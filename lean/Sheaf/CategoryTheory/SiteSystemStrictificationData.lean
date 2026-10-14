@@ -9,7 +9,9 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Category.Cat
 public import Mathlib.CategoryTheory.Comma.Arrow
 public import Mathlib.CategoryTheory.Category.Preorder
-import Sheaf.CategoryTheory.SiteEquivalenceMorphismTransport
+public import Sheaf.CategoryTheory.FinitePrecoverage
+import Sheaf.CategoryTheory.SiteSystemStrictificationCategory
+import Sheaf.CategoryTheory.SiteSystemFiniteSheafTransport
 
 @[expose] public section
 
@@ -21,7 +23,7 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
 /-- Source: Stacks Project, Categories, construction of Tag 004A, applied fibrewise;
-site transport follows `site_equivalence_morphism_transport`.
+site transport uses finite covering axioms and the adjunction API of Mathlib.
 (blueprint: lem-weil-pbc-site-system-strictification-data).
 
 Proof: at stage i take objects (j,X) with j <= i and X in C j, and define homs
@@ -39,18 +41,15 @@ covering choose lifts once for each distinct arrow in its finite presieve, and
 reuse them for repeated members of the indexed family. Fullness gives the lifted
 arrows and the isomorphisms under e_i; the lifted presieve is finite and covering. The gamma
 comparison intertwines evaluation and transitions; transport the covering and
-pullback preservation along it. Apply site_equivalence_morphism_transport to
-obtain continuity and finite limit/colimit preservation on sheaf pullbacks.
+pullback preservation along it. Use the finite pairwise-pullback sheaf criterion for
+continuity. Evaluation and
+its section induce inverse pushforwards on sheaves; compose their pullback adjunctions
+with those of U and use uniqueness of left adjoints for finite-limit/colimit preservation.
 The identity of U i j X defines theta. Define v'_i(j,X)=v_j X and its arrow map
 by conjugating v_i(f) with the delta components. Naturality proves it is a functor;
 the normalization and cocycle of delta give the two strict equalities. Applying
 v'_j to theta gives delta inverse, including both endpoints as an Arrow equality.
 This constructs the strict site system, without claiming its colimit. -/
--- STATEMENT-DISPUTED: take I = WithTop ℕ, C i the one-object category, U identity,
--- and coefficients v i constant at i in Codiscrete I. The strict coefficient equalities
--- force infinitely many distinct isomorphic objects in F.obj ⊤. Indexed base change
--- of the singleton identity covering then gives an infinite covering, contradicting
--- the finiteness clause. See site_system_strictification_obstruction and report.md.
 theorem exists_site_system_strictification_data
     (I : Type u) [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (C : I → Cat.{u, u}) (P : ∀ i : I, Precoverage (C i))
@@ -92,8 +91,8 @@ theorem exists_site_system_strictification_data
     ∃ (F : I ⥤ Cat.{u, u}) (Q : ∀ i : I, Precoverage (F.obj i))
       (e : ∀ i : I, C i ⥤ F.obj i),
       (∀ i : I, (e i).IsEquivalence) ∧
-      (∃ (_ : ∀ i, (Q i).HasIsos) (_ : ∀ i, (Q i).IsStableUnderComposition)
-        (_ : ∀ i, (Q i).IsStableUnderBaseChange) (_ : ∀ i, (Q i).HasPullbacks),
+      (∃ (_ : ∀ i, (Q i).HasIsos) (_ : ∀ i, (Q i).IsStableUnderFiniteComposition)
+        (_ : ∀ i, (Q i).IsStableUnderFiniteBaseChange) (_ : ∀ i, (Q i).HasPullbacks),
         (∀ (i : I) (X : F.obj i) (R : Presieve X), R ∈ Q i X → Finite R.uncurry) ∧
         (∀ (i : I) (X : C i) (R : Presieve X),
           R ∈ P i X ↔ R.map (e i) ∈ Q i ((e i).obj X)) ∧
@@ -125,6 +124,66 @@ theorem exists_site_system_strictification_data
             (∀ (i j : I) (h : i ≤ j) (X : C i),
               Arrow.mk ((v' j).map ((theta i j h).hom.app X)) =
                 Arrow.mk ((delta i j h).inv.app X))) := by
-  sorry
+  let F := SiteSystemPairs.diagram C U gamma hUid hgammaRight hgamma
+  let p := SiteSystemPairs.eval C U
+  let e := SiteSystemPairs.inclusion C U
+  let Q := fun i => finiteEquivalencePrecoverage (p i) (P i)
+  have hp (i : I) : (p i).IsEquivalence :=
+    SiteSystemPairs.eval_isEquivalence C U hUid i
+  have he (i : I) : (e i).IsEquivalence :=
+    SiteSystemPairs.inclusion_isEquivalence C U hUid i
+  have hep (i : I) : e i ⋙ p i = 𝟭 (C i) :=
+    (SiteSystemPairs.inclusion_eval C U i).trans (hUid i)
+  have hcov (i j : I) (h : i ≤ j) (X : F.obj i) (R : Presieve X)
+      (hR : R ∈ Q i X) :
+      R.map (F.map (homOfLE h)).toFunctor ∈ Q j
+        ((F.map (homOfLE h)).toFunctor.obj X) :=
+    finiteEquivalencePrecoverage_transition (p i) (P i) (p j) (P j)
+      (U i j h) (hcover i j h) (SiteSystemPairs.transition C U gamma i j h)
+      (SiteSystemPairs.comparison C U gamma i j h) X R hR
+  have hpb (i j : I) (h : i ≤ j) (X Y Z : F.obj i) (R : Presieve X)
+      (hR : R ∈ Q i X) (f : Y ⟶ X) (g : Z ⟶ X) (hf : R f) :
+      PreservesLimit (cospan f g) (F.map (homOfLE h)).toFunctor :=
+    finiteEquivalencePrecoverage_transition_pullback (p i) (P i) (p j) (U i j h)
+      (hpullback i j h) (SiteSystemPairs.transition C U gamma i j h)
+      (SiteSystemPairs.comparison C U gamma i j h) X Y Z R hR f g hf
+  have hcont (i j : I) (h : i ≤ j) : (F.map (homOfLE h)).toFunctor.IsContinuous
+      (Q i).toGrothendieck (Q j).toGrothendieck :=
+    continuous_of_finite_pullbacks _ (Q i) (Q j)
+      (finiteEquivalencePrecoverage_finite (p i) (P i)) (hcov i j h) (hpb i j h)
+  have hexact (i j : I) (h : i ≤ j) :
+      PreservesFiniteLimits (sheafPullback (F.map (homOfLE h)).toFunctor (Type u)
+        (Q i).toGrothendieck (Q j).toGrothendieck) ∧
+      PreservesFiniteColimits (sheafPullback (F.map (homOfLE h)).toFunctor (Type u)
+        (Q i).toGrothendieck (Q j).toGrothendieck) := by
+    obtain ⟨hpi, hei, ⟨hpilim, hpicolim⟩, ⟨heilim, heicolim⟩⟩ :=
+      finiteEquivalencePrecoverage_sheaf_equivalence (p i) (P i) (e i) (hep i) (hfinite i)
+    obtain ⟨hpj, hej, ⟨hpjlim, hpjcolim⟩, ⟨hejlim, hejcolim⟩⟩ :=
+      finiteEquivalencePrecoverage_sheaf_equivalence (p j) (P j) (e j) (hep j) (hfinite j)
+    let a : p j ≅ (e j).inv :=
+      (p j).leftUnitor.symm ≪≫
+        Functor.isoWhiskerRight (e j).asEquivalence.counitIso.symm (p j) ≪≫
+        Functor.associator (e j).inv (e j) (p j) ≪≫
+        Functor.isoWhiskerLeft (e j).inv (eqToIso (hep j)) ≪≫ (e j).inv.rightUnitor
+    let eta : 𝟭 (F.obj j) ≅ p j ⋙ e j :=
+      (Functor.isoWhiskerRight a (e j) ≪≫ (e j).asEquivalence.counitIso).symm
+    let T := (F.map (homOfLE h)).toFunctor
+    let theta : T ≅ (p i ⋙ U i j h) ⋙ e j :=
+      T.rightUnitor.symm ≪≫ Functor.isoWhiskerLeft T eta ≪≫
+        (Functor.associator T (p j) (e j)).symm ≪≫
+        Functor.isoWhiskerRight (SiteSystemPairs.comparison C U gamma i j h) (e j)
+    exact continuous_transport_pullback_exact (Q i).toGrothendieck (Q j).toGrothendieck
+      (P i).toGrothendieck (P j).toGrothendieck (p i) (U i j h) (e j) T theta
+  refine ⟨F, Q, e, he, inferInstance, inferInstance, inferInstance, inferInstance,
+    (fun i => finiteEquivalencePrecoverage_finite (p i) (P i)),
+    (fun i => finiteEquivalencePrecoverage_inclusion (p i) (P i) (e i) (hep i) (hfinite i)),
+    (fun i => finiteEquivalencePrecoverage_lift (p i) (P i) (e i) (hep i)),
+    hcov, hpb, hcont, (fun i j h => ⟨(hexact i j h).1⟩),
+    (fun i j h => ⟨(hexact i j h).2⟩),
+    SiteSystemPairs.theta C U gamma hUid hgammaLeft,
+    SiteSystemPairs.coefficients C U D v delta, ?_, ?_, ?_⟩
+  · exact SiteSystemPairs.transition_coefficients C U gamma D v delta hdelta
+  · exact SiteSystemPairs.inclusion_coefficients C U D v delta hUid hdeltaId
+  · exact SiteSystemPairs.theta_coefficients C U gamma D v delta hUid hgammaLeft hdeltaId
 
 end CategoryTheory

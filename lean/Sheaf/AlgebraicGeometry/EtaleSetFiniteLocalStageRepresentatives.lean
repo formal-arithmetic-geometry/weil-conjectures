@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 import Mathlib.CategoryTheory.Sites.LocallySurjective
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.AffineEtaleInverseImageComparison
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos

@@ -10,9 +10,6 @@ public import Mathlib.Algebra.Category.Grp.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.Paper.AffineOpenEtaleMapFactorization
 import Sheaf.Paper.AffineOpenInverseImageUnitRepresentatives
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
-import Sheaf.CategoryTheory.ColimitSites
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! # Every section of the inverse image on the affine limit descends to an affine stage. -/
 

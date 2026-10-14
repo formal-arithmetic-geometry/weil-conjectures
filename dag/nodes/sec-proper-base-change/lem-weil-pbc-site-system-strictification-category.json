@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-site-system-strictification-category",
+ "kind": "definition",
+ "title": "Concrete pair categories and strict coefficients",
+ "statement": "Given a preorder I, categories C_i, normalized transition functors U_ij and coherent gamma, form Obj_i = {(s,h,X) | s ≤ i, X in C_s} and homs between their U_si-images. Evaluation and the current-stage inclusion are equivalences. Transition fixes (s,X) and conjugates U_ij on homs by gamma. The normalization and gamma cocycle give a strict diagram F. For coefficients v_i with normalized coherent delta, define v′_i(s,X)=v_s X and conjugate v_i on homs by delta. Then transition composed with v′_j equals v′_i, inclusion composed with v′_i equals v_i, and applying v′_j to the explicit comparison theta gives delta inverse, including endpoints in Arrow.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 004A, applied fibrewise"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Define induced categories on stage-labelled objects. Naturality proves the conjugation formulas are functorial. Use the gamma cocycle at both endpoints, and its naturality between them, for strict composition. Normalized comparisons prove identities. Evaluation is induced fully faithful and every object occurs at its own stage, giving equivalences. Apply the same cancellation argument using delta to prove strict coefficient composition; normalization gives inclusion equality and the theta Arrow equality. Every object and map is explicitly defined.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Explicit pair construction and direct finite-family/sheaf verifications by M4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite precoverage stable under arbitrary indexed base change strictification counterexample",
+   "results": "CategoryTheory.Precoverage.mem_finite_iff; CategoryTheory.instIsStableUnderBaseChangeJointlySurjectivePrecoverage; CategoryTheory.Precoverage.finite; CategoryTheory.Precoverage.IsStableUnderBaseChange; CategoryTheory.Precoverage.ofArrows_mem_finite; AlgebraicGeometry.Scheme.Cover.changeProp; CategoryTheory.Precoverage.IsStableUnderBaseChange.mem_coverings_of_isPullback; CategoryTheory.isStableUnderBaseChange_comap_jointlySurjectivePrecoverage",
+   "date": "2026-10-14",
+   "verdict": "No existing strict site-system construction; use the named component API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Precoverage.mem_coverings_of_isPullback",
+   "results": "CategoryTheory.Precoverage.mem_coverings_of_isPullback",
+   "date": "2026-10-14",
+   "verdict": "No existing strict site-system construction; use the named component API."
+  },
+  {
+   "tool": "grep",
+   "query": "strictif|rectif",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "No existing strict site-system construction; use the named component API."
+  },
+  {
+   "tool": "grep",
+   "query": "equivalence.*sheaf|sheaf.*equivalence",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "No existing strict site-system construction; use the named component API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivalence of categories induces an equivalence on sheaves for compatible Grothendieck topologies",
+   "results": "CategoryTheory.Equivalence.sheafCongr; CategoryTheory.Equivalence.sheafCongr.functor; CategoryTheory.Equivalence.sheafCongr_functor; CategoryTheory.Equivalence.sheafCongr.functor_obj_val_obj; CategoryTheory.Equivalence.sheafCongr.inverse; CategoryTheory.Equivalence.sheafCongrPrecoherent_functor_obj_val_obj; CategoryTheory.Equivalence.sheafCongrPrecoherent; CategoryTheory.Equivalence.sheafCongrPreregular_functor_obj_val_obj",
+   "date": "2026-10-14",
+   "verdict": "No existing strict site-system construction; use the named component API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq; CategoryTheory.Adjunction.leftAdjointUniq_refl; CategoryTheory.Adjunction.leftAdjointUniq_inv_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom; CategoryTheory.Adjunction.leftAdjointUniq_trans; CategoryTheory.Adjunction.leftAdjointUniq_trans_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-14",
+   "verdict": "No existing strict site-system construction; use the named component API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "strictification of a category valued functor with coherent composition natural isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "unavailable": true
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SiteSystemStrictificationData",
+  "date": "2026-10-14",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Passage to cohomology of the limit via 09YQ; strict colimit of affine etale sites, using fibrewise strictification and finite covering/sheaf transport.",
+   "via": [
+    "lem-weil-pbc-site-system-strictification-data",
+    "lem-weil-pbc-site-system-strictification",
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SiteSystemStrictificationCategory",
+  "file": "lean/Sheaf/CategoryTheory/SiteSystemStrictificationCategory.lean",
+  "declaration": "CategoryTheory.SiteSystemPairs.diagram",
+  "statement": "def diagram (hUid : ∀ i : I, U i i le_rfl = 𝟭 (C i)) (hgammaRight : ∀ (i k : I) (h : i ≤ k), HEq (gamma i k k h le_rfl) (Iso.refl (U i k h))) (hgamma : ∀ (i j k l : I) (h : i ≤ j) (h' : j ≤ k) (h'' : k ≤ l) (X : C i), (gamma j k l h' h'').hom.app ((U i j h).obj X) ≫ (gamma i j l h (h'.trans h'')).hom.app X = (U k l h'').map ((gamma i j k h h').hom.app X) ≫ (gamma i k l (h.trans h') h'').hom.app X) : I ⥤ Cat.{u, u}",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-527fb",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261014T170739-L-2556489",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-527fb",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261014T170739-L-2556489",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery files matched their DAG statements and change record; all delivered modules and forced adaptations compiled, with permitted axioms only."
+ }
+}

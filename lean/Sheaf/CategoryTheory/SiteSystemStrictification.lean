@@ -93,8 +93,8 @@ theorem exists_site_system_strictification
     ∃ (F : I ⥤ Cat.{u, u}) (Q : ∀ i : I, Precoverage (F.obj i))
       (e : ∀ i : I, C i ⥤ F.obj i),
       (∀ i : I, (e i).IsEquivalence) ∧
-      (∃ (_ : ∀ i, (Q i).HasIsos) (_ : ∀ i, (Q i).IsStableUnderComposition)
-        (_ : ∀ i, (Q i).IsStableUnderBaseChange) (_ : ∀ i, (Q i).HasPullbacks),
+      (∃ (_ : ∀ i, (Q i).HasIsos) (_ : ∀ i, (Q i).IsStableUnderFiniteComposition)
+        (_ : ∀ i, (Q i).IsStableUnderFiniteBaseChange) (_ : ∀ i, (Q i).HasPullbacks),
         (∀ (i : I) (X : F.obj i) (R : Presieve X), R ∈ Q i X → Finite R.uncurry) ∧
         (∀ (i : I) (X : C i) (R : Presieve X),
           R ∈ P i X ↔ R.map (e i) ∈ Q i ((e i).obj X)) ∧

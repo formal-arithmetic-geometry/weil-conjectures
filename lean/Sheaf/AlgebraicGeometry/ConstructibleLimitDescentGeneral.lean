@@ -8,7 +8,8 @@ module
 public import WeilConjectures.ConstructibleSheaf.Defs
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.ConstructibleAffineFreePresentationGeneral
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
+import Sheaf.AlgebraicGeometry.AffineEtaleBaseChangeSystem
+import Sheaf.AlgebraicGeometry.AffineEtaleDescentData
 import Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleEventualHomLift
 import Sheaf.AlgebraicGeometry.FreeEtaleModuleShriekComparison
 import Sheaf.AlgebraicGeometry.EtaleStratifiedFinite
@@ -191,8 +192,11 @@ private theorem family_models_general
         (∐ fun k : Fin m ↦ Q (WV k)) ≅ (∐ fun k : Fin m ↦ P (V k))) := by
   classical
   intro P
-  obtain ⟨T, v, p, q, gamma, delta, hr⟩ := exists_affineEtaleSite_colimit D c hc
-  rcases hr with ⟨_, _, hpb, _, _, _, _, _, _, _, _, _, _, _, _, hdesc, _⟩
+  obtain ⟨T, v, p, q, gamma, delta,
+    _, h1, hpb, _, _, _, _, h7, _, _, h10, _, h12, _, _⟩ :=
+    exists_affineEtale_baseChange_system D c hc
+  obtain ⟨hdesc, _⟩ := affineEtale_descent_data D c hc T v p q gamma delta
+    h1 hpb h7 h10 h12
   let Z : Fin n ⊕ Fin m → c.pt.FullAffineEtale :=
     Sum.elim (fun k ↦ ⟨U k, hU k⟩) (fun k ↦ ⟨V k, hV k⟩)
   choose idx M e using fun k ↦ hdesc (Z k)

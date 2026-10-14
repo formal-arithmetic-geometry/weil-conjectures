@@ -8,7 +8,8 @@ module
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
+import Sheaf.AlgebraicGeometry.AffineEtaleBaseChangeSystem
+import Sheaf.AlgebraicGeometry.AffineEtaleDescentData
 import WeilConjectures.ConstructibleSheaf.FreeLifting
 import Mathlib.CategoryTheory.Adjunction.Whiskering
 import Mathlib.Data.Finset.Order
@@ -139,7 +140,7 @@ using 095N, and Tag 03S6.
 
 Proof:
 1. Regard each U and V as an object of the full affine etale site. Apply the essential
-   surjectivity clause of `exists_affineEtaleSite_colimit` to each of these finitely
+   object-descent clause of `affineEtale_descent_data` to each of these finitely
    many objects. Nonemptiness and directedness give a common upper bound i, even
    when both families are empty. Move every object to i by the site's transition
    functors. The cartesian squares and composition comparisons identify its base
@@ -187,8 +188,11 @@ theorem exists_affine_free_etaleModule_family_models
         (∐ fun k : Fin m ↦ Q (WV k)) ≅ (∐ fun k : Fin m ↦ P (V k))) := by
   classical
   intro P
-  obtain ⟨T, v, p, q, gamma, delta, hr⟩ := exists_affineEtaleSite_colimit D c hc
-  rcases hr with ⟨_, _, hpb, _, _, _, _, _, _, _, _, _, _, _, _, hdesc, _⟩
+  obtain ⟨T, v, p, q, gamma, delta,
+    _, h1, hpb, _, _, _, _, h7, _, _, h10, _, h12, _, _⟩ :=
+    exists_affineEtale_baseChange_system D c hc
+  obtain ⟨hdesc, _⟩ := affineEtale_descent_data D c hc T v p q gamma delta
+    h1 hpb h7 h10 h12
   let Z : Fin n ⊕ Fin m → c.pt.FullAffineEtale :=
     Sum.elim (fun k ↦ ⟨U k, hU k⟩) (fun k ↦ ⟨V k, hV k⟩)
   choose idx M e using fun k ↦ hdesc (Z k)

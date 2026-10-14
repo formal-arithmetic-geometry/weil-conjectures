@@ -8,12 +8,6 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionRepresentatives
 import Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionZeroEventually
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Sheaf.CategoryTheory.ColimitSiteSections
-import Sheaf.CategoryTheory.ColimitSites
-import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit
 
 /-! # Scalar continuity for descended qcqs étale objects
 

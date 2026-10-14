@@ -11,11 +11,6 @@ import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import Sheaf.AlgebraicGeometry.EtaleFixedAffineDegreeZeroKernel
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.AlgebraicGeometry.Limits
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.CategoryTheory.ColimitSiteSections
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-! # The degree-zero affine continuity kernel
 
