@@ -1,6 +1,6 @@
 # Work queue
 
-43 items; claim with `tools/claim.py next <group> [--stage N]`.
+41 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (43)
+## Stage 3: modules to prove (41)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -28,7 +28,6 @@
 | `Sheaf.Paper.CechCupPullbackCompat` | 23 | 2 | proof |
 | `Sheaf.Paper.CechCupResolutionRepresentatives` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OverlapConjugateRestriction` | 25 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictedCounitCancellation` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackCompositionCounitNormalization` | 27 | 1 | proof |
@@ -49,7 +48,6 @@
 | `Sheaf.AlgebraicGeometry.FlatTelescopeNormalizationMorphisms` | 35 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FlatTelescopeTargetRefinement` | 35 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FlatTelescopeNormalizationUnshiftedIsIso` | 36 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.MayerVietorisOpenCompositionRestrictionFactors` | 37 | 1 | proof |
 | `Sheaf.CategoryTheory.Abelian.DerivedBottomCycleTransport` | 37 | 1 | proof |
 | `Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization` | 41 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineModelCoherentObjectComparisons` | 42 | 1 | proof |
