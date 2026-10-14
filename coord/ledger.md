@@ -14784,5 +14784,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:18 L: merged deliver/V4/Sheaf.AlgebraicGeometry.CompactFlatGeneratorRelativeExtension (stage 3; reviewer PASS; first push; landing 20261014T091810-L-473387 (interface); batch 20261014T091807; modules 3; new nodes 2)
 - 09:22 L: returned deliver/N1/Sheaf.RingTheory.ColimitFlatRelationDescent (reviewer RETURN: (reviewer X-0a8cc, head 0a8cc02f1) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.RingTheory.ColimitFl)
 - 09:23 L: merged deliver/J4/Sheaf.AlgebraicGeometry.FlatTelescopeSumModels (stage 3; reviewer PASS; first push; landing 20261014T092318-L-534072 (interface); batch 20261014T092317; modules 1; new nodes 0; change records: coord/changes/flat-telescope-sum-models-proof-scopes.md)
-- 09:23 L: merged deliver/J4/Sheaf.Paper.CechCupPullbackCompat (stage 3; reviewer PASS; after a return; landing 20261014T092319-L-534344 (proof); batch 20261014T092317; modules 1; new nodes 0)
 - 09:27 L: returned deliver/N4/Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula (reviewer RETURN: (reviewer X-9ecc3, head 9ecc3450e) A3: Unforced changes to unclaimed modules. The delivery-base originals of HigherDirec)
+
+- 17:27 L: batch 20261014T092317 dependency take-out
