@@ -26,9 +26,74 @@
   "def-weil-affine-spectrum",
   "def-weil-weakly-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The preimage of the units of $A/I$ contains $1$ and is closed under multiplication, so $S$ is a multiplicative subset. Apply [lem-weil-pbc-localization-ring-weakly-etale] with $M=S$. The ring/scheme equivalence in [def-weil-pbc-ind-etale-algebra] identifies its conclusion with weak etaleness of $h$.",
+   "uses": [
+    "lem-weil-pbc-localization-ring-weakly-etale",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 096V, lemma-localization, construction of S; Tag 092B, sentence after definition-weakly-etale"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-localization-spectrum-embedding], $h$ is an embedding onto the primes disjoint from $S$. It remains to identify that subset; this topological assertion applies to arbitrary multiplicative subsets, not just powers of one element.",
+   "uses": [
+    "lem-weil-pbc-localization-spectrum-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 096V, lemma-localization, proof of (1); Tag 00E3, lemma-spec-localization"
+   }
+  },
+  {
+   "text": "If $\\mathfrak p\\subseteq\\mathfrak q$ and $I\\subseteq\\mathfrak q$, then $\\mathfrak p\\cap S=\\varnothing$: for $s\\in S$ choose $t\\in A$ lifting an inverse modulo $I$, so $st-1\\in I$. If also $s\\in\\mathfrak p$, then $st$ and $st-1$ lie in $\\mathfrak q$, forcing $1\\in\\mathfrak q$, a contradiction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 096V, lemma-localization, converse direction of (1)"
+   }
+  },
+  {
+   "text": "Conversely suppose $\\mathfrak p\\cap S=\\varnothing$. The ideal $J=\\mathfrak p+I$ is proper: if $1=a+i$ with $a\\in\\mathfrak p$, $i\\in I$, then $a\\bmod I=1$, so $a\\in\\mathfrak p\\cap S$. Apply [lem-weil-pbc-proper-ideal-contained-in-maximal] to $J$ to choose a maximal ideal $\\mathfrak q\\supseteq J$. It is prime: if $xy\\in\\mathfrak q$ and $x\\notin\\mathfrak q$, maximality gives $1=b+cx$ with $b\\in\\mathfrak q$; multiplying by $y$ gives $y\\in\\mathfrak q$. Thus this $\\mathfrak q$ contains both $\\mathfrak p$ and $I$. Together with the preceding step and the embedding this proves the asserted homeomorphism.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 096V, lemma-localization, forward direction of (1); Tag 00E0, lemma-Zariski-topology, proof of (8)"
+   }
+  },
+  {
+   "text": "Taking $\\mathfrak p=\\mathfrak q$ in the image description shows $C$ lies in the image. Given $x\\in\\operatorname{Spec}B$, choose $\\mathfrak q\\supseteq I$ containing $h(x)$ and choose $y$ with $h(y)=\\mathfrak q$, using that image description. To verify specialization within the source, apply [lem-weil-pbc-spec-localization-away-basic-open](i) to $B$. Every basic open containing $y$ is $D_B(a/s)=D_B(a/1)$, since $s/1$ is a unit. Then $a\\notin\\mathfrak q$ implies $a\\notin h(x)$, so $x$ belongs to this basic open. Thus every open neighbourhood of $y$ contains $x$, precisely $x\\rightsquigarrow y$. This proves the last clause, with no finiteness condition anywhere.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 096V, lemma-localization, (1); Tag 00E0, lemma-Zariski-topology, basic opens"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-ring-weakly-etale",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-spec-localization-away-basic-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 096V, lemma-localization, proof of (1) specialized to f=1; Tag 092B for weak etaleness"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -92,15 +157,37 @@
    "results": "25 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean",
    "date": "2026-10-14",
    "verdict": "no full match: localization range and embedding declarations concern primes disjoint from an arbitrary submonoid; they do not identify this quotient-unit submonoid with generalizations of V(I), or give weak etaleness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization by units modulo an ideal has prime spectrum equal to generalizations of the ideal zero locus",
+   "results": "Hits: IsLocalization.AtPrime.coe_primeSpectrumOrderIso_symm_apply_asIdeal, IsLocalization.AtPrime.orderIsoOfPrime, IsLocalization.AtPrime.primeSpectrumOrderIso, IsLocalization.primeSpectrumOrderIso, IsLocalization.coe_primeSpectrumOrderIso_symm_apply_asIdeal, PrimeSpectrum.localizationMapOfSpecializes, IsLocalization.AtPrime.coe_primeSpectrumOrderIso_apply_coe_asIdeal, IsLocalization.AtPrime.coe_orderIsoOfPrime_symm_apply_coe",
+   "date": "2026-10-14",
+   "verdict": "no full match: general localization correspondence only; quotient-unit identification and weak etaleness need separate arguments"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proetale-shriek-specialization-zero",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-affine-closed-specialization-localization",
+  "worker": "stage1",
+  "summary": "Kept the statement. Identified the quotient-unit multiplicative set by the explicit properness argument for p+I, reused maximal-ideal existence, and separated general localization spectrum and weak-etale inputs. Verified specialization by basic opens. Attached the ring input to its closed project declaration.",
+  "blueprint": "Subordinate affine localization input for the closed-neighbourhood vanishing route already named in blueprint.from.place; all five steps realize that input, without altering the qbar descent or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-eac829ac4",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-eac829ac4 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited sources. All five steps are valid; both new localization lemmas match their sources and have no existing replacement. Checked arbitrary ideals, zero rings, zero denominators, specialization direction, and 270 finite-ring cases. No repairs or tool-use exceptions needed. Detailed findings are in review.md."
+ }
 }
