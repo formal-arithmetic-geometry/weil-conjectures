@@ -3,52 +3,134 @@
  "blueprint": {
   "is": "lem-amb-proper-coproducts-projection",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The proper projection formula on the ambient category",
- "statement": "Let $r:V\\to T$ be a proper\nmorphism of finite type between Noetherian schemes. For all complexes\n$L$ on $V$ and $K$ on $T$, the canonical\nderived tensor projection map is an\nisomorphism in the ordinary\nderived category:\n\n$$\nK\\otimes_A^LRr_*L\\longrightarrow Rr_*(r^*K\\otimes_A^LL).\n$$\n\nThe notation refers to derived direct images, and inverse images.",
+ "statement": "Let $A$ be a finite commutative ring, and let $r:V\\to T$ be a proper morphism [def-weil-proper-morphism] of finite type between Noetherian schemes (locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]). Work on the small etale sites and in the ordinary unbounded derived categories $D(V_{\\Et},A)$ and $D(T_{\\Et},A)$ of [def-weil-pbc-derived-categories], with derived tensor as in [def-kun-derived-tensor]. Write $r^*=r^{-1}$ for the termwise exact inverse image of constant-coefficient module sheaves [prop-weil-pbc-inverse-image-modules-exact], and $Rr_*$ for its derived right adjoint. For every $L\\in D(V_{\\Et},A)$ and $K\\in D(T_{\\Et},A)$, the canonical derived tensor projection map\n$$\nK\\otimes_A^L Rr_*L\\longrightarrow Rr_*(r^*K\\otimes_A^L L)\n$$\nis an isomorphism in $D(T_{\\Et},A)$. Precisely, this map is the composite\n$$\nK\\otimes_A^L Rr_*L\n\\xrightarrow{\\sigma}Rr_*L\\otimes_A^L K\n\\xrightarrow{\\mathrm{PF}_r(L,K)}Rr_*(L\\otimes_A^L r^{-1}K)\n\\xrightarrow{Rr_*(\\sigma)}Rr_*(r^{-1}K\\otimes_A^L L),\n$$\nwhere $\\mathrm{PF}$ is the adjoint-of-counit map of [def-kun-projection-formula-map], and $\\sigma$ is the canonical derived tensor symmetry of [lem-kun-tensor-sym], represented by the sign $(-1)^{pq}$ swap on K-flat complexes in bidegree $(p,q)$. No boundedness, constructibility, finite Tor amplitude, pro-etale completion, or invertibility of $|A|$ on the schemes is assumed.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-proper-coproducts-projection.md",
   "place": "node lem-amb-proper-coproducts-projection, order 1563"
  },
  "stmt_deps": [
-  "def-weil-derived-tensor",
+  "def-weil-proper-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
   "def-weil-pbc-derived-categories",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-inverse-image",
-  "def-weil-scheme-morphism-properties"
+  "def-kun-derived-tensor",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-kun-projection-formula-map",
+  "lem-kun-tensor-sym"
  ],
  "proof": [
   {
-   "text": "Test the projection map of\n[def-weil-pbc-projection-formula-map] at a geometric point\n$\\bar t$. It becomes the constant-coefficient map\n\n$$\nK_{\\bar t}\\otimes_A^LR\\Gamma(V_{\\bar t},L|_{V_{\\bar t}})\n\\longrightarrow\nR\\Gamma(V_{\\bar t},\\underline{K_{\\bar t}}\\otimes_A^LL|_{V_{\\bar t}}).\n$$",
+   "text": "Because $A$ is finite, two multiples $i1_A,j1_A$ with $0\\le i<j$ coincide, and subtraction gives $(j-i)1_A=0$. Multiplication by any $a\\in A$ shows $(j-i)a=0$, so $A$ is a torsion ring, including the zero ring. By [prop-weil-pbc-inverse-image-modules-exact], inverse image of constant-coefficient module sheaves is exact and agrees with module pullback. Termwise inverse image therefore preserves acyclic complexes and quasi-isomorphisms: kernels, images and their quotients are preserved by exactness. It gives $r^*=r^{-1}$ on the unbounded derived categories, with no resolution or boundedness restriction on $K$.",
    "uses": [
-    "def-weil-pbc-projection-formula-map"
+    "prop-weil-pbc-inverse-image-modules-exact"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n; finite-ring specialization and tensor symmetry"
+   }
   },
   {
-   "text": "Both sides, as functors of $K_{\\bar t}\\in D(A)$, are exact\nand preserve coproducts. This follows on the right from the coproduct result\n[lem-amb-proper-coproducts] applied over the geometric point. The comparison is the\nidentity for $K_{\\bar t}=A$. The shifts of $A$ generate\n$D(A)$ under coproducts and cones: free resolutions and their\ntruncations give the usual explicit construction. Hence the map\nis an isomorphism for every $K_{\\bar t}$. [lemma-weil-pbc-geometric-stalk-conservative] proves the assertion on $T$.",
+   "text": "Apply [lem-kun-0f0g] with $f=r$, $X=V$, $Y=T$, $\\Lambda=A$, $E=L$, and the given $K$. Its hypotheses are properness, the torsion-ring condition proved in Step 1, and membership in the two unbounded small-etale derived categories; all hold. It makes the specified canonical map $\\mathrm{PF}_r(L,K):Rr_*L\\otimes_A^L K\\to Rr_*(L\\otimes_A^L r^{-1}K)$ an isomorphism. The theorem imposes no boundedness or Tor-amplitude condition and does not require a uniform cohomological-dimension bound over $T$. The additional Noetherian and finite-type hypotheses of this item are harmless.",
    "uses": [
-    "lem-amb-proper-coproducts",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "lem-kun-0f0g"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n; finite-ring specialization and tensor symmetry"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-tensor-sym] on $T$ to $(K,Rr_*L)$ and on $V$ to $(L,r^{-1}K)$, with coefficient ring $A$. It gives the canonical derived isomorphisms $s:K\\otimes_A^LRr_*L\\to Rr_*L\\otimes_A^LK$ and $t:L\\otimes_A^Lr^{-1}K\\to r^{-1}K\\otimes_A^LL$. These are the symmetries specified in the statement; [def-kun-derived-tensor] fixes the signed swap underlying the canonical symmetry. If $t^{-1}$ is the inverse, functoriality gives $Rr_*(t^{-1})Rr_*(t)=1$ and $Rr_*(t)Rr_*(t^{-1})=1$. Put $p=\\mathrm{PF}_r(L,K)$, the adjoint-of-counit map of [def-kun-projection-formula-map], invertible by Step 2. The ordered projection map is exactly $Rr_*(t)\\circ p\\circ s$ by the displayed definition in the statement. Its inverse is $s^{-1}\\circ p^{-1}\\circ Rr_*(t^{-1})$: the two composites cancel adjacent inverse pairs. Hence the claimed map is an isomorphism.",
+   "uses": [
+    "lem-kun-tensor-sym",
+    "def-kun-derived-tensor",
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor and following symmetry paragraph; tensor-order specialization of Tag 0F0G, etale-cohomology.tex lemma-projection-formula-proper-mod-n"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-projection-formula-map",
-  "lem-amb-proper-coproducts",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-kun-0f0g",
+  "lem-kun-tensor-sym",
+  "def-kun-derived-tensor",
+  "def-kun-projection-formula-map"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-proper-coproducts-projection.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n; finite-ring specialization and tensor symmetry"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula",
+   "results": "0 hits: . Read returned types; no proper unbounded etale projection theorem. Grep hits concern Witt vectors and manifold connections, not derived etale sheaves.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*formula|rightAdjointProjectionMap",
+   "results": "3 hits: Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/RingTheory/WittVector/Identities.lean. Read returned types; no proper unbounded etale projection theorem. Grep hits concern Witt vectors and manifold connections, not derived etale sheaves.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived projection formula for proper direct image of etale sheaves with finite coefficients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism of Noetherian schemes and a finite commutative coefficient ring, the derived tensor projection formula holds for all unbounded complexes of small etale module sheaves",
+   "results": "8 hits: LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, AdicCompletion.tensor_map_id_left_eq_map, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale. Read returned types; no proper unbounded etale projection theorem. Grep hits concern Witt vectors and manifold connections, not derived etale sheaves.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"IsIso\"",
+   "results": "0 hits: . Read returned types; no proper unbounded etale projection theorem. Grep hits concern Witt vectors and manifold connections, not derived etale sheaves.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward of complexes of torsion etale sheaves commutes with tensoring by the inverse image of an arbitrary complex",
+   "results": "8 hits: SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardNatIso, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pushforward_assoc. Read returned types; no proper unbounded etale projection theorem. Grep hits concern Witt vectors and manifold connections, not derived etale sheaves.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap|projectionIso|projectionFormula",
+   "results": "0 hits: . Second reader read the returned signatures: no proper derived etale projection formula; the semantic hits concern underived module pullback and adjunction.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection morphism of a right adjoint to a monoidal pullback is invertible for arbitrary derived torsion sheaves along a proper scheme morphism",
+   "results": "8 hits: SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.freeFunctorCompPullbackIso, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit. Second reader read the returned signatures: no proper derived etale projection formula; the semantic hits concern underived module pullback and adjunction.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -84,5 +166,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-amb-proper-coproducts-projection",
+  "worker": "stage1",
+  "summary": "Repaired the unbound coefficient A and incompatible pro-etale dependencies by making the intended finite commutative coefficients and unbounded small-etale category explicit. Reused the already reviewed general torsion-ring proper projection formula lem-kun-0f0g and wrote the finite-ring and tensor-order specializations as steps. No new nodes.",
+  "blueprint": "Realizes the conclusion and both proof paragraphs of the imported node using the existing reviewed Stacks 0F0G theorem, whose fiber proof carries the same constant-complex and stalk route. The unit has no prescribed proof steps; chapter and unit statements unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-0f0g",
+    "why": "General proper projection formula over torsion rings used as a black box for finite coefficients; this unit has no other correctly typed unbounded etale theorem."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact inverse image with constant coefficients identifies r-star with termwise inverse image in the unbounded derived category; generic site tool not supplied by this unit."
+   },
+   {
+    "node": "lem-kun-tensor-sym",
+    "why": "Canonical symmetry for arbitrary unbounded derived tensor products is a generic ringed-site tool; it just changes the factor order, not the proper projection formula route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-0f0g",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-kun-tensor-sym"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-bf28d9aea",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-bf28d9aea (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and unit/chapter route. Verified Stacks 0F0G specialization, finite ordinary étale coefficients, canonical projection map, derived tensor symmetry, and edge cases. Accepted all three declared tool uses. No new nodes, target weakening, introduced circularity, or repairs. Detailed checks recorded in review.md."
+ }
 }
