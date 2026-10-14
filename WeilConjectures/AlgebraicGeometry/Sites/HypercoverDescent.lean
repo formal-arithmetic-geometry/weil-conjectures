@@ -949,4 +949,73 @@ end TruncatedDescent
 
 end Hom
 
+section FiniteHypercoverDescent
+
+variable {I : Type u} [SmallCategory I] [IsCofiltered I] {D : I ⥤ Scheme.{u}} {c : Cone D}
+  [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)]
+  [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)]
+
+open SemiSimplicialObject
+
+omit [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)] in
+/-- **Equalities of morphisms descend along a descent datum**: two families of morphisms
+`T_n ⟶ W_n` (`n ≤ N`) out of a descended truncation which agree after base change to the
+limit `X` agree after base change to a late enough stage. -/
+theorem TruncatedDescent.exists_eq (hc : IsLimit c) {U : SemiSimplicialObject c.pt.Etale}
+    {N : ℕ} {k : I} (d : TruncatedDescent c U N k) (W : SemiSimplicialObject (D.obj k).Etale)
+    (a b : ∀ (n : ℕ) (h : n ≤ N), d.T.obj n h ⟶ W.obj n)
+    (hab : ∀ (n : ℕ) (h : n ≤ N), d.m n h ≫ (a n h).left = d.m n h ≫ (b n h).left) :
+    ∃ (k' : I) (g : k' ⟶ k), ∀ (n : ℕ) (h : n ≤ N),
+      (MorphismProperty.Over.pullback @Etale ⊤ (D.map g)).map (a n h) =
+        (MorphismProperty.Over.pullback @Etale ⊤ (D.map g)).map (b n h) := by
+  classical
+  have key (n : Fin (N + 1)) := by
+    obtain ⟨_, _⟩ := d.qcqs n (Nat.lt_succ_iff.1 n.2)
+    exact exists_eq_descent_stage hc (d.isPullback n (Nat.lt_succ_iff.1 n.2)) _ _
+      (hab n (Nat.lt_succ_iff.1 n.2))
+  choose kn gn hn using key
+  obtain ⟨K, h, b', hb⟩ := IsCofiltered.exists_comp_eq_of_finite kn gn
+  refine ⟨K, h, fun n hn' ↦ ?_⟩
+  have H := hn ⟨n, Nat.lt_succ_of_le hn'⟩ K (b' _)
+  rwa [hb] at H
+
+/-- **Finite hypercover descent** (blueprint `lemma-weil-pbc-finite-hypercover-descent`). Let
+`X = lim Dᵢ` be a cofiltered limit of quasi-compact quasi-separated schemes with affine
+transition maps.
+1. (*objects*) the truncation in degrees `≤ N` of a semi-simplicial object of the small étale
+   site of `X` with qcqs terms is the base change of an `N`-truncated one at some stage `Dₖ`;
+2. (*morphisms*) a morphism into a base change from `Dₖ` descends to a later stage;
+3. (*equalities*) morphisms which agree over `X` agree at a later stage;
+4. (*hypercovers*) for a qcqs hypercover `U` of `X` and every `N`, the `N`-skeleton of `U` is
+   the base change of an `N`-truncated object `T` over some `Dₖ` (`toCosk` is an isomorphism in
+   degrees `≤ N`), and at every late enough stage the coskeletal extension of `T` is a
+   hypercover. -/
+theorem TruncatedDescent.exists_and_exists_hom_and_exists_eq_and_isHypercover (hc : IsLimit c) :
+    (∀ (U : SemiSimplicialObject c.pt.Etale), (∀ n, Scheme.Etale.qcqs _ (U.obj n)) →
+      ∀ N : ℕ, ∃ k : I, Nonempty (TruncatedDescent c U N k)) ∧
+    (∀ {U : SemiSimplicialObject c.pt.Etale} {N : ℕ} {k : I} (d : TruncatedDescent c U N k)
+      (W : SemiSimplicialObject (D.obj k).Etale) (f : U ⟶ W.baseChange (c.π.app k)),
+      ∃ (k' : I) (g : k' ⟶ k), Nonempty ((d.baseChange g).Hom (W.baseChange (D.map g))
+        (Etale.baseChangeLift (c.π.app k) f (c.π.app k') (D.map g) (c.w g)))) ∧
+    (∀ {U : SemiSimplicialObject c.pt.Etale} {N : ℕ} {k : I} (d : TruncatedDescent c U N k)
+      (W : SemiSimplicialObject (D.obj k).Etale)
+      (a b : ∀ (n : ℕ) (h : n ≤ N), d.T.obj n h ⟶ W.obj n),
+      (∀ (n : ℕ) (h : n ≤ N), d.m n h ≫ (a n h).left = d.m n h ≫ (b n h).left) →
+      ∃ (k' : I) (g : k' ⟶ k), ∀ (n : ℕ) (h : n ≤ N),
+        (MorphismProperty.Over.pullback @Etale ⊤ (D.map g)).map (a n h) =
+          (MorphismProperty.Over.pullback @Etale ⊤ (D.map g)).map (b n h)) ∧
+    (∀ U : SemiSimplicialObject c.pt.Etale, Scheme.IsQcqsHypercover U → ∀ N : ℕ,
+      ∃ (k : I) (d : TruncatedDescent c U N k), (∀ (n : ℕ), n ≤ N → IsIso (d.toCosk.app n)) ∧
+        ∃ (k₀ : I) (f₀ : k₀ ⟶ k), ∀ (k' : I) (g : k' ⟶ k₀),
+          (d.baseChange (g ≫ f₀)).T.cosk.IsHypercover (D.obj k').smallEtaleTopology) :=
+  ⟨fun U hU N ↦ exists_truncatedDescent hc U hU N,
+    fun d W f ↦ d.exists_hom hc W f,
+    fun d W a b hab ↦ d.exists_eq hc W a b hab,
+    fun U hU N ↦ by
+      obtain ⟨k, ⟨d⟩⟩ := exists_truncatedDescent hc U
+        (fun n ↦ ⟨hU.compactSpace n, hU.quasiSeparatedSpace n⟩) N
+      exact ⟨k, d, fun n hn ↦ d.isIso_toCosk_app n hn, d.exists_isHypercover hc hU.isHypercover⟩⟩
+
+end FiniteHypercoverDescent
+
 end AlgebraicGeometry
