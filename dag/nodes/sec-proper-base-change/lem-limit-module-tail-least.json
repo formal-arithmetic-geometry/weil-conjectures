@@ -1,0 +1,134 @@
+{
+ "id": "lem-limit-module-tail-least",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-limit-tower-essentially-finite-presentation",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Least object of a directed tail subtype",
+ "statement": "For a preorder I and i₀ : I, the subtype {i : I // i₀ ≤ i} has a least object.",
+ "source": {
+  "document": "elementary order theory",
+  "place": "definition of the tail subtype"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use the subtype element (i₀, le_refl i₀); every j in the subtype satisfies i₀ ≤ j by j.property.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "stage3-worker F2",
+  "document": "elementary order theory",
+  "place": "direct subtype construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "descend a finitely presented algebra localized at a prime and a finitely presented module to a stage of a directed colimit of local rings",
+   "results": "RingHom.finitePresentation_localizationPreserves (Mathlib.RingTheory.RingHom.FinitePresentation); instFinitePresentationLocalizationLocalizedModule (Mathlib.Algebra.Module.FinitePresentation); Algebra.FinitePresentation.of_isLocalizationAway (Mathlib.RingTheory.Localization.Away.AdjoinRoot); Module.Finite.instLocalizationLocalizedModule (Mathlib.RingTheory.Localization.Finiteness); ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModule_functor; LocalizedModule.AtPrime: localization statements only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finitely presented module over a filtered colimit of rings descends to a finitely presented module over some stage, base change isomorphism",
+   "results": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, CommRingCat.preservesFilteredColimits_coyoneda, preservesFilteredColimits_coyoneda, isFinitelyPresentable, CommRingCat.preservesColimit_coyoneda_of_finitePresentation (Mathlib.Algebra.Category.Ring.FinitePresentation); Module.FinitePresentation.trans: factorization of maps out of a finitely presented algebra through a stage (lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit), not descent of an algebra or module to the stages",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation, Module.DirectLimit",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EssFinitePresentation\"",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'FinitePresentation' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib filtered by 'directlimit|colimit|filtered'; grep -rnE 'EssFinitePresentation|essentially of finite presentation' in Mathlib",
+   "results": "AlgebraicGeometry/AffineTransitionLimit.lean:1165,1233 (schemes, cofiltered limits); Algebra/Category/Ring/FinitePresentation.lean:81 (factorization through a stage); RingTheory/Smooth/Fiber.lean:146 'we don't have an \"essentially of finite presentation\" type class yet': no descent lemma",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "proved",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.LimitModuleModuleData",
+  "date": "2026-10-14",
+  "group": "F2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "long statement; when splitting, follow the 00QV construction (descend the presentation and the prime) and 00QX for the module; the 00QX text leaves the verification to the reader, so write it out",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LimitModuleModuleData",
+  "file": "lean/Sheaf/RingTheory/LimitModuleModuleData.lean",
+  "declaration": "RingHom.limit_module_tail_has_least",
+  "statement": "theorem limit_module_tail_has_least\n    {I : Type u} [Preorder I] {i₀ : I} :\n    ∃ j₀ : {i : I // i₀ ≤ i}, ∀ j, j₀ ≤ j",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-66eb4",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261014T020509-L-3810807",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-66eb4",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261014T020509-L-3810807",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compiled cleanly; adapted module fails against changed dependencies at the removed declaration and compiles after minimal forced edits; signatures, nodes, report, and direct importer checks match."
+ }
+}

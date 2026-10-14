@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system-module-data",
+ "kind": "statement",
+ "title": "Presentation-cokernel module descent data",
+ "statement": "Let I be a nonempty directed preorder, F:I→CommRing a diagram of local rings with local maps, and c its ring-colimit cocone with local maps and local vertex A. Let τ:A→T be local with T local. Let N be a T-module with a specified presentation N≅T^t/im(H), where H:T^s→T^t is linear and s,t are natural numbers. Fix i₀∈I, a local-ring diagram B on I≥i₀ with local transitions and ring-colimit cocone β to T with local legs, maps κᵢ=βᵢ, and local essentially finite type maps τᵢ:F(i)→B(i) satisfying κᵢτᵢ=τcᵢ and bⱼᵢτᵢ=τⱼFⱼᵢ. Assume that the canonical ring maps B(i)⊗_{F(i)}F(j)→B(j), x⊗y↦bⱼᵢ(x)τⱼ(y), for i≤j, and B(i)⊗_{F(i)}A→T, x⊗y↦κᵢ(x)τ(y), for all i, are localizations at multiplicative submonoids. Then there exists i₁≥i₀. Restrict B, β, κ and τᵢ to I≥i₁ along ρ(i)=(i,i₀≤i₁≤i), writing B₁=ρ*B and κ₁=ρ*κ. On that later tail there exist an additive-group diagram D and cocone δ to N with additive colimit N, maps νᵢ equal to δᵢ, and B₁(i)-module structures on D(i). They satisfy νᵢ(yx)=κ₁ᵢ(y)νᵢ(x), and each transition dⱼᵢ is semilinear over bⱼᵢ. Each D(i) is finite and is isomorphic to B₁(i)^t/im(Hᵢ) for a B₁(i)-linear map Hᵢ:B₁(i)^s→B₁(i)^t. For every i≤j in I≥i₁ there is a B₁(j)-linear equivalence B₁(j)⊗_{B₁(i)}D(i)≅D(j) sending y⊗x to y·dⱼᵢ(x). For every i in I≥i₁ there is a T-linear equivalence T⊗_{B₁(i)}D(i)≅N sending y⊗x to y·νᵢ(x). No module data is asserted on the old tail before i₁; ring localization properties are assumptions, not additional conclusions. Terminology: ring-colimit [def-weil-pbc-category-colimit], finitely presented algebra [def-weil-pbc-finitely-presented-algebra], essentially finite type [def-weil-pbc-essentially-finite-type-algebra], and finite module [def-weil-finitely-generated-module].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemmas 00QX and 00R1, construction of cokernels of descended presentation matrices"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Express H using the standard bases as its finite t-by-s matrix. The ring colimit represents each entry at some stage of B. Directedness supplies a common stage i₁ ≥ i₀ for all entries. For an empty matrix take i₁ = i₀. Restrict B, β, κ and τ₀ to the tail above i₁. That tail is cofinal: every old index has a common upper bound with i₁. Hence its ring colimit is still T, and both ring-localization hypotheses restrict to it. They are hypotheses, not consequences of colimitness.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Map the lifted matrix at i₁ into each later ring B₁(i), obtaining Hᵢ. Define D(i) as the additive group of the actual quotient B₁(i)^t / range Hᵢ (lifted to universe max u v). Ring transitions send matrix columns to matrix columns, so entrywise maps descend to semilinear quotient maps. Composition and identity follow on representatives. The presentation equivalence at T identifies the limit quotient with N and induces δ and ν. Their naturality and scalar formulas also follow on representatives. The t standard basis classes generate D(i).",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Tensoring a cokernel is right exact. Base change carries the finite free modules and the lifted matrix to the later free modules and matrices. Thus it identifies B₁(j) ⊗[B₁(i)] D(i) with D(j) and T ⊗[B₁(i)] D(i) with N. On pure tensors the maps are precisely multiplication by the scalar followed by the quotient map.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "A vector representing an element of N has finitely many coordinates, so it lifts to a common stage. If a stage vector maps to zero in N, it is H applied to a finite vector over T. Lift that vector's coordinates to a later stage; the finitely many equalities with the original vector hold at a still later stage by the eventual-equality criterion for the ring colimit. Consequently the quotient class is zero there. For any additive cocone define its map from N by a representative. Two choices become equal at a common later stage by applying the zero criterion to their difference. This gives a well-defined additive map, factoring each leg, and representatives prove uniqueness. Therefore the displayed additive cocone has colimit N on the chosen later tail.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00QX, λ₂ and matrix-cokernel paragraphs; Tag 00R1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "descend a localized finitely presented algebra along a directed colimit with tensor localization transition maps",
+   "results": "Service unavailable: Internal Server Error; no verdict inferred.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "polynomial quotient finite presentation descent local rings localization tensor base change",
+   "results": "Localization finite-presentation preservation and away-localization instances; no construction of a compatible local ring diagram.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsColimit, Cocone.whisker",
+   "results": "No hits: identifier IsColimit not known by search service; local rg found Functor.Final.isColimitWhiskerEquiv.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_limit_module_ring_data_core|exists_finitePresentation_module_diagram; IsLocalization.*TensorProduct|isColimitWhiskerEquiv",
+   "results": "Local rg found ring core (proved, but its finite-type image construction does not supply localization base change), and module diagram theorem (requires finite-type integer stage rings and does not retain the prescribed s-by-t presentation). Mathlib has tensor localization base-change APIs and final-functor colimit equivalence.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite matrix cokernel over filtered colimit rings descends to a stage preserving number of generators relations",
+   "results": "LeanFinder returned Module.Presentation.cokernel APIs, not the entire later-tail diagram. Local reading found ModuleCat.exists_stage_finite_relation_cokernel and exists_stage_finite_relation_matrix: useful strict substeps, but PartialOrder/canonical-colimit hypotheses, and no compatible whole-tail additive diagram. Module.exists_finitePresentation_baseChange_diagram additionally assumes finite-type integer rings, unavailable here.",
+   "date": "2026-10-14",
+   "verdict": "no exact match (independent second reading)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.LimitModuleModuleData",
+  "date": "2026-10-14",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential-surjectivity proof: finite-presentation approximation over local rings (historical split step 7, Tag 0GS2); the local algebra/module descent inside the limit-tower construction, with the later stage chosen in Tag 00QX's presentation-matrix paragraph.",
+   "via": [
+    "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system-module-core",
+    "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system",
+    "lem-weil-pbc-limit-tower-essentially-finite-presentation",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LimitModuleModuleDataConstruction",
+  "file": "lean/Sheaf/RingTheory/LimitModuleModuleDataConstruction.lean",
+  "declaration": "RingHom.exists_limit_module_presentation_cokernel_data",
+  "statement": "theorem exists_limit_module_presentation_cokernel_data\n    {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{u}) (c : Cocone F) (hc : IsColimit c)\n    [∀ i : I, IsLocalRing (F.obj i)] [IsLocalRing c.pt]\n    (hF : ∀ (i j : I) (h : i ≤ j), IsLocalHom (F.map (homOfLE h)).hom)\n    (hcLocal : ∀ i : I, IsLocalHom (c.ι.app i).hom)\n    (T : CommRingCat.{u}) [IsLocalRing T] (τ : c.pt →+* T) [IsLocalHom τ]\n    (N : AddCommGrpCat.{max u v}) [Module T N]\n    (s t : ℕ) (H : (Fin s → T) →ₗ[T] (Fin t → T))\n    (hN : Nonempty (((Fin t → T) ⧸ LinearMap.range H) ≃ₗ[T] N))\n    (i₀ : I) (B : {i : I // i₀ ≤ i} ⥤ CommRingCat.{u})\n    (β : B ⟶ (Functor.const _).obj T)\n    (hβcol : Nonempty (IsColimit (Cocone.mk T β)))\n    (hBlocal : ∀ i : {i : I // i₀ ≤ i}, IsLocalRing (B.obj i))\n    (hβlocal : ∀ i : {i : I // i₀ ≤ i}, IsLocalHom (β.app i).hom)\n    (hBmaplocal : ∀ (i j : {i : I // i₀ ≤ i}) (h : i ≤ j),\n      IsLocalHom (B.map (homOfLE h)).hom)\n    (κ : ∀ i : {i : I // i₀ ≤ i}, B.obj i →+* T)\n    (hκ : ∀ i x, κ i x = (β.app i).hom x)\n    (τ₀ : ∀ i : {i : I // i₀ ≤ i}, F.obj i.1 →+* B.obj i)\n    (hτlocal : ∀ i, IsLocalHom (τ₀ i))\n    (hτfinite : ∀ i, (τ₀ i).EssFiniteType)\n    (hτcomp : ∀ i, (κ i).comp (τ₀ i) = τ.comp (c.ι.app i.1).hom)\n    (hτnat : ∀ (i j : {i : I // i₀ ≤ i}) (h : i ≤ j),\n      (B.map (homOfLE h)).hom.comp (τ₀ i) =\n        (τ₀ j).comp (F.map (homOfLE h)).hom)\n    (hRingTrans : ∀ (i j : {i : I // i₀ ≤ i}) (h : i ≤ j),\n      letI := (τ₀ i).toAlgebra\n      letI := (F.map (homOfLE h)).hom.toAlgebra\n      (∃ φ : B.obj i ⊗[F.obj i.1] F.obj j.1 →+* B.obj j,\n        (∀ (x : B.obj i) (y : F.obj j.1),\n          φ (x ⊗ₜ[F.obj i.1] y) =\n            (B.map (homOfLE h)).hom x * τ₀ j y) ∧\n        (letI := φ.toAlgebra\n         ∃ U : Submonoid (B.obj i ⊗[F.obj i.1] F.obj j.1),\n           IsLocalization U (B.obj j))))\n    (hRingLimit : ∀ i : {i : I // i₀ ≤ i},\n      letI := (τ₀ i).toAlgebra\n      letI : Algebra (F.obj i.1) c.pt := (c.ι.app i.1).hom.toAlgebra\n      (∃ φ : B.obj i ⊗[F.obj i.1] c.pt →+* T,\n        (∀ (x : B.obj i) (y : c.pt),\n          φ (x ⊗ₜ[F.obj i.1] y) = κ i x * τ y) ∧\n        (letI := φ.toAlgebra\n         ∃ U : Submonoid (B.obj i ⊗[F.obj i.1] c.pt), IsLocalization U T))) :\n  ∃ (i₁ : I) (hi : i₀ ≤ i₁),\n  let ρ : {i : I // i₁ ≤ i} ⥤ {i : I // i₀ ≤ i} :=\n    { obj := fun i ↦ ⟨i.1, hi.trans i.2⟩\n      map := fun h ↦ homOfLE (leOfHom h) }\n  let B₁ := ρ ⋙ B\n  let κ₁ : ∀ i : {i : I // i₁ ≤ i}, B₁.obj i →+* T := fun i ↦ κ (ρ.obj i)\n  ∃ (D : {i : I // i₁ ≤ i} ⥤ AddCommGrpCat.{max u v}) (δ : D ⟶ (Functor.const _).obj N),\n  Nonempty (IsColimit (Cocone.mk N δ)) ∧\n  ∃ (ν : ∀ i : {i : I // i₁ ≤ i}, D.obj i →+ N)\n    (_ : ∀ i : {i : I // i₁ ≤ i}, Module (B₁.obj i) (D.obj i)),\n    (∀ i, ∀ x : D.obj i, ν i x = (δ.app i).hom x) ∧\n    (∀ i, ∀ (y : B₁.obj i) (x : D.obj i), ν i (y • x) = κ₁ i y • ν i x) ∧\n    (∀ (i j : {i : I // i₁ ≤ i}) (h : i ≤ j)\n      (y : B₁.obj i) (x : D.obj i),\n      (D.map (homOfLE h)).hom (y • x) =\n        (B₁.map (homOfLE h)).hom y • (D.map (homOfLE h)).hom x) ∧\n    (∀ i, Module.Finite (B₁.obj i) (D.obj i)) ∧\n    (∀ i, ∃ H₀ : (Fin s → B₁.obj i) →ₗ[B₁.obj i] (Fin t → B₁.obj i),\n      Nonempty (((Fin t → B₁.obj i) ⧸ LinearMap.range H₀) ≃ₗ[B₁.obj i] D.obj i)) ∧\n    (∀ (i j : {i : I // i₁ ≤ i}) (h : i ≤ j),\n      (letI := (B₁.map (homOfLE h)).hom.toAlgebra\n       ∃ e : B₁.obj j ⊗[B₁.obj i] D.obj i ≃ₗ[B₁.obj j] D.obj j,\n         ∀ (y : B₁.obj j) (x : D.obj i),\n           e (y ⊗ₜ[B₁.obj i] x) = y • (D.map (homOfLE h)).hom x)) ∧\n    (∀ i : {i : I // i₁ ≤ i},\n      (letI := (κ₁ i).toAlgebra\n       ∃ e : T ⊗[B₁.obj i] D.obj i ≃ₗ[T] N,\n         ∀ (y : T) (x : D.obj i), e (y ⊗ₜ[B₁.obj i] x) = y • ν i x))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-66eb4",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261014T020509-L-3810807",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-66eb4",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261014T020509-L-3810807",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compiled cleanly; adapted module fails against changed dependencies at the removed declaration and compiles after minimal forced edits; signatures, nodes, report, and direct importer checks match."
+ }
+}

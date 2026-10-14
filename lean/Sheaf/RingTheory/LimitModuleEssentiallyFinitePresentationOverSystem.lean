@@ -15,7 +15,9 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.Quotient.Basic
-import Sheaf.RingTheory.LimitModuleModuleData
+import Sheaf.RingTheory.LimitModuleLocalizationRingData
+import Sheaf.RingTheory.LimitModuleModuleDataConstruction
+import Mathlib.CategoryTheory.Filtered.Final
 
 /-!
 # Descent of a local algebra and a presented module along a given local-ring system
@@ -145,14 +147,59 @@ theorem exists_limit_module_essentially_finite_presentation_over_system
                    ∃ e : T ⊗[B.obj i] D.obj i ≃ₗ[T] N,
                      ∀ (y : T) (x : D.obj i), e (y ⊗ₜ[B.obj i] x) = y • ν i x)) := by
   obtain ⟨i₀, B, β, hcol, κ, hκ, hBlocal, hκlocal, hBmap, τ₀, hτlocal,
-      hτfinite, hτcomp, hτnat⟩ :=
-    exists_limit_module_ring_data F c hc hF hcLocal T τ P W f hf hT
-  obtain ⟨D, δ, hDcol, ν, hMod, hνδ, hνsmul, hνmap, hDfinite, hDpres, hDB,
-      hDT⟩ :=
-    exists_limit_module_module_data F c hc hF hcLocal T τ N s t H hN κ τ₀ hκ
-      hτlocal hτfinite hτcomp hτnat
-  exact ⟨i₀, B, β, hcol, κ, hκ, hBlocal, hκlocal, hBmap, τ₀, hτlocal,
-    hτfinite, hτcomp, hτnat, D, δ, hDcol, ν, hMod, hνδ, hνsmul, hνmap,
-    hDfinite, hDpres, hDB, hDT⟩
+      hτfinite, hτcomp, hτnat, hRingTrans, hRingLimit⟩ :=
+    exists_limit_module_localization_ring_data F c hc hF hcLocal T τ P W f hf hT
+  have hβlocal : ∀ i, IsLocalHom (β.app i).hom := by
+    intro i
+    have heq : κ i = (β.app i).hom := by ext x; exact hκ i x
+    rw [← heq]
+    exact hκlocal i
+  obtain ⟨i₁, hi, D, δ, hDcol, ν, hModule, hν, hνsmul, hmap, hfinite,
+      hpres, htrans, hlimit⟩ :=
+    exists_limit_module_presentation_cokernel_data F c hc hF hcLocal T τ N s t H hN
+      i₀ B β hcol hBlocal hβlocal hBmap κ hκ τ₀ hτlocal hτfinite hτcomp hτnat
+      hRingTrans hRingLimit
+  let ρ : {i : I // i₁ ≤ i} ⥤ {i : I // i₀ ≤ i} :=
+    { obj := fun i ↦ ⟨i.1, hi.trans i.2⟩
+      map := fun h ↦ homOfLE (leOfHom h) }
+  let B₁ := ρ ⋙ B
+  let β₁ : B₁ ⟶ (Functor.const _).obj T := Functor.whiskerLeft ρ β
+  let κ₁ : ∀ i : {i : I // i₁ ≤ i}, B₁.obj i →+* T := fun i ↦ κ (ρ.obj i)
+  let τ₁ := fun i ↦ τ₀ (ρ.obj i)
+  let : Nonempty {i : I // i₁ ≤ i} := ⟨⟨i₁, le_rfl⟩⟩
+  let : IsDirected {i : I // i₁ ≤ i} (· ≤ ·) := ⟨fun i j ↦ by
+    obtain ⟨k, hik, hjk⟩ := exists_ge_ge i.1 j.1
+    exact ⟨⟨k, i.2.trans hik⟩, hik, hjk⟩⟩
+  let : ρ.Final := by
+    refine Functor.final_of_exists_of_isFiltered ρ ?_ ?_
+    · intro i
+      obtain ⟨k, hik, h₁k⟩ := exists_ge_ge i.1 i₁
+      exact ⟨⟨k, h₁k⟩, ⟨homOfLE hik⟩⟩
+    · intro i j f g
+      exact ⟨j, 𝟙 j, Subsingleton.elim _ _⟩
+  have hcol₁ : Nonempty (IsColimit (Cocone.mk T β₁)) :=
+    ⟨(Functor.Final.isColimitWhiskerEquiv ρ (Cocone.mk T β)).symm hcol.some⟩
+  refine ⟨i₁, B₁, β₁, hcol₁, κ₁, ?_, ?_, ?_, ?_, τ₁, ?_, ?_, ?_, ?_,
+    D, δ, hDcol, ν, hModule, hν, hνsmul, hmap, hfinite, hpres, ?_, ?_⟩
+  · intro i x
+    exact hκ (ρ.obj i) x
+  · intro i
+    exact hBlocal (ρ.obj i)
+  · intro i
+    exact hκlocal (ρ.obj i)
+  · intro i j h
+    exact hBmap (ρ.obj i) (ρ.obj j) h
+  · intro i
+    exact hτlocal (ρ.obj i)
+  · intro i
+    exact hτfinite (ρ.obj i)
+  · intro i
+    exact hτcomp (ρ.obj i)
+  · intro i j h
+    exact hτnat (ρ.obj i) (ρ.obj j) h
+  · intro i j h
+    exact ⟨hRingTrans (ρ.obj i) (ρ.obj j) h, htrans i j h⟩
+  · intro i
+    exact ⟨hRingLimit (ρ.obj i), hlimit i⟩
 
 end RingHom

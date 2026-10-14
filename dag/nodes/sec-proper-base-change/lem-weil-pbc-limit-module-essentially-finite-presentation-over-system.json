@@ -34,26 +34,33 @@
  ],
  "proof": [
   {
-   "text": "Apply the ring descent component to obtain the tail system of local rings and maps. Apply the module continuation component to that data and the given presentation of N. The resulting witnesses and conjuncts are exactly the target conclusion, so assemble them in order.",
+   "text": "Apply the local polynomial-quotient ring construction to obtain the initial ring tail together with its transition and limit localization witnesses. These properties do not follow from the older finite-type image-system ring core.",
    "uses": [
-    "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system-ring",
-    "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system-module"
+    "lem-limit-module-localization-ring-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "lean/Sheaf/RingTheory/LimitModuleEssentiallyFinitePresentationOverSystem.lean",
-    "place": "proof of exists_limit_module_essentially_finite_presentation_over_system"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply presentation-cokernel descent with those ring hypotheses. It chooses i₁≥i₀ and provides all module clauses on that later tail.",
+   "uses": [
+    "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system-module-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict B, β, κ and τ₀ along the tail inclusion ρ. Each old index maps to a common upper bound with i₁; the later tail is directed and the preorder makes parallel arrows equal. Functor.final_of_exists_of_isFiltered proves ρ final. Functor.Final.isColimitWhiskerEquiv transports the ring colimit. Restrict all ring witnesses pointwise, pair the restricted ring localization predicates with the module tensor equivalences, and package the public result at i₁.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system-ring",
-  "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system-module"
+  "lem-limit-module-localization-ring-data",
+  "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system-module-data"
  ],
  "proof_origin": {
-  "by": "stage3-worker",
-  "document": "lean/Sheaf/RingTheory/LimitModuleEssentiallyFinitePresentationOverSystem.lean",
-  "place": "composition of the ring and module split theorems"
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00QV and 00QX; explicit cofinal-tail restriction and ring/module conjunction assembly"
  },
  "mathlib_searches": [
   {
@@ -156,13 +163,13 @@
   "note": "directed set Preorder+Nonempty+IsDirected, local system F with local transitions hF, local colimit cocone hc/hcLocal, local tau, T=W^-1 P with P fp (hf,hT), N=coker H; tail i0, B/beta/kappa ring colimit, D/delta/nu AddCommGrp colimit, tau0 local EssFiniteType compat, module family tied by nu and n semilinearity, (3) same s,t cokernel + Module.Finite, (4)(5) tensor ring maps on pure tensors + IsLocalization, module base-change equivs; FIX index universe w -> u"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F3",
+  "reviewer": "X-66eb4",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261013T215605-L-898310",
+  "landing": "20261014T020509-L-3810807",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files compiled cleanly; adapted module fails against changed dependencies at the removed declaration and compiles after minimal forced edits; signatures, nodes, report, and direct importer checks match."
  }
 }
