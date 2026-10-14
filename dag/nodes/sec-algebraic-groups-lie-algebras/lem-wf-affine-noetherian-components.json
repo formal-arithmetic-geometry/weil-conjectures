@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-wf-affine-noetherian-components",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Affine schemes of finite type are Noetherian with finitely many components",
@@ -13,32 +13,147 @@
   "place": "node lem-wf-affine-noetherian-components, order 2483"
  },
  "stmt_deps": [],
- "proof": [
-  {
-   "text": "*Noetherianity.* Choose a surjection $k[t_1,\\ldots,t_n]\\to A$. The\npolynomial ring is Noetherian by the Hilbert basis theorem, and a\nquotient of a Noetherian ring is Noetherian, because ideals of $A$\ncorrespond to ideals of $k[t_1,\\ldots,t_n]$ containing the kernel,\ncompatibly with inclusions; so $A$ satisfies the ascending chain\ncondition on ideals.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Descending chains of closed sets.* Every closed subset of $X$ is\n$V(I)$ for an ideal $I$, and $V(I)=V(\\sqrt I)$. For radical ideals\n$I,J$ one has $V(I)\\subseteq V(J)$ if and only if $J\\subseteq I$, since\n$\\sqrt I$ is the intersection of the primes containing $I$. Thus\n$Z\\mapsto I(Z)$, the intersection of the primes in $Z$, is an\ninclusion-reversing bijection from closed subsets to radical ideals. A\ndescending chain $Z_1\\supseteq Z_2\\supseteq\\cdots$ of closed sets gives\nan ascending chain $I(Z_1)\\subseteq I(Z_2)\\subseteq\\cdots$, which\nstabilizes because $A$ is Noetherian; hence so does the chain of closed\nsets.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Finitely many components.* Call a closed subset *good* if it is a\nfinite union of irreducible closed subsets (the empty set being the\nempty union). Suppose some closed subset is not good. By the descending\nchain condition the set of such closed subsets has a minimal element\n$Z$. Then $Z$ is nonempty and not irreducible, so $Z=Z_1\\cup Z_2$ with\n$Z_1,Z_2\\subsetneq Z$ closed. By minimality $Z_1$ and $Z_2$ are good,\nhence so is $Z$, a contradiction. Write\n$X=C_1\\cup\\cdots\\cup C_m$ with irreducible closed $C_j$ and discard\nevery $C_j$ contained in another. If $C$ is any irreducible closed\nsubset, then $C=\\bigcup_j(C\\cap C_j)$ forces $C\\subseteq C_j$ for some\n$j$, because an irreducible space is not a finite union of proper\nclosed subsets. Hence the maximal irreducible closed subsets, that is\nthe irreducible components, are exactly the remaining $C_j$, and there\nare finitely many of them.",
-   "uses": [],
-   "elementary": null
-  }
- ],
+ "proof": [],
  "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-geometry/lem-wf-affine-noetherian-components.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isNoetherianRing|instNoetherianSpace",
+   "results": "4 hit(s): 187, 188, 191, 647.",
+   "date": "2026-10-14",
+   "verdict": "read hits; auxiliary search"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type algebra over a field is Noetherian and its spectrum has finitely many irreducible components",
+   "results": "0 hit(s): . service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated algebra over a field is Noetherian and its prime spectrum is a Noetherian space with finitely many irreducible components",
+   "results": "8 hit(s): AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing, AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.isNoetherian_Spec, AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier, PrimeSpectrum.instNoetherianSpace, Algebra.FiniteType.isNoetherianRing, Algebra.EssFiniteType.isNoetherianRing, AlgebraicGeometry.isLocallyNoetherian_Spec.",
+   "date": "2026-10-14",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FiniteType, IsNoetherianRing",
+   "results": "4 hit(s): Algebra.FiniteType.isNoetherianRing, Algebra.FinitePresentation.of_finiteType, instFiniteTypeSubtypePolynomialMemSubalgebraReesAlgebraOfIsNoetherianRing, finite_of_algHom_finiteType_of_isJacobsonRing.",
+   "date": "2026-10-14",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem isNoetherianRing",
+   "results": "19 hit(s): Mathlib/RingTheory/LocalProperties/Semilocal.lean, Mathlib/RingTheory/Noetherian/Nilpotent.lean, Mathlib/RingTheory/HopkinsLevitzki.lean, Mathlib/RingTheory/HopkinsLevitzki.lean, Mathlib/RingTheory/Noetherian/OfPrime.lean, Mathlib/RingTheory/Noetherian/OfPrime.lean, Mathlib/RingTheory/Noetherian/Basic.lean, Mathlib/RingTheory/Noetherian/Basic.lean.",
+   "date": "2026-10-14",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_irreducibleComponents|WellFoundedLT \\(Closeds",
+   "results": "5 hit(s): Mathlib/Topology/NoetherianSpace.lean, Mathlib/Topology/NoetherianSpace.lean, Mathlib/Topology/NoetherianSpace.lean, Mathlib/Topology/NoetherianSpace.lean, Mathlib/Topology/NoetherianSpace.lean.",
+   "date": "2026-10-14",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "instance : NoetherianSpace",
+   "results": "1 hit(s): Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean.",
+   "date": "2026-10-14",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "NoetherianSpace, irreducibleComponents",
+   "results": "0 hit(s): . loogle: unknown identifier 'NoetherianSpace'",
+   "date": "2026-10-14",
+   "verdict": "read hits; auxiliary search"
+  },
+  {
+   "tool": "grep",
+   "query": "DivisionRing|isNoetherianRing_of",
+   "results": "5 hit(s): Mathlib/RingTheory/Noetherian/Basic.lean, Mathlib/RingTheory/Noetherian/Basic.lean, Mathlib/RingTheory/Noetherian/Basic.lean, Mathlib/RingTheory/Noetherian/Basic.lean, Mathlib/RingTheory/Noetherian/Basic.lean.",
+   "date": "2026-10-14",
+   "verdict": "read hits; auxiliary search"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopologicalSpace.NoetherianSpace, irreducibleComponents",
+   "results": "2 hit(s): TopologicalSpace.NoetherianSpace.finite_irreducibleComponents, TopologicalSpace.NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent.",
+   "date": "2026-10-14",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "isNoetherianRing_of_divisionRing|DivisionRing.*IsNoetherian|isNoetherian.*division|DivisionRing",
+   "results": "1 hit(s): Mathlib/RingTheory/Artinian/Module.lean.",
+   "date": "2026-10-14",
+   "verdict": "read hits; auxiliary search"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherianRing, DivisionRing",
+   "results": "1 hit(s): finite_of_algHom_finiteType_of_isJacobsonRing.",
+   "date": "2026-10-14",
+   "verdict": "read hits; auxiliary search"
+  },
+  {
+   "tool": "grep",
+   "query": "isNoetherianRing|IsNoetherianRing",
+   "results": "5 hit(s): 115, 116, 120, 121, 372.",
+   "date": "2026-10-14",
+   "verdict": "read hits; auxiliary search"
+  },
+  {
+   "tool": "grep",
+   "query": "DivisionRing",
+   "results": "4 hit(s): Mathlib/RingTheory/Ideal/Maps.lean, Mathlib/RingTheory/Ideal/Quotient/Basic.lean, Mathlib/RingTheory/Ideal/Quotient/Basic.lean, Mathlib/RingTheory/Ideal/Quotient/Operations.lean.",
+   "date": "2026-10-14",
+   "verdict": "read hits; auxiliary search"
+  },
+  {
+   "tool": "grep",
+   "query": "DivisionRing|isNoetherianRing",
+   "results": "0 hit(s): .",
+   "date": "2026-10-14",
+   "verdict": "read hits; auxiliary search"
+  },
+  {
+   "tool": "grep",
+   "query": "wellFoundedLT|finite_irreducibleComponents",
+   "results": "5 hit(s): 38, 83, 97, 193, 206.",
+   "date": "2026-10-14",
+   "verdict": "match; independently read local declarations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isNoetherianRing\", Algebra.FiniteType",
+   "results": "2 hit(s): Algebra.FiniteType.isNoetherianRing, instFiniteTypeSubtypePolynomialMemSubalgebraReesAlgebraOfIsNoetherianRing.",
+   "date": "2026-10-14",
+   "verdict": "match; independently read local declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "PrincipalIdealRing.isNoetherianRing|to_principal_ideal_domain",
+   "results": "4 hit(s): 36, 115, 287, 317.",
+   "date": "2026-10-14",
+   "verdict": "match; independently read local declarations"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.FiniteType.isNoetherianRing; PrimeSpectrum.instNoetherianSpace; TopologicalSpace.NoetherianSpace.finite_irreducibleComponents",
+  "file": "Mathlib/RingTheory/FiniteType.lean",
+  "how": "One declaration per clause: Algebra.FiniteType.isNoetherianRing (Mathlib/RingTheory/FiniteType.lean:187-194) at R=k, S=A; The base-field Noetherian instance follows from Field.toEuclideanDomain (Mathlib/Algebra/EuclideanDomain/Field.lean:25), EuclideanDomain.to_principal_ideal_domain (Mathlib/RingTheory/PrincipalIdealDomain.lean:287), and PrincipalIdealRing.isNoetherianRing (same file:115-117). PrimeSpectrum.instNoetherianSpace (Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean:30-31) gives NoetherianSpace (PrimeSpectrum A). TopologicalSpace.noetherianSpace_TFAE (Mathlib/Topology/NoetherianSpace.lean:81-92) identifies this with WellFoundedLT (Closeds X), and the instance at lines 97-98 supplies it; therefore every descending chain stabilizes. TopologicalSpace.NoetherianSpace.finite_irreducibleComponents (Mathlib/Topology/NoetherianSpace.lean:193-201) gives the last clause. All extra hypotheses are inferred instances, no extra mathematical assumptions."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -58,5 +173,20 @@
   }
  },
  "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-i-geometry"
+ "unit": "sk-i-geometry",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-wf-affine-noetherian-components",
+  "worker": "stage1",
+  "summary": "All three clauses are direct Mathlib specializations, with the required instances. The project declaration is only a partial match. Read source and recorded actual search results; no new nodes needed.",
+  "blueprint": "Proof paragraphs Noetherianity, Descending chains of closed sets, and Finitely many components are supplied respectively by Algebra.FiniteType.isNoetherianRing, PrimeSpectrum.instNoetherianSpace with noetherianSpace_TFAE, and TopologicalSpace.NoetherianSpace.finite_irreducibleComponents; realizes the Noetherianity-and-components paragraph of unit sk-i-geometry."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-3afed6e80",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-3afed6e80 (reviewer sub-agent of L); spot-checked: Read all required documents, the complete item, unit route, sources, Mathlib declarations, existing candidate nodes, and edge cases. The three clauses match Mathlib specializations with correct hypotheses; no duplicate, circular, or missing dependency found. Review written to review.md."
+ }
 }
