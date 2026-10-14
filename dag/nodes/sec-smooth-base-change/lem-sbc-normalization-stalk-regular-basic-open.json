@@ -1,0 +1,113 @@
+{
+ "id": "lem-sbc-normalization-stalk-regular-basic-open",
+ "kind": "statement",
+ "title": "Inverted functions stay regular on relative normalization",
+ "statement": "Let A be a commutative ring and r in A. Let P be a scheme and p:P->D(r) a morphism, and assume a=p followed by D(r)->Spec A is quasi-compact and quasi-separated. For every point x of the relative normalization of a [lem-weil-pbc-relative-normalization], the image of r in its local ring under the structural stalk map is a nonzerodivisor (multiplication on either side is injective). No reducedness, nonemptiness or Noetherian condition is assumed.",
+ "stmt_deps": [
+  "lem-weil-pbc-relative-normalization"
+ ],
+ "source": {
+  "document": "Mathlib.AlgebraicGeometry.Normalization; Stacks Project",
+  "place": "Normalization.lean ker_toNormalization, fromNormalization, germ_stalkMap; Tag 0307"
+ },
+ "proof": [
+  {
+   "text": "Let d be fromNormalization and c be toNormalization. The inverse image U of the affine base is affine because d is integral. The ring map c.app U is injective: its kernel is the value on U of c.ker, and ker_toNormalization identifies this ideal sheaf with zero. Let s be the base global section corresponding to r and z=d.app(top)(s).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On P, r is a unit at every stalk, since p lands in D(r). The identities c composed with d = a and germ_stalkMap identify these germs with those of c.app U(z). isUnit_of_isUnit_germ proves that section is a unit. Injectivity of c.app U then makes multiplication by z injective on both sides.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The stalk at x is a prime localization of Gamma(U) by IsAffineOpen.isLocalization_stalk. IsLocalization.map_nonZeroDivisors_le preserves regularity of z. germ_stalkMap and the definition of StructureSheaf.toStalk identify its localized image with the required structural germ. These are the explicit steps of the delivered Lean proof.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "kind": "written-by-agent",
+  "agent": "R4",
+  "document": "Mathlib.AlgebraicGeometry.Normalization; Stacks Project",
+  "place": "Normalization.lean ker_toNormalization, fromNormalization, germ_stalkMap; Tag 0307"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A function invertible on the source remains a nonzerodivisor in every stalk of relative normalization",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A function inverted on the source is a nonzerodivisor in its relative normalization stalk",
+   "date": "2026-10-13",
+   "results": "IsAlmostIntegral.isIntegral_of_nonZeroDivisors_le_comap; AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral; IsIntegral.isAlmostIntegral_of_isLocalization; ModuleCat.Tilde.smul_stalk_no_nonzero_divisor; AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization; IsLocalization.nonZeroDivisors_le_comap; IsLocalization.to_map_ne_zero_of_mem_nonZeroDivisors; IsLocalization.map_nonZeroDivisors_le",
+   "verdict": "No exact match; use the recorded general API results."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*stalk|stalk.*normalization",
+   "date": "2026-10-13",
+   "results": "No hits.",
+   "verdict": "No exact match; use the recorded general API results."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationRootNotSquare",
+  "date": "2026-10-14",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Inverted functions stay regular on relative normalization; group-order root local calculation",
+   "via": [
+    "lem-sbc-root-normalization-root-not-square",
+    "lem-sbc-root-normalization-cotangent-root"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.NormalizationStalkRegularBasicOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/NormalizationStalkRegularBasicOpen.lean",
+  "declaration": "AlgebraicGeometry.Scheme.normalization_stalk_regular_basicOpen",
+  "statement": "theorem normalization_stalk_regular_basicOpen\n    (A : CommRingCat.{u}) (r : A) {P : Scheme.{u}}\n    (p : P ⟶ Scheme.Opens.toScheme (X := Spec A) (PrimeSpectrum.basicOpen r))\n    [QuasiCompact (p ≫ Scheme.Opens.ι (X := Spec A) (PrimeSpectrum.basicOpen r))]\n    [QuasiSeparated (p ≫ Scheme.Opens.ι (X := Spec A) (PrimeSpectrum.basicOpen r))] :\n    let a := p ≫ Scheme.Opens.ι (X := Spec A) (PrimeSpectrum.basicOpen r)\n    ∀ (x : a.normalization),\n      IsRegular ((a.fromNormalization.stalkMap x).hom\n        (AlgebraicGeometry.StructureSheaf.toStalk A (a.fromNormalization x) r))",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261014T001733-L-2554891",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261014T001733-L-2554891",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

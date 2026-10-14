@@ -18,24 +18,43 @@
  },
  "proof": [
   {
-   "text": "Proof: Put n = |G|, g = b(f), and t for the adjoined root. A group is nonempty,\nso n is positive. The monic relation makes A free over H; regularity of g makes\n t regular, and A/(t) = H/(g). At the root prime the maximal ideal is generated\nby this nonzero t. Its regular local stalk is therefore a DVR. Localizing H at\n(g) likewise gives a DVR with uniformizer g, and t^n = g gives ramification index n.\nThe chart beta identifies the cover before the root extension with a G-torsor over\nthe fraction field of H_(g). Each field factor is Galois with group a stabilizer\nsubgroup of G. The degree formula 09EB makes its ramification index and residue\ndegree divide n. In positive residue characteristic the inseparable residue degree\nis a power of that characteristic; since n is a unit, this degree is one and the\nramification index is prime to the characteristic. Thus every factor is tame.\nApply 0BRM to the index-n root extension. By 09E7 the resulting normalized DVR\nextensions have index one. Tag 0307 identifies their local rings and structural\nmaps with the actual relative-normalization stalk and stalkMap in the statement.\nThe image of t consequently has valuation one, whereas every element of the square\nof the maximal ideal has valuation at least two. It cannot lie in that square.\nFor n = 1 the same calculation holds. An empty cover has no normalization point x.",
+   "text": "Use lem-sbc-normalization-stalk-regular-basic-open with the inverted function g on the source over D(g). The explicit AdjoinRoot relation is t^n=g. Applying the two structural ring maps and positivity of n shows the image tau of t is regular. This part uses no tame ramification.",
    "uses": [
-    "lem-sbc-normalization-stalk-base-change",
-    "lem-exc-etale-field-galois-classification"
+    "lem-sbc-normalization-stalk-regular-basic-open"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-sbc-root-normalization-dvr-comparison to identify the concrete stalk with the normalization stalk of a group-order root extension over the actual DVR H_(g). Its ring equivalence e preserves the explicit structural root image. This step uses no conclusion about the normalized maximal ideal.",
+   "uses": [
+    "lem-sbc-root-normalization-dvr-comparison"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply lem-sbc-dvr-root-normalization-maximal-ideal to the model. Map its ideal equality through e using IsLocalRing.map_ringEquiv_maximalIdeal, Ideal.map_span, and the root compatibility. Thus the original maximal ideal m equals span(tau).",
+   "uses": [
+    "lem-sbc-dvr-root-normalization-maximal-ideal"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If tau lies in m*m=span(tau)*m, Ideal.mem_span_singleton_mul gives z in m with tau*z=tau. Regularity of tau cancels to z=1. This contradicts properness of the actual maximal ideal. The private Lean helpers prove this cancellation argument and the ideal transport; there is no arbitrary-ideal properness gap.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-normalization-stalk-base-change",
-  "lem-exc-etale-field-galois-classification"
+  "lem-sbc-normalization-stalk-regular-basic-open",
+  "lem-sbc-root-normalization-dvr-comparison",
+  "lem-sbc-dvr-root-normalization-maximal-ideal"
  ],
  "proof_origin": {
   "by": "agent",
   "kind": "written-by-agent",
-  "agent": "D3",
-  "document": "Stacks Project",
-  "place": "Tags 09EB, 0BRM, 09E7 and 0307; the geometric transport to the concrete stalk is written by D3."
+  "agent": "R4",
+  "document": "Stacks Project; Mathlib",
+  "place": "DVR comparison and index-one calculation split from Tags 0307, 09EV, 09EB, 0BRM and 09E7; regularity, structural-root relation, ideal transport, and cancellation proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -156,12 +175,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D3",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261013T231532-L-1816267",
+  "landing": "20261014T001733-L-2554891",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
