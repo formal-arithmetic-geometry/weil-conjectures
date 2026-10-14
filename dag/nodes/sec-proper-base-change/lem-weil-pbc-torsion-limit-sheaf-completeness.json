@@ -23,11 +23,109 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-noetherian-ring",
-  "def-pc-cochain-complex-modules"
+  "def-pc-cochain-complex-modules",
+  "def-pur-localized-ringed-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on any slice $X_{\\mathrm{proet}}/U$. By [lem-weil-proetale-weakly-etale-localization] this is $U_{\\mathrm{proet}}$, with coefficient ring $\\underline A|_U$. Restriction is exact by [lem-pur-site-restriction-module-adjunction-exact]. Countable products of modules over this ring sheaf are exact and sectionwise by [lem-weil-proetale-countable-products-exact]. For a sheaf $F$ on this slice and a local ideal section $f$, put $P(F)=\\prod_{j\\geq0}F$ and $\\Delta_f(F)(x)_j=x_j-fx_{j+1}$. More generally use the same formula degreewise on a representing complex. By [lem-weil-derived-limit-products-core] these termwise products represent the derived products. The cone formula in [def-weil-abstract-derived-category] therefore gives a derived multiplication-tower limit $\\operatorname{Cone}(\\Delta_f)[-1]$, with the triangle required by [def-weil-derived-limit]. By [lem-weil-pbc-local-hom-tower-criterion], local internal-Hom vanishing is equivalent to this cone being zero. For a degree-zero sheaf the shifted cone $\\operatorname{Cone}(\\Delta_f)[-1]$ is isomorphic to the two-term complex $P(F)\\xrightarrow{\\Delta_f}P(F)$ in degrees $0,1$ (its literal shifted differential is $-\\Delta_f$, changed to $\\Delta_f$ by negating the degree-one term), so this is equivalent to $\\Delta_f(F)$ being an isomorphism. This criterion applies to every $f\\in(I\\underline A)(U)$, not merely constant elements of $I$.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-products-core",
+    "def-weil-abstract-derived-category",
+    "def-weil-derived-limit",
+    "lem-weil-pbc-local-hom-tower-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997 (lemma-hom-from-Af), free resolution and multiplication tower; proetale.tex Tag 099Q (proposition-enough-weakly-contractibles), preliminary tower calculation; sites-cohomology.tex Tag 0947 (proposition-enough-weakly-contractibles), clauses (4),(5)"
+   }
+  },
+  {
+   "text": "Restrict the five-term exact sequence to the slice, using [lem-pur-site-restriction-module-adjunction-exact], and apply the exact product functor [lem-weil-proetale-countable-products-exact]. This gives an exact row $P_1\\to P_2\\to P_3\\to P_4\\to P_5$ and its endomorphism $\\Delta_f$, whose components $\\Delta_1,\\Delta_2,\\Delta_4,\\Delta_5$ are isomorphisms by step 1. Here is the middle-component chase, all lifts being local lifts in the exact row, as in [def-weil-sheaf-of-modules-category]. If $\\Delta_3x=0$, its image in $P_4$ is zero by injectivity of $\\Delta_4$, so locally $x$ lifts to $y\\in P_2$. Then $\\Delta_2y$ lifts from $z\\in P_1$; replace $y$ by $y-\\operatorname{image}(\\Delta_1^{-1}z)$. Its $\\Delta_2$ is zero, so it is zero and $x=0$. Given $b\\in P_3$, apply $\\Delta_4^{-1}$ to its image in $P_4$, obtaining $c$. Its image in $P_5$ is zero by injectivity of $\\Delta_5$, so locally lift $c$ to $d\\in P_3$. Then $b-\\Delta_3d$ is locally the image of $e\\in P_2$; $d+\\operatorname{image}(\\Delta_2^{-1}e)$ is a preimage of $b$. Thus $\\Delta_3$ is both monic and epic, and its local inverse is unique and glues to a sheaf inverse. Step 1 proves completeness of $F_3$ on all slices for all ideal sections, which is the stated weak Serre property.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-proetale-countable-products-exact",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Q (proposition-enough-weakly-contractibles), clause (1); more-algebra.tex lemma-serre-subcategory, elementary exact-row chase written out"
+   }
+  },
+  {
+   "text": "Let $F=\\varprojlim_n F_n$ for any inverse sequence of complete sheaves. Limits of sheaves of modules are sectionwise: the compatible-family presheaf is a sheaf because each coordinate glues uniquely, and it has the limit universal property. This follows directly from [def-weil-sheaf-of-modules-category]; [def-pur-localized-ringed-site] shows the same construction commutes with slice restriction. On a fixed slice, $P(F)=\\varprojlim_n P(F_n)$ by exchanging the two compatible-family descriptions. Every transition $F_{n+1}\\to F_n$ commutes with multiplication by $f$ and hence with $\\Delta_f$. Since the latter is invertible for every $F_n$ by step 1, the transition also commutes with $\\Delta_f^{-1}$ (multiply the commutative square by both inverses). For a compatible family $(b_n)$, the family $(\\Delta_f(F_n)^{-1}b_n)$ is therefore compatible and defines an inverse to $\\Delta_f(F)$. Applying step 1 gives completeness of $F$. No transition is assumed surjective and no exactness of inverse limit is used.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Q (proposition-enough-weakly-contractibles), clause (4); explicit compatible-family proof of the ordinary-limit assertion"
+   }
+  },
+  {
+   "text": "If $I^nF=0$, then for every slice and $f\\in I\\underline A$ we have $f^nF=0$: locally $f$ is a finite sum of ideal elements times ring sections, so $f^n$ lies in $I^n\\underline A$, and the zero action glues. On $P(F)$ let $s_f(x)_j=fx_{j+1}$. Then $s_f^n=0$ and $\\Delta_f=1-s_f$ has inverse $1+s_f+\\cdots+s_f^{n-1}$, since their two composites are $1-s_f^n=1$. Step 1 proves completeness of every power-torsion sheaf. Thus step 3 applies to any sequence with $I^nF_n=0$, regardless of its maps. These assertions also hold after restricting to a slice by the sectionwise restriction formula [def-pur-localized-ringed-site].",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099P (section-derived-completion-proetale), first list item; finite geometric-series verification of power-torsion completeness"
+   }
+  },
+  {
+   "text": "Completeness is local for sheaves and for the bounded complexes here. Indeed, on any slice and for any ideal section $f$, the product and $\\Delta_f$ constructions in step 1 commute with further slice restriction, because products and restrictions are sectionwise [lem-weil-proetale-countable-products-exact, def-pur-localized-ringed-site]. If a covering restricts a sheaf to complete sheaves, the resulting restrictions of $\\Delta_f$ are isomorphisms. Unique local inverse sections glue, so $\\Delta_f$ is an isomorphism; equivalently its two-term cone is acyclic. For complexes the same argument applies to the cohomology sheaves of the cone: restriction is exact [lem-pur-site-restriction-module-adjunction-exact], and a sheaf whose restriction to a cover is zero is zero by unique gluing [def-weil-sheaf-of-modules-category]. Covers may be pulled back to any slice. Thus step 4 and step 3 prove that every sheaf locally of the asserted inverse-limit form is complete.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "def-pur-localized-ringed-site",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Q (proposition-enough-weakly-contractibles), preliminary vanishing test; locality on all slices written explicitly"
+   }
+  },
+  {
+   "text": "Let $K^\\bullet$ be the bounded complex in the assertion. Each term is complete by steps 3--5. On any slice and for any local ideal section $f$, form the termwise product complex $P(K^\\bullet)$ as in step 1. Every degree component of $\\Delta_f$ is an isomorphism by the sheaf criterion. This is a chain map since multiplication by $f$ commutes with the $\\underline A$-linear differentials [def-pc-cochain-complex-modules]. Its inverse is also a chain map: $d\\Delta^i=\\Delta^{i+1}d$ implies $(\\Delta^{i+1})^{-1}d=d(\\Delta^i)^{-1}$. The cone of a chain isomorphism is contractible: with the convention of [def-weil-abstract-derived-category], $h(b,a)=(0,(\\Delta_f)^{-1}b)$ satisfies $dh+hd=1$. Consequently the cone and its shift are zero in the derived category. The product representation [lem-weil-derived-limit-products-core] and step 1 identify this shift with the multiplication-tower limit. The criterion [lem-weil-pbc-local-hom-tower-criterion] now gives the required derived internal-Hom vanishing. This proves the bounded-complex conclusion without assuming boundedness or finiteness of section groups.",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "def-weil-abstract-derived-category",
+    "lem-weil-derived-limit-products-core",
+    "lem-weil-pbc-local-hom-tower-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Q (proposition-enough-weakly-contractibles), clause (5), bounded termwise consequence; explicit cone contraction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pur-localized-ringed-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-limit",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-pbc-local-hom-tower-criterion",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099Q, clauses (1),(4),(5), and Tag 099P power-torsion discussion, using the explicit product-tower calculation of Tag 0997 rather than the ring-module evaluation route."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,15 +168,91 @@
    "date": "2026-10-14",
    "results": "8 hits: instHasLimitsCondensedMod, IsAdicComplete.toIsPrecomplete, isAdicComplete_iff, IsAdic.isAdicComplete_iff, instHasLimitsOfSizeLightCondMod_1, instHasLimitsOfSizeLightCondMod, instHasLimitsOfSizeCondensedMod, IsAdicComplete",
    "verdict": "no match: inspected the returned signatures; they concern other sheaf sites, ordinary completeness, or other full functors."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|derived.*complet.*sheaf|sheaf.*complet",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/CategoryTheory/Limits/Presheaf.lean, Mathlib/CategoryTheory/Limits/Presheaf.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: read returned signatures; none states local derived completeness of pro-etale sheaves or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Countable inverse limits of ideal power torsion sheaves are derived complete",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"Sheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: read returned signatures; none states local derived completeness of pro-etale sheaves or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves derived complete for an ideal form a weak Serre subcategory and are closed under countable inverse limits on the pro etale site",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CondensedMod.IsSolid, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, instAbelianLightCondMod",
+   "date": "2026-10-14",
+   "verdict": "no match: read returned signatures; none states local derived completeness of pro-etale sheaves or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of derived Hom from localization is equivalent to invertibility of one minus shift on countable products of a sheaf",
+   "results": "8 hits: CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, CategoryTheory.Sheaf.H, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoObjCochainComplexCompSingleFunctorOfNatOfHasExt, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, DerivedCategory.left_fac_of_isStrictlyGE",
+   "date": "2026-10-14",
+   "verdict": "no match: read returned signatures; none states local derived completeness of pro-etale sheaves or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The endomorphism one minus multiplication shift on the product of an adically complete module sheaf is invertible",
+   "results": "8 hits: AdicCompletion.of_ofLinearEquiv_symm, AdicCompletion.ofLinearEquiv_symm_of, AdicCompletion.of_bijective, AdicCompletion.ofLinearEquiv, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion.of_bijective_iff, AdicCompletion.sumInv_comp_sum, AdicCompletion.ofLinearEquiv_apply",
+   "date": "2026-10-14",
+   "verdict": "no match: read all eight returned signatures; ordinary adic completion equivalences and a finite sum comparison do not state the multiplication-tower criterion for sheaves."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-reconstruction-uniform-tower",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-torsion-limit-sheaf-completeness",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reduced local derived completeness to invertibility of the multiplication-tower difference on an exact countable product, wrote the five-term chase, compatible-family inverse-limit argument, finite geometric series for power torsion, locality and chain-cone contraction. Reused all necessary existing nodes; no new nodes.",
+  "blueprint": "lem-weil-pbc-reconstruction-uniform-tower: proof first sentence and local integral-model completeness; six steps establish the local completeness input, without altering the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies a slice with the pro-etale site of its object and identifies constant coefficients; needed to apply the arbitrary-scheme product theorem on every slice, not supplied by a node of this unit."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exactness of module-sheaf restriction transports the five-term sequence and tests cone cohomology on slices; a generic site tool not supplied in this unit."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exact sectionwise products for arbitrary ring sheaves on every scheme pro-etale site supply the product-tower calculation; generic site tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-6fcf2772b",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-6fcf2772b (reviewer sub-agent of L); spot-checked: Read the mathematics in full. All six steps match the cited Stacks and Bhatt–Scholze results; slice coefficients, cone signs, ordinary limits and edge cases check out. Accepted all three declared tool uses. No repairs or new nodes. review.md records the checks and a separate inherited DAG cycle."
+ }
 }
