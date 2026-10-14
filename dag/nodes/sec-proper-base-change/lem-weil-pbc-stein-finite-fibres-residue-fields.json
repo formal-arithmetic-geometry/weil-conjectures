@@ -33,9 +33,108 @@
   "def-weil-residue-field",
   "def-pc-field-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-stein-factorization-affine] to the given proper morphism: $A\\to B$ is integral, $q$ is proper, and each fibre of $q$ is nonempty. In particular $q$ is surjective. Fix $s\\in S$, put $k=\\kappa(s)$ and $T=\\pi^{-1}(s)$ with its subspace topology. By [lem-weil-pbc-integral-incomparability], distinct primes of $B$ over the prime $s$ cannot contain one another. Thus every singleton in $T$ is closed: the closure of $\\{b\\}$ in $\\operatorname{Spec}B$ consists of primes containing $b$, and its intersection with $T$ is just $\\{b\\}$.",
+   "uses": [
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-integral-incomparability",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E0M, label lemma-stein-universally-closed-residue-fields, proof"
+   }
+  },
+  {
+   "text": "Let $Y=X_s=X\\times_S\\operatorname{Spec}k$ with projection $a:Y\\to X$ [def-pc-scheme-fibre]. Proper base change [lem-weil-pbc-proper-fp-permanence] makes $Y\\to\\operatorname{Spec}k$ proper, hence of finite type and quasi-compact [def-weil-proper-morphism] [def-weil-finite-type-morphism]. The one-point scheme $\\operatorname{Spec}k$ is Noetherian: its coordinate ring is a field, whose only ideals are $0$ and $k$. Therefore [lem-weil-pbc-finite-type-over-noetherian] makes $Y$ Noetherian, without imposing anything on $A$. The fibre homeomorphism identifies $|Y|$ with $f^{-1}(s)$. Restricting $q$ gives a continuous surjection $h:|Y|\\to T$: for $b\\in T$ choose $z\\in X$ with $q(z)=b$, then $f(z)=\\pi(b)=s$, and lift $z$ by that homeomorphism.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E0M, label lemma-stein-universally-closed-residue-fields, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-noetherian-closed-subset-finite-components] with the Noetherian scheme $Y$ and its closed subset $E=Y$. It supplies a finite list of irreducible closed components $C_1,\\ldots,C_r$ covering $Y$, with components as defined in [def-weil-irreducible-components]. By [lem-weil-pbc-scheme-sober], each $C_j$ is $\\overline{\\{\\eta_j\\}}$ for a generic point $\\eta_j$. Continuity gives $h(C_j)\\subseteq\\overline{\\{h(\\eta_j)\\}}$ in $T$. Step 1 makes this last closure a singleton; hence $h(C_j)=\\{h(\\eta_j)\\}$. Surjectivity now gives $T=\\{h(\\eta_1),\\ldots,h(\\eta_r)\\}$, proving finiteness. If $Y$ is empty, surjectivity gives $T$ empty and the same argument uses $r=0$.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "def-weil-irreducible-components",
+    "lem-weil-pbc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E0M, label lemma-stein-universally-closed-residue-fields, proof"
+   }
+  },
+  {
+   "text": "Fix $b\\in T$. Step 1 shows $\\{b\\}$ is closed in $T$, so $h^{-1}(b)$ is a nonempty closed subset of the quasi-compact scheme $Y$. Schemes are Kolmogorov: sobriety [lem-weil-pbc-scheme-sober] gives this directly, since two points with the same singleton closure would be two generic points of that irreducible closed set. Apply [lem-sc-quasi-compact-kolmogorov-closed-point] to obtain $x\\in h^{-1}(b)$ that is closed in $Y$.",
+   "uses": [
+    "lem-weil-pbc-scheme-sober",
+    "lem-sc-quasi-compact-kolmogorov-closed-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E0M, label lemma-stein-universally-closed-residue-fields, proof"
+   }
+  },
+  {
+   "text": "Choose an affine member $U=\\operatorname{Spec}C$ of a finite-type affine cover of $Y\\to\\operatorname{Spec}k$ containing $x$ [def-weil-finite-type-morphism]. Then $C$ is a finitely generated $k$-algebra. Since $x$ is closed in $Y$, it is closed in $U$; its prime ideal $\\mathfrak m$ is maximal, and $\\kappa(x)=C/\\mathfrak m$: restriction to the open neighbourhood gives the same stalk, namely $C_{\\mathfrak m}$, and $C_{\\mathfrak m}/\\mathfrak m C_{\\mathfrak m}=(C/\\mathfrak m)_{C\\setminus\\mathfrak m}=C/\\mathfrak m$, since every element inverted has nonzero image in this field. This quotient is a field and a finitely generated $k$-algebra. Apply [lem-weil-pbc-zariski-lemma] to conclude $[\\kappa(x):k]<\\infty$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-residue-field",
+    "lem-weil-pbc-zariski-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E0M, label lemma-stein-universally-closed-residue-fields, proof"
+   }
+  },
+  {
+   "text": "The morphism $q\\circ a:Y\\to\\operatorname{Spec}B$ sends $x$ to $b$, hence induces a field map $\\kappa(b)\\to\\kappa(x)$ [def-weil-residue-field]. It is injective [def-pc-field-extension]. The equality $\\pi\\circ q\\circ a=(\\operatorname{Spec}k\\to S)\\circ(Y\\to\\operatorname{Spec}k)$ says the resulting tower $k\\to\\kappa(b)\\to\\kappa(x)$ has as composite the structure map used in step 5: this follows by composing the local ring maps and reducing modulo their maximal ideals. Thus $\\kappa(b)$ embeds as a $k$-linear subspace of the finite-dimensional space $\\kappa(x)$. Any linearly independent family in $\\kappa(b)$ stays independent in $\\kappa(x)$, so its size is at most $[\\kappa(x):k]$; consequently $[\\kappa(b):k]<\\infty$. This proves the residue-field clause for every $b\\in T$.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-pc-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E0M, label lemma-stein-universally-closed-residue-fields, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-field-extension",
+  "def-pc-scheme-fibre",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-weil-proper-morphism",
+  "def-weil-residue-field",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-integral-incomparability",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-stein-factorization-affine",
+  "lem-weil-pbc-zariski-lemma"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0E0M, lemma-stein-universally-closed-residue-fields: the omitted topological argument is expanded using component generic points, and the finite-type point is chosen as a closed point in the closed preimage."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,15 +184,67 @@
    "results": "[grep] OK 11 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"line\": \"69\", \"text\": \"  rw [CommRingCat.finrank_eq_of_isPushout this f.flat_appTop f.finite_appTop (T.isoSpec.hom t),\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"line\": \"121\", \"text\": \"  have hf₁ : (Spec.map f).appTop.hom.Finite := (Spec.map f).finite_appTop\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"75\", \"text\": \"lemma Scheme.Hom.finitePresentation_appTop {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffine X] [IsAffine Y]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"77\", \"text\": \"    f.appTop.hom.FinitePresentation :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"78\", \"text\": \"  HasRingHomProperty.appTop (P := @LocallyOfFinitePresentation) _ inferInstance\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"21\", \"text\": \"- `AlgebraicGeometry.finite_appTop_of_universallyClosed`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"161\", \"text\": \"theorem finite_appTop_of_universallyClosed (f : X ⟶ (Spec <| .of K))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"163\", \"text\": \"    f.appTop.hom.Finite := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"48\", \"text\": \"    (fun X _ f _ ↦ IsAffine X ∧ RingHom.Finite (f.appTop).hom) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"170\", \"text\": \"lemma Scheme.Hom.finite_appTop {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffine Y] [IsFinite f] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"171\", \"text\": \"    f.appTop.hom.Finite :=\"}\n",
    "date": "2026-10-14",
    "verdict": "no match: Proper.lean:161-163 assumes integral X over a field; finite fibre results require a finite morphism, absent for the Stein factor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spectrum of global sections of a proper scheme over an arbitrary ring has finite fibres with finite residue field extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.SpecMap_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S),\\n  AlgebraicGeometry.IsFinite (AlgebraicGeometry.Spec.map f) ↔ (CommRingCat.Hom.hom f).Finite\", \"doc\": \"For commutative rings $R$ and $S$, a ring homomorphism $f : R \\to S$ induces a morphism of schemes $\\\\operatorname{Spec}(S) \\to \\\\operatorname{Spec}(R)$. This morphism is finite if and only if the ring ho\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] (y : ↥Y),\\n  (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' {y}).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a finite morphism of schemes. For any point $y \\\\in Y$, the fiber $f^{-1}(\\\\{y\\\\})$ is a finite set.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  JacobsonSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: fibre finiteness assumes IsFinite; finite_appTop_of_universallyClosed assumes an integral scheme over a field, not an arbitrary proper scheme over a ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"stein\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match: fibre finiteness assumes IsFinite; finite_appTop_of_universallyClosed assumes an integral scheme over a field, not an arbitrary proper scheme over a ring"
+  },
+  {
+   "tool": "grep",
+   "query": "stein|finite_appTop_of_universallyClosed",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/TsumDivisorsAntidiagonal.lean\", \"line\": \"20\", \"text\": \"which are used for Eisenstein series and their q-expansions. This is also a special case of\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"34\", \"text\": \"  CuspFormClass MatrixGroups OnePoint Filter EisensteinSeries Asymptotics\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\", \"line\": \"26\", \"text\": \"open UpperHalfPlane ModularForm ModularFormClass MatrixGroups EisensteinSeries\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/DedekindEta.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.NumberTheory.ModularForms.EisensteinSeries.E2.Summable\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/DedekindEta.lean\", \"line\": \"24\", \"text\": \"  derivative and show that it is a multiple of the Eisenstein series `E2`.\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/DedekindEta.lean\", \"line\": \"168\", \"text\": \"open EisensteinSeries in\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CuspFormSubmodule.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.NumberTheory.ModularForms.EisensteinSeries.QExpansion\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Derivative.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.NumberTheory.ModularForms.EisensteinSeries.E2.MDifferentiable\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Derivative.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.NumberTheory.ModularForms.EisensteinSeries.E2.Transform\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Derivative.lean\", \"line\": \"129\", \"text\": \"  D F z - k * 12⁻¹ * EisensteinSeries.E2 z * F z\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Derivative.lean\", \"line\": \"133\", \"text\": \"    serreDerivative k F z = D F z - k * 12⁻¹ * EisensteinSeries.E2 z * F z := rfl\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Derivative.lean\", \"line\": \"137\", \"text\": \"    serreDerivative k F = fun z ↦ D F z - k * 12⁻¹ * EisensteinSeries.E2 z * F z := rfl\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Discriminant.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.NumberTheory.ModularForms.EisensteinSeries.E2.Transform\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Discriminant.lean\", \"line\": \"74\", \"text\": \"open EisensteinSeries in\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Delta.lean\", \"line\": \"6\", \"text\": \"public import Mathlib.NumberTheory.ModularForms.EisensteinSeries.E2.Transform\"}\n  {\"file\": \"Mathlib/NumberTheory/FLT/Three.lean\", \"line\": \"148\", \"text\": \"section eisenstein\"}\n  {\"file\": \"Mathlib/NumberTheory/FLT/Three.lean\", \"line\": \"744\", \"text\": \"end eisenstein\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/IsBoundedAtImInfty.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.NumberTheory.ModularForms.EisensteinSeries.Defs\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/IsBoundedAtImInfty.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.NumberTheory.ModularForms.EisensteinSeries.Summable\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/IsBoundedAtImInfty.lean\", \"line\": \"14\", \"text\": \"# Boundedness of Eisenstein series\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/IsBoundedAtImInfty.lean\", \"line\": \"16\", \"text\": \"We show that Eisenstein series of weight `k` and level `Γ(N)` with congruence condition\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/IsBoundedAtImInfty.lean\", \"line\": \"21\", \"text\": \"We need to bound the value of the Eisenstein series (acted on by `A : SL(2,ℤ)`)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/Summable.lean\", \"line\": \"14\", \"text\": \"# Summability of Eisenstein series\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/Summable.lean\", \"line\": \"16\", \"text\": \"We gather results about the summability of Eisenstein series, particularly\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/Summable.lean\", \"line\": \"17\", \"text\": \"the summability of the Eisenstein series summands, which are used in the proof of the\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: fibre finiteness assumes IsFinite; finite_appTop_of_universallyClosed assumes an integral scheme over a field, not an arbitrary proper scheme over a ring"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stein factorization finite fibres finite residue fields proper morphism",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-stein-finite-fibres-residue-fields",
+  "worker": "stage1",
+  "summary": "Verified the exact non-Noetherian statement against 0E0M. Reused existing Stein, incomparability, proper base-change, Noetherian-component, sobriety, closed-point and Zariski nodes. Expanded the omitted topological argument and the compatible residue-field tower; no new nodes and no Lean changes.",
+  "blueprint": "The classical constructibility sentence in thm-weil-pbc-direct-image-finiteness-proper, expanded through 0GKX / 0GK7 / 0BUI: finiteness of the Stein-factor points and their residue extensions. All six steps realize the auxiliary 0E0M argument at the existing blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-stein-factorization-affine",
+    "why": "Only integrality, properness and nonempty fibres of the canonical affine Stein factor are used as generic geometric inputs; this unit has no replacement for those inputs."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-stein-factorization-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-ca9b20047",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-ca9b20047 (reviewer sub-agent of L); spot-checked: Read all six steps and cited statements against Stacks 0E0M, 03GY, 03H2, 00GT, 01T6, 01IS, 005E and 00FV. Component coverage, closed-point selection and residue-map compatibility justify both conclusions over arbitrary A. No new nodes, cycles or duplicate splits; Stein tool use accepted. Concrete checks and edge cases recorded in review.md; no fixes needed."
+ }
 }
