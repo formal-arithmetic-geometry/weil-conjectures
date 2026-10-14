@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCover
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverDescent
+public import WeilConjectures.WeilSheaf.StalkTensor
 public import WeilConjectures.WeilSheaf.LisseDuality
 
 /-!
@@ -25,6 +26,83 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 
 attribute [local instance] Abelian.hasFiniteBiproducts
+
+namespace AlgebraicGeometry.ProEtale
+
+section Uncurry
+
+open Functor.LaxMonoidal
+
+variable {l : ℕ} [Fact l.Prime] {Z : Scheme.{u}}
+
+/-- The morphism `G ⟶ H` corresponding to `v : ℚ̄_ℓ ⟶ 𝓗om(G, H)`, on underlying sheaves:
+`G ≅ 𝟙 ⊗ G ⟶ 𝓗om(G, H) ⊗ G ⟶ H`. -/
+lemma transpose_comp_ihomRegularIso_hom_app_hom {G H : AdicSheaf l Z}
+    (v : AdicSheaf.unit l Z ⟶ (AdicSheaf.ihom G).obj H) :
+    (Mod.transpose v ≫ Mod.ihomRegularIso.hom.app H).hom =
+      (λ_ G.X).inv ≫ (MonObj.one (X := adicConstantSheaf l Z) ≫ v.hom) ▷ G.X ≫ Mod.evaluation G H := by
+  have h₁ := Mod.uncurryHom_transpose v
+  rw [Mod.uncurryHom, Mod.uncurryHom, Mod.evaluation_regular] at h₁
+  have hunit : (ρ_ H.X).inv ≫ H.X ◁ MonObj.one ≫ Mod.rightAct H = 𝟙 _ := by
+    have := congrArg Mod.Hom.hom (Mod.unitRight_rightActHom H)
+    rw [Mod.comp_hom', Mod.id_hom'] at this
+    change ((ρ_ H.X).inv ≫ H.X ◁ MonObj.one) ≫ Mod.rightAct H = 𝟙 _ at this
+    simpa only [Category.assoc] using this
+  have e₁ : (ρ_ G.X).inv ≫ G.X ◁ MonObj.one (X := adicConstantSheaf l Z) ≫
+      (Mod.transpose v ≫ Mod.ihomRegularIso.hom.app H).hom ▷ adicConstantSheaf l Z =
+      (Mod.transpose v ≫ Mod.ihomRegularIso.hom.app H).hom ≫ (ρ_ H.X).inv ≫
+        H.X ◁ MonObj.one := by
+    rw [whisker_exchange, ← rightUnitor_inv_naturality_assoc]
+    rfl
+  have e₂ : (ρ_ G.X).inv ≫ G.X ◁ (MonObj.one (X := adicConstantSheaf l Z)) ≫
+      (β_ G.X (adicConstantSheaf l Z)).hom = (λ_ G.X).inv ≫ MonObj.one ▷ G.X := by
+    rw [BraidedCategory.braiding_naturality_right, ← Category.assoc]
+    congr 1
+    rw [Iso.inv_comp_eq, ← braiding_leftUnitor, Category.assoc, Iso.hom_inv_id,
+      Category.comp_id]
+  calc (Mod.transpose v ≫ Mod.ihomRegularIso.hom.app H).hom
+      = (ρ_ G.X).inv ≫ G.X ◁ MonObj.one ≫
+          (Mod.transpose v ≫ Mod.ihomRegularIso.hom.app H).hom ▷ _ ≫ Mod.rightAct H := by
+        rw [reassoc_of% e₁, hunit, Category.comp_id]
+    _ = (ρ_ G.X).inv ≫ G.X ◁ MonObj.one ≫ (β_ G.X (adicConstantSheaf l Z)).hom ≫
+          v.hom ▷ G.X ≫ Mod.evaluation G H := by
+        rw [Mod.comp_hom', comp_whiskerRight, Category.assoc]
+        erw [h₁]
+        rfl
+    _ = (λ_ G.X).inv ≫ (MonObj.one (X := adicConstantSheaf l Z) ≫ v.hom) ▷ G.X ≫ Mod.evaluation G H := by
+        rw [reassoc_of% e₂, comp_whiskerRight, Category.assoc]
+
+/-- The map of stalks of the morphism `G ⟶ H` corresponding to `v : ℚ̄_ℓ ⟶ 𝓗om(G, H)` is the
+evaluation pairing with the stalk of the section `v(1)`. -/
+lemma map_transpose_comp_ihomRegularIso_hom_app_hom_apply
+    (Φ : Sheaf (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l) ⥤ WeilCoefficients.{u} l)
+    [Φ.LaxMonoidal] {G H : AdicSheaf l Z} (v : AdicSheaf.unit l Z ⟶ (AdicSheaf.ihom G).obj H)
+    (x : Φ.obj G.X) :
+    (Φ.map (Mod.transpose v ≫ Mod.ihomRegularIso.hom.app H).hom).hom x =
+      Mod.evaluationPairing Φ G H ((ε Φ ≫ Φ.map (MonObj.one (X := adicConstantSheaf l Z) ≫ v.hom)).hom 1) x := by
+  rw [transpose_comp_ihomRegularIso_hom_app_hom, Functor.map_comp, Functor.map_comp,
+    ← left_unitality_inv, Category.assoc, Category.assoc, ← μ_natural_left_assoc,
+    ← comp_whiskerRight_assoc]
+  simp only [ModuleCat.hom_comp, LinearMap.comp_apply,
+    ModuleCat.MonoidalCategory.leftUnitor_inv_apply,
+    ModuleCat.MonoidalCategory.whiskerRight_apply]
+  rfl
+
+/-- The restriction to a point of the global section `v(1)` of `v : ℚ̄_ℓ ⟶ N`. -/
+lemma globalSectionsToUpperStar_globalSectionOfModHom' {K : Type u} [Field K]
+    (t : Spec (.of K) ⟶ Z) {N : AdicSheaf l Z} (v : AdicSheaf.unit l Z ⟶ N) :
+    ((globalSectionsToUpperStar _ t).app N.X).hom (globalSectionOfModHom v) =
+      (ε (stalkFunctor l t) ≫ (stalkFunctor l t).map (MonObj.one (X := adicConstantSheaf l Z) ≫ v.hom)).hom 1 := by
+  have hε := NatTrans.IsMonoidal.unit (τ := globalSectionsToUpperStar (WeilCoefficients.{u} l) t)
+  have n := (globalSectionsToUpperStar (WeilCoefficients.{u} l) t).naturality
+    (MonObj.one (X := adicConstantSheaf l Z) ≫ v.hom)
+  rw [globalSectionOfModHom, globalSectionOfHom, ← ModuleCat.comp_apply, Category.assoc]
+  erw [n]
+  rw [reassoc_of% hε]
+
+end Uncurry
+
+end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.Scheme.UniversalCovers
 
@@ -79,12 +157,66 @@ theorem lisseStalk_faithful (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) {G H : 
   exact ObjectProperty.hom_ext _ (sub_eq_zero.1 h0)
 
 include hU in
-/-- **The stalk functor is full onto equivariant maps.** -/
+omit [IsLocallyNoetherian Y] [CompactSpace Y] [IsRegular Y] [ConnectedSpace Y] in
+/-- The transport of stalks preserves the evaluation pairing `𝓗om(G, N)_y × G_y → N_y`. -/
+lemma monoIso_evaluationPairing_general {y z : Spec (.of (AlgebraicClosure Ω)) ⟶ Y}
+    (τ : fiber y ≅ fiber z) (G N : LisseSheaf l Y)
+    (hGN : IsAdicLisseSheaf ((AdicSheaf.ihom G.obj).obj N.obj))
+    (d : (stalkFunctor l y).obj ((AdicSheaf.ihom G.obj).obj N.obj).X)
+    (v : (stalkFunctor l y).obj G.obj.X) :
+    Mod.evaluationPairing (stalkFunctor l z) G.obj N.obj
+        (((monoIso hU τ).hom.app ⟨_, hGN⟩).hom d) (((monoIso hU τ).hom.app G).hom v) =
+      ((monoIso hU τ).hom.app N).hom
+        (Mod.evaluationPairing (stalkFunctor l y) G.obj N.obj d v) := by
+  have hd := isIso_ptRes_app hU y ⟨_, hGN⟩
+  have hv := isIso_ptRes_app hU y G
+  obtain ⟨d, rfl⟩ : ∃ d₀, ((U.ptRes l y).app _).hom d₀ = d :=
+    ⟨(inv ((U.ptRes l y).app _)).hom d, by rw [← ModuleCat.comp_apply, IsIso.inv_hom_id]; rfl⟩
+  obtain ⟨v, rfl⟩ : ∃ v₀, ((U.ptRes l y).app _).hom v₀ = v :=
+    ⟨(inv ((U.ptRes l y).app _)).hom v, by rw [← ModuleCat.comp_apply, IsIso.inv_hom_id]; rfl⟩
+  rw [monoIso_hom_app_ptRes_apply hU τ ⟨_, hGN⟩, monoIso_hom_app_ptRes_apply hU τ G,
+    evaluationPairing_natTrans, evaluationPairing_natTrans, evaluationPairing_natTrans]
+  exact (monoIso_hom_app_ptRes_apply hU τ N _).symm
+
+include hU in
+omit [IsLocallyNoetherian Y] [CompactSpace Y] [IsRegular Y] [ConnectedSpace Y] in
+/-- **The stalk functor is full onto equivariant maps** (blueprint:
+`cor-galois-lisse-representations`). An equivariant map `φ : G_t → H_t` is an invariant element
+of the stalk `𝓗om(G, H)_t = Hom(G_t, H_t)`, hence the restriction of a global section of the
+lisse sheaf `𝓗om(G, H)` (`AlgebraicGeometry.Scheme.UniversalCovers.exists_globalSection_of_invariant`),
+that is, of a morphism `G ⟶ H`. -/
 theorem lisseMonodromy_full (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) {G H : LisseSheaf l Y}
     (φ : LisseMonodromy.StalkSpace t G →ₗ[PadicAlgCl l] LisseMonodromy.StalkSpace t H)
     (hφ : ∀ g v, φ ((U.lisseMonodromy hU).rep t G g v) = (U.lisseMonodromy hU).rep t H g (φ v)) :
     ∃ f : G ⟶ H, ((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map f)).hom = φ := by
-  sorry
+  have hGH : IsAdicLisseSheaf ((AdicSheaf.ihom G.obj).obj H.obj) := G.property.ihom H.property
+  let Mh : LisseSheaf l Y := ⟨_, hGH⟩
+  have hP := WeilCoefficients.bijective_homLinearMap
+    (G.property.bijective_evaluationPairing_of_lisse H.obj t)
+  obtain ⟨m, hm⟩ := hP.2 φ
+  have hinv (g : Aut (fiber t)) : ((monoIso hU g).hom.app Mh).hom m = m := by
+    refine hP.1 (LinearMap.ext fun x ↦ ?_)
+    obtain ⟨w, rfl⟩ : ∃ w, ((monoIso hU g).hom.app G).hom w = x :=
+      ⟨((monoIso hU g).inv.app G).hom x, by
+        rw [← ModuleCat.comp_apply, Iso.inv_hom_id_app]; rfl⟩
+    rw [WeilCoefficients.homLinearMap_apply, WeilCoefficients.homLinearMap_apply,
+      monoIso_evaluationPairing_general hU g G H hGH]
+    have h₁ := LinearMap.congr_fun hm w
+    have h₂ := LinearMap.congr_fun hm (((monoIso hU g).hom.app G).hom w)
+    rw [WeilCoefficients.homLinearMap_apply] at h₁ h₂
+    rw [h₁, h₂]
+    exact (hφ g w).symm
+  obtain ⟨σ, hσ⟩ := exists_globalSection_of_invariant hU t Mh m hinv
+  obtain ⟨β, hβ⟩ := (bijective_globalSectionOfModHom Mh.obj).2 σ
+  refine ⟨ObjectProperty.homMk (Mod.transpose β ≫ Mod.ihomRegularIso.hom.app H.obj),
+    LinearMap.ext fun x ↦ ?_⟩
+  change ((stalkFunctor l t).map (Mod.transpose β ≫ Mod.ihomRegularIso.hom.app H.obj).hom).hom x =
+    φ x
+  rw [map_transpose_comp_ihomRegularIso_hom_app_hom_apply,
+    ← globalSectionsToUpperStar_globalSectionOfModHom', hβ, hσ]
+  have h := LinearMap.congr_fun hm x
+  rw [WeilCoefficients.homLinearMap_apply] at h
+  exact h
 
 include hU in
 /-- **Every continuous finite-dimensional representation is a monodromy representation.** -/
