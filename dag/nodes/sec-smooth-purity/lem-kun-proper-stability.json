@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-proper-stability",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Properness survives base change and composition",
@@ -19,7 +19,7 @@
  ],
  "proof": [
   {
-   "text": "Stability under base change is [lem-weil-pbc-proper-base-change],\nand stability under composition is\n[lem-weil-pbc-proper-composition]; the last assertion is the\nfirst applied to the proper morphism $X\\to\\Spec(k)$ and the base\nchange $Y\\to\\Spec(k)$, the composite being the projection\n$\\operatorname{pr}_2:X\\times_kY\\to Y$.",
+   "text": "Stability under arbitrary base change is [lem-weil-pbc-proper-base-change], and stability under composition is [lem-weil-pbc-proper-composition]. For the last assertion, apply the base-change statement with $f:X\\to\\Spec(k)$ and $g:Y\\to\\Spec(k)$. Its conclusion is properness of $f':X\\times_{\\Spec(k)}Y\\to Y$. By definition, $X\\times_kY$ is this fibre product, and $f'$ is its second projection $\\operatorname{pr}_2$, so the required projection is proper.",
    "uses": [
     "lem-weil-pbc-proper-base-change",
     "lem-weil-pbc-proper-composition"
@@ -36,9 +36,52 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-proper-stability.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper morphisms stable under base change and composition; product projection proper",
+   "results": "AlgebraicGeometry.IsProper.instSndScheme; AlgebraicGeometry.IsProper.isStableUnderBaseChange; AlgebraicGeometry.IsProper.instIsMultiplicativeScheme; AlgebraicGeometry.IsProper.instCompScheme",
+   "date": "2026-10-14",
+   "verdict": "matches the two stability clauses and pullback projection"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper.instCompScheme",
+   "results": "AlgebraicGeometry.IsProper.instCompScheme in Mathlib.AlgebraicGeometry.Morphisms.Proper",
+   "date": "2026-10-14",
+   "verdict": "match: composition instance"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProper",
+   "results": "none (logged grep subdirectory Mathlib/AlgebraicGeometry/Morphisms returned 0 hits; that subdirectory argument repeats Mathlib and does not search the intended source)",
+   "date": "2026-10-14",
+   "verdict": "no match in the queried path; corrected search recorded below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper morphisms are stable under base change and composition for schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "instCompScheme|pullback.snd|isStableUnderBaseChange",
+   "results": "2 hits in AlgebraicGeometry/Morphisms/Proper.lean: line 72 isStableUnderBaseChange and line 83 proper pullback.snd instance; read lines 40–90 directly as well, including composition at line 67. Search output misparses line-only rg output as file names.",
+   "date": "2026-10-14",
+   "verdict": "match: base-change stability and pullback projection"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper.instSndScheme",
+   "results": "AlgebraicGeometry.IsProper.instSndScheme: (f : X ⟶ S) (g : Y ⟶ S) [IsProper f] : IsProper (CategoryTheory.Limits.pullback.snd f g), Mathlib.AlgebraicGeometry.Morphisms.Proper",
+   "date": "2026-10-14",
+   "verdict": "exact match: base-change projection"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -65,5 +108,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-proper-stability",
+  "worker": "stage1",
+  "summary": "Audited the imported proof against the existing proper-base-change and proper-composition leaves. No new node is needed: the sole proof step applies those two exact statements and identifies the product projection as the corresponding pullback. Filled blueprint ancestry and recorded the mandated Mathlib searches; no Lean declaration attaches to this item.",
+  "blueprint": "Realizes the proof paragraph asserting base-change stability, composition stability, and the projection as a base change."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NL-301863e9e",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-301863e9e (reviewer sub-agent of L); spot-checked: Read the complete item, unit, chapter, cited DAG leaves, Stacks Tags 01W3/01W4, Mathlib properness source, report, and delivery rules. The statement and hypotheses match the blueprint; the proof correctly applies base change and identifies the pullback with pr₂. Edge cases and duplicate/generalization risks were checked. No new nodes or repairs are needed."
+ }
 }
