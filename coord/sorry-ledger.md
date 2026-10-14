@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **830**, closure **9**, holes in definitions **4**, definitions with undetermined data **2** (closure **0**).
+Holes now: library **829**, closure **9**, holes in definitions **4**, definitions with undetermined data **2** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -20,20 +20,20 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 618 | 7 |
+| Sheaf | 617 | 7 |
 | WeilConjectures | 212 | 2 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2178 | 85 | 2093 | 6 | 1 |
-| 660345513 (Application of proof-dependency imports) | library | 2120 | 83 | 2037 | 6 | 1 |
+| 889327369 (Queue at the start of stage 3) | library | 2178 | 84 | 2094 | 6 | 1 |
+| 660345513 (Application of proof-dependency imports) | library | 2120 | 82 | 2038 | 6 | 1 |
 | 660345513 (Application of proof-dependency imports) | closure | 1979 | 7 | 1972 | 4 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3372 |
+| proved | 3373 |
 | decomposed | 48 |
 | moved | 3906 |
 | pruned | 119 |
@@ -82,7 +82,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | K3 | 106 | 106 | 75 | 31 | 55/106 (51.9%) |
 | K4 | 60 | 44 | 35 | 9 | 24/60 (40.0%) |
 | M1 | 136 | 135 | 92 | 43 | 65/136 (47.8%) |
-| M2 | 127 | 129 | 103 | 26 | 69/127 (54.3%) |
+| M2 | 128 | 130 | 103 | 27 | 69/128 (53.9%) |
 | M3 | 105 | 106 | 71 | 35 | 51/105 (48.6%) |
 | M4 | 43 | 43 | 23 | 20 | 16/43 (37.2%) |
 | N1 | 133 | 134 | 108 | 26 | 74/133 (55.6%) |
@@ -149,7 +149,7 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | Sheaf.AlgebraicGeometry.CartesianHigherImageAffineSectionLocalVanishing | 14 | 1 | F3 |
 | Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality | 16 | 1 | F3 |
 | Sheaf.AlgebraicGeometry.PicardH1ProductSpanningBypass | 16 | 1 | — |
-| Sheaf.AlgebraicGeometry.PicardResidueHomologySourceResidueComparison | 22 | 1 | M2 |
+| Sheaf.AlgebraicGeometry.PicardDerivedFibreResidueBridge | 24 | 1 | X2 |
 | Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData | 34 | 2 | S4 |
 | Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates | 50 | 1 | B2 |
 
