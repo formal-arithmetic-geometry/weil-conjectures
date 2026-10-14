@@ -6,7 +6,7 @@ Authors: SHEAF contributors
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
+import Sheaf.AlgebraicGeometry.ClosedImmersionResidueFieldIso
 
 /-!
 # Field-valued points factor through closed immersions
@@ -51,7 +51,7 @@ theorem field_point_factors_through_closed_immersion
     (∃! s' : Spec (.of K) ⟶ Z, s' ≫ i = s) ∧
       ∀ s' : Spec (.of K) ⟶ Z, s' ≫ i = s → s'.base (default : Spec (.of K)) = z := by
   have hr : IsIso (i.residueFieldMap z) :=
-    i.isIso_residueFieldMap z
+    i.isIso_residueFieldMap_of_isClosedImmersion z
   have hx : s (IsLocalRing.closedPoint K) = i z := by
     simpa only [Subsingleton.elim (IsLocalRing.closedPoint K)
       (default : Spec (.of K))] using h

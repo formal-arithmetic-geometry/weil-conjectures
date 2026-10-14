@@ -67,36 +67,7 @@ theorem Scheme.Hom.pic_proper_ntorsion
     Nonempty (C.Pic ⧸ (powMonoidHom n : C.Pic →* C.Pic).range ≃* Multiplicative (ZMod n)) ∧
     (∀ L : C.Pic, L ∈ f.picZero → ∃ M : C.Pic, M ∈ f.picZero ∧ M ^ n = L) := by
   have ht := Scheme.Hom.pic_proper_ntorsion_torsion f n _hn
-  let : C.Over (Spec (.of k)) := ⟨f⟩
-  have : ConnectedSpace C := IsConnectedCurve.connectedSpace' f
-  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
-  have : IsRegular C := IsRegular.of_smooth f
-  have : IrreducibleSpace C := IsRegular.irreducibleSpace C
-  have : SmoothOfRelativeDimension 1 f :=
-    (smoothOfRelativeDimension_iff_topologicalKrullDim_eq f 1).mpr
-      (IsConnectedCurve.krullDim_eq_one (f := f))
-  have : SmoothOfRelativeDimension 1 (C ↘ Spec (.of k)) := ‹SmoothOfRelativeDimension 1 f›
-  have : IsProper (C ↘ Spec (.of k)) := ‹IsProper f›
-  obtain ⟨-, ⟨eQ⟩, -⟩ := Scheme.nonempty_addEquiv_torsionBy_pic_and_quotient (C := C) _hn
-  have hRange : (powMonoidHom n : C.Pic →* C.Pic).range.toAddSubgroup =
-      (zsmulAddGroupHom (α := Additive C.Pic) (n : ℤ)).range := by
-    ext x
-    constructor
-    · rintro ⟨y, hy⟩
-      refine ⟨Additive.ofMul y, ?_⟩
-      simpa using congrArg Additive.ofMul hy
-    · rintro ⟨y, rfl⟩
-      exact ⟨y.toMul, by simp⟩
-  let eQuot : Additive (C.Pic ⧸ (powMonoidHom n : C.Pic →* C.Pic).range) ≃+
-      (Additive C.Pic ⧸ (powMonoidHom n : C.Pic →* C.Pic).range.toAddSubgroup) :=
-    { toFun := fun x ↦ x
-      invFun := fun x ↦ x
-      left_inv := fun _ ↦ rfl
-      right_inv := fun _ ↦ rfl
-      map_add' := fun _ _ ↦ rfl }
-  have hc : Nonempty (C.Pic ⧸ (powMonoidHom n : C.Pic →* C.Pic).range ≃*
-      Multiplicative (ZMod n)) :=
-    ⟨(eQuot.trans ((QuotientAddGroup.quotientAddEquivOfEq hRange).trans eQ)).toMultiplicative⟩
+  have hc := Scheme.Hom.pic_proper_ntorsion_coker f n _hn
   have hd := Scheme.Hom.pic_proper_ntorsion_div f n _hn
   exact ⟨ht, hc, hd⟩
 
