@@ -14622,10 +14622,11 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:21 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.OverlapConjugateRestriction (stage 3; reviewer PASS; first push; landing 20261014T052131-L-1876990 (interface); batch 20261014T052128; modules 2; new nodes 2; change records: coord/changes/overlap-canonical-comparison-representation.md)
 - 05:21 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.FlatTelescopeShiftGauge (stage 3; reviewer PASS; first push; landing 20261014T052131-L-1877109 (interface); batch 20261014T052128; modules 2; new nodes 1)
 - 05:24 L: returned deliver/F1/Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCoreParts (reviewer RETURN: (reviewer X-c4be4, head c4be47979) E2 / review point 4: second_section_homotopy_of_counit remains false at lean/Sheaf/Al)
-- 05:24 L: merged deliver/G3/Sheaf.Paper.CechCupResolutionBetaClassPairing (stage 3; reviewer PASS; after a return; landing 20261014T052438-L-1913314 (interface); batch 20261014T052436; modules 2; new nodes 2; change records: coord/changes/cech-cup-beta-axis-restoration.md)
 - 05:24 L: merged deliver/H2/Sheaf.AlgebraicGeometry.PerfectHomOpenMateResolutionNormalization (stage 3; reviewer PASS; first push; landing 20261014T052439-L-1913452 (interface); batch 20261014T052436; modules 3; new nodes 2; change records: coord/changes/perfect-hom-open-proof-elaboration.md)
 - 05:24 L: merged deliver/H2/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (stage 3; reviewer PASS; first push; landing 20261014T052439-L-1913685 (proof); batch 20261014T052436; modules 1; new nodes 0)
 - 05:24 L: merged deliver/J3/Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling (stage 3; reviewer PASS; first push; landing 20261014T052439-L-1913950 (proof); batch 20261014T052436; modules 1; new nodes 0)
 - 05:24 L: merged deliver/P1/Sheaf.RingTheory.IdealKernelElementDescent (stage 3; reviewer PASS; after a return; landing 20261014T052440-L-1914123 (interface); batch 20261014T052436; modules 2; new nodes 0; change records: coord/changes/ideal-kernel-element-descent-universe.md)
 - 05:24 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.TensorGradedAlgebraData (stage 3; reviewer PASS; first push; landing 20261014T052440-L-1914364 (interface); batch 20261014T052436; modules 3; new nodes 2)
 - 05:24 L: merged deliver/Y3/Sheaf.Paper.CartierEquality (stage 3; reviewer PASS; first push; landing 20261014T052441-L-1914607 (proof); batch 20261014T052436; modules 1; new nodes 0)
+
+- 13:30 L: batch 20261014T052436 dependency take-out
