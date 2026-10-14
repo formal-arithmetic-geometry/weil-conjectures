@@ -16,7 +16,7 @@ The proof follows the componentwise construction in the parent theorem: remove a
 other components, restrict each dense isomorphism, and glue the resulting local
 isomorphisms.
 (blueprint: lem-weil-pbc-dense-open-component-modifications-nonempty) -/
- theorem exists_dense_open_isIso_component_modifications_of_pos
+theorem exists_dense_open_isIso_component_modifications_of_pos
     (X : Scheme.{u}) [IsReduced X]
     (n : ℕ) (hn : 0 < n) (C : Fin n → Scheme.{u}) (ι : ∀ i, C i ⟶ X)
     (hC : ∀ i, IsIntegral (C i) ∧ IsClosedImmersion (ι i) ∧

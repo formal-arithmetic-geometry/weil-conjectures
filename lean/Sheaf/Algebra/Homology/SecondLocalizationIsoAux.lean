@@ -371,7 +371,7 @@ hypotheses identify the two maps to D, so the scalar-extension associator
 gives the required source. Its formula on 1 tensor x and the adjunction
 generator formula give exactly `IsSecondLocalizationMap`.
 -/
- theorem exists_secondLocalization_hom
+theorem exists_secondLocalization_hom
     (T : Submonoid B) [IsLocalization T Bp] (hflat : (algebraMap B Bp).Flat) (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)
@@ -433,7 +433,7 @@ this to base change over A tensor_R Bp. Extend the resulting isomorphism
 further to D, using the tensor associator. The generator formula and
 `IsSecondLocalizationMap.ext` identify it with the chosen map.
 -/
- theorem secondLocalization_hom_isIso
+theorem secondLocalization_hom_isIso
     (T : Submonoid B) [IsLocalization T Bp] (hflat : (algebraMap B Bp).Flat) (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)

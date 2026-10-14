@@ -23,7 +23,7 @@ of sections on the pieces. Sections on each piece identify with its stalk, and
 inverse-image stalks identify with the stalks of `H`. Matching the unique geometric
 point of each factor with the finite geometric fibre, then checking a representative
 germ, gives exactly the displayed restriction map. -/
- theorem finite_pushforward_set_stalk_map_bijective_of_finite
+theorem finite_pushforward_set_stalk_map_bijective_of_finite
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f]
     (H : Sheaf X.smallEtaleTopology (Type (u + 1)))
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)

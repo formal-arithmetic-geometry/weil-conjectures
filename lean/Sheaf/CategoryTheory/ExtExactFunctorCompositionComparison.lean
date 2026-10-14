@@ -157,7 +157,7 @@ theorem mapExactFunctor_comp_mk₀_eq
     simp only [← Functor.commShiftIso_hom_naturality_assoc] at hh
     exact hh
 /-- Deprecated compatibility alias; use `mapExactFunctor_comp_mk₀_eq`. -/
- theorem exactFunctorCompositionComparison
+theorem exactFunctorCompositionComparison
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
     [HasExt.{w} C] [HasExt.{w} D] [HasExt.{w} E]

@@ -18,7 +18,7 @@ Proof: apply the flat height formula to the canonical flat map from A to its com
 the maximal ideal. The completion is local with the extended maximal ideal, and its closed
 fibre is the residue field A/m, hence has dimension zero. Localizing at the maximal ideals
 does not change either local ring, so the formula gives equality. -/
- theorem completion_dimension_eq (A : Type u) [CommRing A] [IsNoetherianRing A]
+theorem completion_dimension_eq (A : Type u) [CommRing A] [IsNoetherianRing A]
     [IsLocalRing A] :
     ringKrullDim (AdicCompletion (IsLocalRing.maximalIdeal A) A) = ringKrullDim A := by
   let B := AdicCompletion (IsLocalRing.maximalIdeal A) A
