@@ -14918,3 +14918,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:49 L: merged deliver/H3/Sheaf.AlgebraicGeometry.PicardExternalCechCupLeibniz (stage 3; reviewer PASS; after a return; landing 20261014T174919-L-3209055 (proof); batch 20261014T174918; modules 1; new nodes 0)
 - 18:05 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.ConstructibleModuleNoetherianStalkDetector (stage 3; reviewer PASS; first push; landing 20261014T180521-L-3430290 (interface); batch 20261014T180520; modules 3; new nodes 2)
 - 18:09 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteSelectionGeneral (stage 3; reviewer PASS; first push; landing 20261014T180945-L-3486112 (proof); batch 20261014T180944; modules 1; new nodes 0)
+- 18:13 L: merged deliver/S4/Sheaf.AlgebraicGeometry.LimitHigherDirectImageExchange (stage 3; reviewer PASS; first push; landing 20261014T181324-L-3532326 (interface); batch 20261014T181322; modules 4; new nodes 12)

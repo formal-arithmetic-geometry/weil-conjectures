@@ -17,24 +17,22 @@
  ],
  "proof": [
   {
-   "text": "Cofinally replace the small cofiltered category by a nonempty directed inverse system, preserving limits and filtered colimits. Form the cartesian pullbacks X_i=X×D_i and X_limit=X×c.pt. The X_i have affine transitions and their cone is limiting. Use constant F on the constant source and base.",
+   "text": "Construct the canonical cartesian derived-image objects, legs and transitions. Pasting gives e_i followed by leg_i equal to the limit exchange, where e_i is the pulled-back stage exchange with inverse-image composition transport. Exact inverse image preserves the degree-q stage isomorphisms, so every e_i is invertible. Pasting between stages and cancellation make every transition invertible; the limit legs are not assumed invertible.",
    "uses": [
-    "lem-weil-pbc-cofiltered-limit-directed-reindex",
-    "lem-weil-pbc-limit-fibre-products"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Every affine etale object of the limit base descends to a stage. Restrict to such an object and its later pullbacks. Express higher direct images as sheafified cohomology presheaves and apply etale cohomology continuity to those pullback systems. This is the higher-direct-image continuity of Tag 0EYM, now with varying bases; the constant coefficient colimit is F because the directed index is connected and nonempty.",
-   "uses": [
-    "lem-weil-pbc-affine-etale-site-colimit",
-    "sbc-lem-higher-direct-image-presheaf",
-    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+    "lem-sc-cartesian-derived-image-map-exchange"
    ],
    "elementary": false
   },
   {
-   "text": "Naturality of pullback cohomology and the resolution formula for canonical exchange identify the resulting limit exchange with the filtered colimit of the stage exchanges (Tag 0EZT). All stage maps in the fixed degree are isomorphisms; so is their colimit. Affine etale objects form a basis, giving a sheaf isomorphism. Exact pullback/homology and single-complex/right-derived comparisons identify it with the displayed map. q=0, zero F and empty X are included.",
+   "text": "At a geometric point of the limit base, use germ descent to represent every limit fiber element by a stage element. If a stage element maps to zero, use eventual germ vanishing and invertibility of the transition map to show the stage element itself is zero. Thus every point map of the limit exchange is bijective.",
+   "uses": [
+    "lem-sc-cartesian-higher-image-germ-descent",
+    "lem-sc-cartesian-higher-image-germ-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheaf-fiber detector turns pointwise bijectivity into an isomorphism of the degree-q homology map.",
    "uses": [
     "def-weil-pbc-inverse-image"
    ],
@@ -42,17 +40,15 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-cofiltered-limit-directed-reindex",
-  "lem-weil-pbc-limit-fibre-products",
-  "lem-weil-pbc-affine-etale-site-colimit",
-  "sbc-lem-higher-direct-image-presheaf",
-  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "lem-sc-cartesian-derived-image-map-exchange",
+  "lem-sc-cartesian-higher-image-germ-descent",
+  "lem-sc-cartesian-higher-image-germ-vanishing",
   "def-weil-pbc-inverse-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0EZT",
-  "place": "Lemma 59.86.3, second assertion, using Lemma 59.51.8 (Tag 0EYM); formal specialization and comparisons by X2"
+  "place": "Lemma 59.86.3, second assertion, using Lemma 59.51.8 (Tag 0EYM); geometric germs isolated as support nodes by S4"
  },
  "mathlib_searches": [
   {
@@ -125,11 +121,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-a32f0",
-  "group": "X2",
+  "reviewer": "COMPILER",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261014T161711-L-1952065",
+  "landing": "20261014T181324-L-3532326",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered signatures, proofs, remaining continuity hole, nodes, change record and repaired report; verified compilation, direct importers, axioms and source-cycle necessity."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
