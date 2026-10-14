@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.CartesianHigherImageTransitions
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
 public import Sheaf.AlgebraicGeometry.CartesianHigherImageChartSystem
 public import Sheaf.AlgebraicGeometry.RestrictedOverAbelianComplexData
+import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyNaturalIso
 
 /-! # Chart cohomology and cartesian exchange
 

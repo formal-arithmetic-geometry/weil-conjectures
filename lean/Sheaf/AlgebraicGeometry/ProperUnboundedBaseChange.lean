@@ -8,6 +8,7 @@ public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.GroupTheory.Torsion
+import Sheaf.AlgebraicGeometry.DerivedCategories
 
 /-! # Proper base change on unbounded derived categories
 
