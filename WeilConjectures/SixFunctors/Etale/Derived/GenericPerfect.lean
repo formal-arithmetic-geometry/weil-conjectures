@@ -142,8 +142,8 @@ theorem exists_dense_open_exactPairing {X : Scheme.{u}} [IsNoetherian X]
 omit [Finite Λ] in
 /-- On a nonempty noetherian scheme with a single point every constructible sheaf is finite
 locally constant: it is so on a dense open, which is the whole scheme. -/
-lemma isFiniteLocallyConstantSheaf_of_subsingleton {X : Scheme.{u}} [IsNoetherian X]
-    [Subsingleton X] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+lemma isFiniteLocallyConstantSheaf_of_isConstructibleSheaf_of_subsingleton {X : Scheme.{u}}
+    [IsNoetherian X] [Subsingleton X] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [IsConstructibleSheaf F] : IsFiniteLocallyConstantSheaf F := by
   obtain ⟨U, hU, hUl⟩ := IsConstructibleSheaf.exists_dense_open F
   by_cases hX : IsEmpty X
@@ -180,7 +180,7 @@ theorem isDualizable_of_constructibleFiniteTor_of_subsingleton {X : Scheme.{u}} 
   refine IsDualizable.of_iso e.symm (_root_.DerivedCategory.isDualizable_Q_obj P a (max a b)
     fun n ↦ ?_)
   have := hPc n
-  have := isFiniteLocallyConstantSheaf_of_subsingleton Λ (P.X n)
+  have := isFiniteLocallyConstantSheaf_of_isConstructibleSheaf_of_subsingleton Λ (P.X n)
   exact ⟨@HasRightDual.mk _ _ _ _ ((ihom (P.X n)).obj (𝟙_ _))
     (letI := exactPairingIhomUnitOfIsFiniteLocallyConstantSheaf (P.X n) (hPflat n);
       BraidedCategory.exactPairing_swap _ _)⟩
