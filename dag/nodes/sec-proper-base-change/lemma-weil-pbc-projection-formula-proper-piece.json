@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-weil-pbc-projection-formula-proper-piece",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Proper compactification piece",
@@ -13,26 +13,69 @@
   "place": "node lemma-weil-pbc-projection-formula-proper-piece, order 1270"
  },
  "stmt_deps": [
-  "def-weil-pbc-projection-compactification"
+  "def-weil-pbc-projection-compactification",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-weil-pbc-projection-formula-arrows"
  ],
  "proof": [
   {
-   "text": "Apply the signed-totalization lemma to the morphism of ringed pro-etale\ntopoi induced by $p$ and the object $j_!E$.",
-   "uses": [],
-   "elementary": null
+   "text": "Use the chosen factorization $f=pj$, $X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$, with $j$ a quasi-compact open immersion and $p$ proper, of [def-weil-pbc-projection-compactification]. In the ringed pro-etale topoi and derived categories of module sheaves of [def-weil-pbc-projection-formula-arrows], put $A=j_!E$, an object on $\\overline X$. The strict-perfect package [def-weil-pbc-strict-perfect-coefficient-package] on $F^\\bullet$ means that it is bounded and has maps $i_r:F^r\\to R^{\\oplus N_r}$ and $p_r:R^{\\oplus N_r}\\to F^r$ with $p_ri_r=1$, where $R$ is the coefficient ring sheaf on $Y$. Thus it satisfies the bounded finite-projective hypothesis of [lemma-weil-pbc-projection-formula-totalization]. Apply that lemma with $h=p$ and its object $E$ equal to $A$: its conclusion is $\\rho_{p,A,F}\\pi_{p,A,F}=1$ and $\\pi_{p,A,F}\\rho_{p,A,F}=1$. The arrow definition gives domain $Rp_*A\\otimes_R^{\\mathbf L}F^\\bullet$ and codomain $Rp_*(A\\otimes_S^{\\mathbf L}Lp^*F^\\bullet)$, where $S$ is the coefficient ring sheaf on $\\overline X$. Substituting $A=j_!E$ gives precisely the displayed morphism and its specified inverse. No boundedness assumption on $E$ and no identification with condensed-module coefficients is used.",
+   "uses": [
+    "def-weil-pbc-projection-compactification",
+    "lemma-weil-pbc-projection-formula-totalization",
+    "def-weil-pbc-projection-formula-arrows",
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-proper-piece.md",
+    "place": "Proof"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-projection-formula-totalization"
+  "def-weil-pbc-projection-compactification",
+  "lemma-weil-pbc-projection-formula-totalization",
+  "def-weil-pbc-projection-formula-arrows",
+  "def-weil-pbc-strict-perfect-coefficient-package"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-proper-piece.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projection.*[Ii]so|[Ii]so.*projection|projectionFormula",
+   "results": "25 hits: Mathlib/Dynamics/BirkhoffSum/NormedSpace.lean, Mathlib/Order/RelIso/Basic.lean, Mathlib/Condensed/Light/Sequence.lean, Mathlib/LinearAlgebra/BilinearForm/Isometry.lean, Mathlib/LinearAlgebra/QuadraticForm/Isometry.lean, Mathlib/Algebra/Lie/Extension.lean, Mathlib/Algebra/Category/ModuleCat/Kernels.lean, Mathlib/Geometry/Manifold/Instances/Sphere.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: results do not state the derived ringed-topos projection formula with the specified inverse"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint between derived categories of sheaves of modules satisfies the tensor projection formula for a bounded complex of finite free retracts",
+   "results": "8 hits: LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod",
+   "date": "2026-10-14",
+   "verdict": "no match: results do not state the derived ringed-topos projection formula with the specified inverse"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: results do not state the derived ringed-topos projection formula with the specified inverse"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived projection formula for a proper morphism of ringed topoi and a bounded complex of finite projective sheaves with its inverse",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable: HTTP service returned Internal Server Error; no absence conclusion drawn from this search"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -59,5 +102,23 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lemma-weil-pbc-projection-formula-proper-piece",
+  "worker": "stage1",
+  "summary": "Audited the imported one-line proof and made the specialization explicit: apply the signed-totalization result to p and j_!E, then identify its total arrows with the projection-formula arrows. Added the strict-perfect package and arrow definitions as statement and proof dependencies. No new nodes were needed. Second reading explicitly cites the compactification, records the coefficient rings and object substitution, and repairs the verbatim citation quotes.",
+  "blueprint": [
+   "Proof: Apply the signed-totalization lemma to the morphism of ringed pro-etale topoi induced by p and object j_!E."
+  ],
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-61de7d0d4",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-61de7d0d4 (reviewer sub-agent of L); spot-checked: Read the item, all four cited statements and their blueprint sources, report, and unit/chapter route in full. The specialization h=p, A=j_!E preserves both inverse equations and the strict-perfect hypotheses; small cases pass. No condensed-coefficient comparison is inferred. Repaired the omitted LeanSearch record with an actual unavailable response. Corrected JSON and detailed review.md written; no new nodes or statement changes.; 1 file(s) fixed by the reviewer"
+ }
 }
