@@ -12,41 +12,41 @@
  ],
  "proof": [
   {
-   "text": "Work locally on an open of X trivializing L and then on its inverse image in Z. Write ell for the generator and ellbar for its pullback. For arbitrary coefficient module J, the trivialization identifies P(J tensor L^d) with PJ tensor the d-fold generator, so any local s is r tensor ellbar^b with r a section of PJ. Write q=h ellbar^a. A trivialization is a sheaf module isomorphism, so this representation is valid for arbitrary sections, without claiming that all tensor sheaf sections globally are pure tensors.",
+   "text": "Use tensorPowAddIso_inv_block_interchange for the invertible L. Expand boundaryIdealTensorProduct and the braiding hexagon to factor it as the braiding of L^a with J tensor L^b, followed by coefficient-first concatenation. Combine the arithmetic casts to identify the target with L^c.",
    "uses": [
-    "lem-sc-square-zero-ideal-tensor-unit"
+    "lem-sc-invertible-tensor-power-block-interchange",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "By induction on d, boundaryPullbackPowIso carries the pullback generator to ellbar^d: at zero this is the unit comparison, and at successor the tensor comparison followed by the induction hypothesis. Induction in tensorPowMulIso groups these d copies into blocks of n; tensorPowAddIso joins the two indicated blocks. Thus boundaryIdealTensorProduct sends q tensor s to hr tensor ellbar^(a+b), with the ideal coefficient moved left by the braiding.",
+   "text": "Map this factorization through tensorPullback. Apply boundaryCoefficientDegreeIso_split to the coefficient-first concatenation; apply boundaryPullbackTensorIso_braiding to the remaining braiding. The result is a morphism equality: the original pairing followed by C_{e+1} equals the input tensorator followed by braiding and the tensor of C_0 followed by rho with S_e.",
    "uses": [
+    "lem-sc-boundary-coefficient-degree-split",
+    "lem-sc-boundary-pullback-tensor-braiding",
     "lem-sc-square-zero-ideal-tensor-unit"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Expand boundaryCoefficientDegreeIso. Its initial tensorPowMulIso groups n(e+2) copies into e+2 blocks, and its associator puts the first n copies next to r. Its pullback tensorator and final power comparisons leave that coefficient fixed. The output is hr ellbar^n tensor (ellbar^n)^(e+1). At source degree zero, the same formula gives r ellbar^n tensor 1; the right unitor removes 1. boundarySectionDegreeIso gives h(ellbar^n)^(e+1). Their tensor product is the preceding output. The possible exchange of the L blocks fixes their generator tensors, so it introduces no scalar or sign.",
+   "text": "Evaluate the morphism equality on the inverse tensorator applied to tmulSection q s. Cancel the tensorator and its inverse on sections. The braiding interchanges q and s, and tensorHom_app_tmulSection evaluates the tensor of the two comparison maps. This is exactly the displayed equality. All arithmetic equality proofs are irrelevant; zero degrees and empty opens use the same isomorphism identities.",
    "uses": [
-    "lem-sc-square-zero-ideal-tensor-unit"
+    "lem-weil-pbc-module-tensor-symmetric-monoidal"
    ],
-   "elementary": false
-  },
-  {
-   "text": "All equalities commute with restriction and hence glue by sheaf separation on the inverse images of the trivializing cover. At n=0 the same calculation is the unit case, with r unchanged and h acting on r; e=0 is the two-block case. Empty opens, zero coefficients and zero q or s give zero on both sides.",
-   "uses": [
-    "lem-sc-square-zero-ideal-tensor-unit"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sc-invertible-tensor-power-block-interchange",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal",
+  "lem-sc-boundary-coefficient-degree-split",
+  "lem-sc-boundary-pullback-tensor-braiding",
   "lem-sc-square-zero-ideal-tensor-unit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/modules.tex",
-  "place": "D4 expansion of the canonical tensor maps implicit in Tags 01CD and 09MS; read via the Stacks tag pages."
+  "place": "A4 proof by canonical coefficient splitting, tensor-power block interchange, pullback symmetry, and evaluation on sections; Tags 01CA, 01CD and 09MS."
  },
  "mathlib_searches": [
   {
@@ -177,9 +177,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D4",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261014T040538-L-999397",
+  "landing": "20261014T045605-L-1570913",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

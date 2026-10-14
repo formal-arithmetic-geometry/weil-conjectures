@@ -1,0 +1,162 @@
+{
+ "id": "lem-sc-boundary-coefficient-degree-split",
+ "kind": "statement",
+ "title": "Splitting off the first coefficient block before pullback",
+ "statement": "Let $j:Z\\to X$ be any scheme morphism, $L$ any $\\mathcal O_X$-module, and $n,e\\in\\mathbb N$. Use the fixed tensor and degree comparison constructions of [lem-sc-square-zero-ideal-tensor-unit]. Set $J=\\ker(j)$, $P=\\mathrm{tensorPullback}(j)$, $a=n(e+1)$, $b=n(0+1)$, $c=n((e+1)+1)$, and $F=P(J\\otimes L^n)$. Define $k:(J\\otimes L^b)\\otimes L^a\\to J\\otimes L^c$ by the associator, $J\\otimes\\mathrm{tensorPowAddIso}(b,a)^{-1}$, and the arithmetic cast $b+a=c$. Then $P(k)\\gg C_{e+1}=\\delta_{J\\otimes L^b,L^a}\\gg((C_0\\gg\\rho_F)\\otimes S_e)$, where $C_d$ is boundaryCoefficientDegreeIso at d, $S_e$ is boundarySectionDegreeIso at e, and $\\delta$ is boundaryPullbackTensorIso. This is a morphism equality without invertibility or a symmetry of the L blocks.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, coherent-equation-ses; canonical tensor comparisons from modules.tex, Tag 01CD (lemma-tensor-product-pullback), and Tag 01CA (section-tensor-product); read via the Stacks tag pages."
+ },
+ "stmt_deps": [
+  "lem-sc-square-zero-ideal-tensor-unit"
+ ],
+ "proof": [
+  {
+   "text": "Transport the Mathlib monoidal structure to P along boundaryPullbackComparison. Its tensorator is the inverse of boundaryPullbackTensorIso. The proved normalization of the monoidal unit identifies its unit with boundaryPullbackPowIso in degree zero.",
+   "uses": [
+    "lem-sc-square-zero-ideal-tensor-unit",
+    "lem-sc-pullback-monoidal-unit-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on a to show the recursive pullback power comparison respects tensorPowAddIso(a,b). The zero case is left unitality; the successor uses tensorator naturality and associativity. Then induct on d to show that pulling back n*d factors and grouping them into d blocks equals first grouping on X, then pulling back each block and comparing its n factors. Use the addition formula from the first induction, and naturality under arithmetic degree casts.",
+   "uses": [
+    "lem-sc-square-zero-ideal-tensor-unit",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on n to identify tensorPowAddIso(n,0).inv with the right unitor, and deduce the degree-one tensorPowMulIso formula. Expand the degree-zero coefficient comparison; right unitality identifies C_0 followed by its right unitor with P of the arithmetic cast n*1=n.",
+   "uses": [
+    "lem-sc-square-zero-ideal-tensor-unit",
+    "lem-sc-pullback-monoidal-unit-comparison",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the inverse positive-degree coefficient comparison at d. Expand tensorPowMulIso(n,d+1). Move its remaining-block map through the associator and pullback tensorator by naturality; the block-grouping identity from step 2 identifies the remaining factor with the inverse section-degree comparison. Cancel isomorphisms to obtain the forward splitting formula. Transport b=n*1 to n, using equality elimination for the product map and tensorator naturality for its pullback. This gives the exact displayed equation, including n=0 and e=0.",
+   "uses": [
+    "lem-sc-square-zero-ideal-tensor-unit",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-square-zero-ideal-tensor-unit",
+  "lem-sc-pullback-monoidal-unit-comparison",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "A4 formal expansion of the canonical comparisons in Tags 01CA, 01CD and 09MS; proof written from the existing recursive definitions and the cited section formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback commutes with grouping tensor powers into blocks and splitting off the first coefficient block",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "monoidal functor tensor powers multiplication comparison canonical block grouping coherence",
+   "date": "2026-10-14",
+   "results": "8 hits: CategoryTheory.MonoidalFunctor.mapPi, CategoryTheory.MonObj.pow_comp_assoc, CategoryTheory.MonObj.comp_pow_assoc, CategoryTheory.MonObj.pow_comp, CategoryTheory.MonObj.comp_pow, CategoryTheory.Mon_Class.pow_comp, CategoryTheory.Monoidal.InducingFunctorData.tensorHom_eq, CategoryTheory.Mon_Class.comp_pow",
+   "verdict": "No exact sheaf comparison statement; use the existing general API in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μ_natural",
+   "date": "2026-10-14",
+   "results": "1 hits: CategoryTheory.Functor.LaxMonoidal.μ_natural",
+   "verdict": "No exact sheaf comparison statement; use the existing general API in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPowMulIso|tensorPowAddIso",
+   "date": "2026-10-14",
+   "results": "0 hits: ",
+   "verdict": "No exact sheaf comparison statement; use the existing general API in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BoundaryCoefficientTensorProduct",
+  "date": "2026-10-14",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS, coherent-equation-ses: coefficient identification for multiplication in the graded ideal sequence; steps 2 and 3 of lem-sc-boundary-coefficient-tensor-product.",
+   "via": [
+    "lem-sc-boundary-coefficient-tensor-product",
+    "lem-sc-tensor-boundary-kernel-map-local-multiplication",
+    "lem-sc-tensor-graded-action-kernel-second",
+    "lem-sc-square-zero-tensor-graded-action-projection-second",
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BoundaryCoefficientDegreeSplit",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundaryCoefficientDegreeSplit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.boundaryCoefficientDegreeIso_split",
+  "statement": "theorem boundaryCoefficientDegreeIso_split {X Z : Scheme.{u}} (j : Z ⟶ X)\n    (L : X.Modules) (n e : ℕ) :\n    let a := n * (e + 1)\n    let b := n * (0 + 1)\n    let c := n * ((e + 1) + 1)\n    let k : (j.ker.toModules ⊗ L.tensorPow b) ⊗ L.tensorPow a ⟶\n        j.ker.toModules ⊗ L.tensorPow c :=\n      (α_ _ _ _).hom ≫ j.ker.toModules ◁ (L.tensorPowAddIso b a).inv ≫\n        j.ker.toModules ◁ (eqToHom (by\n          dsimp [a, b, c]\n          congr 1\n          simp only [Nat.mul_add, Nat.mul_one]\n          omega) : L.tensorPow (b + a) ⟶ L.tensorPow c)\n    (tensorPullback j).map k ≫ (boundaryCoefficientDegreeIso j L n (e + 1)).hom =\n      (boundaryPullbackTensorIso j (j.ker.toModules ⊗ L.tensorPow b)\n        (L.tensorPow a)).hom ≫\n        (((boundaryCoefficientDegreeIso j L n 0).hom ≫\n          (ρ_ ((tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n))).hom) ⊗ₘ\n          (boundarySectionDegreeIso j L n e).hom)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-14"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T045605-L-1570913",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T045605-L-1570913",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

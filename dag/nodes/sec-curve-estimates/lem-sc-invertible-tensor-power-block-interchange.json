@@ -1,0 +1,154 @@
+{
+ "id": "lem-sc-invertible-tensor-power-block-interchange",
+ "kind": "statement",
+ "title": "Canonical concatenation of invertible tensor powers commutes with block interchange",
+ "statement": "Let $X$ be a scheme and $L$ an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. For $a,b\\in\\mathbb N$, let $T_{a,b}:L^{a+b}\\simeq L^a\\otimes L^b$ be the recursive tensorPowAddIso (its zero case is the inverse left unitor, and its successor case uses the inverse associator). Let $\\beta$ be the symmetry [lem-weil-pbc-module-tensor-symmetric-monoidal]. Then $T_{a,b}^{-1}=\\beta_{L^a,L^b}\\gg T_{b,a}^{-1}\\gg\\operatorname{cast}_{b+a=a+b}$, where the formula is written in Lean composition order: first symmetry, then concatenation, then the degree cast. Equivalently, interchanging the two blocks before concatenating does not change the resulting section of $L^{a+b}$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 09MS, coherent-equation-ses; canonical tensor comparisons from modules.tex, Tag 01CD (lemma-tensor-product-pullback), and Tag 01CA (section-tensor-product); read via the Stacks tag pages."
+ },
+ "stmt_deps": [
+  "def-sc-invertible-module",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "Construct localPowerSection ell d recursively as 1 at degree zero and ell tensor localPowerSection ell d at a successor. Induct on d to prove it is a free generator whenever ell is a free generator, using the tensor generator theorem and the unit generator.",
+   "uses": [
+    "def-sc-local-free-generator",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on a to compute tensorPowAddIso(a,b).inv on the two local power generators. The zero step uses the left unitor and the successor uses the associator and the induction hypothesis. Degree casts carry the recursively defined generator to the generator in the cast degree, by equality elimination.",
+   "uses": [
+    "lem-weil-pbc-module-tensor-symmetric-monoidal"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On every open U, choose trivializing affine subopens covering U using invertibility. On each subopen express the restriction of an arbitrary source section as a scalar multiple of the tensor of the two power generators. Both maps are linear; the preceding computation and the symmetry formula give equality on the generator and hence on that section. Naturality under restriction and sheaf separation glue equality on U. This covers zero exponents and the empty open as well.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-sc-local-free-generator",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-local-free-generator",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "A4 formal expansion of the canonical comparisons in Tags 01CA, 01CD and 09MS; proof written from the existing recursive definitions and the cited section formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Interchanging two blocks in the tensor powers of an invertible sheaf preserves canonical tensor multiplication",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor powers invertible module multiplication commutes braiding tensorPowAddIso tensorPowMulIso",
+   "date": "2026-10-14",
+   "results": "8 hits: Module.Invertible.tmul_comm, Module.Invertible.tensorProductComm_eq_refl, ModuleCat.MonoidalCategory.braiding_inv_apply, ModuleCat.MonoidalCategory.braiding_hom_apply, ModuleCat.MonoidalCategory.tensorμ_eq_tensorTensorTensorComm, TensorPower.mul_one, CommRing.Pic.mk_tensor, TensorPower.one_mul",
+   "verdict": "No exact sheaf comparison statement; use the existing general API in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Invertible.tensorProductComm_eq_refl",
+   "date": "2026-10-14",
+   "results": "1 hits: Module.Invertible.tensorProductComm_eq_refl",
+   "verdict": "No exact sheaf comparison statement; use the existing general API in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPow.*(braid|comm)|braiding.*tensorPow",
+   "date": "2026-10-14",
+   "results": "2 hits: Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean, Mathlib/LinearAlgebra/TensorPower/Basic.lean",
+   "verdict": "No exact sheaf comparison statement; use the existing general API in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BoundaryCoefficientTensorProduct",
+  "date": "2026-10-14",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS, coherent-equation-ses: coefficient identification for multiplication in the graded ideal sequence; steps 2 and 3 of lem-sc-boundary-coefficient-tensor-product.",
+   "via": [
+    "lem-sc-boundary-coefficient-tensor-product",
+    "lem-sc-tensor-boundary-kernel-map-local-multiplication",
+    "lem-sc-tensor-graded-action-kernel-second",
+    "lem-sc-square-zero-tensor-graded-action-projection-second",
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InvertibleTensorPowerBlockInterchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/InvertibleTensorPowerBlockInterchange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorPowAddIso_inv_block_interchange",
+  "statement": "theorem tensorPowAddIso_inv_block_interchange {X : Scheme.{u}}\n    (L : X.Modules) [L.IsInvertible] (a b : ℕ) :\n    (L.tensorPowAddIso a b).inv =\n      (β_ (L.tensorPow a) (L.tensorPow b)).hom ≫\n        (L.tensorPowAddIso b a).inv ≫\n        eqToHom (congrArg L.tensorPow (Nat.add_comm b a))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-14"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T045605-L-1570913",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T045605-L-1570913",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
