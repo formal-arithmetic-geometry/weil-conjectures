@@ -24,7 +24,7 @@
  ],
  "proof": [
   {
-   "text": "Set E=c(O_Y) and RE=Rf_*E, using hRf to put RE in D_QCoh. For perfect K choose its dual and exact pairing. Monoidal pullback transports that pairing; the projection mate is the conjugate of the invertible tensorator at the dual. The conjugation equivalence preserves isomorphisms, so the mate is invertible on all perfect K.",
+   "text": "For perfect K use its monoidal dual. The adjunction projection mate is the conjugate of the invertible pullback tensorator at the dual. This proves the specified mate invertible on every perfect object.",
    "uses": [
     "lem-pc-perfect-tensor-hom-duality",
     "lem-sc-monoidal-projection-conjugate"
@@ -32,14 +32,14 @@
    "elementary": false
   },
   {
-   "text": "Construct the natural transformation whose components are the specified projection mates: transpose inverse tensorator followed by the pullback counit. Naturality follows from oplax tensorator naturality, the whisker exchange law and adjunction naturality. Its isomorphism locus is stable under retracts by taking retracts of its naturality squares. Shift and third-triangle-object closure are supplied by projectionComparison_triangles.",
+   "text": "Construct the global natural transformation τ whose component at K is the specified adjunction mate of inverse tensorator followed by counit. Prove naturality by the oplax tensorator, counit and homEquiv naturality. Choose separate exact shift structures for its source and target functors; no equality with the shift of τ is required.",
    "uses": [
-    "lem-sc-projection-comparison-triangles"
+    "lem-sc-derived-separate-exact-structures"
    ],
    "elementary": false
   },
   {
-   "text": "For a coproduct of quasi-coherent K_j, lift its cofan into the full quasi-coherent subcategory. The inclusion preserves this coproduct by ambient coproduct closure. Pullback preserves it as a left adjoint, and tensorRight E preserves it. The pullback-tensor objects are quasi-coherent, so direct image preserves their coproduct. TensorRight RE preserves the source coproduct as well. The natural transformation restricted to the discrete input diagram is an isomorphism because each component is. Preservation of the colimit therefore makes its component at the coproduct invertible. This includes the empty index type.",
+   "text": "Both functors preserve u-sized coproducts. The inclusion preserves ambient quasi-coherent coproducts; pullback is a left adjoint; tensorRight preserves coproducts; direct image preserves them on the quasi-coherent pullback-tensor family, whose quasi-coherence follows from tensor closure.",
    "uses": [
     "lem-pc-derived-ambient-has-coproducts",
     "lem-pc-derived-qcoh-closed-coproducts",
@@ -51,8 +51,9 @@
    "elementary": false
   },
   {
-   "text": "The locus contains perfect objects and has all five closure properties defining perfectLocalizingClosure. Thus perfectLocalizingClosure is contained in it by sInf_le. Perfect generation identifies this closure with the top property, putting every K in the locus. Take the inverse of asIso of the projection mate to obtain pf. Its inverse equation is reflexive by construction.",
+   "text": "Use Q(K)=∀n,IsIso(τ_(K[n])). Perfection is stable under shifts, so the perfect case gives Q on perfects. The proved shift-saturated localizing-closure lemma puts perfectLocalizingClosure inside Q. Perfect generation makes every K belong to Q. Shift-zero transport gives IsIso of the original specified mate. Set pf=(asIso mate).symm; its pinned inverse equation is reflexive.",
    "uses": [
+    "lem-sc-perfect-localizing-iso-locus",
     "lem-pc-derived-qcoh-perfect-generation"
    ],
    "elementary": false
@@ -66,14 +67,17 @@
   "lem-pc-derived-qcoh-closed-coproducts",
   "lem-pc-derived-qcoh-perfect-generation",
   "lem-pc-perfect-tensor-hom-duality",
+  "lem-sc-derived-separate-exact-structures",
   "lem-sc-derived-tensor-right-coproducts",
   "lem-sc-monoidal-projection-conjugate",
-  "lem-sc-projection-comparison-triangles"
+  "lem-sc-perfect-localizing-iso-locus"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/08EU",
-  "place": "Tag 08EU, proof, with global perfect generation (09IS) replacing the affine generation reduction; P1"
+  "group": "P3",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0A9U, 08EU and 09IS: global natural comparison and perfect generation of its all-integer-shifts isomorphism locus, using the five-term cone argument and separate exact structures."
  },
  "mathlib_searches": [
   {
@@ -129,13 +133,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P1",
+  "reviewer": "X-e5b7b",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261013T015605-L-3024167",
+  "landing": "20261014T140636-L-118125",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered proofs and node records agree; application signatures are unchanged. All 33 modules, 29 direct importers, and two validation clients compile; refreshed axiom checks use only permitted axioms. Pruning preserves realized unit steps."
  }
 }

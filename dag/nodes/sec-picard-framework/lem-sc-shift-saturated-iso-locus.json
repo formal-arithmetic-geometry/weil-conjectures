@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-shift-saturated-iso-locus",
+ "kind": "statement",
+ "title": "Invertibility of a natural comparison on all shifts is localizing",
+ "statement": "Let C and D be pretriangulated additive categories with integer shifts [def-weil-triangulated-category]. Let F,G:C→D have separately chosen coherent exact shift structures and let τ:F→G be any natural transformation. For a distinguished triangle A→B→C→A[1], invertibility of τ at A,B,A[1],B[1] implies invertibility at C. No shift-compatibility condition on τ is required. Consequently Q(X):=∀n∈ℤ, IsIso(τ_(X[n])) is closed under isomorphisms, shifts, retracts, distinguished triangles, and every coproduct preserved by F and G.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Triangulated/Yoneda.lean; Mathlib/CategoryTheory/Limits/Preserves/Basic.lean; Mathlib/CategoryTheory/MorphismProperty/Retract.lean",
+  "place": "coyoneda_exact₁/₂/₃ and naturality; five-term diagram chase. The proved private cone_five_lemma is extracted from FlatTelescopeNormalizationUnshiftedIsIso, with attribution in the Lean header."
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Compare the Hom(A,-) sequences of two distinguished triangles. If the four outside components a,b,d,e are invertible, cancellation with d and exactness show the middle map c is mono. For any map y into the target third object, pull its connecting image back through d; cancellation with e shows it lies in the preceding kernel. Lift it by exactness, then correct the difference y-xc by a lift through b. Thus the Yoneda maps of c are bijective and c is invertible.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply this diagram chase to F(T) and G(T). Choose d to be F.commShiftIso(1).inv at A followed by τ_(A[1]) followed by G.commShiftIso(1).hom at A, and likewise e at B. Ordinary naturality of τ and of the functor shift isomorphisms proves all four squares.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define Q using all integer shifts. Transport naturality along isomorphisms; conjugate using the shift-add isomorphism for shift closure; apply retractArrowApp for retracts. For coproducts whisker the coproduct diagram by the shift equivalence and use the invertibility of the transformation on a preserved colimit. Apply the preceding four-component lemma to the triangle shifted by n for each n to get triangle closure.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P3",
+  "date": "2026-10-14",
+  "document": "Mathlib/CategoryTheory/Triangulated/Yoneda.lean; Mathlib/CategoryTheory/Limits/Preserves/Basic.lean; Mathlib/CategoryTheory/MorphismProperty/Retract.lean",
+  "place": "coyoneda_exact₁/₂/₃ and naturality; five-term diagram chase. The proved private cone_five_lemma is extracted from FlatTelescopeNormalizationUnshiftedIsIso, with attribution in the Lean header.; integration of the supplied shift-saturated route experiment."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural transformations between exact functors, invertible on every integer shift of two objects of a distinguished triangle, are invertible on every integer shift of the third object",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_app_obj₃|coyoneda_exact|isIso_app_coconePt_of_preservesColimit",
+   "results": "25 hits: Mathlib/CategoryTheory/Limits/Preserves/Basic.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/WeakKernels.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+   "date": "2026-10-14",
+   "verdict": "Component APIs used; no exact theorem with the displayed combined conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between triangulated functors is invertible on the third term of a distinguished triangle if its components at the first two objects and their shifts are invertible without shift compatibility",
+   "results": "8 hits: CategoryTheory.Pretriangulated.Triangle.functorIsoMk'_hom_app_hom₃, CategoryTheory.Pretriangulated.Triangle.functorIsoMk_hom, CategoryTheory.Pretriangulated.Triangle.functorIsoMk, CategoryTheory.Pretriangulated.Triangle.functorIsoMk', CategoryTheory.Pretriangulated.Triangle.functorIsoMk'_hom_app_hom₂, CategoryTheory.Pretriangulated.Triangle.functorIsoMk'_inv_app_hom₃, CategoryTheory.Pretriangulated.Triangle.functorIsoMk_inv, CategoryTheory.Functor.mapTriangleIso_hom_app_hom₃",
+   "date": "2026-10-14",
+   "verdict": "Component APIs used; no exact theorem with the displayed combined conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatTelescopeConeNormalizationDescent",
+  "date": "2026-10-14",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The diagonal projection formula/generation argument in lem-sc-finite-duality: replace the unnecessary inherited cone-normalized comparison construction by a natural comparison and invertibility on all integer shifts; Invertibility of a natural comparison on all shifts is localizing",
+   "via": [
+    "lem-sc-flat-telescope-cone-normalization-descent",
+    "lem-sc-flat-telescope-normalization-morphisms",
+    "lem-sc-flat-telescope-bounded-normalization-extension",
+    "lem-sc-flat-telescope-model-shift-gauge",
+    "lem-sc-flat-telescope-shift-gauge",
+    "lem-sc-normalized-flat-telescope-stage-comparison",
+    "lem-sc-normalized-flat-telescope-comparison",
+    "lem-sc-normalized-kflat-representative-comparison",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ShiftSaturatedIsoLocus",
+  "file": "lean/Sheaf/CategoryTheory/ShiftSaturatedIsoLocus.lean",
+  "declaration": "CategoryTheory.ShiftSaturated.isoOnThirdOfIsoOnFour",
+  "declarations": [
+   "CategoryTheory.ShiftSaturated.isoOnAllShifts",
+   "CategoryTheory.ShiftSaturated.isoOnAllShifts_of_iso",
+   "CategoryTheory.ShiftSaturated.isoOnAllShifts_shift",
+   "CategoryTheory.ShiftSaturated.isoOnAllShifts_retract",
+   "CategoryTheory.ShiftSaturated.isoOnAllShifts_coproduct",
+   "CategoryTheory.ShiftSaturated.isoOnAllShifts_cone"
+  ],
+  "statement": "theorem isoOnThirdOfIsoOnFour\n    {C D : Type*} [Category C] [Category D]\n    [HasZeroObject C] [HasShift C ℤ] [Preadditive C]\n    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]\n    [HasZeroObject D] [HasShift D ℤ] [Preadditive D]\n    [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]\n    (F G : C ⥤ D) [F.CommShift ℤ] [G.CommShift ℤ]\n    [F.IsTriangulated] [G.IsTriangulated] (τ : F ⟶ G)\n    (T : Triangle C) (hT : T ∈ distTriang C)\n    [IsIso (τ.app T.obj₁)] [IsIso (τ.app T.obj₂)]\n    [IsIso (τ.app (T.obj₁⟦(1 : ℤ)⟧))]\n    [IsIso (τ.app (T.obj₂⟦(1 : ℤ)⟧))] : IsIso (τ.app T.obj₃)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-e5b7b",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261014T140636-L-118125",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-e5b7b",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261014T140636-L-118125",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered proofs and node records agree; application signatures are unchanged. All 33 modules, 29 direct importers, and two validation clients compile; refreshed axiom checks use only permitted axioms. Pruning preserves realized unit steps."
+ }
+}

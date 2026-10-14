@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-perfect-localizing-iso-locus",
+ "kind": "statement",
+ "title": "Perfect localizing generation detects a natural isomorphism on all shifts",
+ "statement": "Let X be a scheme with the displayed derived categories and a triangulated quasi-coherent object property [def-pc-derived-category]. Let F,G:D_QCoh(X)→D be exact functors to a pretriangulated category, equipped with separately chosen coherent integer shifts, preserving u-sized coproducts. For any natural τ:F→G, if τ is invertible at every shift of every perfect object [def-pc-perfect-complex], then perfectLocalizingClosure X [def-pc-perfect-localizing-closure] is contained in the object property on D_QCoh(X) saying that τ is invertible on every integer shift. Perfection itself is stable under isomorphisms and integer shifts.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex; lean/Sheaf/AlgebraicGeometry/PerfectLocalizingClosure.lean; lean/Sheaf/AlgebraicGeometry/PerfectTwoOutOfThree.lean",
+  "place": "Tag 09IS, the defining localizing infimum; Tag 08C3, local bounded strictly-perfect models. The proved perfect_iso and perfect_shift helpers are extracted with attribution from PerfectTwoOutOfThree."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-perfect-localizing-closure"
+ ],
+ "proof": [
+  {
+   "text": "For perfection under isomorphism compose every local presentation with the restriction of the inverse isomorphism. For a shift n, shift each local strictly-perfect complex and subtract n from its two bounds; transport its comparison by the restriction and quotient shift isomorphisms.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply sInf_le to the candidate object property on D_QCoh(X) of invertibility on all shifts. Its perfect case is the hypothesis. Its isomorphism, shift and retract clauses use the corresponding generic shift-saturated closure lemmas.",
+   "uses": [
+    "def-pc-perfect-localizing-closure",
+    "lem-sc-shift-saturated-iso-locus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift any ambient distinguished triangle with quasi-coherent objects to the full D_QCoh subcategory. Identify its image with the ambient triangle using the inclusion shift isomorphism, and invoke the generic all-shifts five-term lemma. For coproducts lift the ambient cofan and its universal property into the full subcategory; the generic preserved-colimit lemma establishes its all-shifts invertibility clause.",
+   "uses": [
+    "lem-sc-shift-saturated-iso-locus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-pc-perfect-localizing-closure",
+  "lem-sc-shift-saturated-iso-locus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P3",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/derived.tex; lean/Sheaf/AlgebraicGeometry/PerfectLocalizingClosure.lean; lean/Sheaf/AlgebraicGeometry/PerfectTwoOutOfThree.lean",
+  "place": "Tag 09IS, the defining localizing infimum; Tag 08C3, local bounded strictly-perfect models. The proved perfect_iso and perfect_shift helpers are extracted with attribution from PerfectTwoOutOfThree.; integration of the supplied shift-saturated route experiment."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isoLocus|isIso_of_isClassicalTriangulatedGenerator|retractArrowApp",
+   "results": "3 hits: Mathlib/Algebra/Homology/LeftResolution/Reduced.lean, Mathlib/CategoryTheory/Retract.lean, Mathlib/CategoryTheory/Retract.lean",
+   "date": "2026-10-14",
+   "verdict": "Component APIs used; no exact theorem with the displayed combined conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The localizing closure of perfect complexes is contained in the objects where a natural transformation of exact coproduct preserving functors is invertible on all integer shifts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism locus natural transformation every integer shift localizing closure of generators",
+   "results": "8 hits: CategoryTheory.MorphismProperty.IsCompatibleWithShift.shiftFunctor_comp_inverts, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.Functor.instIsClosedUnderIsomorphismsHomologicalKernel, DerivedCategory.exists_iso_Q_obj_of_isGE, CategoryTheory.Functor.isHomological_of_localization, DerivedCategory.exists_iso_Q_obj_of_isLE, CategoryTheory.MorphismProperty.commShift_Q'",
+   "date": "2026-10-14",
+   "verdict": "Component APIs used; no exact theorem with the displayed combined conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatTelescopeConeNormalizationDescent",
+  "date": "2026-10-14",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The diagonal projection formula/generation argument in lem-sc-finite-duality: replace the unnecessary inherited cone-normalized comparison construction by a natural comparison and invertibility on all integer shifts; Perfect localizing generation detects a natural isomorphism on all shifts",
+   "via": [
+    "lem-sc-flat-telescope-cone-normalization-descent",
+    "lem-sc-flat-telescope-normalization-morphisms",
+    "lem-sc-flat-telescope-bounded-normalization-extension",
+    "lem-sc-flat-telescope-model-shift-gauge",
+    "lem-sc-flat-telescope-shift-gauge",
+    "lem-sc-normalized-flat-telescope-stage-comparison",
+    "lem-sc-normalized-flat-telescope-comparison",
+    "lem-sc-normalized-kflat-representative-comparison",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectLocalizingIsoLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectLocalizingIsoLocus.lean",
+  "declaration": "CategoryTheory.ShiftSaturated.perfectClosure_le_isoOnAllShifts",
+  "declarations": [
+   "CategoryTheory.ShiftSaturated.perfect_iso",
+   "CategoryTheory.ShiftSaturated.perfect_shift"
+  ],
+  "statement": "theorem perfectClosure_le_isoOnAllShifts\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    [(schemeDerivedQCohProperty X).IsTriangulated]\n    {D : Type*} [Category D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D]\n    [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]\n    (F G : schemeDerivedQCohCategory X ⥤ D)\n    [F.CommShift ℤ] [G.CommShift ℤ] [F.IsTriangulated] [G.IsTriangulated]\n    (τ : F ⟶ G)\n    (hF : ∀ J : Type u, PreservesColimitsOfShape (Discrete J) F)\n    (hG : ∀ J : Type u, PreservesColimitsOfShape (Discrete J) G)\n    (hperfect : ∀ E : schemeDerivedQCohCategory X,\n      Scheme.perfectSubcategory X E.obj → isoOnAllShifts F G τ E) :\n    perfectLocalizingClosure X ≤ isoOnAllShifts F G τ",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-e5b7b",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261014T140636-L-118125",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-e5b7b",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261014T140636-L-118125",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered proofs and node records agree; application signatures are unchanged. All 33 modules, 29 direct importers, and two validation clients compile; refreshed axiom checks use only permitted axioms. Pruning preserves realized unit steps."
+ }
+}

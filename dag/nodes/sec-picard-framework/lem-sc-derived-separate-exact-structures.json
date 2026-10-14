@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-derived-separate-exact-structures",
+ "kind": "statement",
+ "title": "Separate exact shift structures for the two tensor comparisons",
+ "statement": "For scheme derived categories [def-pc-derived-category], the quasi-coherent object property is triangulated. Let f:Z→Y and a:Lf*⊣Rf* be a specified adjunction [def-pc-derived-pullback, def-pc-derived-direct-image]. For any E the functors K↦K⊗Rf*E and K↦Rf*(Lf*K⊗E), from D_QCoh(Y) to D(Y), admit separate coherent exact integer-shift structures [def-pc-scheme-derived-tensor-structure]. If Rf* restricts to D_QCoh, its specified right adjoint c and the quasi-coherent lift of K↦Lf*K⊗c(O_Y) likewise admit separate exact shift structures under the displayed quasi-coherence assumptions. No compatibility of a supplied monoidal tensorator, or of the comparison transformation, with these shifts is asserted.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex; Mathlib/CategoryTheory/Triangulated/Adjunction.lean",
+  "place": "Tags 06YJ and 06YH, existing canonical tensor exactness and supported quasi-coherent triangulated structures; Adjunction.rightAdjointCommShift and isTriangulated_rightAdjoint."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof": [
+  {
+   "text": "Identify supportedProperty(X,univ) with schemeDerivedQCohProperty X by extensionality and simp, then use its proved triangulated property.",
+   "uses": [
+    "lem-pc-supported-qcoh-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extract the exact shift structure of the existing derivedPullback from exists_derivedPullback. The specified adjunction a transports it to an exact right-adjoint shift structure on schemeDerivedDirectImage.",
+   "uses": [
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use schemeCanonicalTensorShift and its tensorRight exactness property. Compose these exact functors and lift exactness through the full quasi-coherent inclusions. For c apply the restricted adjunction right-adjoint shift/exactness construction. Return the independently chosen structures in the displayed existential conclusions.",
+   "uses": [
+    "lem-sc-scheme-canonical-tensor-shift-properties"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "lem-pc-supported-qcoh-triangulated",
+  "lem-sc-scheme-canonical-tensor-shift-properties"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P3",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/derived.tex; Mathlib/CategoryTheory/Triangulated/Adjunction.lean",
+  "place": "Tags 06YJ and 06YH, existing canonical tensor exactness and supported quasi-coherent triangulated structures; Adjunction.rightAdjointCommShift and isTriangulated_rightAdjoint.; integration of the supplied shift-saturated route experiment."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightAdjointCommShift|commShift_of_leftAdjoint|isTriangulated_rightAdjoint",
+   "results": "9 hits: Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean",
+   "date": "2026-10-14",
+   "verdict": "Component APIs used; no exact theorem with the displayed combined conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adjoint to a triangulated functor has a coherent shift structure making it triangulated",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.isTriangulated_rightAdjoint",
+   "results": "1 hits: CategoryTheory.Adjunction.isTriangulated_rightAdjoint",
+   "date": "2026-10-14",
+   "verdict": "Component APIs used; no exact theorem with the displayed combined conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatTelescopeConeNormalizationDescent",
+  "date": "2026-10-14",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The diagonal projection formula/generation argument in lem-sc-finite-duality: replace the unnecessary inherited cone-normalized comparison construction by a natural comparison and invertibility on all integer shifts; Separate exact shift structures for the two tensor comparisons",
+   "via": [
+    "lem-sc-flat-telescope-cone-normalization-descent",
+    "lem-sc-flat-telescope-normalization-morphisms",
+    "lem-sc-flat-telescope-bounded-normalization-extension",
+    "lem-sc-flat-telescope-model-shift-gauge",
+    "lem-sc-flat-telescope-shift-gauge",
+    "lem-sc-normalized-flat-telescope-stage-comparison",
+    "lem-sc-normalized-flat-telescope-comparison",
+    "lem-sc-normalized-kflat-representative-comparison",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedExactStructures",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedExactStructures.lean",
+  "declaration": "CategoryTheory.ShiftSaturated.projection_exactStructures",
+  "declarations": [
+   "CategoryTheory.ShiftSaturated.qc_triangulated",
+   "CategoryTheory.ShiftSaturated.rightAdjointTensor_exactStructures"
+  ],
+  "statement": "theorem projection_exactStructures\n    {Z Y : Scheme.{u}} (f : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [(schemeDerivedQCohProperty Y).IsTriangulated]\n    (a : derivedPullback f ⊣ schemeDerivedDirectImage f)\n    (E : schemeDerivedCategory Z) :\n    let F := (schemeDerivedQCohProperty Y).ι ⋙\n      tensorRight ((schemeDerivedDirectImage f).obj E)\n    let G := (schemeDerivedQCohProperty Y).ι ⋙ derivedPullback f ⋙\n      tensorRight E ⋙ schemeDerivedDirectImage f\n    ∃ (sF : F.CommShift ℤ) (sG : G.CommShift ℤ),\n      letI := sF\n      letI := sG\n      F.IsTriangulated ∧ G.IsTriangulated",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-e5b7b",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261014T140636-L-118125",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-e5b7b",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261014T140636-L-118125",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered proofs and node records agree; application signatures are unchanged. All 33 modules, 29 direct importers, and two validation clients compile; refreshed axiom checks use only permitted axioms. Pruning preserves realized unit steps."
+ }
+}

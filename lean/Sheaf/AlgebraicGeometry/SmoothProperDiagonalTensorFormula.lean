@@ -17,7 +17,12 @@ import Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration
 import Sheaf.AlgebraicGeometry.ProperPerfectRightAdjointCoproducts
 import Sheaf.AlgebraicGeometry.SmoothProperTensorPerfectCase
 import Sheaf.AlgebraicGeometry.PerfectImmersionStalkwiseTorBounds
-import Sheaf.AlgebraicGeometry.RightAdjointTensorLocusLocalizing
+import Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonNatural
+import Sheaf.AlgebraicGeometry.DerivedTensorRightCoproducts
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
+import Sheaf.AlgebraicGeometry.PerfectLocalizingIsoLocus
+import Sheaf.AlgebraicGeometry.DerivedExactStructures
+import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-!
 # Tensor formula for the right adjoint of a perfect proper immersion
@@ -36,6 +41,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace AlgebraicGeometry
+open CategoryTheory.ShiftSaturated
 
 /-- For a proper perfect closed immersion, the right adjoint of derived direct image
 satisfies the projection formula.  The displayed morphism is the mate, under the
@@ -47,16 +53,19 @@ Proof (Tag 0A9U, following the five node steps):
 1. The closed immersion is proper, finite type and perfect: the stalks of i_*O_Z have
    finite free resolutions by local perfection. By lem-sc-smooth-proper-tensor-direct-sums
    (Tag 0A9R), c commutes with arbitrary set-indexed direct sums.
-2. Direct sums exist by lem-pc-derived-qcoh-direct-sums. The isomorphism locus of the
-   comparison is strictly full, saturated and triangulated, because both functors are
-   exact. It is closed under sums: derived pullback and tensor preserve sums, as does c.
+2. Direct sums exist by lem-pc-derived-qcoh-direct-sums. Use the predicate that the
+   natural comparison is invertible at every integer translate. This predicate
+   is closed under isomorphisms, shifts, retracts, coproducts and cones. For cones,
+   the five-term argument uses independently the components at A, B, A[1] and
+   B[1], transported by the two functors' exact shift structures.
 3. Perfect objects generate this localizing subcategory by
    lem-pc-derived-qcoh-perfect-generation. The adjoint exists by
    lem-pc-noetherian-derived-direct-image-right-adjoint.
 4. The comparison is invertible on perfect K by lem-sc-smooth-proper-tensor-perfect-case
    (Tag 0A9T), with the same counit-pinned projection comparison.
-5. The localizing-subcategory argument of Tag 0A9U now gives invertibility for all K.
-   Taking its inverse gives the equivalent displayed tensor formula.
+5. The localizing-subcategory argument of Tag 0A9U gives invertibility on every
+   translate of every K. Shift zero gives the original counit-pinned conclusion,
+   with the same supplied monoidal structure and both specified adjunctions.
 -/
 theorem smooth_proper_diagonal_tensor_formula
     {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (i : Z ⟶ Y)
@@ -105,6 +114,13 @@ theorem smooth_proper_diagonal_tensor_formula
       ((schemeDerivedQCohProperty Z).ι ⋙ schemeDerivedDirectImage i) hRf)
     ((schemeDerivedQCohProperty Y).liftCompιIso
       ((schemeDerivedQCohProperty Z).ι ⋙ schemeDerivedDirectImage i) hRf) c adj
+  let := qc_triangulated Y
+  let := qc_triangulated Z
+  let F := (schemeDerivedQCohProperty Z).lift
+    ((schemeDerivedQCohProperty Y).ι ⋙ derivedPullback i ⋙
+      tensorRight (c.obj ⟨𝟙_ _, hO⟩).obj)
+    (fun K ↦ hTensor K (c.obj ⟨𝟙_ _, hO⟩))
+  obtain ⟨τ, hτ⟩ := rightAdjointTensorComparison_natural i hRf hO hTensor a c adj
   let P : ObjectProperty (schemeDerivedQCohCategory Y) := fun K ↦
     ∃ pf : (schemeDerivedDirectImage i).obj
             (((derivedPullback i).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj) ≅
@@ -118,11 +134,48 @@ theorem smooth_proper_diagonal_tensor_formula
               hTensor K (c.obj ⟨𝟙_ _, hO⟩)⟩ K)
             (ObjectProperty.homMk (pf.hom ≫
               K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom)))
-  have hclosed := rightAdjointTensorLocus_localizing i hRf hO hTensor a c adj hsums
-  have hle : perfectLocalizingClosure Y ≤ P := by
-    apply sInf_le
-    exact ⟨fun E hE ↦ hcase mon a c adj E hE, hclosed⟩
+  have hcriterion (K : schemeDerivedQCohCategory Y) : P K ↔ IsIso (τ.app K) := by
+    obtain ⟨pf, hpin, heq⟩ := hτ K
+    constructor
+    · rintro ⟨pf', hpin', h⟩
+      have hpf : pf' = pf := Iso.ext_inv (hpin'.trans hpin.symm)
+      subst pf'
+      rwa [heq]
+    · intro h
+      exact ⟨pf, hpin, heq ▸ h⟩
+  obtain ⟨sF, sc, hFexact, hcexact⟩ :=
+    rightAdjointTensor_exactStructures i hRf hO hTensor a c adj
+  let := sF
+  let := sc
+  let : F.IsTriangulated := hFexact
+  let : c.IsTriangulated := hcexact
+  have hFsums (J : Type u) : PreservesColimitsOfShape (Discrete J) F := by
+    let : PreservesColimitsOfShape (Discrete J)
+        (tensorRight (c.obj ⟨𝟙_ _, hO⟩).obj) :=
+      derivedTensorRight_preservesCoproducts Z (c.obj ⟨𝟙_ _, hO⟩).obj J
+    let : PreservesColimitsOfShape (Discrete J) (derivedPullback i) :=
+      a.leftAdjoint_preservesColimits.preservesColimitsOfShape
+    let : HasCoproducts.{u} (schemeDerivedCategory Y) := derivedAmbientHasCoproducts Y
+    let : (schemeDerivedQCohProperty Y).IsClosedUnderColimitsOfShape (Discrete J) :=
+      schemeDerivedQCohClosedUnderCoproducts Y J
+    have : PreservesColimitsOfShape (Discrete J)
+        (F ⋙ (schemeDerivedQCohProperty Z).ι) := by
+      change PreservesColimitsOfShape (Discrete J)
+        ((schemeDerivedQCohProperty Y).ι ⋙ derivedPullback i ⋙
+          tensorRight (c.obj ⟨𝟙_ _, hO⟩).obj)
+      infer_instance
+    exact preservesColimitsOfShape_of_reflects_of_preserves F (schemeDerivedQCohProperty Z).ι
+  have hperfectShift (E : schemeDerivedQCohCategory Y)
+      (hE : Scheme.perfectSubcategory Y E.obj) : isoOnAllShifts F c τ E := by
+    intro n
+    apply (hcriterion (E⟦n⟧)).mp
+    exact hcase mon a c adj (E⟦n⟧) (perfect_iso Y
+      (((schemeDerivedQCohProperty Y).ι.commShiftIso n).app E).symm
+      (perfect_shift Y hE n))
+  have hle := perfectClosure_le_isoOnAllShifts Y F c τ hFsums hsums hperfectShift
   rw [derivedQCohPerfectGeneration Y] at hle
-  exact hle K trivial
+  have hK : isoOnAllShifts F c τ K := hle K trivial
+  apply (hcriterion K).mpr
+  exact (NatTrans.isIso_app_iff_of_iso τ ((shiftFunctorZero _ ℤ).app K)).mp (hK 0)
 
 end AlgebraicGeometry

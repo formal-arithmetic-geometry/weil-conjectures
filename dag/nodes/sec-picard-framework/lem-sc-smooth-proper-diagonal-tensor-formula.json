@@ -32,49 +32,60 @@
  ],
  "proof": [
   {
-   "text": "Use perfectImmersion_stalkwiseTorBounds to obtain the finite Tor bounds in both conventions; apply smoothProper_tensor_perfect_case with the Tor-prime bound. Its existential witnesses supply hRf, hO, hTensor, the monoidal structure, the pullback adjunction, and invertibility of the counit-pinned comparison on all perfect K.",
+   "text": "Obtain finite Tor bounds from the perfect immersion hypothesis. Apply the existing perfect tensor formula case and direct-sum case to the supplied adjunction c. Extract hRf, hO, tensor closure, the supplied monoidal pullback structure and its adjunction.",
    "uses": [
     "lem-sc-perfect-immersion-stalkwise-tor-bounds",
-    "lem-sc-smooth-proper-tensor-perfect-case"
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-tensor-direct-sums",
+    "lem-pc-derived-qcoh-direct-sums"
    ],
    "elementary": false
   },
   {
-   "text": "For each specified monoidal structure, pullback adjunction, and right adjoint c, install coproducts on both quasi-coherent derived categories. Apply properPerfect_rightAdjoint_preservesCoproducts with the Tor bound and the canonical liftCompιIso of the quasi-coherent pushforward lift to obtain coproduct preservation of c.",
+   "text": "Use the existing global right-adjoint tensor natural transformation τ. Its pinned inverse equations show that IsIso(τ_K) is equivalent to the original tensorFormulaComparisonProperty, so generation will prove precisely that original predicate. Equip the two functors with separate exact shift structures.",
    "uses": [
-    "lem-pc-derived-qcoh-direct-sums",
-    "lem-sc-smooth-proper-tensor-direct-sums"
+    "lem-sc-right-adjoint-tensor-comparison-natural",
+    "lem-sc-derived-separate-exact-structures"
    ],
    "elementary": false
   },
   {
-   "text": "Let P(K) be exactly the existential pf and IsIso predicate in the theorem conclusion. Apply rightAdjointTensorLocus_localizing to obtain its five closure conditions. Combine them with the perfect-case witness to show P is one of the properties in the defining infimum of perfectLocalizingClosure Y. Therefore sInf_le gives perfectLocalizingClosure Y ≤ P.",
+   "text": "Both source and target functors preserve u-sized coproducts: use quasi-coherent ambient coproduct closure, pullback left adjointness, tensorRight coproduct preservation, and the already supplied direct-sum preservation for c.",
    "uses": [
-    "lem-sc-right-adjoint-tensor-locus-localizing",
-    "lem-sc-smooth-proper-tensor-perfect-case"
+    "lem-pc-derived-ambient-has-coproducts",
+    "lem-pc-derived-qcoh-closed-coproducts",
+    "lem-sc-derived-tensor-right-coproducts"
    ],
    "elementary": false
   },
   {
-   "text": "Rewrite the left hand side using derivedQCohPerfectGeneration Y. The resulting inequality top ≤ P applied to K proves the required existential with exactly the given witnesses and the same counit-pinned comparison.",
+   "text": "Use Q(K)=∀n,IsIso(τ_(K[n])). Perfect objects stay perfect under shifts and isomorphisms, so the perfect case proves Q on generators. Apply the proved shift-saturated perfect localizing closure lemma and derivedQCohPerfectGeneration. Transport n=0 along shiftFunctorZero and recover the original tensorFormulaComparisonProperty using its equivalence with the isomorphism locus.",
    "uses": [
+    "lem-sc-perfect-localizing-iso-locus",
     "lem-pc-derived-qcoh-perfect-generation"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pc-derived-ambient-has-coproducts",
+  "lem-pc-derived-qcoh-closed-coproducts",
   "lem-pc-derived-qcoh-direct-sums",
   "lem-pc-derived-qcoh-perfect-generation",
+  "lem-sc-derived-separate-exact-structures",
+  "lem-sc-derived-tensor-right-coproducts",
   "lem-sc-perfect-immersion-stalkwise-tor-bounds",
-  "lem-sc-right-adjoint-tensor-locus-localizing",
+  "lem-sc-perfect-localizing-iso-locus",
+  "lem-sc-right-adjoint-tensor-comparison-natural",
   "lem-sc-smooth-proper-tensor-direct-sums",
   "lem-sc-smooth-proper-tensor-perfect-case"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "P3",
+  "date": "2026-10-14",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0A9U, lemma-compare-with-pullback-flat-proper-noetherian; implemented by N3 with two missing glue statements split off"
+  "place": "Tags 0A9U, 08EU and 09IS: global natural comparison and perfect generation of its all-integer-shifts isomorphism locus, using the five-term cone argument and separate exact structures."
  },
  "mathlib_searches": [
   {
@@ -155,13 +166,13 @@
   "note": "Noetherian Z,Y; closed immersion+proper i; i_*O_Z perfect as Y.IsPerfect (Ri_* 𝟙_); arbitrary right adjoint c of the D_QCoh lift of Ri_*; arbitrary K in D_QCoh(Y); projection map pinned via Li^*-|Ri_* homEquiv, μIso, counit; conclusion IsIso of the mate of pf ≫ K◁counit ≫ ρ_, same encoding as landed SmoothProperTensorPerfectCase; added stmt_deps def-pc-derived-pullback, def-pc-scheme-derived-tensor-structure justified (both used); check_dag unchanged"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N3",
+  "reviewer": "X-e5b7b",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T085314-L-29615",
+  "landing": "20261014T140636-L-118125",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered proofs and node records agree; application signatures are unchanged. All 33 modules, 29 direct importers, and two validation clients compile; refreshed axiom checks use only permitted axioms. Pruning preserves realized unit steps."
  }
 }

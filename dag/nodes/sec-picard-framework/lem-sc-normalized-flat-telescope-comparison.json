@@ -102,19 +102,6 @@
  },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.NormalizedFlatTelescopeComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedFlatTelescopeComparison.lean",
-  "declaration": "AlgebraicGeometry.exists_normalized_flat_telescope_comparison",
-  "declarations": [
-   "AlgebraicGeometry.exists_normalized_flat_telescope_comparison"
-  ],
-  "statement": "theorem exists_normalized_flat_telescope_comparison\n    {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [Functor.Monoidal (derivedPullback f)]\n    [(Scheme.Modules.tensorPullback f).Additive] :\n    ∃ e : (derivedPullback f).obj ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) ≅\n        (𝟙_ (schemeDerivedCategory Z))⟦(1 : ℤ)⟧,\n      ∃ α : ∀ X : HomotopyCategory\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ),\n        flatTelescopeShiftRepresentative Y X →\n          ((DerivedCategory.Qh ⋙ derivedPullback f).obj X ≅\n            ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n              (DerivedCategory.Qh : HomotopyCategory\n                (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n                schemeDerivedCategory Z)).obj X),\n        (∀ (X X' : HomotopyCategory\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))\n          (hX : flatTelescopeShiftRepresentative Y X) (hX' : flatTelescopeShiftRepresentative Y X')\n          (s : X ⟶ X'),\n          (DerivedCategory.Qh ⋙ derivedPullback f).map s ≫ (α X' hX').hom =\n            (α X hX).hom ≫\n              ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n                (DerivedCategory.Qh : HomotopyCategory\n                  (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n                  schemeDerivedCategory Z)).map s) ∧\n        ∀ (P : CochainComplex\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n        (htel : isFlatTelescope Y P),\n        let X := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P\n        let G := (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n          (DerivedCategory.Qh : HomotopyCategory\n            (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n            schemeDerivedCategory Z)\n        (α (X⟦(1 : ℤ)⟧) ⟨P, htel, Or.inr rfl⟩).hom ≫\n            (G.commShiftIso (1 : ℤ)).hom.app X =\n          (derivedPullback f).map ((DerivedCategory.Qh.commShiftIso (1 : ℤ)).hom.app X) ≫\n            ((derivedPullback f).mapIso\n                (schemeCanonicalShiftUnitIso Y (DerivedCategory.Qh.obj X)).symm ≪≫\n              asIso (Functor.OplaxMonoidal.δ (derivedPullback f)\n                ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) (DerivedCategory.Qh.obj X)) ≪≫\n              tensorIso e (Iso.refl _) ≪≫\n              schemeCanonicalShiftUnitIso Z\n                ((derivedPullback f).obj (DerivedCategory.Qh.obj X))).hom ≫\n            (α X ⟨P, htel, Or.inl rfl⟩).hom⟦(1 : ℤ)⟧'",
-  "branch": "sheaf-dag",
-  "by": "E3",
-  "date": "2026-10-14"
- },
  "lean_audit": {
   "master": {
    "state": "none"
@@ -136,11 +123,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-7f59d",
-  "group": "J2",
+  "reviewer": "X-e5b7b",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261014T043531-L-1335547",
+  "landing": "20261014T140636-L-118125",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files and DAG metadata match the packet; all four modules and direct importer compile successfully, with only the two documented named sorry theorems remaining."
+  "note": "independent Codex review: Delivered proofs and node records agree; application signatures are unchanged. All 33 modules, 29 direct importers, and two validation clients compile; refreshed axiom checks use only permitted axioms. Pruning preserves realized unit steps."
  }
 }
