@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMap
 public import Sheaf.AlgebraicGeometry.RawModuleScalarSourcePrefix
 public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare
 import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackAbelianFormula
+import Sheaf.AlgebraicGeometry.RawModuleScalarHomEvaluation
 
 /-! # Abelian expansion of the scalar raw Hom map
 
@@ -51,6 +52,10 @@ theorem rawModuleAbelianHomMap_target_formula
       ((upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus.map
           (scalarCoefficientFactor Λ B.hom G (q : ℤ)) ≫
         abelianCoefficientFactor ((RawModuleScalarComparison.forget Λ W).obj G)
-          (q : ℤ) A B f) := by sorry
+          (q : ℤ) A B f) := by
+  refine (rawModuleScalar_pullback_abelian_formula Λ k G q U A B f _).trans ?_
+  rw [rawModuleScalarHom_evaluate]
+  dsimp only [rawModuleScalarSourcePrefix]
+  simp only [Functor.map_comp, Category.assoc]
 
 end AlgebraicGeometry.Etale

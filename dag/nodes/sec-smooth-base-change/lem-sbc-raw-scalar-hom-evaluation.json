@@ -1,0 +1,113 @@
+{
+ "id": "lem-sbc-raw-scalar-hom-evaluation",
+ "kind": "statement",
+ "title": "Evaluation of the explicit additive scalar Hom map",
+ "statement": "For a commutative ring Λ in Type(u+1), schemes W and S in universe u, k:W→S, a sheaf G of Λ-modules on the small etale site of W, q:ℕ, U:S.Etale, A:Over(W), and a raw derived Hom class z at A, rawModuleAbelianHomMap(Λ,k,G,q,U,A)(z) equals scalarSourceFactor(Λ,A.hom≫k,freeSheaf(Λ,S)(U),freeAbelian(S,U),freeMap(Λ,S,U)), followed by derived scalar forgetting applied to z, followed by scalarCoefficientFactor(Λ,A.hom,G,q). The factor definitions are the canonical ones of def-sbc-raw-scalar-source-factors and lem-sbc-raw-scalar-coefficient-square.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03FD and 03Q8; explicit additive-map evaluation in lem-sbc-raw-module-abelian-hom-map-naturality"
+ },
+ "stmt_deps": [
+  "def-sbc-raw-module-abelian-hom-map",
+  "def-sbc-raw-scalar-source-factors",
+  "lem-sbc-raw-scalar-coefficient-square"
+ ],
+ "proof": [
+  {
+   "text": "Unfold rawModuleAbelianHomMap. Its additive homomorphism is derived forgetting followed by right composition with the coefficient factor and left composition with the source factor. Evaluate AddCommGrpCat.ofHom and the two additive compositions. The canonical named factors have these exact bodies, so the equality is definitional (rfl). No coherence, invertibility or restriction on q beyond q:ℕ is used; zero classes, zero sheaves, identity maps and degree zero are included.",
+   "uses": [
+    "def-sbc-raw-module-abelian-hom-map",
+    "def-sbc-raw-scalar-source-factors",
+    "lem-sbc-raw-scalar-coefficient-square"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-raw-module-abelian-hom-map",
+  "def-sbc-raw-scalar-source-factors",
+  "lem-sbc-raw-scalar-coefficient-square"
+ ],
+ "proof_origin": {
+  "by": "N4",
+  "document": "Stacks Project; existing RawModuleScalarMapFormula theorem",
+  "place": "Tags 03FD and 03Q8; canonical-factor version of the already proved evaluation argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a composite additive homomorphism defined by left and right composition and an additive functor",
+   "date": "2026-10-14",
+   "results": "Found Preadditive.leftComp, Preadditive.rightComp, Functor.mapAddHom_apply and Functor.coe_mapAddHom. The concrete evaluation is already stated and proved in RawModuleScalarMapFormula; its duplicate factor declarations prevented joint import with the canonical factor modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "date": "2026-10-14",
+   "results": "Found CategoryTheory.Functor.map_comp, needed only by the parent factor calculation. The present evaluation theorem is definitional."
+  },
+  {
+   "tool": "grep",
+   "query": "ofHom_apply|coe_mapAddHom",
+   "date": "2026-10-14",
+   "results": "Found ofHom_apply in the category of additive commutative groups and coe_mapAddHom. Local rg found the existing rawModuleScalar_map_formula theorem and confirmed RawModuleScalarMapFormula has no importing module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive functor maps a morphism through a composite of additive left and right composition homomorphisms",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: Internal Server Error from the search service. No mathematical verdict. Other searches and local library reading identify the existing evaluation theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawModuleAbelianHomTargetFormula",
+  "date": "2026-10-14",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-raw-module-abelian-hom-target-formula",
+   "place": "Evaluation step of its existing factor calculation",
+   "via": [
+    "lem-sbc-raw-module-abelian-hom-map-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarHomEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarHomEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Etale.rawModuleScalarHom_evaluate",
+  "statement": "theorem rawModuleScalarHom_evaluate\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)\n    (A : Over W)\n    (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op A)) :\n    rawModuleAbelianHomMap Λ k G q U A z =\n      scalarSourceFactor Λ (A.hom ≫ k) ((freeSheaf Λ S).obj U)\n        (RawModuleScalarComparison.freeAbelian S U)\n        (RawModuleScalarComparison.freeMap Λ S U) ≫\n      (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus.map z ≫\n        scalarCoefficientFactor Λ A.hom G (q : ℤ)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T081959-L-3956679",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T081959-L-3956679",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
