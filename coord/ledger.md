@@ -14688,3 +14688,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:10 L: merged deliver/S1/Sheaf.AlgebraicGeometry.TensorPowerAlgebraCoproduct (stage 3; reviewer PASS; first push; landing 20261014T061030-L-2467351 (interface); batch 20261014T061020; modules 3; new nodes 2)
 - 06:10 L: merged deliver/S1/Sheaf.CategoryTheory.DerivedExactMateCompatibility (stage 3; reviewer PASS; first push; landing 20261014T061031-L-2467558 (interface); batch 20261014T061020; modules 2; new nodes 1)
 - 06:10 L: merged deliver/T3/Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapNaturality (stage 3; reviewer PASS; after a return; landing 20261014T061032-L-2467783 (interface); batch 20261014T061020; modules 4; new nodes 3)
+- 06:18 L: returned deliver/XR54ac40b180b6708e/Sheaf.CategoryTheory.Abelian.DerivedBottomCycleTransport (reviewer RETURN: (reviewer X-26886, head 268867094) A3: Unnecessary adaptation under the forced-adaptation gate. The original ProperFlatO)
