@@ -1,0 +1,102 @@
+{
+ "id": "lem-sc-square-zero-tensor-graded-presentation-core",
+ "kind": "statement",
+ "title": "Existence of exact graded presentation data",
+ "statement": "For a closed immersion j and an invertible module L with square-zero ideal, there exists a TensorGradedPresentationCore j L containing all algebra, exactness, quotient, kernel, colimit, and projection data of the graded presentation, except the homogeneous multiplication equation.",
+ "stmt_deps": [
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-invertible-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, direct-sum ideal sequence"
+ },
+ "proof": [
+  {
+   "text": "Construct O_X[T], its quotient by the square-zero ideal, and the ideal module locally on frames of L; glue along transition units and take the direct sum of the degreewise exact sequences.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-closed-immersion-unit-quotient"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "lem-weil-pbc-closed-immersion-unit-quotient"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "graded tensor presentation square zero ideal",
+   "results": "No exact match found.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homogeneous multiplication tensor powers sheaf",
+   "results": "No exact match found.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "TensorGradedPresentation|square-zero graded",
+   "results": "No duplicate declaration found.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation",
+  "date": "2026-10-14",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-square-zero-tensor-graded-presentation"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SquareZeroTensorGradedPresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorGradedPresentation_core_exists",
+  "statement": "theorem tensorGradedPresentation_core_exists {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥) : Nonempty (TensorGradedPresentationCore j L)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T010834-L-3160448",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T010834-L-3160448",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

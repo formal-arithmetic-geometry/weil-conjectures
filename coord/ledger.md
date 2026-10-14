@@ -14093,3 +14093,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:04 L: returned deliver/F2/Sheaf.RingTheory.LimitModuleModuleData (reviewer RETURN: (reviewer X-d42bc, head d42bc58a6) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.RingTheory.LimitModu)
 - 01:08 L: returned deliver/S2/Sheaf.Paper.CechCupResolutionBetaClassPairing (reviewer RETURN: (the landing tools, head 3be04b59c) the delivery did not land: lean/Sheaf/Paper/CechCupResolutionBetaClassPairing.lean c)
 - 01:08 L: merged deliver/A4/Sheaf.AlgebraicGeometry.FinitePresentationLocalMapPairEventuallyCompositesCompatible (stage 3; reviewer PASS; first push; landing 20261014T010834-L-3160340 (proof); batch 20261014T010832; modules 1; new nodes 1)
+- 01:08 L: merged deliver/A4/Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation (stage 3; reviewer PASS; first push; landing 20261014T010834-L-3160448 (proof); batch 20261014T010832; modules 1; new nodes 3)
