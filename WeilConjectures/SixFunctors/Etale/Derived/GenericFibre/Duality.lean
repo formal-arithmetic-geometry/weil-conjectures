@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.DoubleDual
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.ClosedSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.InternalHomGeneric
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
+public import WeilConjectures.SixFunctors.Etale.Derived.VerdierPreservation
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertiblePullback
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicallySmooth
 public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
@@ -42,13 +43,12 @@ The second follows from the formal statement
 internal-hom comparisons at `(K, ω_X)` and `(𝔻_X K, ω_X)` being isomorphisms by the generic
 internal-hom exchange (`AlgebraicGeometry.Etale.isIso_derivedHomUpperStarComparison_of_generic`),
 since `ω_X` is bounded constructible and `𝔻_X K ∈ Dctf(X, Λ)`
-(`AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`).
+(`AlgebraicGeometry.Etale.constructibleFiniteTor_and_torAmplitudeIn_verdierDual_of_perfectField`).
 
-## Missing input
+## Implementation notes
 
-The derived pullback `Lg^*` is not yet known to be braided for the derived braidings, so the
-second statement assumes the braided axiom
-`AlgebraicGeometry.Etale.LeftDerivedUpperStarBraided` for `g`.
+The second statement takes the braided axiom `AlgebraicGeometry.Etale.LeftDerivedUpperStarBraided`
+for `g` as a hypothesis; it holds by `AlgebraicGeometry.Etale.leftDerivedUpperStarBraided`.
 -/
 
 @[expose] public section
@@ -163,10 +163,10 @@ if the double-dual map `δ_{Lg^* K}` relative to `f_T : X' ⟶ T` is. For `T = S
 algebraic closure of the function field of `S`, the latter is the double-dual map of the
 geometric generic fibre over its base field.
 
-The hypothesis `hbr`, that `Lg^*` is braided for the derived braidings, is not yet available in
-the repository. -/
+The hypothesis `hbr`, that `Lg^*` is braided for the derived braidings, is
+`AlgebraicGeometry.Etale.leftDerivedUpperStarBraided`. -/
 theorem isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff_of_generic {k : Type u}
-    [Field k] [HasInvertibleExponent Λ (Spec (.of k))]
+    [Field k] [PerfectField k] [HasInvertibleExponent Λ (Spec (.of k))]
     {S : Scheme.{u}} [IsIntegral S] (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS]
     [QuasiCompact aS] [HasCompactification aS] [HasInvertibleExponent Λ S]
     (hS : DerivedCategory.isInvertible Λ S (dualizingComplex (ModuleCat.{u + 1} Λ) aS))
@@ -198,8 +198,11 @@ theorem isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff_of_generic 
   have hω : boundedConstructible (ModuleCat.{u + 1} Λ) X (dualizingComplex _ aX) :=
     boundedConstructible_rightDerivedUpperShriek Λ (𝟙 (Spec (.of k))) aX hUk
   have h₁ := isIso_derivedHomUpperStarComparison_of_generic Λ aS t ht (i ≫ p) hXp hK hω
-  have h₂ := isIso_derivedHomUpperStarComparison_of_generic Λ aS t ht (i ≫ p) hXp
-    (constructibleFiniteTor_verdierDual Λ aX hK) hω
+  obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le aX
+  obtain ⟨hKbc, a, b, hKt⟩ := hK
+  have hD := (constructibleFiniteTor_and_torAmplitudeIn_verdierDual_of_perfectField Λ aX d hd a b
+    hKbc hKt).1
+  have h₂ := isIso_derivedHomUpperStarComparison_of_generic Λ aS t ht (i ≫ p) hXp hD hω
   exact isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff (ModuleCat.{u + 1} Λ) aX fT g
     hbr ((isInvertible_iff_exists_derivedTensor _).2 hL) e K h₁ h₂
 
