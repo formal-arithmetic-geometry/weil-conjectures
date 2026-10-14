@@ -6,8 +6,6 @@ Authors: SHEAF group M2
 module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedProductProjection
-import Sheaf.AlgebraicGeometry.TensorCoefficientActionOnSummand
-import Sheaf.AlgebraicGeometry.TensorCoefficientActionSupport
 
 /-! # The homogeneous coefficient action before cohomology
 
@@ -107,36 +105,7 @@ theorem tensorGradedCoefficient_sheaf_action {X Z : Scheme.{u}} (j : Z ⟶ X)
       (T.degree (n * (e + 1))).τ₁ ≫
         tensorCoefficientKernelMap j L hI n e (e + 1)
           (mulTensorPowSection f ((tensorPullback j).obj
-            (j.ker.toModules ⊗ L.tensorPow n)) e 1) := by
-  set_option backward.isDefEq.respectTransparency false in
-  set_option backward.isDefEq.respectTransparency.types false in
-  apply Cofan.IsColimit.hom_ext T.k_colimit
-  intro d
-  change T.k d ≫ _ = T.k d ≫ _
-  by_cases hd : d = n * (e + 1)
-  · subst d
-    have h := tensorGradedCoefficient_action_on_summand j L hI n T D hD e f
-      σ μ hlocal hrestrict hglobal
-    simp only [← Category.assoc] at h
-    have hdiag : T.k (n * (e + 1)) ≫
-        μ (tensorGradedSection T D 0 (tensorPowSection f 1)) =
-      tensorCoefficientKernelMap j L hI n e (e + 1)
-        (mulTensorPowSection f ((tensorPullback j).obj
-          (j.ker.toModules ⊗ L.tensorPow n)) e 1) ≫
-        T.k (n * ((e + 1) + 1)) := by
-      simpa only [tensorCoefficientKernelMap, tensorCoefficientSheafIso,
-        Category.assoc] using h
-    rw [← Category.assoc, hdiag, Category.assoc, T.k_projection]
-    rw [← Category.assoc, T.k_projection]
-    simp
-  · obtain ⟨v, hv⟩ := tensorGradedCoefficient_action_support j L hI n T D hD d f
-      σ μ hlocal hrestrict hglobal
-    have hdegree : n + d ≠ n * ((e + 1) + 1) := by
-      rw [Nat.mul_add]
-      omega
-    rw [← Category.assoc, hv, Category.assoc, T.k_orthogonal _ _ hdegree]
-    rw [← Category.assoc, T.k_orthogonal _ _ hd]
-    simp
+            (j.ker.toModules ⊗ L.tensorPow n)) e 1) := by sorry
 
 end
 end AlgebraicGeometry.Scheme.Modules

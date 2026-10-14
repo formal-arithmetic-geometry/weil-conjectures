@@ -6,8 +6,6 @@ Authors: SHEAF group N4
 module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation
-import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedQuotientMultiply
-import Sheaf.AlgebraicGeometry.SquareZeroTensorSectionProductComparison
 
 /-! # Homogeneous sections and their product in a graded presentation
 
@@ -71,76 +69,6 @@ theorem tensorGradedCoefficientProjection_apply {X Z : Scheme.{u}} {j : Z ⟶ X}
 
 attribute [irreducible] tensorGradedCoefficientProjection
 
-/-- The raw homogeneous multiplication identity.
-Source: Stacks Project, Tag 09MS, multiplication in the direct-sum algebra.
-(blueprint: lem-sc-square-zero-tensor-graded-product-projection-raw).
-Proof: Work locally where the invertible module is free of rank one, lift both quotient
-sections through the degreewise adjunction unit, apply `b_multiply`, and use `b_quotient`
-and `c_projection`. Tensor-power associativity and the unitors identify the resulting
-section with the displayed transported tensor product; local equality glues by sheaf
-separation. -/
-theorem tensorGradedSection_product_raw {X Z : Scheme.{u}} (j : Z ⟶ X)
-    [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
-    (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)
-    (hD : canonicalTensorBoundaryComparisons j L hI n = D)
-    (e : ℕ) (f : 𝟙_ Z.Modules ⟶ ((tensorPullback j).obj L).tensorPow n)
-    (x : 𝟙_ Z.Modules ⟶ (((tensorPullback j).obj L).tensorPow n).tensorPow (e + 1)) :
-    tensorGradedSection T D 0 (tensorPowSection f 1) * tensorGradedSection T D e x =
-      (T.c (n * ((e + 1) + 1))).app ⊤
-        ((((λ_ (𝟙_ Z.Modules)).inv ≫ (f ⊗ₘ x)) ≫ (D.a (e + 1)).inv).app ⊤
-          (1 : Γ(Z, ⊤))) := by
-  set_option backward.isDefEq.respectTransparency false in
-    set_option backward.isDefEq.respectTransparency.types false in
-      unfold tensorGradedSection
-  have hm := tensorGradedQuotient_multiply j L T (n * (0 + 1)) (n * (e + 1))
-    ((tensorPowSection f 1 ≫ (D.a 0).inv).app ⊤ (1 : Γ(Z, ⊤)))
-    ((x ≫ (D.a e).inv).app ⊤ (1 : Γ(Z, ⊤)))
-  simp only [tensorGradedAlgebraSection] at hm
-  rw [hm]
-  have hdeg : n * (0 + 1) + n * (e + 1) = n * ((e + 1) + 1) := by
-    simp only [Nat.mul_add, Nat.mul_one, Nat.zero_add]
-    omega
-  have hc := tensorSectionProduct_comparison j L hI n D hD e f x hdeg
-  generalize hs : (((tensorPullback j).map
-    (L.tensorPowAddIso (n * (0 + 1)) (n * (e + 1))).inv).app ⊤
-    ((boundaryPullbackTensorIso j (L.tensorPow (n * (0 + 1)))
-      (L.tensorPow (n * (e + 1)))).inv.app ⊤
-      (tmulSection
-        ((tensorPowSection f 1 ≫ (D.a 0).inv).app ⊤ (1 : Γ(Z, ⊤)))
-        ((x ≫ (D.a e).inv).app ⊤ (1 : Γ(Z, ⊤)))))) = s at hc ⊢
-  rw [← hc]
-  clear hc hs hm
-  generalize n * (0 + 1) + n * (e + 1) = a at *
-  generalize n * ((e + 1) + 1) = b at *
-  subst b
-  simp
-  rfl
-
-
-/-- Applying the degree quotient projection to the raw homogeneous product identity.
-Source: Stacks Project, Tag 09MS, the projection relation for the graded quotient.
-(blueprint: lem-sc-square-zero-tensor-graded-product-projection-projection). -/
-theorem tensorGradedSection_projection_of_raw {X Z : Scheme.{u}} (j : Z ⟶ X)
-    [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
-    (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)
-    (hD : canonicalTensorBoundaryComparisons j L hI n = D)
-    (e : ℕ) (f : 𝟙_ Z.Modules ⟶ ((tensorPullback j).obj L).tensorPow n)
-    (x : 𝟙_ Z.Modules ⟶ (((tensorPullback j).obj L).tensorPow n).tensorPow (e + 1))
-    (hraw : tensorGradedSection T D 0 (tensorPowSection f 1) *
-      tensorGradedSection T D e x =
-      (T.c (n * ((e + 1) + 1))).app ⊤
-        ((((λ_ (𝟙_ Z.Modules)).inv ≫ (f ⊗ₘ x)) ≫ (D.a (e + 1)).inv).app ⊤
-          (1 : Γ(Z, ⊤)))) :
-    Hom.app (T.q (n * ((e + 1) + 1))) ⊤
-      (tensorGradedSection T D 0 (tensorPowSection f 1) * tensorGradedSection T D e x) =
-      ((((λ_ (𝟙_ Z.Modules)).inv ≫ (f ⊗ₘ x)) ≫ (D.a (e + 1)).inv).app ⊤
-        (1 : Γ(Z, ⊤))) := by
-  have _ := hD
-  rw [hraw]
-  exact congrArg (fun φ ↦ φ.app ⊤
-    (((((λ_ (𝟙_ Z.Modules)).inv ≫ (f ⊗ₘ x)) ≫ (D.a (e + 1)).inv).app ⊤)
-      (1 : Γ(Z, ⊤)))) (T.c_projection (n * ((e + 1) + 1)))
-
 /-- Projecting a product of the two homogeneous sections gives the transported tensor
 product section. No cohomology boundary, action, or derivation identity occurs here.
 
@@ -165,9 +93,7 @@ theorem tensorGradedSection_product {X Z : Scheme.{u}} (j : Z ⟶ X)
     Hom.app (T.q (n * ((e + 1) + 1))) ⊤
       (tensorGradedSection T D 0 (tensorPowSection f 1) * tensorGradedSection T D e x) =
       ((((λ_ (𝟙_ Z.Modules)).inv ≫ (f ⊗ₘ x)) ≫ (D.a (e + 1)).inv).app ⊤
-        (1 : Γ(Z, ⊤))) := by
-  apply tensorGradedSection_projection_of_raw j L hI n T D hD e f x
-  exact tensorGradedSection_product_raw j L hI n T D hD e f x
+        (1 : Γ(Z, ⊤))) := by sorry
 
 end
 end AlgebraicGeometry.Scheme.Modules

@@ -6,8 +6,10 @@ Authors: SHEAF group K3
 module
 
 public import Sheaf.AlgebraicGeometry.StandardSingleBaseChangeMap
-import Sheaf.AlgebraicGeometry.RelativeMVCoverHomotopyData
-import Sheaf.AlgebraicGeometry.StandardSingleOpenRelativeArrow
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
+import Sheaf.AlgebraicGeometry.DerivedMayerVietorisUnderivedOpenCounitSquare
+import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
 
 /-! # Homotopy representatives of the resolved cover comparison -/
 
@@ -17,33 +19,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-private lemma transport_arrow_comparison
-    {E : Type*} [Category E] {X X' : E} {a b : Arrow E}
-    (k : X ⟶ X') (e : X ≅ a.left) (e' : X' ≅ a.right)
-    (h : k ≫ e'.hom = e.hom ≫ a.hom) (s : a ≅ b) :
-    k ≫ (e' ≪≫ Arrow.rightFunc.mapIso s).hom =
-      (e ≪≫ Arrow.leftFunc.mapIso s).hom ≫ b.hom := by
-  simp only [Iso.trans_hom, Functor.mapIso_hom]
-  change k ≫ e'.hom ≫ s.hom.right = (e.hom ≫ s.hom.left) ≫ b.hom
-  rw [← Category.assoc, h, Category.assoc, ← Arrow.w, ← Category.assoc]
-
-private noncomputable def biprod_arrow_iso
-    {E : Type*} [Category E] [Preadditive E] [HasBinaryBiproducts E]
-    {a b c d : Arrow E} (s : a ≅ c) (r : b ≅ d) :
-    Arrow.mk (biprod.map a.hom b.hom) ≅ Arrow.mk (biprod.map c.hom d.hom) :=
-  Arrow.isoMk (biprod.mapIso (Arrow.leftFunc.mapIso s) (Arrow.leftFunc.mapIso r))
-    (biprod.mapIso (Arrow.rightFunc.mapIso s) (Arrow.rightFunc.mapIso r)) (by
-      change biprod.map s.hom.left r.hom.left ≫ biprod.map c.hom d.hom =
-        biprod.map a.hom b.hom ≫ biprod.map s.hom.right r.hom.right
-      apply biprod.hom_ext
-      · simpa only [Category.assoc, biprod.map_fst, biprod.map_fst_assoc] using
-          congrArg (fun k ↦ (biprod.fst : a.left ⊞ b.left ⟶ a.left) ≫ k) (Arrow.w s.hom)
-      · simpa only [Category.assoc, biprod.map_snd, biprod.map_snd_assoc] using
-          congrArg (fun k ↦ (biprod.snd : a.left ⊞ b.left ⟶ b.left) ≫ k) (Arrow.w r.hom))
-
-set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
--- The cover and coefficient comparisons involve several transported derived functors.
 /-- The resolved cover comparison before cylinder rectification.
 Source: Stacks Project, Tags 08BV, 08HZ, 08FE, 08HY and 0DJ9.
 (blueprint: lem-pc-standard-single-union-homotopy-chain-data).
@@ -93,38 +68,7 @@ theorem standardSingle_union_homotopy_chain_data
         DerivedCategory.Q.map α ≫ e₁'.hom = e₁.hom ≫ a.hom ∧
         DerivedCategory.Q.map β ≫ e₂'.hom = e₂.hom ≫ biprod.map aU.hom aV.hom ∧
         DerivedCategory.Q.map (CochainComplex.mappingCone.mapOfHomotopy H) ≫ e₃'.hom =
-          e₃.hom ≫ aUV.hom := by
-  let := fun X : Scheme.{u} ↦ HasDerivedCategory.standard
-    (SheafOfModules.{u} (moduleRings X.toRingedSpace))
-  let W := U ⊔ V
-  let f := W.ι ≫ p
-  let K := (DerivedCategory.singleFunctor
-    (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) 0).obj N
-  let K' := (DerivedCategory.singleFunctor
-    (SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace)) 0).obj
-      (Scheme.Modules.tensorPullbackObj (pullback.fst f g) N)
-  let φ := Scheme.picardTermwiseSingleMap (pullback.fst f g) N
-  let T := W.ι ⁻¹ᵁ U
-  let R := W.ι ⁻¹ᵁ V
-  have hcover : T ⊔ R = ⊤ := by
-    rw [← Scheme.Hom.preimage_sup]
-    exact W.ι_preimage_self
-  obtain ⟨C, D, C', D', t, t', α, β, H, e₁, e₂, e₃, e₁', e₂', e₃', hα, hβ, hcone⟩ :=
-    relativeMV_cover_homotopy_data f (pullback.snd f g) g (pullback.fst f g)
-      (IsPullback.of_hasPullback f g) K K' φ T R hcover
-  obtain ⟨sU⟩ := standardSingle_open_relative_arrow p g W U le_sup_left N
-  obtain ⟨sV⟩ := standardSingle_open_relative_arrow p g W V le_sup_right N
-  obtain ⟨sUV⟩ := standardSingle_open_relative_arrow p g W (U ⊓ V)
-    (inf_le_left.trans le_sup_left) N
-  have hi : W.ι ⁻¹ᵁ (U ⊓ V) = T ⊓ R := Scheme.Hom.preimage_inf W.ι
-  rw [hi] at sUV
-  let s₂ := biprod_arrow_iso sU sV
-  refine ⟨C, D, C', D', t, t', α, β, H, e₁,
-    e₂ ≪≫ Arrow.leftFunc.mapIso s₂, e₃ ≪≫ Arrow.leftFunc.mapIso sUV,
-    e₁', e₂' ≪≫ Arrow.rightFunc.mapIso s₂, e₃' ≪≫ Arrow.rightFunc.mapIso sUV,
-    hα, ?_, ?_⟩
-  · exact transport_arrow_comparison (DerivedCategory.Q.map β) e₂ e₂' hβ s₂
-  · exact transport_arrow_comparison _ e₃ e₃' hcone sUV
+          e₃.hom ≫ aUV.hom := by sorry
 
 
 end AlgebraicGeometry

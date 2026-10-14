@@ -28,8 +28,6 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
-set_option maxHeartbeats 800000 in
--- The concrete affine-derived extension requires extra elaboration heartbeats.
 /-- Normalized sections comparisons commute with the right-adjoint comparison of
 an arbitrary fibre-product object. This assertion has no pullback units and no
 base-change map: it only compares two ways to take sections of a composed direct image.

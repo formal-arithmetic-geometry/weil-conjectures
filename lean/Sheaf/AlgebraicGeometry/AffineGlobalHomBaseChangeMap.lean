@@ -16,15 +16,15 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResol
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-public import Sheaf.Algebra.Homology.ExtensionKFlatQuasiIso
+import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+import Sheaf.Algebra.Homology.MixedTensorKFlatQuasiIso
 import Sheaf.AlgebraicGeometry.NormalizedInternalHomPullbackComparison
 import Sheaf.AlgebraicGeometry.AffineSectionsPushforwardNormalization
 
 /-!
-REPAIR: Construct canonicalPullbackAdjunction with the original shared derived counit;
-follow coord/hollow-definitions.md (class 2), claim/adapt
+REPAIR: Construct affineDerivedExtensionAdjunction and canonicalPullbackAdjunction
+with fixed canonical data; follow coord/hollow-definitions.md (class 2), claim/adapt
 users and record the definition change.
  # The affine global derived Hom base-change comparison
 Source: Stacks Project, perfect.tex, Tag 0AA7 (blueprint:
@@ -42,7 +42,6 @@ open CategoryTheory Limits Opposite TopologicalSpace
 open CategoryTheory.MonoidalCategory
 noncomputable section
 namespace AlgebraicGeometry
-
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
@@ -102,36 +101,6 @@ def schemeGlobalDerivedHomOver {R : CommRingCat.{u}} {X : Scheme.{u}}
       DerivedCategory (ModuleCat.{u} R) :=
   schemeGlobalDerivedHom X ⋙ (affineGlobalSectionsRestriction f).mapDerivedCategory
 
-/-- Derived extension of scalars, constructed with the fixed K-flat derived counit.
-Source: Stacks Tag 0AA7 (blueprint: def-pc-affine-global-hom-base-change-map). -/
-def affineDerivedExtension {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R) :
-    DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B) := by
-  -- Retain the original sheaf-derived-category parameter in the exposed API.
-  let _ := ‹∀ Z : Scheme.{u},
-    HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))›
-  let ρ := affineBaseRingMap g
-  have : (ModuleCat.extendScalars.{u, u, u} ρ).Additive :=
-    (ModuleCat.extendRestrictScalarsAdj ρ).left_adjoint_additive
-  have : (ModuleCat.extendScalars.{u, u, u} ρ).PreservesKFlatQuasiIso :=
-    ModuleCat.extendScalars_preservesKFlatQuasiIso ρ
-  exact (ModuleCat.extendScalars.{u, u, u} ρ).leftDerivedFunctor
-
-/-- The specified extension/restriction adjunction descended from
-ModuleCat.extendRestrictScalarsAdj, with the fixed left-derived counit and
-right-derived unit. Exact restriction is identified with its derived functor
-by the unit-compatible comparison, so no independent adjunction witness is chosen.
-Source: Stacks Tag 0AA7 (blueprint: def-pc-affine-global-hom-base-change-map). -/
-def affineDerivedExtensionAdjunction {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R) :
-    affineDerivedExtension g ⊣
-      (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory := by
-  let ρ := affineBaseRingMap g
-  have : (ModuleCat.extendScalars.{u, u, u} ρ).Additive :=
-    (ModuleCat.extendRestrictScalarsAdj ρ).left_adjoint_additive
-  have : (ModuleCat.extendScalars.{u, u, u} ρ).PreservesKFlatQuasiIso :=
-    ModuleCat.extendScalars_preservesKFlatQuasiIso ρ
-  exact (ModuleCat.extendRestrictScalarsAdj ρ).derivedAdjunction.ofNatIsoRight
-    (ModuleCat.restrictScalars.{u} ρ).rightDerivedFunctorIsoMapDerivedCategory
-
 set_option linter.unusedSectionVars false in
 -- Preserve the original derived-category instances in the theorem signature.
 /-- Derived extension of scalars, chosen from its adjunction with restriction
@@ -144,10 +113,44 @@ extension. Thus derived extension is left adjoint to exact derived restriction. 
 theorem exists_affineDerivedExtension {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R) :
     ∃ E : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B),
       Nonempty (E ⊣ (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory) := by
-  exact ⟨affineDerivedExtension g, ⟨affineDerivedExtensionAdjunction g⟩⟩
+  let ρ := affineBaseRingMap g
+  have : (ModuleCat.extendScalars.{u, u, u} ρ).Additive :=
+    (ModuleCat.extendRestrictScalarsAdj ρ).left_adjoint_additive
+  have : (ModuleCat.extendScalars.{u, u, u} ρ).PreservesKFlatQuasiIso := by
+    constructor
+    intro P Q hP hQ α hα
+    let N := (HomologicalComplex.single (ModuleCat.{u} B) (.up ℤ) 0).obj (𝟙_ _)
+    have h := (CochainComplex.mixedTensor_kFlat_quasiIso ρ).1 N P Q α hα hP hQ
+    let e := CochainComplex.map₂HomologicalComplexFlipObjSingleIso
+      (ModuleCat.mixedTensor ρ).flip (𝟙_ (ModuleCat.{u} B))
+    have h' : QuasiIso
+        ((((ModuleCat.mixedTensor ρ).obj (𝟙_ (ModuleCat.{u} B))).mapHomologicalComplex
+          (.up ℤ)).map α) :=
+      (quasiIso_iff_of_arrow_mk_iso _ _
+        (Arrow.isoMk (e.app P) (e.app Q) (e.hom.naturality α).symm)).1 h
+    let e₀ : (ModuleCat.mixedTensor ρ).obj (𝟙_ (ModuleCat.{u} B)) ≅
+        ModuleCat.extendScalars.{u, u, u} ρ :=
+      Functor.isoWhiskerLeft (ModuleCat.extendScalars ρ)
+        (leftUnitorNatIso (ModuleCat.{u} B)) ≪≫ Functor.rightUnitor _
+    let e₁ := NatIso.mapHomologicalComplex e₀ (.up ℤ)
+    exact (quasiIso_iff_of_arrow_mk_iso _ _
+      (Arrow.isoMk (e₁.app P) (e₁.app Q) (e₁.hom.naturality α).symm)).1 h'
+  refine ⟨(ModuleCat.extendScalars.{u, u, u} ρ).leftDerivedFunctor, ⟨?_⟩⟩
+  exact (ModuleCat.extendRestrictScalarsAdj ρ).derivedAdjunction.ofNatIsoRight
+    (ModuleCat.restrictScalars.{u} ρ).rightDerivedFunctorIsoMapDerivedCategory
 
--- Keep the concrete scalar-derived resolution machinery out of unrelated proof search.
-attribute [local irreducible] affineDerivedExtension affineDerivedExtensionAdjunction
+/-- Derived tensor with B, chosen as the left adjoint of exact restriction.
+Source: Stacks Tag 0AA7 (blueprint: def-pc-affine-global-hom-base-change-map). -/
+def affineDerivedExtension {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R) :
+    DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B) :=
+  Classical.choose (exists_affineDerivedExtension g)
+
+/-- The derived extension/restriction adjunction.
+Source: Stacks Tag 0AA7 (blueprint: def-pc-affine-global-hom-base-change-map). -/
+def affineDerivedExtensionAdjunction {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R) :
+    affineDerivedExtension g ⊣
+      (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory :=
+  Classical.choice (Classical.choose_spec (exists_affineDerivedExtension g))
 
 /-- The canonical pullback adjunction selected by the normalized derived-adjunction theorem.
 Its Hom equivalence is pinned to the underived tensor-pullback adjunction, the shared
@@ -400,8 +403,6 @@ def globalHomPullbackComparison
             (derivedPullback (pullback.fst f g)).obj K)) :=
   Classical.choose (exists_globalHomPullbackComparison f g M K hM hK)
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 /-- The canonical affine global RHom comparison: the adjoint, under derived extension of
 scalars along `g` and exact restriction of scalars, of the global RHom map induced by
 `Lg_X^*`. Source: Stacks, Tag 0AA7 (blueprint: def-pc-affine-global-hom-base-change-map).
