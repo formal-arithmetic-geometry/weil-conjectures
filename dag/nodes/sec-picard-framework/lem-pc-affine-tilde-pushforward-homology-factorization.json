@@ -1,0 +1,148 @@
+{
+ "id": "lem-pc-affine-tilde-pushforward-homology-factorization",
+ "kind": "statement",
+ "title": "Factorization of the affine pushforward homology comparison",
+ "statement": "Let D and B be commutative rings, psi:B→D, Cg any unbounded complex of D-modules, i an integer, and assume the derived category of sheaves of modules on every scheme exists. Let T be affine tilde over B, F restriction along psi, and sigma the canonical ordinary affine pushforward comparison. With the zero-map preservation instance for tilde over D followed by ordinary pushforward, the explicit affineTildePushforwardCohomologyMap [lem-pc-affine-tilde-pushforward-cohomology-normalization] equals T applied to the inverse restriction homology comparison, followed by the inverse tilde homology comparison on the short complex of the termwise restriction of Cg, followed by the inverse quotient/homology comparison at the termwise tilde of the termwise restriction of Cg, homology of Q applied to the termwise sigma comparison, and homology of the actual right-derived unit. No tensor model, module derived counit or coefficient complex map occurs. More generally, composing the displayed expanded factors with tilde of any B-module morphism v:S→res_psi(H^i(Cg)), and combining its first map with the inverse restriction comparison, equals tilde(v) followed by the normalized cohomology map.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06Z0; https://stacks.math.columbia.edu/tag/0AVW",
+  "place": "Exact functor homology comparison and affine pushforward cohomology coordinates; parent proof step 2."
+ },
+ "stmt_deps": [
+  "lem-pc-affine-tilde-pushforward-cohomology-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Expand the defining pushforward cohomology map. Its initial factor is the inverse homology comparison for restriction followed by exact tilde. Use the existing RingTensorCohomology.mapHomologyIso_hom_comp API of MixedTensorUnderlyingHomology. Cancel the composite forward comparison and the two inverse/forward pairs to obtain the inverse composite comparison. Apply it to Cg.sc i.",
+   "uses": [
+    "lem-pc-affine-tilde-pushforward-cohomology-normalization",
+    "new-lem-pc-mixed-tensor-underlying-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose this equality with the quotient/homology comparison, homology of the termwise ordinary pushforward comparison, and homology of the right-derived unit. Use the equality between the inverse of a natural-isomorphism component and the component of its inverse. The remaining factors are precisely those in the defining formula. All constructions are valid for zero complexes and zero rings. Compose on the left with tilde(v) and use functoriality.",
+   "uses": [
+    "lem-pc-affine-tilde-pushforward-cohomology-normalization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-tilde-pushforward-cohomology-normalization",
+  "new-lem-pc-mixed-tensor-underlying-homology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G3",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/06Z0; https://stacks.math.columbia.edu/tag/0AVW",
+  "place": "Exact functor homology comparison and affine pushforward cohomology coordinates; parent proof step 2.",
+  "note": "Recovered reviewed D4 proof with current displayed category instance bridges; no sorry. Composite comparison proof is reused from MixedTensorUnderlyingHomology."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact homology comparison for a composite of restriction of scalars and affine tilde equals the composite of the two homology comparisons",
+   "results": "Eight hits, including ModuleCat.restrictScalarsComp'App_hom_naturality and restriction homology comparisons, but no complete normalization identity.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.mapHomologyIso",
+   "results": "No hits: unknown unqualified identifier. The fully qualified API was read directly in Mathlib.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso.*comp|mapHomologyIso_inv_naturality",
+   "results": "ShortComplex.mapHomologyIso_inv_naturality in Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, line 627; no composite normalization theorem.",
+   "date": "2026-10-14",
+   "verdict": "Generic naturality is available; the displayed normalization remains a separate step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homology comparison for composite exact functors equals composition of homology comparisons",
+   "results": "Service unavailable: Internal Server Error (msearch 2026-10-14).",
+   "date": "2026-10-14",
+   "verdict": "Unavailable; no conclusion from this service."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical homology isomorphism of composed exact functors and natural transformations on cochain complexes",
+   "results": "Second reading: eight infrastructure hits (derived/homotopy localization factors and homology functors); no affine pushforward normalization formula. Read the exact-functor component formula and short-complex naturality APIs directly.",
+   "date": "2026-10-14",
+   "verdict": "Reuse existing naturality; retain the proved affine specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologyIso\"",
+   "results": "Second reading: canonical comparisons, left/right data formulas and hom/inv naturality returned. No composite formula in these results; reuse the library forward-composition theorem.",
+   "date": "2026-10-14",
+   "verdict": "No replacement for the affine formula."
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*[Cc]ompos|[Cc]ompos.*homology|homologyMap_mapNatTrans",
+   "results": "Second reading: Mathlib ShortComplex.homologyMap_mapNatTrans and direct reading of PreservesHomology.lean confirm the natural-transformation calculation. Separate rg searches of lean/Sheaf and lean/WeilConjectures found the existing private forward composition API in MixedTensorUnderlyingHomology (now exposed), also a private copy in FlatIteratedScalarExtensionHomologySquare, and no existing affine specialization.",
+   "date": "2026-10-14",
+   "verdict": "Shared composition API reused; no copied generic proof added."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineTildeDerivedTensorHomologyCoordinates",
+  "date": "2026-10-14",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Parent homology coordinates, proof step 2: the residual normalized pushforward factor",
+   "via": [
+    "lem-pc-affine-tilde-derived-tensor-homology-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineTildePushforwardHomologyFactorization",
+  "file": "lean/Sheaf/Algebra/Homology/AffineTildePushforwardHomologyFactorization.lean",
+  "declaration": "AlgebraicGeometry.affineTildePushforwardHomologyFactorization",
+  "declarations": [
+   "AlgebraicGeometry.affineTildePushforwardHomologyFactorization",
+   "AlgebraicGeometry.mapHomologyIso_inv_comp"
+  ],
+  "statement": "theorem affineTildePushforwardHomologyFactorization\n    (D B : Type u) [CommRing D] [CommRing B] (ψ : B →+* D)\n    [(affineTildeFunctor D ⋙\n      Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom ψ))).PreservesZeroMorphisms]\n    (Cg : CochainComplex (ModuleCat.{u} D) ℤ) (i : ℤ)\n    (S : ModuleCat.{u} B)\n    (v : S ⟶ (ModuleCat.restrictScalars ψ).obj (Cg.homology i)) :\n    let T := affineTildeFunctor B\n    let _ : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor\n    let _ : T.PreservesHomology := tilde_preservesHomology B\n    let H := DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i\n    let σ := affineTildePushforwardComparison D B ψ\n    let a := (σ.hom.mapHomologicalComplex\n      (.up ℤ)).app Cg\n    let β := (RingedSpace.moduleDirectImage\n      (Spec.map (CommRingCat.ofHom ψ)).toLRSHom.toShHom).rightDerivedFunctorUnit.app\n        ((HomotopyCategory.quotient _ (.up ℤ)).obj\n          (((affineTildeFunctor D).mapHomologicalComplex (.up ℤ)).obj Cg))\n    T.map (v ≫ ((Cg.sc i).mapHomologyIso (ModuleCat.restrictScalars ψ)).inv) ≫\n        (((((ModuleCat.restrictScalars ψ).mapHomologicalComplex\n          (.up ℤ)).obj Cg).sc i).mapHomologyIso T).inv ≫\n        (DerivedCategory.homologyFunctorFactors _ i).inv.app\n          ((T.mapHomologicalComplex (.up ℤ)).obj\n            (((ModuleCat.restrictScalars ψ).mapHomologicalComplex (.up ℤ)).obj Cg)) ≫\n        H.map (DerivedCategory.Q.map a) ≫ H.map β =\n    T.map v ≫ affineTildePushforwardCohomologyMap D B ψ Cg i",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-2d9a0",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261014T141504-L-226067",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-2d9a0",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261014T141504-L-226067",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG records, report, and change record matched the stated item; all four modules and direct importers compiled successfully with no mechanical, proof, interface, or forced-adaptation violations."
+ }
+}

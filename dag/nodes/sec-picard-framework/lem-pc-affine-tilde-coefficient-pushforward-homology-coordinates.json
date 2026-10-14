@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-affine-tilde-coefficient-pushforward-homology-coordinates",
+ "kind": "statement",
+ "title": "Ordinary coefficient maps in normalized affine pushforward coordinates",
+ "statement": "Let R,A,B,D be commutative rings, with R-algebra structures on A and B and an (A tensor_R B)-algebra structure on D. Assume derived categories of R-modules, B-modules, and sheaves of modules on every scheme exist. Let M be an arbitrary unbounded complex of A-modules and m a BaseDerivedTensorCohomologyModel R A B M D [def-pc-base-derived-tensor-cohomology-model]. Let phi:A→D and psi:B→D be the restrictions of the algebra map A tensor_R B→D along the left and right tensor inclusions, with fixed witnesses hphi:alpha composed with the left tensor inclusion equals phi and hpsi:alpha composed with the right tensor inclusion equals psi. Let alpha be the tensor-algebra map, j the right tensor inclusion, C extension of M along alpha restricted to A, and Cg extension along phi. Put cE=m.comparison(i) followed by H^i(m.ordinaryToLocalized) and the forward exact alpha-restriction homology comparison, rho the scalar-restriction composition isomorphism, s=res_j(cE) followed by rho.inv on H^i(C), and z0 the homology of equality transport C=Cg. Let V be the termwise psi-restriction of Cg. The tilde of res_j(m.comparison i) followed by res_j(H^i(m.ordinaryToLocalized) followed by the forward exact alpha-restriction comparison), rho.inv, res_psi(z0), and the inverse psi-restriction homology comparison, followed by the inverse exact tilde homology comparison on V, inverse Q/homology comparison, homology of the termwise affine pushforward comparison, and homology of the right-derived unit, equals tilde(s) followed by tilde(res_psi(z0)) followed by affineTildePushforwardCohomologyMap. This is a statement only about ordinary coefficient homology maps and pushforward normalization; it does not use m.counit, m.derived, or m.cohomologyIso.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06Z0; https://stacks.math.columbia.edu/tag/0AVW",
+  "place": "Exact functor homology comparison and affine pushforward cohomology coordinates; parent proof step 2."
+ },
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-affine-tilde-pushforward-cohomology-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Apply affineTildePushforwardHomologyFactorization to v=s followed by restriction of z0. Expand s and cE, distribute restriction and tilde over composition, and reassociate. This is the residual normalization of parent step 2, after its derived counit and coefficient homology calculations.",
+   "uses": [
+    "lem-pc-affine-tilde-pushforward-homology-factorization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-tilde-pushforward-homology-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G3",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/06Z0; https://stacks.math.columbia.edu/tag/0AVW",
+  "place": "Exact functor homology comparison and affine pushforward cohomology coordinates; parent proof step 2.",
+  "note": "Recovered reviewed D4 proof with current displayed category instance bridges; no sorry. Composite comparison proof is reused from MixedTensorUnderlyingHomology."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact homology comparison for a composite of restriction of scalars and affine tilde equals the composite of the two homology comparisons",
+   "results": "Eight hits, including ModuleCat.restrictScalarsComp'App_hom_naturality and restriction homology comparisons, but no complete normalization identity.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.mapHomologyIso",
+   "results": "No hits: unknown unqualified identifier. The fully qualified API was read directly in Mathlib.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso.*comp|mapHomologyIso_inv_naturality",
+   "results": "ShortComplex.mapHomologyIso_inv_naturality in Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, line 627; no composite normalization theorem.",
+   "date": "2026-10-14",
+   "verdict": "Generic naturality is available; the displayed normalization remains a separate step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homology comparison for composite exact functors equals composition of homology comparisons",
+   "results": "Service unavailable: Internal Server Error (msearch 2026-10-14).",
+   "date": "2026-10-14",
+   "verdict": "Unavailable; no conclusion from this service."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical homology isomorphism of composed exact functors and natural transformations on cochain complexes",
+   "results": "Second reading: eight infrastructure hits (derived/homotopy localization factors and homology functors); no affine pushforward normalization formula. Read the exact-functor component formula and short-complex naturality APIs directly.",
+   "date": "2026-10-14",
+   "verdict": "Reuse existing naturality; retain the proved affine specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologyIso\"",
+   "results": "Second reading: canonical comparisons, left/right data formulas and hom/inv naturality returned. No composite formula in these results; reuse the library forward-composition theorem.",
+   "date": "2026-10-14",
+   "verdict": "No replacement for the affine formula."
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*[Cc]ompos|[Cc]ompos.*homology|homologyMap_mapNatTrans",
+   "results": "Second reading: Mathlib ShortComplex.homologyMap_mapNatTrans and direct reading of PreservesHomology.lean confirm the natural-transformation calculation. Separate rg searches of lean/Sheaf and lean/WeilConjectures found the existing private forward composition API in MixedTensorUnderlyingHomology (now exposed), also a private copy in FlatIteratedScalarExtensionHomologySquare, and no existing affine specialization.",
+   "date": "2026-10-14",
+   "verdict": "Shared composition API reused; no copied generic proof added."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineTildeDerivedTensorHomologyCoordinates",
+  "date": "2026-10-14",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Parent homology coordinates, proof step 2: the residual normalized pushforward factor",
+   "via": [
+    "lem-pc-affine-tilde-derived-tensor-homology-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineTildeCoefficientPushforwardHomologyCoordinates",
+  "file": "lean/Sheaf/Algebra/Homology/AffineTildeCoefficientPushforwardHomologyCoordinates.lean",
+  "declaration": "AlgebraicGeometry.affineTildeCoefficientPushforwardHomologyCoordinates",
+  "statement": "theorem affineTildeCoefficientPushforwardHomologyCoordinates\n    (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]\n    [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) D]\n    [HasDerivedCategory.{wM} (ModuleCat.{u} R)]\n    [HasDerivedCategory.{wM} (ModuleCat.{u} B)]\n    (M : CochainComplex (ModuleCat.{u} A) ℤ)\n    (m : ModuleCat.BaseDerivedTensorCohomologyModel R A B M D)\n    (φ : A →+* D) (ψ : B →+* D)\n    (hφ : (algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B)) = φ)\n    (hψ : (algebraMap (A ⊗[R] B) D).comp\n      Algebra.TensorProduct.includeRight.toRingHom = ψ) (i : ℤ) :\n    let α := algebraMap (A ⊗[R] B) D\n    let j : B →+* A ⊗[R] B := Algebra.TensorProduct.includeRight.toRingHom\n    let T := affineTildeFunctor B\n    let H := DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i\n    let C := (((ModuleCat.extendScalars (α.comp\n      (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex (.up ℤ)).obj M)\n    let Cg := ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M\n    let ρ := ModuleCat.restrictScalarsComp' j α ψ hψ.symm\n    let z₀ := (HomologicalComplex.homologyFunctor (ModuleCat.{u} D) (.up ℤ) i).map\n      (eqToHom (by dsimp only [C, α]; rw [hφ] : C = Cg))\n    let V := ((ModuleCat.restrictScalars ψ).mapHomologicalComplex (.up ℤ)).obj Cg\n    let _ : (affineTildeFunctor B).Additive :=\n      instAdditiveModuleCatCarrierModulesSpecOfFunctor\n    let _ : (affineTildeFunctor B).PreservesHomology := tilde_preservesHomology B\n    let _ : (affineTildeFunctor D).Additive :=\n      instAdditiveModuleCatCarrierModulesSpecOfFunctor\n    let P := Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom ψ))\n    let _ : P.Additive := inferInstance\n    let _ : (affineTildeFunctor D ⋙ P).PreservesZeroMorphisms :=\n      ⟨fun _ _ ↦ by\n        rw [Functor.comp_map, (affineTildeFunctor D).map_zero]\n        exact P.map_zero _ _⟩\n    let a := ((affineTildePushforwardComparison D B ψ).hom.mapHomologicalComplex\n      (.up ℤ)).app Cg\n    let β := (RingedSpace.moduleDirectImage\n      (Spec.map (CommRingCat.ofHom ψ)).toLRSHom.toShHom).rightDerivedFunctorUnit.app\n        ((HomotopyCategory.quotient _ (.up ℤ)).obj\n          (((affineTildeFunctor D).mapHomologicalComplex (.up ℤ)).obj Cg))\n    T.map ((ModuleCat.restrictScalars j).map (m.comparison i) ≫\n        (ModuleCat.restrictScalars j).map\n          (HomologicalComplex.homologyMap m.ordinaryToLocalized i ≫\n            ((C.sc i).mapHomologyIso (ModuleCat.restrictScalars α)).hom) ≫\n        ρ.inv.app (C.homology i) ≫ (ModuleCat.restrictScalars ψ).map z₀ ≫\n        ((Cg.sc i).mapHomologyIso (ModuleCat.restrictScalars ψ)).inv) ≫\n      ((V.sc i).mapHomologyIso (affineTildeFunctor B)).inv ≫\n      (DerivedCategory.homologyFunctorFactors _ i).inv.app\n        (((affineTildeFunctor B).mapHomologicalComplex (.up ℤ)).obj V) ≫\n      H.map (DerivedCategory.Q.map a) ≫ H.map β =\n      T.map ((ModuleCat.restrictScalars j).map (m.comparison i)) ≫\n      T.map ((ModuleCat.restrictScalars j).map\n        (HomologicalComplex.homologyMap m.ordinaryToLocalized i)) ≫\n      T.map ((ModuleCat.restrictScalars j).map\n        ((C.sc i).mapHomologyIso (ModuleCat.restrictScalars α)).hom) ≫\n      T.map (ρ.inv.app (C.homology i)) ≫\n      T.map ((ModuleCat.restrictScalars ψ).map z₀) ≫\n        affineTildePushforwardCohomologyMap D B ψ Cg i",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-2d9a0",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261014T141504-L-226067",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-2d9a0",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261014T141504-L-226067",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG records, report, and change record matched the stated item; all four modules and direct importers compiled successfully with no mechanical, proof, interface, or forced-adaptation violations."
+ }
+}

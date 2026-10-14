@@ -265,7 +265,7 @@ private theorem iteratedHomologyData_comparison
     ShortComplex.LeftHomologyData.homologyπ_comp_homologyIso_hom, hc]
   rfl
 
-private theorem mapHomologyIso_hom_comp
+theorem mapHomologyIso_hom_comp
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Limits.HasZeroMorphisms C] [Limits.HasZeroMorphisms D] [Limits.HasZeroMorphisms E]
     (S : ShortComplex C) [S.HasHomology]

@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Expand kappa and r. Naturality of the exact-tilde derived homology iso moves m.counit to module homology. At the ordinary extension complex use its Q/homology formula, and substitute m.comparison_eq for the counit followed by m.ordinaryIso.",
+   "text": "Use the kernel-checked source and raw-arrow defining equations to express kappa as tilde of m.cohomologyIso followed by exact-derived homology comparison, and r as exact-derived tilde of the module-model counit, the Q factor, and the ordinary target map. Exact-derived homology naturality moves the counit to module homology. Use the Q/homology formula at the ordinary extension complex.",
    "uses": [
     "def-pc-base-derived-tensor-cohomology-model",
     "def-pc-affine-base-change-tilde-coordinates"
@@ -22,10 +22,12 @@
    "elementary": false
   },
   {
-   "text": "Apply homology to the remaining complex coefficient factors. Exact-restriction naturality and compatibility with composition cancel the intermediate homology comparisons; homology of the scalar comparison is rho.inv, and homology of equality transport is z0. Exact-tilde naturality moves these factors past its homology comparison. The residual Q/homology comparison, termwise affine pushforward comparison and right-derived unit are exactly the explicit affineTildePushforwardCohomologyMap. Reassociate.",
+   "text": "Ordinary complex homology naturality moves the coefficient chain map across exact tilde. Rewrite the homotopy homology factor as the complex factor and substitute m.comparison_eq. The private coefficientHomology calculation uses restriction naturality, the shared inverse composite comparison from affineTildePushforwardHomologyFactorization, and ShortComplex.homologyMap_mapNatTrans for the scalar natural isomorphism. Homology of the equality transport is z0. Apply the proved affineTildeCoefficientPushforwardHomologyCoordinates for the remaining ordinary pushforward map and derived unit; distribute functors and reassociate.",
    "uses": [
     "lem-pc-affine-tilde-derived-tensor-mate",
-    "lem-pc-affine-tilde-pushforward-cohomology-normalization"
+    "lem-pc-affine-tilde-pushforward-cohomology-normalization",
+    "lem-pc-affine-tilde-coefficient-pushforward-homology-coordinates",
+    "lem-pc-affine-tilde-pushforward-homology-factorization"
    ],
    "elementary": false
   }
@@ -33,16 +35,18 @@
  "proof_deps": [
   "def-pc-affine-base-change-tilde-coordinates",
   "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-affine-tilde-coefficient-pushforward-homology-coordinates",
   "lem-pc-affine-tilde-derived-tensor-mate",
-  "lem-pc-affine-tilde-pushforward-cohomology-normalization"
+  "lem-pc-affine-tilde-pushforward-cohomology-normalization",
+  "lem-pc-affine-tilde-pushforward-homology-factorization"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "N4",
+  "group": "G3",
   "date": "2026-10-14",
-  "document": "Stacks Project, Tags 0DJ8, 06Y6, 08HY and 06Z0",
-  "place": "Affine computation and exact homology comparison",
-  "note": "Separates the derived-category mate calculation from taking homology in the parent argument."
+  "document": "https://stacks.math.columbia.edu/tag/06Z0; https://stacks.math.columbia.edu/tag/0AVW",
+  "place": "Exact functor homology comparison and affine pushforward cohomology coordinates; parent proof step 2.",
+  "note": "Recovers the reviewed D4 proof, adapts its raw-arrow equation to H2, and uses one shared composite homology API. All generic naturality helpers remain proved and private in the parent. Both supporting modules are proved. No hole is added."
  },
  "mathlib_searches": [
   {
@@ -122,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N4",
+  "reviewer": "X-2d9a0",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261014T033108-L-604526",
+  "landing": "20261014T141504-L-226067",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files, DAG records, report, and change record matched the stated item; all four modules and direct importers compiled successfully with no mechanical, proof, interface, or forced-adaptation violations."
  }
 }
