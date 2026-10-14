@@ -1,6 +1,7 @@
 module
 
-public import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitPresentation
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 import Sheaf.Algebra.Homology.BoundedFlatReplacement
 
 @[expose] public section
@@ -29,6 +30,25 @@ theorem exists_flat_model_of_boundedAbove_model
       (∀ i : ℤ, SheafOfModules.IsFlat (K.X i)) ∧
       Nonempty (E ≅
         DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj K)) := by
-  sorry
+  obtain ⟨K, ⟨b, hb⟩, ⟨e⟩⟩ := h
+  let _ := hBM
+  let J := Opens.grothendieckTopology
+    (B.toRingedSpace.toPresheafedSpace.carrier)
+  let A := SheafOfModules.{u} (moduleRings B.toRingedSpace)
+  let P : ObjectProperty (CochainComplex A ℤ) :=
+    fun F => ∀ i : ℤ, b < i → IsZero (F.X i)
+  let R0 : CategoryTheory.Sheaf J CommRingCat :=
+    ⟨B.toRingedSpace.presheaf, B.toRingedSpace.IsSheaf⟩
+  obtain ⟨Q, ε, hQ⟩ := CochainComplex.exists_functorial_boundedAbove_flat_replacement
+    J R0 b
+  let F : P.FullSubcategory := ⟨K, hb⟩
+  let L := Q.obj F
+  let q := (HomotopyCategory.quotient A (.up ℤ)).map (ε.app F)
+  have hq : IsIso (DerivedCategory.Qh.map q) := by
+    exact (DerivedCategory.isIso_Q_map_iff_quasiIso A (ε.app F)).2 (hQ F).2.2.2
+  refine ⟨L, ⟨b, ?_⟩, (hQ F).1, ?_⟩
+  · intro i hi
+    exact (hQ F).2.1 i hi
+  · refine ⟨e.trans (asIso (DerivedCategory.Qh.map q)).symm⟩
 
 end AlgebraicGeometry
