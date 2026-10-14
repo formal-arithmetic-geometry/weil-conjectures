@@ -410,6 +410,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorMonodromy
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorPullback
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorUnits
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.UniversalCover
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.UniversalCoverConstruction
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.WeilGroup
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.WeilGroupDense
 public import WeilConjectures.AlgebraicGeometry.GenericFiber.CoordinateDimension
@@ -466,6 +467,8 @@ public import WeilConjectures.AlgebraicGeometry.HypercoverFreeResolution
 public import WeilConjectures.AlgebraicGeometry.IntermediateFieldLimit
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponentBase
+public import WeilConjectures.AlgebraicGeometry.Limits.AffineOverLimit
+public import WeilConjectures.AlgebraicGeometry.Limits.AffineOverLimitProperties
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Functoriality
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.RankOne
@@ -1742,6 +1745,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preser
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 public import WeilConjectures.Mathlib.CategoryTheory.Galois.IsFundamentalgroup
+public import WeilConjectures.Mathlib.CategoryTheory.Galois.PointedGaloisSmall
 public import WeilConjectures.Mathlib.CategoryTheory.Galois.Prorepresentability
 public import WeilConjectures.Mathlib.CategoryTheory.Generator.Abelian
 public import WeilConjectures.Mathlib.CategoryTheory.Generator.StrongGenerator
