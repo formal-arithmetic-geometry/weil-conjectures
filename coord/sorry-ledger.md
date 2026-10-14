@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **847**, closure **27**, holes in definitions **5**, definitions with undetermined data **2** (closure **0**).
+Holes now: library **845**, closure **25**, holes in definitions **5**, definitions with undetermined data **2** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -22,21 +22,21 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 | root | library | closure |
 |---|---:|---:|
 | Sheaf | 627 | 20 |
-| WeilConjectures | 220 | 7 |
+| WeilConjectures | 218 | 5 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2172 | 94 | 2078 | 4 | 1 |
-| 660345513 (Application of proof-dependency imports) | library | 2114 | 92 | 2022 | 4 | 1 |
-| 660345513 (Application of proof-dependency imports) | closure | 1978 | 20 | 1958 | 3 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 2174 | 94 | 2080 | 4 | 1 |
+| 660345513 (Application of proof-dependency imports) | library | 2116 | 92 | 2024 | 4 | 1 |
+| 660345513 (Application of proof-dependency imports) | closure | 1979 | 20 | 1959 | 3 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3349 |
+| proved | 3352 |
 | decomposed | 48 |
-| moved | 3883 |
+| moved | 3885 |
 | pruned | 118 |
 | other | 458 |
 
@@ -58,7 +58,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | D3 | 96 | 101 | 66 | 35 | 47/96 (49.0%) |
 | D4 | 50 | 45 | 41 | 4 | 25/50 (50.0%) |
 | E1 | 142 | 157 | 102 | 55 | 78/142 (54.9%) |
-| E2 | 106 | 104 | 81 | 23 | 56/106 (52.8%) |
+| E2 | 107 | 105 | 81 | 24 | 56/107 (52.3%) |
 | E3 | 104 | 99 | 85 | 14 | 56/104 (53.8%) |
 | E4 | 37 | 37 | 26 | 11 | 19/37 (51.4%) |
 | F1 | 134 | 135 | 103 | 32 | 69/134 (51.5%) |
@@ -88,20 +88,20 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | N1 | 132 | 134 | 108 | 26 | 74/132 (56.1%) |
 | N2 | 127 | 116 | 78 | 38 | 57/127 (44.9%) |
 | N3 | 86 | 81 | 65 | 16 | 45/86 (52.3%) |
-| N4 | 53 | 51 | 48 | 3 | 29/53 (54.7%) |
+| N4 | 54 | 52 | 48 | 4 | 29/54 (53.7%) |
 | P1 | 116 | 136 | 91 | 45 | 65/116 (56.0%) |
 | P2 | 129 | 121 | 79 | 42 | 54/129 (41.9%) |
 | P3 | 100 | 93 | 81 | 12 | 52/100 (52.0%) |
 | P4 | 51 | 47 | 39 | 8 | 26/51 (51.0%) |
-| Q1 | 103 | 104 | 74 | 30 | 54/103 (52.4%) |
+| Q1 | 104 | 105 | 74 | 31 | 54/104 (51.9%) |
 | Q2 | 103 | 106 | 79 | 27 | 52/103 (50.5%) |
-| Q3 | 98 | 97 | 66 | 31 | 44/98 (44.9%) |
+| Q3 | 99 | 98 | 68 | 30 | 45/99 (45.5%) |
 | Q4 | 46 | 49 | 26 | 23 | 20/46 (43.5%) |
 | R1 | 122 | 126 | 97 | 29 | 67/122 (54.9%) |
 | R2 | 120 | 120 | 75 | 45 | 52/120 (43.3%) |
 | R3 | 93 | 90 | 65 | 25 | 42/93 (45.2%) |
 | R4 | 55 | 46 | 41 | 5 | 26/55 (47.3%) |
-| S1 | 120 | 122 | 103 | 19 | 67/120 (55.8%) |
+| S1 | 121 | 123 | 104 | 19 | 68/121 (56.2%) |
 | S2 | 121 | 125 | 98 | 27 | 63/121 (52.1%) |
 | S3 | 102 | 97 | 63 | 34 | 48/102 (47.1%) |
 | S4 | 43 | 41 | 32 | 9 | 22/43 (51.2%) |
@@ -142,24 +142,24 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 |---|---:|---:|---|
 | WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty | 0 | 1 | ORCHESTRA |
 | WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine | 0 | 1 | ORCHESTRA |
-| WeilConjectures.ConstructibleSheaf.FinitePushforward | 3 | 2 | Q3 |
+| WeilConjectures.ConstructibleSheaf.FinitePushforward | 3 | 1 | Q3 |
+| Sheaf.AlgebraicGeometry.NormalConstantGenericUnit | 4 | 1 | X3 |
+| Sheaf.AlgebraicGeometry.NormalConstantOpenUnit | 4 | 1 | X3 |
 | Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic | 6 | 1 | X2 |
 | Sheaf.CategoryTheory.SiteSystemStrictificationData | 7 | 1 | M4 |
 | Sheaf.AlgebraicGeometry.BaseChangeClosedCoefficientRange | 8 | 1 | X2 |
-| Sheaf.AlgebraicGeometry.BaseChangeOpenInjectiveCoefficientZero | 8 | 1 | S1 |
 | Sheaf.AlgebraicGeometry.PicardDegreeSheafFpqc | 9 | 1 | M3 |
-| Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality | 10 | 1 | N1 |
+| Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality | 10 | 1 | J2 |
+| Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparison | 10 | 1 | J2 |
 | Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula | 20 | 1 | W4 |
-| WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula | 22 | 3 | Q1 |
+| WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula | 22 | 2 | F2 |
 | Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionsFactorization | 23 | 1 | N3 |
-| Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation | 24 | 1 | G4 |
-| Sheaf.Paper.ModuleCupEqualDerivedMapsClass | 27 | 1 | E2 |
+| Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation | 24 | 1 | P1 |
 | Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex | 28 | 1 | H4 |
-| Sheaf.AlgebraicGeometry.RelativeMVDirectImageRows | 29 | 1 | W3 |
-| Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate | 30 | 1 | N4 |
-| Sheaf.AlgebraicGeometry.ScalarCupModuleCupCompatibility | 30 | 1 | B2 |
-| Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealization | 33 | 1 | B2 |
-| Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchange | 34 | 1 | G4 |
+| Sheaf.AlgebraicGeometry.RelativeMVDirectImageRows | 29 | 1 | W4 |
+| Sheaf.AlgebraicGeometry.ScalarCupModuleCupCompatibility | 30 | 1 | W4 |
+| Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealization | 33 | 1 | W4 |
+| Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchange | 34 | 1 | P1 |
 
 Modules pruned since the imports baseline:
 
@@ -473,6 +473,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.RingTheory.DVRValuationRingCharacterization`
 - `Sheaf.RingTheory.DirectedUnionSubringsFlatModule`
 - `Sheaf.RingTheory.Etale.QuasiFiniteAtPrime`
+- `Sheaf.RingTheory.EtaleColimitNormalLocalDomain`
 - `Sheaf.RingTheory.EtaleFiniteFactorDecomposition`
 - `Sheaf.RingTheory.EtaleRetractionFiniteTypeSplitting`
 - `Sheaf.RingTheory.ExistsNegativeValuationOfTensorSurjective`
