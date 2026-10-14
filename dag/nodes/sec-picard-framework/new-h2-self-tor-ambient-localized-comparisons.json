@@ -1,0 +1,164 @@
+{
+ "id": "new-h2-self-tor-ambient-localized-comparisons",
+ "kind": "statement",
+ "title": "Ambient tensor homology coordinates for one localized comparison",
+ "statement": "Let $i:Z\\to Y$ be a closed immersion of schemes [def-weil-closed-immersion, def-pc-scheme] with the canonical derived category and tensor [def-pc-derived-category, def-pc-scheme-derived-tensor-structure], and $n\\geq0$. Put $B=i_*\\mathcal O_Z$ and $Q=H^{-n}(B[0]\\otimes^{\\mathbf L}B[0])$. For every affine $U$, let $A_U=\\Gamma(Y,U)$, $I_U=\\ker(i^\\sharp)(U)$, $P_U$ the chosen projective resolution of $A_U/I_U$, and $T_U=P_U\\otimes_{A_U}(A_U/I_U)$ [def-weil-pbc-module-chain-complex-homology]. There exist $A_U$-linear equivalences $d_U:H_n(T_U)\\simeq\\Gamma(U,Q)$ such that for every basic inclusion $V\\subseteq U$, there exist a quotient map $\\psi:A_U/I_U\\to A_V/I_V$, an augmented chain map $a:P_U\\to\\operatorname{Res}_{\\varphi}P_V$, and a tensor chain map $k:T_U\\to\\operatorname{Res}_{\\varphi}T_V$, where $\\varphi$ is ring restriction. They satisfy $\\psi\\circ\\mathrm{mk}_{I_U}=\\mathrm{mk}_{I_V}\\circ\\varphi$, $\\pi_Va_0=\\psi\\pi_U$, and $k_j(x\\otimes y)=a_j(x)\\otimes\\psi(y)$. For this one comparison, $\\operatorname{res}_{U,V}(d_U(x))=d_V(e(H_n(k)(x)))$ for every $x$, where $e$ is the exact restriction-of-scalars homology isomorphism. This statement makes no assertion about other lifts or about algebraic Tor coordinates.",
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Tag 08DX(2), lemma-quasi-coherence-tensor-product; Tags 06YG and 00LS(1), chosen local resolution comparison"
+ },
+ "proof": [
+  {
+   "text": "Identify the restricted closed structure sheaf with tilde(A/I), then sheafify the chosen projective resolution and augmentation.",
+   "uses": [
+    "lem-sc-affine-quotient-resolution-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend the sheafified resolution to nonpositive degrees. Its terms are flat, and bounded-above flat K-flatness makes the natural affine derived tensor computation applicable. Exactness of tilde and affine sections gives d_U on the chain homology H_n(T_U), without isoLeftDerivedObj or any Tor transport.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a basic inclusion localize the projective resolution. Exact localization preserving projectives and the projective comparison lift produce one a into the target chosen resolution. The induced quotient map gives psi and tensoring gives k with the stated pure tensor identity. Naturality of the K-flat derived tensor comparison and the affine section unit, together with mapHomologyIso for exact restriction of scalars, gives the equation for this chosen lift. No independence of lifts is used.",
+   "uses": [
+    "lem-weil-pbc-projective-resolution-lift",
+    "lem-pc-kflat-derived-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-kflat-derived-tensor-comparison",
+  "lem-sc-affine-quotient-resolution-sheafification",
+  "lem-weil-pbc-projective-resolution-lift"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "H2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Tag 08DX(2), lemma-quasi-coherence-tensor-product; Tags 06YG and 00LS(1), chosen local resolution comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Affine derived tensor homology sections computed by a localized projective resolution of a quotient",
+   "results": "CategoryTheory.Tor_obj; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor; CategoryTheory.Tor'; Algebra.tensorH1CotangentOfIsLocalization; Rep.Tor_obj; Rep.Tor; Rep.torIso",
+   "date": "2026-10-14",
+   "verdict": "supporting API only; no affine section comparison for localized resolutions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoLeftDerivedObj\"",
+   "results": "CategoryTheory.ProjectiveResolution.isoLeftDerivedObj; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc",
+   "date": "2026-10-14",
+   "verdict": "supporting API only; no affine section comparison for localized resolutions"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*tilde|tilde.*Tor",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-14",
+   "verdict": "supporting API only; no affine section comparison for localized resolutions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine sections of derived tensor homology computed by a localized quotient projective resolution",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfTorAmbientSectionCoordinates",
+  "date": "2026-10-14",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine self-Tor resolution comparison in the local Koszul computation, before ordinary tensor pullback to the closed subscheme",
+   "via": [
+    "new-a3-self-tor-ambient-section-coordinates",
+    "lem-pc-self-tor-ambient-resolution-charts",
+    "new-p4-self-tor-augmented-resolution-charts",
+    "new-q1-self-tor-chosen-resolution-charts",
+    "new-t2-self-tor-target-restriction-coordinates",
+    "new-t2-self-tor-target-basic-localization",
+    "new-u4-self-tor-basic-ideal-wedge-coordinates",
+    "new-e3-self-tor-ideal-wedge-coordinates",
+    "new-h3-self-tor-local-wedge-coordinates",
+    "new-e1-self-tor-nested-affine-coordinates",
+    "new-n1-self-tor-compatible-affine-maps",
+    "new-r4-self-tor-conormal-dual-chart-iso",
+    "lem-sc-self-tor-conormal-dual-chart",
+    "new-s3-koszul-conormal-nested-charts",
+    "new-w4-koszul-self-ext-local-alignment",
+    "new-s3-koszul-conormal-compatible-cover",
+    "lem-sc-koszul-self-ext-conormal-local-comparison",
+    "lem-sc-koszul-self-ext-conormal-comparison-surjection",
+    "lem-sc-koszul-self-ext-dual-exterior-conormal",
+    "lem-sc-koszul-self-ext-yoneda-surjection",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SelfTorAmbientLocalizedComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/SelfTorAmbientLocalizedComparisons.lean",
+  "declaration": "AlgebraicGeometry.exists_selfTor_ambient_localized_comparisons",
+  "statement": "theorem exists_selfTor_ambient_localized_comparisons\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (n : ℕ) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let Q :=\n      ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj\n          (S.obj B ⊗ S.obj B))\n    ∃ c : ∀ U : Y.affineOpens,\n        ((((tensorRight (ModuleCat.of (Γ(Y, U.1) : Type u)\n          ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U))).mapHomologicalComplex (.down ℕ)).obj\n            (projectiveResolution (ModuleCat.of (Γ(Y, U.1) : Type u)\n              ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U))).complex).homology n) ≃ₗ[Γ(Y, U.1)]\n              Q.val.obj (op U.1),\n      ∀ (V U : Y.affineOpens) (h : V.1 ≤ U.1)\n        (_hbasic : ∃ f : Γ(Y, U.1), Y.basicOpen f = V.1),\n          let A := (Γ(Y, U.1) : Type u)\n          let C := (Γ(Y, V.1) : Type u)\n          let I := i.ker.ideal U\n          let J := i.ker.ideal V\n          let φ := (Y.presheaf.map (homOfLE h).op).hom\n          let P := projectiveResolution (ModuleCat.of A (A ⧸ I))\n          let R := projectiveResolution (ModuleCat.of C (C ⧸ J))\n          let TA := (tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex\n            (.down ℕ)\n          let TC := (tensorRight (ModuleCat.of C (C ⧸ J))).mapHomologicalComplex\n            (.down ℕ)\n          ∃ (ψ : (A ⧸ I) →+* (C ⧸ J))\n            (a : P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n              (.down ℕ)).obj R.complex)\n            (k : TA.obj P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n              (.down ℕ)).obj (TC.obj R.complex)),\n            (∀ x : A, ψ (Ideal.Quotient.mk I x) = Ideal.Quotient.mk J (φ x)) ∧\n            (∀ x : P.complex.X 0, R.π.f 0 (a.f 0 x) = ψ (P.π.f 0 x)) ∧\n            (∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I),\n              k.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a.f j x) ⊗ₜ[C] (ψ y)) ∧\n            let e := ((TC.obj R.complex).sc n).mapHomologyIso\n              (ModuleCat.restrictScalars φ)\n          ∀ x, Q.val.map (homOfLE h).op (c U x) =\n            c V (e.hom (HomologicalComplex.homologyMap k n x))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261014T040540-L-999989",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261014T040540-L-999989",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
