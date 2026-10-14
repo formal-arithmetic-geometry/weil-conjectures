@@ -5,9 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactificationIndependence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
 
 /-!
 
@@ -24,22 +23,20 @@ v          v
 Y' --g---> Y
 ```
 
-recorded as `sq : IsPullback g' f' f g`, and compactifications `c : X ⟶[i] Z ⟶[p] Y` of `f` and
-`c'` of `f'`. This file deduces from the proper base change theorem
+recorded as `sq : IsPullback g' f' f g`. This file deduces from the proper base change theorem
 (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper`) and base change
 for extension by zero
-(`ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange`)
-that the compact-support base-change morphism
-
-`Ex_!^{c,c'} : Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c'}`
-
+(`ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange`) that,
 on the bounded constructible derived categories of `E`-sheaves, and of `ℚ̄_ℓ`-sheaves for the
-condensed ring `ℚ̲̄_ℓ = Profinite.padicAlgClRingObj ℓ`, is an isomorphism: first for
-`c' = c.baseChange sq`, then for arbitrary `c'` through the identification
-`Rf'_!^{c.baseChange sq} ≅ Rf'_!^{c'}`, and in particular for the lower shrieks
-`Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` of the chosen compactifications. No properness is imposed
-on `f` itself: the properness enters only through the structure morphism `p` of the
-compactification.
+condensed ring `ℚ̲̄_ℓ = Profinite.padicAlgClRingObj ℓ`, the compact-support base-change morphisms
+of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs`
+are isomorphisms:
+
+* `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.baseChange sq}` for any compactification `c` of `f`;
+* `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` for the lower shriek of the chosen compactifications.
+
+No properness is imposed on `f` itself: the properness enters only through the structure
+morphism `p` of a compactification `c : X ⟶[i] Z ⟶[p] Y` of `f`.
 
 As for the bounded constructible six functors
 (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`), all schemes are
@@ -48,27 +45,14 @@ morphisms are morphisms over `Spec k`. The compactification `Z` of `f` and its b
 `Z ×_Y Y'` are then separated and of finite type over `k` as well
 (`WeilConjectures.Compactification.Over`).
 
-## Main definitions
-
-- `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationBaseChange` and its
-  `_padicAlgCl` version: the compact-support base-change morphism `Ex_!^{c,c'}` for arbitrary
-  compactifications, the pasting into `c.baseChange sq` followed by the identification
-  `Rf'_!^{c.baseChange sq} ≅ Rf'_!^{c'}`
-  (`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso`, currently
-  `sorry`).
-- `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange` and its `_padicAlgCl`
-  version: the compact-support base-change morphism `Ex_!` for the chosen compactifications.
-
 ## Main statements
 
 - `ProEtale.CondensedRing.isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting`
-  and its `_padicAlgCl` version: the case `c' = c.baseChange sq`.
-- `ProEtale.CondensedRing.isIso_boundedConstructibleLowerShriekOfCompactificationBaseChange`
   and its `_padicAlgCl` version: the base change theorem for the compactly supported direct
-  image of bounded constructible `E`- and `ℚ̄_ℓ`-sheaves, for arbitrary compactifications `c`
-  of `f` and `c'` of `f'`.
+  image attached to a compactification `c` of `f` and its base change.
 - `ProEtale.CondensedRing.isIso_boundedConstructibleLowerShriekBaseChange` and its
-  `_padicAlgCl` version: the same for the lower shrieks of the chosen compactifications.
+  `_padicAlgCl` version: the base change theorem for the compactly supported direct image
+  `Rf_!`.
 
 -/
 
@@ -98,14 +82,15 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} [f.IsOver (Spec (.of k))]
   [g.IsOver (Spec (.of k))] [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
 
-/-! ### Into the base-changed compactification -/
+/-! ### For a compactification -/
 
 include ℓ k in
-/-- The compact-support base-change morphism into the base-changed compactification,
-`Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.baseChange sq}`, is an isomorphism of functors
-`Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`: in the defining pasting, the direct-image exchange is an isomorphism
-by proper base change for the proper structure morphism `p` of `c`, and the extension-by-zero
-exchange is an isomorphism by base change for extension by zero. -/
+/-- **The base change theorem for the compactly supported direct image attached to a
+compactification** of bounded constructible `E`-sheaves: for a compactification `c` of `f`, the
+compact-support base-change morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.baseChange sq}` is an
+isomorphism of functors `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`: in the defining pasting, the direct-image
+exchange is an isomorphism by proper base change for the proper structure morphism `p` of `c`,
+and the extension-by-zero exchange is an isomorphism by base change for extension by zero. -/
 theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
     (c : Compactification f) (sq : IsPullback g' f' f g) :
     IsIso (boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
@@ -114,9 +99,10 @@ theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
   rw [boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq]
   infer_instance
 
-/-- The compact-support base-change morphism into the base-changed compactification,
-`Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.baseChange sq}`, is an isomorphism of functors
-`Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y')⟦ℚ̲̄_ℓ⟧`. -/
+/-- **The base change theorem for the compactly supported direct image attached to a
+compactification** of bounded constructible `ℚ̄_ℓ`-sheaves: for a compactification `c` of `f`,
+the compact-support base-change morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.baseChange sq}` is
+an isomorphism of functors `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y')⟦ℚ̲̄_ℓ⟧`. -/
 theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_padicAlgCl
     (c : Compactification f) (sq : IsPullback g' f' f g) :
     IsIso (boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
@@ -126,43 +112,11 @@ theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
   rw [boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq]
   infer_instance
 
-/-! ### For arbitrary compactifications -/
-
-/-- The *compact-support base-change morphism* `Ex_!^{c,c'} : Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c'}`
-on bounded constructible `E`-sheaves, for a cartesian square `sq` and arbitrary compactifications
-`c` of `f` and `c'` of `f'`: the pasting
-`boundedConstructibleLowerShriekOfCompactificationBaseChangePasting` into the base-changed
-compactification `c.baseChange sq`, followed by the identification
-`boundedConstructibleLowerShriekOfCompactificationIso` of `Rf'_!^{c.baseChange sq}` with
-`Rf'_!^{c'}`. -/
-noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChange
-    (c : Compactification f) (c' : Compactification f') (sq : IsPullback g' f' f g) :
-    boundedConstructibleLowerShriekOfCompactification (Profinite.continuousMapRingObj E) ℓ k c ⋙
-      boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g ⟶
-      boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g' ⋙
-        boundedConstructibleLowerShriekOfCompactification
-          (Profinite.continuousMapRingObj E) ℓ k c' :=
-  boundedConstructibleLowerShriekOfCompactificationBaseChangeOfIso _ ℓ k c c' sq
-    (boundedConstructibleLowerShriekOfCompactificationIso ℓ E k (c.baseChange sq) c')
-
-/-- The *compact-support base-change morphism* `Ex_!^{c,c'} : Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c'}`
-on bounded constructible `ℚ̄_ℓ`-sheaves, for a cartesian square `sq` and arbitrary
-compactifications `c` of `f` and `c'` of `f'`: the pasting into the base-changed
-compactification followed by the identification
-`boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl`. -/
-noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChange_padicAlgCl
-    (c : Compactification f) (c' : Compactification f') (sq : IsPullback g' f' f g) :
-    boundedConstructibleLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ k c ⋙
-      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k g ⟶
-      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k g' ⋙
-        boundedConstructibleLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ k c' :=
-  boundedConstructibleLowerShriekOfCompactificationBaseChangeOfIso _ ℓ k c c' sq
-    (boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl ℓ k (c.baseChange sq) c')
+/-! ### For the lower shriek -/
 
 include ℓ k in
 /-- **The base change theorem for the compactly supported direct image** of bounded
-constructible `E`-sheaves, `E` a finite extension of `ℚ_ℓ`, for arbitrary compactifications:
-for a cartesian square of schemes
+constructible `E`-sheaves, `E` a finite extension of `ℚ_ℓ`: for a cartesian square of schemes
 
 ```
 X' --g'--> X
@@ -172,74 +126,26 @@ v          v
 Y' --g---> Y
 ```
 
-and compactifications `c` of `f` and `c'` of `f'`, the compact-support base-change morphism
-`Ex_!^{c,c'} : Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c'}` is an isomorphism of functors
-`Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`. -/
-theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChange
-    (c : Compactification f) (c' : Compactification f') (sq : IsPullback g' f' f g) :
-    IsIso (boundedConstructibleLowerShriekOfCompactificationBaseChange ℓ E k c c' sq) := by
-  have := isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting ℓ E k c sq
-  dsimp only [boundedConstructibleLowerShriekOfCompactificationBaseChange,
-    boundedConstructibleLowerShriekOfCompactificationBaseChangeOfIso]
-  infer_instance
-
-/-- **The base change theorem for the compactly supported direct image** of bounded
-constructible `ℚ̄_ℓ`-sheaves, for arbitrary compactifications: for a cartesian square of schemes
-`sq : IsPullback g' f' f g` and compactifications `c` of `f` and `c'` of `f'`, the
-compact-support base-change morphism `Ex_!^{c,c'} : Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c'}` is an
-isomorphism of functors `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y')⟦ℚ̲̄_ℓ⟧`. -/
-theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChange_padicAlgCl
-    (c : Compactification f) (c' : Compactification f') (sq : IsPullback g' f' f g) :
-    IsIso (boundedConstructibleLowerShriekOfCompactificationBaseChange_padicAlgCl ℓ k c c' sq) := by
-  have := isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_padicAlgCl
-    ℓ k c sq
-  dsimp only [boundedConstructibleLowerShriekOfCompactificationBaseChange_padicAlgCl,
-    boundedConstructibleLowerShriekOfCompactificationBaseChangeOfIso]
-  infer_instance
-
-/-! ### For the chosen compactifications -/
-
-/-- The *compact-support base-change morphism* `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` on bounded
-constructible `E`-sheaves for a cartesian square `sq`, with the lower shrieks
-`boundedConstructibleLowerShriek` for the chosen compactifications
-`compactificationOverField k f` of `f` and `compactificationOverField k f'` of `f'`. -/
-noncomputable def boundedConstructibleLowerShriekBaseChange (sq : IsPullback g' f' f g) :
-    boundedConstructibleLowerShriek (Profinite.continuousMapRingObj E) ℓ k f ⋙
-      boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g ⟶
-      boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g' ⋙
-        boundedConstructibleLowerShriek (Profinite.continuousMapRingObj E) ℓ k f' :=
-  boundedConstructibleLowerShriekOfCompactificationBaseChange ℓ E k
-    (compactificationOverField k f) (compactificationOverField k f') sq
-
-/-- The *compact-support base-change morphism* `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` on bounded
-constructible `ℚ̄_ℓ`-sheaves for a cartesian square `sq`, with the lower shrieks
-`boundedConstructibleLowerShriek` for the chosen compactifications. -/
-noncomputable def boundedConstructibleLowerShriekBaseChange_padicAlgCl
-    (sq : IsPullback g' f' f g) :
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ k f ⋙
-      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k g ⟶
-      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k g' ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ k f' :=
-  boundedConstructibleLowerShriekOfCompactificationBaseChange_padicAlgCl ℓ k
-    (compactificationOverField k f) (compactificationOverField k f') sq
-
-include ℓ k in
-/-- **The base change theorem for the compactly supported direct image** of bounded
-constructible `E`-sheaves: for a cartesian square of schemes `sq : IsPullback g' f' f g`, the
-compact-support base-change morphism `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` is an isomorphism of
-functors `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`, where `Rf_!` and `Rf'_!` are the lower shrieks for the
-chosen compactifications. -/
+the compact-support base-change morphism `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` is an
+isomorphism of functors `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`, where `Rf_!` and `Rf'_!` are the lower
+shrieks `boundedConstructibleLowerShriek`. -/
 theorem isIso_boundedConstructibleLowerShriekBaseChange (sq : IsPullback g' f' f g) :
-    IsIso (boundedConstructibleLowerShriekBaseChange ℓ E k sq) :=
-  isIso_boundedConstructibleLowerShriekOfCompactificationBaseChange ℓ E k _ _ sq
+    IsIso (boundedConstructibleLowerShriekBaseChange ℓ E k sq) := by
+  have := isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting ℓ E k
+    (compactificationOverField k f) sq
+  rw [boundedConstructibleLowerShriekBaseChange_eq]
+  infer_instance
 
 /-- **The base change theorem for the compactly supported direct image** of bounded
 constructible `ℚ̄_ℓ`-sheaves: for a cartesian square of schemes `sq : IsPullback g' f' f g`, the
 compact-support base-change morphism `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` is an isomorphism of
-functors `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y')⟦ℚ̲̄_ℓ⟧`, where `Rf_!` and `Rf'_!` are the lower shrieks for the
-chosen compactifications. -/
+functors `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y')⟦ℚ̲̄_ℓ⟧`, where `Rf_!` and `Rf'_!` are the lower shrieks
+`boundedConstructibleLowerShriek`. -/
 theorem isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl (sq : IsPullback g' f' f g) :
-    IsIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ k sq) :=
-  isIso_boundedConstructibleLowerShriekOfCompactificationBaseChange_padicAlgCl ℓ k _ _ sq
+    IsIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ k sq) := by
+  have := isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_padicAlgCl ℓ k
+    (compactificationOverField k f) sq
+  rw [boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq]
+  infer_instance
 
 end AlgebraicGeometry.ProEtale.CondensedRing
