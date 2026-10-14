@@ -32,9 +32,69 @@
   "def-weil-sheaf-of-modules-category",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P=f_*I$ and forget its scalar action. For a covering $\\mathcal V=\\{V_j\\to V\\}$ of $\\mathcal C$, continuity of $u$ carries it to the covering $u\\mathcal V=\\{u(V_j)\\to u(V)\\}$ of $\\mathcal D$. Its covering-base-change comparison identifies $u(V_{j_0}\\times_V\\cdots\\times_VV_{j_p})$ with $u(V_{j_0})\\times_{u(V)}\\cdots\\times_{u(V)}u(V_{j_p})$ by induction on $p$. The isomorphisms preserve each tuple projection, since each comparison is characterized by its projections. Apply the contravariant restriction maps of $I$ to these comparisons, component by component, and take products. This gives an isomorphism $\\check C^\\bullet(\\mathcal V,P_{ab})\\cong\\check C^\\bullet(u\\mathcal V,I_{ab})$: both differentials are the same alternating sum of restrictions along the projections omitting one index. The ring map $\\rho$ only supplies the scalar action on $P$ and does not enter this additive complex.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 072Z, label lemma-direct-image-injective-sheaf, second paragraph of proof; continuity is Sites Tag 00WV"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-site-injective-module-cech-acyclic] to $I$ and $u\\mathcal V$. The site axioms and common universe are precisely its precoverage and size hypotheses. In the usual abelian sheaf categories on these small sites, sheafification is the exact sheafification of [lem-weil-pbc-sheafification-exact]; and [lem-weil-pbc-site-sheafification-iso-locally-bijective] states that a presheaf map is inverted by abelian sheafification exactly when it is locally injective and locally surjective. This is precisely the WEqualsLocallyBijective condition; thus both sheafification hypotheses are supplied by cited statements. Hence $\\check H^p(u\\mathcal V,I_{ab})=0$ for $p>0$, and the complex isomorphism of step 1 gives $\\check H^p(\\mathcal V,P_{ab})=0$ for every covering $\\mathcal V$ and $p>0$.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-site-sheafification-iso-locally-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FC, label lemma-injective-module-trivial-cech; Tag 072Z, proof"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-site-cech-vanishing-criterion] on $\\mathcal C$ with $\\mathcal B=\\operatorname{Ob}(\\mathcal C)$ and $\\mathrm{Cov}=\\operatorname{Cov}(\\mathcal C)$. Condition (1) holds because every covering intersection is an object of the site; condition (2) holds because each covering refines itself by the identity arrows; condition (3) is step 2. It follows that $H^q(U,P_{ab})=0$ for every $U$ and $q>0$.",
+   "uses": [
+    "lem-weil-pbc-site-cech-vanishing-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F9, label lemma-cech-vanish-collection; Tag 072Z, final sentence of proof"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] to the $\\mathcal O_{\\mathcal C}$-module $P=f_*I$. The common universe and enough-injectives hypotheses are those of the item. Its comparison gives $R^q\\Gamma(U,-)(f_*I)\\cong H^q(U,P_{ab})=0$ for every $q>0$, proving the required module-category derived vanishing. No step uses exactness of extension of scalars or claims that $f_*I$ is injective, so no flatness of $\\rho$ is needed.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD, label lemma-cohomology-modules-abelian-agree, second equality; Tag 0731, label lemma-limp-acyclic (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-cech-complex",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-site-cech-vanishing-criterion",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 072Z proof for a morphism induced by a continuous functor, using 03FC and 03F9, followed by 03FD for module-category evaluation"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -91,15 +151,58 @@
    "results": "{\"t\": \"2026-10-14T12:02:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRightAcyclic\\\", \\\"pushforward\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image injective modules on ringed sites is acyclic for object evaluation without flatness",
+   "results": "{\"t\": \"2026-10-14T12:17:27Z\", \"tool\": \"leanfinder\", \"query\": \"Direct image injective modules on ringed sites is acyclic for object evaluation without flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKInjective_of_injective\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"PresheafOfModules.instIsLocallyInjectiveToSheafify\", \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"SheafOfModules.instAbelian\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"PresheafOfModules.IsLocallyInjective\", \"CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex\"], \"digest\": \"4d092ad03ba0502c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: derived vanishing on injective objects does not imply injectivity or acyclicity of their module pushforwards"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward of injective sheaves of modules has vanishing higher cohomology on all objects of the target site",
+   "results": "{\"t\": \"2026-10-14T12:17:43Z\", \"tool\": \"leanfinder\", \"query\": \"Pushforward of injective sheaves of modules has vanishing higher cohomology on all objects of the target site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKInjective_of_injective\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"PresheafOfModules.instIsLocallyInjectiveToSheafify\", \"CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CategoryTheory.Sheaf.isLocallyInjective_sheafToPresheaf_map_iff\"], \"digest\": \"73ac4e8e52d5ce63\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: derived vanishing on injective objects does not imply injectivity or acyclicity of their module pushforwards"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, CategoryTheory.Functor.rightDerived",
+   "results": "{\"t\": \"2026-10-14T12:17:43Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pushforward, CategoryTheory.Functor.rightDerived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: derived vanishing on injective objects does not imply injectivity or acyclicity of their module pushforwards"
+  },
+  {
+   "tool": "grep",
+   "query": "(pushforward|directImage).*(acyclic|injective)|(acyclic|injective).*(pushforward|directImage)",
+   "results": "{\"t\": \"2026-10-14T12:17:26Z\", \"tool\": \"grep\", \"query\": \"(pushforward|directImage).*(acyclic|injective)|(acyclic|injective).*(pushforward|directImage)\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: derived vanishing on injective objects does not imply injectivity or acyclicity of their module pushforwards"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-ringed-site-cech-refinement-square",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ringed-site-direct-image-injective-evaluation-acyclic",
+  "worker": "stage1",
+  "summary": "Kept the statement, proved pushforward Cech acyclicity by the continuous functor covering/base-change comparisons, reused the existing injective-module Cech vanishing and general-site vanishing criterion, and introduced only the generic 03FD comparison from module to abelian evaluation cohomology. No flatness or abelian injectivity is used.",
+  "blueprint": "Classical torsion constructibility input: 0GKW final sentence invokes 0GKV for prime constant coefficients. Expanded by 0GKV case (b): f_* O_X = O_S and R^1 f_* O_X is finite locally free. Etale form: compatibility of 03P2 comparison with restriction between etale base objects and with scalar multiplication. The naturality comparison is checked after refining the pulled-back affine open cover.; resolution normalization: direct-image replacement has the same global-section cohomology."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-03c06ea06",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-03c06ea06 (reviewer sub-agent of L); spot-checked: Mathematics passes after checking all four steps against Stacks 072Z, 03FC, 03F9, and 03FD, coefficient categories, hypotheses, edge cases, duplicates, route, and archived master targets. Completed the new node’s metadata in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison.json. Full findings are in review.md; statements are unchanged.; 1 file(s) fixed by the reviewer"
+ }
 }
