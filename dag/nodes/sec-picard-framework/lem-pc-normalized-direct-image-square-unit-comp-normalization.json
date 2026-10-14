@@ -6,7 +6,8 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-derived-category",
-  "def-pc-derived-direct-image"
+  "def-pc-derived-direct-image",
+  "lem-pc-ringed-spaces-derived-direct-image-composition"
  ],
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
@@ -14,51 +15,71 @@
  },
  "proof": [
   {
-   "text": "Apply the determining equation for the chosen ringed-space comparison. For the component of the generic pasted right-derived unit, represent the homotopy-category object by a complex, simplify the composition-unit formula, and use the identity comparison equation to reduce the comparison inverse to the identity. This identifies the fixed scheme comparison unit with the ringed-space unit equation.",
-   "uses": "lem-pc-ringed-spaces-derived-direct-image-composition",
-   "elementary": false
+   "text": "Set f=s.toLRSHom.toShHom and g=t.toLRSHom.toShHom. Use the full recorded statement of lem-pc-ringed-spaces-derived-direct-image-composition (AlgebraicGeometry.RingedSpace.exists_derivedModuleDirectImageComposition), not the bare Nonempty scheme composition theorem. It asserts existence of e: Rf_* followed by Rg_* is isomorphic to R(g o f)_*, together with, for every homotopy-category object K, eta_(g o f)(K);e.inv(Qh K)=eta_g(f_*^h K);Rg_*(eta_f(K)). By definition schemeNormalizedDirectImageCompIso s t is Classical.choose of precisely this existential for f and g. Classical.choose_spec evaluated at K therefore gives that equation for the selected comparison. The underlying ringed-space morphism of s followed by t is f followed by g, and schemeDerivedDirectImage is the corresponding ringed-space derived direct image. No properness, flatness, boundedness, or quasi-coherence hypothesis is used.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "/home/ubuntu/weil-newtargets-NQ/lean/Sheaf/AlgebraicGeometry/DerivedDirectImageSquareMate.lean",
+    "place": "schemeNormalizedDirectImageCompIso, lines 25-35; exists_derivedModuleDirectImageComposition in RingedSpaceDerivedDirectImageComposition.lean, lines 119-160"
+   }
+  },
+  {
+   "text": "Write F=Scheme.Modules.pushforward s and G=Scheme.Modules.pushforward t. These are moduleDirectImage f and moduleDirectImage g by their definitions. Expand Functor.rightDerivedFunctorCompUnit F G: its component is the inverse mapHomotopyCategoryCompIso(Iso.refl(F followed by G)) mapped by Qh, followed by the second unit at F_*^h K and RG of the first unit at K; the associator components are identities. To check the initial comparison is the identity for arbitrary K, write K as the image of a complex I under the homotopy quotient (the quotient keeps objects). The comparison component is the quotient image of the identity chain map on G(F(I)), hence is the identity by functoriality; Qh also maps it to the identity. Removing identity factors gives exactly the right side of the equation in step 1, so that equation is the displayed conclusion.",
+   "uses": [
+    "def-pc-derived-direct-image",
+    "def-pc-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "/home/ubuntu/weil-newtargets-master/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/Comp.lean",
+    "place": "Functor.rightDerivedFunctorCompUnit, lines 167-181; Mathlib/Algebra/Homology/HomotopyCategory.lean, mapHomotopyCategoryCompIso lines 287-295"
+   }
   }
  ],
- "proof_deps": "lem-pc-ringed-spaces-derived-direct-image-composition",
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-category"
+ ],
  "proof_origin": {
-  "by": "worker",
-  "group": "D2",
-  "date": "2026-10-14",
+  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0D5T, the determining equation in exists_derivedModuleDirectImageComposition."
+  "place": "Tag 0D5T (lemma-derived-pushforward-composition) supplies composition; the normalization argument is the explicit choice-specification and pasted-unit calculation from the local source definitions cited in the steps, not a unit equation printed in Stacks."
  },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "component of right-derived functor composition unit",
-   "results": "Generic right-derived composition APIs; no exact scheme direct-image normalization theorem.",
-   "date": "2026-10-14",
-   "verdict": "no exact match"
+   "query": "component of normalized direct image composition unit for schemes",
+   "results": "AlgebraicGeometry.Scheme.Hom normalization declarations only; no exact theorem.",
+   "date": "2026-10-15",
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "Functor.rightDerivedFunctorCompUnit",
-   "results": "Functor.rightDerivedFunctorCompUnit; component formula requires explicit homotopy-category identity normalization.",
-   "date": "2026-10-14",
-   "verdict": "generic declaration only"
+   "query": "Functor.rightDerivedFunctorCompUnit, rightDerivedFunctorUnit",
+   "results": "unknown identifier 'Functor.rightDerivedFunctorCompUnit' (0 hits).",
+   "date": "2026-10-15",
+   "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "normalizedDirectImageCompUnit|normalizedDirectImageSquare_component",
-   "results": "No existing declaration before this delivery.",
-   "date": "2026-10-14",
-   "verdict": "new intermediate statements"
+   "query": "normalizedDirectImageCompUnit|schemeNormalizedDirectImageCompIso in Mathlib/",
+   "results": "0 matches.",
+   "date": "2026-10-15",
+   "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "categorical pasting of right-derived composition units",
-   "results": "No exact specialized theorem; generic categorical associativity is used in the proof.",
-   "date": "2026-10-14",
-   "verdict": "no exact match"
+   "query": "categorical normalization of right derived direct image composition unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "proved",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit",
@@ -68,8 +89,8 @@
  "blueprint": {
   "is": null,
   "from": {
-   "node": "lem-pc-normalized-direct-image-square-unit",
-   "place": "proof steps: normalization and component assembly",
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "proof, final comparison step: identify the normalized derived direct-image composition map by its right-derived unit equation",
    "via": []
   },
   "same_as": []
@@ -89,12 +110,10 @@
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-e3cf2",
-  "group": "D2",
+  "reviewer": "NT-Codex-NQ-4b3cddb3f",
+  "group": "NQ",
   "result": "pass",
-  "landing": "20261014T170737-L-2555945",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-4b3cddb3f (reviewer sub-agent of L); spot-checked: Read item, dependencies, unit/chapter route and cited sources in full. Corrected the scheme/ringed-space citation mismatch, expanded the pasted-unit identity calculation, and corrected the attribution: Tag 0D5T proves composition but does not print the Lean unit equation. Verified Classical.choose_spec against the actual normalized comparison definition; accepted the ringed-space comparison as a generic tool. Statement unchanged. Review and corrected JSON written; no new nodes.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_proof": {
   "date": "2026-10-14",
@@ -105,5 +124,21 @@
   "landing": "20261014T170737-L-2555945",
   "kind": "interface",
   "note": "independent Codex review: The delivered Lean files, DAG nodes, report, change record, compilation artifacts, and interface review match the stage-3 requirements and preserve the target statement."
- }
+ },
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "lem-pc-normalized-direct-image-square-unit-comp-normalization",
+  "worker": "stage1",
+  "summary": "Reviewer repair: cite the ringed-space comparison theorem with its recorded inverse-unit equation, expand the pasted-unit definition including the identity quotient comparison, and mark the normalization argument as agent-written rather than a determining equation printed in Tag 0D5T. Statement unchanged.",
+  "blueprint": "Realizes the comparison-unit identification step described above.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "why": "The full recorded ringed-space comparison theorem specifies the inverse right-derived-unit equation used to choose the normalized scheme comparison. The semicontinuity unit and the bare scheme composition theorem do not supply this normalized comparison; this is a generic tool, not a replacement of the unit proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-ringed-spaces-derived-direct-image-composition"
+ ]
 }
