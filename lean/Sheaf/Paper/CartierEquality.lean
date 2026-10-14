@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 import Mathlib.FieldTheory.FinTrdeg
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 import Sheaf.FieldTheory.FinitelyGeneratedFieldCompleteIntersectionModel
 import Sheaf.RingTheory.FractionFieldCompleteIntersectionCotangent
 
@@ -72,16 +73,13 @@ theorem cartier_equality
       change Set.range (Subtype.val ∘ t.equivFin.symm) = _
       rw [EquivLike.range_comp, Subtype.range_coe]
     rwa [hr]
-  obtain ⟨n, c, f, hcn, hnc, hlen, hreg, ι, hι, hfrac, hA, e, he⟩ :=
+  obtain ⟨n, c, f, hcn, hnc, hlen, hreg, _, _, _, hA, e, _⟩ :=
     FieldTheory.exists_completeIntersection_fractionField_model k K hgens s.card x hx
   obtain ⟨δ, ⟨eH⟩, ⟨eΩ⟩⟩ :=
     exists_fractionField_completeIntersection_cotangent_model k K n f hreg e
   have hH : Module.Finite K (H1Cotangent k K) := Module.Finite.equiv eH.symm
   have hΩ : Module.Finite K (KaehlerDifferential k K) := Module.Finite.equiv eΩ.symm
-  have hker : Module.finrank K (LinearMap.range δ) +
-      Module.finrank K (LinearMap.ker δ) = Module.finrank K (Fin f.length → K) := by
-    rw [← δ.quotKerEquivRange.finrank_eq]
-    exact (LinearMap.ker δ).finrank_quotient_add_finrank
+  have hker := δ.finrank_range_add_finrank_ker
   have hcoker := (LinearMap.range δ).finrank_quotient_add_finrank
   simp only [Module.finrank_fin_fun] at hker
   have hker := hker.trans hlen
@@ -97,7 +95,7 @@ theorem cartier_equality
     rw [htrdeg, ← Nat.cast_add, hdim]
   refine ⟨hΩ, hH, heq, ?_⟩
   intro hfinite
-  -- Finite extensions have zero transcendence degree.
+  -- Substitute zero transcendence degree, then cancel the natural-number casts.
   have hzero : Algebra.trdeg k K = 0 := trdeg_eq_zero
   rw [hzero, zero_add] at heq
   exact_mod_cast heq.symm

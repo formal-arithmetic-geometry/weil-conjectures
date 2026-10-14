@@ -14466,3 +14466,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:05 L: merged deliver/R3/Sheaf.RingTheory.ProjectiveResolutionExtDegree (stage 3; reviewer PASS; first push; landing 20261014T040542-L-1000811 (proof); batch 20261014T040537; modules 1; new nodes 0)
 - 04:05 L: merged deliver/U1/Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap (stage 3; reviewer PASS; first push; landing 20261014T040542-L-1000982 (proof); batch 20261014T040537; modules 1; new nodes 0)
 - 04:05 L: merged deliver/U1/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (stage 3; reviewer PASS; first push; landing 20261014T040543-L-1001156 (proof); batch 20261014T040537; modules 1; new nodes 0)
+- 04:05 L: merged deliver/U1/Sheaf.Paper.CartierEquality (stage 3; reviewer PASS; first push; landing 20261014T040543-L-1001323 (proof); batch 20261014T040537; modules 1; new nodes 0)
