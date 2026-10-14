@@ -1,0 +1,161 @@
+{
+ "id": "lem-pc-derived-mate-pasted-unit",
+ "kind": "statement",
+ "title": "Normalized derived squares: pasted-unit equation of their mates",
+ "statement": "For abelian C,D,C′,D′ with derived categories in a common universe and K-injective resolutions [def-weil-abstract-derived-category, def-pur-kinjective-complex], take additive F:C→D, K:C′→D′, G:D→D′, H:C→C′, P:C′→C, Q:D′→D, exact G,H, and adjunctions ah:H⊣P and ag:G⊣Q [lem-sc-derived-adjunction-from-underived]. For any natural transformation m:F;G→H;K and β:RF;D(G)→D(H);RK, assume U(F,G);Qh(RF;RG→RF;D(G));Qh(β)=Qh(m);U(H,K);Qh(RH;RK→D(H);RK), where the exact comparisons are rightDerivedFunctorIsoMapDerivedCategory. Then U(P,F);Qh(mate(β))=Qh(mate(m));U(K,Q), using the exact-left-adjoint derived adjunctions for mate(β). Neither H preserving K-injectives nor invertibility of m, β, or their mates is assumed. No comparison ed is given or identified in this claim.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "lem-sc-derived-adjunction-from-underived"
+ ],
+ "source": {
+  "document": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+  "place": "derivedη_fac_app, derivedε_fac_app and Adjunction.derived; Stacks Project, cohomology.tex, Tag 079W"
+ },
+ "proof": [
+  {
+   "text": "Evaluate at a homotopy object X of C′. Expand U(P,F) and the forward mate of β. Use naturality of the derived G-unit to move the F-unit through it, and naturality of β to move the right-derived P-unit through β. Apply the normalized-square equation hβ at P.mapHomotopyCategory.obj X.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the factorization of the exact identifications RG≅D(G), RH≅D(H), and derivedη_fac_app for G and derivedε_fac_app for H. Naturality of the localization factor isomorphisms and derived units replaces the remaining composite by the localized ordinary G-unit, P-image of m, and H-counit followed by U(K,Q). This is the defining forward mate formula. Associators and unitors cancel componentwise.",
+   "uses": [
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sc-derived-adjunction-from-underived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S1",
+  "date": "2026-10-14",
+  "document": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+  "place": "derivedη_fac_app, derivedε_fac_app and Adjunction.derived; Stacks Project, cohomology.tex, Tag 079W",
+  "note": "Componentwise factorization calculation from the original node, separated from comparison normalization and right-derived uniqueness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived mate of a square satisfying the right derived composite unit equation satisfies the ordinary mate composite unit equation",
+   "results": [
+    "CategoryTheory.mateEquiv_square",
+    "CategoryTheory.mateEquiv",
+    "CategoryTheory.unit_mateEquiv",
+    "CategoryTheory.mateEquiv_counit"
+   ],
+   "date": "2026-10-14",
+   "verdict": "Generic mates API; no pasted right-derived unit calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedε_fac_app",
+   "results": [
+    "CategoryTheory.Adjunction.derivedε_fac_app"
+   ],
+   "date": "2026-10-14",
+   "verdict": "Factorization of one derived counit, not the pasted mate equation."
+  },
+  {
+   "tool": "grep",
+   "query": "mate.*[Uu]nit|[Uu]nit.*mate",
+   "results": [
+    "Mathlib/CategoryTheory/Adjunction/Mates.lean: mateEquiv_counit and unit_mateEquiv"
+   ],
+   "date": "2026-10-14",
+   "verdict": "Ordinary mate equations only; repository search found no derived mate normalization theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pasted unit of a right derived mate of a normalized square",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction derived mate natural transformation compatibility localization unit factorization",
+   "results": [
+    "CategoryTheory.Adjunction.Localization.ε_app",
+    "CategoryTheory.Adjunction.Localization.η_app",
+    "CategoryTheory.Adjunction.localization_unit_app",
+    "CategoryTheory.mateEquiv",
+    "CategoryTheory.Adjunction.derivedη_fac_app",
+    "CategoryTheory.Adjunction.derivedε_fac_app"
+   ],
+   "date": "2026-10-14",
+   "verdict": "Second reading: localization equations and generic mate API, no exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived, CategoryTheory.mateEquiv",
+   "results": [],
+   "date": "2026-10-14",
+   "verdict": "Second reading: no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*fac|mate.*[Ll]ocaliz|[Ll]ocaliz.*mate",
+   "results": [
+    "Mathlib/RingTheory/Ideal/GoingUp.lean:22"
+   ],
+   "date": "2026-10-14",
+   "verdict": "Second reading: no relevant Mathlib result. Repository rg found derivedPlus_mateEquiv_app_fac, a bounded-below result requiring exact vertical functors, not this unbounded right-derived statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedExactMateCompatibility",
+  "date": "2026-10-14",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-exact-left-adjoint-derived-mate-compatibility",
+   "place": "Steps 2–3: normalize the pasted unit of the derived mate",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedMatePastedUnit",
+  "file": "lean/Sheaf/CategoryTheory/DerivedMatePastedUnit.lean",
+  "declaration": "CategoryTheory.Functor.derivedMate_pastedUnit",
+  "statement": "theorem derivedMate_pastedUnit :\n    rightDerivedFunctorCompUnit P F ≫ whiskerLeft DerivedCategory.Qh\n      (mateEquiv ah.mapDerivedCategoryRightDerivedAdjunction\n        ag.mapDerivedCategoryRightDerivedAdjunction\n          (TwoSquare.mk _ _ _ _ β)).natTrans =\n    whiskerRight (NatTrans.mapHomotopyCategory\n      (mateEquiv ah ag (TwoSquare.mk _ _ _ _ m)).natTrans (.up ℤ))\n        DerivedCategory.Qh ≫ rightDerivedFunctorCompUnit K Q",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261014T061031-L-2467558",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261014T061031-L-2467558",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

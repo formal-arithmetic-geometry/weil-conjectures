@@ -14,21 +14,21 @@
  },
  "proof": [
   {
-   "text": "The right adjoint P of exact H preserves K-injectives. Apply mates and uniqueness out of RP;RF with its pasted unit to reduce the assertion to the unit equation.",
-   "uses": [
-    "lem-sc-derived-adjunction-from-underived"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Expand β into the four fixed comparisons. Their right-derived factorization equations identify β after localization with m followed by the pasted H,K unit and the exact H identification. Naturality moves the pasted P,F units through the G-unit and β.",
+   "text": "Prove comparison_unit componentwise by expanding the four comparisons and applying rightDerivedUnique and rightDerivedNatTrans factorization. This is an actual Lean proof: no auxiliary hole is used.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
    "elementary": true
   },
   {
-   "text": "Use derivedη_fac_app and derivedε_fac_app for the two derived adjunctions to replace the derived unit and counit by their ordinary localized versions. The resulting composite is mate(m)=e by the inverse law. The assumed equation for ed identifies it with that same composite. Right-derived extensionality and the inverse mates equivalence give the assertion.",
+   "text": "Apply derivedMate_pastedUnit to the comparison and the proved comparison_unit equation. This gives the normalized unit of its forward mate.",
+   "uses": [
+    "lem-pc-derived-mate-pasted-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use hm and the inverse law of mateEquiv to identify the ordinary forward mate of m with e. The right adjoint P of exact H preserves K-injectives, so RP;RF is right derived with unit U(P,F). Combine the normalized mate-unit equation with hed and apply rightDerived_ext. The inverse mate law then gives exactMateComparison_eq.",
    "uses": [
     "lem-sc-derived-adjunction-from-underived"
    ],
@@ -37,15 +37,16 @@
  ],
  "proof_deps": [
   "def-weil-abstract-derived-category",
+  "lem-pc-derived-mate-pasted-unit",
   "lem-sc-derived-adjunction-from-underived"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "H2",
+  "group": "S1",
   "date": "2026-10-14",
   "document": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
   "place": "derivedη_fac_app, derivedε_fac_app and Adjunction.derived; Stacks Project, cohomology.tex, Tag 079W",
-  "note": "Elementary normalization and categorical assembly from the named source equations; source tags read online."
+  "note": "Compiling Lean decomposition: comparison factorization and derived uniqueness proved; the intervening general pasted-mate-unit calculation is the sole new obligation."
  },
  "mathlib_searches": [
   {
@@ -185,11 +186,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-1a815",
-  "group": "H2",
+  "reviewer": "COMPILER",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261014T052439-L-1913452",
+  "landing": "20261014T061031-L-2467558",
   "kind": "interface",
-  "note": "independent Codex review: Packet statements and DAG nodes matched delivered Lean declarations; all delivered modules compiled cleanly and mechanical findings were empty."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

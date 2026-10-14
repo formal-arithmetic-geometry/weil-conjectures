@@ -7,6 +7,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 public import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.CategoryTheory.DerivedMatePastedUnit
 
 /-! # Compatibility of right derivation with exact-adjoint mate squares
 
@@ -82,6 +83,49 @@ theorem exactMateComparison_eq :
     (exactMateComparison F K G H m).hom =
       ((mateEquiv ah.mapDerivedCategoryRightDerivedAdjunction
         ag.mapDerivedCategoryRightDerivedAdjunction).symm
-          (TwoSquare.mk _ _ _ _ ed.hom)).natTrans := by sorry
+          (TwoSquare.mk _ _ _ _ ed.hom)).natTrans := by
+  have comparison_unit :
+      rightDerivedFunctorCompUnit F G ≫
+        whiskerLeft DerivedCategory.Qh
+          (isoWhiskerLeft F.rightDerivedFunctor
+            G.rightDerivedFunctorIsoMapDerivedCategory).hom ≫
+        whiskerLeft DerivedCategory.Qh (exactMateComparison F K G H m).hom =
+      whiskerRight (NatTrans.mapHomotopyCategory m.hom (.up ℤ)) DerivedCategory.Qh ≫
+        rightDerivedFunctorCompUnit H K ≫
+        whiskerLeft DerivedCategory.Qh
+          (isoWhiskerRight H.rightDerivedFunctorIsoMapDerivedCategory
+            K.rightDerivedFunctor).hom := by
+    ext X
+    simp [exactMateComparison, rightDerivedFunctorCompMapDerivedCategoryIso,
+      rightDerivedFunctorCompIso, rightDerivedFunctorNatIso,
+      rightDerivedFunctorNatTrans, Category.assoc]
+  have : P.PreservesKInjectiveComplexes := ah.preservesKInjectiveComplexes
+  let sq := TwoSquare.mk _ _ _ _ (exactMateComparison F K G H m).hom
+  let md := mateEquiv ah.mapDerivedCategoryRightDerivedAdjunction
+    ag.mapDerivedCategoryRightDerivedAdjunction sq
+  have hunit := derivedMate_pastedUnit F K G H P Q ah ag m.hom
+    (exactMateComparison F K G H m).hom comparison_unit
+  have he : (mateEquiv ah ag (TwoSquare.mk _ _ _ _ m.hom)).natTrans = e.hom := by
+    have hs : TwoSquare.mk _ _ _ _ m.hom =
+        (mateEquiv ah ag).symm (TwoSquare.mk _ _ _ _ e.hom) := by
+      apply TwoSquare.ext
+      intro X
+      exact congrArg (fun t => t.app X) hm
+    rw [hs, Equiv.apply_symm_apply]
+  rw [he] at hunit
+  have hmd : md.natTrans = ed.hom := by
+    apply (P.rightDerivedFunctor ⋙ F.rightDerivedFunctor).rightDerived_ext
+      (rightDerivedFunctorCompUnit P F) (HomotopyCategory.quasiIso C' (.up ℤ))
+    exact hunit.trans hed.symm
+  have hs : md = TwoSquare.mk _ _ _ _ ed.hom := by
+    apply TwoSquare.ext
+    intro X
+    exact congrArg (fun t => t.app X) hmd
+  have h := (mateEquiv ah.mapDerivedCategoryRightDerivedAdjunction
+    ag.mapDerivedCategoryRightDerivedAdjunction).symm_apply_apply sq
+  change (mateEquiv ah.mapDerivedCategoryRightDerivedAdjunction
+    ag.mapDerivedCategoryRightDerivedAdjunction).symm md = sq at h
+  rw [hs] at h
+  exact (congrArg TwoSquare.natTrans h).symm
 
 end CategoryTheory.Functor
