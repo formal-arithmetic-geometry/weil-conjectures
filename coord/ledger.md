@@ -14567,3 +14567,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:00 L: batch 20261014T045603 dependency take-out
 - 05:00 L: returned deliver/F2/Sheaf.Algebra.Homology.TensorBicomplex (reviewer RETURN: (reviewer X-c0a4f, head c0a4f7c33) F1: In coord/changes/tensor-bicomplex-canonical-map.md, replace the prose under ## Ol)
 - 05:01 L: returned deliver/E4/Sheaf.AlgebraicGeometry.TensorIdealSectionCoefficientComparison (reviewer RETURN: (reviewer X-6fb01, head 6fb016425) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Te)
+- 05:01 L: returned deliver/P1/Sheaf.RingTheory.IdealKernelElementDescent (reviewer RETURN: (reviewer X-6b9b3, head 6b9b3412e) B2/forced adaptation: `Sheaf.RingTheory.FiniteIdealKernelDescent` directly imports th)
