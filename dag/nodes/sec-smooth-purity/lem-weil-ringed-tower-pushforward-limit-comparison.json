@@ -23,48 +23,144 @@
   "prop-pur-kinjective-resolutions-exist",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $\\mathcal C_R=\\mathcal C$ and $\\mathcal C_S=\\mathcal D$. For $T=R,S$, form the small tower site $\\mathcal C_T\\times\\mathbf N_{\\geq1}$: an arrow $(U,n)\\to(V,m)$ consists of $U\\to V$ and $n\\leq m$, and coverings have a fixed integer and are coverings of the original site. A sheaf is exactly a strict inverse sequence, since the sheaf condition is imposed separately at each integer; put the constant-in-the-integer ring sheaf $T^{\\operatorname{Tow}}(U,n)=T(U)$. Its module sheaves are exactly $\\operatorname{Tow}(T)$, with the actions and restriction maps of [def-weil-sheaf-of-modules-category]. The morphism $g_T$ to the original ringed topos has constant-tower inverse image, identity structural ring map, and direct image $\\lim_T$: a map from the constant tower on $V$ to $H_\\bullet$ is precisely a compatible family $V\\to H_n$. Apply the underlying geometric inverse image and direct image of $f$ levelwise to get $F=f\\times1$ on tower topoi. Their adjunction restricts to tower maps because its bijections are natural in each transition; levelwise inverse image preserves finite limits. Give $F$ the levelwise structural maps $f^{-1}S\\to R$. Its module direct image is $f_*^{\\operatorname{Tow}}$. The square $fg_R=g_SF$ is a square of ringed topoi: on inverse images, both routes send a sheaf to the constant tower on $f^{-1}$ of that sheaf, with the same structural map. Consequently the composite module direct images are canonically identified, $f_*\\lim_R=\\lim_S f_*^{\\operatorname{Tow}}$. This identification sends $f_*p_n$ to the $n$-th limit projection; it is also obtained by the displayed compatible-family adjunction.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940, section-derived-limits, opening tower-site construction; Tag 0A07, lemma-Rf-commutes-with-Rlim, first proof: ringed tower-site square"
+   }
+  },
+  {
+   "text": "Represent $M$ by a complex $C$ of $R$-towers. On the small ringed tower site, [prop-pur-kinjective-resolutions-exist] gives a K-injective resolution $C\\to I$. Thus $Rf_*^{\\operatorname{Tow}}M$ is represented by the strict tower complex $f_*^{\\operatorname{Tow}}I$. By [lem-weil-tower-evaluation-kinjective], $I_n$ is K-injective. Since exactness in towers is levelwise, $C_n\\to I_n$ is a quasi-isomorphism, and $f_*I_n$ computes $Rf_*\\operatorname{ev}_nM$. Hence $\\operatorname{ev}_nRf_*^{\\operatorname{Tow}}M$ and $Rf_*\\operatorname{ev}_nM$ have the same representative $f_*I_n$. The transitions on both sides are $f_*(I_{n+1}\\to I_n)$, so these evaluation identifications respect every transition.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-tower-evaluation-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940, section-derived-limits; Tag 0941, lemma-derived-limit-is-ok, evaluation and exact-left-adjoint paragraph"
+   }
+  },
+  {
+   "text": "The constant-tower functor $\\Delta_T$ is additive and exact, since exactness is levelwise. The compatible-family bijection in Step 1 gives $\\Delta_T\\dashv\\lim_T$. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] to conclude that $\\lim_T$ sends K-injective tower complexes to K-injective module complexes. In particular $\\lim_R I$ is K-injective and represents $L_R M$ by [lem-weil-pbc-ringed-strict-tower-homotopy-limit], so $f_*\\lim_R I$ represents $Rf_*L_R M$. Choose a K-injective tower resolution $j:f_*^{\\operatorname{Tow}}I\\to J$ over $S$, using [prop-pur-kinjective-resolutions-exist]. Then $\\lim_SJ$ represents $L_S(Rf_*^{\\operatorname{Tow}}M)$. Evaluation gives K-injective $J_n$ by [lem-weil-tower-evaluation-kinjective], and $j_n:f_*I_n\\to J_n$ is a quasi-isomorphism. No assertion that $f_*I$ or $f_*I_n$ is K-injective is needed.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-tower-evaluation-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives; tower-limit computation from sites-cohomology.tex Tag 0940"
+   }
+  },
+  {
+   "text": "Put $P=fg_R=g_SF$. Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to $(g_R,f)$ and $(F,g_S)$, which are morphisms of small ringed topoi by Step 1. This gives natural isomorphisms $\\kappa_{f,g_R}:RP_*\\xrightarrow{\\sim}Rf_*L_R$ and $\\kappa_{g_S,F}:RP_*\\xrightarrow{\\sim}L_SRf_*^{\\operatorname{Tow}}$. Define $a_f=\\kappa_{g_S,F}\\circ\\kappa_{f,g_R}^{-1}$ using the common-direct-image identification of Step 1. Its normalization is explicit: on $I$, the first comparison is represented by the identity of $f_*\\lim_RI$, since $\\lim_RI$ is already K-injective; the second is represented by $\\lim_Sj:\\lim_S f_*^{\\operatorname{Tow}}I\\to\\lim_SJ$. The normalization clause of the cited node says that this second map is a quasi-isomorphism. Therefore $a_{f,M}$ is represented by that map after the underived identification, and is an isomorphism with exactly the common-direct-image normalization required in the statement.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, first proof: derive the square; Tag 0D6E, lemma-derived-pushforward-composition"
+   }
+  },
+  {
+   "text": "Write $p_n:\\lim_RI\\to I_n$ and $q_n:\\lim_SJ\\to J_n$ for the strict projections. Naturality of ordinary inverse limit gives the equality of chain maps $q_n\\circ\\lim_Sj=j_n\\circ f_*p_n$, after the Step 1 identification. The projection from $L_S(Rf_*^{\\operatorname{Tow}}M)$ to $\\operatorname{ev}_n(Rf_*^{\\operatorname{Tow}}M)$ is represented by $q_n$, with that target represented by $J_n$. To express the target using the representative $f_*I_n$ from Step 2, use the inverse of the quasi-isomorphism $j_n:f_*I_n\\to J_n$. Thus in the derived category $j_n^{-1}q_na_{f,M}=f_*p_n$. Both $\\lim_RI$ and $I_n$ are K-injective by Steps 2 and 3, so $f_*p_n$ represents $Rf_*$ of the $n$-th projection from $L_RM$. This proves compatibility with every projection, including its specific evaluation identification. The equality is an equality of chain maps before localization, rather than a choice of a morphism between abstract cone triangles.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, first proof: working through the definitions; strict projection calculation"
+   }
+  },
+  {
+   "text": "The comparisons in Step 4 are natural in $M$ by [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. For the evaluation identifications, [lem-weil-pbc-kinjective-hom-derived] represents a derived morphism between two resolved towers by a chain map $u:I\\to I'$ uniquely up to homotopy. Evaluating and applying $f_*$ gives $f_*u_n$ on both representatives in Step 2, and preserves homotopies termwise. The same cited node says that two K-injective resolutions are related by homotopy equivalences; evaluation, $f_*^{\\operatorname{Tow}}$, and inverse limit preserve those equivalences because their additive termwise actions preserve the homotopy equation. Hence the evaluation identifications are canonical and natural, and the projection equality in Step 5 is independent of all resolution choices. Smallness ensured the resolutions; nowhere was boundedness, product exactness, constructibility, or exactness of module $f^*$ used.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; sites-cohomology.tex Tag 0D6E, lemma-derived-pushforward-composition: naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-tower-evaluation-kinjective",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, first proof; Tag 0940, section-derived-limits; explicit resolution normalization and projection calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "For a morphism of ringed topoi unbounded derived direct image commutes naturally with total derived inverse limit of strict towers of module sheaves",
-   "results": "Hits: CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc, CategoryTheory.sheafComposeIso_inv_fac, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc, CategoryTheory.NatTrans.leftDerived_comp_assoc, CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι_assoc; ",
+   "query": "Unbounded derived direct image of ringed topoi commutes with derived inverse limit of strict inverse sequences of sheaves of modules",
+   "results": "Hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, localCohomology.diagramComp, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc; 8 total hits",
    "date": "2026-10-14",
-   "verdict": "no match: hits concern underived pushforward, abstract Kan extensions, or finite limits of bounded-below complexes; none supplies the strict unbounded tower comparison"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Right derived pushforward of sheaves of modules preserves homotopy inverse limits of inverse sequences using the tower site",
-   "results": "Hits: CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_inv, SheafOfModules.pushforwardNatIso, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso, CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, CategoryTheory.Functor.sheafPushforwardCocontinuous, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val, CategoryTheory.Functor.rightDerived; ",
-   "date": "2026-10-14",
-   "verdict": "no match: hits concern underived pushforward, abstract Kan extensions, or finite limits of bounded-below complexes; none supplies the strict unbounded tower comparison"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"rightDerived\", \"limit\"",
-   "results": "Hits: CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit, CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit'; ",
-   "date": "2026-10-14",
-   "verdict": "no match: hits concern underived pushforward, abstract Kan extensions, or finite limits of bounded-below complexes; none supplies the strict unbounded tower comparison"
+   "verdict": "no match: exact-functor localization, ordinary derived-functor transformations, or unrelated limit terminology; no unbounded strict-tower comparison for module direct image"
   },
   {
    "tool": "grep",
    "query": "homotopyLimit|derivedLimit|Rlim|rightDerived.*[Ll]imit",
-   "results": "Hits: Mathlib/Algebra/Homology/CochainComplexPlus.lean; ",
+   "results": "Hits: Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/CategoryTheory/ObjectProperty/Local.lean, Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean, Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; 25 total hits",
    "date": "2026-10-14",
-   "verdict": "no match: hits concern underived pushforward, abstract Kan extensions, or finite limits of bounded-below complexes; none supplies the strict unbounded tower comparison"
+   "verdict": "no match: exact-functor localization, ordinary derived-functor transformations, or unrelated limit terminology; no unbounded strict-tower comparison for module direct image"
   },
   {
    "tool": "leansearch",
-   "query": "Derived pushforward commutes with derived inverse limits of towers of sheaves of modules",
+   "query": "Derived direct image commutes with derived inverse limit of inverse systems on ringed topoi",
    "results": "service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A canonical natural isomorphism between right derived pushforward followed by derived inverse limit and derived inverse limit followed by levelwise derived pushforward on unbounded module complexes",
+   "results": "Hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc; 8 total hits",
+   "date": "2026-10-14",
+   "verdict": "no match: exact-functor localization, ordinary derived-functor transformations, or unrelated limit terminology; no unbounded strict-tower comparison for module direct image"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"limit\"",
+   "results": "Hits: CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit, CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit'; 2 total hits",
+   "date": "2026-10-14",
+   "verdict": "no match: exact-functor localization, ordinary derived-functor transformations, or unrelated limit terminology; no unbounded strict-tower comparison for module direct image"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyLimit|derivedLimit|\\bRlim\\b|rightDerived.*[Ll]imit",
+   "results": "Hits: ; 0 total hits",
+   "date": "2026-10-14",
+   "verdict": "no match: exact-functor localization, ordinary derived-functor transformations, or unrelated limit terminology; no unbounded strict-tower comparison for module direct image"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorComparison|rightDerived.*[Cc]omp",
+   "results": "Hits: Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; 1 total hits",
+   "date": "2026-10-14",
+   "verdict": "no match: exact-functor localization, ordinary derived-functor transformations, or unrelated limit terminology; no unbounded strict-tower comparison for module direct image"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-derived-direct-image-composition",
   "by": "worker",
@@ -80,5 +176,44 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "worker": "stage1",
+  "summary": "Kept the general ringed-topos statement unchanged. Realized the tower-site square, evaluation comparison, exact constant-tower adjunction, normalized derived-composition comparison, and an explicit strict projection equation using existing nodes only. Arbitrary structural ring maps are allowed: a second tower resolution is used instead of assuming module pushforward preserves K-injectives. No new nodes.",
+  "blueprint": "lem-weil-derived-direct-image-composition, Proof, Integral stage, second comparison of Rh_* with derived inverse limit; realizes it by the first proof of Stacks 0A07 on strict tower sites.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-tower-evaluation-kinjective",
+    "why": "General exact-evaluation K-injective lemma, needed for levelwise derived identification; no lemma in this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "General exact-left-adjoint K-injective criterion for constant towers and inverse limit, not an alternative six-operations route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Strict total-derived inverse-limit realization for arbitrary small ringed sites, already a statement dependency."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "General unbounded ringed-topos composition with normalized comparisons, required for the tower-site square; no general statement in this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-tower-evaluation-kinjective",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-5f749457d",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-5f749457d (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, sources, and unit/chapter route. Stacks 0A07/0941/08BJ/0D6E support all six steps, including the normalized comparison and explicit projection identity. Checked arbitrary structural ring maps, unboundedness, small cases, duplicates, and dependency cycles. No new nodes or repairs. Accepted four declared generic tools; master coefficient-category comparisons remain separate. Detailed checks are in review.md."
  }
 }
