@@ -17,7 +17,7 @@
  "unit": "sk-thm-properbasechange",
  "kind": "statement",
  "title": "Bounded-below filtered continuity of pro-etale pushforward",
- "statement": "Use small sites and indexing categories as in [def-weil-size-convention]. Let $\\Lambda$ be a sheaf of commutative rings on profinite sets with the finite jointly surjective topology, and set $\\Lambda_X=p_X^*\\Lambda$ for each scheme $X$, using the inverse image of [def-weil-pbc-condensed-e-module-category]. For a quasi-compact quasi-separated morphism $f:X\\to Y$ of schemes [def-pc-scheme, def-weil-pbc-scheme-conventions], use the ordinary uncompleted derived pushforward $Rf_*$ of [def-weil-pbc-proetale-operations] between module-sheaf categories. Let $I$ be a small filtered category [def-weil-pbc-category-colimit] and $(K_i^\\bullet)$ a diagram of complexes of $\\Lambda_X$-module sheaves with one common lower bound $a$ on the cohomology. Write $K_i^{\\geq a}=\\tau_{\\geq a}K_i$ for good truncation and $K=Q(\\varinjlim_i K_i^{\\geq a})$, where the colimit is termwise in sheaves, and $Q$ is passage to the derived category [def-weil-abstract-derived-category]. For every integer $q$ the canonical map $\\varinjlim_i H^q(Rf_*QK_i)\\to H^q(Rf_*K)$ is an isomorphism of $\\Lambda_Y$-module sheaves. If $X$ is quasi-compact and quasi-separated, the analogous canonical map $\\varinjlim_i H^q(R\\Gamma(X,QK_i))\\to H^q(R\\Gamma(X,K))$ is an isomorphism of abelian groups. These comparisons are natural in the diagrams and compatible with shifts. Here $R\\Gamma$ is derived global sections of module sheaves, computed by injective resolutions. Equivalently, for functorial bounded-below complex representatives of $Rf_*K_i$ or $R\\Gamma(X,K_i)$ the termwise filtered colimit maps quasi-isomorphically to a representative of the value at $K$. The assertion is independent of such functorial quasi-isomorphic replacements.",
+ "statement": "Use small sites and indexing categories as in [def-weil-size-convention]. Let $\\Lambda$ be a sheaf of commutative rings on profinite sets with the finite jointly surjective topology, and set $\\Lambda_X=p_X^*\\Lambda$ for each scheme $X$, using the inverse image of [def-weil-pbc-condensed-e-module-category]. For a quasi-compact quasi-separated morphism $f:X\\to Y$ of schemes [def-pc-scheme, def-weil-pbc-scheme-conventions], use the ordinary uncompleted derived pushforward $Rf_*$ of [def-weil-pbc-proetale-operations] between module-sheaf categories. Let $I$ be a small filtered category [def-weil-pbc-category-colimit] and $(K_i^\\bullet)$ a diagram of complexes of $\\Lambda_X$-module sheaves with one common lower bound $a$ on the cohomology. Write $K_i^{\\geq a}=\\tau_{\\geq a}K_i$ for good truncation and $K=Q(\\varinjlim_i K_i^{\\geq a})$, where the colimit is termwise in sheaves, and $Q$ is passage to the derived category [def-weil-abstract-derived-category]. For every integer $q$ the canonical map $\\varinjlim_i H^q(Rf_*QK_i)\\to H^q(Rf_*K)$ is an isomorphism of $\\Lambda_Y$-module sheaves. If $X$ is quasi-compact and quasi-separated, the analogous canonical map $\\varinjlim_i H^q(R\\Gamma(X,QK_i))\\to H^q(R\\Gamma(X,K))$ is an isomorphism of abelian groups. These comparisons are natural in the diagrams and compatible with shifts. Here $R\\Gamma$ is derived global sections of module sheaves, computed by injective resolutions. Equivalently, for functorial bounded-below complex representatives of $Rf_*K_i$ or $R\\Gamma(X,K_i)$ the termwise filtered colimit maps quasi-isomorphically to a representative of the value at $K$. The assertion is independent of such functorial quasi-isomorphic replacements. Complexes and good truncation are as in [def-pc-cochain-complex-modules] and [def-sbc-standard-tstructure-derived-category]. Explicitly $\\tau_{\\geq a}K$ is zero below $a$, is $\\operatorname{coker}(d^{a-1})$ in degree $a$, and agrees with $K$ above $a$, with the induced differential.",
  "source": {
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
   "place": "Lemma 5.3(1), its proof by w-contractible affine hypercovers, and the first paragraph of the proof explaining derived global sections; translated to strict bounded-below diagrams and their termwise sheaf colimits."
@@ -29,11 +29,118 @@
   "def-weil-pbc-proetale-operations",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-pc-cochain-complex-modules",
+  "def-sbc-standard-tstructure-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $E_i=\\tau_{\\geq a}K_i$ and $E=\\varinjlim_i E_i$, termwise in module sheaves. These complexes vanish below $a$. The endpoint term is $\\operatorname{coker}(d^{a-1})$, so its degree-$a$ cycles are $\\ker(d^a)/\\operatorname{im}(d^{a-1})$; above $a$ the cohomology calculation is unchanged. The natural maps $K_i\\to E_i$ induce isomorphisms on all cohomology because $H^r(K_i)=0$ for $r<a$. Exact filtered colimits give $H^r(E)=\\varinjlim_i H^r(E_i)$: apply exactness to the kernel/image sequences defining cycles, boundaries and their quotient. The same calculation shows that a natural transformation of diagrams which is a quasi-isomorphism at every stage induces a quasi-isomorphism of their termwise colimits. Thus it suffices to prove the comparison for the strict diagram $E_i$. No functorial bounded-below injective replacement of the entire diagram is assumed.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), its proof by w-contractible affine hypercovers, and the first paragraph of the proof explaining derived global sections; translated to strict bounded-below diagrams and their termwise sheaf colimits."
+   }
+  },
+  {
+   "text": "Test on affine weakly contractible objects $V\\to Y$ factoring through an affine open $A\\subseteq Y$. They cover the site: first cover an object by affine open pieces over affine opens of $Y$, then use the weakly contractible covering-family theorem on each piece. Put $X_A=f^{-1}(A)$. This is qcqs by the qcqs-over-affine lemma. Choose a finite affine cover $X_A=\\bigcup B_j$; each $B_j\\cap B_k$ is quasi-compact because it is the inverse image of $B_j\\times_A B_k$ under the quasi-compact diagonal. Then $W=X\\times_Y V=X_A\\times_A V$ is covered by the finitely many affine schemes $B_j\\times_A V$. Their intersections have finite affine covers obtained by pulling back finite affine covers of $B_j\\cap B_k$. Thus $W$ is qcqs, and it is an object of $X_{\\mathrm{proet}}$ by the base-change site functor.",
+   "uses": [
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "lem-weil-pbc-qcqs-over-affine",
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), its proof by w-contractible affine hypercovers, and the first paragraph of the proof explaining derived global sections; translated to strict bounded-below diagrams and their termwise sheaf colimits."
+   }
+  },
+  {
+   "text": "For each qcqs object $W$ of $X_{\\mathrm{proet}}$, choose $U_\\bullet\\to W$ with affine weakly contractible terms. The hypercover computation identifies $R\\Gamma(W,QE_i)$ and $R\\Gamma(W,QE)$ naturally with the total complexes having terms $E_i^t(U_p)$ and $E^t(U_p)$. The evaluation lemma gives $E^t(U_p)=\\varinjlim_i E_i^t(U_p)$. In total degree $r$ only $0\\leq p\\leq r-a$, $t=r-p$, occur. Exchanging this finite direct sum with the colimit gives an isomorphism of complexes $\\varinjlim_i\\operatorname{Tot}(E_i(U_\\bullet))\\cong\\operatorname{Tot}(E(U_\\bullet))$. On the $(p,t)$ summand the differentials on both sides are $\\sum_j(-1)^j d_j^*+(-1)^p d_E$, so these degreewise identifications commute with differentials and with the original cocone legs.",
+   "uses": [
+    "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
+    "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), its proof by w-contractible affine hypercovers, and the first paragraph of the proof explaining derived global sections; translated to strict bounded-below diagrams and their termwise sheaf colimits."
+   }
+  },
+  {
+   "text": "Filtered colimits of $\\Lambda_X(W)$-modules are exact. Applying this to cycles, boundaries and their quotient in the total complexes of step 3 gives $\\varinjlim_i H^q(R\\Gamma(W,QE_i))\\cong H^q(R\\Gamma(W,QE))$ for every $q$. These are the canonical maps: the hypercover isomorphisms are natural in the chain maps $E_i\\to E$, and the complex isomorphism of step 3 has exactly their colimit cocone legs. This proves the needed derived evaluation comparison without putting that comparison into a new node.",
+   "uses": [
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), its proof by w-contractible affine hypercovers, and the first paragraph of the proof explaining derived global sections; translated to strict bounded-below diagrams and their termwise sheaf colimits."
+   }
+  },
+  {
+   "text": "For a test object $V$ from step 2, exact evaluation at $V$ commutes with the kernels, images and cokernels defining cohomology sheaves. Choose a bounded-below injective resolution $E_i\\to J_i$ and $E\\to J$. These are K-injective, so $Rf_*QE_i$ is represented by $f_*J_i$ and $Rf_*QE$ by $f_*J$. The defining pushforward formula gives $(f_*J_i)(V)=J_i(W)$ and $(f_*J)(V)=J(W)$, where $W=X\\times_Y V$. Hence $H^q(Rf_*QE_i)(V)=H^q(R\\Gamma(W,QE_i))$ and the corresponding equality holds for $E$. These equalities are natural in derived morphisms: compute a morphism into the K-injective resolution by a chain map and apply the same section formula; homotopic maps give the same cohomology map. The evaluation lemma also identifies $(\\varinjlim_i H^q(Rf_*QE_i))(V)$ with $\\varinjlim_i H^q(Rf_*QE_i)(V)$. Step 4 therefore makes the specified pushforward comparison an isomorphism on every test object.",
+   "uses": [
+    "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+    "lem-sc-bounded-below-injective-resolution",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), its proof by w-contractible affine hypercovers, and the first paragraph of the proof explaining derived global sections; translated to strict bounded-below diagrams and their termwise sheaf colimits."
+   }
+  },
+  {
+   "text": "A map of sheaves which is bijective on all the test objects is an isomorphism. Its kernel has zero sections on them, so any kernel section is zero after a covering and thus zero by separation. Given a target section, lift on a test-object cover using the sectionwise bijections; the lifts agree on overlaps since injectivity has just been proved on all objects, and the sheaf axiom glues them. This proves the pushforward assertion. If $X$ is qcqs, apply steps 3 and 4 directly to the terminal object $W=X$ to obtain the asserted comparison for global sections.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), its proof by w-contractible affine hypercovers, and the first paragraph of the proof explaining derived global sections; translated to strict bounded-below diagrams and their termwise sheaf colimits."
+   }
+  },
+  {
+   "text": "For a map of diagrams, its composites with every colimit leg commute with the comparison: each leg is obtained by applying $Rf_*$, or $R\\Gamma$, to $QE_i\\to QE$. The colimit universal property therefore gives naturality of the comparison. Shifting by $s$ replaces the lower bound by $a-s$ and total degree $r$ by $r+s$; the hypercover model is natural in complexes and its signed total differential is the usual shift differential under this reindexing. Thus the comparisons commute with the derived shift identifications. For functorial bounded-below representatives, exact filtered colimits commute with cohomology by the cycle/boundary calculation of step 1. Their induced complex comparison consequently has in each degree precisely the cohomology isomorphism already proved. It is a quasi-isomorphism, and objectwise quasi-isomorphic replacements give the same comparison under their natural identifications by that calculation.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), its proof by w-contractible affine hypercovers, and the first paragraph of the proof explaining derived global sections; translated to strict bounded-below diagrams and their termwise sheaf colimits."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "lem-weil-pbc-qcqs-over-affine",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+  "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
+  "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), proof by w-contractible affine hypercovers"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -86,10 +193,44 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-condensed-sheaf-ext-continuity",
   "by": "worker",
   "date": "2026-10-13"
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "worker": "stage1",
+  "summary": "Second reading removed a restatement of the global-sections clause, reused the existing acyclic hypercover existence and computation nodes, and wrote the finite-diagonal colimit argument and relative test-object computation. Added only the smaller exact colimit-preserving evaluation input.",
+  "blueprint": "Realizes thm-weil-pbc-qbar proof first sentence: continuity of derived Hom/pushforward through the common-stage colimit, with the hypercover cohomology input made explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic ringed-site or homological infrastructure used within the source hypercover proof."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Generic ringed-site or homological infrastructure used within the source hypercover proof."
+   },
+   {
+    "node": "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "why": "Generic ringed-site or homological infrastructure used within the source hypercover proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-1935b6ff7",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-1935b6ff7 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass. The new node was missing required created.by and created.date metadata (plus standard merged_into/lean_audit fields); corrected JSON is in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits.json.; 1 file(s) fixed by the reviewer"
  }
 }
