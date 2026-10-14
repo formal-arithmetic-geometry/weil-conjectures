@@ -14706,3 +14706,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:20 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra (stage 3; reviewer PASS; first push; landing 20261014T072000-L-3277201 (interface); batch 20261014T071959; modules 4; new nodes 3)
 - 07:26 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.InvertibleSymmetricAlgebraCoproduct (stage 3; reviewer PASS; first push; landing 20261014T072647-L-3348395 (proof); batch 20261014T072645; modules 1; new nodes 0)
 - 07:28 L: merged deliver/V4/Sheaf.Paper.ModuleCupShiftedUnitChainTensor (stage 3; reviewer PASS; first push; landing 20261014T072853-L-3370855 (proof); batch 20261014T072851; modules 1; new nodes 0)
+- 07:30 L: merged deliver/V4/Sheaf.Paper.ModuleCupHomologyEvaluationBijective (stage 3; reviewer PASS; first push; landing 20261014T073058-L-3392598 (proof); batch 20261014T073056; modules 1; new nodes 0)
