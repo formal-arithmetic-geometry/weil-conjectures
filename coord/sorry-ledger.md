@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **831**, closure **12**, holes in definitions **4**, definitions with undetermined data **2** (closure **0**).
+Holes now: library **830**, closure **12**, holes in definitions **4**, definitions with undetermined data **2** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -20,24 +20,24 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 619 | 10 |
+| Sheaf | 618 | 10 |
 | WeilConjectures | 212 | 2 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2178 | 86 | 2092 | 6 | 1 |
-| 660345513 (Application of proof-dependency imports) | library | 2120 | 84 | 2036 | 6 | 1 |
+| 889327369 (Queue at the start of stage 3) | library | 2178 | 85 | 2093 | 6 | 1 |
+| 660345513 (Application of proof-dependency imports) | library | 2120 | 83 | 2037 | 6 | 1 |
 | 660345513 (Application of proof-dependency imports) | closure | 1979 | 10 | 1969 | 4 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3367 |
+| proved | 3368 |
 | decomposed | 48 |
-| moved | 3900 |
+| moved | 3901 |
 | pruned | 119 |
-| other | 469 |
+| other | 470 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
 
@@ -70,12 +70,12 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | G3 | 97 | 100 | 66 | 34 | 45/97 (46.4%) |
 | G4 | 52 | 44 | 28 | 16 | 18/52 (34.6%) |
 | H1 | 130 | 128 | 105 | 23 | 73/130 (56.2%) |
-| H2 | 108 | 106 | 88 | 18 | 64/108 (59.3%) |
+| H2 | 109 | 106 | 88 | 18 | 64/109 (58.7%) |
 | H3 | 118 | 133 | 94 | 39 | 65/118 (55.1%) |
 | H4 | 55 | 52 | 41 | 11 | 30/55 (54.5%) |
 | J1 | 122 | 129 | 75 | 54 | 53/122 (43.4%) |
 | J2 | 102 | 104 | 70 | 34 | 51/102 (50.0%) |
-| J3 | 115 | 121 | 76 | 45 | 53/115 (46.1%) |
+| J3 | 116 | 122 | 76 | 46 | 53/116 (45.7%) |
 | J4 | 59 | 51 | 39 | 12 | 26/59 (44.1%) |
 | K1 | 115 | 128 | 87 | 41 | 58/115 (50.4%) |
 | K2 | 119 | 117 | 83 | 34 | 64/119 (53.8%) |
@@ -89,7 +89,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | N2 | 127 | 116 | 78 | 38 | 57/127 (44.9%) |
 | N3 | 86 | 81 | 65 | 16 | 45/86 (52.3%) |
 | N4 | 54 | 52 | 48 | 4 | 29/54 (53.7%) |
-| P1 | 116 | 136 | 91 | 45 | 65/116 (56.0%) |
+| P1 | 117 | 137 | 92 | 45 | 66/117 (56.4%) |
 | P2 | 129 | 121 | 79 | 42 | 54/129 (41.9%) |
 | P3 | 100 | 93 | 81 | 12 | 52/100 (52.0%) |
 | P4 | 51 | 47 | 39 | 8 | 26/51 (51.0%) |
@@ -144,16 +144,16 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 |---|---:|---:|---|
 | WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty | 0 | 1 | ORCHESTRA |
 | WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine | 0 | 1 | ORCHESTRA |
-| Sheaf.AlgebraicGeometry.CartesianHigherImageAffineSectionVanishing | 13 | 1 | — |
+| Sheaf.AlgebraicGeometry.CartesianHigherImageAffineSectionVanishing | 13 | 1 | J3 |
 | Sheaf.AlgebraicGeometry.CartesianHigherImageChartComparison | 15 | 1 | V1 |
-| Sheaf.AlgebraicGeometry.PicardResidueHomologySourceResidueComparison | 22 | 1 | — |
+| Sheaf.AlgebraicGeometry.PicardResidueHomologySourceResidueComparison | 22 | 1 | XR701758115908ba19 |
 | Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation | 24 | 1 | H3 |
 | Sheaf.AlgebraicGeometry.ScalarCupResolutionClassCompatibility | 31 | 1 | W4 |
-| Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchange | 34 | 1 | P1 |
 | Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison | 34 | 1 | B3 |
 | Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData | 34 | 1 | A4 |
+| Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchangePreNormalization | 35 | 1 | U4 |
 | Sheaf.AlgebraicGeometry.RelativeMVDirectImageRowsCore | 41 | 1 | A4 |
-| Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates | 50 | 1 | U3 |
+| Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates | 50 | 1 | B2 |
 
 Modules pruned since the imports baseline:
 
