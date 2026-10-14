@@ -1,6 +1,6 @@
 # Work queue
 
-29 items; claim with `tools/claim.py next <group> [--stage N]`.
+28 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (29)
+## Stage 3: modules to prove (28)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -37,7 +37,6 @@
 | `Sheaf.AlgebraicGeometry.BoundedFlatModelNormalization` | 35 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FlatTelescopeConeNormalizationDescent` | 36 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CompactFlatBarUnionAugmentation` | 37 | 1 | proof |
-| `Sheaf.CategoryTheory.Abelian.DerivedBottomCycleTransport` | 37 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineCoordinateComparisonCoherence` | 43 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit` | 48 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates` | 50 | 1 | proof |
