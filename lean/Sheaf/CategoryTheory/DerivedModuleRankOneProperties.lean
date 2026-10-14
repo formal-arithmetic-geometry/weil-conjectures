@@ -5,7 +5,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Module.ULift
 public import Sheaf.CategoryTheory.CompactObject
 public import Sheaf.CategoryTheory.WeakTriangulatedGenerator
-import Sheaf.CategoryTheory.DerivedModuleDirectSums
+import Sheaf.CategoryTheory.DerivedModuleRankOneCompact
+import Sheaf.CategoryTheory.DerivedModuleRankOneGenerator
 
 @[expose] public section
 
@@ -46,6 +47,8 @@ theorem derivedModule_rankOne_properties
     let P := (DerivedCategory.singleFunctor (ModuleCat.{max w vH} S) 0).obj
       (ModuleCat.of S (ULift.{vH} S))
     IsCompactObject P ∧ IsWeakTriangulatedGenerator P := by
-  sorry
+  dsimp
+  exact ⟨derivedModule_rankOne_compact (S := S),
+    derivedModule_rankOne_generator (S := S)⟩
 
 end CategoryTheory
