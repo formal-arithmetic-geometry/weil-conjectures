@@ -11,7 +11,7 @@ public import Sheaf.ConstructibleSheaf.TorsorAssociatedModule
 # Equivariant locally constant sections are a sheaf
 
 The restricted-scalars theorem below is the single retained implementation;
-the companion compatibility module only imports this declaration.
+callers import this module directly, and the retired companion has no imports.
 
 Source: Stacks Project, Tags 04TR, 04TS and 0DV5 (3).
 (blueprint: lem-weil-pbc-torsor-equivariant-presheaf-sheaf)
