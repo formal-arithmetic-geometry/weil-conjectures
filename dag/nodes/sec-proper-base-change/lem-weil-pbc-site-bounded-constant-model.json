@@ -29,9 +29,133 @@
   "def-weil-finitely-generated-module",
   "def-pur-localized-ringed-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Induct on $b-a$, with the claim for every small site with final object and every object having the stated interval and locally constant finite cohomology. Restriction to a slice is exact by [lem-pur-site-restriction-module-adjunction-exact]; hence it preserves cohomology, quasi-isomorphisms, and cone triangles termwise. Constant sheaves restrict canonically to constant sheaves by [lem-weil-pbc-site-constant-restriction]. Coverings on successive slices compose by the site axioms [def-weil-pbc-sites-and-cohomology]. These facts allow each subsequent finite refinement and each application of the induction hypothesis on a slice. On an object covered by the empty sieve every module sheaf is zero, so the zero module complex is a model there; such objects may be treated separately throughout.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-site-constant-restriction",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094G, lemma-locally-constant, proof"
+   }
+  },
+  {
+   "text": "If $a=b$, take any complex representing $K$ and first replace it by its canonical upper truncation in degree $a$. The map to $H^a(K)[-a]$ is the projection from cycles in degree $a$, zero below; it is a quasi-isomorphism since the other cohomology vanishes. The upper truncation maps quasi-isomorphically to $K$ by [lem-weil-pbc-truncation-descends]. Trivialize $H^a(K)$ on a covering as in the hypothesis and put that finite module in degree $a$. This includes $H^a(K)=0$.",
+   "uses": [
+    "lem-weil-pbc-truncation-descends",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094G, lemma-locally-constant, proof"
+   }
+  },
+  {
+   "text": "Suppose $a<b$. Refine so $H^b(K)=\\underline M$ for a finite $B$-module $M$, and choose generators $x_1,\\ldots,x_r$. Represent $K$ by a complex $A$ with $A^q=0$ for $q>b$ using upper truncation [lem-weil-pbc-truncation-descends]. Let $Z^b=\\ker(d_A^b)$. The quotient $Z^b\\twoheadrightarrow H^b(A)$ is the sheafification of the presheaf quotient of $Z^b$ by the presheaf image of $d_A^{b-1}$: this follows from exact sheafification [lem-weil-pbc-site-module-presheaf-sheafification-exact]. The local representative assertion of [lem-weil-pbc-site-sheafification-sections-local] therefore lifts each of the finitely many sections $x_i$ to a cycle $z_i\\in Z^b(U)$ after a finite sequence of covering refinements. Sending the $i$th basis vector to $z_i$, then sheafifying the natural constant-presheaf map, gives a chain map $P=\\underline{B^r}[-b]\\to A$ inducing the given surjection $\\underline{B^r}\\twoheadrightarrow\\underline M$. This supplies explicitly the local lifting hidden under “details omitted” in the source, without hypercohomology or points.",
+   "uses": [
+    "lem-weil-pbc-truncation-descends",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094G, lemma-locally-constant, proof"
+   }
+  },
+  {
+   "text": "Take the actual mapping cone $L=C(P\\to A)$, so $P\\to K\\to L\\xrightarrow{\\delta}P[1]$ is distinguished [def-weil-abstract-derived-category]. The long exact cohomology sequence [lem-sf-derived-homology-long-exact] and surjectivity in degree $b$ give $H^q(L)=0$ outside $[a,b-1]$, $H^q(L)=H^q(K)$ for $q\\le b-2$, and $0\\to H^{b-1}(K)\\to H^{b-1}(L)\\to\\ker(\\underline{B^r}\\to\\underline M)\\to0$. The kernel is locally constant finite type, and so is the extension, by [lem-weil-pbc-locally-constant-derived-serre]. Apply the induction hypothesis on the current slice to obtain $L\\simeq\\underline E$ with $E$ a finite-module complex supported in $[a,b-1]$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-locally-constant-derived-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094G, lemma-locally-constant, proof"
+   }
+  },
+  {
+   "text": "Put $n=b-1$ and $F=\\underline{B^r}$. The derived boundary is now a map $\\underline E\\to F[-n]$. Here is its chain representative, including why it exists although the terms of $E$ need not be projective. Quasi-isomorphisms in the homotopy category admit a right calculus of fractions [lem-pc-quasi-isomorphisms-multiplicative-system]. By [lem-pc-right-fraction-representation], represent the map by a roof $\\underline E\\xleftarrow{s}T\\xrightarrow{t}F[-n]$ in the localization [def-weil-abstract-derived-category], with $s$ a quasi-isomorphism. Upper truncate $T$ at $n$; this is a quasi-isomorphism because $H^{>n}(T)=0$ [lem-weil-pbc-truncation-descends]. The top component of $t$ kills boundaries, hence factors through $H^n(T)$. Since $H^n(s)$ is invertible, this gives $h:H^n(\\underline E)\\to F$. The chain map $\\underline E\\to H^n(\\underline E)[-n]\\xrightarrow{h}F[-n]$ represents the roof: after precomposition with the truncated $s$, its degree-$n$ component is exactly $t$, and all other target components are zero. Write $u:\\underline{E^n}\\to F$ for its top component; then $u d_E^{n-1}=0$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-truncation-descends",
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-right-fraction-representation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094G, lemma-locally-constant, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-constant-morphism-local] to $u$, whose source module $E^n$ is finite, and choose a covering family contained in the resulting covering sieve, as supplied by the topology generated by the site coverings [def-weil-pbc-sites-and-cohomology]. Refine along this family to obtain $v:E^n\\to B^r$ inducing $u$. On each nonempty slice the constant functor is faithful on module maps: if the constant sheaf of a map $f$ is zero, each element $f(x)$ has the same image as $0$ in the sheafification of the constant presheaf; local equality [lem-weil-pbc-site-sheafification-sections-local] makes these equal in that presheaf on a covering. Unless the slice is empty, that covering has a member, where its restriction is still the same element $f(x)$, so $f(x)=0$. Thus $v d_E^{n-1}=0$ from $u d_E^{n-1}=0$ (the assertion is automatic if $E^{n-1}=0$). Empty slices already have the zero model. Consequently $N=(E^a\\to\\cdots\\to E^{b-1}\\xrightarrow{v}B^r)$ is a genuine $B$-module complex supported in $[a,b]$, with every term finite.",
+   "uses": [
+    "lem-weil-pbc-site-constant-morphism-local",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094G, lemma-locally-constant, proof"
+   }
+  },
+  {
+   "text": "The complex $\\underline N$ is the shifted cone of the chain boundary $\\underline E\\to P[1]$, with the cone sign chosen so the final differential is $v$ (changing the sign of the $B^r$ component gives the alternative convention). Therefore its rotated cone triangle has the same last arrow as $P\\to K\\to\\underline E\\to P[1]$. By rotation and the morphism-of-triangles axiom [def-weil-triangulated-category] there is a comparison between these triangles that is the identity on $P$ and $\\underline E$. On each cohomology sheaf the long exact sequences [lem-sf-derived-homology-long-exact] show the middle comparison is an isomorphism: write five consecutive terms as $A\\to B\\to C\\to D\\to E$, with $C$ the middle cohomology sheaf and the comparisons on $A,B,D,E$ identities. Work locally with sections; lifts onto images exist after covering by [lem-weil-pbc-site-sheafification-sections-local], since the image is the sheafification of the presheaf image. If $c$ maps to zero in the lower $C$, its image in $D$ is zero, so locally $c$ comes from $b\\in B$. The image of $b$ in the lower $C$ is zero, so locally $b$ comes from $A$, and hence $c=0$. Conversely, a section of the lower $C$ maps to $d\\in D$ in the kernel of $D\\to E$. Locally lift $d$ to $c$ in the upper $C$. The difference between the given section and the image of $c$ comes locally from a section $b$ of the lower $B$; adding the image of that same $b$ in the upper $C$ gives a lift of the given section. Thus the comparison is a monomorphism and locally surjective, hence an isomorphism of sheaves. Its cone is therefore acyclic, so the middle comparison is an isomorphism in the derived localization [def-weil-abstract-derived-category]. This proves $K\\simeq\\underline N$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094G, lemma-locally-constant, proof"
+   }
+  },
+  {
+   "text": "Compose the coverings from Steps 3, 4 and 6. The complexes $N$ (and the zero complexes on empty slices) have precisely the asserted bounds and finite terms; their differentials are induced by the displayed module maps. The base and induction step prove the claim for all $b-a\\ge0$. No condition on points or a finite Tor amplitude entered the argument.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094G, lemma-locally-constant, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-site-constant-restriction",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-truncation-descends",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-abstract-derived-category",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-locally-constant-derived-serre",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-representation",
+  "lem-weil-pbc-site-constant-morphism-local",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094G, lemma-locally-constant: source induction with explicit local cycle lifts and roof-to-top-component calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -88,10 +212,80 @@
    "results": "CategoryTheory.Sheaf.IsConstant; CategoryTheory.Sheaf.IsConstant.mem_essImage; CategoryTheory.Sheaf.IsConstant.mk; CategoryTheory.Sheaf.isConstant_congr; CategoryTheory.Sheaf.isConstant_of_iso; CategoryTheory.Sheaf.isConstant_iff_mem_essImage; CategoryTheory.Sheaf.isConstant_iff_of_equivalence; CategoryTheory.Sheaf.isConstant_of_forget",
    "date": "2026-10-14",
    "verdict": "no match: constant single-sheaf essential-image statements and condensed sets are not local derived finite-module complex models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded derived complex on a site with locally constant finite cohomology is locally a constant bounded complex of finite modules over a Noetherian ring",
+   "results": "CompHausLike.LocallyConstantModule.functor; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CompHausLike.LocallyConstantModule.functor_obj_val; LightCondMod.LocallyConstant.functor; CondensedMod.LocallyConstant.functor; LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf; CondensedMod.ofSheafCompHaus; LightCondensed.instIsGrothendieckAbelianLightCondMod",
+   "date": "2026-10-14",
+   "verdict": "no match: constant sheaf infrastructure and specialized condensed functors do not give arbitrary-site bounded constant complex models"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*(complex|homology)|LocallyConstant.*Derived",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match: constant sheaf infrastructure and specialized condensed functors do not give arbitrary-site bounded constant complex models"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\"",
+   "results": "CategoryTheory.constantSheaf; CategoryTheory.constantSheafAdj; CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant; CategoryTheory.constantSheafAdj_counit_app; CategoryTheory.constantSheafAdj_counit_w; CategoryTheory.instAdditiveSheafConstantSheaf; CategoryTheory.constantSheafΓAdj; CategoryTheory.GrothendieckTopology.IsLocalSite.coconstantSheaf",
+   "date": "2026-10-14",
+   "verdict": "no match: constant sheaf infrastructure and specialized condensed functors do not give arbitrary-site bounded constant complex models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally on a Grothendieck site complexes with finite locally constant cohomology have constant finite module models",
+   "results": "CompHausLike.LocallyConstantModule.functor; SheafOfModules.IsFiniteType; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafCompHaus; CompHausLike.LocallyConstantModule.functor_obj_val; CompHausLike.LocallyConstant.functor; LightCondMod.ofSheafLightProfinite; LightCondAb.ofSheafLightProfinite",
+   "date": "2026-10-14",
+   "verdict": "no match: constant sheaf infrastructure and specialized condensed functors do not give arbitrary-site bounded constant complex models"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded complexes with finite locally constant cohomology are locally constant complexes of finite modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded derived complex on a site with locally constant finite cohomology is locally a constant bounded complex of finite modules over a Noetherian ring",
+   "results": "CompHausLike.LocallyConstantModule.functor; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CompHausLike.LocallyConstantModule.functor_obj_val; LightCondMod.LocallyConstant.functor; CondensedMod.LocallyConstant.functor; LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf; CondensedMod.ofSheafCompHaus; LightCondensed.instIsGrothendieckAbelianLightCondMod",
+   "date": "2026-10-14",
+   "verdict": "no match: constant sheaf infrastructure and specialized condensed functors do not give arbitrary-site bounded constant complex models"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*(complex|homology)|LocallyConstant.*Derived",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match: constant sheaf infrastructure and specialized condensed functors do not give arbitrary-site bounded constant complex models"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\"",
+   "results": "CategoryTheory.constantSheaf; CategoryTheory.constantSheafAdj; CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant; CategoryTheory.constantSheafAdj_counit_app; CategoryTheory.constantSheafAdj_counit_w; CategoryTheory.instAdditiveSheafConstantSheaf; CategoryTheory.constantSheafΓAdj; CategoryTheory.GrothendieckTopology.IsLocalSite.coconstantSheaf",
+   "date": "2026-10-14",
+   "verdict": "no match: constant sheaf infrastructure and specialized condensed functors do not give arbitrary-site bounded constant complex models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally on a Grothendieck site complexes with finite locally constant cohomology have constant finite module models",
+   "results": "CompHausLike.LocallyConstantModule.functor; SheafOfModules.IsFiniteType; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafCompHaus; CompHausLike.LocallyConstantModule.functor_obj_val; CompHausLike.LocallyConstant.functor; LightCondMod.ofSheafLightProfinite; LightCondAb.ofSheafLightProfinite",
+   "date": "2026-10-14",
+   "verdict": "no match: constant sheaf infrastructure and specialized condensed functors do not give arbitrary-site bounded constant complex models"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded complexes with finite locally constant cohomology are locally constant complexes of finite modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-locally-constant-tensor",
   "by": "worker",
@@ -107,5 +301,79 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-site-bounded-constant-model",
+  "worker": "stage1",
+  "summary": "Kept the strengthened assertion of Tag 094G unchanged. Wrote out the local lifting omitted in the source using exact sheafification, represented the boundary by an explicit roof/truncation calculation, and treated empty slices when recovering the module relation. Reused all inputs; no new nodes.",
+  "blueprint": "Amplification-proper proof (c): finite lisse cohomology reductions used through nilpotent reduction and locally-constant-tensor; implements exactly the Tag 094G induction supplying the local constant model for Tag 094H.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exact restriction, sheafification, or derived-category infrastructure used in the explicit Tag 094G induction; this unit has no alternative statement of this general tool."
+   },
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Generic exact restriction, sheafification, or derived-category infrastructure used in the explicit Tag 094G induction; this unit has no alternative statement of this general tool."
+   },
+   {
+    "node": "def-weil-derived-cohomology-sheaves",
+    "why": "Generic exact restriction, sheafification, or derived-category infrastructure used in the explicit Tag 094G induction; this unit has no alternative statement of this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "why": "Generic exact restriction, sheafification, or derived-category infrastructure used in the explicit Tag 094G induction; this unit has no alternative statement of this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic exact restriction, sheafification, or derived-category infrastructure used in the explicit Tag 094G induction; this unit has no alternative statement of this general tool."
+   },
+   {
+    "node": "def-weil-pbc-constant-sheaf",
+    "why": "Generic exact restriction, sheafification, or derived-category infrastructure used in the explicit Tag 094G induction; this unit has no alternative statement of this general tool."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Generic exact restriction, sheafification, or derived-category infrastructure used in the explicit Tag 094G induction; this unit has no alternative statement of this general tool."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic exact restriction, sheafification, or derived-category infrastructure used in the explicit Tag 094G induction; this unit has no alternative statement of this general tool."
+   },
+   {
+    "node": "def-weil-triangulated-category",
+    "why": "Generic exact restriction, sheafification, or derived-category infrastructure used in the explicit Tag 094G induction; this unit has no alternative statement of this general tool."
+   },
+   {
+    "node": "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "why": "General derived localization roof infrastructure; used only to calculate the top-degree boundary, without changing the Tag 094G induction route."
+   },
+   {
+    "node": "lem-pc-right-fraction-representation",
+    "why": "General derived localization roof infrastructure; used only to calculate the top-degree boundary, without changing the Tag 094G induction route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-abstract-derived-category",
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-triangulated-category",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-representation"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-63ea6254b",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-63ea6254b (reviewer sub-agent of L); spot-checked: Read the full mathematics and checked all eight steps against Stacks 094G, 093S, 093U and the cited infrastructure. Added the missing exact-sheafification citation to Step 7; corrected JSON and review.md are written. No new nodes or statement changes. Coefficient categories remain distinct; no seeded comparison theorem was accepted as proved.; 1 file(s) fixed by the reviewer"
  }
 }
