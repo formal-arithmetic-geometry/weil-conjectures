@@ -6,6 +6,8 @@ Authors: SHEAF group T4
 module
 
 public import Sheaf.Algebra.Homology.HomologyEvaluationDefinitions
+import Sheaf.Paper.DerivedHomMayerVietoris
+import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
 
 /-! # Internal Hom transport squares for cycles and homology
 
@@ -31,7 +33,9 @@ noncomputable local instance (priority := 2000) openOverInternalHomCycleHomology
 attribute [local irreducible] Scheme.Modules.restrictFunctor SheafOfModules.overFunctor
 attribute [local irreducible] homComplexFunctor
 
-/-- Transport of source and target cycles and homology through internal Hom.
+/- Inference for the composite open-restriction comparisons exceeds the default heartbeats.
+-/
+/- Transport of source and target cycles and homology through internal Hom.
 Source: Stacks Project, Tag 08DL; step 2 of the parent restriction-diagram plan.
 (blueprint: new-t4-open-over-internal-hom-cycle-homology-squares).
 
@@ -48,6 +52,8 @@ Proof: Restriction is exact by the localization finite-limit and finite-colimit
  squares to obtain the four equations. This uses neither the Hom complex nor its
  products or differential. No finiteness or nonempty-open assumption is needed;
  zero and identity maps satisfy the same naturality equations. -/
+set_option maxHeartbeats 800000 in
+-- Inference for the composite open-restriction comparisons exceeds the default heartbeats.
 theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
     (V : X.Opens) (W : V.toScheme.Opens)
     (e : ∀ M N : X.Modules,
@@ -101,6 +107,99 @@ theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
             (R := V.toScheme.sheaf.over W) (𝟙 _) (K.homologyπ 0) ∧
         F.map (SheafOfModules.homObjMap (R := X.sheaf) (T.homologyπ (-n)) (𝟙 _)) ≫
             v.hom = b.hom ≫ SheafOfModules.homObjMap
-              (R := V.toScheme.sheaf.over W) (A.homologyπ (-n)) (𝟙 _) := by sorry
+              (R := V.toScheme.sheaf.over W) (A.homologyπ (-n)) (𝟙 _) := by
+  classical
+  let O := SheafOfModules.overFunctor.{u} X.ringCatSheaf V
+  let E := (Scheme.Modules.overEquiv V).functor
+  let R := Scheme.Modules.restrictFunctor V.ι
+  let B := SheafOfModules.overFunctor.{u} V.toScheme.ringCatSheaf W
+  let F := R ⋙ B
+  let : PreservesFiniteLimits O := moduleOverFunctor_limits_proof X.toRingedSpace V
+  let : PreservesFiniteColimits O := moduleOverFunctor_colimits_proof X.toRingedSpace V
+  let : PreservesFiniteLimits (O ⋙ E) := comp_preservesFiniteLimits O E
+  let : PreservesFiniteColimits (O ⋙ E) := comp_preservesFiniteColimits O E
+  let : PreservesFiniteLimits R :=
+    preservesFiniteLimits_of_natIso (Scheme.Modules.overFunctorEquiv V)
+  let : PreservesFiniteColimits R :=
+    preservesFiniteColimits_of_natIso (Scheme.Modules.overFunctorEquiv V)
+  let : PreservesFiniteLimits B := moduleOverFunctor_limits_proof V.toScheme.toRingedSpace W
+  let : PreservesFiniteColimits B := moduleOverFunctor_colimits_proof V.toScheme.toRingedSpace W
+  let : PreservesFiniteLimits F := comp_preservesFiniteLimits R B
+  let : PreservesFiniteColimits F := comp_preservesFiniteColimits R B
+  let : F.PreservesZeroMorphisms := moduleOpenOver_preservesZeroMorphisms X V W
+  let : F.Additive := Functor.additive_of_preserves_binary_products F
+  let A := (moduleOpenOverComplexFunctor X V W).obj T
+  let K := (moduleOpenOverComplexFunctor X V W).obj J
+  let z (L : CochainComplex X.Modules ℤ) (i : ℤ) :
+      F.obj (L.cycles i) ≅ ((moduleOpenOverComplexFunctor X V W).obj L).cycles i :=
+    ((L.sc i).mapCyclesIso F).symm
+  let d (L : CochainComplex X.Modules ℤ) (i : ℤ) :
+      F.obj (L.homology i) ≅ ((moduleOpenOverComplexFunctor X V W).obj L).homology i :=
+    ((L.sc i).mapHomologyIso F).symm
+  have zi (L : CochainComplex X.Modules ℤ) (i : ℤ) :
+      (z L i).inv ≫ F.map (L.iCycles i) =
+        ((moduleOpenOverComplexFunctor X V W).obj L).iCycles i :=
+    (L.sc i).mapCyclesIso_hom_iCycles F
+  have zp (L : CochainComplex X.Modules ℤ) (i : ℤ) :
+      (z L i).inv ≫ F.map (L.homologyπ i) ≫ (d L i).hom =
+        ((moduleOpenOverComplexFunctor X V W).obj L).homologyπ i := by
+    have h := congrArg (fun f ↦ f ≫ ((L.sc i).mapHomologyIso F).inv)
+      ((L.sc i).homologyπ_mapHomologyIso_hom F).symm
+    simp only [Category.assoc] at h
+    erw [Iso.hom_inv_id, Category.comp_id] at h
+    exact h
+  let H {M M' N N' : SheafOfModules.{u} (V.toScheme.ringCatSheaf.over W)}
+      (a : M ≅ M') (b : N ≅ N') :
+      SheafOfModules.homObj (R := V.toScheme.sheaf.over W) M N ≅
+        SheafOfModules.homObj (R := V.toScheme.sheaf.over W) M' N' :=
+    { hom := SheafOfModules.homObjMap (R := V.toScheme.sheaf.over W) a.inv b.hom
+      inv := SheafOfModules.homObjMap (R := V.toScheme.sheaf.over W) a.hom b.inv
+      hom_inv_id := by
+        simp only [SheafOfModules.homObjMap_comp_homObjMap,
+          Iso.hom_inv_id, SheafOfModules.homObjMap_id]
+      inv_hom_id := by
+        simp only [SheafOfModules.homObjMap_comp_homObjMap,
+          Iso.inv_hom_id, SheafOfModules.homObjMap_id] }
+  have hc {M M' M'' N N' N'' : SheafOfModules.{u}
+      (V.toScheme.ringCatSheaf.over W)} (f : M' ⟶ M) (f' : M'' ⟶ M')
+      (g : N ⟶ N') (g' : N' ⟶ N'') :
+      SheafOfModules.homObjMap (R := V.toScheme.sheaf.over W) f g ≫
+          SheafOfModules.homObjMap (R := V.toScheme.sheaf.over W) f' g' =
+        SheafOfModules.homObjMap (R := V.toScheme.sheaf.over W) (f' ≫ f) (g ≫ g') :=
+    SheafOfModules.homObjMap_comp_homObjMap (R := V.toScheme.sheaf.over W) f f' g g'
+  let b := e (T.homology (-n)) (J.homology 0) ≪≫ H (d T (-n)) (d J 0)
+  let s := e (T.cycles (-n)) (J.cycles 0) ≪≫ H (z T (-n)) (z J 0)
+  let t := e (T.cycles (-n)) (J.X 0) ≪≫ H (z T (-n)) (Iso.refl (K.X 0))
+  let v := e (T.cycles (-n)) (J.homology 0) ≪≫ H (z T (-n)) (d J 0)
+  refine ⟨b, s, t, v, ?_, ?_, ?_, ?_⟩
+  · dsimp only [t, H, Iso.trans_hom, Iso.refl_hom]
+    rw [← Category.assoc, he]
+    simp only [Category.assoc, hc,
+      Functor.map_id, Category.id_comp]
+    congr 2
+    exact zi T (-n)
+  · dsimp only [t, s, H, Iso.trans_hom, Iso.refl_hom]
+    rw [← Category.assoc, he]
+    simp only [Category.assoc, hc,
+      Functor.map_id, Category.id_comp, Category.comp_id]
+    congr 2
+    apply (cancel_epi (z J 0).inv).1
+    simp only [Iso.inv_hom_id_assoc]
+    erw [Category.comp_id]
+    exact zi J 0
+  · dsimp only [v, s, H, Iso.trans_hom]
+    rw [← Category.assoc, he]
+    simp only [Category.assoc, hc,
+      Functor.map_id, Category.id_comp, Category.comp_id]
+    congr 2
+    apply (cancel_epi (z J 0).inv).1
+    simpa only [Category.assoc, Iso.inv_hom_id_assoc] using zp J 0
+  · dsimp only [v, b, H, Iso.trans_hom]
+    rw [← Category.assoc, he]
+    simp only [Category.assoc, hc,
+      Functor.map_id, Category.id_comp, Category.comp_id]
+    congr 2
+    apply (cancel_mono (d T (-n)).hom).1
+    simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using zp T (-n)
 
 end CategoryTheory
