@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-exc-closed-localization",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Closed-site operations under weakly etale localization",
@@ -17,26 +17,92 @@
  ],
  "proof": [
   {
-   "text": "By the slice identification in\n[lem-weil-pbc-proetale-restriction-injectives], restriction is evaluation on\nobjects over $W$. Both closed direct images evaluate a sheaf $G$ on such an\nobject $W'$ as $G(W'\\times_XZ)$, so they agree with their restriction maps.\nFor inverse images, both composites carry a representable sheaf to the sheaf\nof its base change by the same cartesian square of\n[def-weil-pbc-cartesian-square]. All sheaves are colimits of\nrepresentables; for modules use free module sheaves on representables and a\ncokernel presentation. Inverse images preserve these colimits, so the\nidentifications extend to all sheaves. In the sectionwise adjunction of the\npro-etale operations, the unit restricts a section to the base change and\nthe counit evaluates that restriction. The identifications just constructed\npreserve these maps, which proves the claimed compatibility.",
+   "text": "Write $i:Z\\to X$, $v:W\\to X$, $Z_W=Z\\times_XW$, $i_W:Z_W\\to W$, and $v_Z:Z_W\\to Z$. The slice identification identifies $v^*$ and $v_Z^*$ with restriction. For $T\\to W$, the two values $(v^*i_*G)(T)$ and $(i_{W*}v_Z^*G)(T)$ are $G(Z\\times_X T)$ and $G(Z_W\\times_W T)$, respectively. The fiber-product universal property identifies these objects, their arrows, and their coefficient actions. Hence restriction gives a natural isomorphism $v^*i_*\\cong i_{W*}v_Z^*$.",
    "uses": [
     "lem-weil-pbc-proetale-restriction-injectives",
-    "def-weil-pbc-cartesian-square"
+    "def-weil-pbc-proetale-operations"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-localization.md",
+    "place": "node lem-exc-closed-localization, order 1846"
+   }
+  },
+  {
+   "text": "Compute inverse image using the comma-category colimit followed by sheafification in [def-weil-proetale-inverse-image]. For $T\\to Z_W$, a global index is $(V\\to X,\\phi:T\\to Z\\times_XV)$. Replace it by $V_W=V\\times_XW$ with the unique lift of $\\phi$ using the given $T\\to W$. This is a local index for $i_W$, and the projection $V_W\\to V$ sends a section $s\\in F(V)$ to its restriction in $F(V_W)$. Conversely a local index $(V\\to W,\\psi:T\\to Z_W\\times_WV)$ is a global index by forgetting its W-structure. These maps on colimits are inverse: the projection $V_W\\to V$ is an indexing arrow identifying the original representative with its replacement; for a local V, its graph $V\\to V\\times_XW$ is an indexing arrow identifying the local representative with its replacement. The maps commute with arrows of T. Slice coverings are unchanged, so sheafification gives $v_Z^{-1}i^{-1}F\\cong i_W^{-1}v^{-1}F$. For the constant coefficient module sheaves of the site convention, these maps send $a s$ to $a$ times the image of $s$; the module construction in the operations definition therefore gives the same isomorphism for module inverse images. This constructs the canonical pro-etale inverse-image comparison directly from the base-change functors; no etale inverse-image comparison or presentation theorem is used.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-localization.md",
+    "place": "node lem-exc-closed-localization, order 1846"
+   }
+  },
+  {
+   "text": "In the inverse-image colimit definition, the unit $F(V)\\to(i_*i^{-1}F)(V)$ sends s to the class indexed by $(V,\\mathrm{id}_{Z\\times_XV})$, followed by sheafification. For the counit $i^{-1}i_*G\\to G$, a representative indexed by $(V,\\phi:T\\to Z\\times_XV)$ is $s\\in G(Z\\times_XV)$ and is sent to $\\phi^*s\\in G(T)$. The restriction maps respect indexing arrows, so this defines a presheaf map and then a sheaf map; the operations definition lifts these very maps to modules. The unit representative under step 2 is its restriction along $V\\times_XW\\to V$, namely the local unit representative. For the counit, the lifted map $\\phi_W:T\\to Z_W\\times_W(V\\times_XW)$ followed by projection is $\\phi$, so $\\phi_W^*\\operatorname{pr}^*s=\\phi^*s$. This equality on every representative proves equality after the colimit and sheafification. Thus both unit and counit commute with the direct-image identification of step 1 and inverse-image identification of step 2.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-localization.md",
+    "place": "node lem-exc-closed-localization, order 1846"
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proetale-restriction-injectives",
-  "def-weil-pbc-cartesian-square"
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-proetale-restriction-injectives"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-localization.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restriction to a weakly etale localization commutes with closed direct image and inverse image base change",
+   "results": "8 hits, all unrelated etale algebra declarations; no theorem for this sheaf-theoretic statement",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.pushforward, Sheaf.pullback, CategoryTheory.Adjunction",
+   "results": "0 hits; loogle: unknown identifier 'Sheaf.pushforward'",
+   "date": "2026-10-14",
+   "verdict": "unavailable pattern"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*direct image|inverse.*image.*base change Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules on the pro-etale site, restriction to a weakly etale scheme commutes with closed immersion direct image and inverse image and respects the adjunction unit and counit",
+   "results": "Service returned Internal Server Error; no search results available. Maintainer rerun, with search log confined to the isolated review directory.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?etale|baseChange.*(sheaf|Sheaf)|(sheaf|Sheaf).*baseChange in Mathlib/CategoryTheory",
+   "results": "Three hits in CategoryTheory/Sites/Coverage.lean, lines 438, 445, 449: Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange and its small variant; these compare sheaf conditions for coverages, not localization exchange or adjunction compatibility. Read lines 430-453.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +129,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-open-closed-triangle"
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-exc-closed-localization",
+  "worker": "stage1",
+  "summary": "Verified direct images by fiber products; computed localized inverse images using explicit comma-colimit representatives and indexing arrows; verified unit and counit on each representative. No new nodes and no generator-presentation theorem needed.",
+  "blueprint": "Proof first two sentences: slice/direct-image evaluation; inverse-image sentences: explicit replacement of global comma indices by their base change; final sentences: unit and counit on representatives.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-restriction-injectives",
+    "why": "The slice identification and derived evaluation comparison are supplied by the proper-base-change unit; the open-closed triangle unit has no replacement for this generic pro-etale localization tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-restriction-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-b468e910f",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-b468e910f (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, sources, and unit/chapter route in full. Verified all three steps and edge cases. Repaired the unsupported étale-comparison citation and missing LeanSearch attempt; recorded the service failure as unavailable. Statement unchanged; no new nodes or cycles. Corrected JSON and concrete checks are in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
