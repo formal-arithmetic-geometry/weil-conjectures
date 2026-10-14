@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-amplification-proper",
-   "place": "proof (c): bounded adic-lisse finite-type local terms, including after restriction to a stratum",
+   "place": "proof (c): bounded adic-lisse finite-type local terms and their finite quotient realizations, including compatibility after restriction to a stratum",
    "via": [
     "lem-weil-pbc-normalized-constructible-local-effectivity"
    ]
@@ -28,9 +28,145 @@
   "def-weil-proetale-inverse-image",
   "lem-pur-derived-change-of-rings"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First $C$ is Noetherian and $J$-adically complete, and its projection identifies $C/J^n$ with $P_n$ for every $n\\geq1$, by the three cited completion results (a Noetherian ideal is finitely generated). A finite $C$-module $N$ is therefore $J$-adically complete and finitely presented. Its quotient $N/J^nN$ is finite as a set: a finite generating list gives a surjection from a finite power of the finite ring $C/J^n=P_n$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "lem-sc-noetherian-finite-module-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0316 (lemma-completion-Noetherian-Noetherian), 05GG (lemma-hathat-finitely-generated), and 00MA (lemma-completion-tensor)"
+   }
+  },
+  {
+   "text": "Fix a site object $U$ and put $M_n=\\underline{C/J^n}(U)$. Apply the constant-section properties over $C/J^n$: this ring is Noetherian since it is finite, and $M_n$ is flat over it. The same properties over $C$ make the quotient transitions surjective on sections. The limit-flat-modules theorem over $(C,J)$ now gives the canonical, natural identification\n$$N\\otimes_C\\widehat A_X(U)\\cong\\varprojlim_n(N\\otimes_C M_n)\\cong\\varprojlim_n\\underline{N/J^nN}(U)=c_X(N)(U).$$\nThe second identification is the finitely presented tensor/sections assertion. These maps commute with restriction in $U$. Moreover that assertion with $M=C$ identifies $\\underline N(U)$ with $\\underline C(U)\\otimes_C N$. Thus the presheaf tensor defining $\\widehat A_X\\otimes_{\\underline C}\\underline N$ has exactly the displayed sections and already is a sheaf. Sheafifying gives a natural $\\widehat A_X$-linear isomorphism $c_X(N)=\\widehat A_X\\otimes_{\\underline C}\\underline N$, whose finite projections send $a\\otimes x$ to $a_n\\otimes(x\\bmod J^nN)$.",
+   "uses": [
+    "lem-weil-pbc-constant-module-section-properties",
+    "lem-weil-pbc-limit-flat-modules",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0912 (lemma-limit-flat); sites-modules.tex Tags 093J, 093K, 093L (lemma-constant-exact, lemma-tensor-with-finitely-presented, lemma-flat-sections)"
+   }
+  },
+  {
+   "text": "Apply completed-constant-sheaf-reduction with coefficient ring $C$ and ideal $J$; its completed sheaf is $\\widehat A_X$ by step 1. It is flat over $\\underline C$. The constant-sheaf functor is exact by constant-module-section-properties, so the tensor identification of step 2 proves exactness of $c_X$. Also $I^nN=J^nN$, $N$ is complete, and $N/IN$ is finite over $A/I=C/J$. Hence the identity covering of $X$ and the module $N$, viewed as an $A$-module, give precisely the adic-lisse local model of the cited definition. No freeness of $N$ is used.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-constant-module-section-properties",
+    "def-weil-pbc-adic-lisse-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093M (lemma-completion-flat); proetale.tex Tag 09BT (definition-adic), clause (3)"
+   }
+  },
+  {
+   "text": "Here is a finite-free resolution for the entire bounded complex, rather than an assumption that an arbitrary K-flat resolution survives realization. Choose $b$ above its support, put $F^i=0$ for $i>b$, and construct $F^i$ and $f^i:F^i\\to Q^i$ downwards. Given the higher terms, form\n$$E^i=\\{(q,k)\\in Q^i\\oplus F^{i+1}:d_Qq=f^{i+1}k,\\ d_Fk=0\\}.$$\nIt is a finite $C$-module by the Noetherian-submodule theorem. Choose a finite free module $F^i$ surjecting onto $E^i$ by the finite-free-resolution theorem, and define $f^i$ and $d_F^i$ by the two projections. The defining equations give $d_F^2=0$ and $d_Qf=fd_F$. A cocycle $q$ lifts using the pair $(q,0)$, and if a cocycle $k\\in F^{i+1}$ maps to the boundary $d_Qq$, the pair $(q,k)$ lifts and makes $k$ a boundary. Thus $F\\to Q$ is a quasi-isomorphism. Constant sheaves preserve it; exactness in step 3 shows $c_X(F)\\to c_X(Q)$ is a quasi-isomorphism too. Each $c_X(F^i)$ is a finite sum of $\\widehat A_X$, so this bounded-above complex is K-flat by the site K-flat theorem.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "lem-weil-pbc-constant-module-section-properties",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LP (lemma-resolution-by-finite-free), successive-surjection construction applied to the displayed finite modules; sites-cohomology.tex flat-resolution construction"
+   }
+  },
+  {
+   "text": "Compute derived reduction using the K-flat resolution $c_X(F)\\to c_X(Q)$ of step 4 and derived pullback for the identity topos with coefficient map. In each degree, the projection gives\n$$c_X(F^i)\\otimes_{\\widehat A_X}\\underline{P_n}=\\underline{F^i\\otimes_C P_n},$$\nsince $F^i$ is finite free. The differential is a matrix over $C$, and its reduction on both sides is that same matrix modulo $J^n$; these degreewise maps therefore form a chain isomorphism. The module complex $F$ is K-flat by the module bounded-above-flat theorem, and $\\underline{F\\otimes_C P_n}$ represents $\\underline{Q\\otimes_C^L P_n}$ because constant sheaves are exact. This proves the first displayed isomorphism. The maps are canonical tensor/projection maps, natural on chain maps of resolutions. Derived tensor descent and the resolution-independence clause of derived pullback for the identity topos with coefficient map make the comparison independent of $F$ and natural in $Q$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-weil-pbc-constant-module-section-properties",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YU (definition-derived-tor); degreewise finite-free calculation"
+   }
+  },
+  {
+   "text": "For the relative assertion, inverse image preserves constants: a constant sheaf of sets is a coproduct of copies of the terminal sheaf, and the left adjoint $u^{-1}$ preserves coproducts and the terminal object. Its preservation of finite limits and colimits makes it exact on abelian groups and modules; the constants comparison respects addition and scalar multiplication. Apply ringed-topos-flat-module-pullback to the flat $\\underline C_T$-module $\\widehat A_T$ and the coefficient isomorphism $u^{-1}\\underline C_T=\\underline C_X$. Thus $B=u^{-1}\\widehat A_T$ is flat over $\\underline C_X$. Apply the ordinary pullback/tensor isomorphism and exactness to the completed coefficient quotient at $T$ to get\n$$B\\otimes_{\\underline C_X}\\underline{P_n}_X\\cong u^{-1}(\\widehat A_T\\otimes_{\\underline C_T}\\underline{P_n}_T)\\cong u^{-1}\\underline{P_n}_T=\\underline{P_n}_X.$$\nThis is the projection-induced quotient map, and the map $B\\to\\widehat A_X$ respects it by its definition from these projections.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-weil-pbc-completed-constant-sheaf-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05VD (lemma-pullback-flat), lemma-tensor-product-pullback; sites.tex Tag 0H7J (example-constant-sheaf)"
+   }
+  },
+  {
+   "text": "Put $H=\\widehat A_X$ and $M=c_X(Q)$ with its restricted $B$-action. Choose a K-flat $B$-resolution $R\\to M$. Because $B$ is flat over $\\underline C_X$, restriction of $R$ is K-flat over $\\underline C_X$: for every acyclic $\\underline C_X$-complex $L$, $B\\otimes_{\\underline C_X}L$ is acyclic and\n$$R\\otimes_{\\underline C_X}L=R\\otimes_B(B\\otimes_{\\underline C_X}L)$$\nis acyclic. Consequently the quotient isomorphism in step 6 gives\n$$M\\otimes_B^L\\underline{P_n}_X\\cong\\operatorname{Res}_{\\underline C_X}M\\otimes_{\\underline C_X}^L\\underline{P_n}_X.$$\nIndeed both sides are computed by $R\\otimes_{\\underline C_X}\\underline{P_n}_X$, using $(r\\otimes b)\\otimes p\\mapsto r\\otimes bp$ and its inverse $r\\otimes p\\mapsto r\\otimes(1\\otimes p)$. Apply the finite-reduction comparison of constant-completion-equivalence to $(C,J,H,M)$, then step 5: the right side is $M\\otimes_H^L\\underline{P_n}_X\\cong\\underline{Q\\otimes_C^L P_n}_X$. This proves the relative assertion without identifying $B$ with $H$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor); sites-modules.tex Tag 093M (lemma-completion-flat), flat scalar comparison by the displayed K-flat calculation"
+   }
+  },
+  {
+   "text": "For $m\\geq n$, write $q_{m,n}:P_m\\to P_n$ for the quotient map. On a finite-free term in step 5 both orders of reduction send $a\\otimes v$ to $q_{m,n}(a)\\otimes v$. In step 2 both orders take $a\\otimes x$ to $q_{m,n}(a_m)\\otimes(x\\bmod J^nN)$. In step 6 the projections defining $B\\to H$ satisfy $q_{m,n}\\pi_m=\\pi_n$, also after inverse image. The balancing maps of step 7 send $(r\\otimes b)\\otimes p$ to $r\\otimes bp$, and replacing $p$ by $q_{m,n}(p)$ gives $r\\otimes bq_{m,n}(p)$ along either path. These identities commute with differentials and restrictions, hence with sheafification and derived localization. The constant-completion comparison already asserts compatibility with quotient transitions. This proves all the required commutative squares; the same formulas with three quotients give their cocycle identities.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093M (lemma-completion-flat), canonical projections; explicit quotient and balancing maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-adic-lisse-module",
+  "def-weil-proetale-inverse-image",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-kflat-resolution",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-weil-pbc-limit-flat-modules",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093J--093M with more-algebra.tex Tag 0912; explicit finite-free and K-flat scalar-restriction calculations extending the completed local models of proetale.tex Tags 09BT, 09BV"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,12 +205,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-normalized-constructible-local-effectivity",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-completed-constant-finite-complex-realization",
+  "worker": "stage1",
+  "summary": "Second reading replaces unsupported inverse-limit and K-flat transport steps by sectionwise flat-limit tensor realization, an explicit finite-free complex resolution, and flat scalar restriction. All three provisional new nodes are removed in favor of existing generic inputs. Statement unchanged.",
+  "blueprint": "Realizes thm-weil-pbc-amplification-proper proof (c), specifically the bounded adic-lisse finite-type local terms and finite quotient realizations; the inverse-image step realizes the clause saying compatibility survives restriction to a stratum.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-35083a8c8",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-35083a8c8 (reviewer sub-agent of L); spot-checked: Read the full mathematics and all cited statements/source passages. All eight steps pass, including relative coefficient reduction and nonregular Tor cases. Corrected only step 1’s Tag 0316 label to lemma-completion-Noetherian-Noetherian. Statement unchanged; no new nodes, cycles, duplicates, or tool-use exceptions. Full checks are in review.md; corrected JSON is under fixes/dag/nodes/.; 1 file(s) fixed by the reviewer"
+ }
 }
