@@ -14861,3 +14861,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:06 L: merged deliver/V3/Sheaf.AlgebraicGeometry.EtaleProperDerivedDirectImageAdjoint (stage 3; reviewer PASS; first push; landing 20261014T140638-L-118915 (interface); batch 20261014T140633; modules 4; new nodes 4)
 - 14:06 L: merged deliver/V3/Sheaf.RingTheory.AssociatedGradedIdealApproximation (stage 3; reviewer PASS; first push; landing 20261014T140638-L-119024 (proof); batch 20261014T140633; modules 1; new nodes 0)
 - 14:06 L: merged deliver/W4/Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare (stage 3; reviewer PASS; first push; landing 20261014T140639-L-119258 (proof); batch 20261014T140633; modules 1; new nodes 0)
+- 14:06 L: merged deliver/X2/Sheaf.AlgebraicGeometry.Curve.NormalizationComparisonOnIsoLocus (stage 3; reviewer PASS; first push; landing 20261014T140639-L-119459 (proof); batch 20261014T140633; modules 1; new nodes 0)
