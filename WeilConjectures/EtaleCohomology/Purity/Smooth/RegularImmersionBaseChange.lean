@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
+public import WeilConjectures.Mathlib.Data.Fin.Tuple.Basic
 
 /-!
 # Base change and intersections of fundamental classes of regular immersions
@@ -114,17 +115,6 @@ lemma isPullback_zeroLocusSubschemeι_union {S s t : Set Γ(X, ⊤)}
         rw [hker, hS, IdealSheafData.ofIdealTop_sup, sup_comm]
 
 end Scheme
-
-/-- The range of `Fin.append a b` is the union of the ranges. -/
-lemma _root_.Fin.range_append {α : Type*} {m n : ℕ} (a : Fin m → α) (b : Fin n → α) :
-    Set.range (Fin.append a b) = Set.range a ∪ Set.range b := by
-  ext x
-  constructor
-  · rintro ⟨k, rfl⟩
-    induction k using Fin.addCases <;> simp
-  · rintro (⟨k, rfl⟩ | ⟨k, rfl⟩)
-    · exact ⟨Fin.castAdd n k, by simp⟩
-    · exact ⟨Fin.natAdd m k, by simp⟩
 
 /-- Pasting pullback squares: if `A₁ = Y₁ ×_X W`, `A₂ = Y₂ ×_X W`, `P = A₁ ×_W A₂` and
 `Y = Y₁ ×_X Y₂`, then `P = Y ×_X W`. -/
