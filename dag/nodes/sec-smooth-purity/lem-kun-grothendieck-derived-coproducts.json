@@ -20,9 +20,74 @@
   "def-sp-grothendieck-abelian",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-sp-grothendieck-abelian], A has small colimits, hence each coproduct $S^r=\\bigoplus_i K_i^r$ exists. With coprojections $j_i^r$, define $d_S^r$ by $d_S^r j_i^r=j_i^{r+1}d_i^r$. Testing on every coprojection gives $d_S^{r+1}d_S^r j_i^r= j_i^{r+2}d_i^{r+1}d_i^r=0$, so S is a cochain complex and the j_i are chain maps. Any family of chain maps $f_i:K_i\\to T$ induces unique degreewise maps $f^r:S^r\\to T^r$; their differential equations follow by testing on j_i. This proves the chain-level coproduct universal property.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 07D9, lemma-derived-products, proof"
+   }
+  },
+  {
+   "text": "Write $\\mathsf K(A)$ for the homotopy category. Restriction gives a bijection $\\operatorname{Hom}_{\\mathsf K(A)}(S,T)\\to\\prod_i\\operatorname{Hom}_{\\mathsf K(A)}(K_i,T)$ for every target complex T: choose chain representatives of the component classes and assemble them by Step 1 to prove surjectivity. For injectivity, if f and g have homotopic restrictions, choose component homotopies $h_i^r:K_i^r\\to T^{r-1}$ and assemble $h^r:S^r\\to T^{r-1}$. The equation $f^r-g^r=d_T^{r-1}h^r+h^{r+1}d_S^r$ holds on every j_i, hence holds globally. Conversely any homotopy restricts to the component homotopies. Thus the bijection is specifically restriction along the coprojections.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 07D9, lemma-derived-products, proof"
+   }
+  },
+  {
+   "text": "For an arbitrary derived object L choose a complex M representing it, as in [def-weil-abstract-derived-category]. By [lem-weil-pbc-kinjective-functorial-existence] there is a quasi-isomorphism $M\\to J$ with J K-injective, with no boundedness restriction. Localization turns this into an isomorphism $L\\cong Q(J)$. Only existence and K-injectivity are used, not the functoriality clause.",
+   "uses": [
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079P, theorem-K-injective-embedding-grothendieck; Tag 07D9, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-kinjective-quasi-iso-comparison] with target J and sources S and each K_i. It gives bijections from the homotopy-category Hom sets to the corresponding derived Hom sets. These commute with restriction along j_i because localization preserves composition. Conjugating the restriction bijection of Step 2 by these bijections gives $\\operatorname{Hom}_{D(A)}(Q(S),Q(J))\\cong\\prod_i\\operatorname{Hom}_{D(A)}(Q(K_i),Q(J))$, and the resulting map is exactly restriction along Q(j_i).",
+   "uses": [
+    "lem-sc-kinjective-quasi-iso-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 07D9, displayed Hom calculation; derived.tex Tag 070I, lemma-K-injective, assertion (3)"
+   }
+  },
+  {
+   "text": "Postcomposition with the isomorphism $L\\cong Q(J)$ of Step 3 is bijective both on maps from Q(S) and on maps from every Q(K_i), and commutes with restriction along Q(j_i) by associativity. Therefore the restriction map into L is bijective as well. This is exactly the coproduct universal property for the specified Q(j_i). If I is empty, the degreewise coproducts in Step 1 are zero objects, there is a unique map from S into every T and the product of Hom sets in Steps 2 and 4 is a singleton. Hence the same proof covers the empty coproduct.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 07D9, lemma-derived-products, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-sc-kinjective-quasi-iso-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 07D9, lemma-derived-products, coproduct part of proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -79,15 +144,86 @@
    "results": "0 hits: ",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Termwise coproducts of unbounded cochain complexes in a Grothendieck abelian category compute coproducts in its derived category",
+   "results": "; 8 hits: HomologicalComplex.isGrothendieckAbelian, CategoryTheory.IsGrothendieckAbelian.hasExt, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, HasDerivedCategory, HomologicalComplex.ab5OfSize, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.isGE_Q_obj_iff",
+   "date": "2026-10-14",
+   "verdict": "no match: returned instances and localization infrastructure do not assert preservation of coproducts"
+  },
+  {
+   "tool": "grep",
+   "query": "coproduct|HasCoproducts|PreservesColimitsOfShape.*Discrete",
+   "results": "; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Termwise direct sums compute coproducts in the unbounded derived category of a Grothendieck abelian category",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory.Q\", \"PreservesColimitsOfShape\"",
+   "results": "; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The localization functor from cochain complexes to the derived category preserves arbitrary coproducts when K-injective resolutions exist",
+   "results": "; 8 hits: DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, HasDerivedCategory.standard, HasDerivedCategory, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, DerivedCategory.Q, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso",
+   "date": "2026-10-14",
+   "verdict": "no match: returned instances and localization infrastructure do not assert preservation of coproducts"
+  },
+  {
+   "tool": "grep",
+   "query": "preserves.*colimit|coproduct|HasCoproducts",
+   "results": "; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesCoproducts|preservesColimit.*[Qq]h|[Qq]h.*preservesColimit",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient functor from a homotopy category to a derived category preserves direct sums via K injective resolutions",
+   "results": "8 hits: DerivedCategory.instAdditiveHomotopyCategoryIntUpQh, DerivedCategory.instAdditiveCochainComplexIntQ, DerivedCategory.instPreadditive, DerivedCategory.Qh_obj_singleFunctors_obj, DerivedCategory.instLinearHomotopyCategoryIntUpQh, CategoryTheory.Functor.rightDerivedToHomotopyCategory, DerivedCategory.Qh, DerivedCategory.instLinearCochainComplexIntQ",
+   "date": "2026-10-14",
+   "verdict": "no match: additive and linear localization infrastructure does not assert preservation of arbitrary coproducts"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-kun-0f11",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-grothendieck-derived-coproducts",
+  "worker": "stage1",
+  "summary": "Constructed degreewise coproducts and explicitly assembled maps and homotopies. Used existing general K-injective existence and localization Hom-bijection nodes to establish the derived universal property, including the empty family. No new nodes or statement changes.",
+  "blueprint": "lem-kun-0f11 Proof Step 2 (complexes): formation of the direct sum and its canonical coprojections."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-2f51db3b1",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-2f51db3b1 (reviewer sub-agent of L); spot-checked: Read the complete item, five proof steps, cited statements, source passages, and unit/chapter route. Stacks 07D9, 079P, and 070I support the argument, including arbitrary unbounded families, canonical coprojections, and the empty family. No duplicate generalization, circular dependency, or repair needed. No new nodes; no tool_uses exception required. Detailed checks written to review.md."
+ }
 }
