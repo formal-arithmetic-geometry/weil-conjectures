@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
-   "place": "Proof, proper connected case: E=H^1(C,O_C) has dimension g; the top-coherent-cohomology-finite child uses restriction from a projective closure. This node supplies the punctured-neighborhood continuity input in the proof of top-degree restriction. General cohomological continuity used after constructing the punctured inverse system.",
+   "place": "General cohomological continuity used after constructing the punctured inverse system; the lemma-colimit argument gives continuity of all cohomology groups.",
    "via": [
     "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
     "lem-weil-pbc-top-degree-open-restriction-surjective",
@@ -26,9 +26,125 @@
   "def-weil-pbc-category-colimit",
   "def-sc-topological-abelian-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The spectral inverse-limit theorem gives spectral projections, so each $p_i^{-1}(U_i)$ is quasi-compact when $U_i$ is. The limit topology has a basis of finite intersections of inverse images of opens. Refine each stage open by its quasi-compact-open basis. For finitely many resulting opens choose a common upper index $k$; their intersection is $p_k^{-1}(\\bigcap_l f_{i_lk}^{-1}U_{i_l})$, whose stage open is quasi-compact by spectrality and quasi-separatedness. Thus these inverse images form a basis. The descent-opens lemma represents every quasi-compact open at a stage and detects inclusions and finite covering equalities at later stages, as needed below.",
+   "uses": [
+    "def-weil-spectral-space",
+    "lem-weil-pbc-spectral-directed-limit-spectral",
+    "lem-weil-pbc-spectral-limit-descend-opens"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0A30, label lemma-descend-opens; Tag 0A2Z, spectral inverse-limit basis"
+   }
+  },
+  {
+   "text": "Apply the section comparison to the compatible sheaf system on X. It identifies sections of F over p_i^{-1}(U_i) with the filtered colimit of the sections of F_j over f_{ij}^{-1}(U_i), and the comparison is the canonical one induced by the transition maps.",
+   "uses": [
+    "lem-weil-pbc-spectral-limit-sheaf-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0A33, label lemma-descend-opens"
+   }
+  },
+  {
+   "text": "Use the full site of open subsets of each X_i with arbitrary open coverings, not a finite-cover colimit site. Its objects and inclusion morphisms form sets; unions of open covers and intersections verify the site axioms. Choose embeddings e_k:F_k\\to A_k with A_k injective using enough injectives on this site. Define G_i(V)=\\prod_{k\\ge i}A_k(f_{ik}^{-1}V), with componentwise restrictions. This is a sheaf: a compatible local family glues uniquely in each factor, and those gluings give the unique product section. It is the product of the sheaves (f_{ik})_*A_k, with its universal property verified componentwise. Each factor is injective by the topological pushforward-injective lemma, which assumes only continuity; the product-injectives lemma gives injectivity of G_i.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-sc-topological-pushforward-injective",
+    "lem-weil-pbc-product-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A37, label lemma-colimit, compatible injective construction and dimension shifting"
+   }
+  },
+  {
+   "text": "Define \\gamma_i:F_i\\to G_i by its k-component (f_{ik})_*e_k\\circ\\alpha_{ik}. Its i-component is e_i because \\alpha_{ii}=1, so \\gamma_i is monic. Define \\beta_{ij}:G_i\\to(f_{ij})_*G_j on an open V by discarding coordinates k not \\ge j; the retained k-coordinate lies in A_k(f_{jk}^{-1}f_{ij}^{-1}V)=A_k(f_{ik}^{-1}V). Thus \\beta_{ii}=1, and both \\beta_{ik} and (f_{ij})_*\\beta_{jk}\\circ\\beta_{ij} retain exactly the coordinates l\\ge k. On coordinate k\\ge j, (f_{ij})_*\\gamma_j\\circ\\alpha_{ij} equals (f_{ik})_*e_k\\circ(f_{ij})_*\\alpha_{jk}\\circ\\alpha_{ij}=(f_{ik})_*e_k\\circ\\alpha_{ik}, the same as \\beta_{ij}\\circ\\gamma_i. These are sheaf maps since coordinate projections commute with restrictions. Take adjoints to obtain the required compatible inverse-image system of injectives. This proves the construction here rather than applying the finite-cover-site system lemma.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A37, label lemma-colimit, compatible injective construction and dimension shifting"
+   }
+  },
+  {
+   "text": "Let Q_i=\\operatorname{coker}(\\gamma_i). The exactness clause of the topological pushforward-injective lemma says that inverse image along every continuous f_{ij} and p_i is exact. The compatible maps from the preceding step therefore induce maps f_{ij}^{-1}Q_i\\to Q_j by the cokernel universal property; their identity and composition laws follow by precomposing the epimorphisms f_{ij}^{-1}G_i\\to f_{ij}^{-1}Q_i. Pulling back 0\\to F_i\\to G_i\\to Q_i\\to0 along p_i remains exact. Applying exact filtered colimits on the full open-set site of X gives 0\\to F\\to G\\to Q\\to0, where G=\\varinjlim_i p_i^{-1}G_i and Q=\\varinjlim_i p_i^{-1}Q_i. No finite-cover hypothesis is used in either cited exactness statement.",
+   "uses": [
+    "lem-sc-topological-pushforward-injective",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A37, label lemma-colimit, compatible injective construction and dimension shifting"
+   }
+  },
+  {
+   "text": "Let B be the quasi-compact opens of X and Cov all finite coverings of members of B by members of B. They are cofinal among arbitrary open coverings: refine each covering by the quasi-compact-open basis and extract a finite subcover using quasi-compactness of the target. Finite intersections remain in B by spectrality. Descend a finite covering U=\\bigcup_l U_l and its members to one stage using the open-descent lemma; the finite-stage equality is eventually a covering equality. For every later stage the pulled-back covering is still a covering and its finite intersections are quasi-compact since the transition maps are spectral. Step 2 applied to the G_i identifies each term of the ordered Cech complex with its filtered-colimit counterpart. In each fixed degree there are only finitely many tuples: a tuple of finitely many colimit sections is represented at a common stage, and equality is also detected at a common stage, so finite products commute with this colimit. Restrictions are the same under these identifications, hence so are the alternating differentials. The finite-stage complexes have zero positive cohomology by the topological injective-Cech lemma, and exact filtered colimits of abelian groups preserve this exactness. The site Cech-vanishing criterion now applies on the full open-set site, with B and Cov as above, and gives H^p(U,G)=0 for every U in B and p>0, in particular for U=X.",
+   "uses": [
+    "lem-pc-topological-injective-cech-positive-exact",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-site-cech-vanishing-criterion",
+    "lem-weil-pbc-spectral-limit-descend-opens",
+    "lem-weil-pbc-spectral-limit-sheaf-sections",
+    "def-weil-spectral-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A37, lemma-colimit, final proof paragraph using Tags 0A30, 01EP and 01EW"
+   }
+  },
+  {
+   "text": "Prove comparison in degree q for every compatible sheaf system by induction on q. Degree zero is Step 2 with U_i=X_i. For a system F_i embed it in the compatible G_i and form Q_i as in Steps 3-5. On every stage H^p(X_i,G_i)=0 for p>0 by injectivity, and on X H^p(X,G)=0 for p>0 by Step 6. Taking filtered colimits of the stage long exact sequences remains exact. To justify connecting squares also across different spaces, for any continuous $h:Y\\to Z$ consider the functors $E\\mapsto H^n(Y,h^{-1}E)$ on abelian sheaves of $Z$. Exactness of $h^{-1}$ and the natural long exact sequence on $Y$ make these a delta-functor. The degree-zero pullback of sections extends uniquely from the universal delta-functor $H^n(Z,-)$ to this delta-functor. Consequently these pullback maps commute with connecting maps. Composing with the maps induced by the sheaf-system morphisms, which commute with connecting maps by ordinary naturality, proves the required squares for $f_{ij}$ and $p_i$. Uniqueness of the extensions also proves compatibility with compositions, since the extensions agree in degree zero. Taking colimits preserves these commutative squares. For q=1 the two groups are cokernels of H^0(G)\\to H^0(Q), identified by the degree-zero comparison for G_i and Q_i. For q>1 their connecting maps identify degree q for F with degree q-1 for Q on both sides, and the induction hypothesis for the entire quotient system Q_i gives the isomorphism. The commutative connecting squares identify these isomorphisms with the stipulated canonical pullback-and-coprojection maps.",
+   "uses": [
+    "def-sc-topological-abelian-cohomology",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-weil-pbc-derived-functor-injective-vanishing",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "lem-sc-topological-pushforward-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A37, lemma-colimit, induction and long exact sequence argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-topological-abelian-cohomology",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-spectral-space",
+  "lem-pc-topological-injective-cech-positive-exact",
+  "lem-sc-topological-pushforward-injective",
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-product-injectives",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-site-cech-vanishing-criterion",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-spectral-directed-limit-spectral",
+  "lem-weil-pbc-spectral-limit-descend-opens",
+  "lem-weil-pbc-spectral-limit-sheaf-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0A37, label lemma-colimit and proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -88,12 +204,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-spectral-limit-cohomology",
+  "worker": "stage1",
+  "summary": "Repair of the returned delivery: replaced the inapplicable finite-cover-site injective-system theorem with the explicit full-topological-sheaf product construction of Tag 0A37. Verified product sheaf gluing, coordinate projection transitions, cocycles and monomorphisms; cited topological exact inverse image and pushforward injectivity. Expanded the finite-cover Cech cofinality and dimension-shifting argument.",
+  "blueprint": "The steps realize the ancestor blueprint's general cohomological continuity input after the punctured inverse system is constructed."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-ac3b2e6c0",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-ac3b2e6c0 (reviewer sub-agent of L); spot-checked: Read the item, new node, cited statements, source passages, and unit/chapter route. The seven-step proof agrees with Tags 0A37/0A33; canonical maps and edge cases check out. Corrected three metadata faults: incomplete creation record, missing immediate item in blueprint via, and absent standard merge/audit fields. Full findings and accepted cross-unit tools are in review.md; corrected JSON is under fixes/.; 1 file(s) fixed by the reviewer"
+ }
 }

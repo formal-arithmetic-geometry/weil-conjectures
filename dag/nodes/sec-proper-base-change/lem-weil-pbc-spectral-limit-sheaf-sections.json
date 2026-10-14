@@ -1,0 +1,108 @@
+{
+ "id": "lem-weil-pbc-spectral-limit-sheaf-sections",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
+   "place": "General cohomological continuity used after constructing the punctured inverse system: sections on quasi-compact opens are represented and identified at a finite stage.",
+   "via": [
+    "lem-weil-pbc-spectral-limit-cohomology",
+    "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
+    "lem-weil-pbc-top-degree-open-restriction-surjective",
+    "lem-weil-pbc-top-coherent-cohomology-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Sections of a sheaf system on a spectral inverse limit descend to a finite stage",
+ "statement": "Let $I$ be a nonempty directed set. Let $X_i$ be spectral spaces [def-weil-spectral-space], and let $f_{ij}:X_j\\to X_i$ for $i\\le j$ be continuous maps such that inverse images of quasi-compact opens are quasi-compact, $f_{ii}=\\mathrm{id}$ and $f_{ij}\\circ f_{jk}=f_{ik}$. Let $X$ be their inverse limit in topological spaces, with projections $p_i:X\\to X_i$: its points are the compatible tuples, and its topology is the coarsest making every $p_i$ continuous. For every $i$ let $F_i$ be a sheaf of abelian groups on $X_i$, with morphisms $\\alpha_{ij}:F_i\\to(f_{ij})_*F_j$ satisfying $\\alpha_{ii}=\\mathrm{id}$ and $\\alpha_{ik}=(f_{ij})_*\\alpha_{jk}\\circ\\alpha_{ij}$ [def-weil-pbc-topological-inverse-image]. Put $F=\\varinjlim_i p_i^{-1}F_i$ in abelian sheaves on $X$, using the pullbacks of the adjoints $f_{ij}^{-1}F_i\\to F_j$ as transition maps [def-weil-pbc-category-colimit]. For every $i$ and every quasi-compact open $U_i\\subseteq X_i$, the canonical map induced by pullback of sections and the colimit coprojections is an isomorphism of abelian groups: $$\\varinjlim_{j\\ge i} F_j(f_{ij}^{-1}U_i)\\xrightarrow{\\sim}F(p_i^{-1}U_i).$$ The transition homomorphism from index $j$ to $k\\ge j$ on the left is the component of $\\alpha_{jk}$ over $f_{ij}^{-1}U_i$, with $f_{jk}^{-1}f_{ij}^{-1}U_i=f_{ik}^{-1}U_i$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 0A33, label lemma-descend-opens, statement and proof"
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space",
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a cofiltered limit of spectral spaces and compatible sheaves, sections over a quasi compact open are the filtered colimit of sections at finite stages",
+   "results": "Hits were AlgebraicGeometry.exists_appTop_π_eq_of_isLimit and related affine transition-limit section lemmas, plus Condensed locally constant colimit lemmas; none states arbitrary sheaf sections on spectral inverse limits.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of sets on a limit of coherent topological spaces has sections computed by filtered colimits over the stages",
+   "results": "Hits concern affine scheme structure sheaf sections, condensed locally constant presheaves, or general sheaf limits; none gives the spectral-space statement for arbitrary sheaves.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"colimit\"",
+   "results": "12 hits: Presheaf.colimitOfRepresentable, Presheaf.preservesColimitsOfSize_leftKanExtension and related presheaf Kan extensions, and PresheafOfModules colimit existence and preservation. None concerns sections of arbitrary sheaf systems on limits of spectral spaces.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(quasi.compact|compact).*(section|sheaf).*(colimit|limit)|(colimit|limit).*(section|sheaf).*(quasi.compact|compact)",
+   "results": "No matching Mathlib source lines.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of sheaves on compact open subsets commutes with filtered colimits along a cofiltered diagram of topological spaces",
+   "results": "8 hits for condensed locally constant presheaves and their colimits. These concern a fixed coefficient set and profinite objects, not arbitrary sheaves on varying spectral spaces.",
+   "verdict": "no match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"filtered\"",
+   "results": "10 hits: Sheaf.hasFilteredColimitsOfSize only gives existence on one site; Point.presheafFiberOfIsCofilteredCocone and its companions compute a presheaf fiber at a point. None computes sections on varying spectral spaces.",
+   "verdict": "no match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "([Ee]valuation|[Ss]ections|[Ss]heaf).*[Pp]reserves.*[Cc]olimit",
+   "results": "17 source hits concern functor-category or module-presheaf evaluation, sheafification, or ringed-space colimits. FunctorCategory/Basic.lean:312 is presheaf evaluation and does not apply to sheaf sections on varying spaces.",
+   "verdict": "no match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of compatible abelian sheaves on an inverse limit of spectral spaces over a compact open are a filtered colimit",
+   "results": "UNAVAILABLE: service returned Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-spectral-limit-cohomology",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
