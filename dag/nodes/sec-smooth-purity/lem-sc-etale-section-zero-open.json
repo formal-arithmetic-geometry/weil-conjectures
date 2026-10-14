@@ -22,28 +22,109 @@
   "def-weil-pbc-abelian-etale-sheaves",
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Every open subscheme $A\\subseteq V$ is an object of $T_{\\Et}$: its inclusion into V is etale and etale morphisms compose. Open coverings are jointly surjective etale coverings. Define $W=\\bigcup\\{A\\subseteq V:A\\text{ open and }s|_A=0\\}$. This is a union indexed by a subset of the set of opens of V. On the open cover of W by these A, the two sections $s|_W$ and zero agree. The injectivity of the equalizer map in the sheaf axiom gives $s|_W=0$. Every zero open A is contained in W by construction, proving maximality. The empty cover gives $F(\\varnothing)=0$, so the construction also handles an empty W.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04FR, proof of (1); union construction expands the cited Zariski sheaf argument"
+   }
+  },
+  {
+   "text": "Let $h:V\\prime\\to V$ be a morphism in $T_{\\Et}$. Etale cancellation makes h etale. Its image $A=h(V\\prime)$ is open by the open-map lemma. The factorization $V\\prime\\to A$ is a morphism between etale T-objects, hence etale by cancellation, and is surjective by the definition of A. Thus it is a singleton covering of A. If $s|_{V\\prime}=0$, injectivity of $F(A)\\to F(V\\prime)$ from the sheaf equalizer gives $s|_A=0$, so $A\\subseteq W$. Conversely, if $h(V\\prime)\\subseteq W$, h factors through the open subscheme W: the continuous map lands there and its structure-sheaf map restricts there. The restriction of s factors through $s|_W=0$, so $s|_{V\\prime}=0$.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04FR, proof of (2)"
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar v$ of V and put $\\bar t=p\\bar v$. Compute the stalk using a small cofinal family of affine pointed neighbourhoods. Indeed the essentially-small-cover lemma provides a set of affine etale T-objects; for each such object its lifts of $\\bar t$ form a set of morphisms. Their pairs form a small full subcategory J of all pointed neighbourhoods. Every pointed neighbourhood receives a pointed morphism from J: take an affine open $U$ containing its lifted point. Choose a representative $A$ and an isomorphism $e:A\\to U$ over T. The lift to A is $e^{-1}\\circ\\bar u$, where $\\bar u:\\operatorname{Spec}\\Omega\\to U$ is the factorization of the original lift; composing e with $U\\hookrightarrow V$ gives the required pointed arrow (with V here denoting the chosen neighbourhood). The category of all pointed neighbourhoods is cofiltered; the full-subcategory lemma therefore makes J cofiltered and identifies the opposite-indexed colimit on J with the stalk colimit, compatibly with its coprojections. In particular choose a pointed affine refinement $(A,\\bar a)\\to(V,\\bar v)$ from J, and let r be the restriction of s to A.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-affine-etale-essentially-small-cover",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04FR, proof of (3); small affine indexing made explicit"
+   }
+  },
+  {
+   "text": "Assume the germ of s is zero. In the small filtered diagram $J^{\\mathrm{op}}$, the coprojection sends r to this zero germ. Regard abelian groups and their homomorphisms as $\\mathbf Z$-modules and linear maps, with $n\\cdot x$ defined by repeated addition (and negatives); these descriptions have exactly the same objects, morphisms and colimit universal property. Apply the zero-detection clause of the filtered-module-colimit lemma with $R=\\mathbf Z$. There is a pointed refinement $(B,\\bar b)\\to(A,\\bar a)$ on which r restricts to zero. The composite $B\\to V$ is a morphism of the small etale site, its restriction of s is zero, and it takes $\\bar b$ to $\\bar v$. Step 2 gives that its image lies in W. Hence the underlying point of $\\bar v$ lies in W.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04FR, forward implication in (3); eventual zero criterion for the stalk colimit"
+   }
+  },
+  {
+   "text": "Conversely, if the underlying point of $\\bar v$ belongs to W, the geometric point factors through W. The inclusion $(W,\\bar v)\\to(V,\\bar v)$ is a pointed etale neighbourhood morphism. Since $s|_W=0$, the defining stalk coprojections identify the germ of s with the germ of zero, which is zero. Together with step 4 this proves the geometric-germ criterion for every geometric point, with no dependence on any chosen residue-field closure.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04FR, reverse implication in (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-affine-etale-essentially-small-cover",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04FR, lemma-zero-over-image, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "For an abelian sheaf on the small etale site the locus where a section has zero geometric germ is a Zariski open subset",
-   "results": "8 hits: AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero, AlgebraicGeometry.RingedSpace.basicOpen, AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero, AlgebraicGeometry.Scheme.mem_basicOpen'', AlgebraicGeometry.exists_lift_of_germInjective_aux, AlgebraicGeometry.RingedSpace.isUnit_res_of_isUnit_germ, AlgebraicGeometry.Scheme.mem_basicOpen, AlgebraicGeometry.Scheme.mem_basicOpen'; inspected hits do not state this etale/finite-type dimension assertion",
+   "results": "8 hits: AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero, AlgebraicGeometry.RingedSpace.basicOpen, AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero, AlgebraicGeometry.Scheme.mem_basicOpen'', AlgebraicGeometry.exists_lift_of_germInjective_aux, AlgebraicGeometry.RingedSpace.isUnit_res_of_isUnit_germ, AlgebraicGeometry.Scheme.mem_basicOpen, AlgebraicGeometry.Scheme.mem_basicOpen'; returned signatures concern structure sheaves, topological stalks, or general site tools, not all three clauses for an arbitrary abelian small-etale sheaf.",
    "date": "2026-10-14",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "\"stalk\", \"zero\"",
-   "results": "4 hits: Module.rankAtStalk_eq_zero_of_subsingleton, Module.rankAtStalk_eq_zero_iff_notMem_support, Module.rankAtStalk_eq_zero_iff_subsingleton, TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero; inspected hits do not state this etale/finite-type dimension assertion",
+   "results": "4 hits: Module.rankAtStalk_eq_zero_of_subsingleton, Module.rankAtStalk_eq_zero_iff_notMem_support, Module.rankAtStalk_eq_zero_iff_subsingleton, TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero; returned signatures concern structure sheaves, topological stalks, or general site tools, not all three clauses for an arbitrary abelian small-etale sheaf.",
    "date": "2026-10-14",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "zero.*(germ|stalk)|support.*section",
-   "results": "0 hits: ; inspected hits do not state this etale/finite-type dimension assertion",
+   "query": "IsOpenMap|eq_iff.*exists|exists.*eq_iff",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean; returned signatures concern structure sheaves, topological stalks, or general site tools, not all three clauses for an arbitrary abelian small-etale sheaf.",
    "date": "2026-10-14",
    "verdict": "no match"
   },
@@ -57,39 +138,45 @@
   {
    "tool": "leanfinder",
    "query": "The vanishing locus of an individual section of an abelian etale sheaf is open and restriction is zero exactly when its image lies in that open",
-   "results": "8 hits: AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.Scheme.basicOpen_eq_bot_iff_forall_evaluation_eq_zero, AlgebraicGeometry.LocallyRingedSpace.evaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.LocallyRingedSpace.basicOpen_eq_bot_iff_forall_evaluation_eq_zero, AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero; inspected hits do not state this etale/finite-type dimension assertion",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "support|vanish|zero",
-   "results": "15 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean; inspected hits do not state this etale/finite-type dimension assertion",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"presheaf\", \"germ\"",
-   "results": "12 hits: TopCat.Presheaf.germ, TopCat.Presheaf.Γgerm, TopCat.Presheaf.germToPullbackStalk, TopCat.Presheaf.germ_stalkSpecializes, TopCat.Presheaf.germ_stalkSpecializes_assoc, TopCat.Presheaf.germ_res, TopCat.Presheaf.stalkFunctor_map_germ, TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom; inspected hits do not state this etale/finite-type dimension assertion",
+   "results": "8 hits: AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.Scheme.basicOpen_eq_bot_iff_forall_evaluation_eq_zero, AlgebraicGeometry.LocallyRingedSpace.evaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.LocallyRingedSpace.basicOpen_eq_bot_iff_forall_evaluation_eq_zero, AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero; returned signatures concern structure sheaves, topological stalks, or general site tools, not all three clauses for an arbitrary abelian small-etale sheaf.",
    "date": "2026-10-14",
    "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "For a section of a sheaf of abelian groups on the small étale site, nonvanishing geometric germs form a closed subset of the étale object",
-   "results": "8 hits: AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero, AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero, AlgebraicGeometry.RingedSpace.zeroLocus_isClosed, AlgebraicGeometry.Scheme.zeroLocus_isClosed, AlgebraicGeometry.exists_lift_of_germInjective_aux, AlgebraicGeometry.RingedSpace.zeroLocus, AlgebraicGeometry.RingedSpace.basicOpen, AlgebraicGeometry.RingedSpace.mem_zeroLocus_iff; the returned ringed-space structure-sheaf and algebraic rank declarations do not state this small-etale-site or scheme dimension assertion.",
+   "query": "A section of a sheaf becomes zero on a neighbourhood if its germ in the stalk is zero",
+   "results": "8 hits: AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero, AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero, TopCat.Presheaf.germ_exist, TopCat.stalkToFiber_germ, TopCat.Presheaf.Sheafify.isLocallyGerm, TopCat.Presheaf.Sheafify.isGerm, AlgebraicGeometry.RingedSpace.isUnit_res_of_isUnit_germ, TopCat.Presheaf.germ_exist_of_isBasis; returned signatures concern structure sheaves, topological stalks, or general site tools, not all three clauses for an arbitrary abelian small-etale sheaf.",
    "date": "2026-10-14",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-support-dimension-union",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-sc-etale-section-zero-open",
+  "worker": "stage1",
+  "summary": "Proved the three clauses of 04FR by the zero-open union, descent over the open image, and eventual zero on a pointed etale neighbourhood. Reused existing Mathlib leaves, including etale cancellation and small affine cofinal indexing; no new node or statement change. No exact finished project declaration found.",
+  "blueprint": {
+   "steps": [
+    "Ancestor proof: geometric zero germs form an open set, via vanishing on an etale neighbourhood and descent on its image; restriction to that open is zero."
+   ],
+   "same_as_search": "Whole blueprint searched for zero-over-image, zero locus, vanishing locus, zero geometric, zero section open; no equivalent blueprint statement. The ancestor uses this lemma, rather than duplicating its statement."
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NQ-e4d18c8cb",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-e4d18c8cb (reviewer sub-agent of L); spot-checked: Read the complete item and report, all cited statements, unit/chapter route, and cited literature. Verified all five steps against Stacks 04FR, étale cancellation, sheaf descent, small cofiltered indexing, and eventual-zero detection. Checked edge cases, DAG generalization candidates, dependency acyclicity, and all four exact master target signatures and coefficient categories. No new nodes, missing citations, mathematical gaps, or repairs. Full checks recorded in review.md."
+ }
 }
