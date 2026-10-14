@@ -14,21 +14,23 @@ public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 /-!
 # Descending a representing finite étale scheme along an affine étale cover
 
-Let `E` be a sheaf of sets on the small étale site of an affine scheme `T`, and let
-`p : X ⟶ T` be a surjective étale morphism from an affine scheme. Suppose that the restriction
-of `E` to étale `X`-schemes is represented by a finite étale `X`-scheme `v : V ⟶ X`, with
-universal section `ξ ∈ E(V)` (`AlgebraicGeometry.Scheme.IsUniversalSection`). Then `E` itself is
-represented by a finite étale `T`-scheme (`AlgebraicGeometry.Scheme.IsUniversalSection.descend`).
+Let `E` be a sheaf of sets on the small étale site of a scheme `T`, let `s : S ⟶ T` be étale
+with `S` affine, and let `p : X ⟶ S` be a surjective étale morphism from an affine scheme.
+Suppose that the restriction of `E` to étale `X`-schemes is represented by a finite étale
+`X`-scheme `v : V ⟶ X`, with universal section `ξ ∈ E(V)`
+(`AlgebraicGeometry.Scheme.IsUniversalSection`). Then the restriction of `E` to étale
+`S`-schemes is represented by a finite étale `S`-scheme
+(`AlgebraicGeometry.Scheme.IsUniversalSection.exists_isUniversalSection_of_isAffine`).
 
 This is the descent step in the proof that finite locally constant sheaves are represented by
 finite étale schemes (blueprint `lemma-weil-pbc-finite-locally-constant-etale-equivalence`): the
-two pullbacks of `ξ` to `V ×_T X` give, by universality, the descent isomorphism
-`γ : V ×_T X ⟶ V` (the transport of the first projection to the second), which satisfies the
+two pullbacks of `ξ` to `V ×_S X` give, by universality, the descent isomorphism
+`γ : V ×_S X ⟶ V` (the transport of the first projection to the second), which satisfies the
 counit and cocycle identities because both sides pull `ξ` back to the same section. Affine flat
 descent in coaction form (`AlgebraicGeometry.exists_isPullback_of_coaction`, Stacks 023N)
-produces `N` over `T` with `V ≅ N ×_T X`; `N` is finite étale by fpqc descent of these
+produces `N` over `S` with `V ≅ N ×_S X`; `N` is finite étale by fpqc descent of these
 properties, `ξ` descends to `ξ₀ ∈ E(N)` by the sheaf property along `V ⟶ N`, and `ξ₀` is
-universal, by descending morphisms along the effective epimorphism `W ×_T X ⟶ W`.
+universal, by descending morphisms along the effective epimorphism `W ×_S X ⟶ W`.
 -/
 
 @[expose] public section
@@ -66,12 +68,14 @@ noncomputable abbrev coactLift {W : T.Etale} (a : W ⟶ Etale.mk (v ≫ p ≫ s)
     rw [pullback.lift_snd_assoc, ← reassoc_of% hx]
     exact Over.w a)
 
+/-- The lift `W ⟶ V ×_S X` of `(a, x)` followed by the first projection is `a`. -/
 lemma coactLift_fst {W : T.Etale} (a : W ⟶ Etale.mk (v ≫ p ≫ s)) (x : W.left ⟶ X)
     (hx : a.left ≫ v ≫ p = x ≫ p) : coactLift a x hx ≫ coactFst s p v = a :=
   Over.Hom.ext (by
     change pullback.lift a.left x _ ≫ pullback.fst (v ≫ p) p = a.left
     exact pullback.lift_fst _ _ _)
 
+/-- The lift `W ⟶ V ×_S X` of `(a, x)` followed by the second projection is `x`. -/
 lemma coactLift_left_snd {W : T.Etale} (a : W ⟶ Etale.mk (v ≫ p ≫ s)) (x : W.left ⟶ X)
     (hx : a.left ≫ v ≫ p = x ≫ p) :
     (coactLift a x hx).left ≫ pullback.snd (v ≫ p) p = x := by
@@ -86,10 +90,13 @@ noncomputable def coact : coactObj s p v ⟶ Etale.mk (v ≫ p ≫ s) :=
   (h.exists_hom (W := coactObj s p v) (pullback.snd (v ≫ p) p) rfl
     (E.map (coactFst s p v).op ξ)).choose
 
+/-- The descent isomorphism `γ` lies over the second projection `V ×_S X ⟶ X`. -/
 lemma coact_left_comp : (h.coact).left ≫ v = pullback.snd (v ≫ p) p :=
   (h.exists_hom (W := coactObj s p v) (pullback.snd (v ≫ p) p) rfl
     (E.map (coactFst s p v).op ξ)).choose_spec.1
 
+/-- The descent isomorphism `γ` pulls `ξ` back to the pullback of `ξ` along the first projection.
+-/
 lemma map_coact : E.map h.coact.op ξ = E.map (coactFst s p v).op ξ :=
   (h.exists_hom (W := coactObj s p v) (pullback.snd (v ≫ p) p) rfl
     (E.map (coactFst s p v).op ξ)).choose_spec.2
@@ -107,6 +114,7 @@ lemma coactLift_coact {W : T.Etale} (a : W ⟶ Etale.mk (v ≫ p ≫ s)) (x : W.
   · rw [op_comp, Functor.map_comp_apply, map_coact, ← Functor.map_comp_apply, ← op_comp,
       coactLift_fst, hab]
 
+/-- The counit identity `γ (v, v(x)) = x` for the descent isomorphism. -/
 lemma coact_counit :
     coactionUnit p v ≫ (h.coact).left = 𝟙 V := by
   have := h.coactLift_coact (W := Etale.mk (v ≫ p ≫ s)) (𝟙 _) v (Category.id_comp _) (𝟙 _)
@@ -117,6 +125,8 @@ lemma coact_counit :
   rw [e]
   exact congrArg (fun f ↦ f.left) this
 
+/-- The cocycle identity for the descent isomorphism: transporting from the first to the second and
+then to the third factor is transporting from the first to the third factor. -/
 lemma coact_coassoc :
     coactionMap p v (h.coact).left (h.coact_left_comp) ≫ (h.coact).left =
       coactionForget p v ≫ (h.coact).left := by

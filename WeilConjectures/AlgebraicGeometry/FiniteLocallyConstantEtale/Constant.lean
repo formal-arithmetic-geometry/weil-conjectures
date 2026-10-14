@@ -43,10 +43,12 @@ noncomputable def Etale.continuousMapSheafType : Sheaf X.smallEtaleTopology (Typ
     ⟨continuousMapPresheaf.{u + 1, u} A,
       .of_le proetaleTopology_le_fpqcTopology (isSheaf_fpqcTopology_continuousMapPresheaf A)⟩
 
+/-- The sections of `U ↦ C(U, A)` over `U` are the continuous functions on `U`. -/
 lemma Etale.continuousMapSheafType_obj_obj (U : X.Etale) :
     (Etale.continuousMapSheafType X A).obj.obj (op U) = C(U.left, A) :=
   rfl
 
+/-- The restriction maps of `U ↦ C(U, A)` are given by precomposition. -/
 lemma Etale.continuousMapSheafType_obj_map_apply {U V : X.Etale} (f : U ⟶ V)
     (s : C(V.left, A)) :
     (Etale.continuousMapSheafType X A).obj.map f.op s = s.comp f.left.base.hom :=
@@ -106,6 +108,7 @@ noncomputable def Etale.constantSheafToContinuousMapSheafType :
     (Etale.constToContinuousMapType X A)
 
 omit [DiscreteTopology A] in
+/-- The map from the constant sheaf to `U ↦ C(U, A)` restricts to the constant functions. -/
 lemma Etale.toSheafify_constantSheafToContinuousMapSheafType [DiscreteTopology A] :
     toSheafify X.smallEtaleTopology _ ≫ (Etale.constantSheafToContinuousMapSheafType X A).hom =
       Etale.constToContinuousMapType X A := by
@@ -115,6 +118,8 @@ lemma Etale.toSheafify_constantSheafToContinuousMapSheafType [DiscreteTopology A
   rw [Adjunction.homEquiv_unit, sheafificationAdjunction_unit_app] at h
   exact h
 
+/-- The map from the constant sheaf to `U ↦ C(U, A)` is an isomorphism: it is locally bijective.
+-/
 instance : IsIso (Etale.constantSheafToContinuousMapSheafType X A) := by
   have h := Etale.toSheafify_constantSheafToContinuousMapSheafType X A
   refine (Sheaf.isLocallyBijective_iff_isIso
@@ -145,6 +150,7 @@ noncomputable def sigmaIdx : C(↑(∐ fun _ : S' ↦ X), S') :=
     (continuous_sigma_iff.2 fun _ ↦ continuous_const).comp (sigmaMk _).symm.continuous⟩
 
 omit [DiscreteTopology S'] in
+/-- The index of a point of the `σ`-th summand of `∐_{S'} X` is `σ`. -/
 @[simp]
 lemma sigmaIdx_ι (σ : S') (x : X) : sigmaIdx S' X (Sigma.ι (fun _ : S' ↦ X) σ x) = σ := by
   change ((sigmaMk fun _ : S' ↦ X).symm (Sigma.ι (fun _ : S' ↦ X) σ x)).1 = σ
@@ -152,6 +158,8 @@ lemma sigmaIdx_ι (σ : S') (x : X) : sigmaIdx S' X (Sigma.ι (fun _ : S' ↦ X)
 
 variable {S' X}
 
+/-- On the open subscheme of `W` where the index of `a : W ⟶ ∐_{S'} X` is `σ`, the morphism `a`
+is the composite of `w` with the inclusion of the `σ`-th summand. -/
 lemma comp_sigmaIdx_apply {W : Scheme.{u}} (a : W ⟶ ∐ fun _ : S' ↦ X) (w : W ⟶ X)
     (ha : a ≫ Sigma.desc (fun _ ↦ 𝟙 X) = w) (σ : S') :
     (W.fiberOpens ((sigmaIdx S' X).comp a.base.hom) σ).ι ≫ a =
@@ -186,10 +194,12 @@ noncomputable def sigmaHomEquiv {W : Scheme.{u}} (w : W ⟶ X) :
     continuous_of_discreteTopology.comp ((sigmaIdx S' X).comp a.1.base.hom).continuous⟩
   left_inv f := by
     ext z
-    have h := Scheme.fiberOpens_ι_glueOfContinuousMap f (fun m ↦ w ≫ Sigma.ι (fun _ : S' ↦ X) (e m)) (f z)
+    have h := Scheme.fiberOpens_ι_glueOfContinuousMap f
+      (fun m ↦ w ≫ Sigma.ι (fun _ : S' ↦ X) (e m)) (f z)
     have := congrArg (fun g ↦ g ⟨z, (rfl : f z = f z)⟩) h
     simp only [Scheme.Hom.comp_apply, Scheme.Opens.ι_apply] at this
-    change e.symm (sigmaIdx S' X (W.glueOfContinuousMap f (fun m ↦ w ≫ Sigma.ι (fun _ : S' ↦ X) (e m)) z)) = f z
+    change e.symm (sigmaIdx S' X
+      (W.glueOfContinuousMap f (fun m ↦ w ≫ Sigma.ι (fun _ : S' ↦ X) (e m)) z)) = f z
     rw [this, sigmaIdx_ι, Equiv.symm_apply_apply]
   right_inv a := by
     refine Subtype.ext (Scheme.glueOfContinuousMap_eq fun m ↦ ?_)
@@ -202,9 +212,13 @@ noncomputable def sigmaHomEquiv {W : Scheme.{u}} (w : W ⟶ X) :
     rw [hO]
     exact h.symm
 
+/-- The morphism attached to a locally constant function `f` is glued from the inclusions of the
+summands on the fibres of `f`. -/
 lemma sigmaHomEquiv_apply_coe {W : Scheme.{u}} (w : W ⟶ X) (f : C(W, A)) :
-    (sigmaHomEquiv e w f).1 = W.glueOfContinuousMap f (fun m ↦ w ≫ Sigma.ι (fun _ : S' ↦ X) (e m)) := rfl
+    (sigmaHomEquiv e w f).1 =
+      W.glueOfContinuousMap f (fun m ↦ w ≫ Sigma.ι (fun _ : S' ↦ X) (e m)) := rfl
 
+/-- The locally constant function attached to `a : W ⟶ ∐_{S'} X` is the index of the summand. -/
 lemma sigmaHomEquiv_symm_apply {W : Scheme.{u}} (w : W ⟶ X)
     (a : {a : W ⟶ ∐ fun _ : S' ↦ X // a ≫ Sigma.desc (fun _ ↦ 𝟙 X) = w}) (z : W) :
     (sigmaHomEquiv e w).symm a z = e.symm (sigmaIdx S' X (a.1 z)) := rfl
@@ -316,7 +330,8 @@ lemma Etale.isUniversalSection_of_iso
     refine ⟨⟨MorphismProperty.Over.homMk b.1 ?_, b.2⟩, rfl⟩
     exact (Category.assoc _ _ _).symm.trans (congrArg (· ≫ U.hom) b.2)
   have key : α.hom.app (op W'') ∘ (fun a : {a : Etale.mk (w ≫ U.hom) ⟶ Etale.trivialCover U S' //
-      a.left ≫ Sigma.desc (fun _ ↦ 𝟙 U.left) = w} ↦ E.map a.1.op (α.inv.app (op (Etale.trivialCover' U S')) idx)) =
+      a.left ≫ Sigma.desc (fun _ ↦ 𝟙 U.left) = w} ↦
+        E.map a.1.op (α.inv.app (op (Etale.trivialCover' U S')) idx)) =
       (sigmaHomEquiv e w).symm ∘ ψ := by
     ext1 a
     let a'' : W'' ⟶ Etale.trivialCover' U S' := MorphismProperty.Over.homMk a.1.left a.2

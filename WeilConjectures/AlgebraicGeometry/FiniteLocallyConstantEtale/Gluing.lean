@@ -61,6 +61,8 @@ lemma Etale.isSheafFor_ofArrows (hE : Presheaf.IsSheaf T.smallEtaleTopology E) {
   (Presieve.isSheafFor_iff_generate _).2
     ((isSheaf_iff_isSheaf_of_type _ _).1 hE _ ((ofArrows_mem_smallEtaleTopology_iff f).2 hf))
 
+/-- The restrictions of an étale `T`-scheme to a family of opens covering it are jointly
+surjective. -/
 lemma Etale.iUnion_range_restrictι {Z : T.Etale} {ι : Type*} (O : ι → Z.left.Opens)
     (hO : ⨆ i, O i = ⊤) : ⋃ i, Set.range (Etale.restrictι Z (O i)).left = Set.univ := by
   refine Set.eq_univ_of_forall fun x ↦ Set.mem_iUnion.2 ?_
@@ -84,6 +86,8 @@ noncomputable abbrev Etale.inclE (Z : T.Etale) {O O' : Z.left.Opens} (h : O ≤ 
     change Z.left.homOfLE h ≫ O'.ι ≫ Z.hom = O.ι ≫ Z.hom
     rw [Scheme.homOfLE_ι_assoc _ h])
 
+/-- The inclusion of the restriction to a smaller open, followed by the inclusion of the restriction
+to the bigger open, is the inclusion of the restriction to the smaller open. -/
 lemma Etale.inclE_restrictι (Z : T.Etale) {O O' : Z.left.Opens} (h : O ≤ O') :
     Etale.inclE Z h ≫ Etale.restrictι Z O' = Etale.restrictι Z O :=
   Over.Hom.ext (Scheme.homOfLE_ι _ h)
@@ -137,8 +141,10 @@ noncomputable def V (i : Idx E u) : Scheme.{u} := i.2.choose
 /-- The structure morphism of the representing scheme over a good open. -/
 noncomputable def v (i : Idx E u) : V i ⟶ i.1 := i.2.choose_spec.choose
 
+/-- The representing scheme over a good open is étale over it. -/
 instance (i : Idx E u) : AlgebraicGeometry.Etale (v i) := i.2.choose_spec.choose_spec.choose
 
+/-- The representing scheme over a good open is finite over it. -/
 instance (i : Idx E u) : IsFinite (v i) := i.2.choose_spec.choose_spec.choose_spec.choose
 
 /-- The representing scheme over a good open, as an étale `T`-scheme. -/
@@ -148,9 +154,12 @@ noncomputable abbrev Y (i : Idx E u) : T.Etale := Etale.mk (v i ≫ i.1.ι ≫ u
 noncomputable def ξ (i : Idx E u) : E.obj (op (Y i)) :=
   i.2.choose_spec.choose_spec.choose_spec.choose_spec.choose
 
+/-- The chosen section over a good open is universal. -/
 lemma isUniversal (i : Idx E u) : IsUniversalSection E (i.1.ι ≫ u) (Y i) (v i) (ξ i) :=
   i.2.choose_spec.choose_spec.choose_spec.choose_spec.choose_spec
 
+/-- For good opens `i ≤ j`, the representing scheme over `i` maps to the one over `j`, compatibly
+with the universal sections. -/
 lemma exists_transE {i j : Idx E u} (h : i.1 ≤ j.1) :
     ∃ a : Y i ⟶ Y j, a.left ≫ v j = v i ≫ U.homOfLE h ∧ E.map a.op (ξ j) = ξ i :=
   (isUniversal j).exists_hom (W := Y i) (v i ≫ U.homOfLE h)
@@ -159,23 +168,29 @@ lemma exists_transE {i j : Idx E u} (h : i.1 ≤ j.1) :
 /-- The transition morphism between the representing schemes over good opens `i ≤ j`. -/
 noncomputable def transE {i j : Idx E u} (h : i.1 ≤ j.1) : Y i ⟶ Y j := (exists_transE h).choose
 
+/-- The transition morphism lies over the inclusion of opens. -/
 lemma transE_left_v {i j : Idx E u} (h : i.1 ≤ j.1) :
     (transE h).left ≫ v j = v i ≫ U.homOfLE h :=
   (exists_transE h).choose_spec.1
 
+/-- The transition morphism pulls back the universal section over `j` to the one over `i`. -/
 lemma map_transE {i j : Idx E u} (h : i.1 ≤ j.1) : E.map (transE h).op (ξ j) = ξ i :=
   (exists_transE h).choose_spec.2
 
+/-- The transition morphism is the only morphism over the inclusion of opens compatible with the
+universal sections. -/
 lemma transE_unique {i j : Idx E u} (h : i.1 ≤ j.1) (a : Y i ⟶ Y j)
     (ha : a.left ≫ v j = v i ≫ U.homOfLE h) (haξ : E.map a.op (ξ j) = ξ i) :
     a = transE h :=
   (isUniversal j).hom_ext (ha.trans (transE_left_v h).symm)
     (by rw [ha, Category.assoc, Scheme.homOfLE_ι_assoc]; rfl) (haξ.trans (map_transE h).symm)
 
+/-- The transition morphism of `i ≤ i` is the identity. -/
 lemma transE_refl (i : Idx E u) : transE (le_refl i.1) = 𝟙 (Y i) :=
   (transE_unique _ _ (by rw [Etale.id_left_eq, Category.id_comp, Scheme.homOfLE_rfl,
     Category.comp_id]) (by rw [op_id, Functor.map_id_apply])).symm
 
+/-- The transition morphisms are compatible with composition. -/
 lemma transE_trans {i j k : Idx E u} (h₁ : i.1 ≤ j.1) (h₂ : j.1 ≤ k.1) :
     transE h₁ ≫ transE h₂ = transE (h₁.trans h₂) :=
   transE_unique _ _ (by rw [Etale.comp_left_eq, Category.assoc, transE_left_v,
@@ -185,6 +200,7 @@ lemma transE_trans {i j k : Idx E u} (h₁ : i.1 ≤ j.1) (h₂ : j.1 ≤ k.1) :
 variable (H : ∀ x : U, ∃ W : U.Opens, x ∈ W ∧ IsRepresentableOver E u W)
 
 include H in
+/-- The good opens form a basis of the topology of `U`. -/
 lemma isBasis : TopologicalSpace.Opens.IsBasis (Set.range fun i : Idx E u ↦ i.1) := by
   rw [TopologicalSpace.Opens.isBasis_iff_nbhd]
   intro O x hx
@@ -202,8 +218,10 @@ noncomputable def cover : U.OpenCover where
     obtain ⟨W, hxW, hW⟩ := H x
     exact ⟨⟨W, hW⟩, ⟨x, hxW⟩, rfl⟩
 
+/-- The good opens are ordered by inclusion. -/
 instance : Preorder (cover H).I₀ := inferInstanceAs (Preorder (Idx E u))
 
+/-- The cover by good opens is locally directed, the good opens forming a basis. -/
 noncomputable instance : (cover H).LocallyDirected :=
   .ofIsBasisOpensRange (fun {i j} ↦ by
       change i.1 ≤ j.1 ↔ i.1.ι.opensRange ≤ j.1.ι.opensRange
@@ -213,6 +231,7 @@ noncomputable instance : (cover H).LocallyDirected :=
     rw [this]
     exact isBasis H)
 
+/-- The transition morphisms of the cover by good opens are the inclusions of opens. -/
 lemma cover_trans {i j : (cover H).I₀} (f : i ⟶ j) :
     (cover H).trans f = U.homOfLE (leOfHom f) := by
   rw [← cancel_mono (j.1.ι)]
@@ -236,6 +255,9 @@ noncomputable def natTrans : functor H ⟶ (cover H).functorOfLocallyDirected wh
     change (transE (leOfHom f)).left ≫ v j = v i ≫ (cover H).trans f
     rw [transE_left_v, cover_trans]
 
+/-- The square formed by the transition morphism and the inclusion of good opens is cartesian: the
+representing scheme over a smaller good open is the restriction of the representing scheme over a
+bigger one, both representing the restriction of `E`. -/
 lemma equifibered : (natTrans H).Equifibered := by
   intro i j f
   change IsPullback (transE (leOfHom f)).left (v i) (v j) ((cover H).trans f)
@@ -268,31 +290,39 @@ noncomputable abbrev π : P H ⟶ U := (gluingData H).toBase
 /-- The inclusion of the representing scheme over a good open into the glued scheme. -/
 noncomputable abbrev ι (i : (cover H).I₀) : V i ⟶ P H := colimit.ι (gluingData H).functor i
 
+/-- The representing scheme over a good open `i` is the part of the glued scheme over `i`. -/
 lemma isPullback_ι (i : (cover H).I₀) : IsPullback (v i) (ι H i) i.1.ι (π H) :=
   (gluingData H).isPullback_natTrans_ι_toBase i
 
+/-- The inclusion of the representing scheme over `i` into the glued scheme lies over the inclusion
+of `i`. -/
 @[reassoc]
 lemma ι_π (i : (cover H).I₀) : ι H i ≫ π H = v i ≫ i.1.ι :=
   (gluingData H).ι_toBase i
 
+/-- The inclusions into the glued scheme are compatible with the transition morphisms. -/
 @[reassoc]
 lemma transE_ι {i j : (cover H).I₀} (h : i.1 ≤ j.1) :
     (transE h).left ≫ ι H j = ι H i :=
   colimit.w (gluingData H).functor (homOfLE h : i ⟶ j)
 
+/-- Every point of the glued scheme lies in the representing scheme over some good open. -/
 lemma exists_ι_eq (x : P H) : ∃ (i : (cover H).I₀) (y : V i), ι H i y = x :=
   (gluingData H).cover.exists_eq x
 
+/-- The base change of the glued scheme to a good open `i` is the representing scheme over `i`. -/
 lemma pullbackHom_eq (i : (cover H).I₀) :
     (cover H).pullbackHom (π H) i = (isPullback_ι H i).flip.isoPullback.inv ≫ v i :=
   (IsPullback.isoPullback_inv_snd _).symm
 
+/-- The glued scheme is étale over `U`, being so over the good opens. -/
 instance : AlgebraicGeometry.Etale (π H) :=
   IsZariskiLocalAtTarget.of_openCover (cover H) fun i ↦ by
     rw [pullbackHom_eq]
     exact (MorphismProperty.cancel_left_of_respectsIso @AlgebraicGeometry.Etale _ _).2
       inferInstance
 
+/-- The glued scheme is finite over `U`, being so over the good opens. -/
 instance : IsFinite (π H) :=
   IsZariskiLocalAtTarget.of_openCover (cover H) fun i ↦ by
     rw [pullbackHom_eq]
@@ -316,6 +346,8 @@ variable {Z : T.Etale} (g : Z.left ⟶ P H) (y : Z.left ⟶ U) (hy : g ≫ π H 
 noncomputable abbrev O : Z.left.Opens := y ⁻¹ᵁ k.1
 
 include hy in
+/-- Over the part of `Z` lying over a good open `k`, a morphism `g : Z ⟶ P` factors through the
+representing scheme over `k`. -/
 lemma exists_factor : ∃ h : (O H y k).toScheme ⟶ V k,
     h ≫ ι H k = (O H y k).ι ≫ g ∧ h ≫ v k = y ∣_ k.1 :=
   ⟨(isPullback_ι H k).lift (y ∣_ k.1) ((O H y k).ι ≫ g)
@@ -328,9 +360,11 @@ noncomputable def factor : Etale.restrict Z (O H y k) ⟶ Y k :=
     change _ ≫ v k ≫ k.1.ι ≫ u = (O H y k).ι ≫ Z.hom
     rw [reassoc_of% (exists_factor H g y hy k).choose_spec.2, morphismRestrict_ι_assoc, hZ])
 
+/-- The factorisation of `g` through `V_k` composed with `V_k ⟶ P` is the restriction of `g`. -/
 lemma factor_left_ι : (factor H g y hy hZ k).left ≫ ι H k = (O H y k).ι ≫ g :=
   (exists_factor H g y hy k).choose_spec.1
 
+/-- The factorisation of `g` through `V_k` lies over the restriction of `y`. -/
 lemma factor_left_v : (factor H g y hy hZ k).left ≫ v k = y ∣_ k.1 :=
   (exists_factor H g y hy k).choose_spec.2
 
@@ -351,16 +385,19 @@ lemma map_restrictι_comp {i : (cover H).I₀} (hki : k.1 ≤ i.1) (gi : Z ⟶ Y
   rw [this, op_comp, Functor.map_comp_apply, map_transE]
 
 end Factor
+/-- A point in the image of a morphism into an open lies in that open. -/
 lemma comp_ι_mem {Z : Scheme.{u}} {O : U.Opens} (f : Z ⟶ O) (z : Z) : (f ≫ O.ι) z ∈ O := by
   rw [Scheme.Hom.comp_apply, Scheme.Opens.ι_apply]
   exact (f z).2
 
 include H in
+/-- The preimages of the good opens under a morphism to `U` cover its source. -/
 lemma iSup_O {Z : Scheme.{u}} (y : Z ⟶ U) : ⨆ k : (cover H).I₀, y ⁻¹ᵁ k.1 = ⊤ :=
   eq_top_iff.2 fun z _ ↦ by
     obtain ⟨W, hzW, hW⟩ := H (y z)
     exact TopologicalSpace.Opens.mem_iSup.2 ⟨⟨W, hW⟩, hzW⟩
 
+/-- The representing schemes over the good opens cover the glued scheme. -/
 lemma iUnion_range_ιE : ⋃ i, Set.range (ιE H i).left = Set.univ :=
   Set.eq_univ_of_forall fun x ↦ Set.mem_iUnion.2 (by
     obtain ⟨i, y, hy⟩ := exists_ι_eq H x
@@ -401,11 +438,14 @@ noncomputable def ξP : E.obj (op (PE H)) :=
   ((Presieve.isSheafFor_arrows_iff _ _).1
     (Etale.isSheafFor_ofArrows hE (ιE H) (iUnion_range_ιE H)) _ (compatible H hE)).exists.choose
 
+/-- The glued section restricts to the universal section over each good open. -/
 lemma map_ιE_ξP (i : (cover H).I₀) : E.map (ιE H i).op (ξP H hE) = ξ i :=
   ((Presieve.isSheafFor_arrows_iff _ _).1
     (Etale.isSheafFor_ofArrows hE (ιE H) (iUnion_range_ιE H)) _
       (compatible H hE)).exists.choose_spec i
 
+/-- The pullback of the universal section over a good open `k` along the factorisation of `a : W ⟶
+P` through `V_k` is the restriction of `a^* ξ` to the part of `W` over `k`. -/
 lemma map_factor {W : T.Etale} (a : W ⟶ PE H) (y : W.left ⟶ U) (hy : a.left ≫ π H = y)
     (hW : y ≫ u = W.hom) (k : (cover H).I₀) :
     E.map (factor H a.left y hy hW k).op (ξ k) =
@@ -444,10 +484,13 @@ variable {W : T.Etale} (w : W.left ⟶ U) (hw : w ≫ u = W.hom) (e : E.obj (op 
   (hcξ : ∀ k, E.map (c k).op (ξ k) = E.map (Etale.restrictι W (O H w k)).op e)
 
 include hc in
+/-- The morphism `O_k ⟶ V_k ⟶ P` lies over `O_k ⟶ W ⟶ U`. -/
 lemma glue_π (k : (cover H).I₀) : (c k).left ≫ ι H k ≫ π H = (O H w k).ι ≫ w := by
   rw [ι_π, reassoc_of% (hc k), morphismRestrict_ι]
 
 include hcξ in
+/-- The pullback of the glued section along `O' ⟶ O_m ⟶ V_m ⟶ P` is the restriction of `e` to
+`O'`. -/
 lemma glue_map (m : (cover H).I₀) {O' : W.left.Opens} (hm : O' ≤ O H w m) :
     E.map (Etale.inclE W hm ≫ c m ≫ ιE H m).op (ξP H hE) =
       E.map (Etale.restrictι W O').op e := by
@@ -455,6 +498,8 @@ lemma glue_map (m : (cover H).I₀) {O' : W.left.Opens} (hm : O' ≤ O H w m) :
     ← Functor.map_comp_apply, ← op_comp, Etale.inclE_restrictι]
 
 include hE hc hcξ in
+/-- The morphisms `O_k ⟶ V_k ⟶ P` agree on the overlaps `O_k ⊓ O_l`, since they pull back the
+glued section to the same section of `E`. -/
 lemma glue_compat (k l : (cover H).I₀) :
     W.left.homOfLE (inf_le_left : O H w k ⊓ O H w l ≤ _) ≫ (c k).left ≫ ι H k =
       W.left.homOfLE (inf_le_right : O H w k ⊓ O H w l ≤ _) ≫ (c l).left ≫ ι H l := by
@@ -497,6 +542,7 @@ lemma exists_PE {W : T.Etale} (w : W.left ⟶ U) (hw : w ≫ u = W.hom) (e : E.o
   rw [← Functor.map_comp_apply, ← op_comp, this, op_comp, Functor.map_comp_apply, map_ιE_ξP,
     hcξ]
 
+/-- The glued section is universal relative to `u`. -/
 lemma isUniversalSection_ξP : IsUniversalSection E u (PE H) (π H) (ξP H hE) := by
   intro W w hw
   refine ⟨fun a b hab ↦ Subtype.ext (hom_ext_PE H hE a.1 b.1 (a.2.trans b.2.symm) hab),

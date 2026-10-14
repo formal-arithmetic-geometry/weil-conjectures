@@ -26,7 +26,8 @@ Let `T` be a scheme. We show:
 These are the two object-level halves of blueprint node
 `lemma-weil-pbc-finite-locally-constant-etale-equivalence`, combined in
 `AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso'`; the finiteness and
-local constancy conditions are those of `AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheafOfTypes`
+local constancy conditions are those of
+`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheafOfTypes`
 (which is defined in `WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale`, a downstream file).
 
 ## Proof
@@ -38,7 +39,8 @@ sheaf of sections of a trivial cover is constant
 geometric point is a quotient of the finite geometric fibre of `P`.
 
 For the second statement, a constant sheaf with finite stalks over `U` is represented by a
-trivial finite cover of `U` (`AlgebraicGeometry.Scheme.Etale.exists_isUniversalSection_of_isConstant`).
+trivial finite cover of `U`
+(`AlgebraicGeometry.Scheme.Etale.exists_isUniversalSection_of_isConstant`).
 Over an affine open `W` of `T`, finitely many affine opens of the members of the cover give a
 surjective étale `p : X ⟶ W` from an affine scheme; the trivial covers glue to a finite étale
 `X`-scheme representing the restriction of `E` to `X`
