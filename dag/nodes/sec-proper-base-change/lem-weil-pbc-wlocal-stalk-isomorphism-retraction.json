@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-qbar",
-   "place": "Proof, sole paragraph of thm-weil-pbc-qbar.md: “The scalar-compatible family of finite-extension exchange maps descends to a natural transformation”. Supporting input through the coefficient-change compatibility and affine-cover chain listed in via; specifically the final appeal to Tag 09AZ in Tag 0982 after the canonical local rings have been identified. The ancestor paragraph does not itself state this splitting criterion.",
+   "place": "Proof, sole paragraph of thm-weil-pbc-qbar.md: final appeal to Tag 09AZ in Tag 0982 after canonical local rings have been identified.",
    "via": [
     "lem-weil-pbc-wcontractible-geometric-criterion",
     "lem-weil-pbc-wcontractible-ring-extension",
@@ -29,9 +29,59 @@
   "def-weil-pbc-w-local",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let h: ConnectedComponents(Spec S) → ConnectedComponents(Spec R) be the map induced by g. By faithful flatness and [lem-weil-pbc-faithfully-flat-surjective-spectrum], Spec S → Spec R is surjective; the induced map h is continuous, and it is surjective because a preimage of a point in each connected component lies in a connected component mapping into that component. By [lem-weil-pbc-profinite-component-ring-pullback], both component spaces are compact Hausdorff, while the target is extremally disconnected by hypothesis. The section node therefore supplies a continuous section ρ of h.",
+   "uses": [
+    "lem-weil-pbc-extremally-disconnected-component-section",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-profinite-component-ring-pullback",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AZ, proof of (3) => (1), paragraph beginning “π₀(Spec S) → π₀(Spec R) admits a continuous section”"
+   }
+  },
+  {
+   "text": "Put T = range(ρ). Since the component space of Spec S is compact Hausdorff, T is closed. The identity h ∘ ρ = id makes h restricted to T bijective onto ConnectedComponents(Spec R). If q is a closed point of Spec S, then q ∈ V(IS), so IS ⊆ q and I ⊆ g⁻¹(q); hence g⁻¹(q) ∈ V(I), the closed-point subset of Spec R. Thus the required closed-point contraction property holds.",
+   "uses": [
+    "def-weil-pbc-w-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AZ, proof of (3) => (1), paragraphs on closed points and the range of the section"
+   }
+  },
+  {
+   "text": "Apply the closed-component retraction lemma to g, the closed-point contraction property, and T. Its stalk-bijectivity hypothesis is exactly the assumed canonical isomorphisms R_{g⁻¹(q)} ≅ S_q, and its component-surjectivity and injectivity hypotheses are supplied by the preceding section. We obtain a ring map s:S→R with s∘g=id_R.",
+   "uses": [
+    "lem-weil-pbc-wlocal-closed-component-retraction",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AZ, implication (3) to (1), final application of the auxiliary restriction lemma"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-w-local",
+  "lem-weil-pbc-extremally-disconnected-component-section",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-profinite-component-ring-pullback",
+  "lem-weil-pbc-wlocal-closed-component-retraction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AZ, proof of implication (3) to (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,7 +113,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-wcontractible-geometric-criterion",
   "by": "worker",
@@ -76,5 +126,21 @@
   "file": "WeilConjectures/RingTheory/ProEtale/WContractible.lean",
   "line": 636,
   "note": "Exact restricted statement in read-only slopmaster2 source. Not present in supplied compiled sorry maps, so no closed attachment claimed."
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-wlocal-stalk-isomorphism-retraction",
+  "worker": "stage1",
+  "summary": "Split Tag 09AZ into the component-space section, closed-point verification, and application of the closed-component restriction retraction. The existing Lean theorem exists_retraction_of_bijectiveOnStalks has the same auxiliary conclusion under typeclass formulations but the item statement uses explicit ring maps and localization hypotheses, so it is recorded as a closed supporting node rather than attached directly.",
+  "blueprint": "Ancestor thm-weil-pbc-qbar proof sole paragraph: final appeal to Tag 09AZ after canonical local rings are identified; steps realize the component-section and final retraction portions.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-5026fb11a",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-5026fb11a (reviewer sub-agent of L); spot-checked: Mathematics and route checks pass. Repair files correct incomplete created metadata on both new nodes, add the missing compact/Hausdorff statement dependency, and replace the forbidden absolute auxiliary source path with the exact Stacks Tag 09AZ literature location. Review recorded in review.md.; 2 file(s) fixed by the reviewer"
  }
 }
