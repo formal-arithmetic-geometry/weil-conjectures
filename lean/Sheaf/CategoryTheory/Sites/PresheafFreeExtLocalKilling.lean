@@ -243,7 +243,7 @@ theorem exists_presheaf_ext_local_killing
     (x : Ext ((presheafToSheaf J AddCommGrpCat).obj (P ⋙ AddCommGrpCat.free)) F q) :
     ∃ (E : Cᵒᵖ ⥤ Type v) (f : E ⟶ P), Presheaf.IsLocallySurjective J f ∧
       (Ext.mk₀ ((presheafToSheaf J AddCommGrpCat).map
-        (Functor.whiskerRight f AddCommGrpCat.free))).comp x (Nat.zero_add q) = 0 := by
-  exact exists_presheaf_ext_local_killing_witness F P q hq x
+        (Functor.whiskerRight f AddCommGrpCat.free))).comp x (Nat.zero_add q) = 0 :=
+  exists_presheaf_ext_local_killing_witness F P q hq x
 
 end CategoryTheory.Sheaf
