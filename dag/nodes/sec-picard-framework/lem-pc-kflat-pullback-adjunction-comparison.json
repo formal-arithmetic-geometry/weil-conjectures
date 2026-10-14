@@ -1,0 +1,146 @@
+{
+ "id": "lem-pc-kflat-pullback-adjunction-comparison",
+ "kind": "statement",
+ "title": "K-flat computation of the pinned adjunction on chain maps",
+ "statement": "Assume derived categories for all schemes [def-pc-derived-category]. Fix g:S-prime to S and the tensor-pullback/direct-image adjunction [lem-pc-module-pullback-adjunction]. There exist an additive structure on tensor pullback and, for every K-flat complex P on S [def-pc-kflat-complex], an isomorphism e(P):Q(g-star P) to Lg-star Q(P) [def-pc-derived-pullback], independent of a target or map. For every complex I on S-prime and chain map alpha:P to g-star I, Q of its ordinary termwise transpose equals e(P).hom followed by the inverse pinned derived adjunction homEquiv [def-pc-relative-mv-maps] applied to Q(alpha) followed by schemeMVDirectImageLocalization(g).app(I) [def-pc-mayer-vietoris-image-chain-data]. No boundedness or K-injectivity is required of I.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-kflat-complex",
+  "def-pc-derived-pullback",
+  "def-pc-relative-mv-maps",
+  "def-pc-mayer-vietoris-image-chain-data"
+ ],
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 06YI and 06YJ (K-flat computation) and 079W (pinned derived adjunction)."
+ },
+ "proof": [
+  {
+   "text": "Take the additive structure and left-derived counit from exists_derivedPullbackComposition. Compare it with the K-flat-computing counit from exists_derivedPullback using uniqueness of left-derived functors; therefore it is invertible on P. Transport its inverse through quotientCompQhIso to construct e(P).",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the normalized Hom formula of exists_schemeDerivedAdjunction to the homotopy class of the ordinary transpose. The homotopy-category adjunction is induced by the chain adjunction, and its forward transpose is the homotopy class of alpha.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-relative-mv-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the pinned derived homEquiv to both sides, cancel the invertible comparison, and use naturality of quotientCompQhIso. The transported right-derived unit is exactly schemeMVDirectImageLocalization, proving the required equation.",
+   "uses": [
+    "def-pc-mayer-vietoris-image-chain-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-pullback",
+  "def-pc-mayer-vietoris-image-chain-data",
+  "def-pc-relative-mv-maps",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 06YI and 06YJ (K-flat computation) and 079W (pinned derived adjunction)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For K-flat complexes the ordinary pullback adjunction transpose agrees with the derived adjunction via its counit and direct image localization unit",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-14",
+   "verdict": "Unavailable; no absence verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For K-flat complexes the ordinary pullback adjunction transpose agrees with the derived adjunction via its counit and direct image localization unit",
+   "results": "Eight sheaf pullback isomorphism and free-module matches; no pinned derived Hom comparison.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "adjoint.*cone|cone.*adjoint|transpose.*cone; K-flat adjunction",
+   "results": "Read MappingCone, HomotopyCategory.Pretriangulated, source HomotopyCategory.Adjunction and exists_schemeDerivedAdjunction. No declaration with this combined formula. Blueprint text searches found no duplicate.",
+   "date": "2026-10-14",
+   "verdict": "Use the existing component APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackConeSquareTransposition",
+  "date": "2026-10-14",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "K-flat computation of the pinned adjunction on chain maps; a compatibility step in the specified cone-square transposition.",
+   "via": [
+    "lem-pc-derived-pullback-cone-square-transposition",
+    "lem-pc-relative-mv-cover-chain-square",
+    "lem-pc-relative-mv-cover-rows",
+    "lem-pc-relative-mv-cover-homotopy-data",
+    "lem-pc-standard-single-union-homotopy-chain-data",
+    "new-pc-standard-single-union-ses-chain-data",
+    "new-pc-standard-single-union-ses-presentation",
+    "new-pc-standard-single-flat-counit-union-triangles",
+    "new-pc-standard-single-flat-counit-union-equation",
+    "lem-pc-standard-single-flat-counit-union-presentation",
+    "lem-pc-standard-single-flat-counit-union",
+    "lem-pc-standard-single-stalk-flat-counit-model",
+    "lem-pc-standard-flat-single-base-change",
+    "lem-pc-standard-flat-single-base-change-epi"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KFlatPullbackAdjunctionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/KFlatPullbackAdjunctionComparison.lean",
+  "declaration": "AlgebraicGeometry.kFlat_pullback_adjunction_comparison",
+  "statement": "theorem kFlat_pullback_adjunction_comparison\n    [d : ∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {S S' : Scheme.{u}} (g : S' ⟶ S) :\n    ∃ (_hL : (Scheme.Modules.tensorPullback g).Additive)\n      (e : ∀ (P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)\n        (_ : CochainComplex.IsKFlat (R := S.sheaf) P),\n          (DerivedCategory.Q\n              (C := SheafOfModules.{u} (moduleRings S'.toRingedSpace))).obj\n              (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P) ≅\n            (derivedPullback g).obj (DerivedCategory.Q.obj P)),\n      ∀ (P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)\n        (hP : CochainComplex.IsKFlat (R := S.sheaf) P)\n        (I : CochainComplex (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) ℤ)\n        (α : P ⟶ ((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).mapHomologicalComplex\n          (.up ℤ)).obj I),\n        (DerivedCategory.Q\n            (C := SheafOfModules.{u} (moduleRings S'.toRingedSpace))).map\n            ((((Classical.choose\n              (Scheme.Modules.exists_tensorPullbackAdjunction g)).mapHomologicalComplex\n                (.up ℤ)).homEquiv _ _).symm α) =\n          (e P hP).hom ≫ ((relativeMVAdj g).homEquiv _ _).symm\n            (DerivedCategory.Q.map α ≫ (schemeMVDirectImageLocalization g).app I)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261014T094242-L-763103",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261014T094242-L-763103",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

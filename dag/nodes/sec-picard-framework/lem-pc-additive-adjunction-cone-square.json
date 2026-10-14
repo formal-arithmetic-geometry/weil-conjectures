@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-additive-adjunction-cone-square",
+ "kind": "statement",
+ "title": "An additive adjunction transposes a specified cone square",
+ "statement": "Let E and E-prime be preadditive categories with binary biproducts, and L:E to E-prime left adjoint to R:E-prime to E, both additive. Use the termwise adjunction ac on integer-indexed cochain complexes [lem-weil-pbc-termwise-adjunction-homotopy]. For p:P to Q, t:A to B, alpha:P to R(A), beta:Q to R(B), and a specified homotopy H:p beta homotopic to alpha R(t), put a=ac.symm(alpha), b=ac.symm(beta). There exists H-prime:L(p) b homotopic to a t such that Cone.mapOfHomotopy(H-prime) equals the inverse additive cone comparison Cone(L(p)) to L(Cone(p)), followed by ac.symm of Cone.mapOfHomotopy(H) followed by the inverse comparison Cone(R(t)) to R(Cone(t)). The equality is of actual chain maps, not just their homotopy classes.",
+ "stmt_deps": [
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "source": {
+  "document": "Stacks Project, Derived Categories",
+  "place": "Tag 014P (mapping cone formulas), combined with the termwise additive adjunction."
+ },
+ "proof": [
+  {
+   "text": "Apply L to H and postcompose with the termwise counit. Prepend the left-naturality equality for the transpose of beta and append counit naturality for t; this constructs the required homotopy H-prime.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In every degree, compare the two chain maps after the cone injections. Expand mapOfHomotopy, the additive cone comparison, and the transpose as L(map) followed by the counit. Functoriality, additivity, and counit naturality identify the diagonal and off-diagonal components, retaining the specified homotopy and its sign.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Derived Categories",
+  "place": "Tag 014P (mapping cone formulas), combined with the termwise additive adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive adjunction transposes a homotopy square preserving its specified mapping cone chain map",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-14",
+   "verdict": "Unavailable; no absence verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive adjunction transposes a homotopy square preserving its specified mapping cone chain map",
+   "results": "Eight generic cone composition, rotation and trianglehMapOfHomotopy matches; no adjunction compatibility formula.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "adjoint.*cone|cone.*adjoint|transpose.*cone; K-flat adjunction",
+   "results": "Read MappingCone, HomotopyCategory.Pretriangulated, source HomotopyCategory.Adjunction and exists_schemeDerivedAdjunction. No declaration with this combined formula. Blueprint text searches found no duplicate.",
+   "date": "2026-10-14",
+   "verdict": "Use the existing component APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackConeSquareTransposition",
+  "date": "2026-10-14",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "An additive adjunction transposes a specified cone square; a compatibility step in the specified cone-square transposition.",
+   "via": [
+    "lem-pc-derived-pullback-cone-square-transposition",
+    "lem-pc-relative-mv-cover-chain-square",
+    "lem-pc-relative-mv-cover-rows",
+    "lem-pc-relative-mv-cover-homotopy-data",
+    "lem-pc-standard-single-union-homotopy-chain-data",
+    "new-pc-standard-single-union-ses-chain-data",
+    "new-pc-standard-single-union-ses-presentation",
+    "new-pc-standard-single-flat-counit-union-triangles",
+    "new-pc-standard-single-flat-counit-union-equation",
+    "lem-pc-standard-single-flat-counit-union-presentation",
+    "lem-pc-standard-single-flat-counit-union",
+    "lem-pc-standard-single-stalk-flat-counit-model",
+    "lem-pc-standard-flat-single-base-change",
+    "lem-pc-standard-flat-single-base-change-epi"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.AdditiveAdjunctionConeSquare",
+  "file": "lean/Sheaf/CategoryTheory/AdditiveAdjunctionConeSquare.lean",
+  "declaration": "CochainComplex.additiveAdjunction_cone_square",
+  "statement": "theorem additiveAdjunction_cone_square\n    {E : Type u} {E' : Type u'} [Category.{v} E] [Category.{v'} E']\n    [Preadditive E] [Preadditive E'] [HasBinaryBiproducts E] [HasBinaryBiproducts E']\n    {L : E ⥤ E'} {R : E' ⥤ E} [L.Additive] [R.Additive] (adj : L ⊣ R)\n    {P Q : CochainComplex E ℤ} {A B : CochainComplex E' ℤ}\n    (p : P ⟶ Q) (t : A ⟶ B)\n    (α : P ⟶ (R.mapHomologicalComplex (.up ℤ)).obj A)\n    (β : Q ⟶ (R.mapHomologicalComplex (.up ℤ)).obj B)\n    (H : Homotopy (p ≫ β) (α ≫ (R.mapHomologicalComplex (.up ℤ)).map t)) :\n    let ac := adj.mapHomologicalComplex (.up ℤ)\n    let a := (ac.homEquiv _ _).symm α\n    let b := (ac.homEquiv _ _).symm β\n    ∃ H' : Homotopy ((L.mapHomologicalComplex (.up ℤ)).map p ≫ b) (a ≫ t),\n      mappingCone.mapOfHomotopy H' =\n        (mappingCone.mapHomologicalComplexIso p L).inv ≫\n          (ac.homEquiv _ _).symm\n            (mappingCone.mapOfHomotopy H ≫\n              (mappingCone.mapHomologicalComplexIso t R).inv)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261014T094242-L-763103",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261014T094242-L-763103",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
