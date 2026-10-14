@@ -1,0 +1,92 @@
+{
+ "id": "lem-weil-pbc-quasicompact-components-clopen-intersection",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof of master RefactorInstruction.tex Section 4 Lemma lem:point-eval, sentence before the lemma asserting that pi_0(U) is profinite: justification of clopen separation for affine U.",
+   "via": [
+    "lem-weil-pbc-proetale-point-components-maps",
+    "lem-weil-pbc-condensed-point-basis-evaluation",
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Connected components as intersections of clopen neighbourhoods",
+ "statement": "Let $T$ be a topological space satisfying the quasi-compactness, quasi-separatedness and compact-open-basis conditions in [def-weil-spectral-space]: $T$ is quasi-compact, has a basis of quasi-compact open subsets, and the intersection of any two quasi-compact open subsets is quasi-compact. No sobriety assumption is imposed. For every $t\\in T$, its connected component is $\\bigcap\\{V\\subseteq T: V\\text{ is open and closed and }t\\in V\\}$.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 005F, lemma-connected-component-intersection"
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The connected component of a point of a spectral space is the intersection of its clopen neighborhoods",
+   "results": "connectedComponent_eq_iInter_isClopen requires compact Hausdorff, not applicable to general spectral spaces. IsClopen.connectedComponent_subset is only one inclusion.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated space with a basis of quasi compact opens has components equal to intersections of clopen neighborhoods",
+   "results": "QuasiSeparatedSpace.of_isTopologicalBasis and SpectralSpace.toQuasiSeparatedSpace; compact Hausdorff component theorem only.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "connectedComponent, IsClopen",
+   "results": "connectedComponent_eq_iInter_isClopen requires T2Space; remaining hits give one inclusion or assume locally connected.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "connectedComponent_eq_iInter_isClopen|connectedComponent_subset_iInter_isClopen",
+   "results": "Mathlib/Topology/Separation/Regular.lean:725 assumes T2Space and CompactSpace; Mathlib/Topology/Connected/Clopen.lean:368 only subset.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a spectral space each connected component is the intersection of the clopen neighborhoods of any of its points",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-separated compact space with compact open basis quasi-components equal connected components",
+   "results": "connectedComponent_eq_iInter_isClopen and ConnectedComponents.t2 require T2Space; the other hits do not assert the prespectral component intersection formula.",
+   "verdict": "no match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "instSpectralSpace|sInter.*connectedComponent|connectedComponent.*iInter",
+   "results": "Regular.lean:725 requires T2Space; Clopen.lean:368 gives only one inclusion; Prime/Topology.lean documentation names instSpectralSpace, verified declaration at line 844.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-proetale-point-components-maps",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

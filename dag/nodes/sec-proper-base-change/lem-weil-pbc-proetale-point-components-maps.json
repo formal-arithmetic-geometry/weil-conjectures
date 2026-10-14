@@ -6,6 +6,7 @@
    "node": "thm-weil-pbc-qbar",
    "place": "Proof, first sentence: descent through the common-stage colimit; Lemma 4.2.13(1) and its inverse-image computation; Hemo–Richarz–Scholbach Example 3.1 identifies the map from the profinite point. The w-contractible-basis form is also explained in the exact master RefactorInstruction.tex, Section 4, lemma point-eval.",
    "via": [
+    "lem-weil-pbc-condensed-point-basis-evaluation",
     "lem-weil-pbc-condensed-lfp-local-triviality",
     "lem-weil-pbc-condensed-sheaf-ext-continuity",
     "prop-weil-pbc-qbar-condensed-two-colimit",
@@ -16,7 +17,7 @@
  },
  "kind": "statement",
  "title": "Maps from a weakly contractible affine to finite constant objects",
- "statement": "Let $X$ be a scheme [def-pc-scheme] with its small pro-etale site [def-weil-pbc-proetale-site], and let $U$ be an affine object that is weakly contractible, meaning that for every epimorphism $F\to G$ of sheaves of sets on $X_{\\mathrm{proet}}$, the map $F(U)\to G(U)$ is surjective. For every profinite set $S$, write $X[S]$ for the pro-etale object obtained as the inverse limit of finite disjoint unions of copies of $X$ indexed by finite quotients of $S$. The connected-component quotient $\\pi_0(|U|)$, with its quotient topology, is profinite, and there is a natural bijection $\\operatorname{Hom}_X(U,X[S])\\cong C(\\pi_0(|U|),S)$, compatible with maps in $S$ and with morphisms between such $U$.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] with its small pro-etale site [def-weil-pbc-proetale-site], and let $U$ be an affine object that is weakly contractible, meaning that for every epimorphism $F\\to G$ of sheaves of sets on $X_{\\mathrm{proet}}$, the map $F(U)\\to G(U)$ is surjective. For every profinite set $S$, write $X[S]$ for the pro-etale object obtained as the inverse limit of finite disjoint unions of copies of $X$ indexed by finite quotients of $S$. The connected-component quotient $\\pi_0(|U|)$, with its quotient topology, is profinite, and there is a natural bijection $\\operatorname{Hom}_X(U,X[S])\\cong C(\\pi_0(|U|),S)$, compatible with maps in $S$ and with morphisms between such $U$.",
  "source": {
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Section 4.2, Lemma 4.2.13(1), together with the finite-quotient inverse-limit argument; exact master RefactorInstruction.tex, Section 4, proof of Lemma point-pullback formula."
@@ -24,37 +25,105 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-weil-pbc-proetale-site",
-  "def-weil-size-convention"
+  "def-weil-size-convention",
+  "lem-weil-pbc-profinite-test-object-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the existing Mathlib leaf [lem-weil-pbc-qcqs-scheme-spectral] to the affine scheme $U$: its quasi-compactness and quasi-separatedness hypotheses are supplied by the affine instances AlgebraicGeometry.Scheme.compactSpace_of_isAffine (Mathlib/AlgebraicGeometry/AffineScheme.lean:561) and AlgebraicGeometry.quasiSeparatedSpace_of_isAffine (Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:167). Thus its underlying space $T=|U|$ is spectral. This is a specialization using inferred instances, not a new lemma. Thus [def-weil-spectral-space] gives quasi-compactness, a basis of quasi-compact opens, and quasi-compact intersections. Apply [lem-weil-pbc-quasicompact-components-clopen-intersection]: each component is the intersection of its clopen neighbourhoods. If points $x,y$ lie in different components, some clopen $V$ contains $x$ and not $y$. Every clopen is a union of whole components: otherwise a component meeting both $V$ and its complement would have a separation into two nonempty relatively open sets. For the quotient $q:T\\to Q=\\pi_0(T)$, therefore $q^{-1}(q(V))=V$, and $q(V)$ and its complement are open by the quotient topology. They separate $q(x)$ and $q(y)$, proving Hausdorffness; a connected subset of $Q$ cannot contain two distinct points because of this same clopen separation, proving total disconnectedness. Finally any open cover of $Q$ pulls back to an open cover of $T$, has a finite subcover by quasi-compactness, and this finite family covers $Q$ because $q$ is surjective. Hence $Q$ is compact Hausdorff totally disconnected, that is, profinite. This uses no Hausdorffness of $T$ and no splitting of covers.",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "def-weil-spectral-space",
+    "lem-weil-pbc-quasicompact-components-clopen-intersection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 094L (properties.tex, lemma-quasi-compact-quasi-separated-spectral), specialized to affine U via the stated Mathlib instances; Tags 005F (lemma-connected-component-intersection) and 0906 (lemma-spectral-pi0) for the component quotient argument."
+   }
+  },
+  {
+   "text": "For a finite discrete set $I$, [lem-weil-pbc-profinite-test-object-functor] applied to the constant one-object finite-quotient presentation of $I$ gives $X[I]=\\coprod_I X$. Apply [lem-galois-coproduct-copies-morphisms-clopen] with its base $U$ replaced by $X$, its source $W$ replaced by our $U$, and structure morphism $U\\to X$. Its fibre description gives a bijection between $X$-morphisms to $X[I]$ and maps $h:T\\to I$ with all fibres open; these are precisely continuous maps to the finite discrete set. Such an $h$ is constant on every connected component, since distinct values would separate it. It thus factors uniquely as $\\bar h q$. For every open $B\\subseteq I$, $q^{-1}(\\bar h^{-1}(B))=h^{-1}(B)$ is open, so the quotient topology proves $\\bar h$ continuous. Conversely continuous $\\bar h:Q\\to I$ gives continuous $\\bar h q$. The two constructions are inverses, proving the finite-case bijection. We require continuity of $h$, not merely constancy on components.",
+   "uses": [
+    "lem-weil-pbc-profinite-test-object-functor",
+    "lem-galois-coproduct-copies-morphisms-clopen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03YW, example-constant-group; exact master Section 4 proof of lem:point-eval, finite-set case"
+   }
+  },
+  {
+   "text": "Choose a small cofiltered presentation $S=\\varprojlim_i S_i$ by finite discrete quotient sets, as in [lem-weil-pbc-profinite-test-object-functor]. Its scheme-limit clause gives $X[S]=\\varprojlim_i X[S_i]$. An $X$-map from $U$ to this limit is, by the defining universal property of the scheme limit, exactly a compatible family of $X$-maps $U\\to X[S_i]$. Apply step 2 at each stage. Compatibility is preserved because the associated function labels the summand containing the image point, and a transition sends the summand labelled $s$ to that labelled by its image. We obtain precisely compatible continuous functions $Q\\to S_i$.",
+   "uses": [
+    "lem-weil-pbc-profinite-test-object-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4 equation eq:XS and proof of lem:point-eval, finite-quotient argument"
+   }
+  },
+  {
+   "text": "A compatible family $h_i:Q\\to S_i$ defines the unique function $h:Q\\to S$ with coordinates $h_i$, since $S$ is the topological inverse limit. The inverse images of basic opens (finite intersections of inverse images of opens of the $S_i$) are finite intersections of open subsets of $Q$; hence $h$ is continuous. Conversely composing a continuous $h$ with the projections gives a compatible continuous family. Together with step 3 this proves the required bijection. If $S$ is empty use the presentation with its empty finite quotient: step 2 gives no maps when $U$ is nonempty and one map when $U$ is empty. For singleton $S$ both sides have one element.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4 proof of lem:point-eval, general profinite set"
+   }
+  },
+  {
+   "text": "For $a:U^{\\prime}\\to U$ over $X$, the continuous underlying map takes connected components into connected components, and hence induces $\\pi_0(a):Q^{\\prime}\\to Q$; continuity follows by the quotient topology since $\\pi_0(a)q^{\\prime}=qa$. At a finite target $I$ the function associated to $fa$ is the function associated to $f$ composed with $\\pi_0(a)$, by taking preimages of summands. For a continuous $b:S\\to S^{\\prime}$, take any finite quotient $r:S^{\\prime}\\to J$. The continuous finite-valued function $rb$ has finite clopen fibres, so factors through a finite quotient $p:S\\to I$, with $rb=cp$. The functoriality and limit cone of [lem-weil-pbc-profinite-test-object-functor] give $X[r]X[b]=X[c]X[p]$ (composition written in ordinary map order). The finite-stage correspondence therefore identifies $X[b]f$ with $bh$. Equality at all finite quotients determines the maps to the limits, so the bijection is covariant in $S$ and contravariant in $U$.",
+   "uses": [
+    "lem-weil-pbc-profinite-test-object-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4 lem:XS functoriality and natural Hom bijection in proof of lem:point-eval"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "def-weil-spectral-space",
+  "lem-weil-pbc-quasicompact-components-clopen-intersection",
+  "lem-weil-pbc-profinite-test-object-functor",
+  "lem-galois-coproduct-copies-morphisms-clopen"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+  "place": "Detailed finite-coproduct and finite-quotient proof of Section 4 lem:point-eval; missing topology supplied from Stacks Tags 005F and 090M, without invoking the qcqs-base topos statement BS 4.2.13."
+ },
  "mathlib_searches": [
   {
+   "tool": "leansearch",
+   "query": "Maps from a weakly contractible affine proetale object to a profinite test object correspond to continuous maps from connected components",
+   "results": "Logged 2026-10-14T00:28:58Z: service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
    "tool": "leanfinder",
-   "query": "Maps from a weakly contractible affine proetale object to finite coproducts of the base scheme correspond to continuous maps from connected components",
-   "results": "8 hits: AlgebraicGeometry.exists_map_eq_top; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.exists_map_preimage_eq_map_preimage; no connected-component correspondence",
+   "query": "Morphisms over a scheme from an affine scheme into the inverse limit of finite constant disjoint unions correspond to continuous maps from its connected component quotient to a profinite set",
+   "results": "Logged 2026-10-14T00:51:24Z: 8 hits, including AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_map_eq_top; no Hom/component correspondence.",
    "date": "2026-10-14",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "TopologicalSpace ConnectedComponents Profinite continuous map",
-   "results": "0 hits; application type mismatch for ConnectedComponents",
+   "query": "AlgebraicGeometry.Scheme, ConnectedComponents",
+   "results": "Logged 2026-10-14T00:51:25Z: AlgebraicGeometry.Scheme.Hom.connectedComponentsHomeomorph, AlgebraicGeometry.Scheme.Hom.connectedComponentsHomeomorph_apply, AlgebraicGeometry.continuousMapPresheafEquivOfTotallyDisconnectedSpace; these do not state the general scheme-Hom correspondence.",
    "date": "2026-10-14",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "ConnectedComponent|connectedComponent|π₀|pi_0 [Mathlib/Topology]",
-   "results": "0 hits",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Maps from affine proetale object to finite disjoint unions correspond to clopen decompositions",
-   "results": "service unavailable: Internal Server Error",
+   "query": "connectedComponent|ConnectedComponents|weaklyContractible (subdirectory argument Mathlib/Topology)",
+   "results": "Logged 2026-10-14T00:28:58Z: 0 hits. The helper prepends Mathlib/, so the supplied subdirectory produces a nonexistent Mathlib/Mathlib/Topology path. This search is not evidence of absence.",
    "date": "2026-10-14",
    "verdict": "unavailable"
   }
@@ -62,10 +131,34 @@
  "mathlib_match": null,
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-condensed-point-basis-evaluation",
   "by": "worker",
   "date": "2026-10-14"
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proetale-point-components-maps",
+  "worker": "stage1",
+  "summary": "Repair: replace unjustified w-contractibility separation with the clopen-intersection theorem for quasi-compact quasi-separated prespectral spaces and the Mathlib prime-spectrum instance; use the existing coproduct-morphism theorem, quotient continuity and explicit coordinate naturality. Arbitrary X retained; BS 4.2.13 is not applied. Exact master reference and interface modules now read. Maintainer repair: reuse the existing qcqs-scheme spectral Mathlib leaf and drop the redundant prime-spectrum node; correct ancestry and align search records with the actual log.",
+  "blueprint": "thm-weil-pbc-qbar first proof sentence, point-to-pro-etale coefficient realization; master Section 4 proof of lem:point-eval, finite coproducts and general finite quotients.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-coproduct-copies-morphisms-clopen",
+    "why": "Generic morphism-to-scheme-coproduct gluing theorem, used only for the finite test-set case; the proper-base-change unit has no equivalent statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-coproduct-copies-morphisms-clopen"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-df6972e98",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-df6972e98 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited sources. Corrected a redundant spectral specialization, incomplete blueprint ancestry, and inaccurate search records. The five-step Hom proof is sound; accepted the coproduct tool use and verified the component theorem’s sorry-free attachment. Exact master coefficients and base-change arrow checked. Corrected JSON files and detailed review.md written.; 2 file(s) fixed by the reviewer"
  }
 }
