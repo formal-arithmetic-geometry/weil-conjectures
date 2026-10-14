@@ -5,10 +5,7 @@ Authors: SHEAF group U2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
 public import Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionKernel
-public import Sheaf.AlgebraicGeometry.SectionFractionPresentation
-public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 
 /-! # Bijection for Veronese section fractions
 
