@@ -70,3 +70,7 @@ theorem isZero_of_isZero_rightDerivedLowerStar_of_isFinite {X S Z U : Scheme.{u}
   exact (Functor.map_isZero _ (isZero_of_isZero_rightDerivedLowerStar_obj_of_isFinite Λ
     (i ≫ a) hN)).of_iso (asIso
       ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app K))
+
+end Etale
+
+end AlgebraicGeometry

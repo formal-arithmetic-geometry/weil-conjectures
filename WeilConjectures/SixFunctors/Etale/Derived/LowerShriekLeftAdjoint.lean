@@ -56,6 +56,11 @@ universe w u
 
 open CategoryTheory Limits
 
+-- This file brings the instance of `GrothendieckTopology.W.IsMonoidal` through enough points
+-- of the site into scope for all importers of `Rf^!`; it is tried before the direct instance
+-- `GrothendieckTopology.W.monoidal` and makes instance search time out. Prefer the latter.
+attribute [instance high] GrothendieckTopology.W.monoidal
+
 open scoped CategoryTheory.Functor
 
 namespace CategoryTheory.Functor

@@ -247,9 +247,7 @@ theorem verdierDual_rightDerivedLowerShriek_of_isClosedImmersion {X : Scheme.{u}
     | top =>
       have hdW' : Order.krullDim (TopologicalSpace.IrreducibleCloseds W) ≤ d := hdW
       rw [← hm] at hdW'
-      simp at hdW'
-      have h' : ((d : ℕ∞) : WithBot ℕ∞) = ((⊤ : ℕ∞) : WithBot ℕ∞) := hdW'
-      exact (ENat.natCast_ne_top d (WithBot.coe_injective h')).elim
+      exact absurd (WithBot.coe_le_coe.mp hdW') (by simp)
     | coe n => exact ⟨n, hm.symm⟩
   have hnd : n ≤ d := by
     rw [hn] at hdW
