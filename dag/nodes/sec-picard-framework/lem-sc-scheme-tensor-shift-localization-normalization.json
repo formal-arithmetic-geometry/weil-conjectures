@@ -1,127 +1,142 @@
 {
- "id": "lem-sc-scheme-tensor-shift-localization-normalization",
- "kind": "statement",
- "title": "Independent localization formulas for both tensor-shift reassociation routes",
- "statement": "Let X be a scheme with the recorded derived tensor [def-pc-scheme-derived-tensor-structure] and canonical tensor shift [def-sc-scheme-canonical-tensor-shift]. Let P,T,U be K-flat sheaf complexes [def-pc-kflat-complex]. Write Q for localization and mu for its lax monoidal tensorator, eta(V):Q(V[1]) -> Q(V)[1] for its shift comparison, and s for the first-factor tensor shift (subscripts c and d mean complex and derived). Set A=Q(P), K=Q(T), M=Q(U). Define v=(eta(P)^(-1) tensor id_K tensor id_M);(mu(P[1],T) tensor id_M);mu(P[1] tensor T,U), and c=(id_A tensor mu(T,U);mu(P,T tensor U))[1];eta(P tensor (T tensor U))^(-1). Then c is invertible. Moreover (alpha(A[1],K,M);s_d(A,K tensor M));c = v;Q(alpha(P[1],T,U);s_c(P,T tensor U)), and ((s_d(A,K) tensor id_M);s_d(A tensor K,M);alpha(A,K,M)[1]);c = v;Q((s_c(P,T) tensor id_U);s_c(P tensor T,U);alpha(P,T,U)[1]). These are separate route normalizations and assert no equality between the two complex composites.",
- "stmt_deps": [
-  "def-pc-scheme-derived-tensor-structure",
-  "def-sc-scheme-canonical-tensor-shift",
-  "def-pc-kflat-complex"
- ],
- "source": {
-  "document": "https://stacks.math.columbia.edu/tag/06YH",
-  "place": "Homogeneous-summand and localization calculations in lem-sc-scheme-canonical-tensor-shift-associator-kflat-one"
- },
- "proof": [
-  {
-   "text": "Convert sheaf K-flatness to the two-sided upstream quasi-isomorphism preservation condition using acyclic cones and symmetry. The Q tensorator is invertible with a K-flat factor. Hence mu(T,U), mu(P,T tensor U), their whiskered/shifted maps, and eta inverse are invertible, proving IsIso c.",
-   "uses": [
-    "def-pc-kflat-complex",
-    "def-pc-scheme-derived-tensor-structure"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Normalize the first route independently: expand c, move mu(T,U) through s_d using second-variable naturality, and use the defining first-variable localization shift square for P,T tensor U. Move eta(P) inverse through the associator by associator naturality. The lax monoidal associativity equation rewrites the resulting tensorator composite as v followed by Q of the complex associator. Functoriality gives the first displayed formula. Use the liftingIsoApp shift square of the recorded IndependentTensorShift construction and transport quotient followed by Qh to Q along quotientCompQhIso.",
-   "uses": [
+  "id": "lem-sc-scheme-tensor-shift-localization-normalization",
+  "kind": "statement",
+  "title": "Independent localization formulas for both tensor-shift reassociation routes",
+  "statement": "Let X be a scheme with the recorded derived tensor [def-pc-scheme-derived-tensor-structure] and canonical tensor shift [def-sc-scheme-canonical-tensor-shift]. Let P,T,U be K-flat sheaf complexes [def-pc-kflat-complex]. Write Q for localization and mu for its lax monoidal tensorator, eta(V):Q(V[1]) -> Q(V)[1] for its shift comparison, and s for the first-factor tensor shift (subscripts c and d mean complex and derived). Set A=Q(P), K=Q(T), M=Q(U). Define v=(eta(P)^(-1) tensor id_K tensor id_M);(mu(P[1],T) tensor id_M);mu(P[1] tensor T,U), and c=(id_A tensor mu(T,U);mu(P,T tensor U))[1];eta(P tensor (T tensor U))^(-1). Then c is invertible. Moreover (alpha(A[1],K,M);s_d(A,K tensor M));c = v;Q(alpha(P[1],T,U);s_c(P,T tensor U)), and ((s_d(A,K) tensor id_M);s_d(A tensor K,M);alpha(A,K,M)[1]);c = v;Q((s_c(P,T) tensor id_U);s_c(P tensor T,U);alpha(P,T,U)[1]). These are separate route normalizations and assert no equality between the two complex composites.",
+  "stmt_deps": [
+    "def-pc-scheme-derived-tensor-structure",
     "def-sc-scheme-canonical-tensor-shift",
-    "def-pc-scheme-derived-tensor-structure"
-   ],
-   "elementary": false
+    "def-pc-kflat-complex"
+  ],
+  "source": {
+    "document": "https://stacks.math.columbia.edu/tag/06YH",
+    "place": "Homogeneous-summand and localization calculations in lem-sc-scheme-canonical-tensor-shift-associator-kflat-one"
   },
-  {
-   "text": "Normalize the second route independently: expand c and apply lax monoidal associativity at P,T,U under the shift functor. Move mu(P,T) through s_d for the fixed third factor by naturality. The first-variable localization squares for P,T and P tensor T,U rewrite the two successive shift comparisons. P tensor T is K-flat since tensoring any acyclic F with it is reassociation of (F tensor P) tensor T. Tensorator naturality in the first variable moves the localized first comparison into Q. Naturality of eta at the complex associator completes the second formula. This uses neither the complex coherence equation nor any equality of the derived routes.",
-   "uses": [
+  "proof": [
+    {
+      "text": "Convert sheaf K-flatness to the two-sided upstream quasi-isomorphism preservation condition using acyclic cones and symmetry. The Q tensorator is invertible with a K-flat factor. Hence mu(T,U), mu(P,T tensor U), their whiskered/shifted maps, and eta inverse are invertible, proving IsIso c.",
+      "uses": [
+        "def-pc-kflat-complex",
+        "def-pc-scheme-derived-tensor-structure"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Normalize the first route independently: expand c, move mu(T,U) through s_d using second-variable naturality, and use the defining first-variable localization shift square for P,T tensor U. Move eta(P) inverse through the associator by associator naturality. The lax monoidal associativity equation rewrites the resulting tensorator composite as v followed by Q of the complex associator. Functoriality gives the first displayed formula. Use the liftingIsoApp shift square of the recorded IndependentTensorShift construction and transport quotient followed by Qh to Q along quotientCompQhIso.",
+      "uses": [
+        "def-sc-scheme-canonical-tensor-shift",
+        "def-pc-scheme-derived-tensor-structure"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Normalize the second route independently: expand c and apply lax monoidal associativity at P,T,U under the shift functor. Move mu(P,T) through s_d for the fixed third factor by naturality. The first-variable localization squares for P,T and P tensor T,U rewrite the two successive shift comparisons. P tensor T is K-flat since tensoring any acyclic F with it is reassociation of (F tensor P) tensor T. Tensorator naturality in the first variable moves the localized first comparison into Q. Naturality of eta at the complex associator completes the second formula. This uses neither the complex coherence equation nor any equality of the derived routes.",
+      "uses": [
+        "def-pc-kflat-complex",
+        "def-sc-scheme-canonical-tensor-shift",
+        "def-pc-scheme-derived-tensor-structure"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "def-pc-kflat-complex",
-    "def-sc-scheme-canonical-tensor-shift",
-    "def-pc-scheme-derived-tensor-structure"
-   ],
-   "elementary": false
+    "def-pc-scheme-derived-tensor-structure",
+    "def-sc-scheme-canonical-tensor-shift"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "https://stacks.math.columbia.edu/tag/06YH",
+    "place": "Explicit subargument of the parent representative calculation; Lean uses Mathlib total tensor and the recorded K-flat localization."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "The two tensor shift associator composites normalize separately through K flat localization",
+      "date": "2026-10-14",
+      "results": "Service unavailable: Internal Server Error"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "The tensor shift associator composites normalize through K flat derived localization",
+      "date": "2026-10-14",
+      "results": "commShiftOfLocalization.iso_hom_app_assoc and iso_inv_app_assoc; Localization.Monoidal associator descriptions.",
+      "verdict": "No exact match: ordinary monoidal localization does not directly handle K-flat derived tensor localization"
+    },
+    {
+      "tool": "grep",
+      "query": "commShift_liftingIsoApp in WeilConjectures/Mathlib/CategoryTheory/Shift/Localization.lean; associativity in Mathlib/CategoryTheory/Monoidal/Functor.lean",
+      "date": "2026-10-14",
+      "results": "Functor.CommShift₂OfLocalization.commShift_liftingIsoApp and Functor.LaxMonoidal.associativity provide the two ingredients. No theorem giving the two independent normalization formulas for the recorded scheme tensor shifts.",
+      "verdict": "Ingredients found, no exact combined normalization statement"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShiftAssociatorKFlatOne",
+    "date": "2026-10-14",
+    "group": "H1"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-finite-duality",
+      "place": "Representative-complex tensor shift reassociation: Independent localization formulas for both tensor-shift reassociation routes",
+      "via": [
+        "lem-sc-scheme-canonical-tensor-shift-associator-kflat-one",
+        "lem-sc-scheme-canonical-tensor-shift-associator",
+        "lem-sc-scheme-canonical-shift-unit-associativity",
+        "lem-sc-derived-pullback-canonical-tensor-shift-one",
+        "lem-sc-derived-monoidal-pullback-unital-shift",
+        "lem-sc-pinned-projection-counit-exact-shift",
+        "lem-sc-right-adjoint-tensor-compatible-exact-structures",
+        "lem-sc-right-adjoint-tensor-comparison-triangle",
+        "lem-sc-right-adjoint-tensor-comparison-diagrams",
+        "lem-sc-right-adjoint-tensor-locus-triangles",
+        "lem-sc-right-adjoint-tensor-locus-localizing",
+        "lem-sc-smooth-proper-diagonal-tensor-formula",
+        "lem-sc-smooth-proper-relative-dualizing-general"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.SchemeTensorShiftLocalizationNormalization",
+    "file": "lean/Sheaf/AlgebraicGeometry/SchemeTensorShiftLocalizationNormalization.lean",
+    "declaration": "AlgebraicGeometry.schemeTensorShift_localization_normalization",
+    "statement": "theorem schemeTensorShift_localization_normalization\n    (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)\n    (hT : CochainComplex.IsKFlat (R := X.sheaf) T)\n    (hU : CochainComplex.IsKFlat (R := X.sheaf) U) :\n    letI := schemeCanonicalTensorShift X\n    letI : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=\n      fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B\n    let A := DerivedCategory.Q.obj P\n    let K := DerivedCategory.Q.obj T\n    let M := DerivedCategory.Q.obj U\n    let c := schemeTensorShiftTargetComparison X P T U\n    let v := schemeTensorShiftSourceComparison X P T U\n    IsIso c ∧\n      ((α_ (A⟦(1 : ℤ)⟧) K M).hom ≫\n          ((tensorRight (K ⊗ M)).commShiftIso (1 : ℤ)).hom.app A) ≫ c =\n        v ≫ DerivedCategory.Q.map ((α_ (P⟦(1 : ℤ)⟧) T U).hom ≫\n          (CochainComplex.mapBifunctorShift₁Iso P (T ⊗ U)\n            (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom) ∧\n      ((((tensorRight K).commShiftIso (1 : ℤ)).hom.app A) ▷ M ≫\n          ((tensorRight M).commShiftIso (1 : ℤ)).hom.app (A ⊗ K) ≫\n          (α_ A K M).hom⟦(1 : ℤ)⟧') ≫ c =\n        v ≫ DerivedCategory.Q.map\n          ((CochainComplex.mapBifunctorShift₁Iso P T\n            (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom ▷ U ≫\n          (CochainComplex.mapBifunctorShift₁Iso (P ⊗ T) U\n            (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom ≫\n          (α_ P T U).hom⟦(1 : ℤ)⟧')",
+    "branch": "sheaf-dag",
+    "by": "H1",
+    "date": "2026-10-14"
+  },
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "H1",
+    "result": "pass",
+    "landing": "20261013T171511-L-1981206",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "X-8f3e6",
+    "group": "K4",
+    "result": "pass",
+    "landing": "20261014T004107-L-2836183",
+    "kind": "interface",
+    "note": "independent Codex review: Delivered files match the node statements and compile cleanly; direct importer also compiles, with allowed axioms only.",
+    "sorry_before": [
+      "AlgebraicGeometry.schemeTensorShift_first_normalization_core",
+      "AlgebraicGeometry.schemeTensorShift_second_normalization"
+    ],
+    "sorry_after": []
   }
- ],
- "proof_deps": [
-  "def-pc-kflat-complex",
-  "def-pc-scheme-derived-tensor-structure",
-  "def-sc-scheme-canonical-tensor-shift"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/06YH",
-  "place": "Explicit subargument of the parent representative calculation; Lean uses Mathlib total tensor and the recorded K-flat localization."
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "The two tensor shift associator composites normalize separately through K flat localization",
-   "date": "2026-10-14",
-   "results": "Service unavailable: Internal Server Error"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The tensor shift associator composites normalize through K flat derived localization",
-   "date": "2026-10-14",
-   "results": "commShiftOfLocalization.iso_hom_app_assoc and iso_inv_app_assoc; Localization.Monoidal associator descriptions.",
-   "verdict": "No exact match: ordinary monoidal localization does not directly handle K-flat derived tensor localization"
-  },
-  {
-   "tool": "grep",
-   "query": "commShift_liftingIsoApp in WeilConjectures/Mathlib/CategoryTheory/Shift/Localization.lean; associativity in Mathlib/CategoryTheory/Monoidal/Functor.lean",
-   "date": "2026-10-14",
-   "results": "Functor.CommShift₂OfLocalization.commShift_liftingIsoApp and Functor.LaxMonoidal.associativity provide the two ingredients. No theorem giving the two independent normalization formulas for the recorded scheme tensor shifts.",
-   "verdict": "Ingredients found, no exact combined normalization statement"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShiftAssociatorKFlatOne",
-  "date": "2026-10-14",
-  "group": "H1"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-finite-duality",
-   "place": "Representative-complex tensor shift reassociation: Independent localization formulas for both tensor-shift reassociation routes",
-   "via": [
-    "lem-sc-scheme-canonical-tensor-shift-associator-kflat-one",
-    "lem-sc-scheme-canonical-tensor-shift-associator",
-    "lem-sc-scheme-canonical-shift-unit-associativity",
-    "lem-sc-derived-pullback-canonical-tensor-shift-one",
-    "lem-sc-derived-monoidal-pullback-unital-shift",
-    "lem-sc-pinned-projection-counit-exact-shift",
-    "lem-sc-right-adjoint-tensor-compatible-exact-structures",
-    "lem-sc-right-adjoint-tensor-comparison-triangle",
-    "lem-sc-right-adjoint-tensor-comparison-diagrams",
-    "lem-sc-right-adjoint-tensor-locus-triangles",
-    "lem-sc-right-adjoint-tensor-locus-localizing",
-    "lem-sc-smooth-proper-diagonal-tensor-formula",
-    "lem-sc-smooth-proper-relative-dualizing-general"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality",
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H1",
-  "result": "pass",
-  "landing": "20261013T171511-L-1981206",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "X-0798c",
-  "group": "E2",
-  "result": "pass",
-  "landing": "20261014T144457-L-564949",
-  "kind": "interface",
-  "note": "independent Codex review: Packet, delivered tree, DAG records, import audit, and lcompile results matched the review requirements"
- }
 }

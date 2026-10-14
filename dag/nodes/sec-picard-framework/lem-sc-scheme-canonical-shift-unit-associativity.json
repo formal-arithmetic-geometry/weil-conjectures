@@ -1,167 +1,177 @@
 {
- "id": "lem-sc-scheme-canonical-shift-unit-associativity",
- "kind": "statement",
- "title": "Associativity of the canonical translated-unit comparison",
- "statement": "Let X be a scheme with its derived category, recorded tensor [def-pc-scheme-derived-tensor-structure], canonical tensor shifts [def-sc-scheme-canonical-tensor-shift], and c_X [def-sc-scheme-canonical-shift-unit-iso]. For all K,M in D(O_X), c_X(K tensor M) is the inverse associator from O_X[1] tensor (K tensor M) to (O_X[1] tensor K) tensor M, followed by c_X(K) tensor id_M and the canonical first-variable shift s_(tensorRight M)(1)_K. This identity concerns one scheme and has no pullback or triangulated-functor assertion.",
- "stmt_deps": [
-  "def-sc-scheme-canonical-shift-unit-iso",
-  "def-sc-scheme-canonical-tensor-shift",
-  "def-pc-scheme-derived-tensor-structure"
- ],
- "source": {
-  "document": "https://stacks.math.columbia.edu/tag/06YH",
-  "place": "Canonical K-flat total tensor translation; translated-unit calculation of the parent plan"
- },
- "proof": [
-  {
-   "text": "Expand schemeCanonicalShiftUnitIso as the first-variable shift comparison at the tensor unit followed by the shifted left unitor. The private proved helper tensorShiftUnitCalculation performs the remaining categorical calculation in an arbitrary monoidal category with shifted right-tensor functors.",
-   "uses": [
+  "id": "lem-sc-scheme-canonical-shift-unit-associativity",
+  "kind": "statement",
+  "title": "Associativity of the canonical translated-unit comparison",
+  "statement": "Let X be a scheme with its derived category, recorded tensor [def-pc-scheme-derived-tensor-structure], canonical tensor shifts [def-sc-scheme-canonical-tensor-shift], and c_X [def-sc-scheme-canonical-shift-unit-iso]. For all K,M in D(O_X), c_X(K tensor M) is the inverse associator from O_X[1] tensor (K tensor M) to (O_X[1] tensor K) tensor M, followed by c_X(K) tensor id_M and the canonical first-variable shift s_(tensorRight M)(1)_K. This identity concerns one scheme and has no pullback or triangulated-functor assertion.",
+  "stmt_deps": [
     "def-sc-scheme-canonical-shift-unit-iso",
     "def-sc-scheme-canonical-tensor-shift",
     "def-pc-scheme-derived-tensor-structure"
-   ],
-   "elementary": true
+  ],
+  "source": {
+    "document": "https://stacks.math.columbia.edu/tag/06YH",
+    "place": "Canonical K-flat total tensor translation; translated-unit calculation of the parent plan"
   },
-  {
-   "text": "Apply the canonical first-variable associator square with A the tensor unit and n=1. This identifies the shift comparison followed by the shifted inverse associator with the inverse associator followed by the two successive shift comparisons.",
-   "uses": [
+  "proof": [
+    {
+      "text": "Expand schemeCanonicalShiftUnitIso as the first-variable shift comparison at the tensor unit followed by the shifted left unitor. The private proved helper tensorShiftUnitCalculation performs the remaining categorical calculation in an arbitrary monoidal category with shifted right-tensor functors.",
+      "uses": [
+        "def-sc-scheme-canonical-shift-unit-iso",
+        "def-sc-scheme-canonical-tensor-shift",
+        "def-pc-scheme-derived-tensor-structure"
+      ],
+      "elementary": true
+    },
+    {
+      "text": "Apply the canonical first-variable associator square with A the tensor unit and n=1. This identifies the shift comparison followed by the shifted inverse associator with the inverse associator followed by the two successive shift comparisons.",
+      "uses": [
+        "lem-sc-scheme-canonical-tensor-shift-associator"
+      ],
+      "elementary": true
+    },
+    {
+      "text": "Use Mathlib leftUnitor_tensor_hom to expand the left unitor of K tensor M. Map that composite under the shift functor and apply the preceding square. Naturality of (tensorRight M).commShiftIso at (leftUnitor K).hom moves the shifted unitor across the second comparison. Functoriality of right whiskering then recombines the first comparison with the shifted left unitor, giving exactly the stated equality. All these steps are proved in the private generic helper.",
+      "uses": [],
+      "elementary": true
+    }
+  ],
+  "proof_deps": [
+    "def-sc-scheme-canonical-shift-unit-iso",
+    "def-sc-scheme-canonical-tensor-shift",
+    "def-pc-scheme-derived-tensor-structure",
     "lem-sc-scheme-canonical-tensor-shift-associator"
-   ],
-   "elementary": true
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "https://stacks.math.columbia.edu/tag/06YH",
+    "place": "Associator square from the triple-totalization step, followed by Mathlib unitor coherence and shift naturality; formal calculation by E1"
   },
-  {
-   "text": "Use Mathlib leftUnitor_tensor_hom to expand the left unitor of K tensor M. Map that composite under the shift functor and apply the preceding square. Naturality of (tensorRight M).commShiftIso at (leftUnitor K).hom moves the shifted unitor across the second comparison. Functoriality of right whiskering then recombines the first comparison with the shifted left unitor, giving exactly the stated equality. All these steps are proved in the private generic helper.",
-   "uses": [],
-   "elementary": true
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "strong monoidal functor derived pullback commutes with tensor shifts exact triangulated",
+      "date": "2026-10-13",
+      "results": "CategoryTheory.Functor.commShiftPullback, CategoryTheory.NatTrans.instCommShiftPullbackShiftHomFunctorNatIsoComp, CategoryTheory.Functor.instCommShiftTriangleMapTriangleInt, CategoryTheory.Functor.mapTriangleCommShiftIso, CategoryTheory.Functor.commShiftPullback_iso_eq, CategoryTheory.NatTrans.PullbackShift.natIsoComp, CategoryTheory.NatTrans.commShiftPullback, CategoryTheory.Functor.isTriangulated_iff_comp_right",
+      "verdict": "no exact match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Functor.CommShift",
+      "date": "2026-10-13",
+      "results": "CategoryTheory.Functor.CommShift.id, CategoryTheory.Functor.CommShift, CategoryTheory.Functor.CommShift.ofIso, CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.comp, CategoryTheory.NatTrans.CommShiftCore",
+      "verdict": "no exact match"
+    },
+    {
+      "tool": "grep",
+      "query": "CommShift.*[Ii]nt|[Ii]nt.*CommShift",
+      "date": "2026-10-13",
+      "results": "Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Shift/CommShiftTwo.lean, Mathlib/CategoryTheory/Shift/CommShiftTwo.lean, Mathlib/CategoryTheory/Shift/CommShiftTwo.lean",
+      "verdict": "no exact match"
+    },
+    {
+      "tool": "grep",
+      "query": "commShift.*associator|associator.*commShift|translated.*unit",
+      "date": "2026-10-13",
+      "results": "Mathlib/CategoryTheory/Shift/Quotient.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/SingleFunctors.lean, Mathlib/Analysis/CStarAlgebra/Unitary/Connected.lean",
+      "verdict": "no exact match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "canonical derived tensor shift via translated unit compatible with tensor associator",
+      "date": "2026-10-13",
+      "results": "CategoryTheory.HasShift.shiftMonoidal, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Tor_map, CategoryTheory.instMonoidalDiscreteFunctorShiftMonoidalFunctor, CategoryTheory.Tor'_map_app, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors",
+      "verdict": "no exact match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.MonoidalCategory.associator_naturality_left",
+      "date": "2026-10-13",
+      "results": "CategoryTheory.MonoidalCategory.associator_naturality_left",
+      "verdict": "no exact match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Derived tensor translation expressed as tensor with the translated unit, compatible with associativity",
+      "date": "2026-10-13",
+      "results": "service unavailable: Internal Server Error",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leansearch",
+      "query": "An exact shift comparison for derived pullback induced by a supplied strong monoidal structure and an isomorphism on the translated unit",
+      "date": "2026-10-13",
+      "results": "service unavailable: Internal Server Error",
+      "verdict": "unavailable"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.DerivedPullbackCanonicalTensorShiftOne",
+    "date": "2026-10-13",
+    "group": "D4"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-finite-duality",
+      "place": "Translated-unit and associativity parts of the parent proof",
+      "via": [
+        "lem-sc-derived-pullback-canonical-tensor-shift-one",
+        "lem-sc-derived-monoidal-pullback-unital-shift",
+        "lem-sc-pinned-projection-counit-exact-shift",
+        "lem-sc-right-adjoint-tensor-compatible-exact-structures",
+        "lem-sc-right-adjoint-tensor-comparison-triangle",
+        "lem-sc-right-adjoint-tensor-comparison-diagrams",
+        "lem-sc-right-adjoint-tensor-locus-triangles",
+        "lem-sc-right-adjoint-tensor-locus-localizing",
+        "lem-sc-smooth-proper-diagonal-tensor-formula",
+        "lem-sc-smooth-proper-relative-dualizing-general"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": []
+    }
+  },
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.SchemeCanonicalShiftUnitAssociativity",
+    "file": "lean/Sheaf/AlgebraicGeometry/SchemeCanonicalShiftUnitAssociativity.lean",
+    "declaration": "AlgebraicGeometry.schemeCanonicalShiftUnitIso_tensor",
+    "statement": "theorem schemeCanonicalShiftUnitIso_tensor (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (K M : schemeDerivedCategory X) : letI := schemeCanonicalTensorShift X letI : (tensorRight M).CommShift ℤ := Functor.CommShift₂.commShiftFlipObj (h := .int) M (schemeCanonicalShiftUnitIso X (K ⊗ M)).hom = (α_ ((𝟙_ (schemeDerivedCategory X))⟦(1 : ℤ)⟧) K M).inv ≫ (schemeCanonicalShiftUnitIso X K).hom ▷ M ≫ ((tensorRight M).commShiftIso (1 : ℤ)).hom.app K",
+    "branch": "sheaf-dag",
+    "by": "D4",
+    "date": "2026-10-13"
+  },
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "D4",
+    "result": "pass",
+    "landing": "20261013T145117-L-695131",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "E1",
+    "result": "pass",
+    "landing": "20261013T151659-L-923582",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "def-sc-scheme-canonical-shift-unit-iso",
-  "def-sc-scheme-canonical-tensor-shift",
-  "def-pc-scheme-derived-tensor-structure",
-  "lem-sc-scheme-canonical-tensor-shift-associator"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/06YH",
-  "place": "Associator square from the triple-totalization step, followed by Mathlib unitor coherence and shift naturality; formal calculation by E1"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "strong monoidal functor derived pullback commutes with tensor shifts exact triangulated",
-   "date": "2026-10-13",
-   "results": "CategoryTheory.Functor.commShiftPullback, CategoryTheory.NatTrans.instCommShiftPullbackShiftHomFunctorNatIsoComp, CategoryTheory.Functor.instCommShiftTriangleMapTriangleInt, CategoryTheory.Functor.mapTriangleCommShiftIso, CategoryTheory.Functor.commShiftPullback_iso_eq, CategoryTheory.NatTrans.PullbackShift.natIsoComp, CategoryTheory.NatTrans.commShiftPullback, CategoryTheory.Functor.isTriangulated_iff_comp_right",
-   "verdict": "no exact match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Functor.CommShift",
-   "date": "2026-10-13",
-   "results": "CategoryTheory.Functor.CommShift.id, CategoryTheory.Functor.CommShift, CategoryTheory.Functor.CommShift.ofIso, CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.comp, CategoryTheory.NatTrans.CommShiftCore",
-   "verdict": "no exact match"
-  },
-  {
-   "tool": "grep",
-   "query": "CommShift.*[Ii]nt|[Ii]nt.*CommShift",
-   "date": "2026-10-13",
-   "results": "Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Shift/CommShiftTwo.lean, Mathlib/CategoryTheory/Shift/CommShiftTwo.lean, Mathlib/CategoryTheory/Shift/CommShiftTwo.lean",
-   "verdict": "no exact match"
-  },
-  {
-   "tool": "grep",
-   "query": "commShift.*associator|associator.*commShift|translated.*unit",
-   "date": "2026-10-13",
-   "results": "Mathlib/CategoryTheory/Shift/Quotient.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/SingleFunctors.lean, Mathlib/Analysis/CStarAlgebra/Unitary/Connected.lean",
-   "verdict": "no exact match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "canonical derived tensor shift via translated unit compatible with tensor associator",
-   "date": "2026-10-13",
-   "results": "CategoryTheory.HasShift.shiftMonoidal, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Tor_map, CategoryTheory.instMonoidalDiscreteFunctorShiftMonoidalFunctor, CategoryTheory.Tor'_map_app, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors",
-   "verdict": "no exact match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.MonoidalCategory.associator_naturality_left",
-   "date": "2026-10-13",
-   "results": "CategoryTheory.MonoidalCategory.associator_naturality_left",
-   "verdict": "no exact match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Derived tensor translation expressed as tensor with the translated unit, compatible with associativity",
-   "date": "2026-10-13",
-   "results": "service unavailable: Internal Server Error",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leansearch",
-   "query": "An exact shift comparison for derived pullback induced by a supplied strong monoidal structure and an isomorphism on the translated unit",
-   "date": "2026-10-13",
-   "results": "service unavailable: Internal Server Error",
-   "verdict": "unavailable"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackCanonicalTensorShiftOne",
-  "date": "2026-10-13",
-  "group": "D4"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-finite-duality",
-   "place": "Translated-unit and associativity parts of the parent proof",
-   "via": [
-    "lem-sc-derived-pullback-canonical-tensor-shift-one",
-    "lem-sc-derived-monoidal-pullback-unital-shift",
-    "lem-sc-pinned-projection-counit-exact-shift",
-    "lem-sc-right-adjoint-tensor-compatible-exact-structures",
-    "lem-sc-right-adjoint-tensor-comparison-triangle",
-    "lem-sc-right-adjoint-tensor-comparison-diagrams",
-    "lem-sc-right-adjoint-tensor-locus-triangles",
-    "lem-sc-right-adjoint-tensor-locus-localizing",
-    "lem-sc-smooth-proper-diagonal-tensor-formula",
-    "lem-sc-smooth-proper-relative-dualizing-general"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": []
-  }
- },
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D4",
-  "result": "pass",
-  "landing": "20261013T145117-L-695131",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "X-0798c",
-  "group": "E2",
-  "result": "pass",
-  "landing": "20261014T144457-L-564949",
-  "kind": "interface",
-  "note": "independent Codex review: Packet, delivered tree, DAG records, import audit, and lcompile results matched the review requirements"
- }
 }

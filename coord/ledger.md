@@ -14869,5 +14869,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:24 L: returned deliver/W4/Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula (reviewer RETURN: (reviewer X-3d4a1, head 3d4a11d2f) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Ra)
 - 14:24 L: returned deliver/M4/Sheaf.CategoryTheory.SiteSystemStrictificationData (reviewer RETURN: (reviewer X-5c645, head 5c6455413) A2/F (forced-adaptation report): In coord/reports/M4/Sheaf.CategoryTheory.SiteSystemS)
 - 14:39 L: merged deliver/T4/WeilConjectures.AlgebraicGeometry.Picard.Jacobian (stage 3; reviewer PASS; first push; landing 20261014T143903-L-496752 (interface); batch 20261014T143901; modules 9; new nodes 8)
-- 14:44 L: merged deliver/E2/Sheaf.AlgebraicGeometry.BoundedFlatModelNormalization (stage 3; reviewer PASS; first push; landing 20261014T144457-L-564949 (interface); batch 20261014T144456; modules 29; new nodes 0; change records: coord/changes/retire-bounded-flat-normalization-branch.md)
 - 14:44 L: returned deliver/X2/Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic (reviewer RETURN: (reviewer X-163d1, head 163d1d92e) 7 / forced adaptations: report.md has no `## Forced adaptations` section, despite the)
+
+- 22:47 L: batch 20261014T144456 dependency take-out
