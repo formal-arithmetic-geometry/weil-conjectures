@@ -37,3 +37,6 @@ This compatibility module intentionally contains no declarations after duplicate
 
 -- Second reading (B4, 2026-10-14): compatibility-only verification; no declarations,
 -- new proof progress or certification of the absent upstream theorem.
+
+-- Verification (V1, 2026-10-14): this compatibility module compiles with zero declarations
+-- and zero proof holes. The stale repair assignment closes no additional holes.

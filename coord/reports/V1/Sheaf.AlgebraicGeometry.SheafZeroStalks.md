@@ -1,59 +1,65 @@
 ## What changed
 
-Clarified the compatibility module's documentation: no local declaration callers need
-adaptation. The repository baseline already retired the duplicate theorem and removed
-its two proof-only imports. This delivery changes no declaration, signature, definition,
-visibility, import, or target statement.
+Added only a verification comment; no imports, declarations, or DAG records changed.
+Verified the assigned
+compatibility module Sheaf.AlgebraicGeometry.SheafZeroStalks after the already-landed
+duplicate-removal repair 20261013T224521-L-1475959. This report records a stale
+assignment, not additional proof progress.
 
 ## Proved and sorry left
 
-Holes closed: none. Holes added: none. There are zero declarations and zero `sorry`s
-in this module in both the current repository baseline and this delivery. This is a
-second-reading/documentation delivery, not a new proof or decomposition.
+Holes closed: none (0 of 0). Holes added: none. The assigned module contains no
+declarations and no sorry proofs. Nothing was split off. The removed declaration
+AlgebraicGeometry.Scheme.Modules.isZero_of_isZero_stalks was retired before this work.
+Compilation checks only the compatibility module; it does not certify the absent
+upstream AlgebraicGeometry.Scheme.Modules.isZero_of_isZero_stalk theorem recorded
+on node pqf-lem-sheaf-zero-stalks.
 
 ## No longer needed
 
-None newly pruned in this delivery. The baseline already removed the proof-only imports
-`Mathlib.Topology.Sheaves.Abelian` and `Mathlib.Algebra.Category.Grp.Zero` and retired
-`AlgebraicGeometry.Scheme.Modules.isZero_of_isZero_stalks`. Its node already has empty
-`proof_deps`. The two existing public imports are preserved for compatibility.
+None newly pruned. No imports removed, nodes bypassed, or modules newly made
+unreachable. Both original public imports are retained to preserve the compatibility
+interface: Sheaf.Algebra.Homology.ModuleStalkFunctor and
+Mathlib.AlgebraicGeometry.Modules.Sheaf. The node already has empty proof_deps.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The worker's report described the earlier retirement as if it were this delivery's change.
-The actual repository diff is documentation only. The sandbox also contained stale
-maintainer-owned `reviewed_proof` metadata; restored it from the repository.
-The upstream theorem's exact signature and axioms cannot be verified here: its module
-is absent from this snapshot, as the existing node explicitly records. No new proof
-claim is made about that theorem.
+The brief says this item still contains sorry; the current file has no declarations.
+coord/repairs.txt still lists the already-landed duplicate repair. The existing change
+record coord/changes/remove-sheaf-zero-stalks-duplicate.md records its landed status.
+The node pqf-lem-sheaf-zero-stalks already points to
+WeilConjectures.AlgebraicGeometry.Cohomology.FiniteFibre and explicitly records that
+its source and exact signature were unavailable. Source search found neither that
+module nor the canonical theorem in this project's source snapshot or the installed
+source checkout. No replacement theorem is introduced and no certification of the
+absent theorem is claimed. The unit sk-prop-av-pqf-finite is unchanged.
 
 ## Second reading by V1
 
-1. Compared the complete Lean file and node against the repository with diff.
-   Verdict: the Lean change is a module-documentation sentence only; all existing
-   signatures (there are no local declarations), imports and visibility are unchanged.
-   The earlier declaration retirement is already in the repository baseline.
-2. Compiled the delivered module using lcompile.py: exit code 0, no warnings.
-   Inspected the complete file: no theorem, definition, sorry, axiom, unsafe, opaque,
-   implemented_by or extern occurs as code. There is no local declaration on which
-   to run #print axioms. Verdict: clean compatibility module; no new proof claimed.
-3. There are no split-off statements or new nodes. Verdict: small-case testing,
-   duplicate searches and docstring proof checks for new statements are inapplicable.
-   Whole-source rg confirms no caller of the retired declaration remains in lean/.
-4. Read the unit record sk-prop-av-pqf-finite and the node. Verdict: no route or
-   realized field changes; no new pruning. Both public imports remain unchanged
-   because removing compatibility exports would be an interface change. The baseline
-   node already has no local proof dependencies.
-5. Compared proof, proof_deps, proof_origin and lean records with the repository.
-   Verdict: unchanged; the record explicitly identifies the upstream theorem from
-   review #1428 and explicitly says its signature is unverified in this snapshot.
-   Restored stale reviewed_proof metadata rather than overwriting a later review.
+1. Compared the sole delivered module with the repository using diff. The only
+   difference is the final two-line verification comment. All imports, visibility,
+   and module contents are otherwise byte for byte unchanged; there are no existing
+   declaration signatures in either version. Verdict: no accidental interface change.
+2. Compiled the delivered file through lcompile.py: exit code 0, no warnings, 1.6 s.
+   Read the entire file: no declarations, sorry, axioms, unsafe or opaque code,
+   implementation overrides, or definitions. There is no declaration on which to
+   run #print axioms. Verdict: compatibility module verified, no theorem certified.
+3. No statements or nodes were split off or added. Small-case and duplicate searches
+   for new statements therefore do not apply. A source search for the retired and
+   canonical names in the project's algebraic-geometry sources found no declaration;
+   the installed algebraic-geometry source listing likewise has no FiniteFibre module.
+   Verdict: no disguised restatement, arbitrary witness, or new hole.
+4. No proof or proof-dependency imports remain to shorten. Both public imports are
+   inherited compatibility exports; changing them would alter the interface rather
+   than prune a proof-only import. The old proof_deps is empty. Read the unit
+   sk-prop-av-pqf-finite: its realized statement and step lists are unchanged, and no
+   route was bypassed by this delivery. Verdict: no newly pruned imports or nodes.
+5. Read pqf-lem-sheaf-zero-stalks and the landed duplicate-removal record. No node is
+   delivered. The existing node's empty proof_deps agrees with the absence of a local
+   proof, but its upstream proof route is unverified in this snapshot, as its lean.note
+   already records. Verdict: this delivery makes no new DAG or upstream proof claim;
+   the previously recorded missing-source limitation remains.
 
-Second reading changed the documentation sentence to avoid implying existing callers
-use an unavailable upstream module, corrected the report's baseline/progress claims,
-and restored the repository's maintainer-owned review metadata and landed change-record status. No proof was rewritten.
-
-## New nodes
-
-None. The existing change record coord/changes/remove-sheaf-zero-stalks-duplicate.md
-records the earlier retirement; it is not evidence of new proof progress here.
+Changed only this report by adding the independent second reading. Kept the worker's
+verification comment. Closed 0 of 0 local holes, added 0, split off 0, newly pruned none.
+This is a stale repair verification, not proof progress.
