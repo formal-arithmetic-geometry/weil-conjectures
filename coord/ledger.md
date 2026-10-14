@@ -14780,3 +14780,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:09 L: merged deliver/V3/Sheaf.AlgebraicGeometry.RelativeMVDirectImageHomotopyComparison (stage 3; reviewer PASS; first push; landing 20261014T090921-L-367135 (interface); batch 20261014T090916; modules 2; new nodes 1)
 
 - 17:15 L: batch 20261014T090916 dependency take-out
+- 09:15 L: returned deliver/V3/Sheaf.AlgebraicGeometry.SymmetricAlgebraAffineSectionComparison (reviewer RETURN: (reviewer X-1c2b9, head 1c2b9d230) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Sy)
