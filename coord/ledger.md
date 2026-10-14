@@ -14644,3 +14644,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:35 L: returned deliver/F2/Sheaf.Algebra.Homology.TensorBicomplex (reviewer RETURN: (reviewer X-9c100, head 9c100ab46) 2 / reader gate: the new `let F := ...; (Functor.uncurry.obj F).map ...` body changes)
 
 - 13:37 L: batch 20261014T053238 dependency take-out
+- 05:40 L: merged deliver/A3/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (stage 3; reviewer PASS; first push; landing 20261014T054049-L-2105999 (proof); batch 20261014T054047; modules 1; new nodes 0)

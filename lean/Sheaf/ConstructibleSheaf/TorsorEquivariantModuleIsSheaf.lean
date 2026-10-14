@@ -24,6 +24,7 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 
 /- The construction below keeps the equivariance argument at the type-presheaf level. -/
+-- A direct subfunctor proof avoids any descent or connectedness assumptions.
 
 private theorem restriction_action
     {V : Scheme.{u}} {P : Type u} [Group P] [Finite P]
