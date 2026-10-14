@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-pullback-constant",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Inverse image of a constant sheaf",
@@ -13,32 +13,120 @@
   "place": "node lem-kun-pullback-constant, order 1712"
  },
  "stmt_deps": [
+  "def-pc-scheme",
   "def-kun-constant-sheaf",
-  "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-inverse-image"
  ],
  "proof": [
   {
-   "text": "At a geometric point $\\bar x$ of $X$, the\nstalk functor is the inverse\nimage of the point (see [lem-kun-stalk-as-pullback]), so\n$(f^{-1}\\underline{M})_{\\bar x}=(\\underline{M})_{f(\\bar x)}=M= (\\underline{M})_{\\bar x}$; the canonical map is an isomorphism on\nevery stalk hence an isomorphism of sheaves by\n[lemma-weil-pbc-geometric-stalk-conservative]; for a complex the\nsame argument applies degreewise.",
+   "text": "Write $c_{T,M}:M\\to\\underline M_T(T)$ for the constant-section map of the sheafification defining [def-kun-constant-sheaf]. For every etale $V\\to Y$, send $m$ to its constant section on $V\\times_YX$. These maps commute with restrictions and give a map of presheaves from the constant presheaf on $Y$ to $f_*\\underline M_X$, using the direct-image formula [def-weil-pbc-direct-image]. By the universal property [def-weil-pbc-sheafification] this factors uniquely through $\\underline M_Y$. Its adjoint under [def-weil-pbc-inverse-image] is the canonical comparison $\\alpha_M:f^{-1}\\underline M_Y\\to\\underline M_X$. Every coefficient homomorphism $a:M\\to N$ commutes with these maps, since both composites send $m$ to the constant section with value $a(m)$; uniqueness of sheafification and adjunction gives naturality of $\\alpha_M$.",
    "uses": [
-    "lem-kun-stalk-as-pullback",
+    "def-kun-constant-sheaf",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q0, definition-inverse-image (adjunction); construction from the universal property of constant-presheaf sheafification"
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar x$ of $X$, and put $\\bar y=f\\circ\\bar x$. The canonical pullback-stalk comparison [lemma-openclosed-stalk-upperstar] identifies $(f^{-1}\\underline M_Y)_{\\bar x}$ with $(\\underline M_Y)_{\\bar y}$. By [lem-weil-pbc-constant-sheaf-geometric-stalk], the constant-germ maps identify both $(\\underline M_Y)_{\\bar y}$ and $(\\underline M_X)_{\\bar x}$ with the underlying abelian group of $M$. Under these identifications $(\\alpha_M)_{\\bar x}$ sends $m$ to $m$: a representative constant section with value $m$ on $V$ pulls to the constant section with value $m$ on $V\\times_YX$ and then restricts to any pointed neighbourhood mapping there. This is the germ description of the canonical comparison in Stacks 03Q1, not merely an abstract isomorphism between the two stalk groups. Since every germ is a constant germ by the cited constant-stalk theorem, the stalk map is the identity on all of $M$.",
+   "uses": [
+    "lemma-openclosed-stalk-upperstar",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1, lemma-stalk-pullback (3) and equation-pullback; Tag 03PT, lemma-stalk-exact (2)"
+   }
+  },
+  {
+   "text": "Apply [lemma-weil-pbc-geometric-stalk-conservative] to the underlying abelian-sheaf map $\\alpha_M$: step 2 proves it is an isomorphism at every geometric stalk. Thus it is an isomorphism of abelian sheaves. For each $\\lambda\\in\\Lambda$, apply step 1 naturality to the coefficient homomorphism $m\\mapsto\\lambda m$: this gives $\\alpha_M\\circ f^{-1}(\\lambda)=\\lambda\\circ\\alpha_M$. Thus the comparison respects constant scalars. For the module structure over the constant ring sheaf, a local scalar is locally represented by constants; the same equation holds on that cover, and equality follows by the uniqueness part of the sheaf axiom. Its inverse also respects scalars: for a section $v$, write $u=\\alpha_M^{-1}(v)$ and use $\\alpha_M(\\lambda u)=\\lambda\\alpha_M(u)=\\lambda v$, so $\\alpha_M^{-1}(\\lambda v)=\\lambda u$. Consequently $\\alpha_M$ is an isomorphism of $\\Lambda$-module sheaves, without any finiteness, torsion, or invertibility assumption.",
+   "uses": [
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PU, theorem-exactness-stalks; scalar compatibility from step 1 naturality and the sheaf axiom"
+   }
+  },
+  {
+   "text": "For a complex $M^\\bullet$, use its termwise constant complex [def-kun-constant-sheaf]. In degree $r$ the comparison is $\\alpha_{M^r}$. Naturality from step 1 applied to $d^r:M^r\\to M^{r+1}$ says $\\underline{d^r}_X\\alpha_{M^r}=\\alpha_{M^{r+1}}f^{-1}(\\underline{d^r}_Y)$, so the comparisons form a chain map. Multiply this equation on the left by $\\alpha_{M^{r+1}}^{-1}$ and on the right by $\\alpha_{M^r}^{-1}$: $f^{-1}(\\underline{d^r}_Y)\\alpha_{M^r}^{-1}=\\alpha_{M^{r+1}}^{-1}\\underline{d^r}_X$. Thus the degreewise inverses from step 3 form its inverse chain map. This is an actual isomorphism of complexes, in every degree, and does not require boundedness.",
+   "uses": [
+    "def-kun-constant-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-pullback-constant.md",
+    "place": "Proof, final sentence: for a complex the same argument applies degreewise"
+   }
   }
  ],
  "proof_deps": [
-  "lem-kun-stalk-as-pullback",
+  "def-kun-constant-sheaf",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-inverse-image",
+  "lemma-openclosed-stalk-upperstar",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
   "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-pullback-constant.md",
-  "place": "## Proof"
+  "place": "Proof, expanded with Stacks 03Q1, 03PT and 03PU; degreewise inverse chain map written explicitly"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of a constant sheaf of modules along a morphism of schemes is canonically the constant sheaf",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.StructureSheaf.comap_const, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, AlgebraicGeometry.Scheme.Modules.pushforwardId_inv_app_app, ModuleCat.Tilde.res_const, CategoryTheory.Sheaf.isConstant_of_forget, CategoryTheory.Sheaf.isConstant_iff_forget, AlgebraicGeometry.Scheme.Modules.pullbackId",
+   "date": "2026-10-14",
+   "verdict": "No full match: generic constant-sheaf construction, dense-subsite equivalences or structure-sheaf pullback do not state arbitrary etale inverse image and the complex clause."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\"",
+   "results": "CategoryTheory.constantSheaf, CategoryTheory.constantSheafAdj, CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant, CategoryTheory.constantSheafAdj_counit_app, CategoryTheory.constantSheafAdj_counit_w, CategoryTheory.instAdditiveSheafConstantSheaf, CategoryTheory.constantSheafΓAdj, CategoryTheory.GrothendieckTopology.IsLocalSite.coconstantSheaf",
+   "date": "2026-10-14",
+   "verdict": "No full match: generic constant-sheaf construction, dense-subsite equivalences or structure-sheaf pullback do not state arbitrary etale inverse image and the complex clause."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*(pullback|iso)|pullback.*constantSheaf|constant.*stalk",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-14",
+   "verdict": "No full match: generic constant-sheaf construction, dense-subsite equivalences or structure-sheaf pullback do not state arbitrary etale inverse image and the complex clause."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of a constant sheaf is isomorphic to the constant sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a geometric morphism of topoi the inverse image functor commutes with the constant sheaf functor",
+   "results": "CategoryTheory.instIsConstantObjSheafSheafCompose, CategoryTheory.Sheaf.isConstant_of_forget, CategoryTheory.Sheaf.isConstant_iff_forget, CategoryTheory.constantCommuteCompose, CategoryTheory.Sheaf.isConstant_iff_of_equivalence, TopCat.Sheaf.pullbackPushforwardAdjunction, topCatToSheafCompHausLike_map_val_app, TopCat.Sheaf.pushforwardForgetIso",
+   "date": "2026-10-14",
+   "verdict": "No full match: generic constant-sheaf construction, dense-subsite equivalences or structure-sheaf pullback do not state arbitrary etale inverse image and the complex clause."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*[Cc]onstant|[Cc]onstant.*sheafPullback|pullbackConstant|constant.*[Ii]nverseImage",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "No full match: generic constant-sheaf construction, dense-subsite equivalences or structure-sheaf pullback do not state arbitrary etale inverse image and the complex clause."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -69,5 +157,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-pullback-constant",
+  "worker": "stage1",
+  "summary": "Expanded the canonical map, constant-germ action, conservativity and degreewise inverse chain map. Reused all needed facts in existing nodes, with no new nodes or statement change. The closed project constant-sheaf isomorphism covers only the sheaf clause, so no full attachment is claimed.",
+  "blueprint": "Proof first sentence and displayed stalk identification realized in steps 1--2; stalk conservativity in step 3; final degreewise sentence in step 4.",
+  "tool_uses": [
+   {
+    "node": "lemma-openclosed-stalk-upperstar",
+    "why": "Generic canonical stalk comparison for any morphism; the unit stalk-as-point node alone does not state composition compatibility."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Generic constant-germ isomorphism for any abelian group; the unit has no theorem giving these canonical stalk coordinates."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic detection of abelian-sheaf isomorphisms by geometric stalks, as already used in the imported proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-openclosed-stalk-upperstar",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-cb1201885",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-cb1201885 (reviewer sub-agent of L); spot-checked: Read the item, report, route, cited DAG statements, master source, and Stacks Tags 03Q1, 03PT, and 03PU. The arbitrary scheme morphism, coefficient category, module and unbounded complex clauses are preserved. Germ-level canonical-map compatibility, stalk conservativity, scalar linearity, and degreewise inverse chain-map arguments check out; edge cases and Mathlib searches were checked. No duplicates, circularity, unsupported hypotheses, route errors, or repairs found. Review written to review.md."
+ }
 }
