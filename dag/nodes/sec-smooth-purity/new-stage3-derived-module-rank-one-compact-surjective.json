@@ -12,7 +12,17 @@
  },
  "proof": [
   {
-   "text": "The degree-zero free rank-one complex is K-projective, so derived maps from it are naturally H^0. Represent the family by complexes; derivedModuleDirectSums identifies their termwise sum with the derived coproduct. A zero-cycle in that sum has finite support and zero-cycle coordinates; the resulting finite family of derived maps maps to the original morphism.",
+   "text": "The lifted regular module is free and projective. Its degree-zero single complex has projective terms and is bounded above, so Mathlib CochainComplex.isKProjective_of_projective makes it K-projective. CochainComplex.IsKProjective.Qh_map_bijective and the full homotopy quotient show that every derived map from it to Q(L) lifts to a chain map. This is proved as rankOne_kProjective and rankOne_map_surjective in the delivered module.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For a family K of complexes, form the coproduct projections p_i, equal to the identity on summand i and zero on every other summand. Evaluation in degree zero preserves this coproduct. Its colimit cocone is isomorphic to the concrete module direct sum (ModuleCat.coproductCoconeIsColimit). For a chain map f from the rank-one single complex, evaluate f on the lifted unit and express the result as v in that direct sum. Direct-sum induction shows that applying p_i recovers v_i. Hence f is the sum, over the finite support of v, of (f followed by p_i) followed by the ith coprojection: equality in degree zero follows from DirectSum.sum_support_of and linearity, and equality of chain maps follows from HomologicalComplex.from_single_hom_ext. This proves rankOne_chain_finite_sum, including empty families and the zero ring.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For each derived object E_i take the complex Q.objPreimage(E_i), with its canonical isomorphism Q(K_i) to E_i. Apply derivedModuleDirectSums to identify Q of the termwise coproduct with the coproduct of the Q(K_i), then transport through these isomorphisms. Lift the given morphism to a chain map by step 1, and write that map as the finite sum from step 2. Put the localized coordinate maps, transported to E_i, in the algebraic direct sum of Hom groups. Additivity of Q and the defining equations for the coproduct isomorphisms show that the comparison sends this element to the original morphism.",
    "uses": [
     "lem-pc-derived-module-direct-sums"
    ],
@@ -24,10 +34,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "H4",
+  "group": "U1",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/0F5X",
-  "place": "rank-one compactness calculation"
+  "place": "first paragraph: rank-one compactness assertion; explicit chain-map finite-support calculation using Mathlib K-projective localization"
  },
  "mathlib_searches": [
   {
@@ -125,10 +135,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H4",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261014T010844-L-3164331",
-  "kind": "interface",
+  "landing": "20261014T013047-L-3418275",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
