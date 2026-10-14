@@ -7,6 +7,11 @@ module
 
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
+import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
+import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
+import Sheaf.AlgebraicGeometry.LimitFibreProducts
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Degreewise continuity of relative exchange under affine inverse limits
 
