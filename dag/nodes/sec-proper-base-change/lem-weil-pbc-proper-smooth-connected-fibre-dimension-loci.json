@@ -18,7 +18,7 @@
  },
  "kind": "statement",
  "title": "Clopen dimension loci in proper smooth connected families",
- "statement": "Let $S$ be Noetherian [pqf-def-locnoeth] [def-weil-pbc-scheme-conventions], let $f:X\\to S$ be proper and smooth [def-weil-proper-morphism] [def-sbc-smooth-morphisms], and suppose its geometric fibres are nonempty and connected [def-pc-geometrically-irreducible], with dimension at most an integer $d\\ge0$ [def-kun-topological-krull-dimension]. For $0\\le i\\le d$ let $S_i$ be the set of points whose geometric fibre has dimension $i$. These sets are pairwise disjoint open and closed subsets covering $S$. With their open subscheme structures, the base changes $f_i:X\\times_S S_i\\to S_i$ [def-pc-base-change] are proper and smooth with nonempty geometrically connected fibres of pure dimension $i$. The morphism $f_0$ is quasi-finite [pqf-def-quasifinite].",
+ "statement": "Let $S$ be Noetherian [pqf-def-locnoeth] [def-weil-pbc-scheme-conventions], let $f:X\\to S$ be proper and smooth [def-weil-proper-morphism] [def-sbc-smooth-morphisms], and suppose its geometric fibres [def-weil-geometric-fibre] are nonempty and connected [def-pc-geometrically-irreducible], with dimension at most an integer $d\\ge0$ [def-kun-topological-krull-dimension]. For $0\\le i\\le d$ let $S_i$ be the set of points whose geometric fibre has dimension $i$. These sets are pairwise disjoint open and closed subsets covering $S$. With their open subscheme structures [def-weil-open-immersion], the base changes $f_i:X\\times_S S_i\\to S_i$ [def-pc-base-change] are proper and smooth with nonempty geometrically connected fibres of pure dimension $i$ [def-weil-pure-dimension]. The morphism $f_0$ is quasi-finite [pqf-def-quasifinite].",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
   "place": "Tag 02G1, label lemma-smooth-omega-finite-locally-free, with proper closed images of the rank loci; Tag 01TH, label lemma-quasi-finite-at-point-characterize, zero-dimensional fibre criterion. Agent-formulated consequence."
@@ -31,11 +31,115 @@
   "def-pc-geometrically-irreducible",
   "def-kun-topological-krull-dimension",
   "def-pc-base-change",
+  "pqf-def-quasifinite",
+  "def-weil-geometric-fibre",
+  "def-weil-open-immersion",
+  "def-weil-pure-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Put $r(x)=\\dim_x(X_{f(x)})$. By [sbc-lem-smooth-relative-dimension-locally-constant], $r$ is locally constant. Its values are nonnegative finite integers by [lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension]. Thus $U_n=\\{x:r(x)=n\\}$ is open and closed: local constancy makes both $U_n$ and its complement unions of open neighbourhoods on which $r$ is constant. The $U_n$ are disjoint and cover $X$.",
+   "uses": [
+    "sbc-lem-smooth-relative-dimension-locally-constant",
+    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G1, lemma-smooth-omega-finite-locally-free"
+   }
+  },
+  {
+   "text": "For $s\\in S$, [lem-weil-geometrically-connected-algebraic-closure] applied to $X_s$ shows that the assumed connected geometric fibre makes $X_s$ geometrically connected, hence nonempty and connected. Identify its underlying space with $f^{-1}(s)$ by [def-pc-scheme-fibre]. The trace of each $U_n$ is clopen in this connected space. At any point of the nonempty fibre choose its value $n$; its trace is nonempty, so its clopen complement is empty by [def-weil-connected-scheme]. Consequently $r$ is constant with value $n$ on the whole fibre.",
+   "uses": [
+    "lem-weil-geometrically-connected-algebraic-closure",
+    "def-pc-scheme-fibre",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0387 (lemma-characterize-geometrically-connected), 054N; connectedness definition 004S"
+   }
+  },
+  {
+   "text": "The restriction $U_n\\to S$ is smooth by [lem-pc-open-immersion-smooth-composition]. Its fibre at a point of $U_n$ is an open subspace of the fibre of $f$ by [lem-weil-pbc-open-fibre-product], and its dimension there is still $n$ by [lem-weil-pbc-dimension-at-point-open-subspace]. Hence it is smooth of relative dimension $n$ in [def-sbc-smooth-morphisms]. By [lem-sbc-smooth-relative-dimension-permanence], its base change to an algebraic closure of $\\kappa(s)$ is smooth of relative dimension $n$. For an $s$ whose fibre has the constant value $n$ of step 2, that base change is the whole geometric fibre: all of $X_s$ lies in $U_n$. The equivalence in [def-sbc-smooth-morphisms] with nonempty equidimensional fibres therefore shows that both $X_s$ and its geometric fibre have pure dimension $n$, and hence dimension $n$. Thus $n\\le d$ by the assumed bound, and $f(U_i)=S_i$, $f^{-1}(S_i)=U_i$.",
+   "uses": [
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-dimension-at-point-open-subspace",
+    "def-sbc-smooth-morphisms",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VC, 01VA; 02G2 (definition-smooth-relative-dimension) and following equivalence; 02NK (lemma-base-change-relative-dimension-d)"
+   }
+  },
+  {
+   "text": "Properness means universal closedness [def-weil-proper-morphism], so $f$ is a closed map. Since $U_i$ and $X\\setminus U_i$ are closed, $f(U_i)=S_i$ and $f(X\\setminus U_i)$ are closed. Saturation from step 3 and the nonemptiness of every fibre give $f(X\\setminus U_i)=S\\setminus S_i$: a fibre meeting one of these two complementary saturated subsets lies entirely there. Thus $S_i$ is also open. Every nonempty fibre has exactly one value $i$ between $0$ and $d$, so the $S_i$ are pairwise disjoint and cover $S$.",
+   "uses": [
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W1 (definition-proper), universally closed definition"
+   }
+  },
+  {
+   "text": "Equip $S_i$ with its open subscheme structure. By [lem-pc-proper-base-change], $f_i$ is proper and smooth. By [lem-weil-pbc-open-fibre-product], $X\\times_S S_i$ is the open subscheme $f^{-1}(S_i)=U_i$ of $X$. At $s\\in S_i$, [def-weil-open-immersion] identifies the structure sheaf with the restriction of that of $S$. Taking the direct limit of sections over open neighbourhoods of $s$ gives the same local ring, and taking its quotient by the maximal ideal gives the same residue field; the fibre products defining the ordinary and geometric fibres of $f_i$ are therefore those of $f$. By [def-pc-base-change] these are the same fibre products, so step 2 gives nonempty geometrically connected ordinary fibres and step 3 gives geometric fibres of pure dimension $i$. In particular the restricted family retains all the asserted fibre properties.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-open-fibre-product",
+    "def-weil-open-immersion",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W4 (lemma-base-change-proper), Tag 01VB (lemma-base-change-smooth); Schemes Tag 01JR (lemma-open-fibre-product)"
+   }
+  },
+  {
+   "text": "Properness gives finite type for $f_0$ by [def-weil-proper-morphism]. For $s\\in S_0$, its ordinary fibre has dimension zero by steps 3 and 5 and is of finite type over $\\kappa(s)$, using [lem-pc-proper-base-change] on $f_0$. Apply [lem-sc-dim0-finite] to the whole fibre, a closed subset of itself: it is a finite set of closed points. For each point, the complement of its singleton is a finite union of closed singletons and is closed, so the singleton is open. Every point is therefore isolated in its fibre, and the finite-type, isolated-fibre-point definition [pqf-def-quasifinite] gives that $f_0$ is quasi-finite. If $S_0$ is empty this assertion is vacuous.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-pc-proper-base-change",
+    "lem-sc-dim0-finite",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TD (definition-quasi-finite), 01TH (lemma-quasi-finite-at-point-characterize); Varieties Tag 06LH (lemma-algebraic-scheme-dim-0)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-smooth-relative-dimension-locally-constant",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "def-pc-scheme-fibre",
+  "def-weil-connected-scheme",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "def-sbc-smooth-morphisms",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "def-weil-proper-morphism",
+  "lem-pc-proper-base-change",
+  "def-weil-open-immersion",
+  "def-pc-base-change",
+  "lem-sc-dim0-finite",
   "pqf-def-quasifinite"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Agent consequence of Tags 02G1, 02G2, 02NK, 01W1, 01W4, 01TH, with Varieties Tags 0387 and 06LH."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -92,10 +196,66 @@
    "results": "[loogle] OK 12 hit(s); CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, CompHausLike.LocallyConstant.presheaf_ext, Condensed.locallyConstantPresheaf, LightCondensed.locallyConstantPresheaf, LightCondensed.isColimitLocallyConstantPresheafDiagram, Condensed.isColimitLocallyConstantPresheaf, Condensed.isColimitLocallyConstantPresheafDiagram, LightCondensed.isColimitLocallyConstantPresheaf",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper smooth morphism with nonempty connected geometric fibres clopen loci of fibre dimension",
+   "results": "8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.isOpenMap_of_generalizingMap, AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsProper",
+   "results": "0 hits: ; loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDimension|relative_dimension|IsSmoothOfRelativeDimension|SmoothOfRelativeDimension",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative dimension locally constant descends from source to base along a proper surjective morphism with connected fibers",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_snd_triplet_of_prop, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_fst_triplet_of_prop, AlgebraicGeometry.pointsPi_surjective, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion, AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth proper morphism clopen subsets constant fiber dimension",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper map connected fibers locally constant function descends to locally constant function on target",
+   "results": "8 hits: LocallyConstant.lift, IsLocallyConstant.of_constant_on_connected_components, LocallyConstant.lift_comp_proj, DiscreteQuotient.proj_isLocallyConstant, LocallyConstant.desc, IsCoveringMap.constOn_of_comp, Profinite.NobelingProof.fin_comap_jointlySurjective, IsCoveringMap.const_of_comp; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstant.*[Qq]uotient|[Qq]uotient.*IsLocallyConstant|IsSmoothOfRelativeDimension",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocallyConstant, IsQuotientMap",
+   "results": "0 hits: ; loogle: unknown identifier 'IsQuotientMap'",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
   "by": "worker",
@@ -111,5 +271,49 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proper-smooth-connected-fibre-dimension-loci",
+  "worker": "stage1",
+  "summary": "Reused existing nodes throughout; proved clopen base loci by closed images of complementary saturated rank loci, checked geometric dimension using fixed-relative-dimension base change, and deduced quasi-finiteness from finite closed-point fibres. No mathematical statement correction; added missing notion citations.",
+  "blueprint": "Dimension-zero extension of 0GKW used in the classical constructibility input: partition by smooth fibre dimension before applying 0GKW and 0GK3.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-relative-dimension-locally-constant",
+    "why": "Generic scheme-geometric tool used in the dimension-zero extension of the classical constructibility input; the proper-base-change unit does not state this fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "why": "Generic scheme-geometric tool used in the dimension-zero extension of the classical constructibility input; the proper-base-change unit does not state this fact."
+   },
+   {
+    "node": "lem-weil-geometrically-connected-algebraic-closure",
+    "why": "Generic scheme-geometric tool used in the dimension-zero extension of the classical constructibility input; the proper-base-change unit does not state this fact."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic scheme-geometric tool used in the dimension-zero extension of the classical constructibility input; the proper-base-change unit does not state this fact."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme-geometric tool used in the dimension-zero extension of the classical constructibility input; the proper-base-change unit does not state this fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-relative-dimension-locally-constant",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pc-proper-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-52903b5c8",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-52903b5c8 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, source places, and unit/chapter route. All six steps are valid: connected fibres saturate rank loci, properness gives clopen images, fixed-relative-dimension base change gives geometric purity, and finite closed-point fibres give quasi-finiteness. No new nodes, cycles, duplicates, weakened targets, or coefficient-category identifications. Accepted tool uses and edge-case checks are recorded in review.md; no fixes required."
  }
 }
