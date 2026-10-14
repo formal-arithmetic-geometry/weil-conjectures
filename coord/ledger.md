@@ -14087,3 +14087,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 08:57 L: batch 20261014T004054 dependency take-out
 - 00:57 L: returned deliver/A3/Sheaf.Paper.ModuleCupGodementCoefficientComplexes (reviewer RETURN: (reviewer X-3b433, head 3b4331706) H9: in lean/Sheaf/Paper/ModuleCupGodementCoefficientComplexes.lean, remove the unused)
+- 01:00 L: returned deliver/C3/Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSingleStabilizerComponent (reviewer RETURN: (reviewer X-c85ad, head c85ad868c) D1/D2: AffineTorsorSingleStabilizerComponentExistence.lean duplicates affine_torsor_s)
