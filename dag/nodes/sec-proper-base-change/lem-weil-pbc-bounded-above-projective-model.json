@@ -25,9 +25,87 @@
   "def-weil-abstract-derived-category",
   "def-weil-pbc-projective-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a complex $K^\\bullet$ and an isomorphism $Q(K^\\bullet)\\cong C$: a localization has the same objects as its source up to isomorphism. The cohomology functors factor through $Q$, so $H^i(K)=0$ for $i>b$. We construct directly a quasi-isomorphism $f:L\\to K$; no termwise boundedness of $K$ is assumed.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05T7, lemma-subcategory-left-resolution, downward fibre-product construction; Tags 0645 and 0646"
+   }
+  },
+  {
+   "text": "Set $L^i=0$, $f^i=0$ and $d_L^i=0$ for $i>b$. Descend through $n=b,b-1,\\ldots$ (ordinary recursion on $b-n\\in\\mathbf N$). Given the tail in degrees $>n$, with $d_L^2=0$ and $f$ commuting with differentials there, form the submodule $T^n=\\{(x,y)\\in K^n\\oplus L^{n+1}:d_K^nx=f^{n+1}y,\\ d_L^{n+1}y=0\\}$. These are linear equations, so this is an $A$-module; when $n=b$ it is $\\ker d_K^b\\oplus0$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05T7, lemma-subcategory-left-resolution, downward fibre-product construction; Tags 0645 and 0646"
+   }
+  },
+  {
+   "text": "Let $L^n$ be the module of finitely supported functions $T^n\\to A$, with pointwise operations. For $t\\in T^n$, let $e_t$ have value $1$ at $t$ and $0$ elsewhere; every function $a$ is uniquely $\\sum_t a(t)e_t$, so this is a free module with basis $(e_t)_{t\\in T^n}$ [def-weil-pbc-free-module]. Define the linear map $s^n:L^n\\to T^n$ by $s^n(a)=\\sum_t a(t)t$. It is surjective since $s^n(e_t)=t$. Define $f^n=\\operatorname{pr}_1s^n$ and $d_L^n=\\operatorname{pr}_2s^n$. The defining equations of $T^n$ give $d_K^nf^n=f^{n+1}d_L^n$ and $d_L^{n+1}d_L^n=0$. This extends the tail without changing any earlier choice, so recursion gives a complex and a chain map in all integer degrees.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05T7, lemma-subcategory-left-resolution, downward fibre-product construction; Tags 0645 and 0646"
+   }
+  },
+  {
+   "text": "For $n\\le b$, every cycle $x\\in K^n$ gives a pair $(x,0)\\in T^n$. Choose $u\\in L^n$ with $s^n(u)=(x,0)$. Then $d_L^nu=0$ and $f^nu=x$. Hence $H^n(f)$ is surjective.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05T7, lemma-subcategory-left-resolution, downward fibre-product construction; Tags 0645 and 0646"
+   }
+  },
+  {
+   "text": "For $n\\le b$, suppose $y\\in L^n$ is a cycle and $f^ny=d_K^{n-1}x$ for some $x\\in K^{n-1}$. Then $(x,y)\\in T^{n-1}$. Surjectivity of $s^{n-1}$ gives $v\\in L^{n-1}$ with $d_L^{n-1}v=y$. Thus every class in the kernel of $H^n(f)$ is zero, proving injectivity. For $n>b$ both cohomology modules vanish, by the bound on $K$ and the zero terms of $L$. Therefore $f$ is a quasi-isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05T7, lemma-subcategory-left-resolution, downward fibre-product construction; Tags 0645 and 0646"
+   }
+  },
+  {
+   "text": "Every $L^n$ with $n\\le b$ is free by construction, hence projective by [lem-weil-pbc-free-module-projective]. For $n>b$, the zero module is free on the empty basis, hence also projective. The localization inverts $f$, giving $Q(L)\\xrightarrow{\\sim}Q(K)\\xrightarrow{\\sim}C$. The terms above $b$ were set to zero, which proves the exact bound required.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-free-module-projective",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05T7, lemma-subcategory-left-resolution, downward fibre-product construction; Tags 0645 and 0646"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-free-module-projective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Explicit module version of the fibre-product induction in Tag 05T7, lemma-subcategory-left-resolution; direct cohomology-bounded variant of Tags 0645 and 0646 (no termwise epimorphism asserted)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -84,15 +162,65 @@
    "results": "{\"t\": \"2026-10-14T02:40:59Z\", \"tool\": \"leanfinder\", \"query\": \"Any bounded above object of the derived category of modules admits a bounded above complex of projective modules with the same upper bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKProjective_of_projective\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CochainComplex.IsKProjective\", \"CategoryTheory.HasProjectiveDimensionLT.mk'\", \"CategoryTheory.hasExt_of_enoughProjectives\", \"CategoryTheory.HasProjectiveDimensionLT.mk\", \"CategoryTheory.HasProjectiveDimensionLT\", \"CategoryTheory.HasProjectiveDimensionLE\"], \"digest\": \"d541853c78902cc2\"}",
    "date": "2026-10-14",
    "verdict": "no match: inspected hits give one-ring projectivity, existing-complex K-projectivity, or truncation criteria, not this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every bounded above derived module object admits a projective complex model vanishing above the same bound",
+   "results": "{\"t\": \"2026-10-14T02:54:06Z\", \"tool\": \"leanfinder\", \"query\": \"Every bounded above derived module object admits a projective complex model vanishing above the same bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKProjective_of_projective\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CochainComplex.IsKProjective\", \"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\", \"CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex\", \"CategoryTheory.ProjectiveResolution.ofComplex\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\"], \"digest\": \"8484100349f7617e\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: hits give existing-complex K-projectivity, resolutions of single modules, truncation criteria, or the injective dual; none states this module projective-model construction"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(quasiIso|projective)|projective.*(resolution|quasiIso)|EnoughProjectives",
+   "results": "{\"t\": \"2026-10-14T02:54:21Z\", \"tool\": \"grep\", \"query\": \"exists.*(quasiIso|projective)|projective.*(resolution|quasiIso)|EnoughProjectives\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"Mathlib/Algebra/Homology/Single.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean\"], \"digest\": \"f42897eb10c3a41e\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: hits give existing-complex K-projectivity, resolutions of single modules, truncation criteria, or the injective dual; none states this module projective-model construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded above cohomology admits a projective cochain complex representative",
+   "results": "{\"t\": \"2026-10-14T02:54:22Z\", \"tool\": \"leansearch\", \"query\": \"Bounded above cohomology admits a projective cochain complex representative\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, ProjectiveResolution",
+   "results": "{\"t\": \"2026-10-14T02:54:22Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex, ProjectiveResolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'ProjectiveResolution'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: Loogle reports an unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex with vanishing cohomology above b has a quasi-isomorphism from a free module complex zero in degrees greater than b",
+   "results": "{\"t\": \"2026-10-14T02:54:47Z\", \"tool\": \"leanfinder\", \"query\": \"A complex with vanishing cohomology above b has a quasi-isomorphism from a free module complex zero in degrees greater than b\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instQuasiIsoIntP\", \"CochainComplex.quasiIso_πTruncGE_iff\", \"CochainComplex.quasiIso_ιTruncLE_iff\", \"CochainComplex.instQuasiIsoIntπTruncGEOfIsGE\", \"CochainComplex.quasiIsoAt₀_iff\", \"CochainComplex.instQuasiIsoIntιTruncLEOfIsLE\", \"HomologicalComplex.isSupported_iff_of_quasiIso\", \"DerivedCategory.isZero_of_isLE\"], \"digest\": \"742fdd4962f7653a\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: hits give existing-complex K-projectivity, resolutions of single modules, truncation criteria, or the injective dual; none states this module projective-model construction"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-nilpotent-projective-complex-lift",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-bounded-above-projective-model",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Expanded the downward free-on-compatible-pairs construction, including base case, recursion, square-zero and chain-map equations, cycle lifting and boundary lifting. Reused free-module projectivity and the derived-category localization definition; no new nodes. No finished project declaration states the item exactly.",
+  "blueprint": "Realizes amplification proof (c), TOW local-model input, via the existing nilpotent-projective-complex-lift chain: the 09AR hypothesis (5) upper-bounded projective representative. Whole-blueprint searches for bounded above projective model and projective resolution found no duplicate."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-998e6e1d1",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-998e6e1d1 (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full; no new nodes. Verified Stacks 05T7, 0645, 0646, cited statements, recursion, exact bound, edge cases, dependencies and duplicate candidates. No mathematical gaps or repairs required. Checked the archived proper-target morphisms and condensed coefficients without treating this ordinary-module lemma as a comparison theorem. Concrete checks recorded in review.md."
+ }
 }
