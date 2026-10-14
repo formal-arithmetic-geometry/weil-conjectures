@@ -145,7 +145,7 @@ theorem exists_hasDirectImageBaseChangeOnPlus_of_coordinates {n : ℕ}
       Set.range (j ⁻¹ᵁ G).ι := by
     rintro _ ⟨x, rfl⟩
     rw [Opens.range_ι]
-    show j _ ∈ G
+    change j _ ∈ G
     rw [← Scheme.Hom.comp_apply, heq, Scheme.Hom.comp_apply]
     have := hle p ⟨((j ∣_ Uα p.1) ∣_ (t p.1 p.2 ⁻¹ᵁ V p.1 p.2)) x, rfl⟩
     rwa [Opens.range_ι] at this

@@ -68,7 +68,8 @@ lemma exists_topologicalKrullDim_le_of_isPullback_of_isAffine_of_isAffine {U V :
 
 /-- If `g ≫ m` and `s ≫ m` have pullback `P` with `m` a monomorphism, then `P` is also a
 pullback of `g` and `s`. -/
-lemma _root_.CategoryTheory.IsPullback.of_comp_mono {C : Type*} [Category* C] {P U V Y L : C} {p₁ : P ⟶ U}
+lemma _root_.CategoryTheory.IsPullback.of_comp_mono {C : Type*} [Category* C]
+    {P U V Y L : C} {p₁ : P ⟶ U}
     {p₂ : P ⟶ L} {g : U ⟶ V} {s : L ⟶ V} {m : V ⟶ Y} [Mono m]
     (h : IsPullback p₁ p₂ (g ≫ m) (s ≫ m)) : IsPullback p₁ p₂ g s := by
   have hb : IsPullback s (𝟙 L) m (s ≫ m) := by
