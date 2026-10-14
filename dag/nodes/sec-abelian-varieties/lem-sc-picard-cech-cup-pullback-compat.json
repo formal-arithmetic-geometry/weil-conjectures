@@ -69,9 +69,8 @@
    }
   },
   {
-   "text": "The refinement map in Step 1 carries a cup cochain to the cup cochain of the pulled-back factors: on each intersection this is f^*(s tensor t)=f^*s tensor f^*t, and the total-complex sign depends only on the degrees. Thus the refinement square commutes with the cup map. Combining this identity with Step 3 proves compatibility of cup products with pullback. The same restriction and tensor identities commute with morphisms of F and G, and refinement functions compose, proving naturality. The Lean delivery V3 proves three naturality declarations directly: cech_coefficient_apply transports a coefficient morphism through the Cech product projections and the intersection equivalence. Unit naturality and Hom.app_presheaf_map then prove cechRefinement_coefficient_naturality. For cechCup_coefficient_naturality, first prove the cochain coefficient identity by tensorHom_app_tmulSection and restriction naturality. Represent both homology classes by concrete kernel cycles (the cycle-class map is an epimorphism). Leibniz gives their cup cycle. Transport cycles and cycle classes along the cochain coefficient maps using Mathlib cyclesMap_i and homologypi_naturality, and apply the IsCechCupProduct characterization to the source and target cycles. Finally, cechCup_refinement_naturality follows tuplewise from the section formula of lem-weil-pbc-module-pullback-tensor, tensor-section restriction, and the unit restriction square on each front/back face. The resolution comparisons are reduced to the two D4 intermediate statements. Q4 proves the sheaf-cup naturalities in the additional steps below using existing compatible computing resolutions. The successive-refinement composition is formalized in the next step.",
+   "text": "The refinement map in Step 1 carries a cup cochain to the cup cochain of the pulled-back factors: on each intersection this is f^*(s tensor t)=f^*s tensor f^*t, and the total-complex sign depends only on the degrees. Thus the refinement square commutes with the cup map. Combining this identity with Step 3 proves compatibility of cup products with pullback. The same restriction and tensor identities commute with morphisms of F and G, and refinement functions compose, proving naturality. The Lean delivery V3 proves three naturality declarations directly: cech_coefficient_apply transports a coefficient morphism through the Cech product projections and the intersection equivalence. Unit naturality and Hom.app_presheaf_map then prove cechRefinement_coefficient_naturality. For cechCup_coefficient_naturality, first prove the cochain coefficient identity by tensorHom_app_tmulSection and restriction naturality. Represent both homology classes by concrete kernel cycles (the cycle-class map is an epimorphism). Leibniz gives their cup cycle. Transport cycles and cycle classes along the cochain coefficient maps using Mathlib cyclesMap_i and homologypi_naturality, and apply the IsCechCupProduct characterization to the source and target cycles. Finally, cechCup_refinement_naturality follows tuplewise from the section formula of lem-weil-pbc-module-pullback-tensor, tensor-section restriction, and the unit restriction square on each front/back face. The resolution comparisons are reduced to the two D4 intermediate statements. Q4 proves the sheaf-cup naturalities in the additional steps below using existing compatible computing resolutions. The successive-refinement composition is formalized in the next step. B2 uses the specified canonical comparisons directly; their separate existence theorem is not needed in this module.",
    "uses": [
-    "lem-sc-cech-comparison-map-naturality",
     "def-sc-cech-refinement-cochain-map",
     "def-sc-cech-cup-product",
     "lem-weil-pbc-module-pullback-tensor"
@@ -83,14 +82,12 @@
    }
   },
   {
-   "text": "R3 proves cechRefinement_composition_naturality without new intermediate holes. The definition tensorSectionsComp in [lem-sc-etale-qcoherent-presheaf-functorial] is the conjugate of pushforwardComp; Mathlib unit_conjugateEquiv_symm gives its adjunction-unit equation. On each tuple of refined indices expand the two IsCechRefinementMap formulas [def-sc-cech-refinement-cochain-map]. Naturality of the second adjunction unit moves the first restriction through it. Compose the resulting restrictions in the presheaf, move the coefficient comparison through the last restriction, and evaluate the conjugate-unit equation on the original intersection section. Injectivity of the tuple equivalence proves the cochain-composition equality. For the composite comparison square, use the first clause of cechCupPullbackCompat already stated in this module, specialized to G=F and q=0. The extra canonical comparisons exist by [lem-sc-cech-comparison-map-naturality] and the auxiliary products exist by [def-sc-cech-cup-product] and [def-sc-module-cohomology-cup-product]; their values are not used. Apply Mathlib homologyMap_comp to the cochain equality and mapHomologyIso_hom_naturality to its final coefficient map. Cancel the intermediate forgetting-scalars homology isomorphisms to identify the threefold homology composite with the composite refinement homology map. The existing composite refinement comparison gives the second conjunct. Finally the adjunction-unit equation is exactly the hypothesis of moduleCohomologyPullback_comp in [lem-weil-pbc-module-cohomology-fmap-functorial], which gives the third conjunct. This leaves the first clause of cechCupPullbackCompat as an existing dependency; it does not claim to prove it or introduce a circular proof.",
+   "text": "R3 proves cechRefinement_composition_naturality without new intermediate holes. The definition tensorSectionsComp in [lem-sc-etale-qcoherent-presheaf-functorial] is the conjugate of pushforwardComp; Mathlib unit_conjugateEquiv_symm gives its adjunction-unit equation. On each tuple of refined indices expand the two IsCechRefinementMap formulas [def-sc-cech-refinement-cochain-map]. Naturality of the second adjunction unit moves the first restriction through it. Compose the resulting restrictions in the presheaf, move the coefficient comparison through the last restriction, and evaluate the conjugate-unit equation on the original intersection section. Injectivity of the tuple equivalence proves the cochain-composition equality. For the composite comparison square, B2 applies cechRefinement_comparison_square [lem-sc-cech-refinement-comparison-square] directly to the given comparisons and composite refinement. No auxiliary canonical comparisons or cup products are chosen. Apply Mathlib homologyMap_comp to the cochain equality and mapHomologyIso_hom_naturality to its final coefficient map. Cancel the intermediate forgetting-scalars homology isomorphisms to identify the threefold homology composite with the composite refinement homology map. The existing composite refinement comparison gives the second conjunct. Finally the adjunction-unit equation is exactly the hypothesis of moduleCohomologyPullback_comp in [lem-weil-pbc-module-cohomology-fmap-functorial], which gives the third conjunct. This uses the existing refinement comparison square as a tool and introduces no circular dependency.",
    "uses": [
     "lem-sc-etale-qcoherent-presheaf-functorial",
     "def-sc-cech-refinement-cochain-map",
-    "lem-sc-cech-comparison-map-naturality",
-    "def-sc-cech-cup-product",
-    "def-sc-module-cohomology-cup-product",
-    "lem-weil-pbc-module-cohomology-fmap-functorial"
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "lem-sc-cech-refinement-comparison-square"
    ],
    "elementary": false,
    "source": {
@@ -130,7 +127,6 @@
   "def-sc-cech-cup-product",
   "lem-sc-cech-cup-resolution-representatives",
   "def-sc-module-cohomology-cup-product",
-  "lem-sc-cech-comparison-map-naturality",
   "def-sc-cech-refinement-cochain-map",
   "lem-weil-pbc-module-pullback-tensor",
   "lem-sc-etale-qcoherent-presheaf-functorial",
@@ -142,7 +138,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 01FD, 07MB and 0FKV; V3 formalizes the coefficient and refinement naturalities of Step 4 using the existing section-normalized tensor-pullback theorem and the Cech Leibniz theorem, with explicit kernel-to-homology transports; R3 formalizes successive-refinement composition by the conjugate-unit equation, tuplewise restriction naturality, homology functoriality, and the existing cohomology-pullback composition theorem; its comparison-square conjunct uses the existing first clause of cechCupPullbackCompat; D4 reduces the comparison and cup conjuncts to a refinement comparison square and compatible resolution representatives, and proves the inverse clause by injectivity.; Q4 proves the two remaining sheaf-cup naturality declarations from existing coefficient and pullback resolution maps, with explicit kernel-cycle transport, surjectivity of computing class maps, and the two cup-product characterizations; no new theorem holes."
+  "place": "Tags 01FD, 07MB and 0FKV; V3 formalizes the coefficient and refinement naturalities of Step 4 using the existing section-normalized tensor-pullback theorem and the Cech Leibniz theorem, with explicit kernel-to-homology transports; R3 formalizes successive-refinement composition by the conjugate-unit equation, tuplewise restriction naturality, homology functoriality, and the existing cohomology-pullback composition theorem; B2 simplifies its comparison-square conjunct to a direct application of cechRefinement_comparison_square and removes the unused canonical-comparison existence dependency; D4 reduces the comparison and cup conjuncts to a refinement comparison square and compatible resolution representatives, and proves the inverse clause by injectivity.; Q4 proves the two remaining sheaf-cup naturality declarations from existing coefficient and pullback resolution maps, with explicit kernel-cycle transport, surjectivity of computing class maps, and the two cup-product characterizations; no new theorem holes."
  },
  "mathlib_searches": [
   {
@@ -259,11 +255,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-a1f0b",
-  "group": "Q4",
+  "reviewer": "COMPILER",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261014T115943-L-2408458",
-  "kind": "interface",
-  "note": "independent Codex review: Matched the two naturality proofs to the unchanged signatures, resolution-map dependencies, and DAG; delivered modules and all four direct importers compile cleanly, permitted-axiom checks pass, and the documented instance-name repair resolves the reproduced import collision."
+  "landing": "20261014T123659-L-2885328",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

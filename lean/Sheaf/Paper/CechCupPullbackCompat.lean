@@ -5,7 +5,6 @@ Authors: SHEAF group T1
 -/
 module
 
-import Sheaf.Paper.CechComparisonMapNaturality
 public import Sheaf.Paper.CechRefinementCochainMap
 public import Sheaf.Paper.CechCupProduct
 public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
@@ -15,7 +14,6 @@ import Sheaf.Paper.CechRefinementComparisonSquare
 import Sheaf.Paper.CechCupResolutionRepresentatives
 import Sheaf.Paper.ModuleCupCoefficientResolutionMaps
 import Sheaf.Paper.ModuleCupPullbackResolutionMaps
-import Sheaf.Paper.ModuleCohomologyCupProduct
 
 /-! # Cech cup products and pullback
 
@@ -731,13 +729,8 @@ theorem cechRefinement_composition_naturality
     exact congrArg (C.presheaf.map k.op) hs.symm
   refine ⟨hcochain, ?_, (moduleCohomologyPullback_comp f₁ f F
     ((tensorSectionsComp f₁ f).hom.app F) hunit p).symm⟩
-  obtain ⟨c₀, hc₀⟩ := ((cechComparisonMapNaturality X U hU).2 0).1 F
-  obtain ⟨c₂, hc₂⟩ := ((cechComparisonMapNaturality X U hU).2 (p + 0)).1 (F ⊗ F)
-  obtain ⟨cup, hcup, _⟩ := exists_unique_cechCupProduct U F F p 0
-  obtain ⟨sheafCup, hsheafCup, _⟩ := exists_unique_moduleCupProduct F F p 0
-  have hcomparison := (cechCupPullbackCompat X X'' (f₁ ≫ f) U hU U'' hU''
-    (refine ∘ refine₁) hrefineComp F F p 0 c hc cComp hcComp gammaComp hgammaComp
-    c₀ hc₀ c₂ hc₂ cup hcup sheafCup hsheafCup).1
+  have hcomparison := cechRefinement_comparison_square X X'' (f₁ ≫ f) U hU U'' hU''
+    (refine ∘ refine₁) hrefineComp F p c hc cComp hcComp gammaComp hgammaComp
   set_option backward.isDefEq.respectTransparency false in
     let τ := (cechComplexFunctor U'').map
       ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
