@@ -4,20 +4,24 @@
   "is": null,
   "from": {
    "node": "def-weil-scheme-morphism-properties",
-   "place": "unspecified",
+   "place": "Last sentence of def-weil-scheme-morphism-properties: a sheaf on a locally closed subscheme is locally constant if it becomes a constant sheaf after pulling back along a covering family in its pro-etale site.",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Locally constant sheaf on the pro-etale site",
- "statement": "Let $Y$ be a scheme, $A$ a commutative ring, and $Y_{\\mathrm{proet}}$ the small pro-étale site of $Y$ with its constant sheaf of rings $A_Y$ [def-weil-pbc-proetale-site]. For a $A$-module $M$, the *constant sheaf* $\\underline M_Y$ is the sheafification of the constant presheaf $U\\mapsto M$ on $Y_{\\mathrm{proet}}$, a sheaf of $A_Y$-modules. A sheaf $\\mathcal F$ of $A_Y$-modules on $Y_{\\mathrm{proet}}$ is *constant* if it is isomorphic to $\\underline M_Y$ for some $A$-module $M$, and *locally constant* if there is a covering $\\{U_j\\to Y\\}_j$ in $Y_{\\mathrm{proet}}$ such that, for every $j$, the restriction $\\mathcal F|_{U_j}$ to the localized site $Y_{\\mathrm{proet}}/U_j\\simeq(U_j)_{\\mathrm{proet}}$ is constant.",
+ "statement": "Let $Y$ be a scheme and $A$ a commutative ring. Work on the small pro-étale site $Y_{\\mathrm{proet}}$ with the universe and size conventions of [def-weil-pbc-proetale-site]. Let $A_Y$ be the constant sheaf of rings [def-weil-pbc-constant-sheaf]. Sheaves of $A_Y$-modules and their isomorphisms mean those of [def-weil-sheaf-of-modules-category].\n\nFor an $A$-module $M$, the *constant module sheaf* $\\underline M_Y$ is the constant sheaf [def-weil-pbc-constant-sheaf], with values in $A$-modules, namely the sheafification [def-weil-pbc-sheafification] of the presheaf $U\\mapsto M$ whose restriction maps are identities. Its $A_Y$-action is induced by the scalar multiplication $A\\times M\\to M$: locally represented constant sections $a,m$ have product represented by $am$.\n\nA sheaf $\\mathcal F$ of $A_Y$-modules is *constant* if there exist an $A$-module $M$ and an isomorphism of $A_Y$-module sheaves $\\mathcal F\\simeq\\underline M_Y$. It is *locally constant* if there is a covering family $\\{U_j\\to Y\\}_{j\\in J}$ in $Y_{\\mathrm{proet}}$ and, for each $j$, an $A$-module $M_j$ and an isomorphism of module sheaves\n$$\n \\mathcal F|_{U_j}\\simeq\\underline{M_j}_{U_j}.\n$$\nHere restriction is the restriction to the localized ringed site of [def-pur-localized-ringed-site]: $(\\mathcal F|_{U_j})(V\\to U_j)=\\mathcal F(V\\to Y)$, with coefficient ring $A_Y|_{U_j}$. The constant module sheaf $\\underline{M_j}_{U_j}$ is formed on this localized ringed site by the same sheafification construction, using the restricted constant ring sheaf $A_Y|_{U_j}$ and the $A$-module $M_j$. The modules $M_j$ may vary with $j$; no finiteness condition on $A$ or on any $M_j$ is imposed.",
  "source": {
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Bhatt-Scholze, The pro-étale topology for schemes, Definition 7.3.1(1) (stated there for sheaves of sets on X_proét, X locally topologically noetherian); the module version is the blueprint's (node def-weil-scheme-morphism-properties)"
  },
  "stmt_deps": [
-  "def-weil-pbc-proetale-site"
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site"
  ],
  "proof": [],
  "proof_deps": [],
@@ -29,10 +33,80 @@
    "results": "only AlgebraicGeometry/Morphisms/FlatRank.lean (locally constant rank function, unrelated); CategoryTheory/Sites/ConstantSheaf.lean:66 constantSheaf J D; AlgebraicGeometry/Sites/Proetale.lean: Scheme.ProEt S (line 100) and its topology (line 156)",
    "date": "2026-10-09",
    "verdict": "no match: Mathlib has the pro-étale site and constant sheaves but no locally constant sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstantSheaf|LocallyConstantSheaf|IsConstant|def constantSheaf",
+   "results": "6 hits: Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; source inspected: constantSheaf at ConstantSheaf.lean:66 and Sheaf.IsConstant at :81 cover constant sheaves, not cover-local triviality. Condensed locally constant functors concern a different site; topological IsLocallyConstant concerns functions.",
+   "date": "2026-10-14",
+   "verdict": "no match for the full item; constant-sheaf clauses are covered by the existing Mathlib leaf def-weil-pbc-constant-sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules on the small pro etale site is locally constant if a covering family makes it isomorphic to constant module sheaves",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_iff_forget, CategoryTheory.Sheaf.isConstant_of_forget, CompHausLike.LocallyConstantModule.functor, CategoryTheory.Sheaf.mem_essImage_of_isConstant, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.isConstant_iff_of_equivalence, CategoryTheory.Sheaf.IsConstant, CategoryTheory.Sheaf.IsConstant.mem_essImage; source inspected: constantSheaf at ConstantSheaf.lean:66 and Sheaf.IsConstant at :81 cover constant sheaves, not cover-local triviality. Condensed locally constant functors concern a different site; topological IsLocallyConstant concerns functions.",
+   "date": "2026-10-14",
+   "verdict": "no match for the full item; constant-sheaf clauses are covered by the existing Mathlib leaf def-weil-pbc-constant-sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "locally constant sheaf of modules on a Grothendieck site",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.IsConstant",
+   "results": "12 hits: CategoryTheory.Sheaf.IsConstant, CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Sheaf.IsConstant.mk, CategoryTheory.Sheaf.isConstant_congr, CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.instIsConstantObjSheafSheafCompose, CategoryTheory.Sheaf.isConstant_iff_mem_essImage; source inspected: constantSheaf at ConstantSheaf.lean:66 and Sheaf.IsConstant at :81 cover constant sheaves, not cover-local triviality. Condensed locally constant functors concern a different site; topological IsLocallyConstant concerns functions.",
+   "date": "2026-10-14",
+   "verdict": "no match for the full item; constant-sheaf clauses are covered by the existing Mathlib leaf def-weil-pbc-constant-sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "locally.constant.sheaf|IsLocallyConstant|LocallyConstantSheaf",
+   "results": "25 hits: Mathlib/Probability/Distributions/Gaussian/CharFun.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean; source inspected: constantSheaf at ConstantSheaf.lean:66 and Sheaf.IsConstant at :81 cover constant sheaves, not cover-local triviality. Condensed locally constant functors concern a different site; topological IsLocallyConstant concerns functions.",
+   "date": "2026-10-14",
+   "verdict": "no match for the full item; constant-sheaf clauses are covered by the existing Mathlib leaf def-weil-pbc-constant-sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant object of a sheaf category is trivialized over a covering sieve by sheafifications of constant presheaves",
+   "results": "8 hits: CategoryTheory.Sheaf.IsConstant, CategoryTheory.Sheaf.isConstant_iff_forget, CategoryTheory.Sheaf.isConstant_of_forget, CompHausLike.LocallyConstant.functor, CompHausLike.LocallyConstant.functorToPresheavesIso, TopCat.Presheaf.toType_isSheaf, CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.Sheaf.IsConstant.mem_essImage; source inspected: constantSheaf at ConstantSheaf.lean:66 and Sheaf.IsConstant at :81 cover constant sheaves, not cover-local triviality. Condensed locally constant functors concern a different site; topological IsLocallyConstant concerns functions.",
+   "date": "2026-10-14",
+   "verdict": "no match for the full item; constant-sheaf clauses are covered by the existing Mathlib leaf def-weil-pbc-constant-sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf is locally trivial with discrete module fiber after restriction to members of a covering family",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData.I, SheafOfModules.LocalGeneratorsData, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.free, SheafOfModules.LocalGeneratorsData.coversTop, SheafOfModules.GeneratingSections, SheafOfModules.LocalGeneratorsData.generators, SheafOfModules.QuasicoherentData.localGeneratorsData",
+   "date": "2026-10-14",
+   "verdict": "no match: local generators give epimorphisms, not constant-sheaf trivializations; condensed locally constant presheaves use a different site"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyConstant.*Sheaf|Sheaf.*LocallyConstant|IsLocallyTrivial",
+   "results": "11 hits: Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/Module.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: local generators give epimorphisms, not constant-sheaf trivializations; condensed locally constant presheaves use a different site"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstant|LocallyConstant",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: global constancy, local morphism properties and topological open-cover equivalences do not define this coverwise module predicate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object in a sheaf category is locally isomorphic to a constant sheaf on slices over a covering family",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.W_eq_isLocal_range_sheafToPresheaf_obj, CategoryTheory.GrothendieckTopology.W_eq_W_range_sheafToPresheaf_obj, CategoryTheory.Sheaf.IsConstant, TopCat.Presheaf.generateEquivalenceOpensLe, TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_right_as, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.mk', CategoryTheory.Sheaf.isConstant_of_iso, TopCat.Presheaf.generateEquivalenceOpensLe_inverse'",
+   "date": "2026-10-14",
+   "verdict": "no match: global constancy, local morphism properties and topological open-cover equivalences do not define this coverwise module predicate"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -53,5 +127,20 @@
  },
  "import_flags": [],
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-comp-category"
+ "unit": "sk-prop-nagata-sketch-comp-category",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-proetale-locally-constant-sheaf",
+  "worker": "stage1",
+  "summary": "Defines local constancy directly on each localized ringed site Y_proet/U_j, with its restricted constant ring and the same sheafification construction. No geometric site identification, proof steps or new nodes are needed. Second reading corrects the earlier report: its proposed counterexample to weakly-etale localization failed the weakly-etale hypothesis.",
+  "blueprint": "Realizes the locally constant sheaf clause in the last sentence of def-weil-scheme-morphism-properties; the item is not the compactification unit key statement."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-d1e79aa3b",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-d1e79aa3b (reviewer sub-agent of L); spot-checked: Read the complete definition, cited statements, report, and unit/chapter route. Bhatt–Scholze 7.3.1(1), Stacks 0H7J, 00Y0 and 04IX support coverwise constancy, constant modules and slice restriction. Arbitrary module coefficients and edge cases are preserved. No new nodes, duplicates, missing dependencies or cycles; no repairs or tool_uses needed. Review written to review.md."
+ }
 }
