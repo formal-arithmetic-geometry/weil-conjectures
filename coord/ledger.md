@@ -14101,3 +14101,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:08 L: merged deliver/C3/Sheaf.AlgebraicGeometry.PerfectDescendMorphisms (stage 3; reviewer PASS; first push; landing 20261014T010836-L-3161255 (proof); batch 20261014T010832; modules 1; new nodes 0)
 - 01:08 L: merged deliver/C4/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (stage 3; reviewer PASS; first push; landing 20261014T010837-L-3161472 (proof); batch 20261014T010832; modules 1; new nodes 0)
 - 01:08 L: merged deliver/D2/Sheaf.CategoryTheory.MapExtendHomology (stage 3; reviewer PASS; first push; landing 20261014T010837-L-3161603 (proof); batch 20261014T010832; modules 1; new nodes 0)
+- 01:08 L: merged deliver/D2/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone (stage 3; reviewer PASS; first push; landing 20261014T010838-L-3161799 (proof); batch 20261014T010832; modules 1; new nodes 0)
