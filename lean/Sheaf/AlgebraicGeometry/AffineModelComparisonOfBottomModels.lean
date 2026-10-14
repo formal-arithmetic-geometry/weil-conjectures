@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.AffineModelComparisonData
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import Mathlib.Algebra.Homology.BifunctorShift
+import Sheaf.AlgebraicGeometry.AffineModelStageHomEquationOfCoherentObjects
+import Sheaf.AlgebraicGeometry.AffineModelLimitHomEquationOfCoherentObjects
 
 /-! # Propagation of bottom-stage affine models
 Source: Stacks Project, Tags 09RE and 0D5S.
@@ -117,6 +119,15 @@ theorem affineModelComparisonData_of_bottom_models
           (tilde.functor (F.obj ⟨i, le_rfl⟩)))
         ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj K)) ≅
       (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE (le_refl i)))))).obj Q) :
-    affineModelComparisonData R c i Y s P Q F C E K := by sorry
+    affineModelComparisonData R c i Y s P Q F C E K := by
+  rename_i hD
+  obtain ⟨m⟩ := @exists_affineModelCoherentObjectComparisons
+    I _ R c i Y _ s hD P Q F C E K hE hK σ τ htrans d dlim hd hdlim aE aK
+  apply affineModelComparisonData_of_hom_equations R c i Y s P Q F C E K d dlim
+    m.αE m.αK m.βE m.βK
+  · exact affineModelStageHomEquation_of_coherent_objects
+      R c i Y s P Q F C E K d dlim m
+  · exact affineModelLimitHomEquation_of_coherent_objects
+      R c i Y s P Q F C E K d dlim m
 
 end AlgebraicGeometry

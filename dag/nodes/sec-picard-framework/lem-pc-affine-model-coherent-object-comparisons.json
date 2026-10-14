@@ -1,0 +1,154 @@
+{
+ "id": "lem-pc-affine-model-coherent-object-comparisons",
+ "kind": "statement",
+ "title": "Coherent affine object comparisons and one-arrow natural isomorphisms",
+ "statement": "Under exactly the preorder diagram, cocone, affine scheme, acyclic-tensor K-flat model, coordinate transition, derived equivalence and localization hypotheses of lem-pc-affine-model-comparison-of-bottom-models [def-pc-scheme, def-pc-derived-category, def-pc-derived-pullback, def-pc-module-kflat-complex], there is a nonempty AffineModelCoherentObjects structure. Its fields are object isomorphisms αE(j),αK(j),βE,βK from the localized tilde of the bottom models extended to each stage and the cocone ring, to derived pullbacks of P,Q; natural comparisons θ(j,k),θlim(j) between scalar extension followed by localized tilde and localized tilde followed by geometric derived pullback; and iso-level triangles. Each natural comparison is on the full induced category on the two labelled extended models, retaining all morphisms even for coincident objects. The triangle says localized scalar reassociation [def-pc-complex-scalar-extension-hom], θ, pullback of α, and inverse perfectHomComparison [lem-pc-perfect-hom-transport] compose to the target object isomorphism, for both E and K and for finite and cocone arrows. No equation on conjugated arbitrary chain maps is asserted. The structure and its field types are explicit definitions, not chosen data. No directedness, colimit, boundedness or flatness of ring maps is assumed. Identity arrows, zero complexes, coincident models, zero rings and empty spectra are included.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Tag 09RE affine calculation, Tag 08DW(2), Tags 06Y1 and 0D5S; core proof steps 2–3 after bottom-model identification"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-module-kflat-complex",
+  "def-pc-complex-scalar-extension-hom",
+  "lem-pc-perfect-hom-transport"
+ ],
+ "proof": [
+  {
+   "text": "Use natural affine derived pullback on the two K-flat extended models. Identify the scalar-extended tilde functor with pullback of the localized tilde functor, transport through hd at source and target, and use the coordinate transition equation. This defines each natural θ on the full two-label induced category.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-kflat-extension-of-scalars",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At the bottom-to-stage and bottom-to-limit arrows, evaluate the affine comparison at E,K, pull back aE,aK and compose with inverse perfectHomComparison to construct αE(j),αK(j),βE,βK. Identity scalar extension uses F.map_id. For bottom→j→k and bottom→j→limit, use F.map_comp or C.w and the counit characterization and associativity of derived composition. On K-flat representatives the reassociation is the explicit affineModelScalarAssocIso. Transport through hd,hdlim and aE,aK to obtain the four iso-level triangles, and package the constructed fields into AffineModelCoherentObjects.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-perfect-hom-transport",
+    "def-pc-complex-scalar-extension-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Tag 09RE affine model calculation, Tag 06Y1 scalar-extension preservation, and the counit-pinned composition comparisons of Tag 0D5S. The data types and coherence predicate are named explicit definitions to avoid duplicating anonymous dependent functors."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural affine derived pullback comparison compatible with composition on K-flat complexes",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural derived pullback comparison for K-flat module complexes along compatible affine scheme isomorphisms",
+   "results": "Scheme.Modules.pullbackComp, pullbackSpecIso_hom_base and generic sheaf pullback results.",
+   "date": "2026-10-14",
+   "verdict": "No localized-coordinate model comparison or diagram propagation theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsComp",
+   "results": "extendScalarsComp and extendScalars_assoc provide associativity; no geometric model transport theorem.",
+   "date": "2026-10-14",
+   "verdict": "Use for the remaining coherence calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "affineModelComparisonData|derivedPullback_tilde_kFlat_natIso|kFlat.*extendScalars|extendScalars.*kFlat",
+   "results": "AffineDerivedPullbackTensorTilde has natural affine formulas; KFlatModuleBaseChange has the acyclic-tensor preservation criterion; no single-square comparison or propagation from bottom models.",
+   "date": "2026-10-14",
+   "verdict": "Use the existing affine and K-flat APIs and isolate only propagation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineModelComparisonOfBottomModels",
+  "date": "2026-10-14",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Object and natural-comparison part of bottom-stage affine-model propagation; finite and cocone arrows are stated directly.",
+   "via": [
+    "lem-pc-affine-model-comparison-of-bottom-models",
+    "lem-pc-affine-base-change-model-isos-core",
+    "lem-pc-affine-base-change-model-isos-of-scheme-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineModelCoherentObjectComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineModelCoherentObjectComparisons.lean",
+  "declaration": "AlgebraicGeometry.exists_affineModelCoherentObjectComparisons",
+  "declarations": [
+   "AlgebraicGeometry.affineModelTildeComplex",
+   "AlgebraicGeometry.affineModelLocalizedTilde",
+   "AlgebraicGeometry.affineModelLocalizedTilde_map",
+   "AlgebraicGeometry.affineModelScalarPair",
+   "AlgebraicGeometry.affineModelScalarAssocIso",
+   "AlgebraicGeometry.affineModelScalarAssocIso_hom",
+   "AlgebraicGeometry.affineModelScalarAssocIso_inv",
+   "AlgebraicGeometry.affineModelStageArrow",
+   "AlgebraicGeometry.affineModelLimitArrow",
+   "AlgebraicGeometry.affineModel_scalarConjugation_nat",
+   "AlgebraicGeometry.AffineModelStageObjects",
+   "AlgebraicGeometry.AffineModelLimitObject",
+   "AlgebraicGeometry.AffineModelStageArrowComparisons",
+   "AlgebraicGeometry.AffineModelLimitArrowComparisons",
+   "AlgebraicGeometry.affineModelStageObjectCoherence",
+   "AlgebraicGeometry.affineModelLimitObjectCoherence",
+   "AlgebraicGeometry.AffineModelCoherentObjects",
+   "AlgebraicGeometry.exists_affineModelCoherentObjectComparisons"
+  ],
+  "statement": "theorem exists_affineModelCoherentObjectComparisons {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (i : I) (Y : Scheme.{u}) [IsAffine Y] (s : Y ⟶ Spec (R.obj i)) [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (P Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ CommRingCat.{u}) (C : Cocone F) (E K : CochainComplex (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)) ℤ) (hE : ∀ L : CochainComplex (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)) ℤ, L.Acyclic → (CochainComplex.mapBifunctor L E (MonoidalCategory.curriedTensor (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)))).Acyclic) (hK : ∀ L : CochainComplex (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)) ℤ, L.Acyclic → (CochainComplex.mapBifunctor L K (MonoidalCategory.curriedTensor (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)))).Acyclic) (σ : ∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i), Spec (F.obj j.val) ≅ pullback s (Spec.map (R.map (homOfLE j.val.property)))) (τ : Spec C.pt ≅ pullback s (Spec.map (c.ι.app i))) (htrans : (∀ (j k : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) (hjk : j ≤ k), (σ k).hom ≫ baseChangeMap s (T := Over.mk (Spec.map (R.map (homOfLE j.val.property)))) (T' := Over.mk (Spec.map (R.map (homOfLE k.val.property)))) (Over.homMk (Spec.map (R.map (homOfLE hjk))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) = Spec.map (F.map (homOfLE hjk)) ≫ (σ j).hom) ∧ (∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i), τ.hom ≫ baseChangeMap s (T := Over.mk (Spec.map (R.map (homOfLE j.val.property)))) (T' := Over.mk (Spec.map (c.ι.app i))) (Over.homMk (Spec.map (c.ι.app j.val)) (by dsimp; rw [← Spec.map_comp, c.w (homOfLE j.val.property)])) = Spec.map (C.ι.app j.val) ≫ (σ j).hom)) (d : ∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i), schemeDerivedCategory (Spec (F.obj j.val)) ≌ schemeDerivedCategory (pullback s (Spec.map (R.map (homOfLE j.val.property))))) (dlim : schemeDerivedCategory (Spec (C.pt)) ≌ schemeDerivedCategory (pullback s (Spec.map (c.ι.app i)))) (hd : ∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i), DerivedCategory.Q ⋙ (d j).functor ≅ (@Functor.mapHomologicalComplex ℤ (SheafOfModules.{u} (moduleRings (Spec (F.obj j.val)).toRingedSpace)) (SheafOfModules.{u} (moduleRings (pullback s (Spec.map (R.map (homOfLE j.val.property)))).toRingedSpace)) _ _ _ _ (SheafOfModules.pushforward (σ j).hom.toRingCatSheafHom) ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q) (hdlim : DerivedCategory.Q ⋙ dlim.functor ≅ (@Functor.mapHomologicalComplex ℤ (SheafOfModules.{u} (moduleRings (Spec C.pt).toRingedSpace)) (SheafOfModules.{u} (moduleRings (pullback s (Spec.map (c.ι.app i))).toRingedSpace)) _ _ _ _ (SheafOfModules.pushforward τ.hom.toRingCatSheafHom) ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q) (aE : (d ⟨⟨i, le_rfl⟩, le_rfl⟩).functor.obj (DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)) (SheafOfModules.{u} (moduleRings (Spec (F.obj ⟨i, le_rfl⟩)).toRingedSpace)) _ _ _ _ (@id (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩) ⥤ SheafOfModules.{u} (moduleRings (Spec (F.obj ⟨i, le_rfl⟩)).toRingedSpace)) (tilde.functor (F.obj ⟨i, le_rfl⟩))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj E)) ≅ (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE (le_refl i)))))).obj P) (aK : (d ⟨⟨i, le_rfl⟩, le_rfl⟩).functor.obj (DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)) (SheafOfModules.{u} (moduleRings (Spec (F.obj ⟨i, le_rfl⟩)).toRingedSpace)) _ _ _ _ (@id (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩) ⥤ SheafOfModules.{u} (moduleRings (Spec (F.obj ⟨i, le_rfl⟩)).toRingedSpace)) (tilde.functor (F.obj ⟨i, le_rfl⟩))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj K)) ≅ (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE (le_refl i)))))).obj Q) : Nonempty (AffineModelCoherentObjects R c i Y s P Q F C E K d dlim)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-14"
+ },
+ "proof_deps": [
+  "def-pc-complex-scalar-extension-hom",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-kflat-extension-of-scalars",
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261014T045611-L-1573878",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261014T045611-L-1573878",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

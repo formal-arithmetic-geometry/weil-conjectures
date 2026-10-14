@@ -18,43 +18,38 @@
  ],
  "proof": [
   {
-   "text": "For each bottom-to-stage or bottom-to-limit arrow, apply the natural affine derived-pullback comparison to E,K; scalar extension remains K-flat by the acyclic-tensor preservation criterion. Conjugate the comparisons by the specified localized pushforward equivalences, using the transition equation for σ or τ. Pull back aE,aK and compose with perfectHomComparison. This constructs four object isomorphism families using the supplied d,dlim.",
+   "text": "Obtain coherent object comparisons and natural comparisons with object triangles. These are real types under Nonempty, never definitions choosing a witness from unproved existence.",
    "uses": [
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-kflat-extension-of-scalars",
-    "lem-pc-perfect-hom-transport"
+    "lem-pc-affine-model-coherent-object-comparisons"
    ],
    "elementary": false
   },
   {
-   "text": "For an arbitrary chain map at j, use affine comparison naturality for the ring map j→k or j→C.pt. The counit characterization of composition identifies the successive comparison with the direct one; the associativity law for derived pullback and for extendScalarsComp supplies this equality. The scalar-extension conjugation is scalarExtensionHom. This applies to arbitrary stage maps, not only maps obtained by extension from the bottom.",
+   "text": "Apply the finite-stage and cocone Hom-equation interfaces to the same supplied comparison objects. The generic scalar reassociation and naturality cancellation calculation is proved in the coherent-object module; specialization and representation glue remain these two named obligations.",
    "uses": [
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "def-pc-complex-scalar-extension-hom"
+    "lem-pc-affine-model-stage-hom-equation-of-coherent-objects",
+    "lem-pc-affine-model-limit-hom-equation-of-coherent-objects"
    ],
    "elementary": false
   },
   {
-   "text": "Expand the object isomorphisms and the two conjugated maps. Functoriality transports the arbitrary bottom identifications on both sides, and adjacent inverse pairs cancel. The resulting equalities are the two equations of affineModelComparisonData; package the isomorphisms with the specified d,dlim.",
+   "text": "Apply the constructor interface to d,dlim, the four comparison objects and the two proved or supplied Hom-equation families. This packages exactly the original explicit affineModelComparisonData predicate.",
    "uses": [
-    "def-pc-affine-model-comparison-data"
+    "lem-pc-affine-model-comparison-data-from-hom-equations"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-affine-model-comparison-data",
-  "def-pc-complex-scalar-extension-hom",
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-pc-kflat-extension-of-scalars",
-  "lem-pc-perfect-hom-transport",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-affine-model-coherent-object-comparisons",
+  "lem-pc-affine-model-stage-hom-equation-of-coherent-objects",
+  "lem-pc-affine-model-limit-hom-equation-of-coherent-objects",
+  "lem-pc-affine-model-comparison-data-from-hom-equations"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08DW",
-  "place": "Tag 09RE affine calculation, Tag 08DW(2), Tags 06Y1 and 0D5S; core proof steps 2–3 after bottom-model identification; explicit coordinate-transport argument"
+  "place": "Direct finite and cocone object triangles; generic scalar/naturality calculation is proved, with its two concrete specializations and the definition constructor isolated as interfaces."
  },
  "mathlib_searches": [
   {
@@ -113,10 +108,13 @@
   "module": "Sheaf.AlgebraicGeometry.AffineModelComparisonOfBottomModels",
   "file": "lean/Sheaf/AlgebraicGeometry/AffineModelComparisonOfBottomModels.lean",
   "declaration": "AlgebraicGeometry.affineModelComparisonData_of_bottom_models",
-  "statement": "theorem affineModelComparisonData_of_bottom_models\n    {I : Type u} [Preorder I]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R)\n    (i : I) (Y : Scheme.{u}) [IsAffine Y] (s : Y ⟶ Spec (R.obj i))\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (P Q : schemeDerivedCategory Y)\n    (F : Set.Ici i ⥤ CommRingCat.{u}) (C : Cocone F)\n    (E K : CochainComplex (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)) ℤ)\n    (hE : ∀ L : CochainComplex (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)) ℤ,\n      L.Acyclic →\n        (CochainComplex.mapBifunctor L E\n          (MonoidalCategory.curriedTensor (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)))).Acyclic)\n    (hK : ∀ L : CochainComplex (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)) ℤ,\n      L.Acyclic →\n        (CochainComplex.mapBifunctor L K\n          (MonoidalCategory.curriedTensor (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)))).Acyclic)\n    (σ : ∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i),\n      Spec (F.obj j.val) ≅ pullback s (Spec.map (R.map (homOfLE j.val.property))))\n    (τ : Spec C.pt ≅ pullback s (Spec.map (c.ι.app i)))\n    (htrans :\n      (∀ (j k : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) (hjk : j ≤ k),\n        (σ k).hom ≫ baseChangeMap s\n          (T := Over.mk (Spec.map (R.map (homOfLE j.val.property))))\n          (T' := Over.mk (Spec.map (R.map (homOfLE k.val.property))))\n          (Over.homMk (Spec.map (R.map (homOfLE hjk)))\n            (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) =\n          Spec.map (F.map (homOfLE hjk)) ≫ (σ j).hom) ∧\n      (∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i),\n        τ.hom ≫ baseChangeMap s\n          (T := Over.mk (Spec.map (R.map (homOfLE j.val.property))))\n          (T' := Over.mk (Spec.map (c.ι.app i)))\n          (Over.homMk (Spec.map (c.ι.app j.val))\n            (by dsimp; rw [← Spec.map_comp, c.w (homOfLE j.val.property)])) =\n          Spec.map (C.ι.app j.val) ≫ (σ j).hom))\n    (d : ∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i),\n          schemeDerivedCategory (Spec (F.obj j.val)) ≌\n            schemeDerivedCategory (pullback s (Spec.map (R.map (homOfLE j.val.property)))))\n      (dlim : schemeDerivedCategory (Spec (C.pt)) ≌\n        schemeDerivedCategory (pullback s (Spec.map (c.ι.app i))))\n    (hd : ∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i),\n      DerivedCategory.Q ⋙ (d j).functor ≅\n      (@Functor.mapHomologicalComplex ℤ\n        (SheafOfModules.{u} (moduleRings (Spec (F.obj j.val)).toRingedSpace))\n        (SheafOfModules.{u}\n          (moduleRings (pullback s (Spec.map (R.map (homOfLE j.val.property)))).toRingedSpace))\n        _ _ _ _\n        (SheafOfModules.pushforward (σ j).hom.toRingCatSheafHom)\n        ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q)\n    (hdlim : DerivedCategory.Q ⋙ dlim.functor ≅\n      (@Functor.mapHomologicalComplex ℤ\n        (SheafOfModules.{u} (moduleRings (Spec C.pt).toRingedSpace))\n        (SheafOfModules.{u} (moduleRings (pullback s (Spec.map (c.ι.app i))).toRingedSpace)) _ _ _ _\n        (SheafOfModules.pushforward τ.hom.toRingCatSheafHom)\n        ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q)\n    (aE : (d ⟨⟨i, le_rfl⟩, le_rfl⟩).functor.obj\n      (DerivedCategory.Q.obj\n      ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩))\n        (SheafOfModules.{u} (moduleRings (Spec (F.obj ⟨i, le_rfl⟩)).toRingedSpace))\n        _ _ _ _ (@id (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩) ⥤\n          SheafOfModules.{u} (moduleRings (Spec (F.obj ⟨i, le_rfl⟩)).toRingedSpace))\n          (tilde.functor (F.obj ⟨i, le_rfl⟩)))\n        ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj E)) ≅\n      (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE (le_refl i)))))).obj P)\n    (aK : (d ⟨⟨i, le_rfl⟩, le_rfl⟩).functor.obj\n      (DerivedCategory.Q.obj\n      ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩))\n        (SheafOfModules.{u} (moduleRings (Spec (F.obj ⟨i, le_rfl⟩)).toRingedSpace))\n        _ _ _ _ (@id (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩) ⥤\n          SheafOfModules.{u} (moduleRings (Spec (F.obj ⟨i, le_rfl⟩)).toRingedSpace))\n          (tilde.functor (F.obj ⟨i, le_rfl⟩)))\n        ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj K)) ≅\n      (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE (le_refl i)))))).obj Q) :\n    affineModelComparisonData R c i Y s P Q F C E K",
+  "statement": "theorem affineModelComparisonData_of_bottom_models {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (i : I) (Y : Scheme.{u}) [IsAffine Y] (s : Y ⟶ Spec (R.obj i)) [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (P Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ CommRingCat.{u}) (C : Cocone F) (E K : CochainComplex (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)) ℤ) (hE : ∀ L : CochainComplex (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)) ℤ, L.Acyclic → (CochainComplex.mapBifunctor L E (MonoidalCategory.curriedTensor (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)))).Acyclic) (hK : ∀ L : CochainComplex (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)) ℤ, L.Acyclic → (CochainComplex.mapBifunctor L K (MonoidalCategory.curriedTensor (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)))).Acyclic) (σ : ∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i), Spec (F.obj j.val) ≅ pullback s (Spec.map (R.map (homOfLE j.val.property)))) (τ : Spec C.pt ≅ pullback s (Spec.map (c.ι.app i))) (htrans : (∀ (j k : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) (hjk : j ≤ k), (σ k).hom ≫ baseChangeMap s (T := Over.mk (Spec.map (R.map (homOfLE j.val.property)))) (T' := Over.mk (Spec.map (R.map (homOfLE k.val.property)))) (Over.homMk (Spec.map (R.map (homOfLE hjk))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) = Spec.map (F.map (homOfLE hjk)) ≫ (σ j).hom) ∧ (∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i), τ.hom ≫ baseChangeMap s (T := Over.mk (Spec.map (R.map (homOfLE j.val.property)))) (T' := Over.mk (Spec.map (c.ι.app i))) (Over.homMk (Spec.map (c.ι.app j.val)) (by dsimp; rw [← Spec.map_comp, c.w (homOfLE j.val.property)])) = Spec.map (C.ι.app j.val) ≫ (σ j).hom)) (d : ∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i), schemeDerivedCategory (Spec (F.obj j.val)) ≌ schemeDerivedCategory (pullback s (Spec.map (R.map (homOfLE j.val.property))))) (dlim : schemeDerivedCategory (Spec (C.pt)) ≌ schemeDerivedCategory (pullback s (Spec.map (c.ι.app i)))) (hd : ∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i), DerivedCategory.Q ⋙ (d j).functor ≅ (@Functor.mapHomologicalComplex ℤ (SheafOfModules.{u} (moduleRings (Spec (F.obj j.val)).toRingedSpace)) (SheafOfModules.{u} (moduleRings (pullback s (Spec.map (R.map (homOfLE j.val.property)))).toRingedSpace)) _ _ _ _ (SheafOfModules.pushforward (σ j).hom.toRingCatSheafHom) ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q) (hdlim : DerivedCategory.Q ⋙ dlim.functor ≅ (@Functor.mapHomologicalComplex ℤ (SheafOfModules.{u} (moduleRings (Spec C.pt).toRingedSpace)) (SheafOfModules.{u} (moduleRings (pullback s (Spec.map (c.ι.app i))).toRingedSpace)) _ _ _ _ (SheafOfModules.pushforward τ.hom.toRingCatSheafHom) ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q) (aE : (d ⟨⟨i, le_rfl⟩, le_rfl⟩).functor.obj (DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)) (SheafOfModules.{u} (moduleRings (Spec (F.obj ⟨i, le_rfl⟩)).toRingedSpace)) _ _ _ _ (@id (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩) ⥤ SheafOfModules.{u} (moduleRings (Spec (F.obj ⟨i, le_rfl⟩)).toRingedSpace)) (tilde.functor (F.obj ⟨i, le_rfl⟩))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj E)) ≅ (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE (le_refl i)))))).obj P) (aK : (d ⟨⟨i, le_rfl⟩, le_rfl⟩).functor.obj (DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)) (SheafOfModules.{u} (moduleRings (Spec (F.obj ⟨i, le_rfl⟩)).toRingedSpace)) _ _ _ _ (@id (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩) ⥤ SheafOfModules.{u} (moduleRings (Spec (F.obj ⟨i, le_rfl⟩)).toRingedSpace)) (tilde.functor (F.obj ⟨i, le_rfl⟩))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj K)) ≅ (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE (le_refl i)))))).obj Q) : affineModelComparisonData R c i Y s P Q F C E K",
   "branch": "sheaf-dag",
   "by": "U2",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.affineModelComparisonData_of_bottom_models"
+  ]
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -132,9 +130,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261014T010854-L-3168155",
+  "landing": "20261014T045611-L-1573878",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

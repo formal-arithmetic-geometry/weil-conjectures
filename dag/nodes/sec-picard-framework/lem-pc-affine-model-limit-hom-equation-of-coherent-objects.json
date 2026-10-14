@@ -1,0 +1,120 @@
+{
+ "id": "lem-pc-affine-model-limit-hom-equation-of-coherent-objects",
+ "kind": "statement",
+ "title": "Limit Hom equation from coherent object triangles",
+ "statement": "Given the coherent comparison objects of lem-pc-affine-model-coherent-object-comparisons, the limit conjugated Hom equation of def-pc-affine-model-comparison-data holds for every chain map on the two scalar-extended models. This is only the limit-arrow portion of the argument; the other arrows and the construction of the object comparisons are not conclusions. The maps are scalarExtensionHom [def-pc-complex-scalar-extension-hom] and perfectStageMap/perfectLimitMap [lem-pc-perfect-hom-transport].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09RE",
+  "place": "The explicit formula of def-pc-affine-model-comparison-data and the canonical termwise tilde definition; definitional constructor step."
+ },
+ "stmt_deps": [
+  "lem-pc-affine-model-coherent-object-comparisons",
+  "def-pc-complex-scalar-extension-hom",
+  "lem-pc-perfect-hom-transport"
+ ],
+ "proof": [
+  {
+   "text": "Fix the arrow from j to the cocone point.\nApply naturality of the supplied full two-label comparison θ to the given chain\nmap a; it need not descend to the bottom. Scalar reassociation identifies\nscalarExtensionHom with κE.hom followed by extension of a followed by κK.inv,\nwhere κ is affineModelScalarAssocIso. The two object triangles express the\ncomparison at the target as κ, θ, pullback of the source comparison and the\ninverse perfectHomComparison. Substitute these formulas and expand map_comp.\nCancel adjacent inverse pairs, use naturality of θ, then cancel its inverse\npair. The result is exactly the conjugated Hom transport written below.\nProof irrelevance identifies the generated pullback-instance proofs with the\nnamed arrow representation. The argument includes identity arrows, zero rings,\nzero complexes and coincident labelled objects.",
+   "uses": [
+    "lem-pc-affine-model-coherent-object-comparisons",
+    "def-pc-complex-scalar-extension-hom",
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/09RE",
+  "place": "Definitional introduction of the explicitly stated affine comparison-data formula; source representations are given by real named functor definitions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural affine derived pullback comparison compatible with composition on K-flat complexes",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural derived pullback comparison for K-flat module complexes along compatible affine scheme isomorphisms",
+   "results": "Scheme.Modules.pullbackComp, pullbackSpecIso_hom_base and generic sheaf pullback results.",
+   "date": "2026-10-14",
+   "verdict": "No localized-coordinate model comparison or diagram propagation theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsComp",
+   "results": "extendScalarsComp and extendScalars_assoc provide associativity; no geometric model transport theorem.",
+   "date": "2026-10-14",
+   "verdict": "Use for the remaining coherence calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "affineModelComparisonData|derivedPullback_tilde_kFlat_natIso|kFlat.*extendScalars|extendScalars.*kFlat",
+   "results": "AffineDerivedPullbackTensorTilde has natural affine formulas; KFlatModuleBaseChange has the acyclic-tensor preservation criterion; no single-square comparison or propagation from bottom models.",
+   "date": "2026-10-14",
+   "verdict": "Use the existing affine and K-flat APIs and isolate only propagation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineModelComparisonOfBottomModels",
+  "date": "2026-10-14",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Limit arbitrary-chain-map naturality and reassociation step",
+   "via": [
+    "lem-pc-affine-model-comparison-of-bottom-models"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineModelLimitHomEquationOfCoherentObjects",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineModelLimitHomEquationOfCoherentObjects.lean",
+  "declaration": "AlgebraicGeometry.affineModelLimitHomEquation_of_coherent_objects",
+  "declarations": [
+   "AlgebraicGeometry.affineModelLimitHomEquation_of_coherent_objects"
+  ],
+  "statement": "theorem affineModelLimitHomEquation_of_coherent_objects {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (i : I) (Y : Scheme.{u}) [IsAffine Y] (s : Y ⟶ Spec (R.obj i)) [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (P Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ CommRingCat.{u}) (C : Cocone F) (E K : CochainComplex (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)) ℤ) (d : ∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i), schemeDerivedCategory (Spec (F.obj j.val)) ≌ schemeDerivedCategory (pullback s (Spec.map (R.map (homOfLE j.val.property))))) (dlim : schemeDerivedCategory (Spec (C.pt)) ≌ schemeDerivedCategory (pullback s (Spec.map (c.ι.app i)))) (m : AffineModelCoherentObjects R c i Y s P Q F C E K d dlim) : ∀ (j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) (a : ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ))).obj E ⟶ ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ))).obj K), m.βE.inv ≫ (affineModelLocalizedTilde C.pt _ dlim).map (CochainComplex.scalarExtensionHom (F.map (homOfLE j.property)).hom (C.ι.app j.val).hom (C.ι.app ⟨i, le_rfl⟩).hom (congrArg CommRingCat.Hom.hom (C.w (homOfLE j.property)).symm) E K a) ≫ m.βK.hom = perfectLimitMap R c s j.val.property ((m.αE j).inv ≫ (affineModelLocalizedTilde (F.obj j.val) _ (d j)).map a ≫ (m.αK j).hom)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-14"
+ },
+ "proof_deps": [
+  "lem-pc-affine-model-coherent-object-comparisons",
+  "def-pc-complex-scalar-extension-hom",
+  "lem-pc-perfect-hom-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261014T045611-L-1573878",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261014T045611-L-1573878",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
