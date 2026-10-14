@@ -14748,3 +14748,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:24 L: merged deliver/E1/Sheaf.AlgebraicGeometry.FlatTelescopeNormalizationMorphisms (stage 3; reviewer PASS; first push; landing 20261014T082418-L-4009213 (interface); batch 20261014T082416; modules 3; new nodes 2)
 
 - 16:27 L: batch 20261014T082416 dependency take-out
+- 08:29 L: merged deliver/K3/Sheaf.AlgebraicGeometry.RecordedPerfectHomNormalization (stage 3; reviewer PASS; first push; landing 20261014T082919-L-4066280 (proof); batch 20261014T082917; modules 1; new nodes 0)
