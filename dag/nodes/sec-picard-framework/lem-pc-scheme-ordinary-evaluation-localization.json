@@ -21,38 +21,39 @@
  ],
  "proof": [
   {
-   "text": "Resolve the tensor inputs by K-flat complexes and apply the canonical tensor-Hom representative equation into the fixed K-injective target. The map from the ordinary Hom complex is Q of Hom(P,eta_M), followed by the inverse localization factorization; it is constructed without choosing arbitrary data.",
+   "text": "Expose the canonical three-variable naturality field. Extend the representative equation to any tensor-source complex by a K-flat resolution. The canonical representative witness is equal to the explicit uncurrying map by tensor-summand extensionality; naturality of explicit localized uncurrying identifies the resolution composite, and cancellation of Q of the resolution tensor identity removes the K-flatness assumption.",
    "uses": [
     "def-pc-canonical-derived-tensor-hom-bijection",
     "lem-pc-kflat-resolution",
-    "def-pur-derived-internal-hom"
+    "lem-pc-tensor-hom-uncurry-localized-evaluation",
+    "lem-pc-tensor-hom-uncurry-differential"
    ],
    "elementary": false
   },
   {
-   "text": "On a total tensor summand followed by a Hom projection, evaluation naturality reduces to the ordinary component equation. The degree-zero unit forces the r+q=0 unit-action term, with zero in the other degrees. Coproduct inclusions and product projections detect equality. Localize, cancel the resolution quasi-isomorphisms, and transport along eK and eN using canonical three-variable naturality. No ordinary Hom or tensor comparison map is inverted.",
+   "text": "Apply the extended representative formula to f followed by Hom(P,eta_F), and to Hom(P,eta_O). Apply canonical naturality along the tensor model comparison and eK,eN. Substitute the explicit ordinary uncurrying calculation. Associator naturality, tensor functoriality, right-unitor naturality and eN.inv_hom_id prove the final transport equation.",
    "uses": [
-    "def-pc-scheme-ordinary-evaluation-formula",
-    "lem-sc-hom-complex-projections",
-    "def-pc-canonical-derived-tensor-hom-bijection"
+    "lem-pc-scheme-ordinary-evaluation-uncurry-calculation",
+    "lem-pc-scheme-derived-tensor-hom-naturality"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-canonical-derived-tensor-hom-bijection",
-  "def-pc-scheme-ordinary-evaluation-formula",
-  "def-pur-derived-internal-hom",
   "lem-pc-kflat-resolution",
-  "lem-sc-hom-complex-projections"
+  "lem-pc-tensor-hom-uncurry-localized-evaluation",
+  "lem-pc-tensor-hom-uncurry-differential",
+  "lem-pc-scheme-ordinary-evaluation-uncurry-calculation",
+  "lem-pc-scheme-derived-tensor-hom-naturality"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "U4",
+  "group": "K3",
   "date": "2026-10-14",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 08DJ, 08DM and 08DQ; representative evaluation calculation",
-  "description": "Step 3 of lem-pc-kinjective-scheme-evaluation-models, isolated before inverting ordinary comparison maps."
+  "place": "Tags 08DJ, 08DM and 08DQ; ordinary evaluation localization proof step 2",
+  "description": "Compiling reduction to one explicit evaluation-component calculation; K-flat cancellation and all canonical and monoidal transports are implemented in Lean."
  },
  "mathlib_searches": [
   {
@@ -118,12 +119,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U4",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T172659-L-2101415",
+  "landing": "20261014T001726-L-2552299",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
