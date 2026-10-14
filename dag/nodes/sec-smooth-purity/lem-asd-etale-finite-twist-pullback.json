@@ -26,9 +26,150 @@
   "def-pc-scheme",
   "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-asd-finite-etale-twist-line] with its finite coefficient ring equal to $\\mathbf Z/m\\mathbf Z$, $N=m$ and $r=1$. The tensor-unit maps $u\\otimes c\\mapsto c u$ and $u\\mapsto u\\otimes1$, with the power action written additively, identify its Tate line with $\\mu_{m,T}$ itself. Hence there is an etale cover on which $\\mu_{m,T}\\cong(\\mathbf Z/m)_T$. Restriction commutes with the sheaf tensor and sheaf Hom constructions: on a localized site the section tensor presheaf and its local representatives are the restrictions of the original ones, and the Hom rule is literally the rule on further localized sites. Tensor the cyclic trivialization with $A_T$. Since $mA=0$, the ring map $\\mathbf Z/m\\to A$ is defined, and $c\\otimes a\\mapsto ca$ with inverse $a\\mapsto1\\otimes a$ identifies the scalar-extended line with $A$. This does not require $A$ to be finite or flat over $\\mathbf Z/m$. Tensor powers of this local basis give a basis for every positive twist; for the negative twist the linear functional sending this basis to $1$ is a basis of its sheaf dual. The zero twist is the constant sheaf by definition. Thus the same cover trivializes every $A_T(a)$, including negative integers.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PK section-kummer; scalar extension and signed tensor powers of the finite cyclic local system"
+   }
+  },
+  {
+   "text": "First check the roots comparison over an affine open $V=\\operatorname{Spec}R$ of $T$. The local inverses of $m$ glue, so $m$ is a unit in $R$. Put $P=\\operatorname{Spec}(R[t]/(t^m-1))$. In [lem-sbc-root-split-away-cover-etale] take $g=1$ and $n=m$: its distinguished open is all of $P$, so $P\\to V$ is etale. The affine-spectrum convention [def-weil-affine-spectrum] identifies, on an affine $V$-scheme $U=\\operatorname{Spec}B$, maps $U\\to P$ over $V$ with $R$-algebra maps $R[t]/(t^m-1)\\to B$, hence with roots $x^m=1$ in $B$; such a root is a unit with inverse $x^{m-1}$. For nonaffine $U$, apply this calculation on affine opens: agreement of the roots on overlaps gives agreement of the corresponding morphisms on affine refinements of the overlaps, and [lem-weil-pbc-small-etale-representable-presheaf-sheaf] glues the morphisms uniquely. Thus $h_P=\\mu_{m,V}$. For $V'=T'\\times_TV$ and $v_V:V'\\to V$, [lem-galois-inverse-image-representable] gives $v_V^{-1}h_P\\cong h_{V'\\times_VP}$. By the fibre-product universal property, maps $U\\to V'\\times_VP$ over $V'$ are precisely maps $U\\to P$ over $V$, hence precisely the same roots in $\\Gamma(U,\\mathcal O_U)$. The target is therefore $\\mu_{m,V'}$. This is the required comparison, not just some isomorphism: taking the adjunct sends a root on a $V$-object to its restriction along the projection from its base change, which is exactly the defining roots map. Multiplication and powers are preserved by these ring restriction maps. To verify the normalization without borrowing the proof of the representable-pullback node, use [lem-galois-yoneda-hom-bijection]: for every sheaf $H$ on $V'$, the adjunction and evaluation give natural bijections $\\operatorname{Hom}(v_V^{-1}h_P,H)\\cong(v_{V*}H)(P)=H(V'\\times_VP)\\cong\\operatorname{Hom}(h_{V'\\times_VP},H)$. By [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection], these are precomposition with an isomorphism $\\theta:h_{V'\\times_VP}\\to v_V^{-1}h_P$. The roots comparison $c$ has image $\\operatorname{id}_{h_{V'\\times_VP}}$ under these bijections: its adjunct evaluated at $\\operatorname{id}_P$ is precisely the identity point of $V'\\times_VP$. Hence $c\\theta=1$, so $c=\\theta^{-1}$ is the normalized isomorphism. The Yoneda evaluation is legitimate here because $P$ and $V'\\times_VP$ are objects of their small etale sites.",
+   "uses": [
+    "lem-sbc-root-split-away-cover-etale",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-galois-inverse-image-representable",
+    "def-pc-fibre-product",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1 lemma-stalk-pullback (4); Tag 03PK section-kummer and groupoids.tex Tag 040M example-roots-of-unity; affine representation argument expanded"
+   }
+  },
+  {
+   "text": "Define $c_v:v^{-1}\\mu_{m,T}\\to\\mu_{m,T'}$ globally by the inverse-image adjunction: on an etale $U\\to T$ its adjunct sends $z$ to the pullback of $z$ on $T'\\times_TU$. [lem-weil-pbc-etale-inverse-image-algebraic-structures] identifies the underlying set inverse image with the abelian inverse image and their units, so this sectionwise group map has the required abelian adjunct. For an affine-open cover $V_i\\to T$, [lem-weil-pbc-etale-covering-base-change] gives the etale cover $V_i'=T'\\times_TV_i$ of $T'$. The restriction and composition-unit comparisons of [lem-weil-pbc-sets-etale-inverse-image-restriction] and [lem-weil-pbc-sets-etale-inverse-image-composition-units] identify $c_v|_{V_i'}$ with $c_{v_{V_i}}$ from Step 2: both adjuncts pull back the same root section along the same projection. [lem-weil-pbc-etale-cover-detects-iso] proves $c_v$ invertible. It is linear over the pulled-back constant $\\mathbf Z/m$ because $(z^i)|_{U'}=(z|_{U'})^i$, with locally constant residues handled by local restriction. Identity and composite morphisms give the identity and composite comparisons: after taking adjuncts, both sides pull a section through the same composite ring map; the composition-unit node identifies the units in precisely this order. This also proves compatibility with every power-transition map of roots, by $(z^q)|_{U'}=(z|_{U'})^q$.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-etale-cover-detects-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1 lemma-stalk-pullback (1),(2),(4); sites.tex Tag 03CB lemma-composition-morphisms-sites; projection pullback of roots"
+   }
+  },
+  {
+   "text": "Choose a universe containing the objects and morphisms of both small etale sites and a larger universe for the sheaf values, as required by [lem-weil-pbc-left-exact-site-inverse-image-tensor]. The base-change site functor satisfies the finite-limit and covering hypotheses by [lem-weil-pbc-etale-base-change-finite-limits] and [lem-weil-pbc-etale-base-change-continuous]. Hence [lem-weil-pbc-left-exact-site-inverse-image-tensor] supplies its exact, colimit-preserving, strong symmetric monoidal abelian inverse image and monoidal identity/composition comparisons. [prop-weil-pbc-inverse-image-modules-exact] identifies the pulled-back constant rings with their constants on $T'$ and identifies module pullback with this exact inverse image. The absolute tensor comparison also descends to tensor over a constant ring $R$: $F\\otimes_{R_T}G$ is the coequalizer of the two action maps from $F\\otimes_{\\mathbf Z}R_T\\otimes_{\\mathbf Z}G$ to $F\\otimes_{\\mathbf Z}G$. This follows from the balancing relations in [def-pur-sheaf-tensor-product]. Inverse image preserves this coequalizer and its action maps, so gives the canonical comparison over $R$. Apply it first with $R=\\mathbf Z/m$ to $\\mu_m\\otimes A$ and then with $R=A$ to positive tensor powers. Together with $c_v$ this yields $c_{v,1}:v^{-1}A_T(1)\\cong A_{T'}(1)$, $c_{v,0}$ the constant-ring comparison, and $c_{v,a}=c_{v,1}^{\\otimes a}$ for every $a>0$. These are the maps normalized on local pure tensors by pullback of the root section and of its coefficient.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-base-change-continuous",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL lemma-tensor-product-pullback; etale-cohomology.tex Tag 03Q1; balanced tensor comparison from the absolute monoidal comparison"
+   }
+  },
+  {
+   "text": "For a locally free line $L$, put $L^\\vee=\\mathcal Hom_A(L,A_T)$. On a trivializing object with basis $e$, every functional is uniquely $a e^\\vee$, where $e^\\vee(e)=1$, by [def-pur-sheaf-hom]. Its evaluation $L^\\vee\\otimes L\\to A_T$ is an isomorphism locally (it sends $e^\\vee\\otimes e$ to $1$), hence globally by [lem-weil-pbc-etale-cover-detects-iso]. Pull back this evaluation using Step 4. It defines the canonical map $v^{-1}L^\\vee\\to(v^{-1}L)^\\vee$: a pulled-back functional acts on a pulled-back section by the pulled-back value, extended $A_{T'}$-linearly. This is well-defined by the tensor comparison and the sheaf-Hom rule. The pulled-back cover remains a cover by [lem-weil-pbc-etale-covering-base-change]; on it, $v^{-1}L$ has basis $v^{-1}e$ and the displayed map sends $v^{-1}e^\\vee$ to its dual basis, so it is an isomorphism. For $L=A_T(a)$, $a>0$, compose this dual comparison with the dual of $c_{v,a}^{-1}$ to obtain $c_{v,-a}:v^{-1}A_T(-a)\\cong A_{T'}(-a)$. Its normalization is the evaluation identity $\\operatorname{ev}(c_{v,-a}(\\lambda),c_{v,a}(x))=c_{v,0}(v^{-1}\\operatorname{ev}(\\lambda,x))$.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-etale-cover-detects-iso",
+    "lem-weil-pbc-etale-covering-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04TT section-internal-hom and Tag 03EM lemma-internal-hom; evaluation and dual comparison computed on a single local basis"
+   }
+  },
+  {
+   "text": "The signed tensor-product identifications $A_T(a)\\otimes A_T(c)\\cong A_T(a+c)$ are defined by concatenating positive tensor powers, tensoring dual powers, and contracting a basis with its dual in mixed signs. On a local basis $e$ of $A_T(1)$ they send $e^{[a]}\\otimes e^{[c]}$ to $e^{[a+c]}$, where negative exponents denote dual basis powers. Changing $e$ to $u e$ multiplies $e^{[a]}$ by $u^a$ for every signed integer $a$, so these maps do not depend on the chosen basis and glue. Associativity, symmetry, units and evaluation all reduce to multiplication of their coefficients on this basis. The maps of Steps 4 and 5 send these basis tensors to the corresponding pulled-back basis tensors and preserve their coefficient multiplication; thus they respect these identifications and evaluation. For successive morphisms $w$ and $v$, Step 3 gives the composition law on the root line and Step 4 gives it on positive powers. For negative powers, the two paths are the dual of the same positive comparison, since their evaluations with the image of every local basis vector agree; the image of the dual basis is thereby uniquely determined. Identity comparisons obey the same calculation. These are equalities of sheaf morphisms checked on local bases and glued, not an inference from stalkwise equality of derived morphisms.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK section-tensor-product and Tag 04TT section-internal-hom; explicit signed tensor and evaluation coherence"
+   }
+  },
+  {
+   "text": "By [prop-weil-pbc-inverse-image-modules-exact], $v^{-1}$ is exact and is module pullback for the isomorphism of constant coefficient rings. Applying it degreewise therefore preserves quasi-isomorphisms and gives the same functor as $Lv^*$ on the unbounded derived category. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to this morphism of ringed topoi, with $F=K$ and $G=A_T(a)[0]$. Exactness identifies $Lv^*(A_T(a)[0])$ with $(v^{-1}A_T(a))[0]$, and $c_{v,a}$ then gives $v^{-1}(K\\otimes_A^LA_T(a))\\cong v^{-1}K\\otimes_A^LA_{T'}(a)$. This is natural in $K$ and applies to arbitrary unbounded $K$. The shift comparison is degreewise: $K[b]^n=K^{n+b}$ has differential $(-1)^b d_K$, and the additive inverse image preserves that sign. It gives the asserted formula with $[b]$. For tensor and composition coherence choose the K-flat resolutions with flat terms supplied in the tensor-pullback node. Pullback preserves that class of resolutions. Its tensor comparison is the total-complex comparison of [def-pc-tensor-complex-sheaves], with constituents the sheaf tensor maps of Step 4, direct sums preserved by the left adjoint. The composition and tensor diagrams therefore commute term by term by Steps 3–6 and the monoidal-composition assertion of [lem-weil-pbc-left-exact-site-inverse-image-tensor]; the signs in the total differentials are unchanged. Passing to the derived localization preserves those equalities. Thus the derived identifications have the same coherence, without a boundedness or constructibility assumption.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 lemma-pullback-tensor-product and Tag 0G7E lemma-pullback-K-flat; exact coefficient inverse image and total-complex coherence"
+   }
+  },
+  {
+   "text": "Finally let $m'=qm$ be invertible on $T$. Step 1 with coefficient ring $\\mathbf Z/m'$ gives a cover and an isomorphism $\\theta:(\\mathbf Z/m')_U\\cong\\mu_{m',U}$. Put $\\zeta=\\theta(1)$. Inside $\\mu_{m'}$, the subsheaf $\\mu_m$ is precisely the kernel of multiplication by $m$, because it consists of roots $z$ with $z^m=1$. In the cyclic trivialization that kernel is $q(\\mathbf Z/m')$, and $a\\bmod m\\mapsto qa\\bmod m'$ is an isomorphism $\\mathbf Z/m\\cong q(\\mathbf Z/m')$. Thus $\\zeta^q$ trivializes $\\mu_m$. The transition $z\\mapsto z^q$ sends $\\zeta^i$ to $(\\zeta^q)^i$, so in these two bases it is reduction $\\mathbf Z/m'\\to\\mathbf Z/m$, not multiplication by $q$ on the final coefficient module. Its semilinearity over that reduction gives a well-defined map $\\mu_{m'}\\otimes_{\\mathbf Z/m'}A\\to\\mu_m\\otimes_{\\mathbf Z/m}A$, since $mA=0$; in the chosen bases it is the identity on $A$, hence invertible by [lem-weil-pbc-etale-cover-detects-iso]. This defines the comparison canonically, independently of $\\theta$, from the power map itself. Tensoring gives all positive powers, taking its inverse dual gives the negative powers, and the evaluation identity of Step 5 fixes the dual comparison. Powers of units commute with ring pullback (Step 3), and powers compose by $ (z^{q_1})^{q_2}=z^{q_1q_2}$; tensor, dual, and derived comparisons consequently respect these transition maps. This proves the final clause and its compatibility with the preceding constructions.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-etale-cover-detects-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PK section-kummer; cyclic-kernel calculation for a divisible exponent, scalar extension, tensor and dual powers"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-affine-spectrum",
+  "lem-asd-finite-etale-twist-line",
+  "lem-galois-inverse-image-representable",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-sbc-root-split-away-cover-etale",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-cover-detects-iso",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03PK section-kummer and 03Q1 lemma-stalk-pullback (4); sites-modules.tex Tags 03EL and 04TT; sites-cohomology.tex Tags 07A4 and 0G7E; explicit scalar, dual, signed-power and exponent-transition arguments"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -169,15 +310,158 @@
    "results": "0 hits: . Generic free-sheaf pullback and algebraic roots-of-unity results do not identify the etale roots local system, dual twists and coefficient transition maps.",
    "date": "2026-10-14",
    "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|rootsOfUnity.*[Ss]heaf|[Ss]heaf.*rootsOfUnity",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: algebraic roots of unity, free sheaf pullback, or condensed monoidal structures do not state all clauses of the concrete ordinary-etale finite Tate comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image of the etale sheaf of roots of unity is the roots of unity sheaf on the source scheme",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Tate twist on small etale sheaves of modules commutes with arbitrary scheme inverse image and with negative tensor dual powers",
+   "results": "8 hits: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology",
+   "date": "2026-10-14",
+   "verdict": "no match: algebraic roots of unity, free sheaf pullback, or condensed monoidal structures do not state all clauses of the concrete ordinary-etale finite Tate comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rootsOfUnity\"",
+   "results": "12 hits: rootsOfUnity, rootsOfUnity_one, rootsOfUnity_zero, rootsOfUnity_inf_rootsOfUnity, rootsOfUnity_eq_ker, ker_zpowGroupHom_eq_rootsOfUnity, rootsOfUnity_le_of_dvd, instSubsingletonSubtypeUnitsMemSubgroupRootsOfUnityOfNatNat",
+   "date": "2026-10-14",
+   "verdict": "no match: algebraic roots of unity, free sheaf pullback, or condensed monoidal structures do not state all clauses of the concrete ordinary-etale finite Tate comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity|pullbackObjFreeIso",
+   "results": "25 hits: Mathlib/NumberTheory/JacobiSum/Basic.lean, Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean, Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean, Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean, Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean, Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean, Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean, Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: algebraic roots of unity, free sheaf pullback, or condensed monoidal structures do not state all clauses of the concrete ordinary-etale finite Tate comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf of nth roots of unity over a scheme where n is invertible is an invertible local system and its pullback is the same roots of unity local system",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-14",
+   "verdict": "no match: algebraic roots of unity, free sheaf pullback, or condensed monoidal structures do not state all clauses of the concrete ordinary-etale finite Tate comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"pullback\"",
+   "results": "12 hits: PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-14",
+   "verdict": "no match: algebraic roots of unity, free sheaf pullback, or condensed monoidal structures do not state all clauses of the concrete ordinary-etale finite Tate comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "prop-asd-smooth-base-change",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-asd-etale-finite-twist-pullback",
+  "worker": "stage1",
+  "summary": "Reused the finite-coefficient Tate-line lemma at Z/m to cover arbitrary coefficients. Proved roots pullback by affine representability and descent, constructed positive and negative pullback maps and their coherence, passed to unbounded derived tensor, and checked divisible-exponent independence on cyclic bases. No new nodes and no statement change.",
+  "blueprint": "Realizes prop-asd-smooth-base-change proof paragraph 2: ordinary inverse-image and twist base-change isomorphism for projective-line, affine-line and affine-space models. The argument stays on ordinary small-etale constant coefficients.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-inverse-image-representable",
+    "why": "Generic etale-site, root-algebra, or ringed-topos tensor infrastructure used in the finite Tate-line comparison; the compact-support unit does not supply this input and its route is unchanged."
+   },
+   {
+    "node": "lem-sbc-root-split-away-cover-etale",
+    "why": "Generic etale-site, root-algebra, or ringed-topos tensor infrastructure used in the finite Tate-line comparison; the compact-support unit does not supply this input and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-continuous",
+    "why": "Generic etale-site, root-algebra, or ringed-topos tensor infrastructure used in the finite Tate-line comparison; the compact-support unit does not supply this input and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic etale-site, root-algebra, or ringed-topos tensor infrastructure used in the finite Tate-line comparison; the compact-support unit does not supply this input and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-etale-cover-detects-iso",
+    "why": "Generic etale-site, root-algebra, or ringed-topos tensor infrastructure used in the finite Tate-line comparison; the compact-support unit does not supply this input and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Generic etale-site, root-algebra, or ringed-topos tensor infrastructure used in the finite Tate-line comparison; the compact-support unit does not supply this input and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "why": "Generic etale-site, root-algebra, or ringed-topos tensor infrastructure used in the finite Tate-line comparison; the compact-support unit does not supply this input and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Generic etale-site, root-algebra, or ringed-topos tensor infrastructure used in the finite Tate-line comparison; the compact-support unit does not supply this input and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic etale-site, root-algebra, or ringed-topos tensor infrastructure used in the finite Tate-line comparison; the compact-support unit does not supply this input and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "why": "Generic etale-site, root-algebra, or ringed-topos tensor infrastructure used in the finite Tate-line comparison; the compact-support unit does not supply this input and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "why": "Generic etale-site, root-algebra, or ringed-topos tensor infrastructure used in the finite Tate-line comparison; the compact-support unit does not supply this input and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "why": "Generic etale-site, root-algebra, or ringed-topos tensor infrastructure used in the finite Tate-line comparison; the compact-support unit does not supply this input and its route is unchanged."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic etale-site, root-algebra, or ringed-topos tensor infrastructure used in the finite Tate-line comparison; the compact-support unit does not supply this input and its route is unchanged."
+   },
+   {
+    "node": "lem-galois-yoneda-hom-bijection",
+    "why": "Generic Yoneda evaluation and natural-Hom recognition identify the canonical roots comparison, rather than an unspecified isomorphism; no compact-support unit lemma supplies this categorical input."
+   },
+   {
+    "node": "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+    "why": "Generic Yoneda evaluation and natural-Hom recognition identify the canonical roots comparison, rather than an unspecified isomorphism; no compact-support unit lemma supplies this categorical input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-inverse-image-representable",
+  "lem-sbc-root-split-away-cover-etale",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-cover-detects-iso",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-a4262d17e",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-a4262d17e (reviewer sub-agent of L); spot-checked: Read the full item, all eight steps, all 26 cited node statements, report, route, and cited Stacks passages. Verified canonical roots pullback, arbitrary coefficients, signed duals, unbounded derived coherence, and exponent transitions. Checked archived master target categories, duplicate candidates, edge cases, and dependency cycles. Accepted all 15 proposed tool uses. No repairs needed; detailed checks are in review.md."
+ }
 }
