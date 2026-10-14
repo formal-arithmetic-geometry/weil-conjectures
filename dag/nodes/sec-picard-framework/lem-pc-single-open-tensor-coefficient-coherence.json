@@ -16,14 +16,21 @@
  },
  "proof": [
   {
-   "text": "Postcompose with picardTermwiseSingleMap r (T_q N), which is invertible by the explicit hypothesis. Substitute the normalization equation for beta. Apply picardTermwiseSingleMap_composition to (r,q) and (k,i), expressing successive single comparisons using the selected derived and tensor composition maps. Substitute the normalization equation for alpha; naturality of the selected derived counit and the chain single comparison moves the single image of aN across the k comparison.",
+   "text": "Normalize picardTermwiseSingleMap by cancelling the single images of the unique-adjoint comparison and its inverse. This is the selected homotopy counit followed by the tensor single-complex comparison. Naturality of these two transformations proves naturality in the coefficient module. Identify picardTermwiseCounit on a single with the same selected counit. Postcompose picardTermwiseSingleMap_composition with the invertible single-complex comparison and cancel its inverse; the resulting equation is c(f,g);transport;Q_a;single(C(f,g,a).hom) = L_f(Q_g);Q_f(T_g M).",
    "uses": [
     "lem-sc-picard-termwise-single-map-composition"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the same single-comparison composition formula to (k,e.hom) and (e'.hom,t). The tensor composition factors on the two routes agree by tensorPullbackCompositionIso_associativity for (k,e.hom,z), and transport along ht identifies k;e with e';t. The equalities hi and hsq identify the total composite with r;q. Equality induction identifies the transports. The three factors defining bN are exactly the inverse composition factors followed by the r;q tensor composition. Reassociate, cancel the inverse derived composition factors, and cancel the postcomposed invertible r comparison. No single comparison for q or t is inverted.",
+   "text": "Apply tensorPullbackCompositionIso_associativity to z,e.hom,k, with intermediate maps e′.hom;t and i and total map r;q, using ht,hi,heq,hsq. If x=C(k,i,r;q), y=T_k(C(e,z,i)), v=C(e′;t,z,r;q), w=C(k,e,e′;t), this says x.hom;y.hom=v.hom;w.hom. Cancelling isomorphisms gives w.hom;y.inv;x.inv=v.inv. Postcompose with C(r,q,r;q).hom. Expanding bN and cancelling C(e′,t,e′;t).hom with its inverse identifies this with the coefficient identity w.hom;T_k(aN.hom);x.inv;C(r,q,r;q).hom=C(e′,t,e′;t).hom;bN.hom. Apply the single functor.",
+   "uses": [
+    "lem-pc-tensor-pullback-composition-associativity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the desired equality with the explicitly invertible Q_r(T_q N). On the left, the composition equations for (r,q) and (k,i), the pulled-back alpha normalization, and naturality for aN rewrite the result as c(k,e);transport(ht);Q_(e′;t)(M);single(w.hom;T_k(aN.hom);x.inv;C(r,q).hom). On the right, beta normalization and the composition equation for (e′,t) cancel the inverse derived comparison and give c(k,e);transport(ht);Q_(e′;t)(M);single(C(e′,t).hom;bN.hom). The coefficient identity from step 2 equates these expressions. Cancel the final monomorphism Q_r(T_q N). The generic categorical calculation is proved explicitly in normalized_square_algebra. No Q_q or Q_t is inverted and no derived triple-composition associativity is needed.",
    "uses": [
     "lem-sc-picard-termwise-single-map-composition",
     "lem-pc-tensor-pullback-composition-associativity"
@@ -36,9 +43,10 @@
   "lem-sc-picard-termwise-single-map-composition"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tags 06YJ and 0D5S; coefficient normalization calculation of lem-pc-standard-single-open-relative-arrow, before taking direct image."
+  "by": "agent H4",
+  "document": "Stacks Project; Mathlib category and single-complex API",
+  "place": "Tags 06YJ and 0D5S; normalized coefficient calculation of lem-pc-standard-single-open-relative-arrow",
+  "description": "Complete Lean proof from the two planned proved dependencies, with private proved normalization, naturality and category-algebra helpers; no new holes or intermediate nodes."
  },
  "mathlib_searches": [
   {
@@ -108,11 +116,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V4",
+  "reviewer": "X-61948",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261014T034914-L-816221",
+  "landing": "20261014T110246-L-1722338",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Unchanged theorem signature and coefficient identity matched the node; proof and dependencies matched the updated DAG; delivery and unchanged sole direct importer compiled cleanly; all eleven axiom checks used only permitted axioms."
  }
 }
