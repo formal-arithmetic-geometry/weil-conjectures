@@ -25,9 +25,56 @@
   "def-pc-kflat-complex",
   "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an integer $n$ and a sheaf $N$ of $\\mathcal O$-modules. Apply [lem-pur-acyclic-kflat-tensor-arbitrary] to the acyclic K-flat complex $A^\\bullet$ and the complex $N[0]$ concentrated in degree zero. It gives acyclicity of $\\operatorname{Tot}(N[0]\\otimes_{\\mathcal O}A^\\bullet)$. In degree $i$ the only nonzero summand is $N\\otimes_{\\mathcal O}A^i$ and the differential is $1_N\\otimes d^i$, because the first differential is zero and $(-1)^0=1$ [def-pc-tensor-complex-sheaves]. Thus this ordinary tensor complex is exact in degree $n-2$ [def-pc-acyclic-complex-modules].",
+   "uses": [
+    "lem-pur-acyclic-kflat-tensor-arbitrary",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-acyclic-complex-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7C (sites-cohomology-lemma-K-flat-flat-acyclic)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-flat-opcycles-tor-criterion] with $P^\\bullet=A^\\bullet$ and index $n-1$. The terms are flat by hypothesis, and Step 1 gives exactness after tensoring with every $N$ in degree $(n-1)-1=n-2$. Hence $Q^{n-1}=A^{n-1}/\\operatorname{im}(d^{n-2})$ is flat.",
+   "uses": [
+    "lem-weil-pbc-site-flat-opcycles-tor-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7C (sites-cohomology-lemma-K-flat-flat-acyclic), tensor exactness in degree n-2; the cited opcycle criterion packages the local cokernel diagram chase recorded in report.md."
+   }
+  },
+  {
+   "text": "Acyclicity gives $\\ker(d^{n-1})=\\operatorname{im}(d^{n-2})$ and $\\operatorname{im}(d^{n-1})=\\ker(d^n)$ [def-pc-acyclic-complex-modules]. The map $d^{n-1}$ therefore induces an isomorphism $Q^{n-1}\\cong Z^n(A^\\bullet)$. For each sheaf $N$, tensoring this isomorphism gives a natural isomorphism $N\\otimes Q^{n-1}\\cong N\\otimes Z^n(A^\\bullet)$; the exact tensor functor for $Q^{n-1}$ consequently identifies with the tensor functor for $Z^n(A^\\bullet)$, proving its flatness [def-pc-flat-sheaf-modules].",
+   "uses": [
+    "def-pc-acyclic-complex-modules",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7C (sites-cohomology-lemma-K-flat-flat-acyclic)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-acyclic-kflat-tensor-arbitrary",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-acyclic-complex-modules",
+  "lem-weil-pbc-site-flat-opcycles-tor-criterion",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7C (sites-cohomology-lemma-K-flat-flat-acyclic): agent-written variant using universal tensor acyclicity, the local opcycle flatness criterion, and the cokernel-to-cycle isomorphism; no additional purity hypothesis."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -87,12 +134,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-ringed-topos-kflat-pullback",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-site-acyclic-kflat-cycles-flat",
+  "worker": "stage1",
+  "summary": "Restored the source statement without the erroneous additional purity hypothesis. The existing acyclic K-flat tensor lemma supplies universal tensor acyclicity; a ringed-site cokernel criterion and the elementary cokernel-cycle isomorphism finish the proof.",
+  "blueprint": "Realizes the acyclic-case paragraph of the 0G7E proof: flatness of the terms of each good truncation via the cycle-flatness argument.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-acyclic-kflat-tensor-arbitrary",
+    "why": "Generic ringed-site tensor tool supplying acyclicity of ordinary tensor with every module from acyclicity and K-flatness. It realizes the derived-tensor-zero argument in Tag 0G7C; no node of this unit states this tensor theorem. Submitted for maintainer judgment, not recorded as an accepted top-level tool use."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-acyclic-kflat-tensor-arbitrary"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-7c201d05d",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-7c201d05d (reviewer sub-agent of L); spot-checked: Read and checked the full mathematics against Stacks Tags 0G7C, 08G0 and 06YT, cited definitions, blueprint route, and exact archived target declarations. All three proof steps and the new arbitrary-site opcycle criterion pass, including indexing and dual-number edge cases. Accepted the generic tensor lemma as a tool use; found no applicable duplicate. Corrected incomplete new-node metadata and stale purity-hypothesis provenance in fixes/. Statements and proofs are unchanged. Full findings are in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }
