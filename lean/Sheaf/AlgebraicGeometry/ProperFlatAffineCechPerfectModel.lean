@@ -12,7 +12,8 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 
 import Sheaf.AlgebraicGeometry.FiniteAffineCechModelFlatOver
 import Sheaf.AlgebraicGeometry.FiniteAffineCechModelComparison
-import Sheaf.AlgebraicGeometry.FiniteAffineCechModelPerfect
+import Sheaf.AlgebraicGeometry.FiniteAffineCechModelDerivedComparison
+import Sheaf.AlgebraicGeometry.ProperFlatSingleDerivedDirectImagePerfect
 
 /-! # A perfect nonnegative flat cohomology model on a specified affine open -/
 
@@ -108,7 +109,18 @@ theorem exists_proper_flat_affine_cech_perfect_model
   refine ⟨C, r, finiteAffineCechModel_ge _ _ _, finiteAffineCechModel_le _ _ _,
     finiteAffineCechModel_flatOver _ _ hflat V hV,
     finiteAffineCechModel_quasicoherent _ _ _, ?_, ?_⟩
-  · exact finiteAffineCechModel_perfect f F hF U hU V hV hcover
+  · classical
+    let : HasDerivedCategory.{u + 1}
+        (SheafOfModules.{u} (moduleRings (f ⁻¹ᵁ U).toScheme.toRingedSpace)) :=
+      HasDerivedCategory.standard _
+    let : IsAffine U.toScheme := hU
+    let G := F.restrict (f ⁻¹ᵁ U).ι
+    have hp := properFlat_single_derivedDirectImage_perfect (f ∣_ U) G hflat
+    obtain ⟨e⟩ := finiteAffineCechModel_derivedComparison (f ∣_ U) G V hV hcover
+    intro x
+    obtain ⟨W, hx, K, hK, ⟨c⟩⟩ := hp x
+    exact ⟨W, hx, K, hK, ⟨(SheafOfModules.overFunctor.{u}
+      (moduleRings U.toScheme.toRingedSpace) W).mapDerivedCategory.mapIso e ≪≫ c⟩⟩
   · exact finiteAffineCechModel_comparison f F U hU V hV hcover
 
 end AlgebraicGeometry.Scheme.Modules
