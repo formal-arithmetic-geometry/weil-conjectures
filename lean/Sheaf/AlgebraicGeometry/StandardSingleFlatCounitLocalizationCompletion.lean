@@ -1,6 +1,9 @@
 module
 
 public import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitPresentation
+import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationData
+import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationPair
+import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationHomology
 
 @[expose] public section
 set_option autoImplicit false
@@ -79,6 +82,12 @@ theorem standardSingleFlatCounit_localization_completion
                 ((DerivedCategory.homologyFunctor _ n).map (standardSingleBaseChangeMap p M g)) =
               eL.hom ≫ (DerivedCategory.homologyFunctor _ n).map
                 (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ eR.hom  := by
-  sorry
+  dsimp
+  obtain ⟨P, hPbound, hPflat⟩ :=
+    standardSingleFlatCounit_localization_data h_affine p M hM g a
+  obtain ⟨LF, ε, hLF⟩ :=
+    standardSingleFlatCounit_localization_pair h_affine p M hM g a P hPbound hPflat
+  exact ⟨P, hPbound, hPflat, LF, ε, hLF, standardSingleFlatCounit_localization_homology
+    h_affine p M hM g a S V hS hV hSaff hVaff hVS hpres P hPbound hPflat LF ε hLF⟩
 
 end AlgebraicGeometry
