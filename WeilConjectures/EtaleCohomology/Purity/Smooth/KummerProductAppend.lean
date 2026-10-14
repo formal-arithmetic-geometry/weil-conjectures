@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.LeftUnitorShift
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ShiftTateObjectAssoc
 public import WeilConjectures.Mathlib.Data.Fin.Tuple.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionShift
 public import WeilConjectures.SixFunctors.Etale.Derived.SupportsAssoc
@@ -150,10 +151,11 @@ def ShiftTateObjectAddIsoAssoc (a b c : ℤ) : Prop :=
       derivedTensorHom _ (𝟙 ((tateObject Λ U a)⟦2 * a⟧)) (shiftTateObjectAddIso Λ U b c).hom ≫
         (shiftTateObjectAddIso Λ U a (b + c)).hom ≫ eqToHom (by rw [add_assoc])
 
+omit [Finite Λ] in
 /-- The identifications `Λ(m)[2m] ⊗ Λ(m')[2m'] ≅ Λ(m + m')[2(m + m')]` are associative
 (`AlgebraicGeometry.Etale.ShiftTateObjectAddIsoAssoc`). -/
 theorem shiftTateObjectAddIsoAssoc (a b c : ℤ) : ShiftTateObjectAddIsoAssoc Λ U a b c :=
-  sorry
+  shiftTateObjectAddIso_hom_assoc Λ U a b c
 
 omit [Finite Λ] in
 /-- The *left unit law* of the identifications `Λ(m)[2m] ⊗ Λ(m')[2m'] ≅ Λ(m + m')[2(m + m')]`
