@@ -13,31 +13,41 @@
  ],
  "proof": [
   {
-   "text": "Write R_p as the filtered colimit of the principal localizations R_s, indexed by finite subsets of R minus p (00CR; CommRingCat.isColimitAwayProdCocone). Apply etale_finite_data_descent to Spec B over Spec R_p to obtain a finite-presentation etale scheme at a principal stage.",
+   "text": "Use CommRingCat.isColimitAwayProdCocone (00CR) to identify the filtered colimit A of principal localizations R[1/product(s)] with R_p. Transport alpha along the colimit comparison. Apply exists_etale_algebra_of_filteredColimit (00U2 (9)) to obtain a principal stage S, an etale S-algebra C, and an A-algebra isomorphism e : B to A tensor_S C.",
    "uses": [
-    "lem-weil-pbc-etale-finite-data-descent"
+    "lem-weil-pbc-etale-algebra-filtered-colimit-descent"
    ],
    "elementary": false
   },
   {
-   "text": "The transition morphisms of the descended schemes are affine and the limit is Spec B. Apply Mathlib Scheme.exists_isAffine_of_isLimit (01Z6), and replace the stage by a later affine stage Spec C. Compose its etale map to Spec R_s with the etale principal open immersion into Spec R to obtain a : R to C.",
+   "text": "Set a to the composite R to S to C. Algebra.Etale.of_isLocalizationAway and composition of etale spectrum maps show that a is etale (00U2 (1), (2)). Set i to tensor includeRight followed by e inverse. Tensor balancing and e inverse.commutes show g followed by i equals the stage coprojection followed by the structure map. The colimit comparison identity and ofHom_algebraMap_comp_awayProdCocone_ι_app give the required R structure equation.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The base-change isomorphism yields i : C to B and the structure equation. Let M be the image under a of R minus p. The universal property of localization (00CP) identifies the base change with M inverse C; transport IsLocalization to B under the isomorphism, using the C-algebra structure induced by i.",
+   "text": "Transport IsLocalization at the complement of p from R_p to A using IsLocalization.isLocalization_iff_of_ringEquiv. The colimit comparison identity, evaluated on algebraMap R S x, proves the scalar-tower equation for R, S, A.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The powers of product(s) lie in the complement of p by Submonoid.powers_le and Submonoid.prod_mem. Apply IsLocalization.isLocalization_of_submonoid_le to make A a localization of S at N, the image of this complement.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let M be the image of N in C. IsLocalization.tensorRight makes A tensor_S C an M-localization of C. IsLocalization.isLocalization_iff_of_ringEquiv along e inverse gives IsLocalization M B with algebra map e inverse composed with tensor includeRight, exactly the map i constructed above.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-finite-data-descent"
+  "lem-weil-pbc-etale-algebra-filtered-colimit-descent"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "F3",
   "document": "Stacks Project",
-  "place": "Tags 01ZM, 07RP, 01Z6, 00CR and 00CP; extracted unpointed part of the parent descent argument",
-  "group": "M4"
+  "place": "Tag 00U2, proof of (10) from (9), (1), (2); Tags 00CR and 00CP; the ring-level argument replaces the earlier scheme-level descent route"
  },
  "mathlib_searches": [
   {
@@ -111,10 +121,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M4",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261014T022548-L-4046664",
-  "kind": "interface",
+  "landing": "20261014T023933-L-14489",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
