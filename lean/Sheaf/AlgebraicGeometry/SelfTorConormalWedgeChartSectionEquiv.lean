@@ -3,6 +3,8 @@ public import Sheaf.AlgebraicGeometry.SelfTorAffineSection
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.AffineConormalSections
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafAffineUnit
+import Sheaf.AlgebraicGeometry.SelfTorConormalExteriorSectionModel
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -48,6 +50,27 @@ theorem exists_selfTor_conormal_wedge_chart_section_equiv
           (fun j ↦ ((Classical.choose
             (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app
               i.ker.toModules).val.app (op U.1) (b j))) =
-          selfTorAffineSection i U M (selfTorIdealWedge i U n b) := by sorry
+          selfTorAffineSection i U M (selfTorIdealWedge i U n b) := by
+  classical
+  let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules
+  have : N.IsQuasicoherent := (Scheme.Modules.affine_conormal_sections.{u, u} i).1
+  let V : Z.affineOpens := ⟨i ⁻¹ᵁ U.1, U.2.preimage i⟩
+  let η := ((PresheafOfModules.sheafificationAdjunction.{u}
+    (𝟙 Z.ringCatSheaf.obj)).unit.app
+      (Scheme.Modules.exteriorSheafPresheaf N n)).app (op V.1)
+  let e₁ : (⋀[Z.presheaf.obj (op V.1)]^n (N.val.obj (op V.1))) ≃ₗ[
+      Z.presheaf.obj (op V.1)] (Scheme.Modules.exteriorSheaf N n).val.obj (op V.1) :=
+    LinearEquiv.ofBijective η.hom
+    (Scheme.Modules.exteriorSheaf_affine_unit_bijective N n V)
+  obtain ⟨e₂, h₂⟩ := exists_selfTor_conormal_exterior_section_model i n U
+  refine ⟨e₁.symm.trans e₂, ?_⟩
+  intro b
+  change e₂ (e₁.symm (e₁ (exteriorPower.ιMulti
+    (Z.presheaf.obj (op V.1)) n
+    (fun j ↦ ((Classical.choose
+      (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app
+        i.ker.toModules).val.app (op U.1) (b j))))) = _
+  rw [e₁.symm_apply_apply]
+  exact h₂ b
 
 end AlgebraicGeometry
