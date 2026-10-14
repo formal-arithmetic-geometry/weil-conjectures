@@ -25,41 +25,163 @@
   "def-weil-abstract-derived-category",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $R=\\underline B$ and $E=\\underline P^\\bullet$. Sheafifying the chosen bases $P^i\\cong B^{r_i}$ gives $E^i\\cong R^{\\oplus r_i}$: sheafification preserves finite coproducts, and the component maps and inverse maps still compose to the identity. It also preserves the zero terms, so $E$ has the same finite support interval. For every $i$, [lem-sc-finite-free-internal-hom-exact-sequence] gives exactness of $\\mathcal Hom_R(E^i,-)$ at the middle of any exact short complex. Apply it to the three exact short complexes $(0,S_1,S_2)$, $(S_1,S_2,S_3)$ and $(S_2,S_3,0)$ of a short exact sequence. Since $\\mathcal Hom_R(E^i,0)=0$, these give respectively injectivity, middle exactness and surjectivity. Thus each termwise internal Hom functor preserves short exact sequences, including when $r_i=0$.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "lem-sc-finite-free-internal-hom-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FR (lemma-local-actual), finite-free specialization; Tag 08FN (lemma-local-lift-map), basis calculation"
+   }
+  },
+  {
+   "text": "Use the two-universe convention [def-weil-size-convention]: schemes and coefficients lie in $\\mathcal U\\in\\mathcal V$, the site is replaced by its $\\mathcal V$-small skeleton, and sheaves and derived categories are formed in $\\mathcal V$. On this small ringed site, apply [prop-pur-kinjective-resolutions-exist] to the sheaf of commutative rings $R$ and the arbitrary complex $\\mathcal F$, obtaining a quasi-isomorphism $q:\\mathcal F\\to I$ with $I$ K-injective. No lower or upper bound on $\\mathcal F$ is used. Set $H_M=\\mathcal Hom_R^\\bullet(E,M)$, with the differential of [def-pur-hom-complex]. The bounded source and termwise exactness proved in step 1 meet every hypothesis of [lem-pc-bounded-exact-term-hom-quasi-iso]. Hence $H_q:H_{\\mathcal F}\\to H_I$ is a quasi-isomorphism of sheaf complexes.",
+   "uses": [
+    "def-weil-size-convention",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-hom-complex",
+    "lem-pc-bounded-exact-term-hom-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 07A5 (section-unbounded), K-injective resolutions; Section 0A8X (section-hom-complexes); Tag 08FR, construction of representatives"
+   }
+  },
+  {
+   "text": "Each section group of $H_M$ is a $B$-module via the canonical constant-section map $B\\to R(V)$; restrictions commute with this action. Define a presheaf of $B$-modules $A_M(V)=H^0(H_M(V))$ on $U_{\\mathrm{et}}$. By [def-pur-hom-complex], a degree-zero cycle is precisely a chain map $E|_V\\to M|_V$; a degree-minus-one element $h$ has $d(h)=d_Mh+hd_E$. Thus $A_M(V)$ is the group of chain maps modulo chain homotopy, naturally in $V$ and $M$. The exact forgetful functor of [lem-weil-pbc-module-sheaves-colimits-forgetful] identifies cohomology in $R$-module sheaves with underlying abelian-sheaf cohomology. Apply [lem-weil-pbc-site-module-presheaf-sheafification-exact] to the presheaf complex underlying $H_M$: its termwise sheafification is itself, and exact sheafification gives $A_M^\\#\\cong H^0(H_M)$ on underlying abelian sheaves. Consequently step 2 gives an isomorphism $A_{\\mathcal F}^\\#\\to A_I^\\#$. By [lem-weil-pbc-site-sheafification-iso-locally-bijective], the presheaf map $A_{\\mathcal F}\\to A_I$ is locally surjective and locally injective. This is about homotopy classes of actual maps, not about sections of a cohomology sheaf before choosing representatives.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "lem-weil-pbc-site-sheafification-iso-locally-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 0A8X, equation cohomology-hom-complex; literature/stacks-project/sites.tex Tags 00WJ and 00WK, exact sheafification and local sections"
+   }
+  },
+  {
+   "text": "For an etale object $V\\to U$, [lem-weil-pbc-etale-site-localization-open] identifies $(U_{\\mathrm{et}})/V$ with $V_{\\mathrm{et}}$, including the covering families. With the ring and its action carried along, [def-pur-localized-ringed-site] describes module restriction sectionwise. By [lem-weil-pbc-site-restriction-exact] restriction is exact on underlying abelian sheaves; applying the faithful exact forgetful functor of [lem-weil-pbc-module-sheaves-colimits-forgetful] on both sites shows that it is exact on module sheaves too. It therefore preserves kernels, images and their quotient cohomology objects, and in particular takes $q$ to a quasi-isomorphism $q|_V$. It preserves the displayed homotopy equation simply by restricting each component. Thus it induces restriction on derived categories, and $Q(q|_V)$ is invertible.",
+   "uses": [
+    "lem-weil-pbc-etale-site-localization-open",
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-site-restriction-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Definition 04IX (definition-localize-ringed-site), restriction; Lemma 03DA (lemma-abelian); Tag 0E8G (lemma-j-shriek-reflects-exactness), proof, restriction is exact; literature/stacks-project/sites.tex Section 00XZ"
+   }
+  },
+  {
+   "text": "Given $\\varphi:QE\\to Q\\mathcal F$, the surjectivity of [lem-weil-pbc-kinjective-hom-derived] supplies a chain map $\\beta:E\\to I$ with $Q\\beta=Qq\\circ\\varphi$. View its homotopy class as $[\\beta]\\in A_I(U)$. Local surjectivity in step 3 supplies an etale covering $\\{V_j\\to U\\}$ and classes $a_j\\in A_{\\mathcal F}(V_j)$ sent to $[\\beta|_{V_j}]$. Choose a chain-map representative $\\alpha_j$ of each $a_j$. The equality of classes means $q|_{V_j}\\circ\\alpha_j$ and $\\beta|_{V_j}$ differ by $d_Ih+hd_E$ for an actual degree-minus-one family $h$, so they have the same image in the derived category. Step 4 makes $Q(q|_{V_j})$ invertible; cancel it in $Q(q|_{V_j})\\circ Q\\alpha_j=Q\\beta|_{V_j}=Q(q|_{V_j})\\circ\\varphi|_{V_j}$. Hence $Q\\alpha_j=\\varphi|_{V_j}$, proving (1).",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FR (lemma-local-actual), assertion (1); literature/stacks-project/derived.tex Tag 070I (lemma-K-injective), Hom bijection"
+   }
+  },
+  {
+   "text": "Now suppose $\\alpha:E\\to\\mathcal F$ has $Q\\alpha=0$. Then $Q(q\\alpha)=0$. The injectivity of [lem-weil-pbc-kinjective-hom-derived] implies that $q\\alpha$ is null-homotopic on $U$, so $[\\alpha]$ and $0$ in $A_{\\mathcal F}(U)$ have equal images in $A_I(U)$. Local injectivity in step 3 gives an etale covering $\\{V_j\\to U\\}$ with $[\\alpha|_{V_j}]=0$ in $A_{\\mathcal F}(V_j)$. Being zero in this cohomology group means an actual boundary, not merely a zero sheaf cohomology class: choose $h_j\\in H_{\\mathcal F}^{-1}(V_j)$ with $d(h_j)=\\alpha|_{V_j}$. The degree-minus-one differential formula yields $\\alpha^i|_{V_j}=d_{\\mathcal F}^{i-1}h_j^i+h_j^{i+1}d_E^i$ for every $i$. The one element $h_j$ supplies all components simultaneously. This proves (2), including the zero source and empty scheme cases, where the equation is vacuous.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FR (lemma-local-actual), assertion (2), whose omitted proof is supplied here; Section 0A8X, Hom differential"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "def-pur-localized-ringed-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-size-convention",
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "lem-sc-finite-free-internal-hom-exact-sequence",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FR, with the omitted second proof supplied using the independent bounded exact-term Hom theorem, exact sheafification and K-injective localization; Section 0A8X"
+ },
  "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "A derived morphism from a bounded finite free complex of sheaves is locally a chain map and locally zero morphisms are null homotopic",
-   "results": "8 hits: CochainComplex.cm5b, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, CochainComplex.IsKInjective.nonempty_homotopy_zero, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, ComplexShape.QFactorsThroughHomotopy.areEqualizedByLocalization",
-   "date": "2026-10-14",
-   "verdict": "no exact match: generic complex and localization APIs, no etale local representation/null-homotopy theorem"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Homotopy\", \"Sheaf\"",
-   "results": "0 hits: ",
-   "date": "2026-10-14",
-   "verdict": "no exact match: generic complex and localization APIs, no etale local representation/null-homotopy theorem"
-  },
   {
    "tool": "grep",
    "query": "[Ss]heaf.*[Hh]omotopy|[Hh]omotopy.*[Ss]heaf|[Ss]trictly[Pp]erfect",
    "results": "1 hits: Mathlib/AlgebraicTopology/ModelCategory/BrownLemma.lean",
    "date": "2026-10-14",
-   "verdict": "no exact match: generic complex and localization APIs, no etale local representation/null-homotopy theorem"
+   "verdict": "no match: no local representation/null-homotopy theorem; K-projective results require a globally K-projective source, K-injective results supply only the target model"
   },
   {
    "tool": "leansearch",
-   "query": "A derived morphism from a bounded finite free complex of sheaves is locally a chain map and locally zero morphisms are null homotopic",
-   "results": "service unavailable: Internal Server Error; 0 hits obtained",
+   "query": "Etale local chain representatives and null homotopies for bounded complexes of finite free module sheaves",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale locally a derived morphism from a bounded finite free constant complex of module sheaves is a chain map and a derived zero chain map is null homotopic",
+   "results": "8 hits: Algebra.Etale.formallyEtale, AlgebraicGeometry.IsEtale.of_comp, Algebra.FormallyEtale.instFormallySmooth, AlgebraicGeometry.IsEtale.instFormallyUnramified, RingHom.formallyEtale_algebraMap, Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth, RingHom.etale_iff_formallyUnramified_and_smooth, CochainComplex.IsKProjective.nonempty_homotopy_zero",
+   "date": "2026-10-14",
+   "verdict": "no match: no local representation/null-homotopy theorem; K-projective results require a globally K-projective source, K-injective results supply only the target model"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Homotopy\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: no local representation/null-homotopy theorem; K-projective results require a globally K-projective source, K-injective results supply only the target model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finite rank free sheaves on a ringed site computes derived Hom locally by chain maps modulo chain homotopy",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, SheafOfModules.instAbelian, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, CategoryTheory.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoObjCochainComplexCompSingleFunctorOfNatOfHasExt",
+   "date": "2026-10-14",
+   "verdict": "no match: no local representation/null-homotopy theorem; K-projective results require a globally K-projective source, K-injective results supply only the target model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a perfect complex of sheaves, homotopy classes of chain maps are locally equal to morphisms in the derived category",
+   "results": "8 hits: ComplexShape.QFactorsThroughHomotopy.areEqualizedByLocalization, DerivedCategory.Q_map_eq_of_homotopy, DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso, DerivedCategory.right_fac, DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso, DerivedCategory.left_fac, HomologicalComplexUpToQuasiIso.Q_map_eq_of_homotopy, ComplexShape.quotient_isLocalization",
+   "date": "2026-10-14",
+   "verdict": "no whole-item match: localization homotopy equality and Ext cohomology presheaves do not give local finite-free representatives or local null-homotopies"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomologyPresheaf\"",
+   "results": "2 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor",
+   "date": "2026-10-14",
+   "verdict": "no whole-item match: localization homotopy equality and Ext cohomology presheaves do not give local finite-free representatives or local null-homotopies"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-finite-ring-derived-local-constancy",
   "by": "worker",
@@ -79,5 +201,54 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-finite-free-etale-local-actual",
+  "worker": "stage1",
+  "summary": "Proved both local assertions by the independent bounded exact-term internal Hom theorem, K-injective localization and local bijectivity after sheafification. Reused all ingredients; created no nodes. Kept statement and coefficients unchanged; checked small-site, finite-support, finite-free and unbounded-target hypotheses.",
+  "blueprint": "Realizes amplification proof (c), finite etale-origin local models: actual chain representatives and local detection of zero morphisms in the finite derived Hom calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-exact-term-hom-quasi-iso",
+    "why": "Generic finite-width Hom-complex theorem, with arbitrary targets; its independent exact-functor/stupid-tail argument supplies the local Hom calculation."
+   },
+   {
+    "node": "lem-sc-finite-free-internal-hom-exact-sequence",
+    "why": "Generic finite-free sheaf Hom exactness; no local models theorem of this unit supplies termwise Hom exactness."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic identification of a localized small etale site with the cover member small etale site."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic exact forgetful functor for module sheaves, used to compare module homology with abelian sheafification."
+   },
+   {
+    "node": "lem-weil-pbc-site-restriction-exact",
+    "why": "Generic exact restriction to a localized site, used to restrict the quasi-isomorphism, not to replace any unit proof step."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic unbounded resolution existence on small ringed sites, needed to represent the derived morphism in a fixed K-injective target."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "lem-sc-finite-free-internal-hom-exact-sequence",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-restriction-exact",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-f5d08cdf0",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-f5d08cdf0 (reviewer sub-agent of L); spot-checked: Read and checked the complete item, all six steps, cited statements, source passages, and chapter/unit route. Stacks 08FR supports both assertions; the independent bounded-Hom proof avoids circularity. Hypotheses, coefficient actions, exact restriction, and edge cases check out. No new nodes, duplicates, or repairs. Accepted six declared generic tool uses. Detailed findings written to review.md."
  }
 }
