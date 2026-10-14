@@ -12,38 +12,51 @@
  },
  "proof": [
   {
-   "text": "Substitute the hypothesis on `e`. Write L_f = derivedPullback f and\nR_f = schemeDerivedDirectImage f; composition of arrows below is written `≫`.\nPut j = (⊤ : Y.Opens).ι, N = M.restrict j, K = M[0], K' = N[0]. Let\nP = pullback p g have projections r = pullback.fst p g and s = pullback.snd p g.\nLet P' = pullback (j ≫ p) g have projections r' and s'. The universal property\nconstructs k : P' ≅ P with k.hom ≫ r = r' ≫ j and k.hom ≫ s = s': its forward\nmap is pullback.lift (r' ≫ j) s', and its inverse is pullback.lift (r ≫ j.inv) s.\nHere j.inv denotes Y.topIso.inv. Pullback projection extensionality and the two\ninverse identities for Y.topIso prove that these maps are inverse.\n\nLet a : L_j K ≅ K' be precisely the single restriction comparison in sourceIso.\nFor any f write q_f(V) = Scheme.picardTermwiseSingleMap f V. Tensor pullback\nalong the isomorphism k.hom is exact, so q_k on any module is invertible.\nThe canonical module isomorphism b from tensorPullbackObj k.hom\n(tensorPullbackObj r M) to tensorPullbackObj r' N is obtained by tensor-pullback\ncomposition along k.hom,r, transport across k.hom ≫ r = r' ≫ j, inverse\ncomposition along r',j, and tensorPullback r' of the canonical comparison\nfrom tensorPullbackObj j M to N. More explicitly, put\nδ(h,f) = Scheme.Modules.tensorPullbackCompositionIso h f (h ≫ f) rfl, directed from tensor pullback\nof h ≫ f to tensor pullback\nalong f followed by h. If ρ : tensorPullbackObj j M ≅ N is the canonical\nadjoint-uniqueness comparison to restriction used in a, then\n  b = δ(k.hom,r).inv.app M ≫ transport ≫ δ(r',j).hom.app M\n    ≫ (Scheme.Modules.tensorPullback r').map ρ.hom,\nwhere transport is along k.hom ≫ r = r' ≫ j. Thus a.hom is q_j(M) followed\nby single.map ρ.hom. All these comparisons are pinned to the\nsame tensor-pullback adjunctions. Define\n  T = (tensorPullbackObj r M)[0], T' = (tensorPullbackObj r' N)[0],\n  d : L_k T ≅ T' = asIso(q_k(tensorPullbackObj r M)) ≪≫ single.mapIso b.\nWrite C(h,f) for relativeMVComp h f, including equality transport when paths\nare identified. The coefficient-composition identity is\n  L_k(q_r(M)) ≫ d.hom =\n    C(k,r).hom.app K ≫ C(r',j).inv.app K ≫ L_r'(a.hom) ≫ q_r'(N).\nThe equality transport between the two C components uses k.hom ≫ r = r' ≫ j.\nTo verify this identity, apply Scheme.picardTermwiseSingleMap_composition to\n(k.hom,r) and (r',j). Its tensorPullbackCompositionIso and single-complex\ncomparison factors are exactly those defining b. Cancel the inverse factors,\nand use naturality of the single comparison for the tensor-to-restriction map.\nThe defining leftDerivedLift factorization in exists_derivedPullbackComposition\nensures that these are the pinned C comparisons, rather than arbitrary ones.\n\nDefine F : R_s T ≅ R_s' T' by composing R_s of the invertible unit\nT ≅ R_k L_k T, (relativeMVImageComp k.hom s).app (L_k T), transport across\nk.hom ≫ s = s', and R_s'.mapIso d. Invertibility of the unit follows from\nstandardSingleBaseChange_topRestriction_iso_pullback_unit k. Set t = F.symm.\n\nHere is the compatibility calculation before cancelling F. Put D = L_g R_p K.\nWrite B(r,s,p;K) for the transpose of schemeDerivedBaseChangeMap p s g r:\n  B(r,s,p;K) = C(s,g).hom.app (R_p K) ≫ C(r,p).inv.app (R_p K)\n    ≫ L_r((relativeMVAdj p).counit.app K),\nwith the pullback.condition transport between the two C components. Thus the\ntranspose of standardSingleBaseChangeMap p M g under relativeMVAdj s is\nB(r,s,p;K) ≫ q_r(M). Under relativeMVAdj s', the transpose of that map followed\nby F.hom is\n  C(k,s).inv.app D ≫ L_k(B(r,s,p;K)) ≫ L_k(q_r(M)) ≫ d.hom.\nThis follows by expanding F and the right-adjoint mate relativeMVImageComp:\nits mate formula converts the composite adjunction to relativeMVAdj s', and\nL_k of the unit followed by the k counit cancels by the left triangle identity.\n\nSubstitute the coefficient identity. The remaining prefix satisfies\n  C(k,s).inv.app D ≫ L_k(B(r,s,p;K)) ≫ C(k,r).hom.app K\n    ≫ C(r',j).inv.app K ≫ L_r'(a.hom)\n  = L_s'(L_g(e.hom)) ≫ B(r',s',j ≫ p;K').\nFor this equation, expand e as R_p(unit_j) followed by relativeMVImageComp j p\nand R_(j≫p)(a). Move a through the counit by counit naturality. Expand the\ncomposition counit using the right-adjoint mate defining relativeMVImageComp:\nthe counit for j ≫ p is C(j,p).inv followed by L_j of the p counit and then\nthe j counit (with the right-adjoint comparison on its source). Naturality moves\nthe inserted unit_j next to the j counit, where\n  L_j(unit_j.app K) ≫ counit_j.app (L_j K) = 𝟙 (L_j K)\ncancels it. The other mate cancellation is\n  unit_j.app (R_j V) ≫ R_j(counit_j.app V) = 𝟙 (R_j V).\nAssociativity and the identity laws in exists_derivedPullbackComposition\nidentify the remaining C paths using r ≫ p = s ≫ g, r' ≫ j ≫ p = s' ≫ g,\nand the two projection identities for k. These are the pinned composition\nlaws, the single-map composition identity, and the two adjunction triangle\nidentities; no comparison along g is inverted.\n\nAppending q_r'(N) shows equality of the two transposes under relativeMVAdj s'.\nThe adjunction hom equivalence is injective, hence\n  standardSingleBaseChangeMap p M g ≫ F.hom =\n    L_g(e.hom) ≫ standardSingleBaseChangeMap (j ≫ p) N g.\nCompose on the right with F.inv and cancel F.hom ≫ F.inv to get the claimed\nequation with t = F.symm. All constructions are functorial and remain valid\nfor empty schemes and zero modules.",
+   "text": "Substitute the canonical source comparison. Construct the apex isomorphism k by pullback lifts, using Y.topIso and its inverse. Verify both inverse and projection identities by pullback extensionality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the coefficient isomorphism b from tensor pullback composition, transport along the first projection identity and the tensor-to-restriction adjunction comparison. The single map along k is invertible. Compose it with single.mapIso b to define d.",
    "uses": [
+    "lem-pc-picard-single-map-iso-y3",
+    "def-pc-tensor-pullback-composition-iso",
+    "def-pc-single-complex-open-restriction-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct F from direct image of the invertible k-unit, the pinned direct-image composition, transport along the second projection identity, and direct image of d. Apply the general source-restriction unit mate identity, then postcompose with direct image of d. Coefficient coherence simplifies the inner coefficient map. Naturality of the base-change mate in the source coefficient identifies the result with pullback of the canonical source isomorphism followed by the restricted standard base-change map. Thus beta followed by F.hom is that composite. Cancel F using its inverse and return F.symm.",
+   "uses": [
+    "lem-pc-standard-single-base-change-top-restriction-iso-pullback-unit",
+    "lem-pc-derived-source-restriction-unit-naturality-y3",
+    "lem-pc-top-restriction-coefficient-coherence-y3",
     "def-pc-standard-single-base-change-top-restriction-source-iso",
     "def-pc-relative-mv-maps",
-    "def-pc-single-complex-open-restriction-data",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-sc-picard-termwise-single-map-composition",
     "def-pc-standard-single-base-change-map",
-    "def-pc-derived-base-change-map",
-    "lem-pc-standard-single-base-change-top-restriction-iso-pullback-unit",
-    "def-pc-tensor-pullback-composition-iso"
+    "def-pc-derived-base-change-map"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pc-picard-single-map-iso-y3",
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-standard-single-base-change-top-restriction-iso-pullback-unit",
+  "lem-pc-derived-source-restriction-unit-naturality-y3",
+  "lem-pc-top-restriction-coefficient-coherence-y3",
   "def-pc-standard-single-base-change-top-restriction-source-iso",
   "def-pc-relative-mv-maps",
-  "def-pc-single-complex-open-restriction-data",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-sc-picard-termwise-single-map-composition",
   "def-pc-standard-single-base-change-map",
   "def-pc-derived-base-change-map",
-  "lem-pc-standard-single-base-change-top-restriction-iso-pullback-unit",
-  "def-pc-tensor-pullback-composition-iso"
+  "def-pc-single-complex-open-restriction-data"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "G1",
+  "group": "Y3",
   "date": "2026-10-14",
   "document": "Stacks Project",
-  "place": "Tags 08HY and 0D5S"
+  "place": "Tags 08HY, 0D5S and 08DW"
  },
  "mathlib_searches": [
   {
@@ -115,12 +128,12 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-c775f",
-  "group": "G1",
+  "reviewer": "X-a498c",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261014T022543-L-4044816",
+  "landing": "20261014T063824-L-2816066",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures and proofs match all four nodes; both modules and direct importer StandardSingleBaseChangeTopRestriction compile cleanly; hash-verified original parent reproduces the reported failure; two-line adaptation is necessary and preserves its signature; axioms and documented remaining sorry comply."
+  "note": "independent Codex review: Delivered signatures, constructions, proofs and remaining coefficient-coherence statement match their nodes; all four modules compile cleanly, and axiom checks show only permitted axioms plus documented sorryAx."
  },
  "statement_change": {
   "date": "2026-10-14",
