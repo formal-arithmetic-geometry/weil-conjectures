@@ -14151,3 +14151,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:14 L: returned deliver/T4/Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations (reviewer RETURN: (reviewer X-efb69, head efb69a130) A (mechanical finding d): In coord/changes/fieldLinearComparisonProofScopeT4.md, unde)
 
 - 09:16 L: batch 20261014T010832 dependency take-out
+- 01:17 L: returned deliver/B3/Sheaf.AlgebraicGeometry.Morphisms.FixedOrbitProductEquiv (reviewer RETURN: (reviewer X-00a8b, head 00a8bcbb8) D3/AGENTS §5: the new sorry declarations' docstrings do not name their source or prov)
