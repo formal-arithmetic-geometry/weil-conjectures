@@ -1,0 +1,105 @@
+{
+ "id": "new-p4-quotient-resolution-tensor-comparison",
+ "kind": "statement",
+ "title": "Tensor comparison of quotient projective resolutions",
+ "statement": "theorem exists_quotient_resolution_tensor_comparison\n    (A C : Type u) [CommRing A] [CommRing C]\n    (I : Ideal A) (J : Ideal C) (φ : A →+* C)\n    (hI : ∀ x ∈ I, φ x ∈ J)\n    (P : ProjectiveResolution (ModuleCat.of A (A ⧸ I)))\n    (R : ProjectiveResolution (ModuleCat.of C (C ⧸ J))) :\n          let TA := (tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex\n            (.down ℕ)\n          let TC := (tensorRight (ModuleCat.of C (C ⧸ J))).mapHomologicalComplex\n            (.down ℕ)\n          ∃ (ψ : (A ⧸ I) →+* (C ⧸ J))\n            (a : P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n              (.down ℕ)).obj R.complex)\n            (k : TA.obj P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n              (.down ℕ)).obj (TC.obj R.complex)),\n            (∀ x : A, ψ (Ideal.Quotient.mk I x) = Ideal.Quotient.mk J (φ x)) ∧\n            (∀ x : P.complex.X 0, R.π.f 0 (a.f 0 x) = ψ (P.π.f 0 x)) ∧\n            (∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I),\n              k.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a.f j x) ⊗ₜ[C] (ψ y))",
+ "stmt_deps": [],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00LS",
+  "place": "comparison of augmented projective resolutions"
+ },
+ "proof": [
+  {
+   "text": "Construct the required comparison using the stated resolution and tensor constructions; verify each displayed equation by the defining universal properties.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "P4",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/00LS",
+  "place": "comparison of resolutions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective resolution lift augmented chain map",
+   "results": "CategoryTheory.ProjectiveResolution.lift",
+   "date": "2026-10-14",
+   "verdict": "supporting declaration found"
+  },
+  {
+   "tool": "loogle",
+   "query": "ProjectiveResolution.lift",
+   "results": "ProjectiveResolution.lift",
+   "date": "2026-10-14",
+   "verdict": "supporting declaration found"
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectiveResolution.lift TensorProduct.map",
+   "results": "Mathlib resolution and tensor map APIs",
+   "date": "2026-10-14",
+   "verdict": "supporting APIs found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor comparison of quotient projective resolutions",
+   "results": "No exact theorem returned by LeanSearch.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfTorChosenResolutionCharts",
+  "date": "2026-10-14",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-q1-self-tor-chosen-resolution-charts",
+   "place": "chosen resolution comparison step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QuotientResolutionTensorComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuotientResolutionTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.exists_quotient_resolution_tensor_comparison",
+  "statement": "theorem exists_quotient_resolution_tensor_comparison\n    (A C : Type u) [CommRing A] [CommRing C]\n    (I : Ideal A) (J : Ideal C) (φ : A →+* C)\n    (hI : ∀ x ∈ I, φ x ∈ J)\n    (P : ProjectiveResolution (ModuleCat.of A (A ⧸ I)))\n    (R : ProjectiveResolution (ModuleCat.of C (C ⧸ J))) :\n          let TA := (tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex\n            (.down ℕ)\n          let TC := (tensorRight (ModuleCat.of C (C ⧸ J))).mapHomologicalComplex\n            (.down ℕ)\n          ∃ (ψ : (A ⧸ I) →+* (C ⧸ J))\n            (a : P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n              (.down ℕ)).obj R.complex)\n            (k : TA.obj P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n              (.down ℕ)).obj (TC.obj R.complex)),\n            (∀ x : A, ψ (Ideal.Quotient.mk I x) = Ideal.Quotient.mk J (φ x)) ∧\n            (∀ x : P.complex.X 0, R.π.f 0 (a.f 0 x) = ψ (P.π.f 0 x)) ∧\n            (∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I),\n              k.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a.f j x) ⊗ₜ[C] (ψ y))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261014T020516-L-3813528",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261014T020516-L-3813528",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

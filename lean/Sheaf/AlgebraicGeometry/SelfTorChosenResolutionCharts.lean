@@ -13,8 +13,8 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 
 public import Sheaf.AlgebraicGeometry.SelfTorAffineSection
 
-import Sheaf.AlgebraicGeometry.AffineQuotientResolutionSheafification
-import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
+import Sheaf.AlgebraicGeometry.SelfTorAugmentedResolutionCharts
+import Sheaf.AlgebraicGeometry.QuotientResolutionTensorComparison
 
 /-! # Affine derived-Tor charts from chosen resolution comparisons
 
@@ -109,6 +109,15 @@ theorem exists_selfTor_chosen_resolution_charts
                 (((T U).obj _).val.map (homOfLE (i.preimage_mono h)).op
                   (selfTorAffineSection i U _ x)) =
               (t V).hom.val.app (op (Over.mk (𝟙 (i ⁻¹ᵁ V.1))))
-                (selfTorAffineSection i V _ (q x)) := by sorry
+                (selfTorAffineSection i V _ (q x))  := by
+  obtain ⟨t, ht⟩ := exists_selfTor_augmented_resolution_charts.{u, w} i n
+  refine ⟨t, ?_⟩
+  intro V U h hbasic
+  obtain ⟨ψ, a, k, hψ, ha, hk⟩ := exists_quotient_resolution_tensor_comparison
+    (Γ(Y, U.1) : Type u) (Γ(Y, V.1) : Type u)
+    (i.ker.ideal U) (i.ker.ideal V) (Y.presheaf.map (homOfLE h).op).hom
+    (fun x hx ↦ i.ker.ideal_le_comap_ideal h hx)
+    (projectiveResolution _) (projectiveResolution _)
+  exact ⟨ψ, a, k, hψ, ha, hk, ht V U h hbasic ψ a k hψ ha hk⟩
 
 end AlgebraicGeometry

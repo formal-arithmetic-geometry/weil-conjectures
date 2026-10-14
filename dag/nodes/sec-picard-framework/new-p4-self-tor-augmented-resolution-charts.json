@@ -1,0 +1,105 @@
+{
+ "id": "new-p4-self-tor-augmented-resolution-charts",
+ "kind": "statement",
+ "title": "Augmented geometric self-Tor chart comparison",
+ "statement": "theorem exists_selfTor_augmented_resolution_charts\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (n : ℕ) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let Q := (Scheme.Modules.tensorPullback i).obj\n      ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj\n          (S.obj B ⊗ S.obj B))\n    let T := fun U : Y.affineOpens ↦\n      tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙\n        Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i\n    ∃ t : ∀ U : Y.affineOpens,\n        ((T U).obj _).over (i ⁻¹ᵁ U.1) ≅ Q.over (i ⁻¹ᵁ U.1),\n      ∀ (V U : Y.affineOpens) (h : V.1 ≤ U.1)\n        (_hbasic : ∃ f : Γ(Y, U.1), Y.basicOpen f = V.1),\n          let A := (Γ(Y, U.1) : Type u)\n          let C := (Γ(Y, V.1) : Type u)\n          let I := i.ker.ideal U\n          let J := i.ker.ideal V\n          let φ := (Y.presheaf.map (homOfLE h).op).hom\n          let P := projectiveResolution (ModuleCat.of A (A ⧸ I))\n          let R := projectiveResolution (ModuleCat.of C (C ⧸ J))\n          let TA := (tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex\n            (.down ℕ)\n          let TC := (tensorRight (ModuleCat.of C (C ⧸ J))).mapHomologicalComplex\n            (.down ℕ)\n          ∀ (ψ : (A ⧸ I) →+* (C ⧸ J))\n            (a : P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n              (.down ℕ)).obj R.complex)\n            (k : TA.obj P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n              (.down ℕ)).obj (TC.obj R.complex)),\n            (∀ x : A, ψ (Ideal.Quotient.mk I x) = Ideal.Quotient.mk J (φ x)) →\n            (∀ x : P.complex.X 0, R.π.f 0 (a.f 0 x) = ψ (P.π.f 0 x)) →\n            (∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I),\n              k.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a.f j x) ⊗ₜ[C] (ψ y)) →\n            let e := ((TC.obj R.complex).sc n).mapHomologyIso\n              (ModuleCat.restrictScalars φ)\n            let q := fun x ↦\n              (R.isoLeftDerivedObj (tensorRight (ModuleCat.of C (C ⧸ J))) n).inv\n                (e.hom (HomologicalComplex.homologyMap k n\n                  ((P.isoLeftDerivedObj (tensorRight (ModuleCat.of A (A ⧸ I))) n).hom x)))\n          ∀ x,\n            (t U).hom.val.app (op (Over.mk (homOfLE (i.preimage_mono h))))\n                (((T U).obj _).val.map (homOfLE (i.preimage_mono h)).op\n                  (selfTorAffineSection i U _ x)) =\n              (t V).hom.val.app (op (Over.mk (𝟙 (i ⁻¹ᵁ V.1))))\n                (selfTorAffineSection i V _ (q x))",
+ "stmt_deps": [],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YH",
+  "place": "comparison of augmented projective resolutions"
+ },
+ "proof": [
+  {
+   "text": "Construct the required comparison using the stated resolution and tensor constructions; verify each displayed equation by the defining universal properties.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "P4",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/06YH",
+  "place": "comparison of resolutions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective resolution lift augmented chain map",
+   "results": "CategoryTheory.ProjectiveResolution.lift",
+   "date": "2026-10-14",
+   "verdict": "supporting declaration found"
+  },
+  {
+   "tool": "loogle",
+   "query": "ProjectiveResolution.lift",
+   "results": "ProjectiveResolution.lift",
+   "date": "2026-10-14",
+   "verdict": "supporting declaration found"
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectiveResolution.lift TensorProduct.map",
+   "results": "Mathlib resolution and tensor map APIs",
+   "date": "2026-10-14",
+   "verdict": "supporting APIs found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Augmented geometric self-Tor chart comparison",
+   "results": "No exact theorem returned by LeanSearch.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfTorChosenResolutionCharts",
+  "date": "2026-10-14",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-q1-self-tor-chosen-resolution-charts",
+   "place": "chosen resolution comparison step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SelfTorAugmentedResolutionCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/SelfTorAugmentedResolutionCharts.lean",
+  "declaration": "AlgebraicGeometry.exists_selfTor_augmented_resolution_charts",
+  "statement": "theorem exists_selfTor_augmented_resolution_charts\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (n : ℕ) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let Q := (Scheme.Modules.tensorPullback i).obj\n      ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj\n          (S.obj B ⊗ S.obj B))\n    let T := fun U : Y.affineOpens ↦\n      tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙\n        Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i\n    ∃ t : ∀ U : Y.affineOpens,\n        ((T U).obj _).over (i ⁻¹ᵁ U.1) ≅ Q.over (i ⁻¹ᵁ U.1),\n      ∀ (V U : Y.affineOpens) (h : V.1 ≤ U.1)\n        (_hbasic : ∃ f : Γ(Y, U.1), Y.basicOpen f = V.1),\n          let A := (Γ(Y, U.1) : Type u)\n          let C := (Γ(Y, V.1) : Type u)\n          let I := i.ker.ideal U\n          let J := i.ker.ideal V\n          let φ := (Y.presheaf.map (homOfLE h).op).hom\n          let P := projectiveResolution (ModuleCat.of A (A ⧸ I))\n          let R := projectiveResolution (ModuleCat.of C (C ⧸ J))\n          let TA := (tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex\n            (.down ℕ)\n          let TC := (tensorRight (ModuleCat.of C (C ⧸ J))).mapHomologicalComplex\n            (.down ℕ)\n          ∀ (ψ : (A ⧸ I) →+* (C ⧸ J))\n            (a : P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n              (.down ℕ)).obj R.complex)\n            (k : TA.obj P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n              (.down ℕ)).obj (TC.obj R.complex)),\n            (∀ x : A, ψ (Ideal.Quotient.mk I x) = Ideal.Quotient.mk J (φ x)) →\n            (∀ x : P.complex.X 0, R.π.f 0 (a.f 0 x) = ψ (P.π.f 0 x)) →\n            (∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I),\n              k.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a.f j x) ⊗ₜ[C] (ψ y)) →\n            let e := ((TC.obj R.complex).sc n).mapHomologyIso\n              (ModuleCat.restrictScalars φ)\n            let q := fun x ↦\n              (R.isoLeftDerivedObj (tensorRight (ModuleCat.of C (C ⧸ J))) n).inv\n                (e.hom (HomologicalComplex.homologyMap k n\n                  ((P.isoLeftDerivedObj (tensorRight (ModuleCat.of A (A ⧸ I))) n).hom x)))\n          ∀ x,\n            (t U).hom.val.app (op (Over.mk (homOfLE (i.preimage_mono h))))\n                (((T U).obj _).val.map (homOfLE (i.preimage_mono h)).op\n                  (selfTorAffineSection i U _ x)) =\n              (t V).hom.val.app (op (Over.mk (𝟙 (i ⁻¹ᵁ V.1))))\n                (selfTorAffineSection i V _ (q x))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261014T020516-L-3813528",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261014T020516-L-3813528",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
