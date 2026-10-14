@@ -25,48 +25,186 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a sheaf $F$ and $U\\in\\mathcal S$, sheafification adjunction followed by Yoneda gives $\\operatorname{Hom}(h_U^\\#,F)=F(U)$ naturally in both arguments: a map is sent to the image of the unit section of $h_U$. For a set-indexed family $(A_i)$, let $P(U)=\\coprod_i A_i(U)$, with sectionwise restrictions. Its sheafification is the coproduct in sheaves: maps $P^\\#\\to F$ are, by the adjunction and the presheaf coproduct universal property, precisely families of maps $A_i\\to F$. By local sections of sheafification every section of $P^\\#$ locally comes from one of the $A_i$. Hence $\\coprod_i A_i\\to A$ is epi iff every section of $A$ locally lifts to some $A_i$: use the epi/local-surjectivity criterion and then refine its local lifts into $P^\\#$ using the preceding local representation. This includes the empty family, where local lifting may use an empty covering.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-weil-pbc-presheaf-colimits-sectionwise",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "03A1 proof; equation map-representable-into-sheaf; 00WK and 00WN"
+   }
+  },
+  {
+   "text": "The epimorphic families satisfy the site axioms. A singleton isomorphism lifts every section. Given $\\{A_i\\to A\\}$ and $\\{B_{ij}\\to A_i\\}$, first lift a section of $A$ locally to some $A_i$, then refine each such open by a covering on which this lift comes from a $B_{ij}$; composition of coverings on $\\mathcal S$ gives local lifting into the composite family. Given $B\\to A$, a section $b\\in B(U)$ locally has an $A_i$-lift $a_i$ of its image; the pair $(a_i,b)$ is a section of $A_i\\times_A B$ by sectionwise limits. These pullbacks belong to $\\mathcal E$ by hypothesis. Step 1 proves the composite and pulled-back families are epimorphic. Hom-sets in $\\mathcal E$ are sets of natural transformations between sheaves on a small site, so its set of objects makes its arrow collection a set.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "03A1 proof, omitted verification of the site axioms, expanded"
+   }
+  },
+  {
+   "text": "Apply the set-of-coverings theorem to this class of epimorphic families. In addition to any prescribed set, include in $\\operatorname{Cov}_0$ all images of coverings of $\\mathcal S$ under $v(U)=h_U^\\#$, and for each $A\\in\\mathcal E$ the family of all maps $h_U^\\#\\to A$, indexed by pairs $(U,s\\in A(U))$. These are sets because both sites have sets of objects and Hom-sets; the images of $\\mathcal S$ coverings are epi, since two maps $h_U^\\#\\to F$ agreeing on all $h_{U_i}^\\#$ correspond to sections of $F(U)$ agreeing on a cover and hence equal. The all-sections family is epi because each section $s\\in A(U)$ is the image of the unit section under its associated map. Thus all added families are legitimate. The selected set satisfies the site axioms and represents every epimorphic family up to equality of arrow supports. For two occurrences of the same arrow $B\\to A$, the matching equation on $B\\times_A B$, pulled back along the diagonal $B\\to B\\times_A B$, forces the two assigned sections to be equal. Conversely a matching assignment to the arrow support pulls back to a matching assignment on any indexing family. Thus repeating an arrow does not alter the matching-family condition, so sheaves for this set are exactly sheaves for all epimorphic families. Its associated topology is the topology specified in the statement.",
+   "uses": [
+    "lem-weil-pbc-small-set-of-covering-families",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "000X (sets-lemma-coverings-site), (1)-(3), applied to the coverings of 03A1"
+   }
+  },
+  {
+   "text": "For any $F\\in\\operatorname{Sh}(\\mathcal S)$, matching maps $t_i:A_i\\to F$ on an epimorphic family define a map $t:A\\to F$ as follows. For $a\\in A(U)$ choose local lifts $a_k\\in A_{i(k)}(U_k)$ as in step 1 and glue $t_{i(k)}(a_k)\\in F(U_k)$. On overlaps the pair of lifts lies in $A_{i(k)}\\times_A A_{i(l)}$, so the matching hypothesis gives equality there. For a second choice of lifts $a_l^\\prime\\in A_{i^\\prime(l)}(U_l^\\prime)$, pull both coverings back to $U_k\\times_U U_l^\\prime$. The two lifts there have image $a$, hence give a section of $A_{i(k)}\\times_A A_{i^\\prime(l)}$; the matching equation makes their images in $F$ equal. Composition and pullback of coverings give a common covering of $U$, so separatedness makes the two glued sections equal. Restricting the chosen local lifts proves that this assignment commutes with restriction in $\\mathcal S$, hence is a sheaf map. It restricts to $t_i$ and is unique because every section locally lifts. Thus $NF$ is a sheaf on $\\mathcal E$. Taking $F=A\\in\\mathcal E$, fullness gives $N(A)(B)=\\operatorname{Hom}_{\\mathcal E}(B,A)=h_A(B)$, proving subcanonicity.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "03A1(2), Hom equalizer paragraph; local descent argument expanded"
+   }
+  },
+  {
+   "text": "The functor $v:\\mathcal S\\to\\mathcal E$ is continuous. Step 3 ensured its images of coverings are coverings. Representable presheaves preserve every existing fibre product: on $W$ this is the universal-property bijection $\\operatorname{Hom}(W,T\\times_U U_i)=\\operatorname{Hom}(W,T)\\times_{\\operatorname{Hom}(W,U)}\\operatorname{Hom}(W,U_i)$. Sheafification preserves these fibre products by its finite-limit theorem. Hence $v(T\\times_U U_i)\\cong v(T)\\times_{v(U)}v(U_i)$ for every covering arrow and $T\\to U$; these are exactly the continuity requirements. We assert preservation only of fibre products that exist in $\\mathcal S$, not of arbitrary finite limits on that site.",
+   "uses": [
+    "lem-weil-pbc-sheafification-sets-exact",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "03A1 proof of (3), continuity; 00WJ"
+   }
+  },
+  {
+   "text": "To check cocontinuity, take an epimorphic covering $\\{A_i\\to v(U)\\}$ of $v(U)$. Apply local lifting from step 1 to the unit section $\\eta(\\mathrm{id}_U)\\in h_U^\\#(U)$. Obtain a covering $\\{f_j:U_j\\to U\\}$ and $a_j\\in A_{i(j)}(U_j)$ mapping to its restriction. The bijection of step 1 makes $a_j$ a sheaf map $v(U_j)\\to A_{i(j)}$. Its composite to $v(U)$ equals $v(f_j)$, since their corresponding sections are both $\\eta(f_j)$. Thus the image of this covering refines the given one, exactly cocontinuity.",
+   "uses": [
+    "def-weil-pbc-special-cocontinuous-functor",
+    "def-weil-pbc-sheafification",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "03A1 proof of (3), cocontinuity from 00WN"
+   }
+  },
+  {
+   "text": "If $a,b:U'\\to U$ have $v(a)=v(b)$, evaluate at the unit section of $v(U')$: their images $\\eta(a),\\eta(b)$ in $h_U^\\#(U')$ agree. Local equality for the sheafification unit gives a covering $\\{U'_j\\to U'\\}$ on which $a,b$ agree. If $c:v(U')\\to v(U)$ is any sheaf map, the bijection in step 1 gives its section in $h_U^\\#(U')$. Local representation gives a covering $f_j:U'_j\\to U'$ and actual arrows $c_j:U'_j\\to U$ representing its restrictions. Naturality of that bijection gives $v(c_j)=c\\circ v(f_j)$. These establish respectively local faithfulness and local fullness, with no assumption that $\\mathcal S$ is subcanonical.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sheafification",
+    "lem-galois-yoneda-hom-bijection",
+    "def-weil-pbc-special-cocontinuous-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "03A1 proof of (3), verification of conditions (3) and (4) of 03A0"
+   }
+  },
+  {
+   "text": "For every $A\\in\\mathcal E$, the all-sections family $\\{v(U)\\to A\\}_{(U,s)}$ of step 3 is a chosen covering. Hence $v$ is cover-dense. Steps 5-7 verify all remaining conditions in the definition of special cocontinuity. The special-cocontinuous comparison theorem applies to these two small sites and gives an equivalence $g:\\operatorname{Sh}(\\mathcal S)\\to\\operatorname{Sh}(\\mathcal E)$ with $g^{-1}H(U)=H(v(U))$. Since $h_A$ is a sheaf by step 4, this gives $g^{-1}h_A(U)=\\operatorname{Hom}(v(U),A)=A(U)$ by step 1, naturally in $U$ and in $A$. Thus $g^{-1}h_A\\cong A$.",
+   "uses": [
+    "def-weil-pbc-special-cocontinuous-functor",
+    "lem-weil-pbc-special-cocontinuous-sheaf-equivalence",
+    "def-weil-pbc-sheafification",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "03A1(3)-(4), applying 03A0; Hom calculation in proof of (4)"
+   }
+  },
+  {
+   "text": "Finally use the explicit direct-image formula for a continuous cocontinuous functor. An element of $(g_*F)(A)$ is a family $s_{U,\\psi}\\in F(U)$, where $\\psi:v(U)\\to A$, satisfying $F(f)(s_{U,\\psi})=s_{V,\\psi\\circ v(f)}$ for every $f:V\\to U$. By step 1 the maps $\\psi$ correspond to sections $a\\in A(U)$, and this condition is exactly naturality of the functions $A(U)\\to F(U)$, $a\\mapsto s_{U,\\psi_a}$. Thus these families are precisely maps $A\\to F$. Restriction along $B\\to A$ becomes precomposition of such maps, and maps in $F$ become postcomposition. This identifies $g_*$ naturally with the functor $N$ stated in the item, so $N$ is an equivalence of topoi. Step 4 already identifies $N(A)=h_A$, and step 3 proves the asserted exact description of the covering families up to the representative convention.",
+   "uses": [
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "def-weil-pbc-sheafification",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "03A1 Hom calculation in proof of (5); 00XO and 00XR direct-image formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-presheaf-colimits-sectionwise",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-small-set-of-covering-families",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "def-weil-pbc-special-cocontinuous-functor",
+  "lem-weil-pbc-special-cocontinuous-sheaf-equivalence",
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "03A1 (sites-lemma-special-equivalence), proof; omitted site axioms expanded and 000X applied"
+ },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "A small full subcategory of sheaves containing all sheafified representables and closed under pullbacks presents the same topos via Hom sheaves with epimorphic covers",
-   "results": "{\"t\": \"2026-10-14T01:21:18Z\", \"tool\": \"leanfinder\", \"query\": \"A small full subcategory of sheaves containing all sheafified representables and closed under pullbacks presents the same topos via Hom sheaves with epimorphic covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Subcanonical\", \"CategoryTheory.GrothendieckTopology.instSubcanonicalCanonicalTopology\", \"CategoryTheory.coherentTopology.subcanonical\", \"CategoryTheory.Sheaf.canonicalTopology\", \"CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall\", \"CategoryTheory.GrothendieckTopology.W_eq_W_range_sheafToPresheaf_obj\", \"CategoryTheory.Sheaf.isSheaf_of_isRepresentable\", \"CategoryTheory.Presieve.isSheaf_pretopology\"], \"digest\": \"d960f951e5397c5e\"}",
-   "date": "2026-10-14",
-   "verdict": "no match: canonical topology and dense-subsite comparison APIs require additional constructions and density hypotheses, not an exact or one-line specialization of this sheaf-subcategory assertion"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"sheaf\", \"Equivalence\"",
-   "results": "{\"t\": \"2026-10-14T01:21:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheaf\\\", \\\"Equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.sheafBotEquivalence\", \"CategoryTheory.sheafBotEquivalence_functor\", \"CategoryTheory.sheafBotEquivalence_inverse_obj_obj\", \"CategoryTheory.sheafBotEquivalence_inverse_map_hom\", \"CategoryTheory.sheafBotEquivalence_unitIso\", \"CategoryTheory.sheafBotEquivalence_counitIso\", \"CategoryTheory.Functor.IsDenseSubsite.hasWeakSheafify_of_isEquivalence\", \"CategoryTheory.Functor.IsDenseSubsite.hasSheafify_of_isEquivalence\"], \"digest\": \"a3e9583a7ccd9622\"}",
-   "date": "2026-10-14",
-   "verdict": "no match: canonical topology and dense-subsite comparison APIs require additional constructions and density hypotheses, not an exact or one-line specialization of this sheaf-subcategory assertion"
-  },
-  {
    "tool": "grep",
-   "query": "special.*equivalence|full.*subcategory|sheafHom|restricted.*yoneda",
-   "results": "{\"t\": \"2026-10-14T01:21:32Z\", \"tool\": \"grep\", \"query\": \"special.*equivalence|full.*subcategory|sheafHom|restricted.*yoneda\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Basic.lean\", \"Mathlib/CategoryTheory/Sites/Point/Over.lean\", \"Mathlib/CategoryTheory/Sites/Subsheaf.lean\"], \"digest\": \"6168f2d9961988b3\"}",
+   "query": "sheafInducedTopologyEquivOfIsCoverDense|IsDenseSubsite|canonicalTopology",
+   "results": "{\"t\": \"2026-10-14T03:03:03Z\", \"tool\": \"grep\", \"query\": \"sheafInducedTopologyEquivOfIsCoverDense|IsDenseSubsite|canonicalTopology\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean\"], \"digest\": \"dc08568a883d710d\"}",
    "date": "2026-10-14",
-   "verdict": "no match: canonical topology and dense-subsite comparison APIs require additional constructions and density hypotheses, not an exact or one-line specialization of this sheaf-subcategory assertion"
+   "verdict": "no match: canonical and dense-subsite equivalences require constructing the induced topology, local fullness/faithfulness and density; none directly states this sheaf-subcategory presentation or specializes to it in one line"
   },
   {
    "tool": "leansearch",
-   "query": "A full subcategory of a sheaf topos containing sheafified representables and closed under pullbacks is an equivalent site with epimorphic covers",
-   "results": "{\"t\": \"2026-10-14T01:21:33Z\", \"tool\": \"leansearch\", \"query\": \"A full subcategory of a sheaf topos containing sheafified representables and closed under pullbacks is an equivalent site with epimorphic covers\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "Restricted Yoneda on a small pullback closed full subcategory containing sheafified representables is an equivalence of sheaf topoi",
+   "results": "{\"t\": \"2026-10-14T03:03:03Z\", \"tool\": \"leansearch\", \"query\": \"Restricted Yoneda on a small pullback closed full subcategory containing sheafified representables is an equivalence of sheaf topoi\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-14",
    "verdict": "unavailable"
   },
   {
    "tool": "leanfinder",
-   "query": "The restricted Yoneda functor from a Grothendieck topos to sheaves on a small generating subcategory with the induced canonical topology is an equivalence",
-   "results": "{\"t\": \"2026-10-14T01:21:33Z\", \"tool\": \"leanfinder\", \"query\": \"The restricted Yoneda functor from a Grothendieck topos to sheaves on a small generating subcategory with the induced canonical topology is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.typeEquiv\", \"CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense\", \"CategoryTheory.overEquivPresheafCostructuredArrow\", \"CategoryTheory.GrothendieckTopology.uliftYonedaEquiv\", \"CategoryTheory.GrothendieckTopology.yonedaULiftEquiv\", \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor\", \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv\", \"CategoryTheory.GrothendieckTopology.yonedaEquiv\"], \"digest\": \"1b362141d787e80e\"}",
+   "query": "A small full subcategory of a sheaf topos containing sheafified representables and closed under fibre products presents the topos by restricted Yoneda and epimorphic coverings",
+   "results": "{\"t\": \"2026-10-14T03:03:03Z\", \"tool\": \"leanfinder\", \"query\": \"A small full subcategory of a sheaf topos containing sheafified representables and closed under fibre products presents the topos by restricted Yoneda and epimorphic coverings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Subcanonical\", \"CategoryTheory.Sheaf.isSheaf_of_isRepresentable\", \"CategoryTheory.Sheaf.canonicalTopology\", \"CategoryTheory.GrothendieckTopology.instSubcanonicalCanonicalTopology\", \"CategoryTheory.coherentTopology.subcanonical\", \"CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall\", \"CategoryTheory.GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable\", \"CategoryTheory.GrothendieckTopology.W_eq_W_range_sheafToPresheaf_obj\"], \"digest\": \"a36ba587fbaed1d7\"}",
    "date": "2026-10-14",
-   "verdict": "no match: canonical topology and dense-subsite comparison APIs require additional constructions and density hypotheses, not an exact or one-line specialization of this sheaf-subcategory assertion"
+   "verdict": "no match: canonical and dense-subsite equivalences require constructing the induced topology, local fullness/faithfulness and density; none directly states this sheaf-subcategory presentation or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheaf\", \"Equivalence\"",
+   "results": "{\"t\": \"2026-10-14T03:03:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheaf\\\", \\\"Equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.sheafBotEquivalence\", \"CategoryTheory.sheafBotEquivalence_functor\", \"CategoryTheory.sheafBotEquivalence_inverse_obj_obj\", \"CategoryTheory.sheafBotEquivalence_inverse_map_hom\", \"CategoryTheory.sheafBotEquivalence_unitIso\", \"CategoryTheory.sheafBotEquivalence_counitIso\", \"CategoryTheory.Functor.IsDenseSubsite.hasWeakSheafify_of_isEquivalence\", \"CategoryTheory.Functor.IsDenseSubsite.hasSheafify_of_isEquivalence\"], \"digest\": \"a3e9583a7ccd9622\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: canonical and dense-subsite equivalences require constructing the induced topology, local fullness/faithfulness and density; none directly states this sheaf-subcategory presentation or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricted Yoneda from a Grothendieck topos to sheaves on a small generating subcategory with induced canonical topology is an equivalence",
+   "results": "{\"t\": \"2026-10-14T03:03:16Z\", \"tool\": \"leanfinder\", \"query\": \"Restricted Yoneda from a Grothendieck topos to sheaves on a small generating subcategory with induced canonical topology is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.typeEquiv\", \"CategoryTheory.GrothendieckTopology.uliftYonedaEquiv\", \"CategoryTheory.GrothendieckTopology.yonedaULiftEquiv\", \"CategoryTheory.overEquivPresheafCostructuredArrow\", \"CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense\", \"CategoryTheory.GrothendieckTopology.yonedaEquiv\", \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv\", \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor\"], \"digest\": \"fe3f0c96b6550ad5\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: canonical and dense-subsite equivalences require constructing the induced topology, local fullness/faithfulness and density; none directly states this sheaf-subcategory presentation or specializes to it in one line"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-ringed-topos-site-presentation",
   "by": "worker",
@@ -82,5 +220,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-sheaf-subcategory-comparison",
+  "worker": "stage1",
+  "summary": "Verified 03A1 against the source, expanded its omitted site-axiom argument, checked all five comparison hypotheses, identified the specified Hom functor with the actual direct image, and isolated only the general representative-coverings size lemma 000X. Reused existing local sheafification and comparison nodes. No statement correction needed.",
+  "blueprint": "Detailed form, first strict-tower pullback functor: reduction to finite-limit sites in the proof of flatness of pulled-back terms (05VD, opening paragraph). Site-of-sheaves comparison used to make the finite-limit replacements."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-f5d6f536a",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-f5d6f536a (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and cited statements; checked Stacks 03A1, 03A0, 000X and supporting sources. Comparison hypotheses, direct-image Hom formula, empty covers and repeated arrows check out. Corrected creation metadata and step 2’s elementary flag. Accepted local-sheafification tool use; no new cycle or duplicate. Details in review.md and corrected JSON under fixes/.; 2 file(s) fixed by the reviewer"
  }
 }
