@@ -14742,3 +14742,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 16:16 L: batch 20261014T081306 dependency take-out
 - 08:19 L: merged deliver/N4/Sheaf.AlgebraicGeometry.RawModuleAbelianHomTargetFormula (stage 3; reviewer PASS; first push; landing 20261014T081959-L-3956679 (interface); batch 20261014T081956; modules 2; new nodes 1)
+- 08:20 L: returned deliver/D4/Sheaf.Algebra.Homology.AffineTildeDerivedTensorHomologyCoordinates (reviewer RETURN: (reviewer X-02838, head 02838eb56) the reviewer passed it, but the landing failed: mport_prune_check.py for lean/Sheaf/A)
