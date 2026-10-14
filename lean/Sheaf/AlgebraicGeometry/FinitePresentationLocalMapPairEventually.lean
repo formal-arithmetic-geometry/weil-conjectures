@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.FinitePresentationTestMapZeroEventually
 public import Sheaf.AlgebraicGeometry.LocalMapPairDefect
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
+import Sheaf.AlgebraicGeometry.FinitePresentationLocalMapPairEventuallyCompositesCompatible
 
 /-! # Eventual compatibility for one pair of local maps
 
@@ -27,6 +28,15 @@ namespace AlgebraicGeometry
 
 attribute [local irreducible] Scheme.Modules.tensorPullback
   Scheme.Modules.openCoverTensorPullbackComparison
+
+private theorem pairDefectZero_of_pairCompatibility
+    {C : Type*} [Category C] {P : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat}
+    {ι : Type*} {S : C} {X : ι → C} {f : ∀ a, X a ⟶ S}
+    {D₁ D₂ : P.DescentData f} (r : ∀ a, D₁.obj a ⟶ D₂.obj a) (a b : ι)
+    (h : Pseudofunctor.DescentData.PairCompatibility r a b) :
+    Pseudofunctor.DescentData.PairDefectZero r a b := by
+  refine fun {W} t g₁ g₂ h₁ h₂ => ?_
+  exact ⟨_, rfl, (h.comm t g₁ g₂ h₁ h₂).symm⟩
 
 /-- At a sufficiently late stage, the two composites in the pairwise square
 have a common value on every universal test. This is the overlap-defect
@@ -68,7 +78,12 @@ theorem finitePresentation_local_map_pair_eventually_defect_zero
         let e := Scheme.Modules.openCoverTensorPullbackComparison q U₀ x
         e.inv.app F ≫ (Scheme.Modules.pullback (U₀.pullbackHom q x)).map (r₀ x) ≫
           e.hom.app G
-      Pseudofunctor.DescentData.PairDefectZero r a b := by sorry
+      Pseudofunctor.DescentData.PairDefectZero r a b := by
+  obtain ⟨l, hkl, h⟩ := finitePresentation_local_map_pair_eventually_composites_compatible
+    R c hc i f k hik F G hF hFq hG hGq U₀ a b δ r₀ hr
+  refine ⟨l, hkl, ?_⟩
+  intro m hkm hlm
+  exact pairDefectZero_of_pairCompatibility _ a b (h m hkm hlm)
 
 
 set_option linter.unusedVariables false in
