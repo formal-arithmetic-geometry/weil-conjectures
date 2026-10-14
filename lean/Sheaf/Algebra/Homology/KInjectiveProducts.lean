@@ -5,10 +5,6 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Mathlib.Algebra.Homology.HomologicalComplexLimits
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-
 /-!
 # Termwise products of K-injective complexes
 
@@ -17,7 +13,7 @@ Source: Stacks Project, Tag 0BK6, and upstream review #1428.
 
 The duplicate `CochainComplex.termwise_product_isKInjective_and_isLimit` is retired.
 Its callers use the existing homotopy product and K-injective Hom comparison APIs.
-This compatibility module retains its public imports and declares no new theorem.
+This compatibility module declares no new theorem and has no remaining imports.
 -/
 
 @[expose] public section
