@@ -32,9 +32,63 @@
   "def-weil-algebraic-closure",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $s\\in S$ and algebraically closed extensions $K_1,K_2$ of $\\kappa(s)$. By [lem-weil-common-extension-fields] choose embeddings $K_1\\to M\\leftarrow K_2$ agreeing over $\\kappa(s)$. Every nonconstant separable polynomial over $K_i$ has a root by [def-weil-algebraic-closure], so $K_i$ is separably closed by [def-pc-separably-closed]. By [def-pc-fibre-product], $(X\\times_S\\operatorname{Spec}K_i)\\times_{\\operatorname{Spec}K_i}\\operatorname{Spec}M$ is canonically isomorphic to $X\\times_S\\operatorname{Spec}M$: both represent pairs of maps to $X$ and $\\operatorname{Spec}M$ agreeing over $S$. Apply [lem-weil-pbc-sepclosed-field-components-bijection] over each $K_i$. Thus the same $M$-scheme has component bijections to both geometric fibres. Compose one bijection with the inverse of the other. The finite counts agree, or both component sets are infinite. For empty fibres both component sets are empty and the count is zero. This proves independence of $K$.",
+   "uses": [
+    "lem-weil-common-extension-fields",
+    "def-weil-algebraic-closure",
+    "def-pc-separably-closed",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-sepclosed-field-components-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055F, label lemma-base-change-fibres-nr-geometrically-connected-components"
+   }
+  },
+  {
+   "text": "Fix $t\\in T$ and $s=g(t)$. The residue-field map [def-weil-residue-field] is $\\kappa(s)\\to\\kappa(t)$, a field embedding. Choose algebraically closed extensions $K/\\kappa(s)$ and $K'/\\kappa(t)$ [def-weil-algebraic-closure]. Apply [lem-weil-common-extension-fields] over $\\kappa(s)$, regarding $K'$ as an extension through $\\kappa(t)$, to choose embeddings $K\\to M\\leftarrow K'$ agreeing on $\\kappa(s)$. The universal property [def-pc-fibre-product] gives $((X\\times_ST)\\times_T\\operatorname{Spec}K')\\times_{\\operatorname{Spec}K'}\\operatorname{Spec}M\\cong X\\times_S\\operatorname{Spec}M$: a map to either side is exactly a pair of maps to $X$ and $\\operatorname{Spec}M$ agreeing over $S$, since the map to $T$ is forced by $\\operatorname{Spec}M\\to\\operatorname{Spec}K'\\to\\operatorname{Spec}\\kappa(t)\\to T$. The same universal property gives $(X\\times_S\\operatorname{Spec}K)\\times_{\\operatorname{Spec}K}\\operatorname{Spec}M\\cong X\\times_S\\operatorname{Spec}M$.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-weil-algebraic-closure",
+    "lem-weil-common-extension-fields",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055F, label lemma-base-change-fibres-nr-geometrically-connected-components"
+   }
+  },
+  {
+   "text": "Every nonconstant separable polynomial over $K$ or $K'$ is nonconstant, hence has a root by [def-weil-algebraic-closure]; thus both fields are separably closed by [def-pc-separably-closed]. Apply [lem-weil-pbc-sepclosed-field-components-bijection] to $M/K$ and $X\\times_S\\operatorname{Spec}K$, and to $M/K'$ and $(X\\times_ST)\\times_T\\operatorname{Spec}K'$. The source schemes of the two projections are canonically isomorphic by step 2, so their component sets are in bijection: the isomorphism and its inverse are continuous, send nonempty connected subsets to nonempty connected subsets, and therefore send maximal such subsets to maximal such subsets. Composing these bijections gives equal component counts for the two geometric fibres, including zero and infinity. Independence from the algebraically closed extensions was proved in step 1; these counts are therefore $n_f(s)$ and $n_{f_T}(t)$. This proves $n_{f_T}(t)=n_f(g(t))$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-pc-separably-closed",
+    "lem-weil-pbc-sepclosed-field-components-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055F, label lemma-base-change-fibres-nr-geometrically-connected-components"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-common-extension-fields",
+  "def-weil-algebraic-closure",
+  "def-pc-separably-closed",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-sepclosed-field-components-bijection",
+  "def-weil-residue-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055F, label lemma-base-change-fibres-nr-geometrically-connected-components"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -84,15 +138,81 @@
    "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"line\": \"88\", \"text\": \"/-- `continuousMapPresheaf` is `U ↦ C(ConnectedComponents U, T)` if `T` is totally\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"line\": \"92\", \"text\": \"    (continuousMapPresheaf T).obj (.op U) ≃ C(ConnectedComponents U, T) where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"line\": \"93\", \"text\": \"  toFun f := ⟨f.continuous.connectedComponentsLift, f.continuous.connectedComponentsLift_continuous⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"line\": \"94\", \"text\": \"  invFun f := .comp f ⟨ConnectedComponents.mk, ConnectedComponents.continuous_coe⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"line\": \"98\", \"text\": \"    exact (Continuous.connectedComponentsLift_unique _ _ (by simp)).symm\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"22\", \"text\": \"- `AlgebraicGeometry.GeometricallyConnected`: A morphism `f : X ⟶ Y` is geometrically connected if\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"24\", \"text\": \"- `GeometricallyConnected.iff_geometricallyConnected_fiber`: A scheme is geometrically connected\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"40\", \"text\": \"class GeometricallyConnected (f : X ⟶ Y) : Prop where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"43\", \"text\": \"lemma GeometricallyConnected.eq_geometrically :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"44\", \"text\": \"    @GeometricallyConnected = geometrically (ConnectedSpace ·) := by\"}\n",
    "date": "2026-10-14",
    "verdict": "no match: Connected.lean:40-131 gives geometrically connected morphisms and open-map component comparison, not arbitrary field-extension component invariance"
+  },
+  {
+   "tool": "grep",
+   "query": "connectedComponents|geometricallyConnected",
+   "results": "[grep] OK 10 hit(s); Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: candidates give connectedness with additional hypotheses, point maps, or purely inseparable extensions; not the component bijection for arbitrary extensions of a separably closed field"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Connected components of a scheme over an algebraically closed field are unchanged by arbitrary field extension",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s); ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyConnected\", \"ConnectedComponents\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-14",
+   "verdict": "no match: candidates give connectedness with additional hypotheses, point maps, or purely inseparable extensions; not the component bijection for arbitrary extensions of a separably closed field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme over an algebraically closed field, extension of the base field induces a bijection of connected components",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff, AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.compactSpace_of_universallyClosed, AlgebraicGeometry.pointsPi_surjective_of_isAffine, PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec",
+   "date": "2026-10-14",
+   "verdict": "no match: candidates give connectedness with additional hypotheses, point maps, or purely inseparable extensions; not the component bijection for arbitrary extensions of a separably closed field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change by a field extension from a separably closed field preserves the set of connected components of an arbitrary scheme",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, AlgebraicGeometry.IsSeparated.instMap, PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, WeierstrassCurve.Affine.Point.map_some, WeierstrassCurve.baseChange_integralModel_eq, PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable",
+   "date": "2026-10-14",
+   "verdict": "no match: candidates give connectedness with additional hypotheses, point maps, or purely inseparable extensions; not the component bijection for arbitrary extensions of a separably closed field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The number of geometric connected components of the fibres of any scheme morphism commutes with arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s); RingHom.IsStableUnderBaseChange.pullback_fst_appTop, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_snd_triplet_of_prop, AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-14",
+   "verdict": "no match: candidates give connectedness with additional hypotheses, point maps, or purely inseparable extensions; not the component bijection for arbitrary extensions of a separably closed field"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-geometric-component-count-base-change",
+  "worker": "stage1",
+  "summary": "Read Tags 055F and 0363; retained the statement and constructed the common-field comparisons explicitly. Reused common extension fields; separated the first assertion of 0363 from its existing second-assertion node. No finiteness assumptions or compatible algebraic-closure choices are hidden.",
+  "blueprint": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7). Auxiliary input: Tag 0E0N, label lemma-proper-flat-geom-red, specialized to smooth morphisms (smooth implies flat with geometrically reduced fibres); Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous; Tag 0BUI, replacement of the base by an etale neighbourhood; the count is unchanged",
+  "tool_uses": [
+   {
+    "node": "lem-weil-common-extension-fields",
+    "why": "Tag 055F explicitly requires amalgamating two field extensions; the proper-base-change unit has no replacement field-amalgamation statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-common-extension-fields"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-56d9f8c40",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-56d9f8c40 (reviewer sub-agent of L); spot-checked: Read the item and sole new node in full; checked all three steps against Stacks 055F, 0363 and 0H7K, cited definitions, edge cases, DAG reuse and unit route. Verified master target morphisms and coefficient distinctions without assuming comparison theorems. Accepted lem-weil-common-extension-fields as a generic tool. No repairs needed; review.md written."
+ }
 }
