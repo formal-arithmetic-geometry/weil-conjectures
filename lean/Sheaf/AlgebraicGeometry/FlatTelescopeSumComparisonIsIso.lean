@@ -6,7 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
-public import Sheaf.AlgebraicGeometry.BoundedFlatModelNormalization
+public import Sheaf.AlgebraicGeometry.BoundedFlatShiftRepresentative
 import Sheaf.AlgebraicGeometry.FlatTelescopeSumModels
 import Sheaf.AlgebraicGeometry.FlatComparisonPreservesCountableCoproducts
 

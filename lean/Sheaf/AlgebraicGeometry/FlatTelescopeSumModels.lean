@@ -6,7 +6,7 @@ Authors: SHEAF group Y3
 module
 
 public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
-public import Sheaf.AlgebraicGeometry.BoundedFlatModelNormalization
+public import Sheaf.AlgebraicGeometry.BoundedFlatShiftRepresentative
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
 
 /-! # Literal telescope models for a countable coproduct

@@ -6,7 +6,7 @@ Authors: SHEAF group G2
 module
 
 public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
-public import Sheaf.AlgebraicGeometry.BoundedFlatModelNormalization
+public import Sheaf.AlgebraicGeometry.BoundedFlatShiftRepresentative
 import Sheaf.AlgebraicGeometry.FlatTelescopeSumComparisonIsIso
 
 /-! # Invertibility of normalized telescope morphisms
