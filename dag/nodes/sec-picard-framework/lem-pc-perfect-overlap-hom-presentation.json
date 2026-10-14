@@ -1,0 +1,151 @@
+{
+ "id": "lem-pc-perfect-overlap-hom-presentation",
+ "kind": "statement",
+ "title": "Pinned geometric presentation of the two overlap Hom sets",
+ "statement": "Let I be a directed preorder, R:I→CommRingCat a diagram with colimit cocone c, i∈I, Z a scheme and t:Z→Spec(R_i) locally of finite presentation, quasi-compact and quasi-separated. Assume the shared scheme and localized-open derived categories [def-pc-derived-category]. Fix j≥i; the hypothesis hstage says every pair of opens of Y_j admits k≥j (the index j itself suffices). Put Y_j=Z×Spec(R_j), X=Z×Spec(c.pt), and g_j:X→Y_j the canonical map. Let U,V be compact opens covering Y_j, A,B perfect objects on their open subschemes [def-pc-perfect-complex], E∈D(X), and φU,φV the given isomorphisms of their limit pullbacks with the exact restrictions of E [def-pc-derived-open-restriction-maps]. For EVERY k≥j there are exact coherent two-open comparison diagrams d_k [def-pc-two-open-comparison-diagram], functorial transports κU,κV and siteU,siteV, and θU,θV equal to the composites of these transports with the supplied φU,φV. Their overlap composites ψ_k(false)=γU.symm(A′)≫SP(θU)≫τU(E) and ψ_k(true)=γV.symm(B′)≫SQ(θV)≫τV(E) identify HW_k(SU_k(A′)) and HW_k(SV_k(B′)) with RW(E). For the categories C_k=D((f_kj^{-1}U∩f_kj^{-1}V).toScheme), the two objects F_k(false)=SU_k(A′), F_k(true)=SV_k(B′), the actual functors G_k=HW_k and target objects O(false)=O(true)=RW(E), there is instead a PerfectHomPresentation [lem-pc-perfect-hom-presentation] over the same diagram R and base index j. Thus a finitely presented quasi-compact quasi-separated overlap scheme Y, two perfect objects P(b), stage and apex Hom equivalences preserving identities and composition, and a pinning equation identify the prescribed conjugated limit maps with perfectLimitMap. No morphism lift, eventual equality, or stage transport is asserted. The comparisons have exactly the types and equations of [def-pc-perfect-overlap-hom-continuity-data].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09RE",
+  "place": "Tag 09RE proof, first paragraph, restriction to quasi-compact opens; Tag 08DW proof, compatibility with restriction; Tag 0D5S proof, K-flat composition."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-two-open-comparison-diagram",
+  "lem-pc-directed-perfect-hom-iso",
+  "def-pc-perfect-overlap-hom-continuity-data",
+  "lem-pc-perfect-hom-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Put W=(U intersection V).toScheme. Quasi-separatedness makes the intersection compact; its open immersion is quasi-compact, locally finitely presented and quasi-separated, and its composite with the stage structural map has these properties. Restrict A and B by derived pullback along the open inclusions; they are perfect.",
+   "uses": [
+    "lem-pc-derived-pullback-perfect",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base-changing W along Spec(R_k) and Spec(c.pt) identifies it with the inverse-image intersections, by the pullback universal property. Construct HU, HV and HW as pullback followed by inverse open-site equivalence. The restriction and composition comparisons supply beta, gamma, kappa and site; compute coherence on a K-flat representative using termwise tensor pullback, whose restriction and composition paths agree. Define theta as kappa followed by the supplied phi and site; its two equations hold by construction.",
+   "uses": [
+    "def-pc-two-open-comparison-diagram",
+    "lem-pc-derived-pullback-open-restriction-universes",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-perfect-overlap-hom-continuity-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate by the cartesian object comparisons for stage equivalences. At the limit restrict phiU and phiV, then use the cartesian and open-site equivalences for the apex equivalences. Cancellation proves identity and composition. Expand psi into gamma inverse, the image of theta, and tau; substitute theta and use restriction-composition coherence to cancel site comparisons. The remaining counit-pinned composition comparison is precisely perfectLimitMap, proving pin. Empty and coincident opens use the same comparisons. This constructs a presentation without the Hom-colimit theorem.",
+   "uses": [
+    "lem-pc-perfect-hom-presentation",
+    "lem-pc-perfect-hom-transport",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-perfect-overlap-hom-continuity-data",
+  "def-pc-two-open-comparison-diagram",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-derived-pullback-perfect",
+  "lem-pc-perfect-hom-presentation",
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "G2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/09RE",
+  "note": "Source read online: Tag 09RE open-local Hom continuity; 08DW restriction compatibility; 0D5S K-flat composition argument. Explicit categorical packaging written by the worker."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Hom sets between perfect complexes commute with filtered colimits of rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes Hom continuity through open restriction and base change comparison",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsContinuousOpensOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, Topology.IsOpenEmbedding.functor_isContinuous, LightCondensed.ihomPoints_symm_comp, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Scheme.Modules.restrictFunctor, LightCondMod.hom_naturality_apply, CondensedMod.hom_naturality_apply",
+   "date": "2026-10-14",
+   "verdict": "no exact geometric continuity presentation; elementary tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*hom|overlap.*comparison",
+   "results": "12 hits: Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean, Mathlib/FieldTheory/IsPerfectClosure.lean, Mathlib/FieldTheory/IsPerfectClosure.lean, Mathlib/FieldTheory/IsPerfectClosure.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact geometric continuity presentation; elementary tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Equiv.injective",
+   "results": "8 hits: Equiv.injective, Equiv.image_symm_eq_preimage_of_finset, Equiv.restrictPreimageFinset, Equiv.image_eq_preimage_symm_of_finset, Equiv.restrictPreimageFinset_apply_coe, Equiv.restrictPreimageFinset_symm_apply_coe, Finset.restrict_comp_piCongrLeft, Matroid.mapEquiv_eq_map",
+   "date": "2026-10-14",
+   "verdict": "no exact geometric continuity presentation; elementary tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuity",
+  "date": "2026-10-14",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF two-open induction: construct prescribed overlap comparisons and apply full faithfulness before gluing.",
+   "via": [
+    "lem-pc-perfect-overlap-hom-continuity",
+    "lem-pc-perfect-overlap-transition-comparison-core-stage"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectOverlapHomPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOverlapHomPresentation.lean",
+  "declaration": "AlgebraicGeometry.perfect_overlap_hom_presentation",
+  "statement": "theorem perfect_overlap_hom_presentation\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)\n    (i : I) (Z : Scheme.{u}) (t : Z ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation t] [QuasiCompact t] [QuasiSeparated t]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    (j : I) (hij : i ≤ j)\n    (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),\n      ∃ k : I, j ≤ k)\n    : perfectOverlapHomPresentationStatement R c hc i Z t j hij hstage",
+  "declarations": [
+   "AlgebraicGeometry.perfectOverlapHomPresentationStatement",
+   "AlgebraicGeometry.perfect_overlap_hom_presentation"
+  ],
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-6f6dc",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261014T075511-L-3666753",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-6f6dc",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261014T075511-L-3666753",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, relocated definition bodies, proofs and remaining geometric hole with the nodes and change record; all four delivered modules and direct importer Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore compile cleanly; axiom checks agree with the reported dependencies."
+ }
+}

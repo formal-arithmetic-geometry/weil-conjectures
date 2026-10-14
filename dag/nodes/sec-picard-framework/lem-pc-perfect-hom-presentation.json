@@ -1,0 +1,138 @@
+{
+ "id": "lem-pc-perfect-hom-presentation",
+ "kind": "statement",
+ "title": "Hom continuity transferred through a pinned geometric presentation",
+ "statement": "Let $I$ be a directed preorder, $R:I\\to\\mathrm{CommRing}$ a diagram, $c$ a colimit cocone and $i\\in I$. Assume the scheme and localized-open derived categories [def-pc-derived-category] exist with common localization universe. Let $C_k$ be categories for $k\\ge i$, $F_k(b)\\in C_k$ for $b\\in\\{\\mathrm{false},\\mathrm{true}\\}$, $D$ a category, $O(b)\\in D$, $G_k:C_k\\to D$, and $\\psi_k(b):G_k(F_k(b))\\cong O(b)$. A PerfectHomPresentation consists of a scheme $Y$, a locally finitely presented, quasi-compact and quasi-separated $s:Y\\to\\operatorname{Spec}(R_i)$, perfect $P(b)\\in D(Y)$ [def-pc-perfect-complex], equivalences from each stage Hom set to the Hom set between the direct pullbacks of $P(a),P(b)$ to $Y_k$, and equivalences from each limit Hom set to the corresponding direct pullback Hom set on $Y_\\infty$. The stage equivalences preserve identities and composition. The apex equivalence sends $\\psi_k(a)^{-1}G_k(f)\\psi_k(b)$ to the canonical perfectLimitMap of the stage equivalence of $f$ [lem-pc-perfect-hom-transport]. Every such presentation yields a DirectedPerfectHomSystem [lem-pc-directed-perfect-hom-iso] for the original categories, functors and comparisons.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09RE",
+  "place": "Tag 09RE, lemma-descend-homomorphisms, Hom-colimit isomorphism; Tag 0D5S composition."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-directed-perfect-hom-iso"
+ ],
+ "proof": [
+  {
+   "text": "Construct transport by the stage equivalence, canonical perfectStageMap, and the inverse equivalence at the later stage. Apply injectivity of the later equivalence and its identity/composition equations to verify both functorial laws.",
+   "uses": [
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply injectivity of the apex equivalence. Its pin equation turns limit_transport into perfectLimitMap_stage.",
+   "uses": [
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Install the finite-presentation, quasi-compactness and quasi-separatedness fields as instances. For each ordered pair apply perfect_hom_continuity. Transport a limit morphism by the apex equivalence, lift it by surjectivity and invert the stage equivalence. For eventual equality, use the pin equation to identify the geometric limit images, apply the eventual-equality clause, then injectivity of every later stage equivalence. Package the maps and five proved laws.",
+   "uses": [
+    "lem-pc-perfect-hom-continuity",
+    "lem-pc-directed-perfect-hom-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-directed-perfect-hom-iso",
+  "lem-pc-perfect-hom-continuity",
+  "lem-pc-perfect-hom-transport"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "G2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/09RE",
+  "note": "Source read online: Tag 09RE open-local Hom continuity; 08DW restriction compatibility; 0D5S K-flat composition argument. Explicit categorical packaging written by the worker."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Hom sets between perfect complexes commute with filtered colimits of rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes Hom continuity through open restriction and base change comparison",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsContinuousOpensOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, Topology.IsOpenEmbedding.functor_isContinuous, LightCondensed.ihomPoints_symm_comp, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Scheme.Modules.restrictFunctor, LightCondMod.hom_naturality_apply, CondensedMod.hom_naturality_apply",
+   "date": "2026-10-14",
+   "verdict": "no exact geometric continuity presentation; elementary tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*hom|overlap.*comparison",
+   "results": "12 hits: Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean, Mathlib/FieldTheory/IsPerfectClosure.lean, Mathlib/FieldTheory/IsPerfectClosure.lean, Mathlib/FieldTheory/IsPerfectClosure.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact geometric continuity presentation; elementary tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Equiv.injective",
+   "results": "8 hits: Equiv.injective, Equiv.image_symm_eq_preimage_of_finset, Equiv.restrictPreimageFinset, Equiv.image_eq_preimage_symm_of_finset, Equiv.restrictPreimageFinset_apply_coe, Equiv.restrictPreimageFinset_symm_apply_coe, Finset.restrict_comp_piCongrLeft, Matroid.mapEquiv_eq_map",
+   "date": "2026-10-14",
+   "verdict": "no exact geometric continuity presentation; elementary tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuity",
+  "date": "2026-10-14",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF two-open induction: construct prescribed overlap comparisons and apply full faithfulness before gluing.",
+   "via": [
+    "lem-pc-perfect-overlap-hom-continuity",
+    "lem-pc-perfect-overlap-transition-comparison-core-stage"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomPresentation.lean",
+  "declaration": "AlgebraicGeometry.PerfectHomPresentation.toSystem",
+  "statement": "theorem PerfectHomPresentation.toSystem\n    (p : PerfectHomPresentation R c i C F D O G ψ) (hc : IsColimit c) :\n    Nonempty (DirectedPerfectHomSystem (Set.Ici i) C F D O G ψ)",
+  "declarations": [
+   "AlgebraicGeometry.PerfectHomPresentation",
+   "AlgebraicGeometry.PerfectHomPresentation.toSystem"
+  ],
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-6f6dc",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261014T075511-L-3666753",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-6f6dc",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261014T075511-L-3666753",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, relocated definition bodies, proofs and remaining geometric hole with the nodes and change record; all four delivered modules and direct importer Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore compile cleanly; axiom checks agree with the reported dependencies."
+ }
+}

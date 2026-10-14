@@ -16,46 +16,30 @@
  ],
  "proof": [
   {
-   "text": "The compact overlap of U,V is compact by quasi-separatedness; its open immersion and structural map are finitely presented. Restrict A,B to this overlap and use preservation of perfectness. Base-change and open restriction identify their stage and limit pullbacks.",
+   "text": "Obtain exact comparison data and a pinned geometric Hom presentation for the overlap.",
    "uses": [
-    "lem-pc-derived-pullback-perfect",
-    "def-pc-derived-open-restriction-maps"
+    "lem-pc-perfect-overlap-hom-presentation"
    ],
    "elementary": false
   },
   {
-   "text": "At each index of the directed tail construct the simultaneous diagram from pullback on open subschemes followed by inverse open-site equivalences. Canonical composition and restriction comparisons provide κ and site maps. Define θ by the displayed composites with φ. Their overlap composites are ψ, and naturality and composition coherence identify the conjugated map with the canonical perfect Hom limit map.",
+   "text": "Apply PerfectHomPresentation.toSystem with the colimit proof to construct the directed Hom system. Package it together with the very same comparison data in the dependent sigma.",
    "uses": [
-    "def-pc-two-open-comparison-diagram",
-    "lem-pc-derived-pullback-open-restriction-universes",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-perfect-hom-presentation"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Apply perfect_hom_continuity on the directed tail to each of the four ordered pairs of perfect overlap restrictions. Surjectivity supplies lift and its eventual-equality clause supplies equal at every later stage. The canonical pullback transports preserve identity and composition and commute with limit maps. Package these maps and laws in DirectedPerfectHomSystem; no inverse is descended.",
-   "uses": [
-    "lem-pc-perfect-hom-continuity",
-    "lem-pc-directed-perfect-hom-iso"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-pullback-perfect",
-  "def-pc-derived-open-restriction-maps",
-  "def-pc-two-open-comparison-diagram",
-  "lem-pc-derived-pullback-open-restriction-universes",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-pc-perfect-hom-continuity",
-  "lem-pc-directed-perfect-hom-iso"
+  "lem-pc-perfect-overlap-hom-presentation",
+  "lem-pc-perfect-hom-presentation"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "F4",
-  "document": "https://stacks.math.columbia.edu/tag/09RE",
+  "agent": "G2",
   "date": "2026-10-14",
-  "note": "Written from the Hom-colimit statement of Tag 09RE and the prescribed transition of Tag 09RF; online sources read."
+  "document": "https://stacks.math.columbia.edu/tag/09RE",
+  "note": "Geometric presentation split off; categorical transfer of Hom continuity completely proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -113,9 +97,6 @@
   "file": "lean/Sheaf/AlgebraicGeometry/PerfectOverlapHomContinuity.lean",
   "declaration": "AlgebraicGeometry.perfect_overlap_hom_continuity",
   "declarations": [
-   "AlgebraicGeometry.TwoOpenTransportData",
-   "AlgebraicGeometry.perfectOverlapComparisonDataType",
-   "AlgebraicGeometry.perfectOverlapHomContinuityStatement",
    "AlgebraicGeometry.perfect_overlap_hom_continuity"
   ],
   "statement": "theorem perfect_overlap_hom_continuity\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)\n    (i : I) (Z : Scheme.{u}) (t : Z ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation t] [QuasiCompact t] [QuasiSeparated t]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    (j : I) (hij : i ≤ j)\n    (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),\n      ∃ k : I, j ≤ k)\n    : perfectOverlapHomContinuityStatement R c hc i Z t j hij hstage",
@@ -136,10 +117,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F4",
+  "reviewer": "X-6f6dc",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261014T071233-L-3199361",
-  "kind": "interface"
+  "landing": "20261014T075511-L-3666753",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, relocated definition bodies, proofs and remaining geometric hole with the nodes and change record; all four delivered modules and direct importer Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore compile cleanly; axiom checks agree with the reported dependencies."
  }
 }
