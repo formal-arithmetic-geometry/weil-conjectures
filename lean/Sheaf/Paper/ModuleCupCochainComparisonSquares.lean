@@ -59,6 +59,8 @@ noncomputable def moduleCup_cochainPullbackComparison
       (DerivedCategory.quotientCompQhIso
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)))).hom
 
+set_option maxHeartbeats 0 in
+-- Comparing the canonical tensor instances exceeds the default elaboration heartbeat budget.
 /-- Transport the tensor and counit squares from homotopy to cochain localization.
 Source: Stacks, Tags 0FP0 and 0FP1; the quotient transport uses the canonical Qh/Q isomorphism.
 (blueprint: lem-sc-module-cup-cochain-comparison-squares)
@@ -127,7 +129,78 @@ theorem moduleCup_cochain_comparison_squares
     (∀ K, D.map (β.app K) ≫
         dAdj.counit.app (Q.obj K) =
       a.app (T.obj K) ≫ Q.map
-        ((adj.mapHomologicalComplex (ComplexShape.up ℤ)).counit.app K)) := by sorry
+        ((adj.mapHomologicalComplex (ComplexShape.up ℤ)).counit.app K)) := by
+  let sourceComplexTensor : MonoidalCategory (CochainComplex
+      (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) ℤ) := inferInstance
+  let targetComplexTensor : MonoidalCategory
+      (CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) := inferInstance
+  let sourceHomotopyTensor : MonoidalCategory (HomotopyCategory
+      (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) (.up ℤ)) := inferInstance
+  let targetHomotopyTensor : MonoidalCategory (HomotopyCategory
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) := inferInstance
+  subst qLax
+  subst β
+  dsimp only
+  have ha (A : CochainComplex
+      (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) ℤ) :
+      (moduleCup_cochainPullbackComparison X P D α).app A =
+        α.app ((HomotopyCategory.quotient _ _).obj A) := by
+    change D.map (𝟙 _) ≫ α.app ((HomotopyCategory.quotient _ _).obj A) ≫ 𝟙 _ = _
+    erw [D.map_id]
+    simp only [Category.id_comp, Category.comp_id]
+  constructor
+  · intro A B
+    have h := hTensor ((HomotopyCategory.quotient _ _).obj A)
+      ((HomotopyCategory.quotient _ _).obj B)
+    dsimp only [moduleCup_globalTensorDiagram] at h
+    rw [Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans_app_app] at h
+    have hμ₀ : Functor.LaxMonoidal.μ DerivedCategory.Q A B =
+        Functor.LaxMonoidal.μ DerivedCategory.Qh
+          ((HomotopyCategory.quotient _ _).obj A)
+          ((HomotopyCategory.quotient _ _).obj B) := by
+      change (𝟙 _ ⊗ₘ 𝟙 _) ≫
+        (Functor.LaxMonoidal.μ DerivedCategory.Qh _ _ ≫
+          (DerivedCategory.Qh (C := ModuleCat.{u}
+            ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))).map (𝟙 _)) ≫ 𝟙 _ = _
+      erw [DerivedCategory.Qh.map_id]
+      simp only [id_tensorHom_id, Category.id_comp, Category.comp_id]
+      rfl
+    have hμ : Functor.LaxMonoidal.μ DerivedCategory.Q
+        ((P.mapHomologicalComplex (ComplexShape.up ℤ)).obj A)
+        ((P.mapHomologicalComplex (ComplexShape.up ℤ)).obj B) =
+        Functor.LaxMonoidal.μ DerivedCategory.Qh
+          ((P.mapHomotopyCategory (ComplexShape.up ℤ)).obj
+            ((HomotopyCategory.quotient _ _).obj A))
+          ((P.mapHomotopyCategory (ComplexShape.up ℤ)).obj
+            ((HomotopyCategory.quotient _ _).obj B)) := by
+      change (𝟙 _ ⊗ₘ 𝟙 _) ≫
+        (Functor.LaxMonoidal.μ DerivedCategory.Qh _ _ ≫
+          DerivedCategory.Qh.map (𝟙 _)) ≫ 𝟙 _ = _
+      erw [DerivedCategory.Qh.map_id]
+      simp only [id_tensorHom_id, Category.id_comp, Category.comp_id]
+      rfl
+    have hm {K L : CochainComplex
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ} (f : K ⟶ L) :
+        DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map f) =
+          DerivedCategory.Q.map f := rfl
+    rw [hm] at h
+    dsimp only [Functor.whiskeringLeft₂_obj_obj_obj_obj_obj,
+      curriedTensor_obj_obj] at h
+    simp only [ha, hμ₀, hμ]
+    dsimp only [Functor.whiskeringLeft₂_obj_obj_obj_obj_obj, curriedTensor_obj_obj]
+    with_unfolding_all exact h
+  · intro K
+    rw [ha]
+    have h := hCounit ((HomotopyCategory.quotient _ _).obj K)
+    rw [Adjunction.mapHomotopyCategory_counit_app_quotient] at h
+    change D.map (𝟙 _ ≫
+      (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctorUnit.app
+        ((HomotopyCategory.quotient _ _).obj K) ≫
+      (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.map (𝟙 _)) ≫
+      dAdj.counit.app (DerivedCategory.Q.obj K) = _
+    erw [(RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.map_id,
+      Category.comp_id, Category.id_comp]
+    exact h
 
 end
 end AlgebraicGeometry.Scheme.Modules
