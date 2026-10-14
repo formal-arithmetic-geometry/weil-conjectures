@@ -7,9 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates
 
-import Sheaf.Algebra.Homology.DerivedTensorFirstLocalizationModels
-import Sheaf.Algebra.Homology.DerivedTensorBaseSecondLocalizationModels
-import Sheaf.Algebra.Homology.AffineStalkScalarExtensionCoordinates
+import Sheaf.Algebra.Homology.AffineDirectLocalizedTensorSquareCore
 
 /-! # AffineDirectLocalizedTensorSquare
 
@@ -92,9 +90,10 @@ theorem exists_affineDirectLocalizedTensorSquare
       let C := ((ModuleCat.extendScalars (κ.comp φg')).mapHomologicalComplex (.up ℤ)).obj M
       let U := affineBaseChangeTildeModule R A R' D M n i
       let hφ : (algebraMap (A ⊗[R] R') D).comp
-          (algebraMap A (A ⊗[R] R')) = κ.comp φg' := by
-        change (κ.comp (algebraMap (A ⊗[R] R') A')).comp _ = _
-        rw [RingHom.comp_assoc, hφg']
+          (algebraMap A (A ⊗[R] R')) = κ.comp φg' :=
+        by
+          change (κ.comp (algebraMap (A ⊗[R] R') A')).comp _ = _
+          rw [RingHom.comp_assoc, hφg']
       let a := affineBaseChangeTildeModuleMap R A R' D M n (κ.comp φg') hφ i
         (C.homology i) (Iso.refl _)
       let ρ := (SingleComplexBaseChange.tensorMap f f' g g' sq p).comp
@@ -111,7 +110,11 @@ theorem exists_affineDirectLocalizedTensorSquare
               (1 : (Spec (.of A')).presheaf.stalk p) ⊗ₜ[SingleComplexBaseChange.A g' p, ρ]
                 (TopCat.Presheaf.germ (P.X j).val.presheaf ⊤ (g' p) trivial
                   (tilde.toOpen (R := .of A) (M.X j) ⊤ x))) →
-          a ≫ HomologicalComplex.homologyMap τ.hom i = e.hom ≫ l := by sorry
+          a ≫ HomologicalComplex.homologyMap τ.hom i = e.hom ≫ l := by
+  dsimp only
+  intro p
+  apply affineDirectLocalizedTensorSquare_core R A R' A' φg' φf' hφg' hφf' sq M i
+
 
 
 end AlgebraicGeometry
