@@ -16,20 +16,22 @@
  ],
  "proof": [
   {
-   "text": "Substitute the standard-resolution equality hI and the two defining isomorphism equations ha and hb. Unfold moduleCohomologyExtResolutionEquiv, whose explicit ingredients are a, the acyclic-resolution comparison c, the site-sections comparison d and Ext precomposition t.symm. Evaluate AddEquiv.trans and addCommGroupIsoToAddEquiv, and evaluate composite homomorphisms, obtaining t.symm(d.inv(c.inv(a.hom x))). Iso.trans_inv gives the same evaluation of b.inv(a.hom x). The supplied forgotten augmentation is the same as the one in the construction, and proof irrelevance identifies its quasi-isomorphism proof with the supplied proof. No comparison between different resolutions is used, and zero degree, empty schemes and zero coefficients need no separate case.",
+   "text": "Let s be the common-resolution sections comparison and c the acyclic-resolution comparison for the forgotten augmentation. Standard sections factorization, using hI and ha, gives s followed by c equals a. Ext sections factorization evaluates the fixed module-to-Ext equivalence as the inverse of t followed by d applied to s(x), where t is terminal-source precomposition and d is siteSectionsObjIso. The defining equation hb gives b=(t followed by d) followed by c. Substitute these two composite equations and cancel c.hom followed by c.inv. This yields b.inv(a.hom(x)). No change of resolutions or unfolding of derived-functor constructions is needed in this final cancellation.",
    "uses": [
-    "new-module-cohomology-ext-resolution-naturality"
+    "new-module-cohomology-standard-sections-factorization",
+    "new-module-cohomology-ext-sections-factorization"
    ],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "new-module-cohomology-ext-resolution-naturality"
+  "new-module-cohomology-standard-sections-factorization",
+  "new-module-cohomology-ext-sections-factorization"
  ],
  "proof_origin": {
-  "by": "D2 worker",
+  "by": "C1 worker",
   "document": "https://stacks.math.columbia.edu/tag/015E",
-  "place": "Standard-resolution computation in the explicit comparison, Tags 015E and 03FD."
+  "place": "Two-factor calculation on the fixed resolution, with generic isomorphism cancellation; Tags 015E and 03FD."
  },
  "mathlib_searches": [
   {
@@ -102,11 +104,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D2",
+  "reviewer": "X-23141",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261014T004059-L-2833121",
+  "landing": "20261014T071230-L-3198698",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched unchanged theorem signature and all three nodes with delivered Lean, comparison definitions, proof dependencies and report; all delivery modules and sole direct importer compiled, and axiom probes matched the single documented sorry."
  }
 }

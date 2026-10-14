@@ -6,6 +6,8 @@ Authors: SHEAF group D2
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality
+import Sheaf.AlgebraicGeometry.ModuleCohomologyStandardSectionsFactorization
+import Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionsFactorization
 
 /-! # The fixed comparison on the chosen standard resolution
 
@@ -22,23 +24,24 @@ namespace AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+set_option Elab.async false
 
+set_option maxHeartbeats 600000 in
+-- Elaborating the fixed-resolution interfaces requires several derived-functor instances.
 /-- Computation only on Mathlib's fixed standard injective resolution, with no
 change-of-resolution assertion.
 Source: Stacks Project, Tag 015E (acyclic resolution computation) and Tag 03FD.
 (blueprint: new-module-cohomology-ext-standard-resolution-formula)
 
-Proof: Substitute hI, ha and hb, then unfold moduleCohomologyExtResolutionEquiv.
-Its chosen resolution is exactly I = injectiveResolution F. The comparison a
-is its module right-derived resolution isomorphism followed by inverse
-exact-forgetting homology. Write c for the acyclic-resolution comparison in b,
-d for siteSectionsObjIso and t for precompAddEquiv. Evaluating AddEquiv.trans
-and the homomorphism of each composite gives t.symm (d.inv (c.inv (a.hom x))).
-Iso.trans_inv gives the same expression for b.inv (a.hom x). The forgotten
-augmentation is identical in the two constructions, and proof irrelevance
-identifies its quasi-isomorphism proof with the supplied hι. No change of
-resolution is used.
-This calculation includes degree zero, zero coefficients and empty schemes. -/
+Proof: Write s for the common-resolution sections comparison, c for the
+acyclic-resolution comparison, and t for terminal-source precomposition followed
+by siteSectionsObjIso. Standard sections factorization gives
+s.hom x = c.inv (a.hom x), using hI and ha. Ext sections factorization evaluates
+the constructed equivalence as t.inv (s.hom x). Apply t.inv to the first equality.
+The defining equation hb identifies b with t followed by c, whose inverse is
+c.inv followed by t.inv. Thus the resulting value is b.inv (a.hom x).
+No change of resolution is used. The factorization lemmas include degree zero,
+zero coefficients and empty schemes. -/
 theorem standard_resolution_formula
     (X : Scheme.{u}) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))
     [EnoughInjectives (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -70,6 +73,14 @@ theorem standard_resolution_formula
           (evaluation X.Opensᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)).rightDerivedObjIsoOfResolution ι
             (fun n ↦ forgottenInjectiveAcyclic X (I.cocomplex.X n)) p))
     (x : (RingedSpace.moduleCohomology X.toRingedSpace p).obj F) :
-    moduleCohomologyExtResolutionEquiv X F p x = b.inv (a.hom x) := by sorry
+    moduleCohomologyExtResolutionEquiv X F p x = b.inv (a.hom x) := by
+  rw [ext_sections_factorization X F p x, hb]
+  simp only [Iso.trans_inv, AddCommGrpCat.hom_comp, AddMonoidHom.comp_apply,
+    AddEquiv.toAddCommGrpIso_inv, AddCommGrpCat.hom_ofHom, AddEquiv.toAddMonoidHom_eq_coe]
+  apply congrArg (fun z ↦ (Abelian.Ext.precompAddEquiv (terminalSourceIso X)
+    ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj F) p).symm z)
+  apply congrArg (fun z ↦ (siteSectionsObjIso (Opens.grothendieckTopology X) ⊤
+    ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj F) p).inv z)
+  exact standard_sections_factorization X F I hI hι p a ha x
 
 end AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution
