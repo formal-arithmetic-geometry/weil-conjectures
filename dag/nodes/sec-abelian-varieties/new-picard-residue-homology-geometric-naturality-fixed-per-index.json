@@ -2,7 +2,7 @@
  "id": "new-picard-residue-homology-geometric-naturality-fixed-per-index",
  "kind": "statement",
  "title": "Naturality for one finite-family index",
- "statement": "For each index i of a positive finite family, there exists a derived arrow from K to C i such that every chain representative inducing that arrow satisfies the stated residue homology naturality equation.",
+ "statement": "For a positive finite family in the geometric setup, there exists one additive source comparison eK such that, for every index i, there exist a target comparison eCi and a derived arrow Q(K) -> Q(Ci) satisfying the residue homology naturality equation for every chain representative. The comparisons are chosen together; eK is shared by all indices.",
  "stmt_deps": [],
  "source": {
   "document": "Stacks Project",
@@ -10,7 +10,22 @@
  },
  "proof": [
   {
-   "text": "Fix an index i and apply the geometric comparison, derived direct-image functoriality, residue pullback, and K-flat comparison to construct the arrow and establish the homology equation.",
+   "text": "Construct the derived arrows between the direct images using the coefficient pullback adjunction units and composition of derived direct images. Restrict to U and conjugate by hE and hCi.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Terminal sections of the strictly perfect models are bounded complexes of finite projective modules. Their termwise residue tensors compute derived residue pullback; degree-one homology is the explicit cycle quotient. hp, the immersion k and hw identify the residue fields.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Arbitrary base change and affine-base cohomology identify the derived fibres with fibre coefficient cohomology. Use tau and its pullbacks to trivialize the coefficients. Use the same geometric source comparison for all i and construct target comparisons by these natural identifications, rather than prescribing arbitrary additive equivalences.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the preceding comparisons gives the equation for the constructed derived arrow, and the K-flat comparison makes the equation depend only on the derived image of each chain representative.",
    "uses": [],
    "elementary": false
   }
@@ -18,8 +33,10 @@
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "group": "K4",
-  "date": "2026-10-14"
+  "group": "D2",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 0BF2, 0B91 and 01XK; compatible comparisons"
  },
  "mathlib_searches": [
   {
@@ -64,7 +81,7 @@
   "module": "Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex",
   "file": "lean/Sheaf/AlgebraicGeometry/PicardResidueHomologyGeometricNaturalityFixedPerIndex.lean",
   "declaration": "AlgebraicGeometry.Scheme.picard_residue_homology_geometric_naturality_fixed_positive_per_index",
-  "statement": "theorem picard_residue_homology_geometric_naturality_fixed_positive_per_index [∀ Y : Scheme.{v}, HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))] [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1} (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))] {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ} (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] [∀ i, Flat (fi i)] [∀ i, IsProper (fi i)] [∀ i, LocallyOfFinitePresentation (fi i)] (ui : ∀ i, Xi i ⟶ X) (hui : ∀ i, ui i ≫ f = fi i) (L : X.Modules) [L.IsInvertible] (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k] (w : W) (s : S) (hw : k w = s) (τ : (Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅ SheafOfModules.unit (pullback f (S.fromSpecResidueField s)).ringCatSheaf) (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U) (p : Ideal Γ(W, U)) [p.IsPrime] (hp : p = RingHom.ker (W.evaluation U w hwU).hom) (K : CochainComplex (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) (hK : IsStrictlyPerfect W U K) (hE : Nonempty ((SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj ((schemeDerivedDirectImage (pullback.snd f k)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj ((Modules.tensorPullback (pullback.fst f k)).obj L))) ≅ DerivedCategory.Q.obj K)) (C : Fin n → CochainComplex (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) (hC : ∀ i, IsStrictlyPerfect W U (C i)) (hCi : ∀ i, Nonempty ((SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj ((schemeDerivedDirectImage (pullback.snd (fi i) k)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings (pullback (fi i) k).toRingedSpace)) 0).obj ((Modules.tensorPullback (pullback.fst (fi i) k)).obj ((Modules.tensorPullback (ui i)).obj L)))) ≅ DerivedCategory.Q.obj (C i))) (eK : affineResidueCycleHomology W U p K ≃+ Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1) (eC : ∀ i, affineResidueCycleHomology W U p (C i) ≃+ Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1) (hn : 0 < n) (i : Fin n) : ∃ (a : DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj (C i)), ∀ (φ : K ⟶ C i), DerivedCategory.Q.map φ = a → ∀ z : affineResidueCycleHomology W U p K, eC i (affineResidueCycleHomologyMap φ z) = structureSheafCohomologyPullback (((Over.pullback (S.fromSpecResidueField s)).map (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f) (ui i) (hui i))).left) 1 (eK z)",
+  "statement": "theorem picard_residue_homology_geometric_naturality_fixed_positive_per_index [∀ Y : Scheme.{v}, HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))] [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1} (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))] {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ} (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] [∀ i, Flat (fi i)] [∀ i, IsProper (fi i)] [∀ i, LocallyOfFinitePresentation (fi i)] (ui : ∀ i, Xi i ⟶ X) (hui : ∀ i, ui i ≫ f = fi i) (L : X.Modules) [L.IsInvertible] (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k] (w : W) (s : S) (hw : k w = s) (τ : (Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅ SheafOfModules.unit (pullback f (S.fromSpecResidueField s)).ringCatSheaf) (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U) (p : Ideal Γ(W, U)) [p.IsPrime] (hp : p = RingHom.ker (W.evaluation U w hwU).hom) (K : CochainComplex (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) (hK : IsStrictlyPerfect W U K) (hE : Nonempty ((SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj ((schemeDerivedDirectImage (pullback.snd f k)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj ((Modules.tensorPullback (pullback.fst f k)).obj L))) ≅ DerivedCategory.Q.obj K)) (C : Fin n → CochainComplex (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) (hC : ∀ i, IsStrictlyPerfect W U (C i)) (hCi : ∀ i, Nonempty ((SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj ((schemeDerivedDirectImage (pullback.snd (fi i) k)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings (pullback (fi i) k).toRingedSpace)) 0).obj ((Modules.tensorPullback (pullback.fst (fi i) k)).obj ((Modules.tensorPullback (ui i)).obj L)))) ≅ DerivedCategory.Q.obj (C i))) (hn : 0 < n) : ∃ (eK : affineResidueCycleHomology W U p K ≃+ Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1), ∀ i : Fin n, ∃ (eCi : affineResidueCycleHomology W U p (C i) ≃+ Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1) (a : DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj (C i)), ∀ (φ : K ⟶ C i), DerivedCategory.Q.map φ = a → ∀ z : affineResidueCycleHomology W U p K, eCi (affineResidueCycleHomologyMap φ z) = structureSheafCohomologyPullback (((Over.pullback (S.fromSpecResidueField s)).map (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f) (ui i) (hui i))).left) 1 (eK z)",
   "branch": "sheaf-dag",
   "by": "K4",
   "date": "2026-10-14"
@@ -82,17 +99,35 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-47a6d",
-  "group": "H3",
+  "reviewer": "X-50233",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261014T022545-L-4045515",
-  "kind": "proof",
-  "note": "independent Codex review: Delivered module/report match the packet and the stated repair: the false helper is removed, the original theorem signature and `by sorry` are restored unchanged, and the delivery compiles cleanly.",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.picard_residue_homology_geometric_naturality_fixed_positive_per_index"
+  "landing": "20261014T140635-L-117584",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all four node signatures and proof routes with delivered Lean, verified documented corrections and necessary caller adaptations, unchanged upper statement and targets, clean compilation and expected axioms."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "D2 stage 2",
+  "old_statement": "For each index i of a positive finite family, there exists a derived arrow from K to C i such that every chain representative inducing that arrow satisfies the stated residue homology naturality equation.",
+  "what": "The fixed-equivalence helpers universally prescribed arbitrary additive equivalences. Take a smooth plane cubic over C, S=W=Spec(C), k=id, L=O, n=1, Xi=X and ui=id. A strictly perfect model has one-dimensional degree-one residue homology. Choose the source comparison linearly and the target comparison by composing it with complex conjugation in a coordinate. The identity geometric pullback would force conj(H(phi)(z))=z. Every derived arrow between these affine perfect models has a chain representative (perfect_affine_map_representative), and its residue homology map is C-linear, so this is impossible. Instead choose the comparisons together, with one source comparison shared by all indices. The upper geometric naturality theorem already has precisely this existential quantification, and its statement is unchanged.",
+  "source": {
+   "document": "Stacks Project",
+   "place": "Tags 0BF2 (functorial derived arrows), 0B91 (arbitrary base change), 01XK (affine-base cohomology); counterexample: Tags 0BYA and 0BYD (a smooth plane cubic has H1=C)"
+  },
+  "citers": [
+   {
+    "id": "new-picard-residue-homology-naturality-fixed",
+    "holds": false,
+    "note": "The old fixed-equivalence use no longer typechecks. Its caller is adapted in this delivery to use the corrected simultaneous existential comparisons; the upper geometric theorem keeps its exact statement."
+   }
   ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.picard_residue_homology_geometric_naturality_fixed_positive_per_index"
+  "old_proof": [
+   {
+    "text": "Fix an index i and apply the geometric comparison, derived direct-image functoriality, residue pullback, and K-flat comparison to construct the arrow and establish the homology equation.",
+    "uses": [],
+    "elementary": false
+   }
   ]
  }
 }

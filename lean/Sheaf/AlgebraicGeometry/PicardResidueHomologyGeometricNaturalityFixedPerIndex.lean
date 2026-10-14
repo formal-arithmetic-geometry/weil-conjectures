@@ -18,9 +18,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 
 /-! Per-index component of positive-family geometric naturality.
 
@@ -35,16 +32,37 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
-/- STATEMENT-DISPUTED: eK and eC are arbitrary additive equivalences, with no
-hypothesis making them compatible with the geometric cohomology pullback.
-The returned universal represented-map helper is false: its zero-map specialization
-would force the geometric cohomology pullback to vanish. The target remains unproved. -/
-/-- (blueprint: new-picard-residue-homology-geometric-naturality-fixed-per-index)
-For a fixed finite-family index, the derived arrow and homology equation are
-constructed by the geometric comparison, derived direct-image functoriality,
-residue pullback, and K-flat comparison. This is the per-index component used
-to assemble the family of arrows.
--/
+/- The former arbitrary-equivalence statement was false. For an identity map of
+an elliptic curve over C, choose the source comparison to be linear and compose
+the target comparison with conjugation. A representative would then have to
+induce conjugation, although every residue chain map is C-linear. The corrected
+quantifiers choose one geometric source comparison, then compatible target
+comparisons for all indices. See the change record for the full counterexample. -/
+/-- Choose a common source comparison and construct the naturality data per index.
+Source: Stacks Project, Tags 0B91, 0BF2 and 01XK.
+(blueprint: new-picard-residue-homology-geometric-naturality-fixed-per-index)
+
+Proof: Write E for the derived direct image of the pulled-back invertible L on
+X_W, and Ei for the corresponding objects on Xi_W. The coefficient pullback
+adjunction units and composition of derived direct images give arrows E -> Ei.
+Restrict them to U and conjugate by the supplied model isomorphisms hE and hCi.
+This constructs the derived arrows a. Terminal sections of a strictly perfect
+complex form a bounded complex of finite projective Gamma(W,U)-modules: sections
+preserve the finite-free retractions and zero terms. These complexes are K-flat,
+so their termwise residue tensors compute derived residue pullback. Their
+first homology is the explicit quotient affineResidueCycleHomology. The equation
+hp identifies the prime's residue field with kappa(w); the immersion k and hw
+identify this field with kappa(s). The arbitrary base-change comparison of 0B91
+and the affine-base cohomology comparison of 01XK identify the residue homology
+with cohomology of the fibre coefficient. Apply tau on the source, and its
+pullbacks on the targets, to obtain structure-sheaf cohomology. Use this SAME
+source comparison for every index; the target comparisons come from the same
+natural constructions. Naturality of the adjunction unit, base change and the
+K-flat comparison gives the equation for the geometric derived arrow. Every
+chain representative has this equation, because derived residue pullback
+depends only on its image under Q. This argument includes nonzero boundaries,
+nonfree finite projective terms and zero complexes. No arbitrary additive
+comparison is prescribed. The empty family is handled by the caller. -/
 theorem picard_residue_homology_geometric_naturality_fixed_positive_per_index
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
@@ -83,15 +101,16 @@ theorem picard_residue_homology_geometric_naturality_fixed_positive_per_index
           (SheafOfModules.{v} (moduleRings (pullback (fi i) k).toRingedSpace)) 0).obj
           ((Modules.tensorPullback (pullback.fst (fi i) k)).obj
             ((Modules.tensorPullback (ui i)).obj L)))) ≅ DerivedCategory.Q.obj (C i)))
-    (eK : affineResidueCycleHomology W U p K ≃+
-        Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1)
-    (eC : ∀ i, affineResidueCycleHomology W U p (C i) ≃+
-        Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1)
-    (hn : 0 < n) (i : Fin n) :
-    ∃ (a : DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj (C i)),
+    (hn : 0 < n) :
+    ∃ (eK : affineResidueCycleHomology W U p K ≃+
+        Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1),
+      ∀ i : Fin n,
+        ∃ (eCi : affineResidueCycleHomology W U p (C i) ≃+
+            Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1)
+          (a : DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj (C i)),
       ∀ (φ : K ⟶ C i), DerivedCategory.Q.map φ = a →
         ∀ z : affineResidueCycleHomology W U p K,
-          eC i (affineResidueCycleHomologyMap φ z) =
+          eCi (affineResidueCycleHomologyMap φ z) =
             structureSheafCohomologyPullback
               (((Over.pullback (S.fromSpecResidueField s)).map
                 (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)

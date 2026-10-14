@@ -19,11 +19,7 @@ public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricComparison
 import Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixed
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 
 /-! # Geometric naturality after passing to residue homology
 
@@ -121,13 +117,7 @@ theorem picard_residue_homology_geometric_naturality
               (((Over.pullback (S.fromSpecResidueField s)).map
                 (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
                   (ui i) (hui i))).left) 1 (eK z) := by
-  classical
-  obtain ⟨eK, eC, _⟩ :=
-    picard_residue_homology_geometric_comparison f Xi fi ui hui L W k w s hw τ U hwU hU p hp K
-      hK hE C hC hCi
-  obtain ⟨a, ha⟩ :=
-    picard_residue_homology_geometric_naturality_fixed f Xi fi ui hui L W k w s hw τ U hwU hU p hp K
-      hK hE C hC hCi eK eC
-  exact ⟨eK, eC, a, ha⟩
+  exact picard_residue_homology_geometric_naturality_fixed
+    f Xi fi ui hui L W k w s hw τ U hwU hU p hp K hK hE C hC hCi
 
 end AlgebraicGeometry.Scheme

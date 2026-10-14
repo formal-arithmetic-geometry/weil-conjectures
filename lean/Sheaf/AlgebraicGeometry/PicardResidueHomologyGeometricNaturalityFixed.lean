@@ -19,10 +19,8 @@ public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricComparisonSource
 
 /-! # Geometric naturality after passing to residue homology
 
@@ -37,15 +35,20 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
-/-! Naturality after fixing the geometric comparison equivalences.
-(blueprint: new-picard-residue-homology-naturality-fixed) -/
+attribute [local irreducible] structureSheafCohomologyPullback affineResidueCycleHomologyMap
 
-/-- Auxiliary split theorem.
-Proof: With the additive equivalences fixed, apply the coefficient pullback adjunction
-unit to each ui and pass to the derived direct-image arrows. Functoriality of derived
-residue pullback and the termwise K-flat comparison show that every chain map phi
-whose derived arrow is the resulting a i satisfies the stated homology equation.
-(blueprint: new-picard-residue-homology-naturality-fixed-positive) -/
+set_option maxHeartbeats 600000 in
+-- The derived-model comparison types require additional elaboration heartbeats.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Assemble compatible per-index comparisons with their common source comparison.
+Source: Stacks Project, Tag 0BF2, the simultaneous cohomology pullbacks.
+(blueprint: new-picard-residue-homology-naturality-fixed-positive)
+
+Proof: The per-index result first supplies one eK for the whole family. For each
+index choose the target comparison and derived arrow it supplies. The resulting
+families satisfy precisely the same representative equations. Choosing eK
+separately for different indices would not justify this assembly. -/
 theorem picard_residue_homology_geometric_naturality_fixed_positive
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
@@ -84,12 +87,12 @@ theorem picard_residue_homology_geometric_naturality_fixed_positive
           (SheafOfModules.{v} (moduleRings (pullback (fi i) k).toRingedSpace)) 0).obj
           ((Modules.tensorPullback (pullback.fst (fi i) k)).obj
             ((Modules.tensorPullback (ui i)).obj L)))) ≅ DerivedCategory.Q.obj (C i)))
-    (eK : affineResidueCycleHomology W U p K ≃+
-        Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1)
-    (eC : ∀ i, affineResidueCycleHomology W U p (C i) ≃+
-        Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1)
     (hn : 0 < n) :
-    ∃ (a : ∀ i, DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj (C i)),
+    ∃ (eK : affineResidueCycleHomology W U p K ≃+
+        Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1)
+      (eC : ∀ i, affineResidueCycleHomology W U p (C i) ≃+
+        Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1)
+      (a : ∀ i, DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj (C i)),
       ∀ i (φ : K ⟶ C i), DerivedCategory.Q.map φ = a i →
         ∀ z : affineResidueCycleHomology W U p K,
           eC i (affineResidueCycleHomologyMap φ z) =
@@ -98,20 +101,27 @@ theorem picard_residue_homology_geometric_naturality_fixed_positive
                 (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
                   (ui i) (hui i))).left) 1 (eK z) := by
   classical
-  let a : ∀ i, DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj (C i) := fun i =>
-    Classical.choose (picard_residue_homology_geometric_naturality_fixed_positive_per_index
-      f Xi fi ui hui L W k w s hw τ U hwU hU p hp K hK hE C hC hCi eK eC hn i)
-  refine ⟨a, ?_⟩
-  intro i φ hφ z
-  have hi := Classical.choose_spec
-    (picard_residue_homology_geometric_naturality_fixed_positive_per_index
-      f Xi fi ui hui L W k w s hw τ U hwU hU p hp K hK hE C hC hCi eK eC hn i)
-  simpa [a] using hi φ hφ z
+  obtain ⟨eK, hi⟩ :=
+    picard_residue_homology_geometric_naturality_fixed_positive_per_index
+      f Xi fi ui hui L W k w s hw τ U hwU hU p hp K hK hE C hC hCi hn
+  choose eC a ha using hi
+  exact ⟨eK, eC, a, ha⟩
 
 end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Scheme
 
+set_option maxHeartbeats 600000 in
+-- The derived-model comparison types require additional elaboration heartbeats.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Extend the compatible comparison family to include the empty index set.
+Source: Stacks Project, Tag 0BF2; Tag 0B91 for the source comparison.
+(blueprint: new-picard-residue-homology-naturality-fixed)
+
+Proof: If n is positive use the assembled positive-family theorem. If n is zero,
+construct the source comparison by the source geometric comparison theorem;
+the target comparisons, arrows and equations are functions from Fin 0. -/
 theorem picard_residue_homology_geometric_naturality_fixed
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
@@ -149,12 +159,12 @@ theorem picard_residue_homology_geometric_naturality_fixed
         ((DerivedCategory.singleFunctor
           (SheafOfModules.{v} (moduleRings (pullback (fi i) k).toRingedSpace)) 0).obj
           ((Modules.tensorPullback (pullback.fst (fi i) k)).obj
-            ((Modules.tensorPullback (ui i)).obj L)))) ≅ DerivedCategory.Q.obj (C i)))
-    (eK : affineResidueCycleHomology W U p K ≃+
+            ((Modules.tensorPullback (ui i)).obj L)))) ≅ DerivedCategory.Q.obj (C i))) :
+    ∃ (eK : affineResidueCycleHomology W U p K ≃+
         Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1)
-    (eC : ∀ i, affineResidueCycleHomology W U p (C i) ≃+
-        Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1) :
-    ∃ (a : ∀ i, DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj (C i)),
+      (eC : ∀ i, affineResidueCycleHomology W U p (C i) ≃+
+        Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1)
+      (a : ∀ i, DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj (C i)),
       ∀ i (φ : K ⟶ C i), DerivedCategory.Q.map φ = a i →
         ∀ z : affineResidueCycleHomology W U p K,
           eC i (affineResidueCycleHomologyMap φ z) =
@@ -165,12 +175,14 @@ theorem picard_residue_homology_geometric_naturality_fixed
   classical
   by_cases hn : n = 0
   · subst n
-    refine ⟨fun i => Fin.elim0 i, ?_⟩
+    obtain ⟨eK⟩ := picard_residue_homology_geometric_comparison_source
+      f L W k w s hw τ U hwU hU p hp K hK hE
+    refine ⟨eK, fun i => Fin.elim0 i, fun i => Fin.elim0 i, ?_⟩
     intro i
     exact Fin.elim0 i
-  · have hnpos : 0 < n := Nat.pos_of_ne_zero hn
-    exact picard_residue_homology_geometric_naturality_fixed_positive
-      f Xi fi ui hui L W k w s hw τ U hwU hU p hp K hK hE C hC hCi eK eC hnpos
+  · exact picard_residue_homology_geometric_naturality_fixed_positive
+      f Xi fi ui hui L W k w s hw τ U hwU hU p hp K hK hE C hC hCi
+      (Nat.pos_of_ne_zero hn)
 
 
 end AlgebraicGeometry.Scheme
