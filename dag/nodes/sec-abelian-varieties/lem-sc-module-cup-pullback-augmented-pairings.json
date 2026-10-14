@@ -1,0 +1,160 @@
+{
+ "id": "lem-sc-module-cup-pullback-augmented-pairings",
+ "kind": "statement",
+ "title": "Pullback cochain maps of augmented computing pairings",
+ "statement": "Let $f:X'\\to X$ be a scheme morphism [def-pc-scheme], $F,G$ module sheaves on $X$ [def-weil-sheaf-of-modules-category], $f^*$ tensor pullback [def-pc-module-pullback], and $\\eta$ its adjunction unit [def-weil-pbc-module-cohomology-fmap]. Let $\\tau:f^*(F\\otimes G)\\to f^*F\\otimes f^*G$ be the section-normalized tensor comparison [lem-weil-pbc-module-pullback-tensor], for the sheaf tensor [def-pur-sheaf-tensor-product]. There exist computing pairings $D$ of $F,G$ and $E$ of $f^*F,f^*G$ [def-sc-module-cup-resolution-data] and sheaf cochain maps $l:D_l.K\\to f_*E_l.K$, $r:D_r.K\\to f_*E_r.K$, $t:D_t.K\\to f_*E_t.K$ over $\\eta_F$, $\\eta_G$ and $f_*(\\tau)\\eta_{F\\otimes G}$, respectively: their degree-zero augmentation squares commute. Their canonical additive global maps $\\Gamma_f(l),\\Gamma_f(r),\\Gamma_f(t)$ [lem-sc-module-cup-resolution-fmap] preserve the section pairing in every bidegree: $\\Gamma_f(t)^{p+q}(D.\\mathrm{pair}^{p,q}(a,b))=E.\\mathrm{pair}^{p,q}(\\Gamma_f(l)^p(a),\\Gamma_f(r)^q(b))$ for all global sections $a,b$. No equation on cohomology classes is part of the assertion.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "section-cup-product, naive products and Lemma 20.31.3; Tag 0FKS, cohomology-lemma-godement-resolution, extended coordinatewise to a scheme morphism"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-module-pullback-tensor",
+  "def-sc-module-cup-resolution-data",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-sc-module-cup-resolution-fmap"
+ ],
+ "proof": [
+  {
+   "text": "Take the concrete Godement models for the six coefficients. Over V send a product-of-stalks section to the section over f-inverse V whose x-prime coordinate is the image of its f(x-prime) coordinate under the coefficient stalk map. This is O_X(V)-linear with target viewed by pushforward and commutes with restrictions. The germ unit and evaluation commute: both routes take the germ or evaluate the same coordinate. Iterate this construction to obtain augmented cosimplicial f-maps and maps of the alternating complexes.",
+   "uses": [
+    "lem-sc-module-cup-godement-model-pairing-models-exist",
+    "def-sc-module-cup-godement-model",
+    "def-sc-module-cup-godement-codegeneracies",
+    "lem-sc-module-cup-godement-relations",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use coordinatewise tensoring and the front/back faces of Alexander--Whitney to form pairings. The section normalization of the tensor comparison makes image-of-tensor equal tensor-of-images on each stalk coordinate. The iterated f-maps commute with front and back faces, yielding the strict pairing equation. For the target coefficient compose with the Godement map of tau. Leibniz and the germ tensor equation give the augmented pairings.",
+   "uses": [
+    "lem-sc-module-cup-godement-model-pairing-pairing",
+    "lem-sc-module-cup-godement-aw",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The model augmentations are quasi-isomorphisms and the Godement terms are flasque. Restrict to natural degrees, choose injective comparisons over the augmentations, and apply flasque acyclicity and the acyclic-resolution criterion to show that all six global comparison homology maps are invertible. This supplies D and E without changing the constructed complexes, maps or pairings. Taking the explicit global f-maps supplies the asserted equality, and degree-zero germ compatibility supplies the three augmentation equations.",
+   "uses": [
+    "lem-sc-module-cup-godement-model-quasi-iso",
+    "lem-sc-module-cup-godement-object-flasque",
+    "lem-sc-module-cup-flasque-acyclicity",
+    "lemma-weil-pbc-leray-acyclicity",
+    "def-sp-injective-resolutions",
+    "def-sc-module-cup-resolution-data",
+    "lem-sc-module-cup-resolution-fmap"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-cup-godement-model-pairing-models-exist",
+  "def-sc-module-cup-godement-model",
+  "def-sc-module-cup-godement-codegeneracies",
+  "lem-sc-module-cup-godement-relations",
+  "def-pc-module-pullback",
+  "lem-sc-module-cup-godement-model-pairing-pairing",
+  "lem-sc-module-cup-godement-aw",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-sc-module-cup-godement-model-quasi-iso",
+  "lem-sc-module-cup-godement-object-flasque",
+  "lem-sc-module-cup-flasque-acyclicity",
+  "lemma-weil-pbc-leray-acyclicity",
+  "def-sp-injective-resolutions",
+  "def-sc-module-cup-resolution-data",
+  "lem-sc-module-cup-resolution-fmap"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "section-cup-product, naive products and Lemma 20.31.3; Tag 0FKS, cohomology-lemma-godement-resolution, extended coordinatewise to a scheme morphism; E1 explicit construction and comparison argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Godement resolutions simultaneously admit chain f-maps compatible with augmentation and Alexander Whitney pairing",
+   "results": "8 hits: AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_f, CategoryTheory.Abelian.LeftResolution.chainComplexMap_f_succ_succ, AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex, CategoryTheory.Abelian.LeftResolution.chainComplexMap, AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty, AlgebraicTopology.NormalizedMooreComplex.map_f, AlgebraicTopology.NormalizedMooreComplex.map, CategoryTheory.Idempotents.DoldKan.Γ_map_app",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.cyclesMap_i",
+   "results": "1 hits: HomologicalComplex.cyclesMap_i",
+   "date": "2026-10-14",
+   "verdict": "homology infrastructure; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|godement|AlexanderWhitney",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Acyclic sheaf resolutions chain maps over a morphism of ringed spaces compute cohomology f maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupPullbackResolutionMaps",
+  "date": "2026-10-14",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof of Tag 0BF3: invoke the Kunneth cup product on the special fibre; pullback compatibility in Step 4 of lem-sc-picard-cech-cup-pullback-compat; Pullback cochain maps of augmented computing pairings",
+   "via": [
+    "lem-sc-module-cup-pullback-resolution-maps",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupPullbackAugmentedPairings",
+  "file": "lean/Sheaf/Paper/ModuleCupPullbackAugmentedPairings.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_pullback_augmented_pairings",
+  "statement": "theorem moduleCup_pullback_augmented_pairings (X X' : Scheme.{v}) (f : X' ⟶ X)\n    (F G : X.Modules) :\n    ∃ (D : CupResolutionPairing F G)\n      (E : CupResolutionPairing ((tensorPullback f).obj F) ((tensorPullback f).obj G))\n      (l : D.left.K ⟶\n        ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj E.left.K)\n      (r : D.right.K ⟶\n        ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj E.right.K)\n      (t : D.target.K ⟶\n        ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj E.target.K),\n      (D.left.augmentation.f 0 ≫ l.f 0 =\n        (Classical.choose (exists_tensorPullbackAdjunction f)).unit.app F ≫\n          (pushforward f).map (E.left.augmentation.f 0)) ∧\n      (D.right.augmentation.f 0 ≫ r.f 0 =\n        (Classical.choose (exists_tensorPullbackAdjunction f)).unit.app G ≫\n          (pushforward f).map (E.right.augmentation.f 0)) ∧\n      (D.target.augmentation.f 0 ≫ t.f 0 =\n        (Classical.choose (exists_tensorPullbackAdjunction f)).unit.app (F ⊗ G) ≫\n          (pushforward f).map ((Classical.choose (module_pullback_tensor f) F G).hom) ≫\n          (pushforward f).map (E.target.augmentation.f 0)) ∧\n      (∀ (p q : ℕ) (a : Γ(D.left.K.X p, ⊤)) (b : Γ(D.right.K.X q, ⊤)),\n        (cupResolutionGlobalMap f t).f (p + q) (D.pair p q ⊤ a b) =\n          E.pair p q ⊤ ((cupResolutionGlobalMap f l).f p a)\n            ((cupResolutionGlobalMap f r).f q b))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261014T033104-L-603179",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261014T033104-L-603179",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
