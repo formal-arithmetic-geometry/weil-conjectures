@@ -66,3 +66,6 @@ This compatibility module intentionally contains no declarations after duplicate
 
 -- Verification (C4, 2026-10-14): compatibility module compiles cleanly with no declarations
 -- or proof holes. This stale assignment closes no additional holes.
+
+-- Second reading (J3, 2026-10-14): clean compatibility compile; no declarations or holes.
+-- The stale repair closes no additional holes and does not certify the absent upstream theorem.
