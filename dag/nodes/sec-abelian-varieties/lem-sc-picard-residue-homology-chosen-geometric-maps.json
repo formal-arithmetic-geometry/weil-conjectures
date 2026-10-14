@@ -28,54 +28,40 @@
  },
  "proof": [
   {
-   "text": "Construct, for every base-changed ui, the coefficient arrow by transposing the pullback identity under the pullback/direct-image adjunction and composing derived direct images. Restrict this actual arrow to U and conjugate by the supplied model isomorphisms. Lift it to one chain map using the affine perfect representative theorem.",
+   "text": "If n is positive, apply the existing simultaneous per-index geometric naturality theorem. It supplies one common source comparison eK, and for every index a compatible target comparison eCi and a derived arrow a_i with the required equation for every chain representative. Choose these target comparisons and arrows as families.",
    "uses": [
-    "lem-pc-perfect-affine-map-representative",
-    "def-pc-derived-direct-image",
-    "lem-pc-module-pullback-adjunction"
+    "new-picard-residue-homology-geometric-naturality-fixed-per-index"
    ],
    "elementary": false
   },
   {
-   "text": "Choose the quotient-to-homology comparison simultaneously using picard_residue_quotient_model_homology_naturality. The common scalar transport commutes with every module map, and the canonical cycle and quotient projections commute with the homology map. This algebraic naturality theorem is proved in Lean with only the standard axioms.",
+   "text": "For each index apply the affine perfect map representative theorem to the supplied derived arrow a_i, with source K and target C_i. Choose the resulting chain maps phi_i. Specialize the per-index naturality equation to phi_i and the proved equality Q.map(phi_i) = a_i; assemble eK, the target comparisons and the chain maps.",
    "uses": [
-    "new-picard-residue-quotient-model-homology",
-    "lem-sc-affine-residue-cycle-homology-map"
+    "lem-pc-perfect-affine-map-representative"
    ],
    "elementary": false
   },
   {
-   "text": "On strictly perfect complexes, the K-flat pullback counit is invertible and natural. Transport its homology comparison through open restriction, chart and residue-field identifications to the explicit section-tensor model. Apply the source residue comparison with these coherent choices, rather than independent objectwise equivalences.",
+   "text": "If n is zero, compose the existing source residue comparison with the source fibre comparison to obtain eK. The target comparison family, chain map family and all equations are functions on Fin 0 and are constructed by Fin.elim0. This includes the empty family without adding a nonemptiness hypothesis.",
    "uses": [
-    "lem-sc-localized-strict-perfect-residue-homology",
-    "new-picard-residue-homology-comparison-source-residue"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Derived base change identifies the direct-image residue fibres with the direct images of the fibre coefficients. The mate construction respects the coefficient units and direct-image composition. The affine higher-direct-image comparison then identifies the chosen arrows on H1 with coefficient pullback. Use the one source trivialization and its pullbacks on every target. The module-to-additive cohomology comparison identifies this with structureSheafCohomologyPullback. The immersion identifies the original residue fibres. Compose to obtain the common eK and target eCi. The empty family retains only the objectwise source comparison.",
-   "uses": [
+    "new-picard-residue-homology-comparison-source-residue",
     "new-picard-residue-homology-comparison-source-fibre"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "new-picard-residue-homology-geometric-naturality-fixed-per-index",
   "lem-pc-perfect-affine-map-representative",
-  "def-pc-derived-direct-image",
-  "lem-pc-module-pullback-adjunction",
-  "new-picard-residue-quotient-model-homology",
-  "lem-sc-affine-residue-cycle-homology-map",
-  "lem-sc-localized-strict-perfect-residue-homology",
   "new-picard-residue-homology-comparison-source-residue",
   "new-picard-residue-homology-comparison-source-fibre"
  ],
  "proof_origin": {
-  "by": "Codex",
+  "by": "J3",
   "kind": "written-by-agent",
   "date": "2026-10-15",
-  "document": "Stacks Project",
-  "place": "Tag 0BF2: parent-facing chosen representatives, with the natural compatibility construction expanded"
+  "document": "Stacks Project and existing Lean comparison theorems",
+  "place": "Tags 0BF2, 0B91 and 01XK; reuse simultaneous per-index naturality and affine chain representatives; empty-family source comparison"
  },
  "mathlib_searches": [
   {
@@ -145,5 +131,15 @@
   "result": "pass",
   "kind": "interface",
   "note": "Read against Stacks Tags 0BF2, 0B91 and 01XK; one named geometric compatibility proof remains open. Empty-family and zero-complex cases checked."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-9ddde",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261014T205623-L-2719318",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered module and DAG node statements match the published versions; proofs compile, importer gate passes, and only the declared private helpers/proof route changed."
  }
 }
