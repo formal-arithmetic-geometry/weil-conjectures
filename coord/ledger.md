@@ -14774,3 +14774,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 17:07 L: batch 20261014T085849 dependency take-out
 - 09:09 L: merged deliver/G1/Sheaf.AlgebraicGeometry.PerfectOverlapHomPresentation (stage 3; reviewer PASS; first push; landing 20261014T090918-L-365809 (interface); batch 20261014T090916; modules 2; new nodes 1)
+- 09:09 L: merged deliver/J4/Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionExists (stage 3; reviewer PASS; first push; landing 20261014T090919-L-366059 (proof); batch 20261014T090916; modules 1; new nodes 0)
