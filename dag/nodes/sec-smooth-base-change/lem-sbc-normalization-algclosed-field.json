@@ -25,67 +25,220 @@
   "def-sc-function-field",
   "def-weil-pbc-normal-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write Z as Spec A and let phi:A to K be induced by g; form integral closure B of image A in K.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-scheme",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035H"
+   }
+  },
+  {
+   "text": "Set $Z^\\nu=\\operatorname{Spec}B$. Since $B$ is a subring of the field $K$, it is a domain. Applying the existing finite-product integral-closure normality lemma to the one-element product $B^1=K$ gives that every localization $B_{\\mathfrak p}$ is an integrally closed domain; hence $Z^\\nu$ is affine and integral and all its local rings are integrally closed domains. The map from the image of $A$ to $B$ is integral, so the induced morphism $\\pi:Z^\\nu\\to Z$ is integral.",
+   "uses": [
+    "lem-sbc-integral-closure-algclosed-fraction",
+    "lem-sbc-integral-closure-finite-normal-product",
+    "def-pc-integral-scheme",
+    "def-weil-finite-integral-morphism",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035H, 035I, 035L"
+   }
+  },
+  {
+   "text": "For the affine integral scheme $Z^\\nu$, [def-sc-function-field] identifies $k(Z^\\nu)$ with $\\operatorname{Frac}(B)$. The exact algebraic-closure theorem for the fraction field of an integral closure (the new Mathlib leaf) applies, so $k(Z^\\nu)$ is algebraically closed. The inclusion $B\\hookrightarrow K$ is injective because $B$ is a subring of the field $K$; the universal property of the fraction field therefore gives an injective field homomorphism $i:k(Z^\\nu)\\simeq\\operatorname{Frac}(B)\\hookrightarrow K$.",
+   "uses": [
+    "lem-sbc-integral-closure-algclosed-fraction",
+    "def-sc-function-field",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F08, Lemma 59.88.7; fraction-field algebraic-closure argument"
+   }
+  },
+  {
+   "text": "Restrict $i$ to $B$ and use contravariance of $\\operatorname{Spec}$: the resulting map $g^\\nu:\\operatorname{Spec}K\\to\\operatorname{Spec}B$ satisfies $g=\\pi\\circ g^\\nu$. Its image contains the generic point because $i$ is injective, so $g^\\nu$ is dominant.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sc-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035I"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "def-pc-scheme",
+  "def-sc-function-field",
+  "def-weil-affine-spectrum",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-normal-ring",
+  "lem-sbc-integral-closure-algclosed-fraction",
+  "lem-sbc-integral-closure-finite-normal-product",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 035H, 035I, 035L, 0F08"
+ },
  "mathlib_searches": [
   {
+   "tool": "leanfinder",
+   "query": "integral closure in algebraically closed field normalization affine scheme",
+   "results": [
+    "AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization",
+    "AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization",
+    "AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization",
+    "AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc",
+    "AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom",
+    "AlgebraicGeometry.Scheme.Hom.normalizationDesc",
+    "AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage",
+    "AlgebraicGeometry.Scheme.Hom.toNormalization"
+   ],
+   "date": "2026-10-15",
+   "verdict": "no match: general declarations only"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFractionRing.isAlgClosed_integralClosure, IsIntegralHom.SpecMap_iff",
+   "results": [],
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
    "tool": "grep",
-   "query": "isAlgClosed_integralClosure|normalization.*isAlgClosed",
-   "results": "0 hits: ",
-   "date": "2026-10-14",
-   "verdict": "no match: hits give general scheme/ring or sheaf functors, not this full statement"
+   "query": "isAlgClosed_integralClosure|SpecMap_iff",
+   "results": [],
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isAlgClosed_integralClosure|exists_normalization_of_isAlgClosed",
+   "results": [],
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFractionRing.isAlgClosed_integralClosure, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization",
+   "results": [],
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalization affine scheme algebraically closed field function field",
+   "results": [
+    "AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization",
+    "AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization",
+    "AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization",
+    "AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom",
+    "AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization",
+    "AlgebraicGeometry.Scheme.Hom.normalization",
+    "AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen",
+    "AlgebraicGeometry.Scheme.Hom.toNormalization"
+   ],
+   "date": "2026-10-15",
+   "verdict": "no match: general declarations only"
   },
   {
    "tool": "leansearch",
-   "query": "Integral closure in an algebraically closed field has algebraically closed fraction field",
-   "results": "service unavailable: Internal Server Error; 0 hits: ",
-   "date": "2026-10-14",
+   "query": "normalization of affine scheme in algebraically closed field integral morphism algebraically closed function field",
+   "results": [],
+   "date": "2026-10-15",
    "verdict": "unavailable"
   },
   {
    "tool": "leanfinder",
-   "query": "Normalization of an affine scheme in an algebraically closed field is integral normal with algebraically closed fraction field",
-   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain",
-   "date": "2026-10-14",
-   "verdict": "no match: hits give general scheme/ring or sheaf functors, not this full statement"
+   "query": "normalization affine algebraically closed field dominant field embedding",
+   "results": [
+    "AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization",
+    "AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization",
+    "AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization",
+    "IsAlgClosed.ringHom_bijective_of_isIntegral",
+    "IsAlgClosed.lift_def",
+    "IsAlgClosed.algebraMap_bijective_of_isIntegral",
+    "AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom",
+    "AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization"
+   ],
+   "date": "2026-10-15",
+   "verdict": "no match: general declarations only"
   },
   {
    "tool": "loogle",
-   "query": "IsFractionRing, IsAlgClosed",
-   "results": "0 hits: ",
-   "date": "2026-10-14",
-   "verdict": "no match: hits give general scheme/ring or sheaf functors, not this full statement"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Given any ring homomorphism A to an algebraically closed field K construct integral closure B with algebraically closed fraction field and Spec K dominant over Spec B",
-   "results": "8 hits: IsAlgClosed.ringHom_bijective_of_isIntegral, AlgebraicGeometry.isField_of_universallyClosed, Algebra.ZariskisMainProperty.of_isIntegral, IsIntegralClosure.isField, IsAlgClosed.algebraMap_bijective_of_isIntegral, instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed, Algebra.ZariskisMainProperty, AlgebraicGeometry.finite_appTop_of_universallyClosed",
-   "date": "2026-10-14",
-   "verdict": "no match: hits give general scheme/ring or sheaf functors, not this full statement"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Integral closure of a commutative ring inside an algebraically closed field has an algebraically closed field of fractions",
-   "results": "8 hits: Ring.instIsFractionRingNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure, isAlgebraic_of_isFractionRing, integralClosure.isFractionRing_of_algebraic, IsIntegralClosure.isFractionRing_of_algebraic, Ring.instAlgebraNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure, IsIntegralClosure.isField, algebraicClosure.isIntegralClosure, Ring.instIsIntegralClosureNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure",
-   "date": "2026-10-14",
-   "verdict": "no match: integral-closure fraction-field lemmas do not assert the complete geometric normalization statement"
+   "query": "Scheme.Hom.normalization, IsAlgClosed",
+   "results": [],
+   "date": "2026-10-15",
+   "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "isAlgClosed.*integralClosure|integralClosure.*IsAlgClosed",
-   "results": "0 hits: ",
-   "date": "2026-10-14",
-   "verdict": "no match: integral-closure fraction-field lemmas do not assert the complete geometric normalization statement"
+   "query": "exists_normalization_of_isAlgClosed|normalization.*algClosed",
+   "results": [],
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "construct normalization of affine scheme over algebraically closed field with dominant map",
+   "results": [],
+   "date": "2026-10-15",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "sbc-lem-bc-universal-test",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-lem-universal-datum"
+ "unit": "sk-lem-universal-datum",
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "lem-sbc-normalization-algclosed-field",
+  "worker": "stage1",
+  "summary": "Repaired the normalization split to make the integral closure consistently taken over the image of A, while retaining the original affine base and explicitly recording the field embedding and dominance required by the item. The sorry-backed Lean theorem was inspected and rejected as an attachment; one prerequisite node supplies the algebraically closed fraction-field fact.",
+  "blueprint": {
+   "node": "sbc-lem-bc-universal-test",
+   "places": [
+    "Proof, final sentence: normalization of the affine base in Spec K; algebraically closed fraction field"
+   ]
+  },
+  "tool_uses": [
+   {
+    "node": "lem-sbc-integral-closure-finite-normal-product",
+    "why": "The parent needs the generic commutative-algebra fact that localizations of an integral closure in a finite product of normal domains are integrally closed; this node is in another unit and is used as a black-box tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-integral-closure-finite-normal-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-33e65743a",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-33e65743a (reviewer sub-agent of L); spot-checked: The target and route match Tag 0F08 and the master normalization theorem. The Mathlib leaf was overstated: IsFractionRing.isAlgClosed_integralClosure proves algebraic closedness only, not the embedding or domain claim. Corrected DAG JSON files are under fixes/dag/nodes/sec-smooth-base-change; the parent now spells out those elementary consequences. Review and source checks are in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }
