@@ -14,24 +14,43 @@
  ],
  "proof": [
   {
-   "text": "naturality of the open-pullback comparison moves the counit for k\npast its component. The factorization equation of leftDerivedUnique identifies\nthat comparison followed by the exact restriction factor with the counit for\nU' inclusion followed by the localized underived open tensor comparison.\nThe selected composition comparison factors the successive counits through\nits composite counit. Combine these two equations and functoriality of Qh.\nThis uses no source open or commuting square, and applies to every complex,\nincluding zero complexes and the empty open.",
+   "text": "Reuse the proved private compositionCounit and openCounit identities from OpenPinnedSourceCounitTriangle through a proof-only import all. The first factors the selected composition comparison through successive pinned counits and the inverse ordinary tensor composition comparison. The second factors the inverse open derived comparison through the exact restriction localization factor and the inverse termwise open comparison. mappedHomotopyInvHom cancels the inverse and forward termwise open comparisons. Precompose the open identity by the forward derived comparison and postcompose by the forward termwise comparison; targetOpenFactor gives the forward open factorization.",
    "uses": [
-    "def-pc-open-pinned-single-tensor-restriction-iso",
+    "lem-pc-open-pinned-source-counit-triangle",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
     "def-pc-single-complex-open-restriction-data",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "def-pc-open-pinned-single-tensor-restriction-iso"
    ],
    "elementary": false
+  },
+  {
+   "text": "For targetHomotopyComparison choose a representative complex of P. Both homotopy composition components are quotient maps of termwise comparisons. Their composite in each degree cancels the ordinary composition comparison against its inverse and leaves the open tensor comparison evaluated on the tensor pullback of that degree. Apply Qh and its map_comp equation to obtain the target termwise comparison cancellation.",
+   "uses": [
+    "def-pc-tensor-pullback-composition-iso",
+    "def-pc-open-pinned-single-tensor-restriction-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of the forward singleComplexOpenPullbackIso component at the pinned counit for k moves exact restriction of this counit to derived open pullback of the counit followed by the open comparison. Substitute the forward open factorization and the compositionCounit identity. The termwise cancellation identifies the remaining two comparison maps with the forward open tensor comparison. targetTriangleAlgebra reassociates these four equations to give the exact displayed target triangle. No counit is canceled and no source open, boundedness, or geometric assumption is introduced.",
+   "uses": [
+    "def-pc-single-complex-open-restriction-data",
+    "lem-pc-open-pinned-source-counit-triangle"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-open-pinned-single-tensor-restriction-iso",
+  "lem-pc-open-pinned-source-counit-triangle",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
   "def-pc-single-complex-open-restriction-data",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "def-pc-open-pinned-single-tensor-restriction-iso",
+  "def-pc-tensor-pullback-composition-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08HY",
-  "place": "Separate open-leg factorization identities and functorial tensor comparison"
+  "place": "Tags 08DW, 0D5S and 08HY; P4 Lean proof reusing the proved source-leg factorization helpers, with target termwise cancellation and naturality"
  },
  "mathlib_searches": [
   {
@@ -106,13 +125,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G1",
+  "reviewer": "X-2301c",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261013T165640-L-1807483",
+  "landing": "20261014T001728-L-2553360",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module, node proof metadata, change record, report, full compile, axioms, and both direct importers matched the stated requirements."
  }
 }
