@@ -7,6 +7,8 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
 public import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential
 public import Sheaf.AlgebraicGeometry.SchemeTensorUnitAction
+import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationTripleComponent
+import Sheaf.AlgebraicGeometry.SchemeCanonicalTensorUnitComponent
 /-! # Ordinary evaluation: a step of the chain calculation
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
 -/
@@ -21,6 +23,37 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 namespace AlgebraicGeometry
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
+
+-- Prove tensor extensionality with abstract complexes, keeping coproduct data out of the
+-- later component calculation on the concrete single-unit complex.
+private theorem triple_ext {C : Type*} [Category* C] [Preadditive C]
+    [MonoidalCategory C] [SymmetricCategory C] [MonoidalPreadditive C] [MonoidalClosed C]
+    [HasColimitsOfSize.{0, 0} C] (F V P N : CochainComplex C ℤ)
+    (a b : HomologicalComplex.mapBifunctor
+      (HomologicalComplex.mapBifunctor F V (curriedTensor _) (.up ℤ)) P
+        (curriedTensor _) (.up ℤ) ⟶ N)
+    (h : ∀ (p q r n k : ℤ) (hpq : p + q = n) (hnr : n + r = k),
+      (HomologicalComplex.ιMapBifunctor F V (curriedTensor _) (.up ℤ) p q n hpq ▷ P.X r)
+        ≫ HomologicalComplex.ιMapBifunctor
+          (HomologicalComplex.mapBifunctor F V (curriedTensor _) (.up ℤ)) P
+            (curriedTensor _) (.up ℤ) n r k hnr ≫ a.f k =
+      (HomologicalComplex.ιMapBifunctor F V (curriedTensor _) (.up ℤ) p q n hpq ▷ P.X r)
+        ≫ HomologicalComplex.ιMapBifunctor
+          (HomologicalComplex.mapBifunctor F V (curriedTensor _) (.up ℤ)) P
+            (curriedTensor _) (.up ℤ) n r k hnr ≫ b.f k) : a = b := by
+  apply HomologicalComplex.Hom.ext
+  funext k
+  apply HomologicalComplex.mapBifunctor₁₂.hom_ext
+  intro p q r hh
+  have hpqr : p + q + r = k := hh
+  have hi := HomologicalComplex.mapBifunctor₁₂.ι_eq
+    (curriedTensor _) (curriedTensor _) F V P (.up ℤ) (.up ℤ)
+      p q r (p + q) k rfl hpqr
+  simp only [curriedTensor_map_app] at hi
+  rw [hi]
+  exact (Category.assoc _ _ _).trans
+    ((h p q r (p + q) k rfl hpqr).trans (Category.assoc _ _ _).symm)
+
 /-- The ordinary component formula gives the tensor-unit action for a factor map.
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ;
 ordinary evaluation chain calculation, step 3.
@@ -64,5 +97,21 @@ theorem schemeOrdinaryEvaluation_chain_action (Y : Scheme.{u})
     let phiO := ((homComplexFunctor (R := Y.sheaf)).obj (op P)).map (eta.app O)
     schemeTensorHomUncurry Y V P O phiO = e ≫ eta.app O →
     schemeTensorHomUncurry Y (pullbackTensorTotal Y F V) P F phiF =
-      schemeTensorUnitAction Y F V P e ≫ eta.app F := by sorry
+      schemeTensorUnitAction Y F V P e ≫ eta.app F := by
+  classical
+  intro O V eta phiF phiO hO
+  have := SheafOfModules.isGrothendieckAbelian (moduleRings Y.toRingedSpace)
+  let := SheafOfModules.monoidalCategory Y.sheaf
+  let := SheafOfModules.symmetricCategory Y.sheaf
+  have : MonoidalPreadditive (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
+    Classical.choice (SheafOfModules.tensorClosed Y.sheaf).1
+  let := SheafOfModules.monoidalClosed (R := Y.sheaf)
+  have : HasColimitsOfSize.{0, 0}
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
+    hasColimitsOfSizeShrink.{0, 0, u, u} _
+  apply triple_ext F V P ((schemeHomKInjectiveResolution Y).obj F)
+  intro p q r n k hpq hnr
+  have hu := schemeOrdinaryEvaluation_triple_component Y P F f hf p q r n k hpq hnr
+  have ha := schemeCanonicalTensorUnit_component Y P F e p q r n k hpq hnr hO
+  exact hu.trans ha.symm
 end AlgebraicGeometry

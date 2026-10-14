@@ -1,0 +1,127 @@
+{
+ "id": "lem-pc-scheme-canonical-tensor-unit-component",
+ "kind": "statement",
+ "title": "Canonical projection formula for the tensor-unit action",
+ "statement": "For any scheme Y and module-sheaf cochain complexes P,F, put O equal to the single tensor unit, V=Hom(P,O), and eta equal to the fixed K-injective augmentation. Suppose e:Tot(V tensor P) to O satisfies U(Hom(P,eta_O))=e;eta_O. Then the component of schemeTensorUnitAction(F,V,P,e);eta_F on (F^p tensor V^q) tensor P^r in degree k=n+r, n=p+q, is zero if r+q is nonzero; otherwise it is the component associator, F^p tensor the uncurried dual Hom projection identified with the tensor unit by singleObjXSelf, the right unitor, and XIsoOfEq from p to k, followed by eta_F in degree k. No ordinary evaluation map f or ordinary component predicate is used, and no existence of e is asserted.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ (lemma-internal-hom), 08DM and 08DQ; ordinary evaluation localization proof step 2"
+ },
+ "stmt_deps": [
+  "lem-pc-tensor-hom-uncurry-differential",
+  "lem-sc-hom-complex-projections",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-scheme-tensor-unit-action"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the factorization equality to V^q tensor P^r. Uncurrying components and Hom projection naturality move eta_O to the end. The augmentation is a monomorphism and evaluation preserves finite limits, so its degree component is monic. Cancel it to determine each component of e. Postcompose its degree-zero component with singleObjXSelf and use tensor-Hom coefficient naturality.",
+   "uses": [
+    "lem-pc-tensor-hom-uncurry-differential",
+    "lem-sc-hom-complex-projections",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The total tensor associator takes a triple inclusion to the component associator without a sign. Naturality of the total tensor map inserts the component of e. When r+q is nonzero the single-unit component is zero, so the action component vanishes. Otherwise the total right unitor gives singleObjXSelf followed by the ordinary right unitor and XIsoOfEq, and p=k by the two degree equations. Substitute the determined component of e and postcompose with eta_F to obtain exactly the stated formula, using the component-of-composition equation.",
+   "uses": [
+    "def-pc-scheme-tensor-unit-action",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-tensor-unit-action",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-tensor-hom-uncurry-differential",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T3",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ (lemma-internal-hom), 08DM and 08DQ; ordinary evaluation localization proof step 2",
+  "description": "Combine the coefficient cancellation and generic tensor-unit calculation as one component normalization lemma. This is a strict part of the parent: it has no ordinary map f or predicate hf and asserts only a triple-summand component formula."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "component of right unit action after total complex associator and tensoring a map into single tensor unit",
+   "results": "Found HomologicalComplex.associator and bifunctor associator summand formulas, not the combined coefficient-cancellation and single-unit component identity.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightUnitor\", \"ι\"",
+   "results": "Found graded-object right unitor summand formulas, not a formula also incorporating the resolution factorization and the chosen internal Hom projection.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "ι.*(rightUnitor|associator)",
+   "results": "Found standard associator and unitor formulas; source searches found projection and tensor-Hom naturality APIs, but no combined canonical tensor-unit component theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical triple tensor component of evaluation and single-unit action after a monomorphic resolution augmentation",
+   "results": "Service unavailable: Internal Server Error. No absence claim inferred; LeanFinder/Loogle and source grep independently used.",
+   "available": false,
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationChainAction",
+  "date": "2026-10-14",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-scheme-ordinary-evaluation-chain-action",
+   "place": "Proof step 1 and the tensor action portion of proof step 2"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeCanonicalTensorUnitComponent",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeCanonicalTensorUnitComponent.lean",
+  "declaration": "AlgebraicGeometry.schemeCanonicalTensorUnit_component",
+  "statement": "theorem schemeCanonicalTensorUnit_component (Y : Scheme.{u})\n    (P F : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (e : pullbackTensorTotal Y\n      (homComplex (R := Y.sheaf) P\n        ((HomologicalComplex.single _ (.up ℤ) 0).obj\n          (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace))))) P ⟶\n      (HomologicalComplex.single _ (.up ℤ) 0).obj\n        (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace))))\n    (p q r n k : ℤ) (hpq : p + q = n) (hnr : n + r = k) :\n    letI := SheafOfModules.isGrothendieckAbelian (moduleRings Y.toRingedSpace)\n    let O := (HomologicalComplex.single _ (.up ℤ) 0).obj\n      (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))\n    let V := homComplex (R := Y.sheaf) P O\n    let eta := CochainComplex.toKInjectiveResolution.{u}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n    let π := Classical.choose (homComplex_projections_exists.{u, u, u, u} (R := Y.sheaf))\n    schemeTensorHomUncurry Y V P O\n      (((homComplexFunctor (R := Y.sheaf)).obj (op P)).map (eta.app O)) =\n        e ≫ eta.app O →\n    (HomologicalComplex.ιMapBifunctor F V (curriedTensor _) (.up ℤ) p q n hpq ▷ P.X r)\n      ≫ HomologicalComplex.ιMapBifunctor (pullbackTensorTotal Y F V) P\n        (curriedTensor _) (.up ℤ) n r k hnr ≫\n          (schemeTensorUnitAction Y F V P e ≫ eta.app F).f k =\n    (if h : r + q = 0 then\n      (α_ (F.X p) (V.X q) (P.X r)).hom ≫\n        F.X p ◁ ((β_ (V.X q) (P.X r)).hom ≫\n          (SheafOfModules.tensorHomEquiv (R := Y.sheaf) (P.X r) (V.X q)\n            (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))).symm\n              (π P O q r 0 h ≫ SheafOfModules.homObjMap (R := Y.sheaf) (𝟙 (P.X r))\n                (HomologicalComplex.singleObjXSelf (.up ℤ) 0\n                  (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))).hom)) ≫\n        (ρ_ (F.X p)).hom ≫ (F.XIsoOfEq (by omega : p = k)).hom\n    else 0) ≫ (eta.app F).f k",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261014T034913-L-815915",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261014T034913-L-815915",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
