@@ -83,7 +83,34 @@ open Scheme Functor
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-set_option synthInstance.maxHeartbeats 200000 -- instance search on complexes of module objects
+/-! ### Instances
+
+Direct instances for complexes of module objects over `Λ_Z`. Finding them from the generic
+instances on `Mod` exceeds the default heartbeat limit, so they are recorded once here. -/
+
+set_option synthInstance.maxHeartbeats 200000 in
+-- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
+instance hasTensor_cochainComplex (Z : Scheme.{u})
+    (A B : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) ℤ) :
+    HomologicalComplex.HasTensor A B :=
+  inferInstance
+
+set_option synthInstance.maxHeartbeats 200000 in
+-- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
+noncomputable instance monoidalCategoryStruct_cochainComplex (Z : Scheme.{u}) :
+    MonoidalCategoryStruct
+      (CochainComplex (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))
+        ℤ) :=
+  inferInstance
+
+set_option synthInstance.maxHeartbeats 200000 in
+-- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
+noncomputable instance monoidalCategory_cochainComplex (Z : Scheme.{u}) :
+    MonoidalCategory
+      (CochainComplex (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))
+        ℤ) :=
+  inferInstance
 
 /-! ### Complexes -/
 
