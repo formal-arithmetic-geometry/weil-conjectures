@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantEtale.Universal
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
+public import WeilConjectures.ConstructibleSheaf.Defs
 
 /-!
 # Constant sheaves of sets on the small étale site and trivial covers
@@ -334,5 +336,113 @@ lemma Etale.isUniversalSection_of_iso
     (key ▸ (sigmaHomEquiv e w).symm.bijective.comp hψ)
 
 end Restrict
+section Finite
+
+variable {T : Scheme.{u}}
+
+/-- If the restriction of a sheaf `E` with finite stalks to a nonempty étale `T`-scheme `U` is
+the sheaf of locally constant `A`-valued functions, then `A` is finite: `A` injects into the
+stalk of `E` at a geometric point of `U`, a constant function being determined by its value at
+a point. -/
+lemma Etale.finite_of_iso {E : Sheaf T.smallEtaleTopology (Type (u + 1))} (hfin : IsFiniteSheaf E)
+    (U : T.Etale) (x : U.left) {A : Type (u + 1)} [TopologicalSpace A] [DiscreteTopology A]
+    (α : Etale.restrictPresheaf E.obj U ≅ (Etale.continuousMapSheafType U.left A).obj) :
+    Finite A := by
+  let Ω := AlgebraicClosure (U.left.residueField x)
+  let t : Spec (.of Ω) ⟶ U.left :=
+    Spec.map (CommRingCat.ofHom (algebraMap (U.left.residueField x) Ω)) ≫
+      U.left.fromSpecResidueField x
+  let s : Spec (.of Ω) ⟶ T := t ≫ U.hom
+  let Φ := pointSmallEtale s
+  let V0 : U.left.Etale := Etale.mk (𝟙 U.left)
+  let U' : T.Etale := Etale.mk (𝟙 U.left ≫ U.hom)
+  let x' : Φ.fiber.obj U' := CategoryTheory.Over.homMk t (by
+    change t ≫ 𝟙 U.left ≫ U.hom = s
+    rw [Category.id_comp])
+  have : Finite (ToType (Φ.sheafFiber.obj E)) :=
+    (ConcreteCategory.isFinitelyGenerated_iff_finite _).1 (hfin.isFinitelyGenerated_sheafFiber Ω s)
+  have : Finite (ToType (Φ.presheafFiber.obj E.obj)) := this
+  let c (σ : A) : E.obj.obj (op U') := α.inv.app (op V0) (ContinuousMap.const _ σ)
+  refine Finite.of_injective (fun σ ↦ Φ.toPresheafFiber U' x' E.obj (c σ)) fun σ τ hστ ↦ ?_
+  obtain ⟨Y, f, y, -, hf⟩ := (Φ.toPresheafFiber_eq_iff' U' x' _ _).1 hστ
+  let Y'' : U.left.Etale := Etale.mk f.left
+  let f'' : Y'' ⟶ V0 := MorphismProperty.Over.homMk f.left (Category.comp_id _)
+  let eY : Etale.mk (f.left ≫ U.hom) ≅ Y := MorphismProperty.Over.isoMk (Iso.refl _) (by
+    change 𝟙 _ ≫ Y.hom = f.left ≫ U.hom
+    rw [Category.id_comp, ← MorphismProperty.Over.w f]
+    exact congrArg (f.left ≫ ·) (Category.id_comp U.hom))
+  have hc (σ : A) : (Etale.restrictPresheaf E.obj U).map f''.op (c σ) =
+      E.obj.map eY.hom.op (E.obj.map f.op (c σ)) := by
+    rw [← Functor.map_comp_apply, ← op_comp]
+    exact Etale.restrictPresheaf_map_eq f'' _ rfl _
+  have h' : (Etale.restrictPresheaf E.obj U).map f''.op (c σ) =
+      (Etale.restrictPresheaf E.obj U).map f''.op (c τ) := by
+    rw [hc, hc, hf]
+  have hα (σ : A) : α.hom.app (op Y'') ((Etale.restrictPresheaf E.obj U).map f''.op (c σ)) =
+      ContinuousMap.const _ σ := by
+    have h2 : α.hom.app (op V0) (c σ) = ContinuousMap.const _ σ := by
+      change α.hom.app (op V0) (α.inv.app (op V0) _) = _
+      rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app, α.inv_hom_id]
+      rfl
+    rw [NatTrans.naturality_apply, h2]
+    exact ContinuousMap.ext fun _ ↦ rfl
+  have := congrArg (α.hom.app (op Y'')) h'
+  rw [hα, hα] at this
+  exact congrArg (fun g : C(Y.left, A) ↦ g (y.left (IsLocalRing.closedPoint Ω))) this
+
+end Finite
+
+section Main
+
+variable {T : Scheme.{u}} (E : Sheaf T.smallEtaleTopology (Type (u + 1))) (U : T.Etale)
+
+/-- **A constant sheaf with finite stalks is represented by a trivial finite cover.** If the
+restriction of a sheaf `E` with finite stalks to a nonempty étale `T`-scheme `U` is constant,
+then it is represented by a trivial finite cover `∐_{S'} U ⟶ U`.
+(blueprint: `lemma-weil-pbc-finite-locally-constant-etale-equivalence`) -/
+theorem Etale.exists_isUniversalSection_of_isConstant (hfin : IsFiniteSheaf E) (x : U.left)
+    [(E.over U).IsConstant (T.smallEtaleTopology.over U)] :
+    ∃ (S' : Type u) (_ : Finite S') (ξ : E.obj.obj (op (Etale.trivialCover U S'))),
+      IsUniversalSection E.obj U.hom (Etale.trivialCover U S') (Sigma.desc fun _ ↦ 𝟙 U.left)
+        ξ := by
+  let G := (Etale.overSheafEquiv U (Type (u + 1))).functor.obj (E.over U)
+  have : G.IsConstant U.left.smallEtaleTopology :=
+    (Sheaf.isConstant_sheafCongr_functor_iff (Etale.overEquiv U)
+      CategoryTheory.Over.mkIdTerminal (E.over U)).2 inferInstance
+  obtain ⟨S, ⟨iS⟩⟩ := Sheaf.mem_essImage_of_isConstant _ G
+  let : TopologicalSpace S := ⊥
+  have : DiscreteTopology S := ⟨rfl⟩
+  let α : Etale.restrictPresheaf E.obj U ≅ (Etale.continuousMapSheafType U.left S).obj :=
+    (sheafToPresheaf _ _).mapIso
+      (iS.symm ≪≫ Etale.constantSheafIsoContinuousMapSheafType U.left S)
+  have : Finite S := Etale.finite_of_iso hfin U x α
+  obtain ⟨n, ⟨eS⟩⟩ := Finite.exists_equiv_fin S
+  let : TopologicalSpace (ULift.{u} (Fin n)) := ⊥
+  have : DiscreteTopology (ULift.{u} (Fin n)) := ⟨rfl⟩
+  exact ⟨ULift.{u} (Fin n), inferInstance, _,
+    Etale.isUniversalSection_of_iso (eS.trans Equiv.ulift.symm) α⟩
+
+/-- **A sheaf represented by a trivial cover is constant.** If the restriction of `E` to an étale
+`T`-scheme `U` is represented by a trivial cover `∐_{S'} U ⟶ U`, then the restriction of `E` to
+`U` is constant. -/
+theorem Etale.isConstant_over_of_isUniversalSection (S' : Type u)
+    {ξ : E.obj.obj (op (Etale.trivialCover U S'))}
+    (h : IsUniversalSection E.obj U.hom (Etale.trivialCover U S')
+      (Sigma.desc fun _ ↦ 𝟙 U.left) ξ) :
+    (E.over U).IsConstant (T.smallEtaleTopology.over U) := by
+  let : TopologicalSpace S' := ⊥
+  have : DiscreteTopology S' := ⟨rfl⟩
+  let : TopologicalSpace (ULift.{u + 1} S') := ⊥
+  have : DiscreteTopology (ULift.{u + 1} S') := ⟨rfl⟩
+  let α := Etale.isoOfIsUniversalSection (A := ULift.{u + 1} S') Equiv.ulift h
+  let G := (Etale.overSheafEquiv U (Type (u + 1))).functor.obj (E.over U)
+  have : G.IsConstant U.left.smallEtaleTopology :=
+    Sheaf.isConstant_of_iso _ ((fullyFaithfulSheafToPresheaf _ _).preimageIso (X := G)
+      (Y := Etale.continuousMapSheafType U.left (ULift.{u + 1} S')) α ≪≫
+      (Etale.constantSheafIsoContinuousMapSheafType U.left (ULift.{u + 1} S')).symm)
+  exact (Sheaf.isConstant_sheafCongr_functor_iff (Etale.overEquiv U)
+    CategoryTheory.Over.mkIdTerminal (E.over U)).1 this
+
+end Main
 
 end AlgebraicGeometry.Scheme
