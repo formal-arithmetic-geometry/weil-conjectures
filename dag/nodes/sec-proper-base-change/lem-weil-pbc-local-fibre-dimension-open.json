@@ -30,9 +30,70 @@
   "def-pc-scheme-fibre",
   "def-kun-topological-dimension-at-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $n\\geq0$ and $x\\in U_n$. Choose an affine open $T=\\operatorname{Spec}R\\subset S$ containing $f(x)$. By the affine-cover definition of locally of finite type [def-weil-finite-type-morphism], choose an affine open $W=\\operatorname{Spec}B\\subset f^{-1}(T)$ containing $x$, with $B$ a finite type $R$-algebra. Write $h:W\\to T$ for the restriction of $f$. This uses a member of the cover supplied by that definition, rather than asserting finite type for arbitrary affine opens.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FZ, affine reduction; Tag 01T2, label lemma-locally-finite-type-characterize, affine-cover condition (4)"
+   }
+  },
+  {
+   "text": "For every $y\\in W$, put $s=f(y)$. The fibre homeomorphisms in [def-pc-scheme-fibre] identify the fibre of $h$ over $s$ with the open subspace $W\\cap f^{-1}(s)$ of $f^{-1}(s)$, the underlying space of $X_s$. Thus [lem-weil-pbc-dimension-at-point-open-subspace] identifies its local dimension at the point over $y$ with $\\dim_{\\widetilde y}X_s$. Apply [lem-sbc-affine-coordinate-fibre-dimension] to $h$: if $\\mathfrak q_y\\subset B$ corresponds to $y$ and $\\mathfrak p_y$ is its contraction to $R$, this common dimension is $\\dim_{\\mathfrak q_y}(B/R)$, measured on $\\operatorname{Spec}(B\\otimes_R\\kappa(\\mathfrak p_y))$. The affine comparison writes the tensor factors in the opposite order; the swap $b\\otimes a\\mapsto a\\otimes b$ has its own inverse and carries the kernel of $b\\otimes a\\mapsto\\bar b\\bar a$ to the same distinguished prime. Its spectrum homeomorphism carries open neighbourhoods and chains of irreducible closed subsets bijectively, so preserves the defining minimum of dimensions.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-dimension-at-point-open-subspace",
+    "lem-sbc-affine-coordinate-fibre-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FZ, affine reduction; Schemes Tag 01K1, label lemma-fibre-topological; Algebra Tag 00E6, label remark-fundamental-diagram; Topology Tag 0055, label definition-Krull, item (4)"
+   }
+  },
+  {
+   "text": "By [def-kun-topological-dimension-at-point], the local dimension at a point is a nonnegative integer or infinity. Since $x\\in U_n$, it is therefore an integer $d$ with $0\\leq d\\leq n$. Step 2 identifies $\\dim_{\\mathfrak q_x}(B/R)=d$. Apply [lem-weil-pbc-fibre-dimension-bounded-open-upstairs] to the finite type ring map $R\\to B$ and this prime: there is an open $V\\subset\\operatorname{Spec}B$ containing $\\mathfrak q_x$ such that $\\dim_{\\mathfrak q}(B/R)\\leq d$ for every $\\mathfrak q\\in V$. All its hypotheses are now in force; in particular no Noetherian or finite-presentation assumption is used.",
+   "uses": [
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-fibre-dimension-bounded-open-upstairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QH, label lemma-dimension-fibres-bounded-open-upstairs; relative dimension defined in Tag 00QD, label definition-relative-dimension"
+   }
+  },
+  {
+   "text": "Pull $V$ back along the affine identification $W\\simeq\\operatorname{Spec}B$ from [def-weil-affine-spectrum] and the choice of $W$. This gives an open neighbourhood $N_x$ of $x$ in $W$, hence in $X$ because $W$ is open. For $y\\in N_x$, steps 2 and 3 give $\\dim_{\\widetilde y}X_{f(y)}=\\dim_{\\mathfrak q_y}(B/R)\\leq d\\leq n$, so $N_x\\subset U_n$. Consequently $U_n=\\bigcup_{x\\in U_n}N_x$ is open. If $U_n$ is empty this is the empty union, also open.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FZ, conclusion of the affine-local proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-sbc-affine-coordinate-fibre-dimension",
+  "def-kun-topological-dimension-at-point",
+  "lem-weil-pbc-fibre-dimension-bounded-open-upstairs"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02FZ, label lemma-openness-bounded-dimension-fibres: affine-local reduction to Algebra Tag 00QH"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -89,15 +150,84 @@
    "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"177\", \"text\": \"instance (priority := 900) [IsOpenImmersion f] : SmoothOfRelativeDimension 0 f :=\"}\n",
    "date": "2026-10-14",
    "verdict": "no match: results supply general dimension bounds or smooth morphisms, not openness of the local fibre-dimension locus for locally finite type morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type scheme morphism the locus where the topological dimension of its fibre at a point is at most n is open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => IsOpenMap)\", \"doc\": \"The property of being an open map for morphisms of schemes is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes is an open map (i.e., its underlying continuous map s\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Any open immersion between schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyIsOpenMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtSource\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => IsOpenMap)\", \"doc\": \"The property of a scheme morphism having an underlying continuous map that is an open map is Zariski-local at the source. That is, for any scheme morphism, if there exists a Zariski-open cover of its \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.LocallyOfFiniteType (f ∣_ V)\", \"doc\": \"If a morphism $ f: X \\to Y $ is locally of finite type and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeResLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : X.Opens) (V : Y.Opens)\\n  (e : U ≤ (TopologicalSpace.Opens.map f.base).obj V) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Scheme.Hom.resLE f V U e)\", \"doc\": \"If a morphism of schemes $f: X \\\\to Y$ is locally of finite type, then its restriction to any open subschemes $V \\\\subseteq X$ and $U \\\\subseteq Y$ (where the image of $V$ under $f$ is contained in $U$) \"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: these hits concern open maps, unramified or quasi-finite loci, or ring dimension bounds; none states openness of bounded local fibre dimension for arbitrary locally finite type scheme morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFiniteType\", \"topologicalKrullDim\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match: these hits concern open maps, unramified or quasi-finite loci, or ring dimension bounds; none states openness of bounded local fibre dimension for arbitrary locally finite type scheme morphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "02FZ|topologicalKrullDimAt.*fiber|fiber.*topologicalKrullDimAt|openness.bounded.dimension.fibres",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match: these hits concern open maps, unramified or quasi-finite loci, or ring dimension bounds; none states openness of bounded local fibre dimension for arbitrary locally finite type scheme morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Upper semicontinuity on the source of local fibre dimension for morphisms of schemes locally of finite type",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type algebra map, bounded local Krull dimension of the fibre defines an open subset of the prime spectrum",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal S)\\n  [inst_3 : p.IsPrime] [IsArtinianRing R] [Algebra.EssFiniteType R S] [Algebra.QuasiFiniteAt R p],\\n  ∃ f ∉ p, ↑(PrimeSpectrum.basicOpen f) = {{ asIdeal := p, isPrime := inst_3 }}\", \"doc\": \"Let $ R $ be an Artinian ring, $ S $ a commutative ring of essential finite type over $ R $, and $ \\\\mathfrak{p} $ a prime ideal of $ S $ such that $ S $ is quasi-finite at $ \\\\mathfrak{p} $. Then there\"}\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.HasGoingDown R S] [Algebra.FinitePresentation R S], IsOpenMap (PrimeSpectrum.comap (algebraMap R S))\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra satisfying the going-down property, then the induced map from the prime spectrum of $ S $ to the prime spectrum of $ R $, defined by taking preimages und\"}\n  {\"name\": \"Ring.KrullDimLE.of_isLocalization\", \"module\": \"Mathlib/RingTheory/KrullDimension/Zero\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (p : Ideal R) (hp : p ∈ minimalPrimes R) (S : Type u_2)\\n  [inst_1 : CommSemiring S] [inst_2 : Algebra R S] [IsLocalization.AtPrime S p], Ring.KrullDimLE 0 S\", \"doc\": \"If $ S $ is the localization of a commutative semiring $ R $ at the complement of a minimal prime ideal $ \\\\mathfrak{p} $, then the Krull dimension of $ S $ satisfies $ \\\\dim(S) \\\\leq 0 $. This follows b\"}\n  {\"name\": \"Ring.krullDimLE_of_isLocalization_maximal\", \"module\": \"Mathlib/RingTheory/Ideal/Height\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (Rₚ : (P : Ideal R) → [P.IsMaximal] → Type u_2)\\n  [inst_1 : (P : Ideal R) → [inst : P.IsMaximal] → CommRing (Rₚ P)]\\n  [inst_2 : (P : Ideal R) → [inst_2 : P.IsMaximal] → Algebra R (Rₚ P)]\\n  [∀ (P : Ideal R) [inst_3 : P.IsMaximal], IsLocalization.AtPrime (Rₚ P) P] \", \"doc\": \"If for every maximal ideal $\\\\mathfrak{m}$ of a commutative semiring $R$, the Krull dimension of the localization $R_\\\\mathfrak{m}$ is at most $n$, then the Krull dimension of $R$ itself is also at most\"}\n  {\"name\": \"IsLocalization.AtPrime.ringKrullDim_eq_height\", \"module\": \"Mathlib/RingTheory/Ideal/Height\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) [inst_1 : I.IsPrime] (A : Type u_2) [inst_2 : CommRing A]\\n  [inst_3 : Algebra R A] [IsLocalization.AtPrime A I], ringKrullDim A = ↑I.height\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at the complement of a prime ideal $ I $, then the Krull dimension of $ A $ is equal to the height of $ I $. This equality connects the dimensi\"}\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: these hits concern open maps, unramified or quasi-finite loci, or ring dimension bounds; none states openness of bounded local fibre dimension for arbitrary locally finite type scheme morphisms"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-local-fibre-dimension-open",
+  "worker": "stage1",
+  "summary": "Expanded the affine-local deduction in Tag 02FZ from the existing Tag 00QH node. Reused the existing open-subspace local-dimension lemma and affine coordinate/fibre dimension comparison. Kept the statement and statement dependencies unchanged; no new nodes, no statement dispute, and no Lean work.",
+  "blueprint": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7). Auxiliary input: Tag 0D4I, label lemma-dimension-fibres-proper; proof of Tag 0D4I: the sentence that Z_d is closed by Morphisms, lemma-openness-bounded-dimension-fibres (Tag 02FZ).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-dimension-at-point-open-subspace",
+    "why": "Generic topology tool identifying dimensions after restriction to the affine chart; no node of this unit gives it."
+   },
+   {
+    "node": "lem-sbc-affine-coordinate-fibre-dimension",
+    "why": "Generic affine scheme/ring fibre comparison, used exactly under its affine hypotheses; this unit supplies no such bridge."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
+    "why": "Algebra Tag 00QH is precisely the black box explicitly used by Tag 02FZ; this existing node is reused rather than recreated in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-sbc-affine-coordinate-fibre-dimension",
+  "lem-weil-pbc-fibre-dimension-bounded-open-upstairs"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-54767d8d1",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-54767d8d1 (reviewer sub-agent of L); spot-checked: Read the item and all cited statements in full. Verified all four steps against Stacks 02FZ, 00QH/00QD, 01K1/01I4, 00E6 and 0055; checked hypotheses, distinguished primes, edge cases, DAG candidates, cycles, route and exact master target categories. Accepted all three declared tool uses. No repairs needed; concrete checks are in review.md."
+ }
 }
