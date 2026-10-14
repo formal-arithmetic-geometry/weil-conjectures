@@ -146,12 +146,13 @@ theorem termwise_product_isKInjective_and_isLimit
       rw [← Functor.map_comp, hP.fac]
       exact q.map_preimage _
     · intro s m hm
-      obtain ⟨m', rfl⟩ := q.map_surjective (X := s.pt.as) m
+      rw [← q.map_preimage m]
       apply HomotopyCategory.eq_of_homotopy
       apply productHomotopy I
       intro j
       apply HomotopyCategory.homotopyOfEq
       rw [Functor.map_comp, hP.fac]
+      rw [q.map_preimage]
       exact (hm ⟨j⟩).trans (q.map_preimage (s.π.app ⟨j⟩)).symm
   have hPI : IsKInjective P.pt := by
     refine ⟨fun {K} f hK ↦ ⟨productHomotopy I (fun j ↦ ?_)⟩⟩
