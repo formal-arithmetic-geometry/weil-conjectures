@@ -17,40 +17,48 @@
  },
  "proof": [
   {
-   "text": "Injectivity of alpha and of E -> F identifies the two maps from B to F and embeds B into A. Finiteness and normality identify A with the normalization of B in Frac(A). Invert B minus zero in the tensor product: since A is finite, this gives E tensor_Frac(B) Frac(A), and F is a field factor. Thus F/Frac(A) is finite separable. The finite normalizations C and S are Dedekind domains. Q is nonzero since it contracts to the nonzero maximal ideal of A, so S_Q is a DVR. Clearing denominators in monic algebraic equations gives Frac(S)=F.",
+   "text": "Set t=r/gcd(r,n). Positivity of r and gcd gives t>0. Factor n through gcd(r,n) and cancel the gcd in r to show r divides n*t.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Put t=r/gcd(r,n). It is positive and divides r, and n*t=lcm(r,n). Use the DVR obtained by adjoining a t-th root of a uniformizer of A (for t=1 take A itself). Its index over A is t by the root equation and maximal ideal description; hence its index over B is n*t. Write A' for this DVR and K' for its fraction field. Since t is a unit, K'/Frac(A) is separable. Since A' is normal and integral over B, it is the normalization of B in K'.",
+   "text": "Choose an irreducible uniformizer pi of A and form the explicit ring A1=A[X]/(X^t-pi). The existing root-algebra theorem gives its domain and DVR instances and its root-generated maximal ideal. Monicity gives finiteness and positive degree gives injectivity. Map the principal maximal ideal (pi) and use root^t=pi to obtain m_A A1=m_A1^t. Mapping the original maximal-ideal identity gives m_B A1=m_A1^(n*t).",
    "uses": [
     "lem-sbc-dvr-uniformizer-root-algebra"
    ],
    "elementary": false
   },
   {
-   "text": "Choose a field factor F' of F tensor_Frac(A) K'. Normalize S in F'; this is finite by finite separable normalization. Lying over supplies a prime above Q. Let T be the local DVR there and R its contraction in C. Then R lies above m_B. Its index e divides the unit r, and its residue inseparable degree, a power of the residue characteristic, divides the residue degree which divides r. Thus the residue extension is separable and C_R/B is tame. The induced K' embedding gives A' -> T; the contraction of the chosen prime to A' lies over m_A and therefore equals its unique maximal ideal.",
+   "text": "Lift the chosen normalized tensor factor and Q through A1/A by the factor-lifting theorem. It supplies P1, finite normalization S1, the compatible embedding S -> S1, flatness, and a prime Q1 lying over Q and m_A1.",
    "uses": [
-    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
+    "lem-sbc-dvr-normalized-tensor-factor-lift"
    ],
    "elementary": false
   },
   {
-   "text": "Apply Abhyankar 0BRM to C_R/B and K'/Frac(B). Since e divides r and r divides n*t, the normalized tensor factor T has index one over A' (09E7). This factor agrees with the normalization just chosen because integrality over A and B agrees by transitivity, and localization commutes with normalization (09EM). Multiplicativity in A -> A' -> T and A -> S_Q -> T yields t=e(T/S_Q)*e(S_Q/A). Therefore e(S_Q/A) divides t and is at most t. In a DVR the ramification index equals quotient length, so it is Q.ramificationIdx A.",
-   "uses": [],
+   "text": "Since r divides n*t, apply the index-one Abhyankar theorem over B to A1, P1 and Q1 to get e(Q1/A1)=1.",
+   "uses": [
+    "lem-sbc-dvr-abhyankar-normalized-factor-index-one"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Compute e(m_A1/A)=t directly by the length definition, mapping m_A A1=m_A1^t into the localization and using the DVR quotient-length formula. Torsion freedom makes S1 flat over A1. The A->A1->S1 tower gives e(Q1/A)=t; the A->S->S1 tower says e(Q/A) divides e(Q1/A). A positive integer is at least each divisor, hence e(Q/A)<=t. All tower and length facts are supplied by Mathlib.RingTheory.RamificationInertia.Ramification and Mathlib.RingTheory.Flat.TorsionFree.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sbc-dvr-uniformizer-root-algebra",
-  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
+  "lem-sbc-dvr-normalized-tensor-factor-lift",
+  "lem-sbc-dvr-abhyankar-normalized-factor-index-one"
  ],
  "proof_origin": {
   "by": "worker",
   "kind": "written-by-agent",
-  "agent": "V1",
+  "agent": "H2",
   "document": "Stacks Project",
-  "place": "Tags 0BRM and 09EV: apply Abhyankar after an auxiliary root extension of index r/gcd(r,n), then descend the index bound by multiplicativity."
+  "place": "Tags 09EV, 09EM, 032L, 0BRM and 09E7; Lean assembly of the explicit auxiliary-root extension and the two Mathlib ramification towers."
  },
  "mathlib_searches": [
   {
@@ -120,9 +128,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V1",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261014T033115-L-607564",
+  "landing": "20261014T035543-L-887257",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

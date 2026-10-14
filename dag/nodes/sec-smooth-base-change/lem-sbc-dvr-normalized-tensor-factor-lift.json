@@ -1,0 +1,133 @@
+{
+ "id": "lem-sbc-dvr-normalized-tensor-factor-lift",
+ "kind": "statement",
+ "title": "Lifting a normalized tensor factor along a finite DVR extension",
+ "statement": "Let $B$ and $A$ be DVR domains [def-sc-discrete-valuation-ring], with $A$ finite over $B$ [def-weil-finitely-generated-module], and let $E/\\operatorname{Frac}(B)$ be finite separable [def-pc-field-extension, def-weil-pbc-separable-algebraic-extension]. Give $E$ its composite $B$-algebra structure. Let $P$ be a maximal ideal of $E\\otimes_B A$, let $F=(E\\otimes_B A)/P$, and assume the right tensor map $\\alpha:A\\to F$ is injective. Give $F$ this $A$-algebra structure, and assume $S=\\operatorname{integralClosure}_A(F)$ [def-weil-pbc-integral-closure] is finite over $A$. Let $Q$ be a prime of $S$ contracting to $\\mathfrak m_A$. Let $A_1$ be any DVR domain with compatible $B$- and $A$-algebra structures making $B\\to A\\to A_1$ a tower, and assume $A_1$ is finite and faithful over $A$. There exist a maximal ideal $P_1$ of $E\\otimes_B A_1$, its field quotient $F_1=(E\\otimes_B A_1)/P_1$ with injective right map $\\alpha_1:A_1\\to F_1$, and the integral closure $S_1=\\operatorname{integralClosure}_{A_1}(F_1)$ finite over $A_1$. With $A\\to F_1$ given by composition through $A_1$, there exist an $A$-algebra embedding $i:S\\to S_1$ and a prime $Q_1$ of $S_1$ such that $i^{-1}(Q_1)=Q$ and $Q_1\\cap A_1=\\mathfrak m_{A_1}$. Moreover $S_1$ is flat over $S$ [def-weil-pbc-flat-ring-map] for the algebra structure induced by $i$.",
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 09EM (Remark 15.116.1, normalized tensor factors and surjectivity on spectra), 032L (finite separable normalization), and lying over."
+ },
+ "proof": [
+  {
+   "text": "Invert the nonzero elements of B. This identifies F with a finite separable field factor of E tensor_Frac(B) Frac(A). Tensor F with Frac(A1) over Frac(A); the reduced tensor ring is a finite product of fields, each a factor of E tensor_Frac(B) Frac(A1). These factors are quotients by maximal ideals P1 of E tensor_B A1, and A1 embeds in each.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Normalize S in that product. Each field factor is finite separable over Frac(A1), so its normalization S1 is finite over A1. Integrality transitivity identifies these S1 with the factors of the product normalization of S.",
+   "uses": [
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The resulting integral map from S to the product of S1 is injective. Lying over lifts Q to a prime Q1 in one factor. The induced map i is an A-algebra embedding. Its contraction in A1 lies over m_A and is maximal by the integral extension A1/A; since A1 is local it equals m_A1.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "S is a finite normal one-dimensional domain and hence Dedekind. The embedding into the domain S1 makes S1 torsion free over S; torsion free modules over a Dedekind domain are flat. No tame hypothesis or numerical bound is used.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "kind": "written-by-agent",
+  "agent": "H2",
+  "document": "Stacks Project",
+  "place": "Tags 09EM (Remark 15.116.1, normalized tensor factors and surjectivity on spectra), 032L (finite separable normalization), and lying over."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Abhyankar lemma tame ramification normalized tensor factor ramification index one",
+   "date": "2026-10-14",
+   "results": "Internal Server Error; service unavailable",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prime of the integral closure in a tensor factor lifts after a finite extension of discrete valuation rings",
+   "date": "2026-10-14",
+   "results": "Ideal.nonempty_primesOver and Ideal.exists_ideal_over_prime_of_isIntegral_of_isDomain supply lying over; none supplies the normalized tensor-factor construction.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.exists_ideal_over_prime",
+   "date": "2026-10-14",
+   "results": "Unknown identifier; zero hits.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat_iff.*torsion|flat_of.*torsion|Flat.*IsTorsionFree|flat_iff.*isTorsionFree",
+   "date": "2026-10-14",
+   "results": "Mathlib.RingTheory.Flat.TorsionFree proves flatness from torsion freedom over a Dedekind domain; no normalized factor lifting theorem.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.DvrTameTensorFactorRamificationBound",
+  "date": "2026-10-14",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case: tame ramification after adjoining a root of a uniformizer; lifting a chosen normalized tensor factor through the auxiliary DVR extension.",
+   "via": [
+    "lem-sbc-dvr-tame-tensor-factor-ramification-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.DvrNormalizedTensorFactorLift",
+  "file": "lean/Sheaf/RingTheory/DvrNormalizedTensorFactorLift.lean",
+  "declaration": "RingTheory.dvr_normalized_tensor_factor_lift",
+  "statement": "theorem dvr_normalized_tensor_factor_lift\n    (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]\n    (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]\n    [Algebra B A] [Module.Finite B A]\n    (E : Type u) [Field E] [Algebra (FractionRing B) E]\n    (hE : FiniteDimensional (FractionRing B) E ∧ Algebra.IsSeparable (FractionRing B) E) :\n    letI : Algebra B E :=\n      ((algebraMap (FractionRing B) E).comp (algebraMap B (FractionRing B))).toAlgebra\n    ∀ (P : Ideal (E ⊗[B] A)) (hP : P.IsMaximal),\n    letI := hP\n    let F := (E ⊗[B] A) ⧸ P\n    let alpha : A →+* F := (Ideal.Quotient.mk P).comp\n      (Algebra.TensorProduct.includeRight : A →ₐ[B] E ⊗[B] A).toRingHom\n    letI := alpha.toAlgebra\n    Function.Injective alpha →\n    let S := integralClosure A F\n    Module.Finite A S →\n    ∀ (Q : Ideal S) (hQ : Q.IsPrime),\n    Q.comap (algebraMap A S) = IsLocalRing.maximalIdeal A →\n    ∀ (A₁ : Type u) [CommRing A₁] [IsDomain A₁] [IsDiscreteValuationRing A₁]\n      [Algebra A A₁] [Algebra B A₁] [IsScalarTower B A A₁]\n      [Module.Finite A A₁] [FaithfulSMul A A₁],\n    ∃ (P₁ : Ideal (E ⊗[B] A₁)) (hP₁ : P₁.IsMaximal),\n    letI := hP₁\n    let F₁ := (E ⊗[B] A₁) ⧸ P₁\n    let alpha₁ : A₁ →+* F₁ := (Ideal.Quotient.mk P₁).comp\n      (Algebra.TensorProduct.includeRight : A₁ →ₐ[B] E ⊗[B] A₁).toRingHom\n    letI := alpha₁.toAlgebra\n    letI : Algebra A F₁ := (alpha₁.comp (algebraMap A A₁)).toAlgebra\n    letI : IsScalarTower A A₁ F₁ := .of_algebraMap_eq' rfl\n    let S₁ := integralClosure A₁ F₁\n    Function.Injective alpha₁ ∧ Module.Finite A₁ S₁ ∧\n    ∃ (i : S →ₐ[A] S₁) (Q₁ : Ideal S₁),\n      Q₁.IsPrime ∧ Q₁.comap i.toRingHom = Q ∧\n      Q₁.comap (algebraMap A₁ S₁) = IsLocalRing.maximalIdeal A₁ ∧\n      letI := i.toRingHom.toAlgebra\n      Module.Flat S S₁",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261014T035543-L-887257",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261014T035543-L-887257",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
