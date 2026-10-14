@@ -2288,6 +2288,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comp
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.CompUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
