@@ -1,0 +1,113 @@
+{
+ "id": "lem-sbc-dvr-uniformizer-root-compositum-residue",
+ "kind": "statement",
+ "title": "Residue separability over a uniformizer-root DVR base",
+ "statement": "Let B,A,U,T be DVR domains [def-sc-discrete-valuation-ring], with a B-algebra structure on A, a local B-algebra U, and a local A-algebra T. Let pi be an irreducible element of B, let e be a natural number which is a unit in B, and suppose there is theta in A with theta^e=pi. Suppose m_B U=m_U^e and k(U)/k(B) is separable [def-weil-pbc-separable-algebraic-extension]. Let E be a finite separable extension of Frac(B) [def-pc-field-extension] with compatible B- and U-algebra structures, making it the fraction field of U. Let F be a field and an A-algebra, generated over A by the image of a field map iE:E->F compatible with B. Give F a T-algebra structure making it the fraction field of T, compatibly with A. Suppose j:U->T is local, agrees on B with B->A->T, and U->T->F equals U->E->F. Then k(T)/k(A) is separable. No finiteness of A over B is assumed.",
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BRM (more-algebra-lemma-abhyankar), last two paragraphs after the unit-root claim; 09EV (uniformizer-root DVR), 09EQ (further base change), and 09E7 (weakly unramified and residue separable criterion)."
+ },
+ "proof": [
+  {
+   "text": "The ring maps to the specified fraction fields are injective. Embed\nFrac(B) into Frac(A) compatibly with B and let K0 be the intermediate field\nit generates with theta. Since theta^e = pi and pi is a uniformizer, the\nEisenstein root theorem 09EV identifies the normalization of B in K0 with\nthe DVR B[theta]; its ramification index is e and its residue field is k(B).\nChoose a uniformizer q of U. The index hypothesis writes pi = w*q^e for a\nunit w of U. In E tensor_Frac(B) K0, theta/q satisfies X^e-w. This is a unit-root\npolynomial with invertible derivative, so the normalization of U in each field\nfactor is a local factor of a finite etale U-algebra. Its ramification index\nis one over U and its residue field is finite separable over k(U). Multiplicativity\nin the two towers over B gives index one over B[theta]. Transitivity with the\nassumed separability k(U)/k(B) gives separability over the residue field of\nB[theta]. This is the adic formal smoothness criterion 09E7. Base change now\nfrom K0 to Frac(A): the tensor of the weakly unramified normalization with A\nhas special fibre a product of finite separable extensions of k(A), as in 09EQ.\nThe uniformizer of A is a nonzerodivisor in this tensor, so each of its local\nfactors above the closed point is a DVR and is already normal. The compatible\nmaps and the generation hypothesis select the factor whose fraction field is F.\nThe DVR T equals this local factor: both are valuation rings in F and the map is\nlocal, and a proper overring of a DVR in its fraction field is the field itself.\nConsequently its residue extension over k(A) is separable. The tensor argument\nworks for any DVR A containing theta, without finiteness of A over B. When e=1,\nB[theta]=B and the same argument is just weakly unramified base change.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "kind": "written-by-agent",
+  "agent": "D2",
+  "document": "Stacks Project",
+  "place": "Tags 0BRM, 09EV, 09EQ, 09E7, uniformizer-root case followed by arbitrary DVR base change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An etale extension of a discrete valuation ring obtained by adjoining a root of a unit",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tame extension of DVRs becomes unramified after adjoining a root of the base uniformizer",
+   "date": "2026-10-14",
+   "results": "Found ramificationIdx_eq_one_of_isUnramifiedAt and isUnramifiedAt_iff_of_isDedekindDomain. No uniformizer-root cancellation theorem.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallyUnramified\", \"base_change\"",
+   "date": "2026-10-14",
+   "results": "Algebra.FormallyUnramified.base_change handles already unramified tensor algebras, not the root calculation or normalization comparison.",
+   "verdict": "Useful ingredient, not an exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "ramificationIdx|map_maximalIdeal",
+   "date": "2026-10-14",
+   "results": "Found the ramification index API and unramified index-one consequences. No tame root cancellation theorem.",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.DvrAbhyankarLocalResidue",
+  "date": "2026-10-14",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case: cancellation over the standard uniformizer-root extension and further base change in the Abhyankar argument.",
+   "via": [
+    "lem-sbc-dvr-abhyankar-local-residue",
+    "lem-sbc-dvr-tame-tensor-factor-residue-separable",
+    "lem-sbc-dvr-tame-tensor-factor-unramified"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.DvrUniformizerRootCompositumResidue",
+  "file": "lean/Sheaf/RingTheory/DvrUniformizerRootCompositumResidue.lean",
+  "declaration": "RingTheory.dvr_uniformizer_root_compositum_residue_isSeparable",
+  "statement": "theorem dvr_uniformizer_root_compositum_residue_isSeparable\n    (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]\n    (pi : B) (hpi : Irreducible pi)\n    (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]\n    [Algebra B A]\n    (U : Type u) [CommRing U] [IsDomain U] [IsDiscreteValuationRing U]\n    [Algebra B U] [IsLocalHom (algebraMap B U)]\n    (e : ℕ) (he : IsUnit (e : B))\n    (theta : A) (hroot : theta ^ e = algebraMap B A pi)\n    (hindexU : (IsLocalRing.maximalIdeal B).map (algebraMap B U) =\n      IsLocalRing.maximalIdeal U ^ e)\n    (hsep : Algebra.IsSeparable (IsLocalRing.ResidueField B) (IsLocalRing.ResidueField U))\n    (E : Type u) [Field E] [Algebra (FractionRing B) E]\n    [Algebra B E] [IsScalarTower B (FractionRing B) E]\n    [FiniteDimensional (FractionRing B) E] [Algebra.IsSeparable (FractionRing B) E]\n    [Algebra U E] [IsFractionRing U E] [IsScalarTower B U E]\n    (F : Type u) [Field F] [Algebra A F] (iE : E →+* F)\n    (hcomm : ∀ b : B, iE (algebraMap B E b) =\n      algebraMap A F (algebraMap B A b))\n    (hgen : Algebra.adjoin A (Set.range iE) = ⊤)\n    (T : Type u) [CommRing T] [IsDomain T] [IsDiscreteValuationRing T]\n    [Algebra A T] [IsLocalHom (algebraMap A T)]\n    [Algebra T F] [IsFractionRing T F] [IsScalarTower A T F]\n    (j : U →+* T) (hj : IsLocalHom j)\n    (hjB : ∀ b : B, j (algebraMap B U b) =\n      algebraMap A T (algebraMap B A b))\n    (hjE : ∀ c : U, algebraMap T F (j c) = iE (algebraMap U E c)) :\n    Algebra.IsSeparable (IsLocalRing.ResidueField A) (IsLocalRing.ResidueField T)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261014T041056-L-1058903",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261014T041056-L-1058903",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

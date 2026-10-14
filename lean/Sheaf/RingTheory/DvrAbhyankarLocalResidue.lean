@@ -11,6 +11,10 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
 
+import Mathlib.FieldTheory.SeparableDegree
+import Sheaf.RingTheory.DvrEtaleUnitRootDiagram
+import Sheaf.RingTheory.DvrUniformizerRootCompositumResidue
+
 /-! # The local residue conclusion of Abhyankar's lemma
 
 Source: Stacks Project, Tags 0BRM and 09E7.
@@ -76,6 +80,84 @@ theorem dvr_abhyankar_local_residue_isSeparable
     (hjB : ∀ b : B, j (algebraMap B U b) =
       algebraMap A T (algebraMap B A b))
     (hjE : ∀ c : U, algebraMap T F (j c) = iE (algebraMap U E c)) :
-    Algebra.IsSeparable (IsLocalRing.ResidueField A) (IsLocalRing.ResidueField T) := by sorry
+    Algebra.IsSeparable (IsLocalRing.ResidueField A) (IsLocalRing.ResidueField T) := by
+  classical
+  obtain ⟨pi, hpi⟩ := IsDiscreteValuationRing.exists_irreducible B
+  obtain ⟨t, ht⟩ := IsDiscreteValuationRing.exists_irreducible A
+  have hassoc : Associated (t ^ n) (algebraMap B A pi) := by
+    apply Ideal.span_singleton_eq_span_singleton.mp
+    rw [← Ideal.span_singleton_pow, ← ht.maximalIdeal_eq, ← hindex,
+      hpi.maximalIdeal_eq, Ideal.map_span, Set.image_singleton]
+  obtain ⟨v, hv⟩ := hassoc
+  have hepos : 0 < e := Nat.pos_of_dvd_of_pos hedvd hnpos
+  have heA : IsUnit (e : A) := by
+    simpa only [map_natCast] using he.map (algebraMap B A)
+  obtain ⟨A', hringA', hdomA', hdvrA', aAA', hAA', r, hr, hsepAA',
+    T', hringT', hdomT', hdvrT', aTT', aA'T', hTT', hA'T', hsquare,
+    F', hfieldF', aA'F', aT'F', hfracT'F', hA'T'F', iF, hiFA, hiFT, hgenF'⟩ :=
+    dvr_etale_unit_root_diagram A e hepos heA v T F
+  let : Algebra B A' := ((algebraMap A A').comp (algebraMap B A)).toAlgebra
+  have : IsScalarTower B A A' := IsScalarTower.of_algebraMap_eq' rfl
+  let : Algebra A T' := ((algebraMap A' T').comp (algebraMap A A')).toAlgebra
+  have : IsScalarTower A A' T' := IsScalarTower.of_algebraMap_eq' rfl
+  have : IsScalarTower A T T' := IsScalarTower.of_algebraMap_eq (fun a ↦ (hsquare a).symm)
+  have : IsLocalHom (algebraMap A T') := by
+    change IsLocalHom ((algebraMap A' T').comp (algebraMap A A'))
+    infer_instance
+  let : Algebra A F' := ((algebraMap A' F').comp (algebraMap A A')).toAlgebra
+  have : IsScalarTower A A' F' := IsScalarTower.of_algebraMap_eq' rfl
+  have : IsScalarTower A T' F' := IsScalarTower.to₁₃₄ A A' T' F'
+  let fF : F →ₐ[A] F' := { toRingHom := iF, commutes' := hiFA }
+  let iE' : E →+* F' := iF.comp iE
+  obtain ⟨d, hd⟩ := hedvd
+  have hroot : (r * algebraMap A A' t ^ d) ^ e = algebraMap B A' pi := by
+    rw [mul_pow, hr, ← pow_mul, Nat.mul_comm d e, ← hd, ← map_pow, ← map_mul]
+    rw [mul_comm, hv]
+    rfl
+  have hcomm' : ∀ b : B, iE' (algebraMap B E b) =
+      algebraMap A' F' (algebraMap B A' b) := by
+    intro b
+    change iF (iE (algebraMap B E b)) = _
+    rw [hcomm, hiFA, IsScalarTower.algebraMap_apply B A A']
+  have hgen' : Algebra.adjoin A' (Set.range iE') = ⊤ := by
+    let S := Algebra.adjoin A' (Set.range iE')
+    have hle : Algebra.adjoin A (Set.range iE) ≤
+        (S.restrictScalars A).comap fF := by
+      apply Algebra.adjoin_le
+      rintro _ ⟨x, rfl⟩
+      exact Algebra.subset_adjoin ⟨x, rfl⟩
+    apply top_unique
+    rw [← hgenF']
+    apply Algebra.adjoin_le
+    rintro _ ⟨x, rfl⟩
+    exact hle (hgen ▸ (show x ∈ (⊤ : Subalgebra A F) from trivial))
+  let j' : U →+* T' := (algebraMap T T').comp j
+  have hj' : IsLocalHom j' := by
+    let : IsLocalHom j := hj
+    exact inferInstanceAs (IsLocalHom ((algebraMap T T').comp j))
+  have hjB' : ∀ b : B, j' (algebraMap B U b) =
+      algebraMap A' T' (algebraMap B A' b) := by
+    intro b
+    change algebraMap T T' (j (algebraMap B U b)) = _
+    rw [hjB, hsquare, IsScalarTower.algebraMap_apply B A A']
+  have hjE' : ∀ c : U, algebraMap T' F' (j' c) = iE' (algebraMap U E c) := by
+    intro c
+    change algebraMap T' F' (algebraMap T T' (j c)) =
+      iF (iE (algebraMap U E c))
+    rw [← hiFT, hjE]
+  have hsepA'T' := dvr_uniformizer_root_compositum_residue_isSeparable
+    B pi hpi A' U e he (r * algebraMap A A' t ^ d) hroot hindexU hsep
+    E F' iE' hcomm' hgen' T' j' hj' hjB' hjE'
+  have : Algebra.IsSeparable (IsLocalRing.ResidueField A)
+      (IsLocalRing.ResidueField A') := hsepAA'
+  have : Algebra.IsSeparable (IsLocalRing.ResidueField A')
+      (IsLocalRing.ResidueField T') := hsepA'T'
+  have : Algebra.IsSeparable (IsLocalRing.ResidueField A)
+      (IsLocalRing.ResidueField T') :=
+    Algebra.IsSeparable.trans (IsLocalRing.ResidueField A)
+      (IsLocalRing.ResidueField A') (IsLocalRing.ResidueField T')
+  exact Algebra.isSeparable_tower_bot_of_isSeparable
+    (IsLocalRing.ResidueField A) (IsLocalRing.ResidueField T)
+    (IsLocalRing.ResidueField T')
 
 end RingTheory

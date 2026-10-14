@@ -1,0 +1,106 @@
+{
+ "id": "lem-sbc-dvr-etale-unit-root-diagram",
+ "kind": "statement",
+ "title": "Local unit-root cover of a DVR diagram",
+ "statement": "Let A and T be discrete valuation ring domains [def-sc-discrete-valuation-ring], with a local A-algebra structure on T. Let F be a field and the fraction field of T [def-pc-field-extension], with compatible A-algebra structure. Let e>0 be a natural number which is a unit in A and let v be a unit of A. There exist DVR domains A' and T' with local algebra maps A->A', T->T' and A'->T' making the square commute, an element r of A' with r^e=v, and a separable residue extension k(A')/k(A) [def-weil-pbc-separable-algebraic-extension]. There also exist a field F', compatible A'- and T'-algebra structures making it the fraction field of T', and a field map iF:F->F' agreeing with both maps out of A and T, such that F' is generated as an A'-algebra by iF(F). No separability or ramification hypothesis on T/A is imposed.",
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BRM (more-algebra-lemma-abhyankar), first claim of its proof: adjoining a root of the unit and the commutative local DVR square."
+ },
+ "proof": [
+  {
+   "text": "Form C = A[X]/(X^e-v). Its root is a unit, and e is a unit, so its derivative\nis a unit. Thus C is finite etale over A. Form D = T tensor_A C, which is finite\netale over T. Choose a maximal ideal of D above the maximal ideal of T and contract\nit to a prime of C. Localize D and C at these primes, obtaining T' and A'. These\nare DVR domains: an etale local extension of a DVR is regular of dimension one.\nBoth maps are local and their square commutes. The residue extension k(A')/k(A)\nis finite separable. The image r of X satisfies r^e = v. Take F' = Frac(T'). The\ninjection T -> T' extends uniquely to a field map iF from F = Frac(T), and the\nlocalization map A' -> T' -> F' is compatible with A. The field F' is the selected\nfield factor of F[X]/(X^e-v). Hence it is generated as an F-algebra by the root:\nthe root is algebraic, so this algebra is already a field. Since r belongs to A',\nF' is generated as an A'-algebra by iF(F). This construction does not use any\nramification or residue-separability assumption on T/A. For e = 1 use A, T and F\nitself, with r = v.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "kind": "written-by-agent",
+  "agent": "D2",
+  "document": "Stacks Project",
+  "place": "Tag 0BRM, first claim."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An etale extension of a discrete valuation ring obtained by adjoining a root of a unit",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoin an e-th root of a unit in a discrete valuation ring by an etale extension and lift a local map of DVRs",
+   "date": "2026-10-14",
+   "results": "StandardEtalePair.lift, lift_X, homEquiv and the standard-etale instances were returned. None constructs the local DVR square or its fraction-field generation.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "StandardEtalePair|isDedekindDomain.of_formallyUnramified",
+   "date": "2026-10-14",
+   "results": "Found the standard-etale API and isDedekindDomain.of_formallyUnramified. The latter needs an already specified finite domain.",
+   "verdict": "No local unit-root diagram theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.DvrAbhyankarLocalResidue",
+  "date": "2026-10-14",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case: the unit-root cover in the Abhyankar ramification cancellation argument.",
+   "via": [
+    "lem-sbc-dvr-abhyankar-local-residue",
+    "lem-sbc-dvr-tame-tensor-factor-residue-separable",
+    "lem-sbc-dvr-tame-tensor-factor-unramified"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.DvrEtaleUnitRootDiagram",
+  "file": "lean/Sheaf/RingTheory/DvrEtaleUnitRootDiagram.lean",
+  "declaration": "RingTheory.dvr_etale_unit_root_diagram",
+  "statement": "theorem dvr_etale_unit_root_diagram\n    (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]\n    (e : ℕ) (hepos : 0 < e) (he : IsUnit (e : A)) (v : Aˣ)\n    (T : Type u) [CommRing T] [IsDomain T] [IsDiscreteValuationRing T]\n    [Algebra A T] [IsLocalHom (algebraMap A T)]\n    (F : Type u) [Field F] [Algebra A F] [Algebra T F]\n    [IsFractionRing T F] [IsScalarTower A T F] :\n    ∃ (A' : Type u) (_ : CommRing A') (_ : IsDomain A')\n      (_ : IsDiscreteValuationRing A') (aAA' : Algebra A A'),\n    letI := aAA'\n    ∃ (hAA' : IsLocalHom (algebraMap A A')) (r : A'),\n    letI := hAA'\n    r ^ e = algebraMap A A' (v : A) ∧\n    Algebra.IsSeparable (IsLocalRing.ResidueField A) (IsLocalRing.ResidueField A') ∧\n    ∃ (T' : Type u) (_ : CommRing T') (_ : IsDomain T')\n      (_ : IsDiscreteValuationRing T') (aTT' : Algebra T T') (aA'T' : Algebra A' T'),\n    letI := aTT'\n    letI := aA'T'\n    ∃ (_ : IsLocalHom (algebraMap T T')) (_ : IsLocalHom (algebraMap A' T')),\n    (∀ a : A, algebraMap T T' (algebraMap A T a) =\n      algebraMap A' T' (algebraMap A A' a)) ∧\n    ∃ (F' : Type u) (_ : Field F') (aA'F' : Algebra A' F') (aT'F' : Algebra T' F'),\n    letI := aA'F'\n    letI := aT'F'\n    ∃ (_ : IsFractionRing T' F') (_ : IsScalarTower A' T' F') (iF : F →+* F'),\n    (∀ a : A, iF (algebraMap A F a) = algebraMap A' F' (algebraMap A A' a)) ∧\n    (∀ t : T, iF (algebraMap T F t) = algebraMap T' F' (algebraMap T T' t)) ∧\n    Algebra.adjoin A' (Set.range iF) = ⊤",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261014T041056-L-1058903",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261014T041056-L-1058903",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

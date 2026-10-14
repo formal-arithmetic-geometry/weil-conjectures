@@ -14471,3 +14471,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:05 L: merged deliver/W4/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (stage 3; reviewer PASS; first push; landing 20261014T040544-L-1001711 (proof); batch 20261014T040537; modules 1; new nodes 0)
 - 04:05 L: merged deliver/W4/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone (stage 3; reviewer PASS; first push; landing 20261014T040544-L-1001921 (proof); batch 20261014T040537; modules 1; new nodes 0)
 - 04:08 L: returned deliver/Y3/Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux (reviewer RETURN: (reviewer X-a61a8, head a61a8c34e) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.St)
+- 04:10 L: merged deliver/D2/Sheaf.RingTheory.DvrAbhyankarLocalResidue (stage 3; reviewer PASS; first push; landing 20261014T041056-L-1058903 (interface); batch 20261014T041054; modules 3; new nodes 2)
