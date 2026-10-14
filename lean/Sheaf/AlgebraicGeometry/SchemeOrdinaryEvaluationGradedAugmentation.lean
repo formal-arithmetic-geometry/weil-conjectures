@@ -49,6 +49,73 @@ def schemeOrdinaryEvaluationGraded (Y : Scheme.{u})
       schemeOrdinaryEvaluationGradedComponent (C := Opens Y) (J := Opens.grothendieckTopology Y)
         Y.sheaf P N p q n (by change p + q = n at h; omega))
 
+-- Inverse adjunction is natural in the coefficient; keep the projection abstract.
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem evaluation_component_naturality {C : Type u} [Category.{u} C]
+    {J : GrothendieckTopology C}
+    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
+    (R : Sheaf J CommRingCat.{u})
+    (A H B B' : SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
+    (α : H ⟶ SheafOfModules.homObj A B') (π : H ⟶ SheafOfModules.homObj A B)
+    (g : B ⟶ B') (h : α = π ≫ SheafOfModules.homObjMap (R := R) (𝟙 A) g) :
+    letI := SheafOfModules.monoidalCategory R
+    letI := SheafOfModules.symmetricCategory R
+    (β_ H A).hom ≫ (SheafOfModules.tensorHomEquiv (R := R) A H B').symm α =
+      ((β_ H A).hom ≫ (SheafOfModules.tensorHomEquiv (R := R) A H B).symm π) ≫ g := by
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.symmetricCategory R
+  rw [Category.assoc]
+  congr 1
+  apply (SheafOfModules.tensorHomEquiv (R := R) A H B').injective
+  simp only [Equiv.apply_symm_apply, SheafOfModules.tensorHomEquiv_comp_homObjMap]
+  exact h
+
+-- Descend the abstract component calculation before selecting any product witnesses.
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem evaluation_graded_naturality {C : Type u} [Category.{u} C]
+    {J : GrothendieckTopology C}
+    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
+    (R : Sheaf J CommRingCat.{u})
+    (P H H' N I : CochainComplex (SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)
+    (φ : H ⟶ H')
+    (π : ∀ (p q n : ℤ), q + p = n → (H.X p ⟶
+      SheafOfModules.homObj (P.X q) (N.X n)))
+    (π' : ∀ (p q n : ℤ), q + p = n → (H'.X p ⟶
+      SheafOfModules.homObj (P.X q) (I.X n)))
+    (g : N ⟶ I)
+    (hπ : ∀ (p q n : ℤ) (h : q + p = n),
+      φ.f p ≫ π' p q n h = π p q n h ≫
+        SheafOfModules.homObjMap (R := R) (𝟙 (P.X q)) (g.f n)) (n : ℤ) :
+    letI := SheafOfModules.monoidalCategory R
+    letI := SheafOfModules.symmetricCategory R
+    HomologicalComplex.mapBifunctorDesc
+      (K₁ := H) (K₂ := P) (F := curriedTensor _) (c := .up ℤ)
+      (j := n) (fun p q h ↦ (β_ ((H).X p) (P.X q)).hom ≫
+        (SheafOfModules.tensorHomEquiv (R := R) (P.X q)
+          ((H).X p) (I.X n)).symm
+          (φ.f p ≫ π' p q n
+            (by change p + q = n at h; omega))) =
+    HomologicalComplex.mapBifunctorDesc
+      (K₁ := H) (K₂ := P) (F := curriedTensor _) (c := .up ℤ)
+      (j := n) (fun p q h ↦ (β_ ((H).X p) (P.X q)).hom ≫
+        (SheafOfModules.tensorHomEquiv (R := R) (P.X q)
+          ((H).X p) (N.X n)).symm
+          (π p q n (by change p + q = n at h; omega))) ≫ g.f n := by
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.symmetricCategory R
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q hpq
+  have hpq' : p + q = n := hpq
+  simp only [HomologicalComplex.ι_mapBifunctorDesc,
+    HomologicalComplex.ι_mapBifunctorDesc_assoc]
+  apply evaluation_component_naturality R
+  exact hπ p q n (by omega)
+
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Degreewise ordinary evaluation commutes with a map to the fixed coefficient resolution.
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ;
 ordinary evaluation localization proof step 2.
@@ -76,5 +143,20 @@ theorem schemeOrdinaryEvaluationGraded_augmentation (Y : Scheme.{u})
     (g : N ⟶ (schemeHomKInjectiveResolution Y).obj N) (n : ℤ) :
     (schemeTensorHomUncurry Y (homComplex (R := Y.sheaf) P N) P N
       (((homComplexFunctor (R := Y.sheaf)).obj (op P)).map g)).f n =
-        schemeOrdinaryEvaluationGraded Y P N n ≫ g.f n := by sorry
+        schemeOrdinaryEvaluationGraded Y P N n ≫ g.f n := by
+  let π := Classical.choose (homComplex_projections_exists.{u, u, u, u} (R := Y.sheaf))
+  have hπ (p q n : ℤ) (h : q + p = n) :
+      (((homComplexFunctor (R := Y.sheaf)).obj (op P)).map g).f p ≫
+          π P ((schemeHomKInjectiveResolution Y).obj N) p q n h =
+        π P N p q n h ≫ SheafOfModules.homObjMap (R := Y.sheaf) (𝟙 (P.X q)) (g.f n) := by
+    have h := (Classical.choose_spec
+      (homComplex_projections_exists.{u, u, u, u} (R := Y.sheaf))).2.2
+        P P N ((schemeHomKInjectiveResolution Y).obj N) (𝟙 P) g p q n h
+    simpa only [op_id, (homComplexFunctor (R := Y.sheaf)).map_id,
+      NatTrans.id_app, Category.id_comp, HomologicalComplex.id_f] using h
+  exact evaluation_graded_naturality Y.sheaf P (homComplex (R := Y.sheaf) P N)
+    (homComplex (R := Y.sheaf) P ((schemeHomKInjectiveResolution Y).obj N)) N
+    ((schemeHomKInjectiveResolution Y).obj N)
+    (((homComplexFunctor (R := Y.sheaf)).obj (op P)).map g) (π P N)
+    (π P ((schemeHomKInjectiveResolution Y).obj N)) g hπ n
 end AlgebraicGeometry
