@@ -29,6 +29,7 @@ theorem derivedCategory_towerLimit_cone
     ∀ (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ),
       ∃ c : Cone I.asFunctor, Nonempty (IsLimit c) := by
   intro I
-  exact ⟨_, ⟨(limitConeOfEqualizerAndProduct I.asFunctor).isLimit⟩⟩
+  let c := limitConeOfEqualizerAndProduct I.asFunctor
+  exact ⟨c.cone, ⟨c.isLimit⟩⟩
 
 end CategoryTheory
