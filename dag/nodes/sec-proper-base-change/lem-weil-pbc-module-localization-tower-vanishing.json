@@ -28,9 +28,73 @@
   "def-weil-abstract-derived-category",
   "def-weil-derived-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the site with exactly one object $*$, its identity as the only arrow, and only the maximal sieve covering. Put $\\mathcal O(*)=A$. This is a small ringed site, and every presheaf is a sheaf: the sole covering-family gluing condition is the identity condition. Evaluation at $*$ therefore identifies its module-sheaf category with $A$-modules, with inverse sending a module to the one-value sheaf [def-weil-sheaf-of-modules-category]. The slice at $*$ is the very same site. These mutually inverse descriptions identify complexes, differentials, cohomology, homotopies, localization at quasi-isomorphisms and hence $D(\\mathcal O)$ with $D(A)$ [def-weil-abstract-derived-category]. The localized sheaf $\\mathcal O[1/f]$ is exactly $A_f$: sectionwise localization has one value and no sheafification change. Products and their projections are identified as well, so the Roos triangle of [def-weil-derived-limit] is the same triangle in both descriptions.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category",
+    "def-weil-derived-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091P (lemma-hom-from-Af), equivalence (1),(3),(6); specialize Tag 0997 (algebraization.tex, lemma-hom-from-Af) to the one-object identity-only site with trivial topology"
+   }
+  },
+  {
+   "text": "Choose a complex representing $K$. Apply [prop-pur-kinjective-resolutions-exist] on this small site to obtain a K-injective complex $I^\\bullet$ representing $K$ (in fact with injective terms). Put $C^n=\\operatorname{Hom}_A(A_f,I^n)$ and $d_C(h)=d_I\\circ h$. By [def-pur-hom-complex] this is precisely the Hom complex from $A_f[0]$ to $I^\\bullet$, since the only nonzero source term is in degree zero. By [def-pur-derived-internal-hom], on the one-object site $QC$ represents $R\\mathcal Hom_{\\mathcal O}(\\mathcal O[1/f],K)$; internal Hom here is ordinary module Hom, since the only slice is the site itself.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091P (lemma-hom-from-Af), equivalence (1),(3),(6); specialize Tag 0997 (algebraization.tex, lemma-hom-from-Af) to the one-object identity-only site with trivial topology"
+   }
+  },
+  {
+   "text": "Fix $q\\in\\mathbf Z$. By [lem-weil-pbc-kinjective-hom-derived], morphisms $A_f[0][q]\\to K$ are the homotopy classes of chain maps $A_f[0][q]\\to I^\\bullet$. The source has only its degree $-q$ term $A_f$, with zero differential [def-weil-abstract-derived-category]. Such a chain map is exactly an $A$-linear $h:A_f\\to I^{-q}$ satisfying $d_Ih=0$. Two such maps differ by a chain homotopy exactly when their difference is $d_I t$ for an $A$-linear $t:A_f\\to I^{-q-1}$ (the source-differential term in the homotopy equation is zero). Thus these classes are $\\ker(d_C^{-q})/\\operatorname{im}(d_C^{-q-1})=H^{-q}(C)$. In particular every derived morphism is zero if and only if this cohomology module is zero. The sign of $q$ imposes no restriction, since $q$ ranges over all integers.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091P (lemma-hom-from-Af), equivalence (1),(3),(6); specialize Tag 0997 (algebraization.tex, lemma-hom-from-Af) to the one-object identity-only site with trivial topology"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-local-hom-tower-criterion] with this small ringed site, $U=*$, global section $f$, and $K$. The site and slice identifications in step 1 make its assertion $QC=0$ if and only if the given $T(K,f)=0$; it applies to any derived limit, without a canonical choice. By [def-weil-abstract-derived-category], $QC=0$ implies all its cohomology objects vanish, since cohomology factors through localization. Conversely, if every $H^n(C)$ vanishes, the map $C\\to0$ is a quasi-isomorphism and therefore becomes an isomorphism $QC\\simeq0$. Step 3 identifies precisely this cohomology vanishing with the vanishing of all the Hom groups in the statement. Combining both directions proves the equivalence for arbitrary unbounded $K$ and arbitrary $f$, including zero divisors.",
+   "uses": [
+    "lem-weil-pbc-local-hom-tower-criterion",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091P (lemma-hom-from-Af), equivalence (1),(3),(6); specialize Tag 0997 (algebraization.tex, lemma-hom-from-Af) to the one-object identity-only site with trivial topology"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-limit",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-local-hom-tower-criterion",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 091P (lemma-hom-from-Af), equivalence (1),(3),(6); specialize Tag 0997 (algebraization.tex, lemma-hom-from-Af) to the one-object identity-only site with trivial topology"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -73,15 +137,124 @@
    "results": "8 hits: DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, DerivedCategory.isZero_of_isLE, DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.isZero_of_isGE, DerivedCategory.left_fac_of_isStrictlyGE",
    "date": "2026-10-14",
    "verdict": "no match: general derived-category, categorical-localization, dimension, or orthogonal-subcategory results do not give the multiplication-tower/localized-module comparison of 091P or the full arbitrary-ideal completeness assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "vanishing of Hom from a localized ring in all degrees is equivalent to vanishing of the derived multiplication tower",
+   "results": "8 hits: DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.ProjectiveResolution.extMk_zero, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.ProjectiveResolution.extMk_eq_zero_iff, CategoryTheory.isZero_Tor_succ_of_projective, DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.isLE_iff",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned signatures concern projective/injective or degree bounds, or categorical localization; none compares principal ring localization with a multiplication-tower limit"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, Localization, Hom",
+   "results": "0 hits: ; loogle: unknown identifier 'Hom'",
+   "date": "2026-10-14",
+   "verdict": "unavailable: Loogle rejected the query because Hom is an unknown identifier; no negative mathematical conclusion is drawn from this query"
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*(Ext|derived|homotopy)|derived.*localization",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match in the mistakenly supplied Mathlib subdirectory; repeated in Algebra to search the actual source"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vanishing of Hom from a localized ring in all degrees is equivalent to vanishing of the homotopy limit of the multiplication tower",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy inverse limit of multiplication by a ring element is computed by derived Hom out of the principal localization",
+   "results": "8 hits: ComplexShape.quotient_isLocalization, instIsLocalizationHomologicalComplexIntUpHomotopyCategoryQuotientHomotopyEquivalences, instIsLocalizationHomologicalComplexDownHomotopyCategoryQuotientHomotopyEquivalences, ComplexShape.strictUniversalPropertyFixedTargetQuotient, HomologicalComplexUpToQuasiIso.instIsLocalizationHomologicalComplexCompHomotopyCategoryQuotientQhQuasiIso, ComplexShape.QFactorsThroughHomotopy.areEqualizedByLocalization, HomologicalComplexUpToQuasiIso.Q_inverts_homotopyEquivalences, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned signatures concern projective/injective or degree bounds, or categorical localization; none compares principal ring localization with a multiplication-tower limit"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, IsLocalization.Away",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: no principal ring localization/derived multiplication-tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*(Ext|derived|homotopy)|derived.*localization",
+   "results": "25 hits: Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: no principal ring localization/derived multiplication-tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Away.*(KInjective|homotopy|DerivedCategory)|(KInjective|homotopy|DerivedCategory).*Away",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: no principal localization/multiplication-tower equivalence; semantic hits concern support bounds and projective or injective objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away, DerivedCategory",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: no principal localization/multiplication-tower equivalence; semantic hits concern support bounds and projective or injective objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right orthogonality to a principal ring localization detects vanishing of the inverse multiplication telescope of an unbounded complex",
+   "results": "8 hits: DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.isLE_iff, CochainComplex.isGE_iff, HomologicalComplex.isSupported_iff, HomologicalComplex.IsStrictlySupportedOutside.isZero, HomologicalComplex.IsSupportedOutside.exactAt, HomologicalComplex.exactAt_of_isSupported",
+   "date": "2026-10-14",
+   "verdict": "no match: no principal localization/multiplication-tower equivalence; semantic hits concern support bounds and projective or injective objects"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-module-derived-complete-products-triangles",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-module-localization-tower-vanishing",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Specialized the existing ringed-site internal-Hom/tower criterion to the one-object site of A-modules, then computed every shifted Hom group explicitly as the cohomology of Hom(A_f,I) using a K-injective representative. Reused existing general nodes only; no new nodes. Replaced an initially incomplete telescope argument after checking the cited statements.",
+  "blueprint": "Realizes the recorded localization-test clause in the first proof sentence of thm-weil-pbc-finite-extension along the existing ancestry; no change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Identifies sheaves on the one-object trivial site with modules; this is a generic definition used to specialize the existing criterion."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Supplies an unbounded K-injective representative on a small ringed site; the module case is the trivial one-object site, and no unit-specific replacement theorem is needed."
+   },
+   {
+    "node": "def-pur-hom-complex",
+    "why": "Gives the Hom-complex differential used to compute the shifted morphism groups explicitly."
+   },
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Gives the K-injective model for internal Hom to connect the ringed-site criterion to ordinary module Hom."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-sheaf-of-modules-category",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-hom-complex",
+  "def-pur-derived-internal-hom"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-aabf5c18e",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-aabf5c18e (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, unit/chapter route, and exact Stacks 091P/0997 source passages. All four steps preserve hypotheses and correctly handle shifts, arbitrary derived limits, unbounded complexes, and zero divisors. No new nodes, circular dependencies, parent-clause restatements, or coefficient-category substitutions were found. Accepted generic tool uses and concrete edge-case checks are documented in review.md; no fixes required."
+ }
 }
