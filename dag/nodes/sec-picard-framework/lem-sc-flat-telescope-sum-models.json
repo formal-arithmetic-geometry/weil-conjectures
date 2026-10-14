@@ -1,0 +1,139 @@
+{
+ "id": "lem-sc-flat-telescope-sum-models",
+ "kind": "statement",
+ "title": "Literal telescope models for a countable coproduct",
+ "statement": "Let Y be any scheme and let E_n be a sequence of bounded-above cochain complexes of sheaves of O_Y-modules, all of whose terms are flat [def-pc-flat-sheaf-modules]. Bounds may depend on n. Let q be the homotopy quotient [def-pc-cochain-complex-modules]. There exist a complex R with isFlatTelescope Y R [def-sc-flat-telescope-stage-map], complexes T_n with isFlatTelescope Y (T_n), and maps s_n:qT_n -> qR, such that q(sum E_n) is isomorphic to qR, each qT_n satisfies boundedFlatShiftRepresentative Y [def-sc-bounded-flat-shift-representative], and the cofan (qR,s_n) is a coproduct of the qT_n in the homotopy category. No derived category, scheme morphism, comparison, or uniform bound is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YS; https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "Steps 1--2 of lem-sc-flat-telescope-sum-comparison-is-iso: partial-sum telescope splitting and bounded constant-tower models; agent expansion of Tags 06YS and 06YJ."
+ },
+ "stmt_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-cochain-complex-modules",
+  "def-sc-flat-telescope-stage-map",
+  "def-sc-bounded-flat-shift-representative"
+ ],
+ "proof": [
+  {
+   "text": "Let B_n be the finite coproduct of E_0,...,E_n, with the split inclusion B_n -> B_(n+1). Each B_n is bounded above by the finite maximum of the upper bounds. Finite coproducts of its terms are flat by the flat-coproduct clause of lem-pc-kflat-closure. Form R as the explicit mapping cone of one minus transition on the countable coproduct of B_n. This is a literal flat telescope. Its augmentation to S=sum E is a homotopy equivalence: after reindexing the sum by pairs (n,j) with j<=n, each E_j has a constant identity tail. The augmentation sums the coordinates. Its section sends E_j to the first tail coordinate; on the augmentation kernel the inverse to one minus successor is the finite partial-sum operator. This inverse is finite-support because the coordinates of a kernel element sum to zero. It commutes with the differential, yielding the cochain splitting S plus a contractible summand. Apply the homotopy quotient to obtain qS isomorphic to qR.",
+   "uses": [
+    "def-sc-flat-telescope-stage-map",
+    "lem-pc-kflat-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each E_j use the same constant identity telescope construction. Its cone is bounded above (the upper bound increases by at most one) and has flat terms, using countable flat coproducts and finite sums. Its augmentation is a homotopy equivalence to E_j by the preceding explicit finite-support splitting.  Denote these identity telescope cones by T_j. Their homotopy isomorphisms to E_j and the inverse augmentation from sum E to R define s_j : qT_j -> qR. The quotient coproduct cofan is colimiting because both cochain maps and homotopies assemble from summands (the degreewise coproduct property). Transport this universal property through those isomorphisms. This proves exactly the cofan clause, without a comparison family or a morphism of schemes.",
+   "uses": [
+    "def-sc-flat-telescope-stage-map",
+    "def-sc-bounded-flat-shift-representative",
+    "lem-pc-kflat-closure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-bounded-flat-shift-representative",
+  "def-sc-flat-telescope-stage-map",
+  "lem-pc-kflat-closure"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y3",
+  "date": "2026-10-14",
+  "document": "dag/nodes/sec-picard-framework/lem-sc-flat-telescope-sum-comparison-is-iso.json; Stacks Tags 06YS and 06YJ",
+  "place": "Steps 1--2: explicit partial-sum and identity-tail telescope splitting; comparison-free geometric construction remains open."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "countable coproducts in homotopy categories and mapping telescope of finite partial sums",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a natural transformation invertible on summands is invertible on a coproduct if both functors preserve coproducts",
+   "date": "2026-10-14",
+   "results": "Sigma.map_isIso and generic coproduct comparison isomorphisms; no literal telescope model construction.",
+   "verdict": "Infrastructure only; used coproduct universal property directly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsColimit\", \"IsIso\"",
+   "date": "2026-10-14",
+   "results": "IsColimit.hom_isIso and coproduct cofan comparison lemmas; no telescope splitting.",
+   "verdict": "No exact model theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "telescope|finite.*partial.*sum; local searches for telescope splitting, coproduct preservation and mapHomotopyCategory",
+   "date": "2026-10-14",
+   "results": "TelescopeColimit is a quasi-isomorphism theorem, not a homotopy splitting; FilteredFreeTelescopeSplitting is for ModuleCat filtrations. The homotopy/derived coproduct infrastructure is available. Blueprint search telescope and direct sums found no duplicate.",
+   "verdict": "New literal models statement needed; preservation proved from existing infrastructure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatTelescopeSumComparisonIsIso",
+  "date": "2026-10-14",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Steps 1--2 of lem-sc-flat-telescope-sum-comparison-is-iso: partial-sum telescope splitting and bounded constant-tower models; agent expansion of Tags 06YS and 06YJ.",
+   "via": [
+    "lem-sc-flat-telescope-sum-comparison-is-iso",
+    "lem-sc-flat-telescope-normalization-unshifted-is-iso",
+    "lem-sc-flat-telescope-normalization-is-iso",
+    "lem-sc-flat-telescope-bounded-normalization-extension",
+    "lem-sc-flat-telescope-model-shift-gauge",
+    "lem-sc-flat-telescope-shift-gauge",
+    "lem-sc-normalized-flat-telescope-stage-comparison",
+    "lem-sc-normalized-flat-telescope-comparison",
+    "lem-sc-normalized-kflat-representative-comparison",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": "none",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatTelescopeSumModels",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeSumModels.lean",
+  "declaration": "AlgebraicGeometry.exists_flat_telescope_sum_models",
+  "statement": "theorem exists_flat_telescope_sum_models (Y : Scheme.{u})\n    (E : ℕ → CochainComplex\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (hb : ∀ n : ℕ, ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((E n).X i))\n    (hf : ∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E n).X i)) :\n    ∃ (R : CochainComplex\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n      (hR : isFlatTelescope Y R)\n      (T : ℕ → CochainComplex\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n      (hT : ∀ n, isFlatTelescope Y (T n))\n      (s : ∀ n, (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (T n) ⟶\n        (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R),\n      Nonempty ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (∐ E) ≅\n        (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R) ∧\n      (∀ n, boundedFlatShiftRepresentative Y\n        ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (T n))) ∧\n      Nonempty (IsColimit (Cofan.mk\n        ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R) s))",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261014T084703-L-89764",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261014T084703-L-89764",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

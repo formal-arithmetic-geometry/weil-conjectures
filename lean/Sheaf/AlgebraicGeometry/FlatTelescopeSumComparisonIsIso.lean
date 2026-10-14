@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
 public import Sheaf.AlgebraicGeometry.BoundedFlatModelNormalization
+import Sheaf.AlgebraicGeometry.FlatTelescopeSumModels
+import Sheaf.AlgebraicGeometry.FlatComparisonPreservesCountableCoproducts
 
 /-! # The normalized comparison on sums of bounded-flat stages
 
@@ -92,6 +94,48 @@ theorem exists_flat_telescope_sum_comparison_isIso
       Nonempty ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (∐ E) ≅
         (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R) ∧
       IsIso (α ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R)
-        ⟨R, hR, Or.inl rfl⟩) := by sorry
+        ⟨R, hR, Or.inl rfl⟩) := by
+  classical
+  obtain ⟨R, hR, T, hT, s, e, hTb, hc⟩ := exists_flat_telescope_sum_models Y E hb hf
+  let q := HomotopyCategory.quotient
+    (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ)
+  let L := DerivedCategory.Qh ⋙ derivedPullback f
+  let G := (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙
+    (DerivedCategory.Qh : HomotopyCategory
+      (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤
+      schemeDerivedCategory Z)
+  let hR' : flatTelescopeShiftRepresentative Y (q.obj R) := ⟨R, hR, Or.inl rfl⟩
+  let hT' (n : ℕ) : flatTelescopeShiftRepresentative Y (q.obj (T n)) :=
+    ⟨T n, hT n, Or.inl rfl⟩
+  obtain ⟨hL, hG⟩ := flat_comparison_preserves_countable_coproducts f
+  let : PreservesColimitsOfShape (Discrete ℕ) L := hL
+  let : PreservesColimitsOfShape (Discrete ℕ) G := hG
+  have cL : IsColimit (Cofan.mk (L.obj (q.obj R)) (fun n ↦ L.map (s n))) :=
+    isColimitCofanMkObjOfIsColimit L _ _ hc.some
+  have cG : IsColimit (Cofan.mk (G.obj (q.obj R)) (fun n ↦ G.map (s n))) :=
+    isColimitCofanMkObjOfIsColimit G _ _ hc.some
+  let a := α (q.obj R) hR'
+  let b (n : ℕ) := α (q.obj (T n)) (hT' n)
+  have (n : ℕ) : IsIso (b n) := hαbounded _ (hT' n) (hTb n)
+  have hn (n : ℕ) : L.map (s n) ≫ a = b n ≫ G.map (s n) :=
+    hαnat _ _ (hT' n) hR' (s n)
+  let d : G.obj (q.obj R) ⟶ L.obj (q.obj R) :=
+    Cofan.IsColimit.desc cG (fun n ↦ inv (b n) ≫ L.map (s n))
+  have hd (n : ℕ) : G.map (s n) ≫ d = inv (b n) ≫ L.map (s n) :=
+    Cofan.IsColimit.fac cG _ n
+  have had : a ≫ d = 𝟙 _ := by
+    apply Cofan.IsColimit.hom_ext cL
+    intro n
+    change L.map (s n) ≫ (a ≫ d) = L.map (s n) ≫ 𝟙 _
+    rw [← Category.assoc, hn, Category.assoc, hd]
+    simp
+  have hda : d ≫ a = 𝟙 _ := by
+    apply Cofan.IsColimit.hom_ext cG
+    intro n
+    change G.map (s n) ≫ (d ≫ a) = G.map (s n) ≫ 𝟙 _
+    rw [← Category.assoc, hd, Category.assoc, hn]
+    simp
+  refine ⟨R, hR, e, ?_⟩
+  exact ⟨⟨d, had, hda⟩⟩
 
 end AlgebraicGeometry
