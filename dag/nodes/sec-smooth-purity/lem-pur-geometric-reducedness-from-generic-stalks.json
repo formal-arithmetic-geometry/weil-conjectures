@@ -31,9 +31,86 @@
   "def-weil-pbc-module-tensor-product",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a field extension $L/k$ and an affine open $U=\\operatorname{Spec}A$ of $X$. By [def-pc-reduced-scheme], $A$ is reduced. By [lem-weil-pbc-spec-irreducible-closed-subsets-primes], the closure of a minimal prime $\\mathfrak p$ in $U$ is the irreducible closed set $V(\\mathfrak p)$, and any irreducible closed set containing it is $V(\\mathfrak q)$ with $\\mathfrak q\\subseteq\\mathfrak p$, hence equals it by minimality. Its closure $C$ in $X$ is an irreducible component: if an irreducible subset $Y$ contains $C$, then $Y\\cap U$ is a nonempty open subset of $Y$. Any two nonempty opens of $Y\\cap U$ intersect because they are nonempty opens of $Y$; every nonempty open of $Y$ meets $Y\\cap U$, so $Y\\cap U$ is dense in $Y$. Its closure in $U$ is therefore irreducible and contains $V(\\mathfrak p)$, hence equals $V(\\mathfrak p)$. Consequently $Y\\subseteq\\overline{Y\\cap U}^{X}\\subseteq C$, proving maximality. The point $\\xi$ represented by $\\mathfrak p$ has closure $C$, so it is generic in this global component [def-sc-generic-point]. By [lem-weil-pbc-affine-open-stalk-localization](c), the germ map identifies $A_{\\mathfrak p}$ with $\\mathcal O_{X,\\xi}$ as an $A$-algebra and hence as a $k$-algebra. Tensoring this isomorphism and its inverse with $L$ gives inverse ring maps, so the hypothesis says $A_{\\mathfrak p}\\otimes_k L$ is reduced for every minimal prime $\\mathfrak p$.",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "def-weil-irreducible-components",
+    "def-sc-generic-point",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KS(3), reduction to affine generic local rings; Tag 035W, local-ring interpretation"
+   }
+  },
+  {
+   "text": "The maps $A\\to A_{\\mathfrak p}$ jointly detect zero. Indeed [lem-weil-pbc-minimal-prime-reduced-localization-field] gives $\\mathfrak p A_{\\mathfrak p}=0$. The kernel of $A\\to A_{\\mathfrak p}$ is exactly $\\mathfrak p$: one inclusion follows from this equality; for the other, if $a/1=0$, then $sa=0$ for some $s\\notin\\mathfrak p$, and primality gives $a\\in\\mathfrak p$. If $a$ vanishes in all these localizations, it belongs to every minimal prime. Every prime contains a minimal prime by [lem-weil-pbc-prime-contains-minimal-prime] with $I=0$, so $a$ lies in every prime. By [lem-weil-pbc-zero-locus-eq-iff-radical-eq] with $I=0$, $a$ is nilpotent, hence zero because $A$ is reduced.",
+   "uses": [
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Tag 00EW, lemma-reduced-ring-sub-product-fields; Tag 07K2, lemma-generic-points-geometrically-reduced"
+   }
+  },
+  {
+   "text": "The induced maps $A\\otimes_k L\\to A_{\\mathfrak p}\\otimes_k L$ also jointly detect zero, without any finiteness of the set of primes. Write an element $z$ as $\\sum_{j=1}^r a_j\\otimes e_j$ with $e_1,\\ldots,e_r$ linearly independent over $k$: choose a basis of the finite-dimensional span of the finitely many coefficients of any tensor expression and collect coefficients. By [lem-weil-pbc-vector-space-basis-through-vector], extend these independent vectors to a vector-space basis of $L$ and let $\\lambda_j:L\\to k$ be the coordinate linear functionals. If every image of $z$ is zero, applying $\\operatorname{id}\\otimes\\lambda_j$ gives $a_j/1=0$ in every $A_{\\mathfrak p}$. Step 2 gives $a_j=0$ for all $j$, so $z=0$. If $z$ is nilpotent, each image is nilpotent in the reduced ring from step 1 and is therefore zero. Joint detection gives $z=0$, proving $A\\otimes_k L$ reduced.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-vector-space-basis-through-vector"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Tag 07K2, proof: injectivity after field tensor and the free-module inspection, written with finite coefficients"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-fibre-product-affine-spectra] with base ring $k$ and $k$-algebras $A,L$, $U_L$ is $\\operatorname{Spec}(A\\otimes_k L)$. By [lem-weil-pbc-open-immersion-base-change] it is an open subscheme of $X_L$. It is precisely the inverse image of $U$: a morphism to $X_L$ whose composite to $X$ factors through $U$ factors uniquely through $U_L$ by [def-pc-fibre-product]. The inverse images of the affine opens of $X$ therefore cover $X_L$. All their rings are reduced by step 3, and all their stalks are reduced: if $(b/s)^d=0$ in a localization of a reduced ring, then $tb^d=0$ for a denominator $t$, so $(tb)^d=0$, whence $tb=0$ and $b/s=0$. Each point of $X_L$ lies in one such affine chart; [lem-weil-pbc-affine-open-stalk-localization](c), applied to this chart in $X_L$, identifies its local ring with the localization of its reduced section ring at the corresponding prime. Thus [def-pc-reduced-scheme] makes $X_L$ reduced. Since $L/k$ was arbitrary, [def-pc-geometrically-irreducible] gives geometric reducedness of $X$. The empty scheme satisfies the same argument vacuously.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-pc-fibre-product",
+    "def-pc-reduced-scheme",
+    "def-pc-geometrically-irreducible",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KS(3), affine-local conclusion; Schemes Tag 01JO, affine fibre products"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-vector-space-basis-through-vector",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-pc-fibre-product",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 04KS(3), via the affine algebra argument of Tag 07K2 and Tag 00EW; free-module inspection expanded"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -97,10 +174,45 @@
    "results": "[loogle] OK 4 hit(s); returned: Algebra.isReduced_of_isGeometricallyReduced, Algebra.IsGeometricallyReduced.of_injective, Algebra.IsGeometricallyReduced.of_forall_fg, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced",
    "date": "2026-10-14",
    "verdict": "no match: maximal-localization reducedness and subalgebra geometric-reducedness criteria do not state the scheme generic-stalk criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "generic|IsReduced",
+   "results": "{\"t\": \"2026-10-14T10:10:12Z\", \"tool\": \"grep\", \"query\": \"generic|IsReduced\", \"sub\": \"AlgebraicGeometry/Geometrically/Reduced.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"23\", \"45\", \"48\", \"70\", \"71\"], \"digest\": \"61f124e3cfc13dd3\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: returned reducedness definitions, affine criteria, or theorems assuming geometric reducedness, not the generic-stalk criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced scheme is geometrically reduced if every generic local ring is geometrically reduced",
+   "results": "{\"t\": \"2026-10-14T10:10:13Z\", \"tool\": \"leanfinder\", \"query\": \"A reduced scheme is geometrically reduced if every generic local ring is geometrically reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isReduced_of_isGeometricallyReduced\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.IsReduced\", \"AlgebraicGeometry.affine_isReduced_iff\", \"AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"Algebra.IsGeometricallyReduced\"], \"digest\": \"f53503acab3c7fdd\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: returned reducedness definitions, affine criteria, or theorems assuming geometric reducedness, not the generic-stalk criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced algebra whose localizations at minimal prime ideals are geometrically reduced is geometrically reduced",
+   "results": "{\"t\": \"2026-10-14T10:10:13Z\", \"tool\": \"leanfinder\", \"query\": \"A reduced algebra whose localizations at minimal prime ideals are geometrically reduced is geometrically reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier\", \"AlgebraicGeometry.affine_isReduced_iff\", \"isReduced_localizationPreserves\", \"Algebra.isGeometricallyReduced_iff\", \"isReduced_ofLocalizationMaximal\"], \"digest\": \"279cb80f5b36f394\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: returned reducedness definitions, affine criteria, or theorems assuming geometric reducedness, not the generic-stalk criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyReduced\"",
+   "results": "{\"t\": \"2026-10-14T10:10:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"GeometricallyReduced\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyReduced\", \"AlgebraicGeometry.GeometricallyReduced\", \"AlgebraicGeometry.GeometricallyReduced.eq_geometrically\", \"AlgebraicGeometry.GeometricallyReduced.geometrically_isReduced\", \"AlgebraicGeometry.GeometricallyReduced.mk\", \"AlgebraicGeometry.geometricallyReduced_iff\", \"AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian\", \"AlgebraicGeometry.instIsReducedFiberOfGeometricallyReduced\"], \"digest\": \"63da7a08015a7ca0\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: returned reducedness definitions, affine criteria, or theorems assuming geometric reducedness, not the generic-stalk criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric reducedness is detected at the generic points of a reduced scheme",
+   "results": "{\"t\": \"2026-10-14T10:10:14Z\", \"tool\": \"leansearch\", \"query\": \"Geometric reducedness is detected at the generic points of a reduced scheme\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-finite-inseparable-geometric-reduction",
   "by": "worker",
@@ -116,5 +228,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-pur-geometric-reducedness-from-generic-stalks",
+  "worker": "stage1",
+  "summary": "Kept the statement including arbitrary components. Expanded generic-local-ring detection using existing minimal-prime and radical leaves, and finite independent tensor coefficients; no new nodes. Affine base change and its open cover are cited explicitly. Second reading cites the existing spectrum and affine-stalk statements, spells out component maximality, and reserves tool-use authorization for the maintainer.",
+  "blueprint": "lem-fin-generic-radicial-smoothing proof paragraphs 2-3: certification of geometric reducedness from the generic fields."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-104b13b7f",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-104b13b7f (reviewer sub-agent of L); spot-checked: Read the item and cited mathematics in full. All four steps agree with Stacks 04KS/035W and 07K2; finite-coefficient detection handles infinitely many components. No new nodes, missing citations, cycles, duplicates or weakened hypotheses found. Checked reached targets against archived master coefficient categories and exchange morphisms. Detailed review written to review.md; no fixes or tool_uses needed."
  }
 }
