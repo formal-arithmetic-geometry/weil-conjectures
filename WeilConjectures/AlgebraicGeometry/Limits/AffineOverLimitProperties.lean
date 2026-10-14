@@ -112,6 +112,7 @@ noncomputable def isLimitPullbackCone [IsCofiltered I] :
         · rw [pullback.lift_snd, ← hm i₀]
           simp }
 
+/-- The transition maps of the base changed diagram are affine. -/
 instance [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] {i j : I} (f : i ⟶ j) :
     IsAffineHom ((pullbackDiagram D p hp g).map f) := by
   rw [pullbackDiagram_map]
@@ -182,6 +183,7 @@ noncomputable def isLimitPairCone [IsCofiltered I] : IsLimit (pairCone D p hp q 
         · rw [pullback.lift_snd, hl₂, Category.assoc, ← hm i]
           simp }
 
+/-- The transition maps of the base changed diagram are affine. -/
 instance [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] {i j : I} (f : i ⟶ j) :
     IsAffineHom ((pairDiagram D p hp).map f) := by
   rw [pairDiagram_map]

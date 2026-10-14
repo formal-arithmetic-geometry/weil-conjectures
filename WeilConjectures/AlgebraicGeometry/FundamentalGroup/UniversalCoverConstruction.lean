@@ -52,6 +52,7 @@ attribute [local instance] FiniteEtale.fiberFunctor
 variable {Y : Scheme.{u}} [ConnectedSpace Y] {K : Type u} [Field K] [IsSepClosed K]
   (y : Spec (.of K) ⟶ Y)
 
+/-- Pointed Galois finite étale covers form an essentially small category. -/
 instance : EssentiallySmall.{u} (PointedGaloisObject (fiber y)) :=
   have := FiniteEtale.essentiallySmall Y
   essentiallySmall_pointedGaloisObject _
@@ -60,11 +61,13 @@ instance : EssentiallySmall.{u} (PointedGaloisObject (fiber y)) :=
 noncomputable abbrev unitObj : Y.FiniteEtale :=
   ⟨MorphismProperty.Over.mk ⊤ (𝟙 Y) inferInstance, inferInstanceAs (IsFinite (𝟙 Y))⟩
 
+/-- There is a pointed Galois cover. -/
 instance : Nonempty (PointedGaloisObject (fiber y)) := by
   obtain ⟨A, -, a, h, -⟩ := exists_hom_from_galois_of_fiber (fiber y) unitObj
     (fiberMk y unitObj y (Category.comp_id y))
   exact ⟨⟨A, a, h⟩⟩
 
+/-- Pointed Galois covers form a cofiltered category. -/
 instance : IsCofiltered (PointedGaloisObject (fiber y)) where
 
 /-- The small index category of the universal cover: a small model of the category of pointed
@@ -75,6 +78,7 @@ abbrev Index : Type u := SmallModel.{u} (PointedGaloisObject (fiber y))
 noncomputable abbrev indexEquiv : PointedGaloisObject (fiber y) ≌ Index y :=
   equivSmallModel _
 
+/-- The index category is cofiltered. -/
 instance : IsCofiltered (Index y) := IsCofiltered.of_equivalence (indexEquiv y)
 
 /-- The pointed Galois finite étale `Y`-schemes `A_j` indexed by `Index y`. -/
@@ -85,8 +89,10 @@ noncomputable abbrev obj : Index y ⥤ Y.FiniteEtale :=
 noncomputable abbrev point (j : Index y) : (fiber y).obj ((obj y).obj j) :=
   ((indexEquiv y).inverse.obj j).pt
 
+/-- The covers `A_j` are Galois. -/
 instance (j : Index y) : IsGalois ((obj y).obj j) := ((indexEquiv y).inverse.obj j).isGalois
 
+/-- The transition maps preserve the points `a_j`. -/
 lemma map_point {j j' : Index y} (f : j ⟶ j') :
     (fiber y).map ((obj y).map f) (point y j) = point y j' :=
   ((indexEquiv y).inverse.map f).comp
@@ -102,17 +108,22 @@ noncomputable def diagram : Index y ⥤ Scheme.{u} where
 /-- The structure morphisms `A_j ⟶ Y`. -/
 noncomputable abbrev p (j : Index y) : (diagram y).obj j ⟶ Y := ((obj y).obj j).obj.hom
 
+/-- The transition maps are `Y`-morphisms. -/
 lemma map_p {j j' : Index y} (f : j ⟶ j') : (diagram y).map f ≫ p y j' = p y j :=
   hom_left_comp _
 
+/-- The covers `A_j` are finite over `Y`. -/
 instance (j : Index y) : IsFinite (p y j) := ((obj y).obj j).property
 
+/-- The covers `A_j` are étale over `Y`. -/
 instance (j : Index y) : Etale (p y j) := ((obj y).obj j).obj.prop
 
+/-- The transition maps are affine. -/
 instance {j j' : Index y} (f : j ⟶ j') : IsAffineHom ((diagram y).map f) := by
   have : IsAffineHom ((diagram y).map f ≫ p y j') := by rw [map_p]; infer_instance
   exact IsAffineHom.of_comp _ (p y j')
 
+/-- The limit `lim A_j` exists, the `A_j` being affine over `Y`. -/
 instance : HasLimit (diagram y) := hasLimit_of_isAffineHom _ (p y) (map_p y)
 
 /-- The **universal profinite étale cover** `Ỹ_y = lim A_j`. -/
@@ -124,6 +135,7 @@ noncomputable abbrev j₀ : Index y := (IsCofiltered.nonempty (C := Index y)).so
 /-- The projection `Ỹ_y ⟶ Y`. -/
 noncomputable def proj : cover y ⟶ Y := limit.π (diagram y) (j₀ y) ≫ p y (j₀ y)
 
+/-- The projections `Ỹ_y ⟶ A_j` lie over `Y`. -/
 @[reassoc (attr := simp)]
 lemma π_p (j : Index y) : limit.π (diagram y) j ≫ p y j = proj y :=
   have : CategoryTheory.IsConnected (Index y) := IsCofiltered.isConnected _
@@ -141,10 +153,12 @@ noncomputable def pt : Spec (.of K) ⟶ cover y :=
             exact (Category.id_comp _).trans
               (congrArg CommaMorphism.left (map_point y f)).symm } }
 
+/-- The base point maps to the points `a_j`. -/
 @[reassoc (attr := simp)]
 lemma pt_π (j : Index y) : pt y ≫ limit.π (diagram y) j = (point y j).left :=
   limit.lift_π _ _
 
+/-- The base point `ỹ` lies over `y`. -/
 @[reassoc (attr := simp)]
 lemma pt_proj : pt y ≫ proj y = y := by
   rw [proj, pt_π_assoc]
@@ -165,12 +179,14 @@ noncomputable def toObj (P : Y.FiniteEtale) (x : (fiber y).obj P) : cover y ⟶ 
   limit.π (diagram y) (exists_hom_point y P x).choose ≫
     (exists_hom_point y P x).choose_spec.choose.hom.left
 
+/-- `toObj P x` is a `Y`-morphism. -/
 @[reassoc (attr := simp)]
 lemma toObj_hom (P : Y.FiniteEtale) (x : (fiber y).obj P) :
     toObj y P x ≫ P.obj.hom = proj y := by
   rw [toObj, Category.assoc, hom_left_comp]
   exact π_p y _
 
+/-- `toObj P x` sends `ỹ` to `x`. -/
 @[reassoc (attr := simp)]
 lemma pt_toObj (P : Y.FiniteEtale) (x : (fiber y).obj P) : pt y ≫ toObj y P x = x.left := by
   rw [toObj, pt_π_assoc, ← fiber_map_left, (exists_hom_point y P x).choose_spec.choose_spec]
@@ -194,9 +210,11 @@ section QCQS
 
 variable [CompactSpace Y] [QuasiSeparatedSpace Y]
 
+/-- The covers `A_j` are quasi-compact. -/
 instance (j : Index y) : CompactSpace ((diagram y).obj j) :=
   QuasiCompact.compactSpace_of_compactSpace (p y j)
 
+/-- The covers `A_j` are quasi-separated. -/
 instance (j : Index y) : QuasiSeparatedSpace ((diagram y).obj j) :=
   quasiSeparatedSpace_of_quasiSeparated (p y j)
 
@@ -311,6 +329,7 @@ lemma transportHom_toObj (τ : fiber y ≅ fiber z) (P : Y.FiniteEtale) (x : (fi
   congr 1
   exact (ConcreteCategory.congr_hom (τ.inv.naturality g) _).symm
 
+/-- The transport is a `Y`-morphism. -/
 @[reassoc (attr := simp)]
 lemma transportHom_proj (τ : fiber y ≅ fiber z) : transportHom τ ≫ proj z = proj y := by
   rw [proj, ← Category.assoc, transportHom, limit.lift_π]
@@ -336,11 +355,13 @@ noncomputable def transport (τ : fiber y ≅ fiber z) : cover y ≅ cover z whe
     congr 1
     exact inv_app_hom_app τ.symm P x
 
+/-- The transport along the trivial path is the identity. -/
 lemma transport_refl (y : Spec (.of K) ⟶ Y) : transport (Iso.refl (fiber y)) = Iso.refl _ :=
   Iso.ext (hom_ext y fun P x ↦ by
     rw [transport_hom, transportHom_toObj, Iso.refl_hom, Category.id_comp]
     rfl)
 
+/-- The transport is compatible with composition of paths. -/
 lemma transport_trans (τ : fiber y ≅ fiber z) (τ' : fiber z ≅ fiber w) :
     transport (τ ≪≫ τ') = transport τ ≪≫ transport τ' :=
   Iso.ext (hom_ext w fun P x ↦ by
@@ -373,18 +394,21 @@ noncomputable abbrev pullbackFst (P : Y.FiniteEtale) :
   Limits.pullback.fst P.obj.hom f
 
 omit [ConnectedSpace Y] [CompactSpace Y] [QuasiSeparatedSpace Y] in
+/-- Base change of morphisms is compatible with the projections `f^* P ⟶ P`. -/
 @[reassoc]
 lemma pullback_map_pullbackFst {P Q : Y.FiniteEtale} (g : P ⟶ Q) :
     ((FiniteEtale.pullback f).map g).hom.left ≫ pullbackFst f Q = pullbackFst f P ≫ g.hom.left :=
   by simp [pullbackFst]
 
 omit [ConnectedSpace Y] [CompactSpace Y] [QuasiSeparatedSpace Y] in
+/-- The projection `f^* P ⟶ P` lies over `f`. -/
 @[reassoc]
 lemma pullbackFst_hom (P : Y.FiniteEtale) :
     pullbackFst f P ≫ P.obj.hom = ((FiniteEtale.pullback f).obj P).obj.hom ≫ f :=
   Limits.pullback.condition
 
 omit [ConnectedSpace Y] [CompactSpace Y] [QuasiSeparatedSpace Y] in
+/-- The point `(x, y)` of `f^* P` projects to `x`. -/
 @[reassoc (attr := simp)]
 lemma pullbackPoint_left_pullbackFst (y : Spec (.of K) ⟶ Y) (P : Y.FiniteEtale)
     (x : (fiber (y ≫ f)).obj P) : (pullbackPoint f y P x).left ≫ pullbackFst f P = x.left := by
@@ -392,6 +416,7 @@ lemma pullbackPoint_left_pullbackFst (y : Spec (.of K) ⟶ Y) (P : Y.FiniteEtale
   exact Limits.pullback.lift_fst _ _ _
 
 omit [ConnectedSpace Y] [CompactSpace Y] [QuasiSeparatedSpace Y] in
+/-- The points `(x, y)` are natural in `P`. -/
 lemma pullbackPoint_naturality (y : Spec (.of K) ⟶ Y) {P Q : Y.FiniteEtale} (g : P ⟶ Q)
     (x : (fiber (y ≫ f)).obj P) :
     (fiber y).map ((FiniteEtale.pullback f).map g) (pullbackPoint f y P x) =
@@ -421,15 +446,18 @@ lemma map_toObj (y : Spec (.of K) ⟶ Y) (P : Y.FiniteEtale) (x : (fiber (y ≫ 
   change (toObj y _ _ ≫ pullbackFst f _) ≫ g.hom.left = _
   rw [Category.assoc, ← pullback_map_pullbackFst, toObj_comp_assoc, pullbackPoint_naturality]
 
+/-- `map f y` lies over `f`. -/
 lemma map_proj (y : Spec (.of K) ⟶ Y) : map f y ≫ proj (y ≫ f) = proj y ≫ f := by
   rw [proj, ← Category.assoc, map, limit.lift_π]
   change (toObj y _ _ ≫ pullbackFst f _) ≫ p (y ≫ f) _ = _
   rw [Category.assoc, pullbackFst_hom, toObj_hom_assoc]
 
+/-- `map f y` sends `ỹ` to the base point over `y ≫ f`. -/
 lemma pt_map (y : Spec (.of K) ⟶ Y) : pt y ≫ map f y = pt (y ≫ f) :=
   hom_ext (y ≫ f) fun P x ↦ by
     rw [Category.assoc, map_toObj, pt_toObj_assoc, pullbackPoint_left_pullbackFst, pt_toObj]
 
+/-- `map f` is compatible with the transports along `τ` and along the induced path. -/
 lemma map_transport {y z : Spec (.of K) ⟶ Y} (τ : fiber y ≅ fiber z) :
     map f y ≫ (transport (pullbackPathIso f τ)).hom = (transport τ).hom ≫ map f z :=
   hom_ext (z ≫ f) fun P x ↦ by

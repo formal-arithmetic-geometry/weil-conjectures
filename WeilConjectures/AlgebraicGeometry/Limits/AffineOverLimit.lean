@@ -98,6 +98,7 @@ variable {S : Scheme.{u}} {I : Type u} [SmallCategory I] (D : I ⥤ Scheme.{u})
   (p : ∀ i, D.obj i ⟶ S) (hp : ∀ {i j : I} (g : i ⟶ j), D.map g ≫ p j = p i)
 
 include hp in
+/-- The preimage of `pᵢ⁻¹ U` under a transition map is `pⱼ⁻¹ U`. -/
 lemma preimage_map_preimage {i j : I} (g : j ⟶ i) (U : S.Opens) :
     D.map g ⁻¹ᵁ p i ⁻¹ᵁ U = p j ⁻¹ᵁ U := by
   rw [← Scheme.Hom.comp_preimage, hp]
@@ -110,6 +111,7 @@ noncomputable def sections (i : I) : S.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{
   map_id _ := (D.obj i).presheaf.map_id _
   map_comp _ _ := ((D.obj i).presheaf.map_comp _ _)
 
+/-- The sections of `(pᵢ)_* 𝒪_{Dᵢ}` over `U` are `Γ(Dᵢ, pᵢ⁻¹ U)`. -/
 lemma sections_obj (i : I) (U : S.AffineZariskiSiteᵒᵖ) :
     (sections D p i).obj U = Γ(D.obj i, p i ⁻¹ᵁ U.unop.toOpens) := rfl
 
@@ -118,6 +120,7 @@ noncomputable def sectionsι (i : I) : (toOpensFunctor S).op ⋙ S.presheaf ⟶ 
   app U := (p i).app U.unop.toOpens
   naturality _ _ _ := (p i).naturality _
 
+/-- The structure morphism on sections is `pᵢ^*`. -/
 lemma sectionsι_app (i : I) (U : S.AffineZariskiSiteᵒᵖ) :
     (sectionsι D p i).app U = (p i).app U.unop.toOpens := rfl
 
@@ -163,6 +166,7 @@ noncomputable def diagram : Iᵒᵖ ⥤ S.AffineZariskiSiteᵒᵖ ⥤ CommRingCa
     exact Scheme.Hom.appLE_congr_hom (D.map_comp ψ.unop φ.unop) _ _ _ _
 
 include hp in
+/-- The structure morphisms are compatible with the transition maps. -/
 lemma sectionsι_comp_diagram_map {i j : Iᵒᵖ} (φ : i ⟶ j) :
     sectionsι D p i.unop ≫ (diagram D p hp).map φ = sectionsι D p j.unop := by
   ext U : 2
@@ -187,6 +191,7 @@ noncomputable def algebraι : (toOpensFunctor S).op ⋙ S.presheaf ⟶ algebra D
   sectionsι D p (i₀ (I := I)) ≫ colimit.ι (diagram D p hp) (.op (i₀ (I := I)))
 
 omit [∀ i, IsAffineHom (p i)] in
+/-- The structure morphism of the colimit factors through every stage. -/
 lemma sectionsι_comp_colimitι (i : Iᵒᵖ) :
     sectionsι D p i.unop ≫ colimit.ι (diagram D p hp) i = algebraι D p hp :=
   constant_of_preserves_morphisms
@@ -194,6 +199,7 @@ lemma sectionsι_comp_colimitι (i : Iᵒᵖ) :
     (fun _ _ φ ↦ by
       rw [← sectionsι_comp_diagram_map D p hp φ, Category.assoc, colimit.w]) i _
 
+/-- The colimit `colim (pᵢ)_* 𝒪_{Dᵢ}` is a quasi-coherent `𝒪_S`-algebra. -/
 lemma coequifibered_algebraι : (algebraι D p hp).Coequifibered :=
   NatTrans.coequifibered_of_forall_comp_colimitι (fun i ↦ sectionsι D p i.unop)
     (fun i ↦ coequifibered_sectionsι D p i.unop) (sectionsι_comp_diagram_map D p hp) _
@@ -208,6 +214,7 @@ noncomputable abbrev limitScheme : Scheme.{u} := (gluingData D p hp).glued
 /-- The structure morphism `lim Dᵢ ⟶ S`. -/
 noncomputable abbrev limitHom : limitScheme D p hp ⟶ S := (gluingData D p hp).toBase
 
+/-- The transition maps of the relative gluing datum are `Spec` of restriction maps. -/
 lemma gluingData_functor_map {U V : S.AffineZariskiSite} (f : U ⟶ V) :
     (gluingData D p hp).functor.map f = Spec.map ((algebra D p hp).map f.op) := rfl
 
@@ -217,6 +224,7 @@ noncomputable abbrev chart (i : I) (U : S.AffineZariskiSite) :
   (U.2.preimage (p i)).fromSpec
 
 omit [IsCofiltered I] in
+/-- The chart over `U` lies over the chart `Spec Γ(S, U) ⟶ S`. -/
 lemma chart_comp_p (i : I) (U : S.AffineZariskiSite) :
     chart D p i U ≫ p i = Spec.map ((sectionsι D p i).app (.op U)) ≫ U.2.fromSpec := by
   rw [sectionsι_app, Scheme.Hom.app_eq_appLE, IsAffineOpen.SpecMap_appLE_fromSpec]
@@ -231,12 +239,14 @@ lemma specMap_ι_chart_naturality (i : I) {U V : S.AffineZariskiSite} (f : U ⟶
   congr 1
   exact IsAffineOpen.map_fromSpec _ _ _
 
+/-- The charts of the stages are compatible with the structure morphisms. -/
 lemma specMap_ι_chart_p (i : I) (U : S.AffineZariskiSite) :
     Spec.map ((colimit.ι (diagram D p hp) (.op i)).app (.op U)) ≫ chart D p i U ≫ p i =
       Spec.map ((algebraι D p hp).app (.op U)) ≫ U.2.fromSpec := by
   rw [chart_comp_p, ← Spec.map_comp_assoc, ← NatTrans.comp_app,
     sectionsι_comp_colimitι D p hp (.op i)]
 
+/-- The charts of the stages are compatible with the transition maps. -/
 lemma specMap_ι_chart_map {i j : I} (g : i ⟶ j) (U : S.AffineZariskiSite) :
     Spec.map ((colimit.ι (diagram D p hp) (.op i)).app (.op U)) ≫ chart D p i U ≫ D.map g =
       Spec.map ((colimit.ι (diagram D p hp) (.op j)).app (.op U)) ≫ chart D p j U := by
@@ -254,17 +264,20 @@ noncomputable def π (i : I) : limitScheme D p hp ⟶ D.obj i :=
           naturality {_ _} f :=
             (specMap_ι_chart_naturality D p hp i f).trans (Category.comp_id _).symm } }
 
+/-- The projection `lim Dᵢ ⟶ Dᵢ` on the chart over `U`. -/
 @[reassoc]
 lemma ι_π (i : I) (U : S.AffineZariskiSite) :
     colimit.ι (gluingData D p hp).functor U ≫ π D p hp i =
       Spec.map ((colimit.ι (diagram D p hp) (.op i)).app (.op U)) ≫ chart D p i U :=
   colimit.ι_desc _ _
 
+/-- The projections `lim Dᵢ ⟶ Dᵢ` lie over `S`. -/
 @[reassoc (attr := simp)]
 lemma π_p (i : I) : π D p hp i ≫ p i = limitHom D p hp :=
   colimit.hom_ext fun U ↦ (ι_π_assoc D p hp i U _).trans
     ((specMap_ι_chart_p D p hp i U).trans (ι_toBase _ U).symm)
 
+/-- The projections `lim Dᵢ ⟶ Dᵢ` are compatible with the transition maps. -/
 @[reassoc (attr := simp)]
 lemma π_map {i j : I} (g : i ⟶ j) : π D p hp i ≫ D.map g = π D p hp j :=
   colimit.hom_ext fun U ↦ (ι_π_assoc D p hp i U _).trans
@@ -294,6 +307,7 @@ noncomputable def ringCocone (i₁ : I) : Cocone (Over.forget i₁ ⋙ ringDiagr
     (Over.forget i₁).op
 
 omit [∀ i, IsAffineHom (p i)] in
+/-- The components of `ringCocone` are the colimit inclusions. -/
 lemma ringCocone_ι_app (i₁ : I) (j : (Over i₁)ᵒᵖ) :
     (ringCocone D p hp U i₁).ι.app j =
       (colimit.ι (diagram D p hp) (.op j.unop.left)).app (.op U) := rfl
@@ -313,6 +327,7 @@ noncomputable def opensIso (i₁ : I) (j : Over i₁) :
       exact (IsAffineOpen.range_fromSpec _).symm))
 
 omit [IsCofiltered I] in
+/-- The identification `opensIso` is compatible with the inclusions into `Dⱼ`. -/
 @[reassoc (attr := simp)]
 lemma opensIso_hom_chart (i₁ : I) (j : Over i₁) :
     (opensIso D p hp U i₁ j).hom ≫ chart D p j.left U = Scheme.Opens.ι _ :=
@@ -339,6 +354,7 @@ noncomputable def coneOpensIso (i₁ : I) :
       change SetLike.coe ((π D p hp i₁ ≫ p i₁) ⁻¹ᵁ U.toOpens) = _
       rw [π_p]))
 
+/-- The identification `coneOpensIso` is compatible with the inclusions. -/
 @[reassoc (attr := simp)]
 lemma coneOpensIso_hom_ι (i₁ : I) :
     (coneOpensIso D p hp U i₁).hom ≫ colimit.ι (gluingData D p hp).functor U =
