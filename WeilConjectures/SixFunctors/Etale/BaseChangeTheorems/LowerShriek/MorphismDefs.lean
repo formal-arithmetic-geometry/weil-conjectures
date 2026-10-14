@@ -29,7 +29,7 @@ of `f`. This file constructs the compact-support base-change morphism
 
 `Ex_!^c : Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c'}` (in diagrammatic `⋙`-order)
 
-on the bounded below derived categories of étale sheaves, where `c' = c.baseChange sq`
+on the bounded below derived categories of étale sheaves, where `c' = c.ofIsPullback sq`
 is the base-changed compactification of `f'` and `Rf_!^c := Di_! ⋙ R⁺p_*` is the derived
 lower shriek `Rf_!(c)[A]+` of `WeilConjectures.SixFunctors.Etale.Derived.LowerShriek`
 associated with `c` — the bounded below derived incarnation of the lower shriek
@@ -230,7 +230,7 @@ variable {X Y X' Y' : Scheme.{u}}
 
 /-- The *compact-support base-change morphism*
 `Ex_!^c : Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c'}` of a Cartesian square `sq` and a
-compactification `c : X ⟶[i] Z ⟶[p] Y` of `f`, where `c' = c.baseChange sq`: with
+compactification `c : X ⟶[i] Z ⟶[p] Y` of `f`, where `c' = c.ofIsPullback sq`: with
 `Rf_!^c = Di_! ⋙ R⁺p_*`, it is the pasting of the direct-image exchange `Etale.baseChange`
 of the proper square of the base-changed compactification with the inverse of the
 extension-by-zero exchange of its open-immersion square,
@@ -243,24 +243,25 @@ definition. -/
 @[no_expose]
 noncomputable def Etale.lowerShriekBaseChange (c : Compactification f)
     (sq : IsPullback g' f' f g) :
-    Rf_!(c)[A]+ ⋙ D+((g)^*[A]) ⟶ D+((g')^*[A]) ⋙ Rf_!(c.baseChange sq)[A]+ :=
+    Rf_!(c)[A]+ ⋙ D+((g)^*[A]) ⟶ D+((g')^*[A]) ⋙ Rf_!(c.ofIsPullback sq)[A]+ :=
   (Functor.associator _ _ _).hom ≫
   Functor.whiskerLeft D+((c.i)_!open[A])
-    (Etale.baseChange A (c.baseChange_isPullback_g sq).toCommSq) ≫
+    (Etale.baseChange A (c.isPullback_g_ofIsPullback sq).flip.toCommSq) ≫
   (Functor.associator _ _ _).inv ≫
   Functor.whiskerRight
-    (Etale.derivedSquareOpenImmersionLowerShriekBaseChangeIso A (c.baseChange_isPullback_i sq)).hom
-    R+(((c.baseChange sq).g)_*[A]) ≫
+    (Etale.derivedSquareOpenImmersionLowerShriekBaseChangeIso A
+      (c.isPullback_i_ofIsPullback sq)).hom
+    R+(((c.ofIsPullback sq).g)_*[A]) ≫
   (Functor.associator _ _ _).hom
 
 lemma Etale.lowerShriekBaseChange_app (c : Compactification f) (sq : IsPullback g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
     (Etale.lowerShriekBaseChange A c sq).app K =
-      (Etale.baseChange A (c.baseChange_isPullback_g sq).toCommSq).app
+      (Etale.baseChange A (c.isPullback_g_ofIsPullback sq).flip.toCommSq).app
           (D+((c.i)_!open[A]).obj K) ≫
-        R+(((c.baseChange sq).g)_*[A]).map
+        R+(((c.ofIsPullback sq).g)_*[A]).map
           ((Etale.derivedSquareOpenImmersionLowerShriekBaseChangeIso A
-            (c.baseChange_isPullback_i sq)).hom.app K) := by
+            (c.isPullback_i_ofIsPullback sq)).hom.app K) := by
   simp [Etale.lowerShriekBaseChange]
 
 end LowerShriek

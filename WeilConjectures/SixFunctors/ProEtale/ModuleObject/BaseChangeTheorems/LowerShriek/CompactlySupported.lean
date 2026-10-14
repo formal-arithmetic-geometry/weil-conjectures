@@ -34,7 +34,7 @@ that the compact-support base-change morphism
 
 on the bounded constructible derived categories of `E`-sheaves, and of `ℚ̄_ℓ`-sheaves for the
 condensed ring `ℚ̲̄_ℓ = Profinite.padicAlgClRingObj ℓ`, is an isomorphism, where
-`c' = c.baseChange sq`. No properness is imposed on `f` itself: the properness enters only
+`c' = c.ofIsPullback sq`. No properness is imposed on `f` itself: the properness enters only
 through the structure morphism `p` of the compactification.
 
 As for the bounded constructible six functors
@@ -93,7 +93,7 @@ Y' --g---> Y
 
 and a compactification `c : X ⟶[i] Z ⟶[p] Y` of `f`, the compact-support base-change morphism
 `Ex_!^c : Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c'}` is an isomorphism of functors
-`Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`, where `c' = c.baseChange sq`. In the defining composite, the
+`Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`, where `c' = c.ofIsPullback sq`. In the defining composite, the
 direct-image exchange is an isomorphism by proper base change for the proper structure
 morphism `p`, and the extension-by-zero exchange is an isomorphism by base change for
 extension by zero. -/
@@ -101,7 +101,8 @@ theorem isIso_boundedConstructibleLowerShriekBaseChange (c : Compactification f)
     (sq : IsPullback g' f' f g) :
     IsIso (boundedConstructibleLowerShriekBaseChange
       (Profinite.continuousMapRingObj E) ℓ k c sq) := by
-  have := isIso_boundedConstructibleBaseChange_of_isProper ℓ E k (c.baseChange_isPullback_g sq)
+  have := isIso_boundedConstructibleBaseChange_of_isProper ℓ E k
+    (c.isPullback_g_ofIsPullback sq).flip
   rw [boundedConstructibleLowerShriekBaseChange_eq]
   infer_instance
 
@@ -109,13 +110,13 @@ theorem isIso_boundedConstructibleLowerShriekBaseChange (c : Compactification f)
 constructible `ℚ̄_ℓ`-sheaves: for a cartesian square of schemes `sq : IsPullback g' f' f g` and a
 compactification `c` of `f`, the compact-support base-change morphism
 `Ex_!^c : Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c'}` is an isomorphism of functors
-`Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y')⟦ℚ̲̄_ℓ⟧`, where `c' = c.baseChange sq`. -/
+`Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y')⟦ℚ̲̄_ℓ⟧`, where `c' = c.ofIsPullback sq`. -/
 theorem isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl (c : Compactification f)
     (sq : IsPullback g' f' f g) :
     IsIso (boundedConstructibleLowerShriekBaseChange
       (Profinite.padicAlgClRingObj ℓ) ℓ k c sq) := by
   have := isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ k
-    (c.baseChange_isPullback_g sq)
+    (c.isPullback_g_ofIsPullback sq).flip
   rw [boundedConstructibleLowerShriekBaseChange_eq]
   infer_instance
 

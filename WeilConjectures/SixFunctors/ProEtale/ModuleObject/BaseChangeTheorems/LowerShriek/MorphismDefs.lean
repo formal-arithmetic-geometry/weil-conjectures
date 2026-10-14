@@ -28,7 +28,7 @@ objects over `Λ_X = p_X^* Λ`, the compact-support base-change morphism
 
 `Ex_!^c : Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c'}` (in diagrammatic `⋙`-order)
 
-where `c' = c.baseChange sq` is the base-changed compactification of `f'` and
+where `c' = c.ofIsPullback sq` is the base-changed compactification of `f'` and
 `Rf_!^c := i_! ⋙ Rp_*` is the lower shriek attached to `c`
 (`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactification`, of
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`), exactly as
@@ -213,7 +213,7 @@ variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))
 
 /-- The *compact-support base-change morphism* `Ex_!^c : Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c'}` on
 bounded constructible complexes, for a cartesian square `sq` and a compactification
-`c : X ⟶[i] Z ⟶[p] Y` of `f`, where `c' = c.baseChange sq`: with `Rf_!^c = i_! ⋙ Rp_*`, it is
+`c : X ⟶[i] Z ⟶[p] Y` of `f`, where `c' = c.ofIsPullback sq`: with `Rf_!^c = i_! ⋙ Rp_*`, it is
 the pasting of the direct-image exchange `boundedConstructibleBaseChange` of the proper square
 of the base-changed compactification with the inverse of the extension-by-zero exchange of its
 open-immersion square,
@@ -227,15 +227,15 @@ noncomputable def boundedConstructibleLowerShriekBaseChange (c : Compactificatio
     boundedConstructibleLowerShriekOfCompactification Λ ℓ k c ⋙
       boundedConstructibleUpperStar Λ ℓ k g ⟶
       boundedConstructibleUpperStar Λ ℓ k g' ⋙
-        boundedConstructibleLowerShriekOfCompactification Λ ℓ k (c.baseChange sq) :=
+        boundedConstructibleLowerShriekOfCompactification Λ ℓ k (c.ofIsPullback sq) :=
   (Functor.associator _ _ _).hom ≫
     Functor.whiskerLeft (boundedConstructibleOpenImmersionLowerShriek Λ ℓ k c.i)
-      (boundedConstructibleBaseChange Λ ℓ k (c.baseChange_isPullback_g sq).toCommSq) ≫
+      (boundedConstructibleBaseChange Λ ℓ k (c.isPullback_g_ofIsPullback sq).flip.toCommSq) ≫
     (Functor.associator _ _ _).inv ≫
     Functor.whiskerRight
       (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso Λ ℓ k
-        (c.baseChange_isPullback_i sq)).hom
-      (boundedConstructibleLowerStar Λ ℓ k (c.baseChange sq).g) ≫
+        (c.isPullback_i_ofIsPullback sq)).hom
+      (boundedConstructibleLowerStar Λ ℓ k (c.ofIsPullback sq).g) ≫
     (Functor.associator _ _ _).hom
 
 lemma boundedConstructibleLowerShriekBaseChange_eq (c : Compactification f)
@@ -243,12 +243,12 @@ lemma boundedConstructibleLowerShriekBaseChange_eq (c : Compactification f)
     boundedConstructibleLowerShriekBaseChange Λ ℓ k c sq =
       (Functor.associator _ _ _).hom ≫
         Functor.whiskerLeft (boundedConstructibleOpenImmersionLowerShriek Λ ℓ k c.i)
-          (boundedConstructibleBaseChange Λ ℓ k (c.baseChange_isPullback_g sq).toCommSq) ≫
+          (boundedConstructibleBaseChange Λ ℓ k (c.isPullback_g_ofIsPullback sq).flip.toCommSq) ≫
         (Functor.associator _ _ _).inv ≫
         Functor.whiskerRight
           (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso Λ ℓ k
-            (c.baseChange_isPullback_i sq)).hom
-          (boundedConstructibleLowerStar Λ ℓ k (c.baseChange sq).g) ≫
+            (c.isPullback_i_ofIsPullback sq)).hom
+          (boundedConstructibleLowerStar Λ ℓ k (c.ofIsPullback sq).g) ≫
         (Functor.associator _ _ _).hom :=
   by rw [boundedConstructibleLowerShriekBaseChange]
 

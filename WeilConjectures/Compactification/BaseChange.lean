@@ -1,7 +1,7 @@
 /-
-Copyright (c) 2026 Nailin Guan. All rights reserved.
+Copyright (c) 2026 Christian Merten, Nailin Guan. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Nailin Guan
+Authors: Christian Merten, Nailin Guan
 -/
 module
 
@@ -10,49 +10,68 @@ public import WeilConjectures.Compactification.Defs
 
 /-!
 
-# Base change of compactifications
+# Base change of a compactification
 
-Fix a Cartesian square of schemes
-
+If `c` is a compactification of `p : Y ⟶ T` and `S ⟶ T` is any morphism, the fibre
+product of `c` with `S` over `T` compactifies the base change of `p` along `S ⟶ T`:
 ```
-X' --g'--> X
-|          |
-f'         f
-v          v
-Y' --g---> Y
+X ×_T S ⟶ c.Z ×_T S ⟶ S.
 ```
+The right hand map is proper because properness is stable under base change, and the left
+hand map is an open immersion because it is the base change of `c.i` along
+`c.Z ×_T S ⟶ c.Z`.
 
-recorded as `sq : IsPullback g' f' f g`, and a compactification `X ⟶[i] Z ⟶[p] Y` of
-`f`. Base-changing the compactification along `g` yields a compactification
+Since the source of a base change is rarely a literal `CategoryTheory.Limits.pullback` term,
+the construction is stated for an arbitrary pullback square `IsPullback h u p t`; the
+special case of the literal pullback is `Compactification.baseChange`.
 
-`X' ⟶[i'] Z ×_Y Y' ⟶[snd] Y'`
-
-of `f'`: the structure morphism `pullback.snd` is proper since properness is stable under
-base change, and the induced morphism `i'` is an open immersion since it is the base
-change of `i` along the projection `pullback.fst : Z ×_Y Y' ⟶ Z`.
-
-This is the geometric input for the base-change morphism of the lower shriek: both
-squares of the pasting
-
+Writing `i'` and `g'` for the open immersion and the proper morphism of `c.ofIsPullback hsq`,
+both squares of the pasting
 ```
-X' --g'--> X            Z ×_Y Y' --fst--> Z
-|          |            |                 |
-i'         i            snd               p
-v          v            v                 v
-Z ×_Y Y' --fst--> Z     Y' --g----------> Y
+X ----h----> Y          c.Z ×_T S --fst--> c.Z
+|            |          |                  |
+i'          c.i         g'                c.g
+v            v          v                  v
+c.Z ×_T S --fst--> c.Z  S --------t------> T
 ```
-
-are Cartesian, which is recorded in `Compactification.baseChange_isPullback_i` and
-`Compactification.baseChange_isPullback_g`.
+are Cartesian (`Compactification.isPullback_i_ofIsPullback` and
+`Compactification.isPullback_g_ofIsPullback`). This is the geometric input for the base change
+morphism of the lower shriek.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Compactification.baseChange`: the base change of a compactification
-  of `f` along a Cartesian square, a compactification of `f'`.
-- `AlgebraicGeometry.Compactification.baseChange_isPullback_i`: the open-immersion
-  square of the base-changed compactification is Cartesian.
-- `AlgebraicGeometry.Compactification.baseChange_isPullback_g`: the proper square of the
-  base-changed compactification is Cartesian.
+- `AlgebraicGeometry.Compactification.ofIsPullback`: the compactification of `u` obtained by
+  base changing a compactification of `p` along a pullback square `IsPullback h u p t`;
+- `AlgebraicGeometry.Compactification.baseChange`: the special case of a literal fibre
+  product, i.e. the compactification of `pullback.snd f t` obtained from one of `f`.
+
+## Main results
+
+- `AlgebraicGeometry.Compactification.isPullback_of_isPullback`: the open immersion of the
+  base changed compactification is a base change of the original open immersion, and
+  `AlgebraicGeometry.Compactification.isPullback_i_ofIsPullback` its special case for
+  `Compactification.ofIsPullback`;
+- `AlgebraicGeometry.Compactification.isPullback_g_ofIsPullback`: the proper morphism of the
+  base changed compactification is the base change of the original proper morphism;
+- `AlgebraicGeometry.HasCompactification.of_isPullback`: compactifiability is stable under
+  base change, with the two projections of a fibre product as instances
+  (`AlgebraicGeometry.HasCompactification.pullback_snd` and
+  `AlgebraicGeometry.HasCompactification.pullback_fst`);
+- `AlgebraicGeometry.Compactification.isSchemeTheoreticallyDominant_i_ofIsPullback` and
+  `AlgebraicGeometry.Compactification.isSchemeTheoreticallyDominant_i_baseChange`: along a
+  **flat** base change, scheme-theoretic density of the open immersion is preserved;
+- `AlgebraicGeometry.Compactification.locallyOfFinitePresentation_g_ofIsPullback`: if the
+  proper morphism of the compactification is locally of finite presentation, so is its base
+  change.
+
+Flatness of the base change morphism is a genuine hypothesis in the density statements: for
+an arbitrary base change the pulled back open need not be dense in the pulled back
+compactification, and the remedy is to replace it by its schematic closure.
+
+## Blueprint
+
+This file implements `def:nagata-compactification-base-change` and
+`lemma:nagata-compactification-base-change` of the Nagata compactification blueprint.
 
 -/
 
@@ -61,78 +80,6 @@ are Cartesian, which is recorded in `Compactification.baseChange_isPullback_i` a
 universe u
 
 open CategoryTheory Limits
-
-namespace AlgebraicGeometry
-
-namespace Compactification
-
-variable {X Y X' Y' : Scheme.{u}}
-  {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
-variable (c : Compactification f) (sq : IsPullback g' f' f g)
-
-/-- The open immersion of a compactification of `f`, base-changed along a Cartesian
-square: the morphism `X' ⟶ Z ×_Y Y'` induced by `g' ≫ i` and `f'`. It is the base
-change of `i` along `pullback.fst : Z ×_Y Y' ⟶ Z`, see `baseChange_isPullback_i`. -/
-noncomputable def baseChangeOpenImmersion : X' ⟶ pullback c.g g :=
-  pullback.lift (g' ≫ c.i) f' (by rw [Category.assoc, ← c.comm]; exact sq.w)
-
-/-- The open-immersion square of a base-changed compactification is Cartesian: `X'` is
-the preimage of the open `X ⊆ Z` under `pullback.fst : Z ×_Y Y' ⟶ Z`. This follows from
-the Cartesian squares for `f'` and for `pullback.snd` by cancellation of vertical
-pasting. -/
-theorem isPullback_baseChangeOpenImmersion :
-    IsPullback g' (c.baseChangeOpenImmersion sq) c.i (pullback.fst c.g g) := by
-  refine IsPullback.of_bot ?_ (by rw [baseChangeOpenImmersion, pullback.lift_fst])
-    (IsPullback.of_hasPullback c.g g)
-  rw [baseChangeOpenImmersion, pullback.lift_snd, ← c.comm]
-  exact sq
-
-/-- The base change of a compactification `X ⟶[i] Z ⟶[p] Y` of `f` along a Cartesian
-square `sq : IsPullback g' f' f g`: the compactification
-
-`X' ⟶[i'] Z ×_Y Y' ⟶[snd] Y'`
-
-of `f'`, where `i'` is induced by `g' ≫ i` and `f'`. Properness of the structure
-morphism and the open-immersion property of `i'` hold since both are stable under base
-change. -/
-noncomputable def baseChange : Compactification f' where
-  Z := pullback c.g g
-  g := pullback.snd c.g g
-  i := c.baseChangeOpenImmersion sq
-  comm := (pullback.lift_snd _ _ _).symm
-  isProper := inferInstance
-  isOpenImmersion :=
-    MorphismProperty.of_isPullback (c.isPullback_baseChangeOpenImmersion sq)
-      c.isOpenImmersion
-
-@[simp] lemma baseChange_Z : (c.baseChange sq).Z = pullback c.g g := rfl
-
-@[simp] lemma baseChange_g : (c.baseChange sq).g = pullback.snd c.g g := rfl
-
-@[simp] lemma baseChange_i : (c.baseChange sq).i = c.baseChangeOpenImmersion sq := rfl
-
-/-- The scheme of the base-changed compactification is noetherian as soon as the fiber product
-`Z ×_Y Y'` is: the two are the same scheme. This lets noetherianity hypotheses be stated on
-either form. -/
-instance noetherianSpace_baseChange_Z [h : TopologicalSpace.NoetherianSpace ↥(pullback c.g g)] :
-    TopologicalSpace.NoetherianSpace (c.baseChange sq).Z :=
-  h
-
-/-- The open-immersion square of the base-changed compactification is Cartesian, stated
-for the fields of `Compactification.baseChange`. -/
-theorem baseChange_isPullback_i :
-    IsPullback g' (c.baseChange sq).i c.i (pullback.fst c.g g) :=
-  c.isPullback_baseChangeOpenImmersion sq
-
-/-- The proper square of the base-changed compactification is Cartesian, stated for the
-fields of `Compactification.baseChange`. -/
-theorem baseChange_isPullback_g :
-    IsPullback (pullback.fst c.g g) (c.baseChange sq).g c.g g :=
-  IsPullback.of_hasPullback c.g g
-
-end Compactification
-
-end AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
@@ -189,6 +136,19 @@ lemma ofIsPullback_i_fst (hsq : IsPullback h u p t) (c : Compactification p) :
     (c.ofIsPullback hsq).i ≫ pullback.fst c.g t = h ≫ c.i :=
   pullback.lift_fst _ _ _
 
+/-- The open immersion of `c.ofIsPullback hsq` followed by the projection to `S` is `u`. -/
+@[reassoc (attr := simp)]
+lemma ofIsPullback_i_snd (hsq : IsPullback h u p t) (c : Compactification p) :
+    (c.ofIsPullback hsq).i ≫ pullback.snd c.g t = u :=
+  pullback.lift_snd _ _ _
+
+/-- The scheme of `c.ofIsPullback hsq` is noetherian as soon as the fibre product `c.Z ×_T S`
+is: the two are the same scheme. -/
+instance noetherianSpace_ofIsPullback_Z (hsq : IsPullback h u p t) (c : Compactification p)
+    [hZ : TopologicalSpace.NoetherianSpace ↥(pullback c.g t)] :
+    TopologicalSpace.NoetherianSpace (c.ofIsPullback hsq).Z :=
+  hZ
+
 /-- **The proper morphism of a base-changed compactification is a base change of the original
 proper morphism**, for the compactification `c.ofIsPullback hsq`:
 
@@ -209,24 +169,24 @@ compactification of `f : X ⟶ S`, then `c.Z ×_S T ⟶ T` together with `X ×_S
 is a compactification of the base change `pullback.snd f t`.
 (blueprint: `def:nagata-compactification-base-change`,
 `lemma:nagata-compactification-base-change`) -/
-noncomputable def baseChangePullback {f : X ⟶ S} (c : Compactification f) (t : T ⟶ S) :
+noncomputable def baseChange {f : X ⟶ S} (c : Compactification f) (t : T ⟶ S) :
     Compactification (pullback.snd f t) :=
   ofIsPullback (.of_hasPullback f t) c
 
-@[simp] lemma baseChangePullback_Z {f : X ⟶ S} (c : Compactification f) (t : T ⟶ S) :
-    (c.baseChangePullback t).Z = pullback c.g t := rfl
+@[simp] lemma baseChange_Z {f : X ⟶ S} (c : Compactification f) (t : T ⟶ S) :
+    (c.baseChange t).Z = pullback c.g t := rfl
 
-@[simp] lemma baseChangePullback_g {f : X ⟶ S} (c : Compactification f) (t : T ⟶ S) :
-    (c.baseChangePullback t).g = pullback.snd c.g t := rfl
+@[simp] lemma baseChange_g {f : X ⟶ S} (c : Compactification f) (t : T ⟶ S) :
+    (c.baseChange t).g = pullback.snd c.g t := rfl
 
 @[reassoc (attr := simp)] lemma baseChange_i_fst {f : X ⟶ S} (c : Compactification f)
     (t : T ⟶ S) :
-    (c.baseChangePullback t).i ≫ pullback.fst c.g t = pullback.fst f t ≫ c.i :=
+    (c.baseChange t).i ≫ pullback.fst c.g t = pullback.fst f t ≫ c.i :=
   pullback.lift_fst _ _ _
 
 @[reassoc (attr := simp)] lemma baseChange_i_snd {f : X ⟶ S} (c : Compactification f)
     (t : T ⟶ S) :
-    (c.baseChangePullback t).i ≫ pullback.snd c.g t = pullback.snd f t :=
+    (c.baseChange t).i ≫ pullback.snd c.g t = pullback.snd f t :=
   pullback.lift_snd _ _ _
 
 /-- **Flat base change preserves scheme-theoretic density of a compactification.**
@@ -245,10 +205,10 @@ theorem isSchemeTheoreticallyDominant_i_ofIsPullback (hsq : IsPullback h u p t)
   .of_isPullback (c.isPullback_i_ofIsPullback hsq)
 
 /-- **Flat base change preserves scheme-theoretic density of a compactification**, stated for
-the literal fibre product, i.e. for `Compactification.baseChangePullback`. -/
+the literal fibre product, i.e. for `Compactification.baseChange`. -/
 theorem isSchemeTheoreticallyDominant_i_baseChange {f : X ⟶ S} (c : Compactification f)
     (t : T ⟶ S) (hc : IsSchemeTheoreticallyDominant c.i) [QuasiCompact c.i] [Flat t] :
-    IsSchemeTheoreticallyDominant (c.baseChangePullback t).i :=
+    IsSchemeTheoreticallyDominant (c.baseChange t).i :=
   isSchemeTheoreticallyDominant_i_ofIsPullback _ c hc
 
 /-- If the proper morphism of a compactification of `p` is locally of finite presentation,

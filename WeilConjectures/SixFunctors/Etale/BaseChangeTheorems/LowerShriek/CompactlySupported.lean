@@ -31,7 +31,7 @@ base-change morphism
 `Ex_!^c : Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c'}`
 
 of `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LowerShriek.MorphismDefs` is an
-isomorphism, where `c' = c.baseChange sq` and `Rf_!^c = Rf_!(c)[A]+` is the derived lower
+isomorphism, where `c' = c.ofIsPullback sq` and `Rf_!^c = Rf_!(c)[A]+` is the derived lower
 shriek `Etale.rightDerivedLowerShriekOfCompactificationPlus` associated with `c`. No
 properness is assumed on `f` itself: the properness enters only through the structure
 morphism `p` of the compactification, which is proper by definition. This is the base
@@ -86,6 +86,6 @@ theorem Etale.isIso_lowerShriekBaseChange_of_isAddTorsion_ring (Λ : Type (u + 1
   apply CategoryTheory.IsIso.comp_isIso' _ (Functor.map_isIso _ _)
   apply (NatTrans.isIso_iff_isIso_app _).mp
   exact Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring Λ hΛ
-    (Compactification.baseChange_isPullback_g c sq)
+    (c.isPullback_g_ofIsPullback sq).flip
 
 end AlgebraicGeometry
