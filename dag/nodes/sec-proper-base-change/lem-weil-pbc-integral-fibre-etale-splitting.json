@@ -35,9 +35,128 @@
   "def-pc-fibre-product",
   "def-weil-pbc-finite-purely-inseparable-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Enumerate the finitely many points of $T$ over $s$, without repetition. Apply [lem-weil-pbc-etale-split-residue-points] to these points and $\\pi$: its finite-residue-extension hypothesis is exactly the hypothesis here. It gives an etale neighbourhood $(U_0,u_0)\\to(S,s)$ for which the whole fibre of $T_0=T\\times_SU_0$ consists of finitely many distinct points $z_1,\\ldots,z_m$, each with finite purely inseparable residue extension over $\\kappa(u_0)$. The lists over different original points cannot overlap because the first projection has different values. Apply [lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink] with the canonical map $\\operatorname{Spec}\\kappa(u_0)\\to U_0$ and $W=U_0$, to replace $U_0$ by an affine open containing $u_0$. This does not change this fibre or its residue fields. The same construction allows $m=0$.",
+   "uses": [
+    "lem-weil-pbc-etale-split-residue-points",
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LM, label lemma-etale-makes-quasi-finite-finite-multiple-points-var, proof: residue-field splitting; affine shrinking by Tag 04HX, label lemma-describe-etale-local-ring"
+   }
+  },
+  {
+   "text": "Write $U_0=\\operatorname{Spec}A$, let $\\mathfrak p\\subset A$ correspond to $u_0$, and put $k=\\kappa(\\mathfrak p)$. By [lem-weil-pbc-fibre-product-affine-spectra] write $T_0=\\operatorname{Spec}B$. By [lem-sbc-integral-morphism-base-change] and [def-weil-finite-integral-morphism], $A\\to B$ is integral. Its fibre is $\\operatorname{Spec}F$ with $F=B\\otimes_Ak=(A\\setminus\\mathfrak p)^{-1}(B/\\mathfrak pB)$; its points are exactly the $z_i$, by [def-pc-scheme-fibre]. For a prime $\\mathfrak q$ of $B$ over $\\mathfrak p$, localization at $A\\setminus\\mathfrak p$ and quotient by $\\mathfrak p$ do not change the residue field: the resulting residue field is $\\operatorname{Frac}(B/\\mathfrak q)=\\kappa(\\mathfrak q)$, with the same map from $k$. Thus the residue extensions from step 1 are also the residue extensions of these fibre points. A further base change to $k$ is integral, so [lem-weil-pbc-integral-prime-over-maximal-maximal] says every prime of $F$ is maximal. Consequently every point is closed; a finite space with every point closed is discrete, since the complement of any singleton is a finite union of closed singletons. No finite-type or Artinian hypothesis on $F$ is asserted.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sbc-integral-morphism-base-change",
+    "def-weil-finite-integral-morphism",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BSR, label lemma-etale-makes-integral-split, second proof, first paragraph; Tag 01WL, label lemma-base-change-finite; Tag 00GS, label lemma-integral-over-field"
+   }
+  },
+  {
+   "text": "For each singleton $\\{z_i\\}\\subset\\operatorname{Spec}F$, [lem-weil-pbc-spec-clopen-idempotent] supplies an idempotent $\\delta_i\\in F$ with $D(\\delta_i)=\\{z_i\\}$. These are orthogonal: for $i\\ne j$, the idempotent $\\delta_i\\delta_j$ has empty basic open, so uniqueness in that same correspondence makes it zero. Their sum is idempotent and has basic open the whole spectrum (at each prime exactly one summand is $1$), so the sum is $1$ by uniqueness. If $m=0$, the empty sum is $1$ in $F$: indeed the same correspondence identifies the idempotents $0$ and $1$ when the spectrum is empty. Thus this construction does not require $F$ reduced or Noetherian.",
+   "uses": [
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EE, label lemma-disjoint-decomposition; used as the product-decomposition input in the second proof of Tag 0BSR"
+   }
+  },
+  {
+   "text": "Descend these finitely many idempotents from $F$ to a quotient before lifting them. Express each $\\delta_i$ as $b_i/a_i$ in $(A\\setminus\\mathfrak p)^{-1}(B/\\mathfrak pB)$, where $a_i\\in A\\setminus\\mathfrak p$. First invert the product of the $a_i$. In the resulting localization of $B/\\mathfrak pB$, each of the finitely many errors $\\delta_i^2-\\delta_i$, $\\delta_i\\delta_j$ ($i\\ne j$), and $\\sum_i\\delta_i-1$ maps to zero in $F$. For each error $x$, the definition of equality in a localization gives $c_x\\in A\\setminus\\mathfrak p$ with $c_xx=0$. Invert also their product. With $h=(\\prod_i a_i)(\\prod_x c_x)\\notin\\mathfrak p$, all these equations hold in $B_h/\\mathfrak pB_h$. The basic open $D(h)$ contains $u_0$. Apply [lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink] with $W=D(h)$ to obtain an affine open $U_1=\\operatorname{Spec}A_1$ containing $u_0$, lying inside $D(h)$, and etale over $S$. The element $h$ is invertible on $U_1$, so $A\\to A_1$ factors through $A_h$. By [lem-weil-pbc-fibre-product-affine-spectra] its pulled-back coordinate ring is $B_1=B\\otimes_AA_1$. Map the constructed idempotents from $B_h/\\mathfrak pB_h$ to $B_1/\\mathfrak p_1B_1$, where $\\mathfrak p_1$ is the prime of the retained point. This quotient map is defined because every element of the old $\\mathfrak p$ maps into $\\mathfrak p_1$. Since $U_1$ is an open subscheme containing $u_0$, its local ring at that point, and hence its residue field, is unchanged. Consequently $B_1\\otimes_{A_1}\\kappa(\\mathfrak p_1)\\cong B\\otimes_Ak=F$, and the mapped family restricts to the same $\\delta_i$. Rename these rings $A,B$ and the point $\\mathfrak p$. We have a complete orthogonal family $\\bar\\delta_i\\in B/\\mathfrak pB$ mapping to the original $\\delta_i$. For $m=0$ there is only the error $-1$, and the same annihilator argument applies. The point and its fibre are retained because every inverted element is outside $\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BSR, label lemma-etale-makes-integral-split, second proof, finite-equation descent of idempotents; denominator descent supplied explicitly by the agent; basic-open coordinates Tag 01I3, label lemma-standard-open-affine"
+   }
+  },
+  {
+   "text": "Lift the family by a finite induction using [lem-weil-pbc-lift-idempotent-upstairs]. Set $A_0=A$, $B_0=B$. The induction hypothesis after $r$ steps is: $A\\to A_r$ is etale, the canonical map $A/\\mathfrak p\\to A_r/\\mathfrak pA_r$ is an isomorphism, $B_r=B\\otimes_AA_r$ is integral over $A_r$, and the first $r$ quotient idempotents have lifts $f_1,\\ldots,f_r\\in B_r$. For the next step apply that node to $A_r\\to B_r$, the ideal $I_r=\\mathfrak pA_r$, and the image of $\\bar\\delta_{r+1}$ in $B_r/I_rB_r$. This quotient is canonically $B/\\mathfrak pB$ because $A_r/I_r\\cong A/\\mathfrak p$. The node gives an etale map $A_r\\to A_{r+1}$ inducing an isomorphism on the quotients, and the required next lift; pull back the previous lifts. Integrality at the next stage follows from [lem-sbc-integral-morphism-base-change]; etaleness of the composite follows from clause 1 of [lem-weil-pbc-etale-localization-functor-adjoint]. After $m$ steps put $A_*=A_m$, $B_*=B\\otimes_AA_*$. The ideal $\\mathfrak p_*=\\mathfrak pA_*$ is prime because $A_*/\\mathfrak p_*\\cong A/\\mathfrak p$ is a domain. It lies over $\\mathfrak p$, and this isomorphism induces $\\kappa(\\mathfrak p_*)\\cong k$. Hence the fibre ring at $\\mathfrak p_*$ is canonically $F$ and the $f_i$ restrict to $\\delta_i$. The base case $m=0$ is the identity extension, with no lifts to choose.",
+   "uses": [
+    "lem-weil-pbc-lift-idempotent-upstairs",
+    "lem-sbc-integral-morphism-base-change",
+    "lem-weil-pbc-etale-localization-functor-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07M4, label lemma-lift-idempotent-upstairs; finite-family induction and quotient identifications written explicitly by the agent"
+   }
+  },
+  {
+   "text": "The lifts need not be mutually orthogonal. Define $e_i=f_i\\prod_{j<i}(1-f_j)$ in the commutative ring $B_*$, and $e_\\infty=\\prod_{j=1}^m(1-f_j)$. Products of commuting idempotents are idempotent. If $i<j$, then $e_ie_j$ contains $f_i(1-f_i)=0$. Writing $P_0=1$ and $P_i=\\prod_{j=1}^i(1-f_j)$ gives $e_i=P_{i-1}-P_i$; summing cancels every intermediate $P_i$. The telescoping identity $\\sum_{i=1}^m f_i\\prod_{j<i}(1-f_j)+\\prod_{j=1}^m(1-f_j)=1$ shows completeness. Restriction to $F$ sends $e_i$ to $\\delta_i$, since the $\\delta_i$ are orthogonal, and sends $e_\\infty$ to $0$. This includes the empty family, where $e_\\infty=1$ and $F$ is the zero ring.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07M4, label lemma-lift-idempotent-upstairs, applied finitely many times; elementary orthogonalization and telescoping identity supplied by the agent"
+   }
+  },
+  {
+   "text": "Put $V_i=D(e_i)$ and $W=D(e_\\infty)$ in $\\operatorname{Spec}B_*$. By [lem-weil-pbc-spec-clopen-idempotent] they are open and closed, and by [lem-weil-pbc-affine-open-section-vanishing-prime] they are affine. The equations in the preceding step make them pairwise disjoint and covering: in any residue field an idempotent is $0$ or $1$, orthogonality allows at most one of the $e_i,e_\\infty$ to be $1$, and their sum forces one to be $1$. For an idempotent $e$, its localization ring $B_*[1/e]$ is $B_*/(1-e)$: after $e$ becomes invertible the relation $e^2=e$ makes $e=1$, and conversely imposing $e=1$ inverts it. Every element of this quotient satisfies the monic equation satisfied by a representative in $B_*$. Thus each $V_i\\to\\operatorname{Spec}A_*$ and $W\\to\\operatorname{Spec}A_*$ is integral, by [def-weil-finite-integral-morphism]. The fibre of $V_i$ at $\\mathfrak p_*$ is $D(\\delta_i)$ in $\\operatorname{Spec}F$, hence consists of the one point $z_i$ with the purely inseparable residue extension established in step 1; the fibre of $W$ is empty.",
+   "uses": [
+    "lem-weil-pbc-spec-clopen-idempotent",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EE, label lemma-disjoint-decomposition; affine basic opens Tag 01I3, label lemma-standard-open-affine; quotient integrality verified directly"
+   }
+  },
+  {
+   "text": "Remove the remainder on the base. Since $W\\to\\operatorname{Spec}A_*$ is integral, [lem-weil-pbc-integral-spec-closed-map] makes its image closed. That image misses $\\mathfrak p_*$. By [lem-weil-pbc-spec-localization-away-basic-open] choose $t\\in A_*\\setminus\\mathfrak p_*$ with $D(t)$ disjoint from the image. Apply [lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink] to the etale map $\\operatorname{Spec}A_*\\to S$, the canonical residue-field point at $\\mathfrak p_*$, and the open $D(t)$. It gives an affine open $U\\subseteq D(t)$ containing the marked point whose composite to $S$ is etale. Replace every $V_i$ by its pullback to $U$. There is now no remainder, since a point of its pullback would map into both $D(t)$ and the image of $W$. The $V_i$ stay affine by [lem-weil-pbc-fibre-product-affine-spectra], and integral by [lem-sbc-integral-morphism-base-change]. They remain disjoint open-and-closed subschemes, cover $T\\times_SU$, and retain their single fibre points and residue fields at the unchanged marked point $u$. This proves every clause. If $m=0$, $W$ was the whole pullback before shrinking and its removal leaves $T\\times_SU=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-integral-spec-closed-map",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sbc-integral-morphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BSR, label lemma-etale-makes-integral-split, first proof: remove the factor with empty fibre; closed-image argument Tags 00GU and 00HZ; basic-open shrink Tags 00E0 and 00E4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-split-residue-points",
+  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sbc-integral-morphism-base-change",
+  "def-weil-finite-integral-morphism",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-lift-idempotent-upstairs",
+  "lem-weil-pbc-etale-localization-functor-adjoint",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-integral-spec-closed-map",
+  "lem-weil-pbc-spec-localization-away-basic-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BSR, label lemma-etale-makes-integral-split: idempotent decomposition route, with the existing Tag 07M4 etale lifting theorem replacing strict henselization; residue splitting from the proof of Tag 02LM"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -94,10 +213,45 @@
    "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/RingTheory/TotallySplit.lean\", \"line\": \"24\", \"text\": \"- `Algebra.IsFiniteSplit.exists_tensorProduct_of_etale`: If `S` is finite étale over `R` of\"}\n  {\"file\": \"Mathlib/RingTheory/TotallySplit.lean\", \"line\": \"80\", \"text\": \"instance [IsFiniteSplit R S] : Etale R S := by\"}\n  {\"file\": \"Mathlib/RingTheory/TotallySplit.lean\", \"line\": \"131\", \"text\": \"instance [IsSepClosed k] [EssFiniteType k R] [FormallyEtale k R] : IsFiniteSplit k R := by\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"line\": \"15\", \"text\": \"We construct etale neighborhoods that split fibers of finite algebras.\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"line\": \"18\", \"text\": \"- `Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq`:\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"line\": \"202\", \"text\": \"lemma Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq_aux\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"line\": \"298\", \"text\": \"lemma Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq_aux₂\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"line\": \"379\", \"text\": \"lemma Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\"}\n",
    "date": "2026-10-14",
    "verdict": "no match: QuasiFinite.lean:379-390 requires finite type and quasi-finiteness at a chosen prime; TotallySplit.lean:145-150 requires a finite etale algebra, whereas this algebra is merely integral"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral morphism with finite fibre splits etale locally into clopen pieces each with a unique point and purely inseparable residue field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A] [Algebra.EssFiniteType K A],\\n  Algebra.FormallyEtale K A ↔ ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: returned finite-type splitting or nilpotent-kernel lifting results do not cover an arbitrary integral morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a finite family of fibre idempotents of an integral algebra after an etale neighbourhood of a prime",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"OrthogonalIdempotents.lift_of_isNilpotent_ker\", \"module\": \"Mathlib/RingTheory/Idempotents\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : Ring R] [inst_1 : Ring S] (f : R →+* S) {I : Type u_3} [Finite I],\\n  (∀ x ∈ RingHom.ker f, IsNilpotent x) →\\n    ∀ {e : I → S}, OrthogonalIdempotents e → (∀ (i : I), e i ∈ f.range) → ∃ e', OrthogonalIdempotents e' ∧ ⇑f ∘ e' = e\", \"doc\": \"Let $ f : R \\\\to S $ be a ring homomorphism with nilpotent kernel, and let $ \\\\{e_i\\\\}_{i \\\\in I} $ be a finite family of orthogonal idempotents in $ S $ such that each $ e_i $ lies in the image of $ f $.\"}\n  {\"name\": \"CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker\", \"module\": \"Mathlib/RingTheory/Idempotents\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : Ring R] [inst_1 : Ring S] (f : R →+* S) {I : Type u_3} [inst_2 : Fintype I],\\n  (∀ x ∈ RingHom.ker f, IsNilpotent x) →\\n    ∀ {e : I → S},\\n      CompleteOrthogonalIdempotents e →\\n        (∀ (i : I), e i ∈ f.range) → ∃ e', CompleteOrthogonalIdempotents e' ∧ ⇑f ∘ \", \"doc\": \"Let $ f : R \\\\to S $ be a ring homomorphism such that every element in the kernel of $ f $ is nilpotent. If $ \\\\{e_i\\\\}_{i \\\\in I} $ is a complete set of orthogonal idempotents in $ S $ (i.e., $ \\\\sum_{i \\\\\"}\n  {\"name\": \"OrthogonalIdempotents.lift_of_isNilpotent_ker_aux\", \"module\": \"Mathlib/RingTheory/Idempotents\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : Ring R] [inst_1 : Ring S] (f : R →+* S),\\n  (∀ x ∈ RingHom.ker f, IsNilpotent x) →\\n    ∀ {n : ℕ} {e : Fin n → S},\\n      OrthogonalIdempotents e → (∀ (i : Fin n), e i ∈ f.range) → ∃ e', OrthogonalIdempotents e' ∧ ⇑f ∘ e' = e\", \"doc\": \"Let $ f : R \\\\to S $ be a ring homomorphism such that every element in the kernel of $ f $ is nilpotent. If $ \\\\{e_i\\\\}_{i=1}^n $ is a finite family of orthogonal idempotents in $ S $ (i.e., $ e_i^2 = e_\"}\n  {\"name\": \"CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker_aux\", \"module\": \"Mathlib/RingTheory/Idempotents\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : Ring R] [inst_1 : Ring S] (f : R →+* S),\\n  (∀ x ∈ RingHom.ker f, IsNilpotent x) →\\n    ∀ {n : ℕ} {e : Fin n → S},\\n      CompleteOrthogonalIdempotents e →\\n        (∀ (i : Fin n), e i ∈ f.range) → ∃ e', CompleteOrthogonalIdempotents e' ∧ ⇑f ∘ e' = e\", \"doc\": \"Let $ f : R \\\\to S $ be a ring homomorphism such that every element in the kernel $ \\\\ker(f) $ is nilpotent. If $ \\\\{e_i\\\\}_{i \\\\in \\\\mathrm{Fin}(n)} $ is a complete set of orthogonal idempotents in $ S $ (\"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: returned finite-type splitting or nilpotent-kernel lifting results do not cover an arbitrary integral morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegral\", \"Etale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match: returned finite-type splitting or nilpotent-kernel lifting results do not cover an arbitrary integral morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*split|split.*integral|exists_etale.*[Ii]dempotent",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/Chebyshev.lean\", \"line\": \"708\", \"text\": \"We will bound the integral on 2..x by splitting into two intervals and using this result on both. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean\", \"line\": \"49\", \"text\": \"    exact fun x ↦ ⟨Algebra.IsIntegral.isIntegral x, IsAlgClosed.splits _⟩\"}\n  {\"file\": \"Mathlib/FieldTheory/SplittingField/IsSplittingField.lean\", \"line\": \"173\", \"text\": \"theorem IsIntegral.mem_intermediateField_of_minpoly_splits {x : L} (int : IsIntegral K x)\"}\n  {\"file\": \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"line\": \"317\", \"text\": \"    (E := E) f fun s ↦ ⟨Algebra.IsIntegral.isIntegral s, IsAlgClosed.splits _⟩\"}\n  {\"file\": \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"line\": \"327\", \"text\": \"    (fun x _ ↦ ⟨Algebra.IsIntegral.isIntegral x, splits _⟩)\"}\n  {\"file\": \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"line\": \"517\", \"text\": \"    ((Algebra.IsIntegral.isIntegral x).map f).mem_intermediateField_of_minpoly_splits <| by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"line\": \"324\", \"text\": \"  splitMultiplicativeReduction : letI I := W.integralModel R\"}\n  {\"file\": \"Mathlib/FieldTheory/Isaacs.lean\", \"line\": \"63\", \"text\": \"        (fun s hs ↦ ⟨(alg.isIntegral).1 _, splits s hs⟩) ϕ (adjoin_simple_le_iff.mpr hα)\"}\n  {\"file\": \"Mathlib/FieldTheory/PolynomialGaloisGroup.lean\", \"line\": \"319\", \"text\": \"    exact (h_normal.splits _).of_dvd (map_ne_zero (minpoly.ne_zero (h_normal.isIntegral _)))\"}\n  {\"file\": \"Mathlib/FieldTheory/AlgebraicClosure.lean\", \"line\": \"221\", \"text\": \"  splits_of_splits h fun _ hx ↦ (isAlgebraic_of_mem_rootSet hx).isIntegral\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"71\", \"text\": \"    Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"line\": \"386\", \"text\": \"  nonempty_algHom_of_splits fun x ↦ ⟨IsPurelyInseparable.isIntegral' _ _,\"}\n  {\"file\": \"Mathlib/FieldTheory/PrimitiveElement.lean\", \"line\": \"404\", \"text\": \"  · exact fun x ↦ (IsIntegral.of_finite F x).minpoly_splits_tower_top (hA x)\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Basic.lean\", \"line\": \"122\", \"text\": \"    (splits : ∀ x ∈ S, IsIntegral F x ∧ ((minpoly F x).map (algebraMap F L)).Splits) {x : K}\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Basic.lean\", \"line\": \"197\", \"text\": \"          @IsIntegral.minpoly_splits_tower_top F K₁ E E _ _ _ _ _ _ _ _ x\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Closure.lean\", \"line\": \"86\", \"text\": \"        (fun x ↦ ⟨Algebra.IsIntegral.isIntegral x, splits x⟩) (mem_rootSet.mp hy).2\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"line\": \"65\", \"text\": \"    (sp : ((minpoly K x).map (algebraMap K L)).Splits) (hy : IsIntegral K y)\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"line\": \"88\", \"text\": \"        (minpoly_sub_algebraMap_splits y' (IsIntegral.minpoly_splits_tower_top\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Defs.lean\", \"line\": \"46\", \"text\": \"    Normal F K ↔ ∀ x : K, IsIntegral F x ∧ Splits ((minpoly F x).map (algebraMap F K)) :=\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Defs.lean\", \"line\": \"47\", \"text\": \"  ⟨fun h x => ⟨h.isIntegral x, h.splits x⟩, fun h =>\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Defs.lean\", \"line\": \"52\", \"text\": \"    Normal F K → ∀ x : K, IsIntegral F x ∧ Splits ((minpoly F x).map (algebraMap F K)) :=\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Defs.lean\", \"line\": \"136\", \"text\": \"      refine ((h.splits z).of_dvd (map_ne_zero (minpoly.ne_zero (h.isIntegral z)))\"}\n  {\"file\": \"Mathlib/FieldTheory/SeparableDegree.lean\", \"line\": \"207\", \"text\": \"element `s` of `S` is integral (= algebraic) over `F` and whose minimal polynomial splits in `K`.\"}\n  {\"file\": \"Mathlib/FieldTheory/SeparableDegree.lean\", \"line\": \"211\", \"text\": \"    (hK : ∀ s ∈ S, IsIntegral F s ∧ Splits ((minpoly F s).map (algebraMap F K))) :\"}\n  {\"file\": \"Mathlib/FieldTheory/SeparableDegree.lean\", \"line\": \"222\", \"text\": \"`s` of `S` is integral (= algebraic) over `F` and whose minimal polynomial splits in `K`. -/\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: returned finite-type splitting or nilpotent-kernel lifting results do not cover an arbitrary integral morphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral algebra splits etale locally at a finite fibre with finite residue field extensions",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous",
   "by": "worker",
@@ -110,5 +264,34 @@
   "file": "Mathlib/RingTheory/Etale/QuasiFinite.lean",
   "lines": "379-387",
   "why_not_match": "Requires Algebra.FiniteType and Algebra.QuasiFiniteAt; the source permits an arbitrary integral algebra. It isolates one point rather than giving the complete decomposition with purely inseparable residues."
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-integral-fibre-etale-splitting",
+  "worker": "stage1",
+  "summary": "Verified the affine finite-residue specialization of Tag 0BSR. Reused residue-point splitting and integral idempotent lifting; wrote finite denominator descent, lifting induction, orthogonalization and empty-remainder removal explicitly. No new nodes and no statement correction. Finite-algebra Lean splitting is not an attachment for arbitrary integral morphisms.",
+  "blueprint": "Classical constructibility input in thm-weil-pbc-direct-image-finiteness-proper, reached through the component-count branch specified in blueprint.from: Tag 0BUI etale localization and decomposition of the integral Stein factor. This split provides that decomposition by the idempotent route of Tag 0BSR.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-split-residue-points",
+    "why": "Generic finite-residue field splitting for any morphism; used only to prepare the integral Stein-factor fibre, not to replace the constructibility route."
+   },
+   {
+    "node": "lem-weil-pbc-lift-idempotent-upstairs",
+    "why": "Generic integral-algebra idempotent lifting after an etale extension preserving the quotient; supplies the lifting input of the Tag 0BSR decomposition, without replacing a unit-level theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-split-residue-points",
+  "lem-weil-pbc-lift-idempotent-upstairs"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-92a2a17ac",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-92a2a17ac (reviewer sub-agent of L); spot-checked: Read the complete item and checked all eight steps against 0BSR, 02LM, 07M4 and the cited dependency statements and sources. Verified denominator descent, quotient-preserving lifting, orthogonalization and remainder removal, including empty, nonreduced and non-finite-type cases. Checked DAG cycles, duplicate candidates, unit route and archived target coefficient categories and morphism orientation. Both declared generic tool uses are accepted. No repairs needed; detailed findings are in review.md."
  }
 }
