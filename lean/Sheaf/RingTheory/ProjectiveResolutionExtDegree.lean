@@ -1,6 +1,5 @@
 module
 public import Sheaf.RingTheory.GlobalDimension
-public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.CategoryTheory.Abelian.Projective.Dimension
 import Mathlib.CategoryTheory.Abelian.Projective.Ext
 import Sheaf.RingTheory.ProjectiveResolutionSuccSplice

@@ -14080,3 +14080,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:41 L: merged deliver/V2/Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling (stage 3; reviewer PASS; first push; landing 20261014T004116-L-2839651 (proof); batch 20261014T004054; modules 1; new nodes 0)
 - 00:41 L: merged deliver/V2/Sheaf.Paper.CartierEquality (stage 3; reviewer PASS; first push; landing 20261014T004116-L-2839807 (proof); batch 20261014T004054; modules 1; new nodes 0)
 - 00:41 L: merged deliver/W2/Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionDiagram (stage 3; reviewer PASS; after a return; landing 20261014T004117-L-2839977 (proof); batch 20261014T004054; modules 1; new nodes 1)
+- 00:41 L: merged deliver/X3/Sheaf.RingTheory.ProjectiveResolutionExtDegree (stage 3; reviewer PASS; first push; landing 20261014T004117-L-2840142 (interface); batch 20261014T004054; modules 1; new nodes 0; change records: coord/changes/ProjectiveResolutionExtDegree-import.md)
