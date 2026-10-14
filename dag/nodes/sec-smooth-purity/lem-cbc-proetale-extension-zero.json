@@ -3,43 +3,135 @@
  "blueprint": {
   "is": "lem-cbc-proetale-extension-zero",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Extension by zero on the pro-etale site",
- "statement": "For an open immersion\n$j:U\\hookrightarrow X$, extension by zero on the small pro-etale\nsite (the functor $j_!$ of [def-weil-extension-by-zero])\nis the exact left adjoint of $j^{-1}$, acts degreewise, and is\ncharacterized by the same stalk prescription as the etale one,\n\n$$\n(j_!K)_{\\bar x}=\n\\begin{cases}\nK_{\\bar x},&\\bar x\\text{ lies in }U,\\\\\n0,&\\bar x\\text{ lies in }X\\setminus U,\n\\end{cases}\n$$\n\nfor a complex $K$ of pro-etale sheaves and a geometric point\n$\\bar x$ of $X$; it is compatible with restriction of scalars\nalong a finite coefficient ring.",
+ "statement": "Let $A$ be a finite commutative ring. For an open immersion\n$j:U\\hookrightarrow X$, extension by zero on the small pro-etale\nsite (the functor $j_!$ of [def-weil-extension-by-zero])\nis the exact left adjoint of $j^{-1}$, acts degreewise, and\nhas the same stalk prescription as the etale one,\n\n$$\n(j_!K)_{\\bar x}=\n\\begin{cases}\nK_{\\bar x},&\\bar x\\text{ lies in }U,\\\\\n0,&\\bar x\\text{ lies in }X\\setminus U,\n\\end{cases}\n$$\n\nfor a complex $K$ of sheaves of $A$-modules on $U_{\\mathrm{proet}}$ and a geometric point\n$\\bar x$ of $X$; it is compatible with restriction of scalars\nalong a homomorphism $A\\to B$ of finite commutative rings [def-pc-sheaf-restrict-scalars]: canonically $\\operatorname{Res}_{A\\to B}j_!^B K\\cong j_!^A\\operatorname{Res}_{A\\to B}K$ for a complex $K$ of $B$-module sheaves.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero.md",
   "place": "node lem-cbc-proetale-extension-zero, order 1582"
  },
  "stmt_deps": [
   "def-weil-extension-by-zero",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-proetale-geometric-stalk",
+  "def-pc-sheaf-restrict-scalars"
  ],
  "proof": [
   {
-   "text": "The exactness and the left-adjoint property are part of\n[def-weil-extension-by-zero], which is stated on the pro-etale\nsite. For the stalk description, the category of weak etale\nneighbourhoods of $\\bar x$ in\n[def-weil-pbc-proetale-site] is filtered, and the\nsubcategory of the neighbourhoods that factor through the open\nsubscheme $U$ is cofinal in the neighbourhoods of $\\bar x$ when\n$\\bar x\\in U$, and empty otherwise; hence the stalk formula, and\nthe degreewise property of [def-weil-pbc-derived-categories]\nfollows from the explicit cofinality, the compatibility with\nrestriction of scalars being the naturality of the construction in\nthe coefficient ring.",
+   "text": "The localization and coefficient identifications in [lem-weil-proetale-weakly-etale-localization], for the open immersion $j$, identify $U_{\\mathrm{proet}}$ with $X_{\\mathrm{proet}}/U$ and $A_U$ with $A_X|_U$. Apply [lem-pur-site-restriction-module-adjunction-exact] with $\\mathcal C=X_{\\mathrm{proet}}$ and $\\mathcal O=A_X$: its sheafified extension-by-zero presheaf is exactly [def-weil-extension-by-zero]. It gives exactness of both restriction and $j_!$, and the module-sheaf adjunction $j_!\\dashv j^{-1}$.",
    "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-extension-by-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemmas Tags 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact), with proetale.tex Definition Tag 09AE (definition-extension-zero); specialization to the open-immersion localization."
+   }
+  },
+  {
+   "text": "For a sheaf $M$ on $U_{\\mathrm{proet}}$, [lem-cbc-proetale-sheafification-geometric-stalk] identifies the stalk of $j_!M=P_M^\\#$ with the colimit of $P_M(V)$ over the pointed neighbourhoods of [def-weil-proetale-geometric-stalk]. When $\\bar x$ lies in $U$, the refinement $V\\times_X U$ is a pointed neighbourhood factoring through $U$ by [lem-weil-proetale-weakly-etale-localization]. Every representative restricts to this refinement. If two representatives become equal in the full colimit, filteredness gives a pointed neighbourhood on which they agree; refining that neighbourhood by its fibre product with $U$ gives the same equality among neighbourhoods factoring through $U$. Thus the map from the restricted colimit to the full colimit is both surjective and injective; there $P_M=M$ by [def-weil-extension-by-zero], and the index is precisely the pointed neighbourhood index in $U$. When $\\bar x$ lies outside $U$, every pointed neighbourhood fails to factor through $U$, so every $P_M(V)$ is zero and its colimit is zero. These identifications commute with maps of $M$ because each colimit map comes from the component maps of $P_M$.",
+   "uses": [
+    "lem-cbc-proetale-sheafification-geometric-stalk",
+    "def-weil-proetale-geometric-stalk",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-extension-by-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero.md",
+    "place": "Proof, stalk-description sentence; agent representative-class cofinality argument using lem-cbc-proetale-sheafification-geometric-stalk, sourced at proetale.tex Section 0991 (section-points), Tags 0F6B (lemma-cofinal-etale), 0F6C (lemma-geometric-lift-to-cover), and sites.tex Tag 00Y8 (lemma-point-pushforward-sheaf), clause (3)."
+   }
+  },
+  {
+   "text": "For $A\\to B$, restriction of scalars [def-pc-sheaf-restrict-scalars] keeps every section group and restriction map, changing the action to $a\\cdot m=\\varphi(a)m$. Hence $P_{\\operatorname{Res}M}$ and $\\operatorname{Res}P_M$ have identical underlying abelian presheaves and identical $A_X$-actions. Module sheafification in [def-weil-presheaf-modules-sheafification] is underlying abelian sheafification with the unique extended action; therefore the identity induces the claimed natural scalar comparison. The component maps on morphisms in [def-weil-extension-by-zero] agree as well. Apply $j_!$ and this identity in each degree, with differential $j_!(d^q)$. Exactness from Step 1 implies $\\mathcal H^q(j_!K)=j_!\\mathcal H^q(K)$, so quasi-isomorphisms are preserved and the termwise functor descends to the localization of cochain complexes at quasi-isomorphisms in [def-weil-abstract-derived-category], applied to the pro-etale module-sheaf category of [def-weil-pbc-proetale-site]. The same kernel-and-image argument for the exact restriction functor of Step 1 shows that it too preserves quasi-isomorphisms. The degreewise unit and counit are chain maps by naturality with respect to each differential. Their naturality for a quasi-isomorphism also gives naturality for its inverse after localization: multiply the naturality equation by the two inverted images. Thus they define natural transformations on the localization, where their degreewise triangle identities remain equalities. These are the unit and counit of the derived adjunction. Step 2 in each degree is the displayed stalk formula for complexes.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-presheaf-modules-sheafification",
     "def-weil-extension-by-zero",
     "def-weil-pbc-proetale-site",
-    "def-weil-pbc-derived-categories"
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma Tag 03CY (lemma-sheafification-presheaf-modules), unique extended action; agent argument from exactness, the cohomology formula, and the universal property of localization for termwise extension of the functor and its adjunction; abstract derived-category definition Tag 05RU in derived.tex (definition-unbounded-derived-category)."
+   }
   }
  ],
  "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
   "def-weil-extension-by-zero",
   "def-weil-pbc-proetale-site",
-  "def-weil-pbc-derived-categories"
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-proetale-geometric-stalk",
+  "lem-cbc-proetale-sheafification-geometric-stalk",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-proetale-weakly-etale-localization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero on small pro-etale site exact left adjoint stalk formula",
+   "results": "stalkSkyscraperSheafAdjunction and related stalk adjunction declarations in Mathlib/Topology/Sheaves/Skyscraper; no pro-etale extension-by-zero result",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, CategoryTheory.Functor.sheafPullback, IsCofiltered",
+   "results": "0 hits; unknown identifier IsCofiltered",
+   "date": "2026-10-14",
+   "verdict": "query error"
+  },
+  {
+   "tool": "grep",
+   "query": "extension by zero|lowerShriek|stalk",
+   "results": "0 hits with subdirectory Mathlib/CategoryTheory, as logged",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extension[Bb]yZero|extension_by_zero|lowerShriek|LowerShriek",
+   "results": "0 hits; none",
+   "date": "2026-10-14",
+   "verdict": "no match for the full pro-etale extension-by-zero statement; general sheafification and pushforward adjunctions do not give its stalk and coefficient clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension by zero on the pro-etale site is an exact left adjoint with geometric stalk formula",
+   "results": "0 hits; none; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Adjunction",
+   "results": "8 hits; PresheafOfModules.sheafificationAdjunction, SheafOfModules.overMapPushforwardAdj, SheafOfModules.overPushforwardOverAdj, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-14",
+   "verdict": "no match for the full pro-etale extension-by-zero statement; general sheafification and pushforward adjunctions do not give its stalk and coefficient clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero for sheaves of modules on a localized Grothendieck site is exact and left adjoint to restriction",
+   "results": "8 hits; PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification, PresheafOfModules.sheafificationAdjunction, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafificationAdjunction_homEquiv_apply, CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW, PresheafOfModules.sheafification, PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafificationHomEquiv",
+   "date": "2026-10-14",
+   "verdict": "no match for the full pro-etale extension-by-zero statement; general sheafification and pushforward adjunctions do not give its stalk and coefficient clauses"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -67,5 +159,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-cbc-proetale-extension-zero",
+  "worker": "stage1",
+  "summary": "Second reading repairs the module adjunction input, supplies pro-etale sheafification/stalk comparison, and spells out termwise descent and scalar restriction. Statement corrected: finite coefficients made explicit and false uniqueness from ordinary geometric stalks removed; the adjunction characterizes the functor. Returned-delivery repair: replaced the etale-only derived-category citation by pro-etale and abstract definitions, supplied all per-step sources, completed new-node audit metadata and missing logged searches, and removed the statement typo.",
+  "blueprint": "Realizes the proof paragraph of the blueprint node: exactness/adjunction, cofinal pointed weakly etale neighbourhoods, stalk formula, degreewise action, and coefficient naturality.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic ringed-site localization supplies the exact module adjunction, rather than the abelian-only adjunction; no general module-site result occurs in this unit."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic site and coefficient identification already required by def-weil-extension-by-zero; specializes the ringed-site result and identifies pointed open refinements."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-f52eabe45",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-f52eabe45 (reviewer sub-agent of L); spot-checked: Read the item, new node, cited statements, sources, and unit/chapter route in full. Verified module adjunction, stalk colimit argument, scalar compatibility, derived descent, edge cases, duplicate candidates, and acyclicity. Stacks 0991/0993 justifies removing false stalk uniqueness. Accepted both declared localization/module-adjunction tool uses. Checked master target coefficient categories and base-change morphisms without accepting a seeded comparison theorem. No repairs needed; review.md records the checks."
+ }
 }
