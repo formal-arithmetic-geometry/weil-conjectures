@@ -14874,3 +14874,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:47 L: batch 20261014T144456 dependency take-out
 - 14:47 L: returned deliver/Q1/WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula (reviewer RETURN: (reviewer X-f41d9, head f41d952b7) F: `## No longer needed` contradicts the delivered import diff and fails to name remo)
 - 14:58 L: merged deliver/T1/WeilConjectures.SixFunctors.Etale.Derived.UpperShriek (stage 3; reviewer PASS; first push; landing 20261014T145820-L-752767 (interface); batch 20261014T145818; modules 4; new nodes 2; change records: coord/changes/etale-upper-shriek-global-amplitude.md)
+- 15:15 L: merged deliver/Q1/WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula (stage 3; reviewer PASS; after a return; landing 20261014T151512-L-1000885 (interface); batch 20261014T151510; modules 1; new nodes 0; change records: coord/changes/projection-formula-imports.md)

@@ -5,15 +5,12 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapDualizable
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapDualizable
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 
@@ -370,8 +367,12 @@ theorem hasProjectionFormulaOfCompactification_iff [Finite Λ] {f : X ⟶ Y}
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L ↔
-      HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L :=
-  sorry
+      HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L := by
+  constructor <;> intro _
+  · exact hasProjectionFormula_of_finite Λ f K L
+  · rw [HasProjectionFormulaOfCompactification, projectionMapOfCompactification_app_app]
+    have := isIso_rightDerivedLowerStarProjectionMap_of_finite Λ c.g
+    infer_instance
 
 end TorsionCoherence
 
