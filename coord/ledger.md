@@ -14872,3 +14872,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:44 L: returned deliver/X2/Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic (reviewer RETURN: (reviewer X-163d1, head 163d1d92e) 7 / forced adaptations: report.md has no `## Forced adaptations` section, despite the)
 
 - 22:47 L: batch 20261014T144456 dependency take-out
+- 14:47 L: returned deliver/Q1/WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula (reviewer RETURN: (reviewer X-f41d9, head f41d952b7) F: `## No longer needed` contradicts the delivered import diff and fails to name remo)
