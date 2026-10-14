@@ -4,12 +4,12 @@
   "is": null,
   "from": {
    "node": "def-weil-pbc-constructible-complexes",
-   "place": "its statement (a notion the statement uses)",
+   "place": "Statement, first paragraph: constructible means a finite partition by locally closed constructible subschemes on each of which the restriction is lisse; affine-local agreement on qcqs schemes.",
    "via": [
     "def-weil-pbc-etale-constructible-sheaf"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Constructible sheaves of modules on a qcqs scheme: global partition iff affine-local (Stacks 095E)",
@@ -23,36 +23,157 @@
   "def-weil-pbc-etale-sheaves",
   "def-weil-constructible-subset",
   "def-weil-pbc-inverse-image",
-  "def-weil-pbc-etale-constructible-sheaf"
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-scheme-conventions",
+  "def-constructible-stratification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Condition (1) implies (2): take the single-member open covering consisting of $T$ itself. No restriction or change of stratification is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095E, lemma-constructible-quasi-compact-quasi-separated, proof; module version using 03RW(3)"
+   }
+  },
+  {
+   "text": "We first record the pullback operation needed below, with module coefficients throughout. For an etale map $e:E\\to Y$, [lem-weil-pbc-etale-inverse-image-restriction] identifies $e^{-1}G$ with the localized restriction $G|_E$ on underlying abelian sheaves. This identification respects the fixed coefficient ring: its naturality applied to each abelian-sheaf endomorphism $\\lambda:G\\to G$, $\\lambda\\in\\Lambda$, makes it commute with scalar multiplication. Sections of the constant ring sheaf are locally constant, so compatibility with these constant scalars implies compatibility with every local scalar section by restriction and the sheaf condition. Thus this is an isomorphism of $\\Lambda_E$-module sheaves, using the module inverse image of [def-weil-pbc-inverse-image]. If $G$ has an etale covering $E_a\\to Y$ on which it is constant with finite $\\Lambda$-module values $M_a$, pull this cover back along any $h:Z\\to Y$. The projections $Z\\times_Y E_a\\to Z$ form an etale cover by [lem-weil-pbc-etale-covering-base-change]. On each member, inverse-image composition identifies the restriction of $h^{-1}G$ with the inverse image of the corresponding $M_a$-constant sheaf, and [lemma-constructible-pullback-constant], with value category $\\mathcal A=\\operatorname{Mod}(\\Lambda)$, identifies it with the constant sheaf of the SAME finite module $M_a$. Thus finite locally constant module sheaves stay finite locally constant under arbitrary scheme pullback. For completeness the composition comparison on modules follows by [def-weil-pbc-composite-adjunction] and [lem-weil-pbc-conjugate-iso-unit-equation]: the direct-image identity of [def-weil-pbc-direct-image] is induced objectwise by $(W\\times_Y Z)\\times_Z Z^{\\prime}\\cong W\\times_Y Z^{\\prime}$; this is an identity of module-valued section functors, so the adjoints from [def-weil-pbc-inverse-image] give the module comparison, without forgetting coefficients. A locally closed representative can be replaced by any immersion with the same image by [lemma-constructible-immersion-independence]; this includes the reduced induced representative. The finite-ring convention agrees with 03RW(3) by (1) iff (3) of [lem-weil-pbc-finite-locally-constant-module-values].",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "lemma-constructible-pullback-constant",
+    "def-constructible-constant",
+    "def-weil-pbc-inverse-image",
+    "lemma-constructible-immersion-independence",
+    "lem-weil-pbc-finite-locally-constant-module-values",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095E, lemma-constructible-quasi-compact-quasi-separated, proof; module version using 03RW(3)"
+   }
+  },
+  {
+   "text": "Assume (2), with open cover $T=\\bigcup_j V_j$. For each point $x$ choose $j$ with $x\\in V_j$ and, by [lem-weil-pbc-affine-opens-basis], an affine open $W_x$ with $x\\in W_x\\subseteq V_j$. Quasi-compactness of $T$ means this open cover has a finite subcover $W_1,\\ldots,W_r$ (if $T$ is empty use the empty cover). Each $W_a$ is also an affine open of $V_j$, so the hypothesis (1) on $V_j$ supplies a finite constructible locally closed partition of $W_a$ and reduced induced stratum immersions. Its finite locally constant module sheaves are exactly the inverse images of $\\mathcal F$ along the composites into $T$, by the module composition comparison of step 2.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-constructible-stratification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095E, lemma-constructible-quasi-compact-quasi-separated, proof; module version using 03RW(3)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-stratification-local-gluing-core] to this finite affine cover and its local immersed stratifications. Its hypotheses are precisely quasi-compactness and quasi-separatedness of $T$, affineness of the chosen opens, coverage, and constructibility of each local stratum in its chart. It yields a global finite constructible locally closed immersed stratification $S$, and for each stratum an ACTUAL scheme morphism to one local stratum, with its composite to $T$ equal to the global stratum immersion. Pull back the finite locally constant module sheaf on that local stratum along this morphism, using step 2. The result is the inverse image of $\\mathcal F$ on the global stratum. Hence $S$ witnesses (3) by [def-weil-pbc-etale-constructible-sheaf]. This does not infer scheme-theoretic factorization merely from containment of images.",
+   "uses": [
+    "lem-weil-pbc-etale-stratification-local-gluing-core",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095E, lemma-constructible-quasi-compact-quasi-separated, proof; module version using 03RW(3)"
+   }
+  },
+  {
+   "text": "Assume (3), witnessed by immersed strata $Z_i\\to T$ with constructible images $C_i$. Fix any affine open $U\\subseteq T$. By [lemma-constructible-pullback-stratification], the base changes $Z_i\\times_T U\\to U$ give a finite locally closed partition with images $C_i\\cap U$. These images are constructible IN $U$: for the inclusion $j:U\\to T$, a retrocompact open $V\\subseteq T$ has retrocompact inverse image in $U$, since a quasi-compact open $W$ of $U$ is a quasi-compact open of $T$ and $(V\\cap U)\\cap W=V\\cap W$ is quasi-compact with the same subspace topology. Thus [lem-weil-pbc-constructible-preimage] applies to $j$ and $C_i$. Step 2 applied to $Z_i\\times_T U\\to Z_i$ gives finite local constancy with module coefficients; its same-image immersion clause transfers it to the reduced induced representative of $C_i\\cap U$. This is exactly the partition required in (1). Empty intersections are harmless, and no intersection of affine opens was assumed affine.",
+   "uses": [
+    "lemma-constructible-pullback-stratification",
+    "lem-weil-pbc-constructible-preimage",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095E, lemma-constructible-quasi-compact-quasi-separated, proof; module version using 03RW(3)"
+   }
+  },
+  {
+   "text": "The implications (1) to (2), (2) to (3), and (3) to (1) establish the asserted equivalence of all three conditions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095E, lemma-constructible-quasi-compact-quasi-separated, proof; module version using 03RW(3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-covering-base-change",
+  "lemma-constructible-pullback-constant",
+  "def-constructible-constant",
+  "def-weil-pbc-inverse-image",
+  "lemma-constructible-immersion-independence",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-constructible-stratification",
+  "lem-weil-pbc-etale-stratification-local-gluing-core",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lemma-constructible-pullback-stratification",
+  "lem-weil-pbc-constructible-preimage",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095E, lemma-constructible-quasi-compact-quasi-separated, proof; module version using 03RW(3)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
-   "query": "sheaf constructible equivalent on affine opens quasi-compact quasi-separated scheme partition finite locally constant",
-   "results": "AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens, IsAffineOpen.isQuasiSeparated, isCompact_iff_finite_and_eq_biUnion_affineOpens (Morphisms.QuasiSeparated/QuasiCompact), Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover, IsLocallyConstructible.isConstructible (Topology.Constructible): the subset-level analogue only",
-   "date": "2026-10-09",
-   "verdict": "no match (the subset statement IsLocallyConstructible.iff_isConstructible_of_isOpenCover is a tool for the proof, not the sheaf statement)"
+   "query": "constructible sheaf of modules on quasi-compact quasi-separated scheme equivalent affine-local finite partition",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   },
   {
-   "tool": "leanfinder",
-   "query": "constructible étale sheaf on quasi-compact quasi-separated scheme: affine-local definition equivalent to global finite partition into constructible locally closed subschemes",
-   "results": "AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine (AffineTransitionLimit), reduce_to_affine_global, reduce_to_affine_nbhd (Properties), of_affine_open_cover (AffineScheme), exists_of_res_eq_of_qcqs_of_top: no sheaf notion",
-   "date": "2026-10-09",
-   "verdict": "no match"
+   "tool": "loogle",
+   "query": "IsLocallyConstructible, IsConstructible, Sheaf",
+   "results": "loogle: unknown identifier 'IsLocallyConstructible'",
+   "date": "2026-10-14",
+   "verdict": "no match: subset constructibility, finite-type module sheaves and affine-cover facts do not state the three-clause etale module-sheaf equivalence"
   },
   {
    "tool": "grep",
-   "query": "grep -rn 'IsConstructible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry --include=*.lean (outside Morphisms/FinitePresentation.lean); grep -rln 'affineOpens' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites",
-   "results": "no constructible notion in AlgebraicGeometry beyond Chevalley/FinitePresentation (subsets); in Sites only SmallAffineZariski.lean uses affineOpens",
-   "date": "2026-10-09",
-   "verdict": "no match"
+   "query": "IsLocallyConstructible|constructible",
+   "results": "Hits read: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: subset constructibility, finite-type module sheaves and affine-cover facts do not state the three-clause etale module-sheaf equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constructible etale module sheaf finite locally constant on strata affine local criterion",
+   "results": "Hits read: SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, ModuleCat.Tilde.exists_const, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.IsFinitePresentation, Algebra.isOpen_etaleLocus",
+   "date": "2026-10-14",
+   "verdict": "no match: subset constructibility, finite-type module sheaves and affine-cover facts do not state the three-clause etale module-sheaf equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a sheaf locally admitting finite constructible partitions admits a global partition on a compact scheme",
+   "results": "Hits read: AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_f, AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_X, AlgebraicGeometry.Scheme.OpenCover.finiteSubcover, AlgebraicGeometry.Scheme.instFintypeI₀FiniteSubcover, AlgebraicGeometry.Scheme.OpenCover.compactSpace, AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isCompact, AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union, AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact",
+   "date": "2026-10-14",
+   "verdict": "no match: subset constructibility, finite-type module sheaves and affine-cover facts do not state the three-clause etale module-sheaf equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\"",
+   "results": "Hits read: Topology.IsConstructible, Topology.IsLocallyConstructible, Topology.IsConstructible.univ, Topology.IsLocallyConstructible.univ, Topology.IsConstructible.empty, Topology.IsLocallyConstructible.empty, Topology.IsConstructible.isLocallyConstructible, IsRetrocompact.isConstructible",
+   "date": "2026-10-14",
+   "verdict": "no match: subset constructibility, finite-type module sheaves and affine-cover facts do not state the three-clause etale module-sheaf equivalence"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -75,5 +196,21 @@
   "unreachable"
  ],
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-constructible-qcqs-affine-local",
+  "worker": "stage1",
+  "summary": "Realized the three implications of Stacks 095E for finite module coefficients, reusing the existing affine-basis and actual-factorization local-gluing nodes. Wrote the finite-local-constant pullback argument with unchanged finite module values, and verified constructibility of traces in an arbitrary affine open. No new nodes or changed statement. Second reading added the etale restriction comparison citation and its scalar-compatibility argument.",
+  "blueprint": "Makes precise the first paragraph of def-weil-pbc-constructible-complexes: the global constructible finite-coefficient sheaf notion agrees with the affine-local Stacks notion on qcqs schemes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-9a47b1b72",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-9a47b1b72 (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md. Checked all six steps and cited statements against Stacks 095E/03RW, module pullback and restriction sources, actual-factorization gluing, and exact archived master target categories and morphisms. No new nodes or repairs. Two pre-existing dependency cycles are documented; neither involves this item."
+ }
 }
