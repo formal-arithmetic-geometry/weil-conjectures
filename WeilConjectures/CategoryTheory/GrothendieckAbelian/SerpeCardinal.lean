@@ -76,7 +76,9 @@ variable (C) in
   (exists_serpeCardinal.{w} C).choose
 
 variable (C) in
-instance fact_isRegular_serpeCardinal : Fact (serpeCardinal.{w} C).IsRegular :=
+/-- `serpeCardinal C` is regular. This is not a global instance: its conclusion
+`Fact (Cardinal.IsRegular _)` would make instance search try every category `C`. -/
+theorem fact_isRegular_serpeCardinal : Fact (serpeCardinal.{w} C).IsRegular :=
   ⟨(exists_serpeCardinal.{w} C).choose_spec.1⟩
 
 variable (C) in
