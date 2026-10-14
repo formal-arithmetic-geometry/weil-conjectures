@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-finite-free-completed-scalar-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-scalar-extension-composition",
+   "place": "Proof, first paragraph: the completed derived tensor products on integral representatives; comparison with ordinary tensoring by the finite free completed coefficient sheaf",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite free completed coefficient extension is ordinary derived scalar extension",
+ "statement": "Let $\\ell$ be a prime, let $E\\subset L$ be finite extensions of $\\mathbf Q_\\ell$ with valuation rings $\\mathcal O_E\\subset\\mathcal O_L$ and uniformizers $t=\\varpi_E$, $v=\\varpi_L$ [def-weil-l-adic-coefficient-extension], and let $Y$ be any scheme. Work on its small pro-etale site [def-weil-pbc-proetale-site]. Write $R=\\widehat{\\mathcal O}_{E,Y}=\\varprojlim_n(\\mathcal O_E/t^n)_Y$ and $S=\\widehat{\\mathcal O}_{L,Y}=\\varprojlim_m(\\mathcal O_L/v^m)_Y$ for the completed coefficient sheaves [def-weil-completed-integral-coefficients], where $(-)_Y$ is the constant sheaf [def-weil-pbc-constant-sheaf]. The inclusions of valuation rings give a canonical map $R\\to S$. The $R$-module sheaf $S$ is finite free of rank $[L:E]$.\n\nFor $T=R,S$, write $D(T)$ for the derived category of sheaves of $T$-modules [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let $K\\in D(R)$ be derived $t$-complete [def-weil-derived-complete]. Form ordinary derived change of rings $K\\otimes_R^L S$ [lem-pur-derived-change-of-rings]. The reductions $S\\to(\\mathcal O_L/v^m)_Y$ induce the canonical completion map\n$$\n \\chi_{L/E,K}:K\\otimes_R^L S\\longrightarrow\n R\\varprojlim_m\\operatorname{Res}^L_m\\bigl(K\\otimes_R^L(\\mathcal O_L/v^m)_Y\\bigr)\n =K\\otimes_{\\mathcal O_E}\\mathcal O_L,\n$$\nHere $m\\geq1$, $\\operatorname{Res}^L_m$ is restriction of scalars along $S\\to(\\mathcal O_L/v^m)_Y$ [def-pc-sheaf-restrict-scalars], and $R\\varprojlim$ denotes the strict-tower cone model specified in [def-weil-integral-scalar-extension], a derived limit [def-weil-derived-limit]. More explicitly, on a K-flat resolution $P\\to K$ [def-pc-kflat-complex] the compatible quotient maps $P\\otimes_R S\\to\\operatorname{Res}^L_m(P\\otimes_R(\\mathcal O_L/v^m)_Y)$ define a map to the product killed strictly by $1-s$; the induced map to $\\operatorname{Cone}(1-s)[-1]$ has zero component in the shifted product. The map $\\chi_{L/E,K}$ is the resulting morphism in $D(S)$, independent of the resolution. The last functor is exactly the strict-tower integral scalar extension of [def-weil-integral-scalar-extension], and the right side is interpreted as its derived-limit realization [lem-weil-integral-scalar-extension-well-defined]. This map is an isomorphism, natural in $K$, and $K\\otimes_R^L S$ is derived $v$-complete. For $L=E$ it is the natural derived-completeness map $K\\to R\\varprojlim_n K\\otimes_R^L(\\mathcal O_E/t^n)_Y$, after the multiplication isomorphism $K\\otimes_R^L R\\cong K$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1), pp. 58-59 (completed coefficient sheaves); Definition 3.4.10 and Lemma 3.4.12, pp. 22-23 (completed tensor and derived completeness); Proposition 3.5.1, p. 24 (completion as derived inverse limit). The finite-free coefficient-extension comparison is a consequence of these constructions, not a verbatim numbered lemma. Reduction of completed constant coefficients is Stacks Tag 093M, sites-modules.tex, lemma-completion-flat."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-derived-complete",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-derived-limit",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedComplete|completedTensor|adic.*[Tt]ensor|[Tt]ensor.*adic",
+   "results": "Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Complete.lean, Mathlib/RingTheory/Smooth/Flat.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: candidates concern ordinary modules, presheaves, or underived module completion; no completed derived coefficient extension on a pro-etale site"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free extension commutes with derived adic completion of complexes of sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed derived extension of scalars along a finite extension of l-adic valuation rings agrees with ordinary derived tensor with the finite free completed coefficient sheaf",
+   "results": "AdicCompletion.ofTensorProduct, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian",
+   "date": "2026-10-14",
+   "verdict": "no match: candidates concern ordinary modules, presheaves, or underived module completion; no completed derived coefficient extension on a pro-etale site"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-14",
+   "verdict": "no match: candidates concern ordinary modules, presheaves, or underived module completion; no completed derived coefficient extension on a pro-etale site"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|ofTensorProductEquivOfFiniteNoetherian",
+   "results": "Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: candidates concern ordinary modules, presheaves, or underived module completion; no completed derived coefficient extension on a pro-etale site"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"tensor\"",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: candidates concern ordinary modules, presheaves, or underived module completion; no completed derived coefficient extension on a pro-etale site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free algebra over a complete discrete valuation ring gives a finite free completed sheaf on the proetale site and its tensor functor preserves derived complete complexes",
+   "results": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, BDeRhamPlus, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, Algebra.FormallyEtale.instForallOfFinite, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, Algebra.FormallySmooth.iff_injective_lTensor_residueField, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, Algebra.Etale.exists_subalgebra_fg",
+   "date": "2026-10-14",
+   "verdict": "no match: candidates concern ordinary modules, presheaves, or underived module completion; no completed derived coefficient extension on a pro-etale site"
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedComplete|derived.?completion|KFlat|completedTensorProduct",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: classical adic completion of modules only; no derived complete sheaf comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived completion of sheaves of modules is unchanged by tensoring with a finite rank free algebra with equivalent adic filtrations",
+   "results": "AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfPiFintype",
+   "date": "2026-10-14",
+   "verdict": "no match: classical adic completion of modules only; no derived complete sheaf comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"tensor\"",
+   "results": "AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductInvOfPiFintype, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_surjective_of_finite, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProduct_tmul",
+   "date": "2026-10-14",
+   "verdict": "no match: classical adic completion of modules only; no derived complete sheaf comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-scalar-extension-composition",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations"
+}

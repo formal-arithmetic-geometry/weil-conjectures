@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-scalar-extension-composition",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Composition of scalar extensions",
@@ -17,30 +17,126 @@
  ],
  "proof": [
   {
-   "text": "On integral representatives the two composites are both computed, in the two\npossible orders, from the completed derived tensor product with $\\mathcal\nO_M$; the associativity isomorphism of the derived tensor product identifies\n\n$$\n (K\\widehat\\otimes^L_{\\mathcal O_E}\\mathcal O_L)\n \\widehat\\otimes^L_{\\mathcal O_L}\\mathcal O_M\n \\cong K\\widehat\\otimes^L_{\\mathcal O_E}\\mathcal O_M.\n$$",
-   "uses": [],
-   "elementary": null
+   "text": "By [def-weil-rationalization-karoubi], $K$ is represented by an integral object $K_0\\in D^b_c(Y,\\mathcal O_E)$; no retract has to be adjoined. For $F\\in\\{E,L,M\\}$ write $R_F=\\widehat{\\mathcal O}_{F,Y}$. These integral objects are derived complete by [def-weil-derived-complete-integral-detailed]. Apply [lem-weil-finite-free-completed-scalar-comparison] to the three extensions $E\\subset L$, $L\\subset M$, and $E\\subset M$. It identifies each completed scalar extension on a derived-complete input with ordinary derived tensor by $R_L$ or $R_M$. By [lem-weil-integral-scalar-extension-constructible] the first extension remains in $D^b_c(Y,\\mathcal O_L)$, so the second comparison applies to that object. Thus the desired integral comparison reduces to\n$$\n (K_0\\otimes^L_{R_E}R_L)\\otimes^L_{R_L}R_M\\cong K_0\\otimes^L_{R_E}R_M.\n$$",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-integral-scalar-extension-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-scalar-extension-composition.md",
+    "place": "Proof, first paragraph (integral representatives and tensor associativity)"
+   }
   },
   {
-   "text": "The second tensor product is over $\\mathcal O_L$, as required by the tower of\nfinite free coefficient extensions. The levelwise reductions and the\nrationalization of [def-weil-rationalization-karoubi] commute with this\nidentification. After rationalization the comparison is the composite of\nassociators recorded in the scalar-extension proposition of the\nproper-base-change chapter, which also supplies naturality in the object and\nthe unit and pentagon equations. All categories and functors involved are\nthose of [def-weil-rationalization-karoubi].",
+   "text": "Choose a K-flat resolution $P\\to K_0$ with flat terms by [lem-pc-kflat-resolution]. The change-of-rings computation [lem-pur-derived-change-of-rings] computes the first tensor by $P\\otimes_{R_E}R_L$. Applying [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the identity topos with ring map $R_E\\to R_L$ says that this complex is again K-flat with flat terms, so it also computes the second tensor. Termwise, the map\n$$\n ((p\\otimes s)\\otimes u)\\longmapsto p\\otimes su,\n \\qquad p\\otimes u\\longmapsto(p\\otimes1)\\otimes u\n$$\nis a pair of inverse balanced maps, using the sheaf tensor product [def-pur-sheaf-tensor-product]. For example $(p\\otimes s)\\otimes u=(p\\otimes1)\\otimes su$, which checks the less immediate composite. These maps respect restrictions and commute with the differential because $s,u$ have degree zero. They define inverse chain maps. The formulas commute with every chain map between K-flat complexes. A derived morphism can be represented by a roof between such complexes: resolve the middle complex of a roof by [lem-pc-kflat-resolution]. By [lem-pur-derived-change-of-rings], the quasi-isomorphism in the left leg remains invertible after either scalar extension. Naturality for the two legs therefore gives naturality for the roof, and also independence of the chosen resolution. Conjugate this natural isomorphism by the canonical maps $\\chi$ from Step 1 to get the integral composition comparison.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-scalar-extension-composition.md",
+    "place": "Proof, first paragraph (integral representatives and tensor associativity)"
+   }
+  },
+  {
+   "text": "For any integral derived morphism $f$, naturality proved for roofs in Step 2 gives $c_{K'_0}\\circ((f\\otimes1)\\otimes1)=(f\\otimes1)\\circ c_{K_0}$. For a chain-map representative both sides send $((p\\otimes s)\\otimes u)$ to $f(p)\\otimes su$; the roof argument supplies the equality for arbitrary $f$. The comparison is linear over the final completed coefficient sheaf, hence in particular over $\\mathcal O_E$. By [def-weil-rationalization-karoubi], a rational morphism is a finite sum of $f\\otimes a$ with $a\\in E$. The two composite scalar-extension functors send it respectively to $((f\\otimes1)\\otimes1)\\otimes a$ and $(f\\otimes1)\\otimes a$ in the final rationalized Hom group over $M$. Tensor the displayed integral naturality equation by $a$ and add. Therefore the image of the integral comparison is a natural isomorphism on the actual rationalized categories, with inverse the image of the integral inverse. This constructs the displayed isomorphism for every $K$.",
    "uses": [
     "def-weil-rationalization-karoubi"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-scalar-extension-composition.md",
+    "place": "Proof, second paragraph (rationalization and naturality)"
+   }
+  },
+  {
+   "text": "The multiplication unit maps are $p\\otimes r\\mapsto rp$, with inverse $p\\mapsto p\\otimes1$. If $L=E$, Step 2 sends $((p\\otimes r)\\otimes u)$ to $p\\otimes ru=(rp)\\otimes u$, which is precisely application of the source unit map followed by extension. If $M=L$, it sends $((p\\otimes s)\\otimes u)$ to $p\\otimes su$, which is the target unit map. Under $\\chi_{E/E}$ and $\\chi_{L/L}$ these are the identity-extension comparisons because [lem-weil-finite-free-completed-scalar-comparison] identifies those $\\chi$ maps with the derived-completeness units. If a fourth field is inserted, both iterated maps send $(((p\\otimes s)\\otimes u)\\otimes w)$ to $p\\otimes suw$, so the ordinary tensor comparisons are coherent with further composition. To check this after conjugation by $\\chi$, expand each completed comparison as the ordinary associator conjugated by its input and output $\\chi$ maps. Naturality of $\\chi$ moves each intervening map past scalar extension; adjacent $\\chi^{-1}\\chi$ factors cancel. The two expanded composites consequently have the same outer $\\chi$ maps and the ordinary tensor composites just computed, proving completed coherence as well. All these equalities remain equalities after the rationalization of [def-weil-rationalization-karoubi].",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-scalar-extension-composition.md",
+    "place": "Proof, second paragraph (unit and associator coherence)"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-rationalization-karoubi",
-  "prop-weil-pbc-scalar-extension"
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-pur-sheaf-tensor-product"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-scalar-extension-composition.md",
-  "place": "## Proof"
+  "place": "Proof; written out using ordinary tensor chain maps and a separate completed-coefficient comparison, avoiding an application of the proper-base-change package outside its scheme hypotheses"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extendScalars.*[Cc]omp|[Cc]omp.*extendScalars|[Cc]ompleted.*[Tt]ensor",
+   "results": "Mathlib/FieldTheory/Relrank.lean, Mathlib/FieldTheory/Relrank.lean, Mathlib/FieldTheory/Extension.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: candidates concern ordinary modules, presheaves, or underived module completion; no completed derived coefficient extension on a pro-etale site"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associativity of extension of scalars for constructible l-adic complexes on the pro-etale site",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of scalar extension functors on rationalized constructible l-adic derived categories is naturally isomorphic to scalar extension along the composite field inclusion",
+   "results": "ModuleCat.extendScalarsComp, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalars_assoc', ModuleCat.extendScalars_assoc, CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp, ModuleCat.extendScalars_assoc_assoc, ModuleCat.extendScalars_comp_id_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match: candidates concern ordinary modules, presheaves, or underived module completion; no completed derived coefficient extension on a pro-etale site"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "ModuleCat.extendScalars, ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.extendRestrictScalarsAdj, ModuleCat.extendScalarsId, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary modules, not rationalized constructible categories of completed coefficient sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|ofTensorProductEquivOfFiniteNoetherian",
+   "results": "Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: candidates concern ordinary modules, presheaves, or underived module completion; no completed derived coefficient extension on a pro-etale site"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"tensor\"",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: candidates concern ordinary modules, presheaves, or underived module completion; no completed derived coefficient extension on a pro-etale site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free algebra over a complete discrete valuation ring gives a finite free completed sheaf on the proetale site and its tensor functor preserves derived complete complexes",
+   "results": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, BDeRhamPlus, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, Algebra.FormallyEtale.instForallOfFinite, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, Algebra.FormallySmooth.iff_injective_lTensor_residueField, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, Algebra.Etale.exists_subalgebra_fg",
+   "date": "2026-10-14",
+   "verdict": "no match: candidates concern ordinary modules, presheaves, or underived module completion; no completed derived coefficient extension on a pro-etale site"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -66,5 +162,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-scalar-extension-composition",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Four explicit steps compare completed scalar extension with ordinary derived scalar extension by finite free completed coefficient sheaves, construct the integral associator on K-flat resolutions, descend its naturality through raw Hom scalar localization, and check identity extensions on pure tensors. One new statement-only comparison node, no new Mathlib leaf. The PBC scalar-extension package was not applied: its coefficient categories require noetherian finite-dimensional schemes, whereas this item allows any scheme.",
+  "blueprint": "First proof paragraph realized by steps 1-2 (completed scalar extension and integral associator); second paragraph by steps 3-4 (rationalization, naturality, unit and coherence).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of K-flat resolutions with flat terms on ringed sites; this unit has no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic preservation of K-flat complexes with flat terms by pullback, applied to the identity topos and coefficient ring map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-cc747071f",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-cc747071f (reviewer sub-agent of L); spot-checked: Full mathematical and source review completed. The item and four proof steps are valid, and the new comparison is a genuine smaller lemma with correct coefficient-category typing, strict-cone map, ramified cofinality, naturality, and edge cases. Fixed one schema fault: the new node’s created record omitted required by/date fields. Corrected full JSON is under fixes/dag/nodes/sec-smooth-purity/lem-weil-finite-free-completed-scalar-comparison.json; no statements or dependencies changed.; 1 file(s) fixed by the reviewer"
+ }
 }
