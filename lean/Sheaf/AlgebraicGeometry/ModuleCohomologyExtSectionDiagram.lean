@@ -30,6 +30,25 @@ def abelianEdgeHom {X Y : Scheme.{u}} (f : X ⟶ Y) (F : X.Modules) (p : ℕ) :
     (Sheaf.H.mapFunctor (invImage f) (constIso f).symm
       ((SheafOfModules.toSheaf Y.ringCatSheaf).obj ((pushforward f).obj F)) p))
 
+/-- The section-diagram equality is stable after inserting the identity on its codomain.
+This is a strict intermediate compatibility statement; cancelling the identity gives the
+item theorem. Source: Stacks Project, Tag 01FB. (blueprint: new-abelian-edge-section-identity) -/
+theorem abelianEdge_section_diagram_after_identity {X Y : Scheme.{u}} (f : X ⟶ Y) (F : X.Modules)
+    (D : ModuleCohomologyFMapData f ((pushforward f).obj F) F
+      (𝟙 ((pushforward f).obj F))) (p : ℕ) :
+    ((abelianResolutionIso Y D.J p).hom ≫
+        (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p).map
+          (((moduleSections Y).mapHomologicalComplex (ComplexShape.up ℕ)).map D.β)) ≫
+        𝟙 ((HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p).obj
+          (((moduleSections Y).mapHomologicalComplex (ComplexShape.up ℕ)).obj D.K)) =
+      (abelianEdgeHom f F p ≫ (abelianResolutionIso X D.I p).hom ≫
+        (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p).map
+          (D.a.hom ≫
+            ((moduleSections Y).mapHomologicalComplex (ComplexShape.up ℕ)).map D.lambda)) ≫
+        𝟙 ((HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p).obj
+          (((moduleSections Y).mapHomologicalComplex (ComplexShape.up ℕ)).obj D.K)) := by
+  sorry
+
 /-- The Ext map and the horizontal section map agree after the vertical section map.
 This is a square between abelian Ext and section homology; neither the module
 edge map nor the module/Ext equivalence occurs in the assertion.
@@ -64,6 +83,8 @@ theorem abelianEdge_section_diagram {X Y : Scheme.{u}} (f : X ⟶ Y) (F : X.Modu
       abelianEdgeHom f F p ≫ (abelianResolutionIso X D.I p).hom ≫
         (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p).map
           (D.a.hom ≫
-            ((moduleSections Y).mapHomologicalComplex (ComplexShape.up ℕ)).map D.lambda) := by sorry
+            ((moduleSections Y).mapHomologicalComplex (ComplexShape.up ℕ)).map D.lambda) := by
+  convert abelianEdge_section_diagram_after_identity f F D p using 1
+  all_goals try simp only [Category.comp_id]
 
 end AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution

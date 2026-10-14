@@ -1,0 +1,112 @@
+{
+ "id": "new-abelian-edge-section-identity",
+ "kind": "statement",
+ "title": "Identity-inserted common section diagram",
+ "statement": "The two morphisms in the abelian common section diagram remain equal after postcomposition with the identity of the section homology of K.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FB",
+  "place": "common section diagram"
+ },
+ "stmt_deps": [
+  "new-module-cohomology-ext-resolution-normalization",
+  "def-weil-pbc-module-cohomology-fmap"
+ ],
+ "proof": [
+  {
+   "text": "Establish the common section compatibility before cancelling the identity morphism; this is the strict intermediate section-diagram calculation.",
+   "uses": [
+    "new-module-cohomology-ext-resolution-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-module-cohomology-ext-resolution-normalization"
+ ],
+ "proof_origin": {
+  "by": "W2",
+  "document": "https://stacks.math.columbia.edu/tag/01FB",
+  "place": "identity-inserted common section diagram"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "W2",
+  "item": "Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionDiagram",
+  "date": "2026-10-14",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-module-cohomology-ext-section-diagram",
+   "place": "strict intermediate before identity cancellation",
+   "via": [
+    "new-module-cohomology-ext-resolution-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionDiagram",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyExtSectionDiagram.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.abelianEdge_section_diagram_after_identity",
+  "statement": "theorem abelianEdge_section_diagram_after_identity {X Y : Scheme.{u}} (f : X ⟶ Y) (F : X.Modules)\n    (D : ModuleCohomologyFMapData f ((pushforward f).obj F) F\n      (𝟙 ((pushforward f).obj F))) (p : ℕ) :\n    ((abelianResolutionIso Y D.J p).hom ≫\n        (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p).map\n          (((moduleSections Y).mapHomologicalComplex (ComplexShape.up ℕ)).map D.β)) ≫\n        𝟙 ((HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p).obj\n          (((moduleSections Y).mapHomologicalComplex (ComplexShape.up ℕ)).obj D.K)) =\n      (abelianEdgeHom f F p ≫ (abelianResolutionIso X D.I p).hom ≫\n        (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p).map\n          (D.a.hom ≫\n            ((moduleSections Y).mapHomologicalComplex (ComplexShape.up ℕ)).map D.lambda)) ≫\n        𝟙 ((HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p).obj\n          (((moduleSections Y).mapHomologicalComplex (ComplexShape.up ℕ)).obj D.K))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-14"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homologyFunctor map identity composition",
+   "results": "Category identity law is available; no existing section-diagram theorem.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "?f ≫ 𝟙 _ = ?f",
+   "results": "Generic category identity lemmas only.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "abelian section diagram compatibility after identity",
+   "results": "No exact project theorem found.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "section homology diagram identity compatibility",
+   "results": "Service unavailable; no exact theorem found.",
+   "date": "2026-10-14",
+   "verdict": "Unavailable."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261014T004117-L-2839977",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261014T004117-L-2839977",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
