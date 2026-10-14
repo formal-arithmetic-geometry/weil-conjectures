@@ -3,52 +3,149 @@
  "blueprint": {
   "is": "lem-exc-direct-image-coproducts",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite cohomological dimension gives derived coproduct compatibility",
- "statement": "Let $u:U\\to T$ be\nquasi-compact and\nquasi-separated, and let $A$ be a finite ring. Suppose that\n$R^pu_*M=0$ for all etale $A$-module sheaves $M$ and\n$p>c$, where $c\\geq0$. Then\n$Ru_*$ preserves arbitrary\ncoproducts on the unbounded\nordinary derived categories.",
+ "statement": "Let $u:U\\to T$ be a quasi-compact and quasi-separated morphism of schemes [def-weil-pbc-scheme-conventions], and let $A$ be a finite commutative coefficient ring. Use the ordinary unbounded derived categories $D(U_{\\Et},A)$ and $D(T_{\\Et},A)$ of constant-$A$ module sheaves [def-weil-pbc-derived-categories], with direct image $u_*$ and its higher right derived functors as in [def-weil-pbc-direct-image]. Suppose that $R^pu_*M=0$ for every etale $A$-module sheaf $M$ and every $p>c$, for a fixed integer $c\\geq0$. Then the total right derived functor $Ru_*:D(U_{\\Et},A)\\to D(T_{\\Et},A)$, with the natural derived comparison of [lem-kun-finite-cd-acyclic-complex], preserves every set-indexed coproduct: for every family $(K_s)_{s\\in S}$ in $D(U_{\\Et},A)$, the canonical map $\\bigoplus_{s\\in S}Ru_*K_s\\to Ru_*(\\bigoplus_{s\\in S}K_s)$ induced by the coprojections is an isomorphism. No boundedness or constructibility condition is imposed on the $K_s$, and the empty family is included.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-exc-direct-image-coproducts.md",
   "place": "node lem-exc-direct-image-coproducts, order 1561"
  },
  "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-derived-categories",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-scheme-conventions"
+  "lem-kun-finite-cd-acyclic-complex"
  ],
  "proof": [
   {
-   "text": "A direct sum is the filtered colimit of its finite subsums.\nAdditivity and [lemma-weil-pbc-direct-image-filtered-colimit]\ntherefore show that every $R^pu_*$ commutes with direct sums of\nsheaves. We explain why the sheaf assertion also gives the unbounded\nderived assertion, which does not follow from additivity alone.",
+   "text": "Write $\\mathcal A=\\Mod(U_{\\Et},A)$ and $\\mathcal B=\\Mod(T_{\\Et},A)$. These categories are Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian], and have enough injectives by [lem-sp-grothendieck-enough-injectives]. The functor $F=u_*:\\mathcal A\\to\\mathcal B$ is additive and left exact by [lem-weil-pbc-module-direct-image-left-exact]. A finite ring has positive characteristic $N$ (take $N=1$ for the zero ring), so every underlying abelian sheaf of an $A$-module is killed by $N$. For a family $(M_s)$, its sum is the filtered colimit of $M_J=\\bigoplus_{s\\in J}M_s$ over finite subsets $J\\subseteq S$, including the empty subset: a compatible family of maps from the $M_J$ is precisely a family of maps from all the $M_s$. Forgetting coefficients preserves these colimits and is faithful and exact by [lem-weil-pbc-module-sheaves-colimits-forgetful]. The canonical natural derived coefficient comparison [lem-weil-pbc-module-abelian-derived-direct-image-comparison] is invertible and compatible with the degree-zero direct-image identity. Evaluate it on $M[0]$ and take degree-$p$ cohomology. Exact forgetting preserves kernels, images and their quotients, so it identifies the underlying abelian sheaf of $R^pF(M)$ with the abelian higher direct image naturally in $M$. Thus the square between the module and abelian filtered-colimit comparison maps commutes: on the leg indexed by $J$, both composites are the higher direct image of the map $M_J\\to\\bigoplus_s M_s$ under this natural identification; equality on all colimit legs implies equality of the two maps. Apply [lemma-weil-pbc-direct-image-filtered-colimit] to the filtered diagram of these torsion sheaves; $u$ has exactly its qcqs hypotheses. Finite sums commute with $R^pF$: take the finite sum of injective resolutions; it is exact and its terms are injective, since extension of a map into a finite biproduct of injectives is performed in each component. Additivity of $F$ preserves this finite biproduct, and kernels and images of its componentwise differential are the finite sums of the kernels and images. Therefore $R^pF(M_J)=\\bigoplus_{s\\in J}R^pF(M_s)$, with the identifications respecting the inclusions of finite subsets. The filtered comparison gives, after forgetting, the canonical isomorphism $\\bigoplus_s R^pF(M_s)\\xrightarrow{\\sim}R^pF(\\bigoplus_s M_s)$ for every $p\\geq0$. These maps are $A$-linear. Faithful exact forgetting reflects their invertibility: its vanishing kernels and cokernels imply zero module kernels and cokernels. Thus these are isomorphisms of module sheaves. The natural identification $R^0F\\cong F$ is [lem-sp-derived-well-defined]. In particular the $p=0$ case says $F$ commutes with arbitrary sums of sheaves.",
    "uses": [
-    "lemma-weil-pbc-direct-image-filtered-colimit"
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "lemma-weil-pbc-direct-image-filtered-colimit",
+    "def-sp-left-exact-additive",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-sp-derived-well-defined"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F11, lemma-finite-cd-mod-n-direct-sums, proof of (1), adapted from Z/nZ to finite constant A using the stated module cohomological-dimension hypothesis"
+   }
   },
   {
-   "text": "Use a functorial Godement resolution in the etale topos, and truncate\nit after degree $c$, retaining the cokernel in that degree.\nGodement terms are acyclic for direct image. Dimension shifting gives\n$R^pu_*C^c(M)=R^{p+c}u_*M=0$ for $p>0$, so the last term is\nalso acyclic. The resolution functors and their successive cokernel\nfunctors are exact. Applied degreewise to an arbitrary complex, this\nfinite-length resolution computes its derived direct image: resolving\nagain by injectives verifies the comparison, and the horizontal\nresolution has only $c+1$ columns. Thus the hypercohomology\nspectral sequence\n\n$$\nR^pu_*\\mathcal H^q(K)\\Longrightarrow\n\\mathcal H^{p+q}(Ru_*K),\\qquad 0\\leq p\\leq c,\n$$\n\nhas a finite filtration in each total degree, also for unbounded $K$.\nThis is a finite-width double-complex calculation in the ordinary\nderived categories of [def-weil-pbc-derived-categories].",
+   "text": "Let $(K_s)_{s\\in S}$ be any family in $D(\\mathcal A)$. Choose complex representatives $C_s$ and apply [lem-pur-kinjective-degreewise-existence] in the Grothendieck category $\\mathcal A$ to obtain quasi-isomorphisms $C_s\\to I_s$, where every $I_s$ is K-injective and every term $I_s^r$ is injective. Let $L=\\bigoplus_s I_s$ be the termwise sum, with differential induced by the differentials of the $I_s$. By [lem-kun-grothendieck-derived-coproducts], $Q_{\\mathcal A}L$ with the localized coprojections is the coproduct of the $K_s$. This result applies to arbitrary unbounded complexes and every set in the chosen indexing universe; no common lower bound on the $K_s$ is needed.",
    "uses": [
-    "def-weil-pbc-derived-categories"
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-kun-grothendieck-derived-coproducts"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F11, lemma-finite-cd-mod-n-direct-sums, proof of (1), adapted from Z/nZ to finite constant A using the stated module cohomological-dimension hypothesis"
+   }
   },
   {
-   "text": "For a family $(K_s)$, coproducts of module sheaves are exact, so\n$\\mathcal H^q(\\bigoplus_s K_s)=\\bigoplus_s\\mathcal H^q(K_s)$.\nThe canonical map $\\bigoplus_s Ru_*K_s\\to Ru_*(\\bigoplus_s K_s)$\nis an isomorphism on the displayed spectral-sequence entries by the\nfirst paragraph. It is consequently an isomorphism on the abutment,\nby induction along its finite filtration, in every degree. It is\ntherefore an isomorphism in the derived category.",
-   "uses": [],
-   "elementary": null
+   "text": "By [lem-weil-pbc-derived-functor-injective-vanishing], $R^pF(I_s^r)=0$ for every $p>0$, since $I_s^r$ is injective and $\\mathcal A$ has enough injectives. Step 1 now gives $R^pF(L^r)\\cong\\bigoplus_sR^pF(I_s^r)=0$ for every $r\\in\\mathbf Z$ and $p>0$. Thus both $I_s$ and $L$ have $F$-acyclic terms. Apply [lem-kun-finite-cd-acyclic-complex] to $F$ with $d=c$: its source is Grothendieck, its target abelian, $F$ additive and left exact, and the required uniform vanishing is precisely the hypothesis of the item. It supplies the unbounded $RF=Ru_*$ and isomorphisms $\\alpha_{I_s}:Q_{\\mathcal B}(F I_s)\\xrightarrow{\\sim}RF(Q_{\\mathcal A}I_s)$ and $\\alpha_L:Q_{\\mathcal B}(F L)\\xrightarrow{\\sim}RF(Q_{\\mathcal A}L)$. For each coprojection $\\iota_s:I_s\\to L$, naturality gives $RF(Q_{\\mathcal A}\\iota_s)\\circ\\alpha_{I_s}=\\alpha_L\\circ Q_{\\mathcal B}(F\\iota_s)$. Hence these identifications preserve the coprojection maps, not just the objects.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-injective-vanishing",
+    "lem-kun-finite-cd-acyclic-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07K7, lemma-unbounded-right-derived, (1)-(2), with n=c+1; injective vanishing is Tag 015B, lemma-higher-derived-functors (3)"
+   }
+  },
+  {
+   "text": "Use the $p=0$ comparison of Step 1 on $(I_s^r)_s$ in every degree $r$. It gives a canonical isomorphism $\\beta^r:\\bigoplus_s F(I_s^r)\\xrightarrow{\\sim}F(L^r)$. Each component restricted to the $s$th summand is $F(\\iota_s^r)$. The chain-map equation for $\\iota_s$ implies $F(d_L^r)F(\\iota_s^r)=F(\\iota_s^{r+1})F(d_{I_s}^r)$. Maps out of a coproduct are determined by these restrictions, so the $\\beta^r$ commute with differentials and form a complex isomorphism $\\beta:\\bigoplus_s FI_s\\xrightarrow{\\sim}FL$. The target category $\\mathcal B$ is Grothendieck by Step 1, so [lem-kun-grothendieck-derived-coproducts] says $Q_{\\mathcal B}(\\bigoplus_s FI_s)$, with the localized termwise legs, is the derived coproduct of the $Q_{\\mathcal B}(FI_s)$. Localizing $\\beta$ gives an isomorphism to $Q_{\\mathcal B}(FL)$. Under the comparison isomorphisms of Step 3, its restriction to each summand is $RF$ of that summand's coprojection. It is therefore exactly the canonical map $\\bigoplus_s Ru_*K_s\\to Ru_*(\\bigoplus_sK_s)$, by the coproduct universal property, and is invertible. For the empty family the same construction uses the zero complex and the degreewise zero-to-zero comparison, so it proves that case too.",
+   "uses": [
+    "lem-kun-grothendieck-derived-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F11, lemma-finite-cd-mod-n-direct-sums, proof of (1), adapted from Z/nZ to finite constant A using the stated module cohomological-dimension hypothesis"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
   "lemma-weil-pbc-direct-image-filtered-colimit",
-  "def-weil-pbc-derived-categories"
+  "def-sp-left-exact-additive",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sp-derived-well-defined",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "lem-kun-finite-cd-acyclic-complex"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-exc-direct-image-coproducts.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F11, lemma-finite-cd-mod-n-direct-sums, proof of (1); same acyclic-term route adapted to finite A and the given bound c, with comparison naturality made explicit"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite cohomological dimension derived direct image preserves arbitrary coproducts",
+   "results": "; 8 hits: HomologicalComplex.ab5OfSize, CategoryTheory.Functor.preservesFiniteColimits_tfae, Condensed.instAB5CondensedMod, HomologicalComplex.isGrothendieckAbelian, CategoryTheory.instPreservesFiniteColimitsSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreadditiveOfHasFiniteColimits, CategoryTheory.preservesFiniteColimits_preadditiveYonedaObj_of_injective, CategoryTheory.Abelian.IsGrothendieckAbelian.OppositeModuleEmbedding.preservesFiniteColimits_embedding, CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state derived coproduct preservation under finite cohomological dimension"
+  },
+  {
+   "tool": "loogle",
+   "query": "Derived direct image coproduct",
+   "results": "loogle: Unknown identifier `Derived`; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "query rejected (unknown identifier); not evidence of absence, corrected by the second Loogle query"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|direct image.*coproduct",
+   "results": "; 0 hits: ; subdirectory Mathlib",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state derived coproduct preservation under finite cohomological dimension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite cohomological dimension derived direct image preserves arbitrary coproducts",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functor of a left exact functor with bounded cohomological dimension commutes with direct sums of unbounded complexes",
+   "results": "; 8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state derived coproduct preservation under finite cohomological dimension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"PreservesColimits\"",
+   "results": "; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state derived coproduct preservation under finite cohomological dimension"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|cohomologicalDimension|hypercohomology|preserves.*[Cc]oproduct",
+   "results": "; 2 hits: Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean; subdirectory Algebra/Homology",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state derived coproduct preservation under finite cohomological dimension"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -77,5 +174,74 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-exc-direct-image-coproducts",
+  "worker": "stage1",
+  "summary": "Replaced the unsupported Godement/spectral-sequence paragraph with the Stacks 0F11 acyclic-term argument. Reused existing 07K7, 079P and 07D9 nodes, supplied module-to-abelian comparisons, and identified the canonical coproduct map by comparison naturality. Clarified the commutative coefficient-ring typing and the unbounded derived categories. No new nodes.",
+  "blueprint": "Realizes paragraph 1 (sheaf coproducts), replaces paragraph 2 (unbounded computation) by existing finite-cd acyclic computation, and realizes paragraph 3 (canonical derived coproduct comparison) by a degreewise complex isomorphism. The unit has no proof steps to replace; this is a node-level route correction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic sheaf or homological algebra infrastructure supplying the statement used in the proof; this unit has no corresponding standalone lemma."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "Generic sheaf or homological algebra infrastructure supplying the statement used in the proof; this unit has no corresponding standalone lemma."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic sheaf or homological algebra infrastructure supplying the statement used in the proof; this unit has no corresponding standalone lemma."
+   },
+   {
+    "node": "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "why": "Canonical natural coefficient-forgetting comparison; taking cohomology with exact forgetting identifies the canonical higher-image colimit maps, rather than merely the objects."
+   },
+   {
+    "node": "lemma-weil-pbc-direct-image-filtered-colimit",
+    "why": "Generic qcqs torsion higher-direct-image colimit tool already named in the blueprint."
+   },
+   {
+    "node": "lem-pur-kinjective-degreewise-existence",
+    "why": "General Grothendieck replacement gives injective terms; plain K-injectivity alone would not give this."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "General derived localization coproduct representation identifies both termwise sums."
+   },
+   {
+    "node": "lem-kun-finite-cd-acyclic-complex",
+    "why": "General finite-dimensional unbounded acyclic-complex computation supplies the missing justification, rather than a coproduct theorem."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic enough-injectives and right-derived well-definedness infrastructure; supplies the injective resolutions and natural R^0F=F identification in Step 1, absent as separate facts in this unit."
+   },
+   {
+    "node": "lem-sp-derived-well-defined",
+    "why": "Generic enough-injectives and right-derived well-definedness infrastructure; supplies the injective resolutions and natural R^0F=F identification in Step 1, absent as separate facts in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lemma-weil-pbc-direct-image-filtered-colimit",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-kun-finite-cd-acyclic-complex",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sp-derived-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-da458ae52",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-da458ae52 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, source passages and unit/chapter route. Verified all four steps against Stacks 0F11, 09Z1, 03FD, 079P, 07D9 and 07K7, including canonical-map naturality and unbounded edge cases. Checked archived target coefficient categories and base-change morphisms. No new nodes, duplicates, cycles or repairs; accepted tool uses are recorded in review.md."
+ }
 }
