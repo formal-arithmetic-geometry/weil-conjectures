@@ -3,27 +3,28 @@
  "blueprint": {
   "is": "def-cbc-compact-support-square",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Compact-support base-change square",
- "statement": "Let $S$ be a scheme and let\n\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{g'}&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{g}&Y\n\\end{array}\n$$\n\nbe a cartesian square of\n$S$-schemes with $f:X\\to Y$\nseparated and of finite\ntype; no hypothesis on $g$ is made. A\n*compactification of $f$* is a factorization\n\n$$\nX\\xrightarrow{\\ j\\ }\\overline X\\xrightarrow{\\ p\\ }Y\n$$\n\nwith $j$ an open immersion and $p$ a\nproper $S$-morphism and\n$pj=f$, as in\n[def-weil-compactifications-refinements]; write\n$c=(j,p)$. For the base change $g:Y'\\to Y$, put\n\n$$\n\\overline X'=\\overline X\\times_YY',\\qquad\nX'=X\\times_YY'\n$$\n\nwith the projections $\\bar g':\\overline X'\\to\\overline X$,\n$p':\\overline X'\\to Y'$, $j':X'\\hookrightarrow\\overline X'$\n(the base change of the open immersion), and\n$g':X'\\to X$; by the base-change stability in\n[thm-nagata-compactification] the data $c'=(j',p')$ form a\ncompactification of $f'$.",
+ "statement": "Let $S$ be a scheme and let\n\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{g'}&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{g}&Y\n\\end{array}\n$$\n\nbe a cartesian square of\n$S$-schemes with $f:X\\to Y$\nseparated and of finite\ntype; no hypothesis on $g$ is made. A\n*compactification of $f$* is a factorization\n\n$$\nX\\xrightarrow{\\ j\\ }\\overline X\\xrightarrow{\\ p\\ }Y\n$$\n\nwith $j$ an open immersion and $p$ a\nproper $S$-morphism and\n$pj=f$, as in\n[def-weil-compactifications-refinements]; write\n$c=(j,p)$. For the base change $g:Y'\\to Y$, put\n\n$$\n\\overline X'=\\overline X\\times_YY',\\qquad\nX'=X\\times_YY'\n$$\n\nwith the projections $\\bar g':\\overline X'\\to\\overline X$,\n$p':\\overline X'\\to Y'$, $j':X'\\hookrightarrow\\overline X'$\n(the base change of the open immersion), and\n$g':X'\\to X$; by base-change stability of open immersions and proper morphisms\n[lem-weil-pbc-open-immersion-base-change, lem-weil-pbc-proper-base-change] the data $c'=(j',p')$ form a\ncompactification of $f'$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/def-cbc-compact-support-square.md",
   "place": "node def-cbc-compact-support-square, order 1527"
  },
  "stmt_deps": [
   "def-weil-compactifications-refinements",
-  "thm-nagata-compactification",
   "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-base-change"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -51,5 +52,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-cbc-compact-support-square",
+  "worker": "stage1",
+  "summary": "Audited the compact-support square definition against its blueprint source. No Lean declaration or existing exact attachment was found. The definition itself needs no proof nodes; its final assertion that the pulled-back factorization is a compactification is supported by the existing base-change leaves for open immersions and proper morphisms, so the inaccurate citation to Nagata existence was replaced by those precise dependencies. The cartesian-square and compactification notions remain cited as statement dependencies. Mathlib searches found only general base-change stability declarations, which are already represented by the cited leaves.",
+  "blueprint": "The item realizes the blueprint final paragraph defining the pullback compactification and asserting c′ is a compactification by stability under base change."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-b0f01d116",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-b0f01d116 (reviewer sub-agent of L); spot-checked: Reviewed the item, unit/chapter route, master source, all five cited node statements and sources, edge cases, DAG integrity, and archived target morphism/coefficient categories. The corrected open/proper base-change citations are exact; no new nodes, proof steps, cycles, or statement faults."
+ }
 }
