@@ -14638,3 +14638,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:32 L: merged deliver/U2/Sheaf.AlgebraicGeometry.AffineModelComparisonDataFromHomEquations (stage 3; reviewer PASS; first push; landing 20261014T053242-L-2011157 (proof); batch 20261014T053238; modules 1; new nodes 0)
 - 05:32 L: merged deliver/U4/Sheaf.AlgebraicGeometry.FlatTelescopeArrowDiagram (stage 3; reviewer PASS; first push; landing 20261014T053242-L-2011354 (interface); batch 20261014T053238; modules 2; new nodes 2)
 - 05:32 L: merged deliver/X2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (stage 3; reviewer PASS; first push; landing 20261014T053242-L-2011525 (proof); batch 20261014T053238; modules 1; new nodes 0)
+- 05:32 L: merged deliver/X2/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T053243-L-2011627 (proof); batch 20261014T053238; modules 1; new nodes 0)

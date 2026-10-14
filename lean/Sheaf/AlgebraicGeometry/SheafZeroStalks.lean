@@ -72,3 +72,6 @@ This compatibility module intentionally contains no declarations after duplicate
 
 -- Verification (V4, 2026-10-14): zero declarations or proof holes remain after the prior repair.
 -- The compatibility module compiles cleanly; this adds no mathematical proof progress.
+
+-- Second reading (X2, 2026-10-14): repository comparison and local compilation are clean;
+-- this declaration-free compatibility module has no theorem statements or proof holes.
