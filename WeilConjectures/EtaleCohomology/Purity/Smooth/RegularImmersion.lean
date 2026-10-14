@@ -60,12 +60,18 @@ supported localization triangle; for the closed immersion `i` it is `Ri_*`. The 
   `isLocallyConstantSheaf_homology_zero_rightDerivedUpperShriek_of_isRegularImmersion`,
   `exists_cover_nonempty_iso_homology_zero_rightDerivedUpperShriek_of_isRegularImmersion`:
   clause (a).
-- `AlgebraicGeometry.Etale.existsUnique_fundamentalClass`,
-  `AlgebraicGeometry.Etale.isIso_homology_zero_map_fundamentalClassMap`: clause (b).
-- `AlgebraicGeometry.Etale.isIso_fundamentalClassMap`,
-  `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_of_isRegularImmersion`: clause (c).
-- `AlgebraicGeometry.Etale.restrictSupportedClass_fundamentalClass`,
-  `AlgebraicGeometry.Etale.fundamentalClass_eq_cupWithSupportsTateObject`: clause (d).
+- `AlgebraicGeometry.Etale.existsUnique_fundamentalClass`: clause (b), existence and uniqueness
+  of the fundamental class.
+- `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_of_isRegularImmersion`: Steps 1–2,
+  `Ri^! Λ_X ≅ Λ_Z(-c)[-2c]`.
+- `AlgebraicGeometry.Etale.restrictSupportedClass_fundamentalClass`: clause (d), étale base
+  change.
+
+The generation clause (b) and clause (c), `cl_i` is an isomorphism, are in
+`WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionIso`; flat base change and the
+exterior products of clause (d) are in
+`WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionBaseChange` and
+`WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionProduct`.
 -/
 
 @[expose] public section
@@ -115,6 +121,64 @@ structure EtaleFrame (c : ℕ) (i : Z ⟶ X) where
 
 attribute [instance] EtaleFrame.etale
 
+/-- The Zariski frame of a closed immersion `i : Z ⟶ X` given by functions `f₁, …, f_c` on an
+affine open `U` of `X` generating the ideal of `Z ∩ U`: the étale map is the inclusion of `U`,
+and `V(f₁, …, f_c) ⊆ U` is identified with `Z ∩ U`. -/
+noncomputable def EtaleFrame.ofSpanEq {c : ℕ} (i : Z ⟶ X) [IsClosedImmersion i]
+    (U : X.affineOpens) (f : Fin c → Γ(X, U.1))
+    (hf : Ideal.span (Set.range f) = (Scheme.Hom.ker i).ideal U) : i.EtaleFrame c :=
+  have hker : (i ∣_ U.1).ker = (U.1.toScheme.zeroLocusSubschemeι
+      (Set.range fun a ↦ U.1.topIso.inv (f a))).ker := by
+    have : IsAffine U.1.toScheme := U.2
+    rw [IdealSheafData.ker_subschemeι]
+    refine IdealSheafData.ext_of_isAffine ?_
+    rw [IdealSheafData.ideal_top_ofIdealTop, ker_morphismRestrict_ideal,
+      ← IdealSheafData.map_ideal' i.ker (U := ⟨_, _⟩) (V := U)
+        (eqToHom U.1.ι_image_top).op, ← hf, Ideal.map_span]
+    congr 1
+    ext x
+    simp only [Set.mem_image, Set.mem_range]
+    constructor
+    · rintro ⟨_, ⟨a, rfl⟩, rfl⟩
+      exact ⟨a, by simp [Scheme.Opens.topIso]; rfl⟩
+    · rintro ⟨a, rfl⟩
+      exact ⟨f a, ⟨a, rfl⟩, by simp [Scheme.Opens.topIso]; rfl⟩
+  let φ := IsClosedImmersion.lift (U.1.toScheme.zeroLocusSubschemeι
+    (Set.range fun a ↦ U.1.topIso.inv (f a))) (i ∣_ U.1) hker.ge
+  have hφ : φ ≫ U.1.toScheme.zeroLocusSubschemeι (Set.range fun a ↦ U.1.topIso.inv (f a)) =
+      i ∣_ U.1 :=
+    IsClosedImmersion.lift_fac _ _ _
+  have : IsIso φ := IsClosedImmersion.isIso_of_ker_eq _ _ φ hφ hker
+  { U := U.1.toScheme
+    e := U.1.ι
+    etale := inferInstance
+    f a := U.1.topIso.inv (f a)
+    toZ := inv φ ≫ (i ⁻¹ᵁ U.1).ι
+    isPullback := by
+      refine IsPullback.of_iso (isPullback_morphismRestrict i U.1).flip (asIso φ) (Iso.refl _)
+        (Iso.refl _) (Iso.refl _) ?_ ?_ ?_ ?_ <;> simp [hφ] }
+
+instance EtaleFrame.isOpenImmersion_ofSpanEq {c : ℕ} (i : Z ⟶ X) [IsClosedImmersion i]
+    (U : X.affineOpens) (f : Fin c → Γ(X, U.1))
+    (hf : Ideal.span (Set.range f) = (Scheme.Hom.ker i).ideal U) :
+    IsOpenImmersion (EtaleFrame.ofSpanEq i U f hf).e :=
+  inferInstanceAs (IsOpenImmersion U.1.ι)
+
+instance EtaleFrame.isAffine_ofSpanEq {c : ℕ} (i : Z ⟶ X) [IsClosedImmersion i]
+    (U : X.affineOpens) (f : Fin c → Γ(X, U.1))
+    (hf : Ideal.span (Set.range f) = (Scheme.Hom.ker i).ideal U) :
+    IsAffine (EtaleFrame.ofSpanEq i U f hf).U :=
+  U.2
+
+/-- The points of `Z ∩ U` lie in the zero locus of the frame `EtaleFrame.ofSpanEq`. -/
+lemma EtaleFrame.mem_range_ofSpanEq_toZ {c : ℕ} (i : Z ⟶ X) [IsClosedImmersion i]
+    (U : X.affineOpens) (f : Fin c → Γ(X, U.1))
+    (hf : Ideal.span (Set.range f) = (Scheme.Hom.ker i).ideal U) {z : Z} (hz : i.base z ∈ U.1) :
+    z ∈ Set.range (EtaleFrame.ofSpanEq i U f hf).toZ := by
+  obtain ⟨p, hp⟩ : i.base z ∈ Set.range U.1.ι.base := by rw [Scheme.Opens.range_ι]; exact hz
+  obtain ⟨q, hq, -⟩ := (EtaleFrame.ofSpanEq i U f hf).isPullback.exists_scheme_point z p hp.symm
+  exact ⟨q, hq⟩
+
 /-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
 
 *Frames exist Zariski-locally.* Every point of `Z` lies in the zero locus of a frame of a regular
@@ -126,49 +190,26 @@ theorem exists_etaleFrame_isOpenImmersion (c : ℕ) (i : Z ⟶ X)
       RingTheory.Sequence.IsWeaklyRegular Γ(F.U, ⊤) (List.ofFn F.f) := by
   obtain ⟨U, hzU, r, hr, hreg, hI⟩ :=
     IsRegularImmersion.exists_isWeaklyRegular_generators (c := c) (i := i) (i z)
-  have : IsAffine U.1.toScheme := U.2
-  let f : Fin c → Γ(U.1.toScheme, ⊤) := fun a ↦ U.1.topIso.inv (r.get (a.cast hr.symm))
-  -- the sections `f` cut out `Z ∩ U`
-  have hker : (i ∣_ U.1).ker = (U.1.toScheme.zeroLocusSubschemeι (Set.range f)).ker := by
-    rw [IdealSheafData.ker_subschemeι]
-    refine IdealSheafData.ext_of_isAffine ?_
-    rw [IdealSheafData.ideal_top_ofIdealTop, ker_morphismRestrict_ideal,
-      ← IdealSheafData.map_ideal' i.ker (U := ⟨_, _⟩) (V := U)
-        (eqToHom U.1.ι_image_top).op, ← hI, Ideal.ofList, Ideal.map_span]
+  let f : Fin c → Γ(X, U.1) := fun a ↦ r.get (a.cast hr.symm)
+  have hf : Ideal.span (Set.range f) = (Scheme.Hom.ker i).ideal U := by
+    rw [← hI, Ideal.ofList]
     congr 1
     ext x
-    simp only [Set.mem_image, Set.mem_ofPred_eq, Set.mem_range, f]
+    simp only [Set.mem_range, Set.mem_ofPred_eq, f]
     constructor
-    · rintro ⟨y, hy, rfl⟩
-      obtain ⟨a, rfl⟩ := List.mem_iff_get.mp hy
-      exact ⟨a.cast hr, by simp [Scheme.Opens.topIso]; rfl⟩
     · rintro ⟨a, rfl⟩
-      exact ⟨r.get (a.cast hr.symm), List.get_mem _ _, by simp [Scheme.Opens.topIso]; rfl⟩
-  let φ := IsClosedImmersion.lift (U.1.toScheme.zeroLocusSubschemeι (Set.range f)) (i ∣_ U.1)
-    hker.ge
-  have hφ : φ ≫ U.1.toScheme.zeroLocusSubschemeι (Set.range f) = i ∣_ U.1 :=
-    IsClosedImmersion.lift_fac _ _ _
-  have : IsIso φ := IsClosedImmersion.isIso_of_ker_eq _ _ φ hφ hker
-  let F : i.EtaleFrame c :=
-    { U := U.1.toScheme
-      e := U.1.ι
-      etale := inferInstance
-      f := f
-      toZ := inv φ ≫ (i ⁻¹ᵁ U.1).ι
-      isPullback := by
-        refine IsPullback.of_iso (isPullback_morphismRestrict i U.1).flip (asIso φ) (Iso.refl _)
-          (Iso.refl _) (Iso.refl _) ?_ ?_ ?_ ?_ <;> simp [hφ] }
-  have hreg' : RingTheory.Sequence.IsWeaklyRegular Γ(U.1.toScheme, ⊤) (List.ofFn f) := by
-    have hf : List.ofFn f = r.map U.1.topIso.inv.hom := by
-      refine List.ext_get (by simp [hr]) fun n h₁ h₂ ↦ ?_
-      simp [f]
-    rw [hf]
-    exact hreg.map_of_flat (RingHom.Flat.of_bijective
-      (ConcreteCategory.bijective_of_isIso U.1.topIso.inv))
-  refine ⟨F, inferInstanceAs (IsOpenImmersion U.1.ι), ⟨φ ⟨z, hzU⟩, ?_⟩, ‹_›, hreg'⟩
-  change (inv φ ≫ (i ⁻¹ᵁ U.1).ι) (φ ⟨z, hzU⟩) = z
-  rw [← Scheme.Hom.comp_apply, ← Category.assoc, IsIso.hom_inv_id, Category.id_comp]
-  rfl
+      exact List.get_mem _ _
+    · intro hx
+      obtain ⟨a, rfl⟩ := List.mem_iff_get.mp hx
+      exact ⟨a.cast hr, rfl⟩
+  refine ⟨EtaleFrame.ofSpanEq i U f hf, inferInstance,
+    EtaleFrame.mem_range_ofSpanEq_toZ i U f hf hzU, inferInstance, ?_⟩
+  have hf' : List.ofFn (EtaleFrame.ofSpanEq i U f hf).f = r.map U.1.topIso.inv.hom := by
+    refine List.ext_get (by simp [hr]) fun n h₁ h₂ ↦ ?_
+    simp [EtaleFrame.ofSpanEq, f]
+  rw [hf']
+  exact hreg.map_of_flat (RingHom.Flat.of_bijective
+    (ConcreteCategory.bijective_of_isIso U.1.topIso.inv))
 
 /-- A frame of the base change `i'` of `i` along an étale `e` is a frame of `i`, through the
 composite étale map. -/
@@ -207,6 +248,8 @@ section Purity
 variable [Finite Λ]
 
 /-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+
+Blueprint `thm-pur-regular-immersion-purity` (the detailed form of the same theorem).
 
 **Purity for a regular closed immersion.** Let `i : Z ⟶ X` be a regular closed immersion of
 pure codimension `c`, with `X` smooth of relative dimension `n` over a perfect field `k` and
@@ -960,30 +1003,6 @@ noncomputable def fundamentalClassMap (aX : X ⟶ Spec (.of k)) [Smooth aX]
 
 /-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
 
-**(b) The fundamental class generates.** `[Z ⊂ X]` generates `𝓗⁰(Ri^! Λ_X(c)[2c])` at every
-geometric point: the map of sheaves `Λ_Z ⟶ 𝓗⁰(Ri^! Λ_X(c)[2c])` induced by `cl_i` is an
-isomorphism. -/
-theorem isIso_homology_zero_map_fundamentalClassMap (aX : X ⟶ Spec (.of k)) [Smooth aX]
-    (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
-    IsIso ((_root_.DerivedCategory.homologyFunctor _ 0).map (fundamentalClassMap Λ c i aX hZ)) :=
-  sorry
-
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
-
-**(c) `cl_i` is an isomorphism**, `cl_i : Λ_Z ≅ Ri^! (Λ_X(c)[2c])`, `1 ↦ [Z ⊂ X]`.
-
-It equals the isomorphism `Φ_i` assembled from smooth purity of `a_X` and `a_Z` in Steps 1–2
-of the proof (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_of_isRegularImmersion`).
-That isomorphism is so far recorded only as `Nonempty`, so the agreement is a remark rather
-than a statement. Twisting by `(-c)[-2c]`, the inverse of `cl_i(-c)[-2c]` is the canonical
-isomorphism `Ri^! Λ_X ≅ Λ_Z(-c)[-2c]`. -/
-theorem isIso_fundamentalClassMap (aX : X ⟶ Spec (.of k)) [Smooth aX]
-    (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
-    IsIso (fundamentalClassMap Λ c i aX hZ) :=
-  sorry
-
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
-
 **(d) Étale base change**, `[Z_{X'} ⊂ X'] = [Z ⊂ X]|_{X'}`: for an étale `e : X' ⟶ X` and the
 base change `i' : Z' ⟶ X'` of `i`, the restriction of supports along `e`
 (`AlgebraicGeometry.Etale.restrictSupportedClass`) carries the fundamental class of `i` to that
@@ -1024,50 +1043,6 @@ theorem restrictSupportedClass_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smoot
   exact h
 
 end FundamentalClass
-
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
-
-**(d) Exterior products**,
-`[Z₁ × Z₂ ⊂ X₁ × X₂] = [Z₁ ⊂ X₁] ⊠ [Z₂ ⊂ X₂]`. Let `(X₁, Z₁)` and `(X₂, Z₂)` be pairs as in the
-theorem over the same perfect field `k`, of codimensions `c₁` and `c₂`, let
-`P = X₁ ×_k X₂` with projections `p₁`, `p₂`, let `Z₁ ×_k X₂ ⟶ P` and `X₁ ×_k Z₂ ⟶ P` be the base
-changes of `i₁` and `i₂` along them, and `i₁₂ : Z₁ ×_k Z₂ ⟶ P` the product of `i₁` and `i₂`, the
-closed immersion of their intersection. Then the fundamental class of `i₁₂` is the cup product
-with supports of the restrictions `p₁^* [Z₁ ⊂ X₁]` and `p₂^* [Z₂ ⊂ X₂]`: frames `f` on `U₁` and
-`g` on `U₂` give the frame `(p₁^* f, p₂^* g)` on `U₁ ×_k U₂`, and cup products with supports are
-natural and associative (no signs, all degrees even).
-
-The hypotheses on the product are derived: `i₁₂` is a regular immersion of codimension
-`c₁ + c₂` (`AlgebraicGeometry.IsRegularImmersion.pullback_map`), `Z₁ ×_k Z₂` is regular
-(`AlgebraicGeometry.isRegularLocalRing_stalk_pullback`), `P` is smooth over `k` and the exponent
-of `Λ` is invertible on `P`. -/
-theorem fundamentalClass_eq_cupWithSupportsTateObject [Finite Λ] [HasKummerClass Λ]
-    [HasKummerClass.IsNormalized Λ] {k : Type u} [Field k] [PerfectField k]
-    {X₁ X₂ Z₁ Z₂ : Scheme.{u}} (c₁ c₂ : ℕ)
-    (i₁ : Z₁ ⟶ X₁) (i₂ : Z₂ ⟶ X₂) [IsRegularImmersion c₁ i₁] [IsRegularImmersion c₂ i₂]
-    (a₁ : X₁ ⟶ Spec (.of k)) (a₂ : X₂ ⟶ Spec (.of k)) [Smooth a₁] [Smooth a₂]
-    [HasInvertibleExponent Λ X₁] [HasInvertibleExponent Λ X₂]
-    (hZ₁ : ∀ z : Z₁, IsRegularLocalRing (Z₁.presheaf.stalk z))
-    (hZ₂ : ∀ z : Z₂, IsRegularLocalRing (Z₂.presheaf.stalk z)) :
-    haveI := IsRegularImmersion.pullback_map c₁ c₂ i₁ i₂ a₁ a₂
-    haveI : HasInvertibleExponent Λ (pullback a₁ a₂) := .of_hom (pullback.fst a₁ a₂)
-    fundamentalClass Λ (c₁ + c₂) (pullback.map (i₁ ≫ a₁) (i₂ ≫ a₂) a₁ a₂ i₁ i₂ (𝟙 _)
-        (by simp) (by simp)) (pullback.fst a₁ a₂ ≫ a₁)
-        (isRegularLocalRing_stalk_pullback (i₁ ≫ a₁) (i₂ ≫ a₂) hZ₁ hZ₂) =
-      cupWithSupportsTateObject Λ (pullback.snd i₁ (pullback.fst a₁ a₂))
-        (pullback.snd i₂ (pullback.snd a₁ a₂))
-        (pullback.map (i₁ ≫ a₁) (i₂ ≫ a₂) a₁ a₂ i₁ i₂ (𝟙 _) (by simp) (by simp))
-        (Scheme.Pullback.range_map_eq_inter _ _ _ _ _ _ _)
-        (restrictSupportedClass (ModuleCat.{u + 1} Λ) (pullback.fst a₁ a₂) i₁ _ _
-          (IsPullback.of_hasPullback _ _)
-          (leftDerivedUpperStarConstantComplexIso Λ _).inv
-          (leftDerivedUpperStarTateShiftIso Λ _ c₁) (fundamentalClass Λ c₁ i₁ a₁ hZ₁))
-        (restrictSupportedClass (ModuleCat.{u + 1} Λ) (pullback.snd a₁ a₂) i₂ _ _
-          (IsPullback.of_hasPullback _ _)
-          (leftDerivedUpperStarConstantComplexIso Λ _).inv
-          (leftDerivedUpperStarTateShiftIso Λ _ c₂) (fundamentalClass Λ c₂ i₂ a₂ hZ₂)) ≫
-        eqToHom (by rw [Nat.cast_add]) :=
-  sorry
 
 end Etale
 

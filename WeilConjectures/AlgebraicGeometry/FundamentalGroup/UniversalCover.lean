@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import Mathlib.CategoryTheory.Galois.Topology
-public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PathTransport
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.UniversalCoverConstruction
 
 /-!
 # Universal profinite étale covers
@@ -69,7 +69,7 @@ structure UniversalCovers where
   pt_proj (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) : pt y ≫ proj y = y
   connectedSpace (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) : ConnectedSpace (cover y)
   surjective_proj (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) : Function.Surjective (proj y).base
-  /-- The projection `Ỹ_y ⟶ Y` is quasi-compact (it is affine). -/
+  /-- The projection `Ỹ_y ⟶ Y` is quasi-compact (`Ỹ_y` is affine over `Y`). -/
   quasiCompact_proj (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) : QuasiCompact (proj y)
   /-- Every finite étale `Y`-scheme splits over `Ỹ_y`: its `Y`-morphisms from `Ỹ_y` are the
   points of the fibre at `y`, through `ỹ`. -/
@@ -112,9 +112,30 @@ structure UniversalCovers where
       (pt y ≫ (transport g).hom)
       (by rw [Category.assoc, transport_proj])).base x
 
-/-- **Existence of universal profinite étale covers** over a connected scheme: the limits
-`Ỹ_y = lim A` over the pointed Galois finite étale `Y`-schemes. -/
-theorem nonempty_universalCovers [ConnectedSpace Y] : Nonempty (UniversalCovers Y Ω) := by
-  sorry
+/-- **Existence of universal profinite étale covers** over a connected quasi-compact
+quasi-separated scheme: the limits `Ỹ_y = lim A` over the pointed Galois finite étale `Y`-schemes
+(`AlgebraicGeometry.Scheme.UniversalCover.cover`). -/
+theorem nonempty_universalCovers [ConnectedSpace Y] [CompactSpace Y] [QuasiSeparatedSpace Y] :
+    Nonempty (UniversalCovers Y Ω) :=
+  ⟨{ cover := UniversalCover.cover
+     proj := UniversalCover.proj
+     weaklyEtale_proj := UniversalCover.weaklyEtale_proj
+     pt := UniversalCover.pt
+     pt_proj := UniversalCover.pt_proj
+     connectedSpace y := UniversalCover.connectedSpace_cover y
+     surjective_proj := UniversalCover.surjective_proj
+     quasiCompact_proj := UniversalCover.quasiCompact_proj
+     bijective_fiber y P := UniversalCover.bijective_fiber y P
+     transport := UniversalCover.transport
+     transport_proj τ := UniversalCover.transportHom_proj τ
+     transport_refl := UniversalCover.transport_refl
+     transport_trans := UniversalCover.transport_trans
+     pt_transport_reparam := UniversalCover.pt_transport_reparam
+     map := UniversalCover.map
+     map_proj := UniversalCover.map_proj
+     pt_map := UniversalCover.pt_map
+     map_transport := UniversalCover.map_transport
+     exists_graph y q := UniversalCover.exists_graph y q
+     continuous_graph y x := UniversalCover.continuous_graph y x }⟩
 
 end AlgebraicGeometry.Scheme
