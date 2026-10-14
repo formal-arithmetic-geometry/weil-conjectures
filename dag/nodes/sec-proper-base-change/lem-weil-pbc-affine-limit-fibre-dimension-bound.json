@@ -18,7 +18,7 @@
  },
  "kind": "statement",
  "title": "Fibre dimension bounds descend in affine inverse systems",
- "statement": "Let $I$ be a small nonempty directed partially ordered set. Let $(A_i)$ and $(C_i)$ be directed systems of commutative rings and let $A_i\\to C_i$ be compatible ring homomorphisms, each of finite type [def-weil-pbc-finite-type-algebra]. For every $i\\le j$ assume that the canonical map $A_j\\otimes_{A_i}C_i\\to C_j$ is surjective; the tensor product is the pushout of commutative algebras [lem-weil-pbc-fibre-product-affine-spectra]. Let $A=\\varinjlim_iA_i$ and $C=\\varinjlim_iC_i$, with the induced map $A\\to C$ [def-weil-pbc-category-colimit]. Fix an integer $d\\ge0$. For a prime $\\mathfrak p$ of $A$ let $\\kappa(\\mathfrak p)$ be its residue field [def-weil-pbc-localization-at-prime]. Suppose that for every such $\\mathfrak p$ the topological Krull dimension [def-kun-topological-krull-dimension] of $\\operatorname{Spec}(C\\otimes_A\\kappa(\\mathfrak p))$ [def-weil-affine-spectrum] is at most $d$. Then there is $i\\in I$ such that, for every prime $\\mathfrak p_i$ of $A_i$, the dimension of $\\operatorname{Spec}(C_i\\otimes_{A_i}\\kappa(\\mathfrak p_i))$ is at most $d$. Empty spectra have dimension $-\\infty$ and are allowed.",
+ "statement": "Let $I$ be a small nonempty directed partially ordered set. Let $(A_i)$ and $(C_i)$ be directed systems of commutative rings and let $A_i\\to C_i$ be compatible ring homomorphisms, each of finite type [def-weil-pbc-finite-type-algebra]. For every $i\\le j$ assume that the canonical map $A_j\\otimes_{A_i}C_i\\to C_j$ is surjective; the tensor product is the pushout of commutative algebras [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Let $A=\\varinjlim_iA_i$ and $C=\\varinjlim_iC_i$, with the induced map $A\\to C$ [def-weil-pbc-category-colimit]. Fix an integer $d\\ge0$. For a prime $\\mathfrak p$ of $A$ let $\\kappa(\\mathfrak p)$ be its residue field [def-weil-pbc-localization-at-prime]. Suppose that for every such $\\mathfrak p$ the topological Krull dimension [def-kun-topological-krull-dimension] of $\\operatorname{Spec}(C\\otimes_A\\kappa(\\mathfrak p))$ [def-weil-affine-spectrum] is at most $d$. Then there is $i\\in I$ such that, for every prime $\\mathfrak p_i$ of $A_i$, the dimension of $\\operatorname{Spec}(C_i\\otimes_{A_i}\\kappa(\\mathfrak p_i))$ is at most $d$. Empty spectra have dimension $-\\infty$ and are allowed.",
  "source": {
   "document": "literature/stacks-project/limits.tex",
   "place": "Tag 05M5, label lemma-limit-dimension, affine specialization: surjectivity of the comparison ring maps gives closed immersion comparison morphisms."
@@ -29,11 +29,135 @@
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-localization-at-prime",
   "def-kun-topological-krull-dimension",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $X_i=\\operatorname{Spec}C_i$, $S_i=\\operatorname{Spec}A_i$ and let $f_i$ be induced by $A_i\\to C_i$. Define $U_i$ to be the points whose local topological fibre dimension is at most $d$, and $Z_i=X_i\\setminus U_i$. For each $x_i\\in U_i$, this local dimension is a nonnegative integer $n\\le d$ (the fibre point exists, so its neighbourhoods are nonempty). The ring-theoretic bounded-open-upstairs theorem, applied to $A_i\\to C_i$ at $x_i$ with this $n$, gives an open neighbourhood all of whose points have local fibre dimension at most $n$, hence at most $d$. Thus $U_i$ is open as the union of these neighbourhoods, and $Z_i$ is closed. The affine fibre-product identification and the supremum-of-local-dimensions theorem say that $Z_i$ is empty exactly when every fibre of $f_i$ has dimension at most $d$. Assume for contradiction that every $Z_i$ is nonempty.",
+   "uses": [
+    "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
+    "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05M5 (lemma-limit-dimension), affine proof expanded"
+   }
+  },
+  {
+   "text": "For $j\\ge i$ and $x_j\\in X_j$, write $x_i$ for its image and $s_j=f_j(x_j)$, $s_i=f_i(x_i)$. For a ring map $R\\to T$ carrying a prime $\\mathfrak q$ of $T$ back to $\\mathfrak p$, the induced injection $R/\\mathfrak p\\to T/\\mathfrak q$ extends to their fraction fields by $a/b\\mapsto\\bar a/\\bar b$, since $b\\notin\\mathfrak p$ maps outside $\\mathfrak q$; these are the residue fields. Thus $\\kappa(s_i)\\to\\kappa(s_j)$ is the field map used below. The surjection $A_j\\otimes_{A_i}C_i\\to C_j$, after extending scalars to $\\kappa(s_j)$, identifies $(X_j)_{s_j}$ with a closed subspace of $(X_i)_{s_i}\\times_{\\kappa(s_i)}\\kappa(s_j)$. Surjectivity after tensoring is explicit: a pure tensor $c_j\\otimes\\lambda$ lifts by choosing a preimage of $c_j$, and sums lift termwise. The quotient-spectrum homeomorphism identifies this as a closed embedding. At corresponding points, local dimension in a closed subspace is at most that in the ambient space: choose an ambient open neighbourhood attaining its local dimension; intersect with the closed subspace, and every chain of irreducible closed subsets of the intersection is a chain of irreducible closed subsets of that neighbourhood. Taking the minimum over neighbourhoods gives the inequality. Field-extension invariance of local dimension applies to the finite type $\\kappa(s_i)$-algebra $C_i\\otimes_{A_i}\\kappa(s_i)$ (the images of any finite set of algebra generators still generate). Consequently a point of $Z_j$ maps into $Z_i$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "lem-weil-pbc-dimension-at-point-field-extension",
+    "def-kun-topological-dimension-at-point",
+    "def-kun-topological-krull-dimension",
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05M5 (lemma-limit-dimension), affine proof expanded"
+   }
+  },
+  {
+   "text": "Let $J_i$ be the radical ideal defining the reduced induced structure on $Z_i$, and put $D_i=C_i/J_i$. For $a\\in J_i$ and every prime of $C_j$ belonging to $Z_j$, its contraction belongs to $Z_i$ by step 2, so the image of $a$ lies in that prime. The description of the reduced induced ideal as the intersection of these primes implies that $C_i\\to C_j$ maps $J_i$ into $J_j$. Thus the $D_i$ form a directed ring system. Set $D=\\varinjlim D_i$. The spectrum-colimit theorem identifies $\\operatorname{Spec}D$ with the inverse limit of the nonempty affine schemes $\\operatorname{Spec}D_i$, whose transitions are affine. Each is quasi-compact by quasi-compactness of spectra, so the nonempty-limit theorem supplies a point $z\\in\\operatorname{Spec}D$. The compatible maps $C_i\\to D$ induce $C\\to D$ and hence a point $x\\in\\operatorname{Spec}C$ with images $x_i\\in Z_i$. No factorization from mere set containment of an arbitrary nonreduced scheme is used.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-spec-colimit-limit",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-limit-nonempty",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05M5 (lemma-limit-dimension), affine proof expanded"
+   }
+  },
+  {
+   "text": "Let $s$ be the image of $x$ in $\\operatorname{Spec}A$, let $k=\\kappa(s)$, and let $s_i$ be its image in $S_i$. Fix $i_0\\in I$ and restrict to $i\\ge i_0$, a cofinal directed tail. To extend a compatible cocone from this tail to the whole system, for an arbitrary index $i$ choose $j\\ge i,i_0$ and compose the transition from $i$ to $j$ with its cocone map; a common upper bound of two choices proves independence and compatibility. This gives the same colimit universal property on the tail. Put $B_i=C_i\\otimes_{A_i}k$, using $A_i\\to A\\to k$. For $j\\ge i$ the map $B_i\\to B_j$ is surjective: extend the given comparison surjection along $A_j\\to k$; the source identifies with $C_i\\otimes_{A_i}k$ by $(a_j\\otimes c_i)\\otimes\\lambda\\mapsto c_i\\otimes\\bar a_j\\lambda$, with inverse $c_i\\otimes\\lambda\\mapsto(1\\otimes c_i)\\otimes\\lambda$. The balancing relations make these ring maps well-defined, and their composites are the identity on pure tensors. Set $B=C\\otimes_Ak$. This is the colimit of the $B_i$: compatible ring maps $B_i\\to T$ amount, by the tensor pushout property, to compatible maps $C_i\\to T$ and one map $k\\to T$ (the restrictions to $k$ coincide by compatibility at common upper bounds) agreeing on every $A_i$. By the two colimit universal properties they amount precisely to maps $C\\to T$, $k\\to T$ agreeing on $A$, hence to a map $B\\to T$. The point $x$ determines a point $\\widetilde x\\in\\operatorname{Spec}B$, by the tensor pushout map $B\\to\\kappa(x)$ induced by $C\\to\\kappa(x)$ and $k\\to\\kappa(x)$. The field map $k\\to\\kappa(x)$ sends the fraction of classes $a/b$ to the fraction of their images; its denominator stays nonzero by contraction of the prime of $x$ to $s$, so the two maps agree on $A$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05M5 (lemma-limit-dimension), affine proof expanded"
+   }
+  },
+  {
+   "text": "The ring $B_{i_0}$ is a finite type $k$-algebra, since the images of the finite generators of $C_{i_0}$ over $A_{i_0}$ generate it over $k$. A field is Noetherian: its only ideals are zero and the whole field, generated by zero and one. The finite-type-algebra Noetherian theorem therefore makes $B_{i_0}$ Noetherian. For $i\\ge i_0$ let $K_i=\\ker(B_{i_0}\\to B_i)$; these ideals are increasing and form a directed family. The maximal-ideal-in-a-set theorem supplies a maximal $K_{i_1}$ among them. For $j\\ge i_1$ it follows that $K_j=K_{i_1}$; for any other $i$ a common upper bound shows $K_i\\subseteq K_{i_1}$. All maps $B_{i_0}\\to B_i$ are surjective. The kernel of $B_{i_0}\\to B$ is exactly $\\bigcup_iK_i$: an element maps to zero in the colimit exactly when it becomes zero at a stage, by the elementwise filtered-colimit theorem. That map is surjective as well: every colimit element has a representative in some $B_i$, and that representative lifts to $B_{i_0}$. Hence the canonical map $B_{i_1}\\to B$ is an isomorphism, since both are the quotient of $B_{i_0}$ by $K_{i_1}$. Explicitly, to invert $B_{i_1}\\to B$, lift an element of $B$ to $b\\in B_{i_0}$ and send it to the image of $b$ in $B_{i_1}$. Two lifts differ by $K_{i_1}$, so this is well-defined; it preserves ring operations and is inverse on representatives.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-ideal-set-maximal",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05M5 (lemma-limit-dimension), affine proof expanded"
+   }
+  },
+  {
+   "text": "The point $\\widetilde x$ corresponds under $B_{i_1}\\cong B$ to the point lying over $x_{i_1}$ in the field extension of the ordinary fibre of $f_{i_1}$ from $\\kappa(s_{i_1})$ to $k$. Its contraction is exactly the fibre point of $x_{i_1}$, since both points are obtained by contraction of the maps to $\\kappa(x)$. The fibre algebra $C_{i_1}\\otimes_{A_{i_1}}\\kappa(s_{i_1})$ is finite type over its field, so local-dimension field-extension invariance applies. Since $x_{i_1}\\in Z_{i_1}$, the local dimension at $\\widetilde x$ of $\\operatorname{Spec}B$ is greater than $d$. But the hypothesis bounds the dimension of this entire fibre by $d$, and its local dimension is at most the entire dimension (the entire space is an allowed open neighbourhood). This is a contradiction.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-field-extension",
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05M5 (lemma-limit-dimension), affine proof expanded"
+   }
+  },
+  {
+   "text": "Therefore some $Z_i$ is empty. At that stage every point of every fibre has local dimension at most $d$. Taking the supremum over the points of each fibre gives the asserted global bound. For an empty fibre this supremum is $-\\infty$, so it imposes no exception.",
+   "uses": [
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05M5 (lemma-limit-dimension), affine proof expanded"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-dimension-at-point",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-dimension-at-point-field-extension",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-limit-nonempty",
+  "lem-weil-pbc-noetherian-ideal-set-maximal",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 05M5, lemma-limit-dimension: bad-locus argument, with corrected fixed-ambient-fibre stabilization replacing the erroneous final diagram"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -83,15 +207,103 @@
    "results": "; 8 hits: AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty', AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.exists_map_preimage_eq_map_preimage, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_preimage_eq, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(fiber|fibre).*dimension.*(limit|colimit)|(limit|colimit).*dimension",
+   "results": "; 5 hits: Mathlib/Probability/Process/FiniteDimensionalLaws.lean, Mathlib/Probability/CentralLimitTheorem.lean, Mathlib/Algebra/Category/FGModuleCat/Limits.lean, Mathlib/CategoryTheory/Abelian/Injective/Dimension.lean, Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An upper bound on fibre dimensions descends along an inverse limit of affine schemes with closed immersion comparison maps",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eventually all fibers have bounded Krull dimension in an inverse system of finite type affine schemes",
+   "results": "; 8 hits: AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty', AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.exists_preimage_eq, AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ring.KrullDimLE\", \"colimit\"",
+   "results": "; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibre dimensions at most d descend along directed colimits of finite type algebras with surjective base change comparison maps",
+   "results": "; 8 hits: Algebra.IsStandardSmoothOfRelativeDimension.out, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, Algebra.Smooth.exists_finiteType, Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg, Algebra.QuasiFiniteAt.of_surjectiveOnStalks_of_liesOver, AlgebraicGeometry.Scheme.IsLocallyDirected.ι_jointly_surjective, Algebra.QuasiFiniteAt.of_surjectiveOnStalks",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(KrullDimLE|krullDim|dimension).*(IsColimit|DirectLimit|inverse.limit)|(IsColimit|DirectLimit).*(KrullDimLE|krullDim)",
+   "results": "; 2 hits: Mathlib/AlgebraicTopology/SimplicialSet/FiniteColimits.lean, Mathlib/AlgebraicTopology/SimplicialSet/FiniteColimits.lean",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an inverse system of affine schemes of finite type over varying affine bases, with closed immersion comparison maps, an upper bound on all fibre dimensions of the limit holds at some finite stage",
+   "results": "; 8 hits: AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty', AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.exists_preimage_eq",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-descend-quasifinite-affine",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-affine-limit-fibre-dimension-bound",
+  "worker": "stage1",
+  "summary": "Retained the affine specialization of 05M5. Reused existing openness, local-dimension field extension, spectrum-colimit, nonempty-limit and Noetherian leaves. Expanded bad-locus functoriality and tensor-colimit universal properties; replaced the incorrect ambient limit-fibre arrow in the printed source proof by stabilization of quotient kernels in a fixed finite type residue-field algebra. No new nodes. Second reading repaired the tensor pushout citations and expanded cofinal-tail, tensor-associativity, residue-field and quotient inverse maps.",
+  "blueprint": "Realizes the classical constructibility input in the ancestor: 095R invokes 095K(1), whose Noetherian approximation uses 094M/05M5 for descending fibre bounds.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-dimension-at-point-field-extension",
+    "why": "Generic Dimension at a point of a finite type algebra is preserved by extension of the ground field tool used for the 05M5 affine limit-dimension input; the unit has no replacement for this ring/topological fact."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "why": "Generic The dimension of a space is the supremum of its local dimensions tool used for the 05M5 affine limit-dimension input; the unit has no replacement for this ring/topological fact."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
+    "why": "Generic The locus where the fibre dimension of a finite type ring map is at most d is a neighbourhood of a point where it equals d tool used for the 05M5 affine limit-dimension input; the unit has no replacement for this ring/topological fact."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic Reduced induced closed subscheme structure on a closed subset: existence and uniqueness tool used for the 05M5 affine limit-dimension input; the unit has no replacement for this ring/topological fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-dimension-at-point-field-extension",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-569d49808",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-569d49808 (reviewer sub-agent of L); spot-checked: Read the item, all seven proof steps, all cited statements, report, route, and source passages. The kernel-stabilization argument correctly repairs the faulty inference in Stacks 05M5. Hypotheses, edge cases, duplicates, dependencies, and declared tool uses check out. No repairs needed; detailed findings are in review.md."
+ }
 }
