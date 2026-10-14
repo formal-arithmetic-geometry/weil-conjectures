@@ -6,10 +6,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeStalkTransition
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
-public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitionIsIsoOfLower
-import Sheaf.AlgebraicGeometry.BaseChangeTargetTransitionHigherImage
-import Sheaf.AlgebraicGeometry.HigherDirectImageCoefficientSquare
-import Sheaf.AlgebraicGeometry.UpperStarCoefficientSquare
+import Sheaf.AlgebraicGeometry.BaseChangePullbackComparisonComp
+import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
+import Sheaf.AlgebraicGeometry.LowerStarPlusTransitionComp
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Naturality of the canonical target sheaf comparison
 
@@ -24,10 +24,6 @@ open CategoryTheory Limits
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
-set_option backward.isDefEq.respectTransparency true
-
-attribute [local irreducible] lowerStarPlusTransition
-
 variable {X S T : Scheme.{u}} (p : X ⟶ S) (g : T ⟶ S)
 
 /-- The canonical map from the iterated pullback to the single pullback. -/
@@ -39,14 +35,6 @@ noncomputable def targetPullbackComparison (U : Over T) :
       rw [← Category.assoc, pullback.condition, Category.assoc, Category.assoc,
         pullback.condition])
 
-/-- Projection of the canonical comparison to X.
-(blueprint: lem-sbc-target-sheaf-comparison-naturality) -/
-lemma targetPullbackComparison_snd (U : Over T) :
-    targetPullbackComparison p g U ≫ pullback.snd (U.hom ≫ g) p =
-      ((Over.pullback (pullback.fst g p)).obj U).hom ≫ pullback.snd g p := by
-  unfold targetPullbackComparison
-  exact pullback.lift_snd _ _ _
-
 /-- The explicit inverse of the iterated-pullback comparison. -/
 noncomputable def targetPullbackComparisonInv (U : Over T) :
     pullback (U.hom ≫ g) p ⟶ ((Over.pullback (pullback.fst g p)).obj U).left :=
@@ -54,7 +42,7 @@ noncomputable def targetPullbackComparisonInv (U : Over T) :
     (pullback.lift (pullback.fst (U.hom ≫ g) p ≫ U.hom)
       (pullback.snd (U.hom ≫ g) p)
       (by rw [Category.assoc]; exact pullback.condition))
-    (by exact (pullback.lift_fst _ _ _).symm)
+    (by simp)
 
 lemma targetPullbackComparison_hom_inv (U : Over T) :
     targetPullbackComparison p g U ≫ targetPullbackComparisonInv p g U = 𝟙 _ := by
@@ -140,52 +128,25 @@ noncomputable def baseChangeTargetSheafComparison (U : Over T) :
   let a := targetPullbackComparison p g U
   let h := pullback.snd (U.hom ≫ g) p
   let h' := ((Over.pullback (pullback.fst g p)).obj U).hom ≫ pullback.snd g p
-  let w : a ≫ h = h' := targetPullbackComparison_snd p g U
+  let w : a ≫ h = h' := by
+    dsimp only [a, h, h']
+    unfold targetPullbackComparison
+    exact pullback.lift_snd _ _ _
   let C := ((pullback.fst (U.hom ≫ g) p)^*[ModuleCat.{u + 1} Λ]).obj
     (((U.hom)^*[ModuleCat.{u + 1} Λ]).obj F)
   let H := DerivedCategory.Plus.homologyFunctor
     (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q
   let R := R+((h')_*[ModuleCat.{u + 1} Λ])
+  have := targetPullbackTransition_isIso p g Λ U
+    ((DerivedCategory.Plus.singleFunctor _ 0).obj C)
   let t := higherDirectImageTransition Λ a h h' w q C
-  have ht : IsIso t := higherDirectImageTransition_isIso_of_lower Λ a h h' w q C
-    (targetPullbackTransition_isIso p g Λ U _)
-  let I := baseChangeTargetFunctorHigherImageIso Λ (pullback.fst (U.hom ≫ g) p) h q
-    (((U.hom)^*[ModuleCat.{u + 1} Λ]).obj F)
-  let M := higherDirectImageMapIso Λ h' q (targetPullbackCoefficientIso p g Λ F U)
-  exact I ≪≫ (@asIso _ _ _ _ t ht) ≪≫ M
-
-
-private lemma comparison_hom (U : Over T) :
-    (baseChangeTargetSheafComparison p g Λ q F U).hom =
-      (baseChangeTargetFunctorHigherImageIso Λ (pullback.fst (U.hom ≫ g) p)
-        (pullback.snd (U.hom ≫ g) p) q
-          (((U.hom)^*[ModuleCat.{u + 1} Λ]).obj F)).hom ≫
-      higherDirectImageTransition Λ (targetPullbackComparison p g U)
-        (pullback.snd (U.hom ≫ g) p)
-        (((Over.pullback (pullback.fst g p)).obj U).hom ≫ pullback.snd g p)
-        (targetPullbackComparison_snd p g U) q
-        (((pullback.fst (U.hom ≫ g) p)^*[ModuleCat.{u + 1} Λ]).obj
-          (((U.hom)^*[ModuleCat.{u + 1} Λ]).obj F)) ≫
-      higherDirectImageMap Λ
-        (((Over.pullback (pullback.fst g p)).obj U).hom ≫ pullback.snd g p) q
-        (targetPullbackCoefficientIso p g Λ F U).hom := by
-  dsimp only [baseChangeTargetSheafComparison]
-  simp only [Iso.trans_hom, asIso_hom, higherDirectImageMapIso_hom_eq]
-
-private lemma paste_comparisons
-    {C : Type*} [Category C] {A B D E F G H I J K L : C}
-    (r₁ : A ⟶ B) (r₂ : B ⟶ D) (iU : D ⟶ E) (iV : A ⟶ F)
-    (t₁ : F ⟶ G) (t₂ : G ⟶ E) (u₁ : E ⟶ H) (u₂ : H ⟶ I)
-    (v₁ : F ⟶ J) (v₂ : J ⟶ K) (s₁ : K ⟶ L) (s₂ : L ⟶ I)
-    (cU : D ⟶ I) (cV : A ⟶ K) (s : K ⟶ I)
-    (hU : cU = iU ≫ u₁ ≫ u₂) (hV : cV = iV ≫ v₁ ≫ v₂)
-    (hn : r₁ ≫ r₂ ≫ iU = iV ≫ t₁ ≫ t₂)
-    (hs : (t₁ ≫ t₂) ≫ (u₁ ≫ u₂) = (v₁ ≫ v₂) ≫ (s₁ ≫ s₂))
-    (ho : s = s₁ ≫ s₂) : (r₁ ≫ r₂) ≫ cU = cV ≫ s := by
-  rw [hU, hV, ho]
-  set_option backward.isDefEq.respectTransparency false in
-    simp only [Category.assoc] at hn hs ⊢
-  rw [reassoc_of% hn, hs]
+  have : IsIso t := by
+    dsimp [t, higherDirectImageTransition]
+    infer_instance
+  exact (baseChangeTargetFunctorIso Λ (pullback.fst (U.hom ≫ g) p) h q).app _
+    ≪≫ asIso t
+    ≪≫ (DerivedCategory.Plus.singleFunctor _ 0 ⋙ R ⋙ H).mapIso
+      (targetPullbackCoefficientIso p g Λ F U)
 
 /-- The explicit target sheaf comparison commutes with canonical restriction.
 
@@ -223,88 +184,6 @@ theorem baseChangeTargetSheafComparison_naturality {U V : Over T} (φ : U ⟶ V)
       (baseChangeTargetSheafComparison p g Λ q F V).hom ≫
         higherDirectImageOverMap Λ (pullback.snd g p)
           (((pullback.fst g p)^*[ModuleCat.{u + 1} Λ]).obj F) q
-          ((Over.pullback (pullback.fst g p)).map φ) := by
-  let A := ModuleCat.{u + 1} Λ
-  let eV := pullback.fst (V.hom ≫ g) p
-  let eU := pullback.fst (U.hom ≫ g) p
-  let hV := pullback.snd (V.hom ≫ g) p
-  let hU := pullback.snd (U.hom ≫ g) p
-  let PV := (Over.pullback (pullback.fst g p)).obj V
-  let PU := (Over.pullback (pullback.fst g p)).obj U
-  let a : pullback (U.hom ≫ g) p ⟶ pullback (V.hom ≫ g) p :=
-    pullback.lift (eU ≫ φ.left) hU
-      (by
-        dsimp only [eU, hU]
-        rw [Category.assoc, ← Category.assoc φ.left, Over.w]
-        exact pullback.condition)
-  let ψ := (Over.pullback (pullback.fst g p)).map φ
-  let b : PU.left ⟶ PV.left := ψ.left
-  let cV := targetPullbackComparison p g V
-  let cU := targetPullbackComparison p g U
-  have wa : a ≫ eV = eU ≫ φ.left := pullback.lift_fst _ _ _
-  have wh : a ≫ hV = hU := pullback.lift_snd _ _ _
-  have wV : cV ≫ hV = PV.hom ≫ pullback.snd g p := by
-    exact targetPullbackComparison_snd p g V
-  have wU : cU ≫ hU = PU.hom ≫ pullback.snd g p := by
-    exact targetPullbackComparison_snd p g U
-  have wk : b ≫ PV.hom = PU.hom := Over.w ψ
-  have wb : b ≫ (PV.hom ≫ pullback.snd g p) = PU.hom ≫ pullback.snd g p := by
-    rw [← Category.assoc, wk]
-  have ws : cU ≫ a = b ≫ cV := by
-    apply pullback.hom_ext
-    · dsimp only [cU, cV, a, b, ψ, eU, eV, hU, hV]
-      unfold targetPullbackComparison
-      simp only [Category.assoc, pullback.lift_fst, Over.pullback_map_left]
-      simp only [pullback.lift_fst_assoc]
-    · dsimp only [cU, cV, a, b, ψ, eU, eV, hU, hV]
-      unfold targetPullbackComparison
-      simp only [Category.assoc, pullback.lift_snd, Over.pullback_map_left]
-      simp only [pullback.lift_snd_assoc]
-  have wCV : cV ≫ (eV ≫ V.hom) = PV.hom ≫ pullback.fst g p := by
-    dsimp only [cV, eV, PV]
-    unfold targetPullbackComparison
-    rw [pullback.lift_fst_assoc]
-    exact pullback.condition
-  have wCU : cU ≫ (eU ≫ U.hom) = PU.hom ≫ pullback.fst g p := by
-    dsimp only [cU, eU, PU]
-    unfold targetPullbackComparison
-    rw [pullback.lift_fst_assoc]
-    exact pullback.condition
-  let FV := ((eV)^*[A]).obj (((V.hom)^*[A]).obj F)
-  let FU := ((eU)^*[A]).obj (((U.hom)^*[A]).obj F)
-  let G := ((pullback.fst g p)^*[A]).obj F
-  let GV := ((PV.hom)^*[A]).obj G
-  let GU := ((PU.hom)^*[A]).obj G
-  let d : ((a)^*[A]).obj FV ⟶ FU :=
-    (upperStarComp A a eV).inv.app (((V.hom)^*[A]).obj F) ≫
-      (upperStarComp A eU φ.left (a ≫ eV) wa).hom.app (((V.hom)^*[A]).obj F) ≫
-      ((eU)^*[A]).map ((upperStarComp A φ.left V.hom U.hom (Over.w φ).symm).inv.app F)
-  let fV := (targetPullbackCoefficientIso p g Λ F V).hom
-  let fU := (targetPullbackCoefficientIso p g Λ F U).hom
-  let e := (upperStarComp A b PV.hom PU.hom wk.symm).inv.app G
-  have hc := upperStar_coefficient_square Λ V.hom U.hom φ.left (Over.w φ)
-    eV eU a wa (pullback.fst g p) PV.hom PU.hom cV cU b wCV wCU wk ws F
-  have hc' : (upperStarComp A cU a).hom.app FV ≫ ((cU)^*[A]).map d ≫ fU =
-      (upperStarComp A b cV (cU ≫ a) ws).hom.app FV ≫ ((b)^*[A]).map fV ≫ e := by
-    set_option backward.isDefEq.respectTransparency false in
-      simpa only [fU, fV, d, e, FV, G, A, cU, cV, PU, PV, eU, eV,
-        targetPullbackCoefficientIso, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom,
-        Iso.app_hom, Iso.app_inv, eqToIso.hom, Functor.comp_obj, Category.assoc] using hc
-  let ringInst : CommRing Λ := inferInstance
-  let YV := pullback (V.hom ≫ g) p
-  let YU := pullback (U.hom ≫ g) p
-  let ZV := PV.left
-  let ZU := PU.left
-  let kV := PV.hom ≫ pullback.snd g p
-  let kU := PU.hom ≫ pullback.snd g p
-  have hs := higherDirectImage_coefficient_square Λ a b cV cU hV hU kV kU
-    wh wb wV wU ws q FV FU GV GU d fV fU e hc'
-  have hn := baseChangeTargetTransition_higherImage Λ eV hV q φ.left a eU hU wa wh
-    (((V.hom)^*[A]).obj F) (((U.hom)^*[A]).obj F)
-    ((upperStarComp A φ.left V.hom U.hom (Over.w φ).symm).inv.app F)
-  have hCU := comparison_hom p g Λ q F U
-  have hCV := comparison_hom p g Λ q F V
-  have ho := higherDirectImageOverMap_eq Λ (pullback.snd g p) G q ψ
-  bc_paste paste_comparisons using hCU hCV hn hs ho
+          ((Over.pullback (pullback.fst g p)).map φ) := by sorry
 
 end AlgebraicGeometry.Etale

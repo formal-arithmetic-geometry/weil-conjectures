@@ -14758,9 +14758,10 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 16:44 L: batch 20261014T083740 dependency take-out
 - 08:46 L: merged deliver/B2/Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization (stage 3; reviewer PASS; after a return; landing 20261014T084659-L-88460 (interface); batch 20261014T084656; modules 3; new nodes 0; change records: coord/changes/retire-false-component-extension-factorization.md)
-- 08:47 L: merged deliver/B4/Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality (stage 3; reviewer PASS; first push; landing 20261014T084659-L-88600 (interface); batch 20261014T084656; modules 5; new nodes 4; change records: coord/changes/baseChangeTargetSheafComparison-proof-api.md)
 - 08:47 L: merged deliver/F2/Sheaf.Algebra.Homology.TensorBicomplex (stage 3; reviewer PASS; after a return; landing 20261014T084700-L-88935 (interface); batch 20261014T084656; modules 1; new nodes 0; change records: coord/changes/tensor-bicomplex-canonical-map.md)
 - 08:47 L: merged deliver/J1/Sheaf.AlgebraicGeometry.DerivedSelfTorChosenAffineCoordinates (stage 3; reviewer PASS; first push; landing 20261014T084701-L-89097 (interface); batch 20261014T084656; modules 2; new nodes 1)
 - 08:47 L: merged deliver/P1/Sheaf.AlgebraicGeometry.CompactFlatTelescopeBarEnlargement (stage 3; reviewer PASS; first push; landing 20261014T084701-L-89287 (interface); batch 20261014T084656; modules 3; new nodes 2)
 - 08:47 L: merged deliver/U2/Sheaf.AlgebraicGeometry.AffineModelCoherentObjectComparisons (stage 3; reviewer PASS; after a return; landing 20261014T084702-L-89554 (interface); batch 20261014T084656; modules 3; new nodes 2; change records: coord/changes/affine-model-coherent-local-transparency.md)
 - 08:47 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.FlatTelescopeSumComparisonIsIso (stage 3; reviewer PASS; first push; landing 20261014T084703-L-89764 (interface); batch 20261014T084656; modules 3; new nodes 2)
+
+- 16:55 L: batch 20261014T084656 dependency take-out
