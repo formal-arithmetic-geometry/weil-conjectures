@@ -1,0 +1,97 @@
+{
+ "id": "lem-nagata-affine-proj-scalar-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-nagata-relative-proj-exists",
+   "place": "Proof, first paragraph: the affine Proj construction gives an isomorphism from P_W onto the inverse image of W in P_V",
+   "via": [
+    "lem-nagata-proj-affine-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Scalar extension of affine Proj with its chart maps",
+ "statement": "Let $R,S$ be commutative rings, let $R\\to S$ be a ring homomorphism, and let $A=\\bigoplus_{n\\geq0}A_n$ be a commutative graded ring with a ring map $R\\to A_0$. Form the graded $S$-algebra $S\\otimes_R A$, with homogeneous component $S\\otimes_R A_n$, where tensor denotes the usual balanced tensor product with multiplication $(s\\otimes a)(t\\otimes b)=st\\otimes ab$. Let $B=\\bigoplus_{n\\geq0}B_n$ be a commutative graded ring with an $S$-algebra structure whose unit map $S\\to B$ has image in $B_0$ and let $\\beta:S\\otimes_R A\\xrightarrow{\\sim}B$ be a graded $S$-algebra isomorphism. Put $\\psi(a)=\\beta(1\\otimes a)$. Use affine Proj [def-nagata-affine-proj], its degree-zero structure map followed by the spectrum map [def-weil-affine-spectrum] to obtain $p_A:\\operatorname{Proj}(A)\\to\\operatorname{Spec}R$ and $p_B:\\operatorname{Proj}(B)\\to\\operatorname{Spec}S$. There is a canonical morphism $r_\\psi:\\operatorname{Proj}(B)\\to\\operatorname{Proj}(A)$ making the square with $p_A,p_B$ and $\\operatorname{Spec}(R\\to S)$ cartesian [def-pc-fibre-product]. For every homogeneous $f\\in A_d$, $d>0$, its inverse image of $D_+(f)$ is $D_+(\\psi(f))$ and its restriction to that open is the spectrum morphism induced by\n$$A_{(f),0}\\longrightarrow B_{(\\psi(f)),0},\\qquad a/f^m\\longmapsto\\psi(a)/\\psi(f)^m$$\n[def-nagata-homogeneous-localization-degree-zero]. The opens $D_+(\\psi(f))$, as $f$ ranges over all positive-degree homogeneous elements of $A$, cover $\\operatorname{Proj}(B)$; these formulas uniquely determine $r_\\psi$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01N2 (lemma-base-change-map-proj), with the chart characterization of Tag 01MY (lemma-morphism-proj); twist-sheaf assertions omitted"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-nagata-homogeneous-localization-degree-zero"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Projective spectrum commutes with scalar extension of a nonnegatively graded algebra over an arbitrary commutative base ring",
+   "results": "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq_comap; AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq; AlgebraicGeometry.Proj.toSpecZero; AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec; AlgebraicGeometry.Proj.awayι_toSpecZero; AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits give ring-level Proj maps, standard-chart intersections, or affine spectrum pullbacks; none asserts Proj scalar extension or restriction of a graded algebra sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|isPullback|localization|restrict",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits give ring-level Proj maps, standard-chart intersections, or affine spectrum pullbacks; none asserts Proj scalar extension or restriction of a graded algebra sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorProduct|base.change|IsPullback|Equifibered",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits give ring-level Proj maps, standard-chart intersections, or affine spectrum pullbacks; none asserts Proj scalar extension or restriction of a graded algebra sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective spectrum of a graded algebra commutes with arbitrary extension of scalars",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a graded R-algebra A and a ring homomorphism R to S, Proj of S tensor R A is the fibre product of Spec S with Proj A over Spec R",
+   "results": "AlgebraicGeometry.pullbackSpecIso; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left_assoc; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right_assoc; AlgebraicGeometry.Proj.pullbackAwayιIso; AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right; AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits give ring-level Proj maps, standard-chart intersections, or affine spectrum pullbacks; none asserts Proj scalar extension or restriction of a graded algebra sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"IsPullback\"",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits give ring-level Proj maps, standard-chart intersections, or affine spectrum pullbacks; none asserts Proj scalar extension or restriction of a graded algebra sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A graded algebra tensor product induces a cartesian square of projective spectra over affine schemes",
+   "results": "AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left_assoc; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right_assoc; AlgebraicGeometry.Proj.pullbackAwayιIso; AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right; AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match: chart intersections within one Proj and separatedness; no scalar-extension square"
+  },
+  {
+   "tool": "grep",
+   "query": "TensorProduct|tensor|IsPullback|isPullback",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: chart intersections within one Proj and separatedness; no scalar-extension square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-nagata-proj-affine-restriction",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-def-nagata-sketch-data"
+}
