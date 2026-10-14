@@ -20,11 +20,77 @@
   "def-weil-scheme-over-base",
   "def-pc-scheme",
   "def-weil-finite-type-morphism",
-  "def-weil-pbc-krull-dimension-ring"
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Every ideal of the field $K$ is either $(0)$ or $(1)$: an ideal containing a nonzero $a$ contains $a^{-1}a=1$. Thus every ideal is finitely generated and $K$ is Noetherian. The affine scheme $\\operatorname{Spec}K$ has global section ring $K$ and one point. Its single affine chart is a Noetherian affine cover, and a one-point space is quasi-compact. Hence $\\operatorname{Spec}K$ is Noetherian.",
+   "uses": [
+    "def-weil-field",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-affine-spectrum",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Definition 01OV (definition-noetherian); Schemes Lemma 01HV (lemma-spec-sheaves), part (1)"
+   }
+  },
+  {
+   "text": "Apply the finite-type-over-Noetherian theorem to the given structure morphism $X\\to\\operatorname{Spec}K$. Its target is Noetherian by step 1, so $X$ is Noetherian and in particular locally Noetherian.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian"
+   }
+  },
+  {
+   "text": "Choose a member $U$ of the Noetherian affine covering of $X$ containing $x$, and set $R=\\mathcal O_X(U)$; its ring is Noetherian by the definition of locally Noetherian. The affine-open stalk-localization theorem, clause (c), says that the germ map $R\\to\\mathcal O_{X,x}$ is a localization at the complement of the corresponding prime $\\mathfrak p_x$. This complement is multiplicative: $1\\notin\\mathfrak p_x$, and $s,t\\notin\\mathfrak p_x$ implies $st\\notin\\mathfrak p_x$ by primality. Apply the localization-Noetherian theorem directly to this germ map to conclude that $\\mathcal O_{X,x}$ is Noetherian. It is a local ring because $X$ is a locally ringed space.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN, lemma-Noetherian-permanence, localization clause; Schemes Tag 01HV, lemma-spec-sheaves, part (6)"
+   }
+  },
+  {
+   "text": "Apply the finiteness clause of the Noetherian-local-system-of-parameters theorem to $R=\\mathcal O_{X,x}$, which is Noetherian and local by step 3. It gives $\\dim\\mathcal O_{X,x}<\\infty$, exactly the desired conclusion; none of its additional system-of-parameters conclusions is needed.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-system-of-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KQ, proposition-dimension (finiteness consequence for a Noetherian local ring)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-field",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-noetherian-local-system-of-parameters",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Combination of Tags 00FN and 00KQ after the scheme reduction of Tag 01T6 and the stalk calculation of Tag 01HV"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,15 +112,100 @@
    "results": "0 hits",
    "date": "2026-10-15",
    "verdict": "no exact scheme/stalk result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization of a finite type algebra over a field has finite Krull dimension",
+   "results": "; hits: Algebra.Presentation.localizationAway_dimension_zero, Ring.DimensionLEOne.localization, instFiniteDimensionalFractionRingOfFinite, Algebra.QuasiFinite.instOfIsFractionRing, Ring.krullDimLE_of_isLocalization_maximal, instFiniteAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl, Ring.KrullDimLE.of_isLocalization, instFiniteLocalizationAlgebraMapSubmonoidPrimeCompl",
+   "date": "2026-10-15",
+   "verdict": "no exact scheme-stalk finiteness match; algebraic finiteness and Noetherian-stalk results reused through existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "ringKrullDim, IsNoetherianRing",
+   "results": "; hits: ringKrullDim_le_spanFinrank_maximalIdeal, ringKrullDim_le_ringKrullDim_quotient_add_encard, Ideal.height_le_ringKrullDim_quotient_add_encard, ringKrullDim_le_ringKrullDim_quotient_add_card, ringKrullDim_le_ringKrullDim_quotient_add_spanFinrank, Ideal.height_le_ringKrullDim_quotient_add_one, height_le_ringKrullDim_quotient_add_spanFinrank, Polynomial.ringKrullDim_of_isNoetherianRing",
+   "date": "2026-10-15",
+   "verdict": "no exact scheme-stalk finiteness match; algebraic finiteness and Noetherian-stalk results reused through existing DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim.*Noetherian",
+   "results": "; hits: Mathlib/RingTheory/KrullDimension/Basic.lean, Mathlib/RingTheory/KrullDimension/Polynomial.lean, Mathlib/RingTheory/KrullDimension/Polynomial.lean, Mathlib/RingTheory/KrullDimension/Polynomial.lean, Mathlib/RingTheory/KrullDimension/Polynomial.lean, Mathlib/RingTheory/KrullDimension/Polynomial.lean",
+   "date": "2026-10-15",
+   "verdict": "no exact scheme-stalk finiteness match; algebraic finiteness and Noetherian-stalk results reused through existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite type algebra over a field localization at a prime has finite Krull dimension",
+   "results": "; hits: Ring.DimensionLEOne.localization, Ring.KrullDimLE.of_isLocalization, Ring.krullDimLE_of_isLocalization_maximal, Algebra.Presentation.localizationAway_dimension_zero, IsLocalization.AtPrime.ringKrullDim_eq_height, Algebra.QuasiFiniteAt, instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing, instFiniteAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl",
+   "date": "2026-10-15",
+   "verdict": "no exact scheme-stalk finiteness match; algebraic finiteness and Noetherian-stalk results reused through existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "ringKrullDim finite type algebra localization",
+   "results": "loogle: Unknown identifier `finite`; hits: ",
+   "date": "2026-10-15",
+   "verdict": "no exact scheme-stalk finiteness match; algebraic finiteness and Noetherian-stalk results reused through existing DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim.*finite.*type|finite.*type.*ringKrullDim",
+   "results": "; hits: ",
+   "date": "2026-10-15",
+   "verdict": "no exact scheme-stalk finiteness match; algebraic finiteness and Noetherian-stalk results reused through existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of a locally Noetherian scheme is a Noetherian local ring",
+   "results": "; hits: AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian, AlgebraicGeometry.IsLocallyNoetherian.component_noetherian, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.isLocallyNoetherian_Spec, AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.instIsLocallyNoetherianToScheme, AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian",
+   "date": "2026-10-15",
+   "verdict": "no exact scheme-stalk finiteness match; algebraic finiteness and Noetherian-stalk results reused through existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherianRing, AlgebraicGeometry.Scheme",
+   "results": "; hits: AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian, AlgebraicGeometry.noetherianSpace_of_isAffineOpen, AlgebraicGeometry.IsLocallyNoetherian.component_noetherian, AlgebraicGeometry.IsLocallyNoetherian.mk, AlgebraicGeometry.isLocallyNoetherian_of_affine_cover, AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, AlgebraicGeometry.noetherianSpace_of_isAffine",
+   "date": "2026-10-15",
+   "verdict": "no exact scheme-stalk finiteness match; algebraic finiteness and Noetherian-stalk results reused through existing DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "IsNoetherianRing \\(X.presheaf.stalk|isLocalRing.*[Ss]talk",
+   "results": "; hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean",
+   "date": "2026-10-15",
+   "verdict": "no exact scheme-stalk finiteness match; algebraic finiteness and Noetherian-stalk results reused through existing DAG nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "stalk of locally Noetherian scheme is Noetherian",
+   "results": "service unavailable: Internal Server Error; hits: ",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-kun-dimension-finite-type",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "lem-kun-finite-type-local-dimension",
+  "worker": "stage1",
+  "summary": "Expanded the inherited affine-chart/Noetherian-local argument using existing nodes only. Added the missing field statement dependency. Corrected the source pointer: 00P1 is a dimension formula, whereas the direct finiteness input here is 00KQ. No statement change and no new nodes.",
+  "blueprint": "All four steps realize the first sentence of lem-kun-dimension-finite-type: affine chart, Noetherian local stalk, finite dimension via the height theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-65a1c2bab",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-65a1c2bab (reviewer sub-agent of L); spot-checked: The mathematics and source checks pass, but step 1 incorrectly listed lem-weil-pbc-finite-type-over-noetherian among its dependencies while marked elementary; that theorem is used only in step 2. Corrected DAG JSON is in fixes/dag/nodes/sec-smooth-purity/lem-kun-finite-type-local-dimension.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
