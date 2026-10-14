@@ -1,0 +1,120 @@
+{
+ "id": "lem-pc-directed-perfect-hom-iso",
+ "kind": "statement",
+ "title": "Isomorphism lifting from directed Hom continuity",
+ "statement": "Let I be a directed preorder, C_k categories, F_k(b) objects for b in {false,true}, D a category, O(b) objects of D, G_k:C_k→D functors and ψ_k(b):G_k(F_k(b))≅O(b). A DirectedPerfectHomSystem means transport of all four kinds of Hom sets along k≤l preserves identity and composition, preserves the conjugated limit map ψ_k(a)^{-1}G_k(f)ψ_k(b), every limit morphism lifts at a stage, and equal limit images of two stage maps imply equality of their transports at every stage beyond some later index. For every e:O(false)≅O(true), there exist k and e_k:F_k(false)≅F_k(true) whose conjugated hom is e.hom. Moreover, if p:G(A)≅T, q:G(B)≅T and e:A≅B satisfy p.inv≫G(e.hom)≫q.hom=id_T, then p=G(e)≫q as isomorphisms.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09RE",
+  "place": "Tag 09RE, lemma-descend-homomorphisms; Tag 09RF, fully faithful overlap descent before gluing"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Lift e.hom and e.inv separately and transport them to a common upper bound. Transport preserves their limit images. Functoriality and cancellation of ψ show that the two stage composites have limit images equal to the corresponding identity maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply eventual Hom equality to both composites. Choose a common upper bound of the two equality stages. Identity and composition preservation turn the two stabilized relations into inverse equations for the transported maps. Form their isomorphism and retain its prescribed hom image.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the comparison assertion, take homs and cancel p.inv on the left; p.inv≫p.hom=id and the assumed conjugated identity give the claimed equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "F4",
+  "document": "https://stacks.math.columbia.edu/tag/09RE",
+  "date": "2026-10-14",
+  "note": "Written from the Hom-colimit statement of Tag 09RE and the prescribed transition of Tag 09RF; online sources read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphisms between perfect complexes descend over a filtered colimit of commutative rings",
+   "results": "8 hits on Grothendieck categories, local cohomology, eventually constant diagrams, and morphism properties; no exact perfect-overlap continuity theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso",
+   "results": "12 hits including mapIso, mapIso_hom, mapIso_trans and preimageIso_mapIso; useful elementary functorial tools, not the desired continuity theorem.",
+   "date": "2026-10-14",
+   "verdict": "tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*(hom|descend)|overlap.*comparison",
+   "results": "12 hits on perfect closures, perfect rings and perfect groups; no matching geometric statement.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism lifts to a directed stage if morphisms lift and equalities eventually hold",
+   "results": "Service unavailable: Internal Server Error; no search results obtained.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore",
+  "date": "2026-10-14",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF two-open induction: full faithfulness gives a prescribed overlap transition before gluing.",
+   "via": [
+    "lem-pc-perfect-overlap-transition-comparison-core-stage"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DirectedPerfectHomIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/DirectedPerfectHomIso.lean",
+  "declaration": "AlgebraicGeometry.DirectedPerfectHomSystem.lift_iso",
+  "declarations": [
+   "AlgebraicGeometry.DirectedPerfectHomSystem",
+   "AlgebraicGeometry.DirectedPerfectHomSystem.lift_iso",
+   "AlgebraicGeometry.iso_comparison_of_conjugated_identity"
+  ],
+  "statement": "theorem DirectedPerfectHomSystem.lift_iso\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    {C : I → Type v} [∀ k, Category.{h} (C k)]\n    {F : ∀ k, Bool → C k} {D : Type v'} [Category.{h'} D]\n    {O : Bool → D} {G : ∀ k, C k ⥤ D}\n    {ψ : ∀ k b, (G k).obj (F k b) ≅ O b}\n    (H : DirectedPerfectHomSystem I C F D O G ψ) (e : O false ≅ O true) :\n    ∃ (k : I) (ek : F k false ≅ F k true),\n      (ψ k false).inv ≫ (G k).map ek.hom ≫ (ψ k true).hom = e.hom",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261014T063816-L-2813409",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261014T063816-L-2813409",
+  "kind": "interface"
+ }
+}
