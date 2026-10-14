@@ -12,13 +12,13 @@
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
+| `Sheaf.AlgebraicGeometry.ScalarCupResolutionClassCompatibility` | 29 | 1 | disputed |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CartesianHigherImageAffineSectionVanishing` | 13 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CartesianHigherImageChartComparison` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardResidueHomologySourceResidueComparison` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation` | 24 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ScalarCupResolutionClassCompatibility` | 31 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison` | 34 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData` | 34 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchangePreNormalization` | 35 | 1 | proof |
