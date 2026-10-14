@@ -13,7 +13,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitMatrix
 
 Let `T` be a topological space. A locally finite function `T → ℚ̄_ℓ` takes, on a compact `T`,
 values in a finite-dimensional `ℚ_ℓ`-subspace of `ℚ̄_ℓ`, so finitely many of them take values in
-a finite extension `E` of `ℚ_ℓ` (`PadicAlgCl.exists_finiteDimensional_forall_mem`). An invertible
+a finite extension `E` of `ℚ_ℓ`
+(`PadicAlgCl.exists_finiteDimensional_forall_mem_locallyFinite`). An invertible
 matrix of locally finite functions with values in `E` is then a function
 `T → GL_n(E)` with continuous entries (`PadicAlgCl.glOfMatrix`); conversely a function
 `T → GL_n(E)` with continuous entries is a matrix of locally finite functions
@@ -28,7 +29,7 @@ variable {l : ℕ} [Fact l.Prime] {T : Type*} [TopologicalSpace T] {n : ℕ}
 
 /-- **Finitely many locally finite functions on a compact space take values in a finite
 extension of `ℚ_ℓ`.** -/
-lemma exists_finiteDimensional_forall_mem [CompactSpace T]
+lemma exists_finiteDimensional_forall_mem_locallyFinite [CompactSpace T]
     (s : Finset (locallyFiniteFunctions l T)) :
     ∃ E : IntermediateField ℚ_[l] (PadicAlgCl l), FiniteDimensional ℚ_[l] E ∧
       ∀ f ∈ s, ∀ t, f.1 t ∈ E := by

@@ -32,7 +32,7 @@ Bhatt–Scholze (*The pro-étale topology for schemes*, §7.4):
 1. `G` is trivialised on a single affine pro-étale cover `f : V ⟶ Y`, `f^* G ≅ ℚ̄_ℓⁿ`
    (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.exists_affine_cover_iso`); its transition
    matrix on the compact `V ×_Y V` takes values in `GL_n(E)` for a finite extension `E` of
-   `ℚ_ℓ` (`PadicAlgCl.exists_finiteDimensional_forall_mem`), and is a cocycle `γ`
+   `ℚ_ℓ` (`PadicAlgCl.exists_finiteDimensional_forall_mem_locallyFinite`), and is a cocycle `γ`
    (`AlgebraicGeometry.ProEtale.AdicSheaf.transitionMatrix_trans`,
    `AlgebraicGeometry.ProEtale.AdicSheaf.transitionMatrix_comp`).
 2. For every congruence subgroup `K_k ⊆ GL_n(𝒪_E)` (`PadicAlgCl.congruenceSubgroup`), `γ`
@@ -96,7 +96,8 @@ theorem IsAdicLisseSheaf.exists_iso_upperStar_universalCover [IsLocallyNoetheria
     rw [← transitionMatrix_trans e _ _ _ _ _ rfl]
     exact transitionMatrix_self _ _ _
   -- a finite extension `E` containing their values
-  obtain ⟨E, hE, hEmem⟩ := exists_finiteDimensional_forall_mem (l := l) (T := ↥(pullback f f))
+  obtain ⟨E, hE, hEmem⟩ := exists_finiteDimensional_forall_mem_locallyFinite
+    (l := l) (T := ↥(pullback f f))
     ((Finset.univ.image fun p : Fin n × Fin n ↦ g p.1 p.2) ∪
       Finset.univ.image fun p : Fin n × Fin n ↦ g' p.1 p.2)
   have hgE (i j : Fin n) (z) : (g i j).1 z ∈ E :=
