@@ -33,7 +33,8 @@ theorem Scheme.Hom.pic_proper_ntorsion_coker
     Nonempty (C.Pic ⧸ (powMonoidHom n : C.Pic →* C.Pic).range ≃*
       Multiplicative (ZMod n)) := by
   classical
-  obtain ⟨P0, hP0, e, -, -⟩ := f.exists_mulEquiv_prod_picZero
+  obtain ⟨P0, hP0, e, hfirst, hsecond⟩ := f.exists_mulEquiv_prod_picZero
+  clear hfirst hsecond
   have hdiv : Function.Surjective (fun x : P0 ↦ x ^ n) := by
     intro L
     obtain ⟨M, hM, hpow⟩ := f.pic_proper_ntorsion_div n _hn L (by
