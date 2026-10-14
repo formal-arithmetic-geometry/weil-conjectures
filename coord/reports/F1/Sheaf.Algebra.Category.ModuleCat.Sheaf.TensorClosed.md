@@ -28,7 +28,7 @@ sorry_after lists. The item remains listed in coord/repairs.txt for upstream dup
 #1428, although the supplied code already implements the compatibility-abbreviation repair.
 The node proof matches the existing implementation. The unit route is unchanged.
 
-## Second reading by F1
+## Earlier second reading (a previous round; superseded)
 
 1. Compared the delivered module with the repository version. The declaration signature,
    definitions, imports, and proof are unchanged; the only sandbox difference was a
@@ -50,3 +50,26 @@ The node proof matches the existing implementation. The unit route is unchanged.
 
 Changed only the redundant comment in the sandbox module and recorded this second reading;
 no mathematical or interface changes were necessary.
+
+## Second reading by F1
+
+1. Compared the sandbox module with the repository version byte for byte. The declaration,
+   signature, definitions, imports, and proof are identical; no accidental visible changes
+   were introduced. Verdict: pass.
+2. Compiled the module with `python3 /home/ubuntu/weil-launcher/lcompile.py`; it succeeds
+   without errors or warnings. The file contains no `sorry`, `axiom`, `unsafe`, `opaque`,
+   `implemented_by`, or `extern`. The existing abbreviation is fully proved, so no holes
+   were added or split off. Verdict: pass.
+3. Checked the existing declaration against the DAG node and source route. It repackages
+   `monoidalClosed`, `tensorHomEquiv`, their naturality lemmas, and the additive tensor
+   functors without changing the statement or weakening any hypothesis. No new statement
+   needs truth or strength review. Verdict: pass.
+4. The proof follows the shortest available route through the existing `MonoidalFree`
+   additivity instance and the source monoidal closed structure. The public imports support
+   the declaration; the plain `MonoidalFree` import is proof-only. No unused import or
+   additional pruning was found. Verdict: pass.
+5. The DAG node's Lean declaration, proof steps, dependencies, and origin agree with the
+   proof in the module, and the unit's realized route remains unchanged. Verdict: pass.
+
+Changed only this report; no Lean proof, declaration, import, node, or statement required
+repair.
