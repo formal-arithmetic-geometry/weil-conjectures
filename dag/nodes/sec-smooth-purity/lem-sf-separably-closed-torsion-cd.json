@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "lem-sf-separably-closed-torsion-cd",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lem-kun-cd-sep-closed-point"
+  ]
  },
  "kind": "statement",
  "title": "Torsion cohomological dimension of a separably closed field",
@@ -19,24 +21,104 @@
  ],
  "proof": [
   {
-   "text": "Let $F$ be a sheaf of abelian groups on the\nsmall étale site of\n$\\operatorname{Spec}K$. Since $K$ is separably closed, every étale\n$K$-scheme is a disjoint union, finite or infinite, of copies of\n$\\operatorname{Spec}K$; these objects form a basis of the site which is\nclosed under fibre products, and for an object\n$\\bigsqcup_{i\\in I}\\operatorname{Spec}K$ the inclusions of the\ncomponents are an étale covering whose pairwise fibre products are empty,\nso the sheaf axiom presents\n$F(\\bigsqcup_{i\\in I}\\operatorname{Spec}K)$ as\n$\\prod_{i\\in I}F(\\operatorname{Spec}K)$. Hence $F$ is constant and is\ndetermined by the abelian group $F(\\operatorname{Spec}K)$, and the global\nsection functor is an equivalence onto abelian groups; it is therefore\nexact and its higher derived functors vanish. This proves the assertion\nfor every torsion sheaf, and the dictionary of\n[lem-exc-field-discrete-modules] records the same conclusion for the\nétale module sheaves of a finite coefficient ring, which is the case used\nbelow.",
+   "text": "Let $F$ be any abelian sheaf on $\\operatorname{Spec}K$, not necessarily torsion. Take $K^{\\rm sep}=K$ and an algebraic closure $\\Omega$ of $K$. The group $G=\\operatorname{Gal}(K/K)$ is trivial. Apply [lem-exc-abelian-sheaves-gmodules] to identify abelian etale sheaves with discrete $G$-modules, hence with abelian groups. The equivalence is additive by the cited statement, so it preserves kernels and cokernels (their universal properties), and is exact.",
    "uses": [
-    "lem-exc-field-discrete-modules"
+    "lem-exc-abelian-sheaves-gmodules"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JQ, Lemma lemma-equivalence-abelian-sheaves-point"
+   }
+  },
+  {
+   "text": "Apply [lem-exc-field-sections-stalk-invariants] to the underlying sheaf of sets with $L=K$. It identifies $F(\\operatorname{Spec}K)$ naturally with $F_{\\bar s}^G=F_{\\bar s}$. The map is restriction to a geometric germ, so it preserves addition and zero, and is an isomorphism of abelian groups. Thus global sections is naturally the additive equivalence of step 1, and is exact. No coefficient ring or uniform annihilator has been imposed.",
+   "uses": [
+    "lem-exc-field-sections-stalk-invariants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JM, Lemma lemma-global-sections-point, with L=K and G trivial"
+   }
+  },
+  {
+   "text": "Use the resolution formula of [def-weil-pbc-etale-cohomology]. For a K-injective resolution $F\\to I^\\bullet$, exactness of global sections implies that the cycles and boundaries of $\\Gamma(I^\\bullet)$ are the sections of the cycles and boundaries of $I^\\bullet$: kernels are preserved, and images are preserved as kernels of cokernels. Therefore $\\mathcal H^q(\\Gamma(I^\\bullet))=\\Gamma(\\mathcal H^q(I^\\bullet))=0$ for $q>0$, since $I^\\bullet$ is quasi-isomorphic to $F$ in degree zero. In particular this holds for every locally torsion abelian sheaf, with no bound on its annihilators. By [def-sc-etale-torsion-cd] this is $\\operatorname{cd}_{\\rm tor}(K)\\leq0$.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology",
+    "def-sc-etale-torsion-cd"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JQ equivalence and Tag 04JM sections formula; explicit exact-resolution argument"
+   }
   }
  ],
  "proof_deps": [
-  "lem-exc-field-discrete-modules"
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-exc-field-sections-stalk-invariants",
+  "def-weil-pbc-etale-cohomology",
+  "def-sc-etale-torsion-cd"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/lem-sf-separably-closed-torsion-cd.md",
-  "place": "## Proof"
+  "place": "Proof paragraph, via Stacks Tags 04JQ and 04JM and the explicit resolution calculation"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "torsion etale cohomology of separably closed field vanishes in positive degree",
+   "results": "Algebra.FormallyEtale.of_isSeparable_aux; Algebra.FormallyEtale.subsingleton_h1Cotangent; Algebra.FormallyEtale.of_isSeparable; Algebra.FormallyEtale.iff_exists_algEquiv_prod; Algebra.FormallyEtale.iff_isSeparable; Algebra.formallyEtale_iff; groupCohomology.H1ofAutOnUnitsUnique; Algebra.Etale.iff_exists_algEquiv_prod (Mathlib/RingTheory/Etale/Field, Mathlib/RingTheory/Etale/Basic, Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme smallEtale cohomology H q separably closed field",
+   "results": "0 hits; unknown identifier Scheme",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "subsingleton_H|cohomology.*separably|0EZP",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "higher etale cohomology vanishes for a separably closed field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global sections exact on etale site of separably closed spectrum",
+   "results": "Algebra.etaleLocus_eq_univ_iff; AlgebraicGeometry.IsEtale.instFormallyUnramified; Algebra.Etale.formallyEtale; Algebra.FormallyEtale.iff_exists_algEquiv_prod; AlgebraicGeometry.IsEtale.of_comp (Mathlib/RingTheory/Etale/Locus, Mathlib/AlgebraicGeometry/Morphisms/Etale, Mathlib/RingTheory/Etale/Basic)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.subsingleton_H_constantSheaf_of_isSepClosed",
+   "results": "0 hits; unknown identifier",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "subsingleton_H_constantSheaf_of_isSepClosed|subsingleton_H",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -65,5 +147,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-fullcd-etale-origin"
+ "unit": "sk-prop-sf-fullcd-etale-origin",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-sf-separably-closed-torsion-cd",
+  "worker": "stage1",
+  "summary": "Repair of refused landing: revalidated the updated local-torsion definition and all cited statements. Replaced the finite-ring equivalence, which did not cover arbitrary torsion sheaves, by the existing abelian-sheaf equivalence and section-invariants formula, then wrote the exact-resolution calculation explicitly. No new nodes or statement change.",
+  "blueprint": "Steps 1 and 2 realize the equivalence and global-section assertions of the blueprint proof paragraph; step 3 realizes higher-derived-section vanishing and the torsion bound.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-abelian-sheaves-gmodules",
+    "why": "Generic equivalence for all abelian sheaves realizes the blueprint point-equivalence argument without the finite coefficient restriction."
+   },
+   {
+    "node": "lem-exc-field-sections-stalk-invariants",
+    "why": "Generic section-stalk formula realizes the blueprint global-section identification; with L=K and G trivial it identifies sections with the fibre."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-exc-field-sections-stalk-invariants"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-3f64432f6",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-3f64432f6 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, master blueprint, unit/chapter route, and Stacks Tags 04JQ/04JM. The arbitrary-abelian-sheaf equivalence and sections formula prove exactness and ordinary positive-degree vanishing, including Q/Z and imperfect separably closed fields. No new nodes or cycles. Both declared tool uses accepted. review.md records the report’s overly broad attachment-search claim and distinguishes Ext-based source vanishing from ordinary derived sections."
+ }
 }
