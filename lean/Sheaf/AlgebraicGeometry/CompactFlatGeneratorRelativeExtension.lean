@@ -6,6 +6,10 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
+import Sheaf.AlgebraicGeometry.CompactFlatGeneratorCover
+import Sheaf.Algebra.Homology.RelativeBiprodConeExtension
+import Sheaf.Algebra.Homology.CyclePullbackResolution
+import Mathlib.Algebra.Homology.Refinements
 
 /-! # One relative compact flat generator resolution step
 
@@ -18,6 +22,49 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
+
+private abbrev GeneratorSum (Y : Scheme.{u})
+    (M : SheafOfModules.{u} (moduleRings Y.toRingedSpace)) : Prop :=
+  ∃ (I : Type u)
+        (G : I → SheafOfModules.{u} (moduleRings Y.toRingedSpace)),
+        Nonempty (M ≅ ∐ G) ∧
+        (∀ j : I, SheafOfModules.IsFlat (G j)) ∧
+        ∀ (j : I) (K : Type u)
+          (H : K → SheafOfModules.{u} (moduleRings Y.toRingedSpace))
+          (f : G j ⟶ ∐ H),
+          ∃ (S : Finset K) (g : G j ⟶ ∐ (fun k : {k // k ∈ S} ↦ H k.1)),
+            g ≫ Sigma.desc (fun k : {k // k ∈ S} ↦ Sigma.ι H k.1) = f
+
+private theorem generatorSum_biprod (Y : Scheme.{u})
+    (M N : SheafOfModules.{u} (moduleRings Y.toRingedSpace))
+    (hM : GeneratorSum Y M) (hN : GeneratorSum Y N) :
+    GeneratorSum Y (M ⊞ N) := by
+  classical
+  obtain ⟨I, G, ⟨eM⟩, hG, hcG⟩ := hM
+  obtain ⟨J, H, ⟨eN⟩, hH, hcH⟩ := hN
+  let K : I ⊕ J → SheafOfModules.{u} (moduleRings Y.toRingedSpace) := Sum.elim G H
+  let e : (∐ G) ⊞ (∐ H) ≅ ∐ K :=
+    { hom := biprod.desc (Sigma.desc (fun i ↦ Sigma.ι K (.inl i)))
+        (Sigma.desc (fun j ↦ Sigma.ι K (.inr j)))
+      inv := Sigma.desc (fun k ↦ match k with
+        | .inl i => Sigma.ι G i ≫ biprod.inl
+        | .inr j => Sigma.ι H j ≫ biprod.inr)
+      hom_inv_id := by
+        apply biprod.hom_ext'
+        all_goals apply Sigma.hom_ext; intro i; simp [K]
+      inv_hom_id := by
+        apply Sigma.hom_ext
+        intro i
+        cases i <;> simp [K, Category.assoc] }
+  refine ⟨I ⊕ J, K, ⟨biprod.mapIso eM eN ≪≫ e⟩, ?_, ?_⟩
+  · intro i
+    cases i with
+    | inl i => exact hG i
+    | inr j => exact hH j
+  · intro i
+    cases i with
+    | inl i => exact hcG i
+    | inr j => exact hcH j
 
 /-- Extend a bounded-above generator complex along an arbitrary map into a
 bounded-above complex, keeping its inclusion split in each degree.
@@ -77,6 +124,59 @@ theorem exists_compact_flat_generator_relative_extension (Y : Scheme.{u})
           (H : K → SheafOfModules.{u} (moduleRings Y.toRingedSpace))
           (f : G j ⟶ ∐ H),
           ∃ (S : Finset K) (g : G j ⟶ ∐ (fun k : {k // k ∈ S} ↦ H k.1)),
-            g ≫ Sigma.desc (fun k : {k // k ∈ S} ↦ Sigma.ι H k.1) = f := by sorry
+            g ≫ Sigma.desc (fun k : {k // k ∈ S} ↦ Sigma.ι H k.1) = f := by
+  classical
+  let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  let S : ObjectProperty A := GeneratorSum Y
+  have hzero (M : A) (hM : IsZero M) : S M := by
+    let G : PEmpty.{u + 1} → A := PEmpty.elim
+    have hG : IsZero (∐ G) := by
+      rw [IsZero.iff_id_eq_zero]
+      apply Sigma.hom_ext
+      intro j
+      exact PEmpty.elim j
+    exact ⟨PEmpty.{u + 1}, G, ⟨hM.iso hG⟩, fun j ↦ PEmpty.elim j,
+      fun j ↦ PEmpty.elim j⟩
+  obtain ⟨T, π, hT⟩ := exists_functorial_compact_flat_generator_cover Y
+  obtain ⟨bL, hbL⟩ := hL
+  obtain ⟨bE, hbE⟩ := hE
+  let N := max bL bE
+  have hc : ∀ i : ℤ, N < i → IsZero ((CochainComplex.mappingCone a).X i) := by
+    intro i hi
+    apply (CochainComplex.mappingCone.isZero_X_iff a i).2
+    exact ⟨hbL (i + 1) (by dsimp [N] at hi; omega),
+      hbE i (by dsimp [N] at hi; omega)⟩
+  let P : ObjectProperty (CochainComplex A ℤ) :=
+    fun F ↦ ∀ i : ℤ, N < i → IsZero (F.X i)
+  let F : P.FullSubcategory := ⟨CochainComplex.mappingCone a, hc⟩
+  obtain ⟨Q, ε, hQ⟩ := CochainComplex.exists_functorial_cyclePullback_construction
+    S hzero T π (fun M ↦ (hT M).2) (fun M ↦ (hT M).1) N
+  have hr : QuasiIso (ε.app F) := by
+    rw [quasiIso_iff]
+    intro i
+    rw [quasiIsoAt_iff_isIso_homologyMap, isIso_iff_mono_and_epi]
+    constructor
+    · rw [HomologicalComplex.mono_homologyMap_iff_up_to_refinements
+        (ε.app F) (i - 1) i (i + 1) (by simp) (by simp)]
+      intro B x hx y hy
+      have hlift := (hQ F).2.2 (i - 1)
+      rw [show i - 1 + 1 = i by omega] at hlift
+      obtain ⟨B', p, hp, z, _, hz⟩ := hlift B x y hx hy
+      exact ⟨B', p, hp, z, by simpa using hz.symm⟩
+    · rw [HomologicalComplex.epi_homologyMap_iff_up_to_refinements
+        (ε.app F) (i - 1) i (i + 1) (by simp) (by simp)]
+      intro B y hy
+      obtain ⟨B', p, hp, z, hz, hd⟩ :=
+        (hQ F).2.2 i B 0 y (by simp) (by simpa using hy.symm)
+      exact ⟨B', p, hp, z, by simpa using hd, 0, by simpa using hz.symm⟩
+  obtain ⟨L', l, v, hb, hv, hlv, hs, ht⟩ :=
+    CochainComplex.exists_relative_biprod_cone_extension L E a ⟨bL, hbL⟩
+      (Q.obj F) (ε.app F) ⟨N, (hQ F).2.1⟩ hr
+  refine ⟨L', l, v, hb, hv, hlv, hs, ?_⟩
+  intro i
+  obtain ⟨e⟩ := ht i
+  obtain ⟨I, G, ⟨eG⟩, hg, hcompact⟩ :=
+    generatorSum_biprod Y (L.X i) ((Q.obj F).X i) (hgen i) ((hQ F).1 i)
+  exact ⟨I, G, ⟨e ≪≫ eG⟩, hg, hcompact⟩
 
 end AlgebraicGeometry

@@ -14,25 +14,39 @@
  ],
  "proof": [
   {
-   "text": "Use the affine-open sheaves j_! O_U. Their stalks are either zero or the\nlocal ring, so they are flat. Adjunction identifies maps from them with sections\non U. A section of a sheaf coproduct locally comes from a finite subsum; an affine\nopen is quasi-compact, so finitely many such neighborhoods suffice. The union of\ntheir finite supports gives the required factorization, with uniqueness and\ngluing supplied by the monic inclusion of a subsum. Every module sheaf is covered\nby a sum of these sheaves: for every local section choose an affine neighborhood\nand its corresponding adjunction map. Resolve the bounded-above mapping cone of\na by these generators, downward from its upper bound, choosing generator covers\nof the successive pullbacks of cycles as in the bounded resolution construction\nunderlying 077J. This gives a bounded-above complex Q and a quasi-isomorphism\nQ -> Cone(a). Compose with Cone(a) -> L[1]. Its shifted cone gives L', with the\ntermwise split inclusion L -> L' and terms the direct sums of terms of L and Q.\nThe triangle comparison gives L' -> E. Its composite with L -> L' equals a up to\nhomotopy. Extend the comparison homotopy degreewise along the split inclusion,\nand subtract its boundary; this makes the equality strict without changing the\nhomotopy class. The map is a quasi-isomorphism by comparison of the two triangles,\nsince the other vertical maps are the identity of L and Q -> Cone(a).\nFinite direct sums of generator coproducts are reindexed by disjoint union, so\nall terms of L' have the required generator description. The maximum of the\nbounds, with the shift accounted for, bounds L'. There is no assumption on a:\na zero map, a zero target, and an acyclic target are covered by the same argument.\nEmpty coproducts represent zero terms. No projective lifting is used.",
+   "text": "Construct the functorial compact-flat-generator cover. Take S to be coproducts of such generators, and prove every zero object is in S by an empty coproduct. The cone of a:L→E is bounded above by max(bL,bE), since its terms are L^{i+1}⊕E^i. Apply the existing cycle-pullback construction with S and this cover.",
    "uses": [
-    "def-pc-cochain-complex-modules",
-    "def-pc-flat-sheaf-modules",
-    "def-pc-quasi-iso-modules"
+    "lem-sc-compact-flat-generator-cover",
+    "lem-pc-functorial-cycle-pullback-construction"
    ],
    "elementary": false
+  },
+  {
+   "text": "The cycle-pullback lifting property proves the augmentation Q→Cone(a) a quasi-isomorphism. Apply Mathlib mono_homologyMap_iff_up_to_refinements to lift a cycle mapping to a boundary one degree down, and epi_homologyMap_iff_up_to_refinements to lift a target cycle with zero next-degree component.",
+   "uses": [
+    "lem-pc-functorial-cycle-pullback-construction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the explicit relative biproduct cone extension to Q→Cone(a). It gives the bound, quasi-isomorphism v, strict equality l≫v=a, split components, and term isomorphisms Lprime^i≅L^i⊕Q^i. Reindex the two generator coproducts by the disjoint union of their index types: explicit Sigma.desc and biprod.desc maps give the isomorphism by their universal properties. Flatness and finite support follow separately on each summand, with no compactness hypothesis on Lprime itself.",
+   "uses": [
+    "lem-sc-relative-biprod-cone-extension"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-cochain-complex-modules",
-  "def-pc-flat-sheaf-modules",
-  "def-pc-quasi-iso-modules"
+  "lem-pc-functorial-cycle-pullback-construction",
+  "lem-sc-compact-flat-generator-cover",
+  "lem-sc-relative-biprod-cone-extension"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "P1",
+  "group": "V4",
+  "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/06XX",
-  "place": "Finite cone-extension step before the final termwise-surjectivity addition; affine-open generator specialization from the original target-refinement proof, checked against 03EW and 077J."
+  "place": "Explicit cone coordinates, compact affine generators from 03EW, and existing cycle-pullback construction; no new sorry."
  },
  "mathlib_searches": [
   {
@@ -118,9 +132,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261014T083745-L-4168253",
+  "landing": "20261014T091810-L-473387",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
