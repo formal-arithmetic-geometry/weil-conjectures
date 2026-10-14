@@ -24,9 +24,116 @@
   "def-weil-abstract-derived-category",
   "lem-pur-derived-change-of-rings"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By pseudo-coherence choose a bounded-above finite-free complex $L^\\bullet$ and $\\gamma:Q(L^\\bullet)\\xrightarrow{\\sim}K$. Tensor with a free module is a direct sum of copies of the input, so it preserves exact sequences. Thus $L^\\bullet$ is K-flat by the bounded-flat-complex lemma, and its termwise reduction $\\overline L$ computes derived reduction. Put $\\eta=\\alpha\\circ(\\gamma\\otimes_R^L R/I):Q(\\overline L)\\xrightarrow{\\sim}Q(F)$. The projective-complex map-representative lemma, applied over $R/I$ to the bounded-above finite-free complex $F$, gives a chain map $\\delta:F\\to\\overline L$ with $Q(\\delta)=\\eta^{-1}$. It is a quasi-isomorphism since its cohomology maps are those of an isomorphism in the derived category.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-ring-derived-map-representative",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCA (lemma-lift-complex), cone construction and cokernel proof; Tag 0BC9 (lemma-lift-acyclic-complex)"
+   }
+  },
+  {
+   "text": "Use the class $\\mathcal P$ of all projective $R$-modules. It is closed under finite sums and summands: lift a map from a sum componentwise, and a map from a summand by precomposing with the retraction. For any module $M$, $M/IM=0$ implies $M=IM=I^NM=0$. Consequently a map surjective modulo $I$ is surjective, by applying this argument to its cokernel. Every term of $F$ lifts as $R^{r_i}$ and every term of $\\overline L$ lifts as $L^i$. The cone-properties lemma gives the bounded-above acyclic complex $C=\\operatorname{Cone}(\\delta)$, with $C^i=\\overline L^i\\oplus F^{i+1}$ and each term reducing a member of $\\mathcal P$.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "lem-sc-complex-lift-cone-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCA (lemma-lift-complex), cone construction and cokernel proof; Tag 0BC9 (lemma-lift-acyclic-complex)"
+   }
+  },
+  {
+   "text": "The three hypotheses of the acyclic lifting lemma are exactly the projectivity, summand closure and reflection of surjectivity verified in step 2. Apply it to $C$ to obtain a bounded-above acyclic complex $A$ of projective $R$-modules and a complex isomorphism $e:\\overline A\\xrightarrow{\\sim}C$. No finiteness of $A$ is asserted or needed.",
+   "uses": [
+    "lem-sc-complex-lift-acyclic-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCA (lemma-lift-complex), cone construction and cokernel proof; Tag 0BC9 (lemma-lift-acyclic-complex)"
+   }
+  },
+  {
+   "text": "Apply the strict-map lemma to $L$, $A$, $C$ and the cone inclusion $j:\\overline L\\to C$. It supplies $f:L\\to A$ with $e\\overline f=j$. Set $B=\\operatorname{Coker}(f)$ degreewise. The cone-cokernel lemma identifies $\\overline B$ with $F[1]$ and says the reduced right-exact sequence $L^i\\to A^i\\to B^i$ is split exact. Choose this identification explicitly: in $e$-coordinates the image of $\\overline f$ is the first summand of $C^i=\\overline L^i\\oplus F^{i+1}$, so $[x,y]\\mapsto y$ defines a bijection $\\rho^i:\\overline B^i\\to F^{i+1}$. Since the second coordinate of the cone differential is $-d_Fy$, these bijections form a chain isomorphism $\\rho:\\overline B\\xrightarrow{\\sim}F[1]$. Its first two terms are projective; its last reduction is the reduction of the finite free lift $R^{r_{i+1}}$ of $F^{i+1}$. Apply projective-class reduced splitting in every degree. Hence $0\\to L\\xrightarrow f A\\to B\\to0$ is degreewise split exact and every $B^i$ is projective. Set $P=B[-1]$ and $\\theta=\\rho[-1]:\\overline P\\xrightarrow{\\sim}F$, using the canonical cancellation of opposite shifts.",
+   "uses": [
+    "lem-sc-complex-lift-strict-map",
+    "lem-sc-complex-lift-cone-cokernel",
+    "lem-sc-projective-class-reduced-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCA (lemma-lift-complex), cone construction and cokernel proof; Tag 0BC9 (lemma-lift-acyclic-complex)"
+   }
+  },
+  {
+   "text": "For each $i$, lift a finite basis of $F^i\\cong P^i/IP^i$ to $P^i$. If $M_i$ is their span, the cokernel $T=P^i/M_i$ satisfies $T/IT=0$, hence $T=I^NT=0$. Thus $P^i$ is finite. It is projective by step 4, and its reduction is free, so the finite-projective-free-mod-ideal lemma makes it free, using precisely the hypothesis that every element of $1+I$ is a unit. If $F^i=0$ for $i>b$, the same nilpotent argument gives $P^i=0$ for $i>b$. For a literal zero module above $b$, put $P^{\\prime i}=P^i$ for $i\\leq b$ and $P^{\\prime i}=0$ otherwise. Let $u^i:P^{\\prime i}\\to P^i$ be the identity below the bound and the unique isomorphism above it; define $d_{P\\prime}^i=(u^{i+1})^{-1}d_P^iu^i$ and $\\theta^{\\prime i}=\\theta^i\\overline{u^i}$. Then $d_{P\\prime}^{i+1}d_{P\\prime}^i=0$ by cancellation of $u^{i+1}$, and $u$ is a chain isomorphism, so the later isomorphism $\\beta$ is replaced by $\\beta\\circ Q(u)$ and the marking equation follows by composing with $Q(\\overline u)$.",
+   "uses": [
+    "lem-sc-finite-projective-free-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BC6 (lemma-isomorphic-finite-projective-lifts), and Tag 0H76 proof, nilpotent Nakayama argument"
+   }
+  },
+  {
+   "text": "Let $D=\\operatorname{Cone}(f)$, with $D^i=A^i\\oplus L^{i+1}$ and $d(a,l)=(d_Aa+f(l),-d_Ll)$. There are chain maps $t:D\\to B$, $t(a,l)=[a]$, and $p:D\\to L[1]$, $p(a,l)=l$. The cone triangle $L\\to A\\to D\\xrightarrow{-p}L[1]$ and the derived-cohomology long exact sequence show that $-p$ is a quasi-isomorphism, since $A$ is acyclic. Also $t$ is a quasi-isomorphism: its kernel identifies with the complex of pairs $(x,l)\\in L^i\\oplus L^{i+1}$ with differential $(d_Lx+l,-d_Ll)$ and contraction $(x,l)\\mapsto(0,x)$. Explicitly, a cycle of $B$ lifts to $z\\in D$; $dz$ lies in that kernel and its contraction subtracts a kernel element to make $z$ closed. A closed element of $D$ whose image is a boundary in $B$ differs, after subtracting a lifted boundary, by a kernel cycle, which is a kernel boundary. This proves bijectivity on cohomology without assuming reduction is exact on arbitrary sequences. Define $\\beta=\\gamma\\circ Q((-p)[-1])\\circ Q(t[-1])^{-1}:Q(P)\\xrightarrow{\\sim}K$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCA (lemma-lift-complex), cone construction and cokernel proof; Tag 0BC9 (lemma-lift-acyclic-complex)"
+   }
+  },
+  {
+   "text": "It remains to check the prescribed marking, including its sign. All of $L,A,B,D$ are bounded-above complexes of projectives, which are flat: by the summand characterization, tensoring with a projective is a retract of tensoring with a free module, and hence preserves exact sequences. Thus bounded-flat K-flatness and derived change of rings compute the reduction of $\\beta$ by the displayed chain maps. In coordinates supplied by $e$, $\\overline D^i=\\overline L^i\\oplus F^{i+1}\\oplus\\overline L^{i+1}$ and its differential is $(x,y,z)\\mapsto(d x+\\delta y+z,-d y,-d z)$. The map $\\rho\\overline t$ is $(x,y,z)\\mapsto y$ and $\\overline p$ is $(x,y,z)\\mapsto z$. The degree-minus-one map $h(x,y,z)=x$ to $\\overline L[1]$ satisfies $d h+h d=\\delta[1]\\rho\\overline t+\\overline p$. Therefore $Q(-\\overline p)=Q(\\delta[1])Q(\\rho\\overline t)$. Shift by $-1$ and cancel $Q(\\overline t[-1])$ to obtain $\\beta\\otimes_R^L R/I=(\\gamma\\otimes_R^L R/I)\\circ Q(\\delta)\\circ Q(\\theta)$. Since $\\alpha\\circ(\\gamma\\otimes_R^L R/I)\\circ Q(\\delta)=\\eta\\eta^{-1}=1$, this is exactly $Q(\\theta)=\\alpha\\circ(\\beta\\otimes_R^L R/I)$.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCA, choice of delta and cokernel construction; explicit cone-coordinate homotopy for the marking"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-ring-derived-map-representative",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-projective-module",
+  "lem-sc-complex-lift-cone-properties",
+  "lem-sc-complex-lift-acyclic-projective",
+  "lem-sc-complex-lift-strict-map",
+  "lem-sc-complex-lift-cone-cokernel",
+  "lem-sc-projective-class-reduced-splitting",
+  "lem-sc-finite-projective-free-mod-ideal",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0BCA, 0BC9, 0BC6: source cone proof specialized to all projectives with nilpotent reflection of surjectivity; explicit marking homotopy and preservation of the upper bound supplied here"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,15 +176,130 @@
    "results": "8 hits; top: Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.lift, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallySmooth.mk_lift, Algebra.Generators.exists_presentation_of_free_cotangent, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, PreTilt.untiltFun",
    "date": "2026-10-14",
    "verdict": "no match: formally smooth algebra lifting, Tor of projectives and module resolutions do not lift prescribed derived complex models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a prescribed bounded above finite free complex model of derived reduction modulo a nilpotent ideal preserving its specified derived isomorphism",
+   "results": "8 hits; Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.lift, Algebra.FormallySmooth.exists_kerProj_comp_eq_id, Algebra.FormallySmooth.mk_lift, Algebra.Extension.homInfinitesimal, Algebra.FormallySmooth.comp_lift",
+   "date": "2026-10-14",
+   "verdict": "no match: algebra maps and projective resolutions/K-projective comparison do not give the prescribed quotient complex lift"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nilpotent\", \"Complex\"",
+   "results": "0 hits; ",
+   "date": "2026-10-14",
+   "verdict": "no match: algebra maps and projective resolutions/K-projective comparison do not give the prescribed quotient complex lift"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|nilpotent.*complex|complex.*nilpotent",
+   "results": "0 hits; ",
+   "date": "2026-10-14",
+   "verdict": "no match: algebra maps and projective resolutions/K-projective comparison do not give the prescribed quotient complex lift"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above complex of projective modules lifts a specified finite free model over a nilpotent quotient by an acyclic cone construction",
+   "results": "8 hits; CategoryTheory.ProjectiveResolution.ofComplex, ModuleCat.projectiveResolution, CochainComplex.isKProjective_of_projective, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CochainComplex.IsKProjective, CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex, CategoryTheory.ProjectiveResolution.of_def, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex",
+   "date": "2026-10-14",
+   "verdict": "no match: algebra maps and projective resolutions/K-projective comparison do not give the prescribed quotient complex lift"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lifting prescribed finite free complexes across nilpotent ideals",
+   "results": "0 hits; ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a prescribed bounded above finite free complex model of derived reduction modulo a nilpotent ideal preserving its specified derived isomorphism",
+   "results": "8 hits; Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.lift, Algebra.FormallySmooth.exists_kerProj_comp_eq_id, Algebra.FormallySmooth.mk_lift, Algebra.Extension.homInfinitesimal, Algebra.FormallySmooth.comp_lift",
+   "date": "2026-10-14",
+   "verdict": "no match: algebra maps and projective resolutions/K-projective comparison do not give the prescribed quotient complex lift"
+  },
+  {
+   "tool": "grep",
+   "query": "IsNilpotent.*(CochainComplex|HomologicalComplex)|(CochainComplex|HomologicalComplex).*IsNilpotent",
+   "results": "{\"t\": \"2026-10-14T02:08:03Z\", \"tool\": \"grep\", \"query\": \"IsNilpotent.*(CochainComplex|HomologicalComplex)|(CochainComplex|HomologicalComplex).*IsNilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not lift a prescribed quotient complex model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above complex of finite free modules over a quotient ring lifts to a complex of projective modules over a nilpotent thickening",
+   "results": "{\"t\": \"2026-10-14T02:08:04Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded above complex of finite free modules over a quotient ring lifts to a complex of projective modules over a nilpotent thickening\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"ModuleCat.projectiveResolution\", \"Algebra.formallySmooth_iff\", \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"Rep.standardComplex.x_projective\"], \"digest\": \"cdb1dc00703052ec\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not lift a prescribed quotient complex model"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-pseudocoherent-normalized-algebra-tower",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-nilpotent-marked-free-complex-lift",
+  "worker": "stage1",
+  "summary": "Reused the existing projective-class cone, acyclic lift, strict lift, cokernel and reduced-splitting statements. Wrote the nilpotent surjectivity and finite-generation arguments directly. The two roof maps and an explicit signed homotopy prove compatibility with the prescribed alpha, rather than applying the unmarked lifting theorem. Zero reduction forces zero terms above the supplied bound. No new nodes.",
+  "blueprint": "Realizes thm-weil-pbc-amplification-proper proof (c), TOW, the finite-local-model input identified in the inherited from.place; via normalized local effectivity and the pseudo-coherent normalized algebra tower.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic ring-level or derived-category tool in the cone lifting construction; the proper-base-change unit supplies no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic ring-level or derived-category tool in the cone lifting construction; the proper-base-change unit supplies no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-sc-complex-lift-cone-properties",
+    "why": "Generic ring-level or derived-category tool in the cone lifting construction; the proper-base-change unit supplies no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-sc-complex-lift-acyclic-projective",
+    "why": "Generic ring-level or derived-category tool in the cone lifting construction; the proper-base-change unit supplies no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-sc-complex-lift-strict-map",
+    "why": "Generic ring-level or derived-category tool in the cone lifting construction; the proper-base-change unit supplies no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-sc-complex-lift-cone-cokernel",
+    "why": "Generic ring-level or derived-category tool in the cone lifting construction; the proper-base-change unit supplies no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-sc-projective-class-reduced-splitting",
+    "why": "Generic ring-level or derived-category tool in the cone lifting construction; the proper-base-change unit supplies no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-sc-finite-projective-free-mod-ideal",
+    "why": "Generic ring-level or derived-category tool in the cone lifting construction; the proper-base-change unit supplies no replacement for this algebraic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-sc-complex-lift-cone-properties",
+  "lem-sc-complex-lift-acyclic-projective",
+  "lem-sc-complex-lift-strict-map",
+  "lem-sc-complex-lift-cone-cokernel",
+  "lem-sc-projective-class-reduced-splitting",
+  "lem-sc-finite-projective-free-mod-ideal"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-97fe03cdc",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-97fe03cdc (reviewer sub-agent of L); spot-checked: Read the full item, report, all cited statements, source locations and unit/chapter route. Verified all seven steps, nilpotent surjectivity, projective splitting, finite generation, exact upper bound and signed homotopy preserving the prescribed marking. Checked edge cases, duplicates, dependency cycles and archived master coefficient categories/base-change orientation. Accepted eight declared generic tool uses. No new nodes or repairs; detailed checks are in review.md."
+ }
 }
