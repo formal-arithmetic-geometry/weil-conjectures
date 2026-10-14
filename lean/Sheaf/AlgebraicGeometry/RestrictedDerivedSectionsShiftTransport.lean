@@ -8,7 +8,6 @@ module
 public import Sheaf.AlgebraicGeometry.RestrictedDerivedSectionZeroComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
-import WeilConjectures.SixFunctors.Etale.Derived.Shift
 import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
@@ -26,6 +25,11 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Abelian
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale.RawRestrictedComparison
+
+private noncomputable instance restrictedCommShiftLowerStar
+    {X Y : Scheme.{v}} (f : X ⟶ Y) :
+    (R((f)_*[AddCommGrpCat.{v + 1}])).CommShift ℤ :=
+  (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).rightAdjointCommShift ℤ
 
 attribute [local instance] etaleComposition etaleIdentities etalePullbacks
   etaleBaseChange sheafifyInstance weakSheafifyInstance
