@@ -43,8 +43,6 @@ noncomputable abbrev perfectDescentComparison
     {X S : Scheme.{u}} (s : X ⟶ S) {T T' : Over S} (g : T' ⟶ T) :
     derivedPullback (pullback.fst s T'.hom) ≅
       derivedPullback (pullback.fst s T.hom) ⋙ derivedPullback (baseChangeMap s g) :=
-  -- Share the comparison used by Hom continuity; choosing another comparison here
-  -- would require transporting the continuity statement as well as its Hom maps.
   perfectHomComparison s g
 
 private theorem homMap_eq_iff
@@ -189,7 +187,8 @@ theorem perfect_descend_morphisms
       refine ⟨l, (hij.trans hjk).trans (hkl₁.trans hl₁l), fl, ?_, fun _ ↦ inferInstance⟩
       have hfl : perfectLimitMap R c s _ fl = φ := by
         rw [perfectLimitMap_stage, hf']
-      exact (homMap_eq_iff _ _ _ _).2 hfl
+      apply (homMap_eq_iff _ _ _ _).2
+      exact hfl
     · obtain ⟨j, hij, f, hf⟩ := surj i le_rfl φ
       refine ⟨j, hij, f, ?_, fun h ↦ (hφ h).elim⟩
       exact (homMap_eq_iff _ _ _ _).2 hf
