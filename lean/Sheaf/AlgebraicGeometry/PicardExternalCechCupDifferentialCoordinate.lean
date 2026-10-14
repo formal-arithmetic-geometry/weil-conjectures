@@ -85,6 +85,41 @@ the degree-map inclusion equation therefore give the same coordinates. Tensor an
 extensionality conclude the summand equality. The cancellation also applies when p=0 or q=0 and
 in characteristic two. Empty index families give vacuous coordinate equalities; zero
 coefficients give zero maps. -/
+/- The inclusion-level identity in the canonical degree `p + q`. This is the
+   signed Alexander--Whitney coordinate calculation; the general statement
+   above only transports it across an equality of natural-number degrees.
+   (blueprint: lem-sc-picard-external-cech-cup-differential-coordinate-rfl)
+   Proof: expand the alternating Cech faces, use the front/back bidegree
+   coordinate formulas, and cancel the shared face with opposite signs; the
+   remaining faces are exactly the two tensor-total differential summands. -/
+theorem picardExternalCechCupDegreeMaps_comm_ι_rfl
+    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
+    {ι κ : Type w} (U : ι → X.Opens) (V : κ → Y.Opens) (F : X.Modules) (G : Y.Modules)
+    (l : ∀ p q : ℕ, ((curriedTensor (ModuleCat.{w} k)).obj
+        (((picardCechFunctor f U).obj F).X p)).obj
+          (((picardCechFunctor g V).obj G).X q) ⟶
+      ((picardCechFunctor (pullback.fst f g ≫ f)
+        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓
+          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G)).X (p + q))
+    (hl : ∀ p q, IsPicardExternalCechCupBidegree f g U V F G p q (l p q))
+    (p q : ℕ) :
+    HomologicalComplex.ιMapBifunctor ((picardCechFunctor f U).obj F)
+      ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))
+        (ComplexShape.up ℕ) p q (p + q) rfl ≫
+      picardExternalCechCupDegreeMaps f g U V F G l (p + q) ≫
+      ((picardCechFunctor (pullback.fst f g ≫ f)
+        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓
+          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G)).d
+        (p + q) (p + q + 1) =
+    HomologicalComplex.ιMapBifunctor ((picardCechFunctor f U).obj F)
+      ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))
+        (ComplexShape.up ℕ) p q (p + q) rfl ≫
+      (HomologicalComplex.mapBifunctor ((picardCechFunctor f U).obj F)
+        ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))
+          (ComplexShape.up ℕ)).d (p + q) (p + q + 1) ≫
+      picardExternalCechCupDegreeMaps f g U V F G l (p + q + 1) := by
+  sorry
+
 theorem picardExternalCechCupDegreeMaps_comm_ι
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     {ι κ : Type w} (U : ι → X.Opens) (V : κ → Y.Opens) (F : X.Modules) (G : Y.Modules)
@@ -109,8 +144,10 @@ theorem picardExternalCechCupDegreeMaps_comm_ι
       (HomologicalComplex.mapBifunctor ((picardCechFunctor f U).obj F)
         ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))
           (ComplexShape.up ℕ)).d n (n + 1) ≫
-      picardExternalCechCupDegreeMaps f g U V F G l (n + 1) := by
-  sorry
+    picardExternalCechCupDegreeMaps f g U V F G l (n + 1) := by
+  subst n
+  exact picardExternalCechCupDegreeMaps_comm_ι_rfl f g U V F G l hl p q
+
 
 end
 end AlgebraicGeometry.Scheme.Modules
