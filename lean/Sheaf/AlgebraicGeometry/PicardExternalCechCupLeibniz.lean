@@ -124,13 +124,13 @@ theorem picardExternalCechCupBidegree_leibniz
   change ((cechComplexFunctor W).obj E.presheafModuleCat).d (p + q) (p + q + 1)
     (cechCupCochain W FF GG p q (φF.f p a) (φG.f q b)) = _
   rw [cechCupCochain_leibniz]
-  exact congrArg₂ (fun x y ↦
+  apply congrArg₂ (fun x y ↦
     eqToHom (congrArg (fun n ↦ ((cechComplexFunctor W).obj E.presheafModuleCat).X n)
       (Nat.add_right_comm p 1 q)) x + (-1 : ℤ) ^ p •
     eqToHom (congrArg (fun n ↦ ((cechComplexFunctor W).obj E.presheafModuleCat).X n)
       (Nat.add_assoc p q 1).symm) y)
-    (congrArg (fun x ↦ cechCupCochain W FF GG (p + 1) q x (φG.f q b)) hF)
-    (congrArg (fun y ↦ cechCupCochain W FF GG p (q + 1) (φF.f p a) y) hG)
+  · exact congrArg (fun x ↦ cechCupCochain W FF GG (p + 1) q x (φG.f q b)) hF
+  · exact congrArg (fun y ↦ cechCupCochain W FF GG p (q + 1) (φF.f p a) y) hG
 
 end
 end AlgebraicGeometry.Scheme.Modules
