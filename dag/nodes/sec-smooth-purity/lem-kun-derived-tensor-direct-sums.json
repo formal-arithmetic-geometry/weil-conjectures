@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-derived-tensor-direct-sums",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Derived tensor products preserve direct sums",
@@ -13,28 +13,195 @@
   "place": "node lem-kun-derived-tensor-direct-sums, order 1718"
  },
  "stmt_deps": [
-  "def-weil-pbc-derived-categories"
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor"
  ],
  "proof": [
   {
-   "text": "Tensor products with a fixed complex preserve direct sums degreewise,\nand a K-flat replacement of $A$ represents the derived product, so\nthe statement follows from\n[def-kun-derived-tensor].",
+   "text": "Fix a scheme $T$, a commutative ring $\\Lambda$, and a set $I$ in the universe of the sheaves. Work on a small skeleton of $T_{\\Et}$ (equivalently choose the ambient universe in which this site is small), and put $\\mathcal B=\\Mod(\\Lambda_T)$ and $D=D(\\mathcal B)$ as in [def-weil-pbc-derived-categories]. By [lem-pur-ringed-site-grothendieck-abelian], $\\mathcal B$ has small colimits and is Grothendieck abelian.",
    "uses": [
+    "def-weil-pbc-derived-categories",
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A5 (section-unbounded), opening paragraph; sites-modules.tex Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits), 03EW (lemma-module-quotient-flat)"
+   }
+  },
+  {
+   "text": "Let $(C_i)_{i\\in I}$ be any family of complexes in $\\mathcal B$. Apply [lem-kun-grothendieck-derived-coproducts] to the Grothendieck abelian category of step 1. The termwise coproduct complex $S$, with $S^n=\\bigoplus_i C_i^n$ and differential induced by the $d_{C_i}^n$, exists, and $QS$ with the localized coprojections $Q(C_i\\to S)$ is a coproduct of the $QC_i$ in $D$. The cited statement explicitly applies to unbounded complexes and the empty index set.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
+    "lem-kun-grothendieck-derived-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 07D9 (lemma-derived-products), proof of clauses (1)-(2)"
+   }
+  },
+  {
+   "text": "Choose a representative complex $C_A$ of $A$, and apply [lem-kun-flat-resolution-existence] to obtain a quasi-isomorphism $P\\to C_A$ with $P$ K-flat. For a complex $C$ representing $B$, [def-kun-derived-tensor] computes $A\\kunotimes{\\Lambda}B$ as $Q\\operatorname{Tot}(P\\otimes_\\Lambda C)$. The independence of the K-flat choice is supplied by [lem-kun-derived-tensor-well-defined]. Use this same fixed $P$ for all members $B_i=QC_i$ and for the complex $S$ of step 2; the functor sends each coprojection to the image of $1_P\\otimes(C_i\\to S)$. No boundedness of $P$ or of the $C_i$ is imposed.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
+    "def-kun-derived-tensor",
+    "lem-kun-flat-resolution-existence",
+    "lem-kun-derived-tensor-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YU (definition-derived-tor)"
+   }
+  },
+  {
+   "text": "For any sheaf $F$ and family $(G_i)$, the adjunction in [lem-pc-sheaf-modules-tensor-closed] gives $\\operatorname{Hom}(F\\otimes\\bigoplus_iG_i,H)\\cong\\operatorname{Hom}(\\bigoplus_iG_i,\\mathcal Hom(F,H))\\cong\\prod_i\\operatorname{Hom}(F\\otimes G_i,H)$. The bijection is restriction along $F\\otimes G_i\\to F\\otimes\\bigoplus_iG_i$, so it proves that the canonical map $\\bigoplus_i(F\\otimes G_i)\\to F\\otimes\\bigoplus_iG_i$ is an isomorphism. In degree $n$, the total-tensor formula of [def-pc-tensor-complex-sheaves] therefore identifies $\\bigoplus_i\\bigoplus_{p+q=n}(P^p\\otimes C_i^q)$ with $\\bigoplus_{p+q=n}(P^p\\otimes\\bigoplus_i C_i^q)$. Both iterated sums are indexed by the same pairs $(i,(p,q))$; their universal properties identify them, also for infinite $I$ and infinitely many $(p,q)$. On the $(i,p,q)$ summand the differential is $d_P^p\\otimes1+(-1)^p1\\otimes d_{C_i}^q$ on both sides. Hence the canonical comparison $\\alpha:\\bigoplus_i\\operatorname{Tot}(P\\otimes C_i)\\to\\operatorname{Tot}(P\\otimes S)$ is an isomorphism of complexes, whose restriction to summand $i$ is exactly $1_P\\otimes(C_i\\to S)$.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EO (lemma-internal-hom-adjoint-tensor), 03EP (lemma-tensor-commute-colimits); homology.tex Tag 012Z (definition-associated-simple-complex), total terms and signed differential; sites-cohomology.tex Tag 06YM (lemma-derived-tor-exact), application to tensor complexes"
+   }
+  },
+  {
+   "text": "Apply step 2 to the complexes $\\operatorname{Tot}(P\\otimes C_i)$: the source of $Q\\alpha$ is their derived coproduct, with the localized coprojections. Apply step 2 to $C_i$ as well: $QS$ is the derived coproduct of $B_i$. Step 3 identifies the target of $Q\\alpha$ with $A\\kunotimes{\\Lambda}(\\bigoplus_iB_i)$ and each source summand with $A\\kunotimes{\\Lambda}B_i$. By the coprojection calculation in step 4, $Q\\alpha$ is exactly the comparison induced by applying $A\\kunotimes{\\Lambda}-$ to the coproduct arrows. As a functor, $Q$ sends the complex isomorphism $\\alpha$ to an isomorphism. Thus $A\\kunotimes{\\Lambda}-$ preserves the indicated coproduct. Every family of derived objects admits complex representatives by the localization definition in [def-weil-pbc-derived-categories], so this proves the assertion for all families.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
     "def-kun-derived-tensor"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor); combined with injectives.tex Tag 07D9 (lemma-derived-products)"
+   }
+  },
+  {
+   "text": "Finally let $\\sigma_B:A\\kunotimes{\\Lambda}B\\xrightarrow{\\sim}B\\kunotimes{\\Lambda}A$ be the natural symmetry in [lem-kun-tensor-sym]. If $j_i:B_i\\to S_D$ are coproduct arrows, naturality says $\\sigma_{S_D}\\circ(A\\kunotimes{\\Lambda}j_i)=(j_i\\kunotimes{\\Lambda}A)\\circ\\sigma_{B_i}$. Write $c_L:\\bigoplus_i(A\\kunotimes{\\Lambda}B_i)\\to A\\kunotimes{\\Lambda}S_D$ for the comparison of step 5. The comparison $c_R$ for $-\\kunotimes{\\Lambda}A$ satisfies $c_R=\\sigma_{S_D}\\circ c_L\\circ(\\bigoplus_i\\sigma_{B_i})^{-1}$: restriction of this composite to the $i$-th coprojection is $(j_i\\kunotimes{\\Lambda}A)\\circ\\sigma_{B_i}\\circ\\sigma_{B_i}^{-1}=j_i\\kunotimes{\\Lambda}A$, which characterizes $c_R$ by the coproduct universal property. The coproduct of the isomorphisms is invertible, with inverse induced by the individual inverses. All three maps are isomorphisms, proving the second assertion. For the empty family the same formulas identify both tensor functors' value at the zero object with zero.",
+   "uses": [
+    "lem-kun-tensor-sym"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor), canonical symmetry immediately after the definition"
+   }
   }
  ],
  "proof_deps": [
-  "def-kun-derived-tensor"
+  "def-weil-pbc-derived-categories",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-kun-grothendieck-derived-coproducts",
+  "def-kun-derived-tensor",
+  "lem-kun-flat-resolution-existence",
+  "lem-kun-derived-tensor-well-defined",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-tensor-complex-sheaves",
+  "lem-kun-tensor-sym"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-derived-tensor-direct-sums.md",
-  "place": "## Proof"
+  "place": "Expansion of the one-paragraph blueprint proof, using the existing coproduct node (Stacks Tag 07D9), ringed-site Grothendieckness (07A5), tensor-Hom (03EO, 03EP), signed totalization (012Z), and K-flat derived tensor (06YS, 06YT, 06YU)."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor product of unbounded complexes of sheaves of modules preserves arbitrary coproducts in either variable",
+   "results": "8 hits: HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, HomologicalComplex.HasGoodTensor₁₂, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor_obj, HomologicalComplex.HasGoodTensor₂₃",
+   "date": "2026-10-14",
+   "verdict": "no match: degreewise Tor functors with projective resolutions and ordinary complex tensor infrastructure do not state this unbounded derived sheaf assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"PreservesColimits\"",
+   "results": "6 hits: CategoryTheory.instPreservesColimitsTensorLeft, CategoryTheory.Functor.Monoidal.instPreservesColimitsOfShapeTensorLeftOfHasColimitsOfShape, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfShapeOppositeElementsFiberObjFunctorCurriedTensor, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfShapeOppositeElementsFiberObjFunctorFlipCurriedTensor",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: generic ordinary closed-monoidal preservation requires a derived closed-monoidal structure not supplied by Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesColimits.*tensor|PreservesColimits.*Tensor|tensor.*PreservesColimits",
+   "results": "24 hits: Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean (subdirectory Mathlib/CategoryTheory)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product preserves coproducts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The localization functor from cochain complexes in a Grothendieck abelian category to its derived category preserves arbitrary coproducts",
+   "results": "8 hits: DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, HasDerivedCategory.standard, HasDerivedCategory, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, DerivedCategory.Q, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso, HomologicalComplexUpToQuasiIso.instIsLocalizationHomologicalComplexCompHomotopyCategoryQuotientQhQuasiIso, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"PreservesColimits\"",
+   "results": "0 hits: none",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coproduct|HasCoproducts|PreservesColimits",
+   "results": "0 hits: none (subdirectory Mathlib/Algebra/Homology/DerivedCategory)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a Grothendieck abelian category the termwise direct sum of any family of unbounded cochain complexes is their coproduct in the derived category",
+   "results": "8 hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, HomologicalComplex.isGrothendieckAbelian, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isLE",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"coproduct\"",
+   "results": "0 hits: none",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Termwise direct sums compute coproducts in the derived category of a Grothendieck abelian category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "coproduct|HasCoproducts|PreservesColimits",
+   "results": "0 hits: none (subdirectory Mathlib/Algebra/Homology/HomotopyCategory)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring with a fixed K-flat sheaf complex commutes with all set indexed direct sums after localization at quasi isomorphisms",
+   "results": "8 hits: CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor', HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, CategoryTheory.Tor, CategoryTheory.Tor_obj, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X",
+   "date": "2026-10-14",
+   "verdict": "no match: degreewise Tor functors with projective resolutions and ordinary complex tensor infrastructure do not state this unbounded derived sheaf assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|derivedTensor|DerivedTensor",
+   "results": "0 hits: none (subdirectory Mathlib/Algebra/Homology)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +227,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-derived-tensor-direct-sums",
+  "worker": "stage1",
+  "summary": "Expanded the imported fixed-K-flat proof into the existing same-unit termwise derived-coproduct theorem, a fixed K-flat computation, an explicit degreewise tensor comparison including signs and coprojections, and natural symmetry transfer. Reused lem-kun-grothendieck-derived-coproducts and generic ringed-site tool nodes; no new nodes and no statement change. Added the omitted derived tensor definition to statement dependencies. Maintainer reader removed the redundant K-injective coproduct derivation and corrected the totalization source locator to Tag 012Z.",
+  "blueprint": "Realizes the sole proof paragraph: steps 1-2 justify its implicit derived coproduct computation, step 3 its K-flat replacement, steps 4-5 its degreewise tensor/direct-sum argument, and step 6 the other tensor variable.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "The generic ringed-site theorem gives Grothendieckness and colimits of Lambda_T-module sheaves needed for the termwise-sum proof; this unit has no node stating that theorem."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "The arbitrary-ringed-site tensor-Hom adjunction proves ordinary sheaf tensor commutes with sums via its stated Hom bijection; no theorem of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-1cc2e35e5",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-1cc2e35e5 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources and route. Corrected missed reuse of same-unit lem-kun-grothendieck-derived-coproducts and the totalization locator to Stacks 012Z. Canonical maps, signs, unbounded and empty-family cases check out. Accepted two generic tool uses; no targets weakened or new nodes added. Corrected JSON and concrete checks are in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
