@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lemma-weil-pbc-projection-formula-totalization",
-   "place": "Proof, first sentence: Choose a complex representing Rh_*E; justify simultaneous tensor and pushforward representatives before the signed calculation.",
+   "place": "Proof, first sentence: choose a K-injective representative and justify that tensoring it with the bounded split-projective complex remains K-injective.",
    "via": []
   },
   "same_as": []
@@ -20,9 +20,94 @@
   "def-pur-kinjective-complex",
   "def-pc-tensor-complex-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Define $D^\\bullet=\\mathcal Hom^\\bullet(P^\\bullet,R[0])$ by [def-pur-hom-complex]. Thus $D^q=\\mathcal Hom_R(P^{-q},R)$ and $d_D^q(\\phi)=(-1)^{q+1}\\phi\\circ d_P^{-q-1}$. If $P$ is supported in $[u,v]$, then $D$ is supported in $[-v,-u]$. Precomposition with $p_{-q}$ and $i_{-q}$ gives $D^q\\to\\mathcal Hom_R(R^{N_{-q}},R)\\to D^q$ with composite the identity. Coordinate evaluation identifies the middle module with $R^{N_{-q}}$, so every $D^q$ is a retract of a finite free module.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPR, example-dual; dual differential from Tag 0FNK, more-algebra-lemma-left-dual-complex"
+   }
+  },
+  {
+   "text": "For any module sheaf $E$ that is a retract of $R^N$, tensoring a short exact sequence with $E$ gives a retract of its $N$-fold direct sum. The latter is exact, and kernels and images in a split direct sum are computed summandwise, so the retract is exact. Hence $E$ is flat by [def-pc-flat-sheaf-modules]. Apply this to every $D^q$ using Step 1.",
+   "uses": [
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FNY, sites-modules-example-dual, finite-free/direct-summand calculation"
+   }
+  },
+  {
+   "text": "The complex $D$ is bounded above by Step 1 and has flat terms by Step 2. Therefore [lem-pc-bounded-above-flat-kflat-site] implies that $D$ is K-flat.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat"
+   }
+  },
+  {
+   "text": "For $E=P^r$, write $c_j=p_r(e_j)$ and let $\\lambda_j:E\\to R$ be the $j$th coordinate of $i_r$, so $\\sum_j\\lambda_j(y)c_j=y$ and $\\sum_j\\phi(c_j)\\lambda_j=\\phi$ for $\\phi\\in E^\\vee$. For any module sheaf $B$, evaluation $B\\otimes_R E\\to\\mathcal Hom_R(E^\\vee,B)$ sends $x\\otimes y$ to $(\\phi\\mapsto x\\phi(y))$; its inverse sends $f$ to $\\sum_j f(\\lambda_j)\\otimes c_j$, and the two displayed identities give both inverse equations. These formulas commute with restriction on the site, and the bilinear formula induces a sheaf-tensor map by [def-pur-sheaf-tensor-product]; internal Hom is [def-pur-sheaf-hom]. Since $P$ has finite support, the sums in total degree and the products in Hom degree have only finitely many nonzero factors. Thus these evaluation isomorphisms, multiplied on the summand $I^a\\otimes P^r$ by $(-1)^r$, give degreewise isomorphisms $\\alpha^n:\\operatorname{Tot}(I\\otimes_R P)^n\\to\\mathcal Hom^n(D,I)$, with nonzero component at $q=-r$, sending $x\\otimes y$ to $(\\phi\\mapsto(-1)^r x\\phi(y))$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-hom",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FNY, sites-modules-example-dual; Tag 0FPR, example-dual, termwise finite-free retract evaluation"
+   }
+  },
+  {
+   "text": "Let $x$ have degree $a$, $y$ degree $r$, and $n=a+r$. Using the differential of [def-pur-hom-complex], the $q=-r$ component of $d_{\\rm Hom}\\alpha(x\\otimes y)$ sends $\\phi$ to $(-1)^r d_Ix\\,\\phi(y)$. Its $q=-r-1$ component sends $\\phi$ to $-(-1)^n(-1)^r(-1)^r x\\phi(d_Py)=(-1)^{a+r+1}x\\phi(d_Py)$; all other components vanish. These are exactly the images under $\\alpha$ of $d_Ix\\otimes y$ and $(-1)^a x\\otimes d_Py$ in [def-pc-tensor-complex-sheaves]. Consequently $d_{\\rm Hom}\\alpha=\\alpha d_{\\rm Tot}$, and the degreewise inverses in Step 4 also commute with differentials by multiplying this equality by the inverses. Thus $\\alpha$ is an isomorphism of complexes.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FNK, more-algebra-lemma-left-dual-complex, differential sign; Tag 0FPR, example-dual"
+   }
+  },
+  {
+   "text": "By Step 3, $D$ is K-flat, and $I$ is K-injective by hypothesis; [lem-pur-hom-kflat-into-kinjective] therefore makes $\\mathcal Hom^\\bullet(D,I)$ K-injective. For any map $f:A\\to\\operatorname{Tot}(I\\otimes_R P)$ from an acyclic complex, $\\alpha f$ has a null homotopy $h$ by [def-pur-kinjective-complex]. Composing each $h^k$ with $(\\alpha^{k-1})^{-1}$ gives a null homotopy of $f$, since $\\alpha^{-1}$ is a chain map. This proves K-injectivity of the total complex without a boundedness assumption on $I$.",
+   "uses": [
+    "lem-pur-hom-kflat-into-kinjective",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A96, lemma-RHom-from-K-flat-into-K-injective; isomorphism invariance directly from derived-definition-K-injective"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-hom-kflat-into-kinjective",
+  "def-pur-kinjective-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A96 and 06YQ, with duality from Tags 0FPR, 0FNY, and 0FNK"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -89,12 +174,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lemma-weil-pbc-projection-formula-totalization",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-split-perfect-tensor-kinjective",
+  "worker": "stage1",
+  "summary": "The dual is explicitly constructed, its terms are shown flat by their finite-free retractions, and Tag 06YQ makes it K-flat. Coordinate formulas give the degreewise tensor-Hom isomorphism and its inverse; an explicit signed differential calculation makes it a chain isomorphism. Tag 0A96 then gives K-injectivity, transferred using an explicit null homotopy. The elementary helper was removed; no new nodes remain. The item statement is unchanged.",
+  "blueprint": [
+   "Proof, first sentence: choose a K-injective representative and justify that tensoring it with the bounded split-projective complex remains K-injective."
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "The route needs the generic bounded-above-flat implies K-flat theorem; no node in the proper-base-change unit states it."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "The route needs the generic Hom-from-K-flat-into-K-injective theorem; no node in the proper-base-change unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-hom-kflat-into-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-403cbd375",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-403cbd375 (reviewer sub-agent of L); spot-checked: Reviewed item, cited DAG statements, Stacks sources 0A96/06YQ/0FPR/0FNY/0FNK, route, signs, edge cases, duplicate searches, and exact archived target declarations. The repaired split is mathematically correct; no new node or repair file remains. Review written to review.md."
+ }
 }
