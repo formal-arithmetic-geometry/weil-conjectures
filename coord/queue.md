@@ -85,11 +85,11 @@
 | `Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricComparisonSource` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup` | 28 | 1 | proof |
 | `Sheaf.CategoryTheory.GabrielPopescuLargeHomRightAdjoint` | 29 | 1 | proof |
+| `Sheaf.Paper.ModuleCupKInjectiveTarget` | 29 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineBaseChangeTildeMateFactorization` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate` | 30 | 1 | proof |
 | `Sheaf.CategoryTheory.DerivedModuleRankOneProperties` | 30 | 1 | proof |
-| `Sheaf.Paper.ModuleCupAdjunctionPolygon` | 30 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineDirectLocalizedTensorSquare` | 31 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisCanonicalPullback` | 31 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorEquivariantDescent` | 31 | 1 | proof |
