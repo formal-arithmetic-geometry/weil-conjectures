@@ -13,9 +13,123 @@
   "def-weil-pbc-faithfully-flat-ring-map",
   "def-weil-pbc-ind-etale-algebra"
  ],
- "proof": [],
- "proof_deps": [],
- "status": "unsplit",
+ "proof": [
+  {
+   "text": "The set $S$ is multiplicative because the units of $R/I$ contain 1 and are closed under multiplication. The general localization prime correspondence gives a bijection from primes of $B$ to primes $p$ of $R$ disjoint from $S$. Such a $p$ specializes to $V(I)$ exactly when $p+I$ is proper: a proper $p+I$ is contained in a maximal (hence prime) ideal $q$, and then $p\\subseteq q$ and $I\\subseteq q$; the converse follows from containment in a proper prime. Here maximal ideals are prime because their quotient is a field. Moreover $p+I=R$ implies $1=g+h$ with $g\\in p$, $h\\in I$, so $g\\in S\\cap p$. Conversely $s\\in S\\cap p$ has an inverse modulo $I$, giving $ts+i=1$ for some $t\\in R$, $i\\in I$, so $p+I=R$. This identifies the image precisely with the asserted specialization set. Specialization in a spectrum is containment of primes: the closure of $\\{p\\}$ is $V(p)$ directly from the definition of Zariski closed sets.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 096V, lemma-localization, proof with f=1; algebra.tex Tag 00E0, lemma-Zariski-topology"
+   }
+  },
+  {
+   "text": "The preceding bijection is a homeomorphism onto its image $H$. Inverse images of $D(a)$ are $D(a/1)$, so it is continuous by the basic-open basis. Every basic open of $\\operatorname{Spec}B$ is $D(a/s)=D(a/1)$ since $s$ is a unit. Its image is $H\\cap D(a)$, so the bijection is open for the subspace topology, hence its inverse is continuous. This proves the topological clause without using a theorem about the different retained w-localization $R_{[V(I)]}$.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3, lemma-spec-localization, last paragraph"
+   }
+  },
+  {
+   "text": "Define $\\theta:B\\to R/I$ by $a/s\\mapsto \\bar a\\bar s^{-1}$. Fraction equality makes this well-defined: if $u(as'-a's)=0$ with $u\\in S$, its reduction can be cancelled since $\\bar u$ is a unit. It is a surjective ring map because $a/s$ maps to the reduction of $at$ whenever $st=1\\bmod I$. Its kernel is $IB$: $\\theta(a/s)=0$ iff $a\\in I$, and then $a/s=(a/1)(1/s)\\in IB$; every generator of $IB$ maps to zero. Equivalently the maps $B/IB\\to R/I$ and $R/I\\to B/IB$ given by these fractions and $\\bar a\\mapsto[a/1]$ are inverse. Thus the isomorphism is the canonical $R$-algebra isomorphism, including the zero quotient.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 096V, lemma-localization, proof of (3), with f=1"
+   }
+  },
+  {
+   "text": "For any localization $R\\to L$ at $T$, the localization-flat node makes $L$ flat over $R$. Apply localization base change with $D=L$: $L\\to L\\otimes_R L$ is localization at the images of $T$, which are already units, so the units-localization node makes it an isomorphism, whose inverse is multiplication. The affine-fibre-product node identifies $\\operatorname{Spec}L\\times_{\\operatorname{Spec}R}\\operatorname{Spec}L$ with $\\operatorname{Spec}(L\\otimes_R L)$, with projections induced by the two tensor inclusions. By affine-spectrum full faithfulness, its diagonal is induced by multiplication: composing multiplication with either inclusion is the identity of $L$. Hence the diagonal of $\\operatorname{Spec}L\\to\\operatorname{Spec}R$ is an isomorphism and is flat (the identity is localization at $\\{1\\}$). The flat-affine equivalence and the definition of weakly etale imply that every such spectrum map is weakly etale. Apply this to $L=B$ and to all $L=R_{f_k}$. The images $D(f_k)$ together with $H$ cover $\\operatorname{Spec}R$: outside $V(I)=V(f_1,\\ldots,f_r)$ some $f_k$ is not in the prime, while every prime in $V(I)$ belongs to $H$. Each map is between affine schemes and hence affine. For any affine open $V$ of the target its inverse image in every source is therefore affine, and these finitely many inverse images have images whose union is exactly $V$. This verifies the full covering definition, not merely joint surjectivity.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-localization-units-or-zero",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "def-weil-weakly-etale-morphism",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open, displayed cover; Tag 0987, lemma-localization-w-contractible, displayed map; schemes.tex Tag 01I4, lemma-fibre-product-affine-schemes, tensor-product identification and projections"
+   }
+  },
+  {
+   "text": "Now assume $R$ has the stated retraction property, and take an arbitrary faithfully flat weakly etale map $u:B\\to D$. Its spectrum is surjective by the faithfully-flat-surjective-spectrum node. Composition of weakly etale maps makes $\\operatorname{Spec}D\\to\\operatorname{Spec}R$ weakly etale. Replace the $B$-member of the cover in step 4 by $\\operatorname{Spec}D$: surjectivity over $\\operatorname{Spec}B$ leaves its image $H$ unchanged. All members are affine over the affine target, so their inverse images over every affine open are affine; thus the same finite family is a pro-etale covering. The w-contractible-cover-section node applied to $R$ supplies an $R$-scheme section $\\sigma:\\operatorname{Spec}R\\to P$, where $P=(\\coprod_k\\operatorname{Spec}R_{f_k})\\amalg\\operatorname{Spec}D$.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-pbc-wcontractible-cover-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0987, lemma-localization-w-contractible, first half of proof; Tag 098F, lemma-w-contractible-proetale-cover"
+   }
+  },
+  {
+   "text": "Let $h:\\operatorname{Spec}B\\to\\operatorname{Spec}R$ be the localization map, and consider $\\sigma h$. The $D$-summand is open and closed in $P$ by the scheme-coproduct node. Every point of $V(I)$, regarded as a point of $\\operatorname{Spec}B$, maps into this summand: $\\sigma$ is over $\\operatorname{Spec}R$ and no point of $D(f_k)$ lies in $V(I)$ because $f_k\\in I$. Every point $x$ of $\\operatorname{Spec}B$ specializes to such a point $z$. Indeed step 1 supplies primes $p\\subseteq q$ with $q\\supseteq I$, both disjoint from $S$, and the corresponding primes $pB\\subseteq qB$ give that specialization in $\\operatorname{Spec}B$. Continuous maps preserve specialization; membership in a clopen subset is preserved both under specialization and generalization, since both the subset and its complement are closed. Thus all of $\\sigma h$ lands in the $D$-summand. Restricting its continuous map and its sheaf morphism to this open subscheme gives a morphism $t:\\operatorname{Spec}B\\to\\operatorname{Spec}D$ over $\\operatorname{Spec}R$. This is an open-subscheme restriction, not factorization through a closed subscheme from containment of point sets.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0987, lemma-localization-w-contractible, specialization and summand argument"
+   }
+  },
+  {
+   "text": "Affine-spectrum full faithfulness turns $t$ into an $R$-algebra map $v:D\\to B$. Since it is over $R$, the maps $vu:B\\to B$ and $\\mathrm{id}_B$ agree on $R$. They agree on all fractions: $vu(a/s)=vu(a/1)vu(s/1)^{-1}=(a/1)(s/1)^{-1}=a/s$. Therefore $vu=\\mathrm{id}_B$, as required for the arbitrary map $u$. For $r=0$, the first coproduct is empty and $V(I)=\\operatorname{Spec}R$; the argument still applies. For $I=R$, $0\\in S$ and $B=0$; its spectrum and every unital $B$-algebra spectrum are empty, and the same constructions give the unique retraction. For $R=0$ all spectra are empty as well. No Noetherian or finite-generation assumption on $I$ was used.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-localization-units-or-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0987, lemma-localization-w-contractible, final assertion, expanded localization uniqueness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-localization-units-or-zero",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "def-weil-weakly-etale-morphism",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "def-weil-pbc-proetale-covering",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-wcontractible-cover-section",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-open-immersion"
+ ],
+ "status": "split",
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -65,6 +179,34 @@
    "results": "0 hits: ",
    "date": "2026-10-14",
    "verdict": "no exact match: second reader inspected signatures; hits concern structure-sheaf sections, formal etaleness, localization spectra, presheaf restrictions or zero morphisms, and do not give this pro-etale specialization/contractibility assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "wContractible|weakly.?contractible|WeaklyEtale",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the combined closed-localization and retraction assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed localization of a weakly contractible ring preserves weak contractibility",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeaklyEtale\", \"IsLocalization\"",
+   "results": "no hits",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the combined closed-localization and retraction assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every faithfully flat weakly etale algebra over a weakly contractible ring splits and closed subset localization remains contractible",
+   "results": "Algebra.FormallyEtale.localization_map, RingHom.Etale.ofLocalizationSpanTarget, RingHom.Etale.ofLocalizationSpan, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.localization_base, Algebra.FormallyEtale.of_isLocalization, Algebra.Etale, RingHom.Etale.toAlgebra",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the combined closed-localization and retraction assertion"
   }
  ],
  "mathlib_match": null,
@@ -89,7 +231,11 @@
   },
   "same_as": []
  },
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 096V (lemma-localization), 0987 (lemma-localization-w-contractible), 09AH (lemma-ses-associated-to-open); elementary fraction and topology details expanded"
+ },
  "merged_into": null,
  "lean_audit": {
   "master": {
@@ -102,5 +248,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-wcontractible-closed-localization",
+  "worker": "stage1",
+  "summary": "Proved specialization image, canonical quotient, finite pro-etale covering, and preservation of the retraction property following Stacks. Reused the general prime-residue localization node and cover-section node, avoiding duplicate and clause-restatement children. No new nodes. Checked zero ring, empty closed subset and r=0.",
+  "blueprint": "thm-weil-pbc-qbar, proof sole paragraph: descent formula; auxiliary open/closed neighborhood localization reached through the item ancestry, not a literal claim in the blueprint."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-b05d46d52",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-b05d46d52 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements and source passages, and unit/chapter route. Repaired C1 in step 4 by citing the existing affine fibre-product lemma and explicitly identifying the diagonal with multiplication. All seven steps and edge cases check out; no new nodes, cycles, or target weakening. Exact archived master morphism and coefficient distinctions checked. review.md and the whole corrected DAG JSON are written under the review directory.; 1 file(s) fixed by the reviewer"
  }
 }
