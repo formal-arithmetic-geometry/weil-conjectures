@@ -28,63 +28,147 @@
   "def-weil-affine-spectrum",
   "def-weil-pbc-proetale-covering"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $C=C_A$ using [def-weil-pbc-strict-w-cover]. By [lem-weil-pbc-strict-w-cover], $A\\to C$ is faithfully flat and ind-etale, $\\operatorname{Spec}C$ is w-local, and all maximal local rings of $C$ are strictly henselian. The separate size theorem [lem-weil-pbc-strict-w-cover-size] gives $|C|\\leq\\kappa$. This is the bounded strict w-local stage, not yet the desired $D$.",
+   "uses": [
+    "def-weil-pbc-strict-w-cover",
+    "lem-weil-pbc-strict-w-cover",
+    "lem-weil-pbc-strict-w-cover-size"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0983, proposition-find-w-contractible, first sentence of proof; Tag 0984, remark-size-w-contractible, first three stages"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-profinite-component-ring-pullback], $P=\\pi_0(\\operatorname{Spec}C)$ is profinite and is homeomorphic to the closed point set, hence $|P|\\leq 2^\\kappa$: each maximal ideal is a subset of $C$, so there are at most $2^{|C|}\\leq2^\\kappa$ of them. Apply [lem-weil-pbc-bounded-extremally-disconnected-cover] with the infinite cardinal $\\lambda=2^\\kappa$. Obtain an extremally disconnected profinite $T$ and a continuous surjection $u:T\\to P$ with $|T|\\leq2^{2^{2^\\kappa}}$.",
+   "uses": [
+    "lem-weil-pbc-profinite-component-ring-pullback",
+    "lem-weil-pbc-bounded-extremally-disconnected-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0983, choice of T; Tag 0984, bound on the maximal ideal set; Topology Tags 090D and 090E"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-profinite-component-ring-pullback] to $C,T,u$. It supplies $C\\to D$ ind-Zariski and ind-etale, the cartesian spectrum description, $\\pi_0(\\operatorname{Spec}D)\\cong T$, a w-local spectrum, closed points over closed points of $C$, and isomorphisms on every local ring. In particular if $\\mathfrak m$ is maximal in $D$, its contraction $\\mathfrak n$ in $C$ is maximal and $D_{\\mathfrak m}\\cong C_{\\mathfrak n}$. Thus it is strictly henselian by step 1. Surjectivity of $u$ gives surjectivity on spectra. Ind-etale composition in [lem-weil-pbc-ind-etale-stability] makes $A\\to D$ ind-etale and hence weakly etale, in particular flat by [def-weil-pbc-ind-etale-algebra]. Both maps of spectra are surjective (for $A\\to C$ use [lem-weil-pbc-faithfully-flat-surjective-spectrum]); their composite is surjective. Therefore [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] makes $A\\to D$ faithfully flat.",
+   "uses": [
+    "lem-weil-pbc-profinite-component-ring-pullback",
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0983, profinite pullback and preservation paragraph; Tag 097D; Tag 096C; Tag 096T; Algebra Tag 00HQ"
+   }
+  },
+  {
+   "text": "The geometric conditions required by [lem-weil-pbc-wcontractible-geometric-criterion] now hold for $R=D$: w-locality and strict henselianity are from step 3, and the component space is homeomorphic to the extremally disconnected $T$ of step 2. This criterion gives a retraction $r:B\\to D$ of every faithfully flat weakly etale $f:D\\to B$, with $r\\circ f=\\mathrm{id}_D$. No inference from ind-etale splitting to weakly etale splitting is left implicit: the cited criterion states the latter.",
+   "uses": [
+    "lem-weil-pbc-wcontractible-geometric-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0982, implication (3) to (1); Tag 0983, final sentence"
+   }
+  },
+  {
+   "text": "For each maximal $\\mathfrak m$ of $D$, step 3 gives $D_{\\mathfrak m}\\cong C_{\\mathfrak n}$. Fractions in $C_{\\mathfrak n}$ are represented by pairs in $C\\times C$, so $|D_{\\mathfrak m}|\\leq\\kappa$ since $\\kappa$ is infinite. The maximal ideal set of $D$ is homeomorphic to $T$ by [lem-weil-pbc-profinite-component-ring-pullback]. The diagonal map $D\\to\\prod_{\\mathfrak m\\text{ maximal}}D_{\\mathfrak m}$ is injective: if $d\\ne0$, its annihilator is proper, choose a maximal ideal containing it; vanishing of $d/1$ there would give $s\\notin\\mathfrak m$ with $sd=0$, a contradiction. Thus, putting $\\mu=2^{2^{2^\\kappa}}$, we have $|D|\\leq\\prod_{\\mathfrak m}|D_{\\mathfrak m}|\\leq\\kappa^{|T|}\\leq\\kappa^\\mu$. For the zero ring the product is empty and the injection and bound still hold. These are counting of fractions, injection of sets, and monotonicity of cardinal powers; no additional construction theorem is used.",
+   "uses": [
+    "lem-weil-pbc-profinite-component-ring-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0984, final paragraph: local rings, maximal ideal bound, and injection into their product"
+   }
+  },
+  {
+   "text": "Let $f:\\operatorname{Spec}D\\to\\operatorname{Spec}A$ be the induced morphism. It is weakly etale by step 3 and [def-weil-pbc-ind-etale-algebra]. To check the covering condition on an arbitrary affine open $U=\\operatorname{Spec}R\\subset\\operatorname{Spec}A$, first apply [lem-weil-pbc-morphism-affine-schemes-affine]: $V=f^{-1}(U)$ is an affine open of $\\operatorname{Spec}D$. This inverse image represents the pullback along $U\\hookrightarrow\\operatorname{Spec}A$: a morphism to $\\operatorname{Spec}D$ whose composite factors through $U$ factors uniquely through its open inverse image $V$. The fibre-product calculation [lem-weil-pbc-fibre-product-affine-spectra] identifies $V=\\operatorname{Spec}(R\\otimes_A D)$ over $U$, with structure map $r\\mapsto r\\otimes1$. This map is faithfully flat by [lem-weil-pbc-faithfully-flat-base-change], since $A\\to D$ is faithfully flat. By [lem-weil-pbc-faithfully-flat-surjective-spectrum] it is surjective on spectra, so $f(V)=U$. For this $U$, choose one index and the single affine open $V$ in the sole member of the family; its image equals $U$. If $U$ is empty one may instead choose no opens. Therefore the singleton satisfies the finite-affine-open condition of [def-weil-pbc-proetale-covering] for every affine open and is a pro-etale covering.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-weil-pbc-proetale-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0989, definition-fpqc-covering; Morphisms Tag 01SH; Schemes Tags 01I4 and 01JQ; Algebra Tags 00HI and 00HQ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-proetale-covering",
+  "def-weil-pbc-strict-w-cover",
+  "lem-weil-pbc-bounded-extremally-disconnected-cover",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-profinite-component-ring-pullback",
+  "lem-weil-pbc-strict-w-cover",
+  "lem-weil-pbc-strict-w-cover-size",
+  "lem-weil-pbc-wcontractible-geometric-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 0981, 0983, 0984 and 0989"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "For every ring A and infinite cardinal kappa at least its size there is a faithfully flat ind etale extension D of cardinality at most kappa to the power two to the two to the two to kappa such that all faithfully flat weakly etale extensions of D split",
-   "results": "8 hits: Algebra.Etale.exists_subalgebra_fg, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.Smooth.exists_finiteType, Algebra.Smooth.flat, RingHom.Etale.toAlgebra",
-   "date": "2026-10-13",
-   "verdict": "no match: etale descent and smooth factorizations do not construct a bounded w-contractible faithfully flat ind-etale extension"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "There is a faithfully flat filtered colimit of etale algebras over any commutative ring which is w contractible",
-   "results": "8 hits: Algebra.Etale.exists_subalgebra_fg, RingHom.Etale.toAlgebra, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.instFormallySmooth, RingHom.formallyEtale_algebraMap, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.Etale.comp",
-   "date": "2026-10-13",
-   "verdict": "no match: etale descent and smooth factorizations do not construct a bounded w-contractible faithfully flat ind-etale extension"
+   "results": "8 hits: Algebra.Etale.exists_subalgebra_fg; RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; RingHom.IsStandardSmooth.exists_etale_mvPolynomial; Algebra.FormallyEtale.iff_exists_algEquiv_prod; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; Algebra.Smooth.exists_finiteType; Algebra.Smooth.flat; RingHom.Etale.toAlgebra",
+   "date": "2026-10-14",
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "\"Etale\", \"FaithfullyFlat\"",
-   "results": "2 hits: RingHom.Etale.codescendsAlong_faithfullyFlat, Algebra.Etale.of_etale_tensorProduct_of_faithfullyFlat",
-   "date": "2026-10-13",
-   "verdict": "no match: etale descent and smooth factorizations do not construct a bounded w-contractible faithfully flat ind-etale extension"
-  },
-  {
-   "tool": "loogle",
-   "query": "Algebra.WeaklyEtale, Module.FaithfullyFlat",
-   "results": "0 hits: ",
-   "date": "2026-10-13",
-   "verdict": "no match: etale descent and smooth factorizations do not construct a bounded w-contractible faithfully flat ind-etale extension"
+   "results": "2 hits: RingHom.Etale.codescendsAlong_faithfullyFlat; Algebra.Etale.of_etale_tensorProduct_of_faithfullyFlat",
+   "date": "2026-10-14",
+   "verdict": "no match"
   },
   {
    "tool": "grep",
    "query": "IndEtale|WContractible|w.contractible|weakly.contractible",
-   "results": "0 hits: ",
-   "date": "2026-10-13",
-   "verdict": "no match: etale descent and smooth factorizations do not construct a bounded w-contractible faithfully flat ind-etale extension"
-  },
-  {
-   "tool": "grep",
-   "query": "contractible|exists.*retraction|IndEtale",
-   "results": "0 hits: ; source subdirectory RingTheory/Etale",
-   "date": "2026-10-13",
-   "verdict": "no match: etale descent and smooth factorizations do not construct a bounded w-contractible faithfully flat ind-etale extension"
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "Every ring admits a bounded faithfully flat ind etale extension whose weakly etale faithfully flat extensions split",
    "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-13",
+   "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded size w contractification of an arbitrary commutative ring by a faithfully flat ind etale algebra whose faithfully flat weakly etale extensions all admit ring retractions",
+   "results": "8 hits: RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.Etale.exists_subalgebra_fg, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.Etale.toAlgebra, Algebra.Smooth.exists_finiteType, RingHom.Etale, StandardEtalePair.instFormallyEtaleRing",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
  "chapter": "sec-proper-base-change",
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
   "by": "worker",
@@ -94,5 +178,21 @@
  "merged_into": null,
  "lean_audit": {
   "state": "none"
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-wcontractible-ring-extension",
+  "worker": "stage1",
+  "summary": "Repair: separated the strict-cover size, bounded topological cover, generic profinite ring pullback and geometric splitting criterion; wrote the cardinal estimate and verified singleton covering on every affine open by faithfully flat base change. Replaced the contradictory old report and regenerated every citation from the actual files.",
+  "blueprint": "The proof realizes the thm-weil-pbc-qbar paragraph's bounded w-contractible affine extension input.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-a367f1f73",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-a367f1f73 (reviewer sub-agent of L); spot-checked: Full mathematical review completed and written to review.md. Item, six proof steps, four new nodes, Stacks sources, cardinal bounds, retractions, base change, covering condition, edge cases, duplicate searches, and Mathlib searches all check out. No repairs or tool_uses needed."
  }
 }
