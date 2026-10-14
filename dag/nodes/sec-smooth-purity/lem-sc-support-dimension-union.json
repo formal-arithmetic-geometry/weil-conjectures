@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-support-dimension-union",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A sheaf supported in low dimension is a filtered union",
@@ -14,28 +14,176 @@
  },
  "stmt_deps": [
   "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-geometric-stalks",
+  "def-kun-transcendence-degree",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image"
  ],
  "proof": [
   {
-   "text": "Finite unions make these closed subsets a directed system.\nTake a section $s$ of $N$ on a finite-type etale $V\\to B$.\nThe set of points where its geometric germ is zero is open:\nzero in a stalk means zero on an etale neighborhood, whose\nimage is open, and the sheaf axiom gives vanishing on that image.\nIts complement $S$ is consequently closed in $V$.\nAt each generic point of a component of $S$, the germ of $s$\nis nonzero, so the hypothesis and etaleness give\n$\\operatorname{trdeg}_K\\kappa(v)\\leq a$.\nThe dimension formula for finite-type domains gives\n$\\dim S\\leq a$.\nThe closure $Z$ of the image of $S$ has dimension at most\n$a$: on each irreducible component its generic residue field\nembeds in that of the corresponding component of $S$.\nThe restriction of $s$ to $V\\times_B(B\\setminus Z)$ is zero.\nThus $s\\in N_Z(V)$. These objects form a basis of the\netale site, so every section is locally in the proposed union.\nEach $N_Z\\to N$ is injective; exact geometric stalks in\n[prop-weil-pbc-geometric-stalks-exact] finish the verification.",
+   "text": "Let I be the set of closed subsets $Z\\subseteq |B|$ of dimension at most $a$, ordered by inclusion. It is small, since it is a subset of the power set of $|B|$, and nonempty, since it contains the empty set. If $Z_1,Z_2\\in I$, an irreducible closed subset of $Z_1\\cup Z_2$ lies in one of them: intersect with each closed set and use irreducibility. Any strict chain in the union consequently lies wholly in the set containing its largest member. Thus $\\dim(Z_1\\cup Z_2)\\leq a$, and I is directed.",
    "uses": [
-    "prop-weil-pbc-geometric-stalks-exact"
+    "def-kun-topological-krull-dimension",
+    "def-weil-irreducible-components"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-support-dimension-union.md",
+    "place": "Proof, first sentence; expanded chain argument"
+   }
+  },
+  {
+   "text": "For an open inclusion $j:U\\to B$, $j^*N$ is the restriction of N to etale objects over U. Indeed this restriction is left adjoint to $j_*$: a map on U gives on each V over B the map $N(V)\\to N(V\\times_B U)\\to F(V\\times_B U)$; conversely restrict a map $N\\to j_*F$ to objects over U. On an object over U its base change to U is itself, so restriction of the first construction recovers the original map. Conversely, naturality of a map $N\\to j_*F$ along $V\\times_B U\\to V$ says that its component at V equals its component at $V\\times_B U$ composed with the restriction of N, since the restriction of $j_*F$ along this arrow is the identity after the canonical identifications. Thus the second construction followed by the first recovers that map. Both constructions commute with restriction arrows, hence are natural. The definitions of inverse and direct image therefore identify the unit on V with restriction to $V\\times_B U$. Consequently $N_Z(V)=\\{s\\in N(V):s|_{V\\times_B(B\\setminus Z)}=0\\}$. This is a subsheaf (local zero restrictions glue), its inclusion in N is monic, and $Z\\subseteq Z'$ gives the inclusion $N_Z\\subseteq N_{Z'}$, with the required cocone to N.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-support-dimension-union.md",
+    "place": "Proof, definition of N_Z and last sentence; explicit adjunction calculation"
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar b$ and an element of $N_{\\bar b}$. Represent it by a section s on a pointed affine etale neighbourhood, using affine cofinality. Choose a member $B_0=\\operatorname{Spec}A$ containing b of the finite affine cover of B by finitely generated K-algebras supplied by the definition of finite type, and restrict the neighbourhood to an affine open containing its pointed lift above that chart. Its map to the chart is a morphism of affine schemes, hence quasi-compact (preimages of principal opens are principal opens). By the etale finite-type lemma its source V is of finite type over K. The chart exists by the definition of finite type. No separatedness of B is used.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "def-weil-finite-type-morphism",
+    "lem-kun-etale-lfp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-support-dimension-union.md",
+    "place": "Proof, take a section on a finite-type etale V; affine refinement for stalk representatives"
+   }
+  },
+  {
+   "text": "Apply the zero-locus lemma to s on V. Let W be its largest zero open and put $S=V\\setminus W$. Then S is closed and each geometric germ at a point of S is nonzero. The affine V is Noetherian by finite-type-over-Noetherian, applied to Spec K (a field has only two ideals and its spectrum is one point). The closed subset S is therefore a finite union $S=\\bigcup_{i=1}^r S_i$ of irreducible closed components. Each S_i has a generic point $v_i$ by sobriety of schemes. If S is empty take r=0.",
+   "uses": [
+    "lem-sc-etale-section-zero-open",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-weil-pbc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04FR, lemma-zero-over-image; Morphisms 01T6; Properties 0BA8"
+   }
+  },
+  {
+   "text": "Write $p:V\\to B$ and $y_i=p(v_i)$. Choose a geometric lift of $v_i$; its nonzero germ is in $N_{\\bar y_i}$ by the zero-locus lemma. The hypothesis forces $\\operatorname{trdeg}_K\\kappa_B(y_i)\\leq a$. Put $C_i=\\overline{\\{y_i\\}}\\subseteq B$. This is an irreducible closed subset with generic point y_i. Its dimension is at most a by the generic-residue-field dimension lemma. Moreover $p(S_i)\\subseteq C_i$: continuity sends every specialization of v_i to a specialization of y_i. Since y_i itself is in p(S_i), its image closure is exactly C_i. Set $Z=\\bigcup_i C_i$. This is closed and has dimension at most a by the finite-union chain argument of step 1; it contains p(S). When r=0 set Z empty. This implements the blueprint image-closure argument directly at the image generic points, without a residue-field degree comparison.",
+   "uses": [
+    "lem-sc-etale-section-zero-open",
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "def-weil-irreducible-components",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-support-dimension-union.md",
+    "place": "Proof, generic-point hypothesis and closure of image of S; dimension input Stacks 0B1C"
+   }
+  },
+  {
+   "text": "The etale object $V\\times_B(B\\setminus Z)$ maps into W because p(S) is contained in Z. The zero-locus lemma implies that the restriction of s to this object is zero. Step 2 gives $s\\in N_Z(V)$. Its germ maps to the originally chosen element of $N_{\\bar b}$. Hence the union of the images $(N_Z)_{\\bar b}\\to N_{\\bar b}$ exhausts that group, for every geometric point.",
+   "uses": [
+    "lem-sc-etale-section-zero-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04FR, lemma-zero-over-image (2)"
+   }
+  },
+  {
+   "text": "Geometric stalks commute with the colimit over the small directed set I. Exactness makes every map $(N_Z)_{\\bar b}\\to N_{\\bar b}$ injective. The resulting map from the group colimit is injective: an element represented at Z whose image is zero was already zero at Z. It is surjective by step 6. (Elements of a directed colimit of groups are representatives modulo equality at a common larger index.) Thus the canonical sheaf map is an isomorphism on every geometric stalk, and geometric-stalk conservativity makes it an isomorphism of sheaves. Torsion was never needed for the argument; it remains a hypothesis of the statement.",
+   "uses": [
+    "lem-kun-stalks-commute-colimits",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PT, lemma-stalk-exact; Tag 03PU, theorem-exactness-stalks"
+   }
   }
  ],
  "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-inverse-image",
+  "lem-kun-etale-lfp",
+  "lem-kun-stalks-commute-colimits",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sc-etale-section-zero-open",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-scheme-sober",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "lemma-weil-pbc-geometric-stalk-conservative",
   "prop-weil-pbc-geometric-stalks-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-support-dimension-union.md",
-  "place": "## Proof"
+  "place": "Proof, expanded with Stacks 04FR and 0B1C"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale sheaf with zero stalks above transcendence degree a is the filtered union of subsheaves supported on closed subsets of dimension at most a",
+   "results": "8 hits: Algebra.etaleLocus_eq_compl_support, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.isOpen_etaleLocus, Algebra.basicOpen_subset_etaleLocus_iff_etale, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus, Algebra.mem_etaleLocus_iff, Algebra.etaleLocus, Algebra.etaleLocus_eq_univ_iff_etale; inspected hits do not state this etale/finite-type dimension assertion",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale",
+   "results": "12 hits: AlgebraicGeometry.Etale.etale_isStableUnderBaseChange, AlgebraicGeometry.Etale.instIsMultiplicativeScheme, AlgebraicGeometry.Etale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Etale, AlgebraicGeometry.Etale.instHasRingHomPropertyEtale, AlgebraicGeometry.Scheme.Etale.mk, AlgebraicGeometry.Etale.instFormallyUnramified, AlgebraicGeometry.Etale.instOfIsOpenImmersion; inspected hits do not state this etale/finite-type dimension assertion",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*(dimension|colimit)|dimension.*support",
+   "results": "0 hits: ; inspected hits do not state this etale/finite-type dimension assertion",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale sheaf filtered union subsheaves with bounded dimensional support",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf on the etale site is the directed colimit of kernels of restriction away from closed supports",
+   "results": "8 hits: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk, AlgebraicGeometry.Scheme.zero_of_zero_cover, SheafOfModules.Presentation.isColimit, TopCat.Sheaf.objSupIsoProdEqLocus, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.SheafedSpace.colimit_exists_rep, AlgebraicGeometry.SheafedSpace.isColimit_exists_rep; inspected hits do not state this etale/finite-type dimension assertion",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*colimit|colimit.*stalk|zeroLocus",
+   "results": "0 hits: ; inspected hits do not state this etale/finite-type dimension assertion",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +211,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-sc-support-dimension-union",
+  "worker": "stage1",
+  "summary": "Expanded the section-support argument into seven steps, adding only Stacks 04FR and the closed-subset form of 0B1C. Reused Noetherianity, finite components, sobriety and stalk machinery; separated exactness from conservativity. Statement unchanged.",
+  "blueprint": "Steps 1-2: directed family and kernels; 3-4: finite-type neighbourhood and closed section support; 5: image-closure dimension bound; 6: supported section; 7: stalk verification.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-etale-lfp",
+    "why": "Step 3 takes finite type of the source of a quasi-compact etale map to a finite-type field scheme. This is generic neighbourhood geometry required by the blueprint section-support route; no node of sk-prop-sf-cbc states that input."
+   },
+   {
+    "node": "lem-kun-stalks-commute-colimits",
+    "why": "Step 7 takes preservation of sheaf colimits by geometric stalks. Exactness alone does not supply this; no node of sk-prop-sf-cbc states the needed colimit preservation."
+   },
+   {
+    "node": "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "why": "Step 3 takes cofinality of affine pointed etale neighbourhoods in the stalk indexing category, allowing a finite-type representative. No node of sk-prop-sf-cbc states this generic refinement tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-etale-lfp",
+  "lem-kun-stalks-commute-colimits",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NQ-28ea1ec52",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-28ea1ec52 (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and cited statements. Verified all seven steps, Stacks 04FR/04FT and 0B1C, edge cases, duplicates, dependencies, and exact master target categories/morphism directions. Accepted the three declared generic tools. No repairs or target weakening; concrete checks recorded in review.md."
+ }
 }
