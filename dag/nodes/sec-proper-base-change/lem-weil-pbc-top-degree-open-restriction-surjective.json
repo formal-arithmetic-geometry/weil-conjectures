@@ -29,9 +29,154 @@
   "def-weil-sheaf-of-modules-category",
   "pqf-def-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify the open immersion with its image $U\\subseteq |X|$. The Noetherian-scheme minimal-closed-subset theorem gives a Noetherian underlying topological space $T=|X|$. Local Noetherianity gives quasi-separatedness; since $X$ is quasi-compact, the qcqs-scheme spectral theorem gives that $T$ is spectral. Thus, in particular, $T$ is sober. No separatedness or properness hypothesis is used.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A3G, proposition-cohomological-dimension-spectral (2), scheme hypotheses; Properties Tags 01OZ, 01OY and 094L"
+   }
+  },
+  {
+   "text": "If $d=0$, the zero-dimensional Noetherian-scheme theorem makes $T$ finite discrete. Hence $U$ and its complement are disjoint open subsets. Given any section of $\\mathcal F|_U$, glue it with the zero section on $T\\setminus U$. Its restriction is the given section. Since $H^0=\\Gamma$, restriction in degree zero is surjective. This includes $U=\\varnothing$ and $U=T$. Henceforth assume $d\\geq1$.",
+   "uses": [
+    "lem-sc-zero-dim-noetherian-finite-discrete",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A3G, proof, d=0 case; Properties Tag 0AAX, lemma-locally-Noetherian-dimension-0"
+   }
+  },
+  {
+   "text": "Write $A=\\mathcal F_{ab}$. Choose a module-injective resolution $\\mathcal F\\to I^\\bullet$, which exists because module sheaves have enough injectives. For each open $B\\subseteq T$, its restriction is module-injective. The underlying abelian sheaves of these terms are acyclic for global sections on $B$, by injective-module abelian acyclicity applied to the ringed site of opens of $B$. By the module-sheaf category definition, kernels are sectionwise kernels and cokernels are sheafifications of sectionwise cokernels. Forgetting scalars leaves these kernel and cokernel abelian groups unchanged (the induced scalar action descends to the quotient and its sheafification). Thus forgetting preserves kernels and cokernels, hence exactness, so the underlying augmented abelian complex is still a resolution. Leray acyclicity therefore computes $H^p(B,A|_B)$ by the underlying abelian complex $\\Gamma(B,I^\\bullet|_B)$, the very complex computing module cohomology. Consequently there are canonical isomorphisms $c_B:H^p(B,\\mathcal F|_B)\\cong H^p(B,A|_B)$. For inclusions $B\\subseteq B\\prime$, both restriction maps are induced by the identical chain map $\\Gamma(B\\prime,I^\\bullet)\\to\\Gamma(B,I^\\bullet)$, so $c_B\\circ\\mathrm{res}_{mod}=\\mathrm{res}_{ab}\\circ c_{B\\prime}$. This verifies restriction compatibility, not just an objectwise comparison.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-sc-ringed-space-restrict-injective-resolution",
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lemma-weil-pbc-leray-acyclicity",
+    "def-weil-sheaf-of-modules-category",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01F1, lemma-modules-abelian (1), common-resolution proof; Tags 01DI, 01E1 and 03FD"
+   }
+  },
+  {
+   "text": "Set $Z=T\\setminus U$, $W=\\{x\\in T:\\overline{\\{x\\}}\\cap Z\\ne\\varnothing\\}$ and $S=W\\setminus Z$. The space $S$ is Noetherian: for any ascending chain of opens $O_i$ of $S$, choose ambient opens $P_i$ with $O_i=S\\cap P_i$ and replace $P_i$ by $\\bigcup_{j\\leq i}P_j$. These ambient opens form an ascending chain and therefore stabilize in $T$; intersecting with $S$ stabilizes the original chain. Moreover $S$ is stable under generalization: if $x$ specializes to $z\\in Z$ and $y$ generalizes $x$, then $y$ specializes to $z$; if $x\\in U$, then $y\\in U$ because $U$ is open.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A3G, proof of (2), W minus Z; elementary subspace Noetherianity and specialization calculation"
+   }
+  },
+  {
+   "text": "We have $\\dim S\\leq d-1$. Indeed, take a chain $C_0\\subsetneq\\cdots\\subsetneq C_r$ of irreducible closed subsets of $S$. Their ambient closures $D_i=\\overline{C_i}^{\\,T}$ are irreducible closed and strictly nested, since $S\\cap D_i=C_i$. By sobriety choose the generic point $y$ of $D_0$. It generalizes any point of $C_0$, so the preceding generalization-stability gives $y\\in S$. Choose $z\\in Z\\cap\\overline{\\{y\\}}$. Then $\\overline{\\{z\\}}$ is nonempty irreducible closed and lies in $D_0$; it is strictly smaller because it lies in closed $Z$ whereas $y\\notin Z$. Thus $\\overline{\\{z\\}}\\subsetneq D_0\\subsetneq\\cdots\\subsetneq D_r$ is an ambient chain of length $r+1$, so $r+1\\leq d$. If $S$ is empty the bound holds by the definition of dimension. This is a direct chain argument, with no additional dimension theorem needed.",
+   "uses": [
+    "def-weil-spectral-space",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A3G, proof of (2), dimension drop, with the chain argument made explicit"
+   }
+  },
+  {
+   "text": "Apply Noetherian topological cohomology vanishing to $S$, the abelian sheaf $A|_S$, and the nonnegative bound $d-1$. The hypotheses were verified in the preceding two steps. Since $d>d-1$, it gives $H^d(S,A|_S)=0$, including when $S=\\varnothing$. This replaces the lower-dimensional spectral induction in the source by the existing Noetherian vanishing theorem; no quasi-coherence is needed.",
+   "uses": [
+    "lem-sc-noetherian-topological-cohomology-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A3G, proof of (2), lower-dimensional vanishing; Tag 02UZ, proposition-vanishing-Noetherian"
+   }
+  },
+  {
+   "text": "Let $\\xi\\in H^d(U,\\mathcal F|_U)$ and write $\\alpha=c_U(\\xi)$. The punctured-neighborhood comparison applies to spectral $T$, closed $Z$ and quasi-compact open complement $U$. It identifies $H^d(S,A|_S)$ with the filtered colimit of $H^d(N\\setminus Z,A|_{N\\setminus Z})$ over quasi-compact open neighborhoods $N$ of $Z$, using precisely restriction maps. The image of $\\alpha$ from the initial stage $N=T$ is therefore zero in that colimit.",
+   "uses": [
+    "lem-weil-pbc-punctured-neighborhood-cohomology-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A3D, lemma-cohomology-of-neighbourhoods-of-closed (2); its application in Tag 0A3G, proof of (2)"
+   }
+  },
+  {
+   "text": "For completeness the eventual-zero inference is elementary: construct the directed colimit of groups as classes of pairs $(N,a)$, with $(N,a)\\sim(N\\prime,a\\prime)$ exactly when their restrictions agree at a common smaller neighborhood. Addition is defined after passing to a common smaller neighborhood; this gives the colimit universal property. Equality of the class of $(T,\\alpha)$ with the zero class thus gives a quasi-compact open $N\\supseteq Z$ with $\\alpha|_{N\\setminus Z}=0$. Since $N\\setminus Z=N\\cap U$, the restriction-compatible isomorphisms $c_B$ of step 3 imply $\\xi|_{N\\cap U}=0$ in module cohomology.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A3G, proof of (2), extracting a neighborhood from the displayed filtered colimit; explicit quotient construction"
+   }
+  },
+  {
+   "text": "The opens $U,N$ cover $T$ since $N$ contains $Z$. Use the Mayer--Vietoris sequence for the ringed space $X$ and the arbitrary module $\\mathcal F$. Its exact segment is $H^d(X,\\mathcal F)\\to H^d(U,\\mathcal F|_U)\\oplus H^d(N,\\mathcal F|_N)\\to H^d(U\\cap N,\\mathcal F|_{U\\cap N})$, with the last map the difference of restrictions. The pair $(\\xi,0)$ maps to zero by step 8. Exactness gives $\\widetilde\\xi\\in H^d(X,\\mathcal F)$ restricting to $(\\xi,0)$, in particular restricting to $\\xi$ on $U$. This proves surjectivity for $d\\geq1$.",
+   "uses": [
+    "lem-sc-mayer-vietoris-ringed-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A3G, proof of (2), final Mayer--Vietoris lifting; Tag 01EB, lemma-mayer-vietoris"
+   }
+  },
+  {
+   "text": "Finally the $k$-scheme structure supplies compatible maps $k\\to\\mathcal O_X(B)$ for all opens $B$. On the module-resolution complexes used in step 3, restriction obeys $\\mathrm{res}(a s)=a\\mathrm{res}(s)$ for $a\\in k$ in every degree, and the differentials are module-linear. Passing to kernels modulo images gives $\\mathrm{res}(a[ s])=a\\mathrm{res}([ s])$ on cohomology. In degree zero the same formula holds for sections. Thus the surjective canonical restriction map just proved is $k$-linear, as asserted.",
+   "uses": [
+    "def-weil-scheme-over-base",
+    "pqf-def-cohomology",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01F1 common-resolution comparison and definition of derived global sections; degreewise scalar calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "def-weil-open-immersion",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "pqf-def-cohomology",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sc-ringed-space-restrict-injective-resolution",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lemma-weil-pbc-leray-acyclicity",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-topological-abelian-cohomology",
+  "def-weil-spectral-space",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-noetherian-topological-cohomology-vanishing",
+  "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
+  "def-weil-pbc-category-colimit",
+  "lem-sc-mayer-vietoris-ringed-space",
+  "def-weil-scheme-over-base"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0A3G, proposition-cohomological-dimension-spectral, proof of (2), Noetherian specialization using Tag 02UZ instead of its lower-dimensional induction; module comparison Tag 01F1"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,10 +212,45 @@
    "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of top degree sheaf cohomology on a Noetherian scheme to a quasi compact open subset is surjective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.AffineZariskiSite}, Function.Surjective U.presieveOfSections\", \"doc\": \"For any object $U$ in the affine Zariski site of a scheme $X$, the canonical map from the presieve of sections over $U$ to the set of sections of the structure sheaf over $U$ is surjective.\"}\n  {\"name\": \"TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X : TopCat}\\n  {FC : C → C → Type u_1} {CC : C → Type v} [inst_2 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)]\\n  [instCC : CategoryTheory.ConcreteCategory C FC]\\n  [CategoryTheory.Limits.PreservesF\", \"doc\": \"For sheaves $F$ and $G$ on a topological space $X$ with values in a category $\\\\mathcal{C}$, if a morphism $f: F \\\\to G$ induces injective maps on all stalks at points of an open set $U \\\\subseteq X$, an\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X] [∀ (i : ι), IsLocalRing ↑(R i)],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is a compact space and each $R_i$ is a local ring, then the function mapping morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\operatorname{Spec}(R_i) \\\\to X$ is surj\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f g s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n          ∃ n,\", \"doc\": \"Let $X$ be a scheme, and let $U$ be a quasi-compact and quasi-separated open subset of $X$. Let $f, g, s \\\\in \\\\mathcal{O}_X(U)$ be sections of the structure sheaf over $U$. Let $U_s$ be the basic open \"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits concern sections, group cohomology, or representatives of Hom-complex classes, not extension of top-degree sheaf cohomology classes to the ambient scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite dimensional spectral space every cohomology class in degree dimension on an open subset extends to the whole space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"groupCohomologyIsoExt\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      (A : Rep k G) → (n : ℕ) → groupCohomology A n ≅ ((Ext k (Rep k G) n).obj (Opposite.op (Rep.trivial k G k))).obj A\", \"doc\": \"For a group $ G $, a commutative ring $ k $, and a $ k $-representation $ A $ of $ G $, the $ n $-th group cohomology module $ H^n(G, A) $ is isomorphic to the $ n $-th extension group $ \\\\text{Ext}^n_\"}\n  {\"name\": \"CochainComplex.HomComplex.leftHomologyData'_H_coe\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (K L : CochainComplex C ℤ) (n m p : ℤ) (hm : n + 1 = m) (hp : m + 1 = p),\\n  ↑(CochainComplex.HomComplex.leftHomologyData' K L n m p hm hp).H = CochainComplex.HomComplex.CohomologyClass K L m\", \"doc\": \"The cohomology class in degree $ m $ of the homomorphism complex $ \\\\text{Hom}(K, L) $ is equal to the quotient of the cocycle subgroup $ \\\\text{Cocycle}(K, L, m) $ by the coboundary subgroup $ \\\\text{Co\"}\n  {\"name\": \"groupCohomologyIso\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      (A : Rep k G) →\\n        (n : ℕ) →\\n          (P : CategoryTheory.ProjectiveResolution (Rep.trivial k G k)) →\\n            groupCohomology A n ≅ HomologicalComplex.homology (P.complex.linearYonedaObj k A) n\", \"doc\": \"For a group $ G $, commutative ring $ k $, $ k $-representation $ A $ of $ G $, and projective resolution $ P $ of the trivial representation, the $ n $-th group cohomology module $ H^n(G, A) $ is iso\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          CategoryTheory.Sheaf J AddCommGrpCat → ℕ → C\", \"doc\": \"For a fixed natural number $n$ and a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups, the cohomology presheaf is a contravariant functor $\\\\mathcal{C}^\\\\text{op} \\\\to \\\\text{AddCommGrp\"}\n  {\"name\": \"CochainComplex.HomComplex.leftHomologyData_H_coe\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (K L : CochainComplex C ℤ) (n : ℤ),\\n  ↑(CochainComplex.HomComplex.leftHomologyData K L n).H = CochainComplex.HomComplex.CohomologyClass K L n\", \"doc\": \"For any cochain complexes $ K $ and $ L $ in a preadditive category $ C $, and for any integer $ n $, the homology group $ H $ of the left homology data of the homomorphism complex $ \\\\text{Hom}(K, L) \"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.toHom_bijective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (K L : CochainComplex C ℤ) (n : ℤ), Function.Bijective ⇑CochainComplex.HomComplex.CohomologyClass.toHom\", \"doc\": \"The additive monoid homomorphism mapping cohomology classes in degree $ n $ of the homomorphism complex $ \\\\text{Hom}(K, L) $ to homotopy classes of chain maps from $ K $ to $ L[n] $ is bijective. This\"}\n  {\"name\": \"groupCohomology_induction_on\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {A : Rep k G} {n : ℕ} {C : ↑(groupCohomology A n) → Prop}\\n  (x : ↑(groupCohomology A n)),\\n  (∀ (x : ↑(groupCohomology.cocycles A n)), C ((CategoryTheory.ConcreteCategory.hom (groupCohomology.π A n)) x)) → C x\", \"doc\": \"For a group $G$, a representation $A$ of $G$ over a commutative ring $k$, and a natural number $n$, if a property $C$ holds for all projections of $n$-cocycles in the inhomogeneous cochain complex to \"}\n  {\"name\": \"groupCohomology.π_comp_H0IsoOfIsTrivial_hom\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (A : Rep k G) [inst_2 : A.IsTrivial],\\n  CategoryTheory.CategoryStruct.comp (groupCohomology.π A 0) (groupCohomology.H0IsoOfIsTrivial A).hom =\\n    CategoryTheory.CategoryStruct.comp (groupCohomology.iCocycles A 0) (groupCohomology.cochainsIso₀ A\", \"doc\": \"The morphism from the $ k $-module of $ n $-cocycles to the $ n $-th group cohomology module, defined as the projection in the homology of the inhomogeneous cochain complex associated to a representat\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits concern sections, group cohomology, or representatives of Hom-complex classes, not extension of top-degree sheaf cohomology classes to the ambient scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"surjective\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.mk_surjective\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Preadditive C] {K L : CochainComplex C ℤ} {n : ℤ} : Function.Surjective CochainComplex.HomComplex.CohomologyClass.mk\", \"doc\": \"\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits concern sections, group cohomology, or representatives of Hom-complex classes, not extension of top-degree sheaf cohomology classes to the ambient scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomolog.*surject|surject.*cohomolog|cohomologicalDimension",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"line\": \"210\", \"text\": \"  obtain ⟨x, rfl⟩ := R.extEquivCohomologyClass.symm.surjective α\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Projective/Ext.lean\", \"line\": \"217\", \"text\": \"  obtain ⟨x, rfl⟩ := R.extEquivCohomologyClass.symm.surjective α\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits concern sections, group cohomology, or representatives of Hom-complex classes, not extension of top-degree sheaf cohomology classes to the ambient scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Top degree cohomology restriction to an open subset of a Noetherian scheme is surjective",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-top-coherent-cohomology-finite",
   "by": "worker",
@@ -86,5 +266,59 @@
    "state": "none"
   }
  },
- "merged_into": null
+ "merged_into": null,
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-top-degree-open-restriction-surjective",
+  "worker": "stage1",
+  "summary": "Read 0A3G and 01F1; retained the statement, proved the Noetherian punctured-generalization dimension bound explicitly, reused 02UZ and arbitrary-module Mayer--Vietoris, and created only the 0A3D punctured-neighborhood continuity input. Verified restriction compatibility via common acyclic resolution, degree zero and scalar linearity.",
+  "blueprint": "Artin--Schreier calculation, proper connected case E=H^1(C,O_C) has dimension g; through the top-coherent-cohomology-finite child this supplies the top-degree restriction from a projective closure.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-zero-dim-noetherian-finite-discrete",
+    "why": "Generic A Noetherian zero-dimensional scheme has finite discrete underlying space input: its statement is used unchanged below the Artin--Schreier finite-dimensionality input; it does not replace any step of sk-thm-p1, and no node of that unit states this general fact."
+   },
+   {
+    "node": "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "why": "Generic Sheaves of modules on a ringed space have enough injectives input: its statement is used unchanged below the Artin--Schreier finite-dimensionality input; it does not replace any step of sk-thm-p1, and no node of that unit states this general fact."
+   },
+   {
+    "node": "lem-sc-ringed-space-restrict-injective-resolution",
+    "why": "Generic Restriction of an injective module resolution to an open ringed subspace input: its statement is used unchanged below the Artin--Schreier finite-dimensionality input; it does not replace any step of sk-thm-p1, and no node of that unit states this general fact."
+   },
+   {
+    "node": "lem-sc-injective-module-abelian-acyclic-zariski",
+    "why": "Generic Injective module sheaves are acyclic after forgetting to abelian sheaves input: its statement is used unchanged below the Artin--Schreier finite-dimensionality input; it does not replace any step of sk-thm-p1, and no node of that unit states this general fact."
+   },
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "Generic Leray acyclicity criterion input: its statement is used unchanged below the Artin--Schreier finite-dimensionality input; it does not replace any step of sk-thm-p1, and no node of that unit states this general fact."
+   },
+   {
+    "node": "lem-sc-noetherian-topological-cohomology-vanishing",
+    "why": "Generic Noetherian topological spaces have no cohomology above their dimension input: its statement is used unchanged below the Artin--Schreier finite-dimensionality input; it does not replace any step of sk-thm-p1, and no node of that unit states this general fact."
+   },
+   {
+    "node": "lem-sc-mayer-vietoris-ringed-space",
+    "why": "Generic Mayer–Vietoris sequence for modules on a ringed space input: its statement is used unchanged below the Artin--Schreier finite-dimensionality input; it does not replace any step of sk-thm-p1, and no node of that unit states this general fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sc-ringed-space-restrict-injective-resolution",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-sc-noetherian-topological-cohomology-vanishing",
+  "lem-sc-mayer-vietoris-ringed-space"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-727424e2d",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-727424e2d (reviewer sub-agent of L); spot-checked: Read the item, sole new node, cited statements, sources, and unit/chapter route in full. All ten steps agree with Stacks 0A3G, 0A3D, 01F1, 02UZ, and 01EB; restriction compatibility, dimension drop, coefficients, edge cases, duplicates, and cycles checked. Corrected only incomplete new-node metadata. Detailed checks and seven accepted tool_uses are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
