@@ -25,90 +25,159 @@
   "def-weil-pbc-sheafification",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every object $V$ and sheaf $T$, the sheafification existence theorem supplies $h_V^\\#$ and its unit $\\eta_V:h_V\\to h_V^\\#$. The universal property and the Yoneda bijection give $\\operatorname{Hom}(h_V^\\#,T)\\cong\\operatorname{Hom}(h_V,T)\\cong T(V)$. The map corresponding to $t\\in T(V)$ is characterized by sending $\\eta_V(\\mathrm{id}_V)$ to $t$; before sheafification it sends $f:W\\to V$ to $T(f)(t)$. This also specifies the maps when the site is not subcanonical.",
+   "uses": [
+    "lem-weil-pbc-sheafification-plus-theorem",
+    "def-weil-pbc-sheafification",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WS, lemma-sheaf-coequalizer-representable, first paragraph; equation-map-representable-into-sheaf preceding Tag 00WR, using Theorem 00WB and Proposition 00WH"
+   }
+  },
+  {
+   "text": "For an arbitrary sheaf $T$, let $J(T)=\\{(V,t):V\\in E,\\ t\\in T(V)\\}$, a set since the site is small and all values are sets. Define the presheaf $A_T(W)=\\coprod_{(V,t)\\in J(T)}\\operatorname{Hom}(W,V)$ with restriction $(V,t,f)\\mapsto(V,t,f\\circ g)$ along $g:W^{\\prime}\\to W$, and put $P(T)=A_T^\\#$. The functor laws follow from associativity and identities in $\\mathcal D$. A map $A_T\\to K$ to any sheaf $K$ is exactly a family of maps $h_V\\to K$, one for each $(V,t)$: restrict to each summand for one direction, and use these maps on disjoint-union elements for the other. Factoring through sheafification on both sides therefore identifies maps $P(T)\\to K$ with families of maps $h_V^\\#\\to K$. The summand inclusion $h_V\\to A_T\\to P(T)$ factors uniquely through a map $\\iota_{V,t}:h_V^\\#\\to P(T)$. The preceding correspondence sends $b:P(T)\\to K$ to $(b\\circ\\iota_{V,t})_{(V,t)}$, so it proves the coproduct universal property for these injections, including an empty coproduct. The maps of step 1 indexed by $(V,t)$ induce $q_T:P(T)\\to T$; on the image of $(V,t,f)$ in $P(T)(W)$ this map is $T(f)(t)$.",
+   "uses": [
+    "lem-weil-pbc-sheafification-plus-theorem",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WS, first paragraph, displayed coproduct; Tag 00WI, lemma-colimit-sheaves, universal property specialized to coproducts"
+   }
+  },
+  {
+   "text": "The map $q_T$ is locally surjective. Indeed, for $s\\in T(W)$ choose a covering $\\{V_i\\xrightarrow{f_i}W\\}_i$ with $V_i\\in E$. In the summand indexed by $(V_i,T(f_i)(s))$, the image of $\\mathrm{id}_{V_i}$ under $A_T(V_i)\\to P(T)(V_i)$ maps under $q_T$ to $T(f_i)(s)$. This is exactly the covering-local lifting condition, so the sheaf epimorphism criterion implies $q_T$ is an epimorphism. This argument works for every sheaf $T$, so it can be used twice without an additional hypothesis.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WS, first paragraph, epimorphism assertion; Tag 00WN, lemma-mono-epi-sheaves"
+   }
+  },
+  {
+   "text": "Apply the construction to $T=H$ and write $P_0=P(H)$ and $q=q_H$. Form $G=P_0\\times_H P_0$ in sheaves of sets with projections $r,s:G\\rightrightarrows P_0$. The sectionwise-limits theorem supplies this fibre product, with $G(W)=\\{(a,b)\\in P_0(W)^2:q_W(a)=q_W(b)\\}$. Apply steps 1--3 to the sheaf $G$ to obtain $P_1=P(G)$ and the epimorphism $e=q_G:P_1\\to G$. Both $P_0$ and $P_1$ are coproducts of the stipulated sheafified representables indexed by the sets $J(H)$ and $J(G)$. Put $d_0=r\\circ e$ and $d_1=s\\circ e$. The fibre-product equation gives $q\\circ d_0=q\\circ d_1$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WS, second paragraph, construction of the fibre product and its presentation; Tag 00W2, lemma-limit-sheaf"
+   }
+  },
+  {
+   "text": "Since $q$ is an epimorphism and $(G,r,s)$ is its kernel pair in the category of sheaves of sets, the kernel-pair coequalizer theorem says that $(H,q)$ is a coequalizer of $r,s$. All its hypotheses hold by steps 3 and 4; the index category used to construct $G$ is finite.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 086K, lemma-coequalizer-surjection, invoked at the end of Tag 00WS"
+   }
+  },
+  {
+   "text": "For a sheaf $K$ and a map $a:P_0\\to K$ with $a\\circ d_0=a\\circ d_1$, we have $(a\\circ r)\\circ e=(a\\circ s)\\circ e$. As $e$ is an epimorphism, $a\\circ r=a\\circ s$. Step 5 gives exactly one $u:H\\to K$ with $u\\circ q=a$. Conversely, every such composite $u\\circ q$ equalizes $d_0,d_1$ because $q\\circ d_0=q\\circ d_1$. These two operations are inverse, which is the stated bijection and the coequalizer universal property. No new coequalizer-existence result is needed: its vertex is the given sheaf $H$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WS, final sentence, with the universal property of Tag 086K written out after precomposing the kernel pair by an epimorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheafification-plus-theorem",
+  "def-weil-pbc-sheafification",
+  "lem-galois-yoneda-hom-bijection",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00WS (lemma-sheaf-coequalizer-representable), with the coproduct universal property and the final cancellation step written out; Tags 00WB, 00WH, 00WN, 00W2 and 086K for the cited inputs"
+ },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "Every sheaf of sets on a small site is a coequalizer of two coproducts of sheafified representables from a covering family",
-   "results": "CategoryTheory.instIsRegularEpiCategorySheafTypeOfHasSheafify, CategoryTheory.GrothendieckTopology.sheafify_isSheaf, CategoryTheory.instHasSheafifyOfPreservesLimitsForgetOfHasFiniteLimitsOfSmallOppositeCover, CategoryTheory.GrothendieckTopology.Plus.isSheaf_plus_plus, CategoryTheory.GrothendieckTopology.sheafification_obj, CategoryTheory.GrothendieckTopology.Plus.exists_rep, CategoryTheory.GrothendieckTopology.sheafify, CategoryTheory.GrothendieckTopology.Plus.isSheaf_of_sep",
+   "tool": "grep",
+   "query": "coequalizer|presentation|isSeparator",
+   "results": "Mathlib/CategoryTheory/Generator/StrongGenerator.lean, Mathlib/CategoryTheory/Generator/HomologicalComplex.lean, Mathlib/CategoryTheory/Generator/HomologicalComplex.lean, Mathlib/CategoryTheory/Generator/HomologicalComplex.lean, Mathlib/CategoryTheory/Generator/HomologicalComplex.lean, Mathlib/CategoryTheory/Generator/Abelian.lean, Mathlib/CategoryTheory/Generator/Abelian.lean, Mathlib/CategoryTheory/Generator/Abelian.lean; source scope Mathlib/CategoryTheory/Generator",
    "date": "2026-10-14",
-   "verdict": "no match: regular epimorphisms and separating families do not give a coequalizer presentation by an arbitrary covering subset; sheaf adjunctions do not give this covering-evaluation criterion"
+   "verdict": "no match: hits supply general sheafification, regular epimorphisms, presheaf or module generators; none supplies a presentation using the arbitrary covering subset E in this statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf is the coequalizer of two coproducts of sheafified representables",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   },
   {
    "tool": "loogle",
    "query": "\"Sheaf\", \"coequalizer\"",
    "results": "none",
    "date": "2026-10-14",
-   "verdict": "no match: regular epimorphisms and separating families do not give a coequalizer presentation by an arbitrary covering subset; sheaf adjunctions do not give this covering-evaluation criterion"
-  },
-  {
-   "tool": "grep",
-   "query": "coequalizer|presentation|separator|generat",
-   "results": "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/EffectiveEpimorphic.lean, Mathlib/CategoryTheory/Sites/EffectiveEpimorphic.lean",
-   "date": "2026-10-14",
-   "verdict": "no match: regular epimorphisms and separating families do not give a coequalizer presentation by an arbitrary covering subset; sheaf adjunctions do not give this covering-evaluation criterion"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Every sheaf has a coequalizer presentation by coproducts of representable sheaves",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
+   "verdict": "no match: hits supply general sheafification, regular epimorphisms, presheaf or module generators; none supplies a presentation using the arbitrary covering subset E in this statement"
   },
   {
    "tool": "leanfinder",
-   "query": "Sheaf category coequalizer presentation using a separating set of sheafified Yoneda objects",
-   "results": "CategoryTheory.GrothendieckTopology.Plus.meqOfSep, CategoryTheory.Sheaf.isSeparator, CategoryTheory.GrothendieckTopology.Plus.isSheaf_of_sep, CategoryTheory.GrothendieckTopology.Plus.exists_of_sep, CategoryTheory.GrothendieckTopology.Plus.sep, CategoryTheory.Presheaf.IsSeparated, CategoryTheory.Presieve.isSeparatedFor_and_exists_isAmalgamation_iff_isSheafFor, CategoryTheory.Sheaf.isSeparated",
+   "query": "Every sheaf of sets on a small site has a coequalizer presentation by coproducts of sheafified representables from any covering set of objects",
+   "results": "CategoryTheory.instIsRegularEpiCategorySheafTypeOfHasSheafify, CategoryTheory.GrothendieckTopology.sheafify_isSheaf, CategoryTheory.instHasSheafifyOfPreservesLimitsForgetOfHasFiniteLimitsOfSmallOppositeCover, CategoryTheory.GrothendieckTopology.sheafification_obj, CategoryTheory.GrothendieckTopology.Plus.exists_rep, CategoryTheory.GrothendieckTopology.plusObj, CategoryTheory.GrothendieckTopology.sheafify, CategoryTheory.GrothendieckTopology.Plus.isSheaf_plus_plus",
    "date": "2026-10-14",
-   "verdict": "no match: regular epimorphisms and separating families do not give a coequalizer presentation by an arbitrary covering subset; sheaf adjunctions do not give this covering-evaluation criterion"
-  },
-  {
-   "tool": "grep",
-   "query": "coequalizer|[Ss]eparat|[Gg]enerat",
-   "results": "Mathlib/CategoryTheory/Sites/Coherent/RegularTopology.lean, Mathlib/CategoryTheory/Sites/Coherent/RegularTopology.lean, Mathlib/CategoryTheory/Sites/Coherent/RegularTopology.lean, Mathlib/CategoryTheory/Sites/Coherent/RegularTopology.lean, Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean, Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean, Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean, Mathlib/CategoryTheory/Sites/Coherent/CoherentSheaves.lean",
-   "date": "2026-10-14",
-   "verdict": "no match: regular epimorphisms and separating families do not give a coequalizer presentation by an arbitrary covering subset; sheaf adjunctions do not give this covering-evaluation criterion"
+   "verdict": "no match: hits supply general sheafification, regular epimorphisms, presheaf or module generators; none supplies a presentation using the arbitrary covering subset E in this statement"
   },
   {
    "tool": "leanfinder",
-   "query": "Inverse image between sheaf topoi has a left adjoint when evaluation on covering generators is corepresentable",
-   "results": "CategoryTheory.sheafToPresheaf_isRightAdjoint, CategoryTheory.instIsRightAdjointSheafΓ, CategoryTheory.instIsLeftAdjointFunctorOppositeSheafPresheafToSheaf, CategoryTheory.Sheaf.adjunction, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, CategoryTheory.HasSheafify.isRightAdjoint, CategoryTheory.Functor.sheafAdjunctionContinuous",
+   "query": "Category of sheaves has generators from objects covering every object and each sheaf is a quotient of a sum of these generators",
+   "results": "SheafOfModules.GeneratingSections, CategoryTheory.PresheafIsGeneratedBy, SheafOfModules.GeneratingSections.ofEpi, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.LocalGeneratorsData, SheafOfModules.IsFinitePresentation, SheafOfModules.GeneratingSections.I, SheafOfModules.generatorsOfIsCokernelFree",
    "date": "2026-10-14",
-   "verdict": "no match: regular epimorphisms and separating families do not give a coequalizer presentation by an arbitrary covering subset; sheaf adjunctions do not give this covering-evaluation criterion"
+   "verdict": "no match: hits supply general sheafification, regular epimorphisms, presheaf or module generators; none supplies a presentation using the arbitrary covering subset E in this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "coequalizer|presentation|[Gg]enerat",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/SubcanonicalOver.lean, Mathlib/CategoryTheory/Sites/SubcanonicalOver.lean; source scope Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-14",
+   "verdict": "no match: hits supply general sheafification, regular epimorphisms, presheaf or module generators; none supplies a presentation using the arbitrary covering subset E in this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separating family of sheaves indexed by a covering collection gives an epimorphism from a coproduct and a coequalizer presentation",
+   "results": "CategoryTheory.Sheaf.isSeparator, CategoryTheory.coherentTopology.epi_π_app_zero_of_epi, CategoryTheory.PresheafIsGeneratedBy.of_epi, CategoryTheory.Presieve.IsSeparated.isSheaf, CategoryTheory.Sheaf.isSeparated, CategoryTheory.Presheaf.IsSheaf.isSeparated, CategoryTheory.Presieve.IsSeparatedFor.isSheafFor, CategoryTheory.Presieve.isSeparatedFor_and_exists_isAmalgamation_iff_isSheafFor",
+   "date": "2026-10-14",
+   "verdict": "no exact match: Sheaf.isSeparating uses all site objects, and Sheaf.isSeparator additionally assumes preadditive values; neither states the arbitrary covering-subset coequalizer presentation"
   },
   {
    "tool": "loogle",
-   "query": "\"IsRightAdjoint\", \"Sheaf\"",
-   "results": "PresheafOfModules.instIsRightAdjointPushforwardIdFunctorOppositeRingCat, PresheafOfModules.instIsRightAdjointPushforward, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, CategoryTheory.sheafToPresheaf_isRightAdjoint, CategoryTheory.HasSheafify.isRightAdjoint, SheafOfModules.instIsRightAdjointPushforwardIdSheafRingCat, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+   "query": "\"Sheaf\", \"isSeparator\"",
+   "results": "CategoryTheory.Presheaf.isSeparator, CategoryTheory.Sheaf.isSeparator",
    "date": "2026-10-14",
-   "verdict": "no match: regular epimorphisms and separating families do not give a coequalizer presentation by an arbitrary covering subset; sheaf adjunctions do not give this covering-evaluation criterion"
+   "verdict": "no exact match: Sheaf.isSeparating uses all site objects, and Sheaf.isSeparator additionally assumes preadditive values; neither states the arbitrary covering-subset coequalizer presentation"
   },
   {
    "tool": "grep",
-   "query": "isColimit.*[Yy]oneda|[Yy]oneda.*isColimit|[Gg]enerat.*[Ss]heaf|[Ss]heaf.*[Gg]enerat",
-   "results": "Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Presentable/Type.lean, Mathlib/CategoryTheory/Generator/Sheaf.lean, Mathlib/CategoryTheory/Generator/Basic.lean, Mathlib/CategoryTheory/Presentable/Basic.lean, Mathlib/CategoryTheory/Presentable/Basic.lean, Mathlib/CategoryTheory/Presentable/Basic.lean",
+   "query": "IsSeparating|isSeparator|presentation",
+   "results": "Mathlib/CategoryTheory/Generator/StrongGenerator.lean, Mathlib/CategoryTheory/Generator/StrongGenerator.lean, Mathlib/CategoryTheory/Generator/StrongGenerator.lean, Mathlib/CategoryTheory/Generator/StrongGenerator.lean, Mathlib/CategoryTheory/Generator/StrongGenerator.lean, Mathlib/CategoryTheory/Generator/Abelian.lean, Mathlib/CategoryTheory/Generator/Abelian.lean, Mathlib/CategoryTheory/Generator/Abelian.lean",
    "date": "2026-10-14",
-   "verdict": "no match: hits give presheaf generators, module presentations, separating families or partial-adjoint closure; none states the set-sheaf coequalizer presentation for an arbitrary covering subset"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Any object in a category of sheaves of types has a presentation by colimits of Yoneda sheaves from a generating family",
-   "results": "CategoryTheory.PresheafIsGeneratedBy, CategoryTheory.Sieve.forallYonedaIsSheaf_iff_colimit, SheafOfModules.Presentation.isColimit, CategoryTheory.Sheaf.freeYoneda, CategoryTheory.Presheaf.isStrongGenerator, CategoryTheory.hasColimitsEssentiallySmallSite, CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeFreeYonedaOfHasColimitsOfSize, SheafOfModules.Presentation.map",
-   "date": "2026-10-14",
-   "verdict": "no match: hits give presheaf generators, module presentations, separating families or partial-adjoint closure; none states the set-sheaf coequalizer presentation for an arbitrary covering subset"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Sheaf\", \"Generator\"",
-   "results": "SheafOfModules.LocalGeneratorsData, SheafOfModules.LocalGeneratorsData.I, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.LocalGeneratorsData.shrink, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.LocalGeneratorsData.coversTop, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.LocalGeneratorsData.mk",
-   "date": "2026-10-14",
-   "verdict": "no match: hits give presheaf generators, module presentations, separating families or partial-adjoint closure; none states the set-sheaf coequalizer presentation for an arbitrary covering subset"
+   "verdict": "no exact match: Sheaf.isSeparating uses all site objects, and Sheaf.isSeparator additionally assumes preadditive values; neither states the arbitrary covering-subset coequalizer presentation"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-topos-lower-shriek-existence-on-covering-generators",
   "by": "worker",
@@ -123,5 +192,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-sheaf-covering-representable-coequalizer-presentation",
+  "worker": "stage1",
+  "summary": "Verified the exact assertion against Stacks 00WS and split its canonical-generator and kernel-pair proof into six steps, reusing existing nodes only. Constructed the coproducts by sheafifying explicit disjoint-union presheaves, checked local lifts at identities, and wrote out cancellation of the epimorphism onto the kernel pair. No change to the statement, no new nodes and no Lean work. Searches of the project source found no attachment; fresh logged Mathlib searches did not find the entire covering-subset presentation.",
+  "blueprint": "Realizes the coequalizer presentation invoked in Tag 09YX, third paragraph, below the first sentence of lem-weil-pbc-reconstruction-uniform-tower (restriction to the local model and commuting inverse image with the derived limit). This is the existing blueprint.from chain, not a change of the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheafification-plus-theorem",
+    "why": "General existence of set-valued sheafification on a small site; needed to construct the generators and their coproducts, and not supplied by an adic reconstruction statement of this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheafification-plus-theorem"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-1f6960bf3",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-1f6960bf3 (reviewer sub-agent of L); spot-checked: Read the complete item, all cited statements, and source passages. All six steps match Stacks 00WS; sheafification, local-surjectivity, and kernel-pair inputs apply to general set sheaves. Empty-cover and non-subcanonical cases pass. No duplicates, circular dependencies, target weakening, or repairs found. Accepted generic sheafification tool use; detailed checks are in review.md."
  }
 }
