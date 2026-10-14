@@ -77,7 +77,8 @@ private theorem equivarianceSubfunctor_isSheaf
     [TopologicalSpace N.V] [DiscreteTopology N.V] :
     Presieve.IsSheaf V.smallEtaleTopology (equivarianceSubfunctor ℓ c N).toFunctor := by
   let H := functionPresheaf c N.V
-  have hH := functionPresheaf_isSheaf c N.V
+  have hH : Presieve.IsSheaf V.smallEtaleTopology H :=
+    functionPresheaf_isSheaf c N.V
   apply (Subfunctor.isSheaf_iff (equivarianceSubfunctor ℓ c N) hH).2
   intro W s₀ hs
   let s : C(c.sectionSpace W.unop, N.V) := s₀
