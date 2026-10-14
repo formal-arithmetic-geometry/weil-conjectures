@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-ind-zariski-bijective-on-stalks",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, sole paragraph: \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\"; subordinate pro-etale coefficient-continuity tool reached through prop-weil-pbc-qbar-condensed-basechange-compatibility, bounded-below coproducts, affine acyclic hypercovers, and qc affine contractible covers. The blueprint paragraph itself does not mention hypercovers. Input: bounded ring witness from 0983/0984. Supporting input: Profinite change of components of a w-local affine ring. Closed-component restriction used to realize the graph inside the locally constant function-ring spectrum. Preservation of the canonical prime localizations for that restriction.",
+   "via": [
+    "lem-weil-pbc-closed-component-spectrum-restriction",
+    "lem-weil-pbc-profinite-component-ring-pullback",
+    "lem-weil-pbc-wcontractible-ring-extension",
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "lem-weil-pbc-proetale-qc-affine-contractible-cover",
+    "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "stmt_deps": [
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-closed-component-spectrum-restriction",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "title": "Ind-Zariski maps are bijective on stalks",
+ "statement": "Let $R$ and $S$ be commutative rings and let $v:R\\to S$ be a ring homomorphism. Assume that $S$, as an $R$-algebra via $v$, is the colimit of a small filtered diagram of commutative $R$-algebras $C_i$ [def-weil-pbc-category-colimit], each with $R\\to C_i$ a local isomorphism. A ring map $R\\to C$ is a local isomorphism here if for every prime $q\\subset C$ there are $g\\in C\\setminus q$ and $f\\in R$ such that $C_g\\cong R_f$ as $R$-algebras [def-weil-ring-localization-away]. Then for every prime $q\\subset S$, with $p=v^{-1}(q)$, the induced map $R_p\\to S_q$ is an isomorphism [def-weil-pbc-localization-at-prime].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 096T, lemma-ind-zariski-implies; Tag 096N, definition-ind-zariski; Tag 096E, definition-local-isomorphism; project attachment Algebra.IndZariski.bijectiveOnStalks_algebraMap, WeilConjectures.RingTheory.ProEtale.IndZariski:581-588"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A filtered colimit of local isomorphism algebras induces isomorphisms on prime localizations",
+   "results": "8 hits: RingHom.locally_of_exists, RingHom.HoldsForLocalization.localRingHom, AlgebraicGeometry.Spec_map_localization_isIso, RingHom.OfLocalizationPrime, RingHom.locally_iff_exists, RingHom.IsStandardOpenImmersion.holdsForLocalizationAway, AlgebraicGeometry.isIso_SpecMap_stakMap_localization, RingHom.locally_iff_isLocalization",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits concern individual localizations, clopens, or general colimits, not this complete statement; project attachment recorded separately"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ind Zariski ring maps identify local rings at every prime",
+   "results": "8 hits: RingHom.OfLocalizationPrime, RingHom.HoldsForLocalization.localRingHom, AlgebraicGeometry.stalkwise_Spec_map_iff, AlgebraicGeometry.stalkwise_SpecMap_iff, AlgebraicGeometry.HasRingHomProperty.stalkwise, Localization.isLocalHom_localRingHom, Localization.localRingHom_unique, RingHom.locally_iff_exists",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits concern individual localizations, clopens, or general colimits, not this complete statement; project attachment recorded separately"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalIso\", \"localRingHom\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits concern individual localizations, clopens, or general colimits, not this complete statement; project attachment recorded separately"
+  },
+  {
+   "tool": "grep",
+   "query": "bijectiveOnStalks|IndZariski|isLocalIso.*localRing",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits concern individual localizations, clopens, or general colimits, not this complete statement; project attachment recorded separately"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ind Zariski algebra maps identify local rings",
+   "results": "0 hits:  | service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits of ring homomorphisms inducing isomorphisms on local rings still induce isomorphisms on local rings",
+   "results": "8 hits: isLocalHom_of_isIso, RingHom.locally_respectsIso, RingHom.locally_of, RingHom.PropertyIsLocal.respectsIso, isLocalHom_of_iso, RingHom.StableUnderCompositionWithLocalizationAway.respectsIso, RingHom.LocalizationAwayPreserves.respectsIso, RingHom.IsStandardOpenImmersion.respectsIso",
+   "date": "2026-10-14",
+   "verdict": "no full match: inspected hits are definitions, single localizations, or unrelated algebra-map facts; none states this entire diagram property or filtered stalk theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsLocalIso",
+   "results": "12 hits: Algebra.IsLocalIso, Algebra.IsLocalIso.instOfIsStandardOpenImmersion, Algebra.IsLocalIso.of_algEquiv, Algebra.IsLocalIso.iff_of_algEquiv, Algebra.IsLocalIso.pi_of_finite, Algebra.IsLocalIso.trans, Algebra.IsLocalIso.instTensorProduct, Algebra.IsLocalIso.span_isStandardOpenImmersion_eq_top",
+   "date": "2026-10-14",
+   "verdict": "no full match: inspected hits are definitions, single localizations, or unrelated algebra-map facts; none states this entire diagram property or filtered stalk theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraMap_surjective_of_isIdempotentElem|isClosed_and_iUnion_connectedComponent_eq_iff|localization_comap_range",
+   "results": "6 hits: Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Etale/QuasiFinite.lean, Mathlib/RingTheory/Localization/Away/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no full match: inspected hits are definitions, single localizations, or unrelated algebra-map facts; none states this entire diagram property or filtered stalk theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "BijectiveOnStalks|indZariski|jointly_surjective_of_isColimit|isColimit_eq_iff",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no full match: inspected hits are definitions, single localizations, or unrelated algebra-map facts; none states this entire diagram property or filtered stalk theorem"
+  }
+ ],
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_candidates": [
+  {
+   "name": "Algebra.IndZariski.bijectiveOnStalks_algebraMap",
+   "module": "WeilConjectures.RingTheory.ProEtale.IndZariski",
+   "lines": [
+    581,
+    588
+   ],
+   "note": "Exact project attachment candidate; source declaration and its definitions read. Pinned sorry_map_slopmaster2_7d675a26: s=false, ts=false. The source IndZariski class uses filtered colimits of local isomorphisms in the neighborhood sense, as explicitly expanded in this statement; no equivalence with mere stalk isomorphisms is used."
+  }
+ ],
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

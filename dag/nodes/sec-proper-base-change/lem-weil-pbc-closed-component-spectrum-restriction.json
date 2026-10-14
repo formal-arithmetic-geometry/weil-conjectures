@@ -28,9 +28,76 @@
   "def-weil-affine-spectrum",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\pi:\\operatorname{Spec}A\\to P=\\pi_0(\\operatorname{Spec}A)$ be the quotient by connected components, and put $T=\\pi(E)$. Since $E$ is a union of components, $\\pi^{-1}(T)=E$: a point with component in $\\pi(E)$ lies in the same component as some point of $E$, hence lies in $E$. The quotient-topology definition makes $T$ closed because its inverse image is the given closed subset $E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097C, lemma-construct, proof; Tag 096T, lemma-ind-zariski-implies"
+   }
+  },
+  {
+   "text": "Use the clopen-localization diagram and the ring $B=\\operatorname{Restriction}_A(T)$ specified by the restriction surjectivity statement. Its index is a set, is nonempty because the whole spectrum contains $E$, and is directed by intersection. That statement supplies the canonical surjective map $v:A\\to B$.",
+   "uses": [
+    "lem-weil-pbc-restriction-algebraMap-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097C, lemma-construct, proof; Tag 096T, lemma-ind-zariski-implies"
+   }
+  },
+  {
+   "text": "Apply the general surjective-spectrum theorem to $v$. It identifies $\\operatorname{Spec}B$ homeomorphically with $V(\\ker v)$, its image, with the subspace topology. The restriction range theorem applies because step 1 proved $T$ closed; it identifies this image with $\\pi^{-1}(T)=E$. Substitution gives the required homeomorphism onto $E$.",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "lem-weil-pbc-restriction-spectrum-range"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097C, lemma-construct, proof; Tag 096T, lemma-ind-zariski-implies"
+   }
+  },
+  {
+   "text": "The diagram from step 2 is itself a small filtered presentation: its objects form a set, the full spectrum is an object, and $W_1\\cap W_2$ receives arrows from $W_1$ and $W_2$ in reverse inclusion; parallel arrows in this poset are equal. For $C_W=A_{e_W}$ and any prime $q\\subset C_W$, take $g=1\\notin q$ and $f=e_W$. The fraction map $(C_W)_1\\to C_W$, $c/1^n\\mapsto c$, has inverse $c\\mapsto c/1$, so $(C_W)_1\\cong A_{e_W}$ as $A$-algebras. Thus every term satisfies exactly the neighborhood condition in the filtered-local-isomorphism stalk theorem.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097C, lemma-construct, proof; Tag 096N, definition-ind-zariski"
+   }
+  },
+  {
+   "text": "Apply the filtered-local-isomorphism stalk theorem to the presentation checked in step 4. For every prime $q\\subset B$ it says that the canonical induced map $A_{v^{-1}(q)}\\to B_q$ is an isomorphism. This is the map required in the conclusion.",
+   "uses": [
+    "lem-weil-pbc-ind-zariski-bijective-on-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097C, lemma-construct, proof; Tag 096T, lemma-ind-zariski-implies"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-ind-zariski-bijective-on-stalks",
+  "lem-weil-pbc-restriction-algebraMap-surjective",
+  "lem-weil-pbc-restriction-spectrum-range",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 097C, lemma-construct, proof; Tag 096T, lemma-ind-zariski-implies"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -146,7 +213,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-profinite-component-ring-pullback",
   "by": "worker",
@@ -214,5 +281,21 @@
    ],
    "note": "Closed declaration candidates checked against pinned 7d675a26 sorry map (s=false, ts=false). Apply Restriction to the closed image of E in the component quotient; combine its surjectivity, spectrum range and embedding with indZariski and the induced-stalk theorem. This records the report attachments, leaving audit-state assignment to the maintainer."
   }
+ },
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "lem-weil-pbc-closed-component-spectrum-restriction",
+  "worker": "stage1",
+  "summary": "Repaired the false local-isomorphism definition by dropping it, expanded the correct neighborhood condition inline in both presentation statements, made every Restriction diagram self-contained, and recorded four verified closed declaration candidates in the delivery-owned lean_candidates field. Restored the original item statement and correct ancestry. Repeated searches and replaced the inaccurate report. Second reader removed the elementary restriction-presentation node, supplied the explicit filteredness and g=1 neighborhood argument, and removed proof hints from the two retained construction statements.",
+  "blueprint": "Proof, sole paragraph: \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\"; subordinate pro-etale coefficient-continuity tool reached through prop-weil-pbc-qbar-condensed-basechange-compatibility, bounded-below coproducts, affine acyclic hypercovers, and qc affine contractible covers. The blueprint paragraph itself does not mention hypercovers. Input: bounded ring witness from 0983/0984. Supporting input: Profinite change of components of a w-local affine ring. Closed-component restriction used to realize the graph inside the locally constant function-ring spectrum.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-0995f1160",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-0995f1160 (reviewer sub-agent of L); spot-checked: Read all five proof steps and all three new nodes in full. Stacks 097C/096T/04PL and the exact project attachments support the mathematics; pinned records have s=false and ts=false. Target coefficients and exchange maps remain unchanged. Repaired missing provenance/default audit metadata in three whole JSON files. Concrete source, edge-case, duplicate and dependency checks are recorded in review.md.; 3 file(s) fixed by the reviewer"
  }
 }

@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-restriction-spectrum-range",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, sole paragraph: \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\"; subordinate pro-etale coefficient-continuity tool reached through prop-weil-pbc-qbar-condensed-basechange-compatibility, bounded-below coproducts, affine acyclic hypercovers, and qc affine contractible covers. The blueprint paragraph itself does not mention hypercovers. Input: bounded ring witness from 0983/0984. Supporting input: Profinite change of components of a w-local affine ring. Closed-component restriction used to realize the graph inside the locally constant function-ring spectrum. Construction of the closed-component restriction by clopen idempotent localizations.",
+   "via": [
+    "lem-weil-pbc-closed-component-spectrum-restriction",
+    "lem-weil-pbc-profinite-component-ring-pullback",
+    "lem-weil-pbc-wcontractible-ring-extension",
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "lem-weil-pbc-proetale-qc-affine-contractible-cover",
+    "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-spec-clopen-idempotent"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-closed-component-spectrum-restriction",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "title": "Spectrum range of restriction",
+ "statement": "Let $A$ be a commutative ring, let $P=\\pi_0(\\operatorname{Spec}A)$ be the quotient space whose points are the maximal connected subsets of $\\operatorname{Spec}A$, and let $\\pi:\\operatorname{Spec}A\\to P$ be the quotient map [def-weil-affine-spectrum]. Let $T\\subseteq P$ be any subset. For each clopen (open and closed) subset $W\\subseteq\\operatorname{Spec}A$ containing $\\pi^{-1}(T)$, let $e_W$ be the unique idempotent ($e_W^2=e_W$) with $D(e_W)=W$, [lem-weil-pbc-spec-clopen-idempotent], where $D(e)=\\{\\mathfrak p:e\\notin\\mathfrak p\\}$. Define $B=\\operatorname{Restriction}_A(T)=\\varinjlim_W A_{e_W}$ in the category of commutative $A$-algebras [def-weil-ring-localization-away, def-weil-pbc-category-colimit], indexed by these clopens in reverse inclusion with their canonical localization transition maps, and write $v:A\\to B$ for the canonical map. If $T$ is closed in $P$, then $\\operatorname{range}(\\operatorname{Spec}(v))=\\pi^{-1}(T)$.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 097C, lemma-construct, proof (clopen localization diagram); project attachment WContractification.Restriction.range_algebraMap_specComap, WeilConjectures.RingTheory.ProEtale.WContractible:192-242"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Spectrum image of filtered colimit of idempotent localizations is a closed union of connected components",
+   "results": "8 hits: PrimeSpectrum.instSpectralSpace, PrimeSpectrum.instPrespectralSpace, Subalgebra.spectrum_sUnion_connectedComponentIn, PrimeSpectrum.basicOpen_eq_zeroLocus_of_isIdempotentElem, PrimeSpectrum.zeroLocus_eq_basicOpen_of_isIdempotentElem, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat, PrimeSpectrum.isIdempotentElemEquivClopens_apply_toOpens, PrimeSpectrum.isClopen_iff",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits concern individual localizations, clopens, or general colimits, not this complete statement; project attachment recorded separately"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Intersection of clopen neighborhoods of a closed saturated subset of a prime spectrum",
+   "results": "8 hits: PrimeSpectrum.isClopen_iff_mul_add_zeroLocus, PrimeSpectrum.exists_mul_eq_zero_add_eq_one_basicOpen_eq_of_isClopen, PrimeSpectrum.isClopen_iff_mul_add, PrimeSpectrum.isClopen_iff_zeroLocus, PrimeSpectrum.isClopen_iff, PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen, PrimeSpectrum.isClopen_basicOpen_of_mul_add, PrimeSpectrum.existsUnique_idempotent_basicOpen_eq_of_isClopen",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits concern individual localizations, clopens, or general colimits, not this complete statement; project attachment recorded separately"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum, IsLocalization",
+   "results": "7 hits: IsLocalization.primeSpectrumOrderIso, IsLocalization.coe_primeSpectrumOrderIso_apply_coe_asIdeal, IsLocalization.coe_primeSpectrumOrderIso_symm_apply_asIdeal, PrimeSpectrum.localization_comap_injective, PrimeSpectrum.localization_comap_isEmbedding, PrimeSpectrum.localization_comap_isInducing, PrimeSpectrum.localization_comap_range",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits concern individual localizations, clopens, or general colimits, not this complete statement; project attachment recorded separately"
+  },
+  {
+   "tool": "grep",
+   "query": "localization_comap_range|isClosed_and_iUnion_connectedComponent",
+   "results": "4 hits: Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits concern individual localizations, clopens, or general colimits, not this complete statement; project attachment recorded separately"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Image of spectrum of a filtered colimit of idempotent localizations",
+   "results": "0 hits:  | service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectrum of a filtered colimit of localizations at idempotents is the intersection of their clopen images",
+   "results": "8 hits: PrimeSpectrum.existsUnique_idempotent_basicOpen_eq_of_isClopen, PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen, PrimeSpectrum.isIdempotentElemEquivClopens_symm_sup, PrimeSpectrum.coe_isIdempotentElemEquivClopens_apply, PrimeSpectrum.isIdempotentElemEquivClopens_apply_toOpens, PrimeSpectrum.isClopen_iff, PrimeSpectrum.isIdempotentElemEquivClopens_mul, PrimeSpectrum.isIdempotentElemEquivClopens",
+   "date": "2026-10-14",
+   "verdict": "no full match: inspected hits are definitions, single localizations, or unrelated algebra-map facts; none states this entire diagram property or filtered stalk theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsLocalIso",
+   "results": "12 hits: Algebra.IsLocalIso, Algebra.IsLocalIso.instOfIsStandardOpenImmersion, Algebra.IsLocalIso.of_algEquiv, Algebra.IsLocalIso.iff_of_algEquiv, Algebra.IsLocalIso.pi_of_finite, Algebra.IsLocalIso.trans, Algebra.IsLocalIso.instTensorProduct, Algebra.IsLocalIso.span_isStandardOpenImmersion_eq_top",
+   "date": "2026-10-14",
+   "verdict": "no full match: inspected hits are definitions, single localizations, or unrelated algebra-map facts; none states this entire diagram property or filtered stalk theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraMap_surjective_of_isIdempotentElem|isClosed_and_iUnion_connectedComponent_eq_iff|localization_comap_range",
+   "results": "6 hits: Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Etale/QuasiFinite.lean, Mathlib/RingTheory/Localization/Away/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no full match: inspected hits are definitions, single localizations, or unrelated algebra-map facts; none states this entire diagram property or filtered stalk theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "BijectiveOnStalks|indZariski|jointly_surjective_of_isColimit|isColimit_eq_iff",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no full match: inspected hits are definitions, single localizations, or unrelated algebra-map facts; none states this entire diagram property or filtered stalk theorem"
+  }
+ ],
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_candidates": [
+  {
+   "name": "WContractification.Restriction.range_algebraMap_specComap",
+   "module": "WeilConjectures.RingTheory.ProEtale.WContractible",
+   "lines": [
+    192,
+    242
+   ],
+   "note": "Exact project attachment candidate; source declaration and its definitions read. Pinned sorry_map_slopmaster2_7d675a26: s=false, ts=false. Restriction.diag and RestrictClopen at WContractible.lean:58-122 give precisely the displayed diagram."
+  }
+ ],
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
