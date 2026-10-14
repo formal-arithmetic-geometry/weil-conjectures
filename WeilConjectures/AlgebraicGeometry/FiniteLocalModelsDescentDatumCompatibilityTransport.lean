@@ -6,8 +6,8 @@ Authors: Bin Wu
 
 module
 public import WeilConjectures.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibilityDatum
-import WeilConjectures.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibilityTransportDiagonal
-import WeilConjectures.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibilityTransportCocycle
+import WeilConjectures.AlgebraicGeometry.FiniteLocalModelsDescentDatumTransportDiagonal
+import WeilConjectures.AlgebraicGeometry.FiniteLocalModelsDescentDatumTransportCocycle
 /-! # Identity and cocycle of compatible natural transport -/
 
 @[expose] public section
