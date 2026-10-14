@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-weil-pbc-comparison-direct-image",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Comparison direct image",
@@ -30,69 +30,183 @@
    "uses": [
     "lem-weil-pbc-comparison-pullback"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-comparison-direct-image.md",
+    "place": "Proof, first paragraph and displayed pulled-back counit"
+   }
   },
   {
-   "text": "Its mate under the adjunction of the pro-etale operations is the map\n$\\alpha_L$ in the statement. Both sides are bounded below; inverse images are\nexact and right derived direct images preserve lower bounds.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "The assertion is local on $V$, so take $V$ affine. Let $W=\\varprojlim_i W_i$\nbe an arbitrary affine ind-etale basis object, with $W_i\\to V$ affine etale\nof finite presentation, and put $U_i=U\\times_VW_i$, $U_W=U\\times_VW$. The\nschemes $U_i$ are quasi-compact and quasi-separated because $u$ is, and their\ntransition maps are affine. Pullback compatibility and\n[lem-weil-pbc-comparison-global-cohomology] identify the degree-$n$ derived\nsections of the source with\n\n$$\n H^nR\\Gamma\\bigl(W_{\\Et},(Ru_{\\Et,*}L)|_W\\bigr).\n$$",
+   "text": "Its mate under the derived pro-etale adjunction is the map $\\alpha_L$. Use the fixed finite discrete coefficient ring of [def-weil-pbc-site-comparison-morphism]. All inverse images here are exact: [lem-weil-pbc-site-pullback-abelian-exact] applies to both sites and the comparison morphism, and on constant-coefficient modules the underlying abelian sheaf has the same kernels and cokernels. Hence inverse images preserve lower cohomological bounds. For either direct image, choose a bounded-below injective representative by [lem-weil-pbc-dplus-injective-representative]; [lem-weil-pbc-right-derived-plus-injective] computes its right derived image by applying direct image termwise. An additive functor takes zero to zero, so this complex still vanishes in every degree below its lower bound. Thus both sides belong to the bounded-below derived category. The required enough injectives on either ringed site follow from [lem-weil-pbc-ring-sheaves-grothendieck] and [lem-sp-grothendieck-enough-injectives].",
    "uses": [
-    "lem-weil-pbc-comparison-global-cohomology"
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-comparison-direct-image.md",
+    "place": "Proof, second paragraph: the adjoint mate and bounded-below categories"
+   }
   },
   {
-   "text": "Apply the continuity of derived cohomology first on $W=\\varprojlim_iW_i$ and\nthen on $U_W=\\varprojlim_iU_i$. They give the two outer identifications in\n\n$$\n \\begin{split}\n H^nR\\Gamma\\bigl(W_{\\Et},(Ru_{\\Et,*}L)|_W\\bigr)\n &\\simeq\\varinjlim_i\n       H^nR\\Gamma\\bigl(W_{i,\\Et},(Ru_{\\Et,*}L)|_{W_i}\\bigr)\\\\\n &\\simeq\\varinjlim_i H^nR\\Gamma(U_{i,\\Et},L|_{U_i})\\\\\n &\\simeq H^nR\\Gamma(U_{W,\\Et},L|_{U_W}).\n \\end{split}\n$$\n\nThe middle identification is derived evaluation of the direct image. Indeed\nan injective resolution on $U_{\\Et}$ restricts to an injective resolution on\n$U_i$ by the etale-restriction lemma; direct image preserves injectives since\nits inverse image is exact. Evaluation of that resolution gives precisely the\nsame section complex on the two sides.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "By [lem-weil-pbc-comparison-global-cohomology], the last group is\n$H^nR\\Gamma(U_{W,\\Proet},(\\nu_U^*L)|_{U_W})$. By\n[lem-weil-pbc-proetale-restriction-injectives], this in turn is\n\n$$\n H^nR\\Gamma(W_{\\Proet},Ru_{\\Proet,*}\\nu_U^*L),\n$$\n\nthe derived sections of the target. For this last equality use a pro-etale\ninjective resolution on $U$; its restriction to $U_W$ is injective, and its\ndirect image is injective because $u_{\\Proet}^*$ is exact.",
+   "text": "Cover $V$ by affine opens $V_a$. Restriction to these opens preserves injectives by [lem-weil-pbc-etale-restriction-injectives] and [lem-weil-pbc-proetale-restriction-injectives]. Direct-image evaluation and the pullback identification of [lem-weil-pbc-comparison-pullback] therefore identify the restriction of $\\alpha_L$ with the comparison map for $U\\times_V V_a\\to V_a$. The cone is zero globally if it is zero on each $V_a$: its cohomology sheaves restrict to zero on a covering, so the sheaf axiom makes them zero. We may thus take $V$ affine. The covering basis is supplied by [lem-weil-pbc-ind-etale-basis]. Let $W=\\varprojlim_i W_i$\nbe an arbitrary affine ind-etale basis object, with $W_i\\to V$ affine etale\nof finite presentation, and put $U_i=U\\times_VW_i$, $U_W=U\\times_VW$. By [lem-pc-quasi-compact-base-change], each $U_i\\to W_i$ is quasi-compact, so $U_i$ is quasi-compact. Its relative diagonal is a base change of the quasi-compact diagonal of $u$, hence quasi-compact by that same node. Since $W_i=\\operatorname{Spec}B_i$ is affine, its absolute diagonal is induced by the surjection $B_i\\otimes_{\\mathbf Z}B_i\\to B_i$, hence is a closed immersion and is affine by the closed-immersion convention. Its base change is affine and quasi-compact by [lem-weil-pbc-affine-morphism-permanence]. The absolute diagonal of $U_i$ is the composite of its quasi-compact relative diagonal with this base change. The composite is quasi-compact: over an affine open of the final target the inverse image under the affine second map is affine, and its inverse image under the quasi-compact first map is quasi-compact. Thus $U_i$ is quasi-separated. Maps between the affine schemes $W_i$ are affine (on spectra, inverse images of principal opens are spectra of localizations), and their base changes are affine by [lem-weil-pbc-affine-morphism-permanence]; these are the transition maps of $U_i$. Pullback compatibility and\n[lem-weil-pbc-comparison-global-cohomology] identify the degree-$n$ derived\nsections of the source with\n\n$$\n H^nR\\Gamma\\bigl(W_{\\Et},(Ru_{\\Et,*}L)|_W\\bigr).\n$$",
    "uses": [
     "lem-weil-pbc-comparison-global-cohomology",
-    "lem-weil-pbc-proetale-restriction-injectives"
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-ind-etale-basis",
+    "lem-pc-quasi-compact-base-change",
+    "lem-weil-pbc-affine-morphism-permanence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-comparison-direct-image.md",
+    "place": "Proof, third paragraph: Zariski localization and affine ind-etale basis"
+   }
   },
   {
-   "text": "We check that the isomorphism just calculated is induced by $\\alpha_L$.\nRepresent $L$ by an etale injective complex $I^\\bullet$, and resolve\n$\\nu_U^*I^\\bullet$ by a pro-etale injective complex $J^\\bullet$. The mate is\nrepresented by the map $\\nu_V^*u_{\\Et,*}I^\\bullet\\to u_{\\Proet,*}J^\\bullet$\nadjoint to the pulled-back counit followed by $\\nu_U^*I^\\bullet\\to\nJ^\\bullet$. Each $u_{\\Et,*}I^r$ is injective on $V_{\\Et}$. Hence\n[lem-weil-pbc-comparison-injective-acyclicity] makes $\\nu_V^*u_{\\Et,*}I^r$\nacyclic for sections on every basis object $W$. Bounded-below acyclic\nresolutions thus allow derived sections of the source to be computed by\nevaluating this very complex; the target complex is already injective.\nMoreover [lem-weil-pbc-comparison-sections] identifies its source section\ncomplex with $\\varinjlim_i\\Gamma(U_i,I^\\bullet)$. This justifies checking the\nnamed map on these models. At a finite stage $W_i$, evaluation of that counit\nis the identity on sections of $I^\\bullet$ on $U_i$. Restricting to $W$ gives\nexactly the canonical restriction from $U_i$ to $U_W$ followed by the global\ncohomology comparison. The identifications above are natural in these\nrestriction maps. On taking the filtered colimit they therefore compute\n$H^nR\\Gamma(W,\\alpha_L)$, not an unspecified isomorphism between the same\ngroups.",
+   "text": "Apply the continuity of derived cohomology first on $W=\\varprojlim_iW_i$ and\nthen on $U_W=\\varprojlim_iU_i$. They give the two outer identifications in\n\n$$\n \\begin{split}\n H^nR\\Gamma\\bigl(W_{\\Et},(Ru_{\\Et,*}L)|_W\\bigr)\n &\\simeq\\varinjlim_i\n       H^nR\\Gamma\\bigl(W_{i,\\Et},(Ru_{\\Et,*}L)|_{W_i}\\bigr)\\\\\n &\\simeq\\varinjlim_i H^nR\\Gamma(U_{i,\\Et},L|_{U_i})\\\\\n &\\simeq H^nR\\Gamma(U_{W,\\Et},L|_{U_W}).\n \\end{split}\n$$\n\nThe middle identification is derived evaluation of the direct image. Indeed\nan injective resolution on $U_{\\Et}$ restricts to an injective resolution on\n$U_i$ by the etale-restriction lemma; direct image preserves injectives since\nits inverse image is exact. Evaluation of that resolution gives precisely the\nsame section complex on the two sides.\nFix one index $i_0$ and work in its cofinal overcategory: the complexes in the first continuity application are inverse images of $(Ru_{\\Et,*}L)|_{W_{i_0}}$, and those in the second are inverse images of $L|_{U_{i_0}}$. This checks the fixed-stage hypothesis of the continuity node; all the stage schemes are qcqs by step 3. An exact left adjoint implies that its right adjoint preserves injectives: extend a map into the right adjoint across a monomorphism by adjunction, exactness of the left adjoint, and injectivity, then take its adjunct back.",
+   "uses": [
+    "lem-weil-pbc-derived-cohomology-continuity",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-site-pullback-abelian-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-comparison-direct-image.md",
+    "place": "Proof, continuity display and following injective-evaluation paragraph"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-comparison-global-cohomology], the last group is\n$H^nR\\Gamma(U_{W,\\Proet},(\\nu_U^*L)|_{U_W})$. By\n[lem-weil-pbc-proetale-restriction-injectives], this in turn is\n\n$$\n H^nR\\Gamma(W_{\\Proet},Ru_{\\Proet,*}\\nu_U^*L),\n$$\n\nthe derived sections of the target. For this last equality use a pro-etale\ninjective resolution on $U$; its restriction to $U_W$ is injective, and its\ndirect image is injective because $u_{\\Proet}^*$ is exact.\nHere $W\\to V$ is ind-etale and therefore weakly etale by [lem-weil-pbc-ind-etale-stability]; its base change $U_W\\to U$ is weakly etale by the same node. Thus the restriction lemma applies to both projections used for evaluation. Pullback comparison is [lem-weil-pbc-comparison-pullback], and exactness is [lem-weil-pbc-site-pullback-abelian-exact] on underlying abelian sheaves, as in step 2.",
+   "uses": [
+    "lem-weil-pbc-comparison-global-cohomology",
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-site-pullback-abelian-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-comparison-direct-image.md",
+    "place": "Proof, paragraph beginning \"By [lem-weil-pbc-comparison-global-cohomology]\""
+   }
+  },
+  {
+   "text": "We check that the isomorphism just calculated is induced by $\\alpha_L$.\nRepresent $L$ by an etale injective complex $I^\\bullet$, and resolve\n$\\nu_U^*I^\\bullet$ by a pro-etale injective complex $J^\\bullet$. The mate is\nrepresented by the map $\\nu_V^*u_{\\Et,*}I^\\bullet\\to u_{\\Proet,*}J^\\bullet$\nadjoint to the pulled-back counit followed by $\\nu_U^*I^\\bullet\\to\nJ^\\bullet$. Each $u_{\\Et,*}I^r$ is injective on $V_{\\Et}$. Hence\n[lem-weil-pbc-comparison-injective-acyclicity] makes $\\nu_V^*u_{\\Et,*}I^r$\nacyclic for sections on every basis object $W$. Choose bounded-below injective resolutions of the source and target complexes. For evaluation on $W$, both the source complex and its injective resolution have acyclic terms. The resolution map is a quasi-isomorphism, so [lem-weil-pbc-leray-acyclicity-quasi-iso] says that evaluation of it is a quasi-isomorphism. This computes derived sections using this very complex; the target direct-image complex has injective terms by the exact-left-adjoint argument in step 4.\nMoreover [lem-weil-pbc-comparison-sections] identifies its source section\ncomplex with $\\varinjlim_i\\Gamma(U_i,I^\\bullet)$. By [lem-weil-pbc-ring-modules-grothendieck-abelian], filtered colimits of $\\Lambda$-modules are exact. Applying this to the kernel and image sequences of the section complexes gives $H^n(\\varinjlim_i\\Gamma(U_i,I^\\bullet))=\\varinjlim_i H^n\\Gamma(U_i,I^\\bullet)$. Each $I^\\bullet|_{U_i}$ is an injective resolution by the etale-restriction lemma used in step 4, so the right side is the middle colimit in step 4. This justifies checking the named map on these models. At a finite stage $W_i$, evaluation of that counit\nis the identity on sections of $I^\\bullet$ on $U_i$. Restricting to $W$ gives\nexactly the canonical restriction from $U_i$ to $U_W$ followed by the global\ncohomology comparison. The identifications above are natural in these\nrestriction maps. On taking the filtered colimit they therefore compute\n$H^nR\\Gamma(W,\\alpha_L)$, not an unspecified isomorphism between the same\ngroups.",
    "uses": [
     "lem-weil-pbc-comparison-injective-acyclicity",
-    "lem-weil-pbc-comparison-sections"
+    "lem-weil-pbc-comparison-sections",
+    "lem-weil-pbc-leray-acyclicity-quasi-iso",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "lem-weil-pbc-etale-restriction-injectives"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-comparison-direct-image.md",
+    "place": "Proof, paragraph beginning \"We check that the isomorphism just calculated is induced by alpha_L\""
+   }
   },
   {
-   "text": "Thus $\\alpha_L$ is an isomorphism on derived sections of every basis object,\nin every degree. [lem-weil-pbc-basis-derived-detection] proves it is an\nisomorphism of complexes. For identity morphisms its defining mate is the\nidentity. For a composite, the counit is the composite of the two counits\nafter the usual associativity identifications; applying the displayed mate\nformula gives the composite of the two comparison maps. The triangle\nidentities remove the inserted unit--counit pairs. This proves the\ncomposition law, while naturality in $L$ follows from naturality of the\ncounit and the coherent pullback identification. See\n[Stacks Project, Section 61.19](https://stacks.math.columbia.edu/tag/099R)\nfor the comparison's standard setting.",
+   "text": "Thus $\\alpha_L$ is an isomorphism on derived sections of every basis object,\nin every degree. [lem-weil-pbc-basis-derived-detection] proves it is an\nisomorphism of complexes. For identity morphisms its defining mate is the\nidentity. For a composite, the counit is the composite of the two counits\nafter the usual associativity identifications; applying the displayed mate\nformula gives the composite of the two comparison maps. The triangle\nidentities remove the inserted unit--counit pairs. This proves the\ncomposition law, while naturality in $L$ follows from naturality of the\ncounit and the coherent pullback identification. For the coherence of the pullback identifications used here, apply [lem-weil-pbc-comparison-pullback].",
    "uses": [
-    "lem-weil-pbc-basis-derived-detection"
+    "lem-weil-pbc-basis-derived-detection",
+    "lem-weil-pbc-comparison-pullback"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-comparison-direct-image.md",
+    "place": "Proof, final paragraph: basis detection and coherence"
+   }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-comparison-pullback",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
   "lem-weil-pbc-comparison-global-cohomology",
+  "lem-weil-pbc-etale-restriction-injectives",
   "lem-weil-pbc-proetale-restriction-injectives",
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-derived-cohomology-continuity",
+  "lem-weil-pbc-ind-etale-stability",
   "lem-weil-pbc-comparison-injective-acyclicity",
   "lem-weil-pbc-comparison-sections",
-  "lem-weil-pbc-basis-derived-detection",
-  "lem-weil-pbc-derived-cohomology-continuity",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "prop-weil-pbc-inverse-image-exact",
-  "prop-weil-pbc-proetale-constant-exact"
+  "lem-weil-pbc-leray-acyclicity-quasi-iso",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-weil-pbc-basis-derived-detection"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-comparison-direct-image.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism between etale and pro-etale derived direct images for quasi-compact quasi-separated morphism",
+   "results": "AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.Scheme.instCategoryEtale; RingHom.Etale.respectsIso; lightProfiniteToLightCondSetIsoTopCatToLightCondSet",
+   "date": "2026-10-14",
+   "verdict": "no match: only etale morphism/category and condensed-set isomorphisms, no derived direct-image comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerivedFunctorPlus, lowerStarComparison, DerivedCategory.Plus",
+   "results": "none; unknown identifier 'Functor.rightDerivedFunctorPlus'",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerStarComparison|lowerStarComparisonUpperStarBaseChange|comparison direct image (WeilConjectures)",
+   "results": "none in Mathlib search directory",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "comparison between etale and pro-etale derived direct image",
+   "results": "service unavailable (Internal Server Error)",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "comparison direct image etale proetale derived functor",
+   "results": "AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; StandardEtalePair.HasMap.map; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; Algebra.Etale.comp; AlgebraicGeometry.Scheme.instCategoryEtale",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "rightDerivedLowerStarComparisonIso'",
+   "results": "none; unknown identifier 'rightDerivedLowerStarComparisonIso''",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerStarComparisonIso (Mathlib)",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -142,5 +256,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "prop-weil-pbc-comparison-direct-image",
+  "worker": "stage1",
+  "summary": "Second reader repaired coefficient/site mismatches in boundedness, added local and qcqs checks, cited acyclic-complex evaluation, and made fixed-stage continuity explicit; no new nodes. Maintainer reader supplied individual blueprint source places, the affine-permanence citation for the geometric checks, and exact filtered colimits for the cohomology of the source section complex.",
+  "blueprint": "Realizes the blueprint proof paragraphs: counit mate construction; affine ind-etale basis reduction; two continuity comparisons and derived direct-image evaluation; pro-etale restriction and global comparison; model-level identification via injective acyclicity and sections; basis detection and identity/composition/naturality."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-9b35086ec",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-9b35086ec (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources and route. Canonical counit mate agrees with Stacks 09A6. Repaired step source locations, affine-permanence support and exact filtered colimits in step 6. Statement unchanged; no new nodes or cycles. Condensed target coefficients remain distinct. Details in review.md; corrected JSON under fixes/.; 1 file(s) fixed by the reviewer"
+ }
 }
