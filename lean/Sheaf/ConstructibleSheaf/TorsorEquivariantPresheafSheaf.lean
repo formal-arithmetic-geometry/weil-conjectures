@@ -24,5 +24,5 @@ the historical compatibility path.
 
 @[expose] public section
 
--- The duplicate-removal repair is complete: the imported module contains the sole proof.
--- Keep this public import so historical callers receive that same declaration.
+-- TorsorInvariantSections and TorsorSectionEvaluationBijective import this historical path.
+-- The public import supplies the canonical theorem without repeating its declaration or proof.

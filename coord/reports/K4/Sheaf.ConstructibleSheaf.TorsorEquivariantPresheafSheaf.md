@@ -1,69 +1,76 @@
 ## What changed
 
-No Lean source changes are needed. The assigned module is already a compatibility
-public import of Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf. The R4
-repair recorded in coord/changes/equivariantModulePresheafSheaf-duplicate.md landed
-on 2026-10-13 and removed its duplicate implementation. This delivery records that
-the remaining repair queue entry is stale; it does not claim new proof progress.
-The sandbox contains the repository module unchanged for compilation and review.
+Replaced the stale sandbox's empty retired module with the repository's compatibility
+module, which publicly imports Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf.
+The historical module path thus exposes the single canonical theorem
+AlgebraicGeometry.Scheme.GaloisCover.equivariantModulePresheaf_isSheaf.
+No duplicate declaration or proof is introduced. The repository already contains
+this duplicate-removal repair; the sandbox now preserves it rather than removing
+an import still used by callers. Clarified the compatibility comments to identify its two current callers.
+No existing signature, definition or target changes.
 
 ## Proved and sorry left
 
-Holes closed in this delivery: none (0 of 0). Holes added: none. Sorries left in
-the assigned module: none; it contains no declarations.
-
-AlgebraicGeometry.Scheme.GaloisCover.equivariantModulePresheaf_isSheaf is already
-proved in Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf and re-exported
-by the assigned module. The node lem-weil-pbc-torsor-equivariant-presheaf-sheaf
-already points to that canonical module and declaration. Its existing proof uses
-the continuous-function sheaf, locality of the equivariance subfunctor, and the
-forgetful functor's reflection of the sheaf condition. No decomposition is added.
+Holes closed: none (zero sorries in the assigned module at the current baseline).
+Holes added: none. Sorries left in the delivered module: none.
+The retained equivariantModulePresheaf_isSheaf theorem is already proved in
+Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf; no theorem is split off.
 
 ## No longer needed
 
-No imports, nodes, or modules are pruned in this delivery. The single public
-compatibility import remains necessary to expose the retained theorem to callers.
-The duplicate implementation was removed by the earlier R4 delivery, not by K4.
+The duplicate equivariantModulePresheaf_restrictScalars_isSheaf declaration and
+its copied implementation are already absent from the repository and stay absent.
+No additional imports, nodes or modules are pruned in this delivery. The public
+compatibility import is needed by TorsorInvariantSections and
+TorsorSectionEvaluationBijective, which import the historical module path and
+apply the canonical equivariantModulePresheaf_isSheaf declaration.
+TorsorAssociatedModuleFull imports the canonical module directly and also uses
+that same declaration. Both sheaf DAG nodes already name the canonical module;
+no DAG route change is needed.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The brief says this module still contains sorry; the current module contains no
-sorry and no declarations. Its theorem and node were consolidated into
-TorsorEquivariantModuleIsSheaf by the landed R4 duplicate-removal repair.
-coord/repairs.txt still lists this compatibility module for upstream review #1428,
-even though the requested duplicate removal is already present. The dispatcher
-should retire that stale repair entry. No theorem is restated or weakened, no
-interface is changed, and no new mathematical work is claimed.
+This is the duplicate-removal repair from upstream review #1428, not a new proof
+item: its current baseline has no sorry and no duplicate theorem. The earlier
+sandbox incorrectly asserted that the repository module had no imports and
+removed its public compatibility import. Restoring the current module preserves
+its callers' interface and makes the canonical imports available to the generated
+delivery probe. No tool is modified and nothing is pushed. Verification is through
+lcompile.py and deliver3.py --no-push.
 
 ## Second reading by K4
 
-1. **Visible changes.** Compared the delivered module byte-for-byte with the
-repository version. The module is identical: it remains only the public
-compatibility import and its explanatory module comment; no declaration
-signature or definition changed. The report's earlier omission of one comment
-sentence was restored.
+1. PASS: compared every delivered Lean file (one) with the repository using
+   `diff -u`. Only the final two ordinary comments differ. There are no local
+   declarations, and the module command, public import and exposed public section
+   are byte-for-byte unchanged. No signature, definition, visibility or target
+   changes; no change record is required.
+2. PASS: compiled the delivered module through `lcompile.py` with exit code zero,
+   no errors or warnings. There is no sorry, axiom, unsafe, opaque,
+   implemented_by or extern declaration, and no data construction in this module.
+   A scratch copy with `#print axioms` confirms that the re-exported
+   `AlgebraicGeometry.Scheme.GaloisCover.equivariantModulePresheaf_isSheaf`
+   depends only on propext, Classical.choice and Quot.sound. Read its canonical
+   implementation: continuous-function sheaf, local equivariance subfunctor,
+   natural-isomorphism transport and reflection through the module forgetful
+   functor. Its definitions are concrete constructions.
+3. PASS (not applicable): no statement is split off or newly introduced. No
+   duplicate theorem or disguised restatement is added. Library searches confirm
+   the single canonical declaration and the two historical-path callers.
+4. PASS: the shortest route here is the existing canonical implementation.
+   The sole public import is the compatibility interface itself, necessary to
+   re-export the theorem to TorsorInvariantSections and
+   TorsorSectionEvaluationBijective; making it proof-private would remove that
+   interface. No old proof dependency is removed. `## No longer needed` lists
+   all pruning (none). Inspected `dag/units/sk-thm-p1.json`: its realized statement
+   and steps are unchanged, with no route bypassed.
+5. PASS: inspected both sheaf node records. Their Lean records identify the
+   canonical module and exact retained restricted-scalars signature. Their proof,
+   proof_deps and proof_origin describe its actual continuous-function/subfunctor
+   argument, using the etale-base-change continuity and associated-module nodes.
+   No self-reference or new node is introduced, and no node edits are needed.
 
-2. **Proof and axioms.** Compiled the module with `lcompile.py`; it succeeds
-with no errors or warnings. There are no declarations, `sorry`s, axioms, unsafe
-constructs, or definitions in this compatibility module to audit. The imported
-theorem is the already-verified declaration in
-`TorsorEquivariantModuleIsSheaf`.
-
-3. **Statements and split-offs.** No statements are added or split off. The
-canonical theorem and its DAG node are unchanged and are exposed through the
-public import. No duplicate theorem exists in this module.
-
-4. **Pruning and imports.** The single public import is required to expose the
-canonical theorem and is therefore retained. There are no unused imports,
-proof-dependency nodes, or modules to prune. The unit route remains realized by
-the canonical module's theorem.
-
-5. **DAG agreement.** The assigned compatibility module has no declarations;
-the existing node `lem-weil-pbc-torsor-equivariant-presheaf-sheaf` correctly
-records the canonical declaration in `TorsorEquivariantModuleIsSheaf`. Its proof
-and dependencies match that declaration. No new node or change record is
-needed.
-
-**Changed:** restored the repository's explanatory comment sentence, added a
-documentation-only note clarifying the historical compatibility path, and
-added this second-reading audit; no Lean interface or proof changed.
+Second reading changed only this report, recording the checks and their evidence;
+retained the first worker's correct compatibility comments. This is a
+compatibility repair/comment clarification with zero holes closed, zero holes
+added and zero modules pruned, not a new proof or decomposition.
