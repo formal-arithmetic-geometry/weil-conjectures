@@ -33,9 +33,102 @@
   "def-kun-projective",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{Spec}k$, $T=\\operatorname{Spec}L$, let $a:T\\to S$ be induced by the inclusion, and put $f=a\\circ q$. By [lem-weil-pbc-finite-separable-extension-etale], $a$ is etale, since $L/k$ is finite separable. By [lem-weil-pbc-affine-source-morphism-separated], $a$ is separated, since $T$ is affine.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-weil-pbc-affine-source-morphism-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL, lemma-etale-over-field; schemes.tex, Tags 01KN and 01KV"
+   }
+  },
+  {
+   "text": "Form $W=Z\\times_S T$ with projections $r:W\\to Z$ and $b:W\\to T$ [def-pc-fibre-product]. For any scheme $U$, maps $U\\to W$ are pairs $(u:U\\to Z,v:U\\to T)$ with $f\\circ u=a\\circ v$. Reading this pair as $(v,u)$ shows that $(W,b,r)$ is also the fibre product of $(a,f)$, with second projection $r$. Thus the second-projection statements cited next apply to $r$ directly. The map $r$ is the base change of $a$ along $f$, so is etale by [lem-weil-pbc-etale-scheme-base-change] and separated by [lem-weil-pbc-separated-base-change]. The identity $a\\circ q=f$ defines $\\gamma=(\\mathrm{id}_Z,q):Z\\to W$, with $r\\circ\\gamma=\\mathrm{id}_Z$ and $b\\circ\\gamma=q$. Thus [lem-weil-pbc-etale-section-clopen-immersion] applies to this actual section of the separated etale map $r$ and makes $\\gamma$ an open (and closed) immersion.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-etale-section-clopen-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 024T, proposition-properties-sections; morphisms.tex, Tag 02GO; schemes.tex, Tag 01KU"
+   }
+  },
+  {
+   "text": "The map $b:W\\to T$ is also the base change of the smooth map $f:Z\\to S$ along $a$. Clause (2) of [lem-pc-proper-base-change] therefore makes $b$ smooth. Since $\\gamma$ is an open immersion, [lem-pc-open-immersion-smooth-composition] makes $b\\circ\\gamma=q$ smooth. This proves smoothness without treating $q$ itself as the base change of $f$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-pc-open-immersion-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VB, 01VC, 01VA (lemma-base-change-smooth, lemma-open-immersion-smooth, lemma-composition-smooth); alternative graph proof of more-morphisms.tex, Tag 0G80"
+   }
+  },
+  {
+   "text": "By projectivity of $f$ and [def-kun-projective], choose an integer $N\\geq0$ and a closed immersion $i:Z\\hookrightarrow\\mathbf P^N_S$ with structural composite $f$. By [lemma-nagata-projective-space-base-change-pullback], $\\mathbf P^N_T$ is $\\mathbf P^N_S\\times_S T$. The equality of the two maps $Z\\to S$ gives a morphism $j=(i,q):Z\\to\\mathbf P^N_T$ by [def-pc-fibre-product]. For the projections $p:\\mathbf P^N_T\\to\\mathbf P^N_S$ and $h:\\mathbf P^N_T\\to T$, the defining equations are $p\\circ j=i$ and $h\\circ j=q$. Here $N+1$ homogeneous coordinates are used on both projective spaces.",
+   "uses": [
+    "def-kun-projective",
+    "lemma-nagata-projective-space-base-change-pullback",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4Q, lemma-projective-permanence, construction of the map into the base-changed projective bundle; finite projective space case"
+   }
+  },
+  {
+   "text": "The projection $p$ is the base change of the separated morphism $a$, hence is separated by [lem-weil-pbc-separated-base-change]. Since $p\\circ j=i$ is a closed immersion, [lem-weil-pbc-closed-immersion-cancellation] makes $j$ a closed immersion. The equality $h\\circ j=q$ is then exactly an embedding into the finite projective space required by [def-kun-projective], so $q$ is projective.",
+   "uses": [
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-closed-immersion-cancellation",
+    "def-kun-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 07RK, lemma-immersion-permanence (3); Tag 0C4Q, lemma-projective-permanence; schemes.tex, Tag 01KU, lemma-separated-permanence (3)"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-projective-implies-proper] to the projective morphism $q$ established above. It is proper. Together with step 3 and step 5 this gives all three assertions.",
+   "uses": [
+    "lem-kun-projective-implies-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WC, lemma-locally-projective-proper; Tag 01W9, lemma-H-projective"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-pc-proper-base-change",
+  "lem-pc-open-immersion-smooth-composition",
+  "def-kun-projective",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lem-weil-pbc-closed-immersion-cancellation",
+  "lem-kun-projective-implies-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0C4Q finite-projective-space graph construction; smoothness by Tag 024T and Tags 01VB, 01VA, 01VC, proving the specialization of Tag 0G80"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,15 +164,79 @@
    "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*of_comp|smooth.*of_comp|smooth.*etale.*permanence",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole smooth, projective and proper assertion; hits give only individual general ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth projective scheme over a field remains smooth and projective when its structure map factors through a finite separable extension",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"of_comp\"",
+   "results": "1 hits: Algebra.FormallySmooth.of_comp_surjective",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole smooth, projective and proper assertion; hits give only individual general ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth projective morphism factoring through a finite separable field extension is smooth and projective over that extension",
+   "results": "8 hits: AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, RingHom.Smooth.isStableUnderBaseChange, RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange, RingHom.isStandardSmooth_isStableUnderBaseChange, Algebra.Smooth.comp, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme, Algebra.Smooth.exists_finiteType",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole smooth, projective and proper assertion; hits give only individual general ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If X to S is smooth and factors through an etale S scheme T then X to T is smooth; if X to S embeds into projective space and T to S is separated then X embeds into projective space over T",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole smooth, projective and proper assertion; hits give only individual general ingredients"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-field-curve-completion-insep",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-finite-separable-base-refinement",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses. Reused existing nodes throughout: the graph section of the etale separated base change proves smoothness, and a closed immersion into finite projective space lifts over L by separated cancellation, proving projectivity in the precise H-projective convention of def-kun-projective. Properness follows from the existing projective-proper node. No new nodes.",
+  "blueprint": "Expands the finite-separable-base-refinement input of Tag 0GK5 within the classical constructibility paragraph of thm-weil-pbc-direct-image-finiteness-proper, with the existing from.place and via chain retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only clause (2), smoothness under arbitrary base change, is used; no node of this unit supplies this generic geometry tool."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic projective-to-proper implication needed for the final assertion; no unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-kun-projective-implies-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NM-c81e2a87b",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-c81e2a87b (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, sources, and unit/chapter route. All six steps preserve the hypotheses and finite projective-space convention; edge cases pass. No new nodes, missing citations, cycles, or duplicate split found. Accepted both declared geometry tool uses. Archived master target morphisms and coefficient categories checked. Findings written to review.md; no repairs needed."
+ }
 }
