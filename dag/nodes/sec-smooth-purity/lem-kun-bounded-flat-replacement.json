@@ -3,38 +3,179 @@
  "blueprint": {
   "is": "lem-kun-bounded-flat-replacement",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Functorial bounded-above flat replacement",
- "statement": "There is a construction which assigns to every bounded-above complex\n$\\mathcal F^\\bullet$ of $\\Lambda_T$-module sheaves together with an\ninteger $N$ such that $\\mathcal F^i=0$ for $i>N$ a bounded-above\ncomplex $\\Phi(\\mathcal F)^\\bullet$ of flat $\\Lambda_T$-module\nsheaves with $\\Phi(\\mathcal F)^i=0$ for $i>N$ and a termwise\nsurjective quasi-isomorphism\n$\\Phi(\\mathcal F)^\\bullet\\to\\mathcal F^\\bullet$; the construction is\nfunctorial, in the sense that a map\n$\\mathcal F^\\bullet\\to\\mathcal G^\\bullet$ between complexes which both\nvanish above $N$ induces a map\n$\\Phi(\\mathcal F)^\\bullet\\to\\Phi(\\mathcal G)^\\bullet$ compatible with\nthe two quasi-isomorphisms. In particular every bounded-above complex\nof $\\kunZn$-module sheaves on $T_{\\Et}$ is quasi-isomorphic to a\nbounded-above complex of flat sheaves.",
+ "statement": "Let $T$ be a scheme and $\\Lambda$ a commutative ring, with $\\Lambda_T$ its constant sheaf of rings on the small etale site [def-weil-pbc-etale-sheaves]. Use cochain complexes and quasi-isomorphisms as in [def-weil-abstract-derived-category], and flat module sheaves as in [def-pc-flat-sheaf-modules]. There is a construction which assigns to every bounded-above complex\n$\\mathcal F^\\bullet$ of $\\Lambda_T$-module sheaves together with an\ninteger $N$ such that $\\mathcal F^i=0$ for $i>N$ a bounded-above\ncomplex $\\Phi(\\mathcal F)^\\bullet$ of flat $\\Lambda_T$-module\nsheaves with $\\Phi(\\mathcal F)^i=0$ for $i>N$ and a termwise\nsurjective quasi-isomorphism\n$\\Phi(\\mathcal F)^\\bullet\\to\\mathcal F^\\bullet$; the construction is\nfunctorial, in the sense that a map\n$\\mathcal F^\\bullet\\to\\mathcal G^\\bullet$ between complexes which both\nvanish above $N$ induces a map\n$\\Phi(\\mathcal F)^\\bullet\\to\\Phi(\\mathcal G)^\\bullet$ compatible with\nthe two quasi-isomorphisms. In particular every bounded-above complex\nof $\\mathbf Z/n\\mathbf Z$-module sheaves on $T_{\\Et}$ is quasi-isomorphic to a\nbounded-above complex of flat sheaves. Here the last assertion holds for every integer $n$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-bounded-flat-replacement.md",
   "place": "node lem-kun-bounded-flat-replacement, order 1722"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-pc-flat-sheaf-modules"
+ ],
  "proof": [
   {
-   "text": "For a $\\Lambda_T$-module sheaf $F$ in the sense of\n[def-weil-pbc-etale-sheaves] let $\\operatorname{Free}(F)$ be the\nsheafification of the presheaf $U\\mapsto\\Lambda_T^{(F(U))}$ of free\n$\\Lambda_T$-modules on the sections of $F$. Evaluation of basis\nelements is a canonical epimorphism\n$\\operatorname{Free}(F)\\twoheadrightarrow F$; the construction is\nfunctorial; and $\\operatorname{Free}(F)$ is flat, because its stalks\nare free $\\Lambda$-modules. Given $\\mathcal F^\\bullet$ with\n$\\mathcal F^i=0$ for $i>N$, set\n$\\Phi^N=\\operatorname{Free}(\\mathcal F^N)$ and, descending\ninductively, let\n\n$$\nP^i=\\mathcal F^i\\times_{\\mathcal F^{i+1}}\\Phi^{i+1}\n$$\n\nbe the fibre product of $d^i:\\mathcal F^i\\to\\mathcal F^{i+1}$ and\n$\\Phi^{i+1}\\to\\mathcal F^{i+1}$, set\n$\\Phi^i=\\operatorname{Free}(P^i)$, let\n$\\Phi^i\\to\\Phi^{i+1}$ be the composite\n$\\Phi^i\\twoheadrightarrow P^i\\to\\Phi^{i+1}$, and let\n$\\Phi^i\\to\\mathcal F^i$ be the composite\n$\\Phi^i\\twoheadrightarrow P^i\\to\\mathcal F^i$. The squares commute by\nthe definition of the fibre product, and\n$\\Phi^i\\twoheadrightarrow\\mathcal F^i$ is an epimorphism because\n$P^i\\twoheadrightarrow\\mathcal F^i$ is: for $i<N$ this follows from\nthe surjectivity of $\\Phi^{i+1}\\twoheadrightarrow\\mathcal F^{i+1}$,\nand for $i\\ge N$ both differentials out of $\\mathcal F^i$ vanish, so\nthat $P^i\\cong\\mathcal F^i$. Every step is functorial, which gives\nthe asserted compatibility. Finally $\\Phi^\\bullet\\to\\mathcal F^\\bullet$ is a quasi-isomorphism: its kernel\n$\\mathcal K^\\bullet$, with\n$\\mathcal K^i=\\ker(\\Phi^i\\to\\mathcal F^i)$, has surjective\ndifferentials $\\mathcal K^i\\twoheadrightarrow\\mathcal K^{i+1}$, since a\npreimage of $\\kappa\\in\\mathcal K^{i+1}$ is any lift of\n$(0,\\kappa)\\in P^i$ under $\\Phi^i\\twoheadrightarrow P^i$; hence\n\n$$\n\\mathcal H^i(\\mathcal K)\n=\\ker(d^i)/\\operatorname{im}(d^{i-1})\n=\\ker(d^i)/\\mathcal K^i=0\n$$\n\nfor every $i$, the case $i=N$ being the same computation with\n$\\mathcal K^{N+1}=0$ and $\\operatorname{im}(d^{N-1})=\\mathcal K^N$.\nA termwise surjective map of complexes with acyclic kernel is a\nquasi-isomorphism, by the long exact cohomology sequence of\n$0\\to\\mathcal K^\\bullet\\to\\Phi^\\bullet\\to\\mathcal F^\\bullet\\to0$ and\nthe definition of the derived category in\n[def-weil-pbc-derived-categories].",
+   "text": "Regard each $\\mathcal F^i$ as a presheaf of $\\Lambda$-modules on $T_{\\Et}$, by restricting its $\\Lambda_T$-action along the constant-presheaf map $\\Lambda\\to\\Lambda_T$. For any such presheaf $M$, define $B(M)(U)=\\bigoplus_{s\\in M(U)}\\Lambda$. Write $[s]$ for its basis elements; restrictions send $[s]$ to $[s|_V]$, and a map $f:M\\to M'$ sends $[s]$ to $[f(s)]$. Evaluation $e_M:B(M)\\to M$, $[s]\\mapsto s$, is sectionwise surjective and natural. On basis elements, identity and composition of maps are preserved, so $B$ is a functor (no additivity of this functor is asserted). All sums are sets in the chosen universe and can be formed after the small-skeleton convention. The constant sheaf is the sheafification of the constant presheaf.",
    "uses": [
     "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-derived-categories"
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-size-convention"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03CS (presheaves of modules); free-cover argument of 03EW (lemma-module-quotient-flat) made sectionwise and functorial"
+   }
+  },
+  {
+   "text": "Construct a presheaf complex $C$ and an augmentation $q:C\\to\\mathcal F$. Put $C^i=0$ for $i>N$. Descend from $N$, with $Z^jC=\\ker d_C^j$ and $Z^j\\mathcal F=\\ker d_{\\mathcal F}^j$, using\n$$P^i=\\mathcal F^i\\times_{Z^{i+1}\\mathcal F}Z^{i+1}C,\\qquad C^i=B(P^i).$$\nThe first map defining the fibre product is $d_{\\mathcal F}^i$, which lands in cycles since $d_{\\mathcal F}^{i+1}d_{\\mathcal F}^i=0$; the second is the restriction of $q^{i+1}$ to cycles, available from the chain equations already constructed. Explicitly $P^i(U)$ consists of pairs $(x,z)$ with $d_{\\mathcal F}x=qz$ and $d_Cz=0$. Define $q^i$ and $d_C^i$ by evaluation followed by the two projections, the latter followed by $Z^{i+1}C\\hookrightarrow C^{i+1}$. Then $q^{i+1}d_C^i=d_{\\mathcal F}^iq^i$ and $d_C^{i+1}d_C^i=0$ directly on each pair, so these really are complexes and a chain map. At $i=N$, the fibre product is $\\mathcal F^N$, giving $C^N=B(\\mathcal F^N)$. At each fixed degree there are only $N-i+1$ stages, so ordinary induction on this nonnegative integer defines every term.\n\nSource error in the imported blueprint proof: its pullback uses the whole next term instead of its cycles, so it need not give a square-zero differential. On the one-point topos over $\\Lambda=\\mathbf Z$, take $\\mathcal F=\\mathbf Z[0]$ and $N=0$. In its degree-zero free cover the nonzero basis vector $k=[0]$ has evaluation zero. Its degree-minus-one free cover contains $l=[k]$, with differential $k$. Its next full-term pullback contains $l$, so the degree-minus-two generator $[l]$ has second differential $k\\ne0$. The cycle pullback used here excludes $l$ at that stage. This repairs the construction while retaining the statement and the free-cover/descending-resolution/sheafification route.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "05T7 (lemma-subcategory-left-resolution), part (1), cycle-pullback descending induction"
+   }
+  },
+  {
+   "text": "Prove simultaneously, sectionwise, that $q^i:C^i\\to\\mathcal F^i$ and $Z^iC\\to Z^i\\mathcal F$ are surjective. Above $N$ both claims hold between zero modules. Suppose the claims on cycles are known in degree $i+1$. Given $x\\in\\mathcal F^i(U)$, its differential is a cycle; choose $z\\in Z^{i+1}C(U)$ with $qz=d_{\\mathcal F}x$. The basis vector $[(x,z)]\\in C^i(U)$ maps to $x$, proving the first claim. Given a cycle $x\\in Z^i\\mathcal F(U)$, the pair $(x,0)$ belongs to $P^i(U)$ and $[(x,0)]$ has differential zero and maps to $x$. This proves the second claim, completing the descending induction, including degree $N$. These arguments do not presume that an epimorphism of sheaves is surjective on sections: they concern the explicitly constructed presheaf free cover.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "05T7 (1), verification of the induction hypothesis, with explicit sectionwise lifts"
+   }
+  },
+  {
+   "text": "The map $q$ induces an isomorphism on cohomology at every section object $U$. Surjectivity follows from the cycle lift $[(x,0)]$ of step 3. For injectivity, let $c\\in Z^iC(U)$ and suppose $q^i(c)=d_{\\mathcal F}^{i-1}(a)$ for $a\\in\\mathcal F^{i-1}(U)$. Then $(a,c)\\in P^{i-1}(U)$ and $b=[(a,c)]\\in C^{i-1}(U)$ has $d_C^{i-1}b=c$, so $c$ is a boundary. This also covers degree $N$, and above $N$ both cohomologies vanish. By the statement on exact evaluation and sectionwise homology in [lem-weil-pbc-site-module-presheaf-sheafification-exact], $q$ is therefore a quasi-isomorphism of presheaf complexes.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "05T7 (1), explicit verification of cohomology isomorphisms"
+   }
+  },
+  {
+   "text": "Sheafify termwise, setting $\\Phi(\\mathcal F)^i=(C^i)^\\#$. The exact module-sheafification result [lem-weil-pbc-site-module-presheaf-sheafification-exact] sends the sectionwise epic maps $q^i$ to epimorphisms of sheaves and gives natural isomorphisms $H^i(C^\\#)\\cong H^i(C)^\\#$; consequently $q^\\#:C^\\#\\to\\mathcal F$ is a quasi-isomorphism. Here the sheafification of the already sheaf-valued target is canonically the target itself, by the sheafification universal property. The same exactness sends zero terms to zero, retaining the upper bound $N$. The sheafified constant-presheaf ring is $\\Lambda_T$, so these are $\\Lambda_T$-module sheaves with the indicated augmentation. Explicitly, sheafify the scalar multiplication map of underlying presheaves of sets; preservation of finite products by [lem-weil-pbc-sheafification-sets-exact] identifies its domain with $\\Lambda_T\\times(C^i)^\\#$. The module identities follow by sheafifying the identities for the original action. The differential and augmentation commute with this action because they do so before sheafification. On the already sheaf-valued target this action agrees with its given $\\Lambda_T$-action: both extend the constant-presheaf action uniquely through sheafification. Thus the homology comparison and augmentation are $\\Lambda_T$-linear. Kernels are computed on the underlying sheaves and cokernels are sheafified underlying quotients, with the induced actions, so the underlying cohomology isomorphisms give cohomology isomorphisms of $\\Lambda_T$-modules.",
+   "uses": [
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-sheafification-sets-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "00WJ (lemma-sheafification-exact), with 0H7J (example-constant-sheaf)"
+   }
+  },
+  {
+   "text": "Every $C^i(U)$ is a free $\\Lambda$-module (or zero), hence flat by [lem-weil-pbc-projective-module-flat]. Thus tensoring with $C^i(U)$ preserves exact sequences, by [lem-weil-pbc-flat-tensor-exact]. Presheaf evaluation is exact and computes kernels sectionwise, as stated in [lem-weil-pbc-site-module-presheaf-sheafification-exact], so the objectwise tensor functor with $C^i$ preserves kernels. It preserves finite products as well: they are finite direct sums of modules, and the maps $m\\otimes(a,b)\\mapsto(m\\otimes a,m\\otimes b)$ and the sum of the two inclusions are mutually inverse. It sends zero to zero. Hence it preserves finite limits of presheaves. Apply [lem-pc-sites-modules-sheafification-flat] with $\\mathcal O$ the constant presheaf $\\Lambda$ and $\\mathcal F=C^i$: its sheafification is flat over $\\mathcal O^\\#=\\Lambda_T$. This proves flatness of every term of $\\Phi$ without assuming sectionwise flatness of an arbitrary sheaf.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "lem-pc-sites-modules-sheafification-flat",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "03ES (lemma-flatness-presheaves) and 03ET (lemma-flatness-sheafification); algebra.tex 00HD and the free-module observation in the proof of 051G"
+   }
+  },
+  {
+   "text": "For a chain map $f:\\mathcal F\\to\\mathcal G$ with the same upper bound $N$, define the map between the constructed presheaf complexes by descending induction. It is the unique map between zero terms above $N$. If its component $h^{i+1}$ has already been constructed and respects cycles and augmentation, the map of pullbacks is $(x,z)\\mapsto(f^i(x),h^{i+1}(z))$. The chain equations and $q_{\\mathcal G}h=fq_{\\mathcal F}$ show that the image satisfies both equations defining the target pullback. Apply $B$ to this map to obtain $h^i$. Evaluation naturality gives $d_{C\\mathcal G}h^i=h^{i+1}d_{C\\mathcal F}$ and $q_{\\mathcal G}^ih^i=f^iq_{\\mathcal F}^i$ on every basis vector. Identity and composition hold by induction on the two coordinates and on the free basis. Sheafification is a functor, so the resulting maps of $\\Phi$ have the same equations and are functorial. Finally take $\\Lambda=\\mathbf Z/n\\mathbf Z$ for the stated particular case; no invertibility, finiteness, or properness hypothesis is needed.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "05T7 (1), induction made functorial using the canonical free-presheaf cover"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-derived-categories"
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-sheafification",
+  "def-weil-size-convention",
+  "lem-pc-sites-modules-sheafification-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-bounded-flat-replacement.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/derived.tex",
+  "place": "05T7 (1) cycle-pullback argument, with canonical sectionwise free covers and exact sheafification (00WJ, 03ET); all inductive checks written out"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every bounded above complex of sheaves of modules admits a functorial termwise surjective quasi-isomorphism from a bounded above complex of flat sheaves with the same upper bound",
+   "results": "CochainComplex.cm5b, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected results; none states the bounded-above functorial sheaf replacement"
+  },
+  {
+   "tool": "grep",
+   "query": "HasFunctorialFlatResolution|bounded.*flat|flat.*bounded",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected results; none states the bounded-above functorial sheaf replacement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural epimorphism from flat sheaves to any sheaf of modules extends to a bounded above flat resolution of complexes",
+   "results": "Module.Flat.of_forall_exists_factorization, SheafOfModules.instAbelian, Module.Flat.iff_forall_exists_factorization, SheafOfModules.IsFinitePresentation, Module.Flat.of_projective, SheafOfModules.isFinitePresentation, SheafOfModules.Presentation.map, CategoryTheory.Sheaf.instIsGrothendieckAbelian",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected results; none states the bounded-above functorial sheaf replacement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"flat\", \"resolution\"",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected results; none states the bounded-above functorial sheaf replacement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "functorial flat resolution of a bounded above complex of sheaves of modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "LeftResolution|FlatResolution|resolutionFunctor|flat.*resolution",
+   "results": "Mathlib/Algebra/Homology/LeftResolution/Reduced.lean, Mathlib/Algebra/Homology/LeftResolution/Reduced.lean, Mathlib/Algebra/Homology/LeftResolution/Reduced.lean, Mathlib/Algebra/Homology/LeftResolution/Reduced.lean, Mathlib/Algebra/Homology/LeftResolution/Reduced.lean, Mathlib/Algebra/Homology/LeftResolution/Basic.lean, Mathlib/Algebra/Homology/LeftResolution/Basic.lean, Mathlib/Algebra/Homology/LeftResolution/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected results; none states the bounded-above functorial sheaf replacement"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -57,5 +198,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-bounded-flat-replacement",
+  "worker": "stage1",
+  "summary": "Replaced the invalid full-term pullback by the cycle pullback in 05T7 (1), implemented sectionwise on presheaves so free lifts are genuinely surjective on sections. Proved cohomology bijectivity explicitly, sheafified using the existing exactness theorem, and proved flatness with existing free-flat, tensor-exact and flat-sheafification statements. Checked functoriality at fixed N on generators. No new nodes; all needed generic facts already exist. Introduced T and Lambda explicitly and expanded the coefficient macro; no mathematical hypothesis added.",
+  "blueprint": "Steps 1 and 6 realize the free-cover/flatness sentences of the imported proof; steps 2-4 repair its descending pullback and quasi-isomorphism argument; steps 5 and 7 realize sheafification, bound and functoriality.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-modules-sheafification-flat",
+    "why": "Generic flatness preservation under sheafification applied to the constant presheaf ring and the sectionwise free terms in step 6. The Kunneth unit has no such sheafification statement; this supplies a tool and does not replace its theorem route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-modules-sheafification-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-8a8ef3faa",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-8a8ef3faa (reviewer sub-agent of L); spot-checked: Read all seven steps, cited statements, source passages, and unit/chapter route; verified cycle-pullback construction, coefficient actions, flatness, functoriality, edge cases, and exact master target morphisms/categories. Corrected JSON adds the blueprint counterexample and accepted flat-sheafification tool declaration. Statement unchanged; no new nodes. Full findings in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
