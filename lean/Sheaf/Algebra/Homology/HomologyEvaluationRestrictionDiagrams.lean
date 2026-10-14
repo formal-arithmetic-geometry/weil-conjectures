@@ -6,6 +6,9 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.Algebra.Homology.HomologyEvaluationDefinitions
+import Sheaf.Algebra.Homology.OpenOverInternalHomComparison
+import Sheaf.Algebra.Homology.OpenOverHomComplexCycleProjectionComparison
+import Sheaf.Algebra.Homology.OpenOverInternalHomCycleHomologySquares
 
 /-! # Restriction comparisons for the cycle-evaluation diagram
 
@@ -18,6 +21,22 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace CategoryTheory
 
+
+private theorem map_three_square {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {S U V Z : C} {S' U' V' Z' : D}
+    (a : S ⟶ U) (b : U ⟶ V) (d : V ⟶ Z)
+    (a' : S' ⟶ U') (b' : U' ⟶ V') (d' : V' ⟶ Z')
+    (c : F.obj S ⟶ S') (e : F.obj V ⟶ V') (t : F.obj Z ⟶ Z')
+    (h1 : F.map (a ≫ b) ≫ e = c ≫ a' ≫ b')
+    (h2 : F.map d ≫ t = e ≫ d') :
+    F.map (a ≫ b ≫ d) ≫ t = c ≫ a' ≫ b' ≫ d' := by
+  simp only [Functor.map_comp, Category.assoc] at h1 ⊢
+  rw [h2]
+  simpa only [Category.assoc] using congrArg (fun f ↦ f ≫ d') h1
+
+set_option maxHeartbeats 800000 in
+-- Comparing the six dependent restriction isomorphism types needs extra heartbeats.
+set_option backward.isDefEq.respectTransparency true in
 /-- Restriction identifies the cycle-evaluation diagram before choosing any evaluation
 map on homology.
 
@@ -88,6 +107,15 @@ theorem homologyEvaluation_restriction_diagrams (X : Scheme.{u})
         F.map (P.homologyπ n) ≫ a.hom = c.hom ≫ Q.homologyπ n ∧
         F.map (SheafOfModules.homObjMap (R := X.sheaf) (T.homologyπ (-n)) (𝟙 _)) ≫
             v.hom = b.hom ≫ SheafOfModules.homObjMap
-              (R := V.toScheme.sheaf.over W) (A.homologyπ (-n)) (𝟙 _) := by sorry
+              (R := V.toScheme.sheaf.over W) (A.homologyπ (-n)) (𝟙 _) := by
+  classical
+  exact (openOver_internalHom_comparison X V W).elim fun e he ↦
+    (openOver_homComplex_cycle_projection_comparison X V W e he T J n).elim fun a ha ↦
+      ha.elim fun c hcs ↦
+        (openOver_internalHom_cycle_homology_squares X V W e he T J n).elim fun b hb ↦
+          hb.elim fun s hs ↦ hs.elim fun t ht ↦ ht.elim fun v hv ↦
+            ⟨a, b, c, s, t, v,
+              map_three_square _ _ _ _ _ _ _ _ _ _ hcs.1 hv.1,
+              hv.2.1, hv.2.2.1, hcs.2, hv.2.2.2⟩
 
 end CategoryTheory

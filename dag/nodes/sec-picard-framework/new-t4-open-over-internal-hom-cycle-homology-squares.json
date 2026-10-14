@@ -1,0 +1,123 @@
+{
+ "id": "new-t4-open-over-internal-hom-cycle-homology-squares",
+ "kind": "statement",
+ "title": "Internal Hom transport squares for cycles and homology",
+ "statement": "Let X be a scheme, V an open of X and W an open of V, and F restriction to V followed by localization over W [new-b2-homology-evaluation-definitions]. Suppose e(M,N):F(Hom(M,N))≅Hom(F(M),F(N)) is natural in both module arguments [def-pur-sheaf-hom]. For integer cochain complexes T,J and integer n, put A=F(T), K=F(J). There exist internal-Hom comparison isomorphisms b:F(Hom(H^(-n)(T),H^0(J)))≅Hom(H^(-n)(A),H^0(K)), s:F(Hom(Z^(-n)(T),Z^0(J)))≅Hom(Z^(-n)(A),Z^0(K)), t:F(Hom(Z^(-n)(T),J^0))≅Hom(Z^(-n)(A),K^0), and v:F(Hom(Z^(-n)(T),H^0(J)))≅Hom(Z^(-n)(A),H^0(K)). They satisfy F(Hom(T.iCycles,1));t=e(T^(-n),J^0);Hom(A.iCycles,1), F(Hom(1,J.iCycles));t=s;Hom(1,K.iCycles), F(Hom(1,J.homologyPi));v=s;Hom(1,K.homologyPi), and F(Hom(T.homologyPi,1));v=b;Hom(A.homologyPi,1). There is no Hom-complex object or product projection in this statement.",
+ "stmt_deps": [
+  "new-b2-homology-evaluation-definitions",
+  "def-pur-sheaf-hom"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DL",
+  "place": "Lemma 20.42.3, restriction of internal Hom, expanded via its construction; Section 21.34, Tag 0A8X, product terms and signed differential. Parent plan new-v2-homology-evaluation-restriction-diagrams, steps 1 and 2."
+ },
+ "proof": [
+  {
+   "text": "The moduleOverFunctor_limits_proof and moduleOverFunctor_colimits_proof localization comparisons, transported by overFunctorEquiv through the open-site equivalence, make F exact. For T and J take the inverse exact-functor cycle and homology comparisons z_L and d_L. Kernel and cokernel universal properties show that z_L commutes with cycle inclusions and that F(homologyπ);d_L=z_L;homologyπ.",
+   "uses": [
+    "lem-sc-derived-hom-mayer-vietoris",
+    "new-b2-homology-evaluation-definitions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose e with Hom(z_T inverse,z_J), Hom(z_T inverse,identity), Hom(z_T inverse,d_J), and Hom(d_T inverse,d_J) to define s,t,v,b. The inverse to each comparison is supplied by the inverse object isomorphisms and e inverse. Apply the given e naturality to (T.iCycles,identity), (identity,J.iCycles), (identity,J.homologyπ), and (T.homologyπ,identity). Substitute the inclusion and quotient squares from the preceding step; the intermediate object isomorphisms cancel, giving the four displayed squares. Empty opens and zero complexes satisfy the same universal properties; no boundedness hypothesis is used.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "lem-sc-derived-hom-mayer-vietoris",
+  "new-b2-homology-evaluation-definitions"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "T4",
+  "date": "2026-10-14",
+  "description": "Agent expansion of the universal-property steps in the source restriction construction; separated strictly partial squares from the parent diagram theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a sheaf Hom complex commutes with cycles homology and the product projections",
+   "results": "Shape-index restriction comparisons only; no ringed-site comparison with the fixed Hom projections.",
+   "verdict": "No exact match.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.mapCyclesIso",
+   "results": "Loogle does not index this identifier.",
+   "verdict": "No useful result; local source search finds the general exact-functor API.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "mapCyclesIso|mapHomologyIso",
+   "results": "General exact-functor cycle and homology comparison API in Mathlib.Algebra.Homology.ShortComplex.PreservesHomology.",
+   "verdict": "Tools for the exactness part; no composite restriction/evaluation diagram.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction of sheaves of modules commutes with homology and cycles naturally",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomologyEvaluationRestrictionDiagrams",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Local zero-differential Koszul self-Ext calculation, compatibility under restriction; parent restriction-diagram steps 1 and 2.",
+   "via": [
+    "new-v2-homology-evaluation-restriction-diagrams"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OpenOverInternalHomCycleHomologySquares",
+  "file": "lean/Sheaf/Algebra/Homology/OpenOverInternalHomCycleHomologySquares.lean",
+  "declaration": "CategoryTheory.openOver_internalHom_cycle_homology_squares",
+  "statement": "theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})\n    (V : X.Opens) (W : V.toScheme.Opens)\n    (e : ∀ M N : X.Modules,\n      (Scheme.Modules.restrictFunctor V.ι ⋙\n        SheafOfModules.overFunctor V.toScheme.ringCatSheaf W).obj\n          (SheafOfModules.homObj (R := X.sheaf) M N) ≅\n      SheafOfModules.homObj (R := V.toScheme.sheaf.over W)\n        ((Scheme.Modules.restrictFunctor V.ι ⋙\n          SheafOfModules.overFunctor V.toScheme.ringCatSheaf W).obj M)\n        ((Scheme.Modules.restrictFunctor V.ι ⋙\n          SheafOfModules.overFunctor V.toScheme.ringCatSheaf W).obj N))\n    (he : ∀ (M M' N N' : X.Modules) (f : M' ⟶ M) (g : N ⟶ N'),\n      (Scheme.Modules.restrictFunctor V.ι ⋙\n        SheafOfModules.overFunctor V.toScheme.ringCatSheaf W).map\n          (SheafOfModules.homObjMap (R := X.sheaf) f g) ≫ (e M' N').hom =\n        (e M N).hom ≫ SheafOfModules.homObjMap (R := V.toScheme.sheaf.over W)\n          ((Scheme.Modules.restrictFunctor V.ι ⋙\n            SheafOfModules.overFunctor V.toScheme.ringCatSheaf W).map f)\n          ((Scheme.Modules.restrictFunctor V.ι ⋙\n            SheafOfModules.overFunctor V.toScheme.ringCatSheaf W).map g))\n    (T J : CochainComplex X.Modules ℤ) (n : ℤ) :\n    let F := Scheme.Modules.restrictFunctor V.ι ⋙\n      SheafOfModules.overFunctor V.toScheme.ringCatSheaf W\n    let A := (moduleOpenOverComplexFunctor X V W).obj T\n    let K := (moduleOpenOverComplexFunctor X V W).obj J\n    ∃ b : F.obj (SheafOfModules.homObj (R := X.sheaf)\n          (T.homology (-n)) (J.homology 0)) ≅\n          SheafOfModules.homObj (R := V.toScheme.sheaf.over W)\n            (A.homology (-n)) (K.homology 0),\n      ∃ s : F.obj (SheafOfModules.homObj (R := X.sheaf)\n          (T.cycles (-n)) (J.cycles 0)) ≅\n          SheafOfModules.homObj (R := V.toScheme.sheaf.over W)\n            (A.cycles (-n)) (K.cycles 0),\n      ∃ t : F.obj (SheafOfModules.homObj (R := X.sheaf)\n          (T.cycles (-n)) (J.X 0)) ≅\n          SheafOfModules.homObj (R := V.toScheme.sheaf.over W)\n            (A.cycles (-n)) (K.X 0),\n      ∃ v : F.obj (SheafOfModules.homObj (R := X.sheaf)\n          (T.cycles (-n)) (J.homology 0)) ≅\n          SheafOfModules.homObj (R := V.toScheme.sheaf.over W)\n            (A.cycles (-n)) (K.homology 0),\n        F.map (SheafOfModules.homObjMap (R := X.sheaf) (T.iCycles (-n)) (𝟙 _)) ≫\n            t.hom = (e (T.X (-n)) (J.X 0)).hom ≫\n          SheafOfModules.homObjMap (R := V.toScheme.sheaf.over W)\n            (A.iCycles (-n)) (𝟙 _) ∧\n        F.map (SheafOfModules.homObjMap (R := X.sheaf) (𝟙 _) (J.iCycles 0)) ≫ t.hom =\n          s.hom ≫ SheafOfModules.homObjMap\n            (R := V.toScheme.sheaf.over W) (𝟙 _) (K.iCycles 0) ∧\n        F.map (SheafOfModules.homObjMap (R := X.sheaf) (𝟙 _) (J.homologyπ 0)) ≫ v.hom =\n          s.hom ≫ SheafOfModules.homObjMap\n            (R := V.toScheme.sheaf.over W) (𝟙 _) (K.homologyπ 0) ∧\n        F.map (SheafOfModules.homObjMap (R := X.sheaf) (T.homologyπ (-n)) (𝟙 _)) ≫\n            v.hom = b.hom ≫ SheafOfModules.homObjMap\n              (R := V.toScheme.sheaf.over W) (A.homologyπ (-n)) (𝟙 _)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T004114-L-2838888",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T004114-L-2838888",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
