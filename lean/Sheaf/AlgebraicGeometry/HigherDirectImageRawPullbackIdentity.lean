@@ -10,6 +10,8 @@ import all Sheaf.Paper.DerivedEtaleCohomologyPullbackLaws
 import all Sheaf.AlgebraicGeometry.HigherDirectImageTransitionIdentity
 import all Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison
 
+import Sheaf.AlgebraicGeometry.HigherDirectImageRawTrianglePullback
+
 /-! # Identity of raw cohomology pullback
 
 Source: Stacks Project, Tag 09Z1, canonical cohomology comparison maps.
@@ -189,6 +191,9 @@ theorem higherDirectImageRawOverPullback_id
     (A : Over W) (U : S.Etale)
     (z : (higherDirectImageRawOverPresheaf Λ k G q A).obj (op U)) :
     higherDirectImageRawOverPullback Λ k G q (𝟙 A) U z = z := by
+  unfold higherDirectImageRawOverPullback higherDirectImageRawTrianglePullback
+    rawTriangleMap rawTriangleSource
+  simp only [Category.assoc]
   exact single_identity_transport_of_eq (𝟙 A.left)^*[ModuleCat.{u + 1} Λ]
     (upperStarId (ModuleCat.{u + 1} Λ) A.left)
     (((A.hom ≫ k)^*[ModuleCat.{u + 1} Λ]).obj ((freeSheaf Λ S).obj U))

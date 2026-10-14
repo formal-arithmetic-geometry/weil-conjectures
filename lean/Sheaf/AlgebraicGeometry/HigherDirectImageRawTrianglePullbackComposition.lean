@@ -55,7 +55,7 @@ private theorem rawTriangleMap_comp
           ((F.commShiftIso q).hom.app K ≫ (shiftFunctor _ q).map v))
         ((G.commShiftIso q).hom.app L ≫ (shiftFunctor _ q).map w) := by
   change T₀.obj (H₀.obj (H.obj U)) ⟶ K⟦q⟧ at z
-  unfold rawTriangleMap
+  unfold rawTriangleMap rawTriangleSource
   dsimp only [Functor.whiskerLeft_app, Functor.comp_obj]
   simp only [Functor.map_comp, Category.assoc] at hs ⊢
   rw [G.commShiftIso_hom_naturality_assoc]

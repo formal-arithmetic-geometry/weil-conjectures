@@ -23,6 +23,18 @@ open CategoryTheory Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
+/-- The two source factors of the raw triangle map, kept as one morphism.
+Source: Stacks Project, Tags 03Q8 and 09Z1.
+(blueprint: sbc-lem-higher-image-raw-triangle-restriction). -/
+def rawTriangleSource
+    {C D E D' E' : Type*}
+    [Category C] [Category D] [Category E] [Category D'] [Category E']
+    (H : C ⥤ D) (H' : C ⥤ E) (P : D ⥤ E)
+    (A : D ⥤ D') (B : E ⥤ E') (F : D' ⥤ E')
+    (c : H' ⟶ H ⋙ P) (e : P ⋙ B ⟶ A ⋙ F) (U : C) :
+    B.obj (H'.obj U) ⟶ F.obj (A.obj (H.obj U)) :=
+  B.map (c.app U) ≫ e.app (H.obj U)
+
 /-- The map on represented classes obtained from two comparison natural transformations
 and a fixed coefficient morphism. This is the categorical formula for raw triangle pullback;
 its factors are the comparisons used in Stacks Project, Tags 03Q8 and 09Z1. -/
@@ -37,7 +49,7 @@ def rawTriangleMap
     (z : ((H ⋙ A).op ⋙ preadditiveYoneda.obj K).obj (op U))
     (s : F.obj K ⟶ K') :
     ((H' ⋙ B).op ⋙ preadditiveYoneda.obj K').obj (op U) :=
-  B.map (c.app U) ≫ e.app (H.obj U) ≫ F.map z ≫ s
+  rawTriangleSource H H' P A B F c e U ≫ F.map z ≫ s
 
 /-- Pullback of a derived class, followed by a specified coefficient morphism. The
 coefficient morphism is given data, and no witness is chosen from an existence theorem. -/
@@ -76,6 +88,8 @@ private theorem trianglePullback_naturality
       (((H ⋙ A).op ⋙ preadditiveYoneda.obj K).map b.op z) s =
       ((H' ⋙ B).op ⋙ preadditiveYoneda.obj K').map b.op
         (rawTriangleMap H H' P A B F c e U z s) := by
+  unfold rawTriangleMap rawTriangleSource
+  simp only [Category.assoc]
   change B.map (c.app T) ≫ e.app (H.obj T) ≫
     F.map (A.map (H.map b) ≫ z) ≫ s =
       B.map (H'.map b) ≫ B.map (c.app U) ≫ e.app (H.obj U) ≫ F.map z ≫ s

@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackComparison
+public import Sheaf.AlgebraicGeometry.HigherDirectImageRawTrianglePullback
 
 /-! # Degree-zero source factors
 
@@ -48,10 +49,12 @@ noncomputable def moduleSourceFactor
       (upperStar (ModuleCat.{u + 1} Λ) a).mapDerivedCategoryPlus.obj
         ((DerivedCategory.Plus.singleFunctor _ 0).obj
           ((upperStar (ModuleCat.{u + 1} Λ) h).obj L)) :=
-  (DerivedCategory.Plus.singleFunctor _ 0).map
-      ((upperStarComp (ModuleCat.{u + 1} Λ) a h h' w.symm).hom.app L) ≫
-    ((upperStar (ModuleCat.{u + 1} Λ) a).mapDerivedCategoryPlusSingleFunctor 0).inv.app
-      ((upperStar (ModuleCat.{u + 1} Λ) h).obj L)
+  rawTriangleSource (upperStar (ModuleCat.{u + 1} Λ) h) (upperStar (ModuleCat.{u + 1} Λ) h')
+    (upperStar (ModuleCat.{u + 1} Λ) a)
+    (DerivedCategory.Plus.singleFunctor _ 0) (DerivedCategory.Plus.singleFunctor _ 0)
+    (upperStar (ModuleCat.{u + 1} Λ) a).mapDerivedCategoryPlus
+    (upperStarComp (ModuleCat.{u + 1} Λ) a h h' w.symm).hom
+    ((upperStar (ModuleCat.{u + 1} Λ) a).mapDerivedCategoryPlusSingleFunctor 0).inv L
 
 /-- The first two abelian pullback factors.
 Source: Stacks Project, Tag 03Q8.

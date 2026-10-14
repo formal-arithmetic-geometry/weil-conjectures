@@ -5,6 +5,7 @@ Authors: SHEAF group M2
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientFactors
 public import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackComparison
 public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientUnshifted
 import all Sheaf.AlgebraicGeometry.HigherDirectImageOverMapCoefficient
@@ -45,48 +46,6 @@ noncomputable def scalarCoefficientFactor
           ((upperStar (ModuleCat.{u + 1} Λ) h).obj G) ≫
         (DerivedCategory.Plus.singleFunctor _ 0).map
           (inv (RawModuleScalarComparison.pullback Λ h G)))
-
-/-- The last two module pullback factors.
-Source: Stacks Project, Tag 03Q8.
-(blueprint: lem-sbc-raw-scalar-coefficient-square). -/
-noncomputable def moduleCoefficientFactor
-    (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}
-    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
-    (A B : Over W) (f : A ⟶ B) :
-    (upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.obj
-        (((DerivedCategory.Plus.singleFunctor _ 0).obj
-          ((upperStar (ModuleCat.{u + 1} Λ) B.hom).obj G))⟦q⟧) ⟶
-      ((DerivedCategory.Plus.singleFunctor _ 0).obj
-        ((upperStar (ModuleCat.{u + 1} Λ) A.hom).obj G))⟦q⟧ :=
-  ((upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.commShiftIso q).hom.app
-      ((DerivedCategory.Plus.singleFunctor _ 0).obj
-        ((upperStar (ModuleCat.{u + 1} Λ) B.hom).obj G)) ≫
-    (shiftFunctor _ q).map
-      (((upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlusSingleFunctor 0).hom.app
-          ((upperStar (ModuleCat.{u + 1} Λ) B.hom).obj G) ≫
-        (DerivedCategory.Plus.singleFunctor _ 0).map
-          ((upperStarComp (ModuleCat.{u + 1} Λ) f.left B.hom A.hom
-            (Over.w f).symm).inv.app G))
-
-/-- The last two abelian pullback factors.
-Source: Stacks Project, Tag 03Q8.
-(blueprint: lem-sbc-raw-scalar-coefficient-square). -/
-noncomputable def abelianCoefficientFactor
-    {W : Scheme.{u}} (G : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)
-    (A B : Over W) (f : A ⟶ B) :
-    (upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus.obj
-        (((DerivedCategory.Plus.singleFunctor _ 0).obj
-          ((upperStar AddCommGrpCat.{u + 1} B.hom).obj G))⟦q⟧) ⟶
-      ((DerivedCategory.Plus.singleFunctor _ 0).obj
-        ((upperStar AddCommGrpCat.{u + 1} A.hom).obj G))⟦q⟧ :=
-  ((upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus.commShiftIso q).hom.app
-      ((DerivedCategory.Plus.singleFunctor _ 0).obj
-        ((upperStar AddCommGrpCat.{u + 1} B.hom).obj G)) ≫
-    (shiftFunctor _ q).map
-      (((upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlusSingleFunctor 0).hom.app _ ≫
-        (DerivedCategory.Plus.singleFunctor _ 0).map
-          ((upperStarComp AddCommGrpCat.{u + 1} f.left B.hom A.hom
-            (Over.w f).symm).inv.app G))
 
 private theorem shift_square
     {C₀ C₁ D₀ D₁ : Type*} [Category C₀] [Category C₁] [Category D₀] [Category D₁]

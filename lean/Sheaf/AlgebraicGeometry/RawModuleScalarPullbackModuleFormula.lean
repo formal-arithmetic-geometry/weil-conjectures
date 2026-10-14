@@ -5,9 +5,8 @@ Authors: SHEAF group N4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare
+public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientFactors
 public import Sheaf.AlgebraicGeometry.RawModuleScalarSourceFactors
-import Sheaf.AlgebraicGeometry.HigherDirectImageRawDiagram
 
 /-! # Module raw pullback factorization
 Source: Stacks Project, Tags 03FD and 03Q8.
@@ -46,6 +45,7 @@ theorem rawModuleScalar_pullback_module_formula
       moduleSourceFactor Λ f.left (B.hom ≫ k) (A.hom ≫ k)
         (by rw [← Category.assoc, Over.w]) ((freeSheaf Λ S).obj U) ≫
       (upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.map z ≫
-        moduleCoefficientFactor Λ G (q : ℤ) A B f) := by sorry
+        moduleCoefficientFactor Λ G (q : ℤ) A B f) := by
+  rfl
 
 end AlgebraicGeometry.Etale

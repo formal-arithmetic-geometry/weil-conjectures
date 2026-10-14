@@ -1,0 +1,103 @@
+{
+ "id": "def-sbc-raw-scalar-coefficient-factors",
+ "kind": "definition",
+ "title": "The canonical module and abelian coefficient factors",
+ "statement": "Let Λ be a commutative ring, W a scheme, G a module sheaf on its small etale site, q an integer, A and B objects of Over W, and f:A→B. Construct a morphism D⁺f*Λ((B.hom*G)[0][q])→(A.hom*G)[0][q] as the shift comparison for derived inverse image at higherDirectImageRawOverComplex(Λ,G,B) [def-sbc-higher-image-raw-over-complex], followed by shift(q) applied to higherDirectImageRawOverCoefficient(Λ,G,f) [def-sbc-higher-image-raw-over-coefficient]. Independently, for any abelian sheaf H on W, construct D⁺f*Ab((B.hom*H)[0][q])→(A.hom*H)[0][q] as its shift comparison followed by shift(q) applied to the composite of the single comparison and singleFunctor of inverse upperStarComp at H [lem-weil-pbc-inverse-image-composition]. These are the existing module and abelian coefficient factors of lem-sbc-raw-scalar-coefficient-square, with unchanged public types and maps, relocated to their canonical definitions module.",
+ "source": {
+  "document": "Stacks Project; existing scalar coefficient constructions",
+  "place": "Tags 03Q8 and 09Z1; module and abelian definitions previously in RawModuleScalarCoefficientSquare"
+ },
+ "stmt_deps": [
+  "def-sbc-higher-image-raw-over-complex",
+  "def-sbc-higher-image-raw-over-coefficient",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "W4",
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 09Z1; concrete module and abelian coefficient factor definitions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact functor commutes with single complexes and shifts, with the induced coefficient comparison defined as the composite of its shift and single-complex comparisons",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: Internal Server Error; no verdict."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Category.assoc",
+   "date": "2026-10-14",
+   "results": "CategoryTheory.Category.assoc gives the generic regrouping; the project already constructs the single and shift comparisons. No new mathematical theorem is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "rawTriangleMap|moduleSourceFactor|moduleCoefficientFactor",
+   "date": "2026-10-14",
+   "results": "msearch returned zero Mathlib matches. Local rg found the existing factors in RawModuleScalarCoefficientSquare and the named raw coefficient and complex in HigherDirectImageRawOverCoefficient and HigherDirectImageRawOverComplex. Reuse those constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula",
+  "date": "2026-10-14",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-raw-scalar-pullback-module-formula",
+   "place": "Canonical coefficient definitions used by the formula",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientFactors",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarCoefficientFactors.lean",
+  "declaration": "AlgebraicGeometry.Etale.moduleCoefficientFactor",
+  "declarations": [
+   "AlgebraicGeometry.Etale.moduleCoefficientFactor",
+   "AlgebraicGeometry.Etale.abelianCoefficientFactor"
+  ],
+  "statement": "def moduleCoefficientFactor (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}} (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (A B : Over W) (f : A ⟶ B) : (upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.obj (((DerivedCategory.Plus.singleFunctor _ 0).obj ((upperStar (ModuleCat.{u + 1} Λ) B.hom).obj G))⟦q⟧) ⟶ ((DerivedCategory.Plus.singleFunctor _ 0).obj ((upperStar (ModuleCat.{u + 1} Λ) A.hom).obj G))⟦q⟧",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-4376a",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261014T164643-L-2302992",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-4376a",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261014T164643-L-2302992",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered packet, DAG nodes, Lean files, proofs, forced adaptations, and reader importers matched and compiled against the changed overlay."
+ }
+}

@@ -88,22 +88,19 @@ theorem higherDirectImageRawTrianglePullback_adjunct
         (upperStarPlusComp (ModuleCat.{u + 1} Λ) a h).hom (K⟦q⟧) (K'⟦q⟧)
         ((D+((a)^*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app K ≫
           (shiftFunctor _ q).map v)  := by
-  convert adjunct_transition
-    (derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) h)
-    (derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) (a ≫ h))
-    D+((a)^*[ModuleCat.{u + 1} Λ])
-    (upperStarPlusComp (ModuleCat.{u + 1} Λ) a h).hom
-    (((((h)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app
-      ((freeSheaf Λ S).obj U)) ≫ z)
-    ((D+((a)^*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app K ≫
-      (shiftFunctor _ q).map v) using 1
-  · congr 1
-    change _ ≫ ((DerivedCategory.Plus.singleFunctor _ 0).map
-      ((upperStarComp (ModuleCat.{u + 1} Λ) a h (a ≫ h) rfl).hom.app
-        ((freeSheaf Λ S).obj U)) ≫
-      ((((a)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).inv.app
-        (((h)^*[ModuleCat.{u + 1} Λ]).obj ((freeSheaf Λ S).obj U))) ≫
-      D+((a)^*[ModuleCat.{u + 1} Λ]).map z ≫ _) = _
+  have hraw :
+      ((((a ≫ h)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app
+          ((freeSheaf Λ S).obj U)) ≫
+        higherDirectImageRawTrianglePullback Λ a h (a ≫ h) rfl q K K' v U z =
+      (upperStarPlusComp (ModuleCat.{u + 1} Λ) a h).hom.app
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj ((freeSheaf Λ S).obj U)) ≫
+        D+((a)^*[ModuleCat.{u + 1} Λ]).map
+          (((((h)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app
+            ((freeSheaf Λ S).obj U)) ≫ z) ≫
+        ((D+((a)^*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app K ≫
+          (shiftFunctor _ q).map v) := by
+    unfold higherDirectImageRawTrianglePullback rawTriangleMap rawTriangleSource
+    simp only [Category.assoc]
     have hc := upperStarPlusComp_single Λ a h ((freeSheaf Λ S).obj U)
     exact invert_square_map D+((a)^*[ModuleCat.{u + 1} Λ])
       ((upperStarPlusComp (ModuleCat.{u + 1} Λ) a h).app
@@ -114,7 +111,17 @@ theorem higherDirectImageRawTrianglePullback_adjunct
         ((upperStarComp (ModuleCat.{u + 1} Λ) a h (a ≫ h) rfl).app
           ((freeSheaf Λ S).obj U)).symm)
       _ _ hc z _
-  · simp only [derivedUpperStarLowerStarAdjunctionPlus,
-      Adjunction.derivedAdjunctionPlus_eq_derivedPlus]
+  rw [hraw]
+  simpa only [derivedUpperStarLowerStarAdjunctionPlus,
+    Adjunction.derivedAdjunctionPlus_eq_derivedPlus] using
+    adjunct_transition
+      (derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) h)
+      (derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) (a ≫ h))
+      D+((a)^*[ModuleCat.{u + 1} Λ])
+      (upperStarPlusComp (ModuleCat.{u + 1} Λ) a h).hom
+      (((((h)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app
+        ((freeSheaf Λ S).obj U)) ≫ z)
+      ((D+((a)^*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app K ≫
+        (shiftFunctor _ q).map v)
 
 end AlgebraicGeometry.Etale
