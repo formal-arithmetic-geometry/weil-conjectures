@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-cd-stalk-criterion",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Vanishing of a higher direct image, checked at a geometric point",
@@ -13,34 +13,132 @@
   "place": "node lem-kun-cd-stalk-criterion, order 1655"
  },
  "stmt_deps": [
+  "def-weil-pbc-direct-image",
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-scheme-conventions"
  ],
  "proof": [
   {
-   "text": "By [def-weil-pbc-direct-image] the sheaf $R^qf_*F$ is the\nsheafification of the presheaf $W\\mapsto H^q(W\\times_YX,F)$ on\n$Y_{\\Et}$, and by [def-weil-pbc-geometric-stalks] its stalk at\na geometric point $\\bar y$ of $Y$ is precisely the filtered colimit\nof these groups over the pointed etale neighbourhoods of $\\bar y$.\nThe sheaf $R^qf_*F$ vanishes if and only if all its geometric stalks\nvanish, by [lemma-weil-pbc-geometric-stalk-conservative]; hence the\nstated equivalence.",
+   "text": "By [sbc-lem-higher-direct-image-presheaf] (Stacks Tag 03Q8), the sheaf $R^qf_*F$ is associated to the presheaf on $Y_{\\Et}$ sending an etale $W\\to Y$ to $H^q(W\\times_YX,F|_{W\\times_YX})$.",
    "uses": [
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-geometric-stalks",
+    "sbc-lem-higher-direct-image-presheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q8, lemma-higher-direct-images (abelian-sheaf clause)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-sheafification-geometric-stalk], the sheafification map induces an isomorphism from the presheaf stalk to the stalk of its associated sheaf. The former is the colimit of the groups $H^q(W\\times_YX,F|_{W\\times_YX})$ indexed by the opposite of the category of pointed etale neighbourhoods $(W,\\bar w)$ of $\\bar y$, as in that lemma and [def-weil-pbc-geometric-stalks]. Hence this colimit is canonically isomorphic to $(R^qf_*F)_{\\bar y}$.",
+   "uses": [
+    "lem-weil-pbc-sheafification-geometric-stalk",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PT (2), lemma-stalk-exact; definition-stalk"
+   }
+  },
+  {
+   "text": "Put $G=R^qf_*F$ and apply [lemma-weil-pbc-geometric-stalk-conservative] to the unique morphism $0\\to G$. The stalk of the zero sheaf is the zero group, since it is the colimit of zero groups. Thus the induced map on each geometric stalk is $0\\to G_{\\bar y}$; it is an isomorphism exactly when $G_{\\bar y}=0$. The morphism $0\\to G$ is an isomorphism exactly when $G$ is a zero object. Conservativity and the identification in step 2 therefore give both directions of the claimed equivalence.",
+   "uses": [
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-cd-stalk-criterion.md",
+    "place": "Proof, second sentence"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-direct-image",
   "def-weil-pbc-geometric-stalks",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "lem-weil-pbc-sheafification-geometric-stalk",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "sbc-lem-higher-direct-image-presheaf"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-cd-stalk-criterion.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "vanishing of higher direct image iff all geometric stalks vanish",
+   "results": "8 hits: general stalk and derived-category zero lemmas; no higher-direct-image stalk criterion",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.IsZero, sheafFiber, higherDirectImage",
+   "results": "0 hits; unknown identifier Sheaf.IsZero",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|isZero_of_isIso_sheafFiber_map|sheafFiber in Mathlib/AlgebraicGeometry Mathlib/CategoryTheory",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher direct image sheaf vanishes exactly when cohomology colimits at every geometric point vanish",
+   "results": "8 hits: general derived zero and cohomology-presheaf declarations; no exact criterion",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsZero (sheafFiber.obj F), rightDerivedLowerStarPlus",
+   "results": "0 hits; unknown identifier IsZero",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerStarPlus|higherDirectImage|isIso_of_isIso_sheafFiber_map in Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "higher direct image vanishes iff all geometric stalk cohomology colimits vanish",
+   "results": "service unavailable (Internal Server Error)",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher direct image sheaf zero iff every geometric stalk zero",
+   "results": "8 hits including TopCat.Presheaf.isIso_of_stalkFunctor_map_iso and related stalk criteria; no exact higher-direct-image criterion",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.stalkFunctor IsIso",
+   "results": "0 hits; unknown constant CategoryTheory.Sheaf.stalkFunctor",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkFunctor|isIso.*stalk|higher.*direct [Mathlib/Topology/Sheaves]",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -71,5 +169,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-cd-stalk-criterion",
+  "worker": "stage1",
+  "summary": "Audited the imported one-paragraph proof against the Stacks and existing DAG statements. No new nodes were needed: the higher-direct-image sheafification is supplied by sbc-lem-higher-direct-image-presheaf, stalk preservation by lem-weil-pbc-sheafification-geometric-stalk, stalk colimit meaning by def-weil-pbc-geometric-stalks, and conservativity by lemma-weil-pbc-geometric-stalk-conservative. Expanded the proof into three cited steps and filled the blueprint reference. No Lean declaration in slopmaster2 or upstream master states this target. Second reading corrected the file/label of Tag 03Q8, made the opposite indexing category explicit, and expanded the zero-stalk application.",
+  "blueprint": "Steps 1-2 realize the first sentence of the blueprint proof; step 3 realizes its second sentence and conclusion.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-higher-direct-image-presheaf",
+    "why": "Step 1 uses its generic sheafification formula for higher direct images, which is supplied by another unit."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-geometric-stalk",
+    "why": "Step 2 uses its generic preservation of geometric stalks under sheafification."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Step 3 uses its generic criterion detecting sheaf isomorphisms on geometric stalks."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-higher-direct-image-presheaf",
+  "lem-weil-pbc-sheafification-geometric-stalk",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-8da37e77d",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-8da37e77d (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, report, all cited node statements, Stacks Tags 03Q8/03PT/03PU, and relevant Mathlib stalk sources. Verified the base-change orientation W×_Y X and coefficients in Ab(X_et), all hypotheses, stalk indexing, conservativity argument, edge cases, duplicate search, and tool-use declarations. No repair is needed; review.md records the full checks."
+ }
 }
