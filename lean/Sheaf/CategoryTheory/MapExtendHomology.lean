@@ -63,4 +63,4 @@ theorem mapExtendHomology_nonempty_iso
       (((E.mapHomologicalComplex (.up ℤ)).obj
           (K.extend ComplexShape.embeddingUpNat)).homology (q : ℤ) ≅
         ((E.mapHomologicalComplex (.up ℕ)).obj K).homology q) := by
-  exact ⟨mapExtendHomologyIso E K q⟩
+  exact Nonempty.intro (mapExtendHomologyIso E K q)
