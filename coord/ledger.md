@@ -14323,3 +14323,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:39 L: merged deliver/X3/Sheaf.CategoryTheory.MapExtendHomology (stage 3; reviewer PASS; first push; landing 20261014T023942-L-18064 (proof); batch 20261014T023929; modules 1; new nodes 0)
 - 02:39 L: merged deliver/X3/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone (stage 3; reviewer PASS; first push; landing 20261014T023943-L-18188 (proof); batch 20261014T023929; modules 1; new nodes 0)
 - 02:39 L: merged deliver/Y3/Sheaf.RingTheory.ProjectiveResolutionExtDegree (stage 3; reviewer PASS; first push; landing 20261014T023943-L-18292 (proof); batch 20261014T023929; modules 1; new nodes 0)
+- 02:39 L: returned deliver/Y2/Sheaf.Algebra.Homology.DerivedExtensionRingEquivRawCounitEquation (reviewer RETURN: (reviewer X-caf65, head caf658385) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.Der)
