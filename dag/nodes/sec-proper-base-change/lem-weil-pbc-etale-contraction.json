@@ -3,56 +3,151 @@
  "blueprint": {
   "is": "lem-weil-pbc-etale-contraction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Strict henselian local rings in the etale contraction",
- "statement": "The map $R\\to R^{\\mathrm e}$ is faithfully flat and ind-etale\n[def-weil-pbc-ind-etale-algebra]. Every faithfully flat etale algebra of\nfinite presentation over $R^{\\mathrm e}$ has a section. Every maximal\nlocalization of $R^{\\mathrm e}$ is strictly henselian\n[def-weil-pbc-henselian-terminology].",
+ "statement": "Let $R$ be a commutative ring and let $R^{\\mathrm e}$ be its etale contraction [def-weil-pbc-etale-contraction]. The map $R\\to R^{\\mathrm e}$ is faithfully flat and ind-etale\n[def-weil-pbc-ind-etale-algebra]. Every faithfully flat etale algebra of\nfinite presentation over $R^{\\mathrm e}$ has a section. Every maximal\nlocalization of $R^{\\mathrm e}$ is strictly henselian\n[def-weil-pbc-henselian-terminology].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-etale-contraction.md",
   "place": "node lem-weil-pbc-etale-contraction, order 1227"
  },
  "stmt_deps": [
   "def-weil-pbc-ind-etale-algebra",
-  "def-weil-pbc-henselian-terminology"
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-etale-contraction",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-localization-at-prime"
  ],
  "proof": [
   {
-   "text": "Finite tensor products in [def-weil-pbc-etale-contraction] are faithfully\nflat and etale. Their transition maps are faithfully flat, so tensoring a\nnonzero module into their filtered colimit never kills a nonzero element.\nConsequently all the stated colimit maps are faithfully flat; they are\nind-etale by [lem-weil-pbc-ind-etale-stability]. An etale algebra of finite\npresentation over $R^{\\mathrm e}$ descends to some $R_n$, and a surjective\netale covering of finite presentation descends after increasing $n$, by\n[lem-weil-pbc-etale-finite-data-descent]. Its algebra occurs as a tensor\nfactor in $R_{n+1}$. The resulting map from that algebra to $R^{\\mathrm e}$\nis the required section.",
+   "text": "Let $R$ be a commutative ring and use the rings $R_n,B_{n,E},R^{\\mathrm e}$ of [def-weil-pbc-etale-contraction]. Each chosen factor is faithfully flat by definition. For a faithfully flat $A$-algebra $B$ and an $A$-algebra $C$, extension of scalars along $C\\to C\\otimes_A B$ on a complex $N_\\bullet$ of $C$-modules identifies with $B\\otimes_A N_\\bullet$: the isomorphism sends $(c\\otimes b)\\otimes x$ to $b\\otimes cx$, with inverse $b\\otimes x\\mapsto(1\\otimes b)\\otimes x$. Exactness of this complex is equivalent to exactness of $N_\\bullet$ by [def-weil-pbc-faithfully-flat-ring-map], so base change preserves faithful flatness. Likewise the tensor identity $T\\otimes_C(C\\otimes_A N_\\bullet)=T\\otimes_A N_\\bullet$ shows that composition preserves faithful flatness. Induct on the number of factors, starting with the empty tensor $R_n$: every $R_n\\to B_{n,E}$ and every transition $B_{n,E}\\to B_{n,F}$ is faithfully flat.",
    "uses": [
     "def-weil-pbc-etale-contraction",
-    "lem-weil-pbc-ind-etale-stability",
-    "lem-weil-pbc-etale-finite-data-descent"
+    "def-weil-pbc-faithfully-flat-ring-map"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Construction preceding lemma-first-construction, lines 1324-1348; tensor identities written out here"
+   }
   },
   {
-   "text": "Put $S=R^{\\mathrm e}$ and let $\\mathfrak m$ be maximal. An affine etale\nneighbourhood of the closed point of $\\operatorname{Spec}S_{\\mathfrak m}$\ndescends, after clearing finitely many denominators, to an affine etale map\n$E\\to\\operatorname{Spec}S$ whose image contains $D(f)$ for some\n$f\\notin\\mathfrak m$. Choose $a\\in S$ with $g=1-af\\in\\mathfrak m$. The finite\netale family $E\\amalg\\operatorname{Spec}S_g\\to\\operatorname{Spec}S$ is\nsurjective and has a section by the preceding paragraph. After localization\nat $\\mathfrak m$, a section lands in a single summand, since a local ring has\nno nontrivial idempotent. It cannot land in $S_g$, since $g\\in\\mathfrak m$.\nThus every such etale neighbourhood has a local section.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "For clarity, the elementary local-ring criterion just used to recognize\nstrict henselianity consists of two tests. A finite separable residue\nextension can be lifted by a monic polynomial with invertible derivative to\nan etale neighbourhood. Its section forces that residue extension to be\ntrivial. Similarly an approximate simple root of a monic polynomial defines\nan etale neighbourhood after inverting its derivative. Shrink this\nneighbourhood to exclude the other points of its finite closed fibre; its\nsection then lifts the specified root. The simple-root Hensel criterion,\nequivalently lifting idempotents of finite algebras, is the henselian\ncondition of [def-weil-pbc-henselian-terminology]. Together these tests prove\nstrict henselianity.",
+   "text": "Apply [lem-weil-pbc-directed-colimit-faithfully-flat-algebras] over $R_n$ to the directed system indexed by finite subsets, including the empty subset. This proves $R_n\\to R_{n+1}$ faithfully flat. By composition as established in step 1, every $R_n\\to R_k$ for $k\\ge n$ is faithfully flat. Apply the same colimit lemma to this tail to obtain $R_n\\to R^{\\mathrm e}$ faithfully flat, in particular for $n=0$. Each chosen factor is ind-etale by the single-object filtered presentation in [def-weil-pbc-ind-etale-algebra]. By base change and composition in [lem-weil-pbc-ind-etale-stability], each finite tensor is ind-etale over $R_n$; by filtered-colimit stability $R_n\\to R_{n+1}$ is ind-etale. Induction by composition, followed by filtered-colimit stability for the sequential system, proves $R\\to R^{\\mathrm e}$ ind-etale.",
    "uses": [
-    "def-weil-pbc-henselian-terminology"
+    "lem-weil-pbc-directed-colimit-faithfully-flat-algebras",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-ind-etale-stability"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "lemma-first-construction; Tag 090N, algebra-lemma-colimit-faithfully-flat"
+   }
+  },
+  {
+   "text": "Put $S=R^{\\mathrm e}$, and let $S\\to B$ be faithfully flat and etale of finite presentation. The schemes $X_n=\\operatorname{Spec}R_n$ are affine, hence qcqs, and their transitions are affine. By [lem-weil-pbc-limit-affine-transition], their limit is $\\operatorname{Spec}S$. Apply the object clause of [lem-weil-pbc-etale-finite-data-descent] to $\\operatorname{Spec}B$ to obtain an etale finitely presented $U_n\\to X_n$. For $k\\ge n$ put $U_k=U_n\\times_{X_n}X_k$. By the singleton-diagram base-change clause of [lem-weil-pbc-etale-finite-data-descent], each $U_k\\to X_k$ remains etale of finite presentation. Each $U_k$ is qcqs: quasi-compactness follows by taking the inverse image of the affine base; choose a finite affine open cover of $U_k$, and its pairwise intersections are quasi-compact because the relative diagonal is quasi-compact and the products of these affine opens over the affine base are affine. Their transitions are affine by the base-change clause of [lem-weil-pbc-affine-morphism-permanence], and have limit $\\operatorname{Spec}B$: the universal property of this limit is the universal property of the fibre product with the limit $X$. By [lem-weil-pbc-limit-affine-stage], after increasing $n$, $U_n$ is affine, say $\\operatorname{Spec}B_n$. The affine model still has its etale finite-presentation structure map by that singleton-diagram clause. Thus $B\\cong S\\otimes_{R_n}B_n$. The descended algebra $B_n$ is faithfully flat, without needing covering descent: for any complex $N_\\bullet$ of $R_n$-modules, exactness of $B_n\\otimes_{R_n}N_\\bullet$ is equivalent, by faithful flatness of $S$ over $R_n$, to exactness of $S\\otimes_{R_n}(B_n\\otimes_{R_n}N_\\bullet)=B\\otimes_S(S\\otimes_{R_n}N_\\bullet)$. By faithful flatness of $B$ over $S$, and then of $S$ over $R_n$, this is equivalent to exactness of $N_\\bullet$. This is precisely [def-weil-pbc-faithfully-flat-ring-map].",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-etale-finite-data-descent",
+    "lem-weil-pbc-limit-affine-stage",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "lemma-first-construction; affineness supplied by Tag 01Z6, limits-lemma-limit-affine"
+   }
+  },
+  {
+   "text": "The faithfully flat etale finitely presented $R_n$-algebra $B_n$ is isomorphic to a chosen representative in $S_n$. By [def-weil-pbc-etale-contraction], its singleton tensor factor supplies an $R_n$-algebra map $h:B_n\\to R_{n+1}\\to S$. By [lem-weil-pbc-algebra-tensor-base-change-universal-property], this induces an $S$-algebra map $S\\otimes_{R_n}B_n\\to S$, explicitly $s\\otimes b\\mapsto s\\,h(b)$. Through the descended isomorphism this is $\\rho:B\\to S$, and $\\rho(s\\otimes1)=s$, so it is a retraction of $S\\to B$. This proves the section assertion.",
+   "uses": [
+    "def-weil-pbc-etale-contraction",
+    "lem-weil-pbc-algebra-tensor-base-change-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "lemma-first-construction, final two sentences"
+   }
+  },
+  {
+   "text": "For an arbitrary faithfully flat etale $S$-algebra, its induced morphism between affine spectra is affine and hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-morphism-permanence]. It is locally of finite presentation by [def-weil-etale-morphism], hence of finite presentation by [def-weil-pbc-scheme-conventions], so step 4 supplies a retraction. Consequently the hypothesis of [lem-weil-pbc-split-etale-covers-maximal-local-criterion] holds for $A=S$. For every maximal ideal $\\mathfrak m$ that criterion proves $S_{\\mathfrak m}$ strictly henselian. This is the final assertion; no identification with the separately defined Lean IndEtaleContraction is used.",
+   "uses": [
+    "lem-weil-pbc-split-etale-covers-maximal-local-criterion",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-etale-morphism",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097V, lemma-have-sections-strictly-henselian"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-etale-contraction",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-directed-colimit-faithfully-flat-algebras",
+  "def-weil-pbc-ind-etale-algebra",
   "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-limit-affine-transition",
   "lem-weil-pbc-etale-finite-data-descent",
-  "def-weil-pbc-henselian-terminology"
+  "lem-weil-pbc-limit-affine-stage",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-algebra-tensor-base-change-universal-property",
+  "lem-weil-pbc-split-etale-covers-maximal-local-criterion",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-scheme-conventions"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-etale-contraction.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-first-construction and Tag 097V lemma-have-sections-strictly-henselian; affine descent Tag 01Z6"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ee]taleContraction|[Ii]ndContraction|etale.*contraction",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match for this complete statement; returned declarations cover only component notions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ind etale contraction has etale cover sections and strictly henselian maximal localizations",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated tensor product adjoining all etale covers gives faithfully flat ind etale ring with sections and strictly henselian maximal localizations",
+   "results": "Algebra.Etale.exists_subalgebra_fg, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.FormallyEtale.localization_map, Algebra.FormallyEtale.localization_base, Algebra.Etale.baseChange, Algebra.IsEtaleAt.comp, Algebra.FormallyEtale.instTensorProduct, Algebra.FormallyEtale.of_isLocalization",
+   "date": "2026-10-14",
+   "verdict": "no match for this complete statement; returned declarations cover only component notions"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, Module.FaithfullyFlat",
+   "results": "Algebra.Etale.of_etale_tensorProduct_of_faithfullyFlat, Algebra.IsFiniteSplit.exists_tensorProduct_of_etale",
+   "date": "2026-10-14",
+   "verdict": "no match for this complete statement; returned declarations cover only component notions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sequentially adjoining all faithfully flat etale algebras produces a ring whose finite presentation etale covers split",
+   "results": "Algebra.Etale.exists_subalgebra_fg, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.Etale.comp, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.Etale.toAlgebra, Algebra.Etale.finitePresentation, Algebra.Smooth.exists_finiteType",
+   "date": "2026-10-14",
+   "verdict": "no match for this complete statement; returned declarations cover only component notions"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -78,5 +173,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-etale-contraction",
+  "worker": "stage1",
+  "summary": "Preserve all clauses; supply faithful-flat finite tensor and descent arguments, directed-colimit lemma, explicit tensor retraction, and generic retraction criterion. Add construction and property definitions to statement dependencies. Descended affineness uses existing 01Z6 rather than assuming the scheme-descent node states affine descent. No exact attachment for the different project contraction construction. Generic criterion has a sorry-free project body reported as an attachment candidate.",
+  "blueprint": "Steps 1-4 realize blueprint proof paragraph 1. Step 5 uses the independent generic Tag 097V criterion in place of the incomplete recognition argument in paragraphs 2-3."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-63a7d18db",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-63a7d18db (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, cited statements and source locations. All five proof steps check, including affine descent, faithful-flat descent and the explicit retraction. Tags 090N and 097V match the new statements; edge cases, duplicates, cycles and unit routes pass. Target morphisms and coefficient categories remain distinct and unchanged. No repairs needed; detailed checks are in review.md."
+ }
 }
