@@ -31,9 +31,108 @@
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-strict-henselization-structural-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an affine open $U=\\operatorname{Spec}R$ containing $s$. The point $t$ also belongs to $U$, since every open containing a specialization contains its generizations. Write $\\mathfrak m,\\mathfrak r\\subset R$ for $s,t$; then $\\mathfrak r\\subseteq\\mathfrak m$. For every affine pointed neighbourhood $(V,\\bar v)$ of $\\bar s$ over $S$, shrink inside the open inverse image of $U$ using the affine-shrinking lemma. Thus it receives a pointed map from an affine neighbourhood whose structural map factors through $U$. The full subcategory of these neighbourhoods is cofiltered and has the same opposite-indexed ring colimit by the initial-full-subcategory lemma. Its objects and arrows are exactly the affine pointed neighbourhoods of $\\bar s$ considered as a point of $U$: factorization through an open subscheme is unique. Consequently the same colimit ring $H$ represents both strict local schemes, and compatibility of the coprojections identifies $p$ with $\\operatorname{Spec}H\\to U\\hookrightarrow S$. In particular $H$ is an ind-etale $R$-algebra: it is the filtered colimit of the etale affine coordinate algebras of those neighbourhoods.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map",
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "def-weil-open-immersion",
+    "def-weil-etale-morphism",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJ5, remark-can-lift; affine-neighbourhood reduction, expanded using Tag 04HX, lemma-describe-etale-local-ring"
+   }
+  },
+  {
+   "text": "Apply the geometric strict-henselization local-presentation lemma to $U$, its geometric point $\\bar s$, and the structural map $R\\to H$ from step 1. It gives a prime $\\mathfrak q\\subset R$, $A=R_{\\mathfrak q}$, a separable closure $K$ of its residue field, and an $A$-algebra structure making $H$ an algebraic strict henselization of $A$, with $R\\to A\\to H$ equal to the structural map. The triples-presentation lemma expresses this as a universal colimit of etale residue triples over the maximal ideal of $A$, with the prescribed structural map. The strict-henselization-triples theorem identifies the unique maximal ideal of $H$ and shows its contraction to $A$ is the maximal ideal of $A$; its contraction to $R$ is therefore $\\mathfrak q$. Apply clause (1) of strict-henselization functoriality with $g=\\mathrm{id}_U$: the geometric structural map sends the closed point of $\\operatorname{Spec}H$ to $s$, so that same contraction is $\\mathfrak m$. Hence $\\mathfrak q=\\mathfrak m$, and the faithfully-flat strict-henselization lemma now gives faithful flatness of the compatible map $R_{\\mathfrak m}\\to H$.",
+   "uses": [
+    "lem-sbc-geometric-strict-henselization-local-presentation",
+    "lem-sc-strict-henselization-triples-presentation",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJ5, remark-can-lift; faithfully flat local-ring map, using Tags 04HX, 04GW, 04GP and 07QM(1)"
+   }
+  },
+  {
+   "text": "The prime $\\mathfrak r\\subseteq\\mathfrak m$ defines the prime $\\mathfrak rR_{\\mathfrak m}$ of $R_{\\mathfrak m}$, with contraction $\\mathfrak r$: a fraction $x/u$ with $u\\notin\\mathfrak m$ lies in this ideal exactly when $x\\in\\mathfrak r$. Indeed the localized quotient is $(R\\setminus\\mathfrak m)^{-1}(R/\\mathfrak r)$, a nonzero domain since $\\mathfrak r\\subseteq\\mathfrak m$. If $x/u$ maps to zero, some $v\\notin\\mathfrak m$ has $vx\\in\\mathfrak r$; primality and $v\\notin\\mathfrak r$ give $x\\in\\mathfrak r$. Apply faithful-flat surjectivity of spectra to $R_{\\mathfrak m}\\to H$. We obtain a prime $P\\subset H$ contracting to $\\mathfrak rR_{\\mathfrak m}$, and therefore to $\\mathfrak r$ in $R$. Let $t^{\\prime}$ be the corresponding point of $\\operatorname{Spec}H$; the map $p$ sends it to $t$.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJ5, remark-can-lift; lifting the ordinary point, using Tag 00HQ, lemma-ff-rings"
+   }
+  },
+  {
+   "text": "Put $k=\\kappa(\\mathfrak r)=\\kappa(t)$ and $B=H\\otimes_R k$. By ind-etale stability, the ind-etale $R$-algebra $H$ gives an ind-etale, hence weakly etale, $k$-algebra $B$. The fibre-ring identification gives $B= (R\\setminus\\mathfrak r)^{-1}H/\\mathfrak r(R\\setminus\\mathfrak r)^{-1}H$. Since $P\\cap R=\\mathfrak r$, localizing $P$ and then quotienting defines a prime $Q$ of $B$. Its local ring is $H_P/\\mathfrak rH_P$ and its residue field is $H_P/PH_P=\\kappa(t^{\\prime})$: localizing first at $R\\setminus\\mathfrak r$ and then at $Q$ inverts precisely the remaining elements outside $P$, and quotienting by $\\mathfrak r$ does not change the final residue quotient. These identifications respect the map $k\\to\\kappa(t^{\\prime})$. Apply the weakly-etale-over-a-field lemma to $B/k$; its residue field at $Q$, hence $\\kappa(t^{\\prime})$, is separable algebraic over $k$.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-weak-etale-field",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJ5, remark-can-lift; algebraic residue-field extension, expanded via more-algebra.tex, Tag 092Q, lemma-absolutely-flat-over-field"
+   }
+  },
+  {
+   "text": "The given $\\bar t$ determines the embedding $\\iota:k\\to\\Omega_t$. Since $\\kappa(t^{\\prime})/k$ is algebraic and $\\Omega_t$ is algebraically closed, the algebraic-extension embedding lemma gives $j:\\kappa(t^{\\prime})\\to\\Omega_t$ extending $\\iota$. The composite $H_P\\to H_P/PH_P=\\kappa(t^{\\prime})\\xrightarrow{j}\\Omega_t$ has kernel $PH_P$, because $j$ is an injective field homomorphism; the maximal ideal of $\\Omega_t$ is zero, so this is a local homomorphism. The morphism-from-a-local-spectrum bijection, applied to $\\operatorname{Spec}H$ and the local ring $\\Omega_t$, gives $a:\\operatorname{Spec}\\Omega_t\\to\\operatorname{Spec}H=S_{(\\bar s)}$ with image $t^{\\prime}$ and this local-ring map. The composite $p\\circ a$ has image $t$ and residue-field map $j|_k=\\iota$; its local-ring map is thus $\\mathcal O_{S,t}\\to k\\xrightarrow{\\iota}\\Omega_t$, the one of $\\bar t$. Injectivity of the same local-spectrum bijection for $S$ gives $p\\circ a=\\bar t$.",
+   "uses": [
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "lem-weil-pbc-morphism-from-spec-local-ring",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJ5, remark-can-lift; embedding and equality of geometric morphisms, using Tag 09GU and Tag 01J6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "def-weil-open-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-sbc-geometric-strict-henselization-local-presentation",
+  "lem-sc-strict-henselization-triples-presentation",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-weak-etale-field",
+  "def-weil-residue-field",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-weil-pbc-morphism-from-spec-local-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJ5, remark-can-lift; affine reduction and residue-field calculation expanded with 04HX, 04GW, 07QM, 00HQ and 092Q"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -90,10 +189,66 @@
    "results": "[grep] OK 0 hit(s); actual search log: {\"t\": \"2026-10-14T10:34:37Z\", \"tool\": \"grep\", \"query\": \"sheafFiber.*special|special.*sheafFiber|[Ss]trict[Hh]ensel|[Ss]trict[Hh]enselian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric point over a generization lifts to the strict henselization at a specialization",
+   "results": "{\"t\": \"2026-10-14T11:06:18Z\", \"tool\": \"leanfinder\", \"query\": \"A geometric point over a generization lifts to the strict henselization at a specialization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf\", \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk\", \"AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk\", \"AlgebraicGeometry.StructureSheaf.toStalk_stalkSpecializes_apply\", \"AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap_apply\", \"AlgebraicGeometry.StructureSheaf.toStalk_stalkSpecializes\", \"AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap_apply\", \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk_assoc\"], \"digest\": \"c853af41f511ac1c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric field-valued point factors through the strict local scheme of any specialization",
+   "results": "{\"t\": \"2026-10-14T11:06:18Z\", \"tool\": \"leanfinder\", \"query\": \"A geometric field-valued point factors through the strict local scheme of any specialization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk\", \"AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk\", \"AlgebraicGeometry.Scheme.Spec_stalkClosedPointTo_fromSpecStalk\", \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk_assoc\", \"AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk_assoc\", \"AlgebraicGeometry.SpecToEquivOfLocalRing\"], \"digest\": \"6edaea886e14584c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StrictHenselization\"",
+   "results": "{\"t\": \"2026-10-14T11:06:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"StrictHenselization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel.*special|special.*strictHensel|geometricSpecialization",
+   "results": "{\"t\": \"2026-10-14T11:06:19Z\", \"tool\": \"grep\", \"query\": \"strictHensel.*special|special.*strictHensel|geometricSpecialization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lifting a geometric point to a strict henselization along specialization",
+   "results": "{\"t\": \"2026-10-14T11:06:20Z\", \"tool\": \"leansearch\", \"query\": \"Lifting a geometric point to a strict henselization along specialization\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every field valued point over a generization factors through a strict henselian local scheme",
+   "results": "{\"t\": \"2026-10-14T11:14:38Z\", \"tool\": \"leanfinder\", \"query\": \"Every field valued point over a generization factors through a strict henselian local scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.SpecToEquivOfLocalRing\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.Scheme.Spec_stalkClosedPointTo_fromSpecStalk\", \"AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk\"], \"digest\": \"8cbb2dce1eb9375d\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*[Hh]ensel|[Hh]ensel.*[Ss]pec|[Ss]pec.*[Hh]ensel",
+   "results": "{\"t\": \"2026-10-14T11:14:49Z\", \"tool\": \"grep\", \"query\": \"strict.*[Hh]ensel|[Hh]ensel.*[Ss]pec|[Ss]pec.*[Hh]ensel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"AlgebraicGeometry\"",
+   "results": "{\"t\": \"2026-10-14T11:14:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"HenselianLocalRing\\\", \\\"AlgebraicGeometry\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-finite-stalk-specialization-criterion",
   "by": "worker",
@@ -109,5 +264,49 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-geometric-specialization-strict-local-lift",
+  "worker": "stage1",
+  "summary": "Expanded the source proof into affine colimit reduction, identification of the local strict henselization, prime lifting by faithful flatness, separable algebraicity through the weakly etale fibre, and the residue embedding defining the exact prescribed geometric morphism. Reused existing nodes throughout; no new nodes or statement correction.",
+  "blueprint": "Blueprint proof, first paragraph: \"the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$\". This supplies the finite-local-constancy criterion in the classical torsion constructibility chain: 0GKW invokes 0GKV, whose case (a) uses specialization invariance and finite stalks. Technical input: lifting the geometric generization in the bijectivity-locus argument (0GJ5).",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-geometric-strict-henselization-local-presentation",
+    "why": "Generic pointed-neighbourhood/strict-henselization construction input for 0GJ5; the item unit has no substitute for this statement and no unit proof step is replaced."
+   },
+   {
+    "node": "lem-sc-strict-henselization-triples-presentation",
+    "why": "Generic pointed-neighbourhood/strict-henselization construction input for 0GJ5; the item unit has no substitute for this statement and no unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic pointed-neighbourhood/strict-henselization construction input for 0GJ5; the item unit has no substitute for this statement and no unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Generic pointed-neighbourhood/strict-henselization construction input for 0GJ5; the item unit has no substitute for this statement and no unit proof step is replaced."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic pointed-neighbourhood/strict-henselization construction input for 0GJ5; the item unit has no substitute for this statement and no unit proof step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-geometric-strict-henselization-local-presentation",
+  "lem-sc-strict-henselization-triples-presentation",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-sc-strict-henselization-faithfully-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-33d3cc66c",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-33d3cc66c (reviewer sub-agent of L); spot-checked: Reviewed all five proof steps and cited statements against 0GJ5, 04HX, 04GW, 04GP, 07QM, 00HQ, 092Q, 09GU and 01J6. Checked prime contractions, fibre residue fields, and exact equality with the chosen geometric point. No new nodes, duplicates, cycles or repairs. Generic tool uses accepted; review.md written."
  }
 }
