@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.ProjectionFormulaFiniteObjectwise
 
 /-!
 
@@ -258,8 +258,8 @@ The blueprint node is stated for `g` of finite type between Noetherian schemes, 
 factors in the other order; neither hypothesis is used by the argument above. -/
 theorem isIso_rightDerivedLowerStarProjectionMap_of_finite [Finite Λ] {Z : Scheme.{u}}
     (g : Z ⟶ Y) [IsProper g] :
-    IsIso (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) g) :=
-  sorry
+    IsIso (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) g) := by
+  exact AlgebraicGeometry.Etale.finite_projection_iso Λ g
 
 /-- **The projection formula at finite coefficients, unbounded.** For a finite coefficient
 ring `Λ` and `f : X ⟶ Y` admitting a compactification, the projection map
