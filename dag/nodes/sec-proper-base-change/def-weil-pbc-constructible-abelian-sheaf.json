@@ -4,14 +4,14 @@
   "is": null,
   "from": {
    "node": "lemma-weil-pbc-constructible-finite-pushforward",
-   "place": "its statement (a notion the statement uses)",
+   "place": "Statement and proof, first paragraph of lemma-weil-pbc-constructible-finite-pushforward: 'every constructible torsion sheaf C' and 'The finite stratification of C, its finite stalk groups'.",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Constructible abelian sheaf on the small etale site",
- "statement": "Let $T$ be a scheme and $C$ an abelian sheaf on its small etale site $T_{\\Et}$ [def-weil-pbc-etale-site], i.e. an object of $\\Ab(T_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves]. The sheaf $C$ is a *constructible abelian sheaf* if there is a stratification $(\\iota_k\\colon Z_k\\to T)_{k<r}$ of the scheme $T$ [def-constructible-stratification] (a finite partition $T=\\coprod_{k<r}T_k$ of the underlying space into pairwise disjoint locally closed subsets, with immersions of schemes $\\iota_k$ with set-theoretic image $T_k$) such that\n(a) every stratum $T_k$ is a constructible subset of the underlying space of $T$ [def-weil-constructible-subset], and\n(b) for every $k$ the abelian inverse image $\\iota_k^{-1}C$ [def-weil-pbc-inverse-image] on $(Z_k)_{\\Et}$ is *finite locally constant* (Stacks 03RU): there are an etale covering $\\{V_i\\to Z_k\\}_{i\\in I}$ and finite abelian groups $A_i$ with $(\\iota_k^{-1}C)|_{V_i}\\cong\\underline{A_i}$, the constant abelian sheaf with value $A_i$ on $(V_i)_{\\Et}$ [def-weil-pbc-constant-sheaf], for every $i$.\nThis is the global-partition form of Stacks Definition 03RW (2) (there: a partition of every affine open); for quasi-compact quasi-separated $T$ the two agree by Stacks Lemma 095E. It is the abelian counterpart of [def-weil-pbc-etale-constructible-sheaf] (no coefficient ring), the notion called 'constructible torsion' in the blueprint (such a sheaf has finite geometric stalks, and on a quasi-compact $T$ it is killed by a positive integer). The schemes $Z_k$ are part of the data; one may take $Z_k=T_k$ with its reduced induced structure.",
+ "statement": "Let $T$ be a scheme and $C$ an abelian sheaf on its small etale site $T_{\\Et}$ [def-weil-pbc-etale-site], i.e. an object of $\\Ab(T_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves]. The sheaf $C$ is a *constructible abelian sheaf* if there is a stratification $(\\iota_k\\colon Z_k\\to T)_{k<r}$ of the scheme $T$ [def-constructible-stratification] (a finite partition $T=\\coprod_{k<r}T_k$ of the underlying space into pairwise disjoint locally closed subsets, with immersions of schemes $\\iota_k$ with set-theoretic image $T_k$) such that\n(a) every stratum $T_k$ is a constructible subset of the underlying space of $T$ [def-weil-constructible-subset], and\n(b) for every $k$ the abelian inverse image $\\iota_k^{-1}C$ [def-weil-pbc-inverse-image] on $(Z_k)_{\\Et}$ is *finite locally constant*: there are an etale covering $\\{V_i\\to Z_k\\}_{i\\in I}$ and finite abelian groups $A_i$ with $(\\iota_k^{-1}C)|_{V_i}\\cong\\underline{A_i}$, the constant abelian sheaf with value $A_i$ on $(V_i)_{\\Et}$ [def-weil-pbc-constant-sheaf], for every $i$.\nHere restriction to $V_i$ means abelian inverse image along $V_i\\to Z_k$, and the displayed isomorphisms are isomorphisms of abelian sheaves. This definition uses a single finite partition of all of $T$; it does not use an independently chosen partition for each affine open.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Definition 03RW (definition-constructible), part (2), etale-cohomology.tex line 11672, with Definition 03RU (definition-finite-locally-constant), abelian part, line 9917, and Lemma 095E (lemma-constructible-quasi-compact-quasi-separated) (3), line 11717"
@@ -55,10 +55,66 @@
    "results": "no hit: Mathlib/AlgebraicGeometry/Sites/ (Etale.lean, EtalePoint.lean, AffineEtale.lean, Proetale.lean) defines the small etale site and its points but no locally constant or constructible sheaves; constructibility exists only for subsets (Mathlib/Topology/Constructible.lean: Topology.IsConstructible, IsRetrocompact)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|finiteLocallyConstant",
+   "results": "no hits; subdirectory Mathlib/AlgebraicGeometry/Sites",
+   "date": "2026-10-14",
+   "verdict": "no match: returned subsets, condensed sheaves or finite-type module sheaves do not define constructible abelian etale sheaves with finite values"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constructible sheaf of finite abelian groups on the small etale site",
+   "results": "service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An abelian sheaf on the small etale site is constructible if a finite partition into constructible locally closed subschemes makes it locally constant with finite abelian group values",
+   "results": "CompHausLike.LocallyConstant.functor; CompHausLike.LocallyConstantModule.functor; TopCat.toSheafCompHausLike; LightCondensed.IsDiscrete; topCatToSheafCompHausLike_obj; LightCondAb.ofSheafLightProfinite; topCatToSheafCompHausLike; CondensedMod.ofSheafCompHaus",
+   "date": "2026-10-14",
+   "verdict": "no match: returned subsets, condensed sheaves or finite-type module sheaves do not define constructible abelian etale sheaves with finite values"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\"",
+   "results": "Topology.IsConstructible; Topology.IsLocallyConstructible; Topology.IsConstructible.univ; Topology.IsLocallyConstructible.univ; Topology.IsConstructible.empty; Topology.IsLocallyConstructible.empty; Topology.IsConstructible.isLocallyConstructible; IsRetrocompact.isConstructible",
+   "date": "2026-10-14",
+   "verdict": "no match: returned subsets, condensed sheaves or finite-type module sheaves do not define constructible abelian etale sheaves with finite values"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|IsLocallyConstant|FiniteLocallyConstant",
+   "results": "no hits; subdirectory Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-14",
+   "verdict": "no match: returned subsets, condensed sheaves or finite-type module sheaves do not define constructible abelian etale sheaves with finite values"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of abelian groups is finite locally constant on each constructible stratum of a scheme",
+   "results": "SheafOfModules.IsFiniteType; CompHausLike.LocallyConstantModule.functor; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.LocalGeneratorsData.IsFiniteType; ModuleCat.Tilde.exists_const; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; SheafOfModules.GeneratingSections.IsFiniteType; CompHausLike.LocallyConstant.functor",
+   "date": "2026-10-14",
+   "verdict": "no match: returned subsets, condensed sheaves or finite-type module sheaves do not define constructible abelian etale sheaves with finite values"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleSheaf|IsFiniteSheaf|IsFiniteLocallyConstantSheaf|constructible.*sheaf",
+   "results": "no hits; whole Mathlib source",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant sheaf of abelian groups with finite fibers, constructible on a scheme stratification",
+   "results": "CompHausLike.LocallyConstantModule.functor; CompHausLike.LocallyConstant.functor; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier; CompHausLike.LocallyConstantModule.functor_obj_val; LightCondensed.locallyConstantPresheaf; CompHausLike.LocallyConstant.functor_obj_val; Condensed.locallyConstantPresheaf; LightCondSet.LocallyConstant.functor",
+   "date": "2026-10-14",
+   "verdict": "no match: compact Hausdorff/condensed sites are not the small etale site"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -80,9 +136,18 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "reviewed": {
-  "date": "2026-10-10",
+  "date": "2026-10-14",
   "by": "L",
-  "result": "accepted",
-  "note": "Definition of constructible abelian sheaves after Stacks 03RW (2)/03RU in the global-partition form (agrees with Stacks for qcqs T, as the node says); unsplit (to be verified as a definition node)."
+  "reviewer": "NT-Codex-ND-c30e197ee",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-c30e197ee (reviewer sub-agent of L); spot-checked: Read the complete item, report, six dependencies, ancestor and unit/chapter route. Checked Stacks 03RU, 03RW and 095E, edge cases, duplicate candidates and coefficient distinctions. Corrected only source.place to qualify the global-partition convention versus Stacks’ affine-local definition. No new nodes or tool uses; review.md records the checks and inherited inverse-image wording issue.; 1 file(s) fixed by the reviewer"
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-constructible-abelian-sheaf",
+  "worker": "stage1",
+  "summary": "Audited the global-partition definition against Stacks 03RU, 03RW(2), and the abelian variant of 095E(3). All six component notions are provided by the existing statement dependencies, with finite local constancy expanded inline. No proof steps or new nodes are needed for a definition. Removed explanatory theorem claims (qcqs equivalence, finite stalks, bounded exponent and reduced-stratum replacement) from the definition; they are discussed in report.md and were not part of its defining predicate. Clarified abelian restriction and isomorphisms. The existing Scheme.IsConstructibleSheaf is not an attachment because its finiteness notion is finite generation, not finite cardinality for abelian groups.",
+  "blueprint": "Realizes the notion 'constructible torsion sheaf C' in the ancestor's statement and its first proof paragraph's finite stratification with finite stalk groups; the ancestor assumes qcqs, where Stacks 095E applies. No unit proof step or unit record is changed."
  }
 }
