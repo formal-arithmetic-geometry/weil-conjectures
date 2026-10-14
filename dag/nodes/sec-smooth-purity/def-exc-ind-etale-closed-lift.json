@@ -3,24 +3,71 @@
  "blueprint": {
   "is": "def-exc-ind-etale-closed-lift",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The ind-etale lift along a closed subscheme",
- "statement": "For an ideal $I\\subset A$ and an ind-etale $A/I$-algebra $\\overline C$, let\n$\\mathcal N_A(\\overline C)$ have objects factorizations\n$A\\to B\\to\\overline C$, with $B/A$ etale of finite presentation, and\nmorphisms the compatible $A$-algebra maps. Define the $A$-algebra\n$$\n H_A(\\overline C)=\\varinjlim_{\\mathcal N_A(\\overline C)}B\n$$\nand retain its map to $\\overline C$. A map of the algebras $\\overline C$\nacts by postcomposition on the indexing categories, and hence defines the\nmaps of this construction.",
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal, and $\\overline C$ an ind-etale $A/I$-algebra [def-weil-pbc-ind-etale-algebra], regarded as an $A$-algebra through $A\\to A/I$. Let $\\mathcal N_A(\\overline C)$ have objects factorizations $A\\to B\\xrightarrow{q}\\overline C$, with $B/A$ etale of finite presentation, and morphisms $(B,q)\\to(B',q')$ the $A$-algebra maps $f:B\\to B'$ satisfying $q'\\circ f=q$; identities and composition are those of algebra maps. Here etale means that $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism], and finite presentation is as in [def-weil-pbc-finitely-presented-algebra].\n\nFor size, use the small presentation model with $B=A[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$, $n,m\\geq0$, finite lists of polynomials over $A$, the etale condition, and all $A$-algebra maps $q:B\\to\\overline C$; retain all compatible algebra maps as morphisms, regardless of the presentations. Define the diagram by $(B,q)\\mapsto B$ and $f\\mapsto f$. Define the $A$-algebra\n$$H_A(\\overline C)=\\varinjlim_{\\mathcal N_A(\\overline C)} B$$\nas the chosen colimit in the category of commutative $A$-algebras [def-weil-pbc-category-colimit], whose existence is supplied by [lem-weil-pbc-commutative-algebras-colimits-exist]. Write $\\iota_{(B,q)}:B\\to H_A(\\overline C)$ for its structure maps. Retain the map $\\epsilon_{\\overline C}:H_A(\\overline C)\\to\\overline C$ induced by the cocone $q$, characterized by $\\epsilon_{\\overline C}\\circ\\iota_{(B,q)}=q$.\n\nFor another ind-etale $A/I$-algebra $\\overline C'$ and an $A/I$-algebra map $\\phi:\\overline C\\to\\overline C'$, postcomposition defines $\\mathcal N_A(\\phi):(B,q)\\mapsto(B,\\phi\\circ q)$ and $f\\mapsto f$. Define $H_A(\\phi):H_A(\\overline C)\\to H_A(\\overline C')$ as the map induced by the cocone with component $\\iota_{(B,\\phi\\circ q)}$, so that\n$$H_A(\\phi)\\circ\\iota_{(B,q)}=\\iota_{(B,\\phi\\circ q)}.$$",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/def-exc-ind-etale-closed-lift.md",
   "place": "node def-exc-ind-etale-closed-lift, order 1838"
  },
  "stmt_deps": [
-  "def-weil-pbc-ind-etale-algebra"
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-commutative-algebras-colimits-exist"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Colimit of finitely presented etale A algebras mapping to an A algebra C, functorial in C",
+   "results": "Algebra.Etale.finitePresentation; Algebra.Etale.exists_subalgebra_fg; RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit; RingHom.Etale.toAlgebra; RingHom.IsStandardSmooth.exists_etale_mvPolynomial; RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete closed-lift construction"
+  },
+  {
+   "tool": "grep",
+   "query": "ClosedLift|closedLift|closed_lift|hasColimits|HasColimits",
+   "results": "Mathlib/Algebra/Category/CommAlgCat/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: general colimit existence only, reused through lem-weil-pbc-commutative-algebras-colimits-exist"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functorial etale algebra approximation by the colimit of etale algebras mapping to a given algebra",
+   "results": "service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CommAlgCat, CategoryTheory.Limits.colimit",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete closed-lift construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint approximation of a commutative algebra by a colimit over finitely presented etale algebras mapping into it",
+   "results": "Algebra.Etale.exists_subalgebra_fg; StandardEtalePair.lift; StandardEtalePair.homEquiv; RingHom.IsStandardSmooth.exists_etale_mvPolynomial; Algebra.Etale.finitePresentation; RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; StandardEtalePresentation.lift_bijective",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete closed-lift construction"
+  },
+  {
+   "tool": "grep",
+   "query": "ClosedLift|closedLift|closed_lift",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete closed-lift construction"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -44,5 +91,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-open-closed-triangle"
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-exc-ind-etale-closed-lift",
+  "worker": "stage1",
+  "summary": "Expanded the definition into its small presentation indexing category, underlying algebra diagram, colimit, retained cocone map, and explicitly characterized maps on input algebra morphisms. Reused the existing definitions of ind-etale algebras, etale morphisms, finite presentation, and categorical colimits and the Mathlib leaf for all small commutative-algebra colimits. No new nodes or proof obligations are introduced. The project Lean construction covers the indexing model, colimit and retained map but omits functorial maps, so it is not a full attachment.",
+  "blueprint": "All paragraphs of blueprint def-exc-ind-etale-closed-lift, order 1838: factorizations and morphisms; displayed colimit and retained map; final sentence on postcomposition. This is an auxiliary definition, not the statement node of its unit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-5cc82d52f",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-5cc82d52f (reviewer sub-agent of L); spot-checked: Read the complete item, blueprint, unit/chapter route, all dependency statements, literature sources, packet/report, and delivery-errors A–F. Verified the indexing category, small presentation model, colimit in commutative A-algebras, cocone map, functorial postcomposition, hypotheses, edge cases, Mathlib searches, and duplicate checks. Review written to review.md; no fixes required."
+ }
 }
