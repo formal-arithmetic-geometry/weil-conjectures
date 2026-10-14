@@ -4,10 +4,10 @@
   "is": null,
   "from": {
    "node": "def-weil-rationalization-karoubi",
-   "place": "its statement (a notion the statement uses)",
+   "place": "statement, rationalization display and the sentence: If C is an O_E-linear triangulated category, its rationalization C[1/varpi_E] has the same objects (the triangulated structure used by this construction)",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The scalar localization of a linear triangulated category is triangulated",
@@ -20,9 +20,115 @@
   "def-weil-triangulated-category",
   "def-weil-linear-scalar-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal L=\\mathcal C[1/\\varpi]$. The scalar-category lemma supplies its composition, identities, the additive functor $Q$, and its induced $R[1/\\varpi]$-linear shift commuting with $Q$. The old zero object and biproduct diagrams remain zero and biproduct diagrams: the zero Hom modules remain zero, and the equations for biproduct inclusions and projections are preserved by $Q$. Hence $\\mathcal L$ is additive. By the natural tensor-localization isomorphism identify every Hom module of $\\mathcal L$ with $\\Hom_{\\mathcal C}(X,Y)_\\varpi$. Write its elements $f/\\varpi^n$; composition is $(g/\\varpi^m)\\circ(f/\\varpi^n)=(g\\circ f)/\\varpi^{m+n}$ and the shift is $f[1]/\\varpi^n$. Equality $f/\\varpi^n=g/\\varpi^m$ means $\\varpi^k(\\varpi^mf-\\varpi^ng)=0$ for some $k\\ge0$. In particular $Q(f)=Q(g)$ means $\\varpi^k(f-g)=0$ for some $k$.",
+   "uses": [
+    "lem-weil-linear-scalar-localization-category",
+    "lem-weil-pbc-localization-module-tensor",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK, lemma-tensor-localization; Tags 07JZ/07K0, module fractions; scalar-category construction in the blueprint rationalization display"
+   }
+  },
+  {
+   "text": "Define $S=\\{s\\mid Q(s)\\text{ is invertible in }\\mathcal L\\}$. We verify the axioms of the cited multiplicative-system definition, using no triangulation on $\\mathcal L$ yet. Every $\\varpi^n\\mathrm{id}_X$ belongs to $S$. If $s:X\\to Y$ is in $S$, write $Q(s)^{-1}=h/\\varpi^n$. The two inverse identities and the fraction equality criterion give exponents killing $hs-\\varpi^n\\mathrm{id}_X$ and $sh-\\varpi^n\\mathrm{id}_Y$. Choose a common exponent $k$, replace $h$ by $\\varpi^kh$, and put $N=n+k$. Then in $\\mathcal C$ itself $hs=\\varpi^N\\mathrm{id}_X$ and $sh=\\varpi^N\\mathrm{id}_Y$. MS1 follows since functors preserve identities and compositions. For MS4, if $Q(f)Q(g)$ and $Q(g)Q(h)$ are invertible, $Q(g)$ has both a left inverse and a right inverse, which agree, so $g\\in S$. MS5 follows because the induced shift and its inverse are functors commuting with $Q$, and therefore preserve and reflect invertibility.",
+   "uses": [
+    "def-pur-saturated-triangulated-localization",
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-linear-scalar-localization-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05R2, definition-localization, MS5; Categories Tags 04VC and 05Q8, MS1 and MS4; agent verification for scalar denominators"
+   }
+  },
+  {
+   "text": "For the first Ore square (MS2), given $t:X\\to Z$ in $S$ and $g:X\\to Y$, take $h:Z\\to X$ with $ht=\\varpi^N\\mathrm{id}_X$ as in step 2. Set $s=\\varpi^N\\mathrm{id}_Y$ and $f=gh:Z\\to Y$. Then $sg=ft$. For the other square, given $s:Y\\to W$ in $S$ and $f:Z\\to W$, choose $h:W\\to Y$ with $sh=\\varpi^N\\mathrm{id}_W$, and set $t=\\varpi^N\\mathrm{id}_Z$, $g=hf$. Then $ft=sg$. Both new denominators belong to $S$. For MS3, either $ft=gt$ with $t\\in S$, or $sf=sg$ with $s\\in S$, implies $Q(f)=Q(g)$ by cancellation in $\\mathcal L$. Choose $k$ with $\\varpi^k(f-g)=0$. The denominator $\\varpi^k\\mathrm{id}_Y$ equalizes on the left and $\\varpi^k\\mathrm{id}_X$ equalizes on the right. Thus both calculus-of-fractions axioms hold.",
+   "uses": [
+    "def-pur-saturated-triangulated-localization",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05R2 hypotheses; Categories Tag 04VC, MS2 and MS3; agent scalar-square calculation"
+   }
+  },
+  {
+   "text": "For each object $A$, applying the cited Hom exactness lemma to a distinguished triangle $X\\to Y\\to Z\\to X[1]$ and its rotations gives the exact five-term row $\\Hom(A,X)\\to\\Hom(A,Y)\\to\\Hom(A,Z)\\to\\Hom(A,X[1])\\to\\Hom(A,Y[1])$. The rotations introduce signs on shifted arrows; replacing a homomorphism by its negative changes neither its kernel nor its image, so the displayed unsigned row is exact. Its maps are $R$-linear by bilinearity of composition. This row remains exact after localization, directly as follows: for an exact pair of linear maps $U\\xrightarrow{a}V\\xrightarrow{b}W$, if $b(y)/\\varpi^n=0$, there is $k$ with $b(\\varpi^ky)=0$. Choose $x$ with $a(x)=\\varpi^ky$; then $y/\\varpi^n=a(x)/\\varpi^{n+k}$. The reverse inclusion of image in kernel follows from $ba=0$. Applying this calculation at the three middle terms and the tensor-localization isomorphism gives an exact row of additive groups $\\Hom_{\\mathcal L}(A,X)\\to\\Hom_{\\mathcal L}(A,Y)\\to\\Hom_{\\mathcal L}(A,Z)\\to\\Hom_{\\mathcal L}(A,X[1])\\to\\Hom_{\\mathcal L}(A,Y[1])$.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-weil-triangulated-category",
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-pbc-localization-module-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0146 and 0149, lemma-composition-zero and lemma-representable-homological; TR2 rotations; algebra.tex Tags 07JZ and 00DK for the explicit localization calculation"
+   }
+  },
+  {
+   "text": "For MS6, let two distinguished triangles and a commuting square $(s,s')$ with $s,s'\\in S$ be given. TR3 in $\\mathcal C$ completes the square to a triangle morphism $(s,s',c)$. Apply the rows of step 4 for each $A$. The vertical maps on the first, second, fourth and fifth terms are postcomposition by $Q(s),Q(s'),Q(s[1]),Q(s'[1])$, all invertible by step 2. The rows and vertical maps form a commutative diagram: its first three squares are the three equations of the triangle morphism after postcomposition, and the last is the shift of its first equation. The category of additive abelian groups satisfies [def-sp-abelian] directly: it has pointwise addition on homomorphisms, the trivial group and finite products as biproducts, subgroup kernels and quotient cokernels; monomorphisms are injective (test maps from $\\mathbf Z$) and hence kernels of their quotient maps, while epimorphisms are surjective (test the quotient by the image) and hence cokernels of their kernel inclusions. The five lemma in this abelian category implies that postcomposition by $Q(c)$ is bijective on $\\Hom_{\\mathcal L}(A,Z)$ for every $A$. Taking $A=Z'$ supplies $r:Z'\\to Z$ with $Q(c)r=\\mathrm{id}_{Z'}$. Taking $A=Z$ and using injectivity on Hom shows $rQ(c)=\\mathrm{id}_Z$, since postcomposing both $rQ(c)$ and $\\mathrm{id}_Z$ with $Q(c)$ gives $Q(c)$. Thus $c\\in S$. This proves MS6, so the saturated multiplicative system $S$ is compatible with triangulation.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-pur-saturated-triangulated-localization",
+    "lem-weil-pbc-five-lemma",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05R2, MS6; Tag 0145, TR3; homology.tex Tag 05QB, lemma-five-lemma"
+   }
+  },
+  {
+   "text": "We now check that the concrete $Q:\\mathcal C\\to\\mathcal L$ is a localization at $S$ in the universal-property sense of the cited definition. Let $F:\\mathcal C\\to\\mathcal B$ be any functor inverting $S$, with no additivity assumption on $F$ or $\\mathcal B$. Put $d_X=F(\\varpi\\mathrm{id}_X)$, an automorphism, and define $\\overline F(X)=F(X)$ and $\\overline F(f/\\varpi^n)=F(f)d_X^{-n}$. Naturality of scalar identities, $(\\varpi\\mathrm{id}_Y)f=f(\\varpi\\mathrm{id}_X)$, gives $d_YF(f)=F(f)d_X$. If $f/\\varpi^n=g/\\varpi^m$, the fraction criterion gives the equality of arrows $(\\varpi^{k+m}\\mathrm{id}_Y)f=(\\varpi^{k+n}\\mathrm{id}_Y)g$ in $\\mathcal C$. Applying $F$ and canceling the invertible powers of $d_Y$ proves equality of the proposed images. The same commuting identity gives $\\overline F(g/\\varpi^m)\\overline F(f/\\varpi^n)=F(gf)d_X^{-(m+n)}$, and identities are preserved. Thus $\\overline F$ is a functor extending $F$. It is unique because $f/\\varpi^n=Q(f)Q(\\varpi^n\\mathrm{id}_X)^{-1}$. A natural transformation between two such $F$'s extends with the same object components: naturality for scalar identities gives naturality for their inverses, and hence for each displayed fraction. Its extension is unique since $Q$ is the identity on objects. Conversely restriction of functors and transformations along $Q$ inverts $S$ by its definition. This proves both required bijections.",
+   "uses": [
+    "def-pur-saturated-triangulated-localization",
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-linear-scalar-localization-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization (lines 4405--4431), the functor localization universal property; algebra.tex Tag 07JZ, definition-localization-module (fraction relation immediately preceding the definition), for well-definedness. The extension of natural transformations and the scalar-specific factorization are proved by the displayed agent calculation."
+   }
+  },
+  {
+   "text": "Apply the triangulated-localization theorem to $\\mathcal C$, the compatible multiplicative system $S$ of steps 2--5, and its concrete localization $Q$ verified in step 6. Its induced shift is the shift of step 1: on every fraction both shifts send $f/\\varpi^n$ to $f[1]/\\varpi^n$. The theorem declares precisely the triangles isomorphic to localization images distinguished, namely the specified class of triangles of $\\mathcal C[1/\\varpi]$ isomorphic to $Q$-images of distinguished triangles of $\\mathcal C$. It supplies the triangulated structure, including TR4, and exactness of $Q$. Therefore the claimed raw scalar localization, with no idempotent completion or extra hypotheses on $R$ or $\\varpi$, is triangulated and $Q$ is exact.",
+   "uses": [
+    "lem-pur-localization-triangles-05r6",
+    "lem-weil-linear-scalar-localization-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05R6, proposition-construct-localization, statement and definition of distinguished triangles in the proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-linear-scalar-localization-category",
+  "lem-weil-pbc-localization-module-tensor",
+  "def-weil-pbc-module-localization-away",
+  "def-pur-saturated-triangulated-localization",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-five-lemma",
+  "lem-pur-localization-triangles-05r6",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Application of Tag 05R6, proposition-construct-localization; scalar MS1--MS6 and the concrete localization universal property proved here using module fractions and Tags 0149/05QB."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -30,10 +136,59 @@
    "results": "Localization/Triangulated.lean: pretriangulated (line 199) and isTriangulated (line 218) for a localization functor at W with W.IsCompatibleWithTriangulation and a left calculus of fractions; the only instance of compatibility is P.trW for a triangulated subcategory P (Triangulated/Subcategory.lean:644)",
    "date": "2026-10-09",
    "verdict": "generalization not in one line: Mathlib triangulates W.Localization once W is compatible with the triangulation and has a calculus of fractions; for W generated by the ϖ^n·id_K neither property nor the identification with C[1/ϖ] is in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar localization of an R-linear triangulated category at powers of a central element is triangulated",
+   "results": "8 hits: CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization', CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization, CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization, CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization', CategoryTheory.Triangulated.Localization.isTriangulated, CategoryTheory.Triangulated.Localization.pretriangulated, CategoryTheory.Triangulated.Localization.isTriangulated_functor, CategoryTheory.Triangulated.Localization.instAdditiveLocalization'ShiftFunctorInt",
+   "date": "2026-10-14",
+   "verdict": "no match for scalar localization; general triangulated-localization results require compatibility and identification, proved by the split"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.Localization",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Triangulated.Localization'",
+   "date": "2026-10-14",
+   "verdict": "no match for scalar localization; general triangulated-localization results require compatibility and identification, proved by the split"
+  },
+  {
+   "tool": "grep",
+   "query": "isTriangulated|distTriang_iff",
+   "results": "5 hits: Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for scalar localization; general triangulated-localization results require compatibility and identification, proved by the split"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverting a central scalar on all morphism modules preserves distinguished triangles and the octahedral axiom",
+   "results": "8 hits: CategoryTheory.IsTriangulated, CategoryTheory.Pretriangulated, CategoryTheory.IsTriangulated.mk', CategoryTheory.Triangulated.Localization.pretriangulated, CategoryTheory.Triangulated.Localization.isTriangulated, CategoryTheory.ObjectProperty.IsTriangulated, CategoryTheory.Triangulated.TStructure, CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization'",
+   "date": "2026-10-14",
+   "verdict": "no match for scalar localization; general triangulated-localization results require compatibility and identification, proved by the split"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompatibleWithTriangulation\"",
+   "results": "5 hits: CategoryTheory.MorphismProperty.IsCompatibleWithTriangulation, CategoryTheory.MorphismProperty.IsCompatibleWithTriangulation.toIsCompatibleWithShift, CategoryTheory.MorphismProperty.IsCompatibleWithTriangulation.compatible_with_triangulation, CategoryTheory.MorphismProperty.IsCompatibleWithTriangulation.mk, CategoryTheory.ObjectProperty.instIsCompatibleWithTriangulationTrWOfIsTriangulatedOfIsTriangulated",
+   "date": "2026-10-14",
+   "verdict": "no match for scalar localization; general triangulated-localization results require compatibility and identification, proved by the split"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*localization|localization.*scalar|central.*scalar",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match for scalar localization; general triangulated-localization results require compatibility and identification, proved by the split"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension by localization of the coefficient ring makes a linear triangulated category triangulated",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -53,5 +208,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-linear-scalar-localization-triangulated",
+  "worker": "stage1",
+  "summary": "Kept the statement. Proved scalar denominators admit Ore squares and cancellation, verified MS6 by localized representable Hom exactness and the five lemma, and checked the concrete universal property for arbitrary functors before applying existing 05R6. All substantive facts already have nodes; no new nodes or attachments. The scalar verification is agent-written and explicitly marked as such.",
+  "blueprint": "Realizes the triangulated scalar-rationalization notion implicit in the statement and rationalization display of def-weil-rationalization-karoubi; the ambient typing unit has no proof paragraphs to replace.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NQ-aa530a648",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-aa530a648 (reviewer sub-agent of L); spot-checked: Read the full item, report, all cited statements, primary-source passages, and chapter/unit route. All seven proof steps pass, including both Ore squares, MS6, arbitrary-functor localization, and zero/nilpotent scalar cases. Corrected step 6’s universal-property source from Tag 04VC to 04VG (lemma-properties-left-localization). Whole corrected JSON and review.md written; no new nodes, target weakening, or coefficient-category identification.; 1 file(s) fixed by the reviewer"
+ }
 }
