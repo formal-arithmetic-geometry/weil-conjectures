@@ -14214,3 +14214,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 10:01 L: batch 20261014T013031 dependency take-out
 - 02:01 L: returned deliver/S3/Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap (reviewer RETURN: (reviewer X-e1246, head e12463c18) C3: In dag/nodes/sec-picard-framework/lem-pc-extension-kflat-quasi-iso.json, the proo)
+- 02:04 L: returned deliver/Q3/Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso (reviewer RETURN: (reviewer X-e81b5, head e81b5f88f) H10 (compilation; stage-3 reader gate): lean/Sheaf/AlgebraicGeometry/MixedHomTensorPu)
