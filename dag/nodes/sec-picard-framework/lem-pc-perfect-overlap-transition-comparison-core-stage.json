@@ -2,7 +2,7 @@
  "id": "lem-pc-perfect-overlap-transition-comparison-core-stage",
  "kind": "statement",
  "title": "Eventual overlap transition existence",
- "statement": "For the directed colimit setup, compact open cover, perfect local objects and their limit comparison isomorphisms, there are k ≥ j and hjk : j ≤ k such that the exact overlap restrictions of the pullbacks of A and B at k admit an isomorphism.",
+ "statement": "For the directed-colimit core data and supplied φU and φV, there exist k ≥ j, a coherent SchemeTwoOpenComparisonDiagram d, natural isomorphisms κU: derivedPullback(f|U) ⋙ d.HU ≅ derivedPullback(gj|U) ⋙ LU and κV analogously, and site comparisons siteU: PU ⋙ LU ≅ RU and siteV: PV ⋙ LV ≅ RV, where LU and LV are the derived inverse open-site equivalences. There are an overlap isomorphism e and local identifications θU,θV with E satisfying θU=κU.app A ≪≫ LU.mapIso φU ≪≫ siteU.app E and the analogous V equation. Their induced transition is exactly the limit image of e: γU.symm.app A′ ≪≫ SP.mapIso θU ≪≫ τU.app E = HW.mapIso e ≪≫ (γV.symm.app B′ ≪≫ SQ.mapIso θV ≪≫ τV.app E). All functors and comparisons are the exact ones in the core data [def-pc-two-open-comparison-diagram].",
  "source": {
   "document": "https://stacks.math.columbia.edu/tag/09RF",
   "place": "Tags 09RE and 09RF"
@@ -11,14 +11,23 @@
   "def-pc-derived-category",
   "def-pc-perfect-complex",
   "def-pc-derived-pullback",
-  "def-pc-derived-open-restriction-maps"
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-two-open-comparison-diagram"
  ],
  "proof": [
   {
-   "text": "Restrict the supplied local comparison isomorphisms to the compact overlap, descend the overlap morphism and its inverse through the directed colimit using perfect morphism descent, and enlarge the stage until both composites are identities. Transport the representatives through canonical derived-pullback composition and open-restriction comparison isomorphisms to obtain the displayed overlap isomorphism.",
+   "text": "Restrict the supplied φU and φV to the compact overlap and compose through E, obtaining its prescribed limit transition. Apply perfect morphism descent to the transition and inverse and descend the two inverse equations at a common later stage.",
    "uses": [
     "lem-pc-perfect-descend-morphisms",
-    "lem-pc-derived-pullback-perfect",
+    "lem-pc-derived-pullback-perfect"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use composition and open restriction comparisons to form the simultaneous coherent diagram d and functorial transports κU,κV and siteU,siteV. Set θU and θV by transporting the supplied φU and φV. Naturality and coherence retain the prescribed transition as the displayed equality of isomorphisms, rather than dropping it as True.",
+   "uses": [
+    "def-pc-two-open-comparison-diagram",
+    "lem-pc-derived-pullback-open-restriction-universes",
     "lem-pc-ringed-spaces-derived-pullback-composition",
     "def-pc-derived-open-restriction-maps"
    ],
@@ -28,15 +37,17 @@
  "proof_deps": [
   "lem-pc-perfect-descend-morphisms",
   "lem-pc-derived-pullback-perfect",
+  "def-pc-two-open-comparison-diagram",
+  "lem-pc-derived-pullback-open-restriction-universes",
   "lem-pc-ringed-spaces-derived-pullback-composition",
   "def-pc-derived-open-restriction-maps"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "S4",
-  "document": "https://stacks.math.columbia.edu/tag/09RF",
+  "agent": "H1",
   "date": "2026-10-14",
-  "note": "Stage-3 split of eventual overlap transition descent."
+  "document": "https://stacks.math.columbia.edu/tag/09RF",
+  "note": "Repair E2/F6: prescribed induced-transition equality is retained from descent through packaging; no counterexample/realization route remains. H10: the named transparent proposition is the former inline statement verbatim; all binders and conclusions are retained. Unfolding it recovers the original theorem type. This caches statement elaboration and parameter metadata without adding any hole."
  },
  "mathlib_searches": [
   {
@@ -85,10 +96,15 @@
   "module": "Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore",
   "file": "lean/Sheaf/AlgebraicGeometry/PerfectOverlapTransitionComparisonCore.lean",
   "declaration": "AlgebraicGeometry.perfect_overlap_transition_comparison_core_stage",
-  "statement": "theorem perfect_overlap_transition_comparison_core_stage {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c) (i : I) (Z : Scheme.{u}) (t : Z ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation t] [QuasiCompact t] [QuasiSeparated t] [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [∀ (Z : Scheme.{u}) (U : Z.Opens), HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))] (j : I) (hij : i ≤ j) (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens), ∃ k : I, j ≤ k) : let Yj := pullback t (Spec.map (R.map (homOfLE hij))) let X := pullback t (Spec.map (c.ι.app i)) let gj := baseChangeMap t (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (c.ι.app i))) (Over.homMk (Spec.map (c.ι.app j)) (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])) ∀ (U V : Yj.Opens) (hcover : U ⊔ V = ⊤) (hU : IsCompact (U : Set Yj)) (hV : IsCompact (V : Set Yj)) (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme) (hA : U.toScheme.IsPerfect A) (hB : V.toScheme.IsPerfect B) (E : schemeDerivedCategory X), let PU := (schemeOpenRestriction X (gj ⁻¹ᵁ U)).mapDerivedCategory let PV := (schemeOpenRestriction X (gj ⁻¹ᵁ V)).mapDerivedCategory ∀ (φU : (derivedPullback (gj ∣_ U)).obj A ≅ PU.obj E) (φV : (derivedPullback (gj ∣_ V)).obj B ≅ PV.obj E), ∃ (k : I) (hjk : j ≤ k), let Yk := pullback t (Spec.map (R.map (homOfLE (hij.trans hjk)))) let f := baseChangeMap t (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk))))) (Over.homMk (Spec.map (R.map (homOfLE hjk))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) let U' := f ⁻¹ᵁ U let V' := f ⁻¹ᵁ V let A' := (derivedPullback (f ∣_ U)).obj A let B' := (derivedPullback (f ∣_ V)).obj B let SU := (schemeOpenOverlapRestriction Yk (homOfLE (show U' ⊓ V' ≤ U' from inf_le_left))).mapDerivedCategory let SV := (schemeOpenOverlapRestriction Yk (homOfLE (show U' ⊓ V' ≤ V' from inf_le_right))).mapDerivedCategory ∃ e : (SU.obj A' ≅ SV.obj B'), True",
+  "statement": "theorem perfect_overlap_transition_comparison_core_stage\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)\n    (i : I) (Z : Scheme.{u}) (t : Z ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation t] [QuasiCompact t] [QuasiSeparated t]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    (j : I) (hij : i ≤ j)\n    (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),\n      ∃ k : I, j ≤ k)\n    : perfectOverlapStageStatement R c hc i Z t j hij hstage",
   "branch": "sheaf-dag",
   "by": "S4",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.perfect_overlap_transition_comparison_core_stage",
+   "AlgebraicGeometry.perfectOverlapStageStatement"
+  ],
+  "note": "H10: the named transparent proposition is the former inline statement verbatim; all binders and conclusions are retained. Unfolding it recovers the original theorem type. This caches statement elaboration and parameter metadata without adding any hole."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -103,11 +119,52 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-8e18c",
-  "group": "S4",
+  "reviewer": "X-6ef1a",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261014T001734-L-2555518",
+  "landing": "20261014T050526-L-1684913",
   "kind": "interface",
-  "note": "independent Codex review: Delivered module and direct importer compiled; target type, DAG route, declarations, report, and named sorry statements match the review requirements."
+  "note": "independent Codex review: Matched delivered Lean with node statements, declared interface repairs, source descent argument, and report; fresh core artifacts, unchanged direct importer, original statement checks, and axiom checks passed."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "H1 stage 2",
+  "old_statement": "For the directed colimit setup, compact open cover, perfect local objects and their limit comparison isomorphisms, there are k ≥ j and hjk : j ≤ k such that the exact overlap restrictions of the pullbacks of A and B at k admit an isomorphism.",
+  "what": "Repair requested by reviewer X-af36a: the old arbitrary-e₀ coherence statement is false (constant field system on P¹, e₀ the O(1) transition, E=O). The old stage conclusion discarded the prescribed limit-transition equation. Retain that equation and functorial transports of the supplied comparisons in the stage conclusion; require it in coherence. This is an interface repair, not a new reduction or a proof of the false original statement.",
+  "source": {
+   "document": "https://stacks.math.columbia.edu/tag/09RF",
+   "place": "Two-open induction: the isomorphism c pulls back to the displayed identifications through E; Tag 09RE descends it."
+  },
+  "citers": [
+   {
+    "id": "lem-pc-perfect-overlap-transition-comparison-diagram-core",
+    "holds": true,
+    "note": "The unchanged core existential follows by the revised packaging proof delivered in this module; no arbitrary transition is used."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-derived-category",
+   "def-pc-perfect-complex",
+   "def-pc-derived-pullback",
+   "def-pc-derived-open-restriction-maps"
+  ],
+  "old_proof": [
+   {
+    "text": "Restrict the supplied local comparison isomorphisms to the compact overlap, descend the overlap morphism and its inverse through the directed colimit using perfect morphism descent, and enlarge the stage until both composites are identities. Transport the representatives through canonical derived-pullback composition and open-restriction comparison isomorphisms to obtain the displayed overlap isomorphism.",
+    "uses": [
+     "lem-pc-perfect-descend-morphisms",
+     "lem-pc-derived-pullback-perfect",
+     "lem-pc-ringed-spaces-derived-pullback-composition",
+     "def-pc-derived-open-restriction-maps"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pc-perfect-descend-morphisms",
+   "lem-pc-derived-pullback-perfect",
+   "lem-pc-ringed-spaces-derived-pullback-composition",
+   "def-pc-derived-open-restriction-maps"
+  ]
  }
 }
