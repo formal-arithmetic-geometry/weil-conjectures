@@ -1,0 +1,201 @@
+{
+ "id": "lem-sc-tensor-graded-action-kernel-second-diagonal",
+ "kind": "statement",
+ "title": "Canonical tensor action on the degree-n ideal summand",
+ "statement": "Let $j:Z\\to X$ be a closed immersion, $L$ invertible and $J^2=0$. Fix $n,e\\ge0$, a TensorGradedPresentation $T$, and comparison data $D$ equal to canonicalTensorBoundaryComparisons [lem-sc-square-zero-tensor-graded-presentation, lem-sc-square-zero-ideal-tensor-unit]. Put $F=j^*(J\\otimes L^n)$ and let $x:\\mathcal O_Z\\to ((j^*L)^n)^{e+1}$. Suppose $\\sigma$ and $\\mu$ obey the local lift and global section action equations of [lem-sc-tensor-graded-quotient-action-homogeneous]. Then $k_n;\\mu(\\mathrm{tensorGradedSection}(T,D,e,x))=\\mathrm{tensorBoundaryKernelMap}_{n,0,e+1}(\\mathrm{id}_F\\otimes x);k_{n(e+2)}$ [lem-sc-square-zero-tensor-graded-product-projection, lem-sc-tensor-boundary-kernel-map-naturality]. This concerns only the degree-n summand and no projection.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, coherent-equation-ses and its graded direct sum; Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, first proof paragraph."
+ },
+ "stmt_deps": [
+  "lem-sc-square-zero-tensor-graded-presentation",
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-sc-square-zero-ideal-tensor-unit",
+  "lem-sc-tensor-boundary-kernel-map-naturality",
+  "lem-sc-square-zero-tensor-graded-product-projection",
+  "lem-sc-tensor-graded-quotient-action-homogeneous"
+ ],
+ "proof": [
+  {
+   "text": "Substitute D and use the epi unit in degree n(e+1) to choose local lifts t of the canonically transported x(1).",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-unit-quotient",
+    "lem-sc-square-zero-ideal-tensor-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The local kernel-map multiplication formula gives the inclusion of the transported map as tensorPowAddIso applied to t tensor kernel.ι(y). Apply k_inclusion to the output. An equality cast along n(e+1)+n=n(e+2) commutes with the family b by equality elimination.",
+   "uses": [
+    "lem-sc-tensor-boundary-kernel-map-local-multiplication",
+    "lem-sc-square-zero-tensor-graded-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compute i of the action with hglobal, hlocal, b_quotient, k_inclusion and b_multiply. The preceding formula is exactly that product. Cancel the mono i. Naturality and sheaf separation glue the local equality of morphisms.",
+   "uses": [
+    "lem-sc-square-zero-tensor-graded-presentation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-square-zero-ideal-tensor-unit",
+  "lem-sc-square-zero-tensor-graded-presentation",
+  "lem-sc-tensor-boundary-kernel-map-local-multiplication",
+  "lem-weil-pbc-closed-immersion-unit-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Expanded local quotient action and tensor coefficient calculation in Tag 09MS, by N4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by a homogeneous quotient section preserves degree on a square zero graded ideal sheaf",
+   "results": "Ideal.mul_homogeneous_element_mem_of_mem, AlgebraicGeometry.Proj.mul_apply, HomogeneousLocalization.Away.eventually_smul_mem, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.smul_mem, HomogeneousLocalization.Away.isLocalization_mul, HomogeneousLocalization.Away.mk, HomogeneousLocalization.deg, HomogeneousLocalization.NumDenSameDeg.deg_mul",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit.hom_ext",
+   "results": "CategoryTheory.Limits.IsColimit.hom_ext",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorGradedAction|homogeneous.*action|action.*homogeneous",
+   "results": "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorGradedAction|homogeneous.*action|action.*homogeneous",
+   "results": "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit.hom_ext",
+   "results": "CategoryTheory.Limits.IsColimit.hom_ext",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homogeneous quotient section acts on a graded square zero ideal by shifting the degree",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of tensor powers under a monoidal pullback functor and multiplication on the ideal kernel of a square zero closed immersion",
+   "results": "KaehlerDifferential.tensorKaehlerEquiv_left_inv, KaehlerDifferential.End_equiv_aux, KaehlerDifferential.cotangentComplexBaseChange_tmul, Algebra.Extension.tensorCotangent, Algebra.Extension.CotangentSpace.map_tmul, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, Algebra.Generators.CotangentSpace.fst_compEquiv, Algebra.Extension.tensorCotangentInvFun_smul_mk",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.whiskerLeft_comp",
+   "results": "CategoryTheory.MonoidalCategory.whiskerLeft_comp",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed immersion pullback tensor kernel inclusion multiplication local sections canonical isomorphism",
+   "results": "Second reading: ideal-sheaf pullback and kernel comparison results, including ker_fst_of_isClosedImmersion; none computes the transported module tensor action.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "results": "Second reading: the exact unit-comparison lemma already used in both proved helpers. It does not prove the local coefficient multiplication formula.",
+   "date": "2026-10-14",
+   "verdict": "used existing lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "boundary.*(tmul|multiply)|kernel.*(tmul|multiply)|tensor.*unit.*app",
+   "results": "Second reading: Mathlib hits concern other tensor categories. In lean/Sheaf and lean/WeilConjectures, TensorCoefficientActionSupport and TensorCoefficientActionOnSummand remain open and concern degree-n sections with extra restriction hypotheses; TensorSectionProduct_comparison concerns two quotient sections, not an ideal kernel. No existing canonical local kernel multiplication theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TensorGradedActionKernelSecond",
+  "date": "2026-10-14",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS graded direct-sum sequence, quotient multiplication on its ideal; Canonical tensor action on the degree-n ideal summand",
+   "via": [
+    "lem-sc-tensor-graded-action-kernel-second",
+    "lem-sc-square-zero-tensor-graded-action-projection-second",
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorGradedActionKernelSecondDiagonal",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorGradedActionKernelSecondDiagonal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorGradedAction_kernel_second_diagonal",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.tensorGradedAction_kernel_second_diagonal"
+  ],
+  "statement": "theorem tensorGradedAction_kernel_second_diagonal {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥) (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n) (hD : canonicalTensorBoundaryComparisons j L hI n = D) (e : ℕ) (x : 𝟙_ Z.Modules ⟶ (((tensorPullback j).obj L).tensorPow n).tensorPow (e + 1)) (σ : ∀ U : X.Opens, T.C.right.obj.obj (op U) →+* Module.End ((moduleRings X.toRingedSpace).obj.obj (op U)) (T.I.val.obj (op U))) (μ : T.C.right.obj.obj (op ⊤) →+* End T.I) (hlocal : ∀ (U : X.Opens) (b : T.B.right.obj.obj (op U)) (y : T.I.val.obj (op U)), @id (T.B.right.obj.obj (op U)) (T.i.val.app (op U) (σ U (T.p.right.hom.app (op U) b) y)) = b * @id (T.B.right.obj.obj (op U)) (T.i.val.app (op U) y)) (hglobal : ∀ (g : T.C.right.obj.obj (op ⊤)) (U : X.Opens) (y : T.I.val.obj (op U)), (μ g).val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) : let F : Z.Modules := (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n) T.k (n * (0 + 1)) ≫ μ (tensorGradedSection T D e x) = tensorBoundaryKernelMap j L hI n 0 (e + 1) (F ◁ x) ≫ T.k (n * ((e + 1) + 1))",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T033108-L-604732",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T033108-L-604732",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

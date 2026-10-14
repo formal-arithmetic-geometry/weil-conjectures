@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedProductProjection
 public import Sheaf.AlgebraicGeometry.TensorBoundaryKernelMapNaturality
+import Sheaf.AlgebraicGeometry.TensorGradedQuotientActionHomogeneous
+import Sheaf.AlgebraicGeometry.TensorGradedActionKernelSecondDiagonal
 
 /-! # Homogeneous quotient multiplication on degree kernels
 
@@ -73,7 +75,28 @@ theorem tensorGradedAction_kernel_second {X Z : Scheme.{u}} (j : Z ⟶ X)
     let F : Z.Modules := (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n)
     μ (tensorGradedSection T D e x) ≫ (T.degree (n * ((e + 1) + 1))).τ₁ =
       (T.degree (n * (0 + 1))).τ₁ ≫
-        tensorBoundaryKernelMap j L hI n 0 (e + 1) (F ◁ x) := by sorry
+        tensorBoundaryKernelMap j L hI n 0 (e + 1) (F ◁ x) := by
+  set_option backward.isDefEq.respectTransparency false in
+    set_option backward.isDefEq.respectTransparency.types false in
+      dsimp only
+      apply Cofan.IsColimit.hom_ext T.k_colimit
+      intro d
+      change T.k d ≫ (μ (tensorGradedSection T D e x) ≫ _) = T.k d ≫ (_ ≫ _)
+      by_cases hd : d = n * (0 + 1)
+      · subst d
+        rw [← Category.assoc,
+          tensorGradedAction_kernel_second_diagonal j L hI n T D hD e x σ μ hlocal hglobal,
+          Category.assoc, T.k_projection, Category.comp_id,
+          ← Category.assoc, T.k_projection, Category.id_comp]
+      · obtain ⟨v, hv⟩ := tensorGradedQuotientAction_homogeneous j L T
+          (n * (e + 1)) d ((x ≫ (D.a e).inv).app ⊤ (1 : Γ(Z, ⊤)))
+          σ μ hlocal hglobal
+        have hdeg : d + n * (e + 1) ≠ n * ((e + 1) + 1) := by
+          simp only [Nat.mul_add, Nat.mul_one] at *
+          omega
+        change T.k d ≫ μ (tensorGradedSection T D e x) = _ at hv
+        rw [← Category.assoc, hv, Category.assoc, T.k_orthogonal _ _ hdeg,
+          comp_zero, ← Category.assoc, T.k_orthogonal _ _ hd, zero_comp]
 
 end
 end AlgebraicGeometry.Scheme.Modules

@@ -33,39 +33,31 @@
  ],
  "proof": [
   {
-   "text": "Substitute hD to fix the section comparison. Check equality after all k_d by the colimit property. Locally lift x in degree n(e+1) through the surjective degreewise unit. Apply hlocal to that lift and to k_d, and cancel the monomorphism i. Use b_quotient, k_inclusion, and b_multiply to compute the product in degree d+n(e+1).",
+   "text": "Apply Cofan.IsColimit.hom_ext to the supplied kernel coproduct. For d=n, compose the diagonal action equation with the output projection and use both k_projection identities.",
    "uses": [
-    "lem-sc-square-zero-tensor-graded-presentation",
-    "lem-weil-pbc-closed-immersion-unit-quotient"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "If d differs from n, k_orthogonal kills the output and input projections; equality d+n(e+1)=n(e+2) implies d=n, including n=0. For d=n use k_projection and the defining inclusion equation of the ideal-kernel comparison to identify the product with the transported tensor-by-x map. The coefficient-degree comparison records the same tensor associativity. In a local generator ell, a kernel element has inclusion r ell^d with r in J and x has a lift a ell^(n(e+1)); the product is ar ell^(d+n(e+1)). The defining ideal inclusion identifies r, the annihilated-module unit reduces it to Z, and the recursive tensor comparisons preserve the pure generator tensors, including the unitors for exponent zero.",
-   "uses": [
-    "lem-sc-square-zero-ideal-tensor-unit",
-    "lem-sc-tensor-boundary-kernel-map-naturality"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "A different lift differs by a kernel section and contributes zero by squareZero. Equality on the local cover glues by sheaf separation. Use hglobal to identify the sheaf action with mu. The colimit property gives equality of the whole morphisms.",
-   "uses": [
+    "lem-sc-tensor-graded-action-kernel-second-diagonal",
     "lem-sc-square-zero-tensor-graded-presentation"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For d different from n, use homogeneous quotient action support in degree d+n(e+1). Arithmetic cancellation gives this degree different from n(e+2), including n=0. Output orthogonality makes the left side zero; input orthogonality makes the right side zero. The coproduct extensionality concludes.",
+   "uses": [
+    "lem-sc-tensor-graded-quotient-action-homogeneous",
+    "lem-sc-square-zero-tensor-graded-presentation"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-square-zero-tensor-graded-presentation",
-  "lem-weil-pbc-closed-immersion-unit-quotient",
-  "lem-sc-square-zero-ideal-tensor-unit",
-  "lem-sc-tensor-boundary-kernel-map-naturality"
+  "lem-sc-tensor-graded-action-kernel-second-diagonal",
+  "lem-sc-tensor-graded-quotient-action-homogeneous"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Expanded sheaf multiplication and naturality steps underlying Tag 09MS graded ideal sequence and Tag 0B8S quotient action."
+  "place": "Tag 09MS graded direct-sum quotient action, formalized by N4 through proved homogeneous support and diagonal action; only the local canonical kernel tensor multiplication remains open."
  },
  "mathlib_searches": [
   {
@@ -199,9 +191,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261014T025140-L-157348",
+  "landing": "20261014T033108-L-604732",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

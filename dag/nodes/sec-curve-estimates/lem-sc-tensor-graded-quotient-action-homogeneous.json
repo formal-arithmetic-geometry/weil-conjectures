@@ -1,0 +1,193 @@
+{
+ "id": "lem-sc-tensor-graded-quotient-action-homogeneous",
+ "kind": "statement",
+ "title": "Degree support of the homogeneous quotient action",
+ "statement": "Let $j:Z\\to X$ be a closed immersion of schemes, $L$ invertible, and $T$ a TensorGradedPresentation [lem-sc-square-zero-tensor-graded-presentation]. Let $a,d\\in\\mathbb N$ and $s\\in\\Gamma(X,j_*j^*(L^a))$. Suppose local ring actions $\\sigma_U$ and a global endomorphism action $\\mu$ satisfy $i(\\sigma_U(p(b))y)=b i(y)$ and $(\\mu(g))_U(y)=\\sigma_U(g|_U)y$. Then there is a morphism $v:K_d\\to K_{d+a}$ such that $k_d;\\mu(c_a(s))=v;k_{d+a}$, where $K_r=\\ker(L^r\\to j_*j^*L^r)$. There are no canonical tensor comparisons or output projections in this statement.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, coherent-equation-ses and its graded direct sum; Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, first proof paragraph."
+ },
+ "stmt_deps": [
+  "lem-sc-square-zero-tensor-graded-presentation",
+  "lem-weil-pbc-closed-immersion-unit-quotient"
+ ],
+ "proof": [
+  {
+   "text": "The unit in degree a is epi by the closed-immersion unit quotient. Compare the two chosen adjunction units using leftAdjointUniq to transfer Epi, then use Mathlib TopCat.Sheaf.isLocallySurjective_iff_epi and TopCat.Presheaf.isLocallySurjective_iff to obtain local lifts t of s.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-unit-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute the local acted-on inclusion with hglobal, hlocal, b_quotient, k_inclusion and b_multiply. Write the result b_(a+d)(z). Applying p and hw gives c_(a+d)(unit(z))=0. Since c_projection makes c_(a+d) mono, unit(z)=0. Mathlib evaluation preserves kernels; range_map_kernelι gives a section z′ with inclusion z. Cancel the mono i to identify the acted-on section with k_(a+d)(z′).",
+   "uses": [
+    "lem-sc-square-zero-tensor-graded-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define v=k_d;mu(c_a(s));degree_(d+a).tau1. On each local lifting open, k_projection gives v(y)=z′. Use naturality of the two global morphisms and TopCat.Sheaf.eq_of_locally_eq′ to glue the factorization. The calculation includes degree zero and empty opens.",
+   "uses": [
+    "lem-sc-square-zero-tensor-graded-presentation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-square-zero-tensor-graded-presentation",
+  "lem-weil-pbc-closed-immersion-unit-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Expanded local quotient action and tensor coefficient calculation in Tag 09MS, by N4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by a homogeneous quotient section preserves degree on a square zero graded ideal sheaf",
+   "results": "Ideal.mul_homogeneous_element_mem_of_mem, AlgebraicGeometry.Proj.mul_apply, HomogeneousLocalization.Away.eventually_smul_mem, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.smul_mem, HomogeneousLocalization.Away.isLocalization_mul, HomogeneousLocalization.Away.mk, HomogeneousLocalization.deg, HomogeneousLocalization.NumDenSameDeg.deg_mul",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit.hom_ext",
+   "results": "CategoryTheory.Limits.IsColimit.hom_ext",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorGradedAction|homogeneous.*action|action.*homogeneous",
+   "results": "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorGradedAction|homogeneous.*action|action.*homogeneous",
+   "results": "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit.hom_ext",
+   "results": "CategoryTheory.Limits.IsColimit.hom_ext",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homogeneous quotient section acts on a graded square zero ideal by shifting the degree",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of tensor powers under a monoidal pullback functor and multiplication on the ideal kernel of a square zero closed immersion",
+   "results": "KaehlerDifferential.tensorKaehlerEquiv_left_inv, KaehlerDifferential.End_equiv_aux, KaehlerDifferential.cotangentComplexBaseChange_tmul, Algebra.Extension.tensorCotangent, Algebra.Extension.CotangentSpace.map_tmul, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, Algebra.Generators.CotangentSpace.fst_compEquiv, Algebra.Extension.tensorCotangentInvFun_smul_mk",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.whiskerLeft_comp",
+   "results": "CategoryTheory.MonoidalCategory.whiskerLeft_comp",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed immersion pullback tensor kernel inclusion multiplication local sections canonical isomorphism",
+   "results": "Second reading: ideal-sheaf pullback and kernel comparison results, including ker_fst_of_isClosedImmersion; none computes the transported module tensor action.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "results": "Second reading: the exact unit-comparison lemma already used in both proved helpers. It does not prove the local coefficient multiplication formula.",
+   "date": "2026-10-14",
+   "verdict": "used existing lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "boundary.*(tmul|multiply)|kernel.*(tmul|multiply)|tensor.*unit.*app",
+   "results": "Second reading: Mathlib hits concern other tensor categories. In lean/Sheaf and lean/WeilConjectures, TensorCoefficientActionSupport and TensorCoefficientActionOnSummand remain open and concern degree-n sections with extra restriction hypotheses; TensorSectionProduct_comparison concerns two quotient sections, not an ideal kernel. No existing canonical local kernel multiplication theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TensorGradedActionKernelSecond",
+  "date": "2026-10-14",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS graded direct-sum sequence, quotient multiplication on its ideal; Degree support of the homogeneous quotient action",
+   "via": [
+    "lem-sc-tensor-graded-action-kernel-second",
+    "lem-sc-square-zero-tensor-graded-action-projection-second",
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorGradedQuotientActionHomogeneous",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorGradedQuotientActionHomogeneous.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorGradedQuotientAction_homogeneous",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.tensorGradedQuotientAction_homogeneous"
+  ],
+  "statement": "theorem tensorGradedQuotientAction_homogeneous {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (T : TensorGradedPresentation j L) (a d : ℕ) (s : Γ((pushforward j).obj ((tensorPullback j).obj (L.tensorPow a)), ⊤)) (σ : ∀ U : X.Opens, T.C.right.obj.obj (op U) →+* Module.End ((moduleRings X.toRingedSpace).obj.obj (op U)) (T.I.val.obj (op U))) (μ : T.C.right.obj.obj (op ⊤) →+* End T.I) (hlocal : ∀ (U : X.Opens) (b : T.B.right.obj.obj (op U)) (y : T.I.val.obj (op U)), @id (T.B.right.obj.obj (op U)) (T.i.val.app (op U) (σ U (T.p.right.hom.app (op U) b) y)) = b * @id (T.B.right.obj.obj (op U)) (T.i.val.app (op U) y)) (hglobal : ∀ (g : T.C.right.obj.obj (op ⊤)) (U : X.Opens) (y : T.I.val.obj (op U)), (μ g).val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) : ∃ v : kernel (tensorGradedUnit j (L.tensorPow d)) ⟶ kernel (tensorGradedUnit j (L.tensorPow (d + a))), T.k d ≫ μ ((T.c a).app ⊤ s) = v ≫ T.k (d + a)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T033108-L-604732",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T033108-L-604732",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
