@@ -13,18 +13,102 @@
  },
  "kind": "statement",
  "title": "Power-generated ring maps induce universal homeomorphisms",
- "statement": "Let $\\varphi:R\\to B$ be a homomorphism of commutative rings and let $p$ be a prime integer. Suppose $\\ker\\varphi$ consists of nilpotent elements and $B$ is generated as an $R$-algebra by elements $x$ each satisfying $x^{p^n}\\in\\varphi(R)$ and $p^n x\\in\\varphi(R)$ for some integer $n>0$ depending on $x$. Then $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ [def-weil-affine-spectrum] is a universal homeomorphism [def-weil-universal-homeomorphism]. More explicitly, for every commutative $R$-algebra $R\\prime$ the map $R\\prime\\to R\\prime\\otimes_R B$ satisfies the same two hypotheses (with the same prime $p$) and induces a homeomorphism on prime spectra.",
+ "statement": "Let $\\varphi:R\\to B$ be a homomorphism of commutative rings and let $p$ be a prime integer. Suppose $\\ker\\varphi$ consists of nilpotent elements and $B$ is generated as an $R$-algebra by elements $x$ each satisfying $x^{p^n}\\in\\varphi(R)$ and $p^n x\\in\\varphi(R)$ for some integer $n>0$ depending on $x$. Then $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ [def-weil-affine-spectrum] is a universal homeomorphism [def-weil-universal-homeomorphism]. More explicitly, for every commutative $R$-algebra $R'$ the map $R'\\to R'\\otimes_R B$ satisfies the same two hypotheses (with the same prime $p$) and induces a homeomorphism on prime spectra.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Tag 0BRA, lemma-p-ring-map"
  },
  "stmt_deps": [
   "def-weil-affine-spectrum",
+  "def-weil-universal-homeomorphism",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\varphi(R)\\subseteq B$ and let $T$ consist of the elements $b$ for which $b^{p^n},p^n b\\in A$ for some $n>0$. Every element of $A$ is in $T$ (take $n=1$), so $0,1\\in T$. If $x$ has exponent $n$, then $-x$ has the same exponent since $(-x)^{p^n}=(-1)^{p^n}x^{p^n}$. For $x,y$ with exponents $n,m$, $(xy)^{p^{n+m}}=(x^{p^n})^{p^m}(y^{p^m})^{p^n}\\in A$ and $p^{n+m}xy=(p^nx)(p^my)\\in A$. These verify additive inverses and multiplication without assuming characteristic $p$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BRA, lemma-p-ring-map, proof"
+   }
+  },
+  {
+   "text": "For $x,y\\in T$, choose their positive exponents $n,m$ and apply [lem-pur-prime-power-addition-subring] to the subring $A\\subseteq B$. It gives a positive $a$ with $(x+y)^{p^a},p^a(x+y)\\in A$, hence $x+y\\in T$. Together with step 1, $T$ is a subring containing $A$ and therefore an $R$-subalgebra. It contains every specified generator of $B$, so the meaning of generation as an algebra gives $T=B$.",
+   "uses": [
+    "lem-pur-prime-power-addition-subring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BRA, lemma-p-ring-map, proof"
+   }
+  },
+  {
+   "text": "For every $b\\in B$, step 2 supplies the positive power $d=p^n>0$ with $b^d\\in\\varphi(R)$. The kernel hypothesis is exactly that every kernel element is nilpotent, with no uniform nilpotence exponent required. Apply [lem-pur-all-element-powers-spectrum-homeomorphism] to obtain a homeomorphism $\\operatorname{Spec}B\\to\\operatorname{Spec}R$, in particular a surjection.",
+   "uses": [
+    "lem-pur-all-element-powers-spectrum-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BRA, lemma-p-ring-map, proof"
+   }
+  },
+  {
+   "text": "Fix an arbitrary commutative $R$-algebra $R'$ and put $B'=R'\\otimes_R B$. By [lem-weil-pbc-fibre-product-affine-spectra], its spectrum map induced by $r'\\mapsto r'\\otimes1$ is the base change of the surjection in step 3. Thus [lem-weil-pbc-surjective-base-change] makes $\\operatorname{Spec}B'\\to\\operatorname{Spec}R'$ surjective. If $r'$ is in the kernel, every prime $\\mathfrak p'$ of $R'$ is the contraction of a prime of $B'$ and hence contains $r'$. Apply [lem-weil-pbc-zero-locus-eq-iff-radical-eq] with $I=0$ in $R'$: the intersection of all primes is $\\sqrt0$, whose elements have a positive power equal to zero. Consequently this kernel consists of nilpotents. This is deduced from spectrum surjectivity, not from tensor preserving injectivity.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BRA, lemma-p-ring-map, proof"
+   }
+  },
+  {
+   "text": "Using the multiplication formula of [lem-weil-pbc-algebra-tensor-pushout-universal-property], the elements $1\\otimes x$ for the original generators generate $B'$ as an $R'$-algebra: a tensor $r'\\otimes b$ equals $(r'\\otimes1)(1\\otimes b)$, and express $b$ as a finite polynomial in the original generators and then sum the finitely many pure tensors. If $x^{p^n}=\\varphi(r)$ and $p^nx=\\varphi(s)$, balancing gives $(1\\otimes x)^{p^n}=r'_0\\otimes1$ and $p^n(1\\otimes x)=s'_0\\otimes1$, where $r'_0,s'_0$ are the images of $r,s$ in $R'$. Hence the same generator hypothesis holds with the same prime $p$ and the original exponents. Put $A'=\\operatorname{im}(R'\\to B')$ and $T'=\\{b\\in B': b^{p^n},p^nb\\in A'\\text{ for some }n>0\\}$. The elements of $A'$ lie in $T'$ with $n=1$. For $u,v\\in T'$ with witnesses $n,m$, the equalities $(-u)^{p^n}=(-1)^{p^n}u^{p^n}$, $p^n(-u)=-(p^nu)$, $(uv)^{p^{n+m}}=(u^{p^n})^{p^m}(v^{p^m})^{p^n}$ and $p^{n+m}uv=(p^nu)(p^mv)$ prove closure under negatives and products. Apply [lem-pur-prime-power-addition-subring] to $A'\\subseteq B'$ to obtain closure under sums. Thus $T'$ is an $R'$-subalgebra containing the displayed generators, so $T'=B'$; every element has a positive power in $A'$. With the nil kernel from step 4, [lem-pur-all-element-powers-spectrum-homeomorphism] gives the required homeomorphism on spectra.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-pur-prime-power-addition-subring",
+    "lem-pur-all-element-powers-spectrum-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BRA, lemma-p-ring-map, proof"
+   }
+  },
+  {
+   "text": "For an arbitrary scheme $Y'\\to\\operatorname{Spec}R$, cover $Y'$ by affine open subschemes $U_i=\\operatorname{Spec}R_i$. By [lem-weil-pbc-fibre-product-affine-spectra], the restriction of the pullback projection above $U_i$ is the spectrum map of $R_i\\to R_i\\otimes_R B$, and is a homeomorphism by step 5. Thus the projection is bijective: each target point has exactly one lift on any chart containing it. It is a homeomorphism globally: the inverse images of $U_i$ are open, and a subset of the source is open precisely when its intersections with these inverse images are open; their images are open in each $U_i$ and therefore open in $Y'$. By [def-weil-universal-homeomorphism], this proves the universal-homeomorphism assertion for arbitrary scheme base changes, including the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-universal-homeomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BRA, lemma-p-ring-map, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-prime-power-addition-subring",
+  "lem-pur-all-element-powers-spectrum-homeomorphism",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
   "def-weil-universal-homeomorphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0BRA, lemma-p-ring-map, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,15 +151,66 @@
    "results": "[leanfinder] OK 8 hit(s); Returned: PrimeSpectrum.isHomeomorph_comap, PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, PrimeSpectrum.isHomeomorph_comap_of_bijective, PrimeSpectrum.comap_quotientMk_bijective_of_le_nilradical, PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, PrimeSpectrum.preimageHomeomorphFiber, PrimeSpectrum.mapPiLocalization_bijective",
    "date": "2026-10-14",
    "verdict": "no match: Candidate isHomeomorph_comap requires powers of every element and gives one homeomorphism, not the generator-to-all-elements argument or arbitrary-base-change kernel assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "isHomeomorph_comap|exists_add_pow_prime_pow_eq",
+   "results": "[grep] OK 10 hit(s); Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean, Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean, Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean, Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean, Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean, Mathlib/Algebra/CharP/Lemmas.lean, Mathlib/Algebra/CharP/Lemmas.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: the all-element power criterion is an input, not the generator-to-all-elements and arbitrary-base-change assertions of this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Power generated ring maps induce universal homeomorphisms",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s); ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ring homomorphism generated by elements whose prime power and prime multiple lie in its image, with nilpotent kernel, is a universal homeomorphism",
+   "results": "[leanfinder] OK 8 hit(s); PrimeSpectrum.isHomeomorph_comap, StandardEtalePresentation.lift_bijective, Algebra.FormallyUnramified.lift_unique_of_ringHom, isPRadical_iff, RingHom.Etale, PrimeSpectrum.mem_image_comap_basicOpen, StandardEtalePair.homEquiv, PrimeSpectrum.comap_quotientMk_bijective_of_le_nilradical",
+   "date": "2026-10-14",
+   "verdict": "no match: the all-element power criterion is an input, not the generator-to-all-elements and arbitrary-base-change assertions of this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversalHomeomorph\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-14",
+   "verdict": "no match: the all-element power criterion is an input, not the generator-to-all-elements and arbitrary-base-change assertions of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prime power generated algebra ring extension has nilpotent kernel after any tensor base change and homeomorphic spectra",
+   "results": "[leanfinder] OK 8 hit(s); PrimeSpectrum.mem_image_comap_basicOpen, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable, PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, PrimeSpectrum.mem_image_comap_zeroLocus_sdiff, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, isNilpotent_tensor_residueField_iff, Algebra.Etale.exists_subalgebra_fg",
+   "date": "2026-10-14",
+   "verdict": "no match: the all-element power criterion is an input, not the generator-to-all-elements and arbitrary-base-change assertions of this item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-generic-geometrically-reduced-preparation",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-pur-power-generated-spectrum-homeomorphism",
+  "worker": "stage1",
+  "summary": "Read Algebra 0BRA and its 0545/0BR8 inputs. Preserve the imported statement; expand subalgebra closure and tensor-generator calculations, reuse existing base-change and radical results, and add one binomial lemma and one exact Mathlib leaf. Arbitrary scheme base changes follow by affine-chart gluing.",
+  "blueprint": "Realizes lem-fin-generic-radicial-smoothing Proof paragraph 3: the power-generated affine base model induces a universal homeomorphism, through the existing generic-geometrically-reduced preparation split.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-0e92e3278",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-0e92e3278 (reviewer sub-agent of L); spot-checked: Read the complete mathematics, all cited statements, Stacks 0545/0BR8/0BRA, and the exact Mathlib leaf. All six steps pass; no duplicate, circular split, or target weakening found. Corrected incomplete metadata in both new-node JSON files under fixes/. Full checks and source locations are in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }
