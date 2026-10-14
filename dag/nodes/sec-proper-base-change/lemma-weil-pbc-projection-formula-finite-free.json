@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-weil-pbc-projection-formula-finite-free",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite-free projection formula",
@@ -17,20 +17,147 @@
  ],
  "proof": [
   {
-   "text": "Both source and target are the shift by $a$ of a finite direct sum of $N$\ncopies of $Rh_*E$. A right adjoint preserves finite products, and in an\nadditive category finite products are finite coproducts. Under these two\nidentifications, the counit defining $\\pi$ is the identity in every summand.\nThe map $\\rho$ is the reverse finite-sum identification, so the two displayed\ncomposites are componentwise identities.",
-   "uses": [],
-   "elementary": null
+   "text": "Write $R$ for the target ring sheaf (the $\\Lambda$ of the statement), $S$ for the source ring sheaf, and use the ringed-topos morphism $h$ and $E\\in D(S)$ of [def-weil-pbc-projection-formula-arrows]. Let $N\\in\\mathbf N$, $a\\in\\mathbf Z$, and give $F=R^{\\oplus N}[a]$ the identity splitting in its only nonzero degree $r=-a$. Use the K-injective representative $I$ and chain models $A=h_*I$, $C=\\operatorname{Tot}(A\\otimes_R F)$, $J=\\operatorname{Tot}(I\\otimes_S h^*F)$, $B=h_*J$ specified in that definition. These represent the source and target of $\\pi$ and $\\rho$. In total degree $n$ there is only the coefficient degree $r=-a$, so $C^n=(h_*I^{n+a})^{\\oplus N}$ and $B^n=h_*((I^{n+a})^{\\oplus N})$. The coefficient differential is zero; both total differentials are induced by $d_I^{n+a}$, by [def-pc-tensor-complex-sheaves]. This description avoids assuming, without a sign calculation, that the right adjoint commutes with shifts.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-finite-free.md",
+    "place": "## Proof, finite-free identifications and componentwise identities, expanded below"
+   }
+  },
+  {
+   "text": "The pulled-back basis maps satisfy $h^*(\\mathrm{pr}_i)h^*(\\iota_j)=\\delta_{ij}$ and $\\sum_jh^*(\\iota_j)h^*(\\mathrm{pr}_j)=1$ by additivity. Moreover $h^*R=S\\otimes_{h^{-1}R}h^{-1}R\\cong S$ by multiplication, with inverse $s\\mapsto s\\otimes1$. Thus these maps identify $h^*(R^{\\oplus N})$ with $S^{\\oplus N}$, also for $N=0$. For an $S$-module sheaf $M$, the ordinary tensor comparison of [lem-weil-pbc-ringed-topoi-module-pullback-tensor] identifies $h^*(h_*M\\otimes_R R^{\\oplus N})$ with $(h^*h_*M)^{\\oplus N}$. The adjunct $t_{M,R^{\\oplus N}}$ of the direct sum of $N$ counits has, after composing with $h_*$ of the $j$th projection, the $j$th projection $(h_*M)^{\\oplus N}\\to h_*M$: the termwise adjunction bijection in [lem-weil-pbc-termwise-adjunction-homotopy] sends $\\varepsilon_M\\circ h^*(\\mathrm{pr}_j)$ to $\\mathrm{pr}_j$. Thus $t_{M,R^{\\oplus N}}$ is the inverse of the product comparison $k_M:h_*(M^{\\oplus N})\\to(h_*M)^{\\oplus N}$. Indeed [lem-weil-pbc-right-adjoint-preserves-limits] applies to the finite discrete category with $N$ objects. Finite module sums are products: the coordinate maps satisfy $\\mathrm{pr}_i\\iota_j=\\delta_{ij}$ and $\\sum_j\\iota_j\\mathrm{pr}_j=1$, as checked sectionwise. Hence $k_M$ is an isomorphism, including when $N=0$. In the notation of the arrow definition, $q_{M,N}=k_M$, and $q_{M,N}t_{M,R^{\\oplus N}}=1=t_{M,R^{\\oplus N}}q_{M,N}$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-right-adjoint-preserves-limits",
+    "def-weil-pbc-projection-formula-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-finite-free.md",
+    "place": "## Proof, finite-free identifications and componentwise identities, expanded below"
+   }
+  },
+  {
+   "text": "Apply Step 2 to $M=I^{n+a}$. Define $t^n=t_{I^{n+a},R^{\\oplus N}}$ and $s^n=q_{I^{n+a},N}$. Naturality of the counit in [lem-weil-pbc-termwise-adjunction-homotopy] and of the tensor comparison gives $B(d_I)t^n=t^{n+1}C(d_I)$. Multiplication by $s^{n+1}$ on the left and $s^n$ on the right gives $s^{n+1}B(d_I)=C(d_I)s^n$. These are exactly the two chain-map equations since $d_F=0$: in the total differential $d_I\\otimes1+(-1)^{n+a}1\\otimes d_F$ the second term vanishes. Thus $t:C\\to B$ and $s:B\\to C$ are inverse chain maps, with $s^nt^n=1$ and $t^ns^n=1$ in every degree.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-finite-free.md",
+    "place": "## Proof, finite-free identifications and componentwise identities, expanded below"
+   }
+  },
+  {
+   "text": "To identify $Qt$ with the particular derived morphism $\\pi$, take a K-flat resolution with flat terms $v:P\\to A$ from [lem-pc-kflat-resolution]. The complexes $F$ and $P\\otimes F$ are K-flat: tensoring an acyclic test complex with $F$ gives a reindexed finite sum of that complex, and tensoring it with $P\\otimes F$ gives a reindexed finite sum of its acyclic tensor with $P$, by [def-pc-kflat-complex]. Acyclicity here is checked by coordinate kernels and images; the standard shift signs are removed by multiplying degree $n$ by $(-1)^{an}$. Terms of $P\\otimes F$ are finite sums of flat terms of $P$, hence flat since tensor exactness can be checked coordinatewise. In degree $n$ the map $v\\otimes1:C_P=P\\otimes F\\to C$ is $(v^{n+a})^{\\oplus N}$ and the differentials are $(d^{n+a})^{\\oplus N}$. Hence its map on degree-$n$ cohomology is $(H^{n+a}(v))^{\\oplus N}$, an isomorphism, so it is a quasi-isomorphism. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], $h^*(P\\otimes F)=h^*P\\otimes h^*F$ represents $Lh^*(Rh_*E\\otimes_R^L F)$ with the canonical tensor comparison. Apply [lem-pc-pre-derived-adjoint-functors-general] to the ordinary module adjunction and its canonical derived adjunction specified by the arrow definition. For that formula take $M=C_P$, $K=J$, and both quasi-isomorphisms $t$ and $s$ to be identities. The cone map $u_{1_{C_P}}:Lh^*(QC_P)\\to Qh^*C_P$ and cocone map $p_{1_J}:Qh_*J\\to Rh_*(QJ)$ are the representative isomorphisms: $C_P$ has K-flat flat terms and $J$ is K-injective by the arrow definition. Essential constancy is provided by the canonical total derived operations stipulated there. Thus its representative formula, under precisely these isomorphisms, says that $Q(t\\circ(v\\otimes1))$ has adjunct the localization of $h^*P\\otimes h^*F\\xrightarrow{h^*v\\otimes1}h^*h_*I\\otimes h^*F\\xrightarrow{\\varepsilon_I\\otimes1}I\\otimes h^*F$. Taking $M=P$, $K=I$, $s=t=1$ in that formula, with their K-flat and K-injective representative isomorphisms, sends $Qv:QP\\to Qh_*I=Rh_*E$ to $Q(\\varepsilon_I\\circ h^*v)$; since $Qv$ is the source representative identification, this is the derived counit $\\varepsilon_E$ under that identification. Consequently the first displayed adjunct is $\\varepsilon_E\\otimes1$ after the canonical derived tensor comparison. This is precisely the defining adjunct of $\\pi$ in [def-weil-pbc-projection-formula-arrows]. Bijectivity of the derived adjunction and cancellation of the isomorphism $Q(v\\otimes1)$ give $Qt=\\pi_{h,E,F}$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "def-weil-pbc-projection-formula-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-finite-free.md",
+    "place": "## Proof, finite-free identifications and componentwise identities, expanded below"
+   }
+  },
+  {
+   "text": "The identity splitting of the only coefficient term makes the formula for $s_{n+a,-a}$ in [def-weil-pbc-projection-formula-arrows] exactly $q_{I^{n+a},N}$; thus the definition of $\\rho$ as the localization of the finite-total chain map gives $Qs=\\rho_{h,E,F}$. Applying the localization functor to the chain equalities $st=1$ and $ts=1$ of Step 3 preserves compositions and identities. With $Qt=\\pi$ from Step 4 these are $\\rho_{h,E,F}\\pi_{h,E,F}=1$ and $\\pi_{h,E,F}\\rho_{h,E,F}=1$.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-finite-free.md",
+    "place": "## Proof, finite-free identifications and componentwise identities, expanded below"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-pbc-projection-formula-arrows",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-pre-derived-adjoint-functors-general"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-finite-free.md",
-  "place": "## Proof"
+  "place": "## Proof; expanded finite-coordinate adjunction and K-flat/K-injective representative argument, using Stacks Tags 0038, 03EL, 06YS, 07A4, 0DVC/0FND"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite free projection formula inverse maps derived category",
+   "results": "CategoryTheory.ProjectiveResolution.homotopyEquiv_inv_π; CategoryTheory.ProjectiveResolution.π'_f_zero; other projective-resolution declarations, none states the projection formula for derived ringed-topos pushforward",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction finite product coproduct additive",
+   "results": "0 hits; query parser reported Unknown identifier `finite`",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "biproduct|finite.*product|finite.*coproduct",
+   "results": "25 hits including Mathlib/CategoryTheory/Idempotents/Biproducts.lean:50, ObjectProperty/FiniteProducts.lean:18-20, Preadditive/LeftExact.lean:89-90; no projection-formula declaration",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite free projection formula inverse maps",
+   "results": "service unavailable (Internal Server Error)",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensoring derived pushforward by a shifted finite direct sum of copies of the tensor unit gives projection formula isomorphism",
+   "results": "CategoryTheory.Tor and Tor' declarations; HomologicalComplex.leftUnitor' and rightUnitor'; these are complex unitor or Tor infrastructure, not this ringed-topos derived adjunction and inverse assertion",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"biproduct\"",
+   "results": "0 hits, valid query",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula",
+   "results": "0 hits in Mathlib/CategoryTheory",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"tensor\"",
+   "results": "10 hits: monoidal adjunction counit/unit tensor compatibilities, rigid tensor adjunctions, tensor algebra and tensor-hom adjunctions; none states these particular derived ringed-topos projection and inverse maps.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -55,5 +182,34 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lemma-weil-pbc-projection-formula-finite-free",
+  "worker": "stage1",
+  "summary": "Expanded the imported finite-free argument into finite-coordinate product comparison, signed one-row tensor chain maps, canonical derived-adjunction identification of pi, and localization of the inverse equations. Reuses existing generic resolution, tensor and adjunction nodes; no new nodes and no statement change.",
+  "blueprint": "Proof sentences 1–2: Step 1 one-row tensor models and Step 2 finite products; sentence 3: Step 2 coordinate counits and Step 4 canonical derived adjunct; final sentence: Steps 3 and 5 explicit chain inverse equations and localization. No downstream projective-summand or totalization theorem is used.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic K-flat resolution or derived adjunction infrastructure needed to identify the specified morphism on representatives; no node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic K-flat resolution or derived adjunction infrastructure needed to identify the specified morphism on representatives; no node of this unit supplies this general statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-pre-derived-adjoint-functors-general"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-662c9942c",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-662c9942c (reviewer sub-agent of L); spot-checked: Read the complete item, report, nine cited statements, blueprint route and cited Stacks sources. All five steps are valid, including identification of the specified derived projection map; finite-rank and shift edge cases pass. No new nodes, dependency cycles or repairs. Accepted the two declared generic tool uses. Recorded coefficient-category and exact master base-change distinctions in review.md."
+ }
 }
