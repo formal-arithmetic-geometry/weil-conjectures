@@ -15,31 +15,33 @@
  ],
  "proof": [
   {
-   "text": "Forget I and K to abelian sheaves. Forgotten injective modules are section-acyclic on every open; the pushed-forward forgotten I computes derived abelian direct image and its injective replacement K computes the same object.",
+   "text": "The concrete standardSectionEdgeLift satisfies the augmentation equation by sectionAugmentationLift_comm. Apply new-abelian-replacement-section-homotopies to this lift and the standard source module resolution. Obtain a quasi-isomorphism q of abelian section complexes and the two comparison homotopies.",
    "uses": [
-    "lem-sc-injective-module-abelian-acyclic-zariski",
-    "new-module-cohomology-ext-resolution-normalization"
+    "new-abelian-replacement-section-homotopies"
    ],
    "elementary": false
   },
   {
-   "text": "The explicitly constructed standardSectionEdgeLift has source injectiveResolution(f_*F) and extends f_*F to f_*I to K. Thus its localized morphism is the canonical morphism of 01F7. Derived adjunction, evaluated at the constant integer source, identifies this with exact inverse image on Ext followed by coeff(f,identity); evaluation at 1 gives constIso(f).symm. The degreewise restriction equation for a identifies the global-section comparison. Apply the canonical acyclic comparisons to obtain the standard-source displayed equality.",
+   "text": "Map both homotopies to degree-p homology. Homology of q is an isomorphism, so cancel it on the right of the required equality. Functoriality of homology replaces each composite with its two factors.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate new-abelian-counit-resolution-calculation on each source class. Its target is already normalized on the supplied module resolution I, followed by the homology of the explicit map to the fixed abelian injective resolution. Substitute the two homology equalities from the homotopies and apply extensionality; this identifies the two composites after q, hence the original composites after cancellation.",
    "uses": [
-    "def-pc-flat-cohomology-comparison",
-    "new-module-cohomology-ext-resolution-normalization"
+    "new-abelian-counit-resolution-calculation"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-flat-cohomology-comparison",
-  "lem-sc-injective-module-abelian-acyclic-zariski",
-  "new-module-cohomology-ext-resolution-normalization"
+  "new-abelian-counit-resolution-calculation",
+  "new-abelian-replacement-section-homotopies"
  ],
  "proof_origin": {
-  "by": "D3 worker",
+  "by": "U2 worker",
   "document": "https://stacks.math.columbia.edu/tag/01FB",
-  "place": "Remark 20.14.2, common section diagram; Section 20.14 (01F7), derived functoriality; Tags 03FD and 06XR, forgotten acyclicity and sections as Ext; standard source resolution and the explicit lift of 013P."
+  "place": "Common section diagram, separated into a counit computation on a fixed abelian resolution and two homotopies of section complexes; final homology cancellation written in Lean."
  },
  "mathlib_searches": [
   {
@@ -130,11 +132,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-0d7ee",
-  "group": "D3",
+  "reviewer": "COMPILER",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261014T030642-L-342139",
+  "landing": "20261014T040543-L-1001509",
   "kind": "interface",
-  "note": "independent Codex review: Lean signatures and proof routes match DAG records; abelianEdgeHom preserves the original composite. Both delivered modules and direct importer ModuleCohomologyExtResolutionEdge compile cleanly; axiom checks show only permitted axioms and sorryAx from the documented remaining theorem."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

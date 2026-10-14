@@ -1,0 +1,153 @@
+{
+ "id": "new-abelian-counit-resolution-calculation",
+ "kind": "statement",
+ "title": "Abelian Ext counit computed on a fixed abelian resolution",
+ "statement": "Let f:X→Y be a morphism of schemes [def-pc-scheme], F an X-module [def-weil-sheaf-of-modules-category], and I and J injective module resolutions [def-sp-injective-resolutions] of F and f_*F respectively. Write T_X and T_Y for forgetting to abelian sheaves. Fix R=injectiveResolution(T_X F). Form the forgotten augmentation of J, apply the exact inverse image f⁻¹, and use descOfQuasiIso to lift the coefficient counit f⁻¹(T_Y(f_*F))→T_X F to R. Let c:Γ(Y,J)→Γ(X,R) be the sections of its adjoint TJ→f_*R, followed by restriction along f⁻¹(Y)=X. For p∈ℕ and x∈H(f_*F,p), the homology map of c applied to abelianResolutionIso(Y,J,p)(x) equals sections of r:T_X I→R on homology applied to abelianResolutionIso(X,I,p) of inverse image on Ext with constIso(f).symm followed by this coefficient counit. Here r is the explicit descOfQuasiIso identity lift from the forgotten augmentation of I, and abelianResolutionIso is the comparison of [new-module-cohomology-ext-resolution-normalization]. This assertion has no module replacement K, map l or comparison a.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01F7",
+  "place": "Lemma 01F8 and equation 01F9, functoriality via the adjoint coefficient map; Tag 06XR, injective-resolution computation; Tag 03FD, forgotten module injectives are acyclic."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "new-module-cohomology-ext-resolution-normalization",
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Forget the module resolution J. Its augmentation is a quasi-isomorphism, and its terms are section-acyclic. The source Ext comparison is therefore the concrete abelianResolutionIso. Inverse image is exact, so its applied augmentation is also a quasi-isomorphism. Use the explicit descOfQuasiIso lift of the coefficient counit to the fixed abelian injective resolution R.",
+   "uses": [
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "new-module-cohomology-ext-resolution-normalization",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute Ext as cocycles in Hom from the constant integer sheaf. Exact inverse image and postcomposition with the lift compute the two Ext operations. Evaluation on the free integer generator identifies Hom with sections. The adjunction identifies the resulting map with sections of counitResolutionAdjoint, followed by restriction along f-inverse(Y)=X. The constant-source identification is constIso(f).symm. These identifications commute with differentials and boundaries. Taking homology gives the equation, including degree zero.",
+   "uses": [
+    "new-module-cohomology-ext-resolution-normalization",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The target acyclic-resolution comparison is the standard abelian-resolution comparison followed by the inverse homology map of r. The section map of r is a quasi-isomorphism by the section-acyclicity of its source and target terms. Compose the comparison with this map on homology: inverse followed by hom cancels. This gives exactly the displayed expression on the supplied resolution I.",
+   "uses": [
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "new-module-cohomology-ext-resolution-normalization",
+    "lem-weil-pbc-leray-acyclicity-quasi-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-weil-pbc-leray-acyclicity-quasi-iso",
+  "new-module-cohomology-ext-resolution-normalization"
+ ],
+ "proof_origin": {
+  "by": "U2 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01F7",
+  "place": "Lemma 01F8 and equation 01F9, functoriality via the adjoint coefficient map; Tag 06XR, injective-resolution computation; Tag 03FD, forgotten module injectives are acyclic."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Applying an exact inverse image functor to Ext and composing with the counit is computed on injective resolutions by the adjoint cochain map on global sections",
+   "results": "UNAVAILABLE: service returned Internal Server Error. No verdict from this search.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The map on cohomology of sheaves defined by inverse image followed by the counit is computed by global sections of an injective resolution comparison",
+   "results": "Eight hits, including InjectiveResolution.iso_hom_naturality and isoRightDerivedObj_hom_naturality. None computes this counit section map.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapExtCounit\"",
+   "results": "Zero hits. Local rg found the source library mapExtCounit API, which defines the Ext map but does not provide its section-complex formula.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "mapExtCounit|acyclicComparison|rightDerivedObjIsoOfResolution",
+   "results": "msearch returned zero hits. Local rg and source inspection found mapExtCounit, extRightDerivedHomObjIso_naturality, acyclicComparison_naturality and the existing standard section diagram. No theorem states the fixed counit calculation.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StandardAbelianExtSectionDiagram",
+  "date": "2026-10-14",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Standard abelian Ext section calculation, Abelian Ext counit computed on a fixed abelian resolution.",
+   "via": [
+    "new-standard-abelian-ext-section-diagram",
+    "new-module-cohomology-ext-section-diagram",
+    "new-module-cohomology-ext-resolution-edge",
+    "new-module-cohomology-ext-edge-comparison",
+    "new-module-cohomology-ext-pullback-comparison",
+    "new-flat-base-change-target-leray-comparison",
+    "new-flat-base-change-affine-canonical-comparisons",
+    "new-flat-base-change-affine-target",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianCounitResolutionCalculation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianCounitResolutionCalculation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.abelian_counit_resolution_calculation",
+  "statement": "theorem abelian_counit_resolution_calculation {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (F : X.Modules) (J : InjectiveResolution ((pushforward f).obj F))\n    (I : InjectiveResolution F) (p : ℕ) (x : H ((pushforward f).obj F) p) :\n    ((HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (.up ℕ) p).map\n      (counitSectionMap f F J)) ((abelianResolutionIso Y J p).hom x) =\n    ((HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (.up ℕ) p).map\n      (((abelianSections X).mapHomologicalComplex (.up ℕ)).map\n        (forgottenResolutionMap X I)))\n      ((abelianResolutionIso X I p).hom (Sheaf.H.map (coeff f (𝟙 ((pushforward f).obj F))) p\n        (Sheaf.H.mapFunctor (invImage f) (constIso f).symm\n          ((SheafOfModules.toSheaf Y.ringCatSheaf).obj ((pushforward f).obj F)) p x)))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261014T040543-L-1001509",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261014T040543-L-1001509",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

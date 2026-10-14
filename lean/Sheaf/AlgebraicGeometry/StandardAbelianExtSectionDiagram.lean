@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNormalization
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopies
 
 /-! # The standard-source abelian Ext section calculation
 
@@ -135,6 +136,35 @@ theorem standard_abelian_ext_section_diagram {X Y : Scheme.{u}} (f : X ⟶ Y)
       standardSectionExtHom f F p ≫
         (abelianResolutionIso X I p).hom ≫
         (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (.up ℕ) p).map
-          (a.hom ≫ ((moduleSections Y).mapHomologicalComplex (.up ℕ)).map l) := by sorry
+          (a.hom ≫ ((moduleSections Y).mapHomologicalComplex (.up ℕ)).map l) := by
+  let J := injectiveResolution ((pushforward f).obj F)
+  let β := standardSectionEdgeLift f I K hK l
+  let Γ := (moduleSections Y).mapHomologicalComplex (.up ℕ)
+  let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (.up ℕ) p
+  have hβ : J.ι.f 0 ≫ β.f 0 = (pushforward f).map (I.ι.f 0) ≫ l.f 0 :=
+    sectionAugmentationLift_comm _ _ _ _ _
+  obtain ⟨q, hq, ⟨h₁⟩, ⟨h₂⟩⟩ :=
+    abelian_replacement_section_homotopies f I J K hK l hl β hβ a ha
+  have : QuasiIso q := hq
+  have h₁' : H.map (Γ.map β) ≫ H.map q = H.map (counitSectionMap f F J) := by
+    simpa only [H, Functor.map_comp, HomologicalComplex.homologyFunctor_map,
+      HomologicalComplex.homologyMap_comp] using
+      h₁.homologyMap_eq p
+  have h₂' : H.map (a.hom ≫ Γ.map l) ≫ H.map q =
+      H.map (((abelianSections X).mapHomologicalComplex (.up ℕ)).map
+        (forgottenResolutionMap X I)) := by
+    simpa only [H, Functor.map_comp, HomologicalComplex.homologyFunctor_map,
+      HomologicalComplex.homologyMap_comp] using
+      h₂.homologyMap_eq p
+  have : IsIso (H.map q) := by
+    change IsIso (HomologicalComplex.homologyMap q p)
+    infer_instance
+  apply (cancel_mono (H.map q)).1
+  change ((abelianResolutionIso Y J p).hom ≫ H.map (Γ.map β)) ≫ H.map q =
+    (standardSectionExtHom f F p ≫ (abelianResolutionIso X I p).hom ≫
+      H.map (a.hom ≫ Γ.map l)) ≫ H.map q
+  rw [Category.assoc, h₁', Category.assoc, Category.assoc, h₂']
+  ext x
+  exact abelian_counit_resolution_calculation f F J I p x
 
 end AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution
