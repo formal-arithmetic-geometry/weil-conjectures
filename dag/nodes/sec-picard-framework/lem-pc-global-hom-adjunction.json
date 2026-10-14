@@ -26,14 +26,10 @@
  ],
  "proof": [
   {
-   "text": "Obtain the natural comparison family from exists_canonicalPullbackTensorComparison. On K-flat representatives P,N use its characterising chain-isomorphism equation. The localization tensor model map is invertible by the upstream derived-monoidal K-flat counit theorem; convert sheaf K-flatness to categorical K-flatness using the acyclicity criterion and symmetry. Any universal pullback counit is invertible on K-flat complexes: compare it with the counit supplied by exists_derivedPullback using the universal left-derived lift, which is invertible by uniqueness. Tensor of P,N is K-flat, and pullback of P is K-flat. Therefore both sides of the characterising equation are composites of isomorphisms except for the comparison itself. Cancel the invertible right factor to prove the comparison invertible at (Q(P),Q(N)). For each arbitrary derived object choose a complex representative and a K-flat resolution and localize its quasi-isomorphism. Pair the resulting representative isomorphisms and apply naturality to transport component invertibility. Package the family as NatIso.ofComponents. Its hom components are definitionally the original family, so the canonical predicate is unchanged. The private helpers pullbackTensorModelMap_isIso and pullbackCounit_isIso and exists_schemeHomTensorPullbackIso implement this argument without any new hole.",
+   "text": "Obtain the natural comparison family tau from exists_canonicalPullbackTensorComparison. Apply canonicalPullbackTensor_monoidal_realization, the proved statement of lem-pc-canonical-pullback-tensor-monoidal-realization, to obtain a core-monoidal structure whose inverse tensorator at every pair is tau. Package tau as a natural transformation using the naturality clause of its canonical predicate. Rewrite each component as that inverse tensorator to prove it is invertible, and package the transformation as NatIso.ofComponents. Its hom components are definitionally tau, so the canonical predicate is unchanged. Reconstruct schemeHomTensorPullbackIso componentwise with the same hom components; Iso.ext identifies it with the original chosen iso. The existing IsCanonicalPullbackTensorComparison.unique fixes this family for the shared counit. This shorter route replaces the private model-map and counit-invertibility helpers and the repeated K-flat resolution argument, without adding holes.",
    "uses": [
     "def-pc-derived-pullback-tensor-comparison",
-    "def-pc-derived-pullback",
-    "def-pc-scheme-derived-tensor-structure",
-    "lem-pc-kflat-resolution",
-    "lem-pc-kflat-pullback-preservation",
-    "lem-pc-kflat-tensor-product"
+    "lem-pc-canonical-pullback-tensor-monoidal-realization"
    ],
    "elementary": false,
    "source": {
@@ -46,7 +42,9 @@
    "uses": [
     "def-pc-canonical-derived-tensor-hom-bijection",
     "def-pc-derived-pullback-tensor-comparison",
-    "def-pc-derived-base-change-map"
+    "def-pc-derived-base-change-map",
+    "def-pc-derived-pullback",
+    "def-pc-scheme-derived-tensor-structure"
    ],
    "elementary": false,
    "source": {
@@ -84,13 +82,11 @@
  ],
  "proof_deps": [
   "def-pc-derived-pullback-tensor-comparison",
-  "def-pc-derived-pullback",
-  "def-pc-scheme-derived-tensor-structure",
-  "lem-pc-kflat-resolution",
-  "lem-pc-kflat-pullback-preservation",
-  "lem-pc-kflat-tensor-product",
+  "lem-pc-canonical-pullback-tensor-monoidal-realization",
   "def-pc-canonical-derived-tensor-hom-bijection",
   "def-pc-derived-base-change-map",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure",
   "lem-pc-qcqs-derived-direct-image-right-adjoint",
   "lem-pc-qcqs-sheaf-rhom-adjunction",
   "def-pc-global-derived-rhom",
@@ -101,7 +97,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0B6I with the explicit evaluation mate calculation of cohomology Tag 08I3; implemented by R3; Leray reduction via global-sections acyclicity implemented and second-read by G3; canonical tensor-isomorphism proof on K-flat pairs and naturality transport implemented by V2, 2026-10-13"
+  "place": "Tag 0B6I with the explicit evaluation mate calculation of cohomology Tag 08I3; implemented by R3; Leray reduction via global-sections acyclicity implemented and second-read by G3; canonical tensor-isomorphism proof on K-flat pairs and naturality transport implemented by V2, 2026-10-13; Q3 second reading: use the proved monoidal-realization theorem for canonical tensor component invertibility, preserve chosen iso by componentwise reconstruction and Iso.ext, 2026-10-14"
  },
  "mathlib_searches": [
   {
@@ -201,13 +197,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "S3",
+  "reviewer": "X-ce869",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261014T010853-L-3167784",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [],
-  "sorry_after": []
+  "landing": "20261014T025141-L-158024",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matched with unchanged signatures, node statements and proof dependencies; verified definition equality, axioms, all 20 direct importers, and original-fails/adapted-passes compilation."
  }
 }
