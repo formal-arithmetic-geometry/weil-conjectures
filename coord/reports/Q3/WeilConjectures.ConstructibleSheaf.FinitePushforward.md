@@ -1,122 +1,72 @@
 ## What changed
 
-Replaced the proof of
-`AlgebraicGeometry.Etale.isIso_unit_constantSheaf_of_isIntegrallyClosed` by a constructor
-using two strict conjunct declarations, and added those declarations in dedicated modules.
-The finite-presentability and Noetherian-descent proofs were already complete in the repository
-baseline and are unchanged. The wrapper's proof-only imports were adjusted while unused imports
-were pruned. No theorem signatures or definitions changed.
+Closed `AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian` by
+assembling a pointwise finite-pushforward detector with a Noetherian module finite-selection
+statement. Added the detector and selection modules and their DAG nodes. The existing
+normal-constant wrapper and its two proof-only split modules remain in the delivery.
 
 ## Proved and sorry left
 
-The original hole in
-`AlgebraicGeometry.Etale.isIso_unit_constantSheaf_of_isIntegrallyClosed` is decomposed by a
-constructor proof from two strict conjuncts; this is a decomposition rather than a direct
-proof because both conjunct declarations remain open. The existing holes in
-`AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian` remains open.
-`AlgebraicGeometry.Etale.isFinitelyPresentable_of_isConstructibleSheaf` and
-`AlgebraicGeometry.Etale.exists_isNoetherian_upperStar_iso` were already proved before this
-delivery and are not counted as newly closed holes. The following declarations remain sorry:
+Proved:
 
-- `AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian`
+- `AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian`.
+
+The following named obligations remain sorry:
+
+- `AlgebraicGeometry.Etale.exists_noetherian_stalk_detector`
+  (`new-lem-weil-pbc-noetherian-stalk-detector`);
+- `AlgebraicGeometry.Scheme.exists_mono_biproduct_of_constructible_module_stalk_injective_general`
+  (`new-lem-weil-pbc-noetherian-module-finite-selection`);
 - `AlgebraicGeometry.Etale.isIso_unit_constantSheaf_generic_unit`
+  (`lem-weil-pbc-normal-constant-generic-unit`);
 - `AlgebraicGeometry.Etale.isIso_unit_constantSheaf_open_unit`
+  (`lem-weil-pbc-normal-constant-generic-open-unit`).
 
 ## No longer needed
 
-The following proof-only imports remain removed because the delivered proofs do not use them:
-
-- `Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk`
-- `Sheaf.AlgebraicGeometry.ConstructibleFiniteSelection`
-- `Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePresentation`
-- `Sheaf.AlgebraicGeometry.EtaleLocalRingTriples`
-- `Sheaf.AlgebraicGeometry.EtaleSheaves`
-- `Sheaf.AlgebraicGeometry.NormalScheme`
-- `Sheaf.AlgebraicGeometry.StrictHenselization`
-- `Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula`
-- `Sheaf.RingTheory.EtaleColimitNormalLocalDomain`
-- `Sheaf.RingTheory.StrictHenselizationTriples`
-- `WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections`
-- `WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint`
-- `WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs`
-
-No DAG node became unreachable; all remaining imports are used by a completed proof or a public
-statement.
-
-The previous full geometric proof recorded these proof dependencies for the normal-unit node;
-the constructor route no longer uses them directly:
-
-- `lem-weil-pbc-constant-sheaf-maps-global-sections`
-- `lemma-constructible-pullback-constant`
-- `def-weil-pbc-direct-image`
-- `def-weil-pbc-inverse-image`
-- `lem-weil-pbc-qcqs-morphism-permanence`
-- `def-weil-pbc-scheme-conventions`
-- `def-weil-geometric-point`
-- `def-pc-integral-scheme`
-- `def-sbc-normal-dominant-galois`
-- `def-weil-pbc-strict-henselization-limit`
-- `lem-weil-pbc-etale-local-ring-triples`
-- `lem-weil-pbc-strict-henselization-triples`
-- `lem-weil-pbc-etale-colimit-normal-local-domain`
-- `def-pc-fibre-product`
-- `lem-weil-pbc-generic-fibre-localization-domain-irreducible`
-- `prop-weil-pbc-strict-henselization-stalk-formula`
-- `def-weil-pbc-etale-sheaves`
-- `def-weil-pbc-geometric-stalks`
-- `lem-weil-pbc-constant-sheaf-geometric-stalk`
-- `lem-weil-pbc-constant-sheaf-sections-connected`
-- `lemma-weil-pbc-geometric-stalk-conservative`
-- `lem-weil-pbc-inverse-image-composition`
+Removed the direct `Sheaf.AlgebraicGeometry.ConstructibleFiniteSelection` import and the
+finite-carrier comparison and selection route. The proof now uses the Noetherian module
+selection intermediate directly. The discarded non-finite-coefficient branch split is not
+delivered because the general detector and selection statements cover the original
+Noetherian-ring hypothesis.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The worker report described two proofs as restored even though those proofs were already present
-in the supplied repository baseline. The only proof change is the normal-constant wrapper and
-its two explicit split obligations; no target statement was weakened.
+The earlier route split on whether the coefficient ring had a finite underlying type, which
+introduced a branch with the same conclusion as the target and could not be a strict
+reduction. The corrected route states two genuine parts of the planned proof: pointwise
+finite-stage detection and finite selection of stalk-injective maps over a Noetherian ring.
 
 ## New nodes
 
-- `lem-weil-pbc-normal-constant-generic-unit`: split-off generic-point unit theorem in
-  `Sheaf.AlgebraicGeometry.NormalConstantGenericUnit`, still `sorry` and requiring the
-  strict-henselian affine-etale section calculation from Tag 09Z5.
-- `lem-weil-pbc-normal-constant-generic-open-unit`: split-off nonempty-open unit theorem in
-  `Sheaf.AlgebraicGeometry.NormalConstantOpenUnit`, still `sorry` and requiring the same
-  calculation after restriction to a nonempty open.
+- `new-lem-weil-pbc-noetherian-stalk-detector`: pointwise finite pushforward detector.
+- `new-lem-weil-pbc-noetherian-module-finite-selection`: finite selection of module stalk
+  detectors over a Noetherian coefficient ring.
 
 ## Second reading by Q3
 
-1. **Interface:** Compared the delivered module with the repository version using `diff`.
-   Every existing declaration signature and definition is unchanged; the item changes only
-   proof text and proof-only imports. The two added modules introduce the two explicitly
-   split conjunct statements.
+1. **Statements and signatures.** I compared every delivered existing module and declaration
+   with `sheaf-dag`. The target theorem signature is byte-for-byte unchanged. The generic-point
+   and open-unit modules are unchanged; the two detector and finite-selection declarations are
+   new split statements with their own nodes.
+2. **Proof checks.** All five delivered Lean modules compile locally. The target theorem is
+   closed without `sorry`; the only remaining `sorry`s are the two named split theorems, each
+   documented and represented by a DAG node. No axiom, `unsafe`, `opaque`, `extern`, or hollow
+   definition was introduced. The restored normal-constant modules retain their previously
+   checked proofs.
+3. **New statements.** I checked the detector statement against Stacks Tag 09Z6 (3), including
+   the pointwise geometric-stalk condition and finite-module value. I corrected the finite
+   selection proof description to use the Noetherian-object finite-selection argument from that
+   lemma, rather than the earlier unsupported generic-kernel propagation claim. Both new nodes
+   record the corresponding source and proof route.
+4. **Pruning.** The old finite-carrier selection import is removed because the target proof now
+   uses the Noetherian detector and selection interfaces. No existing proof dependency or module
+   was removed from the normal-constant route, and the unit `sk-thm-p1` route is preserved.
+5. **DAG agreement.** The target node's `proof`, `proof_deps`, and `proof_origin` now match the
+   two split declarations used by the Lean proof. Existing node metadata was restored unchanged;
+   only the target node's stage-3-owned proof fields and the two new node files differ.
 
-2. **Proof and trust:** Compiled all three delivered modules in sandbox import order with
-   `lcompile.py`; compilation succeeds without warnings. A source scan found no forbidden
-   declarations and no `sorry` in a definition. The finite-presentability theorem has only
-   the permitted axioms; the normal-unit wrapper and Noetherian-descent helper inherit
-   `sorryAx` solely through the three named open declarations listed above and existing
-   imported descent/Noetherian lemmas.
-
-3. **Split statements:** The generic-point and nonempty-open declarations are strict
-   conjuncts of the original 09Z5 statement, with the same hypotheses and the corresponding
-   single conclusion. Their statements spell out those hypotheses independently, so the DAG
-   has no statement/proof dependency cycle through the parent node. Their docstrings give the
-   Stacks source and the remaining geometric proof obligation; no duplicate library theorem
-   was found.
-
-4. **Route and pruning:** The wrapper proof is the direct constructor route through the two
-   split declarations. The finite-presentability proof uses the affine-free presentation,
-   filtered-colimit sections, and finite-colimit presentability route. Removed proof-only
-   imports are unused by compilation, and the unit's generic/open route is retained.
-
-5. **DAG agreement:** The new node records match the declarations, sources, statements and
-   split status, and the existing normal-unit node now records the constructor route and its
-   two split dependencies. Existing target statements remain unchanged. The delivery records
-   the original normal-unit hole as a two-node decomposition and records the three remaining
-   named holes without adding a hollow definition.
-
-Changes by this reader: added this independent second-reading section; no Lean repair was
-needed after compilation and signature comparison.
-
-
+I restored the previously proved generic-point and open-unit module bodies after finding that
+the worker's version replaced them with `sorry`. I also restored their existing DAG metadata and
+updated the finite-selection node and module documentation to describe the Stacks Noetherian
+finite-selection route accurately.

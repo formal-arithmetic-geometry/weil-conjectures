@@ -18,7 +18,8 @@ import Mathlib.CategoryTheory.Presentable.Directed
 import Sheaf.AlgebraicGeometry.ConstructibleAffineFreePresentationGeneral
 import Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit
 import Mathlib.CategoryTheory.Presentable.Limits
-import Sheaf.AlgebraicGeometry.ConstructibleFiniteSelection
+import Sheaf.AlgebraicGeometry.ConstructibleModuleNoetherianStalkDetector
+import Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteSelectionGeneral
 
 /-!
 # Constructible sheaves embed into finite pushforwards of constant sheaves
@@ -195,7 +196,23 @@ theorem Etale.exists_mono_biproduct_lowerStar_of_isNoetherian [IsNoetherianRing 
       (M : Fin r → ModuleCat.{u + 1} Λ) (_ : ∀ i, Module.Finite Λ (M i))
       (φ : C ⟶ ⨁ fun i ↦ ((h i)_*[ModuleCat.{u + 1} Λ]).obj
         ((constantSheaf (V i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))), Mono φ :=
-  sorry
+  by
+    classical
+    obtain ⟨Y, f, hf, M, hM, ψ, hψ⟩ := exists_noetherian_stalk_detector Λ C
+    let G (x : U) := (lowerStar (ModuleCat.{u + 1} Λ) (f x)).obj
+      ((constantSheaf (Y x).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M x))
+    have htests : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
+        (s : Spec (.of Ω) ⟶ U),
+        ∃ x : U, Function.Injective
+          (((Scheme.pointSmallEtale s).sheafFiber
+            (A := ModuleCat.{u + 1} Λ)).map (ψ x)) := by
+      intro Ω _ _ s
+      exact ⟨((Scheme.SpecToEquivOfField Ω U) s).1, hψ _ Ω s rfl⟩
+    obtain ⟨r, l, hφ⟩ :=
+      Scheme.exists_mono_biproduct_of_constructible_module_stalk_injective_general
+        Λ U C U G ψ htests
+    exact ⟨r, fun i ↦ Y (l i), fun i ↦ f (l i), fun i ↦ hf (l i),
+      fun i ↦ M (l i), fun i ↦ hM (l i), biproduct.lift (fun i ↦ ψ (l i)), hφ⟩
 
 section Auxiliary
 
