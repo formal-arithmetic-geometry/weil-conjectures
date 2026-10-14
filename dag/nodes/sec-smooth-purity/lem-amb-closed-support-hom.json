@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-amb-closed-support-hom",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Closed support as a relative section complex",
@@ -15,32 +15,156 @@
  "stmt_deps": [
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-etale-sheaves",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-kinjective-resolutions",
+  "def-weil-pbc-global-sections-functor"
  ],
  "proof": [
   {
-   "text": "The sequence\n$0\\to v_!A_V\\to A_T\\to i_*A_D\\to0$ is exact:\nat a geometric point of $V$ it is\n$0\\to A\\xrightarrow{1}A\\to0$, and at a point\nof $D$ it is $0\\to0\\to A\\xrightarrow{1}A\\to0$.\nThis stalk computation uses exact closed direct image\nfrom [lemma-weil-pbc-finite-direct-image-exact] and\nconservativity from\n[lemma-weil-pbc-geometric-stalk-conservative].\nApply derived Hom into $K$ to its triangle.\nThe open adjunction of\n[lem-amb-etale-adjoint-locality] identifies\n$R\\operatorname{Hom}_T(v_!A_V,K)$ with\n$R\\Gamma(V,v^*K)$; both adjoints are exact, so\nthe derived identification holds on arbitrary complexes.\nThe resulting Hom triangle is exactly the asserted cone.",
+   "text": "Write $A_T,A_D,A_V$ for the constant coefficient ring sheaves (the commutative-ring convention of the derived-category definition). Apply [lem-weil-pbc-open-closed-short-exact] to the $A_T$-module $A_T$. By [prop-weil-pbc-inverse-image-modules-exact], $v^{-1}A_T=A_V$ and $i^{-1}A_T=A_D$, canonically. Thus obtain $0\\to v_!A_V\\xrightarrow{\\varepsilon}A_T\\xrightarrow{\\eta}i_*A_D\\to0$ in $A_T$-modules, with the adjunction counit and unit as its maps. This result applies to arbitrary open complements, with no finite-type hypothesis on $v$.",
    "uses": [
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-amb-etale-adjoint-locality"
+    "lem-weil-pbc-open-closed-short-exact",
+    "prop-weil-pbc-inverse-image-modules-exact"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095L, lemma-ses-associated-to-open; constant coefficient inverse image as in Modules on Sites, Tag 04JC"
+   }
+  },
+  {
+   "text": "The category $\\Mod(T_{\\Et},A)$ is Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian]. Apply [lem-pur-kinjective-degreewise-existence] in that category to choose a functorial quasi-isomorphism $K\\to I$ with $I$ K-injective and each $I^n$ injective. Put $C^n=\\Hom_T(i_*A_D,I^n)$, $E^n=\\Hom_T(A_T,I^n)$, and $B^n=\\Hom_T(v_!A_V,I^n)$, with differentials given by postcomposition with $d_I$. These are $A$-module complexes; the global Hom-complex convention is [def-weil-pbc-kinjective-resolutions].",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-pur-kinjective-degreewise-existence",
+    "def-weil-pbc-kinjective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079P, theorem-K-injective-embedding-grothendieck; Modules on Sites Tags 03DA, 03DB, 03EW"
+   }
+  },
+  {
+   "text": "Applying $\\Hom_T(-,I^n)$ to the sequence of step 1 gives $0\\to C^n\\to E^n\\xrightarrow{q^n}B^n\\to0$: a morphism vanishing on $v_!A_V$ factors uniquely through its cokernel $i_*A_D$, and surjectivity of $q^n$ is exactly the extension property defining the injective object $I^n$ [def-sp-injective-resolutions]. Postcomposition with $d_I$ commutes with precomposition, so these are a short exact sequence of complexes. The adjunction [lem-weil-pbc-extension-by-zero-adjunction] identifies $B^n$ with $\\Hom_V(A_V,v^*I^n)=\\Gamma(V,v^*I^n)$, and $E^n=\\Gamma(T,I^n)$: a module map out of the rank-one constant ring sheaf is determined by the image of $1$, and a section $s$ defines the map $a\\mapsto as$. These identifications commute with $d_I$. The counit formula in the adjunction node shows that $q$ is precisely restriction of sections, not an unspecified map between these complexes.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-global-sections-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 095L and 03S4; Modules on Sites Tag 03DI, lemma-extension-by-zero"
+   }
+  },
+  {
+   "text": "The restriction $v^*$ is exact by [prop-weil-pbc-inverse-image-modules-exact], and is right adjoint to the exact functor $v_!$ by [lem-weil-pbc-extension-by-zero-adjunction] and [lem-weil-pbc-extension-by-zero-exact]. Hence [lem-weil-pbc-right-adjoint-preserves-kinjective] says that $v^*I$ is K-injective, while exactness makes $v^*K\\to v^*I$ a quasi-isomorphism. Step 2 also applies with $V$ in place of $T$, so both sheaf categories have enough K-injectives. The K-injective computation [lem-weil-pbc-kinjective-total-derived] identifies $E=\\Gamma(T,I)$ with $R\\Gamma(T,K)$ and $B=\\Gamma(V,v^*I)$ with $R\\Gamma(V,v^*K)$ on the whole unbounded derived categories. Here termwise global sections, followed by localization to $D(A)$, is an exact functor on the homotopy category: it commutes with finite direct sums, shifts and the displayed cone differential. The same computation applied to $\\Hom_T(i_*A_D,-)$ identifies $C$ with ordinary global $R\\Hom_T(i_*A_D,K)$; termwise Hom from this fixed degree-zero sheaf likewise commutes with shifts and cones. Step 3 identifies the derived restriction morphism with $q:E\\to B$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08BJ (lemma-adjoint-preserve-K-injectives) and 070K (lemma-enough-K-injectives-implies)"
+   }
+  },
+  {
+   "text": "Use the cone convention of [def-weil-abstract-derived-category]. The complex $\\operatorname{Cone}(q)[-1]$ has degree-$n$ term $B^{n-1}\\oplus E^n$ and differential $(b,e)\\mapsto(-d_Bb-q(e),d_Ee)$. The map $C\\to\\operatorname{Cone}(q)[-1]$, $c\\mapsto(0,c)$, is a chain map and a quasi-isomorphism, as follows directly from degreewise surjectivity of $q$. For a cocycle $(b,e)$, choose $a\\in E^{n-1}$ with $q(a)=-b$; subtracting the boundary of $(0,a)$ leaves $(0,e-d_Ea)$ with $e-d_Ea\\in C^n$. Conversely, if $(0,c)$ is the boundary of $(b,e)\\in B^{n-2}\\oplus E^{n-1}$, then $q(e)=-d_Bb$; choose $a\\in E^{n-2}$ with $q(a)=b$, and $e+d_Ea\\in C^{n-1}$ has differential $c$. Thus the map induces bijections on every cohomology group. It is natural for chain maps $I\\to I'$, since it is just inclusion into the second summand. The functorial resolution from step 2 therefore gives naturality in $K$ at the complex level. To descend this naturality to derived categories, let $f:K\\to K\\prime$ be a quasi-isomorphism. Naturality of the resolution maps gives $I(f)\\eta_K=\\eta_{K\\prime}f$, so $I(f)$ is a quasi-isomorphism. By [lem-weil-pbc-kinjective-hom-derived] it is a homotopy equivalence. More explicitly, a homotopy $h:I^n\\to (I\\prime)^{n-1}$ with $f_I-g_I=d_{I\\prime}h+hd_I$ induces homotopies $h_C,h_E,h_B$ by postcomposition, and $q\\prime h_E=h_Bq$. On the shifted cones the degree-minus-one map $H(b,e)=(-h_Bb,h_Ee)$ satisfies $dH+Hd=(f_B-g_B)\\oplus(f_E-g_E)$: the off-diagonal term is $-q\\prime h_E+h_Bq=0$, and the diagonal terms are $d_Bh_B+h_Bd_B$ and $d_Eh_E+h_Ed_E$. Thus a homotopy inverse for $I(f)$ induces homotopy inverses on $C,E,B$ and the shifted cone, and inclusion $c\\mapsto(0,c)$ commutes with these maps. Both sides and their comparison therefore invert quasi-isomorphisms of $K$ and descend through localization. Combining this quasi-isomorphism with step 4 gives the asserted natural isomorphism in $D(A)$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-closed-support-hom.md",
+    "place": "Proof, final sentence; explicit signed cone and naturality calculation by NV"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-amb-etale-adjoint-locality"
+  "lem-weil-pbc-open-closed-short-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-pur-kinjective-degreewise-existence",
+  "def-weil-pbc-kinjective-resolutions",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-global-sections-functor",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-total-derived",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-hom-derived"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-closed-support-hom.md",
-  "place": "## Proof"
+  "place": "Proof, expanded using Stacks Tags 095L, 079P, 08BJ, 070K and an explicit cone calculation"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from the constant sheaf pushed forward from a closed subset is the shifted mapping cone of restriction of derived global sections to its open complement",
+   "results": "CategoryTheory.Sheaf.cohomologyPresheafFunctor; CategoryTheory.Sheaf.H; CategoryTheory.Sheaf.cohomologyPresheaf; AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.restrictFunctor; TopCat.Sheaf.pullbackPushforwardAdjunction; TopCat.Sheaf.extend_hom_app; inspected hits: sheaf cohomology/Ext, Zariski restriction adjunctions, or Mayer-Vietoris free abelian sheaves, not the claimed closed-support derived isomorphism",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "closedSupport|closed.support|extensionByZero",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of etale sheaves gives short exact sequence extension by zero constant sheaf closed pushforward and relative cohomology mapping cone",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g; Algebra.basicOpen_subset_etaleLocus_iff; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex; inspected hits: sheaf cohomology/Ext, Zariski restriction adjunctions, or Mayer-Vietoris free abelian sheaves, not the claimed closed-support derived isomorphism",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom closed immersion constant sheaf equals relative cohomology of open complement",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"support\", \"Hom\"",
+   "results": "HasCompactMulSupport.comp_homeomorph; HasCompactSupport.comp_homeomorph; HomologicalComplex.IsStrictlySupported; HomologicalComplex.IsStrictlySupportedOutside; HomologicalComplex.IsSupported; HomologicalComplex.IsSupportedOutside; HomologicalComplex.instIsSupportedOfIsStrictlySupported; HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside; hits concern supports of functions or complex shapes, not etale closed support",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeCohomology|sectionsWithSupport|localCohomology|extension.*zero",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A short exact sequence of sheaves yields relative cohomology as the homotopy fibre of restriction to an open subscheme",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃; CategoryTheory.Sheaf.cohomologyPresheaf; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact; CategoryTheory.Sheaf.cohomologyPresheafFunctor; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f; read MayerVietorisSquare.lean:231-266: free abelian sheaves of a site square, not derived relative sections or a one-line specialization",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -72,5 +196,64 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-amb-closed-support-hom",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged; replaced the finite-type open adjunction application by unrestricted etale extension-by-zero tools. Used the existing open-closed short exact sequence, Grothendieck and functorial degreewise injective K-injective resolutions, and generic K-injective computation lemmas. Wrote the exact Hom sequence, restriction-map identification, signed cone quasi-isomorphism and derived naturality explicitly. No new nodes. Second reader made enough-K-injectives on V and the signed induced cone homotopy and localization argument explicit.",
+  "blueprint": "Proof: initial exact sequence realized by step 1, derived Hom construction by steps 2-3, open adjunction by steps 3-4, resulting cone and naturality by step 5.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Generic tool: The open-closed short exact sequence of an etale sheaf; supplies the indicated step without replacing the compact-support base-change route, and this unit has no lemma with the same unrestricted hypotheses."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic tool: Inverse image of etale sheaves of modules over a constant ring is exact; supplies the indicated step without replacing the compact-support base-change route, and this unit has no lemma with the same unrestricted hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic tool: Sheaves of Lambda-modules on the small etale site form a Grothendieck abelian category; supplies the indicated step without replacing the compact-support base-change route, and this unit has no lemma with the same unrestricted hypotheses."
+   },
+   {
+    "node": "lem-pur-kinjective-degreewise-existence",
+    "why": "Generic tool: Functorial K-injective resolutions with injective terms; supplies the indicated step without replacing the compact-support base-change route, and this unit has no lemma with the same unrestricted hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic tool: Extension by zero is left adjoint to restriction (étale site); supplies the indicated step without replacing the compact-support base-change route, and this unit has no lemma with the same unrestricted hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic tool: Extension by zero is exact (étale site); supplies the indicated step without replacing the compact-support base-change route, and this unit has no lemma with the same unrestricted hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic tool: A right adjoint of an exact functor preserves K-injective complexes; supplies the indicated step without replacing the compact-support base-change route, and this unit has no lemma with the same unrestricted hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic tool: Enough K-injectives compute total right derived functors; supplies the indicated step without replacing the compact-support base-change route, and this unit has no lemma with the same unrestricted hypotheses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-open-closed-short-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-total-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-28bcfaaa7",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-28bcfaaa7 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages and unit/chapter route. Verified unrestricted étale hypotheses, the restriction morphism, unbounded K-injective computations, cone signs and derived naturality. Edge cases pass; no new nodes, duplicates or dependency cycle found. Accepted all eight proposed tool_uses. No coefficient-category comparison or target theorem is inferred. Detailed checks are in review.md; no repairs required."
+ }
 }
