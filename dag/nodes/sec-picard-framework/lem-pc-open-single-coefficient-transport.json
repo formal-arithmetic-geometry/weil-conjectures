@@ -1,0 +1,134 @@
+{
+ "id": "lem-pc-open-single-coefficient-transport",
+ "kind": "statement",
+ "title": "Single coefficient transport over an open subscheme",
+ "statement": "theorem exists_openSingle_coefficient_transport\n    {Y P P' : Scheme.{u}} (U : Y.Opens) (M : Y.Modules)\n    (r : P ⟶ Y) (r' : P' ⟶ U.toScheme) (k : P' ≅ P)\n    (hr : k.hom ≫ r = r' ≫ U.ι) :\n    let K := (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj M\n    let N := M.restrict U.ι\n    let a : (derivedPullback U.ι).obj K ≅\n        (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 0).obj N :=\n      (singleComplexOpenPullbackIso Y U).app K ≪≫\n        ((schemeOpenRestriction Y U).mapDerivedCategorySingleFunctor 0).app M ≪≫\n        (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 0).mapIso\n          ((Scheme.Modules.overFunctorEquiv U).app M)\n    let T := (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings P.toRingedSpace)) 0).obj\n      ((Scheme.Modules.tensorPullback r).obj M)\n    let T' := (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings P'.toRingedSpace)) 0).obj\n      ((Scheme.Modules.tensorPullback r').obj N)\n    ∃ d : (derivedPullback k.hom).obj T ≅ T',\n      (derivedPullback k.hom).map (Scheme.picardTermwiseSingleMap r M) ≫ d.hom =\n        (relativeMVComp k.hom r).hom.app K ≫\n          eqToHom (congrArg (fun f ↦ (derivedPullback f).obj K) hr) ≫\n          (relativeMVComp r' U.ι).inv.app K ≫ (derivedPullback r').map a.hom ≫\n          Scheme.picardTermwiseSingleMap r' N",
+ "stmt_deps": [
+  "def-pc-relative-mv-maps",
+  "def-pc-single-complex-open-restriction-data",
+  "lem-sc-picard-termwise-single-map-composition"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 06YJ, 08HY and 0D5S; source coefficient and mate calculations of lem-pc-standard-single-base-change-top-restriction-compatibility"
+ },
+ "proof": [
+  {
+   "text": "Use openPinnedTensorOpenIso and overFunctorEquiv to form rho. The defining leftDerivedUnique factorization, exact restriction single factorization and naturality of singleMapHomologicalComplex identify the displayed a with q_U followed by single(rho). Construct b from inverse tensor composition for k.hom,r with the path equality hr, tensor composition for r',U.ι and tensorPullback r' of rho. The section variable supplies HasDerivedCategory for every scheme; no additional tensor-additivity hypothesis is retained by the public theorem.",
+   "uses": [
+    "def-pc-single-complex-open-restriction-data",
+    "def-pc-tensor-pullback-composition-iso",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-open-pinned-single-tensor-restriction-iso",
+    "lem-pc-open-pinned-single-tensor-restriction-factors"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pinned derived counit along k.hom is invertible on every complex because k is an isomorphism. Its component at the single tensorPullback r M followed by the single comparison and single.mapIso b defines d. Apply picardTermwiseSingleMap_composition to k.hom,r and to r',U.ι. Naturality for rho and cancellation of the composition comparisons yield the coefficient equation. This argument uses no direct image or base-change map, and includes zero modules and empty schemes/opens. The Lean proof normalizes picardTermwiseSingleMap, proves coefficient naturality from the pinned counit and single comparison naturality, obtains the normalized composition equation by postcomposing the existing equation with the single comparison, eliminates the equality of composite paths before this calculation, and cancels the two tensor comparisons. Local reducibility of Scheme.Modules and a private instance identifying its derived category with the given sheaf-module derived category avoid costly redundant unfolding; no definition or signature is changed.",
+   "uses": [
+    "lem-pc-isomorphism-pullback-counit",
+    "lem-sc-picard-termwise-single-map-composition",
+    "def-pc-tensor-pullback-composition-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-single-complex-open-restriction-data",
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-open-pinned-single-tensor-restriction-iso",
+  "lem-pc-open-pinned-single-tensor-restriction-factors",
+  "lem-pc-isomorphism-pullback-counit",
+  "lem-sc-picard-termwise-single-map-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T2",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 06YJ, 08HY and 0D5S"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "canonical derived pullback comparison commutes with restriction to open subscheme and tensor pullback composition",
+   "results": "Service returned Internal Server Error; unavailable.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "horizontal composition of mates of natural transformations adjunction Beck Chevalley",
+   "results": "Found mateEquiv_hcomp, mateEquiv_vcomp and unit_mateEquiv; no scheme-specific coefficient statement.",
+   "date": "2026-10-14",
+   "verdict": "constituents"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_mateEquiv",
+   "results": "Found the abstract adjunction unit-mate identity.",
+   "date": "2026-10-14",
+   "verdict": "constituent"
+  },
+  {
+   "tool": "grep",
+   "query": "schemeDerivedBaseChangeMap.*(transport|composition|source|apex); singleComplexOpenPullbackIso; picardTermwiseSingleMap",
+   "results": "Found DerivedBaseChangeHorizontalMate and DerivedBaseChangeNaturality (its proof import was omitted because it creates a source import cycle; coefficient naturality is proved locally). SingleOpenTensorCoefficientCoherence is a different square with explicit normalization hypotheses and does not supply the open single normalization needed here. Mathlib Adjunction/Mates and Algebra/Homology/Single provide constituents only.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux",
+  "date": "2026-10-14",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-standard-single-base-change-top-restriction",
+   "place": "coefficient composition and canonical adjunction mate compatibility in the top source restriction calculation",
+   "via": [
+    "lem-pc-standard-single-base-change-top-restriction-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenSingleCoefficientTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenSingleCoefficientTransport.lean",
+  "declaration": "AlgebraicGeometry.exists_openSingle_coefficient_transport",
+  "statement": "theorem exists_openSingle_coefficient_transport\n    {Y P P' : Scheme.{u}} (U : Y.Opens) (M : Y.Modules)\n    (r : P ⟶ Y) (r' : P' ⟶ U.toScheme) (k : P' ≅ P)\n    (hr : k.hom ≫ r = r' ≫ U.ι) :\n    let K := (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj M\n    let N := M.restrict U.ι\n    let a : (derivedPullback U.ι).obj K ≅\n        (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 0).obj N :=\n      (singleComplexOpenPullbackIso Y U).app K ≪≫\n        ((schemeOpenRestriction Y U).mapDerivedCategorySingleFunctor 0).app M ≪≫\n        (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 0).mapIso\n          ((Scheme.Modules.overFunctorEquiv U).app M)\n    let T := (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings P.toRingedSpace)) 0).obj\n      ((Scheme.Modules.tensorPullback r).obj M)\n    let T' := (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings P'.toRingedSpace)) 0).obj\n      ((Scheme.Modules.tensorPullback r').obj N)\n    ∃ d : (derivedPullback k.hom).obj T ≅ T',\n      (derivedPullback k.hom).map (Scheme.picardTermwiseSingleMap r M) ≫ d.hom =\n        (relativeMVComp k.hom r).hom.app K ≫\n          eqToHom (congrArg (fun f ↦ (derivedPullback f).obj K) hr) ≫\n          (relativeMVComp r' U.ι).inv.app K ≫ (derivedPullback r').map a.hom ≫\n          Scheme.picardTermwiseSingleMap r' N",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T101747-L-1177271",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T101747-L-1177271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

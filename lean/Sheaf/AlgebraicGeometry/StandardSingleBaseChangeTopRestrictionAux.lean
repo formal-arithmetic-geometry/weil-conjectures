@@ -3,6 +3,8 @@ module
 public import Sheaf.AlgebraicGeometry.StandardSingleBaseChangeMap
 public import Sheaf.AlgebraicGeometry.RelativeMVMaps
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
+import Sheaf.AlgebraicGeometry.DerivedBaseChangeSourceTransport
+import Sheaf.AlgebraicGeometry.OpenSingleCoefficientTransport
 
 @[expose] public section
 set_option autoImplicit false
@@ -193,6 +195,76 @@ theorem standardSingleBaseChange_topRestriction_compatibility
       standardSingleBaseChangeMap p M g =
         (derivedPullback g).map e.hom ≫
           standardSingleBaseChangeMap ((⊤ : Y.Opens).ι ≫ p)
-            (M.restrict (⊤ : Y.Opens).ι) g ≫ t.hom := by sorry
+            (M.restrict (⊤ : Y.Opens).ι) g ≫ t.hom := by
+  classical
+  let := fun X : Scheme.{u} ↦ HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace))
+  intro e he
+  subst e
+  let j := (⊤ : Y.Opens).ι
+  let N := M.restrict j
+  let r := pullback.fst p g
+  let s := pullback.snd p g
+  let r' := pullback.fst (j ≫ p) g
+  let s' := pullback.snd (j ≫ p) g
+  have h : r ≫ p = s ≫ g := pullback.condition
+  have h' : r' ≫ (j ≫ p) = s' ≫ g := pullback.condition
+  let kh : pullback (j ≫ p) g ⟶ pullback p g :=
+    pullback.lift (r' ≫ j) s' (by simpa only [Category.assoc] using h')
+  let ki : pullback p g ⟶ pullback (j ≫ p) g :=
+    pullback.lift (r ≫ Y.topIso.inv) s (by
+      change r ≫ Y.topIso.inv ≫ Y.topIso.hom ≫ p = s ≫ g
+      simpa only [Iso.inv_hom_id_assoc] using h)
+  let k : pullback (j ≫ p) g ≅ pullback p g :=
+    { hom := kh
+      inv := ki
+      hom_inv_id := by
+        apply pullback.hom_ext <;>
+          simp [kh, ki, r, s, r', s', j, Category.assoc]
+      inv_hom_id := by
+        apply pullback.hom_ext <;>
+          simp [kh, ki, r, s, r', s', j, Category.assoc] }
+  have hr : k.hom ≫ r = r' ≫ j := pullback.lift_fst _ _ _
+  have hs : k.hom ≫ s = s' := pullback.lift_snd _ _ _
+  let K := (DerivedCategory.singleFunctor
+    (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj M
+  let K' := (DerivedCategory.singleFunctor
+    (SheafOfModules.{u} (moduleRings (⊤ : Y.Opens).toScheme.toRingedSpace)) 0).obj N
+  let T := (DerivedCategory.singleFunctor
+    (SheafOfModules.{u} (moduleRings (pullback p g).toRingedSpace)) 0).obj
+      (Scheme.Modules.tensorPullbackObj r M)
+  let T' := (DerivedCategory.singleFunctor
+    (SheafOfModules.{u} (moduleRings (pullback (j ≫ p) g).toRingedSpace)) 0).obj
+      (Scheme.Modules.tensorPullbackObj r' N)
+  let a : (derivedPullback j).obj K ≅ K' :=
+    (singleComplexOpenPullbackIso Y ⊤).app K ≪≫
+      ((schemeOpenRestriction Y ⊤).mapDerivedCategorySingleFunctor 0).app M ≪≫
+      (DerivedCategory.singleFunctor
+        (SheafOfModules.{u} (moduleRings
+          (⊤ : Y.Opens).toScheme.toRingedSpace)) 0).mapIso
+        ((Scheme.Modules.overFunctorEquiv ⊤).app M)
+  obtain ⟨d, hd⟩ := exists_openSingle_coefficient_transport ⊤ M r r' k hr
+  have : IsIso (relativeMVAdj k.hom).unit :=
+    standardSingleBaseChange_topRestriction_iso_pullback_unit k
+  let F : (schemeDerivedDirectImage s).obj T ≅
+      (schemeDerivedDirectImage s').obj T' :=
+    (schemeDerivedDirectImage s).mapIso (asIso ((relativeMVAdj k.hom).unit.app T)) ≪≫
+      (relativeMVImageComp k.hom s).app ((derivedPullback k.hom).obj T) ≪≫
+      eqToIso (congrArg (fun f ↦ (schemeDerivedDirectImage f).obj
+        ((derivedPullback k.hom).obj T)) hs) ≪≫
+      (schemeDerivedDirectImage s').mapIso d
+  refine ⟨F.symm, ?_⟩
+  have hc := derivedBaseChange_source_transport p g j r s r' s' k.hom h h' hr hs
+    K K' T T' a.hom (Scheme.picardTermwiseSingleMap r M)
+      (Scheme.picardTermwiseSingleMap r' N) d.hom hd
+  have hc' : standardSingleBaseChangeMap p M g ≫ F.hom =
+      (derivedPullback g).map
+        (standardSingleBaseChange_topRestriction_sourceIso p M).hom ≫
+          standardSingleBaseChangeMap (j ≫ p) N g := by
+    simpa only [standardSingleBaseChangeMap,
+      standardSingleBaseChange_topRestriction_sourceIso, F, a, Iso.trans_hom,
+      Iso.app_hom, Functor.mapIso_hom, asIso_hom, eqToIso.hom, Category.assoc] using hc
+  have hh := congrArg (fun f ↦ f ≫ F.inv) hc'
+  simpa only [Category.assoc, Iso.hom_inv_id, Category.comp_id, Iso.symm_hom] using hh
 
 end AlgebraicGeometry

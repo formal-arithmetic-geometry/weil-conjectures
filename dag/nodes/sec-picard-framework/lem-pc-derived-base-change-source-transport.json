@@ -1,0 +1,124 @@
+{
+ "id": "lem-pc-derived-base-change-source-transport",
+ "kind": "statement",
+ "title": "Transport of a base-change mate along the source and apex",
+ "statement": "theorem derivedBaseChange_source_transport\n    [∀ X : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    {Y Y' B A P P' : Scheme.{u}}\n    (p : Y ⟶ B) (g : A ⟶ B) (j : Y' ⟶ Y)\n    (r : P ⟶ Y) (s : P ⟶ A) (r' : P' ⟶ Y') (s' : P' ⟶ A) (k : P' ⟶ P)\n    (h : r ≫ p = s ≫ g) (h' : r' ≫ (j ≫ p) = s' ≫ g)\n    (hr : k ≫ r = r' ≫ j) (hs : k ≫ s = s')\n    (K : schemeDerivedCategory Y) (K' : schemeDerivedCategory Y')\n    (T : schemeDerivedCategory P) (T' : schemeDerivedCategory P')\n    (a : (derivedPullback j).obj K ⟶ K')\n    (q : (derivedPullback r).obj K ⟶ T)\n    (q' : (derivedPullback r').obj K' ⟶ T')\n    (d : (derivedPullback k).obj T ⟶ T')\n    (hq : (derivedPullback k).map q ≫ d =\n      (relativeMVComp k r).hom.app K ≫\n        eqToHom (congrArg (fun f ↦ (derivedPullback f).obj K) hr) ≫\n        (relativeMVComp r' j).inv.app K ≫ (derivedPullback r').map a ≫ q') :\n    let e := (schemeDerivedDirectImage p).map ((relativeMVAdj j).unit.app K) ≫\n      (relativeMVImageComp j p).hom.app ((derivedPullback j).obj K) ≫\n      (schemeDerivedDirectImage (j ≫ p)).map a\n    let F := (schemeDerivedDirectImage s).map ((relativeMVAdj k).unit.app T) ≫\n      (relativeMVImageComp k s).hom.app ((derivedPullback k).obj T) ≫\n      eqToHom (congrArg (fun f ↦ (schemeDerivedDirectImage f).obj\n        ((derivedPullback k).obj T)) hs) ≫ (schemeDerivedDirectImage s').map d\n    schemeDerivedBaseChangeMap p s g r h K ≫ (schemeDerivedDirectImage s).map q ≫ F =\n      (derivedPullback g).map e ≫ schemeDerivedBaseChangeMap (j ≫ p) s' g r' h' K' ≫\n        (schemeDerivedDirectImage s').map q'",
+ "stmt_deps": [
+  "def-pc-relative-mv-maps",
+  "def-pc-derived-base-change-map"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 06YJ, 08HY and 0D5S; source coefficient and mate calculations of lem-pc-standard-single-base-change-top-restriction-compatibility"
+ },
+ "proof": [
+  {
+   "text": "Eliminate hs, define c from the two pullback composition comparisons and hr, and put q0 = c.inv followed by Lk(q). The elementary adjunction mate-unit identity turns Lr(unit_j), the inner base-change mate and Rk(q0) into q followed by unit_k. Cancel c.inv against the coefficient hypothesis to obtain q0;d = Lr'(a);q'. Coefficient naturality is proved locally from adjunction Hom-equivalence naturality, comparison naturality and counit naturality; the existing Naturality module cannot be imported because its source import closure reaches the item.",
+   "uses": [
+    "def-pc-relative-mv-maps",
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply coefficient naturality to unit_j in the outer square, then horizontal mate pasting to j,p and k,s. Move q0 through the image-composition comparison by naturality and cancel its inverse. Substitute q0;d, apply coefficient naturality to a, and reassociate the functor maps. This proves the displayed source/apex transport identity without any isomorphism hypothesis.",
+   "uses": [
+    "new-lem-pc-derived-base-change-horizontal-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-relative-mv-maps",
+  "def-pc-derived-base-change-map",
+  "new-lem-pc-derived-base-change-horizontal-mate"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T2",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 06YJ, 08HY and 0D5S"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "canonical derived pullback comparison commutes with restriction to open subscheme and tensor pullback composition",
+   "results": "Service returned Internal Server Error; unavailable.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "horizontal composition of mates of natural transformations adjunction Beck Chevalley",
+   "results": "Found mateEquiv_hcomp, mateEquiv_vcomp and unit_mateEquiv; no scheme-specific coefficient statement.",
+   "date": "2026-10-14",
+   "verdict": "constituents"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_mateEquiv",
+   "results": "Found the abstract adjunction unit-mate identity.",
+   "date": "2026-10-14",
+   "verdict": "constituent"
+  },
+  {
+   "tool": "grep",
+   "query": "schemeDerivedBaseChangeMap.*(transport|composition|source|apex); singleComplexOpenPullbackIso; picardTermwiseSingleMap",
+   "results": "Found DerivedBaseChangeHorizontalMate and DerivedBaseChangeNaturality (its proof import was omitted because it creates a source import cycle; coefficient naturality is proved locally). SingleOpenTensorCoefficientCoherence is a different square with explicit normalization hypotheses and does not supply the open single normalization needed here. Mathlib Adjunction/Mates and Algebra/Homology/Single provide constituents only.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux",
+  "date": "2026-10-14",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-standard-single-base-change-top-restriction",
+   "place": "coefficient composition and canonical adjunction mate compatibility in the top source restriction calculation",
+   "via": [
+    "lem-pc-standard-single-base-change-top-restriction-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedBaseChangeSourceTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBaseChangeSourceTransport.lean",
+  "declaration": "AlgebraicGeometry.derivedBaseChange_source_transport",
+  "statement": "theorem derivedBaseChange_source_transport\n    [∀ X : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    {Y Y' B A P P' : Scheme.{u}}\n    (p : Y ⟶ B) (g : A ⟶ B) (j : Y' ⟶ Y)\n    (r : P ⟶ Y) (s : P ⟶ A) (r' : P' ⟶ Y') (s' : P' ⟶ A) (k : P' ⟶ P)\n    (h : r ≫ p = s ≫ g) (h' : r' ≫ (j ≫ p) = s' ≫ g)\n    (hr : k ≫ r = r' ≫ j) (hs : k ≫ s = s')\n    (K : schemeDerivedCategory Y) (K' : schemeDerivedCategory Y')\n    (T : schemeDerivedCategory P) (T' : schemeDerivedCategory P')\n    (a : (derivedPullback j).obj K ⟶ K')\n    (q : (derivedPullback r).obj K ⟶ T)\n    (q' : (derivedPullback r').obj K' ⟶ T')\n    (d : (derivedPullback k).obj T ⟶ T')\n    (hq : (derivedPullback k).map q ≫ d =\n      (relativeMVComp k r).hom.app K ≫\n        eqToHom (congrArg (fun f ↦ (derivedPullback f).obj K) hr) ≫\n        (relativeMVComp r' j).inv.app K ≫ (derivedPullback r').map a ≫ q') :\n    let e := (schemeDerivedDirectImage p).map ((relativeMVAdj j).unit.app K) ≫\n      (relativeMVImageComp j p).hom.app ((derivedPullback j).obj K) ≫\n      (schemeDerivedDirectImage (j ≫ p)).map a\n    let F := (schemeDerivedDirectImage s).map ((relativeMVAdj k).unit.app T) ≫\n      (relativeMVImageComp k s).hom.app ((derivedPullback k).obj T) ≫\n      eqToHom (congrArg (fun f ↦ (schemeDerivedDirectImage f).obj\n        ((derivedPullback k).obj T)) hs) ≫ (schemeDerivedDirectImage s').map d\n    schemeDerivedBaseChangeMap p s g r h K ≫ (schemeDerivedDirectImage s).map q ≫ F =\n      (derivedPullback g).map e ≫ schemeDerivedBaseChangeMap (j ≫ p) s' g r' h' K' ≫\n        (schemeDerivedDirectImage s').map q'",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T101747-L-1177271",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T101747-L-1177271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

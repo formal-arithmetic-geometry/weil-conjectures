@@ -1,147 +1,154 @@
 {
-  "id": "lem-pc-standard-single-base-change-top-restriction-compatibility",
-  "kind": "statement",
-  "title": "Compatibility after top restriction source comparison",
-  "statement": "theorem standardSingleBaseChange_topRestriction_compatibility\n    {Y B A : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) (g : A ⟶ B) :\n    letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    ∀ (e : (schemeDerivedDirectImage p).obj\n          ((DerivedCategory.singleFunctor _ 0).obj M) ≅\n        (schemeDerivedDirectImage ((⊤ : Y.Opens).ι ≫ p)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj (M.restrict (⊤ : Y.Opens).ι))),\n      e = standardSingleBaseChange_topRestriction_sourceIso p M → ∃ (t : (schemeDerivedDirectImage\n          (pullback.snd ((⊤ : Y.Opens).ι ≫ p) g)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj\n            (Scheme.Modules.tensorPullbackObj\n              (pullback.fst ((⊤ : Y.Opens).ι ≫ p) g)\n              (M.restrict (⊤ : Y.Opens).ι))) ≅\n        (schemeDerivedDirectImage (pullback.snd p g)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj\n            (Scheme.Modules.tensorPullbackObj (pullback.fst p g) M))),\n      standardSingleBaseChangeMap p M g =\n        (derivedPullback g).map e.hom ≫\n          standardSingleBaseChangeMap ((⊤ : Y.Opens).ι ≫ p)\n            (M.restrict (⊤ : Y.Opens).ι) g ≫ t.hom",
-  "stmt_deps": [
-    "def-pc-standard-single-base-change-top-restriction-source-iso"
-  ],
-  "source": {
-    "document": "Stacks Project",
-    "place": "Tags 08HY and 0D5S"
+ "id": "lem-pc-standard-single-base-change-top-restriction-compatibility",
+ "kind": "statement",
+ "title": "Compatibility after top restriction source comparison",
+ "statement": "theorem standardSingleBaseChange_topRestriction_compatibility\n    {Y B A : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) (g : A ⟶ B) :\n    letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    ∀ (e : (schemeDerivedDirectImage p).obj\n          ((DerivedCategory.singleFunctor _ 0).obj M) ≅\n        (schemeDerivedDirectImage ((⊤ : Y.Opens).ι ≫ p)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj (M.restrict (⊤ : Y.Opens).ι))),\n      e = standardSingleBaseChange_topRestriction_sourceIso p M → ∃ (t : (schemeDerivedDirectImage\n          (pullback.snd ((⊤ : Y.Opens).ι ≫ p) g)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj\n            (Scheme.Modules.tensorPullbackObj\n              (pullback.fst ((⊤ : Y.Opens).ι ≫ p) g)\n              (M.restrict (⊤ : Y.Opens).ι))) ≅\n        (schemeDerivedDirectImage (pullback.snd p g)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj\n            (Scheme.Modules.tensorPullbackObj (pullback.fst p g) M))),\n      standardSingleBaseChangeMap p M g =\n        (derivedPullback g).map e.hom ≫\n          standardSingleBaseChangeMap ((⊤ : Y.Opens).ι ≫ p)\n            (M.restrict (⊤ : Y.Opens).ι) g ≫ t.hom",
+ "stmt_deps": [
+  "def-pc-standard-single-base-change-top-restriction-source-iso"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 08HY and 0D5S"
+ },
+ "proof": [
+  {
+   "text": "Substitute e. Construct the pullback apex isomorphism k explicitly using the lift with first coordinate r' ≫ j and the inverse lift with first coordinate r ≫ Y.topIso.inv. Pullback projection extensionality and the topIso inverse laws prove the inverse identities. The two lift projection equations give hr and hs.",
+   "uses": [],
+   "elementary": true
   },
-  "proof": [
-    {
-      "text": "Substitute the hypothesis on `e`. Write L_f = derivedPullback f and\nR_f = schemeDerivedDirectImage f; composition of arrows below is written `≫`.\nPut j = (⊤ : Y.Opens).ι, N = M.restrict j, K = M[0], K' = N[0]. Let\nP = pullback p g have projections r = pullback.fst p g and s = pullback.snd p g.\nLet P' = pullback (j ≫ p) g have projections r' and s'. The universal property\nconstructs k : P' ≅ P with k.hom ≫ r = r' ≫ j and k.hom ≫ s = s': its forward\nmap is pullback.lift (r' ≫ j) s', and its inverse is pullback.lift (r ≫ j.inv) s.\nHere j.inv denotes Y.topIso.inv. Pullback projection extensionality and the two\ninverse identities for Y.topIso prove that these maps are inverse.\n\nLet a : L_j K ≅ K' be precisely the single restriction comparison in sourceIso.\nFor any f write q_f(V) = Scheme.picardTermwiseSingleMap f V. Tensor pullback\nalong the isomorphism k.hom is exact, so q_k on any module is invertible.\nThe canonical module isomorphism b from tensorPullbackObj k.hom\n(tensorPullbackObj r M) to tensorPullbackObj r' N is obtained by tensor-pullback\ncomposition along k.hom,r, transport across k.hom ≫ r = r' ≫ j, inverse\ncomposition along r',j, and tensorPullback r' of the canonical comparison\nfrom tensorPullbackObj j M to N. More explicitly, put\nδ(h,f) = Scheme.Modules.tensorPullbackCompositionIso h f (h ≫ f) rfl, directed from tensor pullback\nof h ≫ f to tensor pullback\nalong f followed by h. If ρ : tensorPullbackObj j M ≅ N is the canonical\nadjoint-uniqueness comparison to restriction used in a, then\n  b = δ(k.hom,r).inv.app M ≫ transport ≫ δ(r',j).hom.app M\n    ≫ (Scheme.Modules.tensorPullback r').map ρ.hom,\nwhere transport is along k.hom ≫ r = r' ≫ j. Thus a.hom is q_j(M) followed\nby single.map ρ.hom. All these comparisons are pinned to the\nsame tensor-pullback adjunctions. Define\n  T = (tensorPullbackObj r M)[0], T' = (tensorPullbackObj r' N)[0],\n  d : L_k T ≅ T' = asIso(q_k(tensorPullbackObj r M)) ≪≫ single.mapIso b.\nWrite C(h,f) for relativeMVComp h f, including equality transport when paths\nare identified. The coefficient-composition identity is\n  L_k(q_r(M)) ≫ d.hom =\n    C(k,r).hom.app K ≫ C(r',j).inv.app K ≫ L_r'(a.hom) ≫ q_r'(N).\nThe equality transport between the two C components uses k.hom ≫ r = r' ≫ j.\nTo verify this identity, apply Scheme.picardTermwiseSingleMap_composition to\n(k.hom,r) and (r',j). Its tensorPullbackCompositionIso and single-complex\ncomparison factors are exactly those defining b. Cancel the inverse factors,\nand use naturality of the single comparison for the tensor-to-restriction map.\nThe defining leftDerivedLift factorization in exists_derivedPullbackComposition\nensures that these are the pinned C comparisons, rather than arbitrary ones.\n\nDefine F : R_s T ≅ R_s' T' by composing R_s of the invertible unit\nT ≅ R_k L_k T, (relativeMVImageComp k.hom s).app (L_k T), transport across\nk.hom ≫ s = s', and R_s'.mapIso d. Invertibility of the unit follows from\nstandardSingleBaseChange_topRestriction_iso_pullback_unit k. Set t = F.symm.\n\nHere is the compatibility calculation before cancelling F. Put D = L_g R_p K.\nWrite B(r,s,p;K) for the transpose of schemeDerivedBaseChangeMap p s g r:\n  B(r,s,p;K) = C(s,g).hom.app (R_p K) ≫ C(r,p).inv.app (R_p K)\n    ≫ L_r((relativeMVAdj p).counit.app K),\nwith the pullback.condition transport between the two C components. Thus the\ntranspose of standardSingleBaseChangeMap p M g under relativeMVAdj s is\nB(r,s,p;K) ≫ q_r(M). Under relativeMVAdj s', the transpose of that map followed\nby F.hom is\n  C(k,s).inv.app D ≫ L_k(B(r,s,p;K)) ≫ L_k(q_r(M)) ≫ d.hom.\nThis follows by expanding F and the right-adjoint mate relativeMVImageComp:\nits mate formula converts the composite adjunction to relativeMVAdj s', and\nL_k of the unit followed by the k counit cancels by the left triangle identity.\n\nSubstitute the coefficient identity. The remaining prefix satisfies\n  C(k,s).inv.app D ≫ L_k(B(r,s,p;K)) ≫ C(k,r).hom.app K\n    ≫ C(r',j).inv.app K ≫ L_r'(a.hom)\n  = L_s'(L_g(e.hom)) ≫ B(r',s',j ≫ p;K').\nFor this equation, expand e as R_p(unit_j) followed by relativeMVImageComp j p\nand R_(j≫p)(a). Move a through the counit by counit naturality. Expand the\ncomposition counit using the right-adjoint mate defining relativeMVImageComp:\nthe counit for j ≫ p is C(j,p).inv followed by L_j of the p counit and then\nthe j counit (with the right-adjoint comparison on its source). Naturality moves\nthe inserted unit_j next to the j counit, where\n  L_j(unit_j.app K) ≫ counit_j.app (L_j K) = 𝟙 (L_j K)\ncancels it. The other mate cancellation is\n  unit_j.app (R_j V) ≫ R_j(counit_j.app V) = 𝟙 (R_j V).\nAssociativity and the identity laws in exists_derivedPullbackComposition\nidentify the remaining C paths using r ≫ p = s ≫ g, r' ≫ j ≫ p = s' ≫ g,\nand the two projection identities for k. These are the pinned composition\nlaws, the single-map composition identity, and the two adjunction triangle\nidentities; no comparison along g is inverted.\n\nAppending q_r'(N) shows equality of the two transposes under relativeMVAdj s'.\nThe adjunction hom equivalence is injective, hence\n  standardSingleBaseChangeMap p M g ≫ F.hom =\n    L_g(e.hom) ≫ standardSingleBaseChangeMap (j ≫ p) N g.\nCompose on the right with F.inv and cancel F.hom ≫ F.inv to get the claimed\nequation with t = F.symm. All constructions are functorial and remain valid\nfor empty schemes and zero modules.",
-      "uses": [
-        "def-pc-standard-single-base-change-top-restriction-source-iso",
-        "def-pc-relative-mv-maps",
-        "def-pc-single-complex-open-restriction-data",
-        "lem-pc-ringed-spaces-derived-pullback-composition",
-        "lem-sc-picard-termwise-single-map-composition",
-        "def-pc-standard-single-base-change-map",
-        "def-pc-derived-base-change-map",
-        "lem-pc-standard-single-base-change-top-restriction-iso-pullback-unit",
-        "def-pc-tensor-pullback-composition-iso"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-pc-standard-single-base-change-top-restriction-source-iso",
-    "def-pc-relative-mv-maps",
-    "def-pc-single-complex-open-restriction-data",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-sc-picard-termwise-single-map-composition",
-    "def-pc-standard-single-base-change-map",
-    "def-pc-derived-base-change-map",
+  {
+   "text": "Apply exists_openSingle_coefficient_transport with U=top to obtain the invertible coefficient comparison d and its equation. Construct F as Rs of the unit for k.hom, the canonical image-composition comparison, transport by hs, and Rs'.mapIso d. The unit is invertible by the existing iso pullback unit theorem.",
+   "uses": [
+    "lem-pc-open-single-coefficient-transport",
     "lem-pc-standard-single-base-change-top-restriction-iso-pullback-unit",
-    "def-pc-tensor-pullback-composition-iso"
-  ],
-  "proof_origin": {
-    "by": "worker",
-    "group": "G1",
-    "date": "2026-10-14",
-    "document": "Stacks Project",
-    "place": "Tags 08HY and 0D5S"
+    "def-pc-relative-mv-maps"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "LeanSearch",
-      "query": "standard single base change top restriction derived direct image",
-      "results": "No exact match in Mathlib; only constituent derived-category constructions found.",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "top restriction derived direct image comparison",
-      "results": "No exact match; constituent pullback declarations only.",
-      "date": "2026-10-14",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "loogle",
-      "query": "schemeDerivedDirectImage restriction isomorphism",
-      "results": "No exact match.",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "topRestriction standardSingleBaseChange",
-      "results": "No existing theorem found.",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestriction",
-    "date": "2026-10-14",
-    "group": "A3"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-pc-standard-single-base-change-top-restriction",
-      "place": "compatibility equation"
-    }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-coherence",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux",
-    "file": "lean/Sheaf/AlgebraicGeometry/StandardSingleBaseChangeTopRestrictionAux.lean",
-    "declaration": "AlgebraicGeometry.standardSingleBaseChange_topRestriction_compatibility",
-    "statement": "theorem standardSingleBaseChange_topRestriction_compatibility\n    {Y B A : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) (g : A ⟶ B) :\n    letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    ∀ (e : (schemeDerivedDirectImage p).obj\n          ((DerivedCategory.singleFunctor _ 0).obj M) ≅\n        (schemeDerivedDirectImage ((⊤ : Y.Opens).ι ≫ p)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj (M.restrict (⊤ : Y.Opens).ι))),\n      e = standardSingleBaseChange_topRestriction_sourceIso p M → ∃ (t : (schemeDerivedDirectImage\n          (pullback.snd ((⊤ : Y.Opens).ι ≫ p) g)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj\n            (Scheme.Modules.tensorPullbackObj\n              (pullback.fst ((⊤ : Y.Opens).ι ≫ p) g)\n              (M.restrict (⊤ : Y.Opens).ι))) ≅\n        (schemeDerivedDirectImage (pullback.snd p g)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj\n            (Scheme.Modules.tensorPullbackObj (pullback.fst p g) M))),\n      standardSingleBaseChangeMap p M g =\n        (derivedPullback g).map e.hom ≫\n          standardSingleBaseChangeMap ((⊤ : Y.Opens).ι ≫ p)\n            (M.restrict (⊤ : Y.Opens).ι) g ≫ t.hom",
-    "branch": "sheaf-dag",
-    "by": "A3",
-    "date": "2026-10-14"
-  },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "A3",
-    "result": "pass",
-    "landing": "20261014T004055-L-2831888",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "X-c775f",
-    "group": "G1",
-    "result": "pass",
-    "landing": "20261014T022543-L-4044816",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered Lean signatures and proofs match all four nodes; both modules and direct importer StandardSingleBaseChangeTopRestriction compile cleanly; hash-verified original parent reproduces the reported failure; two-line adaptation is necessary and preserves its signature; axioms and documented remaining sorry comply."
-  },
-  "statement_change": {
-    "date": "2026-10-14",
-    "by": "G1 stage 2",
-    "old_statement": "Given the source comparison isomorphism e for the top restriction, there exists a target isomorphism t such that the standard single base-change map factors through e and the restricted comparison.",
-    "what": "The universal quantification over arbitrary source isomorphisms is false. The compatibility is required only when e is the constructed canonical source comparison, expressed by an implication.",
-    "source": {
-      "document": "reviewer return X-790d9",
-      "place": "E2 repair: dual-number counterexample and canonical interface instruction"
-    },
-    "citers": [],
-    "old_stmt_deps": [
-      "lem-pc-standard-single-base-change-top-restriction-source"
-    ],
-    "old_proof": [
-      {
-        "text": "Apply source-open unit naturality, single pullback composition, and apex transport to identify the target maps and assemble the factorization.",
-        "uses": [],
-        "elementary": false
-      }
-    ],
-    "old_proof_deps": []
+  {
+   "text": "Apply derivedBaseChange_source_transport to a (the precise open-single comparison used in sourceIso), q_r(M), q_r'(N), d and the coefficient equation. Its left side is standardSingleBaseChangeMap p M g followed by F.hom; its right side is Lg(sourceIso.hom) followed by the restricted standard map. Set t=F.symm, postcompose the equality by F.inv, and cancel F.hom followed by F.inv.",
+   "uses": [
+    "lem-pc-derived-base-change-source-transport",
+    "def-pc-standard-single-base-change-top-restriction-source-iso",
+    "def-pc-standard-single-base-change-map",
+    "def-pc-single-complex-open-restriction-data"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-pc-open-single-coefficient-transport",
+  "lem-pc-standard-single-base-change-top-restriction-iso-pullback-unit",
+  "def-pc-relative-mv-maps",
+  "lem-pc-derived-base-change-source-transport",
+  "def-pc-standard-single-base-change-top-restriction-source-iso",
+  "def-pc-standard-single-base-change-map",
+  "def-pc-single-complex-open-restriction-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T2",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 08HY and 0D5S; constructed pullback transport, coefficient square and proved mate pasting"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "standard single base change top restriction derived direct image",
+   "results": "No exact match in Mathlib; only constituent derived-category constructions found.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "top restriction derived direct image comparison",
+   "results": "No exact match; constituent pullback declarations only.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "schemeDerivedDirectImage restriction isomorphism",
+   "results": "No exact match.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "topRestriction standardSingleBaseChange",
+   "results": "No existing theorem found.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestriction",
+  "date": "2026-10-14",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-standard-single-base-change-top-restriction",
+   "place": "compatibility equation"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/StandardSingleBaseChangeTopRestrictionAux.lean",
+  "declaration": "AlgebraicGeometry.standardSingleBaseChange_topRestriction_compatibility",
+  "statement": "theorem standardSingleBaseChange_topRestriction_compatibility\n    {Y B A : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) (g : A ⟶ B) :\n    letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    ∀ (e : (schemeDerivedDirectImage p).obj\n          ((DerivedCategory.singleFunctor _ 0).obj M) ≅\n        (schemeDerivedDirectImage ((⊤ : Y.Opens).ι ≫ p)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj (M.restrict (⊤ : Y.Opens).ι))),\n      e = standardSingleBaseChange_topRestriction_sourceIso p M → ∃ (t : (schemeDerivedDirectImage\n          (pullback.snd ((⊤ : Y.Opens).ι ≫ p) g)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj\n            (Scheme.Modules.tensorPullbackObj\n              (pullback.fst ((⊤ : Y.Opens).ι ≫ p) g)\n              (M.restrict (⊤ : Y.Opens).ι))) ≅\n        (schemeDerivedDirectImage (pullback.snd p g)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj\n            (Scheme.Modules.tensorPullbackObj (pullback.fst p g) M))),\n      standardSingleBaseChangeMap p M g =\n        (derivedPullback g).map e.hom ≫\n          standardSingleBaseChangeMap ((⊤ : Y.Opens).ι ≫ p)\n            (M.restrict (⊤ : Y.Opens).ι) g ≫ t.hom",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261014T004055-L-2831888",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T101747-L-1177271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "G1 stage 2",
+  "old_statement": "Given the source comparison isomorphism e for the top restriction, there exists a target isomorphism t such that the standard single base-change map factors through e and the restricted comparison.",
+  "what": "The universal quantification over arbitrary source isomorphisms is false. The compatibility is required only when e is the constructed canonical source comparison, expressed by an implication.",
+  "source": {
+   "document": "reviewer return X-790d9",
+   "place": "E2 repair: dual-number counterexample and canonical interface instruction"
+  },
+  "citers": [],
+  "old_stmt_deps": [
+   "lem-pc-standard-single-base-change-top-restriction-source"
+  ],
+  "old_proof": [
+   {
+    "text": "Apply source-open unit naturality, single pullback composition, and apex transport to identify the target maps and assemble the factorization.",
+    "uses": [],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": []
+ }
 }
