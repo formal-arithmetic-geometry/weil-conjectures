@@ -40,9 +40,115 @@
   "def-weil-pbc-direct-image",
   "def-weil-pbc-derived-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A=\\mathcal O^{\\mathrm{sh}}_{S,\\bar s}$. To apply the higher-direct-image stalk formula to $h$, verify its hypotheses without imposing any on $f$. For every affine open $U=\\operatorname{Spec}B$ of $X'$, the inverse image $h^{-1}U=U\\times_{\\operatorname{Spec}A}\\operatorname{Spec}\\Omega'$ is $\\operatorname{Spec}(B\\otimes_A\\Omega')$ by the affine-spectrum fibre-product formula. Thus $h$ is affine by the definition of an affine morphism, and hence quasi-compact and quasi-separated by affine-morphism permanence (3).",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJU, stalk calculation; Tag 03Q9 hypotheses"
+   }
+  },
+  {
+   "text": "Fix an arbitrary geometric point $\\bar z:\\operatorname{Spec}\\Xi\\to X_{\\bar s}$, and write $\\bar x'=i\\bar z$ and $\\bar x=p\\bar x'$. Its projection to $\\operatorname{Spec}\\Omega$ supplies the map $a$ in the strict-base closed-point localization lemma. That lemma identifies $S'_{(f'\\bar x')}$ and $S_{(f\\bar x)}$ with $S'$, and identifies $X'_{(\\bar x')}$ with $X_{(\\bar x)}$, compatibly with all structural maps. By the universal property of the fibre product, set\n$$W=X_{\\bar t}\\times_{X'}X'_{(\\bar x')}=X'_{(\\bar x')}\\times_{S'}\\operatorname{Spec}\\Omega'\\cong V_{f,\\bar x,\\bar t}.$$\nHere the last $\\bar t$ is viewed in $S_{(f\\bar x)}$ through the preceding isomorphism; the inverse images of $G$ on both sides agree because the maps to $X$ agree. The coefficient identifications use the inverse-image composition isomorphism (2).",
+   "uses": [
+    "lem-weil-pbc-strict-base-closed-point-localizations",
+    "def-pc-fibre-product",
+    "def-weil-pbc-local-acyclicity-abelian-sheaf",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJU, first paragraph and displayed vanishing-cycle fibre identification; Tag 0GJS"
+   }
+  },
+  {
+   "text": "Exactness of inverse image, built into the termwise derived inverse-image construction, and exactness of geometric stalks identify\n$$\\mathcal H^q(i^{-1}Rh_*G_{\\bar t}[0])_{\\bar z}\\cong (R^qh_*G_{\\bar t})_{\\bar x'}.$$\nApply the canonical restriction isomorphism of the strict-henselization stalk theorem to the qcqs morphism $h$ and the abelian sheaf $G_{\\bar t}$: for $q\\geq0$ this last group is $H^q(W,G|_W)$. The inverse-image stalk isomorphism also identifies $(i^{-1}G')_{\\bar z}$ and $G'_{\\bar x'}$ with $G_{\\bar x}$, naturally in the sheaf and its maps. For $q<0$ both sides of the proposed morphism have zero cohomology: $G'[0]$ has only degree zero and $Rh_*G_{\\bar t}[0]$ is represented by the direct image of a nonnegative injective resolution, which exists by the left-exact injective-resolution degree-zero lemma (1).",
+   "uses": [
+    "def-weil-pbc-derived-inverse-image",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJU, stalk calculation; Tags 03Q1, 03Q9"
+   }
+  },
+  {
+   "text": "Identify the degree-zero map, not just the two groups. By the explicit derived-adjunction unit formula (2), $\\mathcal H^0(\\beta)$ is, by the left-exact injective-resolution degree-zero lemma (2), the ordinary unit $G'\\to h_*h^{-1}G'$. A germ $v\\in G'_{\\bar x'}$, represented by a section on a pointed etale neighbourhood $U$ of $\\bar x'$, is sent by this unit to its inverse-image section on $U\\times_{X'}X_{\\bar t}$. The canonical restriction map in the stalk formula restricts this section further to $W$. On the other hand the germ isomorphism on the strictly henselian scheme $X'_{(\\bar x')}$ sends the pullback section on $X'_{(\\bar x')}$ to $v$, by the inverse-image stalk-germ formula. Its inverse followed by restriction to $W$ therefore gives the very same section. Through the structural-map identifications in step 2 this is precisely $\\alpha_{G,\\bar x,\\bar t}$ of the local-acyclicity definition. Thus the map induced by $i^{-1}\\beta$ on degree-zero stalks is $\\alpha$, with the specified canonical orientation. The unit compatibility in inverse-image composition (2) ensures that replacing the iterated inverse images by the inverse image along the composite preserves this section restriction.",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "def-weil-pbc-local-acyclicity-abelian-sheaf",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJU, identification with alpha; Tag 0GJP, comparison map preceding definition-locally-acyclic"
+   }
+  },
+  {
+   "text": "Apply the hypothesis of local acyclicity to the original point $\\bar x$ and the point $\\bar t$ in $S_{(f\\bar x)}$. Its definition makes $\\alpha_{G,\\bar x,\\bar t}$ an isomorphism and makes $H^q(V_{f,\\bar x,\\bar t},G)=0$ for $q>0$. Consequently step 4 gives an isomorphism in degree zero, and steps 2 and 3 show that every positive-degree stalk map is the unique map $0\\to0$. The negative degrees were handled in step 3. This uses neither torsion nor properness, and applies also when a fibre is empty.",
+   "uses": [
+    "def-weil-pbc-local-acyclicity-abelian-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJU, last two sentences; Tag 0GJP"
+   }
+  },
+  {
+   "text": "Since $\\bar z$ was arbitrary, every cohomology-sheaf map of $i^{-1}\\beta$ is an isomorphism on all geometric stalks. Geometric-stalk conservativity makes each cohomology-sheaf map an isomorphism. The bounded-below derived cohomology criterion now makes $i^{-1}\\beta$ an isomorphism in the stated derived category.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJU, last sentence; Tag 03PU"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-local-acyclicity-abelian-sheaf",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-strict-base-closed-point-localizations",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "pqf-def-affine-morphism",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJU, lemma-beta-is-isomorphism, specialized to G[0]; degreewise stalk proof and explicit germ identification"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -92,15 +198,74 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local acyclicity makes the derived adjunction unit from a geometric fibre invertible on the closed fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.instIsIsoMapFunctorOppositePresheafFiberToSheafify\", \"module\": \"Mathlib/CategoryTheory/Sites/Point/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (Φ : J.Point)\\n  {A : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} A]\\n  [inst_2 : CategoryTheory.Limits.HasColimitsOfSize.{w, w, v', u'} A] {FC : A → A → Type u_1} {CC : A → Type w'}\\n  [inst_3 \", \"doc\": \"Under the conditions that the category has weak sheafification, the forgetful functor preserves filtered colimits, the category is locally small, the WEqualsLocallyBijective condition holds, and the f\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.W_adj_unit_app\", \"module\": \"Mathlib/CategoryTheory/Sites/Localization\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C)\\n  {A : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} A]\\n  {G : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ A) (CategoryTheory.Sheaf J A)}\\n  (adj : G ⊣ CategoryTheory.sheafToPres\", \"doc\": \"For any presheaf $P$ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, the unit of the adjunction between a functor $G$ and the inclusion functor from sheaves to presheaves (with respect to a \"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction\", \"module\": \"Mathlib/CategoryTheory/Sites/Localization\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C)\\n  {A : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} A]\\n  {G : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ A) (CategoryTheory.Sheaf J A)}\\n  (adj : G ⊣ CategoryTheory.sheafToPres\", \"doc\": \"Given an adjunction between a functor $ G $ and the inclusion of sheaves into presheaves with respect to a Grothendieck topology $ J $, a morphism $ f $ between presheaves is a local isomorphism (i.e.\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction\", \"module\": \"Mathlib/CategoryTheory/Sites/Localization\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C)\\n  {A : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} A]\\n  {G : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ A) (CategoryTheory.Sheaf J A)}\\n  (adj : G ⊣ CategoryTheory.sheafToPres\", \"doc\": \"Given an adjunction between a functor $ G $ and the inclusion of sheaves into presheaves, the local morphism property $ W $ in the presheaf category with respect to a Grothendieck topology $ J $ coinc\"}\n  {\"name\": \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.W_isInvertedBy_presheafFiber\", \"module\": \"Mathlib/CategoryTheory/Sites/Point/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (Φ : J.Point)\\n  {A : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} A]\\n  [inst_2 : CategoryTheory.Limits.HasColimitsOfSize.{w, w, v', u'} A] {FC : A → A → Type u_1} {CC : A → Type w'}\\n  [inst_3 \", \"doc\": \"Given a Grothendieck topology $ J $ on a category $\\\\mathcal{C}$, a concrete category $\\\\mathcal{A}$, and a functor $ F : \\\\mathcal{A} \\\\to \\\\mathcal{C} $ satisfying the locally bijective condition for $ J\"}\n  {\"name\": \"CategoryTheory.Localization.LeftBousfield.W_adj_unit_app\", \"module\": \"Mathlib/CategoryTheory/Localization/Bousfield\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  (adj : G ⊣ F) [F.Full] [F.Faithful] (X : D),\\n  CategoryTheory.ObjectProperty.isLocal (fun x => x ∈ Set.r\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ with an adjunction $G \\\\dashv F$, if $F$ is fully faithful, then for e\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.isLocal_adj_unit_app\", \"module\": \"Mathlib/CategoryTheory/Localization/Bousfield\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  (adj : G ⊣ F) [F.Full] [F.Faithful] (X : D),\\n  CategoryTheory.ObjectProperty.isLocal (fun x => x ∈ Set.r\", \"doc\": \"For any object $X$ in category $\\\\mathcal{D}$, the unit morphism $\\\\eta_X : X \\\\to G(F(X))$ of the adjunction $F \\\\dashv G$ is a local morphism with respect to objects in the image of the functor $F$. Spe\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The special fibre restriction of derived pushforward from a geometric generization equals the locally acyclic sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkPushforward\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C X) {x y : ↑X} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (((TopCat.Presheaf.pushforward C f).obj F).stalkSpecializes ⋯)\\n      (TopCat.Pre\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, and let $\\\\mathcal{F}$ be a presheaf on $X$ with values in a category $\\\\mathcal{C}$. Let $x, y \\\\in X$ be points such that $x$ specialize\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkPushforward_assoc\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C X) {x y : ↑X} (h : x ⤳ y) {Z : C} (h_1 : F.stalk x ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (((TopCat.Presheaf.pushforward C f).obj F).stalkSp\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$, a continuous map $f : X \\\\to Y$, and points $x, y \\\\in X$ with $x$ specializing to $y$, the composition of the specialization-induced morphism $(\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkPushforward_apply\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C X) {x y : ↑X} (h : x ⤳ y) {F_1 : C → C → Type uF} {carrier : C → Type w}\\n  {instFunLike : (X Y : C) → FunLike (F_1 X Y) (carrier X) (carrier Y)}\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$, a continuous map $f : X \\\\to Y$, and points $x,y \\\\in X$ with $x$ specializing to $y$, the induced morphism on stalks $\\\\mathcal{F}_{f(y)} \\\\to \\\\ma\"}\n  {\"name\": \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (U : TopologicalSpace.Opens ↑X) (x : ↑X) (hx : x ∈ U)\\n  (V : TopologicalSpace.Opens ↑Y) (hV : U ≤ (TopologicalSpace.Opens.map f).obj V),\\n  Ca\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, and let $\\\\mathcal{F}$ be a presheaf on $Y$ with values in a category $C$ that has colimits. Let $f^{-1}$ denote the pullback functor an\"}\n  {\"name\": \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk_assoc\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (U : TopologicalSpace.Opens ↑X) (x : ↑X) (hx : x ∈ U)\\n  (V : TopologicalSpace.Opens ↑Y) (hV : U ≤ (TopologicalSpace.Opens.map f).obj V) {Z : \", \"doc\": \"For topological spaces $X,Y$ with continuous map $f:X\\\\to Y$, presheaf $\\\\mathcal{F}$ on $Y$, open set $U\\\\subseteq X$ containing $x\\\\in X$, and open set $V\\\\subseteq Y$ with $U\\\\subseteq f^{-1}(V)$, the co\"}\n  {\"name\": \"TopCat.Presheaf.stalkPushforward_germ\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C X) (U : TopologicalSpace.Opens ↑Y) (x : ↑X)\\n  (hx : (CategoryTheory.ConcreteCategory.hom f) x ∈ U),\\n  CategoryTheory.CategoryStruct.comp\\n      (\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, $\\\\mathcal{F}$ be a presheaf on $X$ with values in a category $\\\\mathcal{C}$, and $x$ be a point in $X$. Let $U$ be an open neighborhood \"}\n  {\"name\": \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_app_app_germToPullbackStalk_assoc\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (V : (TopologicalSpace.Opens ↑Y)ᵒᵖ) (x : ↑X)\\n  (hx : (CategoryTheory.ConcreteCategory.hom f) x ∈ Opposite.unop V) {Z : C}\\n  (h : F.stalk ((Ca\", \"doc\": \"For any presheaf $\\\\mathcal{F}$ on $Y$, open set $V \\\\subseteq Y$, point $x \\\\in X$, and morphism $h: \\\\mathcal{F}_{f(x)} \\\\to Z$, the composition of the adjunction unit $\\\\eta_{\\\\mathcal{F}}(V)$ with the ge\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {M : X.Modules} (f : X ⟶ Y) {U V : Y.Opens} (i : U ⟶ V),\\n  ((AlgebraicGeometry.Scheme.Modules.pushforward f).obj M).presheaf.map i.op =\\n    M.presheaf.map ((TopologicalSpace.Opens.map f.base).map i).op\", \"doc\": \"For a morphism $ f : X \\\\to Y $ of schemes and a sheaf of modules $ M $ over $ X $, the restriction map of the pushforward sheaf $ f_*M $ on an inclusion $ U \\\\subset V $ in $ Y $'s open sets is equal t\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"unit\", \"IsIso\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Presheaf.instIsIsoFunctorLeftKanExtensionUnitOppositeTypeUliftYoneda\", \"module\": \"Mathlib.CategoryTheory.Limits.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {ℰ : Type u₂} [CategoryTheory.Category.{v₂, u₂} ℰ] (A : CategoryTheory.Functor C ℰ) [CategoryTheory.uliftYoneda.{max w v₂, v₁, u₁}.HasPointwiseLeftKanExtension A] : CategoryTheory.IsIso (CategoryTheory.uliftYoneda.{max w v₂, v₁, u₁}.leftKanExtensio\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.isIso_sheafificationAdjunction_counit\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheafification\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] [CategoryTheory.HasWeakSheafify J D] (P : CategoryTheory.Sheaf J D) : CategoryTheory.IsIso ((CategoryTheory.sheafificationAdjunction J D).counit.app P\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.instIsIsoFunctorOppositeHomFullSubcategoryIsSheafAppSheafCounitSheafificationAdjunction\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheafification\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] [CategoryTheory.HasWeakSheafify J D] (P : CategoryTheory.Sheaf J D) : CategoryTheory.IsIso ((CategoryTheory.sheafificationAdjunction J D).counit.app P\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instIsIsoFunctorSheafOfModulesCounitSheafificationAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C} {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.obj) [CategoryTheory.Presheaf.IsLocallyInjective J α] [CategoryTheory.Presheaf.IsLocallySurjective J α] [J.WEqual\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (J : CategoryTheory.GrothendieckTopology C) (K : CategoryTheory.GrothendieckTopology D) {A : Type w} [CategoryTheory.Category.{w', w} A] [∀ (X : Dᵒᵖ), Categor\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instIsIsoModulesSpecFromTildeΓUnitOpensCarrierCarrierCommRingCatRingCatSheaf\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \" {R : CommRingCat} : CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Modules.fromTildeΓ (SheafOfModules.unit (AlgebraicGeometry.Spec R).ringCatSheaf))\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_of_isIso_counit_app\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u_2} [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.HasWeakSheafify J D] (F : CategoryTheory.Sheaf J D) [CategoryTheory.Limits.HasTerminal C] [CategoryTheory.IsIso ((CategoryTheory.co\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u_2} [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.HasWeakSheafify J D] [(CategoryTheory.constantSheaf J D).Faithful] [(CategoryTheory.constantSheaf J D).Full] (F : CategoryTheory.Sh\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u_2} [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.HasWeakSheafify J D] [(CategoryTheory.constantSheaf J D).Faithful] [(CategoryTheory.constantSheaf J D).Full] (F : CategoryTheory.Sh\", \"doc\": \"If the constant sheaf functor is fully faithful, then a sheaf is constant if and only if the\\ncounit of the constant sheaf adjunction applied to it is an isomorphism.\\n\"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app'\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u_2} [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.HasWeakSheafify J D] {L : CategoryTheory.Functor D (CategoryTheory.Sheaf J D)} {T : C} (hT : CategoryTheory.Limits.IsTerminal T) (a\", \"doc\": \"A variant of `isConstant_iff_isIso_counit_app` for a general left adjoint to evaluation at a\\nterminal object.\\n\"}\n  {\"name\": \"CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \" (P : TopCat → Prop) [∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)] [CompHausLike.HasProp P PUnit.{u + 1}] [CompHausLike.HasExplicitFiniteCoproducts P] [CompHausLike.HasExplicitPullbacks P] (hs : ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y), CategoryTheory.EffectiveEpi f \", \"doc\": \"\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localAcyclic|locallyAcyclic|beta.*IsIso",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local acyclicity derived unit isomorphism on the closed fibre",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proper-locally-acyclic-specialization",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "blueprint": [
+   "Proof first paragraph: constructibility clause via existing 0GL0 -> 0GKW -> 0GKV case (a) -> 0GKD branch; input 0GJU (lemma-beta-is-isomorphism)."
+  ],
+  "steps": [
+   "Step 1 verifies qcqs hypotheses for h before applying 03Q9.",
+   "Step 2 identifies strict-local fibre product W using 0GIP.",
+   "Steps 3-4 compute stalk cohomology and identify the unit with alpha.",
+   "Steps 5-6 apply local acyclicity and stalk conservativity."
+  ],
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-local-acyclicity-closed-fibre-unit",
+  "worker": "stage1",
+  "summary": "Split the sheaf-in-degree-zero specialization of Stacks 0GJU into the affine qcqs check, compatible strict-local geometry, canonical stalk and unit calculations, local-acyclicity vanishing, and stalkwise derived isomorphism criterion; added one statement-only strict-local geometry input. Statements retain arbitrary geometric-point field extensions and impose no properness or torsion assumption.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-2968f4087",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-2968f4087 (reviewer sub-agent of L); spot-checked: Read the mathematics in full: all six steps and the new geometry lemma agree with Stacks 0GJU, 0GJS, and 0GIP, including arbitrary geometric-point field extensions and the canonical unit map. Corrected two metadata faults in whole JSON files under fixes/. Mathematical content is unchanged. Concrete source, hypothesis, edge-case, duplicate, route, and target-category checks are recorded in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }
