@@ -6,6 +6,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
+import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 
 /-! # Copowers for proper geometric-point derived direct image
 

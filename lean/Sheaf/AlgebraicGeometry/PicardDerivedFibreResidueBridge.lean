@@ -16,6 +16,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Fiber
+import Sheaf.AlgebraicGeometry.PicardH1CommonMinimalModel
 
 /-! A common affine residue model bridge for the derived fibre comparison.
 
