@@ -1,0 +1,92 @@
+{
+ "id": "lem-weil-pbc-smooth-local-on-source",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7). Auxiliary input: Tag 0C0C, label lemma-descend-smooth, in Situation situation-descent-property; persistence by base change of smooth morphisms; Tag 0C0C proof: Being smooth is local on the source and the target; source-cover assembly after affine ring descent",
+   "via": [
+    "lem-weil-pbc-descend-smooth-qcqs",
+    "lem-weil-pbc-good-curves-generic-diagram",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Smoothness is local on an open cover of the source",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and $(U_a)_{a\\in A}$ a family of open subschemes of $X$ whose union is $X$, with inclusion maps $j_a:U_a\\to X$. Then $f$ is smooth [def-sbc-smooth-morphisms] if and only if every composite $f\\circ j_a:U_a\\to Y$ is smooth. The index set $A$ may be empty, in which case the covering hypothesis implies $X=\\varnothing$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01V6, label lemma-smooth-characterize, equivalence (1) and (3), taking the target cover to be the single open Y"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes is smooth if its restrictions to all members of an open cover of the source are smooth",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtSource.of_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtSource P]\\n  {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (𝒰 : X.OpenCover),\\n  (∀ (i : 𝒰.I₀), P (CategoryTheory.CategoryStruct.comp (𝒰.f i) f)) → P f\", \"doc\": \"If a morphism property $ P $ is Zariski-local at the source, and for every morphism $ i $ in an open cover $ \\\\mathcal{U} $ of the source, the composition $ \\\\mathcal{U}.f_i \\\\circ f $ satisfies $ P $, t\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtSource.of_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtSource P]\\n  {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (𝒰 : X.OpenCover),\\n  (∀ (i : 𝒰.I₀), P (CategoryTheory.CategoryStruct.comp (𝒰.f i) f)) → P f\", \"doc\": \"If a morphism property $ P $ is Zariski-local at the source, then for any scheme $ X $, any open cover $ \\\\mathcal{U} $ of $ X $, and any morphism $ f: X \\\\to Y $, if the composition of each open immers\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtSource.iff_of_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtSource P]\\n  {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (𝒰 : X.OpenCover),\\n  P f ↔ ∀ (i : 𝒰.I₀), P (CategoryTheory.CategoryStruct.comp (𝒰.f i) f)\", \"doc\": \"A morphism property $ P $ is Zariski-local at the source if and only if for every open cover $ \\\\mathcal{U} $ of the source scheme and any morphism $ f $, $ P(f) $ holds if and only if $ P(\\\\mathcal{U}_\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtSource.iff_of_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtSource P]\\n  {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (𝒰 : X.OpenCover),\\n  P f ↔ ∀ (i : 𝒰.I₀), P (CategoryTheory.CategoryStruct.comp (𝒰.f i) f)\", \"doc\": \"A morphism property $ P $ that is Zariski-local at the source satisfies $ P(f) $ if and only if for every open immersion $ u_i : U_i \\\\to X $ in an open cover $ \\\\{U_i\\\\} $ of the source scheme $ X $, th\"}\n",
+   "date": "2026-10-14",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsZariskiLocalAtSource.iff_of_openCover",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtSource.iff_of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \" {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtSource P] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (𝒰 : X.OpenCover) : P f ↔ ∀ (i : 𝒰.I₀), P (CategoryTheory.CategoryStruct.comp (𝒰.f i) f)\", \"doc\": \"\"}\n",
+   "date": "2026-10-14",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "(theorem|lemma) (iff_of_openCover|of_openCover)|instance.*IsZariskiLocalAtSource",
+   "results": "[grep] OK 13 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/LimitsOver.lean\", \"line\": \"124\", \"text\": \"instance IsZariskiLocalAtSource.isClosedUnderColimitsOfShape_discrete {ι : Type*} [Small.{u} ι]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\", \"line\": \"164\", \"text\": \"instance : IsZariskiLocalAtSource (topologically IsOpenMap) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\", \"line\": \"322\", \"text\": \"instance : IsZariskiLocalAtSource (topologically GeneralizingMap) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"line\": \"382\", \"text\": \"instance : IsZariskiLocalAtSource P := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"160\", \"text\": \"lemma of_openCover (H : ∀ i, P (𝒰.pullbackHom f i)) : P f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"164\", \"text\": \"theorem iff_of_openCover (𝒰 : Y.OpenCover) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"276\", \"text\": \"lemma of_openCover (H : ∀ i, P (𝒰.f i ≫ f)) : P f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"283\", \"text\": \"theorem iff_of_openCover :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"563\", \"text\": \"theorem of_openCover\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso.lean\", \"line\": \"41\", \"text\": \"instance : IsZariskiLocalAtSource @IsLocalIso := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"line\": \"99\", \"text\": \"instance : IsZariskiLocalAtSource @UniversallyOpen := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"line\": \"69\", \"text\": \"instance : IsZariskiLocalAtSource @SurjectiveOnStalks :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"line\": \"80\", \"text\": \"instance : IsZariskiLocalAtSource @WeaklyEtale := by\"}\n",
+   "date": "2026-10-14",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth morphism is local on source for any open cover",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem iff_of_iSup_eq_top|instance : HasRingHomProperty @Smooth|instance : IsZariskiLocalAtSource P",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"73\", \"text\": \"instance : HasRingHomProperty @Smooth RingHom.Smooth where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"line\": \"375\", \"text\": \"theorem iff_of_iSup_eq_top [IsAffine Y] {ι : Type*}\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"line\": \"382\", \"text\": \"instance : IsZariskiLocalAtSource P := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"156\", \"text\": \"theorem iff_of_iSup_eq_top {ι} (U : ι → Y.Opens) (hU : iSup U = ⊤) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"272\", \"text\": \"theorem iff_of_iSup_eq_top {ι} (U : ι → X.Opens) (hU : iSup U = ⊤) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"558\", \"text\": \"theorem iff_of_iSup_eq_top\"}\n",
+   "date": "2026-10-14",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"iff_of_iSup_eq_top\"",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtSource.iff_of_iSup_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \" {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtSource P] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {ι : Sort u_1} (U : ι → X.Opens) (hU : iSup U = ⊤) : P f ↔ ∀ (i : ι), P (CategoryTheory.CategoryStruct.comp (U i).ι f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.iff_of_iSup_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \" {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtTarget P] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {ι : Sort u_1} (U : ι → Y.Opens) (hU : iSup U = ⊤) : P f ↔ ∀ (i : ι), P (f ∣_ U i)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.iff_of_iSup_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \" {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {Q : AlgebraicGeometry.AffineTargetMorphismProperty} [AlgebraicGeometry.HasAffineProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {ι : Sort u_1} (U : ι → ↑Y.affineOpens) (hU : ⨆ i, ↑(U i) = ⊤) : P f ↔ ∀ (i : ι), Q (f ∣_ ↑(U i)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.iff_of_iSup_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties\", \"type\": \" {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} [AlgebraicGeometry.HasRingHomProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.IsAffine Y] {ι : Type u_1} (U : ι → ↑X.affi\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \" {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} {S : ι → ↑X.affineOpens} (hS : ⨆ i, ↑(S i) = ⊤) : AlgebraicGeometry.IsLocallyNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i)))\", \"doc\": \"A scheme is locally Noetherian if and only if it is covered by affine opens whose sections\\nare Noetherian rings.\\n\\nSee [Har77], Proposition II.3.2. \"}\n",
+   "date": "2026-10-14",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsZariskiLocalAtSource.iff_of_iSup_eq_top",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+  "line": 272,
+  "how": "specializes in one line: take P := @AlgebraicGeometry.Smooth and U := the family of source opens in IsZariskiLocalAtSource.iff_of_iSup_eq_top (Basic.lean:272-274). The source-local instance is inferred from HasRingHomProperty (RingHomProperties.lean:382-389), using the smooth instance (Smooth.lean:73-77). Alternatively iff_of_openCover (Basic.lean:283-285) gives the same assertion. Scheme smoothness uses the same recorded Mathlib realization of def-sbc-smooth-morphisms as the existing Mathlib leaf lem-weil-pbc-smooth-restrict-open-subschemes; the source identifies the two conventions by Tag 02H6."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-weil-pbc-descend-smooth-qcqs",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

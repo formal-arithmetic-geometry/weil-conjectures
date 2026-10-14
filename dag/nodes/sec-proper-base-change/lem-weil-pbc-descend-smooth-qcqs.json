@@ -18,7 +18,7 @@
  },
  "kind": "statement",
  "title": "Smoothness descends along arbitrary qcqs affine-transition limits",
- "statement": "Let $I$ be a nonempty directed set and $(S_i)_{i\\in I}$ an inverse system of quasi-compact quasi-separated schemes with affine transition morphisms [def-pc-scheme] [def-weil-pbc-scheme-conventions] [pqf-def-affine-morphism], and let $S=\\varprojlim_iS_i$ [lem-weil-pbc-limit-affine-transition]. Fix $i_0\\in I$, quasi-compact quasi-separated $S_{i_0}$-schemes $X_{i_0},Y_{i_0}$, and an $S_{i_0}$-morphism $f_{i_0}:X_{i_0}\\to Y_{i_0}$ locally of finite presentation [def-sbc-locally-finite-presentation]. Write $f_i$ and $f$ for its base changes to $S_i$ and $S$ [def-pc-fibre-product]. If $f$ is smooth [def-sbc-smooth-morphisms], there is $i\\geq i_0$ such that $f_j$ is smooth for every $j\\geq i$. No Noetherian hypothesis is imposed on the stages.",
+ "statement": "Let $I$ be a nonempty directed set and $(S_i)_{i\\in I}$ an inverse system of schemes with affine transition morphisms [def-pc-scheme] [def-weil-pbc-scheme-conventions] [pqf-def-affine-morphism], and let $S=\\varprojlim_iS_i$ [lem-weil-pbc-limit-affine-transition]. Fix $i_0\\in I$ and assume $S_{i_0}$ is quasi-compact and quasi-separated. Fix quasi-compact quasi-separated $S_{i_0}$-schemes $X_{i_0},Y_{i_0}$, and an $S_{i_0}$-morphism $f_{i_0}:X_{i_0}\\to Y_{i_0}$ locally of finite presentation [def-sbc-locally-finite-presentation]. Write $f_i$ and $f$ for its base changes to $S_i$ and $S$ [def-pc-fibre-product]. If $f$ is smooth [def-sbc-smooth-morphisms], there is $i\\geq i_0$ such that $f_j$ is smooth for every $j\\geq i$. No Noetherian hypothesis is imposed on the stages.",
  "source": {
   "document": "literature/stacks-project/limits.tex",
   "place": "Tag 0C0C, label lemma-descend-smooth, in Situation situation-descent-property; persistence by base change of smooth morphisms"
@@ -32,9 +32,123 @@
   "def-pc-fibre-product",
   "def-sbc-smooth-morphisms"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $0=i_0$. For every $x\\in X_0$, choose an affine open $W_x\\subseteq S_0$ containing its image, an affine open $V_x\\subseteq Y_0$ containing $f_0(x)$ and contained in the inverse image of $W_x$, and an affine open $U_x\\subseteq X_0$ containing $x$ and contained in $f_0^{-1}(V_x)$. The affine-basis statement supplies each choice inside the specified open. The $U_x$ cover $X_0$, so quasi-compactness gives a finite subcover. Relabel its triples $(W_a,V_a,U_a)$ for $a\\in A$, with $A$ finite. If $X_0$ is empty take $A$ empty. No assertion that intersections of affine opens are affine is needed.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C0C, label lemma-descend-smooth, proof: affine-local reduction and Tag 0C0B"
+   }
+  },
+  {
+   "text": "For a fixed triple and $k\\geq0$, put $W_k=S_k\\times_{S_0}W_0$, $V_k=V_0\\times_{W_0}W_k$, and $U_k=U_0\\times_{W_0}W_k$; use analogous notation without subscripts over $S$. A morphism to $X_k$ whose image lies in the inverse image of $U_0$ factors uniquely through that open; its component to $X_0$ factors uniquely through $U_0$. The fibre-product universal property therefore identifies that open with $U_0\\times_{S_0}S_k$, and likewise for $V_0$ and over $S$. The last two are precisely the inverse images of $V_0$ and $U_0$ in $Y_k$ and $X_k$: in both descriptions a test scheme gives the same pair of maps to the original open and to $S_k$, agreeing in $S_0$. The restricted morphism is $h_k:U_k\\to V_k$. Projections $S_k\\to S_0$ and $S\\to S_0$ are affine. Affine permanence under base change makes $W_k,W,V_k,V,U_k,U$ affine, and their transition maps affine. The original ring map $B_0=\\Gamma(V_0,\\mathcal O)\\to C_0=\\Gamma(U_0,\\mathcal O)$ is finitely presented by the affine-open finite-presentation lemma applied to $f_0$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C0C, label lemma-descend-smooth, proof: affine-local reduction and Tag 0C0B"
+   }
+  },
+  {
+   "text": "The restricted diagram $(W_k)_{k\\geq0}$ has limit $W$, by the open-limit clause of the affine-transition theorem. The diagram $(V_k)$ has limit $V$: a compatible cone $T\\to V_k$ gives a single $T\\to V_0$ and a compatible cone $T\\to W_k$ agreeing over $W_0$; the latter gives a unique $T\\to W$, hence a unique $T\\to V_0\\times_{W_0}W=V$. Conversely the two projections of this fibre product give the cone. Apply the affine limit formula to get $B=\\Gamma(V,\\mathcal O)=\\varinjlim_{k\\geq0}B_k$, where $B_k=\\Gamma(V_k,\\mathcal O)$, with the canonical ring coprojections. Pullback pasting gives $U_k=U_0\\times_{V_0}V_k$ and $U=U_0\\times_{V_0}V$: both pairs of maps agree in $V_0$, and their composite agreement in $W_0$ is exactly the defining agreement for the original fibre products. The affine-spectra fibre-product statement therefore identifies their rings, compatibly with both projections, as $C_k=C_0\\otimes_{B_0}B_k$ and $C=C_0\\otimes_{B_0}B$. Thus the diagram used in ring descent is the directed system of the $B_k$, not an unspecified system of rings.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C0C, label lemma-descend-smooth, proof: affine-local reduction and Tag 0C0B"
+   }
+  },
+  {
+   "text": "The limit restriction $h:U\\to V$ is smooth: $U,V$ are open subschemes of $X,Y$ and $f(U)\\subseteq V$, so apply smooth restriction. Identify $h$ with the spectrum of $B\\to C$ using the induced-ring-map spectrum square and the canonical affine-open isomorphisms; the smooth ring-map/affine-scheme equivalence gives smoothness of $B\\to C$. Apply the fixed-map smooth-pushout descent theorem with its $A=B_0$, its $B=C_0$, diagram $F_k=B_k$, and pushouts $C_k=C_0\\otimes_{B_0}B_k$, $L=C_0\\otimes_{B_0}B$. Its finite-presentation hypothesis is exactly the one verified in step 2, and its smoothness hypothesis is the preceding equivalence. It gives an index $k_a\\geq0$ where $B_{k_a}\\to C_{k_a}$ is smooth. No Noetherian or faithful-flatness hypothesis occurs in this ring theorem.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-sbc-smooth-pushout-filtered-colimit-stage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C0C, label lemma-descend-smooth, proof: affine-local reduction and Tag 0C0B"
+   }
+  },
+  {
+   "text": "By directedness choose an upper bound $i$ for the finite set consisting of $0$ and the indices $k_a$. This follows by induction on the finite set using a common upper bound for each pair; including $0$ handles $A=\\varnothing$. For each $a$, the ring map $B_i\\to C_i$ is the base change of $B_{k_a}\\to C_{k_a}$: $U_{k_a}\\times_{V_{k_a}}V_i$ and $U_i$ are both canonically $U_0\\times_{V_0}V_i$. On test schemes this identifies the common map to $U_0$ and the map to $V_i$ agreeing in $V_0$, and preserves the projection to $V_i$. Affine fibre products thus identify the map with $B_i\\to C_{k_a}\\otimes_{B_{k_a}}B_i$. Smooth ring maps are stable under base change, so it is smooth. The affine-scheme equivalence, the spectrum square, and invariance under affine comparison isomorphisms give smoothness of $h_{a,i}:U_{a,i}\\to V_{a,i}$. Composing with the open inclusion $V_{a,i}\\to Y_i$ is smooth by clause (b) of smooth restriction.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C0C, label lemma-descend-smooth, proof: affine-local reduction and Tag 0C0B"
+   }
+  },
+  {
+   "text": "The opens $U_{a,i}$ cover $X_i$: their union is the inverse image of $\\bigcup_aU_{a,0}=X_0$ under $X_i\\to X_0$. Each restricted composite to $Y_i$ was proved smooth in step 5. The source-local smoothness criterion now gives smoothness of $f_i$. The criterion also covers the empty family when $X_i=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C0C, label lemma-descend-smooth, proof: affine-local reduction and Tag 0C0B"
+   }
+  },
+  {
+   "text": "For every $j\\geq i$, the canonical square from $f_j$ to $f_i$ is cartesian: $X_j=X_i\\times_{Y_i}Y_j$, since both sides represent the pair of maps to $X_0$ and $S_j$ agreeing in $S_0$. Thus $f_j$ is the base change of $f_i$ along $Y_j\\to Y_i$, and clause (2) of proper-and-smooth base change makes it smooth. This gives the all-later conclusion.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VB, label lemma-base-change-smooth; applied to the cartesian square identified by the fibre-product universal property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-pc-proper-base-change",
+  "lem-sbc-smooth-pushout-filtered-colimit-stage",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0C0C, label lemma-descend-smooth; omitted affine-local reduction written out, with Tag 0C0B in algebra.tex and persistence Tag 01VB in morphisms.tex"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -77,15 +191,79 @@
    "results": "{\"t\": \"2026-10-14T08:13:52Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth morphism at a filtered inverse limit descends to a sufficiently large index\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\"], \"digest\": \"b3b25e2c9b9fb534\"}",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented scheme morphism smooth over a qcqs inverse limit is eventually smooth without Noetherian assumptions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eventual smoothness of fixed finite presentation model in an inverse system with affine transition morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"RingHom.smooth_def\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Smooth ↔ f.FormallySmooth ∧ f.FinitePresentation\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is formally smooth and finitely presented as an $ R $-algebra. This means $ S $ must satisfy the formal smoothness lifting property, be \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"IsLimit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "descend.*smooth|smooth.*IsLimit|exists.*smooth.*stage",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"41\", \"text\": \"instance : DescendsAlong @Smooth (@Surjective ⊓ @Flat ⊓ @QuasiCompact) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"42\", \"text\": \"  HasRingHomProperty.descendsAlong_flat RingHom.Smooth.codescendsAlong_faithfullyFlat\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smoothness descends to a finite stage in a directed inverse system of schemes",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-good-curves-generic-diagram",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-descend-smooth-qcqs",
+  "worker": "stage1",
+  "summary": "Expanded Tag 0C0C through finite affine charts, affine limits, ring pushouts and smooth ring-map descent, followed by source locality and persistence. Corrected the unnecessary all-stage qcqs restriction to Situation 081D: only the fixed base stage must be qcqs. One new Mathlib leaf for source locality.",
+  "blueprint": "Classical constructibility paragraph of thm-weil-pbc-direct-image-finiteness-proper, expanded through Tag 0GKX and good-curves diagram: smoothness descent input of Tag 0C0C; steps 1-6 expand its affine-local proof and step 7 its persistence.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-pushout-filtered-colimit-stage",
+    "why": "Generic finite-presentation ring-map descent, exactly the affine algebra input Tag 0C0B of the source; the Noetherian scheme-stage nodes cannot replace it for arbitrary qcqs stages."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only its smoothness base-change clause (2) is used for persistence at all later indices; a generic scheme-morphism tool, preserving the source route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-pushout-filtered-colimit-stage",
+  "lem-pc-proper-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-e2fc6554a",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-e2fc6554a (reviewer sub-agent of L); spot-checked: Read the full mathematics and checked all seven steps, the new source-locality leaf, cited statements, source locations, edge cases, duplicates, route and archived target coefficient categories. Corrected only step 7's source to Stacks 01VB (smooth base-change stability). Accepted both proposed tool_uses. Review and corrected whole-node JSON are written; no mathematical gap or target weakening found.; 1 file(s) fixed by the reviewer"
+ }
 }
