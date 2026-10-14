@@ -1,0 +1,170 @@
+{
+ "id": "lem-pc-relative-mv-direct-image-rows",
+ "kind": "statement",
+ "title": "Resolved relative comparison of short exact rows before cone passage",
+ "statement": "Assume derived module categories on every scheme [def-pc-derived-category]. Let f:X to S, f-prime:X-prime to S-prime, g:S-prime to S and g-prime:X-prime to X form a cartesian square. Fix K in D(O_X), K-prime in D(O_X-prime), phi:L(g-prime)* K to K-prime [def-pc-derived-pullback], and opens U,V covering X. Use the pinned global arrow a and local arrows b(W) [def-pc-relative-mv-maps]. Let G be underived module direct image along g, F its cochain functor and eta the right-derived localization comparison [def-pc-mayer-vietoris-image-chain-data]. There exist short complexes P on S and P-prime on S-prime, both short exact, and an actual short-complex morphism m:P to P-prime.map F. There are six vertex isomorphisms identifying Lg* Q(P.X1), Lg* Q(P.X2), Lg* Q(P.X3) with a.left, b(U).left direct-sum b(V).left and b(U intersection V).left, and Q(P-prime.X1), Q(P-prime.X2), Q(P-prime.X3) with the corresponding right vertices. The adjoint mates of Q(m.tau1) eta, Q(m.tau2) eta and Q(m.tau3) eta, after these vertex comparisons, are a.hom, biprod.map b(U).hom b(V).hom and b(U intersection V).hom, respectively. No mapping-cone identification, cone map, tensor-pullback complex or triangle assertion is included.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-relative-mv-maps",
+  "def-pc-mayer-vietoris-image-chain-data"
+ ],
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08BV, 08HZ, 08FE and 08HY; resolved relative row comparison before cone passage. Tag 0D5T and lem-pc-ringed-space-direct-image-kinjective-acyclic justify the unbounded direct-image computations. The explicit homotopy-pullback differential below is the agent-written elementary rectification."
+ },
+ "proof": [
+  {
+   "text": "Choose injective-term K-injective I,J representing K,K-prime. Resolve g-prime_* J by L with quasi-isomorphism rho and represent the transposed coefficient arrow by r:I to L. Form S=f_* MV(I), R=f_* MV(L), P-prime=f-prime_* MV(J) on the inverse-image cover, and T=G(P-prime). Sheaf gluing and injective flasqueness prove these rows exact on sections, including T. Sectionwise comparisons give strict row maps u:S to R and v:T to R. Every v component is a quasi-isomorphism: restriction and open direct image preserve K-injectivity; apply isIso_moduleDirectImage_unit_on_kInjective to these K-injective complexes on X-prime and the subsequent direct images. Naturality of the right-derived units identifies Q(v) with the derived images of rho. This uses unbounded direct-image acyclicity, never a general assertion about termwise flasque complexes.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-kinjective-mayer-vietoris-presentation",
+    "def-pc-mayer-vietoris-image-chain-data",
+    "lem-pc-ringed-space-direct-image-kinjective-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the row homotopy pullback P of u and v. In degree n at each vertex set P_i^n=S_i^n direct-sum T_i^n direct-sum R_i^(n-1), with differential (s,t,z) maps to (ds,dt,-dz+u(s)-v(t)), and the summandwise horizontal maps. This is a short exact row because S,T,R are exact. Projection p:P to S is a degreewise split epimorphism whose kernel at vertex i is Cone(v_i)[-1], up to sign. Since v_i is a quasi-isomorphism, its cone is acyclic and p_i is a quasi-isomorphism. Projection m:P to T is a strict row map and projection to z supplies the row homotopy u p homotopic to v m. Therefore Q(m_i)=Q(v_i)^(-1) Q(u_i) Q(p_i), simultaneously at all three vertices. This is an explicit replacement of the actual row roof and retains its quotient component. No cone-to-quotient identification is used.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose source vertex comparisons with Lg* and target comparisons with the exact-open and pinned direct-image composition comparisons. Apply the right-derived unit eta and take the pinned adjunction mates. Expand base change as the mate of the pulled-back counit. Pasting the composite counit formula gives the global equation. Naturality of open units and the underived open counit square give the two local equations; biproduct projection extensionality gives the middle equation. The same counit computation on the retained quotient gives the overlap equation. For an empty open the relevant terms are zero, for repeated opens the restriction rows split, and zero coefficients and zero phi give zero rows and row maps.",
+   "uses": [
+    "def-pc-relative-mv-maps",
+    "lem-pc-mayer-vietoris-underived-open-counit-square",
+    "def-pc-mayer-vietoris-image-chain-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-mayer-vietoris-image-chain-data",
+  "def-pc-relative-mv-maps",
+  "lem-pc-kinjective-mayer-vietoris-presentation",
+  "lem-pc-mayer-vietoris-underived-open-counit-square",
+  "lem-pc-ringed-space-direct-image-kinjective-acyclic",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08BV, 08HZ, 08FE, 08HY and 0D5T; resolved rows and unbounded direct-image acyclicity. The agent-written homotopy pullback has the explicit differential recorded in step 2; it replaces the former unspecified finite-diagram common-denominator rectification. Cone-to-quotient passage remains proved in the parent Lean module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A resolved relative Mayer Vietoris comparison is represented by a map of short exact rows before derived pullback",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-14",
+   "verdict": "Unavailable; no absence verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneously represent a morphism of Mayer Vietoris exact rows by chain maps into underived direct image while preserving the quotient component",
+   "results": "Eight additive-sheaf MayerVietorisSquare shortComplex matches; none constructs this relative comparison.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.descShortComplex",
+   "results": "Twelve generic cone/quotient APIs, including quasiIso_descShortComplex, descShortComplex_naturality and map_descShortComplex; none constructs the resolved rows.",
+   "date": "2026-10-14",
+   "verdict": "Tools for the parent cone passage only."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*row|resolved.*row|right denominator; descShortComplex.*naturality|mapHomologicalComplexIso_hom_descShortComplex",
+   "results": "Mathlib gives generic cone naturality. Library has RelativeMVCoverRows, but it is downstream of this item through RelativeMVCoverChainSquare and cannot be imported. KInjectiveMayerVietorisPresentation concerns one absolute row, not the simultaneous relative comparison. Blueprint searches for relative Mayer Vietoris row and 08HZ gave no match; Mayer matched only unrelated lem-kun-0f10.",
+   "date": "2026-10-14",
+   "verdict": "No existing relative row construction usable without an import cycle."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms of short exact cochain complex sequences inducing natural maps of quotients under an additive functor",
+   "results": "Eight hits: additive mapping-cone compatibility, homology-sequence maps, triangleOfSES_mor1 and related generic APIs.",
+   "date": "2026-10-14",
+   "verdict": "Second reading: no relative-row construction; generic cone quotient APIs already used by the parent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.descShortComplex, CategoryTheory.Functor.mapHomologicalComplex",
+   "results": "mapHomologicalComplexIso_hom_descShortComplex and its reassociated variant.",
+   "date": "2026-10-14",
+   "verdict": "Second reading: generic additive comparison already used; no construction of relative rows."
+  },
+  {
+   "tool": "grep",
+   "query": "resolved.*row|row.*rectif|isIso_moduleDirectImage_unit_on_kInjective in lean/Sheaf, lean/WeilConjectures and Mathlib",
+   "results": "RingedSpaceDirectImageKInjectiveAcyclic supplies the unbounded computation criterion. RelativeMVCoverRows is downstream through RelativeMVCoverChainSquare. Generic cone naturality in Mathlib.",
+   "date": "2026-10-14",
+   "verdict": "Second reading: use the existing acyclicity node and an explicit row homotopy pullback; no duplicate relative-row theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeMVDirectImageHomotopyComparison",
+  "date": "2026-10-14",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Resolved relative short exact row comparison, before the cone-to-quotient passage in lem-pc-relative-mv-direct-image-homotopy-comparison.",
+   "via": [
+    "lem-pc-relative-mv-direct-image-homotopy-comparison",
+    "lem-pc-relative-mv-cover-chain-square",
+    "lem-pc-relative-mv-cover-rows",
+    "lem-pc-relative-mv-cover-homotopy-data",
+    "lem-pc-standard-single-union-homotopy-chain-data",
+    "new-pc-standard-single-union-ses-chain-data",
+    "new-pc-standard-single-union-ses-presentation",
+    "new-pc-standard-single-flat-counit-union-triangles",
+    "new-pc-standard-single-flat-counit-union-equation",
+    "lem-pc-standard-single-flat-counit-union-presentation",
+    "lem-pc-standard-single-flat-counit-union",
+    "lem-pc-standard-single-stalk-flat-counit-model",
+    "lem-pc-standard-flat-single-base-change",
+    "lem-pc-standard-flat-single-base-change-epi"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeMVDirectImageRows",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeMVDirectImageRows.lean",
+  "declaration": "AlgebraicGeometry.relativeMV_direct_image_rows",
+  "statement": "theorem relativeMV_direct_image_rows\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (hpull : IsPullback g' f' f g)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    (U V : X.Opens) (hcover : U ⊔ V = ⊤) :\n    let G := RingedSpace.moduleDirectImage g.toLRSHom.toShHom\n    let F := G.mapHomologicalComplex (.up ℤ)\n    let η := schemeMVDirectImageLocalization g\n    let adj := relativeMVAdj g\n    let a := relativeMVGlobalArrow f f' g g' hpull K K' φ\n    let b := relativeMVLocalArrow f f' g g' hpull K K' φ\n    ∃ (P : ShortComplex (CochainComplex\n        (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ))\n      (P' : ShortComplex (CochainComplex\n        (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) ℤ))\n      (m : P ⟶ P'.map F)\n      (e₁ : (derivedPullback g).obj (DerivedCategory.Q.obj P.X₁) ≅ a.left)\n      (e₂ : (derivedPullback g).obj (DerivedCategory.Q.obj P.X₂) ≅\n        (b U).left ⊞ (b V).left)\n      (e₃ : (derivedPullback g).obj (DerivedCategory.Q.obj P.X₃) ≅ (b (U ⊓ V)).left)\n      (e₁' : DerivedCategory.Q.obj P'.X₁ ≅ a.right)\n      (e₂' : DerivedCategory.Q.obj P'.X₂ ≅ (b U).right ⊞ (b V).right)\n      (e₃' : DerivedCategory.Q.obj P'.X₃ ≅ (b (U ⊓ V)).right),\n      P.ShortExact ∧ P'.ShortExact ∧\n      (adj.homEquiv _ _).symm (DerivedCategory.Q.map m.τ₁ ≫ η.app P'.X₁) ≫ e₁'.hom =\n        e₁.hom ≫ a.hom ∧\n      (adj.homEquiv _ _).symm (DerivedCategory.Q.map m.τ₂ ≫ η.app P'.X₂) ≫ e₂'.hom =\n        e₂.hom ≫ biprod.map (b U).hom (b V).hom ∧\n      (adj.homEquiv _ _).symm (DerivedCategory.Q.map m.τ₃ ≫ η.app P'.X₃) ≫ e₃'.hom =\n        e₃.hom ≫ (b (U ⊓ V)).hom",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261014T090921-L-367135",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261014T090921-L-367135",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
