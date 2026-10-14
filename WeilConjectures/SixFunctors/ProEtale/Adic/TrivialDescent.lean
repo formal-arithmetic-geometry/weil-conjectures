@@ -640,6 +640,50 @@ lemma bijective_descentTrivApp
     refine (Finset.sum_congr rfl fun j _ ↦ (congrArg₂ (· * ·) (hd j) (congrArg (c j).1 hf) :)).trans ?_
     simp [c]
 
+variable {f γ} in
+/-- **The comparison `f^* G ⟶ ℚ̄_ℓ,Wⁿ` is an isomorphism**, being bijective on sections. -/
+lemma isIso_descentTriv
+    (hdiag : γ.map (PadicAlgCl.locallyFiniteFunctionsComp l (pullback.diagonal f).base.hom) = 1)
+    (hcoc : γ.map (PadicAlgCl.locallyFiniteFunctionsComp l (tripleProj₁₃ f).base.hom) =
+      γ.map (PadicAlgCl.locallyFiniteFunctionsComp l
+        (pullback.snd (pullback.snd f f) (pullback.fst f f)).base.hom) *
+      γ.map (PadicAlgCl.locallyFiniteFunctionsComp l
+        (pullback.fst (pullback.snd f f) (pullback.fst f f)).base.hom)) :
+    IsIso (descentTriv (l := l) f γ) := by
+  have h : IsIso ((ProEtale.localizationRestriction _ f inferInstance).map
+      (kernel.ι (descentMap (l := l) f γ)).hom ≫
+      (ProEtale.localizationRestrictionLowerStarAdjunction _ f inferInstance).counit.app
+        (⨁ fun _ : Fin n ↦ unit l W).X) := by
+    have : IsIso ((sheafToPresheaf (Scheme.ProEt.topology W) (WeilCoefficients.{u} l)).map
+        ((ProEtale.localizationRestriction _ f inferInstance).map
+          (kernel.ι (descentMap (l := l) f γ)).hom ≫
+        (ProEtale.localizationRestrictionLowerStarAdjunction _ f inferInstance).counit.app
+          (⨁ fun _ : Fin n ↦ unit l W).X)) := by
+      have (U : W.ProEtᵒᵖ) : IsIso (((sheafToPresheaf (Scheme.ProEt.topology W)
+          (WeilCoefficients.{u} l)).map ((ProEtale.localizationRestriction _ f inferInstance).map
+            (kernel.ι (descentMap (l := l) f γ)).hom ≫
+          (ProEtale.localizationRestrictionLowerStarAdjunction _ f inferInstance).counit.app
+            (⨁ fun _ : Fin n ↦ unit l W).X)).app U) := by
+        rw [ConcreteCategory.isIso_iff_bijective]
+        have e : ((sheafToPresheaf (Scheme.ProEt.topology W) (WeilCoefficients.{u} l)).map
+            ((ProEtale.localizationRestriction _ f inferInstance).map
+              (kernel.ι (descentMap (l := l) f γ)).hom ≫
+            (ProEtale.localizationRestrictionLowerStarAdjunction _ f inferInstance).counit.app
+              (⨁ fun _ : Fin n ↦ unit l W).X)).app U =
+            ((ProEtale.localizationRestriction _ f inferInstance).map
+              (kernel.ι (descentMap (l := l) f γ)).hom).hom.app U ≫
+            ((ProEtale.localizationRestrictionLowerStarAdjunction _ f inferInstance).counit.app
+              (⨁ fun _ : Fin n ↦ unit l W).X).hom.app U := rfl
+        rw [e, localizationRestrictionLowerStarAdjunction_counit_app_hom_app]
+        exact bijective_descentTrivApp (l := l) hdiag hcoc U.unop
+      exact NatIso.isIso_of_isIso_app _
+    exact isIso_of_reflects_iso _ (sheafToPresheaf _ _)
+  have : IsIso ((Mod.forget _).map (descentTriv (l := l) f γ)) := by
+    change IsIso (descentTriv (l := l) f γ).hom
+    rw [descentTriv_hom]
+    infer_instance
+  exact isIso_of_reflects_iso _ (Mod.forget _)
+
 end Descent
 
 end AdicSheaf
