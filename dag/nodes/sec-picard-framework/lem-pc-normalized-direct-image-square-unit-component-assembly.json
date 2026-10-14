@@ -14,51 +14,83 @@
  },
  "proof": [
   {
-   "text": "Paste the two inverse-unit equations and the equality-transport equation in the derived category. Associativity and cancellation of the comparison isomorphisms yield the target component equation; unfold only the ordinary square comparison to identify its map.",
-   "uses": "lem-pc-direct-image-square-unit-transport",
-   "elementary": false
+   "text": "Abbreviate the two single-unit components by a and b, the two pasted-unit components by U and V, the two normalized comparison components by c and d, and the equality-transport component by t. Write m for the localized ordinary square map in ht. The hypotheses are a ≫ c.inv = U, b ≫ d.inv = V, and a ≫ t = m ≫ b. Substitute h₁ into the left side to obtain a ≫ c.inv ≫ c.hom ≫ t ≫ d.inv. Associativity and c.inv ≫ c.hom = 𝟙 reduce this to a ≫ t ≫ d.inv. Substitute ht to get m ≫ b ≫ d.inv, and then h₂ to get m ≫ V. This uses no cancellation of a unit and no invertibility of a, b, or t.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D5T (lemma-derived-pushforward-composition); elementary component pasting, not its existence proof"
+   }
+  },
+  {
+   "text": "By definition directImageSquareIso gX f f′ g h is pushforwardComp gX f ≪≫ pushforwardCongr h ≪≫ (pushforwardComp f′ g).symm. Expanding this abbreviation in m gives exactly the map on the displayed right-hand side. Hence the equation from step 1 is the desired component equation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D5T (lemma-derived-pushforward-composition); elementary component pasting, not its existence proof"
+   }
   }
  ],
- "proof_deps": "lem-pc-direct-image-square-unit-transport",
+ "proof_deps": [],
  "proof_origin": {
-  "by": "worker",
-  "group": "D2",
-  "date": "2026-10-14",
+  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0D5T, pasting the two composition comparisons with equality transport."
+  "place": "Tag 0D5T (lemma-derived-pushforward-composition); elementary component pasting, not its existence proof"
  },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "component of right-derived functor composition unit",
-   "results": "Generic right-derived composition APIs; no exact scheme direct-image normalization theorem.",
-   "date": "2026-10-14",
-   "verdict": "no exact match"
+   "query": "component assembly for normalized derived direct image square units",
+   "results": "8 hits: normalizationDiagramMap, preservesLocalization_normalizationDiagramMap, guitartExact' (left/right), subSquare, commSquareM?, catCommSq, homOfLE_tAux.",
+   "date": "2026-10-15",
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "Functor.rightDerivedFunctorCompUnit",
-   "results": "Functor.rightDerivedFunctorCompUnit; component formula requires explicit homotopy-category identity normalization.",
-   "date": "2026-10-14",
-   "verdict": "generic declaration only"
+   "query": "Functor.rightDerivedFunctorCompUnit, CategoryTheory.NatTrans.comp_app",
+   "results": "0 hits; unknown identifier Functor.rightDerivedFunctorCompUnit",
+   "date": "2026-10-15",
+   "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "normalizedDirectImageCompUnit|normalizedDirectImageSquare_component",
-   "results": "No existing declaration before this delivery.",
-   "date": "2026-10-14",
-   "verdict": "new intermediate statements"
+   "query": "rightDerivedFunctorCompUnit|normalizedDirectImageCompIso|directImageSquareIso",
+   "results": "0 hits (requested subdirectory Mathlib).",
+   "date": "2026-10-15",
+   "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "categorical pasting of right-derived composition units",
-   "results": "No exact specialized theorem; generic categorical associativity is used in the proof.",
-   "date": "2026-10-14",
-   "verdict": "no exact match"
+   "query": "pasting right derived composition unit equations with equality transport",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category morphism equality by associativity and cancellation of inverse isomorphisms",
+   "results": "8 hits: Iso.cancel_iso_inv_right, cancel_iso_hom_right, cancel_iso_hom_left, cancel_iso_inv_left, cancel_iso_inv_right_assoc, comp_inv_eq, cancel_iso_hom_right_assoc, inv_comp_eq.",
+   "date": "2026-10-15",
+   "verdict": "Generic inverse laws only; no entire specialized implication"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.inv_hom_id_assoc",
+   "results": "CategoryTheory.Iso.inv_hom_id_assoc (Mathlib.CategoryTheory.Iso): self.inv ≫ self.hom ≫ h = h.",
+   "date": "2026-10-15",
+   "verdict": "Elementary inverse law used in step 1; not whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "def directImageSquareIso|def schemeNormalizedDirectImageCompIso|inv_hom_id_assoc",
+   "results": "25 hits: uses of Iso.inv_hom_id_assoc in Adjunction/Mates, FullyFaithful, Linear/Basic, GradedObject/Braiding, Monoidal, HomCongr, ringed-space Gluing and OpenImmersion, Shift/Basic, Topology/Gluing, NielsenSchreier, Preserves/Yoneda, Pullback/HasPullback and IsPullback/Basic. No specialized definitions.",
+   "date": "2026-10-15",
+   "verdict": "Generic inverse laws only"
   }
  ],
  "mathlib_match": null,
- "status": "proved",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit",
@@ -68,9 +100,13 @@
  "blueprint": {
   "is": null,
   "from": {
-   "node": "lem-pc-normalized-direct-image-square-unit",
-   "place": "proof steps: normalization and component assembly",
-   "via": []
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "The base-change assertion is [lem-pc-rf-base-change-flat-module]; component normalization of the canonical comparison, through the normalized direct-image square unit",
+   "via": [
+    "lem-pc-normalized-direct-image-square-unit",
+    "lem-pc-perfect-hom-open-mate-resolution-normalization",
+    "lem-pc-perfect-hom-open-comparison-mate-is-iso"
+   ]
   },
   "same_as": []
  },
@@ -89,12 +125,10 @@
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-e3cf2",
-  "group": "D2",
+  "reviewer": "NT-Codex-NQ-c10497e1f",
+  "group": "NQ",
   "result": "pass",
-  "landing": "20261014T170737-L-2555945",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-c10497e1f (reviewer sub-agent of L); spot-checked: The categorical statement and two-step equation-chain proof are valid, with hypotheses, coefficient category, morphism orientations, edge cases, and existing dependency statements checked. Repair the three source-document fields in the corrected DAG JSON: Tag 0D5T is indexed to literature/stacks-project/cohomology.tex, not sites-cohomology.tex. The repair is at fixes/dag/nodes/sec-picard-framework/lem-pc-normalized-direct-image-square-unit-component-assembly.json.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_proof": {
   "date": "2026-10-14",
@@ -105,5 +139,12 @@
   "landing": "20261014T170737-L-2555945",
   "kind": "interface",
   "note": "independent Codex review: The delivered Lean files, DAG nodes, report, change record, compilation artifacts, and interface review match the stage-3 requirements and preserve the target statement."
+ },
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "lem-pc-normalized-direct-image-square-unit-component-assembly",
+  "worker": "stage1",
+  "summary": "Expanded the categorical pasting into an explicit equation chain using only the given h₁, h₂ and ht. Removed the redundant off-unit transport citation and repaired the inherited blueprint ancestry. No new nodes.",
+  "blueprint": "Supports the blueprint ancestor’s base-change assertion via normalization of the canonical comparison: realizes the parent normalized-square-unit proof step 3, component assembly."
  }
 }
