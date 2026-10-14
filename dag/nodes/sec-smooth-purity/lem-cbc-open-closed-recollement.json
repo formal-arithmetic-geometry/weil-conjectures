@@ -3,46 +3,143 @@
  "blueprint": {
   "is": "lem-cbc-open-closed-recollement",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Open-closed recollement",
- "statement": "Let $i:Z\\hookrightarrow X$ be a\nclosed immersion with\ncomplementary\nopen immersion\n$j:U\\hookrightarrow X$, and let $\\Lambda$ be a finite commutative\nring. For every $K\\in D^+(X_{\\Et},\\Lambda)$ there is a functorial\ndistinguished triangle\n\n$$\nj_!j^{-1}K\\longrightarrow K\\longrightarrow i_*i^{-1}K\n\\longrightarrow j_!j^{-1}K[1],\n$$\n\nwhere $i_*$ is the (exact) direct image of the closed immersion, and\nthe triangle is compatible with the adjunctions\n$j_!\\dashv j^{-1}$, $i^{-1}\\dashv i_*$ of\n[prop-weil-open-closed-recollement-adjunctions].",
+ "statement": "Let $i:Z\\hookrightarrow X$ be a\nclosed immersion with\ncomplementary\nopen immersion\n$j:U\\hookrightarrow X$, and let $\\Lambda$ be a finite commutative\nring. For every $K\\in D^+(X_{\\Et},\\Lambda)$ there is a functorial\ndistinguished triangle\n\n$$\nj_!j^{-1}K\\longrightarrow K\\longrightarrow i_*i^{-1}K\n\\longrightarrow j_!j^{-1}K[1],\n$$\n\nwhere $i_*$ is the (exact) direct image of the closed immersion, and\nthe first two arrows are respectively the counit and unit of the adjunctions\n$j_!\\dashv j^{-1}$, $i^{-1}\\dashv i_*$ on the small etale sites, induced on derived categories by the exact functors. Here $j_!$ is [def-weil-pbc-extension-by-zero], inverse image is [def-weil-pbc-inverse-image], and direct image is [def-weil-pbc-direct-image]. Functorial means that every morphism $K\\to K'$ induces a morphism of these triangles with the three indicated functorial components, including the square involving the connecting map.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-cbc-open-closed-recollement.md",
   "place": "node lem-cbc-open-closed-recollement, order 1850"
  },
  "stmt_deps": [
-  "prop-weil-open-closed-recollement-adjunctions",
   "def-weil-pbc-derived-categories",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
  ],
  "proof": [
   {
-   "text": "The closed immersion $i$ is finite,\nso $i_*$ is exact by [lemma-weil-pbc-finite-direct-image-exact].\nA short exact sequence of sheaves\n$0\\to j_!j^{-1}F\\to F\\to i_*i^{-1}F\\to0$ is obtained from the\nstalkwise description of [def-weil-pbc-extension-by-zero]: on $U$\nthe first map is the counit of $j_!\\dashv j^{-1}$, an isomorphism\nby the identity $j^*j_!\\cong\\operatorname{id}$ of\n[prop-weil-open-closed-recollement-adjunctions], and the third map is\n$0$ there; on $Z$ the first term already has stalk $0$, the\nspaces of the first two terms at a point of $Z$ agree, and the\nthird map is the (inverse-image) unit of\n[prop-weil-open-closed-recollement-adjunctions], an isomorphism.\nThe exact\nkernel–cokernel description at every stalk gives the short exact\nsequence, and taking the associated distinguished triangle in the\nderived category gives the assertion; functoriality and the\nadjunction compatibilities are those of the short exact sequence and\nof [def-weil-open-closed-recollement].",
+   "text": "The closed immersion $i$ is finite by [lem-weil-pbc-closed-immersion-finite], so its direct image on abelian etale sheaves is exact by [lemma-weil-pbc-finite-direct-image-exact]. It is also exact on $\\Lambda$-module sheaves: the direct-image formula has the same underlying abelian sheaf, and [lem-weil-pbc-module-sheaves-colimits-forgetful] says that forgetting coefficients preserves kernels and cokernels and is faithful. It therefore reflects exactness: the underlying homology of a sequence is zero only if its module homology is zero (faithfulness reflects a zero identity). Both inverse images are exact on constant-coefficient modules by [prop-weil-pbc-inverse-image-modules-exact], and $j_!$ is exact by [lem-weil-pbc-extension-by-zero-exact]. Thus all four operations can be applied termwise to complexes and compute their derived functors by [lem-weil-pbc-exact-functor-derived-functor]; in particular $Ri_*=i_*$.",
    "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
     "lemma-weil-pbc-finite-direct-image-exact",
-    "def-weil-pbc-extension-by-zero",
-    "prop-weil-open-closed-recollement-adjunctions",
-    "def-weil-open-closed-recollement"
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-exact-functor-derived-functor"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; exactness inputs: morphisms.tex Tag 035C, sites-modules.tex Tags 03DA, 03DJ, 04JC"
+   }
+  },
+  {
+   "text": "For a cochain complex $C$ of $\\Lambda$-module sheaves on $X_{\\Et}$ put $A^r=j_!j^{-1}C^r$ and $B^r=i_*i^{-1}C^r$. In each degree apply [lem-weil-pbc-open-closed-short-exact], with its module-coefficient clause, to obtain $0\\to A^r\\xrightarrow{\\varepsilon^r}C^r\\xrightarrow{\\eta^r}B^r\\to0$. Naturality of the counit and unit applied to $d_C^r$ gives $d_C^r\\varepsilon^r=\\varepsilon^{r+1}d_A^r$ and $d_B^r\\eta^r=\\eta^{r+1}d_C^r$. Thus these are maps of complexes and form a degreewise short exact sequence $0\\to A\\to C\\to B\\to0$. This sequence is natural in $C$: a chain map $v:C\\to C'$ gives the three maps $j_!j^{-1}v,v,i_*i^{-1}v$, and naturality gives $v^r\\varepsilon^r=\\varepsilon'{}^r(j_!j^{-1}v)^r$ and $(i_*i^{-1}v)^r\\eta^r=\\eta'{}^rv^r$ in every degree, giving both commuting squares. No claim about pro-etale sheaves is used.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095L, lemma-ses-associated-to-open, applied degreewise; module clause of the cited node"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-complex-ses-triangle] to this short exact sequence of complexes in the abelian category $\\Mod(X_{\\Et},\\Lambda)$. It gives a distinguished triangle $Q(A)\\xrightarrow{Q(\\varepsilon)}Q(C)\\xrightarrow{Q(\\eta)}Q(B)\\xrightarrow{\\delta_C}Q(A)[1]$. Its naturality clause gives, for every chain map $v:C\\to C'$, $Q(j_!j^{-1}v)[1]\\circ\\delta_C=\\delta_{C'}\\circ Q(i_*i^{-1}v)$. The first two arrows remain the specified adjunction maps, not merely maps with isomorphic cones.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor, including the proof of naturality"
+   }
+  },
+  {
+   "text": "The preceding naturality identity descends to the derived category. Indeed all the termwise operations preserve quasi-isomorphisms and factor through $Q$ by [lem-weil-pbc-exact-functor-derived-functor]. For a quasi-isomorphism $s$, both outer maps in the identity of step 3 are invertible; multiplying that identity by their inverses proves the same naturality identity for $Q(s)^{-1}$. Every morphism in the localization is a composite of images of chain maps and such inverses, so the identity holds for every derived morphism and is independent of the representative. In particular quasi-isomorphic representatives give isomorphic triangles with exactly the three prescribed components. The unit and counit descend in the same way; their triangle identities hold termwise, hence after $Q$, and therefore give the induced derived adjunctions. On modules the sheaf adjunctions are [lem-weil-pbc-extension-by-zero-adjunction] and the adjunction clause of [prop-weil-pbc-inverse-image-modules-exact]. Finally [lem-weil-pbc-exact-functor-bounded-below] shows that for $K\\in D^+$ both outer terms are bounded below with the same lower cohomological bound as $K$. Since $D^+$ is the full triangulated subcategory specified by [def-weil-pbc-derived-categories], the triangle and all its naturality squares lie there. This is the claimed functorial triangle with its counit and unit.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0152 and 015F (canonical delta-functor and termwise exact derived functors); localization argument written out from these"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-closed-immersion-finite",
   "lemma-weil-pbc-finite-direct-image-exact",
-  "def-weil-pbc-extension-by-zero",
-  "prop-weil-open-closed-recollement-adjunctions",
-  "def-weil-open-closed-recollement"
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "def-weil-pbc-derived-categories"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-cbc-open-closed-recollement.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095L, lemma-ses-associated-to-open; passage to derived categories: derived.tex Tags 0152 and 015F"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Open closed localization distinguished triangle for etale sheaves with constant ring coefficients",
+   "results": "Hits: Algebra.basicOpen_subset_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff_etale, Algebra.FormallyEtale.localization_map, Algebra.FormallyEtale.localization_base, Algebra.FormallyEtale.instLocalization, Algebra.FormallyEtale.of_isLocalization, Algebra.mem_etaleLocus_iff, Algebra.isOpen_etaleLocus",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the etale module recollement triangle with functorial connecting map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"recollement\"",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the etale module recollement triangle with functorial connecting map"
+  },
+  {
+   "tool": "grep",
+   "query": "openClosed|recollement",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the etale module recollement triangle with functorial connecting map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension by zero restriction closed immersion gives a distinguished triangle",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf on a scheme fits in a natural short exact sequence of extension by zero from an open subscheme and pushforward from its closed complement",
+   "results": "Hits: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.zeroLocus_map, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.Opens.ι_app, ModuleCat.Tilde.toOpen_res",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the etale module recollement triangle with functorial connecting map"
+  },
+  {
+   "tool": "grep",
+   "query": "open.closed|closed.*immersion.*exact|extension.*zero",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the etale module recollement triangle with functorial connecting map"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -73,5 +170,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-open-closed-triangle"
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-cbc-open-closed-recollement",
+  "worker": "stage1",
+  "summary": "Reused the existing module open-closed short exact sequence and functorial complex triangle; made exactness, coefficient transport, localization naturality and bounded-below preservation explicit. Removed the incompatible pro-etale definition and replaced the ambiguous adjunction cross-reference with the precise etale counit and unit. No new nodes.",
+  "blueprint": "Realizes the entire proof paragraph: finite direct-image exactness, the sheaf short exact sequence, passage to its distinguished triangle, functoriality and adjunction compatibility. Follows unit step 1 with no route change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic sheaf or derived-category tool supplying the unit's prescribed termwise exact-sequence argument; the unit does not state this auxiliary result separately."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic sheaf or derived-category tool supplying the unit's prescribed termwise exact-sequence argument; the unit does not state this auxiliary result separately."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic sheaf or derived-category tool supplying the unit's prescribed termwise exact-sequence argument; the unit does not state this auxiliary result separately."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-67af5730b",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-67af5730b (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source passages. Stacks 095L, 0152 and 015F support the specified étale triangle and connecting-map naturality. Checked localization, coefficient hypotheses, edge cases and DAG duplicates; no cycles or new nodes. Accepted all three proposed tool uses. No repairs; detailed checks are in review.md."
+ }
 }
