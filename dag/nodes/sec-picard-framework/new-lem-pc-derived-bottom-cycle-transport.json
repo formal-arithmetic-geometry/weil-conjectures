@@ -1,0 +1,112 @@
+{
+ "id": "new-lem-pc-derived-bottom-cycle-transport",
+ "kind": "statement",
+ "title": "Canonical cycles transported through double truncation to the actual single-object unit",
+ "statement": "Let C,D,S,n be as in [new-def-pc-derived-bottom-comparison], with n any integer, and let K be a cochain complex of C. Write P_n for the explicit initial portion of that bottom comparison: the inverse bounded-below/unbounded compatibility, inverse homology of the upper truncation inclusion, homology of the lower projection of that upper truncation, and homology of the canonical double-truncation-to-single isomorphism. Its codomain is H^n(R⁺S(single_n(H^n(truncGE_n(QK))))). The canonical lift of S of the cycle inclusion, followed by the homology quotient of S(K), inverse localization/homology comparison, H^n of the unbounded derived unit, H^n of RS of the lower-truncation projection, and P_n at QK equals S of the canonical quotient of K followed by inverse localization/homology comparison and H^n of that lower projection, followed by the actual single-object unit u_n of [new-lem-pc-derived-single-shift-normalization] at H^n(truncGE_n(QK)). This equation stops before the shifted single-object comparison and its degree-zero cancellation.",
+ "stmt_deps": [
+  "new-def-pc-derived-bottom-comparison",
+  "new-lem-pc-derived-single-shift-normalization"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/05TC; https://stacks.math.columbia.edu/tag/05TD",
+  "place": "05TC (2), double truncation; 05TD (3), the left-exact degree-zero unit comparison, with canonical-map elaboration from the parent node."
+ },
+ "proof": [
+  {
+   "text": "Model the lower truncation by smart truncation. Its bottom cycles identify with H^n(K), and the canonical cycle lift is precisely the homology quotient. Unit naturality for the upper truncation inclusion cancels its invertible derived homology map in P_n. The lower projection of the upper truncation and the canonical double-truncation-to-single isomorphism identify the remaining map with the actual unit on the single cohomology object; its homology formula fixes the source quotient with no sign ambiguity. Finally bounded-below/unbounded right-derived compatibility intertwines the actual units. This yields the displayed map to derived homology of the single object. No shifted single comparison or classical degree-zero cancellation is used.",
+   "uses": [
+    "new-def-pc-derived-bottom-comparison",
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-def-pc-derived-bottom-comparison",
+  "src-right-derived-functor-plus-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F1",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/05TC; https://stacks.math.columbia.edu/tag/05TD",
+  "place": "Parent canonical-cycle calculation, separated before the single-object comparison.",
+  "note": "Integer shift normalization is fully proved; the cycle-transport calculation is the remaining part of the argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical cycle transport through smart double truncation and the unit of a right derived functor",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical cycles homology map smart truncation naturality derived functor unit bottom degree",
+   "date": "2026-10-14",
+   "results": "8 hits: HomologicalComplex.πTruncGE_naturality_assoc, HomologicalComplex.ιTruncLE_naturality_assoc, HomologicalComplex.πTruncGE_naturality, HomologicalComplex.ιTruncLE_naturality, HomologicalComplex.truncLE'Map_f_eq_cyclesMap, HomologicalComplex.truncLE'ToRestriction_naturality, HomologicalComplex.restrictionToTruncGE'_naturality_assoc, CochainComplex.πTruncGE_naturality_assoc",
+   "verdict": "constituent comparisons only; no exact equation"
+  },
+  {
+   "tool": "grep",
+   "query": "eTruncLTCompETruncGEIso|rightDerivedFunctorPlusUnit.*naturality",
+   "date": "2026-10-14",
+   "results": "0 hits: ",
+   "verdict": "constituent comparisons only; no exact equation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Abelian.DerivedBottomUnitNormalizationFormula",
+  "date": "2026-10-14",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Proof step 3, canonical affine cohomology comparison: double-truncation cycle transport and shifted single-object normalization.",
+   "via": [
+    "new-lem-pc-derived-bottom-unit-normalization-formula",
+    "lem-pc-derived-bottom-unit-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.DerivedBottomCycleTransport",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/DerivedBottomCycleTransport.lean",
+  "declaration": "CategoryTheory.Functor.rightDerivedBottom_cycle_transport",
+  "statement": "theorem rightDerivedBottom_cycle_transport (n : ℤ) (K : CochainComplex C ℤ) :\n    ((((S.mapHomologicalComplex (.up ℤ)).obj K).sc n).liftCycles\n        (S.map (K.sc n).iCycles) (by\n          change S.map (K.sc n).iCycles ≫ S.map (K.sc n).g = 0\n          rw [← S.map_comp, (K.sc n).iCycles_g, S.map_zero])) ≫\n      (((S.mapHomologicalComplex (.up ℤ)).obj K).sc n).homologyπ ≫\n          ((DerivedCategory.homologyFunctorFactors D n).app\n            ((S.mapHomologicalComplex (.up ℤ)).obj K)).inv ≫\n          (DerivedCategory.homologyFunctor D n).map\n            (S.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient C (.up ℤ)).obj K)) ≫\n          (DerivedCategory.homologyFunctor D n).map\n            (S.rightDerivedFunctor.map\n              ((DerivedCategory.TStructure.t.truncGEπ n).app (DerivedCategory.Q.obj K))) ≫\n          (S.rightDerivedBottomToSingleIso n).hom.app (DerivedCategory.Q.obj K) =\n      S.map ((K.sc n).homologyπ ≫\n        ((DerivedCategory.homologyFunctorFactors C n).app K).inv ≫\n        (DerivedCategory.homologyFunctor C n).map\n          ((DerivedCategory.TStructure.t.truncGEπ n).app (DerivedCategory.Q.obj K))) ≫\n      S.rightDerivedPlusSingleUnitHomologyAt n\n        ((DerivedCategory.homologyFunctor C n).obj\n          ((DerivedCategory.TStructure.t.truncGE n).obj (DerivedCategory.Q.obj K)))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261014T051231-L-1771977",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261014T051231-L-1771977",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

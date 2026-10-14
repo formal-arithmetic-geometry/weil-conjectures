@@ -6,7 +6,7 @@ Authors: SHEAF group K2
 module
 
 public import Sheaf.CategoryTheory.Abelian.DerivedBottomComparison
-import Sheaf.CategoryTheory.RightDerivedSingleUnitHomologyComparison
+import Sheaf.CategoryTheory.Abelian.DerivedBottomCycleTransport
 
 /-! # Canonical-cycle normalization of the specified bottom comparison
 
@@ -71,5 +71,27 @@ theorem normalized_bottom_unit_formula
           (S.rightDerivedFunctorTruncatedBottomIso n).hom.app
             (DerivedCategory.Q.obj K) =
         S.map ((K.sc n).homologyπ ≫
-          ((DerivedCategory.homologyFunctorFactors C n).app K).inv) := by sorry
+          ((DerivedCategory.homologyFunctorFactors C n).app K).inv)  := by
+  let X := DerivedCategory.Q.obj K
+  let H := DerivedCategory.homologyFunctor C n
+  let π := (DerivedCategory.TStructure.t.truncGEπ n).app X
+  have : IsIso (H.map π) :=
+    DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app X n n le_rfl
+  have hfactor : (S.rightDerivedFunctorTruncatedBottomIso n).hom.app X =
+      (S.rightDerivedBottomToSingleIso n).hom.app X ≫
+        (S.rightDerivedPlusSingleShiftIso n).hom.app
+          (H.obj ((DerivedCategory.TStructure.t.truncGE n).obj X)) ≫
+        S.map (CategoryTheory.inv (H.map π)) := by
+    simp only [rightDerivedFunctorTruncatedBottomIso, rightDerivedBottomToSingleIso,
+      rightDerivedPlusSingleShiftIso, Iso.trans_hom, Iso.symm_hom,
+      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+      NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      asIso_inv, asIso_hom, NatIso.isIso_inv_app, id, Category.assoc]
+    rfl
+  rw [hfactor]
+  rw [reassoc_of% (S.rightDerivedBottom_cycle_transport n K)]
+  erw [reassoc_of% (S.rightDerivedPlusSingleUnitHomologyAt_comp_shiftIso n
+    (H.obj ((DerivedCategory.TStructure.t.truncGE n).obj X)))]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← S.map_comp, IsIso.hom_inv_id, S.map_id, Category.comp_id]
 end CategoryTheory.Functor

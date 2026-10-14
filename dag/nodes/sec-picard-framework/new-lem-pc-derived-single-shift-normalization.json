@@ -1,0 +1,117 @@
+{
+ "id": "new-lem-pc-derived-single-shift-normalization",
+ "kind": "statement",
+ "title": "The actual unit on a single object normalized in every integer degree",
+ "statement": "Let C and D be abelian categories with chosen derived categories, let C have enough injectives, and let S:C→D be additive and preserve finite limits. For every integer n and object Y of C, define u_n as the canonical degree-n homology identification from S(Y) to H^n(single_n(S(Y))), followed by H^n of the actual bounded-below derived unit on single_n(Y), using the canonical mapped-single and quotient identifications. Let e_n be the explicit isomorphism from H^n(R⁺S(single_n(-))) to S given by shifting single_n to single_0[-n], commuting R⁺S with the shift, applying the homology shift isomorphism, the classical degree-zero comparison, and rightDerivedZeroIsoSelf. Then u_n(Y) followed by e_n(Y) is the identity on S(Y). The constructions use [lem-sbc-right-derived-single-unit-homology-comparison] and [lem-pc-single-homology-shift-comparison]; n may be negative.",
+ "stmt_deps": [
+  "lem-sbc-right-derived-single-unit-homology-comparison",
+  "lem-pc-single-homology-shift-comparison"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/05TC; https://stacks.math.columbia.edu/tag/05TD",
+  "place": "05TC (2), double truncation; 05TD (3), the left-exact degree-zero unit comparison, with canonical-map elaboration from the parent node."
+ },
+ "proof": [
+  {
+   "text": "Generalize the already proved single/quotient inverse-shift and mapped-single inverse-shift calculations from natural numbers to integers as private proved helpers. Apply the CommShift equation of the actual unit and its naturality along the inverse single shift. Applying H^n and homology shift naturality gives the degree-zero unit, preceded by the homology shift of the source single object. All these steps are proved in Lean.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Use the single-object homology shift comparison to cancel the source single homology identifications. The remaining degree-zero unit is identified with toRightDerivedZero by the proved unit comparison. Its composite with rightDerivedZeroIsoSelf.hom is identity by Mathlib. This proves the asserted normalization, including n=0, negative n, zero objects and zero functors.",
+   "uses": [
+    "lem-pc-single-homology-shift-comparison",
+    "lem-sbc-right-derived-single-unit-homology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-single-homology-shift-comparison",
+  "lem-sbc-right-derived-single-unit-homology-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F1",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/05TC; https://stacks.math.columbia.edu/tag/05TD",
+  "place": "Parent canonical-cycle calculation, separated before the single-object comparison.",
+  "note": "Integer shift normalization is fully proved; the cycle-transport calculation is the remaining part of the argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right derived functor unit on a single object commutes with shifting its degree and degree zero left exact comparison",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right derived functor unit on single complex in any integer degree normalized by shifted degree zero comparison",
+   "date": "2026-10-14",
+   "results": "8 hits: DerivedCategory.singleFunctorIsoCompQ, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorsPostcompQIso, DerivedCategory.singleFunctorsPostcompQIso_hom_hom, DerivedCategory.singleFunctorCompHomologyFunctorIso, DerivedCategory.Qh_obj_singleFunctors_obj, DerivedCategory.singleFunctorsPostcompQIso_inv_hom, DerivedCategory.singleFunctors",
+   "verdict": "constituent comparisons only; no exact equation"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedPlusSingleUnitHomologyAt|rightDerivedBottom_cycle_transport",
+   "date": "2026-10-14",
+   "results": "0 hits: ",
+   "verdict": "constituent comparisons only; no exact equation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Abelian.DerivedBottomUnitNormalizationFormula",
+  "date": "2026-10-14",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Proof step 3, canonical affine cohomology comparison: double-truncation cycle transport and shifted single-object normalization.",
+   "via": [
+    "new-lem-pc-derived-bottom-unit-normalization-formula",
+    "lem-pc-derived-bottom-unit-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.DerivedSingleShiftNormalization",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/DerivedSingleShiftNormalization.lean",
+  "declaration": "CategoryTheory.Functor.rightDerivedPlusSingleUnitHomologyAt_comp_shiftIso",
+  "statement": "theorem rightDerivedPlusSingleUnitHomologyAt_comp_shiftIso (n : ℤ) (Y : C) :\n    S.rightDerivedPlusSingleUnitHomologyAt n Y ≫\n      (S.rightDerivedPlusSingleShiftIso n).hom.app Y = 𝟙 (S.obj Y)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261014T051231-L-1771977",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261014T051231-L-1771977",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
