@@ -14799,3 +14799,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:47 L: returned deliver/V2/WeilConjectures.SixFunctors.Etale.Derived.UpperShriek (reviewer RETURN: (reviewer X-a2451, head a24518378) H10 (compile; mandatory reader gate): WeilConjectures.EtaleCohomology.Purity.Smooth.C)
 
 - 17:49 L: batch 20261014T094637 dependency take-out
+- 09:51 L: merged deliver/T4/Sheaf.AlgebraicGeometry.PicardExternalCechCupLeibniz (stage 3; reviewer PASS; after a return; landing 20261014T095138-L-867123 (interface); batch 20261014T095137; modules 2; new nodes 2; change records: coord/changes/picard-external-cech-cup-leibniz-coordinate.md)
