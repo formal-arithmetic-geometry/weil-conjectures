@@ -1,0 +1,116 @@
+{
+ "id": "lem-sc-cartesian-higher-image-affine-section-vanishing",
+ "kind": "statement",
+ "title": "Eventual vanishing of affine cartesian higher-image sections",
+ "statement": "Under the hypotheses of the cartesian higher-image construction, if U is an affine etale object of the limiting base and a section of the stage cartesian higher image over U maps to zero in the limit, then some later transition maps that section to zero.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EYM",
+  "place": "Lemma 59.51.8, second proof; affine section reduction"
+ },
+ "stmt_deps": [
+  "def-sc-cartesian-higher-image-stage",
+  "def-sc-cartesian-higher-image-limit",
+  "def-sc-cartesian-higher-image-leg",
+  "def-sc-cartesian-higher-image-transition"
+ ],
+ "proof": [
+  {
+   "text": "Lift the section to the cohomology presheaf, refine its zero image using local injectivity of sheafification, descend finitely presented affine etale refinements along the cofiltered affine system, and apply cohomology continuity to obtain a common later stage. Use naturality and exchange pasting to identify the resulting zero section with the displayed transition.",
+   "uses": [
+    "lem-weil-pbc-derived-etale-cohomology-limit",
+    "lem-sbc-abelian-higher-direct-image-natural-comparison",
+    "lem-sc-cartesian-derived-image-map-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-etale-cohomology-limit",
+  "lem-sbc-abelian-higher-direct-image-natural-comparison",
+  "lem-sc-cartesian-derived-image-map-exchange"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0EYM",
+  "place": "Second proof, affine etale section step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine higher direct image section vanishing under a cofiltered limit with affine transitions",
+   "results": "No direct theorem returned; the existing affine continuity declarations were then inspected directly.",
+   "verdict": "No direct match.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine etale higher direct image section continuity inverse limit",
+   "results": "No direct theorem; only generic sheaf and stalk APIs.",
+   "verdict": "No direct match.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffine\" \"sheafFiber\"",
+   "results": "Generic affine and point-fiber declarations only.",
+   "verdict": "No direct match.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*section.*higher.*image",
+   "results": "Existing local continuity modules provide ingredients but no exact theorem.",
+   "verdict": "No direct match.",
+   "date": "2026-10-15"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartesianHigherImageGermVanishing",
+  "date": "2026-10-15",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cartesian-higher-image-germ-vanishing",
+   "place": "affine section reduction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartesianHigherImageAffineSectionVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartesianHigherImageAffineSectionVanishing.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_cartesianHigherImage_affine_section_eq_zero",
+  "statement": "theorem exists_cartesianHigherImage_affine_section_eq_zero\n    {k : Type u} [Field k]\n    {I : Type u} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ Over (Spec (.of k)))\n    [∀ i, QuasiCompact (D.obj i).hom] [∀ i, QuasiSeparated (D.obj i).hom]\n    [∀ {i j : I} (a : i ⟶ j), IsAffineHom (D.map a).left]\n    (c : Cone D) (hc : IsLimit ((Over.forget _).mapCone c))\n    [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]\n    {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [QuasiCompact f] [QuasiSeparated f]\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (q : ℕ) (U : c.pt.left.Etale) [IsAffine U.left] (i : I)\n    (x : (cartesianHigherImageStage D c f F q i).obj.obj (Opposite.op U))\n    (hx : (cartesianHigherImageLeg D c f F q i).hom.app (Opposite.op U) x = 0) :\n    ∃ (j : I) (a : j ⟶ i),\n      (cartesianHigherImageTransition D c f F q a).hom.app (Opposite.op U) x = 0",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-33e28",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261014T202735-L-2258468",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-33e28",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261014T202735-L-2258468",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean modules, DAG statements/proof metadata, change record, report, and direct importer checked against the stage-3 brief"
+ }
+}
