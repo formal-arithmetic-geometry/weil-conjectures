@@ -14957,3 +14957,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:09 L: merged deliver/S4/Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData (stage 3; reviewer PASS; first push; landing 20261014T230905-L-382886 (proof); batch 20261014T230903; modules 1; new nodes 1)
 
 - 07:23 L: batch 20261014T231845 dependency take-out
+- 23:46 L: merged deliver/K1/Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData (stage 3; reviewer PASS; first push; landing 20261014T234607-L-1023500 (interface); batch 20261014T234605; modules 1; new nodes 0; change records: coord/changes/perfect_overlap_object_realization_core_data_imports.md)

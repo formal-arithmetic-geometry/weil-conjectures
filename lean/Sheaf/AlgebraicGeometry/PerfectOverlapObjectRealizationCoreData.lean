@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuityData
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 public import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionLocalization
+import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
 
 /-! # Core object comparison data (without the final Hom pin).
 
@@ -220,6 +222,192 @@ Source: Stacks Project, Tags 09RE, 08DW and 0D5S.
           (derivedPullback (Yj.homOfLE (inf_le_right : U ⊓ V ≤ V))).obj B
           else (derivedPullback (Yj.homOfLE (inf_le_left : U ⊓ V ≤ U))).obj A) stageEquiv apexEquiv)
 
+section
+
+/-- Lift the two overlap comparisons through localization of the restriction functors.
+The inverse restrictions of beta, tau, betaW and alpha define the whiskered comparison;
+`map_preimage` and cancellation give the two required coherence equations. -/
+private noncomputable def comparisonFromRestrictions
+    {C D A B W P Q T : Type*}
+    [Category* C] [Category* D] [Category* A] [Category* B]
+    [Category* W] [Category* P] [Category* Q] [Category* T]
+    (L : C ⥤ D) (TU : C ⥤ A) (TV : C ⥤ B) (TW : C ⥤ W)
+    (SU : A ⥤ W) (SV : B ⥤ W)
+    (RU : D ⥤ P) (RV : D ⥤ Q) (RW : D ⥤ T)
+    (SP : P ⥤ T) (SQ : Q ⥤ T)
+    (αU : TU ⋙ SU ≅ TW) (αV : TV ⋙ SV ≅ TW)
+    (τU : RU ⋙ SP ≅ RW) (τV : RV ⋙ SQ ≅ RW)
+    [((Functor.whiskeringLeft C A T).obj TU).Full]
+    [((Functor.whiskeringLeft C A T).obj TU).Faithful]
+    [((Functor.whiskeringLeft C B T).obj TV).Full]
+    [((Functor.whiskeringLeft C B T).obj TV).Faithful]
+    (HU : A ⥤ P) (HV : B ⥤ Q) (HW : W ⥤ T)
+    (βU : L ⋙ RU ≅ TU ⋙ HU) (βV : L ⋙ RV ≅ TV ⋙ HV)
+    (βW : L ⋙ RW ≅ TW ⋙ HW) :
+    TwoOpenComparisonDiagram L TU TV TW SU SV RU RV RW SP SQ αU αV τU τV := by
+  let δU : TU ⋙ (HU ⋙ SP) ≅ TU ⋙ (SU ⋙ HW) :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight βU.symm SP ≪≫ Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft L τU ≪≫ βW ≪≫
+      Functor.isoWhiskerRight αU.symm HW ≪≫ Functor.associator _ _ _
+  let δV : TV ⋙ (HV ⋙ SQ) ≅ TV ⋙ (SV ⋙ HW) :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight βV.symm SQ ≪≫ Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft L τV ≪≫ βW ≪≫
+      Functor.isoWhiskerRight αV.symm HW ≪≫ Functor.associator _ _ _
+  let γU := ((Functor.whiskeringLeft C A T).obj TU).preimageIso δU
+  let γV := ((Functor.whiskeringLeft C B T).obj TV).preimageIso δV
+  have hγU (F : C) : γU.hom.app (TU.obj F) = δU.hom.app F :=
+    congrArg (fun a ↦ a.app F)
+      (((Functor.whiskeringLeft C A T).obj TU).map_preimage δU.hom)
+  have hγV (F : C) : γV.hom.app (TV.obj F) = δV.hom.app F :=
+    congrArg (fun a ↦ a.app F)
+      (((Functor.whiskeringLeft C B T).obj TV).map_preimage δV.hom)
+  refine ⟨HU, HV, HW, βU, βV, βW, γU, γV, ?_, ?_⟩
+  · intro F
+    rw [hγU]
+    simp [δU]
+  · intro F
+    rw [hγV]
+    simp [δV]
+
+variable [∀ Z : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+variable [∀ (Z : Scheme.{u}) (U : Z.Opens),
+  HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]
+
+/-- The inverse site equivalence with its module universe fixed. -/
+private noncomputable abbrev overlapSiteInverse {X : Scheme.{u}} (U : X.Opens) :
+    SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) ⥤
+      SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) :=
+  (Scheme.Modules.overEquiv U).inverse
+
+/-- Exact restriction followed by the inverse site equivalence returns to the over-site.
+Use the derived site equivalence's unit and the exact-functor composition comparison. -/
+private noncomputable def openSiteReturnIso (X : Scheme.{u}) (U : X.Opens) :
+    (schemeOpenRestriction X U).mapDerivedCategory ⋙
+      (overlapSiteInverse U).mapDerivedCategory ≅
+        (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory := by
+  let e : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ≌
+      SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) := Scheme.Modules.overEquiv U
+  exact Functor.isoWhiskerRight
+      (Functor.mapDerivedCategoryCompIso _ _) _ ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ e.mapDerivedCategory.unitIso.symm ≪≫
+    Functor.rightUnitor _
+
+/-- The two paths around an open-restriction square agree by pullback composition.
+Use the fixed composition comparisons and the constructed open-pullback comparisons. -/
+private noncomputable def openPullbackRestrictionIso
+    {X Y : Scheme.{u}} (g : X ⟶ Y) (P : X.Opens) (U : Y.Opens)
+    (h : P ≤ g ⁻¹ᵁ U) :
+    derivedPullback g ⋙ (schemeOpenRestriction X P).mapDerivedCategory ≅
+      (schemeOpenRestriction Y U).mapDerivedCategory ⋙ derivedPullback (g.resLE U P h) :=
+  Functor.isoWhiskerLeft _ (singleComplexOpenPullbackIso X P).symm ≪≫
+    perfectHomComposition P.ι g ≪≫
+    eqToIso (congrArg (fun f ↦ derivedPullback f) (g.resLE_comp_ι h).symm) ≪≫
+    (perfectHomComposition (g.resLE U P h) U.ι).symm ≪≫
+    Functor.isoWhiskerRight (singleComplexOpenPullbackIso Y U) _
+
+/-- Construct a simultaneous diagram from restricted pullbacks and site equivalences.
+Open restriction is a localization, so its fully faithful precomposition functor lifts
+both overlap comparisons and their coherence from the global restriction diagram. -/
+private noncomputable def schemeComparisonFromRestrictions
+    {X Y : Scheme.{u}} (g : X ⟶ Y) (U V : Y.Opens) (P Q : X.Opens)
+    (hP : P ≤ g ⁻¹ᵁ U) (hQ : Q ≤ g ⁻¹ᵁ V) :
+    SchemeTwoOpenComparisonDiagram X Y g U V P Q := by
+  let S (W : X.Opens) := (overlapSiteInverse W).mapDerivedCategory
+  let H (W : Y.Opens) (T : X.Opens) (hT : T ≤ g ⁻¹ᵁ W) :=
+    derivedPullback (g.resLE W T hT) ⋙ S T
+  let HU := H U P hP
+  let HV := H V Q hQ
+  let HW := H (U ⊓ V) (P ⊓ Q) (by
+    intro x hx
+    exact ⟨hP hx.1, hQ hx.2⟩)
+  let β (W : Y.Opens) (T : X.Opens) (hT : T ≤ g ⁻¹ᵁ W) :
+      derivedPullback g ⋙
+          (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) T).mapDerivedCategory ≅
+        (schemeOpenRestriction Y W).mapDerivedCategory ⋙ H W T hT :=
+    Functor.isoWhiskerLeft _ (openSiteReturnIso X T).symm ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (openPullbackRestrictionIso g T W hT) _ ≪≫
+      Functor.associator _ _ _
+  let TU := (schemeOpenRestriction Y U).mapDerivedCategory
+  let TV := (schemeOpenRestriction Y V).mapDerivedCategory
+  let T := DerivedCategory (SheafOfModules.{u}
+    ((moduleRings X.toRingedSpace).over (P ⊓ Q)))
+  have : TU.IsLocalization ((MorphismProperty.isomorphisms _).inverseImage TU) :=
+    schemeDerivedOpenRestriction_isLocalization Y U
+  have : TV.IsLocalization ((MorphismProperty.isomorphisms _).inverseImage TV) :=
+    schemeDerivedOpenRestriction_isLocalization Y V
+  have := Localization.full_whiskeringLeft TU
+    ((MorphismProperty.isomorphisms _).inverseImage TU) T
+  have := Localization.faithful_whiskeringLeft TU
+    ((MorphismProperty.isomorphisms _).inverseImage TU) T
+  have := Localization.full_whiskeringLeft TV
+    ((MorphismProperty.isomorphisms _).inverseImage TV) T
+  have := Localization.faithful_whiskeringLeft TV
+    ((MorphismProperty.isomorphisms _).inverseImage TV) T
+  refine ⟨comparisonFromRestrictions (derivedPullback g) TU TV _ _ _ _ _ _ _ _ _ _ _ _
+    HU HV HW (β U P hP) (β V Q hQ) (β (U ⊓ V) (P ⊓ Q) _)⟩
+
+/-- Construct the transport data for two composable scheme maps.
+The restricted composites agree after their open inclusions; pullback composition gives
+kappa. Set theta equal to kappa, the supplied local isomorphism, and the site comparison. -/
+private noncomputable def transportDataOfComposite
+    {X Y Y₀ : Scheme.{u}} (f : Y ⟶ Y₀) (g : X ⟶ Y) (gf : X ⟶ Y₀)
+    (hgf : g ≫ f = gf) (U V : Y₀.Opens)
+    (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme)
+    (E : schemeDerivedCategory X)
+    (φU : (derivedPullback (gf ∣_ U)).obj A ≅
+      (schemeOpenRestriction X (gf ⁻¹ᵁ U)).mapDerivedCategory.obj E)
+    (φV : (derivedPullback (gf ∣_ V)).obj B ≅
+      (schemeOpenRestriction X (gf ⁻¹ᵁ V)).mapDerivedCategory.obj E) :
+    let P := gf ⁻¹ᵁ U
+    let Q := gf ⁻¹ᵁ V
+    let RU := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) P).mapDerivedCategory
+    let RV := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) Q).mapDerivedCategory
+    let LU := (overlapSiteInverse P).mapDerivedCategory
+    let LV := (overlapSiteInverse Q).mapDerivedCategory
+    TwoOpenTransportData (SchemeTwoOpenComparisonDiagram X Y g (f ⁻¹ᵁ U) (f ⁻¹ᵁ V) P Q)
+      (fun d ↦ d.toDiagram.HU) (fun d ↦ d.toDiagram.HV)
+      (derivedPullback (f ∣_ U)) (derivedPullback (f ∣_ V))
+      (derivedPullback (gf ∣_ U)) (derivedPullback (gf ∣_ V)) LU LV
+      (schemeOpenRestriction X P).mapDerivedCategory
+      (schemeOpenRestriction X Q).mapDerivedCategory RU RV A B E φU φV := by
+  let hP (W : Y₀.Opens) : gf ⁻¹ᵁ W ≤ g ⁻¹ᵁ (f ⁻¹ᵁ W) := by
+    rw [← Scheme.Hom.comp_preimage, hgf]
+  let d := schemeComparisonFromRestrictions g (f ⁻¹ᵁ U) (f ⁻¹ᵁ V)
+    (gf ⁻¹ᵁ U) (gf ⁻¹ᵁ V) (hP U) (hP V)
+  let κ (W : Y₀.Opens) :
+      derivedPullback (f ∣_ W) ⋙
+          (derivedPullback (g.resLE (f ⁻¹ᵁ W) (gf ⁻¹ᵁ W) (hP W)) ⋙
+            (overlapSiteInverse (gf ⁻¹ᵁ W)).mapDerivedCategory) ≅
+        derivedPullback (gf ∣_ W) ⋙
+          (overlapSiteInverse (gf ⁻¹ᵁ W)).mapDerivedCategory := by
+    have eqW : g.resLE (f ⁻¹ᵁ W) (gf ⁻¹ᵁ W) (hP W) ≫ (f ∣_ W) = gf ∣_ W := by
+      apply (cancel_mono W.ι).1
+      simp only [Category.assoc, morphismRestrict_ι]
+      rw [← Category.assoc, Scheme.Hom.resLE_comp_ι, Category.assoc, hgf]
+    exact (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (perfectHomComposition _ _ ≪≫
+        eqToIso (congrArg (fun a ↦ derivedPullback a) eqW)) _
+  exact {
+    d := d
+    κU := κ U
+    κV := κ V
+    siteU := openSiteReturnIso X (gf ⁻¹ᵁ U)
+    siteV := openSiteReturnIso X (gf ⁻¹ᵁ V)
+    θU := (κ U).app A ≪≫ (overlapSiteInverse (gf ⁻¹ᵁ U)).mapDerivedCategory.mapIso φU ≪≫
+      (openSiteReturnIso X (gf ⁻¹ᵁ U)).app E
+    θV := (κ V).app B ≪≫ (overlapSiteInverse (gf ⁻¹ᵁ V)).mapDerivedCategory.mapIso φV ≪≫
+      (openSiteReturnIso X (gf ⁻¹ᵁ V)).app E
+    hθU := rfl
+    hθV := rfl }
+
+
+end
+
 /-- Comparison data for one fixed later stage of the overlap construction.
 The construction is the single-stage restriction and pullback comparison from
 Tags 09RE and 08DW; the family theorem only packages these independent choices.
@@ -260,7 +448,26 @@ theorem perfect_overlap_object_realization_core_data_at
     (k : I) (hjk : j ≤ k) :
     Nonempty (perfectOverlapComparisonDataType R c hc i Z t j hij hstage
       U V hcover hU hV A B hA hB E φU φV k hjk) := by
-  sorry
+  let aj : Over.mk (Spec.map (c.ι.app i)) ⟶
+      Over.mk (Spec.map (R.map (homOfLE hij))) :=
+    Over.homMk (Spec.map (c.ι.app j))
+      (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])
+  let ak : Over.mk (Spec.map (c.ι.app i)) ⟶
+      Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))) :=
+    Over.homMk (Spec.map (c.ι.app k))
+      (by dsimp; rw [← Spec.map_comp, c.w (homOfLE (hij.trans hjk))])
+  let jk : Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))) ⟶
+      Over.mk (Spec.map (R.map (homOfLE hij))) :=
+    Over.homMk (Spec.map (R.map (homOfLE hjk)))
+      (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)
+  have hcomp : ak ≫ jk = aj := by
+    ext
+    change Spec.map (c.ι.app k) ≫ Spec.map (R.map (homOfLE hjk)) = Spec.map (c.ι.app j)
+    rw [← Spec.map_comp, c.w (homOfLE hjk)]
+  have hgf : baseChangeMap t ak ≫ baseChangeMap t jk = baseChangeMap t aj := by
+    rw [← baseChangeMap_comp, hcomp]
+  exact ⟨transportDataOfComposite (baseChangeMap t jk) (baseChangeMap t ak)
+    (baseChangeMap t aj) hgf U V A B E φU φV⟩
 
 /-- The prescribed overlap comparison data exists simultaneously at every stage.
 For each later index, identify the inverse-image intersection with the cartesian
@@ -321,6 +528,9 @@ and `transition_pin`; its naturality gives `comparison`.  Expanding the prescrib
 This is the cartesian composition calculation from Tags 08DW and 0D5S.
 (blueprint: lem-pc-perfect-overlap-object-realization-core-of-data).
 -/
+-- STATEMENT-DISPUTED: κU and κV may be independently twisted at different stages.
+-- With U = V = top, two identical Z-stages and apex Q, twisting κU by 2 at only
+-- the second stage forces incompatible object pins. See the K1 delivery report.
 theorem perfect_overlap_object_realization_core_of_data
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)
