@@ -1,0 +1,113 @@
+{
+ "id": "lem-weil-pbc-geometric-specialization-strict-local-lift",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Blueprint proof, first paragraph: \"the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$\". This supplies the finite-local-constancy criterion in the classical torsion constructibility chain: 0GKW invokes 0GKV, whose case (a) uses specialization invariance and finite stalks. Technical input: lifting the geometric generization in the bijectivity-locus argument (0GJ5).",
+   "via": [
+    "lem-weil-pbc-etale-finite-stalk-specialization-criterion",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Lifting geometric specializations to strict local schemes",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $t,s\\in S$ satisfy $s\\in\\overline{\\{t\\}}$, and choose geometric points $\\bar t:\\operatorname{Spec}\\Omega_t\\to S$ and $\\bar s:\\operatorname{Spec}\\Omega_s\\to S$ over $t,s$ [def-weil-geometric-point]. For the strict local scheme $S_{(\\bar s)}$ [def-weil-pbc-strict-henselization-limit] with structural map $p:S_{(\\bar s)}\\to S$ [def-weil-pbc-strict-henselization-structural-map], there exists a morphism $a:\\operatorname{Spec}\\Omega_t\\to S_{(\\bar s)}$ satisfying $p\\circ a=\\bar t$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJ5, remark-can-lift"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Geometric specializations of points of a scheme lift to the strict henselization at the special point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y),\\n  AlgebraicGeometry.Scheme.Hom.IsOver (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h)) X\", \"doc\": \"For any scheme $X$ and points $x,y$ in $X$ where $x$ specializes to $y$, the morphism of schemes obtained by applying the spectrum map to the specialization-induced morphism between stalks of the stru\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.ValuativeCriterion.Existence f → SpecializingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes satisfies the valuative criterion for existence, then $ f $ is a specializing map, meaning that specialization relations in the codomain can be lifted to the do\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h)) (X.fromSpecStalk y) =\\n    X.fromSpecStalk x\", \"doc\": \"For a scheme $X$ and points $x,y$ where $x$ specializes to $y$, the composition of the morphism $\\\\operatorname{Spec}$ applied to the specialization-induced stalk map $\\\\mathcal{F}_y \\\\to \\\\mathcal{F}_x$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h)) (X.fromSpecStalk y) =\\n    X.fromSpecStalk x\", \"doc\": \"For a scheme $X$ and points $x,y$ where $x$ specializes to $y$, the composition of the morphism induced by the specialization map between stalks $\\\\mathcal{F}_y \\\\to \\\\mathcal{F}_x$ with the canonical mo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y) {Z : AlgebraicGeometry.Scheme} (h_1 : X ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h))\\n      (CategoryTheory.CategoryStruct.comp (X.fromSpecStalk y) h_1) =\\n    CategoryTheory.CategoryStru\", \"doc\": \"For any scheme $X$, points $x$ and $y$ in $X$ with $x$ specializing to $y$, and any morphism $h_1: X \\to Z$ to a scheme $Z$, the composition of the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,y}) \\to \\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x x' : ↥X) (h : x ⤳ x')\\n  (y : ↑(Y.presheaf.stalk ((TopCat.Hom.hom f.base) x'))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\\n      ((CategoryTheory.ConcreteCategory.hom (Y.presheaf.stalkSpecializes ⋯)) y) =\\n    \", \"doc\": \"For a morphism of schemes $ f : X \\to Y $, if $ x $ specializes to $ x' $ in $ X $, then the induced map on stalks at $ x $ composed with the specialization-induced morphism from the stalk of $ Y $ at \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y) {Z : AlgebraicGeometry.Scheme} (h_1 : X ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h))\\n      (CategoryTheory.CategoryStruct.comp (X.fromSpecStalk y) h_1) =\\n    CategoryTheory.CategoryStru\", \"doc\": \"For a scheme $X$ and points $x,y$ where $x$ specializes to $y$, and for any scheme $Z$ with a morphism $f: X \\to Z$, the composition of the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,y} \\\\to \\\\mathcal{\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x x' : ↥X) (h : x ⤳ x')\\n  (y : ↑(Y.presheaf.stalk ((TopCat.Hom.hom f.base) x'))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\\n      ((CategoryTheory.ConcreteCategory.hom (Y.presheaf.stalkSpecializes ⋯)) y) =\\n    \", \"doc\": \"For a morphism of schemes $ f : X \\to Y $, if $ x $ specializes to $ x' $ in $ X $, then the diagram involving the stalk maps at $ x $ and $ x' $ and the specialization-induced maps on $ Y $ and $ X $ \"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generization of a geometric point lifts to a geometric point of its strict local scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y),\\n  AlgebraicGeometry.Scheme.Hom.IsOver (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h)) X\", \"doc\": \"For any scheme $X$ and points $x,y$ in $X$ where $x$ specializes to $y$, the morphism of schemes obtained by applying the spectrum map to the specialization-induced morphism between stalks of the stru\"}\n  {\"name\": \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] [hX : IrreducibleSpace ↥X]\\n  [inst : IrreducibleSpace ↥Y], (CategoryTheory.ConcreteCategory.hom f.base) (genericPoint ↥X) = genericPoint ↥Y\", \"doc\": \"If $ f: X \\to Y $ is an open immersion between irreducible schemes $ X $ and $ Y $, then the image of the generic point of $ X $ under $ f $ coincides with the generic point of $ Y $. This follows from\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : IrreducibleSpace ↥X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [inst_2 : X.IsGermInjectiveAt x]\\n  (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : CategoryTheory.CategoryStruct.comp φ sY = Categor\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $s_X:X\\\\to S$ and $s_Y:Y\\\\to S$ locally of finite type, a point $x\\\\in X$ with injective germ map, and a morphism $\\\\phi:\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\\\\to Y$ s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : IrreducibleSpace ↥X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [inst_2 : X.IsGermInjectiveAt x]\\n  (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : CategoryTheory.CategoryStruct.comp φ sY = Categor\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $s_X:X\\\\to S$ and $s_Y:Y\\\\to S$ locally of finite type, a point $x\\\\in X$ where the germ map is injective, and a morphism $\\\\phi:\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h)) (X.fromSpecStalk y) =\\n    X.fromSpecStalk x\", \"doc\": \"For a scheme $X$ and points $x,y$ where $x$ specializes to $y$, the composition of the morphism $\\\\operatorname{Spec}$ applied to the specialization-induced stalk map $\\\\mathcal{F}_y \\\\to \\\\mathcal{F}_x$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h)) (X.fromSpecStalk y) =\\n    X.fromSpecStalk x\", \"doc\": \"For a scheme $X$ and points $x,y$ where $x$ specializes to $y$, the composition of the morphism induced by the specialization map between stalks $\\\\mathcal{F}_y \\\\to \\\\mathcal{F}_x$ with the canonical mo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} [inst : IsLocalRing ↑R] {x : ↥X} (f : X.presheaf.stalk x ⟶ R)\\n  [inst_1 : IsLocalHom (CommRingCat.Hom.hom f)] (U : X.Opens)\\n  (hU :\\n    (CategoryTheory.ConcreteCategory.hom\\n          (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map f)\", \"doc\": \"Let $X$ be a scheme, $x \\\\in X$ a point, and $f: \\\\mathcal{O}_{X,x} \\\\to R$ a local homomorphism from the stalk of the structure sheaf at $x$ to a local ring $R$. This induces a scheme morphism $\\\\phi: \\\\o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x x' : ↥X) (h : x ⤳ x')\\n  (y : ↑(Y.presheaf.stalk ((TopCat.Hom.hom f.base) x'))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\\n      ((CategoryTheory.ConcreteCategory.hom (Y.presheaf.stalkSpecializes ⋯)) y) =\\n    \", \"doc\": \"For a morphism of schemes $ f : X \\to Y $, if $ x $ specializes to $ x' $ in $ X $, then the induced map on stalks at $ x $ composed with the specialization-induced morphism from the stalk of $ Y $ at \"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StrictHenselization\", \"Spec\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel.*special|special.*strictHensel",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift geometric specialization to strict henselization",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraically closed valued point factors through the strict henselization at a specialization",
+   "results": "[leanfinder] OK 8 hit(s); actual search log: {\"t\": \"2026-10-14T10:33:34Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraically closed valued point factors through the strict henselization at a specialization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.descResidueField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf\", \"AlgebraicGeometry.ValuativeCommSq.i₁\"], \"digest\": \"7f561eaa45e98e15\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\"",
+   "results": "[loogle] OK 5 hit(s); actual search log: {\"t\": \"2026-10-14T10:34:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"HenselianLocalRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"HenselianLocalRing.toIsLocalRing\", \"HenselianLocalRing.is_henselian\", \"HenselianLocalRing.mk\", \"HenselianLocalRing.TFAE\"], \"digest\": \"65d1de31bb0549b9\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber.*special|special.*sheafFiber|[Ss]trict[Hh]ensel|[Ss]trict[Hh]enselian",
+   "results": "[grep] OK 0 hit(s); actual search log: {\"t\": \"2026-10-14T10:34:37Z\", \"tool\": \"grep\", \"query\": \"sheafFiber.*special|special.*sheafFiber|[Ss]trict[Hh]ensel|[Ss]trict[Hh]enselian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-etale-finite-stalk-specialization-criterion",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
