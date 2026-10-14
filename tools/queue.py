@@ -67,7 +67,10 @@ def stage3(imports, dist, waiting: set[str]):
             continue
         kind = "repair" if m in repairs else "disputed" if "STATEMENT-DISPUTED" in text else "proof"
         if m in waiting and kind == "proof":
-            held.append((dist[m], m, n)); continue
+            # 2026-10-14 (launcher, under the human's mandate to remove stalls): a module with a Lean statement is worked
+            # even when its node's proof cites a node without a declaration (the worker states what is missing); holding
+            # them kept 14 closure modules out of the queue for the whole day. Still counted, as before, under `held`.
+            held.append((dist[m], m, n))
         items.append((("repair", "disputed", "proof").index(kind), dist[m], m, n, kind))
     items.sort(key=lambda x: (x[0], repairs[x[2]] if x[4] == "repair" else x[1],
                               x[1], x[2])); held.sort()
