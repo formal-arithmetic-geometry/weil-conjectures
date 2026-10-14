@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sbc-lem-thickening-etale-site",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The etale site of a thickening",
@@ -19,15 +19,86 @@
   ]
  },
  "stmt_deps": [
+  "def-sbc-first-order-thickening",
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-etale-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "A thickening is a surjective closed immersion, so the existing lemma on surjective closed immersions gives that its structure morphism is a universal homeomorphism.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex; literature/stacks-project/morphisms.tex",
+    "place": "Tag 04EX, Definition definition-thickening (1); proof of Tag 09ZV, Lemma lemma-thicken-property-morphisms; Tag 04DF, Lemma lemma-universal-homeomorphism"
+   }
+  },
+  {
+   "text": "For a universal homeomorphism, base change gives an equivalence between the categories of etale schemes, and it preserves and reflects jointly-surjective covering families. Therefore pullback identifies the small etale sites (their objects, morphisms, and covering families).",
+   "uses": [
+    "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+    "lemma-weil-pbc-universal-homeomorphism-coverings",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04DZ, Theorem theorem-topological-invariance; Tag 03SI, Proposition proposition-topological-invariance (1)"
+   }
+  },
+  {
+   "text": "Apply the topological-invariance proposition to the universal homeomorphism $i:T''\\to T'$ obtained in Step 1. Pullback gives an equivalence of small etale topoi. For every abelian sheaf $F$ on $T'_{\\mathrm{et}}$ and every $n\\geq0$, its cohomology clause gives $H^n(T'_{\\mathrm{et}},F)\\cong H^n(T''_{\\mathrm{et}},i^{-1}F)$, which is the claimed identification.",
+   "uses": [
+    "prop-weil-pbc-universal-homeomorphism-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03SI, Proposition proposition-topological-invariance (2)-(3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-first-order-thickening",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+  "lemma-weil-pbc-universal-homeomorphism-coverings",
+  "def-weil-pbc-etale-site",
+  "prop-weil-pbc-universal-homeomorphism-topos"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03SI, Proposition proposition-topological-invariance; Tag 04DZ, Theorem theorem-topological-invariance; Tag 04EX, Definition definition-thickening; proof of Tag 09ZV, Lemma lemma-thicken-property-morphisms"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "thickening of schemes closed immersion surjective induces equivalence of small etale sites and cohomology",
+   "results": "8 hits: AlgebraicGeometry.Scheme.etaleTopology, Scheme.smallEtaleTopology, Scheme.instCategoryEtale, Scheme.smallEtalePretopology, Scheme.Etale.forget, Scheme.etalePretopology, Scheme.Etale, IsEtale; no thickening or topological-invariance declaration",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClosedImmersion, Surjective, IsUniversalHomeomorphism",
+   "results": "0 hits; unknown identifier IsClosedImmersion in Loogle query",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion.*Surjective|IsUniversalHomeomorphism in Mathlib/AlgebraicGeometry",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:45 class IsClosedImmersion; no universal-homeomorphism site/cohomology result",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "undischarged_input",
@@ -85,5 +156,20 @@
   "landing": "20261014T140636-L-118258",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "sbc-lem-thickening-etale-site",
+  "worker": "stage1",
+  "summary": "Rebuilt the split after the refused attachment. A thickening is first converted to a universal homeomorphism using the existing surjective-closed-immersion lemma; the existing site-equivalence and covering-compatibility lemmas give the isomorphism of small etale sites; the existing topological-invariance proposition gives the sheaf equivalence and cohomology identification. No new nodes were necessary.",
+  "blueprint": "Realizes the blueprint proof sentence that a thickening induces an isomorphism of small etale sites, hence an equivalence of etale sheaves identifying cohomology (Tag 03SI)."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-0a0f282f7",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-0a0f282f7 (reviewer sub-agent of L); spot-checked: The three-step split is mathematically correct and matches Tags 04EX, 04DZ, and 03SI; all cited nodes and edge cases were checked. The item retained a stale lean attachment: isEquivalence_upperStar_of_thickening proves only a sheaf equivalence, not the full site and cohomology statement, contrary to the report’s refusal of the attachment. Removed it in fixes/dag/nodes/sec-smooth-base-change/sbc-lem-thickening-etale-site.json. Cross-unit universal-homeomorphism nodes are accepted as maintainer-recorded tool uses.; 1 file(s) fixed by the reviewer"
  }
 }
