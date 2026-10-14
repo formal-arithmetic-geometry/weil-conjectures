@@ -76,7 +76,40 @@ noncomputable def horizontalOrdinaryBaseComparison
     {Y S T : Scheme.{u}} (g : S ⟶ Y) (h : T ⟶ S) :
     qcPullback g ⋙ qcPullback h ≅ qcPullback (h ≫ g) := horizontalMateComp h g
 
-/-- Fixed-comparison mate calculation for ordinary forward pasting.
+/-- A single component of the fixed-comparison mate calculation.
+Source: Stacks Project, Tags 0ATM and 0D5S.
+Proof: transpose the component under the pinned adjunction, apply the two
+derived base-change pasting laws, and cancel units and counits.
+(blueprint: lem-sc-horizontal-ordinary-forward-fixed-pasting-core-aux) -/
+theorem horizontal_ordinary_forward_fixed_pasting_core_aux
+    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    {X Y Y' Z : Scheme.{u}}
+    [CompactSpace X] [QuasiSeparatedSpace X]
+    [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace Y'] [QuasiSeparatedSpace Y']
+    (g : Y' ⟶ Y) (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
+    [CompactSpace Z] [QuasiSeparatedSpace Z]
+    (h : Z ⟶ Y') (E : schemeDerivedQCohCategory X) :
+    letI : QuasiSeparatedSpace (pullback f (h ≫ g) : Scheme.{u}) :=
+      quasiSeparatedSpace_of_quasiSeparated (pullback.snd f (h ≫ g))
+    letI : QuasiSeparatedSpace (pullback (pullback.snd f g) h : Scheme.{u}) :=
+      quasiSeparatedSpace_of_quasiSeparated (pullback.snd (pullback.snd f g) h)
+    let s := horizontalOrdinaryUpperComparison f g h
+    let e := pullbackLeftPullbackSndIso f g h
+    let q := pullback.snd f (h ≫ g)
+    let p := pullback.snd (pullback.snd f g) h
+    let k := horizontalOrdinaryTransfer e q p (pullbackLeftPullbackSndIso_hom_snd f g h)
+    let β := qcBaseChange f (h ≫ g)
+    let γ := fun E : schemeDerivedQCohCategory X ↦
+      (qcPullback h).map ((qcBaseChange f g).app E) ≫
+        (@qcBaseChange _ (pullback f g) Y' Z _
+          (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _
+          (pullback.snd f g) _ _ h).app ((qcPullback (pullback.fst f g)).obj E)
+    (horizontalOrdinaryBaseComparison g h).hom.app ((qcDirectImage f).obj E) ≫
+          β.app E =
+        γ E ≫ (qcDirectImage p).map (s.hom.app E) ≫
+          k.app ((qcPullback (pullback.fst f (h ≫ g))).obj E) := by sorry
+
+/- Fixed-comparison mate calculation for ordinary forward pasting.
 Source: Stacks Project, Tags 0ATM and 0D5S.
 Proof: transpose under the pinned adjunction and apply the two derived
 base-change pasting laws, then cancel units and counits.
@@ -108,7 +141,10 @@ theorem horizontal_ordinary_forward_fixed_pasting_core
       (horizontalOrdinaryBaseComparison g h).hom.app ((qcDirectImage f).obj E) ≫
           β.app E =
         γ E ≫ (qcDirectImage p).map (s.hom.app E) ≫
-          k.app ((qcPullback (pullback.fst f (h ≫ g))).obj E) := by sorry
+          k.app ((qcPullback (pullback.fst f (h ≫ g))).obj E) := by
+  dsimp
+  intro E
+  exact horizontal_ordinary_forward_fixed_pasting_core_aux g f h E
 
 
 /-- Forward ordinary base-change pasting with supplied comparisons equal to the canonical ones.
