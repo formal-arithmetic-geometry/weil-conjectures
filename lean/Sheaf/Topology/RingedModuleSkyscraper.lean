@@ -144,7 +144,6 @@ theorem ringedModuleSkyscraperMap_id (M : ModuleCat.{u_sky} (X.presheaf.stalk x)
     ringedModuleSkyscraperMap X x (𝟙 M) =
       (𝟙 (ringedModuleSkyscraper X x M) :
         ringedModuleSkyscraper X x M ⟶ ringedModuleSkyscraper X x M) := by
-  ext V s
   rfl
 
 /-- Stacks, Tag 009A (4) (blueprint: def-pc-ringed-module-skyscraper).
@@ -154,7 +153,6 @@ theorem ringedModuleSkyscraperMap_comp
     {M N P : ModuleCat.{u_sky} (X.presheaf.stalk x)} (f : M ⟶ N) (g : N ⟶ P) :
     ringedModuleSkyscraperMap X x (f ≫ g) =
       ringedModuleSkyscraperMap X x f ≫ ringedModuleSkyscraperMap X x g := by
-  ext V s
   rfl
 
 /-- Stacks, Tag 009A (4) (blueprint: def-pc-ringed-module-skyscraper).
@@ -176,7 +174,6 @@ theorem ringedModuleSkyscraperFunctor_additive :
     (ringedModuleSkyscraperFunctor X x).Additive := by
   constructor
   intro M N f g
-  ext V s
   rfl
 
 attribute [instance] ringedModuleSkyscraperFunctor_additive

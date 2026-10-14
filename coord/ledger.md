@@ -14017,3 +14017,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:17 L: merged deliver/X2/Sheaf.Paper.CechCupPullbackCompat (stage 3; reviewer PASS; after a return; landing 20261014T001736-L-2556159 (proof); batch 20261014T001711; modules 1; new nodes 0)
 - 00:17 L: merged deliver/X3/Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed (stage 3; reviewer PASS; first push; landing 20261014T001737-L-2556312 (proof); batch 20261014T001711; modules 1; new nodes 0)
 - 00:17 L: merged deliver/X3/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (stage 3; reviewer PASS; first push; landing 20261014T001737-L-2556420 (proof); batch 20261014T001711; modules 1; new nodes 0)
+- 00:17 L: merged deliver/X3/Sheaf.Topology.RingedModuleSkyscraper (stage 3; reviewer PASS; first push; landing 20261014T001738-L-2556525 (proof); batch 20261014T001711; modules 1; new nodes 0)
