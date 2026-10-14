@@ -31,52 +31,155 @@
   "def-pc-fibre-product",
   "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-geometric-stalks], a germ in $G_{\\bar y}$ has a representative $s\\in G(V)$ on a pointed etale neighbourhood. Restrict it to $X_{\\bar y}$. The germ compatibility in [lem-weil-pbc-inverse-image-stalk-germ] shows that the nonzero-germ locus of the restricted section is precisely the inverse image of the support of $s$. By clause (1) of [lem-cbc-closed-proper-support-locality] this support is proper over $\\Omega$. Restriction commutes with refinement of the neighbourhood, so it induces a well-defined homomorphism $c:G_{\\bar y}\\to H^0_c(X_{\\bar y},a_{\\bar y}^{-1}F)$. Every restriction is $\\Lambda$-linear, so $c$ is too. Exactness of the geometric stalk functor [prop-weil-pbc-geometric-stalks-exact] identifies the stalk of the given subsheaf with a submodule of $(f_*F)_{\\bar y}$; by its construction, $c$ followed by inclusion is exactly ordinary restriction.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-cbc-closed-proper-support-locality",
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F76 (lemma-stalk-f-shriek-separated), first three proof paragraphs"
+   }
+  },
+  {
+   "text": "For an open $U\\subset X$, let $P_U(V)$ be the set of proper-support sections on $U_V$ and take its pointed-neighbourhood colimit as a set of germs. Base-change properness in [lem-cbc-closed-proper-support-locality] and step 1 make these restriction maps well-defined. We record explicitly the open-extension argument used below (Tag 0F53, remark-covariance-f-shriek-separated). If $U\\subset X$ is open and $s$ is a section of $F|_U$ on $U_V$ with support $C$ proper over $V$, give $C$ its reduced structure [lem-weil-pbc-reduced-induced-closed-subscheme]. The triangle $C\\to X_V\\to V$ has proper composite and separated second map: $X_V\\to V$ is separated by [lem-weil-pbc-separated-base-change] applied to $f$. By [lemma-nagata-proper-to-separated-target], $C\\to X_V$ is proper, hence has closed image by [def-weil-proper-morphism]. Its image is the same reduced closed subscheme as $C$ (this is checked on the open $U_V$ containing it). Glue $s$ on $U_V$ to zero on $X_V\\setminus C$: they agree on $U_V\\setminus C$ since every germ there is zero, so [lem-sc-etale-section-zero-open] says that the restriction there is zero. Sheaf separation and gluing are those of [def-weil-pbc-etale-sheaves]. Sheaf gluing gives a unique section on $X_V$ with support $C$. It lies in $G(V)$. This operation is injective, commutes with restriction, and hence defines an injection from the pointed colimit of $P_U$ into $G_{\\bar y}$: if two extended representatives agree after a refinement, their restrictions to $U$ agree after that same refinement, which is the equality criterion of [def-weil-pbc-geometric-stalks]. Over $\\Omega$, [lem-weil-pbc-separated-base-change] applied to $f$ makes $X_{\\bar y}\\to\\operatorname{Spec}\\Omega$ separated, so the triangle $C\\to X_{\\bar y}\\to\\operatorname{Spec}\\Omega$ again has proper composite and separated second map, so $C$ is closed in $X_{\\bar y}$. Glue the section on $U_{\\bar y}$ to zero off $C$; restriction back to $U_{\\bar y}$ is a left inverse, giving an injection on compactly supported fibre sections. The square with the restriction maps $c$ commutes: both paths restrict $s$ on the open and are zero on its complement, and gluing is unique.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lemma-nagata-proper-to-separated-target",
+    "def-weil-proper-morphism",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-etale-sheaves",
+    "lem-sc-etale-section-zero-open",
+    "lem-cbc-closed-proper-support-locality",
+    "lem-weil-pbc-separated-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F53 and 0F74 (remark-covariance-f-shriek-separated and remark-covariance-compact-support); Tag 0F76 open-subscheme square"
+   }
+  },
+  {
+   "text": "We may restrict $Y$ to an affine open containing the image of $\\bar y$: pointed neighbourhoods mapping into it are cofinal, since one can intersect any pointed neighbourhood with its inverse image. Suppose $s\\in G_{\\bar y}$ is in the kernel of $c$. Represent it on an affine pointed etale neighbourhood $V$ (shrink around its marked point). Its support $C$ is proper over affine $V$, so is quasi-compact by [def-weil-proper-morphism] and [def-weil-finite-type-morphism]. Its image in $X$ is quasi-compact, so finitely many affine opens of $X$ cover that image; their union is a quasi-compact open $U$. The section is the extension of its restriction to $U_V$ by step 2. The corresponding fibre section on $U_{\\bar y}$ is zero, because the fibre extension is injective. Consequently injectivity of the map from the pointed colimit of $P_U$ for every quasi-compact open $U\\subset X$ implies injectivity for $X$. For surjectivity, the support of any $t\\in H^0_c(X_{\\bar y},a_{\\bar y}^{-1}F)$ is quasi-compact. Cover its image in $X$ by finitely many affine opens and let $U$ be their union. Its restriction to $U_{\\bar y}$ retains the same proper support, and step 2 extends it back to $t$. Surjectivity from the pointed colimit of $P_U$ therefore gives surjectivity for $X$. Here the finite subcovers and finite unions are elementary quasi-compactness arguments using the affine-open basis of a scheme [def-pc-scheme]; no quasi-compactness of the original $X$ is assumed.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F76, affine-base reduction and the two quasi-compact-open reductions"
+   }
+  },
+  {
+   "text": "It remains to prove bijectivity when $Y$ is affine and $X$ is quasi-compact. For this reduced case use $P_X$ in place of the originally given $G$; step 5 identifies it with a sheaf, so its pointed colimit is a stalk. Since $f$ is locally of finite type and quasi-compact, it is finite type [def-weil-finite-type-morphism]. The affine scheme $Y$ is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. Apply [thm-nagata-compactification] and [def-nagata-compactification] to obtain $X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$, with $j$ an open immersion and $p$ proper. Work with the underlying abelian sheaf of $F$ and put $H=j_!F$. Its restriction to $X$ is $F$ by [lem-weil-pbc-extension-by-zero-unit-iso], and its stalks outside $X$ are zero by [lem-weil-pbc-extension-by-zero-stalks].",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-scheme-conventions",
+    "thm-nagata-compactification",
+    "def-nagata-compactification",
+    "lem-weil-pbc-extension-by-zero-unit-iso",
+    "lem-weil-pbc-extension-by-zero-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F76, final paragraph; Tag 0F70 (etale-cohomology-lemma-jshriek-open)"
+   }
+  },
+  {
+   "text": "Restriction identifies the presheaf $P_X$ with $p_*H$, and thus with $G$ whenever the latter is given. Indeed, for etale $V\\to Y$, a section of $H$ on $\\overline X_V$ has closed support by [lem-sc-etale-section-zero-open] (its complement is the zero-germ open), and that support is disjoint from $\\overline X_V\\setminus X_V$, by the zero stalks in [lem-weil-pbc-extension-by-zero-stalks] and the germ formula [lem-weil-pbc-inverse-image-stalk-germ]. The support is proper over $V$: $\\overline X_V\\to V$ is proper by [lem-weil-pbc-proper-base-change], and its reduced closed support is proper by clause (c) of [lem-weil-pbc-closed-immersion-proper]. Thus its restriction is in $P_X(V)$. Conversely, given $s\\in P_X(V)$, its support $C$ is closed also in $\\overline X_V$ by the proper-triangle argument of step 2. Use [lem-weil-pbc-extension-by-zero-unit-iso] to view $s$ as a section of $H$ on $X_V$, and glue it to zero on $\\overline X_V\\setminus C$. These two constructions are inverse: on $X_V$ they preserve $s$, and off $C$ both sections are zero, with equality checked by applying [lem-sc-etale-section-zero-open] to their difference, followed by sheaf separation [def-weil-pbc-etale-sheaves]. They commute with etale restriction and with morphisms of $F$, since restriction and gluing do. This proves the sheaf identification of Tag 0F52 without invoking the composition node (which depends on our item).",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-extension-by-zero-unit-iso",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-etale-sheaves",
+    "lem-sc-etale-section-zero-open",
+    "lemma-nagata-proper-to-separated-target",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F52 (lemma-compactify-f-shriek-separated), entire proof"
+   }
+  },
+  {
+   "text": "On the geometric fibre, [sbc-prop-extension-by-zero-and-arbitrary-base-change] identifies $H|_{\\overline X_{\\bar y}}$ with $j_{\\bar y,!}(F|_{X_{\\bar y}})$. Over $\\operatorname{Spec}\\Omega$, the construction is as follows: using [lem-weil-pbc-extension-by-zero-unit-iso] and [lem-weil-pbc-extension-by-zero-stalks], sections on the proper $\\overline X_{\\bar y}$ have closed support by [lem-sc-etale-section-zero-open], contained inside $X_{\\bar y}$; properness follows from [lem-weil-pbc-proper-base-change] and [lem-weil-pbc-closed-immersion-proper]. Conversely, let $t$ be a compactly supported section with reduced support $C$. The triangle $C\\to\\overline X_{\\bar y}\\to\\operatorname{Spec}\\Omega$ has proper composite and separated second map, so [lemma-nagata-proper-to-separated-target] makes $C\\to\\overline X_{\\bar y}$ proper and its image closed. Regard $t$ as a section of the pulled-back $H$ on $X_{\\bar y}$ using the unit isomorphism, and glue it to zero on $\\overline X_{\\bar y}\\setminus C$. On the intersection it is zero by [lem-sc-etale-section-zero-open]; sheaf gluing [def-weil-pbc-etale-sheaves] gives the extension. Restriction is a left inverse. It is also a right inverse because the difference from the original section has zero germs both on $X_{\\bar y}$ and off $C$, so the zero-open node makes it zero. We obtain $\\Gamma(\\overline X_{\\bar y},H|_{\\overline X_{\\bar y}})\\cong H^0_c(X_{\\bar y},F|_{X_{\\bar y}})$. For a representative $s\\in G(V)$, its extension to $H(\\overline X_V)$ pulls back to a section whose restriction to $X_{\\bar y}$ is $s|_{X_{\\bar y}}$ and whose restriction off the pulled-back support is zero. Uniqueness of the same gluing proves that this identification commutes with the actual restriction maps, not merely that the two objects are abstractly isomorphic.",
+   "uses": [
+    "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+    "lem-weil-pbc-extension-by-zero-unit-iso",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sc-etale-section-zero-open",
+    "lemma-nagata-proper-to-separated-target",
+    "def-weil-proper-morphism",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F75 (lemma-compactify-compact-support) and the final commutative square in Tag 0F76"
+   }
+  },
+  {
+   "text": "For the proper $p$, [lem-weil-pbc-proper-geometric-point-exchange] gives an isomorphism $\\bar y^{-1}p_*H\\to p_{\\bar y,*}(H|_{\\overline X_{\\bar y}})$ with no torsion hypothesis. By [def-weil-pbc-underived-exchange], the exchange is adjoint to pushforward of the inverse-image unit, so on a representative section it sends $s$ to its pullback on the fibre. Taking sections on $\\operatorname{Spec}\\Omega$ and using [lem-weil-pbc-geometric-point-pullback-stalk] identifies it with the canonical restriction $(p_*H)_{\\bar y}\\to\\Gamma(\\overline X_{\\bar y},H|_{\\overline X_{\\bar y}})$. By steps 5 and 6 this is precisely $c$. Thus $c$ is bijective in the quasi-compact case, and step 3 proves it in general. Finally for any $\\Lambda$-linear map $F\\to F'$, the support of the image of a section is closed by [lem-sc-etale-section-zero-open] and contained in its old support, since a linear map sends a zero germ to zero; [lem-weil-pbc-closed-immersion-proper] preserves properness, so the map restricts to proper-support sections. Both composites in the naturality square send a representative $s$ to the restriction of its image, proving naturality. Since $c$ is already $\\Lambda$-linear by step 1, its inverse is $\\Lambda$-linear as well: apply injectivity to $c(\\lambda c^{-1}(t))=\\lambda t$.",
+   "uses": [
+    "lem-weil-pbc-proper-geometric-point-exchange",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-pbc-underived-exchange",
+    "lem-sc-etale-section-zero-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F76, final paragraph; Tag 0A3T (etale-cohomology-lemma-proper-pushforward-stalk)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-cbc-closed-proper-support-locality",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lemma-nagata-proper-to-separated-target",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-etale-sheaves",
+  "lem-sc-etale-section-zero-open",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "thm-nagata-compactification",
+  "def-nagata-compactification",
+  "lem-weil-pbc-extension-by-zero-unit-iso",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+  "lem-weil-pbc-proper-geometric-point-exchange",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-separated-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F76 (lemma-stalk-f-shriek-separated), full proof, with the proofs of Tags 0F52 and 0F75 expanded"
+ },
  "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "properSupport|proper_support|stalk.*shriek|shriek.*stalk",
-   "results": "No hits.",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Geometric stalk formula for proper support direct image of small etale sheaves",
-   "results": "service unavailable: Internal Server Error; No hits.",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"properSupport\"",
-   "results": "No hits.",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The geometric stalk of the direct image with proper support of an etale sheaf is the module of compactly supported sections on the geometric fibre",
-   "results": "Hits: ModuleCat.Tilde.stalkToFiberLinearMap_germ, AlgebraicGeometry.StructureSheaf.toPushforwardStalk, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp, ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap, ModuleCat.Tilde.toOpen_germ, ModuleCat.Tilde.toOpen_germ_apply, ModuleCat.Tilde.toStalk, smoothSheafCommRing.ι_forgetStalk_hom Read returned signatures: ordinary scheme properness/descent or structure-sheaf stalks do not identify reduced closed supports or proper-support small-etale stalks.",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Compactly supported sections on the geometric fibre compute stalks of exceptional underived pushforward for separated locally finite type schemes",
-   "results": "Hits: AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc, AlgebraicGeometry.StructureSheaf.toPushforwardStalk, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo, AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux, TopCat.Presheaf.stalkPushforward_germ_apply, AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk, TopCat.Presheaf.stalkPushforward_germ Read returned signatures: ordinary scheme properness/descent or structure-sheaf stalks do not identify reduced closed supports or proper-support small-etale stalks.",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The stalk of lower shriek is compactly supported global sections of the fiber for etale sheaves",
-   "results": "Returned TopCat.Presheaf.stalkPushforward and stalkPullbackHom, TopCat.stalkToFiber, skyscraper adjunction maps and smoothSheafCommRing.ι_forgetStalk_hom_apply. These concern topological presheaves/manifolds, not small-etale proper-support geometric fibre sections. Actual search log top: TopCat.Presheaf.stalkPushforward, TopCat.stalkToFiber, StalkSkyscraperPresheafAdjunctionAuxs.fromStalk_to_skyscraper, StalkSkyscraperPresheafAdjunctionAuxs.toSkyscraperPresheaf_app, TopCat.Presheaf.stalkPushforward_germ_apply, StalkSkyscraperPresheafAdjunctionAuxs.fromStalk, TopCat.Presheaf.stalkPullbackHom, smoothSheafCommRing.ι_forgetStalk_hom_apply",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
   {
    "tool": "loogle",
    "query": "\"shriek\"",
@@ -86,19 +189,152 @@
   },
   {
    "tool": "grep",
-   "query": "lowerShriek|compactSupport|compactlySupported",
-   "results": "Returned topological HasCompactSupport lemmas in Dynamics/FixedPoints/Support, Topology/Algebra/Support, UrysohnsLemma, PartitionOfUnity and related files; these concern functions on topological spaces and not small-etale support direct image. Actual search log top: Mathlib/Dynamics/FixedPoints/Support.lean, Mathlib/Topology/Algebra/ConstMulAction.lean, Mathlib/Topology/Algebra/ConstMulAction.lean, Mathlib/Topology/UrysohnsLemma.lean, Mathlib/Topology/UrysohnsLemma.lean, Mathlib/Topology/UrysohnsLemma.lean, Mathlib/Topology/UrysohnsLemma.lean, Mathlib/Topology/UrysohnsLemma.lean",
+   "query": "properSupport|proper_support|fShriek|lowerShriek",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extending a section with proper support by zero across an open immersion",
+   "results": "service unavailable: Internal Server Error; returned ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of sections with support proper over the base along open subschemes of a separated scheme",
+   "results": "Returned AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.Scheme.zeroLocus_map. Read the returned types: these are structure-sheaf/topological stalk maps or quasi-separated structure-sheaf section lemmas, not proper-support small-etale sections.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shriek\"",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric stalk of compact support direct image of etale sheaves",
+   "results": "service unavailable: Internal Server Error; returned ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric stalk of direct image with proper support of an etale sheaf equals compactly supported sections on the geometric fibre",
+   "results": "Returned AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp, AlgebraicGeometry.LocallyRingedSpace.toStalk_stalkMap_toΓSpec, AlgebraicGeometry.StructureSheaf.toPushforwardStalk, ModuleCat.Tilde.toOpen_germ, AlgebraicGeometry.Scheme.stalkMap_germ_apply, AlgebraicGeometry.Scheme.Hom.germ_stalkMap_apply, TopCat.Presheaf.stalkPushforward_germ_apply, ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap. Read the returned types: these are structure-sheaf/topological stalk maps or quasi-separated structure-sheaf section lemmas, not proper-support small-etale sections.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional pushforward stalk formula for separated locally finite type schemes and small etale module sheaves",
+   "results": "Returned AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc, AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux, AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk, AlgebraicGeometry.spread_out_of_isGermInjective, TopCat.Presheaf.stalkPushforward, AlgebraicGeometry.stalkMap_toStalk, AlgebraicGeometry.StructureSheaf.toPushforwardStalk. Read the returned types: these are structure-sheaf/topological stalk maps or quasi-separated structure-sheaf section lemmas, not proper-support small-etale sections.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stalk of pushforward with compact supports equals sections with proper support on the fibre",
+   "results": "Returned TopCat.Presheaf.stalkPushforward, TopCat.Presheaf.stalkPushforward.comp, TopCat.Presheaf.stalkPushforward_germ_apply, TopCat.Presheaf.stalkPushforward_germ, TopCat.Presheaf.stalkPushforward_germ_assoc, TopCat.Presheaf.stalkPullbackHom, TopCat.Presheaf.stalkPushforward.id, TopCat.Presheaf.pushforwardPullbackAdjunction_unit_app_app_germToPullbackStalk_assoc. Read signatures: these are ordinary topological-presheaf stalk maps; none states the proper-support small-etale fibre formula.",
    "date": "2026-10-14",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-proper-support-sheaf-composition",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-cbc-proper-support-geometric-stalk",
+  "worker": "stage1",
+  "summary": "Expanded the restriction map, open-extension gluing, quasi-compact-open reduction, Nagata compactification and proper degree-zero comparison. Reused existing arbitrary-coefficient nodes, with no new nodes, no torsion assumption, and no dependence on the parent support-composition theorem.",
+  "blueprint": "thm-cbc-finite-torsion, refinement comparison paragraph and final pasting sentence: restriction-normalized stalk formula used in the underlying support comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic Stalk of an inverse image, compatible with germs of pulled-back sections used for the support/compactification proof of Tag 0F76; the compact-support-base-change unit has no independent replacement with these arbitrary-coefficient hypotheses."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic Exactness of geometric stalks used for the support/compactification proof of Tag 0F76; the compact-support-base-change unit has no independent replacement with these arbitrary-coefficient hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic Reduced induced closed subscheme structure on a closed subset: existence and uniqueness used for the support/compactification proof of Tag 0F76; the compact-support-base-change unit has no independent replacement with these arbitrary-coefficient hypotheses."
+   },
+   {
+    "node": "lemma-nagata-proper-to-separated-target",
+    "why": "Generic [stacks-project] used for the support/compactification proof of Tag 0F76; the compact-support-base-change unit has no independent replacement with these arbitrary-coefficient hypotheses."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic Nagata compactification, [stacks-project] used for the support/compactification proof of Tag 0F76; the compact-support-base-change unit has no independent replacement with these arbitrary-coefficient hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-unit-iso",
+    "why": "Generic The unit of extension by zero along an open immersion is an isomorphism used for the support/compactification proof of Tag 0F76; the compact-support-base-change unit has no independent replacement with these arbitrary-coefficient hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Generic Geometric stalks of extension by zero along an open immersion used for the support/compactification proof of Tag 0F76; the compact-support-base-change unit has no independent replacement with these arbitrary-coefficient hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic Properness is stable under base change used for the support/compactification proof of Tag 0F76; the compact-support-base-change unit has no independent replacement with these arbitrary-coefficient hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic Closed immersions are proper used for the support/compactification proof of Tag 0F76; the compact-support-base-change unit has no independent replacement with these arbitrary-coefficient hypotheses."
+   },
+   {
+    "node": "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+    "why": "Generic Extension by zero base change used for the support/compactification proof of Tag 0F76; the compact-support-base-change unit has no independent replacement with these arbitrary-coefficient hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-proper-geometric-point-exchange",
+    "why": "Generic Underived proper exchange after base change to a geometric point used for the support/compactification proof of Tag 0F76; the compact-support-base-change unit has no independent replacement with these arbitrary-coefficient hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Generic Inverse image to a geometric point is the stalk used for the support/compactification proof of Tag 0F76; the compact-support-base-change unit has no independent replacement with these arbitrary-coefficient hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "Separatedness of X_V over V and of the geometric fibre is required by the proper-to-separated-target triangle in step 2; this is a generic geometric base-change tool, not a replacement for the compact-support route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lemma-nagata-proper-to-separated-target",
+  "thm-nagata-compactification",
+  "lem-weil-pbc-extension-by-zero-unit-iso",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+  "lem-weil-pbc-proper-geometric-point-exchange",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-separated-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-5afe66254",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-5afe66254 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, sources, report, and unit/chapter route. The seven-step proof preserves arbitrary coefficients and the canonical restriction map. Repaired C1 in step 2 by citing existing separated-base-change for both proper triangles. Corrected JSON and review.md written; statement unchanged, no new nodes or cycles.; 1 file(s) fixed by the reviewer"
+ }
 }
