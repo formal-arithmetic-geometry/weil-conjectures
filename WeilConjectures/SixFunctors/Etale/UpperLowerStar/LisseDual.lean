@@ -124,7 +124,7 @@ theorem isIso_ihomUnitTensorToIhom_of_isFiniteLocallyConstantSheaf
   obtain ⟨_⟩ := Nonempty.intro (BraidedCategory.exactPairing_swap (G.obj F) (G.obj F)ᘁ)
   have := isIso_ihomUnitTensorToIhom (G.obj F)ᘁ (G.obj F) (G.obj F)
   have := isIso_ihomComparison_upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i) F
-  exact Functor.Monoidal.isIso_map_ihomUnitTensorToIhom G F F
+  exact Functor.Monoidal.isIso_map_ihomUnitTensorToIhom_of_ihomComparison G F F
 
 /-- **A lisse flat sheaf is dualizable**: for a finite ring `Λ`, a finite locally constant flat
 sheaf `F` of `Λ`-modules on `X_ét` has the left dual `[F, Λ_X]`, the evaluation being the
