@@ -2,7 +2,7 @@
  "id": "lem-pc-standard-single-flat-counit-localization-homology",
  "kind": "statement",
  "title": "Homology identifications and compatibility for fixed stalk data",
- "statement": "For the localized presentation data, fixed P, LF and ε satisfying the bounded-flat and left-derived hypotheses admit all degreewise homology identifications and the required compatibility equality.",
+ "statement": "The localized presentation complex K supplied by hpres, after taking the stalk at g(a) and transporting scalars along the open-stalk isomorphism, yields the bounded-flat stalk complex P and the derived scalar-extension homology identifications and compatibility.",
  "stmt_deps": [],
  "source": {
   "document": "Stacks Project",
@@ -17,7 +17,7 @@
  ],
  "proof_deps": [],
  "proof_origin": {
-  "by": "worker",
+  "by": "A3 repair",
   "group": "B2",
   "date": "2026-10-14",
   "document": "literature/stacks-project/perfect.tex",
@@ -70,7 +70,7 @@
   "module": "Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationHomology",
   "file": "lean/Sheaf/AlgebraicGeometry/StandardSingleFlatCounitLocalizationHomology.lean",
   "declaration": "AlgebraicGeometry.standardSingleFlatCounit_localization_homology",
-  "statement": "theorem standardSingleFlatCounit_localization_homology\n    (h_affine : ∀ {Y₀ B₀ A₀ : Scheme.{u}} (p₀ : Y₀ ⟶ B₀)\n      [QuasiCompact p₀] [QuasiSeparated p₀] [IsAffine B₀] [IsAffine A₀]\n      (g₀ : A₀ ⟶ B₀), StandardSingleFlatCounitOnOpen p₀ g₀ ⊤)\n    {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]\n    (M : Y.Modules) [M.IsQuasicoherent] (hM : M.IsFlatOver p) (g : A ⟶ B) (a : A)\n    (S : B.Opens) (V : A.Opens) (hS : g a ∈ S) (hV : a ∈ V)\n    (hSaff : IsAffine S.toScheme) (hVaff : IsAffine V.toScheme)\n    (hVS : V ≤ g ⁻¹ᵁ S)\n    (hpres : StandardSingleFlatCounitPresentation (p ∣_ S)\n      (M.restrict (p ⁻¹ᵁ S).ι) (g.resLE S V hVS)) :\n    letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    let R := B.presheaf.stalk (g a)\n    let T := A.presheaf.stalk a\n    letI := HasDerivedCategory.standard (ModuleCat.{u} R)\n    letI := HasDerivedCategory.standard (ModuleCat.{u} T)\n    ∀ (P : CochainComplex (ModuleCat.{u} R) ℤ)\n    (hPbound : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P.X i))\n    (hPflat : ∀ i : ℤ, Module.Flat R (P.X i))\n    (LF : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} T))\n    (ε : DerivedCategory.Qh ⋙ LF ⟶\n      (ModuleCat.extendScalars (g.stalkMap a).hom).mapHomotopyCategory (.up ℤ) ⋙\n        DerivedCategory.Qh)\n    (hLF : LF.IsLeftDerivedFunctor ε\n      (HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ))),\n        ∀ n : ℤ,\n          ∃ (eL : (RingedSpace.moduleStalkFunctor A.toRingedSpace a).obj\n              ((DerivedCategory.homologyFunctor _ n).obj\n                ((derivedPullback g).obj ((schemeDerivedDirectImage p).obj\n                  ((DerivedCategory.singleFunctor _ 0).obj M)))) ≅\n              (DerivedCategory.homologyFunctor _ n).obj\n                (LF.obj (DerivedCategory.Qh.obj\n                  ((HomotopyCategory.quotient _ (.up ℤ)).obj P))))\n            (eR : (DerivedCategory.homologyFunctor _ n).obj\n                (DerivedCategory.Qh.obj\n                  (((ModuleCat.extendScalars (g.stalkMap a).hom).mapHomotopyCategory\n                    (.up ℤ)).obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) ≅\n              (RingedSpace.moduleStalkFunctor A.toRingedSpace a).obj\n                ((DerivedCategory.homologyFunctor _ n).obj\n                  ((schemeDerivedDirectImage (pullback.snd p g)).obj\n                    ((DerivedCategory.singleFunctor _ 0).obj\n                      (Scheme.Modules.tensorPullbackObj (pullback.fst p g) M))))),\n            (RingedSpace.moduleStalkFunctor A.toRingedSpace a).map\n                ((DerivedCategory.homologyFunctor _ n).map (standardSingleBaseChangeMap p M g)) =\n              eL.hom ≫ (DerivedCategory.homologyFunctor _ n).map\n                (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ eR.hom ",
+  "statement": "theorem standardSingleFlatCounit_localization_homology\n    (h_affine : ∀ {Y₀ B₀ A₀ : Scheme.{u}} (p₀ : Y₀ ⟶ B₀)\n      [QuasiCompact p₀] [QuasiSeparated p₀] [IsAffine B₀] [IsAffine A₀]\n      (g₀ : A₀ ⟶ B₀), StandardSingleFlatCounitOnOpen p₀ g₀ ⊤)\n    {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]\n    (M : Y.Modules) [M.IsQuasicoherent] (hM : M.IsFlatOver p) (g : A ⟶ B) (a : A)\n    (S : B.Opens) (V : A.Opens) (hS : g a ∈ S) (hV : a ∈ V)\n    (hSaff : IsAffine S.toScheme) (hVaff : IsAffine V.toScheme)\n    (hVS : V ≤ g ⁻¹ᵁ S)\n    (hpres : StandardSingleFlatCounitPresentation (p ∣_ S)\n      (M.restrict (p ⁻¹ᵁ S).ι) (g.resLE S V hVS)) :\n    letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    let R := B.presheaf.stalk (g a)\n    let T := A.presheaf.stalk a\n    letI := HasDerivedCategory.standard (ModuleCat.{u} R)\n    letI := HasDerivedCategory.standard (ModuleCat.{u} T)\n    let K := Classical.choose hpres\n    let xS : S.toScheme := ⟨g a, hS⟩\n    let P :=\n      ((ModuleCat.restrictScalars (S.stalkIso xS).inv.hom).mapHomologicalComplex\n        (.up ℤ)).obj\n        (((RingedSpace.moduleStalkFunctor S.toScheme.toRingedSpace xS).mapHomologicalComplex\n          (.up ℤ)).obj K)\n    ∃ (P' : CochainComplex (ModuleCat.{u} R) ℤ), P' = P ∧\n      (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P'.X i)) ∧\n      (∀ i : ℤ, Module.Flat R (P'.X i)) ∧\n      ∃ (LF : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} T))\n    (ε : DerivedCategory.Qh ⋙ LF ⟶\n      (ModuleCat.extendScalars (g.stalkMap a).hom).mapHomotopyCategory (.up ℤ) ⋙\n        DerivedCategory.Qh)\n    (hLF : LF.IsLeftDerivedFunctor ε\n      (HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ))),\n        ∀ n : ℤ,\n          ∃ (eL : (RingedSpace.moduleStalkFunctor A.toRingedSpace a).obj\n              ((DerivedCategory.homologyFunctor _ n).obj\n                ((derivedPullback g).obj ((schemeDerivedDirectImage p).obj\n                  ((DerivedCategory.singleFunctor _ 0).obj M)))) ≅\n              (DerivedCategory.homologyFunctor _ n).obj\n                (LF.obj (DerivedCategory.Qh.obj\n                  ((HomotopyCategory.quotient _ (.up ℤ)).obj P'))))\n            (eR : (DerivedCategory.homologyFunctor _ n).obj\n                (DerivedCategory.Qh.obj\n                  (((ModuleCat.extendScalars (g.stalkMap a).hom).mapHomotopyCategory\n                    (.up ℤ)).obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P'))) ≅\n              (RingedSpace.moduleStalkFunctor A.toRingedSpace a).obj\n                ((DerivedCategory.homologyFunctor _ n).obj\n                  ((schemeDerivedDirectImage (pullback.snd p g)).obj\n                    ((DerivedCategory.singleFunctor _ 0).obj\n                      (Scheme.Modules.tensorPullbackObj (pullback.fst p g) M))))),\n            (RingedSpace.moduleStalkFunctor A.toRingedSpace a).map\n                ((DerivedCategory.homologyFunctor _ n).map (standardSingleBaseChangeMap p M g)) =\n              eL.hom ≫ (DerivedCategory.homologyFunctor _ n).map\n                (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P')) ≫ eR.hom ",
   "branch": "sheaf-dag",
   "by": "B2",
   "date": "2026-10-14"
@@ -88,47 +88,64 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B2",
+  "reviewer": "X-24010",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261014T001713-L-2547413",
+  "landing": "20261014T020504-L-3808923",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files matched the packet and node; adapted and original importer modules compiled, with only the documented named sorryAx."
  },
  "statement_change": {
   "date": "2026-10-14",
-  "by": "M2 stage 2",
-  "old_statement": "Under the affine open presentation hypothesis, given a bounded-above termwise-flat stalk complex P over the base stalk ring, the derived scalar-extension functor, counit, all homology identifications, and the required compatibility square exist.",
-  "what": "The old arbitrary-P conclusion is false: identity maps on Spec(k), M=O, P=0 would identify zero with k. Require the actual presentation on affine S and V (including e, t and their equation), not a nonexistent global presentation. Construct P from its K. Parent signature is preserved.",
+  "by": "A3 stage 2",
+  "old_statement": "For the localized presentation data, fixed P, LF and ε satisfying the bounded-flat and left-derived hypotheses admit all degreewise homology identifications and the required compatibility equality.",
+  "what": "The arbitrary P quantifiers are false: the conclusion must use the complex constructed from the localized presentation witness. This repair constructs P from K := Classical.choose hpres and exposes P' = P.",
   "source": {
    "document": "Stacks Project",
    "place": "Tags 0DJ9, 06YB and 0D5S"
   },
   "citers": [
    {
-    "id": "lem-pc-standard-single-flat-counit-localization",
+    "id": "lem-pc-standard-single-flat-counit-localization-completion",
     "holds": true,
-    "note": "Parent statement unchanged; its proof is adapted in this delivery to obtain and pass the local presentation."
+    "note": "The completion caller is adapted to obtain its P, bounds, and flatness from the repaired theorem."
    }
   ],
-  "old_stmt_deps": [
-   "def-pc-standard-single-flat-counit-presentation-on-open",
-   "def-pc-standard-single-base-change-map",
-   "lem-pc-stalk-derived-extension-comparison-intermediate"
-  ],
-  "old_proof": [
-   {
-    "text": "Transport the affine sheaf presentation through exact stalks and the universal derived scalar-extension pair; apply homology and the counit compatibility to obtain the square in every degree.",
-    "uses": [
-     "def-pc-standard-single-base-change-map",
-     "lem-pc-stalk-derived-extension-comparison-intermediate"
-    ],
-    "elementary": false
-   }
-  ],
-  "old_proof_deps": [
-   "def-pc-standard-single-base-change-map",
-   "lem-pc-stalk-derived-extension-comparison-intermediate"
-  ]
+  "previous": {
+   "date": "2026-10-14",
+   "by": "M2 stage 2",
+   "old_statement": "Under the affine open presentation hypothesis, given a bounded-above termwise-flat stalk complex P over the base stalk ring, the derived scalar-extension functor, counit, all homology identifications, and the required compatibility square exist.",
+   "what": "The old arbitrary-P conclusion is false: identity maps on Spec(k), M=O, P=0 would identify zero with k. Require the actual presentation on affine S and V (including e, t and their equation), not a nonexistent global presentation. Construct P from its K. Parent signature is preserved.",
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tags 0DJ9, 06YB and 0D5S"
+   },
+   "citers": [
+    {
+     "id": "lem-pc-standard-single-flat-counit-localization",
+     "holds": true,
+     "note": "Parent statement unchanged; its proof is adapted in this delivery to obtain and pass the local presentation."
+    }
+   ],
+   "old_stmt_deps": [
+    "def-pc-standard-single-flat-counit-presentation-on-open",
+    "def-pc-standard-single-base-change-map",
+    "lem-pc-stalk-derived-extension-comparison-intermediate"
+   ],
+   "old_proof": [
+    {
+     "text": "Transport the affine sheaf presentation through exact stalks and the universal derived scalar-extension pair; apply homology and the counit compatibility to obtain the square in every degree.",
+     "uses": [
+      "def-pc-standard-single-base-change-map",
+      "lem-pc-stalk-derived-extension-comparison-intermediate"
+     ],
+     "elementary": false
+    }
+   ],
+   "old_proof_deps": [
+    "def-pc-standard-single-base-change-map",
+    "lem-pc-stalk-derived-extension-comparison-intermediate"
+   ]
+  }
  }
 }

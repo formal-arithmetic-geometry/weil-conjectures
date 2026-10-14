@@ -1,8 +1,6 @@
 module
 
 public import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitPresentation
-import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationData
-import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationPair
 import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationHomology
 
 @[expose] public section
@@ -81,13 +79,12 @@ theorem standardSingleFlatCounit_localization_completion
             (RingedSpace.moduleStalkFunctor A.toRingedSpace a).map
                 ((DerivedCategory.homologyFunctor _ n).map (standardSingleBaseChangeMap p M g)) =
               eL.hom ≫ (DerivedCategory.homologyFunctor _ n).map
-                (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ eR.hom  := by
+                (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ eR.hom := by
   dsimp
-  obtain ⟨P, hPbound, hPflat⟩ :=
-    standardSingleFlatCounit_localization_data h_affine p M hM g a
-  obtain ⟨LF, ε, hLF⟩ :=
-    standardSingleFlatCounit_localization_pair h_affine p M hM g a P hPbound hPflat
-  exact ⟨P, hPbound, hPflat, LF, ε, hLF, standardSingleFlatCounit_localization_homology
-    h_affine p M hM g a S V hS hV hSaff hVaff hVS hpres P hPbound hPflat LF ε hLF⟩
+  obtain ⟨P, hPident, hPbound, hPflat, LF, ε, hLF, hhom⟩ :=
+    standardSingleFlatCounit_localization_homology
+      h_affine p M hM g a S V hS hV hSaff hVaff hVS hpres
+  exact ⟨P, hPbound, hPflat, LF, ε, hLF, hhom⟩
+
 
 end AlgebraicGeometry
