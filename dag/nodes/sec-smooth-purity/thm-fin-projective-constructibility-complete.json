@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-fin-projective-constructibility-complete",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Projective direct-image constructibility",
@@ -18,26 +18,94 @@
  ],
  "proof": [
   {
-   "text": "[thm-fin-projective-line-constructible] proves projective-line\nconstructibility over every finite-type base. Apply\n[lem-finrepair-projective-from-line].",
+   "text": "Fix the finite coefficient ring $\\Lambda$ occurring in [def-finrepair-property-c]. For an arbitrary finite-type $k$-scheme $T$, [thm-fin-projective-line-constructible] says that $R^q\\pi_*F$ is constructible for every constructible $\\Lambda$-sheaf $F$ on $\\mathbf P^1_T$ and every $q\\geq0$, where $\\pi:\\mathbf P^1_T\\to T$. The coefficient ring and invertible annihilating integer are precisely the fixed ones in the definition of $\\mathcal C$. Thus, by [def-finrepair-property-c], $\\mathcal C(\\mathbf P^1_T\\to T)$ holds. Since $T$ was arbitrary, this supplies the universally quantified hypothesis of the reduction lemma.",
    "uses": [
     "thm-fin-projective-line-constructible",
-    "lem-finrepair-projective-from-line"
+    "def-finrepair-property-c"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-constructibility-complete.md",
+    "place": "Proof, first sentence"
+   }
+  },
+  {
+   "text": "Apply [lem-finrepair-projective-from-line] to the assertion for every finite-type base obtained in step 1. Its conclusion gives $\\mathcal C(f)$ for every projective morphism $f:X\\to S$ between finite-type $k$-schemes, exactly as required. The projective convention [def-pc-projective-morphism] is the projective-space-embedding convention used in the reduction; no extension to arbitrary proper morphisms, change of coefficient category, or uniform vanishing assertion is involved.",
+   "uses": [
+    "lem-finrepair-projective-from-line",
+    "def-pc-projective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-constructibility-complete.md",
+    "place": "Proof, second sentence"
+   }
   }
  ],
  "proof_deps": [
   "thm-fin-projective-line-constructible",
-  "lem-finrepair-projective-from-line"
+  "def-finrepair-property-c",
+  "lem-finrepair-projective-from-line",
+  "def-pc-projective-morphism"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-constructibility-complete.md",
-  "place": "## Proof"
+  "place": "Proof, the two sentences; application of the existing line theorem and reduction lemma"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructib.*(direct|pushforward)|IsConstructible",
+   "results": "23 hits; Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean.  First query returned topological constructible-set results, including Scheme.Hom.isConstructible_image (FinitePresentation.lean:165); read its statement, which is about subsets. The second query returned no hits.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projective morphism of finite type schemes preserves constructibility of finite torsion etale sheaves under all higher direct images",
+   "results": "0 hits; . service unavailable: Internal Server Error Service returned Internal Server Error; unavailable.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"direct\"",
+   "results": "0 hits; .  The combined query returned no hits; the broader query returned Topology.IsConstructible and its elementary subset lemmas, not constructible sheaves.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of constructible finite torsion etale sheaves along a projective morphism are constructible",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts, PrimeSpectrum.isConstructible_comap_image, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit.  Hits concern Chevalley constructibility of subsets or coherent-site sheaf comparison and condensed modules; none states higher-direct-image constructibility of torsion etale sheaves.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*sheaf|sheaf.*constructible|projective.*direct",
+   "results": "0 hits; .  First query returned topological constructible-set results, including Scheme.Hom.isConstructible_image (FinitePresentation.lean:165); read its statement, which is about subsets. The second query returned no hits.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology finiteness theorem: projective pushforward preserves finite locally constant stratifications of torsion module sheaves",
+   "results": "8 hits; CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp, CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts, CondensedMod.ofSheafProfinite, CompHausLike.LocallyConstantModule.functor, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondMod.ofSheafLightProfinite, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition.  Hits concern Chevalley constructibility of subsets or coherent-site sheaf comparison and condensed modules; none states higher-direct-image constructibility of torsion etale sheaves.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\"",
+   "results": "12 hits; Topology.IsConstructible, Topology.IsLocallyConstructible, Topology.IsConstructible.univ, Topology.IsLocallyConstructible.univ, Topology.IsConstructible.empty, Topology.IsLocallyConstructible.empty, Topology.IsConstructible.isLocallyConstructible, IsRetrocompact.isConstructible.  The combined query returned no hits; the broader query returned Topology.IsConstructible and its elementary subset lemmas, not constructible sheaves.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -65,5 +133,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "thm-fin-projective-constructibility-complete",
+  "worker": "stage1",
+  "summary": "Preserved the statement and both existing statement dependencies. Expanded the imported application into two steps, checking the universal base quantifier and finite torsion small-etale coefficient conventions against the cited statements. No new nodes or Mathlib leaves are needed. Source searches exclude an attachment: the nearby finite-type direct-image results depend on an explicit sorry.",
+  "blueprint": "Realizes both sentences of the proof of thm-fin-projective-constructibility-complete: the line theorem supplies the universal hypothesis, then the existing projective-from-line lemma gives the conclusion. No unit or chapter route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-392651523",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-392651523 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and unit/chapter route. Both steps correctly apply existing results with matching finite torsion small-etale coefficients and projectivity convention. No new nodes, missing citations, or delivery-induced cycles; broader candidates depend on this item. No repairs needed. Concrete checks and the existing reduction’s stale projectivity reference are recorded in review.md."
+ }
 }
