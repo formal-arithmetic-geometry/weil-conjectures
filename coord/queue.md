@@ -1,6 +1,6 @@
 # Work queue
 
-83 items; claim with `tools/claim.py next <group> [--stage N]`.
+98 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (83)
+## Stage 3: modules to prove (98)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -48,23 +48,25 @@
 | `Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HigherDirectImageOverMapCoefficient` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleLimitOpenCompatibleBoundaries` | 15 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.HigherDirectImageRawTriangleAdjunct` | 16 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations` | 17 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapNaturality` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RestrictedAffineNaturalCoefficientSystem` | 17 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FieldScalarRestrictionInjectives` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionDiagram` | 20 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SquareZeroTensorGradedActionProjection` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SquareZeroTensorGradedBoundaryProjection` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SquareZeroTensorGradedProductProjection` | 21 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.tensorGradedAction_projection_first` | 21 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.tensorGradedAction_projection_second` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFormula` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation` | 22 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitRepresentative` | 23 | 1 | proof |
 | `Sheaf.Paper.CechCupPullbackCompat` | 23 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.LocalMapPairOverlapBaseChange` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationHomology` | 24 | 1 | proof |
 | `Sheaf.Paper.CechCupResolutionRepresentatives` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OverlapConjugateRestriction` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCompatibility` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux` | 25 | 2 | proof |
+| `Sheaf.Paper.ModuleCupGodementCoefficientComplexes` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackCompositionMateUnit` | 26 | 1 | proof |
 | `Sheaf.Paper.CechRefinementResolutionBeta` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OrdinaryEvaluationComponentOverTransport` | 27 | 1 | proof |
@@ -78,6 +80,8 @@
 | `Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PinnedTensorSquareLeftSummand` | 28 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationChainAction` | 28 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationChainMapExists` | 28 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineBaseChangeTildeMateFactorization` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore` | 30 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate` | 30 | 1 | proof |
@@ -86,13 +90,24 @@
 | `Sheaf.AlgebraicGeometry.Morphisms.FixedOrbitProductEquiv` | 32 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIdentity` | 33 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalTensorGeneratorFormulaOfQ` | 33 | 1 | proof |
+| `Sheaf.CategoryTheory.DerivedModuleNonzeroClassMap` | 33 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeComponent` | 35 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.DerivedDirectImageSquareUnitNormalization` | 35 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.MayerVietorisImageCompositionLocalization` | 35 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorStabilizerSectionOpen` | 35 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationLocalizationComparison` | 36 | 1 | proof |
+| `Sheaf.Algebra.Homology.OpenOverHomComplexCycleProjectionCycleSquare` | 37 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.Morphisms.CartierStalkNormalizationProduct` | 37 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.Morphisms.DvrGaloisComponentsStalkFactor` | 38 | 1 | proof |
+| `Sheaf.RingTheory.DvrGaloisRootFactorUniformizer` | 38 | 1 | proof |
+| `Sheaf.Algebra.Homology.BalancedTensorUnitModelComparison` | 39 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineModelComparisonOfBottomModels` | 39 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SelfTorAugmentedResolutionCharts` | 40 | 1 | proof |
 | `Sheaf.Paper.LimitTowerOverLocalSystem` | 40 | 1 | proof |
 | `Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionUniqueAux` | 40 | 1 | proof |
 | `Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization` | 41 | 1 | proof |
+| `Sheaf.RingTheory.LimitModuleLocalizationRingData` | 42 | 1 | proof |
+| `Sheaf.RingTheory.LimitModuleModuleDataConstruction` | 42 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectHomOpenTestBijective` | 46 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectHomOpenTransportSquare` | 46 | 1 | proof |
 
