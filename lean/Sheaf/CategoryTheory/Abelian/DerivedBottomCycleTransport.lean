@@ -6,7 +6,8 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import Sheaf.CategoryTheory.Abelian.DerivedSingleShiftNormalization
-import Sheaf.CategoryTheory.Abelian.DerivedBottomComparison
+import Sheaf.CategoryTheory.Abelian.DerivedBottomInclusion
+import Sheaf.CategoryTheory.Abelian.DerivedCyclesUnitNaturality
 
 /-! # Canonical-cycle transport to the double truncation
 
@@ -88,21 +89,20 @@ noncomputable def rightDerivedBottomToSingleIso (n : ℤ) :
 Source: Stacks Project, Tag 05TC (2), with the unit of Tag 05TD (3).
 (blueprint: new-lem-pc-derived-bottom-cycle-transport).
 
-Proof: Replace the lower derived truncation by the localization of smart
-truncation of K. Its bottom term is K.X n modulo the incoming boundaries,
-and its cycles identify with H^n(K). The canonical cycle map followed by
-this identification is the homology quotient of K. The map from the upper
-smart truncation to the lower one induces an invertible H^n after deriving
-S; naturality of the actual derived unit lets its inverse cancel the
-inclusion. The projection of that upper truncation to the double truncation
-is invertible and identifies the remaining map with the unit on the single
-object. The homology formula for eTruncLTCompETruncGEIso identifies the
-source map with the quotient followed by the lower-truncation homology
-map, with no choice of sign. Finally the uniqueness comparison of bounded
-below and unbounded derived functors intertwines their actual units.
-Apply homology and its localization factor isomorphism to obtain the
-stated equation. This calculation does not use the single-object comparison
-or its shift normalization; it stops at the actual unit on that object. -/
+Proof: Lift the lower truncation to the bounded-below derived category and
+map the single object of cycles into it using the canonical cycle inclusion.
+The cycle-map homology formula identifies its homology coefficient with
+the quotient followed by the lower-truncation homology map. Actual derived-unit
+naturality, including bounded-below/unbounded compatibility, identifies the
+original cycle prefix with the single unit followed by the derived cycle map.
+Factor that map through the canonical bottom-homology inclusion. Naturality
+of the single unit follows by cancelling its shifted comparison and applying
+shift normalization. Move the homology coefficient across the unit, expand
+the bottom inclusion, and cancel the upper inclusion, lower projection and
+double-truncation identification against the explicit comparison. The upper
+inclusion induces invertible derived bottom homology by the distinguished
+triangle and vanishing below n + 1. The result stops at the actual single
+unit; it does not compose the conclusion with the shifted comparison. -/
 theorem rightDerivedBottom_cycle_transport (n : ℤ) (K : CochainComplex C ℤ) :
     ((((S.mapHomologicalComplex (.up ℤ)).obj K).sc n).liftCycles
         (S.map (K.sc n).iCycles) (by
@@ -123,6 +123,84 @@ theorem rightDerivedBottom_cycle_transport (n : ℤ) (K : CochainComplex C ℤ) 
           ((DerivedCategory.TStructure.t.truncGEπ n).app (DerivedCategory.Q.obj K))) ≫
       S.rightDerivedPlusSingleUnitHomologyAt n
         ((DerivedCategory.homologyFunctor C n).obj
-          ((DerivedCategory.TStructure.t.truncGE n).obj (DerivedCategory.Q.obj K))) := by sorry
+          ((DerivedCategory.TStructure.t.truncGE n).obj (DerivedCategory.Q.obj K))) := by
+  let t := DerivedCategory.TStructure.t (C := C)
+  let tp := DerivedCategory.Plus.TStructure.t (C := C)
+  let X := DerivedCategory.Q.obj K
+  let L := t.plus.lift (t.truncGE n) (fun Z ↦ ⟨n, inferInstance⟩)
+  let M := L.obj X
+  let R := S.rightDerivedFunctorPlus
+  let H := DerivedCategory.Plus.homologyFunctor D n
+  let HC := DerivedCategory.Plus.homologyFunctor C n
+  let q : X ⟶ DerivedCategory.Plus.ι.obj M := (t.truncGEπ n).app X
+  let Y := (K.sc n).cycles
+  let f : (DerivedCategory.Plus.singleFunctor C n).obj Y ⟶ M :=
+    DerivedCategory.Plus.ι.preimage (DerivedCategory.cyclesDerivedMap n K ≫ q)
+  have hM : tp.IsGE M n := by
+    apply (DerivedCategory.Plus.isGE_ι_obj_iff M n).mp
+    change t.IsGE ((t.truncGE n).obj X) n
+    infer_instance
+  let a := (tp.truncLTι (n + 1)).app M
+  let b := (tp.truncGEπ n).app ((tp.truncLT (n + 1)).obj M)
+  let e := (DerivedCategory.Plus.eTruncLTCompETruncGEIso n).app M
+  have : IsIso b := inferInstance
+  have : IsIso (H.map (R.map a)) := by
+    let T := (R ⋙ DerivedCategory.Plus.ι).mapTriangle.obj
+      ((tp.triangleLTGE (n + 1)).obj M)
+    have hT : T ∈ CategoryTheory.Pretriangulated.distinguishedTriangles :=
+      (R ⋙ DerivedCategory.Plus.ι).map_distinguished _
+        (tp.triangleLTGE_distinguished (n + 1) M)
+    have hz (j : ℤ) (hj : j < n + 1) :
+        IsZero ((DerivedCategory.homologyFunctor D j).obj T.obj₃) :=
+      S.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE
+        ((tp.truncGE (n + 1)).obj M) (n + 1) hj
+    exact DerivedCategory.isIso_homologyMap_mor₁ T hT (n - 1) n (by omega)
+      (hz (n - 1) (by omega)) (hz n (by omega))
+  have hq : (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso n).inv.app Y ≫
+      HC.map f = (K.sc n).homologyπ ≫
+        (DerivedCategory.homologyFunctorFactors C n).inv.app K ≫
+        (DerivedCategory.homologyFunctor C n).map q := by
+    change (DerivedCategory.singleFunctorCompHomologyFunctorIso C n).inv.app Y ≫
+      (DerivedCategory.homologyFunctor C n).map (DerivedCategory.Plus.ι.map f) = _
+    rw [Functor.map_preimage]
+    simp only [Functor.map_comp]
+    rw [reassoc_of% (DerivedCategory.cyclesDerivedMap_homology n K)]
+  have hf : f = (DerivedCategory.Plus.singleFunctor C n).map
+      ((K.sc n).homologyπ ≫ (DerivedCategory.homologyFunctorFactors C n).inv.app K ≫
+        (DerivedCategory.homologyFunctor C n).map q) ≫
+      DerivedCategory.Plus.bottomHomologyInclusion n M := by
+    rw [DerivedCategory.Plus.single_map_bottomHomologyInclusion n M Y f, hq]
+  have hu (Z : C) (g : Y ⟶ Z) :
+      S.rightDerivedPlusSingleUnitHomologyAt n Y ≫
+        H.map (R.map ((DerivedCategory.Plus.singleFunctor C n).map g)) =
+      S.map g ≫ S.rightDerivedPlusSingleUnitHomologyAt n Z := by
+    let c := S.rightDerivedPlusSingleShiftIso n
+    apply (cancel_mono (c.hom.app Z)).mp
+    simp only [Category.assoc]
+    change S.rightDerivedPlusSingleUnitHomologyAt n Y ≫
+      (DerivedCategory.Plus.singleFunctor C n ⋙ R ⋙ H).map g ≫ c.hom.app Z = _
+    rw [c.hom.naturality]
+    erw [reassoc_of% (S.rightDerivedPlusSingleUnitHomologyAt_comp_shiftIso n Y),
+      S.rightDerivedPlusSingleUnitHomologyAt_comp_shiftIso n Z]
+    simp only [Category.comp_id]
+  simp only [rightDerivedBottomToSingleIso, Iso.trans_hom, Iso.symm_hom,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    asIso_inv, asIso_hom, NatIso.isIso_inv_app, Functor.comp_map]
+  erw [reassoc_of% (S.rightDerived_cycles_unit_naturality n K M q)]
+  change S.rightDerivedPlusSingleUnitHomologyAt n Y ≫ H.map (R.map f) ≫
+    CategoryTheory.inv (H.map (R.map a)) ≫ H.map (R.map b) ≫ H.map (R.map e.hom) = _
+  rw [hf, R.map_comp, H.map_comp]
+  simp only [Category.assoc]
+  rw [reassoc_of% (hu _ _)]
+  dsimp only [DerivedCategory.Plus.bottomHomologyInclusion]
+  change S.map _ ≫ S.rightDerivedPlusSingleUnitHomologyAt n (HC.obj M) ≫
+    H.map (R.map (e.inv ≫ CategoryTheory.inv b ≫ a)) ≫ CategoryTheory.inv (H.map (R.map a)) ≫
+      H.map (R.map b) ≫ H.map (R.map e.hom) = _
+  simp only [Functor.map_comp, Functor.map_inv, Category.assoc,
+    IsIso.hom_inv_id_assoc, IsIso.inv_hom_id_assoc]
+  simp only [← Functor.map_comp, Iso.inv_hom_id, Functor.map_id]
+  erw [H.map_id, Category.comp_id]
+  rfl
 
 end CategoryTheory.Functor
