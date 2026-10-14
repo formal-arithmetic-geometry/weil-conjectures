@@ -33,9 +33,12 @@ variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
 
-/-- Sheaves of modules over a sheaf of commutative rings are additive symmetric monoidal
-closed, with internal Hom `SheafOfModules.homObj`. The family of tensor-Hom equivalences
+/-- Compatibility abbreviation for the existing additive symmetric monoidal closed structure
+on sheaves of modules, with internal Hom `SheafOfModules.homObj`.
+The family of tensor-Hom equivalences
 commutes with precomposition in both tensor factors and postcomposition in the target.
+This packages `monoidalClosed`, `tensorHomEquiv`, their naturality lemmas and the
+additivity instances of `tensorLeft` and `tensorRight`; it adds no new tensor or Hom data.
 Source: Stacks Project, Section 03EK and Lemma 03EO
 (blueprint: lem-pc-sheaf-modules-tensor-closed).
 
@@ -58,7 +61,7 @@ with the two factors interchanged by symmetry).
 (4) For fixed `F`, this natural equivalence is the adjunction between `F ⊗ -` and
 `homObj F -` [def-pur-sheaf-tensor-product, def-pur-sheaf-hom], proving monoidal closure.
 -/
-theorem tensorClosed (R : Sheaf J CommRingCat.{u}) :
+abbrev tensorClosed (R : Sheaf J CommRingCat.{u}) :
     letI := monoidalCategory R
     letI := symmetricCategory R
     Nonempty (MonoidalPreadditive (SheafOfModules.{u} (𝓡 R))) ∧
