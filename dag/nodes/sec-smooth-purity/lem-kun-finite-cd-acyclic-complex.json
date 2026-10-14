@@ -23,9 +23,110 @@
   "def-weil-abstract-derived-category",
   "def-sp-acyclic"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-sp-grothendieck-enough-injectives], $\\mathcal A$ has enough injectives. The vanishing theorem [lem-weil-pbc-derived-functor-injective-vanishing] makes every injective object $F$-acyclic. Fix the given bound $d$: no object has positive derived cohomology in degree greater than $d$. All applications of the long exact sequence below are therefore in an abelian category with enough injectives.",
+   "uses": [
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-derived-functor-injective-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07K7, lemma-unbounded-right-derived, assumptions and initial paragraph"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-kinjective-degreewise-existence] to $\\mathcal A$. Every complex $K$ has a quasi-isomorphism $u_K:K\\to I(K)$ to a K-injective complex with injective terms. Termwise application of the additive $F$ induces a functor $F_h:K(\\mathcal A)\\to K(\\mathcal B)$: a homotopy equation $v-w=dh+hd$ remains that equation after applying $F$. This functor preserves shifts and cone triangles: for a chain map $v:X\\to Y$, the canonical biproduct isomorphisms $F(Y^r\\oplus X^{r+1})\\cong F(Y^r)\\oplus F(X^{r+1})$ send its differential to $\\begin{pmatrix}F(d_Y^r)&F(v^{r+1})\\\\0&-F(d_X^{r+1})\\end{pmatrix}$. Indeed the four entries are obtained by composing with the biproduct inclusions and projections; functoriality and additivity preserve these composites, zero and the minus sign. These isomorphisms also preserve the cone inclusion and projection, and $F(-d_X)=-F(d_X)$ identifies the shifted complexes. Thus the image of each cone triangle is its corresponding cone triangle. Thus $Q_{\\mathcal B}F_h$ is an exact functor to $D(\\mathcal B)$. Apply [lem-weil-pbc-kinjective-total-derived] to obtain $RF$ and a natural comparison $\\alpha$, invertible on every K-injective complex. Only the source category is required to be Grothendieck.",
+   "uses": [
+    "lem-pur-kinjective-degreewise-existence",
+    "def-sp-left-exact-additive",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K/070Y, lemma-enough-K-injectives-implies / lemma-K-injective-defined; alternative existence input to Tag 07K7"
+   }
+  },
+  {
+   "text": "Let $C$ be any acyclic complex all of whose terms are $F$-acyclic, and set $Z^r=\\ker(d_C^r)$. Exactness of $C$ gives short exact sequences $0\\to Z^r\\to C^r\\to Z^{r+1}\\to0$ for every integer $r$. For $q>0$ their long exact sequences [lem-weil-pbc-derived-functor-long-exact] have zero outer terms $R^qF(C^r)$ and $R^{q+1}F(C^r)$, giving $R^qF(Z^{r+1})\\cong R^{q+1}F(Z^r)$. For fixed $r,q>0$, iterating backwards $d$ times gives $R^qF(Z^r)\\cong R^{q+d}F(Z^{r-d})=0$. The iteration has base zero iterations (identity) and induction step the displayed isomorphism at index $r-j-1$ and degree $q+j$. When $d=0$ the asserted vanishing is directly the given global bound. This uses finitely many cycle sequences for each $r,q$, with no convergence claim about an infinite filtration.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07K7, lemma-unbounded-right-derived, preservation of quasi-isomorphisms; direct finite dimension-shifting argument in place of bounded truncations"
+   }
+  },
+  {
+   "text": "In degree zero, the same long exact sequence, together with $R^1F(Z^r)=0$ from Step 3, yields $0\\to F(Z^r)\\to F(C^r)\\to F(Z^{r+1})\\to0$. Here $R^0F=F$, and left exactness identifies $F(Z^r)$ with the kernel of $F(d_C^r)$. The previous differential factors as the epimorphism $F(C^{r-1})\\to F(Z^r)$ followed by the monomorphism $F(Z^r)\\to F(C^r)$. Consequently its image is this kernel and $H^r(F(C))=0$ for every $r$. Thus applying $F$ to any such exact complex produces an exact complex.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "def-sp-left-exact-additive",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07K7, lemma-unbounded-right-derived, quasi-isomorphism claim; cycle sequence calculation"
+   }
+  },
+  {
+   "text": "Now take a quasi-isomorphism $v:L\\to M$ between complexes of $F$-acyclic objects. Its cone $C(v)$ is acyclic by [lem-pur-quasi-iso-cone-acyclic]. Each cone term $M^r\\oplus L^{r+1}$ is $F$-acyclic: apply [lem-weil-pbc-derived-functor-long-exact] to the split short exact sequence $0\\to M^r\\to M^r\\oplus L^{r+1}\\to L^{r+1}\\to0$; for every $q>0$ its two outside $R^qF$ terms vanish, so the middle one vanishes. Steps 3-4 make $F(C(v))$ acyclic. The cone matrix computation in Step 2 identifies it with $C(F(v))$. The cone criterion again, now in $\\mathcal B$, proves that $F(v)$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07K7, lemma-unbounded-right-derived, quasi-isomorphism claim; finite biproduct and cone argument"
+   }
+  },
+  {
+   "text": "For the stipulated complex $L$ use $u_L:L\\to I(L)$ from Step 2. Its target has injective and hence $F$-acyclic terms by Step 1, so Step 5 makes $F(u_L)$ a quasi-isomorphism. Naturality of the comparison gives $RF(Q_{\\mathcal A}u_L)\\circ\\alpha_L=\\alpha_{I(L)}\\circ Q_{\\mathcal B}(F(u_L))$. The right-hand side is invertible: its first factor is invertible on K-injectives by [lem-weil-pbc-kinjective-total-derived] and its second factor by the localization definition. The left factor $RF(Q_{\\mathcal A}u_L)$ is also invertible because $u_L$ is a quasi-isomorphism and functors preserve inverses. Hence $\\alpha_L$ is invertible. This proves computation for every unbounded complex of $F$-acyclic objects.",
+   "uses": [
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-weil-pbc-derived-functor-injective-vanishing",
+    "lem-weil-pbc-kinjective-total-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07K7, lemma-unbounded-right-derived, assertions (1)-(2); comparison with K-injective replacement"
+   }
+  },
+  {
+   "text": "For any map $v:L\\to M$ of complexes with $F$-acyclic terms, comparison naturality reads $RF(Q_{\\mathcal A}v)\\circ\\alpha_L=\\alpha_M\\circ Q_{\\mathcal B}(F(v))$. Inverting the comparison components from Step 6 gives $RF(Q_{\\mathcal A}v)=\\alpha_M\\circ Q_{\\mathcal B}(F(v))\\circ\\alpha_L^{-1}$. This is exactly the claimed identification on maps, with no quasi-isomorphism assumption on $v$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07K7, lemma-unbounded-right-derived, assertion (2); naturality of the derived comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-left-exact-additive",
+  "def-weil-abstract-derived-category",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-kinjective-total-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 07K7, lemma-unbounded-right-derived, (1)-(2); finite dimension shift replaces the truncation spectral-sequence argument; existence uses existing Tags 070K/070Y nodes"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -96,15 +197,101 @@
    "results": "0 hits: ",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso_map_of_rightAcyclic|rightAcyclic",
+   "results": "; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: bounded-support representatives, exact-functor infrastructure or ordinary degreewise derived functors do not state finite-dimension unbounded acyclic computation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.quasiIso_map_of_rightAcyclic",
+   "results": "loogle: unknown identifier 'CategoryTheory.Functor.quasiIso_map_of_rightAcyclic'; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: bounded-support representatives, exact-functor infrastructure or ordinary degreewise derived functors do not state finite-dimension unbounded acyclic computation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Replace an unbounded complex by a quasi-isomorphic complex of acyclic objects using finite cohomological dimension",
+   "results": "; 8 hits: DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CochainComplex.IsKInjective, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CochainComplex.IsKProjective, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-14",
+   "verdict": "no match: bounded-support representatives, exact-functor infrastructure or ordinary degreewise derived functors do not state finite-dimension unbounded acyclic computation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite cohomological dimension left exact functor preserves acyclic unbounded complexes of acyclic objects",
+   "results": "; 8 hits: CategoryTheory.Functor.exact_tfae, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt, CategoryTheory.Functor.preservesHomology_of_map_exact, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.preservesHomologyOfExact, CategoryTheory.Functor.preservesFiniteLimits_tfae, CategoryTheory.Abelian.Ext.mapExactFunctor_zero",
+   "date": "2026-10-14",
+   "verdict": "no match: bounded-support representatives, exact-functor infrastructure or ordinary degreewise derived functors do not state finite-dimension unbounded acyclic computation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded right derived functor computes a complex of acyclic objects under finite cohomological dimension",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive left exact functor sends an exact cochain complex of right acyclic objects to an exact complex if its right derived functors vanish uniformly in high degrees",
+   "results": "8 hits: Ext.mapExactFunctor_hom, Functor.exact_tfae, Ext.mapExactFunctor, quotient_obj_mem_subcategoryAcyclic_iff_exactAt, preservesHomology_of_map_exact, Ext.mapExactFunctor_zero, ShortComplex.Exact.map_of_preservesRightHomologyOf, ShortComplex.RightHomologyData.exact_map_iff",
+   "date": "2026-10-14",
+   "verdict": "no match: exact functor and homology infrastructure, without finite derived dimension or restricted acyclic terms"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-kun-0f11",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-finite-cd-acyclic-complex",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused general Grothendieck K-injective existence and total-derived criterion; proved preservation of unbounded acyclic complexes by finite backwards dimension shifting on cycles, then used the cone and comparison naturality. No new nodes and no spectral-sequence convergence assumption.",
+  "blueprint": "lem-kun-0f11, Proof Step 2 (complexes): finite cohomological dimension is the missing unbounded computation justification. The split proves that input directly; no change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-kinjective-degreewise-existence",
+    "why": "General Grothendieck degreewise injective K-injective replacement supplies existence; the unit has no abstract replacement theorem."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "General K-injective total derived existence and comparison criterion; used as homological algebra infrastructure, not a replacement of the Kunneth route."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Right-derived long exact sequences supply the dimension shift and biproduct vanishing; no unit node states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-injective-vanishing",
+    "why": "Injective objects have zero positive right derived functors, needed for acyclicity of replacement terms."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Generic cone criterion translates quasi-isomorphisms to exact cone complexes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-644310263",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-644310263 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and unit/chapter route. All seven steps and edge cases check out; no new nodes or repairs. Accepted all five declared generic tool uses. review.md records an inherited pointer-only metadata cycle, which this delivery does not introduce."
+ }
 }
