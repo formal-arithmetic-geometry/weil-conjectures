@@ -10,7 +10,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import Mathlib.Algebra.Homology.Monoidal
 public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
+import Sheaf.AlgebraicGeometry.AffineSquareKFlatModelIso
+import Sheaf.AlgebraicGeometry.AffineModelComparisonOfBottomModels
+import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import Sheaf.Algebra.Homology.KFlatModuleBaseChange
 
 @[expose] public section
@@ -20,6 +22,19 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
+
+private theorem module_model_acyclic
+    (A : CommRingCat.{u}) (M : CochainComplex (ModuleCat.{u} A) ℤ)
+    (hM : (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat M)
+    (L : CochainComplex (ModuleCat.{u} A) ℤ) (hL : L.Acyclic) :
+    (CochainComplex.mapBifunctor L M
+      (MonoidalCategory.curriedTensor (ModuleCat.{u} A))).Acyclic := by
+  have h := (HomotopyCategory.kFlat_iff_preserves_acyclic
+    ((HomotopyCategory.quotient _ (.up ℤ)).obj M)).mp
+      ((HomotopyCategory.kFlat_quotient_obj_iff M).mpr hM)
+  have hL' := (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic L).mpr hL
+  exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).mp
+    (h _ hL').2
 
 /-- Core categorical construction.
 Source: Stacks Project Tags 08DW, 09RE and 0D5S.
@@ -108,7 +123,36 @@ theorem affineBaseChangeModelIsosCore
         (SheafOfModules.{u} (moduleRings (pullback s (Spec.map (c.ι.app i))).toRingedSpace)) _ _ _ _
         (SheafOfModules.pushforward τ.hom.toRingCatSheafHom)
         ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q) :
-    Nonempty (affineModelComparisonData R c i Y s P Q F C E K) := by sorry
+    Nonempty (affineModelComparisonData R c i Y s P Q F C E K) := by
+  subst E
+  subst K
+  let j₀ : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i) := ⟨⟨i, le_rfl⟩, le_rfl⟩
+  have hsquare : (σ j₀).hom ≫
+      pullback.fst s (Spec.map (R.map (homOfLE (le_refl i)))) =
+        Spec.map (CommRingCat.ofHom r) ≫ t.hom := by
+    have hb := hgeom.1 j₀
+    change (σ j₀).hom ≫ _ =
+      Spec.map (CommRingCat.ofHom r ≫ F.map (𝟙 (⟨i, le_rfl⟩ : Set.Ici i))) ≫ t.hom at hb
+    have hid : CommRingCat.ofHom r ≫ F.map (𝟙 (⟨i, le_rfl⟩ : Set.Ici i)) =
+        CommRingCat.ofHom r := by
+      rw [F.map_id]
+      exact Category.comp_id _
+    rw [hid] at hb
+    exact hb
+  obtain ⟨aE⟩ := nonempty_affineSquareKFlatModelIso
+    (Scheme.Γ.obj (.op Y)) (F.obj ⟨i, le_rfl⟩) Y _ t (σ j₀) r
+    (pullback.fst s (Spec.map (R.map (homOfLE (le_refl i)))))
+    hsquare e (d j₀) he (hd j₀) E₀ hE P hPE
+  obtain ⟨aK⟩ := nonempty_affineSquareKFlatModelIso
+    (Scheme.Γ.obj (.op Y)) (F.obj ⟨i, le_rfl⟩) Y _ t (σ j₀) r
+    (pullback.fst s (Spec.map (R.map (homOfLE (le_refl i)))))
+    hsquare e (d j₀) he (hd j₀) K₀ hK Q hQK
+  have hE' := CochainComplex.acyclic_mapBifunctor_extendScalars_of_kFlat r E₀
+    (module_model_acyclic _ E₀ hE)
+  have hK' := CochainComplex.acyclic_mapBifunctor_extendScalars_of_kFlat r K₀
+    (module_model_acyclic _ K₀ hK)
+  exact ⟨affineModelComparisonData_of_bottom_models R c i Y s P Q F C _ _
+    hE' hK' σ τ ⟨hgeom.2.2.1, hgeom.2.2.2⟩ d dlim hd hdlim aE aK⟩
 
 
 theorem exists_affineBaseChangeModelIsosOfSchemeComparisons

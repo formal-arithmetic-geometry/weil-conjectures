@@ -18,7 +18,7 @@
  ],
  "proof": [
   {
-   "text": "Use hEr,hKr to rewrite E,K to the specified scalar extensions. The native K-flat hypotheses imply the acyclic-tensor criterion by HomotopyCategory.kFlat_quotient_obj_iff and kFlat_iff_preserves_acyclic. Apply acyclic_mapBifunctor_extendScalars_of_kFlat along r and each stage/cocone map; no boundedness, finite-generation or ring-map flatness is needed for this preservation.",
+   "text": "Substitute hEr and hKr. The native K-flat predicate implies the acyclic-tensor criterion by kFlat_quotient_obj_iff and kFlat_iff_preserves_acyclic. Apply acyclic_mapBifunctor_extendScalars_of_kFlat along r to both models.",
    "uses": [
     "def-pc-module-kflat-complex",
     "lem-pc-kflat-extension-of-scalars"
@@ -26,35 +26,30 @@
    "elementary": false
   },
   {
-   "text": "Apply derivedPullback_tilde_kFlat_natIso on each structural ring map and reassociate scalar extensions with ModuleCat.extendScalarsComp. The first-projection equations identify the corresponding affine scheme morphisms with the geometric projections after σ or τ. Compose localization comparisons hd,hdlim,he with hPE,hQK and the counit of e to obtain the four model isomorphisms in the fixed target categories. Package these isomorphisms using the supplied d,dlim in the existing affineModelComparisonData proposition, rather than duplicating its expanded formula.",
+   "text": "Specialize the first stage projection equation to the bottom j₀. Normalize F.map(identity) to the identity and cancel it, giving the commuting affine square for r. Apply the single-square object comparison to E₀,P,hPE and to K₀,Q,hQK. These produce aE,aK at the bottom, with no identity scalar extension inserted.",
    "uses": [
-    "lem-pc-affine-derived-pullback-tensor-tilde"
+    "lem-pc-affine-square-kflat-model-iso"
    ],
    "elementary": false
   },
   {
-   "text": "Apply naturality at an arbitrary stage chain map f, using the affine comparison for the j→k or j→C.pt map, rather than requiring f to descend from Γ(Y). The transition equations for σ,τ identify those affine maps with geometric base-change arrows. Counit characterization identifies the composition comparisons with perfectHomComposition; scalar-extension associativity gives exactly scalarExtensionHom. Cancel comparison/inverse pairs to obtain the finite and limit identities. Zero rings and complexes and non-flat ring maps cause no exception.",
+   "text": "Apply propagation from bottom models to E,K, their proved acyclic-tensor criteria, the supplied σ,τ,d,dlim,hd,hdlim, the two transition-equation families hgeom.2.2, and aE,aK. Wrap the resulting proposition in Nonempty. The separate limit first-projection equality is unused.",
    "uses": [
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-perfect-hom-transport",
-    "def-pc-complex-scalar-extension-hom"
+    "lem-pc-affine-model-comparison-of-bottom-models"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-complex-scalar-extension-hom",
   "def-pc-module-kflat-complex",
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-pc-kflat-extension-of-scalars",
-  "lem-pc-perfect-hom-transport",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-affine-model-comparison-of-bottom-models",
+  "lem-pc-affine-square-kflat-model-iso",
+  "lem-pc-kflat-extension-of-scalars"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08DW",
-  "place": "Lemma 36.3.8(2), Tag 09RE affine calculation and Tag 0D5S for composition; expansion of lem-pc-affine-base-change-model-comparison-isos into the categorical transport and complex comparison steps"
+  "place": "Tag 08DW(2); bottom square construction followed by Tag 09RE propagation; K-flat scalar extension is Tag 06Y1"
  },
  "mathlib_searches": [
   {
@@ -138,10 +133,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G4",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261014T001719-L-2549837",
-  "kind": "proof",
+  "landing": "20261014T010854-L-3168155",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
