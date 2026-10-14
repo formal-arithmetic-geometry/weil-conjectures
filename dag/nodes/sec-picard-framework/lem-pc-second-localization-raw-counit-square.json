@@ -13,9 +13,23 @@
  },
  "proof": [
   {
-   "text": "Proof: install K.universal and apply leftDerived_fac to the lift defining\nsecondLocalizationDerivedMap. Its composite with K.counit is L.counit extended\nalong B to Bp, followed by the scalar-extension associator. Evaluate this\nidentity at the homotopy class of the restriction of Q to R and apply homology.\nNaturality of flatDerivedHomologyIso moves homology of the extended L.counit\nto extension of homology of L.counit. At an ordinary complex the defining\nlocalization factorization of that isomorphism is precisely mapHomologyIso\nfor exact scalar extension, composed with the homotopy/derived homology\nfactorization isomorphisms. Transpose along extension/restriction of scalars.\nThe unit on complexes is termwise x mapped to 1 tensor x. Naturality of exact\nrestriction homology identifies this transpose with homology of the termwise\nunit followed by the scalar-extension associator. That map sends b tensor x\nto image(b) tensor x; tensor induction and hχ identify it with χ. Cancelling\nthe exact-restriction homology isomorphism gives the displayed identity.\nThis is only the raw counit calculation: it uses neither ordinaryIso,\ncohomologyIso nor comparison of either model. Zero complexes and zero rings\nare covered by tensor induction and the same categorical identities.",
+   "text": "Install K.universal and apply Functor.leftDerived_fac_app to secondLocalizationDerivedMap. Evaluate at qR(T). The ordinary associator is the complex map epsilon induced by extendScalarsComp inverse and the scalar-tower equality. The quotient of epsilon is exactly the homotopy associator component, so the derived counit equation is obtained by the universal lift factorization.",
    "uses": [
-    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-second-localization-map",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private flat_homology_factor computes flatDerivedHomologyIso inverse at the quotient of any ordinary B-complex. Expand mapDerivedCategoryFactorsh and homologyFunctorFactorsh at quotient objects; cancel the homotopy homology factors. Naturality along quotientCompQhIso reduces to DerivedCategory.Q. Unfold the actual localization lift defining flatDerivedHomologyIso and use Localization.liftNatTrans_app. Cancel the derived extension and homology factorization isomorphisms. Apply this computation to P, naturality to L.counit, and homology factorization naturality to epsilon. This proves d followed by cp equals E.map(c) followed by inverse exact-extension homology comparison and homology(epsilon).",
+   "uses": [
+    "lem-pc-second-localization-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private adjoint_homology proves compatibility of exact homology with adjoint chain maps directly using ShortComplex.LeftHomologyMapData. Transpose the cycle and homology maps of the extended source; adjunction naturality proves the inclusion, differential and projection equations. The homology-data comparison isomorphisms identify the resulting maps with the canonical homology maps. To identify chi with the transpose of epsilon, apply ExtendScalars.hom_ext in each degree, so only 1 tensor x is needed. Use hchi at b=1, extendScalarsComp_hom_app_one_tmul, inverse cancellation, and equality transport of the algebra map. Transpose the previous equation using homEquiv_naturality_left and adjoint_homology; cancel the exact-restriction homology isomorphism. All three private helpers are completely proved, with no new holes or hypotheses. Zero complexes, zero rings and identity coefficient extensions are handled by the same identities.",
+   "uses": [
     "lem-pc-second-localization-map"
    ],
    "elementary": false
@@ -27,10 +41,10 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "E1",
+  "group": "J4",
   "date": "2026-10-14",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 06Y6: counit factorization, followed by exact flat-extension homology and adjunction"
+  "place": "Tag 06Y6: the existing counit-factorization route, realized using Mathlib localization and short-complex homology-data APIs; Tag 05G3 for scalar adjunction."
  },
  "mathlib_searches": [
   {
@@ -110,10 +124,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "J4",
   "result": "pass",
-  "landing": "20261014T001714-L-2547936",
-  "kind": "interface",
+  "landing": "20261014T004104-L-2835073",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
