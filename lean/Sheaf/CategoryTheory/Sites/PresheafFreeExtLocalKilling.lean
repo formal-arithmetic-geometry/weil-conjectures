@@ -16,6 +16,7 @@ Source: Stacks Project, Derived Categories, Tag 06XU; Cohomology on Sites, Tag 0
 (blueprint: lem-sc-presheaf-free-ext-local-killing)
 (blueprint: lem-sc-presheaf-free-ext-local-killing-witness)
 
+This implementation follows the explicit generator lifting construction.
 The witness conclusion contains the vanishing equation directly; it has no
 vacuous existential proof witness or ``True`` padding.
 -/
