@@ -137,17 +137,6 @@ theorem Scheme.GaloisCover.equivariantModulePresheaf_isSheaf
         left_inv := fun s ↦ by apply Subtype.ext; rfl
         right_inv := fun t ↦ by apply Subtype.ext; rfl }) (by
       intro W W' f
-      ext s
-      apply Subtype.ext
-      apply ContinuousMap.ext
-      intro y
-      change s.val (c.sectionRestriction f.unop y) =
-        s.val (((MorphismProperty.Over.pullback @Etale ⊤ c.π).map f.unop).left y)
-      have hmap : c.sectionRestriction f.unop =
-          ((MorphismProperty.Over.pullback @Etale ⊤ c.π).map f.unop).left := by
-        apply pullback.hom_ext <;>
-          simp [Scheme.GaloisCover.sectionRestriction, MorphismProperty.Over.pullback]
-      rw [hmap]
       rfl)
   let : PreservesLimitsOfSize.{u, u + 1}
       (CategoryTheory.forget (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) :=
