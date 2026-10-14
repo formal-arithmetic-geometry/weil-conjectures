@@ -31,9 +31,9 @@
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictedCounitCancellation` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux` | 25 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebraAffine` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativeMVCoverRows` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackCompositionCounitNormalization` | 27 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SymmetricAlgebraAffineComparisonStalks` | 27 | 1 | proof |
 | `Sheaf.Paper.ModuleCupEqualDerivedMapsClass` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverComponentIdentity` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup` | 28 | 1 | proof |
@@ -53,7 +53,7 @@
 | `Sheaf.AlgebraicGeometry.AffineModelCoherentObjectComparisons` | 41 | 1 | proof |
 | `Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization` | 41 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit` | 47 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.DerivedSelfTorAffineCoordinates` | 48 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.DerivedSelfTorChosenAffineCoordinates` | 49 | 1 | proof |
 
 Waiting, not claimable: 14 modules whose proof uses a node that has no Lean declaration yet.
 
