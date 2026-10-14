@@ -1,6 +1,6 @@
 # Work queue
 
-42 items; claim with `tools/claim.py next <group> [--stage N]`.
+41 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (42)
+## Stage 3: modules to prove (41)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -24,7 +24,6 @@
 | `Sheaf.AlgebraicGeometry.RawModuleScalarSourceClassFormula` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionsFactorization` | 23 | 1 | proof |
-| `Sheaf.Paper.CechCupPullbackCompat` | 23 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianResolutionComparisonEvaluation` | 24 | 1 | proof |
 | `Sheaf.Paper.CechCupResolutionRepresentatives` | 24 | 1 | proof |
@@ -37,6 +36,7 @@
 | `Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleUnionHomotopyChainData` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SymmetricAlgebraAffineSectionComparison` | 28 | 1 | proof |
+| `Sheaf.Paper.ModuleCupGodementFMapModels` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativeMVDirectImageRows` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SchemeCanonicalTensorUnitComponent` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate` | 30 | 1 | proof |
@@ -50,7 +50,6 @@
 | `Sheaf.AlgebraicGeometry.CompactFlatBarUnionAugmentation` | 37 | 1 | proof |
 | `Sheaf.CategoryTheory.Abelian.DerivedBottomCycleTransport` | 37 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CompactFlatFiniteSubcomplexDiagrams` | 38 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.FlatTelescopeSumModels` | 38 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineCoordinateComparisonCoherence` | 43 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit` | 48 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates` | 50 | 1 | proof |
