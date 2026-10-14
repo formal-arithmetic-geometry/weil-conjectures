@@ -14339,7 +14339,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:51 L: merged deliver/G4/Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeCompatibility (stage 3; reviewer PASS; first push; landing 20261014T025138-L-156560 (interface); batch 20261014T025133; modules 2; new nodes 0; change records: coord/changes/AffineDerivedPushforwardSheafEdgeCycleNormalization.md)
 - 02:51 L: merged deliver/H1/Sheaf.AlgebraicGeometry.Morphisms.CartierStalkPuncturedComplement (stage 3; reviewer PASS; first push; landing 20261014T025139-L-156730 (proof); batch 20261014T025133; modules 1; new nodes 0)
 - 02:51 L: merged deliver/H1/Sheaf.AlgebraicGeometry.Morphisms.NormalizationStalkFieldCoproduct (stage 3; reviewer PASS; first push; landing 20261014T025139-L-156949 (proof); batch 20261014T025133; modules 1; new nodes 0)
-- 02:51 L: merged deliver/K1/Sheaf.Paper.ModuleCupSinglePairingHomology (stage 3; reviewer PASS; after a return; landing 20261014T025139-L-157119 (interface); batch 20261014T025133; modules 3; new nodes 3; change records: coord/changes/ModuleCupSinglePairingHomology-reconstruction.md)
 - 02:51 L: merged deliver/M2/Sheaf.AlgebraicGeometry.tensorGradedAction_projection_second (stage 3; reviewer PASS; first push; landing 20261014T025140-L-157348 (interface); batch 20261014T025133; modules 3; new nodes 2)
 - 02:51 L: merged deliver/N2/Sheaf.Algebra.Homology.BalancedTensorUnitModelComparison (stage 3; reviewer PASS; first push; landing 20261014T025140-L-157541 (interface); batch 20261014T025133; modules 3; new nodes 2)
 - 02:51 L: merged deliver/N2/Sheaf.RingTheory.DvrGaloisRootFactorUniformizer (stage 3; reviewer PASS; first push; landing 20261014T025141-L-157748 (interface); batch 20261014T025133; modules 4; new nodes 3)
@@ -14353,3 +14352,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:51 L: merged deliver/V1/Sheaf.AlgebraicGeometry.PerfectHomOpenTransportSquare (stage 3; reviewer PASS; after a return; landing 20261014T025144-L-158979 (interface); batch 20261014T025133; modules 1; new nodes 0; change records: coord/changes/perfect-hom-open-transport-square-imports.md)
 - 02:51 L: merged deliver/V4/Sheaf.Paper.ModuleCupPullbackCycleStep (stage 3; reviewer PASS; after a return; landing 20261014T025145-L-159082 (proof); batch 20261014T025133; modules 1; new nodes 0; change records: coord/changes/module-cup-pullback-cycle-step.md)
 - 02:53 L: returned deliver/B2/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (reviewer RETURN: (reviewer X-37478, head 37478ffa0) H10 (compile regression; stage-3 review points 2 and 5): In lean/Sheaf/CategoryTheory)
+
+- 11:00 L: batch 20261014T025133 dependency take-out
