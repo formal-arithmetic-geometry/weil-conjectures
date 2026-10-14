@@ -25,9 +25,86 @@
   "def-weil-proetale-inverse-image",
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $S=X,Z$, let $R_S$ be restriction to $S_{\\mathrm{app}}=\\mathcal B_S$. The inclusion is fully faithful because the basis is a full subcategory [def-weil-pbc-ind-etale-basis]. Every full-site object has a basis cover, and every cover of a basis object has a basis refinement, by [lem-weil-pbc-ind-etale-basis]. Thus it is cover-dense and its topology is induced: a full-site covering sieve contains a basis covering refinement, while a basis covering is a full-site covering. In the fixed small skeletons [def-weil-pbc-proetale-site], sets have all the required structured-arrow limits (compatible tuples in products). Apply [lem-pc-fppf-dense-sheaf-equivalence] with sets to obtain restriction equivalences $R_S$; choose quasi-inverses $E_S$, with $R_SE_S\\cong\\mathrm{id}$ and $E_SR_S\\cong\\mathrm{id}$.",
+   "uses": [
+    "def-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-ind-etale-basis",
+    "def-weil-pbc-proetale-site",
+    "lem-pc-fppf-dense-sheaf-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098X, lemma-affine-alternative; dense-subsite comparison"
+   }
+  },
+  {
+   "text": "Use the canonical $u,v$ of [lem-weil-pbc-affine-closed-site-functor-properties], with $v$ defined by the universal ring lift. Throughout, $i$ means the ordinary base-change morphism [def-weil-proetale-inverse-image], not an unidentified morphism induced by $v$. Put $T=R_Z i^{-1}E_X$. The evaluation statement [lem-weil-pbc-affine-closed-inverse-image-evaluation] applies to this ordinary $i^{-1}$ and identifies $T(F)(V)$ with $E_X(F)(v(V))\\cong F(v(V))$ for every weakly contractible $V$ in $Z_{\\mathrm{app}}$; the last identification is the component of $R_XE_X\\cong\\mathrm{id}$ from step 1. All identifications are natural in $F$. The functor $T$ is an inverse image of a morphism of topoi on the basis categories: a right adjoint is $R_Xi_*E_Z$, since the Hom bijections for the two equivalences and $i^{-1}\\dashv i_*$ compose to this adjunction. Equivalences preserve limits by their universal property, and $i^{-1}$ preserves finite limits, so $T$ does also.",
+   "uses": [
+    "lem-weil-pbc-affine-closed-site-functor-properties",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-affine-closed-inverse-image-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BK and 09BL first assertion and clauses (1),(2)"
+   }
+  },
+  {
+   "text": "For a weakly contractible $V$ in $Z_{\\mathrm{app}}$, let $h_{v(V)}$ be the representable presheaf on $X_{\\mathrm{app}}$ and $G_V=h_{v(V)}^\\#$. For any sheaf $F$ on $X_{\\mathrm{app}}$, the universal property [def-weil-pbc-sheafification] gives $\\operatorname{Hom}(G_V,F)\\cong\\operatorname{Hom}(h_{v(V)},F)$. The general presheaf Yoneda bijection [lem-galois-yoneda-hom-bijection] identifies the latter with $F(v(V))$, naturally in $F$. Combining with step 2 gives $\\operatorname{Hom}(G_V,F)\\cong T(F)(V)$, with exactly the naturality required by the criterion in step 4. No subcanonicity assertion is needed.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BL proof of (3); categories.tex Tag 001P; sites.tex Tag 00WH"
+   }
+  },
+  {
+   "text": "Take $E$ to be all weakly contractible objects of the chosen small skeleton of $Z_{\\mathrm{app}}$, hence a set. By [lem-weil-pbc-ind-etale-basis-wcontractible-cover], every object of $Z_{\\mathrm{app}}$ has a covering by objects of this $E$, weakly contractible in this very basis site. Apply [lem-weil-pbc-topos-lower-shriek-existence-on-covering-generators] with $\\mathcal C=X_{\\mathrm{app}}$, $\\mathcal D=Z_{\\mathrm{app}}$ and inverse image $T$. Step 2 gives the topos morphism, step 3 gives the representing $G_V$, and the cited cover theorem gives its covering hypothesis. Obtain $L:\\operatorname{Sh}(Z_{\\mathrm{app}})\\to\\operatorname{Sh}(X_{\\mathrm{app}})$ and $L\\dashv T$.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis-wcontractible-cover",
+    "lem-weil-pbc-topos-lower-shriek-existence-on-covering-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BL proof of (3); Tag 0990 affine S_app clause; sites.tex Tag 09YX"
+   }
+  },
+  {
+   "text": "Define $i^{\\mathrm{Sh}}_!=E_XLR_Z$. For $G$ on $Z_{\\mathrm{proet}}$ and $F$ on $X_{\\mathrm{proet}}$, full faithfulness of $R_X$, then $L\\dashv T$, then $E_XR_XF\\cong F$ and full faithfulness of $R_Z$, give $\\operatorname{Hom}(E_XLR_ZG,F)\\cong\\operatorname{Hom}(LR_ZG,R_XF)\\cong\\operatorname{Hom}(R_ZG,TR_XF)\\cong\\operatorname{Hom}(R_ZG,R_Zi^{-1}F)\\cong\\operatorname{Hom}(G,i^{-1}F)$. Each bijection is natural in $G,F$ by the equivalence and adjunction identities. This proves the required adjunction, with domain the Z-sheaves and codomain the X-sheaves.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BL clause (3), transport of the constructed adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ind-etale-basis",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-proetale-inverse-image",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-pc-fppf-dense-sheaf-equivalence",
+  "lem-weil-pbc-affine-closed-inverse-image-evaluation",
+  "lem-weil-pbc-affine-closed-site-functor-properties",
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-ind-etale-basis-wcontractible-cover",
+  "lem-weil-pbc-topos-lower-shriek-existence-on-covering-generators"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09BK and 09BL, with the lower-shriek criterion of sites.tex Tag 09YX"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,12 +143,41 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proetale-immersion-limit-preservation",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-affine-closed-inverse-image-left-adjoint",
+  "worker": "stage1",
+  "summary": "Repair the returned split: correct 09YX direction and bind both Hom variables; define the canonical lift and its geometric map correctly; cite Yoneda; use the precise 0990 S_app covering clause and the dense-subsite equivalence statement, then display the transport Hom bijections. Item statement and all targets unchanged.",
+  "blueprint": "Ancestor reconstruction proof first sentence: restriction to affine local models. Steps 1-2 establish basis transport and the ordinary closed inverse image formula; steps 3-4 produce its extra left adjoint on the basis; step 5 transports it back to the full sites. Four smaller statement-only inputs expose 09BK, 09BL(1),(2), 0990 S_app, and 09YX.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fppf-dense-sheaf-equivalence",
+    "why": "Generic Mathlib dense-subsite comparison; supplies the essential surjectivity not asserted by the existing basis statement."
+   },
+   {
+    "node": "lem-galois-yoneda-hom-bijection",
+    "why": "General Mathlib presheaf Yoneda evaluation; the unit has no separate general representable Hom bijection."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fppf-dense-sheaf-equivalence",
+  "lem-galois-yoneda-hom-bijection"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-5b0fb4ed5",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-5b0fb4ed5 (reviewer sub-agent of L); spot-checked: Read the full mathematics and checked Stacks 09BK, 09BL, 098X, 0990, 09YX and cited interfaces. All five proof steps and four new statements are sound. Corrected repeated new-node metadata omissions and missing continuity/cocontinuity definition citations. Whole corrected JSON files are under fixes/dag/nodes/; concrete source checks, edge cases, duplicate searches and accepted tool uses are recorded in review.md. No target changed.; 4 file(s) fixed by the reviewer"
+ }
 }
