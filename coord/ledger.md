@@ -14039,3 +14039,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:40 L: merged deliver/C4/Sheaf.Algebra.Homology.TensorBicomplex (stage 3; reviewer PASS; first push; landing 20261014T004058-L-2832675 (proof); batch 20261014T004054; modules 1; new nodes 0)
 - 00:40 L: merged deliver/C4/Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal (stage 3; reviewer PASS; first push; landing 20261014T004059-L-2832804 (proof); batch 20261014T004054; modules 1; new nodes 0)
 - 00:40 L: merged deliver/C4/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone (stage 3; reviewer PASS; first push; landing 20261014T004059-L-2832989 (proof); batch 20261014T004054; modules 1; new nodes 0)
+- 00:40 L: merged deliver/D2/Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNormalization (stage 3; reviewer PASS; first push; landing 20261014T004059-L-2833121 (interface); batch 20261014T004054; modules 2; new nodes 1)

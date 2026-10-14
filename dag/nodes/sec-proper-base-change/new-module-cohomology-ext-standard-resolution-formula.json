@@ -1,0 +1,112 @@
+{
+ "id": "new-module-cohomology-ext-standard-resolution-formula",
+ "kind": "statement",
+ "title": "Evaluation of the fixed module/Ext comparison on its standard resolution",
+ "statement": "For a scheme X [def-pc-scheme], an O_X-module F [def-weil-sheaf-of-modules-category], an injective resolution I [def-sp-injective-resolutions] with I = injectiveResolution F, degree p and a module cohomology class x [def-sc-ringed-space-module-cohomology], the constructed comparison [new-module-cohomology-ext-resolution-naturality] equals b.inv(a.hom(x)). Here a and b are supplied isomorphisms with their defining equations: a is the module right-derived resolution isomorphism followed by exact forgetting of homology, and b is Ext precomposition by terminalSourceIso, then siteSectionsObjIso, then the canonical acyclic-resolution comparison of the forgotten augmentation. The augmentation is assumed quasi-isomorphic, as follows from exact forgetting. This assertion concerns only the selected standard resolution, and asserts no compatibility between different resolutions.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/015E",
+  "place": "Tag 015E, canonical acyclic-resolution computation; Tag 03FD; evaluation of the explicit construction in ModuleCohomologyExtResolutionNaturality."
+ },
+ "stmt_deps": [
+  "new-module-cohomology-ext-resolution-naturality",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sp-injective-resolutions",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Substitute the standard-resolution equality hI and the two defining isomorphism equations ha and hb. Unfold moduleCohomologyExtResolutionEquiv, whose explicit ingredients are a, the acyclic-resolution comparison c, the site-sections comparison d and Ext precomposition t.symm. Evaluate AddEquiv.trans and addCommGroupIsoToAddEquiv, and evaluate composite homomorphisms, obtaining t.symm(d.inv(c.inv(a.hom x))). Iso.trans_inv gives the same evaluation of b.inv(a.hom x). The supplied forgotten augmentation is the same as the one in the construction, and proof irrelevance identifies its quasi-isomorphism proof with the supplied proof. No comparison between different resolutions is used, and zero degree, empty schemes and zero coefficients need no separate case.",
+   "uses": [
+    "new-module-cohomology-ext-resolution-naturality"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-module-cohomology-ext-resolution-naturality"
+ ],
+ "proof_origin": {
+  "by": "D2 worker",
+  "document": "https://stacks.math.columbia.edu/tag/015E",
+  "place": "Standard-resolution computation in the explicit comparison, Tags 015E and 03FD."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "evaluation of an additive equivalence obtained from a composite of isomorphisms",
+   "results": "Eight hits, including AddEquiv.trans_apply and coe_trans. No theorem for the project-specific fixed comparison.",
+   "date": "2026-10-14",
+   "verdict": "Generic evaluation lemmas exist; no exact project formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"addCommGroupIsoToAddEquiv\"",
+   "results": "Three hits: addCommGroupIsoToAddEquiv, addCommGroupIsoToAddEquiv_apply and symm_apply.",
+   "date": "2026-10-14",
+   "verdict": "Generic evaluation API only."
+  },
+  {
+   "tool": "grep",
+   "query": "addCommGroupIsoToAddEquiv|mapHomologyIso_inv_naturality",
+   "results": "Fifteen hits, including Grp.Basic and ShortComplex.PreservesHomology.",
+   "date": "2026-10-14",
+   "verdict": "No project-specific standard-resolution formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "evaluation of an additive equivalence obtained from a composite of isomorphisms",
+   "results": "Service unavailable: Internal Server Error. The other search kinds and Mathlib source grep were used.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNormalization",
+  "date": "2026-10-14",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-module-cohomology-ext-resolution-normalization",
+   "place": "Step 3: evaluation on the standard resolution",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFormula",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyExtStandardResolutionFormula.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.standard_resolution_formula",
+  "statement": "theorem standard_resolution_formula\n    (X : Scheme.{u}) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    [EnoughInjectives (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (I : InjectiveResolution F) (hI : I = injectiveResolution F)\n    (hι : QuasiIso\n      ((HomologicalComplex.singleMapHomologicalComplex\n        (SheafOfModules.toSheaf (moduleRings X.toRingedSpace)) (.up ℕ) 0).inv.app F ≫\n        ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).mapHomologicalComplex\n          (.up ℕ)).map I.ι)) (p : ℕ)\n    (a : (forget₂ _ AddCommGrpCat.{u}).obj\n      ((RingedSpace.moduleCohomology X.toRingedSpace p).obj F) ≅\n      (((RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙\n        forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (.up ℕ)).obj I.cocomplex).homology p)\n    (b : AddCommGrpCat.of (H F p) ≅\n      (((RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙\n        forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (.up ℕ)).obj I.cocomplex).homology p)\n    (ha : a = (forget₂ _ AddCommGrpCat.{u}).mapIso\n      (I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) p) ≪≫\n        (((RingedSpace.globalSectionsComplex I).sc p).mapHomologyIso\n          (forget₂ _ AddCommGrpCat.{u})).symm)\n    (hb : b = (by\n      let T := SheafOfModules.toSheaf (moduleRings X.toRingedSpace)\n      let ι := (HomologicalComplex.singleMapHomologicalComplex T (.up ℕ) 0).inv.app F ≫\n        (T.mapHomologicalComplex (.up ℕ)).map I.ι\n      haveI : QuasiIso ι := hι\n      exact (Abelian.Ext.precompAddEquiv (terminalSourceIso X) (T.obj F) p).toAddCommGrpIso ≪≫\n        siteSectionsObjIso (Opens.grothendieckTopology X) ⊤ (T.obj F) p ≪≫\n        (sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⋙\n          (evaluation X.Opensᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)).rightDerivedObjIsoOfResolution ι\n            (fun n ↦ forgottenInjectiveAcyclic X (I.cocomplex.X n)) p))\n    (x : (RingedSpace.moduleCohomology X.toRingedSpace p).obj F) :\n    moduleCohomologyExtResolutionEquiv X F p x = b.inv (a.hom x)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261014T004059-L-2833121",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261014T004059-L-2833121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
