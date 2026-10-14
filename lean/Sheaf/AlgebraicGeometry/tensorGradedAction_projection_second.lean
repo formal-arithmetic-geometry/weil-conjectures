@@ -6,6 +6,7 @@ Authors: SHEAF group N4
 module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedProductProjection
+import Sheaf.AlgebraicGeometry.TensorGradedActionKernelSecond
 
 /-! # Projection of homogeneous quotient actions
 
@@ -26,6 +27,7 @@ attribute [local irreducible] RingedSpace.moduleCohomology
   boundaryCoefficientCohomologyIso canonicalTensorBoundaryComparisons
 noncomputable section
 
+set_option linter.unusedVariables false in
 /-- Compatibility of the degree-n(e+1) section x on the degree-n coefficient.
 
 Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence;
@@ -77,7 +79,84 @@ theorem tensorGradedAction_projection_second {X Z : Scheme.{u}} (j : Z ⟶ X)
     (∀ z : (RingedSpace.moduleCohomology X.toRingedSpace 1).obj T.I,
       tensorGradedCoefficientProjection T D (e + 1) (ρ (tensorGradedSection T D e x) z) =
       H.map ((ρ_ F).inv ≫ F ◁ x)
-        (H.map (ρ_ F).hom (tensorGradedCoefficientProjection T D 0 z))) := by sorry
+        (H.map (ρ_ F).hom (tensorGradedCoefficientProjection T D 0 z))) := by
+  set_option backward.isDefEq.respectTransparency false in
+    set_option backward.isDefEq.respectTransparency.types false in
+      subst D
+      dsimp only
+      intro z
+      let F : Z.Modules := (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n)
+      let HX := RingedSpace.moduleCohomology X.toRingedSpace 1
+      let HZ := RingedSpace.moduleCohomology Z.toRingedSpace 1
+      have hk := tensorGradedAction_kernel_second j L hI n T
+        (canonicalTensorBoundaryComparisons j L hI n) rfl e x σ μ hlocal hglobal
+      let w := (HX.map (T.degree (n * (0 + 1))).τ₁).hom z
+      let v := F ◁ x
+      let m := tensorBoundaryKernelMap j L hI n 0 (e + 1) v
+      let D0 := canonicalTensorBoundaryComparisons j L hI n
+      have hp (r : ℕ) (y : HX.obj T.I) :
+          tensorGradedCoefficientProjection T D0 r y =
+            (boundaryCoefficientCohomologyIso j L hI n r).inv
+              ((HX.map (T.degree (n * (r + 1))).τ₁).hom y) := by
+        have h := tensorGradedCoefficientProjection_apply T D0 r y
+        have hk : D0.k r = boundaryCoefficientCohomologyIso j L hI n r := by
+          unfold D0 canonicalTensorBoundaryComparisons
+          rfl
+        calc
+          _ = (D0.k r).addCommGroupIsoToAddEquiv.symm
+              ((HX.map (T.degree (n * (r + 1))).τ₁).hom y) := h
+          _ = _ := congrArg (fun t ↦ t.addCommGroupIsoToAddEquiv.symm
+              ((HX.map (T.degree (n * (r + 1))).τ₁).hom y)) hk
+      have hh : (HX.map (T.degree (n * ((e + 1) + 1))).τ₁).hom
+          ((HX.map (μ (tensorGradedSection T D0 e x))).hom z) =
+          (HX.map m).hom w := by
+        let t := tensorGradedSection T D0 e x
+        let p0 := (T.degree (n * (0 + 1))).τ₁
+        let p1 := (T.degree (n * ((e + 1) + 1))).τ₁
+        have hk' : μ t ≫ p1 = p0 ≫ m := hk
+        calc
+          (HX.map p1).hom ((HX.map (μ t)).hom z) =
+              (HX.map (μ t ≫ p1)).hom z :=
+            congrArg (fun g ↦ g.hom z) (HX.map_comp (μ t) p1).symm
+          _ = (HX.map (p0 ≫ m)).hom z :=
+            congrArg (fun g ↦ (HX.map g).hom z) hk'
+          _ = (HX.map m).hom ((HX.map p0).hom z) :=
+            congrArg (fun g ↦ g.hom z) (HX.map_comp p0 m)
+      have hn : (boundaryCoefficientCohomologyIso j L hI n (e + 1)).inv
+          ((HX.map m).hom w) =
+          HZ.map v ((boundaryCoefficientCohomologyIso j L hI n 0).inv w) := by
+        have h := tensorBoundaryKernelMap_naturality j L hI n 0 (e + 1) v
+        exact congrArg (fun g ↦ g w) h
+      have hr (y : HZ.obj (show Z.Modules from F ⊗ 𝟙_ Z.Modules)) :
+          HZ.map v y = HZ.map ((ρ_ F).inv ≫ v) (HZ.map (ρ_ F).hom y) := by
+        have h : (ρ_ F).hom ≫ ((ρ_ F).inv ≫ v) = v :=
+          Iso.hom_inv_id_assoc (ρ_ F) v
+        have hc := congrArg (fun g ↦ HZ.map g) h
+        have he := congrArg (fun g ↦ g y) hc
+        exact (show HZ.map ((ρ_ F).inv ≫ v) (HZ.map (ρ_ F).hom y) =
+          HZ.map v y by
+            simpa only [Functor.map_comp, ModuleCat.comp_apply] using he).symm
+      calc
+        tensorGradedCoefficientProjection T D0 (e + 1)
+            (ρ (tensorGradedSection T D0 e x) z) =
+            tensorGradedCoefficientProjection T D0 (e + 1)
+              ((HX.map (μ (tensorGradedSection T D0 e x))).hom z) :=
+          congrArg (fun g ↦ tensorGradedCoefficientProjection T D0 (e + 1) (g z))
+            (haction (tensorGradedSection T D0 e x))
+        _ = (boundaryCoefficientCohomologyIso j L hI n (e + 1)).inv
+              ((HX.map (T.degree (n * ((e + 1) + 1))).τ₁).hom
+                ((HX.map (μ (tensorGradedSection T D0 e x))).hom z)) := hp _ _
+        _ = (boundaryCoefficientCohomologyIso j L hI n (e + 1)).inv
+              ((HX.map m).hom w) :=
+          congrArg (fun y ↦ (boundaryCoefficientCohomologyIso j L hI n (e + 1)).inv y) hh
+        _ = HZ.map v ((boundaryCoefficientCohomologyIso j L hI n 0).inv w) := hn
+        _ = HZ.map ((ρ_ F).inv ≫ v)
+              (HZ.map (ρ_ F).hom ((boundaryCoefficientCohomologyIso j L hI n 0).inv w)) :=
+          hr _
+        _ = HZ.map ((ρ_ F).inv ≫ v)
+              (HZ.map (ρ_ F).hom (tensorGradedCoefficientProjection T D0 0 z)) :=
+          congrArg (fun y ↦ HZ.map ((ρ_ F).inv ≫ v) (HZ.map (ρ_ F).hom y))
+            (hp 0 z).symm
 
 end
 end AlgebraicGeometry.Scheme.Modules

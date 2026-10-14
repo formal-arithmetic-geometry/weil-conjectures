@@ -30,36 +30,30 @@
  ],
  "proof": [
   {
-   "text": "For the second equation only: The local lift formula determines the action uniquely since i is mono. Locally lift s and t through the degreewise units. The colimit cofan k expresses every kernel section locally as a finite sum of homogeneous sections. Use k_inclusion and b_multiply to compute the action; k_projection and k_orthogonal select only input degree n(e+1) for s and degree n for t. For n=0 use the diagonal relation. Restriction compatibility glues the resulting sheaf morphism identities.",
+   "text": "Obtain the sheaf morphism identity for the second homogeneous action using tensorGradedAction_kernel_second. Apply H^1(X,-) and evaluate on z, using functoriality of the cohomology functor. Replace rho by H^1(mu) using haction.",
    "uses": [
-    "lem-sc-square-zero-tensor-graded-presentation",
-    "lem-weil-pbc-closed-immersion-unit-quotient"
+    "lem-sc-tensor-graded-action-kernel-second"
    ],
    "elementary": false
   },
   {
-   "text": "For the second equation only: Apply H¹ and use ρ=H¹(μ). Each component of the canonical coefficient comparison is natural: ideal-kernel comparison, inverse annihilated-module unit, inverse affine edge, and tensor-degree comparison. Transport the action squares through these maps to obtain mulTensorPowSection f F e 1 and the right-unitor/tensor-by-x map. Evaluate on every z. No boundary product rule is used.",
+   "text": "Evaluate coefficient projections by tensorGradedCoefficientProjection_apply. Apply the general transported-kernel naturality square to v=id_F tensor x from exponent 0 to e+1. Cancel the right unitor followed by its inverse under H^1(Z,-); this proves the exact requested formula.",
    "uses": [
-    "lem-sc-square-zero-ideal-tensor-unit",
-    "lem-weil-pbc-affine-morphism-cohomology-edge",
-    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "lem-sc-tensor-boundary-kernel-map-naturality",
     "lem-sc-square-zero-tensor-graded-product-projection"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-square-zero-ideal-tensor-unit",
-  "lem-sc-square-zero-tensor-graded-presentation",
   "lem-sc-square-zero-tensor-graded-product-projection",
-  "lem-weil-pbc-affine-morphism-cohomology-edge",
-  "lem-weil-pbc-closed-immersion-unit-quotient",
-  "lem-weil-pbc-module-cohomology-fmap-functorial"
+  "lem-sc-tensor-boundary-kernel-map-naturality",
+  "lem-sc-tensor-graded-action-kernel-second"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 09MS, coherent-equation-ses and the direct-sum exact sequence following it; Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, the quotient action in the first paragraph of its proof."
+  "place": "Tag 09MS graded ideal sequence and Tag 0B8S quotient action; sheaf action split from the fully proved comparison transport and cohomology/unitor calculation."
  },
  "mathlib_searches": [
   {
@@ -156,9 +150,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261014T020517-L-3813727",
+  "landing": "20261014T025140-L-157348",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

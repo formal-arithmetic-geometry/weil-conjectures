@@ -1,0 +1,204 @@
+{
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "id": "lem-sc-tensor-boundary-kernel-map-naturality",
+ "kind": "statement",
+ "title": "Canonical coefficient comparison is natural for transported kernel maps",
+ "statement": "Let $j:Z\\to X$ be a closed immersion, $L$ invertible, and $J=j.\\ker$ satisfy $J^2=0$ [def-pc-scheme, def-weil-closed-immersion, def-sc-invertible-module, def-sbc-closed-immersion-ideal-sheaf, def-sbc-ideal-sheaf-powers]. For $n,a,b\\geq0$ put $F=j^*(J\\otimes L^n)$, $N=(j^*L)^n$, $K_r=\\ker(\\eta_{L^{n(r+1)}})$ [def-pc-module-pullback, lem-sc-square-zero-tensor-graded-presentation]. Form $t_r:K_r\\simeq j_*(F\\otimes N^r)$ by the inverse ideal-kernel comparison, the annihilated-module unit, and the coefficient-degree comparison [lem-sc-square-zero-ideal-tensor-unit]. For any module morphism $v:F\\otimes N^a\\to F\\otimes N^b$, define $m=t_a;j_*v;t_b^{-1}$. The canonical coefficient cohomology comparisons $k_r$ [lem-sc-square-zero-ideal-tensor-unit] satisfy $H^1(X,m);k_b^{-1}=k_a^{-1};H^1(Z,v)$ as additive-group morphisms [def-sc-ringed-space-module-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, coherent-equation-ses and its coefficient identifications; Tag 01XC, affine comparison; Tag 01F8, functoriality of cohomology."
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-pc-quasi-coherent-sheaf",
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-invertible-module",
+  "def-sc-module-cohomology-boundary",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-weil-pbc-ringed-space-algebra-module",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-module-section-boundary-exact",
+  "lem-sc-square-zero-ideal-tensor-unit",
+  "lem-sc-square-zero-tensor-graded-presentation",
+  "lem-sc-square-zero-tensor-graded-product-projection",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Construct t_r as the inverse canonical ideal-kernel comparison, the invertible square-zero ideal tensor unit, and pushforward of the coefficient-degree isomorphism. Define m by conjugation. All data are actual composites.",
+   "uses": [
+    "lem-sc-square-zero-ideal-tensor-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use source and target naturality of moduleCohomologyFMap to obtain edge naturality for every module map. Expand the inverse canonical comparison into H(t_r) followed by the edge map. Apply edge naturality to the tensor-degree comparison; functoriality identifies the two composites.",
+   "uses": [
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "lem-sc-square-zero-ideal-tensor-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equation m;t_b=t_a;j_*v follows by inverse cancellation. Apply H, compose with the edge map, use edge naturality for v, and substitute the two inverse-comparison formulas. This gives the asserted commuting square.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-square-zero-ideal-tensor-unit",
+  "lem-weil-pbc-module-cohomology-fmap-functorial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Expanded naturality of the canonical coefficient comparison from Tag 09MS, using the affine edge comparison of Tag 01XC and functoriality of Tag 01F8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "homogeneous action on square zero ideal commutes with graded projection cohomology",
+   "results": "Hits: Algebra.Extension.H1Cotangent.val_smul, LieAlgebra.of_smul, LieAlgebra.of_nsmul, LieAlgebra.of_symm_nsmul, LieAlgebra.of_symm_smul, Algebra.Extension.instModuleH1CotangentOfIsScalarTowerCotangent, LieAlgebra.Extension.ofTwoCocycle_incl_apply, LieAlgebra.of_add",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "Hits: CategoryTheory.Functor.map_comp, PresheafOfModules.map_comp, PresheafOfModules.map_comp_assoc, PresheafOfModules.mk, PresheafOfModulesOfCommRing.mk, AlgebraicGeometry.PresheafedSpace.map_comp_c_app",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorGradedAction|CoefficientProjection",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of canonical cohomology comparisons for a square zero ideal tensor kernel along a closed immersion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homogeneous quotient multiplication followed by a degree projection factors through the input degree of a square zero ideal sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison of cohomology along a closed immersion is natural for morphisms of ideal tensor powers",
+   "results": "Hits: AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_ι, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_ι_assoc, AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.Scheme.IdealSheafData.subSchemeCover_map_inclusion, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap_glueDataObjι, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp_assoc, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι_ι",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*[Nn]aturality|[Nn]aturality.*kernel",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso",
+   "results": "mapIso_hom, mapIso_inv and mapIso_trans support the formal transport; none states this specific coefficient comparison square.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundaryCoefficient.*natur|CohomologyFMap_(source|target)_naturality",
+   "results": "ModuleCohomologyFMapFunctorial supplies the two naturality equations used by the proof. ModuleCohomologyCoefficientFactor proves only source factorization on elements and does not replace the transported-kernel square. No duplicate.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.tensorGradedAction_projection_second",
+  "date": "2026-10-14",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS graded direct-sum sequence: quotient multiplication on the ideal, before applying the derivation rule",
+   "via": [
+    "lem-sc-square-zero-tensor-graded-action-projection-second",
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorBoundaryKernelMapNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorBoundaryKernelMapNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorBoundaryKernelMap_naturality",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.tensorBoundaryKernelPushforwardIso",
+   "AlgebraicGeometry.Scheme.Modules.tensorBoundaryKernelMap",
+   "AlgebraicGeometry.Scheme.Modules.tensorBoundaryKernelMap_naturality"
+  ],
+  "statement": "theorem tensorBoundaryKernelMap_naturality {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥) (n a b : ℕ) (v : (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n) ⊗ (((tensorPullback j).obj L).tensorPow n).tensorPow a ⟶ (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n) ⊗ (((tensorPullback j).obj L).tensorPow n).tensorPow b) : ((RingedSpace.moduleCohomology X.toRingedSpace 1 ⋙ forget₂ _ AddCommGrpCat.{u}).map (tensorBoundaryKernelMap j L hI n a b v)) ≫ (boundaryCoefficientCohomologyIso j L hI n b).inv = (boundaryCoefficientCohomologyIso j L hI n a).inv ≫ (RingedSpace.moduleCohomology Z.toRingedSpace 1 ⋙ forget₂ _ AddCommGrpCat.{u}).map v",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261014T025140-L-157348",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261014T025140-L-157348",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
