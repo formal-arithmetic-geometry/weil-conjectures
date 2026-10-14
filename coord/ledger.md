@@ -14635,3 +14635,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:32 L: merged deliver/N3/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (stage 3; reviewer PASS; first push; landing 20261014T053240-L-2010645 (proof); batch 20261014T053238; modules 1; new nodes 0)
 - 05:32 L: merged deliver/N3/Sheaf.RingTheory.DvrUniformizerRootCompositumMaximalIdeal (stage 3; reviewer PASS; first push; landing 20261014T053241-L-2010847 (proof); batch 20261014T053238; modules 1; new nodes 0)
 - 05:32 L: merged deliver/U1/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore (stage 3; reviewer PASS; first push; landing 20261014T053241-L-2010952 (proof); batch 20261014T053238; modules 1; new nodes 0)
+- 05:32 L: merged deliver/U2/Sheaf.AlgebraicGeometry.AffineModelComparisonDataFromHomEquations (stage 3; reviewer PASS; first push; landing 20261014T053242-L-2011157 (proof); batch 20261014T053238; modules 1; new nodes 0)

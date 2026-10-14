@@ -76,6 +76,12 @@ theorem affineModelComparisonData_of_hom_equations
           (congrArg CommRingCat.Hom.hom (C.w (homOfLE j.property)).symm) E K a) ≫ βK.hom =
       perfectLimitMap R c s j.val.property
         ((αE j).inv ≫ (affineModelLocalizedTilde (F.obj j.val) _ (d j)).map a ≫ (αK j).hom)) :
-    affineModelComparisonData R c i Y s P Q F C E K := by sorry
+    affineModelComparisonData R c i Y s P Q F C E K := by
+  delta affineModelComparisonData
+  refine ⟨d, dlim, αE, αK, βE, βK, ?_, ?_⟩
+  · intro j k hjk a
+    exact hstage j k hjk a
+  · intro j a
+    exact hlim j a
 
 end AlgebraicGeometry
