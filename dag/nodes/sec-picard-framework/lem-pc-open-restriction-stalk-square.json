@@ -1,0 +1,141 @@
+{
+ "id": "lem-pc-open-restriction-stalk-square",
+ "kind": "statement",
+ "title": "Open stalk coordinates preserve a commuting square of module morphisms",
+ "statement": "Let $k:X'\\to X$ be a scheme morphism, $U\\subset X$ an open subscheme with inclusion $j$, and $T=X'\\times_X U$ with projections $p:T\\to X'$, $q:T\\to U$. Let $M$, $N$, $Z$ be sheaves of modules on $X$, $X'$, $T$, respectively. Let $a:M\\to k_*N$, $b:M|_U\\to q_*Z$, and $c:N|_T\\to Z$ be module morphisms. Write $\\eta_j$ and $\\eta_p$ for the ordinary restriction-adjunction units, and $c_P:p_*;k_*\\simeq(pk)_*$, $c_Q:q_*;j_*\\simeq(pk)_*$ for the pushforward composition comparisons, with $c_Q$ using the equality $qj=pk$. Suppose $a;k_*(\\eta_p(N));(p_*;k_*)(c)=\\eta_j(M);j_*(b);c_Q(Z);c_P(Z)^{-1}$. For $z_0\\in T$, put $z=p(z_0)$. Let $a_z:M_{kz}\\to N_z$ and $b_{z_0}:(M|_U)_{qz_0}\\to Z_{z_0}$ be the additive stalk maps of $a$ and $b$, followed by stalkPushforward. Let $r_o:N_z\\to(N|_T)_{z_0}$ and $r_i:M_{j(qz_0)}\\to(M|_U)_{qz_0}$ be the inverses of Mathlib restrictStalkNatIso. Let $t:M_{kz}\\to M_{j(qz_0)}$ be stalkCongr for pullback.condition and $c_{z_0}:(N|_T)_{z_0}\\to Z_{z_0}$ the additive image of the module stalk functor [def-pc-module-stalk-functor]. Then $a_z;r_o;c_{z_0}=t;r_i;b_{z_0}$ as additive maps.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-stalk-functor"
+ ],
+ "source": {
+  "document": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; https://stacks.math.columbia.edu/tag/0098",
+  "place": "restrictAdjunction_unit_app_app, germ_restrictStalkNatIso_inv_app, pushforwardComp_hom_app_app, pushforwardCongr_hom_app_app; Mathlib/Topology/Sheaves/Stalks.lean stalkFunctor_map_germ, stalkPushforward_germ, germ_res, and stalk_hom_ext. Generic germ-functoriality portion of the parent Tag 0098 calculation."
+ },
+ "proof": [
+  {
+   "text": "Define stalkOfHom(f,x,a) as the additive stalk map of a:M→f_*N followed by stalkPushforward. On a section over W containing f(x), stalkFunctor_map_germ and stalkPushforward_germ identify its composite with the input germ as a.app(W) followed by the germ of N over f⁻¹W. This is stalkOfHom_germ.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Using equality on germs, prove stalkOfHom_postcomp for postcomposition by a module morphism; pushforward_map_app and stalkFunctor_map_germ give its equality. Prove stalkOfHom_comp for two successive scheme morphisms: pushforwardComp_hom_app_app is the identity on sections, so the two germ formulas coincide. Prove stalkOfHom_congr for equal scheme morphisms by equality induction: pushforwardCongr_hom_app_app becomes the presheaf identity, and stalkCongr becomes the identity. Also prove pushforwardCongr_refl by extensionality on module sections.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For an open immersion j, apply the germ formula to the restriction adjunction unit. restrictAdjunction_unit_app_app is section restriction from W to j(j⁻¹W). germ_restrictStalkNatIso_inv_app identifies the resulting germ with the inverse restriction-stalk coordinate; germ_res cancels that section restriction. stalk_hom_ext proves restriction_unit_stalk.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose the assumed sheaf square on the right with cP.hom; pushforwardCongr_refl and the inverse-hom identity cancel cP.inv. Combine the two pushforward maps on the left by map_comp. Apply stalkOfHom(pk,z0) to this equality. On the left, stalkOfHom_comp and stalkOfHom_postcomp express it as a_z followed by the stalk restriction unit and c_z0. On the right, stalkOfHom_congr for qj=pk inserts precisely the input stalkCongr; stalkOfHom_comp expresses the remaining map as the input restriction stalk unit followed by b_z0. Replace both restriction units by their inverse restrictStalkNatIso coordinates using restriction_unit_stalk. This is the claimed equality.",
+   "uses": [
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-stalk-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P1",
+  "date": "2026-10-14",
+  "document": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/Topology/Sheaves/Stalks.lean",
+  "place": "Fully formalized germ identities and functoriality for the open-local stalk compatibility step of the parent proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Taking stalks preserves a commuting square of module morphisms after restriction to an open subscheme",
+   "date": "2026-10-14",
+   "available": false,
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taking stalks preserves a commuting square of module morphisms after restriction to an open subscheme",
+   "date": "2026-10-14",
+   "available": true,
+   "results": "8 hits: scheme resLEStalkMap and morphismRestrictStalkMap, ring stalk/germ maps, and Tilde section/germ comparisons. No generic square for module morphisms in these coordinates.",
+   "verdict": "Prove from the germ and pushforward component formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "stalkPushforward.*comp|germ_restrictStalkNatIso|stalk_hom_ext",
+   "date": "2026-10-14",
+   "available": true,
+   "results": "14 hits: stalk_hom_ext and open restriction germ formulas, used as components of the proof.",
+   "verdict": "No direct square theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenRestrictedTensorChainTransportPureOne",
+  "date": "2026-10-14",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Open-locality of the single-complex stalk comparison: generic stalk functoriality for the commuting square of restricted module morphisms.",
+   "via": [
+    "lem-pc-open-tensor-restriction-square-stalk-unit",
+    "lem-pc-open-restricted-tensor-chain-transport-pure-one",
+    "lem-pc-open-restricted-tensor-chain-transport-pure",
+    "lem-pc-open-restricted-tensor-chain-transport",
+    "lem-pc-open-restricted-tensor-homology-transport",
+    "lem-pc-open-restricted-tensor-coordinate-data",
+    "lem-pc-open-restricted-ordinary-comparison-square",
+    "lem-pc-open-restricted-canonical-square",
+    "lem-pc-open-restricted-comparison-core",
+    "lem-pc-open-restricted-comparison-transport",
+    "lem-pc-open-comparison-into-pullback-transport",
+    "lem-pc-single-complex-open-stalk-conjugacy",
+    "lem-pc-single-complex-open-stalk-condition",
+    "lem-pc-single-complex-open-affine",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenRestrictionStalkSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictionStalkSquare.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.openRestriction_stalk_square",
+  "statement": "theorem openRestriction_stalk_square\n    {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)\n    (M : X.Modules) (N : X'.Modules) (Z : (pullback k U.ι : Scheme.{u}).Modules)\n    (a : M ⟶ (Scheme.Modules.pushforward k).obj N)\n    (b : (Scheme.Modules.restrictFunctor U.ι).obj M ⟶\n      (Scheme.Modules.pushforward (pullback.snd k U.ι)).obj Z)\n    (c : (Scheme.Modules.restrictFunctor (pullback.fst k U.ι)).obj N ⟶ Z)\n    (h : a ≫ (Scheme.Modules.pushforward k).map\n        ((Scheme.Modules.restrictAdjunction (pullback.fst k U.ι)).unit.app N) ≫\n        (Scheme.Modules.pushforward (pullback.fst k U.ι) ⋙\n          Scheme.Modules.pushforward k).map c =\n      (Scheme.Modules.restrictAdjunction U.ι).unit.app M ≫\n        (Scheme.Modules.pushforward U.ι).map b ≫\n        (Scheme.Modules.pushforwardComp (pullback.snd k U.ι) U.ι ≪≫\n          Scheme.Modules.pushforwardCongr pullback.condition.symm).hom.app Z ≫\n        (Scheme.Modules.pushforwardComp (pullback.fst k U.ι) k ≪≫\n          Scheme.Modules.pushforwardCongr rfl).inv.app Z)\n    (z0 : (pullback k U.ι : Scheme.{u})) :\n    let z := pullback.fst k U.ι z0\n    let q := pullback.snd k U.ι\n    let L0 := RingedSpace.moduleStalkFunctor (pullback k U.ι).toRingedSpace z0\n    let F0 := forget₂ (ModuleCat.{u} ((pullback k U.ι).presheaf.stalk z0)) AddCommGrpCat.{u}\n    let hp : k z = U.ι (q z0) :=\n      congrArg (fun d : pullback k U.ι ⟶ X ↦ d z0) pullback.condition\n    (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} (k z)).map\n        (Scheme.Modules.Hom.mapPresheaf a) ≫\n      N.presheaf.stalkPushforward AddCommGrpCat.{u} k.base z ≫\n      (Scheme.Modules.restrictStalkNatIso (pullback.fst k U.ι) z0).inv.app N ≫\n      F0.map (L0.map c) =\n    (M.presheaf.stalkCongr (.of_eq hp)).hom ≫\n      (Scheme.Modules.restrictStalkNatIso U.ι (q z0)).inv.app M ≫\n      (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} (q z0)).map\n        (Scheme.Modules.Hom.mapPresheaf b) ≫\n      Z.presheaf.stalkPushforward AddCommGrpCat.{u} q.base z0",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261014T010849-L-3166270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261014T010849-L-3166270",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

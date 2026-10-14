@@ -1,0 +1,153 @@
+{
+ "id": "lem-pc-open-tensor-restriction-square-stalk-unit",
+ "kind": "statement",
+ "title": "The open tensor restriction square preserves adjunction units on stalks",
+ "statement": "Let $k:X'\\to X$ be a scheme morphism, $U\\subset X$ an open subscheme, $T=X'\\times_X U$, and $p:T\\to X'$, $q:T\\to U$ the projections. Let $M$ be an $\\mathcal O_X$-module and $z_0\\in T$; put $z=p(z_0)$ and $N=M|_U$. Use the tensor-pullback adjunction [lem-pc-module-pullback-adjunction], the module stalk functor [def-pc-module-stalk-functor], and the underived comparison $\\theta:k^*M|_T\\simeq q^*N$ specified by [def-pc-open-restricted-tensor-complex-iso]. For $a:Y\\to Z$ and $F$ an $\\mathcal O_Z$-module, let $\\eta_{a,y,F}:F_{a(y)}\\to(a^*F)_y$ be the additive stalk map of the chosen adjunction unit followed by stalkPushforward. Let $r_o:(k^*M)_z\\to(k^*M|_T)_{z_0}$ and $r_i:M_{U.\\iota(qz_0)}\\to N_{qz_0}$ be the inverses of Mathlib's restrictStalkNatIso for $p$ and $U.\\iota$. Let $t:M_{kz}\\to M_{U.\\iota(qz_0)}$ be stalkCongr for the point equality induced by pullback.condition. Then the two additive maps from $M_{kz}$ to $(q^*N)_{z_0}$ agree: $\\eta_{k,z,M};r_o;\\theta_{z_0}=t;r_i;\\eta_{q,z_0,N}$.",
+ "stmt_deps": [
+  "def-pc-open-restricted-tensor-complex-iso",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-module-stalk-functor"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0096",
+  "place": "Tag 0096 (lemma-adjoint-pullback-pushforward-modules), Tag 0098 (lemma-stalk-pullback-modules); adjunction mate unit identities in Mathlib/CategoryTheory/Adjunction/Mates.lean and Unique.lean."
+ },
+ "proof": [
+  {
+   "text": "The private proved helper open_iso_eq identifies openTensorRestrictionIso with the direct comparison of the chosen tensor adjunction and restrictAdjunction, using leftAdjointUniq_inv_app and leftAdjointUniq_trans_app. Therefore open_unit is exactly unit_leftAdjointUniq_hom_app. The helper composition_unit applies unit_conjugateEquiv_symm to the pushforward composition and congruence iso that defines tensorPullbackCompositionIso.",
+   "uses": [
+    "def-pc-open-restricted-tensor-complex-iso",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-tensor-pullback-composition-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For M, multiply the desired underived sheaf-unit square on the right by the output pushforward composition iso cP. Expand its two open restriction units by open_unit. Cancel the first open comparison against its inverse in openTensorRestrictionSquareIso. Naturality of cP moves the resulting composite comparison past pushforward. Apply composition_unit for (p,k), cancel its tensor composition iso with the inverse, and move the input open comparison through the unit for q by unit_naturality. Naturality of cQ and composition_unit for (q,U.ι) identify the result with the other side. These are the private square_unit calculation; cancellation by cP proves the sheaf morphism square.",
+   "uses": [
+    "def-pc-open-restricted-tensor-complex-iso",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-tensor-pullback-composition-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply openRestriction_stalk_square to the ambient unit a, the restricted unit b, and the open tensor square component c. The sheaf-square hypothesis is the proved square_unit. This gives the asserted additive stalk-unit identity, including the actual inverse restriction coordinates and point transport.",
+   "uses": [
+    "lem-pc-open-restriction-stalk-square"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-open-restricted-tensor-complex-iso",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-open-restriction-stalk-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P1",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/0096",
+  "place": "Tags 0096 and 0098; the fully proved categorical mate calculation square_unit, followed by generic open-stalk square functoriality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The tensor pullback adjunction unit commutes with open restriction and the canonical same germ stalk isomorphism",
+   "date": "2026-10-14",
+   "available": false,
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\"",
+   "date": "2026-10-14",
+   "available": true,
+   "results": "12 hits, including unit_leftAdjointUniq_hom_app and leftAdjointUniq_trans_app. General categorical unit identities; no open tensor square stalk identity.",
+   "verdict": "Use the general unit identities as components of the argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical composition comparison of pullback functors preserves adjunction units",
+   "date": "2026-10-14",
+   "available": true,
+   "results": "8 hits for ChosenPullbacksAlong units and composition. They are not tensor pullbacks of module sheaves.",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_leftAdjointUniq|germ_restrictStalkNatIso|stalkPushforward",
+   "date": "2026-10-14",
+   "available": true,
+   "results": "21 hits: stalk pushforward germ formulas, open restriction stalk germ formulas, and adjunction uniqueness unit identities.",
+   "verdict": "No square formula; use these component identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenRestrictedTensorChainTransportPureOne",
+  "date": "2026-10-14",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Open-locality of the single-complex stalk comparison: the unit identities of composition mates and uniqueness comparisons identify the restricted unit section.",
+   "via": [
+    "lem-pc-open-restricted-tensor-chain-transport-pure-one",
+    "lem-pc-open-restricted-tensor-chain-transport-pure",
+    "lem-pc-open-restricted-tensor-chain-transport",
+    "lem-pc-open-restricted-tensor-homology-transport",
+    "lem-pc-open-restricted-tensor-coordinate-data",
+    "lem-pc-open-restricted-ordinary-comparison-square",
+    "lem-pc-open-restricted-canonical-square",
+    "lem-pc-open-restricted-comparison-core",
+    "lem-pc-open-restricted-comparison-transport",
+    "lem-pc-open-comparison-into-pullback-transport",
+    "lem-pc-single-complex-open-stalk-conjugacy",
+    "lem-pc-single-complex-open-stalk-condition",
+    "lem-pc-single-complex-open-affine",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenTensorRestrictionSquareStalkUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenTensorRestrictionSquareStalkUnit.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.openTensorRestrictionSquare_stalk_unit",
+  "statement": "theorem openTensorRestrictionSquare_stalk_unit\n    {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)\n    (M : X.Modules) (z0 : (pullback k U.ι : Scheme.{u})) :\n    let z := pullback.fst k U.ι z0\n    let q := pullback.snd k U.ι\n    let N := (Scheme.Modules.restrictFunctor U.ι).obj M\n    let L0 := RingedSpace.moduleStalkFunctor (pullback k U.ι).toRingedSpace z0\n    let F0 := forget₂ (ModuleCat.{u} ((pullback k U.ι).presheaf.stalk z0)) AddCommGrpCat.{u}\n    let hp : k z = U.ι (q z0) :=\n      congrArg (fun h : pullback k U.ι ⟶ X ↦ h z0) pullback.condition\n    (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} (k z)).map\n        (Scheme.Modules.Hom.mapPresheaf\n          ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction k)).unit.app M)) ≫\n      ((Scheme.Modules.tensorPullback k).obj M).presheaf.stalkPushforward\n        AddCommGrpCat.{u} k.base z ≫\n      (Scheme.Modules.restrictStalkNatIso (pullback.fst k U.ι) z0).inv.app\n        ((Scheme.Modules.tensorPullback k).obj M) ≫\n      F0.map (L0.map ((openTensorRestrictionSquareIso k U).hom.app M)) =\n    (M.presheaf.stalkCongr (.of_eq hp)).hom ≫\n      (Scheme.Modules.restrictStalkNatIso U.ι (q z0)).inv.app M ≫\n      (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} (q z0)).map\n        (Scheme.Modules.Hom.mapPresheaf\n          ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction q)).unit.app N)) ≫\n      ((Scheme.Modules.tensorPullback q).obj N).presheaf.stalkPushforward\n        AddCommGrpCat.{u} q.base z0",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261014T010849-L-3166270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261014T010849-L-3166270",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
