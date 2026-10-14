@@ -3,11 +3,13 @@
  "blueprint": {
   "is": "sbc-lem-degree-zero-flat-base-change",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lem-kun-0eys"
+  ]
  },
  "kind": "statement",
  "title": "Degree-zero flat base change",
- "statement": "Consider a base-change square\nwhere $f$ is flat and locally of finite presentation with\ngeometrically reduced\nfibres (in particular, $f$ may be smooth). Then\n\n$$\nf^{-1}g_*\\mathcal F=h_*e^{-1}\\mathcal F\n$$\n\nfor any sheaf $\\mathcal F$ on $T_{\\Et}$.\n(*Stacks Project, Etale Cohomology, Section 59.87 (Base change\nfor pushforward), [Tag `0EYS`](https://stacks.math.columbia.edu/tag/0EYS) = Lemma 59.87.2; the proof combines\nLemma 59.87.1, [Tag `0EZX`](https://stacks.math.columbia.edu/tag/0EZX), with More on Morphisms, Lemma\n37.46.3, [Tag `0EY5`](https://stacks.math.columbia.edu/tag/0EY5): the connected components of the fibres\ncorrespond under the base change, and direct image is computed by the\nwould-be equalizer of the section descriptions.*)",
+ "statement": "Let $f:X\\to S$, $g:T\\to S$, $h:Y\\to X$ and $e:Y\\to T$ form a Cartesian base-change square with $Y\\cong X\\times_ST$ [sbc-def-base-change-square]. Assume $f$ is flat [def-weil-flat-morphism], locally of finite presentation [def-sbc-locally-finite-presentation], and its fibres over all points of $S$ are geometrically reduced over their residue fields [def-pc-scheme-fibre; def-pc-geometrically-irreducible]. For every sheaf of sets $\\mathcal F$ on $T_{\\Et}$ [def-weil-pbc-etale-sheaf-of-sets], the canonical base-change morphism $\\beta_{\\mathcal F}:f^{-1}g_*\\mathcal F\\longrightarrow h_*e^{-1}\\mathcal F$ is an isomorphism. The inverse images and their composition and unit maps are those of [lem-weil-pbc-sets-etale-inverse-image-composition-units]; direct image is evaluation on base-changed etale objects as in [lem-weil-pbc-etale-base-change-continuous]. Explicitly, $\\beta_{\\mathcal F}$ is the adjoint transpose under $f^{-1}\\dashv f_*$ of $g_*\\mathcal F\\to g_*e_*e^{-1}\\mathcal F\\cong f_*h_*e^{-1}\\mathcal F$, using the unit for $e$ and the Cartesian identification. In particular this holds when $f$ is smooth [def-sbc-smooth-morphisms]. There is no restriction on $g$ and no torsion hypothesis.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-deg0/sbc-lem-degree-zero-flat-base-change.md",
   "place": "node sbc-lem-degree-zero-flat-base-change, order 1382",
@@ -27,29 +29,170 @@
   ]
  },
  "stmt_deps": [
-  "def-sbc-normal-dominant-galois",
-  "sbc-def-base-change-square"
+  "sbc-def-base-change-square",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-geometric-fibre",
+  "def-pc-geometrically-irreducible",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "def-sbc-smooth-morphisms",
+  "def-pc-scheme-fibre"
  ],
  "proof": [
   {
-   "text": "The direct image of [def-weil-pbc-direct-image] is computed by the\nequalizer description of sections along the fibres; for a flat\nmorphism of finite presentation with geometrically reduced fibres, the\n(reduced) connected components of the fibres are the geometric points,\nand they correspond under base change, so for $V\\to T$ etale the\nsections of both sides over $V$ are the same systems of sections on the\nfibres of $V\\times_TY\\to V$: this identifies $f^{-1}g_*\\mathcal F$ and\n$h_*e^{-1}\\mathcal F$ as sheaves, which is the displayed equality.",
+   "text": "For any object $j:U_0\\to X$ of $X_{\\Et}$, $j$ is flat and locally of finite presentation by [def-weil-etale-morphism]. The composite $f\\circ j$ is flat by [lem-pc-flat-compose]. It is locally of finite presentation: on affine neighbourhoods its ring map is a composite of finitely presented ring maps, so clause (2) of [lem-weil-pbc-finite-presentation-base-change-composition] applies. For $s\\in S$ and any field extension $K/\\kappa(s)$, the morphism $(U_0)_s\\times_{\\kappa(s)}K\\to X_s\\times_{\\kappa(s)}K$ is etale by [lem-weil-pbc-etale-base-change-finite-limits]; its target is reduced by the hypothesis on $f$, hence its source is reduced by [etale-proposition-etale-reduced]. Thus $f\\circ j$ has geometrically reduced fibres. Apply [lem-sbc-flat-reduced-etale-connected-charts] to $f\\circ j$. Obtain a covering $a_i:U_i\\to U_0$ with $f\\circ j\\circ a_i=r_i\\circ q_i$, $r_i:V_i\\to S$ etale, and $q_i:U_i\\to V_i$ flat, quasi-compact and with nonempty geometrically connected fibres. These are precisely the charts required in unit sk-prop-deg0 Step 1. Fix one such chart and put $U=U_i$, $V=V_i$, $q=q_i$, $r=r_i$, and $j'=j\\circ a_i$.",
    "uses": [
-    "def-weil-pbc-direct-image"
+    "def-weil-etale-morphism",
+    "lem-pc-flat-compose",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "etale-proposition-etale-reduced",
+    "lem-sbc-flat-reduced-etale-connected-charts"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYS, lemma-fppf-reduced-fibres-base-change-f-star, proof; Tag 0EZX, chart hypothesis",
+    "external": {
+     "document": "literature/stacks-project/more-morphisms.tex",
+     "place": "Tag 0EY5, lemma-cover-by-geometrically-connected"
+    }
+   }
+  },
+  {
+   "text": "Put $G=g_*\\mathcal F$, a sheaf of sets by [lem-weil-pbc-etale-base-change-continuous]. Etale inverse image is restriction by [lem-weil-pbc-sets-etale-inverse-image-restriction], so $G(V)=\\Gamma(V,r^{-1}G)$ and $(f^{-1}G)(U)=\\Gamma(U,(j')^{-1}f^{-1}G)$. The composition isomorphisms of [lem-weil-pbc-sets-etale-inverse-image-composition-units] identify $(j')^{-1}f^{-1}G$ with $q^{-1}r^{-1}G$, since $f\\circ j'=r\\circ q$. Apply [lem-weil-pbc-etale-sections-flat-qc-connected-fibres] to $q$ and the sheaf $r^{-1}G$: all three hypotheses were supplied by Step 1. Its canonical pullback bijection, together with these restriction and composition isomorphisms, gives a bijection $A:G(V)\\xrightarrow{\\sim}(f^{-1}G)(U)$. Unit compatibility in the two comparison nodes says that $A(s)$ is the unit for $f$ applied to $s$, then restricted along the chart map $U\\to V\\times_SX$.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-continuous",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-etale-sections-flat-qc-connected-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZX, lemma-base-change-f-star-general, proof"
+   }
+  },
+  {
+   "text": "Set $V_T=V\\times_ST$, $U_T=U\\times_XY\\cong U\\times_ST$, and let $q_T:U_T\\to V_T$ be induced by $q$ and the map to $T$. The fibre-product universal property [def-pc-fibre-product] identifies $U_T$ with $U\\times_VV_T$ over $V_T$, so $q_T$ is a base change of $q$. It is flat by [lem-weil-pbc-flat-morphism-base-change] and quasi-compact by [lem-pc-quasi-compact-base-change]. For a point $v'\\in V_T$ with image $v\\in V$, its fibre after a field extension $K/\\kappa(v')$ is $U_v\\times_{\\kappa(v)}K$, by the same universal property. This is nonempty and connected by the definition of geometrically connected in [def-pc-geometrically-irreducible], applied to the field extension $K/\\kappa(v)$. Thus $q_T$ meets all the hypotheses of the sections theorem.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-pc-quasi-compact-base-change",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZX, lemma-base-change-f-star-general, proof"
+   }
+  },
+  {
+   "text": "The base-change functor sends etale objects to etale objects by [lem-weil-pbc-etale-base-change-finite-limits], so $V_T$ and $U_T$ are etale objects over $T$ and $Y$, respectively. Write $r_T:V_T\\to T$ and $j_T:U_T\\to Y$ for the structure maps. Restriction [lem-weil-pbc-sets-etale-inverse-image-restriction] gives $\\mathcal F(V_T)=\\Gamma(V_T,r_T^{-1}\\mathcal F)$ and $(e^{-1}\\mathcal F)(U_T)=\\Gamma(U_T,j_T^{-1}e^{-1}\\mathcal F)$. Since $e\\circ j_T=r_T\\circ q_T$, composition [lem-weil-pbc-sets-etale-inverse-image-composition-units] identifies $j_T^{-1}e^{-1}\\mathcal F$ with $q_T^{-1}r_T^{-1}\\mathcal F$. Apply [lem-weil-pbc-etale-sections-flat-qc-connected-fibres] to $q_T$ and $r_T^{-1}\\mathcal F$, with the hypotheses checked in Step 3. Its canonical pullback bijection, followed by the composition and restriction isomorphisms, gives $B:\\mathcal F(V_T)\\xrightarrow{\\sim}(e^{-1}\\mathcal F)(U_T)$. The direct-image formula of [lem-weil-pbc-etale-base-change-continuous] identifies $G(V)=\\mathcal F(V_T)$ and $(h_*e^{-1}\\mathcal F)(U)=(e^{-1}\\mathcal F)(U_T)$. Under these identifications $\\beta_{\\mathcal F}(U)\\circ A=B$: for $s\\in\\mathcal F(V_T)$, $A(s)$ is the chart restriction of the $f$-unit, and the defining adjoint-transpose equation for $\\beta$ sends that unit to the $e$-unit; restriction sends it to the pullback of $s$ on $U_T$. The restriction and composite-unit equations of [lem-weil-pbc-sets-etale-inverse-image-composition-units], and the restriction-unit equation of [lem-weil-pbc-sets-etale-inverse-image-restriction], identify this last section with $B(s)$. Hence $\\beta_{\\mathcal F}(U)=B\\circ A^{-1}$ is bijective on every good chart. This checks the actual canonical morphism, not just its source and target section sets.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-sections-flat-qc-connected-fibres",
+    "lem-weil-pbc-etale-base-change-continuous",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZX, lemma-base-change-f-star-general, proof"
+   }
+  },
+  {
+   "text": "Write $H=f^{-1}g_*\\mathcal F$ and $K=h_*e^{-1}\\mathcal F$. They are sheaves by the inverse-image construction and direct-image theorem. First $\\beta(U_0)$ is injective for every object: equal images imply equal restrictions on its good-chart cover by Step 4, and the separatedness part of the sheaf axiom gives equality. Next let $t\\in K(U_0)$. On a good-chart cover let $s_i\\in H(U_i)$ be its unique lifts. On $U_i\\times_{U_0}U_j$ the restrictions of $s_i$ and $s_j$ have the same image, and the injectivity just proved for every object makes them equal (the overlap itself need not be a good chart). The equalizer sheaf axiom [def-weil-pbc-etale-sheaf-of-sets] glues the $s_i$ to $s\\in H(U_0)$; separatedness of $K$ gives $\\beta(s)=t$. Thus all components of $\\beta$ are bijective. Their inverses are natural, since the original components commute with restrictions; they define an inverse sheaf morphism.",
+   "uses": [
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-etale-base-change-continuous"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZX, lemma-base-change-f-star-general, proof"
+   }
+  },
+  {
+   "text": "If $f$ is smooth, [sbc-lem-smooth-criterion] supplies flatness and local finite presentation, and [sbc-lem-smooth-geometrically-reduced] supplies geometrically reduced fibres. Steps 1--5 therefore apply without any hypothesis on $g$ or torsion assumption on $\\mathcal F$, giving the smooth special case in the statement.",
+   "uses": [
+    "sbc-lem-smooth-criterion",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYS, lemma-fppf-reduced-fibres-base-change-f-star, smooth specialization as in unit sk-prop-deg0 Step 4"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-direct-image"
+  "def-weil-etale-morphism",
+  "lem-pc-flat-compose",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "etale-proposition-etale-reduced",
+  "lem-sbc-flat-reduced-etale-connected-charts",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-etale-sections-flat-qc-connected-fibres",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "def-pc-geometrically-irreducible",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "sbc-lem-smooth-criterion",
+  "sbc-lem-smooth-geometrically-reduced"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-deg0/sbc-lem-degree-zero-flat-base-change.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0EYS and 0EZX, lemma-fppf-reduced-fibres-base-change-f-star and lemma-base-change-f-star-general; geometric input 0EY5 in more-morphisms.tex"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale sheaves degree zero base change for flat locally finitely presented morphisms with geometrically reduced fibres",
+   "results": "Hits: AlgebraicGeometry.IsEtale.of_comp, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.FormallyEtale.comp, AlgebraicGeometry.IsEtale.instFormallyUnramified, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"Sheaf\"",
+   "results": "Hits: CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange_of_small, CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*[Ss]heaf|[Ss]heaf.*baseChange|geometricallyReduced",
+   "results": "Hits: Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale sheaf pushforward commutes with inverse image under flat reduced fibres base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley isomorphism for sheaves on small etale sites flat base change",
+   "results": "Hits: CategoryTheory.compatiblePreservingOfFlat, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, TopCat.Sheaf.pullbackIso, SheafOfModules.pullbackIso, SheafOfModules.pullbackComp, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -77,5 +220,64 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-prop-deg0"
+ "unit": "sk-prop-deg0",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "sbc-lem-degree-zero-flat-base-change",
+  "worker": "stage1",
+  "summary": "Replaced the false connected-components-as-points argument by the 0EY5 chart route, 0A3H sections bijections with unit compatibility, and an explicit overlap gluing proof. Retained arbitrary sheaves of sets rather than substituting the source Lean module-coefficient case. Clarified the equality notation as the canonical isomorphism and supplied notion dependencies.",
+  "blueprint": "Imported proof paragraph: replace the false fibre equalizer assertion by unit sk-prop-deg0 Steps 1--3, as 0EYS/0EZX prescribe. Step 6 realizes its smooth specialization; no route above the unit is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-base-change-continuous",
+    "why": "Direct-image evaluation and preservation of the set-valued sheaf condition for arbitrary scheme morphisms, exactly the direct-image identifications in sk-prop-deg0 Step 2. No same-unit node states this generic input; proposed for maintainer review, not preapproved."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "why": "Restriction to an etale chart equals set-valued inverse image, with the unit equation required for the two section comparisons of sk-prop-deg0 Step 2. No same-unit node states this generic input; proposed for maintainer review, not preapproved."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "why": "The generic inverse-image composition and unit equations identify the chart pullbacks and show the section bijections intertwine the canonical exchange map in sk-prop-deg0 Step 2. No same-unit node states this generic input; proposed for maintainer review, not preapproved."
+   },
+   {
+    "node": "lem-weil-pbc-etale-sections-flat-qc-connected-fibres",
+    "why": "The precise arbitrary-set 0A3H section theorem explicitly required by sk-prop-deg0 Step 2; applied to q and q_T, not to f itself. No same-unit node states this generic input; proposed for maintainer review, not preapproved."
+   },
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Only the forward permanence conclusion smooth implies flat and lfp is used in sk-prop-deg0 Step 4. No same-unit node states this generic input; proposed for maintainer review, not preapproved."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Geometrically reduced fibres for smooth f, explicitly required by sk-prop-deg0 Step 4. No same-unit node states this generic input; proposed for maintainer review, not preapproved."
+   },
+   {
+    "node": "lem-pc-flat-compose",
+    "why": "Generic composition of flat scheme morphisms verifies the chart theorem hypothesis on f j for every etale object, as required by sk-prop-deg0 Steps 1 and 3. No same-unit node states this generic input; proposed for maintainer review, not preapproved."
+   },
+   {
+    "node": "etale-proposition-etale-reduced",
+    "why": "Generic ascent of reducedness along an etale morphism, applied after each field extension to check geometric reducedness of f j for the chart input. No same-unit node states this generic input; proposed for maintainer review, not preapproved."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-etale-sections-flat-qc-connected-fibres",
+  "sbc-lem-smooth-criterion",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-pc-flat-compose",
+  "etale-proposition-etale-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-7f55e8096",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-7f55e8096 (reviewer sub-agent of L); spot-checked: Mathematics, hypotheses, coefficient category, canonical base-change morphism, source routes, all six proof steps, edge cases, duplicate audit, and Mathlib searches pass. The new chart node claims the exact sorry-free declaration AlgebraicGeometry.exists_etaleCover_factorization (SlicingFlat.lean:599-609) but omitted the required lean_audit.slopmaster2 closed attachment. Added the corrected whole node JSON at fixes/dag/nodes/sec-smooth-base-change/lem-sbc-flat-reduced-etale-connected-charts.json.; 1 file(s) fixed by the reviewer"
+ }
 }
