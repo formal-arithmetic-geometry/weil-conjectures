@@ -18,9 +18,9 @@
 | `WeilConjectures.ConstructibleSheaf.FinitePushforward` | 3 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BaseChangeClosedCoefficientRange` | 8 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.BaseChangeOpenInjectiveCoefficientZero` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardDegreeSheafFpqc` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality` | 10 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparison` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula` | 20 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula` | 22 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionsFactorization` | 23 | 1 | proof |
@@ -42,5 +42,5 @@ Waiting, not claimable: 5 modules whose proof uses a node that has no Lean decla
 | `WeilConjectures.ConstructibleSheaf.FinitePushforward` | 3 | 2 |
 | `Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic` | 6 | 1 |
 | `Sheaf.AlgebraicGeometry.BaseChangeClosedCoefficientRange` | 8 | 1 |
-| `Sheaf.AlgebraicGeometry.BaseChangeOpenInjectiveCoefficientZero` | 8 | 1 |
+| `Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparison` | 10 | 1 |
 | `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula` | 22 | 2 |
