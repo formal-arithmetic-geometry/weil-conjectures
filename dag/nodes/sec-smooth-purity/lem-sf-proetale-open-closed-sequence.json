@@ -7,11 +7,11 @@
    "place": "step 5 of its split (source: Pro-etale Cohomology, proof of Lemma Tag 09AK (label lemma-compare-constructible): reduction to $X$ qcqs, induction on the number of strata, a closed stratum $Z=X_k$ near $x$, the sequence of Lemma Tag 09AH, and the comparisons Lemma Tag 09AF ($j_!$) and Tag 09A6 ($i_*$); with literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf, Lemma 6.1.11, p. 43, Lemma 6.2.3 (4), p. 45 ($k_!\\circ\\nu^*\\simeq\\nu^*\\circ k_!$) and Corollary 5.1.9, p. 35, in place of the five lemma)",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Open-closed short exact sequence on the pro-etale site",
- "statement": "Let $X$ be a scheme, let $i:Z\\hookrightarrow X$ be a closed immersion and $j:U\\hookrightarrow X$ the inclusion of the complementary open subscheme [def-weil-scheme-morphism-properties], and assume that $j$ is quasi-compact. Let $\\Lambda$ be a finite commutative ring. On the small pro-etale sites [def-weil-pbc-proetale-site] let $i^*,j^*$ be the inverse images and $i_*$ the direct image of sheaves of $\\Lambda$-modules [def-weil-proetale-inverse-image], and $j_!$ the extension by zero [def-weil-extension-by-zero]. Then for every sheaf $\\mathcal F$ of $\\Lambda_X$-modules on $X_{\\mathrm{proet}}$ the sequence\\n$$\\n0\\longrightarrow j_!j^*\\mathcal F\\longrightarrow\\mathcal F\\longrightarrow i_*i^*\\mathcal F\\longrightarrow0,\\n$$\\nwhose first map is the counit of $j_!\\dashv j^*$ and whose second map is the unit of $i^*\\dashv i_*$, is exact.",
+ "statement": "Let $X$ be a scheme, let $i:Z\\hookrightarrow X$ be a closed immersion and $j:U\\hookrightarrow X$ the inclusion of the complementary open subscheme [def-weil-scheme-morphism-properties], and assume that $j$ is quasi-compact. Let $\\Lambda$ be a finite commutative ring. On the small pro-etale sites [def-weil-pbc-proetale-site] let $i^*,j^*$ be the inverse images and $i_*$ the direct image of sheaves of $\\Lambda$-modules [def-weil-proetale-inverse-image], and $j_!$ the extension by zero [def-weil-extension-by-zero]. Then for every sheaf $\\mathcal F$ of $\\Lambda_X$-modules on $X_{\\mathrm{proet}}$ the sequence\n$$\n0\\longrightarrow j_!j^*\\mathcal F\\longrightarrow\\mathcal F\\longrightarrow i_*i^*\\mathcal F\\longrightarrow0,\n$$\nwhose first map is the counit of $j_!\\dashv j^*$ and whose second map is the unit of $i^*\\dashv i_*$, is exact.",
  "source": {
   "document": "literature/stacks-project/proetale.tex",
   "place": "Pro-etale Cohomology, Lemma Tag 09AH (label lemma-ses-associated-to-open); also literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf, Lemma 6.1.9 (surjectivity of $F\\to i_*i^*F$) and Lemma 6.1.11 ($j_!j^*F=\\ker(F\\to i_*i^*F)$), p. 43, for $X$ qcqs and $U$ qcqs"
@@ -20,11 +20,65 @@
   "def-weil-scheme-morphism-properties",
   "def-weil-pbc-proetale-site",
   "def-weil-proetale-inverse-image",
-  "def-weil-extension-by-zero"
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\Lambda_X$, the constant sheaf of rings. Apply [prop-weil-pbc-proetale-constant-ring-map] to $i$ and $j$: its commutative-coefficient clause says that the particular structure maps $c^i_\\Lambda:i^{-1}\\Lambda_X\\to\\Lambda_Z$ and $c^j_\\Lambda:j^{-1}\\Lambda_X\\to\\Lambda_U$ of [def-weil-proetale-inverse-image] are isomorphisms, preserving constant sections. Thus coefficients in the ringed sequence can be identified with the specified constant coefficients, using these maps rather than an arbitrary ring isomorphism. No qcqs assumption on $X$, constructibility of $\\mathcal F$, or geometric-stalk detection is involved. In the current definition, $c^f_\\Lambda=\\varepsilon_{f,\\Lambda_{\\mathrm{dom}(f)}}\\circ f^{-1}(\\rho^f_\\Lambda)$, with $\\rho^f_\\Lambda$ the sheaf map extending constant sections; this is precisely the adjoint map named by the comparison theorem.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J, example-constant-sheaf; proetale.tex Tag 09A5, section-morphism; existing constant-ring comparison with its canonical-map clause"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-proetale-ringed-open-closed] with the ring sheaf $A=\\Lambda_X$ and the $A$-module $M=\\mathcal F$. Its short-exact-sequence clause gives $0\\to j_!j^{-1}\\mathcal F\\to\\mathcal F\\to i_*i^{-1}\\mathcal F\\to0$ with the counit and unit maps, where the coefficients on $U,Z$ are $j^{-1}A,i^{-1}A$. Its hypotheses are exactly the closed immersion, its complementary open immersion, and quasi-compactness of $j$ already assumed here. The extra qcqs hypothesis in its last sentence belongs only to its filtered-colimit assertion, which is not used.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open; the already-reviewed ringed version states this clause for arbitrary ring sheaves"
+   }
+  },
+  {
+   "text": "Identify the functors and the actual arrows. For $f=i,j$, write $c=c^f_\\Lambda$. Under step 1 the module pullback of [def-weil-proetale-inverse-image] has the canonical isomorphism $f^{-1}\\mathcal F\\otimes_{f^{-1}\\Lambda_X}\\Lambda_{\\mathrm{dom}(f)}\\to f^{-1}\\mathcal F$, $m\\otimes b\\mapsto c^{-1}(b)m$, with inverse $m\\mapsto m\\otimes1$. These formulas commute with restrictions and hence define inverse sheaf maps. Direct image is the same sectionwise sheaf, with scalar action through $\\rho^f_{\\Lambda,V}:\\Lambda_X(V)\\to\\Lambda_{\\mathrm{dom}(f)}(u_f(V))$ as specified in the current definition, so this identification also identifies $i_*i^*\\mathcal F$ with the last term of step 2. The definition [def-weil-extension-by-zero] sheafifies exactly the extension-by-zero presheaf specified in the ringed node: the value is the restricted module on an object factoring through $U$, and zero otherwise. Thus the first term is $j_!j^*\\mathcal F$. The counit on this presheaf sends the section over an object factoring through $U$ to that same section of $\\mathcal F$; it is zero on the other presheaf values. Write $q_f:f^{-1}\\mathcal F\\to f^*\\mathcal F$ for $m\\mapsto m\\otimes1$ and $\\theta_f:f^*\\mathcal F\\to f^{-1}\\mathcal F$ for the displayed inverse. The module adjunction unit is $f_*(q_f)\\circ\\eta_{f,\\mathcal F}$, so $f_*(\\theta_f)$ carries it to $\\eta_{f,\\mathcal F}$ because $\\theta_f q_f=\\mathrm{id}$. The module adjunction counit on a sheaf $G$ is given locally by $m\\otimes b\\mapsto b\\,\\varepsilon_{f,G}(m)$; after $\\theta_f$ it is the underlying counit. The scalar compatibility follows from $c^f_\\Lambda=\\varepsilon_f\\circ f^{-1}(\\rho^f_\\Lambda)$, so these formulas use the specified structure maps. For $j$, the restriction identification over $U$ makes the extension-by-zero counit the section map just described. Consequently the two term identifications carry the arrows of step 2 to precisely the counit and unit in the statement. Since the middle identification is the identity and the outer identifications are invertible, monomorphisms, epimorphisms, and image-equals-kernel are preserved: composing with these inverses identifies the kernels and images as subobjects. Epimorphism here is in the sheaf category; no sectionwise surjectivity is asserted. This is the required short exact sequence.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-extension-by-zero",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AE, definition-extension-zero, and Tag 09AH, lemma-ses-associated-to-open, first sentence of proof; elementary coefficient and arrow identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, lemma-ses-associated-to-open: specialization of the existing reviewed ringed theorem, with explicit canonical constant-coefficient identifications"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -39,10 +93,59 @@
    "results": "only the definition of the pro-etale precoverage/topology and of the small site S.ProEt with its topology; no sheaf operations i_*, i^*, j_!",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any sheaf of modules on the pro etale site the open closed counit and unit form a short exact sequence for a quasi compact complementary open immersion",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, Profinite.NobelingProof.succ_exact, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits concern Mayer-Vietoris free representable sheaves, Zariski structure-sheaf modules, topological flasque sheaves, or pro-etale site definitions; none gives this sequence for arbitrary pro-etale module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "openClosedShortComplex|extensionByZero|lowerShriek|ses.associated.to.open",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits concern Mayer-Vietoris free representable sheaves, Zariski structure-sheaf modules, topological flasque sheaves, or pro-etale site definitions; none gives this sequence for arbitrary pro-etale module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open closed localization exact sequence for sheaves of modules on the pro etale site",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProEtale\", \"ShortExact\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits concern Mayer-Vietoris free representable sheaves, Zariski structure-sheaf modules, topological flasque sheaves, or pro-etale site definitions; none gives this sequence for arbitrary pro-etale module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recollement of pro etale sheaves of modules closed immersion complementary quasi compact open extension by zero kernel restriction",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits concern Mayer-Vietoris free representable sheaves, Zariski structure-sheaf modules, topological flasque sheaves, or pro-etale site definitions; none gives this sequence for arbitrary pro-etale module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"ShortExact\"",
+   "results": "2 hits: TopCat.Sheaf.IsFlasque.of_shortExact_of_isFlasque₁₂, TopCat.Sheaf.IsFlasque.epi_of_shortExact",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits concern Mayer-Vietoris free representable sheaves, Zariski structure-sheaf modules, topological flasque sheaves, or pro-etale site definitions; none gives this sequence for arbitrary pro-etale module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtale|proetale",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits concern Mayer-Vietoris free representable sheaves, Zariski structure-sheaf modules, topological flasque sheaves, or pro-etale site definitions; none gives this sequence for arbitrary pro-etale module sheaves"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +165,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-comparison"
+ "unit": "sk-prop-sf-comparison",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-sf-proetale-open-closed-sequence",
+  "worker": "stage1",
+  "summary": "Repair of the refused landing: reread all current cited statements and revalidated the changed inverse-image definition. Replaced its stale quotes and explicitly used its ring-adjunction formula, sectionwise scalar action through rho, and unit/counit formulas in the coefficient identifications. Same hypotheses, conclusion, three-step route, and existing dependencies; no new nodes.",
+  "blueprint": "lem-sf-proetale-constructible-origin, split step 5: the open-closed short exact sequence used in induction on strata (Stacks 09AH). The blueprint whole proof invokes 09AK; 09AH is expanded in its existing split.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic canonical constant-coefficient comparison for any scheme morphism; this unit supplies no such coefficient identification."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Already-reviewed general ringed pro-etale open-closed localization; our constant-coefficient sequence is its specialization. It follows the same Stacks 09AH route and introduces no new restatement node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-proetale-ringed-open-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-53b99f876",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-53b99f876 (reviewer sub-agent of L); spot-checked: Read the complete item, report, dependency statements, route, and cited mathematics. Stacks 09AH supports the hypotheses; canonical coefficient maps and adjunction arrows agree. Edge cases and dependency closures pass. No new nodes or repairs; both declared generic tool uses are accepted. Concrete checks are in review.md."
+ }
 }
