@@ -20,6 +20,7 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex
 import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 
@@ -95,7 +96,17 @@ theorem picard_residue_homology_geometric_naturality_fixed_positive
             structureSheafCohomologyPullback
               (((Over.pullback (S.fromSpecResidueField s)).map
                 (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
-                  (ui i) (hui i))).left) 1 (eK z) := by sorry
+                  (ui i) (hui i))).left) 1 (eK z) := by
+  classical
+  let a : ∀ i, DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj (C i) := fun i =>
+    Classical.choose (picard_residue_homology_geometric_naturality_fixed_positive_per_index
+      f Xi fi ui hui L W k w s hw τ U hwU hU p hp K hK hE C hC hCi eK eC hn i)
+  refine ⟨a, ?_⟩
+  intro i φ hφ z
+  have hi := Classical.choose_spec
+    (picard_residue_homology_geometric_naturality_fixed_positive_per_index
+      f Xi fi ui hui L W k w s hw τ U hwU hU p hp K hK hE C hC hCi eK eC hn i)
+  simpa [a] using hi φ hφ z
 
 end AlgebraicGeometry.Scheme
 
