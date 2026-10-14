@@ -19,8 +19,8 @@
 | `Sheaf.AlgebraicGeometry.PicardResidueHomologySourceResidueComparison` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ScalarCupResolutionClassCompatibility` | 31 | 1 | proof |
-| `Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchange` | 34 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison` | 34 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData` | 34 | 1 | proof |
+| `Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchangePreNormalization` | 35 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativeMVDirectImageRowsCore` | 41 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates` | 50 | 1 | proof |
