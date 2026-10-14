@@ -1,0 +1,127 @@
+{
+ "id": "lem-sbc-higher-image-transition-isIso-of-lower",
+ "kind": "statement",
+ "title": "Higher-image invertibility from the derived triangle transition",
+ "statement": "For arbitrary schemes [def-weil-pbc-scheme-conventions], a commutative coefficient ring Λ, and étale Λ-module sheaves [def-weil-pbc-etale-sheaves], use the canonical inverse images and composition comparisons [def-weil-pbc-inverse-image] and the canonical degree-q higher-image triangle transitions [def-sbc-module-higher-image-transitions]. Let a:Y′→Y, h:Y→X, h′:Y′→X satisfy a ≫ h=h′ and let C be a sheaf on Y. If lowerStarPlusTransition along this triangle at C placed in degree zero is invertible, then higherDirectImageTransition along the triangle at C is invertible in every integer degree q. For any morphism f:C→C′ of étale Λ-module sheaves on Y, also provide the canonical coefficient-morphism map R^q h_*(f), constructed by applying the degree-zero single-complex functor, Rh_* and degree-q homology to f; its explicit endpoint objects are higherDirectImage. For a scheme T, an arrow e:Y→T and an étale Λ-module sheaf F on T, the target-functor comparison identifies baseChangeTargetFunctor(e,h,q)(F) with R^q h_*(e*F), using the target functor of [def-sbc-canonical-base-change-stalk-transitions]. For a coefficient isomorphism C≅C′ on Y, its higher-image isomorphism is the image under the single-complex, Rh_* and homology functors with these explicit object types. The hom of the mapped coefficient isomorphism is the coefficient-morphism map, and higherDirectImageOverMap is its triangle transition followed by that coefficient-morphism map of the inverse composition comparison.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0F07 (lemma-go-down-to-field), coefficient identification preceding condition (2), and 09Z1, canonical restriction maps."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-sbc-module-higher-image-transitions",
+  "def-sbc-canonical-base-change-stalk-transitions"
+ ],
+ "proof": [
+  {
+   "text": "The exact pullback-single comparison is an isomorphism. Map it by the target derived direct image, compose with the assumed invertible triangle transition, and map by degree-q homology. Functors and composition preserve isomorphisms. The proof builds kernel-checked congruence certificates between this abstract functor expression and the public higherDirectImageTransition definition, avoiding expensive reduction of derived-category projections. The additional mapping API constructs the nested functor maps directly after unfolding the named higher-image object. Its equations and the OverMap equation are reflexive computations; no coefficient object or comparison changes.",
+   "uses": [
+    "def-sbc-module-higher-image-transitions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Provide baseChangeTargetFunctorHigherImageIso and higherDirectImageMapIso as the existing canonical target comparison and nested homology/direct-image/single functor maps, with explicit higher-image object endpoints. Unfold higherDirectImage to verify these constructions directly. The hom formula and OverMap formula are reflexive computations. These APIs change neither sheaf data nor isomorphisms.",
+   "uses": [
+    "def-sbc-module-higher-image-transitions",
+    "def-sbc-canonical-base-change-stalk-transitions"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-canonical-base-change-stalk-transitions",
+  "def-sbc-module-higher-image-transitions"
+ ],
+ "proof_origin": {
+  "by": "worker B4 stage 3; second reader J2 (2026-10-15)",
+  "document": "Stacks Project and source library",
+  "place": "Explicit formal calculation of the coefficient and mate-pasting steps in lem-sbc-target-sheaf-comparison-naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of higher direct image transitions under canonical pullback coefficient comparisons",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor mapping a composite of two isomorphisms gives an isomorphism",
+   "results": "CategoryTheory.Functor.mapIso_trans, CategoryTheory.Functor.map_isoCongr, CategoryTheory.Iso.map_hom_inv_id_assoc, CategoryTheory.Functor.map_hom_inv_assoc, CategoryTheory.Iso.map_inv_hom_id_assoc, CategoryTheory.Functor.mapIso, CategoryTheory.Functor.map_inv_hom_assoc, CategoryTheory.Iso.map_hom_inv_id_app_assoc",
+   "date": "2026-10-15",
+   "verdict": "infrastructure only; no exact theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "map_isIso|isIso_comp",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Geometry/RingedSpace/OpenImmersion.lean",
+   "date": "2026-10-15",
+   "verdict": "infrastructure only; no exact theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality",
+  "date": "2026-10-14",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-failure-field",
+   "place": "Proof condition (2): continuity of target restriction maps with the fixed pulled-back coefficient sheaf",
+   "via": [
+    "lem-sbc-target-sheaf-comparison-naturality",
+    "lem-sbc-target-stalk-higher-image-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageTransitionIsIsoOfLower",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageTransitionIsIsoOfLower.lean",
+  "declaration": "AlgebraicGeometry.Etale.higherDirectImageTransition_isIso_of_lower",
+  "statement": "lemma higherDirectImageTransition_isIso_of_lower {X Y Y' : Scheme.{u}} (a : Y' ⟶ Y) (h : Y ⟶ X) (h' : Y' ⟶ X) (w : a ≫ h = h') (q : ℤ) (C : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (ht : IsIso (lowerStarPlusTransition Λ a h h' w ((DerivedCategory.Plus.singleFunctor _ 0).obj C))) : IsIso (higherDirectImageTransition Λ a h h' w q C)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-15",
+  "declarations": [
+   "AlgebraicGeometry.Etale.higherDirectImageTransition_isIso_of_lower",
+   "AlgebraicGeometry.Etale.higherDirectImageMap",
+   "AlgebraicGeometry.Etale.higherDirectImageMap_eq",
+   "AlgebraicGeometry.Etale.higherDirectImageOverMap_eq",
+   "AlgebraicGeometry.Etale.baseChangeTargetFunctorHigherImageIso",
+   "AlgebraicGeometry.Etale.higherDirectImageMapIso",
+   "AlgebraicGeometry.Etale.higherDirectImageMapIso_hom_eq"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-3bea0",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261014T170738-L-2556305",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-3bea0",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261014T170738-L-2556305",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly, the direct importer compiles, and statements, interfaces, nodes, change record, report, and permitted remaining sorry all satisfy the stage-3 brief."
+ }
+}

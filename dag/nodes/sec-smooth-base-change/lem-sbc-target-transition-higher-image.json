@@ -1,0 +1,114 @@
+{
+ "id": "lem-sbc-target-transition-higher-image",
+ "kind": "statement",
+ "title": "Single-complex normalization of a target transition",
+ "statement": "For arbitrary schemes [def-weil-pbc-scheme-conventions], a commutative coefficient ring Λ, and étale Λ-module sheaves [def-weil-pbc-etale-sheaves], use the canonical inverse images and composition comparisons [def-weil-pbc-inverse-image] and the canonical degree-q higher-image triangle transitions [def-sbc-module-higher-image-transitions]. Let e:Y→T, h:Y→X, π:T′→T, a:Y′→Y, e′:Y′→T′ and h′:Y′→X satisfy a ≫ e=e′ ≫ π and a ≫ h=h′. Let F be a sheaf on T, F′ on T′ and f:π*F→F′. For every integer q, the target transition [def-sbc-canonical-base-change-stalk-transitions] followed by the target-functor map of f and the exact single-complex comparison at e′ equals the exact comparison at e followed by the higher-image transition along a and the higher-image map of δ. Here δ:a*e*F→e′*F′ is the inverse (a,e) composition comparison, followed by the (e′,π) comparison transported using a ≫ e=e′ ≫ π, followed by e′*(f).",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0F07 (lemma-go-down-to-field), coefficient identification preceding condition (2), and 09Z1, canonical restriction maps."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-sbc-module-higher-image-transitions",
+  "def-sbc-canonical-base-change-stalk-transitions",
+  "lem-sbc-higher-image-transition-isIso-of-lower"
+ ],
+ "proof": [
+  {
+   "text": "Expand the target transition and its single-complex comparisons. Naturality of the derived triangle transition moves the source comparison across the transition. Compatibility of exact pullback composition with placing F in degree zero turns the derived coefficient square into the single functor applied to δ; transports along the arrow equality agree by proof irrelevance. Apply the target derived direct image and degree-q homology, then use naturality for the final coefficient map f. This is precisely the normalization equality, independently of q or cartesianness. The target functor comparison is written with explicit higher-image object types using baseChangeTargetFunctorHigherImageIso; this is the same existing exact single-complex isomorphism.",
+   "uses": [
+    "lem-sbc-pullback-single-comp",
+    "def-sbc-module-higher-image-transitions",
+    "def-sbc-canonical-base-change-stalk-transitions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-canonical-base-change-stalk-transitions",
+  "def-sbc-module-higher-image-transitions",
+  "lem-sbc-pullback-single-comp"
+ ],
+ "proof_origin": {
+  "by": "worker B4 stage 3; second reader J2 (2026-10-15)",
+  "document": "Stacks Project and source library",
+  "place": "Explicit formal calculation of the coefficient and mate-pasting steps in lem-sbc-target-sheaf-comparison-naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of higher direct image transitions under canonical pullback coefficient comparisons",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image functor comparison with a single complex is compatible with pullback composition and higher direct image transitions",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility, CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, CategoryTheory.GrothendieckTopology.overMapPullbackComp_inv_app_val_app, CategoryTheory.GrothendieckTopology.overMapPullbackComp, CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_inv",
+   "date": "2026-10-15",
+   "verdict": "infrastructure only; no exact theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryPlusSingleFunctor|upperStarComp_single",
+   "results": "No hits",
+   "date": "2026-10-15",
+   "verdict": "infrastructure only; no exact theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality",
+  "date": "2026-10-14",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-failure-field",
+   "place": "Proof condition (2): continuity of target restriction maps with the fixed pulled-back coefficient sheaf",
+   "via": [
+    "lem-sbc-target-sheaf-comparison-naturality",
+    "lem-sbc-target-stalk-higher-image-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeTargetTransitionHigherImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeTargetTransitionHigherImage.lean",
+  "declaration": "AlgebraicGeometry.Etale.baseChangeTargetTransition_higherImage",
+  "statement": "theorem baseChangeTargetTransition_higherImage {X T Y T' Y' : Scheme.{u}} (e : Y ⟶ T) (h : Y ⟶ X) (q : ℤ) (π : T' ⟶ T) (a : Y' ⟶ Y) (e' : Y' ⟶ T') (h' : Y' ⟶ X) (wa : a ≫ e = e' ≫ π) (wh : a ≫ h = h') (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (F' : Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (f : ((π)^*[ModuleCat.{u + 1} Λ]).obj F ⟶ F') : baseChangeTargetTransition Λ e h q π a e' h' wa wh F ≫ (baseChangeTargetFunctor Λ e' h' q).map f ≫ (baseChangeTargetFunctorHigherImageIso Λ e' h' q F').hom = (baseChangeTargetFunctorHigherImageIso Λ e h q F).hom ≫ higherDirectImageTransition Λ a h h' wh q (((e)^*[ModuleCat.{u + 1} Λ]).obj F) ≫ higherDirectImageMap Λ h' q ((upperStarComp (ModuleCat.{u + 1} Λ) a e).inv.app F ≫ (upperStarComp (ModuleCat.{u + 1} Λ) e' π (a ≫ e) wa).hom.app F ≫ ((e')^*[ModuleCat.{u + 1} Λ]).map f)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-3bea0",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261014T170738-L-2556305",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-3bea0",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261014T170738-L-2556305",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly, the direct importer compiles, and statements, interfaces, nodes, change record, report, and permitted remaining sorry all satisfy the stage-3 brief."
+ }
+}
