@@ -25,9 +25,64 @@
   "def-pc-ring-pseudo-coherent-complex",
   "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume $K$ is pseudo-coherent. Unpack [def-pc-ring-pseudo-coherent-complex]: there is a complex $E^\\bullet$ of finite free $R$-modules, vanishing in degrees above some integer $b$, and an isomorphism $E^\\bullet\\simeq K$ in $D(R)$. Thus $H^i(K)\\cong H^i(E^\\bullet)=0$ for $i>b$.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066E (2), forward implication; definition 064P"
+   }
+  },
+  {
+   "text": "For any integer $i$, the cycles $Z^i(E^\\bullet)=\\ker(d^i:E^i\\to E^{i+1})$ form a submodule of the finite free module $E^i$. Apply [lem-weil-pbc-noetherian-submodule-finite] using that $R$ is Noetherian and the standard finite basis generates $E^i$. Choose generators $z_1,\\ldots,z_r$ of these cycles. Their images generate the quotient $Z^i(E^\\bullet)/\\operatorname{im}d^{i-1}=H^i(E^\\bullet)$: lift any quotient element to a cycle, express that cycle in the $z_j$, and project the expression. Let $\\phi:H^i(E^\\bullet)\\to H^i(K)$ be the induced $R$-linear isomorphism. For any $x\\in H^i(K)$, express $\\phi^{-1}(x)$ as a linear combination of the cycle classes; applying $\\phi$ expresses $x$ in their images. This proves finite generation in every degree.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066E proof, finite cohomology of finite-free complexes"
+   }
+  },
+  {
+   "text": "Conversely assume the stated upper cohomology bound and finite generation of every $H^i(K)$. For each integer $i$, apply [lem-weil-pbc-finite-free-resolution-noetherian] with $M=H^i(K)$. Put its term $R^{\\oplus n_j}$ in cochain degree $-j$, and put zero terms in positive degrees. Use $d_j$ as the differential from degree $-j$ to $-j+1$ for $j\\ge1$ and zero as the degree-zero differential. Exactness gives $d_jd_{j+1}=0$ and $\\varepsilon d_1=0$, so the augmentation, with component $\\varepsilon$ in degree zero and zero elsewhere, is a cochain map to $H^i(K)[0]$. Its degree-zero cohomology map is the isomorphism $R^{\\oplus n_0}/\\operatorname{im}d_1\\cong H^i(K)$ induced by the surjective $\\varepsilon$ with kernel $\\operatorname{im}d_1$; exactness gives zero negative cohomology, and the zero positive terms give zero positive cohomology. The augmentation is therefore a quasi-isomorphism. Its terms are finite free and it is bounded above by zero, so [def-pc-ring-pseudo-coherent-complex] says that $H^i(K)[0]$ is pseudo-coherent.",
+   "uses": [
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066E proof, first paragraph; Algebra Tag 00LP (2)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-pseudocoherent-cohomology-implies-pseudocoherent] to $K$. The same integer $b$ gives its bounded-above hypothesis, and Step 3 gives its pseudo-coherent cohomology hypothesis for every integer $i$. Hence $K$ is pseudo-coherent, proving the converse. No lower cohomology bound or Tor-dimension assumption is used. This is the pseudo-coherent clause of Tag 066B used in the proof of Tag 066E.",
+   "uses": [
+    "lem-weil-pbc-pseudocoherent-cohomology-implies-pseudocoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066E (2), converse via Tag 066B"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-weil-pbc-pseudocoherent-cohomology-implies-pseudocoherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066E, lemma-Noetherian-pseudo-coherent, clause (2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,15 +118,66 @@
    "results": "0 hits; top: ; service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above derived complex whose cohomology modules are pseudo coherent is pseudo coherent",
+   "results": "8 hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CochainComplex.IsKInjective, DerivedCategory.isLE_iff, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isGE_iff, CochainComplex.IsKProjective, DerivedCategory.isLE_Q_obj_iff",
+   "date": "2026-10-14",
+   "verdict": "no match: support and unrestricted projective resolutions do not imply finite-free approximations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded above cohomology and finite free resolutions of each cohomology module imply a bounded above finite free model of a complex",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, CochainComplex.IsKProjective, CochainComplex.isKProjective_of_projective, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt, CategoryTheory.ProjectiveResolution.instIsStrictlyLECochainComplexOfNatInt, CochainComplex.IsKInjective",
+   "date": "2026-10-14",
+   "verdict": "no match: support and unrestricted projective resolutions do not imply finite-free approximations"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"pseudo\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: support and unrestricted projective resolutions do not imply finite-free approximations"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|PseudoCoherent",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: support and unrestricted projective resolutions do not imply finite-free approximations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded above derived complex whose cohomology modules are pseudo coherent is pseudo coherent",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-pseudocoherent-normalized-algebra-tower",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "worker": "stage1",
+  "summary": "Checked Tag 066E (2): forward by cycles as Noetherian submodules and explicit finite-quotient generators; reverse by the existing finite-free module resolution and the general bounded-above pseudo-coherent-cohomology lemma (one new statement-only node, Tag 066B). The statement is unchanged.",
+  "blueprint": "Realizes the Noetherian pseudo-coherence criterion in proof (c), TOW of thm-weil-pbc-amplification-proper: finite cohomology yields finite-free local models without assuming cohomology free.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-3d9a70010",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-3d9a70010 (reviewer sub-agent of L); spot-checked: Read the item and new node in full; verified all four proof steps against Stacks 066E, 066B, 00IK and 00LP and the cited definitions. Checked edge cases, duplicates, dependency cycles, unit route, and downstream master coefficient categories and base-change orientation. No repairs needed; detailed findings written to review.md."
+ }
 }
