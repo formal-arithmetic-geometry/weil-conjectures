@@ -17,7 +17,7 @@
  ],
  "proof": [
   {
-   "text": "For each affine V in Spec R its image U=i(V) is affine and contained in W. Use affine section base change for F on U≤W to identify F(U) with O_X(U) tensor_R F(W). The ring isomorphism i.appIso identifies O_X(U) with O_SpecR(V). The base-change map has the formula r tensor m ↦ r times m restricted to U.",
+   "text": "For each affine V in Spec R, use IsAffineOpen.image_of_isOpenImmersion to see that U=i(V) is affine, and fromSpec_image_le to see U lies in W. Apply quasiCoherent_affine_section_baseChange to F on U≤W and swap tensor factors. Its bijectivity and O(U)-linearity produce the O(U)-linear equivalence O(U) tensor_R F(W) ≃ F(U), sending r tensor m to r times restriction(m).",
    "uses": [
     "lem-weil-pbc-affine-open-spec-points",
     "lem-weil-pbc-quasi-coherent-affine-section-base-change"
@@ -29,7 +29,7 @@
    }
   },
   {
-   "text": "Extend this module identification by the symmetric-algebra universal property and use symmetric algebra base change. Obtain a bijection lambda_V: O_X(U) tensor_R A → Sym_O_X(U)(F(U)), r tensor a ↦ r times restriction(a). For the quasi-coherent tilde(A), affine section base change, with its global section unit isoTop and the affine chart ring isomorphism, gives a bijection beta_V: O_X(U) tensor_R A → T(V), r tensor a ↦ r times toOpen(A,V)(a). Set gamma_V=beta_V composed with lambda_V inverse.",
+   "text": "Extend the module equivalence by symmetric-algebra lifts in both directions (the private symmetricCongr construction). Compose it with baseChange_bijective to obtain the O(U)-linear equivalence ell: O(U) tensor_R A ≃ Sym_O(U)(F(U)). Symmetric algebra induction proves ell(r tensor a)=r times restriction(a). For T=tilde(A), apply quasiCoherent_affine_section_baseChange on V≤top. Use isoTop and equivOfCompatibleSMul to replace the tensor base Γ(Spec R,top) by R; the latter replacement is valid because ΓSpecIso is an isomorphism. This gives beta: O(V) tensor_R A ≃ T(V), with beta(r tensor a)=r times toOpen(A,V)(a). The chart appIso is R-linear by ΓSpecIso_inv_map_appIso_inv. Tensor it with the identity of A and set g_V=beta composed with this tensor equivalence and ell inverse. Its pure tensor formula is the required scalar/restriction formula.",
    "uses": [
     "lem-weil-pbc-symmetric-algebra-base-change",
     "lem-weil-pbc-quasi-coherent-affine-section-base-change",
@@ -43,7 +43,7 @@
    }
   },
   {
-   "text": "For an inclusion Vprime≤V of affine opens, let rho be restriction of the section ring. The tensor restriction sends r tensor a to rho(r) tensor a. Its composites with lambda_Vprime and beta_Vprime respectively equal restriction after lambda_V and beta_V: check the formulas on pure tensors, then use additive tensor induction. Cancelling lambda_V proves naturality of gamma. For the unit factorization, affineComparison_toOpen identifies alpha_V(beta_V(1 tensor a)) with theta_U(restriction(a)). O_X(U)-linearity gives equality on r tensor a; additive tensor induction then proves alpha_V beta_V=theta_U lambda_V. Compose with lambda_V inverse. Each gamma_V is bijective as a composite of bijections.",
+   "text": "Surjectivity of ell and additive tensor induction show that every sectionwise symmetric-algebra section on U is generated additively by r times restriction(a), with a in A. Choose the proved equivalences g_V and use their additive homomorphisms as the components of gamma. Naturality is proved by this section induction: zero and addition follow from additivity, while a scalar/restriction generator follows from restriction_smul, restriction composition, the g_V formula, tilde.toOpen_res and appIso_hom_naturality. Each component is bijective because g_V is an additive equivalence. The unit factorization is proved by the same section induction. On a generator use the g_V formula, linearity of affineComparison and sectionLinearMap, affineComparison_toOpen, the explicit inverse of sectionsTopRestrictFromSpecEquiv, and naturality of toSheafify. The two section restrictions compose to W→i(V), giving exactly the sectionMap formula. This proves the complete unchanged statement, with no new sorry.",
    "uses": [
     "def-weil-pbc-symmetric-algebra-affine-comparison-map",
     "lem-weil-pbc-symmetric-algebra-sheaf-construction",
@@ -68,7 +68,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes Lemma 01I8, Algebra Lemma 0C6F; section-level part of the parent affine comparison plan"
+  "place": "Schemes Lemma 01I8, Constructions Lemma 01LN and Algebra Lemma 0C6F; existing affine tensor proof plan implemented by V3, with explicit scalar transport and section induction"
  },
  "mathlib_searches": [
   {
@@ -150,11 +150,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J1",
+  "reviewer": "X-71413",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261014T083743-L-4167655",
+  "landing": "20261014T095139-L-867373",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged theorem with its node and dependencies, and the updated proof records with the Lean argument; delivery and sole direct importer compile cleanly, and all nine declarations use only permitted axioms."
  }
 }
