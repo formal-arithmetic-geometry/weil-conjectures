@@ -14049,3 +14049,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:41 L: merged deliver/H1/Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate (stage 3; reviewer PASS; first push; landing 20261014T004102-L-2834186 (interface); batch 20261014T004054; modules 2; new nodes 1)
 - 00:41 L: merged deliver/H4/Sheaf.CategoryTheory.DerivedModuleRankOneGenerator (stage 3; reviewer PASS; first push; landing 20261014T004103-L-2834432 (interface); batch 20261014T004054; modules 2; new nodes 1)
 - 00:41 L: merged deliver/J3/Sheaf.AlgebraicGeometry.AffineChartSectionRingPresentations (stage 3; reviewer PASS; first push; landing 20261014T004103-L-2834548 (interface); batch 20261014T004054; modules 3; new nodes 2)
+- 00:41 L: merged deliver/J3/Sheaf.AlgebraicGeometry.AffineIsomorphicSourceNormalizedModels (stage 3; reviewer PASS; first push; landing 20261014T004104-L-2834679 (proof); batch 20261014T004054; modules 1; new nodes 0)
