@@ -1,6 +1,6 @@
 # Work queue
 
-43 items; claim with `tools/claim.py next <group> [--stage N]`.
+42 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (43)
+## Stage 3: modules to prove (42)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -18,8 +18,7 @@
 | `Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex` | 28 | 1 | disputed |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.BaseChangeTargetTransitionHigherImage` | 11 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.UpperStarCoefficientSquare` | 11 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RawModuleAbelianHomSourceFormula` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula` | 19 | 1 | proof |
