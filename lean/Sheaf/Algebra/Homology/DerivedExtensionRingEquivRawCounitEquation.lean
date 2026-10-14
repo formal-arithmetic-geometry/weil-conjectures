@@ -6,6 +6,52 @@ universe u w w'
 open CategoryTheory
 open scoped TensorProduct ChangeOfRings
 namespace ModuleCat
+-- A sign change preserves invertibility, but it does not preserve a nonzero counit.
+private theorem sign_obstruction {C : Type*} [Category C] [Preadditive C]
+    {X Y Z : C} (a : X ≅ Y) (f : Y ⟶ Z) (g : X ⟶ Z) (hne : -g ≠ g) :
+    ¬ ∀ b : X ≅ Y, b.hom ≫ f = g := by
+  intro h
+  let b : X ≅ Y :=
+    { hom := -a.hom
+      inv := -a.inv
+      hom_inv_id := by simp
+      inv_hom_id := by simp }
+  have ha := h a
+  have hb := h b
+  change (-a.hom) ≫ f = g at hb
+  rw [Preadditive.neg_comp, ha] at hb
+  exact hne hb
+
+private theorem natural_iso_sign_obstruction {C D : Type*} [Category C] [Category D]
+    [Preadditive D] (F G : C ⥤ D) (a : F ≅ G) (K : C) {Z : D}
+    (f : G.obj K ⟶ Z) (g : F.obj K ⟶ Z) (hne : -g ≠ g) :
+    ¬ ∀ b : F ≅ G, b.hom.app K ≫ f = g := by
+  intro h
+  let b : F ≅ G :=
+    { hom := -a.hom
+      inv := -a.inv
+      hom_inv_id := by simp
+      inv_hom_id := by simp }
+  have ha := h a
+  have hb := h b
+  change (-a.hom.app K) ≫ f = g at hb
+  rw [Preadditive.neg_comp, ha] at hb
+  exact hne hb
+
+private theorem sign_obstruction_over_integers :
+    ¬ ∀ b : ModuleCat.of ℤ ℤ ≅ ModuleCat.of ℤ ℤ,
+      b.hom ≫ 𝟙 (ModuleCat.of ℤ ℤ) = 𝟙 (ModuleCat.of ℤ ℤ) := by
+  apply sign_obstruction (Iso.refl _) (𝟙 _) (𝟙 _)
+  intro h
+  have hh := congrArg (fun f : ModuleCat.of ℤ ℤ ⟶ ModuleCat.of ℤ ℤ ↦ f (1 : ℤ)) h
+  norm_num at hh
+
+-- STATEMENT-DISPUTED: `a` is arbitrary; composing it with minus identity preserves
+-- its isomorphism type and reverses the left side, with the right side unchanged.
+-- For identity ring equivalences over ℤ and K = ℤ[0], the canonical counit is
+-- invertible, and degree-zero cohomology distinguishes identity from minus identity.
+-- Only the canonical counit-compatible transport isomorphism satisfies this equation.
+
 /-- Counit compatibility for a chosen transported derived-functor isomorphism.
 Source: Stacks Project, Tag 06Y6.
 The proof is the naturality calculation for the transported counits; it is deferred.
