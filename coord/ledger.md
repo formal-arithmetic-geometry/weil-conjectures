@@ -14818,3 +14818,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 18:38 L: batch 20261014T103111 dependency take-out
 - 10:38 L: returned deliver/XReedb48d351b955d4/Sheaf.RingTheory.ColimitFlatRelationDescent (reviewer RETURN: (reviewer X-607e2, head 607e2c8ae) A3 — Forbidden signature changes in forced adaptations: FiniteIdealKernelDescent.lean)
+- 10:40 L: merged deliver/K4/Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup (stage 3; reviewer PASS; after a return; landing 20261014T104041-L-1453892 (interface); batch 20261014T104039; modules 1; new nodes 0; change records: coord/changes/picardScalarCech_externalCup_core-cover-repair.md)
