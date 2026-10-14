@@ -1,116 +1,114 @@
 {
-  "id": "lem-pc-scheme-uncurry-summand-naturality",
-  "kind": "statement",
-  "title": "Naturality of uncurrying on an arbitrary scheme tensor summand",
-  "statement": "For any scheme Y, module-sheaf cochain complexes P,F,V and f:Tot(F tensor V) to Hom(P,F), restrict schemeTensorHomUncurry of f followed by Hom(P,eta_F) through the p,q inner inclusion and n,r outer inclusion, where p+q=n and n+r=k. The result is the braiding of F^p tensor V^q and P^r followed by tensorHomEquiv.symm applied to the inner inclusion, f in degree n and the Hom projection in degrees n,r,k, followed by eta_F in degree k. V is arbitrary and no ordinary evaluation predicate is assumed.",
-  "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 08DJ (lemma-internal-hom), 08DM and 08DQ; ordinary evaluation localization proof step 2"
-  },
-  "stmt_deps": [
+ "id": "lem-pc-scheme-uncurry-summand-naturality",
+ "kind": "statement",
+ "title": "Naturality of uncurrying on an arbitrary scheme tensor summand",
+ "statement": "For any scheme Y, module-sheaf cochain complexes P,F,V and f:Tot(F tensor V) to Hom(P,F), restrict schemeTensorHomUncurry of f followed by Hom(P,eta_F) through the p,q inner inclusion and n,r outer inclusion, where p+q=n and n+r=k. The result is the braiding of F^p tensor V^q and P^r followed by tensorHomEquiv.symm applied to the inner inclusion, f in degree n and the Hom projection in degrees n,r,k, followed by eta_F in degree k. V is arbitrary and no ordinary evaluation predicate is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ (lemma-internal-hom), 08DM and 08DQ; ordinary evaluation localization proof step 2"
+ },
+ "stmt_deps": [
+  "lem-pc-tensor-hom-uncurry-differential",
+  "lem-sc-hom-complex-projections",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof": [
+  {
+   "text": "Use the outer component equation and its explicit projection formula. Apply projection naturality with identity on P and the resolution map on F, cancel the identity via functoriality, and use tensor-Hom naturality in the second tensor factor and target together with braiding naturality. Proved private abstract helpers keep the chosen Hom functor irreducible during this calculation; its projection formula is exposed once by reflexivity.",
+   "uses": [
     "lem-pc-tensor-hom-uncurry-differential",
-    "lem-sc-hom-complex-projections",
-    "lem-pc-sheaf-modules-tensor-closed"
-  ],
-  "proof": [
-    {
-      "text": "Restrict uncurrying to the outer summand. Projection naturality and tensorHomEquiv coefficient naturality move eta_F to the end. Source naturality carries the inner tensor inclusion through the uncurrying equivalence.",
-      "uses": [
-        "lem-pc-tensor-hom-uncurry-differential",
-        "lem-sc-hom-complex-projections",
-        "lem-pc-sheaf-modules-tensor-closed"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-pc-tensor-hom-uncurry-differential",
-    "lem-sc-hom-complex-projections",
-    "lem-pc-sheaf-modules-tensor-closed"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "group": "J2",
-    "date": "2026-10-14",
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 08DJ (lemma-internal-hom), 08DM and 08DQ; ordinary evaluation localization proof step 2",
-    "description": "Separate strictly part of the triple-component calculation: Naturality of uncurrying on an arbitrary scheme tensor summand"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Uncurrying evaluation after tensor inclusion and postcomposition naturality",
-      "results": "CategoryTheory.MonoidalClosed.uncurry_natural_right, CategoryTheory.MonoidalClosed.uncurry_natural_left, CategoryTheory.MonoidalClosed.uncurry_natural_left_assoc, CategoryTheory.MonoidalClosed.uncurry_natural_right_assoc, CategoryTheory.MonoidalClosed.uncurry_ihom_map, CategoryTheory.MonoidalClosed.uncurry_eq, CategoryTheory.CartesianClosed.uncurry_natural_right, CategoryTheory.CartesianClosed.uncurry_natural_left",
-      "verdict": "Naturality APIs found, but no concrete scheme component theorem.",
-      "date": "2026-10-14"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"uncurry_natural_left\"",
-      "results": "CategoryTheory.MonoidalClosed.uncurry_natural_left, CategoryTheory.MonoidalClosed.uncurry_natural_left_assoc",
-      "verdict": "Naturality APIs found, but no concrete scheme component theorem.",
-      "date": "2026-10-14"
-    },
-    {
-      "tool": "grep",
-      "query": "uncurry_natural_left|tensorHomEquiv_whiskerLeft_comp",
-      "results": "Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
-      "verdict": "Naturality APIs found, but no concrete scheme component theorem.",
-      "date": "2026-10-14"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Naturality of uncurrying and cancellation of tensor Hom evaluation on cochain tensor summands",
-      "results": "Service unavailable: Internal Server Error. No absence conclusion inferred. LeanFinder/Loogle and Mathlib source grep used independently.",
-      "available": false,
-      "date": "2026-10-14"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationTripleComponent",
-    "date": "2026-10-14",
-    "group": "J2"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-pc-scheme-ordinary-evaluation-triple-component",
-      "place": "Proof step 1"
-    }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.SchemeTensorHomUncurrySummandNaturality",
-    "file": "lean/Sheaf/AlgebraicGeometry/SchemeTensorHomUncurrySummandNaturality.lean",
-    "declaration": "AlgebraicGeometry.schemeTensorHomUncurry_summand_naturality",
-    "statement": "theorem schemeTensorHomUncurry_summand_naturality (Y : Scheme.{u})\n    (P F V : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (f : pullbackTensorTotal Y F V ⟶ homComplex (R := Y.sheaf) P F)\n    (p q r n k : ℤ) (hpq : p + q = n) (hnr : n + r = k) :\n    letI := SheafOfModules.isGrothendieckAbelian (moduleRings Y.toRingedSpace)\n    let eta := CochainComplex.toKInjectiveResolution.{u}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n    let π := Classical.choose (homComplex_projections_exists.{u, u, u, u} (R := Y.sheaf))\n    (HomologicalComplex.ιMapBifunctor F V (curriedTensor _) (.up ℤ) p q n hpq ▷ P.X r)\n      ≫ HomologicalComplex.ιMapBifunctor (pullbackTensorTotal Y F V) P\n        (curriedTensor _) (.up ℤ) n r k hnr ≫\n          (schemeTensorHomUncurry Y (pullbackTensorTotal Y F V) P F\n            (f ≫ ((homComplexFunctor (R := Y.sheaf)).obj (op P)).map (eta.app F))).f k =\n    (β_ (F.X p ⊗ V.X q) (P.X r)).hom ≫\n      (SheafOfModules.tensorHomEquiv (R := Y.sheaf) (P.X r) (F.X p ⊗ V.X q)\n        (F.X k)).symm\n        (HomologicalComplex.ιMapBifunctor F V (curriedTensor _) (.up ℤ) p q n hpq ≫\n          f.f n ≫ π P F n r k (by omega)) ≫ (eta.app F).f k",
-    "branch": "sheaf-dag",
-    "by": "J2",
-    "date": "2026-10-14"
-  },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "J2",
-    "result": "pass",
-    "landing": "20261014T052130-L-1876599",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "J2",
-    "result": "pass",
-    "landing": "20261014T052130-L-1876599",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-pc-tensor-hom-uncurry-differential",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M3",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ, 08DM and 08DQ; componentwise evaluation naturality",
+  "description": "Complete Lean proof using existing projection and tensor-Hom APIs, with local irreducibility and explicit equations to avoid expensive Hom construction reduction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Uncurrying evaluation after tensor inclusion and postcomposition naturality",
+   "results": "CategoryTheory.MonoidalClosed.uncurry_natural_right, CategoryTheory.MonoidalClosed.uncurry_natural_left, CategoryTheory.MonoidalClosed.uncurry_natural_left_assoc, CategoryTheory.MonoidalClosed.uncurry_natural_right_assoc, CategoryTheory.MonoidalClosed.uncurry_ihom_map, CategoryTheory.MonoidalClosed.uncurry_eq, CategoryTheory.CartesianClosed.uncurry_natural_right, CategoryTheory.CartesianClosed.uncurry_natural_left",
+   "verdict": "Naturality APIs found, but no concrete scheme component theorem.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"uncurry_natural_left\"",
+   "results": "CategoryTheory.MonoidalClosed.uncurry_natural_left, CategoryTheory.MonoidalClosed.uncurry_natural_left_assoc",
+   "verdict": "Naturality APIs found, but no concrete scheme component theorem.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "uncurry_natural_left|tensorHomEquiv_whiskerLeft_comp",
+   "results": "Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+   "verdict": "Naturality APIs found, but no concrete scheme component theorem.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of uncurrying and cancellation of tensor Hom evaluation on cochain tensor summands",
+   "results": "Service unavailable: Internal Server Error. No absence conclusion inferred. LeanFinder/Loogle and Mathlib source grep used independently.",
+   "available": false,
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationTripleComponent",
+  "date": "2026-10-14",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-scheme-ordinary-evaluation-triple-component",
+   "place": "Proof step 1"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeTensorHomUncurrySummandNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeTensorHomUncurrySummandNaturality.lean",
+  "declaration": "AlgebraicGeometry.schemeTensorHomUncurry_summand_naturality",
+  "statement": "theorem schemeTensorHomUncurry_summand_naturality (Y : Scheme.{u})\n    (P F V : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (f : pullbackTensorTotal Y F V ⟶ homComplex (R := Y.sheaf) P F)\n    (p q r n k : ℤ) (hpq : p + q = n) (hnr : n + r = k) :\n    letI := SheafOfModules.isGrothendieckAbelian (moduleRings Y.toRingedSpace)\n    let eta := CochainComplex.toKInjectiveResolution.{u}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n    let π := Classical.choose (homComplex_projections_exists.{u, u, u, u} (R := Y.sheaf))\n    (HomologicalComplex.ιMapBifunctor F V (curriedTensor _) (.up ℤ) p q n hpq ▷ P.X r)\n      ≫ HomologicalComplex.ιMapBifunctor (pullbackTensorTotal Y F V) P\n        (curriedTensor _) (.up ℤ) n r k hnr ≫\n          (schemeTensorHomUncurry Y (pullbackTensorTotal Y F V) P F\n            (f ≫ ((homComplexFunctor (R := Y.sheaf)).obj (op P)).map (eta.app F))).f k =\n    (β_ (F.X p ⊗ V.X q) (P.X r)).hom ≫\n      (SheafOfModules.tensorHomEquiv (R := Y.sheaf) (P.X r) (F.X p ⊗ V.X q)\n        (F.X k)).symm\n        (HomologicalComplex.ιMapBifunctor F V (curriedTensor _) (.up ℤ) p q n hpq ≫\n          f.f n ≫ π P F n r k (by omega)) ≫ (eta.app F).f k",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261014T052130-L-1876599",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-94748",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261014T075200-L-3630614",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature with its node and original source; proof and dependencies agree, delivery compiles cleanly (42.4 s), all four proved declarations use only permitted axioms, and unchanged direct importer Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationTripleComponent compiles against the delivery (19.1 s)."
+ }
 }
