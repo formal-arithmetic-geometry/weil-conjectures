@@ -63,6 +63,8 @@ theorem stalk_normalization_depth_two_section_flat_core
       rw [Limits.pullback.condition, Hom.stalkMap_comp, CommRingCat.hom_comp]
       exact (Flat.stalkMap t _).comp (Flat.stalkMap (Limits.pullback.snd p t) w)
     rw [Hom.stalkMap_comp, CommRingCat.hom_comp] at hcomp
+    -- The projection g is a base change of the flat test t.
+    -- Its stalk map is local, so its flatness is faithful flatness.
     have hg : (g.stalkMap w).hom.FaithfullyFlat := by
       algebraize [(g.stalkMap w).hom]
       have : Module.Flat _ _ := Flat.stalkMap g w
@@ -71,17 +73,15 @@ theorem stalk_normalization_depth_two_section_flat_core
         inferInstanceAs (IsLocalHom (g.stalkMap w).hom)
       exact Module.FaithfullyFlat.of_flat_of_isLocalHom
     have hp : (p.stalkMap (g w)).hom.Flat := by
-      let R := L.presheaf.stalk (p (g w))
-      let A := E.presheaf.stalk (g w)
-      let B := (pullback p t).presheaf.stalk w
-      let f : R →+* A := (p.stalkMap (g w)).hom
-      let g : A →+* B := (g.stalkMap w).hom
-      have hfg : (g.comp f).Flat := hcomp
-      have hg : g.FaithfullyFlat := hg
-      algebraize [f, g, g.comp f]
-      have : Module.Flat R B := hfg
-      have : Module.FaithfullyFlat A B := hg
-      exact Module.Flat.of_flat_of_faithfullyFlat (A := R) (B := A) (C := B)
+      algebraize [(p.stalkMap (g w)).hom, (g.stalkMap w).hom,
+        (g.stalkMap w).hom.comp (p.stalkMap (g w)).hom]
+      have : Module.Flat (L.presheaf.stalk (p (g w)))
+          ((pullback p t).presheaf.stalk w) := hcomp
+      have : Module.FaithfullyFlat (E.presheaf.stalk (g w))
+          ((pullback p t).presheaf.stalk w) := hg
+      exact Module.Flat.of_flat_of_faithfullyFlat
+        (A := L.presheaf.stalk (p (g w))) (B := E.presheaf.stalk (g w))
+        (C := (pullback p t).presheaf.stalk w)
     change g w = z at hw
     rw [hw] at hp
     exact hp
