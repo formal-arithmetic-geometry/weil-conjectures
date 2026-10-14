@@ -29,9 +29,117 @@
   "def-weil-pbc-direct-image",
   "def-weil-pbc-etale-constructible-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Reduce to affine opens of $Y$. For any affine open $U\\subset Y$, its inverse image $V=f^{-1}(U)$ is affine by finiteness [def-weil-finite-integral-morphism]. The restricted map $h:V\\to U$ is finite by the affine-open definition of finiteness. To check local finite presentation at $x\\in V$, choose an original finite-presentation chart $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ about $x$ and $f(x)$. Choose a principal open $D(t)$ about $f(x)$ contained in $U\\cap\\operatorname{Spec}A$. Its inverse image in this chart is $\\operatorname{Spec}B_t$, contained in $V$, and a presentation $B=A[z_1,\\ldots,z_n]/(r_1,\\ldots,r_m)$ localizes to $B_t=A_t[z_1,\\ldots,z_n]/(r_1,\\ldots,r_m)$. This supplies the required chart for $h$ at every $x$. Quasi-compactness and quasi-separatedness restrict over an open target: the inverse images of its affine opens, and of affine opens in the diagonal target, are the same as before. Thus $h$ is finitely presented. By [lem-weil-pbc-constructible-etale-module-sheaf-comparison] and [prop-constructible-pullback], $F|_V$ is constructible. Finite exchange identifies $(f_*F)|_U$ with $h_*(F|_V)$; alternatively their module sections are both $W\\mapsto F(W\\times_Y X)$ for $W\\to U$ etale. By [lem-weil-pbc-constructible-qcqs-affine-local], proving the assertion for every such affine pair proves the original assertion. Work henceforth with $X,Y$ affine.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "prop-constructible-pullback",
+    "lemma-weil-pbc-finite-exchange",
+    "lem-weil-pbc-constructible-qcqs-affine-local",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "095R first sentence; 095F (lemma-constructible-local); 095E"
+   }
+  },
+  {
+   "text": "By [pqf-lem-finite-qf], $f$ is quasi-finite. Apply [lem-weil-pbc-quasifinite-affine-etale-thickening-decomposition] to obtain a surjection $a:Y\\prime\\to Y$ with $Y\\prime$ affine, $X\\prime=X\\times_Y Y\\prime$, projection $b:X\\prime\\to X$, and a surjective closed immersion $i:Z\\hookrightarrow X\\prime$ such that $e=f\\prime\\circ i:Z\\to Y\\prime$ is finite etale. The base change $f\\prime:X\\prime\\to Y\\prime$ is finite, and $X\\prime$ is affine, by [lem-weil-pbc-finite-morphism-permanence]. Also $Z$ is affine, being closed in $X\\prime$; thus $X\\prime,Y\\prime,Z$ are qcqs. No flatness of $a$ is assumed or used.",
+   "uses": [
+    "pqf-lem-finite-qf",
+    "lem-weil-pbc-quasifinite-affine-etale-thickening-decomposition",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "095R base-change reduction; 095K (lemma-decompose-quasi-finite-morphism) (1)"
+   }
+  },
+  {
+   "text": "Put $F\\prime=b^{-1}F$. By [prop-constructible-pullback] and [lem-weil-pbc-constructible-etale-module-sheaf-comparison], $F\\prime$ and then $H=i^{-1}F\\prime$ are constructible module sheaves. These pullbacks have the same constant coefficient ring $\\Lambda$, by [def-weil-pbc-inverse-image]. All three schemes here are qcqs and $\\Lambda$ is finite, so the comparison applies without changing the coefficient category or the finiteness condition.",
+   "uses": [
+    "prop-constructible-pullback",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "095R thickening reduction; 095G pullback constructibility"
+   }
+  },
+  {
+   "text": "The thickening $i$ induces an equivalence of small etale sites by [sbc-lem-thickening-etale-site]. This equivalence also identifies the categories of sheaves of $\\Lambda$-modules: it carries the constant ring to the constant ring and preserves finite products. Explicitly a module object has zero $1\\to F$, addition $F\\times F\\to F$, and action $\\Lambda\\times F\\to F$ satisfying the module identities. Applying either functor of the equivalence to these maps, with its product and constant-ring identifications, gives these same identities on the image. The unit and counit commute with each of these maps by naturality, so they are module-linear. Its pullback and right adjoint direct image are quasi-inverses, hence the adjunction unit is an isomorphism $F\\prime\\simeq i_*H$. Consequently $f\\prime_*F\\prime\\simeq e_*H$. For clarity, the latter composition identification is the module-linear sectionwise identification $H((W\\times_{Y\\prime}X\\prime)\\times_{X\\prime}Z)=H(W\\times_{Y\\prime}Z)$, natural in $W$, using the direct-image formula. This is a topos equivalence argument, not a claim that constructibility alone implies $F\\prime=i_*i^{-1}F\\prime$.",
+   "uses": [
+    "sbc-lem-thickening-etale-site",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "095R parenthesis: thickening induces an equivalence of etale topoi; 03SI (theorem-topological-invariance)"
+   }
+  },
+  {
+   "text": "Since $e$ is finite etale and $H$ is constructible, [lem-weil-pbc-finite-etale-pushforward-constructible] gives constructibility of $e_*H$. The isomorphism in Step 4 therefore makes $f\\prime_*F\\prime$ constructible. Isomorphism invariance is [lemma-constructible-iso-invariance], applied through [lem-weil-pbc-constructible-etale-module-sheaf-comparison] to the module category; all schemes used here are qcqs.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-pushforward-constructible",
+    "lemma-constructible-iso-invariance",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "095R last sentence; 095H (lemma-pushforward-constructible)"
+   }
+  },
+  {
+   "text": "Finite exchange [lemma-weil-pbc-finite-exchange] in the cartesian square for $a$ identifies $a^{-1}(f_*F)$ with $f\\prime_*b^{-1}F=f\\prime_*F\\prime$. Thus $a^{-1}(f_*F)$ is constructible, by [lemma-constructible-iso-invariance] for $\\mathrm{ModuleCat}(\\Lambda)$-valued sheaves, and the two directions of [lem-weil-pbc-constructible-etale-module-sheaf-comparison]. Apply [lem-weil-pbc-constructible-module-surjective-descent] to $a:Y\\prime\\to Y$: it is surjective and both schemes are affine, hence qcqs. This proves constructibility of $f_*F$ in the affine case, and Step 1 proves it on the original qcqs $Y$.",
+   "uses": [
+    "lemma-weil-pbc-finite-exchange",
+    "lemma-constructible-iso-invariance",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-weil-pbc-constructible-module-surjective-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "095R surjective base-change reduction; 0959 (lemma-finite-pushforward-commutes-with-base-change); 095Q (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "prop-constructible-pullback",
+  "lemma-weil-pbc-finite-exchange",
+  "lem-weil-pbc-constructible-qcqs-affine-local",
+  "def-weil-pbc-direct-image",
+  "pqf-lem-finite-qf",
+  "lem-weil-pbc-quasifinite-affine-etale-thickening-decomposition",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-inverse-image",
+  "sbc-lem-thickening-etale-site",
+  "lem-weil-pbc-finite-etale-pushforward-constructible",
+  "lemma-constructible-iso-invariance",
+  "lem-weil-pbc-constructible-module-surjective-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095R, label lemma-finite-pushforward-constructible, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,15 +182,79 @@
    "results": "Actual hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, PrimeSpectrum.isConstructible_comap_image, PrimeSpectrum.isConstructible_range_comap, PrimeSpectrum.exists_range_eq_of_isConstructible, Topology.IsConstructible.image_of_isOpenEmbedding, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, Topology.isConstructible_preimage_iff_of_isOpenEmbedding. Read returned signatures: ring quasi-finiteness and constructible subsets do not state the finite-fp factorization or constructibility of etale module sheaves.",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite finitely presented morphism pushforward preserves constructible etale sheaves of modules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.isConstructible_comap_image\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.FinitePresentation →\\n    ∀ {s : Set (PrimeSpectrum S)}, Topology.IsConstructible s → Topology.IsConstructible (PrimeSpectrum.comap f '' s)\", \"doc\": \"If $ f: R \\\\to S $ is a finitely presented ring homomorphism and $ s \\\\subseteq \\\\operatorname{Spec}(S) $ is a constructible set in the Zariski topology, then the image of $ s $ under the induced map $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] {s : Set ↥X},\\n  Topology.IsLocallyConstructible s →\\n    Topology.IsLocallyConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and locally of finite presentation morphism of schemes. If $s$ is a locally constructible subset of $X$, then its image $f(s)$ is a locally constructible subset of \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"PrimeSpectrum.isConstructible_range_comap\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.FinitePresentation → Topology.IsConstructible (Set.range (PrimeSpectrum.comap f))\", \"doc\": \"If $ f : R \\\\to S $ is a ring homomorphism of finite presentation between commutative semirings, then the image of the induced map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $, defined by taki\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image of finite locally constant modules on constructible strata under a finite scheme morphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] {s : Set ↥X},\\n  Topology.IsLocallyConstructible s →\\n    Topology.IsLocallyConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and locally of finite presentation morphism of schemes. If $s$ is a locally constructible subset of $X$, then its image $f(s)$ is a locally constructible subset of \"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}\n  {\"name\": \"PrimeSpectrum.isConstructible_comap_image\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.FinitePresentation →\\n    ∀ {s : Set (PrimeSpectrum S)}, Topology.IsConstructible s → Topology.IsConstructible (PrimeSpectrum.comap f '' s)\", \"doc\": \"If $ f: R \\\\to S $ is a finitely presented ring homomorphism and $ s \\\\subseteq \\\\operatorname{Spec}(S) $ is a constructible set in the Zariski topology, then the image of $ s $ under the induced map $ \\\\\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ {P : TopCat → Prop} (R : Type (max u w)) [inst : Ring R] [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_2 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n      CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCateg\", \"doc\": \"For a ring $ R $ and a compact Hausdorff-like predicate $ P $ with explicit finite coproducts and pullbacks, and where effective epimorphisms are surjective on underlying sets, the underlying presheaf\"}\n  {\"name\": \"PrimeSpectrum.isConstructible_range_comap\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.FinitePresentation → Topology.IsConstructible (Set.range (PrimeSpectrum.comap f))\", \"doc\": \"If $ f : R \\\\to S $ is a ring homomorphism of finite presentation between commutative semirings, then the image of the induced map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $, defined by taki\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {s : Set ↥Y},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' s)\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes and any constructible subset $ s \\\\subseteq Y $, the preimage $ f^{-1}(s) $ is a constructible subset of $ X $.\"}\n  {\"name\": \"Condensed.finFree\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor FintypeCat (CondensedMod R)\", \"doc\": \"The functor from the category of finite types to the category of condensed $ R $-modules, constructed by composing the embedding of finite types into profinite spaces (via indiscrete topology), the in\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"sheaf\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*sheaf|sheaf.*constructible",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite pushforward preserves constructible etale module sheaves",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-quasifinite-shriek-constructible",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-finite-fp-pushforward-constructible",
+  "worker": "stage1",
+  "summary": "Checked 095R and split its affine/surjective-base-change/thickening/finite-etale argument, introducing three statement-only inputs. Preserved the finite-ring qcqs statement and explicitly bridged module constructibility notions. The source typo saying surjective over X is read as over the target Y. No Lean attachment or Mathlib match was found.",
+  "blueprint": "Proof of thm-weil-pbc-direct-image-finiteness-proper, classical constructibility input; 0GL0 second paragraph uses quasi-finite shriek constructibility; 0GK3 separated case: finite finitely presented Zariski main factorization, followed by open extension and finite pushforward. Realizes the classical finite-pushforward constructibility input through 095R, not the pro-etale finiteness conclusion.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-finite-qf",
+    "why": "Generic finite-implies-quasi-finite tool needed for 095K; the unit has no alternative statement of it."
+   },
+   {
+    "node": "sbc-lem-thickening-etale-site",
+    "why": "Generic equivalence of small etale sites for a thickening, used exactly in the 095R parenthesis; does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-finite-qf",
+  "sbc-lem-thickening-etale-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-21795b50e",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-21795b50e (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, cited statements, sources, and unit/chapter route in full. Verified the six-step argument against Stacks 095R/095K/095Q/095H, module coefficients, base-change orientation, edge cases, and duplicate/cycle candidates. Accepted both declared tool uses. Repaired missing administrative metadata in three whole-file JSONs under fixes/dag/nodes/sec-proper-base-change; mathematics unchanged. Detailed checks are in review.md.; 3 file(s) fixed by the reviewer"
+ }
 }

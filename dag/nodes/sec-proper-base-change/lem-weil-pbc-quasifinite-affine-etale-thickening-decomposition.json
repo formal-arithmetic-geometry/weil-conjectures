@@ -1,0 +1,100 @@
+{
+ "id": "lem-weil-pbc-quasifinite-affine-etale-thickening-decomposition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Proof of thm-weil-pbc-direct-image-finiteness-proper, classical constructibility input; 0GL0 second paragraph uses quasi-finite shriek constructibility; 0GK3 separated case: finite finitely presented Zariski main factorization, followed by open extension and finite pushforward.; 095R reduction to a finite etale morphism using 095K (1)",
+   "via": [
+    "lem-weil-pbc-finite-fp-pushforward-constructible",
+    "lem-weil-pbc-etale-quasifinite-shriek-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Quasi-finite affine decomposition after a surjective base change",
+ "statement": "Let $h:V\\to U$ be a quasi-finite morphism [pqf-def-quasifinite] of affine schemes [def-pc-scheme] of finite presentation (locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]). There exist an affine scheme $U\\prime$, a surjective morphism $a:U\\prime\\to U$ [def-weil-surjective-morphism], and a closed immersion $i:Z\\hookrightarrow V\\prime=V\\times_U U\\prime$ [def-weil-closed-immersion, def-pc-fibre-product] which is surjective on underlying points (a thickening [def-sbc-first-order-thickening]), such that the composite $Z\\xrightarrow{i}V\\prime\\to U\\prime$ is finite etale [def-weil-pbc-finite-etale-category].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095K, label lemma-decompose-quasi-finite-morphism, part (1)"
+ },
+ "stmt_deps": [
+  "pqf-def-quasifinite",
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-surjective-morphism",
+  "def-sbc-first-order-thickening",
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi finite finitely presented affine scheme morphism becomes finite etale after surjective affine base change and removing nilpotents",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFinitePresentation f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n \", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is locally of finite presentation if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ contained in $ f^{-1\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation quasi finite algebras split into etale algebras modulo nil ideals after surjective base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"RingHom.Etale.toAlgebra\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S}, f.Etale → Algebra.Etale R S\", \"doc\": \"If $ f : R \\\\to S $ is an étale ring homomorphism between commutative rings, then the induced algebra structure on $ S $ over $ R $ is étale, meaning $ S $ is finitely presented as an $ R $-algebra and\"}\n  {\"name\": \"StandardEtalePair.instEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.Etale R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is an étale $ R $-algebra. This instance establishes that the standard étale ring extension, constru\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.Etale",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt\", \"module\": \"Mathlib.AlgebraicGeometry.ZariskisMainTheorem\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType f] [AlgebraicGeometry.IsSeparated f] {x : ↥X} {s : ↥S} (h : f x = s) (hx : AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt f x) : ∃ U g, AlgebraicGeometry.Etale g ∧ s ∈ Set.range ⇑g ∧ ∃ V W v, IsCompl V W ∧ AlgebraicGeom\", \"doc\": \"\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "decompose.*[Qq]uasi[Ff]inite|thicken.*[Ee]tale|[Ee]tale.*thicken",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjective base change makes a quasi finite finitely presented affine scheme morphism finite etale after a thickening",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi finite algebra of finite presentation admits a reduced etale model after a surjective change of base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"RingHom.Etale.toAlgebra\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S}, f.Etale → Algebra.Etale R S\", \"doc\": \"If $ f : R \\\\to S $ is an étale ring homomorphism between commutative rings, then the induced algebra structure on $ S $ over $ R $ is étale, meaning $ S $ is finitely presented as an $ R $-algebra and\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"StandardEtalePair.instEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.Etale R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is an étale $ R $-algebra. This instance establishes that the standard étale ring extension, constru\"}\n  {\"name\": \"Algebra.IsStandardEtale.of_surjective\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ (R : Type u_4) (S : Type u_5) (T : Type u_6) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [Algebra.IsStandardEtale R S] [Algebra.Etale R T] (f : S →ₐ[R] T),\\n  Function.Surjective ⇑f → Algebra.IsStandardEtale R T\", \"doc\": \"If $ S $ is a standard étale $ R $-algebra, $ T $ is an étale $ R $-algebra, and there exists a surjective $ R $-algebra homomorphism $ f : S \\to T $, then $ T $ is also a standard étale $ R $-algebra.\"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-finite-fp-pushforward-constructible",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
