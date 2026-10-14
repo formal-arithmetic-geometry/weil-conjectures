@@ -24,9 +24,91 @@
   "def-weil-abstract-derived-category",
   "def-pc-ring-pseudo-coherent-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a cochain complex $C^\\bullet$ representing $K$ using [def-weil-abstract-derived-category]. Write $T_q=\\tau_{\\leq q}C^\\bullet$, with terms $C^i$ for $i<q$, $\\ker d_C^q$ for $i=q$, and zero for $i>q$, as in [lem-weil-pbc-truncation-triangle]. Directly from $H^i=\\ker d^i/\\operatorname{im}d^{i-1}$, the inclusion $T_q\\to C^\\bullet$ induces the identity on cohomology for $i<q$ and the identification $\\ker d_C^q/\\operatorname{im}d_C^{q-1}=H^q(C^\\bullet)$ in degree $q$; above $q$ the cohomology of $T_q$ is zero. Thus $H^i(T_q)=H^i(K)$ for $i\\leq q$ and $H^i(T_q)=0$ for $i>q$. If $q\\geq b$, the inclusion is a quasi-isomorphism and hence gives $Q(T_q)\\cong K$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-truncation-triangle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Section 0118, section-truncations, canonical truncations and their cohomology"
+   }
+  },
+  {
+   "text": "Fix an arbitrary integer $m$. For every integer $q$, the hypothesis says that $H^q(K)[0]$ is pseudo-coherent. Apply [lem-pc-ring-pseudo-coherent-iff-all-m] to this degree-zero complex: it is $(m-q)$-pseudo-coherent. Repeatedly apply [lem-pc-ring-m-pseudo-coherent-shift] in the forward or reverse direction (a finite number of times, according to the sign of $q$). Its formula $X[1]\\text{ is }a\\text{-pseudo-coherent}\\iff X\\text{ is }(a+1)\\text{-pseudo-coherent}$ gives $X[-q]\\text{ is }m\\text{-pseudo-coherent}\\iff X\\text{ is }(m-q)\\text{-pseudo-coherent}$. Therefore $H^q(K)[-q]$ is $m$-pseudo-coherent. In particular this supplies the third vertex for every truncation triangle below.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "lem-pc-ring-m-pseudo-coherent-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066B, lemma-cohomology-pseudo-coherent, shifted cohomology hypothesis; Tag 064U and the shift calculation in Tag 064R"
+   }
+  },
+  {
+   "text": "Put $B=\\max(b,m-1)$. We prove that $Q(T_q)$ is $m$-pseudo-coherent for the finite sequence of integers $q=m-1,m,\\ldots,B$. For the base $q=m-1$, Step 1 gives $H^i(T_{m-1})=0$ for every $i\\geq m$. Apply [lem-pc-ring-m-pseudo-coherent-vanishing-base] with this same integer $m$. Equivalently, the zero bounded finite-free complex maps to $T_{m-1}$, inducing isomorphisms above $m$ and a surjection onto its zero degree-$m$ cohomology.",
+   "uses": [
+    "lem-pc-ring-m-pseudo-coherent-vanishing-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066B, lemma-cohomology-pseudo-coherent, induction base via Tag 064W (1)"
+   }
+  },
+  {
+   "text": "For the induction step let $m\\leq q\\leq B$ and assume $Q(T_{q-1})$ is $m$-pseudo-coherent. Apply [lem-weil-pbc-truncation-triangle] to $C^\\bullet$ at $q$: it gives the distinguished triangle $Q(T_{q-1})\\to Q(T_q)\\to H^q(C^\\bullet)[-q]\\to Q(T_{q-1})[1]$. The first vertex is $m$-pseudo-coherent by induction, and the third is $m$-pseudo-coherent by Step 2 and $H^q(C^\\bullet)\\cong H^q(K)$. Apply the second clause of [lem-pc-ring-pseudo-coherent-distinguished-triangle], with $A=Q(T_{q-1})$, $B=Q(T_q)$ and $C=H^q(C^\\bullet)[-q]$, to conclude that the middle vertex is $m$-pseudo-coherent. This establishes the induction, including cohomology gaps, without requiring a largest nonzero degree.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "lem-pc-ring-pseudo-coherent-distinguished-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066B, lemma-cohomology-pseudo-coherent, induction step via Tag 064R (2); truncation triangle from Derived Categories Tag 08J5"
+   }
+  },
+  {
+   "text": "At the endpoint $B\\geq b$, Step 1 gives an isomorphism $Q(T_B)\\cong K$. Compose the bounded finite-free approximation witnessing $m$-pseudo-coherence of $Q(T_B)$ with that isomorphism. Cohomology functors send the isomorphism to isomorphisms, so the composite is still an isomorphism on cohomology above $m$ and a surjection at $m$, precisely [def-pc-ring-m-pseudo-coherent]. Thus $K$ is $m$-pseudo-coherent. This argument also covers $b<m$, when $B=m-1$ and the induction has no steps.",
+   "uses": [
+    "def-pc-ring-m-pseudo-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066B, lemma-cohomology-pseudo-coherent, conclusion of the fixed-m induction"
+   }
+  },
+  {
+   "text": "Since $m$ was arbitrary, the representative $C^\\bullet$ is $m$-pseudo-coherent for every integer $m$. Apply the converse of [lem-pc-ring-pseudo-coherent-iff-all-m] to obtain a bounded-above finite-free representative of $K$, which is exactly pseudo-coherence. Each fixed-$m$ argument used only finitely many truncation triangles; no lower cohomology bound, Noetherian hypothesis or finite Tor-dimension hypothesis was used.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-iff-all-m"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066B, lemma-cohomology-pseudo-coherent, final pseudo-coherent clause via Tag 064U"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-pc-ring-pseudo-coherent-iff-all-m",
+  "lem-pc-ring-m-pseudo-coherent-shift",
+  "lem-pc-ring-m-pseudo-coherent-vanishing-base",
+  "lem-pc-ring-pseudo-coherent-distinguished-triangle",
+  "def-pc-ring-m-pseudo-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066B, lemma-cohomology-pseudo-coherent, pseudo-coherent clause; finite truncation induction using Tags 064U, 064R, 064W and Derived Categories Tag 08J5"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,15 +144,96 @@
    "results": "0 hits: ; service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded above derived complex with pseudo coherent cohomology modules is pseudo coherent",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free approximations in every degree imply a complex admits a bounded above finite free resolution",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.HasProjectiveDimensionLT, CategoryTheory.HasProjectiveDimensionLE, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, CategoryTheory.ProjectiveResolution.instHasProjectiveResolution, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions, CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits provide support or unrestricted projective resolutions, not finite-free pseudo-coherent approximations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above derived complex with pseudo coherent cohomology modules is pseudo coherent",
+   "results": "8 hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, CochainComplex.IsKInjective, DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, CochainComplex.IsKProjective",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits provide support or unrestricted projective resolutions, not finite-free pseudo-coherent approximations"
+  },
+  {
+   "tool": "grep",
+   "query": "PseudoCoherent|pseudoCoherent|pseudo_coherent|pseudo-coherent",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: truncation support and fraction results do not assert finite-free approximation closure; pseudo keyword hits are compiler or pseudofunctor declarations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension closure of complexes admitting finite free approximations and Postnikov truncations",
+   "results": "8 hits: HomologicalComplex.stupidTrunc, HomologicalComplex.instIsStrictlySupportedStupidTrunc_1, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-14",
+   "verdict": "no match: truncation support and fraction results do not assert finite-free approximation closure; pseudo keyword hits are compiler or pseudofunctor declarations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudo\"",
+   "results": "12 hits: Lean.Compiler.LCNF.Simp.ConstantFold.mkPseudoArrayLiteral, Lean.Compiler.LCNF.Simp.ConstantFold.getPseudoListLiteral, CategoryTheory.LaxFunctor.PseudoCore, CategoryTheory.LaxFunctor.PseudoCore.mapIdIso, CategoryTheory.LaxFunctor.PseudoCore.mapCompIso, CategoryTheory.LaxFunctor.PseudoCore.mapIdIso_inv, CategoryTheory.LaxFunctor.PseudoCore.mapCompIso_inv, CategoryTheory.LaxFunctor.PseudoCore.mk",
+   "date": "2026-10-14",
+   "verdict": "no match: truncation support and fraction results do not assert finite-free approximation closure; pseudo keyword hits are compiler or pseudofunctor declarations"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-pseudocoherent-cohomology-implies-pseudocoherent",
+  "worker": "stage1",
+  "summary": "Kept the statement of Tag 066B unchanged and wrote its fixed-cutoff finite truncation induction, including the zero complex, cohomology gaps and an arbitrary lower tail. Reused all-m equivalence, shift compatibility, vanishing base, triangle closure and the canonical truncation triangle; no new nodes. No project Lean declaration states the item exactly.",
+  "blueprint": "Realizes thm-weil-pbc-amplification-proper proof (c), TOW, the inherited local-model pseudo-coherent-cohomology input via the normalized algebra tower and Noetherian criterion.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "why": "Generic ring-complex finite-free approximation criterion used in both directions; this unit has no all-cutoff equivalence."
+   },
+   {
+    "node": "lem-pc-ring-m-pseudo-coherent-shift",
+    "why": "Generic change of finite-free approximation cutoff under shift; this unit has no ring m-pseudo-coherence shift statement."
+   },
+   {
+    "node": "lem-pc-ring-m-pseudo-coherent-vanishing-base",
+    "why": "Generic ring-complex zero-cohomology base case; this unit has no m-pseudo-coherent base statement."
+   },
+   {
+    "node": "lem-pc-ring-pseudo-coherent-distinguished-triangle",
+    "why": "Generic extension closure for ring m-pseudo-coherence, clause (2); this unit has no such finite-free triangle lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-ring-pseudo-coherent-iff-all-m",
+  "lem-pc-ring-m-pseudo-coherent-shift",
+  "lem-pc-ring-m-pseudo-coherent-vanishing-base",
+  "lem-pc-ring-pseudo-coherent-distinguished-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-9a7979e2f",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-9a7979e2f (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full; checked cited statements against Stacks 066B, 064U, 064R, 064W, 08J5 and 0118. Shift signs, triangle vertices, cutoff endpoints, edge cases, dependencies and unit route are correct. Verified proper-target morphisms and coefficient categories against master source; comparison obligations remain separate. Accepted four declared generic tool uses. No repairs or new nodes needed; detailed checks are in review.md."
+ }
 }
