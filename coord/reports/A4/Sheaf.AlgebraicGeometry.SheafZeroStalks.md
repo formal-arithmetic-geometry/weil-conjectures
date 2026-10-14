@@ -1,80 +1,69 @@
 ## What changed
 
-Proved `AlgebraicGeometry.Scheme.Modules.isZero_of_isZero_stalks` in
-`Sheaf.AlgebraicGeometry.SheafZeroStalks` without changing its signature or visibility.
-The underlying abelian-group stalk has the same carrier as the module stalk; convert
-zero objects to subsingleton carriers, apply Mathlib's zero-stalk criterion to the
-underlying abelian-group sheaf, and reflect the identity-equals-zero equation through
-`SheafOfModules.toSheaf`, which is faithful and additive.
-Added private imports `Mathlib.Topology.Sheaves.Abelian` and
-`Mathlib.Algebra.Category.Grp.Zero`. Updated the existing node's proof, proof_deps,
-and proof_origin to this implementation. Its unit has no realized statement or proof
-step carried by this node, and no unit route is bypassed.
+Copied Sheaf.AlgebraicGeometry.SheafZeroStalks unchanged into the sandbox and
+verified the compatibility module. No declaration, signature, definition, import,
+or DAG record changed. The second reading preserved the latest repository
+verification comment and added an A4 verification comment. The assigned module
+already contains no declarations.
 
 ## Proved and sorry left
 
-Closed the sole original hole:
-`AlgebraicGeometry.Scheme.Modules.isZero_of_isZero_stalks`
-(node `pqf-lem-sheaf-zero-stalks`). No holes remain in the delivered module;
-no holes were added or split off. Single-file compilation passed without warnings.
-An independent scratch-copy `#print axioms` check returned exactly `propext`,
-`Classical.choice`, and `Quot.sound`, with no `sorryAx`.
+Closed: none (0 of 0 local holes). Added: none. Remaining local sorries: none.
+This verifies the prior duplicate-removal repair, not a new mathematical proof.
+The retired declaration was AlgebraicGeometry.Scheme.Modules.isZero_of_isZero_stalks.
+The node pqf-lem-sheaf-zero-stalks now records the canonical upstream declaration
+AlgebraicGeometry.Scheme.Modules.isZero_of_isZero_stalk in
+WeilConjectures.AlgebraicGeometry.Cohomology.FiniteFibre. Its source is absent from
+this snapshot, and its signature and proof are not certified by this verification.
 
 ## No longer needed
 
-Removed the private import `Sheaf.Topology.PresheafModuleStalkFunctor` and its
-proof dependency `def-weil-pbc-module-stalk`: the theorem needs the ringed-space
-stalk functor already used by its hypothesis, carried by
-`def-pc-module-stalk-functor` / `Sheaf.Algebra.Homology.ModuleStalkFunctor`.
-The presheaf-module stalk node remains a statement dependency in the original
-node record, and remains needed elsewhere; no claim of global unreachability is made.
-No other imports, nodes, or modules are pruned by this proof.
+No imports, nodes, or modules newly pruned. The earlier repair already removed
+the proof-only imports Mathlib.Topology.Sheaves.Abelian and
+Mathlib.Algebra.Category.Grp.Zero. The two existing public compatibility imports
+remain as recorded in coord/changes/remove-sheaf-zero-stalks-duplicate.md.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The earlier search correctly identified the fixed-category Mathlib theorem but did
-not complete the forgetful step. Faithful additive forgetting reflects zero by the
-identity criterion, so no additional module-sheaf conservativity theorem is needed.
-The original proof dependency pointed to the presheaf stalk functor although the
-statement uses the ringed-space stalk functor; the route now records the latter.
-The cited blueprint source file is absent from this machine's literature checkout;
-the original docstring and node contain its complete germ/separatedness argument,
-and the actual proof uses existing, proved Mathlib results only.
-
+The brief's assertion that this module still contains sorry is stale. The node
+now points to an upstream module, not the assigned compatibility module.
+The duplicate removal was already reviewed and landed as
+20261013T224521-L-1475959. There is no local proof plan left to implement and no
+reason to recreate the retired duplicate. The node explicitly records that the
+canonical upstream source is unavailable here; this delivery does not resolve
+that existing limitation. No new nodes or forced adaptations are needed.
 
 ## Second reading by A4
 
-1. Compared the only delivered Lean module with the repository using `diff` and
-   checked the existing theorem signature byte for byte: unchanged, including its
-   visibility, universe, hypotheses, and conclusion. No definitions, local
-   instances, options, or public imports changed. PASS.
-2. Independently compiled the module using `lcompile.py`: no errors or warnings.
-   Scanned for holes and prohibited declarations: none. Compiled a scratch copy
-   with `#print axioms AlgebraicGeometry.Scheme.Modules.isZero_of_isZero_stalks`:
-   exactly `propext`, `Classical.choice`, `Quot.sound`. The stalk-carrier conversion
-   is definitional; the final identity equation is reflected by Mathlib's faithful
-   additive `SheafOfModules.toSheaf`. No data is chosen from an unproved theorem.
-   PASS.
-3. There are no split-off statements or new declarations/modules/nodes to review.
-   The proof remains valid on an empty scheme (the stalk condition is vacuous and
-   Mathlib's sheaf criterion still applies), for the zero sheaf, and for a
-   one-point scheme. No coherence or finiteness assumption is introduced. PASS.
-4. Read Mathlib's stalk criterion, the forgetful functor and its faithful/additive
-   instances, and the ringed-space module-stalk construction. Searched the local
-   Lean library and Mathlib using zero/stalk and faithful zero-reflection terms;
-   no shorter applicable ringed-module criterion was found. This proof uses the
-   existing Mathlib criterion directly and adds no holes. Both new private
-   imports are needed (scratch removal checks); the two retained public imports
-   supply the statement's types. The old unused proof dependency
-   `def-weil-pbc-module-stalk` and its private module import are fully listed under
-   No longer needed. Read `dag/units/sk-prop-av-pqf-finite.json`: its realized
-   statement and step lists are empty, so this node carries no fixed unit step
-   bypassed by this proof. PASS.
-5. Compared the node JSON with the repository: only `proof`, `proof_deps`, and
-   `proof_origin` changed. Read the dependency nodes: the retained module-sheaf
-   category and the newly recorded ringed-space stalk functor match the Lean.
-   The proof's three steps match the carrier conversion, Mathlib criterion, and
-   faithful zero reflection; their uses have exactly the recorded union. PASS.
+1. Compared the entire delivered module with the repository using diff. There
+   are no declarations, signatures, definitions or visibility changes. The
+   sandbox lacked the latest C4 verification comment; restored that comment
+   from the repository, then added an A4 verification comment. No change
+   record is needed for this comment-only synchronization.
+2. Compiled the module through lcompile.py: exit code 0, no warnings (1.4 s).
+   Read the whole module and searched for declarations, sorry and prohibited
+   constructs: none. There are no local declarations to run #print axioms on;
+   the delivery tool also runs its per-file axiom probe. No data is chosen from
+   an unproved existence theorem.
+3. No statements were split off and no new modules or nodes were added. Small
+   case tests, docstring proofs and searches for duplicate split statements are
+   therefore inapplicable. The retired theorem is not reintroduced.
+4. Checked the previous duplicate-removal change record, upstream review #1428,
+   source references and the unit sk-prop-av-pqf-finite. There is no remaining
+   local proof to shorten. The two public imports are the existing compatibility
+   interface, explicitly preserved by the landed change record; no proof-only
+   imports remain. No old proof_deps were newly removed, and the unit's realized
+   fields and route are unchanged. This is verification with zero new proof
+   progress, not a proof of the unavailable upstream theorem.
+5. Read pqf-lem-sheaf-zero-stalks in full: its proof, empty proof_deps and
+   proof_origin describe the prior duplicate retirement. Its lean record points
+   to the upstream theorem, with statement null and an explicit source
+   availability limitation. Those records agree with the absence of a local
+   declaration; no claim is made that the upstream signature or axioms were
+   checked. No DAG changes are delivered.
 
-Second reading changed only this report: added independent verification and the
-axiom result. The Lean proof, imports, and node record needed no repair.
+The first dry run refused a report-only delivery because the item's module was
+unchanged. Added a factual A4 verification comment to satisfy that requirement;
+no declaration, import or DAG record changes. Changed only verification comments
+and this review report. Closed holes: none (0 of 0). Added holes: none. Split off: none.
+Newly pruned imports, nodes and modules: none.

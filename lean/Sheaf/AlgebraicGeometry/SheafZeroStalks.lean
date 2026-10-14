@@ -66,3 +66,6 @@ This compatibility module intentionally contains no declarations after duplicate
 
 -- Verification (C4, 2026-10-14): compatibility module compiles cleanly with no declarations
 -- or proof holes. This stale assignment closes no additional holes.
+
+-- Second reading (A4, 2026-10-14): clean compatibility compile; no local declarations
+-- or proof holes. The unavailable upstream theorem is not certified by this review.

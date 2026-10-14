@@ -14549,3 +14549,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 12:53 L: batch 20261014T044551 dependency take-out
 - 04:56 L: merged deliver/A4/Sheaf.AlgebraicGeometry.BoundaryCoefficientTensorProduct (stage 3; reviewer PASS; first push; landing 20261014T045605-L-1570913 (interface); batch 20261014T045603; modules 4; new nodes 3)
+- 04:56 L: merged deliver/A4/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T045605-L-1571118 (proof); batch 20261014T045603; modules 1; new nodes 0)
