@@ -14,31 +14,22 @@
  ],
  "proof": [
   {
-   "text": "Specialize rawModuleScalar_source_square to S=W, Y=B.left, Y'=A.left, a=f.left, h=B.hom, h'=A.hom, w=Over.w f, L=G, E=V_W G, and t=id. All source factors are invertible. Apply IsIso.inv_eq_inv to the source-square equality and precompose both inverse composites by derivedPullbackIso.inv. Functor.map_inv, the inverse composition law, and cancellation of the derived comparison give coefficient_unshifted: epsilon.inv followed by V_A of the module coefficient tail and the scalar coefficient tail equals H of the scalar coefficient tail followed by the abelian coefficient tail.",
+   "text": "Apply rawModuleScalar_coefficient_square_of_unshifted with the same ring, sheaf, integer degree, Over objects and arrow. Its conclusion is exactly the public coefficient square; all signatures remain unchanged.",
    "uses": [
-    "lem-sbc-raw-scalar-source-square"
+    "lem-sbc-raw-scalar-coefficient-square-shift-transport"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Prove privately that the bounded-below derived natural-isomorphism and composition comparisons commute with shifts. Whisker each comparison by the faithful inclusion D+ into D; the inclusion formulas identify it with a composite of shift-compatible restriction comparisons and the already proved unbounded derived comparisons. Apply NatTrans.CommShift.of_whiskerRight. The inverse derivedPullbackIso, being their composite, commutes with shifts. The private generic shift_square transports the unshifted coefficient square using NatTrans.shift_app_comm, naturality of each functor's commShiftIso, and functoriality of the shift functor. Instantiate it with the four exact derived functors and the four unshifted tails; unfolding the existing coefficient-factor definitions gives the required equation for every integer q. No restriction on shifts, coefficient sheaves, or scheme arrows is introduced.",
-   "uses": [
-    "def-sbc-raw-module-scalar-pullback-comparison",
-    "lem-sbc-raw-scalar-source-square"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sbc-raw-module-scalar-pullback-comparison",
-  "lem-sbc-raw-scalar-source-square"
+  "lem-sbc-raw-scalar-coefficient-square-shift-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "S2",
+  "group": "W4",
   "date": "2026-10-14",
-  "document": "Stacks Project; existing source-square proof and exact-derived-functor shift API",
-  "place": "Tags 03D7 and 03Q8; invert the source square at the identity coefficient map, then shift"
+  "document": "Stacks Project; exact-derived-functor shift API",
+  "place": "Tags 03D7 and 03Q8; generic shift transport applied to the proved unshifted coefficient square"
  },
  "mathlib_searches": [
   {
@@ -123,13 +114,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S2",
+  "reviewer": "X-0967d",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261013T234521-L-2167018",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261014T140639-L-119258",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered module, node statements, proof dependencies, and report matched the stage-3 review rules; delivered Lean file compiled successfully."
  }
 }

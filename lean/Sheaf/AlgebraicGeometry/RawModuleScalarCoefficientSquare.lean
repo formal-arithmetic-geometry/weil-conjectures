@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackComparison
 public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientUnshifted
-import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
+import all Sheaf.AlgebraicGeometry.HigherDirectImageOverMapCoefficient
 
 /-! # Coefficient factors of the derived scalar pullback square
 
@@ -20,83 +20,6 @@ Source: Stacks Project, Tags 03D7 and 03Q8.
 universe u
 open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
-namespace CategoryTheory.Functor
-
-private theorem plusCompatibility_commShift
-    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-    [HasDerivedCategory C] [HasDerivedCategory D]
-    (F : C ⥤ D) [F.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
-    NatTrans.CommShift F.mapDerivedCategoryPlusCompatibility.hom ℤ := by
-  change NatTrans.CommShift
-    (DerivedCategory.TStructure.t.plus.liftCompιIso
-      (DerivedCategory.Plus.ι ⋙ F.mapDerivedCategory)
-      (fun X ↦ (F.mapDerivedCategoryPlus.obj X).2)).hom ℤ
-  infer_instance
-
-private theorem plusNatIso_commShift
-    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-    [HasDerivedCategory C] [HasDerivedCategory D]
-    {F G : C ⥤ D} [F.Additive] [G.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (e : F ≅ G) :
-    NatTrans.CommShift (mapDerivedCategoryPlusNatIso e).hom ℤ := by
-  have he : whiskerRight (mapDerivedCategoryPlusNatIso e).hom DerivedCategory.Plus.ι =
-      F.mapDerivedCategoryPlusCompatibility.hom ≫
-        whiskerLeft DerivedCategory.Plus.ι (mapDerivedCategoryNatIso e).hom ≫
-          G.mapDerivedCategoryPlusCompatibility.inv := by
-    apply NatTrans.ext
-    funext X
-    simp only [NatTrans.comp_app, whiskerRight_app, whiskerLeft_app]
-    rw [ι_map_mapDerivedCategoryPlusNatIso_hom_app]
-    dsimp only [mapDerivedCategoryPlusCompatibility, Iso.refl_hom, Iso.refl_inv,
-      NatTrans.id_app, Functor.comp_obj]
-    erw [Category.id_comp, Category.comp_id]
-  have : NatTrans.CommShift
-      (whiskerRight (mapDerivedCategoryPlusNatIso e).hom DerivedCategory.Plus.ι) ℤ := by
-    rw [he]
-    have := plusCompatibility_commShift F
-    have := plusCompatibility_commShift G
-    infer_instance
-  exact NatTrans.CommShift.of_whiskerRight _ DerivedCategory.Plus.ι
-
-private theorem plusCompIso_commShift
-    {C D E : Type*} [Category C] [Category D] [Category E]
-    [Abelian C] [Abelian D] [Abelian E]
-    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
-    (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    [PreservesFiniteLimits (F ⋙ G)] [PreservesFiniteColimits (F ⋙ G)] :
-    NatTrans.CommShift (mapDerivedCategoryPlusCompIso F G).hom ℤ := by
-  have he : whiskerRight (mapDerivedCategoryPlusCompIso F G).hom DerivedCategory.Plus.ι =
-      (F ⋙ G).mapDerivedCategoryPlusCompatibility.hom ≫
-        whiskerLeft DerivedCategory.Plus.ι (mapDerivedCategoryCompIso F G).hom ≫
-        (associator _ _ _).inv ≫
-        whiskerRight F.mapDerivedCategoryPlusCompatibility.inv G.mapDerivedCategory ≫
-        (associator _ _ _).hom ≫
-        whiskerLeft F.mapDerivedCategoryPlus G.mapDerivedCategoryPlusCompatibility.inv ≫
-        (associator _ _ _).inv := by
-    apply NatTrans.ext
-    funext X
-    simp only [NatTrans.comp_app, whiskerRight_app, whiskerLeft_app,
-      associator_hom_app, associator_inv_app]
-    rw [ι_map_mapDerivedCategoryPlusCompIso_hom_app]
-    dsimp only [mapDerivedCategoryPlusCompatibility, Iso.refl_hom, Iso.refl_inv,
-      NatTrans.id_app, Functor.comp_obj]
-    erw [Category.id_comp, Functor.map_id]
-    repeat erw [Category.comp_id]
-  have : NatTrans.CommShift
-      (whiskerRight (mapDerivedCategoryPlusCompIso F G).hom DerivedCategory.Plus.ι) ℤ := by
-    rw [he]
-    have := plusCompatibility_commShift F
-    have := plusCompatibility_commShift G
-    have := plusCompatibility_commShift (F ⋙ G)
-    infer_instance
-  exact NatTrans.CommShift.of_whiskerRight _ DerivedCategory.Plus.ι
-
-end CategoryTheory.Functor
-
 namespace AlgebraicGeometry.Etale
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
@@ -239,7 +162,50 @@ theorem rawModuleScalar_coefficient_square_of_unshifted
   (RawModuleScalarComparison.derivedPullbackIso Λ f.left).inv.app
       (((DerivedCategory.Plus.singleFunctor _ 0).obj FB)⟦q⟧) ≫
     VA.map mT ≫ bA = H.map bB ≫ aT := by
-  sorry
+  have := rawModuleScalar_derivedPullbackIso_commShift Λ f.left
+  let M := (upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus
+  let VA := (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus
+  let VB := (RawModuleScalarComparison.forget Λ B.left).mapDerivedCategoryPlus
+  let H := (upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus
+  let e := (RawModuleScalarComparison.derivedPullbackIso Λ f.left).inv
+  let X := (DerivedCategory.Plus.singleFunctor _ 0).obj
+    ((upperStar (ModuleCat.{u + 1} Λ) B.hom).obj G)
+  let Y := (DerivedCategory.Plus.singleFunctor _ 0).obj
+    ((upperStar (ModuleCat.{u + 1} Λ) A.hom).obj G)
+  let Z := (DerivedCategory.Plus.singleFunctor _ 0).obj
+    ((upperStar AddCommGrpCat.{u + 1} B.hom).obj
+      ((RawModuleScalarComparison.forget Λ W).obj G))
+  let T := (DerivedCategory.Plus.singleFunctor _ 0).obj
+    ((upperStar AddCommGrpCat.{u + 1} A.hom).obj
+      ((RawModuleScalarComparison.forget Λ W).obj G))
+  let m : M.obj X ⟶ Y :=
+    ((upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlusSingleFunctor 0).hom.app _ ≫
+      (DerivedCategory.Plus.singleFunctor _ 0).map
+        ((upperStarComp (ModuleCat.{u + 1} Λ) f.left B.hom A.hom
+          (Over.w f).symm).inv.app G)
+  let bA : VA.obj Y ⟶ T :=
+    ((RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlusSingleFunctor 0).hom.app _ ≫
+      (DerivedCategory.Plus.singleFunctor _ 0).map
+        (inv (RawModuleScalarComparison.pullback Λ A.hom G))
+  let bB : VB.obj X ⟶ Z :=
+    ((RawModuleScalarComparison.forget Λ B.left).mapDerivedCategoryPlusSingleFunctor 0).hom.app _ ≫
+      (DerivedCategory.Plus.singleFunctor _ 0).map
+        (inv (RawModuleScalarComparison.pullback Λ B.hom G))
+  let a : H.obj Z ⟶ T :=
+    ((upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlusSingleFunctor 0).hom.app _ ≫
+      (DerivedCategory.Plus.singleFunctor _ 0).map
+        ((upperStarComp AddCommGrpCat.{u + 1} f.left B.hom A.hom
+          (Over.w f).symm).inv.app _)
+  have hu := coefficient_unshifted Λ G A B f
+  run_tac
+    let goal ← Lean.Elab.Tactic.getMainGoal
+    goal.withContext do
+      let mut inputs := #[]
+      for name in [`M, `VA, `VB, `H, `e, `X, `Y, `Z, `T, `m, `bA, `bB, `a, `hu, `q] do
+        inputs := inputs.push (← Lean.Meta.getLocalDeclFromUserName name).toExpr
+      let proof ← Lean.Meta.mkAppM ``shift_square inputs
+      let proof ← Lean.Meta.zetaReduce proof
+      coefficientStructuralExact proof
 
 theorem rawModuleScalar_coefficient_square
     (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}

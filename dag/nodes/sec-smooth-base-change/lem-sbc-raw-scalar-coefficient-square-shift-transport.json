@@ -14,26 +14,37 @@
  ],
  "proof": [
   {
-   "text": "Apply the generic shift transport identity to the four derived functors and the unshifted coefficient square.",
+   "text": "Install rawModuleScalar_derivedPullbackIso_commShift locally for the inverse derived scalar comparison. Use the four actual bounded-below derived functors, their four single-complex coefficient objects, and typed unshifted tails. The theorem rawModuleScalar_coefficient_unshifted supplies their unshifted equality.",
    "uses": [
-    "def-sbc-raw-module-scalar-pullback-comparison",
-    "lem-sbc-raw-scalar-source-square",
+    "lem-sbc-raw-scalar-derived-pullback-shift",
     "lem-sbc-raw-scalar-coefficient-unshifted"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the existing private shift_square to the four derived functors and unshifted tails. NatTrans.shift_app_comm, the shift-comparison naturality, functoriality, and associativity transport the identity to every integer shift. Unfolding the three unchanged concrete coefficient factors identifies its shifted tails with the goal.",
+   "uses": [
+    "def-sbc-raw-module-scalar-pullback-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct the application of shift_square from the typed local expressions using Lean.Meta.mkAppM and zetaReduce. The existing private coefficientStructuralExact helper, imported for proof only from HigherDirectImageOverMapCoefficient, builds ordinary HEq congruences and proof-irrelevance proofs to identify these tails with the goal. It adds no mathematical premise; the Lean kernel checks the final Eq proof. This avoids a single large definitional-equality reduction.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sbc-raw-module-scalar-pullback-comparison",
-  "lem-sbc-raw-scalar-source-square",
-  "lem-sbc-raw-scalar-coefficient-unshifted"
+  "lem-sbc-raw-scalar-derived-pullback-shift",
+  "lem-sbc-raw-scalar-coefficient-unshifted",
+  "def-sbc-raw-module-scalar-pullback-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "S2",
+  "group": "W4",
   "date": "2026-10-14",
-  "document": "Stacks Project; existing source-square proof and exact-derived-functor shift API",
-  "place": "Tags 03D7 and 03Q8; invert the source square at the identity coefficient map, then shift"
+  "document": "Stacks Project; exact-derived-functor shift API",
+  "place": "Tags 03D7 and 03Q8; generic shift transport applied to the proved unshifted coefficient square"
  },
  "mathlib_searches": [
   {
@@ -115,13 +126,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S2",
+  "reviewer": "X-0967d",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261013T234521-L-2167018",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261014T140639-L-119258",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered module, node statements, proof dependencies, and report matched the stage-3 review rules; delivered Lean file compiled successfully."
  }
 }
