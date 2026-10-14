@@ -14306,3 +14306,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:39 L: merged deliver/M3/Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationHomology (stage 3; reviewer PASS; first push; landing 20261014T023935-L-15101 (interface); batch 20261014T023929; modules 3; new nodes 2)
 - 02:39 L: merged deliver/N2/Sheaf.AlgebraicGeometry.Morphisms.DvrGaloisComponentsStalkFactor (stage 3; reviewer PASS; first push; landing 20261014T023935-L-15322 (interface); batch 20261014T023929; modules 3; new nodes 2)
 - 02:39 L: merged deliver/N3/Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSingleStabilizerComponent (stage 3; reviewer PASS; first push; landing 20261014T023936-L-15472 (interface); batch 20261014T023929; modules 2; new nodes 1)
+- 02:39 L: merged deliver/N3/Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf (stage 3; reviewer PASS; first push; landing 20261014T023936-L-15672 (proof); batch 20261014T023929; modules 1; new nodes 0)
