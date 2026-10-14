@@ -97,7 +97,6 @@ theorem cartier_equality
   intro hfinite
   -- Substitute zero transcendence degree, then cancel the natural-number casts.
   let _ : FiniteDimensional k K := hfinite
-  have hzero : Algebra.trdeg k K = 0 := by
-    exact trdeg_eq_zero
+  have hzero : Algebra.trdeg k K = 0 := trdeg_eq_zero
   rw [hzero, zero_add] at heq
   exact_mod_cast heq.symm
