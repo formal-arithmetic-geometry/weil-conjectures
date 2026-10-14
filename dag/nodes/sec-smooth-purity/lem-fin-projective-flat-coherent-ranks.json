@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fin-projective-flat-coherent-ranks",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Constructible dimensions from coherent base change",
@@ -13,41 +13,150 @@
   "place": "node lem-fin-projective-flat-coherent-ranks, order 1609"
  },
  "stmt_deps": [
-  "def-pc-morphism-conventions",
+  "def-pc-scheme",
   "def-pc-projective-morphism",
-  "def-weil-pbc-scheme-conventions",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
   "pqf-def-coherent",
-  "pqf-def-cohomology"
+  "def-pc-scheme-module-flat-over",
+  "def-weil-geometric-fibre",
+  "pqf-def-cohomology",
+  "def-weil-constructible-subset"
  ],
  "proof": [
   {
-   "text": "By [lem-pc-projective-noetherian-rf-perfect], locally on a\nfinite affine cover of $S$, the coherent derived direct image is\nrepresented by a bounded complex $C^\\bullet$ of finite projective\nmodules. A further finite open cover makes its finitely many terms\nfree, by [def-pc-perfect-complex].\nBy [cor-pc-projective-noetherian-rf-perfect-base-change],\n$C^\\bullet\\otimes\\kappa(\\bar s)$ computes the displayed fibre\ncohomology. If $c_r$ is the rank of $C^r$ on this open, then\n\n$$\nh^r(\\bar s)=c_r-\\operatorname{rank}(d^{r-1}_{\\bar s})\n-\\operatorname{rank}(d^r_{\\bar s}).\n$$",
+   "text": "A Noetherian scheme is locally Noetherian and quasi-compact [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. Choose finitely many affine opens with Noetherian coordinate rings covering $S$. Their underlying spaces are Noetherian by [lem-sc-affine-noetherian-underlying-space]. Every open $W$ of $S$ is quasi-compact: intersect a covering of $W$ with each of these finitely many charts, select a finite subcover on each chart intersection, and take their union. Thus the underlying space of $S$ is Noetherian. In particular every open of $S$ is retrocompact, so every finite union of locally closed subsets is constructible by [def-weil-constructible-subset].",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-weil-pbc-quasi-compact-scheme",
+    "lem-sc-affine-noetherian-underlying-space",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BDN, lemma-jump-loci-geometric, proof; Tag 0BDI, lemma-jump-loci, proof of (3)"
+   }
+  },
+  {
+   "text": "Put $E=Rf_*\\mathcal G$. The hypotheses of [lem-pc-projective-noetherian-rf-perfect] hold: $S$ is locally Noetherian, $f$ is projective, and $\\mathcal G$ is coherent and flat over $S$. Hence $E$ is perfect. By [def-pc-perfect-complex] there is an affine open cover on which $E$ is represented by bounded complexes of finite projective modules. Select a finite subcover. On each affine chart apply [lem-weil-pbc-finite-projective-standard-free-cover] to each of the finitely many nonzero terms and take all intersections of the resulting finite principal-open covers. Localization of a free frame remains a free frame. We obtain a finite affine open cover $U_j=\\operatorname{Spec}(A_j)$ and bounded finite free complexes $C_j^\\bullet$ representing $E|_{U_j}$.",
    "uses": [
     "lem-pc-projective-noetherian-rf-perfect",
     "def-pc-perfect-complex",
-    "cor-pc-projective-noetherian-rf-perfect-base-change"
+    "lem-weil-pbc-finite-projective-standard-free-cover"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BDN, lemma-jump-loci-geometric, proof; Tag 0BDI, lemma-jump-loci, proof of (3)"
+   }
   },
   {
-   "text": "A matrix has rank exactly $t$ where all its $(t+1)$-minors\nvanish and at least one $t$-minor is nonzero; rank zero is defined\nby vanishing of all entries. These are finite unions of locally\nclosed subsets, and there are only finitely many possible ranks.\nIntersect the partitions for the two matrices to obtain a finite\nlocally closed partition on which $h^r$ is constant. Refine the\nfinitely many base-open partitions to a partition of $S$.\nThus constructibility has been obtained from explicit matrices.\nIt does not use etale direct-image finiteness.",
-   "uses": [],
-   "elementary": null
+   "text": "Fix $s\\in U_j$ and write $k=\\kappa(s)$ and $\\Omega=\\kappa(\\bar s)$. Apply [cor-pc-projective-noetherian-rf-perfect-base-change] to the geometric-point morphism $g:\\operatorname{Spec}(\\Omega)\\to S$. It gives $Lg^*E\\cong Rf_{\\bar s,*}\\mathcal G_{\\bar s}$ with ordinary pullback of $\\mathcal G$ on the right, precisely the geometric fibre of [def-weil-geometric-fibre]. The local model comparison [lem-pc-localized-pullback-perfect-model] computes the left side by ordinary termwise pullback. By the tensor-product definition [def-pc-module-pullback], a term $\\mathcal O_{U_j}^{c}$ pulls back to $\\Omega^{c}$ and a differential matrix pulls back by applying $A_j\\to\\Omega$ to its entries; thus this is $C_j^\\bullet\\otimes_{A_j}\\Omega$. The spectrum of the field $\\Omega$ has one point [def-weil-affine-spectrum], so an $\\mathcal O$-module on it is just its module of global sections, and taking global sections is exact. If $I^\\bullet$ is an injective resolution of $\\mathcal G_{\\bar s}$, then taking global sections of $f_{\\bar s,*}I^\\bullet$ gives exactly $\\Gamma(X_{\\bar s},I^\\bullet)$. By [pqf-def-cohomology] its degree-$r$ homology is $H^r(X_{\\bar s},\\mathcal G_{\\bar s})$. Exact global sections on the point also preserves the derived-category isomorphism and computes the homology of the displayed module complex. Consequently the dimension in the statement is $\\dim_\\Omega H^r(C_j^\\bullet\\otimes_{A_j}\\Omega)$. This equals $b_{j,r}(s):=\\dim_k H^r(C_j^\\bullet\\otimes_{A_j}k)$: split the finite-dimensional $k$-complex in degree $r$ into incoming boundaries, a complement representing homology, and a complement to outgoing cycles. Bases of these spaces remain bases after extension to $\\Omega$, and the outgoing map restricts to an isomorphism from the last complement onto its image. The same homology basis therefore counts both dimensions. This also shows independence of the algebraic closure.",
+   "uses": [
+    "cor-pc-projective-noetherian-rf-perfect-base-change",
+    "def-weil-geometric-fibre",
+    "lem-pc-localized-pullback-perfect-model",
+    "pqf-def-cohomology",
+    "def-pc-module-pullback",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BDN, lemma-jump-loci-geometric, proof; Tag 0BDI, lemma-jump-loci, proof of (3)"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-finite-free-complex-homology-upper-semicontinuous] to $A_j$, $C_j^\\bullet$, and the integer $r$. For every integer $t$, the set $O_{j,t}=\\{s\\in U_j:b_{j,r}(s)<t\\}$ is open in $U_j$. For every $n\\geq0$ its level set is $L_{j,n}=O_{j,n+1}\\setminus O_{j,n}$, hence is locally closed in $U_j$ and also in $S$: both $O_{j,n+1}$ and $O_{j,n}$ are open in $S$. Moreover $0\\leq b_{j,r}(s)\\leq c_{j,r}$, where $c_{j,r}$ is the finite free rank of $C_j^r$, because homology is a quotient of a subspace of the $c_{j,r}$-dimensional middle term. Therefore the finitely many sets $L_{j,n}$ with $0\\leq n\\leq c_{j,r}$ partition $U_j$.",
+   "uses": [
+    "lem-sc-finite-free-complex-homology-upper-semicontinuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BDN, lemma-jump-loci-geometric, proof; Tag 0BDI, lemma-jump-loci, proof of (3)"
+   }
+  },
+  {
+   "text": "By Step 3, the geometric fibre dimension $h_r$ restricts to $b_{j,r}$ on every $U_j$. Its image is contained in $\\{0,\\ldots,N\\}$ for $N=\\max_j c_{j,r}$, and $h_r^{-1}(n)=\\bigcup_j L_{j,n}$, a finite union of locally closed subsets of $S$, hence constructible by [def-weil-constructible-subset] and Step 1. These fibres are disjoint and cover $S$, giving a finite constructible partition on which $h_r$ is constant. This is constructibility of the function. If $S$ is empty its image and this partition are empty, so the assertion holds without taking a maximum.",
+   "uses": [
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BDN, lemma-jump-loci-geometric, proof; Tag 0BDI, lemma-jump-loci, proof of (3)"
+   }
   }
  ],
  "proof_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-sc-affine-noetherian-underlying-space",
+  "def-weil-constructible-subset",
   "lem-pc-projective-noetherian-rf-perfect",
   "def-pc-perfect-complex",
-  "cor-pc-projective-noetherian-rf-perfect-base-change"
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "cor-pc-projective-noetherian-rf-perfect-base-change",
+  "def-weil-geometric-fibre",
+  "lem-pc-localized-pullback-perfect-model",
+  "pqf-def-cohomology",
+  "lem-sc-finite-free-complex-homology-upper-semicontinuous",
+  "def-pc-module-pullback",
+  "def-weil-affine-spectrum"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-projective-flat-coherent-ranks.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0BDN, lemma-jump-loci-geometric, proof; Tag 0BDI, lemma-jump-loci, proof of (3)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible|semicontinu",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constructible subsets, morphism images, or ranks of modules, not coherent fibre cohomology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology dimensions of fibres of a flat coherent sheaf under a projective morphism are constructible",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, IsConstructible",
+   "results": "Hits: ; loogle: unknown identifier 'IsConstructible'",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constructible subsets, morphism images, or ranks of modules, not coherent fibre cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Betti numbers of residue field fibres of a perfect complex form constructible functions on the prime spectrum",
+   "results": "Hits: PrimeSpectrum.BasicConstructibleSetData.g, PrimeSpectrum.BasicConstructibleSetData.n, PrimeSpectrum.isConstructible_comap_image, PrimeSpectrum.isConstructible_range_comap, PrimeSpectrum.exists_range_eq_of_isConstructible, PrimeSpectrum.BasicConstructibleSetData.map_n, PrimeSpectrum.isConstructible_comap_C, ChevalleyThm.chevalley_polynomialC",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constructible subsets, morphism images, or ranks of modules, not coherent fibre cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a projective morphism of schemes over a Noetherian base and a relatively flat coherent sheaf, the dimensions of geometric fibre cohomology are constructible",
+   "results": "Hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Flat, AlgebraicGeometry.Scheme.Hom.isConstructible_image, Module.isLocallyConstant_rankAtStalk, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constructible subsets, morphism images, or ranks of modules, not coherent fibre cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsConstructible",
+   "results": "Hits: Topology.IsConstructible, Topology.IsConstructible.univ, Topology.IsConstructible.empty, Topology.IsConstructible.isLocallyConstructible, IsRetrocompact.isConstructible, Topology.IsConstructible.compl, Topology.IsConstructible.of_compl, Topology.isConstructible_compl",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constructible subsets, morphism images, or ranks of modules, not coherent fibre cohomology"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -83,5 +192,49 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-fin-projective-flat-coherent-ranks",
+  "worker": "stage1",
+  "summary": "Checked the blueprint and Stacks 0BDN/0BDI. Reused the existing finite-free semicontinuity lemma rather than creating a matrix-rank node. Supplied the finite local free refinements, geometric field dimension comparison, Noetherian topological argument, and finite constructible level-set argument. Statement unchanged; no new nodes.",
+  "blueprint": "First proof paragraph: perfect representative, finite free refinement and geometric-fibre computation (Steps 2–3). Second paragraph: determinantal constructibility through the existing finite-free sublevel lemma and finite partition (Steps 4–5). Step 1 supplies the Noetherian topological passage implicit in both paragraphs.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-noetherian-rf-perfect",
+    "why": "Perfectness of coherent projective direct image; the item explicitly follows this Picard-framework input and its unit supplies no replacement."
+   },
+   {
+    "node": "cor-pc-projective-noetherian-rf-perfect-base-change",
+    "why": "Arbitrary geometric-point base change of coherent direct image; the item explicitly uses this Picard-framework input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-projective-standard-free-cover",
+    "why": "Finite free trivializations of finite projective modules; a general algebra tool for the imported refinement, absent from this unit."
+   },
+   {
+    "node": "lem-pc-localized-pullback-perfect-model",
+    "why": "Computes derived pullback from a supplied local strictly perfect representative; a generic local-model tool absent from this unit."
+   },
+   {
+    "node": "lem-sc-finite-free-complex-homology-upper-semicontinuous",
+    "why": "Open sublevel sets for a finite free complex on an affine scheme; implements exactly the imported matrix argument and is more general than coherent fibre cohomology."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-noetherian-rf-perfect",
+  "cor-pc-projective-noetherian-rf-perfect-base-change",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-pc-localized-pullback-perfect-model",
+  "lem-sc-finite-free-complex-homology-upper-semicontinuous"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-6c5e248f3",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-6c5e248f3 (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, report, all cited node statements, Stacks Tags 0BDN/0BDI and supporting source locations, plus archived target declarations. All five proof steps are valid with stated hypotheses; residue-field extension, constructibility, edge cases, duplicate search, and coefficient-category distinctions check out. No new nodes or repairs are needed."
+ }
 }
