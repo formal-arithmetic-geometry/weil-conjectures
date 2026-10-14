@@ -15,35 +15,33 @@
  ],
  "proof": [
   {
-   "text": "Restrict both ordinary evaluation composites to F^p tensor V^q tensor P^r. Use the ordinary component equation, inverse currying laws and naturality to identify them. The component is zero for r+q nonzero, and for r+q=0 it is the evaluation into the single unit followed by the right unit action. Coproduct extensionality gives the chain composite equality.",
+   "text": "Apply the ordinary chain calculation to obtain an evaluation e into the single unit and the two chain equalities factoring the explicit uncurrying maps through the fixed augmentations.",
    "uses": [
-    "def-pc-scheme-ordinary-evaluation-formula",
-    "lem-pc-tensor-hom-uncurry-differential",
-    "lem-sc-hom-complex-projections"
+    "lem-pc-scheme-ordinary-evaluation-chain-calculation"
    ],
    "elementary": false
   },
   {
-   "text": "Move coefficient augmentations to the last map by naturality, apply Q and the associativity and right-unit laws of its lax monoidal tensor comparison, and cancel the fixed augmentation quasi-isomorphisms with their specified inverses. The monoidal homotopy quotient identifies the single-unit comparison with the inverse quotientCompQhIso at O. No tensor comparison is inverted.",
+   "text": "Apply the proved localization coherence to e. Rewrite the two chain factorizations under Q and cancel Q(eta_F) and Q(eta_O) against schemeHomResolutionInverse using their defining inverse laws. Reassociation gives the stated equality.",
    "uses": [
-    "def-pc-derived-pullback-tensor-comparison"
+    "lem-pc-scheme-tensor-evaluation-localization-coherence",
+    "def-pc-canonical-derived-tensor-hom-model"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-scheme-ordinary-evaluation-formula",
-  "lem-pc-tensor-hom-uncurry-differential",
-  "lem-sc-hom-complex-projections",
-  "def-pc-derived-pullback-tensor-comparison"
+  "def-pc-canonical-derived-tensor-hom-model",
+  "lem-pc-scheme-ordinary-evaluation-chain-calculation",
+  "lem-pc-scheme-tensor-evaluation-localization-coherence"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "K3",
+  "group": "J3",
   "date": "2026-10-14",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 08DJ, 08DM and 08DQ; ordinary evaluation localization proof step 2",
-  "description": "Strict component-calculation part of the original localization proof; the canonical-family identification, K-flat replacement and categorical transport are proved in the item."
+  "place": "Tags 08DJ (lemma-internal-hom), 08DM and 08DQ; ordinary evaluation localization proof step 2",
+  "description": "Chain component calculation split off without a derived-category assumption; localization coherence and augmentation cancellation are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -114,9 +112,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261014T001726-L-2552299",
+  "landing": "20261014T013039-L-3414721",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

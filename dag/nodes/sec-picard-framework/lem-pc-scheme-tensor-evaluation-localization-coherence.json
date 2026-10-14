@@ -1,0 +1,124 @@
+{
+ "id": "lem-pc-scheme-tensor-evaluation-localization-coherence",
+ "kind": "statement",
+ "title": "Localization of tensor evaluation into the unit",
+ "statement": "Let Y be a scheme with its derived category and tensor [def-pc-scheme-derived-tensor-structure]. Let F,V,P be arbitrary module-sheaf cochain complexes and O the single tensor unit. Let e:Tot(V tensor P) to O be any chain map. Use the localization tensor comparison mu [def-pc-derived-pullback-tensor-comparison] and tensor action a(e) [def-pc-scheme-tensor-unit-action]. Then (mu(F,V) tensor id_QP);mu(Tot(F,V),P);Q(a(e)) equals the derived associator followed by QF tensor (mu(V,P);Qe;z) followed by the derived right unitor, where z is the inverse quotientCompQhIso at O. There is no Hom complex or ordinary evaluation hypothesis in this assertion.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ (lemma-internal-hom), 08DM and 08DQ; ordinary evaluation localization proof step 2"
+ },
+ "stmt_deps": [
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-pullback-tensor-comparison",
+  "def-pc-scheme-tensor-unit-action"
+ ],
+ "proof": [
+  {
+   "text": "For a lax monoidal functor L, use its associativity law, naturality in the second tensor variable along e, and right unitality. If z;epsilon_L=id, the resulting composite equals the associator followed by LA tensor (mu(B,E);L(e);z) followed by the right unitor. The private lax_tensor_evaluation lemma proves this by rewriting these axioms and cancelling z;epsilon_L under whiskering.",
+   "uses": [
+    "def-pc-derived-pullback-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For Q, its lax monoidal structure is transported from quotient followed by Qh along quotientCompQhIso. The homotopy quotient has identity unit comparison, and Qh has identity unit comparison because the derived tensor unit is defined as Qh of the homotopy tensor unit. Thus epsilon_Q equals Qh.map(id) followed by the comparison hom. The private derived_unit_comparison lemma cancels this against the comparison inverse using map_id and the isomorphism inverse law.",
+   "uses": [
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-derived-pullback-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Unfold the actual complex tensor action and apply the general lax tensor evaluation calculation with L=Q. The total complex tensor, associator and right unitor are definitionally the standard complex monoidal constructions.",
+   "uses": [
+    "def-pc-scheme-tensor-unit-action",
+    "def-pc-derived-pullback-tensor-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback-tensor-comparison",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-scheme-tensor-unit-action"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J3",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ (lemma-internal-hom), 08DM and 08DQ; ordinary evaluation localization proof step 2",
+  "description": "Explicit formal elaboration of the chain-component and lax-monoidal calculation in parent proof step 2; no change to the unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lax monoidal functor preserves tensor evaluation into the unit",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "verdict": "unavailable",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.right_unitality",
+   "results": "Found the right unitality axiom in Mathlib.CategoryTheory.Monoidal.Functor; it is used with associativity and naturality.",
+   "verdict": "constituent found",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "ofIso|comp_ε|right_unitality",
+   "results": "Broad Mathlib search found monoidal functor constituents. Direct source inspection of Functor.lean and the project DerivedCategory monoidal instance identifies the transported unit comparison.",
+   "verdict": "constituents found",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationUncurryCalculation",
+  "date": "2026-10-14",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-scheme-ordinary-evaluation-uncurry-calculation",
+   "place": "Proof step 2: localization associativity, right unit and augmentation cancellation"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeTensorEvaluationLocalizationCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeTensorEvaluationLocalizationCoherence.lean",
+  "declaration": "AlgebraicGeometry.schemeTensorEvaluation_localization_coherence",
+  "statement": "theorem schemeTensorEvaluation_localization_coherence (Y : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (F V P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) :\n    let O := (HomologicalComplex.single _ (.up ℤ) 0).obj\n      (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))\n    ∀ e : pullbackTensorTotal Y V P ⟶ O,\n      (pullbackTensorModelMap Y F V ▷ DerivedCategory.Q.obj P) ≫\n          pullbackTensorModelMap Y (pullbackTensorTotal Y F V) P ≫\n          DerivedCategory.Q.map\n            (schemeTensorUnitAction Y F V P e) =\n        (α_ (DerivedCategory.Q.obj F) (DerivedCategory.Q.obj V)\n          (DerivedCategory.Q.obj P)).hom ≫\n        DerivedCategory.Q.obj F ◁\n          (pullbackTensorModelMap Y V P ≫ DerivedCategory.Q.map e ≫\n            ((DerivedCategory.quotientCompQhIso _).app O).inv) ≫\n          (ρ_ (DerivedCategory.Q.obj F)).hom",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261014T013039-L-3414721",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261014T013039-L-3414721",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

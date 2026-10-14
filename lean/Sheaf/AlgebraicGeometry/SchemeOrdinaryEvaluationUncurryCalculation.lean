@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
 public import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential
+import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationChainCalculation
+import Sheaf.AlgebraicGeometry.SchemeTensorEvaluationLocalizationCoherence
 
 /-! # Uncurried ordinary evaluation calculation
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
@@ -25,6 +27,8 @@ namespace AlgebraicGeometry
 
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
+set_option maxHeartbeats 1000000 in
+-- Elaborating the fixed Hom and tensor maps uses the sheaf coproduct instances.
 /-- The ordinary component equation determines the composite of explicit evaluation maps.
 This statement involves only constructed chain maps and the lax tensor comparison;
 it does not mention the derived tensor-Hom equivalence or transport to other objects.
@@ -78,6 +82,31 @@ theorem schemeOrdinaryEvaluation_uncurry_calculation (Y : Scheme.{u})
           DerivedCategory.Q.map (schemeTensorHomUncurry Y V P O phiO) ≫
           schemeHomResolutionInverse Y O ≫
           ((DerivedCategory.quotientCompQhIso _).app O).inv) ≫
-      (ρ_ (DerivedCategory.Q.obj F)).hom := by sorry
+      (ρ_ (DerivedCategory.Q.obj F)).hom := by
+  classical
+  have := SheafOfModules.isGrothendieckAbelian (moduleRings Y.toRingedSpace)
+  let O := (HomologicalComplex.single _ (.up ℤ) 0).obj
+    (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
+  let V := homComplex (R := Y.sheaf) P O
+  let eta := CochainComplex.toKInjectiveResolution.{u}
+    (SheafOfModules.{u} (moduleRings Y.toRingedSpace))
+  obtain ⟨e, hO, hF⟩ := schemeOrdinaryEvaluation_chain_calculation Y P F f hf
+  have hc := schemeTensorEvaluation_localization_coherence Y F V P e
+  have hres (M : CochainComplex
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) :
+      DerivedCategory.Q.map (eta.app M) ≫ schemeHomResolutionInverse Y M =
+        𝟙 (DerivedCategory.Q.obj M) := by
+    have : IsIso (DerivedCategory.Q.map (eta.app M)) :=
+      (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2
+        (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} _ M).2
+    exact IsIso.hom_inv_id _
+  dsimp only [eta] at hres
+  have hrO := hres O
+  dsimp only [O] at hrO
+  dsimp only
+  rw [hF, hO]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [hres F, Category.comp_id, reassoc_of% hrO]
+  exact hc
 
 end AlgebraicGeometry
