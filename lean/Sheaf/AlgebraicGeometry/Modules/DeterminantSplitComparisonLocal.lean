@@ -87,17 +87,7 @@ theorem determinant_split_comparison_restriction {X : Scheme.{v}}
           ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map
             (homOfLE hZW).op y) := by
   intro W Z hW hZW y
-  calc
-    (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =
-        (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (dNatural W hW y) := by
-      rw [hd W hW y]
-    _ = dNatural Z (hZW.trans hW)
-        ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map
-          (homOfLE hZW).op y) := hn W Z hW hZW y
-    _ = d Z (hZW.trans hW)
-        ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map
-          (homOfLE hZW).op y) := by
-      rw [hd Z (hZW.trans hW)]
+  simpa only [hd] using hn W Z hW hZW y
 
 end AlgebraicGeometry.Scheme.Modules
 
