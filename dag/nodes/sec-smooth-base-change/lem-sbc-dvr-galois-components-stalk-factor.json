@@ -1,0 +1,115 @@
+{
+ "id": "lem-sbc-dvr-galois-components-stalk-factor",
+ "kind": "statement",
+ "title": "Actual normalization stalks are integral-closure localizations of generic tensor factors",
+ "statement": "Let $B$ be a DVR domain [def-sc-discrete-valuation-ring] with irreducible uniformizer $\\pi$, fraction field $K$, and $n>0$. Let $E_i/K$, indexed by $i\\in\\operatorname{Fin}(r)$, be finite Galois field extensions [def-weil-field, def-weil-vector-space-dimension]. Suppose $p:X\\to\\operatorname{Spec}K$ is identified over $K$ with the coproduct of $\\operatorname{Spec}E_i$. Put $A=B[t]/(t^n-\\pi)$ [def-weil-polynomial-ring] and let $a:X\\times_{\\operatorname{Spec}B}\\operatorname{Spec}A\\to\\operatorname{Spec}A$ be the base change of $p$ followed by $\\operatorname{Spec}K\\to\\operatorname{Spec}B$. Assume $a$ is qcqs. For every point $x$ of its concrete relative normalization [lem-weil-pbc-relative-normalization] whose image prime is $(t)$, there are an index $i$, a maximal ideal $P$ in $D_i=E_i\\otimes_B A$, and a prime $Q$ of $S=\\operatorname{integralClosure}_A(D_i/P)$ [def-weil-pbc-integral-closure], contracting to $(t)$ in $A$, together with a ring isomorphism $S_Q\\simeq\\mathcal O_{a.\\mathrm{normalization},x}$ [def-weil-pbc-localization-at-prime]. For every $s\\in A$, this isomorphism maps its structural image in $S_Q$ to the actual structural stalk germ at $x$. All $B$-algebra structures on $E_i$ are the composites through $K$, and the $A$-algebra structure on $D_i/P$ is the right tensor inclusion. No invertibility or degree divisibility hypothesis on $n$ is assumed.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-vector-space-dimension",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-relative-normalization"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 09EV, 035H and 0307"
+ },
+ "proof": [
+  {
+   "text": "Use 09EV, or evaluation for n=1, to identify the punctured root spectrum with Spec Frac(A). Pull the given coproduct over K back across Spec A. Affine pullbacks give E_i tensor_B A = E_i tensor_K Frac(A). These are finite products of fields by separability. Integral closure in finite products is componentwise, so normalization on the affine target has components Spec S for the indicated field factors.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "By the affine construction of relative normalization in 035H, a point x selects one such component and a prime Q in its integral closure. The affine-stalk localization isomorphism identifies the actual stalk with S_Q. The image prime is contraction along A to S, hence the stated root-prime condition gives Q contracting to (t). The affine maps are all over A; their stalk localization isomorphism therefore commutes with every structural germ s in A. Tag 0307 makes this identification compatible with localizing the integral closure. For r=0 there is no x.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "kind": "written-by-agent",
+  "agent": "V3",
+  "document": "Stacks Project",
+  "place": "Tags 09EV, 035H and 0307"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalization of a finite disjoint union of field spectra over a discrete valuation ring has stalks equal to localizations of integral closures in field factors of a tensor product",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the relative normalization in a coproduct of spectra of fields is isomorphic to the localization of the integral closure in one generic tensor field factor",
+   "date": "2026-10-14",
+   "results": "AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom, AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom, AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso, AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv, AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization, AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv, AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization",
+   "verdict": "Binary normalization coproduct isomorphisms only; the full tensor-factor stalk identification is not stated."
+  },
+  {
+   "tool": "grep",
+   "query": "Abhyankar|tame.*ramification|normalizationObjIso|integralClosure.*localization",
+   "date": "2026-10-14",
+   "results": "Mathlib/NumberTheory/NumberField/Basic.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean",
+   "verdict": "Related normalization and unramified APIs only; no tame root theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DvrGaloisComponentsRootNotSquare",
+  "date": "2026-10-14",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait tame calculation: identify normalized component local rings and their structural root germs with actual scheme stalks.",
+   "via": [
+    "lem-sbc-dvr-root-normalization-maximal-ideal",
+    "lem-sbc-dvr-galois-components-root-cotangent",
+    "lem-sbc-dvr-galois-components-root-not-square"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.DvrGaloisComponentsStalkFactor",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DvrGaloisComponentsStalkFactor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.dvr_galois_components_stalk_factor",
+  "statement": "theorem dvr_galois_components_stalk_factor\n    (B : CommRingCat.{u}) [IsDomain B] [IsDiscreteValuationRing B]\n    (pi : B) (hpi : Irreducible pi) (n : ℕ) (hnpos : 0 < n)\n    (r : ℕ) (E : Fin r → Type u) [∀ i, Field (E i)]\n    [∀ i, Algebra (FractionRing B) (E i)]\n    (hE : ∀ i, FiniteDimensional (FractionRing B) (E i) ∧\n      IsGalois (FractionRing B) (E i))\n    (X : Scheme.{u}) (p : X ⟶ Spec (CommRingCat.of (FractionRing B)))\n    (e : X ≅ ∐ fun i : Fin r ↦ Spec (CommRingCat.of (E i)))\n    (he : e.hom ≫ Sigma.desc (fun i : Fin r ↦\n      Spec.map (CommRingCat.ofHom (algebraMap (FractionRing B) (E i)))) = p) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial B) ^ n - Polynomial.C pi)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap B A))\n    let j := Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B)))\n    let a := pullback.snd (p ≫ j) q\n    ∀ (hqc : QuasiCompact a) (hqs : QuasiSeparated a),\n    letI := hqc\n    letI := hqs\n    ∀ (x : a.normalization),\n      (a.fromNormalization x).asIdeal = Ideal.span\n        {AdjoinRoot.root ((Polynomial.X : Polynomial B) ^ n - Polynomial.C pi)} →\n    letI : ∀ i, Algebra B (E i) := fun i ↦\n      ((algebraMap (FractionRing B) (E i)).comp\n        (algebraMap B (FractionRing B))).toAlgebra\n    ∃ (i : Fin r) (P : Ideal (E i ⊗[B] A)) (hP : P.IsMaximal),\n    letI := hP\n    let F := (E i ⊗[B] A) ⧸ P\n    let alpha : A →+* F := (Ideal.Quotient.mk P).comp\n      (Algebra.TensorProduct.includeRight : A →ₐ[B] E i ⊗[B] A).toRingHom\n    letI := alpha.toAlgebra\n    let S := integralClosure A F\n    ∃ (Q : Ideal S) (hQ : Q.IsPrime),\n    letI := hQ\n    Q.comap (algebraMap A S) = Ideal.span\n      {AdjoinRoot.root ((Polynomial.X : Polynomial B) ^ n - Polynomial.C pi)} ∧\n    ∃ (epsilon : Localization.AtPrime Q ≃+* a.normalization.presheaf.stalk x),\n      ∀ s : A, epsilon (algebraMap S (Localization.AtPrime Q) (algebraMap A S s)) =\n        (a.fromNormalization.stalkMap x).hom\n          (StructureSheaf.toStalk A (a.fromNormalization x) s)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261014T020518-L-3814383",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261014T020518-L-3814383",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
