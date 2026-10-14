@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-finrepair-finite-surjection-cancellation",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Constructibility descends through a finite surjection",
@@ -18,62 +18,147 @@
  ],
  "proof": [
   {
-   "text": "Let $Q_0=F$ be any constructible $\\Lambda$-sheaf on $X$.\nFor every sheaf $Q$, the unit\n$Q\\to\\pi_*\\pi^*Q$ is injective: by\n[lemma-weil-pbc-finite-stalk-formula], at a geometric point\n$\\bar x$ it is the diagonal map\n\n$$\nQ_{\\bar x}\\longrightarrow\n\\prod_{\\bar y\\in Y_{\\bar x}}Q_{\\bar x},\n$$\n\nand the finite indexing set is nonempty by surjectivity.\nUse [lemma-weil-pbc-geometric-stalk-conservative] to detect\nthis injectivity.\nThe pullback of a constructible sheaf is constructible, by pulling\nback its finite locally closed stratification. Thus\n[lem-fin-finite-morphism] shows that $\\pi_*\\pi^*Q$ is\nconstructible whenever $Q$ is.\nDefine recursively\n\n$$\nG^a=\\pi_*\\pi^*Q_a,\\qquad Q_{a+1}=\\operatorname{coker}(Q_a\\to G^a).\n$$",
+   "text": "Fix the finite commutative coefficient ring $\\Lambda$ in $\\mathcal C$, and let $F$ be a constructible $\\Lambda$-sheaf on $X_{\\Et}$. For any such module sheaf $Q$ (not necessarily constructible), consider the unit $\\eta_Q:Q\\to\\pi_*\\pi^*Q$. Apply [lemma-weil-pbc-finite-stalk-formula] and [lem-weil-pbc-inverse-image-stalk-germ] to its underlying abelian sheaves. At a geometric point $\\bar x$ this identifies $\\eta_Q$ with $Q_{\\bar x}\\to\\prod_{\\bar y\\in Y_{\\bar x}}Q_{\\bar x}$, $t\\mapsto(t)_{\\bar y}$: the compatibility with represented germs in the latter citation identifies each component with the identity, rather than merely identifying the source and target groups. The index set is finite and nonempty. Indeed, choose $y$ over $x$ using surjectivity; finiteness gives a finite residue-field extension $\\kappa(y)/\\kappa(x)$, which embeds over $\\kappa(x)$ into the algebraically closed field of $\\bar x$, giving a geometric lift. The diagonal is therefore injective. By exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact], every stalk of $\\ker\\eta_Q$ is zero. Apply [lemma-weil-pbc-geometric-stalk-conservative] to $0\\to\\ker\\eta_Q$ to deduce that the kernel is zero; this proves that $\\eta_Q$ is a monomorphism. The module kernel is computed sectionwise: its sections over each etale object are precisely the kernel of the underlying group homomorphism, with the inherited $\\Lambda$-action. Thus its underlying zero abelian sheaf is also the zero module sheaf, proving the module monomorphism.",
    "uses": [
     "lemma-weil-pbc-finite-stalk-formula",
-    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP (proposition-finite-higher-direct-image-zero) (1); Tag 03Q1 (lemma-stalk-pullback) (3); Tag 03PT (lemma-stalk-exact); blueprint proof, first paragraph"
+   }
+  },
+  {
+   "text": "The scheme $Y$ is of finite type over $k$: take a finite affine cover $\\operatorname{Spec}A_i$ of $X$ by finitely generated $k$-algebras; its inverse images are $\\operatorname{Spec}B_i$ with $B_i$ finite as an $A_i$-module. The generators of $A_i$ over $k$ together with a finite set of module generators of $B_i$ generate $B_i$ as a $k$-algebra. This verifies the finite-type source needed in $\\mathcal C(f\\pi)$ directly from [def-weil-pbc-scheme-conventions]. Put $Q_0=F$. Given constructible $Q_a$, its pullback $\\pi^*Q_a$ is constructible by [prop-constructible-pullback], so $G^a=\\pi_*\\pi^*Q_a$ is constructible by [lem-fin-finite-morphism]. Put $Q_{a+1}=\\operatorname{coker}\\eta_{Q_a}$; it is constructible by [thm-constructible-serre]. This defines constructible $Q_a,G^a$ for every $a\\geq0$ by induction. Define $d^a:G^a\\to G^{a+1}$ to be the quotient onto $Q_{a+1}$ followed by its monomorphic unit. Thus $\\ker d^a=\\operatorname{im}(Q_a\\to G^a)$, whereas $\\operatorname{im}d^{a-1}=\\operatorname{im}(Q_a\\to G^a)$ for $a>0$, since $G^{a-1}\\to Q_a$ is an epimorphism. For $a=0$ the same kernel is the image of $F$. Consequently $d^{a+1}d^a=0$ and $0\\to F\\to G^0\\to G^1\\to\\cdots$ is exact. Extend $G^\\bullet$ by zero in negative degrees; the augmentation $F[0]\\to G^\\bullet$ is a quasi-isomorphism.",
+   "uses": [
+    "prop-constructible-pullback",
+    "lem-fin-finite-morphism",
+    "thm-constructible-serre",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095G (lemma-pullback-constructible); Tag 095R (lemma-finite-pushforward-constructible); Tag 03RZ (lemma-constructible-abelian); blueprint proof, first two paragraphs"
+   }
+  },
+  {
+   "text": "For each $a$, apply [lem-weil-pbc-grothendieck-spectral-sequence] to $Y\\xrightarrow{\\pi}X\\xrightarrow f S$ and the constructible module sheaf $\\pi^*Q_a$. Its page is $E_2^{b,q}=R^bf_*(R^q\\pi_*(\\pi^*Q_a))$. By [lem-fin-finite-morphism], the rows $q>0$ vanish. In the remaining row there are no incoming or outgoing differentials from page two on. The finite filtration of the degree-$b$ abutment supplied by the cited spectral sequence has a single nonzero graded piece, $E_2^{b,0}$; hence $R^bf_*G^a\\cong R^b(f\\pi)_*(\\pi^*Q_a)$ for every $b\\geq0$. Only vanishing for the particular constructible sheaves $\\pi^*Q_a$ has been used; no assertion of exactness of $\\pi_*$ on arbitrary sheaves is taken from [lem-fin-finite-morphism].",
+   "uses": [
+    "lem-weil-pbc-grothendieck-spectral-sequence",
     "lem-fin-finite-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-finite-surjection-cancellation.md",
+    "place": "Proof, third paragraph: composition spectral sequence, with the row-collapse argument written out"
+   }
   },
   {
-   "text": "Every $G^a$ and $Q_{a+1}$ is constructible by induction and\n[thm-constructible-serre]. Define the differential\n$G^a\\to G^{a+1}$ as the quotient $G^a\\to Q_{a+1}$ followed by\nthe injective unit $Q_{a+1}\\to G^{a+1}$.\nIts kernel is the image of $Q_a$, and the preceding differential\nhas precisely that image. We have therefore constructed an exact\naugmented complex\n\n$$\n0\\longrightarrow F\\longrightarrow G^0\\longrightarrow\nG^1\\longrightarrow G^2\\longrightarrow\\cdots .\n$$",
+   "text": "Work in $\\Mod(X_{\\Et},\\Lambda)$ and $\\Mod(S_{\\Et},\\Lambda)$, which are Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian]; the source has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. The functor $f_*$ is additive and left exact on these module categories by [def-weil-pbc-direct-image]. Apply [lem-sp-cartan-eilenberg-exists] to the nonnegative complex $G^\\bullet$ of step 2. Apply [thm-sp-if-e1] to this Cartan--Eilenberg resolution and $v=f_*$, exchanging its indices $(r,s)=(b,a)$. This gives $E_1^{a,b}=R^bf_*G^a\\Longrightarrow\\mathcal H^{a+b}(Rf_*G^\\bullet)$ for $a,b\\geq0$. Since step 2 identifies $G^\\bullet$ with $F[0]$ in the derived category, the derived functor of [def-weil-pbc-direct-image] identifies the abutment with $R^{a+b}f_*F$. The differential convention after exchanging indices is $d_r:E_r^{a,b}\\to E_r^{a+r,b-r+1}$.",
    "uses": [
-    "thm-constructible-serre"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The finite morphism $\\pi$ has exact direct image by\n[lem-fin-finite-morphism]. The composition spectral sequence of\n[lem-weil-pbc-grothendieck-spectral-sequence] consequently gives\n\n$$\nR^bf_*G^a=R^b(f\\pi)_*(\\pi^*Q_a).\n$$",
-   "uses": [
-    "lem-fin-finite-morphism",
-    "lem-weil-pbc-grothendieck-spectral-sequence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Each such sheaf is constructible by the hypothesis\n$\\mathcal C(f\\pi)$ of [def-finrepair-property-c].\nApply the Cartan–Eilenberg spectral sequence\n[thm-sp-if-e1] to the displayed resolution, indexing it here as\n\n$$\nE_1^{a,b}=R^bf_*G^a\\Longrightarrow R^{a+b}f_*F\n\\qquad(a,b\\geq0).\n$$",
-   "uses": [
-    "def-finrepair-property-c",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "def-weil-pbc-direct-image",
+    "lem-sp-cartan-eilenberg-exists",
     "thm-sp-if-e1"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015I (lemma-cartan-eilenberg), with homology.tex Tag 0130 (lemma-ss-double-complex); blueprint proof, fourth paragraph"
+   }
   },
   {
-   "text": "Every successive page is formed by kernels and cokernels of maps\nbetween constructible sheaves, so all its terms are constructible by\n[thm-constructible-serre].\nFor fixed total degree $n$, only $0\\leq a,b\\leq n$ can contribute,\nand differentials entering or leaving these terms vanish for\nsufficiently large page number by the first-quadrant condition.\nThe abutment has a finite filtration whose quotients are those\nstable terms, so it is constructible by the extension clause of the\nsame weak-Serre lemma. This proves $\\mathcal C(f)$.\nThe resolution is unbounded to the right; this argument makes no\nclaim of a uniform vanishing bound.",
+   "text": "By the hypothesis $\\mathcal C(f\\pi)$, interpreted exactly as [def-finrepair-property-c], the sheaves $R^b(f\\pi)_*(\\pi^*Q_a)$ are constructible for all $a,b\\geq0$, since every $\\pi^*Q_a$ is constructible. By the isomorphisms of step 3, all the terms of the $E_1$ page of step 4 are therefore constructible.",
    "uses": [
-    "thm-constructible-serre"
+    "def-finrepair-property-c"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-finite-surjection-cancellation.md",
+    "place": "Proof, fourth paragraph: use of the hypothesis"
+   }
+  },
+  {
+   "text": "Use [thm-constructible-serre] to pass inductively from one constructible page to the next: the kernel of each differential and its image are constructible (the image is the kernel of its cokernel), and the quotient of the kernel by the incoming image is constructible by the cokernel clause. Outside $a,b\\geq0$ every term is zero. At $(a,b)$ an incoming differential has source $(a-r,b+r-1)$ and an outgoing one has target $(a+r,b-r+1)$; both vanish when $r>\\max(a,b+1)$, so the stable term is constructible. The convergence assertion of [thm-sp-if-e1], with the conventions [def-sp-convergence], gives the abutment filtration; here it is finite, because in degree $n$ the first-quadrant total complex and its filtration have only the summands $a+b=n$ with $0\\leq a\\leq n$. Thus $R^nf_*F$ has a finite filtration whose quotients are the constructible $E_\\infty^{a,n-a}$. Starting with its zero final step and using the extension clause of [thm-constructible-serre] repeatedly shows that $R^nf_*F$ is constructible. Since $F$ and $n\\geq0$ were arbitrary, this is $\\mathcal C(f)$. The proof uses only finitely many filtration pieces in each degree and asserts no uniform vanishing bound.",
+   "uses": [
+    "thm-constructible-serre",
+    "thm-sp-if-e1",
+    "def-sp-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0130 (lemma-ss-double-complex), lemma-first-quadrant-ss; etale-cohomology.tex Tag 03RZ (lemma-constructible-abelian); blueprint proof, final paragraph"
+   }
   }
  ],
  "proof_deps": [
   "lemma-weil-pbc-finite-stalk-formula",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "prop-weil-pbc-geometric-stalks-exact",
   "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-constructible-pullback",
   "lem-fin-finite-morphism",
   "thm-constructible-serre",
+  "def-weil-pbc-scheme-conventions",
   "lem-weil-pbc-grothendieck-spectral-sequence",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "def-weil-pbc-direct-image",
+  "lem-sp-cartan-eilenberg-exists",
+  "thm-sp-if-e1",
   "def-finrepair-property-c",
-  "thm-sp-if-e1"
+  "def-sp-convergence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-finite-surjection-cancellation.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructib.*(surject|finite)|(surject|finite).*constructib",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If the composite with a finite surjective scheme morphism has constructible higher direct images then so does the morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility of all higher direct images descends along a finite surjective morphism of schemes",
+   "results": "AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.Scheme.Hom.isConstructible_image; PrimeSpectrum.isConstructible_comap_image; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget; CategoryTheory.coherentTopology.isLocallySurjective_iff; PrimeSpectrum.isConstructible_range_comap; AlgebraicGeometry.Scheme.isLocallyDirected_of_equifibered_of_injective",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"Sheaf\"",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A resolution by sheaves pushed forward from a finite cover proves constructibility of derived direct images",
+   "results": "CategoryTheory.Functor.sheafPushforwardCocontinuous; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.Scheme.Hom.isConstructible_image; CategoryTheory.ran_isSheaf_of_isCocontinuous; CategoryTheory.coherentTopology.isLocallySurjective_iff; CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits; CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts; TopCat.Sheaf.pushforward_sheaf_of_sheaf",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -102,5 +187,59 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-finrepair-finite-surjection-cancellation",
+  "worker": "stage1",
+  "summary": "Retained the finite-surjection resolution and first-quadrant spectral sequence route. Added exact-stalk and unit-germ citations, constructible pullback, and the existence and category hypotheses for the Cartan--Eilenberg resolution. Replaced the unsupported arbitrary-sheaf exactness assertion by constructible-sheaf Leray row collapse. No statement change and no new nodes.",
+  "blueprint": "Proof paragraphs 1--2 are steps 1--2; paragraph 3 is step 3; paragraph 4 is steps 4--5; final paragraph is step 6.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic Stalk of an inverse image, compatible with germs of pulled-back sections used in the finite-surjection resolution argument; the unit has no replacement for this statement, and its compact-support base-change route is not replaced."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic Constructible sheaves form a weak Serre subcategory used in the finite-surjection resolution argument; the unit has no replacement for this statement, and its compact-support base-change route is not replaced."
+   },
+   {
+    "node": "lem-weil-pbc-grothendieck-spectral-sequence",
+    "why": "Generic Grothendieck spectral sequence for a composite used in the finite-surjection resolution argument; the unit has no replacement for this statement, and its compact-support base-change route is not replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic Sheaves of Lambda-modules on the small etale site form a Grothendieck abelian category used in the finite-surjection resolution argument; the unit has no replacement for this statement, and its compact-support base-change route is not replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic Sheaves of modules on the small etale site have enough injectives used in the finite-surjection resolution argument; the unit has no replacement for this statement, and its compact-support base-change route is not replaced."
+   },
+   {
+    "node": "lem-sp-cartan-eilenberg-exists",
+    "why": "Generic Existence of Cartan--Eilenberg injective resolutions used in the finite-surjection resolution argument; the unit has no replacement for this statement, and its compact-support base-change route is not replaced."
+   },
+   {
+    "node": "thm-sp-if-e1",
+    "why": "Generic Hypercohomology spectral sequence via a Cartan--Eilenberg resolution used in the finite-surjection resolution argument; the unit has no replacement for this statement, and its compact-support base-change route is not replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "thm-constructible-serre",
+  "lem-weil-pbc-grothendieck-spectral-sequence",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-sp-cartan-eilenberg-exists",
+  "thm-sp-if-e1"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-9a4f8f3e3",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-9a4f8f3e3 (reviewer sub-agent of L); spot-checked: Read the full item, all six steps, every cited node, unit/chapter route, packet/report, and cited Stacks sources. The finite-surjection resolution, module coefficient category, stalk-unit argument, spectral-sequence collapse, and finite-filtration convergence are correct with hypotheses checked and edge cases tested. No new nodes, duplicates, circularities, statement changes, or repair files are needed."
+ }
 }
