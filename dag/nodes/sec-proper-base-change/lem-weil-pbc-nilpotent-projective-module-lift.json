@@ -24,9 +24,77 @@
  "stmt_deps": [
   "def-weil-pbc-projective-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the direct-summand characterization in [def-weil-pbc-projective-module], choose a set $S$ and maps $i:\\overline P\\to\\overline F=(A/I)^{(S)}$ and $s:\\overline F\\to\\overline P$ with $si=1$. Put $\\overline p=is$. Then $\\overline p^2=\\overline p$ and its image is $i(\\overline P)$, identified with $\\overline P$ by $s$. Set $F=A^{(S)}$.",
+   "uses": [
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07LV, lemma-lift-projective-module, first sentence; Tag 05CF, lemma-characterize-projective"
+   }
+  },
+  {
+   "text": "The coordinate reduction $q:F\\to\\overline F$ is surjective with kernel $IF$: every vector has finite support, its coefficients lift individually, and a vector with coefficients in $I$ is a finite sum of elements $a e_j$ with $a\\in I$. For each basis vector $e_j$, lift the finitely supported vector $\\overline p(q(e_j))$ to $v_j\\in F$. Define $p(\\sum_j a_j e_j)=\\sum_j a_jv_j$. This is an $A$-linear endomorphism with $qp=\\overline p q$. No bound on the cardinality of $S$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07LV, lemma-lift-projective-module, choice of a lift of the projector"
+   }
+  },
+  {
+   "text": "Write $x=p^2-p$. The equality $qx=0$ implies $x(F)\\subseteq IF$. By $A$-linearity, $x(I^kF)\\subseteq I^{k+1}F$ for every $k\\geq0$, since applying $x$ to a finite sum $\\sum a_j f_j$ gives $\\sum a_jx(f_j)$. Induction gives $x^N(F)\\subseteq I^NF=0$, so $x^N=0$ in the (possibly noncommutative) ring $\\operatorname{End}_A(F)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07LV, lemma-lift-projective-module, nilpotence of the lifted projector defect"
+   }
+  },
+  {
+   "text": "Let $R=\\mathbf Z[t]/((t^2-t)^N)$, write $u$ for the class of $t$, and let $J=(u^2-u)\\subseteq R$. This is a commutative ring with $J^N=0$, and $u\\bmod J$ is idempotent. Apply [lem-weil-pbc-lift-idempotents-locally-nilpotent] to obtain an idempotent $v\\in R$ with $v-u\\in J$. All elements of $J$ are nilpotent because their $N$th powers lie in $J^N=0$.",
+   "uses": [
+    "lem-weil-pbc-lift-idempotents-locally-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05BU, lemma-lift-idempotents-noncommutative, proof using Tag 00J9, lemma-lift-idempotents"
+   }
+  },
+  {
+   "text": "Evaluation at $p$ defines a ring homomorphism $R\\to\\operatorname{End}_A(F)$: integer scalars commute with $p$, and the defining relation evaluates to $x^N=0$. Let $e$ be the image of $v$. Then $e^2=e$. Since $v-u\\in J$, its image is a multiple of $x$ by a polynomial in $p$, hence sends $F$ into $IF$. Thus $qe=qp=\\overline p q$. This is the polynomial correction of Tag 05BU, derived from the cited commutative lifting statement rather than assuming that the endomorphism ring is commutative.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05BU, lemma-lift-idempotents-noncommutative, evaluation of the universal polynomial lift; Tag 07LV"
+   }
+  },
+  {
+   "text": "Set $P=\\operatorname{Im}(e)$. The inclusion $P\\to F$ and the map $F\\to P$, $f\\mapsto e(f)$, compose to the identity on $P$, so [def-weil-pbc-projective-module] makes $P$ projective. The restriction of $q$ maps $P$ onto $\\operatorname{Im}(\\overline p)$: for $\\overline p(\\bar f)$ choose $f$ with $q(f)=\\bar f$ and use $q(e(f))=\\overline p(\\bar f)$. Its kernel is $P\\cap IF=IP$: one inclusion is immediate, and if $y\\in P\\cap IF$, write $y=\\sum_j a_jf_j$ with $a_j\\in I$; then $y=e(y)=\\sum_j a_je(f_j)\\in IP$. Hence $[y]\\mapsto s(q(y))$ defines an $A/I$-linear bijection $P/IP\\to\\overline P$. Its inverse sends $z\\in\\overline P$ to $[e(f)]$ for any lift $f$ of $i(z)$; different lifts differ in $IF$, whose image under $e$ lies in $IP$. The first composition sends $z$ to $s(q(e(f)))=s(\\overline p(i(z)))=si(z)=z$. For $y\\in P$, choose $f=y$ as a lift of $i(s(q(y)))=\\overline p(q(y))=q(y)$; the other composition sends $[y]$ to $[e(y)]=[y]$. Linearity of $s\\circ q$ and the equality $I(P/IP)=0$ give the asserted $A/I$-linearity.",
+   "uses": [
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07LV, lemma-lift-projective-module, final image construction and verification of reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-lift-idempotents-locally-nilpotent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07LV, lemma-lift-projective-module, entire proof; Tag 05BU, lemma-lift-idempotents-noncommutative, polynomial reduction to Tag 00J9"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,15 +144,121 @@
    "results": "{\"t\": \"2026-10-14T02:40:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"Projective\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Module.Grassmannian.projective_quotient\", \"ModuleCat.projectiveDimension_quotient_eq_length\", \"ModuleCat.projectiveDimension_quotient_eq_add_length_of_isWeaklyRegular\"], \"digest\": \"6214f8cadadde5e8\"}",
    "date": "2026-10-14",
    "verdict": "no match: inspected hits give one-ring projectivity, existing-complex K-projectivity, or truncation criteria, not this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent.*projective|projective.*nilpotent",
+   "results": "{\"t\": \"2026-10-14T02:54:12Z\", \"tool\": \"grep\", \"query\": \"nilpotent.*projective|projective.*nilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: projectivity within one ring, not existence of a projective lift across a quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "lift_of_isNilpotent_ker|exists.*idempotent|lift.*[Ii]dempotent",
+   "results": "{\"t\": \"2026-10-14T02:54:12Z\", \"tool\": \"grep\", \"query\": \"lift_of_isNilpotent_ker|exists.*idempotent|lift.*[Ii]dempotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/Semigroup.lean\", \"Mathlib/Topology/Algebra/Semigroup.lean\", \"Mathlib/Topology/Algebra/Semigroup.lean\", \"Mathlib/Topology/Algebra/Semigroup.lean\", \"Mathlib/Topology/Algebra/Semigroup.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\"], \"digest\": \"cc0341751bb4d58d\"}",
+   "date": "2026-10-14",
+   "verdict": "ingredient only: idempotent lifting, not the module lifting statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projective\", \"nilpotent\"",
+   "results": "{\"t\": \"2026-10-14T02:54:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"Projective\\\", \\\"nilpotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: projectivity within one ring, not existence of a projective lift across a quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIdempotentElem\", \"lift\"",
+   "results": "{\"t\": \"2026-10-14T02:54:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIdempotentElem\\\", \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "ingredient only: idempotent lifting, not the module lifting statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a projective module from a ring quotient by a nilpotent ideal",
+   "results": "{\"t\": \"2026-10-14T02:54:13Z\", \"tool\": \"leansearch\", \"query\": \"Lift a projective module from a ring quotient by a nilpotent ideal\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every projective module over a nilpotent quotient ring lifts to a projective module over the ring",
+   "results": "{\"t\": \"2026-10-14T02:54:13Z\", \"tool\": \"leanfinder\", \"query\": \"Every projective module over a nilpotent quotient ring lifts to a projective module over the ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Projective.of_lifting_property\", \"Module.Projective.of_lifting_property'\", \"ModuleCat.enoughProjectives\", \"Module.Projective.of_lifting_property''\", \"ModuleCat.projective_of_module_projective\", \"Module.Finite.exists_comp_eq_id_of_projective\", \"Module.projective_lifting_property\", \"ModuleCat.projective_of_categoryTheory_projective\"], \"digest\": \"9c6a6ccd0824d696\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: projectivity within one ring, not existence of a projective lift across a quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift an idempotent along a surjective ring homomorphism with nilpotent kernel in noncommutative rings",
+   "results": "{\"t\": \"2026-10-14T02:54:13Z\", \"tool\": \"leanfinder\", \"query\": \"Lift an idempotent along a surjective ring homomorphism with nilpotent kernel in noncommutative rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_isIdempotentElem_eq_of_ker_isNilpotent\", \"exists_isIdempotentElem_mul_eq_zero_of_ker_isNilpotent\", \"exists_isIdempotentElem_mul_eq_zero_of_ker_isNilpotent_aux\", \"existsUnique_isIdempotentElem_eq_of_ker_isNilpotent\", \"CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker\", \"CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker_aux\", \"OrthogonalIdempotents.lift_of_isNilpotent_ker\", \"OrthogonalIdempotents.lift_of_isNilpotent_ker_aux\"], \"digest\": \"7bf54459ae86591d\"}",
+   "date": "2026-10-14",
+   "verdict": "ingredient only: idempotent lifting, not the module lifting statement"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isIdempotentElem_eq_of_ker_isNilpotent",
+   "results": "{\"t\": \"2026-10-14T02:54:27Z\", \"tool\": \"grep\", \"query\": \"exists_isIdempotentElem_eq_of_ker_isNilpotent\", \"sub\": \"RingTheory/Idempotents.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"249\", \"377\"], \"digest\": \"5226d96d15f1e3fb\"}",
+   "date": "2026-10-14",
+   "verdict": "ingredient only: idempotent lifting, not the module lifting statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a noncommutative ring homomorphism whose kernel consists of nilpotent elements every idempotent in the image lifts",
+   "results": "{\"t\": \"2026-10-14T02:54:27Z\", \"tool\": \"leansearch\", \"query\": \"In a noncommutative ring homomorphism whose kernel consists of nilpotent elements every idempotent in the image lifts\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "exists_isIdempotentElem_eq_of_ker_isNilpotent",
+   "results": "{\"t\": \"2026-10-14T02:54:27Z\", \"tool\": \"loogle\", \"query\": \"exists_isIdempotentElem_eq_of_ker_isNilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"exists_isIdempotentElem_eq_of_ker_isNilpotent\"], \"digest\": \"95c32c9eb3b41ada\"}",
+   "date": "2026-10-14",
+   "verdict": "ingredient only: idempotent lifting, not the module lifting statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Idempotents on arbitrary infinite free modules can be lifted modulo a nilpotent ideal",
+   "results": "{\"t\": \"2026-10-14T02:54:27Z\", \"tool\": \"leanfinder\", \"query\": \"Idempotents on arbitrary infinite free modules can be lifted modulo a nilpotent ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker\", \"OrthogonalIdempotents.lift_of_isNilpotent_ker\", \"CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker_aux\", \"exists_isIdempotentElem_mul_eq_zero_of_ker_isNilpotent\", \"exists_isIdempotentElem_mul_eq_zero_of_ker_isNilpotent_aux\", \"exists_isIdempotentElem_eq_of_ker_isNilpotent\", \"OrthogonalIdempotents.lift_of_isNilpotent_ker_aux\", \"existsUnique_isIdempotentElem_eq_of_ker_isNilpotent\"], \"digest\": \"5e1ed0f47a6af2e5\"}",
+   "date": "2026-10-14",
+   "verdict": "ingredient only: idempotent lifting, not the module lifting statement"
+  },
+  {
+   "tool": "grep",
+   "query": "Projective.*[Qq]uotient|[Qq]uotient.*Projective",
+   "results": "{\"t\": \"2026-10-14T02:59:59Z\", \"tool\": \"grep\", \"query\": \"Projective.*[Qq]uotient|[Qq]uotient.*Projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup.lean\", \"Mathlib/LinearAlgebra/Projectivization/PSL/PSL2.lean\", \"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean\", \"Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean\", \"Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean\", \"Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean\", \"Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean\"], \"digest\": \"fae6354c09d13db1\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern projectivity and quotient modules over one ring, not projective lifting between coefficient rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective module over a quotient by a nil ideal admits a projective lift over the original ring",
+   "results": "{\"t\": \"2026-10-14T03:00:00Z\", \"tool\": \"leanfinder\", \"query\": \"A projective module over a quotient by a nil ideal admits a projective lift over the original ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Projective.of_lifting_property\", \"Module.Projective.of_lifting_property'\", \"Module.Projective.of_lifting_property''\", \"Module.projective_lifting_property\", \"ModuleCat.enoughProjectives\", \"Module.Finite.exists_comp_eq_id_of_projective\", \"ModuleCat.projective_of_module_projective\", \"ModuleCat.projective_of_categoryTheory_projective\"], \"digest\": \"8aa92e6af74cd6eb\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern projectivity and quotient modules over one ring, not projective lifting between coefficient rings"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-nilpotent-projective-complex-lift",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-nilpotent-projective-module-lift",
+  "worker": "stage1",
+  "summary": "Expanded the arbitrary-free-module projector lift, defect nilpotence, the universal commutative polynomial-ring correction, and the explicit reduction isomorphism. Reused the projective-module characterization and the commutative nil-ideal idempotent Mathlib leaf; no new nodes or changed statement.",
+  "blueprint": "Realizes the projective-module lifting input beneath amplification proof (c), TOW local models, through the nilpotent projective-complex lift; Tag 07LV projector construction and Tag 05BU polynomial correction."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NL-01d6aca12",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-01d6aca12 (reviewer sub-agent of L); spot-checked: Mathematics and citations pass Tags 07LV, 05BU, 00J9, and the cited DAG leaves, including infinite free modules and quotient identification. Repair `created.item`, incorrectly set to the parent complex-lift item; corrected full JSON is under fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-nilpotent-projective-module-lift.json. Detailed review: review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
