@@ -1,0 +1,130 @@
+{
+ "id": "lem-pc-overlap-model-chart-factorization",
+ "kind": "statement",
+ "title": "Factorization of one canonical chart comparison",
+ "statement": "Let H₀,Hₖ,H,K,L,A,B,C,D be schemes [def-pc-scheme], and write f* for abstract module pullback and P_f for tensor pullback [def-pc-module-pullback]. Fix q₀:Hₖ→H₀, p₀:H→Hₖ, t₀:H→H₀ with p₀≫q₀=t₀; r₀:H₀→A, d:K→Hₖ, s:K→B, u:B→A with (d≫q₀)≫r₀=s≫u; v:H→C, u':C→A, k:H→A with t₀≫r₀=k=v≫u'; z:L→H, l:L→K with z≫p₀=l≫d; and r:L→D, w:D→B, δ:D→C with l≫s=r≫w, δ≫u'=w≫u and z≫v=r≫δ. Fix a module sheaf N on A. Let F=r₀*N and let σ:P_t₀≅P_q₀ followed by P_p₀ be the canonical tensor composition comparison [def-pc-tensor-pullback-composition-iso]. Let η_f:P_f≅f* be the canonical adjunction comparison [lem-pc-module-pullback-adjunction]. Write c(g,f,h) for pullbackCompOfEq g f h with the specified map equality. Define E:P_p₀ followed by z*≅d* followed by l* as z*η_p₀, then composition along z,p₀, congruence along z≫p₀=l≫d, then inverse composition along l,d. Let τ=η_t₀(F)≫c(t₀,r₀,k)≫c(v,u',k)⁻¹ and s'=d*η_q₀(F)≫comp(d,q₀)(F)≫c(d≫q₀,r₀,s≫u)≫comp(s,u)(N)⁻¹; these are the direct and stage model comparisons [lem-pc-overlap-conjugate-restriction]. Let Cδ=comp(w,u)(N)≫congr((δ≫u')=(w≫u))⁻¹(N)≫comp(δ,u')(N)⁻¹, and define ξ=z*τ≫c(z,v,r≫δ)(u'*N)≫comp(r,δ)(u'*N)⁻¹≫r*(Cδ⁻¹). Finally let β=c(l,s,r≫w)(u*N)≫comp(r,w)(u*N)⁻¹. Then ξ=z*(σ(F))≫E(P_q₀F)≫l*(s')≫β, an equality of isomorphisms z*P_t₀F≅r*w*u*N. Compositions are in Lean order. No overlap transition or morphism between module sheaves is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0097",
+  "place": "Tags 0095, 0096 and 0097, adjunction and composition of inverse images; Tag 01ZR (2), first proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-overlap-conjugate-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Expand the two model comparisons. Conjugate the tensor composition comparison and the abstract composition comparison through their canonical adjunctions. Both give pushforward composition followed by congruence along p₀≫q₀=t₀. The conjugation equivalence identifies the two left adjoint comparisons, including η_t₀ and the whiskered η_q₀ and η_p₀.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-tensor-pullback-composition-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker that identity by z*. Apply naturality to move η_q₀ through composition, and use the associativity pentagon on z,p₀,q₀ and l,d,q₀ and then r₀. Congruence along hz identifies these two routes. Apply the same pentagon to the routes z,v,u′, r,δ,u′, r,w,u and l,s,u. The five chart equations identify the composites. Cancel each comparison followed by its inverse; the remaining factors are precisely ξ on one side and z*σ, E, l*s′, β on the other. This works when maps are identities or N is zero, since it uses only comparison isomorphisms.",
+   "uses": [
+    "lem-sc-left-adjoint-composition-iso-associativity",
+    "lem-pc-overlap-conjugate-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-overlap-conjugate-restriction",
+  "lem-sc-left-adjoint-composition-iso-associativity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0097",
+  "place": "Canonical inverse-image comparison calculus"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-14",
+   "verdict": "No exact match; use the component identities and adjunction APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp_assoc|conjugateIsoEquiv|leftAdjointCompIso",
+   "results": "Mathlib/Condensed/Light/Small.lean, Mathlib/Condensed/Light/Small.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+   "date": "2026-10-14",
+   "verdict": "No exact match; use the component identities and adjunction APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pasting canonical pullback isomorphisms along a commuting diagram of schemes agrees with comparison of left adjoints",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_fst_assoc, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_fst_assoc, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_snd, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_snd_assoc, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_fst",
+   "date": "2026-10-14",
+   "verdict": "No exact match; use the component identities and adjunction APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_comp_id, CategoryTheory.Adjunction.leftAdjointCompIso_id_comp, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.Adjunction.leftAdjointCompIso_inv_app, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+   "date": "2026-10-14",
+   "verdict": "No exact match; use the component identities and adjunction APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A canonical chart pullback comparison factors through tensor pullback composition and the natural comparison of two left adjoints",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OverlapStageModelRestriction",
+  "date": "2026-10-14",
+  "group": "T1"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-pc-overlap-stage-model-restriction",
+   "place": "Factorization of one canonical chart comparison"
+  },
+  "is": null
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OverlapModelChartFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/OverlapModelChartFactorization.lean",
+  "declaration": "AlgebraicGeometry.overlap_model_chart_factorization",
+  "statement": "theorem overlap_model_chart_factorization\n    {H₀ Hₖ H K L A B C D : Scheme.{u}}\n    (q₀ : Hₖ ⟶ H₀) (p₀ : H ⟶ Hₖ) (t₀ : H ⟶ H₀) (h₀ : p₀ ≫ q₀ = t₀)\n    (r₀ : H₀ ⟶ A) (d : K ⟶ Hₖ) (s : K ⟶ B) (u : B ⟶ A)\n    (hk : (d ≫ q₀) ≫ r₀ = s ≫ u)\n    (v : H ⟶ C) (u' : C ⟶ A) (k : H ⟶ A)\n    (htr : t₀ ≫ r₀ = k) (hvu : v ≫ u' = k)\n    (z : L ⟶ H) (l : L ⟶ K) (hz : z ≫ p₀ = l ≫ d)\n    (r : L ⟶ D) (w : D ⟶ B) (δ : D ⟶ C)\n    (hl : l ≫ s = r ≫ w) (hδ : δ ≫ u' = w ≫ u) (hzv : z ≫ v = r ≫ δ)\n    (N : A.Modules) :\n    let F := (Scheme.Modules.pullback r₀).obj N\n    let σ := Scheme.Modules.tensorPullbackCompositionIso p₀ q₀ t₀ h₀\n    let E := Functor.isoWhiskerRight (overlapAdjunctionComparison p₀)\n        (Scheme.Modules.pullback z) ≪≫\n      Scheme.Modules.pullbackComp z p₀ ≪≫ Scheme.Modules.pullbackCongr hz ≪≫\n      (Scheme.Modules.pullbackComp l d).symm\n    let τ := overlapDirectModelComparison t₀ r₀ k v u' htr hvu N\n    let ξ := (Scheme.Modules.pullback z).mapIso τ ≪≫\n      pullbackCompOfEq z v (r ≫ δ) hzv ((Scheme.Modules.pullback u').obj N) ≪≫\n      ((Scheme.Modules.pullbackComp r δ).app _).symm ≪≫\n      (Scheme.Modules.pullback r).mapIso\n        ((Scheme.Modules.pullbackComp w u).app N ≪≫\n          (Scheme.Modules.pullbackCongr hδ.symm).app N ≪≫\n          ((Scheme.Modules.pullbackComp δ u').app N).symm).symm\n    let s' := overlapStageModelComparison d q₀ r₀ s u hk N\n    let β := pullbackCompOfEq l s (r ≫ w) hl ((Scheme.Modules.pullback u).obj N) ≪≫\n      ((Scheme.Modules.pullbackComp r w).app _).symm\n    ξ = (Scheme.Modules.pullback z).mapIso (σ.app F) ≪≫\n      E.app ((Scheme.Modules.tensorPullback q₀).obj F) ≪≫\n      (Scheme.Modules.pullback l).mapIso s' ≪≫ β",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261014T004114-L-2838717",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261014T004114-L-2838717",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -20,42 +20,39 @@
  ],
  "proof": [
   {
-   "text": "Substitute the four equations identifying the supplied comparison isomorphisms with overlapDirectModelComparison and overlapStageModelComparison. Their data are explicit adjunction and inverse-image composition maps, with prescribed projection equations.Expand the transported stage map, using functoriality to separate source comparison, pullback of alpha, and target comparison. Expand canonical pair base change as conjugated pullHom along l. The projection equations identify each composite chart map in this expression.",
+   "text": "Substitute the four canonicality equations. Let l be the universal overlap lift and E the tensor/abstract square comparison. Apply overlap_base_change_formula to express pair base change as Ba inverse followed by l*φ followed by Bb hom, and substitute the given expression for φ.",
    "uses": [
+    "lem-pc-overlap-base-change-formula",
     "def-pc-overlap-pair-canonical-comparisons"
    ],
+   "elementary": false
+  },
+  {
+   "text": "Apply overlap_model_chart_factorization separately to charts a and b. Use the correct lift projection on each chart, and use the second projection of overlapIteratedChartHom to identify δ followed by the direct chart projection. This factors ξa and ξb through z*σ, E, l* of their respective stage comparisons and Ba or Bb.",
+   "uses": [
+    "lem-pc-overlap-model-chart-factorization",
+    "lem-pc-overlap-conjugate-restriction",
+    "def-pc-tensor-pullback-composition-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the supplied tensor compatibility equation by σ_F inverse to solve for P_p₀(α), and apply z*. Expand the two factorizations by functoriality. Naturality_1 of E identifies E inverse followed by z*P_p₀(α) followed by E hom with l*d*(α). Associativity identifies the source and target exterior factors, giving the desired equality.",
+   "uses": [],
    "elementary": true
-  },
-  {
-   "text": "Naturality and the pullback associativity pentagon identify the route l then d with z then p_0. For each chart, composition along q_0 and r_0 followed by this square agrees with the composition along t_0 and r_0 and then z, because p_0 followed by q_0 is t_0 and the stated chart projections agree.",
-   "uses": [
-    "lem-sc-left-adjoint-composition-iso-associativity",
-    "def-pc-overlap-pair-canonical-comparisons"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Identify tensor and abstract inverse image via leftAdjointUniq. For the composite comparison, conjugate both candidate maps under the canonical adjunctions. Naturality of conjugation and associativity of composition send both to the same pushforward composition followed by congruence along p_0 followed by q_0 equals t_0. The conjugation bijection therefore identifies these comparisons. Substitute this identity into the expanded map and cancel the exterior comparisons. The middle expression is sigma_F.hom followed by P_p0(alpha) followed by sigma_G.inv, conjugated by xi_a and xi_b, as asserted. Postcompose the supplied tensor compatibility equation by sigma_G.inv and use sigma_G.hom_inv_id to replace the tensor conjugate by theta. Substitute the equation naming phi.",
-   "uses": [
-    "lem-pc-module-pullback-adjunction",
-    "def-pc-tensor-pullback-composition-iso",
-    "lem-sc-left-adjoint-composition-iso-associativity",
-    "lem-pc-overlap-conjugate-restriction"
-   ],
-   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-overlap-pair-canonical-comparisons",
-  "lem-sc-left-adjoint-composition-iso-associativity",
-  "lem-pc-module-pullback-adjunction",
   "def-pc-tensor-pullback-composition-iso",
-  "lem-pc-overlap-conjugate-restriction"
+  "lem-pc-overlap-base-change-formula",
+  "lem-pc-overlap-conjugate-restriction",
+  "lem-pc-overlap-model-chart-factorization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01ZR",
-  "place": "Full expansion of the omitted restriction/gluing comparison; canonical adjunctions from Tag 0096"
+  "place": "Explicit pair formula, two one-chart factorizations, and naturality/cancellation; second reading T1"
  },
  "mathlib_searches": [
   {
@@ -135,13 +132,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-5aa55",
-  "group": "J3",
+  "reviewer": "COMPILER",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261013T215606-L-898885",
+  "landing": "20261014T004114-L-2838717",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files match the recorded nodes and change record; all three modules and the required downstream importer compile cleanly, with only the three documented sorry theorems and allowed axioms."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

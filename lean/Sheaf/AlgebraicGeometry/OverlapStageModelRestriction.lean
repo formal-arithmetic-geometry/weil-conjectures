@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.OverlapConjugateRestriction
 public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+import Sheaf.AlgebraicGeometry.OverlapModelChartFactorization
+import Sheaf.AlgebraicGeometry.OverlapBaseChangeFormula
+import Sheaf.AlgebraicGeometry.OverlapBaseChangeFormula
 
 /-! # Restricting a stage morphism through a commutative model diagram
 
@@ -122,7 +125,110 @@ theorem overlap_stage_model_restriction
         (Scheme.Cover.pullbackHom_map (U.pullback₁ q) p b)
         ((Scheme.Modules.pullback (U.pullbackHom q a)).obj (N a))
         ((Scheme.Modules.pullback (U.pullbackHom q b)).obj (N b))
-        φ = ξa.inv ≫ (Scheme.Modules.pullback z).map θ ≫ ξb.hom := by sorry
+        φ = ξa.inv ≫ (Scheme.Modules.pullback z).map θ ≫ ξb.hom := by
+  dsimp only
+  intro τa τb sa sb hτa hτb hsa hsb
+  subst τa τb sa sb
+  intro α θ hθ φ hφ
+  let F := (Scheme.Modules.pullback r₀a).obj (N a)
+  let G := (Scheme.Modules.pullback r₀b).obj (N b)
+  let σ := Scheme.Modules.tensorPullbackCompositionIso p₀ q₀ t₀ h₀
+  let sa' := overlapStageModelComparison d q₀ r₀a
+    (pullback.fst _ _) (U.pullbackHom q a) hka (N a)
+  let sb' := overlapStageModelComparison d q₀ r₀b
+    (pullback.snd _ _) (U.pullbackHom q b) hkb (N b)
+  let ξa := overlapDirectRestrictionIso U q p t h N a b a ha z
+    (pullback.fst _ _) hza ((Scheme.Modules.tensorPullback t₀).obj F)
+    (overlapDirectModelComparison t₀ r₀a ka ha (U.pullbackHom t a) hla hda (N a))
+  let ξb := overlapDirectRestrictionIso U q p t h N a b b hb z
+    (pullback.snd _ _) hzb ((Scheme.Modules.tensorPullback t₀).obj G)
+    (overlapDirectModelComparison t₀ r₀b kb hb (U.pullbackHom t b) hlb hdb (N b))
+  generalize hl : pullback.lift
+    (pullback.fst _ _ ≫ Scheme.Cover.pullbackHom (U.pullback₁ q) p a)
+    (pullback.snd _ _ ≫ Scheme.Cover.pullbackHom (U.pullback₁ q) p b) (by
+      rw [Category.assoc, Category.assoc, Scheme.Cover.pullbackHom_map,
+        Scheme.Cover.pullbackHom_map, ← Category.assoc, ← Category.assoc,
+        pullback.condition]) = l at hz
+  have hlF : l ≫ pullback.fst ((U.pullback₁ q).f a) ((U.pullback₁ q).f b) =
+      pullback.fst _ _ ≫ Scheme.Cover.pullbackHom (U.pullback₁ q) p a := by
+    rw [← hl]
+    exact pullback.lift_fst _ _ _
+  have hlS : l ≫ pullback.snd ((U.pullback₁ q).f a) ((U.pullback₁ q).f b) =
+      pullback.snd _ _ ≫ Scheme.Cover.pullbackHom (U.pullback₁ q) p b := by
+    rw [← hl]
+    exact pullback.lift_snd _ _ _
+  let E := Functor.isoWhiskerRight (overlapAdjunctionComparison p₀)
+      (Scheme.Modules.pullback z) ≪≫
+    Scheme.Modules.pullbackComp z p₀ ≪≫ Scheme.Modules.pullbackCongr hz ≪≫
+    (Scheme.Modules.pullbackComp l d).symm
+  let Ba := (pullbackCompOfEq l (pullback.fst _ _) _ hlF
+      ((Scheme.Modules.pullback (U.pullbackHom q a)).obj (N a))) ≪≫
+    ((Scheme.Modules.pullbackComp (pullback.fst _ _)
+      (Scheme.Cover.pullbackHom (U.pullback₁ q) p a)).app _).symm
+  let Bb := (pullbackCompOfEq l (pullback.snd _ _) _ hlS
+      ((Scheme.Modules.pullback (U.pullbackHom q b)).obj (N b))) ≪≫
+    ((Scheme.Modules.pullbackComp (pullback.snd _ _)
+      (Scheme.Cover.pullbackHom (U.pullback₁ q) p b)).app _).symm
+  have hξa := overlap_model_chart_factorization q₀ p₀ t₀ h₀ r₀a d
+    (pullback.fst _ _) (U.pullbackHom q a) hka ha (U.pullbackHom t a) ka hla hda
+    z l hz (pullback.fst _ _) (Scheme.Cover.pullbackHom (U.pullback₁ q) p a)
+    (overlapIteratedChartHom U q p t h a) hlF
+    (pullback.lift_snd _ _ _) hza (N a)
+  have hξb := overlap_model_chart_factorization q₀ p₀ t₀ h₀ r₀b d
+    (pullback.snd _ _) (U.pullbackHom q b) hkb hb (U.pullbackHom t b) kb hlb hdb
+    z l hz (pullback.snd _ _) (Scheme.Cover.pullbackHom (U.pullback₁ q) p b)
+    (overlapIteratedChartHom U q p t h b) hlS
+    (pullback.lift_snd _ _ _) hzb (N b)
+  change ξa = (Scheme.Modules.pullback z).mapIso (σ.app F) ≪≫
+    E.app ((Scheme.Modules.tensorPullback q₀).obj F) ≪≫
+    (Scheme.Modules.pullback l).mapIso sa' ≪≫ Ba at hξa
+  change ξb = (Scheme.Modules.pullback z).mapIso (σ.app G) ≪≫
+    E.app ((Scheme.Modules.tensorPullback q₀).obj G) ≪≫
+    (Scheme.Modules.pullback l).mapIso sb' ≪≫ Bb at hξb
+  let bc := modulesPseudofunctor.overlapPairBaseChangeHom
+        ((U.pullback₁ q).f a) ((U.pullback₁ q).f b) p
+        (Scheme.Cover.pullbackHom (U.pullback₁ q) p a)
+        (Scheme.Cover.pullbackHom (U.pullback₁ q) p b)
+        (((U.pullback₁ q).pullback₁ p).f a) (((U.pullback₁ q).pullback₁ p).f b)
+        (Scheme.Cover.pullbackHom_map (U.pullback₁ q) p a)
+        (Scheme.Cover.pullbackHom_map (U.pullback₁ q) p b)
+        ((Scheme.Modules.pullback (U.pullbackHom q a)).obj (N a))
+        ((Scheme.Modules.pullback (U.pullbackHom q b)).obj (N b))
+        φ
+  have hBC := overlap_base_change_formula ((U.pullback₁ q).f a) ((U.pullback₁ q).f b) p
+      (Scheme.Cover.pullbackHom (U.pullback₁ q) p a)
+      (Scheme.Cover.pullbackHom (U.pullback₁ q) p b)
+      (((U.pullback₁ q).pullback₁ p).f a) (((U.pullback₁ q).pullback₁ p).f b)
+      (Scheme.Cover.pullbackHom_map (U.pullback₁ q) p a)
+      (Scheme.Cover.pullbackHom_map (U.pullback₁ q) p b)
+      ((Scheme.Modules.pullback (U.pullbackHom q a)).obj (N a))
+      ((Scheme.Modules.pullback (U.pullbackHom q b)).obj (N b)) φ l hlF hlS
+  dsimp only at hBC
+  change σ.hom.app F ≫ (Scheme.Modules.tensorPullback p₀).map α =
+    θ ≫ σ.hom.app G at hθ
+  have hα : (Scheme.Modules.tensorPullback p₀).map α =
+      σ.inv.app F ≫ θ ≫ σ.hom.app G := by
+    rw [← hθ]
+    simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+  have hαz := congrArg (fun f ↦ (Scheme.Modules.pullback z).map f) hα
+  simp only [Functor.map_comp] at hαz
+  change bc = ξa.inv ≫ (Scheme.Modules.pullback z).map θ ≫ ξb.hom
+  dsimp only [bc]
+  rw [hBC, hφ, Functor.map_comp, Functor.map_comp, hξa, hξb]
+  simp only [Iso.trans_inv, Iso.trans_hom, Functor.mapIso_inv, Functor.mapIso_hom,
+    Iso.app_inv, Iso.app_hom, Category.assoc]
+  rw [← reassoc_of% hαz]
+  have hE := NatIso.naturality_1 E α
+  simp only [Functor.comp_map] at hE
+  conv_rhs =>
+    arg 2
+    arg 2
+    rw [reassoc_of% hE]
+  conv_rhs =>
+    dsimp only [Ba, Bb, sa', sb']
+    simp (config := { dsimp := false }) only [Iso.trans_inv, Iso.trans_hom,
+      Iso.symm_inv, Iso.symm_hom, Iso.app_inv, Iso.app_hom, Category.assoc]
+  rfl
 
 end
 end AlgebraicGeometry

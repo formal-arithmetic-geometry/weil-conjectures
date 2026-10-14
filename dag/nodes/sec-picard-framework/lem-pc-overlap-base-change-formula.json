@@ -1,0 +1,112 @@
+{
+ "id": "lem-pc-overlap-base-change-formula",
+ "kind": "statement",
+ "title": "Abstract module formula for pair base change",
+ "statement": "Let S,T,A,B,A′,B′ be schemes [def-pc-scheme]. Fix f:A→S, g:B→S, p:T→S, v:A′→A, w:B′→B, f′:A′→T, g′:B′→T satisfying v≫f=f′≫p and w≫g=g′≫p. Put K=A×_S B, K′=A′×_T B′ with projections s₁,s₂ and r₁,r₂ [def-pc-fibre-product], and l:K′→K any map satisfying l≫s₁=r₁≫v and l≫s₂=r₂≫w. These equations uniquely identify it with the canonical pullback lift. Let N and M be module sheaves on A and B [def-pc-module-pullback], and φ:s₁*N→s₂*M any morphism. Let βa:l*s₁*N≅r₁*v*N be pullbackCompOfEq l s₁ (r₁≫v), using the lift projection equation, followed by inverse pullback composition along r₁,v, and define βb similarly from l,s₂,r₂,w,M. Then the pair base change of φ [def-pc-overlap-pair-canonical-comparisons] equals βa.inv≫l*(φ)≫βb.hom. All comparisons are canonical and compositions are in Lean order.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0097",
+  "place": "Tags 0095, 0096 and 0097, adjunction and composition of inverse images; Tag 01ZR (2), first proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-overlap-pair-canonical-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "The two prescribed projection equations identify l with the canonical lift by pullback hom extensionality. Substitute that equality. Expand overlapPairBaseChangeHom and pullHom. The two mapComp components are inverse pullback composition and pullback composition, by modulesPseudofunctor_mapComp_inv_app and modulesPseudofunctor_mapComp_hom_app. The two mapComp prime components are pullbackCompOfEq inverse and hom, by modulesPseudofunctor_mapComp prime hom_app_eq and inv_app_eq. Their middle map is l*φ. Regroup the source and target factors as βa inverse and βb hom using the formulas for inverse and hom of a composite isomorphism and associativity.",
+   "uses": [
+    "def-pc-overlap-pair-canonical-comparisons",
+    "def-pc-local-overlap-transitions"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-local-overlap-transitions",
+  "def-pc-overlap-pair-canonical-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0097",
+  "place": "Canonical inverse-image comparison calculus"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "overlapPairBaseChangeHom|pullHom",
+   "results": "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean, Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean, Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean",
+   "date": "2026-10-14",
+   "verdict": "No exact match; use the component identities and adjunction APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pairwise overlap base change is conjugation of the inverse image map by composition isomorphisms",
+   "results": "AlgebraicGeometry.Scheme.Pullback.t, AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_snd, CategoryTheory.GlueData.mapGlueData_t', AlgebraicGeometry.Scheme.Pullback.t'_fst_snd, AlgebraicGeometry.PresheafedSpace.GlueData.pullback_base, AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_fst, AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_snd, AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_fst",
+   "date": "2026-10-14",
+   "verdict": "No exact match; use the component identities and adjunction APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat.pullHom",
+   "results": "CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat.pullHom_id, CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat.pullHom, CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat.pullHom_pullHom, CategoryTheory.Pseudofunctor.presheafHom_map, CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat.map_eq_pullHom, CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat.map_eq_pullHom_assoc, CategoryTheory.Pseudofunctor.DescentData.pullHom_hom, CategoryTheory.Pseudofunctor.DescentData.mk",
+   "date": "2026-10-14",
+   "verdict": "No exact match; use the component identities and adjunction APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The base change map on an overlap pair equals pullback of the morphism conjugated by canonical pullback composition comparisons",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OverlapStageModelRestriction",
+  "date": "2026-10-14",
+  "group": "T1"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-pc-overlap-stage-model-restriction",
+   "place": "Abstract module formula for pair base change"
+  },
+  "is": null
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OverlapBaseChangeFormula",
+  "file": "lean/Sheaf/AlgebraicGeometry/OverlapBaseChangeFormula.lean",
+  "declaration": "AlgebraicGeometry.overlap_base_change_formula",
+  "statement": "theorem overlap_base_change_formula\n    {S T A B A' B' : Scheme.{u}} (f : A ⟶ S) (g : B ⟶ S) (p : T ⟶ S)\n    (v : A' ⟶ A) (w : B' ⟶ B) (f' : A' ⟶ T) (g' : B' ⟶ T)\n    (hv : v ≫ f = f' ≫ p) (hw : w ≫ g = g' ≫ p)\n    (N : A.Modules) (M : B.Modules)\n    (φ : (Scheme.Modules.pullback (pullback.fst f g)).obj N ⟶\n      (Scheme.Modules.pullback (pullback.snd f g)).obj M)\n    (l : pullback f' g' ⟶ pullback f g)\n    (hlf : l ≫ pullback.fst f g = pullback.fst f' g' ≫ v)\n    (hls : l ≫ pullback.snd f g = pullback.snd f' g' ≫ w) :\n    let βa := pullbackCompOfEq l (pullback.fst f g) (pullback.fst f' g' ≫ v)\n        hlf N ≪≫\n      ((Scheme.Modules.pullbackComp (pullback.fst f' g') v).app N).symm\n    let βb := pullbackCompOfEq l (pullback.snd f g) (pullback.snd f' g' ≫ w)\n        hls M ≪≫\n      ((Scheme.Modules.pullbackComp (pullback.snd f' g') w).app M).symm\n    modulesPseudofunctor.overlapPairBaseChangeHom f g p v w f' g' hv hw N M φ =\n      βa.inv ≫ (Scheme.Modules.pullback l).map φ ≫ βb.hom",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261014T004114-L-2838717",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261014T004114-L-2838717",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

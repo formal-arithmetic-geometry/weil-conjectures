@@ -14072,3 +14072,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:41 L: merged deliver/R4/Sheaf.AlgebraicGeometry.ClosedImmersionResidueFieldIso (stage 3; reviewer PASS; first push; landing 20261014T004112-L-2838075 (proof); batch 20261014T004054; modules 1; new nodes 0)
 - 00:41 L: merged deliver/R4/Sheaf.AlgebraicGeometry.PerfectDescendMorphisms (stage 3; reviewer PASS; first push; landing 20261014T004113-L-2838312 (proof); batch 20261014T004054; modules 1; new nodes 0)
 - 00:41 L: merged deliver/S4/Sheaf.Paper.ModuleCupDerivedHomologyTensor (stage 3; reviewer PASS; after a return; landing 20261014T004113-L-2838542 (proof); batch 20261014T004054; modules 1; new nodes 2; change records: coord/changes/CupDerivedHomologyTensor.md)
+- 00:41 L: merged deliver/T1/Sheaf.AlgebraicGeometry.OverlapStageModelRestriction (stage 3; reviewer PASS; first push; landing 20261014T004114-L-2838717 (interface); batch 20261014T004054; modules 3; new nodes 2)
