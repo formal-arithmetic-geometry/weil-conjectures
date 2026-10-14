@@ -1,0 +1,145 @@
+{
+ "id": "lem-pc-standard-single-open-derived-arrow",
+ "kind": "lemma",
+ "title": "Open restriction conjugates the canonical single-module derived arrow",
+ "statement": "Let $Y,B,A$ be schemes [def-pc-scheme], $p:Y\\to B$ and $g:A\\to B$ arbitrary morphisms, and $M$ an $\\mathcal O_Y$-module. For opens $S\\subset B$ and $V\\subset A$ with $V\\subset g^{-1}(S)$, put $p_S=p|_S$, $M_S=M|_{p^{-1}(S)}$, and $j=g|_V:V\\to S$. Choose a family of derived categories [def-pc-derived-category] of universe u+1 for modules on these schemes, and let $R$ be exact derived open restriction from $A$ to $V$ [def-pc-derived-open-restriction-maps]. Let $b$ be the canonical derived base-change mate followed by derived direct image of the pinned single-module counit, and let $b_S$ be the same composite for $(p_S,M_S,j)$ [def-pc-derived-base-change-map, lem-sc-picard-termwise-single-map-composition]. There exist isomorphisms $s:R(\\operatorname{source}(b))\\simeq\\operatorname{source}(b_S)$ and $t:R(\\operatorname{target}(b))\\simeq\\operatorname{target}(b_S)$ satisfying $R(b);t=s;b_S$. This is a square in $D(\\mathcal O_V)$ before homology or stalks; there are no point, degree, finiteness, flatness or quasi-coherence assumptions.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-base-change-map",
+  "lem-sc-picard-termwise-single-map-composition"
+ ],
+ "source": {
+  "document": "Stacks Project, cohomology.tex and perfect.tex",
+  "place": "cohomology-remark-base-change (Tag 08HY); cohomology-lemma-restrict-direct-image-open (Tag 08FE); perfect-lemma-single-complex-base-change (Tag 0DJ9), locality paragraph"
+ },
+ "proof": [
+  {
+   "text": "Use the pinned left-derived counit from exists_derivedPullbackComposition. Expand canonicalSinglePullbackMap and cancel the single image of leftAdjointUniq.hom with the single image of its inverse. The remaining composite is picardTermwiseSingleMap and witnesses IsDerivedModulePullbackComparison. Naturality follows from counit naturality and singleMapHomologicalComplex naturality, transported through the homotopy quotient and localization.",
+   "uses": [
+    "lem-pc-canonical-single-pullback-comparison",
+    "lem-sc-picard-termwise-single-map-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply restricted_base_change_compatibility to the chosen pullback of p and g, using those pinned single comparisons on M and H=schemeOpenRestriction(Y,p inverse image S)(M). It produces source and target isomorphisms and the square for the canonical single-module arrows with coefficient H.",
+   "uses": [
+    "lem-pc-canonical-module-base-change-open-comparison-compat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Mathlib overFunctorEquiv component gives e:H isomorphic to MS, the literal restriction. Map e by the single functor, derived direct image, and derived pullback to form the source coefficient isomorphism; map its tensor pullback by the single functor and derived direct image to form the target coefficient isomorphism. Prove coefficient naturality of the derived base-change mate by transposing through its pinned adjunction: left and right naturality of the Hom equivalence, naturality of the pullback composition isomorphism, and naturality of the counit give equal transposes. Follow this with pinnedSingle_naturality from step 1, proves that these coefficient isomorphisms intertwine the two restricted single-module arrows. Compose with the isomorphisms of step 2 and use associativity to obtain the displayed square.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "lem-pc-canonical-module-base-change-open-comparison-compat",
+  "lem-pc-canonical-single-pullback-comparison",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-picard-termwise-single-map-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E1",
+  "date": "2026-10-14",
+  "document": "Stacks Project, cohomology.tex and perfect.tex",
+  "place": "cohomology-remark-base-change (Tag 08HY); cohomology-lemma-restrict-direct-image-open (Tag 08FE); perfect-lemma-single-complex-base-change (Tag 0DJ9), locality paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived open restriction homology stalk natural isomorphism",
+   "date": "2026-10-14",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.PresheafedSpace.restrictStalkIso, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_hom_eq_germ_apply, AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ_apply, AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_ofRestrict, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_hom_eq_germ, AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso",
+   "date": "2026-10-14",
+   "results": "0 hits; ",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkIso_inv|overFunctorEquiv",
+   "date": "2026-10-14",
+   "results": "17 hits; Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean, Mathlib/Geometry/RingedSpace/Stalks.lean, Mathlib/Geometry/RingedSpace/Stalks.lean, Mathlib/Geometry/RingedSpace/Stalks.lean",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived base change of a sheaf module commutes with restriction to open subschemes",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StandardSingleOpenStalkArrow",
+  "date": "2026-10-14",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Open restriction and derived-arrow compatibility, steps 1 and 2 of lem-pc-standard-single-open-stalk-arrow",
+   "via": [
+    "lem-pc-standard-single-open-stalk-arrow",
+    "lem-pc-standard-single-flat-counit-localization-homology",
+    "lem-pc-standard-single-flat-counit-localization-completion",
+    "lem-pc-standard-single-flat-counit-localization",
+    "lem-pc-standard-single-stalk-flat-counit-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean_audit": {
+  "state": "none"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StandardSingleOpenDerivedArrow",
+  "file": "lean/Sheaf/AlgebraicGeometry/StandardSingleOpenDerivedArrow.lean",
+  "declaration": "AlgebraicGeometry.standardSingle_open_derived_arrow",
+  "statement": "theorem standardSingle_open_derived_arrow\n    {Y B A : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) (g : A ⟶ B)\n    (S : B.Opens) (V : A.Opens) (hVS : V ≤ g ⁻¹ᵁ S) :\n    let R := (schemeOpenRestriction A V).mapDerivedCategory\n    let pS := p ∣_ S\n    let MS := M.restrict (p ⁻¹ᵁ S).ι\n    let j := g.resLE S V hVS\n    let b := schemeDerivedBaseChangeMap p (pullback.snd p g) g (pullback.fst p g)\n      pullback.condition ((DerivedCategory.singleFunctor _ 0).obj M) ≫\n        (schemeDerivedDirectImage (pullback.snd p g)).map\n          (Scheme.picardTermwiseSingleMap (pullback.fst p g) M)\n    let bS := schemeDerivedBaseChangeMap pS (pullback.snd pS j) j (pullback.fst pS j)\n      pullback.condition ((DerivedCategory.singleFunctor _ 0).obj MS) ≫\n        (schemeDerivedDirectImage (pullback.snd pS j)).map\n          (Scheme.picardTermwiseSingleMap (pullback.fst pS j) MS)\n    ∃ (s : R.obj ((derivedPullback g).obj ((schemeDerivedDirectImage p).obj\n          ((DerivedCategory.singleFunctor _ 0).obj M))) ≅\n        (derivedPullback j).obj ((schemeDerivedDirectImage pS).obj\n          ((DerivedCategory.singleFunctor _ 0).obj MS)))\n      (t : R.obj ((schemeDerivedDirectImage (pullback.snd p g)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj\n            (Scheme.Modules.tensorPullbackObj (pullback.fst p g) M))) ≅\n        (schemeDerivedDirectImage (pullback.snd pS j)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj\n            (Scheme.Modules.tensorPullbackObj (pullback.fst pS j) MS))),\n      R.map b ≫ t.hom = s.hom ≫ bS",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261014T034908-L-814095",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261014T034908-L-814095",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

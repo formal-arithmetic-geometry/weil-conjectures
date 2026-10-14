@@ -15,44 +15,40 @@
  },
  "proof": [
   {
-   "text": "Use derived direct-image restriction on the full inverse images of S and V to identify the restricted direct images. The existing derived open base-change compatibility theorem supplies the source and target comparisons; specialize its coefficient comparisons to the pinned single maps.",
+   "text": "Use standardSingle_open_derived_arrow to obtain source and target isomorphisms of the restricted derived arrows and their commuting square. No geometric finiteness is used in this comparison.",
    "uses": [
-    "lem-pc-restrict-derived-direct-image-open"
+    "lem-pc-standard-single-open-derived-arrow"
    ],
    "elementary": false
   },
   {
-   "text": "Apply restricted_base_change_compatibility to the pullback square and the pinned coefficient counits. Unfold the canonical single comparison: its adjunction comparison cancels with its inverse, giving picardTermwiseSingleMap. Hence the resulting square is precisely the square for standardSingleBaseChangeMap. The ordinary restriction and pinned-counit identities justify those coefficient identifications.",
+   "text": "Construct a natural linear restriction-stalk isomorphism for V inclusion into A. Mathlib restrictStalkNatIso gives the additive maps. On a common germ neighbourhood, germ_smul and the inverse stalk-map germ formula prove linearity after restriction of scalars. Its additive bijectivity gives a linear isomorphism, natural on all sheaf maps. overFunctorEquiv identifies the slice-site restriction with the literal restriction; Opens.stalkIso_inv identifies the scalar map with the one in F. Compose with mapDerivedCategoryHomologyFunctorIso to get a natural isomorphism from restricted degree-n stalk homology to ambient degree-n stalk homology.",
    "uses": [
-    "lem-weil-pbc-module-base-change-map-open-restriction",
-    "lem-pc-single-complex-open-counit-compatibility",
-    "def-pc-standard-single-base-change-map",
-    "lem-pc-canonical-module-base-change-open-comparison-compat"
+    "def-pc-module-stalk-functor",
+    "def-pc-derived-open-restriction-maps"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply degree-n homology. Exact open restriction commutes with homology. The natural open module-stalk restriction comparison identifies the resulting stalks after restricting scalars along the inverse open-stalk ring isomorphism. Compose these comparisons to obtain s and t, and apply their naturality to the restricted arrow equation.",
+   "text": "Apply the restricted degree-n stalk homology functor to the square of step 1. Compose its source comparison with the inverse natural isomorphism of step 2, and its inverse target comparison with that natural isomorphism. Naturality and cancellation of the target comparison prove the required conjugacy, implemented by the proved private categorical transportArrow lemma.",
    "uses": [
-    "lem-sc-open-module-stalk-restriction-comparison"
+    "def-pc-standard-single-base-change-map"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-module-stalk-functor",
   "def-pc-standard-single-base-change-map",
-  "lem-pc-canonical-module-base-change-open-comparison-compat",
-  "lem-pc-restrict-derived-direct-image-open",
-  "lem-pc-single-complex-open-counit-compatibility",
-  "lem-sc-open-module-stalk-restriction-comparison",
-  "lem-weil-pbc-module-base-change-map-open-restriction"
+  "lem-pc-standard-single-open-derived-arrow"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "M3",
+  "group": "E1",
   "date": "2026-10-14",
-  "document": "Stacks Project, perfect.tex and cohomology.tex",
-  "place": "perfect-lemma-single-complex-base-change (Tag 0DJ9), locality paragraph; cohomology-lemma-restrict-direct-image-open (Tag 08FE); perfect-equation-bc (Tag 0DJ7)"
+  "document": "Stacks Project, cohomology.tex and perfect.tex",
+  "place": "cohomology-remark-base-change (Tag 08HY); cohomology-lemma-restrict-direct-image-open (Tag 08FE); perfect-lemma-single-complex-base-change (Tag 0DJ9), locality paragraph"
  },
  "mathlib_searches": [
   {
@@ -126,9 +122,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261014T023935-L-15101",
+  "landing": "20261014T034908-L-814095",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
