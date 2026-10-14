@@ -219,6 +219,154 @@ lemma coact_coassoc : coactionMap p (trivπ N W) (coact hc hjp) (coact_trivπ hc
     rw [← finInv_apply hBA (finInv A (finInv B i))]
     rw [Function.comp_apply, apply_finInv (g := A) hA.2, apply_finInv (g := B) hB.2]
 
+section Descended
+
+variable {Nsch : Scheme.{u}} {n : Nsch ⟶ S} {q : triv N W ⟶ Nsch}
+  (hq : IsPullback q (trivπ N W) n p) (hγq : coact hc hjp ≫ q = pullback.fst _ _ ≫ q)
+  [Mono s] {U : Scheme.{u}} {π : U ⟶ Y} {w : U ⟶ S} (hw : w ≫ s = π)
+
+include hjp hw in
+lemma fst_p_eq : pullback.fst (j ≫ f) π ≫ p = pullback.snd (j ≫ f) π ≫ w := by
+  rw [← cancel_mono s, Category.assoc, Category.assoc, ← hjp, hw]
+  exact pullback.condition
+
+/-- The lift `W ×_Y U ⟶ ∐_{Fin N} W = N ×_S W` of an `S`-morphism `a : U ⟶ N`. -/
+noncomputable def descLift (a : U ⟶ Nsch) (ha : a ≫ n = w) : pullback (j ≫ f) π ⟶ triv N W :=
+  hq.lift (pullback.snd _ _ ≫ a) (pullback.fst _ _) (by
+    rw [Category.assoc, ha, fst_p_eq hjp hw])
+
+lemma descLift_q (a : U ⟶ Nsch) (ha : a ≫ n = w) :
+    descLift hjp hq hw a ha ≫ q = pullback.snd _ _ ≫ a := hq.lift_fst _ _ _
+
+lemma descLift_trivπ (a : U ⟶ Nsch) (ha : a ≫ n = w) :
+    descLift hjp hq hw a ha ≫ trivπ N W = pullback.fst _ _ := hq.lift_snd _ _ _
+
+include hγq in
+/-- The section of the sheaf defined by the restricted cocycle attached to an `S`-morphism
+`U ⟶ N`: the index in `N ×_S W = ∐_{Fin N} W`. -/
+lemma isTwistedSection_descLift (a : U ⟶ Nsch) (ha : a ≫ n = w) :
+    IsTwistedSection (j ≫ f) (restrictCocycle j c) π
+      (fun x ↦ idx N W ((descLift hjp hq hw a ha).base x)) := by
+  refine ⟨(IsLocallyConstant.iff_continuous _).2
+    (continuous_idx.comp (descLift hjp hq hw a ha).base.hom.continuous), fun w' ↦ ?_⟩
+  set r₁ := pullback.fst (pullback.snd (j ≫ f) π) (pullback.snd (j ≫ f) π)
+  set r₂ := pullback.snd (pullback.snd (j ≫ f) π) (pullback.snd (j ≫ f) π)
+  set L := descLift hjp hq hw a ha
+  have hL : (r₁ ≫ L) ≫ trivπ N W ≫ p = (r₂ ≫ pullback.fst (j ≫ f) π) ≫ p := by
+    have e : r₁ ≫ pullback.snd (j ≫ f) π = r₂ ≫ pullback.snd (j ≫ f) π := pullback.condition
+    rw [Category.assoc, reassoc_of% (descLift_trivπ hjp hq hw a ha), Category.assoc,
+      fst_p_eq hjp hw, reassoc_of% e]
+  let ℓ : pullback (pullback.snd (j ≫ f) π) (pullback.snd (j ≫ f) π) ⟶
+      pullback (trivπ N W ≫ p) p := pullback.lift _ _ hL
+  have hℓ : ℓ ≫ coact hc hjp = r₂ ≫ L := by
+    refine hq.hom_ext ?_ ?_
+    · rw [Category.assoc, hγq, pullback.lift_fst_assoc, Category.assoc,
+        descLift_q, Category.assoc, descLift_q, ← Category.assoc, ← Category.assoc]
+      exact congrArg (· ≫ a) pullback.condition
+    · rw [Category.assoc, coact_trivπ, pullback.lift_snd, Category.assoc, descLift_trivπ]
+  have hκ : ℓ ≫ kappa hjp = twistedPairMap (j ≫ f) π := by
+    apply pullback.hom_ext
+    · rw [Category.assoc, kappa_fst, pullback.lift_fst_assoc, Category.assoc, descLift_trivπ,
+        pullback.lift_fst]
+    · rw [Category.assoc, kappa_snd, pullback.lift_snd, pullback.lift_snd]
+  have e := congrArg (fun g ↦ idx N W (g.base w')) hℓ
+  simp only [Scheme.Hom.comp_apply, idx_coact] at e
+  have e₁ : (pullback.fst (trivπ N W ≫ p) p).base (ℓ.base w') = L.base (r₁.base w') := by
+    rw [← Scheme.Hom.comp_apply, pullback.lift_fst, Scheme.Hom.comp_apply]
+  have e₂ : (kappa hjp).base (ℓ.base w') = (twistedPairMap (j ≫ f) π).base w' := by
+    rw [← Scheme.Hom.comp_apply, hκ]
+  rw [e₁, e₂] at e
+  change idx N W (L.base (r₁.base w')) =
+    c ((pairRestrict j).base ((twistedPairMap (j ≫ f) π).base w')) (idx N W (L.base (r₂.base w')))
+  rw [← e, apply_finInv (hc.bijective _).2]
+omit [Mono s] in
+include hjp hw in
+lemma surjective_snd [Surjective p] : Function.Surjective (pullback.snd (j ≫ f) π).base := by
+  intro u
+  obtain ⟨w₀, hw₀⟩ := p.surjective (w.base u)
+  obtain ⟨x, -, hx⟩ := Scheme.Pullback.exists_preimage_pullback (f := j ≫ f) (g := π) w₀ u (by
+    rw [hjp, Scheme.Hom.comp_apply, hw₀, ← Scheme.Hom.comp_apply, hw])
+  exact ⟨x, hx⟩
+
+omit [Mono s] in
+include hjp hw in
+lemma epi_snd [Surjective p] [WeaklyEtale (j ≫ f)] [QuasiCompact (j ≫ f)] :
+    Epi (pullback.snd (j ≫ f) π) := by
+  have : Surjective (pullback.snd (j ≫ f) π) := ⟨surjective_snd hjp hw⟩
+  infer_instance
+
+/-- Distinct `S`-morphisms `U ⟶ N` give distinct sections. -/
+lemma descLift_injective [Surjective p] [WeaklyEtale (j ≫ f)] [QuasiCompact (j ≫ f)]
+    {a b : U ⟶ Nsch} (ha : a ≫ n = w) (hb : b ≫ n = w)
+    (h : ∀ x, idx N W ((descLift hjp hq hw a ha).base x) =
+      idx N W ((descLift hjp hq hw b hb).base x)) : a = b := by
+  have := epi_snd hjp hw (j := j)
+  have e : descLift hjp hq hw a ha = descLift hjp hq hw b hb :=
+    hom_ext_triv (by rw [descLift_trivπ, descLift_trivπ]) h
+  rw [← cancel_epi (pullback.snd (j ≫ f) π), ← descLift_q hjp hq hw a ha,
+    ← descLift_q hjp hq hw b hb, e]
+
+include hγq in
+/-- Every section comes from an `S`-morphism `U ⟶ N`. -/
+lemma exists_descLift [Surjective p] [WeaklyEtale (j ≫ f)] [QuasiCompact (j ≫ f)]
+    {τ : ↥(pullback (j ≫ f) π) → Fin N}
+    (hτ : IsTwistedSection (j ≫ f) (restrictCocycle j c) π τ) :
+    ∃ (a : U ⟶ Nsch) (ha : a ≫ n = w), ∀ x, idx N W ((descLift hjp hq hw a ha).base x) = τ x := by
+  have : Surjective (pullback.snd (j ≫ f) π) := ⟨surjective_snd hjp hw⟩
+  let Λ : pullback (j ≫ f) π ⟶ triv N W :=
+    ofIdx (pullback.fst _ _) ⟨τ, (IsLocallyConstant.iff_continuous _).1 hτ.1⟩
+  have hΛv : Λ ≫ trivπ N W = pullback.fst _ _ := ofIdx_trivπ _ _
+  have hΛidx (x) : idx N W (Λ.base x) = τ x := idx_ofIdx _ _ x
+  -- `Λ ≫ q` is constant on the fibres of `W ×_Y U ⟶ U`
+  have key {Z : Scheme.{u}} (g₁ g₂ : Z ⟶ pullback (j ≫ f) π)
+      (hg : g₁ ≫ pullback.snd _ _ = g₂ ≫ pullback.snd _ _) : g₁ ≫ Λ ≫ q = g₂ ≫ Λ ≫ q := by
+    let k := pullback.lift g₁ g₂ hg
+    have hk₁ : k ≫ pullback.fst _ _ = g₁ := pullback.lift_fst _ _ _
+    have hk₂ : k ≫ pullback.snd _ _ = g₂ := pullback.lift_snd _ _ _
+    have hL : ((k ≫ pullback.fst _ _) ≫ Λ) ≫ trivπ N W ≫ p =
+        (k ≫ pullback.snd _ _ ≫ pullback.fst (j ≫ f) π) ≫ p := by
+      simp only [Category.assoc]
+      rw [reassoc_of% hΛv, fst_p_eq hjp hw]
+      exact congrArg (k ≫ ·) (pullback.condition_assoc w)
+    let ℓ := pullback.lift _ _ hL
+    have hℓ : ℓ ≫ coact hc hjp = k ≫ pullback.snd _ _ ≫ Λ := by
+      refine hom_ext_triv ?_ fun z ↦ ?_
+      · rw [Category.assoc, coact_trivπ, pullback.lift_snd, Category.assoc, Category.assoc, hΛv]
+      · have hκ : ℓ ≫ kappa hjp = k ≫ twistedPairMap (j ≫ f) π := by
+          apply pullback.hom_ext
+          · rw [Category.assoc, kappa_fst, pullback.lift_fst_assoc, Category.assoc,
+              Category.assoc, hΛv, Category.assoc, pullback.lift_fst]
+          · rw [Category.assoc, kappa_snd, pullback.lift_snd, Category.assoc, pullback.lift_snd]
+        rw [Scheme.Hom.comp_apply, idx_coact]
+        have e₁ : (pullback.fst (trivπ N W ≫ p) p).base (ℓ.base z) =
+            Λ.base ((pullback.fst (pullback.snd (j ≫ f) π) (pullback.snd (j ≫ f) π)).base
+              (k.base z)) := by
+          rw [← Scheme.Hom.comp_apply, pullback.lift_fst]
+          simp only [Scheme.Hom.comp_apply]
+        have e₂ : (kappa hjp).base (ℓ.base z) = (twistedPairMap (j ≫ f) π).base (k.base z) := by
+          rw [← Scheme.Hom.comp_apply, hκ, Scheme.Hom.comp_apply]
+        rw [e₁, e₂, hΛidx, hτ.2 (k.base z)]
+        simp only [restrictCocycle]
+        rw [finInv_apply (hc.bijective _).1]
+        simp only [Scheme.Hom.comp_apply, hΛidx]
+    calc g₁ ≫ Λ ≫ q = (k ≫ pullback.fst _ _) ≫ Λ ≫ q := by rw [hk₁]
+      _ = ℓ ≫ pullback.fst _ _ ≫ q := by rw [pullback.lift_fst_assoc]; simp only [Category.assoc]
+      _ = ℓ ≫ coact hc hjp ≫ q := by rw [hγq]
+      _ = (k ≫ pullback.snd _ _) ≫ Λ ≫ q := by rw [reassoc_of% hℓ, Category.assoc]
+      _ = g₂ ≫ Λ ≫ q := by rw [hk₂]
+  let a := EffectiveEpi.desc (pullback.snd (j ≫ f) π) (Λ ≫ q) fun g₁ g₂ hg ↦ key g₁ g₂ hg
+  have hfac : pullback.snd (j ≫ f) π ≫ a = Λ ≫ q := EffectiveEpi.fac _ _ _
+  have := epi_snd hjp hw (j := j)
+  have ha : a ≫ n = w := by
+    rw [← cancel_epi (pullback.snd (j ≫ f) π), reassoc_of% hfac, hq.w, reassoc_of% hΛv,
+      fst_p_eq hjp hw]
+  refine ⟨a, ha, fun x ↦ ?_⟩
+  have e : descLift hjp hq hw a ha = Λ :=
+    hq.hom_ext (by rw [descLift_q, hfac]) (by rw [descLift_trivπ, hΛv])
+  rw [e, hΛidx]
+
+end Descended
+
 end Coaction
 
 end AlgebraicGeometry.TwistedDescent
