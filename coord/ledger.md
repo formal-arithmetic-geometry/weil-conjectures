@@ -14141,3 +14141,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:08 L: merged deliver/U2/Sheaf.AlgebraicGeometry.AffineBaseChangeModelIsosOfSchemeComparisons (stage 3; reviewer PASS; first push; landing 20261014T010854-L-3168155 (interface); batch 20261014T010832; modules 3; new nodes 2)
 - 01:08 L: merged deliver/U2/Sheaf.AlgebraicGeometry.AffineChartSectionRingPresentationsTail (stage 3; reviewer PASS; first push; landing 20261014T010854-L-3168297 (proof); batch 20261014T010832; modules 1; new nodes 0)
 - 01:08 L: merged deliver/U4/Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup (stage 3; reviewer PASS; after a return; landing 20261014T010855-L-3168472 (proof); batch 20261014T010832; modules 1; new nodes 0)
+- 01:08 L: merged deliver/U4/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore (stage 3; reviewer PASS; first push; landing 20261014T010855-L-3168646 (proof); batch 20261014T010832; modules 1; new nodes 0)
