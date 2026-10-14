@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "thm-fin-projective-line-constructible",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Constructible coefficients on the projective line",
- "statement": "Let $S$ be of finite type\nover $k$, and let $\\Lambda$ be the finite ring killed by an\ninteger invertible in $k$ of [sbc-def-coefficient-conventions].\nFor every constructible\n$\\Lambda$-sheaf $F$ on $\\mathbf P^1_S$, every\nhigher direct image\n$R^q\\pi_*F$, for $\\pi:\\mathbf P^1_S\\to S$, is constructible.",
+ "statement": "Let $k$ be a field, and let $S$ be of finite type\nover $k$, and let $\\Lambda$ be the finite ring killed by an\ninteger invertible in $k$ of [sbc-def-coefficient-conventions].\nFor every constructible\n$\\Lambda$-sheaf $F$ on $\\mathbf P^1_S$, every\nhigher direct image\n$R^q\\pi_*F$, for $\\pi:\\mathbf P^1_S\\to S$, is constructible.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-line-constructible.md",
   "place": "node thm-fin-projective-line-constructible, order 1618"
@@ -15,61 +15,252 @@
  "stmt_deps": [
   "sbc-def-coefficient-conventions",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-nagata-projective-space-base-change",
+  "def-weil-pbc-constructible-complexes"
  ],
  "proof": [
   {
-   "text": "First regard $F$ as a sheaf of $\\mathbf Z/N$-modules.\nApply [lem-fin-finite-type-pushforward-embedding] to embed it\ninto a finite sum $G^0$ of finite pushforwards of constant finite\ngroups killed by $N$.\nThe sheaf $G^0$ is constructible by [lem-fin-finite-morphism];\nits cokernel $Q_1$ is constructible by\n[thm-constructible-serre].\nRepeat with $Q_1$, and inductively with every subsequent cokernel.\nFactoring the differentials through those cokernels produces an exact\naugmented complex\n\n$$\n0\\to F\\to G^0\\to G^1\\to\\cdots ,\n\\qquad G^a=\\bigoplus_i(h_{ai})_*\\underline {M_{ai}},\n$$\n\nwith each $h_{ai}:Y_{ai}\\to\\mathbf P^1_S$ finite.\nBy [lem-fin-finite-over-projective], $Y_{ai}\\to S$ is projective.\nIts geometric fibres have dimension at most one, since they are\nfinite over a projective line. Thus\n[cor-fin-projective-curve-finite-group] applies to $M_{ai}$.\nFinite exactness and the composition sequence of\n[lem-fin-finite-morphism], [lem-weil-pbc-grothendieck-spectral-sequence]\ngive\n\n$$\nR^b\\pi_*G^a\n=\\bigoplus_i R^b(\\pi h_{ai})_*\\underline {M_{ai}},\n$$\n\nwhich is constructible in every degree.",
+   "text": "Write $P=\\mathbf P^1_S$ and $A=\\mathbf Z/N$. Here $k$ is the field in the statement, and $N>0$ annihilates $\\Lambda$ and is invertible in $k$. The projection $\\pi:P\\to S$ is proper by [lemma-nagata-projective-space-base-change-proper], hence quasi-compact and of finite type by [def-weil-proper-morphism]. It is projective in [def-pc-projective-morphism]: take the identity closed immersion into $\\mathbf P^1_S$. A field is Noetherian because its only ideals are zero and the whole field, so [lem-weil-pbc-finite-type-over-noetherian] shows that $S$ and then $P$ are Noetherian. Also $P$ is of finite type over $k$: by [lem-weil-pbc-projective-space-standard-charts](a),(c), on the two projective-line charts over a finite affine cover of $S$, its coordinate algebras are $B[t]$ with $B$ finitely generated over $k$. Choose a finite affine open cover $S=\\bigcup_{j=1}^t U_j$. For Steps 2–9, replace $S$ by one $U_j$, $P$ by $\\mathbf P^1_{U_j}$ using [lemma-nagata-projective-space-base-change-pullback], and $F$ by its restriction. Each $U_j$ is of finite type over $k$ (the finite-type condition is local on the source and an affine scheme is quasi-compact), and is Noetherian by the same lemma. Restricting the finite stratification and its local module trivializations preserves constructibility. Step 10 identifies these local higher direct images and assembles their finite stratifications on the original $S$.",
    "uses": [
-    "lem-fin-finite-type-pushforward-embedding",
-    "lem-fin-finite-morphism",
-    "thm-constructible-serre",
-    "lem-fin-finite-over-projective",
-    "cor-fin-projective-curve-finite-group",
-    "lem-weil-pbc-grothendieck-spectral-sequence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Now use [thm-sp-if-e1] for the ordinary bounded-below resolution:\n\n$$\nE_1^{a,b}=R^b\\pi_*G^a\\Longrightarrow R^{a+b}\\pi_*F,\n\\qquad a,b\\geq0.\n$$",
-   "uses": [
-    "thm-sp-if-e1"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "All pages are constructible by kernels and cokernels.\nFor any fixed total degree, first-quadrant convergence supplies\na finite filtration by stable terms of this spectral sequence.\nExtensions therefore prove constructibility of the abutment by\n[thm-constructible-serre].\nThis step establishes constructibility degree by degree.",
-   "uses": [
-    "thm-constructible-serre"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Finally these are also the underlying abelian higher direct images\nof the original $\\Lambda$-sheaf. Here is an explicit simultaneous\ncomputation. Choose a conservative family $P$ of geometric points\nof $\\mathbf P^1_S$, let $e^*$ take the family of stalks, and set\n$e_*((M_x))=\\prod_{x\\in P}x_*M_x$.\nBoth $e_*$ and $\\pi_*e_*$ are exact on families of modules:\non any etale object their sections are products of the module\ncoordinates, and products of surjections of modules are surjective.\nAlso $e_*$ preserves injectives, being right adjoint to the exact\nstalk functor $e^*$.\nThe ordinary composition spectral sequence therefore makes every\n$e_*((M_x))$ acyclic for $\\pi_*$.\nIterate the injective unit $E\\to e_*e^*E$ on its successive\ncokernels. This is an acyclic resolution, with all maps\n$\\Lambda$-linear; it remains an acyclic resolution on underlying\nabelian sheaves by the identical argument.\nThus it computes both higher direct images, with the same\nunderlying abelian cohomology.\nThis argument uses products of modules in an explicit section\ncalculation, and does not assert that arbitrary products of\nepimorphisms of sheaves are epimorphisms.\nOn each finite locally constant abelian stratum the finitely many\nscalar actions are maps of finite locally constant sheaves.\nA common etale refinement makes their values constant. The given\nmodule identities then identify the stratum with a constant finite\n$\\Lambda$-module, proving the module constructibility required\nby [def-weil-pbc-constructible-complexes].",
-   "uses": [
+    "sbc-def-coefficient-conventions",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "def-pc-projective-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lemma-nagata-projective-space-base-change-pullback",
     "def-weil-pbc-constructible-complexes"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-line-constructible.md",
+    "place": "Proof"
+   }
+  },
+  {
+   "text": "Forget the $\\Lambda$-action on $F$ to the canonical $A$-action. The finite locally constant module trivializations in [def-weil-pbc-constructible-complexes] remain trivializations after this forgetting, so $F$ is constructible over $A$. Put $Q_0=F$. Inductively apply [lem-fin-finite-type-pushforward-embedding] to $Q_a$, obtaining an injection $Q_a\\hookrightarrow G^a=\\bigoplus_i(h_{ai})_*\\underline{M_{ai}}$, with finitely many finite $h_{ai}:Y_{ai}\\to P$ and finite abelian groups $M_{ai}$ killed by $N$. Constant finite $A$-sheaves are constructible. [lem-fin-finite-morphism] and repeated extensions in [thm-constructible-serre] make $G^a$ constructible; the cokernel clause makes $Q_{a+1}=\\operatorname{coker}(Q_a\\to G^a)$ constructible, which justifies the next induction step. Define $d^a$ as the quotient $G^a\\to Q_{a+1}$ followed by the chosen injection $Q_{a+1}\\to G^{a+1}$. Then $\\ker d^a=Q_a=\\operatorname{im}d^{a-1}$ (and $\\ker d^0=F$), so $F[0]\\to G^\\bullet$ is a quasi-isomorphism of nonnegative complexes.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "lem-fin-finite-type-pushforward-embedding",
+    "lem-fin-finite-morphism",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-line-constructible.md",
+    "place": "Proof"
+   }
+  },
+  {
+   "text": "For each $h=h_{ai}$, [lem-fin-finite-over-projective] applies over the affine Noetherian base now in force, since $P\\to S$ is projective, and yields projectivity of $\\pi h:Y_{ai}\\to S$. Moreover [lem-weil-pbc-finite-morphism-permanence](c) applied to the proper projection shows that $Y_{ai}\\to S$ is proper, hence of finite type. Thus $Y_{ai}$ is of finite type over $k$: finite affine covers for the two finite-type maps give coordinate algebras generated by the generators of the first algebra and the generators of the second algebra. No separatedness of $S\\to\\operatorname{Spec}k$ is needed.",
+   "uses": [
+    "lem-fin-finite-over-projective",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-line-constructible.md",
+    "place": "Proof"
+   }
+  },
+  {
+   "text": "For a geometric point $\\bar s$ with algebraically closed residue field $K$, [lemma-nagata-projective-space-base-change-pullback] identifies $P_{\\bar s}$ with $\\mathbf P^1_K$, whose dimension is at most one by [lem-weil-pbc-p1-field-dimension-one]. By [lem-weil-pbc-finite-morphism-permanence](a),(b), $h_{\\bar s}$ is finite and the inverse images of an affine open cover of $\\mathbf P^1_K$ are affine. Its coordinate maps are integral by [pqf-lem-finite-integral-lft]. Each source coordinate ring therefore has dimension at most that of its target coordinate ring by [lem-weil-pbc-integral-extension-dimension]. The affine-cover formula [lem-pc-dimension-affine-open-cover], together with [lem-pc-scheme-dimension-local-rings] identifying its local-ring convention with topological dimension, shows that the target chart rings have dimension at most one and the source fibre has dimension at most one. If the source fibre is empty the dimension is $-\\infty$ and the bound holds directly. This proves the required bound for every geometric fibre, including nonreduced and disconnected ones.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-pullback",
+    "lem-weil-pbc-p1-field-dimension-one",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "pqf-lem-finite-integral-lft",
+    "lem-weil-pbc-integral-extension-dimension",
+    "lem-pc-dimension-affine-open-cover",
+    "lem-pc-scheme-dimension-local-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-line-constructible.md",
+    "place": "Proof"
+   }
+  },
+  {
+   "text": "The additive left exact functor $\\pi_*$ in [lem-weil-pbc-module-direct-image-left-exact] commutes with finite sums, which in an abelian category are finite products. The same is true of $R^b\\pi_*$: use [lem-weil-pbc-module-sheaves-enough-injectives] to take injective resolutions of the finitely many summands, and take their degreewise sum. A finite sum of injectives is injective, since a map into it extends component by component across a monomorphism; finite sums preserve exact sequences, since they are computed component by component. Applying $\\pi_*$ to this summed resolution and taking kernels modulo images therefore gives the sum of the individual $R^b\\pi_*$.",
+   "uses": [
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-weil-pbc-module-sheaves-enough-injectives"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-line-constructible.md",
+    "place": "Proof"
+   }
+  },
+  {
+   "text": "Each finite group $M=M_{ai}$ has order invertible in $k$: choosing finitely many generators gives a surjection $A^r\\twoheadrightarrow M$, so counting the equal-sized fibres gives $|M|\\mid N^r$. All primes dividing $|M|$ thus divide $N$. By Steps 3 and 4, [cor-fin-projective-curve-finite-group] applies to $\\pi h$ and makes every $R^b(\\pi h)_*\\underline M$ constructible as an abelian sheaf. In the composition spectral sequence [lem-weil-pbc-grothendieck-spectral-sequence] for $h$ and $\\pi$ with coefficients $A$, [lem-fin-finite-morphism] kills all rows $R^c h_*\\underline M$ with $c>0$. Its sole row and its filtration give $R^b\\pi_*(h_*\\underline M)\\cong R^b(\\pi h)_*\\underline M$. Apply [lem-sbc-higher-direct-image-forget-comparison] with coefficient rings $A$ and $\\mathbf Z$ to identify the underlying abelian sheaves on the right. A finite locally constant abelian sheaf killed by $N$ is finite locally constant over $A$: its $A$-action is the unique action given by repeated addition. Thus the right sides are constructible $A$-sheaves. Step 5 and the extension clause of [thm-constructible-serre] now make $R^b\\pi_*G^a$ constructible for all $a,b\\ge0$.",
+   "uses": [
+    "cor-fin-projective-curve-finite-group",
+    "lem-weil-pbc-grothendieck-spectral-sequence",
+    "lem-fin-finite-morphism",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-line-constructible.md",
+    "place": "Proof"
+   }
+  },
+  {
+   "text": "Work in $\\Mod(P_{\\Et},A)$ and $\\Mod(S_{\\Et},A)$, which are Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian], and use the additive left exact functor $\\pi_*$ of [lem-weil-pbc-module-direct-image-left-exact]. Enough injectives are supplied by [lem-weil-pbc-module-sheaves-enough-injectives]. Apply [lem-sp-cartan-eilenberg-exists] to the nonnegative complex $G^\\bullet$  to obtain $I^{a,b}$, with $a$ the complex degree and $b$ the resolution degree. Set $J^{b,a}=I^{a,b}$ and exchange the horizontal and vertical differentials; use the signed row-cohomology identification $(-1)^{ab}$ specified in [thm-sp-if-e1]. Then $J^{\\bullet,a}$ resolves $G^a$, and its column-cohomology complexes resolve $H^a(G^\\bullet)$, exactly the row convention required there. That theorem yields $E_1^{b,a}=R^b\\pi_*G^a\\Longrightarrow H^{a+b}(R\\pi_*G^\\bullet)=R^{a+b}\\pi_*F$, with $a,b\\ge0$; the last equality uses the quasi-isomorphism from Step 2 and the definition of the derived direct image. The first-quadrant double-complex convergence and finite-filtration assertions are those of [thm-sp-double-complex-spectral-sequences].",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-sp-cartan-eilenberg-exists",
+    "thm-sp-if-e1",
+    "thm-sp-double-complex-spectral-sequences",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015I (lemma-cartan-eilenberg), 015J (lemma-two-ss-complex-functor), with exchanged indices"
+   }
+  },
+  {
+   "text": "All $E_1$ entries are constructible by Step 6. If a page is constructible, the kernel, image (a cokernel of a kernel), and quotient descriptions of the next page make that page constructible by [thm-constructible-serre]. For each fixed entry, the first-quadrant stabilization in [thm-sp-double-complex-spectral-sequences] reaches a stable page after finitely many steps. For fixed total degree $n\\ge0$, its abutment has a finite filtration with graded pieces $E_\\infty^{b,a}$ for $a+b=n$. Starting at the zero end of that filtration, the extension clause of [thm-constructible-serre] proves constructibility of each successive filtered piece and hence $R^n\\pi_*F$ as an $A$-sheaf.  For a sheaf in degree zero choose its injective resolution in degrees $0,1,\\ldots$ as in [def-weil-pbc-direct-image]; applying $\\pi_*$ leaves all negative terms zero, so negative cohomology vanishes.",
+   "uses": [
+    "thm-constructible-serre",
+    "thm-sp-double-complex-spectral-sequences",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-line-constructible.md",
+    "place": "Proof"
+   }
+  },
+  {
+   "text": "Finally [lem-sbc-higher-direct-image-forget-comparison], applied once to the original $\\Lambda$-sheaf and once to its underlying $A$-sheaf, identifies the underlying abelian sheaves of both higher direct images. Their common abelian sheaf is constructible by Step 8. On any of its finite locally constant strata from [def-weil-pbc-constructible-complexes], choose an etale cover trivializing it as the finite abelian group $M$. At each geometric point, refine this cover so the endomorphism for every $\\lambda\\in\\Lambda$ has a fixed value on every $m\\in M$: an equality of two germs of sections holds on a neighbourhood, and there are only finitely many pairs $(\\lambda,m)$. On this refinement all action tables are constant. The module identities are already sheaf identities, so the fixed table makes $M$ a finite $\\Lambda$-module and the trivialization is $\\Lambda$-linear. These neighbourhoods cover the stratum, giving finite local constancy as $\\Lambda$-modules. The same finite stratification therefore proves the required constructibility of every $R^q\\pi_*F$ over $\\Lambda$. This uses only ordinary small-etale categories and makes no assertion for adic coefficients.",
+   "uses": [
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-line-constructible.md",
+    "place": "Proof"
+   }
+  },
+  {
+   "text": "Return to the original base $S$. For each affine open $j:U_j\\hookrightarrow S$, [lem-weil-pbc-etale-localization-exchange] applied to the underlying abelian sheaf gives $(R^q\\pi_*F)_{ab}|_{U_j}\\cong R^q\\pi_{j*}(F_{ab}|_{\\mathbf P^1_{U_j}})$. The inverse image here is restriction to the localized site, so it is exact and commutes with kernels, images and cohomology. By [lem-sbc-higher-direct-image-forget-comparison], the abelian sheaves on the right underlie the constructible module sheaves proved in Steps 2–9. The finite scalar-action argument of Step 9 therefore makes the original $R^q\\pi_*F$ constructible on each $U_j$. To obtain a finite partition on $S$, take each local stratum in $U_j$ and intersect it with $U_j\\setminus\\bigcup_{i<j}U_i$. These sets are disjoint and cover $S$; they are locally closed constructible in $S$, since their defining sets are locally closed and all schemes here are Noetherian. Give them the induced subscheme structures. Restricting the local module trivializations makes every resulting stratum finite locally constant. There are finitely many opens and finitely many strata per open, so this is the finite stratification required by [def-weil-pbc-constructible-complexes]. If $S$ is empty, the empty partition proves constructibility directly.",
+   "uses": [
+    "lem-weil-pbc-etale-localization-exchange",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6G (lemma-restrict-direct-image-open); finite partition assembled as in the constructibility definition"
+   }
   }
  ],
  "proof_deps": [
+  "sbc-def-coefficient-conventions",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-weil-proper-morphism",
+  "def-pc-projective-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "def-weil-pbc-constructible-complexes",
   "lem-fin-finite-type-pushforward-embedding",
   "lem-fin-finite-morphism",
   "thm-constructible-serre",
   "lem-fin-finite-over-projective",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-p1-field-dimension-one",
+  "pqf-lem-finite-integral-lft",
+  "lem-weil-pbc-integral-extension-dimension",
+  "lem-pc-dimension-affine-open-cover",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
   "cor-fin-projective-curve-finite-group",
   "lem-weil-pbc-grothendieck-spectral-sequence",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-sp-cartan-eilenberg-exists",
   "thm-sp-if-e1",
-  "def-weil-pbc-constructible-complexes"
+  "thm-sp-double-complex-spectral-sequences",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-etale-localization-exchange"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-line-constructible.md",
-  "place": "## Proof"
+  "place": "Proof; expanded using Stacks Tags 015I, 015J, 03FD, 00OJ, 04MU"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of constructible finite torsion etale sheaves under the projective line projection are constructible",
+   "results": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, PrimeSpectrum.isConstructible_comap_image, PrimeSpectrum.isConstructible_range_comap, AlgebraicGeometry.exists_map_preimage_le_map_preimage",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constructible subsets, not constructible etale sheaves and their higher direct images"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(directImage|derived|pushforward)|projective.*constructible",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constructible subsets, not constructible etale sheaves and their higher direct images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of constructible torsion etale sheaves under projective space projection",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"Sheaf\"",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constructible subsets, not constructible etale sheaves and their higher direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology of a constructible sheaf along a proper morphism is constructible",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, Topology.IsConstructible.image_of_isOpenEmbedding, Topology.isConstructible_preimage_iff_of_isOpenEmbedding, Topology.IsConstructible.image_of_isClosedEmbedding, Topology.IsConstructible.preimage, Topology.IsConstructible.preimage_of_isClosedEmbedding",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constructible subsets, not constructible etale sheaves and their higher direct images"
+  },
+  {
+   "tool": "grep",
+   "query": "([Cc]onstructible.*(rightDerived|higherDirect|lowerStar))|((rightDerived|higherDirect|lowerStar).*[Cc]onstructible)",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: general pushforward adjunctions and structure-sheaf modules do not state constructibility of finite-coefficient etale higher direct images"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HigherDirectImage\", \"Constructible\"",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: general pushforward adjunctions and structure-sheaf modules do not state constructibility of finite-coefficient etale higher direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived pushforward preserves constructible sheaves of modules on the etale site for a projective space bundle",
+   "results": "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', SheafOfModules.pushforward, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.bijective_pushforwardSections",
+   "date": "2026-10-14",
+   "verdict": "no match: general pushforward adjunctions and structure-sheaf modules do not state constructibility of finite-coefficient etale higher direct images"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -105,5 +296,109 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "thm-fin-projective-line-constructible",
+  "worker": "stage1",
+  "summary": "Retained the finite-pushforward resolution route, working over a finite affine cover to match the projectivity convention; made the field parameter explicit and completed localization, additivity, coefficient comparison and convergence. No new nodes.",
+  "blueprint": "Proof paragraph 1 is realized by steps 1–6; paragraph 2 by step 7; paragraph 3 by step 8; paragraph 4 by step 9 using the existing general coefficient-comparison lemma. Step 10 glues the affine-base argument back to the original base.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic Projective space is proper over its base supports the finite-pushforward resolution and localization argument; the unit has no replacement statement. Requested for maintainer review, not an accepted maintainer tool_uses entry."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic Standard charts and coordinate sections of projective space over a scheme supports the finite-pushforward resolution and localization argument; the unit has no replacement statement. Requested for maintainer review, not an accepted maintainer tool_uses entry."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-pullback",
+    "why": "Generic Projective space commutes with base change supports the finite-pushforward resolution and localization argument; the unit has no replacement statement. Requested for maintainer review, not an accepted maintainer tool_uses entry."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic Constructible sheaves form a weak Serre subcategory supports the finite-pushforward resolution and localization argument; the unit has no replacement statement. Requested for maintainer review, not an accepted maintainer tool_uses entry."
+   },
+   {
+    "node": "lem-weil-pbc-p1-field-dimension-one",
+    "why": "Generic The projective line over a field has dimension at most one supports the finite-pushforward resolution and localization argument; the unit has no replacement statement. Requested for maintainer review, not an accepted maintainer tool_uses entry."
+   },
+   {
+    "node": "lem-weil-pbc-integral-extension-dimension",
+    "why": "Generic An integral ring map does not raise Krull dimension supports the finite-pushforward resolution and localization argument; the unit has no replacement statement. Requested for maintainer review, not an accepted maintainer tool_uses entry."
+   },
+   {
+    "node": "lem-pc-dimension-affine-open-cover",
+    "why": "Generic The dimension of a scheme is the supremum of the dimensions of the rings of an affine open cover supports the finite-pushforward resolution and localization argument; the unit has no replacement statement. Requested for maintainer review, not an accepted maintainer tool_uses entry."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic Dimension of a scheme is the supremum of the dimensions of its local rings supports the finite-pushforward resolution and localization argument; the unit has no replacement statement. Requested for maintainer review, not an accepted maintainer tool_uses entry."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "Generic Direct image of etale sheaves of modules over a constant ring: module structure, additive and left exact supports the finite-pushforward resolution and localization argument; the unit has no replacement statement. Requested for maintainer review, not an accepted maintainer tool_uses entry."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic Sheaves of modules on the small etale site have enough injectives supports the finite-pushforward resolution and localization argument; the unit has no replacement statement. Requested for maintainer review, not an accepted maintainer tool_uses entry."
+   },
+   {
+    "node": "lem-weil-pbc-grothendieck-spectral-sequence",
+    "why": "Generic Grothendieck spectral sequence for a composite supports the finite-pushforward resolution and localization argument; the unit has no replacement statement. Requested for maintainer review, not an accepted maintainer tool_uses entry."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "Generic Underlying abelian sheaf commutes with higher direct image supports the finite-pushforward resolution and localization argument; the unit has no replacement statement. Requested for maintainer review, not an accepted maintainer tool_uses entry."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic Sheaves of Lambda-modules on the small etale site form a Grothendieck abelian category supports the finite-pushforward resolution and localization argument; the unit has no replacement statement. Requested for maintainer review, not an accepted maintainer tool_uses entry."
+   },
+   {
+    "node": "lem-sp-cartan-eilenberg-exists",
+    "why": "Generic Existence of Cartan--Eilenberg injective resolutions supports the finite-pushforward resolution and localization argument; the unit has no replacement statement. Requested for maintainer review, not an accepted maintainer tool_uses entry."
+   },
+   {
+    "node": "thm-sp-if-e1",
+    "why": "Generic Hypercohomology spectral sequence via a Cartan--Eilenberg resolution supports the finite-pushforward resolution and localization argument; the unit has no replacement statement. Requested for maintainer review, not an accepted maintainer tool_uses entry."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "Generic The two spectral sequences of a first-quadrant double complex supports the finite-pushforward resolution and localization argument; the unit has no replacement statement. Requested for maintainer review, not an accepted maintainer tool_uses entry."
+   },
+   {
+    "node": "lem-weil-pbc-etale-localization-exchange",
+    "why": "Generic Exchange along an etale morphism of the target is an isomorphism supports the finite-pushforward resolution and localization argument; the unit has no replacement statement. Requested for maintainer review, not an accepted maintainer tool_uses entry."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "thm-constructible-serre",
+  "lem-weil-pbc-p1-field-dimension-one",
+  "lem-weil-pbc-integral-extension-dimension",
+  "lem-pc-dimension-affine-open-cover",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-grothendieck-spectral-sequence",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-sp-cartan-eilenberg-exists",
+  "thm-sp-if-e1",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-etale-localization-exchange"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-5e0340f01",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-5e0340f01 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, report, route and source passages. All ten steps pass, including affine localization, composite-N coefficient comparison and spectral-sequence convergence. No new nodes, circular dependencies or target weakening; no repairs needed. Accepted tool uses and an accidental inherited-script invocation contrary to the execution restrictions are documented in review.md; those script outputs were excluded."
+ }
 }
