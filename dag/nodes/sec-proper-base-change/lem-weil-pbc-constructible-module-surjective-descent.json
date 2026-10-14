@@ -29,9 +29,27 @@
   "def-pc-scheme",
   "def-weil-pbc-scheme-conventions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-etale-constructible-surjective-pullback] with $u=a$, $V=T$, $U=U$, and $F=G$. Its hypotheses are exactly that $a$ is surjective, $T$ and $U$ are quasi-compact and quasi-separated, $\\Lambda$ is a finite commutative ring, and $G$ is a sheaf of $\\Lambda$-modules on $U_{\\Et}$, all of which are assumptions here. It gives $G$ constructible if and only if $a^{-1}G$ constructible, with constructibility defined by the same node def-weil-pbc-etale-constructible-sheaf. The reverse implication applied to the assumed constructibility of $a^{-1}G$ proves the claim.",
+   "uses": [
+    "lem-weil-pbc-etale-constructible-surjective-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095Q, label lemma-check-constructible, part (3), converse for finite coefficient rings"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-constructible-surjective-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095Q, label lemma-check-constructible, part (3), converse for finite coefficient rings"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +92,31 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] {s : Set ↥X},\\n  Topology.IsLocallyConstructible s →\\n    Topology.IsLocallyConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and locally of finite presentation morphism of schemes. If $s$ is a locally constructible subset of $X$, then its image $f(s)$ is a locally constructible subset of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {s : Set ↥Y},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' s)\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes and any constructible subset $ s \\\\subseteq Y $, the preimage $ f^{-1}(s) $ is a constructible subset of $ X $.\"}\n  {\"name\": \"TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X : TopCat}\\n  {FC : C → C → Type u_1} {CC : C → Type v} [inst_2 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)]\\n  [instCC : CategoryTheory.ConcreteCategory C FC]\\n  [CategoryTheory.Limits.PreservesF\", \"doc\": \"For sheaves $F$ and $G$ on a topological space $X$ with values in a category $\\\\mathcal{C}$, if a morphism $f: F \\\\to G$ induces injective maps on all stalks at points of an open set $U \\\\subseteq X$, an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i))\\n  [CategoryTheory.Presheaf.IsLocallySurjective\", \"doc\": \"The morphism from the Yoneda embedding of a glued scheme constructed via Zariski gluing data to a sheaf is locally surjective with respect to the Zariski topology. This means that for every scheme, th\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"CategoryTheory.coherentTopology.isLocallySurjective_iff\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/LocallySurjective\", \"type\": \"∀ {C : Type u_1} (D : Type u_2) [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {FD : D → D → Type u_3} {CD : D → Type w}\\n  [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [inst_3 : CategoryTheory.ConcreteCategory D FD]\\n  [inst_4 : CategoryTheory\", \"doc\": \"For a morphism $ f: F \\to G $ between sheaves on a category $ \\\\mathcal{C} $ with respect to the coherent Grothendieck topology, $ f $ is locally surjective if and only if $ f $ is locally surjective wi\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible etale sheaf detected by surjective scheme pullback",
+   "results": "{'t': '2026-10-14T07:56:43Z', 'tool': 'leansearch', 'query': 'Constructible etale sheaf detected by surjective scheme pullback', 'sub': '', 'ok': False, 'n_hits': 0, 'note': 'service unavailable: Internal Server Error', 'top': [], 'digest': '4f53cda18c2baa0c'}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility of etale module sheaves descends along surjective morphisms of quasi compact quasi separated schemes",
+   "results": "{'t': '2026-10-14T07:56:43Z', 'tool': 'leanfinder', 'query': 'Constructibility of etale module sheaves descends along surjective morphisms of quasi compact quasi separated schemes', 'sub': '', 'ok': True, 'n_hits': 8, 'note': '', 'top': ['AlgebraicGeometry.IsEtale.of_comp', 'AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified', 'AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme', 'Algebra.IsStandardEtale.of_surjective', 'Algebra.basicOpen_subset_etaleLocus_iff', 'AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image', 'Algebra.FormallyEtale.comp', 'Algebra.isOpen_etaleLocus'], 'digest': 'dfef4c0eeb770a8e'}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjective scheme inverse image reflects constructible sheaves on the small etale site",
+   "results": "{'t': '2026-10-14T07:56:56Z', 'tool': 'leanfinder', 'query': 'Surjective scheme inverse image reflects constructible sheaves on the small etale site', 'sub': '', 'ok': True, 'n_hits': 8, 'note': '', 'top': ['AlgebraicGeometry.Scheme.Hom.isConstructible_image', 'AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image', 'AlgebraicGeometry.Scheme.Hom.isConstructible_preimage', 'PrimeSpectrum.isConstructible_comap_image', 'PrimeSpectrum.exists_range_eq_of_isConstructible', 'Topology.isConstructible_preimage_iff_of_isOpenEmbedding', 'Topology.IsConstructible.image_of_isOpenEmbedding', 'Topology.IsConstructible.preimage_of_isOpenEmbedding'], 'digest': '2931009f61345e4c'}",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-finite-fp-pushforward-constructible",
   "by": "worker",
@@ -93,5 +132,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-constructible-module-surjective-descent",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 095Q(3) and reused the existing stronger iff node with identical finite-ring module coefficients and qcqs scheme hypotheses. No new lemma is needed; the item is its converse specialization. No project Lean attachment or Mathlib match was found.",
+  "blueprint": "Classical constructibility input of thm-weil-pbc-direct-image-finiteness-proper, through the existing finite-pushforward branch; Tag 095R uses the converse of Tag 095Q(3).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-5534cf64f",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-5534cf64f (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, report, unit/chapter route, and sources. The sole step validly specializes the existing iff theorem, matching Stacks 095Q(3), 095E, and finite-ring module coefficients. Checked edge cases, duplicate/generalization candidates, master target categories and exchange orientation; the 111-node dependency closure contains no cycle. No new nodes or repairs. Detailed findings are in review.md."
  }
 }
