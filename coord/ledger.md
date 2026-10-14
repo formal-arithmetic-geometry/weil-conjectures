@@ -14536,3 +14536,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:45 L: merged deliver/C2/Sheaf.Algebra.Homology.MappingCylinderSplitFactorization (stage 3; reviewer PASS; first push; landing 20261014T044553-L-1451189 (proof); batch 20261014T044551; modules 1; new nodes 0)
 - 04:45 L: merged deliver/C2/Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCore (stage 3; reviewer PASS; first push; landing 20261014T044554-L-1451315 (interface); batch 20261014T044551; modules 2; new nodes 2)
 - 04:45 L: merged deliver/C4/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T044554-L-1451432 (proof); batch 20261014T044551; modules 1; new nodes 0)
+- 04:45 L: merged deliver/C4/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (stage 3; reviewer PASS; first push; landing 20261014T044555-L-1451721 (proof); batch 20261014T044551; modules 1; new nodes 0)

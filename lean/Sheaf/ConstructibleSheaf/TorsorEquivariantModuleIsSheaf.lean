@@ -95,7 +95,7 @@ private theorem equivarianceSubfunctor_isSheaf
       N.ρ g (s (c.sectionRestriction f y))
     rw [← Scheme.Hom.comp_apply, ← restriction_action c, Scheme.Hom.comp_apply]
     exact hf g y
-  exact ContinuousMap.congr_fun hab x
+  exact congrArg (fun t : C(c.sectionSpace W.unop, N.V) ↦ t x) hab
 
 /-- The canonical equivariant locally constant module presheaf sheaf theorem.
 
