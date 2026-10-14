@@ -1,0 +1,81 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group P1
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
+public import Mathlib.AlgebraicGeometry.Normalization
+public import Mathlib.AlgebraicGeometry.Noetherian
+
+public import Mathlib.NumberTheory.RamificationInertia.Galois
+
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+
+/-! # Galois models at generic Cartier DVR stalks
+
+Source: Stacks Project, Tags 0307 and 09EB. -/
+
+@[expose] public section
+universe u
+open CategoryTheory CategoryTheory.Limits
+namespace AlgebraicGeometry.Scheme
+
+/-- A finite normalization of a pulled-back torsor over the complement of an integral
+Cartier centre has a Galois integral-closure model at a DVR generic stalk.
+
+Source: Stacks Project, Tags 0307 and 09EB.
+(blueprint: lem-sbc-cartier-generic-stalk-galois-model)
+
+Proof: The pullback square identifies p with the pullback of W along κ. Localize N
+at j(eta). The Cartier ideal becomes the maximal ideal, since
+the integral centre has a field stalk at its generic point. The complement V after
+this localization is therefore the generic point of the DVR, namely its fraction
+field K. The cover there is a finite etale G-torsor. Its finite etale algebra is a
+product of finite separable fields. Choose the factor containing the generization
+of x, and let T be its stabilizer. Simple transitivity of the torsor action implies
+that this field is Galois over K with group T. Let S be its integral closure over
+the displayed DVR. Normalization commutes with this localization by Tag 0307, so
+the localized normalization is the product of these integral closures. Its assumed
+finiteness makes S module finite. S is a domain and torsion free over the DVR and
+hence flat. The T-action preserves integral elements and is faithful. An invariant
+element is in K and integral over the DVR, so belongs to that integrally closed
+DVR; this gives IsGaloisGroup T R0 S. The point x gives a prime q0 in the selected
+factor. The localization and factor comparisons commute with the base ring maps.
+Their induced residue field isomorphisms identify the two extensions, so their
+finranks agree. This proves the comparison without any arithmetic degree formula.
+The existence of eta excludes an empty centre; empty normalization fibres are
+vacuous, and a trivial group gives the single factor K. -/
+theorem cartier_generic_stalk_galois_model
+    {N U P : Scheme.{u}} [IsLocallyNoetherian N]
+    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)
+    (V : N.Opens) (κ : V.toScheme ⟶ U) (p : P ⟶ V.toScheme) [IsFinite p]
+    (r : P ⟶ W.P) (hpb : IsPullback r p W.π κ) :
+    let a := p ≫ V.ι
+    Etale p → IsFinite a.fromNormalization →
+    ∀ (D : Scheme.{u}) (j : D ⟶ N),
+      IsIntegral D → IsEffectiveCartierCenter j →
+      (∀ z : N, z ∈ V ↔ z ∉ Set.range j) →
+      ∀ (η : D), IsGenericPoint η Set.univ →
+      ∀ (hdom : IsDomain (N.presheaf.stalk (j η))),
+      letI := hdom
+      IsDiscreteValuationRing (N.presheaf.stalk (j η)) →
+      ∀ (x : a.normalization), a.fromNormalization x = j η →
+        ∃ (S : CommRingCat.{u}) (T : Subgroup G)
+          (alg : Algebra (N.presheaf.stalk (j η)) S),
+          letI := alg
+          ∃ (act : MulSemiringAction T S),
+          letI := act
+          IsDomain (N.presheaf.stalk (j η)) ∧ IsDomain S ∧
+          Module.Finite (N.presheaf.stalk (j η)) S ∧
+          Module.Flat (N.presheaf.stalk (j η)) S ∧
+          IsGaloisGroup T (N.presheaf.stalk (j η)) S ∧
+          ∃ (q₀ : Ideal S), q₀.IsPrime ∧
+            (letI := (a.fromNormalization.residueFieldMap x).hom.toAlgebra
+             Module.finrank (N.residueField (a.fromNormalization x))
+               (a.normalization.residueField x)) = q₀.inertiaDeg (N.presheaf.stalk (j η)) := by
+  sorry
+
+end AlgebraicGeometry.Scheme
