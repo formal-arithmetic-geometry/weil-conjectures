@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "lem-kun-cd-sep-closed-point",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lem-sf-separably-closed-torsion-cd"
+  ]
  },
  "kind": "statement",
  "title": "Cohomological dimension of a separably closed point",
@@ -13,16 +15,21 @@
   "place": "node lem-kun-cd-sep-closed-point, order 1534"
  },
  "stmt_deps": [
-  "def-kun-separably-closed"
+  "def-kun-separably-closed",
+  "def-kun-cd"
  ],
  "proof": [
   {
-   "text": "By [def-kun-cd], $\\kuncd(\\Spec(K))=0$ means $H^q=0$ for every\ntorsion etale sheaf and every $q>0$, which is\n[lem-kun-03qu-sep-closed].",
+   "text": "The only prime ideal of the field $K$ is $(0)$, so $\\Spec(K)$ has one underlying point; every open cover has a one-member subcover and every intersection of affine opens is either empty or the whole point. Thus it is quasi-compact and quasi-separated. By [def-kun-cd], for this scheme $\\Spec(K)$ the assertion $\\kuncd(\\Spec(K))=0$ is equivalent to vanishing of $H^q(\\Spec(K)_{\\Et},F)$ for every torsion abelian étale sheaf $F$ and every $q>0$, since the defining nonnegative bound has least possible value 0. Applying [lem-kun-03qu-sep-closed] to each torsion abelian étale sheaf (which is in particular an abelian étale sheaf) gives exactly these vanishings, so the cohomological dimension is 0.",
    "uses": [
     "def-kun-cd",
     "lem-kun-03qu-sep-closed"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-kun-cd-sep-closed-point.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
@@ -34,9 +41,80 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-kun-cd-sep-closed-point.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomological dimension of Spec a separably closed field is zero",
+   "results": "AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatOf; ringKrullDim_eq_zero_of_isField; ringKrullDim_eq_zero_of_field; no etale cohomological-dimension declaration",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CohomologicalDimension Spec IsSepClosed H vanishing",
+   "results": "0 hits; unknown identifier CohomologicalDimension",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological dimension|isSepClosed|subsingleton_H Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomological dimension Spec separably closed field zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "vanishing positive etale cohomology over separably closed field",
+   "results": "Algebra.FormallyEtale.* and Algebra.Etale.* declarations; no etale cohomology dimension result",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subsingleton (Sheaf.H _ (_ + 1))",
+   "results": "0 hits; unknown identifier Sheaf.H",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "subsingleton_H_of_isSepClosed|cohomological dimension Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|CohomologicalDimension|IsSepClosed|isSepClosed",
+   "results": "25 hits; Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/RingTheory/TotallySplit.lean, Mathlib/RingTheory/TotallySplit.lean, Mathlib/RingTheory/Etale/Field.lean; ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits concern étale algebras, spectral sequences or separably closed fields, not the numerical torsion étale cohomological dimension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The global sections functor on abelian etale sheaves over a separably closed field has cohomological dimension zero",
+   "results": "8 hits; Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.formallyEtale_iff, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.FormallyEtale.iff_isSeparable, Algebra.FormallyEtale.subsingleton_kaehlerDifferential, Algebra.FormallySmooth.iff_subsingleton_and_projective, Algebra.etaleLocus_eq_compl_support; ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits concern étale algebras, spectral sequences or separably closed fields, not the numerical torsion étale cohomological dimension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomological\"",
+   "results": "12 hits; CategoryTheory.Abelian.SpectralObject.coreE₂CohomologicalNat, CategoryTheory.Abelian.SpectralObject.coreE₂CohomologicalNat_i₁, CategoryTheory.Abelian.SpectralObject.coreE₂CohomologicalNat_deg, CategoryTheory.Abelian.SpectralObject.coreE₂CohomologicalNat_i₂, CategoryTheory.Abelian.SpectralObject.instHasSpectralSequenceEIntProdNatCoreE₂CohomologicalNat, CategoryTheory.Abelian.SpectralObject.coreE₂CohomologicalFin, CategoryTheory.Abelian.SpectralObject.coreE₂CohomologicalNat_i₀, CategoryTheory.Abelian.SpectralObject.coreE₂CohomologicalNat_i₃; ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits concern étale algebras, spectral sequences or separably closed fields, not the numerical torsion étale cohomological dimension"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +141,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-cd-sep-closed-point",
+  "worker": "stage1",
+  "summary": "Audited the imported one-step proof against the blueprint and the statements of def-kun-cd and lem-kun-03qu-sep-closed. The proof now explicitly explains why the least nonnegative bound is 0 and that torsion etale sheaves are covered by the cited abelian-sheaf vanishing; no new nodes were needed. Second reading added the missing cohomological-dimension statement dependency, supplied the one-point quasi-compact/quasi-separated check, recorded the equivalent blueprint torsion-bound node, and removed the unrelated unit realization.",
+  "blueprint": "Realizes the single argument in ## Proof: unfold the cohomological-dimension definition and apply vanishing on a separably closed point.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-ff441613f",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-ff441613f (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, sources and unit/chapter route. Verified the single proof step against Stacks 0F0Q, 03QU, 04JQ and the closed point-vanishing declaration; checked torsion coefficients, characteristic-p and degree-zero cases, equivalent DAG nodes and acyclicity. No new nodes, repairs or tool_uses. Written review.md."
+ }
 }
