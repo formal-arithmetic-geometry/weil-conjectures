@@ -14,13 +14,19 @@
  ],
  "proof": [
   {
-   "text": "Apply rawModuleScalar_sheaf_composition to the free represented module sheaf. Naturality of upperStarComp on freeMap attaches the generator. Apply plus_single_source_square_core in degree zero to derive the source square. Postcompose with forgotten derived inverse image of z. Naturality of the inverse derivedPullbackIso moves z through the comparison; Functor.map_comp combines the abelian inverse images of the source map and forgotten class into rawModuleScalarSourcePrefix. Reassociate. No coefficient factor or coefficient coherence is used. Zero classes, degree zero, identity arrows, zero coefficients and empty objects obey the same equations.",
+   "text": "Apply the proved scalar sheaf-composition equation to the free represented module sheaf at f.left and the two composite arrows to S. Naturality of upperStarComp at freeMap and the elementary sheaf_source_attach composition calculation attach the free abelian generator. Apply the proved plus_single_source_square_core in degree zero. Its derived comparison is definitionally the existing canonical derivedPullbackIso from RawModuleScalarCoefficientUnshifted. No concrete SourceSquare-module import or comparison-interface change is used.",
    "uses": [
     "lem-sbc-raw-scalar-sheaf-composition",
-    "lem-sbc-raw-scalar-source-square-core",
-    "def-sbc-raw-module-scalar-source-prefix"
+    "lem-sbc-raw-scalar-source-square-core"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use the elementary source_class_attach naturality calculation: postcompose the source square with the derived forgotten module inverse image of the actual raw class, apply naturality of the inverse derived comparison at that class, and combine the abelian maps using Functor.map_comp and associativity. The resulting source prefix and coefficient object agree definitionally with the unchanged statement. This applies to zero classes, degree zero, identity morphisms, and zero or empty objects without an additional hypothesis.",
+   "uses": [
+    "def-sbc-raw-module-scalar-source-prefix"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -30,10 +36,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "N4",
+  "group": "W3",
   "date": "2026-10-14",
-  "document": "Stacks Project; Mathlib exact-functor and naturality API",
-  "place": "Tags 03D7 and 03Q8; source square followed by class naturality"
+  "document": "Stacks Project; Mathlib exact-functor, naturality and composition API",
+  "place": "Tags 03D7 and 03Q8; existing sheaf composition and generic single-complex source square, followed by class naturality"
  },
  "mathlib_searches": [
   {
@@ -130,10 +136,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N4",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261014T090920-L-366641",
-  "kind": "interface",
+  "landing": "20261014T105818-L-1668349",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
