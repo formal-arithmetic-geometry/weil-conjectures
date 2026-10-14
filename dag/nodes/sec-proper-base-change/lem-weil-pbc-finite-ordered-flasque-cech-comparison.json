@@ -28,9 +28,89 @@
   "def-sc-zariski-flasque",
   "def-sp-double-complex-total"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work throughout in abelian groups, or in modules over $\\Gamma(X,\\mathcal O_X)$ by restriction of scalars. Write each subset in increasing order. In the alternating face sum, terms deleting positions $i<j$ occur twice with signs $(-1)^{i+j-1}$ and $(-1)^{i+j}$, so the horizontal differential squares to zero. Restrictions commute with the resolution differential, hence $d_hd_v=d_vd_h$. The total differential is therefore the one specified in the statement. Restriction of a global section has horizontal differential zero (the two restrictions to every overlap agree), and commutes with $d_v$. Thus $\\alpha$ is a cochain map. For $\\beta$, the equation $d_G^0e^0=0$ kills the vertical part and restriction naturality of $e^0$ gives the horizontal cochain identity. These arguments also apply when an indexed product is empty, hence zero.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01EQ (lemma-cech-cohomology), component maps; Tag 01FJ (lemma-ordered-alternating), alternating faces"
+   }
+  },
+  {
+   "text": "We prove directly that for any flasque abelian sheaf $A$ and any finite ordered family of opens, its ordered section complex has zero positive cohomology; the family need only cover its own union. Induct on the number $r$ of opens, simultaneously for every space and every flasque sheaf. For $r=0$ the complex is zero; for $r=1$ all positive terms are zero. For $r>1$ let $a$ be a degree-$k$ cocycle, $k>0$, and put $j=r-1$. By induction the restriction of $a$ to subsets avoiding $j$ equals $db$ for a degree-$(k-1)$ cochain of the first $r-1$ opens. Extend $b$ to the full complex by setting all components containing $j$ to zero, and replace $a$ by $a-db$. The new cocycle is zero on all subsets avoiding $j$. For $W_i=V_i\\cap V_j$, $i<j$, put $t_T=a_{T\\cup\\{j\\}}$, for $|T|=k$. Evaluating $da=0$ on $R\\cup\\{j\\}$ gives $d_Wt=0$: the last face is zero and the other faces have precisely the ordered differential signs. If $k>1$, induction on the $r-1$ opens $W_i$ for the restriction of $A$ to $V_j$ gives $t=d_Wu$. This restriction is flasque because its restriction maps are those of $A$. Define $c_{R\\cup\\{j\\}}=u_R$ for $|R|=k-1$, and set $c$ to zero on subsets avoiding $j$. Then $(dc)_{T\\cup\\{j\\}}=(d_Wu)_T=t_T$, and all other components are zero, so the residual $a$ is $dc$. If $k=1$, the equation $d_Wt=0$ says that the $t_i$ agree on overlaps. Sheaf gluing produces $t$ over $W=\\bigcup_{i<j}W_i\\subseteq V_j$. Flasqueness extends $t$ to $s\\in A(V_j)$. Take $c_j=s$ and $c_i=0$ for $i<j$; then $(dc)_{i,j}=s|_{W_i}=t_i$ and all other components vanish. This again gives $dc=a$. Adding back the first $b$ proves exactness. Empty intersections and an empty $W$ use $A(\\varnothing)=0$, which follows from the sheaf axiom for the empty cover.",
+   "uses": [
+    "def-sc-zariski-flasque",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 09SZ (lemma-flasque-acyclic-cech), finite ordered variant proved here by induction, with ordered differential as in Tag 01FJ"
+   }
+  },
+  {
+   "text": "For a finite cover of $X$, a degree-zero ordered Cech cocycle is a tuple $(s_i)$ with $s_i|_{V_i\\cap V_j}=s_j|_{V_i\\cap V_j}$. The sheaf gluing and uniqueness axioms identify these tuples with $A(X)$ via restriction. There are no degree-zero boundaries. Together with Step 2, for every $q$ the augmented horizontal row $\\Gamma(X,G^q)[0]\\to D^{\\bullet,q}$ is a quasi-isomorphism. If $r=0$, the covering condition implies $X=\\varnothing$, so both its source and target are zero by the empty-cover sheaf axiom.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 09SZ (lemma-flasque-acyclic-cech); degree-zero gluing in Tag 01EQ (lemma-cech-cohomology)"
+   }
+  },
+  {
+   "text": "Let $B^{0,q}=\\Gamma(X,G^q)$ and $B^{p,q}=0$ for $p\\ne0$, with vertical differential the section differential. Restriction is a double-complex map $f:B\\to D$ by Step 1. In the explicit hypothesis of the cited theorem, $K.\\mathrm{flip}.X(q)$ is the horizontal complex $K^{\\bullet,q}$ (the outer index of $K$ is $p$). Thus its required maps for $f$ are exactly $\\Gamma(X,G^q)[0]\\to D^{\\bullet,q}$, proved quasi-isomorphisms in Step 3. Apply that theorem directly, without flipping $f$, in the abelian category of abelian groups. Both bicomplexes are first quadrant, so every total degree has finitely many summands; there is no upper bound required on the resolution degree. The resulting total map is precisely $\\alpha$, since its only source summand in degree $n$ is $(0,n)$, the differential there is $d_v$, and its components are restrictions. Hence $\\alpha$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-sc-first-quadrant-total-column-comparison",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01EQ (lemma-cech-cohomology), augmented-row argument; Homology Tag 0133 (lemma-double-complex-gives-resolution), via the cited column-comparison theorem"
+   }
+  },
+  {
+   "text": "For each fixed $p$, the augmentation $L^p[0]\\to D^{p,\\bullet}$ is a quasi-isomorphism. To verify finite-product preservation here without another lemma, cycles in a product complex are exactly tuples of cycles, and boundaries are exactly tuples of boundaries: a tuple of boundary elements has a tuple of preimages, chosen over the finite set of subsets $S$. Therefore cohomology is the product of the cohomologies and its augmentation map is the product of the stipulated section-augmentation isomorphisms. The product over an empty set is zero. Put $E^{p,0}=L^p$ and $E^{p,q}=0$ for $q\\ne0$, with horizontal differential $d_L$. The augmentation defines a double-complex map $g:E\\to D$ by Step 1. Flip both indices: the horizontal rows of $E^{\\mathrm{flip}}\\to D^{\\mathrm{flip}}$ are exactly the original vertical column maps just checked. These are the maps in the cited theorem's explicit flipped-component hypothesis, so that theorem gives a quasi-isomorphism on the flipped totals. Identify each flipped total with the original total by multiplying the summand originally indexed $(p,q)$ by $(-1)^{pq}$. For a horizontal arrow, the flipped differential followed by this sign has coefficient $(-1)^q(-1)^{(p+1)q}=(-1)^{pq}$; for a vertical arrow the coefficient is $(-1)^{p(q+1)}=(-1)^{pq}(-1)^p$. These are exactly the coefficients of $d_h+(-1)^pd_v$ after applying the source sign. Hence this is a cochain isomorphism. It commutes with $g$ because $g$ preserves both indices and the signs are identical on source and target. The resulting original total map is a quasi-isomorphism. Since $\\operatorname{Tot}(E)=L^\\bullet$ and the sign on its $q=0$ summands is one, this map is precisely $\\beta$.",
+   "uses": [
+    "lem-sc-first-quadrant-total-column-comparison",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01ET (lemma-cech-spectral-sequence-application), acyclic-column argument for the given resolution; Homology Tag 0133 (lemma-double-complex-gives-resolution)"
+   }
+  },
+  {
+   "text": "For $s\\in\\Gamma(X,F)$, both degree-zero composites have $i$-th component $e^0(s)|_{V_i}=e^0(s|_{V_i})$ in $D^{0,0}$. Thus the composites agree. For naturality, write $u:F\\to h_*F^{\\prime}$ and $v:G^\\bullet\\to h_*G^{\\prime\\bullet}$ for the supplied maps. On each subset $S$, the induced component maps are $u_{V_S}$ and $v^q_{V_S}$, with target sections over $h^{-1}V_S=\\bigcap_{i\\in S}h^{-1}V_i$. Their sheaf-morphism identities give $v^q_{V_T}\\operatorname{res}_{S,T}=\\operatorname{res}^{\\prime}_{S,T}v^q_{V_S}$ for $S\\subset T$, their cochain identities give $d_{G^{\\prime}}v^q=v^{q+1}d_G$, and their augmentation identity gives $v^0e^0=e^{\\prime0}u$. Summing the first equality with the same ordered face signs proves compatibility with $d_h$; the second proves compatibility with the signed vertical differential, and the third gives the $\\beta$ square. Evaluating the first equality on $X\\supseteq V_i$ gives the $\\alpha$ square. Coefficient maps are the case $h=1_X$, and restriction to an open $W$ is the case of its inclusion with the indexed family $(W\\cap V_i)$. No inverse-image exactness, flatness or preservation of flasqueness is used. On $Y$ repeat Steps 1--5 only when the stated hypotheses there hold. All displayed maps are additive and semilinear over the global structure-ring map, which suffices for the asserted naturality.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01EQ (lemma-cech-cohomology), omitted functoriality verified componentwise; Tag 01FJ (lemma-ordered-alternating), fixed ordered indices"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-double-complex-total",
+  "def-sc-zariski-flasque",
+  "lem-sc-first-quadrant-total-column-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 09SZ, 01EQ, 01ET and 01FJ; explicit finite-cover induction and component naturality, using Homology Tag 0133 total comparison"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -94,10 +174,59 @@
    "results": "Twelve returned names: Lean trace-children substring matches and categorical CechNerveTerminalFrom constructions. None states a sheaf resolution or ordered Cech quasi-isomorphism.",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite ordered Cech complex of a flasque sheaf is exact in positive degrees and compares to total complexes of flasque resolutions",
+   "results": "Hits: CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, HomologicalComplex.exact_of_degreewise_exact, CategoryTheory.InjectiveResolution.exact_succ, CategoryTheory.InjectiveResolution.exact₀",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flasque|cech.*quasi|quasi.*cech",
+   "results": "Hits: Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ordered Cech complex of an acyclic finite open cover compares by quasi isomorphisms to sections of a flasque resolution",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"quasiIso\"",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of first quadrant double complexes which is a quasi isomorphism on each row or column induces a quasi isomorphism of total complexes",
+   "results": "Hits: quasiIsoAt_iff', CochainComplex.cm5b.instQuasiIsoIntP, quasiIsoAt_of_comp_right, QuasiIsoAt, quasiIsoAt_of_comp_left, quasiIso_iff, QuasiIso.quasiIsoAt, quasiIsoAt_iff_comp_right",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flabby sheaf on a space, sections on a finite open cover form an exact augmented ordered Cech cochain complex",
+   "results": "Eight MayerVietorisSquare hits: shortComplex_exact, shortComplex_shortExact, shortComplex, shortComplex_X2, shortComplex_X1, shortComplex_X3, sheafCondition_iff_comp_coyoneda, and sheafCondition_of_sheaf. These concern a Mayer-Vietoris square of sheaves, not the two maps into the total ordered Cech resolution.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cechComplex|IsFlasque",
+   "results": "Topology/Sheaves: five hits in Mathlib/Topology/Sheaves/Flasque.lean at lines 20,24,27,48,51, defining flasqueness and naming short-exact-sequence results. No ordered Cech total comparison.",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-ring-complex-functorial",
   "by": "worker",
@@ -113,5 +242,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-finite-ordered-flasque-cech-comparison",
+  "worker": "stage1",
+  "summary": "Preserved all hypotheses and clauses. Proved ordered flasque row exactness by a simultaneous finite-cover induction, then applied the existing first-quadrant flipped-component comparison directly to alpha and after transposition to beta, spelling out the signed flip, finite products, empty cover and component naturality. No new nodes.",
+  "blueprint": "Realizes the local extended Cech comparison in the final Stacks comparison clause of def-weil-pbc-completed-pullback, through the completion-model descendants named in blueprint.from.via.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-first-quadrant-total-column-comparison",
+    "why": "Generic first-quadrant total comparison is applied to the row and column augmentations; this unit has no general bicomplex comparison statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-first-quadrant-total-column-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-6ed4af985",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-6ed4af985 (reviewer sub-agent of L); spot-checked: Read the item, dependencies, report, sources and blueprint route in full. Verified finite-cover induction, both total comparisons, transpose signs, supplied-map naturality and edge cases. No duplicate or mathematical gap found. Accepted lem-sc-first-quadrant-total-column-comparison as a generic tool; target coefficient categories remain distinct. Detailed checks are in review.md; no repairs needed."
  }
 }
