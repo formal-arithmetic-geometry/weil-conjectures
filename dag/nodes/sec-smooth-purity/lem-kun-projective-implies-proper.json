@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "lem-kun-projective-implies-proper",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lem-pc-projective-proper"
+  ]
  },
  "kind": "statement",
  "title": "Projective morphisms are proper",
@@ -19,23 +21,31 @@
   ]
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-kun-projective",
+  "def-weil-proper-morphism"
  ],
  "proof": [
   {
-   "text": "By [def-kun-projective] the morphism $f$ is the composite of a\nclosed immersion $i:X\\hookrightarrow\\mathbf P^N_Y$ with the\nstructural projection $q:\\mathbf P^N_Y\\to Y$. Closed immersions are\nproper by [lem-weil-pbc-closed-immersion-proper], and\n$q:\\mathbf P^N_Y\\to Y$ is proper as the base change of\n$\\mathbf P^N_{\\mathbf Z}\\to\\Spec\\mathbf Z$, which is proper (Stacks\nProject,\n[Tag `01WC`](https://stacks.math.columbia.edu/tag/01WC),\nquoted in the proper-base-change chapter,\n[lem-chow-closed-model]). Hence $f=q\\circ i$\nis proper by lem:weil-pbc-proper-composition.",
+   "text": "Let $f:X\\to Y$ be projective. By [def-kun-projective] choose $N\\geq0$ and a closed immersion $i:X\\to\\mathbf P^N_Y$ such that $f=q\\circ i$, where $q:\\mathbf P^N_Y\\to Y$ is the structural projection. By [def-nagata-projective-space-base-change], $\\mathbf P^N_Y$ with its structural projection is $\\mathbf P(\\{0,\\ldots,N\\};Y)$ with its first projection. Use the finite homogeneous-coordinate set $\\{0,\\ldots,N\\}$ in [lemma-nagata-projective-space-base-change-proper] with $S=Y$; this gives that $q$ is proper. By clause (a) of [lem-weil-pbc-closed-immersion-proper], $i$ is proper. Applying [lem-weil-pbc-proper-composition] to $i$ and $q$ proves that $f$ is proper. The same cited statements give each of the three properness facts in the parenthetical clause of the item.",
    "uses": [
     "def-kun-projective",
+    "def-nagata-projective-space-base-change",
     "lem-weil-pbc-closed-immersion-proper",
-    "lem-chow-closed-model"
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-proper-composition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-projective-implies-proper.md",
+    "place": "Proof paragraph (corrected citations)"
+   }
   }
  ],
  "proof_deps": [
   "def-kun-projective",
+  "def-nagata-projective-space-base-change",
   "lem-weil-pbc-closed-immersion-proper",
-  "lem-chow-closed-model",
+  "lemma-nagata-projective-space-base-change-proper",
   "lem-weil-pbc-proper-composition"
  ],
  "proof_origin": {
@@ -43,9 +53,52 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-projective-implies-proper.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective space structural morphism is proper",
+   "results": "AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; AlgebraicGeometry.Proj.instIsSeparated; AlgebraicGeometry.Proj; AlgebraicGeometry.Proj.isSeparated; AlgebraicGeometry.Scheme.Hom.isProperMap; ProjectiveSpectrum.top",
+   "date": "2026-10-14",
+   "verdict": "no exact match for projective morphisms: Proj and properness facts are candidates, not an exact projective-morphism theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsProper Proj.toSpecZero, IsProper pullback.fst",
+   "results": "; loogle: Unknown identifier `IsProper`",
+   "date": "2026-10-14",
+   "verdict": "unavailable: query rejected because IsProper was an unknown identifier; this failed query supplies no evidence of absence. The later qualified Loogle query is recorded separately."
+  },
+  {
+   "tool": "grep",
+   "query": "IsProper.*Proj|Proj.*IsProper",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; directory Mathlib/AlgebraicGeometry/ProjectiveSpectrum",
+   "date": "2026-10-14",
+   "verdict": "no exact match for projective morphisms: Proj and properness facts are candidates, not an exact projective-morphism theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every projective morphism of schemes is proper",
+   "results": "; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed immersion into projective space over a scheme followed by its projection is proper",
+   "results": "AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; AlgebraicGeometry.Proj.isSeparated; AlgebraicGeometry.Proj.instIsSeparated; AlgebraicGeometry.Scheme.Hom.isProperMap; AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; AlgebraicGeometry.IsProper.toUniversallyClosed; AlgebraicGeometry.Proj.fromOfGlobalSections",
+   "date": "2026-10-14",
+   "verdict": "no exact match for projective morphisms: Proj and properness facts are candidates, not an exact projective-morphism theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper",
+   "results": "AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget; AlgebraicGeometry.IsProper.instIsMultiplicativeScheme; AlgebraicGeometry.IsProper.instRespectsIsoScheme; AlgebraicGeometry.IsProper.isStableUnderBaseChange; AlgebraicGeometry.IsProper.stableUnderComposition; AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated; AlgebraicGeometry.IsProper; AlgebraicGeometry.instIsProperOfIsFinite",
+   "date": "2026-10-14",
+   "verdict": "no exact match for projective morphisms: Proj and properness facts are candidates, not an exact projective-morphism theorem."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -77,5 +130,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-projective-implies-proper",
+  "worker": "stage1",
+  "summary": "Audited the imported proof against the projective definition and existing properness nodes. Added the previously omitted proper-composition citation, replaced the unsupported Chow-model citation by the exact existing blueprint node for properness of relative projective space, and recorded Mathlib searches. No new node was needed.",
+  "blueprint": "Realizes the blueprint proof paragraph: factor a projective morphism through relative projective space, apply properness of closed immersions and projective space, then compose.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "The route needs properness of the relative projective-space structural morphism; this exact theorem is supplied by the Nagata projective-space unit and is not reproved in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-projective-space-base-change-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-c0d3d6a63",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-c0d3d6a63 (reviewer sub-agent of L); spot-checked: Read the mathematics in full. Verified every step against cited statements, Stacks 01WC/01W5/01W3, the blueprint route, coordinate convention, and structural first projection; checked edge cases, duplicates, and acyclicity. No new nodes or mathematical gaps. Corrected only the failed Loogle query’s misleading absence verdict. Full review and corrected JSON written under the review directory.; 1 file(s) fixed by the reviewer"
+ }
 }
