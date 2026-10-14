@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-qbar",
-   "place": "Proof, first paragraph, sentence: \"the descent formula preserves this property through the common-stage colimit of [def-weil-pbc-qbar-category]\". Nested condensed coefficient comparison: the presheaf Kan-extension computation before sheafification in exact master RefactorInstruction.tex, label lem:point-eval, proof.",
+   "place": "Nested condensed coefficient comparison in RefactorInstruction.tex, label lem:point-eval, proof: the finite-quotient Kan-extension computation before sheafification.",
    "via": [
     "lem-weil-pbc-proetale-sheafification-wcontractible-sections",
     "lem-weil-pbc-condensed-point-basis-evaluation",
@@ -18,7 +18,7 @@
  },
  "kind": "statement",
  "title": "Presheaf point pullback on affine objects",
- "statement": "Use the universes of [def-weil-size-convention]. Let $X$ be a scheme [def-pc-scheme] with small pro-etale site [def-weil-pbc-proetale-site]. Let $\\mathbf{Prof}$ have compact Hausdorff totally disconnected spaces as objects and continuous maps as arrows, with finite jointly surjective coverings. For $S\\in\\mathbf{Prof}$, let $X[S]$ be the inverse limit over the finite continuous quotients $S\\to S_i$ of the finite disjoint unions $\\coprod_{S_i}X$, and let $a_X(S)=X[S]$. For a sheaf $F$ of sets, abelian groups, or commutative rings on $\\mathbf{Prof}$, let $P_F$ be the presheaf left Kan extension of its underlying presheaf along $a_X^{op}$, so $P_F(V)=\\operatorname{colim}_{(V\\to X[S])}F(S)$, with transitions induced by precomposition on $F$. For every affine object $V$, the quotient space $\\pi_0(|V|)$ of connected components, with quotient topology, is profinite, and there is a canonical isomorphism $P_F(V)\\cong F(\\pi_0(|V|))$, natural in $F$ and in affine $V$. In particular, for every finite family of affine objects $V_i$, the restriction map $P_F(\\coprod_iV_i)\\to\\prod_iP_F(V_i)$ is an isomorphism, including the empty family. The isomorphisms preserve the indicated algebraic operations.",
+ "statement": "Use the universes of [def-weil-size-convention]. Let $X$ be a scheme [def-pc-scheme] with small pro-etale site [def-weil-pbc-proetale-site]. Let $\\mathbf{Prof}$ have compact Hausdorff totally disconnected spaces as objects and continuous maps as arrows, with finite jointly surjective coverings. For $S\\in\\mathbf{Prof}$, let $X[S]$ be the inverse limit over the finite continuous quotients $S\\to S_i$ of the finite disjoint unions $\\coprod_{S_i}X$, and let $a_X(S)=X[S]$. For a sheaf $F$ of sets, abelian groups, or commutative rings on $\\mathbf{Prof}$, let $P_F$ be the presheaf left Kan extension of its underlying presheaf along $a_X^{op}$, so $P_F(U)=\\operatorname{colim}_{(U\\to X[S])}F(S)$, with transitions induced by precomposition on $F$. Let $U$ be a weakly contractible affine object of the pro-etale site, meaning every epimorphism of sheaves of sets is surjective on sections over $U$. Then the quotient space $\\pi_0(|U|)$ of connected components, with quotient topology, is profinite, and there is a canonical isomorphism $P_F(U)\\cong F(\\pi_0(|U|))$, natural in $F$ and in weakly contractible affine $U$. In particular, for every finite family of weakly contractible affine objects $U_i$, the restriction map $P_F(\\coprod_iU_i)\\to\\prod_iP_F(U_i)$ is an isomorphism, including the empty family. The isomorphisms preserve the indicated algebraic operations.",
  "source": {
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf; /home/ubuntu/weil-newtargets-master/WeilConjectures/RefactorInstruction.tex",
   "place": "Lemma 4.2.13(1), proof, first two sentences (factorization through connected components); RefactorInstruction.tex label lem:point-eval, proof, first paragraph and inverse-image site computation."
@@ -28,9 +28,47 @@
   "def-pc-scheme",
   "def-weil-pbc-proetale-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the weakly contractible affine object $U$, the quotient $\\pi_0(|U|)$ is profinite and maps from $U$ to every finite-quotient object $X[S]$ are exactly continuous maps $\\pi_0(|U|)\\to S$, compatibly with refinement and with morphisms of affine objects, by [lem-weil-pbc-proetale-point-components-maps].",
+   "uses": [
+    "lem-weil-pbc-proetale-point-components-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.13(1), first sentence of proof; exact master RefactorInstruction.tex, Section 4, proof of Lemma point-pullback formula."
+   }
+  },
+  {
+   "text": "Put $T=\\pi_0(|U|)$ and let $q:U\\to X[T]$ correspond to $\\mathrm{id}_T$ in step 1. The Kan index has objects $(S,f:U\\to X[S])$ and a morphism $(S,f)\\to(S\\prime,f\\prime)$ is a continuous map $h:S\\prime\\to S$ with $f=X[h]\\circ f\\prime$; its diagram map is $F(h):F(S)\\to F(S\\prime)$. By step 1, $f$ corresponds to a unique $g:T\\to S$, so $g$ gives the unique arrow $(S,f)\\to(T,q)$. Thus $(T,q)$ is terminal. Explicitly the colimit cocone is $F(g):F(S)\\to F(T)$: for a compatible cocone $c_{S,f}:F(S)\\to A$, compatibility with the unique terminal arrow forces $c_{S,f}=c_{T,q}\\circ F(g)$. Conversely any map $F(T)\\to A$ defines this cocone. This proves the colimit universal property in sets, abelian groups and rings, giving $P_F(U)\\cong F(T)$ without asserting continuity through finite-quotient colimits.",
+   "uses": [
+    "lem-weil-pbc-proetale-point-components-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.13(1), inverse-image site computation; exact master RefactorInstruction.tex, label lem:point-eval, first paragraph."
+   }
+  },
+  {
+   "text": "For a finite family of weakly contractible affine objects, $\\pi_0(\\coprod_iU_i)$ is the finite coproduct of the $\\pi_0(|U_i|)$, including the empty family. A sheaf on profinite sets sends this finite jointly-surjective coproduct covering to the product diagram, so the identifications of step 2 give $P_F(\\coprod_iU_i)\\cong\\prod_iP_F(U_i)$; the same calculation preserves addition and multiplication. For a map $k:W\\to U$, write $t=\\pi_0(k)$. A representative $(S,g:T_U\\to S,x\\in F(S))$ restricts to $(S,g\\circ t,x)$; its image is $F(g\\circ t)x=F(t)F(g)x$. For a sheaf morphism $\\alpha:F\\to G$, the equality $\\alpha_TF(g)=G(g)\\alpha_S$ proves naturality in $F$. Every $F(g)$ is an algebra homomorphism when applicable, and the terminal-object colimit is computed in the indicated algebra category; hence the isomorphism preserves operations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "/home/ubuntu/weil-newtargets-master/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, proof of Lemma point-pullback formula and paragraph following it."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-point-components-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.13(1) and inverse-image computation; exact master RefactorInstruction.tex Section 4, label lem:point-eval."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,15 +97,129 @@
    "date": "2026-10-14",
    "results": "0 hits: ; service unavailable: Internal Server Error",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left Kan extension on affine pro-etale object evaluates at connected component profinite space",
+   "results": "8 hits: Condensed.lanPresheaf, Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit, LightCondensed.lanPresheaf, Condensed.profiniteSolidification, Condensed.lanCondensedSet, LightCondensed.lanPresheafExt, Condensed.profiniteSolidCounit, Condensed.lanPresheafExt; ",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected related declarations; none states the whole affine scheme Kan-evaluation assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LeftKanExtension, ConnectedComponents",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Functor.LeftKanExtension'",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "leftKanExtension|ConnectedComponents|pi_0",
+   "results": "0 hits: ;  Requested subdirectory: Mathlib/CategoryTheory",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected related declarations; none states the whole affine scheme Kan-evaluation assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "presheaf left Kan extension on affine pro-etale schemes evaluates on profinite connected components",
+   "results": "8 hits: LightCondensed.lanPresheaf, Condensed.lanPresheaf, Condensed.lanCondensedSet, Condensed.lanSheafProfinite, LightCondensed.lanPresheafExt, LightCondensed.lanLightCondSet, Condensed.lanPresheafExt, LightCondensed.lanPresheafExt_hom; ",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected related declarations; none states the whole affine scheme Kan-evaluation assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Condensed.lanPresheaf, Profinite",
+   "results": "8 hits: Condensed.lanPresheaf, Condensed.lanPresheafExt, Condensed.lanPresheafNatIso, Condensed.lanPresheafIso, Condensed.lanPresheafIso_hom, Condensed.lanPresheafNatIso_hom_app, Condensed.lanPresheafExt_hom, Condensed.lanPresheafExt_inv; ",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected related declarations; none states the whole affine scheme Kan-evaluation assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "ConnectedComponents|lanPresheaf|leftKanExtension",
+   "results": "0 hits: ;  Requested subdirectory: Mathlib/Condensed",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected related declarations; none states the whole affine scheme Kan-evaluation assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "left Kan extension on an affine pro-etale scheme is evaluation on connected components",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "maps from a qcqs affine pro-etale object to profinite constant objects",
+   "results": "8 hits: AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.isAffineHom_π_app, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; ",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected related declarations; none states the whole affine scheme Kan-evaluation assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "ConnectedComponents, Profinite, continuous map",
+   "results": "0 hits: ; loogle: Unknown identifier `continuous`",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "ConnectedComponents|connected components|pi_0 [Mathlib/Topology Mathlib/AlgebraicGeometry]",
+   "results": "0 hits: ;  Requested subdirectory: Mathlib/Topology",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected related declarations; none states the whole affine scheme Kan-evaluation assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "qcqs affine scheme pro-etale connected components profinite maps to constant profinite object",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "ConnectedComponents|connected components|pi_0",
+   "results": "25 hits: Mathlib/Geometry/Manifold/Immersion.lean, Mathlib/Order/Partition/Basic.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean; ",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected related declarations; none states the whole affine scheme Kan-evaluation assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "ConnectedComponents, Profinite",
+   "results": "1 hits: CompHaus.toProfinite_obj'; ",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected related declarations; none states the whole affine scheme Kan-evaluation assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine scheme maps to profinite constant scheme via clopen partitions",
+   "results": "8 hits: AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.exists_map_preimage_eq_map_preimage, AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.exists_preimage_eq, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_isAffineOpen_preimage_eq, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit; ",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected related declarations; none states the whole affine scheme Kan-evaluation assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proetale-sheafification-wcontractible-sections",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-point-lan-affine-evaluation",
+  "worker": "stage1",
+  "summary": "Used the affine maps-to-components correspondence as a strictly smaller input; wrote the terminal-object Kan-index argument explicitly, including the orientation, colimit universal property, naturalities, operations, and finite coproduct/empty-family sheaf axiom.",
+  "blueprint": "Realizes the finite-quotient Kan-extension computation before sheafification in the blueprint ancestor thm-weil-pbc-qbar, exact master RefactorInstruction.tex label lem:point-eval.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-bce96593f",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-bce96593f (reviewer sub-agent of L); spot-checked: Proof checks pass against Bhatt–Scholze §4.2 Lemma 4.2.13(1) and RefactorInstruction.tex §4. The delivered generalized component-map node is unnecessary because the existing reviewed node already matches the item's weakly contractible affine hypothesis. Corrected item JSON repoints all citations and proof_deps; review.md records checks and edge cases. No tool_uses accepted.; 1 file(s) fixed by the reviewer"
+ }
 }
