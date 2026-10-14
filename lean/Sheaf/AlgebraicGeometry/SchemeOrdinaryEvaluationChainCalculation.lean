@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
 public import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential
 public import Sheaf.AlgebraicGeometry.SchemeTensorUnitAction
+import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationChainMapExists
+import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationChainAction
 
 /-! # Ordinary evaluation before localization
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
@@ -65,6 +67,10 @@ theorem schemeOrdinaryEvaluation_chain_calculation (Y : Scheme.{u})
     ∃ e : pullbackTensorTotal Y V P ⟶ O,
       schemeTensorHomUncurry Y V P O phiO = e ≫ eta.app O ∧
       schemeTensorHomUncurry Y (pullbackTensorTotal Y F V) P F phiF =
-        schemeTensorUnitAction Y F V P e ≫ eta.app F := by sorry
+        schemeTensorUnitAction Y F V P e ≫ eta.app F := by
+  have := SheafOfModules.isGrothendieckAbelian (moduleRings Y.toRingedSpace)
+  obtain ⟨e, hO⟩ := schemeOrdinaryEvaluation_chain_map_exists Y P
+  have hF := schemeOrdinaryEvaluation_chain_action Y P F f hf e hO
+  exact ⟨e, hO, hF⟩
 
 end AlgebraicGeometry

@@ -1,0 +1,140 @@
+{
+ "id": "lem-pc-scheme-ordinary-evaluation-chain-map-exists",
+ "kind": "statement",
+ "title": "Ordinary evaluation chain map and coefficient augmentation",
+ "statement": "For any scheme Y and module-sheaf cochain complex P, put O equal to the single tensor unit, V=Hom(P,O), and eta equal to the fixed K-injective augmentation. There exists a chain map e:Tot(V tensor P) to O such that explicit uncurrying of Hom(P,eta_O) equals e followed by eta_O. This construction depends only on P and requires neither an evaluation map f nor an auxiliary coefficient F.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ (lemma-internal-hom), 08DM and 08DQ; ordinary evaluation localization proof step 2"
+ },
+ "stmt_deps": [
+  "lem-pc-tensor-hom-uncurry-differential",
+  "lem-sc-hom-complex-projections",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof": [
+  {
+   "text": "Construct e in degree n by the coproduct extension of the symmetry followed by uncurrying of the projection Hom(P,O)^q to Hom(P^r,O^n), for q+r=n. The Hom projection differential formula, transported through the additive tensor-Hom adjunction, gives the chain-map equation with the total tensor Koszul sign. This is the same differential calculation used to construct explicit uncurrying, with O as the coefficient complex rather than its resolution.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pc-tensor-hom-uncurry-differential"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each V^q tensor P^r summand, naturality in the coefficient augmentation eta_O identifies U(Hom(P,eta_O)) with e followed by eta_O. Apply coproduct extensionality.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "lem-pc-tensor-hom-uncurry-differential",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-tensor-hom-uncurry-differential",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K3",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ (lemma-internal-hom), 08DM and 08DQ; ordinary evaluation localization proof step 2",
+  "description": "Separate construction and component compatibility of the chain calculation; the unit route is preserved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "evaluation from the tensor of a Hom complex with its argument to the coefficient complex",
+   "results": "Leanfinder found HomologicalComplex.tensorObj, tensorHom and ModuleCat.ihom_ev_app; no Hom-complex evaluation identity.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctorDesc",
+   "results": "Found mapBifunctorDesc and its summand equations, not either coefficient-augmentation or tensor-action identity.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*evaluation|evaluation.*homComplex",
+   "results": "No Mathlib hits; repository has the parent theorem and its caller but no independent proof of these steps.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "evaluation morphism Hom complex tensor complex cochain adjunction naturality",
+   "results": "Second reading: hits concern HomComplex cochains for ordinary morphism complexes (toSingleMk/fromSingleMk) and evaluation functors, not sheaf internal Hom evaluation on total tensors. No exact statement match.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "uncurry.*natural|evaluation.*tensor",
+   "results": "Second reading: MonoidalClosed.uncurry_natural_right and uncurry_natural_left give component naturality only; no chain evaluation construction or total tensor-unit action theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "evaluation morphism Hom complex tensor complex cochain adjunction naturality",
+   "results": "Service unavailable: Internal Server Error. No mathematical absence conclusion inferred; independent LeanFinder/Loogle and source searches were used.",
+   "verdict": "unavailable",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationChainCalculation",
+  "date": "2026-10-14",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-scheme-ordinary-evaluation-chain-calculation",
+   "place": "Proof steps 1–2"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationChainMapExists",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeOrdinaryEvaluationChainMapExists.lean",
+  "declaration": "AlgebraicGeometry.schemeOrdinaryEvaluation_chain_map_exists",
+  "statement": "theorem schemeOrdinaryEvaluation_chain_map_exists (Y : Scheme.{u})\n    (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) :\n    letI := SheafOfModules.isGrothendieckAbelian (moduleRings Y.toRingedSpace)\n    let O := (HomologicalComplex.single _ (.up ℤ) 0).obj\n      (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))\n    let V := homComplex (R := Y.sheaf) P O\n    let eta := CochainComplex.toKInjectiveResolution.{u}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n    let phiO := ((homComplexFunctor (R := Y.sheaf)).obj (op P)).map (eta.app O)\n    ∃ e : pullbackTensorTotal Y V P ⟶ O,\n      schemeTensorHomUncurry Y V P O phiO = e ≫ eta.app O",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261014T020514-L-3812459",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261014T020514-L-3812459",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
