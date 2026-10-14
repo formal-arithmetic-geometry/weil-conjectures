@@ -14486,3 +14486,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:19 L: merged deliver/B3/Sheaf.AlgebraicGeometry.BoundaryPullbackTensorUnit (stage 3; reviewer PASS; first push; landing 20261014T041916-L-1153389 (proof); batch 20261014T041913; modules 1; new nodes 0)
 - 04:19 L: merged deliver/D4/Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationGradedAugmentation (stage 3; reviewer PASS; first push; landing 20261014T041916-L-1153599 (proof); batch 20261014T041913; modules 1; new nodes 0)
 - 04:19 L: merged deliver/E4/Sheaf.AlgebraicGeometry.TensorHomogeneousKernelAction (stage 3; reviewer PASS; first push; landing 20261014T041917-L-1153797 (interface); batch 20261014T041913; modules 2; new nodes 1)
+- 04:19 L: merged deliver/F1/Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed (stage 3; reviewer PASS; first push; landing 20261014T041917-L-1153931 (proof); batch 20261014T041913; modules 1; new nodes 0)

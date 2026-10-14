@@ -77,7 +77,6 @@ abbrev tensorClosed (R : Sheaf J CommRingCat.{u}) :
   let := symmetricCategory R
   refine ⟨⟨?_⟩, ⟨monoidalClosed⟩, tensorHomEquiv, ?_⟩
   · -- MonoidalFree supplies additivity of both tensor functors from the adjunction.
-    -- Functor map laws give zero preservation and additivity in each tensor variable.
     exact
       { whiskerLeft_zero := fun {X Y Z} ↦ (tensorLeft X).map_zero Y Z
         zero_whiskerRight := fun {X Y Z} ↦ (tensorRight X).map_zero Y Z
