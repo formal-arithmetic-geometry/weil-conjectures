@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
 public import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential
 
+import Sheaf.AlgebraicGeometry.SchemeTensorHomUncurrySummandNaturality
+import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationUncurriedComponent
+
 /-! # Uncurrying ordinary evaluation on a triple summand
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
 -/
@@ -72,6 +75,16 @@ theorem schemeOrdinaryEvaluation_triple_component (Y : Scheme.{u})
                 (HomologicalComplex.singleObjXSelf (.up ℤ) 0
                   (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))).hom)) ≫
         (ρ_ (F.X p)).hom ≫ (F.XIsoOfEq (by omega : p = k)).hom
-    else 0) ≫ (eta.app F).f k := by sorry
+    else 0) ≫ (eta.app F).f k := by
+  classical
+  let := SheafOfModules.isGrothendieckAbelian (moduleRings Y.toRingedSpace)
+  let O := (HomologicalComplex.single _ (.up ℤ) 0).obj
+    (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
+  let V := homComplex (R := Y.sheaf) P O
+  let eta := CochainComplex.toKInjectiveResolution.{u}
+    (SheafOfModules.{u} (moduleRings Y.toRingedSpace))
+  have h₁ := schemeTensorHomUncurry_summand_naturality Y P F V f p q r n k hpq hnr
+  have h₂ := schemeOrdinaryEvaluation_uncurried_component Y P F f hf p q r n k hpq hnr
+  exact h₁.trans (congrArg (fun t ↦ t ≫ (eta.app F).f k) h₂)
 
 end AlgebraicGeometry

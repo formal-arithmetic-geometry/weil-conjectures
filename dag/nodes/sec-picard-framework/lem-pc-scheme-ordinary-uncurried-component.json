@@ -1,0 +1,113 @@
+{
+ "id": "lem-pc-scheme-ordinary-uncurried-component",
+ "kind": "statement",
+ "title": "Uncurried ordinary evaluation component before resolution",
+ "statement": "For any scheme Y, module-sheaf cochain complexes P,F, the single tensor unit O and V=Hom(P,O), suppose f:Tot(F tensor V) to Hom(P,F) satisfies IsSchemeOrdinaryEvaluation. For p+q=n and n+r=k, apply tensorHomEquiv.symm to the composite of the p,q inclusion, f in degree n and the Hom projection in degrees n,r,k; precompose with the braiding of F^p tensor V^q and P^r. If r+q=0 this equals the associator, dual projection uncurried and identified with the unit, right unitor and transport F^p to F^k. Otherwise it is zero. This statement contains neither a K-injective resolution nor complex-level uncurrying.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ (lemma-internal-hom), 08DM and 08DQ; ordinary evaluation localization proof step 2"
+ },
+ "stmt_deps": [
+  "def-pc-scheme-ordinary-evaluation-formula",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof": [
+  {
+   "text": "From n+r=k rewrite k as r+n, preserving hnr separately. Apply congrArg to hf p q n r hpq, with the function that applies inverse tensorHomEquiv and precomposes the braiding. Compose that equation with the following cancellation calculation. Split on r+q=0. In the positive case Equiv.symm_apply_apply and SymmetricCategory.symmetry_assoc cancel the equivalence and the two braidings. In the negative case use the monoidal closed structure and monoidal preadditivity supplied by tensorClosed; uncurry_eq, whiskerLeft_zero, comp_zero and zero_comp show the result is zero. Proof irrelevance identifies degree equalities.",
+   "uses": [
+    "def-pc-scheme-ordinary-evaluation-formula",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-ordinary-evaluation-formula",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J2",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ (lemma-internal-hom), 08DM and 08DQ; ordinary evaluation localization proof step 2",
+  "description": "Separate strictly part of the triple-component calculation: Uncurried ordinary evaluation component before resolution"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Uncurrying evaluation after tensor inclusion and postcomposition naturality",
+   "results": "CategoryTheory.MonoidalClosed.uncurry_natural_right, CategoryTheory.MonoidalClosed.uncurry_natural_left, CategoryTheory.MonoidalClosed.uncurry_natural_left_assoc, CategoryTheory.MonoidalClosed.uncurry_natural_right_assoc, CategoryTheory.MonoidalClosed.uncurry_ihom_map, CategoryTheory.MonoidalClosed.uncurry_eq, CategoryTheory.CartesianClosed.uncurry_natural_right, CategoryTheory.CartesianClosed.uncurry_natural_left",
+   "verdict": "Naturality APIs found, but no concrete scheme component theorem.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"uncurry_natural_left\"",
+   "results": "CategoryTheory.MonoidalClosed.uncurry_natural_left, CategoryTheory.MonoidalClosed.uncurry_natural_left_assoc",
+   "verdict": "Naturality APIs found, but no concrete scheme component theorem.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "uncurry_natural_left|tensorHomEquiv_whiskerLeft_comp",
+   "results": "Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+   "verdict": "Naturality APIs found, but no concrete scheme component theorem.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of uncurrying and cancellation of tensor Hom evaluation on cochain tensor summands",
+   "results": "Service unavailable: Internal Server Error. No absence conclusion inferred. LeanFinder/Loogle and Mathlib source grep used independently.",
+   "available": false,
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationTripleComponent",
+  "date": "2026-10-14",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-scheme-ordinary-evaluation-triple-component",
+   "place": "Proof step 2"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationUncurriedComponent",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeOrdinaryEvaluationUncurriedComponent.lean",
+  "declaration": "AlgebraicGeometry.schemeOrdinaryEvaluation_uncurried_component",
+  "statement": "theorem schemeOrdinaryEvaluation_uncurried_component (Y : Scheme.{u})\n    (P F : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (f : pullbackTensorTotal Y F\n        (homComplex (R := Y.sheaf) P\n          ((HomologicalComplex.single _ (.up ℤ) 0).obj\n            (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace))))) ⟶\n      homComplex (R := Y.sheaf) P F)\n    (hf : IsSchemeOrdinaryEvaluation Y P F f)\n    (p q r n k : ℤ) (hpq : p + q = n) (hnr : n + r = k) :\n    let O := (HomologicalComplex.single _ (.up ℤ) 0).obj\n      (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))\n    let V := homComplex (R := Y.sheaf) P O\n    let π := Classical.choose (homComplex_projections_exists.{u, u, u, u} (R := Y.sheaf))\n    (β_ (F.X p ⊗ V.X q) (P.X r)).hom ≫\n      (SheafOfModules.tensorHomEquiv (R := Y.sheaf) (P.X r) (F.X p ⊗ V.X q)\n        (F.X k)).symm\n        (HomologicalComplex.ιMapBifunctor F V (curriedTensor _) (.up ℤ) p q n hpq ≫\n          f.f n ≫ π P F n r k (by omega)) =\n    (if h : r + q = 0 then\n      (α_ (F.X p) (V.X q) (P.X r)).hom ≫\n        F.X p ◁ ((β_ (V.X q) (P.X r)).hom ≫\n          (SheafOfModules.tensorHomEquiv (R := Y.sheaf) (P.X r) (V.X q)\n            (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))).symm\n              (π P O q r 0 h ≫ SheafOfModules.homObjMap (R := Y.sheaf) (𝟙 (P.X r))\n                (HomologicalComplex.singleObjXSelf (.up ℤ) 0\n                  (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))).hom)) ≫\n        (ρ_ (F.X p)).hom ≫ (F.XIsoOfEq (by omega : p = k)).hom\n    else 0)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261014T052130-L-1876599",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261014T052130-L-1876599",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
