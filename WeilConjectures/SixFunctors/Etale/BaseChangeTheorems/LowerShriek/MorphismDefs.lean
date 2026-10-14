@@ -44,9 +44,9 @@ zero `i_!` needs no resolutions and only the pushforward is derived.
   (no properness enters its construction);
 - the *extension-by-zero exchange* for the open-immersion square of the base-changed
   compactification. Its canonical mate goes in the direction
-  `Lg'^* ⋙ i'_! ⟶ i_! ⋙ Lḡ^*` (`Etale.derivedSquareOpenImmersionLowerShriekBaseChange`); base
+  `Lg'^* ⋙ i'_! ⟶ i_! ⋙ Lḡ^*` (`Etale.derivedPlusOpenImmersionLowerShriekBaseChange`); base
   change for extension by zero asserts that this mate is an isomorphism
-  (`Etale.isIso_derivedSquareOpenImmersionLowerShriekBaseChange`, currently `sorry`: on geometric
+  (`Etale.isIso_derivedPlusOpenImmersionLowerShriekBaseChange`, currently `sorry`: on geometric
   stalks both sides are the pulled-back stalk on `X'` and vanish outside `X'`), and the
   construction of `Ex_!^c` uses its inverse.
 
@@ -55,14 +55,15 @@ statements are relative to an explicit compactification `c`.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.derivedSquareOpenImmersionLowerShriekBaseChangeUnitStep`,
-  `Etale.derivedSquareOpenImmersionLowerShriekBaseChangeSquareStep`,
-  `Etale.derivedSquareOpenImmersionLowerShriekBaseChangeCounitStep`: the three steps of the
+- `AlgebraicGeometry.Etale.derivedPlusOpenImmersionLowerShriekBaseChangeUnitStep`,
+  `Etale.derivedPlusOpenImmersionLowerShriekBaseChangeSquareStep`,
+  `Etale.derivedPlusOpenImmersionLowerShriekBaseChangeCounitStep`: the three steps of the
   extension-by-zero exchange morphism, mirroring the three steps of `Etale.baseChange`.
-- `AlgebraicGeometry.Etale.derivedSquareOpenImmersionLowerShriekBaseChange`: the canonical exchange
+- `AlgebraicGeometry.Etale.derivedPlusOpenImmersionLowerShriekBaseChange`: the canonical exchange
   morphism `Lg'^* ⋙ i'_! ⟶ i_! ⋙ Lḡ^*` for a commutative square of open immersions.
-- `AlgebraicGeometry.Etale.isIso_derivedSquareOpenImmersionLowerShriekBaseChange`: base change for
-  extension by zero, for a Cartesian square; `Etale.derivedSquareOpenImmersionLowerShriekBaseChangeIso`
+- `AlgebraicGeometry.Etale.isIso_derivedPlusOpenImmersionLowerShriekBaseChange`: base change for
+  extension by zero, for a Cartesian square;
+  `Etale.derivedPlusOpenImmersionLowerShriekBaseChangeIso`
   is the inverse isomorphism `i_! ⋙ Lḡ^* ≅ Lg'^* ⋙ i'_!`.
 - `AlgebraicGeometry.Etale.lowerShriekBaseChange`: the compact-support base-change
   morphism `Ex_!^c`.
@@ -96,32 +97,33 @@ bounded below derived categories: the natural isomorphism obtained by transporti
 the pullback comparison `θ_sq : Lj^* ∘ Lg'^* ≅ Lg^* ∘ Lj'^*` of the square
 (`Etale.pullbackSquareComparison` applied to `sq.flip`) under `j_!` on the left and
 `j'_!` on the right; the reassociations are the only other ingredient. -/
-noncomputable def Etale.derivedSquareOpenImmersionLowerShriekBaseChangeSquareStep (sq : CommSq g' j' j g) :
+noncomputable def Etale.derivedPlusOpenImmersionLowerShriekBaseChangeSquareStep
+    (sq : CommSq g' j' j g) :
     (D+((j)_!open[A]) ⋙ D+((j)^*[A])) ⋙ (D+((g')^*[A]) ⋙ D+((j')_!open[A])) ≅
       (D+((j)_!open[A]) ⋙ D+((g)^*[A])) ⋙ (D+((j')^*[A]) ⋙ D+((j')_!open[A])) :=
   Functor.squareTransport D+((j)_!open[A]) D+((j')_!open[A])
     (Etale.pullbackSquareComparison A sq.flip)
 
-lemma Etale.derivedSquareOpenImmersionLowerShriekBaseChangeSquareStep_app (sq : CommSq g' j' j g)
+lemma Etale.derivedPlusOpenImmersionLowerShriekBaseChangeSquareStep_app (sq : CommSq g' j' j g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
-    (Etale.derivedSquareOpenImmersionLowerShriekBaseChangeSquareStep A sq).app K =
+    (Etale.derivedPlusOpenImmersionLowerShriekBaseChangeSquareStep A sq).app K =
       D+((j')_!open[A]).mapIso
         ((pullbackSquareComparison A sq.flip).app (D+((j)_!open[A]).obj K)) := by
-  simp [derivedSquareOpenImmersionLowerShriekBaseChangeSquareStep]
+  simp [derivedPlusOpenImmersionLowerShriekBaseChangeSquareStep]
 
-lemma Etale.derivedSquareOpenImmersionLowerShriekBaseChangeSquareStep_hom_app (sq : CommSq g' j' j g)
+lemma Etale.derivedPlusOpenImmersionLowerShriekBaseChangeSquareStep_hom_app (sq : CommSq g' j' j g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
-    (Etale.derivedSquareOpenImmersionLowerShriekBaseChangeSquareStep A sq).hom.app K =
+    (Etale.derivedPlusOpenImmersionLowerShriekBaseChangeSquareStep A sq).hom.app K =
       D+((j')_!open[A]).map
         ((pullbackSquareComparison A sq.flip).hom.app (D+((j)_!open[A]).obj K)) :=
-  congrArg Iso.hom (Etale.derivedSquareOpenImmersionLowerShriekBaseChangeSquareStep_app A sq K)
+  congrArg Iso.hom (Etale.derivedPlusOpenImmersionLowerShriekBaseChangeSquareStep_app A sq K)
 
-lemma Etale.derivedSquareOpenImmersionLowerShriekBaseChangeSquareStep_inv_app (sq : CommSq g' j' j g)
+lemma Etale.derivedPlusOpenImmersionLowerShriekBaseChangeSquareStep_inv_app (sq : CommSq g' j' j g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
-    (Etale.derivedSquareOpenImmersionLowerShriekBaseChangeSquareStep A sq).inv.app K =
+    (Etale.derivedPlusOpenImmersionLowerShriekBaseChangeSquareStep A sq).inv.app K =
       D+((j')_!open[A]).map
         ((pullbackSquareComparison A sq.flip).inv.app (D+((j)_!open[A]).obj K)) :=
-  congr(Iso.inv $(Etale.derivedSquareOpenImmersionLowerShriekBaseChangeSquareStep_app A sq K))
+  congr(Iso.inv $(Etale.derivedPlusOpenImmersionLowerShriekBaseChangeSquareStep_app A sq K))
 
 /- The K-flat resolution package on the coefficient category `A`, as in the sections
 `DerivedUpperStar` and `DerivedUpperLowerStarAdjunction` of
@@ -137,37 +139,37 @@ variable (j g j' g')
 below derived categories: the natural transformation
 `Lg'^* ⋙ j'_! ⟶ (j_! ⋙ Lj^*) ⋙ (Lg'^* ⋙ j'_!)` obtained by inserting the unit of the
 derived adjunction `j_! ⊣ Lj^*`. -/
-noncomputable def Etale.derivedSquareOpenImmersionLowerShriekBaseChangeUnitStep :
+noncomputable def Etale.derivedPlusOpenImmersionLowerShriekBaseChangeUnitStep :
     D+((g')^*[A]) ⋙ D+((j')_!open[A]) ⟶
       (D+((j)_!open[A]) ⋙ D+((j)^*[A])) ⋙ (D+((g')^*[A]) ⋙ D+((j')_!open[A])) :=
   (Functor.leftUnitor _).inv ≫ Functor.whiskerRight
   (Etale.derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus A j).unit
   (D+((g')^*[A]) ⋙ D+((j')_!open[A]))
 
-lemma Etale.derivedSquareOpenImmersionLowerShriekBaseChangeUnitStep_app
+lemma Etale.derivedPlusOpenImmersionLowerShriekBaseChangeUnitStep_app
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
-    (Etale.derivedSquareOpenImmersionLowerShriekBaseChangeUnitStep A j j' g').app K =
+    (Etale.derivedPlusOpenImmersionLowerShriekBaseChangeUnitStep A j j' g').app K =
       D+((j')_!open[A]).map (D+((g')^*[A]).map
         ((derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus A j).unit.app K)) := by
-  simp [derivedSquareOpenImmersionLowerShriekBaseChangeUnitStep]
+  simp [derivedPlusOpenImmersionLowerShriekBaseChangeUnitStep]
 
 /-- The *counit contraction* step of the extension-by-zero exchange morphism on the
 bounded below derived categories: the natural transformation
 `(j_! ⋙ Lg^*) ⋙ (Lj'^* ⋙ j'_!) ⟶ j_! ⋙ Lg^*` obtained by contracting the counit of the
 derived adjunction `j'_! ⊣ Lj'^*`. -/
-noncomputable def Etale.derivedSquareOpenImmersionLowerShriekBaseChangeCounitStep :
+noncomputable def Etale.derivedPlusOpenImmersionLowerShriekBaseChangeCounitStep :
     (D+((j)_!open[A]) ⋙ D+((g)^*[A])) ⋙ (D+((j')^*[A]) ⋙ D+((j')_!open[A])) ⟶
       D+((j)_!open[A]) ⋙ D+((g)^*[A]) :=
   Functor.whiskerLeft (D+((j)_!open[A]) ⋙ D+((g)^*[A]))
   (Etale.derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus A j').counit
     ≫ (Functor.rightUnitor _).hom
 
-lemma Etale.derivedSquareOpenImmersionLowerShriekBaseChangeCounitStep_app
+lemma Etale.derivedPlusOpenImmersionLowerShriekBaseChangeCounitStep_app
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
-    (Etale.derivedSquareOpenImmersionLowerShriekBaseChangeCounitStep A j g j').app K =
+    (Etale.derivedPlusOpenImmersionLowerShriekBaseChangeCounitStep A j g j').app K =
       (derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus A j').counit.app
         ((D+((j)_!open[A]) ⋙ D+((g)^*[A])).obj K) := by
-  simp [derivedSquareOpenImmersionLowerShriekBaseChangeCounitStep]
+  simp [derivedPlusOpenImmersionLowerShriekBaseChangeCounitStep]
 
 variable {j g j' g'}
 
@@ -183,19 +185,19 @@ Z' --g---> Z
 of schemes with `j` and `j'` open immersions, assembled as the composite of the unit
 insertion, the square transport, and the counit contraction. -/
 @[no_expose]
-noncomputable def Etale.derivedSquareOpenImmersionLowerShriekBaseChange (sq : CommSq g' j' j g) :
+noncomputable def Etale.derivedPlusOpenImmersionLowerShriekBaseChange (sq : CommSq g' j' j g) :
     D+((g')^*[A]) ⋙ D+((j')_!open[A]) ⟶ D+((j)_!open[A]) ⋙ D+((g)^*[A]) :=
-  (Etale.derivedSquareOpenImmersionLowerShriekBaseChangeUnitStep A j j' g') ≫
-    (Etale.derivedSquareOpenImmersionLowerShriekBaseChangeSquareStep A sq).hom ≫
-      (Etale.derivedSquareOpenImmersionLowerShriekBaseChangeCounitStep A j g j')
+  (Etale.derivedPlusOpenImmersionLowerShriekBaseChangeUnitStep A j j' g') ≫
+    (Etale.derivedPlusOpenImmersionLowerShriekBaseChangeSquareStep A sq).hom ≫
+      (Etale.derivedPlusOpenImmersionLowerShriekBaseChangeCounitStep A j g j')
 
-lemma Etale.derivedSquareOpenImmersionLowerShriekBaseChange_app (sq : CommSq g' j' j g)
+lemma Etale.derivedPlusOpenImmersionLowerShriekBaseChange_app (sq : CommSq g' j' j g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
-    (Etale.derivedSquareOpenImmersionLowerShriekBaseChange A sq).app K =
-      (derivedSquareOpenImmersionLowerShriekBaseChangeUnitStep A j j' g').app K ≫
-        (derivedSquareOpenImmersionLowerShriekBaseChangeSquareStep A sq).hom.app K ≫
-          (derivedSquareOpenImmersionLowerShriekBaseChangeCounitStep A j g j').app K := by
-  simp [Etale.derivedSquareOpenImmersionLowerShriekBaseChange]
+    (Etale.derivedPlusOpenImmersionLowerShriekBaseChange A sq).app K =
+      (derivedPlusOpenImmersionLowerShriekBaseChangeUnitStep A j j' g').app K ≫
+        (derivedPlusOpenImmersionLowerShriekBaseChangeSquareStep A sq).hom.app K ≫
+          (derivedPlusOpenImmersionLowerShriekBaseChangeCounitStep A j g j').app K := by
+  simp [Etale.derivedPlusOpenImmersionLowerShriekBaseChange]
 
 /-- **Base change for extension by zero**: for a *Cartesian* square with `j` and `j'`
 open immersions, the exchange morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` is an isomorphism.
@@ -203,18 +205,19 @@ open immersions, the exchange morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` is an i
 Mathematically, since the square is Cartesian, `X'` is the preimage of the open
 subscheme `X ⊆ Z` under `g`, and on geometric stalks both sides are the pulled-back
 stalk at points of `X'` and vanish outside `X'`. -/
-theorem Etale.isIso_derivedSquareOpenImmersionLowerShriekBaseChange (sq : IsPullback g' j' j g) :
-    IsIso (Etale.derivedSquareOpenImmersionLowerShriekBaseChange A sq.toCommSq) :=
+theorem Etale.isIso_derivedPlusOpenImmersionLowerShriekBaseChange (sq : IsPullback g' j' j g) :
+    IsIso (Etale.derivedPlusOpenImmersionLowerShriekBaseChange A sq.toCommSq) :=
   sorry
 
 /-- The extension-by-zero exchange isomorphism `j_! ⋙ Lg^* ≅ Lg'^* ⋙ j'_!` of a Cartesian
 square of open immersions: the inverse of the canonical exchange morphism
-`Etale.derivedSquareOpenImmersionLowerShriekBaseChange`, which is an isomorphism by base change for
+`Etale.derivedPlusOpenImmersionLowerShriekBaseChange`, which is an isomorphism by base change for
 extension by zero. -/
-noncomputable def Etale.derivedSquareOpenImmersionLowerShriekBaseChangeIso (sq : IsPullback g' j' j g) :
+noncomputable def Etale.derivedPlusOpenImmersionLowerShriekBaseChangeIso
+    (sq : IsPullback g' j' j g) :
     D+((j)_!open[A]) ⋙ D+((g)^*[A]) ≅ D+((g')^*[A]) ⋙ D+((j')_!open[A]) :=
-  have := Etale.isIso_derivedSquareOpenImmersionLowerShriekBaseChange A sq
-  (asIso (Etale.derivedSquareOpenImmersionLowerShriekBaseChange A sq.toCommSq)).symm
+  have := Etale.isIso_derivedPlusOpenImmersionLowerShriekBaseChange A sq
+  (asIso (Etale.derivedPlusOpenImmersionLowerShriekBaseChange A sq.toCommSq)).symm
 
 end OpenImmersion
 
@@ -249,7 +252,7 @@ noncomputable def Etale.lowerShriekBaseChange (c : Compactification f)
     (Etale.baseChange A (c.isPullback_g_ofIsPullback sq).flip.toCommSq) ≫
   (Functor.associator _ _ _).inv ≫
   Functor.whiskerRight
-    (Etale.derivedSquareOpenImmersionLowerShriekBaseChangeIso A
+    (Etale.derivedPlusOpenImmersionLowerShriekBaseChangeIso A
       (c.isPullback_i_ofIsPullback sq)).hom
     R+(((c.ofIsPullback sq).g)_*[A]) ≫
   (Functor.associator _ _ _).hom
@@ -260,7 +263,7 @@ lemma Etale.lowerShriekBaseChange_app (c : Compactification f) (sq : IsPullback 
       (Etale.baseChange A (c.isPullback_g_ofIsPullback sq).flip.toCommSq).app
           (D+((c.i)_!open[A]).obj K) ≫
         R+(((c.ofIsPullback sq).g)_*[A]).map
-          ((Etale.derivedSquareOpenImmersionLowerShriekBaseChangeIso A
+          ((Etale.derivedPlusOpenImmersionLowerShriekBaseChangeIso A
             (c.isPullback_i_ofIsPullback sq)).hom.app K) := by
   simp [Etale.lowerShriekBaseChange]
 
