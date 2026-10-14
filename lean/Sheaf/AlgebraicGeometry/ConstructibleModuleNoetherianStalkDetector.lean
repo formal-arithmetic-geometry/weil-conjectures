@@ -2,7 +2,8 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.ConstructibleModuleIntegralStalkEmbeddingNoetherian
+import Sheaf.AlgebraicGeometry.ConstructibleModuleIntegralMapFactorizationNoetherian
 
 /-!
 # Pointwise finite pushforward detectors on a Noetherian scheme
@@ -55,6 +56,32 @@ theorem exists_noetherian_stalk_detector
               Function.Injective
                 (((Scheme.pointSmallEtale s).sheafFiber
                   (A := ModuleCat.{u + 1} Λ)).map (ψ x)) := by
-  sorry
+  classical
+  have hx (x : U) :
+      ∃ (Y : Scheme.{u}) (f : Y ⟶ U), IsFinite f ∧
+        ∃ (M : ModuleCat.{u + 1} Λ), Module.Finite Λ M ∧
+          ∃ (ψ : C ⟶ (lowerStar (ModuleCat.{u + 1} Λ) f).obj
+            ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)),
+            ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
+              (s : Spec (.of Ω) ⟶ U),
+              ((Scheme.SpecToEquivOfField Ω U) s).1 = x →
+                Function.Injective
+                  (((Scheme.pointSmallEtale s).sheafFiber
+                    (A := ModuleCat.{u + 1} Λ)).map ψ) := by
+    obtain ⟨Y, ν, hν, M, hM, φ, hφ⟩ :=
+      exists_integral_lowerStar_stalk_injective_noetherian Λ C x
+    let : IsIntegralHom ν := hν
+    let : Module.Finite Λ M := hM
+    obtain ⟨Z, f, hf, ψ, κ, hfac⟩ :=
+      exists_finite_lowerStar_factorization_noetherian Λ C ν M φ
+    refine ⟨Z, f, hf, M, hM, ψ, ?_⟩
+    intro Ω _ _ s hs a b hab
+    apply hφ Ω s hs
+    let P := (Scheme.pointSmallEtale s).sheafFiber
+      (A := ModuleCat.{u + 1} Λ)
+    rw [← hfac, P.map_comp]
+    exact congrArg (fun v ↦ (P.map κ) v) hab
+  choose Y f hf M hM ψ hψ using hx
+  exact ⟨Y, f, hf, M, hM, ψ, hψ⟩
 
 end AlgebraicGeometry.Etale
