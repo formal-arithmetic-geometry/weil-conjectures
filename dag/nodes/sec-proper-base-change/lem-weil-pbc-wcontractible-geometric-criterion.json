@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-qbar",
-   "place": "Proof, sole paragraph: \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\"; subordinate pro-etale coefficient-continuity tool reached through prop-weil-pbc-qbar-condensed-basechange-compatibility, bounded-below coproducts, affine acyclic hypercovers, and qc affine contractible covers. The blueprint paragraph itself does not mention hypercovers. Input: bounded ring witness from 0983/0984. Supporting input: Geometric sufficient criterion for all weakly etale covers to split.",
+   "place": "Proof, sole paragraph of thm-weil-pbc-qbar.md: “The scalar-compatible family of finite-extension exchange maps descends to a natural transformation”. This is a supporting ring-theoretic input to the coefficient-change compatibility route, through prop-weil-pbc-qbar-condensed-basechange-compatibility and the bounded-below coproduct/hypercover/affine-cover chain listed in via; the ancestor paragraph does not itself state a w-contractible-cover theorem. The present split realizes Tag 0982 (3) to (1).",
    "via": [
     "lem-weil-pbc-wcontractible-ring-extension",
     "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
@@ -29,9 +29,93 @@
   "def-weil-pbc-faithfully-flat-ring-map",
   "def-weil-pbc-ind-etale-algebra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [thm-weil-pbc-weak-etale-refinement] to $R\\to B$, obtaining $B\\to E$ faithfully flat and ind-etale and $R\\to E$ ind-etale. The composite $R\\to E$ is faithfully flat: tensoring an $R$-module complex first with $B$ and then with $E$ preserves and reflects exactness at both stages, as required by [def-weil-pbc-faithfully-flat-ring-map]. It is weakly etale by [lem-weil-pbc-ind-etale-stability]. It suffices to split a further $R$-algebra of $E$, since composing its retraction with $B\\to E$ gives the desired map.",
+   "uses": [
+    "thm-weil-pbc-weak-etale-refinement",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-ind-etale-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0982, lemma-w-local-strictly-henselian-extremally-disconnected, proof of (3) to (1)"
+   }
+  },
+  {
+   "text": "Let $I=\\bigcap_{\\mathfrak m\\in\\operatorname{MaxSpec}R}\\mathfrak m$. W-locality says that the maximal-point subset is Zariski closed, so it equals $V(I)$ by the ideal-zero-locus correspondence. Set $T=V(IE)$. If $q\\in T$, its contraction contains $I$ and hence is maximal, say $m$. By base-change stability [lem-weil-pbc-ind-etale-stability], $E\\otimes_R\\kappa(m)$ is weakly etale over the field $\\kappa(m)$. Its residue field at $q$ is algebraic by [lem-weil-pbc-weak-etale-field]; indeed all its finitely generated subalgebras are finite etale, so its quotient corresponding to $q$ is an algebraic domain over $\\kappa(m)$, hence a field. Since $m$ is maximal this quotient is $E/q$. Thus $q$ is maximal in $E$. Form $S=E_{[T]}$ using [def-weil-pbc-retained-localization]. By [lem-weil-pbc-retained-localization], $E\\to S$ is ind-Zariski, $\\operatorname{Spec}S$ is w-local, and its closed points are the pairs $(q,q)$ with $q\\in T$. A pair $(q,p)$ lies in $V(IS)$ exactly when $I\\subseteq p\\cap R$. Then $IE\\subseteq p\\subseteq q$ and both $p,q$ are maximal by the argument just given, so $p=q$. Therefore $V(IS)$ is precisely the closed-point subset of $\\operatorname{Spec}S$. Composition gives $R\\to S$ ind-etale and weakly etale.",
+   "uses": [
+    "def-weil-pbc-w-local",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-weak-etale-field",
+    "def-weil-pbc-retained-localization",
+    "lem-weil-pbc-retained-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0982, lemma-w-local-strictly-henselian-extremally-disconnected, proof of (3) to (1)"
+   }
+  },
+  {
+   "text": "Let $n$ be a maximal ideal of $S$. By step 2, its contraction $m$ in $R$ is maximal. The local map $R_m\\to S_n$ is weakly etale: localization is ind-Zariski, and base change and composition preserve weak etaleness [lem-weil-pbc-ind-etale-stability]. The base $R_m$ is strictly henselian by hypothesis, so [thm-weil-pbc-weak-etale-strict-local] makes this canonical map an isomorphism. For an arbitrary prime $p\\subset S$, choose a maximal $n\\supseteq p$. Localizing $R_m\\cong S_n$ at the corresponding primes identifies $R_{p\\cap R}\\cong S_p$; fractions send $r/t$ to $g(r)/g(t)$, so the isomorphism is the canonical local map [def-weil-pbc-localization-at-prime]. Thus $R\\to S$ identifies every local ring.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "thm-weil-pbc-weak-etale-strict-local",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0982, lemma-w-local-strictly-henselian-extremally-disconnected, proof of (3) to (1)"
+   }
+  },
+  {
+   "text": "The map $R\\to S$ is weakly etale by step 2, hence flat by the two-flatness definition [def-weil-pbc-ind-etale-algebra]. To prove surjectivity on spectra, take any prime $p$ of $R$ and a maximal $m\\supseteq p$. Faithful flatness of $R\\to E$ and [lem-weil-pbc-faithfully-flat-surjective-spectrum] give a prime $q$ of $E$ above $m$. It is in $T$, so the retained point $(q,q)$ is a maximal point $n$ of $S$ over $m$. The isomorphism $R_m\\cong S_n$ of step 3 carries the prime $pR_m$ to a prime of $S_n$, hence to a prime of $S$ contracting to $p$. Consequently [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] makes $R\\to S$ faithfully flat. If $R=0$, then $B=E=S=0$ and the same conclusion holds with empty spectra.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0982, lemma-w-local-strictly-henselian-extremally-disconnected, proof of (3) to (1)"
+   }
+  },
+  {
+   "text": "Now apply [lem-weil-pbc-wlocal-stalk-isomorphism-retraction] to $R\\to S$. W-locality and the closed-point ideals are supplied by step 2, all local-ring isomorphisms by step 3, and faithful flatness by step 4; extremal disconnectedness is the hypothesis on $R$. Obtain $s:S\\to R$ with $s\\circ(R\\to S)=\\mathrm{id}_R$. If $h:E\\to S$ and $j:B\\to E$ are the construction maps, put $r=s\\circ h\\circ j$. Then $r\\circ f=s\\circ(h\\circ j\\circ f)=\\mathrm{id}_R$ by associativity.",
+   "uses": [
+    "lem-weil-pbc-wlocal-stalk-isomorphism-retraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0982, lemma-w-local-strictly-henselian-extremally-disconnected, proof of (3) to (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-retained-localization",
+  "def-weil-pbc-w-local",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-retained-localization",
+  "lem-weil-pbc-weak-etale-field",
+  "lem-weil-pbc-wlocal-stalk-isomorphism-retraction",
+  "thm-weil-pbc-weak-etale-refinement",
+  "thm-weil-pbc-weak-etale-strict-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0982, proof of implication (3) to (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -77,12 +161,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-wcontractible-ring-extension",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-wcontractible-geometric-criterion",
+  "worker": "stage1",
+  "summary": "Removed the near-restatement retraction node. Five steps now carry the ind-etale reduction, retained closed-point construction, strict local isomorphisms, faithful flatness, and final application of the general local-ring splitting lemma of Tag 09AZ.",
+  "blueprint": "Proof, sole paragraph of thm-weil-pbc-qbar.md: “The scalar-compatible family of finite-extension exchange maps descends to a natural transformation”. This is a supporting ring-theoretic input to the coefficient-change compatibility route, through prop-weil-pbc-qbar-condensed-basechange-compatibility and the bounded-below coproduct/hypercover/affine-cover chain listed in via; the ancestor paragraph does not itself state a w-contractible-cover theorem. The present split realizes Tag 0982 (3) to (1)."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-9381abc16",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-9381abc16 (reviewer sub-agent of L); spot-checked: Read the item, sole new node, cited statements and source places in full. Stacks 0982, 097Z, 097A, 092Q, 092Z and 09AZ support all five steps; edge cases and 224-node dependency traversal pass. Corrected an unused statement dependency, the flatness explanation, and imprecise blueprint references. Both statements remain unchanged. Whole corrected JSON files and concrete checks are in fixes/ and review.md; no coefficient comparison or target completion is claimed.; 2 file(s) fixed by the reviewer"
+ }
 }
