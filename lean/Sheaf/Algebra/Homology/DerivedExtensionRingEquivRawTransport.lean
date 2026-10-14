@@ -1,7 +1,9 @@
 module
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 @[expose] public section
 set_option autoImplicit false
+set_option linter.unusedVariables false
 universe u w w'
 open CategoryTheory
 open scoped TensorProduct ChangeOfRings
@@ -41,5 +43,19 @@ theorem exists_raw_transport
     let T := (extendScalars (algebraMap R B)).mapHomologicalComplex (.up ℤ)
     ∀ t : V ⋙ T₀ ≅ T ⋙ U.mapHomologicalComplex (.up ℤ),
       ∃ (E : DerivedCategory (ModuleCat.{u} B) ⥤ DerivedCategory (ModuleCat.{u} B₀))
-        (q : S ⋙ E ≅ U.mapHomologicalComplex (.up ℤ) ⋙ S₀), True := by sorry
+        (q : S ⋙ E ≅ U.mapHomologicalComplex (.up ℤ) ⋙ S₀), True := by
+      intros π₀ π S₀ S V U T₀ T t
+      let E := CategoryTheory.Functor.mapDerivedCategory U
+      let q₁ : S ⋙ E ≅
+          (HomotopyCategory.quotient (ModuleCat.{u} B) (.up ℤ)) ⋙
+            U.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh :=
+        CategoryTheory.Functor.isoWhiskerLeft
+          (HomotopyCategory.quotient (ModuleCat.{u} B) (.up ℤ))
+          U.mapDerivedCategoryFactorsh
+      let q₂ : (HomotopyCategory.quotient (ModuleCat.{u} B) (.up ℤ)) ⋙
+          U.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ≅
+          U.mapHomologicalComplex (.up ℤ) ⋙ S₀ := by
+        exact CategoryTheory.Functor.isoWhiskerRight
+          (U.mapHomotopyCategoryFactors (.up ℤ)) DerivedCategory.Qh
+      exact ⟨E, q₁ ≪≫ q₂, trivial⟩
 end ModuleCat
