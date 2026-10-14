@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-tensor-sym",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Symmetry of the derived tensor product",
@@ -13,28 +13,116 @@
   "place": "node lem-kun-tensor-sym, order 1710"
  },
  "stmt_deps": [
-  "def-weil-pbc-derived-categories"
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor"
  ],
  "proof": [
   {
-   "text": "Choose K-flat resolutions $P\\to A$ and $Q\\to B$; both derived\nproducts are computed as $P\\otimes_\\Lambda B$ and\n$Q\\otimes_\\Lambda A$, and the canonical symmetry of the ordinary\ntensor product induces, after K-flat replacement, the displayed\ncanonical isomorphism (the two routes agree because the comparison\nmaps between K-flat resolutions become quasi-isomorphisms after\ntensoring, see [def-kun-derived-tensor]).",
+   "text": "Work on the small etale site of the scheme $T$, with the constant commutative ring sheaf $R=\\Lambda_T$. Choose the universe of module sheaves larger than that of the small etale site, so the smallness hypothesis of the descent theorem holds. Write $Q$ for derived localization. Apply [lem-pc-kflat-resolution] to representing complexes for $A$ and $B$ to obtain K-flat resolutions $P$ and $N$ whose terms are flat. Thus they belong to the full homotopy subcategory $\\mathcal P_R$ in [lem-weil-pbc-site-derived-tensor-descent]. That node gives canonical model isomorphisms $i_{P,N}:Q\\operatorname{Tot}(P\\otimes_RN)\\xrightarrow{\\sim}A\\kunotimes{\\Lambda}B$ and $i_{N,P}:Q\\operatorname{Tot}(N\\otimes_RP)\\xrightarrow{\\sim}B\\kunotimes{\\Lambda}A$, natural on the resolving subcategory and compatible with inversion of its quasi-isomorphisms. This is the construction of [def-kun-derived-tensor] with both representing complexes chosen K-flat; no identification of etale and pro-etale coefficient categories is used.",
    "uses": [
-    "def-kun-derived-tensor"
+    "def-weil-pbc-derived-categories",
+    "def-kun-derived-tensor",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YU (definition-derived-tor and preceding construction); specialization to the constant ring sheaf on the small etale site"
+   }
+  },
+  {
+   "text": "For any two complexes $P,N$, construct $c_{P,N}:\\operatorname{Tot}(P\\otimes_RN)\\to\\operatorname{Tot}(N\\otimes_RP)$ by $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ on the $(p,q)$ summand. The ordinary swap is well defined because $R$ is commutative: the balanced relation $rx\\otimes y=x\\otimes ry$ maps to $y\\otimes rx=ry\\otimes x$; it respects restrictions and hence sheafifies by [def-pur-sheaf-tensor-product]. Extend these maps by the direct-sum universal property of [def-pc-tensor-complex-sheaves]. Its differential gives $d c(x\\otimes y)=(-1)^{pq}d_Ny\\otimes x+(-1)^{pq+q}y\\otimes d_Px$, whereas $c d(x\\otimes y)=(-1)^{(p+1)q}y\\otimes d_Px+(-1)^{p+p(q+1)}d_Ny\\otimes x$; the coefficients agree. Applying the swap twice multiplies by $(-1)^{pq+qp}=1$. For degree-zero complex maps $a:P\\to P'$ and $b:N\\to N'$, both routes in the naturality square send $x\\otimes y$ to $(-1)^{pq}b(y)\\otimes a(x)$. Thus $c$ is a natural chain isomorphism with inverse $c_{N,P}$. Passing these equations through $Q$ gives the corresponding equations on homotopy-category maps.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor, symmetry paragraph immediately following the definition); explicit sign computation using sites-modules.tex Section 03EK (section-tensor-product) and the cited total-complex differential"
+   }
+  },
+  {
+   "text": "Let $U(A,B)=A\\kunotimes{\\Lambda}B$ and $V(A,B)=B\\kunotimes{\\Lambda}A$. On pairs of resolving objects define $s_{QP,QN}=i_{N,P}\\circ Q(c_{P,N})\\circ i_{P,N}^{-1}$. The naturality just calculated and the natural model comparisons in [lem-weil-pbc-site-derived-tensor-descent] make this a natural transformation between the restrictions of $U$ and $V$ to $\\mathcal P_R\\times\\mathcal P_R$. Apply the last clause of that node to extend it uniquely to $s:U\\to V$ on $D(R)\\times D(R)$. Apply the same clause to the swapped inverse maps to obtain $t:V\\to U$. Since $c_{N,P}c_{P,N}=1$, the restrictions of $ts$ and $st$ are identities; uniqueness of extension makes $ts=1_U$ and $st=1_V$ everywhere. Therefore every $s_{A,B}$ is an isomorphism, natural in both derived variables. Uniqueness also shows that any choices of K-flat resolutions give this same transformation under the canonical model comparisons. This supplies the required canonical symmetry, including the unbounded case.",
+   "uses": [
+    "def-kun-derived-tensor",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and preceding construction), via the existing two-variable localization/descent node; explicit descent of the signed swap and its inverse"
+   }
   }
  ],
  "proof_deps": [
-  "def-kun-derived-tensor"
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-tensor-sym.md",
-  "place": "## Proof"
+  "place": "Proof, expanded by the signed chain swap and the existing ringed-site two-variable descent theorem (Stacks 06YS, 06YU)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "KFlat|derivedTensor|tensorDerived|derived.*braiding",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary sheaf symmetry and degreewise Tor do not give the unbounded derived tensor symmetry; shift-commutation results concern a different operation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product of sheaves is symmetric natural in both complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Symmetry natural isomorphism of the unbounded derived tensor product of sheaves of modules over a commutative ring",
+   "results": "CategoryTheory.Sheaf.symmetricCategory; CategoryTheory.Sheaf.monoidalCategory; LightCondensed.instSymmetricCategoryLightCondMod; CategoryTheory.Sheaf.braidedCategory; CategoryTheory.Sheaf.tensorProd_isSheaf; CategoryTheory.sheafToPresheaf_μ; CategoryTheory.sheafToPresheaf_δ; CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary sheaf symmetry and degreewise Tor do not give the unbounded derived tensor symmetry; shift-commutation results concern a different operation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"tensor\"",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary sheaf symmetry and degreewise Tor do not give the unbounded derived tensor symmetry; shift-commutation results concern a different operation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Braiding in the derived category of unbounded cochain complexes obtained by K-flat resolutions with Koszul signs",
+   "results": "DerivedCategory.instCommShiftCochainComplexIntQ; DerivedCategory.instCommShiftHomotopyCategoryIntUpQh; CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; DerivedCategory.instHasShiftInt; DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso; CategoryTheory.Tor'",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary sheaf symmetry and degreewise Tor do not give the unbounded derived tensor symmetry; shift-commutation results concern a different operation"
+  },
+  {
+   "tool": "grep",
+   "query": "braiding|symmetricCategory",
+   "results": "none (Mathlib/Algebra/Homology/DerivedCategory)",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary sheaf symmetry and degreewise Tor do not give the unbounded derived tensor symmetry; shift-commutation results concern a different operation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural commutativity isomorphism for the left derived bifunctor of tensor product on complexes of module sheaves",
+   "results": "CategoryTheory.Tor'_map_app; CategoryTheory.Tor_map; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor'; CategoryTheory.Tor'_obj_map; HomologicalComplex.HasGoodTensor₁₂; CategoryTheory.Tor; HomologicalComplex.HasGoodTensor₂₃",
+   "date": "2026-10-14",
+   "verdict": "no match: Tor and Tor' are degreewise functors on the abelian category with projective resolutions; HasGoodTensor conditions concern associativity of complex tensor, not derived commutativity"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +148,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-tensor-sym",
+  "worker": "stage1",
+  "summary": "Expanded the imported K-flat-replacement proof into representative selection, the full Koszul differential/naturality/inverse calculation, and unique descent to the two derived variables. Added the missing statement dependency on derived tensor. Reused existing generic ringed-site resolution and tensor descent results, with no new nodes. No exact project attachment or Mathlib leaf was established.",
+  "blueprint": "Realizes the single blueprint proof paragraph: choose K-flat resolutions; induce ordinary symmetry with the necessary Koszul signs; verify comparison independence and naturality by two-variable localization."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-213aec40c",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-213aec40c (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, report, unit/chapter route, and cited sources in full. Verified Koszul signs, unbounded direct sums, resolution hypotheses, canonical comparisons, and two-variable descent. No new nodes or circular dependencies; accepted both generic tool uses in review.md. No repairs needed."
+ }
 }
