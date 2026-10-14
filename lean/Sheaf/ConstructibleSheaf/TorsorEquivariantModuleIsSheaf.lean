@@ -19,7 +19,6 @@ Source: Stacks Project, Tags 04TR, 04TS and 0DV5 (3).
 
 @[expose] public section
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency false
 universe u
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
