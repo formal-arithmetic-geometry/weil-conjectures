@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sbc-lem-integral-etale-direct-image-exact",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Etale direct image is exact for integral morphisms",
@@ -19,18 +19,148 @@
   ]
  },
  "stmt_deps": [
-  "lemma-weil-pbc-finite-direct-image-exact",
+  "def-weil-finite-integral-morphism",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-scheme-conventions"
- ],
- "proof": [],
- "proof_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-derived-categories",
   "lemma-weil-pbc-finite-direct-image-exact"
  ],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Let $\\varphi:F\\to G$ be an epimorphism of abelian sheaves on $T'_{\\Et}$ and let $V\\to T$ be etale with $s\\in(\\pi_*G)(V)=G(T'\\times_TV)$. By [lem-weil-pbc-abelian-sheaf-epi-locally-surjective], choose an etale covering $\\{U_i\\to T'\\times_TV\\}$ and sections $t_i\\in F(U_i)$ whose images are $s|_{U_i}$. This applies to the small etale site of $T'$: the covering maps compose with the etale projection $T'\\times_TV\\to T'$ to give objects of that site. The composition is etale by [lem-weil-pbc-etale-composition-cancellation], clause (2).",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04C2 (lemma-what-integral), proof of (1) and (4), via Tags 04DR and 04DO"
+   }
+  },
+  {
+   "text": "For each point $v\\in V$, apply [lem-sbc-integral-etale-cover-disjoint-refinement] with $f=\\pi$ to this covering. It gives an etale neighbourhood $a_v:V_v\\to V$ with a point above $v$, and a partition of $T'\\times_TV_v$ into disjoint opens $W_{v,j}$, each mapping over $T'\\times_TV$ to some $U_{\\alpha_v(j)}$. Pull back $t_{\\alpha_v(j)}$ to a section $r_{v,j}\\in F(W_{v,j})$. Naturality of $\\varphi$ gives $\\varphi(r_{v,j})=s|_{W_{v,j}}$. The refinement lemma requires only that $\\pi$ be integral, not finite or surjective. The opens are etale over the source, and their maps to the covering members are morphisms of its small etale site, by [lem-weil-pbc-etale-composition-cancellation], clauses (1) and (2).",
+   "uses": [
+    "lem-sbc-integral-etale-cover-disjoint-refinement",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04C2 (lemma-what-integral), proof of (1) and (4), via Tags 04DR and 04DO"
+   }
+  },
+  {
+   "text": "The inclusions of the disjoint opens $W_{v,j}$ are monomorphisms and jointly cover $T'\\times_TV_v$. Apply [lem-weil-pbc-disjoint-etale-sections-product] to $F$ and $G$ on the small etale site of $T'$ (the products of abelian groups exist, also for an empty family). The tuple $(r_{v,j})_j$ glues uniquely to $r_v\\in F(T'\\times_TV_v)$, and the equality of the restrictions of $\\varphi(r_v)$ and $s|_{T'\\times_TV_v}$ forces equality of those sections. Thus $s|_{V_v}$ lifts in $(\\pi_*F)(V_v)$. The family $\\{V_v\\to V\\}_{v\\in V}$ is etale and jointly surjective because its $v$-indexed member has a point over $v$; it is a covering. The local-surjectivity criterion on $T_{\\Et}$ now proves that $\\pi_*\\varphi$ is an epimorphism. If $V$ is empty, the empty covering gives the same criterion. The open inclusions are etale by [lem-weil-pbc-etale-composition-cancellation], clause (1); the base neighbourhoods are objects over $T$ by clause (2).",
+   "uses": [
+    "lem-weil-pbc-disjoint-etale-sections-product",
+    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04C2 (lemma-what-integral), proof of (1) and (4), via Tags 04DR and 04DO"
+   }
+  },
+  {
+   "text": "For every short exact sequence $0\\to F_1\\to F_2\\to F_3\\to0$, [lem-weil-pbc-direct-image-left-exact] gives exactness of $0\\to\\pi_*F_1\\to\\pi_*F_2\\to\\pi_*F_3$; the epimorphism preservation just proved supplies its last surjection. Therefore the additive functor $\\pi_*$ carries short exact sequences to short exact sequences, which is exactness.",
+   "uses": [
+    "lem-weil-pbc-direct-image-left-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04C2 (lemma-what-integral), proof of (1) and (4), via Tags 04DR and 04DO"
+   }
+  },
+  {
+   "text": "The categories of abelian etale sheaves on $T'$ and $T$ have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. Apply [lem-sc-exact-functor-higher-derived-vanishing] to the exact additive functor $\\pi_*$ obtained above. It gives $R^q\\pi_*(F)=0$ for every abelian sheaf $F$ and every integer $q>0$, hence the asserted vanishing of functors.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-sc-exact-functor-higher-derived-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), part (5)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] to $\\pi_*$: the termwise functor carries quasi-isomorphisms to quasi-isomorphisms and induces a derived functor. By [lem-weil-pbc-exact-functor-bounded-below] it restricts to the bounded below categories. Now [lem-weil-pbc-exact-functor-derived-functor], clause (2), identifies this restriction canonically with the right derived functor $R\\pi_*$: for every bounded below complex $K$ the canonical map $Q(\\pi_*K)\\to R\\pi_*(QK)$ is an isomorphism. This is precisely $R\\pi_*=\\pi_*$ on $\\Dplus(T'_{\\Et})$, with the right side understood termwise on complexes.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), parts (2)-(4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+  "lem-sbc-integral-etale-cover-disjoint-refinement",
+  "lem-weil-pbc-disjoint-etale-sections-product",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-direct-image-left-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-sc-exact-functor-higher-derived-vanishing",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04C2 (lemma-what-integral), (1) and (4); derived consequences: derived.tex Tag 015F"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsIntegralHom.*[Ee]xact|preservesFiniteColimits_lowerStar|integral.*direct image",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits concern abelian categories and generic exact-functor or local-surjectivity results, not exactness of integral etale pushforward"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralHom\", \"PreservesFiniteColimits\"",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits concern abelian categories and generic exact-functor or local-surjectivity results, not exactness of integral etale pushforward"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The direct image functor on abelian etale sheaves along an integral morphism is exact and its higher right derived functors vanish",
+   "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; SheafOfModules.instAbelian; CategoryTheory.Sheaf.instIsGrothendieckAbelian; AlgebraicGeometry.Scheme.Modules.instAbelian; CategoryTheory.sheafIsAbelian; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; instAbelianLightCondMod",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits concern abelian categories and generic exact-functor or local-surjectivity results, not exactness of integral etale pushforward"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exactness of pushforward of abelian sheaves on the small etale site for integral morphisms",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward for an integral scheme morphism preserves epimorphisms of sheaves on the etale topology",
+   "results": "AlgebraicGeometry.SheafedSpace.epi_of_base_surjective_of_stalk_mono; LightCondMod.instPreservesEpimorphismsLightCondSetForget; CategoryTheory.Sheaf.epi_of_isLocallySurjective; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; CategoryTheory.Sheaf.Hom.epi_of_presheaf_epi; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.Flat.epi_of_flat_of_surjective",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits concern abelian categories and generic exact-functor or local-surjectivity results, not exactness of integral etale pushforward"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "undischarged_input",
@@ -70,5 +200,64 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-lem-universal-datum"
+ "unit": "sk-lem-universal-datum",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "sbc-lem-integral-etale-direct-image-exact",
+  "worker": "stage1",
+  "summary": "Expanded the classical 04C2 input into local lifting, integral disjoint refinement, gluing, and exactness, followed by higher-derived vanishing and the canonical termwise derived comparison. One new geometric statement-only node (04DR/04DP); generic sheaf and derived tools reused. No statement change. Finite exactness is a statement pointer, not an input to the integral proof.",
+  "blueprint": "Realizes blueprint_proof_text first sentence: integral exactness, higher-direct-image vanishing, and derived equality; its finite-case sentence remains the existing statement pointer.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+    "why": "The small-etale local lifting criterion converts epimorphisms to local section lifts and back; this generic sheaf tool is not supplied by the universal-datum unit."
+   },
+   {
+    "node": "lem-weil-pbc-disjoint-etale-sections-product",
+    "why": "The arbitrary disjoint-cover gluing theorem supplies existence and uniqueness of sections on the refinement; it is a generic sheaf tool."
+   },
+   {
+    "node": "lem-weil-pbc-direct-image-left-exact",
+    "why": "Left exactness holds for every scheme morphism and is the generic half of exactness, not a replacement for the integral geometric argument."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Enough injectives supplies the hypotheses of the resolution definition of higher direct images."
+   },
+   {
+    "node": "lem-sc-exact-functor-higher-derived-vanishing",
+    "why": "Generic homological algebra converts established exactness into vanishing of higher derived functors."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic localization of an exact functor supplies the termwise derived functor."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "The generic cohomology comparison ensures the induced functor preserves bounded below objects."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic universal-property identification with the right derived functor supplies the canonical bounded-below comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-disjoint-etale-sections-product",
+  "lem-weil-pbc-direct-image-left-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-sc-exact-functor-higher-derived-vanishing",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-7c51a5ea6",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-7c51a5ea6 (reviewer sub-agent of L); spot-checked: Read the item, new node, cited statements, sources, and route in full. Stacks 04C2/04DR/04DP and 015F support all six steps. Repaired missing étale-permanence citations and incomplete new-node metadata in review-local JSON files. Checked edge cases, duplicates, coefficients, canonical morphism, and dependency acyclicity. Statements unchanged; details and accepted tool uses are in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }
