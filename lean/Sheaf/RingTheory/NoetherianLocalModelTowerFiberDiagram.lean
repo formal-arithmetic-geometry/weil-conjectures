@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.RingTheory.Localization.Defs
+import Sheaf.RingTheory.NoetherianLocalModelTowerFiberLocalization
+import Sheaf.RingTheory.NoetherianLocalModelTowerFiberColimit
 
 /-!
 # Categorical presentation of the closed-fibre system
@@ -134,6 +136,23 @@ theorem NoetherianLocalModelTower.exists_fiber_diagram
         ((S ⧸ Ideal.map (algebraMap R S) (IsLocalRing.maximalIdeal R)) ⊗[S] M)),
       letI := Module.compHom (colimit D : AddCommGrpCat.{max u v w t}) ψ
       ∀ a x, eD (a • x) = eA a • eD x) := by
-  sorry
+  let := X.preorder
+  let := X.commR
+  let := X.commS
+  let := X.localR
+  let := X.algRS
+  let := X.addN
+  let := X.moduleS
+  let := X.fiberAct
+  have hloc := X.fiber_localization
+  obtain ⟨limitAct, ⟨hsem, hlim⟩, _⟩ := X.fiber_colimit
+  refine ⟨X.fiberA, X.fiberB, X.fiberD, X.fiberAct,
+    X.fiberφ, X.fiberψ, limitAct, X.fiberA_local, X.fiberB_local,
+    X.fiberA_noetherian, X.fiberB_noetherian, X.fiberD_finite,
+    X.fiberφ_local, X.fiberA_map_local, X.fiberB_map_local,
+    X.fiber_square, X.fiberD_map_smul, X.fiberψ_comp_ι,
+    hsem, hloc, X.fiber_module_baseChange, ?_, hlim⟩
+  intro i
+  exact ⟨RingEquiv.refl _, X.fiberDEquiv i, X.fiberDEquiv_smul i⟩
 
 end Module

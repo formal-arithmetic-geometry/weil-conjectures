@@ -1,0 +1,139 @@
+{
+ "id": "def-weil-pbc-noetherian-local-model-tower-fiber-ring-colimit",
+ "kind": "definition",
+ "title": "Constructed ring comparison for the middle closed-fibre colimit",
+ "statement": "Let X be a Noetherian local model tower [def-weil-pbc-noetherian-local-model-tower] over a local ring R, with its explicit middle closed-fibre functor A [def-weil-pbc-noetherian-local-model-tower-fiber-system]. Define the cocone to ULift(S/m_R S) by descending the stage limit maps. Its underlying maps are jointly surjective and equality of two quotient classes at a stage descends to equality at a later stage. This makes it a colimit cocone and defines its canonical comparison ring equivalence fiberAEquiv from colimit A to S/m_R S. Every definition has constructed data or data determined uniquely by a proved colimit universal property; no unproved theorem is used.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00R7, paragraph beginning with the colimit of the maximal ideals, quotient systems before the second use of Tag 00R6; read at https://stacks.math.columbia.edu/tag/00R7."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-local-model-tower",
+  "def-weil-pbc-noetherian-local-model-tower-fiber-system"
+ ],
+ "proof": [
+  {
+   "text": "The images of stage extended maximal ideals form an ideal in S: move summands and multipliers to a common stage using directedness and slimit_surj. It contains the image of the maximal ideal of R. Indeed rlimit_surj lifts each coefficient, and a unit lift would have a unit image. Hence every element of m_R S comes from a stage ideal.",
+   "uses": [
+    "def-weil-pbc-noetherian-local-model-tower",
+    "def-weil-pbc-noetherian-local-model-tower-fiber-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the stage limit maps through the quotients and compose with ULift.up to construct a cocone. Quotient representatives prove naturality. Every quotient class is represented at a stage by slimit_surj. For equality of two stage classes, their difference lies in m_R S; represent that ideal element at a common stage and use slimit_eq at a further stage to show the difference lies in its stage ideal. Types.FilteredColimit.isColimitOf' proves the underlying cocone colimiting; reflection by forget CommRingCat proves the ring cocone colimiting. Its unique comparison with colimit A, followed by ULift.ringEquiv, constructs fiberAEquiv.",
+   "uses": [
+    "def-weil-pbc-noetherian-local-model-tower",
+    "def-weil-pbc-noetherian-local-model-tower-fiber-system"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-local-model-tower",
+  "def-weil-pbc-noetherian-local-model-tower-fiber-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R2",
+  "date": "2026-10-14",
+  "note": "Completely proved quotient representative and eventual-equality construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quotients of a directed system of rings form a directed system whose colimit is the quotient ring",
+   "results": "Service unavailable: Internal Server Error (msearch.py).",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed system of local ring quotients and modules has colimit the quotient by the maximal ideal",
+   "results": "ModuleCat.directLimitIsColimit and related fixed-ring direct-limit declarations; no closed-fibre tower diagram match. Loogle tensor-equivalence search also found TensorProduct.comm, LinearEquiv.lTensor/rTensor and equivOfCompatibleSMul.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*colimit|colimit.*quotient; quotientMap.*local|local.*quotientMap; TensorProduct/Maps.lean; Localization/Ideal.lean",
+   "results": "Found Ideal.quotientMap, Algebra.TensorProduct.mapRingHom, IsLocalization.of_surjective, quotTensorEquivQuotSMul, Ideal.smul_restrictScalars and AlgebraTensorModule.cancelBaseChange. None states the tower-specific assertion; these prove its stage constructions and localization comparison. Blueprint searches closed fibre colimit and quotient localization tensor each returned zero matches. Further ring-colimit work uses Types.FilteredColimit.isColimitOf', reflectsColimit_of_reflectsIsomorphisms and coconePointUniqueUpToIso.",
+   "date": "2026-10-14",
+   "verdict": "no exact match; general APIs used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.NoetherianLocalModelTowerFiberDiagram",
+  "date": "2026-10-14",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "finite-etale-lifting step 7 (essential surjectivity via 0GS2): approximation branch, criterion-flatness-fibre steps 1--8 and its limit localization comparisons; Closed-fibre flatness on a tail of a Noetherian local model tower; categorical closed-fibre presentation before applying 00R6; Closed-fibre colimit comparison for the explicit quotient systems; Constructed ring comparison for the middle closed-fibre colimit",
+   "via": [
+    "lem-weil-pbc-noetherian-local-model-tower-fiber-colimit",
+    "lem-weil-pbc-noetherian-local-model-tower-fiber-diagram",
+    "lem-weil-pbc-noetherian-local-model-tower-fiber-flat-stage",
+    "lem-weil-pbc-noetherian-flat-closed-fiber-model",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.NoetherianLocalModelTowerFiberRingColimit",
+  "file": "lean/Sheaf/RingTheory/NoetherianLocalModelTowerFiberRingColimit.lean",
+  "declaration": "Module.NoetherianLocalModelTower.fiberAEquiv",
+  "declarations": [
+   "Module.NoetherianLocalModelTower.fiberIdealS_transition",
+   "Module.NoetherianLocalModelTower.fiberIdealS_limit",
+   "Module.NoetherianLocalModelTower.fiberIdealS_limit_rep",
+   "Module.NoetherianLocalModelTower.fiberS_eventual_zero",
+   "Module.NoetherianLocalModelTower.FiberLimitS",
+   "Module.NoetherianLocalModelTower.fiberSLimit",
+   "Module.NoetherianLocalModelTower.fiberSCocone",
+   "Module.NoetherianLocalModelTower.fiberSCoconeIsColimit",
+   "Module.NoetherianLocalModelTower.fiberAEquiv"
+  ],
+  "statement": "def fiberAEquiv : (colimit X.fiberA : CommRingCat.{max u v w}) ≃+* FiberLimitS (R := R) (S := S)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261014T010852-L-3167270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261014T010852-L-3167270",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

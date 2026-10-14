@@ -1,0 +1,182 @@
+{
+ "id": "def-weil-pbc-noetherian-local-model-tower-fiber-system",
+ "kind": "definition",
+ "title": "Explicit closed-fibre quotient functors and stage comparisons",
+ "statement": "For a Noetherian local model tower X [def-weil-pbc-noetherian-local-model-tower], define I_S(i) and I_T(i) as the maximal ideal of R_i extended to S_i and T_i. Define A_i=S_i/I_S(i), B_i=T_i/I_T(i), and D_i=ULift(B_i tensor over T_i with N_i), at the universes max(u,v,w) and max(u,v,w,t). Their transitions are the induced quotient ring maps and the semilinear tensor maps, lifted by ULift. Define phi_i by quotienting S_i to T_i, and psi by applying colimMap to this natural transformation. The stage module action is the actual tensor-module action transported by ULift. Quotient functor laws, locality, Noetherianity, module finiteness, naturality, semilinearity, the coprojection identity for psi, compatible stage comparisons with (S_i/I_S(i)) tensor over S_i with N_i, and module scalar-extension comparisons are proved by the declarations of this module. No data depend on an unproved existence theorem.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00R7, paragraph beginning with the colimit of the maximal ideals, quotient systems before the second use of Tag 00R6; read at https://stacks.math.columbia.edu/tag/00R7."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-local-model-tower"
+ ],
+ "proof": [
+  {
+   "text": "Locality of rmap maps maximal ideals into maximal ideals. Extend this inclusion through rs_comm and the derived rt_comm to descend smap, tmap and S_i to T_i to quotient homomorphisms. Quotient representatives and the original DirectedSystem laws prove the ring functor laws and the natural square.",
+   "uses": [
+    "def-weil-pbc-noetherian-local-model-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use TensorProduct.map on the semilinear quotient-ring and module transitions. Tensor induction, quotient representatives and the original tower laws prove identity, composition and semilinearity. Compose with ULift.moduleEquiv to produce the lifted group functor and its actual scalar action. Apply colimMap to the natural quotient ring transformation; its coprojection identity follows from iota_colimMap.",
+   "uses": [
+    "def-weil-pbc-noetherian-local-model-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The extended maximal ideals lie properly below the maximal ideals of the stage local rings. The surjective quotient maps give locality; quotient Noetherianity and finite tensor base change give Noetherianity and module finiteness. The quotient maps induced by local maps are local because units lift under quotient maps of local rings and are reflected by the original local map.",
+   "uses": [
+    "def-weil-pbc-noetherian-local-model-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify both fibre tensors with module quotients using quotTensorEquivQuotSMul. Ideal.smul_restrictScalars identifies the two ideal-times-module submodules; restrictScalarsEquiv and quotEquivOfEq compose the comparisons. Their S_i-linearity descends to A_i scalar compatibility. For module transitions remove the ULift, cancel the intermediate B_i base change, insert the T_j base change, apply X.moduleTransition, and restore ULift. Tensor induction and the specified pure-tensor formula prove the required transition formula.",
+   "uses": [
+    "def-weil-pbc-noetherian-local-model-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-local-model-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R2",
+  "date": "2026-10-14",
+  "note": "Detailed Lean argument refining the quotient-system paragraph of Tag 00R7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quotients of a directed system of rings form a directed system whose colimit is the quotient ring",
+   "results": "Service unavailable: Internal Server Error (msearch.py).",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed system of local ring quotients and modules has colimit the quotient by the maximal ideal",
+   "results": "ModuleCat.directLimitIsColimit and related fixed-ring direct-limit declarations; no closed-fibre tower diagram match. Loogle tensor-equivalence search also found TensorProduct.comm, LinearEquiv.lTensor/rTensor and equivOfCompatibleSMul.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*colimit|colimit.*quotient; quotientMap.*local|local.*quotientMap; TensorProduct/Maps.lean; Localization/Ideal.lean",
+   "results": "Found Ideal.quotientMap, Algebra.TensorProduct.mapRingHom, IsLocalization.of_surjective, quotTensorEquivQuotSMul, Ideal.smul_restrictScalars and AlgebraTensorModule.cancelBaseChange. None states the tower-specific assertion; these prove its stage constructions and localization comparison. Blueprint searches closed fibre colimit and quotient localization tensor each returned zero matches.",
+   "date": "2026-10-14",
+   "verdict": "no exact match; general APIs used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.NoetherianLocalModelTowerFiberDiagram",
+  "date": "2026-10-14",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "finite-etale-lifting step 7 (essential surjectivity via 0GS2): approximation branch, criterion-flatness-fibre steps 1--8 and its limit localization comparisons; Closed-fibre flatness on a tail of a Noetherian local model tower; categorical closed-fibre presentation before applying 00R6; Explicit closed-fibre quotient functors and stage comparisons",
+   "via": [
+    "lem-weil-pbc-noetherian-local-model-tower-fiber-diagram",
+    "lem-weil-pbc-noetherian-local-model-tower-fiber-flat-stage",
+    "lem-weil-pbc-noetherian-flat-closed-fiber-model",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.NoetherianLocalModelTowerFiberSystem",
+  "file": "lean/Sheaf/RingTheory/NoetherianLocalModelTowerFiberSystem.lean",
+  "declaration": "Module.NoetherianLocalModelTower.fiberD",
+  "declarations": [
+   "Module.NoetherianLocalModelTower.fiberIdealS",
+   "Module.NoetherianLocalModelTower.fiberIdealT",
+   "Module.NoetherianLocalModelTower.FiberS",
+   "Module.NoetherianLocalModelTower.FiberT",
+   "Module.NoetherianLocalModelTower.FiberN",
+   "Module.NoetherianLocalModelTower.map_fiberIdeal_le",
+   "Module.NoetherianLocalModelTower.fiberSMap",
+   "Module.NoetherianLocalModelTower.rt_comm",
+   "Module.NoetherianLocalModelTower.fiberTMap",
+   "Module.NoetherianLocalModelTower.fiberφ",
+   "Module.NoetherianLocalModelTower.fiberA",
+   "Module.NoetherianLocalModelTower.fiberB",
+   "Module.NoetherianLocalModelTower.fiberTLinear",
+   "Module.NoetherianLocalModelTower.fiberNLinear",
+   "Module.NoetherianLocalModelTower.fiberNMap",
+   "Module.NoetherianLocalModelTower.fiberNMap_tmul",
+   "Module.NoetherianLocalModelTower.fiberNMap_self",
+   "Module.NoetherianLocalModelTower.fiberNMap_comp",
+   "Module.NoetherianLocalModelTower.fiberDMap",
+   "Module.NoetherianLocalModelTower.fiberD",
+   "Module.NoetherianLocalModelTower.fiberAct",
+   "Module.NoetherianLocalModelTower.fiberφNat",
+   "Module.NoetherianLocalModelTower.fiberψ",
+   "Module.NoetherianLocalModelTower.fiberψ_comp_ι",
+   "Module.NoetherianLocalModelTower.fiberIdealS_ne_top",
+   "Module.NoetherianLocalModelTower.fiberIdealT_ne_top",
+   "Module.NoetherianLocalModelTower.fiberA_local",
+   "Module.NoetherianLocalModelTower.fiberB_local",
+   "Module.NoetherianLocalModelTower.fiberA_noetherian",
+   "Module.NoetherianLocalModelTower.fiberB_noetherian",
+   "Module.NoetherianLocalModelTower.fiberD_finite",
+   "Module.NoetherianLocalModelTower.quotientMap_local",
+   "Module.NoetherianLocalModelTower.fiberφ_local",
+   "Module.NoetherianLocalModelTower.fiberA_map_local",
+   "Module.NoetherianLocalModelTower.fiberB_map_local",
+   "Module.NoetherianLocalModelTower.fiber_square",
+   "Module.NoetherianLocalModelTower.fiberNMap_smul",
+   "Module.NoetherianLocalModelTower.fiberD_map_smul",
+   "Module.NoetherianLocalModelTower.fiber_submodule_eq",
+   "Module.NoetherianLocalModelTower.fiberNEquiv",
+   "Module.NoetherianLocalModelTower.fiberDEquiv",
+   "Module.NoetherianLocalModelTower.fiberDEquiv_smul",
+   "Module.NoetherianLocalModelTower.fiber_module_baseChange"
+  ],
+  "statement": "def fiberD : X.ι ⥤ AddCommGrpCat.{max u v w t}",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261014T010852-L-3167270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261014T010852-L-3167270",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

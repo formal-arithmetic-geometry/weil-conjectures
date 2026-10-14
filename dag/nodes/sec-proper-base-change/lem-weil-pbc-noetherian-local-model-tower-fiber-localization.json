@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-noetherian-local-model-tower-fiber-localization",
+ "kind": "statement",
+ "title": "Localization of the explicit closed-fibre ring transitions",
+ "statement": "Let X be a Noetherian local model tower [def-weil-pbc-noetherian-local-model-tower], and let A,B,phi be its explicit quotient functors and quotient stage maps [def-weil-pbc-noetherian-local-model-tower-fiber-system]. For every arrow f:i to j, endow B_i and A_j with their A_i-algebra structures from phi_i and A(f). There exist q:B_i tensor over A_i with A_j to B_j and a denominator submonoid U such that q(b tensor a)=B(f)(b)*phi_j(a), and B_j is a localization at U with algebra map q.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00R7, paragraph beginning with the colimit of the maximal ideals, quotient systems before the second use of Tag 00R6; read at https://stacks.math.columbia.edu/tag/00R7."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-local-model-tower-fiber-system",
+  "def-weil-pbc-noetherian-local-model-tower"
+ ],
+ "proof": [
+  {
+   "text": "For a transition i to j, let g : T_i tensor over S_i with S_j to T_j\nand U be the localization supplied by X.fibreTransition. The commuting quotient\nsquare defines a ring homomorphism q : B_i tensor over A_i with A_j to B_j,\nwith q(b tensor a) = image(b) * phi_j(a), by the tensor universal property.\nThe three quotient maps give P : T_i tensor over S_i with S_j to\nB_i tensor over A_i with A_j. It is surjective: lift both factors of a pure\ntensor to quotient representatives, then use additive induction on tensors.\nThe square consisting of g, P, q and the quotient map T_j to B_j commutes,\nas checked on pure tensors and then by additive induction.\n\nThe image in the source of the extended maximal ideal of S_j lies in ker(P),\nsince its image in A_j is zero. Its image under g is the extended maximal\nideal in T_j, by the formula g(1 tensor a) = algebraMap(S_j,T_j)(a) and\ntransitivity of extension of ideals. Hence ker(T_j to B_j) is contained in\nthe extension of ker(P) along g. Apply IsLocalization.of_surjective to this\nsquare, its two surjective quotient maps and that kernel inclusion. It gives\nIsLocalization (U.map P) B_j with precisely the constructed q as algebra map.\nThe argument uses no flatness and also applies to identity transitions.",
+   "uses": [
+    "def-weil-pbc-noetherian-local-model-tower-fiber-system",
+    "def-weil-pbc-noetherian-local-model-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-local-model-tower",
+  "def-weil-pbc-noetherian-local-model-tower-fiber-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R2",
+  "date": "2026-10-14",
+  "note": "Detailed Lean argument refining the quotient-system paragraph of Tag 00R7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quotients of a directed system of rings form a directed system whose colimit is the quotient ring",
+   "results": "Service unavailable: Internal Server Error (msearch.py).",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed system of local ring quotients and modules has colimit the quotient by the maximal ideal",
+   "results": "ModuleCat.directLimitIsColimit and related fixed-ring direct-limit declarations; no closed-fibre tower diagram match. Loogle tensor-equivalence search also found TensorProduct.comm, LinearEquiv.lTensor/rTensor and equivOfCompatibleSMul.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*colimit|colimit.*quotient; quotientMap.*local|local.*quotientMap; TensorProduct/Maps.lean; Localization/Ideal.lean",
+   "results": "Found Ideal.quotientMap, Algebra.TensorProduct.mapRingHom, IsLocalization.of_surjective, quotTensorEquivQuotSMul, Ideal.smul_restrictScalars and AlgebraTensorModule.cancelBaseChange. None states the tower-specific assertion; these prove its stage constructions and localization comparison. Blueprint searches closed fibre colimit and quotient localization tensor each returned zero matches.",
+   "date": "2026-10-14",
+   "verdict": "no exact match; general APIs used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.NoetherianLocalModelTowerFiberDiagram",
+  "date": "2026-10-14",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "finite-etale-lifting step 7 (essential surjectivity via 0GS2): approximation branch, criterion-flatness-fibre steps 1--8 and its limit localization comparisons; Closed-fibre flatness on a tail of a Noetherian local model tower; categorical closed-fibre presentation before applying 00R6; Localization of the explicit closed-fibre ring transitions",
+   "via": [
+    "lem-weil-pbc-noetherian-local-model-tower-fiber-diagram",
+    "lem-weil-pbc-noetherian-local-model-tower-fiber-flat-stage",
+    "lem-weil-pbc-noetherian-flat-closed-fiber-model",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.NoetherianLocalModelTowerFiberLocalization",
+  "file": "lean/Sheaf/RingTheory/NoetherianLocalModelTowerFiberLocalization.lean",
+  "declaration": "Module.NoetherianLocalModelTower.fiber_localization",
+  "declarations": [
+   "Module.NoetherianLocalModelTower.fiber_localization"
+  ],
+  "statement": "theorem NoetherianLocalModelTower.fiber_localization {R : Type u} {S : Type v} {S' : Type w} {M : Type t} [CommRing R] [CommRing S] [CommRing S'] [IsLocalRing R] [AddCommGroup M] [Algebra R S] [Algebra S S'] [Module S' M] [Module S M] [IsScalarTower S S' M] (X : NoetherianLocalModelTower R S S' M) : letI := X.preorder letI := X.commR letI := X.commS letI := X.localR letI := X.algRS letI := X.addN letI := X.moduleS let A := X.fiberA let B := X.fiberB let φ : ∀ i, A.obj i →+* B.obj i := X.fiberφ (∀ (i j : X.ι) (f : i ⟶ j), letI := (φ i).toAlgebra letI := (A.map f).hom.toAlgebra ∃ (q : B.obj i ⊗[A.obj i] A.obj j →+* B.obj j) (U : Submonoid (B.obj i ⊗[A.obj i] A.obj j)), (∀ (b : B.obj i) (a : A.obj j), q (b ⊗ₜ[A.obj i] a) = (B.map f).hom b * φ j a) ∧ (letI := q.toAlgebra; IsLocalization U (B.obj j)))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261014T010852-L-3167270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261014T010852-L-3167270",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

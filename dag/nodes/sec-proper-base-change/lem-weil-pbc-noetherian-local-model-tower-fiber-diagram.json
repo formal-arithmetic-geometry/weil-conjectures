@@ -12,34 +12,38 @@
  ],
  "proof": [
   {
-   "text": "Put m_i = maximalIdeal R_i, A_i = S_i/m_i S_i, B_i = T_i/m_i T_i, and\n   D_i = B_i tensor over T_i with N_i. Use ULift for the module universe if necessary.\n   Local homomorphisms pull maximal ideals back to maximal ideals. The transition\n   maps therefore descend to these quotients. On D_i send a pure tensor b tensor n\n   to the tensor of the image of b and nmap n. The original system laws, checked\n   on quotient representatives and pure tensors, give functor laws, the commuting\n   ring squares, and semilinearity. The extended ideals lie in the maximal ideals\n   of S_i and T_i, so A_i and B_i are Noetherian local rings, their maps are local,\n   and D_i is finite over B_i by quotient base change of X.finite.",
+   "text": "Use the explicitly constructed quotient systems of def-weil-pbc-noetherian-local-model-tower-fiber-system. Its proved APIs give functor laws, the actual stage actions, locality and Noetherianity, finite stage modules, local quotient transitions, the natural squares, semilinearity, the actual induced colimit ring map, compatible stage fibre equivalences and the module base-change transition equivalences.",
    "uses": [
-    "def-weil-pbc-noetherian-local-model-tower"
+    "def-weil-pbc-noetherian-local-model-tower-fiber-system"
    ],
    "elementary": false
   },
   {
-   "text": "Quotient the localization specified by X.fibreTransition by the image of m_j.\n   Its source is B_i tensor over A_i with A_j: elements of m_i already vanish,\n   and quotienting by m_j in the second factor imposes the remaining relations.\n   Localization commutes with this quotient, giving hloc with the displayed formula.\n   Quotient X.moduleTransition by m_j and use tensor associativity to obtain hbase,\n   with its displayed formula on pure tensors. Tensor over the quotient identifies\n   D_i with A_i tensor over S_i with N_i, compatibly with the A_i action. These\n   identifications are the final stage ring and additive equivalences below.",
+   "text": "Apply lem-weil-pbc-noetherian-local-model-tower-fiber-localization to these fixed ring functors to obtain the quotient localization transitions and their pure-tensor formula. This is proved using the explicit surjective tensor quotient map and IsLocalization.of_surjective.",
    "uses": [
-    "def-weil-pbc-noetherian-local-model-tower"
+    "lem-weil-pbc-noetherian-local-model-tower-fiber-localization"
    ],
    "elementary": false
   },
   {
-   "text": "The limit maps descend to S/m_R S, T/m_R T, and (S/m_R S) tensor over S with M.\n   They give compatible cocones and scalar actions. Every quotient representative\n   comes from a stage, by the tower's surjectivity fields. If a representative maps\n   to zero, express its image as a finite sum of multiples of elements of m_R.\n   Represent those finitely many coefficients and module elements at a common stage.\n   Locality of R_i to R puts each lifted coefficient in m_i. Descend the equality\n   by the tower's eventual-equality fields at a further common stage; there the\n   quotient representative is zero. For module tensors use their identification\n   with the module quotient and the same finite-sum argument. Thus the cocones are\n   colimits. The induced comparison maps are bijective, hence ring and additive\n   equivalences. Their formulas on representatives show that the colimit scalar\n   action restricts along psi to the closed-fibre action. This gives the final\n   limit equivalences and their scalar compatibility. No flatness is used here.",
+   "text": "Apply lem-weil-pbc-noetherian-local-model-tower-fiber-colimit to obtain its uniquely determined colimit module action, semilinear coprojections and compatible closed-fibre comparisons. Assemble all witnesses and conjunctions, taking the stage ring comparison to be RingEquiv.refl and the stage additive comparison to be the explicitly constructed fiberDEquiv.",
    "uses": [
-    "def-weil-pbc-noetherian-local-model-tower"
+    "lem-weil-pbc-noetherian-local-model-tower-fiber-colimit",
+    "def-weil-pbc-noetherian-local-model-tower-fiber-system"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-noetherian-local-model-tower"
+  "def-weil-pbc-noetherian-local-model-tower-fiber-system",
+  "lem-weil-pbc-noetherian-local-model-tower-fiber-localization",
+  "lem-weil-pbc-noetherian-local-model-tower-fiber-colimit"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Tag 00R7 (lemma-criterion-flatness-fibre), paragraph beginning with the colimit of the maximal ideals, quotient systems and transitions before the second application of Tag 00R6; checked at https://stacks.math.columbia.edu/tag/00R7."
+  "by": "agent",
+  "group": "R2",
+  "date": "2026-10-14",
+  "note": "All three steps are implemented and proved: actual quotient/tensor data, quotient localization comparisons, ring and group colimits, transported scalar action and uniqueness. No remaining sorry."
  },
  "mathlib_searches": [
   {
@@ -116,12 +120,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J4",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261013T234513-L-2163779",
+  "landing": "20261014T010852-L-3167270",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
