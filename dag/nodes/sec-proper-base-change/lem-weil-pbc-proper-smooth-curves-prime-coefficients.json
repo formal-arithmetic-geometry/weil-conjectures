@@ -34,9 +34,166 @@
   "def-weil-pbc-direct-image",
   "def-weil-pbc-etale-constructible-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $G_q=R^qf_*\\underline{\\mathbf F_\\ell}$ in module sheaves and $A_q=\\operatorname{For}(G_q)$. Coefficient forgetting identifies $A_q$ with the abelian higher direct image. At each geometric point $\\bar s$, proper base change identifies its stalk with $H^q(C_{\\bar s},\\mathbf F_\\ell)$; inverse image preserves the constant sheaf. The fibre is a smooth proper connected curve over an algebraically closed field, by proper and smooth base-change permanence and the given geometric fibre hypotheses. The curve-finiteness lemma makes these stalks finite for every prime $\\ell$, including the residue characteristic.",
+   "uses": [
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "cor-weil-pbc-geometric-fiber-finite",
+    "lemma-constructible-pullback-constant",
+    "lem-sc-c5",
+    "lem-weil-pbc-proper-base-change",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKV, label lemma-proper-smooth-family-curves; case (a) finite stalks, also used in case (b)"
+   }
+  },
+  {
+   "text": "Let $U=D(\\ell)\\subset S$ and $Z=V(\\ell)\\hookrightarrow S$ with its closed subscheme structure. Prime proper base change along both inclusions identifies the restrictions of $A_q$ with the higher direct images of the constant sheaf on $C_U$ and $C_Z$; coefficient comparison gives the module identifications for $G_q$. Properness and smooth relative dimension one persist under base change. The geometric fibres are the given fibres after an algebraically closed field extension, so remain nonempty geometrically connected curves. Both bases are Noetherian. A finite constructible module stratification on each piece gives one on $S$ by concatenation: every locally closed constructible subset of either piece is locally closed and constructible in the Noetherian $S$, and its immersion into the piece composes with that piece's inclusion by clause (e) of [lem-weil-pbc-proper-fp-permanence]. Thus it suffices to treat the two pieces. Empty pieces are permitted. More explicitly, $U$ is locally Noetherian by the open-subscheme clause of [pqf-def-locnoeth], and it is quasi-compact because every open in a Noetherian topological space is quasi-compact. By [pqf-lem-affine-open-locnoeth], every affine open $\\operatorname{Spec}A$ of $S$ has Noetherian coordinate ring $A$. On such an affine open, the corresponding closed piece is $\\operatorname{Spec}(A/(\\ell))$, which is Noetherian: any ascending chain of ideals in the quotient pulls back to an ascending chain of ideals of $A$ and stabilizes. The closed piece is quasi-compact as a closed subset of the Noetherian underlying space. To justify the topological Noetherian assertions, choose a finite affine open cover of $S$. Each affine has Noetherian underlying space by [lem-sc-affine-noetherian-underlying-space]; an ascending chain of opens stabilizes on each member, hence on their finite union. In such a space every open covering of an open has a finite subcover: the finite unions of its members have a maximal member, which must contain them all. For the quotient-ring check, the ascending-chain condition follows directly from finite generation: the union of a chain is an ideal, and its finite generators lie in one member.",
+   "uses": [
+    "lemma-weil-pbc-prime-proper-base-change",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-proper-base-change",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "def-pc-geometrically-irreducible",
+    "pqf-def-locnoeth",
+    "def-weil-constructible-subset",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-sc-affine-noetherian-underlying-space",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKV, label lemma-proper-smooth-family-curves; Noetherian reduction to cases (a),(b)"
+   }
+  },
+  {
+   "text": "On $U$, the input is locally constant and $\\ell$ is invertible. The specialization-invariance lemma gives bijective specialization maps in every degree. Coefficient comparison gives the same bijections on module stalks, and Step 1 gives finite stalks. Apply the finite-stalk specialization criterion to the Noetherian $U$ and the finite ring $\\mathbf F_\\ell$. Hence $G_q|_U$ is finite locally constant. The one-piece stratum proves its constructibility.",
+   "uses": [
+    "lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic",
+    "lem-weil-pbc-etale-finite-stalk-specialization-criterion",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKV, label lemma-proper-smooth-family-curves; case (a)"
+   }
+  },
+  {
+   "text": "On $Z$, put $p=\\ell$; $p\\cdot1=0$ in its structure sheaf, including if $Z$ is nonreduced. For $q\\geq2$, the proper fibre formula and characteristic-$p$ curve vanishing give zero stalks of $A_q|_Z$. Stalk conservativity makes it the zero sheaf. For $q=0$, apply the flat quasi-compact connected-fibre sections lemma to $C_Z\\times_ZV\\to V$ for every etale object $V\\to Z$. The smooth-flat lemma gives flatness, and smooth/proper permanence applies to each of these base changes. Smooth implies flat and proper implies quasi-compact, and these hypotheses persist on base change; its fibres remain the nonempty connected geometric fibres in question. The resulting bijections are the pullback maps on sections of the constant sheaf and commute with restrictions, giving $f_{Z,*}\\underline{\\mathbf F_p}\\cong\\underline{\\mathbf F_p}$. Coefficient forgetting reflects the isomorphisms. Degree zero and degrees at least two are therefore constructible with one stratum.",
+   "uses": [
+    "lem-sc-artin-schreier-dimension",
+    "cor-weil-pbc-geometric-fiber-finite",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-etale-sections-flat-qc-connected-fibres",
+    "lemma-constructible-pullback-constant",
+    "def-sbc-smooth-morphisms",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-proper-base-change",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKV, label lemma-proper-smooth-family-curves; case (b), degrees zero and at least two"
+   }
+  },
+  {
+   "text": "For degree one on $Z$, the scheme Artin--Schreier section-data and exactness lemmas on $C_Z$ give $0\\to\\underline{\\mathbf F_p}\\to\\mathcal O_{C_Z,\\mathrm{et}}\\xrightarrow{F-1}\\mathcal O_{C_Z,\\mathrm{et}}\\to0$, where $F=\\wp+1$ is sectionwise $p$-th power. Use the same lifted associated structure sheaf as in the section-data lemma and the structure-direct-image input, so no coefficient-universe change occurs. Abelian direct image is additive left exact, and abelian sheaves have enough injectives. Its right derived delta-functor gives an exact segment, hence the short exact sequence\n$$0\\to\\operatorname{Coker}(F-1:f_{Z,*}\\mathcal O_{C_Z,\\mathrm{et}}\\to f_{Z,*}\\mathcal O_{C_Z,\\mathrm{et}})\\to A_1|_Z\\to\\operatorname{Ker}(F-1:R^1f_{Z,*}\\mathcal O_{C_Z,\\mathrm{et}}\\to R^1f_{Z,*}\\mathcal O_{C_Z,\\mathrm{et}})\\to0.$$\nExactness at the two adjacent terms identifies the image of the connecting map with that cokernel, and the image of its successor with that kernel. This is in abelian sheaves; it does not assert finite prime-field dimension of the structure sheaf.",
+   "uses": [
+    "lem-sc-artin-schreier-scheme-section-data",
+    "lem-sc-artin-schreier-scheme-section-exact",
+    "lem-weil-pbc-direct-image-left-exact",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKV, label lemma-proper-smooth-family-curves; case (b), Artin--Schreier exact segment"
+   }
+  },
+  {
+   "text": "The structure-direct-image lemma identifies the first repeated term with $\\mathcal O_{Z,\\mathrm{et}}$ and the second with $E_{\\mathrm{et}}$ for a finite locally free module $E$. On the first term $F$ is $p$-th power. Use the higher-direct-image presheaf lemma to express the second term as the sheafification of $V\\mapsto H^1(C_Z\\times_ZV,\\mathcal O_{C_Z,\\mathrm{et}})$. On the second term $F$ is Frobenius-semilinear: on every etale base object and for every base section $a$, the sectionwise identity $F\\circ m_{f^*a}=m_{f^*(a^p)}\\circ F$ induces the same identity on cohomology by functoriality. The natural scalar action specified in the structure-direct-image lemma is the action of these multiplication maps. Thus $F(ae)=a^pF(e)$. For a morphism $W\\to V$ of etale base objects, pullback sends $a$ to $a|_W$, sends $a^p$ to $(a|_W)^p$, and sends the sectionwise $p$-th-power map to the same map over $W$. The cohomology restriction maps therefore respect the displayed identity. A section of the associated sheaf is locally represented by a presheaf section, so the identity holds locally for every section and hence holds in the sheaf. Apply the Frobenius vector-bundle lemma to $\\mathcal O_Z$ and to $E$. The first application makes the cokernel zero; the second makes the kernel constructible as an abelian sheaf. The exact segment then identifies $A_1|_Z$ with that kernel.",
+   "uses": [
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-frobenius-vector-bundle-kernel",
+    "lem-sc-artin-schreier-scheme-section-data",
+    "def-weil-pbc-direct-image",
+    "sbc-lem-higher-direct-image-presheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKV, label lemma-proper-smooth-family-curves; case (b), structure cohomology and final application of 0GKU"
+   }
+  },
+  {
+   "text": "On each finite abelian constant stratum of $A_1|_Z$, choose its additive constant charts with values $B$. Each element of $B$ is killed by $p$: on a nonempty chart read $pG_1=0$ at a geometric stalk, identified with $B$ by the constant-stalk lemma. Empty charts may be omitted. Give $B$ the forced $\\mathbf F_p$-action $(a\\bmod p)b=ab$, with the right side repeated addition. Every additive chart map commutes with this action, since every element of $\\mathbf F_p$ is an integer multiple of $1$. Thus the same charts are finite constant module charts. Coefficient forgetting commutes with the inverse images on strata, so $G_1|_Z$ is constructible in the module sense. Step 4 treats the other degrees on $Z$, and Step 3 treats every degree on $U$. Concatenate their finite stratifications as in Step 2. This proves every $q\\geq0$ on $S$ without requiring invertibility of $\\ell$; zero sheaves and empty pieces cause no exception.",
+   "uses": [
+    "def-weil-pbc-constructible-abelian-sheaf",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKV, label lemma-proper-smooth-family-curves; finite-field coefficient upgrade and recombination"
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-weil-pbc-geometric-fiber-finite",
+  "def-pc-geometrically-irreducible",
+  "def-sbc-smooth-morphisms",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-constructible-abelian-sheaf",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-proper-morphism",
+  "lem-pc-smooth-flat",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sc-artin-schreier-dimension",
+  "lem-sc-artin-schreier-scheme-section-data",
+  "lem-sc-artin-schreier-scheme-section-exact",
+  "lem-sc-c5",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-direct-image-left-exact",
+  "lem-weil-pbc-etale-finite-stalk-specialization-criterion",
+  "lem-weil-pbc-etale-sections-flat-qc-connected-fibres",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-frobenius-vector-bundle-kernel",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+  "lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic",
+  "lemma-constructible-pullback-constant",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lemma-weil-pbc-prime-proper-base-change",
+  "pqf-def-locnoeth",
+  "pqf-lem-affine-open-locnoeth",
+  "sbc-lem-higher-direct-image-presheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKV, Noetherian paragraph and cases (a),(b); finite cyclic module comparison for the concluding coefficient upgrade"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -93,10 +250,45 @@
    "results": "[loogle] OK 12 hit(s); CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, CompHausLike.LocallyConstant.presheaf_ext, Condensed.locallyConstantPresheaf, LightCondensed.locallyConstantPresheaf, LightCondensed.isColimitLocallyConstantPresheafDiagram, Condensed.isColimitLocallyConstantPresheaf, Condensed.isColimitLocallyConstantPresheafDiagram, LightCondensed.isColimitLocallyConstantPresheaf",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper smooth geometrically connected curve family constant prime field higher etale direct image constructible without invertibility",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility of prime torsion cohomology sheaves in a smooth proper family of curves in mixed characteristic",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"sheaf\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*smooth.*constructible|constructible.*smooth.*proper",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "prime coefficient higher direct image smooth proper curves constructible",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
   "by": "worker",
@@ -112,5 +304,99 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+  "worker": "stage1",
+  "summary": "Expanded 0GKV along its invertible-locus and characteristic-prime Artin--Schreier proof. Reused existing proper base change, curve finiteness/vanishing and coefficient comparisons; created four statement-only inputs for specialization, local constancy, coherent curve-family cohomology and Frobenius vector bundles. Statement unchanged. Maintainer-reader repair: Step 2 explicitly cites affine-open Noetherianness and composition of immersions, both existing Mathlib leaves.",
+  "blueprint": "Expands the classical constructibility input of thm-weil-pbc-direct-image-finiteness-proper through the 0GKW final prime-coefficient reduction and the Noetherian proof of 0GKV.",
+  "tool_uses": [
+   {
+    "node": "lemma-constructible-pullback-constant",
+    "why": "Generic tool: Pullback of a constant sheaf. The constructibility subargument has no in-unit replacement for this statement."
+   },
+   {
+    "node": "lem-sc-c5",
+    "why": "Generic tool: C5: finiteness on proper curves. The constructibility subargument has no in-unit replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic tool: Properness is stable under base change. The constructibility subargument has no in-unit replacement for this statement."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic tool: Base change and composition of smooth morphisms of fixed relative dimension. The constructibility subargument has no in-unit replacement for this statement."
+   },
+   {
+    "node": "lem-sc-artin-schreier-dimension",
+    "why": "Generic tool: Artin–Schreier vanishing on a smooth curve. The constructibility subargument has no in-unit replacement for this statement."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic tool: Conservativity of geometric stalks. The constructibility subargument has no in-unit replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-sections-flat-qc-connected-fibres",
+    "why": "Generic tool: Sections are invariant under flat quasi-compact maps with connected geometric fibres. The constructibility subargument has no in-unit replacement for this statement."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic tool: Smooth morphisms are flat. The constructibility subargument has no in-unit replacement for this statement."
+   },
+   {
+    "node": "lem-sc-artin-schreier-scheme-section-data",
+    "why": "Generic tool: Construction of sectionwise Artin-Schreier maps. The constructibility subargument has no in-unit replacement for this statement."
+   },
+   {
+    "node": "lem-sc-artin-schreier-scheme-section-exact",
+    "why": "Generic tool: Exactness from specified Artin-Schreier section data. The constructibility subargument has no in-unit replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-direct-image-left-exact",
+    "why": "Generic tool: Direct image of abelian etale sheaves is additive and left exact. The constructibility subargument has no in-unit replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "Generic tool: Abelian sheaves on a site have enough injectives. The constructibility subargument has no in-unit replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Generic tool: Right derived functors form a universal delta-functor. The constructibility subargument has no in-unit replacement for this statement."
+   },
+   {
+    "node": "sbc-lem-higher-direct-image-presheaf",
+    "why": "Generic tool: Higher direct image as a sheafified cohomology presheaf. The constructibility subargument has no in-unit replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Generic tool: Geometric stalks of a constant etale sheaf. The constructibility subargument has no in-unit replacement for this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-constructible-pullback-constant",
+  "lem-sc-c5",
+  "lem-weil-pbc-proper-base-change",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-artin-schreier-dimension",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-etale-sections-flat-qc-connected-fibres",
+  "lem-pc-smooth-flat",
+  "lem-sc-artin-schreier-scheme-section-data",
+  "lem-sc-artin-schreier-scheme-section-exact",
+  "lem-weil-pbc-direct-image-left-exact",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "sbc-lem-higher-direct-image-presheaf",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-546d340b8",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-546d340b8 (reviewer sub-agent of L); spot-checked: Read all item and new-node mathematics against Stacks 0GKV, 0GKU, 0GKC, 0GKD, 0GKA and 03P2. Repaired two Step-2 citation omissions using existing affine-open Noetherianness and immersion-composition nodes. Statements and targets unchanged; no duplicate or new cycle found. Exact master coefficient categories and base-change declarations checked. Corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -1,0 +1,93 @@
+{
+ "id": "lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical torsion constructibility input: 0GKW final sentence invokes 0GKV for prime constant coefficients. Expanded by 0GKV case (a): all specialization maps are isomorphisms.",
+   "via": [
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Prime-to-characteristic specialization invariance for smooth proper morphisms",
+ "statement": "Let $f:X\\to S$ be a smooth proper morphism of schemes [def-sbc-smooth-morphisms] [def-weil-proper-morphism], and let $\\ell$ be a prime invertible on $S$ (its image is a unit in every local ring). Let $F$ be a locally constant sheaf of $\\mathbf F_\\ell$-modules on the small etale site $X_{\\mathrm{et}}$ of $X$ [def-weil-pbc-etale-site] [def-constructible-locally-constant] [def-weil-sheaf-of-modules-category], regarded also as an abelian sheaf. For every $q\\geq0$, every geometric point $\\bar s$ of $S$, and every geometric point $\\bar t$ of the strict henselization $S_{(\\bar s)}$ [def-weil-pbc-strict-henselization-limit], the specialization map\n$$\\operatorname{sp}:(R^qf_*F)_{\\bar s}\\longrightarrow(R^qf_*F)_{\\bar t}$$\nis an isomorphism. Higher direct images are those of [def-weil-pbc-direct-image], stalks those of [def-weil-pbc-geometric-stalks], and specialization is induced by restricting pointed etale neighbourhood germs at $\\bar s$ to $\\bar t$ through $S_{(\\bar s)}\\to S$. No relative-dimension or finite-stalk hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GKD, label lemma-sp-isom-proper-loc-cst-torsion; prime-field specialization and degree-q consequence"
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-etale-site",
+  "def-constructible-locally-constant",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth proper morphism and a locally constant prime to characteristic torsion sheaf all higher direct image specialization maps are isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.specializingMap_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"(AlgebraicGeometry.topologically @SpecializingMap).RespectsIso\", \"doc\": \"The property of a scheme morphism being a specializing map (defined via its underlying continuous map) holds for all isomorphisms of schemes. In other words, every isomorphism of schemes automatically\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkPushforward\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C X) {x y : ↑X} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (((TopCat.Presheaf.pushforward C f).obj F).stalkSpecializes ⋯)\\n      (TopCat.Pre\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, and let $\\\\mathcal{F}$ be a presheaf on $X$ with values in a category $\\\\mathcal{C}$. Let $x, y \\\\in X$ be points such that $x$ specialize\"}\n  {\"name\": \"CompHausLike.LocallyConstant.functorIso\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"(P : TopCat → Prop) →\\n  [inst : CompHausLike.HasExplicitFiniteCoproducts P] →\\n    [inst_1 : CompHausLike.HasExplicitPullbacks P] →\\n      (hs :\\n          ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n            CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f)) →\\n \", \"doc\": \"For any type $X$, there is a natural isomorphism between the presheaf assigning locally constant functions $S \\to X$ on compact Hausdorff-like spaces and the sheaf of continuous maps to the discrete to\"}\n  {\"name\": \"CompHausLike.LocallyConstant.functorToPresheavesIso\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"(P : TopCat → Prop) →\\n  [inst : CompHausLike.HasExplicitFiniteCoproducts P] →\\n    [inst_1 : CompHausLike.HasExplicitPullbacks P] →\\n      (hs :\\n          ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n            CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f)) →\\n \", \"doc\": \"For any type $X$, the presheaf on the opposite category of compact Hausdorff-like spaces assigning locally constant functions $S \\to X$ is naturally isomorphic to the sheaf of continuous maps from comp\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkPushforward_assoc\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C X) {x y : ↑X} (h : x ⤳ y) {Z : C} (h_1 : F.stalk x ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (((TopCat.Presheaf.pushforward C f).obj F).stalkSp\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$, a continuous map $f : X \\\\to Y$, and points $x, y \\\\in X$ with $x$ specializing to $y$, the composition of the specialization-induced morphism $(\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkPushforward_apply\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C X) {x y : ↑X} (h : x ⤳ y) {F_1 : C → C → Type uF} {carrier : C → Type w}\\n  {instFunLike : (X Y : C) → FunLike (F_1 X Y) (carrier X) (carrier Y)}\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$, a continuous map $f : X \\\\to Y$, and points $x,y \\\\in X$ with $x$ specializing to $y$, the induced morphism on stalks $\\\\mathcal{F}_{f(y)} \\\\to \\\\ma\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally acyclic sheaves under a proper morphism have invariant cohomology under geometric specialization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkPushforward\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C X) {x y : ↑X} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (((TopCat.Presheaf.pushforward C f).obj F).stalkSpecializes ⋯)\\n      (TopCat.Pre\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, and let $\\\\mathcal{F}$ be a presheaf on $X$ with values in a category $\\\\mathcal{C}$. Let $x, y \\\\in X$ be points such that $x$ specialize\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkPushforward_assoc\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C X) {x y : ↑X} (h : x ⤳ y) {Z : C} (h_1 : F.stalk x ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (((TopCat.Presheaf.pushforward C f).obj F).stalkSp\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$, a continuous map $f : X \\\\to Y$, and points $x, y \\\\in X$ with $x$ specializing to $y$, the composition of the specialization-induced morphism $(\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkPushforward_apply\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C X) {x y : ↑X} (h : x ⤳ y) {F_1 : C → C → Type uF} {carrier : C → Type w}\\n  {instFunLike : (X Y : C) → FunLike (F_1 X Y) (carrier X) (carrier Y)}\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$, a continuous map $f : X \\\\to Y$, and points $x,y \\\\in X$ with $x$ specializing to $y$, the induced morphism on stalks $\\\\mathcal{F}_{f(y)} \\\\to \\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkFunctor_map\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X : TopCat}\\n  {F G : TopCat.Presheaf C X} (f : F ⟶ G) {x y : ↑X} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (F.stalkSpecializes h) ((TopCat.Presheaf.stalkFunctor C x).map f) =\\n    Category\", \"doc\": \"For any presheaves $\\\\mathcal{F}$ and $\\\\mathcal{G}$ on a topological space $X$ with values in a category $\\\\mathcal{C}$, any morphism $f: \\\\mathcal{F} \\\\to \\\\mathcal{G}$, and any points $x, y \\\\in X$ where \"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkFunctor_map_assoc\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X : TopCat}\\n  {F G : TopCat.Presheaf C X} (f : F ⟶ G) {x y : ↑X} (h : x ⤳ y) {Z : C}\\n  (h_1 : (TopCat.Presheaf.stalkFunctor C x).obj G ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (F.stalkSpecializ\", \"doc\": \"For presheaves $\\\\mathcal{F}$ and $\\\\mathcal{G}$ on a topological space $X$, a morphism $f : \\\\mathcal{F} \\\\to \\\\mathcal{G}$, and points $x,y \\\\in X$ with $x$ specializing to $y$, the composition of the sta\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"specialization\", \"Sheaf\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "specialization.*(sheaf|cohomology)|locallyAcyclic",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth proper etale cohomology specialization torsion sheaf",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "(smooth.*proper|proper.*smooth).*(specializ|[Ll]ocally[Cc]onstant)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}
