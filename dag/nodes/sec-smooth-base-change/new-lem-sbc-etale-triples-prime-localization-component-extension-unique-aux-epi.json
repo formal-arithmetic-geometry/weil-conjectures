@@ -2,7 +2,7 @@
  "id": "new-lem-sbc-etale-triples-prime-localization-component-extension-unique-aux-epi",
  "kind": "statement",
  "title": "The descended compatible map is an epimorphism",
- "statement": "theorem etaleResidueTriples_primeLocalization_component_extension_epi\n    (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]\n    (χ : (Spec R).residueField p ⟶ CommRingCat.of K)\n    (q : Spec (CommRingCat.of (Localization.AtPrime p.asIdeal)))\n    (ψ : (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).residueField q ⟶\n      CommRingCat.of K)\n    [Algebra (Localization.AtPrime p.asIdeal) K]\n    (hψ : (ΓSpecIso (CommRingCat.of (Localization.AtPrime p.asIdeal))).inv ≫\n      (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).Γevaluation q ≫ ψ =\n        CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K))\n    (hK : CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫\n      CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K) =\n        (ΓSpecIso R).inv ≫ (Spec R).Γevaluation p ≫ χ)\n    (t : EtaleResidueTriples (CommRingCat.of (Localization.AtPrime p.asIdeal)) q K ψ)\n    (c : EtaleResidueTriples R p K χ) (i : c.B ⟶ t.B)\n    (hα : c.α ≫ i = CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ t.α)\n    (hφ : i ≫ (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =\n      (ΓSpecIso c.B).inv ≫ (Spec c.B).Γevaluation c.q ≫ c.φ) : Epi i",
+ "statement": "theorem etaleResidueTriples_primeLocalization_component_extension_epi\n    (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]\n    (χ : (Spec R).residueField p ⟶ CommRingCat.of K)\n    (q : Spec (CommRingCat.of (Localization.AtPrime p.asIdeal)))\n    (ψ : (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).residueField q ⟶\n      CommRingCat.of K)\n    [Algebra (Localization.AtPrime p.asIdeal) K]\n    (_hψ : (ΓSpecIso (CommRingCat.of (Localization.AtPrime p.asIdeal))).inv ≫\n      (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).Γevaluation q ≫ ψ =\n        CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K))\n    (_hK : CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫\n      CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K) =\n        (ΓSpecIso R).inv ≫ (Spec R).Γevaluation p ≫ χ)\n    (t : EtaleResidueTriples (CommRingCat.of (Localization.AtPrime p.asIdeal)) q K ψ)\n    (c : EtaleResidueTriples R p K χ) (i : c.B ⟶ t.B)\n    (_hα : c.α ≫ i = CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ t.α)\n    (_hφ : i ≫ (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =\n      (ΓSpecIso c.B).inv ≫ (Spec c.B).Γevaluation c.q ≫ c.φ)\n    (M : Submonoid c.B)\n    (hlocal : letI := i.hom.toAlgebra; IsLocalization M t.B) : Epi i",
  "source": {
   "document": "Stacks Project",
   "place": "Tags 00CR, 01ZM, 07RP, 01Z6 and 04GW"
@@ -14,17 +14,17 @@
  ],
  "proof": [
   {
-   "text": "Apply finite-presentation descent and the affine localization epimorphism argument.",
+   "text": "Use the algebra structure induced by i.hom. The explicit hlocal hypothesis makes t.B a localization of c.B at M for exactly this structure. Apply Mathlib IsLocalization.epi M t.B; its canonical algebraMap is definitionally i. This uses localization ring-hom extensionality and requires none of the pointing compatibility equations.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "document": "Stacks Project",
-  "place": "Finite-presentation descent and localization",
-  "group": "U2"
+  "document": "Mathlib.Algebra.Category.Ring.Instances",
+  "place": "IsLocalization.epi, proved using IsLocalization.ringHom_ext",
+  "group": "G3"
  },
  "mathlib_searches": [
   {
@@ -72,7 +72,7 @@
   "module": "Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionUniqueAuxEpi",
   "file": "lean/Sheaf/RingTheory/EtaleResidueTriplesPrimeLocalizationComponentExtensionUniqueAuxEpi.lean",
   "declaration": "AlgebraicGeometry.Scheme.etaleResidueTriples_primeLocalization_component_extension_epi",
-  "statement": "theorem etaleResidueTriples_primeLocalization_component_extension_epi\n    (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]\n    (χ : (Spec R).residueField p ⟶ CommRingCat.of K)\n    (q : Spec (CommRingCat.of (Localization.AtPrime p.asIdeal)))\n    (ψ : (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).residueField q ⟶\n      CommRingCat.of K)\n    [Algebra (Localization.AtPrime p.asIdeal) K]\n    (hψ : (ΓSpecIso (CommRingCat.of (Localization.AtPrime p.asIdeal))).inv ≫\n      (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).Γevaluation q ≫ ψ =\n        CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K))\n    (hK : CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫\n      CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K) =\n        (ΓSpecIso R).inv ≫ (Spec R).Γevaluation p ≫ χ)\n    (t : EtaleResidueTriples (CommRingCat.of (Localization.AtPrime p.asIdeal)) q K ψ)\n    (c : EtaleResidueTriples R p K χ) (i : c.B ⟶ t.B)\n    (hα : c.α ≫ i = CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ t.α)\n    (hφ : i ≫ (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =\n      (ΓSpecIso c.B).inv ≫ (Spec c.B).Γevaluation c.q ≫ c.φ) : Epi i",
+  "statement": "theorem etaleResidueTriples_primeLocalization_component_extension_epi\n    (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]\n    (χ : (Spec R).residueField p ⟶ CommRingCat.of K)\n    (q : Spec (CommRingCat.of (Localization.AtPrime p.asIdeal)))\n    (ψ : (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).residueField q ⟶\n      CommRingCat.of K)\n    [Algebra (Localization.AtPrime p.asIdeal) K]\n    (_hψ : (ΓSpecIso (CommRingCat.of (Localization.AtPrime p.asIdeal))).inv ≫\n      (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).Γevaluation q ≫ ψ =\n        CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K))\n    (_hK : CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫\n      CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K) =\n        (ΓSpecIso R).inv ≫ (Spec R).Γevaluation p ≫ χ)\n    (t : EtaleResidueTriples (CommRingCat.of (Localization.AtPrime p.asIdeal)) q K ψ)\n    (c : EtaleResidueTriples R p K χ) (i : c.B ⟶ t.B)\n    (_hα : c.α ≫ i = CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ t.α)\n    (_hφ : i ≫ (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =\n      (ΓSpecIso c.B).inv ≫ (Spec c.B).Γevaluation c.q ≫ c.φ)\n    (M : Submonoid c.B)\n    (hlocal : letI := i.hom.toAlgebra; IsLocalization M t.B) : Epi i",
   "branch": "sheaf-dag",
   "by": "U2",
   "date": "2026-10-14"
@@ -88,13 +88,37 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U2",
+  "reviewer": "X-29c88",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261013T231549-L-1822551",
+  "landing": "20261014T004102-L-2834063",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files match the recorded changes; all compile, axioms and forced-adaptation importer checks pass."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "G3 stage 2",
+  "old_statement": "theorem etaleResidueTriples_primeLocalization_component_extension_epi\n    (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]\n    (χ : (Spec R).residueField p ⟶ CommRingCat.of K)\n    (q : Spec (CommRingCat.of (Localization.AtPrime p.asIdeal)))\n    (ψ : (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).residueField q ⟶\n      CommRingCat.of K)\n    [Algebra (Localization.AtPrime p.asIdeal) K]\n    (hψ : (ΓSpecIso (CommRingCat.of (Localization.AtPrime p.asIdeal))).inv ≫\n      (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).Γevaluation q ≫ ψ =\n        CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K))\n    (hK : CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫\n      CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K) =\n        (ΓSpecIso R).inv ≫ (Spec R).Γevaluation p ≫ χ)\n    (t : EtaleResidueTriples (CommRingCat.of (Localization.AtPrime p.asIdeal)) q K ψ)\n    (c : EtaleResidueTriples R p K χ) (i : c.B ⟶ t.B)\n    (hα : c.α ≫ i = CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ t.α)\n    (hφ : i ≫ (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =\n      (ΓSpecIso c.B).inv ≫ (Spec c.B).Γevaluation c.q ≫ c.φ) : Epi i",
+  "what": "E2 repair: compatibility alone is insufficient, as the pointed diagonal F → F × F shows. Add a submonoid M and IsLocalization M t.B for the algebra structure induced by i; this ensures i is the canonical localization map. Underscore unused compatibility binder names without changing their types.",
+  "source": {
+   "document": "Stacks Project",
+   "place": "Tags 00CR, 01ZM, 07RP, 01Z6 and 04GW"
+  },
+  "citers": [
+   {
+    "id": "new-lem-sbc-etale-triples-prime-localization-component-extension-unique-aux",
+    "holds": false,
+    "note": "The arbitrary compatible model lacks localization data. Its unchanged existence statement is restored as an explicit descent obligation; the invalid application is removed in the same delivery."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Apply finite-presentation descent and the affine localization epimorphism argument.",
+    "uses": [],
+    "elementary": false
+   }
+  ]
  }
 }
