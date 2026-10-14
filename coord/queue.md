@@ -1,6 +1,6 @@
 # Work queue
 
-72 items; claim with `tools/claim.py next <group> [--stage N]`.
+73 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (72)
+## Stage 3: modules to prove (73)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -81,8 +81,9 @@
 | `Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization` | 41 | 1 | proof |
 | `Sheaf.RingTheory.DvrEtaleUnitRootDiagram` | 42 | 1 | proof |
 | `Sheaf.RingTheory.DvrUniformizerRootCompositumResidue` | 42 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SelfTorAmbientLocalizedComparisons` | 43 | 1 | proof |
-| `Sheaf.RingTheory.DvrAbhyankarLocalMaximalIdeal` | 43 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SelfTorOrdinaryResolutionSections` | 44 | 1 | proof |
+| `Sheaf.RingTheory.DvrUniformizerRootCompositumMaximalIdeal` | 44 | 1 | proof |
+| `Sheaf.RingTheory.DvrUnitRootWeaklyUnramifiedDiagram` | 44 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectHomOpenMateResolutionNormalization` | 46 | 1 | proof |
 
 Waiting, not claimable: 14 modules whose proof uses a node that has no Lean declaration yet.
