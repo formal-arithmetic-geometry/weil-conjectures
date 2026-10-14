@@ -14266,3 +14266,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:25 L: merged deliver/C1/Sheaf.RingTheory.LimitModuleModuleDataConstruction (stage 3; reviewer PASS; first push; landing 20261014T022541-L-4044070 (proof); batch 20261014T022537; modules 1; new nodes 0)
 - 02:25 L: merged deliver/F2/Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal (stage 3; reviewer PASS; first push; landing 20261014T022542-L-4044278 (proof); batch 20261014T022537; modules 1; new nodes 0)
 - 02:25 L: merged deliver/F2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (stage 3; reviewer PASS; first push; landing 20261014T022542-L-4044469 (proof); batch 20261014T022537; modules 1; new nodes 0)
+- 02:25 L: merged deliver/F2/Sheaf.Paper.CartierEquality (stage 3; reviewer PASS; first push; landing 20261014T022542-L-4044628 (proof); batch 20261014T022537; modules 1; new nodes 0)

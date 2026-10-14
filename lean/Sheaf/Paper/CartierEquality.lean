@@ -59,6 +59,7 @@ theorem cartier_equality
         Module.finrank K (KaehlerDifferential k K) =
           Module.finrank K (Algebra.H1Cotangent k K)) := by
   classical
+  -- The finite basis and complete-intersection model provide the required coordinates.
   have : Algebra.EssFiniteType k K := IntermediateField.fg_top_iff.mp hfg
   obtain ⟨s, hs⟩ := exists_finset_isTranscendenceBasis k K
   let x : Fin s.card → K := fun i ↦ (s.equivFin.symm i : K)
