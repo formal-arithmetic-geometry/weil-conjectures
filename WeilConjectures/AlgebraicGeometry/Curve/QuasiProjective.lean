@@ -15,6 +15,7 @@ public import Mathlib.AlgebraicGeometry.Stalk
 public import Mathlib.RingTheory.NoetherNormalization
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateCoverProduct
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Properties
 public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
 public import WeilConjectures.Mathlib.Topology.KrullDimension
@@ -274,13 +275,6 @@ universe u
 open CategoryTheory Limits TopologicalSpace IsLocalRing
 
 variable {X : Scheme.{u}}
-
-/-- A scheme over a field with separated structure morphism is separated. -/
-lemma Scheme.isSeparated_of_isSeparated_hom {K : Type u} [Field K] (p : X ⟶ Spec (.of K))
-    [IsSeparated p] : X.IsSeparated :=
-  ⟨by
-    rw [← terminal.comp_from p]
-    infer_instance⟩
 
 /-- For a nonempty affine open `U` of an integral curve `X` over a field `K` there is a nonzero
 `f ∈ Γ(X, U)` such that `f⁻¹` lies in the maximal ideal of `𝒪_{X,x}` for every `x ∉ U`: `f` has a
