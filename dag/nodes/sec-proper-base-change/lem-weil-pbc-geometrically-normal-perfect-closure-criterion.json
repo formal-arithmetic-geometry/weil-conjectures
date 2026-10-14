@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lemma-weil-pbc-normalization-exact-sequence",
-   "place": "Proof, second paragraph: \"After an algebraically closed extension, X^nu remains smooth and normal and is the normalization of the reduced base-changed curve\"; the perfect-closure criterion of Tag 037Z supports the geometric normality asserted by Tag 0C30.",
+   "place": "Proof, second paragraph: “After an algebraically closed extension, X^nu remains smooth and normal and is the normalization of the reduced base-changed curve”; the perfect-closure criterion of Tag 037Z supports the geometric normality asserted by Tag 0C30.",
    "via": [
     "lem-weil-pbc-separable-field-geometrically-normal",
     "lem-weil-pbc-normal-algebra-separable-scalar-extension",
@@ -26,9 +26,117 @@
   "def-weil-pbc-module-tensor-product",
   "def-weil-pbc-normal-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Condition (2) implies (1) by taking $E=P$. For the converse assume $P\\otimes_k A$ is normal. In characteristic zero the given power condition forces $P=k$. In positive characteristic Frobenius on $P$ is bijective: it is surjective by hypothesis and injective because $P$ is a field.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037Z, label lemma-geometrically-normal, first paragraph and identification of the perfect closure"
+   }
+  },
+  {
+   "text": "Let $k_1/k$ be any finite purely inseparable extension. In characteristic zero $k_1=k=P$. In characteristic $p>0$, for $x\\in k_1$ choose $n$ with $x^{p^n}\\in k$, and send $x$ to the unique $p^n$th root of $x^{p^n}$ in $P$. This is independent of $n$: after raising both proposed images to a common $p$-power they agree, and Frobenius is injective. For $x,y$, choose a common exponent; the identities $(x+y)^{p^n}=x^{p^n}+y^{p^n}$ and $(xy)^{p^n}=x^{p^n}y^{p^n}$ show that this defines a unital $k$-field embedding $k_1\\to P$. Put $C=k_1\\otimes_k A$. The maps $C\\otimes_{k_1}P\\to P\\otimes_k A$, $(x\\otimes a)\\otimes z\\mapsto zx\\otimes a$, and $z\\otimes a\\mapsto(1\\otimes a)\\otimes z$ are inverse ring maps by the tensor pushout universal property and balancing. Apply normality descent for the field extension $P/k_1$ to conclude that $C$ is normal.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-normal-ring-field-extension-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037Z, label lemma-geometrically-normal, paragraph proving (4) implies (3)"
+   }
+  },
+  {
+   "text": "Fix a finitely generated field extension $K/k$. Apply the make-separable lemma to obtain a commuting square $k\\to k_1\\to K_1$ and $k\\to K\\to K_1$, with $k_1/k$ and $K_1/K$ finite purely inseparable and $K_1/k_1$ separable. The extension $K_1/k_1$ is finitely generated: generators of $K/k$ together with a finite $K$-vector-space basis of $K_1$ generate $K_1$ as a field over $k$, and hence over $k_1$. Thus the smooth-fraction-field lemma gives a smooth $k_1$-subalgebra $B\\subset K_1$ whose fraction field is $K_1$. Step 2 gives normality of $C=k_1\\otimes_k A$.",
+   "uses": [
+    "lem-weil-pbc-make-separable",
+    "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037Z, label lemma-geometrically-normal, paragraph proving (3) implies (2), diagram and smooth algebra"
+   }
+  },
+  {
+   "text": "By smooth base change the map $C\\to R=C\\otimes_{k_1}B$ is smooth. Since $C$ is normal, smooth ascent makes $R$ normal. These results allow arbitrary commutative $C$; we make no domain or Noetherian assumption on $A$ or $C$.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-smooth-over-normal-ring-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037Z, label lemma-geometrically-normal, paragraph proving (3) implies (2), Steps 1 and 2"
+   }
+  },
+  {
+   "text": "Let $S=B\\setminus\\{0\\}$. Since $K_1=S^{-1}B$, localization base change identifies $C\\otimes_{k_1}K_1$ with the localization $T$ of $R=C\\otimes_{k_1}B$ at the images of $S$. For each prime $\\mathfrak q$ of $T$, let $\\mathfrak r$ be its inverse image in $R$. Every inverted element is outside $\\mathfrak r$. The maps between $T_{\\mathfrak q}$ and $R_{\\mathfrak r}$ send a fraction $(a/s)/(b/t)$ to $at/(sb)$ and send $a/b$ to $(a/1)/(b/1)$; the denominator $b$ lies outside $\\mathfrak r$, and the maps are well-defined inverse ring maps by cross multiplication. Since $R$ is normal, $R_{\\mathfrak r}$ is an integrally closed domain. Thus every $T_{\\mathfrak q}$ is an integrally closed domain and $T$ is normal. The tensor maps $C\\otimes_{k_1}K_1\\to K_1\\otimes_k A$, $(x\\otimes a)\\otimes z\\mapsto zx\\otimes a$, and $z\\otimes a\\mapsto(1\\otimes a)\\otimes z$ are inverse by balancing and the tensor universal property. Hence $K_1\\otimes_k A$ is normal.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037Z, label lemma-geometrically-normal, paragraph proving (3) implies (2), Step 3; localization argument omitted in lemma-localization-normal-ring"
+   }
+  },
+  {
+   "text": "The inverse tensor maps $(x\\otimes a)\\otimes z\\mapsto zx\\otimes a$ and $z\\otimes a\\mapsto(1\\otimes a)\\otimes z$ identify $(K\\otimes_k A)\\otimes_K K_1$ with $K_1\\otimes_k A$. Apply normality descent along the field extension $K_1/K$. Therefore $K\\otimes_k A$ is normal for every finitely generated $K/k$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-normal-ring-field-extension-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037Z, label lemma-geometrically-normal, paragraph proving (3) implies (2), Step 4"
+   }
+  },
+  {
+   "text": "For an arbitrary field extension $E/k$, index by the finitely generated intermediate fields $K\\subset E$, ordered by inclusion. This is a nonempty directed set: it contains $k$, and the field generated by the union of two finite sets of generators bounds the corresponding fields. The tensor algebras $K\\otimes_k A$ form a directed diagram. Its colimit is $E\\otimes_k A$: a compatible family of ring maps from the stages to a commutative ring $H$ gives a single map $A\\to H$ from the $k$ stage and a map $E\\to H$ by sending $x\\in E$ through any stage containing $x$. Independence and preservation of sums and products are checked in a common stage containing the finitely many elements involved. The maps agree on $k$, so the tensor pushout property gives a unique map $E\\otimes_k A\\to H$ extending the family; uniqueness follows because the pure tensors generate the tensor algebra.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037Z, label lemma-geometrically-normal, paragraph proving (2) implies (1), directed tensor-colimit identification"
+   }
+  },
+  {
+   "text": "Every stage of this directed diagram is normal by Step 6. The filtered-colimit normality lemma makes its colimit $E\\otimes_k A$ normal. Since $E/k$ was arbitrary this proves (2). If $A=0$, all tensor algebras are zero rings and normality is vacuous because there are no prime ideals.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-normal-ring",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037Z, label lemma-geometrically-normal, paragraph proving (2) implies (1), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-normal-ring-field-extension-descent",
+  "lem-weil-pbc-make-separable",
+  "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-over-normal-ring-normal",
+  "lem-weil-pbc-localization-base-change",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-filtered-colimit-normal-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 037Z, lemma-geometrically-normal, proof of (4) => (3) => (2) => (1); embeddings into P and tensor/localization universal properties are written explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -92,15 +200,60 @@
    "results": "0 hits: ",
    "date": "2026-10-14",
    "verdict": "no match: integral extensions, reducedness and conditional composition of integral-closure base-change maps do not state the perfect-closure criterion for normal prime localizations."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed.*(PerfectClosure|PerfectField)|(PerfectClosure|PerfectField).*IsIntegrallyClosed|GeometricallyNormal",
+   "results": "0 hits: ; ",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned declarations concern localizations, Zariski main properties or integral closures, not this normality criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegrallyClosed\", \"PerfectField\"",
+   "results": "0 hits: ; ",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned declarations concern localizations, Zariski main properties or integral closures, not this normality criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal prime localizations of a scalar extension to a perfect purely inseparable field imply normal prime localizations after arbitrary scalar extension",
+   "results": "8 hits: Localization.AtPrime.instAlgebraOfLiesOver, Algebra.ZariskisMainProperty, RingHom.FormallyUnramified.ofLocalizationPrime, Algebra.ZariskisMainProperty.restrictScalars, Ring.instIsGaloisFractionRingNormalClosure, TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway, Algebra.ZariskisMainProperty.of_isIntegral, Algebra.Unramified.of_isLocalization_Away; ",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned declarations concern localizations, Zariski main properties or integral closures, not this normality criterion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-separable-field-geometrically-normal",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-geometrically-normal-perfect-closure-criterion",
+  "worker": "stage1",
+  "summary": "Replaced the uncited one-step appeal to the item itself with the proof of Tag 037Z: finite purely inseparable descent, make-separable reduction, smooth ascent, localization, field descent and directed colimits. No new nodes.",
+  "blueprint": "Proof, second paragraph: “After an algebraically closed extension, X^nu remains smooth and normal and is the normalization of the reduced base-changed curve”; the perfect-closure criterion of Tag 037Z supports the geometric normality asserted by Tag 0C30.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-normal-ring-field-extension-descent",
+    "why": "Generic scalar-field normality descent (Tag 033G) is required by Tag 037Z at (4) => (3) and Step 4 of (3) => (2). No node in sk-thm-p1 states normality descent; this is a tool, not a replacement of the curve-calculation unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-normal-ring-field-extension-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-c289f8393",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-c289f8393 (reviewer sub-agent of L); spot-checked: Read all required instructions, packet, item, cited nodes, unit/chapter route, and Stacks sources. Verified all eight proof steps, hypotheses, tensor base-change maps, coefficient categories, edge cases, searches, DAG dependencies, duplicate candidates, and accepted generic tool use. Wrote review.md; no repairs or new nodes are needed."
+ }
 }
