@@ -8,9 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
-import Sheaf.AlgebraicGeometry.QuasiCoherentAffineSectionBaseChange
-import Sheaf.RingTheory.SymmetricAlgebraBaseChange
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebraCore
+import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebraAffine
 
 /-! # The symmetric algebra of a quasi-coherent module
 
@@ -73,6 +72,15 @@ theorem exists_quasiCoherentSymmetricAlgebra
           (∀ x : F.val.obj (op U.1),
             e (SymmetricAlgebra.ι (X.presheaf.obj (op U.1)) (F.val.obj (op U.1)) x) =
               j.val.app (op U.1) x)) := by
-  sorry
+  obtain ⟨hqc, hAffine⟩ := quasiCoherentSymmetricAlgebra_affine_comparison X F
+  refine ⟨SymmetricAlgebraSheaf.algebra F, SymmetricAlgebraSheaf.inclusion F, hqc,
+    exists_quasiCoherentSymmetricAlgebra_core X F, ?_⟩
+  intro U
+  refine ⟨RingEquiv.ofBijective (SymmetricAlgebraSheaf.sectionMap F (op U.1))
+    (hAffine U), ?_, ?_⟩
+  · intro r
+    rfl
+  · intro x
+    rfl
 
 end AlgebraicGeometry
