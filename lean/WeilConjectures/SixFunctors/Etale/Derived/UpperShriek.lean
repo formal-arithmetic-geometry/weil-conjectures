@@ -5,7 +5,6 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 import Sheaf.AlgebraicGeometry.EtaleProperDerivedDirectImageAdjoint
@@ -31,7 +30,7 @@ which is taken as an instance argument.
   on the unbounded derived categories.
 
 - `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek` : `Rf^!` exists and preserves bounded
-  below objects, an instance for torsion coefficients; and
+  below objects, supplied by a global amplitude bound for torsion coefficients; and
   `AlgebraicGeometry.Etale.HasBoundedBelowUpperShrieks`, the same for every `f`.
 
 ## Implementation notes
@@ -55,7 +54,8 @@ which is taken as an instance argument.
   functor of the blueprint is the constructible one of `sk-prop-sf-existence` (c). That `Rf^!`
   preserves `D⁺` is recorded, together with the existence of `Rf^!`, by the hypothesis class
   `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek`, which the pro-étale `Rf^!` assumes; it
-  is an instance for torsion coefficients (`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`).
+  follows for torsion coefficients with a uniform global upper-amplitude bound
+  (`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`).
 
 ## TODO
 
@@ -150,9 +150,10 @@ section BoundedBelow
 
 This is what the constructible pro-étale `Rf^!`
 (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`) needs of the étale one. Neither half
-holds for an arbitrary coefficient category: both rest on the finite cohomological amplitude of
-the proper direct image, that is, on torsion coefficients, where the class is the instance
-`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`. Note that `Rf^!` is not left t-exact:
+holds automatically for an arbitrary coefficient category. For finite coefficients the first
+holds, while the second additionally requires a uniform global upper-amplitude bound for
+`Rf_!`; `AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek` supplies the class under that
+hypothesis. Note that `Rf^!` is not left t-exact:
 the bound it produces is shifted by the cohomological amplitude of `Rf_!`, which is why the
 condition is about `t.plus` rather than about `IsGE n` for a fixed `n`. -/
 class HasBoundedBelowUpperShriek : Prop extends (R(f)_![A]).IsLeftAdjoint where
@@ -168,32 +169,72 @@ lemma plus_rightDerivedUpperShriek_obj [HasBoundedBelowUpperShriek A f]
     DerivedCategory.TStructure.t.plus ((R(f)^![A]).obj K) :=
   HasBoundedBelowUpperShriek.plus_rightDerivedUpperShriek_obj K hK
 
-/-- For torsion coefficients, `Rf_!` is a left adjoint
-(`AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek`) and `Rf^!` preserves bounded
-below objects. The second half holds because `Rf_!` has finite cohomological amplitude, bounded
-by twice the fibre dimension of the compactification: if `Rf_!` sends `D^{≤ 0}` into `D^{≤ N}`
-then `Rf^!` sends `D^{≥ 0}` into `D^{≥ -N}`, by adjunction [SGA 4, Exp. XVIII, 3.1.7]. -/
--- STATEMENT-DISPUTED: fibre dimensions need not have a uniform global bound.
--- The proper map ⨿ₙ Pⁿ → ⨿ₙ Spec ℂ has Rf^! Λ of cohomological degrees -2n.
--- Thus a degree-zero object can have an exceptional inverse image outside D⁺.
-instance hasBoundedBelowUpperShriek (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
-    HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f where
-  plus_rightDerivedUpperShriek_obj := sorry
+/-- For finite coefficients and a uniform global upper-amplitude bound `N` for `Rf_!`,
+the exceptional inverse image preserves bounded below objects.
+
+Source: SGA 4, Exp. XVIII, 3.1.7; the adjunction and t-structure orthogonality argument.
+(blueprint: lem-etale-upper-shriek-bounded-below-from-amplitude)
+
+Proof: if `K` is bounded below by `n` and `L` is bounded above by `n - N - 1`, the
+amplitude hypothesis bounds `Rf_! L` above by `n - 1`. Every morphism from `Rf_! L`
+to `K` is zero by t-structure orthogonality. The adjunction identifies these morphisms
+with those from `L` to `Rf^! K`, so orthogonality bounds `Rf^! K` below by `n - N`.
+The bound must be global: finite coefficients alone do not supply a uniform `N`
+when the fibre dimensions of the compactification are unbounded. -/
+theorem hasBoundedBelowUpperShriek (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    (N : ℤ)
+    (hN : ∀ (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+      (n : ℤ), DerivedCategory.TStructure.t.IsLE L n →
+        DerivedCategory.TStructure.t.IsLE ((R(f)_![ModuleCat.{u + 1} Λ]).obj L) (n + N)) :
+    HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f := by
+  refine { plus_rightDerivedUpperShriek_obj := ?_ }
+  intro K hK
+  obtain ⟨n, hn⟩ := hK
+  refine ⟨n - N, ?_⟩
+  change DerivedCategory.TStructure.t.IsGE ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) (n - N)
+  rw [DerivedCategory.TStructure.t.isGE_iff_orthogonal (n - N - 1) (n - N) (by omega)]
+  intro L φ hL
+  have := hn
+  have : DerivedCategory.TStructure.t.IsLE
+      ((R(f)_![ModuleCat.{u + 1} Λ]).obj L) (n - 1) := by
+    convert hN L (n - N - 1) hL using 1
+    omega
+  let adj := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f
+  apply (adj.homEquiv L K).symm.injective
+  rw [adj.homAddEquiv_symm_zero]
+  exact DerivedCategory.TStructure.t.zero _ (n - 1) n (by omega)
 
 /-- `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek` for every morphism admitting a
 compactification: the coefficients have exceptional inverse images preserving bounded below
-objects. This holds for torsion coefficients
-(`AlgebraicGeometry.Etale.hasBoundedBelowUpperShrieks`). -/
+objects. This is an explicit hypothesis; finite coefficients alone do not ensure it. The
+constructor `AlgebraicGeometry.Etale.hasBoundedBelowUpperShrieks` requires amplitude bounds
+for all the morphisms in question. -/
 class HasBoundedBelowUpperShrieks : Prop where
   hasBoundedBelowUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
     HasBoundedBelowUpperShriek A f
 
 attribute [instance] HasBoundedBelowUpperShrieks.hasBoundedBelowUpperShriek
 
-/-- Torsion coefficients have exceptional inverse images preserving bounded below objects. -/
-instance hasBoundedBelowUpperShrieks (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
+/-- If every compactifiable morphism has a uniform upper-amplitude bound for `Rf_!`,
+finite coefficients have exceptional inverse images preserving bounded below objects.
+The amplitude bound is an explicit hypothesis, rather than a consequence of finiteness.
+
+Source: `hasBoundedBelowUpperShriek` and the definition of `HasBoundedBelowUpperShrieks`.
+(blueprint: lem-etale-upper-shrieks-bounded-below-from-amplitude)
+
+Proof: for each compactifiable morphism f, take its amplitude bound N and apply
+`hasBoundedBelowUpperShriek f Λ N` to the given bound. This supplies the mapwise
+field of the global class. Only proofs of propositions are constructed. -/
+theorem hasBoundedBelowUpperShrieks (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    (h : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f],
+      ∃ N : ℤ, ∀ (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+        (n : ℤ), DerivedCategory.TStructure.t.IsLE L n →
+          DerivedCategory.TStructure.t.IsLE ((R(f)_![ModuleCat.{u + 1} Λ]).obj L) (n + N)) :
     HasBoundedBelowUpperShrieks (ModuleCat.{u + 1} Λ) where
-  hasBoundedBelowUpperShriek _ _ := inferInstance
+  hasBoundedBelowUpperShriek := by
+    intro X Y f hf
+    obtain ⟨N, hN⟩ := h f
+    exact hasBoundedBelowUpperShriek f Λ N hN
 
 end BoundedBelow
 

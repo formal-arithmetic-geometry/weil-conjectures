@@ -1,0 +1,130 @@
+{
+ "id": "lem-etale-upper-shriek-bounded-below-from-amplitude",
+ "kind": "statement",
+ "title": "Exceptional inverse image preserves global boundedness under an upper-amplitude bound",
+ "statement": "Let X and Y be schemes [def-weil-scheme-morphism-properties], let f : X $\\to$ Y admit a compactification, and let $\\Lambda$ be a finite commutative ring. On the ordinary unbounded étale derived categories [def-weil-pbc-derived-categories], suppose an integer N satisfies: for every integer m and every L in D(X_et,$\\Lambda$), L in $D^{\\le m}$ implies Rf_! L in $D^{\\le m+N}$. Then Rf_! is a left adjoint whose chosen right adjoint Rf^! preserves globally bounded-below objects. The left adjoint is exactly the chosen-compactification functor of lem-etale-lower-shriek-adjoint-from-compactification.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean",
+  "place": "isGE_iff_orthogonal, lines 617-621; source-module bounded-below docstring adjunction argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Use lem-etale-lower-shriek-adjoint-from-compactification for the left-adjoint instance. Let K be globally bounded below and choose n with K in D^{≥n}.",
+   "uses": [
+    "lem-etale-lower-shriek-adjoint-from-compactification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If L is in D^{≤n-N-1}, the given amplitude hypothesis puts Rf_! L in D^{≤n-1}. Mathlib TStructure.zero annihilates every morphism Rf_! L → K. Transport along the inverse of rightDerivedUpperShriekAdjunction.homEquiv; this equivalence is injective and sends zero to zero by Adjunction.homAddEquiv_symm_zero. Thus every morphism L → Rf^! K is zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib TStructure.isGE_iff_orthogonal at the consecutive bounds n-N-1 and n-N. This gives Rf^! K in D^{≥n-N}, and n-N is a global lower bound. Fill the plus_rightDerivedUpperShriek_obj field of HasBoundedBelowUpperShriek with this proof.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-etale-lower-shriek-adjoint-from-compactification"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean",
+  "place": "isGE_iff_orthogonal, lines 617-621; source-module bounded-below docstring adjunction argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isGE_iff_orthogonal|homEquiv.*zero",
+   "results": "14 hits: Mathlib/Algebra/Homology/DerivedCategory/Ext/Linear.lean, Mathlib/Algebra/Group/AddChar.lean, Mathlib/Algebra/Group/AddChar.lean, Mathlib/Algebra/Group/AddChar.lean, Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean, Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean, Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean, Mathlib/CategoryTheory/Adjunction/Additive.lean",
+   "verdict": "no exact adjoint amplitude theorem; component APIs found",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint between derived categories preserves bounded below objects when its left adjoint has a uniform finite upper cohomological amplitude",
+   "results": "8 hits: DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "verdict": "no exact adjoint amplitude theorem; component APIs found",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isGE_iff_orthogonal\"",
+   "results": "1 hits: CategoryTheory.Triangulated.TStructure.isGE_iff_orthogonal",
+   "verdict": "orthogonality API found",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A right adjoint preserves bounded below objects if its left adjoint has a uniform finite upper cohomological amplitude",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.UpperShriek",
+  "date": "2026-10-14",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-etale-exceptional-adjoint",
+   "place": "Source-library bounded-below adjoint variant: finite upper amplitude and adjunction orthogonality"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.UpperShriek",
+  "file": "lean/WeilConjectures/SixFunctors/Etale/Derived/UpperShriek.lean",
+  "declaration": "AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek",
+  "statement": "theorem hasBoundedBelowUpperShriek (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    (N : ℤ)\n    (hN : ∀ (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))\n      (n : ℤ), DerivedCategory.TStructure.t.IsLE L n →\n        DerivedCategory.TStructure.t.IsLE ((R(f)_![ModuleCat.{u + 1} Λ]).obj L) (n + N)) :\n    HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-14"
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "T1 stage 3",
+  "old_statement": "For every compactifiable morphism f of schemes and finite commutative ring Λ, Rf^! preserves globally bounded-below objects, without any uniform amplitude hypothesis.",
+  "what": "Correct the false unrestricted finite-coefficient instance by requiring explicit global upper-amplitude bounds. The proper morphism disjoint_union(P^n_C) → disjoint_union(Spec C) has exceptional pullback degrees -2n and disproves the old claim. Both declarations become explicit theorems, not automatically registered instances. This new node records a previously unattached source declaration; no existing blueprint statement changes.",
+  "source": {
+   "document": "Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean",
+   "place": "isGE_iff_orthogonal, lines 617-621; source-module bounded-below docstring adjunction argument"
+  },
+  "citers": [],
+  "old_lean_statement": "instance hasBoundedBelowUpperShriek (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :\n    HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-bd1af",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261014T145820-L-752767",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-bd1af",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261014T145820-L-752767",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG nodes, change record, and report match the reviewed proof and forced adaptations; all delivered modules and direct importers compile, while originals fail at the recorded missing-instance points."
+ }
+}

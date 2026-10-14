@@ -63,10 +63,11 @@ categories.
   here: it does not exist for proper curves, and nothing needs it.
 * Everything here takes `[AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek A f]`: that the
   étale `Rf_!` is a left adjoint, so that `f^×` exists, and that `f^×` preserves bounded below
-  objects. Both rest on the finite cohomological amplitude of proper direct images, so they are
-  not available for an arbitrary coefficient category; for torsion coefficients `ModuleCat Λ`,
-  `Λ` finite, they are the instance
-  `AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`.
+  objects. For finite coefficients `ModuleCat Λ`, adjoint existence is available, while
+  bounded-below preservation additionally requires a uniform global upper-amplitude bound for
+  the étale `Rf_!`. Under that bound, the theorem
+  `AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek` supplies this hypothesis. Finiteness of
+  the coefficients alone does not supply it.
 
 -/
 

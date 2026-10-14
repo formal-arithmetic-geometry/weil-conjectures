@@ -192,11 +192,8 @@ variable (PX : ObjectProperty (_root_.DerivedCategory
   (hPX : PX ≤ DerivedCategory.plusEtaleOrigin _ X)
   (hPY : PY ≤ DerivedCategory.plusEtaleOrigin _ Y) (hPZ : PZ ≤ DerivedCategory.TStructure.t.plus)
   (hf₁ : ∀ K, PX K → PY ((R(f)_![ModuleCat.{u + 1} Λ]).obj K))
-  (hf₂ : ∀ L, PY L → PX ((R(f)^![ModuleCat.{u + 1} Λ]).obj L))
   (hg₁ : ∀ K, PY K → PZ ((R(g)_![ModuleCat.{u + 1} Λ]).obj K))
-  (hg₂ : ∀ L, PZ L → PY ((R(g)^![ModuleCat.{u + 1} Λ]).obj L))
   (hfg₁ : ∀ K, PX K → PZ ((R(f ≫ g)_![ModuleCat.{u + 1} Λ]).obj K))
-  (hfg₂ : ∀ L, PZ L → PX ((R(f ≫ g)^![ModuleCat.{u + 1} Λ]).obj L))
 
 include hPX in
 /-- The composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of
@@ -210,6 +207,15 @@ theorem nonempty_iso_lift_rightDerivedLowerShriek_comp :
   obtain ⟨e⟩ := nonempty_iso_ι_comp_rightDerivedLowerShriek_comp Λ f g
   exact ⟨(PZ.fullyFaithfulι.whiskeringRight _).preimageIso
     (Functor.isoWhiskerLeft (ObjectProperty.ιOfLE hPX) e)⟩
+
+variable [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f]
+  [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) g]
+  [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) (f ≫ g)]
+
+variable
+  (hf₂ : ∀ L, PY L → PX ((R(f)^![ModuleCat.{u + 1} Λ]).obj L))
+  (hg₂ : ∀ L, PZ L → PY ((R(g)^![ModuleCat.{u + 1} Λ]).obj L))
+  (hfg₂ : ∀ L, PZ L → PX ((R(f ≫ g)^![ModuleCat.{u + 1} Λ]).obj L))
 
 /-- Blueprint `sk-lem-sf-mate`, clause (b), constructible form, on full subcategories: let `PX`,
 `PY` be full subcategories of objects bounded below of étale origin and `PZ` one of bounded below
@@ -266,6 +272,9 @@ section BoundedBelow
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {X Y Z : Scheme.{u}} (f : X ⟶ Y)
   (g : Y ⟶ Z) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
   [QuasiCompact (f ≫ g)]
+  [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f]
+  [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) g]
+  [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) (f ≫ g)]
 
 /-- Blueprint `sk-lem-sf-mate`, clause (b), constructible form: the mate of the composition
 isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on the bounded below objects of étale origin, under the
@@ -338,7 +347,7 @@ theorem exists_rightDerivedUpperShriekAdjunction_comp_eq_of_finiteTor
             (fun _ hK ↦ hK.plus) hf₁ hf₂).comp
           (rightDerivedUpperShriekAdjunction g _ _ (fun _ hK ↦ hK.plusEtaleOrigin)
             (fun _ hK ↦ hK.plus) hg₁ hg₂) :=
-  exists_rightDerivedUpperShriekAdjunction_comp_eq f g _ _ _ _ _ _ hf₁ hf₂ hg₁ hg₂ hfg₁ hfg₂
+  exists_rightDerivedUpperShriekAdjunction_comp_eq f g _ _ _ _ _ _ hf₁ hg₁ hfg₁ hf₂ hg₂ hfg₂
 
 end BoundedBelow
 
