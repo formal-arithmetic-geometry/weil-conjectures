@@ -14746,4 +14746,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:21 L: returned deliver/M2/Sheaf.AlgebraicGeometry.OverlapConjugateRestriction (reviewer RETURN: (reviewer X-fcf50, head fcf502556) C1 (elementary-node exception), together with stages/3-proving-and-pruning.md §4: the)
 - 08:24 L: returned deliver/T1/Sheaf.AlgebraicGeometry.DerivedPullbackCompositionCounitNormalization (reviewer RETURN: (reviewer X-a4893, head a48937404) G1/G3 (review point 5): In lean/Sheaf/AlgebraicGeometry/DerivedPullbackCompositionCou)
 - 08:24 L: merged deliver/E1/Sheaf.AlgebraicGeometry.FlatTelescopeNormalizationMorphisms (stage 3; reviewer PASS; first push; landing 20261014T082418-L-4009213 (interface); batch 20261014T082416; modules 3; new nodes 2)
-- 08:24 L: merged deliver/G3/Sheaf.AlgebraicGeometry.PicardExternalCechCupLeibniz (stage 3; reviewer PASS; after a return; landing 20261014T082419-L-4009504 (interface); batch 20261014T082416; modules 2; new nodes 2; change records: coord/changes/picard-external-cech-cup-leibniz-coordinate.md)
+
+- 16:27 L: batch 20261014T082416 dependency take-out
