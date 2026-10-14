@@ -14070,3 +14070,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:41 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.SelfTorConormalWedgeChartFromSections (stage 3; reviewer PASS; first push; landing 20261014T004111-L-2837762 (interface); batch 20261014T004054; modules 2; new nodes 1)
 - 00:41 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.SelfTorConormalWedgeChartSectionEquiv (stage 3; reviewer PASS; first push; landing 20261014T004112-L-2837919 (interface); batch 20261014T004054; modules 3; new nodes 2)
 - 00:41 L: merged deliver/R4/Sheaf.AlgebraicGeometry.ClosedImmersionResidueFieldIso (stage 3; reviewer PASS; first push; landing 20261014T004112-L-2838075 (proof); batch 20261014T004054; modules 1; new nodes 0)
+- 00:41 L: merged deliver/R4/Sheaf.AlgebraicGeometry.PerfectDescendMorphisms (stage 3; reviewer PASS; first push; landing 20261014T004113-L-2838312 (proof); batch 20261014T004054; modules 1; new nodes 0)

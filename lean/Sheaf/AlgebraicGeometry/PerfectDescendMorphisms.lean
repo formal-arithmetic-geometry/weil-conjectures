@@ -43,6 +43,8 @@ noncomputable abbrev perfectDescentComparison
     {X S : Scheme.{u}} (s : X ⟶ S) {T T' : Over S} (g : T' ⟶ T) :
     derivedPullback (pullback.fst s T'.hom) ≅
       derivedPullback (pullback.fst s T.hom) ⋙ derivedPullback (baseChangeMap s g) :=
+  -- Share the comparison used by Hom continuity; choosing another comparison here
+  -- would require transporting the continuity statement as well as its Hom maps.
   perfectHomComparison s g
 
 private theorem homMap_eq_iff
