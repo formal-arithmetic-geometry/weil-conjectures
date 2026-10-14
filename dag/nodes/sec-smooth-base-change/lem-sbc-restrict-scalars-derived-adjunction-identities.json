@@ -13,29 +13,48 @@
  ],
  "proof": [
   {
-   "text": "The underived direct-image coefficient comparison is sectionwise identity. The inverse-image comparison is leftAdjointUniq for the composite adjunctions with coefficient coextension. Transpose the unit_leftAdjointUniq_hom_app and leftAdjointUniq_hom_app_counit identities through restriction/coextension to obtain the underived unit and counit comparison identities.",
+   "text": "Identify the underived mate of upperStarRestrictScalarsIso with the sectionwise identity lowerStarRestrictScalarsIso. Apply the injective mates equivalence for restriction/coextension to both sides. Mathlib iterated_mateEquiv_conjugateEquiv identifies the double mate on the inverse-image side with conjugation under the composite adjunctions. By the definition of leftAdjointUniq this is conjugateEquiv applied to its inverse on the identity, hence the identity. On the direct-image side, evaluate on a sheaf and an etale section: the double mate is exactly ModuleCat.restrictCoextendScalarsAdj.right_triangle_components. Thus the two underived squares are mates.",
    "uses": [
-    "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "def-weil-pbc-adjunction-mate"
    ],
    "elementary": false
   },
   {
-   "text": "Apply exact derivation to the inverse-image comparison. The direct-image comparison is the canonical right-derived comparison, characterized by the right-derived unit. Compute both derived adjunction identities on bounded below resolutions: the formulas derivedPlus_unit_app_fac and derivedPlus_counit_app_fac reduce them to the underived identities. Restricted injective complexes are direct-image acyclic, so the derived comparison is invertible and can be written with its inverse. Naturality transports from the resolution to every object.",
+   "text": "Compute the exact derived inverse-image square on bounded below homotopy complexes. Expand its definition as the inverse exact-functor composition isomorphism, mapDerivedCategoryPlusNatIso of the underived comparison, and the forward composition isomorphism. Apply mapDerivedCategoryPlusCompIso_hom_app_factorsh and mapDerivedCategoryPlusNatIso_hom_app_factorsh, then cancel the composition isomorphism with its inverse. This gives the hypothesis htheta of Adjunction.derivedPlus_mateEquiv_app_fac.",
+   "uses": [
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use Functor.rightDerived_ext for Rf_* followed by exact restriction. Adjunction.derivedPlus_mateEquiv_app_fac computes the mate of the derived inverse-image square after the right-derived unit, using the factorization from the preceding step. Functor.rightDerivedFunctorPlusBaseChange_fac gives the same expression for the canonical right-derived comparison; its auxiliary homotopy composition isomorphisms are identities. The underived mate identity from step 1 therefore identifies the derived mate with derivedLowerStarRestrictScalarsMap, hence with the hom of derivedLowerStarRestrictScalarsIso.",
    "uses": [
     "lem-sbc-canonical-restrict-scalars-functor-comparisons",
-    "sbc-def-base-change-map"
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-weil-pbc-adjunction-mate"
    ],
    "elementary": false
+  },
+  {
+   "text": "Identify derivedUpperStarLowerStarAdjunctionPlus with Adjunction.derivedPlus using Adjunction.derivedAdjunctionPlus_eq_derivedPlus. Apply Mathlib unit_mateEquiv and mateEquiv_counit to the derived inverse-image square and substitute the mate identity from step 3. Expand the source and target coefficient isomorphisms. For the unit postcompose with the inverse direct-image comparison; for the counit precompose with its inverse mapped by inverse image. Isomorphism cancellation gives precisely the two unchanged displayed identities.",
+   "uses": [
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sbc-canonical-restrict-scalars-functor-comparisons",
-  "sbc-def-base-change-map"
+  "def-weil-pbc-adjunction-mate",
+  "prop-weil-pbc-derived-inverse-image-adjunction"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "Stacks Project, Cohomology on Sites; Mathlib CategoryTheory.Adjunction.Unique; WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction",
-  "place": "Remark 21.19.3, Tag 07A7; Lemma 21.20.7(3), Tag 0D6J; canonical adjunction uniqueness and derived unit/counit factorization."
+  "document": "Mathlib CategoryTheory.Adjunction.Mates and Unique; WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction and PlusBaseChange; WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor",
+  "place": "iterated_mateEquiv_conjugateEquiv, leftAdjointUniq, unit_mateEquiv, mateEquiv_counit; derivedPlus_mateEquiv_app_fac and rightDerivedFunctorPlusBaseChange_fac; exact-functor composition and natural-isomorphism factorization formulas. Concrete Lean proof by T4, 2026-10-14; the same underived-to-derived route, using right-derived uniqueness instead of a new resolution argument."
  },
  "mathlib_searches": [
   {
@@ -109,13 +128,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261012T110307-L-617175",
-  "kind": "interface",
+  "landing": "20261014T140637-L-118692",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
