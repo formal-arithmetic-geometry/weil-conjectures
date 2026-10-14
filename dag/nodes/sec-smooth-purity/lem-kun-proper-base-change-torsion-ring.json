@@ -21,9 +21,62 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-pbc-derived-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose $n\\geq1$ with $n1_\\Lambda=0$ and the ring homomorphism $\\varphi:\\mathbf Z/n\\mathbf Z\\to\\Lambda$, $[a]\\mapsto a1_\\Lambda$. It is well defined because replacing $a$ by $a+nb$ changes its image by $b(n1_\\Lambda)=0$. For a representing complex $C$ of $E$, let $C_n$ be the same complex of abelian sheaves, with $[a]m=(a1_\\Lambda)m$. The differentials are $\\mathbf Z/n\\mathbf Z$-linear. Kernels, images and cokernels have the same underlying abelian sheaves, so this termwise restriction preserves quasi-isomorphisms and gives $E_n\\in D(X_{\\mathrm{et}},\\mathbf Z/n\\mathbf Z)$ [def-weil-pbc-derived-categories]. Forgetting all coefficients gives literally the same underlying complex, hence $U_X^\\Lambda E=U_X^{\\mathbf Z/n}E_n$ in the abelian derived category.",
+   "uses": [
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n, reduction to fibres; Tag 0F0C, lemma-proper-base-change-mod-n, extended to torsion rings by coefficient forgetting"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-0f0c] to the original cartesian square and $E_n$. Its statement permits every $n\\geq1$, every proper $f$, arbitrary $g$, and an unbounded complex of $\\mathbf Z/n\\mathbf Z$-module sheaves. Thus $\\operatorname{Ex}^{\\mathbf Z/n}_{\\square,E_n}$ is an isomorphism. No invertibility of $n$ on a scheme, no finite coefficient algebra assumption, and no scheme of finite type over a field is required.",
+   "uses": [
+    "lem-kun-0f0c"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n, reduction to fibres; Tag 0F0C, lemma-proper-base-change-mod-n, extended to torsion rings by coefficient forgetting"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-unbounded-abelian-exchange-comparison] first with coefficients $\\mathbf Z/n\\mathbf Z$ and complex $E_n$. Its fixed endpoint isomorphisms satisfy $t_n U^{\\mathbf Z/n}_{Y'}(\\operatorname{Ex}^{\\mathbf Z/n}_{\\square,E_n})=\\operatorname{Ex}^{\\mathbf Z}_{\\square,U_X^{\\mathbf Z/n}E_n}s_n$. The middle forgotten map is invertible by step 2, so the abelian exchange equals $t_n U^{\\mathbf Z/n}_{Y'}(\\operatorname{Ex}^{\\mathbf Z/n}_{\\square,E_n})s_n^{-1}$ and is invertible. Now apply the same comparison with coefficients $\\Lambda$ and complex $E$. By step 1 its abelian exchange is the very same map. Consequently $U^\\Lambda_{Y'}(\\operatorname{Ex}^{\\Lambda}_{\\square,E})=t_\\Lambda^{-1}\\operatorname{Ex}^{\\mathbf Z}_{\\square,U_X^\\Lambda E}s_\\Lambda$ is invertible. These equations identify the actual adjunction mates, rather than just isomorphic endpoint objects.",
+   "uses": [
+    "lem-kun-unbounded-abelian-exchange-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n, reduction to fibres; Tag 0F0C, lemma-proper-base-change-mod-n, extended to torsion rings by coefficient forgetting"
+   }
+  },
+  {
+   "text": "The functor $U^\\Lambda_{Y'}$ reflects isomorphisms by [lem-kun-unbounded-abelian-exchange-comparison]. Apply that assertion to the map whose forgotten image was proved invertible in step 3. The resulting isomorphism is precisely $g^{-1}Rf_*E\\to Rf'_*g'^{-1}E$ of the statement.",
+   "uses": [
+    "lem-kun-unbounded-abelian-exchange-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n, reduction to fibres; Tag 0F0C, lemma-proper-base-change-mod-n, extended to torsion rings by coefficient forgetting"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-kun-0f0c",
+  "lem-kun-unbounded-abelian-exchange-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0F0G and 0F0C; explicit coefficient reduction through Tag 0D6J and canonical-mate coherence"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -115,15 +168,66 @@
    "results": "0 hits: ; second reader read returned signatures; no proper etale derived base-change result.",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "properBaseChange|proper_base_change|derivedBaseChangeMap",
+   "date": "2026-10-14",
+   "results": "0 hits: ; read returned signatures. No matching unbounded etale coefficient/exchange theorem.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward on unbounded etale derived categories commutes with arbitrary base change for torsion coefficient rings",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded proper base change for small etale sheaves of modules over any commutative torsion ring",
+   "date": "2026-10-14",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyEtale.comp, AlgebraicGeometry.IsEtale.of_comp, KaehlerDifferential.isBaseChange_of_formallyEtale; read returned signatures. No matching unbounded etale coefficient/exchange theorem.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"baseChange\"",
+   "date": "2026-10-14",
+   "results": "1 hits: AlgebraicGeometry.IsProper.isStableUnderBaseChange; read returned signatures. No matching unbounded etale coefficient/exchange theorem.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For proper scheme morphisms higher derived direct image of arbitrary unbounded complexes killed by an integer satisfies base change",
+   "date": "2026-10-14",
+   "results": "8 hits: DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, DerivedCategory.isGE_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isLE_iff; read returned signatures. No matching unbounded etale coefficient/exchange theorem.",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-kun-0f0g",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-proper-base-change-torsion-ring",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reduce an arbitrary commutative torsion ring to Z/n on the same complex, apply the existing unbounded proper base-change node, and identify the canonical exchanges via an explicitly stated unbounded coefficient-forgetting tool. Bounded-below comparisons were not silently used on unbounded objects.",
+  "blueprint": "The reduction to geometric fibres in the proof of lem-kun-0f0g (Stacks 0F0G), for its actual torsion-ring coefficients; resolves the coefficient gap in applying 0F0C.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-e604e8e5d",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-e604e8e5d (reviewer sub-agent of L); spot-checked: Read the item and sole new node in full. Verified all four steps against Stacks 0F0C, 0F0G, 0D6J(3), and 07A7, including the canonical exchange equation and unbounded coefficient categories. Checked edge cases, duplicate candidates, search logs, route, and exact archived target declarations. No repair required; inherited blueprint proof defects are documented in review.md."
+ }
 }
