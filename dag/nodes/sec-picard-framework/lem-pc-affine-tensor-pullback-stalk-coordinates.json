@@ -15,26 +15,22 @@
  ],
  "proof": [
   {
-   "text": "expand the target coordinate into exact tilde homology, the termwise\npullback comparison, the inverse derived counit and e. The tilde/global-sections\nunit followed by the tilde/Gamma counit is the identity by the adjunction triangle.\nAfter taking stalks, naturality of the localization germ map identifies the\nlocalized global-section map with the stalk of this composite. Exact tilde and\nhomology factorization are the first two factors of\n affineTensorPullbackHomologyStalkIso; the remaining factor is the stalk of the\ninverse counit followed by e. Functoriality identifies the composites. This is\nvalid for all complexes and degrees, including the zero complex and zero rings;\nno K-flatness or cartesian base-change square is used.",
+   "text": "Apply the counit-coordinate theorem, then use preservation of composition by the homology and stalk functors to combine the inverse counit and derived pullback of the representative isomorphism.",
    "uses": [
-    "def-pc-affine-base-change-tilde-coordinates",
-    "lem-pc-affine-derived-cohomology-presentation",
-    "lem-weil-pbc-spec-tilde-stalk-localization"
+    "new-lem-pc-affine-tensor-pullback-stalk-coordinates-at"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-affine-base-change-tilde-coordinates",
-  "lem-pc-affine-derived-cohomology-presentation",
-  "lem-weil-pbc-spec-tilde-stalk-localization"
+  "new-lem-pc-affine-tensor-pullback-stalk-coordinates-at"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "Q2",
-  "date": "2026-10-13",
-  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
-  "place": "Affine proof; explicit formal-interface decomposition of the localization identity"
+  "group": "T4",
+  "date": "2026-10-14",
+  "document": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean; existing affine coordinate definitions",
+  "place": "Adjunction triangle and localization naturality, followed by functoriality"
  },
  "mathlib_searches": [
   {
@@ -98,7 +94,11 @@
   "declaration": "AlgebraicGeometry.affineTensorPullbackHomologyStalkIso_coordinates",
   "declarations": [
    "AlgebraicGeometry.affineTensorPullbackHomologyStalkIso_coordinates",
-   "AlgebraicGeometry.affineTensorPullbackHomologyStalkIso"
+   "AlgebraicGeometry.affineTensorPullbackHomologyStalkIso",
+   "AlgebraicGeometry.affineModuleIsoAddEquiv",
+   "AlgebraicGeometry.affineModuleIsoAddEquiv_coe",
+   "AlgebraicGeometry.affineTildeLocalizationStalkIso",
+   "AlgebraicGeometry.affineTildeLocalizationStalkIso_apply"
   ],
   "statement": "theorem affineTensorPullbackHomologyStalkIso_coordinates\n    (A A' : Type u) [CommRing A] [CommRing A'] (φg' : A →+* A')\n    (K : schemeDerivedCategory (Spec (.of A)))\n    (hL : schemeDerivedQCohProperty (Spec (.of A'))\n      ((derivedPullback (Spec.map (CommRingCat.ofHom φg'))).obj K))\n    (M : CochainComplex (ModuleCat.{u} A) ℤ)\n    (e : DerivedCategory.Q.obj\n      ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n        (@id (ModuleCat.{u} A ⥤\n          SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n          (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M) ≅ K)\n    (hc : IsIso ((SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φg'))).app\n      ((HomotopyCategory.quotient _ (.up ℤ)).obj ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n        (@id (ModuleCat.{u} A ⥤\n          SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n          (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)))) (i : ℤ)\n    (p : PrimeSpectrum A') :\n    let L : schemeDerivedQCohCategory (Spec (.of A')) := ⟨_, hL⟩\n    let b := affineBaseChangeTildeCohomologyIso A A' φg' K M e hc i\n    let P := ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n      (@id (ModuleCat.{u} A ⥤\n        SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n          (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)\n    let H := DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace)) i\n    let s := RingedSpace.moduleStalkFunctor (Spec (.of A')).toRingedSpace p\n    ∀ y, affineDerivedCohomologyStalkIso A' i p L\n        (LocalizedModule.map p.asIdeal.primeCompl b.hom.hom y) =\n      s.map (H.map (inv ((SingleComplexBaseChange.counit\n        (Spec.map (CommRingCat.ofHom φg'))).app\n          ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫\n            (derivedPullback (Spec.map (CommRingCat.ofHom φg'))).map e.hom))\n        (affineTensorPullbackHomologyStalkIso A A' φg' M p i y)",
   "branch": "sheaf-dag",
@@ -118,17 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M2",
+  "reviewer": "X-633c3",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261014T004108-L-2836343",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.affineTensorPullbackHomologyStalkIso_coordinates"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.affineTensorPullbackHomologyStalkIso_counit_coordinate"
-  ]
+  "landing": "20261014T043533-L-1336322",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded node statements and compile successfully, including both direct importers; no forbidden declarations, sorry, signature changes, or interface violations found."
  }
 }

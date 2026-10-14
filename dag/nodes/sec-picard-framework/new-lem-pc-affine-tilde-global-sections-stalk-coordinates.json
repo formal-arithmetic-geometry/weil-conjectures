@@ -1,0 +1,138 @@
+{
+ "id": "new-lem-pc-affine-tilde-global-sections-stalk-coordinates",
+ "kind": "statement",
+ "title": "Global-sections and stalk coordinates for a morphism from an affine tilde module",
+ "statement": "Let A be a commutative ring, p a prime of A, i an integer, L an object of the derived quasi-coherent category of Spec(A) [lem-pc-affine-derived-cohomology-presentation], and V an A-module. Let d:tilde(V) to H^i(L) be any sheaf module morphism. Put b=unit(V) followed by Gamma(d), where unit(V):V to Gamma(tilde(V)) is the canonical global-sections isomorphism [lem-weil-pbc-affine-tilde-gamma-adjunction]. For every x in V localized at p, affineDerivedCohomologyStalkIso applied to the localization of b(x) is stalk(d) applied to the canonical tilde stalk localization of x [lem-weil-pbc-spec-tilde-stalk-localization]. No invertibility of d is assumed.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01HV and 01I7: stalk localization and the mapping property of tilde; formal naturality and adjunction-triangle calculation"
+ },
+ "stmt_deps": [
+  "lem-pc-affine-derived-cohomology-presentation",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-tilde-stalk-localization"
+ ],
+ "proof": [
+  {
+   "text": "For a module map b:V to G, reuse affineTildeStalk_naturality from AffineDerivedCohomologyPresentation (available through a proof-only import all) to identify the stalk map on numerators. Extend by IsLocalizedModule.ext. Applying map_iso_commute identifies the corresponding maps on fractions.",
+   "uses": [
+    "lem-pc-affine-derived-cohomology-presentation",
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set W=H^i(L), G=Gamma(W), and b=unit(V) followed by Gamma(d). Naturality of the tilde/Gamma counit shows tilde(b) followed by counit(W) is d: the left adjunction triangle cancels tilde(unit(V)) followed by counit(tilde(V)).",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand affineDerivedCohomologyStalkIso as tilde stalk localization followed by the stalk of the counit. Substitute the fraction naturality equality from step 1 and compose stalk maps; step 2 gives the required stalk map of d.",
+   "uses": [
+    "lem-pc-affine-derived-cohomology-presentation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-derived-cohomology-presentation",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-tilde-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T4",
+  "date": "2026-10-14",
+  "document": "Sheaf/AlgebraicGeometry/AffineDerivedCohomologyPresentation.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/Algebra/Module/LocalizedModule/Basic.lean",
+  "place": "affineTildeStalk_naturality (reused via import all), tilde.adjunction.left_triangle_components, fromTildeΓNatTrans.naturality and IsLocalizedModule.map_iso_commute"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of localization to stalk for tilde modules and global sections counit",
+   "results": "ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, ModuleCat.Tilde.localizationToStalk, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, ModuleCat.Tilde.localizationToStalk_mk, ModuleCat.Tilde.stalkToFiberLinearMap, ModuleCat.Tilde.stalkIso, ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap",
+   "verdict": "ingredients only; no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde.toOpen_map_app",
+   "results": "AlgebraicGeometry.tilde.toOpen_map_app",
+   "verdict": "ingredients only; no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "fromTildeΓ.*naturality|left_triangle_components",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean",
+   "verdict": "ingredients only; no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of the global sections map of a morphism from tilde V agrees with its stalk map via the tilde Gamma adjunction",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineTensorPullbackStalkCoordinates",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Affine localization identity: naturality of germs and the tilde/global-sections adjunction triangle.",
+   "via": [
+    "lem-pc-affine-tensor-pullback-stalk-coordinates",
+    "lem-pc-affine-base-change-tilde-stalk-comparison",
+    "lem-pc-affine-base-change-tilde-source-model",
+    "lem-pc-affine-base-change-source-model",
+    "lem-pc-affine-base-change-cohomology-model",
+    "lem-pc-rf-single-complex-affine-base-change",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineTildeGlobalSectionsStalkCoordinates",
+  "file": "lean/Sheaf/Algebra/Homology/AffineTildeGlobalSectionsStalkCoordinates.lean",
+  "declaration": "AlgebraicGeometry.affineTildeGlobalSectionsStalk_coordinates",
+  "statement": "theorem affineTildeGlobalSectionsStalk_coordinates\n    (A : Type u) [CommRing A] (i : ℤ) (p : PrimeSpectrum A)\n    (L : schemeDerivedQCohCategory (Spec (.of A))) (V : ModuleCat.{u} A)\n    (d : (tilde.functor (.of A)).obj V ⟶\n      (DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i).obj L.obj)\n    (x : LocalizedModule p.asIdeal.primeCompl V) :\n    affineDerivedCohomologyStalkIso A i p L\n        (LocalizedModule.map p.asIdeal.primeCompl\n          ((tilde.isoTop (R := .of A) V).hom ≫\n            (moduleSpecΓFunctor (R := .of A)).map d).hom x) =\n      (RingedSpace.moduleStalkFunctor (Spec (.of A)).toRingedSpace p).map d\n        ((IsLocalizedModule.iso p.asIdeal.primeCompl\n          (StructureSheaf.toStalkₗ A V p)) x)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-633c3",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T043533-L-1336322",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-633c3",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T043533-L-1336322",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded node statements and compile successfully, including both direct importers; no forbidden declarations, sorry, signature changes, or interface violations found."
+ }
+}

@@ -6,6 +6,9 @@ Authors: SHEAF group Q2
 module
 
 public import Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates
+public import Sheaf.Algebra.Homology.AffineTensorPullbackHomologySheafIso
+import Sheaf.Algebra.Homology.AffineTildeGlobalSectionsStalkCoordinates
+import Sheaf.Algebra.Homology.AffineBaseChangeGlobalSectionsFactorization
 
 /-! # AffineTensorPullbackStalkCoordinates
 
@@ -25,6 +28,57 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
+/-- The additive equivalence of a module isomorphism.
+Source: Mathlib, `CategoryTheory.Iso.toLinearEquiv`.
+(blueprint: lem-pc-affine-tensor-pullback-stalk-coordinates). -/
+def affineModuleIsoAddEquiv {R : Type u} [Ring R]
+    {U V : ModuleCat.{u} R} (d : U ≅ V) : U ≃+ V where
+  toFun := d.hom
+  invFun := d.inv
+  left_inv x := by
+    exact ConcreteCategory.congr_hom d.hom_inv_id x
+  right_inv x := by
+    exact ConcreteCategory.congr_hom d.inv_hom_id x
+  map_add' x y := d.hom.hom.map_add x y
+
+omit [∀ Y : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
+/-- Forward-map equation for the module-isomorphism additive equivalence.
+Source: Mathlib, `CategoryTheory.Iso.toLinearEquiv_apply`.
+(blueprint: lem-pc-affine-tensor-pullback-stalk-coordinates). -/
+theorem affineModuleIsoAddEquiv_coe {R : Type u} [Ring R]
+    {U V : ModuleCat.{u} R} (d : U ≅ V) :
+    ⇑(affineModuleIsoAddEquiv d) = d.hom := by
+  rfl
+
+/-- Localization followed by a specified sheaf isomorphism at an affine stalk.
+Source: Stacks Project, Tag 01HV.
+(blueprint: lem-pc-affine-tensor-pullback-stalk-coordinates). -/
+def affineTildeLocalizationStalkIso (A : Type u) [CommRing A]
+    (p : PrimeSpectrum A) (V : ModuleCat.{u} A) (W : (Spec (.of A)).Modules)
+    (d : (tilde.functor (.of A)).obj V ≅ W) :
+    LocalizedModule p.asIdeal.primeCompl V ≃+
+      (RingedSpace.moduleStalkFunctor (Spec (.of A)).toRingedSpace p).obj W :=
+  (IsLocalizedModule.iso p.asIdeal.primeCompl
+    (StructureSheaf.toStalkₗ A V p)).toAddEquiv.trans
+      (affineModuleIsoAddEquiv
+        ((RingedSpace.moduleStalkFunctor (Spec (.of A)).toRingedSpace p).mapIso d))
+
+omit [∀ Y : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
+/-- Forward map of localization followed by the stalk of a sheaf isomorphism.
+Source: Stacks Project, Tag 01HV.
+(blueprint: lem-pc-affine-tensor-pullback-stalk-coordinates). -/
+theorem affineTildeLocalizationStalkIso_apply (A : Type u) [CommRing A]
+    (p : PrimeSpectrum A) (V : ModuleCat.{u} A) (W : (Spec (.of A)).Modules)
+    (d : (tilde.functor (.of A)).obj V ≅ W)
+    (x : LocalizedModule p.asIdeal.primeCompl V) :
+    affineTildeLocalizationStalkIso A p V W d x =
+      (RingedSpace.moduleStalkFunctor (Spec (.of A)).toRingedSpace p).map d.hom
+        ((IsLocalizedModule.iso p.asIdeal.primeCompl
+          (StructureSheaf.toStalkₗ A V p)) x) := by
+  rfl
+
 def affineTensorPullbackHomologyStalkIso
     (A A' : Type u) [CommRing A] [CommRing A'] (φ : A →+* A')
     (M : CochainComplex (ModuleCat.{u} A) ℤ) (p : PrimeSpectrum A') (i : ℤ) :
@@ -40,52 +94,17 @@ def affineTensorPullbackHomologyStalkIso
           ((DerivedCategory.homologyFunctor
             (SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace)) i).obj
               (DerivedCategory.Q.obj T)) := by
-  let TA : ModuleCat.{u} A ⥤
-      SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace) := tilde.functor (.of A)
-  let TB : ModuleCat.{u} A' ⥤
-      SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace) := tilde.functor (.of A')
-  let : TA.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
-  let : TB.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
-  let : TA.PreservesZeroMorphisms := ⟨fun _ _ ↦ tilde.map_zero⟩
-  let : TB.PreservesZeroMorphisms := ⟨fun _ _ ↦ tilde.map_zero⟩
-  let : TB.PreservesHomology := tilde_preservesHomology A'
-  let f := Spec.map (CommRingCat.ofHom φ)
-  let E : SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace) ⥤
-      SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace) :=
-    Scheme.Modules.tensorPullback f
-  let : E.Additive := SingleComplexBaseChange.tensorPullbackAdditive.{u, w} f
-  let θ : TA ⋙ E ≅ ModuleCat.extendScalars φ ⋙ TB :=
-    Classical.choose (Scheme.Modules.exists_tensorPullback_tilde_iso (CommRingCat.ofHom φ))
-  let P : CochainComplex
-      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ :=
-    (TA.mapHomologicalComplex (.up ℤ)).obj M
-  let C : CochainComplex (ModuleCat.{u} A') ℤ :=
-    ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M
-  let T : CochainComplex
-      (SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace)) ℤ :=
-    (E.mapHomologicalComplex (.up ℤ)).obj P
-  let δ : T ≅ (TB.mapHomologicalComplex (.up ℤ)).obj C :=
-    (Functor.mapHomologicalComplexCompIso θ (.up ℤ)).app M
-  let H := DerivedCategory.homologyFunctor
-    (SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace)) i
+  let C := ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M
   let s := RingedSpace.moduleStalkFunctor (Spec (.of A')).toRingedSpace p
-  let Rs := ModuleCat.restrictScalars (StructureSheaf.toStalk A' p).hom
-  let t : C.homology i →ₗ[A'] (Rs.obj (s.obj (TB.obj (C.homology i)))) :=
-    StructureSheaf.toStalkₗ A' (C.homology i) p
-  have : IsLocalizedModule p.asIdeal.primeCompl t :=
-    inferInstanceAs (IsLocalizedModule p.asIdeal.primeCompl
-      (StructureSheaf.toStalkₗ A' (C.homology i) p))
-  let l : LocalizedModule p.asIdeal.primeCompl (C.homology i) ≃ₗ[A']
-      (Rs.obj (s.obj (TB.obj (C.homology i)))) :=
-    IsLocalizedModule.iso p.asIdeal.primeCompl t
-  let d : TB.obj (C.homology i) ≅ H.obj (DerivedCategory.Q.obj T) :=
-    ((C.sc i).mapHomologyIso TB).symm ≪≫
-      ((DerivedCategory.homologyFunctorFactors _ i).app
-        ((TB.mapHomologicalComplex (.up ℤ)).obj C)).symm ≪≫
-      H.mapIso (DerivedCategory.Q.mapIso δ).symm
-  exact l.toAddEquiv.trans (s.mapIso d).toLinearEquiv.toAddEquiv
+  let l := IsLocalizedModule.iso p.asIdeal.primeCompl
+    (StructureSheaf.toStalkₗ A' (C.homology i) p)
+  -- Keep the original equivalence projections visible to definitional consumers.
+  exact l.toAddEquiv.trans
+    (s.mapIso (affineTensorPullbackHomologySheafIso A A' φ M i)).toLinearEquiv.toAddEquiv
 
 
+set_option maxHeartbeats 600000 in
+-- Matching the explicit sheaf and native scheme-module functors needs extra heartbeats.
 /-- Affine localization identifies the base-change coordinate with the stalk map
 of the inverse ordinary pullback counit.  This is the geometric localization
 identity from Stacks Tag 0DJ8; the remaining supplied representative isomorphism
@@ -129,7 +148,36 @@ theorem affineTensorPullbackHomologyStalkIso_counit_coordinate
         (LocalizedModule.map p.asIdeal.primeCompl b.hom.hom y) =
       s.map (H.map ((derivedPullback (Spec.map (CommRingCat.ofHom φg'))).map e.hom))
         (z y) := by
-  sorry
+  dsimp only
+  intro y
+  let f := Spec.map (CommRingCat.ofHom φg')
+  let P := ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
+    (@id (ModuleCat.{u} A ⥤
+      SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
+        (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)
+  let C := ((ModuleCat.extendScalars φg').mapHomologicalComplex (.up ℤ)).obj M
+  let H := DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace)) i
+  let s := RingedSpace.moduleStalkFunctor (Spec (.of A')).toRingedSpace p
+  let L : schemeDerivedQCohCategory (Spec (.of A')) := ⟨_, hL⟩
+  let d₀ := affineTensorPullbackHomologySheafIso A A' φg' M i
+  let c := inv ((SingleComplexBaseChange.counit f).app
+    ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
+  let a := (derivedPullback f).map e.hom
+  have h := affineTildeGlobalSectionsStalk_coordinates A' i p L (C.homology i)
+    (d₀.hom ≫ H.map c ≫ H.map a) y
+  have hb := affineBaseChangeTildeCohomologyIso_globalSections_factorization
+    A A' φg' K M e hc i
+  rw [hb]
+  rw [h]
+  have hl : affineTensorPullbackHomologyStalkIso A A' φg' M p i y =
+      s.map d₀.hom ((IsLocalizedModule.iso p.asIdeal.primeCompl
+        (StructureSheaf.toStalkₗ A' (C.homology i) p)) y) := by
+    change affineTildeLocalizationStalkIso A' p (C.homology i) _ d₀ y = _
+    exact affineTildeLocalizationStalkIso_apply A' p (C.homology i) _ d₀ y
+  rw [hl]
+  simp only [Functor.map_comp, ModuleCat.comp_apply]
+  rfl
 
 
 /-- The canonical target coordinate commutes with stalk localization.

@@ -1,0 +1,110 @@
+{
+ "id": "new-def-pc-affine-tensor-pullback-homology-sheaf-iso",
+ "kind": "definition",
+ "title": "Sheaf-level affine tensor pullback homology coordinate",
+ "statement": "For commutative rings A and B, a ring map phi:A to B, a cochain complex M of A-modules and an integer i, let C be the scalar-extended complex, P the tilde complex and T its ordinary tensor pullback. Define tilde(H^i(C)) isomorphic to H^i(Q(T)) by the inverse exact tilde homology isomorphism, the inverse derived homology factorization, and homology of the inverse termwise tensor-pullback comparison [lem-weil-pbc-tilde-pullback-base-change]. These are the first three sheaf-level factors of [def-pc-affine-base-change-tilde-coordinates].",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01I9 affine tilde comparison; coordinate construction of Tag 0DJ8"
+ },
+ "stmt_deps": [
+  "def-pc-affine-base-change-tilde-coordinates",
+  "lem-weil-pbc-tilde-pullback-base-change"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T4",
+  "date": "2026-10-14",
+  "document": "Mathlib/Algebra/Homology/Additive.lean; existing affine coordinate definition",
+  "place": "NatIso.mapHomologicalComplex and functoriality of forward maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplexCompIso|mapIso_hom",
+   "results": "Mathlib/Geometry/RingedSpace/PresheafedSpace.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean",
+   "verdict": "ingredients only; no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functor maps composite isomorphisms to composite forward morphisms",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homology and global sections preserve composition of isomorphisms",
+   "results": "CochainComplex.isoHomologyπ₀_inv_naturality, CochainComplex.isoHomologyπ₀_inv_naturality_assoc, HomologicalComplex.homologyIsoSc'_hom_ι, HomologicalComplex.homologyIsoSc'_inv_ι, HomologicalComplex.opcyclesOpIso_inv_naturality, HomologicalComplex.opcyclesIsoSc'_inv_fromOpcycles, ChainComplex.isoHomologyι₀_inv_naturality, HomologicalComplex.pOpcycles_opcyclesIsoSc'_hom",
+   "verdict": "ingredients only; no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "CategoryTheory.Functor.map_comp, PresheafOfModules.map_comp, PresheafOfModules.map_comp_assoc, PresheafOfModules.mk, PresheafOfModulesOfCommRing.mk, AlgebraicGeometry.PresheafedSpace.map_comp_c_app",
+   "verdict": "ingredients only; no exact match",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineTensorPullbackStalkCoordinates",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "The sheaf-level factors of the affine localization coordinate argument.",
+   "via": [
+    "lem-pc-affine-tensor-pullback-stalk-coordinates",
+    "lem-pc-affine-base-change-tilde-stalk-comparison",
+    "lem-pc-affine-base-change-tilde-source-model",
+    "lem-pc-affine-base-change-source-model",
+    "lem-pc-affine-base-change-cohomology-model",
+    "lem-pc-rf-single-complex-affine-base-change",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineTensorPullbackHomologySheafIso",
+  "file": "lean/Sheaf/Algebra/Homology/AffineTensorPullbackHomologySheafIso.lean",
+  "declaration": "AlgebraicGeometry.affineTensorPullbackHomologySheafIso",
+  "statement": "def affineTensorPullbackHomologySheafIso\n    (A A' : Type u) [CommRing A] [CommRing A'] (φ : A →+* A')\n    (M : CochainComplex (ModuleCat.{u} A) ℤ) (i : ℤ) :\n    let P := ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n      (@id (ModuleCat.{u} A ⥤\n        SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n          (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)\n    let T := ((Scheme.Modules.tensorPullback\n      (Spec.map (CommRingCat.ofHom φ))).mapHomologicalComplex (.up ℤ)).obj P\n    let C := ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M\n    (tilde.functor (.of A')).obj (C.homology i) ≅\n      (DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace)) i).obj\n          (DerivedCategory.Q.obj T)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-633c3",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T043533-L-1336322",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-633c3",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T043533-L-1336322",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded node statements and compile successfully, including both direct importers; no forbidden declarations, sorry, signature changes, or interface violations found."
+ }
+}

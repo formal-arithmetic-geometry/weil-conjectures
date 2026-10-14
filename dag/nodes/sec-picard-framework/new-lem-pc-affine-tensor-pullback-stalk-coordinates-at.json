@@ -2,32 +2,39 @@
  "id": "new-lem-pc-affine-tensor-pullback-stalk-coordinates-at",
  "kind": "statement",
  "title": "Pointwise affine tensor pullback stalk coordinate",
- "statement": "The displayed affine tensor pullback stalk coordinate equation for each localized class y.",
+ "statement": "For commutative rings A and A', a ring map phi:A to A', a cochain complex M of A-modules, a representative isomorphism e:Q(tilde M) to K, an invertible ordinary pullback counit on tilde M, a degree i and a prime p of A', suppose the derived pullback L of K has quasi-coherent cohomology. Write b for the canonical affine base-change cohomology isomorphism [def-pc-affine-base-change-tilde-coordinates] and t for the localized ordinary tensor cohomology to pullback stalk coordinate constructed from the tilde tensor-pullback comparison [lem-weil-pbc-tilde-pullback-base-change] and tilde stalk localization [lem-weil-pbc-spec-tilde-stalk-localization]. For every localized cohomology class y, the canonical derived cohomology stalk coordinate [lem-pc-affine-derived-cohomology-presentation] of the localization of b(y) equals the stalk of H^i of the derived pullback of e, applied to the stalk of H^i of the inverse counit applied to t(y). This is the unchanged pointwise counit-coordinate equation; no main coordinate theorem is assumed.",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 0DJ8"
  },
  "stmt_deps": [
-  "lem-pc-affine-tensor-pullback-stalk-coordinates"
+  "def-pc-affine-base-change-tilde-coordinates",
+  "lem-pc-affine-derived-cohomology-presentation",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-spec-tilde-stalk-localization"
  ],
  "proof": [
   {
-   "text": "Expand the canonical localization and stalk coordinates and verify the affine localization identity.",
+   "text": "Use the global-sections factorization to express the affine coordinate as the unit followed by global sections of the sheaf comparison, inverse derived counit and representative isomorphism. Apply the proved general tilde localization and stalk identity. The forward-map API of the localized sheaf isomorphism identifies its first factor; preservation of composition by homology and stalk gives the counit-coordinate equation. The main coordinate equation composes the counit map and representative by functoriality.",
    "uses": [
-    "lem-pc-affine-tensor-pullback-stalk-coordinates"
+    "new-lem-pc-affine-tilde-global-sections-stalk-coordinates",
+    "new-lem-pc-affine-base-change-global-sections-factorization",
+    "new-def-pc-affine-tensor-pullback-homology-sheaf-iso"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-tensor-pullback-stalk-coordinates"
+  "new-lem-pc-affine-tilde-global-sections-stalk-coordinates",
+  "new-lem-pc-affine-base-change-global-sections-factorization",
+  "new-def-pc-affine-tensor-pullback-homology-sheaf-iso"
  ],
  "proof_origin": {
-  "by": "worker",
-  "group": "M2",
+  "by": "agent",
+  "group": "T4",
   "date": "2026-10-14",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJ8"
+  "document": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean; existing affine coordinate definitions",
+  "place": "Adjunction triangle and localization naturality, followed by functoriality"
  },
  "mathlib_searches": [
   {
@@ -101,11 +108,37 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M2",
+  "reviewer": "X-633c3",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261014T004108-L-2836343",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261014T043533-L-1336322",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded node statements and compile successfully, including both direct importers; no forbidden declarations, sorry, signature changes, or interface violations found."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "T4 stage 2",
+  "old_statement": "The displayed affine tensor pullback stalk coordinate equation for each localized class y.",
+  "what": "Repair C6: the old statement only said displayed equation and referred implicitly to the parent coordinate node. Spell out that identical equation using the four direct statement dependencies requested by the reviewer, removing the circular parent reference. No Lean signature or mathematical statement changes.",
+  "source": {
+   "document": "literature/stacks-project/perfect.tex",
+   "place": "Tag 0DJ8"
+  },
+  "citers": [],
+  "old_stmt_deps": [
+   "lem-pc-affine-tensor-pullback-stalk-coordinates"
+  ],
+  "old_proof": [
+   {
+    "text": "Expand the canonical localization and stalk coordinates and verify the affine localization identity.",
+    "uses": [
+     "lem-pc-affine-tensor-pullback-stalk-coordinates"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pc-affine-tensor-pullback-stalk-coordinates"
+  ]
  }
 }
