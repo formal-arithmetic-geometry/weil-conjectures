@@ -31,6 +31,20 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
+/-- Cache the sheafification proof used by the comparison on the Zariski site.
+Source: Mathlib's sheafification theorem for abelian sheaves.
+(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+@[instance 2000]
+theorem comparisonHasSheafify (X : Scheme.{u}) :
+    HasSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{u} := inferInstance
+
+/-- Cache the Ext-size proof used by the comparison on the Zariski site.
+Source: the Grothendieck abelian category instance for abelian sheaves.
+(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+@[instance 2000]
+theorem comparisonHasExt (X : Scheme.{u}) :
+    HasExt.{u} (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) := inferInstance
+
 namespace ExtEdgeResolution
 
 open CategoryTheory.Abelian CochainComplex HomComplex
@@ -280,10 +294,9 @@ set_option backward.isDefEq.respectTransparency false in
 def siteSectionsNatIso
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
-    [HasInjectiveResolutions (Sheaf J AddCommGrpCat.{u})]
     (U : C) (q : ℕ) :
-    Sheaf.cohomologyPresheafFunctor J q ⋙
-      (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U) ≅
+    (extFunctor q).obj (op ((presheafToSheaf J AddCommGrpCat.{u}).obj
+      (yoneda.obj U ⋙ AddCommGrpCat.free))) ≅
       (sheafToPresheaf J AddCommGrpCat.{u} ⋙
         (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).rightDerived q := by
   let e : (extFunctor q).obj (op ((presheafToSheaf J AddCommGrpCat.{u}).obj
@@ -294,17 +307,14 @@ def siteSectionsNatIso
       ((presheafToSheaf J AddCommGrpCat.{u}).obj (yoneda.obj U ⋙ AddCommGrpCat.free)) F q)
       (fun φ ↦ extRightDerivedHomObjIso_naturality
         ((presheafToSheaf J AddCommGrpCat.{u}).obj (yoneda.obj U ⋙ AddCommGrpCat.free)) φ q)
-  exact (show Sheaf.cohomologyPresheafFunctor J q ⋙
-    (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U) ≅
-      (extFunctor q).obj (op ((presheafToSheaf J AddCommGrpCat.{u}).obj
-        (yoneda.obj U ⋙ AddCommGrpCat.free))) from Iso.refl _) ≪≫ e ≪≫
-          derivedSectionsIso J U q
+  exact e ≪≫ derivedSectionsIso J U q
 
 def siteSectionsObjIso
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
     (U : C) (F : Sheaf J AddCommGrpCat.{u}) (q : ℕ) :
-    Sheaf.H' F q U ≅
+    AddCommGrpCat.of (Ext ((presheafToSheaf J AddCommGrpCat.{u}).obj
+      (yoneda.obj U ⋙ AddCommGrpCat.free)) F q) ≅
       ((sheafToPresheaf J AddCommGrpCat.{u} ⋙
         (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).rightDerived q).obj F :=
   (siteSectionsNatIso J U q).app F
@@ -389,6 +399,10 @@ theorem forgottenInjectiveAcyclic (X : Scheme.{u})
   let : Subsingleton (Sheaf.H' ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj I)
       (n + 1) (⊤ : X.Opens)) :=
     injective_module_abelian_acyclic ⊤ I (n + 1) (Nat.succ_pos n)
+  let : Subsingleton (Ext
+      ((presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj
+        (yoneda.obj (⊤ : X.Opens) ⋙ AddCommGrpCat.free))
+      ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj I) (n + 1)) := this
   exact (AddCommGrpCat.isZero_of_subsingleton _).of_iso
     (siteSectionsObjIso _ ⊤ _ (n + 1)).symm
 
@@ -553,6 +567,17 @@ private theorem moduleComparisonEquiv_naturality
       (L.map f) (moduleComparisonEquiv η M x) := by
   exact ConcreteCategory.congr_hom (η.hom.naturality f) x
 
+/-- Compose section comparisons before specializing the functors and the Ext source change.
+Source: Stacks Project, Tags 03FD and 06XR; the three constructed comparison maps.
+(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+noncomputable def sectionsComparisonNatIso
+    {A E : Type*} [Category A] [Category E]
+    {R : Type u} [Ring R] {K : A ⥤ ModuleCat.{u} R} {T : A ⥤ E}
+    {B L Q : E ⥤ AddCommGrpCat.{u}}
+    (a : K ⋙ forget₂ _ AddCommGrpCat.{u} ≅ T ⋙ B)
+    (b : L ≅ B) (c : L ≅ Q) : K ⋙ forget₂ _ AddCommGrpCat.{u} ≅ T ⋙ Q :=
+  a ≪≫ Functor.isoWhiskerLeft T (b.symm ≪≫ c)
+
 end ExtEdgeResolution
 
 /-- The coefficient comparison as a natural isomorphism of additive functors.
@@ -574,14 +599,13 @@ noncomputable def moduleCohomologyExtResolutionNatIso (X : Scheme.{u}) (q : ℕ)
   let V := forget₂ (ModuleCat.{u}
     ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{u}
   change (G.rightDerived q ⋙ V) ≅ T ⋙ Sheaf.functorH (Opens.grothendieckTopology X) q
-  exact ExtEdgeResolution.resolutionSectionsNatIso G V T Γ q
-    (ExtEdgeResolution.sectionHomologyIso X q)
-    (fun M _ ↦ ExtEdgeResolution.forgottenInjectiveAcyclic X M) ≪≫
-      Functor.isoWhiskerLeft T
-        ((ExtEdgeResolution.siteSectionsNatIso (Opens.grothendieckTopology X) ⊤ q).symm ≪≫
-          ExtEdgeResolution.siteExtNatIso (Opens.grothendieckTopology X) ⊤ q ≪≫
-            ExtEdgeResolution.extSourceNatIso (ExtEdgeResolution.terminalSourceIso X) q ≪≫
-              ExtEdgeResolution.siteHNatIso (Opens.grothendieckTopology X) q)
+  exact ExtEdgeResolution.sectionsComparisonNatIso
+    (ExtEdgeResolution.resolutionSectionsNatIso G V T Γ q
+      (ExtEdgeResolution.sectionHomologyIso X q)
+      (fun M _ ↦ ExtEdgeResolution.forgottenInjectiveAcyclic X M))
+    (ExtEdgeResolution.siteSectionsNatIso (Opens.grothendieckTopology X) ⊤ q)
+    (ExtEdgeResolution.extSourceNatIso (ExtEdgeResolution.terminalSourceIso X) q)
+
 
 /-- The same resolution-normalized module/Ext comparison, read from its natural square.
 Its terminal-source map is Ext precomposition by the inverse of `terminalSourceIso`.
