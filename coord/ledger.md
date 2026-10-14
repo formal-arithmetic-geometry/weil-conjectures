@@ -14515,3 +14515,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:32 L: merged deliver/B4/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T043248-L-1304182 (proof); batch 20261014T043246; modules 1; new nodes 0)
 - 04:32 L: merged deliver/B4/Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling (stage 3; reviewer PASS; first push; landing 20261014T043249-L-1304302 (proof); batch 20261014T043246; modules 1; new nodes 0)
 - 04:32 L: merged deliver/E1/Sheaf.Algebra.Homology.TensorBicomplex (stage 3; reviewer PASS; first push; landing 20261014T043249-L-1304452 (proof); batch 20261014T043246; modules 1; new nodes 0)
+- 04:32 L: merged deliver/E1/Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap (stage 3; reviewer PASS; first push; landing 20261014T043249-L-1304622 (proof); batch 20261014T043246; modules 1; new nodes 0)
