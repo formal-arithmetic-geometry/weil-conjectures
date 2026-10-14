@@ -1,0 +1,134 @@
+{
+ "id": "new-abelian-replacement-section-homotopies-core",
+ "kind": "statement",
+ "title": "Construction of the two section homotopies without acyclicity",
+ "statement": "Let f:X→Y be a scheme morphism [def-pc-scheme], F an X-module [def-weil-sheaf-of-modules-category], I an injective resolution of F and J an injective resolution of f_*F [def-sp-injective-resolutions]. Let K be any nonnegative complex of Y-modules, l:f_*I→K a quasi-isomorphism, and β:J→K an augmentation-compatible map, namely J.ι⁰ β⁰=f_*(I.ι⁰)l⁰. Let a:Γ(X,I)≅Γ(Y,f_*I) have inverse the canonical restriction in every degree. Using the abelian resolution R, the explicit forgotten identity lift r:T_X(I)→R and the counit section map c of [new-abelian-counit-resolution-calculation], there exists q:Γ(Y,K)→Γ(X,R) with homotopies Γ(β)q∼c and (a.hom Γ(l))q∼Γ(r). No injectivity of K and no quasi-isomorphism assertion about q is assumed or concluded.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/013P",
+  "place": "013P(1), lifting along a quasi-isomorphism up to homotopy; 013S, uniqueness; 01FB, common sections diagram."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "new-module-cohomology-ext-resolution-normalization",
+  "def-pc-flat-cohomology-comparison",
+  "new-abelian-counit-resolution-calculation"
+ ],
+ "proof": [
+  {
+   "text": "Forget module structures. Abelian inverse image is exact and left adjoint to abelian direct image, so the direct image of R has injective terms. Forgetting l preserves its quasi-isomorphism. Extend the nonnegative complexes by zero to integer complexes, apply the mapping-cylinder split factorization, and use the degreewise-monic lifting property to lift f_*r to the cylinder. Compose with the cylinder section and restrict to nonnegative degrees, producing k:T_Y(K)→f_*R with T_Y(l)k homotopic to f_*r.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison",
+    "lem-weil-pbc-complex-mapping-cylinder-split-factorization",
+    "lem-weil-pbc-lift-along-injective-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose T_Y(β)k and counitResolutionAdjoint with the forgotten augmentation of J. The augmentation identity for β and the identity-lift equation for r, together with the adjunction unit/counit identities, identify these composites up to homotopy. The forgotten augmentation is a quasi-isomorphism. Uniqueness of maps into the nonnegative injective complex f_*R, via extension by zero, therefore gives a homotopy T_Y(β)k∼counitResolutionAdjoint.",
+   "uses": [
+    "new-abelian-counit-resolution-calculation",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define q existentially as sections of k followed by the natural direct-image sections identification. Apply sections to the homotopy in Step 2 and postcompose with that identification to obtain Γ(β)q∼c. Apply sections to the lifting homotopy of Step 1. Naturality of the direct-image sections identification and the prescribed degreewise formula for a.inv identify its two ends with Γ(l)q and a.inv Γ(r). Precompose with a.hom and cancel a.hom a.inv to obtain the second asserted homotopy. These operations use no injectivity hypothesis on K. Zero coefficients, the zero complex when the hypotheses allow it, and empty schemes cause no exceptional case.",
+   "uses": [
+    "new-abelian-counit-resolution-calculation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "A4 worker",
+  "document": "https://stacks.math.columbia.edu/tag/013P",
+  "place": "013P(1), 013S, 01FB; the first two steps of the parent node, separated from its acyclicity step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A map from a complex lifts across a quasi-isomorphism into a bounded below injective complex up to homotopy",
+   "results": "Eight hits including CochainComplex.cm5b and IsKInjective.nonempty_homotopy_zero. These are generic homological ingredients, not this pair of section homotopies.",
+   "verdict": "No exact match.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"counitSectionMap\"",
+   "results": "Zero hits.",
+   "verdict": "No exact match.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "abelian_replacement|counitSectionMap|forgottenResolutionMap",
+   "results": "msearch returned zero hits; local rg in lean/Sheaf and lean/WeilConjectures found the parent statement, its users and the fixed counit definitions, but no construction-only comparison theorem. Local rg of the Mathlib source for counitSectionMap|forgottenResolutionMap returned no matches.",
+   "verdict": "No existing lemma with this conclusion.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Comparing a module injective resolution replacement with the adjoint counit lift gives two homotopies on section complexes",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error. No verdict from this search.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopies",
+  "date": "2026-10-14",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-abelian-replacement-section-homotopies",
+   "place": "Proof Steps 1 and 2, without Step 3 (acyclicity).",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianReplacementSectionHomotopiesCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.abelian_replacement_section_homotopies_core",
+  "statement": "theorem abelian_replacement_section_homotopies_core {X Y : Scheme.{u}} (f : X ⟶ Y)\n    {F : X.Modules} (I : InjectiveResolution F)\n    (J : InjectiveResolution ((pushforward f).obj F)) (K : CochainComplex Y.Modules ℕ)\n    (l : ((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ K)\n    (hl : QuasiIso l) (β : J.cocomplex ⟶ K)\n    (hβ : J.ι.f 0 ≫ β.f 0 = (pushforward f).map (I.ι.f 0) ≫ l.f 0)\n    (a : ((moduleSections X).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ≅\n      ((moduleSections Y).mapHomologicalComplex (.up ℕ)).obj\n        (((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex))\n    (ha : ∀ n : ℕ, a.inv.f n = (presheaf (I.cocomplex.X n)).map\n      (eqToHom (by simp) : (⊤ : X.Opens) ⟶ f ⁻¹ᵁ (⊤ : Y.Opens)).op) :\n    ∃ q : ((moduleSections Y).mapHomologicalComplex (.up ℕ)).obj K ⟶\n        ((abelianSections X).mapHomologicalComplex (.up ℕ)).obj\n          (standardAbelianResolution X F).cocomplex,\n      Nonempty (Homotopy\n        (((moduleSections Y).mapHomologicalComplex (.up ℕ)).map β ≫ q)\n        (counitSectionMap f F J)) ∧\n      Nonempty (Homotopy\n        ((a.hom ≫ ((moduleSections Y).mapHomologicalComplex (.up ℕ)).map l) ≫ q)\n        (((abelianSections X).mapHomologicalComplex (.up ℕ)).map\n          (forgottenResolutionMap X I)))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-14"
+ },
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-weil-pbc-complex-mapping-cylinder-split-factorization",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "new-abelian-counit-resolution-calculation",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T042651-L-1238630",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T042651-L-1238630",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
