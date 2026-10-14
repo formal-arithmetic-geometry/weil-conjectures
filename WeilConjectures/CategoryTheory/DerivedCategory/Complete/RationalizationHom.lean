@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Idempotents.Karoubi
 public import Mathlib.RingTheory.Localization.BaseChange
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationMap
+public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMap
 
 /-!
 # The `Hom` groups of the rationalization

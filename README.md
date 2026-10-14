@@ -35,6 +35,29 @@ the blueprint repository; after they are committed and pushed there, update
 and commit the submodule pointer here. The blueprint repository builds and
 publishes its site independently of this project's Lean CI.
 
+## Where the mathematics lives
+
+Before stating a result, check whether this repository already proves it:
+
+* the zeta function `Z(X, t)` is `AlgebraicGeometry.Scheme.Hom.zetaSeries`,
+  defined in `Comparator/Weil/Definitions.lean`, with its theory in
+  `WeilConjectures/ZetaSeries.lean`;
+* the two headline statements are
+  `AlgebraicGeometry.Scheme.zetaSeries_rational` and
+  `AlgebraicGeometry.Scheme.weil_conjectures` in
+  `WeilConjectures/Statement.lean`;
+* Nagata compactification is `AlgebraicGeometry.NagataCompactification` in
+  `WeilConjectures/Compactification/NagataCompactification.lean`, built on
+  the rest of `WeilConjectures/Compactification/`;
+* the six operations on the étale and pro-étale derived categories are
+  constructed in `WeilConjectures/SixFunctors/`.
+
+New declarations are named and namespaced as if they were headed for Mathlib
+(`AlgebraicGeometry.*`, `CategoryTheory.*`, ...) and go into the topic tree
+they belong to, not into a tree named after a document's sectioning. A file
+under `WeilConjectures/Mathlib/` must mirror a file that already exists in
+Mathlib.
+
 ## GitHub configuration
 
 To set up your new GitHub repository, follow these steps:

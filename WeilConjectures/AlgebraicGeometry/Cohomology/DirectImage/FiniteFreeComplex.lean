@@ -8,14 +8,18 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+public import WeilConjectures.AlgebraicGeometry.Cohomology.ProperFinite
+public import WeilConjectures.AlgebraicGeometry.Modules.FiniteFreeComplex
 
 /-!
-# Higher direct images are computed by finite free complexes
+# Coherence of the higher direct images
 
-For a proper morphism of finite presentation and a coherent sheaf flat over the base, the higher
-direct images are locally computed by bounded complexes of finite free modules
-(`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`); in
-particular they are coherent.
+For a proper morphism over a locally Noetherian base and a coherent sheaf, the higher direct
+images are coherent (`AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage`).
+That they are locally computed by bounded complexes of finite free modules, for a sheaf flat over
+an arbitrary base, is
+`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`, in
+`WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectBaseChange`.
 -/
 
 @[expose] public section
@@ -29,127 +33,32 @@ namespace AlgebraicGeometry.Scheme.Modules
 variable {X T : Scheme.{u}}
 variable (f : X ⟶ T) (ℱ : X.Modules)
 
-/-- `IsFiniteFreeComplex P d` says that the cochain complex `P` of `𝒪_X`-modules is a **bounded
-complex of finite free modules in degrees `[0, d]`**: it vanishes outside `[0, d]`, and each
-`P.X n` is isomorphic to a free module `𝒪_X^r` of finite rank. -/
-structure IsFiniteFreeComplex (P : CochainComplex X.Modules ℤ) (d : ℕ) : Prop where
-  isStrictlyGE : P.IsStrictlyGE 0
-  isStrictlyLE : P.IsStrictlyLE d
-  exists_iso_free (n : ℤ) :
-    ∃ r : ℕ, Nonempty (P.X n ≅ SheafOfModules.free (R := X.ringCatSheaf) (ULift.{u} (Fin r)))
-
-/-- `IsFiniteLocallyFreeInDegree M i r` says that the family `M = (M q)_{q : ℕ}` of `𝒪_X`-modules,
-thought of as the cohomology sheaves `H^q(E)` of an object `E` of the derived category of
-`𝒪_X`-modules, is that of a **finite locally free module of rank `r` placed in degree `i`**:
-`M q = 0` for `q ≠ i`, and `M i` is finite locally free of rank `r`.
-
-For an object `E` represented by a complex this is the same as `E ≅ ℰ[-i]` with `ℰ` finite
-locally free of rank `r`: a complex whose cohomology is concentrated in degree `i` is
-quasi-isomorphic to its `i`-th cohomology placed in degree `i`. There is no derived category of
-`X.Modules` with derived pushforward available, so the condition is stated on the cohomology
-sheaves. The case `i = 0`, `r = 1` is an *invertible module placed in degree `0`*
-(`isFiniteLocallyFreeInDegree_zero_one_iff`).
-
-(blueprint: `def-pc-invertible-in-degree-zero`) -/
-structure IsFiniteLocallyFreeInDegree (M : ℕ → X.Modules) (i r : ℕ) : Prop where
-  isZero (q : ℕ) (hq : q ≠ i) : IsZero (M q)
-  isFiniteLocallyFreeOfRank : (M i).IsFiniteLocallyFreeOfRank r
-
-/-- A family of modules is that of an invertible module placed in degree `0` if and only if it
-vanishes in nonzero degrees and is invertible in degree `0`.
-
-(blueprint: `def-pc-invertible-in-degree-zero`) -/
-theorem isFiniteLocallyFreeInDegree_zero_one_iff (M : ℕ → X.Modules) :
-    IsFiniteLocallyFreeInDegree M 0 1 ↔
-      (∀ q ≠ 0, IsZero (M q)) ∧ SheafOfModules.IsInvertible (R := X.ringCatSheaf) (M 0) :=
-  ⟨fun h ↦ ⟨h.isZero, (SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one (M 0)).2
-      h.isFiniteLocallyFreeOfRank⟩,
-    fun h ↦ ⟨h.1, (SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one (M 0)).1 h.2⟩⟩
-
-/-- **The perfect locus of a bounded complex of finite free modules.** Let `P` be a bounded complex
-of finite free `𝒪_Y`-modules, representing a perfect object `E` of the derived category of `Y`, and
-fix `i r : ℕ`. There is an open subscheme `U` of `Y` such that a morphism `g : Y' ⟶ Y` factors
-through `U` if and only if `L g^* E = g^* P` is a finite locally free module of rank `r` placed in
-degree `i` (`AlgebraicGeometry.Scheme.Modules.IsFiniteLocallyFreeInDegree`).
-
-The pullback `g^* P` computes `L g^* E` because the terms of `P` are free. The proof splits
-contractible summands off `P` over the local rings of `Y`, until every differential has entries in
-the maximal ideal; the remaining complex is then `𝒪^r[-i]` near every point whose derived fibre has
-cohomology `κ(y)^r` concentrated in degree `i`, and `U` is the set of such points. The converse
-direction uses that extension of fields is faithfully flat.
-
-(blueprint: `lem-pc-perfect-locus`) -/
-theorem IsFiniteFreeComplex.exists_opens_range_subset_iff {Y : Scheme.{u}}
-    {P : CochainComplex Y.Modules ℤ} {d : ℕ} (hP : IsFiniteFreeComplex P d) (i r : ℕ) :
-    ∃ U : Y.Opens, ∀ {Y' : Scheme.{u}} (g : Y' ⟶ Y), Set.range g.base ⊆ U ↔
-      IsFiniteLocallyFreeInDegree
-        (fun q : ℕ ↦ (((Modules.pullback g).mapHomologicalComplex _).obj P).homology q) i r :=
-  sorry
-
 section Coherence
 
-variable [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]
+variable [IsProper f] [QuasiCompact f]
   [HasInjectiveResolutions X.Modules] [ℱ.IsFinitePresentation]
-
-/-- **Perfectness of the higher direct images, with base change.** With `f : X ⟶ T` proper of
-finite presentation and `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`, every
-point `t` of `T` has an open neighbourhood `U` over which `R f_* ℱ` is represented by a bounded
-complex `P` of finite free `𝒪_U`-modules whose formation commutes with every base change: for
-every `g : T' ⟶ U`, with `f' : X' ⟶ T'` the base change of `f` along `g ≫ U.ι` in the cartesian
-square `sq`
-```
-X' ------g'-------> X
-|                   |
-f'                  f
-v                   v
-T' --g--> U --U.ι--> T
-```
-and `ℱ'` the pullback of `ℱ` to `X'`, the cohomology of the pullback `g^* P` is `R^q f'_* ℱ'`.
-
-Taking `g = 𝟙 U` and for `sq` the square `(isPullback_morphismRestrict f U).flip`, and
-combining with `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_restrict`, the
-cohomology of `P` itself is `R^q f_* ℱ|_U`.
-
-The isomorphisms are only required to exist for each `g` and `q` separately: they are not
-asserted to be the canonical base-change maps, nor to be compatible with composition of the
-`g`. This suffices for semicontinuity of the fibre dimension and for the perfect locus, but not
-for the clause of Grauert's theorem saying that the canonical maps
-`R^q f_* ℱ ⊗ κ(t) → H^q(X_t, ℱ_t)` are isomorphisms; stating that needs the base-change map of
-higher direct images, which is not available.
-
-The proof needs, over a Noetherian affine base, Mumford's complex, obtained from the Čech complex
-of a finite affine cover, which is a bounded complex of flat modules by the flatness of `ℱ`,
-together with `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage`; the
-general case reduces to this by Noetherian approximation of `(f, ℱ)` [EGA IV₃, §8 and §11.2].
-Alternatively, it follows from Kiehl's theorem that `R f_* ℱ` is pseudo-coherent, and finite
-Tor-amplitude coming from flatness [Stacks, Tags 0B91 and 0A1H].
-
-(blueprint: `sk-thm-picard-coherence`) -/
-theorem exists_isFiniteFreeComplex_higherDirectImage (hℱ : ℱ.IsFlatOver f) (t : T) :
-    ∃ (U : T.Opens) (P : CochainComplex U.toScheme.Modules ℤ) (d : ℕ), t ∈ U ∧
-      IsFiniteFreeComplex P d ∧
-      ∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
-        [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ,
-        Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q ≅
-          (higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)) :=
-  sorry
 
 /-- **Finiteness of the cohomology of a proper morphism over a Noetherian affine base.** With
 `f : X ⟶ T` proper, `T` affine with Noetherian ring of global sections `Γ(T, ⊤)` and `ℱ` a coherent
 `𝒪_X`-module, the global sections `Γ(T, R^q f_* ℱ) = H^q(X, ℱ)` of the higher direct image form a
 finite `Γ(T, ⊤)`-module for every `q` [Stacks, Tag 02O6], [EGA III₁, 3.2.1].
 
-This is the affine clause of the blueprint lemma `lem-pc-coherent-hi`; for a general proper `f`
-the blueprint discharges it by the cited classical input (Chow's lemma and the projective case,
-Stacks 02O5/02O6). It is the only input to
+This is the affine clause of the blueprint lemma `lem-pc-coherent-hi`. Since `T` is affine,
+`Γ(T, R^q f_* ℱ) ≅ H^q(X, ℱ)`, and the finiteness of `H^q(X, ℱ)` is
+`AlgebraicGeometry.Scheme.Modules.hasFiniteH_of_isProper` (Chow's lemma, the projective case
+and noetherian induction, Stacks 02O6). It is the only input to
 `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage` beyond the formal
 properties of the higher direct images.
 
 (blueprint: `lem-pc-coherent-hi`) -/
 theorem finite_sections_higherDirectImage [IsAffine T] [IsNoetherianRing Γ(T, ⊤)]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
-    Module.Finite Γ(T, ⊤) Γ((higherDirectImage f q).obj ℱ, ⊤) :=
-  sorry
+    Module.Finite Γ(T, ⊤) Γ((higherDirectImage f q).obj ℱ, ⊤) := by
+  let p : X ⟶ Spec (.of Γ(T, ⊤)) := f ≫ T.isoSpec.hom
+  have h := hasFiniteH_of_isProper p ℱ q
+  obtain ⟨e, he⟩ := exists_bijective_semilinearMap_sections_higherDirectImage_H f ℱ q
+  exact Module.Finite.of_bijective_semilinearMap e he
+    ((Scheme.ΓSpecIso (.of Γ(T, ⊤))).inv ≫ T.isoSpec.hom.appTop).hom h
 
 /-- **Coherence of the higher direct images over a locally Noetherian base.** With
 `f : X ⟶ T` proper, `T` locally Noetherian and `ℱ` a coherent `𝒪_X`-module, the higher direct
