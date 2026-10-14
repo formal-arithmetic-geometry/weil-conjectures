@@ -14672,3 +14672,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:08 L: batch 20261014T054718 dependency take-out
 - 06:09 L: returned deliver/M2/Sheaf.Paper.CechFlasqueComparisonClasses (reviewer RETURN: (reviewer X-5ea9d, head 5ea9d76e7) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.CechFlasqueCom)
 - 06:09 L: returned deliver/E3/Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverComponentIdentity (reviewer RETURN: (reviewer X-78d94, head 78d94b91b) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Or)
+- 06:10 L: merged deliver/A3/Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker (stage 3; reviewer PASS; after a return; landing 20261014T061022-L-2464573 (interface); batch 20261014T061020; modules 2; new nodes 0; change records: coord/changes/pic_proper_ntorsion_coker.md)
