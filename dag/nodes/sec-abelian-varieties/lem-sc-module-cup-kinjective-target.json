@@ -1,145 +1,135 @@
 {
-  "id": "lem-sc-module-cup-kinjective-target",
-  "kind": "statement",
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-cube",
-  "title": "Natural derived global cup calculated in a K-injective target",
-  "statement": "For a scheme X let S=Γ(X,-), T its termwise action, R its unbounded right derived functor, and β:T followed by Q→Q followed by R the transported right-derived unit. There exists a natural family μ_AB:RA tensor^L RB→R(A tensor^L B). For all integer complexes K,L and every K-injective complex I, and every chain pairing φ:Tot(K tensor L)→I, the composite (β_K tensor β_L), μ_QK,QL, R(Q_tensor_comparison(K,L) followed by Qφ) equals Q_tensor_comparison(TK,TL), Q(moduleCup_naiveMap(K,L) followed by Tφ), β_I. The naive cochain map here is the concrete coproduct construction of [lem-sc-module-cup-naive-map-chain]. No restriction on K,L or on φ beyond its displayed type is imposed.",
-  "source": {
-    "document": "https://stacks.math.columbia.edu/tag/0FP3",
-    "place": "cohomology-lemma-cup-product-compatibility; naive cup before the lemma; Remark 0B68 for the derived cup"
+ "id": "lem-sc-module-cup-kinjective-target",
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "title": "Natural derived global cup calculated in a K-injective target",
+ "statement": "For a scheme X let S=Γ(X,-), T its termwise action, R its unbounded right derived functor, and β:T followed by Q→Q followed by R the transported right-derived unit. There exists a natural family μ_AB:RA tensor^L RB→R(A tensor^L B). For all integer complexes K,L and every K-injective complex I, and every chain pairing φ:Tot(K tensor L)→I, the composite (β_K tensor β_L), μ_QK,QL, R(Q_tensor_comparison(K,L) followed by Qφ) equals Q_tensor_comparison(TK,TL), Q(moduleCup_naiveMap(K,L) followed by Tφ), β_I. The naive cochain map here is the concrete coproduct construction of [lem-sc-module-cup-naive-map-chain]. No restriction on K,L or on φ beyond its displayed type is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FP3",
+  "place": "cohomology-lemma-cup-product-compatibility; naive cup before the lemma; Remark 0B68 for the derived cup"
+ },
+ "stmt_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-sc-module-cup-naive-map-chain"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the actual ordinary pullback, its adjunction and ordinary tensor/counit normalization, together with the absolute left derived pullback, comparison α and normalized natural tensor isomorphisms δ, from lem-sc-module-cup-global-tensor-pullback. The K-injective right derivability structure proves absoluteness of RΓ after D, so Mathlib Adjunction.derived induces D ⊣ RΓ. Define μ in this theorem proof by the Hom-equivalence transpose of δ followed by the tensor of the induced counits. Naturality follows from Adjunction.homEquiv_naturality_left_square, the naturality of δ and the counit, and tensorHom_comp_tensorHom. No arbitrary existential data is installed in a definition.",
+   "uses": [
+    "lem-sc-module-cup-global-tensor-pullback"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-sheaf-tensor-product",
-    "def-sc-ringed-space-module-cohomology",
-    "lem-sc-module-cup-naive-map-chain"
-  ],
-  "proof": [
-    {
-      "text": "For the ringed-space morphism to (pt,Γ(X,O_X)), use the derived pullback/direct-image adjunction of lem-pc-ringed-spaces-derived-adjoint-general, transported through def-pc-global-derived-rhom. Use the canonical bifunctorial tensor isomorphism of lem-sc-module-cup-global-tensor-pullback. This node constructs ordinary pullback via point evaluation, inverse image and change of rings, fixes its tensor constraint by the ordinary evaluation equation, and normalizes the derived tensor isomorphism on K-flat representatives. Transpose that tensor comparison followed by the tensor of the counits to define μ. Naturality of the counits and of the comparison proves naturality of μ.",
-      "uses": [
-        "lem-pc-ringed-spaces-derived-adjoint-general",
-        "def-pc-global-derived-rhom",
-        "lem-sc-module-cup-global-tensor-pullback"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Fix K,L,I,φ with I K-injective. Compute R(QI) by QΓ(I). Resolve the two complexes of global sections by K-flat complexes and take the derived pullback transpose of each displayed composite. By lem-sc-module-cup-global-counit-comparison the counit of the induced derived adjunction composed with the right-derived unit equals the derived-to-ordinary pullback comparison followed by ordinary evaluation. Its absolute-derived-functor hypotheses hold by the absolute K-flat comparison in lem-sc-module-cup-global-tensor-pullback and by the K-injective construction of RΓ. lem-sc-module-cup-global-tensor-comparison supplies the full tensor polygon for arbitrary complexes, with the same comparison maps and the K-flat normalization furnished by lem-sc-module-cup-global-tensor-pullback. Both transposes on each summand are ordinary evaluation on tensor sections, followed by φ. The coproduct formula of lem-sc-module-cup-naive-map-chain identifies this with the naive pairing. The adjunction Hom equivalence is injective, so the transposes give equality. Transport back by β_I gives the displayed equation. This is the polygon argument of Tag 0FP3 with its final map composed with φ; the K-injective target ensures every final morphism is represented by an actual chain map.",
-      "uses": [
-        "lem-sc-module-cup-naive-map-chain",
-        "def-pc-tensor-complex-sheaves",
-        "def-pur-sheaf-tensor-product",
-        "def-sc-ringed-space-module-cohomology",
-        "lem-sc-module-cup-global-counit-comparison",
-        "lem-sc-module-cup-global-tensor-comparison"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-pc-ringed-spaces-derived-adjoint-general",
-    "def-pc-global-derived-rhom",
-    "lem-sc-module-cup-naive-map-chain",
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-sheaf-tensor-product",
-    "def-sc-ringed-space-module-cohomology",
-    "lem-sc-module-cup-global-tensor-pullback",
+  {
+   "text": "Apply lem-sc-module-cup-global-tensor-comparison to extend the K-flat normalization to the full tensor polygon. Apply lem-sc-module-cup-global-counit-comparison to the induced derived adjunction to obtain its counit square. Together with the ordinary normalization, these are exactly the hypotheses of lem-sc-module-cup-adjunction-polygon for the explicit μ constructed in step 1. Supply moduleCup_comparisonNatTrans as the polygon’s β argument and the constructed μ as its pairing argument, with both canonical normalization equations proved by reflexivity. Its conclusion is definitionally the target compatibility. Pass the local localization lax instance explicitly to the polygon; its canonical equality is reflexivity, and δ naturality is hδ from the pullback data.",
+   "uses": [
+    "lem-sc-module-cup-global-tensor-comparison",
     "lem-sc-module-cup-global-counit-comparison",
-    "lem-sc-module-cup-global-tensor-comparison"
-  ],
-  "proof_origin": {
-    "by": "G4 stage-3 worker, following the source",
-    "document": "https://stacks.math.columbia.edu/tag/0FP3",
-    "place": "Lemma 20.31.3 and its proof, with the global specialization and a K-injective target; repair of X-c21c2 C1/C4: explicit global tensor and counit comparison nodes"
-  },
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.Paper.ModuleCupNaiveDerivedCompatibility",
-    "date": "2026-10-13",
-    "group": "G4"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-sc-theorem-of-cube",
-      "place": "global cup pairing used in the theorem-of-cube cohomological argument",
-      "via": [
-        "lem-sc-module-cup-naive-derived-compatibility",
-        "def-sc-module-cohomology-cup-product"
-      ]
-    },
-    "same_as": []
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "natural derived global cup product pairing evaluated in K-injective target",
-      "results": "UNAVAILABLE: service returned Internal Server Error. No mathematical verdict from this service.",
-      "date": "2026-10-13",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "lax monoidal right derived global sections functor tensor cup product",
-      "results": "HomComplex differential lemmas / sheafification monoidal structures found, but no theorem with this module-sheaf global-sections statement.",
-      "date": "2026-10-13",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "grep",
-      "query": "cup|globalSections in Mathlib Algebra/Homology/Monoidal and DerivedCategory/KInjective; mapBifunctorDesc and tensorSectionsMap in the local source library",
-      "results": "Mathlib supplies tensor coproduct descent and K-injective localization; the source supplies tensorSectionsMap_tmul and tensorHom_app_tmulSection. Neither gives the present chain identity or the derived cup pairing.",
-      "date": "2026-10-13",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Functor.map_comp",
-      "results": "Found functoriality of composition, used for the combining argument; no cup compatibility theorem.",
-      "date": "2026-10-13",
-      "verdict": "supporting lemma only"
-    }
-  ],
-  "mathlib_match": null,
-  "lean_audit": {
-    "master": {
-      "state": "none"
-    },
-    "slopmaster2": {
-      "state": "none"
-    }
-  },
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.Paper.ModuleCupKInjectiveTarget",
-    "file": "lean/Sheaf/Paper/ModuleCupKInjectiveTarget.lean",
-    "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_exists_kinjective_target_pairing",
-    "statement": "theorem moduleCup_exists_kinjective_target_pairing :\n    let S := RingedSpace.globalSectionsFunctor X.toRingedSpace\n    let T := S.mapHomologicalComplex (ComplexShape.up ℤ)\n    let R := S.rightDerivedFunctor\n    ∃ μ : ∀ A B : DerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)),\n        R.obj A ⊗ R.obj B ⟶ R.obj (A ⊗ B),\n      (∀ (A A' B B' : DerivedCategory\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)))\n        (f : A ⟶ A') (g : B ⟶ B'),\n        (R.map f ⊗ₘ R.map g) ≫ μ A' B' = μ A B ≫ R.map (f ⊗ₘ g)) ∧\n      ∀ (K L I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n        [I.IsKInjective] (φ : K ⊗ L ⟶ I),\n        ((moduleCup_comparisonNatTrans X).app K ⊗ₘ\n          (moduleCup_comparisonNatTrans X).app L) ≫\n          μ (DerivedCategory.Q.obj K) (DerivedCategory.Q.obj L) ≫\n            R.map (Functor.LaxMonoidal.μ DerivedCategory.Q K L ≫\n              DerivedCategory.Q.map φ) =\n          Functor.LaxMonoidal.μ DerivedCategory.Q (T.obj K) (T.obj L) ≫\n            DerivedCategory.Q.map (moduleCup_naiveMap X K L ≫ T.map φ) ≫\n              (moduleCup_comparisonNatTrans X).app I",
-    "branch": "sheaf-dag",
-    "by": "G4",
-    "date": "2026-10-13"
-  },
-  "reviewed": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "X-db1a8",
-    "group": "G4",
-    "result": "pass",
-    "landing": "20261013T153500-L-1085119",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "X-db1a8",
-    "group": "G4",
-    "result": "pass",
-    "landing": "20261013T153500-L-1085119",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered six-module set matches its DAG statements and report; all delivered modules and direct importer ModuleCupEqualDerivedMapsClass compile cleanly, with permitted sorryAx only through named open theorems."
+    "lem-sc-module-cup-adjunction-polygon"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-sc-module-cup-global-tensor-pullback",
+  "lem-sc-module-cup-global-tensor-comparison",
+  "lem-sc-module-cup-global-counit-comparison",
+  "lem-sc-module-cup-adjunction-polygon"
+ ],
+ "proof_origin": {
+  "by": "A2 repair worker, following the source",
+  "document": "https://stacks.math.columbia.edu/tag/0FP3",
+  "place": "Explicit adjunction transpose and proved naturality; remaining compatibility polygon split off with the comparison equations as hypotheses"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupNaiveDerivedCompatibility",
+  "date": "2026-10-13",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "global cup pairing used in the theorem-of-cube cohomological argument",
+   "via": [
+    "lem-sc-module-cup-naive-derived-compatibility",
+    "def-sc-module-cohomology-cup-product"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "natural derived global cup product pairing evaluated in K-injective target",
+   "results": "UNAVAILABLE: service returned Internal Server Error. No mathematical verdict from this service.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lax monoidal right derived global sections functor tensor cup product",
+   "results": "HomComplex differential lemmas / sheafification monoidal structures found, but no theorem with this module-sheaf global-sections statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cup|globalSections in Mathlib Algebra/Homology/Monoidal and DerivedCategory/KInjective; mapBifunctorDesc and tensorSectionsMap in the local source library",
+   "results": "Mathlib supplies tensor coproduct descent and K-injective localization; the source supplies tensorSectionsMap_tmul and tensorHom_app_tmulSection. Neither gives the present chain identity or the derived cup pairing.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "Found functoriality of composition, used for the combining argument; no cup compatibility theorem.",
+   "date": "2026-10-13",
+   "verdict": "supporting lemma only"
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupKInjectiveTarget",
+  "file": "lean/Sheaf/Paper/ModuleCupKInjectiveTarget.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_exists_kinjective_target_pairing",
+  "statement": "theorem moduleCup_exists_kinjective_target_pairing :\n    let S := RingedSpace.globalSectionsFunctor X.toRingedSpace\n    let T := S.mapHomologicalComplex (ComplexShape.up ℤ)\n    let R := S.rightDerivedFunctor\n    ∃ μ : ∀ A B : DerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)),\n        R.obj A ⊗ R.obj B ⟶ R.obj (A ⊗ B),\n      (∀ (A A' B B' : DerivedCategory\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)))\n        (f : A ⟶ A') (g : B ⟶ B'),\n        (R.map f ⊗ₘ R.map g) ≫ μ A' B' = μ A B ≫ R.map (f ⊗ₘ g)) ∧\n      ∀ (K L I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n        [I.IsKInjective] (φ : K ⊗ L ⟶ I),\n        ((moduleCup_comparisonNatTrans X).app K ⊗ₘ\n          (moduleCup_comparisonNatTrans X).app L) ≫\n          μ (DerivedCategory.Q.obj K) (DerivedCategory.Q.obj L) ≫\n            R.map (Functor.LaxMonoidal.μ DerivedCategory.Q K L ≫\n              DerivedCategory.Q.map φ) =\n          Functor.LaxMonoidal.μ DerivedCategory.Q (T.obj K) (T.obj L) ≫\n            DerivedCategory.Q.map (moduleCup_naiveMap X K L ≫ T.map φ) ≫\n              (moduleCup_comparisonNatTrans X).app I",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-db1a8",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T153500-L-1085119",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "XREPAIR-9e6d7250028f1981",
+  "group": "XR9e6d7250028f1981",
+  "result": "pass",
+  "landing": "20261014T004117-L-2840312",
+  "kind": "interface",
+  "note": "\nREADY: fixed duplicate-instance leakage by privatizing proof imports; `lcompile.py --all` and polygon checks pass.\nDELIVERED: checks and fix"
+ }
 }
