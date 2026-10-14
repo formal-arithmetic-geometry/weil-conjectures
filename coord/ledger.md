@@ -14608,3 +14608,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:16 L: merged deliver/B4/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (stage 3; reviewer PASS; after a return; landing 20261014T051629-L-1819483 (proof); batch 20261014T051627; modules 1; new nodes 0)
 - 05:16 L: merged deliver/P3/Sheaf.CategoryTheory.MapExtendHomology (stage 3; reviewer PASS; first push; landing 20261014T051629-L-1819597 (proof); batch 20261014T051627; modules 1; new nodes 0)
 - 05:16 L: returned deliver/E4/Sheaf.Paper.CechRefinementPushforwardTotal (reviewer RETURN: (reviewer X-4af66, head 4af6606ad) F / brief point 7: Correct coord/reports/E4/Sheaf.Paper.CechRefinementPushforwardTota)
+- 05:16 L: returned deliver/F2/Sheaf.Algebra.Homology.TensorBicomplex (reviewer RETURN: (reviewer X-ecbb6, head ecbb6f584) F1: coord/changes/tensor-bicomplex-canonical-map.md line 1 lacks the declaration head)
