@@ -1,0 +1,127 @@
+{
+ "id": "lem-sbc-field-torsor-galois-components",
+ "kind": "statement",
+ "title": "Galois field components of a finite group torsor",
+ "statement": "Let K be a field [def-weil-field], G a finite group, and T a finite etale G-torsor over Spec K [def-sbc-normal-dominant-galois]. There are a natural number r, fields E_i indexed by Fin r with K-algebra structures, and an isomorphism T.P -> coproduct_i Spec E_i over Spec K. Each E_i is finite dimensional over K [def-weil-vector-space-dimension], Galois, and its degree divides |G|. The isomorphism respects the actual structure morphism: its composite with the coproduct of the algebra-induced maps Spec E_i -> Spec K equals T.pi. No DVR, root algebra, normalization, or ramification conclusion is involved.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sbc-normal-dominant-galois",
+  "def-weil-vector-space-dimension"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03SF and 03QR; the finite etale field/Galois-set correspondence and the torsor action"
+ },
+ "proof": [
+  {
+   "text": "The finite etale affine coordinate algebra is a finite product of finite separable extension fields. Enumerate the factors by Fin r. The affine equivalence between finite products of rings and finite disjoint unions of spectra gives an isomorphism over Spec K.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply finite separable extension/Galois set classification to the component fields. A geometric point identifies the entire torsor geometric fibre with G under its left action. Absolute Galois automorphisms commute with that action, hence act by right translations through a homomorphism with image J <= G. Every orbit stabilizer is the kernel of that homomorphism, which is normal. Thus every component field is Galois with group J.",
+   "uses": [
+    "lem-exc-etale-field-galois-classification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The degree of each component is the cardinality of its Galois group J. Lagrange gives |J| divides |G|. The product decomposition respects K-algebra structure, so the scheme isomorphism respects the structural maps.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-etale-field-galois-classification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "kind": "written-by-agent",
+  "agent": "K3",
+  "document": "Stacks Project",
+  "place": "Tags 03SF and 03QR; the finite etale field/Galois-set correspondence and the torsor action"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale group torsor field component Galois degree divides group order",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale torsor for a finite group over a field is a disjoint union of spectra of finite Galois field extensions whose degrees divide the order of the group",
+   "date": "2026-10-14",
+   "results": "Ideal.isPretransitive_of_isGaloisGroup; IsGaloisGroup.finite; finGaloisGroupFunctor; no scheme torsor decomposition.",
+   "verdict": "No matching geometric statement; arithmetic/local API only."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsGalois.card_aut_eq_finrank",
+   "date": "2026-10-14",
+   "results": "IsGalois.card_aut_eq_finrank: the Galois group cardinality equals the finite extension degree.",
+   "verdict": "No matching geometric statement; arithmetic/local API only."
+  },
+  {
+   "tool": "grep",
+   "query": "Abhyankar|abhyankar|finrank.*card.*G|card.*G.*finrank",
+   "date": "2026-10-14",
+   "results": "Arithmetic Galois degree identities; no finite etale torsor field-component theorem. Also searched library EtaleTorsor and EtaleFieldGaloisClassification: no such scheme decomposition.",
+   "verdict": "No matching geometric statement; arithmetic/local API only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DvrRootNormalizationMaximalIdeal",
+  "date": "2026-10-14",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait tame calculation: finite Galois factors and the index-n uniformizer root extension",
+   "via": [
+    "lem-sbc-dvr-root-normalization-maximal-ideal",
+    "lem-sbc-root-normalization-root-not-square",
+    "lem-sbc-root-normalization-cotangent-root"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FieldTorsorGaloisComponents",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FieldTorsorGaloisComponents.lean",
+  "declaration": "AlgebraicGeometry.Scheme.field_torsor_galois_components",
+  "statement": "theorem field_torsor_galois_components\n    (K : Type u) [Field K]\n    (G : Type (u + 1)) [Group G] [Finite G] (T : GaloisCover G (Spec (CommRingCat.of K))) :\n    ∃ (r : ℕ) (E : Fin r → Type u) (hE : ∀ i, Field (E i))\n      (aE : ∀ i, Algebra K (E i)),\n      letI := hE\n      letI := aE\n      (∀ i, FiniteDimensional K (E i) ∧ IsGalois K (E i) ∧\n        Module.finrank K (E i) ∣ Nat.card G) ∧\n      ∃ e : T.P ≅ ∐ fun i : Fin r ↦ Spec (CommRingCat.of (E i)),\n        e.hom ≫ Sigma.desc (fun i : Fin r ↦\n          Spec.map (CommRingCat.ofHom (algebraMap K (E i)))) = T.π",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261014T004107-L-2835858",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261014T004107-L-2835858",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
