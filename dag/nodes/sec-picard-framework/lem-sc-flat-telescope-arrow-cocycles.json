@@ -1,0 +1,119 @@
+{
+ "id": "lem-sc-flat-telescope-arrow-cocycles",
+ "kind": "statement",
+ "title": "Summand comparison cocycles for a simultaneous flat-tower resolution",
+ "statement": "Let Y be a scheme, P and Pprime cochain complexes of its module sheaves [def-pc-cochain-complex-modules], both actual flat telescopes [def-sc-flat-telescope-stage-map], and f:P→Pprime a cochain map. There are bounded-above termwise-flat towers E0,E1,E2, transitions t0,t1,t2 and level maps a:E0→E1, b:E0→E2 whose sum maps commute with the telescope differentials φj. There are maps r1:Cone(φ1)→P and r2:Cone(φ2)→Pprime whose homotopy-category images are isomorphisms. There are quasi-isomorphisms qn:E0n→τ≤nP [def-pc-quasi-iso-modules], strictly compatible into P. Put s=Σdesc(qn;ιn), Aj=Σmap(a or b), Lj=Cone.inl(φj), Rj=Cone.inr(φj), and s1=s, s2=s;f. There are cochains αj:ΣE0→Pj of degree -2 and βj:ΣE0→Pj of degree -1, for P1=P and P2=Pprime, satisfying 0=δαj+φ0;βj+Aj;(Lj;rj) and ofHom(sj)=δβj+ofHom(Aj;Rj;rj). All compositions involving Lj are cochain compositions. This asserts summand data only: no source-cone augmentation or equality of maps from the source cone is a conclusion.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/077J",
+  "place": "lem-sc-flat-telescope-arrow-diagram, geometric construction in steps 1--2 and retained homotopy components of step 3; simultaneous comparisons are that plan's agent expansion, not a literal Stacks lemma."
+ },
+ "stmt_deps": [
+  "def-sc-flat-telescope-stage-map",
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "Apply strict bar augmentation data. Take all four comparison cochains to be zero. The zero shifted target restrictions give the first and third equations; applying ofHom to the strict unshifted sum identities and reversing gives the other two. Preserve all tower properties.",
+   "uses": [
+    "lem-sc-flat-telescope-arrow-bar-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-flat-telescope-arrow-bar-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F1",
+  "document": "https://stacks.math.columbia.edu/tag/077J",
+  "place": "Algebraic zero-cochain consequence of strict bar augmentation data; no geometric construction is left in this module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous compatible bounded above flat resolutions of a cochain arrow with explicit comparison cochains on a mapping telescope",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a map from a sequential mapping telescope to a complex induced by compatible maps from each stage",
+   "results": "8 hits including CategoryTheory.Functor.OfSequence.map and ComposableArrows maps; no simultaneous flat-tower construction.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.desc",
+   "results": "11 hits including mappingCone.desc, inl_desc and inr_desc. These assemble cone morphisms but do not construct simultaneous flat towers or comparison cochains.",
+   "date": "2026-10-14",
+   "verdict": "Cone assembly available; geometric construction absent."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_flat.*(arrow|diagram)|mappingCone.*descHomotopy",
+   "results": "msearch grep returned zero hits. Direct Mathlib reads found mappingCone.descHomotopy. Blueprint search flat telescope arrow returned zero blueprint nodes. Local searches found the parent core/construction statements, but neither states the needed summand cochains.",
+   "date": "2026-10-14",
+   "verdict": "No exact construction theorem; homotopy assembly available in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatTelescopeArrowDiagram",
+  "date": "2026-10-14",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Simultaneous flat-tower construction and retained comparison homotopies, before the source cone is assembled.",
+   "via": [
+    "lem-sc-flat-telescope-arrow-diagram",
+    "lem-sc-flat-telescope-stage-map-refinement",
+    "lem-sc-normalized-flat-telescope-comparison",
+    "lem-sc-normalized-kflat-representative-comparison",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatTelescopeArrowCocycles",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeArrowCocycles.lean",
+  "declaration": "AlgebraicGeometry.exists_flat_telescope_arrow_cocycles",
+  "statement": "theorem exists_flat_telescope_arrow_cocycles (Y : Scheme.{u}) (P P' : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (hP : isFlatTelescope Y P) (hP' : isFlatTelescope Y P') (f : P ⟶ P') : let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace) let Q := HomotopyCategory.quotient A (ComplexShape.up ℤ) ∃ (E₀ E₁ E₂ : ℕ → CochainComplex A ℤ) (t₀ : ∀ n : ℕ, E₀ n ⟶ E₀ (n + 1)) (t₁ : ∀ n : ℕ, E₁ n ⟶ E₁ (n + 1)) (t₂ : ∀ n : ℕ, E₂ n ⟶ E₂ (n + 1)) (a : ∀ n : ℕ, E₀ n ⟶ E₁ n) (b : ∀ n : ℕ, E₀ n ⟶ E₂ n), (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₀ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₀ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₁ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₁ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₂ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₂ n).X i)) ∧ ∃ (_c₁ : flatTelescopeDifferential E₀ t₀ ≫ Limits.Sigma.map a = Limits.Sigma.map a ≫ flatTelescopeDifferential E₁ t₁) (_c₂ : flatTelescopeDifferential E₀ t₀ ≫ Limits.Sigma.map b = Limits.Sigma.map b ≫ flatTelescopeDifferential E₂ t₂) (r₁ : CochainComplex.mappingCone (flatTelescopeDifferential E₁ t₁) ⟶ P) (r₂ : CochainComplex.mappingCone (flatTelescopeDifferential E₂ t₂) ⟶ P') (q : ∀ n : ℕ, E₀ n ⟶ P.truncLE (n : ℤ)), IsIso (Q.map r₁) ∧ IsIso (Q.map r₂) ∧ (∀ n : ℕ, QuasiIso (q n)) ∧ (∀ n : ℕ, t₀ n ≫ q (n + 1) ≫ P.ιTruncLE ((n + 1 : ℕ) : ℤ) = q n ≫ P.ιTruncLE (n : ℤ)) ∧ let s := Sigma.desc (fun n : ℕ ↦ q n ≫ P.ιTruncLE (n : ℤ)) ∃ (α₁ : Cochain (∐ E₀) P (-2)) (β₁ : Cochain (∐ E₀) P (-1)) (α₂ : Cochain (∐ E₀) P' (-2)) (β₂ : Cochain (∐ E₀) P' (-1)), (0 : Cochain (∐ E₀) P (-1)) = δ (-2) (-1) α₁ + (Cochain.ofHom (flatTelescopeDifferential E₀ t₀)).comp β₁ (zero_add _) + (Cochain.ofHom (Limits.Sigma.map a)).comp ((CochainComplex.mappingCone.inl (flatTelescopeDifferential E₁ t₁)).comp (Cochain.ofHom r₁) (add_zero _)) (zero_add _) ∧ Cochain.ofHom s = δ (-1) 0 β₁ + Cochain.ofHom (Limits.Sigma.map a ≫ CochainComplex.mappingCone.inr (flatTelescopeDifferential E₁ t₁) ≫ r₁) ∧ (0 : Cochain (∐ E₀) P' (-1)) = δ (-2) (-1) α₂ + (Cochain.ofHom (flatTelescopeDifferential E₀ t₀)).comp β₂ (zero_add _) + (Cochain.ofHom (Limits.Sigma.map b)).comp ((CochainComplex.mappingCone.inl (flatTelescopeDifferential E₂ t₂)).comp (Cochain.ofHom r₂) (add_zero _)) (zero_add _) ∧ Cochain.ofHom (s ≫ f) = δ (-1) 0 β₂ + Cochain.ofHom (Limits.Sigma.map b ≫ CochainComplex.mappingCone.inr (flatTelescopeDifferential E₂ t₂) ≫ r₂)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261014T063815-L-2813191",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261014T063815-L-2813191",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

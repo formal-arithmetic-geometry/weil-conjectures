@@ -1,0 +1,115 @@
+{
+ "id": "lem-sc-flat-telescope-arrow-bar-data",
+ "kind": "statement",
+ "title": "Strict augmentation data from finite-piece bar diagrams",
+ "statement": "Let Y be a scheme and P,Pprime complexes of module sheaves [def-pc-cochain-complex-modules], both actual flat telescopes [def-sc-flat-telescope-stage-map], with f:P→Pprime. There are bounded-above termwise-flat towers E0,E1,E2 and level maps a:E0→E1,b:E0→E2 with strict sum squares for the telescope differentials. There are compatible quasi-isomorphisms qn:E0n→τ≤nP [def-pc-quasi-iso-modules]. There are target maps r1:Tel(E1)→P,r2:Tel(E2)→Pprime inducing homotopy-category isomorphisms and having zero shifted-summand restrictions. For s=Σdesc(qn;ιn), their unshifted restrictions satisfy Σmap(a);inr;r1=s and Σmap(b);inr;r2=s;f strictly. No source-cone augmentation or equality of maps from it is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/077J",
+  "place": "03EW flat-generator covers; 077J/06XX split generator-valued truncation tower; parent geometric construction expanded by the agent using finite subcomplexes and bar enlargement."
+ },
+ "stmt_deps": [
+  "def-sc-flat-telescope-stage-map",
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "Proof. Work on the affine-open basis of Y, transporting module sheaves back to the\nZariski site. For an affine open U let G_U = j_{U!} O_U. These are flat generators.\nThey are compact with respect to coproducts: Hom(G_U, M) = Gamma(U, M), and a section\nof a sheaf coproduct has finite support locally; quasi-compactness of U makes its\nsupport finite on all of U. This uses neither projectivity nor coherence of M.\nChoose the section-indexed generating covers in 03EW using this basis. Apply the\nconstruction of 077J/06XX with resolving class the sums of these G_U. It gives\nbounded-above complexes L_n with terms sums of generators, quasi-isomorphisms\nv_n : L_n -> truncLE(n,P), and degreewise split inclusions L_n -> L_(n+1) whose\ncokernel terms are also sums of generators. Choose their degreewise splittings, so\nold summands remain named summands at later stages. The maps v_n into P commute\nstrictly. This is the stronger generator-valued form of the truncation construction;\nits existence is not inferred from a bare termwise-flat tower.\n\nA finite set of named summands of L_n lies in a finite subcomplex: starting with\nthese summands, close under differential upwards. Each differential from a generator\nhas finite support by compactness, and the upper bound on L_n makes this process\nterminate. A finite subcomplex therefore has finitely many nonzero degrees, finite\nsums of generators in each degree, and a degreewise split inclusion into L_n. Such\nsubcomplexes form a filtered poset with union L_n. Let D_n consist of all pairs\n(m,F) for m <= n and finite subcomplexes F of L_m; an arrow is inclusion after the\ntransition to a later stage. D_n is filtered: move two objects to stage n and close\nthe union of their finite sets under differential. Its colimit is L_n. The inclusions\nD_n -> D_(n+1) and augmentations of their diagrams into P are strict.\n\nUse the unnormalized simplicial replacement B(D): its p-simplices are the sum of\nF(x_0) over strings x_0 -> ... -> x_p, with alternating faces and internal differential.\nUse direct-sum totalization, placing the p-direction in cochain degree -p. Each\nB(D_n) is bounded above by the maximum of the bounds on L_0,...,L_n, and all its\nterms are flat. The bar augmentation B(D_n) -> L_n is a quasi-isomorphism: filtered\ncolimits of module sheaves are exact, so the horizontal bar homology is L_n in\ndegree zero and zero elsewhere. Reindexing the internal direction by its common\nupper bound puts this bicomplex in the first quadrant; each total diagonal is finite,\nso the usual successive-filtration argument applies without an unbounded-convergence\nassumption. Set E0_n = B(D_n) and q_n to be this augmentation followed by v_n.\nFunctoriality supplies t0 and strict compatibility of q_n into P.\n\nFor each supplied telescope T, construct an increasing filtration C_k of T by\nfinite cone blocks. A block includes the domain summands of the one-minus-shift\nmap with indices <= k and the codomain summands with indices <= k+1. Restrict that\nmap and take its cone. Each C_k is bounded above and termwise flat, its inclusion\nin C_(k+1) is degreewise a summand inclusion, and the union is the literal telescope\nT. A map from a finite subcomplex F above into T factors through some C_k: there\nare finitely many source degrees and each term is a finite sum of compact generators,\nso its two cone coordinates use finitely many target summands. The factor is a chain\nmap since C_k -> T is monic. Apply this to F -> P and F -> P -> Pprime separately.\nNo assertion is made that L_n, or B(D_n), factors through a single C_k.\n\nFor each target j form the poset I_j by adjoining its chain C_k to D = union D_n.\nKeep the arrows in D and in the target chain, and put an arrow x -> k precisely\nwhen the map from its finite subcomplex factors through C_k. There are no arrows\nback to D. Every x has a least such index rho_j(x). It is monotone along inclusions\nin D, since restriction of a factorization is a factorization. Extend rho_j by the\nidentity on target indices. It is left adjoint to inclusion of the target chain:\nrho_j(x) <= k iff x -> k. Its unit supplies a natural transformation from identity\nto inclusion followed by rho_j. Inserting the unit arrow in each possible position\nof a bar string, with alternating signs, gives the bar chain homotopy; the diagrams'\nstructure maps give its coefficients. Thus inclusion of the target chain induces a\nhomotopy equivalence of bar totals, compatible with their augmentations into T_j.\n\nLet I_j,n be the full subposet with source objects in D_n and target indices <= n,\nand set Ej_n = B(I_j,n). These stages have a common finite upper bound, since the\nsource bounds involve only L_0,...,L_n and the target bounds only C_0,...,C_n.\nFlatness follows from coproduct flatness. Inclusion of D_n gives the two level maps;\nall transition squares commute strictly. Hence their sum maps commute with 1-shift.\nThe union of these bar stages is B(I_j), and each inclusion is degreewise split by\nits named simplex summands. The sequence sum Ej -> sum Ej -> B(I_j) is degreewise\nsplit exact: for each simplex choose its first stage of appearance to split the last\nmap, and solve the finite-support recurrence for the kernel. The cone augmentation\nTel(Ej) -> B(I_j) is therefore a homotopy equivalence; the standard split-sequence\ncone computation gives its homotopy inverse, even though the degreewise splittings\nneed not be chain maps.\n\nFinally B(chain C_k) is homotopy equivalent to Tel(C_k). One explicit verification\nuses the two-term resolution of the constant right functor on the ordered natural\nnumbers by sums of representables, whose map is 1-shift. The simplicial bar resolution\nand this resolution are projective resolutions of the same constant functor; lifting\nsuccessively along their augmentations gives comparison maps and comparison\nhomotopies. Tensor them with C_k to obtain maps and homotopies of the direct-sum\ntotals. The comparison homotopies use finite sums on each input, so no convergence is\nneeded. The cone augmentation Tel(C_k) -> T_j is a homotopy equivalence by the same\ndegreewise split exact-sequence argument for the finite-block filtration. Composing\nthese equivalences proves that the canonical augmentation r_j : Tel(Ej) -> T_j is a\nhomotopy equivalence. Its shifted restriction is zero; its unshifted restriction is\nthe sum of the bar augmentations. Naturality on D_n proves the last two strict sum\nidentities. The construction also handles zero maps, identity maps, and the empty\nscheme; the empty filtered diagrams may instead be given their zero subcomplex as\nan initial object. All choices occur in this existential proof, not in a definition.\n",
+   "uses": [
+    "lem-pc-flat-truncation-tower",
+    "lem-pc-kflat-bounded-flat-replacement"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-flat-truncation-tower",
+  "lem-pc-kflat-bounded-flat-replacement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F1",
+  "document": "https://stacks.math.columbia.edu/tag/077J",
+  "place": "Explicit finite-subcomplex and bar-enlargement proof of the parent construction; the target homotopy equivalences use split filtrations and bar homotopies, not quasi-isomorphism cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A cochain arrow between flat telescopes has strict bar construction diagrams with target homotopy equivalences",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "simplicial replacement bar construction homotopy colimit final functor chain complexes",
+   "results": "Dold-Kan simplicial replacement and normalized/alternating-face homotopy equivalence APIs; no strict flat tower augmentation theorem.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "bar|simplicial.*replacement|homotopy.*final; finite subcomplex bar telescope",
+   "results": "Mathlib/source/library searches found no simultaneous tower theorem. Blueprint search returned zero matching nodes. Cone descent and comparison APIs are present in Mathlib.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatTelescopeArrowDiagram",
+  "date": "2026-10-14",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-piece bar enlargement constructing compatible towers and target homotopy equivalences, before source cone descent.",
+   "via": [
+    "lem-sc-flat-telescope-arrow-cocycles",
+    "lem-sc-flat-telescope-arrow-diagram",
+    "lem-sc-flat-telescope-stage-map-refinement",
+    "lem-sc-normalized-flat-telescope-comparison",
+    "lem-sc-normalized-kflat-representative-comparison",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatTelescopeArrowBarData",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeArrowBarData.lean",
+  "declaration": "AlgebraicGeometry.exists_flat_telescope_arrow_bar_data",
+  "statement": "theorem exists_flat_telescope_arrow_bar_data (Y : Scheme.{u}) (P P' : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (hP : isFlatTelescope Y P) (hP' : isFlatTelescope Y P') (f : P ⟶ P') : let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace) let Q := HomotopyCategory.quotient A (ComplexShape.up ℤ) ∃ (E₀ E₁ E₂ : ℕ → CochainComplex A ℤ) (t₀ : ∀ n : ℕ, E₀ n ⟶ E₀ (n + 1)) (t₁ : ∀ n : ℕ, E₁ n ⟶ E₁ (n + 1)) (t₂ : ∀ n : ℕ, E₂ n ⟶ E₂ (n + 1)) (a : ∀ n : ℕ, E₀ n ⟶ E₁ n) (b : ∀ n : ℕ, E₀ n ⟶ E₂ n), (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₀ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₀ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₁ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₁ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₂ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₂ n).X i)) ∧ ∃ (_c₁ : flatTelescopeDifferential E₀ t₀ ≫ Limits.Sigma.map a = Limits.Sigma.map a ≫ flatTelescopeDifferential E₁ t₁) (_c₂ : flatTelescopeDifferential E₀ t₀ ≫ Limits.Sigma.map b = Limits.Sigma.map b ≫ flatTelescopeDifferential E₂ t₂) (r₁ : CochainComplex.mappingCone (flatTelescopeDifferential E₁ t₁) ⟶ P) (r₂ : CochainComplex.mappingCone (flatTelescopeDifferential E₂ t₂) ⟶ P') (q : ∀ n : ℕ, E₀ n ⟶ P.truncLE (n : ℤ)), IsIso (Q.map r₁) ∧ IsIso (Q.map r₂) ∧ (∀ n : ℕ, QuasiIso (q n)) ∧ (∀ n : ℕ, t₀ n ≫ q (n + 1) ≫ P.ιTruncLE ((n + 1 : ℕ) : ℤ) = q n ≫ P.ιTruncLE (n : ℤ)) ∧ (CochainComplex.mappingCone.inl (flatTelescopeDifferential E₁ t₁)).comp (Cochain.ofHom r₁) (add_zero _) = 0 ∧ (CochainComplex.mappingCone.inl (flatTelescopeDifferential E₂ t₂)).comp (Cochain.ofHom r₂) (add_zero _) = 0 ∧ Limits.Sigma.map a ≫ CochainComplex.mappingCone.inr (flatTelescopeDifferential E₁ t₁) ≫ r₁ = Sigma.desc (fun n : ℕ ↦ q n ≫ P.ιTruncLE (n : ℤ)) ∧ Limits.Sigma.map b ≫ CochainComplex.mappingCone.inr (flatTelescopeDifferential E₂ t₂) ≫ r₂ = Sigma.desc (fun n : ℕ ↦ q n ≫ P.ιTruncLE (n : ℤ)) ≫ f",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261014T063815-L-2813191",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261014T063815-L-2813191",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
