@@ -6,6 +6,8 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
+import Sheaf.Algebra.Homology.DerivedExtensionRingEquivRawTransport
+import Sheaf.Algebra.Homology.DerivedExtensionRingEquivRawCompatibility
 
 /-! # Derived counit transport before homology
 Source: Stacks Project, Tags 06Y6 and 05RR.
@@ -69,6 +71,11 @@ theorem exists_derivedExtension_ringEquiv_raw_counit
         (a : V ⋙ π₀ ⋙ DerivedCategory.Qh ⋙ L₀ ≅ π ⋙ DerivedCategory.Qh ⋙ L ⋙ E),
         ∀ K : CochainComplex (ModuleCat.{u} R) ℤ,
           a.hom.app K ≫ E.map (ε.app (π.obj K)) ≫ q.hom.app (T.obj K) =
-            ε₀.app (π₀.obj (V.obj K)) ≫ S₀.map (t.hom.app K) := by sorry
+            ε₀.app (π₀.obj (V.obj K)) ≫ S₀.map (t.hom.app K) := by
+  dsimp only
+  intro t
+  obtain ⟨E, q, _⟩ := exists_raw_transport L₀ L ε₀ ε h₀ h eR eB hRB t
+  obtain ⟨a, ha⟩ := raw_compatibility L₀ L ε₀ ε h₀ h eR eB hRB E q t
+  exact ⟨E, q, a, ha⟩
 
 end ModuleCat
