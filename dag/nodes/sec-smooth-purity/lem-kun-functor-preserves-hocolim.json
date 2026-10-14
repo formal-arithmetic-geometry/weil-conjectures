@@ -3,38 +3,160 @@
  "blueprint": {
   "is": "lem-kun-functor-preserves-hocolim",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Exact coproduct-preserving functors preserve telescopes",
- "statement": "Let $\\mathcal T,\\mathcal T'$ be triangulated categories with\ncountable coproducts. If an exact functor\n$F:\\mathcal T\\to\\mathcal T'$ preserves countable coproducts, then\nfor every sequence $(E_N)$ the canonical morphism\n$\\operatorname{hocolim}_NF(E_N)\\to F(\\operatorname{hocolim}_NE_N)$\nis an isomorphism.",
+ "statement": "Let $\\mathcal T,\\mathcal T'$ be triangulated categories [def-weil-triangulated-category] with countable coproducts (colimits of discrete diagrams indexed by $\\mathbf N$ [def-weil-pbc-category-colimit]). Let $F:\\mathcal T\\to\\mathcal T'$ be an exact functor, with shift isomorphism $\\xi_X:F(X[1])\\xrightarrow{\\sim}F(X)[1]$, preserving countable coproducts. Let $(E_N,u_N:E_N\\to E_{N+1})_{N\\in\\mathbf N}$ be a sequence. Put $B=\\bigoplus_NE_N$, $B'=\\bigoplus_NF(E_N)$, with coprojections $\\iota_N,\\iota'_N$, and define $s\\iota_N=\\iota_{N+1}u_N$ and $s'\\iota'_N=\\iota'_{N+1}F(u_N)$. Choose telescope triangles [def-kun-truncations]\n$$B\\xrightarrow{1-s}B\\xrightarrow{p}H\\xrightarrow{q}B[1],\\qquad B'\\xrightarrow{1-s'}B'\\xrightarrow{p'}H'\\xrightarrow{q'}B'[1].$$\nThe coproduct comparison $\\alpha:B'\\to F(B)$ defined by $\\alpha\\iota'_N=F(\\iota_N)$ is an isomorphism. There exists a morphism $c:H'\\to F(H)$ satisfying\n$$c p'=F(p)\\alpha,\\qquad \\xi_B F(q)c=\\alpha[1]q',$$\nso that $(\\alpha,\\alpha,c)$ is a morphism from the telescope triangle for $(F(E_N),F(u_N))$ to the image under $F$ of the telescope triangle for $(E_N,u_N)$. Every such $c$ is an isomorphism. In particular $F(H)$ is a homotopy colimit of $(F(E_N),F(u_N))$; the comparison is relative to these chosen triangles and need not be unique.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-functor-preserves-hocolim.md",
   "place": "node lem-kun-functor-preserves-hocolim, order 1721"
  },
  "stmt_deps": [
-  "def-weil-pbc-derived-categories"
+  "def-weil-triangulated-category",
+  "def-weil-pbc-category-colimit",
+  "def-kun-truncations"
  ],
  "proof": [
   {
-   "text": "Apply $F$ to the distinguished triangle of\n[def-kun-truncations] defining $\\operatorname{hocolim}_NE_N$;\nexactness makes the image of the triangle distinguished, and\npreservation of countable coproducts identifies it with the\ndistinguished triangle defining\n$\\operatorname{hocolim}_NF(E_N)$, which determines the hocolim up to\ncanonical isomorphism.",
+   "text": "Use the telescope definition [def-kun-truncations] to fix $B,\\iota_N,s,p,q,H$ and the corresponding primed data. The countable coproducts exist by hypothesis, and TR1 of [def-weil-triangulated-category] supplies distinguished cone triangles for $1-s$ and $1-s'$. Thus arbitrary choices of the two telescope triangles in the statement are legitimate.",
    "uses": [
+    "def-kun-truncations",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 090Z (definition-derived-colimit), and Tag 0145 (definition-triangulated-category), TR1"
+   }
+  },
+  {
+   "text": "Apply the universal property of a colimit [def-weil-pbc-category-colimit] to the discrete $\\mathbf N$-diagram to obtain the unique $\\alpha:B'\\to F(B)$ with $\\alpha\\iota'_N=F(\\iota_N)$. Since $F$ preserves this coproduct, $(F(B),F(\\iota_N))$ is also a coproduct cocone. Its universal property gives $\\beta:F(B)\\to B'$ with $\\beta F(\\iota_N)=\\iota'_N$. The composites $\\beta\\alpha$ and $\\alpha\\beta$ restrict to identities on every coprojection, so uniqueness in the two universal properties gives $\\beta\\alpha=1$ and $\\alpha\\beta=1$. Hence $\\alpha$ is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F (definition-colimit), applied to the discrete category on the small set of natural numbers"
+   }
+  },
+  {
+   "text": "Check the first square on each coprojection, using the shift-endomorphism formulas of [def-kun-truncations]:\n$$\\alpha s'\\iota'_N=\\alpha\\iota'_{N+1}F(u_N)=F(\\iota_{N+1})F(u_N)=F(\\iota_{N+1}u_N)=F(s\\iota_N)=F(s)\\alpha\\iota'_N.$$\nThe coproduct universal property [def-weil-pbc-category-colimit] therefore gives $\\alpha s'=F(s)\\alpha$. Exactness includes additivity by [def-weil-triangulated-category], so $F(1-s)=1-F(s)$ and subtracting the displayed equality from $\\alpha=\\alpha$ gives $\\alpha(1-s')=F(1-s)\\alpha$.",
+   "uses": [
+    "def-kun-truncations",
+    "def-weil-pbc-category-colimit",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 090Z (definition-derived-colimit) and 014V (definition-exact-functor-triangulated-categories); component calculation"
+   }
+  },
+  {
+   "text": "Exactness as defined in [def-weil-triangulated-category] makes\n$$F(B)\\xrightarrow{F(1-s)}F(B)\\xrightarrow{F(p)}F(H)\\xrightarrow{\\xi_B F(q)}F(B)[1]$$\na distinguished triangle. Step 3 supplies its commuting first square with the primed telescope triangle. Apply TR3 of the same definition to the pair $(\\alpha,\\alpha)$ to obtain $c:H'\\to F(H)$ with $c p'=F(p)\\alpha$ and $\\xi_B F(q)c=\\alpha[1]q'$. The last equality uses the specified shift isomorphism, rather than identifying $F(B[1])$ with $F(B)[1]$ without a map.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014V (definition-exact-functor-triangulated-categories), Tag 0145 (definition-triangulated-category), TR3"
+   }
+  },
+  {
+   "text": "For any completion $c$ satisfying those two equations, $(\\alpha,\\alpha,c)$ is a morphism of distinguished triangles in $\\mathcal T'$. Its first and second components are isomorphisms by step 2. Apply [lem-sf-triangle-morphism-iso] to conclude that $c$ is an isomorphism. Step 4 supplies at least one such completion. To check the final homotopy-colimit assertion directly, put $\\widetilde p=F(p)\\alpha:B'\\to F(H)$ and $\\widetilde q=(\\alpha[1])^{-1}\\xi_B F(q):F(H)\\to B'[1]$. The triangle\n$$B'\\xrightarrow{1-s'}B'\\xrightarrow{\\widetilde p}F(H)\\xrightarrow{\\widetilde q}B'[1]$$\nis isomorphic to the distinguished image triangle by $(\\alpha,\\alpha,1_{F(H)})$: the first square is step 3, the second is $\\widetilde p=F(p)\\alpha$, and the last is $\\alpha[1]\\widetilde q=\\xi_B F(q)$. Here $\\alpha[1]$ is invertible because applying the shift functor to the inverse of $\\alpha$ gives its inverse. TR1 of [def-weil-triangulated-category] therefore makes this displayed triangle distinguished. Its first arrow is $1-s'$, so [def-kun-truncations] says precisely that $F(H)$ is a homotopy colimit of the image sequence. No uniqueness of the third component is asserted.",
+   "uses": [
+    "lem-sf-triangle-morphism-iso",
+    "def-weil-triangulated-category",
     "def-kun-truncations"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014A (lemma-third-isomorphism-triangle), Tag 0145 (definition-triangulated-category), and Tag 090Z (definition-derived-colimit)"
+   }
   }
  ],
  "proof_deps": [
-  "def-kun-truncations"
+  "def-kun-truncations",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-category-colimit",
+  "lem-sf-triangle-morphism-iso"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-functor-preserves-hocolim.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 090Z, 0145, 014V and 014A; explicit coprojection calculation and TR3 completion"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor of triangulated categories preserving countable coproducts preserves sequential homotopy colimits",
+   "results": "8 hits: CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.IsHomological.mk', CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.map_distinguished_op_exact",
+   "date": "2026-10-14",
+   "verdict": "no whole-item match; hits concern constituent cone, homotopy, or exact-functor facts"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated, Functor",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Triangulated'",
+   "date": "2026-10-14",
+   "verdict": "no whole-item match; hits concern constituent cone, homotopy, or exact-functor facts"
+  },
+  {
+   "tool": "grep",
+   "query": "hocolim|homotopyColimit|telescope",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no whole-item match; hits concern constituent cone, homotopy, or exact-functor facts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact functors preserving countable coproducts preserve homotopy colimits",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor preserving coproducts sends the mapping telescope cone of identity minus successor to a homotopy colimit",
+   "results": "8 hits: HomotopyCategory.spectralObjectMappingCone_ω₁, CategoryTheory.Functor.mapHomotopyEquiv, CategoryTheory.Functor.mapHomotopyEquiv_homotopyHomInvId, CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.mappingCone.map_inr, HomotopyCategory.composableArrowsFunctor, Homotopy.map_nullHomotopicMap', Homotopy.map_nullHomotopicMap",
+   "date": "2026-10-14",
+   "verdict": "no whole-item match; hits concern constituent cone, homotopy, or exact-functor facts"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"distinguished\", \"map\"",
+   "results": "12 hits: CategoryTheory.Functor.map_distinguished, CategoryTheory.Functor.IsTriangulated.map_distinguished, CategoryTheory.Functor.map_distinguished_iff, CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished, HomotopyCategory.mappingCone_triangleh_distinguished, CategoryTheory.Functor.map_distinguished_exact, HomotopyCategory.mappingConeCompTriangleh_distinguished, DerivedCategory.mappingCocone_triangle_distinguished",
+   "date": "2026-10-14",
+   "verdict": "no whole-item match; hits concern constituent cone, homotopy, or exact-functor facts"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTriangulated|isIso₃_of_isIso₁₂|complete_distinguished_triangle_morphism",
+   "results": "25 hits: Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Subcategory.lean",
+   "date": "2026-10-14",
+   "verdict": "no whole-item match; hits concern constituent cone, homotopy, or exact-functor facts"
+  },
+  {
+   "tool": "grep",
+   "query": "sequential.*colimit|mapping.*telescope|homotopy.*colimit",
+   "results": "2 hits: Mathlib/CategoryTheory/Limits/Shapes/Countable.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no whole-item match; countable-colimit infrastructure or triangulated-functor facts, without the sequential telescope assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A triangulated functor commuting with countable direct sums maps a sequential telescope distinguished triangle to a telescope triangle",
+   "results": "8 hits: CategoryTheory.isTriangulated_of_essSurj_mapComposableArrows_two, CategoryTheory.Functor.distTriang_iff, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.map_distinguished, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Functor.IsHomological.mk', CategoryTheory.Functor.map_distinguished_iff, CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor",
+   "date": "2026-10-14",
+   "verdict": "no whole-item match; countable-colimit infrastructure or triangulated-functor facts, without the sequential telescope assertion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +182,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-functor-preserves-hocolim",
+  "worker": "stage1",
+  "summary": "Corrected the unsupported canonical comparison to an explicitly quantified triangle completion, with every completion invertible. Expanded coproduct preservation, the successor square, exactness with its shift isomorphism, TR3 completion and two-out-of-three. Reused four existing nodes; no new nodes or whole-item Mathlib match.",
+  "blueprint": "Realizes the sole proof paragraph: apply F to the telescope triangle; identify its first arrow through coproduct preservation; compare cone objects. Repairs its final claim of canonical uniqueness to the nonunique comparison of Stacks 090Z/014B."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-ed2bc8251",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-ed2bc8251 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and unit/chapter route. All five steps check, including the shift-compatible triangle completion and its invertibility. The correction of unsupported canonical uniqueness agrees with Stacks 090Z/014B. Edge cases and duplicate candidates checked; no new nodes, cycles, missing citations, or target weakening found. Detailed checks are in review.md."
+ }
 }
