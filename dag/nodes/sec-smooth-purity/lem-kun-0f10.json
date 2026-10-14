@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-0f10",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite cohomological dimension of finite-type morphisms",
@@ -39,18 +39,177 @@
   ]
  },
  "stmt_deps": [
-  "sbc-thm-finiteness-finite-type",
-  "lem-kun-cd-sep-closed-point",
   "def-kun-cd",
   "def-kun-separably-closed",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-scheme-over-base",
+  "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "First record the geometric hypotheses for the two inductions. A finite-type $K$-scheme has a finite affine cover by spectra of finitely generated $K$-algebras. A field is Noetherian (its only ideals are $0$ and $K$), so these rings are Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian], and their spectra are Noetherian spaces by [lem-sc-affine-noetherian-underlying-space]. Every open in a Noetherian space is quasi-compact: otherwise the finite unions in an open cover have no maximal member, contradicting the ascending-chain condition on opens. Consequently intersections of two members of this affine cover are quasi-compact; [lem-weil-pbc-quasi-separated-affine-cover-criterion] gives quasi-separatedness. Every open subscheme is quasi-compact, since its intersections with the finitely many Noetherian affine charts are quasi-compact. A quasi-compact open immersion is finite type by [lem-weil-pbc-qc-open-immersion-finite-type]; composing finite-type maps is checked on affine presentations by taking the union of the two finite sets of algebra generators. Thus every open subscheme is again finite type over $K$. For any morphism between these schemes, the preimage of an affine open is an open in the Noetherian source and hence quasi-compact; for affine opens $U,U'\\subseteq X$ mapping into a common affine open of $Y$, the inverse image under its diagonal of $U\\times_YU'$ is $U\\cap U'$, an open of the Noetherian source and hence quasi-compact. These affine fibre products cover $X\\times_YX$, so the diagonal is quasi-compact and the morphism is quasi-separated. These observations apply to $f^{-1}(V)$ for every affine open $V\\subseteq Y$ and to all opens used below.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "lem-weil-pbc-qc-open-immersion-finite-type"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F10, lemma-finite-cd, hypotheses for the induction principle 08DR"
+   }
+  },
+  {
+   "text": "We make the relative Mayer–Vietoris input explicit without adding a second node for a formal consequence of existing statements. For $h:T\\to S$ and $T=A\\cup B$, apply [lem-weil-pbc-etale-mayer-vietoris] on $T\\times_S W$ for every etale $W\\to S$. The localized-site equivalence [lem-weil-pbc-etale-site-localization-open] and [lem-weil-pbc-cohomology-over-object-localization] identify its terms with object cohomology of $T\\times_S W$, $A\\times_S W$, $B\\times_S W$ and $(A\\cap B)\\times_S W$ in their respective small etale sites. The pullback compatibility [lem-weil-pbc-etale-mayer-vietoris-pullback] makes these exact sequences a sequence of presheaves on $S_{\\Et}$. Sheafify: exactness is preserved by [lem-weil-pbc-sheafification-exact], and [lem-weil-pbc-higher-direct-image-sheafified-presheaf] identifies each sheafified term with the corresponding higher direct image. In particular we obtain the exact segment $$R^{q-1}(h|_{A\\cap B})_*(F|_{A\\cap B})\\longrightarrow R^qh_*F\\longrightarrow R^q(h|_A)_*(F|_A)\\oplus R^q(h|_B)_*(F|_B),\\qquad q\\geq1.$$ This is precisely the relative Mayer–Vietoris segment of Tag 0EYK.",
+   "uses": [
+    "lem-weil-pbc-etale-mayer-vietoris",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-cohomology-over-object-localization",
+    "lem-weil-pbc-etale-mayer-vietoris-pullback",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-higher-direct-image-sheafified-presheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYK, lemma-relative-mayer-vietoris, reconstructed from 0A50 and the sheafified-presheaf description"
+   }
+  },
+  {
+   "text": "Fix an affine open $V\\subseteq Y$ and put $Z=f^{-1}(V)$. For every affine open $W\\subseteq Z$, the morphism $g:W\\to V$ is affine by [lem-weil-pbc-morphism-affine-schemes-affine], since both $W$ and $V$ are affine. Both schemes are finite type over $K$. If $W$ is nonempty, choose an integer $d\\geq\\dim W$, finite by [lem-kun-dimension-finite-type]. The dimension formula [lem-kun-dimension-formula] gives $\\operatorname{trdeg}_K\\kappa(w)\\leq\\dim_wW\\leq\\dim W\\leq d$, since local-ring dimension is nonnegative. Thus $E_d(W)=W$. For any torsion $F$, [lem-kun-affine-direct-image-support-bound] gives $\\operatorname{Supp}(R^qg_*F)\\subseteq E_{d-q}(V)=\\varnothing$ for $q>d$. An empty support means every geometric stalk is zero directly by the existential definition [def-kun-support]. By [lemma-weil-pbc-geometric-stalk-conservative], applied to the map from this sheaf to zero, it is zero. Hence $\\kuncd(g)\\leq d$. For empty $W$, the only abelian sheaf is zero and the same conclusion holds with bound $0$.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "lem-kun-dimension-formula",
+    "def-kun-dimension",
+    "def-kun-support",
+    "lem-kun-affine-direct-image-support-bound",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-kun-cd",
+    "lem-weil-pbc-morphism-affine-schemes-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F10, lemma-finite-cd, proof (1), affine case using Tag 0F0X"
+   }
+  },
+  {
+   "text": "On the qcqs scheme $Z$, let $P(W)$ for a quasi-compact open $W$ mean that $W\\to V$ has some finite torsion cohomological-dimension bound, independent of the torsion sheaf. Step 3 proves the affine case. Suppose $P(A)$, $P(B)$ and $P(A\\cap B)$ hold, with bounds $a,b,c$, where $A$ is quasi-compact and $B$ is affine. Set $N=\\max(a,b,c+1)$. If $q>N$, the two right terms of the exact segment of step 2 vanish because $q>a,b$, and the left term vanishes because $q-1>c$. Hence the middle term vanishes for every torsion sheaf on $A\\cup B$; restrictions are torsion by the local-section criterion (2) of [lem-weil-pbc-torsion-sheaf-characterizations]: an etale object of an open is an etale object of the whole scheme, and the etale covering and positive annihilating integers supplied for a section remain over that open. This proves $P(A\\cup B)$. The induction principle [lem-sc-invert-s-cohomology-induction] now gives $P(Z)$, including the empty case. No intersection of arbitrary affine opens of $Z$ was assumed affine.",
+   "uses": [
+    "lem-sc-invert-s-cohomology-induction",
+    "def-kun-cd",
+    "lem-weil-pbc-torsion-sheaf-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F10, lemma-finite-cd, proof (1), induction 08DR and relative Mayer–Vietoris 0EYK"
+   }
+  },
+  {
+   "text": "Take a finite affine cover $Y=\\bigcup_{i=1}^rV_i$ and the bounds $N_i$ supplied by step 4 for $f_i:f^{-1}(V_i)\\to V_i$. Let $N=\\max(0,N_1,\\ldots,N_r)$. The restricted sheaf $F|_{f^{-1}(V_i)}$ is torsion by the restriction argument of step 4. For a geometric point $\\bar y$ in $V_i$, the pointed etale neighbourhoods factoring through $V_i$ are cofinal among all pointed etale neighbourhoods in $Y$: replace any neighbourhood $W$ by the open $W\\times_YV_i$, which still contains its marked point. The colimit in [lem-kun-cd-stalk-criterion] is therefore the same for $f$ and $f_i$ at this point. For $q>N$ it vanishes for $f_i$ and hence for $f$. Applying that criterion at every geometric point yields $R^qf_*F=0$ for every torsion $F$, proving clause (1). If $Y$ is empty, so is $X$, and use $N=0$.",
+   "uses": [
+    "lem-kun-cd-stalk-criterion",
+    "def-kun-cd"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F10, lemma-finite-cd, proof (1), \"We may assume Y is affine\"; made uniform over a finite cover"
+   }
+  },
+  {
+   "text": "For clause (2), [lem-kun-cd-sep-closed-point] gives $\\operatorname{cd}_{\\rm tor}(K)\\leq0$. For a nonempty affine finite-type $K$-scheme $W$, [thm-sc-affine-torsion-cd] with $c=0$ gives $\\operatorname{cd}_{\\rm tor}(W)\\leq\\dim W$, which is finite by [lem-kun-dimension-finite-type]; the torsion vanishing conventions of [def-sc-etale-torsion-cd] and [def-kun-cd] quantify over the same torsion abelian etale sheaves. The empty affine scheme has bound $0$. On $X$ use the property $Q(W)$ that all torsion sheaf cohomology on $W$ vanishes above some integer bound. If $Q(A),Q(B),Q(A\\cap B)$ hold with bounds $a,b,c$, then for $q>\\max(a,b,c+1)$ the exact Mayer–Vietoris segment has zero end groups $H^{q-1}(A\\cap B,F|)$ and $H^q(A,F|)\\oplus H^q(B,F|)$, so $H^q(A\\cup B,F)=0$. All restricted sheaves remain torsion by the local-section argument of step 4 using [lem-weil-pbc-torsion-sheaf-characterizations]. Applying [lem-sc-invert-s-cohomology-induction] on the qcqs finite-type scheme $X$ proves $Q(X)$, and therefore clause (2).",
+   "uses": [
+    "lem-kun-cd-sep-closed-point",
+    "thm-sc-affine-torsion-cd",
+    "lem-kun-dimension-finite-type",
+    "def-sc-etale-torsion-cd",
+    "def-kun-cd",
+    "lem-weil-pbc-etale-mayer-vietoris",
+    "lem-sc-invert-s-cohomology-induction",
+    "lem-weil-pbc-torsion-sheaf-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F10, lemma-finite-cd, proof (2), affine 0F0V and absolute Mayer–Vietoris 0A50, then the separably closed point calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-cd",
+  "def-kun-dimension",
+  "def-kun-support",
+  "def-sc-etale-torsion-cd",
+  "def-weil-finite-type-morphism",
+  "lem-kun-affine-direct-image-support-bound",
+  "lem-kun-cd-sep-closed-point",
+  "lem-kun-cd-stalk-criterion",
+  "lem-kun-dimension-finite-type",
+  "lem-kun-dimension-formula",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sc-invert-s-cohomology-induction",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-etale-mayer-vietoris",
+  "lem-weil-pbc-etale-mayer-vietoris-pullback",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-sc-affine-torsion-cd"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 59.96.2 (Tag 0F10, lemma-finite-cd), proof (1) and (2); its affine support input Lemma 59.95.8 (Tag 0F0X, lemma-interlude-I), affine scheme input Proposition 59.95.6 (Tag 0F0V, proposition-cd-affine), relative Mayer–Vietoris Lemma 59.50.2 (Tag 0EYK, lemma-relative-mayer-vietoris), absolute Mayer–Vietoris Lemma 59.50.1 (Tag 0A50, lemma-mayer-vietoris), and induction Tag 08DR (coherent-lemma-induction-principle)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|etale.*dimension|dimension.*etale",
+   "results": "18 hits: Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern algebraic etaleness, not torsion etale cohomological dimension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between schemes of finite type over a field has finite torsion etale cohomological dimension",
+   "results": "8 hits: Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.finitePresentation, Algebra.IsStandardSmoothOfRelativeDimension.out",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern algebraic etaleness, not torsion etale cohomological dimension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomologicalDimension\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern algebraic etaleness, not torsion etale cohomological dimension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite cohomological dimension of etale direct image of a finite type morphism",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite torsion etale cohomological dimension for finite type schemes and morphisms",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, Algebra.Etale.exists_subalgebra_fg, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.FormallyEtale.instForallOfFinite, Algebra.Etale.finitePresentation, Algebra.etaleLocus_eq_univ_iff_etale, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern algebraic etaleness, not torsion etale cohomological dimension"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -91,5 +250,104 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-0f10",
+  "worker": "stage1",
+  "summary": "Expanded 0F10 into affine support vanishing, relative Mayer–Vietoris derived from existing sheafified cohomology and exact sheafification, qcqs induction, a uniform finite target cover bound, and absolute induction over a separably closed field. Added only the finer affine support estimate 0F0X; reused existing dimension, affine cd, induction and absolute Mayer–Vietoris nodes. No statement change.",
+  "blueprint": "The single blueprint proof paragraph: affine cases 0F0X and 0F0V, induction 08DR, relative 0EYK and absolute 0A50 Mayer–Vietoris, with the target locality and bounds written out.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-cd-sep-closed-point",
+    "why": "Generic Cohomological dimension of a separably closed point used as a black box in the Stacks 0F10 affine/Mayer–Vietoris induction route; the unit contains no substitute for this statement."
+   },
+   {
+    "node": "lem-sc-affine-noetherian-underlying-space",
+    "why": "Generic An affine scheme with Noetherian coordinate ring has Noetherian underlying space used as a black box in the Stacks 0F10 affine/Mayer–Vietoris induction route; the unit contains no substitute for this statement."
+   },
+   {
+    "node": "lem-sc-invert-s-cohomology-induction",
+    "why": "Generic Induction principle for quasi-compact opens used as a black box in the Stacks 0F10 affine/Mayer–Vietoris induction route; the unit contains no substitute for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-over-object-localization",
+    "why": "Generic Cohomology over an object is cohomology on its localized site used as a black box in the Stacks 0F10 affine/Mayer–Vietoris induction route; the unit contains no substitute for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-mayer-vietoris",
+    "why": "Generic Mayer-Vietoris sequence for etale cohomology used as a black box in the Stacks 0F10 affine/Mayer–Vietoris induction route; the unit contains no substitute for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-mayer-vietoris-pullback",
+    "why": "Generic Mayer-Vietoris sequences are compatible with pullback used as a black box in the Stacks 0F10 affine/Mayer–Vietoris induction route; the unit contains no substitute for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic The localized small etale site at an etale open is the small etale site of the open used as a black box in the Stacks 0F10 affine/Mayer–Vietoris induction route; the unit contains no substitute for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic Finitely generated algebras over Noetherian rings are Noetherian used as a black box in the Stacks 0F10 affine/Mayer–Vietoris induction route; the unit contains no substitute for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
+    "why": "Generic Higher direct images as sheafified cohomology presheaves used as a black box in the Stacks 0F10 affine/Mayer–Vietoris induction route; the unit contains no substitute for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Generic A quasi-compact open immersion is of finite type used as a black box in the Stacks 0F10 affine/Mayer–Vietoris induction route; the unit contains no substitute for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "why": "Generic Quasi-separatedness from affine-open intersections used as a black box in the Stacks 0F10 affine/Mayer–Vietoris induction route; the unit contains no substitute for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-exact",
+    "why": "Generic Sheafification of abelian presheaves is exact; limits of abelian sheaves are sectionwise used as a black box in the Stacks 0F10 affine/Mayer–Vietoris induction route; the unit contains no substitute for this statement."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks used as a black box in the Stacks 0F10 affine/Mayer–Vietoris induction route; the unit contains no substitute for this statement."
+   },
+   {
+    "node": "thm-sc-affine-torsion-cd",
+    "why": "Generic The affine torsion cohomological dimension bound used as a black box in the Stacks 0F10 affine/Mayer–Vietoris induction route; the unit contains no substitute for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "Generic tool for the existing Stacks 0F10 affine/Mayer–Vietoris route; no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-torsion-sheaf-characterizations",
+    "why": "Generic tool for the existing Stacks 0F10 affine/Mayer–Vietoris route; no node of this unit supplies this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-cd-sep-closed-point",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sc-invert-s-cohomology-induction",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-etale-mayer-vietoris",
+  "lem-weil-pbc-etale-mayer-vietoris-pullback",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-sheafification-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-sc-affine-torsion-cd",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-torsion-sheaf-characterizations"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-ce5d3e7d8",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-ce5d3e7d8 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Stacks 0F10/0F0X, Mayer–Vietoris, shifted gluing bounds and coefficient categories check out. Corrected direct definition citations and new-node metadata in fixes/. No duplicate, clause restatement or cycle through the item found. Full checks and accepted tool_uses are recorded in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }
