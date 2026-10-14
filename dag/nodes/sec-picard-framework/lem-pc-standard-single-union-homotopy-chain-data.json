@@ -1,147 +1,145 @@
 {
-  "id": "lem-pc-standard-single-union-homotopy-chain-data",
-  "kind": "statement",
-  "title": "Homotopy chain representatives of the single-module cover comparison",
-  "statement": "For arbitrary p:Y→B, g:A→B, opens U,V and a module N on U union V, use the standard derived categories [def-pc-derived-category], canonical single-module base-change maps [def-pc-standard-single-base-change-map] and literal tensor-pullback coefficients [def-pc-module-pullback]. There exist complexes C,D,C′,D′ of module sheaves on A, maps t:C→D, t′:C′→D′, α:C→C′, β:D→D′, and a specified chain homotopy H:t≫β~α≫t′. Six isomorphisms identify the localized first, middle and cone objects with the union, biproduct of members and overlap objects on both sides. Under these isomorphisms Q(α), Q(β), and Q(mappingCone.mapOfHomotopy H) are the canonical union comparison, biproduct of member comparisons and overlap comparison. No strict square or replacement of its middle complex is asserted.",
-  "stmt_deps": [
-    "def-pc-derived-category",
+ "id": "lem-pc-standard-single-union-homotopy-chain-data",
+ "kind": "statement",
+ "title": "Homotopy chain representatives of the single-module cover comparison",
+ "statement": "For arbitrary p:Y→B, g:A→B, opens U,V and a module N on U union V, use the standard derived categories [def-pc-derived-category], canonical single-module base-change maps [def-pc-standard-single-base-change-map] and literal tensor-pullback coefficients [def-pc-module-pullback]. There exist complexes C,D,C′,D′ of module sheaves on A, maps t:C→D, t′:C′→D′, α:C→C′, β:D→D′, and a specified chain homotopy H:t≫β~α≫t′. Six isomorphisms identify the localized first, middle and cone objects with the union, biproduct of members and overlap objects on both sides. Under these isomorphisms Q(α), Q(β), and Q(mappingCone.mapOfHomotopy H) are the canonical union comparison, biproduct of member comparisons and overlap comparison. No strict square or replacement of its middle complex is asserted.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-standard-single-base-change-map",
+  "def-pc-module-pullback",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 08BV, 08HZ, 08FE, 08HY and 0DJ9; the resolved cover-diagram comparison before the cylinder step of new-pc-standard-single-union-ses-chain-data."
+ },
+ "proof": [
+  {
+   "text": "Put W=U union V and f=W.ι;p. The inverse images W.ι inverse image U and W.ι inverse image V cover W: Scheme.Hom.preimage_sup reduces their union to W.ι inverse image W, and Scheme.Opens.ι_preimage_self identifies this with the top open. Use N[0], the single literal pullback coefficient on pullback f g, and its canonical single pullback comparison as the relative coefficient data.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply relativeMV_cover_homotopy_data to f, pullback.snd f g, g and pullback.fst f g with IsPullback.of_hasPullback. Retain all four complexes, four chain maps, the specified homotopy H, six object isomorphisms and all three comparison equations. The global relative arrow is definitionally the standard single comparison for W.",
+   "uses": [
+    "lem-pc-relative-mv-cover-homotopy-data",
     "def-pc-standard-single-base-change-map",
-    "def-pc-module-pullback",
-    "def-weil-pbc-exact-sequence"
-  ],
-  "source": {
-    "document": "Stacks Project",
-    "place": "Tags 08BV, 08HZ, 08FE, 08HY and 0DJ9; the resolved cover-diagram comparison before the cylinder step of new-pc-standard-single-union-ses-chain-data."
+    "def-pc-relative-mv-maps"
+   ],
+   "elementary": false
   },
-  "proof": [
-    {
-      "text": "Resolve the two single coefficients on W and W_A with injective-term K-injective complexes. The injective Mayer-Vietoris rows on the covers are short exact by gluing and flasqueness, so the cones of their first arrows represent the overlap terms.",
-      "uses": [
-        "prop-pur-kinjective-resolutions-exist",
-        "lem-pc-kinjective-mayer-vietoris-presentation"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Apply relative direct image and source derived pullback to the finite resolved cover diagrams. Transpose the derived-to-ordinary pullback counit and restrict it. Restriction-unit naturality and the underived open counit square give a specified homotopy H of the first square. Keep this homotopy: the induced cone map is mapOfHomotopy H, not an arbitrary triangulated completion. No cylinder replacement is performed.",
-      "uses": [
-        "def-pc-derived-pullback",
-        "lem-pc-mayer-vietoris-underived-open-counit-square"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Transport vertices by direct-image composition, exact open restriction and additive biproduct comparison. Pasting the derived adjunction counits identifies alpha with the union comparison, beta with the biproduct of the member comparisons, and the functorial cone map with the overlap comparison. Empty or repeated opens and zero coefficients are zero or split cases of this construction.",
-      "uses": [
-        "lem-pc-derived-direct-image-composition",
-        "def-pc-standard-single-base-change-map",
-        "def-pc-module-pullback"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pc-kinjective-mayer-vietoris-presentation",
-    "def-pc-derived-pullback",
-    "lem-pc-mayer-vietoris-underived-open-counit-square",
-    "lem-pc-derived-direct-image-composition",
-    "def-pc-standard-single-base-change-map",
-    "def-pc-module-pullback"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "Stacks Project",
-    "place": "Tags 08BV, 08HZ, 08FE, 08HY and 0DJ9; the resolved cover-diagram comparison before the cylinder step of new-pc-standard-single-union-ses-chain-data."
+  {
+   "text": "Apply standardSingle_open_relative_arrow to Z=U, V and U intersection V with le_sup_left, le_sup_right and inf_le_left.trans le_sup_left. Each relative local arrow is thereby isomorphic to the required literal tensor-pullback standard single arrow. Scheme.Hom.preimage_inf identifies the overlap open with the overlap of the two pulled-back cover opens. Extract source and target isomorphisms by Arrow.leftFunc.mapIso and Arrow.rightFunc.mapIso, and combine the U and V vertex isomorphisms with biprod.mapIso.",
+   "uses": [
+    "lem-pc-standard-single-open-relative-arrow"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "A homotopy commutative square of cochain complexes can be replaced by a strictly commutative square with the same cone morphism in the derived category",
-      "results": "Service unavailable: Internal Server Error.",
-      "date": "2026-10-14",
-      "verdict": "Unavailable; no absence verdict."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "strictification of a homotopy commutative square of cochain complexes preserving its mapping cone map",
-      "results": "Eight generic mappingCone.mapOfHomotopy, map_eq_mapOfHomotopy and mapping-cone composition homotopy-equivalence matches.",
-      "date": "2026-10-14",
-      "verdict": "Useful algebraic APIs, no full strictification theorem."
-    },
-    {
-      "tool": "loogle",
-      "query": "CochainComplex.mappingCone.mapOfHomotopy",
-      "results": "Eleven mapOfHomotopy, trianglehMapOfHomotopy projection and commutativity matches.",
-      "date": "2026-10-14",
-      "verdict": "Provides the specified homotopy cone map, not rectification or the geometric comparison."
-    },
-    {
-      "tool": "grep",
-      "query": "strictif|cylinder|Cylinder; mappingCone.mapOfHomotopy",
-      "results": "Read Mathlib HomotopyCofiber, HomotopyCategory.Pretriangulated and MappingCone; local ConeDiagramSESPresentation treats already strict squares. Blueprint search for homotopy square and cover comparison: no matches.",
-      "date": "2026-10-14",
-      "verdict": "No duplicate; use explicit cone cylinder formulas."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.StandardSingleUnionSESChainData",
-    "date": "2026-10-14",
-    "group": "K3"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-pc-coherent-hi",
-      "place": "The geometric comparison with its specified homotopy, before cylinder rectification.",
-      "via": [
-        "new-pc-standard-single-union-ses-chain-data",
-        "new-pc-standard-single-union-ses-presentation",
-        "new-pc-standard-single-flat-counit-union-triangles",
-        "new-pc-standard-single-flat-counit-union-equation",
-        "lem-pc-standard-single-flat-counit-union-presentation",
-        "lem-pc-standard-single-flat-counit-union",
-        "lem-pc-standard-single-stalk-flat-counit-model",
-        "lem-pc-standard-flat-single-base-change",
-        "lem-pc-standard-flat-single-base-change-epi"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-coherence",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.StandardSingleUnionHomotopyChainData",
-    "file": "lean/Sheaf/AlgebraicGeometry/StandardSingleUnionHomotopyChainData.lean",
-    "declaration": "AlgebraicGeometry.standardSingle_union_homotopy_chain_data",
-    "statement": "theorem standardSingle_union_homotopy_chain_data\n    {Y B A : Scheme.{u}} (p : Y ⟶ B) (g : A ⟶ B) (U V : Y.Opens)\n    (N : (U ⊔ V).toScheme.Modules) :\n    letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    let a := Arrow.mk (standardSingleBaseChangeMap ((U ⊔ V).ι ≫ p) N g)\n    let aU := Arrow.mk (standardSingleBaseChangeMap (U.ι ≫ p)\n      (Scheme.Modules.tensorPullbackObj (Y.homOfLE le_sup_left) N) g)\n    let aV := Arrow.mk (standardSingleBaseChangeMap (V.ι ≫ p)\n      (Scheme.Modules.tensorPullbackObj (Y.homOfLE le_sup_right) N) g)\n    let aUV := Arrow.mk (standardSingleBaseChangeMap ((U ⊓ V).ι ≫ p)\n      (Scheme.Modules.tensorPullbackObj (Y.homOfLE (inf_le_left.trans le_sup_left)) N) g)\n    ∃ (C D C' D' : CochainComplex\n        (SheafOfModules.{u} (moduleRings A.toRingedSpace)) ℤ)\n      (t : C ⟶ D) (t' : C' ⟶ D') (α : C ⟶ C') (β : D ⟶ D'),\n      ∃ (H : Homotopy (t ≫ β) (α ≫ t'))\n        (e₁ : DerivedCategory.Q.obj C ≅ a.left)\n        (e₂ : DerivedCategory.Q.obj D ≅ aU.left ⊞ aV.left)\n        (e₃ : DerivedCategory.Q.obj (CochainComplex.mappingCone t) ≅ aUV.left)\n        (e₁' : DerivedCategory.Q.obj C' ≅ a.right)\n        (e₂' : DerivedCategory.Q.obj D' ≅ aU.right ⊞ aV.right)\n        (e₃' : DerivedCategory.Q.obj (CochainComplex.mappingCone t') ≅ aUV.right),\n        DerivedCategory.Q.map α ≫ e₁'.hom = e₁.hom ≫ a.hom ∧\n        DerivedCategory.Q.map β ≫ e₂'.hom = e₂.hom ≫ biprod.map aU.hom aV.hom ∧\n        DerivedCategory.Q.map (CochainComplex.mappingCone.mapOfHomotopy H) ≫ e₃'.hom =\n          e₃.hom ≫ aUV.hom",
-    "branch": "sheaf-dag",
-    "by": "K3",
-    "date": "2026-10-14"
-  },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "K3",
-    "result": "pass",
-    "landing": "20261014T022546-L-4046045",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "K3",
-    "result": "pass",
-    "landing": "20261014T022546-L-4046045",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "text": "Postcompose each original vertex comparison with its coordinate isomorphism. Keep the original chain maps and H unchanged. The global identity is the supplied global identity. For the middle identity, use biprod.hom_ext, biprod.map_fst and biprod.map_snd to reduce to the two commuting squares Arrow.w of the U,V arrow isomorphisms. For the overlap identity, associativity and Arrow.w of the overlap arrow isomorphism transport the supplied equation for Q(mappingCone.mapOfHomotopy H). These are elementary category calculations formalized as private proved helpers, so no new obligation is introduced.",
+   "uses": [],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "def-pc-relative-mv-maps",
+  "def-pc-standard-single-base-change-map",
+  "lem-pc-relative-mv-cover-homotopy-data",
+  "lem-pc-standard-single-open-relative-arrow"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project; existing relative cover and coefficient-normalization statements",
+  "place": "Tags 08BV, 08HZ, 08FE and 08HY; specialization of lem-pc-relative-mv-cover-homotopy-data and transport along lem-pc-standard-single-open-relative-arrow. Formalized by X3 without new split statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A homotopy commutative square of cochain complexes can be replaced by a strictly commutative square with the same cone morphism in the derived category",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "Unavailable; no absence verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strictification of a homotopy commutative square of cochain complexes preserving its mapping cone map",
+   "results": "Eight generic mappingCone.mapOfHomotopy, map_eq_mapOfHomotopy and mapping-cone composition homotopy-equivalence matches.",
+   "date": "2026-10-14",
+   "verdict": "Useful algebraic APIs, no full strictification theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.mapOfHomotopy",
+   "results": "Eleven mapOfHomotopy, trianglehMapOfHomotopy projection and commutativity matches.",
+   "date": "2026-10-14",
+   "verdict": "Provides the specified homotopy cone map, not rectification or the geometric comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "strictif|cylinder|Cylinder; mappingCone.mapOfHomotopy",
+   "results": "Read Mathlib HomotopyCofiber, HomotopyCategory.Pretriangulated and MappingCone; local ConeDiagramSESPresentation treats already strict squares. Blueprint search for homotopy square and cover comparison: no matches.",
+   "date": "2026-10-14",
+   "verdict": "No duplicate; use explicit cone cylinder formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StandardSingleUnionSESChainData",
+  "date": "2026-10-14",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "The geometric comparison with its specified homotopy, before cylinder rectification.",
+   "via": [
+    "new-pc-standard-single-union-ses-chain-data",
+    "new-pc-standard-single-union-ses-presentation",
+    "new-pc-standard-single-flat-counit-union-triangles",
+    "new-pc-standard-single-flat-counit-union-equation",
+    "lem-pc-standard-single-flat-counit-union-presentation",
+    "lem-pc-standard-single-flat-counit-union",
+    "lem-pc-standard-single-stalk-flat-counit-model",
+    "lem-pc-standard-flat-single-base-change",
+    "lem-pc-standard-flat-single-base-change-epi"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StandardSingleUnionHomotopyChainData",
+  "file": "lean/Sheaf/AlgebraicGeometry/StandardSingleUnionHomotopyChainData.lean",
+  "declaration": "AlgebraicGeometry.standardSingle_union_homotopy_chain_data",
+  "statement": "theorem standardSingle_union_homotopy_chain_data\n    {Y B A : Scheme.{u}} (p : Y ⟶ B) (g : A ⟶ B) (U V : Y.Opens)\n    (N : (U ⊔ V).toScheme.Modules) :\n    letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    let a := Arrow.mk (standardSingleBaseChangeMap ((U ⊔ V).ι ≫ p) N g)\n    let aU := Arrow.mk (standardSingleBaseChangeMap (U.ι ≫ p)\n      (Scheme.Modules.tensorPullbackObj (Y.homOfLE le_sup_left) N) g)\n    let aV := Arrow.mk (standardSingleBaseChangeMap (V.ι ≫ p)\n      (Scheme.Modules.tensorPullbackObj (Y.homOfLE le_sup_right) N) g)\n    let aUV := Arrow.mk (standardSingleBaseChangeMap ((U ⊓ V).ι ≫ p)\n      (Scheme.Modules.tensorPullbackObj (Y.homOfLE (inf_le_left.trans le_sup_left)) N) g)\n    ∃ (C D C' D' : CochainComplex\n        (SheafOfModules.{u} (moduleRings A.toRingedSpace)) ℤ)\n      (t : C ⟶ D) (t' : C' ⟶ D') (α : C ⟶ C') (β : D ⟶ D'),\n      ∃ (H : Homotopy (t ≫ β) (α ≫ t'))\n        (e₁ : DerivedCategory.Q.obj C ≅ a.left)\n        (e₂ : DerivedCategory.Q.obj D ≅ aU.left ⊞ aV.left)\n        (e₃ : DerivedCategory.Q.obj (CochainComplex.mappingCone t) ≅ aUV.left)\n        (e₁' : DerivedCategory.Q.obj C' ≅ a.right)\n        (e₂' : DerivedCategory.Q.obj D' ≅ aU.right ⊞ aV.right)\n        (e₃' : DerivedCategory.Q.obj (CochainComplex.mappingCone t') ≅ aUV.right),\n        DerivedCategory.Q.map α ≫ e₁'.hom = e₁.hom ≫ a.hom ∧\n        DerivedCategory.Q.map β ≫ e₂'.hom = e₂.hom ≫ biprod.map aU.hom aV.hom ∧\n        DerivedCategory.Q.map (CochainComplex.mappingCone.mapOfHomotopy H) ≫ e₃'.hom =\n          e₃.hom ≫ aUV.hom",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261014T022546-L-4046045",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261014T094639-L-809675",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
