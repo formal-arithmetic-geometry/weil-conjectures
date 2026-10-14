@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sbc-lem-etale-locality",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Etale locality of the base-change map",
- "statement": "Consider a base-change square\nand let $\\{U_i\\to X\\}$ be an etale covering such that $U_i\\to S$ factors\nas $U_i\\to V_i\\to S$ with $V_i\\to S$ etale; form the associated\nCartesian diagrams\n\n$$\n\\begin{array}{ccc}\nU_i & \\xleftarrow{h_i} & U_i\\times_XY\\\\\nf_i\\big\\downarrow & & \\big\\downarrow e_i\\\\\nV_i & \\xleftarrow{g_i} & V_i\\times_ST,\n\\end{array}\n$$\n\nand put $\\mathcal F_i=\\mathcal F|_{V_i\\times_ST}$ and\n$K_i=K|_{V_i\\times_ST}$ for a sheaf $\\mathcal F$ resp. a complex $K$\non $T_{\\Et}$.\n\n1. If $f_i^{-1}g_{i,*}\\mathcal F_i=h_{i,*}e_i^{-1}\\mathcal F_i$ for\nall $i$, then $f^{-1}g_*\\mathcal F=h_*e^{-1}\\mathcal F$.\n1. If $f_i^{-1}Rg_{i,*}K_i=Rh_{i,*}e_i^{-1}K_i$ for all $i$, then\n$f^{-1}Rg_*K=Rh_*e^{-1}K$.\n1. If $\\mathcal F$ is an abelian sheaf and\n$f_i^{-1}R^qg_{i,*}\\mathcal F_i=R^qh_{i,*}e_i^{-1}\\mathcal F_i$\nfor all $i$, then\n$f^{-1}R^qg_*\\mathcal F=R^qh_*e^{-1}\\mathcal F$.\n\n(*Stacks Project, Lemma 59.86.1, [Tag `0EZR`](https://stacks.math.columbia.edu/tag/0EZR).*)",
+ "statement": "Consider a base-change square\nand let $\\{U_i\\to X\\}$ be an etale covering such that $U_i\\to S$ factors\nas $U_i\\to V_i\\to S$ with $V_i\\to S$ etale; form the associated\nCartesian diagrams\n\n$$\n\\begin{array}{ccc}\nU_i & \\xleftarrow{h_i} & U_i\\times_XY\\\\\nf_i\\big\\downarrow & & \\big\\downarrow e_i\\\\\nV_i & \\xleftarrow{g_i} & V_i\\times_ST,\n\\end{array}\n$$\n\nand put $\\mathcal F_i=\\mathcal F|_{V_i\\times_ST}$ and\n$K_i=K|_{V_i\\times_ST}$ for a sheaf $\\mathcal F$ resp. a complex $K$\non $T_{\\Et}$.\n\n1. If $f_i^{-1}g_{i,*}\\mathcal F_i=h_{i,*}e_i^{-1}\\mathcal F_i$ for\nall $i$, then $f^{-1}g_*\\mathcal F=h_*e^{-1}\\mathcal F$.\n1. If $f_i^{-1}Rg_{i,*}K_i=Rh_{i,*}e_i^{-1}K_i$ for all $i$, then\n$f^{-1}Rg_*K=Rh_*e^{-1}K$.\n1. If $\\mathcal F$ is an abelian sheaf and\n$f_i^{-1}R^qg_{i,*}\\mathcal F_i=R^qh_{i,*}e_i^{-1}\\mathcal F_i$\nfor all $i$, then\n$f^{-1}R^qg_*\\mathcal F=R^qh_*e^{-1}\\mathcal F$.\n\n(*Stacks Project, Lemma [Tag `0EZR`](https://stacks.math.columbia.edu/tag/0EZR).*)",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-bc/sbc-lem-etale-locality.md",
   "place": "node sbc-lem-etale-locality, order 1370",
@@ -27,39 +27,178 @@
   ]
  },
  "stmt_deps": [
-  "sbc-def-base-change-square"
+  "sbc-def-base-change-square",
+  "sbc-def-base-change-map",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-abstract-derived-category"
  ],
  "proof": [
   {
-   "text": "Restricting to $U_i$ and using the factorizations\n$U_i\\to V_i\\to S$ gives\n\n$$\n(f^{-1}g_*\\mathcal F)|_{U_i}=f_i^{-1}(g_*\\mathcal F|_{V_i})\n=f_i^{-1}g_{i,*}\\mathcal F_i,\n$$\n\nwhere the first equality is the compatibility of inverse and direct\nimages with localization of the etale site of\n[def-weil-pbc-etale-site] (Sites, Lemma 7.28.2,\n[Tag `03EF`](https://stacks.math.columbia.edu/tag/03EF)) and the second uses\n$\\mathcal F|_{V_i}=\\mathcal F_i$, and likewise\n\n$$\n(h_*e^{-1}\\mathcal F)|_{U_i}=h_{i,*}e_i^{-1}\\mathcal F_i.\n$$",
+   "text": "Write $a_i:U_i\\to X$, $b_i:V_i\\to S$, $c_i:T_i=V_i\\times_ST\\to T$ and $d_i:Y_i=U_i\\times_XY\\to Y$. Both $c_i$ and $d_i$ are etale by [lem-weil-pbc-etale-base-change-finite-limits], and fibre-product associativity identifies $Y_i$ with $U_i\\times_{V_i}T_i$. Work in a universe containing small models of all the sites; the same universe is used for their slice sites. By [lem-weil-pbc-etale-site-localization-open], the small etale site of any etale object $W\\to Z$ is the slice $Z_{\\Et}/W$, with the same coverings. On sets this site equivalence also identifies sheaves: precomposition in either direction is inverse precomposition and preserves every equalizer diagram defining the sheaf condition. Localization inverse image is restriction [def-pur-localized-ringed-site]. By [lem-weil-pbc-sets-etale-inverse-image-exact], scheme morphisms induce site morphisms by their base-change functors [lem-weil-pbc-etale-base-change-continuous], [lem-weil-pbc-etale-base-change-finite-limits]. For an etale $j:B\\to W$, identify $W_{\\Et}/B$ with $B_{\\Et}$ by the cited site equivalence. Composition $\\lambda:B_{\\Et}\\to W_{\\Et}$ is left adjoint to base change $\\beta:W_{\\Et}\\to B_{\\Et}$: a map $Z\\to B\\times_WQ$ over $B$ is exactly a map $Z\\to Q$ over $W$. Precomposition along $\\lambda$ preserves sheaves because it carries coverings and their fibre products to the same coverings and fibre products; precomposition along $\\beta$ preserves sheaves by the cited continuity theorem. By [lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction], restriction is consequently the scheme inverse image $j^{-1}$, with the adjunction-compatible identification; the unit on an object $Q\\to W$ is restriction along $Q\\times_WB\\to Q$. This holds for abelian sheaves too, since the same adjunction maps preserve the group operations. Apply [lem-weil-pbc-slice-site-localization] to $g$ at $V_i$ and to $h$ at $U_i$. It gives $(g_*F)|_{V_i}\\cong g_{i*}(F|_{T_i})$ and $(h_*G)|_{U_i}\\cong h_{i*}(G|_{Y_i})$ for sheaves of sets as well as abelian sheaves. The inverse-image comparisons of the same lemma, and the adjunction-compatible composition comparisons [lem-weil-pbc-site-morphism-composition], applied to $f a_i=b_i f_i$ and $e d_i=c_i e_i$, give $(f^{-1}H)|_{U_i}\\cong f_i^{-1}(H|_{V_i})$ and $(e^{-1}F)|_{Y_i}\\cong e_i^{-1}(F|_{T_i})$. Thus restriction identifies both sides of the underived global map with the two sides of the local map. No properness or quasi-compactness is assumed.",
    "uses": [
-    "def-weil-pbc-etale-site"
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-base-change-continuous",
+    "lem-weil-pbc-etale-site-localization-open",
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-slice-site-localization",
+    "lem-weil-pbc-site-morphism-composition",
+    "lem-weil-pbc-sets-etale-inverse-image-exact",
+    "lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZR, label lemma-base-change-local, proof of (1), both displayed restriction identities"
+   }
   },
   {
-   "text": "Since $\\{U_i\\to X\\}$ is an etale covering, a morphism of etale sheaves\nwhose restrictions to all $U_i$ are isomorphisms is an isomorphism\n([def-weil-pbc-etale-site]), which proves (1); the assertions (2)\nand (3) are the same argument with the localization compatibility for\nthe higher direct images and sheafified cohomology\n(Cohomology on Sites, Lemma 21.20.4, [Tag `0D6G`](https://stacks.math.columbia.edu/tag/0D6G)), applied\ndegreewise for the $R^q$'s of [def-weil-pbc-direct-image] and to\n$R^q$ of the base-change maps of [sbc-def-base-change-map].",
+   "text": "The same localization calculation holds for unbounded derived direct images. Here all ringed sites carry the constant ring $\\mathbf Z$, so their module sheaves are abelian sheaves. For any scheme morphism $v:Z\\to W$, any etale object $B\\to W$, and $A=Z\\times_WB$, choose a K-injective representative $I$ of $L\\in D(Z_{\\Et})$ using [prop-pur-kinjective-resolutions-exist]. The restricted complex $I|_A$ is K-injective by [lem-pur-kinjective-restrict-localized]. Direct image is additive sectionwise: for sheaf maps $s,t$ and an etale object $Q\\to W$, $(v_*(s+t))_Q=(s+t)_{Z\\times_WQ}=s_{Z\\times_WQ}+t_{Z\\times_WQ}=(v_*s)_Q+(v_*t)_Q$, by the section formula from step 1. Thus termwise direct image preserves shifts and mapping cones: the terms of a cone are finite biproducts and its differential is a matrix of the original differentials and chain map; applying an additive functor preserves that matrix. Therefore direct image followed by derived localization is a triangulated functor on the homotopy category, as required by [lem-weil-pbc-kinjective-total-derived]. By that lemma, $Rv_*L$ is represented by $v_*I$, and $R(v_B)_*(L|_A)$ by $(v_B)_*(I|_A)$. The termwise identity of step 1 identifies $(v_*I)|_B$ with $(v_B)_*(I|_A)$, hence identifies $(Rv_*L)|_B$ with $R(v_B)_*(L|_A)$. This is an equality of natural computations, not merely an objectwise existence of an isomorphism. Restriction is exact by [lem-weil-pbc-site-restriction-exact]; it acts termwise in the derived category by [lem-weil-pbc-exact-functor-derived-factorization]. Inverse image for any scheme morphism is exact by [prop-weil-pbc-inverse-image-exact], so it too acts termwise by [lem-weil-pbc-exact-functor-derived-factorization]. Apply this calculation to $v=g$ and $v=h$, and the inverse-image identities of step 1 termwise, to obtain\n$$ (f^{-1}Rg_*K)|_{U_i}\\cong f_i^{-1}Rg_{i*}K_i,\\qquad (Rh_*e^{-1}K)|_{U_i}\\cong Rh_{i*}e_i^{-1}K_i. $$\nThere is no lower bound on $K$: restriction of K-injectives, rather than restriction of a bounded injective resolution, is precisely what is used.",
    "uses": [
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-direct-image",
-    "sbc-def-base-change-map"
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-site-restriction-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "prop-weil-pbc-inverse-image-exact"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6G, label lemma-restrict-direct-image-open, entire proof; Tag 08FI, label lemma-restrict-K-injective-to-open"
+   }
+  },
+  {
+   "text": "Check the arrows under these comparisons. For sets write $\\beta_F:f^{-1}g_*F\\to h_*e^{-1}F$ for the adjoint, under $h^{-1}\\dashv h_*$, of\n$$h^{-1}f^{-1}g_*F\\cong e^{-1}g^{-1}g_*F\\xrightarrow{e^{-1}\\varepsilon_g}e^{-1}F.$$\nAll inverse-image composition comparisons here are the ones compatible with the adjunctions [lem-weil-pbc-site-morphism-composition]. The direct-image localization comparison is literally the identity $F(W\\times_ST)=F(W\\times_{V_i}T_i)$ on an etale $W\\to V_i$ [lem-weil-pbc-slice-site-localization]. Its adjoint inverse-image comparison therefore carries the counit $g^{-1}g_*F\\to F$ to $g_i^{-1}g_{i*}F_i\\to F_i$: both are the morphism corresponding to the identity of $g_{i*}F_i$ under the same adjunction bijection. After restricting the displayed composite to $Y_i$ it is consequently\n$$h_i^{-1}f_i^{-1}g_{i*}F_i\\cong e_i^{-1}g_i^{-1}g_{i*}F_i\\xrightarrow{e_i^{-1}\\varepsilon_{g_i}}e_i^{-1}F_i.$$\nTransposing under $h_i^{-1}\\dashv h_{i*}$ proves that $\\beta_F|_{U_i}$ is the local base-change map, conjugated by step 1's comparisons. For the derived arrow choose a K-injective representative $I$ of $K$ and a K-injective resolution $r:e^{-1}I\\to J$ [prop-pur-kinjective-resolutions-exist]. If $v$ is any scheme morphism and $P$ is K-injective, then $v_*P$ is K-injective: termwise adjunction identifies maps and homotopies $N\\to v_*P$ with maps and homotopies $v^{-1}N\\to P$; for acyclic $N$, exactness [prop-weil-pbc-inverse-image-exact] makes $v^{-1}N$ acyclic, hence all the latter maps are null-homotopic [def-pur-kinjective-complex]. By [lem-weil-pbc-kinjective-hom-derived], the derived adjunction bijection is therefore the termwise adjunction bijection on homotopy classes, since both target complexes $P$ and $v_*P$ are K-injective. Its counit at $QP$ is represented by the termwise counit $v^{-1}v_*P\\to P$. Thus the global exchange arrow is represented by the chain map $f^{-1}g_*I\\to h_*J$ adjoint to\n$$h^{-1}f^{-1}g_*I\\cong e^{-1}g^{-1}g_*I\\xrightarrow{e^{-1}\\varepsilon_g}e^{-1}I\\xrightarrow{r}J.$$\nThis is the counit-transpose definition of base change [sbc-def-base-change-map], with a resolution inserted into its target. It agrees with that definition’s unit-composite formula: apply both adjunction bijections to the unit-composite; naturality moves the inserted unit past the composition comparison, and the adjacent unit and counit cancel by the triangle identity, leaving the displayed counit composite. Conversely transposing that composite inserts the same unit and then the same counit. Thus the two formulas are mates of the same morphism, not two separately chosen exchange maps. Restrict $I$ to $T_i$ and $J$ to $Y_i$. Both restrictions are K-injective [lem-pur-kinjective-restrict-localized], and $r|_{Y_i}:e_i^{-1}(I|_{T_i})\\to J|_{Y_i}$ is a quasi-isomorphism by exact restriction [lem-weil-pbc-site-restriction-exact] and step 1. They compute the local derived direct images by [lem-weil-pbc-kinjective-total-derived]. The termwise counit calculation already displayed in this step identifies the restricted chain map with the chain map adjoint to\n$$h_i^{-1}f_i^{-1}g_{i*}(I|_{T_i})\\cong e_i^{-1}g_i^{-1}g_{i*}(I|_{T_i})\\xrightarrow{e_i^{-1}\\varepsilon_{g_i}}e_i^{-1}(I|_{T_i})\\xrightarrow{r|_{Y_i}}J|_{Y_i}.$$\nHence restriction of the actual global derived arrow is the local derived arrow under step 2's comparisons. No preservation of K-injectives by $e^{-1}$ is assumed.",
+   "uses": [
+    "lem-weil-pbc-site-morphism-composition",
+    "lem-weil-pbc-slice-site-localization",
+    "prop-pur-kinjective-resolutions-exist",
+    "prop-weil-pbc-inverse-image-exact",
+    "def-pur-kinjective-complex",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "sbc-def-base-change-map",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-weil-pbc-site-restriction-exact",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZR, label lemma-base-change-local, sentence beginning \"Thus if the base change maps\"; derived adjoint-of-counit construction: sites-cohomology.tex, label remark-base-change"
+   }
+  },
+  {
+   "text": "For clause (1), let $A=f^{-1}g_*F$ and $B=h_*e^{-1}F$. Steps 1 and 3 identify $\\beta_F|_{U_i}$ with an isomorphism by hypothesis. For each object $W\\to X$ the base changes $W_i=W\\times_XU_i\\to W$ form a covering [lem-weil-pbc-etale-base-change-continuous]. Given $s\\in B(W)$, take its unique inverse image in $A(W_i)$ on each $W_i$. On $W_i\\times_WW_j$ those inverse images agree, because their images agree and the locally restricted map is injective. The sheaf equalizer condition [def-weil-pbc-etale-sheaf-of-sets] glues them uniquely to a section of $A(W)$ mapping to $s$. Two sections of $A(W)$ with the same image have identical restrictions to all $W_i$ and hence are equal by the same sheaf condition. Thus every component of $\\beta_F$ is bijective; the inverses commute with restrictions by uniqueness, so $\\beta_F$ is an isomorphism. This argument includes the empty covering of the empty scheme (the empty equalizer forces singleton section sets).",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-continuous",
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZR, label lemma-base-change-local, last sentence of proof of (1)"
+   }
+  },
+  {
+   "text": "For clause (2), steps 2 and 3 show that the restriction of $\\beta_K$ is an isomorphism on every $U_i$. Exact restriction [lem-weil-pbc-site-restriction-exact] commutes with cohomology: apply it to the kernel, image and quotient defining $H^r$ [def-weil-abstract-derived-category] to get $(H^r\\beta_K)|_{U_i}=H^r(\\beta_K|_{U_i})$. For each fixed integer $r$ the latter is an isomorphism. By [lem-weil-pbc-etale-cover-detects-iso] the abelian sheaf map $H^r\\beta_K$ is an isomorphism on $X$. Since this holds for every $r\\in\\mathbf Z$, [lem-weil-pbc-unbounded-derived-iso-cohomology] shows that $\\beta_K$ is an isomorphism in $D(X_{\\Et})$. No truncation or uniform cohomological bound is used.",
+   "uses": [
+    "lem-weil-pbc-site-restriction-exact",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-etale-cover-detects-iso",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZR, label lemma-base-change-local, proof of (2), using cohomology sheaves after Tag 0D6G"
+   }
+  },
+  {
+   "text": "For clause (3), put the abelian sheaf $F$ in degree zero. By definition $R^qv_*F=H^q(Rv_*F)$, and the degree-$q$ base-change map is $H^q(\\beta_F)$ (with the exact inverse-image identifications); this is the degreewise convention in [sbc-def-base-change-map] and [def-weil-pbc-direct-image]. Exact restriction commutes with kernels, images and their quotients as in step 5, so taking $H^q$ in the comparison of steps 2 and 3 identifies the restriction of the global degree-$q$ map with the local degree-$q$ map. The hypothesis gives an isomorphism on every $U_i$ in this one degree. Apply [lem-weil-pbc-etale-cover-detects-iso] to that abelian sheaf map to conclude. This does not assume the hypotheses of clause (2) or any comparison in other degrees. The argument applies to every integer $q$ without needing a separate vanishing assertion.",
+   "uses": [
+    "sbc-def-base-change-map",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-etale-cover-detects-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZR, label lemma-base-change-local, proof of (3)"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-direct-image",
-  "sbc-def-base-change-map"
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-etale-site-localization-open",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-slice-site-localization",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-weil-pbc-sets-etale-inverse-image-exact",
+  "lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "prop-weil-pbc-inverse-image-exact",
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "sbc-def-base-change-map",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-etale-cover-detects-iso",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "def-weil-pbc-direct-image"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-bc/sbc-lem-etale-locality.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EZR, label lemma-base-change-local; localization expanded using Sites 03CF/03EF and Cohomology on Sites 0D6G/08FI. The adjunction check and sheaf equalizer gluing are written out."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale localization of the base change morphism for sheaves and unbounded derived direct images",
+   "results": "8 hits: KaehlerDifferential.isBaseChange_of_formallyEtale, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, SheafOfModules.bijective_pushforwardSections, CategoryTheory.Functor.sheafPushforwardCocontinuous, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.RanIsSheafOfIsCocontinuous.fac, CategoryTheory.RanIsSheafOfIsCocontinuous.fac', AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-14",
+   "verdict": "no match: geometry of etale morphisms, sheafification/composition, or exact functors on complexes; no theorem covering all three clauses and unbounded etale direct images"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.IsIso",
+   "results": "12 hits: CategoryTheory.sheafification_reflective, CategoryTheory.isIso_sheafificationAdjunction_counit, CategoryTheory.instIsIsoFunctorOppositeHomFullSubcategoryIsSheafAppSheafCounitSheafificationAdjunction, CategoryTheory.GrothendieckTopology.W_sheafToPresheaf_map_iff_isIso, CategoryTheory.GrothendieckTopology.W_iff, CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction, CategoryTheory.instIsIsoFunctorOppositeSheafToPresheafToSheafCompComposeAndSheafify, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans",
+   "date": "2026-10-14",
+   "verdict": "no match: geometry of etale morphisms, sheafification/composition, or exact functors on complexes; no theorem covering all three clauses and unbounded etale direct images"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|localization",
+   "results": "22 hits: Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Affine.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean (AlgebraicGeometry/Sites)",
+   "date": "2026-10-14",
+   "verdict": "no match: geometry of etale morphisms, sheafification/composition, or exact functors on complexes; no theorem covering all three clauses and unbounded etale direct images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale covering detects isomorphism of base change maps for sheaves and derived direct image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image commutes with restriction to a slice site for unbounded complexes of abelian sheaves",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, DerivedCategory.homologyFunctorFactors, CategoryTheory.Functor.rightDerived_map_eq",
+   "date": "2026-10-14",
+   "verdict": "no match: geometry of etale morphisms, sheafification/composition, or exact functors on complexes; no theorem covering all three clauses and unbounded etale direct images"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -89,5 +228,20 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-def-bc"
+ "unit": "sk-def-bc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "sbc-lem-etale-locality",
+  "worker": "stage1",
+  "summary": "Audited all three clauses against Stacks 0EZR and the previous sandbox draft against every cited statement. Reused existing slice-localization and unbounded K-injective lemmas; expanded the etale restriction adjunction and the actual exchange-arrow calculation. Sets descend by explicit sheaf gluing; arbitrary derived complexes descend through all cohomology sheaves; the degree-q clause uses only its degree-q hypothesis. No new nodes or full Lean/Mathlib attachment.",
+  "blueprint": "The first blueprint proof paragraph is realized by steps 1-3; its cover argument by step 4; its final paragraph on derived and degree-q comparison by steps 2,3,5,6. The unit has no proof steps; this is not its key definition node."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-6cbeded73",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-6cbeded73 (reviewer sub-agent of L); spot-checked: Read the full item, six steps, cited statements and source passages. Canonical-map compatibility, set descent, unbounded K-injective localization, and single-degree detection check out. No new nodes or repairs. review.md records accepted tools and unchanged baseline dependency issues; no coefficient comparison or target completion is claimed."
+ }
 }
