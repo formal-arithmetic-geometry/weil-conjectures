@@ -189,7 +189,6 @@ private theorem exists_presheaf_cover_lift
     FreeAbelianGroup.map_of]
   exact pg.property
 
-set_option linter.unusedVariables false in
 /-- A positive Ext class from the sheafified free abelian presheaf is killed after a
 locally surjective map of small-valued presheaves.
 Source: Stacks Project, Derived Categories, Tag 06XU (Yoneda representatives), and
