@@ -27,9 +27,126 @@
   "def-weil-pbc-extension-by-zero",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $F=k_!J$ and write $F_{ab}$ for its underlying abelian sheaf. The additive group of the finite ring $\\Lambda$ has a positive exponent $N$: for each element choose a positive integer killing it and multiply these finitely many integers. Thus $N1_\\Lambda=0$ and $Nm=(N1_\\Lambda)m=0$ on every $\\Lambda$-module, including every section of $F$. In particular $F_{ab}$ is torsion. By [lem-weil-pbc-module-abelian-derived-direct-image-comparison], exact forgetting identifies the underlying abelian sheaf of $R^qp_*F$ with $R^qp_*F_{ab}$. It therefore suffices to show the latter is zero. We will apply proper base change to abelian sheaves, never assert that $J_{ab}$ is injective.",
+   "uses": [
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6J, lemma-modules-abelian-unbounded, (3); Tag 0F7B, case (b), torsion coefficients"
+   }
+  },
+  {
+   "text": "Form $V=B\\times_D C$ with projections $b:V\\to B$ and $s:V\\to C$ [def-pc-fibre-product]. The equation $pk=ir$ gives $t=(k,r):A\\to V$. Because $i$ is an open immersion, $b$ identifies $V$ with the open $p^{-1}(C)$ of $B$, and $k(A)\\subseteq p^{-1}(C)$; hence $t$ is the same open immersion as $k$, with this smaller target [def-weil-open-immersion]. By [lem-weil-pbc-proper-base-change], $s$ is proper and thus separated [def-weil-proper-morphism]. Since $st=r$ is proper, [lem-weil-pbc-proper-over-separated] implies that $t$ is proper. Apply [lem-weil-pbc-proper-immersion-closed] to $t$ (an open immersion is an immersion, with identity closed factor): it is a closed immersion as well. Write $W=V\\setminus t(A)$ with its open subscheme structure; then $V=t(A)\\amalg W$, with both pieces open and closed. No assertion that $A=V$ has been used.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-immersion-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W4 (lemma-base-change-proper) and 01W6 (lemma-image-proper-scheme-closed), part (2); Schemes Tag 01IQ (lemma-immersion-when-closed)"
+   }
+  },
+  {
+   "text": "Under the two-component equivalence of abelian sheaf categories [lem-weil-pbc-etale-sheaf-clopen-product], $t_!G$ corresponds to $(G,0)$: the unit $G\\to t^{-1}t_!G$ of [lem-weil-pbc-extension-by-zero-adjunction] is induced by the identity on sections of etale objects factoring through $A$, so its stalk maps are the isomorphisms of [lem-weil-pbc-extension-by-zero-stalks]. The map $0\\to (t_!G)|_W$ has zero stalks by the same node. Hence [lemma-weil-pbc-geometric-stalk-conservative] makes both maps isomorphisms. These are natural in $G$, giving the asserted identification of functors, not just of objects. The equivalence extends to constant-$\\Lambda$ module sheaves simply by retaining the $\\Lambda$-actions: an action on a pair is a pair of actions, and a map is $\\Lambda$-linear exactly when both components are. Therefore $t_!J$ is injective as a module sheaf. Indeed a monomorphism becomes $(M_A,M_W)\\hookrightarrow(N_A,N_W)$ componentwise. A map from its source to $(J,0)$ is $(u,0)$; injectivity of $J$ [def-sp-injective-resolutions] extends $u$ to $N_A\\to J$, and pairing that extension with the zero map on $N_W$ gives the required lift.",
+   "uses": [
+    "lem-weil-pbc-etale-sheaf-clopen-product",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S5 (proposition-describe-jshriek); finite clopen decomposition in Tag 0A5B (lemma-constant-smooth-statements), proof first paragraph; componentwise injective lifting written out"
+   }
+  },
+  {
+   "text": "The complex consisting of the injective module sheaf $t_!J$ in degree zero and zero elsewhere is a bounded-below complex of injectives. By [lem-weil-pbc-right-derived-plus-injective], applying the additive direct image $s_*$ to this complex computes $Rs_*(t_!J)$ [def-weil-pbc-direct-image]. It still has only degree zero, so $R^qs_*(t_!J)=0$ for $q>0$. The comparison [lem-weil-pbc-module-abelian-derived-direct-image-comparison] then gives $R^qs_*((t_!J)_{ab})=0$ as well.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TH (lemma-injective-acyclic), (1), and 05TI (lemma-enough-injectives-right-derived), (2); Sites Cohomology Tag 0D6J, (3)"
+   }
+  },
+  {
+   "text": "Apply [lemma-weil-pbc-torsion-assembly] to the Cartesian square defining $V$, the proper map $p$, and the torsion abelian sheaf $F_{ab}$. It gives $i^{-1}R^qp_*F_{ab}\\cong R^qs_*b^{-1}F_{ab}$. The base change of $k$ along $b$ has source $A\\times_B V\\cong A$, since $pk$ factors through the open $C$; its open immersion is precisely $t$. Extension-by-zero base change [sbc-prop-extension-by-zero-and-arbitrary-base-change] therefore gives $b^{-1}F\\cong t_!J$, and the same identity on underlying abelian sheaves. Step 4 proves $i^{-1}R^qp_*F_{ab}=0$ for $q>0$. For every geometric point of $D$ whose image is in $C$, its lift to the open $C$ consequently has zero stalk of this sheaf; equivalently its pullback to that point is zero [lem-kun-stalks-of-cohomology].",
+   "uses": [
+    "lemma-weil-pbc-torsion-assembly",
+    "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+    "lem-kun-stalks-of-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095T (theorem-proper-base-change), as stated degreewise in lemma-weil-pbc-torsion-assembly; Tag 03S6 (lemma-shriek-base-change); Tag 0DDF (lemma-proper-base-change-stalk)"
+   }
+  },
+  {
+   "text": "Let $\\bar d:\\operatorname{Spec}\\Omega\\to D$ be a geometric point with image outside $i(C)$, and put $B_{\\bar d}=B\\times_D\\operatorname{Spec}\\Omega$, with projection $a:B_{\\bar d}\\to B$ and proper map $p_{\\bar d}:B_{\\bar d}\\to\\operatorname{Spec}\\Omega$. The base change of $k$ along $a$ has source $A\\times_D\\operatorname{Spec}\\Omega=\\varnothing$: any point in it would, by $pk=ir$, give a lift of $\\bar d$ to $C$, which is impossible. By [sbc-prop-extension-by-zero-and-arbitrary-base-change], $a^{-1}F_{ab}$ is the extension of a sheaf on the empty scheme, hence zero (the empty cover forces every section of such an abelian sheaf to be zero). Proper base change [lemma-weil-pbc-torsion-assembly] now gives $\\bar d^{-1}R^qp_*F_{ab}\\cong R^qp_{\\bar d,*}(0)=0$; the last equality follows also directly by applying direct image to the zero injective complex [lem-weil-pbc-right-derived-plus-injective]. This is exactly vanishing of the geometric stalk by [lem-kun-stalks-of-cohomology].",
+   "uses": [
+    "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+    "lemma-weil-pbc-torsion-assembly",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-kun-stalks-of-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), case (b), geometric-fibre argument; Etale Cohomology Tags 03S6 and 0DDF"
+   }
+  },
+  {
+   "text": "Steps 5 and 6 cover every geometric point of $D$. Thus the map $0\\to R^qp_*F_{ab}$ is an isomorphism at every geometric stalk for each $q>0$, so it is an isomorphism by [lemma-weil-pbc-geometric-stalk-conservative]. Finally [lem-weil-pbc-module-abelian-derived-direct-image-comparison] identifies this zero sheaf with the underlying abelian sheaf of the module higher direct image $R^qp_*F$. A module whose underlying abelian sheaf is zero has only zero sections and is the zero module sheaf. Hence $R^qp_*(k_!J)=0$.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), conclusion of the injective acyclicity claim; Sites Cohomology Tag 0D6J, (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-proper-base-change",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-etale-sheaf-clopen-product",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-weil-pbc-direct-image",
+  "lemma-weil-pbc-torsion-assembly",
+  "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+  "lem-kun-stalks-of-cohomology",
+  "lem-weil-pbc-extension-by-zero-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, case (b), injective acyclicity claim. Open-immersion specialization: replace the sum over lifts by the clopen component over C and keep the source proof's proper-base-change argument outside C."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -79,15 +196,136 @@
    "results": "CategoryTheory.Functor.instIsIsoPlusAppPlusRightDerivedFunctorPlusUnitObjInjectiveObjectMapCochainComplexPlusι, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles. Generic derived-functor vanishing requires the input object itself to be injective; extension by zero need not preserve injectives, so these hits do not imply this statement.",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of an injective etale module sheaf is acyclic for a proper map when its support maps properly into an open of the base",
+   "results": "; CochainComplex.isKInjective_of_injective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf, CochainComplex.cm5b.instInjectiveXIntI, PresheafOfModules.instIsLocallyInjectiveToSheafify, CochainComplex.isKInjective_of_injective_aux, Algebra.etaleLocus_eq_compl_support, CochainComplex.cm5b.instIsStrictlyGEI",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern generic derived functors or sheaf morphisms, not proper/open etale acyclicity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\", \"rightDerived\"",
+   "results": "; No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern generic derived functors or sheaf morphisms, not proper/open etale acyclicity"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|lowerShriek",
+   "results": "; No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern generic derived functors or sheaf morphisms, not proper/open etale acyclicity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open extension of injective etale sheaves has vanishing higher direct images in a proper open commutative square",
+   "results": "service unavailable: Internal Server Error; No hits",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a commutative square with proper vertical morphisms and open horizontal immersions, extension by zero sends injective sheaves to objects acyclic for the right vertical pushforward",
+   "results": "; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CochainComplex.isKInjective_of_injective, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective, CategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective, CategoryTheory.Presheaf.isLocallyInjective_iff_of_fac, CategoryTheory.Presheaf.comp_isLocallyInjective_iff",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern generic derived functors or sheaf morphisms, not proper/open etale acyclicity"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero_rightDerived_obj_injective|rightDerived.*injective",
+   "results": "; Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern generic derived functors or sheaf morphisms, not proper/open etale acyclicity"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-proper-open-interchange-coherence",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-cbc-open-extended-injective-proper-acyclic",
+  "worker": "stage1",
+  "summary": "Proved the open-immersion specialization of 0F7B using proper base change and the clopen component over C, with an explicit componentwise injective-lifting argument. Kept the non-Cartesian statement unchanged and distinguished module injectivity from abelian injectivity. Reused existing nodes throughout; no new nodes.",
+  "blueprint": "thm-cbc-finite-torsion refinement paragraph (current proof step 4): resolution verification of the proper/open comparison gamma used by lem-cbc-proper-open-interchange-coherence. This item supplies precisely the required p_*-acyclicity of k_!J.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "why": "Generic comparison forgetting constant coefficients; needed to apply torsion abelian proper base change without assuming module injectives are abelian injectives."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic foundational tool whose stated conclusion is used in the explicit argument; no step of the compact-support unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-proper-over-separated",
+    "why": "Generic foundational tool whose stated conclusion is used in the explicit argument; no step of the compact-support unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-proper-immersion-closed",
+    "why": "Generic foundational tool whose stated conclusion is used in the explicit argument; no step of the compact-support unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-sheaf-clopen-product",
+    "why": "Generic decomposition of sheaves on two clopen components; only componentwise lifting is needed, not this node's proof."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Generic foundational tool whose stated conclusion is used in the explicit argument; no step of the compact-support unit is replaced."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic foundational tool whose stated conclusion is used in the explicit argument; no step of the compact-support unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Generic foundational tool whose stated conclusion is used in the explicit argument; no step of the compact-support unit is replaced."
+   },
+   {
+    "node": "lemma-weil-pbc-torsion-assembly",
+    "why": "Generic degreewise proper base change for torsion abelian sheaves, used on actual Cartesian base-change squares; the compact-support unit provides no replacement for its proper-factor input."
+   },
+   {
+    "node": "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+    "why": "Generic foundational tool whose stated conclusion is used in the explicit argument; no step of the compact-support unit is replaced."
+   },
+   {
+    "node": "lem-kun-stalks-of-cohomology",
+    "why": "Generic foundational tool whose stated conclusion is used in the explicit argument; no step of the compact-support unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic extension-by-zero adjunction supplies the natural unit identifying the A component in the clopen sheaf decomposition; the compact-support unit has no replacement for this sheaf-level tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-etale-sheaf-clopen-product",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lemma-weil-pbc-torsion-assembly",
+  "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+  "lem-kun-stalks-of-cohomology",
+  "lem-weil-pbc-extension-by-zero-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-b4851463c",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-b4851463c (reviewer sub-agent of L); spot-checked: Read all seven steps and cited statements; checked 0F7B, coefficient comparison, proper geometry, clopen injectivity, and base-change sources. Non-Cartesian and empty/zero cases pass. Added the missing adjunction tool declaration (C8) in fixes; statement unchanged. review.md records accepted tools and an inherited cycle outside this delivery.; 1 file(s) fixed by the reviewer"
+ }
 }
