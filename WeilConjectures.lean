@@ -754,6 +754,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.CohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.ConnectedConstant
 public import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
 public import WeilConjectures.AlgebraicGeometry.Sites.DerivedStalk
@@ -763,6 +764,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.DivisorSequence
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleEssentiallySmall
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleIsoTorsor
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleLimitDescent
 public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicard
 public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicardMul
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleRigidity
@@ -784,6 +786,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTransport
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleVanishingLocus
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleZariskiComparison
 public import WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.FieldExtensionInjective
 public import WeilConjectures.AlgebraicGeometry.Sites.FieldTrace
@@ -822,6 +825,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimens
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionLimit
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.TypePointFunctions
+public import WeilConjectures.AlgebraicGeometry.Sites.UnitComparison
 public import WeilConjectures.AlgebraicGeometry.Sites.UnitsTorsor
 public import WeilConjectures.AlgebraicGeometry.Sites.UpperStarSections
 public import WeilConjectures.AlgebraicGeometry.Sites.ZariskiSite
