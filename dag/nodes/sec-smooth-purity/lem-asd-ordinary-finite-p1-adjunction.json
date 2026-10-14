@@ -1,0 +1,100 @@
+{
+ "id": "lem-asd-ordinary-finite-p1-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "Proof second and third paragraphs: the affine-space adjunction and its affine-line counits; supply the ordinary-etale arbitrary-finite-ring projective-line input",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ordinary etale projective-line adjunction with arbitrary finite invertible-exponent coefficients",
+ "statement": "Let $N\\geq1$, let $A$ be a finite commutative ring with $NA=0$, and let $S$ be a Noetherian scheme [def-pc-scheme] (one admitting a finite affine cover by spectra of rings whose ascending chains of ideals stabilize) on which $N$ is invertible. Put $P=\\mathbf P^1_S=\\mathbf P(\\{0,1\\};S)$ with projection $q:P\\to S$ [def-nagata-projective-space-base-change]. Work on small ordinary etale sites and their entire derived categories of constant-ring module sheaves [def-weil-pbc-derived-categories], with inverse image [def-weil-pbc-inverse-image] and derived tensor [def-kun-derived-tensor]. For each scheme $T$ over $S$ define the ordinary etale sheaf $A_T(1)=\\mu_{N,T}\\otimes_{(\\mathbf Z/N)_T}A_T$, with $\\mu_N$ and its action as in [lem-asd-finite-etale-twist-line]. Write $\\mathbf G_{m,P}$ for the sheaf $U\\mapsto\\Gamma(U,\\mathcal O_U)^\\times$ and $\\mathcal O_P(1)$ for the line bundle whose local generators $g_0,g_1$ on $D(x_0),D(x_1)$ satisfy $g_0=(x_1/x_0)^{-1}g_1$. Let $h:A_S\\to Rq_*A_P(1)[2]$ be the scalar-extended Kummer first Chern class of $\\mathcal O_P(1)$ (apply the connecting homomorphism of the Kummer sequence [lem-amb-kummer-any-base] to the line-bundle class of $\\mathcal O_P(1)$, then extend scalars from $\\mathbf Z/N$ to $A$ and use inverse-image/direct-image adjunction). The map whose components are the shifted, twisted unit and $h$ is an isomorphism\n$$b_q:A_S(1)[2]\\oplus A_S\\xrightarrow{\\sim}Rq_*A_P(1)[2].$$\nDefine $t_q=\\operatorname{pr}_2 b_q^{-1}$, so $t_qh=1$. There is an adjunction on the entire ordinary etale derived categories\n$$Rq_*\\dashv G_q,\\qquad G_qK=q^{-1}K\\otimes_A^L A_P(1)[2],$$\nwhose actual counit is\n$$\\epsilon_{q,K}:Rq_*G_qK\\xrightarrow{\\pi^{-1}_{q,K,A_P(1)[2]}}K\\otimes_A^LRq_*A_P(1)[2]\\xrightarrow{1\\otimes t_q}K,$$\nwhere $\\pi$ is the canonical proper tensor projection map of [lem-amb-proper-coproducts-projection] and the last target uses the tensor unit constraint. The decomposition, trace and this adjunction normalization commute with base change between Noetherian $S$-schemes under the canonical ordinary-etale proper exchange [def-kun-unbounded-exchange]. No pro-etale or inverse-limit twist occurs in this assertion.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
+  "place": "Agent-written ordinary-etale coefficient interface for the diagonal-kernel proof; decomposition and trace in thm-amb-p1-decomposition.md and def-amb-p1-trace.md; Kummer sequence: Stacks Tag 03PL, etale-cohomology.tex, lemma-kummer-sequence; unbounded proper exchange: Tag 0F0C, lemma-proper-base-change-mod-n, extended to torsion rings"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-projective-space-base-change",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "def-kun-derived-tensor",
+  "lem-asd-finite-etale-twist-line",
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-kummer-any-base",
+  "def-kun-unbounded-exchange"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On the ordinary small etale site with any finite commutative coefficient ring killed by an invertible integer, projective line pushforward is left adjoint to inverse image tensor the roots of unity twist shifted by two, with counit given by the Kummer normalized trace",
+   "results": "; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.pseudofunctor, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.restrictAdjunction; read signatures: scheme structure sheaves, presheaf adjunctions, recurrence, or projective resolutions, not reversed etale projective-line duality",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Poincare duality for the projective line over a Noetherian scheme with arbitrary torsion coefficient ring: trace normalized by the degree one divisor gives an adjunction on unbounded etale derived categories",
+   "results": "; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, Rep.isZero_Tor_succ_of_projective, CochainComplex.isKProjective_of_op, CategoryTheory.ProjectiveResolution.isoExt, CochainComplex.IsKProjective.leftOrthogonal, CochainComplex.isKProjective_iff_leftOrthogonal; read signatures: scheme structure sheaves, presheaf adjunctions, recurrence, or projective resolutions, not reversed etale projective-line duality",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Adjunction\"",
+   "results": "; CategoryTheory.Presheaf.uliftYonedaAdjunction, CategoryTheory.Presheaf.uliftYonedaAdjunction_unit_app_app, CategoryTheory.Presheaf.uliftYonedaAdjunction_homEquiv_app, PresheafOfModules.freeAdjunctionUnit, PresheafOfModules.freeAdjunction, PresheafOfModules.freeAdjunctionUnit_app, PresheafOfModules.freeAdjunction_homEquiv, PresheafOfModules.freeAdjunction_unit_app; read signatures: scheme structure sheaves, presheaf adjunctions, recurrence, or projective resolutions, not reversed etale projective-line duality",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "poincare|projective.*(trace|adjunction)|kummer.*(trace|adjunction)",
+   "results": "; Mathlib/Dynamics/Ergodic/Conservative.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/CategoryTheory/Preadditive/Projective/Preserves.lean, Mathlib/CategoryTheory/Preadditive/Projective/Preserves.lean, Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean, Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean; read signatures: scheme structure sheaves, presheaf adjunctions, recurrence, or projective resolutions, not reversed etale projective-line duality",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective line etale Poincare duality over a finite ring with invertible exponent and its canonical trace counit on unbounded complexes",
+   "results": "service unavailable: Internal Server Error; ; read signatures: scheme structure sheaves, presheaf adjunctions, recurrence, or projective resolutions, not reversed etale projective-line duality",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image along projective space dimension one has a trace adjunction with pullback shifted by two on etale sheaves",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+   "date": "2026-10-14",
+   "verdict": "no match: algebraic roots-of-unity, etale ring maps or structure-sheaf adjunctions do not state the ordinary etale twist/trace assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"DerivedCategory\"",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity|cyclic.*sheaf|projectiveLine.*adjunction",
+   "results": "No hits in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "thm-asd-smooth-tensor",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc"
+}
