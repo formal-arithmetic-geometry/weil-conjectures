@@ -2,7 +2,7 @@
  "id": "new-abelian-replacement-section-homotopies-core-second",
  "kind": "statement",
  "title": "Second section homotopy from the counit homotopy",
- "statement": "theorem second_section_homotopy_of_counit {X Y : Scheme.{u}} (f : X ⟶ Y)\n    {F : X.Modules} (I : InjectiveResolution F)\n    (J : InjectiveResolution ((pushforward f).obj F)) (K : CochainComplex Y.Modules ℕ)\n    (l : ((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ K)\n    (hl : QuasiIso l) (β : J.cocomplex ⟶ K)\n    (hβ : J.ι.f 0 ≫ β.f 0 = (pushforward f).map (I.ι.f 0) ≫ l.f 0)\n    (a : ((moduleSections X).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ≅\n      ((moduleSections Y).mapHomologicalComplex (.up ℕ)).obj\n        (((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex))\n    (ha : ∀ n : ℕ, a.inv.f n = (presheaf (I.cocomplex.X n)).map\n      (eqToHom (by simp) : (⊤ : X.Opens) ⟶ f ⁻¹ᵁ (⊤ : Y.Opens)).op)\n    (q : ((moduleSections Y).mapHomologicalComplex (.up ℕ)).obj K ⟶\n      ((abelianSections X).mapHomologicalComplex (.up ℕ)).obj\n        (standardAbelianResolution X F).cocomplex)\n    (hq : Nonempty (Homotopy\n      (((moduleSections Y).mapHomologicalComplex (.up ℕ)).map β ≫ q)\n      (counitSectionMap f F J))) :\n    Nonempty (Homotopy\n      ((a.hom ≫ ((moduleSections Y).mapHomologicalComplex (.up ℕ)).map l) ≫ q)\n      (((abelianSections X).mapHomologicalComplex (.up ℕ)).map\n        (forgottenResolutionMap X I)))",
+ "statement": "theorem second_section_homotopy_of_counit {X Y : Scheme.{u}} (f : X ⟶ Y)\n    {F : X.Modules} (I : InjectiveResolution F)\n    (J : InjectiveResolution ((pushforward f).obj F)) (K : CochainComplex Y.Modules ℕ)\n    (l : ((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ K)\n    (hl : QuasiIso l) (β : J.cocomplex ⟶ K)\n    (hβ : J.ι.f 0 ≫ β.f 0 = (pushforward f).map (I.ι.f 0) ≫ l.f 0) :\n    ∃ q : ((moduleSections Y).mapHomologicalComplex (.up ℕ)).obj K ⟶\n        ((abelianSections X).mapHomologicalComplex (.up ℕ)).obj\n          (standardAbelianResolution X F).cocomplex,\n      Nonempty (Homotopy\n        (((moduleSections Y).mapHomologicalComplex (.up ℕ)).map β ≫ q)\n        (counitSectionMap f F J)) ∧\n      ∀ (a : ((moduleSections X).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ≅\n          ((moduleSections Y).mapHomologicalComplex (.up ℕ)).obj\n            (((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex))\n        (_ha : ∀ n : ℕ, a.inv.f n = (presheaf (I.cocomplex.X n)).map\n          (eqToHom (by simp) : (⊤ : X.Opens) ⟶ f ⁻¹ᵁ (⊤ : Y.Opens)).op),\n      Nonempty (Homotopy\n        ((a.hom ≫ ((moduleSections Y).mapHomologicalComplex (.up ℕ)).map l) ≫ q)\n        (((abelianSections X).mapHomologicalComplex (.up ℕ)).map\n          (forgottenResolutionMap X I)))",
  "stmt_deps": [
   "new-abelian-replacement-section-homotopies-core"
  ],
@@ -12,22 +12,49 @@
  },
  "proof": [
   {
-   "text": "The construction is the corresponding mapping-cylinder lift and uniqueness-up-to-homotopy argument from the core proof.",
+   "text": "Let T_X and T_Y forget module structures and let R be the standard abelian injective resolution. Abelian direct image G preserves injective objects because it is right adjoint to the exact inverse-image functor. Thus G(R) is a nonnegative complex of injectives. Forgetting preserves the quasi-isomorphism l. Extend by zero to integer degrees; the target is K-injective. The K-injective comparison principle gives a map k:T_Y(K)→G(R) and a homotopy T_Y(l)k∼G(forgottenResolutionMap X I). Restrict the representative and homotopy back to natural degrees. This uses the already proved precomp_bijective_of_quasiIso, not a mapping cylinder.",
    "uses": [
-    "lem-weil-pbc-complex-mapping-cylinder-split-factorization",
-    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+    "def-pc-flat-cohomology-comparison",
+    "new-abelian-counit-resolution-calculation",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-sp-kinjective-comparison-principle"
    ],
    "elementary": false
+  },
+  {
+   "text": "Let d be the direct image of the forgotten augmentation of I, with the canonical single-complex comparison. The augmentation condition hβ, evaluated in degree zero, gives forgottenAugmentation(Y,J)T_Y(β)=dT_Y(l); all other source degrees are zero. The descOfQuasiIso augmentation equations for forgottenResolutionMap and counitResolutionLift, naturality of the adjunction unit, and the identity unit followed by G(coeff(f,id))=id give forgottenAugmentation(Y,J)counitResolutionAdjoint=dG(forgottenResolutionMap). Precompose the lifting homotopy with d and use these two equalities.",
+   "uses": [
+    "new-abelian-counit-resolution-calculation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The forgotten augmentation of J is a quasi-isomorphism, and G(R) has injective terms. Apply injectivity of precomposition on homotopy classes (after extension by zero and then restriction) to deduce T_Y(β)k∼counitResolutionAdjoint. Set q to be abelian sections of k followed by abelianPushforwardSectionsIso. Apply sections to the homotopy and postcompose with this isomorphism. Functoriality and the definition of counitSectionMap give Γ(β)q∼counitSectionMap. No comparison a is needed for this first homotopy.",
+   "uses": [
+    "new-abelian-counit-resolution-calculation",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-sp-kinjective-comparison-principle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the very same k and its lifting homotopy, not an arbitrary witness of the first section theorem. Apply abelian sections to T_Y(l)k∼G(forgottenResolutionMap) and postcompose with the direct-image sections comparison. Its naturality and ha identify the two ends with Γ(l)q and a.inv Γ(forgottenResolutionMap). Precompose with a.hom and use a.hom a.inv=id. Return q together with this homotopy and the counit homotopy already obtained from the same k. Zero coefficients, zero complexes and empty schemes require no exception. The choices k and q precede a; universally quantify a and ha after choosing q, proving uniformity for every compatible section comparison.",
+   "uses": [
+    "new-abelian-counit-resolution-calculation"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-complex-mapping-cylinder-split-factorization",
-  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+  "def-pc-flat-cohomology-comparison",
+  "new-abelian-counit-resolution-calculation",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-sp-kinjective-comparison-principle"
  ],
  "proof_origin": {
-  "by": "C2 worker",
-  "document": "https://stacks.math.columbia.edu/tag/013S",
-  "place": "013S"
+  "by": "F1 repair worker",
+  "document": "Stacks Project Tags 013P and 013S; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+  "place": "Completed common sheaf-level lift and lifting homotopy proof; augmentation compatibility and homotopy reflection; degreewise naturality of the direct-image sections comparison and cancellation of a.hom followed by a.inv; q constructed independently of a, followed by universal introduction of a and ha"
  },
  "mathlib_searches": [
   {
@@ -76,7 +103,7 @@
   "module": "Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCoreParts",
   "file": "lean/Sheaf/AlgebraicGeometry/AbelianReplacementSectionHomotopiesCoreParts.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.second_section_homotopy_of_counit",
-  "statement": "theorem second_section_homotopy_of_counit {X Y : Scheme.{u}} (f : X ⟶ Y)\n    {F : X.Modules} (I : InjectiveResolution F)\n    (J : InjectiveResolution ((pushforward f).obj F)) (K : CochainComplex Y.Modules ℕ)\n    (l : ((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ K)\n    (hl : QuasiIso l) (β : J.cocomplex ⟶ K)\n    (hβ : J.ι.f 0 ≫ β.f 0 = (pushforward f).map (I.ι.f 0) ≫ l.f 0)\n    (a : ((moduleSections X).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ≅\n      ((moduleSections Y).mapHomologicalComplex (.up ℕ)).obj\n        (((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex))\n    (ha : ∀ n : ℕ, a.inv.f n = (presheaf (I.cocomplex.X n)).map\n      (eqToHom (by simp) : (⊤ : X.Opens) ⟶ f ⁻¹ᵁ (⊤ : Y.Opens)).op)\n    (q : ((moduleSections Y).mapHomologicalComplex (.up ℕ)).obj K ⟶\n      ((abelianSections X).mapHomologicalComplex (.up ℕ)).obj\n        (standardAbelianResolution X F).cocomplex)\n    (hq : Nonempty (Homotopy\n      (((moduleSections Y).mapHomologicalComplex (.up ℕ)).map β ≫ q)\n      (counitSectionMap f F J))) :\n    Nonempty (Homotopy\n      ((a.hom ≫ ((moduleSections Y).mapHomologicalComplex (.up ℕ)).map l) ≫ q)\n      (((abelianSections X).mapHomologicalComplex (.up ℕ)).map\n        (forgottenResolutionMap X I)))",
+  "statement": "theorem second_section_homotopy_of_counit {X Y : Scheme.{u}} (f : X ⟶ Y)\n    {F : X.Modules} (I : InjectiveResolution F)\n    (J : InjectiveResolution ((pushforward f).obj F)) (K : CochainComplex Y.Modules ℕ)\n    (l : ((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ K)\n    (hl : QuasiIso l) (β : J.cocomplex ⟶ K)\n    (hβ : J.ι.f 0 ≫ β.f 0 = (pushforward f).map (I.ι.f 0) ≫ l.f 0) :\n    ∃ q : ((moduleSections Y).mapHomologicalComplex (.up ℕ)).obj K ⟶\n        ((abelianSections X).mapHomologicalComplex (.up ℕ)).obj\n          (standardAbelianResolution X F).cocomplex,\n      Nonempty (Homotopy\n        (((moduleSections Y).mapHomologicalComplex (.up ℕ)).map β ≫ q)\n        (counitSectionMap f F J)) ∧\n      ∀ (a : ((moduleSections X).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ≅\n          ((moduleSections Y).mapHomologicalComplex (.up ℕ)).obj\n            (((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex))\n        (_ha : ∀ n : ℕ, a.inv.f n = (presheaf (I.cocomplex.X n)).map\n          (eqToHom (by simp) : (⊤ : X.Opens) ⟶ f ⁻¹ᵁ (⊤ : Y.Opens)).op),\n      Nonempty (Homotopy\n        ((a.hom ≫ ((moduleSections Y).mapHomologicalComplex (.up ℕ)).map l) ≫ q)\n        (((abelianSections X).mapHomologicalComplex (.up ℕ)).map\n          (forgottenResolutionMap X I)))",
   "branch": "sheaf-dag",
   "by": "C2",
   "date": "2026-10-14"
@@ -94,11 +121,36 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C2",
+  "reviewer": "X-b5f7f",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261014T044554-L-1451315",
+  "landing": "20261014T071232-L-3199125",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered signatures and proofs with all three nodes and the change record; Parts and its direct importer Core compile cleanly, original Core fails as reported, adaptation is minimal, and all three public proofs use only permitted axioms."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "F1 stage 2",
+  "old_statement": "theorem second_section_homotopy_of_counit {X Y : Scheme.{u}} (f : X ⟶ Y)\n    {F : X.Modules} (I : InjectiveResolution F)\n    (J : InjectiveResolution ((pushforward f).obj F)) (K : CochainComplex Y.Modules ℕ)\n    (l : ((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ K)\n    (hl : QuasiIso l) (β : J.cocomplex ⟶ K)\n    (hβ : J.ι.f 0 ≫ β.f 0 = (pushforward f).map (I.ι.f 0) ≫ l.f 0)\n    (a : ((moduleSections X).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ≅\n      ((moduleSections Y).mapHomologicalComplex (.up ℕ)).obj\n        (((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex))\n    (ha : ∀ n : ℕ, a.inv.f n = (presheaf (I.cocomplex.X n)).map\n      (eqToHom (by simp) : (⊤ : X.Opens) ⟶ f ⁻¹ᵁ (⊤ : Y.Opens)).op)\n    (q : ((moduleSections Y).mapHomologicalComplex (.up ℕ)).obj K ⟶\n      ((abelianSections X).mapHomologicalComplex (.up ℕ)).obj\n        (standardAbelianResolution X F).cocomplex)\n    (hq : Nonempty (Homotopy\n      (((moduleSections Y).mapHomologicalComplex (.up ℕ)).map β ≫ q)\n      (counitSectionMap f F J))) :\n    Nonempty (Homotopy\n      ((a.hom ≫ ((moduleSections Y).mapHomologicalComplex (.up ℕ)).map l) ≫ q)\n      (((abelianSections X).mapHomologicalComplex (.up ℕ)).map\n        (forgottenResolutionMap X I)))",
+  "what": "The arbitrary-q implication is false: for f:P¹_k→Spec(k), F=O(-2), J=0, K=f_*I, l=id, β=0, q=0 all hypotheses hold, but its second homotopy would kill the nonzero H¹. Replace it by existence of one q with both homotopies constructed from the same sheaf-level lift. No target statement changes. To repair the duplicate of the core theorem, generalize in place: choose q before a and prove the second homotopy for every compatible a. The core theorem specializes this uniform result, keeping its signature unchanged.",
+  "source": {
+   "document": "https://stacks.math.columbia.edu/tag/013P",
+   "place": "013P(1) and 013S: lifting and homotopy reflection into the injective complex f_*R"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "The construction is the corresponding mapping-cylinder lift and uniqueness-up-to-homotopy argument from the core proof.",
+    "uses": [
+     "lem-weil-pbc-complex-mapping-cylinder-split-factorization",
+     "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-complex-mapping-cylinder-split-factorization",
+   "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+  ]
  }
 }

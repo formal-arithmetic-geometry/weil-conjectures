@@ -68,7 +68,6 @@ theorem abelian_replacement_section_homotopies_core {X Y : Scheme.{u}} (f : X �
         ((a.hom ≫ ((moduleSections Y).mapHomologicalComplex (.up ℕ)).map l) ≫ q)
         (((abelianSections X).mapHomologicalComplex (.up ℕ)).map
           (forgottenResolutionMap X I))) := by
-  obtain ⟨q, hq⟩ := exists_section_map_with_counit_homotopy f I J K l hl β hβ a ha
-  exact ⟨q, hq,
-    second_section_homotopy_of_counit f I J K l hl β hβ a ha q hq⟩
+  obtain ⟨q, hq, hr⟩ := second_section_homotopy_of_counit f I J K l hl β hβ
+  exact ⟨q, hq, hr a ha⟩
 end AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution
