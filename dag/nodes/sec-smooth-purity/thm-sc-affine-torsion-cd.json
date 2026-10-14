@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "thm-sc-affine-torsion-cd",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The affine torsion cohomological dimension bound",
- "statement": "Let $K$ be a field with $\\operatorname{cd}_{\\rm tor}(K)\\leq c$.\nFor any affine finite-type\n$K$-scheme $X$, one has\n\n$$\n\\operatorname{cd}_{\\rm tor}(X)\\leq\\dim X+c,\n$$\n\nwith both bounds understood as in [def-sc-etale-torsion-cd].",
+ "statement": "Let $K$ be a field and $c\\ge0$ an integer with $\\operatorname{cd}_{\\rm tor}(K)\\le c$. For any nonempty affine finite-type $K$-scheme $X$,\n$$\\operatorname{cd}_{\\rm tor}(X)\\le\\dim X+c,$$\nwith bounds understood as in [def-sc-etale-torsion-cd] and Krull dimension as in [def-kun-dimension]. If $X$ is empty, $H^q(X,F)=0$ for every torsion abelian etale sheaf $F$ and every $q\\ge0$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
   "place": "node thm-sc-affine-torsion-cd, order 1551",
@@ -20,70 +20,265 @@
  },
  "stmt_deps": [
   "def-sc-etale-torsion-cd",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-kun-dimension"
  ],
  "proof": [
   {
-   "text": "We induct on $d=\\dim X$, simultaneously over all ground fields.\nDimension zero follows from exact finite direct image\n([lemma-weil-pbc-finite-direct-image-exact]) for the finite\nstructure map. Dimension one over an algebraically closed field\nis [lem-sc-arbitrary-curve-cd], and\n[lem-sc-cd-ground-field] gives it over all fields.\nSuppose $d>1$ and that the result is established in smaller\ndimensions over every field. It suffices to prove the result\nover algebraically closed $K$, then apply\n[lem-sc-cd-ground-field] again. We now assume $K$ algebraically\nclosed. Noether normalization gives a finite map\n$X\\to\\mathbf A_K^d$. We use the elementary algebra theorem\n[Stacks Project,\nTag 00OY](https://stacks.math.columbia.edu/tag/00OY). Exact finite direct image reduces to a sheaf $M$\non $\\mathbf A^d$. We first take $M$ killed by an integer $n$.",
+   "text": "Throughout, torsion means that every local section is locally killed by some positive integer; no single integer need annihilate the sheaf. The cohomology is ordinary derived-section cohomology on the small etale site, and a field bound is the corresponding bound on its affine spectrum. We prove, by strong induction on the nonnegative integer $d$, the asserted bound for every nonempty affine finite-type scheme of dimension at most $d$, simultaneously over all fields and all available field bounds $c$. The empty scheme has zero section functor and hence zero cohomology. Finite dimension follows from Noether normalization and its dimension assertion. Algebraic extension of the ground field preserves the dimension of each affine coordinate ring. Thus after establishing the bound $d$ over algebraically closed fields in dimension $d$, the ground-field comparison gives $d+c$ over every field; this descent is made at each induction stage, before advancing to $d+1$. An algebraically closed field is separably closed and has torsion bound zero.",
+   "uses": [
+    "def-sc-etale-torsion-cd",
+    "lem-zl-noether-normalization-field",
+    "lem-zl-noether-normalization-dimension",
+    "lem-weil-pbc-dimension-preserved-field-extension",
+    "lem-sc-cd-ground-field",
+    "lem-sf-separably-closed-torsion-cd"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+    "place": "Proof, opening induction and descent"
+   }
+  },
+  {
+   "text": "We will repeatedly use the following consequence for a finite morphism $u:T\\to S$. Apply $u_*$ to an injective resolution of an abelian sheaf $A$. Exactness makes this a resolution of $u_*A$, and preservation of injectives makes it an injective resolution. Since $\\Gamma(S,u_*I)=\\Gamma(T,I)$ termwise, $H^r(T,A)=H^r(S,u_*A)$ for every $r$. The finite-stalk product formula shows that $u_*A$ is torsion when $A$ is torsion, and is killed by $n$ when $A$ is killed by $n$: a finite tuple of torsion elements has a common annihilator.",
    "uses": [
     "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-direct-image-preserves-injectives",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+    "place": "Proof, exact finite direct image reductions"
+   }
+  },
+  {
+   "text": "For $d=0$, Noether normalization makes the structure morphism to $\\operatorname{Spec}K$ finite, so the preceding finite comparison proves the bound $c$. For $d=1$ over an algebraically closed field the arbitrary-curve bound gives bound one, since the scheme is affine and therefore separated; the descent in step 1 proves the bound over all fields. Now fix $d>1$ and suppose all smaller dimensions have been proved over every field. If $\\dim X<d$, the induction hypothesis already gives the required bound; hence assume $\\dim X=d$. Work first over algebraically closed $K$. Noether normalization supplies a finite morphism $X\\to\\mathbf A_K^d$. The finite comparison reduces the problem to an arbitrary torsion sheaf $M$ on $\\mathbf A_K^d$. Initially suppose $nM=0$ for one positive integer $n$.",
+   "uses": [
+    "lem-zl-noether-normalization-field",
+    "lem-zl-noether-normalization-dimension",
     "lem-sc-arbitrary-curve-cd",
     "lem-sc-cd-ground-field"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+    "place": "Proof, first paragraph"
+   }
   },
   {
-   "text": "*Local calculation in dimension $d$.*\nLet $Y$ be smooth integral of dimension $d$ over $K$, and\nlet $j:Y\\setminus D\\to Y$ be the complement of an effective\nCartier divisor. At $y\\in D$ put\n$a=\\operatorname{trdeg}_K\\kappa(y)$ and\n$R=\\mathcal O^{\\rm sh}_{Y,y}$. Choose lifts of a separating\ntranscendence basis of $\\kappa(y)/K$.\nEvery nonzero polynomial in these lifts is a unit in $R$,\nso they embed $K(t_1,\\ldots,t_a)$ in $R$.\nHensel lifting, with the prescribed residues in the separably\nclosed residue field of $R$, extends this to an embedding of\nits separable closure $F$ in $R$. Indeed each finite\nseparable extension has a primitive element with simple minimal\npolynomial; its chosen residual root lifts uniquely, and these\nunique lifts are compatible on finite subextensions.\n\nThe regular local ring $R$ is a domain, and its fraction\nfield is algebraic over $K(Y)$. Hence\n$\\operatorname{trdeg}_F\\operatorname{Frac}(R)=d-a$.\nIf $f\\in\\mathfrak m_R$ is a local equation of $D$, then\n$f\\ne0$. A nonzero polynomial in $f$ over $F$ is a power\nof $f$ times a unit: factor out its lowest nonzero power and\nreduce the remaining expression modulo $\\mathfrak m_R$.\nThus $F(x)$ embeds in $R[1/f]$ by $x\\mapsto f$.\nThis ring is the filtered union of its finitely generated\n$F(x)$-subalgebras, which are domains of dimension at most\n$d-a-1<d$. The lower-dimensional induction hypothesis,\n[lem-sc-one-variable-field-cd], and\n[lem-sc-cd-affine-limit] give\n$\\operatorname{cd}_{\\rm tor}(R[1/f])\\leq d-a$.\nThe stalk formula\n[prop-weil-pbc-strict-henselization-stalk-formula]\ntherefore gives $(R^qj_*M)_{\\bar y}=0$ for $q>d-a$.\nThis calculation uses separating bases only over the\nalgebraically closed ground field.",
+   "text": "Let $Y$ be smooth integral and finite type of dimension $d$ over $K$, let $D$ be an effective Cartier divisor (its ideal is locally generated by a nonzerodivisor, [def-nagata-effective-cartier-ideal]), and write $j:Y\\setminus D\\to Y$. At $y\\in D$ put $a=\\operatorname{trdeg}_K\\kappa(y)$, $R=\\mathcal O^{\\rm sh}_{Y,\\bar y}$, and choose the field $F\\subset R$ supplied by the smooth strict-local field-model lemma. A local equation $h$ of $D$ is nonzero in the domain $R$ and belongs to its maximal ideal. For $P(T)\\ne0$ in $F[T]$, write $P(T)=T^m(b+TQ(T))$ with $b\\in F^\\times$. Then $b+hQ(h)$ has nonzero residue, hence is a unit of $R$. Thus $P(h)$ is invertible in $R[1/h]$, and evaluation embeds $F(T)$ in $R[1/h]$. In particular $h$ is transcendental over $F$. If $z_1,\\ldots,z_s$ are independent over $F(h)$, a purported nonzero relation $Q(h,z_1,\\ldots,z_s)=0$ with $Q\\in F[T,Z_1,\\ldots,Z_s]$ can be written $\\sum_{\\alpha}Q_{\\alpha}(h)z^{\\alpha}=0$. At least one $Q_{\\alpha}$ is a nonzero polynomial, so transcendence of $h$ makes its coefficient $Q_{\\alpha}(h)$ nonzero. This is a nonzero polynomial relation over $F(h)$, a contradiction. Thus $h,z_1,\\ldots,z_s$ are independent over $F$. Consequently $s+1\\le d-a$. For every finitely generated $F(h)$-subalgebra $A\\subset R[1/h]$, its fraction field is a subfield of $\\operatorname{Frac}(R)$, so the finite-type domain dimension formula gives $\\dim A\\le d-a-1<d$.",
+   "uses": [
+    "lem-sc-smooth-strict-local-field-model",
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "def-kun-transcendence-degree",
+    "def-nagata-effective-cartier-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+    "place": "Proof, Local calculation in dimension d, algebraic calculation"
+   }
+  },
+  {
+   "text": "The finitely generated $F(h)$-subalgebras of $R[1/h]$ form a small filtered poset (the algebra generated by two of them dominates both), and their union is $R[1/h]$. Taking spectra gives an affine inverse-limit presentation with affine transition maps. The bound on $F(h)$ is one by the one-variable field lemma. The induction hypothesis, applicable over every field and in dimensions at most $d-a-1$, gives bound $d-a$ for each model. The affine-limit lemma therefore gives $\\operatorname{cd}_{\\rm tor}(\\operatorname{Spec}R[1/h])\\le d-a$. The strict-henselization stalk formula, applied to $j$, which is quasi-compact and quasi-separated: locally on the target, an affine open where the Cartier ideal has generator $h$ has preimage the principal affine open $D(h)$, and an open immersion is separated, gives $(R^qj_*M)_{\\bar y}=0$ whenever $q>d-a$.",
    "uses": [
     "lem-sc-one-variable-field-cd",
     "lem-sc-cd-affine-limit",
     "prop-weil-pbc-strict-henselization-stalk-formula"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+    "place": "Proof, Local calculation in dimension d, lower-dimensional induction and stalk formula"
+   }
   },
   {
-   "text": "*From the local calculation to affine space.*\nPut $B=\\mathbf A_K^{d-1}$, take\n$j:\\mathbf A^d\\to\\mathbf P^1\\times B$, and write\n$g:\\mathbf P^1\\times B\\to B$ and $f=g j$.\nFor $q>0$, the sheaf $R^qj_*M$ is supported on\n$D=\\{\\infty\\}\\times B$, since restriction to $\\mathbf A^d$\nis the higher direct image of the identity.\nIt equals $i_*N_q$ for $i:D\\to\\mathbf P^1\\times B$,\nas follows on stalks. Since $g i$ is an isomorphism and\nfinite direct image is exact,\n$R^pg_*R^qj_*M=0$ for $p>0,q>0$.\nProper base change in\n[cor-weil-pbc-geometric-fiber-finite] and the curve bound give\n$R^pg_*j_*M=0$ for $p>2$: the geometric fibres of $g$ are\nprojective lines over the separably closed fields\n$\\kappa(z)^{{\\mathrm{sep}}}$, and such a curve has torsion\ncohomological dimension at most $2$, because\n$\\operatorname{cd}_{\\rm tor}(\\kappa(z)^{{\\mathrm{sep}}})=0$\n([lem-kun-cd-sep-closed-point]) while the projective line over the\nalgebraic closure has dimension at most $2$\n([lem-sc-arbitrary-curve-cd]), the comparison\n[lem-sc-cd-ground-field] transferring that bound to the separably\nclosed field.\nThe spectral sequence of [thm-sp-grothendieck] consequently\nidentifies $R^qf_*M$ with $g_*R^qj_*M$ for $q>2$;\nthe only possible exceptional differential would be\nfrom bidegree $(0,1)$ to $(2,0)$, of total degrees one and two.\nThe local calculation implies that the stalks of $R^qf_*M$\nvanish at points of transcendence degree greater than $d-q$\nfor $q>2$.\n\nFor $q=2$, the generic stalk formula identifies its stalk\nat a geometric generic point of $B$ with\n$H^2(\\mathbf A^1_{\\kappa(\\eta)^{\\rm sep}},M|)$.\nThis is zero by the dimension-one case already proved over\nall fields, since a separably closed field has torsion\ncohomological dimension zero, [lem-kun-cd-sep-closed-point]. Thus in this case too the\nstalks vanish at points of transcendence degree greater than\n$d-q=d-2$. This uses base change to a generic strict\nlocalization, not a proper-base-change assertion for $f$.",
+   "text": "Put $B=\\mathbf A_K^{d-1}$, $Y=\\mathbf P^1_K\\times B$, $D=\\{\\infty\\}\\times B$, and let $j:\\mathbf A_K^d\\to Y$, $i:D\\to Y$, $g:Y\\to B$, and $f=gj$. These are the usual two polynomial charts of the projective line; in the chart at infinity $D$ has equation the last coordinate. Both polynomial charts of $Y$, and $B$ itself, are smooth over $K$ by [sbc-lem-affine-space-smooth]; smoothness is local on the source. The chart coordinate rings are domains and their nonempty overlap is dense in each, so $Y$ is integral. In particular $Y$ has dimension $d$, and $\\dim B=d-1$ (apply the finite-type domain dimension formula to the polynomial coordinate charts, whose variables are a transcendence basis). The projection $g$ is proper by properness of projective space. Etale restriction preserves injective resolutions, so restriction of $R^qj_*M$ to the open $\\mathbf A^d$ is $R^q\\mathrm{id}_*M=0$ for $q>0$. For any abelian etale sheaf $A$ supported on $D$, the unit $A\\to i_*i^{-1}A$ is an isomorphism: off $D$ both stalks are zero, and on $D$ the finite-stalk formula and inverse-image stalk formula identify its stalk with the identity of $A_{\\bar y}$. Geometric stalks detect isomorphisms. Apply this to write $R^qj_*M=i_*N_q$ for $q>0$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lemma-openclosed-stalk-upperstar",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-pbc-inverse-image",
+    "sbc-lem-affine-space-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+    "place": "Proof, From the local calculation to affine space, support on the infinity divisor"
+   }
+  },
+  {
+   "text": "For $N$ on $D$, an injective resolution $N\\to I^\\bullet$ stays an injective resolution under the exact functor $i_*$, which preserves injectives. Thus $R^pg_*(i_*N)$ is computed by $g_*i_*I^\\bullet=(gi)_*I^\\bullet$. Since $gi:D\\to B$ is an isomorphism, this complex has no positive cohomology. Hence $R^pg_*R^qj_*M=0$ for $p>0,q>0$. All the sheaves here are killed by $n$: multiplication by $n$ on each derived functor value is the derived functor of $n\\mathrm{id}_M=0$, by additivity.",
+   "uses": [
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-direct-image-preserves-injectives"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+    "place": "Proof, From the local calculation to affine space, acyclicity on the boundary"
+   }
+  },
+  {
+   "text": "View $j_*M$ as a sheaf of $\\Lambda=\\mathbf Z/n$-modules. Apply the first, derived, assertion of finite-coefficient proper base change to $g$ and $(j_*M)[0]$; it applies to every object of $D^+$, with no finiteness or constructibility condition on the stalks. Forgetting coefficients commutes with derived direct image, including the structure morphism of each fibre. Its geometric fibres are projective lines over algebraically closed fields. The projective-line dimension bound and the arbitrary-curve lemma give zero fibre cohomology for $p>2$. The base-change isomorphism and geometric stalk conservativity imply $R^pg_*j_*M=0$ for $p>2$.",
    "uses": [
     "cor-weil-pbc-geometric-fiber-finite",
-    "lem-kun-cd-sep-closed-point",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lem-weil-pbc-p1-field-dimension-one",
     "lem-sc-arbitrary-curve-cd",
-    "lem-sc-cd-ground-field",
-    "thm-sp-grothendieck"
+    "lemma-weil-pbc-geometric-stalk-conservative"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+    "place": "Proof, From the local calculation to affine space, proper projection"
+   }
   },
   {
-   "text": "*Cohomology of the resulting sheaves on $B$.*\nIf $N$ is zero at points of transcendence degree $>a$,\n[lem-sc-support-dimension-union] writes it as a filtered\nunion of sheaves $N_Z$ supported on closed $Z\\subset B$\nof dimension at most $a$. Such a sheaf is $i_*i^*N_Z$,\nand $Z$ is affine. Exact finite direct image and the\nlower-dimensional induction hypothesis show\n$H^p(B,N_Z)=0$ for $p>a$.\nBy [lem-weil-pbc-cohomology-filtered-colimit] the same\nholds for $N$.\nApply this to $R^qf_*M$: for $q\\geq2$ take $a=d-q$;\nwhen $a<0$ all stalks vanish. For $q=0,1$, use the\ninduction bound $\\dim B=d-1$ directly.\nEvery nonzero term of\n\n$$\nH^p(B,R^qf_*M)\\ \\Longrightarrow\\ H^{p+q}(\\mathbf A^d,M)\n$$\n\nhas $p+q\\leq d$. This proves the induction over algebraically\nclosed fields, and the earlier descent step completes it\nover every field with the stated bound $c$.\nFinally [lemma-weil-pbc-torsion-filtered-union], [lem-weil-pbc-cohomology-filtered-colimit]\nremoves the exponent bound on $M$.",
+   "text": "Direct images preserve injectives, so the Grothendieck spectral sequence applies to $j_*$ followed by $g_*$. On its $E_2$ page the only possibly nonzero positions are the column $p=0$ and the row $q=0$ with $p\\le2$. In total degree $r>2$, the term $(0,r)$ survives and is the only graded piece of the abutment: for $2\\le\\ell\\le r$ the outgoing differential $d_{\\ell}$ targets $(\\ell,r-\\ell+1)$, where both coordinates are positive; for $\\ell=r+1$ it targets the zero term $(r+1,0)$; later targets have negative second coordinate. Incoming differentials would start in a negative first coordinate. Thus $R^rf_*M\\cong g_*R^rj_*M$ for $r>2$. Write $v=gi:D\\xrightarrow{\\sim}B$. The boundary identification of step 6 gives $g_*R^rj_*M=g_*i_*N_r=v_*N_r$. At a geometric point $\\bar z$ of $B$, the finite-stalk formula for the isomorphism $v$ identifies $(v_*N_r)_{\\bar z}$ with $(N_r)_{v^{-1}\\bar z}$. The inverse-image stalk formula identifies this with $(R^rj_*M)_{i v^{-1}\\bar z}$. For $z\\in B$ with $a=\\operatorname{trdeg}_K\\kappa(z)>d-r$, the local calculation at the corresponding point of $D$ gives a zero stalk. Hence $R^rf_*M$ has zero stalks at those points.",
+   "uses": [
+    "thm-sp-grothendieck",
+    "lem-weil-pbc-direct-image-preserves-injectives",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lemma-openclosed-stalk-upperstar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+    "place": "Proof, From the local calculation to affine space, spectral sequence and support bound for q>2"
+   }
+  },
+  {
+   "text": "For $r=2$, let $\\eta$ be the generic point of $B$. The field-model lemma applied to $B$, where $a=\\dim B=d-1$, says that its strict henselization is a regular local domain of dimension zero, with residue field $\\kappa(\\eta)^{\\rm sep}$. A zero-dimensional regular local ring has maximal ideal generated by zero elements, and so is that residue field. The strict-henselization stalk formula for the affine projection $f$ therefore identifies the generic stalk of $R^2f_*M$ with $H^2(\\mathbf A^1_{\\kappa(\\eta)^{\\rm sep}},M|)$. By the dimension-one case, already established over every field, and torsion cohomological dimension zero of a separably closed field, this is zero. In the polynomial scheme $B$, the only point of residue transcendence degree $>d-2$ is its generic point: a nonzero prime gives a nonzero polynomial relation between the $d-1$ coordinate residues. Thus the same support bound holds for $r=2$.",
+   "uses": [
+    "lem-sc-smooth-strict-local-field-model",
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "lem-sf-separably-closed-torsion-cd",
+    "def-weil-regular-scheme",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+    "place": "Proof, From the local calculation to affine space, the exceptional degree q=2"
+   }
+  },
+  {
+   "text": "Let $N$ be a torsion sheaf on $B$ with zero stalks above transcendence degree $a\\ge0$. The support-dimension-union lemma writes $N=\\varinjlim_ZN_Z$ over closed $Z\\subset B$ of dimension at most $a$. Equip $Z$ with its reduced closed subscheme structure. By the stalk argument in step 6, $N_Z=i_*i^{-1}N_Z$; by the finite comparison in step 2, $H^p(B,N_Z)=H^p(Z,i^{-1}N_Z)$. The scheme $Z$ is affine of finite type of dimension at most $a$. When $a<d$, induction over $K$ gives zero for $p>a$. Cohomology commutes with this filtered colimit on the qcqs scheme $B$, hence $H^p(B,N)=0$ for $p>a$. Apply this with $N=R^qf_*M$ and $a=d-q$ for $q\\ge2$ and $a\\ge0$. If $a<0$, steps 5 and 9 show every stalk vanishes, hence $N=0$. For $q=0,1$, induction on $B$ gives $H^p(B,R^qf_*M)=0$ for $p>d-1$.",
    "uses": [
     "lem-sc-support-dimension-union",
-    "lem-weil-pbc-cohomology-filtered-colimit",
-    "lemma-weil-pbc-torsion-filtered-union"
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lemma-openclosed-stalk-upperstar",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-direct-image-preserves-injectives",
+    "lem-weil-pbc-cohomology-filtered-colimit"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+    "place": "Proof, Cohomology of the resulting sheaves on B"
+   }
+  },
+  {
+   "text": "Apply the Grothendieck spectral sequence to $f_*$ and $\\Gamma(B,-)$; direct images preserve injectives, so the acyclicity hypothesis is satisfied. Its terms $H^p(B,R^qf_*M)$ vanish for $p+q>d$: for $q=0,1$ use $p\\le d-1$, and for $q\\ge2$ use $p\\le d-q$. A first-quadrant convergent spectral sequence gives a finite filtration in each total degree, so the zero graded pieces force $H^r(\\mathbf A^d,M)=0$ for $r>d$. Finally an arbitrary locally torsion $M$, without a uniform annihilator, is the filtered union of its subsheaves $M[n]$; each has just been treated, and cohomology commutes with this union. The finite comparison handles the original $X$, and the descent of step 1 completes the induction over all fields with bound $d+c$.",
+   "uses": [
+    "thm-sp-grothendieck",
+    "lem-weil-pbc-direct-image-preserves-injectives",
+    "lemma-weil-pbc-torsion-filtered-union",
+    "lem-weil-pbc-cohomology-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+    "place": "Proof, last paragraph and conclusion"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lem-sc-arbitrary-curve-cd",
+  "def-sc-etale-torsion-cd",
+  "lem-zl-noether-normalization-field",
+  "lem-zl-noether-normalization-dimension",
+  "lem-weil-pbc-dimension-preserved-field-extension",
   "lem-sc-cd-ground-field",
+  "lem-sf-separably-closed-torsion-cd",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-direct-image-preserves-injectives",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "def-weil-pbc-etale-cohomology",
+  "lem-sc-arbitrary-curve-cd",
+  "lem-sc-smooth-strict-local-field-model",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "def-kun-transcendence-degree",
+  "def-nagata-effective-cartier-ideal",
   "lem-sc-one-variable-field-cd",
   "lem-sc-cd-affine-limit",
   "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lemma-openclosed-stalk-upperstar",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-pbc-inverse-image",
   "cor-weil-pbc-geometric-fiber-finite",
-  "lem-kun-cd-sep-closed-point",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-p1-field-dimension-one",
   "thm-sp-grothendieck",
+  "def-weil-regular-scheme",
   "lem-sc-support-dimension-union",
   "lem-weil-pbc-cohomology-filtered-colimit",
-  "lemma-weil-pbc-torsion-filtered-union"
+  "lemma-weil-pbc-torsion-filtered-union",
+  "sbc-lem-affine-space-smooth"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale torsion cohomological dimension of an affine finite type scheme over a field is at most its dimension plus the field cohomological dimension",
+   "results": "8 hits: Algebra.etaleLocus_eq_compl_support, Algebra.formallyEtale_iff, IsLocalRing.finrank_cotangentSpace_eq_zero_iff, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.FormallyEtale.subsingleton_h1Cotangent, IsLocalRing.finrank_cotangentSpace_eq_zero, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.IsStandardSmoothOfRelativeDimension.out",
+   "date": "2026-10-14",
+   "verdict": "no match: no affine torsion etale cohomological dimension theorem; hits concern smooth algebra, Artinian schemes or limits"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|torsion.*cohomolog|affine.*cohomolog",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: no affine torsion etale cohomological dimension theorem; hits concern smooth algebra, Artinian schemes or limits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine schemes over a separably closed field have torsion etale cohomological dimension at most their Krull dimension",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"cohomology\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: no affine torsion etale cohomological dimension theorem; hits concern smooth algebra, Artinian schemes or limits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin vanishing for torsion abelian etale sheaves on affine schemes",
+   "results": "8 hits: AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_presheaf_obj, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_of_isAffine, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+   "date": "2026-10-14",
+   "verdict": "no match: no affine torsion etale cohomological dimension theorem; hits concern smooth algebra, Artinian schemes or limits"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -123,5 +318,124 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "thm-sc-affine-torsion-cd",
+  "worker": "stage1",
+  "summary": "Retained the nonempty numerical bound and the simultaneous dimension induction. Exposed the strict-local coefficient-field input as one algebraic statement-only node; replaced the Kunneth-only point bound by the existing all-torsion bound. Added explicit finite-resolution comparison, closed-support stalk argument, coefficient-forgetting comparison and injective-preservation hypotheses; separated the exceptional generic degree-two calculation. Made the empty case explicit: the imported inequality has no meaning under the minus-infinity convention for empty Krull dimension, whereas the empty-site section functor is zero. Repair of the returned landing: re-read the current definition of torsion cohomological dimension, made its local-torsion quantifier explicit in steps 1 and 12, and refreshed the verbatim step-1 citation. All other quoted current statements still agree. Maintainer reader repair: cited the existing affine-space smoothness statement for the polynomial charts and wrote out the principal-open check that the Cartier-complement immersion is qcqs.",
+  "blueprint": "Opening induction and Noether normalization: steps 1-3; local calculation: steps 4-5; compactification and the exceptional q=2 stalk: steps 6-10; supported sheaves and conclusion: steps 11-12.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-noether-normalization-field",
+    "why": "Generic tool used exactly as stated in proof steps 1, 3; it supplies the named algebraic/sheaf-theoretic interface, not an alternative compact-support base-change route."
+   },
+   {
+    "node": "lem-zl-noether-normalization-dimension",
+    "why": "Generic tool used exactly as stated in proof steps 1, 3; it supplies the named algebraic/sheaf-theoretic interface, not an alternative compact-support base-change route."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-preserved-field-extension",
+    "why": "Generic tool used exactly as stated in proof steps 1; it supplies the named algebraic/sheaf-theoretic interface, not an alternative compact-support base-change route."
+   },
+   {
+    "node": "lem-sf-separably-closed-torsion-cd",
+    "why": "Generic tool used exactly as stated in proof steps 1, 10; it supplies the named algebraic/sheaf-theoretic interface, not an alternative compact-support base-change route."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Generic tool used exactly as stated in proof steps 2, 7, 11; it supplies the named algebraic/sheaf-theoretic interface, not an alternative compact-support base-change route."
+   },
+   {
+    "node": "lem-weil-pbc-direct-image-preserves-injectives",
+    "why": "Generic tool used exactly as stated in proof steps 2, 7, 9, 11, 12; it supplies the named algebraic/sheaf-theoretic interface, not an alternative compact-support base-change route."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-stalk-formula",
+    "why": "Generic tool used exactly as stated in proof steps 2, 6, 9, 11; it supplies the named algebraic/sheaf-theoretic interface, not an alternative compact-support base-change route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "why": "Generic tool used exactly as stated in proof steps 4, 6; it supplies the named algebraic/sheaf-theoretic interface, not an alternative compact-support base-change route."
+   },
+   {
+    "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+    "why": "Generic tool used exactly as stated in proof steps 5, 10; it supplies the named algebraic/sheaf-theoretic interface, not an alternative compact-support base-change route."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic tool used exactly as stated in proof steps 6; it supplies the named algebraic/sheaf-theoretic interface, not an alternative compact-support base-change route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-restriction-injectives",
+    "why": "Generic tool used exactly as stated in proof steps 6; it supplies the named algebraic/sheaf-theoretic interface, not an alternative compact-support base-change route."
+   },
+   {
+    "node": "lemma-openclosed-stalk-upperstar",
+    "why": "Generic tool used exactly as stated in proof steps 6, 9, 11; it supplies the named algebraic/sheaf-theoretic interface, not an alternative compact-support base-change route."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic tool used exactly as stated in proof steps 6, 8, 11; it supplies the named algebraic/sheaf-theoretic interface, not an alternative compact-support base-change route."
+   },
+   {
+    "node": "cor-weil-pbc-geometric-fiber-finite",
+    "why": "Generic tool used exactly as stated in proof steps 8; it supplies the named algebraic/sheaf-theoretic interface, not an alternative compact-support base-change route."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Generic tool used exactly as stated in proof steps 8; it supplies the named algebraic/sheaf-theoretic interface, not an alternative compact-support base-change route."
+   },
+   {
+    "node": "lem-weil-pbc-p1-field-dimension-one",
+    "why": "Generic tool used exactly as stated in proof steps 8; it supplies the named algebraic/sheaf-theoretic interface, not an alternative compact-support base-change route."
+   },
+   {
+    "node": "thm-sp-grothendieck",
+    "why": "Generic tool used exactly as stated in proof steps 9, 12; it supplies the named algebraic/sheaf-theoretic interface, not an alternative compact-support base-change route."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-filtered-colimit",
+    "why": "Generic tool used exactly as stated in proof steps 11, 12; it supplies the named algebraic/sheaf-theoretic interface, not an alternative compact-support base-change route."
+   },
+   {
+    "node": "lemma-weil-pbc-torsion-filtered-union",
+    "why": "Generic tool used exactly as stated in proof steps 12; it supplies the named algebraic/sheaf-theoretic interface, not an alternative compact-support base-change route."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Polynomial charts of P1 times affine space, and the affine base B, are smooth over K. This generic geometric input verifies the field-model hypothesis and does not replace the dimension induction or compactification route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-noether-normalization-field",
+  "lem-zl-noether-normalization-dimension",
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "lem-sf-separably-closed-torsion-cd",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-direct-image-preserves-injectives",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lemma-openclosed-stalk-upperstar",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-p1-field-dimension-one",
+  "thm-sp-grothendieck",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lemma-weil-pbc-torsion-filtered-union",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-2256a4f19",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-2256a4f19 (reviewer sub-agent of L); spot-checked: Read all mathematics and cited sources. Corrected the missing affine-space smoothness citation, made Cartier-complement qcqs verification explicit, and completed new-node metadata. Induction, coefficient categories, base-change use, edge cases, and duplicate candidates checked. Statements preserved; review.md records checks and unrelated pre-existing DAG cycles.; 2 file(s) fixed by the reviewer"
+ }
 }
