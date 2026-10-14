@@ -7,7 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardScalarCechComparison
 public import Sheaf.AlgebraicGeometry.PicardExternalCechCupComponent
-import Sheaf.Paper.CechCupPullbackCompat
 
 /-! # Scalar Cech external cup and canonical comparison
 
@@ -21,6 +20,31 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
 
+-- The comparison equation is unchanged by a map killed by every alpha.
+private theorem moduleCechComparison_add_kernel
+    {X : Scheme.{w}} {ι : Type w} (U : ι → X.Opens) (F : X.Modules) (p : ℕ)
+    (c d : ((cechComplexFunctor U).obj F.presheafModuleCat).homology p ⟶
+      (RingedSpace.moduleCohomology X.toRingedSpace p).obj F)
+    (hc : IsModuleCechComparison U F p c)
+    (hd :
+      let : EnoughInjectives X.Modules :=
+        (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
+      let := RingedSpace.globalSectionsFunctor_additive X.toRingedSpace
+      ∀ I : InjectiveResolution F,
+        d ≫ (I.isoRightDerivedObj
+          (RingedSpace.globalSectionsFunctor X.toRingedSpace) p).hom ≫
+          HomologicalComplex.homologyMap (moduleCechAlpha U I) p = 0) :
+    IsModuleCechComparison U F p (c + d) := by
+  let : EnoughInjectives X.Modules :=
+    (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
+  let := RingedSpace.globalSectionsFunctor_additive X.toRingedSpace
+  intro I
+  rw [Preadditive.add_comp, hc I, hd I, add_zero]
+
+-- STATEMENT-DISPUTED: Without cover equalities, alpha can have a kernel.
+-- The comparison equation permits adding maps into that kernel independently
+-- for the factor and product comparisons; external cup need not respect them.
+-- See report.md for a punctured-surface example and the proved kernel lemma above.
 /-- Core scalar Cech compatibility, with cover hypotheses omitted.
 Source: Stacks, Tags 01FD, 07MB, 0FKV and 0BED.
 (blueprint: lem-sc-picard-scalar-cech-external-cup-core).
