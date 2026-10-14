@@ -56,7 +56,7 @@
 | `Sheaf.AlgebraicGeometry.AffineModelCoherentObjectComparisons` | 41 | 1 | proof |
 | `Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization` | 41 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit` | 47 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SelfTorNonpositiveChosenComparisons` | 47 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.DerivedSelfTorAffineCoordinates` | 48 | 1 | proof |
 
 Waiting, not claimable: 14 modules whose proof uses a node that has no Lean declaration yet.
 
