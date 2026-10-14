@@ -18,9 +18,12 @@ compactification `c = (X ⟶[i] Z ⟶[p] Y)` of `f`, the lower shriek on bounded
 complexes is `Rf_!^c := i_! ⋙ Rp_*`
 (`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactification`). This file states
 that, for the coefficient rings `E̲` and `ℚ̲̄_ℓ`, it does not depend on the compactification: for
-two compactifications `c₁` and `c₂` of `f`, `Rf_!^{c₁} ≅ Rf_!^{c₂}`. In particular the lower
-shriek `Rf_!` for the chosen compactification `compactificationOverField k f`
-(`ProEtale.CondensedRing.boundedConstructibleLowerShriek`) is identified with `Rf_!^c`.
+two compactifications `c₁` and `c₂` of `f`, `Rf_!^{c₁} ≅ Rf_!^{c₂}`.
+
+These isomorphisms identify the lower shriek attached to an arbitrary compactification with the
+lower shriek `Rf_!` for the chosen compactification
+(`ProEtale.CondensedRing.boundedConstructibleLowerShriek`), as used in the compact-support
+base-change morphism `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange`.
 
 As for the bounded constructible six functors
 (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`), all schemes
@@ -32,15 +35,10 @@ morphisms are morphisms over `Spec k`.
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso` and
   `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl`: the
   isomorphism `Rf_!^{c₁} ≅ Rf_!^{c₂}` for `E`- and `ℚ̄_ℓ`-sheaves.
-- `ProEtale.CondensedRing.boundedConstructibleLowerShriekIsoOfCompactification` and
-  `ProEtale.CondensedRing.boundedConstructibleLowerShriekIsoOfCompactification_padicAlgCl`: the
-  isomorphism `Rf_! ≅ Rf_!^c` for the chosen compactification.
 
 ## Sorried input
 
-- `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso` and
-  `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl` are
-  currently `sorry`.
+Both isomorphisms are currently `sorry`.
 
 -/
 
@@ -85,23 +83,5 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationIso_padicAlgC
     boundedConstructibleLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ k c₁ ≅
       boundedConstructibleLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ k c₂ :=
   sorry
-
-/-- The isomorphism `Rf_! ≅ Rf_!^c` for bounded constructible `E`-sheaves between the lower
-shriek for the chosen compactification `compactificationOverField k f` and the lower shriek
-attached to a compactification `c` of `f`. -/
-noncomputable def boundedConstructibleLowerShriekIsoOfCompactification (c : Compactification f) :
-    boundedConstructibleLowerShriek (Profinite.continuousMapRingObj E) ℓ k f ≅
-      boundedConstructibleLowerShriekOfCompactification (Profinite.continuousMapRingObj E) ℓ k c :=
-  boundedConstructibleLowerShriekOfCompactificationIso ℓ E k (compactificationOverField k f) c
-
-/-- The isomorphism `Rf_! ≅ Rf_!^c` for bounded constructible `ℚ̄_ℓ`-sheaves between the lower
-shriek for the chosen compactification `compactificationOverField k f` and the lower shriek
-attached to a compactification `c` of `f`. -/
-noncomputable def boundedConstructibleLowerShriekIsoOfCompactification_padicAlgCl
-    (c : Compactification f) :
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ k f ≅
-      boundedConstructibleLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ k c :=
-  boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl ℓ k
-    (compactificationOverField k f) c
 
 end AlgebraicGeometry.ProEtale.CondensedRing
