@@ -8,7 +8,8 @@
   "lem-sbc-raw-scalar-source-square"
  ],
  "proof_deps": [
-  "lem-sbc-raw-scalar-source-square"
+  "lem-sbc-raw-scalar-source-square-core",
+  "lem-sbc-raw-scalar-sheaf-composition"
  ],
  "status": "split",
  "created": {
@@ -43,19 +44,25 @@
  "statement": "Specialize the source-factor square to the identity coefficient map, invert the source factors, and cancel the derived scalar comparison.",
  "proof": [
   {
-   "text": "Specialize the source-factor square to the identity coefficient map, invert the source factors, and cancel the derived scalar comparison.",
+   "text": "Apply plus_single_source_square_core to the four inverse-image and scalar-forgetting functors, the canonical pullbackIso, and the hom components of the module and abelian upperStarComp. Supply rawModuleScalar_sheaf_composition as its sheaf-level equation. This is the identity coefficient-map specialization of the source square, without importing its duplicate derivedPullbackIso declaration.",
    "uses": [
-    "lem-sbc-raw-scalar-source-square"
+    "lem-sbc-raw-scalar-source-square-core",
+    "lem-sbc-raw-scalar-sheaf-composition"
    ],
    "elementary": false
+  },
+  {
+   "text": "All four source factors are isomorphisms. Apply IsIso.inv_eq_inv to invert the source equation, rewrite inverse composites and functor images of inverses, precompose with the inverse derived scalar comparison, and cancel its inverse-hom pair. The single-comparison inverse formulas and upperStarComp inverse formulas give precisely the claimed coefficient square.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "S2",
+  "group": "Q3",
   "date": "2026-10-14",
-  "document": "Stacks Project",
-  "place": "Tags 03D7 and 03Q8"
+  "document": "Stacks Project; WeilConjectures derived exact-functor comparison API",
+  "place": "Tags 03D7 and 03Q8; Shift.ExactFunctor; generic source-square specialization and inversion"
  },
  "lean": {
   "existing": false,
@@ -110,13 +117,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261013T234521-L-2167018",
-  "kind": "interface",
+  "landing": "20261014T063821-L-2815088",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
