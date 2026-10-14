@@ -14148,3 +14148,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:08 L: merged deliver/V2/Sheaf.AlgebraicGeometry.SelfTorConormalExteriorSectionModel (stage 3; reviewer PASS; first push; landing 20261014T010857-L-3169318 (interface); batch 20261014T010832; modules 3; new nodes 2)
 - 01:08 L: merged deliver/W2/Sheaf.Paper.CechCupPullbackCompat (stage 3; reviewer PASS; first push; landing 20261014T010857-L-3169470 (interface); batch 20261014T010832; modules 2; new nodes 1)
 - 01:10 L: returned deliver/H3/Sheaf.CategoryTheory.DerivedModuleRankOneNonzeroMap (reviewer RETURN: (reviewer X-27d14, head 27d14d53d) C6: Break the dependency cycle. In dag/nodes/sec-smooth-purity/new-stage3-derived-mod)
+- 01:12 L: returned deliver/S3/Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap (reviewer RETURN: (reviewer X-63956, head 6395617a5) A9 (brief point 5): replace `public import Mathlib.CategoryTheory.Adjunction.Mates` w)
