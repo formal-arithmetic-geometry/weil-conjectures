@@ -14293,3 +14293,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:32 L: returned deliver/K3/Sheaf.AlgebraicGeometry.TensorSinglePullbackComposition (reviewer RETURN: (reviewer X-d9d1e, head d9d1efb95) H10: lean/Sheaf/AlgebraicGeometry/TensorSinglePullbackComposition.lean timed out at 6)
 
 - 10:35 L: batch 20261014T022537 dependency take-out
+- 02:39 L: merged deliver/XRa0a656f89c54729e/Sheaf.Paper.ModuleCupDerivedClassComparison (stage 3; reviewer PASS; first push; landing 20261014T023930-L-13515 (proof); batch 20261014T023929; modules 1; new nodes 1; change records: coord/changes/ModuleCupDerivedClassComparisonRestore.md)
