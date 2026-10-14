@@ -15,27 +15,45 @@
  },
  "proof": [
   {
-   "text": "Restriction to an open preserves products, computed sectionwise, and passing\nthrough the open-site equivalence preserves limits. Apply the universal properties\nof the limiting product fans of the fixed Hom projections to the isomorphisms e.\nThis constructs mutually inverse degreewise maps, carrying every product projection\nto its e comparison. To check the chain-map equation, compose with every projection:\nthe signed differential formula for Hom complexes reduces it to the two naturality\nequations he and additivity of restriction. Thus the maps form a chain isomorphism.\nIts projection identity at p = -n and q = 0 is the displayed equation. The same\nargument applies to empty opens and unbounded complexes.",
+   "text": "Use Scheme.Modules.preservesLimitsOfSize_restrictFunctor to preserve products under restriction to V. For the over-site functor over W, compose with the forgetful functor to presheaves of abelian groups: the composite is precomposition by (Over.forget W).op and preserves products. The forgetful functor reflects limits, so over-site restriction preserves products as well. Shrink the restriction limit universe to obtain preservation of Discrete Z limits by the composite F. Use the shared moduleOverFunctor_additive instance for over-site additivity and the source restriction additivity instance for F.",
+   "uses": [
+    "new-b2-homology-evaluation-definitions",
+    "lem-sc-derived-hom-mayer-vietoris"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the fixed product projections supplied by homComplex_projections_exists for P and Q. Map the limiting fan of P by F. Construct a degreewise isomorphism to the limiting fan of Q by lifting the families F(pi_P);e and pi_Q;e.inv. Product extensionality and the inverse identities of e prove the two composites are identities. The lift equations give the comparison for every degree and every factor.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-hom-complex",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "To prove the chain equation in adjacent degrees, postcompose with all projections of Q in the target degree. Expand both signed differential formulas furnished by homComplex_projections_exists. Use additivity of F, the degreewise projection equations, and he specialized to the identity/source differential and target differential/identity respectively. The two summands agree; product extensionality gives the chain equation. HomologicalComplex.Hom.isoOfComponents assembles the degreewise isomorphisms. The factor equation at source index -n and target index zero is exactly the stated projection identity.",
    "uses": [
     "def-pur-sheaf-hom",
     "def-pur-hom-complex",
     "lem-sc-hom-complex-projections",
     "new-b2-homology-evaluation-definitions"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "new-b2-homology-evaluation-definitions",
+  "lem-sc-derived-hom-mayer-vietoris",
   "def-pur-sheaf-hom",
   "def-pur-hom-complex",
-  "lem-sc-hom-complex-projections",
-  "new-b2-homology-evaluation-definitions"
+  "lem-sc-hom-complex-projections"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "H1",
+  "agent": "P4",
   "date": "2026-10-14",
-  "description": "Second reader replaced unsound arbitrary-cycle descent by a chain-isomorphism reduction."
+  "description": "Complete product-fan construction and signed differential calculation for the given natural internal-Hom comparison; adapted the proved over-site restriction argument to composite open restriction."
  },
  "mathlib_searches": [
   {
@@ -109,10 +127,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261014T020511-L-3811455",
-  "kind": "interface",
+  "landing": "20261014T023937-L-16010",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
