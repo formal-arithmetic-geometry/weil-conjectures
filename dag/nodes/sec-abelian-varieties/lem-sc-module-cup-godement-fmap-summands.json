@@ -18,57 +18,38 @@
  ],
  "proof": [
   {
-   "text": "For any coefficient f-map H → f_*H', define the semilinear stalk map H_{f(x')} → H'_{x'} by sending the germ of s on V to the germ of its image on f⁻¹V. Common refinements show this is well defined. Use product/skyscraper universality to map T_X H to f_*T_X' H': the x' coordinate of the output is the stalk-map image of the f(x') coordinate. The module action is through the structure-sheaf germs, so this is O_X(V)-linear. Restricting forgets coordinates, hence these section maps form a sheaf morphism.",
+   "text": "Apply new-module-cup-godement-fmap-models to the six given models and coefficient maps, obtaining pairings μ,μ₁, augmented natural transformations g,h,k and their degreewise section pairing square.",
    "uses": [
-    "def-sc-module-cup-godement-model"
+    "new-module-cup-godement-fmap-models"
    ],
    "elementary": false
   },
   {
-   "text": "Starting at φ, ψ and χ, recursively apply this operation to obtain maps T_X^n H → f_*T_X'^n H'. Projection to x' proves compatibility with the germ unit: both paths take the image of the same germ. Projection followed by evaluation proves compatibility with multiplication: representing the outer germ on a common neighbourhood and evaluating its coordinate yields the same image of the inner coordinate. Induct on the iteration position to commute with every insertion and collapse. Transport by the given model term equalities; the model and codegeneracy predicates specify all the cofaces and codegeneracies. Taking alternating coface sums and extending by zero gives l,r,t. The degree-zero model augmentation identities and unit compatibility give the three augmentation squares.",
+   "text": "Apply new-module-cup-cosimplicial-fmap-summands to g,h,k and that pairing square, obtaining l,r,t, their nonnegative component formulas and the front/back summand identity.",
    "uses": [
-    "def-sc-module-cup-godement-model",
-    "def-sc-module-cup-godement-codegeneracies",
-    "lem-sc-module-cup-godement-relations"
+    "new-module-cup-cosimplicial-fmap-summands"
    ],
    "elementary": false
   },
   {
-   "text": "On both schemes take the coordinatewise one-step Godement tensor maps beta, and recursively p_0=id and p_(n+1)=beta(T^nF,T^nG) followed by T(p_n). The unit and multiplication identities give compatibility with all insertions and collapses. Transport to the given six models as in pairing_for_models to obtain μ and μ₁. The unit identity together with the six augmentation identities gives the two zero-pair equations on pure tensors of coefficient sections.",
+   "text": "Evaluate the two augmentation morphism equalities on tmulSection x y and use tensorHom_app_tmulSection. For each of the three augmentation squares substitute the degree-zero component formula, compose its cosimplicial augmentation square with the pushforward inverse degree-zero identification, and cancel the hom/inv pair using functoriality. These give all five remaining conjunctions; the last conjunction is precisely the supplied summand identity.",
    "uses": [
-    "new-module-cup-godement-beta-exists",
-    "new-module-cup-godement-iterate-pairings-canonical-exists",
-    "new-module-cup-godement-iterate-pairings-canonical-collapse",
-    "lem-sc-module-cup-godement-model-pairing-pairing"
+    "new-module-cup-godement-fmap-models",
+    "new-module-cup-cosimplicial-fmap-summands"
    ],
-   "elementary": false
-  },
-  {
-   "text": "The assumed equality hχ gives compatibility at n=0. A pair of stalk germs at f(x') has representatives on a common neighbourhood; hχ applied there gives equality after the semilinear stalk maps. Inducting with the coordinate formula for beta proves compatibility of p_n with the three iterated f-maps for every n. Those maps commute with every simplex map, in particular the front inclusion [p]→[p+q] and back inclusion [q]→[p+q]. Apply their pairing square in degree p+q after these inclusions. Conjugate by the extension identifications to obtain exactly the awSummand section identity. No assertion about a total tensor chain map, flasqueness or quasi-isomorphisms is used. Empty schemes have empty coordinate products, zero maps remain zero, and p=q=0 uses identity inclusions.",
-   "uses": [
-    "def-sc-module-cup-aw-components",
-    "def-sc-module-cup-godement-model",
-    "new-module-cup-godement-beta-exists"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-module-cup-godement-model",
-  "def-sc-module-cup-godement-codegeneracies",
-  "lem-sc-module-cup-godement-relations",
-  "new-module-cup-godement-beta-exists",
-  "new-module-cup-godement-iterate-pairings-canonical-exists",
-  "new-module-cup-godement-iterate-pairings-canonical-collapse",
-  "lem-sc-module-cup-godement-model-pairing-pairing",
-  "def-sc-module-cup-aw-components"
+  "new-module-cup-godement-fmap-models",
+  "new-module-cup-cosimplicial-fmap-summands"
  ],
  "proof_origin": {
-  "by": "M1 stage-3 worker; explicit coordinate extension written by an agent",
+  "by": "Q3 stage-3 worker; separation of Godement coordinates and fully proved complex transport",
   "document": "https://stacks.math.columbia.edu/tag/0FKR",
   "place": "Godement product-of-stalks construction, with the cross-scheme coordinate argument below; Tag 0FKU naive products; Banerjee §1.1.4 front/back formula",
   "date": "2026-10-14",
-  "group": "M1"
+  "group": "Q3"
  },
  "mathlib_searches": [
   {
@@ -149,9 +130,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261014T061027-L-2465939",
+  "landing": "20261014T073558-L-3451672",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.ModuleCupGodementCodegeneracies
 public import Sheaf.Paper.ModuleCupAWComponents
+import Sheaf.Paper.ModuleCupGodementFMapModels
+import Sheaf.Paper.ModuleCupCosimplicialFMapSummands
 
 /-! # Godement f-maps compatible with front/back tensor summands
 
@@ -129,7 +131,43 @@ theorem moduleCup_godement_fmap_summands (X X' : Scheme.{v}) (f : X' ⟶ X)
             (moduleCup_awSummand X' A₁ B₁ C₁ μ₁ (p : ℤ) (q : ℤ)
               ((p + q : ℕ) : ℤ) (by simp)).val.app (op (f ⁻¹ᵁ V))
                 (tmulSection ((l.f (p : ℤ)).val.app (op V) x)
-                  ((r.f (q : ℤ)).val.app (op V) y)) := by sorry
+                  ((r.f (q : ℤ)).val.app (op V) y)) := by
+  -- Separate the Godement coordinate construction from the complex-level argument.
+  obtain ⟨μ, μ₁, g, h, k, hz, hz₁, ha, hb, hc, hμ⟩ :=
+    moduleCup_godement_fmap_models X X' f F G F₁ G₁ φ ψ χ hχ
+      A B C A₁ B₁ C₁ a b c a₁ b₁ c₁ hA hB hC hA₁ hB₁ hC₁ sA sB sC sA₁ sB₁ sC₁
+  obtain ⟨l, r, t, hl, hr, ht, haw⟩ :=
+    moduleCup_cosimplicial_fmap_summands X X' f A B C A₁ B₁ C₁ μ μ₁ g h k hμ
+  refine ⟨μ, μ₁, ?_, ?_, l, r, t, ?_, ?_, ?_, haw⟩
+  · intro V x y
+    have he := congrArg (fun q ↦ q.app V (tmulSection x y)) hz
+    rw [Hom.comp_app, ConcreteCategory.comp_apply, tensorHom_app_tmulSection] at he
+    exact he
+  · intro V x y
+    have he := congrArg (fun q ↦ q.app V (tmulSection x y)) hz₁
+    rw [Hom.comp_app, ConcreteCategory.comp_apply, tensorHom_app_tmulSection] at he
+    exact he
+  · erw [hl 0]
+    change a.f 0 ≫ (moduleCup_cosimplicialZeroIso X A).hom ≫ g.app ⦋0⦌ ≫
+      (pushforward f).map (moduleCup_cosimplicialZeroIso X' A₁).inv = _
+    have he := congrArg
+      (fun z ↦ z ≫ (pushforward f).map (moduleCup_cosimplicialZeroIso X' A₁).inv) ha
+    simpa only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id,
+      Category.comp_id] using he
+  · erw [hr 0]
+    change b.f 0 ≫ (moduleCup_cosimplicialZeroIso X B).hom ≫ h.app ⦋0⦌ ≫
+      (pushforward f).map (moduleCup_cosimplicialZeroIso X' B₁).inv = _
+    have he := congrArg
+      (fun z ↦ z ≫ (pushforward f).map (moduleCup_cosimplicialZeroIso X' B₁).inv) hb
+    simpa only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id,
+      Category.comp_id] using he
+  · erw [ht 0]
+    change c.f 0 ≫ (moduleCup_cosimplicialZeroIso X C).hom ≫ k.app ⦋0⦌ ≫
+      (pushforward f).map (moduleCup_cosimplicialZeroIso X' C₁).inv = _
+    have he := congrArg
+      (fun z ↦ z ≫ (pushforward f).map (moduleCup_cosimplicialZeroIso X' C₁).inv) hc
+    simpa only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id,
+      Category.comp_id] using he
 
 end
 end AlgebraicGeometry.Scheme.Modules
