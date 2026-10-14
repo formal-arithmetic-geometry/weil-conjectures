@@ -12,6 +12,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 
 import Sheaf.Algebra.Homology.KFlatTelescopeClosure
+import Sheaf.CategoryTheory.RightKanExtensionCoherentShift
+import Sheaf.AlgebraicGeometry.FlatTelescopeShiftGauge
 
 /-! # Normalization on maps of flat telescope models
 
@@ -25,6 +27,10 @@ universe u w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated MonoidalCategory
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- The chosen counit and recorded pullback have large dependent types to compare.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Joint normalization on explicit model maps, before extension to arbitrary
 homotopy morphisms. Source: Stacks Project, Tags 06YS and 06YJ; parent steps 1
 and 2, and the model-map part of step 3. The tensorator normalization is the
@@ -95,7 +101,72 @@ theorem exists_normalized_flat_telescope_stage_comparison
               tensorIso e (Iso.refl _) ≪≫
               schemeCanonicalShiftUnitIso Z
                 ((derivedPullback f).obj (DerivedCategory.Qh.obj X))).hom ≫
-            (α X ⟨P, htel, Or.inl rfl⟩).hom⟦(1 : ℤ)⟧' := by sorry
+            (α X ⟨P, htel, Or.inl rfl⟩).hom⟦(1 : ℤ)⟧' := by
+  classical
+  obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
+      E, hE, hEmap, hEadd, ε, hleft, htri, hε⟩ :=
+    Classical.choose_spec (exists_derivedPullback.{u, w} f)
+  have hE' : E = Scheme.Modules.tensorPullback f :=
+    CategoryTheory.Functor.ext hE (fun _ _ s ↦ hEmap s)
+  subst E
+  let L := DerivedCategory.Qh ⋙ derivedPullback f
+  let G : HomotopyCategory
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ) ⥤
+      schemeDerivedCategory Z :=
+    (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙
+    (DerivedCategory.Qh : HomotopyCategory
+      (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤
+      schemeDerivedCategory Z)
+  change L ⟶ G at ε
+  obtain ⟨sF, hsF⟩ := Functor.rightKanExtension_coherentShift
+    G (DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
+      (derivedPullback f) ε hleft.isRightKanExtension
+  let : (derivedPullback f).CommShift ℤ := sF
+  let : NatTrans.CommShift ε ℤ := hsF
+  obtain ⟨e, a, ha⟩ := exists_flat_telescope_shift_gauge f ε hleft
+  have htelK (P : CochainComplex
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
+      (htel : isFlatTelescope Y P) : CochainComplex.IsKFlat (R := Y.sheaf) P := by
+    obtain ⟨E, t, hb, hf, rfl⟩ := htel
+    apply (CochainComplex.kFlat_closure Y.sheaf).2.2.2.1 E t
+    intro n
+    exact (CochainComplex.kFlat_closure Y.sheaf).1 (E n) (hb n) (hf n)
+  have hεiso (X : HomotopyCategory
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))
+      (hX : flatTelescopeShiftRepresentative Y X) : IsIso (ε.app X) := by
+    obtain ⟨P, hP, hX | hX⟩ := hX
+    · subst X
+      exact hε P (htelK P hP)
+    · subst X
+      let X := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P
+      have : IsIso (ε.app X) := hε P (htelK P hP)
+      have hs := NatTrans.shift_app_comm ε (1 : ℤ) X
+      have he : ε.app (X⟦(1 : ℤ)⟧) =
+          (L.commShiftIso (1 : ℤ)).hom.app X ≫ (ε.app X)⟦(1 : ℤ)⟧' ≫
+            (G.commShiftIso (1 : ℤ)).inv.app X := by
+        rw [← Category.assoc, hs, Category.assoc, Iso.hom_inv_id_app]
+        exact (Category.comp_id _).symm
+      rw [he]
+      infer_instance
+  let η : L ⟶ G := a.hom ≫ ε
+  have hηiso (X : HomotopyCategory
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))
+      (hX : flatTelescopeShiftRepresentative Y X) : IsIso (η.app X) := by
+    have := hεiso X hX
+    dsimp only [η, NatTrans.comp_app]
+    infer_instance
+  let α := fun X hX ↦ @asIso _ _ _ _ (η.app X) (hηiso X hX)
+  refine ⟨e, α, ?_, ?_⟩
+  · intro X X' hX hX' s _
+    exact η.naturality s
+  · intro P htel
+    dsimp only [α, asIso_hom]
+    change η.app _ ≫ _ = _ ≫ _ ≫ (η.app _)⟦(1 : ℤ)⟧'
+    dsimp only [η, NatTrans.comp_app]
+    rw [Category.assoc, ← NatTrans.shift_app_comm ε (1 : ℤ),
+      ← Category.assoc, ha P htel]
+    simp only [Category.assoc, ← Functor.map_comp]
+
 
 
 end AlgebraicGeometry

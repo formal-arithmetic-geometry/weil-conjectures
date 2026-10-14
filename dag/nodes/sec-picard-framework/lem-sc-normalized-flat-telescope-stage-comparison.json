@@ -22,48 +22,52 @@
  ],
  "proof": [
   {
-   "text": "Bounded-above flat stages, their countable sum, and their transition cone are K-flat. Termwise tensor pullback preserves the sum and cone and its K-flat counit computes derived pullback on these representatives. The unit and shifted unit have the usual degree-zero and translated models.",
+   "text": "Extract the universal counit ε and its K-flat invertibility from the specification of the recorded derived pullback. Identify the underived functor with the recorded tensor pullback by Functor.ext.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the right Kan extension coherent-shift theorem to equip derived pullback with a shift making ε commute with shifts. Obtain the source automorphism a and e from the source shift gauge theorem.",
+   "uses": [
+    "lem-pur-right-kan-extension-coherent-shift",
+    "lem-sc-flat-telescope-shift-gauge"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "A telescope is K-flat by applying bounded-above flat K-flatness to its stages and the sequential telescope clause of kFlat_closure. Thus ε is invertible there. Its shift square expresses ε at the translated object as a composite of isomorphisms, so it is invertible on every telescope-shift representative.",
    "uses": [
     "lem-pc-kflat-closure",
-    "def-pc-derived-pullback",
-    "def-pc-module-pullback",
-    "def-sc-flat-telescope-stage-map"
+    "def-sc-flat-telescope-stage-map",
+    "def-pc-derived-pullback"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Choose the unit normalization by the supplied monoidal unit map. Rewrite translation by the shifted unit using the first-variable Koszul comparison and translated left unitor. Construct e and the comparisons jointly. Expand tensorator associativity and both unit equations on the two cone summands: their transition, inclusion and projection maps commute, yielding the displayed shift equation.",
+   "text": "Set η = a.hom followed by ε and α_X = asIso(η_X). Naturality of η gives the required equation for stage-induced maps (in fact for every map between these representatives). In the shift equation first substitute shift compatibility of ε, then the source gauge equation for a, and combine shifted composites by functoriality. This is precisely the displayed normalized comparison equation.",
    "uses": [
-    "def-sc-scheme-canonical-shift-unit-iso",
-    "def-sc-scheme-canonical-tensor-shift",
-    "def-pc-scheme-derived-tensor-structure"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a compatible family of bounded-flat stage maps, the same equations on each stage commute with its sum map and the induced cone map. Translation preserves these equations. Common K-flat presentation comparisons give independence under homotopy isomorphisms, hence precisely naturality for the stage-induced maps. No extension to arbitrary homotopy maps is taken here.",
-   "uses": [
-    "def-pc-kflat-complex",
+    "lem-sc-flat-telescope-shift-gauge",
     "def-sc-flat-telescope-stage-map"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-derived-pullback",
-  "def-pc-kflat-complex",
   "def-pc-module-pullback",
-  "def-pc-scheme-derived-tensor-structure",
   "def-sc-flat-telescope-stage-map",
-  "def-sc-scheme-canonical-shift-unit-iso",
-  "def-sc-scheme-canonical-tensor-shift",
-  "lem-pc-kflat-closure"
+  "lem-pc-kflat-closure",
+  "lem-pur-right-kan-extension-coherent-shift",
+  "lem-sc-flat-telescope-shift-gauge"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "J2",
+  "group": "A2",
   "document": "https://stacks.math.columbia.edu/tag/06YJ",
-  "place": "Explicit split of the parent model construction and common-replacement argument."
+  "place": "Formal counit and coherent-shift reduction; the supplied-monoidal source gauge remains lem-sc-flat-telescope-shift-gauge."
  },
  "mathlib_searches": [
   {
@@ -135,11 +139,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-7f59d",
-  "group": "J2",
+  "reviewer": "COMPILER",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261014T043531-L-1335547",
+  "landing": "20261014T050525-L-1684626",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files and DAG metadata match the packet; all four modules and direct importer compile successfully, with only the two documented named sorry theorems remaining."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
