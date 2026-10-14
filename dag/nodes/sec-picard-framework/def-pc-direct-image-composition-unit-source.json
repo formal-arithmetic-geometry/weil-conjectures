@@ -1,0 +1,107 @@
+{
+ "id": "def-pc-direct-image-composition-unit-source",
+ "kind": "definition",
+ "title": "Composite derived unit with successive-pushforward source",
+ "statement": "For composable scheme maps s:A→B and t:B→D, with the three derived module categories in a common morphism universe, and every homotopy object K, define schemeMVCompositionUnit s t K to be the existing right-derived unit of (s≫t)_*, with source Q(t_*(s_*K)) and target R(s≫t)_*(QK). The source is definitionally the same as Q((s≫t)_*K), since pushforwardComp is the identity on sections. This is a fixed construction, not a choice. The derived-category conventions are [def-pc-derived-mayer-vietoris-canonical-data].",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08FE and 0D5T; https://stacks.math.columbia.edu/tag/08FE and https://stacks.math.columbia.edu/tag/0D5T, read 2026-10-14. The comparison normalization is the explicit equality-transport calculation of the parent node."
+ },
+ "stmt_deps": [
+  "def-pc-derived-mayer-vietoris-canonical-data"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "J1",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08FE and 0D5T; equality transport and normalization of canonical direct-image comparisons",
+  "note": "Source pages read. Lean interface calculation expanding the parent proof; no added geometric hypothesis."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equality transport of right derived functor units along equality of scheme morphisms; homotopy pushforward composition comparison",
+   "results": "Eight hits, including Scheme.Modules.pushforwardCongr and its section formulas; no derived unit transport theorem.",
+   "date": "2026-10-14",
+   "verdict": "underived ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerivedFunctorUnit",
+   "results": "Zero hits; unknown identifier 'Functor.rightDerivedFunctorUnit'.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardCongr|rightDerivedFunctorUnit",
+   "results": "Mathlib pushforwardCongr definitions and section formulas; no derived-unit normalization. Searched project modules too; DirectImageSquareUnitTransport has a global derived-category instance hypothesis, unavailable from this item’s four local derived-category structures.",
+   "date": "2026-10-14",
+   "verdict": "no applicable existing unit transport statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "right derived functor unit of a composite and equality transport of an open direct image square",
+   "results": "Service unavailable: Internal Server Error, recorded by msearch.py; independent Loogle, LeanFinder, and source grep searches are recorded.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenCompositionNormalization",
+  "date": "2026-10-14",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "proof: induction on a finite open cover, naturality of relative Mayer--Vietoris triangles including the connecting map: compatibility with individual open units and restrictions; normalized comparison computation before the unit and triangle-identity calculation; counit-computation proof step 1",
+   "via": [
+    "lem-pc-derived-mayer-vietoris-open-composition-normalization",
+    "lem-pc-derived-mayer-vietoris-open-composition-counit",
+    "lem-pc-derived-mayer-vietoris-open-comparison-unit",
+    "lem-pc-derived-mayer-vietoris-direct-image-squares",
+    "lem-pc-derived-mayer-vietoris-functorial",
+    "lem-pc-rf-mv-triangle-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedDirectImageCompositionUnit.lean",
+  "declaration": "AlgebraicGeometry.schemeMVCompositionUnit",
+  "statement": "def schemeMVCompositionUnit {A B D : Scheme.{u}}\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings A.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings B.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings D.toRingedSpace))]\n    (s : A ⟶ B) (t : B ⟶ D)\n    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings A.toRingedSpace))\n      (ComplexShape.up ℤ)) :\n    (fun {V W : Type _} [Category V] [Category W] {P Q : V ⥤ W}\n      (_ : P ⟶ Q) (J : V) ↦ P.obj J)\n      (RingedSpace.moduleDirectImage t.toLRSHom.toShHom).rightDerivedFunctorUnit\n      (((RingedSpace.moduleDirectImage s.toLRSHom.toShHom).mapHomotopyCategory\n        (ComplexShape.up ℤ)).obj K) ⟶\n      (schemeDerivedDirectImage (s ≫ t)).obj (DerivedCategory.Qh.obj K)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261014T020512-L-3811921",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261014T020512-L-3811921",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

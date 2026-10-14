@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenCounitModel
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
+import Sheaf.AlgebraicGeometry.DerivedDirectImageSquareUnitNormalization
 
 /-! # Composition normalization by derived units
 
@@ -24,6 +25,28 @@ set_option synthInstance.maxSize 2048
 noncomputable section
 namespace AlgebraicGeometry
 
+/-- Determining equation of the concrete composite unit.
+Source: Stacks Tag 0D5T (blueprint: def-pc-direct-image-composition-unit-source).
+Proof: the defining equation of the comparison chosen by its unit equation. -/
+private theorem schemeMVCompositionUnit_fac {A B D : Scheme.{u}}
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings A.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings B.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings D.toRingedSpace))]
+    (s : A ⟶ B) (t : B ⟶ D)
+    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings A.toRingedSpace))
+      (ComplexShape.up ℤ)) :
+    schemeMVCompositionUnit s t K ≫
+        (schemeMVDirectImageComposition s t).hom.app (DerivedCategory.Qh.obj K) =
+      (RingedSpace.moduleDirectImage t.toLRSHom.toShHom).rightDerivedFunctorUnit.app
+          (((RingedSpace.moduleDirectImage s.toLRSHom.toShHom).mapHomotopyCategory
+            (ComplexShape.up ℤ)).obj K) ≫
+        (RingedSpace.moduleDirectImage t.toLRSHom.toShHom).rightDerivedFunctor.map
+          ((RingedSpace.moduleDirectImage s.toLRSHom.toShHom).rightDerivedFunctorUnit.app K) := by
+  unfold schemeMVCompositionUnit
+  exact Classical.choose_spec (RingedSpace.exists_derivedModuleDirectImageComposition
+    s.toLRSHom.toShHom t.toLRSHom.toShHom) K
+
+
 variable (X Y : Scheme.{u}) (h : X ⟶ Y)
   [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
   [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -35,6 +58,8 @@ variable (X Y : Scheme.{u}) (h : X ⟶ Y)
 
 attribute [local instance 2000] schemeMVModuleAbelian
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- The composition square commutes with the right-derived units, before any counit
 is applied. This holds on every homotopy object, without a K-injectivity hypothesis.
 Source: Stacks Tag 0D5T; Tag 08FE, composition on inverse-image opens.
@@ -64,6 +89,21 @@ theorem schemeMVOpenComposition_unit_normalization
       DerivedCategory.Qh.map
           ((schemeMVHomotopyOpenComposition h U).hom.app K) ≫
         RY.rightDerivedFunctorUnit.app ((G.mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≫
-        RY.rightDerivedFunctor.map (G.rightDerivedFunctorUnit.app K) := by sorry
+        RY.rightDerivedFunctor.map (G.rightDerivedFunctorUnit.app K) := by
+  have hx := schemeMVCompositionUnit_fac (h ⁻¹ᵁ U).ι h K
+  have hy := schemeMVCompositionUnit_fac (h ∣_ U) U.ι K
+  have ht := schemeDirectImageSquare_single_unit_normalization.{u, w} X Y h U K
+  dsimp only at ht
+  dsimp only
+  rw [hβ]
+  simp only [← Category.assoc]
+  conv_lhs => lhs; rw [← hx]
+  conv_rhs => rw [Category.assoc]; rhs; rw [← hy]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
+    Iso.hom_inv_id_app_assoc]
+  rw [← Category.assoc]
+  conv_rhs => rw [← Category.assoc]
+  exact congrArg (fun v ↦ v ≫
+    (schemeMVDirectImageComposition (h ∣_ U) U.ι).hom.app (DerivedCategory.Qh.obj K)) ht
 
 end AlgebraicGeometry

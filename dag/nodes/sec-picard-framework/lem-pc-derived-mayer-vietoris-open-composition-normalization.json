@@ -13,24 +13,34 @@
  ],
  "proof": [
   {
-   "text": "apply the determining unit equation of each chosen composition comparison.\nTransport the middle unit along the equality jX followed by h = g followed by jY.\nNaturality of the right-derived unit identifies this transport with the image of\nthe underived open-composition identification. Cancel the comparison for g followed\nby jY and reassociate. The result is the equality of the two pasted units displayed\nbelow. No restriction functor or adjunction counit enters this computation.",
+   "text": "Use the determining unit equation of each chosen comparison, expressed by schemeMVCompositionUnit_fac, to replace each pasted pair of units by the single composite unit followed by its comparison.",
    "uses": [
-    "def-pc-derived-mayer-vietoris-open-counit-model",
+    "def-pc-direct-image-composition-unit-source",
     "lem-pc-ringed-spaces-derived-direct-image-composition"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Substitute hβ, cancel the first comparison against its inverse, and reassociate. Apply the single-unit transport equation across the commutative open square, then postcompose with the second comparison. Reassociate to recover the required equation.",
+   "uses": [
+    "lem-pc-direct-image-square-single-unit-normalization",
+    "def-pc-derived-mayer-vietoris-open-counit-model"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-mayer-vietoris-open-counit-model",
-  "lem-pc-ringed-spaces-derived-direct-image-composition"
+  "def-pc-direct-image-composition-unit-source",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-pc-direct-image-square-single-unit-normalization",
+  "def-pc-derived-mayer-vietoris-open-counit-model"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "E3",
+  "agent": "J1",
   "document": "Stacks Project, Cohomology of Sheaves",
-  "place": "Tags 08FE, 0D5T and 08BV; normalization of the fixed Lean comparisons by their factorization equations",
-  "note": "Lean interface calculations expanding the numbered argument of the parent; source pages read, categorical details written by E3."
+  "place": "Tags 08FE and 0D5T; normalization by composite-unit equations",
+  "note": "Second reading removed the canonical restatement. The actual categorical cancellation and pasting are proved in the item; only the strictly smaller single-unit transport remains open."
  },
  "mathlib_searches": [
   {
@@ -101,12 +111,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261013T201746-L-3968243",
+  "landing": "20261014T020512-L-3811921",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
