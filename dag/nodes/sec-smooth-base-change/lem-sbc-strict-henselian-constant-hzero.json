@@ -40,41 +40,123 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-etale-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply clause (1) of [lem-weil-pbc-cohomology-pullback-degree-zero] with T=X and G=\\underline A. Its canonical additive isomorphism epsilon identifies \\Gamma(X,\\underline A) with H^0(X_{\\mathrm{Et}},\\underline A), for precisely the K-injective derived-global-sections cohomology of the statement; take its inverse. This is natural in the abelian sheaf and independent of the resolution.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TD, lemma-left-exact-higher-derived, clause (3), specialized to global sections"
+   }
+  },
+  {
+   "text": "The local ring R has its proper maximal ideal \\mathfrak m, giving a point of X. Every proper ideal is contained in a maximal ideal, which must be \\mathfrak m; in particular every prime \\mathfrak p is contained in \\mathfrak m. By the Zariski definition, a closed subset V(J) contains \\mathfrak p exactly when J⊆\\mathfrak p, and then J⊆\\mathfrak m, so V(J) also contains \\mathfrak m. If X=C\\amalg D is a partition into closed and open subsets, the part containing \\mathfrak m must contain every point: a point in the other closed part would force \\mathfrak m to belong to that part as well. Thus the other part is empty and X is connected in the nonempty sense of [def-weil-connected-scheme]. This is a direct use of the defining closed subsets V(J) in the affine spectrum [def-weil-affine-spectrum] and the local-ring hypothesis [def-weil-pbc-henselian-terminology].",
+   "uses": [
+    "def-weil-connected-scheme",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary local-spectrum argument: every prime is contained in the unique maximal ideal"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-constant-sheaf-sections-connected] with T=X and E=A, using the connectedness just proved. It says that the canonical constant-section homomorphism iota_X:A→\\underline A(X) is an additive isomorphism. Compose the inverse of epsilon from Step 1 with the inverse of iota_X to obtain H^0(X_{\\mathrm{Et}},\\underline A)≃A.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-sections-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P5, remark-constant-locally-constant-maps; degree-zero clause of the blueprint"
+   }
+  },
+  {
+   "text": "For an abelian-group homomorphism u:A→B, the constant-presheaf map sends the constant section a to u(a), and sheafification carries this to \\underline u(iota_X(a))=iota_X(u(a)); the sheafified map is defined by the universal property [def-weil-pbc-sheafification] so that its composite with the sheafification unit is the unit composed with the constant-presheaf map [def-weil-pbc-constant-sheaf]. Naturality of epsilon in Step 1 then gives u∘(iota_X^{-1}∘epsilon_A^{-1})=(iota_X^{-1}∘epsilon_B^{-1})∘H^0(\\underline u). Both factors are additive isomorphisms, so their composite is the claimed natural additive equivalence.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-strict-henselian-constant-cohomology.md",
+    "place": "degree zero clause; explicit naturality of the constant-section and degree-zero maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "def-weil-connected-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-constant-sheaf-sections-connected",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-strict-henselian-constant-cohomology.md",
+  "place": "degree-zero clause, with Stacks 05TD and 03P5; explicit connected local-spectrum and naturality arguments"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "cohomology of finite constant sheaf on strictly henselian local scheme",
-   "results": "No matching cohomology theorem; unrelated affine-limit and cotangent declarations",
+   "query": "degree zero sheaf cohomology is global sections additive equivalence",
+   "results": "{\"t\": \"2026-10-14T17:57:51Z\", \"tool\": \"leanfinder\", \"query\": \"degree zero sheaf cohomology is global sections additive equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.cochainsIso₀\", \"CategoryTheory.Sheaf.ΓObjEquivSections\", \"CategoryTheory.Sheaf.ΓObjEquivHom\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.ΓNatIsoCoyoneda\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"ContinuousCohomology.continuousCohomologyZeroIso\", \"groupCohomology.cocyclesIso₀\"], \"digest\": \"6670812dc3e91b12\"}",
    "date": "2026-10-15",
-   "verdict": "no match"
+   "verdict": "no exact match for this item; generic ingredients only"
   },
   {
    "tool": "loogle",
-   "query": "Scheme.H, constantSheaf, IsStrictlyHenselianLocalRing",
-   "results": "0 hits; unknown identifier Scheme.H",
+   "query": "Sheaf.H.equiv₀, CategoryTheory.Sheaf.H",
+   "results": "{\"t\": \"2026-10-14T17:57:52Z\", \"tool\": \"loogle\", \"query\": \"Sheaf.H.equiv₀, CategoryTheory.Sheaf.H\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Sheaf.H.equiv₀'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-15",
-   "verdict": "no match"
+   "verdict": "no exact match for this item; generic ingredients only"
   },
   {
    "tool": "grep",
-   "query": "strictlyHenselian.*constant|constant.*cohomology (Mathlib/AlgebraicGeometry)",
-   "results": "0 hits",
+   "query": "equiv₀|H.*equiv.*sections",
+   "results": "{\"t\": \"2026-10-14T17:57:52Z\", \"tool\": \"grep\", \"query\": \"equiv₀|H.*equiv.*sections\", \"sub\": \"Mathlib/CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-15",
-   "verdict": "no match"
+   "verdict": "no exact match for this item; generic ingredients only"
   },
   {
    "tool": "leansearch",
-   "query": "higher etale cohomology vanishes for a sheaf on a strictly henselian local scheme",
-   "results": "service unavailable: Internal Server Error",
+   "query": "degree zero sheaf cohomology equals global sections",
+   "results": "{\"t\": \"2026-10-14T17:57:52Z\", \"tool\": \"leansearch\", \"query\": \"degree zero sheaf cohomology equals global sections\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-15",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global sections of a constant etale sheaf over a connected local scheme",
+   "results": "{\"t\": \"2026-10-14T17:59:25Z\", \"tool\": \"leanfinder\", \"query\": \"global sections of a constant etale sheaf over a connected local scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instSubsingletonCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensBot\", \"AlgebraicGeometry.StructureSheaf.toOpen_eq_const\", \"AlgebraicGeometry.StructureSheaf.exists_const\", \"Algebra.etaleLocus_eq_univ_iff\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"AlgebraicGeometry.StructureSheaf.const_self\", \"AlgebraicGeometry.StructureSheaf.locally_const_basicOpen\", \"AlgebraicGeometry.Scheme.component_nontrivial\"], \"digest\": \"76d71a6d88f167cc\"}",
+   "date": "2026-10-15",
+   "verdict": "no exact match for this item; generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "constantSheaf, ConnectedSpace",
+   "results": "{\"t\": \"2026-10-14T17:59:26Z\", \"tool\": \"loogle\", \"query\": \"constantSheaf, ConnectedSpace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'constantSheaf'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-15",
+   "verdict": "no exact match for this item; generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf|rightDerivedZeroIsoSelf",
+   "results": "{\"t\": \"2026-10-14T17:59:26Z\", \"tool\": \"grep\", \"query\": \"constantSheaf|rightDerivedZeroIsoSelf\", \"sub\": \"CategoryTheory/Abelian\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\"], \"digest\": \"f1c536911992275d\"}",
+   "date": "2026-10-15",
+   "verdict": "no exact match for this item; generic ingredients only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "sbc-lem-strict-henselian-constant-cohomology",
   "by": "worker",
@@ -93,5 +175,44 @@
    "branch": "slopmaster2",
    "file": "WeilConjectures/AlgebraicGeometry/Sites/StrictlyHenselian.lean"
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "lem-sbc-strict-henselian-constant-hzero",
+  "worker": "stage1",
+  "summary": "Use the existing K-injective H0/global-sections comparison, prove connectedness of the local spectrum directly, and apply the existing constant-sheaf sections theorem. No new nodes or Ext/derived-cohomology identification is assumed.",
+  "blueprint": "Realizes the degree-zero computation in the ancestor proof; the finite-cover assertion alone is not used to infer contractibility.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "why": "Clause (1) supplies the generic derived H0=sections comparison; sk-rem-rest has no such interface."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-sections-connected",
+    "why": "Computes the constant sheaf sections on the connected local spectrum, the degree-zero content of the blueprint; no such sections lemma belongs to sk-rem-rest."
+   },
+   {
+    "node": "def-weil-connected-scheme",
+    "why": "Defines the nonempty connectedness used to apply the constant-section tool."
+   },
+   {
+    "node": "def-weil-affine-spectrum",
+    "why": "Defines Spec and its Zariski topology for the elementary local-spectrum argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-weil-pbc-constant-sheaf-sections-connected",
+  "def-weil-connected-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-b2987eb3d",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-b2987eb3d (reviewer sub-agent of L); spot-checked: Reviewed the item, report, DAG route, cited nodes, and Stacks Tags 03P5, 03QO, and 05TD. All hypotheses, coefficient definitions, naturality, connectedness argument, edge cases, searches, and duplicate checks pass. Wrote review.md."
+ }
 }
