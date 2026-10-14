@@ -24,9 +24,93 @@
   "def-pc-ring-pseudo-coherent-complex",
   "lem-pur-derived-change-of-rings"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $A=R'$ and $I=\\ker(A\\to R)$, and choose $N\\geq1$ with $I^N=0$. Identify $A/I$ with $R$ by sending the class of $a$ to its image: this is well-defined, injective by the definition of $I$, and surjective by the hypothesis. Hence the scalar reductions below are exactly the derived reduction $K$ in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H76, lemma-check-pseudo-coherent-modulo-nilpotent, proof"
+   }
+  },
+  {
+   "text": "Assume $K'$ is pseudo-coherent. By [def-pc-ring-pseudo-coherent-complex] choose a bounded-above complex $F^\\bullet$ of finite free $A$-modules representing it. Every term is flat by [lem-weil-pbc-projective-module-flat], so $F^\\bullet$ is K-flat by [lem-pc-module-bounded-flat-kflat]. Apply [lem-pur-derived-change-of-rings] on the category with one object and only its identity morphism, with the identity covering. A presheaf on this category is just its value at that object, and the identity-cover sheaf condition imposes no extra restriction. Thus a ring sheaf is a ring and a module sheaf is a module; morphisms, complexes, cohomology, and tensor products are evaluated at that object. Consequently the K-flat computation in clause (2) gives: $K$ is represented by the termwise tensor complex $F^\\bullet\\otimes_A R$. A basis of each term tensors to the same finite basis over $R$, and zero terms above the bound stay zero. This is a bounded-above finite free model, so the pseudo-coherence definition gives the forward implication.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H76, lemma-check-pseudo-coherent-modulo-nilpotent, proof"
+   }
+  },
+  {
+   "text": "Conversely assume $K$ is pseudo-coherent. Its definition gives a bounded-above complex $E^\\bullet$ of finite free $R$-modules representing it. Its terms are projective by [lem-weil-pbc-free-module-projective]. Apply [lem-weil-pbc-nilpotent-projective-complex-lift] to $A,I,C=K'$ and $E^\\bullet$, using the given derived reduction identification and $I^N=0$. Obtain a bounded-above complex $P^\\bullet$ of projective $A$-modules representing $K'$ and an isomorphism of complexes $P^\\bullet/IP^\\bullet\\cong E^\\bullet$. In particular every $P^i/IP^i$ has a finite basis. No pseudo-coherence of $K'$ has been assumed in this lifting step. The quotient and tensor descriptions agree degreewise by the mutually inverse maps $p\\otimes\\bar a\\mapsto\\overline{ap}$ and $\\bar p\\mapsto p\\otimes1$; these commute with the differentials since those are $A$-linear.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-weil-pbc-free-module-projective",
+    "lem-weil-pbc-nilpotent-projective-complex-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H76, lemma-check-pseudo-coherent-modulo-nilpotent, proof"
+   }
+  },
+  {
+   "text": "Fix a degree $i$ and choose the finite basis of $P^i/IP^i$ supplied by the isomorphism with $E^i$. Lift its $r_i$ basis vectors to $P^i$, and let $u:A^{\\oplus r_i}\\to P^i$ send the standard basis to those lifts. Its quotient map modulo $I$ is an isomorphism, hence surjective. Nilpotent Nakayama [lem-weil-pbc-nakayama-nilpotent] makes $u$ surjective even though $P^i$ is not yet known finite. Thus the chosen lifts generate $P^i$.",
+   "uses": [
+    "lem-weil-pbc-nakayama-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H76, lemma-check-pseudo-coherent-modulo-nilpotent, proof"
+   }
+  },
+  {
+   "text": "Projectivity, in its lifting-along-surjections form [def-weil-pbc-projective-module], supplies a section $s:P^i\\to A^{\\oplus r_i}$ of $u$. Put $T=\\ker(u)$. The explicit decomposition $v=(v-su(v))+su(v)$ identifies $A^{\\oplus r_i}$ with $T\\oplus P^i$. Multiplication by $I$ respects this decomposition, so its quotient is $(T/IT)\\oplus(P^i/IP^i)$, and the reduced map of $u$ is the projection onto the second factor. That map is an isomorphism by the chosen basis, so $T/IT=0$. Apply [lem-weil-pbc-nakayama-nilpotent] to $0\\to T$ to conclude $T=0$. Hence $u$ is an isomorphism and $P^i$ is finite free of rank $r_i$. This also works when $r_i=0$.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "lem-weil-pbc-nakayama-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H76, lemma-check-pseudo-coherent-modulo-nilpotent, proof"
+   }
+  },
+  {
+   "text": "Perform the preceding argument in every degree of the already constructed complex $P^\\bullet$. Its terms are now finite free; its differentials, bound, and derived identification with $K'$ were supplied in step 3 and have not been altered. Thus $P^\\bullet$ is a bounded-above finite free model for $K'$. By [def-pc-ring-pseudo-coherent-complex], $K'$ is pseudo-coherent, which proves the reverse implication.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H76, lemma-check-pseudo-coherent-modulo-nilpotent, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-weil-pbc-projective-module",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-free-module-projective",
+  "lem-weil-pbc-nakayama-nilpotent",
+  "lem-weil-pbc-nilpotent-projective-complex-lift",
+  "lem-weil-pbc-projective-module-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0H76, lemma-check-pseudo-coherent-modulo-nilpotent, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,15 +146,82 @@
    "results": "8 hits: ModuleCat.projectiveResolution, CategoryTheory.ProjectiveResolution.ofComplex, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, AdicCompletion.exists_smodEq_pow_add_one_smul, CategoryTheory.ProjectiveResolution.of_def, CategoryTheory.Abelian.LeftResolution.chainComplex, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq",
    "date": "2026-10-14",
    "verdict": "no match: unrestricted projective resolutions and ordinary completion do not detect finite-free derived models across nilpotent quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not assert lifting a specified complex through nilpotent reduction or detection of pseudo-coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo coherence of a derived complex is invariant under a surjective ring map with nilpotent kernel",
+   "results": "8 hits: KaehlerDifferential.map_surjective_of_surjective, RingHom.FormallyUnramified.of_surjective, Derivation.liftOfSurjective, Algebra.FormallySmooth.of_comp_surjective, Algebra.FormallySmooth.comp_surjective, Derivation.liftOfSurjective_apply, KaehlerDifferential.mapBaseChange_surjective, Algebra.FormallyUnramified.of_surjective",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not assert lifting a specified complex through nilpotent reduction or detection of pseudo-coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudo\", \"coherent\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not assert lifting a specified complex through nilpotent reduction or detection of pseudo-coherence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pseudo coherent complexes are detected by reduction modulo a nilpotent ideal",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-pseudocoherent-normalized-algebra-tower",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-pseudo-coherent-nilpotent-invariance",
+  "worker": "stage1",
+  "summary": "Read 0H76 and 09AR in the local Stacks source. Split both directions explicitly; add only the projective-complex lifting theorem without an upstairs pseudo-coherence hypothesis. Expand the finite-free conclusion via a lifted finite basis, nilpotent Nakayama without finiteness, projective splitting and vanishing of the reduced kernel. Retain the exact statement.",
+  "blueprint": "Realizes proof (c), TOW of thm-weil-pbc-amplification-proper through the existing local-effectivity and normalized-algebra-tower ancestry: pseudo-coherence across a nilpotent coefficient quotient.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic bounded-above flat K-flat criterion to compute reduction; no criterion in this unit."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat computation of derived scalar extension on the one-object site; no alternative scalar-extension construction in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-free-module-projective",
+    "why": "Generic freeness implies projectivity to verify 09AR hypotheses; no such module lemma in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-nilpotent",
+    "why": "Generic nilpotent Nakayama without finiteness to detect surjectivity and kill the split kernel; no finiteness assumption is available beforehand."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-free-module-projective",
+  "lem-weil-pbc-nakayama-nilpotent"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-6708abf80",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-6708abf80 (reviewer sub-agent of L); spot-checked: Read both nodes fully, all six steps, cited statements and sources, route, and archived master targets. Mathematics agrees with Stacks 0H76/09AR; no duplicate, circular split, or coefficient-category substitution found. Repaired missing creation metadata and Lean audit record in fixes; review.md records checks, edge cases, and four accepted generic tool uses.; 1 file(s) fixed by the reviewer"
+ }
 }
