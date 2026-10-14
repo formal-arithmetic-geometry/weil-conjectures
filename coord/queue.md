@@ -1,6 +1,6 @@
 # Work queue
 
-68 items; claim with `tools/claim.py next <group> [--stage N]`.
+69 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (68)
+## Stage 3: modules to prove (69)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -29,6 +29,7 @@
 | `Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore` | 18 | 0 | repair |
 | `Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling` | 12 | 0 | repair |
 | `Sheaf.AlgebraicGeometry.SheafZeroStalks` | 14 | 0 | repair |
+| `Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker` | 9 | 0 | repair |
 | `Sheaf.RingTheory.ProjectiveResolutionExtDegree` | 16 | 0 | repair |
 | `Sheaf.Topology.RingedModuleSkyscraper` | 10 | 0 | repair |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed` | 8 | 0 | repair |
