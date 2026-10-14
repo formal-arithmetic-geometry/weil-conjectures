@@ -1,0 +1,100 @@
+{
+ "id": "def-pc-perfect-hom-open-restriction-map",
+ "kind": "definition",
+ "title": "Concrete cartesian open restriction of pullback Hom",
+ "statement": "For schemes s:Y → S, r:T → S and B open in Y, construct b:B ×_S T → Y ×_S T by pullback.map with B.ι, identity T and identity S. Given a:derivedPullback(B.ι) ⊣ schemeDerivedDirectImage(B.ι), form the comparison κ from the fixed composition comparisons, the equation b followed by the original projection equals the restricted projection followed by B.ι, and the mate comparing a with schemeMVAdjunction. Define restriction of a Hom f by κ(M).inv followed by derivedPullback(b).map(f) followed by κ(Q).hom. These are the same three concrete definitions formerly stated in the parent module, with unchanged signatures and bodies. [lem-pc-perfect-hom-transport, def-pc-derived-mayer-vietoris-canonical-data].",
+ "stmt_deps": [
+  "lem-pc-perfect-hom-transport",
+  "def-pc-derived-mayer-vietoris-canonical-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W and 08FE; perfect.tex Tag 09RE, restriction to inverse-image opens in the Hom comparison"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback composition comparisons make Hom transport commute with restriction to an open subscheme",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback composition comparisons make Hom transport commute with restriction to an open subscheme",
+   "date": "2026-10-14",
+   "results": "AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict, AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst, AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc, AlgebraicGeometry.Scheme.Hom.appLE_map",
+   "verdict": "Generic or underived results; no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "perfectHomOpenRestrictionMap|PerfectHomOpenRestrictedEquivFields|perfectHomComposition",
+   "date": "2026-10-14",
+   "results": "No Mathlib hits.",
+   "verdict": "Generic or underived results; no exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedData",
+  "date": "2026-10-14",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Concrete cartesian open restriction of pullback Hom in the open restriction of the representing Hom cocone.",
+   "via": [
+    "lem-pc-perfect-hom-open-restricted-data",
+    "lem-pc-perfect-hom-open-stage-maps",
+    "lem-pc-perfect-hom-open-stage-presentation",
+    "lem-pc-perfect-hom-mayer-vietoris-geometric-columns-odd",
+    "lem-pc-perfect-hom-mayer-vietoris-geometric-columns"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictionMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomOpenRestrictionMap.lean",
+  "declaration": "AlgebraicGeometry.perfectHomOpenRestrictionMap",
+  "statement": "def perfectHomOpenRestrictionMap (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι) {M Q : schemeDerivedCategory Y} (f : (derivedPullback (pullback.fst s r)).obj M ⟶ (derivedPullback (pullback.fst s r)).obj Q) : (derivedPullback (pullback.fst (B.ι ≫ s) r)).obj ((schemeMVDerivedRestriction Y B).obj M) ⟶ (derivedPullback (pullback.fst (B.ι ≫ s) r)).obj ((schemeMVDerivedRestriction Y B).obj Q)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.perfectHomOpenBaseChangeMap",
+   "AlgebraicGeometry.perfectHomOpenPullbackComparison",
+   "AlgebraicGeometry.perfectHomOpenRestrictionMap"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-6585f",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261014T022549-L-4046919",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-6585f",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261014T022549-L-4046919",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with the nodes and change record; parent signature and moved definitions are unchanged. All five modules and direct importer PerfectHomOpenStageMaps compile cleanly; axiom probes show only standard axioms and documented inherited sorryAx."
+ }
+}

@@ -2,10 +2,11 @@
  "id": "lem-pc-perfect-hom-open-restricted-data-pinned",
  "kind": "lemma",
  "title": "Pinned equations for restricted representing data",
- "statement": "Conjunction of stage and limit equations",
+ "statement": "theorem perfect_hom_open_restricted_data_pinned {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i)) [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (B : Y.Opens) (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι) (Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ schemeDerivedCategory Y) (d : Cocone F) (h : PerfectHomPushPullData R c s Q F d) (e : PerfectHomOpenRestrictedEquivFields R c s B Q F d) (hs : ∀ j : Set.Ici i, e.stageEquiv j ((schemeMVDerivedRestriction Y B).obj (F.obj j)) (𝟙 _) = perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j (F.obj j) (𝟙 _))) (hl : e.limitEquiv ((schemeMVDerivedRestriction Y B).obj d.pt) (𝟙 _) = perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a (h.limitEquiv d.pt (𝟙 _))) : (∀ (j : Set.Ici i) (M : schemeDerivedCategory Y) (f : M ⟶ F.obj j), e.stageEquiv j ((schemeMVDerivedRestriction Y B).obj M) ((schemeMVDerivedRestriction Y B).map f) = perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j M f)) ∧ (∀ (M : schemeDerivedCategory Y) (f : M ⟶ d.pt), e.limitEquiv ((schemeMVDerivedRestriction Y B).obj M) ((schemeMVDerivedRestriction Y B).map f) = perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a (h.limitEquiv M f))",
  "stmt_deps": [
   "lem-pc-perfect-hom-push-pull-cocone",
-  "def-pc-derived-mayer-vietoris-canonical-data"
+  "new-perfect-hom-open-restricted-equiv-fields",
+  "def-pc-perfect-hom-open-restriction-map"
  ],
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
@@ -13,24 +14,24 @@
  },
  "proof": [
   {
-   "text": "STATEMENT-DISPUTED: The planned restriction construction produces a particular compatible representing datum, whereas the Lean statement quantifies over arbitrary hB. Simultaneously negate its stage and apex equivalences: naturality and transition compatibility are preserved, but the asserted equations change sign. With B the full open of Spec(Q), a singleton constant diagram, and the structure sheaf in degree zero, the identity differs from its negative, so the equations cannot hold for both hB choices. No proof of the statement as written is supplied. The existential parent must construct one compatible hB rather than apply this universal assertion.",
+   "text": "Pair the proved stage and apex naturality lemmas, supplying their identity normalization hypotheses.",
    "uses": [
-    "lem-pc-perfect-hom-push-pull-cocone",
-    "def-pc-derived-mayer-vietoris-canonical-data"
+    "new-perfect-hom-open-restricted-stage-pinned",
+    "new-perfect-hom-open-restricted-limit-pinned"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-perfect-hom-push-pull-cocone",
-  "def-pc-derived-mayer-vietoris-canonical-data"
+  "new-perfect-hom-open-restricted-limit-pinned",
+  "new-perfect-hom-open-restricted-stage-pinned"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "N2",
+  "group": "P1",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 079W and 08FE; perfect.tex Tag 09RE",
-  "note": "Second reading: the proposed mate calculation does not justify arbitrary independently chosen representing equivalences."
+  "place": "Tags 079W and 08FE; perfect.tex Tag 09RE, restriction to inverse-image opens in the Hom comparison",
+  "note": "Repair using supported testing objects, identity normalization, and existing cartesian transport."
  },
  "mathlib_searches": [
   {
@@ -80,9 +81,9 @@
   "module": "Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedData",
   "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomOpenRestrictedData.lean",
   "declaration": "AlgebraicGeometry.perfect_hom_open_restricted_data_pinned",
-  "statement": "theorem perfect_hom_open_restricted_data_pinned\n    {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)\n    {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i))\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (B : Y.Opens) (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι)\n    (Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ schemeDerivedCategory Y)\n    (d : Cocone F)\n    (h : PerfectHomPushPullData R c s Q F d)\n    (hB : PerfectHomPushPullData R c (B.ι ≫ s)\n      ((schemeMVDerivedRestriction Y B).obj Q)\n      (F ⋙ schemeMVDerivedRestriction Y B)\n      ((schemeMVDerivedRestriction Y B).mapCocone d)) :\n    (∀ (j : Set.Ici i) (M : schemeDerivedCategory Y) (f : M ⟶ F.obj j),\n      hB.stageEquiv j ((schemeMVDerivedRestriction Y B).obj M)\n          ((schemeMVDerivedRestriction Y B).map f) =\n        perfectHomOpenRestrictionMap s B\n          (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j M f)) ∧\n    (∀ (M : schemeDerivedCategory Y) (f : M ⟶ d.pt),\n      hB.limitEquiv ((schemeMVDerivedRestriction Y B).obj M)\n          ((schemeMVDerivedRestriction Y B).map f) =\n        perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a\n          (h.limitEquiv M f))",
+  "statement": "theorem perfect_hom_open_restricted_data_pinned {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i)) [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (B : Y.Opens) (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι) (Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ schemeDerivedCategory Y) (d : Cocone F) (h : PerfectHomPushPullData R c s Q F d) (e : PerfectHomOpenRestrictedEquivFields R c s B Q F d) (hs : ∀ j : Set.Ici i, e.stageEquiv j ((schemeMVDerivedRestriction Y B).obj (F.obj j)) (𝟙 _) = perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j (F.obj j) (𝟙 _))) (hl : e.limitEquiv ((schemeMVDerivedRestriction Y B).obj d.pt) (𝟙 _) = perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a (h.limitEquiv d.pt (𝟙 _))) : (∀ (j : Set.Ici i) (M : schemeDerivedCategory Y) (f : M ⟶ F.obj j), e.stageEquiv j ((schemeMVDerivedRestriction Y B).obj M) ((schemeMVDerivedRestriction Y B).map f) = perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j M f)) ∧ (∀ (M : schemeDerivedCategory Y) (f : M ⟶ d.pt), e.limitEquiv ((schemeMVDerivedRestriction Y B).obj M) ((schemeMVDerivedRestriction Y B).map f) = perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a (h.limitEquiv M f))",
   "branch": "sheaf-dag",
-  "by": "U2",
+  "by": "P1",
   "date": "2026-10-14"
  },
  "reviewed": {
@@ -98,18 +99,56 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H1",
+  "reviewer": "X-6585f",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261014T010843-L-3163766",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.perfect_hom_open_restricted_data_pinned"
+  "landing": "20261014T022549-L-4046919",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with the nodes and change record; parent signature and moved definitions are unchanged. All five modules and direct importer PerfectHomOpenStageMaps compile cleanly; axiom probes show only standard axioms and documented inherited sorryAx."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "P1 stage 2",
+  "old_statement": "Conjunction of stage and limit equations",
+  "what": "The old universal equation for arbitrary hB is false under simultaneous sign twist. Replace it with propagation of a supplied identity normalization for the equivalence/naturality fields; the parent constructs those fields from h.",
+  "source": {
+   "document": "literature/stacks-project/cohomology.tex",
+   "place": "Tags 079W and 08FE; perfect.tex Tag 09RE, restriction to inverse-image opens in the Hom comparison"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-perfect-hom-open-restricted-data",
+    "holds": true,
+    "note": "Use is repaired in this delivery: supply the identity-normalized fields constructed from h."
+   },
+   {
+    "id": "new-perfect-hom-open-restricted-limit-pinned",
+    "holds": true,
+    "note": "Its old backward use of the conjunction is removed; the corrected naturality proof is independent."
+   },
+   {
+    "id": "new-perfect-hom-open-restricted-stage-pinned",
+    "holds": true,
+    "note": "Its old backward use of the conjunction is removed; the corrected naturality proof is independent."
+   }
   ],
-  "sorry_after": [
-   "AlgebraicGeometry.perfect_hom_open_restricted_limit_pinned",
-   "AlgebraicGeometry.perfect_hom_open_restricted_stage_pinned"
+  "old_stmt_deps": [
+   "lem-pc-perfect-hom-push-pull-cocone",
+   "def-pc-derived-mayer-vietoris-canonical-data"
+  ],
+  "old_proof": [
+   {
+    "text": "STATEMENT-DISPUTED: The planned restriction construction produces a particular compatible representing datum, whereas the Lean statement quantifies over arbitrary hB. Simultaneously negate its stage and apex equivalences: naturality and transition compatibility are preserved, but the asserted equations change sign. With B the full open of Spec(Q), a singleton constant diagram, and the structure sheaf in degree zero, the identity differs from its negative, so the equations cannot hold for both hB choices. No proof of the statement as written is supplied. The existential parent must construct one compatible hB rather than apply this universal assertion.",
+    "uses": [
+     "lem-pc-perfect-hom-push-pull-cocone",
+     "def-pc-derived-mayer-vietoris-canonical-data"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pc-perfect-hom-push-pull-cocone",
+   "def-pc-derived-mayer-vietoris-canonical-data"
   ]
  }
 }

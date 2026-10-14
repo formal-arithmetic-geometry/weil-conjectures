@@ -1,88 +1,58 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group F1
+Authors: SHEAF group P1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectHomPushPullCocone
-public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
-import Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedDataExists
+public import Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictionMap
+public import Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedEquivFields
+import Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedPinnedEquiv
+import Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedPinnedMaps
+import Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedQCoh
 
-/-! # Unshifted restriction of a representing pullback Hom cocone
+/-! # Compatible open restriction of representing Hom data
 
-Source: Stacks Project, Cohomology, Tags 079W and 08FE; perfect.tex, Tag 09RE.
+The compatibility at identity morphisms determines compatibility at every testing morphism.
+Source: Stacks Project, Tags 079W, 08FE and 09RE.
 (blueprint: lem-pc-perfect-hom-open-restricted-data).
 -/
 
 @[expose] public section
-
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
-
 set_option backward.isDefEq.respectTransparency false
 set_option synthInstance.maxSize 2048
 noncomputable section
 
-variable {S Y T : Scheme.{u}} (s : Y ⟶ S) (B : Y.Opens) (r : T ⟶ S)
-  [∀ Z : Scheme.{u},
-    HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
-
-/-- The cartesian map induced by the open inclusion, constructed by pullback.map.
-Source: Stacks Tag 09RE (blueprint: lem-pc-perfect-hom-open-restricted-data). -/
-def perfectHomOpenBaseChangeMap : pullback (B.ι ≫ s) r ⟶ pullback s r :=
-  pullback.map (B.ι ≫ s) r s r B.ι (𝟙 T) (𝟙 S) (by simp) (by simp)
-
-/-- The pullback comparison on the cartesian open square, fixed by the supplied
-open pullback adjunction and the existing counit-pinned composition comparisons.
-Source: Stacks Tags 079W and 09RE (blueprint: lem-pc-perfect-hom-open-restricted-data). -/
-def perfectHomOpenPullbackComparison
-    (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι) :
-    derivedPullback (pullback.fst s r) ⋙ derivedPullback (perfectHomOpenBaseChangeMap s B r) ≅
-      schemeMVDerivedRestriction Y B ⋙ derivedPullback (pullback.fst (B.ι ≫ s) r) := by
-  let σ : schemeMVDerivedRestriction Y B ≅ derivedPullback B.ι :=
-    (conjugateIsoEquiv a (schemeMVAdjunction Y B)).symm (Iso.refl _)
-  have he : perfectHomOpenBaseChangeMap s B r ≫ pullback.fst s r =
-      pullback.fst (B.ι ≫ s) r ≫ B.ι := by
-    simp [perfectHomOpenBaseChangeMap, pullback.map]
-  exact perfectHomComposition (perfectHomOpenBaseChangeMap s B r) (pullback.fst s r) ≪≫
-    eqToIso (congrArg (fun f ↦ derivedPullback f) he) ≪≫
-    (perfectHomComposition (pullback.fst (B.ι ≫ s) r) B.ι).symm ≪≫
-    Functor.isoWhiskerRight σ.symm (derivedPullback (pullback.fst (B.ι ≫ s) r))
-
-/-- Restrict a pullback Hom along the explicit cartesian map and conjugate it by
-perfectHomOpenPullbackComparison. No existence witness is selected here.
-Source: Stacks Tag 09RE (blueprint: lem-pc-perfect-hom-open-restricted-data). -/
-def perfectHomOpenRestrictionMap
+private theorem restriction_map_natural
+    {S Y T : Scheme.{u}} (s : Y ⟶ S) (B : Y.Opens) (r : T ⟶ S)
+    [∀ Z : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι)
-    {M Q : schemeDerivedCategory Y}
-    (f : (derivedPullback (pullback.fst s r)).obj M ⟶
+    {M N Q : schemeDerivedCategory Y} (g : M ⟶ N)
+    (f : (derivedPullback (pullback.fst s r)).obj N ⟶
       (derivedPullback (pullback.fst s r)).obj Q) :
-    (derivedPullback (pullback.fst (B.ι ≫ s) r)).obj
-        ((schemeMVDerivedRestriction Y B).obj M) ⟶
-      (derivedPullback (pullback.fst (B.ι ≫ s) r)).obj
-        ((schemeMVDerivedRestriction Y B).obj Q) :=
-  (perfectHomOpenPullbackComparison s B r a).inv.app M ≫
-    (derivedPullback (perfectHomOpenBaseChangeMap s B r)).map f ≫
-    (perfectHomOpenPullbackComparison s B r a).hom.app Q
+    perfectHomOpenRestrictionMap s B r a
+        ((derivedPullback (pullback.fst s r)).map g ≫ f) =
+      (derivedPullback (pullback.fst (B.ι ≫ s) r)).map
+          ((schemeMVDerivedRestriction Y B).map g) ≫
+        perfectHomOpenRestrictionMap s B r a f := by
+  unfold perfectHomOpenRestrictionMap
+  rw [Functor.map_comp]
+  have hn := (perfectHomOpenPullbackComparison s B r a).inv.naturality g
+  dsimp only [Functor.comp_map] at hn
+  simp only [Category.assoc]
+  rw [← Category.assoc, ← hn]
+  simp only [Category.assoc]
 
-end
-
-noncomputable section
-
-/- STATEMENT-DISPUTED: hB is arbitrary representing data, not the restriction of h.
-Negating all its stage and apex equivalences preserves naturality and transition
-compatibility, but changes the asserted pinned equations. For the full open of
-Spec(Q), a one-object constant ring diagram, and Q the structure sheaf in degree
-zero, the identity and its negative are distinct. The same fixed h and a cannot
-satisfy the displayed equations for both choices of hB. Yoneda determines a
-representing isomorphism from an equivalence; it does not uniquely choose that
-equivalence on a fixed representing object. The existential parent needs one
-compatible hB constructed from h, not this assertion about every hB. -/
-/-- Stage mate equation for the restricted representing data. The proof is the
-restriction and adjunction mate calculation described in the parent node; it is
-left as this named obligation because arbitrary hB is disputed.
+/-- Compatibility at a stage identity implies compatibility at every testing morphism.
+Source: Stacks Tags 079W and 09RE.
+Proof: express each natural Hom equivalence at f by its value on the identity of
+F_j. Apply restriction-map naturality to the original expression and use the
+supplied identity equation. Independent representing data without that equation
+need not agree; this hypothesis repairs the earlier false universal assertion.
 (blueprint: new-perfect-hom-open-restricted-stage-pinned). -/
 theorem perfect_hom_open_restricted_stage_pinned
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
@@ -92,20 +62,27 @@ theorem perfect_hom_open_restricted_stage_pinned
     (B : Y.Opens) (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι)
     (Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ schemeDerivedCategory Y)
     (d : Cocone F) (h : PerfectHomPushPullData R c s Q F d)
-    (hB : PerfectHomPushPullData R c (B.ι ≫ s)
-      ((schemeMVDerivedRestriction Y B).obj Q)
-      (F ⋙ schemeMVDerivedRestriction Y B)
-      ((schemeMVDerivedRestriction Y B).mapCocone d)) :
+    (e : PerfectHomOpenRestrictedEquivFields R c s B Q F d)
+    (he : ∀ j : Set.Ici i,
+      e.stageEquiv j ((schemeMVDerivedRestriction Y B).obj (F.obj j)) (𝟙 _) =
+        perfectHomOpenRestrictionMap s B
+          (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j (F.obj j) (𝟙 _))) :
     ∀ (j : Set.Ici i) (M : schemeDerivedCategory Y) (f : M ⟶ F.obj j),
-      hB.stageEquiv j ((schemeMVDerivedRestriction Y B).obj M)
+      e.stageEquiv j ((schemeMVDerivedRestriction Y B).obj M)
           ((schemeMVDerivedRestriction Y B).map f) =
         perfectHomOpenRestrictionMap s B
           (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j M f) := by
-  sorry
+  intro j M f
+  have hb := e.stageNatural j _ _ ((schemeMVDerivedRestriction Y B).map f) (𝟙 _)
+  have hh := h.stageNatural j M (F.obj j) f (𝟙 _)
+  simp only [Category.comp_id] at hb hh
+  rw [hb, he j, hh, restriction_map_natural]
 
-/-- Apex mate equation for the restricted representing data. The proof repeats
-the stage restriction calculation at the cocone apex; it is left as this named
-obligation because arbitrary hB is disputed.
+/-- Compatibility at the apex identity implies compatibility at every testing morphism.
+Source: Stacks Tags 079W and 09RE.
+Proof: use testing-object naturality at f and the identity of d.pt on each side,
+then restriction-map naturality and the supplied apex identity equation.
+This statement makes no assertion about independently chosen unpinned data.
 (blueprint: new-perfect-hom-open-restricted-limit-pinned). -/
 theorem perfect_hom_open_restricted_limit_pinned
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
@@ -115,17 +92,25 @@ theorem perfect_hom_open_restricted_limit_pinned
     (B : Y.Opens) (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι)
     (Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ schemeDerivedCategory Y)
     (d : Cocone F) (h : PerfectHomPushPullData R c s Q F d)
-    (hB : PerfectHomPushPullData R c (B.ι ≫ s)
-      ((schemeMVDerivedRestriction Y B).obj Q)
-      (F ⋙ schemeMVDerivedRestriction Y B)
-      ((schemeMVDerivedRestriction Y B).mapCocone d)) :
+    (e : PerfectHomOpenRestrictedEquivFields R c s B Q F d)
+    (he : e.limitEquiv ((schemeMVDerivedRestriction Y B).obj d.pt) (𝟙 _) =
+      perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a
+        (h.limitEquiv d.pt (𝟙 _))) :
     ∀ (M : schemeDerivedCategory Y) (f : M ⟶ d.pt),
-      hB.limitEquiv ((schemeMVDerivedRestriction Y B).obj M)
+      e.limitEquiv ((schemeMVDerivedRestriction Y B).obj M)
           ((schemeMVDerivedRestriction Y B).map f) =
         perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a
           (h.limitEquiv M f) := by
-  sorry
+  intro M f
+  have hb := e.limitNatural _ _ ((schemeMVDerivedRestriction Y B).map f) (𝟙 _)
+  have hh := h.limitNatural M d.pt f (𝟙 _)
+  simp only [Category.comp_id] at hb hh
+  rw [hb, he, hh, restriction_map_natural]
 
+/-- Combine the identity-normalized stage and apex equations.
+Source: Stacks Tags 079W and 09RE.
+Proof: apply the two naturality lemmas to the supplied identity equations.
+(blueprint: lem-pc-perfect-hom-open-restricted-data-pinned). -/
 theorem perfect_hom_open_restricted_data_pinned
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i))
@@ -133,24 +118,27 @@ theorem perfect_hom_open_restricted_data_pinned
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     (B : Y.Opens) (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι)
     (Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ schemeDerivedCategory Y)
-    (d : Cocone F)
-    (h : PerfectHomPushPullData R c s Q F d)
-    (hB : PerfectHomPushPullData R c (B.ι ≫ s)
-      ((schemeMVDerivedRestriction Y B).obj Q)
-      (F ⋙ schemeMVDerivedRestriction Y B)
-      ((schemeMVDerivedRestriction Y B).mapCocone d)) :
+    (d : Cocone F) (h : PerfectHomPushPullData R c s Q F d)
+    (e : PerfectHomOpenRestrictedEquivFields R c s B Q F d)
+    (hs : ∀ j : Set.Ici i,
+      e.stageEquiv j ((schemeMVDerivedRestriction Y B).obj (F.obj j)) (𝟙 _) =
+        perfectHomOpenRestrictionMap s B
+          (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j (F.obj j) (𝟙 _)))
+    (hl : e.limitEquiv ((schemeMVDerivedRestriction Y B).obj d.pt) (𝟙 _) =
+      perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a
+        (h.limitEquiv d.pt (𝟙 _))) :
     (∀ (j : Set.Ici i) (M : schemeDerivedCategory Y) (f : M ⟶ F.obj j),
-      hB.stageEquiv j ((schemeMVDerivedRestriction Y B).obj M)
+      e.stageEquiv j ((schemeMVDerivedRestriction Y B).obj M)
           ((schemeMVDerivedRestriction Y B).map f) =
         perfectHomOpenRestrictionMap s B
           (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j M f)) ∧
     (∀ (M : schemeDerivedCategory Y) (f : M ⟶ d.pt),
-      hB.limitEquiv ((schemeMVDerivedRestriction Y B).obj M)
+      e.limitEquiv ((schemeMVDerivedRestriction Y B).obj M)
           ((schemeMVDerivedRestriction Y B).map f) =
         perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a
           (h.limitEquiv M f)) := by
-  exact ⟨perfect_hom_open_restricted_stage_pinned R c s B a Q F d h hB,
-    perfect_hom_open_restricted_limit_pinned R c s B a Q F d h hB⟩
+  exact ⟨perfect_hom_open_restricted_stage_pinned R c s B a Q F d h e hs,
+    perfect_hom_open_restricted_limit_pinned R c s B a Q F d h e hl⟩
 
 /-- Exact open restriction carries a representing pullback Hom cocone to a representing
 cocone for the restricted base scheme. There is no shift or outer open direct image
@@ -253,10 +241,19 @@ theorem perfect_hom_open_restricted_data
       (∀ (M : schemeDerivedCategory Y) (f : M ⟶ d.pt),
         hB.limitEquiv (L.obj M) (L.map f) =
           perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a (h.limitEquiv M f)) := by
-  classical
-  let L := schemeMVDerivedRestriction Y B
-  obtain ⟨hB⟩ := perfect_hom_open_restricted_data_exists R c s B Q F d h
-  exact ⟨hB, perfect_hom_open_restricted_data_pinned R c s B a Q F d h hB⟩
+  obtain ⟨e, hs, hl⟩ := perfect_hom_open_restricted_pinned_equiv R c s B a Q F d h
+  obtain ⟨hs', hl'⟩ := perfect_hom_open_restricted_data_pinned R c s B a Q F d h e hs hl
+  obtain ⟨hm, hc⟩ := perfect_hom_open_restricted_pinned_maps R c s B a Q F d h e hs' hl'
+  obtain ⟨hq, hq'⟩ := perfect_hom_open_restricted_qcoh R c s B Q F d h
+  exact ⟨{
+    stageQCoh := hq
+    limitQCoh := hq'
+    stageEquiv := e.stageEquiv
+    limitEquiv := e.limitEquiv
+    stageNatural := e.stageNatural
+    limitNatural := e.limitNatural
+    stageMap := hm
+    limitMap := hc }, hs', hl'⟩
 
 end
 end AlgebraicGeometry

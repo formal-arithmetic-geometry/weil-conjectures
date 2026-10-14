@@ -1,0 +1,124 @@
+{
+ "id": "new-perfect-hom-open-restricted-pinned-maps",
+ "kind": "lemma",
+ "title": "Transition coherence from pinned natural equivalences",
+ "statement": "theorem perfect_hom_open_restricted_pinned_maps {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i)) [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (B : Y.Opens) (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι) (Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ schemeDerivedCategory Y) (d : Cocone F) (h : PerfectHomPushPullData R c s Q F d) (e : PerfectHomOpenRestrictedEquivFields R c s B Q F d) (hs : ∀ (j : Set.Ici i) (M : schemeDerivedCategory Y) (f : M ⟶ F.obj j), e.stageEquiv j ((schemeMVDerivedRestriction Y B).obj M) ((schemeMVDerivedRestriction Y B).map f) = perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j M f)) (hl : ∀ (M : schemeDerivedCategory Y) (f : M ⟶ d.pt), e.limitEquiv ((schemeMVDerivedRestriction Y B).obj M) ((schemeMVDerivedRestriction Y B).map f) = perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a (h.limitEquiv M f)) : (∀ (j k : Set.Ici i) (hjk : j ≤ k) (M : schemeDerivedCategory B.toScheme) (f : M ⟶ (F ⋙ schemeMVDerivedRestriction Y B).obj j), e.stageEquiv k M (f ≫ (F ⋙ schemeMVDerivedRestriction Y B).map (homOfLE hjk)) = perfectStageMap R (B.ι ≫ s) j.property hjk (e.stageEquiv j M f)) ∧ (∀ (j : Set.Ici i) (M : schemeDerivedCategory B.toScheme) (f : M ⟶ (F ⋙ schemeMVDerivedRestriction Y B).obj j), e.limitEquiv M (f ≫ ((schemeMVDerivedRestriction Y B).mapCocone d).ι.app j) = perfectLimitMap R c (B.ι ≫ s) j.property (e.stageEquiv j M f))",
+ "stmt_deps": [
+  "lem-pc-perfect-hom-push-pull-cocone",
+  "new-perfect-hom-open-restricted-equiv-fields",
+  "def-pc-perfect-hom-open-restriction-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W and 08FE; perfect.tex Tag 09RE, restriction to inverse-image opens in the Hom comparison"
+ },
+ "proof": [
+  {
+   "text": "At the identity of L(F_j), substitute pinning for the original transition morphism and identity. The original stageMap and limitMap equations and cartesian transport commutation prove the restricted transition and cocone equations at these identities.",
+   "uses": [
+    "new-perfect-hom-open-restriction-transport",
+    "lem-pc-perfect-hom-push-pull-cocone"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary f:N → L(F_j), use e.stageNatural/e.limitNatural. Naturality of perfectHomMap is obtained by expanding the conjugation and using comparison naturality. Both desired sides are pullback(f) followed by the already proved identity values. This proves every transition and cocone equation.",
+   "uses": [
+    "new-perfect-hom-open-restricted-equiv-fields",
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-hom-push-pull-cocone",
+  "lem-pc-perfect-hom-transport",
+  "new-perfect-hom-open-restricted-equiv-fields",
+  "new-perfect-hom-open-restriction-transport"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P1",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W and 08FE; perfect.tex Tag 09RE, restriction to inverse-image opens in the Hom comparison",
+  "note": "Repair using supported testing objects, identity normalization, and existing cartesian transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of a representing Hom equivalence determines all its values by its value on the identity morphism",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a representing Hom equivalence determines all its values by its value on the identity morphism",
+   "date": "2026-10-14",
+   "results": "CategoryTheory.Functor.RepresentableBy.ext, CategoryTheory.Functor.RepresentableBy.homEquiv_eq, CategoryTheory.Functor.RepresentableBy.ext_iff, CategoryTheory.Functor.IsRepresentedBy.representableBy_homEquiv_apply, CategoryTheory.Functor.functorHomEquiv, CategoryTheory.Functor.RepresentableBy.homEquiv, CategoryTheory.Functor.functorHomEquiv_apply_app, CategoryTheory.hom_ext_uliftCoyoneda",
+   "verdict": "Generic or underived results; no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "perfectHomOpenRestrictionMap|PerfectHomOpenRestrictedEquivFields|perfectHomComposition",
+   "date": "2026-10-14",
+   "results": "No Mathlib hits.",
+   "verdict": "Generic or underived results; no exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedData",
+  "date": "2026-10-14",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Transition coherence from pinned natural equivalences in the open restriction of the representing Hom cocone.",
+   "via": [
+    "lem-pc-perfect-hom-open-restricted-data",
+    "lem-pc-perfect-hom-open-stage-maps",
+    "lem-pc-perfect-hom-open-stage-presentation",
+    "lem-pc-perfect-hom-mayer-vietoris-geometric-columns-odd",
+    "lem-pc-perfect-hom-mayer-vietoris-geometric-columns"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedPinnedMaps",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomOpenRestrictedPinnedMaps.lean",
+  "declaration": "AlgebraicGeometry.perfect_hom_open_restricted_pinned_maps",
+  "statement": "theorem perfect_hom_open_restricted_pinned_maps {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i)) [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (B : Y.Opens) (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι) (Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ schemeDerivedCategory Y) (d : Cocone F) (h : PerfectHomPushPullData R c s Q F d) (e : PerfectHomOpenRestrictedEquivFields R c s B Q F d) (hs : ∀ (j : Set.Ici i) (M : schemeDerivedCategory Y) (f : M ⟶ F.obj j), e.stageEquiv j ((schemeMVDerivedRestriction Y B).obj M) ((schemeMVDerivedRestriction Y B).map f) = perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j M f)) (hl : ∀ (M : schemeDerivedCategory Y) (f : M ⟶ d.pt), e.limitEquiv ((schemeMVDerivedRestriction Y B).obj M) ((schemeMVDerivedRestriction Y B).map f) = perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a (h.limitEquiv M f)) : (∀ (j k : Set.Ici i) (hjk : j ≤ k) (M : schemeDerivedCategory B.toScheme) (f : M ⟶ (F ⋙ schemeMVDerivedRestriction Y B).obj j), e.stageEquiv k M (f ≫ (F ⋙ schemeMVDerivedRestriction Y B).map (homOfLE hjk)) = perfectStageMap R (B.ι ≫ s) j.property hjk (e.stageEquiv j M f)) ∧ (∀ (j : Set.Ici i) (M : schemeDerivedCategory B.toScheme) (f : M ⟶ (F ⋙ schemeMVDerivedRestriction Y B).obj j), e.limitEquiv M (f ≫ ((schemeMVDerivedRestriction Y B).mapCocone d).ι.app j) = perfectLimitMap R c (B.ι ≫ s) j.property (e.stageEquiv j M f))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-6585f",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261014T022549-L-4046919",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-6585f",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261014T022549-L-4046919",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with the nodes and change record; parent signature and moved definitions are unchanged. All five modules and direct importer PerfectHomOpenStageMaps compile cleanly; axiom probes show only standard axioms and documented inherited sorryAx."
+ }
+}

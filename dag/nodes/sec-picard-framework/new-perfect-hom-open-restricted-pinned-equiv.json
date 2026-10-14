@@ -1,0 +1,135 @@
+{
+ "id": "new-perfect-hom-open-restricted-pinned-equiv",
+ "kind": "lemma",
+ "title": "Identity-normalized restricted Hom equivalences",
+ "statement": "theorem perfect_hom_open_restricted_pinned_equiv {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i)) [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (B : Y.Opens) (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι) (Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ schemeDerivedCategory Y) (d : Cocone F) (h : PerfectHomPushPullData R c s Q F d) : ∃ e : PerfectHomOpenRestrictedEquivFields R c s B Q F d, (∀ j : Set.Ici i, e.stageEquiv j ((schemeMVDerivedRestriction Y B).obj (F.obj j)) (𝟙 _) = perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j (F.obj j) (𝟙 _))) ∧ (e.limitEquiv ((schemeMVDerivedRestriction Y B).obj d.pt) (𝟙 _) = perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a (h.limitEquiv d.pt (𝟙 _)))",
+ "stmt_deps": [
+  "lem-pc-perfect-hom-push-pull-cocone",
+  "new-perfect-hom-open-restricted-equiv-fields",
+  "def-pc-perfect-hom-open-restriction-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W and 08FE; perfect.tex Tag 09RE, restriction to inverse-image opens in the Hom comparison"
+ },
+ "proof": [
+  {
+   "text": "For each test N on B, choose its supported extension X(N), its restriction isomorphism t, and the unique inverse of restriction on Hom out of X(N). Localizations on over-modules are supplied in the ambient Hom universe.",
+   "uses": [
+    "lem-sc-derived-open-test-object",
+    "lem-pc-derived-open-localization-universe"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the supported Hom lifting equivalence with the original representing equivalence, bijective cartesian pullback Hom restriction, and precomposition by pullback(t.hom). Testing-object naturality follows from injectivity of the lift and naturality of conjugation.",
+   "uses": [
+    "lem-pc-perfect-hom-open-test-bijective",
+    "def-pc-perfect-hom-open-restriction-map",
+    "lem-pc-perfect-hom-push-pull-cocone"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At LM, lift its identity to x:X(LM) → M, so Lx=t.inv. The lift of Lf is x followed by f. Naturality of the original equivalence and restriction map gives pullback(t.hom) followed by pullback(t.inv) followed by the restriction of the old value. Cancel the inverse pair. Apply to every stage and the apex; package the equivalence and naturality fields and specialize to identities.",
+   "uses": [
+    "def-pc-perfect-hom-open-restriction-map",
+    "new-perfect-hom-open-restricted-equiv-fields"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-hom-open-restriction-map",
+  "lem-pc-derived-open-localization-universe",
+  "lem-pc-perfect-hom-open-test-bijective",
+  "lem-pc-perfect-hom-push-pull-cocone",
+  "lem-sc-derived-open-test-object",
+  "new-perfect-hom-open-restricted-equiv-fields"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P1",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W and 08FE; perfect.tex Tag 09RE, restriction to inverse-image opens in the Hom comparison",
+  "note": "Repair using supported testing objects, identity normalization, and existing cartesian transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct natural representing Hom equivalences on an open subscheme by restricting the representing push pull object and pinning their values at identity morphisms",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct natural representing Hom equivalences on an open subscheme by restricting the representing push pull object and pinning their values at identity morphisms",
+   "date": "2026-10-14",
+   "results": "AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.restrictFunctorΓ, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.restrictFunctorΓ_hom_app, AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_map, AlgebraicGeometry.arrowResLEAppIso",
+   "verdict": "Generic or underived results; no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "perfectHomOpenRestrictionMap|PerfectHomOpenRestrictedEquivFields|perfectHomComposition",
+   "date": "2026-10-14",
+   "results": "No Mathlib hits.",
+   "verdict": "Generic or underived results; no exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedData",
+  "date": "2026-10-14",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Identity-normalized restricted Hom equivalences in the open restriction of the representing Hom cocone.",
+   "via": [
+    "lem-pc-perfect-hom-open-restricted-data",
+    "lem-pc-perfect-hom-open-stage-maps",
+    "lem-pc-perfect-hom-open-stage-presentation",
+    "lem-pc-perfect-hom-mayer-vietoris-geometric-columns-odd",
+    "lem-pc-perfect-hom-mayer-vietoris-geometric-columns"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedPinnedEquiv",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomOpenRestrictedPinnedEquiv.lean",
+  "declaration": "AlgebraicGeometry.perfect_hom_open_restricted_pinned_equiv",
+  "statement": "theorem perfect_hom_open_restricted_pinned_equiv {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i)) [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (B : Y.Opens) (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι) (Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ schemeDerivedCategory Y) (d : Cocone F) (h : PerfectHomPushPullData R c s Q F d) : ∃ e : PerfectHomOpenRestrictedEquivFields R c s B Q F d, (∀ j : Set.Ici i, e.stageEquiv j ((schemeMVDerivedRestriction Y B).obj (F.obj j)) (𝟙 _) = perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j (F.obj j) (𝟙 _))) ∧ (e.limitEquiv ((schemeMVDerivedRestriction Y B).obj d.pt) (𝟙 _) = perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a (h.limitEquiv d.pt (𝟙 _)))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-6585f",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261014T022549-L-4046919",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-6585f",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261014T022549-L-4046919",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with the nodes and change record; parent signature and moved definitions are unchanged. All five modules and direct importer PerfectHomOpenStageMaps compile cleanly; axiom probes show only standard axioms and documented inherited sorryAx."
+ }
+}

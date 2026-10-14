@@ -2,10 +2,11 @@
  "id": "new-perfect-hom-open-restricted-stage-pinned",
  "kind": "lemma",
  "title": "Stage equation for restricted representing data",
- "statement": "theorem perfect_hom_open_restricted_stage_pinned\n    {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)\n    {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i))\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (B : Y.Opens) (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι)\n    (Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ schemeDerivedCategory Y)\n    (d : Cocone F) (h : PerfectHomPushPullData R c s Q F d)\n    (hB : PerfectHomPushPullData R c (B.ι ≫ s)\n      ((schemeMVDerivedRestriction Y B).obj Q)\n      (F ⋙ schemeMVDerivedRestriction Y B)\n      ((schemeMVDerivedRestriction Y B).mapCocone d)) :\n    ∀ (j : Set.Ici i) (M : schemeDerivedCategory Y) (f : M ⟶ F.obj j),\n      hB.stageEquiv j ((schemeMVDerivedRestriction Y B).obj M)\n          ((schemeMVDerivedRestriction Y B).map f) =\n        perfectHomOpenRestrictionMap s B\n          (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j M f)",
+ "statement": "theorem perfect_hom_open_restricted_stage_pinned {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i)) [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (B : Y.Opens) (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι) (Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ schemeDerivedCategory Y) (d : Cocone F) (h : PerfectHomPushPullData R c s Q F d) (e : PerfectHomOpenRestrictedEquivFields R c s B Q F d) (he : ∀ j : Set.Ici i, e.stageEquiv j ((schemeMVDerivedRestriction Y B).obj (F.obj j)) (𝟙 _) = perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j (F.obj j) (𝟙 _))) : ∀ (j : Set.Ici i) (M : schemeDerivedCategory Y) (f : M ⟶ F.obj j), e.stageEquiv j ((schemeMVDerivedRestriction Y B).obj M) ((schemeMVDerivedRestriction Y B).map f) = perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j M f)",
  "stmt_deps": [
   "lem-pc-perfect-hom-push-pull-cocone",
-  "def-pc-derived-mayer-vietoris-canonical-data"
+  "new-perfect-hom-open-restricted-equiv-fields",
+  "def-pc-perfect-hom-open-restriction-map"
  ],
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
@@ -13,22 +14,26 @@
  },
  "proof": [
   {
-   "text": "Split from the disputed conjunction; the stage mate calculation remains an explicit proof obligation for arbitrary hB.",
+   "text": "Testing-object naturality expresses the new and original values at f by their values at identity. Apply restriction-map naturality, obtained by expanding the concrete conjugation and comparison naturality, and substitute the supplied identity equation. No equation for arbitrary independently chosen data is asserted.",
    "uses": [
-    "lem-pc-perfect-hom-open-restricted-data-pinned"
+    "lem-pc-perfect-hom-push-pull-cocone",
+    "new-perfect-hom-open-restricted-equiv-fields",
+    "def-pc-perfect-hom-open-restriction-map"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-perfect-hom-open-restricted-data-pinned"
+  "def-pc-perfect-hom-open-restriction-map",
+  "lem-pc-perfect-hom-push-pull-cocone",
+  "new-perfect-hom-open-restricted-equiv-fields"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "N2",
+  "group": "P1",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 079W and 08FE; perfect.tex Tag 09RE",
-  "note": "Second reading: the proposed mate calculation does not justify arbitrary independently chosen representing equivalences."
+  "place": "Tags 079W and 08FE; perfect.tex Tag 09RE, restriction to inverse-image opens in the Hom comparison",
+  "note": "Repair using supported testing objects, identity normalization, and existing cartesian transport."
  },
  "mathlib_searches": [
   {
@@ -78,9 +83,9 @@
   "module": "Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedData",
   "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomOpenRestrictedData.lean",
   "declaration": "AlgebraicGeometry.perfect_hom_open_restricted_stage_pinned",
-  "statement": "theorem perfect_hom_open_restricted_stage_pinned\n    {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)\n    {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i))\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (B : Y.Opens) (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι)\n    (Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ schemeDerivedCategory Y)\n    (d : Cocone F) (h : PerfectHomPushPullData R c s Q F d)\n    (hB : PerfectHomPushPullData R c (B.ι ≫ s)\n      ((schemeMVDerivedRestriction Y B).obj Q)\n      (F ⋙ schemeMVDerivedRestriction Y B)\n      ((schemeMVDerivedRestriction Y B).mapCocone d)) :\n    ∀ (j : Set.Ici i) (M : schemeDerivedCategory Y) (f : M ⟶ F.obj j),\n      hB.stageEquiv j ((schemeMVDerivedRestriction Y B).obj M)\n          ((schemeMVDerivedRestriction Y B).map f) =\n        perfectHomOpenRestrictionMap s B\n          (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j M f)",
+  "statement": "theorem perfect_hom_open_restricted_stage_pinned {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i)) [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (B : Y.Opens) (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι) (Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ schemeDerivedCategory Y) (d : Cocone F) (h : PerfectHomPushPullData R c s Q F d) (e : PerfectHomOpenRestrictedEquivFields R c s B Q F d) (he : ∀ j : Set.Ici i, e.stageEquiv j ((schemeMVDerivedRestriction Y B).obj (F.obj j)) (𝟙 _) = perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j (F.obj j) (𝟙 _))) : ∀ (j : Set.Ici i) (M : schemeDerivedCategory Y) (f : M ⟶ F.obj j), e.stageEquiv j ((schemeMVDerivedRestriction Y B).obj M) ((schemeMVDerivedRestriction Y B).map f) = perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j M f)",
   "branch": "sheaf-dag",
-  "by": "H1",
+  "by": "P1",
   "date": "2026-10-14"
  },
  "reviewed": {
@@ -96,11 +101,38 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H1",
+  "reviewer": "X-6585f",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261014T010843-L-3163766",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261014T022549-L-4046919",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with the nodes and change record; parent signature and moved definitions are unchanged. All five modules and direct importer PerfectHomOpenStageMaps compile cleanly; axiom probes show only standard axioms and documented inherited sorryAx."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "P1 stage 2",
+  "old_statement": "theorem perfect_hom_open_restricted_stage_pinned\n    {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)\n    {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i))\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (B : Y.Opens) (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι)\n    (Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ schemeDerivedCategory Y)\n    (d : Cocone F) (h : PerfectHomPushPullData R c s Q F d)\n    (hB : PerfectHomPushPullData R c (B.ι ≫ s)\n      ((schemeMVDerivedRestriction Y B).obj Q)\n      (F ⋙ schemeMVDerivedRestriction Y B)\n      ((schemeMVDerivedRestriction Y B).mapCocone d)) :\n    ∀ (j : Set.Ici i) (M : schemeDerivedCategory Y) (f : M ⟶ F.obj j),\n      hB.stageEquiv j ((schemeMVDerivedRestriction Y B).obj M)\n          ((schemeMVDerivedRestriction Y B).map f) =\n        perfectHomOpenRestrictionMap s B\n          (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j M f)",
+  "what": "The old universal equation for arbitrary hB is false under simultaneous sign twist. Replace it with propagation of a supplied identity normalization for the equivalence/naturality fields; the parent constructs those fields from h.",
+  "source": {
+   "document": "literature/stacks-project/cohomology.tex",
+   "place": "Tags 079W and 08FE; perfect.tex Tag 09RE, restriction to inverse-image opens in the Hom comparison"
+  },
+  "citers": [],
+  "old_stmt_deps": [
+   "lem-pc-perfect-hom-push-pull-cocone",
+   "def-pc-derived-mayer-vietoris-canonical-data"
+  ],
+  "old_proof": [
+   {
+    "text": "Split from the disputed conjunction; the stage mate calculation remains an explicit proof obligation for arbitrary hB.",
+    "uses": [
+     "lem-pc-perfect-hom-open-restricted-data-pinned"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pc-perfect-hom-open-restricted-data-pinned"
+  ]
  }
 }

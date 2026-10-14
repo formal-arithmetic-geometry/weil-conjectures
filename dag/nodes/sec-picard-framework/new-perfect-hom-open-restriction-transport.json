@@ -1,0 +1,115 @@
+{
+ "id": "new-perfect-hom-open-restriction-transport",
+ "kind": "lemma",
+ "title": "Stage and apex specializations of cartesian open transport",
+ "statement": "theorem perfect_hom_open_restriction_transport {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i)) [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (B : Y.Opens) (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι) : (∀ (j k : Set.Ici i) (hjk : j ≤ k) (M Q : schemeDerivedCategory Y) (f : (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE j.property))))).obj M ⟶ (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE j.property))))).obj Q), perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE k.property))) a (perfectStageMap R s j.property hjk f) = perfectStageMap R (B.ι ≫ s) j.property hjk (perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE j.property))) a f)) ∧ (∀ (j : Set.Ici i) (M Q : schemeDerivedCategory Y) (f : (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE j.property))))).obj M ⟶ (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE j.property))))).obj Q), perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a (perfectLimitMap R c s j.property f) = perfectLimitMap R c (B.ι ≫ s) j.property (perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE j.property))) a f))",
+ "stmt_deps": [
+  "def-pc-perfect-hom-open-restriction-map",
+  "lem-pc-perfect-hom-transport"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W and 08FE; perfect.tex Tag 09RE, restriction to inverse-image opens in the Hom comparison"
+ },
+ "proof": [
+  {
+   "text": "Apply perfect_hom_open_transport_square with κ(r)=perfectHomOpenPullbackComparison s B r.hom a. Its required normalization is reflexivity by the concrete definition. Specialize the Over arrow to Spec.map(R.map(j≤k)) and Spec.map(c.ι_j), checking the Over conditions by functoriality and the cocone law.",
+   "uses": [
+    "lem-pc-perfect-hom-open-transport-square",
+    "def-pc-perfect-hom-open-restriction-map",
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-hom-open-restriction-map",
+  "lem-pc-perfect-hom-open-transport-square",
+  "lem-pc-perfect-hom-transport"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P1",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W and 08FE; perfect.tex Tag 09RE, restriction to inverse-image opens in the Hom comparison",
+  "note": "Repair using supported testing objects, identity normalization, and existing cartesian transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback composition comparisons make Hom transport commute with restriction to an open subscheme",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback composition comparisons make Hom transport commute with restriction to an open subscheme",
+   "date": "2026-10-14",
+   "results": "AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict, AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst, AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc, AlgebraicGeometry.Scheme.Hom.appLE_map",
+   "verdict": "Generic or underived results; no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "perfectHomOpenRestrictionMap|PerfectHomOpenRestrictedEquivFields|perfectHomComposition",
+   "date": "2026-10-14",
+   "results": "No Mathlib hits.",
+   "verdict": "Generic or underived results; no exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedData",
+  "date": "2026-10-14",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Stage and apex specializations of cartesian open transport in the open restriction of the representing Hom cocone.",
+   "via": [
+    "lem-pc-perfect-hom-open-restricted-data",
+    "lem-pc-perfect-hom-open-stage-maps",
+    "lem-pc-perfect-hom-open-stage-presentation",
+    "lem-pc-perfect-hom-mayer-vietoris-geometric-columns-odd",
+    "lem-pc-perfect-hom-mayer-vietoris-geometric-columns"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictionTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomOpenRestrictionTransport.lean",
+  "declaration": "AlgebraicGeometry.perfect_hom_open_restriction_transport",
+  "statement": "theorem perfect_hom_open_restriction_transport {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i)) [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (B : Y.Opens) (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι) : (∀ (j k : Set.Ici i) (hjk : j ≤ k) (M Q : schemeDerivedCategory Y) (f : (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE j.property))))).obj M ⟶ (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE j.property))))).obj Q), perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE k.property))) a (perfectStageMap R s j.property hjk f) = perfectStageMap R (B.ι ≫ s) j.property hjk (perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE j.property))) a f)) ∧ (∀ (j : Set.Ici i) (M Q : schemeDerivedCategory Y) (f : (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE j.property))))).obj M ⟶ (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE j.property))))).obj Q), perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a (perfectLimitMap R c s j.property f) = perfectLimitMap R c (B.ι ≫ s) j.property (perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE j.property))) a f))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-6585f",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261014T022549-L-4046919",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-6585f",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261014T022549-L-4046919",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with the nodes and change record; parent signature and moved definitions are unchanged. All five modules and direct importer PerfectHomOpenStageMaps compile cleanly; axiom probes show only standard axioms and documented inherited sorryAx."
+ }
+}

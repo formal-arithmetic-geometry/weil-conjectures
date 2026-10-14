@@ -16,42 +16,42 @@
  },
  "proof": [
   {
-   "text": "Construct perfectHomOpenBaseChangeMap by pullback.map and perfectHomOpenPullbackComparison by the fixed composition comparisons, the cartesian fst equality and the mate of the identity between the supplied adjunction and schemeMVAdjunction. Define perfectHomOpenRestrictionMap by conjugating derived pullback on morphisms with this comparison. These existing definitions remain concrete.",
+   "text": "The three unchanged concrete restriction-map definitions are re-exported from their acyclic module.",
    "uses": [
-    "def-pc-derived-mayer-vietoris-canonical-data",
-    "lem-pc-perfect-hom-transport",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "def-pc-perfect-hom-open-restriction-map"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The current Lean proof obtains an arbitrary hB from perfect_hom_open_restricted_data_exists. This existence theorem remains open.",
+   "text": "Construct identity-normalized equivalence/naturality fields from h using supported testing objects. Propagate their identity equations to all restricted testing morphisms.",
    "uses": [
-    "lem-pc-perfect-hom-open-restricted-data-exists"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The current Lean proof pairs hB with perfect_hom_open_restricted_data_pinned. STATEMENT-DISPUTED: that open lemma falsely asserts the pinned equations for arbitrary independently supplied hB, as its sign-twist counterexample shows. Hence this compiled proof is not a closed proof of the parent; a future repair must construct a particular compatible hB from h.",
-   "uses": [
+    "new-perfect-hom-open-restricted-pinned-equiv",
     "lem-pc-perfect-hom-open-restricted-data-pinned"
    ],
    "elementary": false
+  },
+  {
+   "text": "Prove the transition and cocone compatibility fields from pinned equations and naturality; obtain QCoh fields by exact open restriction. Assemble PerfectHomPushPullData from these six sets of fields and pair it with the two proved pinned equations.",
+   "uses": [
+    "new-perfect-hom-open-restricted-pinned-maps",
+    "new-perfect-hom-open-restricted-qcoh"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-mayer-vietoris-canonical-data",
-  "lem-pc-perfect-hom-open-restricted-data-exists",
+  "def-pc-perfect-hom-open-restriction-map",
   "lem-pc-perfect-hom-open-restricted-data-pinned",
-  "lem-pc-perfect-hom-transport",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "new-perfect-hom-open-restricted-pinned-equiv",
+  "new-perfect-hom-open-restricted-pinned-maps",
+  "new-perfect-hom-open-restricted-qcoh"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "N2",
+  "group": "P1",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 079W and 08FE; perfect.tex Tag 09RE",
-  "note": "Second reading: records the actual existing Lean reduction and its disputed dependency, not the unimplemented detailed construction in the docstring."
+  "place": "Tags 079W and 08FE; perfect.tex Tag 09RE, restriction to inverse-image opens in the Hom comparison",
+  "note": "Repair using supported testing objects, identity normalization, and existing cartesian transport."
  },
  "mathlib_searches": [
   {
@@ -112,9 +112,6 @@
   "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomOpenRestrictedData.lean",
   "declaration": "AlgebraicGeometry.perfect_hom_open_restricted_data",
   "declarations": [
-   "AlgebraicGeometry.perfectHomOpenBaseChangeMap",
-   "AlgebraicGeometry.perfectHomOpenPullbackComparison",
-   "AlgebraicGeometry.perfectHomOpenRestrictionMap",
    "AlgebraicGeometry.perfect_hom_open_restricted_data"
   ],
   "statement": "theorem perfect_hom_open_restricted_data\n    {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)\n    {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i))\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (B : Y.Opens)\n    (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι)\n    (Q : schemeDerivedCategory Y)\n    (F : Set.Ici i ⥤ schemeDerivedCategory Y) (d : Cocone F)\n    (h : PerfectHomPushPullData R c s Q F d) :\n    let L := schemeMVDerivedRestriction Y B\n    ∃ hB : PerfectHomPushPullData R c (B.ι ≫ s) (L.obj Q) (F ⋙ L) (L.mapCocone d),\n      (∀ (j : Set.Ici i) (M : schemeDerivedCategory Y) (f : M ⟶ F.obj j),\n        hB.stageEquiv j (L.obj M) (L.map f) =\n          perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE j.property))) a\n            (h.stageEquiv j M f)) ∧\n      (∀ (M : schemeDerivedCategory Y) (f : M ⟶ d.pt),\n        hB.limitEquiv (L.obj M) (L.map f) =\n          perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a (h.limitEquiv M f))",
@@ -135,18 +132,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H1",
+  "reviewer": "X-6585f",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261014T010843-L-3163766",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.perfect_hom_open_restricted_data_pinned"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.perfect_hom_open_restricted_limit_pinned",
-   "AlgebraicGeometry.perfect_hom_open_restricted_stage_pinned"
-  ]
+  "landing": "20261014T022549-L-4046919",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with the nodes and change record; parent signature and moved definitions are unchanged. All five modules and direct importer PerfectHomOpenStageMaps compile cleanly; axiom probes show only standard axioms and documented inherited sorryAx."
  }
 }
