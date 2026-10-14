@@ -23,9 +23,97 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-sc-topological-abelian-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\varphi:F\\to E$ be an epimorphism of abelian sheaves on $X$ and $e\\in E(X)$. By [lem-sc-abelian-sheaf-epi-iff-stalk-epi], for each $x\\in X$ choose a germ $a_x\\in F_x$ with $\\varphi_x(a_x)=e_x$. Apply [def-weil-pbc-module-stalk] to abelian presheaves as modules over the constant presheaf $\\mathbf Z$: represent $a_x$ by $f_x\\in F(V_x)$; equality of the image germ and $e_x$ gives an open $x\\in U_x\\subseteq V_x$ on which $\\varphi(f_x|_{U_x})=e|_{U_x}$. Thus the opens $U_x$ cover $X$ with lifts of $e$.",
+   "uses": [
+    "lem-sc-abelian-sheaf-epi-iff-stalk-epi",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A3F (lemma-vanishing-for-profinite), local section lifts; Sheaves Section 0078 (section-stalks), equality of germs"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-profinite-clopen-basis], for each $x$ choose a clopen $C_x$ with $x\\in C_x\\subseteq U_x$. Compactness of $X$ supplies a finite subcover $C_1,\\ldots,C_n$. Put $D_1=C_1$ and $D_i=C_i\\setminus\\bigcup_{j<i}C_j$ for $2\\leq i\\leq n$. A finite union of clopens is clopen, so each $D_i$ is clopen; the $D_i$ are pairwise disjoint, cover $X$, and $D_i\\subseteq C_i\\subseteq U_{x_i}$. Discard empty parts. If $X=\\varnothing$, take the empty cover. This proves the finite disjoint refinement used in Topology Tag 08ZZ directly from the cited basis and compactness.",
+   "uses": [
+    "lem-weil-pbc-profinite-clopen-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZZ (lemma-profinite-refine-open-covering); elementary finite refinement from its clopen basis consequence"
+   }
+  },
+  {
+   "text": "Restrict the chosen lift on $U_{x_i}$ to $D_i$. These sections agree on pairwise intersections: distinct parts have empty intersection, and the sheaf axiom for the empty cover says $F(\\varnothing)=0$. The equalizer sheaf axiom in [def-weil-pbc-sites-and-cohomology] glues them to $f\\in F(X)$. Naturality gives $\\varphi(f)|_{D_i}=e|_{D_i}$, and uniqueness in the sheaf axiom gives $\\varphi(f)=e$. Hence every epimorphism of abelian sheaves induces a surjection on global sections, including when $X$ is empty. Together with the additivity and left exactness of $\\Gamma(X,-)$ stated in that node, global sections are exact.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A3F (lemma-vanishing-for-profinite), surjectivity and exactness of global sections"
+   }
+  },
+  {
+   "text": "To spell out the higher-derived-functor vanishing rather than invoke it without a citation, use [lem-weil-pbc-site-sheaves-enough-injectives] on the site of opens of $X$. Fix a Grothendieck universe containing $X$, and take covering families indexed by sets in this universe; the opens, inclusions and covering families then form sets in a larger universe. The site axioms hold: the identity covers its target, a composite of open covers covers its target, and pulling back an open cover along an inclusion gives the cover by intersections. This restriction of index sets gives exactly the usual sheaves: after deleting repetitions any open cover is indexed by a subset of the set of opens of $X$, and matching sections at repeated copies of the same open must be equal on that open. Thus the sheaf axiom for the bounded families implies it for every open cover. For any abelian sheaf $G$, choose a monomorphism $G\\hookrightarrow I$ with $I$ injective and let $Q$ be its cokernel. In the abelian category this yields a short exact sequence $0\\to G\\to I\\to Q\\to0$: [def-sp-abelian] says every monomorphism is a kernel, if the embedding $i$ is $\\ker(h)$, then $h$ factors through $c=\\operatorname{coker}(i)$. Any map killed by $c$ is killed by $h$, hence factors uniquely through $i$; conversely $ci=0$. Thus $i=\\ker(c)$, giving the condition in [def-weil-pbc-exact-sequence]. The identifications $H^0(X,A)=A(X)$ and $H^r(X,I)=0$ for $r>0$ are provided by [def-weil-pbc-sites-and-cohomology].",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "def-sp-abelian",
+    "def-weil-pbc-exact-sequence",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01DZ (section-cohomology-sheaves); Tag 0A3F, final sentence expanded; Derived Categories Tag 015B (lemma-higher-derived-functors), injective vanishing"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-right-derived-universal-delta-functor] to $\\Gamma(X,-)$, which is additive and left exact by [def-weil-pbc-sites-and-cohomology] and whose source has enough injectives as in Step 4. The long exact sequence contains $I(X)\\to Q(X)\\to H^1(X,G)\\to H^1(X,I)=0$. Step 3 makes its first map surjective, since $I\\to Q$ is an epimorphism. Exactness therefore makes the connecting map zero and also surjective, so $H^1(X,G)=0$ for every abelian sheaf $G$.",
+   "uses": [
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015B (lemma-higher-derived-functors), long exact sequence; details of Tag 015F (lemma-right-derived-exact-functor) used in Cohomology Tag 0A3F"
+   }
+  },
+  {
+   "text": "Induct on the positive degree, with the claim for all abelian sheaves simultaneously. Step 5 is the base degree $1$. Suppose $H^r(X,A)=0$ for every abelian sheaf $A$, where $r\\geq1$, and apply the sequence of Step 4 to any $G$. By [lem-weil-pbc-right-derived-universal-delta-functor] the segment $H^r(X,I)\\to H^r(X,Q)\\to H^{r+1}(X,G)\\to H^{r+1}(X,I)$ is exact. The two terms for $I$ vanish by [def-weil-pbc-sites-and-cohomology], and the term for $Q$ vanishes by the induction hypothesis. Thus $H^{r+1}(X,G)=0$. This proves the claim for every integer $q>0$ with precisely the cohomology of [def-sc-topological-abelian-cohomology].",
+   "uses": [
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015B (lemma-higher-derived-functors); explicit dimension shifting for Tag 015F as used by Cohomology Tag 0A3F"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-abelian-sheaf-epi-iff-stalk-epi",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-profinite-clopen-basis",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "def-sp-abelian",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0A3F (lemma-vanishing-for-profinite); finite refinement expanded from Topology Tag 08ZZ and higher-derived vanishing expanded using Derived Categories Tag 015B"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -103,10 +191,73 @@
    "results": "12 hits: CategoryTheory.HasSheafify.isLeftExact, CategoryTheory.Sheaf.hasExactColimitsOfShape, CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf, CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf, CategoryTheory.Sheaf.H.longSequence_exact, CategoryTheory.Sheaf.H.longSequence_exact₁', CategoryTheory.Sheaf.H.longSequence_exact₃', CategoryTheory.Sheaf.H.longSequence_exact₂'",
    "date": "2026-10-14",
    "verdict": "no match: coherent sheaves on categories of compact spaces, exactness of sheafification or colimits, and long exact sequences do not state exact global sections or arbitrary-sheaf vanishing on the open-set site of a Stone space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher cohomology of arbitrary abelian sheaves on the open subsets of a profinite compact Hausdorff totally disconnected space is zero",
+   "results": "8 hits: AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace, LightCondensed.IsDiscrete, LightCondAb.ofSheafLightProfinite, Condensed.isSheafProfinite, AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, LightProfinite.hasSheafify_type, LightCondensed, Condensed.IsDiscrete",
+   "date": "2026-10-14",
+   "verdict": "no match: singular homology and condensed/coherent-site results concern different objects; sheafification exactness and long exact sequences are ingredients, not this vanishing statement"
+  },
+  {
+   "tool": "grep",
+   "query": "profinite|totallyDisconnected",
+   "results": "0 hits:  (subdirectory CategoryTheory/Sites/SheafCohomology)",
+   "date": "2026-10-14",
+   "verdict": "no match: singular homology and condensed/coherent-site results concern different objects; sheafification exactness and long exact sequences are ingredients, not this vanishing statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher cohomology of abelian sheaves on a profinite topological space vanishes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The global sections functor for abelian sheaves on the open set site of a Stone space is exact and higher derived functors vanish",
+   "results": "8 hits: Condensed.isSheafStonean, Condensed.ofSheafForgetStonean, Condensed.ofSheafStonean, CondensedMod.ofSheafStonean, CondensedSet.ofSheafStonean, topCatToSheafCompHausLike, Condensed.instPreservesFiniteProductsOppositeStoneanVal, CompHausLike.LocallyConstantModule.functor",
+   "date": "2026-10-14",
+   "verdict": "no match: singular homology and condensed/coherent-site results concern different objects; sheafification exactness and long exact sequences are ingredients, not this vanishing statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"cohomology\", \"Profinite\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: singular homology and condensed/coherent-site results concern different objects; sheafification exactness and long exact sequences are ingredients, not this vanishing statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"exact\"",
+   "results": "12 hits: CategoryTheory.HasSheafify.isLeftExact, CategoryTheory.Sheaf.hasExactColimitsOfShape, CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf, CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf, CategoryTheory.Sheaf.H.longSequence_exact, CategoryTheory.Sheaf.H.longSequence_exact₁', CategoryTheory.Sheaf.H.longSequence_exact₃', CategoryTheory.Sheaf.H.longSequence_exact₂'",
+   "date": "2026-10-14",
+   "verdict": "no match: singular homology and condensed/coherent-site results concern different objects; sheafification exactness and long exact sequences are ingredients, not this vanishing statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at the whole space is an exact functor for abelian sheaves on a compact zero dimensional Hausdorff space",
+   "results": "8 hits: Condensed.hasExactLimitsOfShape, Condensed.hasExactColimitsOfShape, CompHausLike.LocallyConstantModule.functor, Condensed.ofSheafForgetStonean, CompHausLike.LocallyConstant.functor, Condensed.ofSheafStonean, LightCondensed.IsDiscrete, CondensedMod.ofSheafStonean",
+   "date": "2026-10-14",
+   "verdict": "no match: condensed-site functors, zero-sheaf cohomology and stalk detection do not assert arbitrary topological-sheaf vanishing or exact global sections on a compact zero-dimensional Hausdorff space"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsZero\", \"H\"",
+   "results": "3 hits: CategoryTheory.Sheaf.subsingleton_H_of_isZero, AlgebraicGeometry.Scheme.isZero_ellAdicSheaf_of_isEmpty, TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero",
+   "date": "2026-10-14",
+   "verdict": "no match: condensed-site functors, zero-sheaf cohomology and stalk detection do not assert arbitrary topological-sheaf vanishing or exact global sections on a compact zero-dimensional Hausdorff space"
+  },
+  {
+   "tool": "grep",
+   "query": "profinite|zero.?dimensional|StoneSpace|IsStone",
+   "results": "0 hits:  (subdirectory Topology/Sheaves)",
+   "date": "2026-10-14",
+   "verdict": "no match: condensed-site functors, zero-sheaf cohomology and stalk detection do not assert arbitrary topological-sheaf vanishing or exact global sections on a compact zero-dimensional Hausdorff space"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-affine-sepclosed-etale-acyclic",
   "by": "worker",
@@ -122,5 +273,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-cbc-profinite-topological-cohomology-vanishing",
+  "worker": "stage1",
+  "summary": "Preserved the statement of Stacks 0A3F. Reused the existing Mathlib clopen-basis and stalk-epi nodes, wrote out disjoint refinement and gluing, and justified all positive degrees by explicit dimension shifting using existing injectives and long-exact-sequence nodes. No new nodes. No matching project proof or Mathlib leaf for the item.",
+  "blueprint": "Expands the topological Zariski vanishing input in ancestor lem-cbc-proetale-stalk-conservative Proof Step 4 (functions modulo locally constant functions), through the recorded affine-sepclosed and quotient-sections intermediates."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-87b6272d1",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-87b6272d1 (reviewer sub-agent of L); spot-checked: Read all six steps, every cited statement, source passages, and unit/chapter route. Stacks 0A3F matches the unchanged arbitrary-abelian-sheaf statement; lifting, clopen refinement, gluing and dimension shifting are valid. No new nodes or delivery-induced cycles. Accept the derived delta-functor lemma as a generic tool. review.md records concrete checks, edge cases, and inherited tag/cycle issues outside this delivery."
  }
 }
