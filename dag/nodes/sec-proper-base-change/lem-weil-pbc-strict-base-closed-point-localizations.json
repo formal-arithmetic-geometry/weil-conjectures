@@ -34,9 +34,100 @@
   "lem-weil-pbc-strict-henselization-functoriality",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $H=\\mathcal O^{\\mathrm{sh}}_{S,\\bar s}$ and $k=H/\\mathfrak m_H$. Functoriality (1) makes $H$ strictly henselian, identifies $k$ with the separable algebraic closure $K$ of $\\kappa(s)$ in $\\Omega$, and identifies $\\bar s'$ with the composite through the closed point. The equation $f'\\bar x'=\\bar s'a$ therefore identifies the image of $f'\\bar x'$ with the closed point and its residue embedding with $k\\hookrightarrow\\Omega\\hookrightarrow\\Xi$. The field map corresponding to $a$ is injective. All residue comparisons below use this fixed embedding.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJU, first paragraph; Tag 03PS conventions for strict localization"
+   }
+  },
+  {
+   "text": "For each affine pointed etale $S'$-neighbourhood $V=\\operatorname{Spec}E$ of $f'\\bar x'$, let $\\mathfrak q$ be its pointed prime. Its residue field is finite separable over $k$ by the etale residue-field lemma. As $k$ is separably closed, that field equals the specified copy of $k$ in $\\Xi$: the finite separable extension is trivial. Thus the pointed map induces a residue homomorphism $\\theta:E\\to k$ whose restriction along $H\\to E$ is the residue map $H\\to k$. Apply the henselian etale lifting lemma with $R=S=H$, $B=E$, the identity base map, and the residue surjection $H\\to k$. It gives a unique $H$-algebra map $r_E:E\\to H$ with this residue map. Uniqueness makes all the $r_E$ compatible with pointed neighbourhood morphisms. Hence the defining colimit gives $r:\\mathcal O^{\\mathrm{sh}}_{S',f'\\bar x'}\\to H$. If $i:H\\to\\mathcal O^{\\mathrm{sh}}_{S',f'\\bar x'}$ is the structural map, $ri=1$. For any coprojection $c_E$, the section $\\operatorname{Spec}r_E:S'\\to V$ is a pointed $S'$-map; the cocone equation for it gives $c_E=i r_E$. Consequently $ir=1$ by the colimit universal property. Taking spectra proves that the first canonical map, call it $j:L=S'_{(f'\\bar x')}\\to S'$, is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "lem-sc-etale-henselian-ring-lift",
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJU first paragraph, expanded using algebra.tex Tag 08HQ, lemma-map-into-henselian"
+   }
+  },
+  {
+   "text": "Let $k_0=\\kappa(s)$. The separable algebraic closure of $k_0$ in $\\Xi$ is precisely the image of $K$ under $\\Omega\\hookrightarrow\\Xi$. Indeed every separable polynomial over $k_0$ splits in its separable closure $K$; factoring it into linear factors shows any of its roots in $\\Xi$ is one of those images, while every element of $K$ is separable algebraic over $k_0$. This needs no algebraicity of $\\Xi/\\Omega$. Choose an affine open $U\\subset S$ containing $s$. The etale-local-ring-triples lemma presents the strict localizations at $\\bar s$ and at $\\bar u$ by the same etale residue triples over $U$: their point is $s$ and their residue targets are the identified copies of $K$. Postcomposition by the embedding $K\\hookrightarrow\\Xi$ gives an isomorphism of triple diagrams leaving all coordinate rings and transition maps unchanged. Their colimits therefore give an isomorphism $e:S'\\to S_{(\\bar u)}$ over $S$ with the prescribed residue embedding. The functorial map $L\\to S_{(\\bar u)}$ equals $e j$ by functoriality (3), since both have the same structural composite and residue map. Thus the middle map in the statement is exactly $e$, not just an unspecified isomorphism.",
+   "uses": [
+    "def-weil-pbc-relative-separable-closure",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-etale-local-ring-triples",
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PS and Tag 04HX, lemma-describe-etale-local-ring; Tag 0GJU first paragraph with the geometric-point convention retained"
+   }
+  },
+  {
+   "text": "Keep $U=\\operatorname{Spec}A$ and choose an affine open $V=\\operatorname{Spec}C\\subset f^{-1}(U)$ containing the image of $\\bar x$. Write $S'=\\operatorname{Spec}H$. Its structural map factors through $U$; the affine-chart ind-etale lemma gives that $A\\to H$ is ind-etale. Put $V'=V\\times_U S'$, an open neighbourhood of the image of $\\bar x'$ in $X'$. Apply the ind-etale affine strict-local base-change lemma to $A\\to H$, $A\\to C$, and the given $\\Xi$-point of $V'$. The etale-local-ring-triples lemma (2) allows restriction to these affine open charts without changing any strict-local ring or structural map. We obtain the canonical isomorphism\n$$c:X'_{(\\bar x')}\\longrightarrow L\\times_{S_{(\\bar u)}}X_{(\\bar x)}.$$\nIts two components are the functorial maps to $L$ and to $X_{(\\bar x)}$, so all maps here are the ones of the statement. This use of the base-change lemma puts the ind-etale condition on the base map $A\\to H$, never on $A\\to C$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-weil-pbc-ind-etale-affine-strict-local-base-change",
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJS displayed strict-local comparison; algebra.tex Tag 0GIP case (2); Tag 04HX affine chart computation"
+   }
+  },
+  {
+   "text": "Since $L\\to S_{(\\bar u)}$ is $e j$ and both $e,j$ are isomorphisms, the second projection $L\\times_{S_{(\\bar u)}}X_{(\\bar x)}\\to X_{(\\bar x)}$ is an isomorphism. Its inverse pairs the structure map $X_{(\\bar x)}\\to S_{(\\bar u)}$ followed by $(e j)^{-1}$ with the identity on $X_{(\\bar x)}$; the fibre-product identities check both composites. Composing it with $c$ proves that the last canonical map $q:X'_{(\\bar x')}\\to X_{(\\bar x)}$ is an isomorphism. The first projection of $c$ is the structure map to $L$, so the fibre-product equation is $e\\circ j\\circ\\operatorname{pr}_L\\circ c=(X_{(\\bar x)}\\to S_{(\\bar u)})\\circ q$. Composing with $e^{-1}$ proves compatibility with $S'$. Compatibility with $X$ follows from the structural-map equation for the functorial map $q$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJU first paragraph; Tag 0GJS comparison of vanishing-cycle fibres"
+   }
+  },
+  {
+   "text": "For any $\\bar t:\\operatorname{Spec}\\Omega'\\to S'$, pair $q$ with the identity of $\\operatorname{Spec}\\Omega'$ using the compatibility equation just proved and use $e$ to identify the bases. The fibre-product universal property yields the displayed morphism of fibres. Pair $q^{-1}$ with the same identity to obtain its inverse; both composite pairs have identity projections, hence are identity morphisms. Their maps to $X$ agree because $q$ is over $X$. This calculation uses no field extension hypothesis on $\\Omega'$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJS displayed comparison of vanishing-cycle fibres, specialized to Tag 0GJU strict-local base change"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-sc-etale-henselian-ring-lift",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-relative-separable-closure",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-ind-etale-affine-strict-local-base-change",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJU first paragraph and Tag 0GJS strict-local comparison; closed-point and field-embedding identifications expanded using algebra.tex Tag 08HQ and Tag 04HX"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,10 +163,66 @@
    "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For ring maps A to B and A to C with B ind etale over A, strict henselization of B tensor A C at a geometric point is B strict henselization tensor A strict henselization C strict henselization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.Etale R A], Algebra.Etale B (TensorProduct R B A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}\n  {\"name\": \"Algebra.FormallyEtale.instTensorProduct\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyEtale R A],\\n  Algebra.FormallyEtale B (TensorProduct R B A)\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally étale $ B $-algebra.\"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.FormallyUnramified R S]\\n  [Algebra.EssFiniteType R S],\\n  AlgebraicGeometry.IsOpenImmersion\\n    (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.lmul' R).toRingHom))\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ S $ that is formally unramified and of essential finite type, the morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(S \\\\otimes_R S) $ induced\"}\n  {\"name\": \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph\", \"type\": \"∀ (K : Type u_2) (R : Type u_3) (S : Type u_4) [inst : Field K] [inst_1 : CommRing R] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R K] [inst_4 : Algebra R S] (L : Type u_5) [inst_5 : Field L] [inst_6 : Algebra R L]\\n  [inst_7 : Algebra K L] [inst_8 : IsScalarTower R K L] [IsPurelyInseparable K L],\\n  Is\", \"doc\": \"Let $ R $ be a commutative semiring, $ K $ and $ S $ be $ R $-algebras, and $ L $ be a field extending $ K $ as a purely inseparable field extension. The map induced by the tensor product $ K \\\\otimes_\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern etale base change, not the strict-localization comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselian local rings and filtered colimits of etale algebras: tensor product base change formula for strict henselizations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.Etale R A], Algebra.Etale B (TensorProduct R B A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}\n  {\"name\": \"Algebra.Extension.tensorCotangentSpace\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given a formally étale ring homomorphism $ f: P \\\\to Q $ between commutative rings, this constructs a linear equivalence between the tensor product $ T \\\\otimes_S P.\\\\text{CotangentSpace} $ and $ Q.\\\\text\"}\n  {\"name\": \"Algebra.FormallyEtale.instTensorProduct\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyEtale R A],\\n  Algebra.FormallyEtale B (TensorProduct R B A)\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally étale $ B $-algebra.\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"Algebra.tensorH1CotangentOfIsLocalization_toLinearMap\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] (M : Submonoid S)\\n  [inst_7 : IsLocalization M T],\\n  ↑(Algebra.tensorH1CotangentOfIsLoc\", \"doc\": \"For a submonoid $M$ of a commutative ring $S$ and its localization $T$ at $M$, the linear map associated to the tensor product of the first cotangent cohomology modules $H^1_{\\text{Cotangent}}(R \\to T)$\"}\n  {\"name\": \"RingHom.SurjectiveOnStalks.exists_mul_eq_tmul\", \"module\": \"Mathlib/RingTheory/SurjectiveOnStalks\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {S : Type u_2} [inst_1 : CommRing S] {T : Type u_3} [inst_2 : CommRing T]\\n  [inst_3 : Algebra R T] [inst_4 : Algebra R S],\\n  (algebraMap R T).SurjectiveOnStalks →\\n    ∀ (x : TensorProduct R S T) (J : Ideal T), J.IsPrime → ∃ t r a, r • t ∉ J ∧ 1 ⊗ₜ[R] (r • t) * x \", \"doc\": \"Let $R, S, T$ be commutative rings, and let $S$ and $T$ be $R$-algebras. Let $\\\\phi: R \\\\to T$ be the structure map. Suppose that $\\\\phi$ is surjective on stalks. Then for any element $x \\\\in S \\\\otimes_R \"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern etale base change, not the strict-localization comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StrictHenselization\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|strict_henselization|henselization.*tensor|tensor.*henselization",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict henselization commutes with ind etale base change at geometric points",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict localizations above the closed point of base change to the strict henselization of the base are canonically isomorphic to the original strict localizations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsLocalization.AtPrime.algebraMap_equivQuotMaximalIdeal_symm_apply\", \"module\": \"Mathlib/RingTheory/Localization/AtPrime/Extension\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] (Rₚ : Type u_3) [inst_4 : CommRing Rₚ] [inst_5 : Algebra R Rₚ]\\n  [inst_6 : IsLocalization.AtPrime Rₚ p] [inst_7 : IsLocalRing Rₚ] (Sₚ : Type u_4) [inst_8 : CommRing S\", \"doc\": \"For maximal ideals $ p $ in $ R $ and $ P $ in $ S $, with $ P $ lying over the maximal ideal of the localization $ R_p $, the algebra map from $ R/p $ to $ S/P $ composed with the inverse of the quot\"}\n  {\"name\": \"AlgebraicGeometry.isIso_SpecMap_stakMap_localization\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ (R : CommRingCat) (M : Submonoid ↑R) (x : PrimeSpectrum (Localization M)),\\n  CategoryTheory.IsIso\\n    (AlgebraicGeometry.PresheafedSpace.Hom.stalkMap\\n      (AlgebraicGeometry.Spec.toPresheafedSpace.map (CommRingCat.ofHom (algebraMap (↑R) (Localization M))).op) x)\", \"doc\": \"Let $R$ be a commutative ring and $M$ be a submonoid of $R$. Let $\\\\phi: R \\\\to M^{-1}R$ be the canonical localization map. This induces a morphism of presheafed spaces $f: \\\\text{Spec}(M^{-1}R) \\\\to \\\\tex\"}\n  {\"name\": \"Localization.localRingHom_unique\", \"module\": \"Mathlib/RingTheory/Localization/AtPrime/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {P : Type u_3} [inst_1 : CommSemiring P] (I : Ideal R) [hI : I.IsPrime]\\n  (J : Ideal P) [inst_2 : J.IsPrime] (f : R →+* P) (hIJ : I = Ideal.comap f J)\\n  {j : Localization.AtPrime I →+* Localization.AtPrime J},\\n  (∀ (x : R), j ((algebraMap R (Localization.AtPr\", \"doc\": \"Given commutative semirings $ R $ and $ P $, prime ideals $ \\\\mathcal{I} \\\\subseteq R $ and $ \\\\mathcal{J} \\\\subseteq P $, and a ring homomorphism $ f : R \\\\to P $ satisfying $ \\\\mathcal{I} = f^{-1}(\\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.Spec_map_localization_isIso\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ (R : CommRingCat) (M : Submonoid ↑R) (x : PrimeSpectrum (Localization M)),\\n  CategoryTheory.IsIso\\n    (AlgebraicGeometry.PresheafedSpace.Hom.stalkMap\\n      (AlgebraicGeometry.Spec.toPresheafedSpace.map (CommRingCat.ofHom (algebraMap (↑R) (Localization M))).op) x)\", \"doc\": \"Let $R$ be a commutative ring and $M$ be a submonoid of $R$. Let $\\\\phi: R \\\\to M^{-1}R$ be the canonical localization map. For any prime ideal $\\\\mathfrak{p}$ of the ring $M^{-1}R$, the ring homomorphis\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatLocalizationToStalk\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (x : PrimeSpectrum R),\\n  CategoryTheory.IsIso (AlgebraicGeometry.StructureSheaf.localizationToStalk R x)\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in its prime spectrum $ \\\\operatorname{Spec}(R) $, the canonical ring homomorphism from the localization $ R_{\\\\mathfrak{p}} $ (at the prime ideal $ \\\\mathf\"}\n  {\"name\": \"IsLocalization.localizationLocalizationAtPrimeIsoLocalization\", \"module\": \"Mathlib/RingTheory/Localization/LocalizationLocalization\", \"type\": \"{R : Type u_1} →\\n  [inst : CommSemiring R] →\\n    (M : Submonoid R) →\\n      (p : Ideal (Localization M)) →\\n        [inst_1 : p.IsPrime] →\\n          Localization.AtPrime (Ideal.comap (algebraMap R (Localization M)) p) ≃ₐ[R] Localization.AtPrime p\", \"doc\": \"For any prime ideal $\\\\mathfrak{p}$ in the localization $R_M$, the localization of $R_M$ at $\\\\mathfrak{p}$ is canonically isomorphic as an $R$-algebra to the localization of $R$ at the contraction of $\"}\n  {\"name\": \"quotMapEquivQuotMapMaximalIdealOfIsLocalization\", \"module\": \"Mathlib/RingTheory/Localization/AtPrime/Basic\", \"type\": \"(S : Type u_6) →\\n  {R : Type u_7} →\\n    [inst : CommRing R] →\\n      (p : Ideal R) →\\n        [inst_1 : p.IsMaximal] →\\n          (Rₚ : Type u_8) →\\n            [inst_2 : CommRing Rₚ] →\\n              [inst_3 : Algebra R Rₚ] →\\n                [IsLocalization.AtPrime Rₚ p] →\\n                  [inst_5 : Is\", \"doc\": \"For a commutative ring $ S $ and a prime ideal $ p $, the quotient ring $ S/pS $ is isomorphic to the quotient ring $ S_p/pS_p $, where $ S_p $ denotes the localization of $ S $ at the complement of $\"}\n  {\"name\": \"AlgHom.IsArithFrobAt.localize\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {φ : S →ₐ[R] S} →\\n            {Q : Ideal S} →\\n              φ.IsArithFrobAt Q → [inst_3 : Q.IsPrime] → Localization.AtPrime Q →ₐ[R] Localization.AtPrime Q\", \"doc\": \"The ring homomorphism from the localization of $ S $ at the prime ideal $ Q $ to itself, induced by an $ R $-algebra homomorphism $ \\\\varphi: S \\\\to S $ satisfying the arithmetic Frobenius condition at \"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary localization or closed-point maps, not the strict-localization statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For X over S and S prime the strict henselization of S, points of X times S prime over the closed point have unchanged strict henselian local rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Spec_closedPoint\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {R S : CommRingCat} [inst : IsLocalRing ↑R] [inst_1 : IsLocalRing ↑S] {f : R ⟶ S}\\n  [IsLocalHom (CommRingCat.Hom.hom f)],\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Spec.map f).base) (IsLocalRing.closedPoint ↑S) =\\n    IsLocalRing.closedPoint ↑R\", \"doc\": \"For local rings $R$ and $S$ with a local ring homomorphism $f : R \\to S$, the induced morphism $\\\\operatorname{Spec}(f) : \\\\operatorname{Spec}(S) \\to \\\\operatorname{Spec}(R)$ maps the unique closed point o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) (x : ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField f y).base) x =\\n    IsLocalRing.closedPoint ↑(Y.residueField y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes and let $y \\\\in Y$ be a point. Let $\\\\kappa(y)$ be the residue field of $Y$ at $y$. The canonical projection from the fiber $X_y := X \\\\times_Y \\\\operatorname{Spe\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (x : ↥X) → (AlgebraicGeometry.Spec (X.residueField x)).CanonicallyOver X\", \"doc\": \"For any scheme $ X $ and a point $ x \\\\in X $, the affine scheme $ \\\\operatorname{Spec} $ of the residue field at $ x $ is equipped with a canonical morphism to $ X $, thereby forming an object in the o\"}\n  {\"name\": \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (R : CommRingCat) [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X),\\n  ((AlgebraicGeometry.SpecToEquivOfLocalRing X R) f).fst =\\n    (CategoryTheory.ConcreteCategory.hom f.base) (IsLocalRing.closedPoint ↑R)\", \"doc\": \"For any scheme $X$ and commutative local ring $R$, the first component of the bijection between morphisms $\\\\operatorname{Spec}(R) \\\\to X$ and pairs $(x, \\\\varphi)$ (where $x \\\\in X$ and $\\\\varphi: \\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X) ≃\\n        (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any scheme $X$ and field $K$, there is a bijection between the set of morphisms $\\\\operatorname{Spec}(K) \\\\to X$ and the set of pairs $(x, \\\\phi)$ where $x \\\\in X$ is a point and $\\\\phi : \\\\kappa(x) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instOverSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (x : ↥X) → (AlgebraicGeometry.Spec (X.residueField x)).Over X\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, there is a canonical morphism of schemes from the spectrum of the residue field at $x$, denoted $\\\\operatorname{Spec}(k(x))$, to the scheme $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Spec_map_residue_apply\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X) (s : ↥(AlgebraicGeometry.Spec (X.residueField x))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Spec.map (X.residue x)).base) s =\\n    IsLocalRing.closedPoint ↑(X.presheaf.stalk x)\", \"doc\": \"Let $X$ be a scheme and $x$ a point in its underlying topological space. Let $\\\\mathcal{O}_{X,x}$ be the local ring at $x$, and let $k(x)$ be its residue field. The residue map is the canonical project\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecMap_residue_apply\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X) (s : ↥(AlgebraicGeometry.Spec (X.residueField x))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Spec.map (X.residue x)).base) s =\\n    IsLocalRing.closedPoint ↑(X.presheaf.stalk x)\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to \\\\kappa(x)$ m\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary localization or closed-point maps, not the strict-localization statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict localizations above closed point after strict henselization base change are isomorphic",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-local-acyclicity-closed-fibre-unit",
   "by": "worker",
@@ -91,5 +238,49 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-strict-base-closed-point-localizations",
+  "worker": "stage1",
+  "summary": "Proved the two base identifications using henselian etale lifting and equality of relative separable closures under the specified field embedding, then applied one general ind-etale affine strict-local base-change input and wrote the projection and fibre compatibility equations. No statement change, finiteness assumption, or algebraic geometric-point restriction.",
+  "blueprint": "Proof, first paragraph: \"the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$\". Constructibility clause, via the existing 0GL0 -> 0GKW -> 0GKV case (a) -> 0GKD branch; 0GKD invokes 0GJQ, 0GJR and 0GJW. Input 0GJU (lemma-beta-is-isomorphism). Geometry input to 0GJU: strict localizations above the closed point after strict-local base change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Generic Strict henselizations at a geometric point and their functoriality input to the strict-local geometry argument; no statement of this unit supplies this fact, and no unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "why": "Generic Residue field extensions of an etale algebra are finite separable input to the strict-local geometry argument; no statement of this unit supplies this fact, and no unit proof step is replaced."
+   },
+   {
+    "node": "lem-sc-etale-henselian-ring-lift",
+    "why": "Generic Unique henselian lifting in the ring-homomorphism interface input to the strict-local geometry argument; no statement of this unit supplies this fact, and no unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-local-ring-triples",
+    "why": "Generic The etale local ring at a geometric point as a colimit over etale algebras with a point input to the strict-local geometry argument; no statement of this unit supplies this fact, and no unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "why": "Generic Strict henselization is ind-etale over an affine chart input to the strict-local geometry argument; no statement of this unit supplies this fact, and no unit proof step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-sc-etale-henselian-ring-lift",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-b778792bf",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-b778792bf (reviewer sub-agent of L); spot-checked: Read all mathematics and checked every step, cited statement, source, route, edge case, and master target coefficient category/morphism. The split agrees with 0GIP, 0GJS, and 0GJU; no duplicate, cycle, or mathematical gap found. Repaired the new node’s incomplete creator/date and empty audit fields. Detailed findings are in review.md; corrected JSON is under fixes/dag/nodes/sec-proper-base-change/.; 1 file(s) fixed by the reviewer"
  }
 }
