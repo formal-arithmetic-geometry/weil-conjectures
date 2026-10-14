@@ -20,10 +20,10 @@
 | `Sheaf.AlgebraicGeometry.BaseChangeClosedCoefficientRange` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparison` | 10 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PicardDegreeSheafFpqcExistence` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.LimitHigherDirectImageExchange` | 11 | 1 | proof |
-| `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula` | 22 | 2 | proof |
+| `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionsFactorization` | 23 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProjectionFormulaFiniteObjectwise` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativeMVDirectImageRows` | 29 | 1 | proof |
@@ -35,11 +35,12 @@
 | `Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit` | 48 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates` | 50 | 1 | proof |
 
-Waiting, not claimable: 4 modules whose proof uses a node that has no Lean declaration yet.
+Waiting, not claimable: 5 modules whose proof uses a node that has no Lean declaration yet.
 
 | module | distance to a target | sorry |
 |---|---|---|
 | `WeilConjectures.ConstructibleSheaf.FinitePushforward` | 3 | 1 |
 | `Sheaf.AlgebraicGeometry.BaseChangeClosedCoefficientRange` | 8 | 1 |
 | `Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparison` | 10 | 1 |
-| `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula` | 22 | 2 |
+| `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula` | 22 | 1 |
+| `Sheaf.AlgebraicGeometry.ProjectionFormulaFiniteObjectwise` | 23 | 1 |
