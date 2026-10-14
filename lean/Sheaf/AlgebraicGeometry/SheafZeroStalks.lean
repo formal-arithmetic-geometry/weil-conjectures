@@ -25,3 +25,6 @@ This compatibility module intentionally contains no declarations after duplicate
 @[expose] public section
 
 -- The canonical upstream theorem is not re-exported by these compatibility imports.
+-- The recorded FiniteFibre source is absent from this snapshot. Its signature and proof
+-- have not been checked here; see coord/changes/remove-sheaf-zero-stalks-duplicate.md
+-- for the existing repair.
