@@ -14177,3 +14177,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:30 L: merged deliver/N4/Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalTensorGeneratorFormulaQ (stage 3; reviewer PASS; first push; landing 20261014T013040-L-3415338 (proof); batch 20261014T013031; modules 1; new nodes 0)
 - 01:30 L: merged deliver/N4/Sheaf.AlgebraicGeometry.MayerVietorisImageCompositionLocalization (stage 3; reviewer PASS; first push; landing 20261014T013040-L-3415526 (proof); batch 20261014T013031; modules 1; new nodes 1)
 - 01:30 L: merged deliver/P2/Sheaf.Algebra.Homology.LocalizationDerivedFractions (stage 3; reviewer PASS; first push; landing 20261014T013041-L-3415748 (proof); batch 20261014T013031; modules 1; new nodes 0)
+- 01:30 L: merged deliver/P2/Sheaf.AlgebraicGeometry.Morphisms.FieldTorsorComponentGaloisGroup (stage 3; reviewer PASS; first push; landing 20261014T013041-L-3415968 (proof); batch 20261014T013031; modules 1; new nodes 0)

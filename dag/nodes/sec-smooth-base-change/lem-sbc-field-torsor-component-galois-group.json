@@ -13,34 +13,38 @@
  },
  "proof": [
   {
-   "text": "Finiteness and etaleness of T over K imply that its coordinate ring is a finite product of finite separable fields (Mathlib Algebra.Etale.iff_exists_algEquiv_prod). Since Spec E is nonempty and connected, its open immersion into this finite discrete scheme identifies it with one component. Thus E/K is finite separable. Choose a separable closure Ks and an embedding sigma:E -> Ks. The geometric points of Spec E are the embeddings of E into Ks, forming a transitive absolute Galois set by finite_separable_extension_galois_classification [lem-exc-etale-field-galois-classification].",
-   "uses": [
-    "lem-exc-etale-field-galois-classification"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use the geometric point determined by sigma and j as origin in the torsor fibre. The defining torsor isomorphism identifies this entire fibre with G under left multiplication. Absolute Galois automorphisms act on this fibre by precomposition and commute with this G-action. Consequently each gamma acts by right multiplication x -> x*c(gamma). Composition shows c(gamma*delta)=c(delta)*c(gamma); therefore rho(gamma)=c(gamma)^(-1) is a homomorphism. Its kernel N is the stabilizer of the chosen geometric point and every other point, hence is open and normal. Its image H is a subgroup of G, and the first isomorphism theorem gives Gal(Ks/K)/N isomorphic to H.",
+   "text": "The open immersion j is etale. Compose it with the etale structure map of T and use hj to show that Spec(algebraMap K E) is etale. HasRingHomProperty.Spec_iff and RingHom.etale_algebraMap give Algebra.Etale K E. Mathlib Algebra.FormallyUnramified.isSeparable gives separability, and Algebra.FormallyUnramified.finite_of_free gives finite dimensionality.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The stabilizer formula of finite_separable_extension_galois_classification [lem-exc-etale-field-galois-classification] identifies N with the subgroup fixing sigma(E). The Galois fixed-field correspondence gives sigma(E)=Ks^N. Since N is normal, sigma(E)/K is Galois and restriction of absolute automorphisms gives Aut_K(sigma(E)) isomorphic to Gal(Ks/K)/N. Transfer along sigma.equivFieldRange and compose with the quotient-to-image isomorphism from the previous step. This proves both IsGalois K E and the claimed group equivalence. For the trivial group or any split torsor H is trivial and E is isomorphic to K; disconnected torsors are handled component by component.",
-   "uses": [
-    "lem-exc-etale-field-galois-classification"
-   ],
-   "elementary": false
+   "text": "For two maps x,y from a nonempty single-point scheme X into T.P over the same base, form (y,x):X -> T.P x_K T.P and compose with the inverse of the torsor isomorphism. The proved source-library lemma exists_comp_sigmaι_eq_of_subsingleton factors this map through a summand indexed by g. Projection onto the two factors shows x;smul(g)=y. If two g work, cancellation of the torsor isomorphism equates their coproduct inclusions; evaluating at a point and applying sigmaι_eq_iff shows that their indices are equal. This is the private proved helper torsor_translation_unique.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For K-algebra embeddings sigma,tau:E -> L into a common field, apply the preceding helper to Spec(sigma);j and Spec(tau);j. Both lie over Spec(algebraMap K L). The resulting translate j;smul(g) has image in j: evaluating the translation identity at the unique point of Spec L proves this for the unique point of Spec E. IsOpenImmersion.lift supplies f:Spec E -> Spec E with f;j=j;smul(g). The base equation and T.smul_pi show that Spec.preimage f fixes K, so it is a K-algebra endomorphism a of E. Cancel j in the translation identity, and use faithfulness of Spec, obtaining sigma.comp a=tau. This is the private proved helper component_embedding_factors.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take L=AlgebraicClosure K and the constructed embedding sigma=IsAlgClosed.lift. Every other embedding tau factors as sigma.comp a by the preceding helper, so tau.fieldRange is contained in sigma.fieldRange. The Mathlib normalClosure_le_iff criterion and sigma.fieldRange_le_normalClosure identify normalClosure K E L with sigma.fieldRange. Mathlib normalClosure.normal makes this range normal over K. Transfer along sigma.equivFieldRange.symm using Normal.of_algEquiv. Combining this normality with the already proved separability gives IsGalois K E.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each K-algebra automorphism a of E, apply torsor_translation_unique to j and Spec(a inverse);j. Let c(a) be the uniquely determined translation element. The inverse compensates for contravariance of Spec: T.one_smul and T.mul_smul, together with Spec.map_comp, show c(1)=1 and c(a*b)=c(a)*c(b) by uniqueness. This defines the monoid homomorphism rho:Aut_K(E) -> G. If rho(a)=rho(b), cancel the open immersion j and use Spec.map_injective to equate a inverse and b inverse, hence a=b. Finally take H=rho.range and use Mathlib MonoidHom.ofInjective to obtain Aut_K(E) isomorphic to H. All choices are from uniqueness statements proved in the same file; no field decomposition or arbitrary unproved witness is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-exc-etale-field-galois-classification"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "kind": "written-by-agent",
-  "agent": "V2",
+  "agent": "P2",
   "document": "Stacks Project",
-  "place": "Tags 03SF and 03QR; component of a finite torsor, finite separable fields and Galois sets"
+  "place": "Tags 03SF and 03QR; direct torsor translation and normal-closure argument formalized against Mathlib and the proved source-library coproduct factorization lemma"
  },
  "mathlib_searches": [
   {
@@ -123,10 +127,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261014T010856-L-3169166",
-  "kind": "interface",
+  "landing": "20261014T013041-L-3415968",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
