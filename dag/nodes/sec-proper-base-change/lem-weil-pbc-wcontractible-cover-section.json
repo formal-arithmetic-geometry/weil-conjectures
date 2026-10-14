@@ -32,9 +32,82 @@
   "def-weil-pbc-proetale-covering",
   "lem-weil-pbc-scheme-coproduct-family"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the covering definition to the affine open $T\\subseteq T$. It gives a finite set $J$, indices $i(j)\\in I$, and affine open subschemes $U_j\\subseteq T_{i(j)}$ such that $T=\\bigcup_{j\\in J}f_{i(j)}(U_j)$. Write $e_j:U_j\\to T_{i(j)}$ for the inclusions and $g_j=f_{i(j)}\\circ e_j$. Each $f_{i(j)}$ is weakly etale by the covering definition. To see that $g_j$ is weakly etale, apply the source-locality equivalence to the two-member open cover of $T_{i(j)}$ consisting of $e_j$ and its identity: its forward implication gives the assertion. This is the explicit finite affine refinement of Tag 098D. Repeated indices are allowed, and no image of a weakly etale morphism is assumed open. All selected opens and the finite index set stay in the supplied universes.",
+   "uses": [
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-pbc-weakly-etale-source-locality",
+    "def-weil-open-immersion",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098D, lemma-proetale-affine, and Tag 098F, forward implication; more-morphisms.tex Tag 094S for restrictions"
+   }
+  },
+  {
+   "text": "Choose rings $B_j$ and affine identifications $U_j\\simeq\\operatorname{Spec}B_j$. Form $Q=\\coprod_{j\\in J}U_j$ with coprojections $c_j$, and let $q:Q\\to T$ be induced by the $g_j$. Transporting the finite-affine-coproduct-spectrum isomorphism through these identifications gives $Q\\simeq\\operatorname{Spec}B$, where $B=\\prod_{j\\in J}B_j$. The coprojections are open immersions whose images cover $Q$, and $q\\circ c_j=g_j$. Thus the reverse implication of source locality makes $q$ weakly etale. Its image contains every $g_j(U_j)$, whose union is $T$ by step 1, so $q$ is surjective. For $J=\\varnothing$, $B$ is the zero ring and $Q$ is the empty scheme; step 1 forces $T$ empty. In particular this is a finite affine coproduct, never an assertion that an infinite product spectrum is a scheme coproduct.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-weakly-etale-source-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098F, forward implication: the finite coproduct is an affine scheme and its map is surjective weakly etale; schemes.tex Tag 01I5 and more-morphisms.tex Tag 094S"
+   }
+  },
+  {
+   "text": "Under $Q\\simeq\\operatorname{Spec}B$, write $q=\\operatorname{Spec}\\varphi$ for the unique ring map $\\varphi:A\\to B$, using affine-spectrum full faithfulness. Since a weakly etale morphism is flat, the flat-affine equivalence makes $\\varphi$ flat. Surjectivity of $q$ and the flat-surjective-spectrum criterion then make $\\varphi$ faithfully flat. The ring weakly-etale convention says precisely that $\\varphi$ is weakly etale when $\\operatorname{Spec}\\varphi$ is, so it satisfies the other hypothesis of the item as well. Apply the supplied splitting hypothesis to obtain $r:B\\to A$ with $r\\circ\\varphi=\\mathrm{id}_A$. Contravariant functoriality of the affine spectrum turns $r$ into $s:T\\to Q$ and the ring identity into $q\\circ s=\\mathrm{id}_T$. This also works for the zero ring; no nonemptiness assumption is needed.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-weakly-etale-morphism",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098F, forward implication and Tag 0981, definition-w-contractible; morphisms.tex Tag 01U5 and algebra.tex Tag 00HQ"
+   }
+  },
+  {
+   "text": "Let $P=\\coprod_{i\\in I}T_i$ and let $d_i:T_i\\to P$ be its coprojections. The maps $d_{i(j)}\\circ e_j:U_j\\to P$ induce $h:Q\\to P$. On every summand, $(p\\circ h)\\circ c_j=f_{i(j)}\\circ e_j=g_j=q\\circ c_j$. Uniqueness in the coproduct mapping property gives $p\\circ h=q$. Put $\\sigma=h\\circ s$. Then $p\\circ\\sigma=(p\\circ h)\\circ s=q\\circ s=\\mathrm{id}_T$, as required. If the covering family is empty, step 1 forces $T$ empty and the same coproduct uniqueness gives the identity. The construction only requires the small coproduct already in the statement, and makes no coefficient-category or base-change identification.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098F, forward implication, composed with the affine refinement maps from Tag 098D; the coproduct mapping-property calculation is written explicitly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-covering",
+  "lem-weil-pbc-weakly-etale-source-locality",
+  "def-weil-open-immersion",
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "def-weil-weakly-etale-morphism",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "def-weil-pbc-ind-etale-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 098F, lemma-w-contractible-proetale-cover, forward implication; Tag 098D, lemma-proetale-affine; Tag 0981, definition-w-contractible. The refinement-to-original-coproduct composition is explicit."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,10 +136,45 @@
    "results": "service unavailable: Internal Server Error; fresh maintainer attempt logged under search-log/NF/lem-weil-pbc-wcontractible-affine-weakly-contractible/searches.jsonl in the review workspace",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every pro etale covering of an affine scheme whose faithfully flat weakly etale ring maps split has a section to its coproduct",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.of_comp, Algebra.FormallyEtale.instForallOfFinite, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.pi_iff, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern ordinary etale morphisms and formally etale finite products, not the ring splitting hypothesis and arbitrary covering coproduct"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A weakly contractible affine scheme is projective with respect to pro etale covering families",
+   "results": "8 hits: AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.instCategoryEtale",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern projective spectra and ordinary etale sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"section\"",
+   "results": "11 hits: AlgebraicGeometry.Scheme.algebra_section_section_basicOpen, AlgebraicGeometry.Scheme.Cover.intersectionOfLocallyDirected, AlgebraicGeometry.Scheme.Cover.intersectionOfLocallyDirected_f, AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_sectionsOfPresieve, AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections, AlgebraicGeometry.Scheme.AffineZariskiSite.sectionsOfPresieve, AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_surjective, AlgebraicGeometry.Scheme.AffineZariskiSite.generate_presieveOfSections",
+   "date": "2026-10-14",
+   "verdict": "no match: sections of structure sheaves and affine Zariski presieves do not give a section of a covering coproduct"
+  },
+  {
+   "tool": "grep",
+   "query": "WeaklyEtale|WContractible|pro.?etale",
+   "results": "15 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected Proetale.lean and WeaklyEtale.lean; topology and weakly etale permanence do not give this splitting assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pro etale covering family of an affine scheme with split faithfully flat weakly etale algebras has a section",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-wcontractible-affine-weakly-contractible",
   "by": "worker",
@@ -82,5 +190,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-wcontractible-cover-section",
+  "worker": "stage1",
+  "summary": "Followed Stacks 098F: extracted finite affine covering witnesses directly from the covering definition, used the existing finite-affine-coproduct-spectrum leaf, checked weak etaleness by a new Mathlib source-locality leaf, checked flatness and faithful flatness by existing leaves, applied the given ring retraction, and composed the refinement section into the original coproduct. Statement unchanged; empty cases and repeated cover indices included.",
+  "blueprint": "Proof, sole paragraph: \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\"; subordinate pro-etale coefficient-continuity tool reached through prop-weil-pbc-qbar-condensed-basechange-compatibility, bounded-below coproducts, affine acyclic hypercovers, and qc affine contractible covers. The blueprint paragraph itself does not mention hypercovers. Input: ring-to-full-site evaluation implication from 098H. Intermediate geometric input: section of a covering coproduct, used in step 2 of this split before clopen gluing.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-53135148e",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-53135148e (reviewer sub-agent of L); spot-checked: Mathematics and citations pass review. The new node lem-weil-pbc-weakly-etale-source-locality has an incomplete created record; corrected JSON is in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-weakly-etale-source-locality.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
  }
 }
