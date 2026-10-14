@@ -60,7 +60,7 @@ theorem determinant_split_comparison_local {X : Scheme.{v}}
   refine ⟨V, hVU, hxV,
     (fun W hW ↦ LinearEquiv.ofBijective (d W (hW.trans hVU)) (hbij W hW)), ?_⟩
   intro W hW a b
-  simpa using hd W (hW.trans hVU) a b
+  exact hd W (hW.trans hVU) a b
 
 /-- Converting a natural family of linear maps to equal linear equivalences preserves naturality.
 Source: blueprint, Riemann--Roch determinant paragraph
@@ -87,7 +87,7 @@ theorem determinant_split_comparison_restriction {X : Scheme.{v}}
           ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map
             (homOfLE hZW).op y) := by
   intro W Z hW hZW y
-  rw [hd W hW, hd Z (hZW.trans hW)]
+  rw [hd, hd]
   exact hn W Z hW hZW y
 
 end AlgebraicGeometry.Scheme.Modules
