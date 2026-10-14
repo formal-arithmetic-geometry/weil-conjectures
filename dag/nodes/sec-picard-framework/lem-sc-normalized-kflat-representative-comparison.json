@@ -19,23 +19,40 @@
  ],
  "proof": [
   {
-   "text": "Compute derived pullback on K-flat representatives. Use the structure-sheaf complex and its translate for the unit and shifted unit. Termwise pullback identifies these with the analogous representatives over Z. Combine the representative comparison with the supplied monoidal unit map to obtain e.",
+   "text": "For any complex P, obtain compatible bounded-above flat replacements E_n of its good truncations. Set B = coproduct E_n and phi = id_B - Sigma.desc(t_n; inclusion_(n+1)). The sum of the augmentations annihilates phi, so mappingCone.desc with zero shifted component gives a map s:Cone(phi)->P. The telescope comparison makes s a quasi-isomorphism. Bounded-above flatness and K-flat closure make Cone(phi) K-flat. Retain the literal telescope shape in isFlatTelescope. This is the proved private exists_flat_telescope_resolution helper; no arbitrary resolution data is defined.",
    "uses": [
+    "lem-pc-flat-truncation-tower",
+    "lem-pc-kflat-closure",
+    "lem-pc-flat-truncation-telescope-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the normalized comparison only on the concrete telescope resolving class and its one-fold translates. Apply exists_natTrans_from_resolvingClass to Qh followed by derivedPullback and the termwise pullback followed by Qh. The source inverts quasi-isomorphisms. This constructs epsilon on the homotopy category whose components agree with the telescope comparisons.",
+   "uses": [
+    "lem-sc-normalized-flat-telescope-comparison",
+    "lem-sc-nattrans-from-resolving-class",
+    "def-pc-derived-category",
     "def-pc-derived-pullback",
-    "def-pc-kflat-complex",
-    "def-pc-scheme-derived-tensor-structure",
     "def-pc-module-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Rewrite P[1] as O_Y[1] tensor P by the first-variable Koszul comparison and shifted left unitor. Construct its comparison using the supplied inverse tensorator and the shifted-unit comparison e, jointly with the comparison at P. Tensorator associativity identifies the two translated tensor rewrites; the two unit equations identify their unit specializations. Thus the representative formulas agree on overlapping descriptions and give the displayed square. Naturality of the Koszul maps, unitors, tensorator and representative maps gives naturality between objects in C. Replacement maps are inverted on K-flat objects, so these comparisons are independent of the representative. Every component is a composite of isomorphisms. This step makes no extension to objects outside C; that is a separate right-fraction construction.",
+   "text": "Prove naturality of the explicit shifted-unit tensor composite from canonical tensor-shift naturality, left-unitor naturality, and tensorator naturality. Package it as a natural isomorphism b without choosing a shift structure on derivedPullback. The two sides of the required epsilon shift square are natural transformations. They agree at every telescope by the residual theorem. For any homotopy object resolve it by a telescope, precompose the two naturality squares by its shifted quasi-isomorphism, and cancel its invertible source image. Thus the square holds on every homotopy object.",
    "uses": [
+    "lem-sc-normalized-flat-telescope-comparison",
     "def-sc-scheme-canonical-shift-unit-iso",
     "def-sc-scheme-canonical-tensor-shift",
-    "def-pc-derived-category",
-    "def-pc-derived-pullback",
     "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If P is K-flat, resolve it by a telescope s:R->P. Tensor pullback sends this quasi-isomorphism between K-flat complexes to a quasi-isomorphism. In the epsilon naturality square, the source image, target image, and epsilon_R are invertible, hence epsilon_P is invertible. The global shift square then implies invertibility at q(P)[1] by cancellation of the target shift comparison. Define alpha_X as asIso(epsilon_X) for the original resolving class. Naturality is epsilon.naturality, and the square is the previously proved equality at q(P). The original statement and predicate are unchanged.",
+   "uses": [
+    "lem-pc-tensor-pullback-kflat-quasi-iso",
+    "def-pc-kflat-complex"
    ],
    "elementary": false
   }
@@ -47,13 +64,19 @@
   "def-pc-module-pullback",
   "def-pc-scheme-derived-tensor-structure",
   "def-sc-scheme-canonical-shift-unit-iso",
-  "def-sc-scheme-canonical-tensor-shift"
+  "def-sc-scheme-canonical-tensor-shift",
+  "lem-pc-flat-truncation-telescope-comparison",
+  "lem-pc-flat-truncation-tower",
+  "lem-pc-kflat-closure",
+  "lem-pc-tensor-pullback-kflat-quasi-iso",
+  "lem-sc-nattrans-from-resolving-class",
+  "lem-sc-normalized-flat-telescope-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "N2",
+  "group": "E3",
   "document": "https://stacks.math.columbia.edu/tag/06YJ",
-  "place": "K-flat representative construction and its supplied-tensorator shift coherence, restricted before homotopy-category descent (agent expansion, not a literal assertion of 06YJ)."
+  "place": "Resolve by explicit flat telescopes using Tags 06YS and 0949, extend the comparison by right fractions, and transport naturality, invertibility, and the shifted-unit square; telescope normalization remains a separate node."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -135,9 +158,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261014T022549-L-4046769",
+  "landing": "20261014T034908-L-814267",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

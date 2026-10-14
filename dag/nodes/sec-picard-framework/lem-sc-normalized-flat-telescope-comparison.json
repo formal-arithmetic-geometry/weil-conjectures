@@ -1,0 +1,162 @@
+{
+ "id": "lem-sc-normalized-flat-telescope-comparison",
+ "kind": "statement",
+ "title": "Joint normalized pullback comparison on explicit flat telescopes",
+ "statement": "Let f:Z->Y be a proper morphism of Noetherian schemes [def-weil-proper-morphism], with the derived categories [def-pc-derived-category], derived pullback F [def-pc-derived-pullback], additive termwise tensor pullback H [def-pc-module-pullback], recorded tensor [def-pc-scheme-derived-tensor-structure], and canonical tensor shifts [def-sc-scheme-canonical-tensor-shift] and shifted-unit comparison c [def-sc-scheme-canonical-shift-unit-iso]. Fix a supplied strong monoidal structure on F. A flat telescope is literally P=Cone(id_B-shift_t), where B=the countable coproduct of a sequence E_n of bounded-above complexes with flat terms [def-pc-flat-sheaf-modules], and t_n:E_n->E_(n+1); shift_t is specified on summand n by t_n followed by inclusion n+1. Let C_tel consist only of q(P) and q(P)[1] for these concrete telescopes. There exist e:F(O_Y[1]) isomorphic to O_Z[1] and isomorphisms alpha_X:F(Qh_Y(X))->Qh_Z(H(X)) for X in C_tel, natural for every homotopy morphism between such objects. For each flat telescope P and X=q(P), alpha_(X[1]);commShift_G(X) equals F(commShift_Qh_Y(X));b(Qh_Y(X));alpha_X[1], where G=H then Qh_Z, and b(K)=F(c_Y(K)^(-1));delta_F(O_Y[1],K);(e tensor id);c_Z(F(K)). No comparison for arbitrary K-flat representatives, no extension to other homotopy objects, and no natural automorphism of F is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "Tag 06YS flat models in telescope form (Derived Categories, Tag 0949), and step 2 of lem-sc-normalized-kflat-representative-comparison restricted to these models. The supplied-tensorator normalization is an agent expansion, not a literal assertion of 06YJ or 06YS."
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-pc-module-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-sc-scheme-canonical-shift-unit-iso",
+  "def-sc-scheme-canonical-tensor-shift",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Write P as the literal cone of one minus the transition on a countable sum of bounded-above flat E_n. K-flat closure applies to each piece, the sum, and the cone. Termwise pullback preserves the sum, transition, and cone. Constant towers on the degree-zero structure sheaf and its translate give unit representatives; their telescope augmentations identify their localizations with the units.",
+   "uses": [
+    "lem-pc-kflat-closure",
+    "def-pc-module-pullback",
+    "def-pc-derived-pullback",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Carry out the joint representative normalization from the parent step 2 on these concrete models. Normalize the unshifted unit by the supplied unit map. Express translation as tensor with the shifted unit using the Koszul map and shifted left unitor. The translated comparison is the inverse supplied tensorator, e tensor the representative comparison, and the target Koszul-unitor comparison. Construct e and the representative comparisons jointly. Tensorator associativity and the two unit equations identify the successive and unit-specialized rewrites; the formulas commute with telescope transitions, inclusions, and projections and give the displayed shift square. This is the residual supplied-tensorator calculation, not a consequence of first assuming a normalized comparison or of taking its ratio with a raw counit.",
+   "uses": [
+    "def-sc-scheme-canonical-shift-unit-iso",
+    "def-sc-scheme-canonical-tensor-shift",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the representative construction, Koszul maps, unitors, and tensorator gives naturality on model morphisms. Compare two presentations by common K-flat replacement maps; invert their images to see that the comparisons agree and are natural for all homotopy morphisms between the indicated objects. The factors are isomorphisms, hence so are the components. Stop before extension beyond the telescope class.",
+   "uses": [
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-kflat-complex",
+  "def-pc-module-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-sc-scheme-canonical-shift-unit-iso",
+  "def-sc-scheme-canonical-tensor-shift",
+  "lem-pc-kflat-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E3",
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "Parent step 2, restricted to explicit bounded-flat telescope models; Tag 06YS and Derived Categories Tag 0949 give the models. Normalization for a supplied tensorator remains the agent expansion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalized.*telescope|telescope.*normalized|flatTelescope",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "Generic natural transformation and shift APIs only; no normalized flat-telescope comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived pullback comparison on telescopes of bounded above flat complexes, naturality and shifted tensor unit square",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality_assoc, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc, CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "date": "2026-10-14",
+   "verdict": "Generic natural transformation and shift APIs only; no normalized flat-telescope comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift.of_core",
+   "results": "1 hits: CategoryTheory.NatTrans.CommShift.of_core",
+   "date": "2026-10-14",
+   "verdict": "Generic natural transformation and shift APIs only; no normalized flat-telescope comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized derived pullback comparison on telescopes of bounded above flat complexes, naturality and shifted tensor unit square",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NormalizedKFlatRepresentativeComparison",
+  "date": "2026-10-14",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The representative normalization in parent step 2, restricted to explicit flat telescopes; arbitrary-representative descent is proved separately.",
+   "via": [
+    "lem-sc-normalized-kflat-representative-comparison",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NormalizedFlatTelescopeComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedFlatTelescopeComparison.lean",
+  "declaration": "AlgebraicGeometry.exists_normalized_flat_telescope_comparison",
+  "declarations": [
+   "AlgebraicGeometry.isFlatTelescope",
+   "AlgebraicGeometry.flatTelescopeShiftRepresentative",
+   "AlgebraicGeometry.exists_normalized_flat_telescope_comparison"
+  ],
+  "statement": "theorem exists_normalized_flat_telescope_comparison\n    {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [Functor.Monoidal (derivedPullback f)]\n    [(Scheme.Modules.tensorPullback f).Additive] :\n    ∃ e : (derivedPullback f).obj ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) ≅\n        (𝟙_ (schemeDerivedCategory Z))⟦(1 : ℤ)⟧,\n      ∃ α : ∀ X : HomotopyCategory\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ),\n        flatTelescopeShiftRepresentative Y X →\n          ((DerivedCategory.Qh ⋙ derivedPullback f).obj X ≅\n            ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n              (DerivedCategory.Qh : HomotopyCategory\n                (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n                schemeDerivedCategory Z)).obj X),\n        (∀ (X X' : HomotopyCategory\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))\n          (hX : flatTelescopeShiftRepresentative Y X) (hX' : flatTelescopeShiftRepresentative Y X')\n          (s : X ⟶ X'),\n          (DerivedCategory.Qh ⋙ derivedPullback f).map s ≫ (α X' hX').hom =\n            (α X hX).hom ≫\n              ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n                (DerivedCategory.Qh : HomotopyCategory\n                  (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n                  schemeDerivedCategory Z)).map s) ∧\n        ∀ (P : CochainComplex\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n        (htel : isFlatTelescope Y P),\n        let X := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P\n        let G := (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n          (DerivedCategory.Qh : HomotopyCategory\n            (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n            schemeDerivedCategory Z)\n        (α (X⟦(1 : ℤ)⟧) ⟨P, htel, Or.inr rfl⟩).hom ≫\n            (G.commShiftIso (1 : ℤ)).hom.app X =\n          (derivedPullback f).map ((DerivedCategory.Qh.commShiftIso (1 : ℤ)).hom.app X) ≫\n            ((derivedPullback f).mapIso\n                (schemeCanonicalShiftUnitIso Y (DerivedCategory.Qh.obj X)).symm ≪≫\n              asIso (Functor.OplaxMonoidal.δ (derivedPullback f)\n                ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) (DerivedCategory.Qh.obj X)) ≪≫\n              tensorIso e (Iso.refl _) ≪≫\n              schemeCanonicalShiftUnitIso Z\n                ((derivedPullback f).obj (DerivedCategory.Qh.obj X))).hom ≫\n            (α X ⟨P, htel, Or.inl rfl⟩).hom⟦(1 : ℤ)⟧'",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-14"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261014T034908-L-814267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261014T034908-L-814267",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
