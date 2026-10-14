@@ -13,6 +13,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import Sheaf.AlgebraicGeometry.NormalizedDerivedPullbackKFlatCounit
+import Sheaf.AlgebraicGeometry.DerivedPullbackKFlatCounitAdjustmentFactor
+import Sheaf.Algebra.Homology.KFlatResolution
 
 /-! # Adjustment of a K-flat counit to the translated-unit shift
 
@@ -27,6 +30,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated MonoidalCategory
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- Naturality of the canonical tensor shift unfolds the derived monoidal structure.
 /-- A K-flat counit can be adjusted by a natural automorphism of its source
 so that its translation square has the supplied translated-unit tensorator form.
 This asserts a shift square, without any assertion about cone connecting maps.
@@ -99,6 +104,98 @@ theorem exists_derivedPullback_kFlat_counit_shift_adjustment
               schemeCanonicalShiftUnitIso Z
                 ((derivedPullback f).obj (DerivedCategory.Qh.obj X))).hom ≫
             (ε.app X)⟦(1 : ℤ)⟧' := by
-  sorry
+  obtain ⟨e, ε, hε, hsquare⟩ := exists_normalized_derivedPullback_kFlat_counit
+    f ε₀ hε₀
+  let F := derivedPullback f
+  let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  let Q := DerivedCategory.Qh (C := A)
+  let G := (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙
+    (DerivedCategory.Qh : HomotopyCategory
+      (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤
+        schemeDerivedCategory Z)
+  have hc (S : Scheme.{u})
+      [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
+      {K N : schemeDerivedCategory S} (g : K ⟶ N) :
+      (schemeCanonicalShiftUnitIso S K).hom ≫ g⟦(1 : ℤ)⟧' =
+        ((𝟙_ (schemeDerivedCategory S))⟦(1 : ℤ)⟧) ◁ g ≫
+          (schemeCanonicalShiftUnitIso S N).hom := by
+    let := schemeCanonicalTensorShift S
+    let : ∀ M : schemeDerivedCategory S, (tensorRight M).CommShift ℤ :=
+      fun M ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) M
+    have : NatTrans.CommShift ((curriedTensor (schemeDerivedCategory S)).flip.map g) ℤ :=
+      Functor.CommShift₂.commShift_flip_map (h := .int) g
+    dsimp [schemeCanonicalShiftUnitIso]
+    simp only [Category.assoc]
+    rw [← Functor.map_comp, ← leftUnitor_naturality, Functor.map_comp]
+    simpa only [Category.assoc, tensorRight, Functor.flip, curriedTensor] using
+      congrArg (fun t ↦ t ≫ (shiftFunctor (schemeDerivedCategory S) (1 : ℤ)).map (λ_ N).hom)
+        (NatTrans.shift_app_comm ((curriedTensor (schemeDerivedCategory S)).flip.map g)
+          (1 : ℤ) (𝟙_ (schemeDerivedCategory S)))
+  have hci (S : Scheme.{u})
+      [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
+      {K N : schemeDerivedCategory S} (g : K ⟶ N) :
+      g⟦(1 : ℤ)⟧' ≫ (schemeCanonicalShiftUnitIso S N).inv =
+        (schemeCanonicalShiftUnitIso S K).inv ≫
+          ((𝟙_ (schemeDerivedCategory S))⟦(1 : ℤ)⟧) ◁ g := by
+    apply (cancel_epi (schemeCanonicalShiftUnitIso S K).hom).1
+    rw [← Category.assoc, hc S]
+    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id, Iso.hom_inv_id_assoc]
+  let b : shiftFunctor (schemeDerivedCategory Y) (1 : ℤ) ⋙ F ⟶
+      F ⋙ shiftFunctor (schemeDerivedCategory Z) (1 : ℤ) :=
+    { app := fun K ↦ (F.mapIso (schemeCanonicalShiftUnitIso Y K).symm ≪≫
+        asIso (Functor.OplaxMonoidal.δ F
+          ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) K) ≪≫
+        tensorIso e (Iso.refl _) ≪≫ schemeCanonicalShiftUnitIso Z (F.obj K)).hom
+      naturality := by
+        intro K N g
+        dsimp only [Functor.comp_map, Iso.trans_hom, Functor.mapIso_hom,
+          Iso.symm_hom, asIso_hom]
+        simp only [tensorIso, Iso.refl_hom, tensorHom_def, whiskerLeft_id,
+          Category.comp_id, Category.assoc]
+        rw [← F.map_comp_assoc, hci Y, F.map_comp_assoc,
+          ← Functor.OplaxMonoidal.δ_natural_right_assoc]
+        rw [whisker_exchange_assoc, ← hc Z] }
+  let l : shiftFunctor (HomotopyCategory A (ComplexShape.up ℤ)) (1 : ℤ) ⋙ (Q ⋙ F) ⟶
+      G ⋙ shiftFunctor (schemeDerivedCategory Z) (1 : ℤ) :=
+    Functor.whiskerLeft (shiftFunctor _ (1 : ℤ)) ε ≫ (G.commShiftIso (1 : ℤ)).hom
+  let r : shiftFunctor (HomotopyCategory A (ComplexShape.up ℤ)) (1 : ℤ) ⋙ (Q ⋙ F) ⟶
+      G ⋙ shiftFunctor (schemeDerivedCategory Z) (1 : ℤ) :=
+    Functor.whiskerRight (Q.commShiftIso (1 : ℤ)).hom F ≫ Functor.whiskerLeft Q b ≫
+      Functor.whiskerRight ε (shiftFunctor _ (1 : ℤ))
+  have hsq : ∀ X, l.app X = r.app X := by
+    intro X
+    obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    obtain ⟨P, s, hP, _, hs, _⟩ := CochainComplex.exists_isKFlatResolution (R := Y.sheaf) K
+    let q := HomotopyCategory.quotient A (ComplexShape.up ℤ)
+    let t := q.map s
+    have ht : HomotopyCategory.quasiIso A (ComplexShape.up ℤ) t :=
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs
+    have : IsIso (Q.map t) := Localization.inverts Q
+      (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) _ ht
+    have hcomm := (Q.commShiftIso (1 : ℤ)).hom.naturality t
+    dsimp only [Functor.comp_map] at hcomm
+    have : IsIso (Q.map (t⟦(1 : ℤ)⟧') ≫ (Q.commShiftIso (1 : ℤ)).hom.app (q.obj K)) := by
+      rw [hcomm]
+      infer_instance
+    have : IsIso (Q.map (t⟦(1 : ℤ)⟧')) :=
+      IsIso.of_isIso_comp_right _ ((Q.commShiftIso (1 : ℤ)).hom.app (q.obj K))
+    have : IsIso (F.map (Q.map (t⟦(1 : ℤ)⟧'))) := inferInstance
+    apply (cancel_epi (F.map (Q.map (t⟦(1 : ℤ)⟧')))).1
+    change ((shiftFunctor _ (1 : ℤ) ⋙ (Q ⋙ F)).map t) ≫ l.app (q.obj K) =
+      ((shiftFunctor _ (1 : ℤ) ⋙ (Q ⋙ F)).map t) ≫ r.app (q.obj K)
+    rw [l.naturality t, r.naturality t]
+    have heq : l.app (q.obj P) = r.app (q.obj P) := hsquare P hP
+    rw [heq]
+  obtain ⟨a, ha⟩ := exists_derivedPullback_kFlat_counit_adjustment_factor
+    f ε₀ hε₀ ε hε
+  refine ⟨e, a, ?_⟩
+  dsimp
+  intro X
+  have h := hsq X
+  change ε.app (X⟦(1 : ℤ)⟧) ≫ (G.commShiftIso (1 : ℤ)).hom.app X =
+    F.map ((Q.commShiftIso (1 : ℤ)).hom.app X) ≫ b.app (Q.obj X) ≫
+      (ε.app X)⟦(1 : ℤ)⟧' at h
+  rw [← ha] at h
+  exact h
 
 end AlgebraicGeometry

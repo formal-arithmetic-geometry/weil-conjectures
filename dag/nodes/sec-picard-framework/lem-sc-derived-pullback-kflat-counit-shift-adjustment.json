@@ -18,20 +18,35 @@
  },
  "proof": [
   {
-   "text": "Compute derived pullback on K-flat representatives. Represent the unit and its shift by the structure-sheaf complex and its translate, and apply termwise pullback. Rewrite translation by the first-variable Koszul comparison followed by the translated left unitor. Transport the rewrite using the supplied inverse tensorator and the monoidal unit map, choosing the representative comparison jointly with this rewrite. Tensorator associativity and unit equations give its translation square with the displayed translated-unit composite; naturality of the Koszul maps and tensorator makes this comparison compatible with representative maps.",
+   "text": "Apply the normalized representative-counit theorem to obtain e, ε, K-flat invertibility and the shift square on K-flat representatives.",
    "uses": [
-    "def-pc-derived-pullback",
-    "def-pc-scheme-derived-tensor-structure",
-    "def-sc-scheme-canonical-shift-unit-iso"
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized"
    ],
    "elementary": false
   },
   {
-   "text": "Compare the normalized representative comparison with the given ε₀. Their ratio is an isomorphism on each K-flat representative. Naturality makes these ratios compatible with replacement maps; the resolving-class universal property descends the ratios and inverse ratios to a natural automorphism a of Qh followed by derived pullback. Their compositions are identities because they are identities on the resolving class. The normalized counit is a.hom followed by ε₀. Descend the shift square through the same universal property, giving the asserted formula on every homotopy object. Zero complexes and empty schemes satisfy the equations by uniqueness of maps between zero objects.",
+   "text": "Prove naturality of the canonical shift-unit comparison from the canonical two-variable tensor shift, left-unitor naturality and shift_app_comm. Invert that comparison and use inverse-tensorator naturality and whisker exchange to obtain a natural transformation b with the displayed translated-unit components. Form the two sides of the shift square as natural transformations l and r.",
    "uses": [
-    "def-pc-derived-pullback",
-    "def-pc-kflat-complex",
-    "def-pc-derived-category"
+    "def-sc-scheme-canonical-tensor-shift",
+    "def-sc-scheme-canonical-shift-unit-iso",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any homotopy object take a complex representative and a K-flat resolution P→K. Qh inverts the augmentation; naturality of its shift comparison implies that Qh also sends the shifted augmentation to an isomorphism. Thus the common source of l and r sends the augmentation to an isomorphism. Cancel it, use naturality of l and r and the known equality at P, to prove their equality at K.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-derived-category",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved counit factorization theorem to ε₀ and ε. Substitute ε=a.hom≫ε₀ into the equality of the two natural-transformation components, proving the original statement verbatim.",
+   "uses": [
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-factor"
    ],
    "elementary": false
   }
@@ -41,13 +56,17 @@
   "def-pc-derived-pullback",
   "def-pc-kflat-complex",
   "def-pc-scheme-derived-tensor-structure",
-  "def-sc-scheme-canonical-shift-unit-iso"
+  "def-sc-scheme-canonical-shift-unit-iso",
+  "def-sc-scheme-canonical-tensor-shift",
+  "lem-pc-kflat-resolution",
+  "lem-sc-derived-pullback-kflat-counit-shift-adjustment-factor",
+  "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "Q4",
+  "group": "J3",
   "document": "https://stacks.math.columbia.edu/tag/06YJ",
-  "place": "K-flat computation and resolving-class comparison; supplied-tensorator shift normalization is the agent expansion of the parent plan."
+  "place": "Representative shift-square normalization remains open; formal naturality descent and universal-counit automorphism factorization are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -137,9 +156,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q4",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261014T001731-L-2554234",
+  "landing": "20261014T010844-L-3164476",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
