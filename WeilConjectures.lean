@@ -1348,6 +1348,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionIso
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionProduct
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionReduction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ShiftTateObjectAssoc
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedClassMapRestriction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClass
