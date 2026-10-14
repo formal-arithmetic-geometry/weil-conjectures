@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Affine values of the functions-modulo-constant-sheaf quotient",
- "statement": "Let $X$ be a scheme and $A$ an abelian group. On the small pro-etale site $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], the presheaf $\\operatorname{fun}(-,A)$ sending $V\\to X$ to all set maps $|V|\\to A$, with restrictions by precomposition, is a sheaf of abelian groups. Let $\\underline A$ be the constant abelian sheaf [def-weil-pbc-constant-sheaf]. Locally constant functions induce a monomorphism $\\underline A\\to\\operatorname{fun}(-,A)$. Let $\\mathcal Q_A$ be its cokernel in abelian sheaves [def-weil-pbc-sites-and-cohomology], equivalently the sheafification [def-weil-pbc-sheafification] of its presheaf cokernel. If every point of $X$ is closed and has separably closed residue field, then for every affine object $V\\to X$ there is a canonical isomorphism\n$$\\mathcal Q_A(V)\\cong\\frac{\\operatorname{Map}(|V|,A)}{\\operatorname{LC}(|V|,A)},$$\nwhere $|V|$ is the underlying topological space, and $\\operatorname{LC}(|V|,A)$ is the subgroup of functions which are constant on an open neighbourhood of each point.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $A$ an abelian group. On the small pro-etale site $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], the presheaf $\\operatorname{fun}(-,A)$ sending $V\\to X$ to all set maps $|V|\\to A$, with restrictions by precomposition, is a sheaf of abelian groups. Let $\\underline A$ be the constant abelian sheaf [def-weil-pbc-constant-sheaf]. Locally constant functions induce a monomorphism $\\underline A\\to\\operatorname{fun}(-,A)$. Let $\\mathcal Q_A$ be its cokernel in abelian sheaves [def-weil-pbc-sites-and-cohomology], equivalently the sheafification [def-weil-pbc-sheafification] of its presheaf cokernel. If every point of $X$ is closed (its singleton is closed) and has separably closed [def-pc-separably-closed] residue field $\\kappa(x)=\\mathcal O_{X,x}/\\mathfrak m_x$ [def-weil-residue-field], then for every affine object $V\\to X$ there is a canonical isomorphism\n$$\\mathcal Q_A(V)\\cong\\frac{\\operatorname{Map}(|V|,A)}{\\operatorname{LC}(|V|,A)},$$\nwhere $|V|$ is the underlying topological space, and $\\operatorname{LC}(|V|,A)$ is the subgroup of functions which are constant on an open neighbourhood of each point.",
  "source": {
   "document": "literature/stacks-project/proetale.tex",
   "place": "Tag 0F6D, example-functions-mod-locally-constant-functions"
@@ -21,11 +21,119 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-sheafification",
-  "def-pc-separably-closed"
+  "def-pc-separably-closed",
+  "def-pc-scheme",
+  "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Give $A$ the indiscrete topology. Every map $|U|\\to A$ is continuous, and addition and negation are continuous, since every map into an indiscrete space is continuous. Apply [lem-cbc-continuous-functions-fpqc-sheaf]. Every pro-etale covering is an fpqc covering by [def-weil-pbc-proetale-site], so the equalizer condition for these coverings gives exactly the sheaf condition for $\\operatorname{fun}(-,A)$. With the discrete topology on $A$, the same cited lemma gives a sheaf $L(U)=\\operatorname{LC}(|U|,A)$: continuity into a discrete space is equivalent to each point having a neighbourhood of constant value. The pointwise operations make $L$ an abelian subsheaf of $\\operatorname{fun}(-,A)$.",
+   "uses": [
+    "lem-cbc-continuous-functions-fpqc-sheaf",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12 (continuous-map sheaf); 0F6D, first sentence for fun"
+   }
+  },
+  {
+   "text": "The map from the constant presheaf $P(U)=A$ to $L$ sends $a$ to the constant function $a$. It has the universal property of sheafification [def-weil-pbc-sheafification]: given any presheaf morphism $P\\to G$ into a sheaf, send a locally constant $f$ on $U$ to the section obtained by gluing the images of its constant values on an open cover where $f$ is constant. On overlaps the values agree; an empty overlap has only the zero section of $G$. Refining two such open covers by their intersections proves independence. Pulling the open cover back along any scheme morphism proves naturality, and refining covers for two functions proves additivity. Uniqueness follows because every locally constant function is constant on such an open cover. These open covers are coverings of the pro-etale site [def-weil-pbc-proetale-site]. Hence [def-weil-pbc-constant-sheaf] identifies $\\underline A$ with $L$, compatibly with constant sections and restrictions. The inclusion $L(U)\\subseteq\\operatorname{Map}(|U|,A)$ is injective for every $U$, so is a monomorphism of sheaves (cancellation is checked componentwise).",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, last assertion, with universal-property argument written out"
+   }
+  },
+  {
+   "text": "The abelian-sheaf cokernel exists by [def-weil-pbc-sites-and-cohomology]. The sheafification of the presheaf cokernel is that cokernel: [lem-weil-pbc-sheafification-exact] says sheafification preserves colimits. More explicitly maps from the presheaf cokernel to a sheaf $G$ are precisely maps $\\operatorname{fun}(-,A)\\to G$ annihilating $\\underline A$, and its sheafification has the same maps by adjunction. Together with the monomorphism from step 2 this yields the short exact sequence $0\\to\\underline A\\to\\operatorname{fun}(-,A)\\to\\mathcal Q_A\\to0$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0F6D, displayed short exact sequence; Sites 00WH, 00WJ"
+   }
+  },
+  {
+   "text": "Let $v\\in V$ map to $x\\in X$. Base changing the weakly etale map $V\\to X$ to $\\operatorname{Spec}\\kappa(x)$ is weakly etale by [lem-weil-pbc-weakly-etale-composition-base-change]. Restricting this map to an affine open of the fibre remains weakly etale: open restriction leaves its local ring maps unchanged, as it does for the diagonal on the corresponding open of the fibre square; thus both flatness conditions in [def-weil-weakly-etale-morphism] remain true by [def-weil-flat-morphism]. On each such affine open apply [lem-weil-pbc-weak-etale-field]: its coordinate algebra $B$ is the union of finite etale $\\kappa(x)$-subalgebras, hence is integral over that field, and its residue fields are separable algebraic extensions of $\\kappa(x)$. To see points are closed without a noetherian assumption, for a prime $\\mathfrak p$ of $B$, $B/\\mathfrak p$ is an algebraic domain over a field, hence a field: a nonzero element has an algebraic equation with nonzero constant term, which solves for its inverse. Thus all primes are maximal, and no fibre point has a distinct specialization (any specialization shares an affine neighbourhood with the original point). The fibre is a closed subspace of $V$, because $x$ is closed; consequently $v$ is closed in $V$. The fibre point over $v$ has local ring $\\mathcal O_{V,v}/\\mathfrak m_x\\mathcal O_{V,v}$, whose maximal ideal is $\\mathfrak m_v/\\mathfrak m_x\\mathcal O_{V,v}$; its residue field is therefore exactly $\\mathcal O_{V,v}/\\mathfrak m_v=\\kappa(v)$ [def-weil-residue-field]. Each element of this residue field lies in a finite separable subextension, which is trivial by [lem-pc-sepclosed-finite-sep-trivial]; hence $\\kappa(v)=\\kappa(x)$ is separably closed. This proves both hypotheses needed to apply the affine acyclicity lemma to $V$.",
+   "uses": [
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-weil-pbc-weak-etale-field",
+    "lem-pc-sepclosed-finite-sep-trivial",
+    "def-weil-weakly-etale-morphism",
+    "def-weil-flat-morphism",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0F6D, sentence that all points of U are closed with separably closed residue fields; More on Algebra 092Q and 092R"
+   }
+  },
+  {
+   "text": "On $V$ the comparison morphism [def-weil-pbc-site-comparison-morphism] takes the constant abelian etale sheaf to the constant abelian pro-etale sheaf. This follows from the adjunction and the universal property of a constant sheaf: maps from $\\underline A$ to $G$ correspond to maps from the constant presheaf to $G$, hence to homomorphisms $A\\to G(V)$ because $V$ is final. Therefore $\\operatorname{Hom}(\\nu_V^{-1}\\underline A_{\\mathrm{et}},G)=\\operatorname{Hom}(\\underline A_{\\mathrm{et}},\\nu_{V,*}G)=\\operatorname{Hom}(A,(\\nu_{V,*}G)(V))=\\operatorname{Hom}(A,G(V))$ naturally; the inverse maps are the adjunction and evaluation of constant sections, so these universal properties give the isomorphism. Apply [lem-cbc-abelian-etale-proetale-cohomology-comparison] in degree 1, then [lem-cbc-affine-sepclosed-etale-acyclic] using step 4 and affineness of $V$. It follows that $H^1(V_{\\mathrm{proet}},\\underline A)=H^1(V_{\\mathrm{et}},\\underline A)=0$. To use this for evaluation on the object $V$ of $X_{\\mathrm{proet}}$, [lem-weil-pbc-proetale-restriction-injectives] identifies its slice with $V_{\\mathrm{proet}}$, and [lem-weil-pbc-cohomology-over-object-localization] identifies object cohomology with cohomology on that slice. The restriction of $\\underline A_X=L$ is $\\underline A_V=L$, since both send $W\\to V$ to locally constant maps on $|W|$ by step 2.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+    "lem-cbc-affine-sepclosed-etale-acyclic",
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "lem-weil-pbc-cohomology-over-object-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0F6D, vanishing display and preceding constant-pullback sentence; 099W(1), 09AY; 03F3 for localization"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-derived-functor-long-exact] to the short exact sequence of step 3 and $\\Gamma(V,-)$. Its hypotheses hold by [def-weil-pbc-sites-and-cohomology]: abelian sheaves form an abelian category with enough injectives and evaluation is left exact additive, with $H^0(V,G)=G(V)$. The initial segment is $0\\to\\underline A(V)\\to\\operatorname{fun}(V,A)\\to\\mathcal Q_A(V)\\to H^1(V,\\underline A)$. The last term vanishes by step 5, so the third arrow is surjective with kernel $\\underline A(V)=\\operatorname{LC}(|V|,A)$ from step 2. Sending the class of $f$ to its image in $\\mathcal Q_A(V)$ is well-defined and injective by this kernel equality, and surjective by exactness. Its inverse gives the stated canonical isomorphism. All maps used are the natural inclusion and cokernel map, so this isomorphism is compatible with restriction between affine objects; no choice of representatives affects it.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0F6D, final displayed affine quotient formula; Derived Categories 015B"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-continuous-functions-fpqc-sheaf",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-pbc-weak-etale-field",
+  "lem-pc-sepclosed-finite-sep-trivial",
+  "def-weil-weakly-etale-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-residue-field",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+  "lem-cbc-affine-sepclosed-etale-acyclic",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-derived-functor-long-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0F6D, example-functions-mod-locally-constant-functions; preliminary continuous-map argument from Bhatt–Scholze Lemma 4.2.12"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -96,10 +204,94 @@
    "results": "12 hits: AlgebraicGeometry.Scheme.ProEt, AlgebraicGeometry.Scheme.proetalePrecoverage, AlgebraicGeometry.Scheme.proetaleTopology, AlgebraicGeometry.Scheme.instCategoryProEt, AlgebraicGeometry.Scheme.instHasIsosProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderCompositionProetalePrecoverage, AlgebraicGeometry.Scheme.instSubcanonicalProetaleTopology",
    "date": "2026-10-14",
    "verdict": "no match: independently read hits; site constructions, structure-sheaf evaluation, morphisms between points on one fixed site, or unrelated module cokernels do not assert this pro-etale formula"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]ro[Ee]t.*[Cc]okernel|[Cc]okernel.*[Pp]ro[Ee]t",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: module presentations, structural functions and condensed locally constant maps do not supply the pro-etale affine quotient formula"
+  },
+  {
+   "tool": "grep",
+   "query": "functions.*quotient|quotient.*locallyConstant",
+   "results": "6 hits: Mathlib/Analysis/Complex/OpenMapping.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Data/Quot.lean, Mathlib/Topology/UniformSpace/Separation.lean, Mathlib/Geometry/Manifold/Algebra/LieGroup.lean, Mathlib/Algebra/EuclideanDomain/Defs.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: module presentations, structural functions and condensed locally constant maps do not supply the pro-etale affine quotient formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proetale sheaf of all functions modulo constant sheaf affine section formula",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"cokernel\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: module presentations, structural functions and condensed locally constant maps do not supply the pro-etale affine quotient formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of functions modulo locally constant maps on the proetale site evaluated on an affine scheme",
+   "results": "8 hits: ModuleCat.Tilde.res_const, ModuleCat.Tilde.exists_const, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstantModule.functor_obj_val, AlgebraicGeometry.StructureSheaf.res_const, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier, LightCondensed.underlying_obj",
+   "date": "2026-10-14",
+   "verdict": "no match: module presentations, structural functions and condensed locally constant maps do not supply the pro-etale affine quotient formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine sections of the proetale cokernel of all functions modulo the constant abelian sheaf are functions modulo locally constant functions",
+   "results": "8 hits: SheafOfModules.generatorsOfIsCokernelFree_π, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, ModuleCat.Tilde.exists_const, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, ModuleCat.Tilde.res_const, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_s",
+   "date": "2026-10-14",
+   "verdict": "no match: module presentations, structural functions and condensed locally constant maps do not supply the pro-etale affine quotient formula"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]ro[Ee]t.*[Cc]okernel|[Cc]okernel.*[Pp]ro[Ee]t",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: module presentations, structural functions and condensed locally constant maps do not supply the pro-etale affine quotient formula"
+  },
+  {
+   "tool": "grep",
+   "query": "functions.*quotient|quotient.*locallyConstant",
+   "results": "6 hits: Mathlib/Analysis/Complex/OpenMapping.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Data/Quot.lean, Mathlib/Topology/UniformSpace/Separation.lean, Mathlib/Geometry/Manifold/Algebra/LieGroup.lean, Mathlib/Algebra/EuclideanDomain/Defs.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: module presentations, structural functions and condensed locally constant maps do not supply the pro-etale affine quotient formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proetale sheaf of all functions modulo constant sheaf affine section formula",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"cokernel\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: module presentations, structural functions and condensed locally constant maps do not supply the pro-etale affine quotient formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of functions modulo locally constant maps on the proetale site evaluated on an affine scheme",
+   "results": "8 hits: ModuleCat.Tilde.res_const, ModuleCat.Tilde.exists_const, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstantModule.functor_obj_val, AlgebraicGeometry.StructureSheaf.res_const, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier, LightCondensed.underlying_obj",
+   "date": "2026-10-14",
+   "verdict": "no match: module presentations, structural functions and condensed locally constant maps do not supply the pro-etale affine quotient formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine sections of the proetale cokernel of all functions modulo the constant abelian sheaf are functions modulo locally constant functions",
+   "results": "8 hits: SheafOfModules.generatorsOfIsCokernelFree_π, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, ModuleCat.Tilde.exists_const, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, ModuleCat.Tilde.res_const, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_s",
+   "date": "2026-10-14",
+   "verdict": "no match: module presentations, structural functions and condensed locally constant maps do not supply the pro-etale affine quotient formula"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-proetale-stalk-conservative",
   "by": "worker",
@@ -115,5 +307,49 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-cbc-proetale-functions-quotient-sections",
+  "worker": "stage1",
+  "summary": "Followed 0F6D via general abelian comparison 099W and affine acyclicity 09AY; exposed the non-elementary inputs as two statement-only nodes, and the continuous-map fpqc sheaf theorem as a Mathlib leaf. Proved constant sections and weakly-etale point preservation in the steps, cited localization and the long exact sequence, and retained the statement without coefficient or noetherian restrictions.",
+  "blueprint": "Realizes the quotient identification used in lem-cbc-proetale-stalk-conservative Proof Step 4; no conservativity theorem or finite-coefficient comparison is used to infer an arbitrary abelian assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-weak-etale-field",
+    "why": "General weakly etale algebra over a field geometry supplies the affine fibres; no same-unit node states it."
+   },
+   {
+    "node": "lem-pc-sepclosed-finite-sep-trivial",
+    "why": "Generic field fact trivializes each finite separable residue subextension."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-restriction-injectives",
+    "why": "Uses only the slice-site identification, valid independently of coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-over-object-localization",
+    "why": "Generic abelian-sheaf cohomology localization turns evaluation into intrinsic cohomology of V."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Generic derived-functor exact sequence gives the obstruction to lifting quotient sections."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-weak-etale-field",
+  "lem-pc-sepclosed-finite-sep-trivial",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-derived-functor-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-81bc199c1",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-81bc199c1 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, cited statements, unit/chapter route, and source passages in full. Verified Stacks 0F6D, 099W(1), 09AY, 092Q/092R and the exact Mathlib fpqc sheaf theorem; checked coefficient scope, target source declarations, edge cases, duplicates and dependency cycles. Repaired one B3 missing-definition-citation fault in the item's statement and stmt_deps. Mathematics unchanged. Concrete checks and accepted tool uses are recorded in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
