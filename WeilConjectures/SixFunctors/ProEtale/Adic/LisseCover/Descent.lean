@@ -64,11 +64,13 @@ theorem nonempty_iso_of_transitionMatrix_eq_one (f : W ⟶ T) [WeaklyEtale f] [S
     Nonempty (M ≅ ⨁ fun _ : Fin n ↦ unit l T) := by
   have hι (g : W ⟶ T) (i : Fin n) :
       biproduct.ι (fun _ : Fin n ↦ unit l W) i ≫ (freeUpperStarIso l (Fin n) g).inv =
-        (adicUpperStarUnitIso l g).inv ≫ (g)^*ᵃ[l].map (biproduct.ι (fun _ : Fin n ↦ unit l T) i) := by
+        (adicUpperStarUnitIso l g).inv ≫
+          (g)^*ᵃ[l].map (biproduct.ι (fun _ : Fin n ↦ unit l T) i) := by
     simp [freeUpperStarIso]
   have hι' {P : Scheme.{u}} (g : P ⟶ W) (i : Fin n) :
       biproduct.ι (fun _ : Fin n ↦ unit l P) i ≫ (freeUpperStarIso l (Fin n) g).inv =
-        (adicUpperStarUnitIso l g).inv ≫ (g)^*ᵃ[l].map (biproduct.ι (fun _ : Fin n ↦ unit l W) i) := by
+        (adicUpperStarUnitIso l g).inv ≫
+          (g)^*ᵃ[l].map (biproduct.ι (fun _ : Fin n ↦ unit l W) i) := by
     simp [freeUpperStarIso]
   -- the transition isomorphism is the identity
   have htr : transitionHom ε (pullback.fst f f) (pullback.snd f f) pullback.condition =

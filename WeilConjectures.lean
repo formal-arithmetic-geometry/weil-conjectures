@@ -2558,6 +2558,13 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.HomCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHomEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseAbelian
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.CocycleLimit
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Congruence
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Descent
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.GLValues
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Transition
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Trivialization
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedSection
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZero
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseGerm
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
@@ -2565,6 +2572,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseRank
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalkPointwise
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseUniversalCover
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Localization
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarComp

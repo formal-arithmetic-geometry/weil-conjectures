@@ -100,7 +100,6 @@ end Coherence
 namespace AdicSheaf
 
 variable {Y W P Q : Scheme.{u}} {G : AdicSheaf l Y} {h : W ⟶ Y} {n : ℕ}
-
   (ε : (h)^*ᵃ[l].obj G ≅ ⨁ fun _ : Fin n ↦ unit l W)
 
 /-- Pulling back a trivialisation along a composite. -/
@@ -116,9 +115,12 @@ lemma trivPull_comp_hom (c : Q ⟶ P) (a : P ⟶ W) :
     reassoc_of% h₁, reassoc_of% h₂]
   simp only [Functor.map_comp, Category.assoc]
 
-/-- The congruence isomorphisms compose. The composite equality is an independent hypothesis, so that no new equality proofs are built (comparing proofs of equalities of morphisms of schemes up to different instance paths can make the kernel time out). -/
+/-- The congruence isomorphisms compose. The composite equality is an independent hypothesis,
+so that no new equality proofs are built: comparing proofs of equalities of morphisms of schemes
+up to different instance paths can make the kernel time out. -/
 @[reassoc]
-lemma adicUpperStarCongr_hom_app_trans {X Z : Scheme.{u}} {x y z : X ⟶ Z} (p : x = y) (p' : y = z) (p'' : x = z)
+lemma adicUpperStarCongr_hom_app_trans {X Z : Scheme.{u}} {x y z : X ⟶ Z} (p : x = y) (p' : y = z)
+    (p'' : x = z)
     (M : AdicSheaf l Z) :
     (adicUpperStarCongr l p).hom.app M ≫ (adicUpperStarCongr l p').hom.app M =
       (adicUpperStarCongr l p'').hom.app M := by
@@ -126,7 +128,8 @@ lemma adicUpperStarCongr_hom_app_trans {X Z : Scheme.{u}} {x y z : X ⟶ Z} (p :
   simp [adicUpperStarCongr]
 
 /-- The inverse of a congruence isomorphism is a congruence isomorphism. -/
-lemma adicUpperStarCongr_inv_app {X Z : Scheme.{u}} {x y : X ⟶ Z} (p : x = y) (q : y = x) (M : AdicSheaf l Z) :
+lemma adicUpperStarCongr_inv_app {X Z : Scheme.{u}} {x y : X ⟶ Z} (p : x = y) (q : y = x)
+    (M : AdicSheaf l Z) :
     (adicUpperStarCongr l p).inv.app M = (adicUpperStarCongr l q).hom.app M := by
   subst p
   simp [adicUpperStarCongr]
@@ -176,7 +179,8 @@ lemma transitionHom_trans (a b c : P ⟶ W) (hab : a ≫ h = b ≫ h) (hbc : b �
     Iso.hom_inv_id_assoc, adicUpperStarCongr_hom_app_trans_assoc hab hbc hac]
 
 
-/-- The transition morphism at `c ≫ a, c ≫ b` is the pullback along `c` of the transition morphism at `a, b`. -/
+/-- The transition morphism at `c ≫ a, c ≫ b` is the pullback along `c` of the transition
+morphism at `a, b`. -/
 lemma transitionHom_comp (c : Q ⟶ P) (a b : P ⟶ W) (hab : a ≫ h = b ≫ h)
     (hab' : (c ≫ a) ≫ h = (c ≫ b) ≫ h) :
     (transitionHom ε (c ≫ a) (c ≫ b) hab') = (freeUpperStarIso l (Fin n) c).inv ≫
@@ -186,8 +190,7 @@ lemma transitionHom_comp (c : Q ⟶ P) (a b : P ⟶ W) (hab : a ≫ h = b ≫ h)
         (adicUpperStarCongr l (Category.assoc c a h).symm).hom.app G := by
     rw [← cancel_epi (trivPull h ε (c ≫ a)).hom, Iso.hom_inv_id, trivPull_comp_hom]
     simp only [Category.assoc, Iso.hom_inv_id_assoc, ← Functor.map_comp_assoc,
-      Iso.hom_inv_id, Functor.map_id, Category.id_comp, Iso.hom_inv_id_app_assoc,
-      adicUpperStarCongr_hom_app_trans (Category.assoc c a h) (Category.assoc c a h).symm rfl]
+      Iso.hom_inv_id]
     simp [adicUpperStarCongr]
   rw [transitionHom_eq, transitionHom_eq, hinv, trivPull_comp_hom, Functor.map_comp,
     Functor.map_comp]
@@ -245,8 +248,10 @@ lemma transitionHom_baseChange (a b : P ⟶ W') (hab : a ≫ hT = b ≫ hT)
   rw [transitionHom_eq, transitionHom_eq, hinv, trivPull_trivBaseChange_hom ε π hT q hq b pb]
   simp only [Category.assoc]
   rw [reassoc_of% hc, Iso.hom_inv_id_app_assoc,
-    adicUpperStarCongr_inv_app pa pa.symm, adicUpperStarCongr_hom_app_trans_assoc _ _ (show (a ≫ q) ≫ h = (b ≫ hT) ≫ π by
-      simp only [Category.assoc, hq] at hab' ⊢; exact hab'), adicUpperStarCongr_hom_app_trans_assoc _ _ hab']
+    adicUpperStarCongr_inv_app pa pa.symm,
+    adicUpperStarCongr_hom_app_trans_assoc _ _ (show (a ≫ q) ≫ h = (b ≫ hT) ≫ π by
+      simp only [Category.assoc, hq] at hab' ⊢; exact hab'),
+    adicUpperStarCongr_hom_app_trans_assoc _ _ hab']
 
 /-- Pulling back a trivialisation followed by an automorphism of `ℚ̄_ℓⁿ`. -/
 lemma trivPull_trans_hom (A : (⨁ fun _ : Fin n ↦ unit l W) ≅ ⨁ fun _ : Fin n ↦ unit l W)
@@ -258,7 +263,8 @@ lemma trivPull_trans_hom (A : (⨁ fun _ : Fin n ↦ unit l W) ≅ ⨁ fun _ : F
   simp only [Category.assoc]
   rw [Iso.hom_inv_id_assoc]
 
-/-- Changing a trivialisation by an automorphism `A` of `ℚ̄_ℓⁿ` conjugates its transition morphisms by the pullbacks of `A`. -/
+/-- Changing a trivialisation by an automorphism `A` of `ℚ̄_ℓⁿ` conjugates its transition
+morphisms by the pullbacks of `A`. -/
 lemma transitionHom_trans_iso (A : (⨁ fun _ : Fin n ↦ unit l W) ≅ ⨁ fun _ : Fin n ↦ unit l W)
     (a b : P ⟶ W) (hab : a ≫ h = b ≫ h) :
     transitionHom (ε ≪≫ A) a b hab = ((freeUpperStarIso l (Fin n) a).inv ≫
@@ -290,7 +296,8 @@ lemma transitionMatrix_self (a : P ⟶ W) (haa : a ≫ h = a ≫ h) :
 lemma transitionMatrix_trans (a b c : P ⟶ W) (hab : a ≫ h = b ≫ h) (hbc : b ≫ h = c ≫ h)
     (hac : a ≫ h = c ≫ h) :
     transitionMatrix ε a c hac = transitionMatrix ε b c hbc * transitionMatrix ε a b hab := by
-  rw [transitionMatrix, transitionMatrix, transitionMatrix, ← transitionHom_trans ε a b c hab hbc hac,
+  rw [transitionMatrix, transitionMatrix, transitionMatrix,
+    ← transitionHom_trans ε a b c hab hbc hac,
     unitMatrix_comp]
 
 /-- **Transition matrices are compatible with precomposition** by a weakly étale morphism. -/
@@ -315,7 +322,8 @@ lemma transitionMatrix_baseChange (a b : P ⟶ W') (hab : a ≫ hT = b ≫ hT)
       transitionMatrix ε (a ≫ q) (b ≫ q) hab' := by
   rw [transitionMatrix, transitionMatrix, transitionHom_baseChange]
 
-/-- Changing a trivialisation by an automorphism `A` of `ℚ̄_ℓⁿ` with matrix `M` changes its transition matrices at `a, b` to `M(b) T M(a)⁻¹`. -/
+/-- Changing a trivialisation by an automorphism `A` of `ℚ̄_ℓⁿ` with matrix `M` changes its
+transition matrices at `a, b` to `M(b) T M(a)⁻¹`. -/
 lemma transitionMatrix_trans_iso
     (A : (⨁ fun _ : Fin n ↦ unit l W) ≅ ⨁ fun _ : Fin n ↦ unit l W)
     (a b : P ⟶ W) [WeaklyEtale a] [WeaklyEtale b] (hab : a ≫ h = b ≫ h) :

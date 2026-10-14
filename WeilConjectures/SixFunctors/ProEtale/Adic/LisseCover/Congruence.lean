@@ -28,7 +28,8 @@ limit of finite-level trivialisations
 * only finitely many cosets of the `k`-th congruence subgroup meet `GL_n(𝒪_E)`, `𝒪_E` being
   compact (`PadicAlgCl.finite_image_congruenceSubgroup_zero`);
 * `GL_n(E)` is complete and separated for them, `E` being complete
-  (`PadicAlgCl.exists_limit_congruenceSubgroup`, `PadicAlgCl.eq_one_of_forall_mem_congruenceSubgroup`);
+  (`PadicAlgCl.exists_limit_congruenceSubgroup`,
+  `PadicAlgCl.eq_one_of_forall_mem_congruenceSubgroup`);
 * for a function `γ : Z → GL_n(E)` with continuous entries, `z ↦ γ z • q` is locally constant on
   every coset space `GL_n(E) ⧸ K_k` (`PadicAlgCl.isLocallyConstant_smul_mk`), and conversely a
   function `σ : X → GL_n(E)` all of whose reductions are locally constant has continuous entries
@@ -176,10 +177,12 @@ lemma inv_mul_mem_congruenceSubgroup {k : ℕ} {A B : GL (Fin n) E}
       (congruenceRadius l k)) :
     A⁻¹ * B ∈ congruenceSubgroup E n k := by
   have e₁ : ((A⁻¹ * B : GL (Fin n) E) : Matrix (Fin n) (Fin n) E) - 1 =
-      ((A⁻¹ : GL (Fin n) E) : Matrix (Fin n) (Fin n) E) * ((B : Matrix _ _ E) - (A : Matrix _ _ E)) := by
+      ((A⁻¹ : GL (Fin n) E) : Matrix (Fin n) (Fin n) E) *
+        ((B : Matrix _ _ E) - (A : Matrix _ _ E)) := by
     rw [mul_sub, ← Units.val_mul, ← Units.val_mul, inv_mul_cancel, Units.val_one]
   have e₂ : (((A⁻¹ * B)⁻¹ : GL (Fin n) E) : Matrix (Fin n) (Fin n) E) - 1 =
-      ((B⁻¹ : GL (Fin n) E) : Matrix (Fin n) (Fin n) E) * ((A : Matrix _ _ E) - (B : Matrix _ _ E)) := by
+      ((B⁻¹ : GL (Fin n) E) : Matrix (Fin n) (Fin n) E) *
+        ((A : Matrix _ _ E) - (B : Matrix _ _ E)) := by
     rw [mul_inv_rev, inv_inv, mul_sub, ← Units.val_mul, ← Units.val_mul, inv_mul_cancel,
       Units.val_one]
   refine ⟨?_, ?_⟩
@@ -187,7 +190,8 @@ lemma inv_mul_mem_congruenceSubgroup {k : ℕ} {A B : GL (Fin n) E}
     simpa using (entryBound_inv_of_mem_congruenceSubgroup_zero hA).mul h zero_le_one
       (congruenceRadius_nonneg k)
   · rw [e₂]
-    have h' : EntryBound ((A : Matrix (Fin n) (Fin n) E) - (B : Matrix (Fin n) (Fin n) E)) (congruenceRadius l k) := by
+    have h' : EntryBound ((A : Matrix (Fin n) (Fin n) E) - (B : Matrix (Fin n) (Fin n) E))
+        (congruenceRadius l k) := by
       simpa [neg_sub] using h.neg
     simpa using (entryBound_inv_of_mem_congruenceSubgroup_zero hB).mul h' zero_le_one
       (congruenceRadius_nonneg k)

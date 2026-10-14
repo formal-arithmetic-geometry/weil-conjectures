@@ -46,7 +46,8 @@ lemma nonempty_iso_of_sigma {S : Type u} [Finite S] (U : S → Scheme.{u}) {M : 
   have hM := isIso_pi_lift_adicUpperStarLowerStarAdjunction_unit l U M
   have hN := isIso_pi_lift_adicUpperStarLowerStarAdjunction_unit l U
     (⨁ fun _ : Fin n ↦ AdicSheaf.unit l (∐ U))
-  exact ⟨@asIso _ _ _ _ (Pi.lift fun s ↦ (adicUpperStarLowerStarAdjunction l (Sigma.ι U s)).unit.app M) hM ≪≫
+  exact ⟨@asIso _ _ _ _
+      (Pi.lift fun s ↦ (adicUpperStarLowerStarAdjunction l (Sigma.ι U s)).unit.app M) hM ≪≫
     Pi.mapIso (fun s ↦ (Sigma.ι U s)_*ᵃ[l].mapIso
       (e s ≪≫ (AdicSheaf.freeUpperStarIso l (Fin n) (Sigma.ι U s)).symm)) ≪≫
     (@asIso _ _ _ _ (Pi.lift fun s ↦ (adicUpperStarLowerStarAdjunction l (Sigma.ι U s)).unit.app

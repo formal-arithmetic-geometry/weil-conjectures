@@ -81,7 +81,8 @@ def IsTwistedSection {S : Type*} (c : ↥(pullback f f) → S → S) {T : Scheme
     (σ : ↥(pullback f π) → S) : Prop :=
   IsLocallyConstant σ ∧ ∀ w : ↥(pullback (pullback.snd f π) (pullback.snd f π)),
     σ ((pullback.fst (pullback.snd f π) (pullback.snd f π)).base w) =
-      c ((twistedPairMap f π).base w) (σ ((pullback.snd (pullback.snd f π) (pullback.snd f π)).base w))
+      c ((twistedPairMap f π).base w)
+        (σ ((pullback.snd (pullback.snd f π) (pullback.snd f π)).base w))
 
 variable {f}
 

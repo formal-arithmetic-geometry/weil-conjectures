@@ -28,7 +28,8 @@ variable {l : ℕ} [Fact l.Prime] {T : Type*} [TopologicalSpace T] {n : ℕ}
 
 /-- **Finitely many locally finite functions on a compact space take values in a finite
 extension of `ℚ_ℓ`.** -/
-lemma exists_finiteDimensional_forall_mem [CompactSpace T] (s : Finset (locallyFiniteFunctions l T)) :
+lemma exists_finiteDimensional_forall_mem [CompactSpace T]
+    (s : Finset (locallyFiniteFunctions l T)) :
     ∃ E : IntermediateField ℚ_[l] (PadicAlgCl l), FiniteDimensional ℚ_[l] E ∧
       ∀ f ∈ s, ∀ t, f.1 t ∈ E := by
   classical
