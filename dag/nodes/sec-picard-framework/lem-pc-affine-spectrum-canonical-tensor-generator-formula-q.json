@@ -19,20 +19,34 @@
  "statement": "For a cartesian affine scheme square and its cartesian global-section spectrum square [def-pc-scheme], a point z0 of Spec Γ(X', top), and a cochain complex P of modules on X, put z=X'.isoSpec.inv(z0), P0=(X.isoSpec.inv)*P, Q=P at g'(z), and Q0=P0 at g0'(z0) [def-pc-single-complex-base-change-stalk-condition]. Fix eA and eD to the actual canonicalSpectrumStalkEquiv maps of X.isoSpec.inv and X'.isoSpec.inv, including the point transport from isoSpec naturality [lem-pc-affine-spectrum-canonical-stalk-ring-coordinates]. There exists a chain isomorphism q:Q≅Res_eA(Q0). This component only asserts existence of q; the generator formula for a fixed q is a separate strict sub-obligation.",
  "proof": [
   {
-   "text": "Construct the transported stalk chain isomorphism from canonical affine stalk comparison and extension/restriction along the invertible stalk map.",
+   "text": "For an isomorphism j, its stalk ring map rho is invertible. Restriction of scalars along rho is an equivalence; the extension/restriction adjunction unit is therefore invertible. Compose that unit with the inverse tensor-pullback stalk comparison, restricted along rho, obtaining an isomorphism of functors from the original stalk to the restricted pulled-back stalk.",
    "uses": [
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use additivity of tensor pullback and the module stalk functor to map the natural isomorphism to complexes; separate the composed functors with mapHomologicalComplexCompIso. Specialize to X.isoSpec.inv and transport the point by isoSpec_inv_naturality. Unfold canonicalSpectrumStalkEquiv to identify the fixed scalar map. The existential remainder is True.",
+   "uses": [
+    "def-pc-single-complex-base-change-stalk-condition",
+    "lem-pc-stalk-comparison-source-transport",
     "lem-pc-affine-spectrum-canonical-stalk-ring-coordinates"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-module-stalk-pullback",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-stalk-comparison-source-transport",
   "lem-pc-affine-spectrum-canonical-stalk-ring-coordinates"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "N4",
   "document": "https://stacks.math.columbia.edu/tag/0098",
-  "place": "sheaves.tex, lemma-stalk-pullback-modules (Tag 0098); lemma-adjoint-pullback-pushforward-modules (Tag 0096); perfect.tex, lemma-single-complex-base-change-condition (Tag 0DJ8), affine reduction in the proof"
+  "place": "sheaves.tex, lemma-stalk-pullback-modules (Tag 0098); lemma-adjoint-pullback-pushforward-modules (Tag 0096); perfect.tex, lemma-single-complex-base-change-condition (Tag 0DJ8), affine reduction in the proof",
+  "note": "Second reader: direct transport construction adapted from the private proved nonempty_isoPullback_stalk_complex in AffineSpectrumStalkCoordinateData; no new obligation."
  },
  "mathlib_searches": [
   {
@@ -106,10 +120,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261014T010840-L-3162513",
-  "kind": "interface",
+  "landing": "20261014T013040-L-3415338",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
