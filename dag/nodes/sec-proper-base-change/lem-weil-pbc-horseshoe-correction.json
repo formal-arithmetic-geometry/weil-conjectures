@@ -3,11 +3,17 @@
  "blueprint": {
   "is": null,
   "from": {
-   "node": "lem-weil-pbc-horseshoe-morphism-lift",
-   "place": "Step 4",
-   "via": []
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "step 5 of its split (source: Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'By Theorem 09YQ we have H^q(X^h, I|) = colim H^q(Spec(B), I|)... Thus the cohomology groups on the right are zero'); subordinate horseshoe morphism-lift final correction (historical Step 4, current parent proof step 2): subtract q from χ to retain both row squares and correct the augmentation",
+   "via": [
+    "lem-weil-pbc-horseshoe-morphism-lift",
+    "lem-weil-pbc-horseshoe-delta-functor",
+    "lem-weil-pbc-site-cohomology-pullback",
+    "lem-weil-pbc-cohomology-colimit-of-sites",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The horseshoe defect correction preserves both row squares and the augmentation",
@@ -17,43 +23,118 @@
   "place": "Tag 015I, final correction of the middle map"
  },
  "stmt_deps": [
-  "def-sp-abelian"
+  "def-sp-abelian",
+  "def-weil-preadditive-category"
  ],
  "proof": [
   {
-   "text": "Define the corrected map as χ−q and distribute composition over subtraction.",
-   "uses": [],
-   "elementary": true
+   "text": "Since C is abelian it is preadditive. For cochain complexes, morphisms are families fⁿ satisfying fⁿ ≫ d_targetⁿ = d_sourceⁿ ≫ fⁿ⁺¹. Define φBⁿ = χⁿ − qⁿ. For every n ≥ 0, (χⁿ − qⁿ) ≫ d_Y′ⁿ = χⁿ ≫ d_Y′ⁿ − qⁿ ≫ d_Y′ⁿ = d_Yⁿ ≫ χⁿ⁺¹ − d_Yⁿ ≫ qⁿ⁺¹ = d_Yⁿ ≫ (χⁿ⁺¹ − qⁿ⁺¹), by bilinearity and the chain-map equations for χ and q. Thus φB = χ − q is a morphism of complexes. Addition, subtraction and composition of these maps are componentwise; the chain-map equations are closed under addition and negation by the same bilinear identities. No exactness or injectivity is required.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 00ZY, definition-preadditive; elementary subtraction calculation in the category of cochain complexes"
+   }
+  },
+  {
+   "text": "By bilinearity, ε ≫ φB = ε ≫ (χ − q) = ε ≫ χ − ε ≫ q = b ≫ ε′, where the last equality is precisely hε. This verifies the augmentation square as an equality of maps of complexes, including degree zero.",
+   "uses": [
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 00ZY, definition-preadditive; elementary subtraction calculation in the category of cochain complexes"
+   }
+  },
+  {
+   "text": "By bilinearity and hχα and hqa, α ≫ φB = α ≫ χ − α ≫ q = φA ≫ α′ − 0 = φA ≫ α′. This verifies the left row square.",
+   "uses": [
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 00ZY, definition-preadditive; elementary subtraction calculation in the category of cochain complexes"
+   }
+  },
+  {
+   "text": "By bilinearity and hχβ and hqb, φB ≫ β′ = χ ≫ β′ − q ≫ β′ = β ≫ φC − 0 = β ≫ φC. Together with the preceding two identities this supplies the required witness and all three clauses.",
+   "uses": [
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 00ZY, definition-preadditive; elementary subtraction calculation in the category of cochain complexes"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-preadditive-category"
+ ],
  "proof_origin": {
-  "by": "worker",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 015I final correction"
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 00ZY, definition-preadditive; elementary subtraction calculation in the category of cochain complexes"
  },
  "mathlib_searches": [
   {
-   "tool": "leansearch",
-   "query": "corrected_middle_map",
-   "results": "No direct match",
-   "date": "2026-10-12"
+   "tool": "leanfinder",
+   "query": "In a preadditive category subtract a map whose compositions with the row arrows vanish to preserve both commuting squares and correct an augmentation",
+   "results": "Hits: CategoryTheory.CommSq.shortComplex'_g, ChainComplex.augment_d_one_zero, CategoryTheory.CommSq.shortComplex_f, ChainComplex.augment_d_succ_succ, CategoryTheory.CommSq.shortComplex_g, CategoryTheory.CommSq.shortComplex, CategoryTheory.CommSq.shortComplex', CategoryTheory.CommSq.shortComplex'_f (8 hits).",
+   "date": "2026-10-14",
+   "verdict": "no exact match: subtraction identities are elementary ingredients, not the three-clause existence statement"
   },
   {
-   "tool": "leanfinder",
-   "query": "corrected_middle_map",
-   "results": "No direct match",
-   "date": "2026-10-12"
+   "tool": "loogle",
+   "query": "CategoryTheory.Preadditive.comp_sub, CategoryTheory.Preadditive.sub_comp",
+   "results": "Hits:  (0 hits).",
+   "date": "2026-10-14",
+   "verdict": "no exact match: subtraction identities are elementary ingredients, not the three-clause existence statement"
   },
   {
    "tool": "grep",
-   "query": "corrected_middle_map",
-   "results": "No direct match",
-   "date": "2026-10-12"
+   "query": "corrected_middle_map|comp_sub|sub_comp",
+   "results": "Hits: Mathlib/CategoryTheory/Preadditive/EilenbergMoore.lean, Mathlib/CategoryTheory/Preadditive/EilenbergMoore.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Preadditive/EndoFunctor.lean, Mathlib/CategoryTheory/Preadditive/EndoFunctor.lean, Mathlib/CategoryTheory/Preadditive/Basic.lean, Mathlib/CategoryTheory/Preadditive/Basic.lean (11 hits).",
+   "date": "2026-10-14",
+   "verdict": "no exact match: subtraction identities are elementary ingredients, not the three-clause existence statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Subtracting a correction morphism preserves commuting squares when the correction compositions are zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For morphisms chi and q in an additive category let phi be chi minus q; if alpha q and q beta are zero then alpha phi equals alpha chi and phi beta equals chi beta",
+   "results": "Hits: CategoryTheory.Preadditive.comp_sub, CategoryTheory.Preadditive.sub_comp, CategoryTheory.Preadditive.comp_sub_assoc, CategoryTheory.Preadditive.sub_comp_assoc, CategoryTheory.NonPreadditiveAbelian.sub_add, CategoryTheory.NonPreadditiveAbelian.sub_sub_sub, CategoryTheory.NonPreadditiveAbelian.sub_comp, CategoryTheory.NonPreadditiveAbelian.comp_sub (8 hits).",
+   "date": "2026-10-14",
+   "verdict": "no exact match: subtraction identities are elementary ingredients, not the three-clause existence statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"comp_sub\"",
+   "results": "Hits: Set.range_comp_subset_range, map_comp_sub, map_comp_sub', AddMonoidHom.comp_sub, Function.mulSupport_comp_subset, Function.support_comp_subset, QuotientAddGroup.mk'_comp_subtype, QuotientGroup.mk'_comp_subtype (12 hits).",
+   "date": "2026-10-14",
+   "verdict": "no exact match: subtraction identities are elementary ingredients, not the three-clause existence statement"
+  },
+  {
+   "tool": "grep",
+   "query": "correct.*(map|morphism)|horseshoe",
+   "results": "Hits: Mathlib/CategoryTheory/Join/Pseudofunctor.lean, Mathlib/CategoryTheory/Join/Pseudofunctor.lean, Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean, Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean (4 hits).",
+   "date": "2026-10-14",
+   "verdict": "no exact match: subtraction identities are elementary ingredients, not the three-clause existence statement"
   }
  ],
  "mathlib_match": null,
- "status": "proved",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -74,14 +155,12 @@
   "date": "2026-10-12"
  },
  "reviewed": {
-  "date": "2026-10-12",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E1",
+  "reviewer": "NT-Codex-NA-2489e6f31",
+  "group": "NA",
   "result": "pass",
-  "landing": "20261012T053925-L-2632709",
-  "kind": "proof",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-2489e6f31 (reviewer sub-agent of L); spot-checked: Read the item, all four steps, cited definitions, sources, and unit/chapter route in full; no new nodes. The witness χ−q satisfies all three equations by bilinearity, including finite-field and nonzero-differential tests. No hidden hypotheses, circularity, duplicate split, or target weakening found. The inherited incorrect 015I source metadata is disclosed; proof provenance correctly uses 00ZY. Concrete checks recorded in review.md."
  },
  "reviewed_proof": {
   "date": "2026-10-12",
@@ -96,5 +175,12 @@
    "CategoryTheory.InjectiveResolution.horseshoe_preliminary_data"
   ],
   "sorry_after": []
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-horseshoe-correction",
+  "worker": "stage1",
+  "summary": "Expanded the elementary defect correction into a componentwise construction and three explicit equalities; preserved the exact imported Lean statement. No new nodes. Read Tag 00ZY and corrected the claimed proof provenance: Tag 015I does not state this calculation. Exact Sheaf proof exists but is ineligible for the brief’s WeilConjectures-only attachment rule.",
+  "blueprint": "Blueprint lemma-weil-pbc-injective-restriction-acyclicity, higher-cohomology vanishings via Theorem 09YQ (the ancestor recorded by the horseshoe parent). Below its site-cohomology comparison machinery, this item realizes only the final subtraction in the horseshoe morphism-lift, historical Step 4/current step 2. Repaired the inherited immediate-parent reference to the actual imported ancestor and recorded the intervening nodes."
  }
 }
