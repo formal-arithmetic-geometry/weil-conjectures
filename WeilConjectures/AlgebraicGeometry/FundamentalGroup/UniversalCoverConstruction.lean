@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PathTransport
 public import WeilConjectures.AlgebraicGeometry.Limits.AffineOverLimitProperties
 public import WeilConjectures.Mathlib.CategoryTheory.Galois.PointedGaloisSmall
+public import WeilConjectures.Mathlib.CategoryTheory.Galois.Prorepresentability
 
 /-!
 # Construction of the universal profinite étale cover
@@ -442,6 +443,85 @@ end Map
 
 
 section Graph
+
+omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
+/-- A compatible family of points `c_j ∈ F_y(A_j)` is the family of images of the points `a_j`
+under an endomorphism of the fibre functor (pro-representability of `F_y`). -/
+lemma exists_end_of_compatible (c : ∀ j, (fiber y).obj ((obj y).obj j))
+    (hc : ∀ {j j'} (f : j ⟶ j'), (fiber y).map ((obj y).map f) (c j) = c j') :
+    ∃ η : fiber y ⟶ fiber y, ∀ j, η.app _ (point y j) = c j := by
+  let e := indexEquiv y
+  let s : (PointedGaloisObject.incl (fiber y) ⋙ fiber y ⋙ FintypeCat.incl).sections :=
+    ⟨fun A ↦ (fiber y).map (e.unitIso.inv.app A).val (c (e.functor.obj A)), fun {A B} φ ↦ by
+      change (fiber y).map φ.val ((fiber y).map (e.unitIso.inv.app A).val _) =
+        (fiber y).map (e.unitIso.inv.app B).val _
+      rw [← hc (e.functor.map φ)]
+      have h := congrArg PointedGaloisObject.Hom.val (e.unitIso.inv.naturality φ)
+      exact congrArg (fun g ↦ (fiber y).map g (c (e.functor.obj A))) h.symm⟩
+  refine ⟨(homEquivSectionsFibers (fiber y) (fiber y)).symm s, fun j ↦ ?_⟩
+  refine (homEquivSectionsFibers_symm_app _ _ s (e.inverse.obj j)).trans ?_
+  change (fiber y).map (e.unitInv.app (e.inverse.obj j)).val _ = _
+  rw [Equivalence.unitInv_app_inverse]
+  exact hc _
+
+include y in
+omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
+/-- **Graph decomposition** of a Galois cover `A`: the morphism
+`∐_{σ ∈ Aut A} A ⟶ A ×_Y A`, `(σ, z) ↦ (σ z, z)`, is an isomorphism
+(`AlgebraicGeometry.Scheme.FiniteEtale.isIso_sigmaDesc_of_existsUnique`). -/
+lemma isIso_graphDesc (P : Y.FiniteEtale) [IsGalois P] :
+    IsIso (Sigma.desc fun m : ULift.{u + 1} (Aut P) ↦
+      Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom) m.down.hom.hom.left (𝟙 P.obj.left)
+        (by rw [Category.id_comp]; exact hom_left_comp m.down.hom)) := by
+  have : Finite (ULift.{u + 1} (Aut P)) := Finite.of_equiv _ Equiv.ulift.symm
+  refine isIso_sigmaDesc_of_existsUnique (M := ULift.{u + 1} (Aut P)) y P
+    (fun m ↦ m.down.hom) fun a b ↦ ?_
+  obtain ⟨σ, hσ, hu⟩ := (evaluation_aut_bijective_of_isGalois (fiber y) P a).existsUnique b
+  exact ⟨⟨σ⟩, hσ, fun m hm ↦ ULift.ext _ _ (hu m.down hm)⟩
+
+include y in
+omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
+/-- Every point of `A ×_Y A`, for a Galois cover `A`, is of the form `(σ z, z)`. -/
+lemma exists_aut_of_mem_pullback (P : Y.FiniteEtale) [IsGalois P]
+    (q : (Limits.pullback P.obj.hom P.obj.hom : Scheme.{u})) :
+    ∃ (σ : Aut P) (z : P.obj.left), (Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom)
+      σ.hom.hom.left (𝟙 P.obj.left)
+        (by rw [Category.id_comp]; exact hom_left_comp σ.hom)).base z = q := by
+  have := isIso_graphDesc y P
+  set Φ := Sigma.desc fun m : ULift.{u + 1} (Aut P) ↦
+      Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom) m.down.hom.hom.left (𝟙 P.obj.left)
+        (by rw [Category.id_comp]; exact hom_left_comp m.down.hom)
+  obtain ⟨m, z, hz⟩ := (sigmaOpenCover fun _ : ULift.{u + 1} (Aut P) ↦ P.obj.left).exists_eq
+    ((inv Φ).base q)
+  refine ⟨m.down, z, ?_⟩
+  rw [sigmaOpenCover_f] at hz
+  rw [← Sigma.ι_desc (fun m : ULift.{u + 1} (Aut P) ↦ Limits.pullback.lift (f := P.obj.hom)
+    (g := P.obj.hom) m.down.hom.hom.left (𝟙 P.obj.left)
+      (by rw [Category.id_comp]; exact hom_left_comp m.down.hom)) m, Scheme.Hom.comp_apply]
+  erw [hz]
+  rw [← Scheme.Hom.comp_apply, IsIso.inv_hom_id]
+  rfl
+
+include y in
+omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
+/-- The automorphism `σ` in `(σ z, z)` is determined by the point. -/
+lemma aut_eq_of_pullback_lift_eq (P : Y.FiniteEtale) [IsGalois P] (σ σ' : Aut P)
+    (z z' : P.obj.left)
+    (h : (Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom) σ.hom.hom.left (𝟙 P.obj.left)
+      (by rw [Category.id_comp]; exact hom_left_comp σ.hom)).base z =
+      (Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom) σ'.hom.hom.left (𝟙 P.obj.left)
+        (by rw [Category.id_comp]; exact hom_left_comp σ'.hom)).base z') : σ = σ' := by
+  have := isIso_graphDesc y P
+  set Φ := Sigma.desc fun m : ULift.{u + 1} (Aut P) ↦
+      Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom) m.down.hom.hom.left (𝟙 P.obj.left)
+        (by rw [Category.id_comp]; exact hom_left_comp m.down.hom)
+  have e (τ : Aut P) (w : P.obj.left) : (Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom)
+      τ.hom.hom.left (𝟙 P.obj.left) (by rw [Category.id_comp]; exact hom_left_comp τ.hom)).base w =
+      Φ.base ((Sigma.ι (fun _ : ULift.{u + 1} (Aut P) ↦ P.obj.left) ⟨τ⟩).base w) := by
+    rw [← Scheme.Hom.comp_apply, Sigma.ι_desc]
+  rw [e, e] at h
+  have h' := (sigmaι_eq_iff _ _ _ _ _).mp (((ConcreteCategory.bijective_of_isIso Φ.base).1) h)
+  exact congrArg ULift.down (Sigma.mk.inj_iff.mp h').1
 
 /-- **Every point of `Ỹ_y ×_Y Ỹ_y` lies on the graph of the transport along a loop**: for every
 point `q` there are `g ∈ π₁(Y, y) = Aut F_y` and `x ∈ Ỹ_y` with `q = (x, g x)`. Indeed
