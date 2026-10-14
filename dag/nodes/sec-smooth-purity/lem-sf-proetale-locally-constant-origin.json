@@ -7,11 +7,11 @@
    "place": "step 1, 5, 6 of its split (source: Pro-etale Cohomology, proof of Lemma Tag 09AK (label lemma-compare-constructible), first two sentences ($\\epsilon^{-1}$ commutes with restriction to the strata); literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf, Lemma 5.4.1, p. 39, and Corollary 5.1.5, p. 35)",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Locally constant pro-etale sheaves with finite values are of etale origin",
- "statement": "Let $X$ be a scheme, let $\\Lambda$ be a finite commutative ring, and let $\\nu_X:X_{\\mathrm{proet}}\\to X_{\\mathrm{et}}$ be the comparison morphism of sites [def-weil-pbc-site-comparison-morphism], with inverse image $\\nu_X^*$ on sheaves of $\\Lambda$-modules. Call a sheaf of $\\Lambda$-modules on the small etale site $X_{\\mathrm{et}}$ [def-weil-pbc-etale-site] *lisse* if it is locally constant with finite stalks [def-weil-pbc-etale-sheaves], and call a sheaf of $\\Lambda_X$-modules on the small pro-etale site $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site] *lisse* if it is locally constant [def-weil-proetale-locally-constant-sheaf] (there are a covering $\\{U_j\\to X\\}$ in $X_{\\mathrm{proet}}$ and $\\Lambda$-modules $M_j$ with $\\mathcal F|_{U_j}\\cong\\underline{M_j}_{U_j}$) and its stalk at every geometric point of $X$ [def-weil-proetale-geometric-stalk] is a finite $\\Lambda$-module.\\n\\n1. **(a)** If $G$ is a lisse sheaf of $\\Lambda$-modules on $X_{\\mathrm{et}}$, then $\\nu_X^*G$ is a lisse sheaf of $\\Lambda$-modules on $X_{\\mathrm{proet}}$.\\n1. **(b)** If $\\mathcal F$ is a lisse sheaf of $\\Lambda$-modules on $X_{\\mathrm{proet}}$, then there are a lisse sheaf $G$ of $\\Lambda$-modules on $X_{\\mathrm{et}}$ and an isomorphism $\\nu_X^*G\\cong\\mathcal F$ of sheaves of $\\Lambda$-modules.",
+ "statement": "Let $X$ be a scheme, let $\\Lambda$ be a finite commutative ring, and let $\\nu_X:X_{\\mathrm{proet}}\\to X_{\\mathrm{et}}$ be the comparison morphism of sites [def-weil-pbc-site-comparison-morphism], with inverse image $\\nu_X^*$ on sheaves of $\\Lambda$-modules. Call a sheaf of $\\Lambda$-modules on the small etale site $X_{\\mathrm{et}}$ [def-weil-pbc-etale-site] *lisse* if it is locally constant with finite stalks [def-weil-pbc-etale-sheaves], and call a sheaf of $\\Lambda_X$-modules on the small pro-etale site $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site] *lisse* if it is locally constant [def-weil-proetale-locally-constant-sheaf] (there are a covering $\\{U_j\\to X\\}$ in $X_{\\mathrm{proet}}$ and $\\Lambda$-modules $M_j$ with $\\mathcal F|_{U_j}\\cong\\underline{M_j}_{U_j}$) and its stalk at every geometric point of $X$ [def-weil-proetale-geometric-stalk] is a finite $\\Lambda$-module.\n\n1. **(a)** If $G$ is a lisse sheaf of $\\Lambda$-modules on $X_{\\mathrm{et}}$, then $\\nu_X^*G$ is a lisse sheaf of $\\Lambda$-modules on $X_{\\mathrm{proet}}$.\n1. **(b)** If $\\mathcal F$ is a lisse sheaf of $\\Lambda$-modules on $X_{\\mathrm{proet}}$, then there are a lisse sheaf $G$ of $\\Lambda$-modules on $X_{\\mathrm{et}}$ and an isomorphism $\\nu_X^*G\\cong\\mathcal F$ of sheaves of $\\Lambda$-modules.",
  "source": {
   "document": "literature/stacks-project/proetale.tex",
   "place": "Pro-etale Cohomology, Lemma Tag 099Y (label lemma-compare-locally-constant): $\\epsilon^{-1}$ is an equivalence between locally constant sheaves of $\\Lambda$-modules of finite presentation on $X_{\\mathrm{et}}$ and on $X_{\\mathrm{proet}}$ (a finite module over the finite ring $\\Lambda$ is finitely presented); also literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf, Corollary 5.1.5, p. 35 (the locally free case, with the descent of the trivialization to a finite stage $U_i$ of $U=\\lim U_i$ by Lemma 5.1.1)"
@@ -24,9 +24,124 @@
   "def-weil-proetale-locally-constant-sheaf",
   "def-weil-proetale-geometric-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Constant comparison. For a set $S$, its constant sheaf is the coproduct of $S$ copies of the terminal sheaf: this holds for the constant presheaf and persists under the left adjoint sheafification. The left adjoint $\\nu^*$ preserves this coproduct and, as a geometric inverse image, preserves the terminal sheaf. Thus $\\nu^*\\underline S_{\\mathrm{et}}\\cong\\underline S_{\\mathrm{proet}}$, naturally in $S$. Using preservation of finite products, apply this natural identification to addition, zero, negation and each scalar action gives $\\nu^*\\underline M_{\\mathrm{et}}\\cong\\underline M_{\\mathrm{proet}}$ as module sheaves. These are the module inverse images specified in the comparison definition, so no change of coefficient category is involved.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Y, lemma-compare-locally-constant, proof"
+   }
+  },
+  {
+   "text": "Proof of (a). Use [lem-weil-pbc-finite-locally-constant-module-values] to choose an etale cover $\\{V_i\\to X\\}$ trivializing $G$ with finite module values $M_i$. The inclusion of sites is continuous by [def-weil-pbc-site-comparison-morphism], so this etale covering is a pro-etale covering [def-weil-pbc-proetale-site]. By [lem-weil-pbc-comparison-pullback], its restrictions of $\\nu_X^*G$ are $\\nu_{V_i}^*(G|_{V_i})$, hence are $\\underline{M_i}$ by step 1. Geometric stalks on a restriction to a pointed covering member agree with those on $X$: for a lift $\\bar v$ to $V_i$, replace each pointed neighbourhood $(W,\\bar w)$ by $(W\\times_X V_i,(\\bar w,\\bar v))$. Projection gives a pointed refinement over $X$, while this fibre product is a neighbourhood of $\\bar v$ over $V_i$. The same construction refines each relation between representatives, so restriction induces mutually inverse maps of the two stalk colimits. By [lem-weil-proetale-constant-sheaf-stalk] these stalks equal the finite $M_i$. Every geometric point lifts to a member of the original etale cover over its own algebraically closed field: a nonempty etale geometric fibre is a disjoint union of copies of that field. Thus the same pointed-refinement calculation gives the asserted finiteness. This proves both local constancy and finite stalks.",
+   "uses": [
+    "lem-weil-pbc-finite-locally-constant-module-values",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-proetale-geometric-stalk",
+    "lem-weil-proetale-constant-sheaf-stalk",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Y, lemma-compare-locally-constant, proof"
+   }
+  },
+  {
+   "text": "Finite models for (b). Choose a pro-etale trivializing cover $\\{U_i\\to X\\}$ with $\\mathcal F|_{U_i}\\cong\\underline{M_i}$. Restriction really is the sheaf on $(U_i)_{\\mathrm{proet}}$ by [lem-weil-proetale-weakly-etale-localization]. Discard empty $U_i$. For a geometric point of a remaining $U_i$, the pointed-refinement calculation of step 2 and [lem-weil-proetale-constant-sheaf-stalk] identify $M_i$ with a stalk of $\\mathcal F$, so $M_i$ is finite. It is finitely presented: all its elements form a finite generating set, giving a surjection $\\Lambda^r\\to M_i$; since $\\Lambda$ is finite, its kernel is a finite set and is generated by its own elements, giving finitely many relations. This also covers $M_i=0$ and the zero ring.",
+   "uses": [
+    "def-weil-proetale-locally-constant-sheaf",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-proetale-constant-sheaf-stalk",
+    "def-weil-proetale-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Y, lemma-compare-locally-constant, proof"
+   }
+  },
+  {
+   "text": "Partition by module type. If $U_i\\times_XU_j$ is nonempty, take a geometric point on it. The two restrictions of $\\mathcal F$ have the same stalk there; restriction of constants to the slice is constant by [lem-weil-pbc-site-constant-restriction], so [lem-weil-proetale-constant-sheaf-stalk] gives $M_i\\cong M_j$. For a represented isomorphism type $M$, put $W_i=U_i$ when $M_i\\cong M$, and $W_i=\\varnothing$ otherwise. The pullbacks of these opens agree on each double overlap, by the preceding observation. The cover is fpqc by [def-weil-pbc-proetale-site], so [lem-weil-pbc-open-subscheme-fpqc-descent] gives an open $X_M\\subset X$ pulling back to all $W_i$. Joint surjectivity shows these opens are disjoint and cover $X$. On $X_M$ the members with $M_i\\cong M$ give a pro-etale cover and chosen module isomorphisms make every local model equal to $M$.",
+   "uses": [
+    "lem-weil-pbc-site-constant-restriction",
+    "lem-weil-proetale-constant-sheaf-stalk",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-open-subscheme-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Y, lemma-compare-locally-constant, proof"
+   }
+  },
+  {
+   "text": "Trivialization sheaf on $X_M$. Define $\\mathcal I(V)$ to be the set of module-sheaf isomorphisms $\\underline M|_V\\to\\mathcal F|_V$. For a cover $\\{V_a\\to V\\}$ and compatible local isomorphisms $\\phi_a$, take an object $W\\to V$ and a section $s$ of $\\underline M(W)$. The values $\\phi_a(s|_{W\\times_V V_a})$ agree on double overlaps, so glue uniquely to a section of $\\mathcal F(W)$. Uniqueness makes these maps natural in $W$ and linear. Apply this construction also to the $\\phi_a^{-1}$; both composite maps equal the identity since they do so after restriction to the covering $\\{W\\times_V V_a\\to W\\}$. Thus $\\mathcal I$ is a sheaf of sets. Over a trivializing member $U_i\\to X_M$, composing with its chosen trivialization identifies $\\mathcal I|_{U_i}$ with the Isom sheaf of $\\underline M$ with itself. The modules are finitely presented by step 3. Apply [lem-sf-site-constant-module-isom-sheaf] and the restriction isomorphism [lem-weil-pbc-site-constant-restriction] to identify this with $\\underline{\\operatorname{Aut}_\\Lambda(M)}$. It has the section corresponding to the chosen trivialization. In particular $\\mathcal I$ is locally constant as a sheaf of sets and has sections on this pro-etale cover.",
+   "uses": [
+    "lem-sf-site-constant-module-isom-sheaf",
+    "lem-weil-pbc-site-constant-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Y, lemma-compare-locally-constant, proof"
+   }
+  },
+  {
+   "text": "Etale trivializations. Apply [lem-weil-pbc-proetale-locally-classical-etale-cover] to the locally constant set sheaf $\\mathcal I$ on $X_M$ and to the sections from step 5. It supplies an etale covering $\\{V_{M,a}\\to X_M\\}$ with $\\mathcal I(V_{M,a})\\ne\\varnothing$. A chosen section is precisely an isomorphism $\\underline M\\cong\\mathcal F|_{V_{M,a}}$ of module sheaves, not just of underlying sets. Since the $X_M$ are disjoint opens covering $X$, these families together form an etale covering of $X$. Every constant value $M$ in this cover is finite.",
+   "uses": [
+    "lem-weil-pbc-proetale-locally-classical-etale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Y, lemma-compare-locally-constant, last paragraph; etale sections via Bhatt-Scholze Lemma 5.1.4 and the existing locally-classical-etale-cover tool in place of Tag 099X"
+   }
+  },
+  {
+   "text": "Construct the etale origin without an uncited descent assertion. Put $G=\\nu_{X,*}\\mathcal F$, a sheaf of $\\Lambda$-modules. On an etale $V=V_{M,a}\\to X$, the formula $(\\nu_*\\mathcal F)(W)=\\mathcal F(W)$ for etale $W$ identifies $G|_V$ with $\\nu_{V,*}(\\mathcal F|_V)$. Step 6 and step 1 identify this with $\\nu_{V,*}\\nu_V^*\\underline M_{\\mathrm{et}}$, and the unit isomorphism of [prop-weil-pbc-site-comparison-finite-level] identifies it with $\\underline M_{\\mathrm{et}}$. Hence [lem-weil-pbc-finite-locally-constant-module-values] implies that $G$ is lisse. The global counit $\\nu_X^*G\\to\\mathcal F$ restricts to the corresponding counit on $V$ by the evaluation formula and [lem-weil-pbc-comparison-pullback]. It is an isomorphism there: for $\\mathcal F|_V\\cong\\nu_V^*\\underline M$ the triangle identity makes it the inverse of the pullback of the invertible unit. These local inverses glue by the sheaf axiom (their overlap restrictions are both inverses to the same morphism), giving $\\nu_X^*G\\cong\\mathcal F$. This proves (b). For $X=\\varnothing$ take $G=0$; all covering and stalk conditions are vacuous.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-comparison-pullback",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-weil-pbc-finite-locally-constant-module-values"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Y, lemma-compare-locally-constant, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-proetale-locally-constant-sheaf",
+  "lem-sf-site-constant-module-isom-sheaf",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-weil-pbc-proetale-locally-classical-etale-cover",
+  "lem-weil-pbc-site-constant-restriction",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-weil-pbc-site-comparison-finite-level"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099Y, lemma-compare-locally-constant, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -41,10 +156,52 @@
    "results": "none: Mathlib has no notion of a locally constant sheaf on a site",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyConstant.*[Pp]ro[Ee]t|[Pp]ro[Ee]t.*locallyConstant",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constant-sheaf predicates, condensed objects or finite-presentation definitions, not the stated arbitrary-site Isom theorem or scheme-site comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally constant finite module sheaves on the proetale site descend to the etale site",
+   "results": "8 hits: LightCondMod.ofSheafLightProfinite, CondensedMod.ofSheafProfinite, CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CondensedMod.ofSheafCompHaus, CompHausLike.LocallyConstantModule.functor_obj_val, LightCondMod.LocallyConstant.functor, LightCondAb.ofSheafLightProfinite",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constant-sheaf predicates, condensed objects or finite-presentation definitions, not the stated arbitrary-site Isom theorem or scheme-site comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProEt\", \"IsLocallyConstant\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constant-sheaf predicates, condensed objects or finite-presentation definitions, not the stated arbitrary-site Isom theorem or scheme-site comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale and proetale finite locally constant sheaves of modules are equivalent under inverse image",
+   "results": "8 hits: LightCondensed.ofSheafForgetLightProfinite_val, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, LightCondMod.ofSheafLightProfinite, CondensedMod.ofSheafProfinite, CompHausLike.LocallyConstant.functorIso, LightCondMod.LocallyConstant.functorIsoDiscrete, Condensed.ofSheafForgetProfinite, CompHausLike.LocallyConstant.functorToPresheavesIso",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constant-sheaf predicates, condensed objects or finite-presentation definitions, not the stated arbitrary-site Isom theorem or scheme-site comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally constant proetale module sheaves have etale origin",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "locally.constant|IsLocallyConstant",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constant-sheaf predicates, condensed objects or finite-presentation definitions, not the stated arbitrary-site Isom theorem or scheme-site comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +221,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-comparison"
+ "unit": "sk-prop-sf-comparison",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-sf-proetale-locally-constant-origin",
+  "worker": "stage1",
+  "summary": "Proved both directions in seven steps following the module-type partition and Isom argument of Stacks 099Y. Reused fpqc open descent, constant stalks, comparison compatibility, finite model equivalence and locally-classical etale-section tools. One arbitrary-site Isom lemma (093T(2)) is left statement-only; no clause of the item is moved to a new node. Statement content retained; paragraph formatting and corrupted nu notation repaired in second reading.",
+  "blueprint": "Realizes the lisse input in constructible-origin steps 1, 5(b), and 6. The ancestor unit is sk-prop-sf-comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NM-0fd02c1ea",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-0fd02c1ea (reviewer sub-agent of L); spot-checked: Read both origin clauses, all seven proof steps, the sole new node, cited statements, and sources 099Y, 093T, 03N0 and Bhatt–Scholze. Mathematics passes, including finite non-free modules and empty cases. Corrected only missing new-node metadata in fixes; review.md records source checks, seven accepted tool uses, target coefficient boundaries, and an unrelated inherited dangling dependency.; 1 file(s) fixed by the reviewer"
+ }
 }
