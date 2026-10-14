@@ -13,6 +13,8 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 import WeilConjectures.Mathlib.RingTheory.Flat.DescentAlgebra
 import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSplitAction
 public import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentGeometric
+import Sheaf.AlgebraicGeometry.Morphisms.EquivariantOrbitModel
+import Sheaf.AlgebraicGeometry.Morphisms.FixedOrbitProductEquiv
 
 /-! # Descent of a split cover to its equivariant function algebra -/
 
@@ -46,7 +48,10 @@ theorem affine_torsor_equivariant_descent_algebra
       (∀ k : Fin D.m,
         (⨅ ζ : D.stabilizer k,
           AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C))) := by
-  sorry
+  obtain ⟨m, K, eA⟩ := equivariant_orbit_model H C G ρ hρmul d α
+  obtain ⟨eD⟩ := fixed_orbit_product_equiv H C G ρ hρmul d α D hD m K
+  obtain ⟨eA⟩ := eA
+  exact ⟨eA.trans eD⟩
 
 theorem affine_torsor_equivariant_descent
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
