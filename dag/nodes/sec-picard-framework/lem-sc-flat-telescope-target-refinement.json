@@ -1,0 +1,115 @@
+{
+ "id": "lem-sc-flat-telescope-target-refinement",
+ "kind": "statement",
+ "title": "One-target refinement of a bounded flat augmented tower",
+ "statement": "Let $Y$ be a scheme and $A$ its category of module sheaves [def-pc-cochain-complex-modules]. Let $E_n$ be bounded-above cochain complexes of $A$, flat in every degree [def-pc-flat-sheaf-modules], with transitions $t_n:E_n\\to E_{n+1}$. Let $T$ be an actual flat telescope [def-sc-flat-telescope-stage-map] and $p_n:E_n\\to T$ chain maps satisfying $t_n p_{n+1}=p_n$. There exist bounded-above termwise-flat towers $(R_n,s_n)$ and $(F_n,u_n)$, quasi-isomorphisms $c_n:R_n\\to E_n$ [def-pc-quasi-iso-modules], and chain maps $a_n:R_n\\to F_n$ satisfying $s_n c_{n+1}=c_n t_n$ and $s_n a_{n+1}=a_n u_n$. There is a chain map $r:\\operatorname{Cone}(1-\\mathrm{shift}:\\bigoplus F_n\\to\\bigoplus F_n)\\to T$ which becomes an isomorphism in the homotopy category, has zero restriction to the shifted summand, and satisfies $(\\bigoplus a_n)\\,\\mathrm{inr}\\,r=\\operatorname{desc}(c_n p_n)$. Bounded above means that for each stage there is an integer above which all terms vanish; the bound need not be uniform in the stage. No second target or maps to good truncations are asserted.",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeArrowBarData.lean",
+  "place": "Original proof of exists_flat_telescope_arrow_bar_data, finite-subcomplex and one-target bar-enlargement paragraphs, with a relative generator-valued resolution of the input tower by the cone construction of Stacks 06XX; 03EW and 077J supply the generator class."
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-quasi-iso-modules",
+  "def-sc-flat-telescope-stage-map"
+ ],
+ "proof": [
+  {
+   "text": "Proof. First resolve the source tower by a generator-valued tower L with maps\nv_n:L_n -> E_n. Take the resolving class to be sums of affine-open generators\nj_{U!} O_U; 03EW supplies covers, and the bounded resolution argument underlying\n077J applies to this class. At stage zero resolve the bounded-above complex E_0.\nSuppose L_n and v_n are constructed. Form the bounded-above cone H of\nL_n -> E_n -> E_(n+1), and choose a bounded-above generator resolution Q -> H.\nCompose Q -> H -> L_n[1], and form its shifted cone L_(n+1). This realizes the\ntriangle L_n -> L_(n+1) -> Q -> L_n[1] with degreewise split first map and\ncokernel Q. The triangle comparison with L_n -> E_(n+1) -> H -> L_n[1]\nprovides a map L_(n+1) -> E_(n+1) commuting up to homotopy with v_n;t_n.\nExtend that homotopy degreewise along the split inclusion of L_n, and subtract\nits boundary from the comparison map. The resulting map v_(n+1) commutes\nstrictly; it is a quasi-isomorphism by the triangle comparison since the other\ntwo vertical maps are identity and Q -> H. No lifting through a sheaf epimorphism\nis assumed. This is the cone induction of 06XX with E_(n+1) replacing a good\ntruncation; its final termwise-surjectivity addition is unnecessary here.\nChoose the degreewise splittings so that old generator summands remain named.\nAugment L_n into T by v_n;p_n. The upper bounds may increase with n, but any\nfinite initial segment has a common upper bound.\n\nEach affine-open generator is compact for coproducts: its Hom functor is sections\non a quasi-compact affine open. A section has locally finite support in a sheaf\ncoproduct, hence finite support on that open. Close finite sets of named summands\nof L_m under the differential upwards. Compactness gives finitely many new summands\nat each step; boundedness above terminates the procedure. The resulting finite\nsubcomplexes have finitely many nonzero degrees. Let D_n be the filtered diagram\nof such subcomplexes at stages m <= n, ordered by inclusion after transition.\nIts colimit is L_n. Set R_n to the direct-sum total of the unnormalized bar diagram\nof D_n, with simplicial degree p placed in cochain degree -p. The augmentation\nc_n:R_n -> L_n -> E_n is a quasi-isomorphism. Indeed filtered colimits of module\nsheaves are exact, so the horizontal augmented bar complex is exact; the common\nupper bound at stage n makes each total diagonal finite after reindexing. The bar\ninclusions give s_n and strictly satisfy s_n c_(n+1) = c_n t_n.\n\nWrite the supplied target as a telescope. Its finite cone blocks C_k use domain\nindices <= k and codomain indices <= k+1. They are bounded above and flat, their\ninclusions split degreewise, and their union is the target T. Each finite source\nsubcomplex maps into some C_k, because its finitely many compact generator terms\nuse only finitely many target summands. The factor is a chain map since C_k -> T\nis monic. Adjoin the chain of C_k to the union D of the source diagrams, putting\nan arrow x -> k exactly when the augmentation of x factors through C_k. The least\nsuch k is monotone and is left adjoint to inclusion of the target chain. The unit\nof this adjunction gives, by inserting its arrow in bar strings with alternating\nsigns, a bar homotopy equivalence with the target-chain bar construction.\n\nLet F_n be the bar total of the full subdiagram on D_n and target indices <= n.\nThese terms are flat and bounded above. Inclusions define u and a:R -> F. Their\ntransition squares commute strictly, so their sum maps commute with 1-shift. The\nunion bar total has a degreewise split exact presentation by 1-shift on the sum\nof the F_n: split the augmentation using each simplex's first stage, and solve\nthe finite-support recurrence for its kernel. The cone augmentation is a homotopy\nequivalence by the split exact-sequence cone calculation. For the target chain,\ncompare its bar augmentation with the telescope augmentation: compare the bar\nresolution of the constant right functor with its two-term representable resolution\nby 1-shift. Both are projective resolutions, so successive lifts give comparison\nmaps and homotopies; tensor these with the diagram C_k.\nComparison homotopies use finite sums on each input, so totalization is legitimate.\nChoose this comparison to lift identity on the augmented constant functor;\nthen tensoring makes its composite with the augmentation into T exactly the\nbar augmentation. The telescope of the finite cone blocks maps homotopy\nequivalently to T by the same split exact-sequence calculation. Thus the\ncanonical bar augmentation B(I) -> T itself is a homotopy equivalence: compose\nwith the target-chain inclusion, a homotopy equivalence by the unit-insertion\nhomotopy, and cancel that equivalence. Define r to be the canonical cone\naugmentation Tel(F) -> B(I) -> T, rather than an arbitrary comparison map.\nIts shifted restriction is zero and its unshifted restriction is the sum of\nbar augmentations. Naturality gives the displayed equality with Sigma.desc(c_n;p_n).\nZero complexes and zero maps require no exception; include the zero subcomplex\nas an initial source object when necessary. All witnesses are existential data.\n",
+   "uses": [
+    "lem-pc-kflat-bounded-flat-replacement"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-bounded-flat-replacement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V4",
+  "document": "https://stacks.math.columbia.edu/tag/06XX",
+  "place": "Relative bounded resolution cone argument followed by the parent finite-piece bar-enlargement argument, applied to one augmented tower and one target. This is an agent-written extension, not the literal statement of 06XX or 077J."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "refine a bounded above flat tower mapping into a telescope by levelwise quasi-isomorphisms and a strict map of towers",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "telescope|bar construction|compact.*generator",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "No exact match; factorization APIs do not supply bounded flat telescope refinements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above tower augmented into a mapping telescope admits a levelwise quasi-isomorphic refinement with a strict map into a bounded flat tower presenting the target up to chain homotopy",
+   "results": "8 hits: CochainComplex.cm5b, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, CochainComplex.cm5b.instQuasiIsoIntP, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyGE, ComplexShape.QFactorsThroughHomotopy_of_exists_prev, instQFactorsThroughHomotopyDown",
+   "date": "2026-10-14",
+   "verdict": "No exact match; factorization APIs do not supply bounded flat telescope refinements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatTelescopeArrowBarData",
+  "date": "2026-10-14",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-piece bar enlargement of a bounded-flat source tower into one actual target telescope; used twice to obtain the simultaneous arrow diagram.",
+   "via": [
+    "lem-sc-flat-telescope-arrow-bar-data",
+    "lem-sc-flat-telescope-arrow-cocycles",
+    "lem-sc-flat-telescope-arrow-diagram",
+    "lem-sc-flat-telescope-stage-map-refinement",
+    "lem-sc-normalized-flat-telescope-comparison",
+    "lem-sc-normalized-kflat-representative-comparison",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatTelescopeTargetRefinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeTargetRefinement.lean",
+  "declaration": "AlgebraicGeometry.exists_flat_telescope_target_refinement",
+  "statement": "theorem exists_flat_telescope_target_refinement (Y : Scheme.{u})\n    (E : ℕ → CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (t : ∀ n : ℕ, E n ⟶ E (n + 1))\n    (hb : ∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((E n).X i))\n    (hf : ∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E n).X i))\n    (T : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (hT : isFlatTelescope Y T) (p : ∀ n : ℕ, E n ⟶ T)\n    (hp : ∀ n : ℕ, t n ≫ p (n + 1) = p n) :\n    let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)\n    let Q := HomotopyCategory.quotient A (ComplexShape.up ℤ)\n    ∃ (R F : ℕ → CochainComplex A ℤ)\n      (s : ∀ n : ℕ, R n ⟶ R (n + 1))\n      (u : ∀ n : ℕ, F n ⟶ F (n + 1))\n      (c : ∀ n : ℕ, R n ⟶ E n) (a : ∀ n : ℕ, R n ⟶ F n),\n      (∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((R n).X i)) ∧\n      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((R n).X i)) ∧\n      (∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((F n).X i)) ∧\n      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((F n).X i)) ∧\n      (∀ n : ℕ, QuasiIso (c n)) ∧\n      (∀ n : ℕ, s n ≫ c (n + 1) = c n ≫ t n) ∧\n      (∀ n : ℕ, s n ≫ a (n + 1) = a n ≫ u n) ∧\n      ∃ r : CochainComplex.mappingCone (flatTelescopeDifferential F u) ⟶ T,\n        IsIso (Q.map r) ∧\n        (CochainComplex.mappingCone.inl (flatTelescopeDifferential F u)).comp\n          (Cochain.ofHom r) (add_zero _) = 0 ∧\n        Limits.Sigma.map a ≫\n            CochainComplex.mappingCone.inr (flatTelescopeDifferential F u) ≫ r =\n          Sigma.desc (fun n : ℕ ↦ c n ≫ p n)",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261014T074650-L-3571495",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261014T074650-L-3571495",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
