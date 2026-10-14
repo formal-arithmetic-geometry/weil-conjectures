@@ -6,6 +6,7 @@ public import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescent
 @[expose] public section
 universe u
 set_option autoImplicit false
+set_option linter.unusedVariables false
 namespace AlgebraicGeometry.Scheme
 /-- Proof: isolate the finite orbit-model construction and the comparison with supplied
 fixed orbit data.
@@ -17,12 +18,20 @@ theorem fixed_orbit_product_equiv
     (d : ℕ) (α : G →* Equiv.Perm (Fin d)) (D : FixedOrbitData G d)
     (hD : D.action = α) :
     ∀ (m : ℕ) (K : Fin m → Subgroup G),
+      (∃ e : Fin m ≃ Fin D.m, ∀ k, K k = D.stabilizer (e k)) →
       Nonempty ((∀ k : Fin m,
         (⨅ ζ : K k, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)) ≃ₐ[H]
       (∀ k : Fin D.m,
         (⨅ ζ : D.stabilizer k,
           AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C))) := by
-  sorry
+  intro m K hcompat
+  obtain ⟨e, hK⟩ := hcompat
+  have hfamily : K = fun k ↦ D.stabilizer (e k) := funext hK
+  subst K
+  exact ⟨AlgEquiv.piCongrLeft H
+    (fun k : Fin D.m ↦
+      (⨅ ζ : D.stabilizer k,
+        AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)) e⟩
 
 
 end AlgebraicGeometry.Scheme

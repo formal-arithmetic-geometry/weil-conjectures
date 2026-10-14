@@ -9,35 +9,31 @@
  ],
  "proof": [
   {
-   "text": "State the finite orbit-model construction as an intermediate descent step.",
-   "uses": [
-    "def-sbc-affine-torsor-equivariant-algebra"
-   ],
-   "elementary": false
+   "text": "Extract the compatible index equivalence e. Function extensionality replaces K by D.stabilizer composed with e, then Mathlib AlgEquiv.piCongrLeft gives the required product equivalence.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "def-sbc-affine-torsor-equivariant-algebra"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "group": "K4",
+  "group": "B3",
   "document": "Stacks Project",
   "place": "Tag 03SF",
-  "note": "Intermediate orbit bookkeeping statement."
+  "note": "Second reader: direct Mathlib reindexing proof; no new hole or helper."
  },
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
  "id": "lem-sbc-fixed-orbit-product-equiv",
  "title": "Fixed orbit product comparison",
- "statement": "For the same H,C,G,ρ and α, and fixed orbit data D whose action is α, every finite family K of subgroups gives an H-algebra equivalence between the product of equalizer subalgebras indexed by K and the product indexed by the stabilizers of D.",
+ "statement": "For finite m and K, if there is an equivalence e : Fin m ≃ Fin D.m with K k = D.stabilizer (e k) for every k, then the corresponding products of equalizer subalgebras are H-algebra equivalent.",
  "status": "split",
  "lean": {
   "existing": false,
   "module": "Sheaf.AlgebraicGeometry.Morphisms.FixedOrbitProductEquiv",
   "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FixedOrbitProductEquiv.lean",
   "declaration": "AlgebraicGeometry.Scheme.fixed_orbit_product_equiv",
-  "statement": "theorem fixed_orbit_product_equiv\n    (H C : Type u) [CommRing H] [CommRing C] [Algebra H C]\n    (G : Type u) [Group G] (ρ : G → C →ₐ[H] C)\n    (hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b))\n    (d : ℕ) (α : G →* Equiv.Perm (Fin d)) (D : FixedOrbitData G d)\n    (hD : D.action = α) :\n    ∀ (m : ℕ) (K : Fin m → Subgroup G),\n      Nonempty ((∀ k : Fin m,\n        (⨅ ζ : K k, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)) ≃ₐ[H]\n      (∀ k : Fin D.m,\n        (⨅ ζ : D.stabilizer k,\n          AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)))",
+  "statement": "theorem fixed_orbit_product_equiv\n    (H C : Type u) [CommRing H] [CommRing C] [Algebra H C]\n    (G : Type u) [Group G] (ρ : G → C →ₐ[H] C)\n    (hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b))\n    (d : ℕ) (α : G →* Equiv.Perm (Fin d)) (D : FixedOrbitData G d)\n    (hD : D.action = α) :\n    ∀ (m : ℕ) (K : Fin m → Subgroup G),\n      (∃ e : Fin m ≃ Fin D.m, ∀ k, K k = D.stabilizer (e k)) →\n      Nonempty ((∀ k : Fin m,\n        (⨅ ζ : K k, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)) ≃ₐ[H]\n      (∀ k : Fin D.m,\n        (⨅ ζ : D.stabilizer k,\n          AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)))",
   "by": "K4",
   "date": "2026-10-14",
   "branch": "sheaf-dag"
@@ -97,11 +93,34 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K4",
+  "reviewer": "X-b8118",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261014T001727-L-2552752",
+  "landing": "20261014T022541-L-4043907",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered Lean files, DAG nodes, change record, report, forced adaptation, original counterfactual, and direct importer all match and compile cleanly."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "B3 stage 2",
+  "old_statement": "For the same H,C,G,ρ and α, and fixed orbit data D whose action is α, every finite family K of subgroups gives an H-algebra equivalence between the product of equalizer subalgebras indexed by K and the product indexed by the stabilizers of D.",
+  "what": "The unrestricted comparison is false when the finite index family has a different cardinality. Add an explicit equivalence e : Fin m ≃ Fin D.m and the compatibility equalities K k = D.stabilizer (e k).",
+  "source": {
+   "document": "Stacks Project",
+   "place": "Tag 03SF; finite orbit representatives must be indexed compatibly"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "State the finite orbit-model construction as an intermediate descent step.",
+    "uses": [
+     "def-sbc-affine-torsor-equivariant-algebra"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-sbc-affine-torsor-equivariant-algebra"
+  ]
  }
 }

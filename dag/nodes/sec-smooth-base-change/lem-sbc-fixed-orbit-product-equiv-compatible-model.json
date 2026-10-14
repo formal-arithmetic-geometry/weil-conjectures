@@ -1,0 +1,114 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03SF"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "id": "lem-sbc-fixed-orbit-product-equiv-compatible-model",
+ "title": "Compatible finite orbit model",
+ "statement": "Let H and C be commutative rings with an H-algebra structure, G a group, and ρ : G → (C →ₐ[H] C) satisfy ρ(a*b) = ρ(a).comp(ρ(b)). Given α : G →* Equiv.Perm (Fin d) and FixedOrbitData D with D.action = α, there exist m and K : Fin m → Subgroup G such that the H-algebra of α-equivariant functions is H-algebra equivalent to the product of the ρ(K k)-fixed subalgebras, and an equivalence e : Fin m ≃ Fin D.m with K k = D.stabilizer (e k) for all k. In fact take m = D.m and K = D.stabilizer.",
+ "status": "split",
+ "proof": [
+  {
+   "text": "Take m = D.m and K = D.stabilizer. Completeness chooses an orbit index and transporter for every coordinate; distinctness makes the index invariant under α. Evaluation at D.representative is an H-algebra homomorphism into the product of stabilizer equalizers.",
+   "uses": [
+    "def-sbc-affine-torsor-equivariant-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If two transporters reach the same point, their quotient stabilizes its representative. Apply ρ of one transporter to the fixed-value equality and use hρmul to prove independence. Extend fixed values by the chosen transporters. Independence proves equivariance and surjectivity; equivariance proves injectivity. Apply AlgEquiv.ofBijective and use the identity index equivalence for compatibility.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-affine-torsor-equivariant-algebra"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "document": "Stacks Project",
+  "place": "Tag 03SF",
+  "note": "Second reader: complete evaluation/extension proof adapted from EquivariantOrbitModel to the prescribed orbit representatives. No postponed statement."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.EquivariantOrbitModelCompatible",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/EquivariantOrbitModelCompatible.lean",
+  "declaration": "AlgebraicGeometry.Scheme.equivariant_orbit_model_compatible",
+  "statement": "theorem equivariant_orbit_model_compatible\n    (H C : Type u) [CommRing H] [CommRing C] [Algebra H C]\n    (G : Type u) [Group G] (ρ : G → C →ₐ[H] C)\n    (hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b))\n    (d : ℕ) (α : G →* Equiv.Perm (Fin d)) (D : FixedOrbitData G d)\n    (hD : D.action = α) :\n    ∃ (m : ℕ) (K : Fin m → Subgroup G),\n      Nonempty ((affineTorsorEquivariantAlgebra H C G ρ d α) ≃ₐ[H]\n        (∀ k : Fin m,\n          (⨅ ζ : K k, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C))) ∧\n      ∃ e : Fin m ≃ Fin D.m, ∀ k, K k = D.stabilizer (e k)",
+  "by": "B3",
+  "date": "2026-10-14",
+  "branch": "sheaf-dag"
+ },
+ "stmt_deps": [
+  "def-sbc-affine-torsor-equivariant-algebra"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant functions on group orbits equivalent as an algebra to product of stabilizer fixed subalgebras",
+   "results": "MulAction.selfEquivSigmaOrbitsQuotientStabilizer and invariant-subalgebra results are ingredients, not the semilinear algebra comparison.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgEquiv.piCongrLeft",
+   "results": "AlgEquiv.piCongrLeft solves reindexing; not the orbit evaluation construction.",
+   "verdict": "partial match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant.*orbit|orbit_product|FixedOrbitData",
+   "results": "EquivariantOrbitModel and AffineTorsorEquivariantOrbitProduct choose their own representatives; adapted their constructive proof to D. AffineTorsorEquivariantDescent has the desired fixed-D comparison but its proof uses the false unrestricted comparison being repaired.",
+   "verdict": "related proofs adapted; no usable independent fixed-D comparison",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "algebra of equivariant functions is product of stabilizer invariant subalgebras",
+   "results": "Service unavailable: Internal Server Error. Used LeanFinder, Loogle, and source grep instead.",
+   "date": "2026-10-14"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.FixedOrbitProductEquiv",
+  "date": "2026-10-14",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-fixed-orbit-product-equiv",
+   "place": "proof decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-b8118",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261014T022541-L-4043907",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-b8118",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261014T022541-L-4043907",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean files, DAG nodes, change record, report, forced adaptation, original counterfactual, and direct importer all match and compile cleanly."
+ }
+}
