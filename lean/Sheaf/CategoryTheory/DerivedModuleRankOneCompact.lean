@@ -4,7 +4,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Module.ULift
 public import Sheaf.CategoryTheory.CompactObject
-import Sheaf.CategoryTheory.DerivedModuleDirectSums
+import Sheaf.CategoryTheory.DerivedModuleRankOneCompactInjective
+import Sheaf.CategoryTheory.DerivedModuleRankOneCompactSurjective
 
 @[expose] public section
 
@@ -44,6 +45,8 @@ theorem derivedModule_rankOne_compact
     IsCompactObject
       ((DerivedCategory.singleFunctor (ModuleCat.{max w vH} S) 0).obj
         (ModuleCat.of S (ULift.{vH} S))) := by
-  sorry
+  intro I E
+  exact ⟨derivedModule_rankOne_comparison_injective (S := S) I E,
+    derivedModule_rankOne_comparison_surjective (S := S) I E⟩
 
 end CategoryTheory
