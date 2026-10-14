@@ -1,0 +1,152 @@
+{
+ "id": "lem-sc-pullback-monoidal-unit-comparison",
+ "kind": "statement",
+ "title": "Monoidal pullback counit equals the canonical structure-sheaf comparison",
+ "statement": "Let $j:Z\\to X$ be an arbitrary morphism of schemes [def-pc-scheme]. Let $j^*$ be Mathlib\\'s pullback functor on sheaves of modules [def-pc-module-pullback, def-weil-sheaf-of-modules-category], equipped with the monoidal structure descended from presheaf pullback and sheafification [def-weil-presheaf-modules-sheafification]. Its monoidal counit $\\eta:j^*\\mathcal O_X\\to\\mathcal O_Z$ equals the canonical structure-sheaf pullback map, namely the adjoint of the structure-ring map $\\mathcal O_X\\to j_*\\mathcal O_Z$ [lem-pc-module-pullback-adjunction]. In Lean this is $\\operatorname{Functor.OplaxMonoidal.\\eta}(\\operatorname{pullback}j)=(\\operatorname{pullbackObjUnitIso}j).\\operatorname{hom}$. No immersion, invertibility, tensor-exponent, or square-zero hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CD, the unit part of canonical tensor pullback.",
+  "external": [
+   {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0096, the pullback-pushforward adjunction."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Apply the pullback-pushforward adjunction hom-equivalence. Mathlib's pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit identifies the image of the canonical structure-sheaf map with unitToPushforwardObjUnit, the ring map.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand the descended monoidal counit and precompose by pullback of the sheafification unit, which is an isomorphism. Apply the composite adjunction hom-equivalence. The sheafification/pullback comparison is leftAdjointUniq for the two composite adjunctions; homEquiv_leftAdjointUniq_hom_app removes this comparison. Cancel the sheafification counit by homEquiv_counit, and use adjunctionOfCommRingCat_homEquiv_η to identify the remaining presheaf counit with the lax pushforward unit. On the other side use pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit and cancel the sheafification counit. The resulting presheaf maps are equal sectionwise: restrictScalars_η identifies their values with the structure-ring homomorphism. No unproved intermediate statement is used.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Injectivity of the adjunction hom-equivalence identifies the two sheaf morphisms. The argument is functorial for arbitrary j; in particular it also covers empty schemes and identity morphisms.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CD (proof omitted), unit normalization spelled out using Tag 0096 and the Mathlib construction of monoidal pullback; P3 read both Stacks tag pages and the cited Lean definitions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "monoidal pullback of sheaves module counit equals canonical structure sheaf pullback map",
+   "results": "Eight hits, including SheafOfModules.pullbackObjUnitToUnit and its adjunction-image formula, but no equality with the descended monoidal counit.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackObjUnitToUnit\"",
+   "results": "Three hits: the canonical unit map, its IsIso instance, and its adjunction-image formula; none identifies it with Functor.OplaxMonoidal.η of Scheme.Modules.pullback.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjUnitToUnit|functorMonoidalOfComp_ε",
+   "results": "Seven hits in PullbackFree.lean and Localization/Monoidal/Functor.lean. The former gives the canonical map and its adjoint; the latter gives the descended monoidal unit formula. No combined normalization theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The counit of monoidal pullback of module sheaves is the canonical pullback map of the structure sheaf",
+   "results": "Service unavailable: Internal Server Error; no verdict about absence inferred.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SquareZeroTensorSectionProductComparison",
+  "date": "2026-10-14",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Canonical tensor pullback in the homogeneous product calculation: the degree-zero comparison is the normalized structure-sheaf unit map.",
+   "via": [
+    "lem-sc-square-zero-tensor-section-product-comparison",
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PullbackMonoidalUnitComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PullbackMonoidalUnitComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.pullback_monoidal_unit_comparison",
+  "statement": "theorem pullback_monoidal_unit_comparison {X Z : Scheme.{u}} (j : Z ⟶ X) :\n    Functor.OplaxMonoidal.η (pullback j) = (pullbackObjUnitIso j).hom",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261014T040541-L-1000646",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261014T040541-L-1000646",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

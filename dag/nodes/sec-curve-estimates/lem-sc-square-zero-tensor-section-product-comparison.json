@@ -29,20 +29,36 @@
  ],
  "proof": [
   {
-   "text": "Replace D by canonicalTensorBoundaryComparisons using hD. Its section comparison is boundaryPullbackPowIso followed by tensorPowMulIso. Expand these recursive isomorphisms, and use naturality of boundaryPullbackComparison and the monoidal pullback tensorator. The tensor-power addition map groups the first n factors and the remaining n(e+1) factors; the tensor-power multiplication map groups the same factors into blocks of n. Associator coherence identifies these groupings. The degree-one power tensorPowSection f 1 is f followed by the inverse right unitor; its unitor cancels the degree-one tensorPowMulIso. Evaluate the resulting morphism equality at 1, using tensorHom_app_tmulSection and the inverse left unitor formula. The arithmetic equality hdeg only transports the target degree. For n=0 all factors are units and the same triangle and unitor identities apply; for e=0 the argument is the two-block case. No graded presentation or cohomology property is used.",
+   "text": "Substitute hD and expand boundarySectionDegreeIso into the recursive pullback-power comparison followed by tensorPowMulIso. Prove the inverse pullback-power addition equation by induction on its first exponent for an arbitrary lax monoidal functor. Its zero case uses the normalized monoidal unit; its successor uses tensorator associativity, associator naturality, and the inductive equation. Transport the monoidal structure along boundaryPullbackComparison; its tensorator is exactly boundaryPullbackTensorIso.inv.",
+   "uses": [
+    "lem-sc-square-zero-ideal-tensor-unit",
+    "lem-sc-pullback-monoidal-unit-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove tensorPowAddIso associativity by induction and the monoidal pentagon. Induction on the number of blocks then proves tensorPowMulIso_add_inv. Apply this regrouping equation with block counts 1 and e+1. Expand tensorPowSection f 1 and tensorPowAddIso 1 (e+1): unitor and associator coherence cancel the unit factor. Naturality of eqToHom transports both the pullback and the block comparisons through hdeg; Nat.mul_add and Nat.one_add identify the resulting exponent casts.",
    "uses": [
     "lem-sc-square-zero-ideal-tensor-unit"
    ],
    "elementary": false
+  },
+  {
+   "text": "Precompose the obtained morphism equality with the inverse left unitor of the unit module and evaluate at 1. Hom.comp_app, leftUnitor_inv_app, and tensorHom_app_tmulSection give exactly the two sections in the statement. Degree n=0 and e=0 require no separate nonvanishing hypothesis and are included by the two inductions.",
+   "uses": [
+    "lem-sc-square-zero-ideal-tensor-unit"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-square-zero-ideal-tensor-unit"
+  "lem-sc-square-zero-ideal-tensor-unit",
+  "lem-sc-pullback-monoidal-unit-comparison"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 09MS, coherent-equation-ses and the direct-sum exact sequence following it; Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, the quotient action in the first paragraph of its proof."
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CD, tensor-pullback compatibility, expanded into monoidal coherence; Tag 09MS, tensor powers. Lean proof by P3, using the proved coherence arguments in InvertibleSectionRing and SectionRingVeroneseNumeratorTransition without their unrelated imports."
  },
  "mathlib_searches": [
   {
@@ -139,9 +155,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261014T033114-L-606920",
-  "kind": "interface"
+  "landing": "20261014T040541-L-1000646",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
