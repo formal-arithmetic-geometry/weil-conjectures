@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-mayer-vietoris-image-composition-localization-core",
+ "kind": "statement",
+ "title": "Core composition localization identity",
+ "statement": "For any complex I, the h-localization unit on the open-image complex followed by Rh_* of its open-image localization and the canonical open comparison equals Q of the image component, the open-image localization on h_*I, and Rj_W applied to the explicit restriction-localization chain followed by the inverse derived restriction comparison. This is the composition equation before the restriction chain is normalized. Its proof postcomposes the open-composition normalization by the inverse comparison; it does not use the restriction unit normalization, K-injectivity or e. Definitions: [def-pc-mayer-vietoris-restriction-localization-chain], [def-pc-mayer-vietoris-image-chain-data], [def-pc-derived-mayer-vietoris-canonical-data]. Exact Lean statement:\ntheorem schemeMV_image_composition_localization_core\n    (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ T : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    [∀ T : Y.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :\n    let F := (RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex\n      (.up ℤ)\n    let R := schemeDerivedDirectImage W.ι\n    (schemeMVDirectImageLocalization h).app (schemeOpenModuleImageComplex X (h ⁻¹ᵁ W) I) ≫\n      (schemeDerivedDirectImage h).map (schemeMVOpenImageLocalization X (h ⁻¹ᵁ W) I) ≫\n      (schemeMVOpenComparison h W (DerivedCategory.Q.obj I)).hom =\n    DerivedCategory.Q.map (schemeMVImageComponent h W I (F.obj I) (𝟙 _)) ≫\n      schemeMVOpenImageLocalization Y W (F.obj I) ≫\n      R.map (schemeMVRestrictionLocalizationChain X Y h W I) ≫\n      R.map ((schemeMVOpenRestrictionComparison h W).inv.app (DerivedCategory.Q.obj I))",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08FE, 0D5T and 079V; official pages read 2026-10-14"
+ },
+ "stmt_deps": [
+  "def-pc-mayer-vietoris-image-chain-data",
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "def-pc-derived-mayer-vietoris-open-counit-model",
+  "def-pc-mayer-vietoris-restriction-localization-chain"
+ ],
+ "proof": [
+  {
+   "text": "Apply the open-composition unit normalization to the homotopy quotient and transport the units through quotient comparison isomorphisms. Expand the image component and cancel the restriction factors, leaving the explicit chain and inverse comparison as separate derived-map factors.",
+   "uses": [
+    "lem-pc-derived-mayer-vietoris-open-composition-normalization",
+    "def-pc-mayer-vietoris-image-chain-data",
+    "def-pc-derived-mayer-vietoris-open-counit-model",
+    "def-pc-derived-mayer-vietoris-canonical-data",
+    "def-pc-mayer-vietoris-restriction-localization-chain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project, Cohomology of Sheaves",
+    "place": "Tags 08FE, 0D5T and 079V; official pages read 2026-10-14"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-mayer-vietoris-open-composition-normalization",
+  "def-pc-mayer-vietoris-image-chain-data",
+  "def-pc-derived-mayer-vietoris-open-counit-model",
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "def-pc-mayer-vietoris-restriction-localization-chain"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "N4",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08FE and 0D5T; core unit transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived localization unit compatibility for open restriction and direct image",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable; no exact statement found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived direct image open restriction localization comparison naturality composition units",
+   "results": "['AlgebraicGeometry.Scheme.Modules.restrictFunctorComp', 'AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality_assoc', 'AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app', 'AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality', 'AlgebraicGeometry.Scheme.Hom.appIso_inv_naturality', 'AlgebraicGeometry.Scheme.Hom.appIso_inv_naturality_assoc', 'AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc', 'AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality']",
+   "date": "2026-10-13",
+   "verdict": "generic ingredients; no exact complex transport statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "['CategoryTheory.NatTrans.naturality', 'CategoryTheory.Limits.PullbackCone.isoMk', 'CategoryTheory.Limits.PushoutCocone.isoMk', 'CategoryTheory.Limits.PullbackCone.isoMk_hom_hom', 'CategoryTheory.Limits.PullbackCone.isoMk_inv_hom', 'CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom', 'CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom', 'CategoryTheory.Grothendieck.map_map']",
+   "date": "2026-10-13",
+   "verdict": "generic ingredients; no exact complex transport statement"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*fac|pushforwardCongr",
+   "results": "['Mathlib/AlgebraicGeometry/Modules/Sheaf.lean', 'Mathlib/AlgebraicGeometry/Modules/Sheaf.lean', 'Mathlib/AlgebraicGeometry/Modules/Sheaf.lean', 'Mathlib/AlgebraicGeometry/Modules/Sheaf.lean', 'Mathlib/AlgebraicGeometry/Modules/Sheaf.lean', 'Mathlib/CategoryTheory/Abelian/RightDerived.lean', 'Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean', 'Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean']",
+   "date": "2026-10-13",
+   "verdict": "generic ingredients; no exact complex transport statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MayerVietorisImageCompositionLocalization",
+  "date": "2026-10-14",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-mayer-vietoris-image-composition-localization",
+   "place": "core identity before final functorial reassociation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MayerVietorisImageCompositionLocalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/MayerVietorisImageCompositionLocalization.lean",
+  "declaration": "AlgebraicGeometry.schemeMV_image_composition_localization_core",
+  "statement": "theorem schemeMV_image_composition_localization_core\n    (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ T : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    [∀ T : Y.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :\n    let F := (RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex\n      (.up ℤ)\n    let R := schemeDerivedDirectImage W.ι\n    (schemeMVDirectImageLocalization h).app (schemeOpenModuleImageComplex X (h ⁻¹ᵁ W) I) ≫\n      (schemeDerivedDirectImage h).map (schemeMVOpenImageLocalization X (h ⁻¹ᵁ W) I) ≫\n      (schemeMVOpenComparison h W (DerivedCategory.Q.obj I)).hom =\n    DerivedCategory.Q.map (schemeMVImageComponent h W I (F.obj I) (𝟙 _)) ≫\n      schemeMVOpenImageLocalization Y W (F.obj I) ≫\n      R.map (schemeMVRestrictionLocalizationChain X Y h W I) ≫\n      R.map ((schemeMVOpenRestrictionComparison h W).inv.app (DerivedCategory.Q.obj I))",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-14"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T013040-L-3415526",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T013040-L-3415526",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

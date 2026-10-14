@@ -15,76 +15,36 @@
  ],
  "proof": [
   {
-   "text": "Apply the determining open-composition unit equation to the quotient of J. Transport to complexes using mapHomotopyCategoryFactors and quotientCompQhIso.",
+   "text": "Apply the core composition identity, which supplies the same composite with the explicit restriction-localization chain followed by the inverse derived restriction comparison as two separate factors.",
    "uses": [
-    "lem-pc-derived-mayer-vietoris-open-composition-normalization",
-    "def-pc-mayer-vietoris-image-chain-data"
+    "lem-pc-mayer-vietoris-image-composition-localization-core"
    ],
    "elementary": false,
    "source": {
     "document": "Stacks Project, Cohomology of Sheaves",
-    "place": "Tags 08FE, 0D5T and 079V; official pages read 2026-10-14"
+    "place": "Tags 08FE, 0D5T and 079V; core identity"
    }
   },
   {
-   "text": "Expand the image component degreewise into the composition map followed by the open direct image of the inverse underived restriction comparison; pushforwardCongr equals eqToIso. Naturality of the open direct-image localization moves that inverse across its unit, and cancellation leaves the hom restriction comparison on the right.",
+   "text": "Unfold the lets and use functoriality of the derived direct-image functor, rewriting map of a composite as the composite of maps and reassociating composition. This yields the target's single mapped composite.",
    "uses": [
-    "def-pc-derived-mayer-vietoris-open-counit-model",
-    "def-pc-mayer-vietoris-image-chain-data"
+    "lem-pc-mayer-vietoris-image-composition-localization-core"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "Stacks Project, Cohomology of Sheaves",
-    "place": "Tags 08FE, 0D5T and 079V; official pages read 2026-10-14"
-   }
-  },
-  {
-   "text": "Naturality of beta moves the inverse exact-restriction factor on X across beta. Insert the hom/inverse exact-restriction factors on Y to recognize the general open-image localization map. This requires no derived restriction comparison and no K-injectivity.",
-   "uses": [
-    "def-pc-derived-mayer-vietoris-canonical-data",
-    "def-pc-mayer-vietoris-image-chain-data"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project, Cohomology of Sheaves",
-    "place": "Tags 08FE, 0D5T and 079V; official pages read 2026-10-14"
-   }
-  },
-  {
-   "text": "Use the explicit four-map chain [def-pc-mayer-vietoris-restriction-localization-chain] as the shared intermediate map. Its declared endpoints keep downstream categorical composition from unfolding the derived constructions.",
-   "uses": [
-    "def-pc-mayer-vietoris-restriction-localization-chain"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project, Cohomology of Sheaves",
-    "place": "Tags 08FE, 0D5T and 079V; official pages read 2026-10-14"
-   }
-  },
-  {
-   "text": "Postcompose the composition identity by Rj_W of the inverse derived restriction comparison. Functoriality combines the two maps under Rj_W and the definition of schemeMVOpenComparison identifies the left side. No normalization property of that comparison is used in this step.",
-   "uses": [
-    "def-pc-derived-mayer-vietoris-canonical-data"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project, Cohomology of Sheaves",
-    "place": "Tags 08FE, 0D5T and 079V; official pages read 2026-10-14"
+    "document": "Mathlib",
+    "place": "Functor.map_comp and Category.assoc"
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-mayer-vietoris-open-composition-normalization",
-  "def-pc-mayer-vietoris-image-chain-data",
-  "def-pc-derived-mayer-vietoris-open-counit-model",
-  "def-pc-derived-mayer-vietoris-canonical-data",
-  "def-pc-mayer-vietoris-restriction-localization-chain"
+  "lem-pc-mayer-vietoris-image-composition-localization-core"
  ],
  "proof_origin": {
-  "by": "agent",
-  "agent": "C2",
-  "document": "Stacks Project, Cohomology of Sheaves",
-  "place": "Tags 08FE, 0D5T and 079V; complex-interface transport of the composition unit equation"
+  "by": "worker",
+  "agent": "N4",
+  "document": "Mathlib and the project's core identity",
+  "place": "Functor.map_comp reassociation from the split core theorem"
  },
  "mathlib_searches": [
   {
@@ -167,10 +127,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261014T010836-L-3161104",
-  "kind": "interface",
+  "landing": "20261014T013040-L-3415526",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
