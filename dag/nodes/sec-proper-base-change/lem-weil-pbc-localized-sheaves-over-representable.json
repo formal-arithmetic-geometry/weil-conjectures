@@ -25,9 +25,91 @@
   "def-pur-localized-ringed-site",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct the fibre functor $R$. For $(F,p)$ put $R(F,p)(X,a)=\\{s\\in F(X):p_X(s)=\\eta_X(a)\\}$, and restrict along $b:(Y,ab)\\to(X,a)$ using $F(b)$. Naturality of $p$ and $\\eta$ preserves the fibre condition. For a covering of $(X,a)$ the underlying family covers $X$ by [def-pur-localized-ringed-site]. A matching family in these fibres glues uniquely in $F(X)$ by [def-weil-pbc-sites-and-cohomology]; its image under $p$ and $\\eta_X(a)$ agree on the cover, hence agree in the sheaf $h_U^\\#$. Thus the amalgamation lies in the fibre, proving the sheaf condition. A map over $h_U^\\#$ preserves each fibre, and its component restrictions respect identities and composition. This defines $R$ on objects and arrows.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y1 (lemma-essential-image-j-shriek), first construction of the fibre sheaf; Section 00XZ (section-localize), localized coverings."
+   }
+  },
+  {
+   "text": "For a sheaf $H$ on $\\mathcal C/U$ define $P_H(X)=\\coprod_{a:X\\to U}H(X,a)$ and $q_H:P_H\\to h_U$ by $q_H(a,s)=a$. Along $b:Y\\to X$ set $(a,s)|_Y=(ab,H(b)(s))$; the functor laws for $H$ prove the presheaf laws and naturality of $q_H$. Let $\\theta_H:P_H\\to P_H^\\#$ be the sheafification unit. The universal property [def-weil-pbc-sheafification] extends $\\eta q_H$ uniquely to $\\bar q_H:P_H^\\#\\to h_U^\\#$. Set $E(H)=(P_H^\\#,\\bar q_H)$. For $f:H\\to H'$ the presheaf map $(a,s)\\mapsto(a,f_{X,a}(s))$ induces a unique sheaf map $E(f)$; uniqueness of extensions proves compatibility with the structure maps and the identity and composition laws. This is exactly the concrete functor required in the statement.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y1 (lemma-essential-image-j-shriek), disjoint-union functor; lemma-describe-j-shriek in Section 00XZ; universal property of sheafification."
+   }
+  },
+  {
+   "text": "Define $u_H:H\\to R E(H)$ by $s\\mapsto\\theta_{H,X}(a,s)$ at $(X,a)$; it lies in the fibre because $\\bar q_H\\theta_H(a,s)=\\eta_X(a)$. This map is natural under restrictions. It is componentwise injective: equal images of $(a,s)$ and $(a,t)$ in $P_H^\\#(X)$ imply equality of these pairs on a covering of $X$ by the local-equality clause of [lem-weil-pbc-site-sheafification-sections-local]. The covering lifts to $(X,a)$, where separatedness of $H$ gives $s=t$. For surjectivity let $z\\in P_H^\\#(X)$ satisfy $\\bar q_H(z)=\\eta_X(a)$. The local-representative clause of the same node supplies a covering $b_i:X_i\\to X$ and pairs $(a_i,s_i)\\in P_H(X_i)$ representing $z|_{X_i}$. Their images satisfy $\\eta(a_i)=\\eta(ab_i)$. Apply the local-equality clause to the presheaf $h_U$ to refine each covering member until $a_i=ab_i$ on that refinement. Composition of covers gives a cover of $X$ and all these $s_i$ now lie in $H(X_i,ab_i)$. On overlaps they have the same image under $u_H$, namely the restriction of $z$; the injectivity already proved, applied to the overlap object over $U$, proves equality. Glue in $H$ to obtain $s\\in H(X,a)$. The images of $u_H(s)$ and $z$ agree on the cover, so separatedness of $P_H^\\#$ gives $u_H(s)=z$. Therefore $u_H$ is an isomorphism, with inverse given componentwise by these unique preimages. For a restriction $b:(Y,ab)\\to(X,a)$, naturality gives $u_{H,Y}(H(b)(s))=R E(H)(b)(u_{H,X}(s))$; uniqueness of preimages under $u_{H,Y}$ therefore proves that the componentwise inverses commute with $b$. Only pullbacks of covering arrows were used.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y1 (lemma-essential-image-j-shriek), first inverse comparison; agent local-section proof using Tag 00WK (lemma-sections-sheafification) and Theorem 00WB (theorem-plus)."
+   }
+  },
+  {
+   "text": "For $(F,p)$ define $t:P_{R(F,p)}\\to F$ by $t_X(a,s)=s$. Naturality of restrictions is immediate and $p\\,t=\\eta q$. Extend uniquely through sheafification to $c_{F,p}:E R(F,p)\\to(F,p)$ using [def-weil-pbc-sheafification]; the extension is over $h_U^\\#$ because the two structure maps agree after the sheafification unit. Prove componentwise injectivity of $c$: if $z,z'\\in P_{R(F,p)}^\\#(X)$ have equal images, [lem-weil-pbc-site-sheafification-sections-local] supplies local pair representatives for each. Refine to a common covering (pull back the second cover along members of the first and compose), obtaining representatives $(a,s)$ and $(a',s')$ over each member with $s=s'$ in $F$. Their fibre conditions give $\\eta(a)=p(s)=p(s')=\\eta(a')$. The local-equality clause applied to $h_U$ refines once more until $a=a'$. The representatives are then equal as pairs, so $z$ and $z'$ agree on this covering. Separatedness of $P_{R(F,p)}^\\#$ gives $z=z'$. This argument does not identify $h_U$ with $h_U^\\#$.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y1 (lemma-essential-image-j-shriek), second inverse comparison; agent injectivity proof using Tag 00WK (lemma-sections-sheafification) and Theorem 00WB (theorem-plus)."
+   }
+  },
+  {
+   "text": "Prove componentwise surjectivity of $c_{F,p}$. For $s\\in F(X)$ apply the local-representative clause of [lem-weil-pbc-site-sheafification-sections-local] to $p_X(s)\\in h_U^\\#(X)$. It gives a covering $b_i:X_i\\to X$ and arrows $a_i:X_i\\to U$ with $\\eta(a_i)=p(s)|_{X_i}=p(s|_{X_i})$. Consequently $(a_i,s|_{X_i})\\in P_{R(F,p)}(X_i)$. Their sheafification images $z_i$ map under $c$ to $s|_{X_i}$. On every overlap the two restrictions of $z_i$ have equal images under $c$, so the injectivity proved in step 4 forces equality. Glue the $z_i$ in $P_{R(F,p)}^\\#$; the resulting $z$ has $c(z)=s$ by separatedness of $F$. Thus $c$ is an isomorphism of sheaves. Its inverse is also over $h_U^\\#$ by composing the structure-map identity with the inverse.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y1 (lemma-essential-image-j-shriek), second inverse comparison; agent surjectivity proof using Tag 00WK (lemma-sections-sheafification)."
+   }
+  },
+  {
+   "text": "The maps $u_H$ are natural in $H$: both sides of the naturality square send $s\\in H(X,a)$ to $\\theta_{H',X}(a,f(s))$. The maps $c_{F,p}$ are natural in maps over $h_U^\\#$: precomposition with the sheafification unit makes both sides send $(a,s)$ to the image of $s$, so uniqueness in [def-weil-pbc-sheafification] proves the square. Hence steps 3 and 5 give natural isomorphisms $\\mathrm{id}\\cong R E$ and $E R\\cong\\mathrm{id}$. The triangle on $R(F,p)$ sends a fibre section $s$ first to the image of $(a,s)$ and then back to $s$. The triangle on $E(H)$, precomposed with $\\theta_H$, sends $(a,s)$ first to $(a,\\theta_H(a,s))$ and then to $\\theta_H(a,s)$; uniqueness of extensions proves that it is the identity. Thus $E$ and $R$ form the stated equivalence with natural unit and counit. All constructions use only disjoint unions of sets, sheafification, and gluing along coverings; no subcanonicity or unrestricted fibre products have been introduced.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y1 (lemma-essential-image-j-shriek), final functorial identifications; explicit naturality and triangles for the constructed comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Explicit local-section realization of Tag 00Y1 (lemma-essential-image-j-shriek), using its fibre/disjoint-union construction and Tag 00WK instead of its plus-commutation diagram."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -91,15 +173,65 @@
    "results": "25 hits: Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean",
    "date": "2026-10-14",
    "verdict": "no exact match: inspected results concern Yoneda on sheaves, cover-dense comparisons, general Over equivalences, or restriction; none states the arbitrary-site slice equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "overEquiv|sheafEquiv|jShriek|sigmaPresheaf",
+   "results": "25 hits: Mathlib/CategoryTheory/Sites/Point/Over.lean, Mathlib/CategoryTheory/Sites/Point/Over.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean. Read Over.lean:427-459,518-524; DenseSubsite/SheafEquiv.lean:10-38; Localization.lean:10-30.",
+   "date": "2026-10-14",
+   "verdict": "no match: slice-site restriction, localization of presheaves at local equivalences, dense-subsite equivalences, and Yoneda identities do not state this equivalence over a sheafified representable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of sets on a localized site C/U are equivalent to sheaves on C over the sheafification of the representable U",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.GrothendieckTopology.W_eq_isLocal_range_sheafToPresheaf_obj, CategoryTheory.Equivalence.hasSheafify, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor, CategoryTheory.GrothendieckTopology.W_eq_W_range_sheafToPresheaf_obj, CategoryTheory.Equivalence.transportAndSheafify, CategoryTheory.Functor.IsDenseSubsite.sheafEquivSheafificationCompatibility. Read Over.lean:427-459,518-524; DenseSubsite/SheafEquiv.lean:10-38; Localization.lean:10-30.",
+   "date": "2026-10-14",
+   "verdict": "no match: slice-site restriction, localization of presheaves at local equivalences, dense-subsite equivalences, and Yoneda identities do not state this equivalence over a sheafified representable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Slice site sheaves equivalent to slice category over sheafified representable",
+   "results": "Service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence between sheaves on Over U and Over of sheafified yoneda U for any Grothendieck topology",
+   "results": "8 hits: CategoryTheory.sheafToPresheafCompYonedaCompWhiskeringLeftSheafToPresheaf, CategoryTheory.sheafToPresheafCompYonedaCompWhiskeringLeftSheafToPresheaf_app_app, CategoryTheory.sheafToPresheafCompYonedaCompWhiskeringLeftSheafToPresheaf_hom_app_app_val, CategoryTheory.sheafToPresheafCompCoyonedaCompWhiskeringLeftSheafToPresheaf, CategoryTheory.Functor.IsCoverDense.isoOver, CategoryTheory.typeEquiv, CategoryTheory.sheafToPresheafCompCoyonedaCompWhiskeringLeftSheafToPresheaf_app_app, CategoryTheory.sheafToPresheafCompCoyonedaCompWhiskeringLeftSheafToPresheaf_hom_app_app_val. Read Over.lean:427-459,518-524; DenseSubsite/SheafEquiv.lean:10-38; Localization.lean:10-30.",
+   "date": "2026-10-14",
+   "verdict": "no match: slice-site restriction, localization of presheaves at local equivalences, dense-subsite equivalences, and Yoneda identities do not state this equivalence over a sheafified representable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"equivalence\"",
+   "results": "12 hits: CategoryTheory.sheafBotEquivalence, CategoryTheory.sheafBotEquivalence_functor, CategoryTheory.sheafBotEquivalence_inverse_obj_obj, CategoryTheory.sheafBotEquivalence_inverse_map_hom, CategoryTheory.sheafBotEquivalence_unitIso, CategoryTheory.sheafBotEquivalence_counitIso, CategoryTheory.Functor.IsDenseSubsite.hasWeakSheafify_of_isEquivalence, CategoryTheory.Functor.IsDenseSubsite.hasSheafify_of_isEquivalence. Read Over.lean:427-459,518-524; DenseSubsite/SheafEquiv.lean:10-38; Localization.lean:10-30.",
+   "date": "2026-10-14",
+   "verdict": "no match: slice-site restriction, localization of presheaves at local equivalences, dense-subsite equivalences, and Yoneda identities do not state this equivalence over a sheafified representable."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-slice-site-localization",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-localized-sheaves-over-representable",
+  "worker": "stage1",
+  "summary": "Read Stacks 00Y1 and the explicit disjoint-union construction; proved the fibre sheaf and both componentwise isomorphisms by local representatives, equality, and gluing, reusing the existing set-valued local-sheafification node. No new nodes, statement changes, subcanonicity, or all-pullbacks hypotheses.",
+  "blueprint": "Detailed form proof of lemma-weil-pbc-perfect-projection-formula: locality on the target (0944), realized through restriction of ringed morphisms (03CF); this item supplies the underlying localized-topos fibre equivalence."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-8b858a237",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-8b858a237 (reviewer sub-agent of L); spot-checked: Read all six steps and cited statements against Stacks 00Y1, 00WK, 00WB and localization sources. Both natural comparisons and triangles are valid, including non-subcanonical and empty-cover cases. No new nodes, duplicates, cycles or repairs. Checked exact master target categories and base-change maps without assuming comparison theorems. Full findings are in review.md."
+ }
 }
