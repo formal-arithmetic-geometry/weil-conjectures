@@ -1,0 +1,108 @@
+{
+ "id": "lem-sbc-open-injective-coefficient-lower-comparison",
+ "kind": "statement",
+ "title": "Open injective coefficient lower comparison",
+ "statement": "Let Λ be a commutative ring, e:Y→T, j:V→T, eV:W→V and a:W→Y scheme morphisms with a≫e=eV≫j and with the square Cartesian. Assume j is an open immersion, quasi-compact and quasi-separated. Let n be any integer, assume BaseChangeProperty Λ e n [sbc-def-base-change-property], and let J be an injective étale Λ-module sheaf on V. Put G=j_*J and K=De*(G[0]). The unit K→Ra_*Da*K followed by Ra_* of the pullback composition isomorphism Da*De*≅DeV*Dj* and of the map DeV*(Dj*(G[0])→J[0]) induced by the single-complex comparison and the coefficient counit has isomorphic degree-n homology. The pullback composition is the inverse upperStarPlusComp(a,e), the equality transport a≫e=eV≫j, and upperStarPlusComp(eV,j), in that order.",
+ "source": {
+  "document": "Stacks Project Tag 0F07",
+  "place": "closed-open argument, lower-degree comparison / Leray edge"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "sbc-def-base-change-property",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Reduce the derived unit and pullback comparison on the injective single complex to the ordinary base-change map, using the canonical single-complex unit and counit identities; the assumed base-change isomorphism then gives the result.",
+   "uses": [
+    "sbc-def-base-change-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sbc-def-base-change-property"
+ ],
+ "proof_origin": {
+  "by": "worker S1",
+  "document": "Stacks Project Tag 0F07",
+  "place": "formal derived-category reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Leray edge map injectivity under vanishing of lower higher direct images open immersion injective coefficient sheaf",
+   "date": "2026-10-14",
+   "results": "Generic derived and homology lemmas; no exact open coefficient comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryPlusSingleFunctor",
+   "date": "2026-10-14",
+   "results": "Project extension found by local rg; used its single-complex comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "Leray|leray|edge.*[Ii]nject|[Mm]ono.*edge",
+   "date": "2026-10-14",
+   "results": "No ready-made relative Leray edge theorem; proved it from cone triangles and homology exactness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficient naturality and lower degree Leray edge map on injective single complexes",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: Internal Server Error. The service is unavailable; no negative verdict is inferred."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BaseChangeOpenInjectiveCoefficientZero",
+  "date": "2026-10-14",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-open-injective-coefficient-zero",
+   "place": "intermediate derived Leray comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenInjectiveCoefficientLowerComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.open_injective_coefficient_lower_comparison",
+  "statement": "theorem open_injective_coefficient_lower_comparison\n    (Λ : Type (u + 1)) [CommRing Λ] {Y T V W : Scheme.{u}}\n    (e : Y ⟶ T) (j : V ⟶ T) (eV : W ⟶ V) (a : W ⟶ Y)\n    [IsOpenImmersion j] [QuasiCompact j] [QuasiSeparated j]\n    (wa : a ≫ e = eV ≫ j) (sq : IsPullback eV a j e)\n    (n : ℤ) (hbc : BaseChangeProperty Λ e n)\n    (J : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective J] :\n    IsIso ((DerivedCategory.Plus.homologyFunctor _ n).map\n      ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) a).derivedPlus.unit.app\n        (D+((e)^*[ModuleCat.{u + 1} Λ]).obj\n          ((DerivedCategory.Plus.singleFunctor _ 0).obj\n            (((j)_*[ModuleCat.{u + 1} Λ]).obj J))) ≫\n        R+((a)_*[ModuleCat.{u + 1} Λ]).map\n          ((upperStarPlusComp (ModuleCat.{u + 1} Λ) a e).inv.app _ ≫\n            eqToHom (by rw [wa]) ≫\n            (upperStarPlusComp (ModuleCat.{u + 1} Λ) eV j).hom.app _ ≫\n            D+((eV)^*[ModuleCat.{u + 1} Λ]).map\n              ((((j)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app\n                (((j)_*[ModuleCat.{u + 1} Λ]).obj J) ≫\n                (DerivedCategory.Plus.singleFunctor _ 0).map\n                  ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit.app J)))))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261014T152914-L-1197799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261014T152914-L-1197799",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

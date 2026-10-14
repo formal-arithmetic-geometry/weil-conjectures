@@ -1,0 +1,108 @@
+{
+ "id": "lem-sbc-open-injective-leray-edge",
+ "kind": "statement",
+ "title": "Open injective Leray edge monomorphism",
+ "statement": "Let Λ be a commutative ring, h:Y→X, e:Y→T, j:V→T, eV:W→V, a:W→Y and h′:W→X scheme morphisms with a≫e=eV≫j and a≫h=h′. Assume the square (eV,a,j,e) is Cartesian and j is a quasi-compact quasi-separated open immersion. Let q≥1 be an integer and assume BaseChangeProperty Λ e n for every n<q [sbc-def-base-change-property]. For every injective étale Λ-module sheaf J on V, the canonical target transition t(j_*J) [def-sbc-canonical-base-change-stalk-transitions], followed by baseChangeTargetFunctor(Λ,eV,h′,q) applied to the counit j*j_*J→J, is a monomorphism.",
+ "source": {
+  "document": "Stacks Project Tag 0F07",
+  "place": "closed-open argument, lower-degree comparison / Leray edge"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "sbc-def-base-change-property",
+  "def-sbc-canonical-base-change-stalk-transitions"
+ ],
+ "proof": [
+  {
+   "text": "Take the cone of the derived unit followed by the pullback comparison and coefficient counit. Lower-degree comparison makes its homology vanish below q, and the long exact sequence plus the lower bound on the source makes the q-th derived pushforward map monic. Naturality identifies this map with the displayed transition.",
+   "uses": [
+    "lem-sbc-open-injective-coefficient-lower-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-open-injective-coefficient-lower-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker S1",
+  "document": "Stacks Project Tag 0F07",
+  "place": "formal derived-category reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Leray edge map injectivity under vanishing of lower higher direct images open immersion injective coefficient sheaf",
+   "date": "2026-10-14",
+   "results": "Generic derived and homology lemmas; no exact open coefficient comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryPlusSingleFunctor",
+   "date": "2026-10-14",
+   "results": "Project extension found by local rg; used its single-complex comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "Leray|leray|edge.*[Ii]nject|[Mm]ono.*edge",
+   "date": "2026-10-14",
+   "results": "No ready-made relative Leray edge theorem; proved it from cone triangles and homology exactness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficient naturality and lower degree Leray edge map on injective single complexes",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: Internal Server Error. The service is unavailable; no negative verdict is inferred."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BaseChangeOpenInjectiveCoefficientZero",
+  "date": "2026-10-14",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-open-injective-coefficient-zero",
+   "place": "intermediate derived Leray comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOpenInjectiveLerayEdge",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenInjectiveLerayEdge.lean",
+  "declaration": "AlgebraicGeometry.Etale.baseChangeTargetTransition_counit_mono",
+  "statement": "theorem baseChangeTargetTransition_counit_mono\n    {X Y T V W : Scheme.{u}} (h : Y ⟶ X) (e : Y ⟶ T) (j : V ⟶ T)\n    (eV : W ⟶ V) (a : W ⟶ Y) (h' : W ⟶ X)\n    [IsOpenImmersion j] [QuasiCompact j] [QuasiSeparated j]\n    (wa : a ≫ e = eV ≫ j) (wh : a ≫ h = h')\n    (sq : IsPullback eV a j e) (q : ℤ) (hq : 1 ≤ q)\n    (hprev : ∀ n < q, BaseChangeProperty Λ e n)\n    (J : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective J] :\n    Mono (baseChangeTargetTransition Λ e h q j a eV h' wa wh\n      (((j)_*[ModuleCat.{u + 1} Λ]).obj J) ≫\n      (baseChangeTargetFunctor Λ eV h' q).map\n        ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit.app J))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261014T152914-L-1197799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261014T152914-L-1197799",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

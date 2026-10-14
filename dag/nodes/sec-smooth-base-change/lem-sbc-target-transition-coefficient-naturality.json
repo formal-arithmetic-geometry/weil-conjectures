@@ -1,0 +1,105 @@
+{
+ "id": "lem-sbc-target-transition-coefficient-naturality",
+ "kind": "statement",
+ "title": "Coefficient naturality of the target transition",
+ "statement": "For scheme morphisms e:Y→T, h:Y→X, π:T′→T, a:Y′→Y, e′:Y′→T′ and h′:Y′→X with a≫e=e′≫π and a≫h=h′, every map α:F→G of étale Λ-module sheaves and every integer q satisfies B(e,h,q)(α)≫t(G)=t(F)≫B(e′,h′,q)(π*α), where B is baseChangeTargetFunctor and t is baseChangeTargetTransition [def-sbc-canonical-base-change-stalk-transitions].",
+ "source": {
+  "document": "Stacks Project Tag 0F07",
+  "place": "closed-open argument, lower-degree comparison / Leray edge"
+ },
+ "stmt_deps": [
+  "def-sbc-canonical-base-change-stalk-transitions"
+ ],
+ "proof": [
+  {
+   "text": "Naturality of the derived adjunction unit and counit gives naturality of lowerStarPlusTransition. Compose this with the natural pullback-composition isomorphisms, the equality transport, and the single-complex comparison. Apply derived direct image and degree-q homology.",
+   "uses": [
+    "def-sbc-canonical-base-change-stalk-transitions"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-canonical-base-change-stalk-transitions"
+ ],
+ "proof_origin": {
+  "by": "worker S1",
+  "document": "Stacks Project Tag 0F07",
+  "place": "formal derived-category reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Leray edge map injectivity under vanishing of lower higher direct images open immersion injective coefficient sheaf",
+   "date": "2026-10-14",
+   "results": "Generic derived and homology lemmas; no exact open coefficient comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryPlusSingleFunctor",
+   "date": "2026-10-14",
+   "results": "Project extension found by local rg; used its single-complex comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "Leray|leray|edge.*[Ii]nject|[Mm]ono.*edge",
+   "date": "2026-10-14",
+   "results": "No ready-made relative Leray edge theorem; proved it from cone triangles and homology exactness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficient naturality and lower degree Leray edge map on injective single complexes",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: Internal Server Error. The service is unavailable; no negative verdict is inferred."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BaseChangeOpenInjectiveCoefficientZero",
+  "date": "2026-10-14",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-open-injective-coefficient-zero",
+   "place": "intermediate derived Leray comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeTargetCoefficientNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeTargetCoefficientNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.target_transition_naturality",
+  "statement": "lemma target_transition_naturality\n    {Y Y' : Scheme.{u}} (e : Y ⟶ T) (h : Y ⟶ X) (q : ℤ)\n    {T' : Scheme.{u}} (π : T' ⟶ T) (a : Y' ⟶ Y) (e' : Y' ⟶ T') (h' : Y' ⟶ X)\n    (wa : a ≫ e = e' ≫ π) (wh : a ≫ h = h')\n    {F G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (α : F ⟶ G) :\n    (baseChangeTargetFunctor Λ e h q).map α ≫\n        baseChangeTargetTransition Λ e h q π a e' h' wa wh G =\n      baseChangeTargetTransition Λ e h q π a e' h' wa wh F ≫\n        (baseChangeTargetFunctor Λ e' h' q).map\n          (((π)^*[ModuleCat.{u + 1} Λ]).map α)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261014T152914-L-1197799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261014T152914-L-1197799",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
