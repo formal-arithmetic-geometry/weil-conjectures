@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCateg
 public import WeilConjectures.AlgebraicGeometry.Sites.LerayVanishing
 public import WeilConjectures.AlgebraicGeometry.Sites.ZariskiSite
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Injective
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Injective
 
 /-!
 # Comparison of the étale and the Zariski site
