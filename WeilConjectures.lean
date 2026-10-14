@@ -2571,7 +2571,10 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.GLValues
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.SheafGluing
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Transition
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Trivialization
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedDescent
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedFiniteEtale
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedSection
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZero
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseGerm
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom

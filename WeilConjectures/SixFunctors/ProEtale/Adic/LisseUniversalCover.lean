@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.CocycleLimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Descent
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.GLValues
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Trivialization
-public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedSection
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedFiniteEtale
 
 /-!
 # Lisse sheaves are constant on the universal profinite étale cover

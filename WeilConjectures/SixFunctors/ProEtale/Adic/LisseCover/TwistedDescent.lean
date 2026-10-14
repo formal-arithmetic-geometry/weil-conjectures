@@ -97,7 +97,8 @@ lemma finInv_id {N : ℕ} (a : Fin N) : finInv id a = a :=
   finInv_apply (g := id) Function.injective_id a
 
 /-- A descent cocycle on a finite set is locally constant as a function to self-maps. -/
-lemma _root_.AlgebraicGeometry.IsDescentCocycle.isLocallyConstant_fun {Y V : Scheme.{u}} {f : V ⟶ Y} {N : ℕ}
+lemma _root_.AlgebraicGeometry.IsDescentCocycle.isLocallyConstant_fun {Y V : Scheme.{u}}
+    {f : V ⟶ Y} {N : ℕ}
     {c : ↥(pullback f f) → Fin N → Fin N} (hc : IsDescentCocycle f c) :
     IsLocallyConstant c := by
   rw [IsLocallyConstant.iff_eventually_eq]
@@ -204,7 +205,8 @@ lemma coact_coassoc : coactionMap p (trivπ N W) (coact hc hjp) (coact_trivπ hc
     simp only [← Scheme.Hom.comp_apply, hΘ₁₃, e₁, e₂, restrictCocycle] at hco
     simp only [Scheme.Hom.comp_apply] at hco
     rw [Scheme.Hom.comp_apply, Scheme.Hom.comp_apply, idx_coact, idx_coact]
-    have q₁ : (pullback.fst (trivπ N W ≫ p) p).base (cM.base x) = (coact hc hjp).base (z₁.base x) := by
+    have q₁ : (pullback.fst (trivπ N W ≫ p) p).base (cM.base x) =
+        (coact hc hjp).base (z₁.base x) := by
       rw [← Scheme.Hom.comp_apply, hcM₁, Scheme.Hom.comp_apply]
     have q₂ : (pullback.fst (trivπ N W ≫ p) p).base (cF.base x) =
         (pullback.fst (trivπ N W ≫ p) p).base (z₁.base x) := by
