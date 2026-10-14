@@ -3,76 +3,136 @@
  "blueprint": {
   "is": "lem-fin-projective-finite-fibres",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Projective morphisms with finite fibres are finite",
- "statement": "Let $f:D\\to T$ be a\nprojective morphism with\nNoetherian target.\nIf every geometric fibre has only finitely many points, then $f$\nis finite.",
+ "statement": "Let $f:D\\to T$ be a projective morphism [def-pc-projective-morphism] with Noetherian target (that is, $T$ is locally Noetherian [pqf-def-locnoeth] and quasi-compact). If every geometric fibre [def-weil-geometric-fibre] has only finitely many points, then $f$ is finite [def-weil-finite-integral-morphism].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-projective-finite-fibres.md",
   "place": "node lem-fin-projective-finite-fibres, order 1596"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-projective-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-geometric-fibre",
+  "def-weil-finite-integral-morphism"
+ ],
  "proof": [
   {
-   "text": "Fix $t\\in T$. By [def-pc-projective-morphism], after\nrestriction to an affine neighbourhood\n$T_0=\\operatorname{Spec}A$ of $t$, choose a closed immersion\n$D_{T_0}\\hookrightarrow\\mathbf P^N_A$.\nWrite $\\mathfrak p$ for the prime of $A$ corresponding to $t$,\nand put $\\kappa=\\kappa(t)$.",
-   "uses": [
-    "def-pc-projective-morphism"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The fibre $D_t$ is a finite $\\kappa$-scheme. Here finiteness\nfollows directly from the fibre hypothesis: a positive-dimensional\nfinite-type scheme over an algebraically closed field has infinitely\nmany closed points, by Noether normalization on a positive-dimensional\naffine component. Thus $D_t$ is zero-dimensional. Its finitely\nmany points are all closed, so its topology is discrete. Each point\nhas an affine neighbourhood, which can be restricted to that\nsingleton. Its Noetherian zero-dimensional local ring is Artinian.\nIts residue field is finite over $\\kappa$ by Zariski's lemma, and\nits finite filtration by powers of the maximal ideal has finite\ndimensional residue-field quotients. Consequently this local ring\nis a finite dimensional $\\kappa$-algebra. Taking the finite\ndisjoint union proves that $D_t$ is affine and finite over $\\kappa$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Let $I_t$ be the coherent ideal of\n$D_t\\hookrightarrow\\mathbf P^N_\\kappa$.\nFor all sufficiently large $m>0$,\n[lem-pc-projective-space-serre-vanishing] gives\n$H^1(\\mathbf P^N_\\kappa,I_t(m))=0$. The ideal exact sequence,\nwith the twist of [def-pc-projective-space-twist], therefore\ngives a surjection\n\n$$\nH^0(\\mathbf P^N_\\kappa,\\mathcal O(m))\n\\longrightarrow H^0(D_t,\\mathcal O(m)|_{D_t}).\n$$",
-   "uses": [
-    "lem-pc-projective-space-serre-vanishing",
-    "def-pc-projective-space-twist"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "An invertible module over the Artinian ring of $D_t$ is free\nof rank one on each local factor, hence free of rank one on the\nproduct. Choose a generator of $\\mathcal O(m)|_{D_t}$, and\nlift it by this surjection to a homogeneous polynomial $P_t$.\nIf $D_t$ is empty, take any homogeneous polynomial of positive\ndegree instead. In both cases $P_t$ has no zero on $D_t$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "The finitely many coefficients of $P_t$ belong to\n$\\kappa=A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}$.\nLift them to $A_{\\mathfrak p}$ and clear their finitely many\ndenominators, all of which lie outside $\\mathfrak p$.\nThis gives $a\\notin\\mathfrak p$ and a homogeneous polynomial\n$P$ over $A_a$ restricting to $P_t$.\nThe closed subscheme\n\n$$\nE=D_{A_a}\\cap V_+(P)\\subseteq\\mathbf P^N_{A_a}\n$$\n\nis projective, hence proper by [lem-pc-projective-proper].\nIts image in $\\operatorname{Spec}A_a$ is closed by\n[lem-weil-pbc-proper-closed-image], and does not contain $t$.\nChoose a principal affine neighbourhood $V$ of $t$ inside\nthe complement of that image. Then $D_V$ is contained in the\nstandard affine open $D_+(P)$ of projective space over $V$.\nIt is closed in that affine open, and is therefore affine.",
+   "text": "By [lem-pc-projective-proper], $f$ is proper. Since $T$ is Noetherian, it is locally Noetherian by its definition [pqf-def-locnoeth]. Thus the properness and base hypotheses of [thm-pqf-finite-iff-proper-finite-fibres] hold; it remains to verify finite ordinary fibres.",
    "uses": [
     "lem-pc-projective-proper",
-    "lem-weil-pbc-proper-closed-image"
+    "pqf-def-locnoeth"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WC, lemma-locally-projective-proper; properties.tex Tag 01OV, definition-noetherian"
+   }
   },
   {
-   "text": "The morphism $D_V\\to V$ is still projective. Apply the\nalready proved [lem-pc-projective-coherent-finiteness] to\n$\\mathcal O_{D_V}$: the coordinate algebra\n$\\Gamma(D_V,\\mathcal O_{D_V})$ is a finite module over the\ncoordinate ring of $V$. Thus $D_V\\to V$ is finite by\n[def-weil-pbc-scheme-conventions].\nEvery $t$ has such a neighbourhood. The affine-local\ncriterion for finiteness in the same definition proves that\n$f$ is finite.",
+   "text": "Fix any point $t\\in T$ and put $k=\\kappa(t)$ and $\\bar k=\\overline{k}$. Apply [lem-weil-pbc-field-extension-base-change-faithfully-flat] with the commutative $k$-algebra $k$: the map $k\\to k\\otimes_k\\bar k$ is faithfully flat. Under the elementary ring isomorphism $k\\otimes_k\\bar k\\simeq\\bar k$, $a\\otimes b\\mapsto ab$, with inverse $b\\mapsto1\\otimes b$, this is the field inclusion $k\\to\\bar k$. Thus [lem-weil-pbc-faithfully-flat-surjective-spectrum] makes $\\operatorname{Spec}\\bar k\\to\\operatorname{Spec}k$ surjective. By [def-weil-geometric-fibre], $D_{\\bar t}=D_t\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\bar k$. Apply [lem-weil-pbc-surjective-base-change] to the preceding surjective spectrum map and $D_t\\to\\operatorname{Spec}k$: the projection $D_{\\bar t}\\to D_t$ is surjective. The source has finitely many points by hypothesis, so its image, all of $D_t$, is finite. Finally [def-pc-scheme-fibre] identifies the underlying space of $D_t$ with $f^{-1}(t)$. Therefore every ordinary set-theoretic fibre is finite, including the empty case.",
    "uses": [
-    "lem-pc-projective-coherent-finiteness",
-    "def-weil-pbc-scheme-conventions"
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-weil-geometric-fibre",
+    "lem-weil-pbc-surjective-base-change",
+    "def-pc-scheme-fibre"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HI (lemma-flat-base-change), 00HP (lemma-ff), 00HQ (lemma-ff-rings); schemes.tex Tags 01JO and 01K1; morphisms.tex Tag 01S1, lemma-base-change-surjective"
+   }
+  },
+  {
+   "text": "For every $t\\in T$, step 2 proves that $f^{-1}(t)$ is finite. Step 1 proves properness, and the target is locally Noetherian. Apply implication (2) $\\Rightarrow$ (1) of [thm-pqf-finite-iff-proper-finite-fibres] with $X=D$ and $S=T$ to conclude that $f$ is finite.",
+   "uses": [
+    "thm-pqf-finite-iff-proper-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02OG, lemma-characterize-finite, implication (2) => (1)"
+   }
   }
  ],
  "proof_deps": [
-  "def-pc-projective-morphism",
-  "lem-pc-projective-space-serre-vanishing",
-  "def-pc-projective-space-twist",
   "lem-pc-projective-proper",
-  "lem-weil-pbc-proper-closed-image",
-  "lem-pc-projective-coherent-finiteness",
-  "def-weil-pbc-scheme-conventions"
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-weil-geometric-fibre",
+  "lem-weil-pbc-surjective-base-change",
+  "def-pc-scheme-fibre",
+  "thm-pqf-finite-iff-proper-finite-fibres"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-projective-finite-fibres.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02OG, lemma-characterize-finite, specialized using 01WC and the geometric-to-ordinary fibre comparison (00HI, 00HP, 00HQ)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite.*of.*(proper|projective)|[Qq]uasi[Ff]inite|finite.*[Ff]iber",
+   "results": "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib/AlgebraicGeometry/Fiber.lean; Mathlib/AlgebraicGeometry/Fiber.lean; Mathlib/AlgebraicGeometry/Fiber.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match: proper plus locally quasi-finite is available, but the projective and geometric-fibre hypotheses require separate lemmas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective morphism with finite geometric fibers is finite",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective morphism of schemes with finite geometric fibres over a noetherian base is finite",
+   "results": "AlgebraicGeometry.instIsProperOfIsFinite; AlgebraicGeometry.IsProper.instOfIsFinite; AlgebraicGeometry.IsProper.toLocallyOfFiniteType; AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom; AlgebraicGeometry.IsFinite; AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; AlgebraicGeometry.IsFinite.toIsAffineHom; AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+   "date": "2026-10-14",
+   "verdict": "no exact match: proper plus locally quasi-finite is available, but the projective and geometric-fibre hypotheses require separate lemmas"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.QuasiFinite",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.QuasiFinite'",
+   "date": "2026-10-14",
+   "verdict": "no exact match: proper plus locally quasi-finite is available, but the projective and geometric-fibre hypotheses require separate lemmas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper morphism with finite fibers is finite",
+   "results": "AlgebraicGeometry.IsProper.instOfIsFinite; AlgebraicGeometry.instIsProperOfIsFinite; AlgebraicGeometry.IsProper.toLocallyOfFiniteType; AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom; AlgebraicGeometry.IsFinite; AlgebraicGeometry.isProper_iff; AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite; AlgebraicGeometry.IsProper",
+   "date": "2026-10-14",
+   "verdict": "no exact match: proper plus locally quasi-finite is available, but the projective and geometric-fibre hypotheses require separate lemmas"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.LocallyQuasiFinite",
+   "results": "AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite; AlgebraicGeometry.IsFinite.iff_isProper_and_locallyQuasiFinite; AlgebraicGeometry.IsFinite.eq_proper_inf_locallyQuasiFinite",
+   "date": "2026-10-14",
+   "verdict": "candidate general theorem; separate projectivity and geometric-fibre comparisons are required, so not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyQuasiFinite_iff_finite_preimage_singleton|of_isProper_of_locallyQuasiFinite",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+   "date": "2026-10-14",
+   "verdict": "second-reader candidate check: proper plus locally quasi-finite is available; geometric-to-ordinary fibre comparison and projectivity-to-properness still require separate results, so not a one-line leaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsProper",
+   "results": "AlgebraicGeometry.instIsProperOfIsFinite; AlgebraicGeometry.IsProper.instOfIsFinite; AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom; AlgebraicGeometry.IsFinite.eq_isProper_inf_isAffineHom; AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite; AlgebraicGeometry.IsFinite.iff_isProper_and_locallyQuasiFinite; AlgebraicGeometry.IsFinite.eq_proper_inf_locallyQuasiFinite; AlgebraicGeometry.exists_isFinite_morphismRestrict_of_finite_preimage_singleton",
+   "date": "2026-10-14",
+   "verdict": "second-reader candidate check: proper plus locally quasi-finite is available; geometric-to-ordinary fibre comparison and projectivity-to-properness still require separate results, so not a one-line leaf"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -100,5 +160,44 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-fin-projective-finite-fibres",
+  "worker": "stage1",
+  "summary": "Kept the statement with explicit notion citations and inline Noetherian definition. Replaced the below-unit Serre-vanishing argument by existing general finiteness and faithful-flatness tools. Verified geometric-to-ordinary fibres using surjectivity preserved under base change; no new nodes.",
+  "blueprint": "Proof paragraphs 1 and 5: projectivity supplies properness; paragraph 2: finite geometric fibres imply finite ordinary fibres by faithful flatness; final paragraph: finiteness follows from existing Tag 02OG. The unit has no proof steps and its compact-support base-change statement is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "why": "Generic extension-of-scalars ring lemma needed to compare geometric and ordinary fibres; the unit has no such algebra lemma."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "why": "Generic faithful-flatness criterion for surjectivity of affine spectrum maps; the unit has no such ring lemma."
+   },
+   {
+    "node": "thm-pqf-finite-iff-proper-finite-fibres",
+    "why": "General proper/finite-fibre criterion, applied after proving the geometric-fibre comparison; the unit has no competing general finiteness criterion."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic stability of surjectivity under base change needed to compare geometric and ordinary fibres; the unit supplies no such general lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "thm-pqf-finite-iff-proper-finite-fibres",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-d812ed225",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-d812ed225 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, master blueprint, chapter/unit route, and cited Stacks sources in full. Verified all three steps, geometric-to-ordinary fibre surjectivity, 02OG hypotheses, edge cases, DAG reuse and absence of circular dependencies. Accepted the declared generic tool uses; no new nodes or repairs. Written review.md. This does not certify seeded coefficient-comparison routes."
+ }
 }
