@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.Algebra.Homology.DerivedTensorBaseSecondLocalizationModels
+import Sheaf.Algebra.Homology.BaseDerivedTensorUniverseIndependence
 
 /-! # Base and second-factor localization after taking the affine input stalk
 
@@ -23,9 +25,37 @@ open scoped TensorProduct ChangeOfRings
 noncomputable section
 namespace AlgebraicGeometry
 
+private theorem toStalk_stalkCongr (S : Type u) [CommRing S]
+    (x y : PrimeSpectrum S) (h : x = y) :
+    StructureSheaf.toStalk S x ≫
+      ((Spec.structureSheaf S).presheaf.stalkCongr (.of_eq h)).hom =
+        StructureSheaf.toStalk S y := by
+  subst y
+  simp only [TopCat.Presheaf.stalkCongr_hom,
+    TopCat.Presheaf.stalkSpecializes_refl]
+  exact Category.comp_id _
+
+private def equalScalarComplexIso
+    (S T : Type u) [CommRing S] [CommRing T] (a b : S →+* T) (h : a = b)
+    (Q : CochainComplex (ModuleCat.{u} S) ℤ) :
+    ((ModuleCat.extendScalars a).mapHomologicalComplex (.up ℤ)).obj Q ≅
+      ((ModuleCat.extendScalars b).mapHomologicalComplex (.up ℤ)).obj Q :=
+  eqToIso (congrArg
+    (fun k : S →+* T ↦ ((ModuleCat.extendScalars k).mapHomologicalComplex (.up ℤ)).obj Q) h)
+
+private theorem equalScalarComplexIso_tmul
+    (S T : Type u) [CommRing S] [CommRing T] (a b : S →+* T) (h : a = b)
+    (Q : CochainComplex (ModuleCat.{u} S) ℤ) (j : ℤ) (d : T) (x : Q.X j) :
+    (equalScalarComplexIso S T a b h Q).hom.f j (d ⊗ₜ[S, a] x) =
+      d ⊗ₜ[S, b] x := by
+  subst b
+  rfl
+
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
+set_option maxHeartbeats 800000 in
+-- Comparing the two explicit stalk algebra structures requires this elaboration budget.
 /-- Localize only the base and second factor of an already stalk-localized input.
 Source: Stacks Project, Tag 0DJ8, base and second-factor part of the localization
 identity; Tag 06Y6.
@@ -117,6 +147,101 @@ theorem exists_affineStalkBaseSecondLocalizationComparison
                 (TopCat.Presheaf.germ (P.X j).val.presheaf ⊤ (g' p) trivial
                   (tilde.toOpen (R := .of A) (M.X j) ⊤ x))) →
           m.localizedComparison i ≫ HomologicalComplex.homologyMap
-            (β.inv ≫ τ.hom) i = e.hom ≫ l := by sorry
+            (β.inv ≫ τ.hom) i = e.hom ≫ l := by
+  classical
+  have _ := hφg'
+  have _ := hφf'
+  intro P f f' g g' D κ Aq κA α ψ hψA hψB Q m C φ₁ C₁ β hβ ρ l
+  let : Algebra R Aq := (κA.comp (algebraMap R A)).toAlgebra
+  let : Algebra (Aq ⊗[R] R') D := ψ.toAlgebra
+  let : Algebra R' (Aq ⊗[R] R') := Algebra.TensorProduct.rightAlgebra
+  let Rp : Type u := SingleComplexBaseChange.R f g' p
+  let Bp : Type u := SingleComplexBaseChange.B f' p
+  let := HasDerivedCategory.standard (ModuleCat.{u} Rp)
+  let := HasDerivedCategory.standard (ModuleCat.{u} Bp)
+  let : Algebra Rp Aq := SingleComplexBaseChange.leftAlgebra f g' p
+  let : Algebra Rp Bp := SingleComplexBaseChange.rightAlgebra f f' g g' sq p
+  let : Algebra Bp (Aq ⊗[Rp] Bp) := Algebra.TensorProduct.rightAlgebra
+  let : Algebra (Aq ⊗[Rp] Bp) D :=
+    (SingleComplexBaseChange.tensorMap f f' g g' sq p).toAlgebra
+  let κR : R →+* Rp := (StructureSheaf.toStalk R (f (g' p))).hom
+  let κB : R' →+* Bp := (StructureSheaf.toStalk R' (f' p)).hom
+  let : Algebra R Rp := κR.toAlgebra
+  let : Algebra R' Bp := κB.toAlgebra
+  let : Algebra R Bp := (κB.comp (algebraMap R R')).toAlgebra
+  let : Algebra Aq D := α.toAlgebra
+  let : Algebra R' D := (κ.comp φf').toAlgebra
+  let : Algebra Bp D := (f'.stalkMap p).hom.toAlgebra
+  have tRA : IsScalarTower R Rp Aq := IsScalarTower.of_algebraMap_eq' (by
+    ext r
+    exact (AlgebraicGeometry.stalkMap_toStalk_apply
+      (CommRingCat.ofHom (algebraMap R A)) (g' p) r).symm)
+  have tRB : IsScalarTower R R' Bp := IsScalarTower.of_algebraMap_eq' rfl
+  have tRpB : IsScalarTower R Rp Bp := IsScalarTower.of_algebraMap_eq' (by
+    ext r
+    have hc := toStalk_stalkCongr R (f (g' p)) (g (f' p))
+      (congrArg (fun k : Spec (.of A') ⟶ Spec (.of R) ↦ k p) sq.w)
+    have hn := AlgebraicGeometry.stalkMap_toStalk
+      (CommRingCat.ofHom (algebraMap R R')) (f' p)
+    have hh := congrArg CommRingCat.Hom.hom
+      ((congrArg (fun k ↦ k ≫ g.stalkMap (f' p)) hc).trans hn)
+    exact (RingHom.congr_fun hh r).symm)
+  have tAD : IsScalarTower Aq (Aq ⊗[R] R') D :=
+    IsScalarTower.of_algebraMap_eq' hψA.symm
+  have tBD : IsScalarTower R' (Aq ⊗[R] R') D :=
+    IsScalarTower.of_algebraMap_eq' hψB.symm
+  have tApD : IsScalarTower Aq (Aq ⊗[Rp] Bp) D :=
+    IsScalarTower.of_algebraMap_eq'
+      (Classical.choose_spec
+        (SingleComplexBaseChange.exists_tensorMap f f' g g' sq p)).1.symm
+  have tBpD : IsScalarTower Bp (Aq ⊗[Rp] Bp) D :=
+    IsScalarTower.of_algebraMap_eq'
+      (Classical.choose_spec
+        (SingleComplexBaseChange.exists_tensorMap f f' g g' sq p)).2.symm
+  have tBBpD : IsScalarTower R' Bp D := IsScalarTower.of_algebraMap_eq' (by
+    ext b
+    exact (AlgebraicGeometry.stalkMap_toStalk_apply (CommRingCat.ofHom φf') p b).symm)
+  let : IsLocalization (f (g' p)).asIdeal.primeCompl Rp :=
+    StructureSheaf.IsLocalization.to_stalk (R := R) (f (g' p))
+  let : IsLocalization (f' p).asIdeal.primeCompl Bp :=
+    StructureSheaf.IsLocalization.to_stalk (R := R') (f' p)
+  let mc := m.localizedComparison i
+  let dRold : HasDerivedCategory.{wM} (ModuleCat.{u} R) := inferInstance
+  let dBold : HasDerivedCategory.{wM} (ModuleCat.{u} R') := inferInstance
+  let dRstd := HasDerivedCategory.standard (ModuleCat.{u} R)
+  let dBstd := HasDerivedCategory.standard (ModuleCat.{u} R')
+  let n := ModuleCat.baseDerivedTensorCohomologyModel.{u, u, u, u, u, u + 1}
+    R Aq R' Q D
+  obtain ⟨s, hs⟩ :=
+    @ModuleCat.baseDerivedTensorCohomologyModel_localized_universe_independence.{u, wM, u + 1}
+      R Aq R' D _ _ _ _ (κA.comp (algebraMap R A)).toAlgebra _ ψ.toAlgebra
+      dRold dBold Q m dRstd dBstd n i
+  obtain ⟨e, he, _⟩ :=
+    RingTensorCohomology.derivedTensor_base_second_localization_models
+      R Aq R' Rp Bp D (f (g' p)).asIdeal.primeCompl (f' p).asIdeal.primeCompl i
+  let k := SingleComplexBaseChange.cohomologyModel f f' g g' sq p P
+  have hφ : φ₁ = ρ := hψA.trans
+    (Classical.choose_spec
+      (SingleComplexBaseChange.exists_tensorMap f f' g g' sq p)).1.symm
+  let σ := equalScalarComplexIso Aq D φ₁ ρ hφ Q
+  have hσsquare := he Q n k σ (equalScalarComplexIso_tmul Aq D φ₁ ρ hφ Q)
+  refine ⟨s ≪≫ e Q n k, ?_⟩
+  intro τ hτ
+  have ht : β.inv ≫ τ.hom = σ.hom := by
+    apply (cancel_epi β.hom).1
+    simp only [Iso.hom_inv_id_assoc]
+    apply HomologicalComplex.Hom.ext
+    funext j
+    apply ModuleCat.ExtendScalars.hom_ext
+    intro x
+    change τ.hom.f j ((1 : D) ⊗ₜ[A, κ.comp φg'] x) =
+      σ.hom.f j (β.hom.f j ((1 : D) ⊗ₜ[A, κ.comp φg'] x))
+    rw [hβ, hτ]
+    exact (equalScalarComplexIso_tmul Aq D φ₁ ρ hφ Q j 1 _).symm
+  change mc ≫ HomologicalComplex.homologyMap (β.inv ≫ τ.hom) i =
+    s.hom ≫ (e Q n k).hom ≫ l
+  rw [ht]
+  exact (congrArg (fun a ↦ a ≫ HomologicalComplex.homologyMap σ.hom i) hs.symm).trans
+    ((Category.assoc _ _ _).trans (congrArg (fun a ↦ s.hom ≫ a) hσsquare))
 
 end AlgebraicGeometry
