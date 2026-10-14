@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
-import Sheaf.Paper.DerivedSectionsLeftExactBottom
+import Sheaf.CategoryTheory.Abelian.DerivedBottomUnitNormalizationFormula
 
 /-! # Normalization of the bottom-cohomology comparison
 
@@ -82,6 +82,24 @@ theorem exists_rightDerivedFunctor_truncated_bottom_unit
               ((DerivedCategory.TStructure.t.truncGEπ n).app (DerivedCategory.Q.obj K))) ≫
           δ.hom.app (DerivedCategory.Q.obj K) =
         S.map (T.π ≫ T.homologyIso.inv ≫
-          ((DerivedCategory.homologyFunctorFactors C n).app K).inv) := by sorry
+          ((DerivedCategory.homologyFunctorFactors C n).app K).inv) := by
+  refine ⟨S.rightDerivedFunctorTruncatedBottomIso n, ?_⟩
+  intro K T U k hk
+  let V := (((S.mapHomologicalComplex (.up ℤ)).obj K).sc n)
+  let l : S.obj (K.sc n).cycles ⟶ V.cycles :=
+    V.liftCycles (S.map (K.sc n).iCycles) (by
+      change S.map (K.sc n).iCycles ≫ S.map (K.sc n).g = 0
+      rw [← S.map_comp, (K.sc n).iCycles_g, S.map_zero])
+  have hl : l ≫ V.iCycles = S.map (K.sc n).iCycles := V.liftCycles_i _ _
+  have hcycles : k ≫ U.cyclesIso.inv = S.map T.cyclesIso.inv ≫ l := by
+    apply (cancel_mono V.iCycles).1
+    dsimp only [V] at hl ⊢
+    simp only [Category.assoc, ShortComplex.LeftHomologyData.cyclesIso_inv_comp_iCycles,
+      hl, ← S.map_comp, hk]
+  rw [ShortComplex.LeftHomologyData.π_comp_homologyIso_inv_assoc,
+    ← Category.assoc k U.cyclesIso.inv, hcycles]
+  simp only [Category.assoc]
+  rw [normalized_bottom_unit_formula S n K]
+  rw [← S.map_comp, ShortComplex.LeftHomologyData.π_comp_homologyIso_inv_assoc]
 
 end CategoryTheory.Functor
