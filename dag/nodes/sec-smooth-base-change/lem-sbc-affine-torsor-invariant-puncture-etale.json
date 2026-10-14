@@ -1,0 +1,120 @@
+{
+ "id": "lem-sbc-affine-torsor-invariant-puncture-etale",
+ "kind": "statement",
+ "title": "Etaleness of the invariant principal open of an affine torsor",
+ "statement": "Let H be a commutative ring, h in H, and C a domain H-algebra finite and faithfully flat over H, with algebraMap H C h nonzero. Let a finite group G act by H-algebra homomorphisms rho, with rho(1)=id and rho(ab)=rho(a) composed with rho(b). Assume D(algebraMap H C h) -> Spec H is etale. Assume that for every field Omega and a,b:C -> Omega agreeing on H, with a(algebraMap H C h) nonzero, there is exactly one zeta in G with a composed with rho(zeta)=b. For any subgroup K of G, let F be the intersection over zeta in K of the equalizer subalgebras of rho(zeta) and id. Then the composite D(algebraMap H F h) -> Spec F -> Spec H is etale. There is no scheme Y, split cover, selected label or map f in this statement.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03SF, finite Galois covers and finite permutation sets; affine description of subgroup quotients"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Proof: put V = D(algebraMap H C h), B = D(h). Finite faithful flatness is\npreserved by localization, so V -> B is finite and faithfully flat. It is\netale because its composite with the open immersion B -> Spec H is etale.\nIt is connected and nonempty because C is a domain and the localized element\nis nonzero. The group laws make each ρ ζ invertible. By hrot the deck-graph map\nfrom the disjoint union of G copies of V to V ×_B V is bijective on geometric\nfibres. Both schemes are finite etale over V; hence this map is an isomorphism.\nTherefore V -> B is a G-torsor. Finite etale descent gives its quotient by K,\ncorresponding to the finite coset permutation set. Affine descent identifies\nits coordinate ring with C[1/h]^K. This is (C^K)[1/h]: the denominator is fixed,\nand an invariant fraction has invariant numerator because localization in the\ndomain at a nonzero element is injective. The intersection of equalizers F is\nexactly C^K, so the quotient is the displayed open U. Its structural map to B\nis finite etale; compose with B -> Spec H to obtain the claimed etale map.\nFor K trivial this is V itself; for K = G it is B. No assumption on the order\nof G being invertible is required for a torsor quotient.",
+   "uses": [
+    "lem-weil-pbc-connected-torsor-subgroup-quotient"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-connected-torsor-subgroup-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P4",
+  "document": "Stacks Project",
+  "place": "Tag 03SF (consulted online at https://stacks.math.columbia.edu/tag/03SF)",
+  "note": "Extract the etale quotient step and exact-stabilizer monomorphism step of the original node, without changing its statement. The scheme-theoretic subgroup-quotient tool is already proved; the affine invariant-ring identification and compatibility remain."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The quotient of a finite etale Galois cover by a subgroup is finite etale",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A subgroup invariant ring of a finite etale Galois algebra is etale",
+   "results": "Algebra.Etale.iff_exists_algEquiv_prod (Mathlib.RingTheory.Etale.Field), Algebra.FormallyEtale.of_restrictScalars (Mathlib.RingTheory.Etale.Basic), IsGaloisGroup.iff_isFractionRing. These do not identify subgroup-invariant localizations over a general base.",
+   "date": "2026-10-14",
+   "verdict": "Ingredients only; no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*[Ee]tale|[Ee]tale.*invariant|stabilizer.*[Mm]ono in Mathlib, plus invariant|fixed.*Etale in lean/Sheaf/AlgebraicGeometry and lean/WeilConjectures/AlgebraicGeometry",
+   "results": "No exact affine invariant principal-open or selected stabilizer-section theorem. The project has Scheme.GaloisCover.exists_connected_subgroup_quotient in Sheaf.ConstructibleSheaf.ConnectedTorsorSubgroupQuotient, a scheme-theoretic subgroup quotient without the invariant-ring identification. This is a tool for the stated proof. The parent SingleStabilizerComponent module imports the current item, so cannot be used here.",
+   "date": "2026-10-14",
+   "verdict": "No exact match; use the existing subgroup-quotient tool in the proof plan."
+  },
+  {
+   "tool": "grep",
+   "query": "Second reading: finite_and_etale_fixedPoints|tensorFixedPointsEquiv|surjective_comap_fixedPoints_val_and_iff in lean/WeilConjectures and lean/Sheaf; independent LeanFinder localization query and Loogle Mono/Etale query",
+   "results": "WeilConjectures.Mathlib.RingTheory.TotallySplit supplies AlgHom.finite_and_etale_fixedPoints (line 349), AlgHom.tensorFixedPointsEquiv (line 80) and AlgHom.surjective_comap_fixedPoints_val_and_iff (line 552). ColimitsOver uses the first for finite-etale affine quotients. These shorten the algebraic ingredients but require localization and compatibility identifications to prove this exact statement. LeanFinder found localization etaleness ingredients only; Loogle found no result.",
+   "date": "2026-10-14",
+   "verdict": "Useful upstream tools, no exact duplicate; no new Lean obligation introduced by this search."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorStabilizerSectionOpen",
+  "date": "2026-10-14",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-affine-torsor-stabilizer-section-open",
+   "place": "The subgroup quotient V/K is finite etale and equals the basic open in Spec(C^K).",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorStabilizerSectionOpen",
+  "worker": "stage3",
+  "summary": "Strictly smaller part of the openness argument; no change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-connected-torsor-subgroup-quotient",
+    "why": "Generic proved finite-etale subgroup-quotient theorem; only the affine identification and its map are specific to this unit."
+   }
+  ]
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorInvariantPunctureEtale",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineTorsorInvariantPunctureEtale.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_torsor_invariant_puncture_etale",
+  "statement": "theorem affine_torsor_invariant_puncture_etale\n    (H : CommRingCat.{u}) (h : H)\n    (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]\n    [Module.Finite H C] [Module.FaithfullyFlat H C]\n    (G : Type u) [Group G] [Finite G]\n    (ρ : G → C →ₐ[H] C)\n    (hρone : ρ 1 = AlgHom.id H C)\n    (hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b))\n    (hne : algebraMap H C h ≠ 0)\n    (hEt : Etale (Scheme.Opens.ι (X := Spec (CommRingCat.of C))\n      (PrimeSpectrum.basicOpen (algebraMap H C h)) ≫\n      Spec.map (CommRingCat.ofHom (algebraMap H C))))\n    (hrot : ∀ (Ω : Type u) [Field Ω] (a b : C →+* Ω),\n      a.comp (algebraMap H C) = b.comp (algebraMap H C) →\n      a (algebraMap H C h) ≠ 0 →\n      ∃! ζ : G, a.comp (ρ ζ).toRingHom = b)\n    (K : Subgroup G) :\n    let F := (⨅ ζ : K, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)\n    Etale (Scheme.Opens.ι (X := Spec (CommRingCat.of F))\n      (PrimeSpectrum.basicOpen (algebraMap H F h)) ≫\n      Spec.map (CommRingCat.ofHom (algebraMap H F)))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261014T022550-L-4047213",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261014T022550-L-4047213",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

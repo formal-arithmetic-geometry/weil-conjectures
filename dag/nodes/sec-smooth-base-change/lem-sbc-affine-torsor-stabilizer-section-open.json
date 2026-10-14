@@ -12,22 +12,40 @@
  ],
  "proof": [
   {
-   "text": "Proof: let V = D(h), B = D(ι g), and E = Y × Spec H restricted over B.\nV -> B is a connected finite etale Galois cover: finiteness and surjectivity come\nfrom finite faithful flatness, etaleness from hEt, connectedness from the domain,\nand the Galois property from the unique rotation hypothesis on geometric points.\nE is finite etale over B by base change of j. Pull delta back along k to split E\non V. The section equation says the given f induces the chosen label x. Under the\nGalois equivalence, the map V/K -> E is the map from the transitive permutation\nset G/K to the labels, sending the identity coset to x. The exact stabilizer\nhypothesis hK makes this map injective: equal translated labels differ by K.\nIts image is a union of orbits, hence the corresponding finite etale subcover is\nopen and closed. Therefore f is an open immersion into E and into Y × Spec H.\nHere V/K is U because C[1/h]^K = (C^K)[1/h]: h is fixed and localization of the\ndomain is injective, so invariance of a fraction implies invariance of its numerator.\nThe base equation ensures f lies over B; the section equation fixes its label.\nFor G trivial this selects exactly one summand, not an arbitrary summand. For d=0\nthere is no x. No existence of f or of a descended section is asserted here.",
+   "text": "Apply the invariant-principal-open etaleness theorem to H, iota(g), C, rho and K. This proves etaleness of the canonical map U -> Spec H, independently of the selected label.",
    "uses": [
-    "lem-sbc-affine-torsor-split-label-laws"
+    "lem-sbc-affine-torsor-invariant-puncture-etale"
    ],
    "elementary": false
+  },
+  {
+   "text": "Since p = j followed by the basic-open immersion and j is etale, p is etale. Its pullback E -> Spec H is etale. The given base equation identifies f followed by this projection with the etale structural map of U. Mathlib Etale.of_comp therefore gives Etale f.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the exact-stabilizer theorem to obtain Mono f from the base and selected-section equations. Its statement does not need j or the finite-etale assumptions on Y.",
+   "uses": [
+    "lem-sbc-affine-torsor-stabilizer-section-mono"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Etale f supplies flatness and local finite presentation. Mathlib IsOpenImmersion.of_flat_of_mono f now proves that f is an open immersion.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-affine-torsor-split-label-laws"
+  "lem-sbc-affine-torsor-invariant-puncture-etale",
+  "lem-sbc-affine-torsor-stabilizer-section-mono"
  ],
  "proof_origin": {
-  "by": "worker",
-  "group": "C3",
+  "by": "agent",
+  "group": "P4",
   "document": "Stacks Project",
-  "place": "Tag 03SF",
-  "note": "Repair of X-c85ad: separate descent of the selected section from conditional openness; no dependency on the parent theorem."
+  "place": "Tag 03SF; Mathlib Etale.of_comp and IsOpenImmersion.of_flat_of_mono",
+  "note": "Decompose the original argument into etaleness of the invariant quotient and monomorphy of the selected descended map; combine by actual Lean proof. No change to statements or definitions."
  },
  "mathlib_searches": [
   {
@@ -100,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-f73fe",
-  "group": "C3",
+  "reviewer": "COMPILER",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261014T020507-L-3809926",
+  "landing": "20261014T022550-L-4047213",
   "kind": "interface",
-  "note": "independent Codex review: Matched all four Lean signatures to their nodes, the statement repair to its change record, and the proofs to their dependencies; both delivered modules and AffineTorsorOrbitComponentDescent compile cleanly, with only permitted axioms plus sorryAx from the two reported holes."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

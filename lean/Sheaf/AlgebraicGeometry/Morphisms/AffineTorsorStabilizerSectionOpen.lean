@@ -9,6 +9,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
 public import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSplitAction
 
+import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
+import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorInvariantPunctureEtale
+import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorStabilizerSectionMono
 
 /-! # Openness of a descended stabilizer section -/
 
@@ -87,6 +90,20 @@ theorem affine_torsor_stabilizer_section_open
           Spec.map (CommRingCat.ofHom (algebraMap H F)) →
       q ≫ f ≫ pullback.fst p (Spec.map (CommRingCat.ofHom ι)) =
         fixedSplitSection p t k d δ x →
-      IsOpenImmersion f := by sorry
+      IsOpenImmersion f := by
+  dsimp only
+  intro f hbase hsection
+  have : Etale p := by
+    rw [← hj]
+    infer_instance
+  have : Etale (f ≫ pullback.snd p (Spec.map (CommRingCat.ofHom ι))) := by
+    rw [hbase]
+    exact affine_torsor_invariant_puncture_etale H (ι g) C G ρ hρone hρmul hne
+      hEt hrot K
+  have : Etale f := Etale.of_comp f (pullback.snd p (Spec.map (CommRingCat.ofHom ι)))
+  have : Mono f := affine_torsor_stabilizer_section_mono
+    R H g ι C G ρ hρone hρmul hne p hEt hrot d T t k hk δ hδ x K hK
+      f hbase hsection
+  exact IsOpenImmersion.of_flat_of_mono f
 
 end AlgebraicGeometry.Scheme
