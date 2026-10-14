@@ -41,6 +41,6 @@ Proof:
    and hence an isomorphism of residue fields. -/
 theorem Hom.isIso_residueFieldMap_of_isClosedImmersion {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] (z : Z) : IsIso (i.residueFieldMap z) := by
-  exact Hom.isIso_residueFieldMap i z
+  simpa using (Hom.isIso_residueFieldMap i z)
 
 end AlgebraicGeometry.Scheme
