@@ -3,24 +3,80 @@
  "blueprint": {
   "is": "def-kun-projective",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-pc-projective-morphism"
+  ]
  },
  "kind": "definition",
  "title": "Projective morphisms and projective schemes",
- "statement": "A morphism of schemes $f:X\\to Y$ is *projective* if there are\nan integer $N\\ge0$ and a\nclosed immersion\n$i:X\\hookrightarrow\\mathbf P^N_Y$ such that $f$ is the composite\nof $i$ with the structural projection $\\mathbf P^N_Y\\to Y$. A\nscheme is projective over a field $k$ if its structure morphism is\nprojective.",
+ "statement": "A morphism of schemes $f:X\\to Y$ [def-pc-scheme] is *projective* in the convention of this blueprint if there are an integer $N\\geq0$ and a closed immersion $i:X\\hookrightarrow\\mathbf P^N_Y$ [def-weil-closed-immersion] such that $f=\\pi\\circ i$, where $\\pi:\\mathbf P^N_Y\\to Y$ is the structural projection. Here $\\mathbf P^N_Y=\\mathbf P(\\{0,\\ldots,N\\};Y)$ is the projective space over $Y$ with $N+1$ homogeneous coordinates and its structural morphism, as defined in [def-nagata-projective-space-base-change]. This is the H-projective (finite projective-space embedding) convention. For a field $k$ [def-weil-field], a scheme $X$ over $k$ has a specified structure morphism $X\\to\\operatorname{Spec}(k)$ [def-weil-affine-spectrum]; it is *projective over $k$* if that structure morphism is projective in the convention just defined.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-projective.md",
   "place": "node def-kun-projective, order 1707"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-nagata-projective-space-base-change",
+  "def-weil-field",
+  "def-weil-affine-spectrum"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsProjective|ProjectiveSpace|projective morphism",
+   "results": "No hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective morphism of schemes defined by closed immersion into projective space over the base",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes is projective if it factors as a closed immersion into finite dimensional projective space over the base followed by projection",
+   "results": "Returned AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.IsProper, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Scheme.Hom.isProperMap, AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.isProper_eq. These are absolute Proj constructions/properness or general properness, not the projective scheme-morphism predicate.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProjective",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.IsProjective'",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HProjective|[Pp]rojective|projectiv",
+   "results": "No hits in Mathlib/AlgebraicGeometry/Morphisms.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Definition of relatively projective or H-projective scheme morphism by a closed embedding into projective space over an arbitrary scheme",
+   "results": "Returned AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.UniversallyClosed. These are absolute Proj constructions/properness or general properness, not the projective scheme-morphism predicate.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projective\"",
+   "results": "Returned Module.Projective, Module.Projective.of_free, Module.Projective.of_basis, Module.instProjectiveULift, Module.Projective.of_ulift, Module.instProjectiveShrink, Module.Projective.of_shrink, Module.Projective.directSum. These concern projective modules, not scheme morphisms.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -44,5 +100,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-kun-projective",
+  "worker": "stage1",
+  "summary": "Definition-only split preserving the finite-dimensional closed-embedding convention. Replaced the bundled scheme-conventions dependency by existing nodes defining the exact notions used: schemes, closed immersions, projective space with its structural morphism, fields, and affine spectra. Made the N+1 homogeneous-coordinate indexing and the field structure morphism explicit. Recorded the existing projective-morphism blueprint as same_as; no new node, proof claim, or Mathlib leaf. Mathlib semantic searches and grep found Proj/properness or module-projectivity, not this morphism predicate; LeanSearch was unavailable.",
+  "blueprint": "The entire defining statement of def-kun-projective: the finite-dimensional closed immersion over the base and projectivity of the structure morphism over a field. This blueprint definition has no proof steps."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-e1ffc7d0b",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-e1ffc7d0b (reviewer sub-agent of L); spot-checked: Read the complete definition, cited dependency statements, blueprint unit/chapter route, and Stacks 01W8, 01NF, 01QO and related source locations. Verified N+1 coordinates, structural projection, arbitrary-base scope, field clause, duplicate candidate, dependency acyclicity, and empty/N=0 cases. No new nodes, comparison theorem, coefficient identification, repairs, or accepted tool_uses. Detailed checks are in review.md."
+ }
 }
