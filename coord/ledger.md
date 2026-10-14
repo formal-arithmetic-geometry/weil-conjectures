@@ -14905,3 +14905,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:18 L: merged deliver/W4/Sheaf.AlgebraicGeometry.ScalarCupModuleCupCompatibility (stage 3; reviewer PASS; first push; landing 20261014T171841-L-2711344 (interface); batch 20261014T171839; modules 2; new nodes 1)
 - 17:21 L: merged deliver/XR70f81a388df1a824/Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker (stage 3; reviewer PASS; first push; landing 20261014T172138-L-2759090 (proof); batch 20261014T172136; modules 1; new nodes 0)
 - 17:22 L: returned deliver/F2/Sheaf.AlgebraicGeometry.BoundedFlatModelNormalization (reviewer RETURN: (reviewer X-d840e, head d840ec572) Point 6 (nodes agree with Lean): in dag/nodes/sec-picard-framework/lem-sc-bounded-fla)
+- 17:24 L: returned deliver/H3/Sheaf.AlgebraicGeometry.PicardExternalCechCupLeibniz (reviewer RETURN: (reviewer X-95f9f, head 95f9fd0fe) 5 (forced adaptation): PicardExternalCechCupLeibniz was adapted unnecessarily. In lea)
