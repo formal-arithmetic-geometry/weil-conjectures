@@ -1,0 +1,118 @@
+{
+ "id": "new-affine-residue-model-naturality",
+ "kind": "statement",
+ "title": "Naturality of all represented affine residue arrows",
+ "statement": "Let E be a derived object on W, represented over an affine open U containing w by a strictly perfect K and a specified isomorphism m: restriction(E) ~= Q(K). Let p=ker(evaluation). There exists one additive comparison eK from affineResidueCycleHomology(K) to derivedFiberCohomology(E). For every E prime, arrow b:E->E prime, strict perfect model C and specified m prime, there exists a target comparison eC such that eC(residueHomologyMap(phi,z))=derivedFiberCohomologyFunctor(b)(eK(z)) for every phi with Q(phi)=m.inv;restriction(b);m prime.hom. The source comparison is fixed before the target or arrow is chosen.",
+ "stmt_deps": [
+  "new-derived-fiber-cohomology-functor",
+  "def-pc-perfect-complex",
+  "lem-sc-affine-residue-cycle-class-quotient"
+ ],
+ "source": {
+  "document": "Stacks Project; Mathlib and the existing Lean library",
+  "place": "Tags 01IB, 064K, 06YJ and 010V"
+ },
+ "proof": [
+  {
+   "text": "Compose the natural quotient/evaluation comparison with the natural perfect derived-model comparison. This fixes the model-to-local-fibre comparison on every strictly perfect object and arrow.",
+   "uses": [
+    "new-affine-residue-evaluation-homology-naturality",
+    "new-affine-perfect-residue-model-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate by the specified model isomorphisms and compose with the natural open-factorization isomorphism. Substitute the equality for Q(phi), cancel m prime.hom followed by m prime.inv, and apply factorization naturality to b. Evaluation of this categorical square gives the elementwise equation for every representative.",
+   "uses": [
+    "new-derived-fiber-open-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-affine-perfect-residue-model-naturality",
+  "new-affine-residue-evaluation-homology-naturality",
+  "new-derived-fiber-open-factorization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H4",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 01IB, 064K, 06YJ and 010V"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of homology under conjugation by isomorphisms of derived objects",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of homology under conjugation by isomorphisms of derived objects",
+   "results": "8 hits: CategoryTheory.ShortComplex.rightHomologyIso_inv_naturality_assoc, CategoryTheory.ShortComplex.rightHomologyIso_inv_naturality, CategoryTheory.ShortComplex.RightHomologyData.rightHomologyIso_inv_naturality_assoc, CategoryTheory.ShortComplex.RightHomologyData.rightHomologyIso_inv_naturality, ChainComplex.isoHomologyι₀_inv_naturality, CategoryTheory.ShortComplex.rightHomologyIso_hom_naturality, CategoryTheory.ShortComplex.rightHomologyIso_hom_naturality_assoc, CategoryTheory.ShortComplex.RightHomologyData.rightHomologyIso_hom_naturality",
+   "date": "2026-10-14",
+   "verdict": "The listed framework results are used or inspected; no complete matching comparison theorem was returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap_comp",
+   "results": "1 hits: HomologicalComplex.homologyMap_comp",
+   "date": "2026-10-14",
+   "verdict": "The listed framework results are used or inspected; no complete matching comparison theorem was returned."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyMap_comp",
+   "results": "25 hits: Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean, Mathlib/AlgebraicTopology/SimplicialSet/Homology/Basic.lean, Mathlib/AlgebraicTopology/SimplicialSet/Homology/Basic.lean, Mathlib/AlgebraicTopology/SimplicialSet/Homology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean",
+   "date": "2026-10-14",
+   "verdict": "The listed framework results are used or inspected; no complete matching comparison theorem was returned."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex",
+  "date": "2026-10-14",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-picard-residue-homology-geometric-naturality-fixed-per-index"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineResidueModelNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineResidueModelNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_residue_model_naturality",
+  "statement": "theorem affine_residue_model_naturality [∀ Y : Scheme.{v}, HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))] [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1} (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))] (W : Scheme.{v}) (w : W) (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U) (p : Ideal Γ(W, U)) [p.IsPrime] (hp : p = RingHom.ker (W.evaluation U w hwU).hom) (E : schemeDerivedCategory W) (K : CochainComplex (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) (hK : IsStrictlyPerfect W U K) (m : (SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj K) : ∃ eK : affineResidueCycleHomology W U p K ≃+ derivedFiberCohomology W E 1 w, ∀ (E' : schemeDerivedCategory W) (b : E ⟶ E') (C : CochainComplex (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) (_hC : IsStrictlyPerfect W U C) (m' : (SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj E' ≅ DerivedCategory.Q.obj C), ∃ eC : affineResidueCycleHomology W U p C ≃+ derivedFiberCohomology W E' 1 w, ∀ (φ : K ⟶ C), DerivedCategory.Q.map φ = m.inv ≫ (SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.map b ≫ m'.hom → ∀ z : affineResidueCycleHomology W U p K, eC (affineResidueCycleHomologyMap φ z) = (derivedFiberCohomologyFunctor W w 1).map b (eK z)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261014T185244-L-201577",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261014T185244-L-201577",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

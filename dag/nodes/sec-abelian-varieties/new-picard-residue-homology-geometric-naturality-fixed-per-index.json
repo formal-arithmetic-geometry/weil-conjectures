@@ -10,33 +10,38 @@
  },
  "proof": [
   {
-   "text": "Construct the derived arrows between the direct images using the coefficient pullback adjunction units and composition of derived direct images. Restrict to U and conjugate by hE and hCi.",
-   "uses": [],
+   "text": "Use compatible geometric derived-fibre comparisons to fix one source equivalence and obtain target equivalences for the actual constructed coefficient arrows, shared over the whole family.",
+   "uses": [
+    "new-picard-derived-fibre-naturality"
+   ],
    "elementary": false
   },
   {
-   "text": "Terminal sections of the strictly perfect models are bounded complexes of finite projective modules. Their termwise residue tensors compute derived residue pullback; degree-one homology is the explicit cycle quotient. hp, the immersion k and hw identify the residue fields.",
-   "uses": [],
+   "text": "Choose the supplied source model isomorphism and apply affine residue model naturality, fixing a single residue-to-derived-fibre source comparison. For every i choose the supplied target model isomorphism and apply the same naturality theorem to b_i.",
+   "uses": [
+    "new-affine-residue-model-naturality"
+   ],
    "elementary": false
   },
   {
-   "text": "Arbitrary base change and affine-base cohomology identify the derived fibres with fibre coefficient cohomology. Use tau and its pullbacks to trivialize the coefficients. Use the same geometric source comparison for all i and construct target comparisons by these natural identifications, rather than prescribing arbitrary additive equivalences.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Naturality of the preceding comparisons gives the equation for the constructed derived arrow, and the K-flat comparison makes the equation depend only on the derived image of each chain representative.",
-   "uses": [],
+   "text": "Compose the two source comparisons and the two target comparisons. Conjugate each restricted b_i by the model isomorphisms to obtain the chosen arrow Q(K)->Q(Ci). For any representing chain map and any residue class, apply affine naturality, then geometric naturality. This proves the equation and keeps the same source comparison for all i.",
+   "uses": [
+    "new-picard-derived-coefficient-map"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "new-affine-residue-model-naturality",
+  "new-picard-derived-coefficient-map",
+  "new-picard-derived-fibre-naturality"
+ ],
  "proof_origin": {
   "by": "worker",
-  "group": "D2",
+  "group": "H4",
   "date": "2026-10-14",
   "document": "Stacks Project",
-  "place": "Tags 0BF2, 0B91 and 01XK; compatible comparisons"
+  "place": "Tags 01IB, 010V, 08DW, 0B91, 0BF2 and 01XK; separate natural affine and geometric comparisons"
  },
  "mathlib_searches": [
   {
@@ -99,12 +104,12 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-50233",
-  "group": "D2",
+  "reviewer": "COMPILER",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261014T140635-L-117584",
+  "landing": "20261014T185244-L-201577",
   "kind": "interface",
-  "note": "independent Codex review: Matched all four node signatures and proof routes with delivered Lean, verified documented corrections and necessary caller adaptations, unchanged upper statement and targets, clean compilation and expected axioms."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "statement_change": {
   "date": "2026-10-14",

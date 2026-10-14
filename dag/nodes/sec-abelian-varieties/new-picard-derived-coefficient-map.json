@@ -1,0 +1,119 @@
+{
+ "id": "new-picard-derived-coefficient-map",
+ "kind": "definition",
+ "title": "The actual coefficient arrow between base-changed Picard direct images",
+ "statement": "Let f:X->S, f':X'->S, u:X'->X with u;f=f', let L be a module on X, and let k:W->S. Construct an actual arrow R(f_W)_*(L_W[0])->R(f'_W)_*((u^*L)_W[0]). It is induced by the derived coefficient pullback unit and canonical direct-image composition, with the coefficients identified by the two projection equations of the pullback of u. This construction needs derived categories on all schemes but no flatness, properness, invertibility, cohomology, or affine model. The two projection equations are also proved in this module.",
+ "stmt_deps": [
+  "def-pc-relative-mv-maps",
+  "lem-pc-canonical-single-pullback-comparison"
+ ],
+ "source": {
+  "document": "Stacks Project; Mathlib and the existing Lean library",
+  "place": "Tags 01F7, 08HY and 0B91"
+ },
+ "proof": [
+  {
+   "text": "Pull back the morphism u in the over category and prove its source and base projection equations. Identify ordinary pullback of L_W with (u^*L)_W using ordinary pullback composition and the canonical tensor/ordinary adjoint-uniqueness isomorphisms. Use exists_tensorPullbackAdjunction, pinned by its sectionwise unit formula, for the same adjunction-preserving comparisons as canonicalSinglePullbackMap; a bare unnormalized adjunction choice is not used.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose the canonical single pullback map with the coefficient isomorphism. Apply relativeMVUnit along the base-changed u, then direct image of that coefficient map, and finally transport the composite projection to f prime over W. Every datum is an explicit construction from proved APIs or a canonical derived universal property.",
+   "uses": [
+    "def-pc-relative-mv-maps",
+    "lem-pc-canonical-single-pullback-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-relative-mv-maps",
+  "lem-pc-canonical-single-pullback-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H4",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 01F7, 08HY and 0B91; second reading: tensor comparisons pinned by exists_tensorPullbackAdjunction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct the derived coefficient pullback arrow between direct images under a morphism of schemes over a base",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct the derived coefficient pullback arrow between direct images under a morphism of schemes over a base",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.isPullback_map, AlgebraicGeometry.Scheme.Pullback.Triplet.hy, AlgebraicGeometry.Scheme.Pullback.Triplet.hx, AlgebraicGeometry.Scheme.canonicallyOverPullback, AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint_s, AlgebraicGeometry.Scheme.canonicallyOverPullback_over, AlgebraicGeometry.Scheme.Pullback.Triplet, AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint",
+   "date": "2026-10-14",
+   "verdict": "The listed framework results are used or inspected; no complete matching comparison theorem was returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-14",
+   "verdict": "The listed framework results are used or inspected; no complete matching comparison theorem was returned."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_unit|pullback_map_fst|pullback_map_snd",
+   "results": "25 hits: Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/LiftingProperties/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Orthogonal.lean",
+   "date": "2026-10-14",
+   "verdict": "The listed framework results are used or inspected; no complete matching comparison theorem was returned."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex",
+  "date": "2026-10-14",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-picard-residue-homology-geometric-naturality-fixed-per-index"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardDerivedCoefficientMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardDerivedCoefficientMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardDerivedCoefficientMap",
+  "statement": "def picardDerivedCoefficientMap {X X' S : Scheme.{v}} (f : X ⟶ S) (f' : X' ⟶ S) (u : X' ⟶ X) (hu : u ≫ f = f') (L : X.Modules) (W : Scheme.{v}) (k : W ⟶ S) : (schemeDerivedDirectImage (pullback.snd f k)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj ((Modules.tensorPullback (pullback.fst f k)).obj L)) ⟶ (schemeDerivedDirectImage (pullback.snd f' k)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings (pullback f' k).toRingedSpace)) 0).obj ((Modules.tensorPullback (pullback.fst f' k)).obj ((Modules.tensorPullback u).obj L)))",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.picardCoefficientBaseMap_snd",
+   "AlgebraicGeometry.Scheme.picardCoefficientBaseMap_fst",
+   "AlgebraicGeometry.Scheme.picardDerivedCoefficientMap"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261014T185244-L-201577",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261014T185244-L-201577",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

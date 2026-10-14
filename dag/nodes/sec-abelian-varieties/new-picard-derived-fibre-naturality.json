@@ -1,0 +1,157 @@
+{
+ "id": "new-picard-derived-fibre-naturality",
+ "kind": "statement",
+ "title": "Compatible geometric direct-image fibre comparisons",
+ "statement": "Let f:X->S and fi:Xi->S (i in Fin n) be proper, flat and locally finitely presented, with ui:Xi->X and ui;f=fi. Let L be an invertible module on X. Let k:W->S be an immersion, w in W, s=k(w), and tau identify the pullback of L to X_s with O_X_s. Put E=R(f_W)_*(L_W[0]) and Ei=R(fi_W)_*((ui^*L)_W[0]), where the subscript W denotes base change along k. Then there exists one comparison from the derived residue fibre of the source direct image E to H1(X_s,O). For each index i there exists a comparison for Ei such that the map under derivedFiberCohomologyFunctor of the canonical `picardDerivedCoefficientMap` [new-picard-derived-coefficient-map] intertwines these comparisons with structureSheafCohomologyPullback along ui_s. The source comparison is shared by the whole finite family; n may be zero.",
+ "stmt_deps": [
+  "new-derived-fiber-cohomology-functor",
+  "new-picard-derived-coefficient-map"
+ ],
+ "source": {
+  "document": "Stacks Project; Mathlib and the existing Lean library",
+  "place": "Tags 0B91, 0BF2, 01XK, 01F7 and 03FD"
+ },
+ "proof": [
+  {
+   "text": "Use the already constructed picardDerivedCoefficientMap. It is the coefficient pullback adjunction unit, canonical single-module pullback map and normalized direct-image composition; its two projection equations identify the target coefficient. No affine model or representative is needed.",
+   "uses": [
+    "new-picard-derived-coefficient-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply arbitrary base change to the invertible source and target coefficients. Canonical single-pullback composition identifies the coefficient square; derivedBaseChange_source_transport identifies the maps after residue pullback.",
+   "uses": [
+    "lem-pc-flat-invertible-canonical-derived-base-change",
+    "lem-pc-canonical-single-pullback-square",
+    "lem-pc-derived-base-change-source-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An immersion gives an isomorphism of residue fields. Pullback pasting identifies the iterated fibres with X_s and Xi_s, compatibly with ui. Transport tau and its pullbacks using the same source trivialization. Use field-base cohomology with comparisons normalized on common injective resolution section complexes. Derived adjunction units then give the ordinary coefficient pullback maps, rather than arbitrary objectwise equivalences.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For structure coefficients use the explicit unit-to-abelian comparison and its pullback naturality to identify these maps with structureSheafCohomologyPullback. Their normalized isomorphisms give the source and target comparisons and the equation for all i.",
+   "uses": [
+    "new-sc-scalar-unit-comparison-family",
+    "new-sc-scalar-unit-pullback-naturality",
+    "lem-sc-scalar-module-cohomology-pullback-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-canonical-single-pullback-square",
+  "lem-pc-derived-base-change-source-transport",
+  "lem-pc-flat-invertible-canonical-derived-base-change",
+  "lem-sc-scalar-module-cohomology-pullback-comparison",
+  "new-picard-derived-coefficient-map",
+  "new-sc-scalar-unit-comparison-family",
+  "new-sc-scalar-unit-pullback-naturality"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H4",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 0B91, 0BF2, 01XK, 01F7 and 03FD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper flat base change identifies derived fibre cohomology naturally with pullback on fibre cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper flat base change identifies derived fibre cohomology naturally with pullback on fibre cohomology",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Flat.instSndScheme",
+   "date": "2026-10-14",
+   "verdict": "The listed framework results are used or inspected; no complete matching comparison theorem was returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.derivedBaseChange_source_transport",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.derivedBaseChange_source_transport'",
+   "date": "2026-10-14",
+   "verdict": "The listed framework results are used or inspected; no complete matching comparison theorem was returned."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*naturality|homology.*naturality",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/Opposite.lean, Mathlib/Algebra/Homology/Opposite.lean",
+   "date": "2026-10-14",
+   "verdict": "The listed framework results are used or inspected; no complete matching comparison theorem was returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naturality of cohomology pullback on proper schemes computed by derived pushforward and derived base change",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_assoc, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Hom.naturality_assoc",
+   "date": "2026-10-14",
+   "verdict": "Second reading: generic pullback coherence APIs, not the normalized changing-source derived-direct-image/cohomology comparison required here."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "results": "10 hits: AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc",
+   "date": "2026-10-14",
+   "verdict": "Second reading: generic pullback coherence APIs, not the normalized changing-source derived-direct-image/cohomology comparison required here."
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage.*(naturality|comp)|sections.*higherDirectImage|baseChange.*natural",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "Second reading: generic pullback coherence APIs, not the normalized changing-source derived-direct-image/cohomology comparison required here."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex",
+  "date": "2026-10-14",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-picard-residue-homology-geometric-naturality-fixed-per-index"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardDerivedFibreNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardDerivedFibreNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_derived_fibre_naturality",
+  "statement": "theorem picard_derived_fibre_naturality [∀ Y : Scheme.{v}, HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))] [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1} (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))] {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ} (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] [∀ i, Flat (fi i)] [∀ i, IsProper (fi i)] [∀ i, LocallyOfFinitePresentation (fi i)] (ui : ∀ i, Xi i ⟶ X) (hui : ∀ i, ui i ≫ f = fi i) (L : X.Modules) [L.IsInvertible] (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k] (w : W) (s : S) (hw : k w = s) (τ : (Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅ SheafOfModules.unit (pullback f (S.fromSpecResidueField s)).ringCatSheaf) : let E := (schemeDerivedDirectImage (pullback.snd f k)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj ((Modules.tensorPullback (pullback.fst f k)).obj L)) let Ei := fun i ↦ (schemeDerivedDirectImage (pullback.snd (fi i) k)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings (pullback (fi i) k).toRingedSpace)) 0).obj ((Modules.tensorPullback (pullback.fst (fi i) k)).obj ((Modules.tensorPullback (ui i)).obj L))) ∃ e : derivedFiberCohomology W E 1 w ≃+ Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1, ∀ i : Fin n, ∃ ei : derivedFiberCohomology W (Ei i) 1 w ≃+ Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1, ∀ z : derivedFiberCohomology W E 1 w, ei ((derivedFiberCohomologyFunctor W w 1).map (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k) z) = structureSheafCohomologyPullback (((Over.pullback (S.fromSpecResidueField s)).map (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f) (ui i) (hui i))).left) 1 (e z)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261014T185244-L-201577",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261014T185244-L-201577",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
