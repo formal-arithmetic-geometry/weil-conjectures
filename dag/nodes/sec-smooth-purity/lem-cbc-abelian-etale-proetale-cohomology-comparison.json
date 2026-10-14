@@ -25,9 +25,71 @@
   "def-weil-pbc-etale-site",
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $L=\\nu_T^{-1}$ and $G=\\nu_{T,*}$ on abelian sheaves. By [lem-cbc-comparison-pullback-sections], for every etale object $U\\to T$ the comparison unit on underlying sheaves of sets identifies $F(U)$ with $(LF)(U)$. The abelian inverse image and its unit have these underlying set functors and unit, by [def-weil-pbc-sites-and-cohomology] (3). Thus $\\eta_F:F\\to GLF$ is an isomorphism of abelian sheaves: each component is a bijective group homomorphism, whose inverse is a group homomorphism. For each morphism $a:F\\to F'$, naturality of the cited sections identification gives $(GLa)_U\\circ\\eta_F(U)=\\eta_{F'}(U)\\circ a_U$ for every etale $U$; hence the unit isomorphisms are natural in $F$.",
+   "uses": [
+    "lem-cbc-comparison-pullback-sections",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099T, label lemma-fully-faithful; Tag 0GLZ, label lemma-describe-pullback-from-etale"
+   }
+  },
+  {
+   "text": "Choose an injective resolution $F\\to I^\\bullet$ in abelian etale sheaves, using the enough-injectives and cohomology conventions of [def-weil-pbc-sites-and-cohomology] (1)-(2). Exactness of $L$ from [lem-weil-pbc-site-pullback-abelian-exact] makes $LF\\to LI^\\bullet$ an exact augmented resolution. Each $LI^n$ is $G$-acyclic by [lem-cbc-abelian-comparison-injective-acyclicity]. Apply clause (2) of [lemma-weil-pbc-leray-acyclicity] to $v=G$ and this resolution: $R^qG(LF)$ is computed by $H^q(GLI^\\bullet)$. The natural unit of step 1 identifies the complex $I^\\bullet$ with $GLI^\\bullet$, commuting with every differential by unit naturality. Hence $R^qG(LF)=0$ for $q>0$, since $I^\\bullet$ resolves $F$. This uses only an ordinary resolution in degrees at least zero, with no boundedness or finiteness assumption on $F$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-cbc-abelian-comparison-injective-acyclicity",
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099V, label lemma-relative-comparison, second paragraph; derived.tex Tag 015E, label lemma-leray-acyclicity"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-leray-degenerate] to the morphism $\\nu_T$ and the pro-etale abelian sheaf $A=LF$, with $V$ the terminal etale object $T\\to T$. The inclusion sends it to the terminal pro-etale object. The hypothesis $R^qG(A)=0$ for $q>0$ is exactly step 2. Thus for each $i\\geq0$ the edge map $e_A^i:H^i(T_{\\mathrm{et}},GLF)\\to H^i(T_{\\mathrm{proet}},LF)$ is an isomorphism. By the cited statement, it is specifically $H^i(\\varepsilon_{LF})\\circ\\nu_T^*$, not an unspecified isomorphism. Compose this edge isomorphism with $H^i(\\eta_F)$, an isomorphism by step 1.",
+   "uses": [
+    "lem-weil-pbc-site-leray-degenerate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099W, label lemma-compare-cohomology, proof; sites-cohomology.tex Tag 0733, label lemma-apply-Leray"
+   }
+  },
+  {
+   "text": "The preceding composite is the canonical pullback on $F$. Indeed the coefficient naturality of [lem-weil-pbc-site-cohomology-pullback] (2), applied to $\\eta_F:F\\to GLF$, gives $\\nu_T^*\\circ H^i(\\eta_F)=H^i(L\\eta_F)\\circ\\nu_T^*$. Consequently $e_{LF}^i\\circ H^i(\\eta_F)=H^i(\\varepsilon_{LF}\\circ L\\eta_F)\\circ\\nu_T^*=\\nu_T^*$, by the triangle identity for $L\\dashv G$ of [def-weil-pbc-sites-and-cohomology]. Since both factors on the left are isomorphisms, the pullback is an isomorphism. This also checks $i=0$, where the map is the unit on sections; no change of coefficient category has occurred.",
+   "uses": [
+    "lem-weil-pbc-site-cohomology-pullback",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099W, label lemma-compare-cohomology: identification with canonical pullback; sites-cohomology.tex Remark 08J6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-cbc-abelian-comparison-injective-acyclicity",
+  "lem-cbc-comparison-pullback-sections",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "lem-weil-pbc-site-leray-degenerate",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099V and 099W, labels lemma-relative-comparison and lemma-compare-cohomology"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -87,12 +149,51 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-proetale-functions-quotient-sections",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-comparison"
+ "unit": "sk-prop-sf-comparison",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+  "worker": "stage1",
+  "summary": "Retained the arbitrary abelian-sheaf statement and proved it from injective comparison-direct-image acyclicity, acyclic resolutions, and the canonical Leray edge map. One new statement-only node isolates the unfinished injective acyclicity theorem. Finite-ring comparison nodes cannot supply this assertion. Explicit naturality and the adjunction triangle identity identify the isomorphism with the required cohomology pullback.",
+  "blueprint": "Realizes the cohomology-comparison input to lem-cbc-proetale-stalk-conservative proof Step 4, through the functions-quotient-sections split; the unit has no proof steps to replace.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "Generic acyclic-resolution computation for left exact functors; the comparison unit supplies no such general homological algebra theorem."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Generic exactness of abelian inverse image on sites, needed to preserve the augmented resolution."
+   },
+   {
+    "node": "lem-weil-pbc-site-leray-degenerate",
+    "why": "Generic Leray edge isomorphism for an acyclic sheaf, with its canonical counit formula."
+   },
+   {
+    "node": "lem-weil-pbc-site-cohomology-pullback",
+    "why": "Generic coefficient naturality of the canonical cohomology pullback, used to identify the edge composite."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-site-leray-degenerate",
+  "lem-weil-pbc-site-cohomology-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-c5fbdbe8a",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-c5fbdbe8a (reviewer sub-agent of L); spot-checked: Read both nodes and all cited mathematics in full. Stacks 099U–099W support arbitrary abelian coefficients; all four steps correctly identify the canonical pullback. Accepted four generic tool_uses. Repaired incomplete new-node provenance and recorded the verified sorried Lean candidate. No duplicate or new cycle found; review.md documents an inherited dependency cycle outside this delivery.; 1 file(s) fixed by the reviewer"
+ }
 }
