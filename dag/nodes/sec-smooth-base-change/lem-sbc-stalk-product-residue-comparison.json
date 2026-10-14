@@ -1,0 +1,121 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.CartierGenericStalkGaloisModelCore",
+  "date": "2026-10-14",
+  "group": "V3"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "mathlib_match": null,
+ "id": "lem-sbc-stalk-product-residue-comparison",
+ "title": "Compatible residue fields from a coproduct presentation of a stalk base change",
+ "statement": "Let f:X -> N be any scheme morphism, s a point of N, I a small index type, and S_i commutative rings with algebras over the actual stalk R = O_(N,s). Suppose an isomorphism c from X times_N Spec R to the coproduct of Spec S_i is given and commutes with the structural maps induced by the R-algebras. For any x in X with f(x)=s there exist i and a prime q of S_i, a ring equivalence e:kappa_N(f(x)) -> kappa(q contracted to R), and a ring equivalence g:kappa_X(x) -> kappa(q), such that the canonical residue-field algebra maps commute with e and g. No domain, finiteness, torsor, Cartier, or group hypotheses are required. The geometric presentation over Spec R is required.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "def-weil-residue-field"
+ ],
+ "source": {
+  "document": "Stacks Project; Mathlib",
+  "place": "Residue comparison in step 3 of lem-sbc-cartier-generic-stalk-galois-model-core; localization background Tag 0307; Mathlib Stalk, PullbackCarrier, ResidueField and LocalRing.ResidueField.Ideal"
+ },
+ "proof": [
+  {
+   "text": "A morphism surjective on stalks gives a surjective residue-field map by lifting first through the residue quotient and then through the stalk map. A field homomorphism is injective, so this map is bijective. For a Spec algebra map, prove residueFieldIso naturality by precomposing with its inverse, applying Ideal.ResidueField.ringHom_ext and checking on base ring elements using evaluation naturality, GammaSpecIso inverse naturality and scalar towers.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Lift x and the closed point of Spec R to the pullback by Pullback.exists_preimage_pullback. Apply sigmaOpenCover.exists_eq to c.hom of that lift, yielding i and a point y of Spec S_i. Compose its coproduct inclusion with c.inv and the pullback first projection to obtain d:Spec S_i -> X. This sends y to x. The supplied structural equality implies d followed by f equals Spec(algebraMap R S_i) followed by N.fromSpecStalk s.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take q=y.asIdeal. Both N.fromSpecStalk s and d are preimmersions: the latter is a coproduct open immersion followed by an isomorphism and a base change of the stalk preimmersion. The residue maps of both are therefore bijective. Compose their ring equivalences with Spec.residueFieldIso and the necessary residueFieldCongr to construct e and g. Affine residue naturality and residueFieldMap_comp, with Hom.residueFieldMap_congr of the structural equality, give the desired square. This is a complete Lean proof, using no sorry.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "worker",
+  "group": "V3",
+  "document": "Stacks Project; Mathlib",
+  "place": "Residue comparison in step 3 of lem-sbc-cartier-generic-stalk-galois-model-core; localization background Tag 0307; Mathlib Stalk, PullbackCarrier, ResidueField and LocalRing.ResidueField.Ideal"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "base change to a stalk preserves residue fields at a point over the closed point",
+   "date": "2026-10-14",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.residueFieldMap, AlgebraicGeometry.Scheme.SpecMap_residue_apply, AlgebraicGeometry.Scheme.Spec_map_residue_apply, AlgebraicGeometry.Scheme.residue_residueFieldMap, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply, AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField, AlgebraicGeometry.Scheme.descResidueField, AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass",
+   "verdict": "Primitive residue maps and preimmersion/base-change tools found; the exact comparison was assembled and proved in Lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Hom.residueFieldMap",
+   "date": "2026-10-14",
+   "results": "0 hits: ; loogle: unknown identifier 'Scheme.Hom.residueFieldMap'",
+   "verdict": "Primitive residue maps and preimmersion/base-change tools found; the exact comparison was assembled and proved in Lean."
+  },
+  {
+   "tool": "grep",
+   "query": "residueField.*(pullback|fromSpecStalk)|normalizationPullback",
+   "date": "2026-10-14",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean",
+   "verdict": "Primitive residue maps and preimmersion/base-change tools found; the exact comparison was assembled and proved in Lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "residue field isomorphism under base change to a scheme stalk",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error; no results and no mathematical verdict."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-cartier-generic-stalk-galois-model-core",
+   "place": "Geometric model construction and residue-comparison steps",
+   "via": [
+    "lem-sbc-root-normalization-generic-stalk-galois-model",
+    "lem-sbc-cartier-generic-stalk-galois-model"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkProductResidueComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkProductResidueComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.stalk_product_residue_comparison",
+  "statement": "theorem stalk_product_residue_comparison\n    {N X : Scheme.{u}} (f : X ⟶ N) (s : N)\n    (I : Type) (S : I → CommRingCat.{u})\n    (alg : ∀ i, Algebra (N.presheaf.stalk s) (S i)) :\n    letI := alg\n    ∀ (c : pullback f (N.fromSpecStalk s) ≅ ∐ fun i : I ↦ Spec (S i)),\n      c.hom ≫ Sigma.desc (fun i : I ↦\n        Spec.map (CommRingCat.ofHom (algebraMap (N.presheaf.stalk s) (S i)))) =\n          pullback.snd f (N.fromSpecStalk s) →\n      ∀ (x : X), f x = s →\n        ∃ (i : I) (q : Ideal (S i)) (hq : q.IsPrime),\n          letI := hq\n          letI := Localization.AtPrime.algebraOfLiesOver\n            (q.under (N.presheaf.stalk s)) q\n          letI := (f.residueFieldMap x).hom.toAlgebra\n          ∃ (e : N.residueField (f x) ≃+*\n              (q.under (N.presheaf.stalk s)).ResidueField)\n            (g : X.residueField x ≃+* q.ResidueField),\n            (algebraMap (q.under (N.presheaf.stalk s)).ResidueField\n              q.ResidueField).comp e.toRingHom =\n              g.toRingHom.comp (algebraMap (N.residueField (f x))\n                (X.residueField x))",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261014T020518-L-3814164",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261014T020518-L-3814164",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

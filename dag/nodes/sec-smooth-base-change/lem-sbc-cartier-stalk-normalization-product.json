@@ -1,0 +1,141 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.CartierGenericStalkGaloisModelCore",
+  "date": "2026-10-14",
+  "group": "V3"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "mathlib_match": null,
+ "id": "lem-sbc-cartier-stalk-normalization-product",
+ "title": "Integral-closure product model of a Cartier torsor normalization over the actual DVR stalk",
+ "statement": "Under the Cartier complement, finite etale pulled-back finite G-torsor, locally Noetherian base, finite normalization, integral centre with generic point eta, and domain DVR stalk hypotheses of lem-sbc-cartier-generic-stalk-galois-model-core, put R = O_(N,j(eta)) and K = Frac R. There exist finitely many fields E_i with K-algebra structures, subgroups T_i of G and actions of T_i on E_i making IsGaloisGroup T_i K E_i hold. Equip E_i with the composite R-algebra structure. Every concrete ring integralClosure R E_i is module finite over R. The pullback of the entire normalization along Spec R -> N is isomorphic over Spec R to the coproduct of Spec(integralClosure R E_i); the structural maps are precisely Spec of the canonical R-algebra maps. This assertion has no selected point, prime, residue comparison, or action on integral closures or their canonical fraction fields.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-relative-normalization",
+  "def-sbc-normal-dominant-galois",
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-residue-field",
+  "def-weil-vector-space-dimension",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-flat-ring-map",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-field"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0307, 03SF and 03QR; steps 1 and 2 of lem-sbc-cartier-generic-stalk-galois-model-core. Tag 09EB is background arithmetic, not the geometric model theorem."
+ },
+ "proof": [
+  {
+   "text": "The Cartier ideal localized at the image of the generic point is the maximal ideal of the domain DVR R, because its quotient is the field stalk of the integral centre. Hence the open complement over Spec R is Spec K. Pull back the given torsor square and group action to obtain a finite etale G-torsor over K. Apply field_torsor_galois_components to get fields E_i and their finite coproduct presentation over K. For each component apply field_torsor_component_galois_group to identify its K-automorphism group with a subgroup T_i of G. Transport the canonical action through the inverse equivalence; this gives the displayed IsGaloisGroup.",
+   "uses": [
+    "lem-sbc-field-torsor-galois-components",
+    "lem-sbc-field-torsor-component-galois-group"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply normalization stalk base change to the original map a = p followed by the open immersion V -> N. Over the affine scheme Spec R, the normalized coordinate algebra is the integral closure of R in the section algebra of the pulled-back torsor. Under its finite field-product presentation, integrality is coordinatewise: if each coordinate satisfies a monic polynomial, the product of these finitely many polynomials annihilates the tuple. Thus this algebra is the product of integralClosure R E_i. Use Spec of this algebra equivalence and the finite-product/coproduct comparison to get e. Each comparison preserves the R-algebra map, so e satisfies the specified equation over Spec R.",
+   "uses": [
+    "lem-sbc-normalization-stalk-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finiteness of normalization survives base change to Spec R. Its section algebra is therefore module finite over R. Projection to a field-factor integral closure is a surjective R-linear map, so every factor is module finite. An empty index set gives the empty scheme and has no factor to check. For a trivial group the single nonempty factor is K, with integral closure R; in particular the statement does not demand a Q-residue model for the closed point of Spec Z.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-field-torsor-galois-components",
+  "lem-sbc-field-torsor-component-galois-group",
+  "lem-sbc-normalization-stalk-base-change"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "worker",
+  "group": "V3",
+  "document": "Stacks Project",
+  "place": "Tags 0307, 03SF and 03QR; steps 1 and 2 of lem-sbc-cartier-generic-stalk-galois-model-core. Tag 09EB is background arithmetic, not the geometric model theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "relative normalization over a DVR stalk decomposes as spectra of integral closures in the finite etale torsor field components",
+   "date": "2026-10-14",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.normalization",
+   "verdict": "Used the available normalization, residue and Galois APIs; no exact complete geometric product-model statement was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsGaloisGroup.of_isFractionRing",
+   "date": "2026-10-14",
+   "results": "1 hits: IsGaloisGroup.of_isFractionRing",
+   "verdict": "Used the available normalization, residue and Galois APIs; no exact complete geometric product-model statement was found."
+  },
+  {
+   "tool": "grep",
+   "query": "field_torsor_galois_components|normalizationPullback_stalk|residueFieldIso|surjectiveOnStalks",
+   "date": "2026-10-14",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean, Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean",
+   "verdict": "Used the available normalization, residue and Galois APIs; no exact complete geometric product-model statement was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite etale Galois torsor normalization over discrete valuation stalk product integral closures",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error; no results and no mathematical verdict."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-cartier-generic-stalk-galois-model-core",
+   "place": "Geometric model construction and residue-comparison steps",
+   "via": [
+    "lem-sbc-root-normalization-generic-stalk-galois-model",
+    "lem-sbc-cartier-generic-stalk-galois-model"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.CartierStalkNormalizationProduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/CartierStalkNormalizationProduct.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cartier_stalk_normalization_product",
+  "statement": "theorem cartier_stalk_normalization_product\n    {N U P : Scheme.{u}} [IsLocallyNoetherian N]\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (V : N.Opens) (κ : V.toScheme ⟶ U) (p : P ⟶ V.toScheme) [IsFinite p]\n    (r : P ⟶ W.P) (hpb : IsPullback r p W.π κ) :\n    let a := p ≫ V.ι\n    Etale p → IsFinite a.fromNormalization →\n    ∀ (D : Scheme.{u}) (j : D ⟶ N),\n      IsIntegral D → IsEffectiveCartierCenter j →\n      (∀ z : N, z ∈ V ↔ z ∉ Set.range j) →\n      ∀ (η : D), IsGenericPoint η Set.univ →\n      ∀ (hdom : IsDomain (N.presheaf.stalk (j η))),\n      letI := hdom\n      IsDiscreteValuationRing (N.presheaf.stalk (j η)) →\n      let R := N.presheaf.stalk (j η)\n      ∃ (n : ℕ) (E : Fin n → Type u) (hE : ∀ i, Field (E i))\n        (aE : ∀ i, Algebra (FractionRing R) (E i)),\n        letI := hE\n        letI := aE\n        letI (i : Fin n) : Algebra R (E i) :=\n          ((algebraMap (FractionRing R) (E i)).comp\n            (algebraMap R (FractionRing R))).toAlgebra\n        ∃ (T : Fin n → Subgroup G) (act : ∀ i, MulSemiringAction (T i) (E i)),\n          letI := act\n          (∀ i, IsGaloisGroup (T i) (FractionRing R) (E i)) ∧\n          (∀ i, Module.Finite R (integralClosure R (E i))) ∧\n          ∃ e : pullback a.fromNormalization (N.fromSpecStalk (j η)) ≅\n              ∐ fun i : Fin n ↦ Spec (CommRingCat.of (integralClosure R (E i))),\n            e.hom ≫ Sigma.desc (fun i : Fin n ↦\n              Spec.map (CommRingCat.ofHom (algebraMap R (integralClosure R (E i))))) =\n              pullback.snd a.fromNormalization (N.fromSpecStalk (j η))",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261014T020518-L-3814164",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261014T020518-L-3814164",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
