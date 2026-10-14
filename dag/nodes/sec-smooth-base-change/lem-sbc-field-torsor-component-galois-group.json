@@ -1,0 +1,132 @@
+{
+ "id": "lem-sbc-field-torsor-component-galois-group",
+ "kind": "statement",
+ "title": "Galois group of a field component of a finite torsor",
+ "statement": "Let K be a field [def-weil-field], G a finite group, and T a finite etale G-torsor over Spec K [def-sbc-normal-dominant-galois]. Let E be a field with a K-algebra structure and let j:Spec E -> T.P be an open immersion satisfying j;T.pi = Spec(algebraMap K E). Then E/K is Galois and there is a subgroup H of G with a group isomorphism Aut_K(E) -> H. No connectedness of the entire torsor is assumed. This statement concerns a specified component; it constructs neither a decomposition of T nor its field factors and asserts no numerical divisibility.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sbc-normal-dominant-galois"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03SF and 03QR; component of a finite torsor, finite separable fields and Galois sets"
+ },
+ "proof": [
+  {
+   "text": "Finiteness and etaleness of T over K imply that its coordinate ring is a finite product of finite separable fields (Mathlib Algebra.Etale.iff_exists_algEquiv_prod). Since Spec E is nonempty and connected, its open immersion into this finite discrete scheme identifies it with one component. Thus E/K is finite separable. Choose a separable closure Ks and an embedding sigma:E -> Ks. The geometric points of Spec E are the embeddings of E into Ks, forming a transitive absolute Galois set by finite_separable_extension_galois_classification [lem-exc-etale-field-galois-classification].",
+   "uses": [
+    "lem-exc-etale-field-galois-classification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the geometric point determined by sigma and j as origin in the torsor fibre. The defining torsor isomorphism identifies this entire fibre with G under left multiplication. Absolute Galois automorphisms act on this fibre by precomposition and commute with this G-action. Consequently each gamma acts by right multiplication x -> x*c(gamma). Composition shows c(gamma*delta)=c(delta)*c(gamma); therefore rho(gamma)=c(gamma)^(-1) is a homomorphism. Its kernel N is the stabilizer of the chosen geometric point and every other point, hence is open and normal. Its image H is a subgroup of G, and the first isomorphism theorem gives Gal(Ks/K)/N isomorphic to H.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The stabilizer formula of finite_separable_extension_galois_classification [lem-exc-etale-field-galois-classification] identifies N with the subgroup fixing sigma(E). The Galois fixed-field correspondence gives sigma(E)=Ks^N. Since N is normal, sigma(E)/K is Galois and restriction of absolute automorphisms gives Aut_K(sigma(E)) isomorphic to Gal(Ks/K)/N. Transfer along sigma.equivFieldRange and compose with the quotient-to-image isomorphism from the previous step. This proves both IsGalois K E and the claimed group equivalence. For the trivial group or any split torsor H is trivial and E is isomorphic to K; disconnected torsors are handled component by component.",
+   "uses": [
+    "lem-exc-etale-field-galois-classification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-etale-field-galois-classification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "kind": "written-by-agent",
+  "agent": "V2",
+  "document": "Stacks Project",
+  "place": "Tags 03SF and 03QR; component of a finite torsor, finite separable fields and Galois sets"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The automorphism group of a field component of a finite group torsor over a field is isomorphic to a subgroup of the torsor group",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field component of a finite etale G-torsor is a Galois field extension whose automorphism group is isomorphic to a subgroup of G",
+   "date": "2026-10-14",
+   "results": "IsGaloisGroup.isGalois, IsGaloisGroup.mulEquivAlgEquiv, fixedPoints; these require an already constructed field action and invariant-field statement, not a scheme torsor.",
+   "verdict": "No matching scheme-component theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "component.*Galois|Galois.*component|subgroup.*torsor|torsor.*subgroup in Mathlib/AlgebraicGeometry, Mathlib/FieldTheory, library, and DAG; blueprint_refs.py search torsor component",
+   "date": "2026-10-14",
+   "results": "Algebra.Etale.iff_exists_algEquiv_prod handles only the field decomposition; no component Galois-group theorem. Nearby affine torsor orbit descent nodes use fixed rings of a supplied field action and do not supply this interface. Blueprint search: 0 matches.",
+   "verdict": "No duplicate found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.FieldTorsorGaloisComponents",
+  "date": "2026-10-14",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Field torsor component calculation, geometric Galois action and subgroup identification",
+   "via": [
+    "lem-sbc-field-torsor-galois-components",
+    "lem-sbc-dvr-root-normalization-maximal-ideal",
+    "lem-sbc-root-normalization-root-not-square",
+    "lem-sbc-root-normalization-cotangent-root"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "mathlib": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FieldTorsorComponentGaloisGroup",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FieldTorsorComponentGaloisGroup.lean",
+  "declaration": "AlgebraicGeometry.Scheme.field_torsor_component_galois_group",
+  "statement": "theorem field_torsor_component_galois_group\n    (K : Type u) [Field K]\n    (G : Type (u + 1)) [Group G] [Finite G]\n    (T : GaloisCover G (Spec (CommRingCat.of K)))\n    (E : Type u) [Field E] [Algebra K E]\n    (j : Spec (CommRingCat.of E) ⟶ T.P) [IsOpenImmersion j]\n    (hj : j ≫ T.π = Spec.map (CommRingCat.ofHom (algebraMap K E))) :\n    IsGalois K E ∧ ∃ H : Subgroup G, Nonempty ((E ≃ₐ[K] E) ≃* H)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261014T010856-L-3169166",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261014T010856-L-3169166",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
