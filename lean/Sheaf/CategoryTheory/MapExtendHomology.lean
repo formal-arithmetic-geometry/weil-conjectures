@@ -37,7 +37,7 @@ def mapExtendHomologyIso
         (K.extend ComplexShape.embeddingUpNat)).homology (q : ℤ) ≅
       ((E.mapHomologicalComplex (.up ℕ)).obj K).homology q :=
   (HomologicalComplex.homologyFunctor B (.up ℤ) (q : ℤ)).mapIso
-      (HomologicalComplex.mapExtendIso K ComplexShape.embeddingUpNat E) ≪≫
+      (K.mapExtendIso ComplexShape.embeddingUpNat E) ≪≫
     ((E.mapHomologicalComplex (.up ℕ)).obj K).extendHomologyIso
       ComplexShape.embeddingUpNat (j := q) rfl
 
