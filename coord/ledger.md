@@ -14332,3 +14332,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:51 L: merged deliver/A4/Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorStabilizerSectionMono (stage 3; reviewer PASS; first push; landing 20261014T025135-L-155310 (proof); batch 20261014T025133; modules 1; new nodes 0)
 - 02:51 L: merged deliver/B2/Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal (stage 3; reviewer PASS; first push; landing 20261014T025136-L-155497 (proof); batch 20261014T025133; modules 1; new nodes 0)
 - 02:51 L: merged deliver/B2/Sheaf.CategoryTheory.MapExtendHomology (stage 3; reviewer PASS; first push; landing 20261014T025136-L-155665 (proof); batch 20261014T025133; modules 1; new nodes 0)
+- 02:51 L: merged deliver/B2/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone (stage 3; reviewer PASS; first push; landing 20261014T025136-L-155830 (proof); batch 20261014T025133; modules 1; new nodes 0)
