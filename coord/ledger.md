@@ -14532,7 +14532,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 12:44 L: batch 20261014T043529 dependency take-out
 - 04:45 L: merged deliver/XRb0cc22400e136910/Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf (stage 3; reviewer PASS; first push; landing 20261014T044553-L-1450952 (interface); batch 20261014T044551; modules 3; new nodes 0; change records: coord/changes/retire-equivariant-sheaf-compatibility.md)
-- 04:45 L: merged deliver/A3/Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker (stage 3; reviewer PASS; first push; landing 20261014T044553-L-1451055 (interface); batch 20261014T044551; modules 2; new nodes 0; change records: coord/changes/retire-pic-proper-ntorsion-coker-duplicate.md)
 - 04:45 L: merged deliver/C2/Sheaf.Algebra.Homology.MappingCylinderSplitFactorization (stage 3; reviewer PASS; first push; landing 20261014T044553-L-1451189 (proof); batch 20261014T044551; modules 1; new nodes 0)
 - 04:45 L: merged deliver/C2/Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCore (stage 3; reviewer PASS; first push; landing 20261014T044554-L-1451315 (interface); batch 20261014T044551; modules 2; new nodes 2)
 - 04:45 L: merged deliver/C4/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T044554-L-1451432 (proof); batch 20261014T044551; modules 1; new nodes 0)
@@ -14547,3 +14546,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:45 L: merged deliver/T4/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (stage 3; reviewer PASS; after a return; landing 20261014T044558-L-1452948 (proof); batch 20261014T044551; modules 1; new nodes 0)
 - 04:47 L: returned deliver/M3/Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitHomotopyFactorization (reviewer RETURN: (reviewer X-6feb6, head 6feb68ee3) B2/B3: Both new DAG statements must define S independently and cite their definition )
 - 04:51 L: returned deliver/D4/Sheaf.Topology.RingedModuleSkyscraper (reviewer RETURN: (reviewer X-ee0b9, head ee0b9e946) F/6: In dag/nodes/sec-picard-framework/def-pc-ringed-module-skyscraper.json, replace )
+
+- 12:53 L: batch 20261014T044551 dependency take-out
