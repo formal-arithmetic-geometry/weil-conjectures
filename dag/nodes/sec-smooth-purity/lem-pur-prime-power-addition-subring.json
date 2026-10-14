@@ -20,11 +20,59 @@
  "stmt_deps": [
   "def-weil-pbc-algebra-hom-quotient"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose $a=np^n+mp^m+n+m$ and put $P=p^a$, $B=n(p^n-1)+m(p^m-1)$. Since $p\\geq2$ and $n,m>0$, $a>0$, $a\\geq n,m$, and $a-n+1-B=n+2m+1>0$, while $a-m+1-B=2n+m+1>0$. Thus both $a-n+1$ and $a-m+1$ are at least $B$. A unital subring contains every integer multiple of $1$ by repeated addition and additive inverses. Thus $p^a(x+y)=p^{a-n}(p^nx)+p^{a-m}(p^my)$ belongs to $A$ by its defining closure properties.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0545, lemma-help-with-powers, binomial expansion and coefficient divisibility in the proof"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-commutative-ring-binomial-expansion] with exponent $P$: $(x+y)^P=\\sum_{i=0}^P\\binom Pi x^iy^{P-i}$. For each index put $j=P-i$, and use integer division with remainder to write $i=qp^n+r$ and $j=q^{\\prime}p^m+r^{\\prime}$, where $0\\leq r<p^n$ and $0\\leq r^{\\prime}<p^m$. Put $D=nr+mr^{\\prime}\\leq B$. It suffices to show that the integer coefficient $\\binom Pi$ is divisible by $p^D$.",
+   "uses": [
+    "lem-pur-commutative-ring-binomial-expansion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0545, lemma-help-with-powers, binomial expansion and coefficient divisibility in the proof"
+   }
+  },
+  {
+   "text": "If $r=r^{\\prime}=0$, then $D=0$ and the required divisibility is automatic. If $r>0$, then $i>0$ and $p^n$ does not divide $i$, so the definition of $v_p(i)$ gives $v_p(i)\\leq n-1$. Apply [lem-pur-prime-power-binomial-divisibility] with $k=i$ (indeed $0<i\\leq P$). It gives $p^{a-v_p(i)}\\mid\\binom Pi$; since $a-v_p(i)\\geq a-n+1\\geq B\\geq D$, also $p^D\\mid\\binom Pi$. If $r=0$ and $r^{\\prime}>0$, use $0<j\\leq P$ and $v_p(j)\\leq m-1$ in the same cited statement. It gives $p^D\\mid\\binom Pj$, and $\\binom Pj=\\binom Pi$ by the factorial formula with $j=P-i$. These cases include all indices. The endpoint indices $i=0,P$ have both remainders zero because $a\\geq n,m$, so no valuation at zero is used.",
+   "uses": [
+    "lem-pur-prime-power-binomial-divisibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0545, lemma-help-with-powers, binomial expansion and coefficient divisibility in the proof"
+   }
+  },
+  {
+   "text": "For each index write $\\binom Pi=c_i p^{nr+mr^{\\prime}}$ with $c_i\\in\\mathbf N$, using step 3. In $C$ the corresponding term equals $c_i(x^{p^n})^q(y^{p^m})^{q^{\\prime}}(p^nx)^r(p^my)^{r^{\\prime}}$. This follows by multiplying out the powers, using $i=qp^n+r$ and $j=q^{\\prime}p^m+r^{\\prime}$. Each of the four bases is in $A$ by hypothesis; powers (including exponent zero), their product, and the integer multiple are in $A$ by repeated multiplication and addition. The finite sum from step 2 therefore belongs to $A$. Together with step 1 this proves both required memberships with the same positive $a$. No division or cancellation in $C$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0545, lemma-help-with-powers, binomial expansion and coefficient divisibility in the proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-commutative-ring-binomial-expansion",
+  "lem-pur-prime-power-binomial-divisibility"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0545, lemma-help-with-powers, binomial expansion and coefficient divisibility in the proof"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-power-generated-spectrum-homeomorphism",
   "by": "worker",
@@ -90,6 +138,34 @@
    "results": "[leanfinder] OK 8 hit(s); Ring.perfectionSubring, Ideal.sum_pow_mem_span_pow, Subring.exists_list_of_mem_closure, Ring.perfectionSubsemiring, ZMod.exists_one_add_mul_pow_prime_pow_eq, Ideal.add_pow_add_pred_mem_of_pow_mem, sub_mem_pNilradical_iff_pow_expChar_pow_eq, exists_add_pow_prime_pow_eq",
    "date": "2026-10-14",
    "verdict": "no match: subring closure descriptions and characteristic-p power identities do not supply the mixed-characteristic remainder divisibility needed here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A subring containing prime power powers of x y and prime power multiples contains a prime power of their sum",
+   "results": "[leanfinder] OK 8 hit(s); exists_add_pow_prime_pow_eq, ZMod.exists_one_add_mul_pow_prime_pow_eq, ZMod.exists_one_add_mul_pow_prime_eq, exists_add_pow_prime_eq, Ideal.add_pow_add_pred_mem_of_pow_mem, Commute.exists_add_pow_prime_pow_eq, Ideal.add_pow_mem_of_pow_mem_of_le, Ideal.IsPrime.mem_of_pow_mem",
+   "date": "2026-10-14",
+   "verdict": "no match: prime-power sum identities leave an uncontrolled error factor in C; ideal membership differs from subring membership. The integer coefficient bound and remainder argument are additional steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exists_add_pow_prime_pow_eq\"",
+   "results": "[loogle] OK 2 hit(s); Commute.exists_add_pow_prime_pow_eq, exists_add_pow_prime_pow_eq",
+   "date": "2026-10-14",
+   "verdict": "no match: prime-power sum identities leave an uncontrolled error factor in C; ideal membership differs from subring membership. The integer coefficient bound and remainder argument are additional steps."
+  },
+  {
+   "tool": "grep",
+   "query": "Subring.*pow|pow.*Subring|exists_add_pow_prime",
+   "results": "[grep] OK 25 hit(s); Mathlib/Algebra/Ring/Subsemiring/Basic.lean, Mathlib/Analysis/Normed/Lp/lpSpace.lean, Mathlib/Algebra/Ring/Subring/Defs.lean, Mathlib/Algebra/Ring/Subring/Defs.lean, Mathlib/Algebra/CharP/Lemmas.lean, Mathlib/Algebra/CharP/Lemmas.lean, Mathlib/Algebra/CharP/Lemmas.lean, Mathlib/Algebra/CharP/Lemmas.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: prime-power sum identities leave an uncontrolled error factor in C; ideal membership differs from subring membership. The integer coefficient bound and remainder argument are additional steps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Subring containing prime power powers and multiples is closed under addition",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s); ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "merged_into": null,
@@ -100,5 +176,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-pur-prime-power-addition-subring",
+  "worker": "stage1",
+  "summary": "Read Tag 0545 and expanded its explicit exponent, remainder cases, divisibility bound, and evaluation in a general subring. Two arithmetic tools are Mathlib leaves. Statement retained, with no characteristic or domain hypotheses added.",
+  "blueprint": "Realizes the addition closure needed in the power-generated algebra assertion of lem-fin-generic-radicial-smoothing proof paragraph 3, through the recorded preparation and spectrum-homeomorphism ancestors."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-dc2f76156",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-dc2f76156 (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and cited sources in full. All four proof steps and both Mathlib leaves are sound; edge cases and coefficient checks passed. No duplicate, circular split, or target weakening found. Completed metadata in both new-node JSON files under fixes/. Full source locations and checks are recorded in review.md.; 2 file(s) fixed by the reviewer"
  }
 }
