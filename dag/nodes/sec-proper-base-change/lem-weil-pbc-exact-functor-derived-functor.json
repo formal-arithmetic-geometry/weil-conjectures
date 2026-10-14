@@ -4,12 +4,12 @@
   "is": null,
   "from": {
    "node": "def-weil-pbc-derived-exchange",
-   "place": "its statement (a notion the statement uses)",
+   "place": "First construction: 'the source is a model for g^{-1}Rf_*K because g^{-1} is exact'; exact functors need no derived replacement",
    "via": [
     "def-weil-pbc-derived-inverse-image"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The functor induced by an exact functor is its own right and left derived functor",
@@ -24,34 +24,113 @@
   "def-weil-pbc-bounded-derived-subcategories",
   "lem-weil-pbc-exact-functor-bounded-below"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "leansearch",
-   "query": "exact functor induced functor on derived category is the right derived functor, isRightDerivedFunctor_of_inverts",
-   "results": "Functor.isRightDerivedFunctor_of_inverts, isRightDerivedFunctor_iff_of_inverts, isIso_of_isRightDerivedFunctor_of_inverts, instIsRightDerivedFunctorLiftInvFac (Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived); IsRightDerivedFunctor (…RightDerived)",
-   "date": "2026-10-09",
-   "verdict": "generalization for clause (1): isRightDerivedFunctor_of_inverts / isLeftDerivedFunctor_of_inverts with L = DerivedCategory.Q and e = mapDerivedCategoryFactors; nothing for D^+"
+   "text": "Put $T=Q_{\\mathcal B}\\circ C(F)$ and $\\eta=\\varphi^{-1}:T\\to F_D\\circ Q_{\\mathcal A}$. The functor $Q_{\\mathcal A}$ is a localization. For every $G:D(\\mathcal A)\\to D(\\mathcal B)$ and natural transformation $\\beta:T\\to G\\circ Q_{\\mathcal A}$, apply clause (2) of the localization universal property to $\\beta\\circ\\varphi:F_D\\circ Q_{\\mathcal A}\\to G\\circ Q_{\\mathcal A}$, with both comparison isomorphisms identities. Both functors invert quasi-isomorphisms because they factor through $Q_{\\mathcal A}$. It gives exactly one $\\gamma:F_D\\to G$ with $\\gamma_{Q_{\\mathcal A}K}=\\beta_K\\circ\\varphi_K$. Hence $\\gamma_{Q_{\\mathcal A}K}\\circ\\eta_K=\\beta_K$; conversely that equation forces the displayed value of $\\gamma$. This is precisely the left Kan extension property, so $(F_D,\\eta)$ is a right derived functor.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), proof completed from localization universal property; bounded below case uses Tag 05RW (lemma-bounded-derived)"
+   }
   },
   {
+   "text": "For every $G:D(\\mathcal A)\\to D(\\mathcal B)$ and natural transformation $\\beta:G\\circ Q_{\\mathcal A}\\to T$, descend $\\varphi^{-1}\\circ\\beta:G\\circ Q_{\\mathcal A}\\to F_D\\circ Q_{\\mathcal A}$ by clause (2) of the localization universal property. It gives exactly one $\\delta:G\\to F_D$ with $\\delta_{Q_{\\mathcal A}K}=\\varphi_K^{-1}\\circ\\beta_K$, equivalently $\\varphi_K\\circ\\delta_{Q_{\\mathcal A}K}=\\beta_K$. This is the right Kan extension property, so $(F_D,\\varphi)$ is a left derived functor. Neither argument requires injectives, projectives, or resolutions.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), proof completed from localization universal property; bounded below case uses Tag 05RW (lemma-bounded-derived)"
+   }
+  },
+  {
+   "text": "Let $(H_D,\\psi)$ be the induced factorization pair. The exact-functor boundedness lemma says $H_D$ preserves $D^{\\ge n}$ for every $n$. Descend $\\psi^{-1}\\circ\\varphi:F_D\\circ Q_{\\mathcal A}\\to H_D\\circ Q_{\\mathcal A}$ and its inverse by clause (2) of the localization universal property. Descent respects composition and identities, so the descended transformations are inverse. Since $D^+$ is closed under isomorphism, $F_D$ also carries $D^+(\\mathcal A)$ into $D^+(\\mathcal B)$ and restricts to $F^+$. If $K^r$ is zero for $r<n$, then $1_{F(K^r)}=F(1_{K^r})=F(0)=0$ by additivity; hence $F(K^r)$ is a zero object, and $C(F)$ restricts to $C^+(F)$. Write $c_{\\mathcal A}:i_{D,\\mathcal A}Q^+_{\\mathcal A}\\cong Q_{\\mathcal A}i_{C,\\mathcal A}$ and $c_{\\mathcal B}$ for the canonical comparisons of bounded below cochain localization. On a bounded below complex $K$, define the component of $\\varphi^+$, after inclusion in $D(\\mathcal B)$, as the composite $F_D(i_{D,\\mathcal A}Q^+_{\\mathcal A}K)\\xrightarrow{F_D(c_{\\mathcal A,K})}F_D(Q_{\\mathcal A}K)\\xrightarrow{\\varphi_K}Q_{\\mathcal B}(C(F)K)\\xrightarrow{c_{\\mathcal B,C^+(F)K}^{-1}}i_{D,\\mathcal B}Q^+_{\\mathcal B}(C^+(F)K)$. Every factor is natural and invertible. Fullness of $D^+(\\mathcal B)$ makes this and its inverse natural transformations inside that subcategory, giving $\\varphi^+:F^+\\circ Q^+_{\\mathcal A}\\xrightarrow{\\sim}Q^+_{\\mathcal B}\\circ C^+(F)$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "def-weil-pbc-bounded-derived-subcategories",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-bounded-below-cochain-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), proof completed from localization universal property; bounded below case uses Tag 05RW (lemma-bounded-derived)"
+   }
+  },
+  {
+   "text": "By bounded below cochain localization, $Q^+_{\\mathcal A}$ is a localization for any abelian $\\mathcal A$. Put $T^+=Q^+_{\\mathcal B}\\circ C^+(F)$. For $G:D^+(\\mathcal A)\\to D^+(\\mathcal B)$ and $\\beta:T^+\\to G\\circ Q^+_{\\mathcal A}$, clause (2) of the localization universal property gives a unique $\\gamma:F^+\\to G$ with $\\gamma_{Q^+_{\\mathcal A}K}=\\beta_K\\circ\\varphi^+_K$, which is equivalent to $\\gamma_{Q^+_{\\mathcal A}K}\\circ(\\varphi^+_K)^{-1}=\\beta_K$. For $\\beta:G\\circ Q^+_{\\mathcal A}\\to T^+$ it gives a unique $\\delta:G\\to F^+$ with $\\delta_{Q^+_{\\mathcal A}K}=(\\varphi^+_K)^{-1}\\circ\\beta_K$, equivalently $\\varphi^+_K\\circ\\delta_{Q^+_{\\mathcal A}K}=\\beta_K$. These are the two Kan universal properties on bounded below complexes, with no enough-injectives assumption.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-cochain-localization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), proof completed from localization universal property; bounded below case uses Tag 05RW (lemma-bounded-derived)"
+   }
+  },
+  {
+   "text": "For the right derived pair constructed above, the canonical map at $K$ is $\\eta_K=\\varphi_K^{-1}$, hence is invertible. If $(RF,\\alpha)$ is any other right derived pair, the two left Kan universal properties give unique transformations $s:F_D\\to RF$ and $t:RF\\to F_D$ satisfying $(s\\circ Q_{\\mathcal A})\\eta=\\alpha$ and $(t\\circ Q_{\\mathcal A})\\alpha=\\eta$. Their composites satisfy the same equations as the respective identities, so uniqueness forces $ts=1$ and $st=1$. Consequently $\\alpha_K=s_{Q_{\\mathcal A}K}\\circ\\eta_K$ is an isomorphism for every $K$. For a left derived pair $(LF,\\epsilon)$, the right Kan equations give transformations $s:LF\\to F_D$, $t:F_D\\to LF$ with $\\varphi(s\\circ Q_{\\mathcal A})=\\epsilon$ and $\\epsilon(t\\circ Q_{\\mathcal A})=\\varphi$. Then $\\varphi((st)\\circ Q_{\\mathcal A})=\\varphi$ and $\\epsilon((ts)\\circ Q_{\\mathcal A})=\\epsilon$; uniqueness forces $st=1_{F_D}$ and $ts=1_{LF}$, and $\\epsilon_K=\\varphi_K s_{Q_{\\mathcal A}K}$ is invertible. For a bounded right derived pair $(R^+F,\\alpha^+)$, Step 4 gives $s^+:F^+\\to R^+F$ and $t^+:R^+F\\to F^+$ with $(s^+\\circ Q^+_{\\mathcal A})(\\varphi^+)^{-1}=\\alpha^+$ and $(t^+\\circ Q^+_{\\mathcal A})\\alpha^+=(\\varphi^+)^{-1}$. Substitution into these equations shows $t^+s^+$ and $s^+t^+$ satisfy the equations for the identities, so uniqueness makes them identities and $\\alpha^+_K$ invertible. For a bounded left derived pair $(L^+F,\\epsilon^+)$, Step 4 gives $u^+:L^+F\\to F^+$ and $v^+:F^+\\to L^+F$ with $\\varphi^+(u^+\\circ Q^+_{\\mathcal A})=\\epsilon^+$ and $\\epsilon^+(v^+\\circ Q^+_{\\mathcal A})=\\varphi^+$. Thus $\\varphi^+((u^+v^+)\\circ Q^+_{\\mathcal A})=\\varphi^+$ and $\\epsilon^+((v^+u^+)\\circ Q^+_{\\mathcal A})=\\epsilon^+$; uniqueness makes both composites identities and $\\epsilon^+_K$ invertible. Every complex therefore computes both derived functors, with bounded below complexes used in the bounded claims.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), proof completed from localization universal property; bounded below case uses Tag 05RW (lemma-bounded-derived)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-bounded-below-cochain-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F details omitted, supplied explicitly by localization universal property; Tag 05RW for bounded below localization; the left Kan/right Kan duality is checked in Mathlib PointwiseRightDerived.lean:174 and PointwiseLeftDerived.lean:174."
+ },
+ "mathlib_searches": [
+  {
    "tool": "leanfinder",
-   "query": "a functor out of a localization that is isomorphic to the lift is its own right derived functor (left Kan extension along the localization)",
-   "results": "instIsRightDerivedFunctorLiftInvFac; isRightDerivedFunctor_of_inverts; IsRightDerivedFunctor; HasRightDerivedFunctor.mk'; instIsRightDerivedFunctorTotalRightDerived…",
-   "date": "2026-10-09",
-   "verdict": "generalization for clause (1) only"
+   "query": "An exact functor induces both its left and right derived functors on unbounded and bounded below derived categories",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit, CategoryTheory.LocalizerMorphism.hasPointwiseRightDerivedFunctorAt_iff_of_isRightDerivabilityStructure",
+   "date": "2026-10-14",
+   "verdict": "ingredients, not a one-line match for the whole item: general localization Kan results; bounded restriction and comparison are carried out in the proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isRightDerivedFunctor_of_inverts\"",
+   "results": "2 hits: CategoryTheory.Functor.isRightDerivedFunctor_of_inverts, CategoryTheory.Functor.isIso_of_isRightDerivedFunctor_of_inverts",
+   "date": "2026-10-14",
+   "verdict": "ingredients, not a one-line match for the whole item: general localization Kan results; bounded restriction and comparison are carried out in the proof"
   },
   {
    "tool": "grep",
-   "query": "rg -n 'IsRightDerivedFunctor|IsLeftDerivedFunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/; rg -n 'IsLocalization' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Plus.lean; sed -n 166,200p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean",
-   "results": "DerivedCategory/: only rightDerivedFunctorPlus (RightDerivedFunctorPlus.lean:52) and DerivabilityStructureInjectives.lean:376, nothing for mapDerivedCategory; Plus.lean:119,124 Plus.Qh is a localization of HomotopyCategory.Plus at quasi-isomorphisms; PointwiseRightDerived.lean:174 isRightDerivedFunctor_of_inverts, PointwiseLeftDerived.lean:174 isLeftDerivedFunctor_of_inverts",
-   "date": "2026-10-09",
-   "verdict": "no match: clause (1) specializes from isRightDerivedFunctor_of_inverts/isLeftDerivedFunctor_of_inverts, clause (2) needs the D^+ functor, absent from Mathlib"
+   "query": "isRightDerivedFunctor_of_inverts|isLeftDerivedFunctor_of_inverts",
+   "results": "10 hits: Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+   "date": "2026-10-14",
+   "verdict": "ingredients, not a one-line match for the whole item: general localization Kan results; bounded restriction and comparison are carried out in the proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor factoring through a localization with an isomorphism is both a left and a right Kan extension",
+   "results": "service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -74,5 +153,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-def-exchange"
+ "unit": "sk-def-exchange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-exact-functor-derived-functor",
+  "worker": "stage1",
+  "summary": "Explicit left and right Kan universal properties, bounded restriction without extra resolution hypotheses, and compatibility/uniqueness for arbitrary derived pairs. One new Mathlib leaf establishes bounded below cochain localization. Normalized doubled TeX escapes only; mathematical statement unchanged. Second reading: normalized proof TeX, expanded bounded comparison and Kan uniqueness equations, removed worker-authored tool-use authorization.",
+  "blueprint": "Realizes the ancestor's sentence that exact inverse image represents derived inverse image, both on all complexes and on bounded below complexes."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-fbe5819f2",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-fbe5819f2 (reviewer sub-agent of L); spot-checked: Read all mathematics and cited statements; verified all five steps, Stacks 015F/05RW, pinned Mathlib localization without enough injectives, edge cases, duplicates, and exchange/coefficient scope. Completed the sole new node’s missing metadata in fixes; statements and dependencies unchanged. Full checks are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
