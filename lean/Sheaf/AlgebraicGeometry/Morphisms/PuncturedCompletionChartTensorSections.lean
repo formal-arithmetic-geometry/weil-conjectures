@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartSectionModules
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartTensorSectionsAux
 
 @[expose] public section
 
@@ -42,6 +43,7 @@ theorem exists_chart_tensor_sections
     let N := ModuleCat.of C Γ(E, W)
     Nonempty (FormalGlueing.extend φ
       (FormalGlueing.piece f (chartSectionModule (q ≫ U.ι) f)) ≃ₗ[C] N) := by
-  sorry
+  obtain ⟨e, he⟩ := exists_chart_tensor_sections_bijective D f hf hV
+  exact ⟨LinearEquiv.ofBijective e he⟩
 
 end AlgebraicGeometry.Scheme.CompletionGluingData

@@ -1,0 +1,118 @@
+{
+ "id": "new-sbc-punctured-completion-chart-tensor-sections-aux",
+ "kind": "statement",
+ "title": "Affine chart tensor comparison via a bijective structural-linear map",
+ "statement": "Under the hypotheses of new-sbc-punctured-completion-chart-tensor-sections, there exists a C-linear map e from FormalGlueing.extend φ (FormalGlueing.piece f (chartSectionModule (q ≫ U.ι) f)) to the structural section module N on s⁻¹D(φ(f)) that is bijective.",
+ "stmt_deps": [
+  "def-sbc-punctured-completion-chart-section-modules",
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-pbc-adic-completion",
+  "def-sbc-punctured-completion-matching-sections"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01JO, 0BLH and 05EL."
+ },
+ "proof": [
+  {
+   "text": "Restrict the overlap isomorphism to the pullback of the affine principal chart and apply the affine fibre-product tensor formula; transport the resulting C-linear map to the completed principal open. The transported map is bijective because the overlap restriction and affine tensor comparison are bijections.",
+   "uses": [
+    "def-sbc-punctured-completion-chart-section-modules",
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-pbc-adic-completion",
+    "def-sbc-punctured-completion-matching-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-punctured-completion-chart-section-modules",
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-pbc-adic-completion",
+  "def-sbc-punctured-completion-matching-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 01JO, 0BLH and 05EL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "affine fibre product sections tensor product",
+   "results": "No duplicate concrete theorem found.",
+   "date": "2026-10-14",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct linear equivalence affine sections",
+   "results": "No duplicate concrete theorem found.",
+   "date": "2026-10-14",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackSpecIso tensor sections",
+   "results": "Constituent APIs only.",
+   "date": "2026-10-14",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine fibre product sections tensor product linear equivalence",
+   "results": "service unavailable; no result obtained.",
+   "date": "2026-10-14",
+   "verdict": "No duplicate concrete theorem established."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "Q1",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartTensorSections",
+  "date": "2026-10-14",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-sbc-punctured-completion-chart-tensor-sections",
+   "place": "Affine chart tensor sections transported through overlap",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartTensorSectionsAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedCompletionChartTensorSectionsAux.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.exists_chart_tensor_sections_bijective",
+  "statement": "theorem exists_chart_tensor_sections_bijective {A : Type u} [CommRing A] [IsLocalRing A] {U : (Spec (.of A)).Opens} {Y : Scheme.{u}} {q : Y ⟶ U.toScheme} {E : Scheme.{u}} [IsAffine E] {s : E ⟶ Spec (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))} (D : CompletionGluingData A U q E s) (f : A) (hf : PrimeSpectrum.basicOpen f ≤ U) (hV : IsAffineOpen ((q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen f)) : let C := AdicCompletion (IsLocalRing.maximalIdeal A) A let φ := algebraMap A C let W := s ⁻¹ᵁ PrimeSpectrum.basicOpen (φ f) letI : Module C Γ(E, W) := Module.compHom _ ((ΓSpecIso (.of C)).inv ≫ s.appTop ≫ E.presheaf.map (homOfLE (le_top : W ≤ ⊤)).op).hom let N := ModuleCat.of C Γ(E, W) ∃ e : FormalGlueing.extend φ (FormalGlueing.piece f (chartSectionModule (q ≫ U.ι) f)) →ₗ[C] N, Function.Bijective e",
+  "by": "Q1",
+  "date": "2026-10-14",
+  "branch": "sheaf-dag"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261014T010850-L-3166741",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261014T010850-L-3166741",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
