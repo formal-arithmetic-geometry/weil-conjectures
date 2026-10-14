@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCover
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalkPointwise
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GermComp
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GermComp
 
 /-!
 # Descent of invariant sections along universal covers

@@ -6,8 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Sites.SheafHom
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Coherence
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
 
 /-!
 # Gluing morphisms of pro-étale sheaves along a pro-étale cover
