@@ -3,24 +3,79 @@
  "blueprint": {
   "is": "def-nagata-relative-proj",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Relative Proj",
- "statement": "Let $X$ be a scheme and\n$\\mathcal A=\\bigoplus_{n\\geq0}\\mathcal A_n$ a quasi-coherent graded\n$\\mathcal O_X$-algebra. On every affine open $V\\subseteq X$, form\n\n$$\n\\operatorname{Proj}(\\Gamma(V,\\mathcal A)).\n$$\n\nQuasi-coherence identifies the graded algebra on a basic affine restriction\nwith coefficientwise localization. The intended relative Proj is the scheme\nobtained by gluing these affine Proj schemes along the induced standard-chart\nequivalences, with structural map to $X$ glued from the degree-zero maps.\nThe construction includes the chosen affine cover, all overlap\nisomorphisms, their cocycle equalities, and the resulting universal\nrestriction isomorphisms.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $\\mathcal A=\\bigoplus_{n\\geq0}\\mathcal A_n$ be a commutative unital graded $\\mathcal O_X$-algebra sheaf [def-weil-pbc-graded-sheaf-structures], quasi-coherent as an algebra sheaf [def-weil-pbc-quasi-coherent-algebra]. For every affine open $V\\subseteq X$, put $R_V=\\Gamma(V,\\mathcal O_X)$, $C_V=\\Gamma(V,\\mathcal A)$ with its induced grading, and $P_V=\\operatorname{Proj}(C_V)$ [def-nagata-affine-proj]. Its map $p_V:P_V\\to V$ is the composite of the degree-zero structural map $P_V\\to\\operatorname{Spec}(C_{V,0})$ and the spectrum map induced by the unit $R_V\\to C_{V,0}$ [def-weil-affine-spectrum]. No equality $\\mathcal A_0=\\mathcal O_X$ is required.\n\nThe relative Proj construction consists of the following specified data. Choose an affine open cover $(V_i)_{i\\in I}$ of $X$ (one may take all affine opens). Use the local models $P_{V_i}$ and their inverse-image open subschemes $p_{V_i}^{-1}(V_i\\cap V_j)$. The overlap isomorphisms are the maps induced by restriction of $\\mathcal A$, described on affine refinements by coefficientwise localization and on standard Proj charts by the corresponding degree-zero homogeneous localization maps. Include their identity, inverse, and triple-overlap cocycle equalities in the gluing datum. Glue these schemes over $X$ using the relative scheme-gluing construction [lem-weil-pbc-relative-glueing-affine-opens]; denote the resulting scheme and structural map by $\\operatorname{Proj}_X(\\mathcal A)\\xrightarrow{\\pi}X$.\n\nThe construction also records, for every affine open $V\\subseteq X$, the restriction isomorphism $i_V:\\pi^{-1}(V)\\xrightarrow{\\sim}P_V$ over $V$. For affine opens $W\\subseteq V$, the composite $P_W\\xrightarrow{i_W^{-1}}\\pi^{-1}(W)\\hookrightarrow\\pi^{-1}(V)\\xrightarrow{i_V}P_V$ is the map induced by $C_V\\to C_W$ on the same localized charts. These equalities are part of the specified compatibility data. Existence of this datum, and independence of the cover up to unique isomorphism respecting the chart identifications, are the separate statement of lemma-nagata-relative-proj-exists; they are not additional defining hypotheses on $X$ or $\\mathcal A$. Here the $P_V$ are Proj schemes over affine bases, not necessarily affine schemes. No intersection $V_i\\cap V_j$ is assumed affine. All such overlaps are handled by affine refinements.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/def-nagata-relative-proj.md",
   "place": "node def-nagata-relative-proj, order 12"
  },
  "stmt_deps": [
-  "def-nagata-affine-proj"
+  "def-pc-scheme",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-nagata-affine-proj",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-relative-glueing-affine-opens"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative Proj scheme of a quasi-coherent graded algebra sheaf on a scheme obtained by gluing affine Proj schemes",
+   "results": "AlgebraicGeometry.Proj; AlgebraicGeometry.Proj.fromOfGlobalSections; AlgebraicGeometry.Proj.toSpecZero; ProjectiveSpectrum; AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec; AlgebraicGeometry.Proj.toSheafedSpace; AlgebraicGeometry.Proj.awayι; AlgebraicGeometry.Proj.basicOpenToSpec. These are Proj for a single graded ring and associated affine-chart morphisms, not relative Proj for a graded algebra sheaf.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\"",
+   "results": "Lean.Meta.DSimp.Config.proj; Lean.Meta.Simp.Config.proj; Lean.Parser.Sym.DSimp.proj; Std.Sat.AIG.denote_projected_entry; Std.Sat.AIG.denote_projected_entry'; Lean.Expr.isProj; Lean.Expr.projExpr!; Lean.Expr.projIdx!. First broad query returned parser projections; qualified query returned ring-level Proj and its basic-open API.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?proj|RelativeProj|RelativeGluingData",
+   "results": "Mathlib/AlgebraicGeometry/RelativeGluing.lean; Mathlib/AlgebraicGeometry/RelativeGluing.lean; Mathlib/AlgebraicGeometry/RelativeGluing.lean; Mathlib/AlgebraicGeometry/RelativeGluing.lean; Mathlib/AlgebraicGeometry/RelativeGluing.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean. RelativeGluingData provides generic scheme gluing; Proj and toSpecZero provide ring-level models. Neither constructs relative Proj from an arbitrary quasi-coherent graded sheaf.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Proj of a quasi-coherent sheaf of graded algebras on a scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct the projective spectrum of a sheaf of graded algebras by relative gluing over an affine open cover",
+   "results": "AlgebraicGeometry.Proj; AlgebraicGeometry.Proj.fromOfGlobalSections; AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop; AlgebraicGeometry.Proj.toSpecZero; AlgebraicGeometry.Proj.toSheafedSpace; AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop; AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec; ProjectiveSpectrum. These are Proj for a single graded ring and associated affine-chart morphisms, not relative Proj for a graded algebra sheaf.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj",
+   "results": "AlgebraicGeometry.Proj; AlgebraicGeometry.Proj.affineOpenCover; AlgebraicGeometry.Proj.basicOpen; AlgebraicGeometry.Proj.isAffineOpen_basicOpen; AlgebraicGeometry.Proj.basicOpenToSpec; AlgebraicGeometry.Proj.basicOpen_pow; AlgebraicGeometry.Proj.awayι; AlgebraicGeometry.Proj.isBasis_basicOpen. First broad query returned parser projections; qualified query returned ring-level Proj and its basic-open API.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "def.*Proj|def.*toSpecZero|structure.*Glu",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean. RelativeGluingData provides generic scheme gluing; Proj and toSpecZero provide ring-level models. Neither constructs relative Proj from an arbitrary quasi-coherent graded sheaf.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -53,5 +108,20 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-def-nagata-sketch-data"
+ "unit": "sk-def-nagata-sketch-data",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-nagata-relative-proj",
+  "worker": "stage1",
+  "summary": "Definition-only split: reuse existing scheme, graded-sheaf-algebra, quasi-coherent-algebra, affine Proj, spectrum and relative-gluing nodes. Make cover, maps to the affine base (including the unit into degree zero), overlap and restriction data explicit. Keep existence and cover independence in the existing lemma rather than introduce a cyclic dependency or duplicate it. No new nodes and no Lean work.",
+  "blueprint": "The input graded algebra and affine Proj formula, the coefficientwise-localization overlap sentence, and the final sentence requiring cover, overlap isomorphisms, cocycles and universal restriction isomorphisms are realized by the expanded construction specification."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-3019570ab",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-3019570ab (reviewer sub-agent of L); spot-checked: Read the complete definition, all six cited statements, master blueprint and Stacks 01NN/01NO/01NP/01NQ/01LH. Structural-map direction, unrestricted degree zero, affine refinements, gluing data and restriction equations agree. Edge cases and DAG duplicate/cycle checks passed; no new nodes or repairs. review.md records concrete checks. Separate existence and target comparison proofs are not certified."
+ }
 }
