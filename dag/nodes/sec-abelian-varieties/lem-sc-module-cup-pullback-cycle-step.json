@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-module-cup-pullback-cycle-step",
+ "kind": "statement",
+ "title": "Cycle-level pullback compatibility for module cup products",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-cech-cup-pullback-compat",
+   "place": "proof step 3: lift the two input classes to kernel cocycles and compare their paired resolution classes",
+   "via": []
+  },
+  "same_as": []
+ },
+ "statement": "In the setting of module cohomology on schemes, for a morphism f:X'\\to X, quasi-coherent modules F and G, module cup products cup and cup\\prime on X and on the tensor-pullbacks, and a cup-paired acyclic resolution D of F and G, the pullback of cup applied to the classes represented by any two cycles of D equals cup\\prime applied to the pulled-back classes, after the canonical tensor-pullback comparison on the target.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0FKV, cohomology-lemma-diagrams-commute, resolution-level cycle comparison"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-sc-module-cohomology-cup-product",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Take computing pairings P,E and additive cochain maps l,r,t with their three class equations and strict pairing equation. The class map of any computing resolution is surjective: cycles project epimorphically onto homology, the computing comparison is an isomorphism, and the injective comparison is an isomorphism. Lift the two given input classes to cycles a0,b0 in P.",
+   "uses": [
+    "lem-sc-module-cup-pullback-resolution-maps",
+    "def-sc-module-cup-resolution-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Leibniz and the two cycle equations imply that P.pair(a0,b0) is a cycle c0. Transport a0,b0,c0 along l,r,t. The cochain commutation equations preserve the kernel condition; the strict pairing equation says that the transported c0 is the pairing of the transported inputs.",
+   "uses": [
+    "def-sc-module-cup-resolution-data",
+    "lem-sc-module-cup-pullback-resolution-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the source IsModuleCupProduct characterization to P and c0, replacing the lifted input classes by the given classes. The target class equation identifies the pullback of this product with the class of transported c0. Apply the target IsModuleCupProduct characterization to E and the transported cycles, then substitute the two input class equations. This gives the asserted equality for the original resolution D.",
+   "uses": [
+    "def-sc-module-cohomology-cup-product",
+    "lem-sc-module-cup-pullback-resolution-maps"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cohomology-cup-product",
+  "def-sc-module-cup-resolution-data",
+  "lem-sc-module-cup-pullback-resolution-maps"
+ ],
+ "proof_origin": {
+  "by": "K4 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/0FKV",
+  "place": "Resolution-cycle comparison, using functorial computing pairings and the cohomology f-map comparison of Tag 01FD",
+  "date": "2026-10-14"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Acyclic resolution cup products commute with pullback of cohomology classes",
+   "results": "8 group-cohomology cycle-map hits; none is the sheaf pullback cup theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CupResolutionPairing",
+   "results": "0 hits; unknown identifier in Mathlib search.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCup.*pullback|cupResolutionClass.*surjective",
+   "results": "0 Mathlib hits. Local Sheaf search found the already stated and proved moduleCup_pullback_resolution_maps; the existing private class-surjectivity proof uses ModuleCat.epi_iff_surjective.",
+   "date": "2026-10-14",
+   "verdict": "use existing project resolution maps and Mathlib epimorphism API"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Acyclic resolutions compute cup products and pullback on sheaf cohomology",
+   "results": "Service unavailable: Internal Server Error. Other search kinds and direct source search used.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupPullbackCycleStep",
+  "date": "2026-10-14",
+  "group": "K4"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupPullbackCycleStep",
+  "file": "lean/Sheaf/Paper/ModuleCupPullbackCycleStep.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_pullback_cycle_step",
+  "statement": "theorem moduleCup_pullback_cycle_step (X X' : Scheme.{v}) (f : X' ⟶ X) (F G : X.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] (p q : ℕ) (cup : (RingedSpace.moduleCohomology X.toRingedSpace p).obj F →ₗ[Γ(X, ⊤)] (RingedSpace.moduleCohomology X.toRingedSpace q).obj G →ₗ[Γ(X, ⊤)] (RingedSpace.moduleCohomology X.toRingedSpace (p + q)).obj (@id X.Modules (F ⊗ G))) (hc : IsModuleCupProduct F G p q cup) (cup' : (RingedSpace.moduleCohomology X'.toRingedSpace p).obj ((tensorPullback f).obj F) →ₗ[Γ(X', ⊤)] (RingedSpace.moduleCohomology X'.toRingedSpace q).obj ((tensorPullback f).obj G) →ₗ[Γ(X', ⊤)] (RingedSpace.moduleCohomology X'.toRingedSpace (p + q)).obj (@id X'.Modules ((tensorPullback f).obj F ⊗ (tensorPullback f).obj G))) (hc' : IsModuleCupProduct ((tensorPullback f).obj F) ((tensorPullback f).obj G) p q cup') (D : CupResolutionPairing F G) (a : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex (ComplexShape.up ℕ)).obj D.left.K).sc p).moduleCatLeftHomologyData.K) (b : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex (ComplexShape.up ℕ)).obj D.right.K).sc q).moduleCatLeftHomologyData.K) : (RingedSpace.moduleCohomology X'.toRingedSpace (p + q)).map ((Classical.choose (module_pullback_tensor f)) F G).hom (moduleCohomologyPullback f (@id X.Modules (F ⊗ G)) (p + q) (cup (D.left.class p a) (D.right.class q b))) = cup' (moduleCohomologyPullback f F p (D.left.class p a)) (moduleCohomologyPullback f G q (D.right.class q b))",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261014T122102-L-2664772",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261014T122102-L-2664772",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
