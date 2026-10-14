@@ -14820,3 +14820,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:38 L: returned deliver/XReedb48d351b955d4/Sheaf.RingTheory.ColimitFlatRelationDescent (reviewer RETURN: (reviewer X-607e2, head 607e2c8ae) A3 — Forbidden signature changes in forced adaptations: FiniteIdealKernelDescent.lean)
 
 - 18:44 L: batch 20261014T104039 dependency take-out
+- 10:44 L: returned deliver/S1/Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit (reviewer RETURN: (reviewer X-2de7c, head 2de7c21b1) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.No)
