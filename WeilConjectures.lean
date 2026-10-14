@@ -898,6 +898,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.TensorQuot
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructibleTorsion
 public import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
+public import WeilConjectures.CategoryTheory.DerivedCategory.CyclicDevissage
 public import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
 public import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimension
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
@@ -2009,6 +2010,7 @@ public import WeilConjectures.Mathlib.RingTheory.LaurentSeries
 public import WeilConjectures.Mathlib.RingTheory.LocalProperties.ProjectiveDimension
 public import WeilConjectures.Mathlib.RingTheory.LocalProperties.Reduced
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.Basic
+public import WeilConjectures.Mathlib.RingTheory.LocalRing.Quotient
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Idempotent
