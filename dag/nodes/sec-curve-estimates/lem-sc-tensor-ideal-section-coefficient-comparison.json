@@ -1,0 +1,182 @@
+{
+ "id": "lem-sc-tensor-ideal-section-coefficient-comparison",
+ "kind": "statement",
+ "title": "Coefficient coordinates for raw homogeneous ideal multiplication",
+ "statement": "Let j:Z→X be a closed immersion, L an invertible module, J=ker j with J²=0, n,e≥0, D=canonicalTensorBoundaryComparisons(j,L,J²=0,n), and f:O_Z→(j*L)^n [lem-sc-square-zero-ideal-tensor-unit]. Put F=j*(J tensor L^n), N=(j*L)^n, d=n(e+1), a=n(0+1), t=n((e+1)+1), and h:d+a=t. For s=tensorPowSection(f,1) ≫ (D.a 0).inv, the explicit raw multiplication m=tensorIdealSectionMultiply(j,L,a,d,t,h,s) [lem-sc-tensor-homogeneous-kernel-action] equals boundaryCoefficientDegreeIso_e.hom ≫ mulTensorPowSection(f,F,e,1) ≫ boundaryCoefficientDegreeIso_(e+1).inv as maps j*(J tensor L^d)→j*(J tensor L^t). This is an equality on Z before pushforward or passage to kernels, independent of any graded presentation or action.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, tensor powers in coherent-equation-ses and its graded direct sum; Modules Tag 01CD, pullback of tensor products. This spells out the coefficient comparison part of lem-sc-tensor-coefficient-action-on-summand."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-invertible-module",
+  "lem-sc-square-zero-ideal-tensor-unit",
+  "lem-sc-tensor-homogeneous-kernel-action",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Use hD to replace D by canonicalTensorBoundaryComparisons. Expand boundarySectionDegreeIso as boundaryPullbackPowIso followed by tensorPowMulIso. Expand boundaryCoefficientDegreeIso into its pullback of the tensor-power regrouping and associator, its pullback tensorator, and its tensor-power pullback comparison. Expand tensorIdealSectionMultiply as its explicit composite. Only module tensor maps occur.",
+   "uses": [
+    "lem-sc-square-zero-ideal-tensor-unit",
+    "lem-sc-tensor-homogeneous-kernel-action"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of the pullback tensorator moves the section through the tensor comparison. The degree-one tensorPowSection f 1 includes the inverse right unitor, which cancels the degree-one tensor-power regrouping. On the coefficient side, keep the ideal factor fixed, group the first n copies with it, group the remaining factors into e blocks of n, and append one further block through f. These are the same ordered factors as raw ideal multiplication. The regrouping identity follows by induction on tensor-power exponents: addition associativity is induction on the first exponent, with the pentagon in the successor case; multiplication regrouping respects addition by induction on the number of blocks using that identity. The analogous pullback regrouping is induction on the exponent using tensorator naturality and associativity. The zero cases are the unit comparisons and triangle identity. This proves the displayed equality of composites, with no invertibility assumption on the ideal.",
+   "uses": [
+    "lem-sc-square-zero-ideal-tensor-unit",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The output-degree equality h is the arithmetic identity n(e+1)+n=n(e+2). All transports of that equality agree by proof irrelevance. Thus the comparison holds also at n=0 and e=0. The proof uses no graded algebra presentation, quotient action or cohomology.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-square-zero-ideal-tensor-unit",
+  "lem-sc-tensor-homogeneous-kernel-action"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, tensor powers in coherent-equation-ses and its graded direct sum; Modules Tag 01CD, pullback of tensor products. This spells out the coefficient comparison part of lem-sc-tensor-coefficient-action-on-summand. The explicit categorical calculation spells out the original parent node's local proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "squareZero.*action|quotient.*action|action.*quotient",
+   "date": "2026-10-14",
+   "results": "25 hits: Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/ModularForms/NormTrace.lean, Mathlib/NumberTheory/ModularForms/NormTrace.lean, Mathlib/Topology/Algebra/SeparationQuotient/Basic.lean, Mathlib/Topology/Algebra/SeparationQuotient/Basic.lean, Mathlib/Topology/Algebra/SeparationQuotient/Basic.lean, Mathlib/Topology/Algebra/SeparationQuotient/Basic.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean; no exact sheaf-level multiplication comparison.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by a homogeneous quotient section on a square zero ideal sheaf agrees with tensor multiplication on each graded summand",
+   "date": "2026-10-14",
+   "results": "8 hits: TensorProduct.algebraMap_gradedMul, AlgebraicGeometry.Proj.mul_apply, GradedTensorProduct.mul_def, TensorProduct.gradedMul_algebraMap, GradedTensorProduct.mulHom_apply, GradedTensorProduct.tmul_coe_mul_zero_coe_tmul, GradedTensorProduct.tmul_zero_coe_mul_coe_tmul, GradedTensorProduct.tmul_coe_mul_coe_tmul; no exact sheaf-level multiplication comparison.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.cancel_mono",
+   "date": "2026-10-14",
+   "results": "3 hits: CategoryTheory.cancel_mono, CategoryTheory.Limits.PullbackCone.isLimitOfFactors, imageToKernel_comp_mono; no exact sheaf-level multiplication comparison.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Monoidal pullback of sheaves of modules preserves multiplication by a section under the tensor product comparison",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPowMulIso|boundaryCoefficientDegreeIso|tensorIdealSectionMultiply",
+   "date": "2026-10-14",
+   "results": "0 hits: ; no exact sheaf-level multiplication comparison.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal.map_associator",
+   "date": "2026-10-14",
+   "results": "1 hits: CategoryTheory.Functor.Monoidal.map_associator; no exact sheaf-level multiplication comparison.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal functor preserves regrouping of tensor powers and multiplication by a section of an invertible sheaf with an arbitrary module coefficient",
+   "date": "2026-10-14",
+   "results": "8 hits: PresheafOfModules.monoidalCategoryStruct, PresheafOfModules.monoidalCategory, LightCondensed.instMonoidalLightCondSetLightCondModFree, PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.Monoidal.tensorObj_map_tmul, PresheafOfModules.Monoidal.tensorObjMap, PresheafOfModules.Monoidal.tensorObj_obj, CategoryTheory.sheafToPresheaf_μ; no exact sheaf-level multiplication comparison.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a graded square zero ideal sheaf multiplication by a homogeneous quotient section on each ideal summand equals tensor multiplication",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TensorCoefficientActionOnSummand",
+  "date": "2026-10-14",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS, tensor powers in coherent-equation-ses and its graded direct sum; Modules Tag 01CD, pullback of tensor products. This spells out the coefficient comparison part of lem-sc-tensor-coefficient-action-on-summand.",
+   "via": [
+    "lem-sc-tensor-coefficient-action-on-summand",
+    "lem-sc-square-zero-tensor-graded-coefficient-sheaf-action",
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorIdealSectionCoefficientComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorIdealSectionCoefficientComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorIdealSectionMultiply_coefficient_comparison",
+  "statement": "theorem tensorIdealSectionMultiply_coefficient_comparison {X Z : Scheme.{u}}\n    (j : Z ⟶ X) [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible]\n    (hI : j.ker ^ 2 = ⊥) (n : ℕ) (D : TensorBoundaryComparisonData j L n)\n    (hD : canonicalTensorBoundaryComparisons j L hI n = D) (e : ℕ)\n    (f : 𝟙_ Z.Modules ⟶ ((tensorPullback j).obj L).tensorPow n)\n    (h : n * (e + 1) + n * (0 + 1) = n * ((e + 1) + 1)) :\n    tensorIdealSectionMultiply j L (n * (0 + 1)) (n * (e + 1))\n        (n * ((e + 1) + 1)) h (tensorPowSection f 1 ≫ (D.a 0).inv) =\n      (boundaryCoefficientDegreeIso j L n e).hom ≫\n        mulTensorPowSection f ((tensorPullback j).obj\n          (j.ker.toModules ⊗ L.tensorPow n)) e 1 ≫\n        (boundaryCoefficientDegreeIso j L n (e + 1)).inv",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261014T034910-L-814814",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261014T034910-L-814814",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

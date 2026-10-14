@@ -6,6 +6,7 @@ Authors: SHEAF group M3
 module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedProductProjection
+import Sheaf.AlgebraicGeometry.TensorIdealSectionCoefficientComparison
 
 /-! # Action on one ideal summand equals tensor multiplication
 
@@ -76,7 +77,21 @@ theorem tensorGradedCoefficient_action_on_summand {X Z : Scheme.{u}} (j : Z ⟶ 
       (asIso ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app
         (j.ker.toModules ⊗ L.tensorPow (n * ((e + 1) + 1))))).symm ≪≫
       boundaryIdealKernelIso j (L.tensorPow (n * ((e + 1) + 1)))).hom ≫
-        T.k (n * ((e + 1) + 1)) := by sorry
+        T.k (n * ((e + 1) + 1)) := by
+  have := square_zero_ideal_tensor_unit_isIso j L hI (n * (e + 1))
+  have := square_zero_ideal_tensor_unit_isIso j L hI (n * ((e + 1) + 1))
+  have _ := hrestrict
+  have hdeg : n * (e + 1) + n * (0 + 1) = n * ((e + 1) + 1) := by
+    simp only [Nat.mul_add, Nat.mul_one, Nat.zero_add]
+  have hm := tensorHomogeneousKernel_action j L hI T
+    (n * (0 + 1)) (n * (e + 1)) (n * ((e + 1) + 1)) hdeg
+    (tensorPowSection f 1 ≫ (D.a 0).inv) σ μ hlocal hglobal
+  have hc := tensorIdealSectionMultiply_coefficient_comparison j L hI n D hD e f hdeg
+  set_option backward.isDefEq.respectTransparency false in
+    set_option backward.isDefEq.respectTransparency.types false in
+      simpa only [tensorGradedSection, tensorHomogeneousKernelMap, hc, Functor.map_comp,
+        Iso.trans_inv, Iso.trans_hom, Iso.symm_inv, Iso.symm_hom, Functor.mapIso_inv,
+        Functor.mapIso_hom, asIso_inv, asIso_hom, Category.assoc] using hm
 
 end
 end AlgebraicGeometry.Scheme.Modules
