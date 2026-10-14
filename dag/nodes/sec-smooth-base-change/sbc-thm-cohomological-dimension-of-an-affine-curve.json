@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sbc-thm-cohomological-dimension-of-an-affine-curve",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Affine-curve cohomological dimension",
- "statement": "Let $k$ be algebraically closed, let $C$ be a\nsmooth affine curve over\n$k$, and let $d\\geq1$ be prime to $\\operatorname{char}k$. Then\n\n$$\nH^q(C_{\\Et},\\mathbf Z/d\\mathbf Z)=0\\qquad(q>1)\n$$\n\nwith $H^0(C_{\\Et},\\mathbf Z/d\\mathbf Z)=\\mathbf Z/d\\mathbf Z$.\n(*the Jacobian chapter, [thm-sc-affine-cohomology]; Stacks Project,\nTheorem 59.83.10, [Tag `03SC`](https://stacks.math.columbia.edu/tag/03SC), (2).*)",
+ "statement": "Let $k$ be an algebraically closed field, let $C$ be a smooth affine curve over $k$ [def-sc-curves] (separated and of finite type over $k$, of dimension at most one, possibly empty or disconnected), and let $d\\geq1$ be prime to $\\operatorname{char}k$. Let $\\underline{\\mathbf Z/d\\mathbf Z}$ be the constant etale sheaf [def-sc-constant-sheaves], and use etale cohomology [def-weil-pbc-etale-cohomology]. Then\n$$H^q(C_{\\Et},\\underline{\\mathbf Z/d\\mathbf Z})=0\\qquad(q>1).$$\nIf $C$ is nonempty and connected [def-weil-connected-scheme], then also\n$$H^0(C_{\\Et},\\underline{\\mathbf Z/d\\mathbf Z})\\cong\\mathbf Z/d\\mathbf Z.$$\nThe latter identification is induced by constant sections. Connectedness is needed only for the degree-zero assertion.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-vanishing/sbc-thm-cohomological-dimension-of-an-affine-curve.md",
   "place": "node sbc-thm-cohomological-dimension-of-an-affine-curve, order 1411",
@@ -19,31 +19,165 @@
   ]
  },
  "stmt_deps": [
-  "thm-sc-affine-cohomology",
-  "def-weil-pbc-scheme-conventions"
+  "def-sc-curves",
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-connected-scheme"
  ],
  "proof": [
   {
-   "text": "The cohomology groups of [def-weil-pbc-etale-cohomology] of the\nconstant sheaf $\\mathbf Z/d\\mathbf Z$ are computed in\n[thm-sc-affine-cohomology] of the Jacobian chapter (with\n$n=d$), where the vanishing for $q>1$ is displayed under the\nidentifications of the Kummer sequence; this is the claim.",
+   "text": "Put $F=\\underline{\\mathbf Z/d\\mathbf Z}$. By [def-sc-constant-sheaves] this is the constant sheaf with the same value as the $\\mathbf F_d$ appearing in the curve calculation. A section of the sheafification is locally represented by sections of the constant presheaf. Each representative lies in $\\mathbf Z/d\\mathbf Z$ and is killed by $d$. Therefore the restriction of any section to such a representing cover is killed by $d>0$. Thus $F$ is torsion in the precise sense of [def-weil-pbc-etale-sheaves]. By [def-sc-curves], $C$ is separated, finite type and has dimension at most one; no connectedness is inferred.",
    "uses": [
-    "def-weil-pbc-etale-cohomology",
+    "def-sc-constant-sheaves",
+    "def-weil-pbc-etale-sheaves",
+    "def-sc-curves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-vanishing/sbc-thm-cohomological-dimension-of-an-affine-curve.md",
+    "place": "Proof, coefficient identification and hypotheses of the cited curve calculation"
+   }
+  },
+  {
+   "text": "First suppose $C$ is a connected curve in the dimension-one sense of [def-sc-curves]. Apply [thm-sc-affine-cohomology] with $n=d$: the field is algebraically closed, the curve is smooth, affine, nonempty and connected of dimension one, and $d$ is positive and prime to the characteristic. Its displayed $H^q(C_{\\Et},\\mathbf F_d)=0$ for $q>1$ gives the required higher-degree vanishing, and its displayed degree-zero isomorphism gives the degree-zero assertion in this case. No Kummer-sequence calculation or Picard assertion is needed beyond the statement of that existing theorem.",
+   "uses": [
+    "def-sc-curves",
     "thm-sc-affine-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-vanishing/sbc-thm-cohomological-dimension-of-an-affine-curve.md",
+    "place": "Proof, specialization of thm-sc-affine-cohomology to n=d"
+   }
+  },
+  {
+   "text": "The imported proof cannot apply the connected dimension-one theorem to an arbitrary curve. To retain all cases of the vanishing assertion, use the general affine bound [thm-sc-affine-torsion-cd]. For nonempty $C$, the algebraically closed field $k$ is separably closed, so [lem-sf-separably-closed-torsion-cd] gives $\\operatorname{cd}_{\\rm tor}(k)\\leq0$. Apply the affine bound with $K=k$ and $c=0$, obtaining $\\operatorname{cd}_{\\rm tor}(C)\\leq\\dim C\\leq1$. By [def-sc-etale-torsion-cd], this means that $H^q(C,F)=0$ for every $q>1$, since $F$ is torsion by Step 1. This covers disconnected curves and zero-dimensional components without adding any geometric hypothesis. The connected dimension-one case remains the blueprint calculation in Step 2.",
+   "uses": [
+    "thm-sc-affine-torsion-cd",
+    "lem-sf-separably-closed-torsion-cd",
+    "def-sc-etale-torsion-cd"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0V, proposition-cd-affine; Tag 03SC, theorem-vanishing-affine-curves (2)"
+   }
+  },
+  {
+   "text": "If $C$ is empty, every etale $C$-scheme is empty and the empty covering family is jointly surjective in [def-weil-pbc-etale-site]. The sheaf condition on this family forces the section group of every abelian sheaf at every object to be the zero group. Thus the global sections of each term of any resolution are zero; the complex defining [def-weil-pbc-etale-cohomology] is zero and all its cohomology groups are zero. This completes the remaining case of higher-degree vanishing. The corrected degree-zero assertion does not apply to the empty curve.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03SC, theorem-vanishing-affine-curves (2), empty case from the empty-cover sheaf condition"
+   }
+  },
+  {
+   "text": "For the degree-zero identification on any nonempty connected $C$, compute cohomology by an ordinary injective resolution concentrated in nonnegative degrees. The sheaf category is Grothendieck abelian by [lem-weil-pbc-abelian-etale-sheaves-grothendieck], hence has enough injectives by [lem-sp-grothendieck-enough-injectives]. Part (1) of [lem-weil-pbc-left-exact-injective-resolution-degree-zero] supplies such a resolution $F\\to I^\\bullet$. It is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective], so it computes the cohomology of [def-weil-pbc-etale-cohomology]. The functor $\\Gamma(C,-)$ is evaluation at the terminal object by [def-weil-pbc-global-sections-functor]; it is additive because addition of sheaf morphisms is sectionwise. For a morphism of abelian sheaves $a:G\\to H$, the presheaf $U\\mapsto\\ker(a_U)$ is a sheaf: compatible sections glue uniquely in $G$, and their glued image is zero by uniqueness of gluing in $H$. Hence the kernel sheaf is computed sectionwise, and evaluation preserves kernels and is left exact. Part (2) of the degree-zero resolution lemma therefore gives the canonical isomorphism $H^0(C,F)\\cong\\Gamma(C,F)$. Concretely, this is the identification $\\ker(\\Gamma(I^0)\\to\\Gamma(I^1))=\\Gamma(F)$, with no negative-degree boundaries.",
+   "uses": [
+    "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-global-sections-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K and 05TD, lemma-injective-resolutions-exist (1), lemma-left-exact-higher-derived (3)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-constant-sheaf-sections-connected] to the nonempty connected scheme $C$ and the abelian group $E=\\mathbf Z/d\\mathbf Z$. Its canonical constant-section map $E\\to\\Gamma(C,\\underline E)$ is an isomorphism. Compose it with the inverse of the degree-zero comparison from Step 5 to obtain $\\mathbf Z/d\\mathbf Z\\xrightarrow{\\sim}H^0(C,F)$. This proof also covers a connected zero-dimensional smooth affine curve; no dimension-one or Kummer hypothesis is used for this final identification.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-sections-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P5, remark-constant-locally-constant-maps, specialized to a nonempty connected scheme"
+   }
   }
  ],
  "proof_deps": [
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-etale-sheaves",
+  "def-sc-curves",
+  "thm-sc-affine-cohomology",
+  "thm-sc-affine-torsion-cd",
+  "lem-sf-separably-closed-torsion-cd",
+  "def-sc-etale-torsion-cd",
+  "def-weil-pbc-etale-site",
   "def-weil-pbc-etale-cohomology",
-  "thm-sc-affine-cohomology"
+  "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-weil-pbc-global-sections-functor",
+  "lem-weil-pbc-constant-sheaf-sections-connected"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-vanishing/sbc-thm-cohomological-dimension-of-an-affine-curve.md",
-  "place": "## Proof"
+  "place": "Proof specialization, repaired for the nonconnected and zero-dimensional cases using Stacks 0F0V, 03P5, 013K and 05TD"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology of a smooth affine curve over an algebraically closed field vanishes above degree one and constant sheaf degree zero on a connected curve",
+   "results": "Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, Algebra.formallyEtale_iff, Algebra.etaleLocus_eq_compl_support, AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace, Algebra.FormallySmooth.subsingleton_h1Cotangent, Algebra.SubmersivePresentation.subsingleton_h1Cotangent, Algebra.FormallyEtale.subsingleton_kaehlerDifferential",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, Sheaf",
+   "results": "loogle: unknown identifier 'Sheaf'",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*cohomolog|cohomolog.*affine|constantZMod",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology constant finite coefficients affine smooth curve over algebraically closed field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Torsion sheaves on finite type affine schemes over separably closed fields have cohomological dimension at most the Krull dimension",
+   "results": "Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal, CategoryTheory.HasInjectiveDimensionLT.mk, Module.supportDim_le_supportDim_quotSMulTop_succ, CategoryTheory.HasInjectiveDimensionLT.mk', CategoryTheory.hasInjectiveDimensionLT_iff, CategoryTheory.HasInjectiveDimensionLT.subsingleton', CategoryTheory.HasInjectiveDimensionLT.subsingleton, Module.supportDim_quotSMulTop_succ_eq_supportDim",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomological\", \"affine\"",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "subsingleton_sheafH|etale.*vanishing|cohomologicalDimension",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -70,5 +204,54 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-thm-vanishing"
+ "unit": "sk-thm-vanishing",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "sbc-thm-cohomological-dimension-of-an-affine-curve",
+  "worker": "stage1",
+  "summary": "Corrected the false unconditional H0 clause to a nonempty-connected conditional, preserving vanishing for all smooth affine curves, including disconnected, empty and zero-dimensional ones. Retained the blueprint connected-curve specialization, and supplied the previously missing cases and the canonical H0 argument using existing statements only. No new nodes or Mathlib leaves.",
+  "blueprint": "Steps 1–2 realize the blueprint Proof paragraph with n=d. Steps 3–4 repair its invalid application without connected dimension-one hypotheses; Steps 5–6 supply the omitted H0 argument and correct the unconditional clause.",
+  "tool_uses": [
+   {
+    "node": "thm-sc-affine-torsion-cd",
+    "why": "General affine bound handles the arbitrary smooth affine curve of the imported statement; the cited connected-curve calculation alone does not cover disconnected or zero-dimensional cases."
+   },
+   {
+    "node": "lem-sf-separably-closed-torsion-cd",
+    "why": "Computes the field input c=0 for the generic affine dimension bound."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic homological-algebra input supplies enough injectives for the degree-zero comparison."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "why": "Generic resolution theorem supplies a nonnegative injective resolution and the canonical degree-zero comparison."
+   },
+   {
+    "node": "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+    "why": "Generic structural result supplies the Grothendieck hypothesis of the enough-injectives theorem."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Generic resolution comparison identifies the ordinary nonnegative injective resolution with an allowed K-injective resolution."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sc-affine-torsion-cd",
+  "lem-sf-separably-closed-torsion-cd",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+  "lem-weil-pbc-bounded-below-injectives-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-f48816a10",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-f48816a10 (reviewer sub-agent of L); spot-checked: Read the item, unit route, chapter, report, every cited node statement, and cited Stacks/derived sources. The repaired conditional H^0 clause is correct; higher vanishing covers empty, disconnected, zero-dimensional, and connected cases. Checked coefficients, hypotheses, resolution comparison, edge cases, duplicate/cycle absence, and Mathlib searches. No repair files needed. Recorded the pre-existing 00OY/0F0V source-pointer discrepancy in review.md."
+ }
 }
