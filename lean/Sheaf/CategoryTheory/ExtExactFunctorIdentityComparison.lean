@@ -65,21 +65,15 @@ theorem exactFunctorIdentityComparison
       (Ext.mk₀ (e.hom.app X)).comp x (zero_add n) := by
   let := HasDerivedCategory.standard C
   let Q := DerivedCategory.Q (C := C)
-  let ε := Functor.mapHomologicalComplexIdIso C (ComplexShape.up ℤ)
-  let η := NatIso.mapHomologicalComplex e (ComplexShape.up ℤ)
-  have : NatTrans.CommShift ε.hom ℤ := by
-    constructor
-    intro m
-    ext K i
-    simp [ε, Functor.commShiftIso_id_hom_app]
+  let η := NatIso.mapHomologicalComplex e (ComplexShape.up ℤ) ≪≫
+    Functor.mapHomologicalComplexIdIso C (ComplexShape.up ℤ)
   have : NatTrans.CommShift η.hom ℤ := by
     constructor
     intro m
     ext K i
     dsimp [η]
-    erw [Category.id_comp, Category.comp_id]
-    rfl
-  let δ := Functor.isoWhiskerRight (η ≪≫ ε) Q ≪≫ Q.leftUnitor ≪≫ Q.rightUnitor.symm
+    simp [Functor.commShiftIso_id_hom_app]
+  let δ := Functor.isoWhiskerRight η Q ≪≫ Q.leftUnitor ≪≫ Q.rightUnitor.symm
   have : NatTrans.CommShift Q.rightUnitor.inv ℤ :=
     NatTrans.CommShift.of_iso_inv Q.rightUnitor ℤ
   have : NatTrans.CommShift δ.hom ℤ := by dsimp [δ]; infer_instance
@@ -97,7 +91,7 @@ theorem exactFunctorIdentityComparison
     congr 1
     ext i
     dsimp [Functor.mapCochainComplexSingleFunctor,
-      HomologicalComplex.singleMapHomologicalComplex, η, ε,
+      HomologicalComplex.singleMapHomologicalComplex, η,
       NatIso.mapHomologicalComplex, Functor.mapHomologicalComplexIdIso,
       CochainComplex.singleFunctor, CochainComplex.singleFunctors, HomologicalComplex.single]
     by_cases hi : i = 0

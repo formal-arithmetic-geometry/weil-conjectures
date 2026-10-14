@@ -1,83 +1,102 @@
 ## What changed
 
-Repaired `Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison`, listed in
-`coord/repairs.txt` for upstream review #1424. The supplied checkout contains a complete, compiling proof. Restored the private
-`commShift_of_localization` theorem verbatim before `exactFunctorIdentityComparison`,
-preserving the helper interface used by direct importers. The public theorem's
-signature, visibility, docstring and imports are unchanged. No definition or other
-module changed.
+Simplified the proof of CategoryTheory.Abelian.Ext.exactFunctorIdentityComparison
+in the assigned module. Compose NatIso.mapHomologicalComplex e with
+Functor.mapHomologicalComplexIdIso before checking compatibility with shifts;
+this replaces two degreewise compatibility proofs with one. The subsequent
+localization and single-complex cancellation argument stays intact. Updated
+the existing node's first proof step and proof_origin to describe this proof.
+All declaration signatures, visibility, public imports and docstrings stay identical.
+The private commShift_of_localization is retained: the original
+Sheaf.AlgebraicGeometry.HigherDirectImageRawPullbackIdentity imports it with
+import all and calls it at line 56. No caller adaptation is needed.
+
+This is the listed upstream review #1424 repair in coord/repairs.txt. The
+baseline already contains a complete direct localization proof, so this is
+proof simplification, not newly closed proof debt. The requested alternative
+mapExactFunctor_eq_of_iso + mapExactFunctor_id cannot be used in the pinned
+library: both names are absent from Mathlib and WeilConjectures.
 
 ## Proved and sorry left
 
-`CategoryTheory.Abelian.Ext.exactFunctorIdentityComparison` remains completely proved.
-There were zero sorries in the supplied module; zero holes closed and zero holes added.
-No sorry is left in the delivery and no intermediate statement is split off.
-The unchanged starting module compiled in 3.5 seconds with no warnings. The repaired
-module is checked by lcompile and the delivery tool's axiom probe.
-This is a listed repair, not new hole-closing progress.
+CategoryTheory.Abelian.Ext.exactFunctorIdentityComparison compiles with a complete
+proof. CategoryTheory.Abelian.Ext.commShift_of_localization remains proved.
+Original holes: 0. Holes closed: 0. Holes added: 0. Split off: 0.
+No sorry remains, and no new declaration or module is added.
+The rewritten module compiled cleanly with lcompile.py in 2.1 seconds.
+The delivery dry run checks the axioms of all delivered declarations.
 
 ## No longer needed
 
-No imports, DAG nodes or modules are pruned: the restored localization helper and the
-Mathlib Ext API and composition-comparison module are all needed.
+None. The sole public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
+is required by the theorem's statement. No import, node or module is newly
+pruned relative to the current baseline. The exact-functor factorization and
+localized Ext proof dependencies remain. No statement or proof step realized
+by dag/units/sk-thm-p1.json is bypassed. In particular, the private localization
+helper must not be removed despite not occurring in the main theorem's proof.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The returned delivery incorrectly claimed that `commShift_of_localization` was
-unused. `HigherDirectImageRawPullbackIdentity` imports this module and calls the helper
-by its fully qualified name. Restoring the original private declaration is necessary to
-keep that direct importer compiling. The node's public target and route are unchanged.
+The dispatch describes a module containing sorry, but the baseline contains
+none; coord/repairs.txt identifies it as an upstream review repair. The suggested
+mapExactFunctor_eq_of_iso and mapExactFunctor_id do not occur in the pinned
+Mathlib or source library. Fresh msearch.py searches were run with LeanFinder,
+Loogle and grep. Loogle returns id_mapExactFunctor and
+mapExactFunctor_comp_mk₀_natTransApp in online Mathlib; neither is present in the
+pinned Ext/Map.lean. Reading the pinned file and the source extension
+WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean confirms that
+these cannot replace the direct localization argument here.
 
-## Earlier second reading (a previous round; superseded)
-
-1. Compared the delivered Lean module and node with the repository versions. PASS:
-   the public theorem's signature is byte for byte unchanged, as are its visibility,
-   docstring and imports. The private `commShift_of_localization` declaration is
-   restored verbatim, preserving the direct importer interface. No definition,
-   hypothesis, conclusion or target statement changed; no change record is needed.
-2. Read the entire proof and compiled the delivered module with lcompile (3.9 s,
-   no errors or warnings). PASS: no sorry and no forbidden declaration mechanism.
-   A scratch copy with `#print axioms` reports exactly `propext`, `Classical.choice`
-   and `Quot.sound`. The local identity calculation compares actual functors and
-   single complexes; it does not choose data from an unproved existence theorem.
-3. PASS: there are no split-off or new statements, no holes added, and no nodes
-   requiring duplicate searches or small-case tests. In degree zero the statement
-   is ordinary naturality of e; with F the identity and e reflexive it reduces to
-   identity composition. No edge-case restriction has entered the proof.
-4. Read the composition comparison and the pinned Mathlib Ext.Map API, searched
-   both Lean roots for identity/isomorphism Ext-action lemmas, and ran a fresh
-   msearch grep for identity/isomorphism/natural-transformation action names. PASS:
-   the suggested identity API is absent here. The retained local calculation and
-   canonical composition comparison give a complete route without new lemmas.
-   Both imports are needed, and the composition module is correctly proof-only.
-   The old proof dependencies are unchanged and all used, so no node or module
-   is pruned. Read `dag/units/sk-thm-p1.json`: this auxiliary node is below its
-   realized statement and steps; none of that unit's route is bypassed or changed.
-5. Compared the node diff and read its proof dependencies. PASS: only `proof` and
-   `proof_origin` change; `proof_deps` still records the Ext definition, exact-functor
-   localization construction and composition comparison actually used. The second
-   proof step now names the canonical theorem called by Lean. No new node exists.
-
-Second reading changed only this report; no further Lean or DAG repair was needed.
-This delivery has one fully proved public theorem, zero starting holes, zero holes
-closed, zero holes added and zero split-off statements; it is repair progress only.
+The previous H3 return documents an attempted removal of the private helper
+that broke HigherDirectImageRawPullbackIdentity. That deletion is not repeated.
+No statement is disputed or changed. The source literature directory is absent
+on this machine; this delivery uses the existing fully checked Lean argument
+and adds no source-dependent intermediate assertion.
 
 ## Second reading by U1
 
-1. Compared the delivered module with the repository version. PASS: the public
-   theorem signature, visibility, docstring and imports are unchanged. The private
-   `commShift_of_localization` helper is restored verbatim because a direct importer
-   uses its qualified name; no target or definition changed.
-2. Compiled the module with lcompile. PASS: it compiles without errors or warnings,
-   contains no `sorry`, forbidden declarations, or hollow definitions. The proof uses
-   only the permitted standard axioms according to the delivery probe.
-3. PASS: no statements were split off, no holes were added, and the existing theorem
-   is proved directly. The identity specialization is valid in degree zero and for
-   the identity functor, reducing to identity composition.
-4. PASS: the proof uses the pinned canonical `mapExactFunctor_comp_mk₀_eq` API and
-   the local identity calculation because the newer identity lemmas are absent.
-   Both imports remain needed; no route bypasses the realized unit steps.
-5. PASS: the node's proof and proof origin agree with the Lean proof, and its proof
-   dependencies are unchanged. No new node or change record is required.
+1. Compared the only delivered Lean module with the repository using diff. The
+   entire change is inside exactFunctorIdentityComparison's proof: the two
+   termwise isomorphisms are composed before their shift check. The theorem's
+   signature (including HasExt universe, exactness assumptions, arbitrary n,
+   and the two degree-zero comparison components), private helper signature,
+   docstrings, visibility and sole public import are byte-for-byte unchanged.
+   No definitions or target statements change. Verdict: pass.
+2. Read the whole proof and compiled the delivered file independently with
+   lcompile.py (2.3 seconds, no warnings). A scratch copy with #print axioms
+   for exactFunctorIdentityComparison and commShift_of_localization compiled:
+   both use exactly propext, Classical.choice and Quot.sound. There are no
+   sorries, axioms, unsafe declarations, opaque declarations or external
+   implementations. Verdict: pass.
+3. No statements, definitions, nodes or holes are split off or added. Thus
+   there is no new statement requiring edge-case repair or a duplicate-node
+   search. The existing argument includes n = 0, zero objects and arbitrary
+   natural isomorphisms; off-degree single-complex components are compared
+   using isZero_single_obj_X, rather than any nonzero-object assumption.
+   Verdict: pass.
+4. Read pinned Mathlib Ext/Map.lean, the source library's Ext/Map extension,
+   and LocalizerMorphism.equiv_smallShiftedHomMap. A fresh msearch grep for
+   id_mapExactFunctor, mapExactFunctor_comp_mk₀_natTransApp and the proposed
+   mapExactFunctor_eq_of_iso/mapExactFunctor_id returned no matches; a source
+   search of lean/Sheaf and lean/WeilConjectures found no replacement theorem.
+   The proof specializes the localization comparison to the identity, checks
+   the single-complex components hx, derives inverse cancellation hy, then
+   rewrites Ext composition and cancels. Composing η first removes one whole
+   degreewise shift proof. The sole import is required for mapExactFunctor in
+   the public statement. Checked HigherDirectImageRawPullbackIdentity: its
+   import all and line 56 use the private helper, so retaining it is necessary.
+   Compared old proof_deps: both remain used, hence No longer needed is
+   complete. Read sk-thm-p1.json's realized statement and all step lists:
+   this auxiliary comparison is below those nodes and bypasses none of them.
+   Verdict: pass; no additional proof edit needed.
+5. Compared the delivered node with the repository. Only proof and
+   proof_origin change. The first step now describes the composite η shift
+   check and identity localization specialization exactly; the second step
+   describes hx, hy and final cancellation. proof_deps is unchanged and is
+   precisely the union of the steps' uses (exact-functor derived factorization
+   and Ext). Read both dependency nodes and their Mathlib matches. The lean
+   statement record still matches the unchanged theorem. Verdict: pass.
 
-Changed only this report; no Lean or DAG repair was needed.
+Second reading changed only this report by adding the independent checks.
+No Lean or node repair was necessary. This is an already-proved repair item:
+0 original holes, 0 closed, 0 added, 0 split off, and no modules pruned.
