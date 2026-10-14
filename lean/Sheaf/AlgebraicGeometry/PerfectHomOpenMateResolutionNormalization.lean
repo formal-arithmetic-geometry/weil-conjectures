@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
 public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
 public import Sheaf.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperties
+import Sheaf.AlgebraicGeometry.DerivedDirectImageSquareMate
+import Sheaf.CategoryTheory.DerivedExactMateCompatibility
+import Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit
 
 /-! # Normalization of the open-square comparison on K-injective representatives
 
@@ -21,6 +24,97 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
+
+open CategoryTheory CategoryTheory.Limits
+
+private theorem rotated_counit {C D C' D' : Type*}
+    [Category C] [Category D] [Category C'] [Category D']
+    {L : D ⥤ C} {R : C ⥤ D} {L' : D' ⥤ C'} {R' : C' ⥤ D'}
+    {G : D ⥤ D'} {GR : D' ⥤ D} {H : C ⥤ C'} {HR : C' ⥤ C}
+    (a : L ⊣ R) (a' : L' ⊣ R') (ag : G ⊣ GR) (ah : H ⊣ HR)
+    (k : G ⋙ L' ⟶ L ⋙ H) (theta : HR ⋙ R ⟶ R' ⋙ GR)
+    (htheta : theta = conjugateEquiv (a.comp ah) (ag.comp a') k)
+    (E : C) :
+    L'.map (((mateEquiv ah ag).symm
+      (TwoSquare.mk _ _ _ _ theta)).natTrans.app E) ≫ a'.counit.app (H.obj E) =
+        k.app (R.obj E) ≫ H.map (a.counit.app E) := by
+  have hi := iterated_mateEquiv_conjugateEquiv a a' ag ah
+    (TwoSquare.mk _ _ _ _ k)
+  have hb : (mateEquiv ah ag).symm (TwoSquare.mk _ _ _ _ theta) =
+      mateEquiv a a' (TwoSquare.mk _ _ _ _ k) := by
+    apply (mateEquiv ah ag).injective
+    rw [Equiv.apply_symm_apply]
+    apply TwoSquare.ext
+    intro X
+    exact congr_app (htheta.trans hi.symm) X
+  rw [hb]
+  exact mateEquiv_counit a a' (TwoSquare.mk _ _ _ _ k) E
+
+private theorem conjugate_open_transport {C D C' D' : Type*}
+    [Category C] [Category D] [Category C'] [Category D']
+    {L : D ⥤ C} {R : C ⥤ D} {L' : D' ⥤ C'} {R' : C' ⥤ D'}
+    {G G₀ : D ⥤ D'} {GR : D' ⥤ D} {H H₀ : C ⥤ C'} {HR : C' ⥤ C}
+    (a : L ⊣ R) (a' : L' ⊣ R')
+    (ag : G ⊣ GR) (ag₀ : G₀ ⊣ GR) (ah : H ⊣ HR) (ah₀ : H₀ ⊣ HR)
+    (k : G ⋙ L' ⟶ L ⋙ H) :
+    let sg := (conjugateIsoEquiv ag ag₀).symm (Iso.refl _)
+    let sh := (conjugateIsoEquiv ah ah₀).symm (Iso.refl _)
+    conjugateEquiv (a.comp ah₀) (ag₀.comp a')
+      (Functor.whiskerRight sg.hom L' ≫ k ≫ Functor.whiskerLeft L sh.inv) =
+        conjugateEquiv (a.comp ah) (ag.comp a') k := by
+  dsimp only
+  let sg := (conjugateIsoEquiv ag ag₀).symm (Iso.refl _)
+  let sh := (conjugateIsoEquiv ah ah₀).symm (Iso.refl _)
+  have hsg : conjugateEquiv ag ag₀ sg.hom = 𝟙 GR := by
+    exact congrArg Iso.hom ((conjugateIsoEquiv ag ag₀).apply_symm_apply (Iso.refl GR))
+  have hsh : conjugateEquiv ah₀ ah sh.inv = 𝟙 HR := by
+    have hh := congrArg Iso.inv
+      ((conjugateIsoEquiv ah ah₀).apply_symm_apply (Iso.refl HR))
+    exact hh
+  change conjugateEquiv (a.comp ah₀) (ag₀.comp a')
+    (Functor.whiskerRight sg.hom L' ≫ k ≫ Functor.whiskerLeft L sh.inv) = _
+  rw [← Category.assoc]
+  rw [← conjugateEquiv_comp (a.comp ah₀) (a.comp ah) (ag₀.comp a')]
+  rw [← conjugateEquiv_comp (a.comp ah) (ag.comp a') (ag₀.comp a')]
+  rw [conjugateEquiv_whiskerRight, conjugateEquiv_whiskerLeft, hsg, hsh]
+  simp
+
+private theorem rotated_counit_transport {C D C' D' : Type*}
+    [Category C] [Category D] [Category C'] [Category D']
+    {L : D ⥤ C} {R : C ⥤ D} {L' : D' ⥤ C'} {R' : C' ⥤ D'}
+    {G G₀ : D ⥤ D'} {GR : D' ⥤ D} {H H₀ : C ⥤ C'} {HR : C' ⥤ C}
+    (a : L ⊣ R) (a' : L' ⊣ R')
+    (ag : G ⊣ GR) (ag₀ : G₀ ⊣ GR) (ah : H ⊣ HR) (ah₀ : H₀ ⊣ HR)
+    (k : G ⋙ L' ⟶ L ⋙ H) (theta : HR ⋙ R ⟶ R' ⋙ GR)
+    (m : R ⋙ G₀ ⟶ H₀ ⋙ R')
+    (htheta : theta = conjugateEquiv (a.comp ah) (ag.comp a') k)
+    (hm : m = ((mateEquiv ah₀ ag₀).symm (TwoSquare.mk _ _ _ _ theta)).natTrans)
+    (E : C) :
+    let sg := (conjugateIsoEquiv ag ag₀).symm (Iso.refl _)
+    let sh := (conjugateIsoEquiv ah ah₀).symm (Iso.refl _)
+    L'.map (m.app E ≫ R'.map (sh.hom.app E)) ≫ a'.counit.app (H.obj E) =
+      L'.map (sg.hom.app (R.obj E)) ≫ k.app (R.obj E) ≫ H.map (a.counit.app E) := by
+  dsimp only
+  let sg := (conjugateIsoEquiv ag ag₀).symm (Iso.refl _)
+  let sh := (conjugateIsoEquiv ah ah₀).symm (Iso.refl _)
+  let k₀ := Functor.whiskerRight sg.hom L' ≫ k ≫ Functor.whiskerLeft L sh.inv
+  have ht₀ : theta = conjugateEquiv (a.comp ah₀) (ag₀.comp a') k₀ :=
+    htheta.trans (conjugate_open_transport a a' ag ag₀ ah ah₀ k).symm
+  have hh := rotated_counit a a' ag₀ ah₀ k₀ theta ht₀ E
+  rw [← hm] at hh
+  simp only [Functor.map_comp, Category.assoc]
+  have hn := a'.counit.naturality (sh.hom.app E)
+  dsimp only [Functor.comp_map, Functor.id_map] at hn
+  rw [hn]
+  change L'.map (m.app E) ≫ a'.counit.app (H₀.obj E) ≫ sh.hom.app E = _
+  rw [← Category.assoc, hh]
+  dsimp only [k₀, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+  simp only [Category.assoc]
+  have hs := sh.hom.naturality (a.counit.app E)
+  dsimp only [Functor.id_obj, Functor.comp_obj] at hs
+  rw [hs]
+  simp only [Iso.inv_hom_id_app_assoc]
+  rfl
 
 universe u w
 open CategoryTheory CategoryTheory.Limits
@@ -117,6 +211,27 @@ def perfectHomOpenSuppliedComparison {S Y T : Scheme.{u}}
       ((conjugateIsoEquiv (canonicalPullbackAdjunction (pullback.fst (B.ι ≫ s) r)) ap')
         (Iso.refl _))
 
+private local instance schemeDerivedInstance (Z : Scheme.{u}) :
+    HasDerivedCategory.{w} Z.Modules :=
+  inferInstanceAs (HasDerivedCategory.{w}
+    (SheafOfModules.{u} (moduleRings Z.toRingedSpace)))
+private local instance schemeGrothendieckInstance (Z : Scheme.{u}) :
+    IsGrothendieckAbelian.{u} Z.Modules :=
+  SheafOfModules.isGrothendieckAbelian _
+private local instance schemeKInjectiveInstance (Z : Scheme.{u}) :
+    Abelian.HasKInjectiveResolutions Z.Modules :=
+  Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian
+
+attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
+  DerivedCategory.Qh
+
+set_option linter.all false in
+-- Avoid repeated lint traversal of fixed adjunction data after kernel checking.
+set_option cleanup.letToHave false in
+set_option backward.isDefEq.lazyProjDelta false in
+set_option backward.isDefEq.lazyWhnfCore false in
+set_option maxHeartbeats 800000 in
+-- Comparing fixed derived adjunctions requires extra instance conversion.
 /-- On K-injective representatives the derived sectionwise comparison satisfies
 the counit equation for the fixed pullback-composition comparison and canonical adjunctions.
 Source: Stacks Project, Cohomology, `lemma-restrict-direct-image-open` (08FE),
@@ -166,7 +281,67 @@ theorem perfectHomOpenComparison_counit_resolution
         ap'.counit.app ((derivedPullback b).obj (DerivedCategory.Q.obj I)) =
       κ.inv.app ((schemeDerivedDirectImage (pullback.fst s r)).obj
         (DerivedCategory.Q.obj I)) ≫
-        (derivedPullback b).map (ap.counit.app (DerivedCategory.Q.obj I)) := by sorry
+        (derivedPullback b).map (ap.counit.app (DerivedCategory.Q.obj I)) := by
+  let b := perfectHomOpenMap s B r
+  let f := pullback.fst s r
+  let f' := pullback.fst (B.ι ≫ s) r
+  let F := Scheme.Modules.pushforward f
+  let K := Scheme.Modules.pushforward f'
+  let G := schemeOpenRestriction Y B
+  let H := Scheme.Modules.restrictFunctor b
+  let P := Scheme.Modules.pushforward b
+  let Q := Scheme.Modules.pushforward B.ι
+  let a := canonicalPullbackAdjunction f
+  let a' : derivedPullback f' ⊣ K.rightDerivedFunctor := canonicalPullbackAdjunction f'
+  let ag := canonicalPullbackAdjunction B.ι
+  let ah := canonicalPullbackAdjunction b
+  let ag₀ := schemeMVAdjunction Y B
+  have : PreservesFiniteLimits G := comp_preservesFiniteLimits _ _
+  have : PreservesFiniteColimits G := comp_preservesFiniteColimits _ _
+  have : PreservesFiniteLimits H := (openImmersion_restriction_derived_properties b).1
+  have : H.PreservesKInjectiveComplexes :=
+    (openImmersion_restriction_derived_properties b).2
+  have : F.Additive := inferInstance
+  have : K.Additive := inferInstance
+  have : G.Additive := Functor.additive_of_preserves_binary_products _
+  have : H.Additive := restriction_additive _
+  let ah₀ : H.mapDerivedCategory ⊣ P.rightDerivedFunctor :=
+    (Scheme.Modules.restrictAdjunction b).mapDerivedCategoryRightDerivedAdjunction
+  let he : b ≫ f = f' ≫ B.ι := (perfectHomOpenSquare s B r).w.symm
+  let k := perfectHomComposition f' B.ι ≪≫
+    eqToIso (congrArg (fun t ↦ derivedPullback t) he.symm) ≪≫
+    (perfectHomComposition b f).symm
+  let ed := schemeNormalizedDirectImageCompIso b f ≪≫
+    eqToIso (congrArg (fun t ↦ schemeDerivedDirectImage t) he) ≪≫
+    (schemeNormalizedDirectImageCompIso f' B.ι).symm
+  have ht : ed.hom = conjugateEquiv (a.comp ah) (ag.comp a') k.hom := by
+    exact (derivedDirectImage_square_mate f f' B.ι b he).symm
+  have : IsIso (perfectHomOpenModuleMate s B r) := perfectHomOpenModuleMate_isIso s B r
+  have : PreservesFiniteColimits H := by
+    have := (Scheme.Modules.restrictAdjunction b).leftAdjoint_preservesColimits
+    infer_instance
+  have hu : Functor.rightDerivedFunctorCompUnit P F ≫
+      Functor.whiskerLeft DerivedCategory.Qh ed.hom =
+      Functor.whiskerRight
+        (NatTrans.mapHomotopyCategory (perfectHomOpenModuleComposition s B r).hom (.up ℤ))
+        DerivedCategory.Qh ≫ Functor.rightDerivedFunctorCompUnit K Q := by
+    exact normalizedDirectImageSquare_unit f f' B.ι b he
+  have hm : (Functor.exactMateComparison F K G H
+      (asIso (perfectHomOpenModuleMate s B r))).hom =
+      ((mateEquiv ah₀ ag₀).symm (TwoSquare.mk _ _ _ _ ed.hom)).natTrans := by
+    exact Functor.exactMateComparison_eq F K G H P Q
+      (Scheme.Modules.restrictAdjunction b) (schemeOpenModuleAdjunction Y B)
+      (perfectHomOpenModuleComposition s B r) (asIso (perfectHomOpenModuleMate s B r))
+      rfl ed hu
+  have hh := rotated_counit_transport a a' ag ag₀ ah ah₀ k.hom ed.hom
+    (Functor.exactMateComparison F K G H
+      (asIso (perfectHomOpenModuleMate s B r))).hom ht hm (DerivedCategory.Q.obj I)
+  dsimp only at hh ⊢
+  simpa only [perfectHomOpenDerivedComparison, Functor.exactMateComparison,
+    k, F, K, G, H, P, Q, f, f', b, a, a', ag, ah, ag₀, ah₀,
+    eqToIso.hom, eqToIso.inv, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
+    NatTrans.comp_app, Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv,
+    Functor.whiskerRight_app, Category.assoc] using hh
 
 end
 end AlgebraicGeometry

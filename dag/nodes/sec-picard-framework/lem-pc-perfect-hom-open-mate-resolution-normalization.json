@@ -18,43 +18,43 @@
  },
  "proof": [
   {
-   "text": "Construct beta-zero by deriving the proved ordinary isomorphism, using exact open restriction and preservation of K-injectives. Identify exact restriction with Lb* by uniqueness of left adjoints.",
+   "text": "Use normalizedDirectImageSquare_unit to identify the fixed derived right-adjoint square by its pasted unit equation. Apply exactMateComparison_eq to the ordinary open module mate. Exactness and preservation of K-injectives are supplied by the existing open restriction constructions.",
    "uses": [
+    "lem-pc-normalized-direct-image-square-unit",
+    "lem-pc-exact-left-adjoint-derived-mate-compatibility",
     "lem-pc-perfect-hom-open-module-mate",
     "lem-pc-open-immersion-restriction-derived-properties",
-    "def-pc-affine-global-hom-base-change-map",
     "def-pc-derived-mayer-vietoris-canonical-data"
    ],
    "elementary": false
   },
   {
-   "text": "For pinned adjunctions, evaluate the right-derived unit factorization equations on I; restriction is K-injective by 08BS. Evaluate the determining left-derived counit equation of perfectHomComposition on K-flat representatives, then transpose by the pinned Hom equivalences of the derived adjunctions. This identifies both sides with the same ordinary section map and tensor counit over pi inverse (B image W) for every open W of B. Localization yields the counit equation at QI.",
+   "text": "The existing derivedDirectImage_square_mate identifies this right-adjoint square with the conjugate of the fixed pullback-composition square. Transport the two open adjunctions by conjugateIsoEquiv and use iterated_mateEquiv_conjugateEquiv and mateEquiv_counit. Naturality of the counit and the open-adjunction transport cancel the inverse conjugations. Expand the explicit derived comparison and the inverse κ component; this gives the unchanged counit equation at Q(I).",
    "uses": [
+    "lem-sc-derived-direct-image-square-mate",
     "lem-pc-perfect-hom-transport",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "def-pc-derived-base-change-map",
-    "lem-sc-derived-k-injective-restrict-open"
+    "def-pc-affine-global-hom-base-change-map"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-affine-global-hom-base-change-map",
-  "def-pc-derived-base-change-map",
   "def-pc-derived-mayer-vietoris-canonical-data",
+  "lem-pc-exact-left-adjoint-derived-mate-compatibility",
+  "lem-pc-normalized-direct-image-square-unit",
   "lem-pc-open-immersion-restriction-derived-properties",
   "lem-pc-perfect-hom-open-module-mate",
   "lem-pc-perfect-hom-transport",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-sc-derived-k-injective-restrict-open"
+  "lem-sc-derived-direct-image-square-mate"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "F3",
+  "group": "H2",
   "date": "2026-10-14",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma lemma-restrict-direct-image-open (Tag 08FE), Lemma lemma-restrict-K-injective-to-open (Tag 08BS), Lemma lemma-adjoint (Tag 079W), and Lemma lemma-derived-pullback-composition (Tag 0D5S)",
-  "note": "Written from the source tags read online and the explicit Lean constructions."
+  "place": "Tags 08FE, 08BS, 079W and 0D5T; Mathlib Adjunction/Mates and Functor/Derived/Adjunction",
+  "note": "Formal decomposition into right-derived mate compatibility and normalized unit compatibility; the remaining categorical assembly is proved in the item module."
  },
  "mathlib_searches": [
   {
@@ -156,11 +156,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F3",
+  "reviewer": "X-1a815",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261014T033105-L-603421",
+  "landing": "20261014T052439-L-1913452",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Packet statements and DAG nodes matched delivered Lean declarations; all delivered modules compiled cleanly and mechanical findings were empty."
  }
 }

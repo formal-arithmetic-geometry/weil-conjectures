@@ -1,0 +1,195 @@
+{
+ "id": "lem-pc-exact-left-adjoint-derived-mate-compatibility",
+ "kind": "statement",
+ "title": "Right derivation of an ordinary mate square with exact left adjoints",
+ "statement": "Let C,D,C′,D′ be abelian categories with K-injective resolutions and derived categories in a common universe [def-weil-abstract-derived-category, def-pur-kinjective-complex]. Let F:C→D, K:C′→D′, G:D→D′, H:C→C′, P:C′→C and Q:D′→D be additive functors. Assume G and H are exact, H preserves K-injective complexes, and fix adjunctions H⊣P and G⊣Q. Let e: P;F ≅ K;Q and m:F;G ≅ H;K be ordinary squares with m the inverse mate of e. Fix ed:RP;RF≅RK;RQ satisfying the pasted right-derived unit equation U(P,F);Qh(ed)=Qh(e);U(K,Q). Define β:RF;D(G)≅D(H);RK by inverse exact postcomposition comparison, right derivation of m, K-injective composition comparison, and the exact identification RH≅D(H). Then β.hom is the inverse mate of ed.hom under the exact-left-adjoint derived adjunctions of [lem-sc-derived-adjunction-from-underived]. No scheme morphism, pullback composition comparison, or counit equation for the projection adjunctions is in this claim.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "lem-sc-derived-adjunction-from-underived"
+ ],
+ "source": {
+  "document": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+  "place": "derivedη_fac_app, derivedε_fac_app and Adjunction.derived; Stacks Project, cohomology.tex, Tag 079W"
+ },
+ "proof": [
+  {
+   "text": "The right adjoint P of exact H preserves K-injectives. Apply mates and uniqueness out of RP;RF with its pasted unit to reduce the assertion to the unit equation.",
+   "uses": [
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand β into the four fixed comparisons. Their right-derived factorization equations identify β after localization with m followed by the pasted H,K unit and the exact H identification. Naturality moves the pasted P,F units through the G-unit and β.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use derivedη_fac_app and derivedε_fac_app for the two derived adjunctions to replace the derived unit and counit by their ordinary localized versions. The resulting composite is mate(m)=e by the inverse law. The assumed equation for ed identifies it with that same composite. Right-derived extensionality and the inverse mates equivalence give the assertion.",
+   "uses": [
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sc-derived-adjunction-from-underived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H2",
+  "date": "2026-10-14",
+  "document": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+  "place": "derivedη_fac_app, derivedε_fac_app and Adjunction.derived; Stacks Project, cohomology.tex, Tag 079W",
+  "note": "Elementary normalization and categorical assembly from the named source equations; source tags read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived comparison of direct image and open restriction satisfies the counit equation for derived pullback composition",
+   "results": [
+    "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+    "AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app",
+    "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp",
+    "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+    "AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app",
+    "AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app",
+    "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app",
+    "AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction"
+   ],
+   "date": "2026-10-14",
+   "verdict": "Generic APIs only; no exact mate or normalized pasted-unit theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": [
+    "CategoryTheory.mateEquiv_counit"
+   ],
+   "date": "2026-10-14",
+   "verdict": "Generic APIs only; no exact mate or normalized pasted-unit theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Mm]ate|[Mm]ate.*rightDerived",
+   "results": "",
+   "date": "2026-10-14",
+   "verdict": "Generic APIs only; no exact mate or normalized pasted-unit theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right deriving an ordinary mate under exact restriction adjunctions gives the mate of the normalized derived direct image square",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functor of a mate square agrees with the mate of the right derived square when the left adjoints are exact",
+   "results": [
+    "CategoryTheory.Adjunction.derivedε",
+    "CategoryTheory.Adjunction.derivedε_fac_app_assoc",
+    "CategoryTheory.Adjunction.derivedη_fac_app_assoc",
+    "CategoryTheory.Adjunction.derivedη",
+    "CategoryTheory.Adjunction.derivedε_fac_app",
+    "CategoryTheory.Adjunction.derivedη_fac_app",
+    "CategoryTheory.Adjunction.derived_counit",
+    "CategoryTheory.Adjunction.derived'_counit"
+   ],
+   "date": "2026-10-14",
+   "verdict": "Generic APIs only; no exact mate or normalized pasted-unit theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.iterated_mateEquiv_conjugateEquiv",
+   "results": [
+    "CategoryTheory.iterated_mateEquiv_conjugateEquiv"
+   ],
+   "date": "2026-10-14",
+   "verdict": "Generic APIs only; no exact mate or normalized pasted-unit theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Mm]ate|[Mm]ate.*derived",
+   "results": [
+    "Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+    "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+    "Mathlib/CategoryTheory/Abelian/LeftDerived.lean"
+   ],
+   "date": "2026-10-14",
+   "verdict": "Generic APIs only; no exact mate or normalized pasted-unit theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right derivation preserves mates under exact left adjoints",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived_fac_app",
+   "results": [
+    "CategoryTheory.Functor.rightDerived_fac_app"
+   ],
+   "date": "2026-10-14",
+   "verdict": "Generic APIs only; no exact mate or normalized pasted-unit theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomOpenMateResolutionNormalization",
+  "date": "2026-10-14",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Open direct-image mate normalization in the Mayer--Vietoris Hom comparison, right-derived unit and adjunction factorization",
+   "via": [
+    "lem-pc-perfect-hom-open-mate-resolution-normalization",
+    "lem-pc-perfect-hom-open-comparison-mate-is-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedExactMateCompatibility",
+  "file": "lean/Sheaf/CategoryTheory/DerivedExactMateCompatibility.lean",
+  "declaration": "CategoryTheory.Functor.exactMateComparison_eq",
+  "statement": "theorem exactMateComparison_eq :\n    (exactMateComparison F K G H m).hom =\n      ((mateEquiv ah.mapDerivedCategoryRightDerivedAdjunction\n        ag.mapDerivedCategoryRightDerivedAdjunction).symm\n          (TwoSquare.mk _ _ _ _ ed.hom)).natTrans",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-1a815",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261014T052439-L-1913452",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-1a815",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261014T052439-L-1913452",
+  "kind": "interface",
+  "note": "independent Codex review: Packet statements and DAG nodes matched delivered Lean declarations; all delivered modules compiled cleanly and mechanical findings were empty."
+ }
+}
