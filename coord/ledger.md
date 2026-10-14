@@ -14416,3 +14416,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:44 L: returned deliver/N4/Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdge (reviewer RETURN: (reviewer X-42350, head 42350ee99) C4: In lem-pc-affine-derived-pushforward-sheaf-edge.json, proof[0] invokes CategoryTh)
 
 - 11:46 L: batch 20261014T033101 dependency take-out
+- 03:47 L: returned deliver/C1/Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCompatibility (reviewer RETURN: (reviewer X-6fc1f, head 6fc1ff078) G1: The latest LAUNCHER UPDATE in packet §7 replaces the retention instruction and re)
