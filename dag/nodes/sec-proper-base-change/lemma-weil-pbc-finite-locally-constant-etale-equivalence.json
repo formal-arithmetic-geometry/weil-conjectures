@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "thm-galois-lc-etale"
+  ]
  },
  "kind": "statement",
  "title": "Finite locally constant sheaves and finite-etale schemes",
@@ -12,35 +14,141 @@
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-finite-locally-constant-etale-equivalence.md",
   "place": "node lemma-weil-pbc-finite-locally-constant-etale-equivalence, order 1123"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-pbc-etale-sheaves"
+ ],
  "proof": [
   {
-   "text": "For a finite etale P over T, use the canonical uliftYoneda sheaf, whose sheaf property comes from subcanonical_smallEtaleTopology. The finite-local-model theorem supplies an etale cover, finite constant sheaf isomorphisms and IsFiniteSheaf. Each isomorphism gives IsConstant by Sheaf.isConstant_of_iso. Pair this local constancy with the supplied finiteness.",
+   "text": "For a finite etale $T$-scheme $P$, the local-trivializations node supplies its canonical sheaf of sections $h_P$, an etale cover, and finite sets $S_i$ with $h_P|_{U_i}\\cong\\underline{S_i}$. Thus $h_P$ is finite locally constant. Send a $T$-morphism $f:P\\to Q$ to the natural transformation $h_f$ given on each section $x:V\\to P$ by $x\\mapsto f\\circ x$. Associativity and identities make this assignment a functor $H$ into the full category of finite locally constant sheaves.",
    "uses": [
-    "lem-weil-pbc-finite-etale-yoneda-local-trivializations"
+    "lem-weil-pbc-finite-etale-yoneda-local-trivializations",
+    "def-weil-pbc-finite-etale-category",
+    "def-weil-pbc-etale-sheaf-of-sets"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RV, lemma-characterize-finite-locally-constant, (2) implies (1)"
+   }
   },
   {
-   "text": "For a locally constant sheaf with finite stalks, pass the two fields of IsFiniteLocallyConstantSheafOfTypes to the descent representability theorem. Combine the two independently proved implications as the required conjunction.",
+   "text": "Let $E$ be finite locally constant. By the stated definition it is constant on an etale covering and its geometric stalks are finite, in particular at separably closed geometric points. Apply the representability node with exactly these hypotheses to obtain $P\\to T$ finite etale and an isomorphism $h_P\\cong E$. The node explicitly supplies an isomorphism of sheaves, so this is essential surjectivity of $H$; no extra connectedness, quasi-compactness, or fixed cardinality is needed.",
    "uses": [
+    "def-weil-pbc-etale-sheaves",
     "lem-weil-pbc-finite-locally-constant-sets-representability"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RV, lemma-characterize-finite-locally-constant, (1) implies (2)"
+   }
+  },
+  {
+   "text": "Apply the Yoneda bijection in the category $T_{\\mathrm{et}}$ to $P,Q$, which are objects since they are etale over $T$. Its morphisms between them are exactly $T$-morphisms. Because sheaves form a full subcategory of presheaves, the same bijection identifies $\\operatorname{Hom}_T(P,Q)$ with sheaf morphisms $h_P\\to h_Q$. Its inverse sends $\\tau$ to $\\tau_P(\\mathrm{id}_P)$. Thus $H$ is full and faithful.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful",
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "def-weil-pbc-finite-etale-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RV, categorical assembly using Categories Tag 001P (lemma-yoneda)"
+   }
+  },
+  {
+   "text": "Explicitly construct an inverse to $H$: for every $E$ choose a representative $P_E$ and $\\epsilon_E:h_{P_E}\\xrightarrow{\\sim}E$ as in step 2. For $u:E\\to F$ let $G(u):P_E\\to P_F$ be the unique morphism whose Yoneda image is $\\epsilon_F^{-1}\\circ u\\circ\\epsilon_E$. The bijection of step 3 proves $G(\\mathrm{id})=\\mathrm{id}$ and $G(v\\circ u)=G(v)\\circ G(u)$, and makes $\\epsilon:HG\\cong\\mathrm{id}$ natural. The unique morphism $\\eta_P:P_{h_P}\\to P$ mapping to $\\epsilon_{h_P}$ is an isomorphism: the preimage of its inverse sheaf map is its inverse by injectivity. For $f:P\\to Q$, the defining formula gives $H(G(H(f)))=\\epsilon_{h_Q}^{-1}\\circ H(f)\\circ\\epsilon_{h_P}$, whence $H(\\eta_Q\\circ G(H(f)))=H(f)\\circ\\epsilon_{h_P}=H(f\\circ\\eta_P)$. Injectivity proves $\\eta_Q\\circ G(H(f))=f\\circ\\eta_P$, so $\\eta:GH\\cong\\mathrm{id}$ is natural. This proves the equivalence without invoking an uncited equivalence criterion.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RV, explicit categorical assembly of object correspondence and Yoneda"
+   }
+  },
+  {
+   "text": "Let a finite abelian group $M$ act on $E$, meaning automorphisms $\\rho_m$ with $\\rho_0=\\mathrm{id}$ and $\\rho_{m+n}=\\rho_m\\circ\\rho_n$. For a representation $\\epsilon:h_P\\cong E$, define $a_m:P\\to P$ as the unique preimage of $\\epsilon^{-1}\\circ\\rho_m\\circ\\epsilon$ under step 3. Injectivity gives $a_0=\\mathrm{id}$, $a_{m+n}=a_m\\circ a_n$, and $a_{-m}$ inverse to $a_m$. These are $T$-automorphisms of the finite etale scheme. Conversely an action by $a_m$ induces $\\rho_m=\\epsilon\\circ h_{a_m}\\circ\\epsilon^{-1}$, satisfying the same equations. The two assignments are inverse by the Yoneda bijection. For representations $\\epsilon_E:h_P\\cong E$ and $\\epsilon_F:h_Q\\cong F$, let $b:P\\to Q$ represent $u:E\\to F$. Then $u\\circ\\rho_m^E=\\rho_m^F\\circ u$ is equivalent, after composing with $\\epsilon_F^{-1}$ and $\\epsilon_E$, to $H(b)\\circ H(a_m^P)=H(a_m^Q)\\circ H(b)$, and injectivity makes this equivalent to $b\\circ a_m^P=a_m^Q\\circ b$. Thus the equivalence gives the claimed correspondence of actions, with no torsor or simple-transitivity assumption.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Blueprint node, final action sentence; Yoneda argument extending Tag 03RV"
+   }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-etale-yoneda-local-trivializations",
-  "lem-weil-pbc-finite-locally-constant-sets-representability"
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-finite-locally-constant-sets-representability",
+  "lem-galois-yoneda-fully-faithful"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03RV: G1 Lean reduction separates finite local models from effective descent and builds the local constancy witnesses"
+  "place": "Tag 03RV, lemma-characterize-finite-locally-constant, object correspondence; explicit Yoneda quasi-inverse and action equations complete the blueprint categorical clauses."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally constant sheaves of sets on the small etale site of a scheme are equivalent to finite etale schemes",
+   "results": "Eight hits: condensed locally constant functors, Scheme.Etale.forgetFullyFaithful, etaleTopology and smallEtaleTopology. None states finite-etale representability or the full equivalence.",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, CategoryTheory.Equivalence",
+   "results": "Zero hits.",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale schemes and finite locally constant sheaves of sets form equivalent categories",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*locally.*constant|FiniteEtale|finiteEtale",
+   "results": "Three hits in Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean:32,86,231 concerning locally constant rank, not sheaf representability.",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstant|LocallyConstant.*Sheaf|Sheaf.*LocallyConstant",
+   "results": "25 displayed hits concerning manifolds, germs, condensed sheaves and flat rank. No finite-etale equivalence.",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Yoneda.fullyFaithful",
+   "results": "Four hits: Yoneda.fullyFaithful, fullyFaithful_preimage, RepresentableBy.uniqueUpToIso_hom and _inv. Read Mathlib/CategoryTheory/Yoneda.lean:134-153; this proves only the existing Yoneda leaf, not the item.",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every locally constant sheaf with finite stalks is represented by a finite etale morphism, Yoneda gives an equivalence",
+   "results": "Eight hits all about condensed/light condensed locally constant functors and TopCat comparison; different sites, no finite-etale representability.",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -102,5 +210,20 @@
    "AlgebraicGeometry.Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing"
   ],
   "sorry_after": []
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
+  "worker": "stage1",
+  "summary": "Retained the true statement; reused existing finite-etale local-model and representability nodes, added Yoneda full faithfulness and explicit inverse-functor and group-action arguments. Removed the erroneous claim that the object-level conjunction alone proves every clause. No new nodes. The blueprint proof unnecessarily assumes a single finite etale trivializing cover and a single finite fibre; the existing nodes use arbitrary etale covering families and varying finite local values.",
+  "blueprint": "Steps 1-2 realize the converse and effective-descent object correspondence of the blueprint proof; steps 3-4 realize its claim that the constructions are inverse, including morphisms; step 5 realizes its final M-action sentence."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-580312b9b",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-580312b9b (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, sources and unit/chapter route in full. Stacks 03RV and Yoneda 001P support all five steps, including the explicit inverse and action equations. Edge cases passed; no new nodes or repairs. The report’s circularity claim is stale but does not affect the proof. Concrete checks and inherited DAG cycles are documented in review.md."
  }
 }
