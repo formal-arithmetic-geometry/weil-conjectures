@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-cd-ground-field",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Descent of a geometric cohomological dimension bound",
@@ -18,32 +18,200 @@
  ],
  "proof": [
   {
-   "text": "For the structure map $f:X\\to\\operatorname{Spec}K$, the stalk\nformula [prop-weil-pbc-strict-henselization-stalk-formula]\nidentifies the unique geometric stalk of $R^qf_*F$ with\n$H^q(X_{K^{\\rm sep}},F|)$. Passing from $K^{\\rm sep}$ to\n$\\overline K$ is a purely inseparable algebraic extension,\nwhose base change is a universal homeomorphism.\nThus [thm-weil-pbc-universal-homeomorphism-invariance]\nmakes this group zero for $q>e$.\nFor $F$ killed by $n$, every $R^qf_*F$ is also killed by\n$n$. The spectral sequence of [thm-sp-grothendieck]\nhas terms $H^p(K,R^qf_*F)$, zero unless $p\\leq c$ and\n$q\\leq e$; its total degrees are at most $c+e$.\nFor arbitrary torsion $F$, pass to the union of the $F[n]$\nusing [lemma-weil-pbc-torsion-filtered-union], [lem-weil-pbc-cohomology-filtered-colimit].",
+   "text": "Put $S=\\operatorname{Spec}K$ and $f:X\\to S$. Finite type gives quasi-compactness. The field $K$ is Noetherian (its only ideals are $0$ and $K$); every affine finite-type chart of $X$ has Noetherian coordinate ring by [lem-weil-pbc-finite-type-algebra-noetherian]. Thus $X$ is locally Noetherian, and [lem-weil-pbc-locally-noetherian-quasi-separated] makes intersections of affine opens quasi-compact. Since the base is affine, this makes $f$ quasi-separated as well. Hence $f$ and $X$ are qcqs; the stalk formula and the filtered-colimit theorem apply without a separatedness assumption.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "lemma-finite-type-Noetherian-quasi-separated; Algebra Tag 00FN and Properties Tag 01OY"
+   }
+  },
+  {
+   "text": "Choose the geometric point $\\bar s:\\operatorname{Spec}\\overline K\\to S$, and let $K^{\\rm sep}\\subset\\overline K$ be the relative separable closure of [def-weil-pbc-relative-separable-closure]. This is a separably closed separable algebraic extension of $K$. Let $C$ be the coordinate ring of $S_{(\\bar s)}$. Apply [lem-weil-pbc-strict-henselization-chart-maximal-ideal] with the identity chart $\\operatorname{Spec}K\\to S$: the maximal ideal of $C$ is the extension of the unique prime $(0)$, hence is zero. By [lem-weil-pbc-strict-henselization-pointed-map] there is a surjection $\\psi:C\\to K^{\\rm sep}$ with this kernel, hence an isomorphism. If the chosen representative of the identity pointed neighbourhood is $(V,\\bar v)$, let $a:V\\xrightarrow{\\sim}S$ be its pointed isomorphism over $S$, so $a\\circ\\bar v=\\bar s$. By [def-weil-pbc-strict-henselization-structural-map], $a\\circ\\pi_V=\\operatorname{Spec}\\rho$. Compose the pointed-map equality for $V$ with $a$; on coordinate rings it says $j\\circ\\psi\\circ\\rho=j_K$, where $j:K^{\\rm sep}\\hookrightarrow\\overline K$ and $j_K:K\\hookrightarrow\\overline K$ are the chosen embeddings. Since $j$ is injective, $\\psi\\circ\\rho$ is the given inclusion $K\\hookrightarrow K^{\\rm sep}$; thus the isomorphism is over $K$. Consequently $S_{(\\bar s)}\\cong\\operatorname{Spec}K^{\\rm sep}$ over $S$.",
+   "uses": [
+    "def-weil-pbc-relative-separable-closure",
+    "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
+    "lem-weil-pbc-strict-henselization-pointed-map",
+    "def-weil-pbc-strict-henselization-structural-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX (lemma-describe-etale-local-ring), together with Algebra Tag 04GP (lemma-strict-henselization), properties (4) and (5)"
+   }
+  },
+  {
+   "text": "Let $F$ be an abelian etale sheaf on $X$ annihilated by a positive integer $n$. The extension $\\overline K/K^{\\rm sep}$ is algebraic, and [lem-pc-kbar-pure-insep] makes it purely inseparable. The homeomorphism assertion [lem-pc-homeo-pure-insep], applied to every $K^{\\rm sep}$-scheme $T$, shows that $T_{\\overline K}\\to T$ is a homeomorphism. Every base change of $u:X_{\\overline K}\\to X_{K^{\\rm sep}}$ has this form, so $u$ is a universal homeomorphism. Apply [thm-weil-pbc-universal-homeomorphism-invariance] to obtain $H^q(X_{K^{\\rm sep}},F|_{X_{K^{\\rm sep}}})\\cong H^q(X_{\\overline K},F|_{X_{\\overline K}})$. Pullback of the equation $n\\,\\mathrm{id}_F=0$ gives the same equation on the restricted sheaf, so every local section is killed by the same positive integer $n$. It is therefore torsion in the local-section sense on the small etale site required by the current [def-sc-etale-torsion-cd]. By [def-sc-etale-torsion-cd] and the assumed geometric bound, these groups vanish for $q>e$.",
+   "uses": [
+    "lem-pc-kbar-pure-insep",
+    "lem-pc-homeo-pure-insep",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "def-sc-etale-torsion-cd"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03SI (proposition-topological-invariance); Fields Tag 030K (lemma-separable-first), as in lemma-smooth-base-change-separably-closed"
+   }
+  },
+  {
+   "text": "For every $q\\geq0$, apply [prop-weil-pbc-strict-henselization-stalk-formula] to $f,F,\\bar s$ and step 2 to identify $(R^qf_*F)_{\\bar s}$ with $H^q(X_{K^{\\rm sep}},F|)$. For $q>e$ this is zero by step 3. The equivalence [lem-exc-abelian-sheaves-gmodules] detects zero objects from this single fixed geometric stalk, so $R^qf_*F=0$ for $q>e$. Moreover, the same stalk group is killed by $n$: the additive cohomology functor sends $n\\,\\mathrm{id}_{F|}=0$ to $n\\,\\mathrm{id}_{H^q}=0$. Faithfulness of the stalk equivalence therefore gives $n\\,\\mathrm{id}_{R^qf_*F}=0$ for every $q$. In particular every $R^qf_*F$ is torsion.",
    "uses": [
     "prop-weil-pbc-strict-henselization-stalk-formula",
-    "thm-weil-pbc-universal-homeomorphism-invariance",
-    "thm-sp-grothendieck",
-    "lemma-weil-pbc-torsion-filtered-union",
-    "lem-weil-pbc-cohomology-filtered-colimit"
+    "lem-exc-abelian-sheaves-gmodules",
+    "def-weil-pbc-etale-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9 (theorem-higher-direct-images) and Tag 04JQ (lemma-equivalence-abelian-sheaves-point)"
+   }
+  },
+  {
+   "text": "Apply [thm-sp-grothendieck] to $f_*$ followed by $\\Gamma(S,-)$. The source and middle categories are Grothendieck abelian by [lem-weil-pbc-abelian-etale-sheaves-grothendieck]. Direct image is additive and left exact by [def-weil-pbc-direct-image]. Global sections is additive and left exact: as sections at the terminal object [def-weil-pbc-global-sections-functor], it preserves kernels and finite products, both computed sectionwise. The category of abelian groups is Grothendieck (small colimits are quotients of direct sums by the diagram relations, filtered colimits of exact sequences are exact elementwise, and $\\mathbf Z$ is a generator). By [lem-weil-pbc-direct-image-preserves-injectives], $f_*I$ is injective for injective $I$; [lemma-weil-pbc-leray-acyclicity](1) makes it $\\Gamma(S,-)$-acyclic. Finally the section formula for direct image gives $\\Gamma(S,f_*F)=\\Gamma(X,F)$. The resulting first-quadrant spectral sequence is $E_2^{p,q}=H^p(S,R^qf_*F)\\Rightarrow H^{p+q}(X,F)$, with the cohomology identification of [def-weil-pbc-etale-cohomology].",
+   "uses": [
+    "thm-sp-grothendieck",
+    "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-global-sections-functor",
+    "lem-weil-pbc-direct-image-preserves-injectives",
+    "lemma-weil-pbc-leray-acyclicity",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0732 (lemma-Leray), using Tag 0730 (lemma-pushforward-injective-flat) and Derived Categories Tag 015N (lemma-grothendieck-spectral-sequence)"
+   }
+  },
+  {
+   "text": "By step 4, $E_2^{p,q}=0$ when $q>e$. For $p>c$, it is zero by the field bound [def-sc-etale-torsion-cd], since step 4 proves $n\\,\\mathrm{id}_{R^qf_*F}=0$, hence every local section is locally killed by a positive integer, as the current definition requires. The field notation means ordinary derived-section cohomology on the small etale site of $S=\\operatorname{Spec}K$. If $t>c+e$ and $p+q=t$, at least one of $p>c$ and $q>e$ holds. Thus every $E_2$ term of total degree $t$ is zero, and every later term there remains zero, being the cohomology of a page with zero term at that position. Convergence of [thm-sp-grothendieck], in the sense of [def-sp-convergence], identifies the graded pieces of the abutment filtration with $E_\\infty^{p,t-p}=0$. For $p<0$ and $p>t$, first-quadrantness gives zero graded pieces, so the filtration is constant for $p\\leq0$ and for $p\\geq t+1$. Exhaustiveness in [def-sp-convergence] makes its first constant value $F^0H^t=H^t$, and separatedness makes its last constant value $F^{t+1}H^t=0$. The remaining successive quotients are zero as well; descending induction from $F^{t+1}=0$ to $F^0$ gives $H^t(X,F)=0$. This proves the required bound for every sheaf killed by some positive integer.",
+   "uses": [
+    "def-sc-etale-torsion-cd",
+    "thm-sp-grothendieck",
+    "def-sp-convergence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015N (lemma-grothendieck-spectral-sequence): finite filtration on each abutment; convergence conventions Tag 012U"
+   }
+  },
+  {
+   "text": "Now let $F$ be any torsion abelian sheaf on the small etale site of $X$, meaning that every local section is locally killed by a positive integer, with no uniform annihilator assumed, exactly as in the current [def-sc-etale-torsion-cd]. By [lemma-weil-pbc-torsion-filtered-union], $F=\\varinjlim_{n\\in(\\mathbf N_{>0},\\mid)}F[n]$, with $F[n]=\\ker(n:F\\to F)$ and inclusion transition maps; the index is filtered by common multiples. Each $F[n]$ is killed by $n$, so step 6 gives $H^t(X,F[n])=0$ for $t>c+e$. Since $X$ is qcqs by step 1, [lem-weil-pbc-cohomology-filtered-colimit] identifies $H^t(X,F)$ with $\\varinjlim_n H^t(X,F[n])=0$. The definition [def-sc-etale-torsion-cd] now gives $\\operatorname{cd}_{\\rm tor}(X)\\leq c+e$.",
+   "uses": [
+    "lemma-weil-pbc-torsion-filtered-union",
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "def-sc-etale-torsion-cd"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDC (lemma-torsion-cohomology), proof of (1), and Tag 03Q5 (lemma-colimit)"
+   }
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "def-weil-pbc-relative-separable-closure",
+  "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
+  "lem-weil-pbc-strict-henselization-pointed-map",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-pc-kbar-pure-insep",
+  "lem-pc-homeo-pure-insep",
   "thm-weil-pbc-universal-homeomorphism-invariance",
+  "def-sc-etale-torsion-cd",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-exc-abelian-sheaves-gmodules",
+  "def-weil-pbc-etale-cohomology",
   "thm-sp-grothendieck",
+  "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-global-sections-functor",
+  "lem-weil-pbc-direct-image-preserves-injectives",
+  "lemma-weil-pbc-leray-acyclicity",
+  "def-sp-convergence",
   "lemma-weil-pbc-torsion-filtered-union",
   "lem-weil-pbc-cohomology-filtered-colimit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-cd-ground-field.md",
-  "place": "## Proof"
+  "place": "Proof, expanded with Stacks Tags 04HX, 04GP, 03Q9, 03SI, 04JQ, 0732, 015N, 0DDC and 03Q5"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|cohomological_dimension|Leray",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: no declaration gives the etale geometric-to-arithmetic dimension bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale cohomological dimension descent from algebraic closure",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The etale cohomological dimension of a scheme over a field is at most the sum of the field cohomological dimension and the geometric cohomological dimension",
+   "results": "Algebra.etaleLocus_eq_compl_support; AlgebraicGeometry.IsEtale.of_comp; Algebra.FormallyEtale.comp; Algebra.Etale.comp; Algebra.FormallyEtale.of_restrictScalars; Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat; Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero; Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars",
+   "date": "2026-10-14",
+   "verdict": "no match: no declaration gives the etale geometric-to-arithmetic dimension bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images and the Leray spectral sequence bound torsion sheaf cohomology over a field",
+   "results": "DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; DerivedCategory.isZero_of_isLE; DerivedCategory.isZero_of_isGE; CategoryTheory.Sheaf.H; DerivedCategory.isLE_iff; DerivedCategory.isGE_iff; CategoryTheory.Sheaf.cohomologyPresheaf; Rep.isZero_Tor_succ_of_projective",
+   "date": "2026-10-14",
+   "verdict": "no match: no declaration gives the etale geometric-to-arithmetic dimension bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSequence\"",
+   "results": "ComplexShape.spectralSequenceNat; ComplexShape.spectralSequenceFin; ComplexShape.spectralSequenceNat_rel_iff; ComplexShape.spectralSequenceFin_rel_iff; CategoryTheory.Abelian.SpectralObject.SpectralSequenceDataCore; CategoryTheory.Abelian.SpectralObject.SpectralSequenceDataCore.deg; CategoryTheory.Abelian.SpectralObject.SpectralSequenceDataCore.i₁; CategoryTheory.Abelian.SpectralObject.SpectralSequenceDataCore.i₂",
+   "date": "2026-10-14",
+   "verdict": "no match: no declaration gives the etale geometric-to-arithmetic dimension bound"
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck.*spectral|Leray|torsion.*dimension",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: no declaration gives the etale geometric-to-arithmetic dimension bound"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological.?dimension|Leray|IsAcyclicComposablePair",
+   "results": "0 hits: none",
+   "date": "2026-10-14",
+   "verdict": "no match: derived-category truncation or group-cohomology facts do not state geometric-to-arithmetic etale cohomological-dimension descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of higher derived global sections from a bound on higher direct images and cohomological dimension of the base",
+   "results": "8 hits: DerivedCategory.isZero_of_isLE; DerivedCategory.isZero_of_isGE; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; DerivedCategory.isGE_iff; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; DerivedCategory.isLE_iff; CochainComplex.isZero_of_isGE; CategoryTheory.hasInjectiveDimensionLT_iff",
+   "date": "2026-10-14",
+   "verdict": "no match: derived-category truncation or group-cohomology facts do not state geometric-to-arithmetic etale cohomological-dimension descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"isZero\"",
+   "results": "4 hits: isZero_groupCohomology_succ_of_subsingleton; groupCohomology.mono_δ_of_isZero; groupCohomology.epi_δ_of_isZero; groupCohomology.isIso_δ_of_isZero",
+   "date": "2026-10-14",
+   "verdict": "no match: derived-category truncation or group-cohomology facts do not state geometric-to-arithmetic etale cohomological-dimension descent"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -74,5 +242,99 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-sc-cd-ground-field",
+  "worker": "stage1",
+  "summary": "Expanded the descent proof into seven steps, checked qcqs and the Grothendieck acyclicity hypothesis, used existing strict-henselization and field stalk-equivalence nodes, and wrote the finite-filtration and arbitrary-torsion arguments. No new nodes. Repair of return L: revalidated all cited statements against the current DAG; updated steps 3, 6 and 7 to explicitly use the clarified local-section torsion, small-etale-site and ordinary derived-section conventions, and replaced the three stale definition quotations. Fresh second reading: made the chosen representative compatibility in step 2 explicit; rechecked every current citation and all seven steps.",
+  "blueprint": "Proof sentences 1-3 are realized by steps 1-4; the bounded-torsion and Grothendieck spectral-sequence sentences by steps 4-6; the final filtered-union sentence by step 7.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic tool: Finitely generated algebras over Noetherian rings are Noetherian; supplies a hypothesis or comparison in the existing ground-field descent argument, not a replacement of the compact-support-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic tool: A locally Noetherian scheme is quasi-separated (Stacks 01OY); supplies a hypothesis or comparison in the existing ground-field descent argument, not a replacement of the compact-support-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
+    "why": "Generic tool: Maximal ideal and structural map in an affine strict-henselization chart; supplies a hypothesis or comparison in the existing ground-field descent argument, not a replacement of the compact-support-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-pointed-map",
+    "why": "Generic tool: Surjective pointed map from the neighbourhood colimit to the relative separable closure; supplies a hypothesis or comparison in the existing ground-field descent argument, not a replacement of the compact-support-base-change unit route."
+   },
+   {
+    "node": "lem-pc-kbar-pure-insep",
+    "why": "Generic tool: The algebraic closure over a separably closed field; supplies a hypothesis or comparison in the existing ground-field descent argument, not a replacement of the compact-support-base-change unit route."
+   },
+   {
+    "node": "lem-pc-homeo-pure-insep",
+    "why": "Generic tool: Base change along a purely inseparable extension is a homeomorphism; supplies a hypothesis or comparison in the existing ground-field descent argument, not a replacement of the compact-support-base-change unit route."
+   },
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "Generic tool: Universal-homeomorphism invariance; supplies a hypothesis or comparison in the existing ground-field descent argument, not a replacement of the compact-support-base-change unit route."
+   },
+   {
+    "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+    "why": "Generic tool: Strict-henselization stalk formula; supplies a hypothesis or comparison in the existing ground-field descent argument, not a replacement of the compact-support-base-change unit route."
+   },
+   {
+    "node": "lem-exc-abelian-sheaves-gmodules",
+    "why": "Generic tool: Abelian etale sheaves on a field and discrete G-modules; supplies a hypothesis or comparison in the existing ground-field descent argument, not a replacement of the compact-support-base-change unit route."
+   },
+   {
+    "node": "thm-sp-grothendieck",
+    "why": "Generic tool: Grothendieck spectral sequence; supplies a hypothesis or comparison in the existing ground-field descent argument, not a replacement of the compact-support-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+    "why": "Generic tool: Abelian sheaves on the small etale site form a Grothendieck abelian category; supplies a hypothesis or comparison in the existing ground-field descent argument, not a replacement of the compact-support-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-direct-image-preserves-injectives",
+    "why": "Generic tool: Direct image preserves injectives; supplies a hypothesis or comparison in the existing ground-field descent argument, not a replacement of the compact-support-base-change unit route."
+   },
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "Generic tool: Leray acyclicity criterion; supplies a hypothesis or comparison in the existing ground-field descent argument, not a replacement of the compact-support-base-change unit route."
+   },
+   {
+    "node": "lemma-weil-pbc-torsion-filtered-union",
+    "why": "Generic tool: Filtered torsion union; supplies a hypothesis or comparison in the existing ground-field descent argument, not a replacement of the compact-support-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-filtered-colimit",
+    "why": "Generic tool: Filtered colimits of etale cohomology; supplies a hypothesis or comparison in the existing ground-field descent argument, not a replacement of the compact-support-base-change unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
+  "lem-weil-pbc-strict-henselization-pointed-map",
+  "lem-pc-kbar-pure-insep",
+  "lem-pc-homeo-pure-insep",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-exc-abelian-sheaves-gmodules",
+  "thm-sp-grothendieck",
+  "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+  "lem-weil-pbc-direct-image-preserves-injectives",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lemma-weil-pbc-torsion-filtered-union",
+  "lem-weil-pbc-cohomology-filtered-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-7b908c884",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-7b908c884 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, and source passages. Verified all seven steps, strict-local compatibility over K, torsion coefficients, Leray hypotheses, filtration vanishing, and arbitrary-torsion colimits. No new nodes or fixes. review.md records accepted tool uses and inherited downstream DAG defects; no dependency returns to this item."
+ }
 }
