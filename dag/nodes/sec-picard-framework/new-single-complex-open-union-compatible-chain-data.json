@@ -1,0 +1,142 @@
+{
+ "id": "new-single-complex-open-union-compatible-chain-data",
+ "kind": "statement",
+ "title": "Compatible strict chain models for arbitrary coefficient comparison on an open union",
+ "statement": "theorem singleComplexOpenComparison_union_compatible_chain_data\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g) [IsAffine S] [IsAffine S']\n    [QuasiCompact f] [QuasiSeparated f]\n    (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K)\n    (K' : schemeDerivedCategory X') (hK' : schemeDerivedQCohProperty X' K')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    (U V : X.Opens)\n    (hUqc : IsCompact (U : Set X)) (hVqc : IsCompact (V : Set X))\n    (hUVqc : IsCompact ((U ⊓ V : X.Opens) : Set X)) :\n    let a : X.Opens → Arrow (schemeDerivedCategory S') := fun Z ↦\n      Arrow.mk (singleComplexOpenComparison f f' g g' sq.w K K' φ Z)\n    ∃ (A B A' B' : CochainComplex\n        (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) ℤ)\n      (t : A ⟶ B) (t' : A' ⟶ B') (α : A ⟶ A') (β : B ⟶ B')\n      (hc : t ≫ β = α ≫ t')\n      (e₁ : DerivedCategory.Q.obj A ≅ (a (U ⊔ V)).left)\n      (e₂ : DerivedCategory.Q.obj B ≅ (a U).left ⊞ (a V).left)\n      (e₃ : DerivedCategory.Q.obj (CochainComplex.mappingCone t) ≅\n        (a (U ⊓ V)).left)\n      (e₁' : DerivedCategory.Q.obj A' ≅ (a (U ⊔ V)).right)\n      (e₂' : DerivedCategory.Q.obj B' ≅ (a U).right ⊞ (a V).right)\n      (e₃' : DerivedCategory.Q.obj (CochainComplex.mappingCone t') ≅\n        (a (U ⊓ V)).right),\n      DerivedCategory.Q.map α ≫ e₁'.hom = e₁.hom ≫ (a (U ⊔ V)).hom ∧\n      DerivedCategory.Q.map β ≫ e₂'.hom =\n        e₂.hom ≫ biprod.map (a U).hom (a V).hom ∧\n      DerivedCategory.Q.map (CochainComplex.mappingCone.map t t' α β hc) ≫ e₃'.hom =\n        e₃.hom ≫ (a (U ⊓ V)).hom",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-single-complex-open-comparison",
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/perfect.tex; literature/stacks-project/derived.tex",
+  "place": "Tags 08HZ, 08HY and 0DJ9, relative restriction sequence and coefficient comparison before passing to the derived triangle; functorial cylinder replacement as in Tags 013N and 013O. Online 08HZ, 08HY, 0DJ9 read on 2026-10-14."
+ },
+ "proof": [
+  {
+   "text": "Resolve both coefficients on the union and its inverse image by functorial injective-term K-injective complexes. Form the exact restriction pair/difference rows; gluing gives the kernel and flasqueness gives surjectivity on the overlap. Apply derived direct image and base pullback with resolutions of the finite diagrams (K-flat for pullback). The transposed coefficient morphism and restriction naturality give the comparison of resolved diagrams, including a specified homotopy of the first square.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-open-union-image-complex-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Retain the specified homotopy in the cone map, and rectify the first square by a cylinder. Transport the middle and cone comparisons along the resulting homotopy equivalences. This produces a strict square whose functorial cone map still represents the original overlap comparison.",
+   "uses": [
+    "lem-pc-homotopy-square-cone-rectification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the six vertices by exact open restriction, direct-image composition and the additive biproduct comparison. Expand the base-change mate and the restricted coefficient arrow. Pullback pasting, composite counits and adjunction triangle identities identify the first, middle and cone components with the canonical union, member-biproduct and overlap arrows. Nested coefficient coherence identifies restrictions made on the union with the ambient restrictions. Empty opens and zero coefficients give zero diagrams; repeated or contained opens give split diagrams.",
+   "uses": [
+    "lem-pc-derived-direct-image-composition",
+    "lem-pc-single-complex-nested-coefficient-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-open-union-image-complex-exact",
+  "lem-pc-homotopy-square-cone-rectification",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-single-complex-nested-coefficient-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HZ; https://stacks.math.columbia.edu/tag/08HY; https://stacks.math.columbia.edu/tag/0DJ9; https://stacks.math.columbia.edu/tag/013N",
+  "place": "Chain-level realization of the relative Mayer–Vietoris comparison, before the short exact cylinder step; read online 2026-10-14."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible strict complexes representing derived Mayer Vietoris comparison for base change on two opens",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial mapping cylinder short exact sequence with all three components",
+   "results": "Eight generic short-complex and cylinder results; none constructs the geometric comparison with the pinned coefficient arrow.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.map",
+   "results": "Generic strict cone maps and map_eq_mapOfHomotopy; these do not give compatible geometric representatives.",
+   "date": "2026-10-14",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "cylIso|cylMap|cone_diagram_ses_presentation|union_ses_core",
+   "results": "StandardSingleUnionSESChainData handles an ordinary single coefficient with standard derived instances, not arbitrary K,K′ and φ. SingleComplexOpenUnionSESCore chooses α=β=0 and provides only object isomorphisms. No compatible model theorem for this input.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCompatibility",
+  "date": "2026-10-14",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Tag 0DJ9 induction diagram: compatible chain models for the source-open union before the short-exact-sequence triangle step.",
+   "via": [
+    "new-single-complex-open-union-ses-compatibility",
+    "lem-pc-single-complex-open-union-ses-presentation",
+    "lem-pc-single-complex-open-union-triangles",
+    "lem-pc-single-complex-open-affine-union",
+    "lem-pc-standard-flat-single-base-change",
+    "lem-pc-standard-flat-single-base-change-mono",
+    "lem-pc-single-complex-qcqs-homology-mono"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenUnionCompatibleChainData",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenUnionCompatibleChainData.lean",
+  "declaration": "AlgebraicGeometry.singleComplexOpenComparison_union_compatible_chain_data",
+  "statement": "theorem singleComplexOpenComparison_union_compatible_chain_data\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g) [IsAffine S] [IsAffine S']\n    [QuasiCompact f] [QuasiSeparated f]\n    (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K)\n    (K' : schemeDerivedCategory X') (hK' : schemeDerivedQCohProperty X' K')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    (U V : X.Opens)\n    (hUqc : IsCompact (U : Set X)) (hVqc : IsCompact (V : Set X))\n    (hUVqc : IsCompact ((U ⊓ V : X.Opens) : Set X)) :\n    let a : X.Opens → Arrow (schemeDerivedCategory S') := fun Z ↦\n      Arrow.mk (singleComplexOpenComparison f f' g g' sq.w K K' φ Z)\n    ∃ (A B A' B' : CochainComplex\n        (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) ℤ)\n      (t : A ⟶ B) (t' : A' ⟶ B') (α : A ⟶ A') (β : B ⟶ B')\n      (hc : t ≫ β = α ≫ t')\n      (e₁ : DerivedCategory.Q.obj A ≅ (a (U ⊔ V)).left)\n      (e₂ : DerivedCategory.Q.obj B ≅ (a U).left ⊞ (a V).left)\n      (e₃ : DerivedCategory.Q.obj (CochainComplex.mappingCone t) ≅\n        (a (U ⊓ V)).left)\n      (e₁' : DerivedCategory.Q.obj A' ≅ (a (U ⊔ V)).right)\n      (e₂' : DerivedCategory.Q.obj B' ≅ (a U).right ⊞ (a V).right)\n      (e₃' : DerivedCategory.Q.obj (CochainComplex.mappingCone t') ≅\n        (a (U ⊓ V)).right),\n      DerivedCategory.Q.map α ≫ e₁'.hom = e₁.hom ≫ (a (U ⊔ V)).hom ∧\n      DerivedCategory.Q.map β ≫ e₂'.hom =\n        e₂.hom ≫ biprod.map (a U).hom (a V).hom ∧\n      DerivedCategory.Q.map (CochainComplex.mappingCone.map t t' α β hc) ≫ e₃'.hom =\n        e₃.hom ≫ (a (U ⊓ V)).hom",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-da0d4",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261014T063818-L-2814065",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-da0d4",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261014T063818-L-2814065",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proof routes with the nodes and change record; verified clean compilation, axioms, the sole direct importer, and the original importer’s reported failure against changed dependencies."
+ }
+}
