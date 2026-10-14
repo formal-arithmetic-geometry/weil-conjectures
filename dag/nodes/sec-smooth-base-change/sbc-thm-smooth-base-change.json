@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sbc-thm-smooth-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Smooth base change",
- "statement": "Consider a cartesian diagram of\nschemes\n\n$$\n\\begin{array}{ccc}\nX & \\xleftarrow{\\;h\\;} & Y\\\\\nf\\big\\downarrow & & \\big\\downarrow e\\\\\nS & \\xleftarrow{\\;g\\;} & T\n\\end{array}\n$$\n\nwhere $f$ is smooth and $g$ is\nquasi-compact and\nquasi-separated. Then\n\n$$\nf^{-1}R^qg_*\\mathcal F=R^qh_*e^{-1}\\mathcal F\n$$\n\nfor any $q$ and any abelian sheaf $\\mathcal F$ on $T_{\\Et}$ all of\nwhose stalks at geometric points are torsion of orders invertible on\n$S$, the isomorphism being the base-change map of\n[sbc-def-base-change-map].\n(*Stacks Project, Etale Cohomology, Theorem 59.89.2, [Tag `0EYU`](https://stacks.math.columbia.edu/tag/0EYU); this chapter follows the second, shorter proof\nof that theorem.*)",
+ "statement": "Consider a cartesian diagram of\nschemes\n\n$$\n\\begin{array}{ccc}\nX & \\xleftarrow{\\;h\\;} & Y\\\\\nf\\big\\downarrow & & \\big\\downarrow e\\\\\nS & \\xleftarrow{\\;g\\;} & T\n\\end{array}\n$$\n\nwhere $f$ is smooth and $g$ is\nquasi-compact and\nquasi-separated. Then\n\n$$\nf^{-1}R^qg_*\\mathcal F=R^qh_*e^{-1}\\mathcal F\n$$\n\nfor any $q$ and any abelian sheaf $\\mathcal F$ on $T_{\\Et}$ all of\nwhose stalks at geometric points are torsion of orders invertible on\n$S$, the isomorphism being the base-change map of\n[sbc-def-base-change-map].\n",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-smooth-base-change/sbc-thm-smooth-base-change.md",
   "place": "node sbc-thm-smooth-base-change, order 1417",
@@ -31,7 +31,11 @@
     "sbc-lem-smooth-criterion",
     "sbc-lem-smooth-geometrically-reduced"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-smooth-base-change/sbc-thm-smooth-base-change.md",
+    "place": "## Proof, degree-zero paragraph"
+   }
   },
   {
    "text": "*(Filtered torsion.)* For every $n\\geq1$ invertible on $S$, let\n$\\mathcal F[n]$ be the subsheaf of sections of $\\mathcal F$ annihilated\nby $n$; by [lemma-weil-pbc-torsion-filtered-union]\n$\\mathcal F=\\varinjlim_n\\mathcal F[n]$ with $n$ ranging over the\nintegers invertible on $S$. Inverse images ($f^{-1}$, $h^{-1}$,\n$e^{-1}$) commute with filtered colimits as left adjoints, and the\nhigher direct images $R^qg_*$, $R^qh_*$ commute with filtered colimits\nby [lemma-weil-pbc-direct-image-filtered-colimit] (the morphisms\n$g$, $h$ being quasi-compact and quasi-separated), so the assertion\nfor $\\mathcal F$ reduces to the case of a sheaf $\\mathcal F$\nannihilated by some $n$ invertible on $S$; fix such an $n$.",
@@ -39,25 +43,41 @@
     "lemma-weil-pbc-torsion-filtered-union",
     "lemma-weil-pbc-direct-image-filtered-colimit"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-smooth-base-change/sbc-thm-smooth-base-change.md",
+    "place": "## Proof, Filtered torsion paragraph"
+   }
   },
   {
-   "text": "*(Etale locality and the normal form.)* By\n[sbc-lem-etale-locality] the question is etale local on $X$ and\n$S$. By [sbc-thm-etale-local-normal-form] (the local structure of\nsmooth morphisms) we may assume $X$ and $S$ are affine and that $X\\to S$\nfactors through an etale morphism $X\\to\\mathbf A^d_S$. Writing $X\\to S$\nas the composition\n$X\\to\\mathbf A^{d-1}_S\\to\\mathbf A^{d-2}_S\\to\\dots\\to\\mathbf A^1_S\\to S$,\n[sbc-lem-base-change-composition] shows that the theorem need\nonly be proved when $X$ and $S$ are affine and $X\\to S$ has relative\ndimension one.",
+   "text": "*(Etale locality and the normal form.)* By\n[sbc-lem-etale-locality] the question is etale local on $X$ and\n$S$. By [sbc-thm-etale-local-normal-form] (the local structure of\nsmooth morphisms) we may assume $X$ and $S$ are affine and that $X\\to S$\nfactors through an etale morphism $X\\to\\mathbf A^d_S$. Writing $X\\to S$\nas the composition\n$X\\to\\mathbf A^{d-1}_S\\to\\mathbf A^{d-2}_S\\to\\dots\\to\\mathbf A^1_S\\to S$,\n[sbc-lem-base-change-composition] shows that the theorem need\nonly be proved when $X$ and $S$ are affine and $X\\to S$ has relative\ndimension one, except when $d=0$. In the case $d=0$, the local normal form\nhas $X\\to S$ etale; apply [sbc-lem-etale-locality] with the cover $X\\to X$\nand $V=X$ to reduce to the identity morphism, whose degreewise base-change\nmap is an isomorphism directly from [sbc-def-base-change-map].",
    "uses": [
     "sbc-lem-etale-locality",
     "sbc-thm-etale-local-normal-form",
-    "sbc-lem-base-change-composition"
+    "sbc-lem-base-change-composition",
+    "sbc-def-base-change-map"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-smooth-base-change/sbc-thm-smooth-base-change.md",
+    "place": "## Proof, Etale locality and the normal form paragraph"
+   }
   },
   {
-   "text": "*(The induction step.)* For the affine smooth morphism of relative\ndimension one $f:X\\to S$, the induction hypothesis (the theorem in\ndegrees $<q$) gives $\\mathrm{BC}(f,n,q')$ universally for all\n$q'\\leq q-1$ in the sense of [sbc-def-base-change-property]: every base\nchange $f'$ of $f$ along a morphism $S'\\to S$ is again smooth\n(smoothness being stable under base change, as is immediate from\n[def-sbc-smooth-morphisms])\nand $n$ is invertible on $S'$, so the theorem in degrees $<q$ applies to\n$f'$ and every quasi-compact quasi-separated $g:T\\to S'$;\n[sbc-lem-rel-dim-one-induction] then gives $\\mathrm{BC}(f,n,q)$\nuniversally, in particular $\\mathrm{BC}(f,n,q)$, and (a degree-$q$ statement being etale local and stable under\ncomposition, by the first two steps) the theorem holds in degree $q$\nfor every smooth $f$, every quasi-compact quasi-separated $g$, and\nevery $n$-torsion $\\mathcal F$. Running the filtered colimit back over\nthe $n$'s gives the theorem in degree $q$ for every torsion $\\mathcal F$\nwith orders invertible on $S$; induction on $q$ finishes the proof.",
+   "text": "*(The induction step.)* For the affine smooth morphism of relative\ndimension one $f:X\\to S$, the induction hypothesis (the theorem in\ndegrees $<q$) gives $\\mathrm{BC}(f,n,q')$ universally for all\n$q'\\leq q-1$ in the sense of [sbc-def-base-change-property]: every base\nchange $f'$ of $f$ along a morphism $S'\\to S$ is again smooth\n(and remains of relative dimension one) by\n[lem-sbc-smooth-relative-dimension-permanence]\nand $n$ is invertible on $S'$, so the theorem in degrees $<q$ applies to\n$f'$ and every quasi-compact quasi-separated $g:T\\to S'$;\n[sbc-lem-rel-dim-one-induction] then gives $\\mathrm{BC}(f,n,q)$\nuniversally, in particular $\\mathrm{BC}(f,n,q)$, and (a degree-$q$ statement being etale local by\n[sbc-lem-etale-locality] and stable under composition by\n[sbc-lem-base-change-composition]) the theorem holds in degree $q$\nfor every smooth $f$, every quasi-compact quasi-separated $g$, and\nevery $n$-torsion $\\mathcal F$. Running the filtered colimit back over\nthe $n$'s gives the theorem in degree $q$ for every torsion $\\mathcal F$\nwith orders invertible on $S$; induction on $q$ finishes the proof.",
    "uses": [
     "sbc-def-base-change-property",
     "def-sbc-smooth-morphisms",
-    "sbc-lem-rel-dim-one-induction"
+    "sbc-lem-rel-dim-one-induction",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "sbc-lem-etale-locality",
+    "sbc-lem-base-change-composition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-smooth-base-change/sbc-thm-smooth-base-change.md",
+    "place": "## Proof, The induction step paragraph"
+   }
   }
  ],
  "proof_deps": [
@@ -69,18 +89,49 @@
   "sbc-lem-etale-locality",
   "sbc-thm-etale-local-normal-form",
   "sbc-lem-base-change-composition",
+  "sbc-def-base-change-map",
   "sbc-def-base-change-property",
   "def-sbc-smooth-morphisms",
-  "sbc-lem-rel-dim-one-induction"
+  "sbc-lem-rel-dim-one-induction",
+  "lem-sbc-smooth-relative-dimension-permanence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-smooth-base-change/sbc-thm-smooth-base-change.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "smooth base change theorem for torsion étale sheaves under a smooth morphism",
+   "results": "KaehlerDifferential.isBaseChange_of_formallyEtale; RingHom.Etale.isStableUnderBaseChange; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; Algebra.Etale.baseChange; Algebra.FormallyEtale.of_restrictScalars; Algebra.FormallyEtale.comp; AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale.isIso_baseChange_of_smooth, Smooth, IsPullback",
+   "results": "0 hits; unknown identifier AlgebraicGeometry.Etale.isIso_baseChange_of_smooth",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_baseChange_of_smooth|smooth base change [Mathlib]",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth base change in étale cohomology torsion sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -119,5 +170,34 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-thm-smooth-base-change"
+ "unit": "sk-thm-smooth-base-change",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "sbc-thm-smooth-base-change",
+  "worker": "stage1",
+  "summary": "Checked the imported smooth base change theorem against Stacks Tag 0EYU and the chapter/unit blueprint. All eleven proof dependencies already exist as DAG nodes; no new nodes were needed. Verified the four steps, their hypotheses, and the filtered-torsion and universal-induction reductions. The slopmaster2 declaration has sorry and therefore is not an attachment. Mathlib searches found no matching theorem.",
+  "blueprint": "Realizes the unit proof paragraph: degree zero, filtered torsion reduction, etale-local relative-dimension-one reduction, and induction on q.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-direct-image-filtered-colimit",
+    "why": "The filtered-torsion step needs commutation of higher direct images with filtered colimits for qcqs morphisms, a generic six-functor fact supplied by this existing node and absent from the smooth-base-change unit route."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "The universal induction step needs smoothness and relative-dimension-one permanence under arbitrary base change; this generic permanence lemma is in another unit and is not supplied by the definition of smoothness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-direct-image-filtered-colimit",
+  "lem-sbc-smooth-relative-dimension-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-f24a841d6",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-f24a841d6 (reviewer sub-agent of L); spot-checked: Repaired item JSON adds per-step sources and complete proof dependencies, handles the omitted d=0 étale case, cites smooth relative-dimension permanence under base change, and corrects the locality/composition attribution. Review written in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
