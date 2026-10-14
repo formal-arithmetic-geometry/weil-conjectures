@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Finite stratified restrictions detect pro-etale sheaves",
- "statement": "Let $X$ be a Noetherian scheme, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact. Let $(i_\\alpha:X_\\alpha\\to X)_\\alpha$ be a finite stratification [def-constructible-stratification]. On each $X_\\alpha$ choose a pro-etale covering $(v_{\\alpha j}:V_{\\alpha j}\\to X_\\alpha)_j$ [def-weil-pbc-proetale-site]. For every abelian sheaf $F$ on $X_{\\mathrm{proet}}$, if $v_{\\alpha j}^{-1}i_\\alpha^{-1}F=0$ for all $\\alpha,j$, then $F=0$, where inverse images are [def-weil-proetale-inverse-image]. In particular, for any ring sheaf $R$ on $X_{\\mathrm{proet}}$, the termwise exact inverse images to modules over its inverse images jointly detect zero objects and isomorphisms in $D(\\operatorname{Mod}(R))$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category].",
+ "statement": "Let $X$ be a Noetherian scheme, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. Let $(i_\\alpha:X_\\alpha\\to X)_\\alpha$ be a finite stratification [def-constructible-stratification]. On each $X_\\alpha$ choose a pro-etale covering $(v_{\\alpha j}:V_{\\alpha j}\\to X_\\alpha)_j$ [def-weil-pbc-proetale-site]. For every abelian sheaf $F$ on $X_{\\mathrm{proet}}$, if $v_{\\alpha j}^{-1}i_\\alpha^{-1}F=0$ for all $\\alpha,j$, then $F=0$, where inverse images are [def-weil-proetale-inverse-image]. In particular, for any ring sheaf $R$ on $X_{\\mathrm{proet}}$, the termwise exact inverse images to modules over its inverse images jointly detect zero objects and isomorphisms in $D(\\operatorname{Mod}(R))$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category].",
  "source": {
   "document": "literature/stacks-project/proetale.tex",
   "place": "Tag 09AH (lemma-ses-associated-to-open), and Tag 09AB (lemma-thickening), followed by Noetherian induction. The induction and covering detection are agent consequences, not the literal statements of those lemmas."
@@ -22,11 +22,119 @@
   "def-weil-pbc-proetale-site",
   "def-weil-proetale-inverse-image",
   "def-weil-sheaf-of-modules-category",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-quasi-compact-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record composition of restrictions, including along the open subschemes used below. For composable scheme maps $a,b$, the direct-image formula identifies $a_*b_*$ with $(ab)_*$: on an object $W$ the two sections are evaluated on $(W\\times X_a)\\times X_b\\cong W\\times X_b$. Composing the two adjunction bijections therefore identifies $b^{-1}a^{-1}$ with $(ab)^{-1}$, naturally in the sheaf. This is the uniqueness of a representing object for the same Hom functor, and also identifies restriction along an identity with the identity. In particular restrictions of a sheaf already zero on a stratum remain zero after any further restriction.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, section-functoriality; composition by the displayed direct-image formula and adjunction"
+   }
+  },
+  {
+   "text": "For any scheme $T$, let $(v_j:V_j\\to T)_j$ be a pro-etale covering and $G$ an abelian sheaf whose inverse images on the $V_j$ vanish. Regard an abelian sheaf as a module over the constant integer sheaf: integers act by repeated addition, with locally constant integers acting locally and gluing. The localization theorem identifies $v_j^{-1}G$ with slice restriction, so for any object $W\\to T$, the restriction of every $s\\in G(W)$ to $W\\times_TV_j$ is zero. These fibre products cover $W$ by the covering axiom. Separatedness in the sheaf axiom gives $s=0$. Hence $G=0$. Apply this with $G=i_\\alpha^{-1}F$ to remove the chosen coverings from the hypothesis. The same argument will glue vanishing over an open covering of $X$.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-proetale-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5 and localization at objects; covering and sheaf axioms; integer action is repeated addition"
+   }
+  },
+  {
+   "text": "Prove by induction on $n$ that restrictions to any stratification with at most $n$ strata detect zero abelian sheaves on every Noetherian scheme. For $n=0$ the scheme is empty, and the empty covering forces every sheaf of abelian groups to have zero sections. For the induction step discard empty strata. For each remaining $i_\\alpha:X_\\alpha\\to X$, the definition of immersion gives a factorization $X_\\alpha\\hookrightarrow W_\\alpha\\hookrightarrow X$, closed followed by open. The opens $W_\\alpha$ cover $X$ because their images contain the strata. Write $Z_\\alpha=X_\\alpha$, viewed with this actual closed-immersion structure in $W_\\alpha$, and put $U_\\alpha=W_\\alpha\\setminus |Z_\\alpha|$. Both $W_\\alpha$ and $U_\\alpha$ are Noetherian by open-subscheme permanence. Moreover $U_\\alpha\\to W_\\alpha$ is quasi-compact: for any affine open $B\\subset W_\\alpha$, the open $B\\cap U_\\alpha$ of the Noetherian scheme $X$ is quasi-compact by that same permanence theorem. This checks the morphism hypothesis, not just quasi-compactness of $U_\\alpha$ itself.",
+   "uses": [
+    "def-constructible-stratification",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OW (lemma-locally-Noetherian), 01OZ (lemma-Noetherian-topology); induction using the immersion factorization"
+   }
+  },
+  {
+   "text": "On $U_\\alpha$ base-change the original stratification. Its $\\alpha$-stratum is empty, so discard it; the other strata form a stratification with at most $n-1$ strata. The pullback-stratification lemma supplies the schemes and immersions, not merely a partition of points. By step 1, the restriction $F|_{U_\\alpha}$ has zero restriction to each of them, since every original $i_\\beta^{-1}F$ is zero by step 2. The induction hypothesis applied to the Noetherian scheme $U_\\alpha$ gives $F|_{U_\\alpha}=0$. Also the closed restriction of $F|_{W_\\alpha}$ to $Z_\\alpha=X_\\alpha$ is zero by step 1. Apply open/closed detection to $F|_{W_\\alpha}$, regarded as a module sheaf over the constant integer sheaf as in step 2. Its two inverse images vanish and its open complement is quasi-compact by step 3, so $F|_{W_\\alpha}=0$. The open-cover case of step 2 now gives $F=0$, completing the induction. At no point is an arbitrary subscheme replaced by its reduced structure.",
+   "uses": [
+    "lemma-constructible-pullback-stratification",
+    "lem-exc-open-closed-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH (lemma-ses-associated-to-open), in its zero-object consequence lem-exc-open-closed-detection; finite-stratum induction is an agent argument"
+   }
+  },
+  {
+   "text": "Let now $R$ be any ring sheaf on $X_{\\mathrm{proet}}$. For a scheme map $u$, inverse image takes an $R$-module sheaf to a module over $u^{-1}R$ by applying inverse image to its addition and action. There is no scalar extension to a different coefficient ring here. Underlying abelian inverse image is exact by the site-pullback theorem. Kernels and cokernels of module sheaves have the underlying abelian kernels and cokernels, so this module functor is exact. The exact-functor theorem induces its termwise triangulated functor on the unbounded derived categories. Explicitly, preservation of kernels and cokernels gives $u^{-1}H^q(K)=H^q(u^{-1}K)$: the cohomology quotient is the cokernel of the image of the previous differential in the next kernel. The sheaf result of steps 1--4 applies to underlying abelian sheaves, hence detects zero $R$-modules as well.",
+   "uses": [
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "def-weil-sheaf-of-modules-category",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC (lemma-flat-pullback-exact), first assertion; Tag 03DA (lemma-abelian); derived.tex Tag 015F (lemma-right-derived-exact-functor)"
+   }
+  },
+  {
+   "text": "If a derived object $K$ restricts to zero on every chosen covering of every stratum, step 5 gives zero restrictions of $H^q(K)$ for every integer $q$. The abelian-sheaf result makes $H^q(K)=0$ for all $q$. Choose a representing complex $C$; the map $0\\to C$ is then a quasi-isomorphism, so its image in the localization is an isomorphism $0\\cong K$. Conversely an additive restriction functor sends a zero object to zero. This proves joint zero detection without boundedness assumptions.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU (definition-unbounded-derived-category): localization at quasi-isomorphisms"
+   }
+  },
+  {
+   "text": "For a morphism $f:K\\to L$ in $D(\\operatorname{Mod}(R))$, complete it to a distinguished triangle $K\\xrightarrow f L\\to C\\to K[1]$. Each restriction is triangulated by step 5. If every restricted $f$ is invertible, the long exact cohomology sequence of each restricted triangle makes every cohomology object of the restricted $C$ zero; the localization argument in step 6 makes that restricted cone zero. Joint zero detection gives $C=0$. Apply Hom$(W,-)$ exactness to the global triangle and its rotations: since both $C$ and $C[-1]$ are zero, Hom$(W,f)$ is bijective for every $W$. Taking $W=L$ gives $h:L\\to K$ with $fh=1_L$; injectivity for $W=K$ applied to $hf$ and $1_K$ gives $hf=1_K$. Thus $f$ is invertible. The converse follows since every functor preserves isomorphisms.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145 (TR1 and TR2); Tags 05RS/05RT (cohomological exactness); Tag 0149 (lemma-representable-homological)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-stratification",
+  "def-weil-abstract-derived-category",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-triangulated-category",
+  "lem-exc-open-closed-detection",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lemma-constructible-pullback-stratification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH and finite-stratum induction using actual immersion factorizations; derived consequences from exactness and triangles"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,15 +177,89 @@
    "date": "2026-10-14",
    "results": "8 hits: AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, Algebra.isOpen_etaleLocus, AlgebraicGeometry.Scheme.smallEtaleTopology",
    "verdict": "no match: inspected the returned signatures; they concern other sheaf sites, ordinary completeness, or other full functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally closed stratification of a Noetherian scheme jointly detects zero abelian sheaves on the pro etale site",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, SheafOfModules.IsFiniteType, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.etaleTopology",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected results; structure-sheaf open-cover and affine-limit results do not concern arbitrary abelian pro-etale sheaves or locally closed stratifications."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"conservative\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected results; structure-sheaf open-cover and affine-limit results do not concern arbitrary abelian pro-etale sheaves or locally closed stratifications."
+  },
+  {
+   "tool": "grep",
+   "query": "stratif.*(detect|conserv)|proetale.*(detect|conserv)",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected results; structure-sheaf open-cover and affine-limit results do not concern arbitrary abelian pro-etale sheaves or locally closed stratifications."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restrictions to finite locally closed strata are jointly conservative on pro etale abelian sheaves",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An abelian sheaf is zero if its restrictions to an open subscheme and the closed complement vanish on a noetherian scheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_eq_of_qcqs",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected results; structure-sheaf open-cover and affine-limit results do not concern arbitrary abelian pro-etale sheaves or locally closed stratifications."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-reconstruction-uniform-tower",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-noetherian-stratum-detection",
+  "worker": "stage1",
+  "summary": "Retained the statement and supplied seven steps: composition and covering detection, finite-stratum induction on actual closed immersion neighborhoods, exact module inverse image, and unbounded derived zero/isomorphism detection. Reused existing general open/closed detection instead of the insufficient finite-ring open/closed sequence node. No new nodes, no Lean writes or builds. Added the explicit quasi-compactness definition citation without changing the hypothesis.",
+  "blueprint": "Final sentence of lem-weil-pbc-reconstruction-uniform-tower: justify descent of cohomological bounds and local isomorphisms; steps 1--4 sheaves, steps 5--7 derived categories.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-open-closed-detection",
+    "why": "Generic site, open/closed detection, or exact/triangulated category tool used as stated; supplies a local ingredient of the reconstruction argument, not a replacement for a unit-level proper base-change step."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Generic site, open/closed detection, or exact/triangulated category tool used as stated; supplies a local ingredient of the reconstruction argument, not a replacement for a unit-level proper base-change step."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic site, open/closed detection, or exact/triangulated category tool used as stated; supplies a local ingredient of the reconstruction argument, not a replacement for a unit-level proper base-change step."
+   },
+   {
+    "node": "lemma-constructible-pullback-stratification",
+    "why": "Generic site, open/closed detection, or exact/triangulated category tool used as stated; supplies a local ingredient of the reconstruction argument, not a replacement for a unit-level proper base-change step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-open-closed-detection",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lemma-constructible-pullback-stratification"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-6a9299b64",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-6a9299b64 (reviewer sub-agent of L); spot-checked: Full mathematical and source review completed. The seven-step split is coherent, hypotheses and coefficient categories are preserved, cited statements support every non-elementary step, no duplicate or restated node was found, and edge cases including empty/nonreduced strata, infinite covers, zero objects, and unbounded complexes check out. Exact proper and smooth master target morphisms and categories were verified. Review written to review.md."
+ }
 }
