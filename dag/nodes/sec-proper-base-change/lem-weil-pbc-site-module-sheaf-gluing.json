@@ -26,9 +26,91 @@
   "def-pur-localized-ringed-site",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an object $V\\to U$, put $V_i=U_i\\times_U V$ and $V_{ij}=U_i\\times_U U_j\\times_U V$. Define $F(V)$ to be the set of tuples $(s_i)\\in\\prod_i F_i(V_i)$ satisfying $\\phi_{ij}(s_i|_{V_{ij}})=s_j|_{V_{ij}}$ for every pair. For a morphism $W\\to V$ over $U$, restrict each component along $U_i\\times_U W\\to V_i$. Naturality of $\\phi_{ij}$ preserves the compatibility equations; identity and composite restriction laws hold componentwise. All these fibre products exist by the base-change axiom for coverings.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR, sites-lemma-glue-sheaves: compatible-tuples formula; explicit verification of restrictions, sheaf condition and local isomorphisms omitted in the source."
+   }
+  },
+  {
+   "text": "Make $F(V)$ an $A(V)$-module by $(s+t)_i=s_i+t_i$, $0_i=0$, $(-s)_i=-s_i$, and $(a s)_i=(a|_{V_i})s_i$. On $V_{ij}$ both scalar restrictions are $a|_{V_{ij}}$; linearity of $\\phi_{ij}$ therefore preserves the tuple equations for all four operations. Every module axiom holds in each $F_i(V_i)$ and hence in the tuple subset. The restriction maps are additive and satisfy $(a s)|_W=a|_W(s|_W)$ by the corresponding property in each $F_i$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR, sites-lemma-glue-sheaves: compatible-tuples formula; explicit verification of restrictions, sheaf condition and local isomorphisms omitted in the source."
+   }
+  },
+  {
+   "text": "Let $\\{W_b\\to V\\}_b$ be a covering in $\\mathcal C/U$, and let $t^{(b)}\\in F(W_b)$ be a matching family. For each $i$, the base-changed family $\\{U_i\\times_U W_b\\to V_i\\}_b$ is a covering of $\\mathcal C/U_i$; its matching sections $t_i^{(b)}$ have a unique amalgamation $s_i\\in F_i(V_i)$. On $V_{ij}$, the sections $\\phi_{ij}(s_i|_{V_{ij}})$ and $s_j|_{V_{ij}}$ agree on the covering $\\{V_{ij}\\times_V W_b\\to V_{ij}\\}_b$, since each $t^{(b)}$ is a compatible tuple. Separatedness of $F_j$ makes them equal. Thus $(s_i)\\in F(V)$ amalgamates the family, uniquely by separatedness in every component. The underlying presheaf is a sheaf, so the module presheaf of step 2 is an $A$-module sheaf.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR, sites-lemma-glue-sheaves: compatible-tuples formula; explicit verification of restrictions, sheaf condition and local isomorphisms omitted in the source."
+   }
+  },
+  {
+   "text": "Fix $k$ and $g:W\\to U_k$. For $s\\in F(W)$ define $e_k(W)(s)$ by restricting $s_k\\in F_k(U_k\\times_U W)$ along the graph $d_g=(g,\\mathrm{id}_W):W\\to U_k\\times_U W$. For $t\\in F_k(W)$ define a tuple $q_k(W)(t)$ whose $i$-component is $\\phi_{ki}(t|_{U_i\\times_U W})$, evaluated on $U_i\\times_U W$ as an object over $U_k\\times_U U_i$ via $(g\\circ\\mathrm{pr}_W,\\mathrm{pr}_{U_i})$. Restricting the cocycle $\\phi_{kj}=\\phi_{ij}\\circ\\phi_{ki}$ to $U_i\\times_U U_j\\times_U W$ gives its tuple equation. Thus $q_k$ takes values in $F(W)$. Both $e_k$ and $q_k$ commute with restriction by naturality of $\\phi$ and the graph maps, and are $A(W)$-linear by step 2 and linearity of the transition maps.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR, sites-lemma-glue-sheaves: compatible-tuples formula; explicit verification of restrictions, sheaf condition and local isomorphisms omitted in the source."
+   }
+  },
+  {
+   "text": "Restrict the $(k,k,k)$ cocycle to the full diagonal $U_k\\to U_k\\times_U U_k\\times_U U_k$. The resulting automorphism $\\alpha=\\Delta^*\\phi_{kk}$ satisfies $\\alpha=\\alpha\\circ\\alpha$, so cancellation gives $\\alpha=\\mathrm{id}$. It follows that $e_k(W)q_k(W)(t)=t$. Conversely, restrict the tuple equation $\\phi_{ki}(s_k)=s_i$ to $U_i\\times_U W$ by the map with coordinates $(g\\circ\\mathrm{pr}_W,\\mathrm{pr}_{U_i},\\mathrm{pr}_W)$. Its left side is exactly the $i$-component of $q_k(W)e_k(W)(s)$, while its right side is $s_i$. Hence $q_ke_k=\\mathrm{id}$ componentwise. Therefore $e_k:F|_{U_k}\\to F_k$ is an $A_k$-linear isomorphism; no covering arrow was assumed monomorphic.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR, sites-lemma-glue-sheaves: compatible-tuples formula; explicit verification of restrictions, sheaf condition and local isomorphisms omitted in the source."
+   }
+  },
+  {
+   "text": "For an object $W\\to U_i\\times_U U_j$ write $g_i,g_j$ for its two projections to $U_i,U_j$. Pull the tuple equation on $U_i\\times_U U_j\\times_U W$ back along $(g_i,g_j,\\mathrm{id}_W)$. It gives $\\phi_{ij}(e_i(W)(s))=e_j(W)(s)$ for every $s\\in F(W)$. These are equalities of $A(W)$-linear maps, and hence the required equalities of $A_{ij}$-module sheaf morphisms on the overlap. The sheaf $F$ and the isomorphisms $e_i$ now meet every clause of the statement.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR, sites-lemma-glue-sheaves: compatible-tuples formula; explicit verification of restrictions, sheaf condition and local isomorphisms omitted in the source."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR, sites-lemma-glue-sheaves; compatible-tuples construction with componentwise module operations and the omitted verifications written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,10 +153,31 @@
    "results": "8 hits: SheafOfModules.IsQuasicoherent, SheafOfModules.isQuasicoherent, SheafOfModules.QuasicoherentData, SheafOfModules.Presentation, SheafOfModules.QuasicoherentData.presentation, CategoryTheory.isSheaf_coherent, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.IsFinitePresentation",
    "date": "2026-10-14",
    "verdict": "no match: second reader inspected the relevant local signatures; definitions, presentation transport, Mayer-Vietoris, and Ext class construction do not establish this complete statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent data consisting of sheaves on over categories of a covering is effective",
+   "date": "2026-10-14",
+   "results": "8 hits: CategoryTheory.isSheaf_coherent, CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, CategoryTheory.Pseudofunctor.bijective_toDescentData_map_iff, CategoryTheory.coherentTopology.exists_effectiveEpiFamily_iff_mem_induced, CategoryTheory.Pseudofunctor.DescentData.isEquivalence_toDescentData_iff_of_sieve_eq, CategoryTheory.Pseudofunctor.DescentData.exists_equivalence_of_sieve_eq, CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff, CategoryTheory.Pseudofunctor.isStackFor_iff",
+   "verdict": "no match: inspected IsStack.lean lines 45-73 (assumes an already established IsStack instance), IsSheafFor.lean lines 629-645 (glues sections), and Sheaf.lean lines 75-89 (defines sheaves); none proves effective gluing of module sheaf objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"equivalence\"",
+   "date": "2026-10-14",
+   "results": "12 hits: CategoryTheory.sheafBotEquivalence, CategoryTheory.sheafBotEquivalence_functor, CategoryTheory.sheafBotEquivalence_inverse_obj_obj, CategoryTheory.sheafBotEquivalence_inverse_map_hom, CategoryTheory.sheafBotEquivalence_unitIso, CategoryTheory.sheafBotEquivalence_counitIso, CategoryTheory.Functor.IsDenseSubsite.hasWeakSheafify_of_isEquivalence, CategoryTheory.Functor.IsDenseSubsite.hasSheafify_of_isEquivalence",
+   "verdict": "no match: inspected IsStack.lean lines 45-73 (assumes an already established IsStack instance), IsSheafFor.lean lines 629-645 (glues sections), and Sheaf.lean lines 75-89 (defines sheaves); none proves effective gluing of module sheaf objects."
+  },
+  {
+   "tool": "grep",
+   "query": "descent|glue|gluing",
+   "date": "2026-10-14",
+   "results": "25 hits: Mathlib/CategoryTheory/Sites/LocallyBijective.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/Precoverage/Generates.lean, Mathlib/CategoryTheory/Sites/Precoverage/Generates.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+   "verdict": "no match: inspected IsStack.lean lines 45-73 (assumes an already established IsStack instance), IsSheafFor.lean lines 629-645 (glues sections), and Sheaf.lean lines 75-89 (defines sheaves); none proves effective gluing of module sheaf objects."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-condensed-finite-presentation-descent",
   "by": "worker",
@@ -90,5 +193,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-site-module-sheaf-gluing",
+  "worker": "stage1",
+  "summary": "Construct compatible tuples directly; verify module operations and the sheaf axiom componentwise; construct local graph evaluation and its cocycle-defined inverse, then check the overlap equations. No new nodes are needed.",
+  "blueprint": "Realizes the gluing of lifted local finite presentations in the first (Obj) descent paragraph of TwoColimit.lean.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-12fdfc434",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-12fdfc434 (reviewer sub-agent of L); spot-checked: Tag 04TR and all cited definitions support the arbitrary-site compatible-tuple construction, module structure, sheaf axiom, graph inverses, and overlap equation; edge cases and archived target coefficient categories were checked. Steps 3–5 are substantial descent arguments but are incorrectly marked elementary. Corrected full node is at fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-site-module-sheaf-gluing.json.; 1 file(s) fixed by the reviewer"
  }
 }
