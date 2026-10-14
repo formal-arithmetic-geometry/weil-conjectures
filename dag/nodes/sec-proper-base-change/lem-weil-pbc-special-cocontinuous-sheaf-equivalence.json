@@ -6,11 +6,92 @@
   "by": "worker",
   "date": "2026-10-13"
  },
- "status": "unsplit",
+ "status": "split",
  "mathlib_match": null,
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $L=u^s$ and $R=g_*$. The hypotheses (a),(b) of [def-weil-pbc-special-cocontinuous-functor] give cocontinuity and continuity. Apply [lem-weil-pbc-continuous-cocontinuous-topos-adjunction] to these small sites. Thus $g^{-1}=L$ is restriction, $R\\mathcal F(V)$ consists of the compatible families specified there, the counit is evaluation at $(U,\\mathrm{id})$, and the unit sends $t$ to its restrictions along all $\\psi:u(A)\\to V$. We prove these two maps bijective; the remaining hypotheses (c),(d),(e) enter below.",
+   "uses": [
+    "def-weil-pbc-special-cocontinuous-functor",
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A0 (lemma-equivalence), first paragraph of proof; Tags 00XO, 00XR"
+   }
+  },
+  {
+   "text": "Fix a sheaf $\\mathcal F$ on $\\mathcal C$, $U\\in\\mathcal C$ and $s\\in\\mathcal F(U)$. Given $\\psi:u(A)\\to u(U)$, choose by (d) a covering $\\{f_i:A_i\\to A\\}$ and arrows $c_i:A_i\\to U$ with $u(c_i)=\\psi u(f_i)$. On $P=A_i\\times_A A_j$, continuity identifies $u(P)$ with $u(A_i)\\times_{u(A)}u(A_j)$, so $u(c_i\\operatorname{pr}_1)=u(c_j\\operatorname{pr}_2)$. By (c) these two arrows become equal on a covering of $P$. Consequently the restrictions of $c_i^*s$ and $c_j^*s$ agree on that covering and hence on $P$, by the injectivity part of the sheaf equalizer condition. Its existence part gives a unique section $t_{A,\\psi}\\in\\mathcal F(A)$ restricting to $c_i^*s$. All fibre products invoked exist by the covering-base-change site axiom. The section is independent of the chosen covering and lifts: on the common refinement $A_i\\times_A A'_j$, the two lifts to $U$ have equal $u$-images by continuity, so (c) and separatedness identify their pullbacks of $s$; separatedness on the refinement identifies the two glued sections.",
+   "uses": [
+    "def-weil-pbc-special-cocontinuous-functor",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A0 (lemma-equivalence), counit surjectivity paragraph and overlap diagram"
+   }
+  },
+  {
+   "text": "For $a:B\\to A$, pull the chosen covering of $A$ back to $B$. Its arrows $q_i:B\\times_A A_i\\to B$ and maps $c_i\\operatorname{pr}_2:B\\times_A A_i\\to U$ are lifts of $\\psi u(a)$, because $a q_i=f_i\\operatorname{pr}_2$. By independence of choices from step 2, $t_{B,\\psi u(a)}=a^*t_{A,\\psi}$. Therefore the $t_{A,\\psi}$ form an element of $R\\mathcal F(u(U))$. Choosing the identity covering and identity lift for $(U,\\mathrm{id})$ gives $t_{U,\\mathrm{id}}=s$. Conversely, any compatible family with this value has $f_i^*s_{A,\\psi}=c_i^*s$ by compatibility with the arrows from $(A_i,u(c_i))$ to both $(A,\\psi)$ and $(U,\\mathrm{id})$. Sheaf separatedness forces $s_{A,\\psi}=t_{A,\\psi}$. Evaluation is thus bijective, proving the counit $LR\\mathcal F\\to\\mathcal F$ is an isomorphism. This uses only evaluation, not the incorrect assertion in the source that $(U,\\mathrm{id})$ is final.",
+   "uses": [
+    "def-weil-pbc-special-cocontinuous-functor",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A0 (lemma-equivalence), counit injectivity and end of counit surjectivity; details of compatibility written out"
+   }
+  },
+  {
+   "text": "For a sheaf $\\mathcal G$ on $\\mathcal D$ and any $U$, the composite of the unit component $\\eta_{\\mathcal G,u(U)}:\\mathcal G(u(U))\\to RL\\mathcal G(u(U))$ with the counit evaluation $RL\\mathcal G(u(U))\\to\\mathcal G(u(U))$ is the identity: the $(U,\\mathrm{id})$ coordinate of the unit family is $\\mathrm{id}^*t=t$. Step 3 says evaluation is bijective, so $\\eta_{\\mathcal G,u(U)}$ is its inverse, hence bijective.",
+   "uses": [
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A0 (lemma-equivalence), unit proof, first paragraph"
+   }
+  },
+  {
+   "text": "Write $H=RL\\mathcal G$, a sheaf by step 1. For any $V$, choose by (e) a covering $\\{v_i:u(U_i)\\to V\\}$. If two sections of $\\mathcal G(V)$ have the same image under $\\eta_V$, their restrictions to $u(U_i)$ agree by step 4 and naturality; separatedness gives equality on $V$. Here $V$ was arbitrary, so this proves $\\eta_W$ injective for every object $W$. Given $h\\in H(V)$, step 4 supplies unique $t_i\\in\\mathcal G(u(U_i))$ mapping to $h|_{u(U_i)}$. On $u(U_i)\\times_Vu(U_j)$ their restrictions have the same image by naturality; the just-proved injectivity on that object implies equality. The sheaf condition glues them to $t\\in\\mathcal G(V)$. The sections $\\eta_V(t)$ and $h$ agree on the covering and hence agree by separatedness of $H$. Thus $\\eta_V$ is surjective as well as injective. This fills the source's 'we see easily' without assuming overlaps themselves lie in the image of $u$. Empty coverings cause no exception: the equalizer condition forces singleton section sets on any object with an empty covering.",
+   "uses": [
+    "def-weil-pbc-special-cocontinuous-functor",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A0 (lemma-equivalence), final paragraph; cover-detection argument written out"
+   }
+  },
+  {
+   "text": "The unit $\\mathrm{id}_{\\operatorname{Sh}(\\mathcal D)}\\to RL$ and counit $LR\\to\\mathrm{id}_{\\operatorname{Sh}(\\mathcal C)}$ are natural transformations by the adjunction, and their components are bijections by steps 3 and 5. Their componentwise inverses are natural: the naturality square is rearranged by composing with the inverse components. Hence $L$ and $R$ are quasi-inverse equivalences, with these natural isomorphisms as the equivalence data. Since step 1 identifies $L$ with the inverse image of the associated morphism of topoi, that morphism is an equivalence and its inverse image is precisely precomposition with $u$.",
+   "uses": [
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A0 (lemma-equivalence), opening aim and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-special-cocontinuous-functor",
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03A0 (lemma-equivalence), proof, with choice-independence, compatibility and cover-detection details expanded"
+ },
  "id": "lem-weil-pbc-special-cocontinuous-sheaf-equivalence",
  "blueprint": {
   "is": null,
@@ -18,7 +99,9 @@
    "node": "def-weil-pbc-completed-pullback",
    "place": "The proof of Tag 099E first replaces the site by the full subcategory of objects on which the ideal is finitely generated, using that the inclusion is special cocontinuous and hence an equivalence of topoi.",
    "via": [
-    "lem-weil-pbc-extended-cech-completion-model"
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
    ]
   },
   "same_as": []
@@ -76,6 +159,42 @@
    "results": "CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense; CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor; CategoryTheory.Functor.IsDenseSubsite.sheafEquiv; CategoryTheory.Functor.IsDenseSubsite.instIsEquivalenceSheafSheafPushforwardContinuous; CategoryTheory.Functor.IsCoverDense.compatiblePreserving; CategoryTheory.Functor.IsDenseSubsite.isLocallyFaithful; CategoryTheory.Functor.IsDenseSubsite.isLocallyFaithful'; CategoryTheory.Equivalence.isDenseSubsite_functor_of_isCocontinuous",
    "date": "2026-10-14",
    "verdict": "no exact match: DenseSubsite/Basic.lean lines 538-542 requires a sieve pushforward covering iff condition; deriving that structure from the five family-cover hypotheses is a theorem, not an inferred instance or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "special cocontinuous functor induces equivalence of sheaf categories",
+   "results": "CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.Equivalence.hasSheafCompose, CategoryTheory.Equivalence.precoherent_isSheaf_iff, CategoryTheory.Functor.IsDenseSubsite.instIsEquivalenceSheafSheafPushforwardContinuous, CategoryTheory.Equivalence.sheafCongrPrecoherent, CategoryTheory.Equivalence.sheafCongr.functor, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, CategoryTheory.Functor.sheafAdjunctionCocontinuous",
+   "date": "2026-10-14",
+   "verdict": "no exact match: dense-subsite theorem requires translating five covering-family conditions into IsDenseSubsite; read Basic.lean:538-566 and SheafEquiv.lean:31-70"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "locally full locally faithful cover dense continuous cocontinuous functor equivalence sheaves",
+   "results": "CategoryTheory.Equivalence.isDenseSubsite_functor_of_isCocontinuous, CategoryTheory.Functor.IsDenseSubsite.instIsCocontinuous, CategoryTheory.Functor.IsDenseSubsite.isLocallyFaithful, CategoryTheory.Functor.IsDenseSubsite.isLocallyFaithful', CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense, CategoryTheory.Functor.locallyCoverDense_of_isCoverDense, CategoryTheory.Functor.IsCoverDense.isContinuous, CategoryTheory.Functor.LocallyCoverDense",
+   "date": "2026-10-14",
+   "verdict": "no exact match: dense-subsite theorem requires translating five covering-family conditions into IsDenseSubsite; read Basic.lean:538-566 and SheafEquiv.lean:31-70"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsDenseSubsite|def sheafEquiv|functorPushforward_mem_iff",
+   "results": "Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Equivalence.lean, Mathlib/CategoryTheory/Sites/Equivalence.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match: dense-subsite theorem requires translating five covering-family conditions into IsDenseSubsite; read Basic.lean:538-566 and SheafEquiv.lean:31-70"
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-special-cocontinuous-sheaf-equivalence",
+  "worker": "stage1",
+  "summary": "Kept the statement. Followed 03A0 with a single new generic continuous/cocontinuous topos-adjunction infrastructure node; proved counit and unit bijections by explicit local lifts, overlap equalization, gluing, choice-independence and cover detection. Corrected the source proof’s unnecessary false claim that the evaluation object is final. No project attachment or exact Mathlib leaf found.",
+  "blueprint": "The proof of Tag 099E first replaces the site by the full subcategory of objects on which the ideal is finitely generated, using that the inclusion is special cocontinuous and hence an equivalence of topoi. Steps 1-6 realize the special-cocontinuous equivalence invoked in that replacement."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-8f8f30145",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-8f8f30145 (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and cited sources; all six proof steps and the new adjunction statement are sound. Corrected B9: both blueprint.from.via lists omitted two existing intermediate nodes. Whole corrected JSON files and detailed review.md are written. No target, coefficient category, statement, or proof changed.; 2 file(s) fixed by the reviewer"
+ }
 }

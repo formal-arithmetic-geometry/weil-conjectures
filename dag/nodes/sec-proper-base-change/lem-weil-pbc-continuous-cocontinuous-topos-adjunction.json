@@ -1,0 +1,103 @@
+{
+ "id": "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "The proof of Tag 099E first replaces the site by the full subcategory of objects on which the ideal is finitely generated, using that the inclusion is special cocontinuous and hence an equivalence of topoi. Infrastructure for the first paragraph of the proof of Sites Tag 03A0.",
+   "via": [
+    "lem-weil-pbc-special-cocontinuous-sheaf-equivalence",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "title": "Topos adjunction for a continuous cocontinuous functor",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be small sites and let $\\operatorname{Sh}(\\mathcal C),\\operatorname{Sh}(\\mathcal D)$ denote their categories of sheaves of sets [def-weil-pbc-sites-and-cohomology]. Let $u:\\mathcal C\\to\\mathcal D$ be continuous [def-weil-pbc-sites-and-cohomology](3) and cocontinuous [def-weil-pbc-special-cocontinuous-functor](1); no local fullness, local faithfulness or cover-density is assumed. Define $L\\mathcal G(U)=\\mathcal G(u(U))$, with restriction maps induced by $u$. For a sheaf $\\mathcal F$ on $\\mathcal C$ define $R\\mathcal F(V)$ to be the set of families $(s_{A,\\psi})$, indexed by all pairs $(A,\\psi:u(A)\\to V)$, with $s_{A,\\psi}\\in\\mathcal F(A)$ and $\\mathcal F(a)(s_{A,\\psi})=s_{B,\\psi\\circ u(a)}$ for every $a:B\\to A$. Restriction along $h:V'\\to V$ sends this family to $(s_{A,h\\circ\\psi'})_{A,\\psi':u(A)\\to V'}$; maps of sheaves act componentwise. Then $L$ and $R$ are functors between the sheaf categories, and $L\\dashv R$ is the adjunction of the morphism of topoi $g:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sh}(\\mathcal D)$ associated to the cocontinuous functor $u$: $g^{-1}=L$, $g_*=R$. In particular $L$ preserves finite limits. Its counit at $\\mathcal F$, evaluated at $U$, is $(s_{A,\\psi})\\mapsto s_{U,\\mathrm{id}_{u(U)}}$, and its unit at $\\mathcal G$, evaluated at $V$, is $t\\mapsto (\\mathcal G(\\psi)(t))_{A,\\psi}$. A morphism of topoi here means an adjoint pair whose left adjoint preserves finite limits.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00XK (lemma-pu-sheaf), 00XL (lemma-exact-cocontinuous), 00XO (lemma-cocontinuous-morphism-topoi), 00XR (lemma-when-shriek), and Section 00XF (section-more-functoriality-PSh), compatible-family formula and Tag 00XH (lemma-adjoints-pu)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-special-cocontinuous-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous and cocontinuous functor of small sites restriction of sheaves is left adjoint to right Kan extension computed by compatible families",
+   "results": "; CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val, CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val, CategoryTheory.RanIsSheafOfIsCocontinuous.fac, CategoryTheory.RanIsSheafOfIsCocontinuous.fac', CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafAdjunctionContinuous",
+   "date": "2026-10-14",
+   "verdict": "related Mathlib infrastructure, not an exact match for the covering-family formulation and explicit section formulas; inspected CoverLifting.lean:275-367"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafAdjunctionCocontinuous",
+   "results": "; CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_hom, CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_hom, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_hom, CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous",
+   "date": "2026-10-14",
+   "verdict": "related Mathlib infrastructure, not an exact match for the covering-family formulation and explicit section formulas; inspected CoverLifting.lean:275-367"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafAdjunctionCocontinuous|sheafPushforwardCocontinuous|RanIsSheafOfIsCocontinuous",
+   "results": "; Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean",
+   "date": "2026-10-14",
+   "verdict": "related Mathlib infrastructure, not an exact match for the covering-family formulation and explicit section formulas; inspected CoverLifting.lean:275-367"
+  },
+  {
+   "tool": "leansearch",
+   "query": "continuous cocontinuous functor of sites restriction right Kan extension adjunction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cocontinuous functor right Kan extension sheaf left exact inverse image precomposition continuous",
+   "results": "; CategoryTheory.ran_isSheaf_of_isCocontinuous, CategoryTheory.RanIsSheafOfIsCocontinuous.fac, CategoryTheory.RanIsSheafOfIsCocontinuous.fac', CategoryTheory.Functor.sheafPushforwardCocontinuous, CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Functor.IsCocontinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val",
+   "date": "2026-10-14",
+   "verdict": "related Mathlib infrastructure, not an exact match for the covering-family formulation and explicit section formulas; inspected CoverLifting.lean:275-367"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ran_isSheaf_of_isCocontinuous",
+   "results": "CategoryTheory.ran_isSheaf_of_isCocontinuous",
+   "date": "2026-10-14",
+   "verdict": "related infrastructure, not a one-line specialization: CoverLifting.lean:281-365 uses sieve-topology IsContinuous and IsCocontinuous; family-to-sieve and explicit compatible-family-model comparisons are still required."
+  },
+  {
+   "tool": "grep",
+   "query": "ran_isSheaf_of_isCocontinuous|sheafAdjunctionCocontinuous_unit_app_hom|preservesFiniteLimits.*sheafPushforward",
+   "results": "Mathlib/CategoryTheory/Sites/CoverLifting.lean; Mathlib/CategoryTheory/Sites/CoverLifting.lean; Mathlib/CategoryTheory/Sites/CoverLifting.lean; Mathlib/CategoryTheory/Sites/CoverLifting.lean; Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+   "date": "2026-10-14",
+   "verdict": "related infrastructure, not a one-line specialization: CoverLifting.lean:281-365 uses sieve-topology IsContinuous and IsCocontinuous; family-to-sieve and explicit compatible-family-model comparisons are still required."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocontinuous functor sends a sheaf to a sheaf by pointwise right Kan extension and has an adjunction with sheaf restriction",
+   "results": "CategoryTheory.Functor.sheafAdjunctionCocontinuous; CategoryTheory.ran_isSheaf_of_isCocontinuous; CategoryTheory.Functor.sheafPushforwardCocontinuous; CategoryTheory.RanIsSheafOfIsCocontinuous.fac; CategoryTheory.RanIsSheafOfIsCocontinuous.fac'; CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val; CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val; CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val",
+   "date": "2026-10-14",
+   "verdict": "related infrastructure, not a one-line specialization: CoverLifting.lean:281-365 uses sieve-topology IsContinuous and IsCocontinuous; family-to-sieve and explicit compatible-family-model comparisons are still required."
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.Functor.sheafAdjunctionCocontinuous",
+  "file": "Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+  "how": "Lines 322-327 give the adjunction for sieve topologies; lines 329-365 identify its unit and counit with right Kan extension. Translating the covering-family continuity/cocontinuity assumptions, and specifying the compatible-family model, needs a bridge theorem, so this is not recorded as a one-line leaf."
+ },
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-special-cocontinuous-sheaf-equivalence",
+  "by": "worker",
+  "date": "2026-10-14"
+ }
+}
