@@ -7,8 +7,8 @@ module
 public import Sheaf.AlgebraicGeometry.SelfTorAffineSection
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.AffineConormalSections
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
+import Sheaf.AlgebraicGeometry.SelfTorConormalWedgeChartSectionEquiv
+import Sheaf.AlgebraicGeometry.SelfTorConormalWedgeChartFromSections
 
 /-! # Affine conormal exterior coordinates preserving ideal wedges
 
@@ -60,6 +60,12 @@ theorem exists_selfTor_conormal_wedge_chart
               (fun j ↦ ((Classical.choose
                 (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app
                   i.ker.toModules).val.app (op U.1) (b j))) =
-          selfTorAffineSection i U M (selfTorIdealWedge i U n b) := by sorry
+          selfTorAffineSection i U M (selfTorIdealWedge i U n b) := by
+  obtain ⟨e, he⟩ := exists_selfTor_conormal_wedge_chart_section_equiv i n U
+  obtain ⟨s, hs⟩ := exists_selfTor_conormal_wedge_chart_from_sections i n U e
+  refine ⟨s, ?_⟩
+  intro b
+  rw [hs]
+  exact he b
 
 end AlgebraicGeometry
