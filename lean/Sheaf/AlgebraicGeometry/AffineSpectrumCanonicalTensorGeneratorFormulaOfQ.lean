@@ -3,6 +3,9 @@ module
 public import Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalStalkRingCoordinates
 public import Sheaf.AlgebraicGeometry.IsoPullbackStalkCohomology
 public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalStalkComplexIso
+import Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalTensorComparisonScalar
+import Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalTensorComparisonOne
 @[expose] public section
 
 /-! Canonical spectrum tensor generator formula for a fixed chain isomorphism -/ 
@@ -16,10 +19,16 @@ noncomputable section
 namespace AlgebraicGeometry.SingleComplexBaseChange
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-/-- Strict intermediate obligation for the affine-spectrum tensor generator argument.
-Proof: construct the transported stalk chain isomorphism from the canonical affine stalk
-comparison and extension/restriction along the invertible stalk map; the fixed-q version
-then follows by the section-germ calculation for the tensor pullback comparisons.
+
+set_option maxHeartbeats 800000 in
+-- Comparing the fixed stalk complex types needs substantial definitional reduction.
+/-- The canonical affine-spectrum comparison respects tensor generators for the explicitly
+constructed input coordinates, not for arbitrary chain isomorphisms.
+Proof: the coefficient-one identity is the composition-unit germ calculation. The
+comparison is semilinear over the actual stalk map along X'.isoSpec.inv. Write
+`d tensor x = d • (1 tensor x)`, use semilinearity, and then the coefficient-one
+identity. The chain coordinates are constructed from the extension/restriction unit
+and the inverse pullback-stalk comparison; source-point transport is by isoSpec naturality.
 Source: Stacks Project, Tags 0098, 0096, and 0DJ8.
 (blueprint: lem-pc-affine-spectrum-canonical-tensor-generator-formula-of-q). -/
 theorem canonicalSpectrum_tensor_generator_formula_of_q
@@ -34,19 +43,19 @@ theorem canonicalSpectrum_tensor_generator_formula_of_q
     let z := X'.isoSpec.inv z0
     let P0 := ((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
       (.up ℤ)).obj P
-    letI := leftAlgebra f g' z
-    letI := rightAlgebra f f' g g' sq z
-    letI := (tensorMap f f' g g' sq z).toAlgebra
-    letI := HasDerivedCategory.standard (ModuleCat.{u} (R f g' z))
-    letI := HasDerivedCategory.standard (ModuleCat.{u} (B f' z))
-    letI := leftAlgebra (Spec.map f.appTop) (Spec.map g'.appTop) z0
-    letI := rightAlgebra (Spec.map f.appTop) (Spec.map f'.appTop)
+    let := leftAlgebra f g' z
+    let := rightAlgebra f f' g g' sq z
+    let := (tensorMap f f' g g' sq z).toAlgebra
+    let := HasDerivedCategory.standard (ModuleCat.{u} (R f g' z))
+    let := HasDerivedCategory.standard (ModuleCat.{u} (B f' z))
+    let := leftAlgebra (Spec.map f.appTop) (Spec.map g'.appTop) z0
+    let := rightAlgebra (Spec.map f.appTop) (Spec.map f'.appTop)
       (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0
-    letI := (tensorMap (Spec.map f.appTop) (Spec.map f'.appTop)
+    let := (tensorMap (Spec.map f.appTop) (Spec.map f'.appTop)
       (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0).toAlgebra
-    letI := HasDerivedCategory.standard
+    let := HasDerivedCategory.standard
       (ModuleCat.{u} (R (Spec.map f.appTop) (Spec.map g'.appTop) z0))
-    letI := HasDerivedCategory.standard (ModuleCat.{u} (B (Spec.map f'.appTop) z0))
+    let := HasDerivedCategory.standard (ModuleCat.{u} (B (Spec.map f'.appTop) z0))
     let R0 := R (Spec.map f.appTop) (Spec.map g'.appTop) z0
     let A0 := A (Spec.map g'.appTop) z0
     let B0 := B (Spec.map f'.appTop) z0
@@ -97,14 +106,48 @@ theorem canonicalSpectrum_tensor_generator_formula_of_q
         (Scheme.isoSpec_inv_naturality g')).symm
     let eA := canonicalSpectrumStalkEquiv X (g' z) ((Spec.map g'.appTop) z0) hA
     let eD := canonicalSpectrumStalkEquiv X' z z0 rfl
-    ∀ (q : Q ≅ ((ModuleCat.restrictScalars.{u} eA.toRingHom).mapHomologicalComplex
-      (.up ℤ)).obj Q0),
-      (∀ (k : ℤ) (d : C z) (x : Q.X k),
+    let q : Q ≅ ((ModuleCat.restrictScalars.{u} eA.toRingHom).mapHomologicalComplex
+      (.up ℤ)).obj Q0 :=
+      canonicalSpectrumStalkComplexIso X (g' z) ((Spec.map g'.appTop) z0) hA P
+    (∀ (k : ℤ) (d : C z) (x : Q.X k),
         H.hom.f k (d ⊗ₜ[A g' z, (tensorMap f f' g g' sq z).comp
           (algebraMap (A g' z) (A g' z ⊗[R f g' z] B f' z))] x) =
         eD d ⊗ₜ[A0, (tensorMap (Spec.map f.appTop) (Spec.map f'.appTop)
           (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0).comp
           (algebraMap A0 (A0 ⊗[R0] B0))] (show Q0.X k from q.hom.f k x)) := by
-  sorry
+  dsimp only
+  intro k d x
+  have hs := canonicalSpectrum_tensor_comparison_smul f f' g g' sq sq0 z0 P k d
+    ((1 : C (X'.isoSpec.inv z0)) ⊗ₜ[_, _] x)
+  have hu := canonicalSpectrum_tensor_comparison_one f f' g g' sq sq0 z0 P k x
+  let z := X'.isoSpec.inv z0
+  let := leftAlgebra f g' z
+  let := rightAlgebra f f' g g' sq z
+  let := leftAlgebra (Spec.map f.appTop) (Spec.map g'.appTop) z0
+  let := rightAlgebra (Spec.map f.appTop) (Spec.map f'.appTop)
+    (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0
+  have hl := ModuleCat.ExtendScalars.smul_tmul
+    ((tensorMap f f' g g' sq z).comp
+      (algebraMap (A g' z) (A g' z ⊗[R f g' z] B f' z)))
+    (M := (stalkComplex g' z P).X k) d 1 x
+  simp only [mul_one] at hl
+  rw [hl, hu] at hs
+  let P0 := ((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
+    (.up ℤ)).obj P
+  let hA : g' z = X.isoSpec.inv ((Spec.map g'.appTop) z0) :=
+    (congrArg (fun k : Spec Γ(X', ⊤) ⟶ X ↦ k z0)
+      (Scheme.isoSpec_inv_naturality g')).symm
+  let q := canonicalSpectrumStalkComplexIso X (g' z) ((Spec.map g'.appTop) z0) hA P
+  have hr := ModuleCat.ExtendScalars.smul_tmul
+    ((tensorMap (Spec.map f.appTop) (Spec.map f'.appTop)
+      (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0).comp
+      (algebraMap (A (Spec.map g'.appTop) z0)
+        (A (Spec.map g'.appTop) z0 ⊗[R (Spec.map f.appTop) (Spec.map g'.appTop) z0]
+          B (Spec.map f'.appTop) z0)))
+    (M := (stalkComplex (Spec.map g'.appTop) z0 P0).X k)
+    (canonicalSpectrumStalkEquiv X' z z0 rfl d) 1 (q.hom.f k x)
+  simp only [mul_one] at hr
+  rw [hr] at hs
+  exact hs
 
 end AlgebraicGeometry.SingleComplexBaseChange

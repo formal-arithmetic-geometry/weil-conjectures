@@ -1,0 +1,143 @@
+{
+ "id": "def-pc-affine-spectrum-canonical-stalk-complex-iso",
+ "kind": "definition",
+ "title": "Explicit canonical affine-spectrum stalk chain coordinates",
+ "statement": "Let X be an affine scheme, x a point of X, y a point of Spec Γ(X,top), h:x=X.isoSpec.inv(y), and P a cochain complex of module sheaves on X. With eA=canonicalSpectrumStalkEquiv X x y h [lem-pc-affine-spectrum-canonical-stalk-ring-coordinates], define an isomorphism from the module stalk complex P_x to Res_eA of the stalk at y of (X.isoSpec.inv)*P. Before transporting x by h, it is the extension/restriction adjunction unit for the invertible stalk map, followed by the inverse canonical pullback-stalk comparison [lem-weil-pbc-module-stalk-pullback], whiskered with restriction of scalars. Lift this natural isomorphism degreewise to complexes, inserting functor composition isomorphisms. The pullback-stalk comparison is the one specified on every section germ; no arbitrary complex-isomorphism witness is chosen.",
+ "stmt_deps": [
+  "lem-pc-affine-spectrum-canonical-stalk-ring-coordinates",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-pc-iso-pullback-stalk-cohomology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0098",
+  "place": "sheaves.tex, lemma-stalk-pullback-modules (Tag 0098); lemma-adjoint-pullback-pushforward-modules (Tag 0096); perfect.tex, lemma-single-complex-base-change-condition (Tag 0DJ8), affine reduction in the proof"
+ },
+ "proof": [
+  {
+   "text": "For an isomorphism j:Y→Z, its stalk ring map rho is bijective. Restriction and extension of scalars along rho are equivalences, so the extension/restriction unit is an isomorphism. Compose that unit with the inverse pullback-stalk natural isomorphism after restricting scalars. The germ specification of the latter determines the chosen map on generators.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map the resulting natural isomorphism to cochain complexes and use mapHomologicalComplexCompIso twice to identify its target. The additive pullback and stalk functors preserve zero morphisms.",
+   "uses": [
+    "lem-pc-iso-pullback-stalk-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize j=X.isoSpec.inv and transport x by h. Unfold canonicalSpectrumStalkEquiv only to identify the restriction-of-scalars ring map.",
+   "uses": [
+    "lem-pc-affine-spectrum-canonical-stalk-ring-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-spectrum-canonical-stalk-ring-coordinates",
+  "lem-pc-iso-pullback-stalk-cohomology",
+  "lem-weil-pbc-module-stalk-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N4",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/0098",
+  "place": "sheaves.tex, lemma-stalk-pullback-modules (Tag 0098); lemma-adjoint-pullback-pushforward-modules (Tag 0096); perfect.tex, lemma-single-complex-base-change-condition (Tag 0DJ8), affine reduction in the proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isoPullbackAdditiveStalkIso|tensorStalkIso.*smul|canonicalSpectrum.*one",
+   "date": "2026-10-14",
+   "available": true,
+   "results": "0 hits: ",
+   "verdict": "Generic component facts only; no result for these specified module-stalk and adjunction comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical pullback stalk comparison is semilinear over the stalk ring map and respects composition on the tensor generator one tensor x",
+   "date": "2026-10-14",
+   "available": true,
+   "results": "8 hits: TopCat.Presheaf.stalkPullbackHom, TopCat.Presheaf.stalkPullbackInv, TopCat.Presheaf.stalkPullbackIso, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc, TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom",
+   "verdict": "Generic component facts only; no result for these specified module-stalk and adjunction comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_unit_app",
+   "date": "2026-10-14",
+   "available": true,
+   "results": "1 hits: CategoryTheory.Adjunction.comp_unit_app",
+   "verdict": "Generic component facts only; no result for these specified module-stalk and adjunction comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stalk of the pullback of a sheaf of modules is extension of scalars and its canonical comparison respects the composition adjunction unit",
+   "date": "2026-10-14",
+   "available": false,
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "grep",
+   "query": "isoPullbackAdditiveStalkIso|tensorStalkIso.*smul|canonicalSpectrum.*one",
+   "date": "2026-10-14",
+   "available": true,
+   "results": "0 hits",
+   "verdict": "No Mathlib declaration for these project comparison maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalTensorGeneratorFormulaOfQ",
+  "date": "2026-10-14",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Construction of q in the parent generator proof, before the section-germ calculation. The ancestor tool reports no blueprint ancestor for this imported created.item chain.",
+   "via": [
+    "lem-pc-affine-spectrum-canonical-tensor-generator-formula-of-q",
+    "lem-pc-affine-spectrum-canonical-tensor-generator-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalStalkComplexIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpectrumCanonicalStalkComplexIso.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.canonicalSpectrumStalkComplexIso",
+  "statement": "def canonicalSpectrumStalkComplexIso\n  (X : Scheme.{u}) [IsAffine X] (x : X) (y : Spec Γ(X, ⊤))\n  (h : x = X.isoSpec.inv y)\n  (P : CochainComplex X.Modules ℤ) :\n    ((((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex\n        (.up ℤ)).obj P) ≅\n      ((ModuleCat.restrictScalars\n        (canonicalSpectrumStalkEquiv X x y h).toRingHom).mapHomologicalComplex\n        (.up ℤ)).obj\n        (((RingedSpace.moduleStalkFunctor\n          (Spec Γ(X, ⊤)).toRingedSpace y).mapHomologicalComplex (.up ℤ)).obj\n          (((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex\n            (.up ℤ)).obj P)))",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-86f93",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T023937-L-15873",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-86f93",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T023937-L-15873",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, constructions, proofs and dependencies with the corrected nodes and change record; verified minimal forced caller adaptation, clean compilation of all five modules, direct importer Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalTensorGeneratorFormula and its downstream importer, and expected axiom dependencies."
+ }
+}

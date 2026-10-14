@@ -3,7 +3,6 @@ module
 public import Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalStalkRingCoordinates
 public import Sheaf.AlgebraicGeometry.IsoPullbackStalkCohomology
 public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
-import Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalTensorGeneratorFormulaQ
 import Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalTensorGeneratorFormulaOfQ
 /-! # Canonical affine spectrum comparison on tensor generators
 
@@ -137,9 +136,11 @@ theorem exists_canonicalSpectrum_tensor_generator_formula
           (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0).comp
           (algebraMap A0 (A0 ⊗[R0] B0))] (show Q0.X k from q.hom.f k x)) := by
   dsimp only
-  obtain ⟨q⟩ := exists_canonicalSpectrum_tensor_generator_formula_q
-    f f' g g' sq sq0 z0 P
-  refine ⟨q, ?_⟩
-  exact canonicalSpectrum_tensor_generator_formula_of_q f f' g g' sq sq0 z0 P q
+  let z := X'.isoSpec.inv z0
+  let hA : g' z = X.isoSpec.inv ((Spec.map g'.appTop) z0) :=
+    (congrArg (fun k : Spec Γ(X', ⊤) ⟶ X ↦ k z0)
+      (Scheme.isoSpec_inv_naturality g')).symm
+  refine ⟨canonicalSpectrumStalkComplexIso X (g' z) ((Spec.map g'.appTop) z0) hA P, ?_⟩
+  exact canonicalSpectrum_tensor_generator_formula_of_q f f' g g' sq sq0 z0 P
 
 end AlgebraicGeometry.SingleComplexBaseChange
