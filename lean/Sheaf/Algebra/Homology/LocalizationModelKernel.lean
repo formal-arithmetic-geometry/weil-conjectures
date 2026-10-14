@@ -6,6 +6,8 @@ module
 
 public import Sheaf.Algebra.Homology.LocalizationModelSemilinear
 public import Mathlib.RingTheory.Localization.Basic
+import Sheaf.Algebra.Homology.BaseTensorUnitCohomologyModel
+import Sheaf.Algebra.Homology.ComplexLocalizationUnitKernel
 
 /-! # Torsion kernel of the canonical localization cohomology map
 
@@ -60,6 +62,17 @@ theorem localizationModelMap_kernel
     (x : L.cohomology i)
     (hx : localizationModelMap R A Aq B D i Q L K uQ x = 0) :
     ∃ s : S, (Algebra.TensorProduct.includeLeft (S := R) (s : A) : A ⊗[R] B) • x = 0 :=
-  by sorry
+  by
+    obtain ⟨C, e, e', he⟩ :=
+      exists_baseTensorUnitCohomologyModel R A Aq B D i Q L K uQ huQ
+    have hzero : (HomologicalComplex.homologyMap
+        (((ModuleCat.extendRestrictScalarsAdj (algebraMap A Aq)).mapHomologicalComplex
+          (.up ℤ)).unit.app C) i) (e.hom x) = 0 := by
+      rw [← he x, hx]
+      exact e'.hom.hom.map_zero
+    obtain ⟨s, hs⟩ := complexLocalizationUnit_kernel A Aq S i C (e.hom x) hzero
+    refine ⟨s, ?_⟩
+    apply (ModuleCat.mono_iff_injective e.hom).1 inferInstance
+    exact (e.hom.hom.map_smul (s : A) x).trans (hs.trans e.hom.hom.map_zero.symm)
 
 end RingTensorCohomology

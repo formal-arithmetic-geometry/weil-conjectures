@@ -1,0 +1,150 @@
+{
+ "id": "new-lem-pc-base-tensor-unit-cohomology-model",
+ "kind": "statement",
+ "title": "Balanced complex computation of the base-tensor unit on cohomology",
+ "statement": "Let R,A,Aq,B,D be commutative rings in one universe with the algebra and derived-category structures of def-pc-base-derived-tensor-cohomology-model. Let Q be an A-module cochain complex, L a base-derived R-to-B tensor cohomology model for Q, K such a model for Aq tensor_A Q, and uQ the degreewise R-linear unit x -> 1 tensor x. Fix i in Z. There exist an A-module complex C, an A-linear cohomology isomorphism e from L.cohomology(i) restricted along A -> A tensor_R B to H^i(C), and an A-linear isomorphism e' from K.cohomology(i) restricted along A -> Aq -> Aq tensor_R B to H^i(restrict_A(Aq tensor_A C)), such that e' composed with localizationModelMap equals H^i of the scalar-extension unit of C composed with e. There is no localization or flatness assumption on Aq.",
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-first-localization-cohomology-semilinear"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 064L and 06Y6"
+ },
+ "proof": [
+  {
+   "text": "Choose a K-flat R-resolution F of B concentrated in degree zero and put C=Tot(Q tensor_R F). The balanced derived tensor computation and unique universal-counit comparisons identify its cohomology with L; similarly compute K using the same F.",
+   "uses": [
+    "lem-pc-balanced-derived-tensor-model",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor associativity identifies Aq tensor_A C with Tot((Aq tensor_A Q) tensor_R F) and the units on pure tensors. Naturality of the balanced computation and the universal comparisons identifies its cohomology map with localizationModelMap.",
+   "uses": [
+    "lem-pc-balanced-derived-tensor-model",
+    "lem-pc-derived-tensor-action-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Multiplication by a on Q acts termwise on C. The cohomologyIso_smul fields identify these actions on L and K; thus the two comparisons are A-linear after the stated restrictions. No kernel criterion or exactness is involved.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-derived-tensor-action-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-balanced-derived-tensor-model",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-derived-tensor-action-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 064L and 06Y6; explicit assembly and transport by second reader H1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "balanced derived tensor cohomology computed by resolving the second factor naturally with respect to scalar extension in the first factor",
+   "date": "2026-10-14",
+   "results": [
+    "CategoryTheory.Tor'_obj_obj",
+    "CategoryTheory.Tor_obj",
+    "CategoryTheory.Tor",
+    "CategoryTheory.Tor'",
+    "Rep.torIso",
+    "CategoryTheory.Tor'_map_app",
+    "Rep.Tor",
+    "Rep.Tor_obj"
+   ],
+   "verdict": "No exact generic balanced-model comparison found; existing component declarations used or recorded."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor\"",
+   "date": "2026-10-14",
+   "results": [
+    "CategoryTheory.Functor.IsLeftDerivedFunctor",
+    "CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit",
+    "CategoryTheory.Functor.IsLeftDerivedFunctor.isRightKanExtension",
+    "CategoryTheory.Functor.IsLeftDerivedFunctor.mk",
+    "CategoryTheory.Functor.isLeftDerivedFunctor_iff_isRightKanExtension",
+    "CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift",
+    "CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_iso",
+    "CategoryTheory.Functor.instIsLeftDerivedFunctorCompCompInvAssociatorWhiskerRightOfIsRightAdjoint"
+   ],
+   "verdict": "No exact generic balanced-model comparison found; existing component declarations used or recorded."
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*localiz|localiz.*homology|balancedDerivedTensor",
+   "date": "2026-10-14",
+   "results": [
+    "Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean",
+    "Mathlib/Algebra/Homology/Localization.lean",
+    "Mathlib/Algebra/Homology/Localization.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/Basic.lean"
+   ],
+   "verdict": "No exact generic balanced-model comparison found; existing component declarations used or recorded."
+  },
+  {
+   "tool": "leansearch",
+   "query": "balanced complex cohomology models of derived tensor commute with extension of scalars in the first variable",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizationModelKernel",
+  "date": "2026-10-14",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-first-localization-cohomology-kernel",
+   "place": "balanced-complex computation"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseTensorUnitCohomologyModel",
+  "file": "lean/Sheaf/Algebra/Homology/BaseTensorUnitCohomologyModel.lean",
+  "declaration": "RingTensorCohomology.exists_baseTensorUnitCohomologyModel",
+  "statement": "theorem exists_baseTensorUnitCohomologyModel (i : ℤ)\n    (Q : CochainComplex (ModuleCat.{u} A) ℤ)\n    (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)\n    (K : ModuleCat.BaseDerivedTensorCohomologyModel R Aq B ((extend A Aq).obj Q) D)\n    (uQ : (restrict R A).obj Q ⟶ (restrict R Aq).obj ((extend A Aq).obj Q))\n    (huQ : ∀ (j : ℤ) (x : Q.X j), uQ.f j x = (1 : Aq) ⊗ₜ[A,algebraMap A Aq] x) :\n    ∃ (C : CochainComplex (ModuleCat.{u} A) ℤ)\n      (e : (ModuleCat.restrictScalars\n        (Algebra.TensorProduct.includeLeft (S := R) : A →ₐ[R] A ⊗[R] B).toRingHom).obj\n          (L.cohomology i) ≅ C.homology i)\n      (e' : (ModuleCat.restrictScalars\n        ((Algebra.TensorProduct.includeLeft (S := R) : Aq →ₐ[R] Aq ⊗[R] B).toRingHom.comp\n          (algebraMap A Aq))).obj (K.cohomology i) ≅\n          ((restrict A Aq).obj ((extend A Aq).obj C)).homology i),\n      ∀ x : L.cohomology i,\n        e'.hom (localizationModelMap R A Aq B D i Q L K uQ x) =\n          (HomologicalComplex.homologyMap\n            (((ModuleCat.extendRestrictScalarsAdj (algebraMap A Aq)).mapHomologicalComplex\n              (.up ℤ)).unit.app C) i) (e.hom x)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261014T001719-L-2549988",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261014T001719-L-2549988",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
