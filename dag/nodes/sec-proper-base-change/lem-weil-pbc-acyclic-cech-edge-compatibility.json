@@ -27,9 +27,174 @@
   "def-sp-left-exact-additive",
   "lem-weil-pbc-right-derived-universal-delta-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a nonnegative injective resolution $a:A\\to I^\\bullet$ in abelian sheaves. Put $D^{t,r}=\\prod_{\\mathbf i\\in I_{\\mathcal U}^{t+1}}I^r(U_{\\mathbf i})$, where $I_{\\mathcal U}$ denotes the finite index set of the covering (not the resolution). The Cech restriction differential commutes with the resolution differential by naturality. Define $\\alpha^n$ by restricting $I^n(1)$ to the $(0,n)$ summand of $T=\\operatorname{Tot}D$, and $\\beta^n$ by applying $a$ on every component of $\\check C^n(\\mathcal U,A)$ and including the $(n,0)$ summand. Both are chain maps: restrictions of a global section have zero Cech differential, $d_Ia=0$, and the vertical sign is $+1$ on the image of $\\alpha$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "def-weil-pbc-site-cech-complex",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AX, lemma-cech-cohomology, construction of alpha and beta"
+   }
+  },
+  {
+   "text": "For each $r$, the augmented row $0\\to I^r(1)\\to\\check C^0(\\mathcal U,I^r)\\to\\check C^1(\\mathcal U,I^r)\\to\\cdots$ is exact: its positive cohomology vanishes by injective Cech acyclicity, and its degree-zero kernel is precisely the image of restriction by the sheaf equalizer condition. Apply the first-quadrant augmentation lemma with the first index the Cech degree. Its augmentation is $\\alpha$, so $\\alpha$ is a quasi-isomorphism. Each diagonal has only $n+1$ summands; no boundedness of the Cech degree is needed.",
+   "uses": [
+    "lem-weil-pbc-site-injective-cech-acyclic",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-sc-first-quadrant-column-augmentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0133, lemma-double-complex-gives-resolution, second-variable variant; applied as in sites-cohomology Tag 03AX"
+   }
+  },
+  {
+   "text": "For each fixed $t$, the resolution column has cohomology $\\prod_{\\mathbf i}H^r(U_{\\mathbf i},A)$: kernels and images of the differential in a finite product are computed componentwise. The augmentation identifies its degree-zero kernel with $\\prod_{\\mathbf i}A(U_{\\mathbf i})$, and the hypothesis makes all positive cohomology zero. Apply the same augmentation lemma with the resolution index first to obtain that $\\beta$ is a quasi-isomorphism. Explicitly the transposed total has differential $d_I+(-1)^r d_C$; multiplication by $(-1)^{tr}$ on bidegree $(t,r)$ identifies it with $T$, and is the identity on $r=0$, so its augmentation becomes exactly $\\beta$. Thus the specified edge $H^q(\\alpha)^{-1}H^q(\\beta)$ is an isomorphism for every $q\\ge0$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-sp-double-complex-total",
+    "lem-sc-first-quadrant-column-augmentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F7, lemma-cech-spectral-sequence-application, acyclicity; Tag 03AX augmentation model, with Homology Tag 0133"
+   }
+  },
+  {
+   "text": "For an additive coefficient map $g:A\\to A'$, lift $g$ to a map $v:I^\\bullet\\to I'^\\bullet$ of injective resolutions. On bidegree $(t,r)$ apply $v^r$ to each section. This defines a total map $V:T\\to T'$ and gives the literal chain-map equations $V\\alpha=\\alpha'\\Gamma(v)$ and $V\\beta=\\beta'\\check C(g)$. On cohomology, $H(\\Gamma(v))$ is the canonical coefficient map. Multiplying the first equation by the inverses of $H(\\alpha)$ and $H(\\alpha')$ and using the second proves $H(g)e_A=e_{A'}H(\\check C(g))$. This uses only additivity and commutation with restrictions, so semilinear maps that are additive are allowed.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AX, omitted verification of functoriality, supplied explicitly; Derived Categories Tag 013P"
+   }
+  },
+  {
+   "text": "Take $g=\\mathrm{id}_A$ in the preceding step to compare any two resolutions. Any two lifts are homotopic, by applying uniqueness of lifts to the quasi-isomorphism $A[0]\\to I^\\bullet$. If $v-w=d k+k d$, the induced total maps are homotopic via $K|_{(t,r)}=(-1)^t\\check C^t(k^r)$. Indeed the two horizontal contributions cancel, while the two vertical contributions are $d_Ik+kd_I$ because the two signs $(-1)^t$ multiply to $1$. On global sections the homotopy is $\\Gamma(k)$. Therefore all induced cohomology maps agree. Comparisons for identities and compositions agree by the same uniqueness, giving resolution independence of the specified edge under the canonical cohomology identifications.",
+   "uses": [
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "def-sp-double-complex-total",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013S, lemma-morphisms-equal-up-to-homotopy; applied to Tag 03AX augmentations"
+   }
+  },
+  {
+   "text": "For site change choose $B\\to J^\\bullet$ injective on $\\mathcal D$. Exactness of $f^{-1}$ makes $f^{-1}A[0]\\to f^{-1}I^\\bullet$ a degreewise monomorphic quasi-isomorphism. Lift the map $f^{-1}A[0]\\to B[0]\\to J^\\bullet$, whose first arrow is adjoint to $h$, along this augmentation to $j:f^{-1}I^\\bullet\\to J^\\bullet$, strictly over the augmentations. Adjunction gives $v:I^\\bullet\\to f_*J^\\bullet$. Its section maps are $I^r(V)\\to J^r(uV)$, compatible with every restriction. Their global map $w:\\Gamma_{\\mathcal C}I\\to\\Gamma_{\\mathcal D}J$ computes $h_H$. To check the last assertion against the canonical pullback, insert an injective resolution $L$ of $f^{-1}A$, a lift $f^{-1}I\\to L$, and a coefficient lift $L\\to J$; the canonical pullback and coefficient formulas compute their composite on sections. Its composite is homotopic to $j$ by lift uniqueness, so it has the same cohomology map.",
+   "uses": [
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-site-cohomology-pullback",
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013P, lemma-morphisms-lift, part (2); sites-cohomology Tag 03AX augmentations and canonical site pullback"
+   }
+  },
+  {
+   "text": "The section components of $v$ define $V^{t,r}:\\check C^t(\\mathcal U,I^r)\\to\\check C^t(u\\mathcal U,J^r)$, using the canonical tuple-product identifications preserved by $u$. For each omitted index $a$, the equation $v_{U_{\\mathbf i}}\\operatorname{res}_a=\\operatorname{res}_{u(a)}v_{U_{\\mathbf i\\setminus a}}$ shows that $V$ commutes with $d_C$; since $v$ is a chain map it commutes with $d_I$ and hence the total differential. On the two axes the equations are $V\\alpha_{\\mathcal C}=\\alpha_{\\mathcal D}w$ and $V\\beta_A=\\beta_B h_C$. Both are literal equalities: the former is restriction naturality, the latter is the strictly commuting lifted augmentation of step 6. Applying cohomology and inverting both $H(\\alpha)$ proves $h_H e_{\\mathcal U,A}=e_{u\\mathcal U,B}H(h_C)$. The two edges are isomorphisms by steps 2--3 using the separately assumed acyclicity of $A$ and $B$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-site-cech-complex",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AX, its two specified augmentations; agent verification of the site-change square"
+   }
+  },
+  {
+   "text": "The category of sheaves of left $\\mathcal O$-modules on the small site $\\mathcal C$ is Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck], in a universe containing the site and coefficient values. Hence it has enough injectives by [lem-sp-grothendieck-enough-injectives]. For modules choose a nonnegative injective module resolution $M\\to P^\\bullet$, as in the statement's convention for module cohomology. After forgetting scalars it remains an exact augmented resolution: kernels are sectionwise and the underlying sheaf of a cokernel is the sheafification of the sectionwise abelian cokernel, so forgetting preserves kernels and cokernels. Every $P^r_{ab}$ is acyclic for abelian evaluation at every object by the ringed-site injective-module acyclicity theorem; it is not asserted to be an injective abelian sheaf. The acyclic-resolution theorem therefore identifies $H^q(\\Gamma(P_{ab}))$ with $H^q(\\mathcal C,M_{ab})$, by any augmentation-preserving map $P_{ab}\\to J$ to an abelian injective resolution. Such a strict map exists by the monomorphic quasi-isomorphism lifting lemma. Denote it by $k$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD, lemma-cohomology-modules-abelian-agree, proof, acyclicity of injective modules; Derived Categories acyclic-resolution criterion; injectives.tex Tag 079Q (remark-existence-D), final sentence, and Tag 079H (theorem-injective-embedding-grothendieck), for existence of the module resolution"
+   }
+  },
+  {
+   "text": "The canonical module-to-abelian identification is the resolution map $H^q(\\Gamma(k))$ just obtained. Here is its normalization: the module right-derived delta-functor is universal, while abelian cohomology precomposed with exact forgetting is a delta-functor and vanishes in positive degrees on module injectives. Hence it is effaceable and universal as well, and the unique delta-functor morphism inducing the identity on sections is an isomorphism. Its value on $M\\to P^\\bullet$ is the acyclic-resolution comparison: successively put $M_0=M$, $M_{r+1}=\\operatorname{coker}(M_r\\to P^r)$ and use $0\\to M_r\\to P^r\\to M_{r+1}\\to0$. In degree one both comparisons are induced by the identity on sections modulo the image of $\\Gamma(P^0)$; in higher degrees the connecting isomorphisms reduce degree by one, since the positive cohomology of each $P^r$ vanishes in both theories. Induction therefore identifies the universal comparison with $H^q(\\Gamma(k))$ in every degree, with the same connecting-map convention.",
+   "uses": [
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD, lemma-cohomology-modules-abelian-agree, first paragraph; Derived Categories Tag 015B and Homology Tag 010T"
+   }
+  },
+  {
+   "text": "For $P$ the module restriction augmentation $\\alpha_P:\\Gamma(P)\\to\\operatorname{Tot}\\check C(\\mathcal U,P)$ is a quasi-isomorphism by injective-module Cech acyclicity, the degree-zero sheaf equalizer, and the same augmentation lemma used in step 2. The module coefficient augmentation $\\beta_M$ is a quasi-isomorphism by step 3 applied to module evaluation and the assumed module acyclicity on every tuple. Underlying section Cech complexes and both axis maps are unchanged on forgetting scalars. Applying $\\check C$ termwise to $k:P_{ab}\\to J$ gives $K$ between the two totals with $K\\alpha_P=\\alpha_J\\Gamma(k)$ and $K\\beta_M=\\beta_{M_{ab}}$, component by component. Consequently $H(\\Gamma(k))H(\\alpha_P)^{-1}H(\\beta_M)=H(\\alpha_J)^{-1}H(\\beta_{M_{ab}})$, the required compatibility with the canonical identification of step 9. No claim that forgetting preserves injectives or that tensoring with the ring sheaf is exact occurs.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-sc-first-quadrant-column-augmentation",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FC, lemma-injective-module-trivial-cech; Tag 03FD, lemma-cohomology-modules-abelian-agree; Tag 03AX axis augmentations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total",
+  "def-weil-pbc-site-cech-complex",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-first-quadrant-column-augmentation",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "lem-weil-pbc-site-injective-cech-acyclic",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03AX and 03F7 for the specified Cech augmentations and their quasi-isomorphisms; Tag 03FD for module comparison. The omitted coefficient functoriality, site-change square and forgetting square are verified explicitly here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -93,15 +258,99 @@
    "results": "Mathlib/Combinatorics/Hindman.lean; Mathlib/Geometry/Manifold/Instances/Real.lean; Mathlib/Geometry/Manifold/Instances/Real.lean; Mathlib/Geometry/Manifold/Instances/Real.lean; Mathlib/Geometry/Manifold/Instances/Real.lean; Mathlib/Geometry/Manifold/Instances/Real.lean; Mathlib/AlgebraicTopology/ExtraDegeneracy.lean; Mathlib/AlgebraicTopology/ExtraDegeneracy.lean",
    "date": "2026-10-14",
    "verdict": "no match: plus-construction, dense-subsite evaluation, group cochains, and Cech complex definitions do not state the general derived edge squares"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical Cech edge isomorphism for an acyclic cover commutes with morphisms of sites and forgetting module structure",
+   "results": "CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι; SheafOfModules.Presentation.map_π_eq; TopCat.Presheaf.SheafCondition.pairwiseDiagramIso; TopCat.Presheaf.whiskerIsoMapGenerateCocone; CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback; TopCat.Presheaf.SheafConditionEqualizerProducts.diagram.isoOfIso; TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_map; CategoryTheory.Functor.IsCoverDense.Types.presheafIso_hom_app",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the normalized acyclic Cech comparison or its site-change and module-forgetting squares"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cech\", \"cohomology\"",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the normalized acyclic Cech comparison or its site-change and module-forgetting squares"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(comparison|edge)|acyclic.*cech",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the normalized acyclic Cech comparison or its site-change and module-forgetting squares"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Leray acyclic covering computes derived sections by a Cech resolution naturally under additive maps",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂; CategoryTheory.Sheaf.cohomologyPresheaf; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex; CategoryTheory.Sheaf.cohomologyPresheafFunctor",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the normalized acyclic Cech comparison or its site-change and module-forgetting squares"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech cohomology edge comparison with sheaf cohomology is natural for acyclic covers",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-coherent-frobenius-comparison",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-acyclic-cech-edge-compatibility",
+  "worker": "stage1",
+  "summary": "Proved the specified two-axis comparison and all three naturality clauses by literal maps of resolution Cech double complexes. Reused existing injective lifting, first-quadrant augmentation, site pullback, acyclic-resolution and ringed-site module-acyclicity nodes. No new nodes and no statement changes. Included the total-homotopy and transpose signs and the universal-delta normalization of forgetting.",
+  "blueprint": "Final proof paragraph of lemma-weil-pbc-smooth-curve-artin-schreier: proper coherent base change identifies E tensor k-prime with H1 and carries Frobenius to Frobenius. Steps 1--5 give the additive normalized edge, 6--7 its site-change square, 8--10 its module-forgetting square, supporting the existing coherent-frobenius-comparison child.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-first-quadrant-column-augmentation",
+    "why": "General homological or ringed-site tool used in the explicit two-augmentation argument; no curve-calculation step or unit route is replaced."
+   },
+   {
+    "node": "lem-sc-injective-module-abelian-acyclic-zariski",
+    "why": "General homological or ringed-site tool used in the explicit two-augmentation argument; no curve-calculation step or unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+    "why": "General homological or ringed-site tool used in the explicit two-augmentation argument; no curve-calculation step or unit route is replaced."
+   },
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "General homological or ringed-site tool used in the explicit two-augmentation argument; no curve-calculation step or unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Part (1) supplies exact forgetting on an arbitrary small ringed site, used to retain the resolution and form the abelian-cohomology delta-functor on modules."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "General small ringed-site Grothendieck-category theorem, combined with the existing enough-injectives leaf to justify the module resolution in step 8; it replaces no curve or base-change step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-first-quadrant-column-augmentation",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ring-sheaves-grothendieck"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-558502815",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-558502815 (reviewer sub-agent of L); spot-checked: Read the full mathematics, cited statements, source passages, route, and exact master targets. Repaired step 8’s missing arbitrary-ringed-site module-resolution existence citations using existing Grothendieck-category and enough-injectives nodes. Statements unchanged; signs, canonical comparison maps, edge cases, and dependency cycles checked. Detailed review and corrected JSON are written.; 1 file(s) fixed by the reviewer"
+ }
 }
