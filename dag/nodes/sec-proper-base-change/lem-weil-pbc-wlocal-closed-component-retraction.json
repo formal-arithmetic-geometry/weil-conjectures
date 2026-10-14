@@ -11,7 +11,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-qbar",
-   "place": "Final appeal to Tag 09AZ after choosing the closed range T of the component-space section.",
+   "place": "Final appeal to Tag 09AZ after choosing the closed range T of the component-space section: apply the closed-component restriction retraction to the resulting bijection on components.",
    "via": [
     "lem-weil-pbc-wlocal-stalk-isomorphism-retraction"
    ]
@@ -29,9 +29,62 @@
   "def-weil-pbc-w-local",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Equip S with the R-algebra structure induced by g. The w-local hypotheses are exactly the hypotheses recorded in [def-weil-pbc-w-local]. The resulting algebra map is g, so its contraction map on prime spectra and on connected components is the given map h.",
+   "uses": [
+    "def-weil-pbc-w-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AZ, proof of implication (3) to (1), paragraph identifying the component map"
+   }
+  },
+  {
+   "text": "For each prime q of S, the assumed bijection of the canonical localization map R_{g⁻¹(q)} → S_q is precisely bijectivity on the prime stalks of this algebra map. Thus the auxiliary theorem’s stalk hypothesis holds.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AZ, proof of implication (3) to (1), paragraph assuming the local rings are identified"
+   }
+  },
+  {
+   "text": "The assumed closed-point contraction condition is exactly the auxiliary closed-point hypothesis. Since h|_T is bijective, for every component of Spec R there is a component in T mapping to it, and two components in T with the same image are equal; these are the auxiliary surjectivity and injectivity conditions.",
+   "uses": [
+    "def-weil-pbc-w-local"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AZ, proof of implication (3) to (1), paragraph after choosing the closed range T"
+   }
+  },
+  {
+   "text": "Apply the closed-component retraction theorem to the algebra map, T, and the three verified hypotheses. It yields a ring map s:S→R with s∘g=id_R.",
+   "uses": [
+    "lem-weil-pbc-wlocal-isClosed-bijOn-retraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AZ, proof of implication (3) to (1), final application of the auxiliary restriction lemma"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-w-local",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-wlocal-isClosed-bijOn-retraction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AZ, proof of implication (3) to (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,5 +116,21 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit"
+ "status": "split",
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "lem-weil-pbc-wlocal-closed-component-retraction",
+  "worker": "stage1",
+  "summary": "Audited the explicit ring-map statement against Tag 09AZ. The source checkout contains the closed auxiliary declaration exists_retraction_of_isClosed_of_bijOn in WContractible.lean; its algebra/typeclass formulation is recorded as one closed supporting node. The item proof has separate elementary steps for inducing the algebra structure, translating stalk bijectivity, and translating the closed-point and component hypotheses, followed by application of the closed theorem.",
+  "blueprint": "Ancestor thm-weil-pbc-qbar, final appeal to Tag 09AZ after choosing the closed range T; the sole proof step realizes the conversion to the closed-component restriction theorem and its application.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-fb1a91bc0",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-fb1a91bc0 (reviewer sub-agent of L); spot-checked: Mathematics and route pass. Repair files add the missing new-node created.by/date metadata, attach the verified sorry-free exists_retraction_of_isClosed_of_bijOn declaration with lean_audit, correct the item's created.item metadata, and record the exact source location.; 2 file(s) fixed by the reviewer"
+ }
 }
