@@ -8,6 +8,7 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import Mathlib.CategoryTheory.Monoidal.Preadditive
+-- Additive tensor functors supply the four MonoidalPreadditive fields below.
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 
 /-!
