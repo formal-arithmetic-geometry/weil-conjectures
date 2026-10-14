@@ -2,7 +2,7 @@
  "id": "lem-sbc-affine-torsor-split-label-laws",
  "kind": "statement",
  "title": "Cocycle laws for labels in a pulled-back splitting",
- "statement": "Let R,H be commutative rings, g in R, iota:R -> H, and C a domain H-algebra with h=iota(g) nonzero in C. Let rho be an H-algebra action of a group G on C. Let p:Y -> Spec R and t:T -> Spec R, with k:D(h) in Spec C -> T over Spec R. Suppose delta splits pullback p t into d copies of T over T. Define a(g,i) by precomposing the i-th pulled-back section with the restricted Spec map of rho(g inverse), lifting with k into pullback p t, applying delta, and reading the unique coproduct index at the zero prime. Then a(1,i)=i and a(gh,i)=a(g,a(h,i)).",
+ "statement": "Let R,H be commutative rings, g in R, iota:R -> H, and C a domain H-algebra with h=iota(g) nonzero in C. Let rho be an H-algebra action of a group G on C. Let p:Y -> Spec R and t:T -> Spec R, with k:D(h) in Spec C -> T over Spec R. Suppose delta splits pullback p t into d copies of T over T. Define a(g,i) by precomposing the i-th pulled-back section with the restricted Spec map of rho(g), lifting with k into pullback p t, applying delta, and reading the unique coproduct index at the zero prime. Then a(1,i)=i and a(gh,i)=a(g,a(h,i)).",
  "source": {
   "document": "Stacks Project",
   "place": "Tag 03SF, finite Galois covers and permutation sets; connected-summand argument"
@@ -10,7 +10,7 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "The principal open of Spec C is connected and nonempty because C is a domain and h is nonzero. Every section of the splitting pulled back along k has image in one coproduct summand; projection compatibility makes it the split section of that label. Read the label at the zero prime, exactly fixedPunctureLabel. The inverse deck map preserves the structural morphism to Spec H. Contravariance gives v(ab)=v(a) followed by v(b), and the identity and cocycle laws for the labels follow by precomposition and disjointness of the coproduct injections. No existence theorem chooses label data.",
+   "text": "The nonzero principal open of Spec C contains the zero prime and is irreducible, hence connected. Each coproduct injection has clopen range: its complement is the union of the other open summands. The image of a connected scheme under a section lifted into the splitting lies in the summand containing its value at the zero prime. Factor the morphism through that open immersion; its projection to T is k, so composing with delta inverse and the first pullback projection reconstructs the split section with that evaluated label. Disjointness of summands and nonemptiness prove injectivity of the split-section indexing. Restrict Spec(rho(zeta)) itself, without an inverse. The restriction preserves Spec H because rho(zeta) fixes algebraMap H C. Cancellation against the principal-open immersion and Spec contravariance prove v(1)=id and v(ab)=v(a) followed by v(b), using rho(ab)=rho(a).comp(rho(b)). Precomposition and reconstruction, followed by injectivity, give a(1,i)=i and a(ab,i)=a(a,a(b,i)). These proofs include d=0 vacuously. No postponed theorem or chosen existence data is used.",
    "uses": [],
    "elementary": false
   }
@@ -18,10 +18,10 @@
  "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "group": "D3",
+  "group": "E3",
   "document": "Stacks Project",
-  "place": "Tag 03SF",
-  "note": "Explicit section and label construction; only its cocycle proof is postponed."
+  "place": "Tag 03SF, connected-summand argument",
+  "note": "Repair of reviewer X-e9fd4 point 4: forward deck convention, complete Lean reconstruction and label laws from Mathlib only."
  },
  "mathlib_searches": [
   {
@@ -103,13 +103,37 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-3e7fd",
-  "group": "D3",
+  "reviewer": "X-320c6",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T222400-L-1221588",
+  "landing": "20261014T001716-L-2548680",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and constructions with their nodes, change records, source arguments, and report; both modules and the direct importer AffineTorsorFixedPunctureDescentCore compile cleanly, as does outer descent; axiom checks match the two reported holes."
+  "note": "independent Codex review: Delivered module, node metadata, change record, report, and direct importers match the stated repair and compile cleanly."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "E3 stage 2",
+  "old_statement": "Let R,H be commutative rings, g in R, iota:R -> H, and C a domain H-algebra with h=iota(g) nonzero in C. Let rho be an H-algebra action of a group G on C. Let p:Y -> Spec R and t:T -> Spec R, with k:D(h) in Spec C -> T over Spec R. Suppose delta splits pullback p t into d copies of T over T. Define a(g,i) by precomposing the i-th pulled-back section with the restricted Spec map of rho(g inverse), lifting with k into pullback p t, applying delta, and reading the unique coproduct index at the zero prime. Then a(1,i)=i and a(gh,i)=a(g,a(h,i)).",
+  "what": "The old inverse-ring-automorphism convention gives the reverse label law, contradicting the claimed left action for S3 acting on the splitting field of X^3-2 over Q. Restrict Spec(rho(g)) instead of Spec(rho(g inverse)); the Lean theorem signature remains unchanged.",
+  "source": {
+   "document": "Stacks Project",
+   "place": "Tag 03SF, finite Galois covers and permutation sets; connected-summand argument"
+  },
+  "citers": [
+   {
+    "id": "lem-sbc-affine-torsor-orbit-component-descent",
+    "holds": true,
+    "note": "The corrected left action has the same orbit relation and stabilizers as the old inverse-indexed label maps; the stabilizer invariant-ring descent statement remains valid."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "The principal open of Spec C is connected and nonempty because C is a domain and h is nonzero. Every section of the splitting pulled back along k has image in one coproduct summand; projection compatibility makes it the split section of that label. Read the label at the zero prime, exactly fixedPunctureLabel. The inverse deck map preserves the structural morphism to Spec H. Contravariance gives v(ab)=v(a) followed by v(b), and the identity and cocycle laws for the labels follow by precomposition and disjointness of the coproduct injections. No existence theorem chooses label data.",
+    "uses": [],
+    "elementary": false
+   }
+  ]
  }
 }

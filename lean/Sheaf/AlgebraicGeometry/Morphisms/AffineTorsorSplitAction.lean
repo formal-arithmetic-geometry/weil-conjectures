@@ -6,6 +6,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.Restrict
+import Mathlib.Topology.Connected.Clopen
+import Mathlib.AlgebraicGeometry.Properties
 
 /-! # The action on labels of a pulled-back splitting
 
@@ -19,7 +21,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Restrict the contravariant automorphism induced by `ρ ζ⁻¹` to D(h).
+/-- Restrict the contravariant automorphism induced by `ρ ζ` to D(h).
 The element h comes from H and is therefore fixed by every H-algebra homomorphism.
 Source: Stacks Project, Tag 03SF.
 (blueprint: lem-sbc-affine-torsor-split-label-laws) -/
@@ -30,11 +32,11 @@ noncomputable def fixedPunctureDeck (H : CommRingCat.{u}) (C : Type u)
       (PrimeSpectrum.basicOpen (algebraMap H C h))) ⟶
       (Scheme.Opens.toScheme (X := Spec (CommRingCat.of C))
       (PrimeSpectrum.basicOpen (algebraMap H C h))) :=
-  (Spec.map (CommRingCat.ofHom (ρ ζ⁻¹).toRingHom)).resLE
+  (Spec.map (CommRingCat.ofHom (ρ ζ).toRingHom)).resLE
     (PrimeSpectrum.basicOpen (algebraMap H C h))
     (PrimeSpectrum.basicOpen (algebraMap H C h)) (by
     change PrimeSpectrum.basicOpen (algebraMap H C h) ≤
-      PrimeSpectrum.basicOpen ((ρ ζ⁻¹) (algebraMap H C h))
+      PrimeSpectrum.basicOpen ((ρ ζ) (algebraMap H C h))
     rw [AlgHom.commutes])
 
 /-- Restriction of a deck map preserves the structural map to Spec H.
@@ -54,7 +56,29 @@ theorem fixedPunctureDeck_base (H : CommRingCat.{u}) (C : Type u)
   rw [← Category.assoc, Hom.resLE_comp_ι, Category.assoc, ← Spec.map_comp]
   congr 2
   ext x
-  exact (ρ ζ⁻¹).commutes x
+  exact (ρ ζ).commutes x
+
+private theorem puncture_deck_one (H : CommRingCat.{u}) (C : Type u)
+    [CommRing C] [Algebra H C] (h : H) (G : Type u) [Group G]
+    (ρ : G → C →ₐ[H] C) (hρone : ρ 1 = AlgHom.id H C) :
+    fixedPunctureDeck H C h G ρ 1 = 𝟙 _ := by
+  apply (cancel_mono (Scheme.Opens.ι (X := Spec (CommRingCat.of C))
+    (PrimeSpectrum.basicOpen (algebraMap H C h)))).mp
+  simp only [fixedPunctureDeck, Hom.resLE_comp_ι, hρone, Category.id_comp]
+  change _ ≫ Spec.map (𝟙 (CommRingCat.of C)) = _
+  rw [Spec.map_id, Category.comp_id]
+
+private theorem puncture_deck_mul (H : CommRingCat.{u}) (C : Type u)
+    [CommRing C] [Algebra H C] (h : H) (G : Type u) [Group G]
+    (ρ : G → C →ₐ[H] C)
+    (hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b)) (a b : G) :
+    fixedPunctureDeck H C h G ρ (a * b) =
+      fixedPunctureDeck H C h G ρ a ≫ fixedPunctureDeck H C h G ρ b := by
+  apply (cancel_mono (Scheme.Opens.ι (X := Spec (CommRingCat.of C))
+    (PrimeSpectrum.basicOpen (algebraMap H C h)))).mp
+  simp only [fixedPunctureDeck, Category.assoc, Hom.resLE_comp_ι,
+    Hom.resLE_comp_ι_assoc, ← Spec.map_comp, hρmul]
+  congr 2
 
 /-- The zero prime is an actual point of D(h), since h is nonzero.
 Source: Stacks Project, Tag 03SF (connected cover).
@@ -96,7 +120,71 @@ noncomputable def fixedSplitLabel {Y S T V : Scheme.{u}} (p : Y ⟶ S) (t : T �
     (s : V ⟶ Y) (hs : s ≫ p = k ≫ t) (x : V) : Fin d :=
   (sigmaOpenCover (fun _ : Fin d ↦ T)).idx ((pullback.lift s k hs ≫ δ.hom) x)
 
-/-- The label obtained by precomposing a split section with the inverse deck map.
+private theorem split_ι_clopen (T : Scheme.{u}) (d : ℕ) (i : Fin d) :
+    IsClopen (Set.range (Sigma.ι (fun _ : Fin d ↦ T) i)) := by
+  have hc : (Set.range (Sigma.ι (fun _ : Fin d ↦ T) i))ᶜ =
+      ⋃ j : {j : Fin d // j ≠ i}, Set.range (Sigma.ι (fun _ : Fin d ↦ T) j.1) := by
+    ext z
+    constructor
+    · intro hz
+      let j := (sigmaOpenCover (fun _ : Fin d ↦ T)).idx z
+      have hj : j ≠ i := by
+        intro he
+        exact hz (he ▸ (sigmaOpenCover (fun _ : Fin d ↦ T)).covers z)
+      exact Set.mem_iUnion.mpr ⟨⟨j, hj⟩, (sigmaOpenCover (fun _ : Fin d ↦ T)).covers z⟩
+    · intro hz hi
+      obtain ⟨j, y, hy⟩ := Set.mem_iUnion.mp hz
+      obtain ⟨w, hw⟩ := hi
+      exact j.2 (congrArg Sigma.fst
+        ((sigmaι_eq_iff (fun _ : Fin d ↦ T) _ _ _ _).mp (hy.trans hw.symm)))
+  refine ⟨?_, IsOpenImmersion.isOpen_range _⟩
+  rw [← isOpen_compl_iff, hc]
+  exact isOpen_iUnion fun _ ↦ IsOpenImmersion.isOpen_range _
+
+private theorem split_section_reconstruction {Y S T V : Scheme.{u}} [ConnectedSpace V]
+    (p : Y ⟶ S) (t : T ⟶ S) (k : V ⟶ T) (d : ℕ)
+    (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T)
+    (hδ : δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T) = pullback.snd p t)
+    (s : V ⟶ Y) (hs : s ≫ p = k ≫ t) (x : V) :
+    s = fixedSplitSection p t k d δ (fixedSplitLabel p t k d δ s hs x) := by
+  let f := pullback.lift s k hs ≫ δ.hom
+  let i := fixedSplitLabel p t k d δ s hs x
+  have hrange : Set.range f ⊆ Set.range (Sigma.ι (fun _ : Fin d ↦ T) i) :=
+    (isConnected_range f.continuous).isPreconnected.subset_isClopen (split_ι_clopen T d i)
+      ⟨f x, ⟨x, rfl⟩, (sigmaOpenCover (fun _ : Fin d ↦ T)).covers (f x)⟩
+  let l := IsOpenImmersion.lift (Sigma.ι (fun _ : Fin d ↦ T) i) f hrange
+  have hl : l ≫ Sigma.ι (fun _ : Fin d ↦ T) i = f :=
+    IsOpenImmersion.lift_fac _ _ _
+  have hlk : l = k := by
+    have he := congrArg (fun a ↦ a ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T)) hl
+    simpa only [f, Category.assoc, Sigma.ι_desc, Category.comp_id, hδ,
+      pullback.lift_snd] using he
+  dsimp only [fixedSplitSection]
+  have he := congrArg (fun a ↦ a ≫ δ.inv ≫ pullback.fst p t) hl
+  simpa only [hlk, f, Category.assoc, Iso.hom_inv_id_assoc,
+    pullback.lift_fst] using he.symm
+
+private theorem split_section_injective {Y S T V : Scheme.{u}}
+    (p : Y ⟶ S) (t : T ⟶ S) (k : V ⟶ T) (d : ℕ)
+    (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T)
+    (hδ : δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T) = pullback.snd p t)
+    (x : V) : Function.Injective (fixedSplitSection p t k d δ) := by
+  intro i j hij
+  have hinv : δ.inv ≫ pullback.snd p t = Sigma.desc (fun _ : Fin d ↦ 𝟙 T) := by
+    rw [← hδ, ← Category.assoc, δ.inv_hom_id, Category.id_comp]
+  have he : k ≫ Sigma.ι (fun _ : Fin d ↦ T) i ≫ δ.inv =
+      k ≫ Sigma.ι (fun _ : Fin d ↦ T) j ≫ δ.inv := by
+    apply pullback.hom_ext
+    · exact hij
+    · simp only [Category.assoc, hinv, Sigma.ι_desc, Category.comp_id]
+  have he' : k ≫ Sigma.ι (fun _ : Fin d ↦ T) i =
+      k ≫ Sigma.ι (fun _ : Fin d ↦ T) j := by
+    simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using
+      congrArg (fun a ↦ a ≫ δ.hom) he
+  exact congrArg Sigma.fst
+    ((sigmaι_eq_iff (fun _ : Fin d ↦ T) _ _ _ _).mp (congrArg (fun a ↦ a x) he'))
+
+/-- The label obtained by precomposing a split section with the deck map of `ρ ζ`.
 Source: Stacks Project, Tag 03SF.
 (blueprint: lem-sbc-affine-torsor-split-label-laws) -/
 noncomputable def fixedPunctureLabel
@@ -133,7 +221,7 @@ partition a connected nonempty scheme. Its projection to the base is the identit
 so it is precisely the corresponding split section. Its label is the index evaluated
 at the zero prime, exactly the formula in fixedPunctureLabel. Deck maps preserve the
 structural map because ρ consists of H-algebra maps. Restriction and contravariance
-of Spec give v(1)=id and v(ab)=v(a) followed by v(b), using ρ of inverse elements.
+of Spec give v(1)=id and v(ab)=v(a) followed by v(b), using ρ of the group elements themselves.
 Precomposing split sections therefore gives label(1,i)=i and
 label(ab,i)=label(a,label(b,i)). Equality of labels follows from disjointness of the
 summands. For d=0 both laws have no i to quantify over.
@@ -155,7 +243,30 @@ theorem fixedPunctureLabel_laws
     (d : ℕ) (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T)
     (hδ : δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T) = pullback.snd p t) :
     let a := fixedPunctureLabel R H g ι C G ρ hne p T t k hk d δ hδ
-    (∀ i, a 1 i = i) ∧ (∀ ζ ξ i, a (ζ * ξ) i = a ζ (a ξ i)) := by sorry
+    (∀ i, a 1 i = i) ∧ (∀ ζ ξ i, a (ζ * ξ) i = a ζ (a ξ i)) := by
+  let V := Scheme.Opens.toScheme (X := Spec (CommRingCat.of C))
+    (PrimeSpectrum.basicOpen (algebraMap H C (ι g)))
+  let x : V := fixedPunctureGeneric C (algebraMap H C (ι g)) hne
+  have : Nonempty V := ⟨x⟩
+  have : IrreducibleSpace (Spec (CommRingCat.of C) : Scheme) := inferInstance
+  have : IrreducibleSpace V :=
+    (Scheme.Opens.ι (X := Spec (CommRingCat.of C))
+      (PrimeSpectrum.basicOpen (algebraMap H C (ι g)))).isOpenEmbedding.irreducibleSpace
+  let a := fixedPunctureLabel R H g ι C G ρ hne p T t k hk d δ hδ
+  have hr (ζ : G) (i : Fin d) :
+      fixedPunctureDeck H C (ι g) G ρ ζ ≫ fixedSplitSection p t k d δ i =
+        fixedSplitSection p t k d δ (a ζ i) := by
+    dsimp only [a, fixedPunctureLabel]
+    exact split_section_reconstruction p t k d δ hδ _ _ x
+  have hinj := split_section_injective p t k d δ hδ x
+  constructor
+  · intro i
+    apply hinj
+    rw [← hr, puncture_deck_one H C (ι g) G ρ hρone, Category.id_comp]
+  · intro ζ ξ i
+    apply hinj
+    rw [← hr, ← hr, ← hr, puncture_deck_mul H C (ι g) G ρ hρmul,
+      Category.assoc]
 
 /-- The concrete descent action; its underlying function is label evaluation.
 The law theorem supplies proofs only; no component data are chosen from it.
