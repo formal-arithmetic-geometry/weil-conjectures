@@ -3,38 +3,143 @@
  "blueprint": {
   "is": "prop-weil-pbc-rational-transport",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Functorial transport to a finite field",
- "statement": "Every exact $\\mathcal O_E$-linear functor among the integral constructible\ncategories, and every natural transformation between such functors, extends\nuniquely to the rationalization of [def-weil-pbc-rational-category]. In\nparticular $Rf_*$, completed pullback, and their exchange transformation\ndefine exact functors and a natural transformation on $\\Dbc(-,E)$.",
+ "statement": "Fix a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$, and the integral constructible categories and their raw rationalizations $\\Dbc(T,E)$ of [def-weil-pbc-rational-category]. Every exact $\\mathcal O_E$-linear functor $F:\\mathcal C\\to\\mathcal D$ between these integral categories [def-weil-linear-functor, def-weil-triangulated-category] has a unique $E$-linear extension $F_E:\\mathcal C[1/\\varpi]\\to\\mathcal D[1/\\varpi]$ agreeing with $F$ on objects and integral morphisms. This extension is exact, with the localized shift comparison. For two such exact $\\mathcal O_E$-linear functors $F,G:\\mathcal C\\to\\mathcal D$, every natural transformation $\\eta:F\\Rightarrow G$ extends uniquely with components $\\eta_K\\otimes1$.\n\nIn particular, let $X,Y,X',Y'$ be schemes for which these integral constructible categories are defined. Suppose the integral operations denoted $Rf_*:\\Dbc(X,\\mathcal O_E)\\to\\Dbc(Y,\\mathcal O_E)$, $Rf'_*:\\Dbc(X',\\mathcal O_E)\\to\\Dbc(Y',\\mathcal O_E)$, $Lg^*_{\\mathrm{comp}}:\\Dbc(Y,\\mathcal O_E)\\to\\Dbc(Y',\\mathcal O_E)$ and $Lg'^*_{\\mathrm{comp}}:\\Dbc(X,\\mathcal O_E)\\to\\Dbc(X',\\mathcal O_E)$ are given exact $\\mathcal O_E$-linear functors, together with a specified integral natural exchange $\\Ex^{\\mathrm{comp}}:Lg^*_{\\mathrm{comp}}Rf_*\\Rightarrow Rf'_*Lg'^*_{\\mathrm{comp}}$. They extend to exact functors on the corresponding $\\Dbc(-,E)$, and that specified exchange extends to a natural transformation between their composites, with component $\\Ex^{\\mathrm{comp}}_K\\otimes1$. This is a transport assertion for supplied integral data, not an assertion that arbitrary scheme morphisms preserve integral constructibility.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-rational-transport.md",
   "place": "node prop-weil-pbc-rational-transport, order 1306"
  },
  "stmt_deps": [
-  "def-weil-pbc-rational-category"
+  "def-weil-pbc-rational-category",
+  "def-weil-linear-functor",
+  "def-weil-triangulated-category"
  ],
  "proof": [
   {
-   "text": "Localization at a central natural endomorphism (inverting the\nmultiplication by $\\varpi$) is functorial for exact functors and natural\ntransformations, so every integral datum descends uniquely to the category\nof [def-weil-pbc-rational-category]; applying this to the direct image,\ncompleted pullback, and the completed exchange morphism gives the displayed\nstructures.",
+   "text": "Write $R=\\mathcal O_E$. By [def-weil-pbc-rational-category] and [def-weil-linear-scalar-localization], objects are unchanged and each Hom is $\\operatorname{Hom}_{\\mathcal C}(K,L)\\otimes_R E$. Since $F$ is $R$-linear [def-weil-linear-functor], [def-weil-module-base-change] defines $F_E(K)=F(K)$ and $F_E(u\\otimes a)=F(u)\\otimes a$. The tensor balancing relation is respected because $F(ru)\\otimes a=rF(u)\\otimes a=F(u)\\otimes ra$.",
    "uses": [
-    "def-weil-pbc-rational-category"
+    "def-weil-pbc-rational-category",
+    "def-weil-linear-scalar-localization",
+    "def-weil-linear-functor",
+    "def-weil-module-base-change"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-rational-transport.md",
+    "place": "Proof: explicit expansion of localization functoriality"
+   }
+  },
+  {
+   "text": "Composition in [def-weil-linear-scalar-localization] gives $F_E((v\\otimes b)\\circ(u\\otimes a))=F(vu)\\otimes ba=(F(v)\\otimes b)\\circ(F(u)\\otimes a)$. Extend this equality by bilinearity to finite sums of tensors. The identity goes to $F(\\mathrm{id}_K)\\otimes1=\\mathrm{id}_{F(K)}\\otimes1$. Any $E$-linear extension agreeing on integral morphisms must send $u\\otimes a=a(u\\otimes1)$ to $a(F(u)\\otimes1)$; tensors generate the Hom module, proving uniqueness.",
+   "uses": [
+    "def-weil-linear-scalar-localization",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-rational-transport.md",
+    "place": "Proof: explicit expansion of localization functoriality"
+   }
+  },
+  {
+   "text": "For $\\eta:F\\Rightarrow G$ put $(\\eta_E)_K=\\eta_K\\otimes1$. For a pure tensor $u\\otimes a:K\\to L$, its naturality equation is $(G(u)\\circ\\eta_K)\\otimes a=(\\eta_L\\circ F(u))\\otimes a$, the integral naturality equation tensored with $a$. Additivity proves it for every morphism. Since all objects are integral objects, the required components determine the transformation uniquely. Identity transformations and composites are preserved componentwise. The localized composite functor equals the composite of localized functors by the same formula on $u\\otimes a$.",
+   "uses": [
+    "def-weil-linear-scalar-localization",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-rational-transport.md",
+    "place": "Proof: explicit expansion of localization functoriality"
+   }
+  },
+  {
+   "text": "Use [lem-weil-linear-scalar-localization-triangulated] for source and target: every distinguished rational triangle is isomorphic to $Q(T)$ for an integral distinguished triangle $T$. Localize the shift comparison of $F$ by step 3; its inverse also localizes and remains inverse. Now $F_E(Q(T))=Q(F(T))$ with this shift comparison. Since $F$ is exact, $F(T)$ is distinguished, so its image is distinguished by the cited lemma. Images of triangle isomorphisms remain isomorphisms, proving exactness on every distinguished rational triangle, as required by [def-weil-triangulated-category].",
+   "uses": [
+    "lem-weil-linear-scalar-localization-triangulated",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05R6, proposition-construct-localization, definition of distinguished localized triangles; application to the scalar localization as stated in the cited node"
+   }
+  },
+  {
+   "text": "Apply steps 1–4 separately to the four given exact $\\mathcal O_E$-linear integral functors. For composites, the extension sends $u\\otimes a$ to $F(G(u))\\otimes a$, which is also the composite of the two extended functors. The given integral exchange therefore extends by step 3 to the transformation between these composites with component $\\Ex^{\\mathrm{comp}}_K\\otimes1$. Its naturality for $u\\otimes a$ is exactly the given integral naturality equation tensored with $a$, and then extends to sums. Thus the conclusion concerns the specified exchange, with no new choice of comparison map.",
+   "uses": [
+    "def-weil-linear-scalar-localization",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-rational-transport.md",
+    "place": "Proof, final clause: applying localization to the integral data"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-rational-category"
+  "def-weil-pbc-rational-category",
+  "def-weil-linear-scalar-localization",
+  "def-weil-linear-functor",
+  "def-weil-module-base-change",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "def-weil-triangulated-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-rational-transport.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalar.*localization|localization.*triangulated|liftNatTrans",
+   "results": "Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/Center/Localization.lean, Mathlib/CategoryTheory/Center/Localization.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: generic categorical localizations require a separate identification with the specified raw Hom tensor category; no full exact statement of this item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend linear functors by tensoring morphism modules with a localized ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.lift, CategoryTheory.NatTrans",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match: generic categorical localizations require a separate identification with the specified raw Hom tensor category; no full exact statement of this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact linear functor extends to scalar localization of triangulated categories and natural transformations extend uniquely",
+   "results": "CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism, CategoryTheory.Triangulated.Localization.isTriangulated_functor, CategoryTheory.Triangulated.Localization.isTriangulated, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.distTriang_iff, CategoryTheory.Triangulated.Localization.pretriangulated",
+   "date": "2026-10-14",
+   "verdict": "no match: generic categorical localizations require a separate identification with the specified raw Hom tensor category; no full exact statement of this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor between linear categories change scalars Hom tensor localization exact functor",
+   "results": "CategoryTheory.Localization.functor_linear_iff, CategoryTheory.Localization.functor_linear, CategoryTheory.Localization.linear, CategoryTheory.Localization.instLinearLocalizationQ, CategoryTheory.Localization.instLinearLocalization'Q', CategoryTheory.Localization.instLinearLocalization, CategoryTheory.Localization.instLinearLocalization', ModuleCat.localizedModule_functor",
+   "date": "2026-10-14",
+   "verdict": "no match: generic categorical localizations require a separate identification with the specified raw Hom tensor category; no full exact statement of this item"
+  },
+  {
+   "tool": "grep",
+   "query": "map.*isTriangulated|liftNatTrans|functor_linear_iff",
+   "results": "Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/Center/Localization.lean, Mathlib/CategoryTheory/Center/Localization.lean, Mathlib/CategoryTheory/Shift/Linear.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected Localization/Predicate.lean:315–350 and Localization/Linear.lean:65–110; these require an identified categorical localization, rather than the raw Hom tensor category of this item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -59,5 +164,29 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "prop-weil-pbc-rational-transport",
+  "worker": "stage1",
+  "summary": "Expanded localization functoriality into tensor construction, composition, uniqueness, naturality, exactness, and its application to supplied exact linear integral operations and their specified exchange. Clarified the missing preservation input and E-linear uniqueness. The integral existence theorem cannot be cited without a dependency cycle; no new nodes.",
+  "blueprint": "Proof, sole paragraph: central localization functoriality and its application to integral direct image, completed pullback and completed exchange.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-linear-scalar-localization-triangulated",
+    "why": "Generic triangulated scalar-localization structure, used only to identify distinguished triangles; not a replacement for the unit proper-base-change route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-linear-scalar-localization-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-3d13e274c",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-3d13e274c (reviewer sub-agent of L); spot-checked: Read the complete item and report; checked all five steps, six cited statements, source locations, edge cases, DAG reuse and cycles. Accepted the generic triangulated-localization tool. The conditional transport correction is valid; the exact master condensed-category and unit–square–counit exchange comparison remains a separate unsplit obligation. No target weakened. Details in review.md."
+ }
 }
