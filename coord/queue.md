@@ -1,6 +1,6 @@
 # Work queue
 
-116 items; claim with `tools/claim.py next <group> [--stage N]`.
+115 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (116)
+## Stage 3: modules to prove (115)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -40,7 +40,6 @@
 | `Sheaf.CategoryTheory.SiteSystemStrictificationData` | 10 | 1 | disputed |
 | `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 20 | 1 | disputed |
 | `Sheaf.RingTheory.ColimitFlatRelationDescent` | 26 | 1 | disputed |
-| `Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup` | 28 | 1 | disputed |
 | `Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeCompatibility` | 34 | 1 | disputed |
 | `Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedData` | 42 | 2 | disputed |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` | 0 | 1 | proof |
@@ -60,13 +59,12 @@
 | `Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation` | 22 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.FinitePresentationLocalMapPairEventuallyCompositesCompatible` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitRepresentative` | 23 | 1 | proof |
+| `Sheaf.Paper.CechCupPullbackCompat` | 23 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationHomology` | 24 | 1 | proof |
 | `Sheaf.Paper.CechCupResolutionRepresentatives` | 24 | 1 | proof |
-| `Sheaf.Paper.ModuleCupPullbackCycleStep` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OverlapConjugateRestriction` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCompatibility` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux` | 25 | 2 | proof |
-| `Sheaf.Paper.ModuleCupGodementCoefficientComplexes` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackCompositionMateUnit` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardCoefficientTransposePasting` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PinnedTensorSquareCompatibility` | 26 | 1 | proof |
@@ -81,6 +79,7 @@
 | `Sheaf.AlgebraicGeometry.HorizontalOrdinaryForwardFixedPasting` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.NormalizedDerivedPullbackKFlatCounit` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex` | 28 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardResidueHomologySourceFibreComparison` | 29 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineBaseChangeTildeMateFactorization` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore` | 30 | 2 | proof |
