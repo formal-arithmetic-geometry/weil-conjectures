@@ -22,6 +22,21 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
 
+-- Keep the comparison and exact-derived constructions folded during specialization.
+private lemma restriction_factors
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    (F : B ⥤ D) (j : A ⥤ B) (G : A ⥤ C) (k : C ⥤ D)
+    (r : B ⥤ A) (s : D ⥤ C) (β : j ⋙ F ≅ G ⋙ k)
+    (γ : F ⋙ s ≅ r ⋙ G) {P : A} {Q R : B}
+    (u : R ⟶ j.obj P) (f : P ⟶ r.obj Q) :
+    F.map (u ≫ j.map f) ≫ (β.app (r.obj Q) ≪≫ k.mapIso (γ.symm.app Q)).hom =
+      F.map u ≫ β.hom.app P ≫ k.map (G.map f ≫ γ.inv.app Q) := by
+  simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Iso.symm_hom]
+  have hn := β.hom.naturality f
+  dsimp only [Functor.comp_map] at hn
+  rw [F.map_comp, Category.assoc, ← Category.assoc (F.map (j.map f)), hn]
+  simp only [Category.assoc, Functor.map_comp]
+
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Naturality moves the exact source-restriction factor through open composition.
 Source: Stacks Project, Tags 08FE, 0D5T and 079V.
@@ -59,6 +74,15 @@ theorem schemeMVOpenComposition_restriction_factors
       β.hom.app (DerivedCategory.Q.obj J) ≫
       (schemeDerivedDirectImage W.ι).map
         ((schemeDerivedDirectImage (h ∣_ W)).map (LX.mapDerivedCategoryFactors.inv.app I) ≫
-          (schemeMVOpenRestrictionComparison h W).inv.app (DerivedCategory.Q.obj I)) := by sorry
+          (schemeMVOpenRestrictionComparison h W).inv.app (DerivedCategory.Q.obj I)) := by
+  intro LX J β
+  exact restriction_factors (schemeDerivedDirectImage h)
+    (schemeDerivedDirectImage (h ⁻¹ᵁ W).ι) (schemeDerivedDirectImage (h ∣_ W))
+    (schemeDerivedDirectImage W.ι) (schemeMVDerivedRestriction X (h ⁻¹ᵁ W))
+    (schemeMVDerivedRestriction Y W) β (schemeMVOpenRestrictionComparison h W)
+    (P := DerivedCategory.Q.obj J) (Q := DerivedCategory.Q.obj I)
+    (R := DerivedCategory.Q.obj (schemeOpenModuleImageComplex X (h ⁻¹ᵁ W) I))
+    ((schemeMVDirectImageLocalization (h ⁻¹ᵁ W).ι).app J)
+    (LX.mapDerivedCategoryFactors.inv.app I)
 
 end AlgebraicGeometry
