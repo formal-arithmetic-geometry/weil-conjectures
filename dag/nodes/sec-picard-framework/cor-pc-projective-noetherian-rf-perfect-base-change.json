@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "cor-pc-projective-noetherian-rf-perfect-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Arbitrary base change for a projective Noetherian family",
- "statement": "Let $S$ be locally Noetherian, let $f:X\\to S$ be\nprojective, and let\n$\\mathcal G$ be a coherent\n$\\mathcal O_X$-module flat over $S$.\nFor any morphism $g:T\\to S$, without a Noetherian hypothesis on\n$T$, the canonical base-change map\n\n$$\nLg^*(Rf_*\\mathcal G)\\longrightarrow Rf_{T,*}\\mathcal G_T\n$$\n\nis an isomorphism, and both sides are perfect.\nThe symbols $Lg^*$ and $Rf_*$ denote the\nderived pullback and\nderived direct image.",
+ "statement": "Let $S$ be locally Noetherian, let $f:X\\to S$ be\nprojective, and let\n$\\mathcal G$ be a coherent\n$\\mathcal O_X$-module flat over $S$.\nFor any morphism $g:T\\to S$, without a Noetherian hypothesis on\n$T$, the canonical base-change map\n\n$$\nLg^*(Rf_*\\mathcal G)\\longrightarrow Rf_{T,*}\\mathcal G_T\n$$\n\nis an isomorphism, and both sides are perfect.\nThe symbols $Lg^*$ and $Rf_*$ denote the\nderived pullback and\nderived direct image. Here $X_T=X\\times_S T$, $p:X_T\\to X$ and $f_T:X_T\\to T$ are the projections, and $\\mathcal G_T=p^*\\mathcal G$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/cor-pc-projective-noetherian-rf-perfect-base-change.md",
   "place": "node cor-pc-projective-noetherian-rf-perfect-base-change, order 674"
@@ -18,32 +18,108 @@
   "def-pc-derived-pullback",
   "def-pc-morphism-conventions",
   "def-pc-projective-morphism",
-  "pqf-def-coherent"
+  "pqf-def-coherent",
+  "def-pc-perfect-complex",
+  "pqf-def-locnoeth",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-derived-module-base-change-map"
  ],
  "proof": [
   {
-   "text": "The isomorphism is [lem-pc-rf-base-change-flat-module].\nBy [lem-pc-projective-noetherian-rf-perfect], the source\nbefore pullback is perfect. Locally it is a bounded complex of\nfinite projective modules, as in [def-pc-perfect-complex].\nTensoring such a complex with any base algebra preserves this\ndescription: a finite projective module is the image of an\nidempotent on a finite free module, and tensoring preserves that\nidempotent decomposition. Hence derived pullback is perfect,\nand the isomorphic right side is perfect as well.",
+   "text": "By [def-pc-projective-morphism], $f$ is quasi-compact and factors through a closed immersion $X\\hookrightarrow\\mathbf P^n_S$. The projection is proper by [lemma-nagata-projective-space-base-change-proper]; clause (b) of [lem-weil-pbc-closed-immersion-proper] makes $f$ proper, hence separated by [def-weil-proper-morphism]. Coherence [pqf-def-coherent] gives locally a surjection $\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U$ with finite-type kernel; shrinking around each point and choosing finitely many generators of that kernel gives an exact presentation $\\mathcal O_V^{\\oplus m}\\to\\mathcal O_V^{\\oplus n}\\to\\mathcal G|_V\\to0$. Thus $\\mathcal G$ is of finite presentation and is quasi-coherent by clause (0) of [lem-weil-pbc-quasi-coherent-finite-type-affine]. Together with the assumed relative flatness, these are exactly the quasi-compact separated and quasi-coherent flat hypotheses of [lem-pc-rf-base-change-flat-module]. That lemma gives the isomorphism for the canonical module base-change map of [def-pc-derived-module-base-change-map] for the arbitrary morphism $g:T\\to S$; it requires neither properness nor finite presentation nor a Noetherian hypothesis on $T$.",
    "uses": [
+    "def-pc-projective-morphism",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-proper-morphism",
+    "pqf-def-coherent",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
     "lem-pc-rf-base-change-flat-module",
+    "def-pc-derived-module-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/cor-pc-projective-noetherian-rf-perfect-base-change.md",
+    "place": "## Proof, first sentence"
+   }
+  },
+  {
+   "text": "The cited projective Noetherian perfectness lemma gives that Rf_*G is perfect. By the definition of a perfect complex, this means that locally it is represented by a bounded complex of finite projective modules.",
+   "uses": [
     "lem-pc-projective-noetherian-rf-perfect",
     "def-pc-perfect-complex"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/cor-pc-projective-noetherian-rf-perfect-base-change.md",
+    "place": "## Proof, second and third sentences"
+   }
+  },
+  {
+   "text": "On every open $U\\subseteq S$ with a strictly perfect representative $P^\\bullet$ of $Rf_*\\mathcal G$, each term is a direct summand of $\\mathcal O_U^{\\oplus r}$, hence flat: tensoring an injection with that term is a direct summand of tensoring it with a finite free module and is injective. The local-model comparison [lem-pc-localized-pullback-perfect-model] identifies $Lg^*(Rf_*\\mathcal G)|_{g^{-1}(U)}$ with the termwise pullback of $P^\\bullet$ along $g^{-1}(U)\\to U$. Its flat-complex computation is [lem-pc-flat-complex-derived-pullback], applicable because $P^\\bullet$ is bounded and its terms are flat. If $\\iota:P^j\\to\\mathcal O_U^{\\oplus r}$ and $\\pi:\\mathcal O_U^{\\oplus r}\\to P^j$ satisfy $\\pi\\iota=1$, their pullbacks satisfy $(g^*\\pi)(g^*\\iota)=1$, and $g^*\\mathcal O_U^{\\oplus r}=\\mathcal O_{g^{-1}(U)}^{\\oplus r}$. Thus every pulled-back term is a direct summand of a finite free module. Zero terms remain zero, so the pulled-back complex is bounded and strictly perfect. The opens $g^{-1}(U)$ cover $T$, proving perfectness of the left side by [def-pc-perfect-complex]. Its isomorphism with the right side from Step 1 proves perfectness of the right side as well.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "def-pc-perfect-complex",
+    "lem-pc-localized-pullback-perfect-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/cor-pc-projective-noetherian-rf-perfect-base-change.md",
+    "place": "## Proof, third and fourth sentences"
+   }
   }
  ],
  "proof_deps": [
+  "def-pc-projective-morphism",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-weil-proper-morphism",
+  "pqf-def-coherent",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
   "lem-pc-rf-base-change-flat-module",
+  "def-pc-derived-module-base-change-map",
   "lem-pc-projective-noetherian-rf-perfect",
-  "def-pc-perfect-complex"
+  "def-pc-perfect-complex",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-localized-pullback-perfect-model"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/cor-pc-projective-noetherian-rf-perfect-base-change.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived direct image of coherent flat sheaf under projective morphism over locally Noetherian base commutes with arbitrary base change and is perfect",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforwardComp; no exact derived direct-image perfectness/base-change theorem",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.Perfect, derived direct image, base change",
+   "results": "0 hits; unknown identifier 'DerivedCategory.Perfect'",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*base.change|base.change.*perfect Mathlib/AlgebraicGeometry",
+   "results": "no hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "projective Noetherian coherent flat sheaf derived pushforward perfect arbitrary base change",
+   "results": "service unavailable (Internal Server Error)",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -84,5 +160,34 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "cor-pc-projective-noetherian-rf-perfect-base-change",
+  "worker": "stage1",
+  "summary": "Second reader retained the three-step blueprint route, cited the geometric and quasi-coherence inputs, and made derived-pullback computation and split summand preservation explicit; no new nodes.",
+  "blueprint": "The three steps realize the blueprint proof sentences: base-change isomorphism; perfectness before pullback; preservation of finite-projective models under tensor and transfer across the isomorphism.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Clause (0) is the generic finite-presentation implies quasi-coherence fact needed to check the existing base-change lemma; this unit has no replacement."
+   },
+   {
+    "node": "lem-pc-localized-pullback-perfect-model",
+    "why": "The generic compatibility of derived pullback with a strictly perfect model on an open supplies the restriction identification in Step 3; the original finite-projective splitting argument is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-pc-localized-pullback-perfect-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-9ff61d34e",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-9ff61d34e (reviewer sub-agent of L); spot-checked: Read the mathematics and cited sources in full. Repaired three small faults: missing canonical module base-change definition, missing local derived-pullback comparison citation, and Loogle failure misclassified as no match. Statement unchanged; no new or dropped nodes. Review and corrected JSON written under the review directory.; 1 file(s) fixed by the reviewer"
+ }
 }
