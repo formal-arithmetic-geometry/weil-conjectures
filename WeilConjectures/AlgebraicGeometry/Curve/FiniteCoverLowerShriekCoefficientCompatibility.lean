@@ -145,6 +145,7 @@ theorem finiteCoverLowerShriek_torsion {k : Type u}
       refine ⟨fun Ω _ _ s x ↦ ⟨1, Nat.zero_lt_one,
         by simpa only [Nat.cast_one] using
           (isUnit_one : IsUnit (1 : Γ(Spec (.of k), ⊤))), ?_⟩⟩
+      have := (Scheme.pointSmallEtale s).sheafFiber_additive (A := ModuleCat.{u + 1} R)
       have := ModuleCat.subsingleton_of_isZero
         ((Scheme.pointSmallEtale s).sheafFiber.map_isZero hzK)
       exact Subsingleton.elim _ _
@@ -163,6 +164,7 @@ theorem finiteCoverLowerShriek_torsion {k : Type u}
           (Fact.out : p.Prime)).mp hdp).symm)
       have hzK : Limits.IsZero K := finiteCoverLowerShriek_isZero j G v hzF
       intro Ω _ _ s x
+      have := (Scheme.pointSmallEtale s).sheafFiber_additive (A := ModuleCat.{u + 1} R)
       have := ModuleCat.subsingleton_of_isZero
         ((Scheme.pointSmallEtale s).sheafFiber.map_isZero hzK)
       exact ⟨0, Subsingleton.elim _ _⟩
@@ -239,6 +241,7 @@ theorem finiteCoverLowerShriek_coefficient_compatibility {k : Type u}
       refine ⟨fun Ω _ _ s x ↦ ⟨1, Nat.zero_lt_one,
         by simpa only [Nat.cast_one] using
           (isUnit_one : IsUnit (1 : Γ(Spec (.of k), ⊤))), ?_⟩⟩
+      have := (Scheme.pointSmallEtale s).sheafFiber_additive (A := ModuleCat.{u + 1} R)
       have := ModuleCat.subsingleton_of_isZero
         ((Scheme.pointSmallEtale s).sheafFiber.map_isZero hzK)
       exact Subsingleton.elim _ _
@@ -257,6 +260,7 @@ theorem finiteCoverLowerShriek_coefficient_compatibility {k : Type u}
           (Fact.out : p.Prime)).mp hdp).symm)
       have hzK : Limits.IsZero K := finiteCoverLowerShriek_isZero j G v hzF
       intro Ω _ _ s x
+      have := (Scheme.pointSmallEtale s).sheafFiber_additive (A := ModuleCat.{u + 1} R)
       have := ModuleCat.subsingleton_of_isZero
         ((Scheme.pointSmallEtale s).sheafFiber.map_isZero hzK)
       exact ⟨0, Subsingleton.elim _ _⟩
