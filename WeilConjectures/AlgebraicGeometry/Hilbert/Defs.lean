@@ -87,7 +87,10 @@ def IsHilbertSubscheme (f : X ⟶ S) (d : ℕ) (T : Over S)
 
 Finiteness, flatness and local finite presentation are stable under base change, and so is the
 rank `AlgebraicGeometry.Scheme.Hom.finrank`, since the closed subscheme cut out by the pullback
-ideal sheaf is the base change of the one cut out by `I`. -/
+ideal sheaf is the base change of the one cut out by `I`. This makes `T ↦ Hilb^d_{X/S}(T)` a
+contravariant functor by base change of closed subschemes, `AlgebraicGeometry.hilbertPresheaf`.
+
+(blueprint: `lem-pc-hilb-functorial`, `rem-ptr-pc-hilb-functor-12`) -/
 theorem IsHilbertSubscheme.comap {f : X ⟶ S} {d : ℕ} {T T' : Over S} (φ : T' ⟶ T)
     {I : (Limits.pullback f T.hom).IdealSheafData} (hI : IsHilbertSubscheme f d T I) :
     IsHilbertSubscheme f d T' (I.comap (baseChangeMap f φ)) := by
@@ -148,7 +151,7 @@ constantly `d`.
 An `S`-morphism `φ : T' ⟶ T` acts by pulling back the ideal sheaf along the base-change map
 `X_{T'} ⟶ X_T`.
 
-(blueprint: `sk-the-hilbert-functor--definition-1`) -/
+(blueprint: `sk-the-hilbert-functor--definition-1`, `def-pc-hilb-functor`) -/
 noncomputable def hilbertPresheaf (f : X ⟶ S) (d : ℕ) : (Over S)ᵒᵖ ⥤ Type u where
   obj T := { I : (Limits.pullback f T.unop.hom).IdealSheafData // IsHilbertSubscheme f d T.unop I }
   map φ := TypeCat.ofHom fun I ↦ ⟨I.1.comap (baseChangeMap f φ.unop),

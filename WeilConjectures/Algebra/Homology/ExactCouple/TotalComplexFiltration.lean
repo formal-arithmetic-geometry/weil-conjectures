@@ -152,7 +152,7 @@ lemma total_map_columnsGEMap_comp (p : ℤ) :
 total complex of the double complex `K^{≥ p, •}` of the columns of index `≥ p`, that is
 `Fᵖ (Tot K)ⁿ = ⨁_{i ≥ p} K^{i, n - i}`. It is a filtration by subcomplexes.
 
-(blueprint: `def-sp-double-complex-total`) -/
+(blueprint: `def-sp-double-complex-total`, `sk-def-groth-ss`) -/
 noncomputable def columnFiltration : DecreasingFiltration (K.total (up ℤ)) where
   F p := Subobject.mk (K.totalιColumnsGE p)
   F_succ_le p := Subobject.mk_le_mk_of_comm (total.map (K.columnsGEMap p) (up ℤ))
