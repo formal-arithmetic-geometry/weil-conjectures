@@ -34,9 +34,141 @@
   "def-sc-etale-qcoherent-module",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Smoothness gives flatness and local finite presentation. Properness gives quasi-compactness and separatedness, hence quasi-separatedness, so $f$ is of finite presentation. Smooth fibres are geometrically reduced. For every $s\\in S$ the fibre $X_s$ is proper by proper base-change permanence, geometrically reduced and geometrically connected. Apply the field global-sections lemma to its structure morphism to get the canonical isomorphism $\\kappa(s)\\to H^0(X_s,\\mathcal O_{X_s})$. These conclusions require no reducedness of $S$. The quasi-separatedness just used is elementary from the definitions: a closed immersion is affine by the conventions node, so its inverse image of any affine open is affine and therefore quasi-compact; apply this to the diagonal of $f$.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "def-weil-proper-morphism",
+    "def-weil-pbc-scheme-conventions",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-pc-h0-geom-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0GKA, proof of (a); Tag 0E0L and Tag 0E62 hypotheses"
+   }
+  },
+  {
+   "text": "Put $K=Rf_*\\mathcal O_X[0]$ in the Zariski module derived category. The structure module is finitely presented as a module (locally it is free of rank one), and flat over $S$ by Step 1. Thus the perfect-direct-image theorem makes $K$ perfect and identifies $Lg^*K$ with $Rf_{T,*}\\mathcal O_{X_T}[0]$ for every base change $g:T\\to S$. The flat derived structure-unit lemma supplies $u:\\mathcal O_S[0]\\to K$ inducing $f^\\sharp$ on $H^0$, with no negative derived fibre cohomology and with $H^0(Li_s^*u)$ invertible by Step 1. Apply the perfect degree-zero fibre criterion. It proves that the natural $f^\\sharp:\\mathcal O_S\\to f_*\\mathcal O_X$ is an isomorphism and, locally on $S$, $K\\cong\\mathcal O_S[0]\\oplus P$ with $P$ perfect of Tor amplitude in $[1,\\infty)$.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "lem-sc-flat-derived-structure-unit",
+    "lem-sc-perfect-degree-zero-fibre-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0GKA, first two sentences of proof; Tags 0B91 and 0E62"
+   }
+  },
+  {
+   "text": "Fix one open carrying this decomposition and $s$ in it. Derived base change gives $H^i(Li_s^*K)=H^i(X_s,\\mathcal O_{X_s})$; for $i\\ge1$ this is $H^i(Li_s^*P)$, and the latter vanishes for $i\\le0$ by its Tor amplitude. The fibre is Noetherian of dimension one: it is finite type and quasi-compact over the field $\\kappa(s)$ by properness, and is locally Noetherian by the locally-finite-type lemma (a field is Noetherian since its only ideals are $0$ and the whole field). The dimension-one hypothesis is exactly the given fibre dimension. The Noetherian dimension-vanishing theorem gives $H^i(X_s,\\mathcal O_{X_s})=0$ for $i>1$. The perfect finite-free residue-model lemma applied to $P$ therefore gives, on an affine neighbourhood of $s$, a representative having only one nonzero term, a finite free module in degree one. Its cohomology in degree one is that module and all its other cohomology is zero. Define globally $E=H^1(K)=R^1f_*\\mathcal O_X$ in Zariski modules; the local models show $E$ is finite locally free, with rank possibly varying, and $K$ locally is $\\mathcal O_S[0]\\oplus E[-1]$. Here $E[-1]$ means $E$ placed in cohomological degree one.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "pqf-lem-locnoeth-lft",
+    "def-weil-proper-morphism",
+    "def-kun-topological-krull-dimension",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "lem-sc-perfect-finite-free-residue-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0GKA, fibre vanishing and final perfect-complex argument; Tags 02UZ and 0BCD"
+   }
+  },
+  {
+   "text": "For any $g:T\\to S$, pull back the local models from Step 3. Both $\\mathcal O_S$ and $E$ are locally free, so ordinary tensor pullback computes their derived pullback: tensoring a free module is a finite direct sum of the identity functor and has no higher Tor. The canonical derived base-change isomorphism of Step 2 consequently induces the canonical isomorphisms $f_{T,*}\\mathcal O_{X_T}\\cong\\mathcal O_T$ and $R^1f_{T,*}\\mathcal O_{X_T}\\cong g^*E$, and the higher Zariski direct images vanish. In particular take an affine etale $v:V\\to S$. The Leray spectral sequence for $f_V:X_V\\to V$, together with affine vanishing for the quasi-coherent modules $\\mathcal O_V$ and $v^*E$, gives the canonical edge isomorphism $H^1(X_V,\\mathcal O_{X_V})\\cong\\Gamma(V,v^*E)$. All maps here are the canonical base-change and edge maps, so their compositions with the usual cohomology pullback for $W\\to V$ are the section pullbacks for $E$; the base-change map is obtained from the adjunction unit and its composition law. In degree zero the same construction is exactly structural pullback $\\Gamma(V,\\mathcal O_V)\\to\\Gamma(X_V,\\mathcal O_{X_V})$, and is bijective. Explicitly, write $j_V:X_V\\to X$ and $j_W:X_W\\to X_V$ for a tower over $W\\xrightarrow{h}V\\xrightarrow{v}S$. The transpose defining the direct-image comparison for the composite is $Rf_*\\eta_{j_Vj_W}$. Under the composition isomorphisms the composite adjunction unit is $\\eta_{j_V}$ followed by $Rj_{V,*}(\\eta_{j_W})$ after pullback. Thus transposing the two successive base-change maps gives the same map as transposing the composite; taking $H^1$ and sections gives the displayed restriction compatibility. For structure modules, the additional derived-to-ordinary comparison is transposed from the ordinary unit, whose section formula is successive structural pullback, so the same unit identity applies. The affine Leray edge identification is evaluation of this derived direct-image identification; its functoriality is consequently this equality, rather than a choice of fibrewise isomorphisms. The choice-independence and composition clauses of [lem-weil-pbc-module-cohomology-fmap-functorial] identify these section maps with the cohomology maps of [def-weil-pbc-module-cohomology-fmap]. Indeed, in its resolution notation the map is H^1(Gamma(beta)) followed by the inverse of H^1(Gamma(lambda)); this is precisely the global-sections image of the same derived adjunction-unit arrow, as in Remark 01FB. Thus the equality of unit arrows just proved is an equality for the specified cohomology pullbacks, independently of the resolutions used.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "pqf-lem-leray",
+    "pqf-lem-affine-vanishing",
+    "def-pc-derived-module-base-change-map",
+    "def-weil-pbc-module-cohomology-fmap",
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-pc-derived-direct-image-composition",
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-module-cohomology-fmap-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0GKA, base-change compatibility; Tag 0B91; Tags 01F2 and 01XB; Section 01F7, Lemma 01F8 (lemma-functoriality) and Remark 01FB (remark-explain-arrow), for the normalized resolution cohomology maps"
+   }
+  },
+  {
+   "text": "Let $A$ be the associated additive structure sheaf in the fixed coefficient universe of the abelian direct-image functor, and $\\mathcal P(V)=H^1(X_V{}_{\\mathrm{et}},A|_{X_V})$. The higher-direct-image presheaf theorem identifies $R^1f_*A$ with $\\mathcal P^\\#$. For affine etale $V$, $X_V$ is quasi-compact separated: $f_V$ is proper by proper permanence and $V$ is affine. Its restricted coefficient sheaf is the same associated structure sheaf, with the same sectionwise lift, since both assign the (possibly lifted) ring of functions to every etale object. Apply the pullback-natural comparison to $X_V,\\mathcal O_{X_V}$, then Step 4, then the sectionwise lift if used. This gives bijections $b_V:\\mathcal P(V)\\to L\\Gamma(V,v^*E)$. For every arrow between affine etale base objects, the new comparison's pullback square and the canonical coherent edge/base-change maps from Step 4 give $b_W\\operatorname{res}_{W,V}=\\rho_{W,V}b_V$. For a base function $a$, apply the comparison's coefficient naturality to multiplication by $f_V^*a$; the coherent edge and base-change maps are linear: they are induced by morphisms of complexes of modules over $\\Gamma(V,\\mathcal O_V)$, so on cycles they send $a z$ to $a$ times the image of $z$, and this equality passes to the quotient by boundaries. Thus $b_V(a x)=a b_V(x)$, with transported scalar action if lifted. No cohomology in one universe is identified with another without this explicit comparison.",
+   "uses": [
+    "lem-weil-pbc-qcoherent-cohomology-comparison-pullback",
+    "sbc-lem-higher-direct-image-presheaf",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-sc-etale-qcoherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P2, separated-case comparison; Tag 03Q8 higher-direct-image presheaf"
+   }
+  },
+  {
+   "text": "Extend the compatible $b_V$ to a presheaf morphism $b:\\mathcal P\\to E_{\\mathrm{et}}$ as follows. For an arbitrary etale object $U$, restrict a cohomology class to an affine open cover of $U$, apply $b_V$ on each member, and glue in $E_{\\mathrm{et}}$. The target is a sheaf by quasi-coherent descent. Compatibility is checked after covering every overlap by affine opens, so the glued section is independent of the cover and is compatible with every etale arrow; for an arrow, cover its source by affine opens lying over affine opens of its target. The affine-opens-basis lemma provides all these covers, which are etale coverings by the definition of the small site. The same argument proves linearity of $b$. On every affine object $b$ is bijective by Step 5. Hence $b$ is locally injective and locally surjective: restrict any equality or desired target section to an affine open cover and use those bijections. The locally-bijective sheafification criterion now gives $\\mathcal P^\\#\\cong E_{\\mathrm{et}}$ as abelian sheaves. The map and its inverse are module-linear (apply the bijection to $a x$ to check the inverse), so it is an isomorphism of $\\mathcal O_{S,\\mathrm{et}}$-modules. For degree zero, take the natural structural map $\\mathcal O_{S,\\mathrm{et}}\\to f_*\\mathcal O_{X,\\mathrm{et}}$. Both sides are sheaves, and its components on affine etale objects are bijective by Step 4 and the degree-zero comparison in Step 5. To prove injectivity on any object, restrict two sections with equal images to an affine open cover and use those bijections, then the sheaf uniqueness axiom. To prove surjectivity, lift a target section on that cover using the bijections; on overlaps the lifts agree after an affine refinement by injectivity, hence agree as sheaf sections and glue to a preimage. Thus this natural map is an isomorphism. This proves both conclusions, including an empty base and rank-zero local models.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-pbc-etale-site",
+    "lem-sc-etale-qcoherent-descent",
+    "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P2 etale comparison applied objectwise; sheafification and affine-cover assembly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-module-base-change-map",
+  "def-sc-etale-qcoherent-module",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-proper-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-h0-geom-connected",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-pc-rf-perfect-base-change",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-smooth-flat",
+  "lem-sc-etale-qcoherent-descent",
+  "lem-sc-flat-derived-structure-unit",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-perfect-degree-zero-fibre-criterion",
+  "lem-sc-perfect-finite-free-residue-model",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcoherent-cohomology-comparison-pullback",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+  "pqf-lem-affine-vanishing",
+  "pqf-lem-leray",
+  "pqf-lem-locnoeth-lft",
+  "sbc-lem-higher-direct-image-presheaf",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0GKA proof, specialized to smooth curves; Tag 03P2 etale comparison and explicit natural affine-object assembly"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -79,15 +211,155 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"Algebra.FormallyEtale.instForallOfFinite\", \"module\": \"Mathlib/RingTheory/Etale/Pi\", \"type\": \"∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I] [∀ (i : I), Algebra.FormallyEtale R (A i)],\\n  Algebra.FormallyEtale R ((i : I) → A i)\", \"doc\": \"If $ I $ is a finite set and each algebra $ A_i $ over a commutative ring $ R $ is formally étale, then the product algebra $ \\\\prod_{i \\\\in I} A_i $ is also formally étale over $ R $.\"}",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth proper geometrically connected curves have structure sheaf direct image equal to base and first higher direct image locally free",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. For any affine open subset $U$ of $Y$ and any affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the induced ring homomorph\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V \\\\subseteq f^{-1}(U)$. Then the ring homomorp\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f],\\n  ((((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\\n                (AlgebraicGeometry.Scheme.Hom.normalizationDiagram f)).rightOp.comp\\n          AlgebraicGe\", \"doc\": \"The composition of the opposite of the affine Zariski site inclusion functor for a scheme $ Y $, the normalization diagram of a morphism $ f $, the right opposite functor, the contravariant Spec funct\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "genus.*family|(higherDirectImage|rightDerived).*locallyFree",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat proper family of geometrically connected smooth curves, the first coherent cohomology sheaf is a finite rank vector bundle and agrees with the etale higher direct image of the structure sheaf",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; Algebra.Extension.tensorH1Cotangent; Algebra.smoothLocus_eq_compl_support_inter; Algebra.etaleLocus_eq_compl_support; Algebra.FormallyEtale.subsingleton_h1Cotangent",
+   "date": "2026-10-14",
+   "verdict": "no match: cotangent homology, etale permanence, finite fibres and smooth-locus results do not state coherent or etale structure-sheaf direct images of curve families"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+  "worker": "stage1",
+  "summary": "Followed the 0GKA perfect-complex proof using existing general decomposition, base-change, residue-model and dimension-vanishing nodes. Added only the missing simultaneous pullback-natural quasi-coherent cohomology comparison, including the fixed coefficient lift. Checked nonreduced bases, rank zero and affine-object sheafification; statement unchanged.",
+  "blueprint": "Realizes the inherited 0GKW/0GKV characteristic-prime structure-cohomology input in the classical torsion constructibility branch of thm-weil-pbc-direct-image-finiteness-proper. The split follows the 0GKA proof rather than moving its two clauses into new nodes.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-direct-image-composition",
+    "why": "Generic Composition of derived direct images input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   },
+   {
+    "node": "lem-pc-h0-geom-connected",
+    "why": "Generic $H^0=k$ is equivalent to geometric connectedness input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   },
+   {
+    "node": "lem-pc-module-pullback-adjunction",
+    "why": "Generic The tensor-formula pullback of modules is left adjoint to pushforward input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   },
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "Generic Identity and composition for tensor-formula module pullback input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   },
+   {
+    "node": "lem-pc-rf-perfect-base-change",
+    "why": "Generic Perfectness of $Rf_*\\mathcal{G}$ and base change input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-adjoint",
+    "why": "Generic Derived pullback is left adjoint to derived direct image input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic Smooth morphisms are flat input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   },
+   {
+    "node": "lem-sc-etale-qcoherent-descent",
+    "why": "Generic Descent for quasi-coherent modules input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   },
+   {
+    "node": "lem-sc-flat-derived-structure-unit",
+    "why": "Generic Derived structure unit and its ordinary and fibre comparisons input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Generic Quasi-coherent cohomology vanishes above the dimension of a Noetherian scheme input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   },
+   {
+    "node": "lem-sc-perfect-degree-zero-fibre-criterion",
+    "why": "Generic Perfect complex with residue-field degree-zero fibres input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   },
+   {
+    "node": "lem-sc-perfect-finite-free-residue-model",
+    "why": "Generic Finite-free local model with prescribed fibre ranks input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic The affine opens of a scheme form a basis of its topology (Stacks 01IT) input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic Permanence of proper, separated, finite type, finitely presented morphisms and of immersions input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "why": "Generic A presheaf map sheafifies to an isomorphism iff it is locally injective and locally surjective input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   },
+   {
+    "node": "pqf-lem-affine-vanishing",
+    "why": "Generic Vanishing of higher cohomology on affines input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   },
+   {
+    "node": "pqf-lem-leray",
+    "why": "Generic Leray spectral sequence input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic Finite type over a locally Noetherian base input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   },
+   {
+    "node": "sbc-lem-higher-direct-image-presheaf",
+    "why": "Generic Higher direct image as a sheafified cohomology presheaf input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic Smooth morphisms have geometrically reduced fibres input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-h0-geom-connected",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-pc-rf-perfect-base-change",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-smooth-flat",
+  "lem-sc-etale-qcoherent-descent",
+  "lem-sc-flat-derived-structure-unit",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-perfect-degree-zero-fibre-criterion",
+  "lem-sc-perfect-finite-free-residue-model",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+  "pqf-lem-affine-vanishing",
+  "pqf-lem-leray",
+  "pqf-lem-locnoeth-lft",
+  "sbc-lem-higher-direct-image-presheaf",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-24495e93e",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-24495e93e (reviewer sub-agent of L); spot-checked: Read the mathematics in full; checked 0GKA, 0B91, 0E62, 0BCD, 03P2/03DW, all six steps, coefficient categories, base-change maps, duplicates and edge cases. Completed new-node metadata and added the existing cohomology-map functoriality citation to Step 4. Corrected JSON files and concrete checks are in fixes/ and review.md; statements unchanged.; 2 file(s) fixed by the reviewer"
+ }
 }
