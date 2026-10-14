@@ -1,6 +1,6 @@
 # Work queue
 
-26 items; claim with `tools/claim.py next <group> [--stage N]`.
+25 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (26)
+## Stage 3: modules to prove (25)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -20,7 +20,6 @@
 | `Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BaseChangeClosedCoefficientRange` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BaseChangeOpenInjectiveCoefficientZero` | 8 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.BaseChangeSourceImageLimitDescent` | 8 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Picard.Jacobian` | 8 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula` | 20 | 1 | proof |
@@ -39,7 +38,7 @@
 | `Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit` | 48 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates` | 50 | 1 | proof |
 
-Waiting, not claimable: 7 modules whose proof uses a node that has no Lean declaration yet.
+Waiting, not claimable: 6 modules whose proof uses a node that has no Lean declaration yet.
 
 | module | distance to a target | sorry |
 |---|---|---|
@@ -47,6 +46,5 @@ Waiting, not claimable: 7 modules whose proof uses a node that has no Lean decla
 | `Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic` | 6 | 1 |
 | `Sheaf.AlgebraicGeometry.BaseChangeClosedCoefficientRange` | 8 | 1 |
 | `Sheaf.AlgebraicGeometry.BaseChangeOpenInjectiveCoefficientZero` | 8 | 1 |
-| `Sheaf.AlgebraicGeometry.BaseChangeSourceImageLimitDescent` | 8 | 1 |
 | `WeilConjectures.AlgebraicGeometry.Picard.Jacobian` | 8 | 2 |
 | `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula` | 22 | 3 |
