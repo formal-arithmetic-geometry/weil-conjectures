@@ -9,6 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.CategoryTheory.CommAlgebraSheafModule
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
+import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
+import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
+import Sheaf.AlgebraicGeometry.CommAlgebraSheafTensorPowerMaps
+import Sheaf.AlgebraicGeometry.InvertibleSymmetricAlgebraCoproduct
 
 /-! # The algebra coproduct of tensor powers of a line bundle
 
@@ -53,7 +57,10 @@ theorem exists_tensorPowerAlgebraCoproduct {X : Scheme.{u}}
           (show B.right.obj.obj (op U) from (b d).app U t) =
           (show B.right.obj.obj (op U) from
             (b (a + d)).app U ((L.tensorPowAddIso a d).inv.app U (tmulSection s t))) := by
-  sorry
+  obtain ⟨B, j, _, _, hAffine⟩ := exists_quasiCoherentSymmetricAlgebra X L
+  obtain ⟨b, hZero, hOne, hMul⟩ := exists_commAlgebraSheaf_tensorPower_maps L B j
+  exact ⟨B, b, isColimit_invertible_symmetricAlgebra_cofan
+    L B j b hAffine hZero hOne hMul, hMul⟩
 
 end
 end AlgebraicGeometry.Scheme.Modules

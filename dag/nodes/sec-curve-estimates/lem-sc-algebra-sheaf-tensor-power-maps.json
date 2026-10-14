@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-algebra-sheaf-tensor-power-maps",
+ "kind": "statement",
+ "title": "Multiplicative tensor-power maps from a line bundle into an algebra sheaf",
+ "statement": "For a scheme X, an invertible O_X-module L [def-sc-invertible-module], a commutative algebra sheaf B [def-weil-pbc-comm-algebra-sheaf], and a module map j:L to U(B), there exist maps b_d:L.tensorPow d to U(B). The degree-zero map sends a structure-sheaf section r to the structure image of r, the degree-one map equals the right unitor followed by j, and b_a(s)b_d(t)=b_(a+d)(tensorPowAddIso(a,d).inv(tmulSection(s,t))) on every open. The powers and sections use the existing source-library monoidal tensor product [def-pur-sheaf-tensor-product].",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Section 01CF, tensor and symmetric algebras; also coherent.tex, Tag 09MS, the direct-sum algebra"
+ },
+ "stmt_deps": [
+  "def-sc-invertible-module",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Multiplication of sections is bilinear over the structure sheaf and commutes with\nrestriction. The presheaf tensor-product universal property, followed by the module\nsheafification adjunction, gives a map U(B) tensor U(B) to U(B). Define b_0 by the\nstructure map and b_(n+1) by j tensor b_n followed by this multiplication map. The unit\nlaw identifies b_1 with j after the right unitor. Induct on a in the multiplication\nformula: a=0 is the left unit law, including the zero_add transport in tensorPowAddIso;\nthe successor case uses its recursive associator formula and associativity of section\nmultiplication. Equality of maps from sheaf tensor products can be tested on elementary\ntensors before sheafification. For three factors, locally choose a frame of L; every\nsection of L tensor N is then an elementary tensor, and sheaf separation globalizes\nthe calculation. The zero algebra, degree zero and empty open obey the same laws.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-weil-pbc-comm-algebra-sheaf",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-sc-invertible-module",
+  "def-weil-pbc-comm-algebra-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S1",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Section 01CF, tensor and symmetric algebras; also coherent.tex, Tag 09MS, the direct-sum algebra"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A module map from an invertible sheaf to a commutative algebra sheaf extends multiplicatively to all its tensor powers",
+   "results": "UNAVAILABLE: Internal Server Error; not a negative search result.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a morphism of module sheaves to multiplicative maps on tensor powers into a commutative algebra sheaf",
+   "results": "PresheafOfModules.Monoidal.tensorObjMap, tensorObj, tensorObj_map_tmul; ModuleCat.tilde; no exact statement.",
+   "date": "2026-10-14",
+   "verdict": "No exact sheaf-level power-map theorem; use the tensor and sheafification APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPow.*[Aa]lgebra|[Aa]lgebra.*tensorPow in Mathlib, lean/WeilConjectures and lean/Sheaf",
+   "results": "The existing item and its tensor-graded callers; TensorPower.galgebra is for ring modules. No duplicate extension theorem. Whole-DAG and blueprint search found no duplicate.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TensorPowerAlgebraCoproduct",
+  "group": "S1",
+  "date": "2026-10-14"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS direct-sum algebra: construct the homogeneous maps and prove multiplication",
+   "via": [
+    "lem-sc-tensor-power-algebra-coproduct",
+    "lem-sc-tensor-graded-algebra-data",
+    "lem-sc-square-zero-tensor-graded-presentation",
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CommAlgebraSheafTensorPowerMaps",
+  "file": "lean/Sheaf/AlgebraicGeometry/CommAlgebraSheafTensorPowerMaps.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_commAlgebraSheaf_tensorPower_maps",
+  "statement": "theorem exists_commAlgebraSheaf_tensorPower_maps {X : Scheme.{u}} (L : X.Modules) [L.IsInvertible] (B : X.CommAlgebraSheaf) (j : L ⟶ commAlgebraSheafModule X.sheaf B) : ∃ b : ∀ d : ℕ, L.tensorPow d ⟶ commAlgebraSheafModule X.sheaf B, (∀ (U : X.Opens) (r : Γ(X, U)), (b 0).app U (unitSectionsEquiv U r) = B.hom.hom.app (op U) r) ∧ b 1 = (ρ_ L).hom ≫ j ∧ ∀ (U : X.Opens) (a d : ℕ) (s : Γ(L.tensorPow a, U)) (t : Γ(L.tensorPow d, U)), (show B.right.obj.obj (op U) from (b a).app U s) * (show B.right.obj.obj (op U) from (b d).app U t) = (show B.right.obj.obj (op U) from (b (a + d)).app U ((L.tensorPowAddIso a d).inv.app U (tmulSection s t)))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261014T061030-L-2467351",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261014T061030-L-2467351",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
