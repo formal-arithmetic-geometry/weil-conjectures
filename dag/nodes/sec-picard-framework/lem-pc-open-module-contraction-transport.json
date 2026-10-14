@@ -1,0 +1,151 @@
+{
+ "id": "lem-pc-open-module-contraction-transport",
+ "kind": "statement",
+ "title": "Open-site transport of module contraction",
+ "statement": "For a scheme X and open U, a natural internal-Hom comparison e and a unit-normalized symmetric core monoidal structure m on the open-site equivalence, contraction with any module-valued dual input v commutes with transport. The input module W, its map h to the transported dual-input module, and the output map k are arbitrary. No complexes, integer degrees or Hom-complex comparison occur.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EO, tensor-Hom adjunction; open-site reindexing and the scalar naturality argument written in the parent proof; Tags 08DL and 08DQ motivate compatibility with restriction and dual evaluation."
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "stmt_deps": [
+  "def-pc-ordinary-evaluation-data"
+ ],
+ "proof": [
+  {
+   "text": "compare e with sectionwise internal-Hom reindexing. Its quotient is\nan internal-Hom automorphism natural in both variables. On global morphisms,\nits value on identities gives endomorphisms z with alpha(f)=z_B f=f z_A.\nFor each open V, use the extension by zero of O_V and its map to O, which is\nidentity on V. Its endomorphism is multiplication by the restriction of\nz_O(1). Every local section is represented by a map from this extension by\nzero, so every z_A is multiplication by the same scalar t. Apply the same\nargument to the adjoint map from the extension by zero of A restricted to V\nto obtain alpha(phi)=t phi for local Hom sections. The scalar is invertible\nbecause alpha on Hom(O,O) is invertible. The normalized tensorator is the\ncanonical reindexing tensorator: test local pure tensors with the two maps\nfrom the extension by zero of O_V, reduce by naturality to the unit-unit\ncomponent, and use the unit coherence law and hunit. Local sums of pure\ntensors determine maps from the sheaf tensor product. On a local tensor\nb tensor w the two curried maps send x to k(t * v(h(w))(x) • b); linearity\nallows t to move between the two factors. Symmetry and associativity place\nthese factors in the displayed order. Substitute hv and hk in this equation.\nThe output map k is handled by\nnaturality in the target, and the input h by tensor-Hom naturality.\nThus the maps agree on local tensors, hence on their sheafification.\nThe argument includes zero modules, empty opens and the zero ring.",
+   "uses": [
+    "def-pc-ordinary-evaluation-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ordinary-evaluation-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A4",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EO, tensor-Hom adjunction; open-site reindexing and the scalar naturality argument written in the parent proof; Tags 08DL and 08DQ motivate compatibility with restriction and dual evaluation.",
+  "description": "The corresponding part of the parent proof, isolated as a module-level transport equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural internal Hom comparison and normalized monoidal equivalence preserve pairing with dual modules",
+   "date": "2026-10-14",
+   "results": "8 rigid-category tensorLeftHomEquiv and tensorRightHomEquiv hits.",
+   "verdict": "Rigid duality results do not address arbitrary natural internal-Hom isomorphisms on module sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.tensorHomEquiv",
+   "date": "2026-10-14",
+   "results": "Unknown identifier in service; no hits.",
+   "verdict": "The sheaf tensor-Hom API is project-local and was read in the source."
+  },
+  {
+   "tool": "grep",
+   "query": "overEquiv.*homObj|homObj.*overEquiv|tensorHomEquiv.*comp",
+   "date": "2026-10-14",
+   "results": "Only linear contraction homTensorHomEquiv hit in Mathlib; project has tensorHomEquiv naturality and homComplex product projections.",
+   "verdict": "No existing declaration gives this transport or inverse projection equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural automorphisms of internal Hom sheaves of modules are multiplication by a scalar",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "internal Hom naturality product projection homological complex single complex functor",
+   "date": "2026-10-14",
+   "results": "Eight hits, including HomologicalComplex.singleMapHomologicalComplex_hom_app_self and single_map_f_self.",
+   "verdict": "Second reading used the single-complex API to prove the dual-projection statement; no module contraction transport statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal, CategoryTheory.Closed",
+   "date": "2026-10-14",
+   "results": "CategoryTheory.Monoidal.Reflective.closed only.",
+   "verdict": "No compatibility result for the arbitrary natural e in this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorHomEquiv.*naturality|homObjMap_comp_homObjMap|singleMapHomologicalComplex_hom_app_self; rg overEquiv/hom, contraction/transport and scalar/naturality in the local Lean trees",
+   "date": "2026-10-14",
+   "results": "Single-complex comparison in Mathlib; project-local homObjMap_comp_homObjMap, projection naturality, tensorHomEquiv naturality and InternalHomOverEquiv.",
+   "verdict": "These prove the dual projection; none already states the contraction compatibility for arbitrary e and normalized m."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverComponentIdentity",
+  "date": "2026-10-14",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Parent component-identity proof: Open-site transport of module contraction",
+   "via": [
+    "lem-pc-ordinary-evaluation-over-component-identity",
+    "lem-pc-ordinary-evaluation-over-tensor-formula",
+    "lem-pc-ordinary-evaluation-over-comparisons",
+    "lem-pc-ordinary-evaluation-over-transport",
+    "lem-pc-exact-source-kinjective-evaluation-open-models",
+    "lem-pc-exact-source-evaluation-open-models",
+    "lem-pc-exact-source-evaluation-local-comparisons",
+    "lem-pc-strictly-perfect-evaluation-local-retraction",
+    "lem-pc-strictly-perfect-kinjective-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-model",
+    "lem-pc-strictly-perfect-rhom-evaluation-local",
+    "lem-pc-perfect-rhom-evaluation-isomorphisms",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenModuleContractionTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenModuleContractionTransport.lean",
+  "declaration": "AlgebraicGeometry.openModule_contraction_transport",
+  "statement": "theorem openModule_contraction_transport (X : Scheme.{u}) (U : X.Opens) : let L := Equivalence.functor (C := localEvaluationModules X U) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv U) ∀ (e : ∀ A B : localEvaluationModules X U, L.obj (SheafOfModules.homObj (R := X.sheaf.over U) A B) ≅ SheafOfModules.homObj (R := U.toScheme.sheaf) (L.obj A) (L.obj B)) (he : ∀ (A A' B B' : localEvaluationModules X U) (f : A' ⟶ A) (g : B ⟶ B'), L.map (SheafOfModules.homObjMap (R := X.sheaf.over U) f g) ≫ (e A' B').hom = (e A B).hom ≫ SheafOfModules.homObjMap (R := U.toScheme.sheaf) (L.map f) (L.map g)) (m : L.CoreMonoidal) (hunit : m.εIso = Scheme.Modules.overEquivFunctorObjUnitIso U) (hsymm : ∀ A B : localEvaluationModules X U, L.map (β_ A B).hom ≫ (m.μIso B A).inv = (m.μIso A B).inv ≫ (β_ (L.obj A) (L.obj B)).hom) (A B V B' : localEvaluationModules X U) (W : SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (h : W ⟶ L.obj V) (v : V ⟶ SheafOfModules.homObj (R := X.sheaf.over U) A (𝟙_ (localEvaluationModules X U))) (k : B ⟶ B') (v' : W ⟶ SheafOfModules.homObj (R := U.toScheme.sheaf) (L.obj A) (𝟙_ (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)))) (k' : L.obj B ⟶ L.obj B') (hv : h ≫ L.map v ≫ (e A (𝟙_ (localEvaluationModules X U))).hom ≫ SheafOfModules.homObjMap (R := U.toScheme.sheaf) (𝟙 (L.obj A)) (Scheme.Modules.overEquivFunctorObjUnitIso U).inv = v') (hk : L.map k = k'), (𝟙 (L.obj B) ⊗ₘ h) ≫ (m.μIso B V).hom ≫ L.map (SheafOfModules.tensorHomEquiv (R := X.sheaf.over U) A _ _ ((β_ A (B ⊗ V)).hom ≫ (α_ B V A).hom ≫ B ◁ ((β_ V A).hom ≫ (SheafOfModules.tensorHomEquiv (R := X.sheaf.over U) A V (𝟙_ (localEvaluationModules X U))).symm v) ≫ (ρ_ B).hom ≫ k)) ≫ (e A B').hom = SheafOfModules.tensorHomEquiv (R := U.toScheme.sheaf) (L.obj A) _ _ ((β_ (L.obj A) (L.obj B ⊗ W)).hom ≫ (α_ (L.obj B) W (L.obj A)).hom ≫ L.obj B ◁ ((β_ W (L.obj A)).hom ≫ (SheafOfModules.tensorHomEquiv (R := U.toScheme.sheaf) (L.obj A) W (𝟙_ (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)))).symm v') ≫ (ρ_ (L.obj B)).hom ≫ k')",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T100433-L-1021472",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T100433-L-1021472",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

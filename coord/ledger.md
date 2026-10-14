@@ -14804,3 +14804,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:02 L: returned deliver/P4/Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker (reviewer RETURN: (reviewer X-9f2f7, head 9f2f76960) A3 — Adaptation scope violates the supplied forced-adaptation rule. Originals of Exte)
 
 - 18:03 L: batch 20261014T095137 dependency take-out
+- 10:04 L: merged deliver/A4/Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverComponentIdentity (stage 3; reviewer PASS; first push; landing 20261014T100433-L-1021472 (interface); batch 20261014T100431; modules 3; new nodes 2)

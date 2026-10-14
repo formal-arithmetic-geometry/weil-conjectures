@@ -1,0 +1,154 @@
+{
+ "id": "lem-pc-ordinary-evaluation-over-dual-projection",
+ "kind": "statement",
+ "title": "Inverse dual comparison recovers the unit-valued projection",
+ "statement": "For a scheme X, open U, complex P, natural termwise internal-Hom comparison e and projection-pinned b, form d by composing b at the single unit with Hom(P,a). In every degree q and input degree r with r+q=0, d inverse followed by the transported over-site unit-valued projection and e, then inverse unit comparison, is the scheme-site unit-valued projection. No tensorator or second complex F is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X, Hom-complex products and canonical tensor-Hom maps; cohomology.tex Tag 08DL, open restriction, and Tag 08DQ, representative evaluation computation; parent proof step 3."
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "stmt_deps": [
+  "def-pc-ordinary-evaluation-data",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof": [
+  {
+   "text": "apply the functorial projection equation of homComplex_projections_exists\nwith identity in the first variable and a.hom in the second variable. Compose\non the left with the hom of b at the single unit. Its projection is hπ.\nUse naturality he for the singleObjXSelf map to move that output map across e.\nThe degree-zero component of a, followed by singleObjXSelf on the scheme,\nis L(singleObjXSelf) followed by the inverse normalized unit isomorphism:\nexpand the two factors of a, use singleMapHomologicalComplex_hom_app_self\nand single_map_f_self, and cancel singleObjXSelf with its inverse.\nFunctoriality of homObjMap then identifies the resulting equation with\nd.hom.f q followed by the scheme unit-valued projection. Precompose with\nd.inv.f q and cancel using the degree-q component of d.inv_hom_id.\nThis proves the displayed equation, without any tensorator or complex F.\nEmpty opens and zero complexes require no separate assumptions.",
+   "uses": [
+    "def-pc-ordinary-evaluation-data",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ordinary-evaluation-data",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A4",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X, Hom-complex products and canonical tensor-Hom maps; cohomology.tex Tag 08DL, open restriction, and Tag 08DQ, representative evaluation computation; parent proof step 3.",
+  "description": "Proved by projection naturality, normalized single-unit comparison, internal-Hom map composition and inverse cancellation; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural internal Hom comparison and normalized monoidal equivalence preserve pairing with dual modules",
+   "date": "2026-10-14",
+   "results": "8 rigid-category tensorLeftHomEquiv and tensorRightHomEquiv hits.",
+   "verdict": "Rigid duality results do not address arbitrary natural internal-Hom isomorphisms on module sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.tensorHomEquiv",
+   "date": "2026-10-14",
+   "results": "Unknown identifier in service; no hits.",
+   "verdict": "The sheaf tensor-Hom API is project-local and was read in the source."
+  },
+  {
+   "tool": "grep",
+   "query": "overEquiv.*homObj|homObj.*overEquiv|tensorHomEquiv.*comp",
+   "date": "2026-10-14",
+   "results": "Only linear contraction homTensorHomEquiv hit in Mathlib; project has tensorHomEquiv naturality and homComplex product projections.",
+   "verdict": "No existing declaration gives this transport or inverse projection equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural automorphisms of internal Hom sheaves of modules are multiplication by a scalar",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "internal Hom naturality product projection homological complex single complex functor",
+   "date": "2026-10-14",
+   "results": "Eight hits, including HomologicalComplex.singleMapHomologicalComplex_hom_app_self and single_map_f_self.",
+   "verdict": "Second reading used the single-complex API to prove the dual-projection statement; no module contraction transport statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal, CategoryTheory.Closed",
+   "date": "2026-10-14",
+   "results": "CategoryTheory.Monoidal.Reflective.closed only.",
+   "verdict": "No compatibility result for the arbitrary natural e in this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorHomEquiv.*naturality|homObjMap_comp_homObjMap|singleMapHomologicalComplex_hom_app_self; rg overEquiv/hom, contraction/transport and scalar/naturality in the local Lean trees",
+   "date": "2026-10-14",
+   "results": "Single-complex comparison in Mathlib; project-local homObjMap_comp_homObjMap, projection naturality, tensorHomEquiv naturality and InternalHomOverEquiv.",
+   "verdict": "These prove the dual projection; none already states the contraction compatibility for arbitrary e and normalized m."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverComponentIdentity",
+  "date": "2026-10-14",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Parent component-identity proof: Inverse dual comparison recovers the unit-valued projection",
+   "via": [
+    "lem-pc-ordinary-evaluation-over-component-identity",
+    "lem-pc-ordinary-evaluation-over-tensor-formula",
+    "lem-pc-ordinary-evaluation-over-comparisons",
+    "lem-pc-ordinary-evaluation-over-transport",
+    "lem-pc-exact-source-kinjective-evaluation-open-models",
+    "lem-pc-exact-source-evaluation-open-models",
+    "lem-pc-exact-source-evaluation-local-comparisons",
+    "lem-pc-strictly-perfect-evaluation-local-retraction",
+    "lem-pc-strictly-perfect-kinjective-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-model",
+    "lem-pc-strictly-perfect-rhom-evaluation-local",
+    "lem-pc-perfect-rhom-evaluation-isomorphisms",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverDualProjection",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryEvaluationOverDualProjection.lean",
+  "declaration": "AlgebraicGeometry.ordinaryEvaluation_over_dual_projection",
+  "statement": "theorem ordinaryEvaluation_over_dual_projection (X : Scheme.{u}) (U : X.Opens) (P : CochainComplex (localEvaluationModules X U) ℤ) : let L := Equivalence.functor (C := localEvaluationModules X U) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv U) let T := L.mapHomologicalComplex (.up ℤ) ∀ (e : ∀ A B : localEvaluationModules X U, L.obj (SheafOfModules.homObj (R := X.sheaf.over U) A B) ≅ SheafOfModules.homObj (R := U.toScheme.sheaf) (L.obj A) (L.obj B)) (he : ∀ (A A' B B' : localEvaluationModules X U) (f : A' ⟶ A) (g : B ⟶ B'), L.map (SheafOfModules.homObjMap (R := X.sheaf.over U) f g) ≫ (e A' B').hom = (e A B).hom ≫ SheafOfModules.homObjMap (R := U.toScheme.sheaf) (L.map f) (L.map g)) (b : ∀ M : CochainComplex (localEvaluationModules X U) ℤ, T.obj (homComplex (R := X.sheaf.over U) P M) ≅ homComplex (R := U.toScheme.sheaf) (T.obj P) (T.obj M)) (hπ : ∀ (M : CochainComplex (localEvaluationModules X U) ℤ) (n r s : ℤ) (h : r + n = s), (b M).hom.f n ≫ (Classical.choose (homComplex_projections_exists.{u, u, u, u} (R := U.toScheme.sheaf))) (T.obj P) (T.obj M) n r s h = L.map (localEvaluationProjection X U P M n r s h) ≫ (e (P.X r) (M.X s)).hom), let a : T.obj (localEvaluationUnit X U) ≅ (HomologicalComplex.single _ (.up ℤ) 0).obj (𝟙_ (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))) := by set_option backward.isDefEq.respectTransparency true in exact (HomologicalComplex.singleMapHomologicalComplex L (.up ℤ) 0).app _ ≪≫ (HomologicalComplex.single _ (.up ℤ) 0).mapIso (Scheme.Modules.overEquivFunctorObjUnitIso U).symm let d := b (localEvaluationUnit X U) ≪≫ ((homComplexFunctor.{u, u, u, u} (R := U.toScheme.sheaf)).obj (op (T.obj P))).mapIso a ∀ (q r : ℤ) (h : r + q = 0), d.inv.f q ≫ L.map (localEvaluationProjection X U P (localEvaluationUnit X U) q r 0 h ≫ SheafOfModules.homObjMap (R := X.sheaf.over U) (𝟙 (P.X r)) (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (𝟙_ (localEvaluationModules X U))).hom) ≫ (e (P.X r) (𝟙_ (localEvaluationModules X U))).hom ≫ SheafOfModules.homObjMap (R := U.toScheme.sheaf) (𝟙 (L.obj (P.X r))) (Scheme.Modules.overEquivFunctorObjUnitIso U).inv = (Classical.choose (homComplex_projections_exists.{u, u, u, u} (R := U.toScheme.sheaf))) (T.obj P) ((HomologicalComplex.single _ (.up ℤ) 0).obj (𝟙_ (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)))) q r 0 h ≫ SheafOfModules.homObjMap (R := U.toScheme.sheaf) (𝟙 ((T.obj P).X r)) (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (𝟙_ (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)))).hom",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T100433-L-1021472",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T100433-L-1021472",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

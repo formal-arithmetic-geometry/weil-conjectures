@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationComponent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Sheaf.AlgebraicGeometry.OpenModuleContractionTransport
+import Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverDualProjection
 
 /-! # Evaluation components with a fixed normalized tensor comparison
 
@@ -40,6 +42,7 @@ noncomputable local instance ordinaryComponentIdentitySchemePreadditive (Y : Sch
 attribute [local irreducible] homComplexFunctor Scheme.Modules.overEquiv
   Scheme.Modules.overEquivFunctorObjUnitIso HomologicalComplex.singleMapHomologicalComplex
 
+set_option linter.unusedVariables false in
 /-- The tensor-Hom component identity after dual and output transport.
 Source: Stacks Project, Tags 08DQ and 08DL; Tag 0A8X, Hom projections.
 (blueprint: lem-pc-ordinary-evaluation-over-component-identity).
@@ -139,6 +142,36 @@ theorem ordinaryEvaluation_over_component_identity (X : Scheme.{u}) (U : X.Opens
         L.map (localEvaluationComponent X U P F p q n r hpq) ≫
         (e (P.X r) (F.X (r + n))).hom =
       schemeOrdinaryEvaluationComponent U.toScheme (T.obj P) (T.obj F) p q n r hpq
-        := by sorry
-
+        := by
+  classical
+  intro L T e he b hπ a d m hunit hsymm F p q n r hpq
+  let := SheafOfModules.monoidalCategory U.toScheme.sheaf
+  let := SheafOfModules.symmetricCategory U.toScheme.sheaf
+  let : L.Full := (Scheme.Modules.overEquiv U).full_functor
+  let : L.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_full L
+  by_cases h : r + q = 0
+  · have hk : L.map (F.XIsoOfEq (by omega : p = r + n)).hom =
+        ((T.obj F).XIsoOfEq (by omega : p = r + n)).hom := by
+      have hh : p = r + n := by omega
+      cases hh
+      simp only [HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom]
+      exact L.map_id _
+    have hv := ordinaryEvaluation_over_dual_projection X U P e he b hπ q r h
+    dsimp only [homComplex] at hv
+    have hc := openModule_contraction_transport X U e he m hunit hsymm
+      (P.X r) (F.X p) ((localEvaluationDual X U P).X q) (F.X (r + n))
+      _ (d.inv.f q)
+      (localEvaluationProjection X U P (localEvaluationUnit X U) q r 0 h ≫
+        SheafOfModules.homObjMap (R := X.sheaf.over U) (𝟙 (P.X r))
+          (HomologicalComplex.singleObjXSelf (.up ℤ) 0
+            (𝟙_ (localEvaluationModules X U))).hom)
+      (F.XIsoOfEq (by omega : p = r + n)).hom _ _ hv hk
+    simp only [localEvaluationComponent, schemeOrdinaryEvaluationComponent, dif_pos h]
+    dsimp only [homComplex]
+    set_option backward.isDefEq.respectTransparency.types true in
+      convert hc using 1 <;> congr 1
+  · change _ ≫ _ ≫ L.map _ ≫ _ = _
+    simp only [localEvaluationComponent, schemeOrdinaryEvaluationComponent, dif_neg h,
+      Functor.map_zero, zero_comp]
+    simp only [comp_zero]
 end AlgebraicGeometry

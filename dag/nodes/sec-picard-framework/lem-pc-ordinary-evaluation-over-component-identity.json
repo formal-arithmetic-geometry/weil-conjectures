@@ -135,8 +135,10 @@
  ],
  "proof": [
   {
-   "text": "Proof: first compare `e` with the explicit sectionwise internal-Hom\nreindexing isomorphism. Their quotient is a natural automorphism alpha of\ninternal Hom on the open scheme. Applying alpha to each global identity\nmap defines endomorphisms z_A. Naturality in both variables gives\nalpha(f) = z_B f = f z_A for every global map f : A -> B. These\nendomorphisms are all multiplication by the same global scalar t: for an\nopen V use extension by zero j_! O_V and its canonical map to O. That map\nis the identity over V, so z_(j_! O_V) is multiplication by t there, where\nt is z_O(1). Every section of A over V is a map j_! O_V -> A;\nnaturality then gives z_A(x) = t*x. To obtain the same description of\nalpha on a local Hom section phi : A|V -> B|V, use its adjoint global map\nj_!(A|V) -> B and precomposition with j_!(A|V) -> A. Over V the latter is\nthe identity, and the naturality square says alpha(phi) = t*phi.\nThe scalar t is a unit since alpha_(O,O) is an isomorphism.\n\nLikewise the tensorator of m equals sectionwise tensor reindexing. Check\nthis on local pure tensors using maps j_! O_V -> A and j_! O_V -> B.\nTheir naturality squares reduce the check over V to the tensorator on\n(O,O), which is fixed by the core monoidal unit laws and the prescribed\nunit isomorphism. These extensions by zero ensure that local sections,\nrather than only global sections, are tested. Sheafified tensor sections\nare locally sums of pure tensors, so the check determines the tensorator.\n\nIf r+q is nonzero, both components are zero and the additive equivalence\nand composition preserve zero. Otherwise apply hπ at the single unit,\nthen naturality of Hom(P,-) for the single-unit map a. Projecting d thus\nsends a dual section phi to t times its canonical reindexing. Its inverse\ncontributes t inverse. The local component evaluates y tensor phi on x\nas y*phi(x). The output comparison e contributes t, which cancels t\ninverse. The tensorator calculation and the symmetry and unit equations\nidentify the parenthesizations and remove the unit factor. The degree\nidentification agrees because T acts degreewise. Thus the uncurried\nmaps agree on all local tensors; curry back to the displayed equation.\nNo f or c is used. Zero complexes, the zero ring and empty opens satisfy\nthe same identities, with zero maps on zero carriers.",
+   "text": "Apply openModule_contraction_transport to the dual projection and d inverse. Apply ordinaryEvaluation_over_dual_projection to identify the resulting dual input. The degree transport is preserved by the degreewise functor, proved by equality elimination and map_id. Supply these two equations to the contraction transport theorem and identify its conclusion with the component formula by explicitly reducing homComplex and converting the degreewise component formula with congruence. If r+q is nonzero, unfold the two components and use map_zero and composition with zero.",
    "uses": [
+    "lem-pc-open-module-contraction-transport",
+    "lem-pc-ordinary-evaluation-over-dual-projection",
     "def-pc-ordinary-evaluation-data",
     "lem-sc-hom-complex-projections",
     "def-pc-scheme-ordinary-evaluation-component"
@@ -145,17 +147,19 @@
   }
  ],
  "proof_deps": [
+  "lem-pc-open-module-contraction-transport",
+  "lem-pc-ordinary-evaluation-over-dual-projection",
   "def-pc-ordinary-evaluation-data",
   "lem-sc-hom-complex-projections",
   "def-pc-scheme-ordinary-evaluation-component"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "H4",
+  "group": "A4",
   "date": "2026-10-14",
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 0A8X, Hom-complex products and canonical tensor-Hom maps; cohomology.tex Tag 08DL, open restriction, and Tag 08DQ, representative evaluation computation; parent proof step 3.",
-  "description": "Component cancellation via the natural internal-Hom scalar automorphism, extension by zero to test local sections, normalized tensorator, and dual/output inverse cancellation."
+  "description": "Reduction to module contraction transport and the proved inverse dual projection; explicit Hom-wrapper reduction and component congruence identify the formulas, and map_zero handles inactive degrees."
  },
  "mathlib_match": null,
  "status": "split",
@@ -189,11 +193,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-0c910",
-  "group": "H4",
+  "reviewer": "COMPILER",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261014T022546-L-4045870",
+  "landing": "20261014T100433-L-1021472",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered declarations and proofs with their DAG records and unchanged existing signature; all four modules and the direct importer compile cleanly, and axiom checks show only standard axioms plus sorryAx from the single documented component-identity hole."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
