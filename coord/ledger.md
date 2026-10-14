@@ -14191,3 +14191,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:30 L: merged deliver/U1/Sheaf.CategoryTheory.DerivedHomologyInjectiveInjective (stage 3; reviewer PASS; first push; landing 20261014T013046-L-3417965 (proof); batch 20261014T013031; modules 1; new nodes 0)
 - 01:30 L: merged deliver/U1/Sheaf.CategoryTheory.DerivedHomologyInjectiveSurjective (stage 3; reviewer PASS; first push; landing 20261014T013046-L-3418121 (proof); batch 20261014T013031; modules 1; new nodes 0)
 - 01:30 L: merged deliver/U1/Sheaf.CategoryTheory.DerivedModuleRankOneCompactSurjective (stage 3; reviewer PASS; first push; landing 20261014T013047-L-3418275 (proof); batch 20261014T013031; modules 1; new nodes 0)
+- 01:30 L: merged deliver/U2/Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeCompatibility (stage 3; reviewer PASS; first push; landing 20261014T013047-L-3418376 (interface); batch 20261014T013031; modules 2; new nodes 1)

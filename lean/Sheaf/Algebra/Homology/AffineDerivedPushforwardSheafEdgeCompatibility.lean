@@ -1,5 +1,6 @@
 module
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+import Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeComponent
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 @[expose] public section
 set_option autoImplicit false
@@ -56,5 +57,6 @@ theorem affineDerivedPushforwardSheafEdge_compatibility
             (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit).app
             ((HomotopyCategory.quotient _ (.up ℤ)).obj
               ((F.mapHomologicalComplex (.up ℤ)).obj C))) := by
-  sorry
+  intro ε F _ _ _ _ _ hF C hC
+  exact affineDerivedPushforwardSheafEdge_component A B φ i ε F hF C hC
 end AlgebraicGeometry
