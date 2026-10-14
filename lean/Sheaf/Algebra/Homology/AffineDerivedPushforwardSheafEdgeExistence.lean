@@ -1,6 +1,5 @@
 module
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-public import Mathlib.Algebra.Category.ModuleCat.Abelian
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -26,5 +25,6 @@ theorem exists_affineDerivedPushforwardSheafEdge_existence
       schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙
       DerivedCategory.homologyFunctor
         (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i) := by
-  sorry
+  -- Only existence is asserted; zero is a natural transformation of these functors.
+  exact ⟨0⟩
 end AlgebraicGeometry
