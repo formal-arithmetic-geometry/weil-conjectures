@@ -1,125 +1,129 @@
 {
-  "id": "lem-sc-cech-cup-resolution-representatives",
-  "kind": "statement",
-  "title": "Cech cup resolution representatives",
-  "statement": "Let U be an arbitrary open cover of a scheme X and F,G quasi-coherent modules. Fix canonical comparisons cF,cG,cFG [def-sc-module-cech-comparison] in degrees p,q,p+q. For Cech kernel cocycles a,b,c with underlying cochain c equal to the Alexander-Whitney product of a and b [def-sc-cech-cup-product], there exist a computing acyclic resolution pairing D [def-sc-module-cup-resolution-data] and global kernel cocycles a',b',c' such that their D-class maps equal cF([a]),cG([b]),cFG([c]), respectively, and the underlying section of c' is D.pair(p,q,top)(a',b'). This concerns resolution representatives and assumes no cup product on cohomology.",
-  "stmt_deps": [
-    "def-pc-scheme",
-    "pqf-def-coherent",
-    "def-sc-cech-cup-product",
-    "def-sc-module-cech-comparison",
-    "def-sc-module-cup-resolution-data"
-  ],
-  "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Stacks Tag 0FKV"
+ "id": "lem-sc-cech-cup-resolution-representatives",
+ "kind": "statement",
+ "title": "Cech cup resolution representatives",
+ "statement": "Let U be an arbitrary open cover of a scheme X and F,G quasi-coherent modules. Fix canonical comparisons cF,cG,cFG [def-sc-module-cech-comparison] in degrees p,q,p+q. For Cech kernel cocycles a,b,c with underlying cochain c equal to the Alexander-Whitney product of a and b [def-sc-cech-cup-product], there exist a computing acyclic resolution pairing D [def-sc-module-cup-resolution-data] and global kernel cocycles a',b',c' such that their D-class maps equal cF([a]),cG([b]),cFG([c]), respectively, and the underlying section of c' is D.pair(p,q,top)(a',b'). This concerns resolution representatives and assumes no cup product on cohomology.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sc-cech-cup-product",
+  "def-sc-module-cech-comparison",
+  "def-sc-module-cup-resolution-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Stacks Tag 0FKV"
+ },
+ "proof": [
+  {
+   "text": "Use the existing flasque-resolution comparison theorem to choose a CupResolutionPairing D and Cech comparison data for its left, right and target resolutions.",
+   "uses": [
+    "lem-sc-cech-cup-resolution-comparison-exists"
+   ],
+   "elementary": false
   },
-  "proof": [
-    {
-      "text": "Use the nonnegative Godement/flasque resolutions and augmentation-preserving sectionwise pairing [lem-sc-module-cup-godement-aw]. Their flasque terms are global-section acyclic [lem-sc-module-cup-flasque-acyclicity], so injective comparisons equip them with the computing class maps in CupResolutionPairing.",
-      "uses": [
-        "lem-sc-module-cup-godement-aw",
-        "lem-sc-module-cup-flasque-acyclicity"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The alpha maps from global sections to total Cech complexes are quasi-isomorphisms for flasque resolutions. Lift the images of a,b to global cocycles a′,b′. The Leibniz identity makes the paired section a cocycle c′. In Tag 0FKV the alpha and augmentation beta maps preserve the signed cup pairing, so the three resulting cohomology classes agree with the canonical comparisons characterized in [lem-sc-cech-comparison-map-naturality]. The comparisons to injective resolutions identify them with the D-class maps.",
-      "uses": [
-        "lem-sc-cech-comparison-map-naturality"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-sc-module-cup-godement-aw",
-    "lem-sc-module-cup-flasque-acyclicity",
-    "lem-sc-cech-comparison-map-naturality"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0FKV, Lemma 20.31.4; Godement/flasque resolution pairing and signed Cech comparison diagram"
+  {
+   "text": "The projection from kernel cocycles to homology is surjective, and both subsequent maps defining D.class are isomorphisms. Thus choose global cocycles a′ and b′ representing the canonical Cech comparison images. Their differentials vanish, so the signed Leibniz rule gives a target cocycle c′ whose underlying section is D.pair(p,q,top)(a′,b′). This is proved directly in Lean by the two private helper lemmas.",
+   "uses": [],
+   "elementary": true
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Cech cup cocycles admit global cocycle representatives in computing flasque resolutions compatible with their tensor pairing",
-      "results": "Service unavailable: Internal Server Error. No mathematical verdict; leanfinder, loogle and grep searches were completed instead.",
-      "date": "2026-10-13"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The Alexander Whitney product of Cech cocycles has compatible global cocycle representatives in flasque resolutions of module sheaves",
-      "results": "8 hits; no result states this intermediate comparison. Nearest results: CategoryTheory.PresheafOfGroups.OneCocycle.ev_trans, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.OneCochain.mul_ev, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂",
-      "date": "2026-10-13",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"cech\", \"homology\"",
-      "results": "0 hits; no result states this intermediate comparison. No hits.",
-      "date": "2026-10-13",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "grep",
-      "query": "Godement|flasque|cup.*(resolution|comparison)|comparison.*cup|cech.*naturality",
-      "results": "5 hits; no result states this intermediate comparison. Nearest results: Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean",
-      "date": "2026-10-13",
-      "verdict": "no exact match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.Paper.CechCupPullbackCompat",
-    "date": "2026-10-13",
-    "group": "D4"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-sc-theorem-of-cube",
-      "place": "proof: application of the general theorem of the cube; Kunneth comparison on the special fibre",
-      "via": [
-        "lem-sc-picard-cech-cup-pullback-compat",
-        "lem-sc-picard-kunneth-qcoh"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-cube",
-  "lean": {
-    "module": "Sheaf.Paper.CechCupResolutionRepresentatives",
-    "declaration": "AlgebraicGeometry.Scheme.Modules.cechCup_resolution_representatives",
-    "file": "lean/Sheaf/Paper/CechCupResolutionRepresentatives.lean",
-    "statement": "theorem cechCup_resolution_representatives (X : Scheme.{v}) {ι : Type v}\n    (U : ι → X.Opens) (hU : iSup U = ⊤)\n    (F G : X.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] (p q : ℕ)\n    (cF : ((cechComplexFunctor U).obj F.presheafModuleCat).homology p ⟶\n      (RingedSpace.moduleCohomology X.toRingedSpace p).obj F)\n    (hcF : IsModuleCechComparison U F p cF)\n    (cG : ((cechComplexFunctor U).obj G.presheafModuleCat).homology q ⟶\n      (RingedSpace.moduleCohomology X.toRingedSpace q).obj G)\n    (hcG : IsModuleCechComparison U G q cG)\n    (cFG : ((cechComplexFunctor U).obj (F ⊗ G).presheafModuleCat).homology (p + q) ⟶\n      (RingedSpace.moduleCohomology X.toRingedSpace (p + q)).obj (@id X.Modules (F ⊗ G)))\n    (hcFG : IsModuleCechComparison U (F ⊗ G) (p + q) cFG)\n    (a : (((cechComplexFunctor U).obj F.presheafModuleCat).sc p).moduleCatLeftHomologyData.K)\n    (b : (((cechComplexFunctor U).obj G.presheafModuleCat).sc q).moduleCatLeftHomologyData.K)\n    (c : (((cechComplexFunctor U).obj (F ⊗ G).presheafModuleCat).sc\n      (p + q)).moduleCatLeftHomologyData.K)\n    (hc : c.val = cechCupCochain U F G p q a.val b.val) :\n    ∃ (D : CupResolutionPairing F G)\n      (a' : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj D.left.K).sc p).moduleCatLeftHomologyData.K)\n      (b' : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj D.right.K).sc q).moduleCatLeftHomologyData.K)\n      (c' : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj D.target.K).sc (p + q)).moduleCatLeftHomologyData.K),\n      D.left.class p a' = cF (cupCycleClass _ p a) ∧\n      D.right.class q b' = cG (cupCycleClass _ q b) ∧\n      D.target.class (p + q) c' = cFG (cupCycleClass _ (p + q) c) ∧\n      c'.val = D.pair p q ⊤ a'.val b'.val",
-    "branch": "sheaf-dag",
-    "by": "D4",
-    "date": "2026-10-13",
-    "existing": false
-  },
-  "reviewed": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "X-c6cfc",
-    "group": "D4",
-    "result": "pass",
-    "landing": "20261013T161727-L-1459870",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "X-c6cfc",
-    "group": "D4",
-    "result": "pass",
-    "landing": "20261013T161727-L-1459870",
-    "kind": "interface",
-    "note": "independent Codex review: Matched the proof, new theorem signatures, DAG records, sources, and report; existing signatures remain unchanged, all three delivered modules and all three direct importers compile cleanly, and axiom checks pass with recorded sorry dependencies."
+  {
+   "text": "Apply the signed total Cech pairing on the alpha and beta axes. The alpha_class and beta_class equations, together with the hypotheses hcF, hcG and hcFG, identify the three resulting classes with cF([a]), cG([b]) and cFG([c]).",
+   "uses": [
+    "lem-sc-cech-cup-signed-axis-pairing",
+    "lem-sc-cech-cup-resolution-comparison-exists"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-sc-cech-cup-resolution-comparison-exists",
+  "lem-sc-cech-cup-signed-axis-pairing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0FKV, Lemma 20.31.4; Godement/flasque resolution pairing and signed Cech comparison diagram"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech cup cocycles admit global cocycle representatives in computing flasque resolutions compatible with their tensor pairing",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict; leanfinder, loogle and grep searches were completed instead.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Alexander Whitney product of Cech cocycles has compatible global cocycle representatives in flasque resolutions of module sheaves",
+   "results": "8 hits; no result states this intermediate comparison. Nearest results: CategoryTheory.PresheafOfGroups.OneCocycle.ev_trans, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.OneCochain.mul_ev, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cech\", \"homology\"",
+   "results": "0 hits; no result states this intermediate comparison. No hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|flasque|cup.*(resolution|comparison)|comparison.*cup|cech.*naturality",
+   "results": "5 hits; no result states this intermediate comparison. Nearest results: Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CechCupPullbackCompat",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: application of the general theorem of the cube; Kunneth comparison on the special fibre",
+   "via": [
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "module": "Sheaf.Paper.CechCupResolutionRepresentatives",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.cechCup_resolution_representatives",
+  "file": "lean/Sheaf/Paper/CechCupResolutionRepresentatives.lean",
+  "statement": "theorem cechCup_resolution_representatives (X : Scheme.{v}) {ι : Type v}\n    (U : ι → X.Opens) (hU : iSup U = ⊤)\n    (F G : X.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] (p q : ℕ)\n    (cF : ((cechComplexFunctor U).obj F.presheafModuleCat).homology p ⟶\n      (RingedSpace.moduleCohomology X.toRingedSpace p).obj F)\n    (hcF : IsModuleCechComparison U F p cF)\n    (cG : ((cechComplexFunctor U).obj G.presheafModuleCat).homology q ⟶\n      (RingedSpace.moduleCohomology X.toRingedSpace q).obj G)\n    (hcG : IsModuleCechComparison U G q cG)\n    (cFG : ((cechComplexFunctor U).obj (F ⊗ G).presheafModuleCat).homology (p + q) ⟶\n      (RingedSpace.moduleCohomology X.toRingedSpace (p + q)).obj (@id X.Modules (F ⊗ G)))\n    (hcFG : IsModuleCechComparison U (F ⊗ G) (p + q) cFG)\n    (a : (((cechComplexFunctor U).obj F.presheafModuleCat).sc p).moduleCatLeftHomologyData.K)\n    (b : (((cechComplexFunctor U).obj G.presheafModuleCat).sc q).moduleCatLeftHomologyData.K)\n    (c : (((cechComplexFunctor U).obj (F ⊗ G).presheafModuleCat).sc\n      (p + q)).moduleCatLeftHomologyData.K)\n    (hc : c.val = cechCupCochain U F G p q a.val b.val) :\n    ∃ (D : CupResolutionPairing F G)\n      (a' : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj D.left.K).sc p).moduleCatLeftHomologyData.K)\n      (b' : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj D.right.K).sc q).moduleCatLeftHomologyData.K)\n      (c' : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj D.target.K).sc (p + q)).moduleCatLeftHomologyData.K),\n      D.left.class p a' = cF (cupCycleClass _ p a) ∧\n      D.right.class q b' = cG (cupCycleClass _ q b) ∧\n      D.target.class (p + q) c' = cFG (cupCycleClass _ (p + q) c) ∧\n      c'.val = D.pair p q ⊤ a'.val b'.val",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c6cfc",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T161727-L-1459870",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261014T123700-L-2885500",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
