@@ -85,8 +85,6 @@ theorem exists_affineDerivedPushforwardSheafEdge
           (((RingedSpace.moduleDirectImage
             (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit).app
             ((HomotopyCategory.quotient _ (.up ℤ)).obj
-              ((F.mapHomologicalComplex (.up ℤ)).obj C))) := by
-  obtain ⟨ε⟩ := exists_affineDerivedPushforwardSheafEdge_existence A B φ i
-  exact ⟨ε, affineDerivedPushforwardSheafEdge_compatibility A B φ i ε⟩
+              ((F.mapHomologicalComplex (.up ℤ)).obj C))) := by sorry
 
 end AlgebraicGeometry
