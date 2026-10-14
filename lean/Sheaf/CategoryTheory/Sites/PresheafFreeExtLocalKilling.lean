@@ -228,10 +228,12 @@ theorem exists_presheaf_ext_local_killing_witness
   obtain ⟨E, f, hf, l, hl⟩ := exists_presheaf_cover_lift P G g
   refine ⟨E, f, hf, ?_⟩
   rw [← hl, ← Ext.mk₀_comp_mk₀_assoc, hx]
-  simp
+  exact Ext.comp_zero _ _ _ _ _
 
 /-- The local Ext killing conclusion. (blueprint: lem-sc-presheaf-free-ext-local-killing)
-Proof: apply the preceding Yoneda witness theorem. -/
+Proof: apply the preceding Yoneda witness theorem, which directly supplies the
+presheaf, locally surjective map, and vanishing equation. No existential proof
+witness or auxiliary True proposition is needed. -/
 theorem exists_presheaf_ext_local_killing
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{v}]
