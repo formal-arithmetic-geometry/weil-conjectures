@@ -59,7 +59,6 @@ theorem cartier_equality
       (FiniteDimensional k K →
         Module.finrank K (KaehlerDifferential k K) =
           Module.finrank K (Algebra.H1Cotangent k K)) := by
-  -- The complete-intersection model supplies the two finite-dimensional comparisons.
   classical
   have : Algebra.EssFiniteType k K := IntermediateField.fg_top_iff.mp hfg
   obtain ⟨s, hs⟩ := exists_finset_isTranscendenceBasis k K
