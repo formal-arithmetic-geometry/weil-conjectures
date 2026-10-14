@@ -22,9 +22,82 @@
  "stmt_deps": [
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the given presentation, write $q:B^v\\to M$ for its surjection, and let $A$ be the $v\\times u$ matrix of its first map in the coordinate bases. Thus $\\ker q=\\operatorname{im}A$. Put $m_j=q(e_j)$; these finitely many elements generate $M$. For each $v$-element subset $S$ of the $u$ columns put $d_S=\\det(A^S)$, and let $I=(d_S)_S$. There are finitely many such subsets. If $v=0$, the presentation gives $M=0$, the unique empty minor is $1$, and $I=B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051B (algebra-lemma-support-finite-presentation-constructible), proof; expanded maximal-minor criterion using Tags 07DQ and 0F0K"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p$ be a prime and suppose $M_{\\mathfrak p}=0$. Each $m_j/1=0$ gives $s_j\\notin\\mathfrak p$ with $s_jm_j=0$ by the fraction equality in the statement. Set $s=\\prod_j s_j\\notin\\mathfrak p$ (empty product $1$). Then $q(se_j)=0$, so exactness supplies $c_j\\in B^u$ with $Ac_j=se_j$. The matrix $C$ with columns $c_j$ satisfies $AC=s1_v$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051B (algebra-lemma-support-finite-presentation-constructible), proof; expanded maximal-minor criterion using Tags 07DQ and 0F0K"
+   }
+  },
+  {
+   "text": "Apply Cauchy--Binet over $B$ to the $v\\times u$ matrix $A$ and the $u\\times v$ matrix $C$. In the permutation expansion of $\\det(s1_v)$ every nonidentity permutation contributes zero, while the identity contributes $s^v$ (the empty product is $1$). The cited formula therefore gives $s^v=\\det(s1_v)=\\sum_{|S|=v}d_S\\det(C_S)\\in I$. As $s\\notin\\mathfrak p$, also $s^v\\notin\\mathfrak p$, so $I\\nsubseteq\\mathfrak p$. This includes $v=0$, where $s^0=1$ and the sum has the single empty minor, and $u<v$, where the sum is empty and the equation would contradict $s\\notin\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-cauchy-binet"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051B (algebra-lemma-support-finite-presentation-constructible), proof; expanded maximal-minor criterion using Tags 07DQ and 0F0K"
+   }
+  },
+  {
+   "text": "Conversely, if $I\\nsubseteq\\mathfrak p$, some generator $d_S$ is outside $\\mathfrak p$. Let $E_S:B^v\\to B^u$ insert the selected coordinates, so $AE_S=A^S$. The adjugate identity gives $A(E_S\\operatorname{adj}(A^S))=d_S1_v$. Applying $q$ shows $d_Sm_j=0$ for every $j$, hence $d_SM=0$. Since $d_S\\notin\\mathfrak p$, the localization fraction criterion gives $m/t=0$ for every $m/t\\in M_{\\mathfrak p}$ (use multiplier $d_S$); thus $M_{\\mathfrak p}=0$. Together with the preceding steps, $\\operatorname{Supp}_B(M)=V(I)$. This is closed by the definition of the Zariski topology.",
+   "uses": [
+    "lem-weil-pbc-matrix-adjugate-identity",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051B (algebra-lemma-support-finite-presentation-constructible), proof; expanded maximal-minor criterion using Tags 07DQ and 0F0K"
+   }
+  },
+  {
+   "text": "For any $f\\in B$, the cited localization homeomorphism identifies $D(f)=\\{\\mathfrak p:f\\notin\\mathfrak p\\}$ with $\\operatorname{Spec}B_f$, and the cited spectrum compactness applies to the commutative ring $B_f$. To check compactness explicitly, pull any open cover of $D(f)$ back through this homeomorphism, choose a finite subcover of $\\operatorname{Spec}B_f$, and push its members back. Hence every $D(f)$ is quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051B, last sentence, using Tag 00E4 (algebra-lemma-standard-open) and Tag 00E8 (algebra-lemma-quasi-compact)"
+   }
+  },
+  {
+   "text": "A prime contains $I=(d_S)_S$ precisely when it contains every $d_S$, so $\\operatorname{Spec}B\\setminus\\operatorname{Supp}_B(M)=\\bigcup_S D(d_S)$. For an arbitrary open cover of this union, its restriction to each $D(d_S)$ admits a finite subcover by the preceding step. Take the union of these finitely many finite choices to cover the entire complement. When there are no minors the union is empty and the empty subcover suffices. When $v=0$ it is $D(1)=\\operatorname{Spec}B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051B (algebra-lemma-support-finite-presentation-constructible), proof; expanded maximal-minor criterion using Tags 07DQ and 0F0K"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cauchy-binet",
+  "lem-weil-pbc-matrix-adjugate-identity",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 051B maximal-minor proof; agent expansion replaces residue-field/Nakayama detection by the explicit fraction argument and determinant identities of Tags 07DQ and 0F0K"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,15 +154,95 @@
    "results": "[grep] OK 0 hit(s); RingTheory subtree",
    "date": "2026-10-14",
    "verdict": "No matching declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The complement of the support of a finitely presented module is quasi compact",
+   "results": "OK 8 hits; PrimeSpectrum.isRetrocompact_zeroLocus_compl_of_fg, PrimeSpectrum.isRetrocompact_zeroLocus_compl, Module.isClosed_support, AlgebraicGeometry.exists_of_res_zero_of_qcqs, Module.support_quotient, PrimeSpectrum.isCompact_isOpen_iff_ideal, Module.support_quotSMulTop, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+   "date": "2026-10-14",
+   "verdict": "No exact match for the item: basic-open compactness and closedness of finite-module support omit the finitely presented support/minor identification. Prime/Module.lean:20-21 explicitly lists 051B as TODO; isCompact_basicOpen at Prime/Topology.lean:611 was read."
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.isCompact_basicOpen",
+   "results": "OK 1 hits; PrimeSpectrum.isCompact_basicOpen",
+   "date": "2026-10-14",
+   "verdict": "No exact match for the item: basic-open compactness and closedness of finite-module support omit the finitely presented support/minor identification. Prime/Module.lean:20-21 explicitly lists 051B as TODO; isCompact_basicOpen at Prime/Topology.lean:611 was read."
+  },
+  {
+   "tool": "grep",
+   "query": "FinitePresentation.*support|support.*FinitePresentation|isCompact_basicOpen",
+   "results": "OK 6 hits; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+   "date": "2026-10-14",
+   "verdict": "No exact match for the item: basic-open compactness and closedness of finite-module support omit the finitely presented support/minor identification. Prime/Module.lean:20-21 explicitly lists 051B as TODO; isCompact_basicOpen at Prime/Topology.lean:611 was read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complement of support of a finitely presented module is compact",
+   "results": "UNAVAILABLE 0 hits; ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing locus of a finitely presented module is a compact open subset of prime spectrum",
+   "results": "OK 8 hits; PrimeSpectrum.isRetrocompact_zeroLocus_compl_of_fg, PrimeSpectrum.isCompact_isOpen_iff_ideal, PrimeSpectrum.isRetrocompact_zeroLocus_compl, PrimeSpectrum.isCompact_isOpen_iff, PrimeSpectrum.isCompact_basicOpen, AlgebraicGeometry.Scheme.zeroLocus_eq_univ_iff_subset_nilradical_of_isCompact, Polynomial.isCompact_image_comap_of_monic, PrimeSpectrum.compactSpace",
+   "date": "2026-10-14",
+   "verdict": "No exact match for the item: basic-open compactness and closedness of finite-module support omit the finitely presented support/minor identification. Prime/Module.lean:20-21 explicitly lists 051B as TODO; isCompact_basicOpen at Prime/Topology.lean:611 was read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a module of finite presentation the set of primes where its localization is zero is compact",
+   "results": "OK 8 hits; PrimeSpectrum.isRetrocompact_zeroLocus_compl_of_fg, PrimeSpectrum.isCompact_isOpen_iff_ideal, PrimeSpectrum.compactSpace, Submodule.fg_of_isLocalized_maximal, PrimeSpectrum.isCompact_basicOpen, PrimeSpectrum.isRetrocompact_zeroLocus_compl, PrimeSpectrum.exists_image_comap_of_finite_of_free, Module.Finite.of_isLocalized_maximal",
+   "date": "2026-10-14",
+   "verdict": "No exact match: Module.isClosed_support assumes only finite generation and proves closedness; compact basic opens and complements of finitely generated ideal zero loci do not supply the support/minor identification. Read Mathlib/RingTheory/Spectrum/Prime/Module.lean:20-21 (051B TODO), 45-47 (closedness), and Spectrum/Prime/Topology.lean:592-611 (localization and compactness)."
+  },
+  {
+   "tool": "grep",
+   "query": "support.*[Cc]ompact|[Cc]ompact.*support|051B",
+   "results": "OK 25 hits; Mathlib/Probability/Density.lean, Mathlib/Algebra/Algebra/NonUnitalHom.lean, Mathlib/Algebra/Algebra/NonUnitalHom.lean, Mathlib/RingTheory/Spectrum/Prime/Module.lean, Mathlib/Dynamics/FixedPoints/Support.lean, Mathlib/Dynamics/FixedPoints/Support.lean, Mathlib/Dynamics/FixedPoints/Support.lean, Mathlib/Dynamics/FixedPoints/Support.lean",
+   "date": "2026-10-14",
+   "verdict": "No exact match: Module.isClosed_support assumes only finite generation and proves closedness; compact basic opens and complements of finitely generated ideal zero loci do not supply the support/minor identification. Read Mathlib/RingTheory/Spectrum/Prime/Module.lean:20-21 (051B TODO), 45-47 (closedness), and Spectrum/Prime/Topology.lean:592-611 (localization and compactness)."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.isClosed_support",
+   "results": "OK 1 hits; Module.isClosed_support",
+   "date": "2026-10-14",
+   "verdict": "No exact match: Module.isClosed_support assumes only finite generation and proves closedness; compact basic opens and complements of finitely generated ideal zero loci do not supply the support/minor identification. Read Mathlib/RingTheory/Spectrum/Prime/Module.lean:20-21 (051B TODO), 45-47 (closedness), and Spectrum/Prime/Topology.lean:592-611 (localization and compactness)."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-generic-quasi-separatedness",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-pur-finitely-presented-support-complement",
+  "worker": "stage1",
+  "summary": "Verified Tag 051B and retained its statement and maximal-minor route. Expanded the vanishing/minor equivalence directly from presentation exactness and localization fractions with existing Cauchy--Binet and adjugate nodes. Reused existing localization-homeomorphism and spectrum-compactness leaves; no new nodes. Checked all zero-rank and empty-minor cases.",
+  "blueprint": "Realizes the finite-presentation support-complement ingredient in the ancestor proof paragraphs 2-3, as specified in blueprint.from.place, used in the generic quasi-separatedness preparation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cauchy-binet",
+    "why": "Generic determinant formula for AC, needed for the maximal-minor criterion; this unit supplies no determinant identity."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cauchy-binet"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-2dfab483e",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-2dfab483e (reviewer sub-agent of L); spot-checked: Read the item, all six proof steps, five cited statements, sources and unit/chapter route in full. The maximal-minor argument proves both conclusions without extra hypotheses and handles zero ranks and the zero ring. No duplicates, cycles or missing citations found. Accepted Cauchy–Binet as a generic tool use. No repairs; concrete checks recorded in review.md."
+ }
 }
