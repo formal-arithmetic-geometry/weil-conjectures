@@ -29,9 +29,84 @@
   "def-weil-affine-spectrum",
   "pqf-def-quasifinite"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Restrict to the directed tail $J=\\{i:i\\ge i_0\\}$. This does not change the ring colimit: given a cocone on the tail and $k\\in I$, choose $j\\ge k,i_0$ and compose $A_k\\to A_j$ with its leg; directedness proves independence of $j$ and compatibility, so the universal property gives exactly a cocone on $I$. Moreover $B$ is the colimit of the $B_i$: compatible maps $B_i\\to D$ are precisely a compatible family $A_i\\to D$ and one map $B_0\\to D$ agreeing on $A_{i_0}$, hence precisely a map from the pushout $A\\otimes_{A_{i_0}}B_0$ to $D$. This proves the colimit assertion in commutative rings, including its canonical legs. Choose algebra generators $b_1,\\ldots,b_n$ from a finite presentation of $B_0$. Every element of $B_i$ is a finite sum of tensors $a\\otimes b$; express $b$ as a polynomial in the $b_r$, so $B_i$ is generated over $A_i$ by $1\\otimes b_1,\\ldots,1\\otimes b_n$. Thus every $A_i\\to B_i$ is of finite type.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "094M, setup of affine specialization of Situation 081D; elementary cocone and pushout argument"
+   }
+  },
+  {
+   "text": "By quasi-finiteness of $f:\\operatorname{Spec}B\\to\\operatorname{Spec}A$, every point is isolated in its fibre. The scheme-fibre homeomorphism identifies these fibres with the underlying preimages, and the affine fibre-product formula identifies the fibre at a prime $\\mathfrak p$ with $\\operatorname{Spec}(B\\otimes_A\\kappa(\\mathfrak p))$. Since every singleton is open, every subset is a union of open singletons, and both it and its complement are open. An irreducible closed subset cannot contain distinct points: one singleton and its complement would partition it into two proper closed subsets. Thus every nonempty irreducible closed subset is a singleton, and no strict chain of these has positive length. By the definition of Krull dimension the fibre has dimension zero if nonempty, and $-\\infty$ if empty, hence at most zero in either case.",
+   "uses": [
+    "pqf-def-quasifinite",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "094M: reduction to fibre dimension at most zero; 05M5 with d=0"
+   }
+  },
+  {
+   "text": "For $i\\le j$ in the tail, the canonical map $A_j\\otimes_{A_i}B_i\\to B_j$ is an isomorphism: a map from either ring to $D$ is exactly maps from $A_j$ and $B_0$ to $D$ agreeing on $A_{i_0}$; equivalently, its inverse sends $a\\otimes b\\in B_j$ to $a\\otimes(1\\otimes b)$. In particular the comparison map is surjective. Apply the affine limit fibre-dimension bound to the two systems $(A_i)$ and $(B_i)$ on $J$, their ring colimits established in step 1, the finite-type maps of step 1, these surjective comparisons, and the bound of step 2 with $d=0$. It supplies $i\\ge i_0$ for which every fibre $\\operatorname{Spec}(B_i\\otimes_{A_i}\\kappa(\\mathfrak p_i))$ has dimension at most zero.",
+   "uses": [
+    "lem-weil-pbc-affine-limit-fibre-dimension-bound",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 094M, application of Tag 05M5 (lemma-limit-dimension)"
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak q$ of $B_i$ and let $\\mathfrak p_i$ be its contraction. At its point in the fibre, the dimension at the point is at most the whole fibre dimension because the whole fibre is an open neighbourhood. It is at least zero since every neighbourhood contains that point. Hence it equals zero. The zero-fibre-dimension criterion, with the finite-type map $A_i\\to B_i$ from step 1, proves quasi-finiteness at $\\mathfrak q$. Using the full source and target as affine neighbourhoods in the definition of quasi-finiteness at a point proves that $f_i$ is locally quasi-finite. The morphism between these affine schemes is affine, and affine-morphism permanence makes it quasi-compact. The equivalence of quasi-finiteness with local quasi-finiteness plus quasi-compactness therefore proves that $f_i$ is quasi-finite. If $B_i$ is the zero ring there are no primes, and the same argument has a vacuous pointwise assertion.",
+   "uses": [
+    "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+    "def-kun-topological-dimension-at-point",
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "pqf-lem-qf-locqf-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0397 (lemma-locally-quasi-finite-rel-dimension-0); final inference of 094M"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-finite-type-algebra",
+  "pqf-def-quasifinite",
+  "def-pc-scheme-fibre",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-affine-limit-fibre-dimension-bound",
+  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+  "def-kun-topological-dimension-at-point",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "pqf-lem-qf-locqf-qc"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "094M (lemma-descend-quasi-finite), applying 05M5 with d=0; affine setup and final pointwise criterion expanded using 0397."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -88,15 +163,107 @@
    "results": "8 hits; top results: CommRingCat.isFinitelyPresentable_hom, RingHom.FinitePresentation.of_comp_finiteType, RingHom.FiniteType.of_finitePresentation, RingHom.FinitePresentation.of_finiteType, RingHom.finitePresentation_isLocal, RingHom.QuasiFinite.of_isIntegral_of_finiteType, RingHom.QuasiFinite.of_finite, AlgHom.FinitePresentation.of_finiteType",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi finiteness of a finitely presented algebra over a filtered colimit descends to one stage",
+   "results": "; 8 hits: RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, CommRingCat.isFinitelyPresentable_hom, RingHom.FinitePresentation.of_comp_finiteType, AlgHom.FinitePresentation.of_comp_finiteType, RingHom.FiniteType.of_finitePresentation, isFinitelyPresentable, Algebra.FinitePresentation.trans",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiFinite\", \"colimit\"",
+   "results": "; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "descend.*[Qq]uasi[Ff]inite|[Qq]uasi[Ff]inite.*(colimit|limit)",
+   "results": "; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi finiteness of finitely presented algebras descends along filtered colimits",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-quasifinite-affine-etale-thickening-decomposition",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-descend-quasifinite-affine",
+  "worker": "stage1",
+  "summary": "Expanded 094M through 05M5 with d=0, proving the directed-tail and tensor colimits explicitly, and reducing the stage conclusion pointwise via 0397. Two unsplit general tool nodes; no statement change or Lean attachment.",
+  "blueprint": "Proof, classical constructibility input: finite pushforward constructibility (095R) invokes 095K(1); 095K proof, Noetherian approximation and finite section-cover paragraphs.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-category-colimit",
+    "why": "Generic Colimit of a diagram in a category used exactly as stated; the unit has no replacement for this supporting affine/dimension/definition fact."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic The fibre product of affine schemes is the spectrum of the tensor product used exactly as stated; the unit has no replacement for this supporting affine/dimension/definition fact."
+   },
+   {
+    "node": "def-weil-pbc-finitely-presented-algebra",
+    "why": "Generic Ring maps of finite presentation used exactly as stated; the unit has no replacement for this supporting affine/dimension/definition fact."
+   },
+   {
+    "node": "def-weil-pbc-finite-type-algebra",
+    "why": "Generic Ring maps of finite type used exactly as stated; the unit has no replacement for this supporting affine/dimension/definition fact."
+   },
+   {
+    "node": "pqf-def-quasifinite",
+    "why": "Generic Quasi-finite morphisms and finite fibres used exactly as stated; the unit has no replacement for this supporting affine/dimension/definition fact."
+   },
+   {
+    "node": "def-pc-scheme-fibre",
+    "why": "Generic Scheme-theoretic fibre of a morphism over a point used exactly as stated; the unit has no replacement for this supporting affine/dimension/definition fact."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "Generic A morphism between affine schemes is affine (Stacks 01SH) used exactly as stated; the unit has no replacement for this supporting affine/dimension/definition fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic Base change, affineness of the source, and quasi-compactness and separatedness of affine morphisms used exactly as stated; the unit has no replacement for this supporting affine/dimension/definition fact."
+   },
+   {
+    "node": "pqf-lem-qf-locqf-qc",
+    "why": "Generic Quasi-finite = locally quasi-finite + quasi-compact used exactly as stated; the unit has no replacement for this supporting affine/dimension/definition fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-finite-type-algebra",
+  "pqf-def-quasifinite",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "pqf-lem-qf-locqf-qc"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-0ac072954",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-0ac072954 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, sources, and unit/chapter route in full. Checked 094M/081D, 05M5, and 0397 hypothesis by hypothesis; edge cases and the 84-node dependency traversal pass. No duplicates, circular splits, target weakening, or unsupported coefficient comparison found. Accepted the declared generic tool uses. Detailed checks are in review.md; no repairs needed."
+ }
 }

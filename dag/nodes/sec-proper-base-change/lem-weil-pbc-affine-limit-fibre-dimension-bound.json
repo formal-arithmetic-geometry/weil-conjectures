@@ -1,0 +1,97 @@
+{
+ "id": "lem-weil-pbc-affine-limit-fibre-dimension-bound",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Proof, classical constructibility input: finite pushforward constructibility (095R) invokes 095K(1); 095K proof, Noetherian approximation and finite section-cover paragraphs. General limit-dimension input of 094M, namely 05M5, for all d and closed immersion comparison maps.",
+   "via": [
+    "lem-weil-pbc-descend-quasifinite-affine",
+    "lem-weil-pbc-quasifinite-affine-etale-thickening-decomposition",
+    "lem-weil-pbc-finite-fp-pushforward-constructible",
+    "lem-weil-pbc-etale-quasifinite-shriek-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Fibre dimension bounds descend in affine inverse systems",
+ "statement": "Let $I$ be a small nonempty directed partially ordered set. Let $(A_i)$ and $(C_i)$ be directed systems of commutative rings and let $A_i\\to C_i$ be compatible ring homomorphisms, each of finite type [def-weil-pbc-finite-type-algebra]. For every $i\\le j$ assume that the canonical map $A_j\\otimes_{A_i}C_i\\to C_j$ is surjective; the tensor product is the pushout of commutative algebras [lem-weil-pbc-fibre-product-affine-spectra]. Let $A=\\varinjlim_iA_i$ and $C=\\varinjlim_iC_i$, with the induced map $A\\to C$ [def-weil-pbc-category-colimit]. Fix an integer $d\\ge0$. For a prime $\\mathfrak p$ of $A$ let $\\kappa(\\mathfrak p)$ be its residue field [def-weil-pbc-localization-at-prime]. Suppose that for every such $\\mathfrak p$ the topological Krull dimension [def-kun-topological-krull-dimension] of $\\operatorname{Spec}(C\\otimes_A\\kappa(\\mathfrak p))$ [def-weil-affine-spectrum] is at most $d$. Then there is $i\\in I$ such that, for every prime $\\mathfrak p_i$ of $A_i$, the dimension of $\\operatorname{Spec}(C_i\\otimes_{A_i}\\kappa(\\mathfrak p_i))$ is at most $d$. Empty spectra have dimension $-\\infty$ and are allowed.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 05M5, label lemma-limit-dimension, affine specialization: surjectivity of the comparison ring maps gives closed immersion comparison morphisms."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-localization-at-prime",
+  "def-kun-topological-krull-dimension",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For directed systems of finite type algebras C_i over rings A_i with surjective A_j tensor C_i to C_j, dimension at most d of all fibres of the colimit algebra holds at some stage",
+   "results": "; 8 hits: Algebra.IsStandardSmoothOfRelativeDimension.out, Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg, FirstOrder.Language.DirectLimit.exists_quotient_mk'_sigma_mk'_eq, Submodule.FG.rTensor.directedSystem, Submodule.FG.lTensor.directedSystem, Algebra.Smooth.exists_finiteType",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ring.KrullDimLE\", \"colimit\"",
+   "results": "; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(fiber|fibre|Fiber).*([Dd]imension|krullDim).*(colimit|limit)|(colimit|limit).*([Dd]imension|krullDim)",
+   "results": "; 5 hits: Mathlib/Algebra/Category/FGModuleCat/Limits.lean, Mathlib/Probability/Process/FiniteDimensionalLaws.lean, Mathlib/Probability/CentralLimitTheorem.lean, Mathlib/CategoryTheory/Abelian/Injective/Dimension.lean, Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bound on the dimension of fibers descends along inverse limits of finite type schemes",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Upper bounds on dimensions of fibres of finite type morphisms spread out along filtered inverse limits",
+   "results": "; 8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.Hom.discrete_fiber, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.exists_map_preimage_le_map_preimage",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiFiniteAt|krullDim.*(nhds|IsOpen)|IsOpen.*krullDim",
+   "results": "; 25 hits: Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an inverse system of affine schemes with closed embeddings into base changes, an upper bound on fibre dimensions at the limit holds eventually",
+   "results": "; 8 hits: AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty', AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.exists_map_preimage_eq_map_preimage, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_preimage_eq, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-descend-quasifinite-affine",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}
