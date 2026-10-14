@@ -14354,3 +14354,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:53 L: returned deliver/B2/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (reviewer RETURN: (reviewer X-37478, head 37478ffa0) H10 (compile regression; stage-3 review points 2 and 5): In lean/Sheaf/CategoryTheory)
 
 - 11:00 L: batch 20261014T025133 dependency take-out
+- 03:01 L: returned deliver/T2/Sheaf.AlgebraicGeometry.SquareZeroTensorGradedBoundaryProjection (reviewer RETURN: (reviewer X-701dc, head 701dc67aa) H10: lean/Sheaf/AlgebraicGeometry/SquareZeroTensorGradedBoundaryProjection.lean fails)
