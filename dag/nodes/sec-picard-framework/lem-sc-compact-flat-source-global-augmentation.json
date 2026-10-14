@@ -1,0 +1,106 @@
+{
+ "id": "lem-sc-compact-flat-source-global-augmentation",
+ "kind": "statement",
+ "title": "Global augmentation of source pieces",
+ "statement": "For a finite-piece diagram D [lem-sc-compact-flat-finite-subcomplex-diagrams] and compatible maps p_n:L_n -> T, define the global map of a piece j using its augmentation at stage(j) followed by p_stage(j). At every later stage n this equals the augmentation at n followed by p_n.",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarUnionAugmentation.lean",
+  "place": "The source-bar, finite-cone-block, least-block adjunction and union-bar paragraphs; Global augmentation of source pieces."
+ },
+ "stmt_deps": [
+  "lem-sc-compact-flat-finite-subcomplex-diagrams"
+ ],
+ "proof": [
+  {
+   "text": "Induct on n>=stage(j). The base is reflexivity. At the successor stage use D.compatibility and l_n;p_(n+1)=p_n. Naturality of the specified cocone then gives naturality of the global augmentation between any two pieces.",
+   "uses": [
+    "lem-sc-compact-flat-finite-subcomplex-diagrams"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-compact-flat-finite-subcomplex-diagrams"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P2",
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatSourceBarTower.lean",
+  "place": "Explicit Lean construction and proof, expanding the corresponding paragraph of the parent argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The least finite telescope block through which a diagram augmentation factors gives a monotone map and an adjunction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Nat.find, OrderHom",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "Related constructions and APIs only; no declaration with this exact statement."
+  },
+  {
+   "tool": "grep",
+   "query": "least.*[Bb]lock|[Bb]lock.*[Aa]djunction",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "Related constructions and APIs only; no declaration with this exact statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactFlatBarUnionAugmentation",
+  "date": "2026-10-14",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-piece and target-chain bar argument in the telescope comparison supporting finite duality. the finite-piece, target-chain and union-bar paragraphs of the parent proof. Global augmentation of source pieces.",
+   "via": [
+    "lem-sc-compact-flat-bar-union-augmentation",
+    "lem-sc-compact-flat-telescope-bar-enlargement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompactFlatSourceBarTower",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactFlatSourceBarTower.lean",
+  "declaration": "AlgebraicGeometry.CompactFlatFiniteSubcomplexDiagrams.augmentationTo_eq",
+  "statement": "theorem CompactFlatFiniteSubcomplexDiagrams.augmentationTo_eq\n    (D : CompactFlatFiniteSubcomplexDiagrams Y L l)\n    {T : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ}\n    (p : ∀ n : ℕ, L n ⟶ T) (hp : ∀ n : ℕ, l n ≫ p (n + 1) = p n)\n    (j : D.index) (n : ℕ) (hn : D.stage j ≤ n) :\n    D.augmentationTo p j = (D.augmentation n).app ⟨j, hn⟩ ≫ p n",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

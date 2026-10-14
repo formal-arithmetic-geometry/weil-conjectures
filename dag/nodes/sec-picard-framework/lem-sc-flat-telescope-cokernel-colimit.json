@@ -1,0 +1,109 @@
+{
+ "id": "lem-sc-flat-telescope-cokernel-colimit",
+ "kind": "statement",
+ "title": "The sequential telescope cokernel is the colimit",
+ "statement": "For any cochain sequence F with transitions u [def-pc-cochain-complex-modules], the cokernel of identity minus shift [def-sc-flat-telescope-stage-map], with injections F_n -> sum(F) -> cokernel(delta), is a colimit of the sequence.",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarUnionAugmentation.lean",
+  "place": "The source-bar, finite-cone-block, least-block adjunction and union-bar paragraphs; The sequential telescope cokernel is the colimit."
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-sc-flat-telescope-stage-map"
+ ],
+ "proof": [
+  {
+   "text": "A compatible family out of F induces a unique map out of sum(F). On each coproduct injection, its composite with identity minus shift is q_n-u_n;q_(n+1), which is zero. Descend through the cokernel. The coproduct and cokernel universal properties give factorization and uniqueness.",
+   "uses": [
+    "def-sc-flat-telescope-stage-map",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-flat-telescope-stage-map",
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P2",
+  "document": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeCokernelColimit.lean",
+  "place": "Explicit Lean construction and proof, expanding the corresponding paragraph of the parent argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The total bar of a union of increasing full subdiagrams is their sequential colimit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit, HomologicalComplex.eval",
+   "results": "9 hits: HomologicalComplex.isColimitCoconeOfHasColimitEval, HomologicalComplex.isColimitOfEval, CochainComplex.Lifting.cochain₁, CochainComplex.Lifting.cocycle₁, CochainComplex.Lifting.hasLift, CochainComplex.Lifting.comp_coe_cocycle₁_comp, CochainComplex.Lifting.π_f_cochain₁_v_ι_f, CochainComplex.Lifting.π_f_cochain₁_v_ι_f_assoc",
+   "date": "2026-10-14",
+   "verdict": "Related constructions and APIs only; no declaration with this exact statement."
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]otal.*[Cc]olimit|[Cc]olimit.*[Bb]ar",
+   "results": "1 hits: Mathlib/CategoryTheory/Presentable/ColimitPresentation.lean",
+   "date": "2026-10-14",
+   "verdict": "Related constructions and APIs only; no declaration with this exact statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactFlatBarUnionAugmentation",
+  "date": "2026-10-14",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-piece and target-chain bar argument in the telescope comparison supporting finite duality. the finite-piece, target-chain and union-bar paragraphs of the parent proof. The sequential telescope cokernel is the colimit.",
+   "via": [
+    "lem-sc-compact-flat-bar-union-augmentation",
+    "lem-sc-compact-flat-telescope-bar-enlargement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatTelescopeCokernelColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeCokernelColimit.lean",
+  "declaration": "AlgebraicGeometry.flatTelescopeCokernelIsColimit",
+  "statement": "def flatTelescopeCokernelIsColimit : IsColimit (flatTelescopeCokernelCocone F s)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

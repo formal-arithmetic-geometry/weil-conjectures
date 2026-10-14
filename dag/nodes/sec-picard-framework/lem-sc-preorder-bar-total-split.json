@@ -1,0 +1,106 @@
+{
+ "id": "lem-sc-preorder-bar-total-split",
+ "kind": "statement",
+ "title": "Split reindexing of bar totals",
+ "statement": "Let D and E be diagrams of integer cochain complexes on small preorders I and J, and let f:I -> J be an injective order map [def-sc-preorder-bar-total]. If a natural transformation D -> E(f(-)) is split monic in each term, its induced map of bar totals is split monic in each term.",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarUnionAugmentation.lean",
+  "place": "The source-bar, finite-cone-block, least-block adjunction and union-bar paragraphs; Split reindexing of bar totals."
+ },
+ "stmt_deps": [
+  "def-sc-preorder-bar-total"
+ ],
+ "proof": [
+  {
+   "text": "An injective order map induces an injective map on monotone strings. On a coproduct indexed by strings define a retraction using the chosen termwise retraction on a string in the image and zero off the image. Coproduct extensionality verifies the left inverse. Conjugate this retraction by the evaluation-coproduct isomorphisms in each column, then use totalDesc on diagonal components. The component identities give the left inverse in each total degree.",
+   "uses": [
+    "def-sc-preorder-bar-total"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-preorder-bar-total"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P2",
+  "document": "lean/Sheaf/AlgebraicGeometry/PreorderBarTotalSplit.lean",
+  "place": "Explicit Lean construction and proof, expanding the corresponding paragraph of the parent argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Reindexing a coproduct bar total along an injective order map is degreewise split monic",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSplitMono, HomologicalComplex₂.total",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "Related constructions and APIs only; no declaration with this exact statement."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]njective.*[Cc]oproduct|sigma.*[Ss]plit|[Ss]plit.*[Tt]otal",
+   "results": "12 hits: Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean, Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean, Mathlib/Topology/Category/CompHausLike/Limits.lean, Mathlib/CategoryTheory/Limits/MonoCoprod.lean, Mathlib/CategoryTheory/Limits/MonoCoprod.lean, Mathlib/CategoryTheory/Limits/MonoCoprod.lean, Mathlib/CategoryTheory/Types/Monomorphisms.lean, Mathlib/Data/Finsupp/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "Related constructions and APIs only; no declaration with this exact statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactFlatBarUnionAugmentation",
+  "date": "2026-10-14",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-piece and target-chain bar argument in the telescope comparison supporting finite duality. the finite-piece, target-chain and union-bar paragraphs of the parent proof. Split reindexing of bar totals.",
+   "via": [
+    "lem-sc-compact-flat-bar-union-augmentation",
+    "lem-sc-compact-flat-telescope-bar-enlargement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PreorderBarTotalSplit",
+  "file": "lean/Sheaf/AlgebraicGeometry/PreorderBarTotalSplit.lean",
+  "declaration": "CategoryTheory.PreorderBar.totalMap_split",
+  "statement": "theorem totalMap_split\n    (D : I ⥤ CochainComplex C ℤ) (E : J ⥤ CochainComplex C ℤ)\n    (f : I →o J) (hf : Function.Injective f) (φ : D ⟶ orderFunctor f ⋙ E)\n    (hφ : ∀ (i : I) (q : ℤ), IsSplitMono ((φ.app i).f q)) (n : ℤ) :\n    IsSplitMono ((totalMap D E f φ).f n)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

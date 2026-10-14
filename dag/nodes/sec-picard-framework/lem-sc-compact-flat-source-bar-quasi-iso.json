@@ -1,0 +1,113 @@
+{
+ "id": "lem-sc-compact-flat-source-bar-quasi-iso",
+ "kind": "statement",
+ "title": "Filtered source bar augmentation",
+ "statement": "For the source bar tower of a finite-piece diagram [def-sc-compact-flat-source-bar-tower], each canonical augmentation c_n:R_n -> L_n is a quasi-isomorphism [def-pc-quasi-iso-modules].",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarUnionAugmentation.lean",
+  "place": "The source-bar, finite-cone-block, least-block adjunction and union-bar paragraphs; Filtered source bar augmentation."
+ },
+ "stmt_deps": [
+  "def-sc-compact-flat-source-bar-tower",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "Write the full source bar as the colimit of the bars of principal lower ideals. Each lower ideal has a greatest element, so its augmentation to that diagram value is a homotopy equivalence, proved by the unit prism. These augmentations are natural. Filtered colimits of module sheaves are exact, so their colimit is a quasi-isomorphism. The generator formula for the lower-ideal colimit identifies this colimit map with the canonical sourceBarAugmentation. No bounded-diagonal or stalk argument is needed.",
+   "uses": [
+    "def-sc-compact-flat-source-bar-tower",
+    "lem-sc-preorder-bar-filtered-augmentation",
+    "lem-sc-compact-flat-finite-subcomplex-diagrams",
+    "lem-pc-scheme-modules-grothendieck-abelian"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-compact-flat-source-bar-tower",
+  "lem-sc-preorder-bar-filtered-augmentation",
+  "lem-sc-compact-flat-finite-subcomplex-diagrams",
+  "lem-pc-scheme-modules-grothendieck-abelian"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P2",
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatSourceBarQuasiIso.lean",
+  "place": "The principal-lower-ideal contraction and exact filtered-colimit proof, complete in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The augmentation of the bar total of a filtered uniformly bounded above diagram into its colimit is a quasi-isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The augmentation of the bar total of a filtered bounded above diagram into its colimit is a quasi-isomorphism",
+   "results": "8 hits: Rep.standardComplex.quasiIso_forget₂_εToSingle₀, CochainComplex.cm5b.instQuasiIsoIntP, Rep.standardComplex.instQuasiIsoNatεToSingle₀, CategoryTheory.InjectiveResolution.instQuasiIsoIntι', CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, HomologicalComplexUpToQuasiIso.quotientCompQhIso, HomologicalComplexUpToQuasiIso.homologyFunctorFactorsh, CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'",
+   "date": "2026-10-14",
+   "verdict": "Related constructions and APIs only; no declaration with this exact statement."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]iltered.*[Bb]ar|[Bb]ar.*[Qq]uasiIso",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "Related constructions and APIs only; no declaration with this exact statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactFlatBarUnionAugmentation",
+  "date": "2026-10-14",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-piece and target-chain bar argument in the telescope comparison supporting finite duality. the finite-piece, target-chain and union-bar paragraphs of the parent proof. Filtered source bar augmentation.",
+   "via": [
+    "lem-sc-compact-flat-bar-union-augmentation",
+    "lem-sc-compact-flat-telescope-bar-enlargement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompactFlatSourceBarQuasiIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactFlatSourceBarQuasiIso.lean",
+  "declaration": "AlgebraicGeometry.CompactFlatFiniteSubcomplexDiagrams.sourceBarAugmentation_quasiIso",
+  "statement": "theorem CompactFlatFiniteSubcomplexDiagrams.sourceBarAugmentation_quasiIso\n    {Y : Scheme.{u}}\n    {L : ℕ → CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ}\n    {l : ∀ n : ℕ, L n ⟶ L (n + 1)}\n    (D : CompactFlatFiniteSubcomplexDiagrams Y L l) (n : ℕ) :\n    QuasiIso (D.sourceBarAugmentation n)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

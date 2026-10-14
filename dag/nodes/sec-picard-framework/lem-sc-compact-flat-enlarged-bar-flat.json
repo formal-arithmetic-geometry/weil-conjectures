@@ -1,0 +1,115 @@
+{
+ "id": "lem-sc-compact-flat-enlarged-bar-flat",
+ "kind": "statement",
+ "title": "Flat enlarged bar terms",
+ "statement": "If all E_k are termwise flat [def-pc-flat-sheaf-modules], every term of every enlarged bar stage F_n [def-sc-compact-flat-enlarged-bar-tower] is flat.",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarUnionAugmentation.lean",
+  "place": "The source-bar, finite-cone-block, least-block adjunction and union-bar paragraphs; Flat enlarged bar terms."
+ },
+ "stmt_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-sc-compact-flat-enlarged-bar-tower"
+ ],
+ "proof": [
+  {
+   "text": "Separate source and target objects: source terms are flat by diagram_flat and target terms by block_flat. The bar-column terms and then the total terms are coproducts of these terms. Transport flatness across the evaluation-coproduct isomorphisms.",
+   "uses": [
+    "def-sc-compact-flat-enlarged-bar-tower",
+    "lem-sc-compact-flat-diagram-term-flat",
+    "lem-sc-compact-flat-telescope-block-flat",
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-sites-modules-coproduct-flat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-compact-flat-enlarged-bar-tower",
+  "lem-sc-compact-flat-diagram-term-flat",
+  "lem-sc-compact-flat-telescope-block-flat",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-sites-modules-coproduct-flat"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P2",
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatEnlargedBarTower.lean",
+  "place": "Explicit Lean construction and proof, expanding the corresponding paragraph of the parent argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The coproduct bar construction of a preorder diagram of cochain complexes and its totalization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coproduct bar construction of a preorder diagram of cochain complexes and its totalization",
+   "results": "8 hits: AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂, AlgebraicTopology.DoldKan.Γ₀.obj, AlgebraicTopology.DoldKan.Γ₀.Obj.map, AlgebraicTopology.DoldKan.Γ₀_obj_obj, AlgebraicTopology.DoldKan.Γ₀.obj_obj, AlgebraicTopology.DoldKan.Γ₀.Obj.summand, AlgebraicTopology.DoldKan.Γ₀.map_app, AlgebraicTopology.DoldKan.Γ₀_map_app",
+   "date": "2026-10-14",
+   "verdict": "Related constructions and APIs only; no declaration with this exact statement."
+  },
+  {
+   "tool": "grep",
+   "query": "simplicialReplacement|bar.*[Tt]otal|bar.*[Rr]esolution",
+   "results": "16 hits: Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean",
+   "date": "2026-10-14",
+   "verdict": "Related constructions and APIs only; no declaration with this exact statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactFlatBarUnionAugmentation",
+  "date": "2026-10-14",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-piece and target-chain bar argument in the telescope comparison supporting finite duality. the finite-piece, target-chain and union-bar paragraphs of the parent proof. Flat enlarged bar terms.",
+   "via": [
+    "lem-sc-compact-flat-bar-union-augmentation",
+    "lem-sc-compact-flat-telescope-bar-enlargement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompactFlatEnlargedBarTower",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactFlatEnlargedBarTower.lean",
+  "declaration": "AlgebraicGeometry.CompactFlatBarIndex.enlargedBar_flat",
+  "statement": "lemma enlargedBar_flat (hf : ∀ k : ℕ, ∀ i : ℤ, SheafOfModules.IsFlat ((E k).X i))\n    (n : ℕ) (i : ℤ) : SheafOfModules.IsFlat ((enlargedBar D E t p hp n).X i)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

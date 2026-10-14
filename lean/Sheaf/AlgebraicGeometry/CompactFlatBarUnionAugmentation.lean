@@ -6,7 +6,8 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.AlgebraicGeometry.CompactFlatFiniteSubcomplexDiagrams
-import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
+import Sheaf.AlgebraicGeometry.CompactFlatSourceBarQuasiIso
+import Sheaf.AlgebraicGeometry.CompactFlatBarUnionHomotopy
 
 /-! # Canonical augmentation of the enlarged finite-piece bar union
 
@@ -59,13 +60,15 @@ the common bound on this finite segment.
 
 The union bar total is the cokernel of identity minus shift: its relations
 identify each simplex with the same simplex at the next stage. Compare the bar
-resolution of the augmented constant right functor on the target chain with the
-two-term representable resolution by identity minus shift. Projective comparison
-lifts yield maps and homotopies lifting its identity. Tensor them with C_k;
-every input has finite support, so they totalize. The finite-block telescope
-augmentation to T is a homotopy equivalence, since its degreewise split union
-sequence has contractible cone kernel. Consequently the target-chain bar
-augmentation is a homotopy equivalence. Cancel the unit-insertion bar equivalence
+of the finite cone blocks with the cone of the two partial-sum bars. The comparison
+multiplies the source summand in horizontal degree p by (-1)^p and leaves the target
+summand unchanged; the total differential identities verify it is a chain isomorphism.
+The partial-sum bars contract onto their infinite sums: on the coefficient at index k,
+prepend its first available stage k-r, with r=0 or r=1 respectively. These explicit
+extra degeneracies give homotopy equivalences preserving augmentation. Apply the
+isomorphism theorem for morphisms of distinguished cone triangles to conclude that
+the target-chain bar augmentation is a homotopy equivalence. Cancel the unit-insertion
+bar equivalence
 to conclude this for the enlarged union's canonical augmentation as well.
 Identify the union with the displayed cokernel by its universal property. This
 identification carries its augmentation to cokernel.desc of Sigma.desc q.
@@ -99,6 +102,23 @@ theorem exists_compact_flat_bar_union_augmentation (Y : Scheme.{u})
         (∀ n : ℕ, a n ≫ q n = c n ≫ p n) ∧
         ∀ hzero : flatTelescopeDifferential F u ≫ Sigma.desc q = 0,
           IsIso (Q.map
-            (cokernel.desc (flatTelescopeDifferential F u) (Sigma.desc q) hzero)) := by sorry
+            (cokernel.desc (flatTelescopeDifferential F u) (Sigma.desc q) hzero)) := by
+  obtain ⟨E, t, hb, hf, hE⟩ := hT
+  change CochainComplex.mappingCone (flatTelescopeDifferential E t) = T at hE
+  subst T
+  dsimp only
+  refine ⟨D.sourceBar, CompactFlatBarIndex.enlargedBar D E t p hp,
+    D.sourceBarMap, CompactFlatBarIndex.enlargedBarMap D E t p hp,
+    D.sourceBarAugmentation, CompactFlatBarIndex.sourceToBar D E t p hp,
+    D.sourceBar_bounded, D.sourceBar_flat,
+    CompactFlatBarIndex.enlargedBar_bounded D E t p hp hb,
+    CompactFlatBarIndex.enlargedBar_flat D E t p hp hf,
+    D.sourceBarAugmentation_quasiIso, D.sourceBarAugmentation_naturality,
+    CompactFlatBarIndex.sourceToBar_naturality D E t p hp,
+    CompactFlatBarIndex.enlargedBarMap_split D E t p hp,
+    CompactFlatBarIndex.enlargedBarAugmentation D E t p hp,
+    CompactFlatBarIndex.enlargedBarAugmentation_naturality D E t p hp,
+    CompactFlatBarIndex.sourceToBar_augmentation D E t p hp,
+    CompactFlatBarIndex.cokernelAugmentation_isIso D E t p hp⟩
 
 end AlgebraicGeometry

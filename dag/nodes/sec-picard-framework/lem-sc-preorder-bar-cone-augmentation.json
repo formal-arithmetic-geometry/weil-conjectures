@@ -1,0 +1,116 @@
+{
+ "id": "lem-sc-preorder-bar-cone-augmentation",
+ "kind": "statement",
+ "title": "Homotopy-invertible bar augmentations give an invertible cone augmentation",
+ "statement": "Let I be a preorder and A a preadditive category with a zero object, binary biproducts, and coproducts in the universes of I and Nat. Let φ:D→E be a natural transformation between I-diagrams of cochain complexes. Let c,e be cocones to an arrow f:c.pt→e.pt, with φ(i);e(i)=c(i);f. If the canonical total augmentations for D and E [def-sc-preorder-bar-total] become isomorphisms in the homotopy category, so does the canonical total augmentation from the objectwise cone-diagram bar to mappingCone(f) [def-sc-preorder-bar-cone-diagram].",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarUnionAugmentation.lean",
+  "place": "The source-bar, least-block unit contraction, and finite-cone-block paragraphs."
+ },
+ "stmt_deps": [
+  "def-sc-preorder-bar-cone-diagram",
+  "def-sc-preorder-bar-total"
+ ],
+ "proof": [
+  {
+   "text": "The two bar augmentations and their naturality square define a map of the mapping-cone triangles in the homotopy category. Both triangles are distinguished by Mathlib mappingCone_triangleh_distinguished. Apply isIso₃_of_isIso₁₂ to get invertibility of the induced cone map from the two hypotheses. The total-cone augmentation equality identifies the desired map with the composite of this map and the total-cone isomorphism. Its quotient map is therefore an isomorphism.",
+   "uses": [
+    "lem-sc-preorder-bar-total-cone-augmentation",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-preorder-bar-total-cone-augmentation",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P2",
+  "document": "lean/Sheaf/AlgebraicGeometry/PreorderBarConeAugmentation.lean",
+  "place": "Complete explicit Lean construction and proof; no remaining sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Totalization of a diagram of mapping cones is isomorphic to the mapping cone of the totalized natural transformation",
+   "results": "8 hits: CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.mapHomologicalComplexXIso, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq, CochainComplex.MappingConeCompHomotopyEquiv.hom, CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv, CochainComplex.MappingConeCompHomotopyEquiv.inv",
+   "date": "2026-10-14",
+   "verdict": "Related Mathlib constructions were used where applicable; no exact preorder-bar total comparison was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, HomologicalComplex₂.total",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "Related Mathlib constructions were used where applicable; no exact preorder-bar total comparison was found."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.*total|total.*mappingCone",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "Related Mathlib constructions were used where applicable; no exact preorder-bar total comparison was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An increasing union of finite coproducts has a bar construction whose augmentation is a homotopy equivalence by an extra degeneracy",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactFlatBarUnionAugmentation",
+  "date": "2026-10-14",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The compact-flat bar-enlargement argument in the finite-duality proof; Homotopy-invertible bar augmentations give an invertible cone augmentation.",
+   "via": [
+    "lem-sc-compact-flat-bar-union-augmentation",
+    "lem-sc-compact-flat-telescope-bar-enlargement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PreorderBarConeAugmentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/PreorderBarConeAugmentation.lean",
+  "declaration": "CategoryTheory.PreorderBar.coneAugmentation_isIso",
+  "statement": "theorem coneAugmentation_isIso (c : Cocone D) (e : Cocone E) (f : c.pt ⟶ e.pt)\n    (hf : ∀ i, φ.app i ≫ e.ι.app i = c.ι.app i ≫ f)\n    (hc : IsIso ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).map\n      (totalAugmentation D c)))\n    (he : IsIso ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).map\n      (totalAugmentation E e))) :\n    IsIso ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).map\n      (totalAugmentation (coneDiagram φ) (coneCocone φ c e f hf)))",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

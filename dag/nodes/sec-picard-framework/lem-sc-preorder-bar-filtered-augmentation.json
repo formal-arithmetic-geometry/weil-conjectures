@@ -1,0 +1,115 @@
+{
+ "id": "lem-sc-preorder-bar-filtered-augmentation",
+ "kind": "statement",
+ "title": "Exact colimits preserve the preorder bar augmentation",
+ "statement": "Let I be a preorder and A an abelian category with coproducts and exact colimits of shape I. For any diagram D:I→CochainComplex(A,Int) and specified colimit cocone c, the canonical total bar augmentation [def-sc-preorder-bar-total] to c.pt is a quasi-isomorphism. No bound on the complexes is required.",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarUnionAugmentation.lean",
+  "place": "The source-bar, least-block unit contraction, and finite-cone-block paragraphs."
+ },
+ "stmt_deps": [
+  "def-sc-preorder-bar-total"
+ ],
+ "proof": [
+  {
+   "text": "The lower-ideal bars have colimit the full bar, and their augmentations have colimit the supplied colimit cocone on D. Each lower-ideal augmentation is a homotopy equivalence because that lower ideal has greatest object j. Exact colimits preserve quasi-isomorphisms: apply MorphismProperty.colimitsOfShape_le for HomologicalComplex.quasiIso, as proved in the source-library GrothendieckAxioms.Colim module. Naturality of augmentation identifies the resulting colimit map with the canonical total augmentation.",
+   "uses": [
+    "lem-sc-preorder-bar-lower-ideals-colimit",
+    "lem-sc-preorder-bar-terminal-augmentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-preorder-bar-lower-ideals-colimit",
+  "lem-sc-preorder-bar-terminal-augmentation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P2",
+  "document": "lean/Sheaf/AlgebraicGeometry/PreorderBarFilteredAugmentation.lean",
+  "place": "Complete explicit Lean construction and proof; no remaining sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The augmentation of the bar total of a filtered bounded above diagram into its colimit is a quasi-isomorphism",
+   "results": "8 hits: Rep.standardComplex.quasiIso_forget₂_εToSingle₀, CochainComplex.cm5b.instQuasiIsoIntP, Rep.standardComplex.instQuasiIsoNatεToSingle₀, CategoryTheory.InjectiveResolution.instQuasiIsoIntι', CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, HomologicalComplexUpToQuasiIso.quotientCompQhIso, HomologicalComplexUpToQuasiIso.homologyFunctorFactorsh, CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'",
+   "date": "2026-10-14",
+   "verdict": "Related Mathlib APIs were used in the explicit proof; no theorem supplied this exact preorder-bar assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit, HomologicalComplex.eval",
+   "results": "9 hits: HomologicalComplex.isColimitCoconeOfHasColimitEval, HomologicalComplex.isColimitOfEval, CochainComplex.Lifting.cochain₁, CochainComplex.Lifting.cocycle₁, CochainComplex.Lifting.hasLift, CochainComplex.Lifting.comp_coe_cocycle₁_comp, CochainComplex.Lifting.π_f_cochain₁_v_ι_f, CochainComplex.Lifting.π_f_cochain₁_v_ι_f_assoc",
+   "date": "2026-10-14",
+   "verdict": "Related Mathlib APIs were used in the explicit proof; no theorem supplied this exact preorder-bar assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]iltered.*[Bb]ar|[Bb]ar.*[Qq]uasiIso",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "Related Mathlib APIs were used in the explicit proof; no theorem supplied this exact preorder-bar assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coproduct simplicial replacement of a preorder diagram contracts when it has a greatest element and exact colimits preserve its augmentation quasi isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactFlatBarUnionAugmentation",
+  "date": "2026-10-14",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The compact-flat bar-enlargement argument in the finite-duality proof; Exact colimits preserve the preorder bar augmentation.",
+   "via": [
+    "lem-sc-compact-flat-bar-union-augmentation",
+    "lem-sc-compact-flat-telescope-bar-enlargement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PreorderBarFilteredAugmentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/PreorderBarFilteredAugmentation.lean",
+  "declaration": "CategoryTheory.PreorderBar.augmentation_quasiIso",
+  "statement": "theorem augmentation_quasiIso (c : Cocone D) (hc : IsColimit c) :\n    QuasiIso (totalAugmentation D c)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

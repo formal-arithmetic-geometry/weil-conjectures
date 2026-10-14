@@ -1,0 +1,114 @@
+{
+ "id": "def-sc-compact-flat-bar-index",
+ "kind": "definition",
+ "title": "The concrete enlarged indexing diagram",
+ "statement": "Let D be a finite-piece diagram [lem-sc-compact-flat-finite-subcomplex-diagrams], E,t a telescope sequence, and p a compatible augmentation of the source tower into its telescope [def-sc-flat-telescope-stage-map]. On the disjoint union of the source preorder and the target chain, retain the old source and target orders, allow no target-to-source arrow, and put j<=k from source to target exactly when the least cone block through which j factors is at most k. The diagram has source object D(j), target object C_k [def-sc-compact-flat-telescope-blocks], and the factorization map on a mixed arrow.",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarUnionAugmentation.lean",
+  "place": "The source-bar, finite-cone-block, least-block adjunction and union-bar paragraphs; The concrete enlarged indexing diagram."
+ },
+ "stmt_deps": [
+  "lem-sc-compact-flat-finite-subcomplex-diagrams",
+  "def-sc-flat-telescope-stage-map",
+  "def-sc-compact-flat-telescope-blocks"
+ ],
+ "proof": [
+  {
+   "text": "Finite-piece factorization supplies a nonempty set of block indices. Nat.find gives its least index; choices of factor maps are made only from this proved existence. Naturality of the source augmentation shows the least index is monotone. Define the four cases of the order explicitly and check transitivity. Define maps by the old source map, the chosen factor followed by a block inclusion, the impossible reverse case, and the target transition. Every map commutes with augmentation. Cancellation of a monic target block inclusion proves identity and composition when the last vertex is a target; the all-source case is diagram functoriality.",
+   "uses": [
+    "lem-sc-compact-flat-finite-subcomplex-diagrams",
+    "def-sc-compact-flat-telescope-blocks",
+    "lem-sc-compact-flat-factor-telescope-block",
+    "lem-sc-compact-flat-source-global-augmentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-compact-flat-finite-subcomplex-diagrams",
+  "def-sc-compact-flat-telescope-blocks",
+  "lem-sc-compact-flat-factor-telescope-block",
+  "lem-sc-compact-flat-source-global-augmentation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P2",
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarIndex.lean",
+  "place": "Explicit Lean construction and proof, expanding the corresponding paragraph of the parent argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The least finite telescope block through which a diagram augmentation factors gives a monotone map and an adjunction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Nat.find, OrderHom",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "Related constructions and APIs only; no declaration with this exact statement."
+  },
+  {
+   "tool": "grep",
+   "query": "least.*[Bb]lock|[Bb]lock.*[Aa]djunction",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "Related constructions and APIs only; no declaration with this exact statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactFlatBarUnionAugmentation",
+  "date": "2026-10-14",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-piece and target-chain bar argument in the telescope comparison supporting finite duality. the finite-piece, target-chain and union-bar paragraphs of the parent proof. The concrete enlarged indexing diagram.",
+   "via": [
+    "lem-sc-compact-flat-bar-union-augmentation",
+    "lem-sc-compact-flat-telescope-bar-enlargement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompactFlatBarIndex",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarIndex.lean",
+  "declaration": "AlgebraicGeometry.CompactFlatBarIndex.diagram",
+  "statement": "def diagram : Index D E t p hp ⥤ CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

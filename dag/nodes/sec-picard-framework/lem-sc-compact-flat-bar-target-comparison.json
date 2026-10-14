@@ -1,0 +1,109 @@
+{
+ "id": "lem-sc-compact-flat-bar-target-comparison",
+ "kind": "statement",
+ "title": "Unit contraction and target-chain telescope comparison",
+ "statement": "For the target-chain inclusion i and retraction r of the enlarged bar [def-sc-compact-flat-bar-target-retraction], the composite r;i is homotopic to identity on the full bar. The canonical augmentation of the target-chain bar into the supplied telescope [def-sc-flat-telescope-stage-map] is an isomorphism in the homotopy category.",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarUnionAugmentation.lean",
+  "place": "The source-bar, finite-cone-block, least-block adjunction and union-bar paragraphs; Unit contraction and target-chain telescope comparison."
+ },
+ "stmt_deps": [
+  "def-sc-compact-flat-bar-target-retraction",
+  "def-sc-flat-telescope-stage-map"
+ ],
+ "proof": [
+  {
+   "text": "Combine the proved least-block unit homotopy with the proved target augmentation isomorphism. The latter uses the two explicit partial-sum contractions and signed total-cone comparison.",
+   "uses": [
+    "lem-sc-compact-flat-bar-unit-homotopy",
+    "lem-sc-compact-flat-bar-target-augmentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-compact-flat-bar-unit-homotopy",
+  "lem-sc-compact-flat-bar-target-augmentation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P2",
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarHomotopyComparison.lean",
+  "place": "Complete Lean proof from the unit prism and partial-sum cone augmentations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The enlarged bar of finite telescope cone blocks has a canonical homotopy equivalence to the telescope",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bar augmentation from finite cone blocks is a homotopy equivalence to the sequential telescope",
+   "results": "8 hits: CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex, ChainComplex.alternatingConstHomotopyEquiv, CategoryTheory.SimplicialObject.cechNerveEquiv_apply, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId, classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve, CategoryTheory.SimplicialObject.cechNerveEquiv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv",
+   "date": "2026-10-14",
+   "verdict": "Related constructions and APIs only; no declaration with this exact statement."
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]ar.*[Hh]omotopyEquiv|[Tt]elescope.*[Hh]omotopyEquiv",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "Related constructions and APIs only; no declaration with this exact statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactFlatBarUnionAugmentation",
+  "date": "2026-10-14",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-piece and target-chain bar argument in the telescope comparison supporting finite duality. the finite-piece, target-chain and union-bar paragraphs of the parent proof. Unit contraction and target-chain telescope comparison.",
+   "via": [
+    "lem-sc-compact-flat-bar-union-augmentation",
+    "lem-sc-compact-flat-telescope-bar-enlargement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompactFlatBarHomotopyComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarHomotopyComparison.lean",
+  "declaration": "AlgebraicGeometry.CompactFlatBarIndex.targetComparison",
+  "statement": "theorem targetComparison :\n    Nonempty (Homotopy\n      (targetRetraction D E t p hp ≫ targetInclusion D E t p hp) (𝟙 _)) ∧\n    IsIso ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map\n      (targetAugmentation D E t p hp))",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

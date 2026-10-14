@@ -1,0 +1,113 @@
+{
+ "id": "lem-sc-preorder-bar-horizontal-homotopy",
+ "kind": "statement",
+ "title": "Horizontal homotopies on mixed bar totals",
+ "statement": "Let A be a preadditive category. For bicomplexes K,L with horizontal shape down Nat and vertical shape up Int whose coproduct totals exist, every horizontal chain homotopy between bicomplex maps f,g induces a cochain homotopy between their induced maps on the coproduct totals [def-sc-preorder-bar-total].",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarUnionAugmentation.lean",
+  "place": "The source-bar, least-block unit contraction, and finite-cone-block paragraphs."
+ },
+ "stmt_deps": [
+  "def-sc-preorder-bar-total"
+ ],
+ "proof": [
+  {
+   "text": "On the summand of horizontal degree p and vertical degree q, use the horizontal homotopy component into horizontal degree p+1, followed by its diagonal inclusion. It lowers total degree q-p by one. Its horizontal boundary is the supplied homotopy equation. Its two vertical terms cancel because the total signs in adjacent columns are opposite. Coproduct extensionality proves the homotopy equation, including the zero horizontal boundary at p=0.",
+   "uses": [
+    "def-sc-preorder-bar-total"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-preorder-bar-total"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P2",
+  "document": "lean/Sheaf/AlgebraicGeometry/PreorderBarTotalHomotopy.lean",
+  "place": "Complete explicit Lean construction and proof; no remaining sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between functors of preorders induces a homotopy on the bar complex",
+   "results": "8 hits: AlgebraicTopology.DoldKan.natTransHσ, AlgebraicTopology.DoldKan.homotopyPInftyToId_hom, AlgebraicTopology.DoldKan.natTransP, AlgebraicTopology.DoldKan.hσ', AlgebraicTopology.DoldKan.natTransPInfty, AlgebraicTopology.DoldKan.hσ'_naturality, AlgebraicTopology.DoldKan.natTransPInfty_f_app, AlgebraicTopology.DoldKan.homotopyPInftyToId",
+   "date": "2026-10-14",
+   "verdict": "Related Mathlib APIs were used in the explicit proof; no theorem supplied this exact preorder-bar assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.total, Homotopy",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "Related Mathlib APIs were used in the explicit proof; no theorem supplied this exact preorder-bar assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]ar.*[Hh]omotopyEquiv|[Tt]elescope.*[Hh]omotopyEquiv",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "Related Mathlib APIs were used in the explicit proof; no theorem supplied this exact preorder-bar assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The map of simplicial replacements induced by a monotone map above the identity is chain homotopic to the identity after totalization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactFlatBarUnionAugmentation",
+  "date": "2026-10-14",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The compact-flat bar-enlargement argument in the finite-duality proof; Horizontal homotopies on mixed bar totals.",
+   "via": [
+    "lem-sc-compact-flat-bar-union-augmentation",
+    "lem-sc-compact-flat-telescope-bar-enlargement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PreorderBarTotalHomotopy",
+  "file": "lean/Sheaf/AlgebraicGeometry/PreorderBarTotalHomotopy.lean",
+  "declaration": "CategoryTheory.PreorderBar.horizontalHomotopy",
+  "statement": "def horizontalHomotopy {f g : K ⟶ L} (h : Homotopy f g) : Homotopy (HomologicalComplex₂.total.map f (ComplexShape.up ℤ)) (HomologicalComplex₂.total.map g (ComplexShape.up ℤ))",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

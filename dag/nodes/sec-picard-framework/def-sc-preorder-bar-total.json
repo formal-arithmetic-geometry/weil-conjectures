@@ -1,0 +1,106 @@
+{
+ "id": "def-sc-preorder-bar-total",
+ "kind": "definition",
+ "title": "Explicit preorder bar total",
+ "statement": "Let C be a preadditive category with zero object and small coproducts, as for complexes of module sheaves [def-pc-cochain-complex-modules]. For a small preorder I and a diagram D of integer cochain complexes in C, define B_p(D) as the coproduct of D(i_0) over monotone strings i_0 <= ... <= i_p. Its simplicial maps use D on the first arrow when the first vertex changes. The bar total has total degree q-p and vertical sign (-1)^p. It has the canonical augmentation associated to any cocone of D, and reindexing maps associated to order maps and compatible natural transformations.",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarUnionAugmentation.lean",
+  "place": "The source-bar, finite-cone-block, least-block adjunction and union-bar paragraphs; Explicit preorder bar total."
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "Form the coproduct for each simplex. A simplex operator restricts the string and applies the diagram map from its old first vertex to its new first vertex. Functoriality follows on each coproduct injection. Apply Mathlib alternatingFaceMapComplex and totalization with degree q-p and vertical sign (-1)^p. The augmented alternating-face-map map followed by collapse of the single column defines the augmentation. Coproduct and total-generator extensionality prove naturality and composition of reindexing.",
+   "uses": [
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P2",
+  "document": "lean/Sheaf/AlgebraicGeometry/PreorderBarTotal.lean",
+  "place": "Explicit Lean construction and proof, expanding the corresponding paragraph of the parent argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The coproduct bar construction of a preorder diagram of cochain complexes and its totalization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coproduct bar construction of a preorder diagram of cochain complexes and its totalization",
+   "results": "8 hits: AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂, AlgebraicTopology.DoldKan.Γ₀.obj, AlgebraicTopology.DoldKan.Γ₀.Obj.map, AlgebraicTopology.DoldKan.Γ₀_obj_obj, AlgebraicTopology.DoldKan.Γ₀.obj_obj, AlgebraicTopology.DoldKan.Γ₀.Obj.summand, AlgebraicTopology.DoldKan.Γ₀.map_app, AlgebraicTopology.DoldKan.Γ₀_map_app",
+   "date": "2026-10-14",
+   "verdict": "Related constructions and APIs only; no declaration with this exact statement."
+  },
+  {
+   "tool": "grep",
+   "query": "simplicialReplacement|bar.*[Tt]otal|bar.*[Rr]esolution",
+   "results": "16 hits: Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean",
+   "date": "2026-10-14",
+   "verdict": "Related constructions and APIs only; no declaration with this exact statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactFlatBarUnionAugmentation",
+  "date": "2026-10-14",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-piece and target-chain bar argument in the telescope comparison supporting finite duality. the finite-piece, target-chain and union-bar paragraphs of the parent proof. Explicit preorder bar total.",
+   "via": [
+    "lem-sc-compact-flat-bar-union-augmentation",
+    "lem-sc-compact-flat-telescope-bar-enlargement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PreorderBarTotal",
+  "file": "lean/Sheaf/AlgebraicGeometry/PreorderBarTotal.lean",
+  "declaration": "CategoryTheory.PreorderBar.total",
+  "statement": "def total (D : I ⥤ CochainComplex C ℤ) : CochainComplex C ℤ",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

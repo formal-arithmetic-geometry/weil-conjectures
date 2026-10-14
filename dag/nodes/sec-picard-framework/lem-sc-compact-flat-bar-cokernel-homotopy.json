@@ -1,0 +1,115 @@
+{
+ "id": "lem-sc-compact-flat-bar-cokernel-homotopy",
+ "kind": "statement",
+ "title": "Canonical cokernel augmentation in the homotopy category",
+ "statement": "For the explicit enlarged bar tower [def-sc-compact-flat-enlarged-bar-tower] and its augmentations q_n, for every proof hz of delta;desc(q)=0, the canonical cokernel.desc map into the telescope is invertible in the homotopy category [def-sc-flat-telescope-stage-map].",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarUnionAugmentation.lean",
+  "place": "The source-bar, finite-cone-block, least-block adjunction and union-bar paragraphs; Canonical cokernel augmentation in the homotopy category."
+ },
+ "stmt_deps": [
+  "def-sc-compact-flat-enlarged-bar-tower",
+  "def-sc-flat-telescope-stage-map"
+ ],
+ "proof": [
+  {
+   "text": "Under unionIso the cokernel.desc map is the composite of the canonical cokernel-to-full-bar isomorphism and the full-bar augmentation. The quotient functor preserves the first isomorphism; the second is invertible by fullBarAugmentation_isIso. Their composite is invertible.",
+   "uses": [
+    "lem-sc-compact-flat-bar-union-homotopy",
+    "def-sc-compact-flat-bar-union-iso",
+    "lem-sc-compact-flat-bar-union-iso-augmentation",
+    "def-sc-compact-flat-enlarged-bar-tower",
+    "def-sc-flat-telescope-stage-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-compact-flat-bar-union-homotopy",
+  "def-sc-compact-flat-bar-union-iso",
+  "lem-sc-compact-flat-bar-union-iso-augmentation",
+  "def-sc-compact-flat-enlarged-bar-tower",
+  "def-sc-flat-telescope-stage-map"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P2",
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarUnionHomotopy.lean",
+  "place": "Explicit Lean construction and proof, expanding the corresponding paragraph of the parent argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The enlarged bar of finite telescope cone blocks has a canonical homotopy equivalence to the telescope",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bar augmentation from finite cone blocks is a homotopy equivalence to the sequential telescope",
+   "results": "8 hits: CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex, ChainComplex.alternatingConstHomotopyEquiv, CategoryTheory.SimplicialObject.cechNerveEquiv_apply, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId, classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve, CategoryTheory.SimplicialObject.cechNerveEquiv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv",
+   "date": "2026-10-14",
+   "verdict": "Related constructions and APIs only; no declaration with this exact statement."
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]ar.*[Hh]omotopyEquiv|[Tt]elescope.*[Hh]omotopyEquiv",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "Related constructions and APIs only; no declaration with this exact statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactFlatBarUnionAugmentation",
+  "date": "2026-10-14",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-piece and target-chain bar argument in the telescope comparison supporting finite duality. the finite-piece, target-chain and union-bar paragraphs of the parent proof. Canonical cokernel augmentation in the homotopy category.",
+   "via": [
+    "lem-sc-compact-flat-bar-union-augmentation",
+    "lem-sc-compact-flat-telescope-bar-enlargement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompactFlatBarUnionHomotopy",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarUnionHomotopy.lean",
+  "declaration": "AlgebraicGeometry.CompactFlatBarIndex.cokernelAugmentation_isIso",
+  "statement": "lemma cokernelAugmentation_isIso\n    (hz : flatTelescopeDifferential (enlargedBar D E t p hp)\n      (enlargedBarMap D E t p hp) ≫\n        Sigma.desc (enlargedBarAugmentation D E t p hp) = 0) :\n    IsIso ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map\n      (cokernel.desc (flatTelescopeDifferential (enlargedBar D E t p hp)\n        (enlargedBarMap D E t p hp))\n          (Sigma.desc (enlargedBarAugmentation D E t p hp)) hz))",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

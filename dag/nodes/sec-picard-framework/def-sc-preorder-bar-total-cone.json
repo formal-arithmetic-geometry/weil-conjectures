@@ -1,0 +1,116 @@
+{
+ "id": "def-sc-preorder-bar-total-cone",
+ "kind": "definition",
+ "title": "The explicit degreewise total-cone comparison",
+ "statement": "Let I be a preorder and A a preadditive category with binary biproducts, and coproducts in the universes of I and Nat. For D,E:I→CochainComplex(A,Int) and φ:D→E, let totalArrow be the induced map of total bars [def-sc-preorder-bar-total]. In every integer degree, the total bar of the objectwise cone diagram [def-sc-preorder-bar-cone-diagram] is explicitly isomorphic to mappingCone(totalArrow).",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarUnionAugmentation.lean",
+  "place": "The source-bar, least-block unit contraction, and finite-cone-block paragraphs."
+ },
+ "stmt_deps": [
+  "def-sc-preorder-bar-cone-diagram",
+  "def-sc-preorder-bar-total"
+ ],
+ "proof": [
+  {
+   "text": "On a cone summand in bar degree p and internal degree q, send its source summand to the source of the cone of totalArrow with coefficient (-1)^p, and send its target summand to the target with coefficient 1. Use the corresponding diagonal inclusions. Define the inverse by totalDesc on source and target with the same coefficients. The cone projections define these maps without existence choices. Test composites on both cone inclusions and every bar generator. They reduce to identity because ((-1)^p)^2=1. This constructs coneTotalXIso in each degree.",
+   "uses": [
+    "def-sc-preorder-bar-cone-diagram",
+    "def-sc-preorder-bar-total"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-preorder-bar-cone-diagram",
+  "def-sc-preorder-bar-total"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P2",
+  "document": "lean/Sheaf/AlgebraicGeometry/PreorderBarTotalCone.lean",
+  "place": "Complete explicit Lean construction and proof; no remaining sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Totalization of a diagram of mapping cones is isomorphic to the mapping cone of the totalized natural transformation",
+   "results": "8 hits: CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.mapHomologicalComplexXIso, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq, CochainComplex.MappingConeCompHomotopyEquiv.hom, CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv, CochainComplex.MappingConeCompHomotopyEquiv.inv",
+   "date": "2026-10-14",
+   "verdict": "Related Mathlib constructions were used where applicable; no exact preorder-bar total comparison was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, HomologicalComplex₂.total",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "Related Mathlib constructions were used where applicable; no exact preorder-bar total comparison was found."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.*total|total.*mappingCone",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "Related Mathlib constructions were used where applicable; no exact preorder-bar total comparison was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An increasing union of finite coproducts has a bar construction whose augmentation is a homotopy equivalence by an extra degeneracy",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactFlatBarUnionAugmentation",
+  "date": "2026-10-14",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The compact-flat bar-enlargement argument in the finite-duality proof; The explicit degreewise total-cone comparison.",
+   "via": [
+    "lem-sc-compact-flat-bar-union-augmentation",
+    "lem-sc-compact-flat-telescope-bar-enlargement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PreorderBarTotalCone",
+  "file": "lean/Sheaf/AlgebraicGeometry/PreorderBarTotalCone.lean",
+  "declaration": "CategoryTheory.PreorderBar.coneTotalXIso",
+  "statement": "def coneTotalXIso (n : ℤ) : (total (coneDiagram φ)).X n ≅ (CochainComplex.mappingCone (totalArrow φ)).X n",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
