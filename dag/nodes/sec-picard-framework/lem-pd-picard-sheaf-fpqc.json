@@ -1,0 +1,131 @@
+{
+ "id": "lem-pd-picard-sheaf-fpqc",
+ "kind": "statement",
+ "title": "The relative Picard sheaf of a curve is an fpqc sheaf",
+ "statement": "Let k be a field and let f:C to Spec k be a smooth proper geometrically integral curve. Its relative Picard sheaf [def-pc-picard-functor], defined as the fppf sheafification of the relative Picard presheaf, satisfies the sheaf condition for the fpqc topology on schemes over Spec k.",
+ "stmt_deps": [
+  "def-pc-picard-functor"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0D28, 0D2B and 023T; finite point extension uses Tag 056U"
+ },
+ "proof": [
+  {
+   "text": "Choose a closed point with finite separable residue field K by [lem-pc-dense-separable-points]. Spec K to Spec k is flat, surjective and locally of finite presentation. The residue-field point induces a section sigma of the base-changed curve C_K.",
+   "uses": [
+    "lem-pc-dense-separable-points"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The smooth proper geometrically integral base-changed curve has universally trivial structure pushforward by [lem-pc-rational-hyp]. The normalized-to-relative-Picard map is objectwise bijective by the normalized splitting [thm-pc-pic-split], hence is an isomorphism of presheaves. Apply [lem-pd-normalized-picard-fpqc] and transport its sheaf condition along this isomorphism.",
+   "uses": [
+    "lem-pc-rational-hyp",
+    "thm-pc-pic-split",
+    "lem-pd-normalized-picard-fpqc"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Picard base change [lem-pd-picard-base-change] identifies restriction of the original relative Picard sheaf to Spec K with the base-changed Picard sheaf. For any T over Spec k, the pullback of Spec K is an fppf cover Q. The original functor satisfies the sheaf condition for Q. For any arrow belonging to Q its source maps to Spec K, and the fpqc sheaf condition on Spec K, transported through the over-site equivalence, gives the sheaf condition for the pullback of an arbitrary fpqc sieve R. Separatedness for pullbacks of Q follows from the fppf sheaf condition. Presieve.isSheafFor_trans now proves the sheaf condition for R.",
+   "uses": [
+    "lem-pd-picard-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-dense-separable-points",
+  "lem-pc-rational-hyp",
+  "thm-pc-pic-split",
+  "lem-pd-normalized-picard-fpqc",
+  "lem-pd-picard-base-change"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project and WeilConjectures.AlgebraicGeometry.Picard.Defs",
+  "place": "Normalization and scalar-cocycle descent proofs, adapted from fppf to fpqc; S1, 2026-10-15"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fpqc sheaf normalized Picard functor with a section",
+   "date": "2026-10-15",
+   "results": "Service unavailable: Internal Server Error; no mathematical result obtained.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fpqc sheaf relative Picard functor normalized by a section",
+   "date": "2026-10-15",
+   "results": "Module descent and ring Picard ingredients, but no theorem for normalized geometric Picard classes.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presieve.isSheafFor_trans",
+   "date": "2026-10-15",
+   "results": "Mathlib.CategoryTheory.Sites.IsSheafFor: generic transitivity of sheaf conditions. Used in the finite-base-cover reduction; does not prove Picard descent itself.",
+   "verdict": "ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "fpqc.*[Pp]icard|[Pp]icard.*fpqc|isSheafFor_over_map_op_comp_iff",
+   "date": "2026-10-15",
+   "results": "No geometric Picard fpqc sheaf theorem in Mathlib. The over-site sheaf criterion is in Mathlib.CategoryTheory.Sites.Over. Existing WeilConjectures Picard.Defs gives the fppf normalization argument, which can be adapted to fpqc descent.",
+   "verdict": "ingredients only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardDegreeSheafFpqcExistence",
+  "date": "2026-10-15",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pd-jacobian-general-field",
+   "place": "Step 7: fpqc descent of the Picard sheaf before descent of its representing isomorphism",
+   "via": [
+    "lem-pd-degree-picard-sheaf-fpqc-existence",
+    "lem-pd-degree-picard-sheaf-fpqc"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardSheafFpqc",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardSheafFpqc.lean",
+  "declaration": "AlgebraicGeometry.isSheaf_fpqc_picardFunctor",
+  "statement": "theorem isSheaf_fpqc_picardFunctor {k : Type u} [Field k] {C : Scheme.{u}}\n    (f : C ⟶ Spec (.of k)) [SmoothOfRelativeDimension 1 f] [IsProper f]\n    [GeometricallyIntegral f] :\n    Presheaf.IsSheaf (Scheme.fpqcTopology.over (Spec (.of k))) (picardFunctor f).obj",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261014T165955-L-2456518",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261014T165955-L-2456518",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

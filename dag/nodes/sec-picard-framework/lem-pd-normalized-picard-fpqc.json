@@ -1,0 +1,126 @@
+{
+ "id": "lem-pd-normalized-picard-fpqc",
+ "kind": "statement",
+ "title": "Normalized Picard classes satisfy fpqc descent",
+ "statement": "Let f:X to S be a morphism of schemes with a section sigma:S to X. Assume that the natural map from the structure sheaf of T to its pushforward from X_T is an isomorphism for every scheme T over S. The normalized Picard subfunctor [def-pc-pic-sigma-functor], consisting of classes of invertible modules on X_T with trivial section pullback, is a sheaf for the fpqc topology.",
+ "stmt_deps": [
+  "def-pc-pic-sigma-functor"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0D28, 0D2B and 023T; finite point extension uses Tag 056U"
+ },
+ "proof": [
+  {
+   "text": "Present a covering sieve by its arrows. Represent a compatible family of normalized Picard classes by invertible modules L_i and choose trivializations of their section pullbacks. Compatibility gives isomorphisms on double overlaps. Apply the existing normalizedDescentData construction: the universally trivial structure pushforward makes global units come from the base, and normalization makes the overlap maps unique and hence satisfies the cocycle condition. The normalized classes are those of [def-pc-pic-sigma-functor].",
+   "uses": [
+    "def-pc-pic-sigma-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change the fpqc cover to X_T and apply effective quasi-coherent descent [lem-pc-fpqc-descent]. Invertibility descends as well. If M is the resulting module, construct M tensor f_T^*(dual(sigma_T^*M)); the section pullback is trivial and the twisting factor is trivial over each cover member. Tensor, pullback and unit isomorphisms show its local classes are exactly L_i.",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For uniqueness take normalized global modules A and B with locally equal classes. Their quotient A tensor dual(B) is locally trivial. The existing DescentCocycle.exists_iso_twist construction produces its scalar cocycle; universal bijectivity on global sections transfers this cocycle to the base (ofBaseChange). Effective descent on the base gives an invertible N. Full faithfulness of descent identifies A tensor dual(B) with f_T^*N. Thus A is isomorphic to B tensor f_T^*N. Apply the proved picardFunctorNormalized_eq_of_iso_tensorObj to conclude equality of normalized classes. This is the fpqc version of the local-equality argument in Picard.Defs, with every step proved here.",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-pic-sigma-functor",
+  "lem-pc-fpqc-descent"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project and WeilConjectures.AlgebraicGeometry.Picard.Defs",
+  "place": "Normalization and scalar-cocycle descent proofs, adapted from fppf to fpqc; S1, 2026-10-15"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fpqc sheaf normalized Picard functor with a section",
+   "date": "2026-10-15",
+   "results": "Service unavailable: Internal Server Error; no mathematical result obtained.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fpqc sheaf relative Picard functor normalized by a section",
+   "date": "2026-10-15",
+   "results": "Module descent and ring Picard ingredients, but no theorem for normalized geometric Picard classes.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presieve.isSheafFor_trans",
+   "date": "2026-10-15",
+   "results": "Mathlib.CategoryTheory.Sites.IsSheafFor: generic transitivity of sheaf conditions. Used in the finite-base-cover reduction; does not prove Picard descent itself.",
+   "verdict": "ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "fpqc.*[Pp]icard|[Pp]icard.*fpqc|isSheafFor_over_map_op_comp_iff",
+   "date": "2026-10-15",
+   "results": "No geometric Picard fpqc sheaf theorem in Mathlib. The over-site sheaf criterion is in Mathlib.CategoryTheory.Sites.Over. Existing WeilConjectures Picard.Defs gives the fppf normalization argument, which can be adapted to fpqc descent.",
+   "verdict": "ingredients only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardDegreeSheafFpqcExistence",
+  "date": "2026-10-15",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pd-jacobian-general-field",
+   "place": "Step 7: fpqc descent of the Picard sheaf before descent of its representing isomorphism",
+   "via": [
+    "lem-pd-degree-picard-sheaf-fpqc-existence",
+    "lem-pd-degree-picard-sheaf-fpqc"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardNormalizedFpqc",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardNormalizedFpqc.lean",
+  "declaration": "AlgebraicGeometry.isSheaf_fpqc_picardFunctorNormalized",
+  "statement": "theorem isSheaf_fpqc_picardFunctorNormalized (f : X ⟶ S) (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S)\n    (hf : ∀ T : Over S, IsIso (pushforwardUnitMap (Limits.pullback.snd f T.hom))) :\n    Presheaf.IsSheaf (Scheme.fpqcTopology.over S)\n      (picardFunctorNormalized f σ hσ).toFunctor",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261014T165955-L-2456518",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261014T165955-L-2456518",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
