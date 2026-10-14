@@ -1,0 +1,125 @@
+{
+ "id": "lem-sbc-dvr-finite-separable-fraction-ess-finite-type",
+ "kind": "statement",
+ "title": "Essential finite type for a DVR with finite separable fraction extension",
+ "statement": "Let $B,U$ be DVR domains [def-sc-discrete-valuation-ring] and let $B\\to U$ be a local ring map. Let $E/\\operatorname{Frac}(B)$ be a finite separable field extension [def-pc-field-extension, def-weil-pbc-separable-algebraic-extension], with compatible $B$- and $U$-algebra structures, and suppose $E=\\operatorname{Frac}(U)$ via its specified structural map. Then $U$ is essentially of finite type over $B$ [def-weil-pbc-essentially-finite-type-algebra]. No finiteness of $U$ as a $B$-module is assumed.",
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-essentially-finite-type-algebra"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 09E8 (normalized local DVRs, including the valuation-ring comparison) and 032L (finite separable normalization)."
+ },
+ "proof": [
+  {
+   "text": "Set C=integralClosure_B(E). Apply IsIntegralClosure.finite to make it a finite B-module. The integral-closure fraction-field theorem gives Frac(C)=E, and the Dedekind integral-closure instance makes C Dedekind.",
+   "uses": [
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every element of C is integral over U by scalar extension, hence belongs to U because U is integrally closed in E. Codomain restriction to the range of U->E and its proved inverse construct C->U; the scalar tower over B is checked in E.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Contract m(U) to P in C. A base uniformizer belongs to P by locality and is nonzero by injectivity into E, so P is nonzero. The Mathlib Dedekind localization theorem makes S=C_P a DVR. Extend C->U to S->U and prove locality with the unit criterion for localization fractions.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Compatibility of C->S->E identifies E as Frac(S). Mathlib bijective_rangeRestrict_comp_of_valuationRing makes the local map S->U surjective. Composition makes S essentially of finite type over B, and EssFiniteType.of_surjective transfers that property to U.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "kind": "written-by-agent",
+  "agent": "G2",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 09E8 (normalized local DVRs, including the valuation-ring comparison) and 032L (finite separable normalization).",
+  "note": "Complete kernel-checked Lean proof, no sorry; the tensor or normalization construction is explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A local DVR in a finite separable extension of the fraction field of a DVR is essentially of finite type",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A discrete valuation ring whose fraction field is finite separable over the fraction field of a locally embedded DVR is essentially of finite type over that DVR",
+   "date": "2026-10-14",
+   "results": "Actual search returned 8 hits: IsDedekindDomainDvr.isIntegrallyClosed, IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain, Algebra.QuasiFinite.instOfIsFractionRing, IsDedekindDomainDvr.is_dvr_at_nonzero_prime, IsDiscreteValuationRing.TFAE, tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, instFiniteDimensionalFractionRingOfFinite, Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing",
+   "verdict": "Ingredients only; the combined result is proved in Lean."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegralClosure.finite|bijective_rangeRestrict_comp_of_valuationRing|EssFiniteType.of_surjective",
+   "date": "2026-10-14",
+   "results": "Actual search returned 8 hits: Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/NumberField/ExistsRamified.lean, Mathlib/NumberTheory/NumberField/Discriminant/Different.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/RingTheory/NormalClosure.lean, Mathlib/RingTheory/EssentialFiniteness.lean, Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean, Mathlib/RingTheory/Valuation/LocalSubring.lean",
+   "verdict": "Ingredients only; the combined result is proved in Lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.DvrUniformizerRootCompositumResidue",
+  "date": "2026-10-14",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case: the finite separable normalization and local DVRs used in the tame root argument; supplies essential finite type in the standard-root model.",
+   "via": [
+    "lem-sbc-dvr-uniformizer-root-compositum-residue"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.DvrFiniteSeparableFractionEssFiniteType",
+  "file": "lean/Sheaf/RingTheory/DvrFiniteSeparableFractionEssFiniteType.lean",
+  "declaration": "RingTheory.dvr_finite_separable_fraction_essFiniteType",
+  "statement": "theorem dvr_finite_separable_fraction_essFiniteType\n    (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]\n    (U : Type u) [CommRing U] [IsDomain U] [IsDiscreteValuationRing U]\n    [Algebra B U] [IsLocalHom (algebraMap B U)]\n    (E : Type u) [Field E] [Algebra (FractionRing B) E]\n    [Algebra B E] [IsScalarTower B (FractionRing B) E]\n    [FiniteDimensional (FractionRing B) E] [Algebra.IsSeparable (FractionRing B) E]\n    [Algebra U E] [IsFractionRing U E] [IsScalarTower B U E] :\n    Algebra.EssFiniteType B U",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261014T050217-L-1646866",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261014T050217-L-1646866",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,136 @@
+{
+ "id": "lem-sbc-dvr-standard-root-unramified-model",
+ "kind": "statement",
+ "title": "Unramified intermediate DVR from the standard tame unit-root calculation",
+ "statement": "Let $B,U,T$ be DVR domains [def-sc-discrete-valuation-ring], let $\\pi\\in B$ be irreducible, and let $e\\in\\mathbf N$ be a unit in $B$. Suppose $B\\to U$ is local and $k(U)/k(B)$ is separable [def-weil-pbc-separable-algebraic-extension]. Let $E/\\operatorname{Frac}(B)$ be finite separable [def-pc-field-extension], with compatible $B,U$ structures making $E=\\operatorname{Frac}(U)$. Let $F=\\operatorname{Frac}(T)$, $i_E:E\\to F$ a field map, and $j:U\\to T$ a local map whose composite to $F$ agrees with $i_E$ on $U$. Choose an irreducible $q\\in U$ and a unit $w\\in U$ with $q^e w=\\pi$ in $U$. Put $R=B[t]/(t^e-\\pi)$ and give it its domain and DVR structures. Suppose $\\rho:R\\to T$ is local, agrees on $B$ with $j$, and there is a unit $y\\in T$ with $j(q)y=\\rho(t)$. Then there exists a DVR domain $V$ with a local injective $R$-algebra structure, essentially of finite type [def-weil-pbc-essentially-finite-type-algebra] and formally unramified (relative Kahler differentials zero); there is a local $k:V\\to T$ extending $\\rho$, a field map $i_V:\\operatorname{Frac}(V)\\to F$ extending $V\\to T\\to F$, and $i_{EV}:E\\to\\operatorname{Frac}(V)$ with $i_V\\circ i_{EV}=i_E$. This constructs the intermediate standard-root model and does not assert any later base-change property.",
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-essentially-finite-type-algebra"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BRM, final paragraph, with 09EV (standard root DVR) and the local unramified criterion 02FM."
+ },
+ "proof": [
+  {
+   "text": "Injectivity of j follows from its compatibility with the field embeddings. Raise j(q)y=rho(t) to the e-th power and cancel j(q)^e to get y^e=j(w). Form D=U[Y]/(Y^e-w) with Y mapping to y in T. The proved source theorem AdjoinRoot.etale_X_pow_sub_C makes D etale over U.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Localize D at the inverse image of m(T), obtaining V and a local k:V->T. Flatness and formal unramifiedness give m(U)V=m(V); the closed source regularity ascent theorem makes V regular local and a domain. The image of q is nonzero by flatness and generates m(V), so V is a DVR. The root z of D in V is a unit.",
+   "uses": [
+    "lem-sc-principal-ideal-dvr"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map R into V by t->qz, checking the root equation. Check k composed with this map equals rho on constants and the root. Thus R->V is local; its root maps to a nonzero uniformizer, so uniformizer factorization proves injectivity. The standard root algebra theorem supplies m(R)=(t).",
+   "uses": [
+    "lem-sbc-dvr-uniformizer-root-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the finite-separable-fraction essential-finite-type theorem on U/B; composition and restriction of scalars give essential finite type for V/R. Etaleness gives k(V)/k(U) separable. Transitivity gives separability over k(B), and restriction of the base along k(B)->k(R) gives separability over k(R). Since t maps to q times a unit, m(R)V=m(V). The Mathlib local unramified criterion proves formal unramifiedness of V/R.",
+   "uses": [
+    "lem-sbc-dvr-finite-separable-fraction-ess-finite-type"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The map k does not kill the uniformizer q, hence is injective by factorization. Extend V->T->F and U->V to fraction fields. Their composites agree on U and therefore on E=Frac(U), giving the required iV and iEV and every compatibility equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-dvr-finite-separable-fraction-ess-finite-type",
+  "lem-sbc-dvr-uniformizer-root-algebra",
+  "lem-sc-principal-ideal-dvr"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "kind": "written-by-agent",
+  "agent": "G2",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tag 0BRM, final paragraph, with 09EV (standard root DVR) and the local unramified criterion 02FM.",
+  "note": "Complete kernel-checked Lean proof, no sorry; the tensor or normalization construction is explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The standard root of a uniformizer kills tame ramification by an etale root of a unit",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale unit-root extension of a DVR cancels the ramification over the ring adjoining a root of a uniformizer",
+   "date": "2026-10-14",
+   "results": "Actual search returned 8 hits: Ideal.ramificationIdx_eq_one_of_isUnramifiedAt, Algebra.isUnramifiedAt_iff_of_isDedekindDomain, Algebra.IsUnramifiedAt, Ideal.Quotient.algebraQuotientOfRamificationIdxNeZero, Algebra.IsStandardEtale, Algebra.IsUnramifiedAt.of_liesOver, IsUnramifiedAt.of_liesOver_of_ne_bot, StandardEtalePair",
+   "verdict": "Ingredients only; the combined result is proved in Lean."
+  },
+  {
+   "tool": "grep",
+   "query": "FormallyUnramified|isSeparable|base_change",
+   "date": "2026-10-14",
+   "results": "Actual search returned 25 hits: Mathlib/RingTheory/Unramified/LocalStructure.lean, Mathlib/RingTheory/Unramified/LocalStructure.lean, Mathlib/RingTheory/Unramified/LocalStructure.lean, Mathlib/RingTheory/Unramified/LocalStructure.lean, Mathlib/RingTheory/Unramified/LocalStructure.lean, Mathlib/RingTheory/Unramified/Field.lean, Mathlib/RingTheory/Unramified/Field.lean, Mathlib/RingTheory/Unramified/Field.lean",
+   "verdict": "Ingredients only; the combined result is proved in Lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.DvrUniformizerRootCompositumResidue",
+  "date": "2026-10-14",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case: the final unit-root calculation of 0BRM, supplying the intermediate unramified DVR before the further 09EQ base change.",
+   "via": [
+    "lem-sbc-dvr-uniformizer-root-compositum-residue"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.DvrStandardRootUnramifiedModel",
+  "file": "lean/Sheaf/RingTheory/DvrStandardRootUnramifiedModel.lean",
+  "declaration": "RingTheory.dvr_standard_root_unramified_model",
+  "statement": "theorem dvr_standard_root_unramified_model\n    (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]\n    (pi : B) (hpi : Irreducible pi)\n    (U : Type u) [CommRing U] [IsDomain U] [IsDiscreteValuationRing U]\n    [Algebra B U] [IsLocalHom (algebraMap B U)]\n    (e : ℕ) (he : IsUnit (e : B))\n    (hsep : Algebra.IsSeparable (IsLocalRing.ResidueField B) (IsLocalRing.ResidueField U))\n    (E : Type u) [Field E] [Algebra (FractionRing B) E]\n    [Algebra B E] [IsScalarTower B (FractionRing B) E]\n    [FiniteDimensional (FractionRing B) E] [Algebra.IsSeparable (FractionRing B) E]\n    [Algebra U E] [IsFractionRing U E] [IsScalarTower B U E]\n    (T : Type u) [CommRing T] [IsDomain T] [IsDiscreteValuationRing T]\n    (F : Type u) [Field F] [Algebra T F] [IsFractionRing T F]\n    (iE : E →+* F) (j : U →+* T) (hj : IsLocalHom j)\n    (hjE : ∀ c : U, algebraMap T F (j c) = iE (algebraMap U E c))\n    (q : U) (hq : Irreducible q) (w : Uˣ)\n    (hw : q ^ e * (w : U) = algebraMap B U pi) :\n    let R := AdjoinRoot ((Polynomial.X : Polynomial B) ^ e - Polynomial.C pi)\n    ∀ (hdom : IsDomain R) (hdvr : IsDiscreteValuationRing R),\n    letI := hdom\n    letI := hdvr\n    ∀ (rho : R →+* T) (_hrho : IsLocalHom rho)\n      (_hrhoB : ∀ b : B, rho (algebraMap B R b) = j (algebraMap B U b))\n      (y : Tˣ)\n      (_hy : j q * (y : T) = rho (AdjoinRoot.root\n        ((Polynomial.X : Polynomial B) ^ e - Polynomial.C pi))),\n    ∃ (V : Type u) (_ : CommRing V) (_ : IsDomain V)\n      (_ : IsDiscreteValuationRing V) (aRV : Algebra R V),\n    letI := aRV\n    ∃ (_ : IsLocalHom (algebraMap R V)) (_ : FaithfulSMul R V)\n      (_ : Algebra.EssFiniteType R V) (_ : Algebra.FormallyUnramified R V)\n      (k : V →+* T) (_ : IsLocalHom k),\n      (∀ r : R, k (algebraMap R V r) = rho r) ∧\n      ∃ (iV : FractionRing V →+* F) (iEV : E →+* FractionRing V),\n        (∀ v : V, iV (algebraMap V (FractionRing V) v) = algebraMap T F (k v)) ∧\n        (∀ x : E, iV (iEV x) = iE x)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261014T050217-L-1646866",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261014T050217-L-1646866",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

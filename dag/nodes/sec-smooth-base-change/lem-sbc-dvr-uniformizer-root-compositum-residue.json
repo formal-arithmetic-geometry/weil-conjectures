@@ -14,18 +14,44 @@
  },
  "proof": [
   {
-   "text": "The ring maps to the specified fraction fields are injective. Embed\nFrac(B) into Frac(A) compatibly with B and let K0 be the intermediate field\nit generates with theta. Since theta^e = pi and pi is a uniformizer, the\nEisenstein root theorem 09EV identifies the normalization of B in K0 with\nthe DVR B[theta]; its ramification index is e and its residue field is k(B).\nChoose a uniformizer q of U. The index hypothesis writes pi = w*q^e for a\nunit w of U. In E tensor_Frac(B) K0, theta/q satisfies X^e-w. This is a unit-root\npolynomial with invertible derivative, so the normalization of U in each field\nfactor is a local factor of a finite etale U-algebra. Its ramification index\nis one over U and its residue field is finite separable over k(U). Multiplicativity\nin the two towers over B gives index one over B[theta]. Transitivity with the\nassumed separability k(U)/k(B) gives separability over the residue field of\nB[theta]. This is the adic formal smoothness criterion 09E7. Base change now\nfrom K0 to Frac(A): the tensor of the weakly unramified normalization with A\nhas special fibre a product of finite separable extensions of k(A), as in 09EQ.\nThe uniformizer of A is a nonzerodivisor in this tensor, so each of its local\nfactors above the closed point is a DVR and is already normal. The compatible\nmaps and the generation hypothesis select the factor whose fraction field is F.\nThe DVR T equals this local factor: both are valuation rings in F and the map is\nlocal, and a proper overring of a DVR in its fraction field is the field itself.\nConsequently its residue extension over k(A) is separable. The tensor argument\nworks for any DVR A containing theta, without finiteness of A over B. When e=1,\nB[theta]=B and the same argument is just weakly unramified base change.",
+   "text": "Invertibility of e excludes e=0. Choose a uniformizer q of U. Rewrite the maximal-ideal power identity as equality of singleton principal ideals, obtaining a unit w with q^e*w=pi in U. Apply the proved standard-root algebra theorem to R=B[t]/(t^e-pi). Lift t to theta in A and compose to rho:R->T.",
+   "uses": [
+    "lem-sbc-dvr-uniformizer-root-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The compatible B maps show rho(t)^e=(j(q))^e*j(w). Unique factorization cancels equal positive powers in the association relation and supplies a unit y with j(q)y=rho(t). Since j is local, this image lies in m(T); m(R)=(t) then proves rho local. Its factor R->A is consequently local.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the standard-root unramified model theorem with q,w,y,rho. It constructs a local faithful essentially finite type formally unramified R-algebra V and compatible maps k:V->T, iV:Frac(V)->F and iEV:E->Frac(V), with iV composed with iEV=iE.",
+   "uses": [
+    "lem-sbc-dvr-standard-root-unramified-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every element of range(iE) lies in range(iV), by the displayed field factorization. Monotonicity of Algebra.adjoin transfers the given generation over A to iV. Apply the proved arbitrary DVR compositum base-change theorem to R,V,A,T, obtaining essential finite type and formal unramifiedness of T/A. Mathlib local residue-field separability then gives the requested conclusion.",
+   "uses": [
+    "lem-sbc-dvr-unramified-compositum-base-change"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-dvr-standard-root-unramified-model",
+  "lem-sbc-dvr-uniformizer-root-algebra",
+  "lem-sbc-dvr-unramified-compositum-base-change"
+ ],
  "proof_origin": {
   "by": "worker",
   "kind": "written-by-agent",
-  "agent": "D2",
-  "document": "Stacks Project",
-  "place": "Tags 0BRM, 09EV, 09EQ, 09E7, uniformizer-root case followed by arbitrary DVR base change."
+  "agent": "G2",
+  "document": "Stacks Project and Mathlib",
+  "place": "0BRM standard root calculation and 09EQ tensor base change; complete Lean assembly and three proved supporting modules.",
+  "note": "All four declarations have exactly propext, Classical.choice and Quot.sound as axioms; no sorry. Uniformizer association replaces the ramification-index multiplicativity calculation below the unit level."
  },
  "mathlib_searches": [
   {
@@ -104,9 +130,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261014T041056-L-1058903",
+  "landing": "20261014T050217-L-1646866",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
