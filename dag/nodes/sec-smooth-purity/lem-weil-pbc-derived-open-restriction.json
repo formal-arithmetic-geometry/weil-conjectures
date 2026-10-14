@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-derived-open-restriction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Derived direct image restricted to an open",
@@ -19,44 +19,91 @@
  ],
  "proof": [
   {
-   "text": "For an etale $W\\to U$, also viewed as etale over $S$, the direct\nimage of [def-weil-pbc-direct-image] satisfies\n\n$$\n(a^{-1}f_*F)(W)=F(T\\times_SW)\n=(f_{U,*}b^{-1}F)(W).\n$$",
+   "text": "For an etale W→U, the inverse-image description [lem-weil-pbc-etale-inverse-image-restriction] identifies (a^{-1}f_*F)(W) with (f_*F)(W→S), and [def-weil-pbc-direct-image] evaluates this as F(T×_S W). Since V=T×_S U, this is F(V×_U W)=(f_{U,*}b^{-1}F)(W), naturally in W and F.",
    "uses": [
-    "def-weil-pbc-direct-image"
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-etale-inverse-image-restriction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "03S2 (restriction to an open / direct image on the localized etale site)"
+   }
   },
   {
-   "text": "Here restriction along an open is the inverse image of\n[def-weil-pbc-inverse-image], which is exact by\n[prop-weil-pbc-inverse-image-exact]. The extension-by-zero functor\n$b_!$ of [def-weil-pbc-extension-by-zero] is exact and left\nadjoint to $b^{-1}$. Consequently, if $I$ is injective on\n$T_{\\Et}$, the identity\n\n$$\n\\operatorname{Hom}_{V_{\\Et}}(-,b^{-1}I)\n\\simeq \\operatorname{Hom}_{T_{\\Et}}(b_!(-),I)\n$$\n\nis an exact contravariant functor: $b_!$ preserves short exact\nsequences, and $\\operatorname{Hom}(-,I)$ is exact. Thus $b^{-1}I$\nis injective.",
+   "text": "Identify V_Et with the localized slice T_Et/U via [lem-weil-pbc-etale-site-localization-open]. The restriction b^{-1} is exact by [lem-pur-site-restriction-module-adjunction-exact], while [lem-pur-site-restriction-module-adjunction-exact] gives an exact extension-by-zero left adjoint b_! to this restriction. For an injective I on T_Et, Hom_{V_Et}(-,b^{-1}I)≅Hom_{T_Et}(b_!(-),I) is therefore exact contravariantly: b_! preserves short exact sequences and Hom(-,I) is exact. Thus b^{-1}I is injective.",
    "uses": [
     "def-weil-pbc-inverse-image",
-    "prop-weil-pbc-inverse-image-exact",
-    "def-weil-pbc-extension-by-zero"
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-etale-site-localization-open"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "03S2 and 03F3 (localized site, exact restriction and extension by zero)"
+   }
   },
   {
-   "text": "Choose a bounded-below injective resolution $L\\to I^\\bullet$ as in\n[prop-weil-pbc-kinjective-resolutions-exist]. Exactness of\n$b^{-1}$ and the preceding injectivity calculation make\n$b^{-1}I^\\bullet$ an injective resolution of $b^{-1}L$.\nThe displayed identity of sections applied in every degree identifies\n$a^{-1}f_*I^\\bullet$ with $f_{U,*}b^{-1}I^\\bullet$.\nSince $a^{-1}$ is exact, these represent the two derived functors\nin the statement. This proves the derived isomorphism.\nThese identifications are restrictions of the same sections, so they\ncommute with successive restrictions and composition of direct images.",
+   "text": "Choose a bounded-below injective resolution L→I^• using [prop-weil-pbc-kinjective-resolutions-exist]. By exactness of b^{-1} and Step 2, b^{-1}I^• is an injective resolution of b^{-1}L. Applying the Step 1 sectionwise equality degree by degree identifies a^{-1}f_*I^• with f_{U,*}b^{-1}I^•. The exactness of the module inverse images a^{-1} and b^{-1} from [lem-pur-site-restriction-module-adjunction-exact] means these complexes compute a^{-1}Rf_*L and Rf_{U,*}b^{-1}L, yielding the claimed natural isomorphism; sectionwise construction gives compatibility with further restrictions and compositions.",
    "uses": [
-    "prop-weil-pbc-kinjective-resolutions-exist"
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-etale-inverse-image-restriction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "05TI, 05TH (bounded-below injective resolutions and derived functors)"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-direct-image",
   "def-weil-pbc-inverse-image",
-  "prop-weil-pbc-inverse-image-exact",
-  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-pur-site-restriction-module-adjunction-exact",
   "prop-weil-pbc-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-derived-open-restriction.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "03S2, 03F3, with derived.tex 05TI/05TH"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of derived direct image to an open immersion equals direct image after base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of pushforward along a morphism restricted to an open subscheme",
+   "results": "AlgebraicGeometry.image_morphismRestrict_preimage; Scheme.Hom.resLE_preimage; no derived sheaf direct-image theorem",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "rightDerivedFunctorPlus, inverse image, lowerStar",
+   "results": "unknown identifier 'rightDerivedFunctorPlus'; 0 hits",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorPlus|lowerStar|openImmersion in Mathlib/CategoryTheory Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -89,5 +136,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-derived-open-restriction",
+  "worker": "stage1",
+  "summary": "Audited the imported three-paragraph proof. Reused existing nodes for direct-image evaluation, inverse-image restriction, exact inverse image, localized etale-site equivalence, exact extension by zero with its adjunction, and K-injective resolutions. Rewrote each step to state the sectionwise calculation, the injective-preservation Hom argument, and the derived identification with naturality. No new nodes were needed. Mathlib searches were run and recorded; LeanSearch was unavailable. Small cases (a=id, U=empty, L=0) reduce to identities or zero complexes.",
+  "blueprint": "Realizes the blueprint proof paragraphs: sectionwise direct-image equality; exact restriction and extension-by-zero adjunction imply injective preservation; bounded-below injective resolution computes both derived functors and yields naturality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-a21af4a1d",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-a21af4a1d (reviewer sub-agent of L); spot-checked: Step 2 cited `lem-weil-pbc-site-restriction-injectives`, stated only for abelian sheaves, while the target is in finite-ring module derived categories. I supplied a corrected DAG JSON citing `lem-pur-site-restriction-module-adjunction-exact` for module restriction exactness and the exact extension-by-zero adjunction, including Step 3's inverse-image exactness. Full source, node, route, coefficient, and edge-case checks are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
