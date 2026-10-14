@@ -13955,3 +13955,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:01 L: returned deliver/R4/Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartCompletedLocalizationsD (reviewer RETURN: (reviewer X-c9a00, head c9a005f9d) E2: The existing theorem is false because it universally quantifies arbitrary `alpha`)
 
 - 08:03 L: batch 20261013T234502 dependency take-out
+- 00:06 L: returned deliver/M2/Sheaf.AlgebraicGeometry.HigherDirectImageRawTransitionToHomCore (reviewer RETURN: (reviewer X-663e9, head 663e9a823) the reviewer passed it, but the landing failed: metry.AbelianDerivedDirectImageTransi)
