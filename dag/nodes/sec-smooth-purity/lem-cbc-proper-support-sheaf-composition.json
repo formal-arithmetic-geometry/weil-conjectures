@@ -30,9 +30,161 @@
   "def-weil-pbc-extension-by-zero",
   "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The support of a section is closed: its complement is the largest open on which it vanishes, by [lem-sc-etale-section-zero-open]. For a pullback $u:T'\\to T$, [lem-weil-pbc-inverse-image-stalk-germ] identifies the germ of the pulled-back section at $\\bar t'$ with the original germ at $u\\bar t'$. Thus its support is exactly $u^{-1}\\operatorname{Supp}(s)$. The statement applies to underlying abelian sheaves; [prop-weil-pbc-inverse-image-modules-exact] supplies precisely the same inverse image on constant-$\\Lambda$ modules. Germwise, $\\operatorname{Supp}(s+t)\\subseteq\\operatorname{Supp}(s)\\cup\\operatorname{Supp}(t)$ and $\\operatorname{Supp}(\\lambda s)\\subseteq\\operatorname{Supp}(s)$, since a sum or scalar multiple of zero germs is zero. The support of zero is empty.",
+   "uses": [
+    "lem-sc-etale-section-zero-open",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F4X (lemma-f-shriek-separated), first paragraph; etale-cohomology.tex Tags 04FR/04FT and 03Q1"
+   }
+  },
+  {
+   "text": "For an etale $V\\to Y$, the proposed proper-support sections form a $\\Lambda$-submodule of $F(X_V)$: finite unions of proper closed supports are proper by [lem-weil-pbc-closed-subset-proper-over-base-union-preimage](1), and their closed subsets are proper by [lem-weil-pbc-closed-subset-proper-over-base-properties](2). Restriction preserves the condition by step 1 and [lem-cbc-closed-proper-support-locality](1). For a covering $\\{V_i\\to V\\}$, glue compatible sections in the ordinary direct-image sheaf [def-weil-pbc-direct-image]. Their glued support pulls back to their individual supports by step 1, so [lem-cbc-closed-proper-support-locality](2) makes it proper over $V$. Uniqueness is inherited from $f_*F$. This constructs the required subsheaf. A linear sheaf morphism sends a zero germ to zero, so its image support is a closed subset of the old support and remains proper by the same closed-subset lemma. Thus the construction is a functor on module sheaves.",
+   "uses": [
+    "lem-cbc-closed-proper-support-locality",
+    "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F4X (lemma-f-shriek-separated), subgroup, restriction and gluing arguments"
+   }
+  },
+  {
+   "text": "All base-changed maps in the argument are locally of finite type: on affine charts, base change replaces a finitely generated algebra $B=A[b_1,\\ldots,b_n]$ by $B\\otimes_AC$, generated over $C$ by $b_i\\otimes1$. Composite maps are locally of finite type since finite generating sets for $B/A$ and $D/B$ together generate $D/A$, using the affine-open definition [def-weil-finite-type-morphism]. Separatedness is preserved by base change by [lem-weil-pbc-separated-base-change]. For composition, $\\Delta_{gf}$ factors through $X\\times_YX$: its first factor is $\\Delta_f$, and the second is the pullback of $\\Delta_g$ along $X\\times_ZX\\to Y\\times_ZY$. The second factor is closed by [lem-weil-pbc-closed-immersion-base-change]; two closed immersions compose, since their affine maps are surjective ring maps and the composite of surjections is surjective [def-weil-closed-immersion]. Hence $gf$ and all needed base changes are separated. The same affine quotient description gives local finite type for closed subschemes used below.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F50 and 0F55, verification of scheme-morphism hypotheses"
+   }
+  },
+  {
+   "text": "Fix $W\\to Z$ etale, write $X_W=X\\times_ZW$, $Y_W=Y\\times_ZW$ and $f_W:X_W\\to Y_W$, and let $s\\in F(X_W)$. Put $T=\\operatorname{Supp}(s)$. Suppose that $T$ is proper over $Y_W$, so $s$ defines a section of $G=f_!^{\\mathrm{supp}}F$ on the etale object $Y_W\\to Y$. By [lem-weil-pbc-proper-closed-image] its image $I=f_W(T)$ is closed. Over $Y_W\\setminus I$, the original section has all germs zero and is zero by [lem-sc-etale-section-zero-open]; hence the section of $G$ has zero germs there. Conversely, if the germ of this section of $G$ at a geometric point over $y\\in Y_W$ is zero, apply [lem-sc-etale-section-zero-open] to $G$ itself: there is a Zariski open neighbourhood $O\\subseteq Y_W$ of $y$ on which this section is zero. The inclusion $G\\subseteq f_*F$ implies $s|_{X_W\\times_{Y_W}O}=0$. By step 1, $T\\cap f_W^{-1}(O)=\\varnothing$. If $y$ belonged to $I$, a point of $T$ over $y$ would belong to this intersection, a contradiction. Therefore the support of the section of $G$ is exactly $I$. This supplies the omitted support-image calculation of 0F50 using actual Zariski zero neighbourhoods, without a filtered-colimit argument or ordinary direct-image stalk base change.",
+   "uses": [
+    "lem-weil-pbc-proper-closed-image",
+    "lem-sc-etale-section-zero-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F50 (lemma-f-shriek-composition), first paragraph: details omitted; support-image calculation expanded"
+   }
+  },
+  {
+   "text": "If $T$ is proper over $W$, then its reduced closed scheme maps properly to $Y_W$ by [lem-weil-pbc-proper-over-separated], because $Y_W\\to W$ is separated (step 3). Its image $I$ is closed and proper over $W$ by [lem-weil-pbc-closed-subset-proper-over-base-properties](3). Therefore step 4 shows $s\\in(g_!^{\\mathrm{supp}}f_!^{\\mathrm{supp}}F)(W)$. Conversely, membership in that module says that $T\\to Y_W$ is proper and its closed image $I$ is proper over $W$. Apply [lem-weil-pbc-closed-subset-proper-over-base-union-preimage](2) to the proper map $T_{\\mathrm{red}}\\to Y_W$ of schemes locally of finite type over $W$ (step 3) and the closed subset $I$. Its inverse image is all of $T_{\\mathrm{red}}$, so $T$ is proper over $W$. This avoids making an unjustified scheme factorization through the reduced image. These two implications prove equality on every $W$ inside the ordinary direct image. The equality is literally the identity on sections and hence is natural, linear and compatible with restriction.",
+   "uses": [
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "lem-weil-pbc-closed-subset-proper-over-base-union-preimage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F50 (lemma-f-shriek-composition), second paragraph; equivalent inverse-image argument for the converse"
+   }
+  },
+  {
+   "text": "For proper $f$, $X_V\\to V$ is proper by [lem-weil-pbc-proper-base-change], and each closed reduced support in $X_V$ is proper over $V$ by [lem-weil-pbc-closed-immersion-proper](c). Thus every section qualifies and $f_!^{\\mathrm{supp}}F=f_*F$ with the identity inclusion.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F51 (lemma-proper-f-shriek)"
+   }
+  },
+  {
+   "text": "For an open immersion $j:U\\hookrightarrow Y$, map the presheaf $j_{p!}F$ of [def-weil-pbc-extension-by-zero] to $j_!^{\\mathrm{supp}}F$. If $V\\to Y$ factors through $U$, send its section to the same section on $U\\times_YV=V$; its support is closed in $V$ and hence proper over $V$ by [lem-weil-pbc-closed-immersion-proper](a). For the zero presheaf value use zero. These maps respect restriction, so the universal property [def-weil-pbc-sheafification] produces a linear map $j_!F\\to j_!^{\\mathrm{supp}}F$. Inside $U$ it is the identity on the original germs; [lem-weil-pbc-extension-by-zero-stalks](1) says it is a stalk isomorphism there. Outside $U$, a section of the target on $V$ has support $T\\subseteq U_V$ proper over $V$, whose image in $V$ is closed by [lem-weil-pbc-proper-closed-image] and misses the given point. On the open complement of that image the section is zero, by step 1, so its germ is zero. The source stalk is zero there by [lem-weil-pbc-extension-by-zero-stalks](2). Hence [lem-weil-pbc-sets-etale-iso-on-geometric-stalks] makes the map an isomorphism on underlying sets; its inverse is linear since it inverts a bijective linear map objectwise. Its composite into $j_*F$ is the canonical extension map by its presheaf construction. This proves the open specialization without the extra etale-sheet arguments needed for a general separated etale morphism.",
+   "uses": [
+    "def-weil-pbc-extension-by-zero",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-weil-pbc-proper-closed-image",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F4Y (lemma-separated-etale-shriek), open-immersion specialization"
+   }
+  },
+  {
+   "text": "Consider the stated square of $f$, and put $G=f_!^{\\mathrm{supp}}F$ and $H=f'_!{}^{\\mathrm{supp}}a^{-1}F$. Construct a linear sheaf morphism $\\alpha:G\\to b_*H$ directly. On an etale object $U\\to Y$, [def-weil-pbc-direct-image] gives $(b_*H)(U)=H(U\\times_YY')$. Send $s\\in G(U)\\subseteq F(X\\times_YU)$ to its pullback on $(X\\times_YU)\\times_YY'=X'\\times_{Y'}(U\\times_YY')$. The coefficient sheaf here is the restriction of $a^{-1}F$, by the unit-compatible inverse-image compositors [lem-weil-pbc-sets-etale-inverse-image-composition-units] and the module inverse-image construction [prop-weil-pbc-inverse-image-modules-exact]. Step 1 identifies its support with the inverse image of the support of $s$, and [lem-cbc-closed-proper-support-locality](1), for the base change $U\\times_YY'\\to U$, makes that support proper over $U\\times_YY'$. Thus the section belongs to $H(U\\times_YY')$. Pullback respects restrictions, sums and scalars, so these maps define $\\alpha$. The adjunction $b^{-1}\\dashv b_*$ of [prop-weil-pbc-inverse-image-modules-exact](3) gives its adjoint $\\beta_f:b^{-1}G\\to H$. Composing $\\alpha$ with $b_*H\\to b_*f'_*a^{-1}F$ gives the sectionwise pullback map defining the ordinary comparison; the adjunction hom-bijection therefore shows that $\\beta_f$ followed by $H\\hookrightarrow f'_*a^{-1}F$ is the ordinary comparison restricted to $b^{-1}G$. For a geometric point $\\bar y':\\operatorname{Spec}\\Omega\\to Y'$, put $\\bar y=b\\bar y'$. The inverse-image stalk formula [lem-weil-pbc-inverse-image-stalk-germ] identifies the source stalk with $(f_!^{\\mathrm{supp}}F)_{\\bar y}$. By [lem-cbc-proper-support-geometric-stalk] the source and target stalks identify with compactly supported sections on $X_{\\bar y}$ and $X'_{\\bar y'}$ respectively. These schemes are canonically equal as fibre products over the same $\\operatorname{Spec}\\Omega$; their coefficient sheaves agree under inverse-image composition [lem-weil-pbc-sets-etale-inverse-image-composition-units], and [prop-weil-pbc-inverse-image-modules-exact] supplies the constant-$\\Lambda$ action. The adjunction identity $b_*\\beta_f\\circ\\eta_{b,G}=\\alpha$ says that $\\beta_f$ sends the unit pullback of every representative $s\\in G(U)$ to the pullback section defining $\\alpha_U(s)$. The germ-compatible inverse-image stalk isomorphism identifies the germ of that unit pullback with the original germ of $s$. The two fibre restriction maps therefore send it to the same section, since the two composites from the geometric fibre to $X\\times_YU$ coincide. Every source stalk element is such a germ, and the new stalk lemma specifies restriction as its isomorphism; thus the stalk comparison is the identity on compactly supported fibre sections. Thus it is bijective. By [lem-weil-pbc-sets-etale-iso-on-geometric-stalks], $\\beta_f$ is an isomorphism, with a linear inverse. No torsion, finite-ring or Noetherian hypothesis is used.",
+   "uses": [
+    "lem-cbc-closed-proper-support-locality",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-cbc-proper-support-geometric-stalk",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F55 (lemma-base-change-f-shriek-separated), full restriction and geometric-stalk argument"
+   }
+  },
+  {
+   "text": "For the stacked Cartesian squares write the horizontal projections $a:Z'\\to Z$, $b:Y'\\to Y$, $c:X'\\to X$ and the vertical maps $f',g'$. The ordinary exchange for $gf$ equals $g'_*\\operatorname{Ex}^0_f\\circ\\operatorname{Ex}^0_g f_*$: this is the adjunction-pasting equation [lem-weil-pbc-mate-pasting](2), applied to the inverse-image composition squares, whose unit-compatible compositors are those of [lem-weil-pbc-sets-etale-inverse-image-composition-units]. The module adjunctions have those same underlying units and counits by [prop-weil-pbc-inverse-image-modules-exact](3). Restrict this equality to $a^{-1}(gf)_!^{\\mathrm{supp}}F$. Step 5 identifies support composition by identities on sections; step 8 constructs each support exchange as the restriction of the corresponding ordinary exchange. Both resulting paths have the same composite into $(g'f')_*c^{-1}F$. Its support-subsheaf inclusion is injective objectwise, so the two paths are equal already in $(g'f')_!^{\\mathrm{supp}}c^{-1}F$. All these equalities are natural and linear: section maps are linear, the inclusions are linear, and the factorizations are unique. The same identity-on-sections argument gives associativity and identity composition identifications.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F77 (remark-f-shriek-base-change-composition), parts (1),(2); ordinary mate pasting made explicit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-sheafification",
+  "lem-cbc-closed-proper-support-locality",
+  "lem-cbc-proper-support-geometric-stalk",
+  "lem-sc-etale-section-zero-open",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-closed-image",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F4X, 0F50, 0F51, 0F4Y, 0F55, 0F77; omitted support-image calculation and open-immersion specialization expanded"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -82,15 +234,111 @@
    "results": "TopCat.Sheaf.pushforward_sheaf_of_sheaf, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, TopCat.Sheaf.pushforward_forget, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, SheafOfModules.pushforwardComp_hom_app_val_app, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward. These hits concern analytic compact support or ordinary structure-sheaf pushforward, not the small-etale proper-support functor.",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition and arbitrary base change of the underived proper support pushforward of module sheaves on small etale sites",
+   "results": "Hits: SheafOfModules.pushforwardComp_hom_app_val_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardNatTrans_comp, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatIso_hom Read returned signatures: ordinary scheme properness/descent or structure-sheaf stalks do not identify reduced closed supports or proper-support small-etale stalks.",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-proper-open-interchange-coherence",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-cbc-proper-support-sheaf-composition",
+  "worker": "stage1",
+  "summary": "Constructed the support subsheaf, expanded the omitted support-image argument, proved composition and proper/open specializations, and restricted ordinary pullback using the geometric-fibre stalk formula. Reused existing closed-support geometry. No coefficient restrictions or quasi-compactness assumptions added. Second reading replaced the colimit argument by Zariski zero neighbourhoods and constructed the restricted exchange using the module adjunction.",
+  "blueprint": "Proof, refinement comparison paragraph and final sentence: compatibility of proper and open factors with refinements and pasting; underlying sheaf construction and resolution verification of the proper/open comparison",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic Stalk of an inverse image, compatible with germs of pulled-back sections used for the proper-support sheaf argument; this unit has no replacement statement for this foundational fact."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact used for the proper-support sheaf argument; this unit has no replacement statement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+    "why": "Generic Finite unions and proper preimages of closed subsets proper over a base used for the proper-support sheaf argument; this unit has no replacement statement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "why": "Generic Closed subsets proper over a base: any scheme structure, closed subsets, images used for the proper-support sheaf argument; this unit has no replacement statement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "Generic Separated morphisms are stable under base change (Stacks 01KU (3)) used for the proper-support sheaf argument; this unit has no replacement statement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic Base change of a closed immersion is a closed immersion used for the proper-support sheaf argument; this unit has no replacement statement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-closed-image",
+    "why": "Generic A proper morphism has closed image used for the proper-support sheaf argument; this unit has no replacement statement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-over-separated",
+    "why": "Generic A morphism from a proper scheme to a separated scheme over the same base is proper used for the proper-support sheaf argument; this unit has no replacement statement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic Properness is stable under base change used for the proper-support sheaf argument; this unit has no replacement statement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic Closed immersions are proper used for the proper-support sheaf argument; this unit has no replacement statement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Generic Geometric stalks of extension by zero along an open immersion used for the proper-support sheaf argument; this unit has no replacement statement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "why": "Generic Geometric stalks detect isomorphisms of etale sheaves of sets used for the proper-support sheaf argument; this unit has no replacement statement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "why": "Generic Composition isomorphisms of etale inverse images of sheaves of sets, with units used for the proper-support sheaf argument; this unit has no replacement statement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic Mates of pasted squares and of conjugate-whiskered squares used for the proper-support sheaf argument; this unit has no replacement statement for this foundational fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-proper-closed-image",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-9c488e281",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-9c488e281 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements and source locations in full. All nine steps check against Stacks 0F4X–0F77; locality matches 0CYP/0F4J. Verified the actual pullback comparison, coefficient distinctions against archived master targets, edge cases, duplicate candidates and acyclicity. No repairs needed; concrete checks and accepted tool uses are recorded in review.md."
+ }
 }
