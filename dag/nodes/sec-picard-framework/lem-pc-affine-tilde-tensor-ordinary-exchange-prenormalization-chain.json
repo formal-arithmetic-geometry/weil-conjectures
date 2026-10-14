@@ -1,0 +1,87 @@
+{
+ "id": "lem-pc-affine-tilde-tensor-ordinary-exchange-prenormalization-chain",
+ "kind": "statement",
+ "title": "Ordinary affine exchange in tensor coordinates before localization",
+ "statement": "For the affine square and coefficient chain map k of lem-pc-affine-tilde-tensor-ordinary-exchange-prenormalization, suppose each k_i sends b tensor q to psi(b) tensor q. The ordinary source comparison followed by termwise module base change equals tilde(k), the termwise affine pushforward comparison, and pushforward of the inverse tensor/tilde complex comparison. No invertibility of any derived pullback counit is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "the ordinary adjoint exchange in affine tensor coordinates"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "lem-pc-affine-tilde-tensor-source-comparison",
+  "lem-pc-affine-tilde-pushforward-cohomology-normalization",
+  "def-pc-affine-base-change-tilde-representative-iso",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Transpose degreewise through the tensor-pullback/pushforward adjunction along g. The mate formula for moduleBaseChangeMap becomes the pushforward of the pullback unit along p, with the functorial composition identifications. Apply the tilde adjunction, whose unit identifies module elements with their global sections. The affine pushforward comparison preserves these unit sections, and the chosen tensor/tilde comparisons send them to 1 tensor q. Thus the two transposed maps agree by the given formula for k at 1 tensor q. The tilde adjunction is injective, so this gives the degreewise identity. Cancel the tensor/tilde isomorphisms to restore the ordinary source comparison. Extensionality of chain maps gives the displayed equality. All maps used are the existing comparisons, and this argument covers zero rings and complexes as well.",
+   "uses": [
+    "lem-pc-affine-tilde-tensor-source-comparison",
+    "lem-pc-affine-tilde-pushforward-cohomology-normalization",
+    "def-pc-affine-base-change-tilde-representative-iso",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-tilde-tensor-source-comparison",
+  "lem-pc-affine-tilde-pushforward-cohomology-normalization",
+  "def-pc-affine-base-change-tilde-representative-iso",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "L-only",
+  "date": "2026-10-15",
+  "document": "Stacks Project Tag 08HY",
+  "place": "degreewise mate computation followed by chain-map extensionality",
+  "note": "Completed proof recovered from the earlier U4 route, with the shared original pushforward chain-map definition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "rg",
+   "query": "tilde.toOpen_map_app|exists_tensorPullback_tilde_iso|moduleBaseChangeMap",
+   "results": "The existing tilde adjunction, normalized tensor/tilde unit, and ordinary base-change mate provide the degreewise calculation.",
+   "date": "2026-10-15",
+   "verdict": "Use the library definitions and adjunction API directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchangePreNormalization",
+  "date": "2026-10-15",
+  "group": "L-only"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-tilde-tensor-ordinary-exchange-prenormalization",
+   "place": "ordinary chain-map calculation before derived-unit transport"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchangePreNormalizationChain",
+  "file": "lean/Sheaf/Algebra/Homology/AffineTildeTensorOrdinaryExchangePreNormalizationChain.lean",
+  "declaration": "AlgebraicGeometry.affineTildeTensorOrdinaryExchange_preNormalization_chain",
+  "statement": "theorem affineTildeTensorOrdinaryExchange_preNormalization_chain\n    (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]\n    [Algebra R A] [Algebra R B]\n    (M : CochainComplex (ModuleCat.{u} A) ℤ)\n    (φ : A →+* D) (ψ : B →+* D)\n    (hw : Spec.map (CommRingCat.ofHom φ) ≫\n        Spec.map (CommRingCat.ofHom (algebraMap R A)) =\n      Spec.map (CommRingCat.ofHom ψ) ≫\n        Spec.map (CommRingCat.ofHom (algebraMap R B)))\n    (k : (((ModuleCat.extendScalars (algebraMap R B)).mapHomologicalComplex (.up ℤ)).obj\n        (((ModuleCat.restrictScalars (algebraMap R A)).mapHomologicalComplex\n          (.up ℤ)).obj M)) ⟶\n      ((ModuleCat.restrictScalars ψ).mapHomologicalComplex (.up ℤ)).obj\n        (((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M))\n    (hk : ∀ (i : ℤ) (b : B) (q : M.X i),\n      k.f i (b ⊗ₜ[R,algebraMap R B] q) = ψ b ⊗ₜ[A,φ] q) :\n    let f := Spec.map (CommRingCat.ofHom (algebraMap R A))\n    let g := Spec.map (CommRingCat.ofHom (algebraMap R B))\n    let p := Spec.map (CommRingCat.ofHom φ)\n    let f' := Spec.map (CommRingCat.ofHom ψ)\n    let C := ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M\n    let P := ((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj M\n    let E : SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace) ⥤\n        SheafOfModules.{u} (moduleRings (Spec (.of D)).toRingedSpace) :=\n      Scheme.Modules.tensorPullback p\n    let F' : SheafOfModules.{u} (moduleRings (Spec (.of D)).toRingedSpace) ⥤\n        SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace) :=\n      Scheme.Modules.pushforward f'\n    let : E.Additive := chainPullbackAdditive p\n    let : F'.Additive := chainPushforwardAdditive f'\n    let : (affineTildeFunctor A).Additive := chainTildeAdditive A\n    let : (affineTildeFunctor D).Additive := chainTildeAdditive D\n    let : (E ⋙ F').PreservesZeroMorphisms :=\n      ⟨fun _ _ ↦ by\n        rw [Functor.comp_map, E.map_zero]\n        exact F'.map_zero _ _⟩\n    let δ := affineBaseChangeTildeComplexIso A D φ M\n    let b₀ :\n        (Scheme.Modules.pushforward f ⋙ Scheme.Modules.tensorPullback g) ⟶\n          (E ⋙ F') :=\n      { app := Scheme.Modules.moduleBaseChangeMap f f' g p hw\n        naturality := fun _ _ z ↦\n          Scheme.Modules.moduleBaseChangeMap_naturality f f' g p hw z }\n    let b := (b₀.mapHomologicalComplex (.up ℤ)).app P\n    let a := affineTildePushforwardComplexMap D B ψ C\n    (affineTildeTensorOrdinarySourceIso R A B M).hom ≫ b =\n      (((affineTildeFunctor B).mapHomologicalComplex (.up ℤ)).map k) ≫ a ≫\n        ((F'.mapHomologicalComplex (.up ℤ)).map δ.inv)",
+  "branch": "sheaf-dag",
+  "by": "L-only",
+  "date": "2026-10-15",
+  "declarations": [
+   "AlgebraicGeometry.affineTildePushforwardComplexMap",
+   "AlgebraicGeometry.affineTildeTensorOrdinaryExchange_preNormalization_chain"
+  ]
+ }
+}
