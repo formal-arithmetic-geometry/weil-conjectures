@@ -3,43 +3,152 @@
  "blueprint": {
   "is": "lem-kun-bc-map-on-cohomology",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Cohomology of a derived base-change map",
- "statement": "For a\ncartesian square as in\n[def-weil-pbc-cartesian-square] and a sheaf $F$, the morphism on\n$q$-th cohomology sheaves induced by\n\n$$\ng^{-1}Rf_*F\\longrightarrow Rf'_*(g')^{-1}F\n$$\n\nis the usual base-change morphism\n$g^{-1}R^qf_*F\\to R^qf'_*(g')^{-1}F$.",
+ "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square], with $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$, and $g':X'\\to X$. Let $F$ be an abelian sheaf on $X_{\\Et}$, placed in degree zero in the bounded below derived category. For $q\\in\\mathbf Z$, under the canonical identifications\n$$\n\\mathcal H^q(g^{-1}Rf_*F)\\cong g^{-1}R^qf_*F,\\qquad\n\\mathcal H^q(Rf'_*g'^{-1}F)=R^qf'_*g'^{-1}F,\n$$\nfrom [def-weil-pbc-direct-image], [def-weil-pbc-derived-inverse-image] and [lem-weil-pbc-exact-functor-complex-cohomology], the map $\\mathcal H^q(\\Ex_{\\square,F})$ of the derived exchange [def-weil-pbc-derived-exchange] is the usual higher-direct-image base-change map\n$$\ng^{-1}R^qf_*F\\longrightarrow R^qf'_*g'^{-1}F.\n$$\nHere the usual map is the injective-resolution construction extending the underived exchange [def-weil-pbc-underived-exchange]: apply that exchange termwise to a resolution of $F$, compare its $g'^{-1}$-pullback with a resolution on $X'$, and take degree-$q$ cohomology. For negative $q$ both higher direct images are zero. All coefficients in this statement are abelian groups.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-bc-map-on-cohomology.md",
   "place": "node lem-kun-bc-map-on-cohomology, order 1752"
  },
  "stmt_deps": [
   "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-direct-image"
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-underived-exchange"
  ],
  "proof": [
   {
-   "text": "The derived exchange morphism is, by\n[def-weil-pbc-derived-exchange], the mate of the underived one,\nand the mate construction is natural in the object; applying it to the\ntruncation triangles $\\tau_{\\le n}$ of\n[def-kun-truncations] shows that its $q$-th cohomology sheaf is\nthe map induced by the underived exchange of the sheaf\n$\\mathcal H^q(F)$. That induced map is precisely\n$g^{-1}R^qf_*F\\to R^qf'_*(g')^{-1}F$, by\n[def-weil-pbc-underived-exchange] together with the description of\nhigher direct images in def:weil-pbc-direct-image.",
+   "text": "Choose a K-injective resolution $F[0]\\to I$ and a K-injective resolution $j:g'^{-1}I\\to J$, using [prop-weil-pbc-kinjective-resolutions-exist] with $R=\\mathbf Z$, the abelian-sheaf convention of [def-weil-pbc-kinjective-resolutions]. By [prop-weil-pbc-inverse-image-exact] and [lem-weil-pbc-exact-functor-complex-cohomology], $g'^{-1}(F[0])\\to g'^{-1}I$ is a quasi-isomorphism: its degree-$r$ cohomology is $g'^{-1}$ applied to the isomorphism on degree-$r$ cohomology of $F[0]\\to I$. Thus the composite $g'^{-1}F[0]\\to J$ resolves $g'^{-1}F[0]$. No injectivity of $g'^{-1}I$ is assumed.",
    "uses": [
-    "def-weil-pbc-derived-exchange",
-    "def-kun-truncations",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "def-weil-pbc-kinjective-resolutions",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0736, lemma-base-change-map-flat-case (resolution construction); Tag 07A7, remark-base-change (adjunction mate)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-derived-exchange-termwise] to $K=F[0]$, the resolution $I$ and $j$. It supplies a chain map\n$$e=f'_*(j)\\circ\\Ex^0_{\\square,I}:g^{-1}f_*I\\longrightarrow f'_*J,$$\nand the precise equation $\\Ex_{\\square,F}\\circ\\sigma_{\\rm src}=\\sigma_{\\rm tgt}\\circ Q(e)$ under its canonical resolution identifications. Consequently applying the functor $\\mathcal H^q$ to this equation computes the map in the item by $H^q(e)$ under $H^q(\\sigma_{\\rm src})$ and $H^q(\\sigma_{\\rm tgt})$.",
+   "uses": [
+    "lem-weil-pbc-derived-exchange-termwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0736, lemma-base-change-map-flat-case (resolution construction); Tag 07A7, remark-base-change (adjunction mate)"
+   }
+  },
+  {
+   "text": "Identify the source of $H^q(e)$ with $g^{-1}R^qf_*F$. Indeed [prop-weil-pbc-inverse-image-exact] makes $g^{-1}$ exact, and [lem-weil-pbc-exact-functor-complex-cohomology] gives the cycle-and-boundary comparison\n$$H^q(g^{-1}f_*I)\\cong g^{-1}H^q(f_*I)=g^{-1}R^qf_*F.$$\nThe last equality is the resolution computation in [def-weil-pbc-direct-image]. The same definition, using the resolution of $g'^{-1}F$ in step 1, identifies $H^q(f'_*J)$ with $R^qf'_*g'^{-1}F$. These are the identifications in the statement, since the derived inverse image [def-weil-pbc-derived-inverse-image] is represented by termwise inverse image and its comparison is natural in complexes. For completeness, the negative-degree assertion follows from [lem-weil-pbc-dplus-injective-representative] with $n=0$, separately for $F[0]$ and $g'^{-1}F[0]$. Both have zero cohomology below zero, so each has a representative consisting of injective sheaves and zero terms below zero. By [def-weil-pbc-direct-image] their derived direct images are computed by applying the additive direct-image functor to these representatives. Those complexes are again zero below zero, hence their negative cohomology vanishes.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0736, lemma-base-change-map-flat-case (resolution construction); Tag 07A7, remark-base-change (adjunction mate)"
+   }
+  },
+  {
+   "text": "Write out the resulting map. In degree $q$, a local section $a$ of the cycle subsheaf of $g^{-1}f_*I$ maps to $f'_*(j^q)(\\Ex^0_{\\square,I^q}(a))$; the chain-map equation implies this is a cycle and sends every boundary to a boundary. The map therefore factors through the cokernel of the boundary-subsheaf inclusion into the cycle subsheaf, which is the cohomology sheaf. Its formula on locally represented classes is $[a]\\mapsto[f'_*(j^q)(\\Ex^0_{\\square,I^q}(a))]$. This is a statement about the quotient sheaf; it does not assert that every section of cohomology has a global cycle representative. Here [def-weil-pbc-underived-exchange] says that $\\Ex^0$ restricts sections along $X'\\times_{Y'}V\\to X\\times_YW$, followed by sheafification. Thus this quotient map is exactly the usual resolution recipe stated above: restrict by the underived exchange and then compare resolutions. Together with steps 2 and 3 this proves the asserted equality, without substituting the sheaf $\\mathcal H^q(F)$ for $F$. The formula is valid in all degrees; for $q<0$ the zero higher direct images give the unique zero-to-zero map.",
+   "uses": [
     "def-weil-pbc-underived-exchange"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0736, lemma-base-change-map-flat-case (resolution construction); Tag 07A7, remark-base-change (adjunction mate)"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-derived-exchange",
-  "def-kun-truncations",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "def-weil-pbc-kinjective-resolutions",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-derived-exchange-termwise",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-dplus-injective-representative",
   "def-weil-pbc-underived-exchange"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-bc-map-on-cohomology.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0736, lemma-base-change-map-flat-case (resolution construction); Tag 07A7, remark-base-change (adjunction mate)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology of the derived base change morphism for etale sheaves agrees with the higher direct image base change map",
+   "results": "KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not identify the etale derived mate with the resolution base-change map"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "results": "CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.instIsIsoAppToRightDerivedZero, CategoryTheory.NatTrans.rightDerived",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not identify the etale derived mate with the resolution base-change map"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*(homology|cohomology)|(homology|cohomology).*baseChange",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not identify the etale derived mate with the resolution base-change map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image commutes with cohomology and the derived adjunction mate is computed by an injective resolution and termwise exchange",
+   "results": "CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not identify the etale derived mate with the resolution base-change map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of derived base change equals higher direct image base change for sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*(exchange|base.change)|(exchange|base.change).*derived",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not identify the etale derived mate with the resolution base-change map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between direct image functors induces the base change morphism on right derived functors via injective resolutions",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.NatTrans.rightDerived, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match: RightDerived.lean:244-249 derives a transformation between functors with the same domain and codomain; it does not compare the mixed inverse/direct-image mate with the independently constructed base-change map"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived_app_eq|baseChange.*[Hh]omology|[Hh]omology.*baseChange",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: RightDerived.lean:244-249 derives a transformation between functors with the same domain and codomain; it does not compare the mixed inverse/direct-image mate with the independently constructed base-change map"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -68,5 +177,49 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-bc-map-on-cohomology",
+  "worker": "stage1",
+  "summary": "Replaced unsupported truncation argument by the existing resolution and termwise exchange comparison, exact inverse-image cohomology comparison, and explicit cycle quotient formula. Clarified abelian coefficients, degree-zero embedding, and the meaning of usual base change. No new nodes.",
+  "blueprint": "Proof paragraph: replace the unsupported claim about truncations and H^q(F) by the termwise resolution argument; retain the mate and underived-exchange route.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "Provides resolutions of complexes on the two sites; the unit has no resolution existence statement."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Supplies exactness of scheme inverse images; the unit has no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Identifies cohomology of termwise inverse image naturally, with cycles and boundaries; generic exact-functor tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-exchange-termwise",
+    "why": "Computes the adjunction mate on resolutions; it is the existing general comparison tool needed to repair the imported argument."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Produces nonnegative injective representatives to verify negative higher direct images vanish; generic abelian-category resolution tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-derived-exchange-termwise",
+  "lem-weil-pbc-dplus-injective-representative"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NQ-4ce5efd92",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-4ce5efd92 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, unit/chapter route, and Stacks Tags 0736/07A7. Verified the resolution comparison, canonical cohomology identifications, coefficient scope, edge cases, and absence of dependency cycles. No new nodes or repairs; accepted all five declared tool uses. Detailed checks are in review.md."
+ }
 }
