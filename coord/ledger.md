@@ -14291,3 +14291,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:25 L: merged deliver/V1/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T022552-L-4048095 (proof); batch 20261014T022537; modules 1; new nodes 0)
 - 02:25 L: merged deliver/V1/Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling (stage 3; reviewer PASS; first push; landing 20261014T022553-L-4048257 (proof); batch 20261014T022537; modules 1; new nodes 0)
 - 02:25 L: merged deliver/V1/Sheaf.RingTheory.ZariskisMainAway (stage 3; reviewer PASS; first push; landing 20261014T022553-L-4048405 (proof); batch 20261014T022537; modules 1; new nodes 0)
+- 02:25 L: merged deliver/W2/Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker (stage 3; reviewer PASS; after a return; landing 20261014T022553-L-4048584 (proof); batch 20261014T022537; modules 1; new nodes 0)
