@@ -32,9 +32,103 @@
   "def-pc-reduced-scheme",
   "def-weil-connected-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The field k is Noetherian: its only ideals are 0 and k. By def-weil-affine-spectrum its spectrum is a one-point affine scheme with section ring k; this single affine chart is a locally Noetherian cover by pqf-def-locnoeth, and the one-point space is quasi-compact. Thus Spec k is Noetherian in the sense of lem-weil-pbc-finite-type-over-noetherian. Properness includes finite type, so that lemma applied to the structure morphism gives that X is Noetherian, in particular locally Noetherian.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-affine-spectrum",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, label lemma-finite-type-noetherian; used in the finiteness argument of Tag 0BUG"
+   }
+  },
+  {
+   "text": "The structure sheaf is quasi-coherent and of finite type: on an affine open Spec R it is the sheaf associated to the rank-one free R-module R, and the identity O_X -> O_X is a one-generator presentation. By pqf-lem-coherent-ft-locnoeth and step 1, O_X is coherent. Apply the affine-base clause of lem-pc-coherent-hi to X -> Spec k and F=O_X, with i=0. Thus A=Gamma(X,O_X) is a finite-dimensional k-vector space.",
+   "uses": [
+    "pqf-def-coherent",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-coherent-hi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XZ, label lemma-coherent-Noetherian; Tag 02O6, label lemma-proper-over-affine-cohomology-finite; Tag 0BUG proof of (1)"
+   }
+  },
+  {
+   "text": "Suppose X is nonempty and write d=dim_k A. Any finite partition of X into r nonempty clopen subsets has r<=d: glue the section 1 on the j-th part and 0 elsewhere to obtain e_j in A. If sum a_j e_j=0, taking the germ at a point of the j-th part gives a_j=0, since the unital map from the field k to its nonzero local ring is injective. Thus the e_j are linearly independent. The possible partition sizes form a nonempty subset of {1,...,d} (the partition {X} exists); choose one of largest size. Every part is connected: a disconnection of a part into two nonempty relatively clopen subsets is a clopen refinement in X, contradicting maximal size.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BUG, label lemma-proper-geometrically-reduced-global-sections, proof of (2): idempotent sections from clopen decompositions; the finite-dimensional bound spells out finiteness without a separate topological decomposition theorem"
+   }
+  },
+  {
+   "text": "Each piece U of the partition in step 3 is a maximal nonempty connected subset of X. Indeed, any connected subset meeting U and its complement would be disconnected by those two clopen sets. A connected subset containing U is therefore contained in U, so equals U; conversely any maximal connected subset meeting U is contained in U and hence equals U by maximality, since U is connected. The partition pieces are exactly C. Consequently C is finite and every member is open and closed.",
+   "uses": [
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BUG, label lemma-proper-geometrically-reduced-global-sections, proof of (2), identification with connected components"
+   }
+  },
+  {
+   "text": "For c in C let B_c=Gamma(c,O_X|_c). Restriction A -> B_c is surjective: any section on c extends by zero over X minus c, by the sheaf gluing axiom. Hence B_c is finite-dimensional over k, being a linear quotient of A. It is reduced by def-pc-reduced-scheme applied to the open c. It is nonzero since c contains a point and its section ring maps unitally to the nonzero local ring there. Since c is connected and nonempty, lem-pc-scheme-connected-iff-idempotents gives that B_c has only idempotents 0 and 1. All hypotheses of lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one now hold (k algebraically closed, B_c commutative, finite-dimensional, reduced and nonzero); its conclusion says the actual structure map rho_c:k -> B_c is bijective.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-reduced-scheme",
+    "lem-pc-scheme-connected-iff-idempotents",
+    "lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BUG, label lemma-proper-geometrically-reduced-global-sections, proof of (2), (3), and the finite-extension specialization over an algebraically closed field"
+   }
+  },
+  {
+   "text": "Restriction gives a k-algebra isomorphism A -> product_{c in C} B_c: injectivity is sheaf uniqueness on the clopen cover, and surjectivity is sheaf gluing since distinct members have empty intersection. Composing its inverse with the coordinate structure maps rho_c of step 5 gives product_{c in C} k -> A. Its restriction on c sends (a_b) to rho_c(a_c), so it is exactly the map of constant sections in the statement, and it is an isomorphism. If X is empty, it has no nonempty connected subset, C is empty, and the sheaf axiom for the empty covering gives a unique section on X. Thus A is the zero ring, as is the empty product, and the same map is the unique isomorphism between them.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BUG, label lemma-proper-geometrically-reduced-global-sections, clauses (1)-(3) and their proof; the sheaf gluing description specifies the canonical algebra map and includes n=0"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-affine-spectrum",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-def-coherent",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-coherent-hi",
+  "def-pc-scheme",
+  "def-weil-connected-scheme",
+  "def-pc-reduced-scheme",
+  "lem-pc-scheme-connected-iff-idempotents",
+  "lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BUG, label lemma-proper-geometrically-reduced-global-sections, proof of (1)-(3); finite-dimensional clopen refinement replaces the Artinian decomposition and the Noetherian component argument, using the existing connected algebra lemma"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -98,15 +192,94 @@
    "results": "{\"t\": \"2026-10-14T08:59:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsProper\\\", \\\"ConnectedComponents\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "globalSections.*(product|connected|IsAlgClosed)|isAlgClosed.*globalSections|connectedComponents.*(sections|proper)",
+   "results": "{\"t\": \"2026-10-14T09:20:30Z\", \"tool\": \"grep\", \"query\": \"globalSections.*(product|connected|IsAlgClosed)|isAlgClosed.*globalSections|connectedComponents.*(sections|proper)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of proper reduced scheme over algebraically closed field product of fields",
+   "results": "{\"t\": \"2026-10-14T09:20:30Z\", \"tool\": \"leansearch\", \"query\": \"Global sections of proper reduced scheme over algebraically closed field product of fields\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced proper scheme over an algebraically closed field has global functions equal to a product of copies of the field indexed by its connected components",
+   "results": "{\"t\": \"2026-10-14T09:20:30Z\", \"tool\": \"leanfinder\", \"query\": \"A reduced proper scheme over an algebraically closed field has global functions equal to a product of copies of the field indexed by its connected components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\", \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"AlgebraicGeometry.pointsPi_surjective\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\"], \"digest\": \"04f7f31d270d167f\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsReduced\"",
+   "results": "{\"t\": \"2026-10-14T09:20:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsProper\\\", \\\"IsReduced\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a complete reduced algebraic scheme are the finite algebra of locally constant scalar functions",
+   "results": "{\"t\": \"2026-10-14T09:20:31Z\", \"tool\": \"leanfinder\", \"query\": \"Global sections of a complete reduced algebraic scheme are the finite algebra of locally constant scalar functions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineOpen.instAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecPresheafOpOpens\", \"AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral\", \"AlgebraicGeometry.ΓRestrictAlgebra\", \"AlgebraicGeometry.StructureSheaf.to_global_factors_apply\", \"AlgebraicGeometry.ΓSpec.toSpecΓ_of\", \"AlgebraicGeometry.StructureSheaf.exists_const\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso\", \"AlgebraicGeometry.StructureSheaf.toOpen_eq_const\"], \"digest\": \"5c15f4b10dc40135\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proper-flat-geometric-components-locally-constant",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "worker": "stage1",
+  "summary": "Read 0BUG (1)-(3), 01T6, 01XZ and 02O6. No whole-item Lean attachment exists. Reused all finiteness, coherence, connectedness and algebra inputs; no new nodes. Made finiteness and clopenness explicit using linearly independent indicator sections and a maximal finite partition. Checked every algebra lemma hypothesis and the canonical map, including the empty scheme. Corrected doubled TeX escapes only; the mathematical statement is unchanged.",
+  "blueprint": "Realizes the 0BUG global-functions input in the ancestor thm-weil-pbc-direct-image-finiteness-proper constructibility branch, as expanded through 0GKX/0GK7 and the proper flat geometric component argument: finiteness, clopen connected components, and the product algebra. This is an auxiliary node, not the key statement of sk-thm-properbasechange.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Finite type over the Noetherian field makes X locally Noetherian for coherence; no lemma in the item gives this general finiteness tool."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Converts the explicit rank-one quasi-coherent finite-type structure sheaf to a coherent module; needed by the source 02O6 route."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "The affine-base i=0 clause gives finite-dimensional global sections, exactly the 02O6 input used by 0BUG."
+   },
+   {
+    "node": "lem-pc-scheme-connected-iff-idempotents",
+    "why": "Gives only trivial idempotents on each nonempty connected clopen piece; a generic scheme tool, not a substitute for the unit route."
+   },
+   {
+    "node": "lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one",
+    "why": "The algebraic finite reduced connected-algebra calculation gives the bijective coordinate structure map after the partition is constructed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-coherent-hi",
+  "lem-pc-scheme-connected-iff-idempotents",
+  "lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-0de6e5607",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-0de6e5607 (reviewer sub-agent of L); spot-checked: Read all six steps, cited statements, unit/chapter route and source passages, including Stacks 0BUG, 01T6, 01XZ and 02O6. Hypotheses, clopen-component argument, canonical algebra map and empty case check out; no new nodes or repairs. Accepted five declared tool uses. review.md records an inherited downstream coherence cycle that does not involve this item."
+ }
 }
