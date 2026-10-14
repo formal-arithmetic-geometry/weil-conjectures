@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-open-section-clopen",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "An open section is also closed",
@@ -12,29 +12,175 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-open-section-clopen.md",
   "place": "node lem-weil-pbc-open-section-clopen, order 1477"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
  "proof": [
   {
-   "text": "The identity of $S$ is a closed immersion, so\n[lem-weil-pbc-closed-immersion-from-composite] makes $s$ a\nclosed immersion. It is already an open immersion; the two immersion\nnotions of [def-weil-pbc-scheme-conventions] therefore identify\n$S$ with an open and closed subscheme of $V$. Its complement is\nopen, and the two disjoint opens cover $V$.",
+   "text": "The identity of $S$ is a closed immersion: its underlying map is a homeomorphism onto the whole (closed) space and its map on structure sheaves is the identity, hence surjective [def-weil-closed-immersion]. Since $p$ is separated and $p\\circ s=\\operatorname{id}_S$, apply [lem-weil-pbc-closed-immersion-from-composite] with $T=S$ and $r=s$ to conclude that $s$ is a closed immersion. Its image $U=s(S)$ is therefore closed by [def-weil-closed-immersion]; it is open, and $S$ is isomorphic to the open subscheme $(U,\\mathcal O_V|_U)$, by the hypothesis and [def-weil-open-immersion].",
    "uses": [
     "lem-weil-pbc-closed-immersion-from-composite",
-    "def-weil-pbc-scheme-conventions"
+    "def-weil-proper-morphism",
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KT, label lemma-section-immersion, separated-section assertion"
+   }
+  },
+  {
+   "text": "Let $W=V\\setminus U$. Since $U$ is closed, $W$ is open and has its open-subscheme structure $(W,\\mathcal O_V|_W)$. The equalities $U\\cap W=\\varnothing$ and $U\\cup W=V$ follow from the definition of complement. Thus the two open subschemes form a disjoint open cover of $V$. On each member the map to $V$ is the inclusion and the structure sheaf is its restriction; the inverse on underlying spaces sends each point to its unique member of the cover and is continuous because both members are open. For each open $A\\subseteq V$, the sheaf axiom for the disjoint cover gives $\\mathcal O_V(A)\\cong\\mathcal O_V(A\\cap U)\\times\\mathcal O_V(A\\cap W)$, compatibly with restriction, so the inclusion map is also an isomorphism on structure sheaves. This identifies their disjoint union with $V$, giving $V=s(S)\\amalg(V\\setminus s(S))$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-open-section-clopen.md",
+    "place": "Proof, final sentence: complement open and two disjoint opens cover V (elementary expansion)"
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-immersion-from-composite",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-from-composite"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-open-section-clopen.md",
-  "place": "## Proof"
+  "place": "Proof paragraph, expanded using Stacks 01KT (schemes.tex, lemma-section-immersion)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An open immersion section of a separated scheme morphism has open and closed image",
+   "results": "['AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated', 'AlgebraicGeometry.instIsClosedImmersionLiftCoborder', 'AlgebraicGeometry.Scheme.Hom.isLocallyClosed_range', 'AlgebraicGeometry.Scheme.Hom.opensRange', 'AlgebraicGeometry.Scheme.Hom.coborderRange', 'AlgebraicGeometry.IsImmersion.isLocallyClosed_range', 'AlgebraicGeometry.IsClosedImmersion.of_comp', 'AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated'] ",
+   "date": "2026-10-14",
+   "verdict": "No single exact match for the full statement; cancellation is already carried by the existing cited node."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, AlgebraicGeometry.IsClosedImmersion",
+   "results": "['AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated', 'AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion', 'AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal', 'AlgebraicGeometry.IsClosedImmersion.of_comp', 'AlgebraicGeometry.IsSeparated.mk', 'AlgebraicGeometry.isSeparated_iff', 'AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId', 'AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme'] ",
+   "date": "2026-10-14",
+   "verdict": "No single exact match for the full statement; cancellation is already carried by the existing cited node."
+  },
+  {
+   "tool": "grep",
+   "query": "isClopen_range|isClosedImmersion_of_comp|section.*closed",
+   "results": "['Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean', 'Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean', 'Mathlib/AlgebraicGeometry/Group/Abelian.lean', 'Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean', 'Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean', 'Mathlib/AlgebraicGeometry/Scheme.lean', 'Mathlib/AlgebraicGeometry/Stalk.lean', 'Mathlib/AlgebraicGeometry/Stalk.lean'] ",
+   "date": "2026-10-14",
+   "verdict": "No single exact match for the full statement; cancellation is already carried by the existing cited node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open section of a separated morphism of schemes is closed",
+   "results": "[] service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of a separated morphism is a closed immersion and if it is open its image gives a disjoint open decomposition",
+   "results": "['AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift', 'AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated', 'AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated', 'AlgebraicGeometry.isSeparated_iff', 'AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion', 'AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId', 'AlgebraicGeometry.IsSeparated', 'AlgebraicGeometry.Scheme.isSeparated_iff'] ",
+   "date": "2026-10-14",
+   "verdict": "No single exact match for the full statement; cancellation is already carried by the existing cited node."
+  },
+  {
+   "tool": "grep",
+   "query": "of_comp|isClopen|coprodIso|iso.*[Cc]oprod",
+   "results": "['242', '248', '254', '256', '259'] ",
+   "date": "2026-10-14",
+   "verdict": "No single exact match for the full statement; cancellation is already carried by the existing cited node."
+  },
+  {
+   "tool": "grep",
+   "query": "isClopen_range|[Ii]so.*[Cc]oprod|[Cc]oprod.*[Ii]so",
+   "results": "['Mathlib/AlgebraicGeometry/Modules/Tilde.lean', 'Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean', 'Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean', 'Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean', 'Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean', 'Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean', 'Mathlib/AlgebraicGeometry/Normalization.lean', 'Mathlib/AlgebraicGeometry/Normalization.lean'] ",
+   "date": "2026-10-14",
+   "verdict": "No single exact match for the full statement; cancellation is already carried by the existing cited node."
+  },
+  {
+   "tool": "grep",
+   "query": "of_section_of_isSeparated|isClopen_range|iso.*[Dd]isjoint|[Cc]oprod.*[Oo]pen",
+   "results": {
+    "t": "2026-10-14T09:48:16Z",
+    "tool": "grep",
+    "query": "of_section_of_isSeparated|isClopen_range|iso.*[Dd]isjoint|[Cc]oprod.*[Oo]pen",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Geometry/Manifold/PartitionOfUnity.lean",
+     "Mathlib/FieldTheory/LinearDisjoint.lean",
+     "Mathlib/FieldTheory/LinearDisjoint.lean",
+     "Mathlib/FieldTheory/LinearDisjoint.lean",
+     "Mathlib/FieldTheory/LinearDisjoint.lean",
+     "Mathlib/FieldTheory/LinearDisjoint.lean",
+     "Mathlib/Topology/Algebra/Order/Archimedean.lean",
+     "Mathlib/Topology/Algebra/WithZeroTopology.lean"
+    ],
+    "digest": "a42334d734cfbeb3"
+   },
+   "date": "2026-10-14",
+   "verdict": "Second reading: cancellation matches the existing cited node; complementary-open coproduct facts corroborate the elementary decomposition. No exact full-statement match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion.of_comp\"",
+   "results": {
+    "t": "2026-10-14T09:48:30Z",
+    "tool": "loogle",
+    "query": "\"IsClosedImmersion.of_comp\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsClosedImmersion.of_comp_isClosedImmersion",
+     "AlgebraicGeometry.IsClosedImmersion.of_comp"
+    ],
+    "digest": "e017a7864dcfd417"
+   },
+   "date": "2026-10-14",
+   "verdict": "Second reading: cancellation matches the existing cited node; complementary-open coproduct facts corroborate the elementary decomposition. No exact full-statement match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme is the coproduct of the restrictions to two complementary open subsets",
+   "results": {
+    "t": "2026-10-14T09:48:42Z",
+    "tool": "leanfinder",
+    "query": "A scheme is the coproduct of the restrictions to two complementary open subsets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.isCompl_opensRange_inl_inr",
+     "AlgebraicGeometry.nonempty_isColimit_binaryCofanMk_of_isCompl",
+     "AlgebraicGeometry.isCompl_range_inl_inr",
+     "AlgebraicGeometry.coprodOpenCover",
+     "AlgebraicGeometry.nonempty_isColimit_cofanMk_of",
+     "AlgebraicGeometry.sigmaOpenCover",
+     "AlgebraicGeometry.sigmaOpenCover_X",
+     "AlgebraicGeometry.sigmaOpenCover_f"
+    ],
+    "digest": "5e2c8c0b125e5e6e"
+   },
+   "date": "2026-10-14",
+   "verdict": "Second reading: cancellation matches the existing cited node; complementary-open coproduct facts corroborate the elementary decomposition. No exact full-statement match."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -57,5 +203,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-open-section-clopen",
+  "worker": "stage1",
+  "summary": "Checked imported proof against Stacks Lemma section-immersion (01KT). Used existing closed-immersion cancellation and made complement argument explicit.",
+  "blueprint": "Realizes source proof: section closed, then open complement decomposition.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-from-composite",
+    "why": "Step 1 uses separated postcomposition cancellation with r=s and p composed with s=id_S. This is a generic scheme-morphism tool explicitly cited by the master blueprint proof; sk-def-sf-operations has no proof steps or cited units supplying cancellation, and no six-operation or comparison argument is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-from-composite"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-d5bae983b",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-d5bae983b (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, master blueprint route, and source locations including Stacks 01KT. Both proof steps are valid, including the scheme decomposition and empty cases. Repaired one missing split_report.tool_uses declaration for the off-unit cancellation lemma; corrected whole JSON and concrete checks are in fixes/ and review.md. No new nodes or target weakening.; 1 file(s) fixed by the reviewer"
+ }
 }
