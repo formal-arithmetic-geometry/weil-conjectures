@@ -14666,3 +14666,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:55 L: returned deliver/F1/Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCoreParts (reviewer RETURN: (reviewer X-1dea9, head 1dea9de17) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Ab)
 
 - 13:59 L: batch 20261014T054718 dependency take-out
+- 06:03 L: returned deliver/S1/Sheaf.AlgebraicGeometry.AlgebraTensorPullbackComparison (reviewer RETURN: (reviewer X-cfdb2, head cfdb205fd) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Al)
