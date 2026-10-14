@@ -1,0 +1,88 @@
+{
+ "id": "lem-weil-pbc-geonormal-dim-one-smooth",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7). Auxiliary input: Tag 0GK5, label lemma-dim-1-projective-completion-after-insep, assertions (1)-(5); normalization interpreted componentwise as in its normalization section; proof of 0GK5: geonormal-dim-one-smooth",
+   "via": [
+    "lem-weil-pbc-field-curve-completion-insep",
+    "lem-weil-pbc-good-curves-generic-diagram",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Geonormal dim one smooth",
+ "statement": "Let $k$ be a field [def-weil-field] and $Z$ a finite type $k$-scheme [def-pc-scheme, def-weil-pbc-scheme-conventions] with $\\dim Z\\le1$ [def-kun-topological-krull-dimension]. Suppose $Z$ is geometrically normal: every local ring of $Z_L=Z\\times_k\\operatorname{Spec}L$ is an integrally closed domain [def-weil-pbc-normal-ring, def-pc-fibre-product] for every field extension $L/k$. Then $Z$ is smooth [def-sbc-smooth-morphisms] and geometrically reduced over $k$ [def-pc-geometrically-irreducible]. Moreover, for any field extension $L/k$, if $Z_L$ is connected and nonempty [def-weil-connected-scheme], then $Z_L$ is irreducible [def-weil-irreducible-components].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0BX2 (properties.tex, lemma-normal-dimension-1-regular), 038X (lemma-geometrically-regular-smooth), 00P3 (algebra.tex, lemma-dimension-preserved-field-extension), 033M (properties.tex, lemma-normal-Noetherian)"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-normal-ring",
+  "def-pc-fibre-product",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-weil-connected-scheme",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A geometrically normal finite type scheme of dimension at most one is smooth and its connected geometric fibres are irreducible",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsIntegral X ↔ IrreducibleSpace ↥X ∧ AlgebraicGeometry.IsReduced X\", \"doc\": \"A scheme $X$ is integral if and only if it is irreducible as a topological space and reduced (i.e., all its local rings have no nonzero nilpotent elements).\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], IrreducibleSpace ↥X\", \"doc\": \"Every integral scheme has an irreducible underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.affine_isIntegral_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (R : CommRingCat), AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Spec R) ↔ IsDomain ↑R\", \"doc\": \"The affine scheme $\\\\operatorname{Spec}(R)$ is integral if and only if the commutative ring $R$ is a domain (i.e., has no zero divisors).\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsReduced X] [H : IrreducibleSpace ↥X],\\n  AlgebraicGeometry.IsIntegral X\", \"doc\": \"If a scheme $X$ is irreducible as a topological space and has no nonzero nilpotent elements in its structure sheaf (i.e., is reduced), then $X$ is an integral scheme.\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometrically normal curves are geometrically regular and smooth; connected normal Noetherian schemes are irreducible",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsIntegral X ↔ IrreducibleSpace ↥X ∧ AlgebraicGeometry.IsReduced X\", \"doc\": \"A scheme $X$ is integral if and only if it is irreducible as a topological space and reduced (i.e., all its local rings have no nonzero nilpotent elements).\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsReduced X] [H : IrreducibleSpace ↥X],\\n  AlgebraicGeometry.IsIntegral X\", \"doc\": \"If a scheme $X$ is irreducible as a topological space and has no nonzero nilpotent elements in its structure sheaf (i.e., is reduced), then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], IrreducibleSpace ↥X\", \"doc\": \"Every integral scheme has an irreducible underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.affine_isIntegral_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (R : CommRingCat), AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Spec R) ↔ IsDomain ↑R\", \"doc\": \"The affine scheme $\\\\operatorname{Spec}(R)$ is integral if and only if the commutative ring $R$ is a domain (i.e., has no zero divisors).\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {R : CommRingCat} [IsDomain ↑R], AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Spec R)\", \"doc\": \"For any commutative ring $ R $ that is a domain (i.e., has no zero divisors), the scheme $ \\\\operatorname{Spec}(R) $ constructed from the prime spectrum of $ R $ is an integral scheme. This means $ \\\\op\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"IsRegular\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Gg]eometrically[Nn]ormal|[Gg]eometrically_normal|[Nn]ormal.*[Dd]imension",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/KrullTopology.lean\", \"line\": \"160\", \"text\": \"  simp only [normalClosure.is_finiteDimensional K E L, normalClosure.normal K E L, true_and]\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Basic.lean\", \"line\": \"36\", \"text\": \"theorem Normal.exists_isSplittingField [h : Normal F K] [FiniteDimensional F K] :\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/GaloisClosure.lean\", \"line\": \"115\", \"text\": \"    normalClosure.is_finiteDimensional k (IntermediateField.adjoin k (s : Set K)) K\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/PartitionOfUnity.lean\", \"line\": \"504\", \"text\": \"/-- Given two disjoint closed sets `s, t` in a Hausdorff normal σ-compact finite-dimensional\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/PartitionOfUnity.lean\", \"line\": \"522\", \"text\": \"/-- Given two sets `s, t` in a Hausdorff normal σ-compact finite-dimensional manifold `M`\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"431\", \"text\": \"noncomputable def normalAutEquivQuotient [FiniteDimensional K L] [IsGalois K L]\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"437\", \"text\": \"lemma normalAutEquivQuotient_apply [FiniteDimensional K L] [IsGalois K L]\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"159\", \"text\": \"    finiteDimensional := normalClosure.is_finiteDimensional k L K\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"252\", \"text\": \"    finiteDimensional := normalClosure.is_finiteDimensional k M K\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"line\": \"535\", \"text\": \"See also `Ideal.smithNormalForm`, which moreover proves that the dimension of\"}\n  {\"file\": \"Mathlib/FieldTheory/NormalizedTrace.lean\", \"line\": \"68\", \"text\": \"private theorem normalizedTraceAux_eq_of_finiteDimensional [FiniteDimensional F K] (a : K) :\"}\n  {\"file\": \"Mathlib/FieldTheory/NormalizedTrace.lean\", \"line\": \"96\", \"text\": \"      normalizedTraceAux_eq_of_finiteDimensional F a',\"}\n  {\"file\": \"Mathlib/FieldTheory/NormalizedTrace.lean\", \"line\": \"97\", \"text\": \"      normalizedTraceAux_eq_of_finiteDimensional F b',\"}\n  {\"file\": \"Mathlib/FieldTheory/NormalizedTrace.lean\", \"line\": \"98\", \"text\": \"      normalizedTraceAux_eq_of_finiteDimensional F ab',\"}\n  {\"file\": \"Mathlib/FieldTheory/NormalizedTrace.lean\", \"line\": \"110\", \"text\": \"      normalizedTraceAux_eq_of_finiteDimensional F a',\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean\", \"line\": \"182\", \"text\": \"lemma isZero_normalizedChainComplex_X_of_hasDimensionLT (n d : ℕ) [X.HasDimensionLT d]\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean\", \"line\": \"252\", \"text\": \"  exact .of_isZero (X.isZero_normalizedChainComplex_X_of_hasDimensionLT R n d)\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/PiL2.lean\", \"line\": \"44\", \"text\": \"- `Basis.toOrthonormalBasis`: constructs an `OrthonormalBasis` for a finite-dimensional\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/PiL2.lean\", \"line\": \"50\", \"text\": \"- `exists_orthonormalBasis`: provides an orthonormal basis on a finite-dimensional vector space\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/PiL2.lean\", \"line\": \"390\", \"text\": \"/-- An orthonormal basis on E is an identification of `E` with its dimensional-matching\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/ExteriorPower.lean\", \"line\": \"140\", \"text\": \"/-- An orthonormal basis of a finite-dimensional real inner product space `E` induces an\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Orientation.lean\", \"line\": \"74\", \"text\": \"/-- Two orthonormal bases with the same orientation determine the same \\\"determinant\\\" top-dimensional\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Projection/FiniteDimensional.lean\", \"line\": \"406\", \"text\": \"/-- An orthonormal set in a finite-dimensional `InnerProductSpace` is maximal, if and only if it\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Projection/FiniteDimensional.lean\", \"line\": \"408\", \"text\": \"theorem maximal_orthonormal_iff_basis_of_finiteDimensional (hv : Orthonormal 𝕜 ((↑) : v → E)) :\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/InnerProductSpace.lean\", \"line\": \"89\", \"text\": \"/-- The Haar measure defined by any orthonormal basis of a finite-dimensional inner product space\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A geometrically normal finite type scheme of dimension at most one is smooth and its connected geometric fibres are irreducible",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-field-curve-completion-insep",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}
