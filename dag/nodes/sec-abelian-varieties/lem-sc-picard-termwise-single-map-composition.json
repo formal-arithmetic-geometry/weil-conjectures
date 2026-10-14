@@ -17,22 +17,27 @@
  },
  "proof": [
   {
-   "text": "Expand the constructed termwise single map. Cancel the forward and inverse single images of leftAdjointUniq. The remaining map is the pinned homotopy counit followed by the quotient of singleMapHomologicalComplex.",
+   "text": "Eliminate ht by equality induction. Expand picardTermwiseSingleMap and canonicalSinglePullbackMap; functoriality cancels the single images of the unique-adjoint comparison and its inverse. The result is the pinned homotopy counit followed by the quotient of the tensor-pullback single-complex comparison.",
    "uses": [
     "lem-pc-canonical-single-pullback-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Evaluate the defining leftDerivedLift counit factorization of the pinned derived composition at the homotopy single of M. Naturality of the second counit moves the first single comparison through it; the single-complex composition calculation identifies the termwise comparison. Equivalently use canonicalSinglePullbackComposition and cancel the ordinary-to-tensor target comparisons.",
+   "text": "Evaluate the defining leftDerivedLift factorization of the pinned derived composition at the homotopy single of M, using Functor.leftDerived_fac_app. The resulting equation is c.hom;epsilon_(i;t) = Li(epsilon_t);epsilon_i;Qh(delta). The definition of tensorPullbackCompositionIso and inverse conjugate-isomorphism identities identify delta with the inverse tensor composition comparison.",
    "uses": [
-    "lem-pc-canonical-single-pullback-composition",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-tensor-pullback-composition-iso"
    ],
    "elementary": false
   },
   {
-   "text": "Expand picardTermwiseCounit and use naturality of quotientCompQhIso to express the homotopy equality on complexes. Its identity quotient factors cancel. The resulting source restriction is exactly the single of tensorPullbackCompositionIso followed by the inverse single comparison. Transport along ht; proof irrelevance identifies its equality transports. Zero modules and empty schemes use the same categorical equations.",
+   "text": "Prove compatibility of singleMapHomologicalComplex with termwise composition by HomologicalComplex.to_single_hom_ext, evaluating at degree zero. Postcompose that equation with the single of the tensor composition comparison and the inverse single comparison for i. Cancel the two isomorphism pairs, then map the resulting equation through the homotopy and derived quotients. Substitute it into the counit factorization and apply naturality of epsilon_i to the single comparison for t.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Expand picardTermwiseCounit: quotientCompQhIso and mapHomotopyCategoryFactors have identity components, so its component is the pinned homotopy counit in complex coordinates. This and the normalization in the first step identify the factorization-and-naturality equality with the required equation. No counit is canceled or inverted.",
    "uses": [
     "def-sc-picard-termwise-models"
    ],
@@ -41,15 +46,15 @@
  ],
  "proof_deps": [
   "lem-pc-canonical-single-pullback-comparison",
-  "lem-pc-canonical-single-pullback-composition",
-  "def-sc-picard-termwise-models",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-tensor-pullback-composition-iso",
+  "def-sc-picard-termwise-models"
  ],
  "proof_origin": {
-  "by": "agent K3",
-  "document": "Stacks Project",
-  "place": "Tags 06YJ and 0D5S",
-  "description": "Agent-written complex-coordinate calculation of the defining counit factorization, following the existing canonicalSinglePullbackComposition proof."
+  "by": "agent J4",
+  "document": "Stacks Project; Mathlib derived-functor and single-complex API",
+  "place": "Tags 06YJ and 0D5S; Functor.leftDerived_fac_app; HomologicalComplex.to_single_hom_ext",
+  "description": "Direct pinned counit factorization followed by a proved single-complex composition calculation and naturality; no ordinary-pullback composition theorem."
  },
  "mathlib_searches": [
   {
@@ -162,13 +167,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K3",
+  "reviewer": "X-7123f",
+  "group": "J4",
   "result": "pass",
-  "landing": "20261013T145121-L-696515",
+  "landing": "20261014T001723-L-2551257",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module, theorem statement, definition body, node, report, and change record matched the packet and baseline; delivery and both direct importers compiled successfully."
  }
 }

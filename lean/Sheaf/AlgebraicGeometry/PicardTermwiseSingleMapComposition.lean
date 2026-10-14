@@ -7,7 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardTermwiseModels
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
-import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComposition
 
 /-! # Composition of the canonical termwise single map
 
@@ -23,6 +22,103 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 noncomputable section
+
+attribute [local implicit_reducible] CochainComplex.singleFunctors
+
+private theorem single_composition
+    {A B C : Type*} [Category A] [Category B] [Category C]
+    [Preadditive A] [Preadditive B] [Preadditive C]
+    [HasZeroObject A] [HasZeroObject B] [HasZeroObject C]
+    (F : A ⥤ B) (G : B ⥤ C) (H : A ⥤ C)
+    [F.Additive] [G.Additive] [H.Additive] (c : F ⋙ G ≅ H) (N : A) :
+    (Functor.mapHomologicalComplexCompIso c (.up ℤ)).hom.app
+        ((CochainComplex.singleFunctor A 0).obj N) ≫
+      (HomologicalComplex.singleMapHomologicalComplex H (.up ℤ) 0).hom.app N =
+    (G.mapHomologicalComplex (.up ℤ)).map
+      ((HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).hom.app N) ≫
+      (HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) 0).hom.app (F.obj N) ≫
+      (CochainComplex.singleFunctor C 0).map (c.hom.app N) := by
+  apply HomologicalComplex.to_single_hom_ext
+  simp [CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+    HomologicalComplex.singleMapHomologicalComplex,
+    HomologicalComplex.single, Functor.mapHomologicalComplexCompIso,
+    NatIso.mapHomologicalComplex, NatTrans.mapHomologicalComplex,
+    Functor.mapHomologicalComplex]
+
+private theorem cancel_composition_maps
+    {A B : Type*} [Category A] [Category B] (F : A ⥤ B)
+    {X Y : B} {U V : A} (p : X ⟶ Y) (j : Y ≅ F.obj U) (b : U ≅ V) :
+    (p ≫ j.hom ≫ F.map b.hom) ≫ F.map b.inv ≫ j.inv = p := by
+  simp only [Category.assoc, ← F.map_comp_assoc, b.hom_inv_id, F.map_id,
+    Category.id_comp, j.hom_inv_id, Category.comp_id]
+
+private theorem single_composition_restriction
+    {A B C : Type*} [Category A] [Category B] [Category C]
+    [Preadditive A] [Preadditive B] [Preadditive C]
+    [HasZeroObject A] [HasZeroObject B] [HasZeroObject C]
+    (F : A ⥤ B) (G : B ⥤ C) (H : A ⥤ C)
+    [F.Additive] [G.Additive] [H.Additive] (c : F ⋙ G ≅ H) (N : A) :
+    (Functor.mapHomologicalComplexCompIso c (.up ℤ)).hom.app
+        ((CochainComplex.singleFunctor A 0).obj N) ≫
+      (HomologicalComplex.singleMapHomologicalComplex H (.up ℤ) 0).hom.app N ≫
+      (CochainComplex.singleFunctor C 0).map (c.inv.app N) ≫
+      (HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) 0).inv.app (F.obj N) =
+    (G.mapHomologicalComplex (.up ℤ)).map
+      ((HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).hom.app N) := by
+  have h := congrArg (fun k ↦ k ≫
+    (CochainComplex.singleFunctor C 0).map (c.inv.app N) ≫
+    (HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) 0).inv.app (F.obj N))
+    (single_composition F G H c N)
+  simpa only [Category.assoc] using h.trans
+    (cancel_composition_maps (CochainComplex.singleFunctor C 0) _
+      ((HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) 0).app (F.obj N))
+      (c.app N))
+
+private theorem cancel_single_maps
+    {A C : Type*} [Category A] [Category C]
+    (F : A ⥤ C) {X Y : C} {U V : A} (e : X ⟶ Y) (q : Y ⟶ F.obj U) (b : U ≅ V) :
+    (e ≫ q ≫ F.map b.hom) ≫ F.map b.inv = e ≫ q := by
+  simp only [Category.assoc, ← F.map_comp, b.hom_inv_id, F.map_id, Category.comp_id]
+
+private theorem counit_composition
+    {A B C D E F : Type*}
+    [Category A] [Category B] [Category C] [Category D] [Category E] [Category F]
+    {QA : A ⥤ D} {QB : B ⥤ E} {QC : C ⥤ F}
+    {S : A ⥤ B} {T : B ⥤ C} {U : A ⥤ C}
+    {LS : D ⥤ E} {LT : E ⥤ F} {LU : D ⥤ F}
+    (εS : QA ⋙ LS ⟶ S ⋙ QB) (εT : QB ⋙ LT ⟶ T ⋙ QC)
+    (εU : QA ⋙ LU ⟶ U ⋙ QC) (W : MorphismProperty A)
+    [QA.IsLocalization W] [LU.IsLeftDerivedFunctor εU W]
+    (d : S ⋙ T ≅ U) (c : LS ⋙ LT ≅ LU)
+    (h : c.hom = LU.leftDerivedLift εU W (LS ⋙ LT)
+      ((Functor.associator QA LS LT).inv ≫ Functor.whiskerRight εS LT ≫
+        (Functor.associator S QB LT).hom ≫ Functor.whiskerLeft S εT ≫
+        (Functor.associator S T QC).inv ≫ Functor.whiskerRight d.hom QC)) (X : A) :
+    c.hom.app (QA.obj X) ≫ εU.app X =
+      LT.map (εS.app X) ≫ εT.app (S.obj X) ≫ QC.map (d.hom.app X) := by
+  have h₀ := congrArg (fun k ↦ k.app (QA.obj X) ≫ εU.app X) h
+  have h₁ := LU.leftDerived_fac_app εU W (LS ⋙ LT)
+    ((Functor.associator QA LS LT).inv ≫ Functor.whiskerRight εS LT ≫
+      (Functor.associator S QB LT).hom ≫ Functor.whiskerLeft S εT ≫
+      (Functor.associator S T QC).inv ≫ Functor.whiskerRight d.hom QC) X
+  simpa only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_inv_app, Functor.associator_hom_app, Category.id_comp]
+    using h₀.trans h₁
+
+private theorem finish_composition
+    {C D : Type*} [Category C] [Category D] (L : C ⥤ D)
+    {B U V W X : D} {Y Z Z' : C}
+    {c : L.obj Y ⟶ B} {e : B ⟶ V} {α : B ⟶ W} {r : V ⟶ W} {u : W ⟶ X}
+    {a : Y ⟶ Z} {α' : Y ⟶ Z'} {r' : Z ⟶ Z'}
+    {b : L.obj Z ⟶ U} {d : U ⟶ V} {v : U ⟶ X}
+    {b' η : L.obj Z' ⟶ X}
+    (hα : α = e ≫ r) (hα' : α' = a ≫ r') (hη : η = b')
+    (hfac : c ≫ e = L.map a ≫ b ≫ d)
+    (hu : d ≫ r ≫ u = v) (hn : L.map r' ≫ b' = b ≫ v) :
+    c ≫ α ≫ u = L.map α' ≫ η := by
+  rw [hα, hα', hη, ← Category.assoc, ← Category.assoc, hfac]
+  simp only [L.map_comp, Category.assoc]
+  rw [hu, ← hn]
 
 variable [∀ Y : Scheme.{v},
   HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
@@ -42,6 +138,67 @@ def picardTermwiseSingleMap {W T : Scheme.{v}} (t : T ⟶ W) (M : W.Modules) :
       (((Classical.choose (Modules.exists_tensorPullbackAdjunction t)).leftAdjointUniq
         (Modules.pullbackPushforwardAdjunction t)).inv.app M)
 
+attribute [local irreducible] derivedPullback
+  Modules.tensorPullbackCompositionIso Modules.tensorPullback Modules.tensorPullbackObj
+attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
+attribute [local implicit_reducible] Modules.Hom DerivedCategory
+  Functor.mapHomologicalComplex HomotopyCategory Functor.mapHomotopyCategory
+  HomotopyCategory.quotient DerivedCategory.Q DerivedCategory.Qh
+  HomologicalComplexUpToQuasiIso.Qh
+
+private def pinnedCounit {X Y : Scheme.{v}} (f : X ⟶ Y) :
+    let := Modules.canonicalTensorPullbackAdditive f
+    DerivedCategory.Qh.{v + 1} ⋙ derivedPullback f ⟶
+      (Modules.tensorPullback f).mapHomotopyCategory (.up ℤ) ⋙
+        DerivedCategory.Qh.{v + 1} (C := SheafOfModules.{v} (moduleRings X.toRingedSpace)) :=
+  Classical.choose (Classical.choose_spec exists_derivedPullbackComposition) f
+
+private def pinnedComposition {X Y Z : Scheme.{v}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g) :=
+  Classical.choose (Classical.choose_spec (Classical.choose_spec
+    (Classical.choose_spec exists_derivedPullbackComposition))) f g
+
+private theorem single_map_normalize {X Y : Scheme.{v}} (f : X ⟶ Y)
+    (N : Y.Modules) :
+    let := Modules.canonicalTensorPullbackAdditive f
+    picardTermwiseSingleMap f N =
+      (pinnedCounit f).app
+        ((HomotopyCategory.singleFunctor _ 0).obj N) ≫
+      DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map
+        ((HomologicalComplex.singleMapHomologicalComplex
+          (Modules.tensorPullback f) (.up ℤ) 0).hom.app N)) := by
+  exact cancel_single_maps (DerivedCategory.singleFunctor
+    (SheafOfModules.{v} (moduleRings X.toRingedSpace)) 0) _ _
+    (((Classical.choose (Modules.exists_tensorPullbackAdjunction f)).leftAdjointUniq
+      (Modules.pullbackPushforwardAdjunction f)).app N)
+
+private theorem counit_normalize {X Y : Scheme.{v}} (f : X ⟶ Y)
+    (K : CochainComplex Y.Modules ℤ) :
+    let := Modules.canonicalTensorPullbackAdditive f
+    (picardTermwiseCounit f).app K =
+      (pinnedCounit f).app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj K) := by
+  have hnorm (A : schemeDerivedCategory Y)
+      (B : HomotopyCategory X.Modules (.up ℤ))
+      (e : (derivedPullback f).obj A ⟶ DerivedCategory.Qh.obj B) :
+      (derivedPullback f).map (𝟙 A) ≫ e ≫ DerivedCategory.Qh.map (𝟙 B) ≫
+        𝟙 (DerivedCategory.Qh.obj B) = e := by
+    simp
+  simp only [picardTermwiseCounit, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, Iso.symm_hom, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp]
+  simp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom,
+    Quotient.lift.isLift_inv]
+  exact hnorm _ _ _
+
+attribute [local irreducible] picardTermwiseCounit picardTermwiseSingleMap
+  Modules.canonicalSinglePullbackMap
+
+set_option maxHeartbeats 800000 in
+-- The pinned counit and composition choices have large dependent types.
 /-- The canonical maps on arbitrary singles satisfy the composition counit equation.
 No flatness, invertibility, or choice of a comparison family is asserted here.
 Source: Stacks Project, Tags 06YJ and 0D5S.
@@ -96,7 +253,90 @@ theorem picardTermwiseSingleMap_composition
       (derivedPullback i).map (picardTermwiseSingleMap t M) ≫
         (picardTermwiseCounit i).app ((CochainComplex.singleFunctor
           (SheafOfModules.{v} (moduleRings T.toRingedSpace)) 0).obj
-            ((Modules.tensorPullback t).obj M)) := by sorry
+            ((Modules.tensorPullback t).obj M)) := by
+  subst t'
+  simp only [eqToIso_refl, Iso.trans_refl]
+  let a : ∀ {X Y : Scheme.{v}} (f : X ⟶ Y), (Modules.tensorPullback f).Additive :=
+    fun f ↦ Classical.choose exists_derivedPullbackComposition f
+  let ε : ∀ {X Y : Scheme.{v}} (f : X ⟶ Y),
+      DerivedCategory.Qh.{v + 1} ⋙ derivedPullback f ⟶
+        (Modules.tensorPullback f).mapHomotopyCategory (.up ℤ) ⋙
+          DerivedCategory.Qh.{v + 1} (C := SheafOfModules.{v} (moduleRings X.toRingedSpace)) :=
+    fun f ↦ pinnedCounit f
+  let c := pinnedComposition i t
+  let := a i
+  let := a t
+  let := a (i ≫ t)
+  let P := (CochainComplex.singleFunctor W.Modules 0).obj M
+  let q := (HomotopyCategory.quotient W.Modules (.up ℤ)).obj P
+  let δ := ((conjugateIsoEquiv
+      (Classical.choose (Modules.exists_tensorPullbackAdjunction (i ≫ t)))
+      ((Classical.choose (Modules.exists_tensorPullbackAdjunction t)).comp
+        (Classical.choose (Modules.exists_tensorPullbackAdjunction i)))).symm
+      (Modules.pushforwardComp i t).symm)
+  let d := Functor.mapHomotopyCategoryCompIso δ (.up ℤ)
+  have : (derivedPullback (i ≫ t)).IsLeftDerivedFunctor (ε (i ≫ t))
+      (HomotopyCategory.quasiIso W.Modules (.up ℤ)) :=
+    Classical.choose (Classical.choose_spec
+      (Classical.choose_spec exists_derivedPullbackComposition)) (i ≫ t)
+  have fac := counit_composition (ε t) (ε i) (ε (i ≫ t))
+    (HomotopyCategory.quasiIso W.Modules (.up ℤ)) d c
+    ((Classical.choose_spec (Classical.choose_spec (Classical.choose_spec
+      (Classical.choose_spec exists_derivedPullbackComposition)))).1 i t) q
+  let b := Modules.tensorPullbackCompositionIso i t (i ≫ t) rfl
+  let r_t := (HomologicalComplex.singleMapHomologicalComplex
+    (Modules.tensorPullback t) (.up ℤ) 0).hom.app M
+  let r_it := (HomologicalComplex.singleMapHomologicalComplex
+    (Modules.tensorPullback (i ≫ t)) (.up ℤ) 0).hom.app M
+  let r_i := (HomologicalComplex.singleMapHomologicalComplex
+    (Modules.tensorPullback i) (.up ℤ) 0).app ((Modules.tensorPullback t).obj M)
+  let u := (CochainComplex.singleFunctor T'.Modules 0).mapIso (b.app M) ≪≫ r_i.symm
+  let D := (Functor.mapHomologicalComplexCompIso δ (.up ℤ)).hom.app P
+  have htensor :
+      (Modules.tensorPullbackCompositionIso i t (i ≫ t) rfl).inv =
+        ((conjugateIsoEquiv
+          (Classical.choose (Modules.exists_tensorPullbackAdjunction (i ≫ t)))
+          ((Classical.choose (Modules.exists_tensorPullbackAdjunction t)).comp
+            (Classical.choose (Modules.exists_tensorPullbackAdjunction i)))).symm
+          (Modules.pushforwardComp i t).symm).hom := by
+    unfold Modules.tensorPullbackCompositionIso
+    have hpush : Modules.pushforwardCongr (rfl : (i ≫ t) = (i ≫ t)) =
+        Iso.refl _ := by
+      ext M U
+      simp
+    rw [hpush]
+    simp only [Iso.trans_refl, conjugateIsoEquiv_symm_apply_inv,
+      conjugateIsoEquiv_symm_apply_hom, Iso.symm_hom]
+  have hb : δ.hom = b.inv := htensor.symm
+  have hb' : δ = b.symm := Iso.ext hb
+  have hb_inv : δ.inv = b.hom := congrArg Iso.inv hb'
+  have hs : D ≫ r_it ≫ u.hom =
+      ((Modules.tensorPullback i).mapHomologicalComplex (.up ℤ)).map r_t := by
+    have h := single_composition_restriction (Modules.tensorPullback t)
+      (Modules.tensorPullback i) (Modules.tensorPullback (i ≫ t)) δ M
+    simpa only [hb_inv, u, r_i, Iso.trans_hom, Functor.mapIso_hom,
+      Iso.symm_hom, Iso.app_hom, Iso.app_inv, Category.assoc] using h
+  have hd : d.hom.app q = (HomotopyCategory.quotient T'.Modules (.up ℤ)).map D := rfl
+  have hsq : DerivedCategory.Qh.map (d.hom.app q) ≫
+      DerivedCategory.Q.map r_it ≫ DerivedCategory.Q.map u.hom =
+    DerivedCategory.Qh.map (((Modules.tensorPullback i).mapHomotopyCategory (.up ℤ)).map
+      ((HomotopyCategory.quotient T.Modules (.up ℤ)).map r_t)) := by
+    rw [hd]
+    change DerivedCategory.Q.map D ≫ DerivedCategory.Q.map r_it ≫
+      DerivedCategory.Q.map u.hom = DerivedCategory.Q.map _
+    simpa only [Functor.map_comp, Category.assoc] using
+      congrArg (fun k ↦ DerivedCategory.Q.map k) hs
+  have hn := (ε i).naturality ((HomotopyCategory.quotient T.Modules (.up ℤ)).map r_t)
+  change (derivedPullback i).map (DerivedCategory.Q.map r_t) ≫
+      (ε i).app ((HomotopyCategory.singleFunctor T.Modules 0).obj
+        ((Modules.tensorPullback t).obj M)) =
+    (ε i).app (((Modules.tensorPullback t).mapHomotopyCategory (.up ℤ)).obj q) ≫
+      DerivedCategory.Qh.map (((Modules.tensorPullback i).mapHomotopyCategory (.up ℤ)).map
+        ((HomotopyCategory.quotient T.Modules (.up ℤ)).map r_t)) at hn
+  exact finish_composition (derivedPullback i)
+    (single_map_normalize (i ≫ t) M) (single_map_normalize t M)
+    (counit_normalize i ((CochainComplex.singleFunctor T.Modules 0).obj
+      ((Modules.tensorPullback t).obj M))) fac hsq hn
 
 end
 end AlgebraicGeometry.Scheme
