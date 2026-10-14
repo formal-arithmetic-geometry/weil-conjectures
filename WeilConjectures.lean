@@ -2150,6 +2150,11 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Projective
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.TargetLocal
+public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.ClosedSupport
+public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.Comparison
+public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.DirectImage
+public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.InternalHom
+public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.InternalHomGeneric
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericPerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalDuality

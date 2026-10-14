@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.InternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericPerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.HomTriangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
@@ -80,14 +81,6 @@ instance torAmplitudeIn_isTriangulatedClosed₂ (X : Scheme.{u}) (a b : ℤ) :
     obtain ⟨g₃, l₃⟩ := h₃ F
     exact ⟨_root_.DerivedCategory.TStructure.t.isGE₂ _ (G.map_distinguished _ hT) _ g₁ g₃,
       _root_.DerivedCategory.TStructure.t.isLE₂ _ (G.map_distinguished _ hT) _ l₁ l₃⟩
-
-/-- The internal hom out of an object `P` with a left dual `D` is tensoring with `D`,
-`RHom(P, M) ≅ D ⊗ᴸ M`, written with `AlgebraicGeometry.Etale.derivedTensor` (see the
-implementation notes of `WeilConjectures.SixFunctors.Etale.Derived.TensorStructure`). -/
-noncomputable def derivedHomIsoDerivedTensorOfExactPairing {X : Scheme.{u}}
-    (D P M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) [ExactPairing D P] :
-    (RHom(X)[A].obj (op P)).obj M ≅ ((-⊗ᴸ-(X)[A]).obj D).obj M :=
-  (MonoidalClosed.ihomIsoTensorLeft D P).app M
 
 /-- The internal hom out of a zero object is zero. -/
 lemma isZero_derivedHom_obj_of_isZero {X : Scheme.{u}}
