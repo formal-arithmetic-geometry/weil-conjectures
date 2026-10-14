@@ -248,10 +248,11 @@ theorem isFiniteLocallyFree_pushforward (g : X ⟶ Y) [IsFinite g] [Flat g]
 the finite, flat and finitely presented, hence projective, `A`-module `B = Γ(X, g ⁻¹ᵁ Spec A)`, and
 its rank at a point `y` is the dimension `d` of the fibre `B ⊗_A κ(y) = Γ(X_y, 𝒪_{X_y})`.
 
-This is the pointer remark to the properties of finite locally free morphisms; the statement is
-proved in the blueprint as `lem-pc-flf-properties`.
+This is the first half of `lem-pc-flf-properties` (the second half, on the fibres, is
+`AlgebraicGeometry.Scheme.Hom.exists_ringEquiv_tensorProduct_fiber`), and the pointer remark to
+the properties of finite locally free morphisms.
 
-(blueprint: `rem-ptr-pc-finite-locally-free-11`) -/
+(blueprint: `lem-pc-flf-properties`, `rem-ptr-pc-finite-locally-free-11`) -/
 theorem isFiniteLocallyFreeOfRank_pushforward_unit (g : X ⟶ Y) (d : ℕ)
     [g.IsFiniteLocallyFreeOfDegree d] :
     ((pushforward g).obj (𝟙_ X.Modules)).IsFiniteLocallyFreeOfRank d := by
