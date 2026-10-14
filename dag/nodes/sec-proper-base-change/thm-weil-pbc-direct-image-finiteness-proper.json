@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-weil-pbc-direct-image-finiteness-proper",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finiteness of proper direct images",
@@ -37,15 +37,51 @@
   "def-weil-pbc-constructible-direct-image-finiteness",
   "def-weil-pbc-scheme-conventions"
  ],
- "proof": [],
- "proof_deps": [
-  "prop-weil-pbc-comparison-direct-image",
-  "def-weil-pbc-constructible-direct-image-finiteness"
+ "proof": [
+  {
+   "text": "Let $F$ be constructible on $X_{\\Proet}$. By [def-weil-pbc-constructible-direct-image-finiteness] there are a constructible étale $\\Lambda$-module sheaf $F_{\\Et}$ on $X_{\\Et}$ and an isomorphism $F\\cong\\nu_X^*F_{\\Et}$. If $N$ is the additive order of $1$ in the finite ring $\\Lambda=P_n$, then $N>0$ and $Nm=(N1)m=0$ for every local section $m$ of $F_{\\Et}$. Thus $F_{\\Et}$ is torsion; the stated invertibility hypothesis on $Y$ applies to all its coefficient orders. The étale proper direct-image finiteness theorem [lem-weil-pbc-etale-proper-direct-image-finiteness] gives that every $R^qf_{\\Et,*}F_{\\Et}$ is constructible and that it vanishes for $q>2e$.",
+   "uses": [
+    "def-weil-pbc-constructible-direct-image-finiteness",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-direct-image-finiteness-proper.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-scheme-conventions], properness includes finite type, hence quasi-compactness, and separatedness: the diagonal is a closed immersion. By its affine-local description [def-weil-closed-immersion], the inverse image of an affine open under this diagonal is affine, hence quasi-compact. This is the definition of quasi-separatedness in [def-weil-pbc-scheme-conventions]. Apply [prop-weil-pbc-comparison-direct-image] to the bounded-below complex $F_{\\Et}[0]$ and to $f$. The inverse-image functors $\\nu_X^*,\\nu_Y^*$ are exact by [prop-weil-pbc-site-comparison-finite-level]. For a representative complex $C$, exactness identifies $\\nu_Y^*\\ker d^q$ with $\\ker(\\nu_Y^*d^q)$ and $\\nu_Y^*\\operatorname{im}d^{q-1}$ with $\\operatorname{im}(\\nu_Y^*d^{q-1})$, and preserves their quotient. Therefore $\\mathcal H^q(\\nu_Y^*C)=\\nu_Y^*\\mathcal H^q(C)$. Taking cohomology of the derived comparison and using $F\\cong\\nu_X^*F_{\\Et}$ gives $R^qf_{\\Proet,*}F\\cong\\nu_Y^*R^qf_{\\Et,*}F_{\\Et}$. The right side is constructible by the étale-origin definition in [def-weil-pbc-constructible-direct-image-finiteness]; for $q>2e$ it is the inverse image of the zero sheaf, hence zero by exactness. Since $F$ was arbitrary, these give both clauses of $\\mathrm{FIN}(f,\\Lambda;2e)$ in that definition.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-closed-immersion",
+    "prop-weil-pbc-comparison-direct-image",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "def-weil-pbc-constructible-direct-image-finiteness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-direct-image-finiteness-proper.md",
+    "place": "## Proof"
+   }
+  }
  ],
- "proof_origin": null,
+ "proof_deps": [
+  "def-weil-pbc-constructible-direct-image-finiteness",
+  "lem-weil-pbc-etale-proper-direct-image-finiteness",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-closed-immersion",
+  "prop-weil-pbc-comparison-direct-image",
+  "prop-weil-pbc-site-comparison-finite-level"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-direct-image-finiteness-proper.md",
+  "place": "## Proof"
+ },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "undischarged_input",
@@ -93,5 +129,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "thm-weil-pbc-direct-image-finiteness-proper",
+  "worker": "stage1",
+  "summary": "Split the proof into the classical étale proper direct-image finiteness input and the pro-étale transfer supplied by the existing comparison proposition. The target statement and all hypotheses are unchanged.",
+  "blueprint": "Realizes the sole blueprint proof paragraph: étale-origin constructibility and vanishing from SGA 4 1/2 and Tags 095U/0GL0, followed by the displayed comparison and the two clauses of FIN.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-50430eb9d",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-50430eb9d (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass: Tags 095U and 0GL0, the comparison morphism orientation, finite-level exactness, hypotheses, coefficient category, edge cases, route, duplicates, and searches were checked. The new node’s `created` record is incomplete: it has only `item`, omitting required `by`, `date`, and `group`. A corrected full DAG JSON is in `fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-etale-proper-direct-image-finiteness.json`. No node is dropped.; 1 file(s) fixed by the reviewer"
+ }
 }

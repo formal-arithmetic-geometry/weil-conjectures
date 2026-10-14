@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-pbc-etale-proper-direct-image-finiteness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Since the finite ring $\\Lambda=P_n$ is annihilated by an integer, $F_{\\Et}$ is a torsion abelian sheaf, so the classical input of the source note (Th. 1.1 of SGA 4 1/2 and [Tag 095U](https://stacks.math.columbia.edu/tag/095U)) applies to $f_{\\Et}$: the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Étale proper direct-image finiteness",
+ "statement": "Let $X$ and $Y$ be schemes [def-pc-scheme] which are Noetherian (each has a finite affine open cover by spectra of Noetherian rings [def-weil-pbc-noetherian-ring]) and finite-dimensional (the Krull dimension of each underlying space [def-kun-topological-krull-dimension] is bounded above by a nonnegative integer), let $f:X\\to Y$ be a proper morphism [def-weil-pbc-scheme-conventions] whose geometric fibres [def-weil-pbc-scheme-conventions] have Krull dimension [def-kun-topological-krull-dimension] at most $e\\in\\mathbf Z_{\\geq0}$, and let $\\Lambda$ be a commutative ring whose underlying set is finite whose element orders are invertible in every local ring of $Y$. For every constructible sheaf [def-weil-pbc-etale-constructible-sheaf] $F$ of $\\Lambda$-modules on the small étale site $X_{\\Et}$ [def-weil-pbc-direct-image], the sheaves $R^qf_{\\Et,*}F$ are constructible $\\Lambda$-module sheaves on $Y_{\\Et}$ for all integers $q\\geq0$, and $R^qf_{\\Et,*}F=0$ for every $q>2e$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095U, label lemma-cohomological-dimension-proper (vanishing clause)",
+  "external": [
+   {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL0, label theorem-constructible-shriek (constructibility clause); label section-derived-lower-shriek-compactification (choose the identity open immersion for proper f)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-direct-image-finiteness-proper.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper morphism of noetherian finite dimensional schemes sends constructible torsion etale sheaves to constructible sheaves and vanishes above twice fiber dimension",
+   "results": "Returned AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, and unrelated affine-transition results; none states derived etale direct-image finiteness.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "constructible, proper, direct image, torsion",
+   "results": "0 hits; unknown identifier constructible.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*direct.*image|095U|0GL0",
+   "results": "No matching declarations in Mathlib source. Second reader: the logged subdirectory begins with Mathlib, duplicating the Mathlib root; these empty results are not evidence. Superseded by the correctly rooted grep below.",
+   "date": "2026-10-14",
+   "verdict": "unavailable (invalid search root)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher direct images of torsion constructible sheaves under proper scheme morphisms vanish above twice fiber dimension",
+   "results": "Returned affine-transition limit lemmas, DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE, and unrelated scheme lemmas; no matching finiteness theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "|- R^q f_* F = 0",
+   "results": "0 hits; unknown identifier R.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "R.qf|HigherDirect|constructible",
+   "results": "No matching declarations in Mathlib/AlgebraicGeometry. Second reader: the logged subdirectory begins with Mathlib, duplicating the Mathlib root; these empty results are not evidence. Superseded by the correctly rooted grep below.",
+   "date": "2026-10-14",
+   "verdict": "unavailable (invalid search root)"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*cohomolog|cohomolog.*etale|constructib.*sheaf|sheaf.*constructib",
+   "results": "Correct Mathlib root, no hits for étale cohomology or constructible sheaves.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper map of schemes, the right derived pushforward on sheaves of finite modules preserves constructibility and has finite cohomological dimension",
+   "results": "Eight hits: ordinary sheaf and module pushforward definitions/adjoints/composition, and constructible images of subsets (Chevalley). No derived étale constructibility or fibre-dimension bound.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\"",
+   "results": "Twelve hits on Topology.IsConstructible and IsLocallyConstructible and their set operations; these concern topological subsets, not constructible sheaves.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "thm-weil-pbc-direct-image-finiteness-proper",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}
