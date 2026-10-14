@@ -1,6 +1,6 @@
 # Work queue
 
-23 items; claim with `tools/claim.py next <group> [--stage N]`.
+22 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (23)
+## Stage 3: modules to prove (22)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -22,7 +22,6 @@
 | `Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparison` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardDegreeSheafFpqcExistence` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.LimitHigherDirectImageExchange` | 11 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula` | 20 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula` | 22 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionsFactorization` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation` | 24 | 1 | proof |
