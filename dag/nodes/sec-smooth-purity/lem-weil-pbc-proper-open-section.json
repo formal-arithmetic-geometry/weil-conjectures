@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-proper-open-section",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The section of the comparison square and the open it fixes",
@@ -13,34 +13,154 @@
   "place": "node lem-weil-pbc-proper-open-section, order 1478"
  },
  "stmt_deps": [
-  "def-weil-pbc-proper-open-comparison"
+  "def-weil-pbc-proper-open-comparison",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
  ],
  "proof": [
   {
-   "text": "The projection $b:V\\to T_1$ is the base change of the open immersion\n$j_2$ along $u$; a base change of an open immersion is an open\nimmersion, and its image is $u^{-1}(j_2(X))$, so $b$ identifies\n$V$ with the open subscheme $u^{-1}(j_2(X))$ of $T_1$. Since\n$u j_1=j_2$, the morphism $j_1$ maps $X$ into\n$u^{-1}(j_2(X))=b(V)$, so the pair $(j_1,\\operatorname{id}_X)$\nfactors through the fibre product $V=T_1\\times_{T_2}X$: there is a\nmorphism $s:X\\to V$ with $bs=j_1$ and $ps=\\operatorname{id}_X$,\nthe one named in [def-weil-pbc-proper-open-comparison]. Being\nthe restriction of the open immersion $j_1$ to the open subscheme\n$b(V)$, the morphism $s$ is an open immersion, and it identifies\n$X$ with the open subscheme $j_1(X)$ of $V$. By\n[lem-weil-pbc-proper-open-p-proper] the morphism $p$ is proper,\nhence separated, and $s$ is an open immersion with\n$ps=\\operatorname{id}_X$; the criterion of\n[lem-weil-pbc-open-section-clopen] therefore makes the image of\n$s$ open and closed in $V$, with\n$V=s(X)\\amalg(V\\setminus s(X))$ a decomposition into open\nsubschemes. All schemes and morphisms here are those of\n[def-weil-pbc-scheme-conventions].",
+   "text": "The pair $(j_1,\\operatorname{id}_X)$ satisfies $u\\circ j_1=j_2\\circ\\operatorname{id}_X$. The fibre-product universal property gives the unique $s:X\\to V$ with $b\\circ s=j_1$ and $p\\circ s=\\operatorname{id}_X$. These are precisely the defining equations for the section named in [def-weil-pbc-proper-open-comparison]; this argument uses only its geometric data, and no sheaf or coefficient hypothesis.",
    "uses": [
-    "def-weil-pbc-proper-open-comparison",
-    "lem-weil-pbc-proper-open-p-proper",
-    "lem-weil-pbc-open-section-clopen",
-    "def-weil-pbc-scheme-conventions"
+    "def-pc-fibre-product",
+    "def-weil-pbc-proper-open-comparison"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-section.md",
+    "place": "Proof, construction of s from the pair (j_1,id_X)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-open-immersion-base-change] to $j_2:X\\hookrightarrow T_2$ and $u:T_1\\to T_2$. It gives an open immersion $c:X\\times_{T_2}T_1\\to T_1$. The universal property in [def-pc-fibre-product] gives a map $\\tau:V\\to X\\times_{T_2}T_1$ with components $(p,b)$ and a reverse map with the reversed projections. Each composite has the same two projections as the identity, so uniqueness makes them inverse. Thus $b=c\\circ\\tau$ is an open immersion: composing the open-subscheme isomorphism for $c$ with the isomorphism $\\tau$ preserves that identification, by [def-weil-open-immersion].",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JY, label lemma-base-change-immersion, open-immersion clause"
+   }
+  },
+  {
+   "text": "Put $O=j_2(X)$ and $U=u^{-1}(O)\\subseteq T_1$. The cartesian equation $u b=j_2 p$ gives $b(V)\\subseteq U$. Conversely, on the open subscheme $(U,\\mathcal O_{T_1}|_U)$, restrict the underlying map and structure-sheaf map of $u$ to the open $O$, and then compose with the inverse of the open-subscheme isomorphism $j_2:X\\xrightarrow{\\sim}(O,\\mathcal O_{T_2}|_O)$. This gives a morphism $q:U\\to X$ with $j_2q=u|_U$. The pair $(U\\hookrightarrow T_1,q)$ therefore gives a morphism $U\\to V$ by the fibre-product universal property. Its composite with $b$ is the inclusion of $U$, proving $U\\subseteq b(V)$. Consequently $b(V)=U$, and the open-immersion definition identifies $V$ with $(U,\\mathcal O_{T_1}|_U)$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-section.md",
+    "place": "Proof, identification of the image of b (elementary open-subscheme restriction argument)"
+   }
+  },
+  {
+   "text": "Under this identification of $V$ with $U$, the equality $b s=j_1$ says that the underlying map of $s$ is the homeomorphism of $X$ onto $j_1(X)\\subseteq U$. This is open in $U$, since $j_1(X)$ is open in $T_1$. Both $b$ and $j_1$ identify the relevant structure sheaves with restrictions of $\\mathcal O_{T_1}$; the composite sheaf map for $b s=j_1$ forces the sheaf map for $s$ to be the corresponding restriction isomorphism (cancel the isomorphism supplied by $b$). Hence $s$ is an open immersion and identifies $X$ with the open subscheme $j_1(X)$ of $V$.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-section.md",
+    "place": "Proof, s is the restriction of j_1 to the open subscheme b(V)"
+   }
+  },
+  {
+   "text": "[lem-weil-pbc-proper-open-p-proper] applies to the given proper $u$ and open immersion $j_2$, and states that this projection $p:V\\to X$ is proper and separated. We have proved that $s$ is an open immersion, and step 1 supplies $p s=\\operatorname{id}_X$. Apply [lem-weil-pbc-open-section-clopen] with $S=X$ to obtain that $s(X)$ is open and closed in $V$, including the decomposition into the two complementary open subschemes. This proves all the clauses of the statement.",
+   "uses": [
+    "lem-weil-pbc-proper-open-p-proper",
+    "lem-weil-pbc-open-section-clopen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-section.md",
+    "place": "Proof, final separated-section argument; Stacks Tag 01KT via the cited clopen-section node"
+   }
   }
  ],
  "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
   "def-weil-pbc-proper-open-comparison",
-  "lem-weil-pbc-proper-open-p-proper",
+  "lem-weil-pbc-open-immersion-base-change",
   "lem-weil-pbc-open-section-clopen",
-  "def-weil-pbc-scheme-conventions"
+  "lem-weil-pbc-proper-open-p-proper"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-section.md",
-  "place": "## Proof"
+  "place": "Proof paragraph, expanded into five steps; open base change also checked against Stacks 01JY"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper open immersion base change has open image and section clopen",
+   "results": "AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange; AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion; AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion; AlgebraicGeometry.IsOpenImmersion.isPullback; AlgebraicGeometry.instIsOpenImmersionMapOfHomForallEvalRingHom; AlgebraicGeometry.IsOpenImmersion.instLift; AlgebraicGeometry.IsOpenImmersion.range_pullback_snd_of_left; AlgebraicGeometry.IsOpenImmersion.range_pullbackSnd",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole item: hits supply constituent base-change, image, or cancellation facts, not all clauses of this comparison square in one specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, IsProper, IsClosedImmersion",
+   "results": "loogle: unknown identifier 'IsProper'",
+   "date": "2026-10-14",
+   "verdict": "no match: query returned no hits; loogle: unknown identifier 'IsProper'"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*OpenImmersion|IsOpenImmersion.*base",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: query returned no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "base change of an open immersion is an open immersion and its image is the inverse image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "stableUnderBaseChange",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: query returned no hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion.isStableUnderBaseChange",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.IsOpenImmersion.isStableUnderBaseChange'",
+   "date": "2026-10-14",
+   "verdict": "no match: query returned no hits; loogle: unknown identifier 'AlgebraicGeometry.IsOpenImmersion.isStableUnderBaseChange'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a commutative triangle two open immersions factor through one another and the resulting section of a separated proper projection has clopen image",
+   "results": "AlgebraicGeometry.IsOpenImmersion.range_pullbackSnd; AlgebraicGeometry.IsOpenImmersion.range_pullback_snd_of_left; AlgebraicGeometry.IsOpenImmersion.range_pullbackFst; AlgebraicGeometry.IsOpenImmersion.range_pullback_fst_of_right; AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_right; AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_left; Profinite.exists_isClopen_of_cofiltered; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_range",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole item: hits supply constituent base-change, image, or cancellation facts, not all clauses of this comparison square in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "range_pullback|instLift|of_comp",
+   "results": "501; 509; 512; 636; 648",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole item: hits supply constituent base-change, image, or cancellation facts, not all clauses of this comparison square in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of a proper scheme morphism which factors two open immersions identifies its source with a clopen subscheme of an open pullback",
+   "results": "AlgebraicGeometry.IsOpenImmersion.range_pullbackSnd; AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder; AlgebraicGeometry.IsOpenImmersion.range_pullbackFst; AlgebraicGeometry.IsOpenImmersion.range_pullback_snd_of_left; AlgebraicGeometry.IsOpenImmersion.range_pullback_fst_of_right; AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_right; AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_left; AlgebraicGeometry.Scheme.Hom.opensRange_pullbackSnd",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the whole item: these statements give pullback image formulas or an immersion image square, not the section and clopen conclusion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -65,5 +185,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proper-open-section",
+  "worker": "stage1",
+  "summary": "Retained the statement and source route. Added the missing explicit open-immersion base-change citation, constructed the image equality using open restrictions and the pullback universal property, and wrote the open-immersion cancellation argument rather than treating inclusion of images as a general factorization criterion. Reused existing proper-projection and clopen-section nodes; no new nodes. No exact project attachment found.",
+  "blueprint": "Proof paragraph: pair (j_1,id_X) in step 1; base change of j_2 in step 2; image u^{-1}(j_2(X)) in step 3; restriction of j_1 in step 4; proper/separated projection and clopen section in step 5."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-e8cfcd8d5",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-e8cfcd8d5 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, master blueprint route, and Stacks sources 01HE/01IO, 01JP/001V, 01JY, 01W1, and 01KT. All five steps are valid; open-subscheme factorization and sheaf-map cancellation are explicit. Edge cases pass. No new nodes, circular dependency, target weakening, or coefficient-category identification. Detailed checks written to review.md; no fixes needed."
+ }
 }
