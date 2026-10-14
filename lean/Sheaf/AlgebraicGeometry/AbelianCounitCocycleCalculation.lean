@@ -74,6 +74,30 @@ def abelianInjectiveResolutionIso (X : Scheme.{u})
     (abelianSections X).rightDerivedObjIsoOfResolution R.ι
       (fun n ↦ Functor.rightAcyclic_of_injective (R.cocomplex.X n)) p
 
+/- The canonical Ext comparison factors through the Hom-complex homology map.
+This is the resolution-local normalization used by the cocycle calculation. -/
+theorem abelian_ext_homology_comparison_formula
+    {A : Type u} [Category.{u} A] [Abelian A] [HasExt.{u} A]
+    [HasInjectiveResolutions A] (P F : A) (p : ℕ) :
+    let I := injectiveResolution F
+    let E := preadditiveCoyoneda.obj (op P)
+    (extRightDerivedHomObjIso P F p).hom ≫ (I.isoRightDerivedObj E p).hom =
+    (I.extAddEquivCohomologyClass (X := P) (n := p)).toAddCommGrpIso.hom ≫
+      (CochainComplex.HomComplex.leftHomologyData ((CochainComplex.singleFunctor A 0).obj P)
+        I.cochainComplex (p : ℤ)).homologyIso.inv ≫
+      HomologicalComplex.homologyMap (extRightDerivedHomComplexIso P I.cochainComplex).hom
+        (p : ℤ) ≫
+      HomologicalComplex.homologyMap
+        (I.cocomplex.mapExtendIso ComplexShape.embeddingUpNat E).hom (p : ℤ) ≫
+      (((E.mapHomologicalComplex (.up ℕ)).obj I.cocomplex).extendHomologyIso
+        ComplexShape.embeddingUpNat (rfl : (p : ℤ) = p)).hom := by
+  dsimp only
+  simp only [extRightDerivedHomObjIso,
+    InjectiveResolution.isoRightDerivedObjCochainComplex,
+    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
+    Functor.mapIso_hom, Functor.mapIso_inv, HomologicalComplex.homologyFunctor_map,
+    Category.assoc, Iso.inv_hom_id, Category.comp_id]
+
 /-- The inverse-image/coefficient cocycle computation for abelian sheaves.
 It asserts no comparison with a target module resolution.
 
