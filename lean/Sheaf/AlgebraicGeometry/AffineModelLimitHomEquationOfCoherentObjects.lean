@@ -60,6 +60,23 @@ theorem affineModelLimitHomEquation_of_coherent_objects
           (congrArg CommRingCat.Hom.hom (C.w (homOfLE j.property)).symm) E K a) ≫ m.βK.hom =
       perfectLimitMap R c s j.val.property
         ((m.αE j).inv ≫
-          (affineModelLocalizedTilde (F.obj j.val) _ (d j)).map a ≫ (m.αK j).hom) := by sorry
+          (affineModelLocalizedTilde (F.obj j.val) _ (d j)).map a ≫ (m.αK j).hom) := by
+  intro j a
+  change _ = perfectHomMap s (affineModelLimitArrow R c j) _
+  rw [perfectHomMap]
+  have hE := (m.hlim j).1
+  have hK := (m.hlim j).2
+  generalize hε : perfectHomComparison s (affineModelLimitArrow R c j) = ε at hE hK ⊢
+  exact affineModel_scalarConjugation_nat
+    (F.map (homOfLE j.property)).hom (C.ι.app j.val).hom
+    (C.ι.app ⟨i, le_rfl⟩).hom
+    (congrArg CommRingCat.Hom.hom (C.w (homOfLE j.property)).symm) E K
+    (affineModelLocalizedTilde (F.obj j.val) _ (d j))
+    (affineModelLocalizedTilde C.pt _ dlim)
+    (derivedPullback (baseChangeMap s (affineModelLimitArrow R c j)))
+    (m.θlim j)
+    (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE j.val.property)))))
+    (derivedPullback (pullback.fst s (Spec.map (c.ι.app i)))) P Q
+    (m.αE j) (m.αK j) m.βE m.βK ε hE hK a
 
 end AlgebraicGeometry
