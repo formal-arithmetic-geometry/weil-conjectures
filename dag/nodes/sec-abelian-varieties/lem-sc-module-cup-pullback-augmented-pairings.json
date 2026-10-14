@@ -19,60 +19,54 @@
  ],
  "proof": [
   {
-   "text": "Take the concrete Godement models for the six coefficients. Over V send a product-of-stalks section to the section over f-inverse V whose x-prime coordinate is the image of its f(x-prime) coordinate under the coefficient stalk map. This is O_X(V)-linear with target viewed by pushforward and commutes with restrictions. The germ unit and evaluation commute: both routes take the germ or evaluate the same coordinate. Iterate this construction to obtain augmented cosimplicial f-maps and maps of the alternating complexes.",
+   "text": "Apply moduleCup_pullback_flasque_complexes to obtain the six integer flasque resolutions, tensor chain maps u and u1, and the three sheaf cochain f-maps with their degree-zero squares and the sectionwise pairing equation on every open. Extract these witnesses in stages to avoid repeatedly elaborating the large existential telescope.",
    "uses": [
-    "lem-sc-module-cup-godement-model-pairing-models-exist",
-    "def-sc-module-cup-godement-model",
-    "def-sc-module-cup-godement-codegeneracies",
-    "lem-sc-module-cup-godement-relations",
-    "def-pc-module-pullback"
+    "lem-sc-module-cup-pullback-flasque-complexes"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use coordinatewise tensoring and the front/back faces of Alexander--Whitney to form pairings. The section normalization of the tensor comparison makes image-of-tensor equal tensor-of-images on each stalk coordinate. The iterated f-maps commute with front and back faces, yielding the strict pairing equation. For the target coefficient compose with the Godement map of tau. Leibniz and the germ tensor equation give the augmented pairings.",
+   "text": "On each scheme restrict the three integer complexes along embeddingUpNat. Reuse the proved private restriction, natAugmentation, computingFlasqueResolution and tensorChainSectionPair API of ModuleCupPairingExists through a proof-only import all. The local computingPairing helper packages these resolutions: the tensor summand formula commutes with sheaf restrictions; the tensor chain differential gives signed Leibniz, with natural/integer sign and index transports; and the degree-zero tensor formulas give augmentation_pair. Flasque acyclicity and the right-acyclic resolution comparison furnish the global homology isomorphisms required by computes. All injective comparisons are constructed by descOfQuasiIso over the identity, without choosing arbitrary existential data.",
    "uses": [
-    "lem-sc-module-cup-godement-model-pairing-pairing",
-    "lem-sc-module-cup-godement-aw",
-    "lem-weil-pbc-module-pullback-tensor"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The model augmentations are quasi-isomorphisms and the Godement terms are flasque. Restrict to natural degrees, choose injective comparisons over the augmentations, and apply flasque acyclicity and the acyclic-resolution criterion to show that all six global comparison homology maps are invertible. This supplies D and E without changing the constructed complexes, maps or pairings. Taking the explicit global f-maps supplies the asserted equality, and degree-zero germ compatibility supplies the three augmentation equations.",
-   "uses": [
-    "lem-sc-module-cup-godement-model-quasi-iso",
-    "lem-sc-module-cup-godement-object-flasque",
+    "lem-sc-module-cup-pairing-exists",
     "lem-sc-module-cup-flasque-acyclicity",
     "lemma-weil-pbc-leray-acyclicity",
     "def-sp-injective-resolutions",
-    "def-sc-module-cup-resolution-data",
-    "lem-sc-module-cup-resolution-fmap"
+    "def-sc-module-cup-resolution-data"
    ],
    "elementary": false
+  },
+  {
+   "text": "Restrict l,r,t along embeddingUpNat; restriction commutes definitionally with termwise pushforward. At degree zero natAugmentation has the original augmentation component, so the three f-map squares follow from the supplied integer squares. The target square uses precisely the existing section-normalized tensor-pullback comparison.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Unfold the canonical global f-map component: it first applies the sheaf f-map on the top open and then restricts from f-inverse(top) to top. Apply the supplied sectionwise pairing equation at top, followed by restriction naturality of the tensor summand followed by u1. The opposite homOfLE for top <= f-inverse(top) equals the eqToHom used by cupPushforwardSectionsIso by subsingleton elimination in the opens category. This gives exactly the required strict global pairing identity.",
+   "uses": [
+    "lem-sc-module-cup-resolution-fmap"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-module-cup-godement-model-pairing-models-exist",
-  "def-sc-module-cup-godement-model",
-  "def-sc-module-cup-godement-codegeneracies",
-  "lem-sc-module-cup-godement-relations",
-  "def-pc-module-pullback",
-  "lem-sc-module-cup-godement-model-pairing-pairing",
-  "lem-sc-module-cup-godement-aw",
-  "lem-weil-pbc-module-pullback-tensor",
-  "lem-sc-module-cup-godement-model-quasi-iso",
-  "lem-sc-module-cup-godement-object-flasque",
+  "lem-sc-module-cup-pullback-flasque-complexes",
+  "lem-sc-module-cup-pairing-exists",
   "lem-sc-module-cup-flasque-acyclicity",
   "lemma-weil-pbc-leray-acyclicity",
   "def-sp-injective-resolutions",
   "def-sc-module-cup-resolution-data",
+  "lem-weil-pbc-module-pullback-tensor",
   "lem-sc-module-cup-resolution-fmap"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "E3 stage-3 worker; explicit Lean assembly from flasque tensor complexes",
   "document": "https://stacks.math.columbia.edu/tag/0FKU",
-  "place": "section-cup-product, naive products and Lemma 20.31.3; Tag 0FKS, cohomology-lemma-godement-resolution, extended coordinatewise to a scheme morphism; E1 explicit construction and comparison argument"
+  "place": "section-cup-product, naive products and Lemma 20.31.3; Tag 0FKS, cohomology-lemma-godement-resolution, extended coordinatewise to a scheme morphism; restriction to natural degrees, injective comparison assembly and restriction naturality for f-inverse(top)=top",
+  "date": "2026-10-14",
+  "group": "E3"
  },
  "mathlib_searches": [
   {
@@ -151,9 +145,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261014T033104-L-603179",
+  "landing": "20261014T042430-L-1211766",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

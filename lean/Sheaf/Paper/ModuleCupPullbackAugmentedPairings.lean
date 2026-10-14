@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.ModuleCupResolutionFMap
 public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+import Sheaf.Paper.ModuleCupPullbackFlasqueComplexes
+import all Sheaf.Paper.ModuleCupPairingExists
 
 /-! # Pullback of augmented computing pairings
 
@@ -24,6 +26,85 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 open AlgebraicGeometry TopologicalSpace
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
+
+/-- Package an augmented flasque tensor-paired complex into computing resolutions. -/
+private def computingPairing {X : Scheme.{v}} {F G : X.Modules} [MonoidalPreadditive X.Modules]
+    (K L M : CochainComplex X.Modules ℤ)
+    (a : (CochainComplex.singleFunctor X.Modules 0).obj F ⟶ K)
+    (b : (CochainComplex.singleFunctor X.Modules 0).obj G ⟶ L)
+    (c : (CochainComplex.singleFunctor X.Modules 0).obj (F ⊗ G) ⟶ M)
+    (ha : QuasiIso a) (hb : QuasiIso b) (hc : QuasiIso c)
+    (hK : K.IsStrictlyGE 0) (hL : L.IsStrictlyGE 0) (hM : M.IsStrictlyGE 0)
+    (fK : ∀ n : ℤ, TopCat.Sheaf.IsFlasque
+      ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj (K.X n)))
+    (fL : ∀ n : ℤ, TopCat.Sheaf.IsFlasque
+      ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj (L.X n)))
+    (fM : ∀ n : ℤ, TopCat.Sheaf.IsFlasque
+      ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj (M.X n)))
+    (t : HomologicalComplex.tensorObj K L ⟶ M)
+    (ht : ∀ (V : X.Opens)
+      (x : Γ(((CochainComplex.singleFunctor X.Modules 0).obj F).X 0, V))
+      (y : Γ(((CochainComplex.singleFunctor X.Modules 0).obj G).X 0, V)),
+      (t.f 0).val.app (op V)
+        ((HomologicalComplex.ιTensorObj K L 0 0 0 (by simp)).val.app (op V)
+          (tmulSection ((a.f 0).val.app (op V) x) ((b.f 0).val.app (op V) y))) =
+        (c.f 0).val.app (op V) (tmulSection x y)) :
+    CupResolutionPairing F G := by
+  have := ha
+  have := hb
+  have := hc
+  have := hK
+  have := hL
+  have := hM
+  have := natAugmentation_quasiIso a
+  have := natAugmentation_quasiIso b
+  have := natAugmentation_quasiIso c
+  refine {
+    left := computingFlasqueResolution _ (natAugmentation a) (fun n ↦ fK n)
+    right := computingFlasqueResolution _ (natAugmentation b) (fun n ↦ fL n)
+    target := computingFlasqueResolution _ (natAugmentation c) (fun n ↦ fM n)
+    pair := tensorChainSectionPair K L M t
+    restriction := ?_
+    leibniz := ?_
+    augmentation_pair := ?_ }
+  · intro r s V W h x y
+    change (M.X ((r + s : ℕ) : ℤ)).presheaf.map (homOfLE h).op
+      (tensorChainSectionPair K L M t r s V x y) =
+        tensorChainSectionPair K L M t r s W
+          ((K.X (r : ℤ)).presheaf.map (homOfLE h).op x)
+          ((L.X (s : ℤ)).presheaf.map (homOfLE h).op y)
+    have hres := tensorSection_restriction
+      (HomologicalComplex.ιTensorObj K L (r : ℤ) (s : ℤ) ((r + s : ℕ) : ℤ)
+        (by simp) ≫ t.f _) V W h x y
+    simpa only [tensorChainSectionPair_apply, Hom.comp_app,
+      ConcreteCategory.comp_apply, app_val_apply] using hres
+  · intro r s V x y
+    have hs := tensorChain_leibniz K L M t (r : ℤ) (s : ℤ) V x y
+    change (M.d ((r + s : ℕ) : ℤ) ((r + s + 1 : ℕ) : ℤ)).val.app (op V)
+      (tensorChainSectionPair K L M t r s V x y) =
+      (eqToHom (congrArg (fun n : ℕ ↦ M.X (n : ℤ))
+        (show r + 1 + s = r + s + 1 by omega))).val.app (op V)
+        (tensorChainSectionPair K L M t (r + 1) s V
+          ((K.d (r : ℤ) ((r + 1 : ℕ) : ℤ)).val.app (op V) x) y) +
+      (-1 : ℤ) ^ r •
+        (eqToHom (congrArg (fun n : ℕ ↦ M.X (n : ℤ))
+          (show r + (s + 1) = r + s + 1 by omega))).val.app (op V)
+          (tensorChainSectionPair K L M t r (s + 1) V x
+            ((L.d (s : ℤ) ((s + 1 : ℕ) : ℤ)).val.app (op V) y))
+    rw [tensorChainSectionPair_transport K L M t (r + 1) s (r + s + 1) (by omega),
+      tensorChainSectionPair_transport K L M t r (s + 1) (r + s + 1) (by omega),
+      tensorChainSectionPair_apply]
+    simp only [app_val_apply, Units.smul_def, Int.coe_negOnePow_natCast] at hs
+    exact hs
+  · intro V x y
+    change tensorChainSectionPair K L M t 0 0 V
+      (((natAugmentation a).f 0).val.app (op V) x)
+      (((natAugmentation b).f 0).val.app (op V) y) =
+      ((natAugmentation c).f 0).val.app (op V) (tmulSection x y)
+    simp only [natAugmentation, CochainComplex.fromSingle₀Equiv_symm_apply_f_zero]
+    rw [tensorChainSectionPair_apply]
+    exact ht V x y
+
 
 /-- Pullback admits simultaneous sheaf cochain maps of computing pairings over the
 three coefficient f-maps, preserving the pairing before passing to cohomology.
@@ -75,7 +156,67 @@ theorem moduleCup_pullback_augmented_pairings (X X' : Scheme.{v}) (f : X' ⟶ X)
       (∀ (p q : ℕ) (a : Γ(D.left.K.X p, ⊤)) (b : Γ(D.right.K.X q, ⊤)),
         (cupResolutionGlobalMap f t).f (p + q) (D.pair p q ⊤ a b) =
           E.pair p q ⊤ ((cupResolutionGlobalMap f l).f p a)
-            ((cupResolutionGlobalMap f r).f q b)) := by sorry
+            ((cupResolutionGlobalMap f r).f q b)) := by
+  let : MonoidalPreadditive X.Modules :=
+    Classical.choice (SheafOfModules.tensorClosed X.sheaf).1
+  let : MonoidalPreadditive X'.Modules :=
+    Classical.choice (SheafOfModules.tensorClosed X'.sheaf).1
+  have h := moduleCup_pullback_flasque_complexes X X' f F G
+  rcases h with ⟨K, L, M, a, b, c, h⟩
+  rcases h with ⟨ha, hb, hc, hK, hL, hM, fK, fL, fM, u, hu, h⟩
+  rcases h with ⟨K₁, L₁, M₁, a₁, b₁, c₁, h⟩
+  rcases h with ⟨ha₁, hb₁, hc₁, hK₁, hL₁, hM₁, fK₁, fL₁, fM₁, u₁, hu₁,
+    l, r, t, hl, hr, ht, hpair⟩
+  let D := computingPairing K L M a b c ha hb hc hK hL hM fK fL fM u hu
+  let E := computingPairing K₁ L₁ M₁ a₁ b₁ c₁ ha₁ hb₁ hc₁
+    hK₁ hL₁ hM₁ fK₁ fL₁ fM₁ u₁ hu₁
+  let ln : D.left.K ⟶
+      ((pushforward f).mapHomologicalComplex (.up ℕ)).obj E.left.K :=
+    HomologicalComplex.restrictionMap l ComplexShape.embeddingUpNat
+  let rn : D.right.K ⟶
+      ((pushforward f).mapHomologicalComplex (.up ℕ)).obj E.right.K :=
+    HomologicalComplex.restrictionMap r ComplexShape.embeddingUpNat
+  let tn : D.target.K ⟶
+      ((pushforward f).mapHomologicalComplex (.up ℕ)).obj E.target.K :=
+    HomologicalComplex.restrictionMap t ComplexShape.embeddingUpNat
+  refine ⟨D, E, ln, rn, tn, ?_, ?_, ?_, ?_⟩
+  · change (natAugmentation a).f 0 ≫ l.f 0 = _
+    simpa only [D, E, computingPairing, computingFlasqueResolution,
+      natAugmentation, CochainComplex.fromSingle₀Equiv_symm_apply_f_zero] using hl
+  · change (natAugmentation b).f 0 ≫ r.f 0 = _
+    simpa only [D, E, computingPairing, computingFlasqueResolution,
+      natAugmentation, CochainComplex.fromSingle₀Equiv_symm_apply_f_zero] using hr
+  · change (natAugmentation c).f 0 ≫ t.f 0 = _
+    simpa only [D, E, computingPairing, computingFlasqueResolution,
+      natAugmentation, CochainComplex.fromSingle₀Equiv_symm_apply_f_zero] using ht
+  · intro p q x y
+    change (cupResolutionGlobalMap f tn).f (p + q)
+      (tensorChainSectionPair K L M u p q ⊤ x y) =
+      tensorChainSectionPair K₁ L₁ M₁ u₁ p q ⊤
+        ((cupResolutionGlobalMap f ln).f p x) ((cupResolutionGlobalMap f rn).f q y)
+    have hs := hpair p q ⊤ x y
+    simp only [← tensorChainSectionPair_apply] at hs
+    change (M₁.X ((p + q : ℕ) : ℤ)).presheaf.map
+        (eqToHom (by simp) : op (f ⁻¹ᵁ (⊤ : X.Opens)) ⟶ op (⊤ : X'.Opens))
+        ((t.f ((p + q : ℕ) : ℤ)).val.app (op ⊤)
+          (tensorChainSectionPair K L M u p q ⊤ x y)) =
+      tensorChainSectionPair K₁ L₁ M₁ u₁ p q ⊤
+        ((K₁.X (p : ℤ)).presheaf.map
+          (eqToHom (by simp) : op (f ⁻¹ᵁ (⊤ : X.Opens)) ⟶ op (⊤ : X'.Opens))
+          ((l.f (p : ℤ)).val.app (op ⊤) x))
+        ((L₁.X (q : ℤ)).presheaf.map
+          (eqToHom (by simp) : op (f ⁻¹ᵁ (⊤ : X.Opens)) ⟶ op (⊤ : X'.Opens))
+          ((r.f (q : ℤ)).val.app (op ⊤) y))
+    rw [hs]
+    have hres := tensorSection_restriction
+      (HomologicalComplex.ιTensorObj K₁ L₁ (p : ℤ) (q : ℤ) ((p + q : ℕ) : ℤ)
+        (by simp) ≫ u₁.f _) (f ⁻¹ᵁ ⊤) ⊤ (by simp)
+      ((l.f (p : ℤ)).val.app (op ⊤) x) ((r.f (q : ℤ)).val.app (op ⊤) y)
+    have he : (homOfLE (show (⊤ : X'.Opens) ≤ f ⁻¹ᵁ (⊤ : X.Opens) by simp)).op =
+        (eqToHom (by simp) : op (f ⁻¹ᵁ (⊤ : X.Opens)) ⟶ op (⊤ : X'.Opens)) :=
+      Subsingleton.elim _ _
+    simpa only [tensorChainSectionPair_apply, Hom.comp_app,
+      ConcreteCategory.comp_apply, app_val_apply, he] using hres
 
 end
 end AlgebraicGeometry.Scheme.Modules
