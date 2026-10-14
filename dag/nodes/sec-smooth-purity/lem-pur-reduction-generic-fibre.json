@@ -24,9 +24,88 @@
   "def-pc-scheme-fibre",
   "def-weil-pbc-scheme-reduction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood $\\operatorname{Spec}A\\subseteq T$ of $\\eta$, and cover its inverse image by affine opens $\\operatorname{Spec}B$ using [def-pc-scheme] and [lem-weil-pbc-affine-open-spec-points]. The prime $\\mathfrak p\\subset A$ corresponding to $\\eta$ is minimal by [lem-weil-pbc-spec-irreducible-components-minimal-primes]. Indeed the closure of $\\eta$ in this open is an irreducible component: if it were properly contained in an irreducible subset of the open, closure in $T$ would contradict maximality of the original component. Put $k=\\kappa(\\mathfrak p)$, $N=\\sqrt{(0)}\\subseteq B$, and $\\bar B=B/N$. By [def-weil-pbc-scheme-reduction], [def-pc-scheme-fibre] and [lem-weil-pbc-fibre-product-affine-spectra], the two fibres on this chart have coordinate rings $D=B\\otimes_A k$ and $C=\\bar B\\otimes_A k$, and the canonical map on rings is induced by $B\\to\\bar B$. By [lem-weil-pbc-open-fibre-product], taking the base open to be $\\operatorname{Spec}A$ and the other factor to be $\\operatorname{Spec}k$, these chart fibres are the open preimages of the chosen affine opens in each fibre. Thus they cover both fibres, compatibly with their canonical morphism.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "def-weil-pbc-scheme-reduction",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 054Z, lemma-reduction-generic-fibre, proof"
+   }
+  },
+  {
+   "text": "Let $S=A\\setminus\\mathfrak p$ and $L=S^{-1}B$, where the denominators in $B$ are images of elements of $S$. By [lem-weil-pbc-localization-base-change], $L=B\\otimes_A A_{\\mathfrak p}$. By [def-weil-pbc-localization-at-prime], $D=L/J$, where $J=(\\mathfrak p A_{\\mathfrak p})L$. Every element of $\\mathfrak p A_{\\mathfrak p}$ is nilpotent by the first clause of [lem-weil-pbc-minimal-prime-reduced-localization-field], applied to $A$ with no reducedness assumption. Thus $J$ consists of nilpotents: each element is a finite sum $\\sum_{i=1}^r a_i\\ell_i$ with $a_i^{n_i}=0$, and its power of degree $1+\\sum_i(n_i-1)$ vanishes, since every monomial has some $a_i$ to exponent at least $n_i$. The empty sum is zero.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 054Z, lemma-reduction-generic-fibre, proof"
+   }
+  },
+  {
+   "text": "The map $L\\to S^{-1}\\bar B$ is surjective and has kernel $K=S^{-1}N$. In fact a fraction $b/s$ maps to zero precisely when some $t\\in S$ has image $tb\\in N$; then $b/s=(tb)/(ts)$ is in the image of $S^{-1}N$. Conversely fractions with numerator in $N$ map to zero. Moreover $K$ is exactly the nilradical of $L$. One inclusion follows because fractions with nilpotent numerator are nilpotent. For the other, if $(b/s)^n=0$ with $n\\geq1$, some $t\\in S$ has $tb^n=0$, hence $(tb)^n=t^{n-1}(tb^n)=0$ and $b/s=(tb)/(ts)\\in K$. Both localizations have the general localization properties supplied by [lem-weil-pbc-localization-base-change], applied to $B$ and $\\bar B$. Their zero criterion gives the killing denominator used above. Fraction equality follows from it: $b/s-b\\prime/s\\prime=(bs\\prime-b\\prime s)/(ss\\prime)$ is zero exactly when some image denominator kills its numerator, because $ss\\prime$ is a unit. Surjectivity follows by lifting each numerator in $\\bar B$ to $B$. These arguments remain valid when a denominator maps to zero.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 054Z, lemma-reduction-generic-fibre, proof"
+   }
+  },
+  {
+   "text": "By step 2, $J\\subseteq K$. Apply the fibre-ring formula of [def-weil-pbc-localization-at-prime] to $\\bar B$: $C=(S^{-1}\\bar B)/(\\mathfrak p A_{\\mathfrak p})(S^{-1}\\bar B)$. Step 3 identifies $S^{-1}\\bar B=L/K$; the displayed ideal is zero since it is the image of $J\\subseteq K$. Thus the canonical map $D=L/J\\to C=L/K$ is surjective with kernel $K/J$. This kernel is exactly the nilradical of $D$: each class from $K$ is nilpotent, while if $(x+J)^n=0$ then $x^n\\in J\\subseteq K$, so $(x^n)^m=0$ for some $m\\geq1$ and $x\\in K$. Consequently $C=D/\\sqrt{(0)}$ with its canonical quotient map, not merely an abstract ring isomorphism.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 054Z, lemma-reduction-generic-fibre, proof"
+   }
+  },
+  {
+   "text": "On every affine fibre chart the canonical morphism $\\operatorname{Spec}C\\to\\operatorname{Spec}D$ is therefore exactly the closed subscheme cut out by the nilradical, which is the reduction by [def-weil-pbc-scheme-reduction]. The kernel ideals just computed are kernels of restrictions of the single canonical morphism, so agree on overlaps. Quotienting the structure sheaf by these kernels identifies it globally with $\\mathcal O_{Z_\\eta}/\\mathcal N_{Z_\\eta}$; hence the local identifications glue to $(Z_{\\mathrm{red}})_\\eta\\cong(Z_\\eta)_{\\mathrm{red}}$ over $\\kappa(\\eta)$. The structure maps agree because all affine maps were induced from the quotient $B\\to B/N$ by tensoring with $k$. Empty charts and an empty fibre satisfy the same calculation with zero rings. No finite generation or uniform nilpotence exponent, finite type, flatness, or reducedness of $T$ was used.",
+   "uses": [
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 054Z, lemma-reduction-generic-fibre, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "def-weil-pbc-scheme-reduction",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-localization-base-change",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 054Z, lemma-reduction-generic-fibre, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,15 +148,65 @@
    "results": "[leanfinder] OK 8 hit(s); Returned: AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier, AlgebraicGeometry.affine_isReduced_iff, AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.isReduced_stalk_of_isReduced, AlgebraicGeometry.IsReduced, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.isReduced_of_isAffine_isReduced, AlgebraicGeometry.Scheme.nilradical_eq_bot",
    "date": "2026-10-14",
    "verdict": "no match: Returned affine and stalk reducedness criteria do not identify reductions with generic fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any morphism of schemes reduction commutes with the fibre at a generic point of an irreducible component",
+   "results": "8 hits: AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint, AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk, genericPoints.component_ofComponent, AlgebraicGeometry.Scheme.Spec_stalkClosedPointTo_fromSpecStalk, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.Scheme.toSpecΓ_base, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match: returned fibre, generic-point, and reducedness definitions or criteria do not state the canonical reduction/generic-fibre comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fiber\", \"reduction\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: returned fibre, generic-point, and reducedness definitions or criteria do not state the canonical reduction/generic-fibre comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "reduction.*fiber|fiber.*reduction|reduction.*[Gg]eneric|[Gg]eneric.*reduction",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: returned fibre, generic-point, and reducedness definitions or criteria do not state the canonical reduction/generic-fibre comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The generic fiber of a reduced scheme over an arbitrary base is reduced",
+   "results": "8 hits: AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier, AlgebraicGeometry.IsReduced, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.affine_isReduced_iff, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced",
+   "date": "2026-10-14",
+   "verdict": "no match: returned fibre, generic-point, and reducedness definitions or criteria do not state the canonical reduction/generic-fibre comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduction of schemes commutes with taking generic fibers",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-generic-geometrically-reduced-preparation",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-pur-reduction-generic-fibre",
+  "worker": "stage1",
+  "summary": "Verified Stacks 054Z with arbitrary nonreduced base, reused existing affine-fibre and minimal-prime localization Mathlib leaves, and expanded the canonical nilradical-kernel calculation. No new nodes or statement correction.",
+  "blueprint": "Ancestor lem-fin-generic-radicial-smoothing proof paragraphs 2-3: identifies the generic fibre of the reduction of the prepared pullback with the reduction of its field fibre. This is the commutative-algebra detail of that identification, as in Stacks 054Z."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-8bdd88cb2",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-8bdd88cb2 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, source passages, report and unit/chapter route. All five steps prove the canonical reduction identification without added hypotheses; checked nonreduced bases, zero denominators, empty fibres and unbounded nilpotence. No new nodes, duplicate comparison, cycle or missing citation found. Exact archived target declarations retain their coefficient categories and base-change maps. Detailed checks are in review.md."
+ }
 }
