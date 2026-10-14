@@ -14440,3 +14440,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:49 L: merged deliver/W4/Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling (stage 3; reviewer PASS; first push; landing 20261014T034915-L-816526 (proof); batch 20261014T034905; modules 1; new nodes 0)
 - 03:51 L: returned deliver/Q3/Sheaf.Paper.ModuleCupEqualDerivedMapsClass (reviewer RETURN: (reviewer X-6b899, head 6b8994456) H10 / G1: The earlier compilation fault remains unresolved. Two independent --all run)
 - 03:52 L: returned deliver/T4/Sheaf.Algebra.Homology.AffineTensorPullbackStalkCoordinates (reviewer RETURN: (reviewer X-c6c6a, head c6c6ab563) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.Aff)
+- 03:55 L: returned deliver/XR4ee1424d1f9ed605/Sheaf.AlgebraicGeometry.ClosedImmersionResidueFieldIso (reviewer RETURN: (the landing tools, head 55307de9d) the delivery did not land: lean/Sheaf/AlgebraicGeometry/ClosedImmersionResidueFieldI)
