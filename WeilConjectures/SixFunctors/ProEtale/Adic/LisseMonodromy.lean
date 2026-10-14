@@ -283,6 +283,37 @@ theorem reparam_comp_upperStar_comp_mono (f : Y ⟶ Y) (a : Spec (.of Ω) ≅ Sp
     Iso.hom_inv_id_app_assoc]
   rw [reassoc_of% e₁, e₂]
 
+/-- The transport along the reparametrisation path and along an equality of geometric points,
+followed by `G_{s ≫ f} = (f^* G)_s ⟶ G_s`, computed on the underlying sheaves. -/
+theorem reparam_upperStar_apply (f : Y ⟶ Y) (a : Spec (.of Ω) ≅ Spec (.of Ω))
+    {s : Spec (.of Ω) ⟶ Y} (hs : s ≫ f = a.hom ≫ s) (G : LisseSheaf l Y)
+    (ψ : G.upperStar l f ⟶ G) (v : StalkSpace s G) :
+    ((WeilCoefficients.toModuleCat l).map ((lisseStalk l s).map ψ)).hom
+      (((WeilCoefficients.toModuleCat l).map (upperStarStalkIso l f s G.obj.X).hom).hom
+        (((WeilCoefficients.toModuleCat l).map
+          ((M.mono (eqToIso (congrArg fiber hs.symm))).hom.app G)).hom
+          (((WeilCoefficients.toModuleCat l).map
+            ((M.mono (fiberReparamIso a s)).inv.app G)).hom v))) =
+    ((WeilCoefficients.toModuleCat l).map ((stalkFunctor l s).map ψ.hom.hom)).hom
+      (((WeilCoefficients.toModuleCat l).map (upperStarStalkIso l f s G.obj.X).hom).hom
+        (((WeilCoefficients.toModuleCat l).map
+          ((Sheaf.Γ _ _).map ((upperStarCongr _ hs.symm).hom.app G.obj.X))).hom
+          (((WeilCoefficients.toModuleCat l).map (reparamStalkIso l a s G.obj.X).inv).hom v))) := by
+  have e₃ : (M.mono (fiberReparamIso a s)).app G = reparamStalkIso l a s G.obj.X :=
+    Iso.ext (M.mono_reparam a s G)
+  have h₁ : ((WeilCoefficients.toModuleCat l).map
+      ((M.mono (fiberReparamIso a s)).inv.app G)).hom v =
+      ((WeilCoefficients.toModuleCat l).map (reparamStalkIso l a s G.obj.X).inv).hom v := by
+    rw [← Iso.app_inv, e₃]
+    rfl
+  have h₂ : ∀ w, ((WeilCoefficients.toModuleCat l).map
+      ((M.mono (eqToIso (congrArg fiber hs.symm))).hom.app G)).hom w =
+      ((WeilCoefficients.toModuleCat l).map
+        ((Sheaf.Γ _ _).map ((upperStarCongr _ hs.symm).hom.app G.obj.X))).hom w := fun w ↦ by
+    rw [M.mono_eqToIso_hom_app]
+    rfl
+  rw [h₁, h₂]
+  rfl
 end LisseMonodromy
 
 /-- **Lisse `ℚ̄_ℓ`-sheaves and continuous representations** (blueprint:
