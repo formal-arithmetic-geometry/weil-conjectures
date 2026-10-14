@@ -22,9 +22,126 @@
   "def-pc-fibre-product",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an affine open V_0 containing v by the affine-opens basis. Replace the base by V_0 and the total space by T=X times_Y V_0. The base-change lemma makes T→V_0 integral; hence T=Spec(B) for V_0=Spec(A) and an integral A-algebra B, by the definition of integral. Pull back the given cover to T using covering base change. A neighbourhood over V_0 and maps into this pulled-back cover give the required neighbourhood over V and maps into the original cover by composition. If T is empty, take V′=V_0 and J empty.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-sbc-integral-morphism-base-change",
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04DR (lemma-integral-B), affine reduction"
+   }
+  },
+  {
+   "text": "For every point of each covering member over T choose an affine open neighbourhood, then a principal open on which the etale algebra over B is standard, using the affine-opens basis and the locally-standard lemma. These refined members still cover T. Their images are open by the etale open-map lemma; since Spec(B) is quasi-compact, finitely many images cover T. Denote the chosen members by E_k=Spec(P_k.Ring), k in a finite set K, and retain their maps E_k→U_{i(k)} times_V V_0. This is a refinement, not a replacement without maps to the original cover.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-etale-locally-standard",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04DR (lemma-integral-B), standard etale covering reduction; Algebra Tag 00UE (proposition-etale-locally-standard)"
+   }
+  },
+  {
+   "text": "Apply standard-etale finite-subalgebra descent to the integral A-algebra B (the ring of T, not the ring of the original X). Obtain B_0⊆B finite over A and Q_k with B tensor_{B_0} Q_k.Ring ≅ P_k.Ring. Put Z=Spec(B_0) and F_k=Spec(Q_k.Ring). Then Z→V_0 is finite and the E_k are the pullbacks of F_k→Z. For the affine tensor-product identification, maps from any affine test scheme into the proposed pullback are compatible ring maps; the tensor-product universal property gives exactly these maps. The affine identifications glue on affine open covers of a test scheme, so they give the scheme fibre-product identification. The inclusion B_0→B is injective and integral: a monic equation over A for an element of B is also one over B_0. Lying over therefore makes T→Z surjective. For any z∈Z choose t∈T over z and an E_k-point over t; its projection to F_k lies over z. Thus {F_k→Z} is an etale covering, so the finite problem really is a covering problem.",
+   "uses": [
+    "lem-sbc-standard-etale-finite-subalgebra",
+    "lem-weil-pbc-integral-injective-lying-over",
+    "def-weil-finite-integral-morphism",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04DR (lemma-integral-B), finite-subalgebra reduction; Algebra Tag 00GQ (lemma-integral-overring-surjective)"
+   }
+  },
+  {
+   "text": "Choose an algebraic closure Ω of κ(v) and its geometric point y of V_0. The Ω-fibre of Z→V_0 is finite: on affine charts tensoring a finite set of module generators keeps the algebra finite over Ω, and the finite-fibres lemma applies. For a prime of this finite-dimensional Ω-algebra, its quotient is a finite-dimensional domain. Multiplication by a nonzero element is injective and hence surjective, so that quotient is a field and already the residue field. It is algebraic over Ω and therefore equal to Ω; hence its points are precisely the finite set H of geometric points t:Spec(Ω)→Z over y. For each t∈H, the geometric-cover-lift lemma gives k(t) and a marked lift into F_{k(t)}. Apply the finite pointed-piece refinement to Z→V_0 and this pointed etale neighbourhood of t. Obtain a pointed neighbourhood c_t of y and its selected clopen piece D_t mapping over Z to F_{k(t)}. Its geometric fibre contains t and no other element of H: the other marked points lie in the other pieces of the disjoint decomposition.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "lem-sbc-finite-pointed-piece-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04DQ (lemma-finite-B), finite fibre and pointed neighbourhood refinements"
+   }
+  },
+  {
+   "text": "Take the finite fibre product c of the c_t over V_0, with marked point given by the tuple of their Ω-points; for H empty use the identity neighbourhood. The small etale site has finite limits, so c is etale over V_0. Pull each D_t back to Z times_{V_0} c and compose its map to F_{k(t)}. In an ordering of H, set E_t=D_t minus the union of earlier D_s. Finite unions and differences of clopen subsets are clopen. These E_t are pairwise disjoint, have the same union as the D_t, retain their respective marked points because D_s excludes t for s≠t, and retain maps to F_{k(t)} by restriction.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04DQ (lemma-finite-B), finitely many refinements and disjoint pieces"
+   }
+  },
+  {
+   "text": "Let c_0 be the ordinary point underlying the chosen Ω-point of c. Every point of Z times_{V_0} c over c_0 lifts to an Ω-point over that marked point by finite geometric-point lifting. Its projection to Z is some t∈H, so it belongs to D_t and thus to the union of the E_t. Consequently the clopen complement R has empty fibre over c_0. The projection Z times_{V_0} c→c is finite (tensoring module generators proves this on affine charts); the finite closed-map lemma makes the image of R closed and excludes c_0. Restrict c to its open complement V′. Now the restricted E_t cover Z times_{V_0} V′ and remain disjoint with the same maps. This also handles H empty: remove the closed image of the entire finite scheme to obtain an empty pullback.",
+   "uses": [
+    "lem-weil-pbc-finite-geometric-point-lift",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04DQ (lemma-finite-B), removal of the finite closed complement"
+   }
+  },
+  {
+   "text": "Pull each E_t back along T times_{V_0} V′→Z times_{V_0} V′ to obtain W_t. Inverse images commute with union and intersection, so the W_t are disjoint opens covering T times_{V_0} V′=X times_Y V′. The two compatible maps W_t→T and W_t→F_{k(t)} give, by the fibre-product universal property, a map W_t→T times_Z F_{k(t)}=Spec(B tensor_{B_0} Q_{k(t)}.Ring)≅E_{k(t)}. Compose with the retained refinement map to U_{i(k(t))}. Its map to X times_Y V is the original pullback projection because both components of the fibre-product map have those structural maps. Set J=H and α(t)=i(k(t)); if the total pullback is empty instead take J empty.",
+   "uses": [
+    "lem-sbc-standard-etale-finite-subalgebra",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04DR (lemma-integral-B), pullback of the finite disjoint refinement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-sbc-integral-morphism-base-change",
+  "lem-weil-pbc-etale-covering-base-change",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-etale-locally-standard",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sbc-standard-etale-finite-subalgebra",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-sbc-finite-pointed-piece-refinement",
+  "def-weil-pbc-etale-site",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-finite-geometric-point-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04DR (lemma-integral-B), using Tag 04DQ (lemma-finite-B) and Tag 04DP (lemma-simplify-B)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -98,7 +215,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "sbc-lem-integral-etale-direct-image-exact",
   "by": "worker",
@@ -114,5 +231,69 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "lem-sbc-integral-etale-cover-disjoint-refinement",
+  "worker": "stage1",
+  "summary": "Second reader repaired the base ring in finite descent, proved the descended family covers using lying over, expanded simultaneous finite pointed-piece refinements and closed-complement shrinking, and wrote the final compatible fibre-product maps. No new nodes.",
+  "blueprint": "Realizes the item blueprint place: the disjoint decomposition in 04DR reduced to 04DQ/lemma-finite-B, with 04DP as the refinement formulation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic affine, etale-cover, integral-ring or finite-morphism input to the 04DR/04DQ argument; no statement of this unit supplies this input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-locally-standard",
+    "why": "Generic affine, etale-cover, integral-ring or finite-morphism input to the 04DR/04DQ argument; no statement of this unit supplies this input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-morphism-open-map",
+    "why": "Generic affine, etale-cover, integral-ring or finite-morphism input to the 04DR/04DQ argument; no statement of this unit supplies this input."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic affine, etale-cover, integral-ring or finite-morphism input to the 04DR/04DQ argument; no statement of this unit supplies this input."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-lying-over",
+    "why": "Generic affine, etale-cover, integral-ring or finite-morphism input to the 04DR/04DQ argument; no statement of this unit supplies this input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Generic affine, etale-cover, integral-ring or finite-morphism input to the 04DR/04DQ argument; no statement of this unit supplies this input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "why": "Generic affine, etale-cover, integral-ring or finite-morphism input to the 04DR/04DQ argument; no statement of this unit supplies this input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-geometric-point-lift",
+    "why": "Generic affine, etale-cover, integral-ring or finite-morphism input to the 04DR/04DQ argument; no statement of this unit supplies this input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Generic affine, etale-cover, integral-ring or finite-morphism input to the 04DR/04DQ argument; no statement of this unit supplies this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-etale-locally-standard",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-pbc-finite-geometric-point-lift",
+  "lem-weil-pbc-etale-covering-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-8ea383c43",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-8ea383c43 (reviewer sub-agent of L); spot-checked: Full review written to review.md. The item matches Stacks Tags 04DR/04DP, all seven proof steps and cited DAG statements check out, edge cases were tested, and no repairs or duplicate-node changes are required."
  }
 }
