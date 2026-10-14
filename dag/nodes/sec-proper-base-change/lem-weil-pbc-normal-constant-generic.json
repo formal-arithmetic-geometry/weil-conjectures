@@ -36,153 +36,28 @@
  ],
  "proof": [
   {
-   "text": "*The canonical maps and the units.* For $f:Z\\to Y$ the map $c_f$ exists and is unique by the adjunction between the constant sheaf and global sections [lem-weil-pbc-constant-sheaf-maps-global-sections], applied on $Y_{\\Et}$ to $\\mathcal F=f_*\\underline E_Z$, whose global sections are $\\underline E_Z(Y\\times_YZ)=\\underline E_Z(Z)$ [def-weil-pbc-direct-image]. The isomorphism $\\gamma_f:f^{-1}\\underline E_Y\\to\\underline E_Z$ of [lemma-constructible-pullback-constant] is the unique isomorphism between the two left adjoints $M\\mapsto f^{-1}\\underline M_Y$ and $M\\mapsto\\underline M_Z$ of $\\mathcal G\\mapsto\\Gamma(Z,\\mathcal G)=\\Gamma(Y,f_*\\mathcal G)$ compatible with their units; the unit of the first is $e\\mapsto\\eta_f(\\iota_Y(e))$, that of the second $e\\mapsto\\iota_Z(e)$, so $\\Gamma(Y,f_*\\gamma_f)\\circ\\eta_f(Y)\\circ\\iota_Y=\\iota_Z$, and by the uniqueness in the constant-sheaf adjunction $f_*(\\gamma_f)\\circ\\eta_f=c_f$. As $\\gamma_f$ is an isomorphism, so is $f_*(\\gamma_f)$, hence $c_f$ is an isomorphism if and only if $\\eta_f$ is. It therefore suffices to prove that $c_g$ and $c_j$ are isomorphisms.",
+   "text": "Apply the generic-point conjunct theorem isIso_unit_constantSheaf_generic_unit to obtain the first component of the conjunction.",
    "uses": [
-    "lem-weil-pbc-constant-sheaf-maps-global-sections",
-    "lemma-constructible-pullback-constant",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-inverse-image"
+    "lem-weil-pbc-normal-constant-generic-unit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.73.13 (Tag 09Z5), proof of (1)"
-   }
+   "elementary": false
   },
   {
-   "text": "*$g$ is quasi-compact and quasi-separated.* The preimage under $g$ of any open subset of $Y$ is empty or all of the one-point space $\\operatorname{Spec}K$, hence quasi-compact; so $g$ is quasi-compact. $\\operatorname{Spec}K$ is affine, hence quasi-separated, so $g$ is quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence] (1). (This is the hypothesis of the stalk formula, Stacks Tag 03Q9, which the source cites as Theorem 'higher-direct-images'.)",
+   "text": "Apply the nonempty-open conjunct theorem isIso_unit_constantSheaf_open_unit to obtain the second component for every open immersion.",
    "uses": [
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "def-weil-pbc-scheme-conventions"
+    "lem-weil-pbc-normal-constant-generic-open-unit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.73.13 (Tag 09Z5), proof of (1)"
-   }
-  },
-  {
-   "text": "*The local ring at a geometric point.* Let $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point [def-weil-geometric-point] lying over $y\\in Y$. Choose an affine open $V_0=\\operatorname{Spec}A\\subset Y$ containing $y$; it is nonempty, so it contains the generic point $\\eta$ of the irreducible space $Y$, and $A$ is an integral domain [def-pc-integral-scheme] whose zero ideal is the point $\\eta$, so $K=\\mathcal O_{Y,\\eta}=A_{(0)}$ is the field of fractions of $A$. For every prime $\\mathfrak q\\subset A$ the localization $A_{\\mathfrak q}=\\mathcal O_{Y,\\mathfrak q}$ is a normal domain [def-sbc-normal-dominant-galois], i.e. $A$ is a normal ring. By [lem-weil-pbc-etale-local-ring-triples] (2) and (3), the strict henselization $C=\\mathcal O^{\\mathrm{sh}}_{Y,\\bar y}$ [def-weil-pbc-strict-henselization-limit] is canonically the colimit $\\varinjlim_{(B,\\mathfrak q,\\phi)}B$ over the category of triples over $(A,\\mathfrak p_y)$, compatibly with the maps from the affine pointed etale neighbourhoods factoring through $V_0$; by [lem-weil-pbc-strict-henselization-triples] (1) and (2) this is a filtered colimit of $A$-algebras $B$ etale over $A$, and $C$ is a local ring. In particular $C$ is an $A$-algebra and the canonical morphism $Y_{(\\bar y)}=\\operatorname{Spec}C\\to Y$ is $\\operatorname{Spec}C\\to\\operatorname{Spec}A=V_0\\subset Y$.",
-   "uses": [
-    "def-weil-geometric-point",
-    "def-pc-integral-scheme",
-    "def-sbc-normal-dominant-galois",
-    "def-weil-pbc-strict-henselization-limit",
-    "lem-weil-pbc-etale-local-ring-triples",
-    "lem-weil-pbc-strict-henselization-triples"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.73.13 (Tag 09Z5), proof of (1)"
-   }
-  },
-  {
-   "text": "*$\\mathcal O^{\\mathrm{sh}}_{Y,\\bar y}$ is a normal domain.* By [lem-weil-pbc-etale-colimit-normal-local-domain], applied to the normal domain $A$ and the local filtered colimit $C$ of etale $A$-algebras of the previous step, $C$ is a normal domain and every nonzero element of $A$ has nonzero image in $C$. (Stacks cites More on Algebra, Lemma 06DI for this.)",
-   "uses": [
-    "lem-weil-pbc-etale-colimit-normal-local-domain"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.73.13 (Tag 09Z5), proof of (1)"
-   }
-  },
-  {
-   "text": "*The generic fibre of $Y_{(\\bar y)}$ is irreducible.* Let $T=\\operatorname{Spec}K\\times_YY_{(\\bar y)}$ [def-pc-fibre-product], with projection $p:T\\to\\operatorname{Spec}K$. Both $g$ and $Y_{(\\bar y)}\\to Y$ factor through the open subscheme $V_0=\\operatorname{Spec}A$ (step 3; $\\eta\\in V_0$), and an open immersion is a monomorphism, so $T=\\operatorname{Spec}K\\times_{\\operatorname{Spec}A}\\operatorname{Spec}C=\\operatorname{Spec}(K\\otimes_AC)$. By step 4 and [lem-weil-pbc-generic-fibre-localization-domain-irreducible] (with $C$ a domain and $A\\to C$ injective), $K\\otimes_AC$ is a localization of $C$, an integral domain, and $T$ is nonempty, irreducible and connected. (The source: 'Hence $\\operatorname{Spec}(K)\\times_X\\operatorname{Spec}(\\mathcal O^{sh}_{X,\\bar x})$ is irreducible.')",
-   "uses": [
-    "def-pc-fibre-product",
-    "lem-weil-pbc-generic-fibre-localization-domain-irreducible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.73.13 (Tag 09Z5), proof of (1)"
-   }
-  },
-  {
-   "text": "*The stalk of $g_*\\underline E$ at $\\bar y$.* The sheaf $\\underline E_{\\operatorname{Spec}K}$ is torsion ($E$ is finite) [def-weil-pbc-etale-sheaves], and $g$ is quasi-compact and quasi-separated (step 2), so [prop-weil-pbc-strict-henselization-stalk-formula] in degree $q=0$ (where $R^0g_*=g_*$, $g_*$ being left exact [def-weil-pbc-direct-image]) gives an isomorphism $\\Phi:(g_*\\underline E_{\\operatorname{Spec}K})_{\\bar y}\\xrightarrow{\\sim}\\Gamma(T,p^{-1}\\underline E_{\\operatorname{Spec}K})$; it sends the class at a pointed etale neighbourhood $(W,\\bar w)$ of a section $s\\in(g_*\\underline E_{\\operatorname{Spec}K})(W)=\\underline E_{\\operatorname{Spec}K}(\\operatorname{Spec}K\\times_YW)$ to the pullback of $s$ along the projection $T\\to\\operatorname{Spec}K\\times_YW$. Composing with $\\Gamma(T,\\gamma_p)$, $\\gamma_p:p^{-1}\\underline E_{\\operatorname{Spec}K}\\cong\\underline E_T$ [lemma-constructible-pullback-constant], identifies the stalk with $\\underline E_T(T)$; by the description of $\\gamma_p$ in step 1 (its unit sends $e$ to $\\iota_T(e)$) and the naturality of $\\gamma$ in the base, the pullback of a constant section $\\iota_{Z}(e)$ ($Z$ any etale $\\operatorname{Spec}K$-scheme) to $T$ goes to $\\iota_T(e)$.",
-   "uses": [
-    "prop-weil-pbc-strict-henselization-stalk-formula",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-direct-image",
-    "lemma-constructible-pullback-constant",
-    "def-weil-pbc-geometric-stalks"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.73.13 (Tag 09Z5), proof of (1)"
-   }
-  },
-  {
-   "text": "*$c_g$ is bijective on the stalk at $\\bar y$.* Consider $E\\xrightarrow{\\epsilon}(\\underline E_Y)_{\\bar y}\\xrightarrow{(c_g)_{\\bar y}}(g_*\\underline E_{\\operatorname{Spec}K})_{\\bar y}\\xrightarrow{\\Gamma(T,\\gamma_p)\\circ\\Phi}\\underline E_T(T)$, where $\\epsilon(e)$ is the class of $\\iota_Y(e)$ at $(Y,\\bar y)$, an isomorphism by [lem-weil-pbc-constant-sheaf-geometric-stalk]. By the definition of $c_g$ (step 1) and its naturality, $c_g(Y)(\\iota_Y(e))=\\iota_{\\operatorname{Spec}K}(e)$, and by step 6 its image in $\\underline E_T(T)$ is $\\iota_T(e)$; so the composite is $\\iota_T$. Since $T$ is connected (step 5), $\\iota_T$ is an isomorphism by [lem-weil-pbc-constant-sheaf-sections-connected]. As the outer maps $\\epsilon$ and $\\Gamma(T,\\gamma_p)\\circ\\Phi$ are isomorphisms, $(c_g)_{\\bar y}$ is an isomorphism. (Source: 'It follows that the stalk $(g_*\\underline E)_{\\bar x}$ is equal to $E$'.)",
-   "uses": [
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "lem-weil-pbc-constant-sheaf-sections-connected",
-    "lem-weil-pbc-constant-sheaf-maps-global-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.73.13 (Tag 09Z5), proof of (1)"
-   }
-  },
-  {
-   "text": "*Conclusion of (1).* The geometric point $\\bar y$ was arbitrary, so $c_g$ is an isomorphism on every geometric stalk and hence an isomorphism of abelian sheaves by [lemma-weil-pbc-geometric-stalk-conservative]; by step 1 the unit $\\eta_g$ is an isomorphism as well.",
-   "uses": [
-    "lemma-weil-pbc-geometric-stalk-conservative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.73.13 (Tag 09Z5), proof of (1)"
-   }
-  },
-  {
-   "text": "*Proof of (2).* Let $j:U\\hookrightarrow Y$ be a nonempty open. $U$ is an integral normal scheme with the same generic point $\\eta$ and function field $K$ (a nonempty open of an irreducible space is irreducible and dense, its affine opens are affine opens of $Y$, and its local rings are those of $Y$) [def-pc-integral-scheme], [def-sbc-normal-dominant-galois], and $g=j\\circ g'$ with $g':\\operatorname{Spec}K\\to U$ the inclusion of its generic point. Let $d=d_{j,g'}:g_*\\xrightarrow{\\sim}j_*g'_*$ be the isomorphism of [lem-weil-pbc-inverse-image-composition] (1). The morphism $j_*(c_{g'})\\circ c_j:\\underline E_Y\\to j_*\\underline E_U\\to j_*g'_*\\underline E_{\\operatorname{Spec}K}$ sends $\\iota_Y(e)$ to $j_*(c_{g'})(\\iota_U(e))=\\iota_{\\operatorname{Spec}K}(e)$, as does $d\\circ c_g$ (the component of $d$ at $Y$ is induced by the identification $(Y\\times_YU)\\times_U\\operatorname{Spec}K=\\operatorname{Spec}K$); by the uniqueness in [lem-weil-pbc-constant-sheaf-maps-global-sections], $j_*(c_{g'})\\circ c_j=d\\circ c_g$. By (1) for $Y$, $d\\circ c_g$ is an isomorphism; by (1) for $U$, $c_{g'}$ and hence $j_*(c_{g'})$ are isomorphisms. Therefore $c_j=j_*(c_{g'})^{-1}\\circ d\\circ c_g$ is an isomorphism, and so is $\\eta_j$ by step 1. (Stacks argues: the map $j_*\\underline E\\to g_*\\underline E$ is injective because $\\operatorname{Spec}K\\times_YV$ is dense in $U\\times_YV$ for every etale $V\\to Y$, and $\\underline E\\to j_*\\underline E\\to g_*\\underline E$ is an isomorphism by (1). Here that map, $d^{-1}\\circ j_*(c_{g'})$, is even an isomorphism by (1) applied to $U$, which makes the density argument unnecessary; the structure of the argument is the source's.)",
-   "uses": [
-    "def-pc-integral-scheme",
-    "def-sbc-normal-dominant-galois",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-constant-sheaf-maps-global-sections",
-    "def-weil-pbc-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.73.13 (Tag 09Z5), proof of (2)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-constant-sheaf-maps-global-sections",
-  "lemma-constructible-pullback-constant",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-geometric-point",
-  "def-pc-integral-scheme",
-  "def-sbc-normal-dominant-galois",
-  "def-weil-pbc-strict-henselization-limit",
-  "lem-weil-pbc-etale-local-ring-triples",
-  "lem-weil-pbc-strict-henselization-triples",
-  "lem-weil-pbc-etale-colimit-normal-local-domain",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
-  "prop-weil-pbc-strict-henselization-stalk-formula",
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "lem-weil-pbc-constant-sheaf-sections-connected",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-weil-pbc-inverse-image-composition"
+  "lem-weil-pbc-normal-constant-generic-unit",
+  "lem-weil-pbc-normal-constant-generic-open-unit"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Etale Cohomology, Lemma 59.73.13 (Tag 09Z5, label lemma-push-constant-sheaf-from-open) and its proof; ingredients More on Algebra Tag 06DI, Etale Cohomology Theorem Tag 03Q9; the injectivity in (2) is obtained from (1) for U instead of the source's density argument (step 9)"
+  "by": "worker",
+  "document": "WeilConjectures/ConstructibleSheaf/FinitePushforward.lean",
+  "place": "constructor proof reducing the conjunction to the generic-point and nonempty-open split declarations"
  },
  "mathlib_searches": [
   {
@@ -289,20 +164,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261014T141505-L-226422",
+  "landing": "20261014T155257-L-1577185",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Etale.exists_isNoetherian_upperStar_iso",
-   "AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian",
-   "AlgebraicGeometry.Etale.isFinitelyPresentable_of_isConstructibleSheaf",
-   "AlgebraicGeometry.Etale.isIso_unit_constantSheaf_of_isIntegrallyClosed"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian",
-   "AlgebraicGeometry.Etale.isIso_unit_constantSheaf_of_isIntegrallyClosed"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

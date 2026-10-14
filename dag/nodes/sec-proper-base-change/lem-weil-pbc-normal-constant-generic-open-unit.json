@@ -1,0 +1,104 @@
+{
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "status": "split",
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.ConstructibleSheaf.FinitePushforward",
+  "date": "2026-10-14",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "nonempty-open conjunct",
+   "via": []
+  },
+  "same_as": []
+ },
+ "id": "lem-weil-pbc-normal-constant-generic-open-unit",
+ "title": "Nonempty-open unit for a normal constant sheaf",
+ "statement": "Let Y be an integral scheme whose local rings are integrally closed, let j : U ⟶ Y be a nonempty open immersion, and let M be a module over a commutative ring Λ. The unit from the constant Λ-module sheaf on Y to its pushforward along j is an isomorphism.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-integral-scheme",
+  "def-sbc-normal-dominant-galois",
+  "def-weil-residue-field",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09Z5, nonempty-open conjunct"
+ },
+ "proof": [
+  {
+   "text": "A nonempty open subscheme of an integral scheme contains the generic point. Repeat the strict-henselian normal-domain calculation on the affine etale basis of the open; the unit is an isomorphism on every basis object and hence of sheaves.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 09Z5, split from the nonempty-open conjunct"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "IsIso constant sheaf generic point upperStar lowerStar unit",
+   "results": "No exact theorem found.",
+   "verdict": "no match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso ((upperStarLowerStarAdjunction _ _).unit.app _)",
+   "results": "No exact theorem found.",
+   "verdict": "no match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf genericPoint unit isIso",
+   "results": "Only the target and finite-type specializations were found.",
+   "verdict": "no match",
+   "date": "2026-10-14"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NormalConstantOpenUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalConstantOpenUnit.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_unit_constantSheaf_open_unit",
+  "statement": "theorem isIso_unit_constantSheaf_open_unit (Λ : Type (u + 1)) [CommRing Λ] {Y : Scheme.{u}} [IsIntegral Y] (hY : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y)) (M : ModuleCat.{u + 1} Λ) {U : Scheme.{u}} (j : U ⟶ Y) [IsOpenImmersion j] [Nonempty U] : IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261014T155257-L-1577185",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261014T155257-L-1577185",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

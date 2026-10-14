@@ -10,24 +10,14 @@ public import Mathlib.CategoryTheory.Presentable.Finite
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Finite.BaseChange
+import Sheaf.AlgebraicGeometry.ConstructibleLimitDescentGeneral
+import Sheaf.AlgebraicGeometry.NormalConstantGenericUnit
+import Sheaf.AlgebraicGeometry.NormalConstantOpenUnit
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Mathlib.CategoryTheory.Presentable.Directed
 import Sheaf.AlgebraicGeometry.ConstructibleAffineFreePresentationGeneral
 import Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit
 import Mathlib.CategoryTheory.Presentable.Limits
-import Mathlib.CategoryTheory.Presentable.Directed
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.ConstructibleLimitDescentGeneral
-import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
-import Sheaf.AlgebraicGeometry.ConstructibleFiniteSelection
-import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.NormalScheme
-import Sheaf.AlgebraicGeometry.StrictHenselization
-import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
-import Sheaf.RingTheory.EtaleColimitNormalLocalDomain
-import Sheaf.RingTheory.StrictHenselizationTriples
-import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Constructible sheaves embed into finite pushforwards of constant sheaves
@@ -99,8 +89,11 @@ theorem Etale.isIso_unit_constantSheaf_of_isIntegrallyClosed {Y : Scheme.{u}} [I
           ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) ∧
       ∀ {U : Scheme.{u}} (j : U ⟶ Y) [IsOpenImmersion j] [Nonempty U],
         IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app
-          ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) :=
-  sorry
+          ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) := by
+  constructor
+  · exact isIso_unit_constantSheaf_generic_unit Λ hY M
+  · intro U j hj hU
+    exact isIso_unit_constantSheaf_open_unit Λ hY M j
 
 private noncomputable def affineFreeHomEquiv
     {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]

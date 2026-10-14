@@ -14880,3 +14880,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:29 L: merged deliver/S1/Sheaf.AlgebraicGeometry.BaseChangeOpenInjectiveCoefficientZero (stage 3; reviewer PASS; first push; landing 20261014T152914-L-1197799 (interface); batch 20261014T152912; modules 4; new nodes 3)
 - 15:30 L: returned deliver/M4/Sheaf.CategoryTheory.SiteSystemStrictificationData (reviewer RETURN: (reviewer X-c3fa4, head c3fa4d9e9) 8(d): Add the missing adapted user to coord/changes/site-system-strictification-finit)
 - 15:42 L: returned deliver/X2/Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic (reviewer RETURN: (reviewer X-eee82, head eee82e875) F1: In coord/changes/smooth-curve-invariance-module.md, lines 14–15, replace 'Vanishi)
+- 15:52 L: merged deliver/Q3/WeilConjectures.ConstructibleSheaf.FinitePushforward (stage 3; reviewer PASS; first push; landing 20261014T155257-L-1577185 (interface); batch 20261014T155254; modules 3; new nodes 2)
