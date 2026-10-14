@@ -66,29 +66,34 @@ open Scheme
 
 section TorsionSheaf
 
-/-- A sheaf `F` of `Λ`-modules on the small étale site of `X` is *torsion* if the stalk
-of `F` at every geometric point of `X` is a torsion abelian group, i.e. every element of
-every geometric stalk is killed by a positive integer. Torsion refers to the underlying
-abelian group of the stalk, not to its `Λ`-module structure; for `Λ = ℤ` this is the
-classical notion of a torsion abelian sheaf [Stacks 03SA]. -/
+/-- This is for describing sheaves in proper base change. -/
 class Scheme.IsTorsionSheaf {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology Ab.{u + 1}) : Prop where
   isTorsion_sheafFiber (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X) :
     IsAddTorsion (↥((pointSmallEtale s).sheafFiber.obj F))
 
+/-- This is for describing sheaves in smooth base change. -/
+class Scheme.OrderInvertibleOnSheaf {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (F : Sheaf X.smallEtaleTopology Ab.{u + 1}) : Prop where
+  isUnit_addOrderOf_sheafFiber (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X)
+      (x : ↥((pointSmallEtale s).sheafFiber.obj F)) :
+    IsUnit ((addOrderOf x : ℕ) : Γ(Y, ⊤))
+
 end TorsionSheaf
 
 section TorsionHomology
 
-variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
-
-/-- An object of the bounded below derived category of étale sheaves of `Λ`-modules has
-*torsion cohomology* if all its cohomology sheaves are torsion
-(`AlgebraicGeometry.Scheme.IsTorsionSheaf`). This is the hypothesis on the coefficient
-complex in the general proper base change theorem. -/
-noncomputable def Etale.DerivedCategory.Plus.torsionHomology :
+/-- An object of `D+` with cohomologies `IsTorsionSheaf`. -/
+noncomputable def Etale.DerivedCategory.Plus.torsionHomology (X : Scheme.{u}) :
     ObjectProperty (DerivedCategory.Plus (Sheaf X.smallEtaleTopology Ab.{u + 1})) :=
   fun K ↦ ∀ n : ℤ, IsTorsionSheaf
+    ((DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology Ab.{u + 1}) n).obj K)
+
+/-- An object of `D+` with cohomologies `OrderInvertibleOnSheaf`. -/
+noncomputable def Etale.DerivedCategory.Plus.orderInvertibleOnHomology
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    ObjectProperty (DerivedCategory.Plus (Sheaf X.smallEtaleTopology Ab.{u + 1})) :=
+  fun K ↦ ∀ n : ℤ, OrderInvertibleOnSheaf f
     ((DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology Ab.{u + 1}) n).obj K)
 
 end TorsionHomology
