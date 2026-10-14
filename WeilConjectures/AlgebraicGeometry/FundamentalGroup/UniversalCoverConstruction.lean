@@ -206,6 +206,15 @@ lemma surjective_proj : Function.Surjective (proj y) :=
   surjective_of_isLimit (diagram y) (limit.isLimit _) (p y) (map_p y) (proj y) (π_p y)
     fun j ↦ (surjective_of_nonempty_fiber y ((obj y).obj j) ⟨point y j⟩).surj
 
+/-- `Ỹ_y` is affine over `Y`: the limit legs are affine and the stages are finite over `Y`. -/
+instance isAffineHom_proj : IsAffineHom (proj y) := by
+  have : IsAffineHom (limit.π (diagram y) (j₀ y)) :=
+    isAffineHom_π_app (diagram y) (limit.cone _) (limit.isLimit _) (j₀ y)
+  exact inferInstanceAs (IsAffineHom (limit.π (diagram y) (j₀ y) ≫ p y (j₀ y)))
+
+/-- The projection `Ỹ_y ⟶ Y` is quasi-compact. -/
+instance quasiCompact_proj : QuasiCompact (proj y) := inferInstance
+
 section QCQS
 
 variable [CompactSpace Y] [QuasiSeparatedSpace Y]
