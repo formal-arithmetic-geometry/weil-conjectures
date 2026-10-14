@@ -5,13 +5,13 @@ Authors: SHEAF group E3
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
-public import Mathlib.Algebra.Homology.HomologicalComplexLimits
-public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 public import Sheaf.AlgebraicGeometry.SchemeCanonicalShiftUnitIso
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.NormalizedFlatTelescopeStageComparison
+import Sheaf.AlgebraicGeometry.FlatTelescopeStageMapRefinement
 
 /-! # Normalized comparison on flat telescope representatives
 
@@ -26,32 +26,6 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated MonoidalCategory
 namespace AlgebraicGeometry
-
-/-- A concrete sequential telescope of bounded-above flat complexes.
-The transition cone is constructed explicitly; no existence witness supplies its data.
-Source: Stacks Project, Tag 06YS, telescope construction.
-(blueprint: lem-sc-normalized-flat-telescope-comparison). -/
-def isFlatTelescope (Y : Scheme.{u})
-    (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) : Prop :=
-  ∃ (E : ℕ → CochainComplex
-      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
-    (t : ∀ n : ℕ, E n ⟶ E (n + 1)),
-    (∀ n : ℕ, ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((E n).X i)) ∧
-    (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E n).X i)) ∧
-    CochainComplex.mappingCone (𝟙 (∐ E) -
-      Sigma.desc (fun n : ℕ ↦ t n ≫ Sigma.ι E (n + 1))) = P
-
-/-- Homotopy objects represented by flat telescopes or their translates by one.
-This predicate records actual representatives and contains no choice of data.
-Source: Stacks Project, Tag 06YJ.
-(blueprint: lem-sc-normalized-flat-telescope-comparison). -/
-def flatTelescopeShiftRepresentative (Y : Scheme.{u})
-    (X : HomotopyCategory
-      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ)) : Prop :=
-  ∃ P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ,
-    isFlatTelescope Y P ∧
-      ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P = X ∨
-        ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)⟦(1 : ℤ)⟧ = X)
 
 /-- A jointly normalized comparison on the concrete flat telescopes and their
 one-fold translates. Naturality is required only between objects of this class;
@@ -138,6 +112,34 @@ theorem exists_normalized_flat_telescope_comparison
               tensorIso e (Iso.refl _) ≪≫
               schemeCanonicalShiftUnitIso Z
                 ((derivedPullback f).obj (DerivedCategory.Qh.obj X))).hom ≫
-            (α X ⟨P, htel, Or.inl rfl⟩).hom⟦(1 : ℤ)⟧' := by sorry
+            (α X ⟨P, htel, Or.inl rfl⟩).hom⟦(1 : ℤ)⟧' := by
+  obtain ⟨e, α, hα, hsquare⟩ := exists_normalized_flat_telescope_stage_comparison f
+  refine ⟨e, α, ?_, hsquare⟩
+  intro X X' hX hX' s
+  obtain ⟨R, a, b, hR, ha, hstagea, hstageb, hab⟩ :=
+    exists_flat_telescope_stage_map_refinement Y hX hX' s
+  let L := DerivedCategory.Qh ⋙ derivedPullback f
+  let G : HomotopyCategory
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ) ⥤
+      schemeDerivedCategory Z :=
+    (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙
+    (DerivedCategory.Qh : HomotopyCategory
+      (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤
+      schemeDerivedCategory Z)
+  have : IsIso (DerivedCategory.Qh.map a) :=
+    Localization.inverts DerivedCategory.Qh
+      (HomotopyCategory.quasiIso
+        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ)) a ha
+  have : IsIso (L.map a) := inferInstanceAs
+    (IsIso ((derivedPullback f).map (DerivedCategory.Qh.map a)))
+  change L.map s ≫ (α X' hX').hom = (α X hX).hom ≫ G.map s
+  apply (cancel_epi (L.map a)).1
+  calc
+    L.map a ≫ L.map s ≫ (α X' hX').hom =
+        L.map b ≫ (α X' hX').hom := by rw [← L.map_comp_assoc, hab]
+    _ = (α R hR).hom ≫ G.map b := hα R X' hR hX' b hstageb
+    _ = (α R hR).hom ≫ G.map a ≫ G.map s := by rw [← hab, G.map_comp]
+    _ = L.map a ≫ (α X hX).hom ≫ G.map s := by
+      rw [← Category.assoc, ← hα R X hR hX a hstagea, Category.assoc]
 
 end AlgebraicGeometry

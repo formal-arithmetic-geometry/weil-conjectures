@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-flat-telescope-stage-map-refinement",
+ "kind": "statement",
+ "title": "Common flat-tower refinement of a homotopy morphism",
+ "statement": "Let Y be a scheme, let H be the homotopy category of cochain complexes of its module sheaves [def-pc-cochain-complex-modules], and let Ctel be the flat-telescope shift representatives [def-sc-flat-telescope-stage-map]. For X,Xprime in Ctel and any s:X→Xprime there exist R in Ctel and a:R→X, b:R→Xprime such that a is a quasi-isomorphism [def-pc-quasi-iso-modules], both a and b are stage-induced maps [def-sc-flat-telescope-stage-map], and a;s=b in H. This is a statement solely about tower presentations and refinement; no derived pullback or normalized comparison occurs.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "Parent lem-sc-normalized-flat-telescope-comparison, steps 1–3; Tags 06YS and 06YJ for flat models. The explicit stage-map refinement and supplied-tensorator normalization are agent expansions, not literal Stacks assertions."
+ },
+ "stmt_deps": [
+  "def-sc-flat-telescope-stage-map",
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "Lift the homotopy map to a cochain map between the indicated (possibly translated) telescope models. Resolve its arrow diagram using flat covers of the bounded-above truncations and compatible-pair lifts. At successive stages retain the preceding commutative square. Mapping cylinders rectify the homotopies of the transition squares; their terms are finite sums of flat terms and stay bounded above. Diagonalize the countable stages, using larger stages to accommodate the finite supports of sections in the coproducts.",
+   "uses": [
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-flat-truncation-tower",
+    "def-sc-flat-telescope-stage-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the transition cones of the resulting sum maps. This gives two stage-induced maps from a common flat telescope. The augmentation to the source is a quasi-isomorphism by the flat truncation telescope comparison. If the squares initially agree only after localization, right-fraction equality supplies a further source refinement on which they agree in the homotopy category; repeat the compatible flat diagram construction for this source. Composition of the tower maps and quasi-isomorphisms gives a;s=b. Translate and transport the diagrams by the original homotopy isomorphisms. Zero and identity arrow diagrams give the corresponding edge cases.",
+   "uses": [
+    "lem-pc-flat-truncation-telescope-comparison",
+    "lem-pc-right-fraction-common-refinement",
+    "lem-pc-kflat-bounded-flat-replacement",
+    "def-sc-flat-telescope-stage-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-flat-telescope-stage-map",
+  "lem-pc-flat-truncation-telescope-comparison",
+  "lem-pc-flat-truncation-tower",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-right-fraction-common-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J2",
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "Explicit split of the parent model construction and common-replacement argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Morphisms between telescopes of bounded above flat complexes are induced by maps of towers after a quasi-isomorphic common source refinement",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphisms between flat telescope complexes represented by levelwise tower maps after refining by a quasi-isomorphism",
+   "results": "8 hits: CochainComplex.cm5b, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, CochainComplex.cm5b.fac, DerivedCategory.right_fac_of_isStrictlyLE, CategoryTheory.InjectiveResolution.descFSucc, DerivedCategory.left_fac_of_isStrictlyGE, HomotopyCategory.spectralObjectMappingCone_ω₁",
+   "date": "2026-10-14",
+   "verdict": "No exact match; generic maps, shifts, or fractions only."
+  },
+  {
+   "tool": "grep",
+   "query": "flatTelescopeStageMap|telescope.*refinement|refinement.*telescope",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "No exact match; generic maps, shifts, or fractions only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NormalizedFlatTelescopeComparison",
+  "date": "2026-10-14",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Parent telescope comparison: explicit model maps and extension to arbitrary homotopy morphisms.",
+   "via": [
+    "lem-sc-normalized-flat-telescope-comparison",
+    "lem-sc-normalized-kflat-representative-comparison",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatTelescopeStageMapRefinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeStageMapRefinement.lean",
+  "declaration": "AlgebraicGeometry.exists_flat_telescope_stage_map_refinement",
+  "statement": "theorem exists_flat_telescope_stage_map_refinement (Y : Scheme.{u}) {X X' : HomotopyCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ)} (hX : flatTelescopeShiftRepresentative Y X) (hX' : flatTelescopeShiftRepresentative Y X') (s : X ⟶ X') : ∃ (R : HomotopyCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ)) (a : R ⟶ X) (b : R ⟶ X'), flatTelescopeShiftRepresentative Y R ∧ HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ) a ∧ flatTelescopeStageMap Y a ∧ flatTelescopeStageMap Y b ∧ a ≫ s = b",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-7f59d",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261014T043531-L-1335547",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-7f59d",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261014T043531-L-1335547",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files and DAG metadata match the packet; all four modules and direct importer compile successfully, with only the two documented named sorry theorems remaining."
+ }
+}
