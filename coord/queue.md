@@ -1,6 +1,6 @@
 # Work queue
 
-76 items; claim with `tools/claim.py next <group> [--stage N]`.
+77 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (76)
+## Stage 3: modules to prove (77)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -17,6 +17,7 @@
 | `Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso` | 21 | 0 | repair |
 | `Sheaf.AlgebraicGeometry.PerfectDescendMorphisms` | 30 | 0 | repair |
 | `Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap` | 13 | 0 | repair |
+| `Sheaf.AlgebraicGeometry.ClosedImmersionResidueFieldIso` | 7 | 0 | repair |
 | `Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison` | 2 | 0 | repair |
 | `Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison` | 2 | 0 | repair |
 | `Sheaf.CategoryTheory.MapExtendHomology` | 16 | 0 | repair |
@@ -52,7 +53,7 @@
 | `Sheaf.AlgebraicGeometry.SquareZeroTensorSectionProductComparison` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorCoefficientActionOnSummand` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorCoefficientActionSupport` | 23 | 1 | proof |
-| `Sheaf.Paper.CechCupPullbackCompat` | 23 | 1 | proof |
+| `Sheaf.Paper.CechCupPullbackCompat` | 23 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.LocalMapPairOverlapBaseChange` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitHomotopyFactorization` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorBoundaryKernelMapLocalMultiplication` | 24 | 1 | proof |
