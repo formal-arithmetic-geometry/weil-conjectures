@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
-   "place": "Proof, proper/affine Artin--Schreier vanishing calculation; finite-dimensionality of H^1(O) used to prove the degree-two cokernel vanishes, including nonproper one-dimensional components",
+   "place": "Proof, Artin--Schreier calculation: finite-dimensionality of H^1(C,O_C) used for surjectivity of Frobenius minus identity; Tag 0A3M supplies the nonproper case.",
    "via": []
   },
   "same_as": []
@@ -25,9 +25,169 @@
   "pqf-def-coherent",
   "pqf-def-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Prove the assertion by strong induction on $d$, simultaneously for all separated finite-type $k$-schemes and all coherent modules. Such a scheme is Noetherian: its finite affine cover has finite-type $k$-algebras, which are Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian] (a field is Noetherian since its only ideals are $0,k$); local Noetherianity is exactly [pqf-def-locnoeth], and finite type includes quasi-compactness. For $d=0$, [lem-pc-zero-dimensional-closed-subscheme-finite] applied to the identity closed immersion gives $X=\\operatorname{Spec}A$ with $A$ finite-dimensional over $k$. By [pqf-lem-coherent-ft-locnoeth] and [lem-weil-pbc-quasi-coherent-finite-type-affine], $M=\\Gamma(X,\\mathcal F)$ is a finite $A$-module. If $a_i$ span $A$ over $k$ and $m_j$ generate $M$ over $A$, the finitely many $a_i m_j$ span $M$ over $k$. Since $H^0=\\Gamma$, this proves the base case; zero modules and the empty scheme have zero cohomology.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "pqf-def-locnoeth",
+    "def-weil-finite-type-morphism",
+    "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3M, label lemma-top-cohomology-coherent, induction and dimension-zero paragraph"
+   }
+  },
+  {
+   "text": "Fix $d>0$ and assume the assertion in every smaller dimension. Finiteness in a fixed degree is preserved by extensions: use the $k$-linear long exact sequence of [pqf-def-cohomology] and [lem-pc-e2-cohomology-finite-extension] with $R=k$. The finite filtration in [lem-weil-pbc-coherent-filtration-integral-subschemes] therefore reduces $H^d(X,\\mathcal F)$ to $H^d(X,i_*\\mathcal I)$, where $i:Z\\hookrightarrow X$ is integral closed and $\\mathcal I$ is a nonzero coherent ideal. By [lem-pc-closed-immersion-coherent-cohomology] this is $H^d(Z,\\mathcal I)$. The closed subscheme is separated finite type over $k$, and its dimension is at most $d$ (every chain in a closed subspace is a chain in $X$). If $\\dim Z<d$, [lem-sc-noetherian-cohomology-above-dimension] makes this group zero. It remains to treat an integral separated finite-type scheme of dimension $d$ and a nonzero coherent ideal on it.",
+   "uses": [
+    "pqf-def-cohomology",
+    "lem-pc-e2-cohomology-finite-extension",
+    "lem-weil-pbc-coherent-filtration-integral-subschemes",
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-sc-noetherian-cohomology-above-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3M, label lemma-top-cohomology-coherent, extension closure and integral closed-subscheme reduction"
+   }
+  },
+  {
+   "text": "We will repeatedly use the following consequence of the induction hypothesis: on any Noetherian separated finite-type scheme, a coherent module supported in a closed subset of dimension at most $d-1$ has finite $H^{d-1}$. Indeed filter it by [lem-weil-pbc-coherent-filtration-integral-subschemes]; the supports of subquotients remain inside its support by exactness of stalks [lem-weil-pbc-module-stalk-exact]. For each quotient $(i_j)_*\\mathcal I_j$, its support is exactly $i_j(Z_j)$: [lem-weil-pbc-closed-pushforward-stalks] identifies its stalks on and off the closed subset, and a nonzero coherent ideal on an integral scheme has nonzero generic stalk and closed support by [lem-weil-pbc-finite-type-module-support-closed], hence has full support. Each integral support has dimension $e\\le d-1$. Closed-pushforward cohomology [lem-pc-closed-immersion-coherent-cohomology] reduces its degree-$d-1$ group to the integral support: if $e=d-1$ apply the induction hypothesis; if $e<d-1$ use [lem-sc-noetherian-cohomology-above-dimension]. Extension closure [lem-pc-e2-cohomology-finite-extension] then gives the claimed finiteness. This also handles supports which are not pure dimensional and the zero module.",
+   "uses": [
+    "lem-weil-pbc-coherent-filtration-integral-subschemes",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "lem-pc-e2-cohomology-finite-extension",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "lem-weil-pbc-finite-type-module-support-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3M, label lemma-top-cohomology-coherent, induction for the lower-dimensional ideal quotient and later cokernel"
+   }
+  },
+  {
+   "text": "Now write $X$ for the integral dimension-$d$ scheme. For a nonzero coherent ideal $\\mathcal I$, its generic stalk is the entire function field. The quotient $\\mathcal O_X/\\mathcal I$ is coherent by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth] and has closed support by [lem-weil-pbc-finite-type-module-support-closed]; it misses the generic point. This proper closed subset is nowhere dense since $X$ is irreducible, so [lem-sc-hilbert-nowhere-dense-dimension-drop] bounds its dimension by $d-1$. Step 3 makes $H^{d-1}(X,\\mathcal O_X/\\mathcal I)$ finite. The long exact sequence of [pqf-def-cohomology] gives $H^{d-1}(X,\\mathcal O_X/\\mathcal I)\\to H^d(X,\\mathcal I)\\to H^d(X,\\mathcal O_X)$. Thus it suffices to prove finiteness for the structure sheaf: the kernel is a quotient of the first finite vector space and the image a subspace of the last.",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-sc-hilbert-nowhere-dense-dimension-drop",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3M, label lemma-top-cohomology-coherent, ideal exact sequence reducing to the structure sheaf"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-chow-noetherian] over $\\operatorname{Spec}k$, and use its integral-source/relative-ampleness refinement [lem-weil-pbc-integral-chow-relatively-ample]. Obtain $\\pi:Y\\to X$ proper, $Y$ integral, $j:Y\\hookrightarrow\\mathbf P^N_k$ an immersion, a nonempty open $U$ where $\\pi$ is an isomorphism, and $\\mathcal L=j^*\\mathcal O(1)$ relatively ample for $\\pi$. By [lem-sc-integral-locally-algebraic-opens-dimension], both $Y$ and $X$ have the dimension of the common nonempty open $U$, namely $d$. Apply [lem-pc-relative-kill-by-twisting] with base $X$, proper morphism $\\pi$, and coherent $\\mathcal O_Y$. Choose $n\\ge0$ sufficiently large that $R^p\\pi_*\\mathcal L^{\\otimes n}=0$ for all $p>0$. This theorem assumes properness of $\\pi$, not of $X\\to\\operatorname{Spec}k$.",
+   "uses": [
+    "lem-weil-pbc-chow-noetherian",
+    "lem-weil-pbc-integral-chow-relatively-ample",
+    "lem-sc-integral-locally-algebraic-opens-dimension",
+    "lem-pc-relative-kill-by-twisting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3M, label lemma-top-cohomology-coherent, Chow modification, relative ampleness and higher-image vanishing"
+   }
+  },
+  {
+   "text": "Set $\\mathcal G=\\pi_*\\mathcal L^{\\otimes n}$; it is coherent by [lem-pc-coherent-hi], since $\\pi$ is proper and $X$ locally Noetherian. Choose a projective coordinate $x_a$ nonzero at the generic point of $j(Y)$; at least one exists since the standard coordinate opens cover projective space. Its $n$th power restricts to a global section $s$ of $\\mathcal L^{\\otimes n}$ nonzero at the generic point (for $n=0$ take $1$). Here the transition rule for $\\mathcal O(n)$ in [def-pc-projective-space-twist] identifies coordinate powers with these sections. The corresponding map $\\mathcal O_X\\to\\mathcal G$ is injective: a local function whose product with $s$ is zero pulls back to zero in the function field of the integral $Y$, hence is zero in the function field, and therefore in the local domain, of $X$, because $\\pi$ is an isomorphism on a dense open. On a smaller nonempty open inside $U$ where $s$ does not vanish it is an isomorphism. Its coherent cokernel $\\mathcal Q$ [lem-weil-pbc-coherent-kernel-cokernel-locnoeth] has closed support [lem-weil-pbc-finite-type-module-support-closed] missing the generic point, of dimension at most $d-1$ by [lem-sc-hilbert-nowhere-dense-dimension-drop]. Notice that a nonzero section need not be nowhere vanishing on all of $U$; the smaller open is essential.",
+   "uses": [
+    "lem-pc-coherent-hi",
+    "def-pc-projective-space-twist",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-sc-hilbert-nowhere-dense-dimension-drop"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3M, label lemma-top-cohomology-coherent, nonzero section and coherent small-support cokernel"
+   }
+  },
+  {
+   "text": "From $0\\to\\mathcal O_X\\to\\mathcal G\\to\\mathcal Q\\to0$, the long exact sequence [pqf-def-cohomology] gives $H^{d-1}(X,\\mathcal Q)\\to H^d(X,\\mathcal O_X)\\to H^d(X,\\mathcal G)$. Step 3 makes the left term finite. It is enough that the right term be finite, by the same kernel/image argument as step 4. Since all positive higher direct images of $\\mathcal L^{\\otimes n}$ vanish, [lem-pc-m1-leray-acyclic-pushforward-linear-comparison] applied to $\\pi$ and $X\\to\\operatorname{Spec}k$ gives a $k$-linear isomorphism $H^d(X,\\mathcal G)\\cong H^d(Y,\\mathcal L^{\\otimes n})$.",
+   "uses": [
+    "pqf-def-cohomology",
+    "lem-pc-m1-leray-acyclic-pushforward-linear-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3M, label lemma-top-cohomology-coherent, cokernel reduction and Leray comparison"
+   }
+  },
+  {
+   "text": "By [lem-chow-closed-model], the immersion $j$ identifies $Y$ with a dense open in its scheme-theoretic projective closure $\\overline Y\\subseteq\\mathbf P^N_k$. This closure is integral: it is irreducible because it is the closure of an irreducible space; on an affine open meeting $Y$, the ideal of the scheme-theoretic closure is the kernel of restriction to the integral open, so the quotient embeds in its function field and is a domain. Thus [lem-sc-integral-locally-algebraic-opens-dimension] gives $\\dim\\overline Y=\\dim Y=d$. The coherent invertible module $\\mathcal O_{\\overline Y}(n)$ restricts to $\\mathcal L^{\\otimes n}$; the identification follows directly from the coordinate transition functions $(x_i/x_j)^n$ of [def-pc-projective-space-twist]. Apply [lem-weil-pbc-top-degree-open-restriction-surjective] to this Noetherian closure and its quasi-compact open $Y$ to get a $k$-linear surjection $H^d(\\overline Y,\\mathcal O_{\\overline Y}(n))\\twoheadrightarrow H^d(Y,\\mathcal L^{\\otimes n})$. The source is finite-dimensional by [lem-pc-projective-coherent-finiteness], since $\\overline Y$ is projective over the Noetherian ring $k$. Its quotient is finite-dimensional.",
+   "uses": [
+    "lem-chow-closed-model",
+    "lem-sc-integral-locally-algebraic-opens-dimension",
+    "def-pc-projective-space-twist",
+    "lem-weil-pbc-top-degree-open-restriction-surjective",
+    "lem-pc-projective-coherent-finiteness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3M, label lemma-top-cohomology-coherent, projective closure and surjective top-degree restriction"
+   }
+  },
+  {
+   "text": "Step 8 proves finiteness of $H^d(X,\\mathcal G)$; step 7 proves it for $\\mathcal O_X$; step 4 proves it for every nonzero coherent ideal on every integral dimension-$d$ scheme. The smaller integral supports in step 2 contribute zero. Starting with $H^d(X,0)=0$, induction along the finite filtration in step 2 proves the assertion for every coherent $\\mathcal F$. This closes the strong induction on $d$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3M, label lemma-top-cohomology-coherent, conclusion of the induction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "pqf-def-locnoeth",
+  "def-weil-finite-type-morphism",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-def-cohomology",
+  "lem-pc-e2-cohomology-finite-extension",
+  "lem-weil-pbc-coherent-filtration-integral-subschemes",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-sc-hilbert-nowhere-dense-dimension-drop",
+  "lem-weil-pbc-chow-noetherian",
+  "lem-weil-pbc-integral-chow-relatively-ample",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "lem-pc-relative-kill-by-twisting",
+  "lem-pc-coherent-hi",
+  "def-pc-projective-space-twist",
+  "lem-pc-m1-leray-acyclic-pushforward-linear-comparison",
+  "lem-chow-closed-model",
+  "lem-weil-pbc-top-degree-open-restriction-surjective",
+  "lem-pc-projective-coherent-finiteness"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3M, label lemma-top-cohomology-coherent"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -91,15 +251,122 @@
    "results": "No hits",
    "date": "2026-10-14",
    "verdict": "no match: generic cohomology/global-section naturality, cotangent cohomology or condensed coherent topology do not state this scheme-cohomology assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Top degree coherent sheaf cohomology of a separated finite type scheme over a field is finite dimensional without properness",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsFinite f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, meaning that $ \\\\Gamma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsFinite f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"For any finite morphism $ f : X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\mathcal{O}_Y(U) \\\\to \\\\mathcal{O}_X(f^{-1}(U)) $ is finite, meaning that\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Finite ↥X] [DiscreteTopology ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is finite and discrete, then $X$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: finite morphism and global-section facts do not assert top coherent cohomology finiteness"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"FiniteDimensional\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-14",
+   "verdict": "no match: finite morphism and global-section facts do not assert top coherent cohomology finiteness"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*cohomology|cohomology.*coherent",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-14",
+   "verdict": "no match: finite morphism and global-section facts do not assert top coherent cohomology finiteness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional top cohomology of coherent modules on nonproper varieties",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lemma-weil-pbc-smooth-curve-artin-schreier",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-top-coherent-cohomology-finite",
+  "worker": "stage1",
+  "summary": "Checked Tag 0A3M and replaced the empty proof with its induction, integral-ideal filtration, relatively ample Chow modification, Leray and top-degree projective-closure restriction argument. Explicitly handled smaller-dimensional/nonpure supports and shrank the isomorphism locus to the nonvanishing locus of the chosen section. Two geometric/cohomological inputs are new statement-only nodes; existing proper-X Chow line-bundle nodes are inapplicable.",
+  "blueprint": "Proof, Artin--Schreier calculation: finite-dimensionality of H^1(C,O_C) used for surjectivity of Frobenius minus identity; Tag 0A3M supplies the nonproper case. Steps 1–9 supply precisely the coherent finiteness input in the Artin--Schreier calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "why": "Generic A zero-dimensional closed subscheme of a finite-type scheme over a field is finite used in the explicit Tag 0A3M proof; the sk-thm-p1 curve-calculation route supplies no replacement for this scheme/module input."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic Coherence on locally Noetherian schemes used in the explicit Tag 0A3M proof; the sk-thm-p1 curve-calculation route supplies no replacement for this scheme/module input."
+   },
+   {
+    "node": "lem-pc-e2-cohomology-finite-extension",
+    "why": "Generic CohomologyFiniteExtension used in the explicit Tag 0A3M proof; the sk-thm-p1 curve-calculation route supplies no replacement for this scheme/module input."
+   },
+   {
+    "node": "lem-pc-closed-immersion-coherent-cohomology",
+    "why": "Generic Coherent modules under a closed immersion used in the explicit Tag 0A3M proof; the sk-thm-p1 curve-calculation route supplies no replacement for this scheme/module input."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Generic Quasi-coherent cohomology vanishes above the dimension of a Noetherian scheme used in the explicit Tag 0A3M proof; the sk-thm-p1 curve-calculation route supplies no replacement for this scheme/module input."
+   },
+   {
+    "node": "lem-sc-hilbert-nowhere-dense-dimension-drop",
+    "why": "Generic Nowhere-dense closed subsets have smaller dimension used in the explicit Tag 0A3M proof; the sk-thm-p1 curve-calculation route supplies no replacement for this scheme/module input."
+   },
+   {
+    "node": "lem-sc-integral-locally-algebraic-opens-dimension",
+    "why": "Generic Nonempty opens of an integral locally algebraic scheme have its dimension used in the explicit Tag 0A3M proof; the sk-thm-p1 curve-calculation route supplies no replacement for this scheme/module input."
+   },
+   {
+    "node": "lem-pc-relative-kill-by-twisting",
+    "why": "Generic Relative Serre vanishing for a proper morphism used in the explicit Tag 0A3M proof; the sk-thm-p1 curve-calculation route supplies no replacement for this scheme/module input."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Generic Coherence and finiteness of higher direct images used in the explicit Tag 0A3M proof; the sk-thm-p1 curve-calculation route supplies no replacement for this scheme/module input."
+   },
+   {
+    "node": "lem-pc-m1-leray-acyclic-pushforward-linear-comparison",
+    "why": "Generic Base-linear Leray comparison for acyclic direct image used in the explicit Tag 0A3M proof; the sk-thm-p1 curve-calculation route supplies no replacement for this scheme/module input."
+   },
+   {
+    "node": "lem-chow-closed-model",
+    "why": "Generic Closed model of a quasi-compact immersion used in the explicit Tag 0A3M proof; the sk-thm-p1 curve-calculation route supplies no replacement for this scheme/module input."
+   },
+   {
+    "node": "lem-pc-projective-coherent-finiteness",
+    "why": "Generic Coherent cohomology of a projective scheme over a Noetherian ring used in the explicit Tag 0A3M proof; the sk-thm-p1 curve-calculation route supplies no replacement for this scheme/module input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-e2-cohomology-finite-extension",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-hilbert-nowhere-dense-dimension-drop",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "lem-pc-relative-kill-by-twisting",
+  "lem-pc-coherent-hi",
+  "lem-pc-m1-leray-acyclic-pushforward-linear-comparison",
+  "lem-chow-closed-model",
+  "lem-pc-projective-coherent-finiteness"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-1742f870d",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-1742f870d (reviewer sub-agent of L); spot-checked: Read all nine proof steps, both new nodes, cited statements, sources, and unit/chapter route. Mathematics agrees with Stacks 0A3M, 0200/0201, 02NR, 0A3G and 01F1; induction, support dimensions, nonproper Chow modification and linear comparisons checked. Corrected metadata in both new-node JSON files. Detailed checks and accepted tool_uses are in review.md; inherited transitive missing dependency noted separately.; 2 file(s) fixed by the reviewer"
+ }
 }
