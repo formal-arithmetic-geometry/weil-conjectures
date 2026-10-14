@@ -1,0 +1,142 @@
+{
+ "id": "lem-pc-perfect-hom-open-comparison-mate-is-iso",
+ "kind": "lemma",
+ "title": "Invertibility of the fixed open pullback comparison mate",
+ "statement": "Let s:Y→S and r:T→S be morphisms of schemes and B an open of Y [def-pc-scheme]. Assume the derived module categories [def-pc-derived-category] in a common Hom universe on every scheme. Put pi=pullback.fst s r, pi'=pullback.fst (B.ι followed by s) r and b=pullback.map induced by B.ι and the identities. Let a be any adjunction derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι [def-pc-derived-pullback, def-pc-derived-direct-image]. Put L=schemeMVDerivedRestriction Y B and sigma:L≅derivedPullback B.ι the mate of the identity between a and schemeMVAdjunction Y B [def-pc-derived-mayer-vietoris-canonical-data]. Define kappa:F;H≅L;F', where F=Lpi*, H=Lb*, F'=Lpi'*, as perfectHomComposition b pi, equality transport for b;pi=pi';B.ι, inverse perfectHomComposition pi' B.ι, and sigma inverse whiskered by F' [lem-pc-perfect-hom-transport]. For every ap:F⊣Rpi_* and ap':F'⊣Rpi'_*, the natural transformation mateEquiv ap ap' of kappa inverse from Rpi_*;L to H;Rpi'_* is an isomorphism. No supported testing object, coefficient object, finiteness, flatness or quasi-coherence assumption is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "lem-pc-perfect-hom-transport"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma lemma-restrict-direct-image-open (Tag 08FE), Lemma lemma-restrict-K-injective-to-open (Tag 08BS), Lemma lemma-adjoint (Tag 079W), and Lemma lemma-derived-pullback-composition (Tag 0D5S)"
+ },
+ "proof": [
+  {
+   "text": "Let pi=Y x_S T -> Y and pi'=B x_S T -> B. The pullback map b and pi' exhibit B x_S T as pi inverse B: construct the comparison to the inverse-image open by the pullback universal property; the inverse is the pair of maps to B and T. The two projection equations prove the inverse laws by pullback.hom_ext. Transport the open restriction/direct-image isomorphism of Tag 08FE through this scheme isomorphism and the derived pullback/direct-image adjunctions along it. Thus restriction of Rpi_* is isomorphic to Lb* followed by Rpi'_*.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the projection adjunctions pinned by their ordinary tensor adjunctions and derived units/counits, the mate of the displayed inverse pullback comparison is this open direct-image comparison. Verify the normalization on K-flat representatives using the left-derived counit equation defining perfectHomComposition. Under the pinned derived Hom equivalence, transposing this equation gives the ordinary restriction/direct-image section map. Compute direct image on a K-injective complex I; its restriction to the inverse-image open is K-injective. On each open W of B, the two complexes have the same sections I(pi inverse W), and the transposed comparison is the identity with the same differentials. The universal properties of the derived functors extend this identification to arbitrary derived objects. Hence every component of the mate is invertible.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "def-pc-derived-base-change-map",
+    "lem-sc-derived-k-injective-restrict-open",
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary supplied projection adjunctions, conjugate the mate by the right-adjoint uniqueness isomorphisms from the pinned adjunctions. Naturality and the uniqueness unit/counit equations prove that this is the new mate. Changing the supplied open adjunction replaces sigma by the left-adjoint uniqueness isomorphism; whiskering and taking its mate inserts invertible factors. Thus all supplied adjunctions have invertible mate. Apply NatIso.isIso_of_isIso_app. For the empty open the local derived category is zero, and for the full open this is the identity square; no other hypotheses are used.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "def-pc-derived-mayer-vietoris-canonical-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-derived-k-injective-restrict-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V1",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08FE, 08BS, 079W, 0D5S",
+  "note": "Agent-written mate normalization and cartesian-presentation argument; source tags read on the Stacks website."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a cartesian square whose horizontal arrows are open immersions, the mate of the derived pullback comparison is an isomorphism",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image commutes with open restriction and the canonical base change mate is invertible",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc",
+   "date": "2026-10-14",
+   "verdict": "No match for the normalized derived open-square mate."
+  },
+  {
+   "tool": "grep",
+   "query": "open.*[Bb]ase[Cc]hange.*[Ii]so|[Ii]so.*open.*[Bb]ase[Cc]hange",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "No match for the normalized derived open-square mate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomOpenTestBijective",
+  "date": "2026-10-14",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Mayer--Vietoris Hom comparison: direct-image/open-restriction mate in the inverse-image-open square",
+   "via": [
+    "lem-pc-perfect-hom-open-test-bijective",
+    "new-perfect-hom-open-restricted-maps",
+    "new-perfect-hom-open-restricted-core",
+    "lem-pc-perfect-hom-open-restricted-data-exists",
+    "lem-pc-perfect-hom-open-restricted-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomOpenComparisonMateIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomOpenComparisonMateIso.lean",
+  "declaration": "AlgebraicGeometry.perfect_hom_open_comparison_mate_isIso",
+  "statement": "theorem perfect_hom_open_comparison_mate_isIso\n    {S Y T : Scheme.{u}} (s : Y ⟶ S) (B : Y.Opens) (r : T ⟶ S)\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι)\n    :\n    let b := pullback.map (B.ι ≫ s) r s r B.ι (𝟙 T) (𝟙 S) (by simp) (by simp)\n    let σ : schemeMVDerivedRestriction Y B ≅ derivedPullback B.ι :=\n      (conjugateIsoEquiv a (schemeMVAdjunction Y B)).symm (Iso.refl _)\n    let he : b ≫ pullback.fst s r = pullback.fst (B.ι ≫ s) r ≫ B.ι := by\n      simp [b, pullback.map]\n    let κ₀ := perfectHomComposition b (pullback.fst s r) ≪≫\n      eqToIso (congrArg (fun f ↦ derivedPullback f) he) ≪≫\n      (perfectHomComposition (pullback.fst (B.ι ≫ s) r) B.ι).symm ≪≫\n      Functor.isoWhiskerRight σ.symm (derivedPullback (pullback.fst (B.ι ≫ s) r))\n    ∀ (ap : derivedPullback (pullback.fst s r) ⊣\n        schemeDerivedDirectImage (pullback.fst s r))\n      (ap' : derivedPullback (pullback.fst (B.ι ≫ s) r) ⊣\n        schemeDerivedDirectImage (pullback.fst (B.ι ≫ s) r)),\n      IsIso (mateEquiv ap ap' (TwoSquare.mk _ _ _ _ κ₀.inv)).natTrans",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-c31ff",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261014T022552-L-4047894",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-c31ff",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261014T022552-L-4047894",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with both DAG nodes, source statements, import change record, report, and earlier return; compiled both modules and the sole direct importer; verified axioms."
+ }
+}
