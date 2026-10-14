@@ -1,0 +1,149 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 064L (lemma-derived-tor-quasi-isomorphism) and 06Y6 (lemma-derived-base-change). Official Stacks pages read online; literature source omitted from this remote checkout."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BalancedTensorUnitModelComparison",
+  "date": "2026-10-14",
+  "group": "N2"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "new-lem-pc-universal-balanced-tensor-comparison",
+ "title": "Natural additive K-flat computation of universal scalar extension",
+ "statement": "Let R and B be commutative rings in universe u with an R-algebra structure on B, and derived categories of R- and B-modules with morphisms in universe w [def-weil-abstract-derived-category]. Fix an integer i and a quasi-isomorphism f:F to B[0] with F an R-K-flat cochain complex [def-pc-module-kflat-complex]. Put V=quotient followed by Qh, H=degree-i derived homology, T=the ordinary total tensor bifunctor of R-complexes [def-pc-tensor-complex-sheaves], and W=the quasi-isomorphisms in K(R). There is a family of additive equivalences e(L,epsilon,hL,X): H(L(V(X))) to H^i(T(X,F)), for every functor L:D(R) to D(B), counit epsilon:Qh followed by L to ordinary scalar extension followed by Qh, proof hL that this pair is universal, and R-complex X [def-weil-module-base-change]. For every chain map g:X to Y, e at Y sends H(L(V(g)))(x) to H^i(T(g,F))(e at X of x). For two universal pairs (L,epsilon) and (K,delta), let zeta be their canonical leftDerivedNatIso for the identity of the underived scalar extension. Then e(K,delta,X)(H(zeta at V(X))(x))=e(L,epsilon,X)(x). No A-algebra structure, coefficient action, localization unit or mixed tensor occurs in this assertion.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-module-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual functorial R-K-flat resolution P(X) -> X from def-pc-ring-tensor-cohomology. K-flatness of F makes P(X) tensor F -> X tensor F a quasi-isomorphism. K-flatness of P(X) makes P(X) tensor F -> P(X) tensor B[0] a quasi-isomorphism. The degree-zero total tensor identification and tensor symmetry identify the latter with restriction to R of the ordinary B-extension of P(X). All identifications use x tensor b -> b tensor x and commute with chain maps.",
+   "uses": [
+    "def-pc-ring-tensor-cohomology",
+    "def-pc-module-kflat-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The universal counit at P(X) is invertible by lem-pc-kflat-scalar-extension-counit. Compose its homology image with the inverse of the derived image of P(X) -> X, the ordinary homology factorization isomorphisms, and the two inverse homology maps in the tensor span. This defines the additive equivalence e for each universal pair and X.",
+   "uses": [
+    "lem-pc-kflat-scalar-extension-counit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Functorial resolution and counit naturality yield the first equation after cancellation of the invertible span maps. For the second, the canonical isomorphism between universal pairs commutes with their counits by leftDerivedNatTrans_app. Apply it at P(X), take homology, and move its component to X by naturality for P(X) -> X. Cancel the same invertible resolution and tensor maps. The specified orientations yield both displayed pointwise equations.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-kflat-complex",
+  "def-pc-ring-tensor-cohomology",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-scalar-extension-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 064L (lemma-derived-tor-quasi-isomorphism) and 06Y6 (lemma-derived-base-change). Official Stacks pages read online; literature source omitted from this remote checkout.; explicit reduction by N2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The total tensor with a K-flat resolution of a ring computes the universal derived scalar extension functor naturally",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A K-flat resolution of the second tensor factor computes derived scalar extension naturally in the first complex",
+   "date": "2026-10-14",
+   "results": [
+    "Module.Flat.rTensor_shortComplex_exact",
+    "Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+    "Module.Flat.lTensor_shortComplex_exact",
+    "Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+    "Module.Flat.iff_lTensor_exact'",
+    "Module.Flat.iff_rTensor_exact'",
+    "ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+    "Module.Flat.iff_lTensor_exact"
+   ],
+   "verdict": "Infrastructure only; no direct theorem for the full comparison and its equations."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso|mapBifunctorSingle",
+   "date": "2026-10-14",
+   "results": [
+    "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+    "Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean"
+   ],
+   "verdict": "Infrastructure only; no direct theorem for the full comparison and its equations."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-first-localization-cohomology-kernel",
+   "place": "balanced-complex computation of the scalar extension unit: Natural additive K-flat computation of universal scalar extension",
+   "via": [
+    "new-lem-pc-balanced-tensor-unit-model-comparison",
+    "new-lem-pc-base-tensor-unit-cohomology-model"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.UniversalBalancedTensorComparison",
+  "file": "lean/Sheaf/Algebra/Homology/UniversalBalancedTensorComparison.lean",
+  "declaration": "RingTensorCohomology.exists_universalBalancedTensorComparison",
+  "statement": "theorem exists_universalBalancedTensorComparison (R B : Type u) [CommRing R] [CommRing B] [Algebra R B] [HasDerivedCategory.{w} (ModuleCat.{u} R)] [HasDerivedCategory.{w} (ModuleCat.{u} B)] (i : ℤ) (F : CochainComplex (ModuleCat.{u} R) ℤ) (f : F ⟶ (CochainComplex.singleFunctor (ModuleCat.{u} R) (0 : ℤ)).obj (ModuleCat.of R B)) (hf : QuasiIso f) (hF : (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat F) : let V := HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ) ⋙ DerivedCategory.Qh let H := DerivedCategory.homologyFunctor (ModuleCat.{u} B) i let T := (MonoidalCategory.curriedTensor (ModuleCat.{u} R)).map₂CochainComplex let W := HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ) ∃ e : ∀ (L : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B)) (ε : DerivedCategory.Qh ⋙ L ⟶ (ModuleCat.extendScalars (algebraMap R B)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh), L.IsLeftDerivedFunctor ε W → ∀ X : CochainComplex (ModuleCat.{u} R) ℤ, H.obj (L.obj (V.obj X)) ≃+ (((T.obj X).obj F).homology i), (∀ L ε hL X Y (g : X ⟶ Y) x, e L ε hL Y (H.map (L.map (V.map g)) x) = HomologicalComplex.homologyMap ((T.map g).app F) i (e L ε hL X x)) ∧ (∀ (L : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B)) (ε : DerivedCategory.Qh ⋙ L ⟶ (ModuleCat.extendScalars (algebraMap R B)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) (hL : L.IsLeftDerivedFunctor ε W) (K : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B)) (δ : DerivedCategory.Qh ⋙ K ⟶ (ModuleCat.extendScalars (algebraMap R B)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) (hK : K.IsLeftDerivedFunctor δ W) X x, letI := hL letI := hK let ζ := Functor.leftDerivedNatIso L K ε δ W (Iso.refl _) e K δ hK X (H.map (ζ.hom.app (V.obj X)) x) = e L ε hL X x)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261014T025140-L-157541",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261014T025140-L-157541",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

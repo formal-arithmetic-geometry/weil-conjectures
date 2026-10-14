@@ -8,9 +8,8 @@ module
 public import Sheaf.Algebra.Homology.LocalizationModelSemilinear
 public import Sheaf.Algebra.Homology.MixedTotalTensor
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.Algebra.Homology.BalancedDerivedTensorModel
-import Sheaf.Algebra.Homology.DerivedTensorActionNaturality
-import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
+import Sheaf.Algebra.Homology.UniversalBalancedTensorComparison
+import Sheaf.Algebra.Homology.MixedTensorUnderlyingHomology
 
 /-! # Universal derived cohomology comparisons for a fixed balanced tensor complex
 
@@ -95,6 +94,84 @@ theorem exists_balancedTensorUnitModelComparison (i : ℤ)
         eq.hom (localizationModelMap R A Aq B D i Q L K uQ x) =
           (HomologicalComplex.homologyMap
             ((((ModuleCat.extendRestrictScalarsAdj (algebraMap A Aq)).mapHomologicalComplex
-              (.up ℤ)).unit.app C) ≫ (restrict A Aq).map θ.hom) i) (e.hom x) := by sorry
+              (.up ℤ)).unit.app C) ≫ (restrict A Aq).map θ.hom) i) (e.hom x) := by
+  classical
+  obtain ⟨er, hnat, hmodels⟩ :=
+    exists_universalBalancedTensorComparison R B i F f hf hF
+  obtain ⟨em, hscalar, hmixed⟩ := exists_mixedTensorUnderlyingHomology R i F
+  let V := HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ) ⋙ DerivedCategory.Qh
+  let H := DerivedCategory.homologyFunctor (ModuleCat.{u} B) i
+  have makeIso (S : Type u) [CommRing S] [Algebra R S] [Algebra (S ⊗[R] B) D]
+      (P : CochainComplex (ModuleCat.{u} S) ℤ)
+      (M : ModuleCat.BaseDerivedTensorCohomologyModel R S B P D) :
+      ∃ e : (ModuleCat.restrictScalars
+          (Algebra.TensorProduct.includeLeft (S := R) : S →ₐ[R] S ⊗[R] B).toRingHom).obj
+            (M.cohomology i) ≅
+          (((ModuleCat.mixedTotalTensor (algebraMap R S)).obj P).obj F).homology i,
+        ∀ x, e.hom x = em S P
+          (er M.derived M.counit M.universal ((restrict R S).obj P)
+            ((M.cohomologyIso i).hom x)) := by
+    let b := (M.cohomologyIso i).toLinearEquiv.toAddEquiv
+    let d := (b.trans (er M.derived M.counit M.universal ((restrict R S).obj P))).trans
+      (em S P)
+    let source := (ModuleCat.restrictScalars
+      (Algebra.TensorProduct.includeLeft (S := R) : S →ₐ[R] S ⊗[R] B).toRingHom).obj
+        (M.cohomology i)
+    let target := (((ModuleCat.mixedTotalTensor (algebraMap R S)).obj P).obj F).homology i
+    let l : source ≃ₗ[S] target :=
+      { d with
+        map_smul' := by
+          intro a x
+          have hc := ConcreteCategory.congr_hom (M.cohomologyIso_smul i a) x
+          change (M.cohomologyIso i).hom
+              ((Algebra.TensorProduct.includeLeft (S := R) a : S ⊗[R] B) • x) =
+            H.map (M.derived.map (V.map ((restrict R S).map (a • 𝟙 P))))
+              ((M.cohomologyIso i).hom x) at hc
+          change em S P (er M.derived M.counit M.universal ((restrict R S).obj P)
+              ((M.cohomologyIso i).hom
+                ((Algebra.TensorProduct.includeLeft (S := R) a : S ⊗[R] B) • x))) = _
+          rw [hc, hnat, hscalar]
+          rfl }
+    exact ⟨l.toModuleIso, fun _ ↦ rfl⟩
+  obtain ⟨e, he⟩ := makeIso A Q L
+  obtain ⟨ek, hek⟩ := makeIso Aq ((extend A Aq).obj Q) K
+  dsimp only
+  let C := ((ModuleCat.mixedTotalTensor (algebraMap R A)).obj Q).obj F
+  let Cq := ((ModuleCat.mixedTotalTensor (algebraMap R Aq)).obj ((extend A Aq).obj Q)).obj F
+  let J := (Cq.sc i).mapHomologyIso (ModuleCat.restrictScalars (algebraMap A Aq))
+  let eq := (ModuleCat.restrictScalars (algebraMap A Aq)).mapIso ek ≪≫ J.symm
+  refine ⟨e, eq, ?_⟩
+  intro x
+  let v := (((ModuleCat.extendRestrictScalarsAdj (algebraMap A Aq)).mapHomologicalComplex
+    (.up ℤ)).unit.app C) ≫ (restrict A Aq).map θ.hom
+  have hv : ∀ (p q n : ℤ) (h : p + q = n) (z : Q.X p) (y : F.X q),
+      v.f n ((HomologicalComplex.ιMapBifunctor Q F
+        (ModuleCat.mixedTensor (algebraMap R A)) (.up ℤ) p q n h)
+          (z ⊗ₜ[A] ((1 : A) ⊗ₜ[R,algebraMap R A] y))) =
+      (HomologicalComplex.ιMapBifunctor ((extend A Aq).obj Q) F
+        (ModuleCat.mixedTensor (algebraMap R Aq)) (.up ℤ) p q n h)
+          ((uQ.f p z) ⊗ₜ[Aq] ((1 : Aq) ⊗ₜ[R,algebraMap R Aq] y)) := by
+    intro p q n h z y
+    change θ.hom.f n ((1 : Aq) ⊗ₜ[A,algebraMap A Aq]
+      ((HomologicalComplex.ιMapBifunctor Q F
+        (ModuleCat.mixedTensor (algebraMap R A)) (.up ℤ) p q n h)
+          (z ⊗ₜ[A] ((1 : A) ⊗ₜ[R,algebraMap R A] y)))) = _
+    rw [hθ, huQ]
+  let := L.universal
+  let := K.universal
+  let ζ := Functor.leftDerivedNatIso L.derived K.derived L.counit K.counit
+    (HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ)) (Iso.refl _)
+  have hloc : (K.cohomologyIso i).hom (localizationModelMap R A Aq B D i Q L K uQ x) =
+      H.map (ζ.hom.app (V.obj ((restrict R Aq).obj ((extend A Aq).obj Q))))
+        (H.map (L.derived.map (V.map uQ)) ((L.cohomologyIso i).hom x)) := by
+    change (K.cohomologyIso i).hom ((K.cohomologyIso i).inv
+      (H.map (L.derived.map (V.map uQ) ≫ ζ.hom.app _)
+        ((L.cohomologyIso i).hom x))) = _
+    rw [← ModuleCat.comp_apply, Iso.inv_hom_id]
+    simp only [ModuleCat.id_apply, Functor.map_comp, ModuleCat.comp_apply]
+  change J.inv (ek.hom (localizationModelMap R A Aq B D i Q L K uQ x)) =
+    HomologicalComplex.homologyMap v i (e.hom x)
+  rw [hek, hloc, hmodels, hnat, he]
+  exact hmixed A Aq Q ((extend A Aq).obj Q) uQ v hv _
 
 end RingTensorCohomology

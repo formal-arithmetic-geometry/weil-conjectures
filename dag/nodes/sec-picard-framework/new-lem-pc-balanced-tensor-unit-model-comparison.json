@@ -16,33 +16,40 @@
  ],
  "proof": [
   {
-   "text": "Compute the derived tensor using the supplied K-flat F. Resolve the underlying R-complex of each first factor by P. K-flatness of F identifies Tot(P tensor_R F) with Tot(Q tensor_R F); K-flatness of P identifies it with Tot(P tensor_R B[0]). The latter is ordinary extension to B. The universal counits compare this with L.derived and K.derived. The counit on the R-K-flat resolution P is invertible by lem-pc-kflat-scalar-extension-counit; naturality for P -> Q transports the comparison. P here resolves the underlying R-complex, not an A-K-flat complex mistakenly regarded as R-K-flat.",
+   "text": "Apply new-lem-pc-universal-balanced-tensor-comparison to F -> B[0], giving additive comparisons for every universal scalar extension functor, natural in R-chain maps and compatible with the unique comparison between universal pairs. Apply new-lem-pc-mixed-tensor-underlying-homology to obtain actual additive comparisons from ordinary R-total tensors to the specified mixed tensors, with first-factor scalar compatibility and cross-coefficient generator naturality.",
    "uses": [
-    "lem-pc-balanced-derived-tensor-model",
-    "def-pc-base-derived-tensor-cohomology-model",
-    "lem-pc-kflat-scalar-extension-counit"
+    "new-lem-pc-universal-balanced-tensor-comparison",
+    "new-lem-pc-mixed-tensor-underlying-homology"
    ],
    "elementary": false
   },
   {
-   "text": "Naturality for multiplication by a in A, together with the cohomologyIso_smul fields, upgrades the comparisons to A-linear isomorphisms. The pure-tensor formula shows unit_C followed by theta is uQ tensored with F. Naturality of the resolution comparisons and uniqueness of the universal-counit comparison identify its cohomology map with localizationModelMap.",
+   "text": "For any coefficient ring S and model M, compose M.cohomologyIso as an additive equivalence with the two preceding comparisons. The cohomologyIso_smul field, naturality for multiplication by a, and the mixed-homology scalar equation prove S-linearity. Turn the additive equivalence into a linear equivalence and then a ModuleCat isomorphism. Apply this once to L and once to K. Restrict the latter from Aq to A and compose with the inverse exact restriction homology comparison.",
    "uses": [
-    "lem-pc-derived-tensor-action-naturality",
     "def-pc-base-derived-tensor-cohomology-model"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Let v be the complex unit followed by restriction of theta. The unit is x -> 1 tensor x; htheta and huQ verify the diagonal generator hypothesis of the mixed-homology naturality theorem. Unfold localizationModelMap and cancel K.cohomologyIso.inv followed by its hom. Compatibility of universal comparisons with leftDerivedNatIso removes zeta; chain-map naturality moves uQ to the ordinary total tensor. Substitute the two constructed isomorphisms and apply mixed-homology naturality for v. This proves the required square pointwise.",
+   "uses": [
+    "lem-pc-first-localization-cohomology-semilinear",
+    "new-lem-pc-mixed-tensor-underlying-homology",
+    "new-lem-pc-universal-balanced-tensor-comparison"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-base-derived-tensor-cohomology-model",
-  "lem-pc-balanced-derived-tensor-model",
-  "lem-pc-derived-tensor-action-naturality",
-  "lem-pc-kflat-scalar-extension-counit"
+  "lem-pc-first-localization-cohomology-semilinear",
+  "new-lem-pc-mixed-tensor-underlying-homology",
+  "new-lem-pc-universal-balanced-tensor-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tags 064L and 06Y6; explicit mixed-complex assembly and universal-counit comparison"
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 064L (lemma-derived-tor-quasi-isomorphism) and 06Y6 (lemma-derived-base-change). Official Stacks pages read online; literature source omitted from this remote checkout.; N2 explicit Lean linear upgrade and square assembly; ordinary mixed-homology comparison proved, universal additive K-flat step split off"
  },
  "mathlib_searches": [
   {
@@ -132,9 +139,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J4",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261014T020513-L-3812179",
+  "landing": "20261014T025140-L-157541",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
