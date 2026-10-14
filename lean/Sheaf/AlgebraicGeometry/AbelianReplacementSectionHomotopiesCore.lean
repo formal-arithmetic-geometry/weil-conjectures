@@ -5,6 +5,7 @@ Authors: SHEAF group A4
 -/
 module
 public import Sheaf.AlgebraicGeometry.AbelianCounitResolutionCalculation
+import Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCoreParts
 import Sheaf.Algebra.Homology.MappingCylinderSplitFactorization
 import Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
 import Mathlib.Algebra.Homology.ModelCategory.Injective
@@ -66,5 +67,8 @@ theorem abelian_replacement_section_homotopies_core {X Y : Scheme.{u}} (f : X �
       Nonempty (Homotopy
         ((a.hom ≫ ((moduleSections Y).mapHomologicalComplex (.up ℕ)).map l) ≫ q)
         (((abelianSections X).mapHomologicalComplex (.up ℕ)).map
-          (forgottenResolutionMap X I))) := by sorry
+          (forgottenResolutionMap X I))) := by
+  obtain ⟨q, hq⟩ := exists_section_map_with_counit_homotopy f I J K l hl β hβ a ha
+  exact ⟨q, hq,
+    second_section_homotopy_of_counit f I J K l hl β hβ a ha q hq⟩
 end AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution

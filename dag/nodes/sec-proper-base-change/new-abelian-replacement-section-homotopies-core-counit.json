@@ -1,0 +1,104 @@
+{
+ "id": "new-abelian-replacement-section-homotopies-core-counit",
+ "kind": "statement",
+ "title": "Existence of the counit section homotopy",
+ "statement": "theorem exists_section_map_with_counit_homotopy {X Y : Scheme.{u}} (f : X ⟶ Y)\n    {F : X.Modules} (I : InjectiveResolution F)\n    (J : InjectiveResolution ((pushforward f).obj F)) (K : CochainComplex Y.Modules ℕ)\n    (l : ((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ K)\n    (hl : QuasiIso l) (β : J.cocomplex ⟶ K)\n    (hβ : J.ι.f 0 ≫ β.f 0 = (pushforward f).map (I.ι.f 0) ≫ l.f 0)\n    (a : ((moduleSections X).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ≅\n      ((moduleSections Y).mapHomologicalComplex (.up ℕ)).obj\n        (((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex))\n    (ha : ∀ n : ℕ, a.inv.f n = (presheaf (I.cocomplex.X n)).map\n      (eqToHom (by simp) : (⊤ : X.Opens) ⟶ f ⁻¹ᵁ (⊤ : Y.Opens)).op) :\n    ∃ q : ((moduleSections Y).mapHomologicalComplex (.up ℕ)).obj K ⟶\n        ((abelianSections X).mapHomologicalComplex (.up ℕ)).obj\n          (standardAbelianResolution X F).cocomplex,\n      Nonempty (Homotopy\n        (((moduleSections Y).mapHomologicalComplex (.up ℕ)).map β ≫ q)\n        (counitSectionMap f F J))",
+ "stmt_deps": [
+  "new-abelian-replacement-section-homotopies-core"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/013S",
+  "place": "013P(1), 013S"
+ },
+ "proof": [
+  {
+   "text": "The construction is the corresponding mapping-cylinder lift and uniqueness-up-to-homotopy argument from the core proof.",
+   "uses": [
+    "lem-weil-pbc-complex-mapping-cylinder-split-factorization",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-complex-mapping-cylinder-split-factorization",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "proof_origin": {
+  "by": "C2 worker",
+  "document": "https://stacks.math.columbia.edu/tag/013S",
+  "place": "013P(1), 013S"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "section homotopy lift",
+   "results": "No exact match.",
+   "verdict": "No exact match.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "Homotopy",
+   "results": "No exact match.",
+   "verdict": "No exact match.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "section_map_with_counit",
+   "results": "No exact match.",
+   "verdict": "No exact match.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCore",
+  "date": "2026-10-14",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-abelian-replacement-section-homotopies-core",
+   "place": "decomposition of core proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCoreParts",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianReplacementSectionHomotopiesCoreParts.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.exists_section_map_with_counit_homotopy",
+  "statement": "theorem exists_section_map_with_counit_homotopy {X Y : Scheme.{u}} (f : X ⟶ Y)\n    {F : X.Modules} (I : InjectiveResolution F)\n    (J : InjectiveResolution ((pushforward f).obj F)) (K : CochainComplex Y.Modules ℕ)\n    (l : ((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ K)\n    (hl : QuasiIso l) (β : J.cocomplex ⟶ K)\n    (hβ : J.ι.f 0 ≫ β.f 0 = (pushforward f).map (I.ι.f 0) ≫ l.f 0)\n    (a : ((moduleSections X).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ≅\n      ((moduleSections Y).mapHomologicalComplex (.up ℕ)).obj\n        (((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex))\n    (ha : ∀ n : ℕ, a.inv.f n = (presheaf (I.cocomplex.X n)).map\n      (eqToHom (by simp) : (⊤ : X.Opens) ⟶ f ⁻¹ᵁ (⊤ : Y.Opens)).op) :\n    ∃ q : ((moduleSections Y).mapHomologicalComplex (.up ℕ)).obj K ⟶\n        ((abelianSections X).mapHomologicalComplex (.up ℕ)).obj\n          (standardAbelianResolution X F).cocomplex,\n      Nonempty (Homotopy\n        (((moduleSections Y).mapHomologicalComplex (.up ℕ)).map β ≫ q)\n        (counitSectionMap f F J))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261014T044554-L-1451315",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261014T044554-L-1451315",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
