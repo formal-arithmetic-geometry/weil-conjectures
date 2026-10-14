@@ -3,26 +3,142 @@
  "blueprint": {
   "is": "def-kun-projection-formula-map",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The projection-formula morphism",
- "statement": "Let $f:X\\to Y$ be a morphism of schemes, $\\Lambda$ a commutative\nring, $E\\in D(X_{\\Et},\\Lambda)$, and $K\\in D(Y_{\\Et},\\Lambda)$.\nThe *projection-formula morphism* is the morphism\n\n$$\n\\mathrm{PF}_f(E,K):\\quad\nRf_*E\\kunotimes{\\Lambda}K\\longrightarrow\nRf_*\\bigl(E\\kunotimes{\\Lambda}f^{-1}K\\bigr)\n$$\n\nin $D(Y_{\\Et},\\Lambda)$ adjoint to the composite\n\n$$\nf^{-1}(Rf_*E\\kunotimes{\\Lambda}K)\n\\cong f^{-1}Rf_*E\\kunotimes{\\Lambda}f^{-1}K\n\\xrightarrow{\\ \\varepsilon_f\\otimes1\\ }E\\kunotimes{\\Lambda}f^{-1}K,\n$$\n\nwhere the first map is the monoidality isomorphism of\n[lem-kun-inverse-image-monoidal] for the\ninverse image $f^{-1}$ and\n$\\varepsilon_f$ is the counit of the derived adjunction.",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes and $\\Lambda$ a commutative ring. Work on small representatives of the small etale sites in a universe large enough for the module sheaves [def-weil-size-convention], and use the unbounded module derived categories $D(T_{\\Et},\\Lambda)$ [def-weil-pbc-derived-categories]. The constant-coefficient module inverse image $f^{-1}$ is the exact left adjoint to $f_*$ of [prop-weil-pbc-inverse-image-modules-exact]. On derived categories $f^{-1}$ is its termwise derived functor [lem-weil-pbc-exact-functor-derived-functor]. For a representing complex $C$ choose a K-injective resolution $C\\to I$ [def-weil-pbc-kinjective-resolutions], [prop-weil-pbc-kinjective-resolutions-exist], and let $Rf_*(QC)=Q(f_*I)$ be the total right derived functor [lem-weil-pbc-kinjective-total-derived]. Use the canonical derived adjunction $f^{-1}\\dashv Rf_*$, with unit $\\eta_f$ and counit $\\varepsilon_f$: its Hom bijection is the termwise adjunction [lem-weil-pbc-termwise-adjunction-homotopy] computed on a K-injective resolution of the second argument, using [lem-weil-pbc-kinjective-hom-derived] and [lem-weil-pbc-right-adjoint-preserves-kinjective].\n\nAll tensor products are the ordinary uncompleted derived tensor products of [def-kun-derived-tensor], acting on morphisms by the derived tensor bifunctor [lem-weil-pbc-site-derived-tensor-descent]. Let $E\\in D(X_{\\Et},\\Lambda)$ and $K\\in D(Y_{\\Et},\\Lambda)$. Put $M=Rf_*E\\kunotimes{\\Lambda}K$ and $N=E\\kunotimes{\\Lambda}f^{-1}K$. Let\n$$\n c_{Rf_*E,K}:f^{-1}(Rf_*E\\kunotimes{\\Lambda}K)\n \\xrightarrow{\\sim}f^{-1}Rf_*E\\kunotimes{\\Lambda}f^{-1}K\n$$\nbe the inverse of the canonical comparison of [lem-kun-inverse-image-monoidal], and put\n$$\n \\alpha_{E,K}=(\\varepsilon_{f,E}\\kunotimes{\\Lambda}1_{f^{-1}K})\\circ c_{Rf_*E,K}:f^{-1}M\\longrightarrow N.\n$$\nThe *projection-formula morphism* is the explicit composite in $D(Y_{\\Et},\\Lambda)$\n$$\n \\mathrm{PF}_f(E,K):\\quad\n Rf_*E\\kunotimes{\\Lambda}K=M\n \\xrightarrow{\\eta_{f,M}}Rf_*f^{-1}M\n \\xrightarrow{Rf_*(\\alpha_{E,K})}Rf_*N\n =Rf_*(E\\kunotimes{\\Lambda}f^{-1}K).\n$$\nEquivalently it is the morphism adjoint to $\\alpha_{E,K}$ under the displayed derived adjunction. No boundedness, properness, finiteness or torsion condition is imposed, and no assertion that this morphism is invertible is part of the definition.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-projection-formula-map.md",
   "place": "node def-kun-projection-formula-map, order 1735"
  },
  "stmt_deps": [
-  "lem-kun-inverse-image-monoidal",
+  "def-weil-size-convention",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "def-weil-pbc-kinjective-resolutions",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
   "def-kun-derived-tensor",
-  "def-weil-pbc-inverse-image"
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-kun-inverse-image-monoidal"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula morphism for derived direct image of etale sheaves of modules defined by adjunction and monoidal inverse image",
+   "results": "SheafOfModules.unitToPushforwardObjUnit; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pushforwardSections_unitHomEquiv; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.unitToPushforwardObjUnit_val_app_apply; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+   "date": "2026-10-14",
+   "verdict": "no match: underived module pullbacks, slice-category adjunctions and formal adjunction operations do not supply the unbounded etale module derived tensor and adjunction construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"projection\"",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: underived module pullbacks, slice-category adjunctions and formal adjunction operations do not supply the unbounded etale module derived tensor and adjunction construction"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap|projection.formula|rightAdjointProjection",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: underived module pullbacks, slice-category adjunctions and formal adjunction operations do not supply the unbounded etale module derived tensor and adjunction construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived etale projection formula map from tensor product of pushforward and coefficients to pushforward of tensor product",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal left adjoint L with right adjoint R has canonical morphism R E tensor K to R of E tensor L K given by the adjunction counit",
+   "results": "CategoryTheory.tensorLeftAdjunction; CategoryTheory.tensorRightAdjunction; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ; CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match: underived module pullbacks, slice-category adjunctions and formal adjunction operations do not supply the unbounded etale module derived tensor and adjunction construction"
+  },
+  {
+   "tool": "grep",
+   "query": "projection|rightAdjointProjection",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean; Mathlib/Algebra/Homology/HomotopyCofiber.lean; Mathlib/Algebra/Homology/HomotopyCofiber.lean; Mathlib/Algebra/Homology/HomotopyCofiber.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: underived module pullbacks, slice-category adjunctions and formal adjunction operations do not supply the unbounded etale module derived tensor and adjunction construction"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointProjectionMap|projectionFormula",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: underived module pullbacks, slice-category adjunctions and formal adjunction operations do not supply the unbounded etale module derived tensor and adjunction construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical tensor comparison for a right adjoint of a strong monoidal functor using the counit and adjunction hom equivalence",
+   "results": "CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit; CategoryTheory.Adjunction.instIsMonoidal; CategoryTheory.Adjunction.rightAdjointLaxMonoidal; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit; CategoryTheory.Adjunction.IsMonoidal; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ; CategoryTheory.Adjunction.mapMon_counit",
+   "date": "2026-10-14",
+   "verdict": "no match: underived module pullbacks, slice-category adjunctions and formal adjunction operations do not supply the unbounded etale module derived tensor and adjunction construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection formula morphism for derived direct image and derived tensor of sheaves is adjoint to pullback monoidality followed by the counit",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.pullbackComp; SheafOfModules.pullbackIso; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-14",
+   "verdict": "no match: underived module pullbacks, slice-category adjunctions and formal adjunction operations do not supply the unbounded etale module derived tensor and adjunction construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"Formula\"",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: underived module pullbacks, slice-category adjunctions and formal adjunction operations do not supply the unbounded etale module derived tensor and adjunction construction"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection.formula",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: underived module pullbacks, slice-category adjunctions and formal adjunction operations do not supply the unbounded etale module derived tensor and adjunction construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula map for unbounded derived categories of etale sheaves of modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal left adjoint defines a projection formula comparison tensor of pushforward with an object to pushforward of tensor with pullback",
+   "results": "CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom; CategoryTheory.ExponentiableMorphism.ev; CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit; CategoryTheory.ExponentiableMorphism.coev_ev_assoc; CategoryTheory.ExponentiableMorphism.coev",
+   "date": "2026-10-14",
+   "verdict": "no match: underived module pullbacks, slice-category adjunctions and formal adjunction operations do not supply the unbounded etale module derived tensor and adjunction construction"
+  },
+  {
+   "tool": "grep",
+   "query": "projection|Projection",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: underived module pullbacks, slice-category adjunctions and formal adjunction operations do not supply the unbounded etale module derived tensor and adjunction construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an adjunction F left adjoint to G and a comonoidal tensor comparison, construct G X tensor Y to G (X tensor F Y) by taking the mate of the tensor counit",
+   "results": "CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε",
+   "date": "2026-10-14",
+   "verdict": "no match: rightAdjointLaxMonoidal_μ has both tensor inputs in the target of the left adjoint; it is not the mixed-input derived etale projection map"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -49,5 +165,31 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-kun-projection-formula-map",
+  "worker": "stage1",
+  "summary": "Expanded the adjoint definition into its explicitly typed unit/direct-image composite; supplied the existing unbounded module derived-adjunction and tensor-bifunctor interfaces, rather than taking derived adjunction from the underived inverse-image definition. No statement dispute and no new nodes. Second reading records the exact sorry-free etale projection-map attachment and makes the unbounded Hom-adjunction interface concrete on K-injective resolutions.",
+  "blueprint": "Realizes the displayed projection-formula morphism, the displayed transpose, and the final counit sentence of the imported definition. A definition has no proof steps; all construction dependencies are statement dependencies."
+ },
+ "lean_candidates": [
+  {
+   "name": "AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap",
+   "module": "WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection",
+   "lines": [
+    110,
+    119
+   ],
+   "note": "Belongs to def-kun-projection-formula-map, specializing A to ModuleCat Λ and evaluating at E,K. Current source lines 114-119 define the mate of the pullback tensor comparison followed by the tensor counit; lines 126-139 give the formula. ModuleCat.hasFunctorialFlatResolution (CategoryTheory/GrothendieckAbelian/Monoidal/FlatResolution.lean:135-142) and Etale.upperStarPreservesFlat_moduleCat (SixFunctors/Etale/UpperLowerStar/FlatModuleCat.lean:69-74) supply the extra instances for every commutative Λ. Constant-ring module sheaves are equivalently ModuleCat Λ-valued sheaves; exact pullback identifies Lp^* with p^{-1}. Archived local/sorry_map_slopmaster2_7d675a26.jsonl.gz and full map both record s=false, ts=false. Current module warning about sorryAx is stale: derivedTensor now has the body curriedTensor. Maintainer to verify and attach; no compiler run."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-a47aafc3b",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-a47aafc3b (reviewer sub-agent of L); spot-checked: Read the full item, report, all thirteen cited dependency statements, unit/chapter route and cited source passages. The unbounded adjunction, inverse tensor comparison and projection-map transpose agree with Stacks Tags 07A4, 07A6 and 0B56. Edge cases and dependency cycles checked; no new nodes or repairs. Verified the source attachment and archived sorry records. Full findings are in review.md; no target comparison theorem is certified."
+ }
 }
