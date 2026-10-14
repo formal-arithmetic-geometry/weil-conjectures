@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **829**, closure **9**, holes in definitions **4**, definitions with undetermined data **2** (closure **0**).
+Holes now: library **828**, closure **8**, holes in definitions **4**, definitions with undetermined data **2** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -21,13 +21,13 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 | root | library | closure |
 |---|---:|---:|
 | Sheaf | 617 | 7 |
-| WeilConjectures | 212 | 2 |
+| WeilConjectures | 211 | 1 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2178 | 84 | 2094 | 6 | 1 |
-| 660345513 (Application of proof-dependency imports) | library | 2120 | 82 | 2038 | 6 | 1 |
-| 660345513 (Application of proof-dependency imports) | closure | 1979 | 7 | 1972 | 4 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 2179 | 84 | 2095 | 6 | 1 |
+| 660345513 (Application of proof-dependency imports) | library | 2121 | 82 | 2039 | 6 | 1 |
+| 660345513 (Application of proof-dependency imports) | closure | 1980 | 7 | 1973 | 4 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
@@ -35,7 +35,7 @@ No closure delta is quoted across 660345513: proof-dependency imports changed th
 |---|---:|
 | proved | 3373 |
 | decomposed | 48 |
-| moved | 3906 |
+| moved | 3909 |
 | pruned | 119 |
 | other | 474 |
 
@@ -63,7 +63,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | E4 | 37 | 37 | 26 | 11 | 19/37 (51.4%) |
 | F1 | 134 | 135 | 103 | 32 | 69/134 (51.5%) |
 | F2 | 133 | 134 | 98 | 36 | 61/133 (45.9%) |
-| F3 | 85 | 86 | 55 | 31 | 39/85 (45.9%) |
+| F3 | 86 | 87 | 56 | 31 | 40/86 (46.5%) |
 | F4 | 50 | 43 | 36 | 7 | 25/50 (50.0%) |
 | G1 | 135 | 136 | 111 | 25 | 74/135 (54.8%) |
 | G2 | 132 | 131 | 88 | 43 | 60/132 (45.5%) |
@@ -104,7 +104,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | S1 | 123 | 125 | 104 | 21 | 68/123 (55.3%) |
 | S2 | 121 | 125 | 98 | 27 | 63/121 (52.1%) |
 | S3 | 102 | 97 | 63 | 34 | 48/102 (47.1%) |
-| S4 | 44 | 42 | 34 | 8 | 23/44 (52.3%) |
+| S4 | 45 | 43 | 35 | 8 | 24/45 (53.3%) |
 | T1 | 108 | 108 | 80 | 28 | 55/108 (50.9%) |
 | T2 | 131 | 153 | 97 | 56 | 64/131 (48.9%) |
 | T3 | 98 | 93 | 75 | 18 | 52/98 (53.1%) |
@@ -138,20 +138,19 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | Y2 | 108 | 110 | 98 | 12 | 59/108 (54.6%) |
 | Y3 | 103 | 90 | 56 | 34 | 45/103 (43.7%) |
 | Z2 | 3 | 4 | 0 | 4 | 1/3 (33.3%) |
-| launcher prover | 5 | 4 | 1 | 3 | 1/5 (20.0%) |
+| launcher prover | 6 | 5 | 2 | 3 | 2/6 (33.3%) |
 
 Nearest targets (claims from the scanned git tree; live leases may differ):
 
 | module | distance | holes | group |
 |---|---:|---:|---|
 | WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty | 0 | 1 | ORCHESTRA |
-| WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine | 0 | 1 | ORCHESTRA |
-| Sheaf.AlgebraicGeometry.CartesianHigherImageAffineSectionLocalVanishing | 14 | 1 | F3 |
+| Sheaf.AlgebraicGeometry.CartesianHigherImageAffineSectionLocalVanishing | 14 | 1 | C4 |
 | Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality | 16 | 1 | F3 |
 | Sheaf.AlgebraicGeometry.PicardH1ProductSpanningBypass | 16 | 1 | — |
 | Sheaf.AlgebraicGeometry.PicardDerivedFibreResidueBridge | 24 | 1 | X2 |
-| Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData | 34 | 2 | S4 |
-| Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates | 50 | 1 | B2 |
+| Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData | 34 | 2 | K1 |
+| Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates | 50 | 1 | T4 |
 
 Modules pruned since the imports baseline:
 
