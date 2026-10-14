@@ -2,7 +2,7 @@
  "id": "new-determinant-split-local",
  "kind": "statement",
  "title": "new-determinant-split-local",
- "statement": "theorem determinant_split_comparison_local {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]\n    (U : X.Opens)\n    (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)\n    (hf : (restrictFunctor U.ι).map S.f ≫ e.hom = biprod.inl)\n    (hg : e.hom ≫ biprod.snd = (restrictFunctor U.ι).map S.g)\n    (l : ∀ (W : X.Opens), W ≤ U → S.X₃.val.obj (op W) → S.X₂.val.obj (op W))\n    (hl : ∀ W hW b, S.g.val.app (op W) (l W hW b) = b) :\n    ∀ x ∈ U, ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧\n      ∃ (d : ∀ (W : X.Opens), W ≤ V →\n        (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)\n          ≃ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W)),\n      ∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))\n        (b : Fin r₃ → S.X₃.val.obj (op W)),\n        d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)\n          (exteriorSheafSection S.X₃ r₃ W b)) =\n        exteriorSheafSection S.X₂ r₂ W\n          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))\n            (fun j ↦ l W (hW.trans hVU) (b j)) (Fin.cast hr i)) ",
+ "statement": "theorem determinant_split_comparison_exists {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]\n    (U : X.Opens)\n    (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)\n    (hf : (restrictFunctor U.ι).map S.f ≫ e.hom = biprod.inl)\n    (hg : e.hom ≫ biprod.snd = (restrictFunctor U.ι).map S.g)\n    (l : ∀ (W : X.Opens), W ≤ U → S.X₃.val.obj (op W) → S.X₂.val.obj (op W))\n    (hl : ∀ W hW b, S.g.val.app (op W) (l W hW b) = b) :\n    ∀ x ∈ U, ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧\n      ∃ (d : ∀ (W : X.Opens), W ≤ V →\n        (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)\n          ≃ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W)),\n      (∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))\n        (b : Fin r₃ → S.X₃.val.obj (op W)),\n        d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)\n          (exteriorSheafSection S.X₃ r₃ W b)) =\n        exteriorSheafSection S.X₂ r₂ W\n          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))\n            (fun j ↦ l W (hW.trans hVU) (b j)) (Fin.cast hr i))) ∧\n      (∀ (W Z : X.Opens) (hW : W ≤ V) (hZW : Z ≤ W) y,\n        (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =\n          d Z (hZW.trans hW)\n            ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map\n              (homOfLE hZW).op y))",
  "source": {
   "document": "blueprint determinant paragraph",
   "place": "local construction"
@@ -12,33 +12,20 @@
  ],
  "proof": [
   {
-   "text": "Construct the unique natural family d of linear wedge maps on U. This step needs only the first-term rank, and establishes the generator formula without invertibility.",
+   "text": "Use the existing determinant_split_comparison_exists theorem. It gives both the local wedge formula and restriction compatibility under exactly the same hypotheses; the duplicate local declaration is retired.",
    "uses": [
-    "lem-sc-split-determinant-linear-maps"
+    "lem-sc-determinant-split-comparison"
    ],
    "elementary": false
-  },
-  {
-   "text": "Apply local bijectivity to the constructed linear maps and obtain a chart V containing the given point on which every subopen map is bijective.",
-   "uses": [
-    "lem-sc-split-determinant-linear-bijective"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For W inside V use LinearEquiv.ofBijective on the map indexed by the composite W <= V <= U. Its forward function is the original linear map, so its wedge formula is exactly the existing formula.",
-   "uses": [],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-split-determinant-linear-maps",
-  "lem-sc-split-determinant-linear-bijective"
+  "lem-sc-determinant-split-comparison"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph; linear construction and local bijectivity separated by V1"
+  "place": "Proof of (*), determinant paragraph; repair of return X-59b54: reuse the canonical local comparison instead of duplicating its proof."
  },
  "mathlib_searches": [
   {
@@ -83,14 +70,14 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-rr",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DeterminantSplitComparisonLocal.lean",
-  "declaration": "AlgebraicGeometry.Scheme.Modules.determinant_split_comparison_local",
-  "statement": "theorem determinant_split_comparison_local {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]\n    (U : X.Opens)\n    (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)\n    (hf : (restrictFunctor U.ι).map S.f ≫ e.hom = biprod.inl)\n    (hg : e.hom ≫ biprod.snd = (restrictFunctor U.ι).map S.g)\n    (l : ∀ (W : X.Opens), W ≤ U → S.X₃.val.obj (op W) → S.X₂.val.obj (op W))\n    (hl : ∀ W hW b, S.g.val.app (op W) (l W hW b) = b) :\n    ∀ x ∈ U, ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧\n      ∃ (d : ∀ (W : X.Opens), W ≤ V →\n        (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)\n          ≃ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W)),\n      ∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))\n        (b : Fin r₃ → S.X₃.val.obj (op W)),\n        d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)\n          (exteriorSheafSection S.X₃ r₃ W b)) =\n        exteriorSheafSection S.X₂ r₂ W\n          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))\n            (fun j ↦ l W (hW.trans hVU) (b j)) (Fin.cast hr i)) ",
+  "existing": true,
+  "module": "Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DeterminantSplitComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.determinant_split_comparison_exists",
+  "statement": "theorem determinant_split_comparison_exists {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]\n    (U : X.Opens)\n    (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)\n    (hf : (restrictFunctor U.ι).map S.f ≫ e.hom = biprod.inl)\n    (hg : e.hom ≫ biprod.snd = (restrictFunctor U.ι).map S.g)\n    (l : ∀ (W : X.Opens), W ≤ U → S.X₃.val.obj (op W) → S.X₂.val.obj (op W))\n    (hl : ∀ W hW b, S.g.val.app (op W) (l W hW b) = b) :\n    ∀ x ∈ U, ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧\n      ∃ (d : ∀ (W : X.Opens), W ≤ V →\n        (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)\n          ≃ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W)),\n      (∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))\n        (b : Fin r₃ → S.X₃.val.obj (op W)),\n        d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)\n          (exteriorSheafSection S.X₃ r₃ W b)) =\n        exteriorSheafSection S.X₂ r₂ W\n          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))\n            (fun j ↦ l W (hW.trans hVU) (b j)) (Fin.cast hr i))) ∧\n      (∀ (W Z : X.Opens) (hW : W ≤ V) (hZW : Z ≤ W) y,\n        (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =\n          d Z (hZW.trans hW)\n            ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map\n              (homOfLE hZW).op y))",
   "branch": "sheaf-dag",
-  "by": "S3",
-  "date": "2026-10-13"
+  "by": "M1",
+  "date": "2026-10-14"
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -105,13 +92,47 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "B2",
+  "reviewer": "X-2aac0",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261014T025136-L-155497",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [],
-  "sorry_after": []
+  "landing": "20261014T035544-L-887375",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the redirected node exactly to determinant_split_comparison_exists, verified the recorded retirement and unchanged restriction theorem, found no callers or DAG citers, and compiled the delivery and sole direct importer against it; both axiom probes show only propext, Classical.choice, Quot.sound."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "M1 stage 2",
+  "old_statement": "theorem determinant_split_comparison_local {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]\n    (U : X.Opens)\n    (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)\n    (hf : (restrictFunctor U.ι).map S.f ≫ e.hom = biprod.inl)\n    (hg : e.hom ≫ biprod.snd = (restrictFunctor U.ι).map S.g)\n    (l : ∀ (W : X.Opens), W ≤ U → S.X₃.val.obj (op W) → S.X₂.val.obj (op W))\n    (hl : ∀ W hW b, S.g.val.app (op W) (l W hW b) = b) :\n    ∀ x ∈ U, ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧\n      ∃ (d : ∀ (W : X.Opens), W ≤ V →\n        (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)\n          ≃ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W)),\n      ∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))\n        (b : Fin r₃ → S.X₃.val.obj (op W)),\n        d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)\n          (exteriorSheafSection S.X₃ r₃ W b)) =\n        exteriorSheafSection S.X₂ r₂ W\n          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))\n            (fun j ↦ l W (hW.trans hVU) (b j)) (Fin.cast hr i)) ",
+  "what": "Retire the unused duplicate local declaration and realize its node by the existing determinant_split_comparison_exists. All original hypotheses and the wedge conclusion are retained; the existing canonical theorem also supplies the requested naturality conjunct. No statement is proved a second time.",
+  "source": {
+   "document": "coord/returns/M1.md",
+   "place": "Return X-59b54: reuse the existing theorem instead of duplicating its statement and proof."
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "Construct the unique natural family d of linear wedge maps on U. This step needs only the first-term rank, and establishes the generator formula without invertibility.",
+    "uses": [
+     "lem-sc-split-determinant-linear-maps"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Apply local bijectivity to the constructed linear maps and obtain a chart V containing the given point on which every subopen map is bijective.",
+    "uses": [
+     "lem-sc-split-determinant-linear-bijective"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For W inside V use LinearEquiv.ofBijective on the map indexed by the composite W <= V <= U. Its forward function is the original linear map, so its wedge formula is exactly the existing formula.",
+    "uses": [],
+    "elementary": true
+   }
+  ],
+  "old_proof_deps": [
+   "lem-sc-split-determinant-linear-maps",
+   "lem-sc-split-determinant-linear-bijective"
+  ]
  }
 }
