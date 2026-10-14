@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sbc-lem-bc-injectivity",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Injectivity of the critical map and its cokernel",
- "statement": "With $f:X\\to S$ and $n$ as in [sbc-def-base-change-property], assume for\nsome $q\\geq1$ that $\\mathrm{BC}(f,n,q-1)$ holds universally (in the\nsingle degree $q-1$; no hypothesis in the degrees $<q-1$ is needed).\nLet $S'\\to S$ be a morphism, $f':X'=X\\times_SS'\\to S'$ the base change,\n$g:T\\to S'$ a quasi-compact and quasi-separated morphism, and\n$h:Y=X'\\times_{S'}T\\to X'$, $e:Y\\to T$ the projections. Then for\nevery abelian sheaf $\\mathcal F$ on $T_{\\Et}$ annihilated by $n$:\n\n1. the base-change map\n$f'^{-1}R^qg_*\\mathcal F\\to R^qh_*e^{-1}\\mathcal F$ is\ninjective;\n1. if $\\mathcal F\\subset\\mathcal G$ with $\\mathcal G$ annihilated by\n$n$, then\n$$\n\\operatorname{Coker}\\bigl(f'^{-1}R^qg_*\\mathcal F\\to\nR^qh_*e^{-1}\\mathcal F\\bigr)\n\\subset\\operatorname{Coker}\\bigl(f'^{-1}R^qg_*\\mathcal G\\to\nR^qh_*e^{-1}\\mathcal G\\bigr);\n$$\n1. if in (2) the sheaf $\\mathcal G$ is an injective sheaf of\n$\\mathbf Z/n\\mathbf Z$-modules, then\n$$\n\\operatorname{Coker}\\bigl(f'^{-1}R^qg_*\\mathcal F\\to\nR^qh_*e^{-1}\\mathcal F\\bigr)\n\\subset R^qh_*e^{-1}\\mathcal G.\n$$\n\n(*Stacks Project, Lemma 59.88.2, [Tag `0F03`](https://stacks.math.columbia.edu/tag/0F03).*)",
+ "statement": "With $f:X\\to S$ and $n$ as in [sbc-def-base-change-property], assume for\nsome $q\\geq1$ that $\\mathrm{BC}(f,n,q-1)$ holds universally (in the\nsingle degree $q-1$; no hypothesis in the degrees $<q-1$ is needed).\nLet $S'\\to S$ be a morphism, $f':X'=X\\times_SS'\\to S'$ the base change,\n$g:T\\to S'$ a quasi-compact and quasi-separated morphism, and\n$h:Y=X'\\times_{S'}T\\to X'$, $e:Y\\to T$ the projections. Then for\nevery abelian sheaf $\\mathcal F$ on $T_{\\Et}$ annihilated by $n$:\n\n1. the base-change map\n$f'^{-1}R^qg_*\\mathcal F\\to R^qh_*e^{-1}\\mathcal F$ is\ninjective;\n1. if $\\mathcal F\\subset\\mathcal G$ with $\\mathcal G$ an abelian sheaf\non $T_{\\Et}$ annihilated by $n$, then\n$$\n\\operatorname{Coker}\\bigl(f'^{-1}R^qg_*\\mathcal F\\to\nR^qh_*e^{-1}\\mathcal F\\bigr)\n\\subset\\operatorname{Coker}\\bigl(f'^{-1}R^qg_*\\mathcal G\\to\nR^qh_*e^{-1}\\mathcal G\\bigr);\n$$\n1. if in (2) the sheaf $\\mathcal G$ is an injective sheaf of\n$\\mathbf Z/n\\mathbf Z$-modules, then\n$$\n\\operatorname{Coker}\\bigl(f'^{-1}R^qg_*\\mathcal F\\to\nR^qh_*e^{-1}\\mathcal F\\bigr)\n\\subset R^qh_*e^{-1}\\mathcal G.\n$$\n\n(*Stacks Project, [Tag `0F03`](https://stacks.math.columbia.edu/tag/0F03).*)",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-injectivity/sbc-lem-bc-injectivity.md",
   "place": "node sbc-lem-bc-injectivity, order 1384",
@@ -23,17 +23,49 @@
  ],
  "proof": [
   {
-   "text": "Choose a short exact sequence\n$0\\to\\mathcal F\\to\\mathcal I\\to\\mathcal Q\\to0$ with $\\mathcal I$ an\ninjective sheaf of $\\mathbf Z/n\\mathbf Z$-modules on $T_{\\Et}$. The\ninjective-acyclicity input of [lemma-weil-pbc-leray-acyclicity]\n(using the adjunction of [def-weil-pbc-inverse-image]) gives\n$R^qg_*\\mathcal I=0$ for $q>0$, so the two long exact sequences of\nhigher direct images of [def-weil-pbc-direct-image] (in the\nderived categories of [def-weil-pbc-derived-categories], the\ndistinguished triangle of the short exact sequence) and the naturality\nof the base-change maps of [sbc-def-base-change-map] ([sbc-lem-bc-naturality]) give the\ndiagram with exact rows of the statement: the long exact sequences are\nthe ones of [lemma-weil-pbc-five-lemma-transfer]; the left two\nvertical arrows are the degree-$(q-1)$ base-change maps for\n$\\mathcal I$ and $\\mathcal Q$ for the base change $f'$ along $g$, hence\nisomorphisms by $\\mathrm{BC}(f',n,q-1)$, which is part of the\nhypothesis that $\\mathrm{BC}(f,n,q-1)$ holds universally (only this\nsingle degree enters), the top\nright entry $f'^{-1}R^qg_*\\mathcal I$ is zero, hence the middle vertical arrow is injective,\nwhich is (1), and the same diagram gives the inclusion of the cokernel\ninto $R^qh_*e^{-1}\\mathcal I$, which is (3); for (2), with\n$\\mathcal F\\subset\\mathcal G\\subset\\mathcal I$, the same diagram\napplied to $\\mathcal F\\subset\\mathcal G$ gives the inclusion of the\ncokernels.",
+   "text": "Put $A^i(E)=f\\prime^{-1}R^ig_*E$ and $B^i(E)=R^ih_*e^{-1}E$, and denote the base-change arrow by $a_E^i$. Work first with $\\Lambda=\\mathbf Z/n\\mathbf Z$-module sheaves. Enough injectives gives $0\\to F\\to I\\to Q\\to0$ with $I$ injective; $Q$ is again annihilated by $n$. Direct image is left exact, so injective acyclicity gives $R^qg_*I=0$ for $q>0$ in module sheaves. The exchange-forget-coefficients comparison identifies this with vanishing for the underlying abelian sheaf (an injective module sheaf need not itself be an injective abelian sheaf). Exactness of inverse image gives exact rows after applying the two derived functors. Their long exact sequences and base-change maps agree with those for abelian sheaves by the same coefficient comparison.",
    "uses": [
     "lemma-weil-pbc-leray-acyclicity",
     "def-weil-pbc-inverse-image",
     "def-weil-pbc-direct-image",
     "def-weil-pbc-derived-categories",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exchange-forget-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-injectivity/sbc-lem-bc-injectivity.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "The long-exact comparison gives exact rows $A^{q-1}(I)\\to A^{q-1}(Q)\\to A^q(F)\\to0$ and $B^{q-1}(I)\\to B^{q-1}(Q)\\to B^q(F)\\to B^q(I)$. The first two vertical maps are isomorphisms: universal $BC(f,n,q-1)$ applies to $f\\prime$, the given qcqs $g$, and the $n$-annihilated sheaves $I,Q$. Thus they induce an isomorphism of the cokernels of the first horizontal arrows. The upper cokernel is $A^q(F)$; the lower cokernel is the kernel of $B^q(F)\\to B^q(I)$. Commutativity identifies this induced map with $a_F^q$. Consequently $a_F^q$ is injective and its image is exactly that kernel. This proves (1) and gives an induced monomorphism $c_{F,I}:\\operatorname{Coker}(a_F^q)\\to B^q(I)$.",
+   "uses": [
+    "lemma-weil-pbc-five-lemma-transfer",
     "sbc-def-base-change-map",
     "sbc-lem-bc-naturality",
-    "lemma-weil-pbc-five-lemma-transfer"
+    "sbc-def-base-change-property"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-injectivity/sbc-lem-bc-injectivity.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "For clause (3), run steps 1 and 2 with the specified injective sheaf $G$ in place of $I$ and the given inclusion $F\\to G$; the resulting $c_{F,G}$ is the required map. For clause (2), embed $G$ into an injective $I$ using enough injectives and compose $F\\to G\\to I$. Apply step 2 to both $F\\to I$ and $G\\to I$. Naturality yields the cokernel map $d:\\operatorname{Coker}(a_F^q)\\to\\operatorname{Coker}(a_G^q)$. By construction each $c_{E,I}$ is induced by $B^q(E)\\to B^q(I)$, so functoriality of $B^q$ and the quotient universal property give $c_{G,I}\\circ d=c_{F,I}$. Since $c_{F,I}$ is a monomorphism, $d$ is a monomorphism: if $d u=d v$, composing with $c_{G,I}$ and cancelling $c_{F,I}$ gives $u=v$. This proves (2).",
+   "uses": [
+    "lemma-weil-pbc-five-lemma-transfer",
+    "sbc-lem-bc-naturality",
+    "sbc-def-base-change-map",
+    "lem-weil-pbc-module-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-injectivity/sbc-lem-bc-injectivity.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
@@ -41,18 +73,58 @@
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-derived-categories",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lemma-weil-pbc-five-lemma-transfer",
   "sbc-def-base-change-map",
   "sbc-lem-bc-naturality",
-  "lemma-weil-pbc-five-lemma-transfer"
+  "sbc-def-base-change-property"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-injectivity/sbc-lem-bc-injectivity.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a short exact sequence of torsion etale sheaves, lower degree base change isomorphisms imply injectivity of the degree q base change map and inclusions of cokernels",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "short exact sequence etale sheaves base change map cokernel injective",
+   "results": "Hits are unrelated Mayer-Vietoris, Kähler differential, and presheaf injectivity declarations; no match.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "mono_baseChangeHomologyMap, mono_cokernelMap, mono_cokernelDesc",
+   "results": "unknown identifier / 0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChangeHomologyMap|cokernel.map|Injective.ι in WeilConjectures",
+   "results": "0 hits in Mathlib source",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injectivity and cokernel inclusion of etale base change map under lower degree base change",
+   "results": "Hits unrelated to etale base change; no match.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -81,5 +153,39 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-prop-injectivity"
+ "unit": "sk-prop-injectivity",
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "sbc-lem-bc-injectivity",
+  "worker": "stage1",
+  "summary": "Expanded the source exact-diagram argument, added enough-injectives, inverse-image exactness and coefficient-forgetting comparisons, and proved the cokernel monotonicity via a common injective embedding. No new nodes.",
+  "blueprint": "The three steps realize the single proof paragraph under ## Proof: injective resolution/acyclicity, exact naturality diagram, and cokernel conclusions.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic enough-injectives tool to justify the existing unit step choosing an injective module embedding; no replacement of the unit argument."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic exactness tool explicitly assumed in unit step 2; the inverse-image definition alone states only its adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Generic coefficient comparison needed to justify module-injective acyclicity for the abelian higher-direct-image maps already used in unit step 1; no different proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exchange-forget-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-bff97996c",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-bff97996c (reviewer sub-agent of L); spot-checked: Read the full item, unit, chapter route, cited node statements, Stacks Tag 0F03 source, blueprint, and archived master declaration. The three-step injective-resolution and exact-diagram argument is correct, hypotheses and coefficient categories match, edge cases were checked, and no duplicate or circular nodes occur. Review written to review.md; no repairs needed."
+ }
 }
