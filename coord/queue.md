@@ -1,6 +1,6 @@
 # Work queue
 
-78 items; claim with `tools/claim.py next <group> [--stage N]`.
+71 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (78)
+## Stage 3: modules to prove (71)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -43,7 +43,6 @@
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapNaturality` | 17 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SquareZeroTensorGradedBoundaryProjection` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopies` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFormula` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation` | 22 | 2 | proof |
@@ -54,11 +53,9 @@
 | `Sheaf.AlgebraicGeometry.TensorIdealSectionCoefficientComparison` | 24 | 1 | proof |
 | `Sheaf.Paper.CechCupResolutionRepresentatives` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BoundaryCoefficientTensorProduct` | 25 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.BoundaryPullbackTensorUnit` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OverlapConjugateRestriction` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCompatibility` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux` | 25 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.TensorHomogeneousKernelAction` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackCompositionCounitNormalization` | 27 | 1 | proof |
 | `Sheaf.Paper.CechRefinementPushforwardTotal` | 27 | 1 | proof |
 | `Sheaf.Paper.ModuleCupEqualDerivedMapsClass` | 27 | 1 | proof |
@@ -69,7 +66,6 @@
 | `Sheaf.AlgebraicGeometry.StandardSingleUnionHomotopyChainData` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PullbackTensorTotalCompositionLocalized` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SchemeCanonicalTensorUnitComponent` | 29 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationGradedAugmentation` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationTripleComponent` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.NormalizedFlatTelescopeComparison` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore` | 30 | 2 | proof |
@@ -77,15 +73,12 @@
 | `Sheaf.Algebra.Homology.AffineTildeDerivedTensorHomologyCoordinates` | 32 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineStalkBaseSecondLocalizationComparison` | 33 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeDerivedTensorMate` | 33 | 1 | proof |
-| `Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdge` | 34 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIdentity` | 34 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.MayerVietorisImageCompositionLocalization` | 35 | 1 | proof |
-| `Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeDescent` | 37 | 1 | proof |
-| `Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafReverseUnit` | 37 | 1 | proof |
+| `Sheaf.CategoryTheory.Abelian.DerivedBottomUnitNormalization` | 35 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineModelComparisonOfBottomModels` | 39 | 1 | proof |
 | `Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization` | 41 | 1 | proof |
 | `Sheaf.RingTheory.DvrEtaleUnitRootDiagram` | 42 | 1 | proof |
-| `Sheaf.RingTheory.DvrNormalizedTensorFactorLift` | 42 | 1 | proof |
 | `Sheaf.RingTheory.DvrUniformizerRootCompositumResidue` | 42 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SelfTorAmbientLocalizedComparisons` | 43 | 1 | proof |
 | `Sheaf.RingTheory.DvrAbhyankarLocalMaximalIdeal` | 43 | 1 | proof |
