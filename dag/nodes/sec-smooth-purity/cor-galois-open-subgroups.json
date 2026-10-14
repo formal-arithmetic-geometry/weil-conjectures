@@ -3,42 +3,180 @@
  "blueprint": {
   "is": "cor-galois-open-subgroups",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Open subgroups and finite etale covers",
- "statement": "Let $Y$ be connected with geometric point $\\bar y$. Assigning to a\nconnected finite etale cover $P$ the stabilizer in $\\pi_1(Y,\\bar y)$ of a\npoint of $P_{\\bar y}$ is a bijection between the isomorphism classes of\nconnected finite etale covers of $Y$ and the open subgroups of\n$\\pi_1(Y,\\bar y)$, and the degree of $P$ over $Y$ is the index of the\nsubgroup. (This is the form used without citation in the proof of the\nfinite-monodromy lemma of the smooth base change chapter.)",
+ "statement": "Let $Y$ be a connected scheme [def-weil-connected-scheme] with a geometric point $\\bar y$, and put $G=\\pi_1(Y,\\bar y)$ [def-galois-fibre-functor]. Finite etale covers and their geometric fibres are as in [def-galois-categories]. The assignment sending a nonempty connected finite etale cover $P\\to Y$ to the conjugacy class of $\\operatorname{Stab}_G(p)$, for any $p\\in |P_{\\bar y}|$, is a well-defined bijection between isomorphism classes of such covers and conjugacy classes of open subgroups of $G$. More precisely, isomorphism classes of pointed nonempty connected finite etale covers $(P,p)$ of $Y$, with $p\\in |P_{\\bar y}|$ and isomorphisms required to carry the marked geometric-fibre point to the marked point, correspond bijectively to individual open subgroups by $(P,p)\\mapsto\\operatorname{Stab}_G(p)$. In both forms the degree of $P\\to Y$ (its constant finite locally free rank [def-pc-finite-locally-free]) equals $[G:\\operatorname{Stab}_G(p)]$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/cor-galois-open-subgroups.md",
   "place": "node cor-galois-open-subgroups, order 1902"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-connected-scheme",
+  "def-galois-fibre-functor",
+  "def-galois-categories",
+  "def-pc-finite-locally-free"
+ ],
  "proof": [
   {
-   "text": "Here $\\pi_1=\\pi_1(Y,\\bar y)=\\operatorname{Aut}(F_{\\bar y})$ is the group\nof [def-galois-fibre-functor] and the covers are the finite etale\ncovers of [def-galois-object]. Under [thm-galois-fundamental] connected finite etale covers of $Y$\ncorrespond to transitive finite continuous $\\pi_1$-sets — the\ntransitivity being that of [lem-galois-transitive] — i.e. to\n$\\pi_1/H$ with $H$ open: the stabilizer of a point of $P_{\\bar y}$ is\nthat subgroup, and $\\#F_{\\bar y}(P)=\\#\\pi_1/H=[\\pi_1:H]$ is the degree. A\nmorphism of connected covers corresponds to an equivariant map\n$\\pi_1/H\\to\\pi_1/H'$, which exists exactly when $H'$ is contained in\n$H$ up to conjugacy, so the assignment is bijective on isomorphism\nclasses.",
+   "text": "Write $S=|P_{\\bar y}|$. By [thm-galois-fundamental] the fibre functor is an equivalence to finite continuous $G$-sets. If $P$ is connected as a scheme, [lem-galois-finite-etale-connected-object] makes it a connected object, in the sense of [def-galois-connected-object]. An equivalence preserves and reflects initial objects and monomorphisms (apply its quasi-inverse), so $S$ is nonempty and has no proper nonempty invariant subset: the inclusion of any invariant subset is a monomorphism. Each orbit is such a subset, hence the action on $S$ is transitive.",
    "uses": [
-    "def-galois-fibre-functor",
-    "def-galois-object",
     "thm-galois-fundamental",
-    "lem-galois-transitive"
+    "lem-galois-finite-etale-connected-object",
+    "def-galois-connected-object"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BND (theorem-fundamental-group), 0BNB (lemma-finite-etale-connected-galois-category), 0BN4 (proposition-galois), and 04JJ (definition-G-set-continuous)"
+   }
+  },
+  {
+   "text": "Conversely suppose $S$ is a nonempty transitive finite continuous $G$-set and choose a cover $P$ representing it by essential surjectivity of [thm-galois-fundamental]. For a clopen subset $V\\subseteq P$, [lem-galois-coproduct-copies-morphisms-clopen] with $U=Y$ and $E=\\{0,1\\}$ gives a $Y$-morphism $P\\to Y\\amalg Y$ whose two inverse images are $V$ and its complement. The equivalence preserves the terminal object and this coproduct, so its fibre is an equivariant map from $S$ to the trivial two-point set. Transitivity forces the map to be constant. Faithfulness then identifies the morphism with one of the two structural coprojection maps; clause (c) of the clopen-decomposition lemma says $V$ is empty or all of $P$. A chosen point of $S=|P_{\\bar y}|$ projects to a point of $P$, so $P$ is nonempty. Thus $P$ is connected by [def-weil-connected-scheme].",
+   "uses": [
+    "thm-galois-fundamental",
+    "lem-galois-coproduct-copies-morphisms-clopen",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BND (theorem-fundamental-group), 0BNB (lemma-finite-etale-connected-galois-category), 0BN4 (proposition-galois), and 04JJ (definition-G-set-continuous)"
+   }
+  },
+  {
+   "text": "For a point $p$ in the transitive fibre, let $H=\\{g\\in G:gp=p\\}$. The map $g\\mapsto gp$ is continuous to the discrete set $S$ [def-galois-fibre-functor], so $H$ is open. The map $G/H\\to S$, $gH\\mapsto gp$, is well-defined; $gp=g'p$ holds exactly when $g^{-1}g'\\in H$, proving injectivity, and transitivity proves surjectivity. It is equivariant and sends $H$ to $p$. Hence $\\#S=[G:H]$.",
+   "uses": [
+    "def-galois-fibre-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BND (theorem-fundamental-group), 0BNB (lemma-finite-etale-connected-galois-category), 0BN4 (proposition-galois), and 04JJ (definition-G-set-continuous)"
+   }
+  },
+  {
+   "text": "For any open subgroup $H\\leq G$, the left cosets $gH$ form a disjoint open cover of the compact group $G$ (the fundamental group is profinite by [thm-galois-fundamental]); a finite subcover therefore contains every coset. Thus $G/H$ is finite. Give it the discrete topology. The inverse image of $bH$ under $g\\mapsto gaH$ is $bHa^{-1}$, an open subset; since $G\\times(G/H)$ is the disjoint union of the open slices $G\\times\\{aH\\}$, this proves continuity of the action. The action is transitive and the stabilizer of $H$ is exactly $H$. Steps 1-2 and the equivalence [thm-galois-fundamental] therefore realize this pointed $G$-set by a pointed connected cover.",
+   "uses": [
+    "thm-galois-fundamental"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BND (theorem-fundamental-group), 0BNB (lemma-finite-etale-connected-galois-category), 0BN4 (proposition-galois), and 04JJ (definition-G-set-continuous)"
+   }
+  },
+  {
+   "text": "The equivalence [thm-galois-fundamental] identifies pointed cover isomorphisms with equivariant fibre bijections preserving the marked point. Such a bijection preserves its stabilizer. Conversely, if two pointed fibres have stabilizer $H$, the bijections in step 3 identify both, with their marked points, with $(G/H,H)$; fullness lifts their composite and its inverse to cover morphisms, and faithfulness makes both composites identities. The resulting cover isomorphism preserves the marked points, and is unique by faithfulness. This proves the pointed classification. Changing the marked point from $p$ to $ap$ changes the stabilizer from $H$ to $aHa^{-1}$, since $g(ap)=ap$ is equivalent to $a^{-1}ga\\in H$. An unpointed equivariant bijection sends $p$ to some $ap'$, so its two stabilizers are conjugate. Conversely, conjugate stabilizers can be made equal by changing one marked point and then using the pointed classification. This proves precisely the unpointed classification by conjugacy classes.",
+   "uses": [
+    "thm-galois-fundamental"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BND (theorem-fundamental-group), 0BNB (lemma-finite-etale-connected-galois-category), 0BN4 (proposition-galois), and 04JJ (definition-G-set-continuous)"
+   }
+  },
+  {
+   "text": "For the degree assertion, a finite etale morphism is finite, flat and locally of finite presentation by [def-weil-etale-morphism], hence finite locally free by [def-pc-finite-locally-free]. Its rank function is locally constant by [lem-weil-pbc-finite-locally-free-degree-locally-constant]; the clopen rank fibres show it has one constant value $d$ on the connected nonempty base. At $y$, the image of $\\bar y=\\operatorname{Spec}\\Omega$, write the finite fibre algebra as $A$ over $\\kappa(y)$. A basis of $A$ stays a basis of $A\\otimes_{\\kappa(y)}\\Omega$, so its dimension is still $d$. By [lem-galois-geometric-fibre] the geometric fibre is a disjoint union of $\\#S$ copies of $\\operatorname{Spec}\\Omega$, whose algebra is $\\Omega^{\\#S}$, of dimension $\\#S$. Thus $\\deg(P/Y)=d=\\#S=[G:H]$ by step 3, and conjugating $H$ does not change this index.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+    "lem-galois-geometric-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02K9/02KA (section-finite-locally-free, rank/degree), 04MH (lemma-finite-locally-free); geometric splitting as in pione.tex, Tag 0BNB"
+   }
   }
  ],
  "proof_deps": [
-  "def-galois-fibre-functor",
-  "def-galois-object",
   "thm-galois-fundamental",
-  "lem-galois-transitive"
+  "lem-galois-finite-etale-connected-object",
+  "def-galois-connected-object",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "def-weil-connected-scheme",
+  "def-galois-fibre-functor",
+  "def-weil-etale-morphism",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "lem-galois-geometric-fibre"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/cor-galois-open-subgroups.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tags 0BND, 0BNB, 0BN4 and 04JJ; explicit coset and conjugacy argument completing the imported blueprint proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "connected finite etale covers correspond to conjugacy classes of open subgroups of fundamental group",
+   "results": "CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen; CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected; CategoryTheory.PreGaloisCategory.IsFundamentalGroup; CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected; CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois; CategoryTheory.PreGaloisCategory.instPreservesIsConnectedActionFintypeCatAutFunctorFunctorToAction; CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat; CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected",
+   "date": "2026-10-14",
+   "verdict": "no match for the scheme classification; abstract Galois/action facts only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory Galois finite transitive continuous group actions stabilizer open subgroup",
+   "results": "loogle: <input>:1:76: expected end of input",
+   "date": "2026-10-14",
+   "verdict": "invalid Loogle pattern; retried with \"stabilizer\""
+  },
+  {
+   "tool": "grep",
+   "query": "isPretransitive_of_isConnected|transitive.*open|stabilizer",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match for the scheme classification; abstract Galois/action facts only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "open subgroup classification connected finite etale covers fundamental group",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite transitive continuous actions of a profinite group are coset spaces of open subgroups up to conjugacy",
+   "results": "CategoryTheory.PreGaloisCategory.has_decomp_quotients; Finite.to_properlyDiscontinuousSMul; Subgroup.properlyDiscontinuousSMul_opposite_of_tendsto_cofinite; Subgroup.quotient_finite_of_isOpen; Subgroup.properlyDiscontinuousSMul_of_tendsto_cofinite; Subgroup.quotient_finite_of_isOpen'; Finite.to_properlyDiscontinuousVAdd; Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace",
+   "date": "2026-10-14",
+   "verdict": "no match for the scheme classification; abstract Galois/action facts only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stabilizer\"",
+   "results": "AddAction.stabilizerAddSubmonoid; MulAction.stabilizerSubmonoid; AddAction.stabilizer; MulAction.stabilizer; AddAction.instDecidablePredMemAddSubgroupStabilizerOfDecidableEq; MulAction.instDecidablePredMemSubgroupStabilizerOfDecidableEq; AddAction.instDecidablePredMemAddSubmonoidStabilizerAddSubmonoidOfDecidableEq; MulAction.instDecidablePredMemSubmonoidStabilizerSubmonoidOfDecidableEq",
+   "date": "2026-10-14",
+   "verdict": "no match for the scheme classification; abstract Galois/action facts only"
+  },
+  {
+   "tool": "grep",
+   "query": "isPretransitive_of_isConnected|stabilizer",
+   "results": "Mathlib/CategoryTheory/Galois/Examples.lean; Mathlib/CategoryTheory/Galois/Examples.lean; Mathlib/CategoryTheory/Galois/Examples.lean; Mathlib/CategoryTheory/Galois/Examples.lean; Mathlib/CategoryTheory/Galois/Examples.lean; Mathlib/CategoryTheory/Galois/EssSurj.lean; Mathlib/CategoryTheory/Galois/EssSurj.lean; Mathlib/CategoryTheory/Galois/EssSurj.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the scheme classification; abstract Galois/action facts only"
+  },
+  {
+   "tool": "grep",
+   "query": "has_decomp_quotients|IsPretransitive|quotient.*stabilizer",
+   "results": "Mathlib/CategoryTheory/Galois/Examples.lean; Mathlib/CategoryTheory/Galois/Examples.lean; Mathlib/CategoryTheory/Galois/Examples.lean; Mathlib/CategoryTheory/Galois/Examples.lean; Mathlib/CategoryTheory/Galois/Examples.lean; Mathlib/CategoryTheory/Galois/GaloisObjects.lean; Mathlib/CategoryTheory/Galois/GaloisObjects.lean; Mathlib/CategoryTheory/Galois/GaloisObjects.lean",
+   "date": "2026-10-14",
+   "verdict": "second reading: abstract transitivity and orbit-stabilizer results only; not a one-line scheme classification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale connected schemes classified by transitive actions of the etale fundamental group",
+   "results": "CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected; CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected; CategoryTheory.PreGaloisCategory.instPreservesIsConnectedActionFintypeCatAutFunctorFunctorToAction; CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected; CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected; CategoryTheory.PreGaloisCategory.instFiniteHomOfIsConnected; CategoryTheory.PreGaloisCategory.isGalois_iff_pretransitive; CategoryTheory.PreGaloisCategory.connected_component_unique",
+   "date": "2026-10-14",
+   "verdict": "second reading: abstract transitivity and orbit-stabilizer results only; not a one-line scheme classification"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -66,5 +204,49 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "cor-galois-open-subgroups",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: unpointed covers classify conjugacy classes, not individual open subgroups. Corrected that false assertion and added the pointed formulation retaining individual subgroups. Replaced reversed subgroup-containment argument by explicit pointed and conjugacy proofs. Existing DAG suffices; no new nodes. Removed unused Galois-cover definition and abstract transitivity lemma, adding exact connectedness and degree inputs.",
+  "blueprint": "Proof sentences 1-2: finite etale equivalence and transitivity, now steps 1-2; coset/stabilizer sentence: steps 3-4; final isomorphism-class assertion corrected by step 5; fibre-cardinality/degree sentence: step 6.",
+  "tool_uses": [
+   {
+    "node": "thm-galois-fundamental",
+    "why": "Generic finite-etale fibre equivalence already used by the imported proof; this unit does not reconstruct Galois theory."
+   },
+   {
+    "node": "lem-galois-coproduct-copies-morphisms-clopen",
+    "why": "Generic correspondence between clopen partitions and maps to a coproduct of base copies, used to recover scheme connectedness."
+   },
+   {
+    "node": "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+    "why": "Generic rank constancy theorem for finite locally free morphisms used only to identify cover degree."
+   },
+   {
+    "node": "lem-galois-geometric-fibre",
+    "why": "Generic splitting of a finite etale geometric fibre, used to compute rank as its number of points."
+   },
+   {
+    "node": "lem-galois-finite-etale-connected-object",
+    "why": "Generic implication from connected scheme to connected categorical object, needed before using the fibre equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-galois-fundamental",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "lem-galois-geometric-fibre",
+  "lem-galois-finite-etale-connected-object"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-5cea6a6a8",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-5cea6a6a8 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, sources, and unit/chapter route. All six steps are sound; Stacks 0BND/0BNB/0BN4 and 02KB/04MH support the inputs. S3 checks confirm both blueprint corrections. No new nodes, duplicates, dependency cycles, or target weakening found. Accepted the five declared generic tool uses; detailed review written to review.md."
+ }
 }
