@@ -8,10 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuityData
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 public import Mathlib.CategoryTheory.HomCongr
-import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.TwoOpenComparisonDiagram
+import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData
 
 /-! # Object comparisons for the geometric overlap model
 
@@ -67,6 +64,101 @@ structure PerfectHomObjectRealization
       perfectLimitMap R c s k.property
         ((Iso.homCongr (stageObj k a) (stageObj k b))
           ((stageEquiv k).functor.map f))
+
+private theorem pinned_conjugation
+    {C₀ D₀ E₀ : Type*} [Category C₀] [Category D₀] [Category E₀]
+    (S₀ : C₀ ⥤ D₀) (K₀ : C₀ ⥤ E₀) (H₀ : D₀ ⥤ E₀)
+    (η : K₀ ≅ S₀ ⋙ H₀) {a b : C₀} {p q : D₀} {z z' : E₀}
+    (σa : S₀.obj a ≅ p) (σb : S₀.obj b ≅ q)
+    (ρa : K₀.obj a ≅ z) (ρb : K₀.obj b ≅ z')
+    (χa : z ≅ H₀.obj p) (χb : z' ≅ H₀.obj q)
+    (ha : ρa.hom ≫ χa.hom = η.hom.app a ≫ H₀.map σa.hom)
+    (hb : ρb.hom ≫ χb.hom = η.hom.app b ≫ H₀.map σb.hom) (f : a ⟶ b) :
+    ρa.inv ≫ K₀.map f ≫ ρb.hom =
+      χa.hom ≫ H₀.map (σa.inv ≫ S₀.map f ≫ σb.hom) ≫ χb.inv := by
+  have hsource : ρa.inv ≫ η.hom.app a = χa.hom ≫ H₀.map σa.inv := by
+    apply (cancel_epi ρa.hom).1
+    simp only [Iso.hom_inv_id_assoc]
+    rw [← Category.assoc, ha, Category.assoc, ← H₀.map_comp]
+    simp
+  apply (cancel_mono χb.hom).1
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id, Functor.map_comp]
+  rw [hb]
+  rw [← Category.assoc (K₀.map f), η.hom.naturality]
+  simp only [Functor.comp_map, Category.assoc]
+  rw [← Category.assoc ρa.inv, hsource]
+  simp only [Category.assoc]
+
+/-- Pinned object comparisons and a natural functor comparison determine the Hom pin.
+Source: Stacks Project, Tags 08DW and 0D5S.
+(blueprint: lem-pc-perfect-overlap-object-realization).
+
+Proof: Multiply the target equation by the hom component of the target composition
+comparison. Substitute object_pin at the target. Naturality of comparison moves the
+stage morphism through that component. The inverse form of object_pin at the source
+then leaves exactly the fixed conjugation defining perfectLimitMap. Cancel the target
+comparison, which is an isomorphism. -/
+private theorem perfect_overlap_object_realization_hom_pin
+    {I : Type u} [Preorder I]
+    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (i : I)
+    [∀ Z : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    (C : Set.Ici i → Type v) [∀ k, Category.{h} (C k)]
+    (F : ∀ k, Bool → C k) (D : Type v') [Category.{h'} D]
+    (O : Bool → D) (G : ∀ k, C k ⥤ D)
+    (ψ : ∀ k b, (G k).obj (F k b) ≅ O b)
+    (Y : Scheme.{u}) (s : Y ⟶ Spec (R.obj i))
+    (objects : Bool → schemeDerivedCategory Y)
+    (stageEquiv : ∀ k : Set.Ici i, C k ≌
+      schemeDerivedCategory (pullback s (Spec.map (R.map (homOfLE k.property)))))
+    (apexEquiv : D ≌ schemeDerivedCategory (pullback s (Spec.map (c.ι.app i))))
+    (r : PerfectHomObjectRealizationCore R c i C F D O G ψ Y s objects stageEquiv apexEquiv) :
+    ∀ (k : Set.Ici i) (a b : Bool) (f : F k a ⟶ F k b),
+    (Iso.homCongr (r.apexObj a) (r.apexObj b))
+        (apexEquiv.functor.map ((ψ k a).inv ≫ (G k).map f ≫ (ψ k b).hom)) =
+      perfectLimitMap R c s k.property
+        ((Iso.homCongr (r.stageObj k a) (r.stageObj k b))
+          ((stageEquiv k).functor.map f)) := by
+  intro k a b f
+  have h := pinned_conjugation (stageEquiv k).functor
+    (G k ⋙ apexEquiv.functor)
+    (r.transition k)
+    (r.comparison k) (r.stageObj k a) (r.stageObj k b)
+    (apexEquiv.functor.mapIso (ψ k a) ≪≫ r.apexObj a)
+    (apexEquiv.functor.mapIso (ψ k b) ≪≫ r.apexObj b)
+    ((r.baseComparison k).app (objects a))
+    ((r.baseComparison k).app (objects b))
+    (by simpa only [Iso.trans_hom, Functor.mapIso_hom, Category.assoc,
+      Iso.app_hom] using r.object_pin k a)
+    (by simpa only [Iso.trans_hom, Functor.mapIso_hom, Category.assoc,
+      Iso.app_hom] using r.object_pin k b) f
+  rw [r.transition_pin]
+  simpa only [Iso.homCongr_apply, Iso.trans_inv, Iso.trans_hom,
+    Functor.mapIso_inv, Functor.mapIso_hom, Functor.comp_map, Functor.map_comp,
+    Category.assoc, Iso.app_inv, Iso.app_hom] using h
+
+
+private def completePerfectHomObjectRealization
+    {I : Type u} [Preorder I]
+    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (i : I)
+    [∀ Z : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    (C : Set.Ici i → Type v) [∀ k, Category.{h} (C k)]
+    (F : ∀ k, Bool → C k) (D : Type v') [Category.{h'} D]
+    (O : Bool → D) (G : ∀ k, C k ⥤ D)
+    (ψ : ∀ k b, (G k).obj (F k b) ≅ O b)
+    (Y : Scheme.{u}) (s : Y ⟶ Spec (R.obj i)) (objects : Bool → schemeDerivedCategory Y)
+    (stageEquiv : ∀ k : Set.Ici i, C k ≌
+      schemeDerivedCategory (pullback s (Spec.map (R.map (homOfLE k.property)))))
+    (apexEquiv : D ≌ schemeDerivedCategory (pullback s (Spec.map (c.ι.app i))))
+    (r : PerfectHomObjectRealizationCore R c i C F D O G ψ Y s objects stageEquiv apexEquiv) :
+    PerfectHomObjectRealization R c i C F D O G ψ Y s objects where
+  stageEquiv := stageEquiv
+  apexEquiv := apexEquiv
+  stageObj := r.stageObj
+  apexObj := r.apexObj
+  hom_pin := perfect_overlap_object_realization_hom_pin R c i C F D O G ψ Y s objects
+    stageEquiv apexEquiv r
 
 set_option synthInstance.maxHeartbeats 400000 in
 -- The dependent overlap expression needs the shared exact-restriction instances.
@@ -240,6 +332,14 @@ theorem perfect_overlap_object_realization
     (j : I) (hij : i ≤ j)
     (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),
       ∃ k : I, j ≤ k)
-    : perfectOverlapObjectRealizationStatement R c hc i Z t j hij hstage := by sorry
+    : perfectOverlapObjectRealizationStatement R c hc i Z t j hij hstage := by
+  unfold perfectOverlapObjectRealizationStatement
+  intro Yj X gj U V hcover hU hV A B hA hB E instP instQ instX PU PV φU φV
+    P Q RU RV RW SP SQ τU τV
+  have hcore := perfect_overlap_object_realization_core_data R c hc i Z t j hij hstage
+  rw [perfectOverlapObjectRealizationCoreStatement] at hcore
+  have hdata := hcore U V hcover hU hV A B hA hB E φU φV
+  obtain ⟨⟨data, core⟩⟩ := hdata
+  exact ⟨⟨data, completePerfectHomObjectRealization _ _ _ _ _ _ _ _ _ _ _ _ _ _ core⟩⟩
 
 end AlgebraicGeometry
