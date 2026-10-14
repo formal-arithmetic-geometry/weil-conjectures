@@ -29,9 +29,92 @@
   "def-weil-pbc-module-tensor-product",
   "def-weil-ring-localization-away"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose finite bases in degrees $i-1,i,i+1$. Extension of a basis is a basis: $(a_j)\\mapsto\\sum e_j\\otimes a_j$ and $e_j\\otimes a\\mapsto a$ in coordinate $j$ are inverse by bilinearity. Prove the claim by induction on the number $m$ of middle basis vectors, uniformly for all rings, primes and complexes. For $m=0$, take $f=1$, $Q=P\\otimes_R R_1$, identity maps and zero homotopy; $Q^i=0$ because its basis is empty.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 068U, lemma-cut-complex-in-two, direct matrix proof expanded into unit-entry induction"
+   }
+  },
+  {
+   "text": "For $m>0$, write the incoming and outgoing matrices as $A,B$. If both residue matrices were zero, $H^i$ of the residue complex would be $\\kappa(\\mathfrak p)^m\\ne0$ (its first coordinate vector is nonzero). Choose a nonzero residue entry of either matrix, represented by $a\\in R\\setminus\\mathfrak p$, and invert $a$. The map $R_a\\to\\kappa(\\mathfrak p)$ sends $x/a^t$ to $\\bar x/\\bar a^t$; its kernel is $\\mathfrak p_a=\\{x/a^t:x\\in\\mathfrak p\\}$, which is prime because its image lies in a field and is a domain. Its quotient embeds in $\\kappa(\\mathfrak p)$, and every element $\\bar x/\\bar s$ of that field is the quotient of the images of $x/1$ and $s/1$, with the latter nonzero. This identifies its fraction field with $\\kappa(\\mathfrak p)$. The inverse scalar-extension maps are $(z\\otimes u)\\otimes v\\mapsto z\\otimes uv$ and $z\\otimes v\\mapsto(z\\otimes1)\\otimes v$, with balancing and inverse identities checked on pure tensors. They commute with differentials, so the residue complex and its vanishing hypothesis are unchanged.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 068U, lemma-cut-complex-in-two, direct matrix proof expanded into unit-entry induction"
+   }
+  },
+  {
+   "text": "For the selected differential $D:S^u\\to S^v$ over $S=R_a$, permute bases so its unit entry is at $(1,1)$, and rescale the first source vector to $e=a^{-1}e_1$. Put $w=D(e)$; its first coordinate is $1$. The vectors $(w,t_2,\\ldots,t_v)$ are a target basis: subtract the first coordinate times $w$ to obtain the remaining coefficients. For each other source vector subtract its first image coordinate times $e$. These invertible triangular changes give $D=\\operatorname{diag}(1,D_0)$. No constancy of residue ranks over an open is asserted.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 068U, lemma-cut-complex-in-two, direct matrix proof expanded into unit-entry induction"
+   }
+  },
+  {
+   "text": "The selected degree is $k=i-1$ or $k=i$. From $d^kd^{k-1}=0$ the preceding differential has zero component in the first source coordinate; from $d^{k+1}d^k=0$ the succeeding differential kills the first target vector. Hence the complex is $C\\oplus T$, where $T$ is $S\\xrightarrow{1}S$ in degrees $k,k+1$, zero elsewhere. Projection $p_1$ and inclusion $q_1$ are chain maps with $p_1q_1=1$. Define $h_1^{k+1}$ to send the first target coordinate to the first source coordinate and all other components to zero. Substitution in each degree gives $1-q_1p_1=dh_1+h_1d$. The middle basis size of $C$ is $m-1$; only these two terms have shrunk to explicit complementary spans.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 068U, lemma-cut-complex-in-two, direct matrix proof expanded into unit-entry induction"
+   }
+  },
+  {
+   "text": "Tensor these equations with the residue field; functoriality and linearity preserve them. For any cycle $z$, $(dh_1+h_1d)z=d(h_1z)$ is a boundary, so $p_1,q_1$ induce inverse cohomology maps. Thus $H^i(C\\otimes\\kappa(\\mathfrak p))=0$. Apply induction over $S=R_a$ and the prime kernel above to obtain a further element $g$ outside that prime and a model with middle term zero. Write $g=b/a^t$, with $b\\notin\\mathfrak p$. Then $(R_a)_g\\cong R_{ab}$: inverting $a,b$ inverts $g$, and inverting $a,g$ inverts $b=ga^t$. Explicitly the maps send $(x/a^r)/g^s$ to $xb^{-s}a^{ts-r}$ in $R_{ab}$ and $x/(ab)^n$ to $xa^{-n}(ga^t)^{-n}$ in $(R_a)_g$; substituting $g=b/a^t$ verifies both composites on fractions. For each term, the scalar-extension maps $(z\\otimes u)\\otimes v\\mapsto z\\otimes uv$ and $z\\otimes v\\mapsto(z\\otimes1)\\otimes v$ are balanced inverses commuting with every differential and every homotopy. These identify the twice-extended original complex with $P\\otimes_R R_{ab}$. Thus $ab\\notin\\mathfrak p$ supplies one principal localization.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 068U, lemma-cut-complex-in-two, direct matrix proof expanded into unit-entry induction"
+   }
+  },
+  {
+   "text": "After this localization, let $p_2:C\\to Q$, $q_2:Q\\to C$ be the induction maps, with $1-q_2p_2=dh_2+h_2d$ and $1-p_2q_2=dt_2+t_2d$. Set $p=p_2p_1$, $q=q_1q_2$. Expanding gives $1-qp=d(h_1+q_1h_2p_1)+(h_1+q_1h_2p_1)d$; since $p_1q_1=1$, also $1-pq=dt_2+t_2d$. Hence these are the required homotopy equivalence maps. Outside $i-1,i,i+1$ all basis changes and cancellations are identities, so terms and differentials between them are unchanged. Successive finite free complementary spans are direct summands of the original terms: $F=U\\oplus V$ and $U=U'\\oplus W$ give $F=U'\\oplus(W\\oplus V)$. Zero terms remain zero. Induction terminates, proving every clause.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 068U, lemma-cut-complex-in-two, direct matrix proof expanded into unit-entry induction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-ring-localization-away"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 068U, lemma-cut-complex-in-two, explicit rank-one pivot induction and contracting homotopies"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -91,12 +174,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-free-complex-residue-degree-cancellation",
+  "worker": "stage1",
+  "summary": "Expanded the direct matrix proof into induction on middle free size, explicit pivot bases and contraction, residue invariance, principal localization composition and support preservation. No new nodes; all coordinate calculations are supplied. Statement unchanged. Second reading made the residue-field, tensor-rebracketing and fraction identifications explicit.",
+  "blueprint": "Proof, first sentence 'Choose an integral lattice for K': algebraic perfectness test for the reconstructed integral model, via the residue-field and inverse-limit lifting lemmas",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-66ceac0cd",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-66ceac0cd (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements and source passages. Verified all six cancellation steps, localization and homotopy formulas, nilpotent and zero-rank cases, support preservation, DAG duplication candidates, and archived target coefficients and exchange direction. No repairs or accepted tool_uses. The separate realization comparison remains an obligation. Full findings are in review.md."
+ }
 }
