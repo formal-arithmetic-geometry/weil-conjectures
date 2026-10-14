@@ -3,55 +3,185 @@
  "blueprint": {
   "is": "lem-fin-finite-over-projective",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite covers of projective schemes are projective",
- "statement": "Let $S$ be Noetherian, $T\\to S$\nprojective, and $h:Y\\to T$\nfinite.\nThen $Y\\to S$ is projective.",
+ "statement": "Let $S$ be a Noetherian scheme (quasi-compact and locally Noetherian [pqf-def-locnoeth]), let $p:T\\to S$ be projective in the global closed-embedding convention of [def-pc-projective-morphism], and let $h:Y\\to T$ be finite [def-weil-finite-integral-morphism]. Then $p\\circ h$ is locally projective in the following explicit sense: for every affine open $U\\subseteq S$, with $T_U=p^{-1}(U)$ and $Y_U=(p\\circ h)^{-1}(U)$, there exist $N\\geq0$ and a closed immersion $Y_U\\hookrightarrow\\mathbf P^N_U$ over $U$. Thus $Y_U\\to U$ is projective in the convention of [def-pc-projective-morphism]. In particular, if $S$ is affine, $Y\\to S$ is projective. No global projective-space embedding is asserted when $S$ is arbitrary.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-over-projective.md",
   "place": "node lem-fin-finite-over-projective, order 1601"
  },
  "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
   "def-pc-projective-morphism",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-finite-integral-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-scheme"
  ],
  "proof": [
   {
-   "text": "Work over an affine open of $S$, and fix $T\\hookrightarrow\\mathbf P^n_S$.\nLet $x_i$ be the coordinate sections, $T_i=T\\cap D_+(x_i)$, and\n$\\mathcal B=h_*\\mathcal O_Y$. On each $T_i$, choose finitely many\nalgebra generators $b_{ij}$ of the finite algebra $\\mathcal B(T_i)$.\nThe clearing-denominators argument of\n[lem-pc-section-clearing-denominators], applied to the coherent\nmodule $\\mathcal B$ on $T$, extends $x_i^m b_{ij}$ to sections\nof $\\mathcal B(m)$ for one common $m\\geq1$.\nIncrease $m$ when necessary by multiplication by $x_i$.\nInclude also the sections $x_i^m\\cdot1$ and\n$x_i^{m-1}x_j\\cdot1$ for all $i,j$.\nThey correspond on $Y$ to sections of $h^*\\mathcal O_T(m)$.\nThe sections $x_i^m\\cdot1$ have no common zero, so the entire\nfinite list defines a morphism $v:Y\\to\\mathbf P^N_S$.",
+   "text": "Fix an affine open $U=\\operatorname{Spec}A\\subseteq S$. Choose the global embedding $T\\hookrightarrow\\mathbf P^n_S$ supplied by [def-pc-projective-morphism]. Restrict it to the inverse image of $U$. The affine-quotient description of a closed immersion [def-weil-closed-immersion] still holds on every affine open of this open subscheme of the target, so the restriction $T_U\\hookrightarrow\\mathbf P^n_U$ is closed. The base-change presentation [def-nagata-projective-space-base-change] identifies this target with $\\mathbf P^n_U$, whose relative-Proj chart interface is [def-nagata-relative-projective-space]. The restricted map $h_U:Y_U\\to T_U$ is finite: on each affine open of $T_U$, which is also an affine open of $T$, its inverse image and finite ring map are exactly those in [def-weil-finite-integral-morphism]. For every affine open $W\\subseteq U$, the $n+1$ standard projective charts over $W$ cover $\\mathbf P^n_W$, and their inverse images in $T_W$ are affine by [def-weil-closed-immersion]. Thus $T_W$ is a finite union of quasi-compact affine opens. By [def-weil-finite-type-morphism], $T_U\\to U$ is quasi-compact. Together with the restricted closed embedding, this proves it is projective under the stated convention.",
    "uses": [
-    "lem-pc-section-clearing-denominators"
+    "def-pc-projective-morphism",
+    "def-weil-closed-immersion",
+    "def-nagata-projective-space-base-change",
+    "def-nagata-relative-projective-space",
+    "def-weil-finite-integral-morphism",
+    "def-weil-finite-type-morphism"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-over-projective.md",
+    "place": "Proof, first sentence: work over an affine open of S"
+   }
   },
   {
-   "text": "Over the target chart indexed by $x_i^m\\cdot1$, the inverse image\nis $h^{-1}(T_i)$. It is affine over $S$. The ratios of the chosen\nsections include all $b_{ij}$ and the coordinate functions\n$x_j/x_i$ of $T_i$. They therefore generate its coordinate\nalgebra, so $v$ is a closed immersion on that chart.\nConsequently $v$ is an immersion into the union of these charts.\nThe source is proper over $S$ by\n[lem-pc-projective-proper], [lem-weil-pbc-finite-proper], [lem-weil-pbc-proper-composition].\nThus $v$ is proper by [lem-weil-pbc-proper-to-separated],\nand the immersion is closed by\n[lem-weil-pbc-proper-immersion-closed].\nThis gives the required projective embedding locally on $S$.",
+   "text": "The morphism $T_U\\to U$ is proper by [lem-pc-projective-proper], and $h_U$ is proper by [lem-weil-pbc-finite-proper]. Their composite $f_U:Y_U\\to U$ is proper by [lem-weil-pbc-proper-composition]. By [def-weil-proper-morphism] it is of finite type. Thus [def-weil-finite-type-morphism] supplies local finite type and quasi-compactness; since $U$ itself is affine, $Y_U=f_U^{-1}(U)$ is quasi-compact.",
    "uses": [
     "lem-pc-projective-proper",
     "lem-weil-pbc-finite-proper",
     "lem-weil-pbc-proper-composition",
-    "lem-weil-pbc-proper-to-separated",
-    "lem-weil-pbc-proper-immersion-closed"
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W3 (lemma-composition-proper), 01WC (lemma-locally-projective-proper), 01WN (lemma-finite-proper); proper definition 01W1"
+   }
+  },
+  {
+   "text": "Let $a:Y_U\\to\\mathbf P^n_U$ be the embedding of $T_U$ composed with $h_U$, and put $\\mathcal L=a^*\\mathcal O(1)$. The twist is invertible by its glued free rank-one presentation [def-pc-projective-space-twist], and its pullback is invertible by clause (1) of [lem-weil-pbc-invertible-pullback-tensor]. For each homogeneous coordinate $x_i$, the formulas $x_i=(x_i/x_j)e_j$ on the standard chart $D_+(x_j)$ define a global section of $\\mathcal O(1)$: on overlaps this follows from $e_j=(x_j/x_k)e_k$, the transition rule in [def-pc-projective-space-twist]. Write $s_i=a^*x_i$.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-over-projective.md",
+    "place": "Proof, first paragraph: coordinate sections and their corresponding pullback sections on Y; Modules Tags 0B8L and 0098"
+   }
+  },
+  {
+   "text": "The standard chart $D_+(x_i)$ over $U$ is $\\operatorname{Spec}A[x_j/x_i:j\\ne i]$: a degree-zero fraction $F/x_i^d$, with $F$ homogeneous of degree $d$, is a sum of terms $c\\prod_{j\\ne i}(x_j/x_i)^{a_j}$ after cancelling the power of $x_i$; conversely every monomial in the ratios has such a homogeneous numerator [def-nagata-relative-projective-space]. By [def-weil-closed-immersion], $T_i=T_U\\cap D_+(x_i)$ is affine, with coordinate ring a quotient of that polynomial ring. By [def-weil-finite-integral-morphism], $V_i=h_U^{-1}(T_i)$ is affine. These finitely many opens cover $Y_U$. Clause (3) of [lem-weil-pbc-invertible-pullback-tensor] identifies the value of $s_i$ at $y$ with $x_i(a(y))\\otimes1$; on a chart $D_+(x_j)$ containing $a(y)$, its value is $(x_i/x_j)(a(y))e_j$. This is nonzero exactly when $x_i$ is absent from the homogeneous prime representing $a(y)$, that is, when $a(y)\\in D_+(x_i)$. A nonzero vector remains nonzero under the residue-field extension $\\kappa(a(y))\\to\\kappa(y)$ (identify the one-dimensional space with its field). Thus $(Y_U)_{s_i}=V_i$. Together with the quasi-compactness in step 2, the sections $s_i$ (all of power one) satisfy both conditions in [def-weil-pbc-ample-invertible-module]. Hence $\\mathcal L$ is ample on $Y_U$.",
+   "uses": [
+    "def-nagata-relative-projective-space",
+    "def-weil-closed-immersion",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PS (definition-ample); affine charts from Constructions 01NF; pullback fibres from Sheaves 0098"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ample-very-ample-immersion-affine-base] to the ring $A$, the locally finite type morphism $f_U:Y_U\\to\\operatorname{Spec}A$ of step 2, and the invertible ample module $\\mathcal L$ of steps 3–4. It gives $N\\geq0$ and an immersion $v:Y_U\\to\\operatorname{Proj}(A[z_0,\\ldots,z_N])=\\mathbf P^N_U$ over $U$. We use only its immersion and structure-map equation, not its additional twist-isomorphism clause. This packages precisely the clearing-denominators and chart-generator argument of the imported proof.",
+   "uses": [
+    "lem-weil-pbc-ample-very-ample-immersion-affine-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VS (lemma-quasi-projective-finite-type-over-S), affine-base case; Tag 01VT (lemma-finite-type-over-affine-ample-very-ample), (1) implies (5)"
+   }
+  },
+  {
+   "text": "Projective space $\\mathbf P^N_U$ is separated over $U$ by [lem-weil-pbc-projective-space-proj-separated]. Its composite with $v$ is the proper $f_U$, so [lem-weil-pbc-proper-to-separated] makes $v$ proper. It is an immersion by step 5, hence a closed immersion by [lem-weil-pbc-proper-immersion-closed]. The morphism $f_U$ is quasi-compact by step 2. The embedding and this quasi-compactness are exactly [def-pc-projective-morphism], proving $Y_U\\to U$ projective. As $U$ was arbitrary, the corrected local assertion follows. For affine $S$, take $U=S$.",
+   "uses": [
+    "lem-weil-pbc-projective-space-proj-separated",
+    "lem-weil-pbc-proper-to-separated",
+    "lem-weil-pbc-proper-immersion-closed",
+    "def-pc-projective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W6 (lemma-image-proper-scheme-closed), with Schemes 01IQ (lemma-immersion-when-closed); local-projectivity distinction in 01W8 (definition-projective) and 01WB (lemma-characterize-locally-projective)"
+   }
   }
  ],
  "proof_deps": [
-  "lem-pc-section-clearing-denominators",
+  "def-pc-projective-morphism",
+  "def-weil-closed-immersion",
+  "def-nagata-projective-space-base-change",
+  "def-nagata-relative-projective-space",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
   "lem-pc-projective-proper",
   "lem-weil-pbc-finite-proper",
   "lem-weil-pbc-proper-composition",
+  "def-weil-proper-morphism",
+  "def-pc-projective-space-twist",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+  "lem-weil-pbc-projective-space-proj-separated",
   "lem-weil-pbc-proper-to-separated",
   "lem-weil-pbc-proper-immersion-closed"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-over-projective.md",
-  "place": "## Proof"
+  "place": "Proof: affine-local coordinate construction; streamlined using Properties 01PS and Morphisms 01VS/01VT; corrected local conclusion"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsProjective|HProjective|finite.*projective",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: scheme projectivity or finite-cover embeddings are not stated by these hits; Proj properness and module projectivity do not give an embedding"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite morphisms preserve projectivity of schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite morphism to a projective scheme over a noetherian base is projective",
+   "results": "AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+   "date": "2026-10-14",
+   "verdict": "no match: scheme projectivity or finite-cover embeddings are not stated by these hits; Proj properness and module projectivity do not give an embedding"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projective\"",
+   "results": "Module.Projective, Module.Projective.of_free, Module.Projective.of_basis, Module.instProjectiveULift, Module.Projective.of_ulift, Module.instProjectiveShrink, Module.Projective.of_shrink, Module.Projective.directSum",
+   "date": "2026-10-14",
+   "verdict": "no match: scheme projectivity or finite-cover embeddings are not stated by these hits; Proj properness and module projectivity do not give an embedding"
+  },
+  {
+   "tool": "grep",
+   "query": "projective morphism|IsHProjective|IsProjective|finite.*Proj",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: scheme projectivity or finite-cover embeddings are not stated by these hits; Proj properness and module projectivity do not give an embedding"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, AlgebraicGeometry.IsFinite",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: scheme projectivity or finite-cover embeddings are not stated by these hits; Proj properness and module projectivity do not give an embedding"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over an affine scheme, a finite cover of a closed subscheme of projective space admits a closed embedding into projective space",
+   "results": "AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, ProjectiveSpectrum.isClosed_iff_zeroLocus, AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop",
+   "date": "2026-10-14",
+   "verdict": "no match: scheme projectivity or finite-cover embeddings are not stated by these hits; Proj properness and module projectivity do not give an embedding"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -84,5 +214,44 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-fin-finite-over-projective",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: arbitrary Noetherian bases do not support the asserted global H-projective conclusion. Corrected to an explicit affine-local embedding conclusion, with the affine-base global case retained. A doubled-origin square-zero cover counterexample is in report.md. Reused the existing absolute ampleness definition and affine-base immersion theorem; no new nodes. Checked all cited statements, hypotheses and edge cases; no completed project declaration states the item.",
+  "blueprint": "First paragraph: affine localization, coordinate sections, affine inverse-image charts and ampleness. The existing 01VS/01VT node carries its clearing-denominators and chart-generator construction. Second paragraph: proper source, separated target and proper immersion closed. The final sentence gives only a local embedding and is made explicit in the corrected statement.",
+  "tool_uses": [
+   {
+    "node": "def-nagata-relative-projective-space",
+    "why": "Generic standard-chart interface for projective space; the unit does not define it."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic invertibility and residue-field fibre calculation for pullback sections; the unit has no such statement."
+   },
+   {
+    "node": "def-weil-pbc-ample-invertible-module",
+    "why": "Absolute affine-nonvanishing-locus definition, not the field-only complete-linear-system definition."
+   },
+   {
+    "node": "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "why": "Generic affine-base immersion construction packages the imported clearing-denominators argument without changing any unit-level route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-nagata-relative-projective-space",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-77dafd755",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-77dafd755 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, blueprint route, and source passages. All six steps prove the corrected affine-local conclusion; the doubled-origin counterexample validates the source correction. Both existing callers use affine bases or fields. No new nodes, cycles, missing substantive citations, or target changes. Detailed checks and accepted tool uses are in review.md."
+ }
 }
