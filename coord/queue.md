@@ -1,6 +1,6 @@
 # Work queue
 
-120 items; claim with `tools/claim.py next <group> [--stage N]`.
+119 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (120)
+## Stage 3: modules to prove (119)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -57,7 +57,7 @@
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNormalization` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FinitePresentationLocalMapPairEventually` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitRepresentative` | 23 | 1 | proof |
-| `Sheaf.Paper.CechCupPullbackCompat` | 23 | 1 | proof |
+| `Sheaf.Paper.CechCupPullbackCompat` | 23 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.OverlapPairModelTransport` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestriction` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationHomology` | 24 | 1 | proof |
@@ -67,7 +67,6 @@
 | `Sheaf.AlgebraicGeometry.OverlapConjugateRestriction` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OverlapStageModelRestriction` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCompatibility` | 25 | 1 | proof |
-| `Sheaf.Paper.ModuleCupGodementCoefficientComplexes` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackCompositionMateUnit` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardCoefficientTransposePasting` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PinnedTensorSquareCompatibility` | 26 | 1 | proof |
