@@ -112,11 +112,11 @@ Proof:
    complexes to obtain its lift. Equality of projections gives component homotopies;
    assembling their components degreewise proves uniqueness in the homotopy category.
    This uses only the limits of this family's evaluations, not all products of this shape.
-2. Apply Mathlib's `isKInjective_iff_rightOrthogonal` to the product. Every morphism
-   from an acyclic object has zero composites with the projections, by the factors'
-   `IsKInjective.rightOrthogonal`. Limit extensionality then makes the morphism zero.
-   Thus K-injectivity follows from the homotopy-category product already constructed,
-   without a second null-homotopy assembly or any exactness assumption on products.
+2. For a chain map from an acyclic complex to the product, each composite with a
+   projection is null-homotopic by the corresponding factor's K-injectivity. Reuse
+   the degreewise homotopy assembly of Step 1 to obtain a homotopy to zero. This
+   proves K-injectivity directly from its defining property, without an orthogonality
+   criterion or any exactness assumption on products.
 3. Mathlib's K-injective Hom comparison (`lem-weil-pbc-kinjective-hom-derived`) gives
    bijections on morphisms into the product and each factor. Essential surjectivity of
    `Qh` lets us pull back any cone in the derived category to the homotopy category.
@@ -154,12 +154,9 @@ theorem termwise_product_isKInjective_and_isLimit
       rw [Functor.map_comp, hP.fac]
       exact (hm ⟨j⟩).trans (q.map_preimage (s.π.app ⟨j⟩)).symm
   have hPI : IsKInjective P.pt := by
-    apply (isKInjective_iff_rightOrthogonal P.pt).2
-    intro X f hX
-    apply hq.hom_ext
-    intro j
-    rw [zero_comp]
-    exact IsKInjective.rightOrthogonal (I j.as) (f ≫ q.map (P.π.app j)) hX
+    refine ⟨fun {K} f hK ↦ ⟨productHomotopy I (fun j ↦ ?_)⟩⟩
+    simpa only [zero_comp] using
+      IsKInjective.homotopyZero (L := I j) (f ≫ P.π.app ⟨j⟩) hK
   let := hPI
   have hd : IsLimit (DerivedCategory.Qh.mapCone (q.mapCone P)) := by
     exact mapProduct DerivedCategory.Qh (Discrete.functor I ⋙ q) (q.mapCone P) hq
