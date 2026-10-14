@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-exc-closed-lift-adjunction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Adjunction for the ind-etale closed lift",
- "statement": "For every ind-etale $A$-algebra $D$, reduction induces a natural bijection\n$$\n \\operatorname{Hom}_A(D,H_A(\\overline C))\n \\xrightarrow{\\sim}\n \\operatorname{Hom}_{A/I}(D/ID,\\overline C).\n$$\nThis identifies $H_A$ as right adjoint to reduction on ind-etale algebras.",
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal, and $\\overline C$ an ind-etale $A/I$-algebra [def-weil-pbc-ind-etale-algebra], regarded as an $A$-algebra through the quotient map. Let $H_A(\\overline C)$ and $\\epsilon_{\\overline C}:H_A(\\overline C)\\to\\overline C$ be the colimit algebra and its specified map of [def-exc-ind-etale-closed-lift]. For every ind-etale $A$-algebra $D$, put $ID=(\\operatorname{im}(I\\to D))D$. Then the rule $f\\mapsto([d]\\mapsto\\epsilon_{\\overline C}(f(d)))$ induces a bijection\n$$\n\\operatorname{Hom}_A(D,H_A(\\overline C))\\xrightarrow{\\sim}\\operatorname{Hom}_{A/I}(D/ID,\\overline C),\n$$\nnatural contravariantly in $D$ and covariantly in $\\overline C$. Consequently $H_A$, with the maps of [def-exc-ind-etale-closed-lift], is right adjoint to reduction $D\\mapsto D/ID$ between the categories of ind-etale algebras (morphisms are algebra homomorphisms).",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-lift-adjunction.md",
   "place": "node lem-exc-closed-lift-adjunction, order 1842",
@@ -19,38 +19,149 @@
   ]
  },
  "stmt_deps": [
-  "def-weil-pbc-ind-etale-algebra"
+  "def-weil-pbc-ind-etale-algebra",
+  "def-exc-ind-etale-closed-lift"
  ],
  "proof": [
   {
-   "text": "First let $D$ be etale of finite presentation. A map $D/ID\\to\\overline C$\nmakes $D$ an object of [def-exc-ind-etale-closed-lift], hence gives its\ncanonical map to the colimit. Conversely any $D\\to H_A(\\overline C)$ factors\nthrough a stage $B$, by finite presentation and\n[lem-exc-closed-lift-filtered]. If its reduction is the specified map, this\nfactorization $D\\to B$ is a morphism in the indexing category. The colimit\nrelation then identifies it with the canonical map from the object $D$. This\nproves uniqueness as well as existence.",
+   "text": "Write $H=H_A(\\overline C)$ and $\\epsilon=\\epsilon_{\\overline C}$. By [lem-exc-closed-lift-filtered] the small indexing category in [def-exc-ind-etale-closed-lift] is filtered; its objects are etale algebras of finite presentation. Thus its colimit $H$ is ind-etale by [def-weil-pbc-ind-etale-algebra]. Reduction is base change along $A\\to A/I$: the quotient $D/ID$ has the universal property of $(A/I)\\otimes_A D$, because algebra maps to an $A/I$-algebra are exactly the $A$-algebra maps killing $ID$. The base-change clause of [lem-weil-pbc-ind-etale-stability] therefore makes reduction a functor on ind-etale algebras. For any $f:D\\to H$, the composite $\\epsilon f$ kills $ID$: for $a\\in I$ and $d\\in D$, its value on $ad$ is the image of $a$ in $\\overline C$ times $\\epsilon f(d)$, hence zero. The quotient universal property gives the specified map $\\beta_{D,\\overline C}(f):D/ID\\to\\overline C$.",
    "uses": [
+    "lem-exc-closed-lift-filtered",
     "def-exc-ind-etale-closed-lift",
-    "lem-exc-closed-lift-filtered"
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-ind-etale-stability"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097P, lemma-lift-ind-etale, proof: Hom equality and final adjunction paragraphs; uniqueness expanded using Algebra Tags 00QO and 07C3"
+   }
   },
   {
-   "text": "For general $D=\\varinjlim D_a$, apply this bijection to every $D_a$. The\nunique lifts commute with all transition maps, so pass to a unique map from\n$D$. This proves the bijection and its naturality. The reduction isomorphism\nof [lem-exc-closed-lift-reduction] is its adjunction counit. This supplies\nthe adjunction, including uniqueness, in [Stacks Project, Tag\n097P](https://stacks.math.columbia.edu/tag/097P).",
+   "text": "First assume $D$ is etale of finite presentation. Given $u:D/ID\\to\\overline C$, let $q:D\\to\\overline C$ be its composite with the quotient. By [def-exc-ind-etale-closed-lift], $(D,q)$ is an indexing object and its coprojection gives a map $\\ell(q):D\\to H$ with $\\epsilon\\ell(q)=q$. In the small presentation model, choose a presentation isomorphism $s:P\\xrightarrow{\\sim}D$ supplied by [def-weil-pbc-finitely-presented-algebra] and define $\\ell(q)=\\iota_{(P,qs)}s^{-1}$. For another presentation $t:Q\\xrightarrow{\\sim}D$, the compatible isomorphism $t^{-1}s:P\\to Q$ is an indexing morphism, so the cocone relation gives $\\iota_{(P,qs)}=\\iota_{(Q,qt)}t^{-1}s$. Thus the map is independent of the chosen presentation and $\\beta(\\ell(q))=u$.",
+   "uses": [
+    "def-exc-ind-etale-closed-lift",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097P, lemma-lift-ind-etale, proof: Hom equality and final adjunction paragraphs; uniqueness expanded using Algebra Tags 00QO and 07C3"
+   }
+  },
+  {
+   "text": "For uniqueness in the finite-presentation case, suppose $f:D\\to H$ satisfies $\\beta(f)=u$, equivalently $\\epsilon f=q$. By [lem-exc-closed-lift-filtered] the indexing category is small and filtered, and clause (1) of [lem-weil-pbc-filtered-colimit-algebras-elementwise] says that its algebra colimit is also a colimit of the underlying rings. Apply [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit] with $R=A$, this diagram, $\\Lambda=H$, and $g=fs:P\\to H$ for the presentation $s:P\\xrightarrow{\\sim}D$ of [def-weil-pbc-finitely-presented-algebra]. It gives an object $(B,q_B)$ and an $A$-algebra map $h:P\\to B$ such that $fs=\\iota_{(B,q_B)}h$. Applying $\\epsilon$ gives $qs=q_Bh$. Hence $h:(P,qs)\\to(B,q_B)$ is a morphism of [def-exc-ind-etale-closed-lift], and the cocone relation gives $fs=\\iota_{(P,qs)}$. Therefore $f=\\ell(q)$, proving the finite-presentation bijection.",
+   "uses": [
+    "lem-exc-closed-lift-filtered",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-exc-ind-etale-closed-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097P, lemma-lift-ind-etale, proof: Hom equality and final adjunction paragraphs; uniqueness expanded using Algebra Tags 00QO and 07C3"
+   }
+  },
+  {
+   "text": "For arbitrary ind-etale $D$, choose a small filtered colimit presentation $D=\\varinjlim_a D_a$ with etale finite-presentation terms and coprojections $k_a$ using [def-weil-pbc-ind-etale-algebra]. Given $u:D/ID\\to\\overline C$, put $q(d)=u([d])$ and $q_a=qk_a$. Steps 2 and 3 give the unique lift $\\ell_a:D_a\\to H$ with $\\epsilon\\ell_a=q_a$. For every transition $r:D_a\\to D_b$, both $\\ell_br$ and $\\ell_a$ compose with $\\epsilon$ to $q_a$, so step 3 gives $\\ell_br=\\ell_a$. The universal property of [def-weil-pbc-category-colimit] now gives a unique $\\ell:D\\to H$ with $\\ell k_a=\\ell_a$. The maps $\\epsilon\\ell$ and $q$ agree after every $k_a$, hence are equal by the same universal property, so $\\beta(\\ell)=u$. Any other lift agrees with $\\ell$ after every $k_a$ by step 3, and is therefore equal to $\\ell$. This proves the full bijection without assuming that a map out of an arbitrary ind-etale algebra factors through one finite stage.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097P, lemma-lift-ind-etale, proof: Hom equality and final adjunction paragraphs; uniqueness expanded using Algebra Tags 00QO and 07C3"
+   }
+  },
+  {
+   "text": "For an $A$-algebra map $r:D'\\to D$, the formula on quotient classes gives $\\beta_{D',\\overline C}(fr)=\\beta_{D,\\overline C}(f)\\overline r$, where $\\overline r([d'])=[r(d')]$. For $\\phi:\\overline C\\to\\overline C'$, the component formula for $H_A(\\phi)$ in [def-exc-ind-etale-closed-lift] gives $\\epsilon_{\\overline C'}H_A(\\phi)\\iota_{(B,q)}=\\phi q=\\phi\\epsilon_{\\overline C}\\iota_{(B,q)}$. The universal property of [def-weil-pbc-category-colimit] gives $\\epsilon_{\\overline C'}H_A(\\phi)=\\phi\\epsilon_{\\overline C}$, and consequently $\\beta_{D,\\overline C'}(H_A(\\phi)f)=\\phi\\beta_{D,\\overline C}(f)$. The same component formula gives $H_A(\\mathrm{id})=\\mathrm{id}$ and $H_A(\\psi\\phi)=H_A(\\psi)H_A(\\phi)$ by equality on all coprojections. Thus $H_A$ is a functor and the bijections are natural in both variables; their inverses are natural too by uniqueness in step 4.",
+   "uses": [
+    "def-exc-ind-etale-closed-lift",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097P, lemma-lift-ind-etale, proof: Hom equality and final adjunction paragraphs; uniqueness expanded using Algebra Tags 00QO and 07C3"
+   }
+  },
+  {
+   "text": "An adjunction between these categories means a natural family of bijections $\\operatorname{Hom}_{A/I}(D/ID,\\overline C)\\cong\\operatorname{Hom}_A(D,H_A(\\overline C))$. The inverses of the bijections proved above give exactly this family, so reduction is left adjoint to $H_A$. Its counit at $\\overline C$ is the image of $\\mathrm{id}_{H_A(\\overline C)}$ under $\\beta$, namely $[h]\\mapsto\\epsilon_{\\overline C}(h)$; this is precisely the specified reduction map, an isomorphism by [lem-exc-closed-lift-reduction]. No full-faithfulness theorem is needed for the claimed adjunction.",
    "uses": [
     "lem-exc-closed-lift-reduction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097P, lemma-lift-ind-etale, proof: Hom equality and final adjunction paragraphs; uniqueness expanded using Algebra Tags 00QO and 07C3"
+   }
   }
  ],
  "proof_deps": [
-  "def-exc-ind-etale-closed-lift",
   "lem-exc-closed-lift-filtered",
+  "def-exc-ind-etale-closed-lift",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-ind-etale-stability",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "def-weil-pbc-category-colimit",
   "lem-exc-closed-lift-reduction"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-lift-adjunction.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 097P, lemma-lift-ind-etale, final two proof paragraphs; expanded uniqueness via algebra.tex Tags 00QO (lemma-characterize-finite-presentation) and 07C3 (lemma-when-colimit)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ClosedLift|closedLift|closed_lift|IndEtale",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern square-zero formal etale lifting or the Spec/Gamma adjunction, not this arbitrary-ideal ind-etale closed-lift adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CommAlgCat, CategoryTheory.Adjunction",
+   "results": "AlgebraicGeometry.algΓAlgSpecAdjunction",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern square-zero formal etale lifting or the Spec/Gamma adjunction, not this arbitrary-ideal ind-etale closed-lift adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction modulo an ideal on ind etale algebras has a right adjoint constructed as the colimit of etale algebras mapping to the quotient algebra",
+   "results": "StandardEtalePair.lift, StandardEtalePair.instFormallyEtaleRing, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, Algebra.FormallyEtale.comp_bijective, StandardEtalePair.homEquiv, Algebra.FormallyEtale.iff_comp_bijective, StandardEtalePresentation.toPresentation_val, StandardEtalePair.Ring",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern square-zero formal etale lifting or the Spec/Gamma adjunction, not this arbitrary-ideal ind-etale closed-lift adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural bijection between maps from an ind etale algebra to the closed lift and maps from its reduction modulo an ideal",
+   "results": "none; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The etale approximation functor on commutative algebras is right adjoint to quotient base change for arbitrary ideals, with a natural Hom equivalence",
+   "results": "Algebra.FormallyEtale.comp_bijective, Algebra.FormallyEtale.iff_comp_bijective, StandardEtalePair.homEquiv, StandardEtalePair.lift, StandardEtalePair.instFormallyEtaleRing, AlgCat.instIsRightAdjointForget, Algebra.Etale.exists_subalgebra_fg, RingHom.formallyEtale_algebraMap",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern square-zero formal etale lifting or the Spec/Gamma adjunction, not this arbitrary-ideal ind-etale closed-lift adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A universal etale algebra approximation represents algebra homomorphisms into a quotient algebra and is right adjoint to base change",
+   "results": "StandardEtalePair.homEquiv, StandardEtalePair.lift, StandardEtalePair.instFormallyEtaleRing, StandardEtalePair.homEquiv_apply_coe, StandardEtalePair.homEquiv_symm_apply, RingHom.formallyEtale_algebraMap, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, RingHom.Etale.toAlgebra",
+   "date": "2026-10-14",
+   "verdict": "no match: StandardEtalePair.homEquiv parametrizes maps from a single standard-etale algebra by roots; the other hits concern individual etale maps or formal etaleness, not the filtered-colimit right adjoint"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -80,5 +191,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-open-closed-triangle"
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-exc-closed-lift-adjunction",
+  "worker": "stage1",
+  "summary": "Made the inherited ring, ideal, quotient algebra, retained map, and reduction map explicit. Expanded finite-stage uniqueness using the existing underlying-ring-colimit and finite-presentation-factorization Mathlib leaves; treated presentation choices, compatibility of general ind-etale lifts, and both naturality equations explicitly. Reused existing nodes only.",
+  "blueprint": "Blueprint proof paragraph 1 is realized by steps 2 and 3, with the finite-presentation factorization and small presentation model made explicit. Paragraph 2 is realized by steps 1 and 4-6 (ind-etale functor domains, passage to general D, naturality, and counit). The item is auxiliary to the open-closed triangle unit, not its key statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Uses only generic ind-etale base-change stability to ensure D/ID is an object of the target category. No statement in this auxiliary closed-lift unit supplies that permanence fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ind-etale-stability"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-45398b14b",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-45398b14b (reviewer sub-agent of L); spot-checked: Read the full mathematics, all nine cited statements, sources and unit/chapter route. All six steps pass; no new nodes, cycles or mathematical gaps. Accepted ind-etale base-change stability as a generic tool. Corrected the external 097P citation to its exact file and label. Review and whole corrected JSON written under the review directory.; 1 file(s) fixed by the reviewer"
+ }
 }
