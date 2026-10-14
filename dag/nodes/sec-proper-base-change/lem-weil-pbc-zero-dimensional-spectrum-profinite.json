@@ -19,9 +19,71 @@
  "stmt_deps": [
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $X=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. Every prime $\\mathfrak p$ is minimal: if a prime $\\mathfrak q\\subseteq\\mathfrak p$ is given, then $\\mathfrak q$ is maximal by hypothesis and $\\mathfrak p$ is proper, so $\\mathfrak q=\\mathfrak p$. Thus $\\mathfrak p$ is minimal over the zero ideal. For $g\\in A$ write $D(g)=\\{\\mathfrak p:g\\notin\\mathfrak p\\}$, which is open by the definition of the Zariski topology.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04MG, lemma-ring-with-only-minimal-primes, first proof: (6) implies (7)"
+   }
+  },
+  {
+   "text": "Fix $g\\in A$ and $\\mathfrak p\\notin D(g)$, so $g\\in\\mathfrak p$. Apply [lem-weil-pbc-minimal-prime-localization-radical] with $R=A$, $I=0$, $\\mathfrak q=\\mathfrak p$: its minimality hypothesis is step 1. The extended zero ideal is zero, hence $\\sqrt{0}=\\mathfrak p A_{\\mathfrak p}$. In particular $g/1\\in\\mathfrak p A_{\\mathfrak p}$ is nilpotent, so $(g/1)^n=0$ for some $n>0$. The fraction equality in [def-weil-pbc-localization-at-prime] gives an $s\\notin\\mathfrak p$ with $s g^n=0$. This uses no reducedness or Noetherian hypothesis.",
+   "uses": [
+    "lem-weil-pbc-minimal-prime-localization-radical",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04MG, first proof via Tag 00EV, lemma-standard-open-containing-maximal-point, for W=D(g); local nilpotence as in Tag 00EU, lemma-minimal-prime-reduced-ring"
+   }
+  },
+  {
+   "text": "The element $s$ of step 2 satisfies $\\mathfrak p\\in D(s)$ and $D(s)\\cap D(g)=\\varnothing$: a prime $\\mathfrak r$ omitting $s$ and $g$ would omit $s g^n$ by primality, although $s g^n=0\\in\\mathfrak r$. Therefore every point outside $D(g)$ has an open neighbourhood disjoint from $D(g)$. Its complement is open, so every $D(g)$ is closed as well as open.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04MG, lemma-ring-with-only-minimal-primes, first proof: (7) implies (8), by the principal-open argument of Tag 00EV, lemma-standard-open-containing-maximal-point"
+   }
+  },
+  {
+   "text": "For distinct primes $\\mathfrak p,\\mathfrak q$, their underlying ideals differ, so, exchanging them if necessary, choose $g\\in\\mathfrak q\\setminus\\mathfrak p$. The disjoint open sets $D(g)$ and $X\\setminus D(g)$ contain $\\mathfrak p$ and $\\mathfrak q$ respectively, proving Hausdorffness. If a connected subset $C\\subseteq X$ contained two distinct points, the same clopen partition would induce two disjoint nonempty relatively open sets covering $C$, contradicting connectedness. Thus every connected subset has at most one point, which is total disconnectedness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04MG, lemma-ring-with-only-minimal-primes, first proof: clopen standard opens separate distinct primes, proving (2) and (3) directly from (8)"
+   }
+  },
+  {
+   "text": "By clause (iii) of [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact], $X=\\operatorname{Spec}A$ is quasi-compact for every commutative ring $A$. Together with step 4 this is compact Hausdorff and totally disconnected, exactly the meaning of profinite in the statement. The argument includes the zero ring: its spectrum is empty and all three properties hold.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04MG, end of first proof, using Tag 00E8, lemma-quasi-compact"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-minimal-prime-localization-radical",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04MG, lemma-ring-with-only-minimal-primes, first proof, with the local nilpotence argument of 00EV/00EU expanded via the existing radical-localization node"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -78,15 +140,87 @@
    "results": "25 hits: Mathlib/Topology/ClopenBox.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/OnePoint/Basic.lean, Mathlib/Topology/Category/CompHausLike/Basic.lean, Mathlib/Topology/Category/CompHausLike/Basic.lean, Mathlib/Topology/Category/CompHausLike/Basic.lean, Mathlib/Topology/Category/Profinite/Product.lean",
    "date": "2026-10-14",
    "verdict": "no exact match: general topology examples and instances only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring with all prime ideals maximal has compact Hausdorff totally disconnected prime spectrum",
+   "results": "8 hits: PrimeSpectrum.instPrespectralSpace, PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero, PrimeSpectrum.discreteTopology_iff_finite_isMaximal_and_sInf_le_nilradical, PrimeSpectrum.instSpectralSpace, PrimeSpectrum.compactSpace, PrimeSpectrum.instDiscreteTopology, Algebra.QuasiFinite.discreteTopology_primeSpectrum, PrimeSpectrum.isJacobsonRing_iff_jacobsonSpace",
+   "date": "2026-10-14",
+   "verdict": "no exact match: spectrum compactness is already a cited leaf; discrete-topology hits require finiteness; clopen hits require special elements"
+  },
+  {
+   "tool": "grep",
+   "query": "T2Space|totallyDisconnected|totallySeparated|isClopen",
+   "results": "6 hits: Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match: spectrum compactness is already a cited leaf; discrete-topology hits require finiteness; clopen hits require special elements"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commutative ring with every prime maximal has profinite prime spectrum",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Zariski spectrum of a ring of Krull dimension zero is a Stone space",
+   "results": "8 hits: PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero, PrimeSpectrum.instPrespectralSpace, PrimeSpectrum.instSpectralSpace, PrimeSpectrum.instDiscreteTopology, PrimeSpectrum.discreteTopology_iff_finite_isMaximal_and_sInf_le_nilradical, PrimeSpectrum.t1Space_iff_isField, Ring.krullDimLE_one_iff, PrimeSpectrum.compactSpace",
+   "date": "2026-10-14",
+   "verdict": "no exact match: spectrum compactness is already a cited leaf; discrete-topology hits require finiteness; clopen hits require special elements"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum, T2Space",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no exact match: spectrum compactness is already a cited leaf; discrete-topology hits require finiteness; clopen hits require special elements"
+  },
+  {
+   "tool": "grep",
+   "query": "KrullDimLE|isMaximal|[Tt]otally[Ss]eparated|[Tt]2[Ss]pace",
+   "results": "17 hits: Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean, Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean, Mathlib/RingTheory/Spectrum/Prime/LTSeries.lean, Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean, Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean, Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean, Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean, Mathlib/RingTheory/Spectrum/Prime/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match: dimension-zero and finite discrete-spectrum candidates do not state general Hausdorffness or total disconnectedness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative ring of Krull dimension at most zero, the prime spectrum is totally separated",
+   "results": "8 hits: PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero, PrimeSpectrum.t1Space_iff_isField, Ring.KrullDimLE.mk₁, Ring.krullDimLE_one_iff, Ring.krullDimLE_zero_iff, Ring.KrullDimLE.mk₀, Ring.krullDimLE_one_iff_of_isPrime_bot, PrimeSpectrum.unique_of_ringKrullDimLE_zero",
+   "date": "2026-10-14",
+   "verdict": "no exact match: dimension-zero and finite discrete-spectrum candidates do not state general Hausdorffness or total disconnectedness"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum, TotallySeparatedSpace",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no exact match: dimension-zero and finite discrete-spectrum candidates do not state general Hausdorffness or total disconnectedness"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-retained-localization",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-zero-dimensional-spectrum-profinite",
+  "worker": "stage1",
+  "summary": "Followed the first proof of 04MG: maximality gives minimality, the existing radical-localization lemma gives local nilpotence, the defining fraction relation gives disjoint principal neighbourhoods, and clopen separation proves Hausdorffness and total disconnectedness. Reused the existing spectrum quasi-compactness leaf. Statement unchanged; no new nodes. Checked zero ring and nonreduced examples.",
+  "blueprint": "The retained-localization blueprint proof, second paragraph: both quotient spectra are zero-dimensional affine spectra, hence compact Hausdorff. This split also proves the total disconnectedness included in the item.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-06139a823",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-06139a823 (reviewer sub-agent of L); spot-checked: Read the item, all four cited nodes, report, unit/chapter route, and source passages in full. All five steps agree with Stacks 04MG, 00EU/00EV and 00E8; Mathlib citations have the required arbitrary-ring scope. Zero, nonreduced, finite-product and infinite Boolean cases pass. No duplicate, circular dependency, missing citation, repair or tool_use found. Detailed checks are in review.md; no target comparison theorem is inferred."
+ }
 }
