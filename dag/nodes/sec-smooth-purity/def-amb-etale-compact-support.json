@@ -3,11 +3,13 @@
  "blueprint": {
   "is": "def-amb-etale-compact-support",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-weil-pbc-projection-compactification"
+  ]
  },
  "kind": "definition",
  "title": "Compact supports on the ordinary etale category",
- "statement": "For a compactification\n$c=(j,r)$ of $f:X\\to S$ between Noetherian schemes,\ndefine the ordinary etale compact-support candidate by\n\n$$\nRf_!^c=Rr_*j_!:D(X_{\\rm et},A)\\longrightarrow D(S_{\\rm et},A).\n$$\n\nHere $j_!$ is the etale\nextension by zero,\nand $Rr_*$ is the ordinary\nderived direct image.\nFor a proper refinement take the comparison which is the\nidentity over $X$; the comparison lemma below proves\nthat these maps give a compactification-independent\nfunctor, denoted $Rf_!$. This definition concerns\nthe etale category; it does not identify it with a\nfunctor on the pro-etale category.\nThe notation refers to ordinary derived categories.",
+ "statement": "Let $A$ be a commutative coefficient ring. Let $f:X\\to S$ be a morphism of Noetherian schemes [def-pc-scheme] (schemes admitting finite affine covers by spectra of Noetherian rings), and fix a compactification $c=(j,r)$, meaning a factorization $X\\xrightarrow{j}\\overline X\\xrightarrow{r}S$ with $j$ an open immersion [def-weil-open-immersion], $r$ proper [def-weil-proper-morphism] and $rj=f$ [def-weil-compactifications-refinements]. Use the ordinary unbounded derived categories $D(T_{\\mathrm{et}},A)$ of sheaves of modules over the constant ring sheaf $A_T$ on the small etale site [def-weil-pbc-derived-categories].\n\nLet $j_!$ on sheaves be etale extension by zero [def-weil-pbc-extension-by-zero]. Write $Q_T$ for localization of complexes, or of their homotopy category, at quasi-isomorphisms [def-weil-abstract-derived-category]. The degreewise application of $j_!$ to complexes preserves quasi-isomorphisms [lem-weil-pbc-extension-by-zero-exact]; denote by $Dj_!$ its descent along the localization functors $Q_T$ [lem-weil-pbc-localization-universal-property], normalized by $Dj_!Q_X\\cong Q_{\\overline X}j_!$.\n\nLet $r_*$ be the module-sheaf direct image [def-weil-pbc-direct-image]. Degreewise application of this additive functor respects the chain-homotopy equation $h-h' = ds+sd$, shifts, and the cone differential $\\left(\\begin{smallmatrix}d_L&h\\\\0&-d_K\\end{smallmatrix}\\right)$, because it respects sums and negatives. Hence $Q_Sr_*$ on the homotopy category is exact for the cone triangulations [def-weil-abstract-derived-category], [def-weil-triangulated-category]. On the unbounded categories define $Rr_*$ as the total right derived functor of $Q_Sr_*$ on the homotopy category, using [lem-weil-pbc-kinjective-total-derived] and the K-injective resolutions of [def-weil-pbc-kinjective-resolutions], [prop-weil-pbc-kinjective-resolutions-exist]. Thus for a representing complex $L$ and a K-injective resolution $L\\to I$, $Rr_*(Q_{\\overline X}L)\\cong Q_S(r_*I)$. A morphism between resolved objects is sent to $Q_S(r_*h)$, where $h$ is its representing homotopy class of maps between the K-injective resolutions [lem-weil-pbc-kinjective-hom-derived]. This is the unbounded total derived construction, rather than only the bounded-below functor recorded in [def-weil-pbc-direct-image].\n\nDefine the ordinary etale compact-support candidate by\n$$Rf_!^c:=Rr_*\\circ Dj_!:D(X_{\\mathrm{et}},A)\\longrightarrow D(S_{\\mathrm{et}},A).$$\nThis is the ordinary etale module-coefficient instance of the chosen-compactification construction [def-weil-pbc-projection-compactification]; the preceding paragraphs specify its unbounded interpretation.\n\nOn a complex $K$, first form $j_!K$ degreewise, then take a K-injective resolution $j_!K\\to I$ on $\\overline X$, and return $Q_S(r_*I)$. On morphisms use the composite of the two functors just specified. In the conventional formula $Rr_*j_!$, $j_!$ denotes this induced derived functor.\n\nThe proper-refinement comparison normalized to be the identity over $X$, its coherence and invertibility, and compactification-independent notation $Rf_!$ are the properties to be supplied by the separate node lem-amb-etale-compact-comparisons (a pointer, not an ingredient defining the candidate). This definition makes no identification with a functor on a pro-etale coefficient category. No boundedness or constructibility condition is imposed on the input complex.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/def-amb-etale-compact-support.md",
   "place": "node def-amb-etale-compact-support, order 1560"
@@ -16,14 +18,69 @@
   "def-weil-compactifications-refinements",
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-extension-by-zero"
+  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-pbc-kinjective-resolutions",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-projection-compactification"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lowerShriek|compactlySupported|extensionByZero|rightDerivedLowerStar",
+   "results": "Mathlib/Topology/ContinuousMap/CompactlySupported.lean; Mathlib/Topology/ContinuousMap/CompactlySupported.lean; Mathlib/Topology/ContinuousMap/CompactlySupported.lean; Mathlib/Topology/ContinuousMap/CompactlySupported.lean; Mathlib/Topology/ContinuousMap/CompactlySupported.lean; Mathlib/Topology/ContinuousMap/BoundedCompactlySupported.lean; Mathlib/Topology/ContinuousMap/BoundedCompactlySupported.lean; Mathlib/Topology/ContinuousMap/BoundedCompactlySupported.lean (25 hits)",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern underived sheaf pushforward or compactly supported functions, not this etale derived compactification construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported direct image of etale sheaves from a compactification",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.Sheaf",
+   "results": "none (0 hits)",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern underived sheaf pushforward or compactly supported functions, not this etale derived compactification construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Define the unbounded derived direct image with compact support on etale sheaves by extension by zero followed by derived proper pushforward",
+   "results": "CategoryTheory.Functor.sheafPushforwardCocontinuous; SheafOfModules.pushforward; CategoryTheory.Functor.sheafPushforwardContinuous; AlgebraicGeometry.Scheme.Modules.pushforward; TopCat.Sheaf.pushforward_sheaf_of_sheaf; SheafOfModules.pushforward_obj_val; CategoryTheory.Functor.sheafPushforwardContinuous_obj_val_obj; TopCat.Sheaf.pushforward (8 hits)",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern underived sheaf pushforward or compactly supported functions, not this etale derived compactification construction"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|extension.by.zero|compact.support",
+   "results": "none (0 hits)",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern underived sheaf pushforward or compactly supported functions, not this etale derived compactification construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of sheaves along an open immersion induces a functor on derived categories and composition with total right derived pushforward defines lower shriek",
+   "results": "CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val; CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom; CategoryTheory.Functor.sheafPushforwardCocontinuous; SheafOfModules.pushforwardNatIso; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso; SheafOfModules.pushforwardPushforwardAdj; CategoryTheory.Functor.sheafPushforwardContinuousCompSheafToPresheafIso (8 hits)",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern underived sheaf pushforward or compactly supported functions, not this etale derived compactification construction"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -53,5 +110,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-amb-etale-compact-support",
+  "worker": "stage1",
+  "summary": "Made the coefficient ring explicit and unpacked the unbounded functor: exact termwise extension by zero descends through localization, and total direct image is computed on K-injective resolutions after extension by zero. Reused the existing DAG nodes and kept comparison/coherence assertions with the existing comparison lemma, not as construction data. No new nodes or Lean edits. Maintainer reading: reused the existing closed chosen-compactification construction def-weil-pbc-projection-compactification and recorded it in blueprint.same_as; the K-injective paragraphs explain that construction rather than introduce a second functor.",
+  "blueprint": "Realizes the defining formula and ordinary-derived-category clause of blueprint order 1560; the proper-refinement/independence sentence is explicitly a pointer to lem-amb-etale-compact-comparisons, which remains the separate theorem. The candidate formula also matches blueprint def-weil-pbc-projection-compactification, order 1268, which is cited directly."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-8c5d14d49",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-8c5d14d49 (reviewer sub-agent of L); spot-checked: Read the delivered mathematics and cited sources in full. The unbounded fixed-compactification construction is sound. Corrected the omitted reuse reference to existing def-weil-pbc-projection-compactification (C5/B9), adding its citation and blueprint.same_as. Review and complete corrected JSON written. No unrestricted refinement comparison certified; no targets weakened.; 1 file(s) fixed by the reviewer"
+ }
 }
