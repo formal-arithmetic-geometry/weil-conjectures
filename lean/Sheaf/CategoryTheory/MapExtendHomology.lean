@@ -37,8 +37,7 @@ theorem mapExtendHomology_nonempty_iso
       (((E.mapHomologicalComplex (.up ℤ)).obj
           (K.extend ComplexShape.embeddingUpNat)).homology (q : ℤ) ≅
         ((E.mapHomologicalComplex (.up ℕ)).obj K).homology q) := by
-  refine ⟨?_⟩
-  exact (HomologicalComplex.homologyFunctor B (.up ℤ) (q : ℤ)).mapIso
+  exact ⟨(HomologicalComplex.homologyFunctor B (.up ℤ) (q : ℤ)).mapIso
       (HomologicalComplex.mapExtendIso K ComplexShape.embeddingUpNat E) ≪≫
     ((E.mapHomologicalComplex (.up ℕ)).obj K).extendHomologyIso
-      ComplexShape.embeddingUpNat (j := q) rfl
+      ComplexShape.embeddingUpNat (j := q) rfl⟩
