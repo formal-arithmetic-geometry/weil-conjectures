@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Algebra.Homology.DerivedCategory.PerfectTower
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.Mathlib.RingTheory.AdicCompletion.Basic
-public import WeilConjectures.SixFunctors.ProEtale.Derived.RestrictScalars
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Adic
 
 /-!

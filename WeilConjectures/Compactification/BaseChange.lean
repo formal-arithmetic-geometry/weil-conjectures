@@ -1,7 +1,7 @@
 /-
-Copyright (c) 2026 Christian Merten. All rights reserved.
+Copyright (c) 2026 Christian Merten, Nailin Guan. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Christian Merten
+Authors: Christian Merten, Nailin Guan
 -/
 module
 
@@ -24,6 +24,19 @@ hand map is an open immersion because it is the base change of `c.i` along
 Since the source of a base change is rarely a literal `CategoryTheory.Limits.pullback` term,
 the construction is stated for an arbitrary pullback square `IsPullback h u p t`; the
 special case of the literal pullback is `Compactification.baseChange`.
+
+Writing `i'` and `g'` for the open immersion and the proper morphism of `c.ofIsPullback hsq`,
+both squares of the pasting
+```
+X ----h----> Y          c.Z ×_T S --fst--> c.Z
+|            |          |                  |
+i'          c.i         g'                c.g
+v            v          v                  v
+c.Z ×_T S --fst--> c.Z  S --------t------> T
+```
+are Cartesian (`Compactification.isPullback_i_ofIsPullback` and
+`Compactification.isPullback_g_ofIsPullback`). This is the geometric input for the base change
+morphism of the lower shriek.
 
 ## Main definitions
 
@@ -122,6 +135,19 @@ theorem isPullback_i_ofIsPullback (hsq : IsPullback h u p t) (c : Compactificati
 lemma ofIsPullback_i_fst (hsq : IsPullback h u p t) (c : Compactification p) :
     (c.ofIsPullback hsq).i ≫ pullback.fst c.g t = h ≫ c.i :=
   pullback.lift_fst _ _ _
+
+/-- The open immersion of `c.ofIsPullback hsq` followed by the projection to `S` is `u`. -/
+@[reassoc (attr := simp)]
+lemma ofIsPullback_i_snd (hsq : IsPullback h u p t) (c : Compactification p) :
+    (c.ofIsPullback hsq).i ≫ pullback.snd c.g t = u :=
+  pullback.lift_snd _ _ _
+
+/-- The scheme of `c.ofIsPullback hsq` is noetherian as soon as the fibre product `c.Z ×_T S`
+is: the two are the same scheme. -/
+instance noetherianSpace_ofIsPullback_Z (hsq : IsPullback h u p t) (c : Compactification p)
+    [hZ : TopologicalSpace.NoetherianSpace ↥(pullback c.g t)] :
+    TopologicalSpace.NoetherianSpace (c.ofIsPullback hsq).Z :=
+  hZ
 
 /-- **The proper morphism of a base-changed compactification is a base change of the original
 proper morphism**, for the compactification `c.ofIsPullback hsq`:

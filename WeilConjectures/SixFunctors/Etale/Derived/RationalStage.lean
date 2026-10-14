@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHom
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationRecollement
+public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationRecollement
 public import WeilConjectures.SixFunctors.ClosedImmersionStages
 
 /-!
