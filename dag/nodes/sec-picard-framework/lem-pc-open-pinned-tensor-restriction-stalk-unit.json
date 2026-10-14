@@ -15,7 +15,7 @@
  },
  "proof": [
   {
-   "text": "Expand the inverse pinned restriction into its four factors. The two open comparison factors identify adjunction units by Adjunction.unit_leftAdjointUniq_hom_app; the two composition factors identify composite units by unit_conjugateEquiv_symm. Naturality moves the input open comparison through the unit for j, and the composition identities cancel using the commuting square hj. Thus the inverse pinned comparison preserves the restricted adjunction unit.",
+   "text": "Normalize each open comparison by composing with overFunctorEquiv; leftAdjointUniq_trans identifies this with the unique comparison from the chosen tensor adjunction to restrictAdjunction. Expand the inverse restriction comparison into its four factors. Apply conjugateEquiv_comp and the whiskering identities to compute its mate as the pushforward composition comparison for U'.ι and k followed by the inverse comparison for j and U.ι, including transport along hj. The unit_conjugateEquiv identity gives the composite-unit equality. Evaluate it over A = U.ι image W. Naturality of the comparison and of the j unit moves the equality to W. The restriction unit followed by the map from W to U.ι inverse-image A is the identity, by restrictAdjunction_unit_app_app and restrict_map. For the other side, expand pushforwardComp and pushforwardCongr section components and combine their restriction maps; all resulting arrows between opens coincide by thinness. Naturality of the j unit moves the input overFunctorEquiv through it. This proves the required identity on unit sections. Proved private APIs for arbitrary open immersions keep concrete open-subscheme sheaf constructions abstract during elaboration.",
    "uses": [
     "def-pc-open-pinned-single-tensor-restriction-iso",
     "lem-pc-module-pullback-adjunction",
@@ -24,7 +24,7 @@
    "elementary": false
   },
   {
-   "text": "Apply additive stalk maps to this unit equality. On a section germ the stalk map of a unit followed by stalkPushforward is the germ of the pulled-back section, by stalkFunctor_map_germ and stalkPushforward_germ. The hom formulas for restrictStalkNatIso identify the open factors with the ambient germs; stalkCongr accounts for the equality of input points induced by hj. Every stalk element is a section germ, so stalk_hom_ext gives the displayed equality of maps.",
+   "text": "Use a proved private germ lemma for arbitrary module sheaves and maps satisfying the preceding section identity. Apply stalk_hom_ext to the source presheaf. On each section germ, stalkFunctor_map_germ, stalkPushforward_germ and germ_restrictStalkNatIso_hom_app reduce both sides to the ambient section germs. stalkCongr and germ_stalkSpecializes transport the input point along the equality obtained by evaluating hj at z. Postcompose the section identity with the output germ and use germ_res. Equality on all germs gives the stated equality of additive stalk maps. Specialize this germ lemma to the chosen pullback units and the inverse pinned restriction comparison.",
    "uses": [],
    "elementary": true
   }
@@ -36,11 +36,11 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "G1",
+  "group": "B3",
   "date": "2026-10-14",
   "document": "Stacks Project",
-  "place": "Tags 0096 and 0098",
-  "note": "Extract the unit-compatibility part of the canonical generator calculation, independently of tensor coordinates, complexes and cartesian base-change squares."
+  "place": "Tags 0096 and 0098; Mathlib adjunction mate and restriction/stalk identities",
+  "note": "Complete Lean proof of the planned section calculation and germ argument. Private proved APIs for arbitrary open immersions and sheaves avoid repeated unfolding of concrete open-subscheme and tensor constructions; no new holes or dependencies."
  },
  "mathlib_searches": [
   {
@@ -110,10 +110,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261014T001718-L-2549443",
-  "kind": "interface",
+  "landing": "20261014T020505-L-3809218",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
