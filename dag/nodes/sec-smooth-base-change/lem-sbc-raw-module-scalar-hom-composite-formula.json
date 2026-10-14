@@ -1,0 +1,137 @@
+{
+ "id": "lem-sbc-raw-module-scalar-hom-composite-formula",
+ "kind": "statement",
+ "title": "Scalar Hom map after module raw pullback expansion",
+ "statement": "Let Λ be a commutative ring in Type(u+1), W,S schemes in universe u, k:W→S, G an etale Λ-module sheaf on W, q a natural number, U∈S.Etale, A,B∈Over(W), f:A→B and z a raw module class at B. The scalar Hom map at A evaluated on the module raw pullback of z equals scalarSourceFactor at A.hom≫k followed by derived scalar forgetting of moduleSourceFactor, derived scalar forgetting of the derived module inverse image of z, and derived scalar forgetting of moduleCoefficientFactor, followed by scalarCoefficientFactor at A.hom. No source coherence, inverse derived scalar comparison, abelian source factor or abelian raw pullback is used.",
+ "source": {
+  "document": "Stacks Project; the explicit definition rawModuleAbelianHomMap",
+  "place": "Tags 03FD and 03Q8; scalar-map expansion in lem-sbc-raw-module-abelian-hom-source-formula"
+ },
+ "stmt_deps": [
+  "def-sbc-raw-module-abelian-hom-map",
+  "def-sbc-raw-scalar-source-factors",
+  "lem-sbc-raw-scalar-coefficient-square"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the defining composite rawModuleAbelianHomMap: derived scalar forgetting on Hom groups, right composition by b, and left composition by c. The named scalar coefficient and source factors are exactly b and c. Apply rawModuleScalar_pullback_module_formula inside derived scalar forgetting to replace its raw input with the module source factor, derived module inverse image of z and module coefficient factor. Distribute the derived forgetting map across these three factors with Functor.map_comp: no source coherence or naturality equation is used. This handles zero classes, degree zero, identity arrows and zero coefficients.",
+   "uses": [
+    "def-sbc-raw-module-abelian-hom-map",
+    "lem-sbc-raw-scalar-pullback-module-formula"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-raw-module-abelian-hom-map",
+  "lem-sbc-raw-scalar-pullback-module-formula"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "N4",
+  "date": "2026-10-14",
+  "document": "Stacks Project; explicit library construction",
+  "place": "Tags 03FD and 03Q8; expansion of the bundled additive map"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of a composite of additive homomorphisms",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: Internal Server Error; no verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of the composite of two additive homomorphisms is the composite of their evaluations",
+   "date": "2026-10-14",
+   "results": "AddMonoidHom.comp_apply and coe_comp give evaluation, but do not identify the concrete scalar Hom map."
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidHom.comp_apply",
+   "date": "2026-10-14",
+   "results": "One hit gives (g.comp f) x = g (f x); it does not identify the bundled scalar map."
+  },
+  {
+   "tool": "grep",
+   "query": "mapAddHom|leftComp_apply|rightComp_apply",
+   "date": "2026-10-14",
+   "results": "21 hits give the generic additive-composition and mapAddHom APIs. RawModuleScalarMapFormula states the element formula but redeclares both scalar factor names, and cannot be imported with the assigned module. No existing compatible bundled equation found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of an inverse natural isomorphism composed with a morphism",
+   "date": "2026-10-14",
+   "results": "Second reading: NatIso.naturality_1 and related inverse naturality equations provide the generic class step, not the concrete scalar source or bundled-map identification."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "date": "2026-10-14",
+   "results": "Second reading: NatTrans.naturality is the generic naturality step; no theorem identifying these concrete factors."
+  },
+  {
+   "tool": "grep",
+   "query": "leftComp_apply|rightComp_apply|comp_apply",
+   "date": "2026-10-14",
+   "results": "Second reading: Mathlib CategoryTheory/Preadditive search found only matrix comp_apply equations. Local Lean search found the existing rfl scalar-map formula and proved concrete source square, but their modules redeclare factors/comparison names from the required signature imports and cannot be imported together."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawModuleAbelianHomSourceFormula",
+  "date": "2026-10-14",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-raw-module-abelian-hom-source-formula",
+   "place": "First step: expand the additive scalar map and module raw pullback",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarHomCompositeFormula",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarHomCompositeFormula.lean",
+  "declaration": "AlgebraicGeometry.Etale.rawModuleScalar_hom_composite_formula",
+  "statement": "theorem rawModuleScalar_hom_composite_formula\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)\n    (A B : Over W) (f : A ⟶ B)\n    (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op B)) :\n    rawModuleAbelianHomMap Λ k G q U A\n      ((higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).map f.op z) =\n      scalarSourceFactor Λ (A.hom ≫ k) ((freeSheaf Λ S).obj U)\n        (RawModuleScalarComparison.freeAbelian S U)\n        (RawModuleScalarComparison.freeMap Λ S U) ≫\n      (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus.map\n        (moduleSourceFactor Λ f.left (B.hom ≫ k) (A.hom ≫ k)\n          (by rw [← Category.assoc, Over.w]) ((freeSheaf Λ S).obj U)) ≫\n      (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus.map\n        ((upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.map z) ≫\n      (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus.map\n        (moduleCoefficientFactor Λ G (q : ℤ) A B f) ≫\n      scalarCoefficientFactor Λ A.hom G (q : ℤ)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T090920-L-366641",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T090920-L-366641",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,9 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMap
 public import Sheaf.AlgebraicGeometry.RawModuleScalarSourcePrefix
 public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare
-import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula
-import Sheaf.AlgebraicGeometry.RawModuleScalarSheafComposition
-import Sheaf.AlgebraicGeometry.RawModuleScalarSourceSquareCore
+import Sheaf.AlgebraicGeometry.RawModuleScalarHomCompositeFormula
+import Sheaf.AlgebraicGeometry.RawModuleScalarSourceClassFormula
 
 /-! # The source and class factors of the raw scalar comparison
 
@@ -55,6 +54,15 @@ theorem rawModuleAbelianHomMap_source_formula
             ((upperStar (ModuleCat.{u + 1} Λ) B.hom).obj G))⟦(q : ℤ)⟧) ≫
         (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus.map
           (moduleCoefficientFactor Λ G (q : ℤ) A B f) ≫
-        scalarCoefficientFactor Λ A.hom G (q : ℤ)) := by sorry
+        scalarCoefficientFactor Λ A.hom G (q : ℤ)) := by
+  have hs := rawModuleScalar_source_class_formula Λ k G q U A B f z
+  have ht := congrArg
+    (fun v ↦ v ≫
+      (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus.map
+        (moduleCoefficientFactor Λ G (q : ℤ) A B f) ≫
+      scalarCoefficientFactor Λ A.hom G (q : ℤ)) hs
+  have he := rawModuleScalar_hom_composite_formula Λ k G q U A B f z
+  apply he.trans
+  simpa only [Category.assoc] using ht
 
 end AlgebraicGeometry.Etale
