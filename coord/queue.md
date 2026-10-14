@@ -1,6 +1,6 @@
 # Work queue
 
-22 items; claim with `tools/claim.py next <group> [--stage N]`.
+24 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,14 +8,16 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (22)
+## Stage 3: modules to prove (24)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
 | `Sheaf.CategoryTheory.SiteSystemStrictificationData` | 7 | 1 | disputed |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
-| `WeilConjectures.ConstructibleSheaf.FinitePushforward` | 3 | 2 | proof |
+| `WeilConjectures.ConstructibleSheaf.FinitePushforward` | 3 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.NormalConstantGenericUnit` | 4 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.NormalConstantOpenUnit` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BaseChangeClosedCoefficientRange` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardDegreeSheafFpqc` | 9 | 1 | proof |
@@ -39,7 +41,7 @@ Waiting, not claimable: 5 modules whose proof uses a node that has no Lean decla
 
 | module | distance to a target | sorry |
 |---|---|---|
-| `WeilConjectures.ConstructibleSheaf.FinitePushforward` | 3 | 2 |
+| `WeilConjectures.ConstructibleSheaf.FinitePushforward` | 3 | 1 |
 | `Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic` | 6 | 1 |
 | `Sheaf.AlgebraicGeometry.BaseChangeClosedCoefficientRange` | 8 | 1 |
 | `Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparison` | 10 | 1 |
