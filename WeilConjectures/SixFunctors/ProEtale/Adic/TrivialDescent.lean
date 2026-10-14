@@ -232,6 +232,13 @@ noncomputable abbrev descentρ₂ (T : X.ProEt) :
   pullback.lift (pullback.fst _ _) (pullback.snd _ _ ≫ pullback.snd f f)
     (by rw [Category.assoc, ← pullback.condition (f := f) (g := f)]; exact pullback.condition)
 
+/-- The components of the zero section. -/
+lemma comps_zero {B : Scheme.{u}} {Z : B.ProEt} :
+    comps (0 : (⨁ fun _ : Fin n ↦ unit l B).X.obj.obj (op Z)) = 0 := by
+  funext i
+  simp only [comps, map_zero]
+  rfl
+
 /-- The components of a difference of sections. -/
 lemma comps_sub {B : Scheme.{u}} {Z : B.ProEt}
     (x x' : (⨁ fun _ : Fin n ↦ unit l B).X.obj.obj (op Z)) :
@@ -381,6 +388,259 @@ lemma comps_descentMap (T : X.ProEt)
   rfl
 
 end DescentMap
+
+section Localization
+
+variable {V U : Scheme.{u}} (g : V ⟶ U) (hg : WeaklyEtale g)
+
+/-- The counit of `j_g^* ⊣ g_*` restricts sections along the graph `T ⟶ T ×_U V`. -/
+lemma localizationRestrictionLowerStarAdjunction_counit_app_hom_app
+    (N : Sheaf (Scheme.ProEt.topology V) (WeilCoefficients.{u} l)) (T : V.ProEt) :
+    ((ProEtale.localizationRestrictionLowerStarAdjunction _ g hg).counit.app N).hom.app (op T) =
+      N.obj.map ((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ g hg
+        trivial).unit.app T).op := by
+  simp [ProEtale.localizationRestrictionLowerStarAdjunction, Adjunction.sheafPushforwardContinuous]
+
+end Localization
+
+section Kernel
+
+variable {B : Scheme.{u}} {M N : AdicSheaf l B} (φ : M ⟶ N) (U : B.ProEt)
+
+instance : PreservesFiniteLimits (sectionsFunctor (l := l) U) := by
+  unfold sectionsFunctor
+  infer_instance
+
+/-- The inclusion of a kernel is injective on sections. -/
+lemma kernel_ι_injective : Function.Injective ((kernel.ι φ).hom.hom.app (op U)) := by
+  have : Mono ((sectionsFunctor (l := l) U).map (kernel.ι φ)) := inferInstance
+  exact (ModuleCat.mono_iff_injective _).1 this
+
+/-- The sections killed by a morphism come from the kernel. -/
+lemma exists_kernel_ι_eq (y : M.X.obj.obj (op U)) (hy : φ.hom.hom.app (op U) y = 0) :
+    ∃ s, (kernel.ι φ).hom.hom.app (op U) s = y := by
+  let F := sectionsFunctor (l := l) U
+  refine ⟨((PreservesKernel.iso F φ).inv).hom
+    ((ModuleCat.kernelIsoKer (F.map φ)).inv.hom ⟨y, hy⟩), ?_⟩
+  change ((PreservesKernel.iso F φ).inv ≫ F.map (kernel.ι φ)).hom _ = y
+  rw [PreservesKernel.iso_inv_ι, ← ModuleCat.comp_apply, ModuleCat.kernelIsoKer_inv_kernel_ι]
+  rfl
+
+/-- The sections of a kernel map to zero. -/
+lemma kernel_ι_app_comp (s : (kernel φ).X.obj.obj (op U)) :
+    φ.hom.hom.app (op U) ((kernel.ι φ).hom.hom.app (op U) s) = 0 := by
+  rw [← comp_hom_app_apply, kernel.condition]
+  rfl
+
+end Kernel
+
+section Descent
+
+variable {X W : Scheme.{u}} (f : W ⟶ X) [WeaklyEtale f] {n : ℕ}
+  (γ : Matrix (Fin n) (Fin n) (PadicAlgCl.locallyFiniteFunctions l ↥(Limits.pullback f f)))
+
+/-- The descent of `ℚ̄_ℓ,Wⁿ` along the cocycle `γ`: the kernel of the descent map. -/
+noncomputable def descentSheaf : AdicSheaf l X :=
+  kernel (descentMap (l := l) f γ)
+
+/-- The comparison `f^* G ⟶ ℚ̄_ℓ,Wⁿ`, adjoint to the inclusion `G ⟶ f_* ℚ̄_ℓ,Wⁿ`. -/
+noncomputable def descentTriv :
+    (f)^*ᵃ[l].obj (descentSheaf f γ) ⟶ ⨁ fun _ : Fin n ↦ unit l W :=
+  ((adicUpperStarLowerStarAdjunction l f).homEquiv _ _).symm (kernel.ι (descentMap (l := l) f γ))
+
+/-- The comparison `f^* G ⟶ ℚ̄_ℓ,Wⁿ`, through the identification of `f^*` with restriction along
+the localization functor. -/
+lemma descentTriv_hom : (descentTriv f γ).hom =
+    (ProEtale.upperStarIsoLocalizationRestriction _ f inferInstance).hom.app _ ≫
+      (ProEtale.localizationRestriction _ f inferInstance).map
+        (kernel.ι (descentMap (l := l) f γ)).hom ≫
+      (ProEtale.localizationRestrictionLowerStarAdjunction _ f inferInstance).counit.app
+        (⨁ fun _ : Fin n ↦ unit l W).X := by
+  rw [descentTriv, adicUpperStarLowerStarAdjunction]
+  erw [Adjunction.modAdjunction_homEquiv_symm_apply_hom]
+  rw [Adjunction.homEquiv_counit, ← Adjunction.leftAdjointUniq_hom_app_counit
+      (upperStarLowerStarAdjunction (WeilCoefficients.{u} l) f)
+      (ProEtale.localizationRestrictionLowerStarAdjunction _ f inferInstance)]
+  have nat := (ProEtale.upperStarIsoLocalizationRestriction (WeilCoefficients.{u} l) f
+    inferInstance).hom.naturality (kernel.ι (descentMap (l := l) f γ)).hom
+  have := nat =≫ (ProEtale.localizationRestrictionLowerStarAdjunction _ f
+    inferInstance).counit.app (⨁ fun _ : Fin n ↦ unit l W).X
+  simp only [Category.assoc] at this
+  exact this
+
+/-- The comparison on sections over `T ∈ W_proét`: restriction of `y ∈ G(T ⟶ X)` along the
+graph `T ⟶ T ×_X W`. -/
+noncomputable abbrev descentTrivApp (T : W.ProEt) :
+    (descentSheaf (l := l) f γ).X.obj.obj
+      (op ((MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale f)).obj T)) →
+      (⨁ fun _ : Fin n ↦ unit l W).X.obj.obj (op T) :=
+  fun s ↦ (⨁ fun _ : Fin n ↦ unit l W).X.obj.map ((MorphismProperty.Over.mapPullbackAdj
+    @WeaklyEtale ⊤ f inferInstance trivial).unit.app T).op
+      ((kernel.ι (descentMap (l := l) f γ)).hom.hom.app _ s)
+
+variable {f γ} in
+/-- **The comparison is bijective on sections**: a section `y` of `G` over `T ⟶ X` satisfies
+`y(t, w) = γ(a t, w) y(t, a t)`, so it is determined by its restriction `c(t) = y(t, a t)` to the
+graph, and conversely `c ↦ γ(a t, w) c(t)` is a section of `G` by the cocycle condition. -/
+lemma bijective_descentTrivApp
+    (hdiag : γ.map (PadicAlgCl.locallyFiniteFunctionsComp l (pullback.diagonal f).base.hom) = 1)
+    (hcoc : γ.map (PadicAlgCl.locallyFiniteFunctionsComp l (tripleProj₁₃ f).base.hom) =
+      γ.map (PadicAlgCl.locallyFiniteFunctionsComp l
+        (pullback.snd (pullback.snd f f) (pullback.fst f f)).base.hom) *
+      γ.map (PadicAlgCl.locallyFiniteFunctionsComp l
+        (pullback.fst (pullback.snd f f) (pullback.fst f f)).base.hom)) (T : W.ProEt) :
+    Function.Bijective (descentTrivApp (l := l) f γ T) := by
+  classical
+  set T' := (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale f)).obj T
+  set u := (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ f inferInstance trivial).unit.app T
+  have hu₁ : u.left ≫ pullback.fst T'.hom f = 𝟙 _ := pullback.lift_fst _ _ _
+  have hu₂ : u.left ≫ pullback.snd T'.hom f = T.hom := pullback.lift_snd _ _ _
+  have hT' : T'.hom = T.hom ≫ f := rfl
+  let ψ : Limits.pullback T'.hom f ⟶ Limits.pullback f f :=
+    pullback.lift (pullback.fst _ _ ≫ T.hom) (pullback.snd _ _)
+      (by rw [Category.assoc, ← hT', pullback.condition])
+  let σ : Limits.pullback T'.hom f ⟶ Limits.pullback T'.hom (pullback.fst f f ≫ f) :=
+    pullback.lift (pullback.fst _ _) ψ (by simp [ψ, T'])
+  have hσ₁ : σ ≫ descentρ₁ f T' = pullback.fst _ _ ≫ u.left := by
+    refine pullback.hom_ext ?_ ?_
+    · simp only [σ, Category.assoc, pullback.lift_fst]
+      rw [hu₁]
+      exact (Category.comp_id _).symm
+    · simp only [σ, Category.assoc, pullback.lift_snd, pullback.lift_snd_assoc]
+      rw [hu₂]
+      exact pullback.lift_fst _ _ _
+  have hσ₂ : σ ≫ descentρ₂ f T' = 𝟙 _ := pullback.hom_ext (by simp [σ]) (by simp [σ, ψ])
+  have hσ₃ : σ ≫ pullback.snd _ _ = ψ := pullback.lift_snd _ _ _
+  have hpt₁ (x) : (descentρ₁ f T').base (σ.base x) = u.left.base ((pullback.fst T'.hom f).base x) := by
+    rw [← Scheme.Hom.comp_apply, hσ₁, Scheme.Hom.comp_apply]
+    rfl
+  have hpt₂ (x) : (descentρ₂ f T').base (σ.base x) = x := by
+    rw [← Scheme.Hom.comp_apply, hσ₂]
+    rfl
+  have hpt₃ (x) : (pullback.snd T'.hom (pullback.fst f f ≫ f)).base (σ.base x) = ψ.base x := by
+    rw [← Scheme.Hom.comp_apply, hσ₃]
+  -- the relation satisfied by the sections of the kernel
+  have hrel (y : (⨁ fun _ : Fin n ↦ unit l W).X.obj.obj
+      (op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj T')))
+      (hy : (descentMap (l := l) f γ).hom.hom.app (op T') y = 0) (i : Fin n) (x) :
+      (comps y i).1 x = ∑ j, (γ i j).1 (ψ.base x) *
+        (comps y j).1 (u.left.base ((pullback.fst T'.hom f).base x)) := by
+    have h := congrArg (fun c ↦ (c i).1 (σ.base x)) (comps_descentMap (l := l) f γ T' y)
+    simp only [hy, comps_zero, Pi.zero_apply, ZeroMemClass.coe_zero, ContinuousMap.zero_apply,
+      AddSubgroupClass.coe_sub, ContinuousMap.sub_apply, AddSubmonoidClass.coe_finsetSum,
+      ContinuousMap.sum_apply, MulMemClass.coe_mul, ContinuousMap.mul_apply,
+      PadicAlgCl.locallyFiniteFunctionsComp_apply_coe, ContinuousMap.comp_apply] at h
+    erw [hpt₁ x, hpt₂ x, hpt₃ x] at h
+    exact (sub_eq_zero.1 h.symm).symm
+  have hmap (y : (⨁ fun _ : Fin n ↦ unit l W).X.obj.obj
+      (op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj T'))) (j : Fin n) (z) :
+      (comps ((⨁ fun _ : Fin n ↦ unit l W).X.obj.map u.op y) j).1 z = (comps y j).1 (u.left.base z) := by
+    rw [comps_map]
+    rfl
+  constructor
+  · intro s s' h
+    rw [← sub_eq_zero]
+    apply kernel_ι_injective (descentMap (l := l) f γ) T'
+    rw [map_sub, map_zero]
+    have hy : (descentMap (l := l) f γ).hom.hom.app (op T')
+        ((kernel.ι (descentMap (l := l) f γ)).hom.hom.app (op T') s -
+          (kernel.ι (descentMap (l := l) f γ)).hom.hom.app (op T') s') = 0 := by
+      rw [map_sub, kernel_ι_app_comp, kernel_ι_app_comp, sub_zero]
+    have hz : (⨁ fun _ : Fin n ↦ unit l W).X.obj.map u.op
+        ((kernel.ι (descentMap (l := l) f γ)).hom.hom.app (op T') s -
+          (kernel.ι (descentMap (l := l) f γ)).hom.hom.app (op T') s') = 0 := by
+      rw [map_sub, sub_eq_zero]
+      exact h
+    apply comps_injective
+    rw [comps_zero]
+    funext i
+    refine Subtype.ext (ContinuousMap.ext fun x ↦ ?_)
+    rw [hrel _ hy i x]
+    refine (Finset.sum_eq_zero fun j _ ↦ ?_).trans rfl
+    rw [← hmap, hz, comps_zero]
+    simp
+  · intro z
+    let c := comps z
+    let yc : Fin n → PadicAlgCl.locallyFiniteFunctions l ↥(Limits.pullback T'.hom f) := fun i ↦
+      ∑ j, PadicAlgCl.locallyFiniteFunctionsComp l ψ.base.hom (γ i j) *
+        PadicAlgCl.locallyFiniteFunctionsComp l (pullback.fst T'.hom f).base.hom (c j)
+    let y := ofComps (l := l) (B := W)
+      (Z := (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj T') yc
+    -- the triple point `(a t, w₁, w₂)`
+    let Θ : Limits.pullback T'.hom (pullback.fst f f ≫ f) ⟶ tripleProduct f :=
+      pullback.lift (descentρ₁ f T' ≫ ψ) (pullback.snd _ _) (by simp [ψ])
+    have hΘ₁₂ : Θ ≫ pullback.fst _ _ = descentρ₁ f T' ≫ ψ := pullback.lift_fst _ _ _
+    have hΘ₂₃ : Θ ≫ pullback.snd _ _ = pullback.snd _ _ := pullback.lift_snd _ _ _
+    have hΘ₁₃ : Θ ≫ tripleProj₁₃ f = descentρ₂ f T' ≫ ψ :=
+      pullback.hom_ext (by simp [Θ, ψ]) (by simp [Θ, ψ])
+    have hfst : descentρ₁ f T' ≫ pullback.fst _ _ = descentρ₂ f T' ≫ pullback.fst _ _ := by
+      simp
+    have hy : (descentMap (l := l) f γ).hom.hom.app (op T') y = 0 := by
+      apply comps_injective
+      rw [comps_descentMap, comps_zero, comps_ofComps]
+      funext i
+      refine Subtype.ext (ContinuousMap.ext fun q ↦ ?_)
+      have e₁₃ : (tripleProj₁₃ f).base (Θ.base q) = ψ.base ((descentρ₂ f T').base q) := by
+        rw [← Scheme.Hom.comp_apply, hΘ₁₃, Scheme.Hom.comp_apply]
+      have e₁₂ : (pullback.fst (pullback.snd f f) (pullback.fst f f)).base (Θ.base q) =
+          ψ.base ((descentρ₁ f T').base q) := by
+        rw [← Scheme.Hom.comp_apply, hΘ₁₂, Scheme.Hom.comp_apply]
+      have e₂₃ : (pullback.snd (pullback.snd f f) (pullback.fst f f)).base (Θ.base q) =
+          (pullback.snd T'.hom (pullback.fst f f ≫ f)).base q := by
+        rw [← Scheme.Hom.comp_apply, hΘ₂₃]
+      have hc (k : Fin n) : (γ i k).1 (ψ.base ((descentρ₂ f T').base q)) =
+          ∑ j, (γ i j).1 ((pullback.snd T'.hom (pullback.fst f f ≫ f)).base q) *
+            (γ j k).1 (ψ.base ((descentρ₁ f T').base q)) := by
+        have := congrArg (fun M ↦ (M i k).1 (Θ.base q)) hcoc
+        simp only [Matrix.map_apply, Matrix.mul_apply, AddSubmonoidClass.coe_finsetSum,
+          ContinuousMap.sum_apply, MulMemClass.coe_mul, ContinuousMap.mul_apply,
+          PadicAlgCl.locallyFiniteFunctionsComp_apply_coe, ContinuousMap.comp_apply] at this
+        erw [e₁₃, e₁₂, e₂₃] at this
+        exact this
+      have hq : (pullback.fst T'.hom f).base ((descentρ₁ f T').base q) =
+          (pullback.fst T'.hom f).base ((descentρ₂ f T').base q) := by
+        rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply, hfst]
+      simp only [Pi.zero_apply, ZeroMemClass.coe_zero, ContinuousMap.zero_apply,
+        AddSubgroupClass.coe_sub, ContinuousMap.sub_apply, AddSubmonoidClass.coe_finsetSum,
+        ContinuousMap.sum_apply, MulMemClass.coe_mul, ContinuousMap.mul_apply,
+        PadicAlgCl.locallyFiniteFunctionsComp_apply_coe, ContinuousMap.comp_apply, yc]
+      rw [sub_eq_zero]
+      simp only [Finset.mul_sum]
+      rw [Finset.sum_comm]
+      refine Finset.sum_congr rfl fun k _ ↦ ?_
+      erw [hc k, ← hq, Finset.sum_mul]
+      refine Finset.sum_congr rfl fun j _ ↦ ?_
+      ring
+    obtain ⟨s, hs⟩ := exists_kernel_ι_eq (descentMap (l := l) f γ) T' y hy
+    refine ⟨s, comps_injective (funext fun i ↦ Subtype.ext (ContinuousMap.ext fun x ↦ ?_))⟩
+    change (comps ((⨁ fun _ : Fin n ↦ unit l W).X.obj.map u.op
+      ((kernel.ι (descentMap (l := l) f γ)).hom.hom.app (op T') s)) i).1 x = _
+    rw [hmap, hs, comps_ofComps]
+    have hψu : u.left ≫ ψ = T.hom ≫ pullback.diagonal f := pullback.hom_ext
+      (by simp only [ψ, Category.assoc, pullback.lift_fst, pullback.diagonal_fst]
+          rw [← Category.assoc, hu₁]; exact Category.id_comp _)
+      (by simp only [ψ, Category.assoc, pullback.lift_snd, pullback.diagonal_snd]
+          rw [hu₂]; exact (Category.comp_id _).symm)
+    have hd (j : Fin n) : (γ i j).1 (ψ.base (u.left.base x)) = if i = j then 1 else 0 := by
+      have := congrArg (fun M ↦ (M i j).1 (T.hom.base x)) hdiag
+      simp only [Matrix.map_apply, PadicAlgCl.locallyFiniteFunctionsComp_apply_coe,
+        ContinuousMap.comp_apply, Matrix.one_apply] at this
+      have e := congrArg (fun φ ↦ φ.base x) hψu
+      simp only [Scheme.Hom.comp_apply] at e
+      erw [e]
+      refine this.trans ?_
+      split_ifs <;> rfl
+    have hf : (pullback.fst T'.hom f).base (u.left.base x) = x := by
+      have e := congrArg (fun φ ↦ φ.base x) hu₁
+      simp only [Scheme.Hom.comp_apply] at e
+      exact e
+    simp only [yc, AddSubmonoidClass.coe_finsetSum, ContinuousMap.sum_apply, MulMemClass.coe_mul,
+      ContinuousMap.mul_apply, PadicAlgCl.locallyFiniteFunctionsComp_apply_coe,
+      ContinuousMap.comp_apply]
+    refine (Finset.sum_congr rfl fun j _ ↦ (congrArg₂ (· * ·) (hd j) (congrArg (c j).1 hf) :)).trans ?_
+    simp [c]
+
+end Descent
 
 end AdicSheaf
 
