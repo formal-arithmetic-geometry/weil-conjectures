@@ -202,11 +202,141 @@ theorem isGenericallyConnected_of_isLimit {W Y : Scheme.{u}} (h : W ⟶ Y) {J : 
     · simp [M, πj, sj]
     · simp [M, πj, sj, pullback.condition]
   refine ⟨M.base ρ, hVΩ ?_, ?_, ?_⟩
-  · show (M ≫ πj).base ρ ∈ V'
+  · change (M ≫ πj).base ρ ∈ V'
     rw [hM, Scheme.Hom.comp_apply, Scheme.Hom.comp_apply, hρ₁, ← haξ]
     exact ((hξ _ hwO).map (pullback.diagonal (t.app j)).base.hom.continuous).mem_open hV'
       hwV'
   · rw [← Scheme.Hom.comp_apply, pullback.lift_fst, Category.comp_id, hρ₁]
   · rw [← Scheme.Hom.comp_apply, pullback.lift_snd, Category.comp_id, hρ₂]
+
+/-- Generic connectedness is local on the source: it can be checked on an open immersion. -/
+lemma IsGenericallyConnectedAt.of_openImmersion {O W Y : Scheme.{u}} (ι : O ⟶ W)
+    [IsOpenImmersion ι] (h : W ⟶ Y) {η : Y} {w₀ : O}
+    (H : IsGenericallyConnectedAt (ι ≫ h) η w₀) : IsGenericallyConnectedAt h η (ι.base w₀) := by
+  intro Ω hΩ hw
+  let m : pullback (ι ≫ h) (ι ≫ h) ⟶ pullback h h :=
+    pullback.map _ _ _ _ ι ι (𝟙 Y) (by simp) (by simp)
+  have hm : pullback.diagonal (ι ≫ h) ≫ m = ι ≫ pullback.diagonal h :=
+    pullback.hom_ext (by simp [m]) (by simp [m])
+  obtain ⟨U₀, hU₀, hU₀p⟩ := H (m.base ⁻¹' Ω) (hΩ.preimage m.base.hom.continuous) (by
+    rw [Set.mem_preimage, ← Scheme.Hom.comp_apply, hm, Scheme.Hom.comp_apply]
+    exact hw)
+  have hgen {w₁ : O} {a : W} (ha : a ⤳ ι.base w₁) : ∃ a₀, ι.base a₀ = a ∧ a₀ ⤳ w₁ := by
+    obtain ⟨a₀, rfl⟩ : a ∈ Set.range ι.base :=
+      ha.mem_open ι.isOpenEmbedding.isOpen_range ⟨w₁, rfl⟩
+    exact ⟨a₀, rfl, ι.isOpenEmbedding.isInducing.specializes_iff.mp ha⟩
+  refine ⟨ι.base '' U₀, ι.isOpenEmbedding.image_mem_nhds.mpr hU₀, ?_⟩
+  rintro _ ⟨w₁, hw₁, rfl⟩ a b ha hb haη hbη
+  obtain ⟨a₀, rfl, ha₀⟩ := hgen ha
+  obtain ⟨b₀, rfl, hb₀⟩ := hgen hb
+  obtain ⟨z, hz, h₁, h₂⟩ := hU₀p w₁ hw₁ a₀ b₀ ha₀ hb₀ haη hbη
+  refine ⟨m.base z, hz, ?_, ?_⟩
+  · rw [← Scheme.Hom.comp_apply, pullback.lift_fst, Scheme.Hom.comp_apply, h₁]
+  · rw [← Scheme.Hom.comp_apply, pullback.lift_snd, Scheme.Hom.comp_apply, h₂]
+
+/-- The spectrum of an ind-étale algebra over an affine open of a regular locally Noetherian
+scheme `Y` is generically connected over `Y`: it is the limit of a cofiltered diagram of affine
+schemes étale over `Y`, which are regular and locally Noetherian. -/
+lemma isGenericallyConnected_SpecMap_comp_fromSpec {Y : Scheme.{u}} [IsLocallyNoetherian Y]
+    [IsRegular Y] {U : Y.Opens} (hU : IsAffineOpen U) {T : CommRingCat.{u}} (ψ : Γ(Y, U) ⟶ T)
+    (hψ : ψ.hom.IndEtale) {η : Y} (hη : ∀ y, η ⤳ y) :
+    IsGenericallyConnected (Spec.map ψ ≫ hU.fromSpec) η := by
+  obtain ⟨J, _, _, D, t, s, hs, hts⟩ := proAffineEtale_Spec_iff.mpr hψ
+  have (j : J) : IsAffine (D.obj j) := MorphismProperty.ofObjectProperty_top_right_iff.mp
+    (hts j).1.2
+  have (j : J) : Etale (t.app j) := (hts j).1.1
+  let t' : D ⟶ (Functor.const J).obj Y := t ≫ (Functor.const J).map hU.fromSpec
+  have ht' (j : J) : t'.app j = t.app j ≫ hU.fromSpec := rfl
+  have (j : J) : LocallyQuasiFinite (t'.app j) := by
+    rw [ht']
+    infer_instance
+  refine isGenericallyConnected_of_isLimit _ hs (t := t') (fun j ↦ by
+    rw [ht', ← Category.assoc, (hts j).2]) (fun j q ↦ ?_) hη
+  have : IsLocallyNoetherian (D.obj j) :=
+    LocallyOfFiniteType.isLocallyNoetherian (t.app j ≫ hU.fromSpec)
+  have : IsRegular (D.obj j) :=
+    ⟨isRegularLocalRing_stalk_of_etale (t.app j ≫ hU.fromSpec) fun _ ↦ inferInstance⟩
+  exact IsRegular.exists_isOpen_specializes _ q
+
+/-- **Generically connected covers.** Let `Y` be a regular locally Noetherian scheme, `η` a
+point of `Y` specializing to every point, and `f : V ⟶ Y` weakly étale with `V`
+quasi-compact. There is a flat surjective submersive morphism `j : W ⟶ V` from an affine
+scheme such that `j ≫ f` is generically connected relative to `η`: cover `V` by finitely many
+affine opens `Spec B` mapping to affine opens `Spec R` of `Y`, and take `W = ∐ Spec C` for
+faithfully flat ind-étale `B`-algebras `C` which are ind-étale over `R` (Stacks 097Z,
+`Algebra.WeaklyEtale.exists_indEtale`). -/
+theorem exists_isGenericallyConnected_cover {Y V : Scheme.{u}} [IsLocallyNoetherian Y]
+    [IsRegular Y] (f : V ⟶ Y) [WeaklyEtale f] [CompactSpace V] {η : Y} (hη : ∀ y, η ⤳ y) :
+    ∃ (W : Scheme.{u}) (j : W ⟶ V), IsAffine W ∧ Flat j ∧ Function.Surjective j.base ∧
+      (∀ E : Set V, IsOpen (j.base ⁻¹' E) → IsOpen E) ∧ IsGenericallyConnected (j ≫ f) η := by
+  classical
+  -- affine opens of `V` mapping into affine opens of `Y`
+  have hloc (x : V) : ∃ (U : Y.Opens) (Vx : V.Opens), IsAffineOpen U ∧ IsAffineOpen Vx ∧
+      x ∈ Vx ∧ Vx ≤ f ⁻¹ᵁ U := by
+    obtain ⟨U, hU, hxU, -⟩ :=
+      exists_isAffineOpen_mem_and_subset (X := Y) (x := f.base x) (U := ⊤) trivial
+    obtain ⟨Vx, hVx, hxV, hle⟩ :=
+      exists_isAffineOpen_mem_and_subset (X := V) (x := x) (U := f ⁻¹ᵁ U) hxU
+    exact ⟨U, Vx, hU, hVx, hxV, hle⟩
+  choose U Vx hU hVx hxV hle using hloc
+  obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover (fun x ↦ (Vx x : Set V))
+    (fun x ↦ (Vx x).isOpen) (fun x _ ↦ Set.mem_iUnion.2 ⟨x, hxV x⟩)
+  -- Stacks 097Z on each piece
+  have hpiece (x : V) : ∃ (T : CommRingCat.{u}) (g : Γ(V, Vx x) ⟶ T), g.hom.FaithfullyFlat ∧
+      (f.appLE (U x) (Vx x) (hle x) ≫ g).hom.IndEtale := by
+    have hw : (f.appLE (U x) (Vx x) (hle x)).hom.WeaklyEtale :=
+      HasRingHomProperty.appLE @WeaklyEtale f inferInstance ⟨U x, hU x⟩ ⟨Vx x, hVx x⟩ (hle x)
+    obtain ⟨T, _, g, -, h₂, h₃⟩ := hw.exists_indEtale_comp
+    exact ⟨.of T, CommRingCat.ofHom g, h₂, h₃⟩
+  choose T g hg₂ hg₃ using hpiece
+  let π (x : V) : Spec (T x) ⟶ V := Spec.map (g x) ≫ (hVx x).fromSpec
+  have hπf (x : V) : π x ≫ f =
+      Spec.map (f.appLE (U x) (Vx x) (hle x) ≫ g x) ≫ (hU x).fromSpec := by
+    simp only [π, Spec.map_comp, Category.assoc]
+    rw [IsAffineOpen.SpecMap_appLE_fromSpec f (hU x) (hVx x) (hle x)]
+  have hflat (x : V) : Flat (Spec.map (g x)) ∧ Surjective (Spec.map (g x)) :=
+    (flat_and_surjective_SpecMap_iff _).2 (hg₂ x)
+  let W := ∐ fun x : t ↦ Spec (T x.1)
+  let j : W ⟶ V := Sigma.desc fun x : t ↦ π x.1
+  have hιj (x : t) : Sigma.ι (fun x : t ↦ Spec (T x.1)) x ≫ j = π x.1 := Sigma.ι_desc _ _
+  refine ⟨W, j, inferInstance, ?_, fun v ↦ ?_, fun E hE ↦ ?_, fun w ↦ ?_⟩
+  · have (x : t) : Flat (π x.1) := by
+      have := (hflat x.1).1
+      infer_instance
+    infer_instance
+  · obtain ⟨x, hxt, hx⟩ := Set.mem_iUnion₂.1 (ht (Set.mem_univ v))
+    obtain ⟨p, hp⟩ : v ∈ Set.range (hVx x).fromSpec.base := by
+      rw [IsAffineOpen.range_fromSpec]
+      exact hx
+    have := (hflat x).2
+    obtain ⟨q, rfl⟩ := (Spec.map (g x)).surjective p
+    refine ⟨(Sigma.ι (fun x : t ↦ Spec (T x.1)) ⟨x, hxt⟩).base q, ?_⟩
+    rw [← Scheme.Hom.comp_apply, hιj, ← hp, Scheme.Hom.comp_apply]
+  · have hcov : E = ⋃ x ∈ t, (hVx x).fromSpec.base '' ((hVx x).fromSpec.base ⁻¹' E) := by
+      ext v
+      simp only [Set.mem_iUnion, Set.image_preimage_eq_inter_range, IsAffineOpen.range_fromSpec,
+        Set.mem_inter_iff, exists_and_left, exists_prop]
+      refine ⟨fun hv ↦ ⟨hv, ?_⟩, fun h ↦ h.1⟩
+      obtain ⟨x, hxt, hx⟩ := Set.mem_iUnion₂.1 (ht (Set.mem_univ v))
+      exact ⟨x, hxt, hx⟩
+    rw [hcov]
+    refine isOpen_biUnion fun x hxt ↦ (hVx x).fromSpec.isOpenEmbedding.isOpenMap _ ?_
+    have := (hflat x).1
+    have := (hflat x).2
+    refine (Flat.isQuotientMap_of_surjective (Spec.map (g x))).isOpen_preimage.mp ?_
+    have h₁ : (π x).base ⁻¹' E =
+        (Sigma.ι (fun x : t ↦ Spec (T x.1)) ⟨x, hxt⟩).base ⁻¹' (j.base ⁻¹' E) := by
+      rw [← Set.preimage_comp, ← TopCat.coe_comp, ← Scheme.Hom.comp_base, hιj]
+    have h₂ := hE.preimage (Sigma.ι (fun x : t ↦ Spec (T x.1)) ⟨x, hxt⟩).base.hom.continuous
+    rw [← h₁] at h₂
+    rwa [Scheme.Hom.comp_base, TopCat.coe_comp, Set.preimage_comp] at h₂
+  · obtain ⟨⟨x, q⟩, rfl⟩ := (sigmaMk fun x : t ↦ Spec (T x.1)).surjective w
+    rw [sigmaMk_mk]
+    refine IsGenericallyConnectedAt.of_openImmersion _ _ ?_
+    have : Sigma.ι (fun x : t ↦ Spec (T x.1)) x ≫ j ≫ f =
+        Spec.map (f.appLE (U x) (Vx x) (hle x) ≫ g x) ≫ (hU x).fromSpec := by
+      rw [reassoc_of% hιj, hπf]
+    rw [this]
+    exact isGenericallyConnected_SpecMap_comp_fromSpec (hU x) _ (hg₃ x) hη q
 
 end AlgebraicGeometry

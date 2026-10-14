@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedDescent
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.GenericallyConnected
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 
 /-!
@@ -29,8 +30,9 @@ from the theory of the pro-étale fundamental group is Bhatt–Scholze, *The pro
 for schemes*, Lemma 7.4.10: on a geometrically unibranch scheme every locally constant sheaf of
 sets on `Y_proét` is a disjoint union of finite étale `Y`-schemes
 (`AlgebraicGeometry.exists_isTwistedSection_finiteEtale`). It is reduced to the finiteness of
-its components (`AlgebraicGeometry.exists_finite_invariant_subset`, the unproved input) and
-the finite case. It is combined with the splitting of finite étale `Y`-schemes over `Ỹ_y` at all
+its components (`AlgebraicGeometry.exists_finite_invariant_subset`), proved from the local
+irreducibility of regular schemes étale over `Y` (`AlgebraicGeometry.IsGenericallyConnected`),
+and the finite case. It is combined with the splitting of finite étale `Y`-schemes over `Ỹ_y` at all
 geometric points (`AlgebraicGeometry.Scheme.UniversalCovers.exists_comp_eq_of_finiteEtale`),
 deduced from `AlgebraicGeometry.Scheme.UniversalCovers.bijective_fiber` in the Galois category
 of finite étale `Ỹ_y`-schemes.
@@ -165,7 +167,6 @@ theorem exists_isTwistedSection_finiteEtale_of_fin (f : V ⟶ Y) [WeaklyEtale f]
   refine (congrArg (c _) hξb).trans ?_
   rw [← Scheme.Hom.comp_apply, e₃, hb]
 
-
 /-- **The components of a locally constant sheaf of sets on a geometrically unibranch scheme are
 finite** (Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 7.4.10), in cocycle form.
 Let `Y` be a connected regular (hence normal, hence geometrically unibranch) Noetherian scheme,
@@ -174,12 +175,13 @@ Let `Y` be a connected regular (hence normal, hence geometrically unibranch) Noe
 the fibre `S` at a point `v` of `V` lies in a finite subsheaf of `F_c`: a locally constant
 function `T` from `V` to finite subsets of `S`, compatible with `c`, with `s ∈ T v`.
 
-Indeed `F_c` corresponds to a geometric cover of `Y` (Bhatt–Scholze, Lemma 7.3.9), which on a
-geometrically unibranch scheme is a disjoint union of finite étale `Y`-schemes (Lemma 7.4.10:
-`π₁^proét(Y)` is profinite, so orbits of the monodromy action on `S` are finite); `T` is the
-summand containing `s`, restricted to `V`, where `F_c` is the constant sheaf `S_V`. Normality is
-necessary: on a nodal curve, a cocycle with values in the shifts of `ℤ` along the loop has
-infinite orbits. -/
+The subsheaf `T` is the orbit of `s` at a generization lying over the generic point `η` of
+`Y` (`AlgebraicGeometry.exists_finite_invariant_subset_of_isGenericallyConnected`), after
+replacing `V` by a cover which is ind-étale over affine opens of `Y`
+(`AlgebraicGeometry.exists_isGenericallyConnected_cover`, via Stacks 097Z) and on which nearby
+generic points are connected close to the diagonal, by local irreducibility of the regular
+schemes étale over `Y`. Normality is necessary: on a nodal curve, a cocycle with values in the
+shifts of `ℤ` along the loop has infinite orbits. -/
 theorem exists_finite_invariant_subset [IsLocallyNoetherian Y] [CompactSpace Y]
     [IsRegular Y] [ConnectedSpace Y] (f : V ⟶ Y) [WeaklyEtale f] [Surjective f]
     [QuasiCompact f] {S : Type*} {c : ↥(pullback f f) → S → S} (hc : IsDescentCocycle f c)
@@ -187,7 +189,12 @@ theorem exists_finite_invariant_subset [IsLocallyNoetherian Y] [CompactSpace Y]
     ∃ T : V → Set S, (∀ v, (T v).Finite) ∧ IsLocallyConstant T ∧
       (∀ z, T ((pullback.fst f f).base z) = c z '' T ((pullback.snd f f).base z)) ∧
         s ∈ T v := by
-  sorry
+  have := IsRegular.isIntegral Y
+  have : CompactSpace V := QuasiCompact.compactSpace_of_compactSpace f
+  have hη : ∀ y : Y, genericPoint Y ⤳ y := genericPoint_specializes
+  obtain ⟨W, j, _, _, hj, hsub, hQ⟩ := exists_isGenericallyConnected_cover f hη
+  exact exists_finite_invariant_subset_of_comp f j hj hsub hc (fun w s' ↦
+    exists_finite_invariant_subset_of_isGenericallyConnected (j ≫ f) hη hQ hc.restrict w s') v s
 
 /-- **Locally constant sheaves of sets on a geometrically unibranch scheme are unions of finite
 étale ones** (Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 7.4.10, with Lemma

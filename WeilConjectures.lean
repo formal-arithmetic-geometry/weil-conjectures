@@ -2567,7 +2567,9 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseAbelian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.CocycleLimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Congruence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Descent
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.FiniteOrbit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.GLValues
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.GenericallyConnected
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.SheafGluing
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Transition
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Trivialization

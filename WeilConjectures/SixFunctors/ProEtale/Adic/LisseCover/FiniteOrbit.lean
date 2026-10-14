@@ -85,7 +85,9 @@ lemma IsDescentCocycle.comp_swap (hc : IsDescentCocycle f c) (z : ↥(pullback f
   let L : pullback f f ⟶ tripleProduct f :=
     pullback.lift (𝟙 _) (pairSwap f) (by simp [pairSwap])
   have hL : L ≫ tripleProj₁₃ f = pullback.fst f f ≫ pullback.diagonal f :=
-    pullback.hom_ext (by simp [L, pairSwap]; exact Category.id_comp _) (by simp [L, pairSwap])
+    pullback.hom_ext (by
+      rw [Category.assoc, pullback.lift_fst, pullback.lift_fst_assoc, Category.id_comp,
+        Category.assoc, pullback.diagonal_fst, Category.comp_id]) (by simp [L, pairSwap])
   have h₁ : L ≫ pullback.fst _ _ = 𝟙 _ := pullback.lift_fst _ _ _
   have h₂ : L ≫ pullback.snd _ _ = pairSwap f := pullback.lift_snd _ _ _
   have := hc.cocycle (L.base z)
