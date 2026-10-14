@@ -16,15 +16,15 @@
  },
  "proof": [
   {
-   "text": "Choose a Cartier chart at j(eta). The stalk ideal is principal on a nonzerodivisor. The closed-immersion quotient is the field stalk of the integral generic point eta, so this ideal is the maximal ideal of the DVR R. Thus the inverse image of V is the complement of the closed point of Spec R.",
+   "text": "Pull the invertible Cartier ideal back along the flat canonical morphism Spec R -> N (Scheme.flat_fromSpecStalk and IsInvertible.comap_of_flat). A Cartier chart containing the closed point of the local spectrum is the whole spectrum (IsLocalRing.closedPoint_mem_iff). Thus the pulled ideal is generated on Spec R by a nonzero global section. By support_comap and range_subschemeι its support is the inverse image of the centre. The generator excludes the zero prime; every nonzero prime of the DVR is its maximal ideal. The closed point belongs to the inverse image since fromSpecStalk sends it to j(eta). This proves that the inverse image of the centre consists exactly of the closed point, without using integrality or genericity of D.",
    "uses": [
     "def-nagata-effective-cartier-ideal",
-    "def-pc-integral-scheme"
+    "def-sc-discrete-valuation-ring"
    ],
    "elementary": false
   },
   {
-   "text": "A uniformizer generates the maximal ideal. Every nonzero DVR element is a unit times a power of this uniformizer, hence localization at it is the fraction field. The open complement is Spec K over Spec R. Factor its composite to N through V and use the equality of open images to obtain the asserted cartesian square.",
+   "text": "Choose an irreducible uniformizer. Every nonzero DVR element is associated to a power of it (IsDiscreteValuationRing.associated_pow_irreducible). IsLocalization.iff_of_le_of_exists_dvd therefore gives IsLocalization.Away for the fraction field. IsOpenImmersion.of_isLocalization makes Spec K -> Spec R an open immersion; localization_away_comap_range and the DVR prime dichotomy identify its range with the complement of the closed point. The first step and hV identify this range with the inverse image of V. Lift the composite Spec K -> N through V using IsOpenImmersion.lift, and apply IsOpenImmersion.isPullback to the commuting square and the equality of open ranges.",
    "uses": [
     "def-sc-discrete-valuation-ring",
     "def-pc-fibre-product"
@@ -35,16 +35,15 @@
  "proof_deps": [
   "def-nagata-effective-cartier-ideal",
   "def-pc-fibre-product",
-  "def-pc-integral-scheme",
   "def-sc-discrete-valuation-ring"
  ],
  "proof_origin": {
   "kind": "written-by-agent",
-  "by": "agent",
-  "group": "P4",
+  "by": "worker",
+  "group": "H1",
   "document": "Stacks Project",
-  "place": "Tag 01WQ, Lemmas 31.14.2-4; step 1 of lem-sbc-cartier-stalk-normalization-product",
-  "note": "Argument written by P4 from the cited source and the parent node steps; source pages checked online because literature texts are absent in this clone."
+  "place": "Tag 01WQ; Cartier local-equation argument and DVR localization",
+  "note": "Fully checked Lean proof using the proved Cartier ideal flat-pullback API and Mathlib localization/open-immersion APIs. Avoids identifying the quotient stalk with the field stalk of D."
  },
  "mathlib_searches": [
   {
@@ -125,10 +124,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P4",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261014T022551-L-4047434",
-  "kind": "interface",
+  "landing": "20261014T025139-L-156730",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
