@@ -36,22 +36,28 @@ noncomputable section
 variable (X : Scheme.{u})
   [HasDerivedCategory.{u} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
-local instance : CommRing ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) :=
+local instance moduleCupCompatibilityCommRing :
+    CommRing ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) :=
   inferInstanceAs (CommRing Γ(X, ⊤))
 
-local instance : MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance moduleCupCompatibilityMonoidal :
+    MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.monoidalCategory X.toRingedSpace.sheaf
-local instance : SymmetricCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance moduleCupCompatibilitySymmetric :
+    SymmetricCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.symmetricCategory X.toRingedSpace.sheaf
 
-local instance : HasColimitsOfSize.{0, 0} (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance moduleCupCompatibilityColimits :
+    HasColimitsOfSize.{0, 0} (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   hasColimitsOfSizeShrink.{0, 0, u} _
 
-local instance : MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance moduleCupCompatibilityPreadditive :
+    MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).1
-local instance : MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance moduleCupCompatibilityClosed :
+    MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).2.1
-local instance : Abelian.HasFunctorialFlatResolution
+local instance moduleCupCompatibilityFlatResolution : Abelian.HasFunctorialFlatResolution
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   schemeModule_hasFunctorialFlatResolution X
 

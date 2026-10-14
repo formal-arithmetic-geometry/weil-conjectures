@@ -13,6 +13,8 @@ public import Sheaf.AlgebraicGeometry.EtaleTensorSections
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import Sheaf.Paper.CechRefinementComparisonSquare
 import Sheaf.Paper.CechCupResolutionRepresentatives
+import Sheaf.Paper.ModuleCupCoefficientResolutionMaps
+import Sheaf.Paper.ModuleCupPullbackResolutionMaps
 import Sheaf.Paper.ModuleCohomologyCupProduct
 
 /-! # Cech cup products and pullback
@@ -313,6 +315,65 @@ theorem cechCupPullbackCompat (X X' : Scheme.{v}) (f : X' ⟶ X)
     ConcreteCategory.id_apply] using h
 
 
+/-- Computing resolution classes are surjective, since both comparison maps are isomorphisms. -/
+private theorem resolution_class_surjective {X : Scheme.{v}} {F : X.Modules}
+    (D : CupAcyclicResolution F) (n : ℕ) : Function.Surjective (D.class n) := by
+  let : EnoughInjectives X.Modules :=
+    (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
+  let := RingedSpace.globalSectionsFunctor_additive X.toRingedSpace
+  let T := (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+    (ComplexShape.up ℕ)
+  have : IsIso (HomologicalComplex.homologyMap (T.map D.comparison) n) := D.computes n
+  exact ((ModuleCat.epi_iff_surjective
+    (D.I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) n).inv).1
+      inferInstance).comp
+    (((ModuleCat.epi_iff_surjective
+      (HomologicalComplex.homologyMap (T.map D.comparison) n)).1 inferInstance).comp
+        (cycle_class_surjective (T.obj D.K) n))
+
+/-- Leibniz supplies the cocycle of a resolution pairing. -/
+private theorem resolution_pair_cycle {X : Scheme.{v}} {F G : X.Modules}
+    (D : CupResolutionPairing F G) (p q : ℕ)
+    (a : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+      (ComplexShape.up ℕ)).obj D.left.K).sc p).moduleCatLeftHomologyData.K)
+    (b : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+      (ComplexShape.up ℕ)).obj D.right.K).sc q).moduleCatLeftHomologyData.K) :
+    ∃ c : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+      (ComplexShape.up ℕ)).obj D.target.K).sc (p + q)).moduleCatLeftHomologyData.K,
+      c.val = D.pair p q ⊤ a.val b.val := by
+  have ha := cycle_val_d
+    ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+      (ComplexShape.up ℕ) |>.obj D.left.K) p (p + 1) a
+  have hb := cycle_val_d
+    ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+      (ComplexShape.up ℕ) |>.obj D.right.K) q (q + 1) b
+  change (D.left.K.d p (p + 1)).val.app (op ⊤) a.val = 0 at ha
+  change (D.right.K.d q (q + 1)).val.app (op ⊤) b.val = 0 at hb
+  refine ⟨⟨D.pair p q ⊤ a.val b.val, ?_⟩, rfl⟩
+  change (D.target.K.d (p + q) ((ComplexShape.up ℕ).next (p + q))).val.app (op ⊤)
+    (D.pair p q ⊤ a.val b.val) = 0
+  rw [ComplexShape.next_eq' (ComplexShape.up ℕ) (by simp :
+    (ComplexShape.up ℕ).Rel (p + q) (p + q + 1))]
+  rw [D.leibniz, ha, hb]
+  simp
+
+/-- An additive cochain map carries a kernel cocycle across a change of scalar ring. -/
+private def map_cycle_additive {R S : Type v} [Ring R] [Ring S]
+    {K : CochainComplex (ModuleCat.{v} R) ℕ}
+    {L : CochainComplex (ModuleCat.{v} S) ℕ}
+    (u : ((forget₂ _ AddCommGrpCat.{v}).mapHomologicalComplex (.up ℕ)).obj K ⟶
+      ((forget₂ _ AddCommGrpCat.{v}).mapHomologicalComplex (.up ℕ)).obj L)
+    (n : ℕ) (a : (K.sc n).moduleCatLeftHomologyData.K) :
+    (L.sc n).moduleCatLeftHomologyData.K := by
+  refine ⟨u.f n a.val, ?_⟩
+  have h := ConcreteCategory.congr_hom (u.comm n ((ComplexShape.up ℕ).next n)).symm a.val
+  change u.f ((ComplexShape.up ℕ).next n) (K.d n ((ComplexShape.up ℕ).next n) a.val) =
+    L.d n ((ComplexShape.up ℕ).next n) (u.f n a.val) at h
+  rw [cycle_val_d, map_zero] at h
+  exact h.symm
+
+set_option maxHeartbeats 800000 in
+-- Three resolution-class transports require additional elaboration steps.
 /-- The sheaf cup product is natural in both coefficient sheaves.
 Source: Stacks Project, Tags 07MB and 0FKV
 (blueprint: lem-sc-picard-cech-cup-pullback-compat).
@@ -337,8 +398,28 @@ theorem moduleCup_coefficient_naturality (X : Scheme.{v})
         (@id (F ⊗ G ⟶ F₁ ⊗ G₁) (φ ⊗ₘ ψ)) (cup a b) =
       cup₁ ((RingedSpace.moduleCohomology X.toRingedSpace p).map φ a)
         ((RingedSpace.moduleCohomology X.toRingedSpace q).map ψ b) := by
-  sorry
+  obtain ⟨D, E, l, r, t, hl, hr, ht, hpair⟩ :=
+    moduleCup_coefficient_resolution_maps X F G F₁ G₁ φ ψ
+  intro x y
+  obtain ⟨a, rfl⟩ := resolution_class_surjective D.left p x
+  obtain ⟨b, rfl⟩ := resolution_class_surjective D.right q y
+  obtain ⟨c, hcpair⟩ := resolution_pair_cycle D p q a b
+  let T := (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+    (ComplexShape.up ℕ)
+  let a' := map_cycle (T.map l) p a
+  let b' := map_cycle (T.map r) q b
+  let c' := map_cycle (T.map t) (p + q) c
+  have ha' : a'.val = (l.f p).val.app (op ⊤) a.val := map_cycle_val _ _ _
+  have hb' : b'.val = (r.f q).val.app (op ⊤) b.val := map_cycle_val _ _ _
+  have hc' : c'.val = (t.f (p + q)).val.app (op ⊤) c.val := map_cycle_val _ _ _
+  have hpair' : c'.val = E.pair p q ⊤ a'.val b'.val := by
+    rw [hc', hcpair, hpair, ha', hb']
+  rw [hc D a b c hcpair, ← ht (p + q) c c' hc',
+    ← hl p a a' ha', ← hr q b b' hb']
+  exact (hc₁ E a' b' c' hpair').symm
 
+set_option maxHeartbeats 800000 in
+-- Transporting cycles between two scalar rings requires additional elaboration steps.
 /-- Pullback carries the sheaf cup product to the product of pulled-back classes,
 using the canonical tensor-pullback comparison on the coefficient sheaves.
 Source: Stacks Project, Tags 01FD, 07MB and 0FKV
@@ -368,7 +449,28 @@ theorem moduleCup_pullback_naturality (X X' : Scheme.{v}) (f : X' ⟶ X)
         ((Classical.choose (module_pullback_tensor f)) F G).hom
         (moduleCohomologyPullback f (@id X.Modules (F ⊗ G)) (p + q) (cup a b)) =
       cup' (moduleCohomologyPullback f F p a) (moduleCohomologyPullback f G q b) := by
-  sorry
+  obtain ⟨D, E, l, r, t, hl, hr, ht, hpair⟩ :=
+    moduleCup_pullback_resolution_maps X X' f F G
+  intro x y
+  obtain ⟨a, rfl⟩ := resolution_class_surjective D.left p x
+  obtain ⟨b, rfl⟩ := resolution_class_surjective D.right q y
+  obtain ⟨c, hcpair⟩ := resolution_pair_cycle D p q a b
+  let TX := (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+    (ComplexShape.up ℕ)
+  let TY := (RingedSpace.globalSectionsFunctor X'.toRingedSpace).mapHomologicalComplex
+    (ComplexShape.up ℕ)
+  let a' := map_cycle_additive (K := TX.obj D.left.K) (L := TY.obj E.left.K) l p a
+  let b' := map_cycle_additive (K := TX.obj D.right.K) (L := TY.obj E.right.K) r q b
+  let c' := map_cycle_additive (K := TX.obj D.target.K) (L := TY.obj E.target.K)
+    t (p + q) c
+  have ha' : a'.val = l.f p a.val := rfl
+  have hb' : b'.val = r.f q b.val := rfl
+  have hct : c'.val = t.f (p + q) c.val := rfl
+  have hpair' : c'.val = E.pair p q ⊤ a'.val b'.val := by
+    rw [hct, hcpair, hpair, ha', hb']
+  rw [hc D a b c hcpair, ← ht (p + q) c c' hct,
+    ← hl p a a' ha', ← hr q b b' hb']
+  exact (hc' E a' b' c' hpair').symm
 
 /-- Refinement of Cech cochains is natural in the coefficient module.
 Source: Stacks Project, Tag 01FD
