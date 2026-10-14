@@ -11,10 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
-public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarCompCoherence
-public import WeilConjectures.SixFunctors.ProEtale.Derived.WeilComplex
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarCompCoherence
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.WeilComplex
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.TopInvariance
 
 /-!
 # Weil complexes, relative Frobenius and topological invariance

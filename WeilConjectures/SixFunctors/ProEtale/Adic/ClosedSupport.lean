@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.SixFunctors.ClosedImmersionStages
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
 
 /-!
 # Sheaves supported on a closed subscheme, with `ℓ`-adic coefficients

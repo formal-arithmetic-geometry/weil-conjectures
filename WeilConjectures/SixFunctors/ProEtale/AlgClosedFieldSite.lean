@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Sites.EpiMono
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
 
 /-!
 # The pro-étale site of the spectrum of an algebraically closed field

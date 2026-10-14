@@ -6,11 +6,11 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
-public import WeilConjectures.SixFunctors.ProEtale.Derived.Hom
-public import WeilConjectures.SixFunctors.ProEtale.Derived.Shift
-public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
-public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Shift
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriek
 
 /-!
 # Coefficients and the geometric operation package of the trace formula

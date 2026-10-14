@@ -5,6 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShriek
+
 public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint

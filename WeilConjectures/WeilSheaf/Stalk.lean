@@ -10,8 +10,8 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Detection
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Restriction
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Detection
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Restriction
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule
 
