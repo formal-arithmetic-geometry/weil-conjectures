@@ -4,10 +4,10 @@
   "is": null,
   "from": {
    "node": "def-weil-derived-direct-image",
-   "place": "its statement (a notion the statement uses)",
+   "place": "statement, first paragraph: 'the functor $f_*:\\Sh(X_{\\mathrm{proet}},A)\\to\\Sh(Y_{\\mathrm{proet}},A)$ is left exact'",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Pro-etale direct image is left exact",
@@ -25,9 +25,52 @@
  "stmt_deps": [
   "def-weil-proetale-module-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For two module-sheaf morphisms $a,b:F\\to G$, addition is addition on sections. By the formula for direct image on morphisms, for each $V\\to Y$ one has $(f_*(a+b))_V=(a+b)_{V\\times_YX}=a_{V\\times_YX}+b_{V\\times_YX}=(f_*a)_V+(f_*b)_V$. The same formula gives $f_*0=0$ on morphisms. Equality of sheaf morphisms is equality of all components, so $f_*$ is additive.",
+   "uses": [
+    "def-weil-proetale-module-direct-image",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), preceding section-kernels: addition and kernels on sections; compare Tag 03DC (lemma-exactness-pushforward-pullback)"
+   }
+  },
+  {
+   "text": "Use the small-site/module-universe convention of the direct-image definition, so both module categories are abelian. Let $b:F\\to G$ and put $K=\\ker b$ in the category of $A_X$-module sheaves. Kernels of module sheaves are computed sectionwise. Thus for every $V\\to Y$, $(f_*K)(V)=K(V\\times_YX)=\\{s\\in F(V\\times_YX):b_{V\\times_YX}(s)=0\\}=\\ker((f_*b)_V)$. These identifications commute with restriction because each kernel has the restrictions induced from $F$. They respect the $A_Y(V)$-action because on both sides it is restriction of the $A_X(V\\times_YX)$-action along the component $\\rho^f_{A,V}:A_Y(V)\\to A_X(V\\times_YX)$ of the constant-ring structure map specified in the direct-image definition. The inclusion is on each object the kernel inclusion. Consequently $f_*K\\to f_*F$ is the kernel of $f_*b$. Also $f_*$ sends the zero sheaf to the zero sheaf, since its value at every object is the zero module.",
+   "uses": [
+    "def-weil-proetale-module-direct-image",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), preceding section-kernels: addition and kernels on sections; compare Tag 03DC (lemma-exactness-pushforward-pullback)"
+   }
+  },
+  {
+   "text": "Write the given sequence as $0\\to F\\xrightarrow{a}G\\xrightarrow{b}H$, relabelling its three terms. In an abelian category its exactness says precisely that $a$ identifies $F$ with $\\ker b$: $a$ is monic, and its image is $\\ker b$. Let $c:F\\xrightarrow{\\sim}\\ker b$ be this identification, so $a$ is $c$ followed by the kernel inclusion. A functor sends an isomorphism to an isomorphism, since it sends the two inverse identities to inverse identities. Applying $f_*$, step 2 therefore identifies $f_*a$ with the kernel inclusion of $f_*b$, up to the isomorphism $f_*c$. It is monic with image that kernel. Together with preservation of the zero sheaf, this is exactly the asserted exactness $0\\to f_*F\\to f_*G\\to f_*H$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), preceding section-kernels: addition and kernels on sections; compare Tag 03DC (lemma-exactness-pushforward-pullback)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-module-direct-image",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Explicit sectionwise-kernel proof using section-kernels and Tag 03DA; proves the direct-image assertion of Tag 03DC without using the adjunction proof there"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -42,10 +85,87 @@
    "results": "none in these files",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward|PreservesFiniteLimits|Additive",
+   "results": "8; 15; 19; 20; 21",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the small pro-etale constant-ring-sheaf module functor; general site constructions or module limits only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The direct image functor on sheaves of modules over constant ring sheaves on small pro-etale sites is additive and left exact",
+   "results": "LightCondMod.ofSheafLightProfinite; CondensedMod.ofSheafProfinite; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CompHausLike.LocallyConstantModule.functor; CondensedMod.ofSheafCompHaus; LightCondensed.instIsGrothendieckAbelianLightCondMod; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; Condensed.profiniteSolid",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the small pro-etale constant-ring-sheaf module functor; general site constructions or module limits only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pushforward of sheaves of modules preserves kernels and is additive",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward",
+   "results": "SheafOfModules.pushforwardId; SheafOfModules.pushforward; SheafOfModules.instIsLeftAdjointOverOverRingCatPushforwardIdSheafOver; SheafOfModules.overPushforwardOverAdj; SheafOfModules.isLeftAdjoint_pushforward_of_isIso; SheafOfModules.pushforwardCongr; SheafOfModules.pushforwardNatIso; SheafOfModules.pushforwardNatTrans",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the small pro-etale constant-ring-sheaf module functor; general site constructions or module limits only"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesLimits|[Aa]dditive|[Kk]ernel",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the small pro-etale constant-ring-sheaf module functor; general site constructions or module limits only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along a continuous functor of sites preserves kernels of sheaves of modules",
+   "results": "SheafOfModules.restrictScalars; SheafOfModules.restrictScalars_obj_val; AlgebraicGeometry.Scheme.kerFunctor; AlgebraicGeometry.Scheme.IdealSheafData.map_ker; SheafOfModules.instAdditiveRestrictScalars; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.kerFunctor_map; SheafOfModules.instAbelian",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the small pro-etale constant-ring-sheaf module functor; general site constructions or module limits only"
+  },
+  {
+   "tool": "grep",
+   "query": "instAdditive|preservesFiniteLimits|PreservesLimits",
+   "results": "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Sites/BigZariski.lean; Mathlib/AlgebraicGeometry/Sites/BigZariski.lean; Mathlib/AlgebraicGeometry/Sites/BigZariski.lean; Mathlib/AlgebraicGeometry/Sites/BigZariski.lean; Mathlib/AlgebraicGeometry/Sites/BigZariski.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match: results concern module-sheaf evaluation/forgetful functors or general limit preservation, not this pro-etale module direct image"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"preserve\"",
+   "results": "SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf; SheafOfModules.forgetPreservesLimitsOfSize; SheafOfModules.Finite.forgetPreservesFiniteLimits; SheafOfModules.forgetPreservesLimitsOfShape; SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf; SheafOfModules.evaluationPreservesLimitsOfSize; SheafOfModules.Finite.evaluationPreservesFiniteLimits; SheafOfModules.evaluationPreservesLimitsOfShape",
+   "date": "2026-10-14",
+   "verdict": "no exact match: results concern module-sheaf evaluation/forgetful functors or general limit preservation, not this pro-etale module direct image"
+  },
+  {
+   "tool": "grep",
+   "query": "preserv.*[Kk]ernel|[Aa]dditive.*pushforward|pushforward.*[Aa]dditive",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no exact match: generic module-sheaf forgetful functors, abelian structure, presheaf pushforward, or structure-sheaf modules do not state this constant-ring pro-etale direct-image result"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, \"additive\"",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no exact match: generic module-sheaf forgetful functors, abelian structure, presheaf pushforward, or structure-sheaf modules do not state this constant-ring pro-etale direct-image result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor on ringed site module sheaves given by precomposition preserves sectionwise kernels",
+   "results": "SheafOfModules.instAdditivePresheafOfModulesValRingCatForget; SheafOfModules.instAbelian; SheafOfModules.instPreadditive; AlgebraicGeometry.Scheme.Modules.instAbelian; PresheafOfModules.pushforward₀_obj_obj_isAddCommGroup; AlgebraicGeometry.Scheme.Modules.instAdditivePushforward; PresheafOfModules.instAbelian; SheafOfModules.instAdditiveSheafAddCommGrpCatToSheaf",
+   "date": "2026-10-14",
+   "verdict": "no exact match: generic module-sheaf forgetful functors, abelian structure, presheaf pushforward, or structure-sheaf modules do not state this constant-ring pro-etale direct-image result"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +185,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-proetale-module-direct-image-left-exact",
+  "worker": "stage1",
+  "summary": "Proved additivity on components and preservation of module kernels by the direct-image section formula, then identified a left exact sequence with a kernel. Reused the existing module-category Mathlib leaf; no new nodes or coefficient-category identifications. Statement unchanged. Repair of the returned delivery: re-read the current direct-image definition and module-category statement; use its explicit rho^f_A scalar map and size convention in step 2, and replace stale verbatim citation quotes. No dependency or statement change.",
+  "blueprint": "Realizes the first-paragraph assertion 'the functor f_* ... is left exact' of def-weil-derived-direct-image; unit sk-def-sf-operations clause (ii)."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-d90169157",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-d90169157 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited dependencies, unit/chapter route, Stacks 03CV/03D6/03D7/03DA/03DC, and archived master target declarations. All three steps check out, including scalar actions, sectionwise kernels, and edge cases. No new nodes, circular dependencies, unsupported coefficient comparisons, repairs, or accepted tool_uses. Concrete checks recorded in review.md."
+ }
 }
