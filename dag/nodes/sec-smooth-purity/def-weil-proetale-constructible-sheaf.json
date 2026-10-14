@@ -4,14 +4,14 @@
   "is": null,
   "from": {
    "node": "def-weil-finite-torsion-constructibility",
-   "place": "its statement (a notion the statement uses)",
+   "place": "statement, second paragraph: \"A sheaf of $A_{E,n}$-modules on $Y_{\\mathrm{proet}}$ is *constructible* if there is a finite disjoint partition\" (the global finite-stratification constructibility clause)",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Constructible sheaf of modules on the pro-etale site",
- "statement": "Let $Y$ be a scheme and let $\\Lambda$ be a finite commutative ring (for instance $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]). Let $Y_{\\mathrm{proet}}$ be the small pro-etale site of $Y$ and $\\Lambda_Y$ the constant sheaf of rings on it, and let $\\mathcal F$ be a sheaf of $\\Lambda_Y$-modules on $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site]. The sheaf $\\mathcal F$ is *constructible* if there exist an integer $N\\geq1$ and a finite partition $Y=\\bigsqcup_{\\nu=1}^{N}Y_\\nu$ of the underlying set of $Y$ into pairwise disjoint locally closed constructible subsets [def-weil-scheme-morphism-properties], each $Y_\\nu$ given a subscheme structure with immersion $i_\\nu:Y_\\nu\\to Y$ (a stratification [def-constructible-stratification]), such that for every $\\nu$ the restriction $\\mathcal F|_{Y_\\nu}=i_\\nu^{*}\\mathcal F$, the module inverse image along $i_\\nu$ on pro-etale sites [def-weil-pbc-proetale-operations], is a locally constant sheaf of $\\Lambda_{Y_\\nu}$-modules on $(Y_\\nu)_{\\mathrm{proet}}$ (there is a covering $\\{U_j\\to Y_\\nu\\}$ in $(Y_\\nu)_{\\mathrm{proet}}$ and $\\Lambda$-modules $M_j$ with $i_\\nu^*\\mathcal F|_{U_j}$ isomorphic to the constant sheaf of $M_j$ [def-weil-scheme-morphism-properties]) whose stalk at every geometric point of $Y_\\nu$ is a finite $\\Lambda$-module (finitely generated, equivalently finite as a set since $\\Lambda$ is finite).",
+ "statement": "Let $Y$ be a scheme and let $\\Lambda$ be a finite commutative ring (for instance $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]). Let $Y_{\\mathrm{proet}}$ be the small pro-etale site of $Y$ and $\\Lambda_Y$ the constant sheaf of rings on it, and let $\\mathcal F$ be a sheaf of $\\Lambda_Y$-modules on $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site]. The sheaf $\\mathcal F$ is *constructible* if there exist an integer $N\\geq1$ and a finite partition $Y=\\bigsqcup_{\\nu=1}^{N}Y_\\nu$ of the underlying set of $Y$ into pairwise disjoint locally closed [def-weil-locally-closed-subset] constructible [def-weil-constructible-subset] subsets, each $Y_\\nu$ given a subscheme structure with immersion $i_\\nu:Y_\\nu\\to Y$ (a stratification [def-constructible-stratification]), such that for every $\\nu$ the restriction $\\mathcal F|_{Y_\\nu}=i_\\nu^{*}\\mathcal F$, where the module inverse image along $i_\\nu$ on pro-etale sites uses the canonical identification $i_\\nu^{-1}\\Lambda_Y\\cong\\Lambda_{Y_\\nu}$ of constant ring sheaves [def-weil-pbc-proetale-operations], is a locally constant sheaf of $\\Lambda_{Y_\\nu}$-modules on $(Y_\\nu)_{\\mathrm{proet}}$ (there is a covering $\\{U_j\\to Y_\\nu\\}$ in $(Y_\\nu)_{\\mathrm{proet}}$ and $\\Lambda$-modules $M_j$ with $i_\\nu^*\\mathcal F|_{U_j}$ isomorphic to the constant sheaf of $M_j$ [def-weil-proetale-locally-constant-sheaf]) whose stalk [def-weil-proetale-geometric-stalk] at every geometric point of $Y_\\nu$ is a finite $\\Lambda$-module (finitely generated, equivalently finite as a set since $\\Lambda$ is finite).",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-finite-torsion-constructibility.md",
   "place": "node def-weil-finite-torsion-constructibility, order 1454, second paragraph (the constructibility clause, here for any finite coefficient ring); compare literature/stacks-project/proetale.tex, Definition 61.27.1 (Tag 09AJ, label definition-constructible), which asks for the partition only on each affine open and for Noetherian Lambda, and literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf, Definition 1.1 (2)"
@@ -19,9 +19,12 @@
  "stmt_deps": [
   "def-weil-l-adic-coefficient-extension",
   "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties",
+  "def-weil-locally-closed-subset",
+  "def-weil-constructible-subset",
   "def-constructible-stratification",
-  "def-weil-pbc-proetale-operations"
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-geometric-stalk"
  ],
  "proof": [],
  "proof_deps": [],
@@ -47,10 +50,73 @@
    "results": "Sheaf.IsConstant (Mathlib/CategoryTheory/Sites/ConstantSheaf.lean:81, essential image of the constant sheaf functor); no locally constant sheaf on a site; no constructible sheaf anywhere (grep -rn 'onstructible' over Mathlib/CategoryTheory and Mathlib/AlgebraicGeometry/Sites gives nothing of this kind).",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|IsLocallyConstant",
+   "results": "No hits (source scope AlgebraicGeometry/Sites)",
+   "date": "2026-10-14",
+   "verdict": "no match: no finite-stratification constructible pro-etale module sheaf predicate; finite-type sheaf and condensed-module results do not supply local constancy on scheme strata"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructible|constructibleSheaf|IsFiniteLocallyConstant",
+   "results": "No hits (source scope CategoryTheory)",
+   "date": "2026-10-14",
+   "verdict": "no match: no finite-stratification constructible pro-etale module sheaf predicate; finite-type sheaf and condensed-module results do not supply local constancy on scheme strata"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"Sheaf\"",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: no finite-stratification constructible pro-etale module sheaf predicate; finite-type sheaf and condensed-module results do not supply local constancy on scheme strata"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of modules is locally constant of finite type on the strata of a finite partition of a scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaf of modules on the pro-etale site finite stratification locally constant finite stalks",
+   "results": "SheafOfModules.IsFiniteType; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafProfinite; CondensedMod.ofSheafStonean; CompHausLike.LocallyConstantModule.functor; LightCondMod.ofSheafLightProfinite; CondensedMod.ofSheafCompHaus; SheafOfModules.IsFinitePresentation",
+   "date": "2026-10-14",
+   "verdict": "no match: no finite-stratification constructible pro-etale module sheaf predicate; finite-type sheaf and condensed-module results do not supply local constancy on scheme strata"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf of finite modules locally trivial on locally closed constructible subschemes",
+   "results": "SheafOfModules.IsFiniteType; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.localGeneratorsDataOfIsFiniteType; SheafOfModules.GeneratingSections.IsFiniteType; SheafOfModules.GeneratingSections.IsFiniteType.finite; SheafOfModules.isFinitePresentation",
+   "date": "2026-10-14",
+   "verdict": "no match: no finite-stratification constructible pro-etale module sheaf predicate; finite-type sheaf and condensed-module results do not supply local constancy on scheme strata"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant sheaf with finite fibers on a finite decomposition into locally closed scheme strata",
+   "results": "Profinite.exists_locallyConstant_finite_aux; Profinite.exists_locallyConstant_finite_nonempty; CompHausLike.LocallyConstant.functor; Profinite.exists_locallyConstant_fin_two; CompHausLike.LocallyConstant.sigmaIso; CompHausLike.LocallyConstant.functor_obj_val; CompHausLike.LocallyConstantModule.functor; Profinite.exists_locallyConstant",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern profinite locally constant functions, condensed module constructions, or finite limits/colimits; none defines constructible module sheaves on scheme strata"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|finiteLocallyConstant|locallyConstant",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern profinite locally constant functions, condensed module constructions, or finite limits/colimits; none defines constructible module sheaves on scheme strata"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Finite\"",
+   "results": "PresheafOfModules.Finite.hasFiniteColimits; PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits; PresheafOfModules.Finite.evaluation_preservesFiniteColimits; PresheafOfModules.hasFiniteLimits; PresheafOfModules.toPresheaf_preservesFiniteLimits; PresheafOfModules.evaluation_preservesFiniteLimits; CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafPresheafToSheaf; CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern profinite locally constant functions, condensed module constructions, or finite limits/colimits; none defines constructible module sheaves on scheme strata"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -70,5 +136,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-proetale-constructible-sheaf",
+  "worker": "stage1",
+  "summary": "Definition split by naming its existing constituent notions. Replaced the obsolete scheme-properties citation for local constancy with def-weil-proetale-locally-constant-sheaf, added def-weil-proetale-geometric-stalk, and cited the actual locally closed and constructible subset definitions. Preserved the blueprint global finite-stratification convention and finite coefficient rings; Stacks 09AJ is affine-local and is only a comparison. No new nodes or proof assertions.",
+  "blueprint": "Realizes the second paragraph of def-weil-finite-torsion-constructibility (global finite partition and locally constant finite module stalks), generalized there to any finite commutative coefficient ring. The ancestor also defines a derived category and hence is not a duplicate of this sheaf-only definition."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-d4569509c",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-d4569509c (reviewer sub-agent of L); spot-checked: The definition matches the blueprint and cited sources, with edge cases and target coefficient categories checked. Repair the ill-typed restriction by explicitly supplying the canonical identification iν^{-1}Λ_Y ≅ Λ_{Yν}; corrected whole JSON is in fixes/dag/nodes/sec-smooth-purity/def-weil-proetale-constructible-sheaf.json.; 1 file(s) fixed by the reviewer"
+ }
 }
