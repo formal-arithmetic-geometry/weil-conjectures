@@ -1,0 +1,98 @@
+{
+ "id": "lem-weil-pbc-slice-site-localization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Detailed form, proof: locality on the target in Stacks 0944 before the finite-complex reduction; underlying unringed slice-site construction for localization of the ringed morphism.",
+   "via": [
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "lem-weil-pbc-ringed-projection-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Localization of a continuous site morphism",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be small sites [def-weil-pbc-sites-and-cohomology]. Let $u:\\mathcal D\\to\\mathcal C$ be continuous and define a morphism of sites $f:\\mathcal C\\to\\mathcal D$: the sheaf functor $f_*G(T)=G(u(T))$ has a left adjoint $f^{-1}$ preserving finite limits [def-weil-pbc-sites-and-cohomology]. For $V\\in\\mathcal D$ and $U=u(V)$ give $\\mathcal D/V$ and $\\mathcal C/U$ the localized topologies [def-pur-localized-ringed-site]. The functor $u_V:\\mathcal D/V\\to\\mathcal C/U$, $(T\\to V)\\mapsto(u(T)\\to U)$, is continuous and its induced sheaf inverse image preserves finite limits, hence defines a morphism of sites $f_V:\\mathcal C/U\\to\\mathcal D/V$. Write $j_U,j_V$ for the localization morphisms of topoi, whose inverse images are restriction [def-pur-localized-ringed-site] and whose direct images are their right adjoints. There are canonical natural isomorphisms\n$$ (f_V)^{-1}j_V^{-1}\\cong j_U^{-1}f^{-1},\\qquad j_V^{-1}f_*\\cong(f_V)_*j_U^{-1}. $$",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CF, lemma-localize-morphism"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "slice-site localization of continuous functor induced morphism of topo",
+   "results": "CategoryTheory.GrothendieckTopology.instIsContinuousOverMapOver; iterated slice continuity results; no declaration for arbitrary continuous u_V comparison",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.instIsContinuousOverMapOver",
+   "results": "instIsContinuousOverMapOver, Sheaf.pushforwardOverMapIso, overMapPullback and composition isomorphisms",
+   "date": "2026-10-14",
+   "verdict": "generalization: only maps internal to one site, not a morphism induced by arbitrary continuous u"
+  },
+  {
+   "tool": "grep",
+   "query": "overMapPullback|instIsContinuousOverMapOver in Mathlib/CategoryTheory/",
+   "results": "Mathlib/CategoryTheory/Sites/Over.lean lines 427-441 and 512-520; these concern Over.map and sheaf restriction",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric morphism induced functor on over categories restriction sheaves",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.overMapPullback, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, AlgebraicGeometry.PresheafedSpace.restrict_presheaf, AlgebraicGeometry.PresheafedSpace.ofRestrict, AlgebraicGeometry.PresheafedSpace.ofRestrict_c_app, AlgebraicGeometry.Scheme.Modules.restrictFunctor, CategoryTheory.Sheaf.over, CategoryTheory.GrothendieckTopology.overPullback",
+   "date": "2026-10-14",
+   "verdict": "no match: overMap and overPullback are internal to one site; no general arbitrary-site slice morphism and inverse-image square"
+  },
+  {
+   "tool": "grep",
+   "query": "mapSlice|slice.*[Cc]ontinuous|[Cc]ontinuous.*slice",
+   "results": "5 hits: Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: overMap and overPullback are internal to one site; no general arbitrary-site slice morphism and inverse-image square"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"pushforward\", \"over\"",
+   "results": "11 hits: CategoryTheory.Functor.IsCoverDense.faithful_sheafPushforwardContinuous, CategoryTheory.Functor.IsCoverDense.full_sheafPushforwardContinuous, CategoryTheory.Sheaf.pushforwardOverMapIso, CategoryTheory.Sheaf.toPushforwardOverPullback, CategoryTheory.Sheaf.toPushforwardOverPullback_hom_app, CategoryTheory.Sheaf.pushforwardOverMapIso_hom_hom_app, CategoryTheory.Sheaf.pushforwardOverMapIso_inv_hom_app, SheafOfModules.overMapPushforwardAdj",
+   "date": "2026-10-14",
+   "verdict": "no match: overMap and overPullback are internal to one site; no general arbitrary-site slice morphism and inverse-image square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of a morphism of sites induces a morphism between slice sites and commutes with restriction of sheaves",
+   "results": "Service returned Internal Server Error; no usable search result. Reviewer ran msearch.py NG lem-weil-pbc-localize-ringed-site-morphism with its log destination redirected into the review directory.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-localize-ringed-site-morphism",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lemma-weil-pbc-perfect-projection-formula",
-   "place": "Detailed form, proof: 'Hence it contains every perfect complex'; locality on the target in Stacks 0944, before the finite-complex reduction",
+   "place": "Detailed form, proof: locality on the target in Stacks 0944, before the finite-complex reduction",
    "via": [
     "lem-weil-pbc-ringed-projection-restriction"
    ]
@@ -23,11 +23,61 @@
   "def-pur-localized-ringed-site",
   "lem-weil-pbc-ringed-topoi-module-adjunction",
   "def-weil-sheaf-of-modules-category",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-slice-site-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the underlying slice-site localization lemma (Stacks Tag 03CF) to u and V. It gives the continuous functor u_V, the induced morphism f_V, the canonical isomorphism (f_V)^{-1}j_V^{-1}≅j_U^{-1}f^{-1}, and the direct-image identity j_V^{-1}f_*≅(f_V)_*j_U^{-1}.",
+   "uses": [
+    "lem-weil-pbc-slice-site-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF, lemma-localize-morphism"
+   }
+  },
+  {
+   "text": "Define the localized ring map by (f_V)^{-1}(R|_V)≅(f^{-1}R)|_U→S|_U, using the inverse-image isomorphism from Step 1 and the restriction of c. The ring-map square therefore commutes by construction.",
+   "uses": [
+    "lem-weil-pbc-slice-site-localization",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, proof of lemma-localize-morphism-ringed-sites"
+   }
+  },
+  {
+   "text": "First $j^*=j^{-1}$ for a localization: its ring map is the identity on the restricted ring, so the tensor formula in the module-adjunction node reduces to $\\mathcal O_U\\otimes_{\\mathcal O_U}M|_U\\cong M|_U$, by $a\\otimes m\\mapsto am$ with inverse $m\\mapsto1\\otimes m$. Taking right adjoints of the inverse-image square of Step 1 gives $j_{V*}(f_V)_*\\cong f_*j_{U*}$: for any sheaves $A,H$, both Hom sets are identified by adjunction with $\\operatorname{Hom}((f_V)^{-1}j_V^{-1}A,H)\\cong\\operatorname{Hom}(j_U^{-1}f^{-1}A,H)$. This is also an isomorphism of module functors. Indeed the coefficient map $R\\to j_{V*}(f_V)_*(S|_U)$ is adjunct to the composite $(f_V)^{-1}j_V^{-1}R\\to S|_U$ of Step 2; the map $R\\to f_*j_{U*}(S|_U)$ is adjunct to $j_U^{-1}f^{-1}R\\xrightarrow{c|_U}S|_U$. Step 2 identifies these maps, so the right-adjoint isomorphism respects the $R$-actions. Now apply the cited module adjunction twice on each side: for every $R$-module $M$ and $S|_U$-module $H$,\n$$ \\operatorname{Hom}((f_V)^*j_V^*M,H)\\cong\\operatorname{Hom}(M,j_{V*}(f_V)_*H)\\cong\\operatorname{Hom}(M,f_*j_{U*}H)\\cong\\operatorname{Hom}(j_U^*f^*M,H). $$\nThese natural bijections give the desired canonical pullback isomorphism (apply them to the identity maps to obtain the two inverse arrows). Finally, on $T\\to V$ both $j_V^*f_*G$ and $(f_V)_*j_U^*G$ are $G(u(T))$. If $a:R\\to f_*S$ is adjunct to $c$, the scalar $r\\in R(T)$ acts on both by multiplication by $a_T(r)\\in S(u(T))$; the localized adjunct has component $a_T$ by Step 2. Thus the sectionwise identity is linear, commutes with restriction maps and with morphisms in $G$, and yields the asserted natural module direct-image isomorphism.",
+   "uses": [
+    "lem-weil-pbc-slice-site-localization",
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites and proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-slice-site-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J0, using underlying Tag 03CF"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -80,7 +130,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-ringed-projection-restriction",
   "by": "worker",
@@ -96,5 +146,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-localize-ringed-site-morphism",
+  "worker": "stage1",
+  "summary": "Split the ringed-site localization lemma into the underlying slice-site localization statement and three proof steps. Checked the localized ring map and module pullback/direct-image formulas against Stacks 04J0 and its underlying 03CF lemma.",
+  "blueprint": "Detailed form of lemma-weil-pbc-perfect-projection-formula: locality on the target before the finite-complex reduction."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-e6eb53dc5",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-e6eb53dc5 (reviewer sub-agent of L); spot-checked: Read the mathematics in full; Stacks 03CF/04J0 and 03D7 support all three steps and the new unringed lemma. Checked hypotheses, ring actions, edge cases, duplicates, route, and exact archived master targets. Repaired new-node metadata, blueprint ancestry, and missing LeanSearch attempt (recorded unavailable). Statements unchanged; review.md and corrected JSON supplied.; 1 file(s) fixed by the reviewer"
  }
 }
