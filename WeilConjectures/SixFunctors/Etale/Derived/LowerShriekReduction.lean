@@ -189,7 +189,7 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedLowerShriek_of_isWeaklyRegula
       ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
         (ModuleCat.of Λ (Λ ⧸ Ideal.ofList rs)))) h
   exact ⟨e ≪≫ Functor.isoWhiskerRight ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).flip.mapIso
-    (leftDerivedUpperStarSingleConstantSheafIso Λ f _)) _⟩
+    (leftDerivedUpperStarSingleConstantSheafIso (ModuleCat.{u + 1} Λ) f _)) _⟩
 
 end Regular
 
