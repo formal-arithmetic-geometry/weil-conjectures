@@ -15,27 +15,28 @@
  ],
  "proof": [
   {
-   "text": "Construct the affine localization or section identification by the affine pullback and principal-open localization formulas described in the source.",
+   "text": "For each chart apply exists_completed_affine_section_localization to φ:A→C, E, s and f_i. It provides an A-linear equivalence e_i from localized completed global sections to sections on s⁻¹D(φ(f_i)), with the localized C-scalar compatibility.",
    "uses": [
-    "def-sbc-punctured-completion-chart-section-modules",
-    "def-sbc-punctured-completion-matching-sections",
-    "def-weil-pbc-formal-glueing-data",
-    "def-weil-pbc-adic-completion"
+    "new-sbc-completed-affine-section-localization"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply exists_chart_tensor_sections to D and the affine chart. It supplies a C-linear equivalence d_i from the scalar-extended chart module to the same completed-open sections. Restrict its scalars explicitly along φ and compose e_i with its inverse. The scalar equality follows by rewriting with the compatibility of e_i and applying the C-linearity of d_i inverse. Assemble the family; no new data definition is chosen from mere existence.",
+   "uses": [
+    "new-sbc-punctured-completion-chart-tensor-sections"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sbc-punctured-completion-chart-section-modules",
-  "def-sbc-punctured-completion-matching-sections",
-  "def-weil-pbc-formal-glueing-data",
-  "def-weil-pbc-adic-completion"
+  "new-sbc-completed-affine-section-localization",
+  "new-sbc-punctured-completion-chart-tensor-sections"
  ],
  "proof_origin": {
-  "kind": "agent",
-  "by": "E1",
+  "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 0BLH and 05EL"
+  "place": "Tags 01HR, 01JO and 0BLH; localization and affine pullback section formulas, assembled by E1 in the second reading."
  },
  "mathlib_searches": [
   {
@@ -110,12 +111,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
   "group": "E1",
   "result": "pass",
-  "landing": "20261013T234507-L-2161398",
+  "landing": "20261014T001715-L-2548287",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

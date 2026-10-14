@@ -1,6 +1,8 @@
 module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartSectionModules
+import Sheaf.AlgebraicGeometry.Morphisms.CompletedAffineSectionLocalization
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartTensorSections
 
 @[expose] public section
 universe u
@@ -37,6 +39,30 @@ theorem exists_chart_completed_localizations_alpha
       ∀ i (z : C) (x : FormalGlueing.localize (f i) (FormalGlueing.restrict φ M')),
         alpha i ((FormalGlueing.localizedSModule φ (f i) M').smul z x) =
           z • (alpha i x : FormalGlueing.extend φ (FormalGlueing.piece (f i) (M i))) := by
-  sorry
+  classical
+  dsimp only
+  let C := AdicCompletion (IsLocalRing.maximalIdeal A) A
+  let φ := algebraMap A C
+  let W := fun i ↦ s ⁻¹ᵁ PrimeSpectrum.basicOpen (φ (f i))
+  let moduleN := fun i ↦ Module.compHom Γ(E, W i)
+    ((ΓSpecIso (.of C)).inv ≫ s.appTop ≫
+      E.presheaf.map (homOfLE (le_top : W i ≤ ⊤)).op).hom
+  let N := fun i ↦ @ModuleCat.of C _ Γ(E, W i) _ (moduleN i)
+  have hloc (i : Fin t) := exists_completed_affine_section_localization φ s (f i)
+  have htensor (i : Fin t) := exists_chart_tensor_sections D (f i) (hf i) (hV i)
+  choose e he using hloc
+  let d (i : Fin t) := Classical.choice (htensor i)
+  let dA (i : Fin t) : FormalGlueing.restrict φ
+      (FormalGlueing.extend φ (FormalGlueing.piece (f i)
+        (chartSectionModule (q ≫ U.ι) (f i)))) ≃ₗ[A] FormalGlueing.restrict φ (N i) :=
+    { (d i).toEquiv with
+      map_add' := (d i).map_add
+      map_smul' := fun a x ↦ (d i).map_smul (φ a) x }
+  refine ⟨fun i ↦ (e i).trans (dA i).symm, ?_⟩
+  intro i z x
+  change (d i).symm (e i
+    ((FormalGlueing.localizedSModule φ (f i) (completedSectionModule s)).smul z x)) = _
+  rw [he i]
+  exact (d i).symm.map_smul z (e i x)
 
 end AlgebraicGeometry.Scheme.CompletionGluingData

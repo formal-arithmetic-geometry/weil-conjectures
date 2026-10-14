@@ -1,0 +1,134 @@
+{
+ "id": "new-sbc-punctured-completion-chart-tensor-sections",
+ "kind": "statement",
+ "title": "Affine chart tensor sections transported through the overlap",
+ "statement": "Let A be a commutative local ring and C its maximal-ideal completion, with φ:A→C [def-weil-pbc-adic-completion]. Let U⊆Spec A be open, q:Y→U, E affine, s:E→Spec C and D:CompletionGluingData A U q E s [def-sbc-punctured-completion-matching-sections]. For f∈A suppose D(f)⊆U and V=(q followed by U inclusion)⁻¹D(f) affine. Then C tensor_A (the fixed chart section module for f [def-sbc-punctured-completion-chart-section-modules]), with scalar extension as in [def-weil-pbc-formal-glueing-data], is C-linearly equivalent to Γ(E,s⁻¹D(φ(f))) with its structural C-action. This statement involves neither localization of Γ(E,top) nor a choice of A-linear transition equivalence.",
+ "stmt_deps": [
+  "def-sbc-punctured-completion-chart-section-modules",
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-pbc-adic-completion",
+  "def-sbc-punctured-completion-matching-sections"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01JO, Lemma 26.17.2 (affine fibre products); 0BLH, first two proof paragraphs; 05EL, item (1)."
+ },
+ "proof": [
+  {
+   "text": "Restrict the supplied overlap isomorphism to the inverse image of the affine chart V. Since D(f) lies in U, this restriction is the pullback of V→Spec A along Spec C→Spec A. D.over identifies the restriction on the completed side with s⁻¹D(φ(f)), over Spec C.",
+   "uses": [
+    "def-sbc-punctured-completion-chart-section-modules",
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-pbc-adic-completion",
+    "def-sbc-punctured-completion-matching-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine fibre-product formula gives its section ring as C tensor_A Γ(Y,V). Transport through the restricted overlap isomorphism. chartSectionModule_smul identifies the chart A-action with its structural action. The structural maps are over Spec C, so the transported equivalence is C-linear. Empty charts give zero rings on both sides.",
+   "uses": [
+    "def-sbc-punctured-completion-chart-section-modules",
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-pbc-adic-completion",
+    "def-sbc-punctured-completion-matching-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-punctured-completion-chart-section-modules",
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-pbc-adic-completion",
+  "def-sbc-punctured-completion-matching-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 01JO, Lemma 26.17.2 (affine fibre products); 0BLH, first two proof paragraphs; 05EL, item (1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "localization of module restrict scalars along algebra map compare localization at image element",
+   "results": "IsLocalizedModule.of_restrictScalars; LocalizedModule.restrictScalars_map_eq; LinearMap.extendScalarsOfIsLocalizationEquiv_apply; instIsLocalizedModuleToLinearMapToAlgHomOfIsLocalizationAlgebraMapSubmonoid; IsLocalization.mapExtendScalars_eq_toLinearMap_mapₐ; Submodule.restrictScalars_localized'; LinearMap.extendScalarsOfIsLocalizationEquiv; isLocalizedModule_iff_isLocalization",
+   "date": "2026-10-14",
+   "verdict": "Constituent APIs; used for localization or affine pullbacks. No duplicate concrete section-module comparison found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalizedModule.linearEquiv\"",
+   "results": "IsLocalizedModule.linearEquiv; IsLocalizedModule.linearEquiv_of_isLocalizedModule_comp; IsLocalizedModule.linearEquiv_apply; IsLocalizedModule.linearEquiv_symm_apply",
+   "date": "2026-10-14",
+   "verdict": "Constituent APIs; used for localization or affine pullbacks. No duplicate concrete section-module comparison found."
+  },
+  {
+   "tool": "grep",
+   "query": "isLocalization_of_eq_basicOpen|pullbackSpecIso|restrictScalars_powers",
+   "results": "Mathlib/Algebra/Module/LocalizedModule/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Group/Affine.lean; Mathlib/AlgebraicGeometry/Group/Affine.lean",
+   "date": "2026-10-14",
+   "verdict": "Constituent APIs; used for localization or affine pullbacks. No duplicate concrete section-module comparison found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine scheme principal open sections localization and affine fibre product sections tensor product",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The global sections of a fibre product of affine schemes over an affine scheme are the tensor product of their section rings",
+   "results": "AlgebraicGeometry.pullbackSpecIso; AlgebraicGeometry.Scheme.Pullback.SpecOfPoint; AlgebraicGeometry.Scheme.Pullback.SpecTensorTo_SpecOfPoint; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_base_fst; AlgebraicGeometry.Scheme.Pullback.Triplet.fst_SpecTensorTo_apply; AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.carrierEquiv; AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc",
+   "date": "2026-10-14",
+   "verdict": "Constituent APIs; used for localization or affine pullbacks. No duplicate concrete section-module comparison found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartCompletedLocalizationsAlpha",
+  "date": "2026-10-14",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-punctured-completion-chart-completed-localizations-alpha",
+   "place": "Affine chart tensor sections transported through the overlap",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartTensorSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedCompletionChartTensorSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.exists_chart_tensor_sections",
+  "statement": "theorem exists_chart_tensor_sections\n    {A : Type u} [CommRing A] [IsLocalRing A]\n    {U : (Spec (.of A)).Opens} {Y : Scheme.{u}} {q : Y ⟶ U.toScheme}\n    {E : Scheme.{u}} [IsAffine E] {s : E ⟶ Spec\n      (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))}\n    (D : CompletionGluingData A U q E s) (f : A)\n    (hf : PrimeSpectrum.basicOpen f ≤ U)\n    (hV : IsAffineOpen ((q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen f)) :\n    let C := AdicCompletion (IsLocalRing.maximalIdeal A) A\n    let φ := algebraMap A C\n    let W := s ⁻¹ᵁ PrimeSpectrum.basicOpen (φ f)\n    letI : Module C Γ(E, W) := Module.compHom _\n      ((ΓSpecIso (.of C)).inv ≫ s.appTop ≫\n        E.presheaf.map (homOfLE (le_top : W ≤ ⊤)).op).hom\n    let N := ModuleCat.of C Γ(E, W)\n    Nonempty (FormalGlueing.extend φ\n      (FormalGlueing.piece f (chartSectionModule (q ≫ U.ι) f)) ≃ₗ[C] N)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261014T001715-L-2548287",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261014T001715-L-2548287",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

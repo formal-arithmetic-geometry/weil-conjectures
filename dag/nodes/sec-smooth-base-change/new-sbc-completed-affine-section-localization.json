@@ -1,0 +1,134 @@
+{
+ "id": "new-sbc-completed-affine-section-localization",
+ "kind": "statement",
+ "title": "Completed affine principal-open section localization",
+ "statement": "Let A and C be commutative rings, φ:A→C, E an affine scheme, s:E→Spec C, and f∈A. Put W=s⁻¹D(φ(f)) and give Γ(E,W) its structural C-action. The localization at f of the restricted A-module completedSectionModule s [def-sbc-punctured-completion-chart-section-modules] is A-linearly equivalent to Γ(E,W) restricted along φ. This equivalence commutes with the localized C-action of [def-weil-pbc-formal-glueing-data]. No completion, overlap data, or tensor product is needed.",
+ "stmt_deps": [
+  "def-sbc-punctured-completion-chart-section-modules",
+  "def-weil-pbc-formal-glueing-data"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01HR, Lemma 26.5.4(3)-(5), and 0BLH, principal-open section localization."
+ },
+ "proof": [
+  {
+   "text": "Define the structural homomorphisms χ:C→B=Γ(E,top), ρ:B→Γ(E,W) and ψ:C→Γ(E,W). Their composite identity is definitional. Identify W with E.basicOpen(χ(φ(f))) by Scheme.preimage_basicOpen_top and basicOpen_eq_of_affine. IsAffineOpen.isLocalization_of_eq_basicOpen and Algebra.algebraMapSubmonoid_powers make Γ(E,W) a localization of B at the image of the powers of f.",
+   "uses": [
+    "def-sbc-punctured-completion-chart-section-modules",
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the ring-localization module instance and IsLocalizedModule.of_linearEquiv_right to identify restriction as a localization of the fixed restricted A-module. IsLocalizedModule.linearEquiv constructs e from this map and LocalizedModule.mkLinearMap.",
+   "uses": [
+    "def-sbc-punctured-completion-chart-section-modules",
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each z:C compare e composed with localization of multiplication by χ(z), and multiplication by ψ(z) composed with e. IsLocalizedModule.ext reduces their equality to the original sections, where it is ρ(χ(z)m)=ψ(z)ρ(m). The chosen localized C-action equals localized multiplication on each fraction by exists_localized_s_module.choose_spec and IsLocalizedModule.map_LocalizedModules. Evaluation of the equality of maps proves the scalar identity.",
+   "uses": [
+    "def-sbc-punctured-completion-chart-section-modules",
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-punctured-completion-chart-section-modules",
+  "def-weil-pbc-formal-glueing-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 01HR, Lemma 26.5.4(3)-(5), and 0BLH, principal-open section localization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "localization of module restrict scalars along algebra map compare localization at image element",
+   "results": "IsLocalizedModule.of_restrictScalars; LocalizedModule.restrictScalars_map_eq; LinearMap.extendScalarsOfIsLocalizationEquiv_apply; instIsLocalizedModuleToLinearMapToAlgHomOfIsLocalizationAlgebraMapSubmonoid; IsLocalization.mapExtendScalars_eq_toLinearMap_mapₐ; Submodule.restrictScalars_localized'; LinearMap.extendScalarsOfIsLocalizationEquiv; isLocalizedModule_iff_isLocalization",
+   "date": "2026-10-14",
+   "verdict": "Constituent APIs; used for localization or affine pullbacks. No duplicate concrete section-module comparison found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalizedModule.linearEquiv\"",
+   "results": "IsLocalizedModule.linearEquiv; IsLocalizedModule.linearEquiv_of_isLocalizedModule_comp; IsLocalizedModule.linearEquiv_apply; IsLocalizedModule.linearEquiv_symm_apply",
+   "date": "2026-10-14",
+   "verdict": "Constituent APIs; used for localization or affine pullbacks. No duplicate concrete section-module comparison found."
+  },
+  {
+   "tool": "grep",
+   "query": "isLocalization_of_eq_basicOpen|pullbackSpecIso|restrictScalars_powers",
+   "results": "Mathlib/Algebra/Module/LocalizedModule/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Group/Affine.lean; Mathlib/AlgebraicGeometry/Group/Affine.lean",
+   "date": "2026-10-14",
+   "verdict": "Constituent APIs; used for localization or affine pullbacks. No duplicate concrete section-module comparison found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine scheme principal open sections localization and affine fibre product sections tensor product",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The global sections of a fibre product of affine schemes over an affine scheme are the tensor product of their section rings",
+   "results": "AlgebraicGeometry.pullbackSpecIso; AlgebraicGeometry.Scheme.Pullback.SpecOfPoint; AlgebraicGeometry.Scheme.Pullback.SpecTensorTo_SpecOfPoint; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_base_fst; AlgebraicGeometry.Scheme.Pullback.Triplet.fst_SpecTensorTo_apply; AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.carrierEquiv; AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc",
+   "date": "2026-10-14",
+   "verdict": "Constituent APIs; used for localization or affine pullbacks. No duplicate concrete section-module comparison found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartCompletedLocalizationsAlpha",
+  "date": "2026-10-14",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-punctured-completion-chart-completed-localizations-alpha",
+   "place": "Completed affine principal-open section localization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.CompletedAffineSectionLocalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/CompletedAffineSectionLocalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.exists_completed_affine_section_localization",
+  "statement": "theorem exists_completed_affine_section_localization\n    {A C : Type u} [CommRing A] [CommRing C]\n    (φ : A →+* C) {E : Scheme.{u}} [IsAffine E] (s : E ⟶ Spec (.of C)) (f : A) :\n    let W := s ⁻¹ᵁ PrimeSpectrum.basicOpen (φ f)\n    letI : Module C Γ(E, W) := Module.compHom _\n      ((ΓSpecIso (.of C)).inv ≫ s.appTop ≫\n        E.presheaf.map (homOfLE (le_top : W ≤ ⊤)).op).hom\n    let N := ModuleCat.of C Γ(E, W)\n    ∃ e : FormalGlueing.localize f (FormalGlueing.restrict φ (completedSectionModule s)) ≃ₗ[A]\n        FormalGlueing.restrict φ N,\n      ∀ (z : C) x,\n        e ((FormalGlueing.localizedSModule φ f (completedSectionModule s)).smul z x) =\n          z • (e x : N)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261014T001715-L-2548287",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261014T001715-L-2548287",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
