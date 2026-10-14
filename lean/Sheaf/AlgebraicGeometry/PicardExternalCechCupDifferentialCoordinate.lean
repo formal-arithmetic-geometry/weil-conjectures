@@ -6,9 +6,7 @@ Authors: SHEAF group R4
 module
 
 public import Sheaf.AlgebraicGeometry.PicardExternalCechCupBidegree
-import Sheaf.AlgebraicGeometry.PicardExternalRightCechModels
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.Paper.CechCupProduct
+import Sheaf.AlgebraicGeometry.PicardExternalCechCupLeibniz
 
 /-! # The external Alexander--Whitney differential calculation
 Source: Stacks Project, Tags 0BED and 07MB.
@@ -113,7 +111,30 @@ theorem picardExternalCechCupDegreeMaps_comm_ι
         ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))
           (ComplexShape.up ℕ)).d n (n + 1) ≫
       picardExternalCechCupDegreeMaps f g U V F G l (n + 1) := by
-  sorry
+  subst n
+  rw [← Category.assoc, picardExternalCechCupDegreeMaps_ι]
+  rw [HomologicalComplex.mapBifunctor.d_eq, Preadditive.add_comp, Preadditive.comp_add,
+    HomologicalComplex.mapBifunctor.ι_D₁_assoc,
+    HomologicalComplex.mapBifunctor.ι_D₂_assoc]
+  rw [HomologicalComplex.mapBifunctor.d₁_eq _ _ _ _ (show
+      (ComplexShape.up ℕ).Rel p (p + 1) from rfl) q (p + q + 1)
+      (by dsimp; omega),
+    HomologicalComplex.mapBifunctor.d₂_eq _ _ _ _ p (show
+      (ComplexShape.up ℕ).Rel q (q + 1) from rfl) (p + q + 1)
+      (by dsimp; omega)]
+  simp only [Linear.units_smul_comp, Category.assoc,
+    picardExternalCechCupDegreeMaps, HomologicalComplex.ι_mapBifunctorDesc]
+  apply ModuleCat.MonoidalCategory.tensor_ext
+  intro a b
+  simp only [curriedTensor_map_app, curriedTensor_obj_map, ComplexShape.ε₁_def,
+    ComplexShape.ε₂_def, ComplexShape.ε_up_ℕ, one_smul, ModuleCat.hom_add,
+    LinearMap.add_apply, ModuleCat.hom_comp, LinearMap.comp_apply,
+    Units.smul_def,
+    Units.val_pow_eq_pow_val, Units.val_neg, Units.val_one]
+  exact picardExternalCechCupBidegree_leibniz f g U V F G p q
+    (l p q) (l (p + 1) q) (l p (q + 1)) (hl p q) (hl (p + 1) q) (hl p (q + 1)) a b
 
 end
 end AlgebraicGeometry.Scheme.Modules
+
+#print axioms AlgebraicGeometry.Scheme.Modules.picardExternalCechCupDegreeMaps_comm_ι
