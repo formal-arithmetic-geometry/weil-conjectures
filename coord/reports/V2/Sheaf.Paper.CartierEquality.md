@@ -1,51 +1,58 @@
 ## What changed
 
-The proof of `cartier_equality` is present in
-`lean/Sheaf/Paper/CartierEquality.lean`. It chooses a finite transcendence basis and a
-finite generating set, applies the complete-intersection fraction-field model and its
-cotangent comparison, then combines rank-nullity and quotient dimension formulas. The
-finite-extension clause follows from zero transcendence degree. The file compiles
-cleanly and contains no `sorry`.
+Repaired `cartier_equality` by making its finite-generation hypothesis explicit as
+`IntermediateField.FG (⊤ : IntermediateField k K)`, as required by upstream review #1428.
+The existing complete proof and proof imports were retained. The copied DAG node's
+Lean statement was updated to match the repaired interface.
+Change record: `coord/changes/cartier_equality.md`.
 
 ## Proved and sorry left
 
-`cartier_equality` is proved. No `sorry` remains in the delivered module, and no new
-statements were added.
+`cartier_equality` remains fully proved; no `sorry` declarations were added or left.
 
 ## No longer needed
 
-No imports or DAG nodes were removed: the proof uses the complete-intersection model,
-the fraction-field cotangent model, finite transcendence-basis enumeration, and the
-Mathlib linear-algebra and field-theory APIs already imported by the module.
+None. The existing complete-intersection and cotangent-model imports remain required by
+the proof.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-Nothing was found to be wrong. The existing proof follows the DAG's complete-intersection
-and cotangent-model route and proves the unchanged target statement.
+The earlier repair attempt treated the already-proved module as unchanged and did not
+materialize the required statement repair. The upstream review specifically requires
+an explicit finitely generated field-extension hypothesis. The repaired statement is
+definitionally equivalent to the notation previously used, while recording the intended
+interface directly.
+
+## New nodes
+
+None. The existing node was copied and its Lean signature metadata was synchronized with
+the repaired statement.
 
 ## Earlier second reading (a previous round; superseded)
 
-The proof was compiled from the unchanged theorem signature. Its only dependency
-statements are the existing complete-intersection and cotangent-model declarations; no
-new nodes or holes are open.
+Independent reading remains to be performed by the V2 second reader. The repaired
+signature is definitionally equivalent to the existing call sites and the proof compiles.
 
 ## Second reading by V2
 
-1. **Signatures and visibility.** Compared the delivered module with the repository
-   version. The theorem signature and all existing declarations are byte-for-byte
-   unchanged; the only difference is a proof comment.
-2. **Compilation and axioms.** Compiled the module with `lcompile.py`; it succeeds
-   without errors or warnings. The proof contains no `sorry`, `axiom`, `unsafe`,
-   `opaque`, `extern`, or `implemented_by`, and introduces no definitions with
-   unfinished data.
-3. **Statements and dependencies.** No statements were split off and no new nodes
-   were added. The target statement is unchanged and its proof uses the existing
-   complete-intersection and cotangent-model declarations, together with the standard
-   finite-dimensional linear algebra and transcendence-basis APIs.
-4. **Pruning and route.** The complete-intersection and fraction-field cotangent route
-   recorded by the unit is retained. Every listed import is used by the proof, so no
-   import or proof dependency can be removed safely.
-5. **DAG agreement.** The node's declaration, proof route, proof dependencies, and
-   proof origin agree with the Lean proof; the unit's `realized` route is preserved.
+1. **Interface and accidental changes.** Compared the delivered module with the repository
+   version. The theorem statement is unchanged from the repository's repaired interface;
+   the DAG Lean statement matches it byte for byte. Verdict: pass.
+2. **Proof validity.** Compiled the module and all sandbox modules with `lcompile.py`; no
+   errors, warnings, `sorry`, or forbidden declarations occur. The proof uses only the
+   declared finite-generation hypothesis and the cited complete-intersection lemmas.
+   Verdict: pass.
+3. **Statements and nodes.** No statements were split off and no new nodes were added.
+   The existing node's statement, proof dependencies, and proof origin agree with the
+   implementation, and the qualified `IntermediateField.FG` hypothesis is true and exactly
+   expresses finite generation of the top intermediate field. Verdict: pass.
+4. **Pruning and imports.** The public imports are needed for the theorem's types; the
+   proof-only imports supply the finite transcendence basis, complete-intersection model,
+   and cotangent comparison used by the proof. No removable import or proof dependency was
+   found. Verdict: pass.
+5. **Unit route and edge cases.** The proof retains the unit's complete-intersection and
+   cotangent-model route, and the finite-extension conclusion follows by zero transcendence
+   degree and cancellation of natural-number casts. Verdict: pass.
 
-No repair was needed beyond adding this second-reading record; no holes were added.
+Changed nothing during this second reading: the sandbox already contained the repaired
+qualified hypothesis, synchronized DAG metadata, and a compiling complete proof.
