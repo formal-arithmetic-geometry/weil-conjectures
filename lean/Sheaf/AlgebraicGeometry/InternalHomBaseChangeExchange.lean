@@ -5,6 +5,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
+import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
 /-! # Internal Hom exchange with the canonical base-change mate
 Source: Stacks Project, duality.tex, Tag 0AA8, lemma-more-base-change,

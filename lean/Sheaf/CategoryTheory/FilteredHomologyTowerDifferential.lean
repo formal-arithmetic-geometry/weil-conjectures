@@ -8,6 +8,9 @@ module
 public import Sheaf.CategoryTheory.FilteredHomologyExactCouple
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.CategoryTheory.ExactCouple
+import Sheaf.CategoryTheory.FilteredHomologyCoupleData
 
 /-! # Representative comparisons with the canonical exact-couple tower
 

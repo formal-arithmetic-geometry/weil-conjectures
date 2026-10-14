@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PicardScalarCechComparison
 public import Sheaf.AlgebraicGeometry.PicardExternalCechCupComponent
 import Sheaf.Paper.CechCupPullbackCompat
+import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 
 /-! # Scalar Cech external cup and canonical comparison
 

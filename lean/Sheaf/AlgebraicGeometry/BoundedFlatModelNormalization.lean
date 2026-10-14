@@ -11,6 +11,8 @@ public import Sheaf.AlgebraicGeometry.SchemeCanonicalShiftUnitIso
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
+import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShift
 
 /-! # Bounded flat model normalization
 

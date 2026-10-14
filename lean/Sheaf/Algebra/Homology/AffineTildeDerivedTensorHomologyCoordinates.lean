@@ -6,6 +6,9 @@ Authors: SHEAF group N4
 module
 
 public import Sheaf.Algebra.Homology.AffineTildeDerivedTensorMate
+import Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates
+import Sheaf.Algebra.Homology.AffineTildePushforwardCohomologyNormalization
+import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 
 /-! # Homology coordinates of the raw affine tensor comparison
 

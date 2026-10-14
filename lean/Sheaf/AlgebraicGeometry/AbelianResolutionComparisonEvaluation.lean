@@ -6,6 +6,9 @@ Authors: SHEAF group G2
 module
 
 public import Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation
+import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNormalization
+import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
+import Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 
 /-! # Evaluation of the target acyclic-resolution comparison
 

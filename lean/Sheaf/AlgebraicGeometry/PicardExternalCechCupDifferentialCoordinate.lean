@@ -6,6 +6,9 @@ Authors: SHEAF group R4
 module
 
 public import Sheaf.AlgebraicGeometry.PicardExternalCechCupBidegree
+import Sheaf.AlgebraicGeometry.PicardExternalRightCechModels
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.Paper.CechCupProduct
 
 /-! # The external Alexander--Whitney differential calculation
 Source: Stacks Project, Tags 0BED and 07MB.

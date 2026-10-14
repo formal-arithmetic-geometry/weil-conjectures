@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare
 public import Sheaf.AlgebraicGeometry.RawModuleScalarSourceFactors
+import Sheaf.AlgebraicGeometry.HigherDirectImageRawDiagram
 
 /-! # Module raw pullback factorization
 Source: Stacks Project, Tags 03FD and 03Q8.

@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNormalization
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
+import Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 
 /-! # The cocycle calculation for an arbitrary abelian injective target
 

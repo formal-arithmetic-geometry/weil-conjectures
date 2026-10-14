@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
 public import Sheaf.AlgebraicGeometry.BoundedFlatModelNormalization
 import Sheaf.Algebra.Homology.KFlatTelescopeClosure
 import Sheaf.AlgebraicGeometry.FlatTelescopeStageMapRefinement
+import Sheaf.AlgebraicGeometry.DerivedPullback
+import Sheaf.AlgebraicGeometry.SchemeCanonicalShiftUnitIso
 
 /-! # Extending normalized sum maps across transition cones
 

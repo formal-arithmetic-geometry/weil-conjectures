@@ -6,6 +6,7 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.AlgebraicGeometry.CompactFlatFiniteSubcomplexDiagrams
+import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
 
 /-! # Canonical augmentation of the enlarged finite-piece bar union
 

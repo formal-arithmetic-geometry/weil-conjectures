@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Preadditive.Yoneda.Limits
 public import Mathlib.Algebra.Homology.ShortComplex.Ab
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 /-!
 # Shift compatibility on an injective cocycle

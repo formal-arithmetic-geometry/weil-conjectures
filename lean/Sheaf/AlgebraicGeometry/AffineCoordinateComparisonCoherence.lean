@@ -12,6 +12,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.CategoryTheory.InducedCategory
 public import Sheaf.Algebra.Homology.KFlatModuleBaseChange
+import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
+import Sheaf.AlgebraicGeometry.AffineSquareKFlatModelIso
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # Composition of affine-coordinate comparisons
 Source: Stacks Project, Tags 08DW, 06Y1 and 0D5S.

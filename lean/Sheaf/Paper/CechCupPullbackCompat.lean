@@ -13,6 +13,7 @@ public import Sheaf.AlgebraicGeometry.EtaleTensorSections
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import Sheaf.Paper.CechRefinementComparisonSquare
 import Sheaf.Paper.CechCupResolutionRepresentatives
+import Sheaf.Paper.ModuleCohomologyCupProduct
 
 /-! # Cech cup products and pullback
 

@@ -5,6 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.GlobalHomPullbackComparison
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.GlobalDerivedHom
+import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
+import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
 /-! # Leray comparison and the base-change mate
 Source: Stacks Project, cohomology.tex, Remark 08HY; duality.tex, Tag 0AA8,

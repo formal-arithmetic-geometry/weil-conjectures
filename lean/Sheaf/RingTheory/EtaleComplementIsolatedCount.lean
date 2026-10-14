@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Data.Set.Card
 public import Mathlib.RingTheory.QuasiFinite.Basic
+import Sheaf.AlgebraicGeometry.FiniteIsolatedPointsOfFiniteType
 
 /-!
 # Isolated points in the complementary idempotent fibre

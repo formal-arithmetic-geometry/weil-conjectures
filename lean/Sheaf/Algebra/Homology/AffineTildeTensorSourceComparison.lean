@@ -8,6 +8,14 @@ module
 public import Sheaf.Algebra.Homology.AffineTildePushforwardCohomologyNormalization
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Sheaf.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
+import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
+import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
+import Sheaf.AlgebraicGeometry.AffinePushforwardResolutionQuasiIso
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.AlgebraicGeometry.DerivedPullback
+import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
+import Sheaf.AlgebraicGeometry.TensorPullbackTilde
+import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # Counit-normalized affine derived tensor source
 

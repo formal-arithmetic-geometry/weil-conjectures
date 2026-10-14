@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuityData
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 public import Mathlib.CategoryTheory.HomCongr
 import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.TwoOpenComparisonDiagram
 
 /-! # Object comparisons for the geometric overlap model
 

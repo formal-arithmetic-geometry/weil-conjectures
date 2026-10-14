@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 import Sheaf.CategoryTheory.GrothendieckDerivedBrownRightAdjoint
+import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-! # Right adjoint to proper étale derived direct image
 

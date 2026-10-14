@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.ModuleCupResolutionRealization
 import Sheaf.Paper.ModuleCupNaiveDerivedCompatibility
+import Sheaf.Paper.ModuleCupResolutionData
+import Sheaf.Topology.RingedSpaceModuleCohomology
 
 /-! # Equality of realized derived pairings on cocycle classes
 

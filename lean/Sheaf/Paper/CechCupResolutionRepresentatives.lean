@@ -7,6 +7,9 @@ module
 
 public import Sheaf.Paper.CechCupProduct
 public import Sheaf.AlgebraicGeometry.ModuleCechComparison
+import Sheaf.Paper.CechComparisonMapNaturality
+import Sheaf.Paper.ModuleCupFlasqueAcyclicity
+import Sheaf.Paper.ModuleCupGodementPairing
 
 /-! # Resolution representatives for a Cech cup cocycle
 

@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 public import Sheaf.AlgebraicGeometry.DerivedDirectImageSquareMate
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Sheaf.AlgebraicGeometry.DirectImageSquareUnitTransport
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
 /-! # Right-derived unit normalization of direct-image squares
 
 Source: Stacks Project, Cohomology, Tag 0D5T.

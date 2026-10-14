@@ -7,6 +7,10 @@ module
 
 public import Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison
 public import Sheaf.Algebra.Homology.AffineBaseChangeTildeRepresentative
+import Sheaf.Algebra.Homology.AffineTildePushforwardCohomologyNormalization
+import Sheaf.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.AlgebraicGeometry.TensorPullbackTilde
 
 /-! # Ordinary affine exchange in tensor coordinates
 
