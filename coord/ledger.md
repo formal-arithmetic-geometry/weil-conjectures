@@ -14668,3 +14668,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:59 L: batch 20261014T054718 dependency take-out
 - 06:03 L: returned deliver/S1/Sheaf.AlgebraicGeometry.AlgebraTensorPullbackComparison (reviewer RETURN: (reviewer X-cfdb2, head cfdb205fd) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Al)
 - 06:05 L: returned deliver/N1/Sheaf.RingTheory.ColimitFlatRelationDescent (reviewer RETURN: (reviewer X-3bf66, head 3bf661c7e) E2 (review point 4): lean/Sheaf/RingTheory/FiniteIdealKernelDescent.lean:99 leaves `s)
+- 06:06 L: returned deliver/V2/Sheaf.AlgebraicGeometry.PerfectDescendMorphisms (reviewer RETURN: (reviewer X-34130, head 341308594) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Pe)
