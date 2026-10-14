@@ -26,9 +26,103 @@
   "def-nagata-compactification",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Unpack $d$: $i$ is a quasi-compact open immersion, $\\overline g$ is proper, and $\\overline g i=g$. Properness makes $\\overline g$ quasi-compact and separated. Its diagonal is therefore a closed immersion, hence proper by clause (c) of [lem-weil-pbc-proper-fp-permanence], hence quasi-compact by the definition of proper and finite type. Thus $\\overline g$ is quasi-separated. Apply clause (2) of [lem-weil-pbc-qcqs-morphism-permanence] to $\\overline g$ and the qcqs scheme $Z$: $\\overline Y$ is qcqs.",
+   "uses": [
+    "def-nagata-compactification",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-weil-quasi-separated-morphism",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, lemma-shriek-composition, proof first paragraph and compactification diagram; hypotheses for the second compactification; Schemes Tag 01KU and the definition of quasi-separated"
+   }
+  },
+  {
+   "text": "Put $h=i\\circ f$. By [lem-weil-pbc-qc-open-immersion-finite-type], $i$ is of finite type. Clause (e) of [lem-weil-pbc-proper-fp-permanence] gives that $h$ is locally of finite type; clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] makes it quasi-compact, since $X$ is quasi-compact and $\\overline Y$ is quasi-separated. Hence $h$ is of finite type. An open immersion is a monomorphism: maps into its source are determined by their composites with the inclusion of the open subscheme. Consequently $X\\times_Y X\\cong X\\times_{\\overline Y}X$: for every test scheme the conditions $f u=f v$ and $i f u=i f v$ are equivalent, and the inverse morphisms are the pairs of projections supplied by the fibre-product universal property. Under these inverse maps the diagonals agree. Since the diagonal of $f$ is a closed immersion, so is that of $h$; thus $h$ is separated.",
+   "uses": [
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-finite-type-morphism",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, lemma-shriek-composition, proof first paragraph and compactification diagram; check that the composite into the prescribed ambient scheme is separated finite type; Morphisms Tag 01T3"
+   }
+  },
+  {
+   "text": "Apply [thm-nagata-compactification] to $h:X\\to\\overline Y$: step 1 supplies its qcqs base and step 2 supplies separatedness and finite type. Obtain a compactification $e=(a:X\\hookrightarrow\\overline X,p:\\overline X\\to\\overline Y)$, with $p a=i f$, $a$ a quasi-compact open immersion and $p$ proper.",
+   "uses": [
+    "thm-nagata-compactification",
+    "def-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, lemma-shriek-composition, proof first paragraph and compactification diagram; second sentence; More on Flatness Tag 0F41, theorem-nagata"
+   }
+  },
+  {
+   "text": "Form $U=\\overline X\\times_{\\overline Y}Y$ with projections $b,p_Y$. Its defining equality is $p b=i p_Y$, and its defining universal property says that this square is Cartesian. The pair $(a,f)$ defines $c:X\\to U$ with $bc=a$ and $p_Yc=f$. Base change $e$ along $i$. By [def-nagata-compactification-base-change] and [lemma-nagata-compactification-base-change], the resulting factorization $X\\times_{\\overline Y}Y\\to U\\to Y$ is a compactification of $X\\times_{\\overline Y}Y\\to Y$. Identify its source with $X$ explicitly: the forward map is $(1_X,f)$, the inverse is the first projection. In the fibre product $i\\operatorname{pr}_Y=i f\\operatorname{pr}_X$, so monicity of the open immersion $i$ gives $\\operatorname{pr}_Y=f\\operatorname{pr}_X$; the two composites are identities by uniqueness in the fibre-product universal property. Under this identification the first map is exactly $c$, since its projections are $a,f$, and the second is $p_Y$. Therefore $c$ is a quasi-compact open immersion and $p_Y$ is proper, and $(c,p_Y)$ compactifies $f$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion",
+    "def-nagata-compactification-base-change",
+    "lemma-nagata-compactification-base-change",
+    "def-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, lemma-shriek-composition, proof first paragraph and compactification diagram; inverse image U and the left triangle in the displayed diagram"
+   }
+  },
+  {
+   "text": "The projection $b$ is the base change of $i$ along $p$, hence is an open immersion by [lem-weil-pbc-open-immersion-base-change] and quasi-compact by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. Finally $\\overline g\\circ p$ is proper by [lem-weil-pbc-proper-composition], and $(\\overline g\\circ p)\\circ a=\\overline g\\circ(i\\circ f)=g\\circ f$. Together with the quasi-compact open immersion $a$ this is precisely the compactification $(a,\\overline g\\circ p)$ of $g\\circ f$. All asserted equations and the Cartesian square were obtained in step 4.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-proper-composition",
+    "def-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, lemma-shriek-composition, proof first paragraph and compactification diagram; right open immersion and total compactification in the displayed diagram; Schemes Tags 01JY and 01K5; Morphisms Tag 01W3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-compactification",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "thm-nagata-compactification",
+  "def-nagata-compactification-base-change",
+  "lemma-nagata-compactification-base-change",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J, lemma-shriek-composition, proof first paragraph and displayed compactification diagram; hypothesis checks expanded using flat.tex Tag 0F41 (theorem-nagata)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,15 +179,107 @@
    "results": "Second-reader search: 0 hits; . Read returned signatures: properness criteria and scheme pullback/image identities do not state compactification existence or derived etale extension-by-zero exchange.",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyOfFiniteType.*comp|QuasiCompact.*comp",
+   "results": "24 hits: Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Descent.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean. Supporting permanence searches; existing lem-weil-pbc-proper-fp-permanence already covers locally finite type composition.",
+   "date": "2026-10-14",
+   "verdict": "supporting search; existing DAG leaf reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible compactifications of composable separated finite type morphisms with a prescribed compactification of the second morphism",
+   "results": "8 hits: AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.exists_map_preimage_eq_map_preimage, AlgebraicGeometry.ExistsHomHomCompEqCompAux. Read the returned signatures; none states compactification existence with the prescribed triangle.",
+   "date": "2026-10-14",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition of finite type scheme morphisms is finite type",
+   "results": "service unavailable: Internal Server Error; 0 hits: . Supporting permanence searches; existing lem-weil-pbc-proper-fp-permanence already covers locally finite type composition.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composite of two morphisms of schemes of finite type is of finite type",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.instCompScheme, AlgebraicGeometry.IsFinite.comp_iff, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.locallyOfFiniteType_comp, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType. Supporting permanence searches; existing lem-weil-pbc-proper-fp-permanence already covers locally finite type composition.",
+   "date": "2026-10-14",
+   "verdict": "supporting search; existing DAG leaf reused"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, CategoryTheory.CategoryStruct.comp",
+   "results": "12 hits: AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.locallyOfFiniteType_comp, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.pointEquivClosedPoint, AlgebraicGeometry.pointOfClosedPoint_comp, AlgebraicGeometry.SpecMap_residueFieldIsoBase_inv. Supporting permanence searches; existing lem-weil-pbc-proper-fp-permanence already covers locally finite type composition.",
+   "date": "2026-10-14",
+   "verdict": "supporting search; existing DAG leaf reused"
+  },
+  {
+   "tool": "grep",
+   "query": "Compactification|compactif.*[Ss]cheme",
+   "results": "0 hits: . Read the returned signatures; none states compactification existence with the prescribed triangle.",
+   "date": "2026-10-14",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible compactifications for composable scheme morphisms",
+   "results": "service unavailable: Internal Server Error; 0 hits: . Read the returned signatures; none states compactification existence with the prescribed triangle.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Compactification\"",
+   "results": "0 hits: . Read the returned signatures; none states compactification existence with the prescribed triangle.",
+   "date": "2026-10-14",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nagata compactification of a morphism X to the proper compactification of Y and restriction to the open subscheme Y",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.liftCoborder, AlgebraicGeometry.specTargetImageFactorization, AlgebraicGeometry.Scheme.Hom.liftCoborder_ι, AlgebraicGeometry.specTargetImageFactorization_comp, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization. Read the returned signatures; none states compactification existence with the prescribed triangle.",
+   "date": "2026-10-14",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "Nagata|HasCompactification|Compactification",
+   "results": "0 hits in Mathlib/AlgebraicGeometry for Nagata, HasCompactification, or Compactification.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated morphism of finite type admits a proper extension whose pullback to an open subscheme is a compactification of the original morphism",
+   "results": "8 returned signatures concern properness criteria, cancellation of proper/finite morphisms, or proper projective spectra; none asserts existence of the prescribed compactification triangle.",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-shriek-qcqs-composition",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-compatible-compactification-triangle",
+  "worker": "stage1",
+  "summary": "Kept the statement and prescribed compactification unchanged. Expanded the geometric construction of Tag 0F7J into five steps, checking the qcqs Nagata base and identifying the base-changed source by inverse maps. Reused existing DAG definitions and permanence lemmas; no new nodes or attachment. Checked the weaker open-immersion convention of the Lean compactification structure and retained all quasi-compactness assertions explicitly.",
+  "blueprint": "Realizes the compatible geometric models for the composition equality in the compact-support constructibility expansion of thm-weil-pbc-direct-image-finiteness-proper, through the three existing via nodes. The local geometric diagram is Tag 0F7J, first paragraph; no change to the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-f5606b65f",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-f5606b65f (reviewer sub-agent of L); spot-checked: Read the full item, five proof steps, cited statements, source passages, report, and unit/chapter route. Nagata hypotheses, quasi-compactness, the explicit source identification, and Cartesian projections check out. No new nodes, duplicate splits, missing dependencies, or cycles. Archived master coefficient categories remain distinct; no comparison theorem is certified here. Review written to review.md; no fixes required."
+ }
 }
