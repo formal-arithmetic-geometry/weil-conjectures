@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "Use the existing determinant_split_comparison_exists theorem. It gives both the local wedge formula and restriction compatibility under exactly the same hypotheses; the duplicate local declaration is retired.",
+   "text": "The historical local construction is already subsumed by determinant_split_comparison_exists, as recorded in the existing statement_change. Retain the canonical theorem and retire this redundant attachment.",
    "uses": [
     "lem-sc-determinant-split-comparison"
    ],
@@ -69,16 +69,6 @@
  },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-rr",
- "lean": {
-  "existing": true,
-  "module": "Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DeterminantSplitComparison.lean",
-  "declaration": "AlgebraicGeometry.Scheme.Modules.determinant_split_comparison_exists",
-  "statement": "theorem determinant_split_comparison_exists {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]\n    (U : X.Opens)\n    (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)\n    (hf : (restrictFunctor U.ι).map S.f ≫ e.hom = biprod.inl)\n    (hg : e.hom ≫ biprod.snd = (restrictFunctor U.ι).map S.g)\n    (l : ∀ (W : X.Opens), W ≤ U → S.X₃.val.obj (op W) → S.X₂.val.obj (op W))\n    (hl : ∀ W hW b, S.g.val.app (op W) (l W hW b) = b) :\n    ∀ x ∈ U, ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧\n      ∃ (d : ∀ (W : X.Opens), W ≤ V →\n        (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)\n          ≃ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W)),\n      (∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))\n        (b : Fin r₃ → S.X₃.val.obj (op W)),\n        d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)\n          (exteriorSheafSection S.X₃ r₃ W b)) =\n        exteriorSheafSection S.X₂ r₂ W\n          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))\n            (fun j ↦ l W (hW.trans hVU) (b j)) (Fin.cast hr i))) ∧\n      (∀ (W Z : X.Opens) (hW : W ≤ V) (hZW : Z ≤ W) y,\n        (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =\n          d Z (hZW.trans hW)\n            ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map\n              (homOfLE hZW).op y))",
-  "branch": "sheaf-dag",
-  "by": "M1",
-  "date": "2026-10-14"
- },
  "reviewed": {
   "date": "2026-10-12",
   "by": "L",
@@ -92,12 +82,12 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-2aac0",
-  "group": "M1",
+  "reviewer": "X-ead30",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261014T035544-L-887375",
+  "landing": "20261014T092935-L-608889",
   "kind": "interface",
-  "note": "independent Codex review: Matched the redirected node exactly to determinant_split_comparison_exists, verified the recorded retirement and unchanged restriction theorem, found no callers or DAG citers, and compiled the delivery and sole direct importer against it; both axiom probes show only propext, Classical.choice, Quot.sound."
+  "note": "independent Codex review: Matched Lean with node statements and proof dependencies; verified recorded retirement, unchanged canonical signature, minimal forced adaptation, original caller failure, clean delivery and importer compilation, standard axioms only, and repairs to both obsolete attachments."
  },
  "statement_change": {
   "date": "2026-10-14",

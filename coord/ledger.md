@@ -14788,3 +14788,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 17:27 L: batch 20261014T092317 dependency take-out
 - 09:29 L: merged deliver/XR33076d633fce5c89/Sheaf.Algebra.Homology.KInjectiveProducts (stage 3; reviewer PASS; first push; landing 20261014T092934-L-608757 (proof); batch 20261014T092932; modules 1; new nodes 0; change records: coord/changes/KInjectiveProducts-retired-imports.md)
+- 09:29 L: merged deliver/K3/Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal (stage 3; reviewer PASS; after a return; landing 20261014T092935-L-608889 (interface); batch 20261014T092932; modules 2; new nodes 0; change records: coord/changes/DeterminantSplitComparisonLocal-repair.md)

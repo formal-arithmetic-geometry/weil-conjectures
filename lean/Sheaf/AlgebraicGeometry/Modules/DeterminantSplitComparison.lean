@@ -13,7 +13,6 @@ public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
 import Sheaf.LinearAlgebra.ExteriorTopDirectSum
 import Sheaf.AlgebraicGeometry.Modules.DeterminantSplitLinearMaps
 import Sheaf.AlgebraicGeometry.Modules.DeterminantSplitLinearBijective
-import Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal
 
 /-!
 # Construction of the determinant comparison on a split open
@@ -97,11 +96,7 @@ theorem determinant_split_comparison_exists {X : Scheme.{v}}
   refine ⟨V, hVU, hxV, d, ?_, ?_⟩
   · intro W hW a b
     exact hd₀ W (hW.trans hVU) a b
-  · apply determinant_split_comparison_restriction S r₁ r₂ r₃ V d
-      (fun W hW ↦ d₀ W (hW.trans hVU))
-    · intro W Z hW hZW y
-      exact hn W Z (hW.trans hVU) hZW y
-    · intro W hW y
-      rfl
+  · intro W Z hW hZW y
+    exact hn W Z (hW.trans hVU) hZW y
 
 end AlgebraicGeometry.Scheme.Modules
