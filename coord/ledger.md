@@ -14215,7 +14215,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:01 L: batch 20261014T013031 dependency take-out
 - 02:01 L: returned deliver/S3/Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap (reviewer RETURN: (reviewer X-e1246, head e12463c18) C3: In dag/nodes/sec-picard-framework/lem-pc-extension-kflat-quasi-iso.json, the proo)
 - 02:04 L: returned deliver/Q3/Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso (reviewer RETURN: (reviewer X-e81b5, head e81b5f88f) H10 (compilation; stage-3 reader gate): lean/Sheaf/AlgebraicGeometry/MixedHomTensorPu)
-- 02:05 L: merged deliver/XRa3e07659d1a5d330/Sheaf.Paper.CechCupPullbackCompat (stage 3; reviewer PASS; first push; landing 20261014T020502-L-3808366 (proof); batch 20261014T020501; modules 1; new nodes 0)
 - 02:05 L: merged deliver/A2/Sheaf.Algebra.Homology.KInjectiveProducts (stage 3; reviewer PASS; first push; landing 20261014T020503-L-3808473 (proof); batch 20261014T020501; modules 1; new nodes 0)
 - 02:05 L: merged deliver/A2/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (stage 3; reviewer PASS; first push; landing 20261014T020503-L-3808668 (proof); batch 20261014T020501; modules 1; new nodes 0)
 - 02:05 L: merged deliver/A2/Sheaf.RingTheory.ProjectiveResolutionExtDegree (stage 3; reviewer PASS; first push; landing 20261014T020504-L-3808820 (proof); batch 20261014T020501; modules 1; new nodes 0)
@@ -14227,7 +14226,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:05 L: merged deliver/B4/Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling (stage 3; reviewer PASS; first push; landing 20261014T020506-L-3809625 (proof); batch 20261014T020501; modules 1; new nodes 0)
 - 02:05 L: merged deliver/B4/Sheaf.Paper.CartierEquality (stage 3; reviewer PASS; first push; landing 20261014T020507-L-3809806 (proof); batch 20261014T020501; modules 1; new nodes 0)
 - 02:05 L: merged deliver/C3/Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSingleStabilizerComponent (stage 3; reviewer PASS; after a return; landing 20261014T020507-L-3809926 (interface); batch 20261014T020501; modules 2; new nodes 1; change records: coord/changes/affine-torsor-single-stabilizer-component-section.md)
-- 02:05 L: merged deliver/D2/Sheaf.Paper.ModuleCupDerivedClassComparison (stage 3; reviewer PASS; after a return; landing 20261014T020507-L-3810095 (proof); batch 20261014T020501; modules 1; new nodes 1; change records: coord/changes/ModuleCupDerivedClassComparisonRestore.md)
 - 02:05 L: merged deliver/E3/Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal (stage 3; reviewer PASS; first push; landing 20261014T020508-L-3810240 (proof); batch 20261014T020501; modules 1; new nodes 0)
 - 02:05 L: merged deliver/E3/Sheaf.CategoryTheory.MapExtendHomology (stage 3; reviewer PASS; first push; landing 20261014T020508-L-3810435 (proof); batch 20261014T020501; modules 1; new nodes 0)
 - 02:05 L: merged deliver/E3/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone (stage 3; reviewer PASS; first push; landing 20261014T020509-L-3810555 (proof); batch 20261014T020501; modules 1; new nodes 0)
@@ -14243,9 +14241,7 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:05 L: merged deliver/J3/Sheaf.Algebra.Homology.OpenOverInternalHomCycleHomologySquares (stage 3; reviewer PASS; first push; landing 20261014T020513-L-3812079 (proof); batch 20261014T020501; modules 1; new nodes 0)
 - 02:05 L: merged deliver/J4/Sheaf.Algebra.Homology.BaseTensorUnitCohomologyModel (stage 3; reviewer PASS; first push; landing 20261014T020513-L-3812179 (interface); batch 20261014T020501; modules 3; new nodes 2)
 - 02:05 L: merged deliver/K3/Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationChainCalculation (stage 3; reviewer PASS; first push; landing 20261014T020514-L-3812459 (interface); batch 20261014T020501; modules 3; new nodes 2)
-- 02:05 L: merged deliver/N2/Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker (stage 3; reviewer PASS; after a return; landing 20261014T020514-L-3812631 (proof); batch 20261014T020501; modules 1; new nodes 0)
 - 02:05 L: merged deliver/N2/Sheaf.AlgebraicGeometry.HigherDirectImageRawTriangleAdjunct (stage 3; reviewer PASS; first push; landing 20261014T020515-L-3812813 (proof); batch 20261014T020501; modules 1; new nodes 0)
-- 02:05 L: merged deliver/N2/Sheaf.Paper.ModuleCupPullbackCycleStep (stage 3; reviewer PASS; first push; landing 20261014T020515-L-3812965 (proof); batch 20261014T020501; modules 1; new nodes 0; change records: coord/changes/module-cup-pullback-cycle-step.md)
 - 02:05 L: merged deliver/N4/Sheaf.AlgebraicGeometry.MayerVietorisImageRestrictionLocalization (stage 3; reviewer PASS; first push; landing 20261014T020516-L-3813165 (interface); batch 20261014T020501; modules 2; new nodes 1)
 - 02:05 L: merged deliver/P4/Sheaf.AlgebraicGeometry.SelfTorAffineTensorSections (stage 3; reviewer PASS; first push; landing 20261014T020516-L-3813323 (interface); batch 20261014T020501; modules 3; new nodes 2)
 - 02:05 L: merged deliver/P4/Sheaf.AlgebraicGeometry.SelfTorChosenResolutionCharts (stage 3; reviewer PASS; first push; landing 20261014T020516-L-3813528 (interface); batch 20261014T020501; modules 3; new nodes 2)
@@ -14257,3 +14253,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:14 L: returned deliver/Q3/Sheaf.Paper.ModuleCupEqualDerivedMapsClass (reviewer RETURN: (reviewer X-97f7d, head 97f7d2deb) C5 (stage-3 review points 4–5): The item needs a common resolution-class equivalence,)
 - 02:14 L: returned deliver/F1/Sheaf.Algebra.Homology.AffineBaseChangeTildeMateFactorization (reviewer RETURN: (reviewer X-27336, head 27336b1c6) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.Aff)
 - 02:17 L: returned deliver/D3/Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionDiagram (reviewer RETURN: (reviewer X-c7869, head c78691cb0) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Mo)
+
+- 10:18 L: batch 20261014T020501 dependency take-out
