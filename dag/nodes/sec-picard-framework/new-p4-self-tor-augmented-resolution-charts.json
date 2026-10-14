@@ -10,18 +10,35 @@
  },
  "proof": [
   {
-   "text": "Construct the required comparison using the stated resolution and tensor constructions; verify each displayed equation by the defining universal properties.",
-   "uses": [],
+   "text": "Apply the ambient affine self-Tor comparison, producing charts r on Y and their augmented resolution section equations before any pullback.",
+   "uses": [
+    "lem-pc-self-tor-ambient-resolution-charts"
+   ],
    "elementary": false
+  },
+  {
+   "text": "For each chart U apply exists_tensorPullback_over_iso_unit to r U. This constructs t on the inverse-image open with the canonical pullback-unit section equation for every V contained in U.",
+   "uses": [
+    "lem-pc-tensor-pullback-over-iso-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the pullback unit moves restriction of selfTorAffineSection before the unit. The normalization of t U then rewrites its value to the pullback unit of r U. Apply the ambient section equation and then the inverse normalization of t V. This proves the original explicit q equation by transitivity.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-self-tor-ambient-resolution-charts",
+  "lem-pc-tensor-pullback-over-iso-unit"
+ ],
  "proof_origin": {
   "by": "worker",
-  "agent": "P4",
+  "agent": "C1",
   "date": "2026-10-14",
-  "document": "https://stacks.math.columbia.edu/tag/06YH",
-  "place": "comparison of resolutions"
+  "document": "https://stacks.math.columbia.edu/tag/0096",
+  "place": "Separate the ambient derived tensor computation from ordinary pullback; assemble using adjunction-unit naturality"
  },
  "mathlib_searches": [
   {
@@ -96,9 +113,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P4",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261014T020516-L-3813528",
+  "landing": "20261014T023931-L-13770",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

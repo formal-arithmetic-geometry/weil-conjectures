@@ -1,0 +1,182 @@
+{
+ "id": "lem-pc-self-tor-ambient-resolution-charts",
+ "kind": "statement",
+ "title": "Affine self-Tor comparison before tensor pullback",
+ "statement": "theorem exists_selfTor_ambient_resolution_charts {Z Y : Scheme.{u}} (i : Z ⟶ Y) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [IsClosedImmersion i] (n : ℕ) : let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf) let S := DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0 let Q := ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj (S.obj B ⊗ S.obj B)) let T := fun U : Y.affineOpens ↦ tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙ Scheme.Modules.pushforward U.1.ι let s := fun (U : Y.affineOpens) (M : ModuleCat.{u} (Γ(Y, U.1) : Type u)) (x : M) ↦ let L := (tilde.functor Γ(Y, U.1)).obj M (Scheme.Modules.restrictAppIso U.2.isoSpec.hom L (U.1.ι ⁻¹ᵁ U.1)).inv (L.val.map (homOfLE le_top).op ((tilde.adjunction.unit.app M) x)) ∃ t : ∀ U : Y.affineOpens, ((T U).obj _).over (U.1) ≅ Q.over (U.1), ∀ (V U : Y.affineOpens) (h : V.1 ≤ U.1) (_hbasic : ∃ f : Γ(Y, U.1), Y.basicOpen f = V.1), let A := (Γ(Y, U.1) : Type u) let C := (Γ(Y, V.1) : Type u) let I := i.ker.ideal U let J := i.ker.ideal V let φ := (Y.presheaf.map (homOfLE h).op).hom let P := projectiveResolution (ModuleCat.of A (A ⧸ I)) let R := projectiveResolution (ModuleCat.of C (C ⧸ J)) let TA := (tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex (.down ℕ) let TC := (tensorRight (ModuleCat.of C (C ⧸ J))).mapHomologicalComplex (.down ℕ) ∀ (ψ : (A ⧸ I) →+* (C ⧸ J)) (a : P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex (.down ℕ)).obj R.complex) (k : TA.obj P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex (.down ℕ)).obj (TC.obj R.complex)), (∀ x : A, ψ (Ideal.Quotient.mk I x) = Ideal.Quotient.mk J (φ x)) → (∀ x : P.complex.X 0, R.π.f 0 (a.f 0 x) = ψ (P.π.f 0 x)) → (∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I), k.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a.f j x) ⊗ₜ[C] (ψ y)) → let e := ((TC.obj R.complex).sc n).mapHomologyIso (ModuleCat.restrictScalars φ) let q := fun x ↦ (R.isoLeftDerivedObj (tensorRight (ModuleCat.of C (C ⧸ J))) n).inv (e.hom (HomologicalComplex.homologyMap k n ((P.isoLeftDerivedObj (tensorRight (ModuleCat.of A (A ⧸ I))) n).hom x))) ∀ x, (t U).hom.val.app (op (Over.mk (homOfLE (h)))) (((T U).obj _).val.map (homOfLE (h)).op (s U _ x)) = (t V).hom.val.app (op (Over.mk (𝟙 (V.1)))) (s V _ (q x))",
+ "stmt_deps": [],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Lemma 36.3.9(2), with 06YG and 00LS; ambient computation before pullback"
+ },
+ "proof": [
+  {
+   "text": "Identify the restricted pushforward of the closed structure sheaf with the associated affine quotient and sheafify its chosen projective resolution.",
+   "uses": [
+    "lem-sc-affine-quotient-resolution-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend the resolution into nonpositive cochain degrees. Projective terms sheafify to flat terms; use bounded-above flat K-flatness and the affine derived tensor formula to compute the ambient tensor. Exact tilde and isoLeftDerivedObj identify its homology with the associated self-Tor module.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each supplied augmented a and pure-tensor comparison k, sheafify the augmentation square and invert its quasi-isomorphisms. Naturality of the derived tensor comparison, exact restriction-of-scalars homology, and the tilde unit gives the stated equation for q. This is the naturality part of the same ambient comparison, and involves no tensor pullback to Z.",
+   "uses": [
+    "lem-pc-kflat-derived-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-kflat-derived-tensor-comparison",
+  "lem-sc-affine-quotient-resolution-sheafification"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "C1",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Lemma 36.3.9(2), with 06YG and 00LS; ambient computation before pullback"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Associated sheaf of Tor modules identifies naturally with homology of derived tensor on an affine scheme",
+   "results": "AlgebraicGeometry.Scheme.Modules.instAbelian, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj, ModuleCat.tilde, CategoryTheory.Tor, CategoryTheory.Tor', Rep.Tor, Rep.Tor_obj",
+   "date": "2026-10-14",
+   "verdict": "supporting API only, no exact theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "ProjectiveResolution.isoLeftDerivedObj",
+   "results": "loogle: unknown identifier 'ProjectiveResolution.isoLeftDerivedObj'",
+   "date": "2026-10-14",
+   "verdict": "supporting API only, no exact theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullback.*over|over.*tensorPullback|homology.*tilde",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "supporting API only, no exact theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a sheaf of modules commutes with restriction to an open subset and preserves the adjunction unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of modules commutes with restriction to an open subset",
+   "results": "AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst, AlgebraicGeometry.isPullback_morphismRestrict, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-14",
+   "verdict": "supporting API only, no exact theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictStalkNatIso|isIso_of_bijective_stalkLinearMap|unit_conjugateEquiv",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-14",
+   "verdict": "supporting API only, no exact theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of sheaves of modules invertible on an open pulls back to an isomorphism on its inverse image",
+   "results": "AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, AlgebraicGeometry.Scheme.Modules.inv_app, CategoryTheory.GrothendieckTopology.W_sheafToPreheaf_map_iff_isIso, CategoryTheory.GrothendieckTopology.W_sheafToPresheaf_map_iff_isIso, PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.instIsIsoInvApp, CategoryTheory.Functor.IsCoverDense.presheafIso",
+   "date": "2026-10-14",
+   "verdict": "supporting API only, no exact theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "SheafOfModules.overFunctor, SheafOfModules.overFunctorMap, AlgebraicGeometry.Scheme.Modules.overFunctorEquiv",
+   "date": "2026-10-14",
+   "verdict": "supporting API only, no exact theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfTorAugmentedResolutionCharts",
+  "date": "2026-10-14",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine self-Tor comparison: ambient derived tensor computation and subsequent ordinary tensor pullback",
+   "via": [
+    "new-p4-self-tor-augmented-resolution-charts",
+    "new-q1-self-tor-chosen-resolution-charts",
+    "new-t2-self-tor-target-restriction-coordinates",
+    "new-t2-self-tor-target-basic-localization",
+    "new-u4-self-tor-basic-ideal-wedge-coordinates",
+    "new-e3-self-tor-ideal-wedge-coordinates",
+    "new-h3-self-tor-local-wedge-coordinates",
+    "new-e1-self-tor-nested-affine-coordinates",
+    "new-n1-self-tor-compatible-affine-maps",
+    "new-r4-self-tor-conormal-dual-chart-iso",
+    "lem-sc-self-tor-conormal-dual-chart",
+    "new-s3-koszul-conormal-nested-charts",
+    "new-w4-koszul-self-ext-local-alignment",
+    "new-s3-koszul-conormal-compatible-cover",
+    "lem-sc-koszul-self-ext-conormal-local-comparison",
+    "lem-sc-koszul-self-ext-conormal-comparison-surjection",
+    "lem-sc-koszul-self-ext-dual-exterior-conormal",
+    "lem-sc-koszul-self-ext-yoneda-surjection",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SelfTorAmbientResolutionCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/SelfTorAmbientResolutionCharts.lean",
+  "declaration": "AlgebraicGeometry.exists_selfTor_ambient_resolution_charts",
+  "statement": "theorem exists_selfTor_ambient_resolution_charts {Z Y : Scheme.{u}} (i : Z ⟶ Y) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [IsClosedImmersion i] (n : ℕ) : let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf) let S := DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0 let Q := ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj (S.obj B ⊗ S.obj B)) let T := fun U : Y.affineOpens ↦ tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙ Scheme.Modules.pushforward U.1.ι let s := fun (U : Y.affineOpens) (M : ModuleCat.{u} (Γ(Y, U.1) : Type u)) (x : M) ↦ let L := (tilde.functor Γ(Y, U.1)).obj M (Scheme.Modules.restrictAppIso U.2.isoSpec.hom L (U.1.ι ⁻¹ᵁ U.1)).inv (L.val.map (homOfLE le_top).op ((tilde.adjunction.unit.app M) x)) ∃ t : ∀ U : Y.affineOpens, ((T U).obj _).over (U.1) ≅ Q.over (U.1), ∀ (V U : Y.affineOpens) (h : V.1 ≤ U.1) (_hbasic : ∃ f : Γ(Y, U.1), Y.basicOpen f = V.1), let A := (Γ(Y, U.1) : Type u) let C := (Γ(Y, V.1) : Type u) let I := i.ker.ideal U let J := i.ker.ideal V let φ := (Y.presheaf.map (homOfLE h).op).hom let P := projectiveResolution (ModuleCat.of A (A ⧸ I)) let R := projectiveResolution (ModuleCat.of C (C ⧸ J)) let TA := (tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex (.down ℕ) let TC := (tensorRight (ModuleCat.of C (C ⧸ J))).mapHomologicalComplex (.down ℕ) ∀ (ψ : (A ⧸ I) →+* (C ⧸ J)) (a : P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex (.down ℕ)).obj R.complex) (k : TA.obj P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex (.down ℕ)).obj (TC.obj R.complex)), (∀ x : A, ψ (Ideal.Quotient.mk I x) = Ideal.Quotient.mk J (φ x)) → (∀ x : P.complex.X 0, R.π.f 0 (a.f 0 x) = ψ (P.π.f 0 x)) → (∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I), k.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a.f j x) ⊗ₜ[C] (ψ y)) → let e := ((TC.obj R.complex).sc n).mapHomologyIso (ModuleCat.restrictScalars φ) let q := fun x ↦ (R.isoLeftDerivedObj (tensorRight (ModuleCat.of C (C ⧸ J))) n).inv (e.hom (HomologicalComplex.homologyMap k n ((P.isoLeftDerivedObj (tensorRight (ModuleCat.of A (A ⧸ I))) n).hom x))) ∀ x, (t U).hom.val.app (op (Over.mk (homOfLE (h)))) (((T U).obj _).val.map (homOfLE (h)).op (s U _ x)) = (t V).hom.val.app (op (Over.mk (𝟙 (V.1)))) (s V _ (q x))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261014T023931-L-13770",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261014T023931-L-13770",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
