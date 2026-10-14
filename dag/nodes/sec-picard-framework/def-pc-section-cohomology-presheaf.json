@@ -2,50 +2,50 @@
  "id": "def-pc-section-cohomology-presheaf",
  "kind": "definition",
  "title": "Section cohomology presheaf of a resolution complex",
- "statement": "For a scheme T [def-pc-scheme], a homological complex K [def-sp-injective-resolutions], of sheaves of modules on T, and q∈ℕ, define sectionCohomologyPresheaf(K,q) on T.Opensᵒᵖ by assigning to each open V the q-th homology of the cochain complex of sections of K over V; for an inclusion V≤W its map is the homology map induced by restriction of sections. Thus P(V) and its restriction maps are fixed objects, with no flatness or base-change data.",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], and let $K^\\bullet$ be a cochain complex of sheaves of $\\mathcal O_T$-modules [def-pc-cochain-complex-modules], indexed by $\\mathbb N$, with $q\\in\\mathbb N$. Define the section-cohomology presheaf $P=\\operatorname{sectionCohomologyPresheaf}(K^\\bullet,q)$ on $T_{\\mathrm{Zar}}^{\\mathrm{op}}$ by $P(V)=H^q(\\Gamma(V,K^\\bullet))$ for each open $V\\subseteq T$, where $\\Gamma(V,K^\\bullet)$ is obtained by applying sections degreewise and $H^q$ is cycles modulo boundaries. For an inclusion $V\\subseteq W$, define the restriction map $P(W)\\to P(V)$ as the map on $q$-th cohomology induced degreewise by the section restrictions $\\Gamma(W,K^i)\\to\\Gamma(V,K^i)$. Thus all values and restriction maps of $P$ are fixed, with no flatness or base-change hypotheses.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tags 01E1 and 01E4; section-complex evaluation and restriction of injective resolutions (the declarations bundled in FlatBaseChangeOpenChoices)."
  },
  "stmt_deps": [
   "def-pc-scheme",
-  "def-sc-open-module-cohomology"
+  "def-pc-cochain-complex-modules"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
  "mathlib_searches": [
   {
+   "tool": "grep",
+   "query": "homologyFunctor|mapHomologicalComplex|sectionsFunctor",
+   "results": "2 hits in Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean and Mathlib/Algebra/Category/ModuleCat/Sheaf.lean; no declaration of this section-cohomology presheaf.",
+   "date": "2026-10-14",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "presheaf of homology of section complexes with restriction maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
    "tool": "leanfinder",
-   "query": "presheaf assigning cohomology of global sections of a homological complex on opens",
-   "results": "CategoryTheory.Sheaf.cohomologyPresheaf and cohomologyPresheafFunctor in Mathlib/CategoryTheory/Sites/SheafCohomology/Basic; these are sheaf cohomology presheaves, not module section-complex homology.",
+   "query": "presheaf assigning to each open set the homology of the complex of sections of a cochain complex of sheaves of modules",
+   "results": "CategoryTheory.Sheaf.cohomologyPresheaf and cohomologyPresheafFunctor; no direct section-complex module presheaf match.",
    "date": "2026-10-14",
    "verdict": "no direct match"
   },
   {
    "tool": "loogle",
-   "query": "sectionCohomologyPresheaf, HomologicalComplex.homology",
-   "results": "unknown identifier sectionCohomologyPresheaf; no matching declaration.",
+   "query": "HomologicalComplex.homologyFunctor",
+   "results": "HomologicalComplex.homologyFunctor and related generic homology declarations; no declaration of sectionCohomologyPresheaf.",
    "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "sectionCohomologyPresheaf in Mathlib/",
-   "results": "0 hits.",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "presheaf of section cohomology of a complex",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
+   "verdict": "no direct match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-section-cohomology-untwisted-comparisons",
   "by": "worker",
@@ -54,14 +54,35 @@
  "blueprint": {
   "is": null,
   "from": {
-   "node": null,
-   "place": "the definition of sectionCohomologyPresheaf used in the raw section-complex comparison (Tags 01E1 and 01E4).",
+   "node": "lem-pc-finite-support-hi",
+   "place": "The raw section-complex comparison used in the proof: evaluate the section complex on each open, take q-th homology, and use the restriction-induced homology maps.",
    "via": [
-    "lem-pc-section-cohomology-untwisted-comparisons"
+    "lem-pc-section-cohomology-untwisted-comparisons",
+    "lem-pc-section-cohomology-unit-comparisons",
+    "lem-pc-section-cohomology-principal-denominators",
+    "lem-pc-section-cohomology-principal-localization",
+    "lem-pc-higher-direct-image-section-denominators",
+    "new-higher-direct-image-affine-local-qcoherent",
+    "lem-pc-sections-higher-direct-image-quasi-coherent"
    ]
   },
   "same_as": []
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-coherence"
+ "unit": "sk-thm-picard-coherence",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-pc-section-cohomology-presheaf",
+  "worker": "stage1",
+  "summary": "Audited this project definition against Stacks Tags 01E1 and 01E4. It is a direct construction from the existing scheme and open-module-cohomology definitions: evaluate the section complex on each open, take q-th homology, and use restriction-induced homology maps. No additional non-elementary lemma is needed for a definition split. The source repository contains no declaration tagged with this blueprint id or named sectionCohomologyPresheaf.",
+  "blueprint": "The item realizes the definition sentence used by the raw section-complex comparison: evaluation of a complex of sections on opens, q-th homology, and restriction maps."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-650f44367",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-650f44367 (reviewer sub-agent of L); spot-checked: Definition and edge cases pass. Repair required: blueprint.from.node was null despite the item’s nearest ancestor being lem-pc-finite-support-hi, and the source place included an internal bundle name instead of exact Stacks labels/locations. Corrected full JSON is in fixes/dag/nodes/sec-picard-framework/def-pc-section-cohomology-presheaf.json.; 1 file(s) fixed by the reviewer"
+ }
 }
