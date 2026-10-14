@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sbc-prop-torsors-h1",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Torsors and etale $H^1$",
- "statement": "Let $Y$ be a scheme and $M$ a finite abelian group. Then there is a\ncanonical bijection, natural in $(Y,M)$,\n\n$$\n\\operatorname{Tor}^1(Y,M)\\xrightarrow{\\ \\sim\\ }H^1(Y_{\\Et},\\underline M)\n$$\n\nbetween the pointed set of isomorphism classes of $M$-torsors of\n[def-weil-pbc-finite-torsors] and $H^1(Y_{\\Et},\\underline M)$, and an\n$M$-torsor is the same thing as a finite etale $Y$-scheme with a simply\ntransitive $M$-action. Moreover, let $Y$ be connected\nwith geometric point $\\bar y$. For an $M$-torsor $P$, viewed as a finite\netale $Y$-scheme, and $p\\in|P_{\\bar y}|$, let\n$f_P:\\pi_1(Y,\\bar y)\\to M$ be defined by $g\\cdot p=p+f_P(g)$; it is\na continuous homomorphism independent of $p$ and of $P$ within its\nisomorphism class. Then $P$ is connected — that is, a Galois cover with\ngroup $M$ — exactly when $f_P$ is surjective (the case of the sketch is\n$M=\\Z/d\\Z$).\n(Stacks 02NE, together with the finite-etale correspondence; cf. Milne,\n*Lectures on Etale Cohomology*, III.3.)",
+ "statement": "Let $Y$ be a scheme and $M$ a finite abelian group. Then there is a\ncanonical bijection, natural in $(Y,M)$,\n\n$$\n\\operatorname{Tor}^1(Y,M)\\xrightarrow{\\ \\sim\\ }H^1(Y_{\\Et},\\underline M)\n$$\n\nbetween the pointed set of isomorphism classes of $M$-torsors of\n[def-weil-pbc-finite-torsors] and $H^1(Y_{\\Et},\\underline M)$, and an\n$M$-torsor is the same thing as a finite etale surjective $Y$-scheme with an $M$-action simply\ntransitive on every geometric fibre. Moreover, let $Y$ be connected\nwith geometric point $\\bar y$. For an $M$-torsor $P$, viewed as a finite\netale $Y$-scheme, and $p\\in|P_{\\bar y}|$, let\n$f_P:\\pi_1(Y,\\bar y)\\to M$ be defined by $g\\cdot p=p+f_P(g)$; it is\na continuous homomorphism independent of $p$ and of $P$ within its\nisomorphism class. Then $P$ is connected — that is, a Galois cover with\ngroup $M$ — exactly when $f_P$ is surjective (the case of the sketch is\n$M=\\Z/d\\Z$).\n(Stacks 03AJ, 03RV, 0BND, together with the finite-etale correspondence; cf. Milne,\n*Lectures on Etale Cohomology*, III.3.)",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-input-torsors/sbc-prop-torsors-h1.md",
   "place": "node sbc-prop-torsors-h1, order 1409",
@@ -19,60 +19,214 @@
   ]
  },
  "stmt_deps": [
-  "def-weil-pbc-finite-torsors"
+  "def-weil-pbc-finite-torsors",
+  "def-weil-pbc-etale-cohomology",
+  "def-galois-categories",
+  "def-galois-fibre-functor",
+  "def-galois-object",
+  "def-weil-pbc-cohomology-pullback"
  ],
  "proof": [
   {
-   "text": "The bijection, with its naturality, is [thm-galois-torsor-h1]. By\n[thm-galois-lc-etale] the functor\n$P\\mapsto\\underline{\\operatorname{Hom}}_Y(-,P)$ is an equivalence from\nfinite etale $Y$-schemes to finite locally constant sheaves which carries\nsimply transitive $M$-actions to simply transitive ones, and conversely;\nsince an $M$-torsor is by [def-weil-pbc-finite-torsors] a finite locally\nconstant sheaf with an $M$-action for which $M\\times P\\to P\\times_YP$ is\nan isomorphism, $M$-torsors are the same as finite etale $Y$-schemes with\na simply transitive $M$-action.\n\nNow let $Y$ be connected and $P$ an $M$-torsor, viewed as a\nfinite etale $Y$-scheme with $M$ acting by $Y$-automorphisms. By\n[thm-galois-fundamental] the fibre functor $F_{\\bar y}$ of\n[def-galois-fibre-functor] identifies $P$ with the finite continuous\n$\\pi_1(Y,\\bar y)$-set $|P_{\\bar y}|$, and the $M$-action with an action\nof $M$ on $|P_{\\bar y}|$ by $\\pi_1$-equivariant maps; this action is\nsimply transitive because the isomorphism $M\\times P\\to P\\times_YP$\nbecomes $M\\times|P_{\\bar y}|\\cong|P_{\\bar y}|\\times|P_{\\bar y}|$ under\nthe exact functor $F_{\\bar y}$. In particular $|P_{\\bar y}|\\neq\\emptyset$.",
+   "text": "Apply [lem-sc-torsor-h1] on the small etale site with $G=\\underline M_Y$. This gives the canonical bijection $[T]\\mapsto\\delta_T(1)$. Every such $G$-torsor is finite locally constant by clause (2) of [lem-galois-etale-torsor-sheaf-torsor], so these are exactly the torsors of [def-weil-pbc-finite-torsors]; the trivial torsor maps to zero. No geometric point or connectedness is needed here. When a geometric point is chosen this is also the lifting-torsor bijection of [thm-galois-torsor-h1], whose statement supplies naturality in $(Y,M)$. Its construction realizes the first four paragraphs of the unit: a class represented by a quotient section is sent to its sheaf of lifts, and changing that section by a global lift gives translation of torsors. We use the general-site form above so that the first clause also covers the empty scheme.",
    "uses": [
-    "thm-galois-torsor-h1",
-    "thm-galois-lc-etale",
+    "lem-sc-torsor-h1",
+    "lem-galois-etale-torsor-sheaf-torsor",
     "def-weil-pbc-finite-torsors",
-    "thm-galois-fundamental",
-    "def-galois-fibre-functor"
+    "thm-galois-torsor-h1"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1; Tag 03AH, definition-torsor"
+   }
   },
   {
-   "text": "*The homomorphism.* Fix $p\\in|P_{\\bar y}|$. By simple transitivity there\nis a unique $f_P(g)\\in M$ with $g\\cdot p=p+f_P(g)$. As the two actions\ncommute,\n$gh\\cdot p=g\\cdot(p+f_P(h))=(g\\cdot p)+f_P(h)=p+f_P(g)+f_P(h)$, so\n$f_P$ is a homomorphism. It is continuous: for $m\\in M$ the set\n$\\{g:f_P(g)=m\\}$ is the stabilizer-coset $\\{g:g\\cdot p=p+m\\}$, which\nis open because the action on the finite discrete set $|P_{\\bar y}|$ is\ncontinuous (the definition of a $\\pi_1(Y,\\bar y)$-set in\n[def-galois-fibre-functor]). Replacing $p$ by $p+a$ gives\n$g\\cdot(p+a)=p+a+f_P(g)$, so $f_P$ does not depend on $p$, $M$ being\nabelian; and an $M$-equivariant isomorphism $P\\cong P'$ carries $p$ to a\npoint $p'$ with the same $f$, so $f_P$ only depends on the class of $P$,\nhence (by the bijection) on the class in $H^1(Y_{\\Et},\\underline M)$.",
+   "text": "For a scheme morphism $u:Y\\to X$, [lem-sc-etale-torsor-inverse-image-extension] identifies the inverse image of $0\\to G\\to E_T\\to\\mathbf Z_X\\to0$ with the canonical extension of $u^{-1}T$. By [lem-weil-pbc-pullback-cohomology-long-exact-ladder], $u^*\\delta_T(1)=\\delta_{u^{-1}T}(u^*1)$. By [lem-weil-pbc-cohomology-pullback-degree-zero], $u^*1$ is the pullback global section $1$. The canonical constant-sheaf comparison of [lem-weil-pbc-sets-etale-inverse-image-constant-sheaf] preserves every constant element; [lem-weil-pbc-etale-inverse-image-algebraic-structures] makes it the corresponding comparison of abelian sheaves. Thus, identifying $u^{-1}\\underline M_X=\\underline M_Y$, the equality is $u^*c_X(T)=c_Y(u^{-1}T)$. This proves scheme naturality without assuming either scheme connected.",
+   "uses": [
+    "lem-sc-etale-torsor-inverse-image-extension",
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, canonical extension and boundary construction; naturality proved here from the cited extension and cohomology statements"
+   }
+  },
+  {
+   "text": "For a homomorphism $\\varphi:M\\to N$ of finite abelian groups, apply [lem-sc-etale-torsor-pushout-extension] to the induced morphism of constant abelian sheaves. It gives a morphism of the canonical short exact sequences with endpoints $(\\underline\\varphi,\\mathrm{id}_{\\mathbf Z_Y})$ and identifies the target extension with that of the contracted-product $N$-torsor. The abelian-sheaf category has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. Global sections are evaluation at the terminal object [def-weil-pbc-global-sections-functor]; kernels of abelian sheaves are computed sectionwise, so this functor is additive and left exact. Choose an ordinary injective resolution concentrated in nonnegative degrees. It is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective], so it computes precisely the cohomology of [def-weil-pbc-etale-cohomology]. Thus we can compute that cohomology as the right-derived functors of global sections; [lem-weil-pbc-right-derived-universal-delta-functor] gives naturality of its boundary for a morphism of short exact sequences. Therefore $H^1(\\underline\\varphi)(\\delta_T(1))=\\delta_{T\\wedge^M N}(1)$. Combining with step 2 proves naturality in both variables. The contracted-product torsor is finite locally constant by the same finite-constant torsor statement used in step 1.",
+   "uses": [
+    "lem-sc-etale-torsor-pushout-extension",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "lem-galois-etale-torsor-sheaf-torsor",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "def-weil-pbc-global-sections-functor",
+    "def-weil-pbc-etale-cohomology",
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, extension presentation; literature/stacks-project/derived.tex, Tags 015B and 05TE, boundary naturality"
+   }
+  },
+  {
+   "text": "Use [lemma-weil-pbc-finite-locally-constant-etale-equivalence], whose statement is for any scheme, to represent the finite locally constant underlying sheaf $T$ by a finite etale $Y$-scheme $P$, and to lift its $M$-action. Clause (3) of [lem-galois-etale-torsor-sheaf-torsor] gives the surjective scheme torsor and its torsor isomorphism $\\coprod_{m\\in M}P\\cong P\\times_Y P$. Conversely let $P$ be finite etale and surjective with the stated geometric-fibre action. Put $A=\\coprod_{m\\in M}P$, $B=P\\times_Y P$, and let $a:A\\to B$ send $(m,p)$ to $(m+p,p)$. Both are finite etale objects (finite coproducts and products under the cited equivalence). At every geometric point the map $a$ is bijective by simple transitivity. By [lem-galois-stalk-representable], these fibre maps are the maps on geometric stalks of $h_a$. Hence [lem-weil-pbc-sets-etale-iso-on-geometric-stalks] makes $h_a$ an isomorphism, and full faithfulness of the finite-etale/sheaf equivalence makes $a$ an isomorphism. This verifies the scheme torsor condition, so clause (1) gives its sheaf torsor. The equivalence identifies equivariant isomorphisms, so this is an equivalence on isomorphism classes. Here simply transitive on geometric fibres includes nonemptiness; the surjectivity/local-section condition excludes the empty pseudo-torsor over a nonempty base. For the later pointed case [thm-galois-lc-etale] also identifies the fibre functors and explicitly preserves torsors and simply transitive actions.",
+   "uses": [
+    "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
+    "lem-galois-etale-torsor-sheaf-torsor",
+    "thm-galois-lc-etale",
+    "lem-galois-stalk-representable",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RV, lemma-characterize-finite-locally-constant; blueprint unit paragraph 5"
+   }
+  },
+  {
+   "text": "Now assume $Y$ connected with geometric point $\\bar y$. By [thm-galois-fundamental] the fibre $S=|P_{\\bar y}|$ is a finite continuous $\\pi_1$-set and each $M$-automorphism of $P$ is equivariant. By the torsor and fibre compatibility of [thm-galois-lc-etale], $S$ is a nonempty simply transitive $M$-set. Its $M$-action commutes with $\\pi_1$ because $\\pi_1$ consists of natural automorphisms of the fibre functor [def-galois-fibre-functor]. Choose $p\\in S$. The bijection $M\\to S$, $a\\mapsto p+a$, uniquely defines $f_P(g)$ by $gp=p+f_P(g)$.",
+   "uses": [
+    "thm-galois-fundamental",
+    "thm-galois-lc-etale",
+    "def-galois-fibre-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BND, theorem-fundamental-group; Tag 0DV5 in etale-cohomology.tex"
+   }
+  },
+  {
+   "text": "Commutation gives $ghp=g(p+f_P(h))=p+f_P(g)+f_P(h)$, hence $f_P(gh)=f_P(g)+f_P(h)$ by uniqueness; also $f_P(1)=0$. For each $m\\in M$, the inverse image $f_P^{-1}(m)=\\{g:gp=p+m\\}$ is open by continuity of the action on the discrete finite set $S$, as specified in [def-galois-fibre-functor]. Since $M$ is discrete this proves continuity. If $p_1=p+a$, then $gp_1=p+f_P(g)+a=p_1+f_P(g)$, using abelianity; thus the character is independent of $p$. An equivariant torsor isomorphism sends $gp=p+f_P(g)$ to the identical equation in the other fibre, so the character is independent of the representative.",
    "uses": [
     "def-galois-fibre-functor"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BND and blueprint sbc-prop-torsors-h1, paragraph The homomorphism; explicit elementary calculation"
+   }
   },
   {
-   "text": "*Connectedness.* By [lem-fet-galois-category], $\\mathrm{F\\acute Et}(Y)$\nwith $F_{\\bar y}$ is a Galois category whose connected objects are the\nconnected finite etale $Y$-schemes, and the equivalence of\n[thm-galois-fundamental] preserves finite coproducts and initial\nobjects, so $P$ is connected exactly when the nonempty\n$\\pi_1(Y,\\bar y)$-set $|P_{\\bar y}|$ is not a disjoint union of two\nnonempty sub-$\\pi_1$-sets, i.e. exactly when $\\pi_1(Y,\\bar y)$ acts\ntransitively on it (each orbit is a sub-$\\pi_1$-set with an invariant\ncomplement). Since $p\\mapsto p+m$ is a bijection $M\\to|P_{\\bar y}|$\nand the orbit of $p$ is $p+f_P(\\pi_1(Y,\\bar y))$, the action is\ntransitive exactly when $f_P$ is surjective.",
+   "text": "If $P$ is connected as a scheme, [lem-galois-finite-etale-connected-object] makes it a connected object of $\\mathrm{F\\acute Et}(Y)$. Under [thm-galois-fundamental], monomorphisms correspond to inclusions of invariant subsets and the initial object to the empty set. By [def-galois-connected-object], the nonempty set $S$ has no proper nonempty invariant subset; each orbit is such a subset, so $S$ is transitive. Conversely, suppose $S$ transitive. Let $V$ be any clopen subset of $P$. By [lem-galois-coproduct-copies-morphisms-clopen] with $U=Y$, $E=\\{0,1\\}$ and $W=P$, the partition $(V,P\\setminus V)$ defines a $Y$-morphism $P\\to Y\\amalg Y$. The equivalence [thm-galois-fundamental] preserves this coproduct and its coprojections; the fibre of $Y$ is a singleton, so the target is the trivial two-point $\\pi_1$-set. An equivariant map from a transitive set to it is constant. Faithfulness makes the original morphism one of the two constant coprojection maps. Clause (c) of the clopen-decomposition statement then forces $V=\\varnothing$ or $V=P$. Also $P$ is nonempty because its fibre $S$ is. This is exactly topological connectedness of $P$. Finally the orbit of $p$ is $p+f_P(\\pi_1)$ and $a\\mapsto p+a$ is a bijection $M\\to S$, so transitivity is equivalent to surjectivity of $f_P$.",
+   "uses": [
+    "lem-galois-finite-etale-connected-object",
+    "thm-galois-fundamental",
+    "def-galois-connected-object",
+    "lem-galois-coproduct-copies-morphisms-clopen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BNB, lemma-finite-etale-connected-galois-category, proof paragraph 2; Tag 0BND, theorem-fundamental-group"
+   }
+  },
+  {
+   "text": "If $P$ is connected, [lem-fet-galois-category] supplies the Galois category to which [lem-galois-axioms] applies. The translations define an injective homomorphism $M\\to\\operatorname{Aut}_Y(P)$: a translation which is the identity fixes $p$, and simple transitivity forces its element to be zero. Since $|S|=|M|$, clause (6) of [lem-galois-axioms] bounds $|\\operatorname{Aut}_Y(P)|$ by $|S|=|M|$. Thus the injection is onto, identifies $M$ with the entire automorphism group, and this group acts simply transitively on $S$. Together with connectedness this is a Galois cover by [def-galois-object]. Conversely that definition includes connectedness. This proves the final parenthetical equivalence with no assumption that $M$ is cyclic.",
    "uses": [
     "lem-fet-galois-category",
-    "thm-galois-fundamental"
+    "lem-galois-axioms",
+    "def-galois-object"
    ],
-   "elementary": false
-  },
-  {
-   "text": "*Galois.* If $P$ is connected, $M$ acts on $P$ by\n$Y$-automorphisms, faithfully and transitively on the fibre\n$|P_{\\bar y}|$ of cardinality $\\#M$, so $\\#\\operatorname{Aut}(P)\\ge\\#M$;\nby [lem-galois-axioms] (6) $\\#\\operatorname{Aut}(P)\\le\\#|P_{\\bar y}|=\\#M$.\nHence $\\operatorname{Aut}(P)=M$ acts simply transitively on the\nfibre, and $P$ is a Galois cover with group $M$. Conversely a\nGalois cover is connected by definition.",
-   "uses": [
-    "lem-galois-axioms"
-   ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BNB and 0BN0, lemma-epi-mono and following paragraph defining Galois objects (pione.tex:407-485)"
+   }
   }
  ],
  "proof_deps": [
-  "thm-galois-torsor-h1",
-  "thm-galois-lc-etale",
+  "lem-sc-torsor-h1",
+  "lem-galois-etale-torsor-sheaf-torsor",
   "def-weil-pbc-finite-torsors",
+  "thm-galois-torsor-h1",
+  "lem-sc-etale-torsor-inverse-image-extension",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-sc-etale-torsor-pushout-extension",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "def-weil-pbc-global-sections-functor",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
+  "thm-galois-lc-etale",
+  "lem-galois-stalk-representable",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
   "thm-galois-fundamental",
   "def-galois-fibre-functor",
+  "lem-galois-finite-etale-connected-object",
+  "def-galois-connected-object",
+  "lem-galois-coproduct-copies-morphisms-clopen",
   "lem-fet-galois-category",
-  "lem-galois-axioms"
+  "lem-galois-axioms",
+  "def-galois-object"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-input-torsors/sbc-prop-torsors-h1.md",
-  "place": "## Proof"
+  "place": "Proof, corrected and expanded using Stacks 03AJ, 03RV, 0BNB, 0BND; explicit naturality and clopen argument"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite abelian torsors on the etale site classify first sheaf cohomology and connected torsors correspond to surjective fundamental group homomorphisms",
+   "results": "; CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen, CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat, CategoryTheory.PreGaloisCategory.IsFundamentalGroup, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial, CategoryTheory.PreGaloisCategory.exists_lift_of_continuous, CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial' (8 hits)",
+   "date": "2026-10-14",
+   "verdict": "no match: abstract Galois-category or fixed-family Cech H1 results do not state all the scheme torsor, derived H1, naturality and connectedness clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|Torsor|classH1",
+   "results": "; Mathlib/Topology/Algebra/ContinuousAffineEquiv.lean, Mathlib/Topology/Algebra/ContinuousAffineEquiv.lean, Mathlib/Topology/Algebra/ContinuousAffineEquiv.lean, Mathlib/Topology/Algebra/ContinuousAffineEquiv.lean, Mathlib/Topology/Algebra/ContinuousAffineEquiv.lean, Mathlib/Topology/Algebra/AffineSubspace.lean, Mathlib/Topology/Algebra/AffineSubspace.lean, Mathlib/Topology/Algebra/AffineSubspace.lean (25 hits)",
+   "date": "2026-10-14",
+   "verdict": "no match: abstract Galois-category or fixed-family Cech H1 results do not state all the scheme torsor, derived H1, naturality and connectedness clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, Torsor",
+   "results": "loogle: unknown identifier 'Sheaf';  (0 hits)",
+   "date": "2026-10-14",
+   "verdict": "no match: abstract Galois-category or fixed-family Cech H1 results do not state all the scheme torsor, derived H1, naturality and connectedness clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First cohomology of an abelian sheaf is classified by torsors",
+   "results": "; CategoryTheory.PresheafOfGroups.H1, CategoryTheory.PresheafOfGroups.OneCocycle.class, CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous, CategoryTheory.PresheafOfGroups.OneCocycle.class_eq_iff, CategoryTheory.PresheafOfGroups.instOneH1, CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous.class_eq, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.OneCochain.ext_iff (8 hits)",
+   "date": "2026-10-14",
+   "verdict": "no match: abstract Galois-category or fixed-family Cech H1 results do not state all the scheme torsor, derived H1, naturality and connectedness clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphism classes of finite constant abelian etale torsors are naturally first cohomology",
+   "results": "service unavailable: Internal Server Error;  (0 hits)",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Torsor|classH1",
+   "results": ";  (0 hits)",
+   "date": "2026-10-14",
+   "verdict": "no match: abstract Galois-category or fixed-family Cech H1 results do not state all the scheme torsor, derived H1, naturality and connectedness clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.PresheafOfGroups.H1",
+   "results": "; CategoryTheory.PresheafOfGroups.H1, CategoryTheory.PresheafOfGroups.instOneH1, CategoryTheory.PresheafOfGroups.OneCocycle.class, CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous.class_eq, CategoryTheory.PresheafOfGroups.OneCocycle.class_eq_iff (5 hits)",
+   "date": "2026-10-14",
+   "verdict": "no match: abstract Galois-category or fixed-family Cech H1 results do not state all the scheme torsor, derived H1, naturality and connectedness clauses"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -167,5 +321,124 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "sbc-prop-torsors-h1",
+  "worker": "stage1",
+  "summary": "Audited all clauses against Stacks and the existing DAG. Corrected the wrong 02NE citation, made nonempty geometric fibres explicit, used general-scheme torsor and representability nodes rather than imposing a geometric-point hypothesis, wrote both naturality diagrams, and repaired the connectedness citation by proving the reverse direction with clopen partitions. No new nodes. Second reader made the reverse geometric-fibre implication explicit and justified the cohomology resolution convention.",
+  "blueprint": "Node proof paragraphs 1-2 become steps 1-5; The homomorphism becomes step 6; Connectedness becomes step 7; Galois becomes step 8. Unit first four paragraphs remain carried by thm-galois-torsor-h1, the general-site boundary presentation and explicit naturality fill its unpointed scope; paragraphs 5-6 are carried by this item.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-etale-torsor-inverse-image-extension",
+    "why": "Generic Inverse image of the torsor extension used with exactly its stated hypotheses; the unit sketch has no general-scheme version of this tool. It supports the torsor/finite-etale route, rather than replacing it."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "why": "Generic Pullback maps form a morphism of long exact cohomology sequences used with exactly its stated hypotheses; the unit sketch has no general-scheme version of this tool. It supports the torsor/finite-etale route, rather than replacing it."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "why": "Generic Degree-zero cohomology and the degree-zero pullback map used with exactly its stated hypotheses; the unit sketch has no general-scheme version of this tool. It supports the torsor/finite-etale route, rather than replacing it."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf",
+    "why": "Generic Inverse image of a set-valued constant etale sheaf is constant used with exactly its stated hypotheses; the unit sketch has no general-scheme version of this tool. It supports the torsor/finite-etale route, rather than replacing it."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "why": "Generic Inverse image of etale sheaves of sets, abelian groups and rings used with exactly its stated hypotheses; the unit sketch has no general-scheme version of this tool. It supports the torsor/finite-etale route, rather than replacing it."
+   },
+   {
+    "node": "lem-sc-etale-torsor-pushout-extension",
+    "why": "Generic Pushout of the etale torsor extension used with exactly its stated hypotheses; the unit sketch has no general-scheme version of this tool. It supports the torsor/finite-etale route, rather than replacing it."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Generic Right derived functors form a universal delta-functor used with exactly its stated hypotheses; the unit sketch has no general-scheme version of this tool. It supports the torsor/finite-etale route, rather than replacing it."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
+    "why": "Generic Finite locally constant sheaves and finite-etale schemes used with exactly its stated hypotheses; the unit sketch has no general-scheme version of this tool. It supports the torsor/finite-etale route, rather than replacing it."
+   },
+   {
+    "node": "thm-galois-lc-etale",
+    "why": "Generic Finite locally constant sheaves and finite etale schemes used with exactly its stated hypotheses; the unit sketch has no general-scheme version of this tool. It supports the torsor/finite-etale route, rather than replacing it."
+   },
+   {
+    "node": "thm-galois-fundamental",
+    "why": "Generic The fibre functor is an equivalence used with exactly its stated hypotheses; the unit sketch has no general-scheme version of this tool. It supports the torsor/finite-etale route, rather than replacing it."
+   },
+   {
+    "node": "lem-galois-coproduct-copies-morphisms-clopen",
+    "why": "Generic Morphisms into a disjoint union of copies of the base are clopen decompositions used with exactly its stated hypotheses; the unit sketch has no general-scheme version of this tool. It supports the torsor/finite-etale route, rather than replacing it."
+   },
+   {
+    "node": "lem-galois-axioms",
+    "why": "Generic Consequences of the axioms used with exactly its stated hypotheses; the unit sketch has no general-scheme version of this tool. It supports the torsor/finite-etale route, rather than replacing it."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Supplies enough injectives for abelian etale sheaves on any scheme, the hypothesis for the generic right-derived boundary-naturality tool; no unit node states this infrastructure."
+   },
+   {
+    "node": "lem-galois-stalk-representable",
+    "why": "Identifies the geometric-fibre action map with the map on representable sheaf stalks; no unit statement supplies this general-scheme comparison."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "why": "Detects the scheme torsor action isomorphism through its sheaf on arbitrary bases, including disconnected bases; no unit statement supplies the detection criterion."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Allows an ordinary injective resolution in the K-injective cohomology convention before applying the boundary-naturality tool."
+   },
+   {
+    "node": "lem-sc-torsor-h1",
+    "why": "General etale-site torsor/H^1 classification used for the arbitrary-scheme first clause; the unit route only supplies the narrower imported theorem."
+   },
+   {
+    "node": "lem-galois-etale-torsor-sheaf-torsor",
+    "why": "Finite-constant scheme/sheaf torsor clauses used to transfer torsor structure and finite local constancy; no node in this unit states them."
+   },
+   {
+    "node": "lem-galois-finite-etale-connected-object",
+    "why": "Forward implication from connected finite-etale scheme to categorical connectedness."
+   },
+   {
+    "node": "lem-fet-galois-category",
+    "why": "Galois-category structure needed for the automorphism bound."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-etale-torsor-inverse-image-extension",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-sc-etale-torsor-pushout-extension",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
+  "thm-galois-lc-etale",
+  "thm-galois-fundamental",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "lem-galois-axioms",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-galois-stalk-representable",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-sc-torsor-h1",
+  "lem-galois-etale-torsor-sheaf-torsor",
+  "lem-galois-finite-etale-connected-object",
+  "lem-fet-galois-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-b2dc54c8b",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-b2dc54c8b (reviewer sub-agent of L); spot-checked: The mathematics and all eight steps check against the cited DAG statements and Stacks sources (03AH, 03AJ, 03RV, 0DV5, 0BNB, 0BND, 0BN0, 05TE). The delivery omitted several cross-unit non-leaf dependencies from split_report.tool_uses, including lem-sc-torsor-h1, lem-galois-etale-torsor-sheaf-torsor, the inverse-image/cohomology/pushout tools, and the connected-object/Galois-category tools. A corrected whole item JSON is in fixes/dag/nodes/sec-smooth-base-change/sbc-prop-torsors-h1.json; review.md records source, route, hypothesis, edge-case, and step checks. No new nodes or drops.; 1 file(s) fixed by the reviewer"
  }
 }
