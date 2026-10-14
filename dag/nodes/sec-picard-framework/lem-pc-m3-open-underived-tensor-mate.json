@@ -1,0 +1,153 @@
+{
+ "id": "lem-pc-m3-open-underived-tensor-mate",
+ "kind": "statement",
+ "title": "Underived tensor restriction comparison has the sectionwise open direct-image mate",
+ "statement": "Let $f:X\\to Y$ be any scheme morphism [def-pc-scheme], $V$ an open of $Y$, $U=f^{-1}V$, and $f_0=f|_V:U\\to V$. Let $a_f$ and $a_{f_0}$ be the chosen tensor-pullback adjunctions [lem-pc-module-pullback-adjunction]. Let $r_Y,r_X$ be the exact open restriction functors and $t:f^*\\mathbin{\\star}r_X\\cong r_Y\\mathbin{\\star}f_0^*$ the constructed underived tensor restriction comparison [def-pc-open-pinned-single-tensor-restriction-iso], using the commuting square $f_0;i_Y=i_X;f$. Let $e:f_*\\mathbin{\\star}r_Y\\cong r_X\\mathbin{\\star}f_{0*}$ be the sectionwise direct-image comparison [def-pc-e2-open-underived-direct-image-iso]. Under the mates equivalence for $a_f,a_{f_0}$, the natural transformation $t^{-1}$ is sent to $e$. This is an equality of natural transformations on module sheaves, with no complexes or derived functors involved; no additivity, flatness or boundedness is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-open-pinned-single-tensor-restriction-iso",
+  "def-pc-e2-open-underived-direct-image-iso"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Tag 08HY, adjoint construction of the base-change map; Tag 08FE, sectionwise identity in the proof; Tag 0D5S, pullback composition. Underived calculation in step 1 of lem-pc-k3-open-homotopy-tensor-counit"
+ },
+ "proof": [
+  {
+   "text": "Apply the existing ordinary open counit square to the open adjunctions schemeOpenModuleAdjunction X (f inverse image V) and schemeOpenModuleAdjunction Y V. The comparison schemeMVUnderivedOpenRestriction is definitionally the same as singleComplexOpenUnderivedDirectImageIso. For each module on the source open, injectivity of the inverse Hom equivalence for the Y open adjunction, together with mateEquiv_counit, proves that the mate of e.hom under the two open adjunctions is schemeMVUnderivedOpenComposition.hom. This is the private proved lemma underived_open_mate.",
+   "uses": [
+    "lem-pc-mayer-vietoris-ordinary-open-counit-square",
+    "def-pc-e2-open-underived-direct-image-iso",
+    "def-pc-derived-mayer-vietoris-open-counit-model",
+    "def-pc-kinjective-mayer-vietoris-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Conjugate the comparison openPinnedTensorOpenIso from the chosen tensor adjunction to schemeOpenModuleAdjunction. Its conjugate is the identity: expand the latter adjunction as ofNatIsoLeft, cancel overFunctorEquiv inverse/hom, and use leftAdjointUniq_trans_app and leftAdjointUniq_hom_app_counit. This is the private proved lemma open_conjugate.",
+   "uses": [
+    "def-pc-open-pinned-single-tensor-restriction-iso",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-kinjective-mayer-vietoris-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the proved generic four_factor_conjugate lemma. Expand the inverse four-factor isomorphism, apply conjugateEquiv_comp three times, apply conjugateEquiv_whiskerLeft and conjugateEquiv_whiskerRight, replace the two open comparison conjugates by identity, and replace the two tensor-composition conjugates by their defining pushforward isomorphisms using the inverse law of conjugateIsoEquiv. Whiskered identities cancel. Specialize to the two open inclusions and f, f restricted to V. The pushforwardCongr at reflexivity is identity; the inverse congruence along morphismRestrict_ι is the hom congruence along its symmetric equality. Thus the remaining composite is precisely schemeMVUnderivedOpenComposition.hom. This is tensor_open_conjugate.",
+   "uses": [
+    "def-pc-open-pinned-single-tensor-restriction-iso",
+    "def-pc-tensor-pullback-composition-iso",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-derived-mayer-vietoris-open-counit-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply injectivity of the mates equivalence for the two open adjunctions. Mathlib iterated_mateEquiv_conjugateEquiv identifies the iterated mate of t.inv with the conjugate computed in the preceding step. It equals schemeMVUnderivedOpenComposition.hom, which the first step identifies with the open mate of e.hom. Injectivity yields mateEquiv a_f a_f0 t.inv = e.hom. All identities hold for arbitrary modules and opens, including empty and top opens and zero modules.",
+   "uses": [
+    "lem-pc-mayer-vietoris-ordinary-open-counit-square",
+    "def-pc-open-pinned-single-tensor-restriction-iso",
+    "def-pc-e2-open-underived-direct-image-iso",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-kinjective-mayer-vietoris-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-mayer-vietoris-open-counit-model",
+  "def-pc-e2-open-underived-direct-image-iso",
+  "def-pc-kinjective-mayer-vietoris-data",
+  "def-pc-open-pinned-single-tensor-restriction-iso",
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-mayer-vietoris-ordinary-open-counit-square",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "M3: existing ordinary open counit square, left-adjoint uniqueness, four-factor conjugation, and injectivity of iterated mates; all steps proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse tensor restriction comparison for an open subscheme is the mate of sectionwise pushforward restriction",
+   "date": "2026-10-14",
+   "results": "Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of schemes and inverse image open, the mate of inverse tensor pullback restriction comparison equals the sectionwise direct image restriction comparison",
+   "date": "2026-10-14",
+   "results": "Scheme.Modules.conjugateEquiv_pullbackComp_inv, restrictFunctorIsoPullback, restrictAdjunction_unit_app_app, restrictAdjunction and restrictFunctorAdjCounitIso. These concern ordinary pullback or the individual open comparison, not the named tensor square.",
+   "verdict": "tools only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.iterated_mateEquiv_conjugateEquiv",
+   "date": "2026-10-14",
+   "results": "CategoryTheory.iterated_mateEquiv_conjugateEquiv in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "verdict": "generic categorical tool; sectionwise calculation still required"
+  },
+  {
+   "tool": "grep",
+   "query": "singleComplexOpenUnderivedDirectImageIso|openPinnedTensorRestrictionIso",
+   "date": "2026-10-14",
+   "results": "msearch Mathlib grep returned 0 hits; repository rg found the two comparison definitions and the assigned homotopy counit theorem, but no underived mate identity.",
+   "verdict": "no exact existing declaration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenHomotopyTensorCounit",
+  "date": "2026-10-14",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 locality on the target: underived sectionwise mate calculation for open counit compatibility, step 1 of lem-pc-k3-open-homotopy-tensor-counit",
+   "via": [
+    "lem-pc-k3-open-homotopy-tensor-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenUnderivedTensorMate",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenUnderivedTensorMate.lean",
+  "declaration": "AlgebraicGeometry.singleComplexOpen_underived_tensor_mate",
+  "statement": "theorem singleComplexOpen_underived_tensor_mate\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens) :\n    (mateEquiv\n      (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f))\n      (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ∣_ V)))\n      (TwoSquare.mk _ _ _ _\n        (openPinnedTensorRestrictionIso f V (f ⁻¹ᵁ V) (f ∣_ V)\n          (morphismRestrict_ι f V)).inv)).natTrans =\n      (singleComplexOpenUnderivedDirectImageIso f V).hom",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261014T033107-L-604220",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261014T033107-L-604220",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
