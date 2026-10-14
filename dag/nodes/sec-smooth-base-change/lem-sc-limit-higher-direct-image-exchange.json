@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-limit-higher-direct-image-exchange",
+ "kind": "statement",
+ "title": "A single higher-direct-image exchange passes to an affine inverse limit",
+ "statement": "Let k be a field, D:I -> Over(Spec k) a small cofiltered diagram with qcqs structure maps and affine transitions, and c a cone whose underlying scheme cone is limiting and whose structure map is qcqs. Let f:X -> Spec k be qcqs, F any abelian etale sheaf, and q a natural number. If every degree-q homology map of the canonical bounded-below derived exchange for f and D_i at F[0] is invertible, then its degree-q homology map for f and c.pt.hom at F[0] is invertible. There is no smoothness, torsion, injectivity or algebraic closure hypothesis [def-weil-pbc-inverse-image, def-weil-pbc-etale-sheaves].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EZT",
+  "place": "Lemma 59.86.3, second assertion, using Lemma 59.51.8 (Tag 0EYM)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Cofinally replace the small cofiltered category by a nonempty directed inverse system, preserving limits and filtered colimits. Form the cartesian pullbacks X_i=X×D_i and X_limit=X×c.pt. The X_i have affine transitions and their cone is limiting. Use constant F on the constant source and base.",
+   "uses": [
+    "lem-weil-pbc-cofiltered-limit-directed-reindex",
+    "lem-weil-pbc-limit-fibre-products"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Every affine etale object of the limit base descends to a stage. Restrict to such an object and its later pullbacks. Express higher direct images as sheafified cohomology presheaves and apply etale cohomology continuity to those pullback systems. This is the higher-direct-image continuity of Tag 0EYM, now with varying bases; the constant coefficient colimit is F because the directed index is connected and nonempty.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "sbc-lem-higher-direct-image-presheaf",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of pullback cohomology and the resolution formula for canonical exchange identify the resulting limit exchange with the filtered colimit of the stage exchanges (Tag 0EZT). All stage maps in the fixed degree are isomorphisms; so is their colimit. Affine etale objects form a basis, giving a sheaf isomorphism. Exact pullback/homology and single-complex/right-derived comparisons identify it with the displayed map. q=0, zero F and empty X are included.",
+   "uses": [
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "lem-weil-pbc-limit-fibre-products",
+  "lem-weil-pbc-affine-etale-site-colimit",
+  "sbc-lem-higher-direct-image-presheaf",
+  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0EZT",
+  "place": "Lemma 59.86.3, second assertion, using Lemma 59.51.8 (Tag 0EYM); formal specialization and comparisons by X2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of abelian etale sheaves commute with affine inverse limits and cartesian base change",
+   "results": "8 hits: scheme section descent in Mathlib.AlgebraicGeometry.AffineTransitionLimit; cover lifting and module pullback formulas. No relative higher-direct-image comparison.",
+   "verdict": "No exact match. The library fixed-base higher-image continuity is insufficient for a varying base; its cohomology-continuity and affine-etale descent ingredients remain useful.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctor\"",
+   "results": "12 hits: ShortComplex homology functors and formulas.",
+   "verdict": "Use the existing Plus.isIso_iff and exact-inverse-image homology comparisons for the formal derived step; no geometric limit comparison returned.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "limit.*higherDirectImage|higherDirectImage.*limit",
+   "results": "0 Mathlib hits. Repository rg finds HigherDirectImageLimitSystem, a fixed-base statement with a compatible coefficient diagram, and EtaleCohomologyLimitOfSchemes.",
+   "verdict": "The fixed-base statement does not identify the inverse images of higher images along varying bases.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of abelian etale sheaves commute with affine inverse limits and cartesian base change",
+   "results": "service unavailable: Internal Server Error; 0 hits",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic",
+  "date": "2026-10-14",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-limit-derived-direct-image-exchange",
+   "place": "Relative field-exchange step, specialized to the algebraically closed base actually needed",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LimitHigherDirectImageExchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/LimitHigherDirectImageExchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_limit_homology_derivedBaseChangeMapPlus",
+  "statement": "theorem isIso_limit_homology_derivedBaseChangeMapPlus\n    {k : Type u} [Field k]\n    {I : Type u} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ Over (Spec (.of k)))\n    [∀ i, QuasiCompact (D.obj i).hom] [∀ i, QuasiSeparated (D.obj i).hom]\n    [∀ {i j : I} (a : i ⟶ j), IsAffineHom (D.map a).left]\n    (c : Cone D) (hc : IsLimit ((Over.forget _).mapCone c))\n    [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]\n    {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [QuasiCompact f] [QuasiSeparated f]\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (q : ℕ)\n    (hstage : ∀ i, IsIso\n      ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map\n        ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1}\n          (IsPullback.of_hasPullback f (D.obj i).hom).toCommSq).app\n            ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))) :\n    IsIso ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map\n      ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1}\n        (IsPullback.of_hasPullback f c.pt.hom).toCommSq).app\n          ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-a32f0",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261014T161711-L-1952065",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-a32f0",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261014T161711-L-1952065",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered signatures, proofs, remaining continuity hole, nodes, change record and repaired report; verified compilation, direct importers, axioms and source-cycle necessity."
+ }
+}

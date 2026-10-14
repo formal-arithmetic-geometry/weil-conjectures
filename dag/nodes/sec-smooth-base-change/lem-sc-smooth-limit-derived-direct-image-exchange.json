@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-smooth-limit-derived-direct-image-exchange",
+ "kind": "statement",
+ "title": "Relative derived exchange along a limit of smooth schemes",
+ "statement": "Let k be a field, D:I -> Over(Spec k) a small cofiltered diagram of smooth qcqs structure maps with affine transitions, and c a cone whose underlying scheme cone is limiting and whose structure map is qcqs. Let f:X -> Spec k be qcqs and F an abelian etale sheaf killed by n, where n is nonzero in k. Then c.pt.hom^* Rf_*(F[0]) is isomorphic to Rf\\prime_*((p^*F)[0]) for the cartesian square with c.pt.hom [def-weil-pbc-inverse-image].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0F09",
+  "place": "Lemma 59.89.3, field-base degree-zero specialization"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Construct a module sheaf M over ULift(Z/n) with underlying abelian sheaf F. Its stalks are n-torsion. The image of n in global functions of Spec k is a unit, so M has torsion of invertible order.",
+   "uses": [
+    "lem-weil-pbc-killed-sheaf-module-lift"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At each smooth stage apply the proved single-sheaf case of bounded-below derived smooth base change for M. The module/abelian canonical exchange compatibility and exact forgetful-functor single comparison transport this to the abelian canonical exchange for F. Cancel the comparison isomorphism.",
+   "uses": [
+    "sbc-thm-bounded-below-derived-smooth-base-change",
+    "lem-weil-pbc-module-abelian-derived-exchange-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the derived limit-exchange theorem to the resulting stage isomorphisms. The coefficient and empty-source edge cases are preserved.",
+   "uses": [
+    "lem-sc-limit-derived-direct-image-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-killed-sheaf-module-lift",
+  "sbc-thm-bounded-below-derived-smooth-base-change",
+  "lem-weil-pbc-module-abelian-derived-exchange-compatibility",
+  "lem-sc-limit-derived-direct-image-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0F09",
+  "place": "Lemma 59.89.3, field-base degree-zero specialization; formal specialization and comparisons by X2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of abelian etale sheaves commute with affine inverse limits and cartesian base change",
+   "results": "8 hits: scheme section descent in Mathlib.AlgebraicGeometry.AffineTransitionLimit; cover lifting and module pullback formulas. No relative higher-direct-image comparison.",
+   "verdict": "No exact match. The library fixed-base higher-image continuity is insufficient for a varying base; its cohomology-continuity and affine-etale descent ingredients remain useful.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctor\"",
+   "results": "12 hits: ShortComplex homology functors and formulas.",
+   "verdict": "Use the existing Plus.isIso_iff and exact-inverse-image homology comparisons for the formal derived step; no geometric limit comparison returned.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "limit.*higherDirectImage|higherDirectImage.*limit",
+   "results": "0 Mathlib hits. Repository rg finds HigherDirectImageLimitSystem, a fixed-base statement with a compatible coefficient diagram, and EtaleCohomologyLimitOfSchemes.",
+   "verdict": "The fixed-base statement does not identify the inverse images of higher images along varying bases.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of abelian etale sheaves commute with affine inverse limits and cartesian base change",
+   "results": "service unavailable: Internal Server Error; 0 hits",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic",
+  "date": "2026-10-14",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-algclosed-extension-injective-acyclic",
+   "place": "Relative field-exchange step, specialized to the algebraically closed base actually needed",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmoothLimitDerivedDirectImageExchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothLimitDerivedDirectImageExchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_smoothLimit_derivedDirectImage_single_iso",
+  "statement": "theorem nonempty_smoothLimit_derivedDirectImage_single_iso\n    {k : Type u} [Field k]\n    {I : Type u} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ Over (Spec (.of k)))\n    [∀ i, Smooth (D.obj i).hom]\n    [∀ i, QuasiCompact (D.obj i).hom] [∀ i, QuasiSeparated (D.obj i).hom]\n    [∀ {i j : I} (a : i ⟶ j), IsAffineHom (D.map a).left]\n    (c : Cone D) (hc : IsLimit ((Over.forget _).mapCone c))\n    [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]\n    {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [QuasiCompact f] [QuasiSeparated f]\n    (n : ℕ) (hn : (n : k) ≠ 0)\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : n • 𝟙 F = 0) :\n    Nonempty\n      (((upperStar AddCommGrpCat.{u + 1} c.pt.hom).mapDerivedCategory).obj\n          ((lowerStar AddCommGrpCat.{u + 1} f).rightDerivedFunctor.obj\n            ((DerivedCategory.singleFunctor _ 0).obj F)) ≅\n        (lowerStar AddCommGrpCat.{u + 1} (pullback.snd f c.pt.hom)).rightDerivedFunctor.obj\n          ((DerivedCategory.singleFunctor _ 0).obj\n            ((upperStar AddCommGrpCat.{u + 1} (pullback.fst f c.pt.hom)).obj F)))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-a32f0",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261014T161711-L-1952065",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-a32f0",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261014T161711-L-1952065",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered signatures, proofs, remaining continuity hole, nodes, change record and repaired report; verified compilation, direct importers, axioms and source-cycle necessity."
+ }
+}

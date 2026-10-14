@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-limit-derived-direct-image-exchange",
+ "kind": "statement",
+ "title": "From degreewise affine-limit exchange to derived exchange",
+ "statement": "Let k be a field, D:I -> Over(Spec k) a small cofiltered diagram with qcqs structure maps and affine transitions, c a cone with underlying scheme limit and qcqs structure map, and f:X -> Spec k qcqs. For any abelian etale F on X, assume the canonical bounded-below derived exchange at F[0] is invertible at every D_i. Then the exact total derived inverse image along c.pt.hom of Rf_*(F[0]) is isomorphic to the total derived direct image of (p^*F)[0] on the limit pullback [def-weil-pbc-inverse-image].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EZT",
+  "place": "Lemma 59.86.3, second assertion, with the formal derived-category argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "In every nonnegative degree, apply degreewise inverse-limit continuity to the homology maps of the stage derived exchanges; functors preserve their invertibility.",
+   "uses": [
+    "lem-sc-limit-higher-direct-image-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In negative degrees the source is zero because right derived direct image is left t-exact and exact inverse image commutes with homology. The inverse image of F[0] remains ≥0, so left t-exactness also makes the target zero. Thus all homology maps are isomorphisms. Plus.isIso_iff makes the canonical derived exchange invertible.",
+   "uses": [
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Map this isomorphism along the fully faithful Plus inclusion. Compose the two bounded-below/total right-derived compatibility isomorphisms and the exact inverse-image single-functor isomorphism. This gives the displayed total-derived objects without changing F or any map.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-limit-higher-direct-image-exchange",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0EZT",
+  "place": "Lemma 59.86.3, second assertion, with the formal derived-category argument; formal specialization and comparisons by X2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of abelian etale sheaves commute with affine inverse limits and cartesian base change",
+   "results": "8 hits: scheme section descent in Mathlib.AlgebraicGeometry.AffineTransitionLimit; cover lifting and module pullback formulas. No relative higher-direct-image comparison.",
+   "verdict": "No exact match. The library fixed-base higher-image continuity is insufficient for a varying base; its cohomology-continuity and affine-etale descent ingredients remain useful.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctor\"",
+   "results": "12 hits: ShortComplex homology functors and formulas.",
+   "verdict": "Use the existing Plus.isIso_iff and exact-inverse-image homology comparisons for the formal derived step; no geometric limit comparison returned.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "limit.*higherDirectImage|higherDirectImage.*limit",
+   "results": "0 Mathlib hits. Repository rg finds HigherDirectImageLimitSystem, a fixed-base statement with a compatible coefficient diagram, and EtaleCohomologyLimitOfSchemes.",
+   "verdict": "The fixed-base statement does not identify the inverse images of higher images along varying bases.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of abelian etale sheaves commute with affine inverse limits and cartesian base change",
+   "results": "service unavailable: Internal Server Error; 0 hits",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic",
+  "date": "2026-10-14",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-algclosed-extension-injective-acyclic",
+   "place": "Relative field-exchange step, specialized to the algebraically closed base actually needed",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LimitDerivedDirectImageExchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/LimitDerivedDirectImageExchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_limit_derivedDirectImage_single_iso",
+  "statement": "theorem nonempty_limit_derivedDirectImage_single_iso\n    {k : Type u} [Field k]\n    {I : Type u} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ Over (Spec (.of k)))\n    [∀ i, QuasiCompact (D.obj i).hom] [∀ i, QuasiSeparated (D.obj i).hom]\n    [∀ {i j : I} (a : i ⟶ j), IsAffineHom (D.map a).left]\n    (c : Cone D) (hc : IsLimit ((Over.forget _).mapCone c))\n    [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]\n    {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [QuasiCompact f] [QuasiSeparated f]\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hstage : ∀ i, IsIso\n      ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1}\n        (IsPullback.of_hasPullback f (D.obj i).hom).toCommSq).app\n          ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) :\n    Nonempty\n      (((upperStar AddCommGrpCat.{u + 1} c.pt.hom).mapDerivedCategory).obj\n          ((lowerStar AddCommGrpCat.{u + 1} f).rightDerivedFunctor.obj\n            ((DerivedCategory.singleFunctor _ 0).obj F)) ≅\n        (lowerStar AddCommGrpCat.{u + 1} (pullback.snd f c.pt.hom)).rightDerivedFunctor.obj\n          ((DerivedCategory.singleFunctor _ 0).obj\n            ((upperStar AddCommGrpCat.{u + 1} (pullback.fst f c.pt.hom)).obj F)))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-a32f0",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261014T161711-L-1952065",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-a32f0",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261014T161711-L-1952065",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered signatures, proofs, remaining continuity hole, nodes, change record and repaired report; verified compilation, direct importers, axioms and source-cycle necessity."
+ }
+}
