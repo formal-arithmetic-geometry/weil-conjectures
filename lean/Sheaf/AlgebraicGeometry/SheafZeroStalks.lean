@@ -31,3 +31,6 @@ This compatibility module intentionally contains no declarations after duplicate
 
 -- Repair verification (N2, 2026-10-14): duplicate removal already landed as
 -- 20261013T224521-L-1475959; this module has no declarations or proof holes.
+
+-- Second reading (G2, 2026-10-14): compatibility module compiled without warnings;
+-- no declarations or proof holes remain. The unavailable upstream theorem is not certified here.
