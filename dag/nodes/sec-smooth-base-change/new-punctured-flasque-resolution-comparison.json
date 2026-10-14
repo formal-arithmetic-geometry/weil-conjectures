@@ -13,22 +13,53 @@
  ],
  "proof": [
   {
-   "text": "The associated sheaves of the injective resolution are flasque and form an exact resolution. The acyclic-resolution comparison supplies mutually inverse comparison maps, and sections identify with evaluation on W.",
+   "text": "Use the exact augmentation of the explicitly restricted associated abelian-sheaf complex.",
    "uses": [
-    "def-weil-pbc-noetherian-ring",
+    "new-punctured-tilde-resolution-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each term of I is injective. The associated sheaf is flasque; restriction and forgetting scalars preserve surjectivity of its restriction functions. Flasque abelian sheaves have zero positive cohomology. Identify this cohomology with right-derived terminal evaluation to obtain termwise acyclicity.",
+   "uses": [
+    "lem-sbc-injective-module-tilde-flasque",
+    "lem-sc-zariski-flasque-acyclic",
+    "new-sheaf-cohomology-derived-evaluation",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the acyclic-resolution criterion to global abelian sections. Identify sheaf cohomology with derived terminal evaluation (degree zero by Sheaf.H.equiv₀, positive degrees by the derived-evaluation theorem).",
+   "uses": [
+    "lemma-weil-pbc-leray-acyclicity",
+    "new-sheaf-cohomology-derived-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved sections-complex isomorphism and the homology comparison for forgetting R-modules to abelian groups, then take the forward and inverse additive homomorphisms.",
+   "uses": [
+    "new-punctured-tilde-sections-comparison",
     "def-sbc-punctured-sections-complex"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "new-punctured-tilde-resolution-exact",
+  "lem-sbc-injective-module-tilde-flasque",
+  "lem-sc-zariski-flasque-acyclic",
+  "new-sheaf-cohomology-derived-evaluation",
   "def-weil-pbc-noetherian-ring",
+  "lemma-weil-pbc-leray-acyclicity",
+  "new-punctured-tilde-sections-comparison",
   "def-sbc-punctured-sections-complex"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project",
-  "place": "Tags 09T2 and 0A6T"
+  "place": "Tags 09T2 and 0A6T; genuine acyclic-resolution reduction by second reader H1"
  },
  "mathlib_searches": [
   {
@@ -102,13 +133,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E1",
+  "reviewer": "X-8a180",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261013T231534-L-1816823",
+  "landing": "20261014T010842-L-3163640",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered Lean files and DAG/report records match the stated item, compile successfully, and the direct importer compiles against them."
  }
 }

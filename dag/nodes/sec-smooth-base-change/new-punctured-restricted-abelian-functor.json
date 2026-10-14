@@ -1,0 +1,121 @@
+{
+ "id": "new-punctured-restricted-abelian-functor",
+ "kind": "definition",
+ "title": "Restricted associated-sheaf functor to abelian sheaves",
+ "statement": "For a commutative ring R and an open W of Spec R, the functor from R-modules to abelian sheaves on W associates the module sheaf, restricts along the inclusion of W and forgets the scalar action. It sends zero morphisms to zero.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01I6 and 0A6T; associated sheaves, restriction and exactness"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Compose Mathlib tilde.functor, Modules.restrictFunctor and SheafOfModules.toSheaf. The zero-map identity follows from tilde.map_zero and the componentwise definitions of restriction and forgetting.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 01I6 and 0A6T; second-reader reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A functor associates a sheaf to a module, restricts it to an open subscheme and forgets to abelian sheaves",
+   "date": "2026-10-14",
+   "results": "Use Mathlib tilde, restrictFunctor and toSheaf; the requested composite has no separate name.",
+   "verdict": "Use existing constructions; only name their explicit composite."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde.functor",
+   "date": "2026-10-14",
+   "results": "The tilde functor and its additive/adjunction APIs; restriction and forgetting still must be composed.",
+   "verdict": "Use existing constructions; only name their explicit composite."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFunctor|map_zero|toSheaf",
+   "date": "2026-10-14",
+   "results": "Mathlib module restriction and forgetful interfaces; compose these existing definitions.",
+   "verdict": "Use existing constructions; only name their explicit composite."
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact theorem for the stated restricted associated sheaf construction",
+   "date": "2026-10-14",
+   "results": "No exact theorem found in LeanSearch.",
+   "verdict": "No direct match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedFlasqueResolutionComparison",
+  "date": "2026-10-14",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Restricted associated-sheaf functor to abelian sheaves",
+   "via": [
+    "new-punctured-flasque-resolution-comparison",
+    "lem-sbc-punctured-flasque-resolution-cohomology",
+    "lem-sbc-punctured-injective-quotient-cohomology",
+    "lem-sbc-punctured-h-one-derived-torsion",
+    "lem-sbc-depth-three-puncture-h-one-comparison",
+    "lem-sbc-depth-three-puncture-h-one",
+    "lem-sbc-punctured-principal-eventual-scalar-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedTildeResolutionExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedTildeResolutionExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.puncturedRestrictedAbelianFunctor",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.puncturedRestrictedAbelianFunctor",
+   "AlgebraicGeometry.Scheme.puncturedRestrictedAbelianFunctor_preservesZeroMorphisms"
+  ],
+  "statement": "def puncturedRestrictedAbelianFunctor (R : Type u) [CommRing R]\n    (W : (Spec (.of R)).Opens) :\n    ModuleCat.{u} R ⥤\n      Sheaf (Opens.grothendieckTopology W.toScheme.carrier)\n        AddCommGrpCat.{u}",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8a180",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261014T010842-L-3163640",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8a180",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261014T010842-L-3163640",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean files and DAG/report records match the stated item, compile successfully, and the direct importer compiles against them."
+ }
+}

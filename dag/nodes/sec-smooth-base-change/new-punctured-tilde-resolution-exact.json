@@ -1,0 +1,131 @@
+{
+ "id": "new-punctured-tilde-resolution-exact",
+ "kind": "statement",
+ "title": "Exact augmented restricted associated-sheaf resolution",
+ "statement": "Let R be a commutative ring, W an open of Spec R and I an injective resolution of the R-module R [def-sp-injective-resolutions]. There is a quasi-isomorphism from the degree-zero complex of the underlying abelian structure sheaf on W to the complex obtained by applying [new-punctured-restricted-abelian-functor] to I. This statement asserts exactness before taking sections and asserts no comparison of cohomology groups.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01I6 and 0A6T; associated sheaves, restriction and exactness"
+ },
+ "stmt_deps": [
+  "new-punctured-restricted-abelian-functor",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Apply AlgebraicGeometry.tilde_preserves_finite_limits to obtain finite-limit preservation by the associated-sheaf functor. Its left adjunction supplies finite-colimit preservation.",
+   "uses": [
+    "lem-sc-tilde-preserves-finite-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Open restriction preserves limits and is a left adjoint, hence preserves finite colimits. The abelian forgetful functor also preserves finite limits and colimits. Their composite therefore preserves homology and the resolution augmentation remains a quasi-isomorphism. Compose its source with the single-complex transport of the canonical tildeSelf and restrictUnitIso identifications. This constructs the augmentation in the theorem, with no sorry.",
+   "uses": [
+    "new-punctured-restricted-abelian-functor",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-tilde-preserves-finite-limits",
+  "new-punctured-restricted-abelian-functor",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project and proved library finite-limit preservation theorem",
+  "place": "Tags 01I6 and 0A6T; AlgebraicGeometry.tilde_preserves_finite_limits in Sheaf.AlgebraicGeometry.TildePreservesFiniteLimits; Mathlib quasiIso_map_of_preservesHomology"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Taking associated sheaves and restricting an injective module resolution preserves its exact augmentation",
+   "date": "2026-10-14",
+   "results": "Only general InjectiveResolution.exact₀ and exact_succ; no concrete sheaf augmentation.",
+   "verdict": "No direct replacement; use the listed elementary or general APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "InjectiveResolution.exact₀",
+   "date": "2026-10-14",
+   "results": "Loogle unknown short identifier; no direct match.",
+   "verdict": "No direct replacement; use the listed elementary or general APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "tilde|IsFlasque",
+   "date": "2026-10-14",
+   "results": "Tilde construction and associated functor; no exact restricted augmentation theorem.",
+   "verdict": "No direct replacement; use the listed elementary or general APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact theorem for the stated restricted associated sheaf construction",
+   "date": "2026-10-14",
+   "results": "No exact theorem found in LeanSearch.",
+   "verdict": "No direct match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedFlasqueResolutionComparison",
+  "date": "2026-10-14",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Exact augmented restricted associated-sheaf resolution",
+   "via": [
+    "new-punctured-flasque-resolution-comparison",
+    "lem-sbc-punctured-flasque-resolution-cohomology",
+    "lem-sbc-punctured-injective-quotient-cohomology",
+    "lem-sbc-punctured-h-one-derived-torsion",
+    "lem-sbc-depth-three-puncture-h-one-comparison",
+    "lem-sbc-depth-three-puncture-h-one",
+    "lem-sbc-punctured-principal-eventual-scalar-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedTildeResolutionExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedTildeResolutionExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.punctured_tilde_resolution_exact",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.punctured_tilde_resolution_exact"
+  ],
+  "statement": "theorem punctured_tilde_resolution_exact\n    (R : Type u) [CommRing R] (W : (Spec (.of R)).Opens)\n    (I : InjectiveResolution (ModuleCat.of R R : ModuleCat.{u} R)) :\n    ∃ ι : (CochainComplex.single₀ _).obj\n        ((SheafOfModules.toSheaf W.toScheme.ringCatSheaf).obj\n          (SheafOfModules.unit W.toScheme.ringCatSheaf)) ⟶\n        ((puncturedRestrictedAbelianFunctor R W).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj I.cocomplex,\n      QuasiIso ι",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8a180",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261014T010842-L-3163640",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8a180",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261014T010842-L-3163640",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean files and DAG/report records match the stated item, compile successfully, and the direct importer compiles against them."
+ }
+}

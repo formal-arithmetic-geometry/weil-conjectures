@@ -1,0 +1,123 @@
+{
+ "id": "new-punctured-tilde-sections-comparison",
+ "kind": "statement",
+ "title": "Sections of the restricted associated-sheaf complex",
+ "statement": "For a commutative ring R, an open W of Spec R and any nonnegative cochain complex K of R-modules, the abelian-group complex obtained by applying [new-punctured-restricted-abelian-functor] degreewise and taking global sections on W is isomorphic to the underlying abelian-group complex of puncturedSectionsComplex R W K [def-sbc-punctured-sections-complex].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01I6 and 0A6T; associated sheaves, restriction and exactness"
+ },
+ "stmt_deps": [
+  "new-punctured-restricted-abelian-functor",
+  "def-sbc-punctured-sections-complex"
+ ],
+ "proof": [
+  {
+   "text": "In each degree use the original abelian presheaf map along the equality W.ι_image_top. Both sides have the same underlying section groups after forgetting scalars. Naturality of the sheaf map of each differential proves the chain-map condition, so HomologicalComplex.Hom.isoOfComponents gives the isomorphism. This proof is complete and applies to arbitrary K, including the zero complex and empty W.",
+   "uses": [
+    "new-punctured-restricted-abelian-functor",
+    "def-sbc-punctured-sections-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-punctured-restricted-abelian-functor",
+  "def-sbc-punctured-sections-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 01I6 and 0A6T; second-reader reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of an associated sheaf to an open has the same global sections as evaluation on that open",
+   "date": "2026-10-14",
+   "results": "Restriction and presheaf evaluation APIs, but no direct complex theorem.",
+   "verdict": "No direct replacement; use the listed elementary or general APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.Hom.isoOfComponents",
+   "date": "2026-10-14",
+   "results": "Use HomologicalComplex.Hom.isoOfComponents and presheaf naturality.",
+   "verdict": "No direct replacement; use the listed elementary or general APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "tilde|IsFlasque",
+   "date": "2026-10-14",
+   "results": "Use Mathlib Tilde construction and restriction interfaces.",
+   "verdict": "No direct replacement; use the listed elementary or general APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact theorem for the stated restricted associated sheaf construction",
+   "date": "2026-10-14",
+   "results": "No exact theorem found in LeanSearch.",
+   "verdict": "No direct match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedFlasqueResolutionComparison",
+  "date": "2026-10-14",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Sections of the restricted associated-sheaf complex",
+   "via": [
+    "new-punctured-flasque-resolution-comparison",
+    "lem-sbc-punctured-flasque-resolution-cohomology",
+    "lem-sbc-punctured-injective-quotient-cohomology",
+    "lem-sbc-punctured-h-one-derived-torsion",
+    "lem-sbc-depth-three-puncture-h-one-comparison",
+    "lem-sbc-depth-three-puncture-h-one",
+    "lem-sbc-punctured-principal-eventual-scalar-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedTildeSectionsComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedTildeSectionsComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.punctured_tilde_sections_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.punctured_tilde_sections_comparison"
+  ],
+  "statement": "theorem punctured_tilde_sections_comparison\n    (R : Type u) [CommRing R] (W : (Spec (.of R)).Opens)\n    (K : CochainComplex (ModuleCat.{u} R) ℕ) :\n    let Γ := sheafToPresheaf\n      (Opens.grothendieckTopology W.toScheme.carrier)\n        AddCommGrpCat.{u} ⋙ (evaluation _ _).obj (op ⊤)\n    Nonempty (((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).obj\n      (((puncturedRestrictedAbelianFunctor R W).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj K)) ≅\n      (((forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u}).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj (puncturedSectionsComplex R W K)))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8a180",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261014T010842-L-3163640",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8a180",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261014T010842-L-3163640",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean files and DAG/report records match the stated item, compile successfully, and the direct importer compiles against them."
+ }
+}
