@@ -1,6 +1,6 @@
 # Work queue
 
-18 items; claim with `tools/claim.py next <group> [--stage N]`.
+19 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,13 +8,14 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (18)
+## Stage 3: modules to prove (19)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
-| `WeilConjectures.ConstructibleSheaf.FinitePushforward` | 3 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteSelectionGeneral` | 4 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ConstructibleModuleNoetherianStalkDetector` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparison` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BaseChangeTargetTransitionHigherImage` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.LimitHigherDirectImageExchange` | 11 | 1 | proof |
@@ -31,11 +32,10 @@
 | `Sheaf.AlgebraicGeometry.AffineCoordinateComparisonCoherence` | 43 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates` | 50 | 1 | proof |
 
-Waiting, not claimable: 5 modules whose proof uses a node that has no Lean declaration yet.
+Waiting, not claimable: 4 modules whose proof uses a node that has no Lean declaration yet.
 
 | module | distance to a target | sorry |
 |---|---|---|
-| `WeilConjectures.ConstructibleSheaf.FinitePushforward` | 3 | 1 |
 | `Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparison` | 10 | 1 |
 | `Sheaf.AlgebraicGeometry.LimitHigherDirectImageExchange` | 11 | 1 |
 | `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula` | 22 | 1 |
