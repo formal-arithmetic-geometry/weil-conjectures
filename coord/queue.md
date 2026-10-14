@@ -1,6 +1,6 @@
 # Work queue
 
-12 items; claim with `tools/claim.py next <group> [--stage N]`.
+9 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (12)
+## Stage 3: modules to prove (9)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -19,8 +19,5 @@
 | `Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardResidueHomologySourceResidueComparison` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation` | 24 | 1 | proof |
-| `Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison` | 34 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData` | 34 | 1 | proof |
-| `Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchangePreNormalization` | 35 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.RelativeMVDirectImageRowsCore` | 41 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData` | 34 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates` | 50 | 1 | proof |
