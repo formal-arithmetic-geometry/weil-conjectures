@@ -1,0 +1,103 @@
+{
+ "id": "lem-weil-pbc-proetale-locally-classical-etale-cover",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: \"Choose an integral lattice for K\"; the final sentence of Proposition 6.8.4(6): locally constant sheaves are locally classical and a pro-etale section descends to an etale cover",
+   "via": [
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Locally constant pro-etale sheaves admit etale sections",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $\\nu_X:X_{\\mathrm{proet}}\\to X_{\\mathrm{et}}$ be the comparison morphism [def-weil-pbc-proetale-site, def-weil-pbc-etale-site, def-weil-pbc-site-comparison-morphism]. A sheaf of sets $F$ on $X_{\\mathrm{proet}}$ is called classical if $F\\cong\\nu_X^*G$ for a sheaf of sets $G$ on $X_{\\mathrm{et}}$, and locally classical if there is a pro-etale covering family $\\{U_j\\to X\\}_j$ such that $F|_{U_j}\\cong\\nu_{U_j}^*G_j$ for etale sheaves of sets $G_j$. Every locally classical $F$ is classical. In particular this holds for every locally constant sheaf of sets, meaning one that becomes a constant sheaf $\\underline{S_j}$ on each member of a pro-etale covering, where constant sheaf means sheafification of the constant presheaf [def-weil-pbc-constant-sheaf]. If a locally classical $F$ has sections on every member of some pro-etale covering family of $X$, then there is an etale covering family $\\{Y_i\\to X\\}_i$ with $F(Y_i)\\ne\\varnothing$ for every $i$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 5.1.3 and Lemma 5.1.4 (local classicality implies classicality); Lemmas 5.1.1-5.1.2 and Proposition 6.8.4(6), final passage from local pro-etale sections to etale sections."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant sheaf on the pro-etale site is locally classical and has an etale cover with a section",
+   "results": "AlgebraicGeometry.Scheme.etaleTopology; smallEtaleTopology; no comparison theorem",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "pro etale locally constant etale cover section",
+   "results": "0 hits; parser expected end of input",
+   "date": "2026-10-14",
+   "verdict": "invalid query: parser error, no usable theorem search result; replaced by valid second-reader query"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyClassical|proetale.*classical|etale.*section [Mathlib]",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally constant pro-etale sheaf has an etale cover with a section",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"constant\"",
+   "results": "12 hits: CategoryTheory.Sheaf.IsConstant, CategoryTheory.constantSheaf, CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Sheaf.IsConstant.mk, CategoryTheory.Sheaf.isConstant_congr, CategoryTheory.constantPresheafAdj, CategoryTheory.Sheaf.isConstant_of_iso",
+   "date": "2026-10-14",
+   "verdict": "no match: second reader read types; generic constant sheaves, site definitions and localization do not state this lattice identification or etale-origin descent"
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?etale|locally.?classical|GeneralLinearGroup.*[Qq]uotient",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: second reader read types; generic constant sheaves, site definitions and localization do not state this lattice identification or etale-origin descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of sets locally pulled back from the small etale site is globally pulled back from that site and local inhabitedness descends",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.W_eq_isLocal_range_sheafToPresheaf_obj, AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.GrothendieckTopology.W_eq_W_range_sheafToPresheaf_obj, CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff, AlgebraicGeometry.Scheme.etaleTopology, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.mk', LightProfinite.instWEqualsLocallyBijectiveCoherentTopology",
+   "date": "2026-10-14",
+   "verdict": "no match: second reader read types; generic constant sheaves, site definitions and localization do not state this lattice identification or etale-origin descent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-lisse-lattice-etale-local",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

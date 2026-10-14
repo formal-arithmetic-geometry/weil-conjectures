@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-finite-extension",
-   "place": "Proof, first sentence: \"Choose an integral lattice for K\"; Bhatt-Scholze 6.8.13 first paragraph, application of 6.8.4(6) before stratification.",
+   "place": "Proof, first sentence: \"Choose an integral lattice for K\"; Bhatt-Scholze Proposition 6.8.4(6), construction of the lattice sheaf and etale descent.",
    "via": [
     "lem-weil-pbc-lisse-e-constructible-integral-lattice",
     "lem-weil-pbc-condensed-e-realization",
@@ -30,9 +30,50 @@
   "def-weil-pbc-etale-site",
   "def-weil-proetale-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-lattice-sheaf-locally-constant], the isomorphism classes of pairs $(M,\\alpha:E\\otimes_A M\\cong L)$ form a sheaf $\\mathscr L_L$ of sets. Choose the pro-etale covering trivializing $L$ from its locally-free hypothesis, with rank $n_j$ on $U_j$. The cited node identifies $\\mathscr L_L|_{U_j}$ with $\\underline{\\operatorname{GL}_{n_j}(E)/\\operatorname{GL}_{n_j}(A)}$. Thus $\\mathscr L_L$ is locally constant. The identity coset gives the pair $(A_{U_j}^{n_j},\\alpha_j)$ on every $U_j$, including $n_j=0$, so it has sections on all members of this cover.",
+   "uses": [
+    "lem-weil-pbc-lattice-sheaf-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), construction of the lattice sheaf and its local description"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-proetale-locally-classical-etale-cover] to the sheaf $\\mathscr L_L$ of Step 1: it is locally constant and has sections on every member of a pro-etale covering. Obtain an etale covering family $(u_i:Y_i\\to X)_i$ and sections $s_i\\in\\mathscr L_L(Y_i)$. No compatibility between distinct $s_i$ is required.",
+   "uses": [
+    "lem-weil-pbc-proetale-locally-classical-etale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), final passage from pro-etale to etale cover"
+   }
+  },
+  {
+   "text": "Choose a representative $(M_i,\\alpha_i)$ for each isomorphism class $s_i$. By the definition of $\\mathscr L_L$ in [lem-weil-pbc-lattice-sheaf-locally-constant], $M_i$ is pro-etale locally free of finite rank over $A_{Y_i}$ and $\\alpha_i:E_{Y_i}\\otimes_{A_{Y_i}}M_i\\cong L|_{Y_i}$. Since $Y_i\\to X$ is etale, restriction to the localized pro-etale site is $u_i^{-1}L$ with the slice-site coefficient action specified in the item. These are exactly the required modules and isomorphisms. For $X=\\varnothing$ take the empty covering family.",
+   "uses": [
+    "lem-weil-pbc-lattice-sheaf-locally-constant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), construction of the lattice sheaf and its local description"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "lem-weil-pbc-proetale-locally-classical-etale-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -78,12 +119,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-lisse-e-constructible-integral-lattice",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-lisse-lattice-etale-local",
+  "worker": "stage1",
+  "summary": "Split Proposition 6.8.4(6) into the sheaf and coset description of lattices, general local classicality and descent of inhabitedness, and elementary extraction of representatives. Second reader made the support statements self-contained and made the covering quantifiers and coefficient actions explicit; item statement unchanged.",
+  "blueprint": "Realizes thm-weil-pbc-finite-extension proof first sentence, using Proposition 6.8.4(6) to obtain an etale-local integral lattice."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-ceb1ed61b",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-ceb1ed61b (reviewer sub-agent of L); spot-checked: Full mathematical and source review passes against Bhatt–Scholze Proposition 6.8.4(6) and Lemmas 5.1.1–5.1.4. Checked every step, both new nodes, edge cases, DAG duplicates, route, and archived master coefficients/base-change signature. Corrected both support nodes’ incomplete metadata and blueprint ancestry in fixes/dag/nodes/sec-proper-base-change/. Statements and targets are unchanged; details are in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }
