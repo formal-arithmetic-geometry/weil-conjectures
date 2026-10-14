@@ -34,9 +34,139 @@
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-etale-constructible-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We first record explicitly the coefficient upgrade used below. For a finite ring $A$ and an $A$-module sheaf $G$, constructibility of its underlying abelian sheaf is equivalent to module constructibility with the same strata. On an abelian constant chart $G=\\underline B$ with $B$ finite, every $a\\in A$ acts by an abelian endomorphism of $\\underline B$. Apply the constant-sheaf morphism lemma with coefficient ring $\\mathbf Z$ to each of the finitely many $a$. Refine these finitely many covers by fibre products. On each nonempty member all actions are constant group homomorphisms $B\\to B$, and the ring-action identities hold for these maps because they hold for the sheaf actions: on a nonempty chart choose a geometric point, whose stalk of the constant sheaf is canonically $B$ by [lem-weil-pbc-constant-sheaf-geometric-stalk], and read each identity on that stalk; hence $B$ acquires an $A$-module structure and the chart is $A$-linear. Its values are finite. The converse forgets the action on each module chart. Restrictions commute with forgetting by the coefficient comparison. Thus both global-partition definitions agree in this finite-ring case.",
+   "uses": [
+    "lemma-constructible-hom-constant-locally",
+    "def-weil-pbc-constructible-abelian-sheaf",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "0GKW coefficient comparison paragraph; Etale Cohomology definitions 03RU/03RW, finite-action argument"
+   }
+  },
+  {
+   "text": "Apply the dimension-loci lemma with $d=1$ and write $S=S_0\\amalg S_1$, allowing either locus to be empty. Restrictions of $R^qf_*\\underline M$ to these open and closed loci are $R^qf_{i,*}\\underline M$: inverse image along their open immersions is exact by site-pullback-abelian-exact (also for modules, by the exact forgetful functor and coefficient comparison), and preserves injectives by the etale-restriction lemma, so restricting an injective resolution and the sectionwise direct-image formula gives this canonical isomorphism; [lemma-constructible-pullback-constant] identifies the restricted input with the constant sheaf on $C_i$. The two loci are Noetherian and quasi-compact; their finite constructible stratifications can be concatenated to a finite constructible stratification of $S$. It therefore suffices to work on each locus.",
+   "uses": [
+    "lem-weil-pbc-proper-smooth-connected-fibre-dimension-loci",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Dimension-zero extension of 0GKW; 02G1/01TH"
+   }
+  },
+  {
+   "text": "On $S_0$, the map $f_0$ is quasi-finite, proper and of finite presentation (smooth is locally of finite presentation; proper is of finite type, hence quasi-compact, and separated, hence quasi-separated: its diagonal is a closed immersion, whose inverse image of an affine open is a closed affine subscheme and thus quasi-compact). The schemes $S_0$ and $C_0$ are quasi-compact and quasi-separated: $S_0$ is Noetherian and hence quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]; it is quasi-compact since it is closed in the quasi-compact base. By [lem-weil-pbc-qcqs-morphism-permanence] (2), a quasi-compact quasi-separated morphism over this quasi-compact quasi-separated base has quasi-compact quasi-separated source. Use the compactification $(\\mathrm{id}_{C_0},f_0)$. The constant sheaf $\\underline M[0]$ has constructible cohomology: the one-piece stratum has finite constant value $M$, and all other cohomology sheaves are zero. The quasi-finite shriek constructibility theorem therefore applies. For this compactification $Rf_{0,!}=Rf_{0,*}(\\mathrm{id}_! -)=Rf_{0,*}$, since extension by zero along the identity is the identity. Its conclusion gives every required cohomology sheaf on $S_0$.",
+   "uses": [
+    "lem-weil-pbc-proper-smooth-connected-fibre-dimension-loci",
+    "lem-weil-pbc-etale-quasifinite-shriek-constructible",
+    "def-weil-pbc-extension-by-zero",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-sbc-smooth-morphisms",
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-proper-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GK3, label lemma-qf-f-shriek-constructible, identity compactification"
+   }
+  },
+  {
+   "text": "On $S_1$ prove the assertion first for the underlying finite abelian coefficient group $B$. If $\\ell B=0$ for a prime $\\ell$, the formula $(a\\bmod\\ell)b=ab$ gives $B$ an $\\mathbf F_\\ell$-vector-space structure. The vector-space freeness theorem supplies a basis. Its basis vectors form a subset of the finite set $B$, so the basis index set is finite. Enumerating it gives $B\\cong\\mathbf F_\\ell^r$, including $r=0$. Constant sheaves preserve finite direct sums by exact sheafification, and the additive right-derived functors preserve these finite biproducts. Thus $R^qf_{1,*}\\underline B$ is a finite direct sum of the prime-coefficient higher direct images. The prime-coefficient theorem and closure under extensions (split exact sequences) make this constructible as an $\\mathbf F_\\ell$-module sheaf, hence as an abelian sheaf by Step 1. The forgotten derived direct images are the abelian derived direct images by the coefficient comparison applied to the identity base-change square.",
+   "uses": [
+    "lem-weil-pbc-vector-space-free",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "thm-constructible-serre",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-weil-pbc-module-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "0GKW final reduction to 0GKV; finite-underlying-set specialization"
+   }
+  },
+  {
+   "text": "Induct strongly on a positive integer $n$ killing $B$, simultaneously for all finite abelian $B$ and all $q\\ge0$. For $n=1$, $B=0$ and the conclusion is the constant zero sheaf. For $n>1$, take a prime divisor $\\ell$ and put $n=\\ell n\\prime$, $B\\prime=\\ell B$. Then $B[\\ell]$ is killed by $\\ell$, $B\\prime$ is killed by $n\\prime<n$, and both are finite. Regard all three groups as $\\mathbf Z/n$-modules. The exact sequence $0\\to B[\\ell]\\to B\\xrightarrow{\\ell}B\\prime\\to0$ gives an exact sequence of constant sheaves by exact sheafification. The derived delta-functor theorem applies to $f_{1,*}$: its module direct image is additive left exact and its module-sheaf domain has enough injectives. Consequently there is an exact segment $R^{q-1}f_{1,*}\\underline {B\\prime}\\to R^qf_{1,*}\\underline{B[\\ell]}\\to R^qf_{1,*}\\underline B\\to R^qf_{1,*}\\underline {B\\prime}\\to R^{q+1}f_{1,*}\\underline{B[\\ell]}$. For $q=0$ the leftmost term is zero. By Step 4 and induction the four outer terms are constructible abelian sheaves; coefficient comparison and Step 1 make them constructible $\\mathbf Z/n$-module sheaves. The middle term is an extension of the cokernel of the first arrow by the kernel of the last arrow, both constructible by the weak-Serre theorem. This proves the induction without any invertibility assumption.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "thm-constructible-serre",
+    "lem-weil-pbc-exchange-forget-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKW first paragraph; replace erroneous M[n] by M[l]"
+   }
+  },
+  {
+   "text": "The finite additive group of $M$ is killed by a positive integer: each element has finite additive order (two of its nonnegative multiples coincide), and the product of these orders kills every element. Apply Step 5 to this group. The coefficient comparison identifies the underlying abelian sheaf of $R^qf_{1,*}\\underline M$ with that abelian higher direct image. Step 1 upgrades its constructibility to the given $\\Lambda$-module structure. For $q<0$, an injective resolution of a sheaf starts in degree zero; the sectionwise direct image therefore has zero terms in negative degrees, so its negative cohomology is the zero sheaf and constructible. Combine the results on the two loci as in Step 2. This proves all integer degrees, including $M=0$ and the zero ring.",
+   "uses": [
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "0GKW finite torsion conclusion; dimension-zero gluing and negative degrees"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-constructible-hom-constant-locally",
+  "def-weil-pbc-constructible-abelian-sheaf",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-proper-smooth-connected-fibre-dimension-loci",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-etale-quasifinite-shriek-constructible",
+  "def-weil-pbc-extension-by-zero",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-vector-space-free",
+  "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "thm-constructible-serre",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKW first paragraph and final prime-coefficient input; finite abelian coefficient route replaces the general Noetherian coefficient free-resolution argument; 0GK3 for dimension zero"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -79,10 +209,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] {s : Set ↥X},\\n  Topology.IsLocallyConstructible s →\\n    Topology.IsLocallyConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and locally of finite presentation morphism of schemes. If $s$ is a locally constructible subset of $X$, then its image $f(s)$ is a locally constructible subset of \"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {s : Set ↥Y},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' s)\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes and any constructible subset $ s \\\\subseteq Y $, the preimage $ f^{-1}(s) $ is a constructible subset of $ X $.\"}\n  {\"name\": \"PrimeSpectrum.isConstructible_comap_image\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.FinitePresentation →\\n    ∀ {s : Set (PrimeSpectrum S)}, Topology.IsConstructible s → Topology.IsConstructible (PrimeSpectrum.comap f '' s)\", \"doc\": \"If $ f: R \\\\to S $ is a finitely presented ring homomorphism and $ s \\\\subseteq \\\\operatorname{Spec}(S) $ is a constructible set in the Zariski topology, then the image of $ s $ under the induced map $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper smooth families finite module coefficients etale higher direct images constructible",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.isOpen_etaleLocus, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.Etale.exists_subalgebra_fg",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant finite torsion sheaf cohomology constructible proper family of curves",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*smooth.*constructible|constructible.*smooth.*proper",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"sheaf\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper smooth geometrically connected curves prime torsion etale cohomology constructible",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error; ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
   "by": "worker",
@@ -98,5 +263,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+  "worker": "stage1",
+  "summary": "Kept statement; separated fibre dimensions, used 0GK3 in dimension zero, and supplied finite abelian prime-coefficient devissage with an explicit finite-action coefficient upgrade. Corrected the source proof typo M[n] to M[l]. Two new unsplit nodes; reused the existing Mathlib vector-space freeness leaf and made its finite-index specialization elementary.",
+  "blueprint": "Realizes the classical constructibility input of thm-weil-pbc-direct-image-finiteness-proper through its 0GKX/0GKW expansion; 0GKV is the strictly smaller prime-coefficient input."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-9ed9815be",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-9ed9815be (reviewer sub-agent of L); spot-checked: Read all mathematics and checked Stacks 0GKW, 0GKV, 0GK3, 0GKM, 02G1 and 01TH. Finite-coefficient induction and dimension reduction are sound, including characteristic-p coefficients. Added existing stalk, restriction and qcqs citations and completed new-node metadata in three corrected JSON files. Statements unchanged; no duplicate nodes found. Full checks and inherited DAG defects are recorded in review.md.; 3 file(s) fixed by the reviewer"
  }
 }
