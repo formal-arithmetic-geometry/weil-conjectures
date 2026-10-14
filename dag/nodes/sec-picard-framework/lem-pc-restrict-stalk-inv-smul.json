@@ -1,0 +1,116 @@
+{
+ "id": "lem-pc-restrict-stalk-inv-smul",
+ "kind": "statement",
+ "title": "Inverse restriction on module stalks respects scalars",
+ "statement": "For schemes Y,Z, an open immersion j:Y→Z, a point z of Y, a module sheaf M on Z, a scalar d in O_Z,jz, and x in M_jz, let r be the inverse additive restriction stalk comparison restrictStalkNatIso j z. Then r(d • x) = j.stalkMap(z)(d) • r(x), where the right action is that of O_Y,z on the stalk of restrictFunctor j M. There are no flatness, finiteness or nonzero assumptions.",
+ "stmt_deps": [
+  "def-pc-module-stalk-functor"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0098",
+  "place": "Restriction of germs, specialized to modules; coefficient-one and scalar-extension steps of the parent proof."
+ },
+ "proof": [
+  {
+   "text": "Represent the scalar and restricted module element by section germs on a common open U. The inverse stalk ring map takes the scalar germ to the germ of the inverse appIso section. germ_smul and germ_restrictStalkNatIso_hom_app prove semilinearity of the forward restriction comparison over the inverse stalk map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply injectivity of the forward additive restriction isomorphism to the desired equation. Apply its semilinearity formula to j.stalkMap(z)(d) and the inverse restriction image of x. The two ring inverse equations and the additive inverse equations simplify this formula to the desired equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E3",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/0098",
+  "place": "Parent proof step 1, expanded using specified adjunction units and germ formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse restriction stalk isomorphism respects scalar multiplication along stalk ring map",
+   "date": "2026-10-14",
+   "available": true,
+   "results": "Generic stalk and ring restriction comparisons; no scalar formula for restrictStalkNatIso.inv.",
+   "verdict": "Use Mathlib germ formulas; scalar compatibility must be derived."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictStalkNatIso\"",
+   "date": "2026-10-14",
+   "available": true,
+   "results": "restrictStalkNatIso and its hom/inv germ formulas.",
+   "verdict": "No semilinearity or tensor-square unit formula is stated."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictStalk.*smul|restriction_stalk_smul|transport_pure_one",
+   "date": "2026-10-14",
+   "available": true,
+   "results": "No Mathlib hit. Repository OpenSemilinearInputComplexIso and Modules.RestrictionStalkExtensionIso prove a private forward restriction_stalk_smul.",
+   "verdict": "Reuse that proved germ argument and invert it; no existing public inverse scalar lemma. The pinned-open tensor coordinates use different comparison maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse restriction stalk map for modules respects multiplication by germs of scalars",
+   "date": "2026-10-14",
+   "available": false,
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenRestrictedTensorChainTransportPure",
+  "date": "2026-10-14",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-open-restricted-tensor-chain-transport",
+   "place": "Pure-tensor geometric calculation: coefficient-one unit calculation and scalar extension.",
+   "via": [
+    "lem-pc-open-restricted-tensor-chain-transport-pure"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictStalkInvSmul",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictStalkInvSmul.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso_inv_smul",
+  "statement": "theorem restrictStalkNatIso_inv_smul\n    {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsOpenImmersion j] (z : Y)\n    (M : Z.Modules) (d : Z.presheaf.stalk (j z))\n    (x : (RingedSpace.moduleStalkFunctor Z.toRingedSpace (j z)).obj M) :\n    (restrictStalkNatIso j z).inv.app M (d • x) =\n      (j.stalkMap z).hom d •\n        (show (RingedSpace.moduleStalkFunctor Y.toRingedSpace z).obj\n          ((restrictFunctor j).obj M) from (restrictStalkNatIso j z).inv.app M x)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261014T001716-L-2548838",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261014T001716-L-2548838",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

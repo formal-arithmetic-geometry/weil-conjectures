@@ -1,6 +1,8 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 public import Sheaf.AlgebraicGeometry.OpenRestrictedTensorComplexIso
+import Sheaf.AlgebraicGeometry.OpenRestrictedTensorChainTransportPureOne
+import Sheaf.AlgebraicGeometry.RestrictStalkInvSmul
 /-! # Homology transport for normalized open tensor coordinates
 
 Source: Stacks Project, Tag 0098, stalks of pullback and restriction.
@@ -20,6 +22,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 
+set_option linter.unusedVariables false in
 /-- The open tensor restriction square carries a pure tensor to the same restricted germ.
 
 Proof: use the specified components of tensorStalkIso to reduce to the ordinary
@@ -90,6 +93,49 @@ theorem openRestricted_tensor_chain_transport_pure
               (algebraMap A0 (A0 ⊗[R0] B0))]
             ((Scheme.Modules.restrictStalkNatIso U.ι (pullback.snd g' U.ι z0)).inv.app
               (P.X k) (((show X.Modules from P.X k).presheaf.stalkCongr (.of_eq hp)).hom x)))
-      := by sorry
+      := by
+  dsimp only
+  intro k d x
+  let z := pullback.fst g' U.ι z0
+  let P0 := ((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj P
+  let Pg := ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P
+  let := leftAlgebra f g' z
+  let := rightAlgebra f f' g g' sq z
+  let a := (tensorMap f f' g g' sq z).comp
+    (algebraMap (A g' z) (A g' z ⊗[R f g' z] B f' z))
+  let := leftAlgebra (U.ι ≫ f) (pullback.snd g' U.ι) z0
+  let := rightAlgebra (U.ι ≫ f) (pullback.fst g' U.ι ≫ f')
+    g (pullback.snd g' U.ι) sq0 z0
+  let a0 := (tensorMap (U.ι ≫ f) (pullback.fst g' U.ι ≫ f')
+    g (pullback.snd g' U.ι) sq0 z0).comp
+      (algebraMap (A (pullback.snd g' U.ι) z0)
+        (A (pullback.snd g' U.ι) z0 ⊗[R (U.ι ≫ f) (pullback.snd g' U.ι) z0]
+          B (pullback.fst g' U.ι ≫ f') z0))
+  let e := (tensorStalkIso f f' g g' sq z P).hom.f k
+  let e0 := (tensorStalkIso (U.ι ≫ f) (pullback.fst g' U.ι ≫ f')
+    g (pullback.snd g' U.ι) sq0 z0 P0).hom.f k
+  let c := (RingedSpace.moduleStalkFunctor (pullback g' U.ι).toRingedSpace z0).map
+    ((openTensorRestrictionComplexIso g' U P).hom.f k)
+  let r := (Scheme.Modules.restrictStalkNatIso (pullback.fst g' U.ι) z0).inv.app (Pg.X k)
+  let hp : g' z = U.ι (pullback.snd g' U.ι z0) :=
+    congrArg (fun h : pullback g' U.ι ⟶ X => h z0) pullback.condition
+  let x0 := (Scheme.Modules.restrictStalkNatIso U.ι (pullback.snd g' U.ι z0)).inv.app
+    (P.X k) (((show X.Modules from P.X k).presheaf.stalkCongr (.of_eq hp)).hom x)
+  let d0 := ((pullback.fst g' U.ι).stalkMap z0).hom d
+  change c.hom (r (e.hom (d ⊗ₜ[A g' z, a] x))) =
+    e0.hom (d0 ⊗ₜ[A (pullback.snd g' U.ι) z0, a0] x0)
+  have h := openRestricted_tensor_chain_transport_pure_one f f' g g' sq U sq0 z0 P k x
+  simp only [map_one] at h
+  change c.hom (r (e.hom ((1 : C z) ⊗ₜ[A g' z, a] x))) =
+    e0.hom ((1 : C z0) ⊗ₜ[A (pullback.snd g' U.ι) z0, a0] x0) at h
+  rw [← mul_one d]
+  erw [← ModuleCat.ExtendScalars.smul_tmul a d 1 x, e.hom.map_smul]
+  erw [Scheme.Modules.restrictStalkNatIso_inv_smul, c.hom.map_smul]
+  rw [h]
+  dsimp only [d0]
+  erw [← e0.hom.map_smul]
+  congr 1
+  exact (ModuleCat.ExtendScalars.smul_tmul a0
+    (((pullback.fst g' U.ι).stalkMap z0).hom d) 1 _).trans (by rw [mul_one])
 
 end AlgebraicGeometry.SingleComplexBaseChange
