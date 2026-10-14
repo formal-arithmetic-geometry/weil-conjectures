@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuityData
 public import Sheaf.AlgebraicGeometry.PerfectHomPresentation
 import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
-import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
+import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealization
 
 /-! # Geometric Hom presentation on a compact two-open overlap
 
@@ -34,6 +34,42 @@ attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverMo
   schemeOpenRestriction_preservesFiniteColimits schemeOpenOverlapRestriction_additive
   schemeOpenOverlapRestriction_preservesFiniteLimits
   schemeOpenOverlapRestriction_preservesFiniteColimits
+
+/-- Assemble the geometric finiteness and perfectness with object comparisons. -/
+private noncomputable def homPresentationOfObjects
+    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
+    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (i : I)
+    [∀ Z : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    [∀ (Z : Scheme.{u}) (U : Z.Opens),
+      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]
+    (C : Set.Ici i → Type*) [∀ k, Category* (C k)]
+    (F : ∀ k, Bool → C k) (D : Type*) [Category* D]
+    (O : Bool → D) (G : ∀ k, C k ⥤ D)
+    (ψ : ∀ k b, (G k).obj (F k b) ≅ O b)
+    (Y : Scheme.{u}) (s : Y ⟶ Spec (R.obj i))
+    (objects : Bool → schemeDerivedCategory Y)
+    (lfp : LocallyOfFinitePresentation s) (qc : QuasiCompact s) (qs : QuasiSeparated s)
+    (perfect : ∀ b, Y.IsPerfect (objects b))
+    (r : PerfectHomObjectRealization R c i C F D O G ψ Y s objects) :
+    PerfectHomPresentation R c i C F D O G ψ where
+  Y := Y
+  s := s
+  lfp := lfp
+  qc := qc
+  qs := qs
+  P := objects
+  perfect := perfect
+  stage k a b := (r.stageEquiv k).fullyFaithfulFunctor.homEquiv.trans
+    (Iso.homCongr (r.stageObj k a) (r.stageObj k b))
+  apex a b := r.apexEquiv.fullyFaithfulFunctor.homEquiv.trans
+    (Iso.homCongr (r.apexObj a) (r.apexObj b))
+  stage_id k a := by
+    simp
+  stage_comp k a b d f g := by
+    simp
+  pin k a b f := by
+    exact r.hom_pin k a b f
 
 set_option synthInstance.maxHeartbeats 400000 in
 -- The dependent overlap expression needs the shared exact-restriction instances.
@@ -153,6 +189,10 @@ noncomputable def perfectOverlapHomPresentationStatement
         | false => d.toDiagram.γU.symm.app A' ≪≫ SP.mapIso θU ≪≫ τU.app E
       PerfectHomPresentation R c j C F _ (fun _ ↦ RW.obj E) G ψ)
 
+set_option synthInstance.maxHeartbeats 400000 in
+-- The cached statement exposes the shared exact-restriction instances.
+set_option maxHeartbeats 1600000 in
+-- The reduction unfolds the cached stage categories and their realization data.
 /-- The exact overlap Hom sets admit a pinned geometric presentation.
 No morphism lifting, eventual equality, or stage transport is asserted here.
 Source: Stacks Project, Tag 09RE, restriction to quasi-compact opens in the proof
@@ -200,6 +240,40 @@ theorem perfect_overlap_hom_presentation
     (j : I) (hij : i ≤ j)
     (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),
       ∃ k : I, j ≤ k)
-    : perfectOverlapHomPresentationStatement R c hc i Z t j hij hstage := by sorry
+    : perfectOverlapHomPresentationStatement R c hc i Z t j hij hstage := by
+  unfold perfectOverlapHomPresentationStatement
+  intro Yj X gj U V hcover hU hV A B hA hB E instP instQ instX PU PV φU φV
+    P Q RU RV RW SP SQ τU τV
+  let W := U ⊓ V
+  let s : W.toScheme ⟶ Spec (R.obj j) :=
+    W.ι ≫ pullback.snd t (Spec.map (R.map (homOfLE hij)))
+  have : QuasiSeparatedSpace Yj :=
+    quasiSeparatedSpace_of_quasiSeparated
+      (pullback.snd t (Spec.map (R.map (homOfLE hij))))
+  have hW : IsCompact (W : Set Yj) :=
+    hU.inter_of_isOpen hV U.isOpen V.isOpen
+  have : CompactSpace W.toScheme :=
+    (isCompact_iff_compactSpace).mp hW
+  have hsfp : LocallyOfFinitePresentation s := by dsimp [s]; infer_instance
+  have hsqc : QuasiCompact s := by infer_instance
+  have hsqs : QuasiSeparated s := by dsimp [s]; infer_instance
+  let objects : Bool → schemeDerivedCategory W.toScheme := fun b ↦
+    if b then (derivedPullback (Yj.homOfLE (inf_le_right : W ≤ V))).obj B
+    else (derivedPullback (Yj.homOfLE (inf_le_left : W ≤ U))).obj A
+  have hobjects : ∀ b, W.toScheme.IsPerfect (objects b) := by
+    intro b
+    cases b
+    · exact derivedPullback_preserve_perfect _ A hA
+    · exact derivedPullback_preserve_perfect _ B hB
+  have hr := perfect_overlap_object_realization R c hc i Z t j hij hstage
+  unfold perfectOverlapObjectRealizationStatement at hr
+  have hr' := hr U V hcover hU hV A B hA hB E φU φV
+  obtain ⟨pair⟩ := hr'
+  let data := pair.1
+  have realization := pair.2
+  refine ⟨⟨data, ?_⟩⟩
+  intro K C F G ψ
+  exact homPresentationOfObjects R c j C F _ (fun _ ↦ RW.obj E) G ψ W.toScheme s objects
+    hsfp hsqc hsqs hobjects realization
 
 end AlgebraicGeometry

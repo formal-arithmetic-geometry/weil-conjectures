@@ -14773,3 +14773,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:07 L: returned deliver/S3/Sheaf.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization (reviewer RETURN: (reviewer X-32f96, head 32f960ff3) G1: SingleComplexOpenCounitCompatibility is recorded as unclaimed, but its original c)
 
 - 17:07 L: batch 20261014T085849 dependency take-out
+- 09:09 L: merged deliver/G1/Sheaf.AlgebraicGeometry.PerfectOverlapHomPresentation (stage 3; reviewer PASS; first push; landing 20261014T090918-L-365809 (interface); batch 20261014T090916; modules 2; new nodes 1)
