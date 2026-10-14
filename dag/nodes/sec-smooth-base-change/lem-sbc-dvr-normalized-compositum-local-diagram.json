@@ -1,0 +1,146 @@
+{
+ "id": "lem-sbc-dvr-normalized-compositum-local-diagram",
+ "kind": "statement",
+ "title": "Compatible local DVR diagram of a finite normalized compositum",
+ "statement": "Let B and A be DVR domains [def-sc-discrete-valuation-ring], with A a finite faithful B-algebra [def-weil-finitely-generated-module], and let n be a natural number. Let E/Frac(B) be finite separable [def-pc-field-extension, def-weil-pbc-separable-algebraic-extension], with its compatible B-algebra structure. Set C=integralClosure_B(E) [def-weil-pbc-integral-closure] and assume C finite over B. Suppose every prime R of C above m_B has ramification index e_R a unit in B, e_R dividing n, and separable residue-field extension k(R)/k(R intersect B); here k(R) is the residue field of C_R. Let F be a field and an A-algebra, and let i:E->F be a ring homomorphism agreeing with B->A->F on B. Assume F is generated as an A-algebra by i(E). Set S=integralClosure_A(F), assumed finite over A. Let Q be a prime of S above m_A. Then there is a prime R of C such that, writing U=C_R and T=S_Q [def-weil-pbc-localization-at-prime], the canonical map B->U is local, both U and T are DVRs, E has a U-algebra structure making it the fraction field of U compatibly with B, and F has a T-algebra structure making it the fraction field of T compatibly with A. There is a local ring homomorphism j:U->T agreeing on B with B->A->T and satisfying U->T->F=U->E->F. Furthermore e_R is a unit in B, e_R divides n, m_B U=m_U^(e_R), and the induced extension (U/m_U)/(B/m_B) is separable. No condition m_B A=m_A^n, nor any conclusion about the residue extension of T/A, is asserted.",
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 032L (finite normalization), 00PD/034X (normal local domains and DVRs), and 09EM (normalization diagrams); the compatibility assertions are proved directly in Lean."
+ },
+ "proof": [
+  {
+   "text": "Injectivity of the field map i and fraction-field injectivity imply B->F is injective. The kernel of A->F contracts to zero in B; integrality and the domain A force that kernel to be zero. Algebraicity of E over B descends from Frac(B); transfer through i and extend the coefficient ring to A. Generation then makes every element of F algebraic over A. Thus S has fraction field F.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "S is finite over the Noetherian ring A, is normal in F, and has dimension at most one by integrality. It is therefore Dedekind. The prime Q is nonzero since its contraction is m_A. Apply the Dedekind localization DVR theorem to get T=S_Q.",
+   "uses": [
+    "lem-sc-dedekind-localization-dvr"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict i to C. Integral elements over B map to integral elements over A, defining i_C:C->S. Put R=i_C^{-1}(Q). Compatibility and locality of the integral faithful map B->A show R contracts to m_B. Finite separable normalization makes C Dedekind, and R is nonzero. Apply the Dedekind localization theorem to U=C_R.",
+   "uses": [
+    "lem-sc-dedekind-localization-dvr"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Localization.mapToFractionRing for U->E and T->F. Their fraction-field and tower identities follow from the localization APIs. Define j by Localization.localRingHom R Q i_C; it is local. Its compatibility on B follows from the structural maps, and compatibility into F follows from localization ring-hom extensionality.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Every nonzero ideal of U is a power of its maximal ideal. Apply this to m_B U. The definition of R.ramificationIdx B is the length of U/(m_B U), and the DVR quotient-length formula identifies the exponent with that index. The input tameness gives its unit and divisibility properties.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The prime residue field k(R) is definitionally the local residue field of U. Put p=R intersect B=m_B. The canonical map B/p->k(p) is bijective. Compose its inverse with the quotient equivalence B/p=B/m_B. Transport the given separability through that field equivalence and the identity on k(R); compatibility is checked on the surjective image of B. This yields exactly the residue algebra from the local B->U map.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-dedekind-localization-dvr"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "kind": "written-by-agent",
+  "agent": "V1",
+  "document": "Stacks Project",
+  "place": "Tags 032L (finite normalization), 00PD/034X (normal local domains and DVRs), and 09EM (normalization diagrams); the compatibility assertions are proved directly in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Integral closures in a finite extension of a DVR yield compatible local DVRs and fraction fields after localization",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing the integral closure of a DVR in a finite extension at a prime gives a DVR and a fraction field",
+   "date": "2026-10-14",
+   "results": "IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain and related localization theorems.",
+   "verdict": "Used directly in the proof, with further algebraic and residue-map glue."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isDiscreteValuationRing\", \"IsDedekindDomain\"",
+   "date": "2026-10-14",
+   "results": "isDedekindDomain_iff_isDiscreteValuationRing_atPrime.",
+   "verdict": "The full compatible diagram is not a single specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "isDiscreteValuationRing_of_dedekind_domain|ramificationIdx.*length|Abhyankar|abhyankar",
+   "date": "2026-10-14",
+   "results": "Mathlib/RingTheory/DedekindDomain/Dvr.lean:128 and Mathlib/RingTheory/RamificationInertia/Ramification.lean:59,134,155.",
+   "verdict": "Used the localization theorem and length formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.DvrTameTensorFactorResidueSeparable",
+  "date": "2026-10-14",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case: localization of both normalizations and identification of the local field-compositum diagram before the Abhyankar calculation.",
+   "via": [
+    "lem-sbc-dvr-tame-tensor-factor-residue-separable",
+    "lem-sbc-dvr-tame-tensor-factor-unramified"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.DvrNormalizedCompositumLocalDiagram",
+  "file": "lean/Sheaf/RingTheory/DvrNormalizedCompositumLocalDiagram.lean",
+  "declaration": "RingTheory.dvr_normalized_compositum_local_diagram",
+  "statement": "theorem dvr_normalized_compositum_local_diagram\n    (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]\n    (n : ℕ)\n    (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]\n    [Algebra B A] [Module.Finite B A] [FaithfulSMul B A]\n    (E : Type u) [Field E] [Algebra (FractionRing B) E]\n    [Algebra B E] [IsScalarTower B (FractionRing B) E]\n    [FiniteDimensional (FractionRing B) E] [Algebra.IsSeparable (FractionRing B) E]\n    [Module.Finite B (integralClosure B E)]\n    (htame : ∀ (R : Ideal (integralClosure B E)) (hR : R.IsPrime),\n      letI := hR\n      R.comap (algebraMap B (integralClosure B E)) = IsLocalRing.maximalIdeal B →\n      letI := Localization.AtPrime.algebraOfLiesOver (R.under B) R\n      IsUnit (R.ramificationIdx B : B) ∧ R.ramificationIdx B ∣ n ∧\n        Algebra.IsSeparable (R.under B).ResidueField R.ResidueField)\n    (F : Type u) [Field F] [Algebra A F]\n    (iE : E →+* F)\n    (hcomm : ∀ b : B, iE (algebraMap B E b) =\n      algebraMap A F (algebraMap B A b))\n    (hgen : Algebra.adjoin A (Set.range iE) = ⊤)\n    [Module.Finite A (integralClosure A F)]\n    (Q : Ideal (integralClosure A F)) [Q.IsPrime]\n    (hQ : Q.comap (algebraMap A (integralClosure A F)) = IsLocalRing.maximalIdeal A) :\n    ∃ (R : Ideal (integralClosure B E)) (hR : R.IsPrime),\n    letI := hR\n    let U := Localization.AtPrime R\n    let T := Localization.AtPrime Q\n    ∃ (hBU : IsLocalHom (algebraMap B U))\n      (_hU : IsDiscreteValuationRing U) (_hT : IsDiscreteValuationRing T)\n      (aUE : Algebra U E),\n    letI := aUE\n    ∃ (_hfracUE : IsFractionRing U E) (_hBUE : IsScalarTower B U E)\n      (aTF : Algebra T F),\n    letI := aTF\n    ∃ (_hfracTF : IsFractionRing T F) (_hATF : IsScalarTower A T F)\n      (j : U →+* T),\n      IsLocalHom j ∧\n      (∀ b : B, j (algebraMap B U b) = algebraMap A T (algebraMap B A b)) ∧\n      (∀ c : U, algebraMap T F (j c) = iE (algebraMap U E c)) ∧\n      IsUnit (R.ramificationIdx B : B) ∧ R.ramificationIdx B ∣ n ∧\n      (IsLocalRing.maximalIdeal B).map (algebraMap B U) =\n        IsLocalRing.maximalIdeal U ^ R.ramificationIdx B ∧\n      letI := hBU\n      Algebra.IsSeparable (IsLocalRing.ResidueField B) (IsLocalRing.ResidueField U)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261014T034914-L-816029",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261014T034914-L-816029",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

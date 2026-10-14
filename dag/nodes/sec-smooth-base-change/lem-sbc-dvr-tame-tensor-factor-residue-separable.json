@@ -17,37 +17,48 @@
  },
  "proof": [
   {
-   "text": "Finite faithfulness of A over B induces a finite fraction-field extension K1/K. Since A is normal and integral over B, it is the integral closure of B in K1. The assumed ideal identity says its ramification index over B is n. The kernel of A -> F contracts to zero in B and hence is zero by integrality. Thus F is a field factor of the generic tensor E tensor_K K1.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "The integral closure C of B in E is finite by [lem-weil-pbc-noetherian-normal-separable-integral-closure-finite], and is a Dedekind domain. Localize at each prime above m_B to get a DVR. The assumed e,f divisibilities and invertibility of n make e prime to the residue characteristic and f prime to it; the inseparable residue degree, a power of that characteristic dividing f, is therefore one. In residue characteristic zero, separability is automatic.",
+   "text": "Install the finite-dimensional and separable structures from hE, and the composite B-algebra tower. The finite normalization C is supplied by IsIntegralClosure.finite.",
    "uses": [
     "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
    ],
    "elementary": false
   },
   {
-   "text": "Apply Abhyankar lemma 0BRM to each resulting tame DVR and K1/K, whose base ramification index n is divisible by e. Integrality over A and over B in F are equivalent by integrality of A/B; localization of integral closure identifies S_Q with the normalized tensor factor of 0BRM. It is adically formally smooth over A. Use the appropriate consequence of 09E7: For every proof that the canonical map A -> S_Q is local, the induced algebra of local residue fields k(S_Q)/k(A) is separable. The local-hom argument supplies the canonical residue-field algebra structure and is not a ramification bound.",
+   "text": "For every prime R over m_B, the e and f divisibilities imply that their casts are units in B. Map the latter unit to k(R intersect B). The inertia-degree formula identifies it with the residue field degree. The proved private helper isSeparable_of_isUnit_finrank shows separability: the inseparable degree is a power of the exponential characteristic and divides the degree; an invertible degree excludes every positive power of that characteristic. In exponential characteristic one the power is already one.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Give the maximal tensor quotient F its explicit Ideal.Quotient.field structure. Define i_E by the left tensor inclusion followed by the quotient. Check compatibility with the right A-algebra map on B. Prove that i_E(E) generates F as an A-algebra by quotient surjectivity and tensor induction: a pure tensor is the product of its two images.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved normalized-compositum local-diagram theorem to Q. Destructure its canonical local DVR, fraction-field algebra, ramification, and residue data.",
+   "uses": [
+    "lem-sbc-dvr-normalized-compositum-local-diagram"
+   ],
    "elementary": false
   },
   {
-   "text": "For every proof that the canonical map A -> S_Q is local, the induced algebra of local residue fields k(S_Q)/k(A) is separable. The local-hom argument supplies the canonical residue-field algebra structure and is not a ramification bound.",
-   "uses": [],
-   "elementary": true
+   "text": "Apply the local Abhyankar residue theorem to those DVRs, the original base index identity, and the explicit local-hom proof hloc. This gives exactly the induced local residue-field algebra of the original statement.",
+   "uses": [
+    "lem-sbc-dvr-abhyankar-local-residue"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sbc-dvr-abhyankar-local-residue",
+  "lem-sbc-dvr-normalized-compositum-local-diagram",
   "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
  ],
  "proof_origin": {
   "by": "worker",
   "kind": "written-by-agent",
-  "agent": "S1",
+  "agent": "V1",
   "document": "Stacks Project",
-  "place": "The argument of Tags 0BRM and 09E7, specialized to a tensor quotient and separated into its two local invariants."
+  "place": "Tags 032L, 09EM, 0BRM, 09E7. Finite normalization, prime-to-characteristic residue arithmetic, tensor generation, and the entire local normalization diagram are proved in Lean. Only the abstract local Abhyankar theorem remains."
  },
  "mathlib_searches": [
   {
@@ -123,9 +134,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261014T030648-L-344555",
+  "landing": "20261014T034914-L-816029",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
