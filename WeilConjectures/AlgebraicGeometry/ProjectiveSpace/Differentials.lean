@@ -25,12 +25,12 @@ The sheaf of relative differentials `Ω¹_{ℙ/S}` of `ℙ = ℙ(n; S)` is local
 - `AlgebraicGeometry.ProjectiveSpace.isFiniteLocallyFreeOfRank_relativeDifferentials`:
   `Ω¹_{ℙ(n; S)/S}` is finite locally free of rank `d`.
 
-## TODO
+## See also
 
-- The canonical sheaf `ω_ℙ = Λᵈ Ω¹_{ℙ/S}` and the isomorphism `ω_ℙ ≅ 𝒪(-d-1)` sending the local
-  bases `ηᵢ = (-1)ⁱ ⋀_{k ≠ i} d(x_k / xᵢ)` to the bases `eᵢ^{(-d-1)}` of the twist. This needs
-  exterior powers of sheaves of modules, which are not available yet. For `d = 1`, where
-  `ω = Ω¹`, it is `AlgebraicGeometry.ProjectiveLine.nonempty_relativeDifferentials_iso_twist`.
+- `AlgebraicGeometry.ProjectiveSpace.canonicalModuleIsoTwist`: the canonical module
+  `ω_ℙ = Λᵈ Ω¹_{ℙ/A}` is isomorphic to `𝒪(-d-1)`, sending the local bases
+  `ηᵢ = (-1)ⁱ ⋀_{k ≠ i} d(x_k / xᵢ)` to the bases `eᵢ^{(-d-1)}` of the twist. For `d = 1`, where
+  `ω = Ω¹`, see also `AlgebraicGeometry.ProjectiveLine.nonempty_relativeDifferentials_iso_twist`.
 -/
 
 @[expose] public section
@@ -74,8 +74,9 @@ on the differentials `d(x_k / xᵢ)`, since Kähler differentials of a polynomia
 the differentials of the variables and commute with localization. Here this follows from the
 smoothness of `ℙ(n; S) ⟶ S` of relative dimension `d`.
 
-This is the first assertion of the blueprint lemma; its main assertion `ω_ℙ ≅ 𝒪(-d-1)` needs
-the top exterior power `ω_ℙ = Λᵈ Ω¹_{ℙ/S}`, see the TODO in the module docstring.
+This is the first assertion of the blueprint lemma; the main assertion, the canonical module
+`ω_ℙ = Λᵈ Ω¹_{ℙ/A}` and the isomorphism `ω_ℙ ≅ 𝒪(-d-1)` over `S = Spec A`, is
+`AlgebraicGeometry.ProjectiveSpace.canonicalModuleIsoTwist`.
 
 (blueprint: `lem-pc-projective-space-canonical`) -/
 theorem isFiniteLocallyFreeOfRank_relativeDifferentials {d : ℕ} (hn : Nat.card n = d + 1) :

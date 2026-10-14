@@ -103,7 +103,7 @@ noncomputable def Etale.DerivedCategory.boundedConstructible :
 
 /-- The constructible bounded derived category `Dᵇc( X, A)`, realized as the full
 subcategory of bounded complexes with constructible homology in the derived category of
-étale sheaves. -/
+étale sheaves. (blueprint: `def-weil-pbc-constructible-complexes`) -/
 noncomputable def Etale.DerivedCategoryBoundedConstructible : Type _ :=
   (Etale.DerivedCategory.boundedConstructible A X).FullSubcategory
 

@@ -65,9 +65,10 @@ agrees with coherence on a noetherian scheme such as a closed subscheme of `ℙ�
 
 ## Main statements
 
-- `AlgebraicGeometry.ProjectiveSpace.nonempty_H_zero_twist_equiv`,
-  `subsingleton_H_twist_of_ne`, `subsingleton_H_twist_top` and
-  `nonempty_H_twist_top_equiv_dual` — the cohomology of `𝒪(m)` on `ℙᵈ_k`.
+- `AlgebraicGeometry.ProjectiveSpace.subsingleton_H_twist_of_ne` and `subsingleton_H_twist_top`
+  — the vanishing of the cohomology of `𝒪(m)` on `ℙᵈ_k`. The canonical isomorphisms
+  `H⁰(ℙᵈ_k, 𝒪(m)) ≅ Sᵐ(V)` and `Hᵈ(ℙᵈ_k, 𝒪(m)) ≅ S^{-m-d-1}(V)^∨` are in
+  `WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveSpaceOverField`.
 - `AlgebraicGeometry.ProjectiveSpace.exists_epi_sigma_twist` — a coherent module on `ℙⁿ_A` is a
   quotient of a finite sum of twists `𝒪(-mⱼ)`.
 - `AlgebraicGeometry.ProjectiveSpace.exists_subsingleton_H_tensor_twist` — Serre vanishing on
@@ -161,21 +162,6 @@ theorem ProjectiveSpace.nonempty_H_twist_linearEquiv_homology (k : Type u) [Fiel
   exact ⟨e₃ ≪≫ₗ ((ModuleCat.restrictScalarsHomologyIso φ K q).symm ≪≫
     (HomologicalComplex.homologyFunctor _ _ q).mapIso e₂).toLinearEquiv⟩
 
-/-- **`H⁰` of the twisting sheaves on `ℙᵈ_k`.** With `X = ℙᵈ_k` presented as `ℙ(n; Spec k)`
-for an index type `n` of homogeneous coordinates with `Nat.card n = d + 1`, and `Sᵐ(V)` for
-`V = k^{d+1}` the degree-`m` homogeneous part of the polynomial ring in those coordinates,
-`H⁰(X, 𝒪(m)) = Sᵐ(V)` for `m ≥ 0`.
-
-(blueprint: `sk-thm-picard-pn`, `lem-pc-projective-space-twist-cohomology` (i)) -/
-theorem ProjectiveSpace.nonempty_H_zero_twist_equiv (k : Type u) [Field k] [Finite n] (d : ℕ)
-    (hn : Nat.card n = d + 1) (m : ℕ) :
-    Nonempty ((ProjectiveSpace.twist n (Spec (.of k)) m).H 0 ≃ₗ[k]
-      MvPolynomial.homogeneousSubmodule n k m) := by
-  have := Fintype.ofFinite n
-  have : Nonempty n := (Nat.card_pos_iff.1 (by omega)).1
-  obtain ⟨e⟩ := ProjectiveSpace.nonempty_H_twist_linearEquiv_homology n k m 0
-  exact ⟨e ≪≫ₗ ProjectiveSpace.monomialCechComplexHomologyZeroLinearEquiv n k m⟩
-
 /-- **Vanishing of the cohomology of the twisting sheaves in middle degrees.**
 `H^q(ℙᵈ_k, 𝒪(m)) = 0` for every `m` and every `q ∉ {0, d}`.
 
@@ -207,27 +193,6 @@ theorem ProjectiveSpace.subsingleton_H_twist_top (k : Type u) [Field k] [Finite 
   have := ProjectiveSpace.subsingleton_monomialCechComplex_homology_top (n := n) (A := k)
     (by rwa [← Nat.card_eq_fintype_card]) hd hm
   exact e.toEquiv.subsingleton
-
-/-- **The top cohomology of the twisting sheaves.**
-`H^d(ℙᵈ_k, 𝒪(m)) = S^{-m-d-1}(V)^∨` for `m ≤ -d-1`. Taking `m = -d-1` exhibits `𝒪(-d-1)` as
-the dualising sheaf of `ℙᵈ_k`.
-
-The blueprint's isomorphism is the canonical one induced by the multiplication pairing. Here it
-is transported through the non-canonical identification
-`nonempty_H_twist_linearEquiv_homology` with the monomial Čech complex, so the description by
-the pairing (`monomialCechComplexHomologyTopLinearEquivDual_apply`) holds only on that
-complex.
-
-(blueprint: `sk-thm-picard-pn`, `lem-pc-projective-space-twist-cohomology` (ii),
-`lem-pc-projective-space-serre-pairing`) -/
-theorem ProjectiveSpace.nonempty_H_twist_top_equiv_dual (k : Type u) [Field k] [Finite n]
-    (d : ℕ) (hn : Nat.card n = d + 1) (m : ℤ) (hm : m ≤ -(d : ℤ) - 1) :
-    Nonempty ((ProjectiveSpace.twist n (Spec (.of k)) m).H d ≃ₗ[k]
-      Module.Dual k (MvPolynomial.homogeneousSubmodule n k (-m - d - 1).toNat)) := by
-  have := Fintype.ofFinite n
-  obtain ⟨e⟩ := ProjectiveSpace.nonempty_H_twist_linearEquiv_homology n k m d
-  exact ⟨e ≪≫ₗ ProjectiveSpace.monomialCechComplexHomologyTopLinearEquivDual n k m
-    (by rwa [← Nat.card_eq_fintype_card]) hm⟩
 
 end Pn
 
