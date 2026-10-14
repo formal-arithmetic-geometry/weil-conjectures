@@ -145,16 +145,6 @@
  },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CompactFlatBarUnionAugmentation",
-  "file": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarUnionAugmentation.lean",
-  "declaration": "AlgebraicGeometry.exists_compact_flat_bar_union_augmentation",
-  "statement": "theorem exists_compact_flat_bar_union_augmentation (Y : Scheme.{u})\n    (L : ℕ → CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (l : ∀ n : ℕ, L n ⟶ L (n + 1))\n    (D : CompactFlatFiniteSubcomplexDiagrams Y L l)\n    (T : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (hT : isFlatTelescope Y T) (p : ∀ n : ℕ, L n ⟶ T)\n    (hp : ∀ n : ℕ, l n ≫ p (n + 1) = p n) :\n    let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)\n    let Q := HomotopyCategory.quotient A (ComplexShape.up ℤ)\n    ∃ (R F : ℕ → CochainComplex A ℤ)\n      (s : ∀ n : ℕ, R n ⟶ R (n + 1))\n      (u : ∀ n : ℕ, F n ⟶ F (n + 1))\n      (c : ∀ n : ℕ, R n ⟶ L n) (a : ∀ n : ℕ, R n ⟶ F n),\n      (∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((R n).X i)) ∧\n      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((R n).X i)) ∧\n      (∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((F n).X i)) ∧\n      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((F n).X i)) ∧\n      (∀ n : ℕ, QuasiIso (c n)) ∧\n      (∀ n : ℕ, s n ≫ c (n + 1) = c n ≫ l n) ∧\n      (∀ n : ℕ, s n ≫ a (n + 1) = a n ≫ u n) ∧\n      (∀ (n : ℕ) (i : ℤ), IsSplitMono ((u n).f i)) ∧\n      ∃ q : ∀ n : ℕ, F n ⟶ T,\n        (∀ n : ℕ, u n ≫ q (n + 1) = q n) ∧\n        (∀ n : ℕ, a n ≫ q n = c n ≫ p n) ∧\n        ∀ hzero : flatTelescopeDifferential F u ≫ Sigma.desc q = 0,\n          IsIso (Q.map\n            (cokernel.desc (flatTelescopeDifferential F u) (Sigma.desc q) hzero))",
-  "branch": "sheaf-dag",
-  "by": "P1",
-  "date": "2026-10-14"
- },
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -168,11 +158,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P2",
+  "reviewer": "X-0798c",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261014T140635-L-117934",
+  "landing": "20261014T144457-L-564949",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Packet, delivered tree, DAG records, import audit, and lcompile results matched the review requirements"
  }
 }

@@ -86,16 +86,6 @@
  },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FlatTelescopeArrowCocycles",
-  "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeArrowCocycles.lean",
-  "declaration": "AlgebraicGeometry.exists_flat_telescope_arrow_cocycles",
-  "statement": "theorem exists_flat_telescope_arrow_cocycles (Y : Scheme.{u}) (P P' : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (hP : isFlatTelescope Y P) (hP' : isFlatTelescope Y P') (f : P ⟶ P') : let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace) let Q := HomotopyCategory.quotient A (ComplexShape.up ℤ) ∃ (E₀ E₁ E₂ : ℕ → CochainComplex A ℤ) (t₀ : ∀ n : ℕ, E₀ n ⟶ E₀ (n + 1)) (t₁ : ∀ n : ℕ, E₁ n ⟶ E₁ (n + 1)) (t₂ : ∀ n : ℕ, E₂ n ⟶ E₂ (n + 1)) (a : ∀ n : ℕ, E₀ n ⟶ E₁ n) (b : ∀ n : ℕ, E₀ n ⟶ E₂ n), (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₀ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₀ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₁ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₁ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₂ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₂ n).X i)) ∧ ∃ (_c₁ : flatTelescopeDifferential E₀ t₀ ≫ Limits.Sigma.map a = Limits.Sigma.map a ≫ flatTelescopeDifferential E₁ t₁) (_c₂ : flatTelescopeDifferential E₀ t₀ ≫ Limits.Sigma.map b = Limits.Sigma.map b ≫ flatTelescopeDifferential E₂ t₂) (r₁ : CochainComplex.mappingCone (flatTelescopeDifferential E₁ t₁) ⟶ P) (r₂ : CochainComplex.mappingCone (flatTelescopeDifferential E₂ t₂) ⟶ P') (q : ∀ n : ℕ, E₀ n ⟶ P.truncLE (n : ℤ)), IsIso (Q.map r₁) ∧ IsIso (Q.map r₂) ∧ (∀ n : ℕ, QuasiIso (q n)) ∧ (∀ n : ℕ, t₀ n ≫ q (n + 1) ≫ P.ιTruncLE ((n + 1 : ℕ) : ℤ) = q n ≫ P.ιTruncLE (n : ℤ)) ∧ let s := Sigma.desc (fun n : ℕ ↦ q n ≫ P.ιTruncLE (n : ℤ)) ∃ (α₁ : Cochain (∐ E₀) P (-2)) (β₁ : Cochain (∐ E₀) P (-1)) (α₂ : Cochain (∐ E₀) P' (-2)) (β₂ : Cochain (∐ E₀) P' (-1)), (0 : Cochain (∐ E₀) P (-1)) = δ (-2) (-1) α₁ + (Cochain.ofHom (flatTelescopeDifferential E₀ t₀)).comp β₁ (zero_add _) + (Cochain.ofHom (Limits.Sigma.map a)).comp ((CochainComplex.mappingCone.inl (flatTelescopeDifferential E₁ t₁)).comp (Cochain.ofHom r₁) (add_zero _)) (zero_add _) ∧ Cochain.ofHom s = δ (-1) 0 β₁ + Cochain.ofHom (Limits.Sigma.map a ≫ CochainComplex.mappingCone.inr (flatTelescopeDifferential E₁ t₁) ≫ r₁) ∧ (0 : Cochain (∐ E₀) P' (-1)) = δ (-2) (-1) α₂ + (Cochain.ofHom (flatTelescopeDifferential E₀ t₀)).comp β₂ (zero_add _) + (Cochain.ofHom (Limits.Sigma.map b)).comp ((CochainComplex.mappingCone.inl (flatTelescopeDifferential E₂ t₂)).comp (Cochain.ofHom r₂) (add_zero _)) (zero_add _) ∧ Cochain.ofHom (s ≫ f) = δ (-1) 0 β₂ + Cochain.ofHom (Limits.Sigma.map b ≫ CochainComplex.mappingCone.inr (flatTelescopeDifferential E₂ t₂) ≫ r₂)",
-  "branch": "sheaf-dag",
-  "by": "F1",
-  "date": "2026-10-14"
- },
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -109,11 +99,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F1",
+  "reviewer": "X-0798c",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261014T063815-L-2813191",
+  "landing": "20261014T144457-L-564949",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Packet, delivered tree, DAG records, import audit, and lcompile results matched the review requirements"
  }
 }
