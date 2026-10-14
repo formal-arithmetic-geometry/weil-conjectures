@@ -12,22 +12,32 @@
  },
  "proof": [
   {
-   "text": "Assemble the degreewise equality into an equality of additive chain maps and apply homology. Move the exact forgetful comparisons across all chain maps by mapHomologyIso naturality; the exact comparison for restriction followed by forgetting agrees with direct forgetting by uniqueness of the kernel and cokernel homology identifications. Expand openDerivedStalkIso and openRestrictionRepresentativeIso: the derived restriction comparison and its inverse cancel. The remaining exact restriction and stalk homology comparisons identify with homology of inverse restrictStalkNatIso. Apply comparisonStalkHomologyIso_naturality to alpha. Cancel the invertible endpoint comparisons to obtain the stated formula.",
+   "text": "Take the short complex in degree i of each complex. The degreewise hypothesis at the predecessor, i and successor gives equality of additive short-complex maps by extensionality. Apply ShortComplex.homologyMap and its composition law. Naturality of mapHomologyIso moves the forgetful comparisons across a,t,b and stalk(alpha). The private proved homology_comparison_comp computes the restriction-of-scalars/forgetting comparison from common mapped left homology data.",
    "uses": [
     "def-pc-open-derived-stalk-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the representative identity [lem-pc-open-derived-stalk-representative-homology] to N. Naturality of comparisonStalkHomologyIso for alpha moves the restricted inverse representative comparison past Q(alpha). Cancel the ambient invertible forgetful comparison and use the equality of additive homology maps from the preceding step. Postcompose with the endpoint forgetful and representative comparisons to get precisely the original equation.",
+   "uses": [
+    "lem-pc-open-derived-stalk-representative-homology",
+    "lem-pc-stalk-comparison-source-transport"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-open-derived-stalk-iso"
+  "def-pc-open-derived-stalk-iso",
+  "lem-pc-open-derived-stalk-representative-homology",
+  "lem-pc-stalk-comparison-source-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "J3",
+  "group": "S2",
   "date": "2026-10-14",
-  "document": "https://stacks.math.columbia.edu/tag/0098",
-  "place": "Parent proof step 2; Stacks Section 20.32 (0D5U) opening paragraph, exact restriction, and exact-functor homology naturality."
+  "document": "https://stacks.math.columbia.edu/tag/0D5U",
+  "place": "Parent proof step 1: expand the constructed open derived comparison and cancel the representative/localization factors; Stacks 0D5U opening paragraph and Tag 0098."
  },
  "mathlib_searches": [
   {
@@ -101,12 +111,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T231537-L-1818056",
+  "landing": "20261014T001734-L-2555339",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

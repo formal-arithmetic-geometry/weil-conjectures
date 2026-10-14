@@ -1,0 +1,144 @@
+{
+ "id": "lem-pc-open-derived-stalk-representative-homology",
+ "kind": "statement",
+ "title": "Open derived stalk comparison on a literal representative",
+ "statement": "Let j:Y→Z be an open immersion of schemes, y∈Y, i∈ℤ, and assume derived categories of sheaf modules exist on all schemes. Let N be any sheaf-module cochain complex on Z. Use the constructed comparisons of [def-pc-open-derived-stalk-iso]. The forgotten inverse comparisonStalkHomologyIso on Z, followed by openDerivedStalkIso on Q(N) and additive derived stalk cohomology of openRestrictionRepresentativeIso(j,N).inv, equals the inverse ambient forgetful homology comparison, homology of the inverse additive restrictStalkNatIso evaluated on N.sc i, the restricted forgetful homology comparison, and the forgotten inverse comparisonStalkHomologyIso for the literal restriction of N. This fixes only the value on one representative; no auxiliary complexes, arbitrary chain-square hypothesis or morphism alpha occurs.",
+ "stmt_deps": [
+  "def-pc-open-derived-stalk-iso"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0D5U",
+  "place": "Parent proof step 1: expand the constructed open derived comparison and cancel the representative/localization factors; Stacks 0D5U opening paragraph and Tag 0098."
+ },
+ "proof": [
+  {
+   "text": "Expand openDerivedStalkIso and openRestrictionRepresentativeIso. The inverse derived-restriction comparison is followed by its hom through additive derived stalk cohomology, so these two factors cancel.",
+   "uses": [
+    "def-pc-open-derived-stalk-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Move the exact restriction localization factor through additiveStalkCohomologyIso by its inverse naturality. Evaluate restriction.mapDerivedCategoryHomologyFunctorIso on Q(N), using hom_app_Q. The homology image of the inverse localization factor cancels the homology image of its hom.",
+   "uses": [
+    "def-pc-open-derived-stalk-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the two exact-stalk comparisons on the complexes. The hom_app_Q formula and comparisonStalkHomologyIso identify each with the short-complex mapHomologyIso followed by the sheaf derived homology factor. Naturality of the inverse restrictStalkNatIso moves that factor across the same-germ map; the two derived homology factors cancel.",
+   "uses": [
+    "def-pc-open-derived-stalk-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply ShortComplex.homologyMap_mapNatTrans to the inverse restrictStalkNatIso at N.sc i. For stalk followed by forgetting, compute both homology comparisons with the same mapped left homology data: the kernel object, cokernel object, inclusion and projection are unchanged by whether mapping is done in one or two steps. Thus the composed comparison is the stalk comparison followed by the forgetful one.",
+   "uses": [
+    "def-pc-open-derived-stalk-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Substitute these two composite comparison identities and cancel the invertible stalk comparisons. The surviving factors are the inverse ambient forgetful comparison, homology of the inverse restriction-stalk transformation, the restricted forgetful comparison, and the inverse restricted representative comparison, exactly as stated.",
+   "uses": [
+    "def-pc-open-derived-stalk-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-open-derived-stalk-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/0D5U",
+  "place": "Parent proof step 1: expand the constructed open derived comparison and cancel the representative/localization factors; Stacks 0D5U opening paragraph and Tag 0098."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact functor homology comparison on localization of a complex",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error.",
+   "available": false
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologyIso\"",
+   "date": "2026-10-14",
+   "results": "12 hits, including ShortComplex.mapHomologyIso_hom_naturality and mapHomologyIso_inv_naturality. They supply ordinary homology naturality, not this constructed derived comparison.",
+   "verdict": "Generic ingredients used; no full statement match.",
+   "available": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive chain square induces a homology square under exact functors",
+   "date": "2026-10-14",
+   "results": "8 hits, including ShortComplex.ShortExact.map, ShortComplex.Exact.map and HomologicalComplex.HomologySequence.snakeInput; no comparison-on-representatives identity.",
+   "verdict": "No full statement match.",
+   "available": true
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso.*comp|homologyMap_mapNatTrans; open-derived-stalk.*homology|representative.homology",
+   "date": "2026-10-14",
+   "results": "Mathlib ShortComplex.homologyMap_mapNatTrans supplies the ordinary natural transformation identity. The source-library mapDerivedCategoryHomologyFunctorIso_hom_app_Q supplies localization evaluation. OpenStalkRepresentativeCoherence uses a different derived stalk isomorphism and inclusions of opens; its generic helpers are private. No existing theorem gives this constructed isomorphism for arbitrary open immersions.",
+   "verdict": "Generic ingredients only; no duplicate found.",
+   "available": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenStalkChainHomologyTransport",
+  "date": "2026-10-14",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-open-restricted-tensor-homology-transport",
+   "place": "Parent proof step 1: expand the constructed open derived comparison and cancel the representative/localization factors; Stacks 0D5U opening paragraph and Tag 0098.",
+   "via": [
+    "lem-pc-open-stalk-chain-homology-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenDerivedStalkRepresentativeHomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenDerivedStalkRepresentativeHomology.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.openDerivedStalk_representative_homology",
+  "statement": "theorem openDerivedStalk_representative_homology\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsOpenImmersion j] (y : Y) (i : ℤ)\n    (N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ) :\n    let F := forget₂ (ModuleCat.{u} (Z.presheaf.stalk (j y))) AddCommGrpCat.{u}\n    let F0 := forget₂ (ModuleCat.{u} (Y.presheaf.stalk y)) AddCommGrpCat.{u}\n    let S := (RingedSpace.moduleStalkFunctor Z.toRingedSpace (j y)).mapHomologicalComplex\n      (.up ℤ)\n    let S0 := (RingedSpace.moduleStalkFunctor Y.toRingedSpace y).mapHomologicalComplex\n      (.up ℤ)\n    let R := (Scheme.Modules.restrictFunctor j).mapHomologicalComplex (.up ℤ)\n    let HU := comparisonStalkCohomology Y y i ⋙ F0\n    F.map (comparisonStalkHomologyIso Z (j y) N i).inv ≫\n        (openDerivedStalkIso j y i).hom.app (DerivedCategory.Q.obj N) ≫\n        HU.map (openRestrictionRepresentativeIso j N).inv =\n      (((S.obj N).sc i).mapHomologyIso F).inv ≫\n        ShortComplex.homologyMap\n          ((N.sc i).mapNatTrans\n            (show (RingedSpace.moduleStalkFunctor Z.toRingedSpace (j y) ⋙ F) ⟶\n              (openRestrictionFunctor j ⋙\n                RingedSpace.moduleStalkFunctor Y.toRingedSpace y ⋙ F0) from\n              (Scheme.Modules.restrictStalkNatIso j y).inv)) ≫\n        (((S0.obj (R.obj N)).sc i).mapHomologyIso F0).hom ≫\n        F0.map (comparisonStalkHomologyIso Y y (R.obj N) i).inv",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261014T001734-L-2555339",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261014T001734-L-2555339",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
