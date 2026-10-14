@@ -31,24 +31,39 @@
  ],
  "proof": [
   {
-   "text": "Locally lift the section represented by f along the epimorphic unit in degree n,\nusing the canonical section-degree comparison. Multiply this lift by the inclusion\nof a section of the degree-d kernel. The equation b_multiply places the product in\ndegree n+d. Its image under the unit is zero, by naturality of the unit and the\nkernel equation for the second factor, so it factors uniquely through the degree\nn+d kernel. The equation b_quotient identifies the quotient of the lift with the\nspecified homogeneous section, while hlocal and k_inclusion identify the resulting\nmap into I with the given action. Two lifts differ by a kernel section; their\nproducts with the ideal section agree by squareZero. Thus the kernel-valued maps\nagree on overlaps and glue to v. The hrestrict and hglobal identities identify\nv followed by k with the global action. The construction works in degree zero\nwith the tensor unit, including n=d=0.",
+   "text": "Use closedImmersion_unit_epi and the unique adjunction comparison to obtain epimorphy of tensorGradedUnit. Mathlib local surjectivity for abelian sheaves gives a lift of a homogeneous quotient section near each point of any open.",
    "uses": [
-    "lem-sc-square-zero-tensor-graded-presentation",
-    "lem-weil-pbc-closed-immersion-unit-quotient",
-    "lem-sc-square-zero-ideal-tensor-unit"
+    "lem-weil-pbc-closed-immersion-unit-epi",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply tensorKernel_section_product to the lifted section and the restricted degree-d kernel section. The b_quotient, k_inclusion and b_multiply fields, together with hlocal and hglobal, identify the restricted action with k_(a+d) of the resulting kernel section. Cancel i using shortExact.mono_f.",
+   "uses": [
+    "lem-sc-tensor-kernel-section-product",
+    "lem-sc-square-zero-tensor-graded-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set r=k_d followed by the global action, pi=(degree(a+d)).tau_1, and v=r followed by pi. Locally k_(a+d) followed by pi is the identity, so r=v followed by k_(a+d). Naturality and sheaf separation prove equality globally. Substitute the section defining tensorGradedSection and transport a=n*(0+1) to n.",
+   "uses": [
+    "lem-sc-square-zero-tensor-graded-presentation"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-square-zero-tensor-graded-presentation",
-  "lem-weil-pbc-closed-immersion-unit-quotient",
-  "lem-sc-square-zero-ideal-tensor-unit"
+  "lem-weil-pbc-closed-immersion-unit-epi",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-tensor-kernel-section-product",
+  "lem-sc-square-zero-tensor-graded-presentation"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Detailed local sheaf calculation for Tag 09MS equation-ses and graded direct sum, using Tag 0B8S quotient action."
+  "place": "Tag 09MS coherent-equation-ses and graded direct sum; P3 uses a degree projection and local lifting."
  },
  "mathlib_searches": [
   {
@@ -143,7 +158,7 @@
   "declaration": "AlgebraicGeometry.Scheme.Modules.tensorGradedCoefficient_action_support",
   "statement": "theorem tensorGradedCoefficient_action_support {X Z : Scheme.{u}} (j : Z ⟶ X)\n    [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)\n    (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)\n    (hD : canonicalTensorBoundaryComparisons j L hI n = D)\n    (d : ℕ) (f : 𝟙_ Z.Modules ⟶ ((tensorPullback j).obj L).tensorPow n)\n    (σ : ∀ U : X.Opens, T.C.right.obj.obj (op U) →+*\n      Module.End ((moduleRings X.toRingedSpace).obj.obj (op U)) (T.I.val.obj (op U)))\n    (μ : T.C.right.obj.obj (op ⊤) →+* End T.I)\n    (hlocal : ∀ (U : X.Opens) (b : T.B.right.obj.obj (op U)) (y : T.I.val.obj (op U)),\n      @id (T.B.right.obj.obj (op U))\n        (T.i.val.app (op U) (σ U (T.p.right.hom.app (op U) b) y)) =\n        b * @id (T.B.right.obj.obj (op U)) (T.i.val.app (op U) y))\n    (hrestrict : ∀ (U V : X.Opens) (a : V ⟶ U)\n      (g : T.C.right.obj.obj (op U)) (y : T.I.val.obj (op U)),\n      T.I.val.map a.op (σ U g y) = σ V (T.C.right.obj.map a.op g) (T.I.val.map a.op y))\n    (hglobal : ∀ (g : T.C.right.obj.obj (op ⊤)) (U : X.Opens)\n      (y : T.I.val.obj (op U)),\n      (μ g).val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) :\n    ∃ v : kernel (tensorGradedUnit j (L.tensorPow d)) ⟶\n        kernel (tensorGradedUnit j (L.tensorPow (n + d))),\n      T.k d ≫ μ (tensorGradedSection T D 0 (tensorPowSection f 1)) =\n        v ≫ T.k (n + d)",
   "branch": "sheaf-dag",
-  "by": "M3",
+  "by": "P3",
   "date": "2026-10-14"
  },
  "reviewed": {
@@ -160,9 +175,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261014T033107-L-604370",
-  "kind": "interface"
+  "landing": "20261014T034910-L-814924",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
