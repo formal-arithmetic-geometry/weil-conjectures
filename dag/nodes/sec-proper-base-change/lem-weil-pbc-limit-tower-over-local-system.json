@@ -14,43 +14,38 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-limit-module-essentially-finite-presentation-over-system] to the supplied base-ring colimit and the given presentation of S over R, with the zero module and the empty matrix. On a tail obtain the middle-ring diagram, local natural structure maps, its colimit cocone, essential finite type, and transition and limit localization comparisons.",
+   "text": "Apply [lem-weil-pbc-limit-module-essentially-finite-presentation-over-system] to F and its prescribed colimit cocone, descending S with the empty 0-by-0 matrix and its concrete cokernel. Identify the auxiliary ring maps with the supplied cocone components by extensionality. Obtain the first directed tail and the middle diagram with ring localization comparisons.",
    "uses": [
     "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system"
    ],
    "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-limit-module-essentially-finite-presentation-over-system] to that middle-ring colimit and the supplied presentation of S′ over S, with the given presentation matrix for M (lifted to universe max u v). Obtain a further tail, the top-ring and module diagrams, the local and semilinear maps, the two colimit cocones, the descended cokernel presentations, and their tensor comparisons.",
+   "text": "Compose the essentially finite type maps to show that the middle stage rings are essentially of finite type over Z [def-weil-pbc-essentially-finite-type-algebra]. Apply [lem-weil-pbc-limit-module-small-over-system] to this middle system, the supplied presentation of S′ over S, and the given matrix presentation of M. Obtain the top ring and module data on a second tail, directly in module universe v. Identify its auxiliary component maps by extensionality.",
    "uses": [
-    "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system"
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "lem-weil-pbc-limit-module-small-over-system"
    ],
    "elementary": false
   },
   {
-   "text": "The two tail inclusions and their composite J are final by directedness. Restrict the base and middle diagrams and cocones along J; [lem-weil-pbc-colimit-initial-full-subcategory] preserves their colimit assertions. Take A = J ⋙ F and π.app i = π₀.app (J.obj i), as prescribed by the Lean statement. The remaining clauses restrict from the two descent applications.",
+   "text": "Construct the two monotone inclusion functors of the directed upper tails. Directedness supplies an upper bound of the cutoff and each ambient index; parallel arrows are equal because the preorder category is thin. Mathlib Functor.final_of_exists_of_isFiltered proves each inclusion final, and Functor.final_comp proves their composite final. Preserve the original base and middle cocones with Functor.Final.isColimitWhiskerEquiv, the final-functor colimit transport of [lem-weil-pbc-colimit-initial-full-subcategory]. Define the two natural structure transformations from the returned component ring maps, using transition compatibility for naturality. Restrict all remaining clauses along the second inclusion and assemble the witnesses, with exactly the prescribed base functor and base cocone.",
    "uses": [
     "lem-weil-pbc-colimit-initial-full-subcategory"
    ],
    "elementary": false
-  },
-  {
-   "text": "The stages are essentially of finite type over ℤ by composition. A finite polynomial algebra over countable ℤ is countable, as are its quotients and localizations (fractions are represented by pairs). Thus each stage ring, and every finite-vector cokernel, is countable and admits Shrink in universe v. Transport all module structures and maps across these equivalences, composing with ULift.down at M; universal properties and pure-tensor formulas transport across the equivalences. Test cocones in the smaller universe lift to the larger universe. Zero rows or columns give respectively zero or finite free modules, so the same argument applies.",
-   "uses": [
-    "def-weil-pbc-essentially-finite-type-algebra"
-   ],
-   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system",
-  "lem-weil-pbc-colimit-initial-full-subcategory",
-  "def-weil-pbc-essentially-finite-type-algebra"
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "lem-weil-pbc-limit-module-small-over-system",
+  "lem-weil-pbc-colimit-initial-full-subcategory"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "stage3-worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Tag 00R7, first paragraph (two applications of the constructions of Tags 00QV and 00QX), and first sentence of the second paragraph (tensor comparisons)."
+  "place": "Tag 00R7 first paragraph; P2 implements the two descents and final restriction, splitting independent-universe single descent into lem-weil-pbc-limit-module-small-over-system; rebased on F2 complete repair landing 20261014T020509-L-3810807"
  },
  "mathlib_searches": [
   {
@@ -119,12 +114,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261013T222422-L-1229872",
+  "landing": "20261014T022550-L-4047083",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

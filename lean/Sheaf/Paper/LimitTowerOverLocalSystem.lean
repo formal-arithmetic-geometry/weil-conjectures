@@ -17,6 +17,8 @@ public import Mathlib.LinearAlgebra.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.Quotient.Basic
 public import Mathlib.CategoryTheory.Limits.Final
 import Sheaf.RingTheory.LimitModuleEssentiallyFinitePresentationOverSystem
+import Sheaf.RingTheory.LimitModuleSmallOverSystem
+import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # Tower descent over a prescribed local-ring system
 Source: Stacks Project, Algebra, proof of Tag 00R7, using Tags 00QV and 00QX.
@@ -31,6 +33,25 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 
 namespace WeilConjectures
+
+private theorem tail_directed {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
+    (i₀ : I) : IsDirected {i : I // i₀ ≤ i} (· ≤ ·) := by
+  refine ⟨fun a b ↦ ?_⟩
+  obtain ⟨k, ha, hb⟩ := IsDirected.directed (r := (· ≤ ·)) a.val b.val
+  exact ⟨⟨k, a.property.trans ha⟩, ha, hb⟩
+
+private theorem tail_final {I : Type u} [Preorder I] [Nonempty I]
+    [IsDirected I (· ≤ ·)] (i₀ : I) :
+    ((show Monotone (fun i : {i : I // i₀ ≤ i} ↦ i.val)
+      from fun _ _ h ↦ h).functor).Final := by
+  let : Nonempty {i : I // i₀ ≤ i} := ⟨⟨i₀, le_rfl⟩⟩
+  let := tail_directed i₀
+  apply Functor.final_of_exists_of_isFiltered
+  · intro k
+    obtain ⟨l, hi, hk⟩ := IsDirected.directed (r := (· ≤ ·)) i₀ k
+    exact ⟨⟨l, hi⟩, ⟨homOfLE hk⟩⟩
+  · intro a b f g
+    exact ⟨b, 𝟙 b, Subsingleton.elim _ _⟩
 
 /-- Descend the two upper rings and a module over a supplied base-ring system and a supplied
 presentation of the top ring over the middle ring. The base diagram and its cocone are
@@ -180,6 +201,93 @@ theorem limit_tower_over_local_system
           ∀ (y : S') (x : D.obj i),
             e (y ⊗ₜ[C.obj i] x) =
               y • (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) x) := by
-  sorry
+  classical
+  let : ∀ i, IsLocalRing (F.obj i) := hFlocal
+  let c₀ := Cocone.mk (CommRingCat.of R) π₀
+  let Z := (Fin 0 → S) ⧸ LinearMap.range (0 : (Fin 0 → S) →ₗ[S] (Fin 0 → S))
+  obtain ⟨i₀, Bs, κ, hBscol, k, hk, hBslocal, hklocal, hBsmap, r,
+      hrlocal, hrfinite, hrcomp, hrnat, D₀, δ₀, hD₀col, n₀, m₀,
+      hn₀, hn₀smul, hn₀map, hD₀finite, hD₀pres, hBsbase, hBslimit⟩ :=
+    RingHom.exists_limit_module_essentially_finite_presentation_over_system
+      F c₀ hcolim.some hFmap hπlocal (CommRingCat.of S) α B W f hf hS
+      (AddCommGrpCat.of Z) 0 0 0
+      ⟨LinearEquiv.refl S Z⟩
+  have hk' : k = fun i ↦ (κ.app i).hom := funext (fun i ↦ RingHom.ext (hk i))
+  subst k
+  let I₁ := {i : I // i₀ ≤ i}
+  let : Nonempty I₁ := ⟨⟨i₀, le_rfl⟩⟩
+  let : IsDirected I₁ (· ≤ ·) := tail_directed i₀
+  let j₁ : I₁ ⥤ I :=
+    (show Monotone (fun i : I₁ ↦ i.val) from fun _ _ h ↦ h).functor
+  let : j₁.Final := tail_final i₀
+  let : ∀ i, IsLocalRing (Bs.obj i) := hBslocal
+  have hBsfinite : ∀ i, Algebra.EssFiniteType ℤ (Bs.obj i) := by
+    intro i
+    let := (r i).toAlgebra
+    let : Algebra.EssFiniteType ℤ (F.obj i.val) := hFfinite i.val
+    let : Algebra.EssFiniteType (F.obj i.val) (Bs.obj i) := hrfinite i
+    exact Algebra.EssFiniteType.comp ℤ (F.obj i.val) (Bs.obj i)
+  let c₁ := Cocone.mk (CommRingCat.of S) κ
+  obtain ⟨i₁, C, κ', hCcol, k', hk₂, hClocal, hk'local, hCmap, z,
+      hzlocal, hzfinite, hzcomp, hznat, D, ν, hDcol, n, m,
+      hn, hnsmul, hnmap, hDfinite, hDpres, hCbase, hClimit⟩ :=
+    RingHom.exists_limit_module_small_over_system Bs c₁ hBscol.some hBsmap hBsfinite
+      hklocal (CommRingCat.of S') β Q V g hg hS' (AddCommGrpCat.of M) s t H hM
+  have hk₂' : k' = fun i ↦ (κ'.app i).hom := funext (fun i ↦ RingHom.ext (hk₂ i))
+  have hn' : n = fun i ↦ (ν.app i).hom := funext (fun i ↦ AddMonoidHom.ext (hn i))
+  subst k' n
+  let Λ := {i : I₁ // i₁ ≤ i}
+  let : Nonempty Λ := ⟨⟨i₁, le_rfl⟩⟩
+  let : IsDirected Λ (· ≤ ·) := tail_directed i₁
+  let j₂ : Λ ⥤ I₁ :=
+    (show Monotone (fun i : Λ ↦ i.val) from fun _ _ h ↦ h).functor
+  let : j₂.Final := tail_final i₁
+  let J := j₂ ⋙ j₁
+  let ρ : J ⋙ F ⟶ j₂ ⋙ Bs :=
+    { app := fun i ↦ CommRingCat.ofHom (r i.val)
+      naturality := by
+        intro i j h
+        apply CommRingCat.hom_ext
+        exact (hrnat i.val j.val (leOfHom h)).symm }
+  let σ : j₂ ⋙ Bs ⟶ C :=
+    { app := fun i ↦ CommRingCat.ofHom (z i)
+      naturality := by
+        intro i j h
+        apply CommRingCat.hom_ext
+        exact (hznat i j (leOfHom h)).symm }
+  let κ₁ : j₂ ⋙ Bs ⟶ (Functor.const Λ).obj (CommRingCat.of S) :=
+    { app := fun i ↦ κ.app i.val
+      naturality := fun _ _ h ↦ κ.naturality (j₂.map h) }
+  refine ⟨Λ, inferInstance, inferInstance, inferInstance, J, inferInstance,
+    j₂ ⋙ Bs, C, ρ, σ, κ₁, κ', D, ν, m, ?_⟩
+  refine ⟨(fun i ↦ hFlocal i.val.val), (fun i ↦ hBslocal i.val), hClocal,
+    (fun i ↦ hrlocal i.val), hzlocal,
+    (fun i j h ↦ hFmap i.val.val j.val.val h),
+    (fun i j h ↦ hBsmap i.val j.val h), hCmap,
+    (fun i ↦ hπlocal i.val.val), (fun i ↦ hklocal i.val), hk'local,
+    ?_, ?_, hnmap, hnsmul, ?_, ?_, hCcol, hDcol,
+    (fun i ↦ RingHom.essFiniteType_algebraMap.mpr (hFfinite i.val.val)),
+    (fun i ↦ hrfinite i.val), hzfinite, hDpres,
+    ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro i
+    apply CommRingCat.hom_ext
+    exact hrcomp i.val
+  · intro i
+    apply CommRingCat.hom_ext
+    exact hzcomp i
+  · exact ⟨(Functor.Final.isColimitWhiskerEquiv J c₀).symm hcolim.some⟩
+  · exact ⟨(Functor.Final.isColimitWhiskerEquiv j₂ c₁).symm hBscol.some⟩
+  · intro i j h
+    exact (hBsbase i.val j.val h).1
+  · intro i j h
+    exact (hCbase i j h).1
+  · intro i j h
+    exact (hCbase i j h).2
+  · intro i
+    exact (hBslimit i.val).1
+  · intro i
+    exact (hClimit i).1
+  · intro i
+    exact (hClimit i).2
 
 end WeilConjectures
