@@ -14020,3 +14020,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:17 L: merged deliver/X3/Sheaf.Topology.RingedModuleSkyscraper (stage 3; reviewer PASS; first push; landing 20261014T001738-L-2556525 (proof); batch 20261014T001711; modules 1; new nodes 0)
 - 00:17 L: merged deliver/Y3/Sheaf.CategoryTheory.MapExtendHomology (stage 3; reviewer PASS; first push; landing 20261014T001738-L-2556769 (interface); batch 20261014T001711; modules 1; new nodes 0; change records: coord/changes/map-extend-homology-import-pruning.md)
 - 00:17 L: returned deliver/F2/Sheaf.RingTheory.LimitModuleModuleData (reviewer RETURN: (reviewer X-6a253, head 6a2536d30) E2: LimitModuleModuleDataConstruction.lean:15–78, RingHom.exists_limit_module_present)
+- 00:18 L: returned deliver/R3/Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso (reviewer RETURN: (reviewer X-374f2, head 374f21bd7) F2 / reader gate: add and minimally adapt lean/Sheaf/AlgebraicGeometry/MixedTensorPai)
