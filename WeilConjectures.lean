@@ -686,6 +686,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.TensorO
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Transition
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.UnitToTwist
 public import WeilConjectures.AlgebraicGeometry.Regular
+public import WeilConjectures.AlgebraicGeometry.RegularImmersionChart
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.RelativeGluing.BaseChange
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.Affine
@@ -927,10 +928,12 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryA
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatGeneration
 public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatTelescope
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.AssociatorShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableShortExact
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Equivalence
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.LeftUnitorShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ShiftComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ShiftUnitor
@@ -1355,12 +1358,19 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.FamilyObject
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrameIndependence
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductAppend
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Normalization
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Orientation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Rational
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Reduction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionBaseChange
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionIso
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionProduct
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionReduction
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ShiftTateObjectAssoc
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedClassMapRestriction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClass
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Trace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Transport
@@ -1580,6 +1590,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.ShiftSeq
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 public import WeilConjectures.Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
+public import WeilConjectures.Mathlib.Algebra.Homology.MonoidalShift
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Ab
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
@@ -1885,6 +1896,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Types.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 public import WeilConjectures.Mathlib.Data.Fin.Rev
+public import WeilConjectures.Mathlib.Data.Fin.Tuple.Basic
 public import WeilConjectures.Mathlib.Data.Multiset.MapFold
 public import WeilConjectures.Mathlib.Data.Multiset.UnionInter
 public import WeilConjectures.Mathlib.Data.Nat.Choose.Dvd
@@ -1966,6 +1978,7 @@ public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiniteSection
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiniteSplitting
 public import WeilConjectures.Mathlib.RingTheory.Etale.GeometricPoint
+public import WeilConjectures.Mathlib.RingTheory.Etale.Kaehler
 public import WeilConjectures.Mathlib.RingTheory.Etale.Pi
 public import WeilConjectures.Mathlib.RingTheory.Etale.PropertyC
 public import WeilConjectures.Mathlib.RingTheory.Etale.QuasiFinite
@@ -2139,6 +2152,7 @@ public import WeilConjectures.RingTheory.Derivation.Localization
 public import WeilConjectures.RingTheory.DiscreteValuationRing.Dominating
 public import WeilConjectures.RingTheory.DiscreteValuationRing.QuotientDuality
 public import WeilConjectures.RingTheory.DualContent
+public import WeilConjectures.RingTheory.Etale.Coordinates
 public import WeilConjectures.RingTheory.Etale.IntegrallyClosed
 public import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
 public import WeilConjectures.RingTheory.FaithfullyFlat.FamilyDescent
@@ -2384,6 +2398,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.ScalarExtension
 public import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
+public import WeilConjectures.SixFunctors.Etale.Derived.ShiftAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.SingleDelta
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
@@ -2397,7 +2412,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.TorSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriekConstructible
 public import WeilConjectures.SixFunctors.Etale.Derived.Supports
+public import WeilConjectures.SixFunctors.Etale.Derived.SupportsAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.SupportsBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.SupportsEtale
 public import WeilConjectures.SixFunctors.Etale.Derived.SupportsOpenImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
