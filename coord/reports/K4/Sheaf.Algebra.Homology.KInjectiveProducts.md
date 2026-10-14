@@ -1,168 +1,109 @@
 ## What changed
 
-Removed the three unused public Mathlib imports from
-`Sheaf.Algebra.Homology.KInjectiveProducts`. Retained its empty compatibility
-module and updated the module docstring to describe the remaining interface.
-The duplicate theorem and its three callers were already repaired by U2 in
-landing 20261014T035546-L-888417. This delivery completes the remaining import
-pruning; it introduces no replacement duplicate or mathematical statement.
-Change record: `coord/changes/KInjectiveProducts-retired-imports.md`.
+Repaired the proof of `CochainComplex.termwise_product_isKInjective_and_isLimit`
+in `Sheaf.Algebra.Homology.KInjectiveProducts` without changing any signature,
+visibility, universe, hypothesis, definition, or import. The K-injectivity argument
+now uses Mathlib's `isKInjective_iff_rightOrthogonal` and
+`IsKInjective.rightOrthogonal`: the previously constructed product in the
+homotopy category makes any map from an acyclic object zero by projection
+extensionality. Removed the separate null-homotopy assembly for this step.
+Updated the docstring and the node's proof order and proof_origin to agree.
+
+This is a repair item listed in coord/repairs.txt, not a fresh sorry item.
+The existing complete product and localization constructions are retained.
+The module compiles with lcompile.py without warnings. Searches through
+msearch.py used LeanFinder, Loogle, and grep; direct source searches checked
+both project roots and Mathlib. Read the supporting node, unit realization,
+Mathlib's right-orthogonality criterion and Hom comparison, and the available
+upstream HomotopyCategory/Products.lean. The local Stacks source is absent;
+the source was read at https://stacks.math.columbia.edu/tag/0BK6.
 
 ## Proved and sorry left
 
-Holes closed: 0 of 0. Holes added: 0. Split off: 0.
-There are no declarations or sorries in the item. The former declaration
-`CochainComplex.termwise_product_isKInjective_and_isLimit` was already retired
-in the baseline, and is not counted as proved by this delivery. The existing
-node `lem-pc-ringed-space-product-kinjective` already has `lean: null`.
+`CochainComplex.termwise_product_isKInjective_and_isLimit` remains completely
+proved, as do the private helpers `CochainComplex.productHomotopy` and
+`CochainComplex.mapProduct`. No sorry remains and none was added.
+Holes closed: 0, because the supplied baseline already had no holes.
+Holes added: 0. Node: `lem-pc-ringed-space-product-kinjective`.
+The K-injectivity step is shortened using existing Mathlib theorems, rather
+than moved to a new statement. Empty and singleton families use the same
+limit-extensionality proof; there is no inhabited-index, boundedness,
+K-injective-resolution, or global-product hypothesis.
 
 ## No longer needed
 
-Removed public imports:
-`Mathlib.Algebra.Homology.HomologicalComplexLimits`,
-`Mathlib.Algebra.Homology.DerivedCategory.Basic`, and
-`Mathlib.Algebra.Homology.HomotopyCategory.KInjective`.
-Repair H9 also removes the temporary `public meta import Mathlib.Util.ParseCommand`.
-No Lean source imports `Sheaf.Algebra.Homology.KInjectiveProducts`.
-The compatibility file remains with no imports or declarations; no supporting
-mathematical node is declared unnecessary. The node's statement and the unit
-route remain unchanged. No new modules or nodes and no forced adaptations.
+No imports or modules removed. The direct K-injectivity proof no longer needs
+`IsKInjective.homotopyZero` or a second application of `productHomotopy`.
+The latter helper remains necessary for uniqueness in the homotopy category.
+The public bridge import is retained to preserve all existing reexports.
+The existing pruning of `lem-pc-abelian-groups-exact-products` remains valid:
+no exactness of products in Ab is used. The unit sk-thm-picard-duality has
+empty realized statement and step lists; no unit route is bypassed.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-This is a repair item with zero sorries. U2 already removed the duplicate and
-replaced its three caller proofs using the available homotopy product and
-K-injective Hom comparison APIs. The named upstream pair in review #1428 is
-unavailable in this snapshot; the baseline node explicitly records that fact
-and its retirement. No unavailable declaration is imported or claimed proved.
+The brief calls this a module containing sorry, but the supplied module is
+already proved. The relevant assignment is the duplicate repair entry from
+upstream review #1428. That entry cites
+`CochainComplex.isKInjective_of_isLimitFan` and
+`DerivedCategory.isLimitFanMkQObjOfIsKInjective` in
+`WeilConjectures.Algebra.Homology.DerivedCategory.Products`.
+Neither declaration nor that module exists in the supplied repository,
+source checkout, or published local Lean library. The available module is
+`WeilConjectures.Algebra.Homology.HomotopyCategory.Products`; its
+`homotopyOfFan` and `isLimitFanQuotient` require
+`HasLimitsOfShape (Discrete T) C`, which is strictly stronger than existence
+of this family's products in each degree. Applying those results directly
+would change the statement's hypotheses, so that replacement is unavailable
+in this baseline. This delivery removes the redundant K-injectivity
+construction using the available Mathlib criterion; it does not claim to
+have imported or used the two absent declarations. A full replacement by
+those particular upstream declarations needs their sources and compiled
+modules to be incorporated by the maintainer first. No tools were changed.
 
-The preserved sandbox requested deletion of the unused compatibility file.
-The required dry run again rejected that deletion under the preflight's older
-no-deletion rule, despite the brief's step 8b and deliver3.py supporting it.
-Instead this delivery removes the residual unused imports while retaining the
-file. The deletion request is withdrawn, not hidden or bypassed; no process
-script is changed. The report's second-reading section is reserved for the
-independent reader.
-
-Validation on this repair attempt: downstream.py reports 0 downstream modules.
-The delivered import-free compatibility file compiles cleanly through
-lcompile.py (exit code 0, 0.2 seconds). The required deliver3.py --no-push dry
-run then fails in its appended probe, not in the delivered module. Calling
-lcompile.run with the exact preflight PROBE exposes these errors after the
-last source line:
-
-```text
-error: unknown namespace `Command`
-error: to use this command, include `import Lean.Elab.Command`
-```
-
-The probe assumes a transitive metaprogramming import absent from a valid empty
-module. deliver3.py filters errors after the last delivered line, leaving only
-`COMPILE FAILED (local)` and timing. The module has no declarations to audit.
-The tool must supply its own probe imports or handle declaration-free modules;
-adding an unused mathematical import merely to support its probe would undo
-the intended complete pruning. The earlier deletion alternative is also still
-rejected by preflight. No process script was changed, no second reading was
-fabricated, and nothing was pushed. The fully compiling import-pruning repair
-and its change record remain prepared in the sandbox for the next attempt.
-
-Revalidation on the next dispatcher attempt (2026-10-14): the delivered file again
-compiled cleanly through lcompile.py (exit 0, 0.2 seconds). The required
-deliver3.py --no-push again returned exit 1 with COMPILE FAILED (local).
-Diagnostic compilation using the unchanged exact stage3_delivery.py PROBE
-confirmed unknown namespace `Command` at probe line 23 and the missing
-`Lean.Elab.Command` import at probe line 24 (probe exit 1). The delivered
-source ends before those lines. downstream.py again reports zero users.
-The current stage3_delivery.py read_delivery still unconditionally rejects
-deletions/renames, explicitly saying they are never deleted by a delivery,
-so the authorized withdrawal alternative also remains unsupported.
-No extra import was added to conceal the probe defect, and no process tool
-was edited. The repair remains prepared, unpushed, and blocked by the same
-audit-tool failure.
-
-Repair of reviewer X-dae4e's H9 (2026-10-14): removed
-`public meta import Mathlib.Util.ParseCommand` and replaced the requested
-second-reading sentence with the reviewer's exact wording. The import-free
-module compiles through lcompile.py (exit 0, 0.2 seconds); downstream.py reports
-zero users. The required deliver3.py --no-push still fails in the unchanged
-auditor's appended PROBE. Diagnostic compilation through lcompile.run with that
-exact PROBE reports unknown namespace `Command` at line 22 and the missing
-`Lean.Elab.Command` import at line 23; the delivered source has only 19 lines.
-The subsequent required dry run printed OK: the import-free module compiles and
-passes preflight, with review class CODEX. The tool now reports the empty
-module's unavailable declaration probe as a note. H9 is repaired in the sandbox.
-No process tool was changed by this worker, no temporary import is retained,
-and nothing was pushed.
-
-## Earlier second reading (a previous round; superseded)
-
-The compatibility module contains no theorem or sorry. The retired duplicate is absent,
-and the existing callers contain no code reference to it. The only added import is a
-`public meta` Mathlib import required by the delivery auditor's appended declaration
-probe; it does not provide mathematical declarations to ordinary importers. The module
-compiles cleanly with lcompile.py and the source signatures are unchanged.
-
-## Earlier second reading (a previous round; superseded)
-
-1. Compared the delivered compatibility module with the repository version. The only source change is removal of the three unused public Mathlib imports; there are no declarations whose signatures could change. Verdict: unchanged interface and no accidental edits.
-
-2. Compiled the module with `lcompile.py`; it succeeds without errors or warnings. The file contains no `sorry`, `axiom`, `unsafe`, `opaque`, `extern`, or `implemented_by`, and has no declarations requiring an axiom probe. Verdict: valid proof-only compatibility module.
-
-3. No statements were split off or added. The retired duplicate theorem is absent from both versions, and searches show no replacement declaration in this delivery. Verdict: no new statement review required.
-
-4. The module has no mathematical declarations and no target importers. Removing its unused imports is the shortest route and does not bypass any unit route. Verdict: pruning is complete and imports are minimal.
-
-5. The change record documents the retired imports, and the module/node metadata remains consistent with the empty compatibility interface. Verdict: DAG and Lean agree.
-
-No temporary meta import is retained; the compatibility module has no imports.
+The three direct importers are
+`Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerTriangle`,
+`Sheaf.CategoryTheory.Triangulated.RightDerivedFunctorCountableProducts`, and
+`Sheaf.Topology.RingedSpaceRGammaDerivedLimit`. Their statements and imports
+need no adaptation because this delivery changes only a proof and its
+explanation. No statement was disputed or weakened, and no arbitrary object
+was chosen from an unproved existence theorem.
 
 ## Second reading by K4
 
-1. Compared the complete sandbox module with the repository module using `diff -u`.
-   The three public Mathlib imports are removed and the final module-docstring
-   sentence describes that removal. Both files have zero declarations, so there
-   is no existing signature, definition, hypothesis or conclusion to change.
-   The sole change record is `KInjectiveProducts-retired-imports.md`; its Old
-   imports match the repository and its New description matches the sandbox.
-   Verdict: no accidental mathematical interface change.
+1. **Interface: pass.** Compared the complete module with the repository using `diff`.
+   Every existing declaration signature, definition, universe, visibility, and import
+   is byte-for-byte unchanged. Only the public theorem proof and its explanatory
+   docstring change. No change record or downstream adaptation is needed.
+2. **Proof and axioms: pass.** Compiled the delivered file through `lcompile.py`
+   without errors or warnings. A scratch copy with `#print axioms` for
+   `CochainComplex.termwise_product_isKInjective_and_isLimit`, `productHomotopy`,
+   and `mapProduct` reports exactly `propext`, `Classical.choice`, and `Quot.sound`.
+   There is no sorry or forbidden declaration modifier. The homotopy components
+   and cone lifts are constructed from actual limits and inverse Hom bijections;
+   no arbitrary data comes from an unproved existence theorem.
+3. **Split statements: pass, none.** No statements, nodes, or holes are added.
+   Inspected the Mathlib right-orthogonality criterion and Hom comparison, searched
+   with LeanFinder, Loogle, grep, and direct `rg`, and read the upstream product
+   module. Its generic product lemmas require all products of the index shape,
+   whereas this statement only assumes products of the evaluated family.
+   The argument handles empty and singleton families: projection extensionality
+   requires neither an inhabited index nor a nonempty family.
+4. **Route and pruning: pass.** Reviewed both private constructions and the theorem
+   from its conclusion backward. The homotopy-category limit, orthogonality step,
+   and localization Hom bijections prove both conclusions with the original
+   hypotheses. The shortened K-injectivity step uses proved Mathlib results.
+   The proof-only DerivedCategory.KInjective import is already private. Existing
+   public imports are retained as part of the module's unchanged reexported
+   interface. No old proof dependency is removed by this repair; the earlier
+   removal of the exact-products-in-Ab node remains valid. Checked the unit's
+   empty realized statement and step lists; no realized route is bypassed.
+5. **DAG: pass after correction.** The node's proof dependencies are the union of
+   its steps' uses, and its proof and origin match the Lean route. Its statement,
+   Lean record, and unit are unchanged. Corrected the last step's stale reference
+   from "product of Step 2" to "product of Step 1" after the reordered proof.
 
-2. Compiled the delivered file through `lcompile.py`: exit 0, 0.2 seconds, no
-   errors or warnings. Read all 19 lines: `module` and `@[expose] public section`
-   are present, with no imports, declarations, `sorry`, forbidden declarations
-   or hollow definitions. There is no declaration on which to run `#print axioms`.
-   Verdict: the compatibility module compiles and introduces no axioms or holes.
-
-3. The delivery contains one Lean module and no new node or split-off statement.
-   The retired conjunction occurs only in the module comment; searches of
-   `lean/` find no declaration or code use under its former name (two other
-   module docstrings still mention it). No theorem is moved or restated.
-   Verdict: zero statements split off; no small-case or new-statement search
-   obligation arises.
-
-4. Confirmed zero importers by source search and `tools/downstream.py`, which
-   reports 0 downstream modules. All three baseline imports are enumerated
-   under `## No longer needed`; no meta import is retained. Read the unit
-   `sk-thm-picard-duality.json`: its `realized` statement and step lists are empty
-   and are not edited. The supporting product node and its mathematical route
-   are retained. Verdict: all unused imports are pruned without claiming an
-   additional proved theorem or a newly unreachable module.
-
-5. Read `lem-pc-ringed-space-product-kinjective.json` in full. Its `lean: null`,
-   U2 `proof_origin`, and proof explicitly record retirement of the standalone
-   conjunction and direct countable-product specializations in the callers.
-   Its three `proof_deps` equal the uses of that recorded route. This delivery
-   edits no node and proves none of the unattached arbitrary-family statement.
-   The retained module comment agrees with that retirement.
-   Verdict: the existing node metadata and this empty module agree.
-
-Changed during this second reading: appended this independent review; the
-already correct Lean module and change record required no further edits.
-Verified reviewer X-dae4e's H9 repair: the requested unused meta import is absent.
-No temporary meta import is retained; the compatibility module has no imports.
-Holes closed: 0 of 0. Holes added: 0. Split off: 0.
-
-Second-reader dry run: `deliver3.py K4 Sheaf.Algebra.Homology.KInjectiveProducts
---no-push` printed OK and passed preflight (CODEX: public-import removal,
-change record, returned repair). The tool reports the appended probe's missing
-`Lean.Elab.Command` dependency as a note and separately accepts the clean source
-compile. The file has no declarations whose axioms could escape that probe.
+Second reading changed only that DAG step reference and appended this review;
+no Lean repair was necessary. Independently checked the unchanged mathematical
+statement against [Stacks Tag 0BK6](https://stacks.math.columbia.edu/tag/0BK6).
+This is a completed proof repair, not a new hole closure: holes closed 0, added 0.
