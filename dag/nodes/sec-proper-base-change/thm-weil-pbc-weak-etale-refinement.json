@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-weil-pbc-weak-etale-refinement",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Ind-etale refinement of a weakly etale map",
@@ -24,17 +24,18 @@
  ],
  "proof": [
   {
-   "text": "Use $C,J,D_0$ from [def-weil-pbc-weak-etale-refinement]. By\n[lem-weil-pbc-strict-w-cover], $C/A$ is faithfully flat and ind-etale, and\nits maximal local rings are strictly henselian. The fibres of $D_0/C$ are\nalgebraic over their base fields by\n[lem-weil-pbc-weak-etale-field]. Thus $T=V(JD_0)$ consists of closed points\nof $D_0$. [lem-weil-pbc-retained-localization] makes $B'$ w-local with closed\npoints $T$, unchanged local rings there, and $D_0\\to B'$ ind-Zariski.",
+   "text": "Use $C,J,D_0$ from [def-weil-pbc-weak-etale-refinement]. By\n[lem-weil-pbc-strict-w-cover], $C/A$ is faithfully flat and ind-etale, and\nits maximal local rings are strictly henselian. Since $A\to B$ is weakly etale\nand weakly etale maps are stable under base change, $C\to D_0$ is weakly\netale. Applying [lem-weil-pbc-weak-etale-field] to each fibre of $D_0/C$\nshows that its residue fields are algebraic over the base fields. Thus\n$T=V(JD_0)$ consists of closed points of $D_0$.\n[lem-weil-pbc-retained-localization] makes $B'$ w-local with closed points\n$T$, unchanged local rings there, and $D_0\\to B'$ ind-Zariski.",
    "uses": [
     "def-weil-pbc-weak-etale-refinement",
     "lem-weil-pbc-strict-w-cover",
     "lem-weil-pbc-weak-etale-field",
-    "lem-weil-pbc-retained-localization"
+    "lem-weil-pbc-retained-localization",
+    "lem-weil-pbc-ind-etale-stability"
    ],
    "elementary": false
   },
   {
-   "text": "At every maximal ideal $n\\subset B'$, its contraction $m\\subset C$ is\nmaximal. The local map $C_m\\to B'_n$ is weakly etale by\n[lem-weil-pbc-ind-etale-stability], so is an isomorphism by\n[thm-weil-pbc-weak-etale-strict-local]. Every prime of $B'$ lies under a\nmaximal ideal. Localizing this isomorphism again shows that $C\\to B'$\nidentifies all local rings. It is therefore ind-Zariski by\n[lem-weil-pbc-local-rings-ind-zariski]. Composition with $A\\to C$ proves that\n$A\\to B'$ is ind-etale.",
+   "text": "At every maximal ideal $n\\subset B'$, its contraction $m\\subset C$ is\nmaximal. The composite $C\\to D_0\\to B'$ is weakly etale: the first map is\nthe weakly etale base change above, while $D_0\\to B'$ is ind-Zariski and\nhence ind-etale and weakly etale by [lem-weil-pbc-ind-etale-stability].\nTherefore the local map $C_m\\to B'_n$ is weakly etale, so is an isomorphism\nby [thm-weil-pbc-weak-etale-strict-local]. Every prime of $B'$ lies under a\nmaximal ideal. Localizing this isomorphism again shows that $C\\to B'$\nidentifies all local rings. It is therefore ind-Zariski by\n[lem-weil-pbc-local-rings-ind-zariski]. Composition with $A\\to C$ proves that\n$A\\to B'$ is ind-etale.",
    "uses": [
     "lem-weil-pbc-ind-etale-stability",
     "thm-weil-pbc-weak-etale-strict-local",
@@ -43,21 +44,25 @@
    "elementary": false
   },
   {
-   "text": "The map $B\\to D_0$ is ind-etale by base change from $A\\to C$; composition\nmakes $B\\to B'$ ind-etale and flat as well. The closed point set $V(J)$\nsurjects onto $\\operatorname{Spec}A$ by\n[lem-weil-pbc-strict-w-cover]. Its base change $T$ therefore surjects onto\n$\\operatorname{Spec}B$, and all these points are retained in\n$\\operatorname{Spec}B'$. This proves faithful flatness. The construction\ngives the refinement theorem commonly formulated in\n[Stacks Project, Tag 097Z](https://stacks.math.columbia.edu/tag/097Z); its\ncovering and local-ring steps have been proved above.",
+   "text": "The map $B\\to D_0$ is ind-etale by base change from $A\\to C$; composition\nmakes $B\\to B'$ ind-etale and flat as well. The closed point set $V(J)$\nsurjects onto $\\operatorname{Spec}A$ by\n[lem-weil-pbc-strict-w-cover]. By [lem-weil-pbc-faithfully-flat-base-change], the base-changed faithfully flat map remains faithfully flat, so its base change $T$ surjects onto\n$\\operatorname{Spec}B$, and all these points are retained in\n$\\operatorname{Spec}B'$. The composite $B\to B'$ is flat, and the retained points give a surjective\nmap $\\operatorname{Spec}B'\to\\operatorname{Spec}B$. The existing criterion\n[lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] therefore gives\nfaithful flatness. The construction\ngives the refinement theorem commonly formulated in\n[Stacks Project, Tag 097Z](https://stacks.math.columbia.edu/tag/097Z); its\ncovering and local-ring steps have been proved above.",
    "uses": [
-    "lem-weil-pbc-strict-w-cover"
+    "lem-weil-pbc-strict-w-cover",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-weak-etale-refinement",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-local-rings-ind-zariski",
+  "lem-weil-pbc-retained-localization",
   "lem-weil-pbc-strict-w-cover",
   "lem-weil-pbc-weak-etale-field",
-  "lem-weil-pbc-retained-localization",
-  "lem-weil-pbc-ind-etale-stability",
-  "thm-weil-pbc-weak-etale-strict-local",
-  "lem-weil-pbc-local-rings-ind-zariski"
+  "thm-weil-pbc-weak-etale-strict-local"
  ],
  "proof_origin": {
   "by": "agent",
@@ -66,7 +71,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -100,5 +105,34 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "thm-weil-pbc-weak-etale-refinement",
+  "worker": "stage1",
+  "summary": "Audited the three blueprint proof paragraphs against all cited DAG statements. Added the existing Mathlib leaf for the non-elementary flat-plus-surjective-spectrum criterion, and made the weak-etale base-change and retained-localization transitions explicit; the existing faithful-flat base-change leaf remains cited for the tensor map. No statement correction or new node is needed.",
+  "blueprint": "Realizes the three proof paragraphs of blueprint node thm-weil-pbc-weak-etale-refinement: construction and retained-localization properties; local-ring identification and ind-Zariski conclusion; base-change composition and faithful-flat covering argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-faithfully-flat-base-change",
+    "why": "Generic ring-theoretic faithful-flat base-change criterion for the tensor map; the proper-base-change unit has no replacement node."
+   },
+   {
+    "node": "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "why": "Generic ring criterion converting flatness plus surjective prime spectrum into faithful flatness; the proper-base-change unit has no replacement node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-922eddcdd",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-922eddcdd (reviewer sub-agent of L); spot-checked: The statement and three-step route are mathematically correct and match blueprint 1232 / Stacks 097Z. The delivery omitted the existing non-elementary leaf lem-weil-pbc-flat-surjective-spectrum-faithfully-flat when deriving faithful flatness from flatness plus surjective Spec in step 3. I repaired the item JSON, added that citation, recorded both generic Mathlib tool uses, and made the weak-etale base-change transitions explicit. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
