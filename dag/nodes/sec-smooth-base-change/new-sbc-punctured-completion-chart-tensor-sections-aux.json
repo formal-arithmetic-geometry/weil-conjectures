@@ -15,7 +15,7 @@
  },
  "proof": [
   {
-   "text": "Restrict the overlap isomorphism to the pullback of the affine principal chart and apply the affine fibre-product tensor formula; transport the resulting C-linear map to the completed principal open. The transported map is bijective because the overlap restriction and affine tensor comparison are bijections.",
+   "text": "Paste the overlap pullback square with the restriction square for the completion map. Apply Mathlib isIso_pushoutSection_of_isAffineOpen on the affine chart and the two affine base spectra, identify their sections by ΓSpecIso, and use CommRingCat.isPushout_tensorProduct and isoIsPushout to obtain the section-ring equivalence from C tensor_A Γ(Y,V). Its C-generator formula follows from inl_isoIsPushout_hom.",
    "uses": [
     "def-sbc-punctured-completion-chart-section-modules",
     "def-weil-pbc-formal-glueing-data",
@@ -23,6 +23,21 @@
     "def-sbc-punctured-completion-matching-sections"
    ],
    "elementary": false
+  },
+  {
+   "text": "The equation D.over identifies D.toCompleted followed by s with the completed-base projection. The hypothesis D(f) ≤ U implies W is in the open immersion D.toCompleted's range, and D.overlap_base identifies the inverse image of W with the pullback chart. Mathlib Scheme.Hom.isIso_app then makes the section pullback an isomorphism; compose its inverse with the tensor comparison. Naturality proves that this composition carries c tensor 1 to the structural image of c.",
+   "uses": [
+    "def-sbc-punctured-completion-matching-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use chartSectionModule_smul to identify the chart module with its section ring as an A-module, and apply LinearEquiv.baseChange. The ring equivalence is C-linear because c acts by multiplication with c tensor 1, whose image is the structural scalar c. Compose these linear equivalences and use their bijectivity.",
+   "uses": [
+    "def-sbc-punctured-completion-chart-section-modules",
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -32,9 +47,9 @@
   "def-sbc-punctured-completion-matching-sections"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tags 01JO, 0BLH and 05EL."
+  "by": "P4",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 01JO, 0BLH and 05EL; Mathlib.AlgebraicGeometry.Morphisms.Flat, isIso_pushoutSection_of_isAffineOpen; existing private chart_affine_tensor calculation in PuncturedCompletionAffineChartGeneratorCoherence used as implementation reference."
  },
  "mathlib_searches": [
   {
@@ -109,10 +124,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261014T010850-L-3166741",
-  "kind": "interface",
+  "landing": "20261014T013043-L-3416612",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
