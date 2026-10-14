@@ -14662,8 +14662,7 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:47 L: merged deliver/F1/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore (stage 3; reviewer PASS; first push; landing 20261014T054721-L-2186873 (proof); batch 20261014T054718; modules 1; new nodes 0)
 - 05:47 L: merged deliver/F2/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (stage 3; reviewer PASS; after a return; landing 20261014T054721-L-2187072 (proof); batch 20261014T054718; modules 1; new nodes 0)
 - 05:47 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T054722-L-2187215 (proof); batch 20261014T054718; modules 1; new nodes 0)
-- 05:47 L: merged deliver/R2/Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso (stage 3; reviewer PASS; first push; landing 20261014T054722-L-2187349 (interface); batch 20261014T054718; modules 2; new nodes 1; change records: coord/changes/global-hom-mate-counit-transport.md)
-- 05:47 L: merged deliver/R2/Sheaf.CategoryTheory.Abelian.DerivedBottomCycleTransport (stage 3; reviewer PASS; first push; landing 20261014T054723-L-2187586 (interface); batch 20261014T054718; modules 4; new nodes 3)
-- 05:47 L: merged deliver/V4/Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap (stage 3; reviewer PASS; first push; landing 20261014T054723-L-2187800 (interface); batch 20261014T054718; modules 1; new nodes 0; change records: coord/changes/dualityEquationBaseChangeMap-repair.md)
 - 05:52 L: returned deliver/B2/Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization (reviewer RETURN: (reviewer X-472ac, head 472ace8c7) E2 (review point 4): The restored etaleResidueTriples_primeLocalization_component_ext)
 - 05:55 L: returned deliver/F1/Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCoreParts (reviewer RETURN: (reviewer X-1dea9, head 1dea9de17) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Ab)
+
+- 13:59 L: batch 20261014T054718 dependency take-out
