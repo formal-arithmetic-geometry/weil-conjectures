@@ -3,59 +3,144 @@
  "blueprint": {
   "is": "prop-weil-pbc-strict-local-exchange",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Strict-local projective-line exchange",
- "statement": "Let $A\\to B$ be a local morphism of strictly henselian local rings inducing a\nspecified extension of their separably closed residue fields. For the\nbase-change square of $\\mathbf P^1_A\\to\\operatorname{Spec}A$, the stalk of the\nexchange morphism [def-weil-pbc-derived-exchange] at the closed geometric\npoint of $\\operatorname{Spec}B$ is the restriction map between the\ncohomologies of the two closed projective lines. If the residue-field map is\nan isomorphism, this stalk map is an isomorphism.",
+ "statement": "Let $\\varphi:A\\to B$ be a local homomorphism of strictly henselian local rings [def-weil-pbc-henselian-terminology], with induced residue-field extension $\\bar\\varphi:\\kappa_A\\to\\kappa_B$. Put $S=\\operatorname{Spec}A$, $T=\\operatorname{Spec}B$, $g=\\operatorname{Spec}\\varphi$, $X=\\mathbf P^1_S$, $X'=\\mathbf P^1_T$ [def-nagata-projective-space-base-change], and let $(g':X'\\to X,p':X'\\to T,p:X\\to S,g)$ be the base-change square. Let $F$ be a torsion abelian sheaf [def-weil-pbc-torsion-etale-sheaf] on $X_{\\mathrm{et}}$, and $q\\geq0$. Write $i:X_0=\\mathbf P^1_{\\kappa_A}\\to X$, $j:X'_0=\\mathbf P^1_{\\kappa_B}\\to X'$ for the closed fibres, $k:X'_0\\to X_0$ for the map induced by $\\bar\\varphi$, $F_0=i^{-1}F$, and $t:\\operatorname{Spec}\\kappa_B\\to T$ for the closed geometric point [def-weil-pbc-geometric-stalks]. Under the canonical global-germ identifications followed by closed-fibre restriction [def-weil-pbc-derived-global-germ; def-weil-pbc-cohomology-pullback], the degree-$q$ stalk at $t$ of the exchange [def-weil-pbc-derived-exchange] is the map\n$$k^*:H^q(X_0,F_0)\\longrightarrow H^q(X'_0,k^{-1}F_0).$$\nMore precisely these canonical identifications $e_1:(g^{-1}R^qp_*F)_t\\simeq H^q(X_0,F_0)$ and $e_2:(R^qp'_*g'^{-1}F)_t\\simeq H^q(X'_0,k^{-1}F_0)$ satisfy $e_2\\circ\\mathrm{Ex}_t=k^*\\circ e_1$. If $\\bar\\varphi$ is an isomorphism, $\\mathrm{Ex}_t$ is an isomorphism.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/prop-weil-pbc-strict-local-exchange.md",
   "place": "node prop-weil-pbc-strict-local-exchange, order 1143"
  },
  "stmt_deps": [
-  "def-weil-pbc-derived-exchange",
-  "def-weil-pbc-henselian-terminology"
+  "def-weil-pbc-henselian-terminology",
+  "def-nagata-projective-space-base-change",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-derived-global-germ",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-derived-exchange"
  ],
  "proof": [
   {
-   "text": "For the projective-line square obtain a1,a2 identifying stalk exchange with cohomology pullback on the two total projective lines, with no closed-fibre comparison used yet.",
+   "text": "The residue quotient maps satisfy $\\bar\\varphi\\circ r_A=r_B\\circ\\varphi$: both send $a$ to the residue class of $\\varphi(a)$. Hence the induced projective-line square satisfies $g'\\circ j=i\\circ k$. Indeed projective lines are the products of their bases with the fixed projective line over $\\mathbf Z$, and both composites have the same two projections. This also identifies $j^{-1}g'^{-1}F$ with $k^{-1}i^{-1}F$ via the inverse-image composition isomorphisms.",
    "uses": [
-    "lem-weil-pbc-strict-local-total-cohomology-exchange"
+    "def-nagata-projective-space-base-change",
+    "lem-weil-pbc-inverse-image-composition"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095T (theorem-proper-base-change), strictly henselian comparison and final map-on-stalks paragraphs; Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian)"
+   }
   },
   {
-   "text": "The residue-field identity Res(phi) after res(A) = res(B) after phi gives a commuting square of projective lines by contravariance of Spec.map and ProjectiveSpace.map_comp. Stalks of inverse images equal the original stalks, so torsion is preserved (the existing instance isTorsionSheaf_upperStar). Apply the strictly henselian projective-line comparison over A to F and over B to g prime inverse image of F. These are the two bijective restriction hypotheses of the restriction-square transport theorem. Obtain b1,b2 and its commuting equation.",
+   "text": "Let $U=H^q(X,F)$ and $V=H^q(X',g'^{-1}F)$. Use the canonical derived global germs, precomposed with inverse Leray as defined, and take degree $q$. This gives maps $\\alpha:U\\to(g^{-1}R^qp_*F)_t$ and $\\beta:V\\to(R^qp'_*g'^{-1}F)_t$. They are isomorphisms: the two underived germ transformations are natural isomorphisms by the strict-local global-germ lemma; deriving them preserves their inverses, as does taking homology, and the Leray factors are isomorphisms. The exact-stalk identification is the one specified in the definition of the derived global germs. Apply the canonical derived global-germ exchange identity to $F[0]$. The derived-unit description of cohomology pullback identifies its middle arrow with $(g')^*$, giving $\\mathrm{Ex}_t\\alpha=\\beta(g')^*$. No arbitrary choice of additive equivalences is made.",
    "uses": [
-    "prop-weil-pbc-p1-strict-henselian-comparison",
+    "def-weil-pbc-derived-global-germ",
+    "lem-weil-pbc-strict-local-global-germ-iso",
+    "lem-weil-pbc-derived-global-germ-exchange",
+    "lem-weil-pbc-cohomology-pullback-derived-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095T (theorem-proper-base-change), strictly henselian comparison and final map-on-stalks paragraphs; Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian)"
+   }
+  },
+  {
+   "text": "The inverse-image stalk isomorphism identifies every stalk of $g'^{-1}F$ with a stalk of $F$. These groups are torsion, so the stalkwise characterization of torsion implies that $g'^{-1}F$ is torsion. Apply the strictly henselian projective-line comparison over $A$ to $F$ and over $B$ to $g'^{-1}F$. Thus the actual restrictions $r=i^*:U\\to H^q(X_0,F_0)$ and $s=j^*:V\\to H^q(X'_0,j^{-1}g'^{-1}F)$ are isomorphisms, in every degree including zero.",
+   "uses": [
     "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-weil-pbc-cohomology-restriction-square-transport"
+    "lem-weil-pbc-torsion-sheaf-characterizations",
+    "prop-weil-pbc-p1-strict-henselian-comparison"
    ],
-   "elementary": true
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095T (theorem-proper-base-change), strictly henselian comparison and final map-on-stalks paragraphs; Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian)"
+   }
   },
   {
-   "text": "Define e1=a1 followed by b1 and e2=a2 followed by b2. Rewrite first with the total-space exchange equation, then with the restriction-square equation. This proves the unchanged existential statement. The existing second assertion then follows from bijectivity of pullback along an isomorphism of residue fields.",
+   "text": "Let $c_{g',j,F}$ and $c_{i,k,F}$ be the unit-compatible composition isomorphisms of step 1, with their common target identified using $g'\\circ j=i\\circ k$. Put $\\gamma=c_{i,k,F}^{-1}\\circ c_{g',j,F}:j^{-1}g'^{-1}F\\xrightarrow{\\sim}k^{-1}i^{-1}F$ and $\\tilde s=H^q(\\gamma)\\circ s$. Clause 4 of cohomology-pullback functoriality gives $H^q(c_{g',j,F})s(g')^*=(g'\\circ j)^*=(i\\circ k)^*=H^q(c_{i,k,F})k^*r$. Composing with $H^q(c_{i,k,F}^{-1})$ gives $\\tilde s(g')^*=k^*r$. Set $e_1=r\\alpha^{-1}$ and $e_2=\\tilde s\\beta^{-1}$. For a stalk element $x$ the identity of step 2 gives $\\beta^{-1}\\mathrm{Ex}_t(x)=(g')^*\\alpha^{-1}(x)$, and hence\n$$e_2\\mathrm{Ex}_t(x)=\\tilde s(g')^*\\alpha^{-1}(x)=k^*r\\alpha^{-1}(x)=k^*e_1(x).$$\nThese are precisely the canonical global-germ and closed-fibre identifications specified in the statement.",
    "uses": [
-    "lem-weil-pbc-strict-local-total-cohomology-exchange",
-    "lem-weil-pbc-cohomology-restriction-square-transport"
+    "lem-weil-pbc-cohomology-pullback-functorial"
    ],
-   "elementary": true
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095T (theorem-proper-base-change), strictly henselian comparison and final map-on-stalks paragraphs; Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian)"
+   }
+  },
+  {
+   "text": "If $\\bar\\varphi$ is an isomorphism then $k$ is an isomorphism: its inverse is base change of $\\operatorname{Spec}(\\bar\\varphi^{-1})$, and the two composites are identities by their projections to the base and fixed projective line. By the composition and identity laws for cohomology pullback, pullback along $k^{-1}$ is inverse to $k^*$ after the canonical coefficient identifications. Thus $k^*$ is invertible. The formula of step 4 yields $\\mathrm{Ex}_t=e_2^{-1}k^*e_1$, an isomorphism.",
+   "uses": [
+    "def-nagata-projective-space-base-change",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095T (theorem-proper-base-change), strictly henselian comparison and final map-on-stalks paragraphs; Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian)"
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-cohomology-restriction-square-transport",
+  "def-nagata-projective-space-base-change",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-derived-global-germ",
+  "lem-weil-pbc-strict-local-global-germ-iso",
+  "lem-weil-pbc-derived-global-germ-exchange",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
   "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-strict-local-total-cohomology-exchange",
-  "prop-weil-pbc-p1-strict-henselian-comparison"
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "prop-weil-pbc-p1-strict-henselian-comparison",
+  "lem-weil-pbc-cohomology-pullback-functorial"
  ],
  "proof_origin": {
-  "by": "worker T1",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Theorem Tag 095T, closed-fibre comparison and final map-on-stalks paragraphs; expanded into two generic comparison interfaces"
+  "place": "Tag 095T (theorem-proper-base-change), final map-on-stalks paragraph; canonical germ argument expanded using 03QO and the existing derived-global-germ lemmas. Torsion scope uses the existing comparison node, beyond the prime-coefficient proof printed in 095T."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strictLocal|ProjectiveLine.*cohomology|baseChange.*Henselian",
+   "results": "1 hits: Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: etale ring base change, topological presheaf stalks, and manifold restriction do not state etale projective-line cohomology exchange"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, HenselianLocalRing",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: etale ring base change, topological presheaf stalks, and manifold restriction do not state etale projective-line cohomology exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a local map of strictly henselian rings the stalk of etale projective line base change is pullback on closed fibre torsion cohomology",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.isStableUnderBaseChange, Algebra.IsEtaleAt.comp, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, AlgebraicGeometry.Scheme.Pullback.Triplet.tensor, AlgebraicGeometry.Scheme.Pullback.ofPointTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor",
+   "date": "2026-10-14",
+   "verdict": "no match: etale ring base change, topological presheaf stalks, and manifold restriction do not state etale projective-line cohomology exchange"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stalk of proper base change for the projective line over strictly henselian local rings identifies with restriction to closed fibres",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale higher direct image exchange morphism on closed geometric stalks equals canonical cohomology pullback",
+   "results": "8 hits: TopCat.Presheaf.stalkPullbackIso, TopCat.Presheaf.stalkPullbackHom, TopCat.Presheaf.stalkPullbackInv, TopCat.Presheaf.germ_stalkPullbackHom, TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom, TopCat.Presheaf.germ_stalkPullbackInv, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp, TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk",
+   "date": "2026-10-14",
+   "verdict": "no match: etale ring base change, topological presheaf stalks, and manifold restriction do not state etale projective-line cohomology exchange"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -122,5 +207,20 @@
   "landing": "20261012T042421-L-1821727",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "prop-weil-pbc-strict-local-exchange",
+  "worker": "stage1",
+  "summary": "Made the implicit torsion abelian coefficient sheaf and degree explicit. Replaced existential-equivalence transport by the existing canonical global-germ identities, then wrote the residue-square restriction calculation and the isomorphism case. No new nodes. Lean comparison is weaker and remains sorried.",
+  "blueprint": "Realizes the entire proof of blueprint prop-weil-pbc-strict-local-exchange: canonical exchange on total-space cohomology, two strictly henselian comparisons, residue pullback, and residue-isomorphism conclusion; unit sk-thm-p1 steps (ii)-(iii)."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-35966a118",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-35966a118 (reviewer sub-agent of L); spot-checked: Read all five proof steps, cited statements, master blueprint, unit/chapter route, and Stacks 03QO, 095T, 01F8 and 08J6. Canonical exchange and coefficient transports check out; torsion comparison hypotheses hold. Edge cases and dependency-cycle/duplicate searches passed. No repairs or exceptional tool_uses needed; detailed checks are in review.md."
  }
 }
