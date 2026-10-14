@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-finrepair-modification-c",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Proper modification transfer without an amplitude claim",
- "statement": "Let $f:X\\to S$ and $\\pi:Y\\to X$ be proper finite-type morphisms,\nand suppose $\\pi$ is an isomorphism over the open $U\\subset X$.\nLet $i:Z=X\\setminus U\\hookrightarrow X$ have the reduced closed\nstructure. If $\\mathcal C(f\\pi)$ and $\\mathcal C(fi)$ hold,\nthen $\\mathcal C(f)$ holds, with the conventions of\n[def-finrepair-property-c], [def-weil-pbc-scheme-conventions].",
+ "statement": "Let $k$ be a field, let $X,Y,S$ be schemes of finite type over $k$, and let $f:X\\to S$ and $\\pi:Y\\to X$ be proper $k$-morphisms,\nand suppose $\\pi$ is an isomorphism over the open $U\\subset X$.\nLet $i:Z=X\\setminus U\\hookrightarrow X$ have the reduced closed\nstructure. If $\\mathcal C(f\\pi)$ and $\\mathcal C(fi)$ hold,\nthen $\\mathcal C(f)$ holds, with the coefficient and sheaf conventions of\n[def-finrepair-property-c] and the morphism conventions of [def-weil-pbc-scheme-conventions].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-modification-c.md",
   "place": "node lem-finrepair-modification-c, order 1595"
@@ -18,58 +18,155 @@
  ],
  "proof": [
   {
-   "text": "For a constructible $F$ on $X$, put $G=F|_U$.\nThe stalk descriptions of\n[def-weil-pbc-extension-by-zero], [def-weil-pbc-inverse-image],\nwith [lemma-weil-pbc-geometric-stalk-conservative], give\n\n$$\n0\\longrightarrow j_!G\\longrightarrow F\n\\longrightarrow i_*i^*F\\longrightarrow0.\n$$",
-   "uses": [
-    "def-weil-pbc-extension-by-zero",
-    "def-weil-pbc-inverse-image",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "With $j':\\pi^{-1}(U)\\hookrightarrow Y$ and $G'$ the pullback\nof $G$, the sheaf $j'_!G'$ is constructible by\n[lem-fin-extension-by-zero]. The identity and acyclicity of\n[lem-finrepair-modification-extension-zero], combined with\n[lem-weil-pbc-grothendieck-spectral-sequence], give\n\n$$\nA_q:=R^qf_*j_!G\\simeq R^q(f\\pi)_*j'_!G'.\n$$",
-   "uses": [
-    "lem-fin-extension-by-zero",
-    "lem-finrepair-modification-extension-zero",
-    "lem-weil-pbc-grothendieck-spectral-sequence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "These are constructible by $\\mathcal C(f\\pi)$ in\n[def-finrepair-property-c]. The same composition spectral\nsequence and the exact closed direct image of\n[lem-fin-closed-immersion] identify\n$B_q:=R^qf_*i_*i^*F$ with $R^q(fi)_*i^*F$;\nthese are constructible by $\\mathcal C(fi)$.\nThe long exact sequence yields\n\n$$\n0\\to\\operatorname{coker}(B_{q-1}\\to A_q)\n\\to R^qf_*F\\to\\ker(B_q\\to A_{q+1})\\to0,\n\\qquad B_{-1}=0.\n$$",
+   "text": "Work throughout with the fixed finite ring $\\Lambda$ and small etale module sheaves of [def-finrepair-property-c]. The inherited coefficient convention fixes a positive integer $N$ annihilating $\\Lambda$ and invertible on the schemes; inverse images to $U$, $Z$ and $U'$  preserve invertibility. The ring $\\Lambda$ is Noetherian because its finite set of ideals admits no infinite strictly ascending chain. Fix a constructible $F$ on $X$ and put $G=j^{-1}F$, $H=i^{-1}F$, where $j:U\\hookrightarrow X$. By [prop-constructible-pullback], $G$ and $H$ are constructible. The field $k$ and the finite-type $k$-structures on $X,Y,S$ are explicit hypotheses of the corrected item, not consequences of the definition of $\\mathcal C$. Apply [lem-weil-pbc-open-closed-short-exact], including its module-sheaf clause, to obtain $0\\to j_!G\\to F\\to i_*H\\to0$.",
    "uses": [
     "def-finrepair-property-c",
-    "lem-fin-closed-immersion"
+    "prop-constructible-pullback",
+    "lem-weil-pbc-open-closed-short-exact"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-modification-c.md",
+    "place": "Proof, first paragraph; Stacks 095G (lemma-pullback-constructible), 095L (lemma-ses-associated-to-open)"
+   }
   },
   {
-   "text": "All four sheaves defining the kernel and cokernel are constructible.\nThe kernel, cokernel, and extension clauses of\n[thm-constructible-serre] prove $\\mathcal C(f)$.",
+   "text": "Put $U'=Y\\times_XU=\\pi^{-1}(U)$, let $j':U'\\hookrightarrow Y$ and $h:U'\\to U$ be the projections, and put $G'=h^{-1}G$. The hypothesis that $\\pi$ is an isomorphism over $U$ says exactly that $h$ is an isomorphism. By [prop-constructible-pullback] $G'$ is constructible; [lem-fin-extension-by-zero] makes $E=j'_!G'$ constructible on the finite-type $k$-scheme $Y$. The current statement of [lem-finrepair-modification-extension-zero] applies to the finite commutative coefficient ring $\\Lambda$, the proper morphism $\\pi$, the open immersion $j$ and this cartesian square. Its canonical adjunction map $a:j_!G\\xrightarrow{\\sim}\\pi_*E$ is an isomorphism and $R^b\\pi_*E=0$ for every $b>0$. Use $a^{-1}$ for the identification $\\pi_*E\\simeq j_!G$ in the next step. This application needs no finiteness of the stalks of $G$ and no invertibility assumption beyond the inherited coefficient conventions fixed in step 1.",
    "uses": [
-    "thm-constructible-serre"
+    "prop-constructible-pullback",
+    "lem-fin-extension-by-zero",
+    "lem-finrepair-modification-extension-zero"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-modification-c.md",
+    "place": "Proof, second paragraph"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-grothendieck-spectral-sequence] to $Y\\xrightarrow{\\pi}X\\xrightarrow f S$ and $E$. Its $E_2^{a,b}=R^af_*(R^b\\pi_*E)$ is zero for $b>0$, and its bottom row is $A_a=R^af_*j_!G$. Since each next-page entry is a kernel modulo an image in the current entry, the positive rows remain zero by induction on the page. All differentials from page 2 onward meeting the bottom row vanish: outgoing targets have second degree $1-r<0$, incoming sources have positive second degree $r-1$. In total degree $q$ the finite abutment filtration therefore has just one nonzero graded piece, at $(q,0)$; all earlier graded pieces vanish, so $F^0=\\cdots=F^q$, and $F^{q+1}=0$. Thus $R^q(f\\pi)_*E\\simeq A_q$. Since $E$ is constructible, $\\mathcal C(f\\pi)$ in [def-finrepair-property-c] proves that $A_q$ is constructible for every $q\\ge0$.",
+   "uses": [
+    "lem-weil-pbc-grothendieck-spectral-sequence",
+    "def-finrepair-property-c"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-modification-c.md",
+    "place": "Proof, second paragraph, displayed identification and third paragraph"
+   }
+  },
+  {
+   "text": "The explicit hypothesis that $X$ is of finite type over $k$ permits applying [lem-fin-closed-immersion] to constructible $H=i^{-1}F$ on $Z$. It gives $R^bi_*H=0$ for $b>0$; in degree zero the right derived functor is $i_*$. Use [lem-weil-pbc-grothendieck-spectral-sequence] for $Z\\xrightarrow i X\\xrightarrow f S$: again only the bottom row survives. For total degree $q$, outgoing differentials have negative second degree, incoming ones positive second degree, and all positive-second-degree entries stay zero on every page. The filtration therefore has zero quotients at indices $p<q$, giving $F^0=\\cdots=F^q$, while $F^{q+1}=0$ and $F^q/F^{q+1}$ is the bottom-row term. Hence $B_q:=R^qf_*i_*H\\simeq R^q(fi)_*H$. The hypothesis $\\mathcal C(fi)$, applied to constructible $H$, makes every $B_q$ constructible by [def-finrepair-property-c]. This uses the stated vanishing of the closed-immersion node, not an unstated exactness clause.",
+   "uses": [
+    "lem-fin-closed-immersion",
+    "lem-weil-pbc-grothendieck-spectral-sequence",
+    "def-finrepair-property-c"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-modification-c.md",
+    "place": "Proof, third paragraph, closed-complement identification"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-derived-functor-long-exact] to the short exact sequence of step 1 and $f_*$. Its source and target are abelian module-sheaf categories, its source has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives], and $f_*$ is additive and left exact by [lem-weil-pbc-module-direct-image-left-exact]. Thus for $q>0$ there is an exact segment $B_{q-1}\\to A_q\\to R^qf_*F\\to B_q\\to A_{q+1}$. For $q=0$ the sequence starts $0\\to A_0\\to f_*F\\to B_0\\to A_1$.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-module-direct-image-left-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Stacks Tag 015B (derived-lemma-higher-derived-functors), parts (1)-(2); blueprint Proof, third paragraph"
+   }
+  },
+  {
+   "text": "Set $B_{-1}=0$. Exactness in step 5 identifies the image of $A_q\\to R^qf_*F$ with $C_q=\\operatorname{coker}(B_{q-1}\\to A_q)$ and the image of $R^qf_*F\\to B_q$ with $K_q=\\ker(B_q\\to A_{q+1})$. Factoring through these images gives $0\\to C_q\\to R^qf_*F\\to K_q\\to0$. For $q=0$ this reads $C_0=A_0$, using the initial injectivity, so no negative derived functor is required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-modification-c.md",
+    "place": "Proof, third paragraph, displayed short exact sequence"
+   }
+  },
+  {
+   "text": "The terms $A_q$, $A_{q+1}$, $B_q$ and, for $q>0$, $B_{q-1}$ are constructible by steps 3-4. By the kernel and cokernel clauses of [thm-constructible-serre], $C_q$ and $K_q$ are constructible (for $q=0$, $C_0=A_0$). Its extension clause applied to step 6 proves $R^qf_*F$ constructible. Since $F$ and $q\\ge0$ were arbitrary, this is $\\mathcal C(f)$ by [def-finrepair-property-c]. No uniform bound on $q$ or vanishing assertion has been used.",
+   "uses": [
+    "thm-constructible-serre",
+    "def-finrepair-property-c"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-modification-c.md",
+    "place": "Proof, last paragraph; Stacks 03RZ (lemma-constructible-abelian)"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-extension-by-zero",
-  "def-weil-pbc-inverse-image",
-  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-finrepair-property-c",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-open-closed-short-exact",
   "lem-fin-extension-by-zero",
   "lem-finrepair-modification-extension-zero",
   "lem-weil-pbc-grothendieck-spectral-sequence",
-  "def-finrepair-property-c",
   "lem-fin-closed-immersion",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-module-direct-image-left-exact",
   "thm-constructible-serre"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-modification-c.md",
-  "place": "## Proof"
+  "place": "Proof, all four paragraphs, expanded using Stacks 095G, 095L, 015B and 03RZ"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper modification isomorphism on an open subset transfers constructibility of all higher direct images from the modification and closed complement",
+   "results": "Topology.isConstructible_preimage_iff_of_isOpenEmbedding, Topology.IsConstructible.image_of_isOpenEmbedding, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, Topology.IsConstructible.image_of_isClosedEmbedding, Topology.IsLocallyConstructible.preimage_of_isOpenEmbedding, AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state constructibility of higher direct images of etale sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|modification",
+   "results": "Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state constructibility of higher direct images of etale sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper modification transfer constructibility higher direct image etale sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, \"constructible\"",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state constructibility of higher direct images of etale sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible etale sheaves higher direct images proper morphism modification closed complement",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.isLocallyDirected_of_equifibered_of_injective",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state constructibility of higher direct images of etale sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images in an abelian sheaf category are constructible by a localization exact sequence and acyclic proper pushforward",
+   "results": "CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.sheafIsAbelian, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Functor.sheafPushforwardCocontinuous, CategoryTheory.Sheaf.cohomologyPresheafFunctor, SheafOfModules.instAbelian, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H",
+   "date": "2026-10-14",
+   "verdict": "no match: generic sheaf category, pushforward and cohomology constructions; no constructibility transfer theorem"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -100,5 +197,59 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-finrepair-modification-c",
+  "worker": "stage1",
+  "summary": "Repaired E1/C4 by explicitly correcting the imported statement to the finite-type-over-a-field setting of its two cited finiteness lemmas and surrounding proper-constructibility theorem. STATEMENT-DISPUTED: the import omitted this setting; identity maps of Spec Z[1/N] disprove the former inference of a field base. Removed the claim that property C supplies k. All seven steps and citations rechecked; no new nodes or target changes. Repair of landing refusal: revalidated all eleven proof-dependency statements against the current DAG; updated step 2 to the finite-ring, cartesian-square and canonical-map formulation of lem-finrepair-modification-extension-zero, and replaced its stale citation quote. No dependencies or item statement changed in this repair.",
+  "blueprint": "Paragraph 1 is step 1; paragraph 2 is steps 2-3; paragraph 3 is steps 4-6; paragraph 4 is step 7.",
+  "tool_uses": [
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Generic etale sheaf or homological algebra tool used inside the original modification/localization argument; the item unit has no node stating this tool."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Generic etale sheaf or homological algebra tool used inside the original modification/localization argument; the item unit has no node stating this tool."
+   },
+   {
+    "node": "lem-weil-pbc-grothendieck-spectral-sequence",
+    "why": "Generic etale sheaf or homological algebra tool used inside the original modification/localization argument; the item unit has no node stating this tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Generic etale sheaf or homological algebra tool used inside the original modification/localization argument; the item unit has no node stating this tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic etale sheaf or homological algebra tool used inside the original modification/localization argument; the item unit has no node stating this tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "Generic etale sheaf or homological algebra tool used inside the original modification/localization argument; the item unit has no node stating this tool."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic etale sheaf or homological algebra tool used inside the original modification/localization argument; the item unit has no node stating this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-constructible-pullback",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-grothendieck-spectral-sequence",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "thm-constructible-serre"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-f512557b3",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-f512557b3 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, sources, route, packet and report in full. Verified all seven steps, coefficient categories, canonical adjunction map, spectral-sequence collapses and edge cases. Accepted the explicit auxiliary field-setting correction and seven generic tool uses; no target weakened, new nodes, cycles or repairs. Concrete checks recorded in review.md."
+ }
 }
