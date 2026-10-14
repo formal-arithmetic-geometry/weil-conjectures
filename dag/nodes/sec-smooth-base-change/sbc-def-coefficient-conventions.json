@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sbc-def-coefficient-conventions",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Coefficient conventions",
@@ -21,9 +21,59 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible|KInjective|smallEtaleTopology",
+   "results": "Small-etale sites and points; Chevalley constructible-image theorem. These do not define lisse sheaves or bounded constructible complexes. Actual output: 16 hits; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, DerivedCategory",
+   "results": "No hits for the combined Sheaf/DerivedCategory pattern. Actual output: 0 hits; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite commutative coefficient ring annihilated by a positive integer invertible on a scheme, etale module sheaves and bounded constructible derived categories",
+   "results": "Etale-algebra locus, descent, and finite-presentation results; none defines the coefficient convention or constructible derived category. Actual output: 8 hits; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale sheaves of modules over a finite ring with invertible torsion and bounded constructible derived category",
+   "results": "LeanSearch returned Internal Server Error. Actual output: 0 hits; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived category of sheaves of modules on a Grothendieck site, bounded below objects, K-injective complexes and constructible cohomology",
+   "results": "Generic DerivedCategory t-structure results and CochainComplex.IsKInjective/isKInjective_of_injective; these are individual ingredients, not the finite-coefficient conventions. Actual output: 8 hits; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules",
+   "results": "SheafOfModules and its category, morphisms, sections and forgetful functor; only the module-sheaf ingredient, not all clauses. Source read in Mathlib/Algebra/Category/ModuleCat/Sheaf.lean. Actual output: 12 hits; ",
+   "date": "2026-10-14",
+   "verdict": "no match for whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective|IsConstructibleSheaf|abbrev Plus|abbrev Bounded|def constantSheaf",
+   "results": "constantSheaf in Mathlib/CategoryTheory/Sites/ConstantSheaf.lean:66, and imports/applications of KInjective in Injective/Ext.lean; no whole convention. Actual output: 7 hits; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -47,5 +97,20 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-def-bc"
+ "unit": "sk-def-bc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "sbc-def-coefficient-conventions",
+  "worker": "stage1",
+  "summary": "Audited this definition against its blueprint source and the four cited foundation statements. They define all the imported notions; no theorem or existence assertion is added. Retained the statement and statement dependencies; no proof steps or new nodes are needed. Mathlib searches find component constructions, not the whole convention.",
+  "blueprint": "Realizes the entire definition paragraph: the first sentence fixes finite coefficients killed by N on schemes where N is invertible; the remaining sentences reuse the four ambient-foundation definitions, including the notation D^b_c. The blueprint node has no proof to realize."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NR-78975a3db",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-78975a3db (reviewer sub-agent of L); spot-checked: Read the full item, four cited statements, source passages, report and unit/chapter route. Verified coefficient hypotheses, edge cases, search records and target-category boundaries; no duplicates, missing dependencies or cycles found. No repairs or tool_uses needed. Detailed checks written to review.md."
+ }
 }
