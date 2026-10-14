@@ -7,8 +7,6 @@ import Sheaf.RingTheory.ProjectiveResolutionSuccSplice
 universe u v
 open CategoryTheory
 namespace ModuleCat
-
--- Stage-3 delivery: bounded resolutions are characterized by projective dimension.
 /-- The explicit bounded-resolution predicate agrees with Mathlib's projective-dimension
 predicate. Unlike the Ext criteria already in Mathlib, the reverse implication constructs
 an actual bounded projective resolution. Induct on the bound: at zero use the identity
