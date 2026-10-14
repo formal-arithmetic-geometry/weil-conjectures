@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-0f11",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Direct sums and finite cohomological dimension",
@@ -13,36 +13,157 @@
   "place": "node lem-kun-0f11, order 1732"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-kun-cd",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-global-sections-functor",
+  "lem-kun-finite-cd-acyclic-complex",
+  "lem-kun-grothendieck-derived-coproducts"
  ],
  "proof": [
   {
-   "text": "*Step 1 (sheaves).* A set-indexed direct sum of torsion sheaves is\nthe filtered colimit of its finite partial sums, with split-injective\ntransition maps, so for every $q$ the canonical map\n\n$$\n\\bigoplus_iR^qf_*F_i\\longrightarrow\nR^qf_*\\Bigl(\\bigoplus_iF_i\\Bigr)\n$$\n\nis an isomorphism by\n[lemma-weil-pbc-direct-image-filtered-colimit] (and the same argument\nwith $f$ the structure morphism gives the statement for\n$\\RGamma(X_{\\Et},-)$).\n*Step 2 (complexes).* For $K_i\\in D(X_{\\Et},\\kunZn)$ ([def-weil-pbc-derived-categories]) the\nhypercohomology spectral sequences of\n[def-weil-pbc-hypercohomology-filtrations] for the $K_i$ and for\n$\\bigoplus_iK_i$ have $E_2$-pages $R^pf_*\\mathcal H^q(K_i)$\nrespectively $R^pf_*\\mathcal H^q(\\bigoplus_iK_i)$, and\n$\\mathcal H^q(\\bigoplus_iK_i)=\\bigoplus_i\\mathcal H^q(K_i)$, so Step 1\nidentifies the second $E_2$-page with the direct sum of the first.\nThe truncation construction of the spectral sequence is compatible with\ndirect sums, so the spectral sequence of the direct sum is the direct\nsum of the spectral sequences; both converge in the half-plane sense of\n[lemma-weil-pbc-hypercohomology-convergence] (half-plane, since\n$p\\ge0$), and a direct sum of separated exhaustive filtrations is\nseparated and exhaustive. Hence the abutments agree, i.e.\n\n$$\n\\mathcal H^n\\Bigl(Rf_*\\bigoplus_iK_i\\Bigr)\n\\cong\\bigoplus_i\\mathcal H^n(Rf_*K_i)\n\\qquad(n\\in\\mathbf Z),\n$$\n\nwhich is the direct-sum statement; the finite-dimensionality hypothesis\n$\\kuncd(f)<\\infty$ of [def-kun-cd] is not needed for the argument\nand is retained only to match the classical formulation.",
+   "text": "Put $A=\\mathbf Z/n\\mathbf Z$. Every $A$-module sheaf is torsion as an abelian sheaf, since $n$ kills all sections. The natural higher-direct-image coefficient comparison identifies the underlying abelian sheaf of $R^qf_*M$ with $R^qf_*$ of the underlying sheaf. Thus $\\kuncd(f)<\\infty$ supplies $d\\geq0$ with $R^qf_*M=0$ in the module category for all $q>d$. For a set-indexed family $(M_i)$ of module sheaves, write its sum as the filtered colimit of finite partial sums, indexed by finite subsets of the index set (including the empty subset). Module colimits have the underlying abelian colimits. Apply the filtered-colimit direct-image theorem to these torsion sheaves. Finite sums commute with $R^qf_*$ by additivity (take the finite sum of injective resolutions). Hence the canonical map $\\bigoplus_iR^qf_*M_i\\to R^qf_*(\\bigoplus_iM_i)$ is an isomorphism for every $q\\geq0$, including $q=0$. All maps are $A$-linear; exact faithful forgetting reflects their invertibility.",
    "uses": [
+    "def-kun-cd",
+    "lem-sbc-higher-direct-image-forget-comparison",
     "lemma-weil-pbc-direct-image-filtered-colimit",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-hypercohomology-filtrations",
-    "lemma-weil-pbc-hypercohomology-convergence",
-    "def-kun-cd"
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-sp-left-exact-additive"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F11, lemma-finite-cd-mod-n-direct-sums, proof of (1) and (2)"
+   }
+  },
+  {
+   "text": "The categories of $A$-module sheaves on $X_{\\mathrm{Et}}$ and $Y_{\\mathrm{Et}}$ are Grothendieck abelian. Given arbitrary $E_i\\in D(X_{\\mathrm{Et}},A)$, choose representatives $K_i^\\bullet$ and K-injective resolutions $K_i^\\bullet\\to I_i^\\bullet$ with each $I_i^r$ injective. The termwise sum $L^\\bullet=\\bigoplus_i I_i^\\bullet$ represents the coproduct $\\bigoplus_i E_i$ by the Grothendieck derived-coproduct theorem. No common bound on the $E_i$ is imposed.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-kun-grothendieck-derived-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F11, lemma-finite-cd-mod-n-direct-sums, proof of (1) and (2)"
+   }
+  },
+  {
+   "text": "For an injective $J$, the resolution concentrated in degree zero computes $R^qf_*J$ by a complex concentrated in degree zero, so $R^qf_*J=0$ for $q>0$. In particular each $I_i^r$ is $f_*$-acyclic. Step 1 gives, for every $q>0$ and $r\\in\\mathbf Z$, $R^qf_*(L^r)\\cong\\bigoplus_iR^qf_*I_i^r=0$. Thus both $I_i^\\bullet$ and $L^\\bullet$ consist of $f_*$-acyclic objects. The module direct image is additive and left exact; its finite cohomological dimension was established in Step 1. The unbounded acyclic-complex theorem therefore represents $Rf_*E_i$ by $f_*I_i^\\bullet$ and $Rf_*(\\bigoplus_iE_i)$ by $f_*L^\\bullet$. Its natural comparison identifies $Rf_*$ of each coprojection with the corresponding map of these complexes.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "lem-kun-finite-cd-acyclic-complex",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F11, lemma-finite-cd-mod-n-direct-sums, proof of (1) and (2)"
+   }
+  },
+  {
+   "text": "The $q=0$ case of Step 1 is a natural isomorphism $\\bigoplus_i f_*I_i^r\\cong f_*(\\bigoplus_iI_i^r)$ for every degree $r$. Naturality with respect to the differentials makes these isomorphisms a complex isomorphism $\\bigoplus_i f_*I_i^\\bullet\\cong f_*L^\\bullet$, whose composite with the $i$th coprojection is $f_*$ of the $i$th coprojection into $L^\\bullet$. Apply localization. Since the target sheaf category is Grothendieck abelian, the derived-coproduct theorem identifies the left complex with $\\bigoplus_iRf_*E_i$. Step 3 identifies the right complex with $Rf_*(\\bigoplus_iE_i)$ and identifies its legs. This proves that the canonical coproduct comparison is invertible, proving (1).",
+   "uses": [
+    "lem-kun-grothendieck-derived-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F11, lemma-finite-cd-mod-n-direct-sums, proof of (1) and (2)"
+   }
+  },
+  {
+   "text": "For (2), work directly with $F=\\Gamma(X,-):\\operatorname{Mod}(X_{\\mathrm{Et}},A)\\to\\operatorname{Mod}(A)$, rather than identifying global sections with a scheme-theoretic structure morphism. This is additive because sections preserve addition of maps; it preserves kernels because module-sheaf kernels are sectionwise, so it is left exact. The cohomology coefficient comparison identifies the underlying group of $R^qF(M)$ with $H^q(X_{\\mathrm{Et}},M_{\\mathrm{ab}})$. Thus $\\kuncd(X)<\\infty$ supplies a uniform bound $d_X$ for $R^qF$ on all module sheaves. On the qcqs scheme $X$, cohomology commutes with filtered colimits, also for constant-ring module sheaves. For the filtered poset of finite subsets $J$ of the index set, put $M_J=\\bigoplus_{i\\in J}M_i$. Its colimit is $\\bigoplus_iM_i$. A finite sum of injective resolutions is an injective resolution of the finite sum (finite biproducts of injectives are injective), and applying the additive functor $F$ and taking cohomology commutes with this finite sum. Consequently $R^qF(M_J)=\\bigoplus_{i\\in J}R^qF(M_i)$. Taking the filtered colimit of these equalities proves $R^qF(\\bigoplus_iM_i)\\cong\\bigoplus_iR^qF(M_i)$ for all $q\\geq0$. Here finite sums commute by additivity, and the filtered-colimit comparison is the canonical one.",
+   "uses": [
+    "def-kun-cd",
+    "def-weil-pbc-global-sections-functor",
+    "lem-weil-pbc-etale-module-cohomology-forget",
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "def-sp-left-exact-additive",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F11, lemma-finite-cd-mod-n-direct-sums, proof of (1) and (2)"
+   }
+  },
+  {
+   "text": "Choose the complexes $I_i^\\bullet$ and $L^\\bullet$ as in Step 2 on $X$. For an injective sheaf $J$, its degree-zero injective resolution gives $R^qF(J)=0$ for $q>0$, so the terms $I_i^r$ are $F$-acyclic; the positive-degree comparisons of Step 5 imply that each $L^r=\\bigoplus_iI_i^r$ is $F$-acyclic. The unbounded acyclic-complex theorem, using the bound $d_X$, represents $R\\Gamma(X,E_i)$ by $\\Gamma(X,I_i^\\bullet)$ and $R\\Gamma(X,\\bigoplus_iE_i)$ by $\\Gamma(X,L^\\bullet)$, naturally on the coprojections. Write $\\theta_r:\\bigoplus_iF(I_i^r)\\to F(L^r)$ for the degree-zero comparison of Step 5 and $\\iota_i^r:I_i^r\\to L^r$ for a coprojection. Then $\\theta_r$ composed with the $i$th coprojection is $F(\\iota_i^r)$. Since $d_L^r\\iota_i^r=\\iota_i^{r+1}d_i^r$, applying $F$ shows that $F(d_L^r)\\theta_r=\\theta_{r+1}(\\bigoplus_iF(d_i^r))$, by equality on every coprojection. Thus the $\\theta_r$ give a complex isomorphism $\\bigoplus_i\\Gamma(X,I_i^\\bullet)\\to\\Gamma(X,L^\\bullet)$ preserving all coprojections. Termwise sums of $A$-module complexes compute coproducts in $D(A)$. Therefore this isomorphism is exactly the canonical map $\\bigoplus_iR\\Gamma(X,E_i)\\to R\\Gamma(X,\\bigoplus_iE_i)$, which proves (2). The argument also includes the empty family, whose sum and image are zero.",
+   "uses": [
+    "lem-kun-finite-cd-acyclic-complex",
+    "lem-pc-derived-module-direct-sums",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F11, lemma-finite-cd-mod-n-direct-sums, proof of (1) and (2)"
+   }
   }
  ],
  "proof_deps": [
+  "def-kun-cd",
+  "lem-sbc-higher-direct-image-forget-comparison",
   "lemma-weil-pbc-direct-image-filtered-colimit",
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-hypercohomology-filtrations",
-  "lemma-weil-pbc-hypercohomology-convergence",
-  "def-kun-cd"
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-kun-grothendieck-derived-coproducts",
+  "def-weil-pbc-direct-image",
+  "lem-kun-finite-cd-acyclic-complex",
+  "def-weil-pbc-global-sections-functor",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-pc-derived-module-direct-sums"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f11.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F11, lemma-finite-cd-mod-n-direct-sums, proof of (1) and (2)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image on etale sheaves with finite cohomological dimension preserves arbitrary direct sums",
+   "results": "; 8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, instAbelianLightCondMod, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, SheafOfModules.instAbelian, CategoryTheory.Sheaf.instIsGrothendieckAbelian, PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification",
+   "date": "2026-10-14",
+   "verdict": "no match: sheaf-category instances, not a derived direct-image coproduct theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functor preserves infinite coproducts under a uniform bound on higher derived functors and commutation of higher derived functors with direct sums",
+   "results": "; 8 hits: CategoryTheory.LocalizerMorphism.hasPointwiseRightDerivedFunctorAt_iff_of_isRightDerivabilityStructure, CategoryTheory.Functor.hasRightDerivedFunctor_of_hasPointwiseRightDerivedFunctor, CategoryTheory.LocalizerMorphism.Derives.hasPointwiseRightDerivedFunctor, CategoryTheory.LocalizerMorphism.hasPointwiseRightDerivedFunctor_iff_of_isRightDerivabilityStructure, CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit, CategoryTheory.Functor.HasPointwiseRightDerivedFunctor, CategoryTheory.Functor.hasPointwiseRightDerivedFunctor_of_inverts, CategoryTheory.Functor.hasLeftDerivedFunctor_of_hasPointwiseLeftDerivedFunctor",
+   "date": "2026-10-14",
+   "verdict": "no match: abstract derived-functor existence without the preservation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"PreservesColimits\"",
+   "results": "; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|finiteCohomological|etale.*[Cc]oproduct|[Cc]oproduct.*etale",
+   "results": "; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived pushforward of etale Z/n module sheaves commutes with direct sums when the morphism has finite cohomological dimension",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -72,5 +193,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-0f11",
+  "worker": "stage1",
+  "summary": "Replaced the invalid unbounded half-plane convergence argument by the actual proof of Stacks 0F11: sums of injective terms are acyclic, and finite cohomological dimension permits unbounded termwise computation. Retained the statement and all coefficient hypotheses; handled global sections separately and added coefficient-forgetting citations. Added two general homological-algebra statement-only nodes, after DAG, blueprint, project-source and Mathlib searches.",
+  "blueprint": "Steps 1 and 5 realize blueprint Step 1 (sheaves); Steps 2-4 and 6 repair blueprint Step 2 (complexes). The cited convergence node assumes a bounded-below K; p>=0 alone does not give convergence for arbitrary unbounded K. Stacks 0F11 supplies the correct finite-CD route."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-0d866c8cf",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-0d866c8cf (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, all cited statements and source places in full. Six-step proof matches Stacks 0F11; auxiliaries match 07K7 and 07D9. Checked hypotheses, coefficient categories, canonical coproduct maps, edge cases, duplicates and new cycles. Eight cross-unit tools accepted in review.md. No repairs needed."
+ }
 }

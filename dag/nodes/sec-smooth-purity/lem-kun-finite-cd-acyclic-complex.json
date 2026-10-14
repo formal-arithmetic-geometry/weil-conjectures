@@ -1,0 +1,110 @@
+{
+ "id": "lem-kun-finite-cd-acyclic-complex",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f11",
+   "place": "Proof, Step 2 (complexes): repair the unbounded convergence inference using finite cohomological dimension; Stacks 0F11 uses 07K7 here.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite cohomological dimension permits unbounded acyclic-complex computation",
+ "statement": "Let $\\mathcal A$ be a Grothendieck abelian category [def-sp-grothendieck-abelian], let $\\mathcal B$ be an abelian category [def-sp-abelian], and let $F:\\mathcal A\\to\\mathcal B$ be additive and left exact, with right derived functors $R^qF$ [def-sp-left-exact-additive]. Suppose there is an integer $d\\geq0$ such that $R^qF(M)=0$ for every $M\\in\\mathcal A$ and every $q>d$. Use cochain complexes, quasi-isomorphisms and derived categories as in [def-weil-abstract-derived-category]. Then the unbounded right derived functor $RF:D(\\mathcal A)\\to D(\\mathcal B)$ exists, with its natural comparison $\\alpha_L:Q_{\\mathcal B}(F(L^\\bullet))\\to RF(Q_{\\mathcal A}L^\\bullet)$. For every unbounded complex $L^\\bullet$ whose terms are $F$-acyclic [def-sp-acyclic], meaning $R^qF(L^r)=0$ for all $r\\in\\mathbf Z$ and $q>0$, $\\alpha_L$ is an isomorphism. In particular, these isomorphisms identify the derived images of maps of such complexes with the termwise images under $F$, by naturality of $\\alpha$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 07K7, lemma-unbounded-right-derived, assertions (1)-(2); apply with n=d+1 and enough injectives in A"
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-sp-abelian",
+  "def-sp-left-exact-additive",
+  "def-weil-abstract-derived-category",
+  "def-sp-acyclic"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A left exact functor of finite cohomological dimension has its unbounded right derived functor computed on any complex of acyclic objects",
+   "results": "; 8 hits: CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategory, HasDerivedCategory.standard, CategoryTheory.Functor.leftDerived",
+   "date": "2026-10-14",
+   "verdict": "no match: exact-functor localization and individual right derived functors do not give this acyclic-complex theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a functor with R^q F zero above a bound, applying F termwise to an unbounded complex of F-acyclic objects computes RF",
+   "results": "; 8 hits: CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.isGE_Q_obj_iff, CategoryTheory.Functor.rightDerived, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isLE, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors",
+   "date": "2026-10-14",
+   "verdict": "no match: injective-object vanishing and exact-functor localization are weaker"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "results": "; 12 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.instIsIsoAppToRightDerivedZero, CategoryTheory.NatTrans.rightDerived",
+   "date": "2026-10-14",
+   "verdict": "no match: rightDerived is an individual degree functor on the abelian category"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RightDerived\", \"IsZero\"",
+   "results": "; 1 hits: CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ",
+   "date": "2026-10-14",
+   "verdict": "no match: only vanishing on injective objects"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*cohomological|acyclic.*comput|comput.*acyclic|rightDerived.*[Aa]cyclic",
+   "results": "; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match in CategoryTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic|cohomological",
+   "results": "; 16 hits: Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: DerivedCategory files contain bounded-below derivability and localization infrastructure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A left exact functor of finite cohomological dimension is computed on unbounded complexes of acyclic objects",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "total right derived functor evaluated on a complex of acyclic objects with bounded derived dimension",
+   "results": "8 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.leftDerived, DerivedCategory.Q, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso",
+   "date": "2026-10-14",
+   "verdict": "no match: only localization or individual derived-functor infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"totalRightDerived\", \"IsIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesColimitsOfShape.*Discrete|HasCoproducts|preserves.*coproduct|acyclic.*(derived|dimension)|(derived|dimension).*acyclic",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-kun-0f11",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary"
+}
