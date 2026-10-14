@@ -3,54 +3,149 @@
  "blueprint": {
   "is": "lemma-weil-pbc-curve-normalization-constant",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Normalization and smooth constant case",
- "statement": "For a reduced curve, extension-invariance for $j_!\\underline{\\mathbf F_\\ell}$\nreduces through the finite normalization to the corresponding calculation on\na smooth curve, both for proper and affine opens and also when\n$\\ell=\\operatorname{char}k$.",
+ "statement": "For a reduced curve, extension-invariance for $j_!\\underline{\\mathbf F_\\ell}$\nreduces through the finite normalization to the corresponding calculation on\na smooth curve, both for proper and affine opens and also when\n$\\ell=\\operatorname{char}k$. More precisely, let k be algebraically closed, X a reduced separated finite-type k-scheme of dimension at most one, ν:Y→X its finite smooth normalization, j:U→X open and j′:Y×_X U→Y its pullback. For any prime ℓ, if the eight conditional assertions [def-weil-pbc-eight-curve-assertions] hold for (Y,j′_!F_ℓ), then they hold for (X,j_!F_ℓ). Here no restriction ℓ≠char(k) is imposed; extension-invariance retains the prime-to-characteristic or properness conditions of C6/C7.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-curve-normalization-constant.md",
   "place": "node lemma-weil-pbc-curve-normalization-constant, order 1181"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-extension-by-zero",
+  "def-sc-normalization",
+  "def-weil-pbc-constant-sheaf"
+ ],
  "proof": [
   {
-   "text": "Obtain the normalization monomorphism, its constructible cokernel and vanishing over V from exists_mono_lowerShriek_constantModSheaf_lowerStar. The source calculations are already the hypothesis H in this Lean interface.",
+   "text": "Fix an algebraically closed field k, a reduced separated finite-type k-scheme X of dimension at most one, an open j:U→X, and a prime ℓ. Take ν:Y→X to be the normalization. The reduced-curve normalization lemma provides a smooth separated finite-type Y of dimension at most one, a finite ν, and a dense open V over which ν is an isomorphism. Write U′=Y×_X U and j′:U′→Y. These data include empty and zero-dimensional components.",
+   "uses": [
+    "lem-weil-pbc-reduced-curve-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3Q, lemma-somewhat-easier, proof; Tags 03SG (lemma-even-easier), 0A5D (lemma-finite-pushforward-statements), 0GJA (lemma-restrict-to-open)"
+   }
+  },
+  {
+   "text": "Put R=ULift(Z/ℓZ). Since ℓ=0 in R, R/(ℓ)=R canonically, with underlying abelian group F_ℓ. The corresponding smooth calculation in this reduction is the assumption that all eight conditional assertions hold for F′=j′_!F_ℓ on Y. It is this assumption that the reduction transfers, not an assertion proved using this same reduction. We write the prime-field coefficients as R-modules; the canonical identification R/(ℓ)=R is scalarwise the identity, so the sheaves and their pullback comparison maps are the same. This reduction applies with this input in either characteristic branch.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3Q, lemma-somewhat-easier, proof; Tags 03SG (lemma-even-easier), 0A5D (lemma-finite-pushforward-statements), 0GJA (lemma-restrict-to-open)"
+   }
+  },
+  {
+   "text": "Set F=j_!F_ℓ and G=ν_*F′. Finite pushforward transfers all eight conditional assertions from (Y,F′) to (X,G). This is the module-valued finite-pushforward assertion, applied with coefficient ring R. No identification of module constructibility with constructibility for arbitrary infinite coefficient rings is made.",
+   "uses": [
+    "b3-finite-pushforward-module-assertions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3Q, lemma-somewhat-easier, proof; Tags 03SG (lemma-even-easier), 0A5D (lemma-finite-pushforward-statements), 0GJA (lemma-restrict-to-open)"
+   }
+  },
+  {
+   "text": "The normalization exact-sequence node supplies a natural monomorphism α:F→G with constructible cokernel Q supported on the finite nonnormal locus; over the dense normal isomorphism locus V its restriction is zero. It also supplies compatibility of this sequence, its boundary maps and its open restrictions with algebraically closed field extension. These are assertions of that node, not consequences inferred just from the existence of an unspecified monomorphism.",
    "uses": [
     "lemma-weil-pbc-normalization-exact-sequence"
    ],
-   "elementary": true
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3Q, lemma-somewhat-easier, proof; Tags 03SG (lemma-even-easier), 0A5D (lemma-finite-pushforward-statements), 0GJA (lemma-restrict-to-open)"
+   }
   },
   {
-   "text": "Use finite_pushforward_open_constantModSheaf_constructible for the direct-image sheaf G, then of_finite_pushforward_module to obtain its eight assertions from H.",
+   "text": "The field k is Noetherian since its ideals are 0 and k, so Spec k is Noetherian; finite type gives Noetherian X. Apply finite-pushforward-open-quotient-constant with coefficient ring R, quotient R/(ℓ)=R (a finite set), finite map ν and open j′. This proves G constructible as an underlying sheaf of sets. For each finite locally constant stratum of G, apply finite-local-abelian-forget to its underlying abelian sheaf; this supplies additive local trivializations and finite geometric stalks. Then apply finite-local-cyclic-module-forget with n=ℓ to its restricted R-module sheaf to obtain finite constant R-module values. These are exactly the stratumwise witnesses in def-weil-pbc-etale-constructible-sheaf. The constructible Q from step 4 has the same module constructibility: apply these two lemmas on its finite locally constant strata (the first is unnecessary if its constructibility is already read in abelian sheaves). Thus G and Q are constructible R-module sheaves. Here ℓ≥1 by primality, and empty strata are allowed by both lemmas. Moreover ℓ times id G is zero: every section is an R-module, and the scalar ℓ is zero in R. The same holds for Q. Thus α, G, Q and V satisfy every hypothesis of the finite-support-monomorphism assertion with coefficient ring R.",
    "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-finite-pushforward-open-quotient-constant",
-    "b3-finite-pushforward-module-assertions"
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-finite-local-abelian-forget",
+    "lem-weil-pbc-finite-local-cyclic-module-forget"
    ],
-   "elementary": true
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3Q, lemma-somewhat-easier, proof; Tags 03SG (lemma-even-easier), 0A5D (lemma-finite-pushforward-statements), 0GJA (lemma-restrict-to-open)"
+   }
   },
   {
-   "text": "Prove that the constant quotient sheaf is annihilated by ℓ using Ideal.Quotient.eq_zero_iff_mem. Additivity of extension by zero and direct image gives ℓ • id G = 0. Apply of_finite_support_mono to the normalization monomorphism.",
+   "text": "Apply the finite-support-monomorphism assertion to α. The eight assertions for G obtained in step 3 imply all eight for F. In particular it gives the actual canonical algebraically closed field-extension comparison in C6 when ℓ is prime to the characteristic and in C7 for proper X, including degrees zero and one, and gives the open-restriction surjection C8. No unconditional extension-invariance is claimed for an affine curve with characteristic-primary coefficients. For the proper and affine vanishing/finite branches on the normalization, finite-morphism permanence gives respectively proper Y over k and affine Y when X is affine. Thus the argument covers both geometric branches and both characteristic cases of the blueprint.",
    "uses": [
-    "b3-finite-support-mono-assertions"
+    "b3-finite-support-mono-assertions",
+    "lem-weil-pbc-finite-morphism-permanence"
    ],
-   "elementary": true
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3Q, lemma-somewhat-easier, proof; Tags 03SG (lemma-even-easier), 0A5D (lemma-finite-pushforward-statements), 0GJA (lemma-restrict-to-open)"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-normalization-exact-sequence",
-  "lem-weil-pbc-finite-pushforward-open-quotient-constant",
+  "lem-weil-pbc-reduced-curve-normalization",
   "b3-finite-pushforward-module-assertions",
-  "b3-finite-support-mono-assertions"
+  "lemma-weil-pbc-normalization-exact-sequence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-finite-pushforward-open-quotient-constant",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-finite-local-abelian-forget",
+  "lem-weil-pbc-finite-local-cyclic-module-forget",
+  "b3-finite-support-mono-assertions",
+  "lem-weil-pbc-finite-morphism-permanence"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "Stacks Project, Etale Cohomology",
-  "place": "Lemmas 0A5D, 0A3Q and 0GJA; explicit module-valued normalization reduction by B3"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3Q, lemma-somewhat-easier, proof; Tags 03SG (lemma-even-easier), 0A5D (lemma-finite-pushforward-statements), 0GJA (lemma-restrict-to-open)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology of extension by zero of a constant finite field sheaf on a reduced curve reduces to its finite normalization",
+   "results": "Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.basicOpen_subset_etaleLocus_iff, StandardEtalePair.instFormallyEtaleRing, Algebra.Etale.exists_subalgebra_fg, Algebra.formallyEtale_iff; types inspected: relative normalization or unrelated ring-theoretic etale results, not curve sheaf cohomology.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization",
+   "results": "AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization; types inspected: relative normalization or unrelated ring-theoretic etale results, not curve sheaf cohomology.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|constantModSheaf",
+   "results": "Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; types inspected: relative normalization or unrelated ring-theoretic etale results, not curve sheaf cohomology.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite direct image and finite support cokernel transfer invariance of etale cohomology on curves under algebraically closed field extensions",
+   "results": "Algebra.etaleLocus_eq_compl_support, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, Algebra.Etale.exists_subalgebra_fg, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.Etale.comp; types inspected: relative normalization or unrelated ring-theoretic etale results, not curve sheaf cohomology.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization reduction for etale cohomology of constant sheaves on curves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -118,5 +213,29 @@
   "result": "pass",
   "landing": "20261012T150950-L-2229548",
   "kind": "interface"
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lemma-weil-pbc-curve-normalization-constant",
+  "worker": "stage1",
+  "summary": "Made the blueprint reduction precise as the conditional transfer from the smooth normalization. Supplied constructibility, scalar annihilation and exact finite-support transfer using existing nodes. Kept characteristic-specific smooth calculations as pointers, since their seeded general-curve dependencies return to this item.",
+  "blueprint": "Realizes the normalization transfer in the second blueprint proof paragraph. The first paragraph supplies the smooth input elsewhere; this node states the reduction to that input, exactly as its imported statement says.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherianity needed for constructibility of finite direct image; no replacement of the curve-calculation route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-201469f4c",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-201469f4c (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Repaired step 5’s passage from set constructibility to module constructibility by citing two existing finite-local coefficient lemmas. Checked normalization hypotheses, canonical comparison maps, characteristic conditions, edge cases and cycles. Conditional transfer accepted; smooth calculations remain separate obligations. Findings in review.md; corrected whole item JSON under fixes/dag/nodes/sec-proper-base-change/.; 1 file(s) fixed by the reviewer"
  }
 }
