@@ -39,6 +39,7 @@ Zariski cover of `Z`.
 
 - `AlgebraicGeometry.Etale.isIso_fundamentalClassMap`: clause (c).
 - `AlgebraicGeometry.Etale.isIso_homology_zero_map_fundamentalClassMap`: clause (b), generation.
+- `AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_fundamentalClassMap`: finite reduction.
 -/
 
 @[expose] public section
@@ -142,6 +143,26 @@ isomorphism, `cl_i` being one (`AlgebraicGeometry.Etale.isIso_fundamentalClassMa
 theorem isIso_homology_zero_map_fundamentalClassMap (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
     IsIso ((_root_.DerivedCategory.homologyFunctor _ 0).map (fundamentalClassMap Λ c i aX hZ)) :=
+  have := isIso_fundamentalClassMap Λ c i aX hZ
+  inferInstance
+
+/-- Blueprint `prop-pur-regular-immersion-purity-compatibilities`: Compatibilities of purity for
+regular immersions
+
+**Finite reduction** (item 4). Reduction of coefficients along a quotient `Λ ⟶ Λ / J`
+(`AlgebraicGeometry.Etale.reductionModIdeal`, `K ↦ K ⊗ᴸ (Λ / J)`; for `Λ = A_{E,n}` and
+`J = ϖ^{n-1}` this is the reduction `A_{E,n} ⟶ A_{E,n-1}`) carries the purity isomorphism
+`cl_i : Λ_Z ≅ Ri^! (Λ_X(c)[2c])` to an isomorphism
+`Λ_Z ⊗ᴸ (Λ / J) ≅ Ri^! (Λ_X(c)[2c]) ⊗ᴸ (Λ / J)`: the reduction functor is applied to every
+step of the construction, which is natural in the coefficients.
+
+In this formalisation a single coefficient ring `Λ` carries the rank-one datum
+`AlgebraicGeometry.Etale.HasKummerClass`, so the reduction is expressed inside `D(Z_ét, Λ)`;
+comparing with the purity isomorphism of a separate rank-one datum on `Λ / J` would need a
+compatibility structure between the data of the tower, which is not part of the framework. -/
+theorem isIso_reductionModIdeal_map_fundamentalClassMap (aX : X ⟶ Spec (.of k)) [Smooth aX]
+    (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) (J : Ideal Λ) :
+    IsIso ((reductionModIdeal Λ Z J).map (fundamentalClassMap Λ c i aX hZ)) :=
   have := isIso_fundamentalClassMap Λ c i aX hZ
   inferInstance
 
