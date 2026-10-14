@@ -1,0 +1,118 @@
+{
+ "id": "lem-etale-projection-formula-triangle-closure",
+ "kind": "statement",
+ "title": "Projection-formula isomorphisms are closed under triangles",
+ "statement": "Let A be a Grothendieck abelian symmetric monoidal closed coefficient category with monoidal preadditivity and functorial flat resolutions, and assume etale upper star preserves flat objects. For any morphism p : X → Y, any M in D(X_et,A), and any distinguished triangle T in D(Y_et,A), if the projection-map components at T.obj₁ and T.obj₂ are isomorphisms, then the component at T.obj₃ is an isomorphism. The derived categories and canonical functors are as in [def-weil-pbc-derived-categories], [def-kun-projection-formula-map].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0F12",
+  "place": "Property (2) in the proof; Tag 014A, third-isomorphism theorem"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-kun-projection-formula-map"
+ ],
+ "proof": [
+  {
+   "text": "Give derived pushforward its right-adjoint shift structure and derived pullback the shift structure transported from exact inverse image. The derived adjunction commutes with these structures. For the tensor comparison, prove shift compatibility on a K-flat homotopy representative using its defining counit factorization; functorial flat resolution and invariance under isomorphism extend the calculation to every derived object. The generic projection-map shift theorem then makes the canonical projection map commute with shift.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Tensor, exact derived pullback, and its right adjoint are triangulated. The components of the projection transformation define a morphism between the images of T under the two triangulated functors; the third square follows from shift compatibility and naturality. Apply the third-isomorphism theorem to the first two component isomorphisms.",
+   "uses": [
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/0F12",
+  "place": "Property (2) in the proof; Tag 014A, third-isomorphism theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The isomorphism locus of the derived projection formula is closed under distinguished triangles",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no search verdict is asserted.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The isomorphism locus of a shift compatible natural transformation between triangulated functors is closed under distinguished triangles",
+   "results": "Eight generic triangulated-functor results, including map_distinguished and isTriangulated_iff_of_iso.",
+   "verdict": "Use these generic functor APIs; no exact projection-map closure statement.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isIso₃_of_isIso₁₂\"",
+   "results": "CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂ in Mathlib.CategoryTheory.Triangulated.Pretriangulated.",
+   "verdict": "Used after proving shift compatibility and constructing the triangle morphism.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*triangle|triangle.*projection",
+   "results": "Four hits for projections from a category of triangles.",
+   "verdict": "No projection-formula match.",
+   "date": "2026-10-15"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectionFormulaFiniteObjectwise",
+  "date": "2026-10-15",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-etale-exceptional-adjoint",
+   "place": "Proper-factor coproduct preservation in the first proof paragraph; the projection formula used there is proved on geometric fibres.",
+   "via": [
+    "lem-etale-proper-projection-formula-finite-objectwise",
+    "lem-etale-proper-projection-formula-finite",
+    "lem-etale-proper-derived-direct-image-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectionFormulaTriangleClosure",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectionFormulaTriangleClosure.lean",
+  "declaration": "AlgebraicGeometry.Etale.projection_triangle_isIso",
+  "statement": "theorem projection_triangle_isIso [UpperStarPreservesFlat A]\n    {X Y : Scheme.{u}} (p : X ⟶ Y)\n    (M : DerivedCategory (Sheaf X.smallEtaleTopology A))\n    (T : Pretriangulated.Triangle (DerivedCategory (Sheaf Y.smallEtaleTopology A)))\n    (ht : T ∈ Pretriangulated.distinguishedTriangles)\n    (h₁ : IsIso (((rightDerivedLowerStarProjectionMap A p).app M).app T.obj₁))\n    (h₂ : IsIso (((rightDerivedLowerStarProjectionMap A p).app M).app T.obj₂)) :\n    IsIso (((rightDerivedLowerStarProjectionMap A p).app M).app T.obj₃)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-a61cd",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261014T194627-L-1482207",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-a61cd",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261014T194627-L-1482207",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded DAG statements and compile successfully, including adapted importers and forced Proper re-export."
+ }
+}

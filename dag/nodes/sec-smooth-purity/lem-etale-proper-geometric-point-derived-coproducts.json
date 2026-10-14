@@ -1,0 +1,139 @@
+{
+ "id": "lem-etale-proper-geometric-point-derived-coproducts",
+ "kind": "statement",
+ "title": "Proper geometric-point derived pushforward preserves coproducts",
+ "statement": "Let Λ be a finite commutative ring, k an algebraically closed field, and p : X → Spec k a proper morphism. The right derived direct-image functor Rp_* on the ordinary unbounded derived categories of small-etale Λ-module sheaves preserves colimits of Discrete I for every I : Type (u+1), where schemes and k lie in Type u and coefficient modules in Type (u+1). No boundedness assumption on the input complexes is made. The derived categories and canonical functors are as in [def-weil-pbc-derived-categories], [def-weil-pbc-direct-image], [def-weil-scheme-morphism-properties].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0F11",
+  "place": "Lemma 59.96.3 and its proof, extended to a finite commutative coefficient ring as in 0F12"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "A proper k-scheme is quasi-compact, separated, and of finite type, hence has finite dimension. The finite coefficient ring is annihilated by a positive integer. The torsion cohomological-dimension bound over a separably closed field, together with the module-cohomology forgetful comparison, gives a uniform finite cohomological bound for module sheaves. Constancy of module sheaves on Spec k identifies these global-cohomology bounds with bounds on the higher direct images. Module-valued cohomology on the qcqs scheme commutes with filtered colimits; express sums as filtered colimits of finite sums to obtain commutation with sums.",
+   "uses": [
+    "thm-sc-finite-type-torsion-cd",
+    "lem-weil-pbc-etale-module-cohomology-forget",
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve every input complex by a K-injective complex with injective terms. The termwise direct sum represents the derived coproduct. Every term of this sum is direct-image-acyclic because positive higher direct images commute with sums and vanish on each injective summand.",
+   "uses": [
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-kun-grothendieck-derived-coproducts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite cohomological bound permits computing the unbounded derived functor on the sum complex by taking direct image termwise, although the sum need not be K-injective. Termwise direct image commutes with the sums by the degree-zero comparison. Localizing the resulting natural complex isomorphism identifies the canonical coproduct comparison and proves it invertible. The empty family, empty X, zero ring and zero complexes require no extra cases.",
+   "uses": [
+    "lem-kun-finite-cd-acyclic-complex",
+    "lem-kun-grothendieck-derived-coproducts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-sc-finite-type-torsion-cd",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-kun-finite-cd-acyclic-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/0F11",
+  "place": "Lemma 59.96.3 and its proof, extended to a finite commutative coefficient ring as in 0F12"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper derived direct image over an algebraically closed field preserves arbitrary coproducts of unbounded finite coefficient etale sheaf complexes",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no search verdict is asserted.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived direct image for a proper scheme over an algebraically closed field commutes with arbitrary coproducts of unbounded finite coefficient sheaf complexes",
+   "results": "Eight unrelated scheme-colimit and condensed-category instances.",
+   "verdict": "No exact Mathlib match. The existing proper-direct-image adjoint proof imports the projection formula and would create a cycle.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesColimitsOfShape\", \"rightDerivedFunctor\"",
+   "results": "No hits.",
+   "verdict": "No Mathlib match.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*coproduct|coproduct.*rightDerived",
+   "results": "No hits.",
+   "verdict": "No Mathlib match; the general blueprint finite-CD coproduct theorem has no Lean attachment, and its Z/n signature is not this finite-ring specialization.",
+   "date": "2026-10-15"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectionFormulaFiniteObjectwise",
+  "date": "2026-10-15",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-etale-exceptional-adjoint",
+   "place": "Proper-factor coproduct preservation in the first proof paragraph; the projection formula used there is proved on geometric fibres.",
+   "via": [
+    "lem-etale-proper-projection-formula-finite-objectwise",
+    "lem-etale-proper-projection-formula-finite",
+    "lem-etale-proper-derived-direct-image-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperGeometricPointDerivedCoproducts",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperGeometricPointDerivedCoproducts.lean",
+  "declaration": "AlgebraicGeometry.Etale.proper_geometricPoint_pushforward_preservesCoproducts",
+  "statement": "theorem proper_geometricPoint_pushforward_preservesCoproducts\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}\n    (p : X ⟶ Spec (.of k)) [IsProper p] :\n    ∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I)\n      (R((p)_*[ModuleCat.{u + 1} Λ]))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-a61cd",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261014T194627-L-1482207",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-a61cd",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261014T194627-L-1482207",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded DAG statements and compile successfully, including adapted importers and forced Proper re-export."
+ }
+}

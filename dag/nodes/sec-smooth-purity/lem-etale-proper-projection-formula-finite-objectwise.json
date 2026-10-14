@@ -15,27 +15,40 @@
  ],
  "proof": [
   {
-   "text": "A finite commutative ring is torsion, since the powers of its additive unit eventually repeat and a positive integer annihilates every element.",
-   "uses": [],
-   "elementary": true
+   "text": "It suffices to prove invertibility after exact inverse image to every algebraic-closure point. Indeed exact inverse image commutes with all derived homology functors; its composition with the geometric-point fibre functor identifies with the corresponding geometric stalk on Y. Geometric stalks reflect isomorphisms of homology sheaves, and derived homology reflects isomorphisms of unbounded complexes.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
   },
   {
-   "text": "Apply the unbounded proper projection formula for torsion coefficients to the two chosen derived-category objects. Exact inverse image on etale module sheaves identifies the derived upper-star tensor comparison with the canonical projection component; the adjoint-of-counit definitions give the displayed component.",
+   "text": "Base change g to an algebraically closed point s. The fibre morphism is proper. A finite ring is additive torsion, so the unbounded proper base-change theorem makes both exchange components invertible. Projection-map/base-change compatibility expresses the pullback of the original projection map, followed by the exchange and tensor-comparison isomorphisms, as a composite of the fibre projection map and canonical monoidal/commutative-square isomorphisms. Cancel the invertible comparison maps.",
    "uses": [
-    "lem-kun-0f0g",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-kun-proj-formula-natural",
+    "lem-kun-inverse-image-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The fibre projection component is invertible by the finite geometric-point projection theorem. Apply the preceding transport calculation first with an abstract algebraically closed field, then specialize to each algebraic-closure point of Y. Conservativity proves the original component invertible. Assemble the components twice by NatTrans.isIso_iff_isIso_app to obtain finite_projection_iso.",
+   "uses": [
+    "lem-etale-projection-formula-finite-geometric-point"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-kun-0f0g",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-kun-proj-formula-natural",
+  "lem-kun-inverse-image-monoidal",
+  "lem-etale-projection-formula-finite-geometric-point"
  ],
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/0F0G",
-  "place": "objectwise geometric-stalk specialization"
+  "place": "Lemma 59.96.6, geometric-fibre proof; implemented using proper derived base change, projection compatibility, and Tag 0F12 free generation"
  },
  "mathlib_searches": [
   {
@@ -114,11 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F2",
+  "reviewer": "X-a61cd",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261014T165955-L-2456294",
+  "landing": "20261014T194627-L-1482207",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files match the recorded DAG statements and compile successfully, including adapted importers and forced Proper re-export."
  }
 }

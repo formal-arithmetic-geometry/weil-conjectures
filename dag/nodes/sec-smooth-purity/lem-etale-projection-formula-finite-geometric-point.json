@@ -1,0 +1,136 @@
+{
+ "id": "lem-etale-projection-formula-finite-geometric-point",
+ "kind": "statement",
+ "title": "Finite proper projection formula over a geometric point",
+ "statement": "Let Λ be a finite commutative ring, k an algebraically closed field, and p : X → Spec k a proper morphism. For arbitrary unbounded derived complexes M of small-etale Λ-module sheaves on X and N on Spec k, the canonical component Rp_*M ⊗ᴸ N → Rp_*(M ⊗ᴸ Lp^*N) is an isomorphism. The derived categories and canonical functors are as in [def-weil-pbc-derived-categories], [def-kun-projection-formula-map].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0F12",
+  "place": "Lemma 59.96.5, specialized to a proper scheme over an algebraically closed field; Tag 0F0G geometric-fibre step"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-kun-projection-formula-map"
+ ],
+ "proof": [
+  {
+   "text": "The constant-sheaf counit for set-valued sheaves over Spec k is invertible. Forgetting module structure reflects isomorphisms and commutes with this counit, so the module-valued counit is invertible too. The sections functor at the terminal object is exact, by the separably closed point calculation. Deriving this counit and using the composition and identity isomorphisms shows that every N is isomorphic to D(constantSheaf)(K) for a complex K of Λ-modules.",
+   "uses": [
+    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant-sheaf derived functor is a left adjoint to the exact derived sections functor and therefore preserves all coproducts. Derived pullback is a left adjoint, and tensor with a fixed object preserves coproducts by monoidal closedness. The coproduct theorem for proper direct image over k gives preservation for the other composite. Naturality of the projection map identifies its component on a coproduct with the coproduct of the components.",
+   "uses": [
+    "lem-etale-proper-geometric-point-derived-coproducts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The degree-zero free rank-one module maps to the tensor unit, using the module ULift equivalence, the monoidal unit of sheafification, and the single-functor unit comparison. Shift compatibility gives the same statement for every integer shift. A shift of the tensor unit is dualizable: its tensor inverse is the opposite shift, by the shift-tensor isomorphism and unit constraint. The projection map for a monoidal left adjoint is invertible at every dualizable object. Apply that categorical theorem to the derived pullback adjunction.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The class of complexes K where the component at D(constantSheaf)(K) is invertible is closed under third vertices of distinguished triangles by the projection triangle theorem. It is closed under retracts by naturality and the retract property of isomorphisms. Apply derived-module free generation to these closure properties, coproduct closure, and the shifted free generators. Transport the resulting isomorphism along the chosen derived constant-sheaf isomorphism to N.",
+   "uses": [
+    "lem-etale-projection-formula-triangle-closure",
+    "lem-pc-derived-module-free-generation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "lem-etale-proper-geometric-point-derived-coproducts",
+  "lem-etale-projection-formula-triangle-closure",
+  "lem-pc-derived-module-free-generation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/0F12",
+  "place": "Lemma 59.96.5, specialized to a proper scheme over an algebraically closed field; Tag 0F0G geometric-fibre step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper projection formula for unbounded etale complexes with finite coefficients over an algebraically closed field",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no search verdict is asserted.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper projection formula for finite coefficient etale complexes over an algebraically closed point",
+   "results": "Eight unrelated standard-etale and differential algebra results.",
+   "verdict": "No exact Mathlib match; the generic dualizable projection theorem in the source library is used.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDualizable\", \"rightAdjointProjectionMap\"",
+   "results": "No hits.",
+   "verdict": "No Mathlib match.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*geometricPoint|geometricPoint.*projection",
+   "results": "No hits.",
+   "verdict": "No Mathlib match; repository search found no acyclic import of this field specialization.",
+   "date": "2026-10-15"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectionFormulaFiniteObjectwise",
+  "date": "2026-10-15",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-etale-exceptional-adjoint",
+   "place": "Proper-factor coproduct preservation in the first proof paragraph; the projection formula used there is proved on geometric fibres.",
+   "via": [
+    "lem-etale-proper-projection-formula-finite-objectwise",
+    "lem-etale-proper-projection-formula-finite",
+    "lem-etale-proper-derived-direct-image-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectionFormulaFiniteGeometricPoint",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectionFormulaFiniteGeometricPoint.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_projection_over_geometricPoint",
+  "statement": "theorem isIso_projection_over_geometricPoint\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}\n    (p : X ⟶ Spec (.of k)) [IsProper p]\n    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))\n    (N : _root_.DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology\n      (ModuleCat.{u + 1} Λ))) :\n    IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) p).app M).app N)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-a61cd",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261014T194627-L-1482207",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-a61cd",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261014T194627-L-1482207",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded DAG statements and compile successfully, including adapted importers and forced Proper re-export."
+ }
+}

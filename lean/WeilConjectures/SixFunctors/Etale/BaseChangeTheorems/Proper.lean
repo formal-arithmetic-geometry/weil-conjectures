@@ -6,6 +6,7 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
+public import Sheaf.AlgebraicGeometry.ProperUnboundedBaseChange
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine
 
 /-!
@@ -140,20 +141,7 @@ theorem Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring (hΛ : IsAddTors
       (Etale.DerivedCategory.Plus.torsionHomology_of_isTorsion Λ X hΛ K)
   NatIso.isIso_of_isIso_app _
 
-/-- **Proper base change on the unbounded derived categories**: if the coefficient ring `Λ` is
-torsion as an additive group, then for a cartesian square with `f` proper the derived base
-change map
-
-`Ex_* : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*`
-
-on the unbounded derived categories `D(-_ét, Λ)` is an isomorphism. This is the unbounded
-upgrade of `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`. It
-holds because the question is local on `Y`, and over a quasi-compact open of `Y` the proper
-map `f` has bounded fibre dimension, so `Rf_*` has finite cohomological dimension on torsion
-sheaves and the bounded below statement passes to unbounded complexes. -/
-theorem Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring (hΛ : IsAddTorsion Λ)
-    [IsProper f] (sq : IsPullback g' f' f g) :
-    IsIso (Etale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
-  sorry
+/- The unchanged unbounded theorem is publicly re-exported from
+`Sheaf.AlgebraicGeometry.ProperUnboundedBaseChange`. -/
 
 end AlgebraicGeometry
