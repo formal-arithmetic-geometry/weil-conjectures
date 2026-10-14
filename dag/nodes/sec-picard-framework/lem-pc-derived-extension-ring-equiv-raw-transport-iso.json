@@ -12,12 +12,60 @@
  ],
  "proof": [
   {
-   "text": "uniqueness of left derived functors.",
+   "text": "Pull the universal counits ε₀ and ε from homotopy categories to complex categories. Precomposition by the homotopy quotient is fully faithful: descend each test natural transformation uniquely, apply the original universal lift, and use faithfulness to prove uniqueness. The factorization isomorphisms mapHomotopyCategoryFactors and quotientCompQhIso identify the ordinary functor and localization with their complex versions.",
    "uses": [
     "def-weil-abstract-derived-category",
     "def-weil-module-base-change"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Restriction along each ring equivalence induces an equivalence of complexes. Its exact derived functor is also an equivalence: localize the complex equivalence and its inverse, transporting its unit and counit with mapDerivedCategoryFactors; Localization.isEquivalence then constructs the inverse on derived categories.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Precompose the R₀ universal pair by restriction from R, using isRightKanExtension_iff_precomp. The localization factorization mapDerivedCategoryFactors and isRightKanExtension_iff_postcomp₁ give a universal pair with derived functor restriction(R) followed by L₀.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use q and quotientCompQhIso to identify Q_B followed by E with Q_B followed by derived restriction(B). Precomposition by Q_B is fully faithful, hence preimageIso descends this identification to E itself. Therefore E is an equivalence.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Postcomposition by E preserves the R universal pair: RightExtension.postcompose₂ is an equivalence of extension categories, as follows from CostructuredArrow.isEquivalenceMap₂ and equivalence of whiskering by E. It preserves the terminal extension object. Reassociate to obtain a universal pair for L followed by E.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Whisker t by localization, then compose with q inverse and quotientCompQhIso to identify the two ordinary functors on R-complexes. Apply rightKanExtensionUniqueOfIso to the two universal pairs to get the derived comparison.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Whisker the derived comparison by Q_R and compose the restriction/localization and quotient/localization factorization isomorphisms. Reassociation gives exactly the requested natural isomorphism on complexes, hence its Nonempty assertion.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -26,10 +74,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "P1",
+  "group": "B4",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/06Y6",
-  "place": "Lemma 15.61.1"
+  "place": "derived scalar-extension transport; explicit universal-property proof using Mathlib Kan-extension and localization APIs"
  },
  "mathlib_searches": [
   {
@@ -96,10 +144,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261014T004110-L-2837253",
-  "kind": "interface",
+  "landing": "20261014T010834-L-3160639",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
