@@ -14,7 +14,7 @@
  },
  "kind": "statement",
  "title": "Locally constant finite type sheaves form a weak Serre subcategory",
- "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] and $B$ a commutative Noetherian ring [def-weil-pbc-noetherian-ring]. The full subcategory of sheaves of $\\underline B$-modules [def-weil-sheaf-of-modules-category] which are locally constant of finite type is closed under kernels and cokernels of morphisms between its objects, and under extensions in the abelian category of sheaves of $\\underline B$-modules. Here $\\underline B$ is the constant sheaf [def-weil-pbc-constant-sheaf]; locally constant of finite type means that locally on the site the sheaf is isomorphic to the constant sheaf associated to a finitely generated $B$-module. No existence of points of the site is assumed.",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] and $B$ a commutative Noetherian ring [def-weil-pbc-noetherian-ring]. The full subcategory of sheaves of $\\underline B$-modules [def-weil-sheaf-of-modules-category] which are locally constant of finite type is closed under kernels and cokernels of morphisms between its objects, and under extensions in the abelian category of sheaves of $\\underline B$-modules. Here $\\underline B$ is the constant sheaf [def-weil-pbc-constant-sheaf]; locally constant of finite type means that locally on the site the sheaf is isomorphic to the constant sheaf associated to a finitely generated $B$-module [def-weil-finitely-generated-module]. No existence of points of the site is assumed.",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tag 093U, lemma-kernel-finite-locally-constant (3)"
@@ -23,11 +23,115 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-constant-sheaf",
   "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-sites-and-cohomology"
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix any object $U$. To test local constancy, work on $\\mathcal C/U$, whose final object is $U\\to U$. Trivialize both sheaves by successive coverings and bind the covers using the site axioms. Relocalization identifies the resulting slices with $\\mathcal C/V$. Restriction preserves kernels because they are sectionwise. It preserves epimorphisms: for a section over $V/U$, the general-site epimorphism theorem supplies a covering of $V$ and local lifts, and that same covering is a covering of $V/U$ in the slice. The faithful exact forgetful functor identifies module-sheaf exactness with underlying abelian-sheaf exactness. Thus restriction preserves short exact sequences and hence kernels and cokernels in these abelian categories. The canonical restriction comparison identifies further restrictions of constants with constants. Thus for the kernel and cokernel problem we may assume the two sheaves are $\\underline M,\\underline N$ with $M,N$ finitely generated.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-constant-restriction",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093U, lemma-kernel-finite-locally-constant (3), kernel/cokernel paragraph"
+   }
+  },
+  {
+   "text": "Apply the local-morphism lemma to $\\varphi:\\underline M\\to\\underline N$. On every nondegenerate member of its covering sieve it becomes $\\underline f$ for a linear map $f:M\\to N$. Sectionwise exactness of the constant-module functor applied to $0\\to\\ker f\\to M\\to\\operatorname{im}f\\to0$ and $0\\to\\operatorname{im}f\\to N\\to\\operatorname{coker}f\\to0$ identifies the kernel and cokernel sheaves with $\\underline{\\ker f}$ and $\\underline{\\operatorname{coker}f}$. The Noetherian submodule theorem makes $\\ker f$ finitely generated. Images of generators of $N$ generate $\\operatorname{coker}f$. On an object covered by the empty sieve every sheaf has only the zero section, so its restriction is the zero constant module and already satisfies the desired conclusion. These local descriptions prove both closure clauses without assuming points.",
+   "uses": [
+    "lem-weil-pbc-site-constant-morphism-local",
+    "lem-weil-pbc-constant-module-section-properties",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093U, lemma-kernel-finite-locally-constant (3), kernel/cokernel paragraph"
+   }
+  },
+  {
+   "text": "Now start with $0\\to\\mathcal F\\xrightarrow{i}\\mathcal E\\xrightarrow{p}\\mathcal G\\to0$ and restrict first to each member of a cover trivializing $\\mathcal F$, and then to the members of a cover trivializing $\\mathcal G$. Cover composition and relocalization identify these restrictions with slices of the original site. The sectionwise-kernel and local-surjectivity argument of step 1 gives exact restriction, including for module sheaves by the exact forgetful functor; hence the short exact module sequence remains short exact on each slice. The constant-restriction comparisons write its outer terms as $\\underline M$ and $\\underline N$, with $M,N$ finitely generated. Choose finitely many generators $y_1,\\ldots,y_t$ of $N$, define $q:B^t\\twoheadrightarrow N$, and put $K=\\ker q$. The Noetherian submodule theorem applied to $B^t$ gives finite generation of $K$. Sectionwise constant exactness gives $0\\to\\underline K\\to\\underline{B^t}\\xrightarrow{\\underline q}\\underline N\\to0$. This includes $t=0$ when $N=0$.",
+   "uses": [
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-constant-restriction",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-constant-module-section-properties",
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093U, lemma-kernel-finite-locally-constant (3), kernel/cokernel paragraph"
+   }
+  },
+  {
+   "text": "The underlying abelian-sheaf map $p$ is epic, since the exact forgetful functor preserves its cokernel. By the general-site epimorphism theorem each of the finitely many constant generator sections $y_j$ lifts locally to a section $s_j$ of $\\mathcal E$. Successively refine these finitely many coverings; restriction and relocalization preserve all previously obtained lifts. The formula $\\ell(a_1,\\ldots,a_t)=\\sum_j a_js_j$ defines a module-sheaf map $\\ell:\\underline{B^t}\\to\\mathcal E$ with $p\\ell=\\underline q$: first define it on the constant presheaf, then extend uniquely by the constant sheafification universal property. Equality follows by checking the free generators. For $t=0$ no refinement is necessary.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-site-constant-restriction",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093U, lemma-kernel-finite-locally-constant (3), extension paragraph"
+   }
+  },
+  {
+   "text": "Since $p\\ell|_{\\underline K}=0$, the kernel property gives $g:\\underline K\\to\\underline M$ with $ig=\\ell|_{\\underline K}$. Define $a:\\underline K\\to\\underline M\\oplus\\underline{B^t}$ by $a(k)=(-g(k),k)$ and $b(m,v)=i(m)+\\ell(v)$. Then $ba=0$. Every section $e$ of $\\mathcal E$ is locally in the image of $b$: lift $p(e)$ along $\\underline q$ (the constant sequence is even sectionwise exact), subtract $\\ell(v)$ and use $\\ker p=\\underline M$. Conversely, if $b(m,v)=0$, then $q(v)=0$, so $v$ is a section of $\\underline K$ and injectivity of $i$ gives $m=-g(v)$. Thus $\\ker b=\\operatorname{im}a$ and $b$ is epic by local surjectivity. Kernels are sectionwise and cokernels are sheafified sectionwise cokernels, so this chase yields $\\mathcal E\\simeq\\operatorname{coker}a$; no splitting of the original extension was asserted.",
+   "uses": [
+    "lem-weil-pbc-constant-module-section-properties",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093U, lemma-kernel-finite-locally-constant (3), extension paragraph"
+   }
+  },
+  {
+   "text": "The source of $g$ is a constant finitely generated module sheaf, so the local-morphism lemma gives a further cover on which $g=\\underline h$ for a linear map $h:K\\to M$. On it, $a$ is the constant map $k\\mapsto(-h(k),k)$ to $M\\oplus B^t$. For the direct sum, the constant maps of the two inclusions and projections satisfy the biproduct identities because the constant-module functor is additive: these identities hold on the constant presheaves and hence after sheafification. They give the canonical isomorphism $\\underline{M\\oplus B^t}\\simeq\\underline M\\oplus\\underline{B^t}$. For the cokernel, apply sectionwise constant exactness to $0\\to\\operatorname{im}a_0\\to M\\oplus B^t\\to P\\to0$ and to $0\\to\\ker a_0\\to K\\to\\operatorname{im}a_0\\to0$, where $a_0(k)=(-h(k),k)$. The image of the constant map $a_0$ is thus the kernel of the constant quotient to $P$, which is sectionwise surjective. Consequently the presentation in step 5 becomes $\\mathcal E\\simeq\\underline P$ with $P=(M\\oplus B^t)/\\{(-h(k),k):k\\in K\\}$. The images of generators of $M$ and the free basis generate $P$, so it is finitely generated. Degenerate members have zero restriction as in step 2. Bind the successive covers: this proves local constancy of finite type for $\\mathcal E$ on every object of the original site and proves extension closure.",
+   "uses": [
+    "lem-weil-pbc-site-constant-morphism-local",
+    "lem-weil-pbc-constant-module-section-properties",
+    "lem-weil-pbc-site-constant-restriction",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093U, lemma-kernel-finite-locally-constant (3), extension paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-site-constant-morphism-local",
+  "lem-weil-pbc-site-constant-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093U, lemma-kernel-finite-locally-constant (3); pushout expanded as an explicit cokernel"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -105,10 +209,108 @@
    "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod; CompHausLike.LocallyConstantModule.functor; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafCompHaus; CondensedMod.IsSolid; instAbelianCondensedMod; CondensedMod.ofSheafStonean; instAbelianLightCondMod",
    "date": "2026-10-14",
    "verdict": "no match: hits do not state the arbitrary-site finite-type sheaf assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]ocally[Cc]onstant|[Ll]ocally[Cc]onstant[Ss]heaf",
+   "results": "0 hits: none",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits provide constant sheaf adjunctions, specialized condensed constructions or finite-presentation definitions, not this arbitrary-site assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*(hom|map)|[Ll]ocally[Cc]onstant.*[Mm]orphism",
+   "results": "6 hits: Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits provide constant sheaf adjunctions, specialized condensed constructions or finite-presentation definitions, not this arbitrary-site assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map of locally constant module sheaves with finite type source is locally a constant linear map",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On any small site a morphism between locally constant module sheaves with finitely generated source is locally induced by a homomorphism of constant modules",
+   "results": "8 hits: CompHausLike.LocallyConstantModule.functor; CompHausLike.LocallyConstantModule.functor_obj_val; CompHausLike.LocallyConstantModule.functor_map_val; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier; LightCondMod.LocallyConstant.functor; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.LocallyConstant.functor",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits provide constant sheaf adjunctions, specialized condensed constructions or finite-presentation definitions, not this arbitrary-site assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\"",
+   "results": "12 hits: CategoryTheory.constantSheaf; CategoryTheory.constantSheafAdj; CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant; CategoryTheory.constantSheafAdj_counit_app; CategoryTheory.constantSheafAdj_counit_w; CategoryTheory.instAdditiveSheafConstantSheaf; CategoryTheory.constantSheafΓAdj; CategoryTheory.GrothendieckTopology.IsLocalSite.coconstantSheaf",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits provide constant sheaf adjunctions, specialized condensed constructions or finite-presentation definitions, not this arbitrary-site assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type locally constant sheaves of modules over a Noetherian ring on a site are closed under kernels cokernels and extensions",
+   "results": "8 hits: CompHausLike.LocallyConstantModule.functor; LightCondensed.instIsGrothendieckAbelianLightCondMod; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafCompHaus; instAbelianLightCondMod; CondensedMod.ofSheafStonean; instAbelianCondensedMod; CondensedMod.ofSheafProfinite",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits provide constant sheaf adjunctions, specialized condensed constructions or finite-presentation definitions, not this arbitrary-site assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms from a constant finitely presented module sheaf to a constant module sheaf locally come from module homomorphisms on an arbitrary Grothendieck site",
+   "results": "8 hits: SheafOfModules.IsFinitePresentation; SheafOfModules.isFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.Presentation.mapGenerators; PresheafOfModules.homEquivOfIsLocallyBijective; SheafOfModules.Presentation.map_π_eq; SheafOfModules.Presentation.map",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits provide constant sheaf adjunctions, specialized condensed constructions or finite-presentation definitions, not this arbitrary-site assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]ocally[Cc]onstant|[Ll]ocally[Cc]onstant[Ss]heaf",
+   "results": "0 hits: none",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits provide constant sheaf adjunctions, specialized condensed constructions or finite-presentation definitions, not this arbitrary-site assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*(hom|map)|[Ll]ocally[Cc]onstant.*[Mm]orphism",
+   "results": "6 hits: Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits provide constant sheaf adjunctions, specialized condensed constructions or finite-presentation definitions, not this arbitrary-site assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map of locally constant module sheaves with finite type source is locally a constant linear map",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On any small site a morphism between locally constant module sheaves with finitely generated source is locally induced by a homomorphism of constant modules",
+   "results": "8 hits: CompHausLike.LocallyConstantModule.functor; CompHausLike.LocallyConstantModule.functor_obj_val; CompHausLike.LocallyConstantModule.functor_map_val; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier; LightCondMod.LocallyConstant.functor; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.LocallyConstant.functor",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits provide constant sheaf adjunctions, specialized condensed constructions or finite-presentation definitions, not this arbitrary-site assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\"",
+   "results": "12 hits: CategoryTheory.constantSheaf; CategoryTheory.constantSheafAdj; CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant; CategoryTheory.constantSheafAdj_counit_app; CategoryTheory.constantSheafAdj_counit_w; CategoryTheory.instAdditiveSheafConstantSheaf; CategoryTheory.constantSheafΓAdj; CategoryTheory.GrothendieckTopology.IsLocalSite.coconstantSheaf",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits provide constant sheaf adjunctions, specialized condensed constructions or finite-presentation definitions, not this arbitrary-site assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type locally constant sheaves of modules over a Noetherian ring on a site are closed under kernels cokernels and extensions",
+   "results": "8 hits: CompHausLike.LocallyConstantModule.functor; LightCondensed.instIsGrothendieckAbelianLightCondMod; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafCompHaus; instAbelianLightCondMod; CondensedMod.ofSheafStonean; instAbelianCondensedMod; CondensedMod.ofSheafProfinite",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits provide constant sheaf adjunctions, specialized condensed constructions or finite-presentation definitions, not this arbitrary-site assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms from a constant finitely presented module sheaf to a constant module sheaf locally come from module homomorphisms on an arbitrary Grothendieck site",
+   "results": "8 hits: SheafOfModules.IsFinitePresentation; SheafOfModules.isFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.Presentation.mapGenerators; PresheafOfModules.homEquivOfIsLocallyBijective; SheafOfModules.Presentation.map_π_eq; SheafOfModules.Presentation.map",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits provide constant sheaf adjunctions, specialized condensed constructions or finite-presentation definitions, not this arbitrary-site assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-nilpotent-reduction-lissity",
   "by": "worker",
@@ -124,5 +326,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-locally-constant-derived-serre",
+  "worker": "stage1",
+  "summary": "Followed Tag 093U for the general-site Noetherian coefficient assertion. Restriction exactness is derived explicitly from sectionwise kernels and local surjectivity, avoiding the existing restriction node whose source incorrectly identifies Tag 03DJ. Reused constant section exactness and Noetherian submodule finiteness; expanded the extension pushout with its signs and kernel/surjectivity chase. Local constant-map attachment and the Mathlib constant-restriction comparison are recorded in their nodes.",
+  "blueprint": "Realizes amplification-proper proof (c), finite lisse cohomology reductions through nilpotent-reduction-lissity and normalized-constructible-local-effectivity; kernel/cokernel and extension stability of locally constant finite type sheaves.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-21bdea089",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-21bdea089 (reviewer sub-agent of L); spot-checked: Read the full mathematics against Stacks 093U, 093S, 093J, 00XR and Mathlib sources. Closure proof and both new statements hold, including nonsplit and degenerate cases. Corrected the mis-sourced restriction citation, restored new-node metadata, and recorded the verified local-morphism attachment. Statements remain unchanged. Detailed checks are in review.md; three corrected JSON files are under fixes/dag/nodes/sec-proper-base-change.; 3 file(s) fixed by the reviewer"
  }
 }
