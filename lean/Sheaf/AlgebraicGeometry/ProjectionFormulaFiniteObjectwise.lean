@@ -6,6 +6,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-! An objectwise split of the finite proper projection formula.
 
