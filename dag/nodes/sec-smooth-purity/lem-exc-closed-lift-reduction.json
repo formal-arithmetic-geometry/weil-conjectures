@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-exc-closed-lift-reduction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Reduction of the ind-etale lift",
@@ -18,37 +18,114 @@
  ],
  "proof": [
   {
-   "text": "The construction of [def-exc-ind-etale-closed-lift] is ind-etale by\n[lem-exc-closed-lift-filtered]. Write $\\overline C$ as a filtered colimit of\netale finite-presentation $A/I$-algebras. Every term lifts by\n[lem-exc-etale-algebra-lift]; these lifts are objects of the indexing\ncategory. Every element of $\\overline C$ therefore comes from $C$, so\n$C/IC\\to\\overline C$ is surjective. Both its source and target are ind-etale\nover $A/I$. Their relative map is ind-etale and hence flat by the stability\nlemma for ind-etale algebras.",
+   "text": "Write $C=H_A(\\overline C)$ and $\\epsilon:C\\to\\overline C$ for the cocone map of [def-exc-ind-etale-closed-lift]. Since the structural map $A\\to\\overline C$ factors through $A/I$, $\\epsilon$ kills every product $ac$ with $a\\in I$, and hence kills $IC$. Thus it factors uniquely through a ring map $r:R=C/IC\\to\\overline C$, the specified reduction map. The indexing category is small by its presentation model and filtered by [lem-exc-closed-lift-filtered]; its terms are etale of finite presentation, so $C/A$ is ind-etale by [def-weil-pbc-ind-etale-algebra].",
    "uses": [
     "def-exc-ind-etale-closed-lift",
     "lem-exc-closed-lift-filtered",
-    "lem-exc-etale-algebra-lift"
+    "def-weil-pbc-ind-etale-algebra"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097P, lemma-lift-ind-etale, construction of C and induced quotient map"
+   }
   },
   {
-   "text": "Let $J$ be the kernel of the preceding surjection $C/IC\\to\\overline C$.\nFlatness of the quotient implies that for each $x\\in J$ one has $x=ex$ for\nan $e\\in J$: tensor the injection $(x)\\subset C/IC$ with the quotient to\nobtain $(x)\\cap J=J(x)$. Lift $e$ to $C$. The element $1-e$ maps to one in\n$\\overline C$, so [lem-exc-closed-lift-units] makes it invertible in\n$C/IC$. Thus $x=0$, proving the reduction isomorphism.",
+   "text": "Choose a small filtered presentation $\\overline C=\\varinjlim_i\\overline B_i$ by etale finite-presentation $A/I$-algebras, using [def-weil-pbc-ind-etale-algebra]. The algebra colimit is also the ring colimit: a compatible family of ring maps has a common restriction from $A/I$ because the filtered category is nonempty and every two indices have a common successor. Give the target ring this common $A/I$-algebra structure; the algebra universal property gives the unique induced ring map, since any ring map extending the cocone respects that structure. By [lem-pc-filtered-colimit-commrings-elementwise], each $z\\in\\overline C$ is the image of some $\\overline b\\in\\overline B_i$. By [lem-exc-etale-algebra-lift], choose an etale finite-presentation $A$-algebra $B_i$ and the specified isomorphism $B_i/IB_i\\cong\\overline B_i$. Choose $b\\in B_i$ reducing to $\\overline b$. Write $q_i:B_i\\to\\overline B_i\\to\\overline C$ for the composite. Finite presentation gives a presentation-model algebra $P_i$ and an $A$-algebra isomorphism $u:P_i\\to B_i$. Then $(P_i,q_i\\circ u)$ is an object of the indexing category in [def-exc-ind-etale-closed-lift]. Its structure map sends $u^{-1}(b)$ to an element of $C$ whose image under $\\epsilon$ is $q_i(u(u^{-1}(b)))=z$. Hence $\\epsilon$, and therefore $r$, is surjective.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "lem-exc-etale-algebra-lift",
+    "def-exc-ind-etale-closed-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097P, lemma-lift-ind-etale, third proof paragraph: lift the etale stages and obtain surjectivity"
+   }
+  },
+  {
+   "text": "The base change of $A\\to C$ along $A\\to A/I$ is $A/I\\to R$: the isomorphism $C\\otimes_A(A/I)\\cong C/IC$ sends $c\\otimes\\overline a$ to $ac\\bmod IC$, with inverse $c\\bmod IC\\mapsto c\\otimes1$; these are well-defined inverse ring maps by balancing and the quotient relations. Base-change stability in [lem-weil-pbc-ind-etale-stability] makes $R$ ind-etale over $A/I$. The target $\\overline C$ is ind-etale over $A/I$ by hypothesis, and $r$ is an $A/I$-algebra map. The relative-map clause of that same node makes $r$ ind-etale, hence weakly etale. By the explicit flatness clause in [def-weil-pbc-ind-etale-algebra], $\\overline C$ is flat as an $R$-module via $r$.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097P, lemma-lift-ind-etale, third proof paragraph: permanence and flatness"
+   }
+  },
+  {
+   "text": "Put $J=\\ker r$. Surjectivity gives an $R$-linear ring isomorphism $R/J\\to\\overline C$, $[a]\\mapsto r(a)$: its inverse sends $z$ to the class of any preimage, independently of the choice since two preimages differ by $J$. Thus $R/J$ is flat over $R$: for any injection of $R$-modules, tensoring this isomorphism identifies the induced tensor map with that for the flat module $\\overline C$. Apply [lem-exc-flat-quotient-element-equation] to obtain, for each $x\\in J$, an $e\\in J$ with $x=xe$.",
+   "uses": [
+    "lem-exc-flat-quotient-element-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097P, lemma-lift-ind-etale, third proof paragraph; Algebra Tag 04PS, implication (1) => (5)"
+   }
+  },
+  {
+   "text": "For such $e$, choose $\\widetilde e\\in C$ with image $e$ in $R=C/IC$. Since $e\\in\\ker r$, $\\epsilon(\\widetilde e)=0$ and $\\epsilon(1-\\widetilde e)=1$. By [lem-exc-closed-lift-units], $1-\\widetilde e$ is invertible in $C$. Reducing its inverse modulo $IC$ shows that $1-e$ is invertible in $R$. But $x=xe$ implies $x(1-e)=0$; multiplication by that inverse gives $x=0$. Thus $\\ker r=0$. Together with surjectivity this proves that the specified map $r$ is an isomorphism.",
    "uses": [
     "lem-exc-closed-lift-units"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097P, lemma-lift-ind-etale, third proof paragraph: invert the kernel annihilator"
+   }
   }
  ],
  "proof_deps": [
   "def-exc-ind-etale-closed-lift",
   "lem-exc-closed-lift-filtered",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-pc-filtered-colimit-commrings-elementwise",
   "lem-exc-etale-algebra-lift",
-  "lem-exc-closed-lift-units",
-  "lem-weil-pbc-ind-etale-stability"
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-exc-flat-quotient-element-equation",
+  "lem-exc-closed-lift-units"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-lift-reduction.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 097P, lemma-lift-ind-etale, construction and third proof paragraph; flat-quotient kernel equation from Algebra Tag 04PS"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of the colimit of etale A algebras mapping to an ind etale A/I algebra by I is isomorphic to that algebra",
+   "results": "Algebra.FormallyEtale.comp_bijective; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; StandardEtalePair.instFormallyEtaleRing; StandardEtalePair.homEquiv; StandardEtalePair.lift; StandardEtalePresentation.toPresentation_val; Algebra.FormallyEtale.iff_comp_bijective; StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation",
+   "date": "2026-10-14",
+   "verdict": "no match for the closed-lift reduction theorem; formal-etale hits require nilpotent ideals and do not state this construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical reduction of the universal ind etale lift along a quotient of rings is an isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The universal etale approximation of an ind etale quotient algebra reduces isomorphically modulo the ideal",
+   "results": "StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; StandardEtalePair.instFormallyEtaleRing; StandardEtalePair.homEquiv; StandardEtalePair.lift; StandardEtalePresentation.toPresentation_val; Algebra.FormallyEtale.comp_bijective; StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation; StandardEtalePair.homEquiv_apply_coe",
+   "date": "2026-10-14",
+   "verdict": "no match for the closed-lift reduction theorem; formal-etale hits require nilpotent ideals and do not state this construction"
+  },
+  {
+   "tool": "grep",
+   "query": "ClosedLift|closedLift|closed_lift|IndEtale",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match for the closed-lift reduction theorem; formal-etale hits require nilpotent ideals and do not state this construction"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -79,5 +156,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-open-closed-triangle"
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-exc-closed-lift-reduction",
+  "worker": "stage1",
+  "summary": "Expanded the original surjectivity/flatness/kernel argument into five complete steps, retaining the exact statement. Added one Mathlib leaf for the flat-quotient element equation, and reused the existing filtered ring-colimit and ind-etale stability nodes. No Lean work.",
+  "blueprint": "First blueprint proof paragraph is realized by steps 1-3; second paragraph by steps 4-5. This auxiliary node is not the unit statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic base-change, relative-map and flatness stability used exactly as the blueprint requests; no node of the open-closed unit replaces this algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ind-etale-stability"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-c13a45073",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-c13a45073 (reviewer sub-agent of L); spot-checked: Read the full item, sole new node, cited statements and source passages. All five steps hold for arbitrary ideals; the new leaf exactly matches Ideal.exists_eq_mul_of_pure. No duplicate, missing hypothesis or dependency cycle found. Accepted ind-etale stability as a generic tool. Target coefficients and base-change morphisms remain unchanged. Detailed checks are in review.md."
+ }
 }
