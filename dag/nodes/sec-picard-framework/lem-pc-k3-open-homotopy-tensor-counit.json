@@ -1,0 +1,124 @@
+{
+ "id": "lem-pc-k3-open-homotopy-tensor-counit",
+ "kind": "statement",
+ "title": "Homotopy tensor counit for the explicit inverse-image open square",
+ "statement": "Let f:X→Y be a scheme morphism [def-pc-scheme], V an open of Y, U=f⁻¹V, and f₀:U→V. Assume the common derived-category instances and additive tensor pullbacks used to name the comparisons. Put F=f_*, rX=restriction to U, b and b₀ the homotopy adjunctions induced by the chosen tensor-pullback adjunctions [lem-pc-module-pullback-adjunction], e_h the sectionwise homotopy direct-image comparison [def-pc-e2-open-homotopy-direct-image-iso], and t_h the constructed homotopy tensor restriction comparison [def-pc-open-pinned-single-tensor-restriction-iso]. For every homotopy object I on X, t_h⁻¹(F_h I) ≫ rX_h(b.counit(I)) = tensorPullback(f₀)_h(e_h(I)) ≫ b₀.counit(rX_h I). Every arrow lies in a homotopy category: no localization, right-derived unit or derived adjunction counit occurs.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-open-pinned-single-tensor-restriction-iso",
+  "def-pc-e2-open-homotopy-direct-image-iso",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Tags 08FE, 08HY and 0D5S; sectionwise mate calculation in step 1 of lem-pc-e2-open-pullback-counit-representative"
+ },
+ "proof": [
+  {
+   "text": "Expand openPinnedTensorRestrictionIso into the inverse open comparison on X, inverse target composition comparison, source composition comparison transported along morphismRestrict_ι, and the open comparison on Y. Tensor composition comparisons are conjugates of pushforwardComp under the chosen tensor adjunctions. The open comparisons are left-adjoint uniqueness comparisons with exact restriction. The mate of the inverse composite is therefore pushforwardComp, transport across the commuting square, and inverse pushforwardComp with the restriction identifications inserted. On an open W of V these identify the same sections over f inverse image W, so this is singleComplexOpenUnderivedDirectImageIso.",
+   "uses": [
+    "def-pc-open-pinned-single-tensor-restriction-iso",
+    "def-pc-tensor-pullback-composition-iso",
+    "def-pc-e2-open-underived-direct-image-iso",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the counit identity of the mates correspondence to the equality of comparisons from the first step. Apply the termwise complex functors, whose counits act degreewise by the module counits. All maps commute with differentials by naturality. Descend through the homotopy quotient and insert the canonical mapHomotopyCategoryCompIso factors in the two named comparisons. Their composition identities give the stated equation for arbitrary I, including the zero complex and empty or top opens; neither boundedness nor flatness is used.",
+   "uses": [
+    "def-pc-e2-open-homotopy-direct-image-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-e2-open-homotopy-direct-image-iso",
+  "def-pc-e2-open-underived-direct-image-iso",
+  "def-pc-open-pinned-single-tensor-restriction-iso",
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Categorical expansion of the sectionwise restriction comparison in Tags 08FE, 08HY and 0D5S"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Left derived counit factorization of pullback composition and exact open restriction",
+   "date": "2026-10-14",
+   "results": "Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse tensor pullback comparison across open restriction is the mate of the direct image restriction identity",
+   "date": "2026-10-14",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv; Scheme.Modules.restrictFunctorIsoPullback; Scheme.Modules.conjugateEquiv_pullbackComp_inv; Scheme.Modules.restrictFunctorComp_inv_app_app. No theorem for the chosen tensor pullback and this explicit square.",
+   "verdict": "generic tools, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit_symm|leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-14",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean:128; Mathlib/CategoryTheory/Adjunction/Unique.lean:71. Repository search found OpenPinnedCounitHomotopyRestriction (derived factorization) and HomotopyPullbackSquareLocalization (pullback-only localization), but neither the sectionwise mate identity for the named comparisons. Blueprint search for open pullback counit returned no matches.",
+   "verdict": "generic mate identity; named-comparison equality still required"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitRepresentative",
+  "date": "2026-10-14",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 locality on the target: sectionwise mate calculation for the open counit compatibility",
+   "via": [
+    "lem-pc-e2-open-pullback-counit-representative-postcomp",
+    "lem-pc-e2-open-pullback-counit-representative",
+    "lem-pc-t2-open-counit-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenHomotopyTensorCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenHomotopyTensorCounit.lean",
+  "declaration": "AlgebraicGeometry.singleComplexOpen_homotopy_tensor_counit",
+  "statement": "theorem singleComplexOpen_homotopy_tensor_counit\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens)\n    (I : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :\n    let F := RingedSpace.moduleDirectImage f.toLRSHom.toShHom\n    let rX := schemeOpenRestriction X (f ⁻¹ᵁ V)\n    let b := Adjunction.mapHomotopyCategory (.up ℤ)\n      (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f))\n    let b₀ := Adjunction.mapHomotopyCategory (.up ℤ)\n      (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ∣_ V)))\n    (openPinnedHomotopyTensorRestrictionIso f V (f ⁻¹ᵁ V) (f ∣_ V)\n        (morphismRestrict_ι f V)).inv.app ((F.mapHomotopyCategory (.up ℤ)).obj I) ≫\n      (rX.mapHomotopyCategory (.up ℤ)).map (b.counit.app I) =\n    ((Scheme.Modules.tensorPullback (f ∣_ V)).mapHomotopyCategory (.up ℤ)).map\n        ((singleComplexOpenHomotopyDirectImageIso f V).hom.app I) ≫\n      b₀.counit.app ((rX.mapHomotopyCategory (.up ℤ)).obj I)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261014T023934-L-14694",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261014T023934-L-14694",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
