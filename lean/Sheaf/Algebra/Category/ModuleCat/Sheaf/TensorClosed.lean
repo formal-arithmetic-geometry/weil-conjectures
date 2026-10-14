@@ -75,6 +75,7 @@ abbrev tensorClosed (R : Sheaf J CommRingCat.{u}) :
               g ≫ e F G H t ≫ homObjMap f h := by
   let := monoidalCategory R
   let := symmetricCategory R
+  -- Reuse the source monoidal and closed structures; this abbreviation adds only compatibility.
   refine ⟨⟨?_⟩, ⟨monoidalClosed⟩, tensorHomEquiv, ?_⟩
   · -- MonoidalFree supplies additivity of both tensor functors from the adjunction.
     exact
