@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-weil-pbc-retained-localization",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Retaining a closed subset",
- "statement": "Let $T$ be a closed subset of $\\operatorname{Spec}R$. For a constructible\nneighbourhood $E\\supset T$, let $e_E$ be the idempotent of $R^w$ selecting\nthe parts in $E$ in [def-weil-pbc-w-localization]. Define\n\n$$\n R_{[T]}=\\varinjlim_{E\\supset T}(R^w)_{e_E},\n$$\n\nwhere neighbourhoods are ordered by reverse inclusion. Their finite\nintersections are again such neighbourhoods.",
+ "statement": "Let $R$ be a commutative ring and let $T$ be a closed subset of $\\operatorname{Spec}R$. For a constructible\nneighbourhood $E\\supset T$, let $e_E$ be the idempotent of $R^w$ selecting\nthe parts in $E$ in [def-weil-pbc-w-localization]. Define\n\n$$\n R_{[T]}=\\varinjlim_{E\\supset T}(R^w)_{e_E},\n$$\n\nwhere neighbourhoods are ordered by reverse inclusion. Their finite\nintersections are again such neighbourhoods.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-retained-localization.md",
   "place": "node def-weil-pbc-retained-localization, order 1224"
@@ -19,9 +19,59 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "retained localization of a closed subset in the w-localization",
+   "results": "RingHom.locally_holdsForLocalizationAway; RingHom.locally_localizationAwayPreserves; RingHom.locally_propertyIsLocal; RingHom.locally_localizationPreserves; RingHom.locally_iff_isLocalization; RingHom.locally_of_exists; RingHom.locally_iff_exists; RingHom.locally_StableUnderCompositionWithLocalizationAwaySource",
+   "date": "2026-10-14",
+   "verdict": "no match: only generic localization-preservation predicates, not the retained w-localization construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit of idempotent localizations retaining a closed subset of Spec R",
+   "results": "PrimeSpectrum.zeroLocus_eq_basicOpen_of_isIdempotentElem; PrimeSpectrum.basicOpen_eq_zeroLocus_of_isIdempotentElem; AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.colimitDesc_preimage; AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier; AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.opensRange_map; PrimeSpectrum.localization_away_comap_range; AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι; localCohomology.hasColimitDiagram",
+   "date": "2026-10-14",
+   "verdict": "no match: generic idempotent/basic-open and colimit facts do not define this construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization, DirectLimit, Idempotent",
+   "results": "0 hits; loogle reported unknown identifier Idempotent",
+   "date": "2026-10-14",
+   "verdict": "invalid query: unknown identifier; this response gives no evidence of absence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.FilteredColimit",
+   "results": "0 hits; loogle reported unknown identifier CategoryTheory.FilteredColimit",
+   "date": "2026-10-14",
+   "verdict": "invalid query: unknown identifier; this response gives no evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i -g *.lean retained.?localization|constructible.*neigh /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Reviewer rerun: 1 matching line, Mathlib/Topology/Constructible.lean:375, docstring for IsLocallyConstructible (definition at line 378). Read lines 350-395; this is local constructibility, not a retained-localization construction.",
+   "date": "2026-10-14",
+   "verdict": "no match: the single hit does not define any ring localization"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i -g *.lean FilteredColimit|Idempotent|Localization /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory",
+   "results": "Reviewer rerun: 6915 matching lines, not zero hits. These include generic localization and idempotent results, e.g. RingTheory/Localization/Basic.lean:17,79,86 and RingTheory/Spectrum/Prime/Noetherian.lean:59-68. Read Localization/Basic.lean lines 1-86. The narrower construction search above and the semantic searches find no exact retained w-localization definition; this broad keyword search alone cannot establish absence.",
+   "date": "2026-10-14",
+   "verdict": "generic candidates only; no exact construction identified"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Define the retained localization of a closed subset as the filtered colimit of idempotent localizations of the w-localization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -46,5 +96,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-retained-localization",
+  "worker": "stage1",
+  "summary": "This imported node is a bespoke definition of the retained localization of a closed subset: it introduces the filtered colimit of the idempotent localizations selected by constructible neighborhoods. I found no exact project declaration in the read-only Lean source and no Mathlib declaration encoding this construction. Its two statement dependencies, the w-local notion and w-localization construction, already exist, so no child nodes or proof steps are required; the node is marked split.",
+  "blueprint": "The item realizes the complete definition in blueprint node def-weil-pbc-retained-localization, order 1224 (the displayed construction and the finite-intersection indexing condition)."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-7035d73d8",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-7035d73d8 (reviewer sub-agent of L); spot-checked: Read the mathematics and cited sources in full. The definition, selector idempotents, reverse-inclusion maps and edge cases check out; no new nodes or coefficient comparison is assumed. Corrected two B7 search-record faults: invalid Loogle queries labelled no-match and inaccurate zero-hit grep results. Whole corrected JSON is under fixes/dag/nodes/sec-proper-base-change/; detailed checks are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
