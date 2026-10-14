@@ -1,0 +1,114 @@
+{
+ "id": "new-affine-residue-quotient-homology-naturality",
+ "kind": "statement",
+ "title": "Natural cycle quotient comparison for affine residue tensors",
+ "statement": "Let W be a scheme, U an open and p a prime ideal of Gamma(W,U). For every complex K of modules on the localized site there is an additive isomorphism from affineResidueCycleHomology [lem-sc-affine-residue-cycle-class-quotient] to degree-one homology of terminal sections extended to p.ResidueField. The family intertwines affineResidueCycleHomologyMap [lem-sc-affine-residue-cycle-homology-map] and tensor-complex homologyMap for every chain map. Neither affinity nor perfectness is required.",
+ "stmt_deps": [
+  "lem-sc-affine-residue-cycle-class-quotient",
+  "lem-sc-affine-residue-cycle-homology-map"
+ ],
+ "source": {
+  "document": "Stacks Project; Mathlib and the existing Lean library",
+  "place": "Tag 010V; Mathlib ShortComplex.ModuleCat and quotient homology API"
+ },
+ "proof": [
+  {
+   "text": "Identify residue tensor terms with ModuleCat.extendScalars by the scalar-compatible tensor identity. Tensor induction proves the differential and map equations. Restrict the term comparison to kernels and identify incoming boundary subgroups with the range of moduleCatToCycles.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Descend the kernel comparison by QuotientAddGroup.congr and compose with moduleCatHomologyIso and homologyIsoSc for degrees 0,1,2. Prove its value on explicit cycle classes. The cycle-class projection is surjective and its map formula is the existing residue map formula; homology projection naturality therefore proves the equation on every class.",
+   "uses": [
+    "lem-sc-affine-residue-cycle-class-quotient",
+    "lem-sc-affine-residue-cycle-homology-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-residue-cycle-class-quotient",
+  "lem-sc-affine-residue-cycle-homology-map"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H4",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tag 010V; Mathlib ShortComplex.ModuleCat and quotient homology API"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the isomorphism from cycles modulo boundaries to the homology of a module complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the isomorphism from cycles modulo boundaries to the homology of a module complex",
+   "results": "8 hits: ChainComplex.isoHomologyι₀_inv_naturality_assoc, ChainComplex.isoHomologyι₀_inv_naturality, groupHomology.toCycles_comp_isoCycles₁_hom, groupHomology.isoCycles₁_hom_comp_i, HomologicalComplex.π_homologyIsoSc'_hom, groupHomology.toCycles_comp_isoCycles₁_hom_apply, groupHomology.toCycles_comp_isoCycles₁_hom_assoc, groupHomology.toCycles_comp_isoCycles₂_hom",
+   "date": "2026-10-14",
+   "verdict": "The listed framework results are used or inspected; no complete matching comparison theorem was returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.moduleCatHomologyIso",
+   "results": "loogle: unknown identifier 'ShortComplex.moduleCatHomologyIso'",
+   "date": "2026-10-14",
+   "verdict": "The listed framework results are used or inspected; no complete matching comparison theorem was returned."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCatHomologyIso|homologyπ_naturality",
+   "results": "25 hits: Mathlib/RepresentationTheory/Homological/GroupHomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean",
+   "date": "2026-10-14",
+   "verdict": "The listed framework results are used or inspected; no complete matching comparison theorem was returned."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardResidueHomologySourceResidueComparison",
+  "date": "2026-10-15",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-picard-residue-homology-geometric-naturality-fixed-per-index"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineResidueQuotientHomologyNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineResidueQuotientHomologyNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_residue_quotient_homology_naturality",
+  "statement": "theorem affine_residue_quotient_homology_naturality : let F : SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U) ⥤ ModuleCat.{v} Γ(W, U) := SheafOfModules.evaluation _ (.op (Over.mk (𝟙 U))) letI : F.Additive := inferInstanceAs ((SheafOfModules.forget _ ⋙ PresheafOfModules.evaluation _ _).Additive) let T := ModuleCat.extendScalars.{v, v, v} (algebraMap Γ(W, U) p.ResidueField) letI : T.Additive := (ModuleCat.extendRestrictScalarsAdj _).left_adjoint_additive let G := (F ⋙ T).mapHomologicalComplex (.up ℤ) ∃ e : ∀ K, affineResidueCycleHomology W U p K ≃+ (G.obj K).homology 1, ∀ K C (φ : K ⟶ C) z, e C (affineResidueCycleHomologyMap φ z) = HomologicalComplex.homologyMap (G.map φ) 1 (e K z)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261014T225654-L-188573",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261014T225654-L-188573",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

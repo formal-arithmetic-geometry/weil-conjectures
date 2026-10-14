@@ -3,11 +3,8 @@ module
 public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 public import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.AffineKFlatResiduePullbackModel
 import Sheaf.AlgebraicGeometry.PicardResidueSourceModelHomology
 import Sheaf.AlgebraicGeometry.PicardResidueQuotientModelHomology
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
@@ -20,12 +17,9 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.PicardResidueHomologySourceFibreComparison
+import Sheaf.AlgebraicGeometry.PicardDerivedFibreNaturality
+import Sheaf.AlgebraicGeometry.AffineResidueModelNaturality
 import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
-import Sheaf.AlgebraicGeometry.LocalizedStrictPerfectResidueHomology
-import Sheaf.AlgebraicGeometry.RelativeMVMaps
-import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # A strictly perfect affine model computes residue cycle homology
 
@@ -242,27 +236,36 @@ theorem picard_residue_homology_chosen_geometric_maps
             (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
               (ui i) (hui i))).left) 1 (eK z) := by
   classical
+  obtain ⟨eg, hg⟩ := picard_derived_fibre_naturality f Xi fi ui hui L W k w s hw τ
   obtain ⟨m⟩ := hE
-  let mi := fun i ↦ Classical.choice (hCi i)
-  let R := (SheafOfModules.overFunctor.{v}
-    (moduleRings W.toRingedSpace) U).mapDerivedCategory
-  let a := fun i ↦ m.inv ≫ R.map
-    (bypassPicardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k) ≫ (mi i).hom
-  choose φ hφ using fun i ↦
-    perfect_affine_map_representative W U hU K (C i) hK (hC i) (a i)
-  suffices h : ∃ (eK : affineResidueCycleHomology W U p K ≃+
-        Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1)
-      (eC : ∀ i, affineResidueCycleHomology W U p (C i) ≃+
-        Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1),
-      ∀ i z, eC i (affineResidueCycleHomologyMap (φ i) z) =
-        structureSheafCohomologyPullback
-          (((Over.pullback (S.fromSpecResidueField s)).map
-            (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
-              (ui i) (hui i))).left) 1 (eK z) by
-    obtain ⟨eK, eC, h⟩ := h
-    exact ⟨eK, eC, φ, h⟩
-  -- The arrows and their representatives are constructed above. What remains is
-  -- compatibility of the coherent residue and geometric cohomology comparisons.
-  sorry
+  obtain ⟨er, hr⟩ := affine_residue_model_naturality W w U hwU hU p hp _ K hK m
+  let eC : ∀ i, affineResidueCycleHomology W U p (C i) ≃+
+      Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1 :=
+    fun i ↦
+      let egi := Classical.choose (hg i)
+      let mi := Classical.choice (hCi i)
+      let eri := Classical.choose (hr _
+        (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k) (C i) (hC i) mi)
+      eri.trans egi
+  let a : ∀ i, DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj (C i) := fun i ↦
+    let mi := Classical.choice (hCi i)
+    m.inv ≫ (SheafOfModules.overFunctor.{v}
+      (moduleRings W.toRingedSpace) U).mapDerivedCategory.map
+        (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k) ≫ mi.hom
+  let φ : ∀ i, K ⟶ C i := fun i ↦
+    Classical.choose (perfect_affine_map_representative W U hU K (C i) hK (hC i) (a i))
+  have hφ : ∀ i, DerivedCategory.Q.map (φ i) = a i := fun i ↦
+    Classical.choose_spec (perfect_affine_map_representative W U hU K (C i) hK (hC i) (a i))
+  refine ⟨er.trans eg, eC, φ, ?_⟩
+  intro i z
+  let egi := Classical.choose (hg i)
+  have hb := Classical.choose_spec (hg i)
+  let mi := Classical.choice (hCi i)
+  let hi := Classical.choose_spec (hr _
+    (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k) (C i) (hC i) mi)
+  let a := m.inv ≫ (SheafOfModules.overFunctor.{v}
+    (moduleRings W.toRingedSpace) U).mapDerivedCategory.map
+      (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k) ≫ mi.hom
+  exact (congrArg egi (hi (φ i) (hφ i) z)).trans (hb (er z))
 
 end AlgebraicGeometry.Scheme
