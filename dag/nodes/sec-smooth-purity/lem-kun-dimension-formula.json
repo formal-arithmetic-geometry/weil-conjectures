@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-dimension-formula",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Dimension formula for finite type schemes",
@@ -19,14 +19,127 @@
   ]
  },
  "stmt_deps": [
-  "def-kun-support"
+  "def-weil-scheme-over-base",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-residue-field",
+  "def-kun-transcendence-degree"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Write f:X→Spec K for the structure morphism. Finite type includes locally finite type; its defining affine cover over the affine base Spec K supplies an affine open U containing x. Put R=O_X(U). Apply the affine-pairs characterization of locally finite type to U and V=Spec K: R is a finite type K-algebra. The canonical affine identification U≅Spec R sends x to a prime p of R. No separatedness, reducedness or irreducibility hypothesis is used.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-affine-open-spec-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FX, lemma-dimension-fibre-at-a-point, proof (lines 5389–5393), specialized to Spec K"
+   }
+  },
+  {
+   "text": "The local dimension is unchanged on the open neighbourhood U, so dim_x X=dim_x U. The canonical homeomorphism U≅Spec R identifies open neighbourhoods and their irreducible closed chains bijectively, hence identifies their dimensions and their minima: dim_x X=dim_p(Spec R).",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-open-subspace",
+    "lem-weil-pbc-affine-open-spec-points"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FX, lemma-dimension-fibre-at-a-point, proof (lines 5389–5393), specialized to Spec K"
+   }
+  },
+  {
+   "text": "Apply the finite type algebra formula with k=K, S=R and the prime p: dim_p(Spec R)=dim(R_p)+trdeg_K κ(p). Its hypotheses hold by step 1; the statement allows arbitrary finite type algebras, so it applies also when R is reducible or nonreduced.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FX, lemma-dimension-fibre-at-a-point, proof (lines 5389–5393), specialized to Spec K"
+   }
+  },
+  {
+   "text": "The affine-open stalk localization gives R_p≅O_{X,x}, by r/s↦r_x s_x^{-1}. This map is K-linear: for a∈K it sends (a·1)/1 to the germ of the constant section a, which is the structure map K→O_{X,x}. A ring isomorphism sends units to units, hence sends the unique maximal ideal of one local ring onto that of the other. Quotienting therefore gives a K-isomorphism κ(p)≅κ(x). Prime ideal chains correspond under the ring isomorphism, so dim(R_p)=dim O_{X,x}; algebraically independent subsets correspond under the K-isomorphism, so the transcendence degrees agree. Substituting both equalities and step 2 into step 3 proves precisely the asserted formula.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-residue-field",
+    "def-weil-pbc-krull-dimension-ring",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FX, lemma-dimension-fibre-at-a-point, proof (lines 5389–5393), specialized to Spec K"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-residue-field",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-kun-transcendence-degree"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02FX, lemma-dimension-fibre-at-a-point, proof (lines 5389–5393), specialized to Spec K"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme of finite type over a field the dimension at a point equals the dimension of its local ring plus the transcendence degree of its residue field",
+   "results": "IsLocalRing.finrank_cotangentSpace_eq_zero; AlgebraicGeometry.Scheme.instFieldCarrierResidueField; IsLocalRing.finrank_cotangentSpace_eq_zero_iff; IsLocalRing.finrank_CotangentSpace_eq_one; Algebra.IsStandardSmooth.relativeDimension; Algebra.Presentation.localizationAway_dimension_zero; IsLocalRing.finrank_CotangentSpace_eq_one_iff; IsLocalRing.finrank_quotient_map",
+   "date": "2026-10-14",
+   "verdict": "no match: no scheme/local-ring/residue-transcendence-degree dimension formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.trdeg, ringKrullDim",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: no scheme/local-ring/residue-transcendence-degree dimension formula"
+  },
+  {
+   "tool": "grep",
+   "query": "trdeg|dimensionAt",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: no scheme/local-ring/residue-transcendence-degree dimension formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "dimension of finite type scheme at a point equals local ring dimension plus residue field transcendence degree",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of localization at a prime plus transcendence degree of residue field for a finitely generated algebra over a field",
+   "results": "IsLocalization.AtPrime.ringKrullDim_eq_height; Ring.KrullDimLE.of_isLocalization; Ring.krullDimLE_of_isLocalization_maximal; Algebra.Presentation.localizationAway_dimension_zero; Ring.DimensionLEOne.localization; ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors; Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors; ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim",
+   "date": "2026-10-14",
+   "verdict": "no match: no scheme/local-ring/residue-transcendence-degree dimension formula"
+  },
+  {
+   "tool": "grep",
+   "query": "trdeg.*[Dd]im|[Dd]im.*trdeg",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: no scheme/local-ring/residue-transcendence-degree dimension formula"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "undischarged_input",
@@ -61,5 +174,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-dimension-formula",
+  "worker": "stage1",
+  "summary": "Read Stacks 02FX and its affine input 00P1. Reused the existing affine formula and affine/stalk/open-dimension comparisons; no new nodes. Replaced the unrelated support dependency by the actual dimension and residue-field notions. No mathematical change to the statement.",
+  "blueprint": "The blueprint proof refers to 02FX without giving an argument. Steps 1–2 realize its reduction to an affine neighbourhood, step 3 its cited Algebra 00P1, and step 4 the local-ring and residue-field identifications."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-bd62085cc",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-bd62085cc (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md. Stacks 02FX, 00P1, 01T2, 0055 and 01HV support all four steps; the residue-field identification respects K. Edge cases, duplicate candidates and dependency cycles checked. No new nodes or repairs. Accepted the existing affine dimension formula as a generic tool."
+ }
 }
