@@ -9,22 +9,120 @@
     "def-weil-constant-weil-structure"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Inverse image and direct image along a morphism on small pro-etale sites",
- "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-weil-scheme-morphism-properties], with small pro-etale sites $X_{\\mathrm{proet}}$, $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site]. The base-change functor $u_f:Y_{\\mathrm{proet}}\\to X_{\\mathrm{proet}}$, $(V\\to Y)\\mapsto(X\\times_YV\\to X)$, is well defined because weakly etale maps are stable under base change, and it sends coverings to coverings and commutes with fibre products and the final object; it therefore defines a morphism of sites $f_{\\mathrm{proet}}:X_{\\mathrm{proet}}\\to Y_{\\mathrm{proet}}$. For a sheaf $\\mathcal G$ (of sets, abelian groups, rings or modules) on $X_{\\mathrm{proet}}$ the *direct image* is $f_*\\mathcal G(V)=\\mathcal G(X\\times_YV)$. For a sheaf $\\mathcal F$ on $Y_{\\mathrm{proet}}$ the *inverse image* $f^{-1}\\mathcal F$ is the sheafification of the presheaf\n$$\n U\\longmapsto\\varinjlim_{(V,\\ U\\to X\\times_YV)}\\mathcal F(V),\n$$\nthe colimit over the category of pairs of an object $V$ of $Y_{\\mathrm{proet}}$ and an $X$-morphism $U\\to X\\times_YV$. Then $f^{-1}$ is left adjoint to $f_*$; write $\\eta_f:\\mathcal F\\to f_*f^{-1}\\mathcal F$ and $\\varepsilon_f:f^{-1}f_*\\mathcal G\\to\\mathcal G$ for the unit and counit. For a commutative ring $A$, with constant sheaves $A_Y$, $A_X$ (sheafifications of the constant presheaves with value $A$), the *structure map*\n$$\n c^f_A:f^{-1}A_Y\\longrightarrow A_X\n$$\nis the morphism of sheaves of rings adjoint to the morphism $A_Y\\to f_*A_X$ obtained, by the universal property of sheafification, from the map of presheaves sending $a\\in A$ to the image of the constant section $a$ in $A_X(X\\times_YV)$, for every $V$. On sheaves of $A_Y$-modules, $f^{-1}$ produces sheaves of $f^{-1}A_Y$-modules, which become $A_X$-modules by $f^{-1}(-)\\otimes_{f^{-1}A_Y}A_X$ along $c^f_A$, and $f_*$ produces $A_Y$-modules through $A_Y\\to f_*A_X$.",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-weil-scheme-morphism-properties]. Use the small pro-etale sites [def-weil-pbc-proetale-site], choosing compatible small skeletons and universes as in [def-weil-size-convention]. The base-change functor\n$$u_f:Y_{\\mathrm{proet}}\\longrightarrow X_{\\mathrm{proet}},\\qquad (V\\to Y)\\longmapsto (X\\times_YV\\to X)$$\nuses the chosen fibre products [def-pc-fibre-product]; on arrows it is $a\\mapsto\\mathrm{id}_X\\times_Ya$. Weakly etale base change [lem-weil-pbc-weakly-etale-composition-base-change] and fpqc base change [lem-galois-fpqc-covering-base-change] make it well defined and covering-preserving. It preserves the final object and fibre products by their universal properties. Apply [lem-weil-pbc-left-exact-site-inverse-image-tensor] to obtain the morphism of sites $f_{\\mathrm{proet}}:X_{\\mathrm{proet}}\\to Y_{\\mathrm{proet}}$.\n\nDefine its direct image by $(f_*\\mathcal G)(V)=\\mathcal G(u_f(V))$, with restrictions induced by $u_f$. Define $\\mathcal I_U$ to have objects $(V,\\phi:U\\to u_f(V))$ and arrows $(V,\\phi)\\to(V',\\phi')$ given by $Y$-morphisms $a:V\\to V'$ satisfying $u_f(a)\\phi=\\phi'$. Define\n$$ (u_{f,p}\\mathcal F)(U)=\\varinjlim_{(V,\\phi)\\in\\mathcal I_U^{\\mathrm{op}}}\\mathcal F(V),\\qquad f^{-1}\\mathcal F=(u_{f,p}\\mathcal F)^\\#,$$\nwhere $\\#$ is sheafification [def-weil-pbc-sheafification]; the diagram uses the restriction maps of $\\mathcal F$. Restriction along $b:U'\\to U$ sends the coprojection indexed by $(V,\\phi)$ to that indexed by $(V,\\phi b)$. All indexing categories are small in the larger universe. On sheaves of sets and abelian groups these constructions and their adjunction are those of [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction]. Write $\\eta_f:\\mathcal F\\to f_*f^{-1}\\mathcal F$ and $\\varepsilon_f:f^{-1}f_*\\mathcal G\\to\\mathcal G$ for its unit and counit.\n\nOn sheaves of rings use the same construction, taking the colimits and sheafification in rings; equivalently apply the finite-product-preserving set inverse image to the addition, zero, negation, multiplication and unit maps. Their ring identities are the images of the original identities. Direct image uses sectionwise ring operations, and the adjunction restricts to ring homomorphisms, with the same unit and counit. For commutative rings this lifting is [lem-weil-pbc-adjunction-lifts-group-ring-objects]; without commutativity omit that identity and retain both distributive identities.\n\nFor a commutative ring $A$, let $A_Y,A_X$ be the constant sheaves of rings [def-weil-pbc-constant-sheaf]. Define $\\rho^f_A:A_Y\\to f_*A_X$ as the unique sheaf map extending the presheaf map which, on $V$, sends $a\\in A$ to the constant section $a$ of $A_X(u_f(V))$. Define the structure map $c^f_A:f^{-1}A_Y\\to A_X$ to be its adjoint, namely $\\varepsilon_{f,A_X}\\circ f^{-1}(\\rho^f_A)$.\n\nFor sheaves of modules [def-weil-sheaf-of-modules-category], apply $f^{-1}$ to the underlying abelian sheaf and to the action map, using $f^{-1}(A_Y\\times\\mathcal F)\\cong f^{-1}A_Y\\times f^{-1}\\mathcal F$; this defines a sheaf of $f^{-1}A_Y$-modules. Define the module pullback to be $f^{-1}\\mathcal F\\otimes_{f^{-1}A_Y}A_X$ along $c^f_A$, using sheaf tensor product [def-pur-sheaf-tensor-product]. For an $A_X$-module sheaf $\\mathcal G$, define the $A_Y$-action on $f_*\\mathcal G(V)=\\mathcal G(u_f(V))$ through the ring map $\\rho^f_{A,V}:A_Y(V)\\to A_X(u_f(V))$. These constructions on morphisms use the induced sheaf maps.",
  "source": {
   "document": "literature/stacks-project/proetale.tex",
   "place": "Stacks Project, Tag 09A5 (Section 'Functoriality of the pro-etale site'), with Sites, Tag 00X6 (Proposition sites-proposition-get-morphism: a continuous functor commuting with finite limits defines a morphism of sites), Tag 06UM (Section sites-section-pullback: the presheaf inverse image and its adjunction) and Tag 0H7J (Example sites-example-constant-sheaf)"
  },
  "stmt_deps": [
   "def-weil-scheme-morphism-properties",
-  "def-weil-pbc-proetale-site"
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Base change of each weakly etale object and of each weakly etale covering arrow is weakly etale. Base change of an fpqc covering is fpqc. Hence the displayed object and arrow formulas define a functor on the small sites and send pro-etale coverings to pro-etale coverings. Choose skeleton representatives within the fixed universes; the resulting comma categories are small in the larger universe.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-size-convention",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-galois-fpqc-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, section-morphism; more-morphisms.tex Tags 094T/094U; topologies.tex Tag 022D (3)"
+   }
+  },
+  {
+   "text": "The identity of Y is final. Products and fibre products of weakly etale Y-objects are again objects: the projection is a base change of a weakly etale arrow and the structure map is its composite with a weakly etale arrow. The relative arrows are weakly etale by the site description. Universal properties identify u_f(Y) with X and u_f(V_1 times_V V_2) with u_f(V_1) times_{u_f(V)} u_f(V_2), compatibly with projections. A final object and fibre products give finite limits. Thus apply the general left-exact site functor theorem to obtain the geometric morphism and its finite-limit-preserving inverse image.",
+   "uses": [
+    "def-weil-pbc-small-proetale-site",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00X6, proposition-get-morphism, applied as in proetale.tex Tag 09A5"
+   }
+  },
+  {
+   "text": "For a covering {V_i to V}, step 1 gives the covering {u_f(V_i) to u_f(V)}, and step 2 identifies u_f(V_i times_V V_j) with u_f(V_i) times_{u_f(V)} u_f(V_j). The sheaf equalizer diagram of G for this covering is therefore precisely the sheaf equalizer diagram for G composed with u_f on {V_i to V}. This proves the continuity hypothesis, including for abelian sheaves. Apply the continuous-functor adjunction with C=Y_proet, D=X_proet and u=u_f. Its category I_U has exactly the arrows specified here; its colimit is indexed by I_U opposite, and its left adjoint is sheafification of that colimit. The theorem supplies both the set and abelian adjunctions. Restriction along b sends the coprojection for (V,phi) to that for (V,phi b); functoriality follows by composing these maps on every coprojection.",
+   "uses": [
+    "def-weil-pbc-small-proetale-site",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00VC, section-functoriality-PSh; 00WX, lemma-adjoint-sheaves"
+   }
+  },
+  {
+   "text": "Finite product preservation lets us apply inverse image to every ring operation and every ring identity, giving the displayed operations. The commutative-ring adjunction is the cited lifting. For arbitrary rings retain both distributive identities and omit only multiplicative commutativity. Here is the operation check, valid for either choice. Write L=f inverse, R=f star, lambda_F:L(F^n) to (LF)^n and rho_G:R(G^n) to (RG)^n for the product comparisons. For an n-ary operation t and adjoint maps alpha:LF to G and beta=R(alpha) eta_F, the adjoint of alpha L(t_F) is beta t_F by naturality of eta; the adjoint of t_G alpha^n lambda_F is R(t_G) rho_G^{-1} beta^n, since rho_{LF} R(lambda_F) eta_{F^n}=eta_F^n and rho is natural. Thus alpha preserves t exactly when beta does. For n=0 use the terminal-object comparisons. This checks addition, zero, negation, multiplication and one, so the adjunction restricts to ring homomorphisms, with its original unit and counit.\n\nTo verify also the ring-colimit description, let P(U) be the colimit in rings over I_U opposite. A ring presheaf map P to G assigns to each coprojection F(V) to P(U), indexed by phi:U to u_f(V), a ring map F(V) to G(U). For beta:F to G composed with u_f these maps are G(phi) beta_V. They form a cocone: for a:V to V' with u_f(a) phi=phi', naturality gives G(phi) beta_V F(a)=G(phi') beta_{V'}. Conversely evaluate the cocone at U=u_f(V), phi=id to recover beta_V. Naturality in U shows that the map at any phi is G(phi) beta_V, so these assignments are inverse and natural. Sheafification then gives the ring adjunction. Both this construction and the lifted set inverse image are left adjoint to the identical ring direct image; the maps corresponding to their units are inverse, because their composites correspond to those same units under the two adjunction bijections. This gives the claimed canonical equivalence without assuming that arbitrary ring colimits are computed on underlying sets.\n\nThe presheaf map defining rho is natural since restrictions of constant sections are constant sections. Sheafification extends it uniquely, and the counit formula defines its adjoint c.",
+   "uses": [
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi; Tag 0H7J, example-constant-sheaf"
+   }
+  },
+  {
+   "text": "Apply the finite-product-preserving inverse image to the module action and to each of its associativity, unit and distributivity diagrams. Their images are the module axioms over f inverse A_Y, and naturality makes induced maps linear. Sheaf tensor product defines extension to A_X along c. On direct image, evaluate the original action on u_f(V) and restrict scalars through rho_V. Naturality of rho gives semilinear restrictions, while the module axioms and linearity of maps hold sectionwise. This verifies precisely the displayed module constructions.",
+   "uses": [
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D1, lemma-pushforward-module; 03D2, lemma-pullback-module; change of rings as sheaf tensor product"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-galois-fpqc-covering-base-change",
+  "def-weil-pbc-small-proetale-site",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A5, section-morphism, with Sites Tags 00VC, 00WX, 00X6, 00YV, 0H7J and Sites Modules Tags 03D1/03D2"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -39,10 +137,80 @@
    "results": "OverAdjunction.lean:101 MorphismProperty.Over.pullback (base change functor P.Over Q Y ⥤ P.Over Q X) and :42 Over.map; Sites/Pullback.lean:55 Functor.sheafPullback and Functor.sheafAdjunctionContinuous (inverse image along a continuous functor, left adjoint of sheafPushforwardContinuous); no IsContinuous instance for MorphismProperty.Over.pullback with the pro-etale topologies, and no constant-sheaf structure map",
    "date": "2026-10-09",
    "verdict": "generalization, not in one line: the inverse image is (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).sheafPullback once that functor is shown continuous (and representably flat) for ProEt.topology, which Mathlib does not prove; no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback|sheafAdjunctionContinuous|def pullback",
+   "results": "Mathlib/CategoryTheory/Sites/Pullback.lean; Mathlib/CategoryTheory/Sites/Pullback.lean; Mathlib/CategoryTheory/Sites/Pullback.lean; Mathlib/CategoryTheory/Sites/Pullback.lean; Mathlib/CategoryTheory/Sites/Pullback.lean; Mathlib/CategoryTheory/Sites/CoverLifting.lean; Mathlib/CategoryTheory/Sites/CoverLifting.lean; Mathlib/CategoryTheory/Sites/Point/Comap.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: generic sheaf pullback requires continuity; no complete one-line specialization for all clauses of this pro-etale construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.sheafPullback, Functor.sheafPushforwardContinuous",
+   "results": "loogle: unknown identifier 'Functor.sheafPullback'",
+   "date": "2026-10-14",
+   "verdict": "no match: generic sheaf pullback requires continuity; no complete one-line specialization for all clauses of this pro-etale construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse and direct image functors on small pro-etale sheaves along a scheme morphism with constant coefficient modules",
+   "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; SheafOfModules.pushforwardNatIso_inv; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; lightProfiniteToLightCondSetIsoTopCatToLightCondSet_inv_app_val_app_hom_hom; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj",
+   "date": "2026-10-14",
+   "verdict": "no match: generic sheaf pullback requires continuity; no complete one-line specialization for all clauses of this pro-etale construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change induces a morphism of small pro-etale sites and inverse image left adjoint to direct image",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEt|proetale",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: generic sheaf pullback requires continuity; no complete one-line specialization for all clauses of this pro-etale construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProEt\"",
+   "results": "AlgebraicGeometry.Scheme.ProEt; AlgebraicGeometry.Scheme.proetalePrecoverage; AlgebraicGeometry.Scheme.proetaleTopology; AlgebraicGeometry.Scheme.instCategoryProEt; AlgebraicGeometry.Scheme.instHasIsosProetalePrecoverage; AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeProetalePrecoverage; AlgebraicGeometry.Scheme.instIsStableUnderCompositionProetalePrecoverage; AlgebraicGeometry.Scheme.instSubcanonicalProetaleTopology",
+   "date": "2026-10-14",
+   "verdict": "no match: generic sheaf pullback requires continuity; no complete one-line specialization for all clauses of this pro-etale construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback functor between small pro-etale sites of schemes is continuous and preserves finite limits",
+   "results": "AlgebraicGeometry.Scheme.instHasPullbacksEtale; CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits; CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback; CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat; AlgebraicGeometry.IsOpenImmersion.instPreservesLimitSchemeTopCatWalkingCospanCospanForgetToTop_1; AlgebraicGeometry.IsOpenImmersion.instPreservesLimitSchemeLocallyRingedSpaceWalkingCospanCospanForgetToLocallyRingedSpace_1; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_preservesPullbackOfLeft",
+   "date": "2026-10-14",
+   "verdict": "no match: generic sheaf pullback requires continuity; no complete one-line specialization for all clauses of this pro-etale construction"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullbackConstruction|sheafAdjunctionContinuous|ProEtale",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Comap.lean; Mathlib/CategoryTheory/Sites/Pullback.lean; Mathlib/CategoryTheory/Sites/Pullback.lean; Mathlib/CategoryTheory/Sites/Pullback.lean; Mathlib/CategoryTheory/Sites/Pullback.lean; Mathlib/CategoryTheory/Sites/Pullback.lean; Mathlib/Topology/Sheaves/Functors.lean; Mathlib/Topology/Sheaves/Functors.lean",
+   "date": "2026-10-14",
+   "verdict": "no complete match: generic sheaf/module constructions require continuity and do not state the full pro-etale construction with its constant-ring map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of sheaves of rings along a continuous functor preserving finite limits is left adjoint to precomposition",
+   "results": "SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.pullback; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackIso; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.Functor.sheafPullback; TopCat.Sheaf.instIsLeftAdjointPullback; CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+   "date": "2026-10-14",
+   "verdict": "no complete match: generic sheaf/module constructions require continuity and do not state the full pro-etale construction with its constant-ring map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPullback\"",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback; CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify; CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous; CategoryTheory.Functor.sheafPullback; CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback; CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso; CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat",
+   "date": "2026-10-14",
+   "verdict": "no complete match: generic sheaf/module constructions require continuity and do not state the full pro-etale construction with its constant-ring map"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +230,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-admissible"
+ "unit": "sk-def-sf-admissible",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-proetale-inverse-image",
+  "worker": "stage1",
+  "summary": "Made all constructions and their supporting dependencies explicit. Fixed the omitted opposite indexing category and corrected the inverse-image source tag (06UM is pullback maps, not presheaf inverse image). Reused existing DAG results throughout; no new nodes. Supplied five well-definedness steps for the claims embedded in this definition. Second reading supplied the continuity equalizer and ring-colimit universal-property checks; left generic-tool approval to the maintainer.",
+  "blueprint": "Realizes the inverse-image notion used in def-weil-ordinary-compact-cohomology statement through def-weil-constant-weil-structure; no unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-dfe87e1f2",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-dfe87e1f2 (reviewer sub-agent of L); spot-checked: Reviewed the item, all cited DAG statements, unit route, and source locations. All five steps and edge cases check; no new nodes or repairs are needed. Generic cross-unit tools are listed for merge recording."
+ }
 }
