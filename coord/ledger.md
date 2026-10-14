@@ -14279,3 +14279,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:25 L: merged deliver/M3/Sheaf.Algebra.Homology.KInjectiveProducts (stage 3; reviewer PASS; first push; landing 20261014T022547-L-4046244 (proof); batch 20261014T022537; modules 1; new nodes 0)
 - 02:25 L: merged deliver/M3/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (stage 3; reviewer PASS; first push; landing 20261014T022547-L-4046353 (proof); batch 20261014T022537; modules 1; new nodes 0)
 - 02:25 L: merged deliver/M3/Sheaf.RingTheory.ProjectiveResolutionExtDegree (stage 3; reviewer PASS; first push; landing 20261014T022548-L-4046498 (proof); batch 20261014T022537; modules 1; new nodes 0)
+- 02:25 L: merged deliver/M4/Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionUniqueAux (stage 3; reviewer PASS; after a return; landing 20261014T022548-L-4046664 (interface); batch 20261014T022537; modules 2; new nodes 1)

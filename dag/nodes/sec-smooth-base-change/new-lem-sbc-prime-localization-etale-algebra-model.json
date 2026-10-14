@@ -1,0 +1,120 @@
+{
+ "id": "new-lem-sbc-prime-localization-etale-algebra-model",
+ "kind": "statement",
+ "title": "Unpointed etale algebra model at a prime",
+ "statement": "Let R be a commutative ring and p a prime of Spec R [def-weil-pbc-localization-at-prime]. Let alpha : R_p to B be a ring map whose map of spectra is etale [def-weil-etale-morphism]. There exist a commutative ring C, maps a : R to C and i : C to B, and a submonoid M of C, such that Spec(a) is etale, a followed by i equals the composite R to R_p to B, and B is an M-localization of C for the algebra structure induced by i. No field-valued pointing is part of the conclusion.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01ZM, 07RP, 01Z6, 00CR and 00CP; unpointed affine descent and localization identification in the parent proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Write R_p as the filtered colimit of the principal localizations R_s, indexed by finite subsets of R minus p (00CR; CommRingCat.isColimitAwayProdCocone). Apply etale_finite_data_descent to Spec B over Spec R_p to obtain a finite-presentation etale scheme at a principal stage.",
+   "uses": [
+    "lem-weil-pbc-etale-finite-data-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The transition morphisms of the descended schemes are affine and the limit is Spec B. Apply Mathlib Scheme.exists_isAffine_of_isLimit (01Z6), and replace the stage by a later affine stage Spec C. Compose its etale map to Spec R_s with the etale principal open immersion into Spec R to obtain a : R to C.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The base-change isomorphism yields i : C to B and the structure equation. Let M be the image under a of R minus p. The universal property of localization (00CP) identifies the base change with M inverse C; transport IsLocalization to B under the isomorphism, using the C-algebra structure induced by i.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-finite-data-descent"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 01ZM, 07RP, 01Z6, 00CR and 00CP; extracted unpointed part of the parent descent argument",
+  "group": "M4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An etale algebra over localization at a prime descends to an etale algebra over a principal localization",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: Internal Server Error",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented etale algebra over a localization at a prime is the localization of an etale algebra over the original ring",
+   "date": "2026-10-14",
+   "results": "Algebra.exists_etale_of_isEtaleAt, Algebra.Etale.of_isLocalizationAway and localization-span results. None constructs a model for a given R_p-algebra.",
+   "verdict": "No direct match; local etale-locus lemmas do not provide this model."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, Localization",
+   "date": "2026-10-14",
+   "results": "0 hits",
+   "verdict": "No indexed direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*[Dd]escent|exists.*etale.*[Ll]ocalization; rg Scheme.exists_isAffine_of_isLimit; rg awayProdDiagram and isColimitAwayProdCocone",
+   "date": "2026-10-14",
+   "results": "Mathlib Etale.Descent only supplies faithfully flat descent. Sheaf.Paper.EtaleFiniteDataDescent is scheme-level descent; Mathlib Scheme.exists_isAffine_of_isLimit supplies affine-stage descent; WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits supplies the principal-localization colimit. No theorem with the unpointed ring-model conclusion was found.",
+   "verdict": "Generic ingredients exist but assembling the ring-model descent is the remaining obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionUniqueAux",
+  "date": "2026-10-14",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-lem-sbc-etale-triples-prime-localization-component-extension-unique-aux",
+   "place": "Unpointed algebra descent, before constructing the residue-field pointing",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PrimeLocalizationEtaleAlgebraModel",
+  "file": "lean/Sheaf/RingTheory/PrimeLocalizationEtaleAlgebraModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.primeLocalization_etale_algebra_model",
+  "statement": "theorem primeLocalization_etale_algebra_model\n    (R : CommRingCat.{u}) (p : Spec R) (B : CommRingCat.{u})\n    (α : CommRingCat.of (Localization.AtPrime p.asIdeal) ⟶ B)\n    (hα : Etale (Spec.map α)) :\n    ∃ (C : CommRingCat.{u}) (a : R ⟶ C) (i : C ⟶ B),\n      Etale (Spec.map a) ∧\n      a ≫ i = CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ α ∧\n      ∃ M : Submonoid C, (letI := i.hom.toAlgebra; IsLocalization M B)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261014T022548-L-4046664",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261014T022548-L-4046664",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

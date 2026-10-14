@@ -1,128 +1,147 @@
 {
-  "id": "new-lem-sbc-etale-triples-prime-localization-component-extension-unique-aux",
-  "kind": "statement",
-  "title": "Existence of an epimorphic pointed affine model",
-  "statement": "theorem etaleResidueTriples_primeLocalization_component_extension_unique_aux\n    (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]\n    (χ : (Spec R).residueField p ⟶ CommRingCat.of K)\n    (q : Spec (CommRingCat.of (Localization.AtPrime p.asIdeal)))\n    (ψ : (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).residueField q ⟶\n      CommRingCat.of K)\n    [Algebra (Localization.AtPrime p.asIdeal) K]\n    (hψ : (ΓSpecIso (CommRingCat.of (Localization.AtPrime p.asIdeal))).inv ≫\n      (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).Γevaluation q ≫ ψ =\n        CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K))\n    (hK : CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫\n      CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K) =\n        (ΓSpecIso R).inv ≫ (Spec R).Γevaluation p ≫ χ)\n    (t : EtaleResidueTriples (CommRingCat.of (Localization.AtPrime p.asIdeal)) q K ψ) :\n    ∃ (s : EtaleResidueTriples R p K χ) (β : s.B ⟶ t.B),\n      s.α ≫ β = CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ t.α ∧\n      β ≫ (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =\n        (ΓSpecIso s.B).inv ≫ (Spec s.B).Γevaluation s.q ≫ s.φ ∧\n      Epi β",
-  "source": {
-    "document": "Stacks Project",
-    "place": "Tags 00CR, 01ZM, 07RP, 01Z6 and 04GW; localization and affine finite-presentation descent argument"
+ "id": "new-lem-sbc-etale-triples-prime-localization-component-extension-unique-aux",
+ "kind": "statement",
+ "title": "Existence of an epimorphic pointed affine model",
+ "statement": "theorem etaleResidueTriples_primeLocalization_component_extension_unique_aux\n    (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]\n    (χ : (Spec R).residueField p ⟶ CommRingCat.of K)\n    (q : Spec (CommRingCat.of (Localization.AtPrime p.asIdeal)))\n    (ψ : (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).residueField q ⟶\n      CommRingCat.of K)\n    [Algebra (Localization.AtPrime p.asIdeal) K]\n    (hψ : (ΓSpecIso (CommRingCat.of (Localization.AtPrime p.asIdeal))).inv ≫\n      (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).Γevaluation q ≫ ψ =\n        CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K))\n    (hK : CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫\n      CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K) =\n        (ΓSpecIso R).inv ≫ (Spec R).Γevaluation p ≫ χ)\n    (t : EtaleResidueTriples (CommRingCat.of (Localization.AtPrime p.asIdeal)) q K ψ) :\n    ∃ (s : EtaleResidueTriples R p K χ) (β : s.B ⟶ t.B),\n      s.α ≫ β = CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ t.α ∧\n      β ≫ (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =\n        (ΓSpecIso s.B).inv ≫ (Spec s.B).Γevaluation s.q ≫ s.φ ∧\n      Epi β",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 00CR, 01ZM, 07RP, 01Z6 and 04GW; localization and affine finite-presentation descent argument"
+ },
+ "stmt_deps": [
+  "def-weil-residue-field",
+  "def-weil-pbc-etale-residue-triples",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Apply primeLocalization_etale_algebra_model to the unpointed ring map t.alpha and t.etale, obtaining C, a, i, etaleness, the structure equation, and a submonoid M with IsLocalization relative to i.",
+   "uses": [
+    "new-lem-sbc-prime-localization-etale-algebra-model"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-weil-residue-field",
-    "def-weil-pbc-etale-residue-triples",
-    "def-weil-pbc-localization-at-prime"
-  ],
-  "proof": [
-    {
-      "text": "Descend the finitely presented etale R_p-algebra t.B to an etale algebra C over R_s, s outside p, using finite-presentation descent and the affine-limit theorem. The base-change identification makes t.B the localization of C at the image of R minus p. Compose its canonical localization map with the given pointing into K; take the prime kernel and extend the quotient injection to its fraction field to obtain a residue-field pointing. The given hpsi and hK show that this pointing lies over p and is compatible with chi. These data form the global pointed triple, and the localization map satisfies the two equations. Localization extensionality proves that this particular map is epic. This whole descent obligation is left as the named theorem sorry: the previous application to an arbitrary compatible map was false.",
-      "uses": [],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [],
-  "proof_origin": {
-    "by": "worker",
-    "document": "Stacks Project",
-    "place": "Tags 00CR, 01ZM, 07RP, 01Z6 and 04GW; preserve the canonical localization map during affine descent",
-    "group": "G3"
+  {
+   "text": "Restrict the given field-valued pointing of t along i. Mathlib SpecToEquivOfField factors the map C to K into a point r and its residue-field map phi. The field-point equivalence is proved, so this is not an arbitrary witness extracted from an unproved existence theorem.",
+   "uses": [],
+   "elementary": true
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "extend ring homomorphism from etale algebra model along localization by inverting denominators",
-      "date": "2026-10-14",
-      "results": "8 hits including StandardEtalePair.lift, StandardEtalePair.homEquiv and Algebra.Etale.of_isLocalization_Away; no cocone leg extension.",
-      "verdict": "No direct match"
-    },
-    {
-      "tool": "loogle",
-      "query": "NatTrans.ext",
-      "date": "2026-10-14",
-      "results": "0 hits: unknown identifier in service index; the local compiler accepts NatTrans.ext.",
-      "verdict": "Generic extensionality, not a component extension"
-    },
-    {
-      "tool": "grep",
-      "query": "IsLocalization.ringHom_ext; primeLocalization; pointed localization; etale descent",
-      "date": "2026-10-14",
-      "results": "Mathlib has localization lifts and extensionality and Scheme.exists_isAffine_of_isLimit; Sheaf has unit refinement and scheme finite-data descent. Neither Mathlib nor upstream nor Sheaf has the single-object compatible leg statement.",
-      "verdict": "Use existing generic tools; new component lemma needed"
-    },
-    {
-      "tool": "leansearch",
-      "query": "extend a compatible cocone leg to a finitely presented etale algebra over localization at a prime",
-      "date": "2026-10-14",
-      "results": "UNAVAILABLE: service unavailable: Internal Server Error",
-      "verdict": "No mathematical verdict from unavailable service"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "two ring homomorphisms out of a localization equal if equal on the original algebra",
-      "date": "2026-10-14",
-      "results": "IsLocalization.ringHom_ext, lift_unique, algHom_ext; these apply once a pointed affine model is supplied, not directly to t.",
-      "verdict": "No duplicate; use generic tools in the documented proof."
-    },
-    {
-      "tool": "loogle",
-      "query": "IsLocalization.ringHom_ext",
-      "date": "2026-10-14",
-      "results": "Mathlib.RingTheory.Localization.Defs.IsLocalization.ringHom_ext; requires a localization structure over a model, which the current hypotheses do not supply.",
-      "verdict": "Generic final step only."
-    },
-    {
-      "tool": "grep",
-      "query": "rg component_extension, pointed model, etale descent in lean/Sheaf, lean/WeilConjectures and Mathlib RingTheory/Etale, Localization, AlgebraicGeometry/AffineTransitionLimit",
-      "date": "2026-10-14",
-      "results": "No existing component existence or uniqueness theorem; downstream cocone/comparison results import this component extension, so cannot be used without a cycle. Scheme.exists_isAffine_of_isLimit and localization extensionality supply generic steps.",
-      "verdict": "No direct noncircular route found."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "P2",
-    "item": "Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionUnique",
-    "date": "2026-10-14",
-    "group": "P2"
+  {
+   "text": "Rewrite using the factorization equation, the structure equation, t.compatible, hpsi and hK to prove a composed with the new pointing equals evaluation at p followed by chi. Apply Spec.map to this equality and evaluate at the closed point of Spec K; fromSpecResidueField_apply proves Spec(a)(r)=p. Package the pointed triple explicitly.",
+   "uses": [],
+   "elementary": true
   },
-  "blueprint": {
-    "from": {
-      "node": "new-lem-sbc-etale-triples-prime-localization-component-extension-unique",
-      "place": "strict logical substatement",
-      "via": []
-    },
-    "is": null
-  },
-  "chapter": "sec-smooth-base-change",
-  "unit": "sk-prop-input-spreading",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionUniqueAux",
-    "file": "lean/Sheaf/RingTheory/EtaleResidueTriplesPrimeLocalizationComponentExtensionUniqueAux.lean",
-    "declaration": "AlgebraicGeometry.Scheme.etaleResidueTriples_primeLocalization_component_extension_unique_aux",
-    "statement": "theorem etaleResidueTriples_primeLocalization_component_extension_unique_aux\n    (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]\n    (χ : (Spec R).residueField p ⟶ CommRingCat.of K)\n    (q : Spec (CommRingCat.of (Localization.AtPrime p.asIdeal)))\n    (ψ : (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).residueField q ⟶\n      CommRingCat.of K)\n    [Algebra (Localization.AtPrime p.asIdeal) K]\n    (hψ : (ΓSpecIso (CommRingCat.of (Localization.AtPrime p.asIdeal))).inv ≫\n      (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).Γevaluation q ≫ ψ =\n        CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K))\n    (hK : CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫\n      CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K) =\n        (ΓSpecIso R).inv ≫ (Spec R).Γevaluation p ≫ χ)\n    (t : EtaleResidueTriples (CommRingCat.of (Localization.AtPrime p.asIdeal)) q K ψ) :\n    ∃ (s : EtaleResidueTriples R p K χ) (β : s.B ⟶ t.B),\n      s.α ≫ β = CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ t.α ∧\n      β ≫ (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =\n        (ΓSpecIso s.B).inv ≫ (Spec s.B).Γevaluation s.q ≫ s.φ ∧\n      Epi β",
-    "by": "P2",
-    "date": "2026-10-14",
-    "branch": "sheaf-dag"
-  },
-  "reviewed": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "P2",
-    "result": "pass",
-    "landing": "20261013T224517-L-1474527",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "X-29c88",
-    "group": "G3",
-    "result": "pass",
-    "landing": "20261014T004102-L-2834063",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered files match the recorded changes; all compile, axioms and forced-adaptation importer checks pass."
+  {
+   "text": "Install i.hom.toAlgebra and the supplied IsLocalization instance, then use Mathlib IsLocalization.epi M t.B. The factorization equation gives the remaining pointing equality. Return the explicitly assembled triple, i, both equations and Epi i.",
+   "uses": [],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "new-lem-sbc-prime-localization-etale-algebra-model"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project and Mathlib",
+  "place": "Parent affine descent argument split at the unpointed algebra model; Mathlib SpecToEquivOfField and IsLocalization.epi close the pointing and epi steps",
+  "group": "M4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "extend ring homomorphism from etale algebra model along localization by inverting denominators",
+   "date": "2026-10-14",
+   "results": "8 hits including StandardEtalePair.lift, StandardEtalePair.homEquiv and Algebra.Etale.of_isLocalization_Away; no cocone leg extension.",
+   "verdict": "No direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.ext",
+   "date": "2026-10-14",
+   "results": "0 hits: unknown identifier in service index; the local compiler accepts NatTrans.ext.",
+   "verdict": "Generic extensionality, not a component extension"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalization.ringHom_ext; primeLocalization; pointed localization; etale descent",
+   "date": "2026-10-14",
+   "results": "Mathlib has localization lifts and extensionality and Scheme.exists_isAffine_of_isLimit; Sheaf has unit refinement and scheme finite-data descent. Neither Mathlib nor upstream nor Sheaf has the single-object compatible leg statement.",
+   "verdict": "Use existing generic tools; new component lemma needed"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extend a compatible cocone leg to a finitely presented etale algebra over localization at a prime",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "verdict": "No mathematical verdict from unavailable service"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "two ring homomorphisms out of a localization equal if equal on the original algebra",
+   "date": "2026-10-14",
+   "results": "IsLocalization.ringHom_ext, lift_unique, algHom_ext; these apply once a pointed affine model is supplied, not directly to t.",
+   "verdict": "No duplicate; use generic tools in the documented proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.ringHom_ext",
+   "date": "2026-10-14",
+   "results": "Mathlib.RingTheory.Localization.Defs.IsLocalization.ringHom_ext; requires a localization structure over a model, which the current hypotheses do not supply.",
+   "verdict": "Generic final step only."
+  },
+  {
+   "tool": "grep",
+   "query": "rg component_extension, pointed model, etale descent in lean/Sheaf, lean/WeilConjectures and Mathlib RingTheory/Etale, Localization, AlgebraicGeometry/AffineTransitionLimit",
+   "date": "2026-10-14",
+   "results": "No existing component existence or uniqueness theorem; downstream cocone/comparison results import this component extension, so cannot be used without a cycle. Scheme.exists_isAffine_of_isLimit and localization extensionality supply generic steps.",
+   "verdict": "No direct noncircular route found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "P2",
+  "item": "Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionUnique",
+  "date": "2026-10-14",
+  "group": "P2"
+ },
+ "blueprint": {
+  "from": {
+   "node": "new-lem-sbc-etale-triples-prime-localization-component-extension-unique",
+   "place": "strict logical substatement",
+   "via": []
+  },
+  "is": null
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionUniqueAux",
+  "file": "lean/Sheaf/RingTheory/EtaleResidueTriplesPrimeLocalizationComponentExtensionUniqueAux.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleResidueTriples_primeLocalization_component_extension_unique_aux",
+  "statement": "theorem etaleResidueTriples_primeLocalization_component_extension_unique_aux\n    (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]\n    (χ : (Spec R).residueField p ⟶ CommRingCat.of K)\n    (q : Spec (CommRingCat.of (Localization.AtPrime p.asIdeal)))\n    (ψ : (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).residueField q ⟶\n      CommRingCat.of K)\n    [Algebra (Localization.AtPrime p.asIdeal) K]\n    (hψ : (ΓSpecIso (CommRingCat.of (Localization.AtPrime p.asIdeal))).inv ≫\n      (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).Γevaluation q ≫ ψ =\n        CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K))\n    (hK : CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫\n      CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K) =\n        (ΓSpecIso R).inv ≫ (Spec R).Γevaluation p ≫ χ)\n    (t : EtaleResidueTriples (CommRingCat.of (Localization.AtPrime p.asIdeal)) q K ψ) :\n    ∃ (s : EtaleResidueTriples R p K χ) (β : s.B ⟶ t.B),\n      s.α ≫ β = CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ t.α ∧\n      β ≫ (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =\n        (ΓSpecIso s.B).inv ≫ (Spec s.B).Γevaluation s.q ≫ s.φ ∧\n      Epi β",
+  "by": "P2",
+  "date": "2026-10-14",
+  "branch": "sheaf-dag"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T224517-L-1474527",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261014T022548-L-4046664",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
