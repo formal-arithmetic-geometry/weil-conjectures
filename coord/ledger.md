@@ -14075,3 +14075,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:41 L: merged deliver/T1/Sheaf.AlgebraicGeometry.OverlapStageModelRestriction (stage 3; reviewer PASS; first push; landing 20261014T004114-L-2838717 (interface); batch 20261014T004054; modules 3; new nodes 2)
 - 00:41 L: merged deliver/T4/Sheaf.Algebra.Homology.HomologyEvaluationRestrictionDiagrams (stage 3; reviewer PASS; first push; landing 20261014T004114-L-2838888 (interface); batch 20261014T004054; modules 4; new nodes 3)
 - 00:41 L: merged deliver/U2/Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf (stage 3; reviewer PASS; first push; landing 20261014T004114-L-2839037 (proof); batch 20261014T004054; modules 1; new nodes 0)
+- 00:41 L: merged deliver/V2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (stage 3; reviewer PASS; first push; landing 20261014T004115-L-2839338 (proof); batch 20261014T004054; modules 1; new nodes 0)
