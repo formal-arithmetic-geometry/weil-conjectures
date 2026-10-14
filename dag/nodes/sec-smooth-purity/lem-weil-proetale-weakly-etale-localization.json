@@ -4,14 +4,14 @@
   "is": null,
   "from": {
    "node": "def-weil-extension-by-zero",
-   "place": "its statement (a notion the statement uses)",
+   "place": "statement: U_proet is the localization of the ambient pro-etale site, its constant coefficient ring is the restricted ring, and factorization through the open U is unique",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The small pro-etale site of a weakly etale X-scheme is the localization of X_proet",
- "statement": "Let $X$ be a scheme, $A$ a commutative ring, and let $j:W\\to X$ be a weakly etale morphism with $W$ an object of the small pro-etale site $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site] (for instance an open immersion [def-weil-open-immersion] of an open subscheme $W\\subset X$; open immersions are etale, hence weakly etale). Then: (1) for every object $V\\to W$ of $W_{\\mathrm{proet}}$ the composite $V\\to W\\to X$ is weakly etale, and $\\iota_j:(V\\to W)\\mapsto(V\\to W\\to X,\\ V\\to W)$ is an isomorphism of categories from $W_{\\mathrm{proet}}$ onto the localization $X_{\\mathrm{proet}}/W$ [def-pur-localized-ringed-site] (an $X$-morphism $V\\to W$ from an object $V\\to X$ of $X_{\\mathrm{proet}}$ is weakly etale because $V\\to X$ and $W\\to X$ are), under which the coverings of $W_{\\mathrm{proet}}$ are exactly the coverings of $X_{\\mathrm{proet}}/W$; so $\\iota_j$ identifies the two sites and their categories of sheaves. (2) Under $\\iota_j$ the restriction $A_X|_W$, $(A_X|_W)(V\\to W)=A_X(V\\to X)$, of the constant sheaf of rings $A_X$ [def-weil-pbc-constant-sheaf] is identified with the constant sheaf of rings $A_W$ on $W_{\\mathrm{proet}}$, by the unique map of sheaves of rings $A_W\\to A_X|_W$ that is the identity on the constant sections $a\\in A$, which is an isomorphism. (3) Consequently restriction $F\\mapsto F|_W$, $F|_W(V\\to W)=F(V\\to X)$, is a functor $\\Sh(X_{\\mathrm{proet}},A)\\to\\Sh(W_{\\mathrm{proet}},A)$ [def-weil-sheaf-of-modules-category], and sheaves of $A_W$-modules on $W_{\\mathrm{proet}}$ are the same as sheaves of $A_X|_W$-modules on $X_{\\mathrm{proet}}/W$. (4) If $j$ is an open immersion then $j$ is a monomorphism, so every object $V\\to X$ of $X_{\\mathrm{proet}}$ has at most one $X$-morphism to $W$, and it has one exactly when $V\\to X$ factors through the open subscheme $W$ (set-theoretically, when its image lies in $W$).",
+ "statement": "Let $X$ be a scheme, $A$ a commutative ring, and let $j:W\\to X$ be a weakly etale morphism with $W$ an object of the small pro-etale site $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site] (for instance an open immersion [def-weil-open-immersion] of an open subscheme $W\\subset X$). Then: (1) for every object $V\\to W$ of $W_{\\mathrm{proet}}$ the composite $V\\to W\\to X$ is weakly etale, and $\\iota_j:(V\\to W)\\mapsto(V\\to W\\to X,\\ V\\to W)$ is a canonical equivalence of categories (an isomorphism on the concrete bounded-object categories before choosing small skeleta) from $W_{\\mathrm{proet}}$ onto the localization $X_{\\mathrm{proet}}/W$ [def-pur-localized-ringed-site] (an $X$-morphism $V\\to W$ from an object $V\\to X$ of $X_{\\mathrm{proet}}$ is weakly etale because $V\\to X$ and $W\\to X$ are), under which the coverings of $W_{\\mathrm{proet}}$ are exactly the coverings of $X_{\\mathrm{proet}}/W$; so $\\iota_j$ identifies the two sites and their categories of sheaves. (2) Under $\\iota_j$ the restriction $A_X|_W$, $(A_X|_W)(V\\to W)=A_X(V\\to X)$, of the constant sheaf of rings $A_X$ [def-weil-pbc-constant-sheaf] is identified with the constant sheaf of rings $A_W$ on $W_{\\mathrm{proet}}$, by the unique map of sheaves of rings $A_W\\to A_X|_W$ that is the identity on the constant sections $a\\in A$, which is an isomorphism. (3) Consequently restriction $F\\mapsto F|_W$, $F|_W(V\\to W)=F(V\\to X)$, is a functor $\\Sh(X_{\\mathrm{proet}},A)\\to\\Sh(W_{\\mathrm{proet}},A)$ [def-weil-sheaf-of-modules-category], and sheaves of $A_W$-modules on $W_{\\mathrm{proet}}$ are the same as sheaves of $A_X|_W$-modules on $X_{\\mathrm{proet}}/W$. (4) If $j$ is an open immersion then $j$ is a monomorphism, so every object $V\\to X$ of $X_{\\mathrm{proet}}$ has at most one $X$-morphism to $W$, and it has one exactly when $V\\to X$ factors through the open subscheme $W$ (set-theoretically, when its image lies in $W$).",
  "source": {
   "document": "literature/stacks-project/proetale.tex",
   "place": "used without statement in Definition 09AE (proetale-definition-extension-zero), which applies Modules on Sites Section 03DH to U ∈ Ob(X_proet); the localized site: literature/stacks-project/sites.tex Section 00XZ (sites-section-localize) with Lemma 00XR (sites-lemma-when-shriek); weakly etale composition and permanence: literature/stacks-project/more-morphisms.tex Lemmas 094T (more-morphisms-lemma-composition-weakly-etale), 0951 (more-morphisms-lemma-weakly-etale-permanence)"
@@ -23,34 +23,137 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work with the same bounded schemes in the universes of [def-weil-pbc-proetale-site], and first with concrete objects rather than independently chosen skeleta [def-weil-size-convention]. By [lem-weil-pbc-weakly-etale-composition-base-change], $V\\to W$ weakly etale implies $V\\to X$ weakly etale. Conversely an object $(V\\to X,a:V\\to W)$ of the slice satisfies $j\\circ a=V\\to X$, and [lem-trf-weakly-etale-between-objects] applied over $X$ shows that $a$ is weakly etale, since both $V\\to X$ and $W\\to X$ are weakly etale. These assignments preserve the underlying scheme and arrow, and are inverse on objects. A morphism on either side is exactly a scheme map $b:V\\to V^{\\prime}$ with $a^{\\prime}\\circ b=a$; this also gives its required triangle over $X$. They are therefore inverse on morphisms and preserve identity and composition. Passing to small skeleta gives the stated canonical equivalence, rather than an equality of independently chosen object sets.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-size-convention",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-trf-weakly-etale-between-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 094T (lemma-composition-weakly-etale (2)) and 0951 (lemma-weakly-etale-permanence)"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-proetale-site], a covering of an object $V\\to W$ is a family of weakly etale arrows $V_i\\to V$ satisfying the fpqc finite-affine-cover condition on every affine open of $V$. This condition mentions only those arrows and their images in $V$, not the ultimate base $W$ or $X$. In the slice the underlying objects are the same schemes by step 1, and by [def-pur-localized-ringed-site] the covering families are exactly their coverings over $X$. Hence both sites have precisely the same covering families. Precomposition with the inverse assignments sends the sheaf matching/gluing condition to the identical condition; applying these precompositions successively gives the identity. This explicitly identifies the sheaf categories (up to the skeleton equivalences), proving the rest of (1).",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Definition 098K (definition-big-small-proetale), clause (2); Sites Section 00XZ (section-localize)"
+   }
+  },
+  {
+   "text": "Put $\\mathcal C=X_{\\mathrm{proet}}$ and let $P$ be the constant ring presheaf with value $A$. Its restriction to $\\mathcal C/W$ is again the constant ring presheaf with identity transition maps. By [def-weil-pbc-constant-sheaf], $P^\\#=A_X$, and by step 2 the sheafification of $P|_W$ is $A_W$. Apply [lem-pur-ring-presheaf-sheafification-localization] to $P$ and $W$: its ring-sheaf isomorphism is $A_W\\to A_X|_W$, and its unit identity says that each constant section $a$ maps to the same constant section $a$. Uniqueness among maps with this property follows from the universal property [def-weil-pbc-sheafification]: such a map has prescribed composite with the constant-presheaf unit at every object. This establishes (2) as an isomorphism of rings, including multiplication and identity, without inferring a ring assertion merely from a module-valued assertion.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "lem-pur-ring-presheaf-sheafification-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 0H7J (example-constant-sheaf), 00WH (proposition-sheafification-adjoint), 00XR and 00XZ; generic ring-valued compatibility as stated in the cited Mathlib leaf"
+   }
+  },
+  {
+   "text": "For an $A_X$-module sheaf $F$, [def-pur-localized-ringed-site] gives the sheaf $F|_W$ with its sectionwise $A_X(V)$-module action and sends a sheaf morphism $\\varphi$ to its same component $\\varphi_V$. Pull this action back along the ring isomorphism of step 3: for $a\\in A_W(V)$ and $s\\in F(V)$ put $a\\cdot s=e_{P,V}(a)s$. For an arrow $T\\to V$, the old semilinearity and naturality of $e_P$ give $(e_{P,V}(a)s)|_T=e_{P,V}(a)|_T\\,s|_T=e_{P,T}(a|_T)s|_T$, the required restriction identity in [def-weil-sheaf-of-modules-category]. For example $e_{P,V}(ab)s=e_{P,V}(a)e_{P,V}(b)s$ and $e_{P,V}(1)s=s$ give the associative and unit action laws; the additive laws follow by distributing the ring homomorphism and the old action. A restricted module morphism remains linear; identities and compositions are unchanged componentwise. Using $e_P^{-1}$ reverses the change of ring actions: the two composites act by $e_{P,V}(e_{P,V}^{-1}(b))s=bs$ and $e_{P,V}^{-1}(e_{P,V}(a))s=as$, and leave every underlying morphism unchanged. Combined with the site identification from step 2, these mutually inverse operations identify the two module-sheaf categories and give exactly the restriction functor in (3).",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IX (definition-localize-ringed-site), Section 03DH (section-localize)"
+   }
+  },
+  {
+   "text": "Assume $j$ is an open immersion. By [lem-weil-pbc-open-immersion-monomorphism], if $a,b:V\\to W$ give the same composite $V\\to X$, then $a=b$. Existence of such an $X$-morphism is exactly the factorization equation by definition. If it exists then its underlying point map has image in the open image of $W$. Conversely, if the image of $V\\to X$ is contained in that open image, identify $W$ with this open subscheme by [def-weil-open-immersion] and apply [lem-weil-pbc-morphism-factors-through-open-subscheme] to obtain the factorization. Thus existence is equivalent to the asserted set-theoretic condition, and uniqueness has already been proved. Step 1 also ensures that this factorization is an object of $W_{\\mathrm{proet}}$. This proves (4).",
+   "uses": [
+    "lem-weil-pbc-open-immersion-monomorphism",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01L7 (lemma-immersions-monomorphisms), 01HI (lemma-restrict-map-to-opens) and 01IK (lemma-open-subspace-scheme)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-open-immersion",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-size-convention",
+  "lem-pur-ring-presheaf-sheafification-localization",
+  "lem-trf-weakly-etale-between-objects",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "lem-weil-pbc-weakly-etale-composition-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Localization required by Definition 09AE, expanded using 094T, 0951, 00XZ, ring-valued sheafification compatibility, 04IX and 01HI/01L7"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "grep -n 'def \\|abbrev \\|instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
-   "results": "`Scheme.ProEt S` (line 100): the small pro-étale site (weakly étale schemes over S, no size bound), `ProEt.topology S` (line 156), `ProEt.forget S : S.ProEt ⥤ Over S` (line 120); no functor W.ProEt ⥤ X.ProEt and no equivalence with `Over` of an object of X.ProEt",
-   "date": "2026-10-09",
-   "verdict": "no match"
+   "query": "iteratedSliceEquiv|constantSheaf.*[Oo]ver|[Oo]ver.*constantSheaf",
+   "results": "5 hits: Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the complete statement; relevant infrastructure inspected"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pro etale site of a weakly etale scheme over X is the slice site over that object",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProEt\"",
+   "results": "12 hits: AlgebraicGeometry.Scheme.ProEt, AlgebraicGeometry.Scheme.proetalePrecoverage, AlgebraicGeometry.Scheme.proetaleTopology, AlgebraicGeometry.Scheme.instCategoryProEt, AlgebraicGeometry.Scheme.instHasIsosProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderCompositionProetalePrecoverage, AlgebraicGeometry.Scheme.instSubcanonicalProetaleTopology",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the complete statement; relevant infrastructure inspected"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a weakly etale morphism W to X the small pro etale site of W is equivalent to the slice site of X over W and constant sheaves restrict to constant sheaves",
+   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.etaleTopology, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.sheafCongr.functor_obj_val_obj, CategoryTheory.Equivalence.sheafCongr_functor, CategoryTheory.Equivalence.sheafCongr.functor, CategoryTheory.Sheaf.isConstant_iff_of_equivalence",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the complete statement; relevant infrastructure inspected"
   },
   {
    "tool": "grep",
-   "query": "grep -n 'def Over.map\\|HasOfPostcompProperty\\|instance \\[WeaklyEtale f\\] \\[WeaklyEtale g\\]' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/MorphismProperty/OverAdjunction.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean",
-   "results": "`MorphismProperty.Over.map hPf : P.Over Q X ⥤ P.Over Q Y` (OverAdjunction.lean:42, composition with f); weakly etale stable under composition (WeaklyEtale.lean:71) and `HasOfPostcompProperty @WeaklyEtale @WeaklyEtale` (line 112, permanence); `Over.iteratedSliceEquiv : Over f ≌ Over f.left` (CategoryTheory/Comma/Over/Basic.lean:382) for the big slice categories",
-   "date": "2026-10-09",
-   "verdict": "ingredients only: the composition functor and permanence exist; the identification of sites W_proet ≅ X_proet/W and of constant sheaves is not in Mathlib"
+   "query": "ProEt|WeaklyEtale",
+   "results": "5 hits: 9, 34, 50, 52, 53",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the complete statement; relevant infrastructure inspected"
   },
   {
-   "tool": "grep",
-   "query": "grep -rn 'constantSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites | grep -i 'over\\|restrict\\|pullback'",
-   "results": "only a docstring in ConstantSheaf.lean:158 about commuting constantSheaf with pullback/pushforward via `equivCommuteConstant'`; no restriction of a constant sheaf to `J.over X`",
-   "date": "2026-10-09",
-   "verdict": "no match"
+   "tool": "leanfinder",
+   "query": "Restriction to a slice site commutes with sheafification of a constant sheaf of rings and a weakly etale morphism induces the slice pro etale site",
+   "results": "8 hits: Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.Scheme.Etale.forget, PresheafOfModules.sheafificationCompForgetCompToPresheaf, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, PresheafOfModules.sheafificationCompToSheaf, Algebra.basicOpen_subset_etaleLocus_iff_etale, Algebra.FormallyEtale.localization_map, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the complete statement; relevant infrastructure inspected"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -70,5 +173,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-proetale-weakly-etale-localization",
+  "worker": "stage1",
+  "summary": "Constructed the inverse site assignments and checked the identical fpqc covers; used one new generic ring-presheaf Mathlib leaf for canonical ring-valued sheafification compatibility; transported module actions and cited the existing monomorphism and open-factorization leaves. Corrected strict category isomorphism to equivalence after choosing independent small skeleta.",
+  "blueprint": "Realizes the ancestor def-weil-extension-by-zero statement: localization of U_proet, identification of constant rings, the induced restriction of modules, and the unique factorization through U."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NQ-6dc5aed8b",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-6dc5aed8b (reviewer sub-agent of L); spot-checked: Read the full delivery, DAG instructions, unit/chapter route, report, item, new node, cited statements, Stacks sources, and Mathlib declarations. Verified all five proof steps, hypotheses, coefficient/base-change typing, skeleton correction, edge cases, duplicate searches, and blueprint route. Wrote review.md; no repairs needed."
+ }
 }
