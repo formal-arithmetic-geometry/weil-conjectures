@@ -3,27 +3,87 @@
  "blueprint": {
   "is": "def-weil-pbc-proper-open-comparison",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Comparison map for a proper map fixing an open",
- "statement": "Let $u:T_1\\to T_2$ be\nproper, and let\n$j_i:X\\hookrightarrow T_i$ be\nopen immersions with\n$u j_1=j_2$. Fix a finite ring $\\Lambda$ and\n$K\\in\\hyperref[def-weil-pbc-derived-categories]{D^+(X_{\\Et},\\Lambda)}$.\nSet $V=T_1\\times_{T_2}X$, with projections $b:V\\to T_1$ and\n$p:V\\to X$, and let $s:X\\to V$ be the morphism induced by $j_1$,\nso that $b s=j_1$ and $p s=\\operatorname{id}_X$. Define\n\n$$\n\\alpha_{u,K}:j_{2!}K\\longrightarrow Ru_*j_{1!}K\n$$\n\nto be the adjoint, under $j_{2!}\\dashv j_2^{-1}$, of\n$\\theta_{u,K}^{-1}$. The functor $Ru_*$ here is the\nderived direct image.",
+ "statement": "Let $T_1,T_2,X$ be schemes [def-pc-scheme], let $u:T_1\\to T_2$ be proper [def-weil-proper-morphism], and let $j_i:X\\hookrightarrow T_i$ be open immersions [def-weil-open-immersion] with $u\\circ j_1=j_2$. Fix a finite commutative ring $\\Lambda$ and $K\\in D^+(X_{\\Et},\\Lambda)$ [def-weil-pbc-derived-categories]. Use the derived direct image $Ru_*$ [def-weil-pbc-direct-image], extension by zero [def-weil-pbc-extension-by-zero], and inverse image [def-weil-pbc-inverse-image].\n\nPut $V=T_1\\times_{T_2}X$ [def-pc-fibre-product], with projections $b:V\\to T_1$ and $p:V\\to X$. Define $s:X\\to V$ by the pair $(j_1,\\operatorname{id}_X)$, so $b\\circ s=j_1$ and $p\\circ s=\\operatorname{id}_X$. The base-change identification of [lem-weil-pbc-open-immersion-base-change] identifies $V$ with the open subscheme $u^{-1}(j_2(X))$ of $T_1$. Under this identification, $s$ is the inclusion of the open subscheme $j_1(X)$ into $u^{-1}(j_2(X))$: the inclusion of images follows from $u\\circ j_1=j_2$, and the structure sheaf maps are the restrictions of those of $j_1$. Thus $s$ is an open immersion. The morphism $p$ is proper by [lem-weil-pbc-proper-base-change], hence separated; [lem-weil-pbc-open-section-clopen] makes $s(X)$ open and closed in $V$.\n\nSpecify the three isomorphisms used in the construction as follows. Let\n$$\n r_{u,K}:j_2^{-1}Ru_*j_{1!}K\\xrightarrow{\\sim}Rp_*b^{-1}j_{1!}K\n$$\nbe the open-restriction isomorphism of [lem-weil-pbc-derived-open-restriction], applied to $u,j_2,j_{1!}K$. The square with top map $\\operatorname{id}_X:X\\to X$, left map $s:X\\to V$, right map $j_1:X\\to T_1$, and bottom map $b:V\\to T_1$ is an open-immersion square [def-cbc-open-immersion-square]. Indeed an open immersion is a monomorphism: after identifying its source with an open subscheme, a morphism into it is uniquely determined by its composite with the inclusion, including the restricted structure sheaf maps. For every scheme $Z$, a pair $t:Z\\to X$, $v:Z\\to V$ with $j_1t=bv$ satisfies $b s t=j_1t=bv$, hence $v=st$. Thus the fibre-product universal property gives $X\\times_{T_1}V\\cong X$, with inverse to its first projection given by $(\\operatorname{id}_X,s)$. Let\n$$\n e_{u,K}:b^{-1}j_{1!}K\\xrightarrow{\\sim}s_!K\n$$\nbe the canonical base-change isomorphism of [cor-cbc-derived-extension-zero-base-change] for this square, using the identity inverse-image identification on $X$. Let\n$$\n c_{p,s,K}:Rp_*s_!K\\xrightarrow{\\sim}K\n$$\nbe the component-restriction isomorphism of [lem-weil-pbc-clopen-section-direct-image]. Define the specified isomorphism by the composite\n$$\n \\theta_{u,K}=c_{p,s,K}\\circ Rp_*(e_{u,K})\\circ r_{u,K}:\n j_2^{-1}Ru_*j_{1!}K\\xrightarrow{\\sim}K.\n$$\n\nUse the adjunction $j_{2!}\\dashv j_2^{-1}$ on $D^+$ induced by [lem-weil-pbc-extension-by-zero-adjunction]. Here both sheaf functors are exact by [lem-weil-pbc-extension-by-zero-exact] and [prop-weil-pbc-inverse-image-modules-exact]; apply them termwise to complexes and homotopy classes as in [lem-weil-pbc-termwise-adjunction-homotopy]. Their units and counits descend through the localization by [lem-weil-pbc-localization-universal-property], and the triangle identities descend with them. These induced exact functors preserve $D^+$ by [lem-weil-pbc-exact-functor-bounded-below]. Write $\\varepsilon_{j_2}:j_{2!}j_2^{-1}\\to\\operatorname{id}$ for the descended counit. Define the comparison map to be the adjoint of $\\theta_{u,K}^{-1}$, explicitly\n$$\n \\alpha_{u,K}:=\n \\varepsilon_{j_2,Ru_*j_{1!}K}\\circ j_{2!}(\\theta_{u,K}^{-1}):\n j_{2!}K\\longrightarrow Ru_*j_{1!}K.\n$$\nAll composites and inverse isomorphisms are taken in the indicated bounded below derived categories.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-pbc-proper-open-comparison.md",
   "place": "node def-weil-pbc-proper-open-comparison, order 1475"
  },
  "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-extension-by-zero",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-inverse-image",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-open-section-clopen",
+  "lem-weil-pbc-derived-open-restriction",
+  "def-cbc-open-immersion-square",
+  "cor-cbc-derived-extension-zero-base-change",
+  "lem-weil-pbc-clopen-section-direct-image",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-exact-functor-bounded-below"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism fixing an open subscheme construct the comparison from extension by zero to derived pushforward as the adjoint of the inverse restriction isomorphism",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.pushforwardPushforwardAdj; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; SheafOfModules.pushforwardNatIso_hom; SheafOfModules.pushforwardNatIso",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern Zariski structure-sheaf modules or general sheaf pushforwards, not this etale derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "properOpenComparison|proper.open.comparison|extension.by.zero",
+   "results": "Mathlib/NumberTheory/MulChar/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: only a multiplicative-character extension-by-zero comment"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper morphism identity on an open extension by zero derived direct image comparison morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "CategoryTheory.Adjunction.homEquiv and its unit/counit formulas, Mathlib.CategoryTheory.Adjunction.Basic",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole definition: the abstract transpose operation only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adjunction extension by zero restriction on bounded below derived categories of etale sheaves comparison for proper morphisms identity on open",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction; CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern Zariski structure-sheaf modules or general sheaf pushforwards, not this etale derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|extensionByZero|clopen.*section",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: no declarations found"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -52,5 +112,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-proper-open-comparison",
+  "worker": "stage1",
+  "summary": "Specified the previously free theta as the composite described by the neighbouring blueprint identification lemma, using independent existing open-restriction, extension-zero base-change and clopen-section nodes. Spelled out the derived adjunction and counit formula; no new nodes and no proof for this definition. Replaced the scheme-conventions bundle by the definitions actually used. Made the commutative coefficient convention explicit, as required by the existing derived-category definition. Avoided the cycle through lem-weil-pbc-proper-open-identification and the two proper-open geometric nodes that cite this item.",
+  "blueprint": "The statement of blueprint def-weil-pbc-proper-open-comparison, order 1475: its fibre product and section, its adjoint-of-the-inverse clause, and its final derived-direct-image sentence. The meaning of theta is expanded exactly as the composite specified in lem-weil-pbc-proper-open-identification, order 1481; that downstream node is a source/pointer, not a dependency."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-b3cb2d4c2",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-b3cb2d4c2 (reviewer sub-agent of L); spot-checked: Read the definition, all cited statements, source passages, report, and unit/chapter route. Geometry, cartesianness, the three-isomorphism composite, derived adjunction, coefficient category, and edge cases check out. No dependency cycle, duplicate new node, or target weakening found. No repairs or tool_uses accepted; detailed checks are in review.md."
+ }
 }
