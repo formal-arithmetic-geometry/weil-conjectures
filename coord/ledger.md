@@ -14033,3 +14033,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:40 L: merged deliver/A3/Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestriction (stage 3; reviewer PASS; first push; landing 20261014T004055-L-2831888 (interface); batch 20261014T004054; modules 2; new nodes 2)
 - 00:40 L: merged deliver/A3/Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationPair (stage 3; reviewer PASS; first push; landing 20261014T004056-L-2831989 (proof); batch 20261014T004054; modules 1; new nodes 0)
 - 00:40 L: merged deliver/B3/Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorRepresentativeComponentCover (stage 3; reviewer PASS; first push; landing 20261014T004056-L-2832088 (interface); batch 20261014T004054; modules 3; new nodes 2)
+- 00:40 L: merged deliver/B3/Sheaf.AlgebraicGeometry.Morphisms.EquivariantOrbitModel (stage 3; reviewer PASS; first push; landing 20261014T004057-L-2832195 (proof); batch 20261014T004054; modules 1; new nodes 0)

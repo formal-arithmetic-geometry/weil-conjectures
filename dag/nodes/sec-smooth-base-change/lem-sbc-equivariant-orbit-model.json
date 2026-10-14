@@ -9,11 +9,21 @@
  ],
  "proof": [
   {
-   "text": "State the finite orbit-model construction as an intermediate descent step.",
+   "text": "Equip Fin d with the permutation action alpha. Enumerate its finite orbit quotient by Fin m using Fintype.equivFin; choose Quotient.out representatives r(k) and their stabilizers K(k). Every component has a chosen transporter from its representative, and orbit labels are invariant under alpha.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Unfold the equalizer intersection defining the equivariant algebra. Evaluation at representatives defines an H-algebra homomorphism into the product of stabilizer equalizers. If alpha(a)(r(k))=alpha(a-prime)(r(k)), then a-prime inverse times a stabilizes r(k); applying rho(a-prime) to its fixedness equation proves transport independence using rho(ab)=rho(a) composed with rho(b). No assumption rho(1)=id is needed.",
    "uses": [
     "def-sbc-affine-torsor-equivariant-algebra"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For a family b in the product, define f(i)=rho(t(i))(b(o(i))), where t(i) is the chosen transporter and o(i) the orbit label. Transport independence proves equivariance, and stabilizer fixedness proves evaluation of f is b. Conversely equivariance determines every value from the representative, proving injectivity. Apply AlgEquiv.ofBijective and return m and K. This is the already proved affine_torsor_equivariant_orbit_product construction with its unused rho-one assumption and unneeded cardinality bound omitted.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -21,10 +31,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "K4",
+  "group": "B3",
   "document": "Stacks Project",
-  "place": "Tag 03SF",
-  "note": "Intermediate orbit bookkeeping statement."
+  "place": "Tag 03SF, finite orbit decomposition",
+  "note": "Reused the complete constructive proof from AffineTorsorEquivariantOrbitProduct. Its rho-one hypothesis is unused; the same proof establishes the unchanged weaker-hypothesis signature here directly from Mathlib."
  },
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
@@ -98,10 +108,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K4",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261014T001727-L-2552752",
-  "kind": "interface",
+  "landing": "20261014T004057-L-2832195",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
