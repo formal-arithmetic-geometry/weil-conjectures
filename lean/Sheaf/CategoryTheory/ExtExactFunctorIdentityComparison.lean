@@ -84,7 +84,7 @@ theorem exactFunctorIdentityComparison
   have : NatTrans.CommShift Q.rightUnitor.inv ℤ :=
     NatTrans.CommShift.of_iso_inv Q.rightUnitor ℤ
   have : NatTrans.CommShift δ.hom ℤ := by dsimp [δ]; infer_instance
-  have h := (F.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism
+  have hmap := (F.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism
     (ComplexShape.up ℤ)).equiv_smallShiftedHomMap Q Q
       ((F.mapCochainComplexSingleFunctor 0).app X)
       ((F.mapCochainComplexSingleFunctor 0).app Y) (𝟭 _) δ x
@@ -115,8 +115,8 @@ theorem exactFunctorIdentityComparison
     erw [Q.map_id, Category.id_comp, Iso.inv_hom_id_app]
   apply Ext.ext
   simp only [Ext.comp_hom, Ext.mk₀_hom, ShiftedHom.comp_mk₀, ShiftedHom.mk₀_comp]
-  change (x.mapExactFunctor F).hom = _ at h
-  rw [h]
+  change (x.mapExactFunctor F).hom = _ at hmap
+  rw [hmap]
   simp only [ShiftedHom.comp_mk₀, ShiftedHom.mk₀_comp, ShiftedHom.id_map,
     Category.assoc, ← Functor.map_comp, hy, hx]
   change _ ≫ x.hom ≫ (shiftFunctor _ _).map (𝟙 _) = _
