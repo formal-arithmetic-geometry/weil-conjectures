@@ -1,6 +1,6 @@
 # Work queue
 
-43 items; claim with `tools/claim.py next <group> [--stage N]`.
+42 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (43)
+## Stage 3: modules to prove (42)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -40,7 +40,6 @@
 | `Sheaf.AlgebraicGeometry.StandardSingleUnionHomotopyChainData` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SchemeCanonicalTensorUnitComponent` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate` | 30 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SchemeTensorHomUncurrySummandNaturality` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuity` | 31 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeDerivedTensorHomologyCoordinates` | 32 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineStalkBaseSecondLocalizationComparison` | 33 | 1 | proof |
