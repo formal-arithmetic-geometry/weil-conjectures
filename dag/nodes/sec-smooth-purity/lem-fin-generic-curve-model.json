@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fin-generic-curve-model",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A generic curve model with finite comparison boundary",
@@ -14,76 +14,286 @@
  },
  "stmt_deps": [
   "def-pc-projective-morphism",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-geometric-fibre",
+  "def-kun-dimension",
+  "def-pc-base-change",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-scheme-coproduct-family"
  ],
  "proof": [
   {
-   "text": "Let $K$ be the fraction field of the base and $\\bar K$ an algebraic\nclosure. Normalize the reduced one-dimensional components of\n$X_{\\bar K}$ and retain its isolated zero-dimensional components.\nNormalization is finite by\n[lem-fin-normalization-extension-finite]; the normalized curves\nare smooth over $\\bar K$ by [lem-sc-normalized-curve-smooth].\nThey are projective by [lem-fin-finite-over-projective], since\nnormalization is finite over a projective scheme. Their disjoint union $\\bar Y$ maps finitely and\nsurjectively to $(X_{\\bar K})_{\\mathrm{red}}$.\nOn the complement of component intersections and the nonnormal\npoints this is an isomorphism. These exceptional sets are finite:\nthe finite normalization algebra agrees with the original algebra\nat every generic point, so the support of its coherent cokernel is\nzero-dimensional on a curve.",
+   "text": "First replace $S$ by a nonempty affine open $\\operatorname{Spec}A$; its generic point remains in this open, and $A$ is a domain. Schemes of finite type over the given field are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Thus all schemes of finite type used below are Noetherian. On their affine charts finite type implies finite presentation by [lem-weil-pbc-finite-type-noetherian-finite-presentation]; separatedness gives quasi-separatedness, so the projective schemes and their finite covers are of finite presentation over their respective ground fields (the original field, $K$, or $\\bar K$). A field is Noetherian because its only ideals are zero and the whole field. Put $K=\\operatorname{Frac}A$ and choose an algebraic closure $\\bar K$. Projectivity survives both the generic-fibre and field base changes by [lem-pc-projective-base-change]. Put $\\bar T=(X_{\\bar K})_{\\mathrm{red}}$; its closed immersion into $X_{\\bar K}$ followed by the fixed projective embedding is still a closed immersion (affine-locally it is the composite of surjective quotient maps), so $\\bar T$ is projective. Reduction has the same underlying space, hence $\\dim\\bar T\\leq1$.",
    "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-pc-projective-base-change",
+    "def-pc-projective-morphism",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-generic-curve-model.md",
+    "place": "Proof paragraph 1; Stacks 01T6 (lemma-finite-type-noetherian), 00FP (lemma-Noetherian-finite-type-is-finite-presentation)"
+   }
+  },
+  {
+   "text": "By [lem-sc-component-intersections-finite], $\\bar T$ has finitely many irreducible components. Give each component its reduced closed structure. Normalize each one-dimensional component $C_a$ in its own function field. The identity extension of that field is finite, so [lem-fin-normalization-extension-finite] gives a finite normalization; [lem-sc-normalization-exists] gives surjectivity, birationality and preservation of dimension. Since $\\bar K$ is perfect, [lem-sc-normalized-curve-smooth] makes the normalized curves smooth. Each zero-dimensional component is $\\operatorname{Spec}\\bar K$ by [lem-weil-pbc-zero-dim-integral-point], and is retained unchanged. Take their finite coproduct using [lem-weil-pbc-scheme-coproduct-family]. The resulting $\\bar\\nu:\\bar Y\\to\\bar T$ is finite: on an affine chart it corresponds to a finite product of finite modules, with the component inclusions given by quotient maps. It is surjective because the components cover $\\bar T$ and each normalization is surjective. Each factor is projective over the affine Noetherian base $\\operatorname{Spec}\\bar K$ by [lem-fin-finite-over-projective], applied to its finite map to $\\bar T$. A smooth integral curve has pure dimension one: the fibre-dimension function is locally constant by [sbc-lem-smooth-relative-dimension-locally-constant], hence constant on the irreducible normalization, and its value is one since its dimension is one. The point factors have relative dimension zero.",
+   "uses": [
+    "lem-sc-component-intersections-finite",
     "lem-fin-normalization-extension-finite",
+    "lem-sc-normalization-exists",
     "lem-sc-normalized-curve-smooth",
-    "lem-fin-finite-over-projective"
+    "lem-weil-pbc-zero-dim-integral-point",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-fin-finite-over-projective",
+    "sbc-lem-smooth-relative-dimension-locally-constant"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-generic-curve-model.md",
+    "place": "Proof paragraph 1; Stacks 0359 (section-nagata), 0BXC (lemma-normalization-birational), 02G1 (lemma-smooth-omega-finite-locally-free)"
+   }
   },
   {
-   "text": "All these data descend to a finite extension $K'/K$. Here is what must\nbe descended. On finitely many affine charts, take generators\n$f_1,\\ldots,f_m$ of the nilradical defining\n$(X_{\\bar K})_{\\mathrm{red}}$ together with nilpotence identities\n$f_j^{N_j}=0$, presentations of the finite normalization algebra and\nits finitely many factors, and the morphisms. There are finitely many\nalgebraic coefficients, so they lie in one finite extension $K'$.\nEqualities, inverse maps and gluing conditions descend by faithful\nflatness after including those coefficients: the descended ideal $I'$\nis generated by the descended $f_j$, and the descended identities give\n$I'^{N}=0$ for $N=\\max_jN_j$. Hence $I'$ lies in the nilradical of\nthe descended algebra. Conversely a nilpotent class of $A/I'$ becomes\nzero after tensoring with $\\bar K$, because the descended quotient is\ngeometrically reduced: its extension to $\\bar K$ is reduced. We use\nthe commutative-algebra criterion that a finite-type algebra over a field\nis geometrically reduced if and only if its tensor product with an\nalgebraic closure is reduced; this criterion also covers transcendental\nfield extensions. Therefore no non-zero nilpotent class survives and the\ndescended nilpotent ideal $I'$ is the entire nilradical. Thus the\ntarget really is $T_\\eta=(X_{K'})_{\\mathrm{red}}$; reduction is not\nbeing presumed to commute with every field extension.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Smoothness of each descended factor follows from smooth\npresentations of its $\\bar K$-model: on a finite affine cover,\ninclude the equations, the invertible Jacobian minors and the\nfinite identities asserting that the opens cover. These give\nsmooth presentations over $K'$ in the sense of\n[def-sbc-smooth-morphisms]. Each factor has relative dimension\none or zero. Its geometric model is connected, although connectedness\nof all later fibres will not be needed.",
+   "text": "The map $\\mathcal O_{\\bar T}\\to\\bar\\nu_*\\mathcal O_{\\bar Y}$ is injective. Indeed on an affine chart a section in its kernel vanishes in the function field of every component meeting the chart, by the inclusions into the normalization algebras. It therefore belongs to every minimal prime, hence to every prime, and is nilpotent by [lem-weil-pbc-zero-locus-eq-iff-radical-eq]; reducedness makes it zero. The pushforward is coherent by [lem-pc-f3-finite-pushforward-finite-type] and [pqf-lem-coherent-ft-locnoeth], and its cokernel is coherent by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth]. Its support $\\bar E$ is closed by [lem-weil-pbc-finite-type-module-support-closed]. At each generic point only its own component remains (the other finitely many closed components can be excluded); the normalization induces the same function field by birationality, so the cokernel stalk is zero there. The complement of $\\bar E$ is dense. The projective $\\bar T$ is separated, of finite type over $\\bar K$, and of dimension at most one, hence is a curve in [def-sc-curves], including when it is empty or has isolated point components; [lem-sc-dense-open-finite-complement] makes $\\bar E$ a finite set of closed points. Off $\\bar E$ the algebra map is an isomorphism and hence $\\bar\\nu$ is an isomorphism. Thus the generic comparison boundary has dimension at most zero.",
    "uses": [
-    "def-sbc-smooth-morphisms"
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "lem-sc-normalization-exists",
+    "lem-pc-f3-finite-pushforward-finite-type",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-sc-dense-open-finite-complement",
+    "def-sc-curves"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-generic-curve-model.md",
+    "place": "Proof paragraph 1, coherent cokernel argument; Stacks 00E0 (lemma-Zariski-topology), 01XZ (lemma-coherent-Noetherian), 01Y5 (lemma-coherent-support-closed)"
+   }
   },
   {
-   "text": "Write the base as $\\operatorname{Spec}A$.\nAfter inverting a nonzero element, the finitely many field generators\nof $K'/K$ are integral over $A$: multiply each generator by a\ncommon denominator in its monic polynomial. The algebra $A'$\nthey generate is finite and a domain, with fraction field $K'$.\nIt gives a finite surjection $S'=\\operatorname{Spec}A'\\to S$,\nby lying over. Put $T=(X_{S'})_{\\mathrm{red}}$.\nLocalization commutes with reduction, so its generic fibre is $T_\\eta$.\nApply [lem-fin-spread-finite-algebra] to the finite algebra of\nthe generic map, including its factor decomposition. This gives\n$\\nu:Y\\to T$ finite with $Y=\\coprod Y_a$.\nBy [lem-fin-finite-over-projective], each $Y_a$ is projective\nover $S'$.",
+   "text": "The finite intermediate extensions $L/K$ in $\\bar K$ form a small directed set, with union $\\bar K$; their spectra have affine transition maps and are Noetherian and quasi-separated. This is an actual limit diagram: on coordinate rings its colimit is the union $\\bar K$. Apply all three clauses of [thm-pd-spreading-out] to $\\bar T$, the finitely many factors of $\\bar Y$, their maps to $\\bar T$, and $\\bar T\\to X_{\\bar K}$, with the existing $X_K$ as the fixed model. Choosing a common finite stage descends the objects, arrows and their commuting relations to a finite extension $K'/K$. The descended $T'\\to X_{K'}$ is a closed immersion by [lem-pc-fpqc-descend-closed-immersion], since its pullback to $\\bar K$ is one; the covering is fpqc because a field extension is faithfully flat and its spectrum map is affine. Form $Y'$ as the coproduct of the descended factors. Its map $Y'\\to T'$ is finite by [lem-sbc-finite-morphism-fpqc-descent], applied to $T'_{\\bar K}\\to T'$. All these source and target schemes are of finite presentation, as required for the limit theorem.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-pc-fpqc-descend-closed-immersion",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-sbc-finite-morphism-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-generic-curve-model.md",
+    "place": "Proof paragraph 2; Stacks 01ZM (lemma-descend-finite-presentation), 02L6 (lemma-descending-property-closed-immersion), 02LA (lemma-descending-property-finite)"
+   }
+  },
+  {
+   "text": "Identify the descended closed subscheme with the reduction, rather than assuming reduction commutes with field extension. On a chart $\\operatorname{Spec}B\\subset X_{K'}$, let $I\\subset B$ define $T'$. Its extended ideal in $B\\otimes_{K'}\\bar K$ is the nilradical. Every $b\\in I$ therefore has $(b\\otimes1)^N=0$ for some $N$, and injectivity of $B\\to B\\otimes_{K'}\\bar K$ implies $b^N=0$. Conversely $B/I$ injects into $(B/I)\\otimes_{K'}\\bar K$, which is reduced, so $B/I$ is reduced. These two observations give $I=\\sqrt{0}$, and glue to $T'=(X_{K'})_{\\mathrm{red}}$. Tensor injectivity here is elementary linear algebra: extend a nonzero vector to a field-vector-space basis. No assertion about transcendental extensions is needed. In particular the erroneous exponent $\\max N_j$ in the imported proof is not used; if generators satisfy $b_j^{N_j}=0$, a valid exponent for their ideal is $1+\\sum_j(N_j-1)$.",
+   "uses": [
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-generic-curve-model.md",
+    "place": "Proof paragraph 2, identification of the nilradical; elementary faithful field-extension argument"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-affine-limit-smooth-stage] to the total descended $Y'$ over the directed system of finite intermediate fields extending $K'$: its pullback to $\\bar K$ is smooth. This gives a further finite field stage at which $Y'$ is smooth; replace $K'$ by that stage and all objects by their pullbacks. Each open-and-closed factor is smooth as well. The preceding reduction argument still applies after this replacement. For each factor its dimension at every point equals that at a point above it over $\\bar K$, by [lem-weil-pbc-dimension-at-point-field-extension], applied on finite-type affine charts. Points above exist because a field extension is faithfully flat (for a prime, the residue-field tensor product is nonzero and has a prime). Thus its relative dimension over $K'$ is exactly the one or zero of its geometric model. Also the map $\\mathcal O_{T'}\\to\\nu'_*\\mathcal O_{Y'}$ is injective and its cokernel has dimension-zero support: on affine charts tensoring with $\\bar K$ is exact, so the kernel tensors to zero, and [lem-weil-pbc-support-pullback-finite-type] identifies the cokernel's pulled-back support with $\\bar E$. The dimensions of its affine support charts are unchanged by [lem-weil-pbc-dimension-preserved-field-extension].",
+   "uses": [
+    "lem-sbc-affine-limit-smooth-stage",
+    "lem-weil-pbc-dimension-at-point-field-extension",
+    "lem-weil-pbc-support-pullback-finite-type",
+    "lem-weil-pbc-dimension-preserved-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-generic-curve-model.md",
+    "place": "Proof paragraphs 2-3; Stacks 0C0C (lemma-descend-smooth), field-extension dimension and support comparison"
+   }
+  },
+  {
+   "text": "Choose finitely many generators $\\alpha_i$ of the finite extension $K'/K$. Each satisfies a monic polynomial with coefficients in $K$. Invert the product $a\\ne0$ of the denominators of all those coefficients in $A$, so the same polynomials show the $\\alpha_i$ integral over $A_a$. Then $A'=A_a[\\alpha_1,\\ldots,\\alpha_r]\\subset K'$ is a domain, finite over $A_a$: monomials whose individual exponents are less than the respective monic degrees span it. Its fraction field is $K'$. The injective integral inclusion $A_a\\hookrightarrow A'$ gives a surjective spectrum map by [pqf-lem-lying-over]. Therefore $p:S'=\\operatorname{Spec}A'\\to\\operatorname{Spec}A_a$ is finite and surjective. Put $T=(X_{S'})_{\\mathrm{red}}$. By [lem-pc-projective-base-change] and the reduction closed immersion, $T$ is projective. Its generic fibre is $T'$: localization commutes with reduction, since if $b/s$ is nilpotent, some nonzero localization denominator $t$ has $tb^n=0$, whence $(tb)^n=0$, so $b/s$ is the localization of a nilpotent element. Conversely localizing a nilpotent stays nilpotent.",
+   "uses": [
+    "pqf-lem-lying-over",
+    "lem-pc-projective-base-change",
+    "def-weil-pbc-scheme-reduction",
+    "def-pc-projective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-generic-curve-model.md",
+    "place": "Proof paragraph 4; Stacks 00GU (lemma-integral-going-up); explicit monic-polynomial and localization calculations"
+   }
+  },
+  {
+   "text": "Use [lem-fin-spread-finite-algebra] over the Noetherian domain $A'$ on the finite coherent $\\mathcal O_{T'}$-algebra of $Y'\\to T'$, including its finite product decomposition. After inverting one nonzero element of $A'$, it gives a finite $\\nu:Y\\to T$ and a finite decomposition $Y=\\coprod_aY_a$ whose generic factors are the prescribed ones. Each $Y_a\\to T$ is finite, because a product factor is a finite quotient of the finite algebra. By [lem-fin-finite-over-projective], all $Y_a$ are projective over this affine open of $S'$. Their finite-type morphisms are of finite presentation by the Noetherian affine-ring criterion [lem-weil-pbc-finite-type-noetherian-finite-presentation].",
    "uses": [
     "lem-fin-spread-finite-algebra",
-    "lem-fin-finite-over-projective"
+    "lem-fin-finite-over-projective",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-generic-curve-model.md",
+    "place": "Proof paragraph 4, spreading the finite algebra and its factors"
+   }
   },
   {
-   "text": "The finitely many smooth presentations covering $Y_{a,\\eta}$ are\ndescribed by finitely many equations and their invertible Jacobian\nminors with coefficients in $K'$. Clearing the denominators of those\nfinitely many coefficients by multiplying with a common denominator\n$h_i$ presents each chart, over the open $D(h_i)\\subseteq S'$, as a\nclosed subscheme of an affine space over $S'$ together with the\nlocalization making it smooth; smoothness is the Jacobian criterion of\n[def-sbc-smooth-morphisms] over $S'$, and the relative dimension\nis the one recorded by the presentation. Their union is therefore an\nopen subset of $Y_a$ whose generic fibre is all of $Y_{a,\\eta}$.\nIts closed complement in the projective $S'$-scheme $Y_a$ is proper\nover $S'$ and misses the generic fibre, so its closed image does not\ncontain the generic point of $S'$ and is removed by\n[lem-weil-pbc-proper-closed-image].\nThus the entire $Y_a$ is smooth of dimension one or zero.",
+   "text": "For the total projective $Y$ over the current affine domain base, apply [lem-sbc-affine-limit-smooth-stage] to the system of principal nonempty base opens $\\operatorname{Spec}A'_h$ ($h\\ne0$), whose limit is $\\operatorname{Spec}K'$. Their transitions are affine, their stages are Noetherian and quasi-separated, and $Y$ is of finite presentation. Its generic fibre is smooth by Step 6, so after one further localization $Y$ and all its factors are smooth. On a factor $Y_a$ of generic relative dimension $n_a\\in\\{0,1\\}$, [sbc-lem-smooth-relative-dimension-locally-constant] says the locus where the fibre dimension is not $n_a$ is closed (indeed open and closed). It has empty generic fibre. Projectivity implies properness by [lem-pc-projective-proper], so its image is closed by [lem-weil-pbc-proper-closed-image]; remove these finitely many images. Now every factor is smooth of pure relative dimension $n_a$. For each $n_a=0$ factor apply [lem-fin-projective-generically-finite] to make its structural map finite by a further nonempty base restriction. Smooth relative dimension zero means etale by [def-sbc-smooth-morphisms], so these are finite etale families. The $n_a=1$ factors are the required smooth projective families.",
    "uses": [
-    "def-sbc-smooth-morphisms",
-    "lem-weil-pbc-proper-closed-image"
+    "lem-sbc-affine-limit-smooth-stage",
+    "sbc-lem-smooth-relative-dimension-locally-constant",
+    "lem-pc-projective-proper",
+    "lem-weil-pbc-proper-closed-image",
+    "lem-fin-projective-generically-finite",
+    "def-sbc-smooth-morphisms"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-generic-curve-model.md",
+    "place": "Proof paragraph 5; Stacks 0C0C (lemma-descend-smooth), 02G1 (lemma-smooth-omega-finite-locally-free), explicit zero-dimensional finiteness step"
+   }
   },
   {
-   "text": "The coherent kernel $I$ of\n$\\mathcal O_T\\to\\nu_*\\mathcal O_Y$ is zero on the generic fibre.\nRemove the proper closed image of $\\operatorname{Supp}I$;\nthen the map of algebras is injective and the finite map $\\nu$\nis surjective by lying over.\nLet $D$ be the reduced closed support of its coherent cokernel.\nIt has finite generic fibre. Apply\n[lem-fin-projective-generically-finite] to make $D\\to S'$\nfinite. Outside $D$ the algebra map is bijective, so $\\nu$\nis an isomorphism there.",
+   "text": "Let $I=\\ker(\\mathcal O_T\\to\\nu_*\\mathcal O_Y)$ and $Q=\\operatorname{coker}(\\mathcal O_T\\to\\nu_*\\mathcal O_Y)$. Finiteness gives a quasi-coherent finite-type pushforward by [lem-pc-f3-finite-pushforward-finite-type]; on the Noetherian $T$ it is coherent by [pqf-lem-coherent-ft-locnoeth]. Hence $I,Q$ are coherent by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth], with closed supports by [lem-weil-pbc-finite-type-module-support-closed]. Generic localization is exact, so $I$ restricts to zero on $T'$ by Step 6. The support comparison [lem-weil-pbc-support-pullback-finite-type] shows its support misses the generic fibre. This support is a closed subscheme of the projective $T$, therefore projective and proper; [lem-pc-projective-proper] and [lem-weil-pbc-proper-closed-image] allow removal of its closed image from $S'$. Then $I=0$, and [pqf-lem-lying-over], applied on every affine chart to the injective finite algebra map, makes $\\nu$ surjective. Let $D\\subset T$ be the reduced closed subscheme on $\\operatorname{Supp}Q$. It is projective and its generic fibre has dimension at most zero by Step 6 and support pullback. Apply [lem-fin-projective-generically-finite] to make $D\\to S'$ finite. On $T\\setminus D$ the kernel and cokernel vanish, so the finite algebra map is bijective. Taking affine spectra gives that $\\nu$ is an isomorphism there.",
    "uses": [
+    "lem-pc-f3-finite-pushforward-finite-type",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-weil-pbc-support-pullback-finite-type",
+    "lem-pc-projective-proper",
+    "lem-weil-pbc-proper-closed-image",
+    "pqf-lem-lying-over",
     "lem-fin-projective-generically-finite"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-generic-curve-model.md",
+    "place": "Proof paragraph 6, kernel, surjectivity and finite cokernel boundary"
+   }
   },
   {
-   "text": "Finally all the shrinkings so far have been on $S'$.\nIf their intersection is $V\\subset S'$, remove $p(S'\\setminus V)$\nfrom $S$. This image is closed, because $p$ is finite.\nIt misses the generic point: the generic fibre of $p$ is\n$\\operatorname{Spec}K'$, whose point belongs to $V$.\nThe resulting open is nonempty and its full inverse image lies in\n$V$; the restricted $p$ remains finite and surjective.",
-   "uses": [],
-   "elementary": null
+   "text": "Keep the original finite map $p:S'\\to\\operatorname{Spec}A_a$ before the subsequent restrictions, and let $V\\subset S'$ be the intersection of all the finitely many nonempty opens used in Steps 8-10. Every one contains the unique generic point of the integral $S'$. Its complement $Z=S'\\setminus V$ has a reduced closed subscheme structure; its map to $S'$ is finite (quotient algebras are cyclic modules), so $Z\\to\\operatorname{Spec}A_a$ is finite by [lem-weil-pbc-finite-composition]. It is proper by [lem-weil-pbc-finite-proper] and has closed image by [lem-weil-pbc-proper-closed-image]. That image misses the generic point of $\\operatorname{Spec}A_a$, because the generic fibre of $p$ is the one-point $\\operatorname{Spec}K'$ and its point is in $V$. Remove the image and choose a nonempty principal affine open $U$ inside the remaining open. Its full inverse image $p^{-1}(U)$ lies in $V$ and is affine and integral. The restricted $p$ is finite by [lem-weil-pbc-finite-morphism-permanence] and surjective (each fibre is the same fibre as for the original surjection). The finite comparison and finite boundary remain finite by the same base-change lemma; projectivity remains by [lem-pc-projective-base-change], and smoothness with its specified relative dimension remains by [lem-sbc-smooth-relative-dimension-permanence]. Reduction commutes with this open restriction by the localization argument in Step 7. Renaming $U$ and $p^{-1}(U)$ as $S$ and $S'$ gives every clause of the original statement. Empty generic fibre is included: the coproduct may be empty, and Step 10 removes the entire vertical target by the kernel-support argument.",
+   "uses": [
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-closed-image",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-pc-projective-base-change",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-generic-curve-model.md",
+    "place": "Proof paragraph 7, pushing all shrinkings down to the original base"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-pc-projective-base-change",
+  "def-pc-projective-morphism",
+  "def-weil-pbc-scheme-reduction",
+  "lem-sc-component-intersections-finite",
   "lem-fin-normalization-extension-finite",
+  "lem-sc-normalization-exists",
   "lem-sc-normalized-curve-smooth",
+  "lem-weil-pbc-zero-dim-integral-point",
+  "lem-weil-pbc-scheme-coproduct-family",
   "lem-fin-finite-over-projective",
-  "def-sbc-smooth-morphisms",
+  "sbc-lem-smooth-relative-dimension-locally-constant",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-pc-f3-finite-pushforward-finite-type",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-sc-dense-open-finite-complement",
+  "def-sc-curves",
+  "thm-pd-spreading-out",
+  "lem-pc-fpqc-descend-closed-immersion",
+  "lem-sbc-finite-morphism-fpqc-descent",
+  "lem-sbc-affine-limit-smooth-stage",
+  "lem-weil-pbc-dimension-at-point-field-extension",
+  "lem-weil-pbc-support-pullback-finite-type",
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "pqf-lem-lying-over",
   "lem-fin-spread-finite-algebra",
+  "lem-pc-projective-proper",
   "lem-weil-pbc-proper-closed-image",
-  "lem-fin-projective-generically-finite"
+  "lem-fin-projective-generically-finite",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-sbc-smooth-relative-dimension-permanence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-generic-curve-model.md",
-  "place": "## Proof"
+  "place": "Proof paragraphs 1-7, repaired with Stacks 01ZM, 0C0C, 02L6, 02LA and existing DAG tools"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A projective scheme with fibres of dimension at most one admits after finite base change a finite cover by smooth projective curves and finite etale schemes, isomorphic away from a finite boundary",
+   "results": "Actual hits: AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.isSmooth_isStableUnderBaseChange",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not construct finite generic curve models with all clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsFinite",
+   "results": "Actual hits: . loogle: unknown identifier 'AlgebraicGeometry.IsSmoothOfRelativeDimension'",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not construct finite generic curve models with all clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "genericCurve|generic_curve|normalization.*smooth|smooth.*normalization",
+   "results": "Actual hits: Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not construct finite generic curve models with all clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalize each component of a projective curve over the algebraic closure of a function field and spread it out after a finite field extension to a smooth projective family",
+   "results": "Actual hits: WeierstrassCurve.Affine.Point.map_some, WeierstrassCurve.Projective.NonsingularLift, WeierstrassCurve.integralModel, WeierstrassCurve.minimal, WeierstrassCurve.IsIntegral.integral, WeierstrassCurve.toProjective, WeierstrassCurve.exists_isIntegral, WeierstrassCurve.Projective.nonsingularLift_some",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not construct finite generic curve models with all clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projective curve becomes covered by smooth curves after shrinking an integral base and a finite surjective base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\"",
+   "results": "The 12 returned hits are Aesop normalization-rule and normalization-state declarations, including Aesop.LocalRuleSet.applicableNormalizationRules, Aesop.LocalRuleSet.applicableNormalizationRulesWith, Aesop.NormalizationState, Aesop.GoalState.provenByNormalization, Aesop.NormalizationState.notNormal, Aesop.instInhabitedNormalizationState, Aesop.Goal.normalizationState, Aesop.GoalState.isProvenByNormalization",
+   "date": "2026-10-14",
+   "verdict": "no match: these are tactic normalization declarations, not algebraic-geometric normalization or curve models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper relative curve over an integral variety, a finite dominant base change and shrinking yield a simultaneous smooth normalization with finite non-isomorphism locus",
+   "results": "Actual hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization",
+   "date": "2026-10-14",
+   "verdict": "no match: normalization factorization and integrality declarations do not construct a finite base extension, smooth projective factors, or finite comparison boundary"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -117,5 +327,174 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-fin-generic-curve-model",
+  "worker": "stage1",
+  "summary": "Retained the statement; expanded descent, reduction, smoothness spreading, finite etale point factors, coherent boundary and pushing shrinkings down. Reused existing DAG lemmas only. Corrected the nilpotent-ideal exponent and avoided a nonexistent Jacobian criterion in the smoothness definition.",
+  "blueprint": "Steps 1-3 realize paragraph 1; steps 4-6 realize paragraphs 2-3; steps 7-8 realize paragraph 4; step 9 realizes paragraph 5; step 10 realizes paragraph 6; step 11 realizes paragraph 7.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Steps 1 use the statement as a generic tool: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "Steps 1, 8 use the statement as a generic tool: Finite type over a Noetherian ring is finite presentation. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-pc-projective-base-change",
+    "why": "Steps 1, 7, 11 use the statement as a generic tool: Projective morphisms are stable under base change. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-sc-component-intersections-finite",
+    "why": "Steps 2 use the statement as a generic tool: Distinct components of a Noetherian curve meet in finitely many closed points. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-fin-normalization-extension-finite",
+    "why": "Steps 2 use the statement as a generic tool: Finiteness of normalization in a finite extension. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-sc-normalization-exists",
+    "why": "Steps 2, 3 use the statement as a generic tool: Existence and finiteness of the normalization. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-sc-normalized-curve-smooth",
+    "why": "Steps 2 use the statement as a generic tool: The normalized curve over a perfect field is smooth. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-weil-pbc-zero-dim-integral-point",
+    "why": "Steps 2 use the statement as a generic tool: An integral zero-dimensional finite-type scheme over an algebraically closed field is a point. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Steps 2, 4 use the statement as a generic tool: Coproducts of schemes: open coprojections with disjoint images covering. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "sbc-lem-smooth-relative-dimension-locally-constant",
+    "why": "Steps 2, 9 use the statement as a generic tool: Local constancy of the relative dimension. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "why": "Steps 3 use the statement as a generic tool: Two ideals have the same zero locus iff they have the same radical. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-pc-f3-finite-pushforward-finite-type",
+    "why": "Steps 3, 10 use the statement as a generic tool: Finite pushforward preserves quasi-coherence and finite type without Noetherian assumptions. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Steps 3, 10 use the statement as a generic tool: Coherence on locally Noetherian schemes. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "Steps 3, 10 use the statement as a generic tool: Coherent modules on a locally Noetherian scheme: kernels, cokernels, sums, quasi-coherent sub- and quotient modules. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-module-support-closed",
+    "why": "Steps 3, 10 use the statement as a generic tool: The support of a finite type quasi-coherent module is closed, locally the zero locus of the annihilator. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-sc-dense-open-finite-complement",
+    "why": "Steps 3 use the statement as a generic tool: Finite closed-point complement of a dense open in a curve. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Steps 4 use the statement as a generic tool: Descent of finitely presented data at a filtered limit. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-pc-fpqc-descend-closed-immersion",
+    "why": "Steps 4 use the statement as a generic tool: Closed immersions descend along an fpqc covering of the target. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-sbc-finite-morphism-fpqc-descent",
+    "why": "Steps 4 use the statement as a generic tool: Finiteness descends under fpqc base change. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-sbc-affine-limit-smooth-stage",
+    "why": "Steps 6, 9 use the statement as a generic tool: Eventual smoothness over an arbitrary affine-transition limit. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-field-extension",
+    "why": "Steps 6 use the statement as a generic tool: Dimension at a point of a finite type algebra is preserved by extension of the ground field. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-weil-pbc-support-pullback-finite-type",
+    "why": "Steps 6, 10 use the statement as a generic tool: Support of a finite type quasi-coherent module and of its pullback. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-preserved-field-extension",
+    "why": "Steps 6 use the statement as a generic tool: Krull dimension of a finite type algebra over a field is preserved by field extension. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "pqf-lem-lying-over",
+    "why": "Steps 7, 10 use the statement as a generic tool: Lying over for an injective integral extension. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Steps 9, 10 use the statement as a generic tool: Projective morphisms are proper. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-closed-image",
+    "why": "Steps 9, 10, 11 use the statement as a generic tool: A proper morphism has closed image. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-composition",
+    "why": "Steps 11 use the statement as a generic tool: Composition of finite morphisms. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Steps 11 use the statement as a generic tool: Finite morphisms are proper. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Steps 11 use the statement as a generic tool: Base change, affineness and properness for finite morphisms. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Steps 11 use the statement as a generic tool: Base change and composition of smooth morphisms of fixed relative dimension. The compact-support unit has no corresponding geometric tool; this auxiliary curve-model argument retains its blueprint normalization/spreading/boundary route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-pc-projective-base-change",
+  "lem-sc-component-intersections-finite",
+  "lem-fin-normalization-extension-finite",
+  "lem-sc-normalization-exists",
+  "lem-sc-normalized-curve-smooth",
+  "lem-weil-pbc-zero-dim-integral-point",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "sbc-lem-smooth-relative-dimension-locally-constant",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-pc-f3-finite-pushforward-finite-type",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-sc-dense-open-finite-complement",
+  "thm-pd-spreading-out",
+  "lem-pc-fpqc-descend-closed-immersion",
+  "lem-sbc-finite-morphism-fpqc-descent",
+  "lem-sbc-affine-limit-smooth-stage",
+  "lem-weil-pbc-dimension-at-point-field-extension",
+  "lem-weil-pbc-support-pullback-finite-type",
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "pqf-lem-lying-over",
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-proper-closed-image",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-sbc-smooth-relative-dimension-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-026e47ffd",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-026e47ffd (reviewer sub-agent of L); spot-checked: Read the full item, report, unit/chapter route, all cited DAG statements, and cited literature. Steps 1–11 check correctly, including descent, reduction, smooth spreading, dimensions, finiteness, base-change morphisms, coefficient categories, boundary finiteness, and edge cases. The source’s nilpotent-exponent error is correctly repaired without changing the target. No new nodes, duplicates, cycles, or repairs needed. Details are in review.md."
+ }
 }
