@@ -4,11 +4,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 module
 public import Sheaf.AlgebraicGeometry.RelativeMVMaps
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisUnderivedOpenCounitSquare
-import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
 import Sheaf.CategoryTheory.DerivedCategory.HomotopySquareRectification
+import Sheaf.AlgebraicGeometry.RelativeMVDirectImageHomotopyComparison
+import Sheaf.AlgebraicGeometry.DerivedPullbackConeSquareTransposition
 /-! # A strict relative cover comparison before cylinder replacement
 
 Source: Stacks Project, Cohomology, Tags 08BV, 08HZ, 08FE and 08HY.
@@ -19,6 +17,10 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 800000 in
+-- Elaborating the resolved adjunction mates requires extra heartbeats.
 /-- Chain representatives for the unrestricted relative Mayer--Vietoris square.
 Source: Stacks Project, Cohomology, Tags 08BV, 08HZ, 08FE and 08HY.
 (blueprint: lem-pc-relative-mv-cover-chain-square).
@@ -76,5 +78,23 @@ theorem relativeMV_cover_chain_square
       DerivedCategory.Q.map β ≫ e₂'.hom =
         e₂.hom ≫ biprod.map (b U).hom (b V).hom ∧
       DerivedCategory.Q.map (CochainComplex.mappingCone.map t t' α β hc) ≫ e₃'.hom =
-        e₃.hom ≫ (b (U ⊓ V)).hom := by sorry
+        e₃.hom ≫ (b (U ⊓ V)).hom := by
+  dsimp only
+  obtain ⟨A, B, A', B', t, t', α, β, H, e₁, e₂, e₃, e₁', e₂', e₃', hα, hβ, hγ⟩ :=
+    relativeMV_direct_image_homotopy_comparison f f' g g' hpull K K' φ U V hcover
+  obtain ⟨C, D, s, a, b, H', d₁, d₂, d₃, ha, hb, hc⟩ :=
+    derivedPullback_cone_square_transposition g A B A' B' t t' α β H
+  obtain ⟨T, i, c, hcomm, r₂, r₃, hr₂, hr₃⟩ :=
+    CochainComplex.homotopy_square_cone_rectification s t' a b H'
+  refine ⟨C, T, A', B', i, t', a, c, hcomm,
+    d₁ ≪≫ e₁, r₂ ≪≫ d₂ ≪≫ e₂, r₃ ≪≫ d₃ ≪≫ e₃, e₁', e₂', e₃', ?_, ?_, ?_⟩
+  · rw [ha]
+    simp only [Iso.trans_hom, Category.assoc]
+    rw [hα]
+  · rw [hr₂, hb]
+    simp only [Iso.trans_hom, Category.assoc]
+    rw [hβ]
+  · rw [hr₃, hc]
+    simp only [Iso.trans_hom, Category.assoc]
+    rw [hγ]
 end AlgebraicGeometry
