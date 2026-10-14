@@ -1,0 +1,146 @@
+{
+ "id": "lem-sc-tensor-power-algebra-coproduct",
+ "kind": "statement",
+ "title": "The tensor-power coproduct algebra of an invertible sheaf",
+ "statement": "For a scheme X and an invertible O_X-module L [def-sc-invertible-module], there exist a commutative O_X-algebra sheaf B [def-weil-pbc-comm-algebra-sheaf] and module maps b_d:L.tensorPow d→U(B), for d in N, whose cofan is a coproduct. On every open U and for every a,d and sections s of L^a and t of L^d, b_a(s)b_d(t)=b_(a+d)(tensorPowAddIso(a,d)^(-1)(tmulSection(s,t))). This is solely a construction on X, with no morphism of schemes or quotient algebra.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, the middle algebra of the direct-sum sequence following coherent-equation-ses; expanded local-frame construction in lem-sc-tensor-graded-algebra-data step 1"
+ },
+ "stmt_deps": [
+  "def-sc-invertible-module",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose local frames of L. On each frame open form the polynomial algebra sheaf. A change of frame by a unit v acts by T↦vT and on degree d by v^d. The cocycle identities glue these algebras and their coefficient structure maps to B, and glue the monomial maps to b_d.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-weil-pbc-comm-algebra-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The underlying module of the local polynomial sheaf is the sheafification of finite sums of monomials, hence is the coproduct of its homogeneous module sheaves. A family of maps from the homogeneous terms to any module sheaf extends locally and uniquely by finite summation and the sheafification universal property. These extensions agree on overlaps and glue, giving the global coproduct universal property. No equality between sections of an infinite sheaf coproduct and the direct sum of sections is asserted.",
+   "uses": [
+    "def-weil-pbc-comm-algebra-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each frame multiplication of monomials is (sT^a)(tT^d)=stT^(a+d). The tensor-power addition isomorphism identifies st with the tensor product of the two sections. Transition maps preserve the identity, and separation extends it to every open. Degree zero, zero sections and the empty open obey the same calculation.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-sc-invertible-module",
+  "def-weil-pbc-comm-algebra-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q3",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, the middle algebra of the direct-sum sequence following coherent-equation-ses; expanded local-frame construction in lem-sc-tensor-graded-algebra-data step 1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The direct sum of tensor powers of an invertible module sheaf is a commutative algebra sheaf",
+   "results": "UNAVAILABLE: msearch.py reports Internal Server Error; not used as a negative verdict.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "commutative algebra sheaf direct sum tensor powers invertible module pullback algebra underlying module",
+   "results": "SheafOfModules.pullbackObjFreeIso, ModuleCat.tilde, CommRing.Pic.mapAlgebra. No tensor-power algebra sheaf coproduct theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact sheaf-level match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Cofan, CategoryTheory.Limits.IsColimit",
+   "results": "Cofan.IsColimit.desc, fac, mk and Cofan.isColimitMapCoconeEquiv provide colimit glue, but do not construct an algebra sheaf.",
+   "date": "2026-10-14",
+   "verdict": "no exact sheaf-level match"
+  },
+  {
+   "tool": "grep",
+   "query": "SymmetricAlgebra|sheaf.*graded|graded.*sheaf",
+   "results": "Mathlib has symmetric and tensor algebras for ring modules and Proj structure sheaves; no algebra sheaf realizing the coproduct of tensor powers. The project QuasiCoherentSymmetricAlgebra theorem lacks the homogeneous coproduct comparison. Whole-DAG/blueprint searches found no duplicate.",
+   "date": "2026-10-14",
+   "verdict": "no exact sheaf-level match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TensorGradedAlgebraData",
+  "date": "2026-10-14",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS direct-sum algebra: construct its middle term; original item proof step 1",
+   "via": [
+    "lem-sc-tensor-graded-algebra-data",
+    "lem-sc-square-zero-tensor-graded-presentation",
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorPowerAlgebraCoproduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorPowerAlgebraCoproduct.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_tensorPowerAlgebraCoproduct",
+  "statement": "theorem exists_tensorPowerAlgebraCoproduct {X : Scheme.{u}} (L : X.Modules) [L.IsInvertible] : ∃ (B : X.CommAlgebraSheaf) (b : ∀ d : ℕ, L.tensorPow d ⟶ commAlgebraSheafModule X.sheaf B), Nonempty (IsColimit (Cofan.mk (commAlgebraSheafModule X.sheaf B) b)) ∧ ∀ (U : X.Opens) (a d : ℕ) (s : Γ(L.tensorPow a, U)) (t : Γ(L.tensorPow d, U)), (show B.right.obj.obj (op U) from (b a).app U s) * (show B.right.obj.obj (op U) from (b d).app U t) = (show B.right.obj.obj (op U) from (b (a + d)).app U ((L.tensorPowAddIso a d).inv.app U (tmulSection s t)))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261014T052440-L-1914364",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261014T052440-L-1914364",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
