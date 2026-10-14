@@ -24,9 +24,47 @@
   "lem-kun-stalk-as-pullback",
   "lem-weil-pbc-extension-by-zero-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a geometric point \\bar x' of X' and let \\bar x=g\\bar x'. By the extension-by-zero stalk formula, the stalk of g^{-1}j_!F at \\bar x' identifies with F_{\\bar u} when \\bar x=j\\bar u lies in U and is zero otherwise; the stalk of j'_!g_U^{-1}F identifies with (g_U^{-1}F)_{\\bar u'} when \\bar x'=j'\\bar u' lies in U' and is zero otherwise. The inverse-image stalk identification identifies (g_U^{-1}F)_{\\bar u'} with F_{\\bar u} for corresponding geometric points.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-kun-stalk-as-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition 03S5 (proposition-describe-jshriek), explicit map on germ representatives; geometric-point inverse-image identification as in lem-kun-stalk-as-pullback"
+   }
+  },
+  {
+   "text": "Write $H=g^{-1}j_!F$, $K=g_U^{-1}F$, and $\\alpha:K\\to j'^{-1}H$ for the composite in the statement; let $\\mu:j'_!K\\to H$ be its adjoint, so that $\\beta=\\mu^{-1}$. The chosen cartesian identification gives $\\bar x\\in U$ if and only if $\\bar x'\\in U'$. Suppose first $\\bar x'=j'\\bar u'$ and $\\bar x=j\\bar u$. The unit $F\\to j^{-1}j_!F$ is the adjoint of the identity of $j_!F$. The explicit adjunction formula therefore sends a section $s\\in F(V)$, with $V$ an etale object over $U$, to its image in the sheafification of $j_{p!}F$ on that same object. The inside stalk formula sends this image back to the germ $[s]\\in F_{\\bar u}$. Thus the unit is the identity under the canonical inside-stalk identifications. Taking inverse image along $g_U$ and using $j'^{-1}g^{-1}=g_U^{-1}j^{-1}$ shows that $\\alpha_{\\bar u'}$ is the identity under the identifications of Step 1. The explicit adjunction formula for $j'$ sends the germ of a section of $K$ on a neighbourhood inside $U'$ to its image under $\\alpha$; hence $\\mu_{\\bar x'}$ is the identity under those identifications. Its inverse $\\beta_{\\bar x'}$ is therefore precisely $F_{\\bar u}\\simeq K_{\\bar u'}$. If $\\bar x'$ is outside $U'$, cartesianness puts $\\bar x$ outside $U$; Step 1 makes both stalks zero, and the stalk of $\\beta$ is the unique map $0\\to0$.",
+   "uses": [
+    "def-cbc-open-immersion-square",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-kun-stalk-as-pullback",
+    "def-weil-pbc-extension-by-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03DI (lemma-extension-by-zero), explicit adjoint section map; together with Proposition 03S5 (proposition-describe-jshriek) in etale-cohomology.tex"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-open-immersion-square",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-kun-stalk-as-pullback",
+  "def-weil-pbc-extension-by-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Explicit germ calculation supplementing Proposition 03S5 and Lemma 03S6 (lemma-shriek-base-change); adjunction formula from Modules on Sites Lemma 03DI"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,15 +93,81 @@
    "results": "service unavailable: Internal Server Error",
    "date": "2026-10-15",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of canonical base change mate for extension by zero along cartesian open immersion",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; TopCat.Presheaf.stalkPullbackHom; AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp; AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc; TopCat.Presheaf.stalkPullbackInv; TopCat.Presheaf.stalkPullbackIso; TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk; TopCat.Presheaf.pushforwardPullbackAdjunction_unit_app_app_germToPullbackStalk",
+   "date": "2026-10-15",
+   "verdict": "no exact match: generic adjunction, topological or Zariski stalk facts do not state the etale extension-by-zero mate calculation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.mateEquiv, stalk",
+   "results": "loogle: unknown identifier 'stalk'",
+   "date": "2026-10-15",
+   "verdict": "no exact match: generic adjunction, topological or Zariski stalk facts do not state the etale extension-by-zero mate calculation"
+  },
+  {
+   "tool": "grep",
+   "query": "mate|homEquiv|extension by zero|stalk",
+   "results": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean; Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; searched CategoryTheory",
+   "date": "2026-10-15",
+   "verdict": "no exact match: generic adjunction, topological or Zariski stalk facts do not state the etale extension-by-zero mate calculation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical mate extension by zero base change induces stalk identity",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of extension by zero adjunction unit is identity on geometric stalks of etale sheaves",
+   "results": "AlgebraicGeometry.Scheme.fromSpecStalk_app; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; StalkSkyscraperPresheafAdjunctionAuxs.fromStalk_to_skyscraper; StalkSkyscraperPresheafAdjunctionAuxs.to_skyscraper_fromStalk; AlgebraicGeometry.Scheme.fromSpecStalk_appTop; AlgebraicGeometry.Scheme.Opens.fromSpecStalkOfMem_toSpecΓ; smoothSheafCommRing.ι_forgetStalk_inv; AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ_apply",
+   "date": "2026-10-15",
+   "verdict": "no exact match: generic adjunction, topological or Zariski stalk facts do not state the etale extension-by-zero mate calculation"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|extensionByZero|sheafFiberComapIso",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Comap.lean; searched CategoryTheory/Sites",
+   "date": "2026-10-15",
+   "verdict": "no exact match: generic adjunction, topological or Zariski stalk facts do not state the etale extension-by-zero mate calculation"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-extension-zero-base-change",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "lem-cbc-base-change-mate-stalk",
+  "worker": "stage1",
+  "summary": "Audited the stalk comparison against Stacks Lemma 03S6. The split now derives both stalk values from the existing extension-by-zero stalk formula and the geometric-point inverse-image identification, then uses the explicit adjunction construction to identify the mate with the inverse-image isomorphism on points inside U' and the unique zero map outside.",
+  "blueprint": "Realizes Proof Step 2 of lem-cbc-extension-zero-base-change: the mate restricts to the inverse-image stalk identification on the inside-open case and to the zero map outside.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-stalk-as-pullback",
+    "why": "Generic identification of a geometric stalk with inverse image along the corresponding geometric point; the cbc unit has no replacement node for this categorical stalk fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-stalk-as-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-e1fad1b9f",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-e1fad1b9f (reviewer sub-agent of L); spot-checked: Read the full packet, required stage documents, unit/chapter route, item, cited nodes, master sources (Stacks 03S6, 03S5, 03DI), and edge cases. The cartesian square orientation, abelian-sheaf coefficient category, mate/base-change morphism, stalk identifications, and zero case all agree; no duplicates, cycles, missing citations, or new nodes were found. Review written to review.md."
+ }
 }
