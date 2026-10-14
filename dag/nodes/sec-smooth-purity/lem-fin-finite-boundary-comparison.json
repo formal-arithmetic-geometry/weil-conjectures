@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fin-finite-boundary-comparison",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A proper direct image detects a comparison off a finite boundary",
@@ -15,34 +15,167 @@
  "stmt_deps": [
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-inverse-image"
  ],
  "proof": [
   {
-   "text": "Let $M$ be the cone of $c$.\nIts restriction to $G$ is zero. The termwise localization\nsequence for extension by zero in\n[def-weil-pbc-extension-by-zero], verified on stalks by\n[lemma-weil-pbc-geometric-stalk-conservative], identifies\n$M=i_*i^*M$.\nTherefore\n\n$$\n0=Rb_*M=R(bi)_*i^*M=(bi)_*i^*M,\n$$\n\nthe last equality using finite exactness in\n[lemma-weil-pbc-finite-direct-image-exact].\nFinite direct image is conservative: its stalks are the products\nin [lemma-weil-pbc-finite-stalk-formula], so a zero direct image\nforces every stalk on its source to be zero.\nApply this to every cohomology sheaf of $i^*M$.\nIt follows that $i^*M=0$, hence $M=0$ and $c$ is an isomorphism.",
+   "text": "Fix the commutative coefficient ring $R$ implicit in the statement, and write $U_T$ for forgetting $R$-module sheaves to abelian sheaves. The exact forgetful functor and its derived direct-image comparison are supplied by [lem-weil-pbc-module-abelian-derived-direct-image-comparison]. Exactness means that on complexes $U_T$ commutes with kernels, images and quotients, hence $\\mathcal H^n(U_TK)=U_T\\mathcal H^n(K)$. It reflects isomorphisms of sheaves: the inverse of an invertible underlying abelian sheaf map is $R$-linear because $f(rx)=rf(x)$. Thus [lem-weil-pbc-derived-plus-iso-on-cohomology] implies that derived $U_T$ reflects isomorphisms. The inverse-image compatibility of [prop-weil-pbc-inverse-image-modules-exact] identifies $U_Ga^*c$ with $a^{-1}U_Yc$. The natural direct-image comparison identifies $U_SRb_*c$ with $Rb_*U_Yc$. Both are isomorphisms by the hypotheses. It suffices to prove that $\\bar c=U_Yc$ is an isomorphism in $D^+(Y_{\\mathrm{et}})$; from now until the final step all complexes and sheaves are abelian, without changing sites or assuming torsion.",
    "uses": [
-    "def-weil-pbc-extension-by-zero",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "lemma-weil-pbc-finite-stalk-formula"
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03FD (lemma-cohomology-modules-abelian-agree), 0D6J(3) (lemma-modules-abelian-unbounded); sites-modules.tex Tag 04JC; elementary reflection using cohomology"
+   }
+  },
+  {
+   "text": "Choose a distinguished cone triangle $U_YK\\xrightarrow{\\bar c}U_YL\\to M\\to U_YK[1]$ in the bounded-below derived category [def-weil-abstract-derived-category, def-weil-pbc-derived-categories]. Exact inverse image [prop-weil-pbc-inverse-image-exact] induces a triangulated termwise functor by [lem-sf-exact-functor-derived-triangulated]; $Rb_*$ is triangulated by [lem-weil-pbc-derived-direct-image-triangulated]. Apply each functor to this triangle. In either resulting triangle the first arrow is an isomorphism by step 1. Its long exact cohomology sequence [lem-sf-derived-homology-long-exact] has isomorphisms at both $\\mathcal H^n$ and $\\mathcal H^{n+1}$ of the first arrow. Exactness therefore forces the cohomology of the third term to vanish in every degree. Applying [lem-weil-pbc-derived-plus-iso-on-cohomology] to the unique morphism from zero proves $a^{-1}M=0$ and $Rb_*M=0$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-derived-categories",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05RS (lemma-cohomology-homological), 05RT (lemma-acyclic), 015F (lemma-right-derived-exact-functor), 05SE (proposition-derived-functor); etale-cohomology.tex Tag 03Q1"
+   }
+  },
+  {
+   "text": "The closed immersion $i$ is finite by [lem-weil-pbc-closed-immersion-finite], so $i_*$ is exact and $Ri_*=i_*$ on $D^+$ by [lemma-weil-pbc-finite-direct-image-exact]. Also $i^{-1}$ is exact by [prop-weil-pbc-inverse-image-exact]. Their termwise functors and the adjunction unit of [def-weil-pbc-inverse-image] therefore descend to complexes and to the derived category. For every $n$, set $F=\\mathcal H^n(M)$. Exactness gives $a^{-1}F=\\mathcal H^n(a^{-1}M)=0$. At a geometric point in $G$, [lemma-openclosed-stalk-upperstar] identifies the stalk of this restriction with the stalk of $F$, so $F$ is supported on $Z$. By [lem-kun-04ca], $F\\simeq i_*H$ for some abelian sheaf $H$, and the counit $i^{-1}i_*H\\to H$ is invertible. The adjunction triangle identity $i_*\\varepsilon_H\\circ\\eta_{i_*H}=1$ then makes $\\eta_{i_*H}$ the inverse of $i_*\\varepsilon_H$; for an isomorphism $\\theta:F\\to i_*H$, naturality gives $\\eta_F=(i_*i^{-1}\\theta)^{-1}\\circ\\eta_{i_*H}\\circ\\theta$, a composite of isomorphisms. Consequently the complex unit $\\eta_M:M\\to i_*i^{-1}M$ induces the isomorphism $\\eta_F:F\\to i_*i^{-1}F$ on each cohomology sheaf, since both functors are exact. It is an isomorphism by [lem-weil-pbc-derived-plus-iso-on-cohomology]. This proves $M\\simeq Ri_*i^{-1}M$ without assuming constructibility, finite coefficients, or quasi-compactness of $a$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "prop-weil-pbc-inverse-image-exact",
+    "def-weil-pbc-inverse-image",
+    "lemma-openclosed-stalk-upperstar",
+    "lem-kun-04ca",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 04CA (proposition-closed-immersion-pushforward), 03Q1 (lemma-stalk-pullback), 03QP (proposition-finite-higher-direct-image-zero); morphisms.tex Tag 035C"
+   }
+  },
+  {
+   "text": "Put $N=i^{-1}M\\in D^+(Z_{\\mathrm{et}})$. Apply $Rb_*$ to the isomorphism of step 3. Composition of derived direct images [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] gives $Rb_*Ri_*N\\simeq R(bi)_*N$. Here the sites are the chosen small representatives of the small etale sites, the ring sheaves are the constant integer sheaves, and the inverse images are those of scheme morphisms, exact by [prop-weil-pbc-inverse-image-exact]. Thus these are morphisms of ringed topoi satisfying the cited theorem. Its unbounded comparison restricts to $D^+$: bounded-below injective representatives are K-injective and compute the functors there by [def-weil-pbc-direct-image]. Combining with $Rb_*M=0$ from step 2 yields $R(bi)_*N=0$. Since $bi$ is finite by hypothesis, [lemma-weil-pbc-finite-direct-image-exact] computes this functor termwise, so $(bi)_*\\mathcal H^n(N)=\\mathcal H^n(R(bi)_*N)=0$ for every $n$; exactness commutes with the kernel/image quotient defining cohomology.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "prop-weil-pbc-inverse-image-exact",
+    "def-weil-pbc-direct-image",
+    "lemma-weil-pbc-finite-direct-image-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E (lemma-derived-pushforward-composition), restricted to bounded-below complexes; etale-cohomology.tex Tag 03QP"
+   }
+  },
+  {
+   "text": "Fix $n$ and write $H=\\mathcal H^n(N)$. For any geometric point $\\bar z$ of $Z$, let $\\bar s=(bi)\\bar z$. By [lemma-weil-pbc-finite-stalk-formula], the zero group $((bi)_*H)_{\\bar s}$ is the finite product of stalks $H_{\\bar z'}$ in the geometric fibre, including $H_{\\bar z}$. Inclusion of a factor by zero in all other factors followed by projection is its identity. Therefore each factor, in particular $H_{\\bar z}$, is zero. The morphism $0\\to H$ is an isomorphism on every geometric stalk, hence an isomorphism by [lemma-weil-pbc-geometric-stalk-conservative]. This proves $\\mathcal H^n(N)=0$ for every $n$. The empty-fibre product causes no problem: no $\\bar z$ lies in an empty fibre.",
+   "uses": [
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP(1) (proposition-finite-higher-direct-image-zero); Tag 03PU (theorem-exactness-stalks)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-derived-plus-iso-on-cohomology], the cohomology vanishing in step 5 implies $N=0$. The isomorphism $M\\simeq i_*N$ from step 3 implies $M=0$. Apply the long exact sequence [lem-sf-derived-homology-long-exact] to the original cone triangle: its zero third term makes every $\\mathcal H^n(\\bar c)$ an isomorphism. The cohomology criterion [lem-weil-pbc-derived-plus-iso-on-cohomology] gives that $\\bar c$ is an isomorphism. The reflection argument of step 1 gives that the original module morphism $c$ is an isomorphism. Properness of $b$ remains a hypothesis of the item but is not needed for this detection argument.",
+   "uses": [
+    "lem-weil-pbc-derived-plus-iso-on-cohomology",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05RS (lemma-cohomology-homological), 05RT (lemma-acyclic); cohomology criterion on D^+"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-extension-by-zero",
-  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-closed-immersion-finite",
   "lemma-weil-pbc-finite-direct-image-exact",
-  "lemma-weil-pbc-finite-stalk-formula"
+  "def-weil-pbc-inverse-image",
+  "lemma-openclosed-stalk-upperstar",
+  "lem-kun-04ca",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-pbc-direct-image",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-boundary-comparison.md",
-  "place": "## Proof"
+  "place": "Proof: cone, closed-support recovery, finite direct-image conservativity; expanded with Stacks Tags 04CA, 03QP, 0D6E, 0D6J, 05RS and 015F"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of bounded below etale sheaf complexes is an isomorphism if its restriction to an open complement is an isomorphism and its proper direct image is an isomorphism with finite boundary",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app, AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isIso_of_subset, TopCat.Presheaf.app_isIso_of_stalkFunctor_map_iso, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.to_iso, TopCat.Presheaf.isIso_of_stalkFunctor_map_iso, AlgebraicGeometry.IsLocalIso",
+   "date": "2026-10-14",
+   "verdict": "no match: returned results do not state finite-boundary detection in ordinary derived etale sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite direct image detects isomorphisms of derived etale sheaves supported on closed complement",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(stalk|conservative)|boundary.*comparison",
+   "results": "21 hits: Mathlib/Dynamics/Ergodic/MeasurePreserving.lean, Mathlib/Dynamics/Ergodic/MeasurePreserving.lean, Mathlib/Dynamics/Ergodic/Conservative.lean, Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: returned results do not state finite-boundary detection in ordinary derived etale sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, CategoryTheory.IsIso",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: returned results do not state finite-boundary detection in ordinary derived etale sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion and its open complement a complex vanishing on the open is recovered from its restriction to the closed subscheme and finite pushforward is conservative",
+   "results": "8 hits: AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.Scheme.zeroLocus_map, AlgebraicGeometry.Scheme.Hom.liftCoborder_ι_assoc, AlgebraicGeometry.Scheme.Hom.liftCoborder_ι, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.Scheme.ofRestrict_app",
+   "date": "2026-10-14",
+   "verdict": "no match: returned results do not state finite-boundary detection in ordinary derived etale sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConservative|reflectsIsomorphisms|ReflectsIsomorphisms",
+   "results": "25 hits: Mathlib/Condensed/Discrete/Module.lean, Mathlib/Condensed/Discrete/Module.lean, Mathlib/Condensed/Discrete/Module.lean, Mathlib/Condensed/Discrete/Module.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Gluing.lean, Mathlib/Condensed/Light/Instances.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: generic reflection instances and geometric-point conservativity do not state the derived finite-boundary criterion; the latter is already cited through the existing stalk conservativity node"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -75,5 +208,74 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-fin-finite-boundary-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the imported cone proof into six steps. Explicitly forgot arbitrary constant module coefficients to abelian sheaves using the derived comparison, proved closed-support recovery from the existing fully faithful closed-image theorem and exactness, and supplied triangulatedness, derived composition and cohomology detection citations. All dependencies reused; no new nodes or statement change.",
+  "blueprint": "Realizes the complete blueprint Proof: cone and vanishing on G; identification M=i_*i^*M; displayed direct-image equality; finite stalk products and cohomology vanishing. Closed-support recovery replaces the insufficient definition-only localization citation with the existing Stacks 04CA theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "why": "Generic Canonical derived direct image comparison for forgotten module coefficients used as a black box in the cone/support/finite-image argument; this unit has no theorem supplying this unrestricted statement."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact used as a black box in the cone/support/finite-image argument; this unit has no theorem supplying this unrestricted statement."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Generic Exactness of inverse image used as a black box in the cone/support/finite-image argument; this unit has no theorem supplying this unrestricted statement."
+   },
+   {
+    "node": "lem-weil-pbc-derived-direct-image-triangulated",
+    "why": "Generic The derived direct image on bounded below derived categories is a triangulated functor used as a black box in the cone/support/finite-image argument; this unit has no theorem supplying this unrestricted statement."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Generic Exactness of finite direct image used as a black box in the cone/support/finite-image argument; this unit has no theorem supplying this unrestricted statement."
+   },
+   {
+    "node": "lemma-openclosed-stalk-upperstar",
+    "why": "Generic Stalks of a pullback used as a black box in the cone/support/finite-image argument; this unit has no theorem supplying this unrestricted statement."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "Generic Pushforward along a closed immersion used as a black box in the cone/support/finite-image argument; this unit has no theorem supplying this unrestricted statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic Canonical composition comparison for unbounded ringed-topos direct images used as a black box in the cone/support/finite-image argument; this unit has no theorem supplying this unrestricted statement."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-stalk-formula",
+    "why": "Generic Geometric stalk formula for finite direct image used as a black box in the cone/support/finite-image argument; this unit has no theorem supplying this unrestricted statement."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks used as a black box in the cone/support/finite-image argument; this unit has no theorem supplying this unrestricted statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-openclosed-stalk-upperstar",
+  "lem-kun-04ca",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-818e72cab",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-818e72cab (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, exact literature locations, and unit/chapter route. All six proof steps are valid for ordinary étale complexes with arbitrary constant ring coefficients. Checked edge cases, duplicate candidates, target coefficient distinctions, and dependency acyclicity. Accepted all ten proposed generic tool uses. No new nodes or repairs; full findings recorded in review.md."
+ }
 }
