@@ -7,10 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.RelativeMVMaps
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisUnderivedOpenCounitSquare
-import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
+import Sheaf.AlgebraicGeometry.RelativeMVCoverChainSquare
+import Sheaf.CategoryTheory.DerivedCategory.ConeDiagramFullSESPresentation
 
 /-! # Short exact rows for an unrestricted relative cover comparison
 
@@ -86,6 +84,29 @@ theorem relativeMV_cover_rows
         e₂.hom ≫ biprod.fst ≫ (b U).hom ∧
       DerivedCategory.Q.map m.τ₂ ≫ e₂'.hom ≫ biprod.snd =
         e₂.hom ≫ biprod.snd ≫ (b V).hom ∧
-      DerivedCategory.Q.map m.τ₃ ≫ e₃'.hom = e₃.hom ≫ (b (U ⊓ V)).hom := by sorry
+      DerivedCategory.Q.map m.τ₃ ≫ e₃'.hom = e₃.hom ≫ (b (U ⊓ V)).hom := by
+  dsimp only
+  obtain ⟨A, B, A', B', t, t', α, β, hc, e₁, e₂, e₃, e₁', e₂', e₃', hα, hβ, hγ⟩ :=
+    relativeMV_cover_chain_square f f' g g' hpull K K' φ U V hcover
+  obtain ⟨P, P', m, d₁, d₂, d₃, d₁', d₂', d₃', hP, hP', _, _, _, _, hm₁, hm₂, hm₃⟩ :=
+    cone_diagram_full_ses_presentation A B A' B' t t' α β hc
+  refine ⟨P, P', m, d₁ ≪≫ e₁, d₂ ≪≫ e₂, d₃ ≪≫ e₃,
+    d₁' ≪≫ e₁', d₂' ≪≫ e₂', d₃' ≪≫ e₃', hP, hP', ?_, ?_, ?_, ?_⟩
+  · simpa only [Iso.trans_hom, Category.assoc, hα] using
+      congrArg (fun k ↦ k ≫ e₁'.hom) hm₁
+  · have h := congrArg (fun k ↦ k ≫ e₂'.hom) hm₂
+    simp only [Category.assoc] at h
+    have hb := congrArg (fun k ↦ d₂.hom ≫ k) hβ
+    have hh := h.trans hb
+    simpa only [Iso.trans_hom, Category.assoc, biprod.map_fst] using
+      congrArg (fun k ↦ k ≫ biprod.fst) hh
+  · have h := congrArg (fun k ↦ k ≫ e₂'.hom) hm₂
+    simp only [Category.assoc] at h
+    have hb := congrArg (fun k ↦ d₂.hom ≫ k) hβ
+    have hh := h.trans hb
+    simpa only [Iso.trans_hom, Category.assoc, biprod.map_snd] using
+      congrArg (fun k ↦ k ≫ biprod.snd) hh
+  · simpa only [Iso.trans_hom, Category.assoc, hγ] using
+      congrArg (fun k ↦ k ≫ e₃'.hom) hm₃
 
 end AlgebraicGeometry

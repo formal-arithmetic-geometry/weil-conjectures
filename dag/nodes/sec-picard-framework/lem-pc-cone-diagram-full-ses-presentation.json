@@ -1,0 +1,133 @@
+{
+ "kind": "statement",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "id": "lem-pc-cone-diagram-full-ses-presentation",
+ "title": "Short exact cylinder presentation preserving all three components",
+ "statement": "For an abelian category C with a derived category, a strict square tβ=αt′ of integer cochain maps admits short exact cylinder rows A→T→Cone(t) and A′→T′→Cone(t′) and a row morphism m. Six localized isomorphisms identify the rows with A,B,Cone(t) and A′,B′,Cone(t′). The horizontal maps become t,t′ and cone inclusions, and ALL three vertical components become α, β and the functorial cone map, respectively.",
+ "stmt_deps": [
+  "def-pc-derived-category"
+ ],
+ "source": {
+  "document": "Stacks Project, Derived Categories",
+  "place": "Tag 014D, Lemma 13.9.6 and the explicit cylinder construction; also the existing proved ConeDiagramSESPresentation implementation."
+ },
+ "proof": [
+  {
+   "text": "For each arrow t put T=B⊕Cone(id A), i=(t,0,id), and q(b,a⁺,a)=(-a⁺,b-t(a)). The cone differential verifies that these are chain maps and iq=0. The degreewise retraction r(b,a⁺,a)=a and section s(a⁺,b)=(b,-a⁺,0) satisfy ir=id, sq=id, and ri+qs=id, so the row A→T→Cone(t) is degreewise split short exact.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The identity cone has its standard contracting homotopy. Localization kills all maps out of it, so Q of the projection T→B is an isomorphism with inverse Q of the B inclusion. Under this comparison the first arrow is Q(t), and the second is the cone inclusion; the extra identity-cone summand maps to zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use β on B and the functorial cone map induced by α on Cone(id A) to map the source cylinder to the target cylinder. The given strict-square equation makes this commute with i and q. On A it is α and on the quotient it is the standard cone map. The six comparisons, identity at first and third vertices and the projection comparison at middle vertices, give the result.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The middle cylinder map is biprod.map β (Cone.map α α). Composing with the target projection gives the source projection followed by β. Applying Q proves the extra middle-component identity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Derived Categories",
+  "place": "Tag 014D, Lemma 13.9.6 and the explicit cylinder construction; also the existing proved ConeDiagramSESPresentation implementation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Functorial short exact mapping cylinder presentation preserving all three vertical maps",
+   "results": "Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relative Mayer Vietoris comparison represented by a morphism of short exact cochain complex rows",
+   "results": "Eight MayerVietorisSquare additive-sheaf results; no resolved relative diagram theorem.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.ShortExact",
+   "results": "Unknown identifier",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "rectif|relativeMV|mayerVietoris.*presentation",
+   "results": "Found ConeDiagramSESPresentation (omits middle component), restricted RelativeMVSESPresentation, and HomotopySquareRectification. Blueprint search relative cover chain square and mapping cylinder: zero nodes.",
+   "date": "2026-10-14",
+   "verdict": "No exact statement; cylinder construction reused with an additional proved component equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeMVCoverRows",
+  "date": "2026-10-14",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Resolved relative cover construction: chain-square geometry and functorial short exact cylinder replacement, respectively.",
+   "via": [
+    "lem-pc-relative-mv-cover-rows",
+    "lem-pc-relative-mv-cover-homotopy-data",
+    "lem-pc-standard-single-union-homotopy-chain-data",
+    "new-pc-standard-single-union-ses-chain-data",
+    "new-pc-standard-single-union-ses-presentation",
+    "new-pc-standard-single-flat-counit-union-triangles",
+    "new-pc-standard-single-flat-counit-union-equation",
+    "lem-pc-standard-single-flat-counit-union-presentation",
+    "lem-pc-standard-single-flat-counit-union",
+    "lem-pc-standard-single-stalk-flat-counit-model",
+    "lem-pc-standard-flat-single-base-change",
+    "lem-pc-standard-flat-single-base-change-epi"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.ConeDiagramFullSESPresentation",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/ConeDiagramFullSESPresentation.lean",
+  "declaration": "cone_diagram_full_ses_presentation",
+  "statement": "theorem cone_diagram_full_ses_presentation\n    {C : Type u} [Category C] [Abelian C] [HasDerivedCategory.{w} C]\n    (A B A' B' : CochainComplex C ℤ)\n    (t : A ⟶ B) (t' : A' ⟶ B') (α : A ⟶ A') (β : B ⟶ B')\n    (hc : t ≫ β = α ≫ t') :\n    ∃ (P P' : ShortComplex (CochainComplex C ℤ)) (m : P ⟶ P')\n      (d₁ : DerivedCategory.Q.obj P.X₁ ≅ DerivedCategory.Q.obj A)\n      (d₂ : DerivedCategory.Q.obj P.X₂ ≅ DerivedCategory.Q.obj B)\n      (d₃ : DerivedCategory.Q.obj P.X₃ ≅\n        DerivedCategory.Q.obj (CochainComplex.mappingCone t))\n      (d₁' : DerivedCategory.Q.obj P'.X₁ ≅ DerivedCategory.Q.obj A')\n      (d₂' : DerivedCategory.Q.obj P'.X₂ ≅ DerivedCategory.Q.obj B')\n      (d₃' : DerivedCategory.Q.obj P'.X₃ ≅\n        DerivedCategory.Q.obj (CochainComplex.mappingCone t')),\n      P.ShortExact ∧ P'.ShortExact ∧\n      DerivedCategory.Q.map P.f ≫ d₂.hom = d₁.hom ≫ DerivedCategory.Q.map t ∧\n      DerivedCategory.Q.map P.g ≫ d₃.hom =\n        d₂.hom ≫ DerivedCategory.Q.map (CochainComplex.mappingCone.inr t) ∧\n      DerivedCategory.Q.map P'.f ≫ d₂'.hom = d₁'.hom ≫ DerivedCategory.Q.map t' ∧\n      DerivedCategory.Q.map P'.g ≫ d₃'.hom =\n        d₂'.hom ≫ DerivedCategory.Q.map (CochainComplex.mappingCone.inr t') ∧\n      DerivedCategory.Q.map m.τ₁ ≫ d₁'.hom = d₁.hom ≫ DerivedCategory.Q.map α ∧\n      DerivedCategory.Q.map m.τ₂ ≫ d₂'.hom = d₂.hom ≫ DerivedCategory.Q.map β ∧\n      DerivedCategory.Q.map m.τ₃ ≫ d₃'.hom =\n        d₃.hom ≫ DerivedCategory.Q.map (CochainComplex.mappingCone.map t t' α β hc)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261014T080232-L-3750174",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261014T080232-L-3750174",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
