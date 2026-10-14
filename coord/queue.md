@@ -1,6 +1,6 @@
 # Work queue
 
-49 items; claim with `tools/claim.py next <group> [--stage N]`.
+51 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (49)
+## Stage 3: modules to prove (51)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -26,26 +26,28 @@
 | `Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientUnshifted` | 20 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFormula` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianCounitResolutionCalculation` | 23 | 1 | proof |
+| `Sheaf.Paper.CechCupPullbackCompat` | 23 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCoreParts` | 24 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.AlgebraTensorPullbackComparison` | 24 | 1 | proof |
 | `Sheaf.Paper.CechCupResolutionRepresentatives` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.InvertibleSymmetricAlgebraCoproduct` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OverlapConjugateRestriction` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra` | 25 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictedCounitCancellation` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCompatibility` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackCompositionCounitNormalization` | 27 | 1 | proof |
 | `Sheaf.Paper.ModuleCupEqualDerivedMapsClass` | 27 | 1 | proof |
-| `Sheaf.Paper.ModuleCupGodementFMapSummands` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HorizontalOrdinaryForwardFixedPasting` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverComponentIdentity` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleUnionHomotopyChainData` | 28 | 1 | proof |
 | `Sheaf.Paper.CechPushforwardTupleTotal` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SchemeCanonicalTensorUnitComponent` | 29 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate` | 30 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuity` | 31 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SchemeTensorHomUncurrySummandNaturality` | 30 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeDerivedTensorHomologyCoordinates` | 32 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FlatTelescopeArrowDiagram` | 32 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineStalkBaseSecondLocalizationComparison` | 33 | 1 | proof |
