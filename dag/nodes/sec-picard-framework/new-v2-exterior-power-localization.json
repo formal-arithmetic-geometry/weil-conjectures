@@ -1,0 +1,159 @@
+{
+ "id": "new-v2-exterior-power-localization",
+ "kind": "statement",
+ "title": "Exterior powers preserve module localization, characterized on pure wedges",
+ "statement": "Let R and B be commutative rings, B an R-algebra which is a localization at a multiplicative submonoid S of R [def-weil-pbc-module-localization]. Let M be an R-module and N a B-module. Suppose f : M -> N is R-linear after restricting scalars and identifies N with the localization of M at S. Let n be a natural number and let g : exteriorPower_R^n M -> exteriorPower_B^n N be R-linear after restricting scalars [def-weil-pbc-exterior-algebra]. If g(m_1 wedge ... wedge m_n) = f(m_1) wedge ... wedge f(m_n) for every n-tuple of elements of M, then g identifies its codomain with the localization of its domain at S. This includes n=0, S containing zero, and modules without finiteness or freeness assumptions.",
+ "stmt_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-exterior-algebra"
+ ],
+ "source": {
+  "document": "dag/nodes/sec-picard-framework/new-q1-exterior-sheaf-affine-unit-bijective.json",
+  "place": "Proof step 2: localization of exterior powers by the pure-wedge fraction formula; based on Stacks Project, Algebra, Section 00DM and Schemes, Tags 01I8, 01IA and 01HV."
+ },
+ "proof": [
+  {
+   "text": "Identify N with S-inverse M using the localization axioms for f. Form L = S-inverse (exteriorPower_R^n M). It is naturally a B-module since B is S-inverse R. Every element of S acts invertibly on both L and exteriorPower_B^n N.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define an alternating map from N^n to L by sending a tuple of fractions (m_i/s_i) to (wedge_i m_i)/(product_i s_i). To check independence of representatives, replace one fraction at a time. The equality criterion gives t(s_i-prime m_i - s_i m_i-prime)=0 for some t in S. Multilinearity makes the corresponding equality of wedge numerators hold after multiplying by t and by the other denominators, exactly the equality criterion in L. Additivity follows by common denominators in the changed coordinate. An R-scalar multiplies the numerator; an inverse of an element of S multiplies the denominator, proving B-linearity. If two coordinates agree, choose the same fraction representative for them; their wedge numerator vanishes. The exterior universal property therefore induces a B-linear map h : exteriorPower_B^n N -> L.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend g to an R-linear map k : L -> exteriorPower_B^n N by the localization universal property, since denominators act invertibly on this B-module. The composite h k fixes numerator pure wedges by the hypothesis on g; the pure wedges span the exterior power, so it fixes all numerators and therefore all fractions. The composite k h fixes pure wedges of f(m_i), then pure wedges of arbitrary fractions by B-multilinearity and inversion of denominators; these span the B-exterior power. Thus h and k are inverse and g is the localization map under their comparison.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For n=0 the empty wedge is 1 and the denominator product is 1, so the construction reduces to ring localization. If zero belongs to S, the localized ring and all its modules are zero. Thus the same construction includes both boundary cases.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V2",
+  "date": "2026-10-14",
+  "document": "dag/nodes/sec-picard-framework/new-q1-exterior-sheaf-affine-unit-bijective.json",
+  "place": "Proof step 2: localization of exterior powers by the pure-wedge fraction formula; based on Stacks Project, Algebra, Section 00DM and Schemes, Tags 01I8, 01IA and 01HV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exterior powers commute with localization of modules over a commutative ring",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exterior power commutes with localization of a module; sheafification is an isomorphism on affine opens for a localizing presheaf",
+   "results": "ModuleCat.Tilde.openToLocalization, ModuleCat.Tilde.toOpen, Scheme.AffineZariskiSite.PreservesLocalization, and module sheafification construction declarations. No exterior localization theorem.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"IsLocalizedModule\"",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "exterior.*localiz|localiz.*exterior|exterior.*baseChange; searched ExteriorPower, ExteriorAlgebra, Alternating, Multilinear, LocalizedModule, and both project roots",
+   "results": "No exterior-power localization declaration. CliffordAlgebra.equivBaseChange concerns the entire algebra, not its individual exterior powers. Blueprint exterior search and DAG statement search found no duplicate algebraic localization node.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafAffineUnit",
+  "group": "V2",
+  "date": "2026-10-14"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The affine conormal wedge chart calculation: algebraic localization step of the exterior sheaf affine unit comparison.",
+   "via": [
+    "new-q1-exterior-sheaf-affine-unit-bijective",
+    "new-t2-self-tor-conormal-wedge-chart-section-equiv",
+    "new-t2-self-tor-conormal-wedge-chart",
+    "new-u4-self-tor-basic-ideal-wedge-coordinates",
+    "new-e3-self-tor-ideal-wedge-coordinates",
+    "new-h3-self-tor-local-wedge-coordinates",
+    "new-e1-self-tor-nested-affine-coordinates",
+    "new-n1-self-tor-compatible-affine-maps",
+    "new-r4-self-tor-conormal-dual-chart-iso",
+    "lem-sc-self-tor-conormal-dual-chart",
+    "new-s3-koszul-conormal-nested-charts",
+    "new-w4-koszul-self-ext-local-alignment",
+    "new-s3-koszul-conormal-compatible-cover",
+    "lem-sc-koszul-self-ext-conormal-local-comparison",
+    "lem-sc-koszul-self-ext-conormal-comparison-surjection",
+    "lem-sc-koszul-self-ext-dual-exterior-conormal",
+    "lem-sc-koszul-self-ext-yoneda-surjection",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.LinearAlgebra.ExteriorPowerLocalization",
+  "file": "lean/Sheaf/LinearAlgebra/ExteriorPowerLocalization.lean",
+  "declaration": "exteriorPower.isLocalizedModule_of_wedge",
+  "statement": "theorem isLocalizedModule_of_wedge\n    {R B : Type u} [CommRing R] [CommRing B] [Algebra R B]\n    (S : Submonoid R) [IsLocalization S B]\n    (M : ModuleCat.{u} R) (N : ModuleCat.{u} B)\n    (f : M ⟶ (ModuleCat.restrictScalars (algebraMap R B)).obj N)\n    [IsLocalizedModule S f.hom] (n : ℕ)\n    (g : ModuleCat.of R (⋀[R]^n M) ⟶\n      (ModuleCat.restrictScalars (algebraMap R B)).obj (ModuleCat.of B (⋀[B]^n N)))\n    (hg : ∀ a : Fin n → M,\n      g (ιMulti R n a) = ιMulti B n (fun i ↦ f (a i))) :\n    IsLocalizedModule S g.hom",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261014T010856-L-3168988",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261014T010856-L-3168988",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
