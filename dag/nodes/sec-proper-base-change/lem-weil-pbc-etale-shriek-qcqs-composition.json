@@ -27,9 +27,82 @@
   "def-weil-pbc-direct-image",
   "def-weil-pbc-derived-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-compatible-compactification-triangle] to the chosen compactification $c_g=(i,\\overline g)$. Obtain $e=(a,p)$, $U$, $b$, $p_Y$ and $c$ as in its statement. Write $d_f=(c,p_Y)$ and $d_{gf}=(a,\\overline g\\circ p)$. These are actual compactifications; in particular $c,b$ are quasi-compact open immersions, $p,p_Y$ are proper, $a=b\\circ c$, and $U=\\overline X\\times_{\\overline Y}Y$. These are exactly the geometric models in the first paragraph of 0F7J, without assuming the original three chosen compactifications form a Cartesian triangle.",
+   "uses": [
+    "lem-weil-pbc-compatible-compactification-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, label lemma-shriek-composition, first paragraph and four-line calculation"
+   }
+  },
+  {
+   "text": "For the successive opens $X\\xrightarrow{c}U\\xrightarrow{b}\\overline X$, [lem-weil-pbc-extension-by-zero-adjunction] identifies maps $b_!c_!F\\to H$ successively with maps $c_!F\\to b^{-1}H$, then with maps $F\\to c^{-1}b^{-1}H$. Open inverse image is restriction: evaluation on objects over $X$ gives $c^{-1}b^{-1}H=a^{-1}H$ since $a=bc$; the same cited adjunction identifies the last maps with maps $a_!F\\to H$. Thus uniqueness of a left adjoint supplies $b_!c_!\\cong a_!$, naturally in $F$. All these Hom bijections are $\\Lambda$-linear. The exactness and preservation of quasi-isomorphisms in [lem-weil-pbc-extension-by-zero-exact] allow this isomorphism to be applied degreewise and then localized, giving $b_!c_!\\cong a_!$ on $D^+$. This is the open case of Tag 0F50, with its argument written here rather than creating a node.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7J (second equality) and 0F50 (lemma-f-shriek-composition), open-immersion case"
+   }
+  },
+  {
+   "text": "The defining square for $U$ satisfies [lem-weil-pbc-etale-open-proper-interchange], with proper vertical map $p$ and quasi-compact open horizontal map $i$. Applying its natural isomorphism to $c_!K$ gives $i_!Rp_{Y,*}c_!K\\cong Rp_*b_!c_!K$ for every $K\\in D^+(X_{\\Et},\\Lambda)$. Degreewise exact extension by zero keeps $c_!K$ bounded below. Finite $\\Lambda$ is a torsion ring (some positive integer annihilates its additive group), so no invertibility hypothesis on a prime or on residue characteristics is needed.",
+   "uses": [
+    "lem-weil-pbc-etale-open-proper-interchange",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7J (third equality) and 0F7B (lemma-shriek-proper-and-open)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to the morphisms of small etale topoi associated to $p$ and $\\overline g$, each with the constant ring sheaf $\\Lambda$. Their structural ring maps are the canonical pullback identifications of this constant ring. Choose a universe in which all three small sites are small. The canonical isomorphism $R\\overline g_*Rp_*\\cong R(\\overline g p)_*$ restricts to $D^+$: derived direct images computed by bounded-below injective resolutions preserve the lower bound, as described in [def-weil-pbc-direct-image]. By [def-weil-pbc-projection-compactification] the two model compact-support functors are $Rf_!^{d_f}=Rp_{Y,*}c_!$ and $R(gf)_!^{d_{gf}}=R(\\overline g p)_*a_!$. Hence the step-3 isomorphism, followed by step 2 and direct-image composition, gives the explicit natural chain\n$$Rg_!^{c_g}Rf_!^{d_f}=R\\overline g_*i_!Rp_{Y,*}c_!\\cong R\\overline g_*Rp_*b_!c_!\\cong R\\overline g_*Rp_*a_!\\cong R(\\overline g p)_*a_!=R(gf)_!^{d_{gf}}.$$\nEach arrow is an isomorphism of functors; the coefficient ring and site remain the small etale $\\Lambda$-module ones throughout.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-projection-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, first, second and fourth equalities; sites-cohomology.tex Tag 0D6E, label lemma-derived-pushforward-composition"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-shriek-compactification-independence] for $f$ and $gf$, whose sources and bases are the original qcqs schemes and whose morphisms are separated of finite type. Its comparisons give $Rf_!^{c_f}\\cong Rf_!^{d_f}$ and $R(gf)_!^{d_{gf}}\\cong R(gf)_!^{c_{gf}}$. Whisker the first with $Rg_!^{c_g}$, compose with the isomorphism of step 4, and then compose with the second comparison. The result is the required natural isomorphism $Rg_!^{c_g}Rf_!^{c_f}\\cong R(gf)_!^{c_{gf}}$. The statement asks for existence of a natural isomorphism for the specified choices; it does not assert unit, associativity or independence of the auxiliary triangle for this composition map. Those stronger coherence assertions of 0F7J are consequently unnecessary here.",
+   "uses": [
+    "lem-weil-pbc-etale-shriek-compactification-independence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7I (lemma-shriek-well-defined) and 0F7J, comparison with chosen models"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-etale-open-proper-interchange",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-projection-compactification",
+  "lem-weil-pbc-etale-shriek-compactification-independence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J, label lemma-shriek-composition, construction (first paragraph and calculation); Tag 0F7I for arbitrary chosen models"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -166,12 +239,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-compactification-constructibility",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-etale-shriek-qcqs-composition",
+  "worker": "stage1",
+  "summary": "Checked 0F7J and the Lean composition construction; the existing body rests on the unfinished proper base-change declaration. Split using a geometric compatible triangle, open-proper interchange, the explicit adjunction proof for successive extensions by zero, the general ringed-topos direct-image compositor, and choice comparisons. No coefficient-prime restriction or Noetherian assumption introduced.",
+  "blueprint": "Since the finite ring $\\Lambda=P_n$ is annihilated by an integer, $F_{\\Et}$ is a torsion abelian sheaf, so the classical input of the source note (Th. 1.1 of SGA 4 1/2 and [Tag 095U](https://stacks.math.columbia.edu/tag/095U)) applies to $f_{\\Et}$: the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$.; classical constructibility input expanded using proof of 0GL0, second paragraph: Rf_! = Rp_! composed with Ri_!, then factor affine-space projections"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-873b9b941",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-873b9b941 (reviewer sub-agent of L); spot-checked: Read all five proof steps, both new nodes, cited statements and sources. Stacks 0F7J, 0F7B, 0F7I and 0D6E support the hypotheses and finite-ring étale module categories. No duplicate, restated child or delivery cycle found. No fixes needed; review.md records edge cases, inherited cycles and exact target scope."
+ }
 }
