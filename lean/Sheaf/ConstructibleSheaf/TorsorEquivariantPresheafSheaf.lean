@@ -23,3 +23,5 @@ the historical compatibility path.
 -/
 
 @[expose] public section
+
+-- The implementation is intentionally centralized in the imported module.
