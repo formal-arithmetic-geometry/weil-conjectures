@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-perfect-hom-open-transport-square",
+ "kind": "lemma",
+ "title": "Open pullback Hom transport square",
+ "statement": "Let $s:Y\\to S$ be a morphism of schemes, $B\\subset Y$ an open, and assume derived categories of sheaves of modules in the common Hom universe $w$ on every scheme [def-pc-scheme, def-pc-derived-category]. Put $L=\\operatorname{schemeMVDerivedRestriction}(Y,B)$ [def-pc-derived-mayer-vietoris-canonical-data]. Supply an adjunction $a:LB.\\iota^*\\dashv RB.\\iota_*$ [def-pc-derived-pullback, lem-pc-perfect-hom-transport]. For $r:T\\to S$, put $\\pi_r:Y\\times_S T\\to Y$, $\\pi'_r:B\\times_S T\\to B$, and let $b_r:B\\times_S T\\to Y\\times_S T$ be the pullback map induced by $B.\\iota$ and the identities. Thus $b_r\\pi_r=\\pi'_r B.\\iota$. Let $\\sigma:L\\cong LB.\\iota^*$ be the mate of the identity on the common right adjoint between $a$ and $\\operatorname{schemeMVAdjunction}(Y,B)$. Define $\\kappa_r:L\\pi_r^*;Lb_r^*\\cong L;L\\pi_r'^*$ as $c(b_r,\\pi_r)$, then the equality comparison of the preceding cartesian equality, then $c(\\pi'_r,B.\\iota)^{-1}$, then $\\sigma^{-1}$ whiskered by $L\\pi_r'^*$, where $c$ is the fixed counit-pinned perfectHomComposition [lem-pc-perfect-hom-transport]. For derived objects $M,Q$ on $Y$ and $f:L\\pi_r^*M\\to L\\pi_r^*Q$, put $\\tau_r(f)=\\kappa_r(M)^{-1};Lb_r^*(f);\\kappa_r(Q)$. For objects $T,T'$ of $\\operatorname{Over}(S)$ and an arrow $g:T'\\to T$, the canonical Hom transport satisfies $\\tau_{T'}(\\operatorname{perfectHomMap}(s,g,f))=\\operatorname{perfectHomMap}(B.\\iota;s,g,\\tau_T(f))$. No supportedness, bijectivity or finiteness hypothesis is asserted or needed. The Lean interface accepts a comparison family pointwise equal to the explicitly defined $\\kappa_r$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "lem-pc-perfect-hom-transport"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D5S, cohomology-lemma-derived-pullback-composition; perfect.tex Tag 09RE, inverse-image open compatibility of Hom transport"
+ },
+ "proof": [
+  {
+   "text": "The two composites B x_S T' -> Y x_S T of the open cartesian arrows and the base-change arrows agree by pullback.hom_ext, checking their first and second projections.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Paste the fixed derived pullback composition comparisons around that commuting square. Associativity equates the two paths, and naturality of sigma equates their final whiskered factors. Evaluate at M and Q, use functoriality and naturality to move pullback of f, and cancel inverse comparison components. Substituting the supplied comparison equations gives exactly the displayed Hom transport square.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-perfect-hom-transport",
+    "def-pc-derived-mayer-vietoris-canonical-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "E2",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W, 08FE, 08BT, 0D5S; perfect.tex Tag 09RE",
+  "note": "Agent-written detailed argument for the cartesian open restriction step; source tags read on the Stacks website."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived pullback composition comparisons commute with restriction to a cartesian open square",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "date": "2026-10-14",
+   "results": "CategoryTheory.conjugateIsoEquiv; CategoryTheory.conjugateIsoEquiv_apply_hom; CategoryTheory.conjugateIsoEquiv_apply_inv; CategoryTheory.conjugateIsoEquiv_symm_apply_hom; CategoryTheory.conjugateIsoEquiv_symm_apply_inv",
+   "verdict": "No exact match for the derived open Hom assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Cc]omp.*[Aa]ssoc|[Cc]omp.*[Aa]ssoc.*pullback",
+   "date": "2026-10-14",
+   "results": "Mathlib/AlgebraicTopology/CechNerve.lean; Mathlib/Topology/Sheaves/Functors.lean; Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean; Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean; Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean; Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean; Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean; Mathlib/AlgebraicGeometry/ValuativeCriterion.lean",
+   "verdict": "No exact match for the derived open Hom assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedMaps",
+  "date": "2026-10-14",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Mayer--Vietoris Hom comparison: restriction to inverse-image opens before shifts and colimits",
+   "via": [
+    "new-perfect-hom-open-restricted-maps",
+    "new-perfect-hom-open-restricted-core",
+    "lem-pc-perfect-hom-open-restricted-data-exists",
+    "lem-pc-perfect-hom-open-restricted-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomOpenTransportSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomOpenTransportSquare.lean",
+  "declaration": "AlgebraicGeometry.perfect_hom_open_transport_square",
+  "statement": "theorem perfect_hom_open_transport_square\n    {S Y : Scheme.{u}} (s : Y ⟶ S) (B : Y.Opens)\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι)\n    {T T' : Over S} (g : T' ⟶ T) (M Q : schemeDerivedCategory Y)\n    (f : (derivedPullback (pullback.fst s T.hom)).obj M ⟶\n      (derivedPullback (pullback.fst s T.hom)).obj Q) :\n    let b (r : Over S) :=\n      pullback.map (B.ι ≫ s) r.hom s r.hom B.ι (𝟙 r.left) (𝟙 S) (by simp) (by simp)\n    let σ : schemeMVDerivedRestriction Y B ≅ derivedPullback B.ι :=\n      (conjugateIsoEquiv a (schemeMVAdjunction Y B)).symm (Iso.refl _)\n    let he (r : Over S) :\n        b r ≫ pullback.fst s r.hom = pullback.fst (B.ι ≫ s) r.hom ≫ B.ι := by\n      simp [b, pullback.map]\n    let κ₀ (r : Over S) := perfectHomComposition (b r) (pullback.fst s r.hom) ≪≫\n      eqToIso (congrArg (fun f ↦ derivedPullback f) (he r)) ≪≫\n      (perfectHomComposition (pullback.fst (B.ι ≫ s) r.hom) B.ι).symm ≪≫\n      Functor.isoWhiskerRight σ.symm (derivedPullback (pullback.fst (B.ι ≫ s) r.hom))\n    ∀ κ : (r : Over S) →\n        derivedPullback (pullback.fst s r.hom) ⋙ derivedPullback (b r) ≅\n          schemeMVDerivedRestriction Y B ⋙ derivedPullback (pullback.fst (B.ι ≫ s) r.hom),\n      (∀ r, κ r = κ₀ r) →\n    (κ T').inv.app M ≫ (derivedPullback (b T')).map (perfectHomMap s g f) ≫\n        (κ T').hom.app Q =\n      perfectHomMap (B.ι ≫ s) g\n        ((κ T).inv.app M ≫ (derivedPullback (b T)).map f ≫ (κ T).hom.app Q)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261014T010839-L-3162361",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261014T010839-L-3162361",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-perfect-hom-open-test-bijective",
+ "kind": "lemma",
+ "title": "Bijective open pullback Hom restriction on supported tests",
+ "statement": "Let $s:Y\\to S$ be a morphism of schemes, $B\\subset Y$ an open, and assume derived categories of sheaves of modules in the common Hom universe $w$ on every scheme [def-pc-scheme, def-pc-derived-category]. Put $L=\\operatorname{schemeMVDerivedRestriction}(Y,B)$ [def-pc-derived-mayer-vietoris-canonical-data]. Supply an adjunction $a:LB.\\iota^*\\dashv RB.\\iota_*$ [def-pc-derived-pullback, lem-pc-perfect-hom-transport]. For $r:T\\to S$, put $\\pi_r:Y\\times_S T\\to Y$, $\\pi'_r:B\\times_S T\\to B$, and let $b_r:B\\times_S T\\to Y\\times_S T$ be the pullback map induced by $B.\\iota$ and the identities. Thus $b_r\\pi_r=\\pi'_r B.\\iota$. Let $\\sigma:L\\cong LB.\\iota^*$ be the mate of the identity on the common right adjoint between $a$ and $\\operatorname{schemeMVAdjunction}(Y,B)$. Define $\\kappa_r:L\\pi_r^*;Lb_r^*\\cong L;L\\pi_r'^*$ as $c(b_r,\\pi_r)$, then the equality comparison of the preceding cartesian equality, then $c(\\pi'_r,B.\\iota)^{-1}$, then $\\sigma^{-1}$ whiskered by $L\\pi_r'^*$, where $c$ is the fixed counit-pinned perfectHomComposition [lem-pc-perfect-hom-transport]. For derived objects $M,Q$ on $Y$ and $f:L\\pi_r^*M\\to L\\pi_r^*Q$, put $\\tau_r(f)=\\kappa_r(M)^{-1};Lb_r^*(f);\\kappa_r(Q)$. If $L:\\operatorname{Hom}(M,E)\\to\\operatorname{Hom}(LM,LE)$ is bijective for every derived object $E$ on $Y$, then $\\tau_r:\\operatorname{Hom}(L\\pi_r^*M,L\\pi_r^*Q)\\to\\operatorname{Hom}(L\\pi_r'^*LM,L\\pi_r'^*LQ)$ is bijective. The Lean interface allows a supplied comparison equal to this explicitly defined $\\kappa_r$, to avoid unfolding its construction in downstream proofs.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "lem-pc-perfect-hom-transport"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W (cohomology-lemma-adjoint), 08FE (open restriction of derived direct image), 08BT (derived extension-by-zero adjunction); sheaves.tex Tag 00A7; perfect.tex Tag 09RE, inverse-image opens in the Hom comparison"
+ },
+ "proof": [
+  {
+   "text": "Using the exact extension-by-zero adjunction, identify the all-target Hom bijectivity hypothesis with invertibility of the counit J(LM) -> M by the Hom adjunction and Yoneda. Thus M is the supported extension of LM.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-pc-open-extension-restriction-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute pullback using a K-flat representative. On each stalk, tensor pullback of extension by zero agrees with extension by zero along the inverse-image open: inside the open it is the same stalk tensor, and outside it is zero. This constructs the derived cartesian extension-by-zero comparison. Identify the inverse-image open with B x_S T by the canonical pullback lifts.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-derived-pullback",
+    "lem-sc-open-extension-counit-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The derived extension/restriction adjunction gives bijectivity on Hom out of the supported pullback. The canonical composition and open-adjunction mate comparisons identify this function with tau_r. Substitute the supplied comparison equation and conjugate by kappa_r; conjugation by isomorphisms preserves bijectivity.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-mayer-vietoris-canonical-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "def-pc-derived-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-pc-open-extension-restriction-iso",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-sc-open-extension-counit-stalk"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "E2",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W, 08FE, 08BT, 0D5S; perfect.tex Tag 09RE",
+  "note": "Agent-written detailed argument for the cartesian open restriction step; source tags read on the Stacks website."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of pullback Hom is bijective for an extension by zero testing object on an open subscheme",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback commutes with extension by zero along a cartesian open immersion",
+   "date": "2026-10-14",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackComp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_id_comp; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackComp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullback_comp_id; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "verdict": "No exact match for the derived open Hom assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*pullback|pullback.*extensionByZero",
+   "date": "2026-10-14",
+   "results": "No hits.",
+   "verdict": "No exact match for the derived open Hom assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedMaps",
+  "date": "2026-10-14",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Mayer--Vietoris Hom comparison: restriction to inverse-image opens before shifts and colimits",
+   "via": [
+    "new-perfect-hom-open-restricted-maps",
+    "new-perfect-hom-open-restricted-core",
+    "lem-pc-perfect-hom-open-restricted-data-exists",
+    "lem-pc-perfect-hom-open-restricted-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomOpenTestBijective",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomOpenTestBijective.lean",
+  "declaration": "AlgebraicGeometry.perfect_hom_open_test_bijective",
+  "statement": "theorem perfect_hom_open_test_bijective\n    {S Y T : Scheme.{u}} (s : Y ⟶ S) (B : Y.Opens) (r : T ⟶ S)\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι)\n    (M Q : schemeDerivedCategory Y)\n    (hM : ∀ E : schemeDerivedCategory Y,\n      Function.Bijective (fun f : M ⟶ E ↦ (schemeMVDerivedRestriction Y B).map f)) :\n    let b := pullback.map (B.ι ≫ s) r s r B.ι (𝟙 T) (𝟙 S) (by simp) (by simp)\n    let σ : schemeMVDerivedRestriction Y B ≅ derivedPullback B.ι :=\n      (conjugateIsoEquiv a (schemeMVAdjunction Y B)).symm (Iso.refl _)\n    let he : b ≫ pullback.fst s r = pullback.fst (B.ι ≫ s) r ≫ B.ι := by\n      simp [b, pullback.map]\n    let κ₀ := perfectHomComposition b (pullback.fst s r) ≪≫\n      eqToIso (congrArg (fun f ↦ derivedPullback f) he) ≪≫\n      (perfectHomComposition (pullback.fst (B.ι ≫ s) r) B.ι).symm ≪≫\n      Functor.isoWhiskerRight σ.symm (derivedPullback (pullback.fst (B.ι ≫ s) r))\n    ∀ κ : derivedPullback (pullback.fst s r) ⋙ derivedPullback b ≅\n        schemeMVDerivedRestriction Y B ⋙ derivedPullback (pullback.fst (B.ι ≫ s) r),\n      κ = κ₀ →\n    Function.Bijective (fun f : (derivedPullback (pullback.fst s r)).obj M ⟶\n        (derivedPullback (pullback.fst s r)).obj Q ↦\n      κ.inv.app M ≫ (derivedPullback b).map f ≫ κ.hom.app Q)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261014T010839-L-3162361",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261014T010839-L-3162361",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
