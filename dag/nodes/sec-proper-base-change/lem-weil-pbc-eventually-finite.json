@@ -30,9 +30,109 @@
   "def-weil-finite-type-morphism",
   "lem-weil-pbc-limit-affine-transition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $f_i:X_i\\to S$ and $f:X\\to S$. By [def-weil-finite-integral-morphism], integral $f$ is affine and all finite transition morphisms are affine. Apply [lem-weil-pbc-eventually-affine] with $T=S$ and $Z_i=X_i$: its nonempty directed index, quasi-compact quasi-separated base and stages, affine transitions, and affine limit hypotheses are precisely available. Obtain $a\\in I$ with $f_i$ affine for every $i\\ge a$. Work on this upper tail. A cone on the tail extends uniquely to the full system: for any $i$, choose $k\\ge i,a$ and compose the tail cone map with $X_k\\to X_i$; a common upper bound proves independence of $k$. Thus the tail has the same limit $X$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-eventually-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09ZN, label lemma-eventually-finite, proof"
+   }
+  },
+  {
+   "text": "Choose a finite affine open cover $S=\\bigcup_{b=1}^N V_b$, using the affine neighbourhoods in the definition of scheme and quasi-compactness. If $S$ is empty, every $X_i$ is empty and the finite-local-on-target criterion with the empty cover proves the conclusion; choose any index. Otherwise fix a cover member $V=\\operatorname{Spec}R$. For $i\\ge a$, let $U_i=f_i^{-1}(V)=\\operatorname{Spec}A_i$; these are affine by the definition of affine morphism. Set $U=f^{-1}(V)$. Apply [lem-weil-pbc-limit-affine-transition] to the open $U_a\\subset X_a$: its pullbacks in $X_i$ are exactly $U_i$, since the transitions are over $S$. Its open-restriction clause and affine-scheme clause give $U=\\varprojlim_{i\\ge a}U_i=\\operatorname{Spec}A$ with $A=\\varinjlim_{i\\ge a}A_i$. By [lem-weil-pbc-lft-affine-pairs], $R\\to A_i$ is of finite type. The definitions in [def-weil-finite-integral-morphism] give integral $R\\to A$ and finite $A_i\\to A_j$ for $a\\le i\\le j$, by applying the finite transition to the affine open $U_i$.",
+   "uses": [
+    "def-pc-scheme",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-local-on-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09ZN, label lemma-eventually-finite, proof"
+   }
+  },
+  {
+   "text": "For this fixed cover member choose finitely many $R$-algebra generators $x_1,\\ldots,x_m$ of $A_a$. The image of each $x_t$ in $A$ is integral over $R$, so choose a monic polynomial $P_t\\in R[T]$ with $P_t(x_t)=0$ in $A$. Let $z_t=P_t(x_t)\\in A_a$; polynomial evaluation commutes with the ring coprojection, since it is a finite sum of coefficients times powers. Consequently the images of $z_t$ and $0\\in A_a$ in the ring colimit are equal.",
+   "uses": [
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09ZN, label lemma-eventually-finite, proof"
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-pc-filtered-colimit-commrings-elementwise] to $z_t$ and $0$ at stage $a$. The upper tail is a small filtered category: it contains $a$, any two of its indices have an upper bound still in the tail, and parallel arrows in its preorder category are equal. In particular the two arrows $a\\to k_t$ are the same. Hence there exists $k_t\\ge a$ with image of $z_t$ equal to zero in $A_{k_t}$. Choose a common upper bound $j\\ge a,k_1,\\ldots,k_m$. The transition maps send zero to zero and commute with polynomial evaluation, so every $P_t$ annihilates the image of $x_t$ in $A_j$. If $m=0$, take $j=a$.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09ZN, label lemma-eventually-finite, proof"
+   }
+  },
+  {
+   "text": "Let $B=\\operatorname{im}(A_a\\to A_j)$, with its induced $R$-algebra structure. The images of $x_1,\\ldots,x_m$ generate $B$ as an $R$-algebra: every element of $A_a$ is an $R$-polynomial in the $x_t$, and applying the ring map gives that same polynomial in their images. These images satisfy the monic $P_t$ in $B$, because the inclusion $B\\hookrightarrow A_j$ is injective. Thus [lem-weil-pbc-finite-of-integral-generators] says that $B$ is a finite $R$-module.",
+   "uses": [
+    "lem-weil-pbc-finite-of-integral-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09ZN, label lemma-eventually-finite, proof"
+   }
+  },
+  {
+   "text": "The finite transition $A_a\\to A_j$ supplies generators $y_1,\\ldots,y_q$ of $A_j$ as an $A_a$-module. They also generate over $B$: in an expression $y=\\sum_l c_l y_l$ with $c_l\\in A_a$, replace each coefficient by its image in $B$. If $b_1,\\ldots,b_p$ generate $B$ over $R$, write those image coefficients as $\\sum_h r_{hl}b_h$; then $y=\\sum_{h,l}r_{hl}(b_h y_l)$. The finitely many products $b_hy_l$ therefore generate $A_j$ over $R$. This is the explicit argument of Algebra Tag 00GL (lemma-finite-transitive), requiring no injectivity of $A_a\\to A_j$. The finite-local-on-target criterion, applied to the single affine target $V$, now gives that $U_j\\to V$ is finite.",
+   "uses": [
+    "lem-weil-pbc-finite-local-on-target"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09ZN, label lemma-eventually-finite, proof"
+   }
+  },
+  {
+   "text": "For each $b$, choose algebra generators of $\\mathcal O_{X_a}(f_a^{-1}(V_b))$ over $\\mathcal O_S(V_b)$. Their images in $\\mathcal O_X(f^{-1}(V_b))$ satisfy monic equations by integrality. Step 4 descends these finitely many equations to a stage $j_b\\ge a$; step 5 makes the image algebra finite, and the product generators of step 6 make $\\mathcal O_{X_{j_b}}(f_{j_b}^{-1}(V_b))$ finite over $\\mathcal O_S(V_b)$. Thus $f_{j_b}^{-1}(V_b)\\to V_b$ is finite. Choose an upper bound $i_0$ for $a,j_1,\\ldots,j_N$. For every $i\\ge i_0$ and every $b$, the restricted transition $f_i^{-1}(V_b)\\to f_{j_b}^{-1}(V_b)$ is finite by the open-restriction clause of [lem-weil-pbc-finite-local-on-target]. Composing with the finite $f_{j_b}^{-1}(V_b)\\to V_b$ is finite by [lem-weil-pbc-finite-composition]. The $V_b$ cover $S$, so [lem-weil-pbc-finite-local-on-target] implies $f_i:X_i\\to S$ finite. This proves the required assertion for every $i\\ge i_0$.",
+   "uses": [
+    "lem-weil-pbc-finite-local-on-target",
+    "lem-weil-pbc-finite-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09ZN, label lemma-eventually-finite, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-eventually-affine",
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-weil-pbc-finite-of-integral-generators",
+  "lem-weil-pbc-finite-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 09ZN, label lemma-eventually-finite, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -82,15 +182,72 @@
    "results": "hits: Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean",
    "date": "2026-10-15",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite transition morphisms integral inverse limit locally finite type schemes eventually finite",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.instIsIntegralHom, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, CategoryTheory.Limits.IsLimit",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eventually.*finite|exists.*isFinite",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse system schemes finite transitions integral limit eventually finite",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "directed colimit finite type algebras finite transition maps integral colimit eventually module finite",
+   "results": "8 hits: FGModuleCat.instFiniteCarrierColimitModuleCatCompForget₂, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, Algebra.QuasiFinite, FGModuleCat.instHasColimitsOfShapeOfFinCategory, Algebra.EssFiniteType, RingHom.QuasiFinite.of_isIntegral_of_finiteType, RingHom.FiniteType.essFiniteType, Algebra.QuasiFinite.of_isIntegral_of_finiteType",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[Cc]olimit|[Cc]olimit.*finite|09ZN",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "date": "2026-10-15",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-finite-closed-fp-approximation",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "lem-weil-pbc-eventually-finite",
+  "worker": "stage1",
+  "summary": "Checked all five hypotheses against Stacks 09ZN. Reused existing 09ZM, affine-limit, finite-local, affine finite-type, filtered ring-colimit equality, integral-generator and finite-composition nodes. Wrote out tail cofinality, open restriction, monic relation descent, passage to the image algebra, the product module generators and uniform eventual finiteness. No new nodes; statement unchanged.",
+  "blueprint": "Realizes the classical constructibility input in the first paragraph of thm-weil-pbc-direct-image-finiteness-proper: through the existing etale compactification and finite-closed-fp-approximation chain, the eventual-finiteness invocation of Stacks 09ZN in 09YY."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-763c80333",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-763c80333 (reviewer sub-agent of L); spot-checked: Read the required instructions, item, report, chapter/unit route, all cited node statements, and Stacks Tag 09ZN with its proof. Verified every hypothesis, affine-tail and open-restriction step, filtered-colimit equality descent, image-algebra finiteness, module generators, uniform tail argument, Mathlib searches, duplicate checks, route tools, and small edge cases. No new nodes or repairs are needed; review.md records the detailed checks."
+ }
 }
