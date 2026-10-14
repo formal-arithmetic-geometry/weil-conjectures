@@ -49,8 +49,8 @@ theorem stalk_normalization_depth_two_section_flat_core
     (p : E ⟶ L) [IsFinite p] (t : T ⟶ L)
     [Flat t] [Flat (pullback.snd p t)] (x : L) (b : T) (hb : t b = x) :
     ∃ W : L.Opens, x ∈ W ∧ Flat (p ∣_ W) := by
-  -- The rational generic section point is used upstream to prove pullback flatness.
-  -- Given that flatness, hb lifts every source point for stalkwise descent.
+  -- The caller supplies pullback flatness; hb then lifts every point of the fibre.
+  -- Descend flatness along the faithfully flat projection stalk map.
   classical
   let F : Set L := {y | ∀ z, p z = y → (p.stalkMap z).hom.Flat}
   let W : L.Opens := ⟨F, isOpen_setOf_finite_flat_stalks p⟩
