@@ -1,0 +1,147 @@
+{
+ "id": "lem-sc-square-zero-tensor-graded-presentation",
+ "kind": "statement",
+ "title": "Algebraic graded presentation of the tensor ideal sequences",
+ "statement": "Let j:Z→X be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], L an invertible O_X-module [def-sc-invertible-module], and J=j.ker [def-sbc-closed-immersion-ideal-sheaf] with J²=0 [def-sbc-ideal-sheaf-powers]. Write η_d:L^d→j_*j^*L^d for the tensor-pullback adjunction unit in every nonnegative degree d [lem-pc-module-pullback-adjunction]. There exists a TensorGradedPresentation of these sequences: commutative O_X-algebra sheaves B,C and p:B→C [def-weil-pbc-comm-algebra-sheaf], an O_X-module K and inclusion i:K→B [def-weil-pbc-ringed-space-algebra-module], with 0→K→B→C→0 short exact and products of local sections in ker p equal to zero. It includes maps b_d:L^d→B, c_d:j_*j^*L^d→C, k_d:ker η_d→K, explicit quotient projections q_d=π_d,3, and morphisms π_d of short complexes from this extension to the degree-d kernel sequence. The maps k_d exhibit K as the sheaf coproduct of the degreewise kernels. The equations b_d;p=η_d;c_d and k_d;i=ker.ι;b_d hold. The diagonal composites c_d;π_d,3 and k_d;π_d,1 are identities, and k_a;π_d,1=0 for a≠d. On every open U, multiplication satisfies b_a(s)b_d(t)=b_(a+d)((tensorPowAddIso a d)^(-1)(s⊗t)). The statement asserts no cohomology boundary or action equation.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, coherent-equation-ses and the direct-sum exact sequence following it; Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, the quotient action in the first paragraph of its proof."
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-pc-quasi-coherent-sheaf",
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-invertible-module",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-weil-pbc-ringed-space-algebra-module",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "On a frame open for L form O_X[T], its quotient (O_X/J)[T], and J[T]. Frame changes multiply degree-d coefficients by the d-th power of the transition unit, so these algebras and ideal inclusions glue. The degreewise quotient and ideal-kernel comparisons give b_d,c_d,k_d and their quotient/inclusion equations.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-closed-immersion-unit-quotient",
+    "lem-sc-square-zero-ideal-tensor-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exactness of small sheaf direct sums follows from AB4, or stalkwise exactness; sum the degreewise unit-quotient sequences. Degree projections give morphisms π_d of short complexes and the kernel colimit cofan. Diagonal composites are identities and off-diagonal ones vanish. Homogeneous multiplication is inverse tensorPowAddIso. Locally every coefficient of a product of two ideal sections is in J²=0, and sheaf separation extends the vanishing to every open.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-invertible-module",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sc-square-zero-ideal-tensor-unit",
+  "lem-weil-pbc-closed-immersion-unit-quotient"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, coherent-equation-ses and the direct-sum exact sequence following it; Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, the quotient action in the first paragraph of its proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Direct sum of tensor powers of an invertible sheaf and homogeneous quotient actions",
+   "results": "Service returned Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection of a product of homogeneous quotient sections in a graded algebra sheaf equals the tensor product section",
+   "results": "Eight hits on Proj homogeneous localization and graded ring tensor products; no graded module-sheaf realization or coefficient cohomology action comparison.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundary.*naturality|graded.*algebra|Cofan.mk",
+   "results": "Mathlib supplies graded tensor algebras and generic coproduct machinery but no line-bundle graded algebra sheaf or its coefficient cohomology comparisons. Whole blueprint searches for graded square zero and quotient action returned no duplicate.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryGradedRealization",
+  "date": "2026-10-14",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS graded direct-sum sequence: its algebraic construction before cohomology",
+   "via": [
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SquareZeroTensorGradedPresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorGradedPresentation_exists",
+  "statement": "theorem tensorGradedPresentation_exists {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥) : Nonempty (TensorGradedPresentation j L)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-381d3",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T004110-L-2836995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-381d3",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T004110-L-2836995",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files and DAG nodes match the stated theorem interfaces; all five modules and the direct importer compile successfully."
+ }
+}

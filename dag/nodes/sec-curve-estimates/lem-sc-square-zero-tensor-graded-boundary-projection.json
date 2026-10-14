@@ -1,0 +1,164 @@
+{
+ "id": "lem-sc-square-zero-tensor-graded-boundary-projection",
+ "kind": "statement",
+ "title": "Naturality of homogeneous coefficient boundary projections",
+ "statement": "Let j:Z→X be a closed immersion of schemes and L an O_X-module [def-pc-scheme, def-weil-closed-immersion]. Fix n≥0 and write η_d:L^d→j_*j^*L^d for the tensor-pullback adjunction unit [def-pc-module-pullback, lem-pc-module-pullback-adjunction]. Assume each kernel sequence of η_d is short exact. Let T=(0→K→B→C→0) be any TensorGradedPresentation, with short-complex degree morphisms π_d and quotient components q_d=π_d,3 [lem-sc-square-zero-tensor-graded-presentation]. Let D=(a_e,k_e) be any TensorBoundaryComparisonData [lem-sc-square-zero-ideal-tensor-unit]; D need not be identified with the canonical construction. Put A_e=H¹(Z,j^*(j.ker⊗L^n)⊗((j^*L)^n)^e) and let b_e:A_e≃H¹(X,ker η_(n(e+1))) be the additive equivalence induced by k_e [def-sbc-closed-immersion-ideal-sheaf, def-sc-ringed-space-module-cohomology]. Choose the derived categories needed for the canonical section boundaries [def-weil-abstract-derived-category, def-sc-module-cohomology-boundary, lem-sc-module-section-boundary-exact]. Take any injective resolutions of K,B,C and chain maps lifting the extension maps, whose sequence is degreewise short exact and whose global-sections image is short exact [def-sp-injective-resolutions]. Let δ′:Γ(X,C)→H¹(X,K) be its snake boundary, transported through the resolution/right-derived comparison isomorphisms and preceded by the canonical sections-to-zeroth-derived map. Define P_e=b_e^(-1)∘H¹(X,π_(n(e+1)),1), as in [lem-sc-square-zero-tensor-graded-product-projection]. Then for every e≥0 and z∈Γ(X,C), P_e(δ′(z))=b_e^(-1)(∂_(η_(n(e+1)))(q_(n(e+1))(z))), where ∂ is the canonical section boundary. This is a single naturality diagram, asserting no multiplication or action identity.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01DZ, module cohomology as a delta-functor; Tag 0B8S, its boundary for a square-zero extension. Applied to the degree projections of coherent.tex, Tag 09MS."
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-pc-quasi-coherent-sheaf",
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-invertible-module",
+  "def-sc-module-cohomology-boundary",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-weil-pbc-ringed-space-algebra-module",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-module-section-boundary-exact",
+  "lem-sc-square-zero-ideal-tensor-unit",
+  "lem-sc-square-zero-tensor-graded-presentation",
+  "lem-sc-square-zero-tensor-graded-product-projection",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "First use the snake/triangle comparison for the compatible resolutions to identify delta-prime with the canonical section boundary. Apply rightDerived_triangle_connecting to global sections. Its triangle comparison\nidentifies its delta with moduleCohomologyBoundary after the canonical single-complex\nisomorphisms. Delta naturality for T.degree in degrees zero and one, followed by naturality\nof toRightDerivedZero, identifies the two section-boundary composites. Evaluate on z and\nuse degree_quotient to replace the third component by q. Compose with the inverse additive\ncoefficient comparison D.k; tensorGradedCoefficientProjection_apply identifies the left\nside. No multiplication rule is used. The argument includes n=0, e=0 and zero sections.",
+   "uses": [
+    "lem-sc-p1-right-derived-triangle-connecting",
+    "lem-sc-square-zero-tensor-graded-presentation",
+    "lem-sc-square-zero-tensor-graded-product-projection",
+    "def-sc-module-cohomology-boundary",
+    "lem-sc-module-section-boundary-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cohomology-boundary",
+  "lem-sc-module-section-boundary-exact",
+  "lem-sc-p1-right-derived-triangle-connecting",
+  "lem-sc-square-zero-tensor-graded-presentation",
+  "lem-sc-square-zero-tensor-graded-product-projection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01DZ, module cohomology as a delta-functor; Tag 0B8S, its boundary for a square-zero extension. Applied to the degree projections of coherent.tex, Tag 09MS."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Direct sum of tensor powers of an invertible sheaf and homogeneous quotient actions",
+   "results": "Service returned Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection of a product of homogeneous quotient sections in a graded algebra sheaf equals the tensor product section",
+   "results": "Eight hits on Proj homogeneous localization and graded ring tensor products; no graded module-sheaf realization or coefficient cohomology action comparison.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundary.*naturality|graded.*algebra|Cofan.mk",
+   "results": "Mathlib supplies graded tensor algebras and generic coproduct machinery but no line-bundle graded algebra sheaf or its coefficient cohomology comparisons. Whole blueprint searches for graded square zero and quotient action returned no duplicate.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of section boundary connecting map in a short exact sequence and comparison with injective resolutions",
+   "results": "Generic injective-resolution comparison and toRightDerivedZero naturality lemmas; no canonical section-boundary naturality theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact.δ",
+   "results": "ShortComplex.ShortExact.δ and its exactness API; the existing project triangle comparison gives the needed resolution independence.",
+   "date": "2026-10-14",
+   "verdict": "generic API used through the existing comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryGradedRealization",
+  "date": "2026-10-14",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS degree projection diagram and Tag 01DZ naturality of connecting maps",
+   "via": [
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SquareZeroTensorGradedBoundaryProjection",
+  "file": "lean/Sheaf/AlgebraicGeometry/SquareZeroTensorGradedBoundaryProjection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorGradedProjection_boundary",
+  "statement": "theorem tensorGradedProjection_boundary {X Z : Scheme.{u}} {j : Z ⟶ X} [IsClosedImmersion j] [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wD} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (Opposite.op ⊤)))] {L : X.Modules} {n : ℕ} (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n) (hshort : ∀ d : ℕ, (ShortComplex.kernelSequence ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app (L.tensorPow d))).ShortExact) (IA : InjectiveResolution T.I) (IB : InjectiveResolution (commAlgebraSheafModule X.sheaf T.B)) (IC : InjectiveResolution (commAlgebraSheafModule X.sheaf T.C)) (α : IA.cocomplex ⟶ IB.cocomplex) (β : IB.cocomplex ⟶ IC.cocomplex) (hαβ : α ≫ β = 0) (hιA : IA.ι ≫ α = (CochainComplex.single₀ _).map T.i ≫ IB.ι) (hιB : IB.ι ≫ β = (CochainComplex.single₀ _).map (tensorGradedAlgebraMap T.p) ≫ IC.ι) (hH : ∀ k : ℕ, ((ShortComplex.mk α β hαβ).map (HomologicalComplex.eval _ (ComplexShape.up ℕ) k)).ShortExact) (hΓ : ((ShortComplex.mk α β hαβ).map ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex (ComplexShape.up ℕ))).ShortExact) (δ' : T.C.right.obj.obj (op ⊤) →+ ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj T.I)) (hboundary : ∀ z : T.C.right.obj.obj (op ⊤), δ' z = (((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app (commAlgebraSheafModule X.sheaf T.C) ≫ (IC.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) 0).hom ≫ hΓ.δ 0 1 rfl ≫ (IA.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) 1).inv).hom z)) (e : ℕ) (z : T.C.right.obj.obj (op ⊤)) : tensorGradedCoefficientProjection T D e (δ' z) = (Iso.addCommGroupIsoToAddEquiv (D.k e)).symm (RingedSpace.moduleSectionBoundary X.toRingedSpace (ShortComplex.kernelSequence ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app (L.tensorPow (n * (e + 1))))) (hshort (n * (e + 1))) (Hom.app (T.q (n * (e + 1))) ⊤ z))",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-381d3",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T004110-L-2836995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-381d3",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T004110-L-2836995",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files and DAG nodes match the stated theorem interfaces; all five modules and the direct importer compile successfully."
+ }
+}

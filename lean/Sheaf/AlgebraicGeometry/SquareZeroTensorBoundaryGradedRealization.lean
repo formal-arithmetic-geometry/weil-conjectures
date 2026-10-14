@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.CategoryTheory.CommAlgebraSheafModule
+import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedActionProjection
+import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedBoundaryProjection
 
 /-! # Homogeneous realization of tensor boundaries
 
@@ -23,11 +25,33 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry MonoidalCategory
 open Opposite TopologicalSpace
+attribute [local irreducible] AlgebraicGeometry.Scheme.Modules.tensorPullback
+  Functor.rightDerived Functor.rightDerivedToHomotopyCategory
 namespace AlgebraicGeometry.Scheme.Modules
 universe u wC wD
 attribute [local irreducible] RingedSpace.moduleSectionBoundary boundaryCoefficientCohomologyIso
-  canonicalTensorBoundaryComparisons
+  canonicalTensorBoundaryComparisons tensorGradedSection
 noncomputable section
+
+section GradedProjectionHelpers
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+attribute [local irreducible] RingedSpace.moduleCohomology
+
+private theorem graded_section_projection {X Z : Scheme.{u}} {j : Z ⟶ X}
+    [IsClosedImmersion j] {L : X.Modules} {n : ℕ}
+    (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n) (e : ℕ)
+    (x : 𝟙_ Z.Modules ⟶ (((tensorPullback j).obj L).tensorPow n).tensorPow (e + 1)) :
+    Hom.app (T.q (n * (e + 1))) ⊤ (tensorGradedSection T D e x) =
+      (x ≫ (D.a e).inv).app ⊤ (1 : Γ(Z, ⊤)) := by
+  unfold tensorGradedSection
+  set_option backward.isDefEq.respectTransparency false in
+    set_option backward.isDefEq.respectTransparency.types false in
+      rw [← AddCommGrpCat.comp_apply, ← Hom.comp_app, T.c_projection, Hom.id_app]
+  rfl
+
+
+end GradedProjectionHelpers
 
 /-- Realize the three homogeneous boundary/action terms in a single square-zero algebra
 extension. This is a comparison theorem: it asserts no derivation identity, either for
@@ -152,7 +176,52 @@ theorem tensorBoundary_graded_realization
           P (ρ s z) = H.map (mulTensorPowSection f F e 1) (Px z)) ∧
         (∀ z : (RingedSpace.moduleCohomology X.toRingedSpace 1).obj I,
           P (ρ t z) = H.map ((ρ_ F).inv ≫ F ◁ x)
-          (H.map (ρ_ F).hom (Pf z))) := by sorry
-
+          (H.map (ρ_ F).hom (Pf z))) := by
+  set_option backward.isDefEq.respectTransparency true in
+    set_option backward.isDefEq.respectTransparency.types true in
+      intro F N H b δ e f x
+      have hT : Nonempty (TensorGradedPresentation j L) :=
+        tensorGradedPresentation_exists j L hI
+      rcases hT with ⟨T⟩
+      refine Exists.intro T.B ?_
+      refine Exists.intro T.C ?_
+      refine Exists.intro T.p ?_
+      refine Exists.intro T.I ?_
+      refine Exists.intro T.i ?_
+      refine Exists.intro T.hw ?_
+      refine Exists.intro T.shortExact ?_
+      refine Exists.intro T.squareZero ?_
+      intro IA IB IC α β hαβ hιA hιB hH hΓ σ μ ρ δ' hlocal hrestrict hglobal haction hboundary
+      let s := tensorGradedSection T D 0 (tensorPowSection f 1)
+      let t := tensorGradedSection T D e x
+      let P := tensorGradedCoefficientProjection T D (e + 1)
+      let Px := tensorGradedCoefficientProjection T D e
+      let Pf := tensorGradedCoefficientProjection T D 0
+      have hactions := tensorGradedAction_projection j L hI n T D hD e f x σ μ ρ
+        hlocal hrestrict hglobal haction
+      refine Exists.intro s ?_
+      refine Exists.intro t ?_
+      refine Exists.intro P ?_
+      refine Exists.intro Px ?_
+      refine Exists.intro Pf ?_
+      let ψ (d : ℕ) (y : Γ((pushforward j).obj
+          ((tensorPullback j).obj (L.tensorPow (n * (d + 1)))), ⊤)) :=
+        (b d).symm (RingedSpace.moduleSectionBoundary X.toRingedSpace
+          (ShortComplex.kernelSequence
+            ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app
+              (L.tensorPow (n * (d + 1))))) (hshort (n * (d + 1))) y)
+      refine ⟨?_, ?_, ?_, hactions⟩
+      · have hb := tensorGradedProjection_boundary T D hshort
+          IA IB IC α β hαβ hιA hιB hH hΓ δ' hboundary (e + 1) (s * t)
+        have hp := tensorGradedSection_product j L hI n T D hD e f x
+        exact hb.trans (congrArg (ψ (e + 1)) hp)
+      · have hb := tensorGradedProjection_boundary T D hshort
+          IA IB IC α β hαβ hιA hιB hH hΓ δ' hboundary e t
+        have hp := graded_section_projection T D e x
+        exact hb.trans (congrArg (ψ e) hp)
+      · have hb := tensorGradedProjection_boundary T D hshort
+          IA IB IC α β hαβ hιA hιB hH hΓ δ' hboundary 0 s
+        have hp := graded_section_projection T D 0 (tensorPowSection f 1)
+        exact hb.trans (congrArg (ψ 0) hp)
 end
 end AlgebraicGeometry.Scheme.Modules
