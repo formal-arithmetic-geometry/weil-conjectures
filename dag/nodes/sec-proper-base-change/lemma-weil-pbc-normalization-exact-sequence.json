@@ -3,55 +3,190 @@
  "blueprint": {
   "is": "lemma-weil-pbc-normalization-exact-sequence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Normalization comparison exact sequence",
- "statement": "Let $C$ be a reduced curve, let $\\nu:\\widetilde C\\to C$ be its finite\nnormalization, and let $j:U\\hookrightarrow C$ be open. There is a natural\nexact sequence\n\n$$\n 0\\to j_!\\mathbf F_r\\longrightarrow\n \\nu_*\\widetilde j_!\\mathbf F_r\\longrightarrow Q\\to0,\n$$\n\nwhere $Q$ is constructible and supported on the finite nonnormal locus. The\nsequence, its boundary maps, and its restriction to opens commute with\nalgebraically closed field extension.",
+ "statement": "Let $k$ be algebraically closed and $C$ a reduced curve over $k$ in the sense of [def-sc-curves, def-pc-reduced-scheme] (separated, of finite type, and of dimension at most one). Let $\\nu:\\widetilde C\\to C$ be its normalization, defined as the disjoint union of the normalizations [def-sc-normalization] of its reduced irreducible components [def-weil-irreducible-components], and let $j:U\\hookrightarrow C$ be open with pullback $\\widetilde j:\\widetilde U\\hookrightarrow\\widetilde C$. For a prime $r$, use the constant small-etale sheaf $\\underline{\\mathbf F_r}$ [def-weil-pbc-constant-sheaf], extension by zero [def-weil-pbc-extension-by-zero], and direct image [def-weil-pbc-direct-image]. The unit and the finite-open comparison [def-weil-pbc-finite-open-comparison] define a natural short exact sequence\n$$0\\to j_!\\underline{\\mathbf F_r}\\xrightarrow{\\alpha}\\nu_*\\widetilde j_!\\underline{\\mathbf F_r}\\to Q\\to0,$$\nwhere $Q=\\operatorname{coker}\\alpha$ is constructible [def-constructible-constructible] and supported on the finite nonnormal locus. For every algebraically closed extension $k\\subseteq K$ and every open $W\\subseteq C$, the canonical inverse-image identifications carry this sequence to the sequence constructed on $C_K$ or $W$, respectively. The induced cohomology pullback maps [def-weil-pbc-etale-cohomology] commute with every connecting homomorphism of its long exact sequence, and field extension commutes with open restriction. This asserts compatibility, without asserting that the cohomology pullback maps are isomorphisms.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
   "place": "node lemma-weil-pbc-normalization-exact-sequence, order 1177"
  },
  "stmt_deps": [
-  "def-weil-pbc-constructible-complexes",
-  "def-weil-pbc-scheme-conventions"
+  "def-sc-curves",
+  "def-pc-reduced-scheme",
+  "def-sc-normalization",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-finite-open-comparison",
+  "def-constructible-constructible",
+  "def-weil-pbc-etale-cohomology"
  ],
  "proof": [
   {
-   "text": "Base change preserves surjectivity, so ν′ is surjective. The adjunction unit R_U → ν′_*ν′^*R_U is mono by [lem-weil-pbc-finite-surjective-unit-mono]. Identify ν′^*R_U with R_U′ using [lemma-constructible-pullback-constant], then apply exact extension by zero [lem-weil-pbc-extension-by-zero-exact] and compose with the finite/open comparison isomorphism [lemma-weil-pbc-finite-pushforward-extension-zero], constructed in [def-weil-pbc-finite-open-comparison]. This gives the concrete monomorphism α=j_!(η followed by ν′_*e) followed by β. The Lean proof proves monicity by preservation of monos, then cancellation of the comparison isomorphisms.",
+   "text": "Apply [lem-weil-pbc-reduced-algebraic-normalization-field-change] to C. Its normalization is finite, surjective and an isomorphism over the dense open normal locus N. C is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since Spec k is Noetherian (a field has just two ideals). The closed complement $Z=C\\setminus N$ contains no generic point of any irreducible component. A chain of length one of irreducible closed subsets inside Z could be extended by the component of C containing it, contradicting dim C\\le 1. Thus dim Z\\le 0. Apply [lem-sc-zero-dim-noetherian-closed-finite] (schemes are T0) to conclude that Z is a finite set of closed points. This argument includes zero-dimensional and empty C.",
+   "uses": [
+    "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-zero-dim-noetherian-closed-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+    "place": "Proof, first paragraph; Stacks 0BXR, 035Q, 0C3N and the finite nonnormal locus"
+   }
+  },
+  {
+   "text": "Put v=nu|_{\\widetilde U}:\\widetilde U\\toU and R=F_r. It is finite and surjective as the restriction of nu over an open. The unit eta:R_U\\to v_*v^{-1}R_U is mono by [lem-weil-pbc-finite-surjective-unit-mono]. Identify v^{-1}R_U with R_{\\widetilde U} using [lemma-constructible-pullback-constant]. Define alpha=beta_{nu,j,R} composed with j_!(eta), with this constant-sheaf identification included, using [def-weil-pbc-finite-open-comparison]. Exactness of j_! [lem-weil-pbc-extension-by-zero-exact] preserves the mono, and beta is an isomorphism by [lemma-weil-pbc-finite-pushforward-extension-zero]. Hence alpha is mono.",
    "uses": [
     "lem-weil-pbc-finite-surjective-unit-mono",
     "lemma-constructible-pullback-constant",
+    "def-weil-pbc-finite-open-comparison",
     "lem-weil-pbc-extension-by-zero-exact",
-    "lemma-weil-pbc-finite-pushforward-extension-zero",
-    "def-weil-pbc-finite-open-comparison"
+    "lemma-weil-pbc-finite-pushforward-extension-zero"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+    "place": "Proof, displayed definition of alpha; Stacks 0GJ1"
+   }
   },
   {
-   "text": "Apply [lem-weil-pbc-normalization-mono-cokernel] to the constructed α and its proof of monicity. It supplies precisely constructibility of cokernel α and zero inverse image on V. Package α, Mono α, and these two properties as the existential conclusion. This proves the existing Lean signature; the additional boundary-map compatibility of the prose blueprint is not part of that signature and is not newly asserted here.",
+   "text": "At a geometric point x in U, [lemma-weil-pbc-finite-stalk-formula] and [lem-weil-pbc-extension-by-zero-stalks] identify alpha_x with $R\\to\\prod_{z\\in\\nu^{-1}(x)}R$, $a\\mapsto(a)_z$: evaluation of the adjunction unit at each fibre point is the identity on the constant sheaf, and beta restricts to that same evaluation by its defining adjunction formula. At x outside U all the summands and the source vanish. Since nu is surjective the fibre over x in U is nonempty. Over N it has a single point and alpha is the identity under these identifications. This describes the particular canonical map, rather than merely an arbitrary monomorphism.",
    "uses": [
-    "lem-weil-pbc-normalization-mono-cokernel"
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "def-weil-pbc-finite-open-comparison"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+    "place": "Proof, stalk diagonal paragraph; Stacks 03S5, 0958, 0GJ1"
+   }
+  },
+  {
+   "text": "Define Q=coker alpha. A monomorphism and its cokernel give the displayed short exact sequence in the abelian sheaf category. Apply [lem-weil-pbc-normalization-mono-cokernel] with Lambda=F_r, ell=r, and V=N: Lambda/(r)=F_r is finite, and Step 1 gives all the hypotheses on nu and N. Its conclusion is precisely constructibility of Q and zero restriction to N. Thus its support is contained in the finite set Z; Step 3 also gives $$Q_x=\\left(\\prod_{z\\in\\nu^{-1}(x)}R\\right)/\\Delta R$$ for x in U and zero outside U, since stalks preserve cokernels [prop-weil-pbc-geometric-stalks-exact].",
+   "uses": [
+    "lem-weil-pbc-normalization-mono-cokernel",
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+    "place": "Proof, cokernel and constructibility paragraph"
+   }
+  },
+  {
+   "text": "Let a:C_K\\toC for algebraically closed K extending k, or let a:W\\toC be an open inclusion. In the first case use the algebraically closed-base clause of the cited normalization lemma; [lem-sc-base-change-curve] ensures that C_K is again a curve. It is reduced as well: k is perfect, since in positive characteristic every element has a p-th root in the algebraically closed field k; on each affine chart Spec A of C, [lem-weil-pbc-perfect-reduced-tensor] says that $A\\otimes_k K$ is reduced. These charts cover C_K. Open restriction also preserves reducedness, since its local rings are those of C. In the second case use the open-restriction clause. [lem-weil-pbc-reduced-algebraic-normalization-field-change] identifies the pullback nu_a with the normalization used to define the new sequence. [sbc-prop-extension-by-zero-and-arbitrary-base-change] identifies a^{-1}j_!R with j_{a,!}R. [lemma-weil-pbc-finite-exchange], followed by the same extension-by-zero comparison on the normalization and [lemma-constructible-pullback-constant], identifies a^{-1}nu_*\\widetilde j_!R with nu_{a,*}\\widetilde j_{a,!}R. Under these canonical isomorphisms a^{-1}alpha equals alpha_a. Indeed at every geometric point of the new base the finite-exchange isomorphism is the finite-fibre bijection, and both arrows are the diagonal a \\mapsto (a)_z on that fibre (zero outside the pulled-back U). Pullback stalks agree with the original stalks: by [lem-weil-pbc-geometric-point-pullback-stalk], both are sections after inverse image to Spec Omega, with the composition of inverse images given by the composition of their left adjoints. Equality on stalks implies equality of sheaf maps: the image of their difference has zero stalks by exactness [prop-weil-pbc-geometric-stalks-exact], so it is zero by [lemma-weil-pbc-geometric-stalk-conservative] applied to 0\\toimage.",
+   "uses": [
+    "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+    "lem-sc-base-change-curve",
+    "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+    "lemma-weil-pbc-finite-exchange",
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-perfect-reduced-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+    "place": "Proof, field extension and open restriction paragraphs; Stacks 0C3N, 035K, 03S6, 0959, 03Q1"
+   }
+  },
+  {
+   "text": "Inverse image is exact and preserves cokernels by [lem-weil-pbc-site-pullback-abelian-exact]. Applying it to the sequence, Step 5 identifies its first arrow with alpha_a. The universal property of cokernel therefore gives a unique isomorphism a^{-1}Q\\toQ_a commuting with the quotient maps, so the entire short exact sequence is the newly constructed sequence. For a further open restriction or field extension the canonical normalization identifications compose: on an affine chart with coordinate ring A and normalization ring B, the field comparison of [lem-weil-pbc-reduced-algebraic-normalization-field-change] is induced by the ring map sending b tensor t to t times the image of b in the new total fraction ring. For k contained in K contained in L, both composites send (b tensor t) tensor s to st times b. Restriction to a principal open sends b/f^n to the same fraction after scalar extension. Principal opens cover every open, so these equalities give the normalization comparison for a mixed field/open square as well. The sheaf identifications compose as well: on the first two terms they send every fibre coordinate to the coordinate labelled by the composed geometric point; on the quotient their composites agree because the quotient arrow is epi. In particular field extension and open restriction commute, including W empty.",
+   "uses": [
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-reduced-algebraic-normalization-field-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+    "place": "Proof, sequence pulls back to the primed sequence and open-restriction compatibility"
+   }
+  },
+  {
+   "text": "Apply clause (3) of [lem-weil-pbc-site-cohomology-pullback] to the small-etale morphism of sites induced by a and to the short exact sequence constructed above, taking the terminal etale object C. Its image terminal object is the new base. For every q\\ge 0 it states a_H^* composed with delta^q_C = delta^q_{C_a} composed with a_H^*; naturality in coefficients identifies the target sequence using the isomorphisms from Steps 5-6. Thus all connecting maps commute with both field extension and open restriction. Clause (4) of the same node makes the resulting cohomology maps compatible with composites, proving the asserted commutation of restriction with field extension. Exact inverse image need not preserve injective objects; the cited theorem uses a map from the pulled-back resolution to an injective resolution, so that preservation is not being assumed.",
+   "uses": [
+    "lem-weil-pbc-site-cohomology-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+    "place": "Proof, naturality of connecting homomorphisms; Stacks 01F8, 01FB and sites-cohomology 08J6"
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-surjective-unit-mono",
-  "lemma-constructible-pullback-constant",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lemma-weil-pbc-finite-pushforward-extension-zero",
   "def-weil-pbc-finite-open-comparison",
-  "lem-weil-pbc-normalization-mono-cokernel"
+  "lem-sc-base-change-curve",
+  "lem-sc-zero-dim-noetherian-closed-finite",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-finite-surjective-unit-mono",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-normalization-mono-cokernel",
+  "lem-weil-pbc-perfect-reduced-tensor",
+  "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lemma-constructible-pullback-constant",
+  "lemma-weil-pbc-finite-exchange",
+  "lemma-weil-pbc-finite-pushforward-extension-zero",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "sbc-prop-extension-by-zero-and-arbitrary-base-change"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
-  "place": "Adjunction-unit and finite/open comparison construction; cokernel part split into lem-weil-pbc-normalization-mono-cokernel"
+  "place": "Expanded blueprint normalization sequence construction; geometry from Stacks 0BXR, 035Q, 035K, 0C3N; finite comparison from 0GJ1, 0959; boundary naturality from existing site-cohomology pullback theorem."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalization.*(Sheaf|sheaf)|exists_mono_lowerShriek",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean; normalization diagram definitions do not assert the sheaf exact sequence or boundary compatibility.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalization exact sequence for extension by zero of a constant finite etale sheaf on a reduced curve is compatible with field extension",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.ι_toNormalization; normalization diagram definitions do not assert the sheaf exact sequence or boundary compatibility.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Short exact sequence of etale constant sheaves for finite normalization of a curve with connecting maps compatible with base change",
+   "results": "0 hits: ; normalization diagram definitions do not assert the sheaf exact sequence or boundary compatibility.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization, CategoryTheory.ShortComplex.ShortExact",
+   "results": "0 hits.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of a constant finite sheaf embeds into its direct image from a curve normalization, with constructible cokernel supported on nonnormal points",
+   "results": "8 hits: relative-normalization diagram and map definitions; none asserts an etale sheaf normalization sequence.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "detailed_form",
@@ -134,5 +269,59 @@
    "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
   ],
   "sorry_after": []
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lemma-weil-pbc-normalization-exact-sequence",
+  "worker": "stage1",
+  "summary": "Restored every compatibility clause omitted by the inherited proof, explicitly bound the curve conventions and normalization of a reducible curve, reused the mono-cokernel and cohomology pullback nodes, and added one geometry-only lemma for reduced algebraic normalization and separable field change.",
+  "blueprint": "Steps 1-4 realize the first proof paragraph and its alpha/stalk display; Steps 5-6 realize field extension and open restriction; Step 7 realizes connecting-map naturality. The final paragraph on transferring eight assertions belongs to the citing curve-normalization reduction, not this exact-sequence statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherianity supplies Noetherian C; no normalization-sequence node supplies it."
+   },
+   {
+    "node": "lem-sc-zero-dim-noetherian-closed-finite",
+    "why": "Generic topological finiteness converts the dimension-zero nonnormal complement into finitely many closed points."
+   },
+   {
+    "node": "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+    "why": "Generic etale open extension-by-zero base change needed to identify the two sequence terms; finite/open comparison alone does not assert arbitrary base change."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Generic identification of geometric stalk with inverse image to Spec Omega verifies the canonical map equality under base change."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Generic exact inverse image preserves the cokernel and the whole short exact sequence."
+   },
+   {
+    "node": "lem-weil-pbc-site-cohomology-pullback",
+    "why": "Generic cohomology delta-functor pullback theorem supplies every boundary square and composition law."
+   },
+   {
+    "node": "lem-sc-base-change-curve",
+    "why": "Generic base-field extension of the curve convention supplies separatedness, finite type and the dimension bound for C_K; this does not replace the normalization route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-zero-dim-noetherian-closed-finite",
+  "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "lem-sc-base-change-curve"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-e11d28fa2",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-e11d28fa2 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass. Step 2 had malformed TeX (`R_U\\\\tov_*v^{-1}R_U`); corrected whole DAG JSON is in fixes/dag/nodes/sec-proper-base-change/lemma-weil-pbc-normalization-exact-sequence.json. Also clarified existing quotient and tensor-product TeX. No statements or dependencies changed.; 1 file(s) fixed by the reviewer"
  }
 }
