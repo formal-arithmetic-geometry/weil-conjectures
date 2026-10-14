@@ -1,171 +1,148 @@
 {
- "id": "lem-weil-pbc-colimit-flat-relation-descent",
- "kind": "statement",
- "title": "A finite relation becomes trivial at a stage of a flat colimit",
- "statement": "Let $\\Lambda$ be a nonempty directed preorder, $A,B:\\Lambda\\to\\mathrm{CommRing}$ and $N:\\Lambda\\to\\mathrm{Ab}$ functors with categorical colimits [def-weil-pbc-category-colimit]. The indexing type, both ring diagrams, and the additive-group diagram lie in the same universe, so the specified filtered colimits are algebraic. Give each $N_i$ a $B_i$-module structure, with transition maps $\\eta_f$ semilinear over $\\beta_f$. Let $\\varphi_i:A_i\\to B_i$ be ring maps with $\\beta_f\\varphi_i=\\varphi_j\\alpha_f$, and let $\\psi:A_\\infty\\to B_\\infty$ satisfy $\\psi a_i=b_i\\varphi_i$. Give $N_\\infty$ a $B_\\infty$-module structure whose coprojections $n_i$ are semilinear over $b_i$, and assume it is flat over $A_\\infty$ through $\\psi$ [def-weil-pbc-flat-ring-map]. Fix $i$, a finite type $P$, coefficients $a_p\\in A_i$ and vectors $x_p\\in N_i$ with $\\sum_p\\varphi_i(a_p)x_p=0$. There exist $j$, $f:i\\to j$, an integer $m\\ge0$, coefficients $c_{pq}\\in A_j$ and vectors $y_q\\in N_j$ for $q\\in\\mathrm{Fin}(m)$ such that $\\eta_f(x_p)=\\sum_q\\varphi_j(c_{pq})y_q$ for every $p$, and $\\sum_p\\alpha_f(a_p)c_{pq}=0$ for every $q$. No Noetherian, finite-module, local-ring, or injectivity assumption is imposed.",
- "stmt_deps": [
-  "def-weil-pbc-category-colimit",
-  "def-weil-pbc-flat-ring-map"
- ],
- "source": {
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Tags 00HK (equational flatness) and 00R6 (finite-stage kernel descent)."
- },
- "proof": [
-  {
-   "text": "Infer IsFiltered from the nonempty directed preorder. Mathlib CommRingCat.FilteredColimits supplies ring forgetful preservation for this common-universe diagram. Apply [lem-weil-pbc-colimit-flat-relation-descent-elementwise], whose proof uses equational flatness, stage representatives, and eventual finite equalities.",
-   "uses": [
-    "lem-weil-pbc-colimit-flat-relation-descent-elementwise"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-weil-pbc-colimit-flat-relation-descent-elementwise"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Tags 00HK and 00R6 via the proved elementwise variant; common-universe Mathlib filtered-colimit preservation is inferred."
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "A finite linear relation in a stage module is trivial at a later stage if the colimit module is flat over the colimit ring",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-13"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A finite linear relation in a stage module is trivial at a later stage if the colimit module is flat over the colimit ring",
-   "results": "Module.Flat.of_forall_isTrivialRelation, Module.Flat.iff_forall_isTrivialRelation, Module.Flat.of_forall_exists_factorization, Module.Flat.iff_forall_exists_factorization, Module.Flat.isTrivialRelation_of_sum_smul_eq_zero, Module.Flat.tfae_equational_criterion, Module.Flat.exists_factorization_of_apply_eq_zero_of_free, Module.Flat.exists_factorization_of_comp_eq_zero_of_free",
-   "date": "2026-10-13",
-   "verdict": "no exact stage-descent theorem; flatness and colimit tools only"
-  },
-  {
-   "tool": "grep",
-   "query": "isTrivialRelation|exists_sum_tmul_eq|colimit_exists_rep",
-   "results": "Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/RingTheory/Flat/EquationalCriterion.lean",
-   "date": "2026-10-13",
-   "verdict": "no exact stage-descent theorem; flatness and colimit tools only"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.RingTheory.ColimitMaximalKernelDescent",
-  "date": "2026-10-13",
-  "group": "G1"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-weil-pbc-finite-etale-lifting",
-   "place": "Finite-generator kernel descent in Tag 00R6, steps 1–6 of lem-weil-pbc-colimit-eventually-flat, before applying Tag 00MO.",
-   "via": [
-    "lem-weil-pbc-ideal-kernel-element-descent",
-    "lem-weil-pbc-finite-ideal-kernel-descent",
-    "lem-weil-pbc-colimit-maximal-kernel-descent",
-    "lem-weil-pbc-colimit-eventually-flat",
-    "lem-weil-pbc-criterion-flatness-fibre",
-    "lem-weil-pbc-smooth-retract-standard-smooth",
-    "lem-weil-pbc-popescu-delocalize-base",
-    "lem-weil-pbc-popescu-reduce-to-field",
-    "lem-weil-pbc-popescu-smoothing",
-    "lem-weil-pbc-henselian-pair-approximation",
-    "lem-weil-pbc-finite-etale-lifting-approximation",
-    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "lean_audit": {
-  "master": {
-   "state": "none"
-  },
-  "slopmaster2": {
-   "state": "none"
-  }
- },
- "lean": {
-  "existing": false,
-  "module": "Sheaf.RingTheory.ColimitFlatRelationDescent",
-  "file": "lean/Sheaf/RingTheory/ColimitFlatRelationDescent.lean",
-  "declaration": "RingTheory.exists_stage_flat_relation_factorization",
-  "statement": "theorem exists_stage_flat_relation_factorization\n    {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]\n    (A : Λ ⥤ CommRingCat.{u}) (B : Λ ⥤ CommRingCat.{u})\n    (N : Λ ⥤ AddCommGrpCat.{u}) [HasColimit A] [HasColimit B] [HasColimit N]\n    [∀ i, Module (B.obj i) (N.obj i)]\n    (φ : ∀ i, A.obj i →+* B.obj i)\n    (hcomm : ∀ (i j : Λ) (f : i ⟶ j),\n      (B.map f).hom.comp (φ i) = (φ j).comp (A.map f).hom)\n    (hscalar : ∀ (i j : Λ) (f : i ⟶ j) (b : B.obj i) (x : N.obj i),\n      (N.map f).hom (b • x) = (B.map f).hom b • (N.map f).hom x)\n    (ψ : (colimit A : CommRingCat.{u}) →+* (colimit B : CommRingCat.{u}))\n    (hψ : ∀ i, ψ.comp (colimit.ι A i).hom = (colimit.ι B i).hom.comp (φ i))\n    [Module (colimit B : CommRingCat.{u}) (colimit N : AddCommGrpCat.{u})]\n    (hlimitScalar : ∀ (i : Λ) (b : B.obj i) (x : N.obj i),\n      (colimit.ι N i).hom (b • x) = (colimit.ι B i).hom b • (colimit.ι N i).hom x)\n    (hflat : letI := Module.compHom (colimit N : AddCommGrpCat.{u}) ψ\n      Module.Flat (colimit A : CommRingCat.{u}) (colimit N : AddCommGrpCat.{u}))\n    (i : Λ) {ι : Type t} [Fintype ι] (a : ι → A.obj i) (x : ι → N.obj i)\n    (hx : ∑ p, (φ i) (a p) • x p = 0) :\n    ∃ (j : Λ) (f : i ⟶ j) (m : ℕ)\n      (c : ι → Fin m → A.obj j) (y : Fin m → N.obj j),\n      (∀ p, (N.map f).hom (x p) = ∑ q, (φ j) (c p q) • y q) ∧\n      (∀ q, ∑ p, (A.map f).hom (a p) * c p q = 0)",
-  "branch": "sheaf-dag",
-  "by": "G1",
-  "date": "2026-10-13"
- },
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G1",
-  "result": "pass",
-  "landing": "20261013T115023-L-3323872",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "X-7d0bf",
-  "group": "P1",
-  "result": "pass",
-  "landing": "20261014T045611-L-1573613",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered modules, corrected node statements, change records, and report matched; both compiled, permitted axioms only, and the original/adapted caller interface gate behaved as recorded."
- },
- "statement_change": {
-  "date": "2026-10-14",
-  "by": "P1 stage 2",
-  "old_statement": "Let $\\Lambda$ be a nonempty directed preorder, $A,B:\\Lambda\\to\\mathrm{CommRing}$ and $N:\\Lambda\\to\\mathrm{Ab}$ functors with categorical colimits [def-weil-pbc-category-colimit]. Give each $N_i$ a $B_i$-module structure, with transition maps $\\eta_f$ semilinear over $\\beta_f$. Let $\\varphi_i:A_i\\to B_i$ be ring maps with $\\beta_f\\varphi_i=\\varphi_j\\alpha_f$, and let $\\psi:A_\\infty\\to B_\\infty$ satisfy $\\psi a_i=b_i\\varphi_i$. Give $N_\\infty$ a $B_\\infty$-module structure whose coprojections $n_i$ are semilinear over $b_i$, and assume it is flat over $A_\\infty$ through $\\psi$ [def-weil-pbc-flat-ring-map]. Fix $i$, a finite type $P$, coefficients $a_p\\in A_i$ and vectors $x_p\\in N_i$ with $\\sum_p\\varphi_i(a_p)x_p=0$. There exist $j$, $f:i\\to j$, an integer $m\\ge0$, coefficients $c_{pq}\\in A_j$ and vectors $y_q\\in N_j$ for $q\\in\\mathrm{Fin}(m)$ such that $\\eta_f(x_p)=\\sum_q\\varphi_j(c_{pq})y_q$ for every $p$, and $\\sum_p\\alpha_f(a_p)c_{pq}=0$ for every $q$. No Noetherian, finite-module, local-ring, or injectivity assumption is imposed.",
-  "what": "Launcher-authorized common-universe correction: Λ, A, B, N use universe u; ι retains its own universe t. No preservation binder is added.",
+  "id": "lem-weil-pbc-colimit-flat-relation-descent",
+  "kind": "statement",
+  "title": "A finite relation becomes trivial at a stage of a flat colimit",
+  "statement": "Let $\\Lambda$ be a nonempty directed preorder, $A,B:\\Lambda\\to\\mathrm{CommRing}$ and $N:\\Lambda\\to\\mathrm{Ab}$ functors with categorical colimits [def-weil-pbc-category-colimit]. Give each $N_i$ a $B_i$-module structure, with transition maps $\\eta_f$ semilinear over $\\beta_f$. Let $\\varphi_i:A_i\\to B_i$ be ring maps with $\\beta_f\\varphi_i=\\varphi_j\\alpha_f$, and let $\\psi:A_\\infty\\to B_\\infty$ satisfy $\\psi a_i=b_i\\varphi_i$. Give $N_\\infty$ a $B_\\infty$-module structure whose coprojections $n_i$ are semilinear over $b_i$, and assume it is flat over $A_\\infty$ through $\\psi$ [def-weil-pbc-flat-ring-map]. Fix $i$, a finite type $P$, coefficients $a_p\\in A_i$ and vectors $x_p\\in N_i$ with $\\sum_p\\varphi_i(a_p)x_p=0$. There exist $j$, $f:i\\to j$, an integer $m\\ge0$, coefficients $c_{pq}\\in A_j$ and vectors $y_q\\in N_j$ for $q\\in\\mathrm{Fin}(m)$ such that $\\eta_f(x_p)=\\sum_q\\varphi_j(c_{pq})y_q$ for every $p$, and $\\sum_p\\alpha_f(a_p)c_{pq}=0$ for every $q$. No Noetherian, finite-module, local-ring, or injectivity assumption is imposed.",
+  "stmt_deps": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-flat-ring-map"
+  ],
   "source": {
-   "document": "literature/stacks-project/algebra.tex",
-   "place": "Algebra, Tags 00HK (equational flatness) and 00R6 (finite-stage kernel descent)."
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tags 00HK (equational flatness) and 00R6 (finite-stage kernel descent)."
   },
-  "citers": [
-   {
-    "id": "lem-weil-pbc-ideal-kernel-element-descent",
-    "holds": true,
-    "note": "Caller held by P1 is corrected to the same universe and its original tensor proof restored in this delivery."
-   }
+  "proof": [
+    {
+      "text": "Map the relation to N_infty using scalar compatibility and psi*a_i=b_i*phi_i. Apply [lem-weil-pbc-flat-equational-criterion] to the resulting relation in the flat A_infty-module N_infty. It gives finitely many coefficients C_pq and vectors Y_q with n_i(x_p)=sum_q C_pq*Y_q and sum_p a_i(a_p)*C_pq=0.",
+      "uses": [
+        "lem-weil-pbc-flat-equational-criterion"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Use representatives in the ring colimit from [lem-weil-pbc-filtered-colimit-algebras-elementwise] (ring Z), and representatives in the additive-group colimit (abelian groups as Z-modules) from [lem-weil-pbc-filtered-colimit-modules-elementwise]. Directedness puts the finite representatives at one stage mu above i.",
+      "uses": [
+        "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+        "lem-weil-pbc-filtered-colimit-modules-elementwise"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "At mu form the column sums and differences of the row expressions. Compatibility of transitions, phi and coprojections shows their images are zero. Use [lem-weil-pbc-filtered-colimit-rings-zero] for the column sums and eventual equality from [lem-weil-pbc-filtered-colimit-modules-elementwise] for the row differences. Directedness gives one later j where all finitely many equations hold; ring and module transitions preserve these equations. The images of the representatives c_pq,y_q at j give the claimed factorization.",
+      "uses": [
+        "lem-weil-pbc-filtered-colimit-rings-zero",
+        "lem-weil-pbc-filtered-colimit-modules-elementwise"
+      ],
+      "elementary": false
+    }
   ],
-  "old_proof": [
-   {
-    "text": "Map the relation to N_infty using scalar compatibility and psi*a_i=b_i*phi_i. Apply [lem-weil-pbc-flat-equational-criterion] to the resulting relation in the flat A_infty-module N_infty. It gives finitely many coefficients C_pq and vectors Y_q with n_i(x_p)=sum_q C_pq*Y_q and sum_p a_i(a_p)*C_pq=0.",
-    "uses": [
-     "lem-weil-pbc-flat-equational-criterion"
-    ],
-    "elementary": false
-   },
-   {
-    "text": "Use representatives in the ring colimit from [lem-weil-pbc-filtered-colimit-algebras-elementwise] (ring Z), and representatives in the additive-group colimit (abelian groups as Z-modules) from [lem-weil-pbc-filtered-colimit-modules-elementwise]. Directedness puts the finite representatives at one stage mu above i.",
-    "uses": [
-     "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-     "lem-weil-pbc-filtered-colimit-modules-elementwise"
-    ],
-    "elementary": false
-   },
-   {
-    "text": "At mu form the column sums and differences of the row expressions. Compatibility of transitions, phi and coprojections shows their images are zero. Use [lem-weil-pbc-filtered-colimit-rings-zero] for the column sums and eventual equality from [lem-weil-pbc-filtered-colimit-modules-elementwise] for the row differences. Directedness gives one later j where all finitely many equations hold; ring and module transitions preserve these equations. The images of the representatives c_pq,y_q at j give the claimed factorization.",
-    "uses": [
-     "lem-weil-pbc-filtered-colimit-rings-zero",
-     "lem-weil-pbc-filtered-colimit-modules-elementwise"
-    ],
-    "elementary": false
-   }
+  "proof_deps": [
+    "lem-weil-pbc-flat-equational-criterion",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-weil-pbc-filtered-colimit-rings-zero"
   ],
-  "old_proof_deps": [
-   "lem-weil-pbc-flat-equational-criterion",
-   "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-   "lem-weil-pbc-filtered-colimit-modules-elementwise",
-   "lem-weil-pbc-filtered-colimit-rings-zero"
-  ]
- }
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HK supplies finite trivial relations; Tag 00R6 supplies finite-data descent in ring and module colimits. This is the equational implementation of the original tensor descent."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "A finite linear relation in a stage module is trivial at a later stage if the colimit module is flat over the colimit ring",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-13"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A finite linear relation in a stage module is trivial at a later stage if the colimit module is flat over the colimit ring",
+      "results": "Module.Flat.of_forall_isTrivialRelation, Module.Flat.iff_forall_isTrivialRelation, Module.Flat.of_forall_exists_factorization, Module.Flat.iff_forall_exists_factorization, Module.Flat.isTrivialRelation_of_sum_smul_eq_zero, Module.Flat.tfae_equational_criterion, Module.Flat.exists_factorization_of_apply_eq_zero_of_free, Module.Flat.exists_factorization_of_comp_eq_zero_of_free",
+      "date": "2026-10-13",
+      "verdict": "no exact stage-descent theorem; flatness and colimit tools only"
+    },
+    {
+      "tool": "grep",
+      "query": "isTrivialRelation|exists_sum_tmul_eq|colimit_exists_rep",
+      "results": "Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/RingTheory/Flat/EquationalCriterion.lean",
+      "date": "2026-10-13",
+      "verdict": "no exact stage-descent theorem; flatness and colimit tools only"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.RingTheory.ColimitMaximalKernelDescent",
+    "date": "2026-10-13",
+    "group": "G1"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-weil-pbc-finite-etale-lifting",
+      "place": "Finite-generator kernel descent in Tag 00R6, steps 1–6 of lem-weil-pbc-colimit-eventually-flat, before applying Tag 00MO.",
+      "via": [
+        "lem-weil-pbc-ideal-kernel-element-descent",
+        "lem-weil-pbc-finite-ideal-kernel-descent",
+        "lem-weil-pbc-colimit-maximal-kernel-descent",
+        "lem-weil-pbc-colimit-eventually-flat",
+        "lem-weil-pbc-criterion-flatness-fibre",
+        "lem-weil-pbc-smooth-retract-standard-smooth",
+        "lem-weil-pbc-popescu-delocalize-base",
+        "lem-weil-pbc-popescu-reduce-to-field",
+        "lem-weil-pbc-popescu-smoothing",
+        "lem-weil-pbc-henselian-pair-approximation",
+        "lem-weil-pbc-finite-etale-lifting-approximation",
+        "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "lean_audit": {
+    "master": {
+      "state": "none"
+    },
+    "slopmaster2": {
+      "state": "none"
+    }
+  },
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.RingTheory.ColimitFlatRelationDescent",
+    "file": "lean/Sheaf/RingTheory/ColimitFlatRelationDescent.lean",
+    "declaration": "RingTheory.exists_stage_flat_relation_factorization",
+    "statement": "theorem exists_stage_flat_relation_factorization\n    {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]\n    (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w})\n    (N : Λ ⥤ AddCommGrpCat.{z}) [HasColimit A] [HasColimit B] [HasColimit N]\n    [∀ i, Module (B.obj i) (N.obj i)]\n    (φ : ∀ i, A.obj i →+* B.obj i)\n    (hcomm : ∀ (i j : Λ) (f : i ⟶ j),\n      (B.map f).hom.comp (φ i) = (φ j).comp (A.map f).hom)\n    (hscalar : ∀ (i j : Λ) (f : i ⟶ j) (b : B.obj i) (x : N.obj i),\n      (N.map f).hom (b • x) = (B.map f).hom b • (N.map f).hom x)\n    (ψ : (colimit A : CommRingCat.{v}) →+* (colimit B : CommRingCat.{w}))\n    (hψ : ∀ i, ψ.comp (colimit.ι A i).hom = (colimit.ι B i).hom.comp (φ i))\n    [Module (colimit B : CommRingCat.{w}) (colimit N : AddCommGrpCat.{z})]\n    (hlimitScalar : ∀ (i : Λ) (b : B.obj i) (x : N.obj i),\n      (colimit.ι N i).hom (b • x) = (colimit.ι B i).hom b • (colimit.ι N i).hom x)\n    (hflat : letI := Module.compHom (colimit N : AddCommGrpCat.{z}) ψ\n      Module.Flat (colimit A : CommRingCat.{v}) (colimit N : AddCommGrpCat.{z}))\n    (i : Λ) {ι : Type t} [Fintype ι] (a : ι → A.obj i) (x : ι → N.obj i)\n    (hx : ∑ p, (φ i) (a p) • x p = 0) :\n    ∃ (j : Λ) (f : i ⟶ j) (m : ℕ)\n      (c : ι → Fin m → A.obj j) (y : Fin m → N.obj j),\n      (∀ p, (N.map f).hom (x p) = ∑ q, (φ j) (c p q) • y q) ∧\n      (∀ q, ∑ p, (A.map f).hom (a p) * c p q = 0)",
+    "branch": "sheaf-dag",
+    "by": "G1",
+    "date": "2026-10-13"
+  },
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "G1",
+    "result": "pass",
+    "landing": "20261013T115023-L-3323872",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "X-7ce4a",
+    "group": "V2",
+    "result": "pass",
+    "landing": "20261013T163540-L-1621766",
+    "kind": "interface",
+    "note": "independent Codex review: Delivered files matched the recorded node/report, compiled cleanly, preserved the target signature, and the new theorem uses only permitted axioms.",
+    "sorry_before": [
+      "RingTheory.exists_stage_flat_relation_factorization"
+    ],
+    "sorry_after": [
+      "RingTheory.exists_stage_flat_relation_factorization"
+    ]
+  }
 }

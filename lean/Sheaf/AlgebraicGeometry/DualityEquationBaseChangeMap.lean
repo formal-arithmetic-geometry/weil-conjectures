@@ -13,8 +13,7 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 The construction is the mate of the inverse canonical base-change square, using only
 the supplied direct-image/right-adjoint adjunctions. No auxiliary pullback adjunction
-or derived-pullback counit is chosen by this definition; hence its data is fully
-determined by the displayed adjunctions and base-change isomorphism.
+or derived-pullback counit is chosen by this definition.
 
 # Canonical base-change map for a right adjoint
 
