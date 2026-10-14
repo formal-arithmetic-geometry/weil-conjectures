@@ -266,6 +266,12 @@ def batch_checks(included: list[dict], log: str) -> list[dict]:
         res[m] = run_probe([m])[m]      # one module of the set stopped the common run: each of the others alone
     for m in todo:
         r, (rec, path) = res[m], mods[m]
+        if not r["ran"] and "environment already contains" in r["out"]:
+            # 2026-10-14 (launcher): the probe file is outside the module system, so its plain imports load private
+            # declarations too and collide where the module system does not; the global build compiled the module, and
+            # deliver3 probed each delivered file at delivery. 82 of 101 take-outs that day were this, not the delivery.
+            print(f"note: the batch probe could not import {m} (an import collision of the probe file only); not taken out")
+            continue
         if not r["ran"]:
             out.append({"module": m, "kind": "probe", "landing": rec["id"],
                         "message": f"the axiom and sorry probe did not run on {m}: " + " | ".join(r["out"].strip().splitlines()[-8:])})
