@@ -12,7 +12,8 @@ public import Mathlib.GroupTheory.QuotientGroup.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
 import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionTorsion
-import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker
+import Sheaf.AlgebraicGeometry.Curve.PicardDecomposition
+import Mathlib.Algebra.Group.TypeTags.Hom
 import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionDiv
 
 /-!
@@ -67,7 +68,51 @@ theorem Scheme.Hom.pic_proper_ntorsion
     Nonempty (C.Pic ⧸ (powMonoidHom n : C.Pic →* C.Pic).range ≃* Multiplicative (ZMod n)) ∧
     (∀ L : C.Pic, L ∈ f.picZero → ∃ M : C.Pic, M ∈ f.picZero ∧ M ^ n = L) := by
   have ht := Scheme.Hom.pic_proper_ntorsion_torsion f n _hn
-  have hc := Scheme.Hom.pic_proper_ntorsion_coker f n _hn
+  have hc : Nonempty (C.Pic ⧸ (powMonoidHom n : C.Pic →* C.Pic).range ≃*
+      Multiplicative (ZMod n)) := by
+    classical
+    obtain ⟨P0, hP0, e, -, -⟩ := f.exists_mulEquiv_prod_picZero
+    have hdiv : Function.Surjective (fun x : P0 ↦ x ^ n) := by
+      intro L
+      obtain ⟨M, hM, hpow⟩ := f.pic_proper_ntorsion_div n _hn L (by
+        rw [← hP0]
+        exact L.property)
+      refine ⟨⟨M, by change M ∈ (P0 : Set C.Pic); rw [hP0]; exact hM⟩, ?_⟩
+      exact Subtype.ext hpow
+    let φ : C.Pic →* Multiplicative (ZMod n) :=
+      (Int.castAddHom (ZMod n)).toMultiplicative.comp
+        ((MonoidHom.fst (Multiplicative ℤ) P0).comp e.toMonoidHom)
+    have hφ : Function.Surjective φ := by
+      intro a
+      obtain ⟨z, hz⟩ := ZMod.intCast_surjective (Multiplicative.toAdd a)
+      refine ⟨e.symm (Multiplicative.ofAdd z, 1), ?_⟩
+      change Multiplicative.ofAdd (((e (e.symm (Multiplicative.ofAdd z, 1))).1.toAdd : ℤ) :
+        ZMod n) = a
+      simpa using congrArg Multiplicative.ofAdd hz
+    have hker : (powMonoidHom n : C.Pic →* C.Pic).range = φ.ker := by
+      ext L
+      constructor
+      · rintro ⟨M, rfl⟩
+        change φ (M ^ n) = 1
+        rw [map_pow]
+        change Multiplicative.ofAdd (n • Multiplicative.toAdd (φ M)) = 1
+        simp
+      · intro hL
+        have hz : (((e L).1.toAdd : ℤ) : ZMod n) = 0 := by
+          exact congrArg Multiplicative.toAdd hL
+        obtain ⟨z, hz⟩ := (ZMod.intCast_zmod_eq_zero_iff_dvd _ _).mp hz
+        obtain ⟨M, hM⟩ := hdiv (e L).2
+        refine ⟨e.symm (Multiplicative.ofAdd z, M), ?_⟩
+        change (e.symm (Multiplicative.ofAdd z, M)) ^ n = L
+        apply e.injective
+        rw [map_pow, e.apply_symm_apply]
+        apply Prod.ext
+        · change Multiplicative.ofAdd (n • z) = (e L).1
+          apply Multiplicative.toAdd.injective
+          simpa [nsmul_eq_mul, mul_comm] using hz.symm
+        · exact hM
+    exact ⟨(QuotientGroup.quotientMulEquivOfEq hker).trans
+      (QuotientGroup.quotientKerEquivOfSurjective φ hφ)⟩
   have hd := Scheme.Hom.pic_proper_ntorsion_div f n _hn
   exact ⟨ht, hc, hd⟩
 
