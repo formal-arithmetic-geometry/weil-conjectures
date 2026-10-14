@@ -2,8 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxModelStructure
-import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxModelPointing
+import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionUniqueAuxCompatible
 
 @[expose] public section
 universe u
@@ -33,12 +32,7 @@ theorem etaleResidueTriples_primeLocalization_component_extension_model
       c.α ≫ i = CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ t.α ∧
       i ≫ (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =
         (ΓSpecIso c.B).inv ≫ (Spec c.B).Γevaluation c.q ≫ c.φ  := by
-  obtain ⟨c, i, hiα⟩ :=
-    etaleResidueTriples_primeLocalization_component_extension_model_structure
-      R p K χ q ψ hψ hK t
-  have hiφ :=
-    etaleResidueTriples_primeLocalization_component_extension_model_pointing
-      R p K χ q ψ hψ hK t c i hiα
-  exact ⟨c, i, hiα, hiφ⟩
+  exact etaleResidueTriples_primeLocalization_component_extension_compatible
+    R p K χ q ψ hψ hK t
 
 end AlgebraicGeometry.Scheme

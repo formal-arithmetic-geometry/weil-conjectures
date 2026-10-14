@@ -12,7 +12,7 @@
  },
  "proof": [
   {
-   "text": "Residue-field compatibility from the structure equation establishes the pointing equality.",
+   "text": "Deleted as false after the certified counterexample in the delivered module: the diagonal map R → R × R followed by the two coordinate projections satisfies the structure equation but yields distinct pointings. The sole caller is repaired to use the compatible-model theorem directly. The counterexample uses Mathlib’s SpecToEquivOfField equivalence and its inverse law directly; no duplicate field-point helper theorems are retained.",
    "uses": [],
    "elementary": false
   }
@@ -22,7 +22,8 @@
   "by": "Codex",
   "document": "Stacks Project",
   "place": "Tags 00CR, 01ZM, 07RP, 01Z6 and 04GW",
-  "group": "G3"
+  "group": "R2",
+  "note": "Repair X-cbd87: declaration deleted because false; caller adapted to UniqueAuxCompatible. Repair X-039e3: remove duplicate private helpers and use the Mathlib equivalence directly."
  },
  "mathlib_searches": [
   {
@@ -62,16 +63,7 @@
  },
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxModelPointing",
-  "file": "lean/Sheaf/RingTheory/EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxModelPointing.lean",
-  "declaration": "AlgebraicGeometry.Scheme.etaleResidueTriples_primeLocalization_component_extension_model_pointing",
-  "statement": "theorem etaleResidueTriples_primeLocalization_component_extension_model_pointing (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K] (χ : (Spec R).residueField p ⟶ CommRingCat.of K) (q : Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))) (ψ : (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).residueField q ⟶ CommRingCat.of K) [Algebra (Localization.AtPrime p.asIdeal) K] (hψ : (ΓSpecIso (CommRingCat.of (Localization.AtPrime p.asIdeal))).inv ≫ (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).Γevaluation q ≫ ψ = CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K)) (hK : CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K) = (ΓSpecIso R).inv ≫ (Spec R).Γevaluation p ≫ χ) (t : EtaleResidueTriples (CommRingCat.of (Localization.AtPrime p.asIdeal)) q K ψ) (c : EtaleResidueTriples R p K χ) (i : c.B ⟶ t.B) (hiα : c.α ≫ i = CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ t.α) : i ≫ (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ = (ΓSpecIso c.B).inv ≫ (Spec c.B).Γevaluation c.q ≫ c.φ",
-  "branch": "sheaf-dag",
-  "by": "G3",
-  "date": "2026-10-14"
- },
+ "lean": null,
  "reviewed": {
   "date": "2026-10-13",
   "by": "L",
@@ -83,13 +75,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G3",
+  "reviewer": "X-dadbf",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261013T234510-L-2162667",
+  "landing": "20261014T010851-L-3167153",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the certified counterexample and documented deletion with the retired node; caller signature and DAG dependency match UniqueAuxCompatible. Delivered modules and direct importers AuxModel and Aux compile; original caller fails against deletion and passes baseline; both delivered proofs use only permitted axioms."
  }
 }
