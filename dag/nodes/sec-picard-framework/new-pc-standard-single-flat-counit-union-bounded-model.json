@@ -12,20 +12,43 @@
  },
  "proof": [
   {
-   "text": "Use the relative Mayer--Vietoris construction and truncation argument described in the source.",
+   "text": "For T=U,V,U intersection V, set a:T→U union V to Scheme.homOfLE. Compare tensorPullback a with exact open restriction by uniqueness of left adjoints to pushforward. Quasi-coherence transports across that isomorphism. Prove relative flatness of restriction directly: an affine open of T maps isomorphically onto an affine open of U union V; apply the affine-pair definition of IsFlatOver there. Scheme.Hom.comp_appLE and appLE_appIso_inv identify the scalar actions. Transport flatness along the section-module isomorphism. Thus hPU,hPV,hPUV give the three StandardSingleFlatCounitPresentation witnesses.",
    "uses": [
-    "lem-pc-kinjective-mayer-vietoris-presentation"
+    "def-pc-standard-single-flat-counit-presentation-on-open"
    ],
    "elementary": false
+  },
+  {
+   "text": "Extract the complex K, integer b and base direct-image isomorphism from each presentation; discard its flatness, pullback and counit data. The termwise bound gives K.IsStrictlyLE b by CochainComplex.isStrictlyLE_iff, hence Q(K).IsLE b. Transport along quotientCompQhIso and the supplied isomorphism. Each of the three restricted direct images belongs to the bounded-above object property DerivedCategory.TStructure.t.minus.",
+   "uses": [
+    "def-pc-standard-single-flat-counit-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize standardSingle_union_ses_presentation to identity base change on B. Use only its first short exact row S and its three source-vertex identifications. The identity isomorphism from exists_derivedPullbackComposition identifies L(id_B)^* with the identity functor. Consequently Q(S.X2) is bounded above, since it identifies with a biproduct of the two bounded-above member direct images; Q(S.X3) is bounded above by the overlap presentation. The split biproduct distinguished triangle and ext_of_isTriangulatedClosed₂ prove biproduct closure. Apply Mathlib DerivedCategory.triangleOfSES_distinguished to S and ext_of_isTriangulatedClosed₁ for t.minus to deduce that Q(S.X1) is bounded above. Transport its bound through the first-vertex isomorphism and the identity pullback comparison to the union direct image.",
+   "uses": [
+    "new-pc-standard-single-union-ses-presentation",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extract b and IsLE b from membership in t.minus. Mathlib DerivedCategory.exists_iso_Q_obj_of_isLE supplies a complex K with K.IsStrictlyLE b and an isomorphism from the union direct image to Q(K). CochainComplex.isZero_of_isStrictlyLE supplies the required termwise bound. Compose with the inverse of quotientCompQhIso to obtain exactly the requested Qh(quotient K) representative.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-kinjective-mayer-vietoris-presentation"
+  "def-pc-standard-single-flat-counit-presentation-on-open",
+  "def-pc-standard-single-flat-counit-presentation",
+  "new-pc-standard-single-union-ses-presentation",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08BV and 0DJ9"
+  "document": "Stacks Project, Tags 08BV, 0DJ9 and 0D5S; Mathlib canonical t-structure",
+  "place": "G1: identity-base-change specialization of the existing unrestricted short exact presentation; bounded-above subcategory closure and exists_iso_Q_obj_of_isLE replace explicit cohomology-bound and truncation bookkeeping."
  },
  "mathlib_searches": [
   {
@@ -93,11 +116,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-4afdf",
-  "group": "C1",
+  "reviewer": "COMPILER",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261014T004058-L-2832491",
-  "kind": "interface",
-  "note": "independent Codex review: Unchanged item signature and delivered lemmas matched their nodes and cited arguments; all three modules and the sole direct importer compile cleanly; axioms are permitted foundations plus sorryAx from the two recorded holes."
+  "landing": "20261014T010841-L-3163170",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
