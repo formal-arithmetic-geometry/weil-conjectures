@@ -27,11 +27,100 @@
   "def-weil-pbc-direct-image",
   "def-weil-pbc-derived-categories",
   "pqf-def-quasifinite",
-  "def-weil-pbc-etale-constructible-sheaf"
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-sbc-locally-finite-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the finitely presented Zariski main factorization to $h$: its separatedness, quasi-finiteness, finite presentation and qcqs target are precisely the hypotheses. Obtain $T\\xrightarrow{a}T_1\\xrightarrow{g}B$ with $a$ a quasi-compact open immersion, $g$ finite and finitely presented, $T_1$ qcqs, and $h=g\\circ a$. A finite morphism is proper: apply the finite-morphism permanence statement (c) to $g$ and the proper identity of $B$. Hence $d=(a,g)$ is a compactification permitted in the statement.",
+   "uses": [
+    "lem-weil-pbc-quasifinite-fp-finite-factorization",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 0F2N (lemma-quasi-finite-separated-pass-through-finite-addendum) and 05K0; Morphisms 01WN (lemma-finite-proper)"
+   }
+  },
+  {
+   "text": "For a constructible module sheaf $F$ on $T$, extension by zero along $a$ is constructible on $T_1$, as follows directly from its strata. Inside $a(T)$ its restriction is $F$, by the extension-by-zero unit isomorphism; the unit is $\\Lambda$-linear and its inverse is linear because its underlying abelian map is bijective. On the complementary closed subscheme all geometric stalks of the restriction are zero, by the extension-by-zero stalk formula and the inverse-image stalk formula. The map from this restriction to the zero sheaf is bijective on all geometric stalks, hence an isomorphism on underlying sets, and therefore on modules. Take the images of the finitely many strata for $F$ and add the complementary closed subscheme, with value the zero module. They are disjoint locally closed strata and cover $T_1$. Their subsets are constructible: $a(T)$ is retrocompact since $a$ is quasi-compact; if $V$ is retrocompact open in $T$, then for every quasi-compact open $W$ of $T_1$, $V\\cap a^{-1}(W)$ is quasi-compact because $a^{-1}(W)$ is quasi-compact, so $a(V)$ is retrocompact open in $T_1$. Images of the Boolean generators $V\\setminus V^{\\prime}$ are thus the same differences of retrocompact opens in $T_1$; the complement of $a(T)$ is constructible too. Restrictions to the old strata are the given finite locally constant modules, and to the new stratum are the constant zero module. This meets every clause of the constructible-sheaf definition.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-unit-iso",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lemma-openclosed-stalk-upperstar",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GK3 (lemma-qf-f-shriek-constructible), separated case, open extension step; expanded using Etale Cohomology 0F70 (lemma-jshriek-open) and the constructible strata definition"
+   }
+  },
+  {
+   "text": "Finite direct image $g_*$ is exact by the finite-direct-image exactness statement. The module version follows from the abelian version: kernels and cokernels of module-sheaf maps carry the induced $\\Lambda$-action on their abelian kernels and cokernels; thus an abelian-exact image sequence is module-exact. Consequently the right derived functor on module sheaves is the degreewise functor $g_*$: applying $g_*$ to a quasi-isomorphism remains a quasi-isomorphism, since exactness carries its acyclic cone to an acyclic cone, so applying it to an injective resolution gives the same derived object as applying it to the original complex. Extension by zero is exact on module sheaves as well. For an exact functor $E$, kernels, images and quotients are preserved, so $H^q(E(C))=E(\\ker d^q/\\operatorname{im}d^{q-1})=E(H^q(C))$. For a bounded-below representative of $K$ this gives $Rh_!^dK=Rg_*a_!K\\cong g_*a_!K$ and $H^q(Rh_!^dK)\\cong g_*a_!H^q(K)$ for every integer $q$. Both exact functors preserve the lower bound; no upper bound or finite Tor amplitude is used.",
+   "uses": [
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "def-weil-pbc-extension-by-zero",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKM (lemma-Rf-shriek-for-quasi-finite), finite higher direct image vanishing; 0GK3 first sentence, exactness and cohomology"
+   }
+  },
+  {
+   "text": "Each $H^q(K)$ is constructible by hypothesis. Step 2 makes $a_!H^q(K)$ constructible; apply finite finitely presented pushforward constructibility to $g:T_1\\to B$ to make $g_*a_!H^q(K)$ constructible. Step 3 identifies these sheaves with the cohomology of $Rh_!^dK$. For any compactification $c$, compactification independence supplies $Rh_!^cK\\cong Rh_!^dK$. Applying cohomology transfers the same finite stratification and local trivializations along this isomorphism. Thus all cohomology sheaves of $Rh_!^cK$ are constructible for every $c$.",
+   "uses": [
+    "lem-weil-pbc-finite-fp-pushforward-constructible",
+    "lem-weil-pbc-etale-shriek-compactification-independence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GK3 (lemma-qf-f-shriek-constructible), final finite-pushforward step; 0F7I (lemma-shriek-well-defined)"
+   }
+  },
+  {
+   "text": "For the final assertion retain the qcqs scheme assumptions. A closed immersion of finite presentation is finite by the closed-immersion finiteness lemma. Its fibre over a point is empty or the spectrum of a residue field, so every fibre point is isolated. It is of finite type and separated (its diagonal is an isomorphism). Thus it is quasi-finite under the cited definition, and all the hypotheses just used hold.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035C (lemma-closed-immersion-finite), with quasi-finite definition 01TD"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasifinite-fp-finite-factorization",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-extension-by-zero-unit-iso",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lemma-openclosed-stalk-upperstar",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-constructible-subset",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-finite-fp-pushforward-constructible",
+  "lem-weil-pbc-etale-shriek-compactification-independence",
+  "lem-weil-pbc-closed-immersion-finite",
+  "pqf-def-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0GK3 (lemma-qf-f-shriek-constructible) and 0GKM (lemma-Rf-shriek-for-quasi-finite); separated case, with open-stratification and exact-functor computations expanded"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -193,15 +282,58 @@
    "date": "2026-10-14",
    "verdict": "no match",
    "results": "Hits: SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.GeneratingSections.IsFiniteType, ChevalleyThm.chevalley_polynomialC, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential. Read signatures: these are sheafification/condensed constructions, finite local generators or constructible subsets, not compact-support etale cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi finite finitely presented separated shriek preserves constructible cohomology in bounded below etale derived categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] {s : Set ↥X},\\n  Topology.IsLocallyConstructible s →\\n    Topology.IsLocallyConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and locally of finite presentation morphism of schemes. If $s$ is a locally constructible subset of $X$, then its image $f(s)$ is a locally constructible subset of \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"} Read signatures: no match for the stated scheme factorization or constructible etale module-sheaf theorem; constructible subsets and quasi-coherent modules are different notions.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "results": "[loogle] OK 0 hit(s) Read signatures: no match for the stated scheme factorization or constructible etale module-sheaf theorem; constructible subsets and quasi-coherent modules are different notions.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|constructible.*cohomology",
+   "results": "[grep] OK 0 hit(s) Read signatures: no match for the stated scheme factorization or constructible etale module-sheaf theorem; constructible subsets and quasi-coherent modules are different notions.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale quasi finite compact support direct image constructibility",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it. Read signatures: no match for the stated scheme factorization or constructible etale module-sheaf theorem; constructible subsets and quasi-coherent modules are different notions.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-compactification-constructibility",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-etale-quasifinite-shriek-constructible",
+  "worker": "stage1",
+  "summary": "Factored through a finite finitely presented morphism, expanded open extension constructibility without a new node, and used exactness to compute every cohomology sheaf before comparing all compactifications. Added only the fp factorization and arbitrary-qcqs finite-fp module constructibility statements; recorded the existing Lean factorization as an attachment candidate. No statement correction.",
+  "blueprint": "Proof of thm-weil-pbc-direct-image-finiteness-proper, classical constructibility input; 0GL0 second paragraph uses quasi-finite shriek constructibility; 0GK3 separated case: finite finitely presented Zariski main factorization, followed by open extension and finite pushforward."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-7118ce80f",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-7118ce80f (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, and relevant sources in full. The five-step proof agrees with Stacks 0GK3, 0GKM, 0F7I, 0F2N and 095R; hypotheses, coefficients, edge cases, duplicates and cycles checked. Added the report’s verified factorization attachment as lean_candidates in one corrected JSON file. No mathematical statements changed; no target comparison inferred from seeded routes. Detailed findings are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

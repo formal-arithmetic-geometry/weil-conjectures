@@ -1,0 +1,98 @@
+{
+ "id": "lem-weil-pbc-quasifinite-fp-finite-factorization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Proof of thm-weil-pbc-direct-image-finiteness-proper, classical constructibility input; 0GL0 second paragraph uses quasi-finite shriek constructibility; 0GK3 separated case: finite finitely presented Zariski main factorization, followed by open extension and finite pushforward.",
+   "via": [
+    "lem-weil-pbc-etale-quasifinite-shriek-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finitely presented Zariski main finite factorization",
+ "statement": "Let $f:X\\to S$ be a separated, quasi-finite morphism of schemes [def-pc-scheme] [def-weil-pbc-scheme-conventions] [pqf-def-quasifinite], with $S$ quasi-compact and quasi-separated. Assume $f$ is of finite presentation, meaning locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated. Then there exist a scheme $T$, a quasi-compact open immersion $j:X\\hookrightarrow T$ [def-weil-open-immersion], and a finite morphism $p:T\\to S$ [def-weil-finite-integral-morphism] of finite presentation such that $f=p\\circ j$. The scheme $T$ is quasi-compact and quasi-separated.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0F2N, label lemma-quasi-finite-separated-pass-through-finite-addendum; includes the factorization of the preceding lemma-quasi-finite-separated-pass-through-finite, with qcqs finite factor over qcqs S"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-quasifinite",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-open-immersion",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated quasi finite finitely presented morphism of qcqs schemes factors as an open immersion followed by a finite finitely presented morphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.IsImmersion f ↔\\n    ∃ Z g₁ g₂,\\n      AlgebraicGeometry.IsOpenImmersion g₁ ∧\\n        AlgebraicGeometry.IsClosedImmersion g₂ ∧ CategoryTheory.CategoryStruct.comp g₁ g₂ = f\", \"doc\": \"For a quasi-compact morphism $ f: X \\\\to Y $ of schemes, $ f $ is an immersion if and only if there exists a scheme $ Z $ and morphisms $ g_1: X \\\\to Z $ (an open immersion) and $ g_2: Z \\\\to Y $ (a clos\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsFinite (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is a finite morphism, and $ g $ is separated, then $ f $ is a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every immersion of schemes is a quasi-finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsQuasiAffine], X.IsSeparated\", \"doc\": \"Every quasi-affine scheme is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"} Read signatures: no match for the stated scheme factorization or constructible etale module-sheaf theorem; constructible subsets and quasi-coherent modules are different notions.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski main theorem compactification by a finite algebra of finite presentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"Algebra.FiniteType.of_span_eq_top_source\", \"module\": \"Mathlib/RingTheory/RingHom/FiniteType\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (s : Set R),\\n  Ideal.span s = ⊤ →\\n    (∀ i ∈ s, Algebra.FiniteType (Localization.Away i) (TensorProduct R (Localization.Away i) S)) →\\n      Algebra.FiniteType R S\", \"doc\": \"Let $R$ be a commutative ring and let $S$ be an $R$-algebra. Let $s \\\\subseteq R$ be a set of elements such that the ideal they generate is the whole ring, i.e., $\\\\langle s \\\\rangle = R$. If for every $\"}\n  {\"name\": \"Algebra.EssFiniteType.cond\", \"module\": \"Mathlib/RingTheory/EssentialFiniteness\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.EssFiniteType R S],\\n  ∃ s, IsLocalization (Submonoid.comap (algebraMap (↥(Algebra.adjoin R ↑s)) S) (IsUnit.submonoid S)) S\", \"doc\": \"For commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, if $ S $ is of essential finite type over $ R $, then there exists a finite set $ s $ such that $ S $ is the localizatio\"}\n  {\"name\": \"Algebra.QuasiFinite\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) → (S : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"A quasi-finite algebra over a commutative ring $ R $, which is a commutative ring $ S $ equipped with an $ R $-algebra structure and satisfying the quasi-finite condition (typically meaning $ S $ is f\"}\n  {\"name\": \"Algebra.QuasiFinite.finite_primeSpectrum\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Finite (PrimeSpectrum R)] [Algebra.QuasiFinite R S], Finite (PrimeSpectrum S)\", \"doc\": \"If $ R $ is a commutative ring with a finite prime spectrum and $ S $ is a quasi-finite $ R $-algebra (i.e., $ S $ is finitely generated as an $ R $-module), then the prime spectrum of $ S $ is also f\"}\n  {\"name\": \"Algebra.QuasiFinite.iff_finite_comap_preimage_singleton\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FiniteType R S],\\n  Algebra.QuasiFinite R S ↔ ∀ (x : PrimeSpectrum R), (PrimeSpectrum.comap (algebraMap R S) ⁻¹' {x}).Finite\", \"doc\": \"An $ R $-algebra $ S $ of finite type is quasi-finite over $ R $ if and only if, for every prime ideal $ \\\\mathfrak{p} $ in the prime spectrum of $ R $, the preimage of $ \\\\{\\\\mathfrak{p}\\\\} $ under the i\"}\n  {\"name\": \"Algebra.FiniteType.of_span_eq_top_target\", \"module\": \"Mathlib/RingTheory/RingHom/FiniteType\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (s : Set S),\\n  Ideal.span s = ⊤ → (∀ x ∈ s, Algebra.FiniteType R (Localization.Away x)) → Algebra.FiniteType R S\", \"doc\": \"If the ideal generated by a set $ s $ in $ S $ is the entire ring (i.e., $ \\\\text{span}(s) = \\\\top $), and for every $ x \\\\in s $ the localization $ S_x $ is a finitely generated $ R $-algebra, then $ S \"}\n  {\"name\": \"Algebra.ZariskisMainProperty\", \"module\": \"Mathlib/RingTheory/ZariskisMainTheorem\", \"type\": \"(R : Type u_1) → {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Ideal S → Prop\", \"doc\": \"An ideal $\\\\mathfrak{p} \\\\subseteq S$ satisfies Zariski's Main Theorem property if there exists an element $r$ in the integral closure of $R$ in $S$ such that $r \\\\notin \\\\mathfrak{p}$ and the induced rin\"} Read signatures: no match for the stated scheme factorization or constructible etale module-sheaf theorem; constructible subsets and quasi-coherent modules are different notions.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiFinite\", \"FinitePresentation\"",
+   "results": "[loogle] OK 0 hit(s) Read signatures: no match for the stated scheme factorization or constructible etale module-sheaf theorem; constructible subsets and quasi-coherent modules are different notions.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiFinite.*factor|zariski.*main|finite.*presentation.*factor",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Composition.lean\", \"line\": \"114\", \"text\": \"  have := IsZariskiLocalAtTarget.restrict ‹IsDominant f.hom› g.domain\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1229\", \"text\": \"If `X` is locally of finite presentation over `S`, then any `S`-morphism `lim Dᵢ ⟶ X` factors\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"78\", \"text\": \"  -- Since the image of `y ↦ γ(e, y)` is finite, by Zariski Main, there exists an open\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"13\", \"text\": \"public import Mathlib.RingTheory.ZariskisMainTheorem\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"17\", \"text\": \"# Zariski's Main Theorem\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"19\", \"text\": \"In this file we prove Grothendieck's reformulation of Zariski's main theorem, namely if\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"47\", \"text\": \"-- Note: This is weaker than stacks#02LN but is enough to proof Zariski's main.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"193\", \"text\": \"**Zariski's main theorem**\"}\n  {\"file\": \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"line\": \"17\", \"text\": \"# Algebraic Zariski's Main Theorem\"}\n  {\"file\": \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"line\": \"19\", \"text\": \"The statement of Zariski's main theorem is the following:\"}\n  {\"file\": \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"line\": \"26\", \"text\": \"1. `Algebra.ZariskisMainProperty.of_adjoin_eq_top`:\"}\n  {\"file\": \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"line\": \"32\", \"text\": \"2. `Algebra.ZariskisMainProperty.of_algHom_polynomial`:\"}\n  {\"file\": \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"line\": \"47\", \"text\": \"3. `Algebra.ZariskisMainProperty.of_algHom_mvPolynomial`:\"}\n  {\"file\": \"Mathlib/RingTheory/Algebraic/StronglyTranscendental.lean\", \"line\": \"15\", \"text\": \"This is a relatively niche notion, but is useful for proving Zariski's main theorem.\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"line\": \"15\", \"text\": \"mathematically for algebras of finite type, but this requires Zariski's main theorem to prove.\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"line\": \"17\", \"text\": \"Zariski's main theorem in terms of, and deduce from this that `Algebra.WeaklyQuasiFiniteAt` is\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"line\": \"20\", \"text\": \"This class should only be used in stating (and proving) Zariski's main theorem and should not be\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"line\": \"29\", \"text\": \"(according to Zariski's Main theorem). But this requires the statement of Zariski's main\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"line\": \"45\", \"text\": \"due to Zariski's main theorem.\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean\", \"line\": \"333\", \"text\": \"lemma finitePresentation_universalFactorizationMap :\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean\", \"line\": \"342\", \"text\": \"    (.of_finitePresentation (finitePresentation_universalFactorizationMap R n m k hn))\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean\", \"line\": \"506\", \"text\": \"    MvPolynomial.finitePresentation_universalFactorizationMap R n m k hn\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.RingTheory.ZariskisMainTheorem\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"line\": \"353\", \"text\": \"  obtain ⟨S', hS', r, hrQ, hr⟩ := ZariskisMainProperty.of_finiteType (R := R) Q\"} Read signatures: no match for the stated scheme factorization or constructible etale module-sheaf theorem; constructible subsets and quasi-coherent modules are different notions.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski main theorem finite presentation factorization",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it. Read signatures: no match for the stated scheme factorization or constructible etale module-sheaf theorem; constructible subsets and quasi-coherent modules are different notions.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski main theorem factor a separated quasi finite morphism through a finite algebra of finite presentation",
+   "results": "Actual hits: RingHom.QuasiFinite.of_isIntegral_of_finiteType, Algebra.QuasiFinite.iff_finite_comap_preimage_singleton, Algebra.Smooth.exists_finiteType, AlgebraicGeometry.finite_appTop_of_universallyClosed, Algebra.QuasiFiniteAt, Algebra.QuasiFinite.iff_finite_primesOver, RingHom.QuasiFinite, Polynomial.map_under_lt_comap_of_quasiFiniteAt. Read returned signatures: ring quasi-finiteness and constructible subsets do not state the finite-fp factorization or constructibility of etale module sheaves.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-etale-quasifinite-shriek-constructible",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_candidates": [
+  {
+   "name": "AlgebraicGeometry.Scheme.Hom.exists_isOpenImmersion_isFinite_locallyOfFinitePresentation",
+   "module": "WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization",
+   "lines": [
+    121,
+    151
+   ],
+   "note": "Read the signature and full local proof. It supplies a quasi-compact open immersion and a finite locally finitely presented factor over a qcqs target. Finite implies quasi-compact and quasi-separated, hence the factor is finitely presented and its source is qcqs. The local proof contains no sorry; transitive closure has not been certified in this read-only review. Reported attachment candidate, not a Mathlib leaf or a claim of Lean closure."
+  }
+ ]
+}
