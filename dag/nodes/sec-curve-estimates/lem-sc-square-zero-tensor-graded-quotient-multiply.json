@@ -29,24 +29,51 @@
  ],
  "proof": [
   {
-   "text": "The closed-immersion adjunction unit on each tensor power is locally surjective: on stalks it is the quotient by the immersion ideal, transported by the unique adjunction comparison. Locally lift s and t through these units, refining their covers to a common cover. The equation b_quotient identifies their images under c with p applied to their b-images. Since p is an algebra morphism, their product is p applied to the product of those b-images. Apply b_multiply and b_quotient in degree a+d. Naturality and the monoidal adjunction comparison identify the image of the tensor product of the lifts with the tensor product of s and t transported through boundaryPullbackTensorIso. This proves the displayed equality on the common cover; sheaf separation proves it globally. The argument also works in degree zero, where tensorPowAddIso and the pullback tensor comparison use the unitors.",
+   "text": "Apply closedImmersion_unit_epi and transport its unit through the unique isomorphism of left adjoints to the adjunction used by tensorGradedUnit. The functor to sheaves of abelian groups preserves epimorphisms; Mathlib TopCat.Sheaf.isLocallySurjective_iff_epi and TopCat.Presheaf.isLocallySurjective_iff therefore provide local lifts of any quotient section.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-unit-epi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary modules M,N and sections over U, the defining adjunction comparison boundaryPullbackComparison sends the tensorGradedUnit images to the canonical pullback-unit images. Apply pullback_δ_app_unit_tmulSection, then tensorHom_app_tmulSection for the inverse comparison maps. Their inverse identities show that boundaryPullbackTensorIso sends the unit image of tmulSection(s,t) to the tensor of the two unit images. Inverting the comparison gives the formula used below, including degree zero.",
+   "uses": [
+    "lem-sc-square-zero-ideal-tensor-unit",
+    "lem-sc-pullback-tensor-unit-section",
+    "lem-sc-square-zero-tensor-graded-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For two sections of the original tensor powers over an open U, apply b_quotient in each degree to identify their c-images after the unit with p of their b-images. Use map_mul for the algebra morphism p and b_multiply. The inverse tensor comparison formula and naturality of the adjunction unit with respect to tensorPowAddIso inverse identify the degree-(a+d) quotient section. Apply b_quotient in that degree to obtain multiplication compatibility for these lifted sections.",
    "uses": [
     "lem-sc-square-zero-tensor-graded-presentation",
     "lem-sc-square-zero-ideal-tensor-unit",
-    "lem-weil-pbc-closed-immersion-unit-quotient"
+    "lem-sc-pullback-tensor-unit-section"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each point x of X, lift s and t separately over neighborhoods V and W using the first step. Restrict both lifts to V intersection W. Naturality of the unit and composition of restrictions show that they lift the restrictions of s and t there. Apply the preceding multiplication calculation. Naturality of c and of the pushed-forward composite of boundaryPullbackTensorIso inverse with the pullback of tensorPowAddIso inverse, together with tmulSection_map, identifies this calculation with the restriction of the desired equality. Mathlib TopCat.Presheaf.IsSheaf.section_ext for the algebra sheaf C proves the global equality. Empty schemes and zero sections need no separate hypotheses.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-unit-epi",
+    "lem-sc-square-zero-tensor-graded-presentation",
+    "lem-sc-square-zero-ideal-tensor-unit",
+    "lem-sc-pullback-tensor-unit-section"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-square-zero-tensor-graded-presentation",
+  "lem-weil-pbc-closed-immersion-unit-epi",
   "lem-sc-square-zero-ideal-tensor-unit",
-  "lem-weil-pbc-closed-immersion-unit-quotient"
+  "lem-sc-pullback-tensor-unit-section",
+  "lem-sc-square-zero-tensor-graded-presentation"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 09MS, coherent-equation-ses and the direct-sum exact sequence following it; Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, the quotient action in the first paragraph of its proof."
+  "place": "Tag 09MS, coherent-equation-ses and the direct-sum exact sequence following it; Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, the quotient action in the first paragraph of its proof. The local lifting argument is formalized by U2 using the proved closed-immersion unit epimorphism and single-pullback cotensorator section formula, transported by adjunction uniqueness."
  },
  "mathlib_searches": [
   {
@@ -143,9 +170,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261014T033114-L-606920",
-  "kind": "interface"
+  "landing": "20261014T041058-L-1059772",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

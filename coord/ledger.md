@@ -14476,3 +14476,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:10 L: merged deliver/R3/Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker (stage 3; reviewer PASS; after a return; landing 20261014T041057-L-1059261 (proof); batch 20261014T041054; modules 1; new nodes 0)
 - 04:10 L: merged deliver/R3/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (stage 3; reviewer PASS; first push; landing 20261014T041058-L-1059463 (proof); batch 20261014T041054; modules 1; new nodes 0)
 - 04:10 L: merged deliver/R4/Sheaf.RingTheory.DvrAbhyankarNormalizedFactor (stage 3; reviewer PASS; first push; landing 20261014T041058-L-1059617 (interface); batch 20261014T041054; modules 2; new nodes 1)
+- 04:10 L: merged deliver/U2/Sheaf.AlgebraicGeometry.SquareZeroTensorGradedQuotientMultiply (stage 3; reviewer PASS; after a return; landing 20261014T041058-L-1059772 (proof); batch 20261014T041054; modules 1; new nodes 0)
