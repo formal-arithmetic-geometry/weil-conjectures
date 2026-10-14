@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenComparison
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
-import Sheaf.Algebra.Homology.SingleComplexAffineBaseChange
+import Sheaf.Algebra.Homology.SingleComplexAffineBaseChangeCore
 import Sheaf.AlgebraicGeometry.SingleComplexAffineSpectrumCoordinates
 import Sheaf.AlgebraicGeometry.SingleComplexOpenStalkCondition
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
@@ -84,7 +84,7 @@ theorem singleComplexOpenComparison_affine
   obtain ⟨K0, K0', φ0, hK0, hK0', hstalk, eL, eR, hcomp⟩ :=
     exists_singleComplexAffineSpectrumCoordinates (U.ι ≫ f) (pullback.fst g' U.ι ≫ f')
       g (pullback.snd g' U.ι) sqU sq0 KU hKU KU' hKU' φU
-  have hb := singleComplexAffineBaseChange Γ(S, ⊤) Γ(U.toScheme, ⊤)
+  have hb := singleComplexAffineBaseChangeCore Γ(S, ⊤) Γ(U.toScheme, ⊤)
     Γ(S', ⊤) Γ(pullback g' U.ι, ⊤)
     (U.ι ≫ f).appTop.hom g.appTop.hom (pullback.snd g' U.ι).appTop.hom
     (pullback.fst g' U.ι ≫ f').appTop.hom
