@@ -191,7 +191,7 @@ theorem properFlatImage_globalHomBaseChange_isIso
     have hP : Scheme.IsPerfect Y ((schemeDerivedDirectImage f).obj M.obj) := by
       intro y
       obtain ⟨U, hy, C, hC, ⟨c⟩⟩ := hp y
-      exact ⟨U, hy, C, hC, ⟨(SheafOfModules.overFunctor
+      exact ⟨U, hy, C, hC, ⟨(SheafOfModules.overFunctor.{u}
         (moduleRings Y.toRingedSpace) U).mapDerivedCategory.mapIso
           ((schemeDerivedDirectImage f).mapIso e.symm) ≪≫ c⟩⟩
     let P := (schemeDerivedDirectImage f).obj M.obj

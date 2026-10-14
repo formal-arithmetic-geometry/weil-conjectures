@@ -1,0 +1,113 @@
+{
+ "id": "lem-pc-extension-kflat-quasi-iso",
+ "kind": "statement",
+ "title": "Extension of scalars preserves K-flat quasi-isomorphisms",
+ "statement": "Let R and B be commutative rings in one universe and rho:R→B a ring homomorphism. Termwise ModuleCat.extendScalars rho sends every quasi-isomorphism [def-pc-quasi-iso-modules] between unbounded K-flat complexes of R-modules [def-pc-module-kflat-complex] to a quasi-isomorphism of B-module complexes. No flatness of rho, boundedness, or choice of a derived category is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 064L and 06Y0; mixed tensor with the target ring in degree zero"
+ },
+ "stmt_deps": [
+  "def-pc-quasi-iso-modules",
+  "def-pc-module-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the existing private scalarExtension_quasiIso_of_kFlat proof in KFlatScalarExtensionDerivedIso. Its proof applies the first clause of mixedTensor_kFlat_quasiIso to the B-module tensor unit in degree zero. The natural single-complex comparison and tensor left unitor identify that total tensor with termwise extension of scalars. Their naturality yields arrow isomorphisms; quasi-isomorphism is invariant under these. Pack this property into the existing proposition-valued PreservesKFlatQuasiIso class.",
+   "uses": [
+    "lem-pc-mixed-tensor-kflat-quasi-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-mixed-tensor-kflat-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q1",
+  "date": "2026-10-14",
+  "note": "Reuses the existing private proof instead of reproving the tensor calculation. Local rg search found this helper; no public property declaration remains after the S3 repair was reverted. Blueprint search for extension of scalars returned three unrelated nodes (four-corners coefficients, Fourier formula, Kunneth separation reduction); no exact imported blueprint statement."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "PreservesKFlatQuasiIso",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensoring acyclic K flat complexes with an arbitrary commutative algebra preserves quasi isomorphisms",
+   "results": "8 hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact, Module.FaithfullyFlat.iff_exact_iff_rTensor_exact",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"quasiIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension of scalars preserves quasi-isomorphisms between K-flat cochain complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap",
+  "date": "2026-10-14",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine Hom-out-of-perfect base change: construct the specified scalar-extension left adjoint",
+   "via": [
+    "def-pc-affine-global-hom-base-change-map"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ExtensionKFlatQuasiIso",
+  "file": "lean/Sheaf/Algebra/Homology/ExtensionKFlatQuasiIso.lean",
+  "declaration": "ModuleCat.extendScalars_preservesKFlatQuasiIso",
+  "statement": "theorem extendScalars_preservesKFlatQuasiIso {R B : Type u} [CommRing R] [CommRing B]\n    (ρ : R →+* B) [(ModuleCat.extendScalars.{u, u, u} ρ).Additive] :\n    (ModuleCat.extendScalars.{u, u, u} ρ).PreservesKFlatQuasiIso",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-098b1",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261014T035545-L-887788",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-098b1",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261014T035545-L-887788",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with node statements, recorded scalar-definition changes, proof dependencies, unchanged signatures, axiom probes, all 18 direct importers, and both reproduced forced adaptations."
+ }
+}
