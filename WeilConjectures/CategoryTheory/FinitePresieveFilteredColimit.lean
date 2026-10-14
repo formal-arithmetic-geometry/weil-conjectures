@@ -20,17 +20,17 @@ Source: Stacks Project, Categories, Tag 002W; Sites, Tag 00VM.
 
 @[expose] public section
 
-universe u
+universe v u₁ w t
 
 open CategoryTheory.Limits CategoryTheory.ConcreteCategory Opposite
 
 namespace CategoryTheory
 
 private theorem finite_sections_lift
-    {C : Type u} [SmallCategory C]
-    {Λ : Type u} [SmallCategory Λ] [IsFiltered Λ]
-    (D : Λ ⥤ Cᵒᵖ ⥤ Type u) (c : Cocone D) (hc : IsColimit c)
-    {I : Type u} [Finite I] (Y : I → C) (x : ∀ i, c.pt.obj (op (Y i))) :
+    {C : Type u₁} [Category.{v} C]
+    {Λ : Type t} [SmallCategory Λ] [IsFiltered Λ] [UnivLE.{t, w}]
+    (D : Λ ⥤ Cᵒᵖ ⥤ Type w) (c : Cocone D) (hc : IsColimit c)
+    {I : Type*} [Finite I] (Y : I → C) (x : ∀ i, c.pt.obj (op (Y i))) :
     ∃ (k : Λ) (y : ∀ i, (D.obj k).obj (op (Y i))),
       ∀ i, (c.ι.app k).app (op (Y i)) (y i) = x i := by
   classical
@@ -44,10 +44,10 @@ private theorem finite_sections_lift
   exact (congr_hom hw (y i)).trans (hy i)
 
 private theorem finite_sections_equal
-    {C : Type u} [SmallCategory C]
-    {Λ : Type u} [SmallCategory Λ] [IsFiltered Λ]
-    (D : Λ ⥤ Cᵒᵖ ⥤ Type u) (c : Cocone D) (hc : IsColimit c)
-    {I : Type u} [Finite I] (Y : I → C) (j : Λ)
+    {C : Type u₁} [Category.{v} C]
+    {Λ : Type t} [SmallCategory Λ] [IsFiltered Λ] [UnivLE.{t, w}]
+    (D : Λ ⥤ Cᵒᵖ ⥤ Type w) (c : Cocone D) (hc : IsColimit c)
+    {I : Type*} [Finite I] (Y : I → C) (j : Λ)
     (x y : ∀ i, (D.obj j).obj (op (Y i)))
     (h : ∀ i, (c.ι.app j).app _ (x i) = (c.ι.app j).app _ (y i)) :
     ∃ (k : Λ) (f : j ⟶ k), ∀ i,
@@ -88,9 +88,9 @@ stagewise empty-presieve sheaf condition supplies the unique section over X.
 This is the finite-stage argument of Sites Tag 0738(4), applied directly to the
 sectionwise presheaf colimit and the sheaf condition of Tag 00VM. -/
 theorem finitePresieve_isSheafFor_filteredColimit
-    {C : Type u} [SmallCategory C]
-    {Λ : Type u} [SmallCategory Λ] [IsFiltered Λ]
-    (D : Λ ⥤ Cᵒᵖ ⥤ Type u) (c : Cocone D) (hc : IsColimit c)
+    {C : Type u₁} [Category.{v} C]
+    {Λ : Type t} [SmallCategory Λ] [IsFiltered Λ] [UnivLE.{t, w}]
+    (D : Λ ⥤ Cᵒᵖ ⥤ Type w) (c : Cocone D) (hc : IsColimit c)
     {X : C} (R : Presieve X) [R.HasPairwisePullbacks]
     (hfinite : R.uncurry.Finite)
     (hD : ∀ i, R.IsSheafFor (D.obj i)) : R.IsSheafFor c.pt := by

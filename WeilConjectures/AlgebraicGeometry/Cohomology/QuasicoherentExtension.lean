@@ -106,7 +106,10 @@ lemma isQuasicoherent_of_isZero {M : X.Modules} (hM : IsZero M) :
   isQuasicoherent_of_forall_isAffineOpen M
     (fun _ _ _ _ ↦ ⟨0, 0, (h _ _).trans (h _ _).symm⟩) (fun _ _ _ _ _ ↦ ⟨0, h _ _⟩)
 
-/-- A binary biproduct of quasi-coherent modules is quasi-coherent. -/
+/-- A binary biproduct of quasi-coherent modules is quasi-coherent.
+
+Source: Stacks Project, Modules, Lemma 01BF
+(blueprint: lem-weil-pbc-quasi-coherent-module-direct-sum). -/
 lemma isQuasicoherent_biprod (M N : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) M]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) N] :
