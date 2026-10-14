@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-fin-proper-constructibility-complete",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Proper direct-image constructibility",
@@ -18,43 +18,152 @@
  ],
  "proof": [
   {
-   "text": "The assertion is local on the target in the Zariski topology:\nrestriction to an open commutes with derived direct image because\nopen restriction has exact extension by zero as a left adjoint and\nthus preserves injectives. Constructibility glues on a finite\nopen cover by refining finite partitions. We may assume $S$ affine.",
-   "uses": [],
-   "elementary": null
+   "text": "Fix the finite ring $\\Lambda$ and allowable coefficients in [def-finrepair-property-c], and a proper $k$-morphism $f:X\\to S$ with $X,S$ of finite type over the field $k$. A field is Noetherian (its only ideals are $0$ and $k$), so [lem-weil-pbc-finite-type-over-noetherian] makes $X$ and $S$ Noetherian. In particular they are quasi-compact, and [lem-weil-pbc-locally-noetherian-quasi-separated] makes them quasi-separated. The assertion concerns each $R^qf_*F$ individually and introduces no uniform bound on $q$.",
+   "uses": [
+    "def-finrepair-property-c",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-proper-constructibility-complete.md",
+    "place": "Proof, first and last paragraphs; Stacks 01T6 and 01OY"
+   }
   },
   {
-   "text": "Fix $f:X\\to S$ and use Noetherian induction on closed subsets\n$Z\\subset X$, with their reduced structures.\nFor the empty set there is nothing to prove.\nFor nonempty $Z$, the morphism $f_Z:Z\\to S$ is proper.\nBy [lem-fin-noetherian-chow-modification], choose\n$\\pi:Y\\to Z$ proper, an isomorphism over a dense open $U\\subset Z$,\nwith $Y\\to S$ projective.\nIts direct images are constructible by\n[thm-fin-projective-constructibility-complete].\nThe complement $Z\\setminus U$ is a proper closed subset, so its\nproper map to $S$ has the desired property by induction.\nApply [lem-finrepair-modification-c].\nThat lemma uses $R\\pi_*j'_!=j_!$, proved by proper base change,\nrather than dropping the positive direct images of a general\npullback. It gives the assertion for $Z$.\nThis completes Noetherian induction.",
+   "text": "It suffices to prove the assertion when $S$ is affine. For an affine open $a:S_0\\hookrightarrow S$, let $X_0=f^{-1}(S_0)$ and $f_0:X_0\\to S_0$. Properness of $f_0$ follows from [lem-weil-pbc-proper-base-change]. Every open in a Noetherian scheme is quasi-compact: otherwise finite unions of members of an open cover have no maximal member, and their closed complements have no minimal member, contrary to [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. All these opens are of finite type over $k$: choose finitely many affine charts in the Noetherian open, and within each original finite-type affine chart use finitely many principal opens, whose rings are localizations at one element and hence finitely generated over $k$. For a constructible $F$, restricting its finite locally closed partition shows that $F|_{X_0}$ is constructible, by [def-weil-pbc-constructible-complexes]. Apply [lem-weil-pbc-derived-open-restriction] to $F[0]$ and take cohomology: $(R^qf_*F)|_{S_0}\\cong R^qf_{0,*}(F|_{X_0})$, since inverse image on constant-coefficient modules is exact by [prop-weil-pbc-inverse-image-modules-exact]. If the affine-target assertion holds, each of these restrictions is constructible. Apply the open-local equivalence (2) iff (3) of [lem-weil-pbc-constructible-qcqs-affine-local] on the qcqs scheme $S$. This proves $\\mathcal C(f)$ globally.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-derived-open-restriction",
+    "lem-weil-pbc-constructible-qcqs-affine-local",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-proper-constructibility-complete.md",
+    "place": "Proof, first paragraph; Stacks 095E"
+   }
+  },
+  {
+   "text": "Now fix an affine target $S$. For each closed subset $Z\\subseteq X$, give it its reduced induced closed subscheme structure, and put $f_Z:Z\\to X\\xrightarrow{f}S$. The closed-immersion and composition clauses of [lem-weil-pbc-closed-immersion-proper] make $f_Z$ proper. These closed subschemes are of finite type over $k$: on finite affine charts their rings are quotients of finitely generated $k$-algebras. The empty closed subset has the property, because its sheaf category is zero and all its direct images are zero; the zero sheaf is constructible by the defining finite partition condition of [def-weil-pbc-constructible-complexes]. If any closed subset fails $\\mathcal C(f_Z)$, choose an inclusion-minimal failing subset using [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. It is nonempty, and every proper closed subset of it satisfies the property.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-proper-constructibility-complete.md",
+    "place": "Proof, second paragraph: Noetherian induction (minimal-counterexample form); Stacks 01W5, 01W3 and 01OZ"
+   }
+  },
+  {
+   "text": "For this minimal $Z$, the hypotheses of [lem-fin-noetherian-chow-modification] hold: the target $S$ is affine Noetherian, $f_Z$ is proper, and $Z$ is reduced. Obtain a proper $\\pi:Y\\to Z$ and a dense open $U\\subseteq Z$ with $\\pi^{-1}(U)\\to U$ an isomorphism and $f_Z\\pi:Y\\to S$ projective. The scheme $Y$ is of finite type over $k$: the projective definition [def-pc-projective-morphism] realizes it as a closed subscheme of $\\mathbf P^r_S$, whose standard affine charts are polynomial algebras over the finite-type affine $S$; the finite chart cover proves finite type. Thus [thm-fin-projective-constructibility-complete] gives $\\mathcal C(f_Z\\pi)$.",
    "uses": [
     "lem-fin-noetherian-chow-modification",
     "thm-fin-projective-constructibility-complete",
-    "lem-finrepair-modification-c"
+    "def-pc-projective-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-proper-constructibility-complete.md",
+    "place": "Proof, second paragraph: Chow modification and the projective case"
+   }
   },
   {
-   "text": "The nilpotent closed immersion $X_{\\mathrm{red}}\\hookrightarrow X$\ninduces the etale equivalence of\n[thm-weil-pbc-universal-homeomorphism-invariance], compatible\nwith direct image, so the result for $Z=X_{\\mathrm{red}}$ proves\nit for $X$.\nThe spaces used are Noetherian and have finitely many components\nby [lem-weil-pbc-noetherian-finite-components]; hence every\npartition and target cover in this argument can be taken finite.",
+   "text": "Let $W=Z\\setminus U$ have its reduced induced structure and let $i:W\\hookrightarrow Z$. Density and nonemptiness of $Z$ imply $W\\subsetneq Z$, so minimality gives $\\mathcal C(f_Zi)$; the reduction of $W$ as a subscheme of $Z$ is the same reduced induced subscheme of $X$. Both $f_Z$ and $\\pi$ are proper finite-type maps, $\\pi$ is an isomorphism over $U$, and the two required constructibility predicates have just been obtained. Apply [lem-finrepair-modification-c] to conclude $\\mathcal C(f_Z)$, contradicting the choice of $Z$. Consequently every reduced closed subscheme of $X$, including $X_{\\mathrm{red}}$, has constructible higher direct images to $S$.",
    "uses": [
-    "thm-weil-pbc-universal-homeomorphism-invariance",
-    "lem-weil-pbc-noetherian-finite-components"
+    "lem-finrepair-modification-c"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-proper-constructibility-complete.md",
+    "place": "Proof, second paragraph: complement induction and modification transfer"
+   }
+  },
+  {
+   "text": "Put $r:X_{\\mathrm{red}}\\hookrightarrow X$. By [lem-weil-pbc-reduction-universal-homeomorphism], $r$ is a universal homeomorphism. The equivalence of small etale topoi in [thm-weil-pbc-universal-homeomorphism-invariance] identifies inverse and direct images as quasi-inverse exact functors; the same holds for $\\Lambda$-modules because the equivalence preserves products and therefore carries the scalar-action map and its associativity and unit identities to the corresponding maps and identities, with the inverse equivalence reversing this construction. For constructible $F$ on $X$, the sheaf $r^{-1}F$ is constructible: pull back its finite partition; on each stratum pull back an etale covering that trivializes the sheaf with a finite module as value, which is again a covering and gives the same finite module as value, as in [def-weil-pbc-constructible-complexes]. The constant-coefficient module functor and its exactness are those of [prop-weil-pbc-inverse-image-modules-exact]. Choose an injective resolution $I$ of $r^{-1}F$ using [lem-weil-pbc-module-sheaves-enough-injectives]: embed in an injective, take its cokernel, and repeat to obtain the bounded-below resolution.  The exact equivalence $r_*$ preserves injectives: a monomorphism and a map into $r_*J$ pull back under its exact inverse to a monomorphism and a map into $J$; injectivity extends that map, and applying $r_*$ gives the required extension. Thus $r_*I$ resolves $r_*r^{-1}F\\cong F$. For each etale $V\\to S$, the direct-image formula of [def-weil-pbc-direct-image] gives $(f_*r_*I)(V)=I(X_{\\mathrm{red}}\\times_SV)=((fr)_*I)(V)$, with identical restriction maps and differentials. Hence $R^qf_*F\\cong R^q(fr)_*r^{-1}F$. The right side is constructible by the result for $X_{\\mathrm{red}}$ in step 5. This proves the affine-target assertion, and step 2 proves the item.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-pbc-direct-image",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-module-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-proper-constructibility-complete.md",
+    "place": "Proof, third paragraph: passage from the reduction; Stacks 054M and 03SI"
+   }
   }
  ],
  "proof_deps": [
+  "def-finrepair-property-c",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-proper-base-change",
+  "def-weil-pbc-constructible-complexes",
+  "lem-weil-pbc-derived-open-restriction",
+  "lem-weil-pbc-constructible-qcqs-affine-local",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-closed-immersion-proper",
   "lem-fin-noetherian-chow-modification",
   "thm-fin-projective-constructibility-complete",
+  "def-pc-projective-morphism",
   "lem-finrepair-modification-c",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
   "thm-weil-pbc-universal-homeomorphism-invariance",
-  "lem-weil-pbc-noetherian-finite-components"
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-module-sheaves-enough-injectives"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-proper-constructibility-complete.md",
-  "place": "## Proof"
+  "place": "Proof, three paragraphs, expanded using existing DAG tools and Stacks 01T6, 01OY, 01OZ, 095E, 054M, 03SI"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible.*(proper|directImage)|proper.*constructible",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constructible subsets or underived module pushforward, not etale higher direct-image constructibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of constructible finite coefficient etale sheaves under a proper morphism of finite type schemes over a field are constructible",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; PrimeSpectrum.isConstructible_comap_image; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; PrimeSpectrum.isConstructible_range_comap; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; Topology.IsConstructible.image_of_isOpenEmbedding; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constructible subsets or underived module pushforward, not etale higher direct-image constructibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, \"constructible\"",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constructible subsets or underived module pushforward, not etale higher direct-image constructibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of constructible etale module sheaves by proper morphisms are constructible",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward preserves constructibility of sheaves of finite modules on the small etale site",
+   "results": "AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.Scheme.Hom.isConstructible_image; PrimeSpectrum.isConstructible_comap_image; AlgebraicGeometry.Scheme.Modules.pushforward; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; SheafOfModules.pushforward; SheafOfModules.pushforward_obj_val; PrimeSpectrum.isConstructible_range_comap",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constructible subsets or underived module pushforward, not etale higher direct-image constructibility"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -85,5 +194,59 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "thm-fin-proper-constructibility-complete",
+  "worker": "stage1",
+  "summary": "Expanded the imported Chow-modification argument into six steps, with exact hypotheses and a minimal bad closed subset. Supplied locality, Noetherianness, properness of closed restrictions and reduction geometry from existing nodes; wrote the resolution calculation identifying direct images under reduction. No statement change, no new nodes, no uniform vanishing claim. Removed the finite-components lemma, which neither establishes Noetherianness nor is needed for this induction. No finished exact project declaration or Mathlib match was found. Second reading cites Noetherian topology in the open-cover argument and the projective definition in the chart argument, and expands module equivalence and injective preservation.",
+  "blueprint": "Steps 1-2 realize the first paragraph (affine-target locality); steps 3-5 realize the second paragraph (Noetherian induction, Chow modification, projective constructibility, modification transfer); step 6 realizes the reduction paragraph. The unit has no proof steps and this item is not its key statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-derived-open-restriction",
+    "why": "Open-target restriction is a generic small-etale derived direct-image tool; the unit has no such locality statement."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-qcqs-affine-local",
+    "why": "Generic locality of constructibility glues the affine-target conclusions; the unit supplies no gluing statement."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic stability of proper morphisms verifies the restricted map remains proper."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Generic reduction geometry verifies the universal-homeomorphism hypothesis."
+   },
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "The imported node route already uses topological invariance; this generic equivalence removes nilpotents."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact inverse image for constant etale module coefficients is the generic tool for taking cohomology of the restriction comparison and for passage to module objects."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Enough injectives for constant-coefficient etale module sheaves supplies the resolution used to identify reduction direct images."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-derived-open-restriction",
+  "lem-weil-pbc-constructible-qcqs-affine-local",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-d26765892",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-d26765892 (reviewer sub-agent of L); spot-checked: Read the complete item, all six proof steps, every cited node statement, unit/chapter route, blueprint sources, and cited Stacks locations. Verified coefficient category, proper base change, affine locality, Noetherian induction, Chow modification, projective finite-type hypotheses, modification transfer, reduction/topological invariance, and edge cases. No new nodes, duplicates, cycles, missing citations, or mathematical faults found. Wrote review.md."
+ }
 }
