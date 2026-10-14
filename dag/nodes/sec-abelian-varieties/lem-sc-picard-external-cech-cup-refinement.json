@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-picard-external-cech-cup-refinement",
+ "kind": "statement",
+ "title": "External Cech cup as ordinary cup after projection refinements",
+ "statement": "For a field k, schemes X,Y over Spec k, arbitrary open families U,V, modules F,G, and degrees p,q, let h be a k-linear bidegree map satisfying the prescribed external Alexander--Whitney coordinates [lem-sc-picard-external-cech-cup-bidegree]. Let W be the product open family of [def-sc-picard-external-right-cech-models]. Identify scalar and module Cech complexes additively through their explicit section coordinates. Let gamma_X and gamma_Y be the unique projection refinement cochain maps of [def-sc-cech-refinement-cochain-map] into Cech(W,pr_1^*F) and Cech(W,pr_2^*G). For every a in scalar degree p and b in scalar degree q, the additive identification of h(a tensor_k b) equals the ordinary Cech cup [def-sc-cech-cup-product] of gamma_X(a) and gamma_Y(b). No differential identity is assumed, and no covering, finiteness or quasicoherence hypothesis is needed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Proof, refinement cochain formula; https://stacks.math.columbia.edu/tag/07MB, Alexander--Whitney component; https://stacks.math.columbia.edu/tag/0BED, equation-kunneth-on-cech. Official pages read 2026-10-14."
+ },
+ "stmt_deps": [
+  "lem-sc-picard-external-cech-cup-bidegree",
+  "def-sc-picard-external-right-cech-models",
+  "def-sc-cech-refinement-cochain-map",
+  "def-sc-cech-cup-product"
+ ],
+ "proof": [
+  {
+   "text": "Compose the scalar and module explicit additive Cech isomorphisms. They have definitionally identical explicit section complexes, hence this is an additive complex isomorphism whose coordinate action is the identity.",
+   "uses": [
+    "def-sc-picard-external-right-cech-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the unique refinement cochain map along each projection, refining U and V to the product family by Prod.fst and Prod.snd. Infimum projections supply the refinement inequalities. The existing uniqueness theorem fixes all degree components and ensures chosen data are uniquely determined.",
+   "uses": [
+    "def-sc-cech-refinement-cochain-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply target Cech coordinate injectivity and the prescribed external bidegree coordinate formula. Expand ordinary cup and the refinement coordinates. Composed restrictions coincide with direct restrictions because opens form a thin category; use TopCat.Presheaf.map_homOfLE_map_homOfLE_apply. Tensor-section congruence proves the coordinate equality in each factor.",
+   "uses": [
+    "lem-sc-picard-external-cech-cup-bidegree",
+    "def-sc-cech-cup-product",
+    "def-sc-cech-refinement-cochain-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-cech-cup-product",
+  "def-sc-cech-refinement-cochain-map",
+  "def-sc-picard-external-right-cech-models",
+  "lem-sc-picard-external-cech-cup-bidegree"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Refinement coordinate formula, combined with Tags 07MB and 0BED"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech cup product differential Leibniz refinement scalar restriction",
+   "results": "Service unavailable (Internal Server Error); no verdict recorded.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alexander Whitney cup product Leibniz differential for Cech cochains bilinear natural pairing",
+   "results": "Eight group cohomology and HomComplex results; no external Cech comparison result.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.cechComplexFunctorIso",
+   "results": "Identifier absent from remote Mathlib index; the declaration is in the source library.",
+   "date": "2026-10-14",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "cechCupCochain_leibniz|cechComplexFunctorIso|map_homOfLE_map_homOfLE_apply",
+   "results": "Remote Mathlib grep found no result. Local rg found the proved CechCupProduct Leibniz theorem, CechRefinementCochainMap unique refinement, and WeilConjectures CechComparison additive isomorphism and restriction composition lemma.",
+   "date": "2026-10-14",
+   "verdict": "use existing library interfaces"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate",
+  "date": "2026-10-14",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof, application of the general theorem of the cube: the external Cech cup construction used downstream, identifying external bidegree coordinates with ordinary cup after projection refinements",
+   "via": [
+    "lem-sc-picard-external-cech-cup-differential-coordinate",
+    "lem-sc-picard-external-cech-cup-differential",
+    "lem-sc-picard-external-cech-cup-component",
+    "lem-sc-picard-external-right-cech-comparison",
+    "lem-sc-picard-right-cech-cup-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalCechCupRefinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCechCupRefinement.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.externalCup_bidegree_refinement",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.externalCupScalarCechIso",
+   "AlgebraicGeometry.Scheme.Modules.externalCupRefineCech",
+   "AlgebraicGeometry.Scheme.Modules.externalCup_bidegree_refinement"
+  ],
+  "statement": "theorem externalCup_bidegree_refinement\n    {X Y : Scheme.{w}}\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    {ι κ : Type w} (U : ι → X.Opens) (V : κ → Y.Opens) (F : X.Modules) (G : Y.Modules)\n    (p q : ℕ)\n    (h : ((curriedTensor (ModuleCat.{w} k)).obj\n        (((picardCechFunctor f U).obj F).X p)).obj\n          (((picardCechFunctor g V).obj G).X q) ⟶\n      ((picardCechFunctor (pullback.fst f g ≫ f)\n        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G)).X (p + q))\n    (hh : IsPicardExternalCechCupBidegree f g U V F G p q h)\n    (a : ((picardCechFunctor f U).obj F).X p)\n    (b : ((picardCechFunctor g V).obj G).X q) :\n    (externalCupScalarCechIso (pullback.fst f g ≫ f)\n      (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n        pullback.snd f g ⁻¹ᵁ V ij.2) (externalCupCoefficients f g F G)).hom.f (p + q)\n        (h (a ⊗ₜ[k] b)) =\n      cechCupCochain\n        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n          pullback.snd f g ⁻¹ᵁ V ij.2)\n        ((tensorPullback (pullback.fst f g)).obj F)\n        ((tensorPullback (pullback.snd f g)).obj G) p q\n        ((externalCupRefineCech (pullback.fst f g) U _ Prod.fst\n          (fun _ ↦ inf_le_left) F).f p ((externalCupScalarCechIso f U F).hom.f p a))\n        ((externalCupRefineCech (pullback.snd f g) V _ Prod.snd\n          (fun _ ↦ inf_le_right) G).f q ((externalCupScalarCechIso g V G).hom.f q b))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-122ba",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261014T082919-L-4066388",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-122ba",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261014T082919-L-4066388",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signatures and proofs match the node statements and recorded dependencies; both delivered modules and sole direct importer compile cleanly; all six public declarations use only propext, Classical.choice and Quot.sound; prior B9 repair verified."
+ }
+}
