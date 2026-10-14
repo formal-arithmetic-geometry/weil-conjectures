@@ -1,0 +1,97 @@
+{
+ "id": "lem-weil-pbc-cofinality-small-family-bound",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, first strict-tower pullback functor: reduction to finite-limit sites in the proof of flatness of pulled-back terms (05VD, opening paragraph). Site-of-sheaves comparison used to make the finite-limit replacements. Set-theoretic choice of coverings used in Sites 03A1(1). Auxiliary ordinal bound used to put all inner covering families at one transfinite stage (Sets 000X, final paragraph).",
+   "via": [
+    "lem-weil-pbc-small-set-of-covering-families",
+    "lem-weil-pbc-sheaf-subcategory-comparison",
+    "lem-weil-pbc-ringed-topos-site-presentation",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A family smaller than the cofinality is bounded below an ordinal",
+ "statement": "Let $\\delta$ be an ordinal, viewed as a well-ordered set (a total order in which every nonempty subset has a least element, as in [lem-weil-pbc-transfinite-recursion]), and let $I$ be a set. Define $\\operatorname{cf}(\\delta)$ to be the least cardinality of a subset $T\\subseteq\\delta$ such that for every $\\gamma<\\delta$ some $t\\in T$ satisfies $\\gamma\\leq t$. Let $(a_i)_{i\\in I}$ be ordinals with $a_i<\\delta$ for every $i\\in I$. If $|I|<\\operatorname{cf}(\\delta)$, then $\\sup_{i\\in I}a_i<\\delta$, where the supremum of an empty family is $0$.",
+ "source": {
+  "document": "literature/stacks-project/sets.tex",
+  "place": "Tag 000E (section-cofinality), definition of cofinality; Tag 05N2 (lemma-map-from-set-lifts), proof, bound on sup of the chosen stages"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-transfinite-recursion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cof_ord_succ|lt_cof|bddAbove|cof.*succ",
+   "results": "{\"t\": \"2026-10-14T04:25:07Z\", \"tool\": \"grep\", \"query\": \"cof_ord_succ|lt_cof|bddAbove|cof.*succ\", \"sub\": \"SetTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/SetTheory/Ordinal/Enum.lean\", \"Mathlib/SetTheory/Ordinal/Enum.lean\", \"Mathlib/SetTheory/Ordinal/Enum.lean\", \"Mathlib/SetTheory/Ordinal/Enum.lean\", \"Mathlib/SetTheory/Ordinal/Enum.lean\", \"Mathlib/SetTheory/Ordinal/FundamentalSequence.lean\", \"Mathlib/SetTheory/Ordinal/Exponential.lean\", \"Mathlib/SetTheory/Ordinal/Exponential.lean\"], \"digest\": \"100c83e013c5cb69\"}",
+   "date": "2026-10-14",
+   "verdict": "match: Ordinal.iSup_lt_of_lt_cof, Cofinality/Ordinal.lean:296-299; initial hits use older aliases, current local statement read"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinals with arbitrarily large cofinality exist and every smaller indexed family of ordinals below them is bounded",
+   "results": "{\"t\": \"2026-10-14T04:25:07Z\", \"tool\": \"leansearch\", \"query\": \"Ordinals with arbitrarily large cofinality exist and every smaller indexed family of ordinals below them is bounded\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There are ordinals of arbitrarily large cofinality and a set smaller than the cofinality is bounded in the ordinal",
+   "results": "{\"t\": \"2026-10-14T04:25:07Z\", \"tool\": \"leanfinder\", \"query\": \"There are ordinals of arbitrarily large cofinality and a set smaller than the cofinality is bounded in the ordinal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ordinal.cof_type_le\", \"Ordinal.exists_lsub_cof\", \"Ordinal.le_cof_type\", \"Ordinal.ord_cof_le\", \"Ordinal.lt_cof_type\", \"Ordinal.exists_blsub_cof\", \"Ordinal.le_cof_iff_blsub\", \"Ordinal.cof_eq\"], \"digest\": \"a7ad9efa90fe7395\"}",
+   "date": "2026-10-14",
+   "verdict": "match: Ordinal.iSup_lt_of_lt_cof, Cofinality/Ordinal.lean:296-299; initial hits use older aliases, current local statement read"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ordinal.cof",
+   "results": "{\"t\": \"2026-10-14T04:25:08Z\", \"tool\": \"loogle\", \"query\": \"Ordinal.cof\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Ordinal.cof\", \"Ordinal.cof_omega0\", \"Ordinal.cof_univ\", \"Ordinal.cof_le_card\", \"Ordinal.cof_ord_le\", \"Ordinal.cof_ord_cof\", \"Ordinal.lift_cof\", \"Ordinal.ord_cof_le\"], \"digest\": \"8b1facc3fca0ba46\"}",
+   "date": "2026-10-14",
+   "verdict": "match: Ordinal.iSup_lt_of_lt_cof, Cofinality/Ordinal.lean:296-299; initial hits use older aliases, current local statement read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the cardinality of an index set is smaller than the cofinality of a limit ordinal, the supremum of any indexed family below that ordinal is strictly below it",
+   "results": "{\"t\": \"2026-10-14T04:25:39Z\", \"tool\": \"leanfinder\", \"query\": \"If the cardinality of an index set is smaller than the cofinality of a limit ordinal, the supremum of any indexed family below that ordinal is strictly below it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ordinal.lsub_lt_ord\", \"Ordinal.iSup_lt_ord\", \"Ordinal.iSup_lt\", \"Ordinal.cof_iSup_le\", \"Ordinal.iSup_lt_ord_lift\", \"Ordinal.lsub_lt_ord_lift\", \"Ordinal.bsup_lt_ord\", \"Ordinal.cof_lsub_le\"], \"digest\": \"2883a99b05d7fdb5\"}",
+   "date": "2026-10-14",
+   "verdict": "match: Ordinal.iSup_lt_of_lt_cof, Cofinality/Ordinal.lean:296-299; initial hits use older aliases, current local statement read"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ordinal.iSup_lt_of_lt_cof",
+   "results": "{\"t\": \"2026-10-14T04:25:39Z\", \"tool\": \"loogle\", \"query\": \"Ordinal.iSup_lt_of_lt_cof\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Ordinal.iSup_lt_of_lt_cof\"], \"digest\": \"153c71e4e18b809b\"}",
+   "date": "2026-10-14",
+   "verdict": "match: Ordinal.iSup_lt_of_lt_cof, Cofinality/Ordinal.lean:296-299; initial hits use older aliases, current local statement read"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem iSup_lt_of_lt_cof",
+   "results": "{\"t\": \"2026-10-14T04:25:52Z\", \"tool\": \"grep\", \"query\": \"theorem iSup_lt_of_lt_cof\", \"sub\": \"SetTheory/Cardinal\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/SetTheory/Cardinal/Cofinality/Ordinal.lean\"], \"digest\": \"49e31b369c99f565\"}",
+   "date": "2026-10-14",
+   "verdict": "match: Ordinal.iSup_lt_of_lt_cof, Cofinality/Ordinal.lean:296-299; initial hits use older aliases, current local statement read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ordinal.iSup_lt_of_lt_cof",
+  "file": "Mathlib/SetTheory/Cardinal/Cofinality/Ordinal.lean",
+  "line": 296,
+  "how": "exact: lines 296-299, with index type I and f i = a_i; no infinitude or nonemptiness hypothesis. The same-universe statement suffices by taking a universe containing I and delta."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-weil-pbc-small-set-of-covering-families",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

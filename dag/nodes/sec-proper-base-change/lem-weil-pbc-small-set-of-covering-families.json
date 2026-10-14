@@ -25,9 +25,81 @@
  "stmt_deps": [
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\operatorname{Arrows}(\\mathcal C)$ and $O=\\operatorname{Ob}(\\mathcal C)$. The pairs $(U,T)$ with $U\\in O$ and $T\\subseteq\\{a\\in A:\\operatorname{target}(a)=U\\}$ form a set. By Separation take the subset $P$ of pairs that occur as the target and arrow support of a family in $\\operatorname{Cov}$. For each $p\\in P$ there is a set-coded witnessing family; the ZFC Collection axiom gives a set of such witnesses, and Choice selects one for each $p$. Thus obtain a set $R\\subseteq\\operatorname{Cov}$ representing every target/support pair. Recording the target separately is necessary for empty families. Equal supports at equal targets give the required equivalence (one chooses an occurrence of each arrow in each family); no reindexing or removal of repetitions is asserted to preserve membership in the original class.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000X (lemma-coverings-site), first paragraph; target included to cover empty supports; Collection replaces the equivalent least-rank witness construction"
+   }
+  },
+  {
+   "text": "Let $B_0$ be the union of $R$, $\\operatorname{Cov}_0$, and the standard singleton families of all isomorphisms. It is a set contained in $\\operatorname{Cov}$. Choose an infinite cardinal $\\kappa$ bounding $|A|$, $|O|$ and every index cardinal of a family in $B_0$ (take the supremum of this set of cardinals and $\\aleph_0$). For a set $K$ of cardinality $\\kappa$, [lem-weil-pbc-finite-list-cardinality] gives $|\\operatorname{List}(K)|\\leq\\kappa$. The map $(x,y)\\mapsto[x,y]$ is injective, so $|K\\times K|\\leq\\kappa$. Consequently if $|I|\\leq\\kappa$ and all $|J_i|\\leq\\kappa$, choose injections into $K$ to inject $\\coprod_i J_i$ into $K\\times K$, giving cardinality at most $\\kappa$.",
+   "uses": [
+    "lem-weil-pbc-finite-list-cardinality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000X (lemma-coverings-site), second paragraph, infinite cardinal arithmetic; Tag 000D (section-cardinals)"
+   }
+  },
+  {
+   "text": "Let $\\theta$ be the least ordinal of cardinality greater than $\\kappa$. It is nonzero and a limit: adjoining one element to an infinite set of size at most $\\kappa$ preserves that bound (encode it in $K\\times K$), so it cannot be a successor. Every $\\gamma<\\theta$ has size at most $\\kappa$. If a cofinal subset $T\\subseteq\\theta$ had size at most $\\kappa$, the equality $\\theta=\\bigcup_{t\\in T}t$ and the disjoint-union estimate in step 2 would imply $|\\theta|\\leq\\kappa$, a contradiction. Thus $\\operatorname{cf}(\\theta)>\\kappa$. Cofinality means the least size of a cofinal subset, where cofinal means every earlier ordinal is at most some member.",
+   "uses": [
+    "lem-weil-pbc-finite-list-cardinality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 05N3 (proposition-exist-ordinals-large-cofinality), proof; used in Tag 000X"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-transfinite-recursion] on the set of stages $\\gamma\\leq\\theta$ to define increasing sets $B_\\gamma$. Start with the $B_0$ of step 2. At a successor add to $B_\\gamma$ every composite of an outer family in $B_\\gamma$ and a choice of a family in $B_\\gamma$ on each of its domains, and, for each family in $B_\\gamma$ and arrow of $A$, one chosen pullback family supplied by the site axiom (Choice selects one such fibre-product presentation for each pair). At a nonzero limit take the union of the earlier stages. These successor additions form sets: for each outer index set $I$, all choices of inner families lie in the set of maps $I\\to B_\\gamma$; all selected base-change data are indexed by $B_\\gamma\\times A$, with the pullback objects and projections in the fixed sets $O,A$. Induction proves $B_\\gamma\\subseteq\\operatorname{Cov}$ by the given axioms and proves every family has index cardinal at most $\\kappa$ by step 2; pullbacks retain the index set and composites have index set $\\coprod_iJ_i$.",
+   "uses": [
+    "lem-weil-pbc-transfinite-recursion",
+    "lem-weil-pbc-finite-list-cardinality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000X (lemma-coverings-site), transfinite closure construction; direct sets of families in place of rank cutoffs"
+   }
+  },
+  {
+   "text": "Set $\\operatorname{Cov}\\prime=B_\\theta=\\bigcup_{\\gamma<\\theta}B_\\gamma$, a set. It contains $\\operatorname{Cov}_0$ and all singleton isomorphisms and is contained in $\\operatorname{Cov}$. If a family belongs to it, it belongs to some $B_\\gamma$ with $\\gamma<\\theta$; the selected pullback family supplied by the original class axiom belongs to $B_{\\gamma+1}\\subseteq B_\\theta$, since $\\theta$ is a limit. The existence of the fibre products and the covering property for this selected choice are exactly the original class axiom. This proves the identity and base-change axioms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000X (lemma-coverings-site), verification of conditions (1) and (3)"
+   }
+  },
+  {
+   "text": "For the composition axiom take an outer family $\\mathcal U\\in B_\\theta$, indexed by $I$, and inner families $\\mathcal W_i\\in B_\\theta$. Choose $\\gamma_0<\\theta$ and $\\gamma_i<\\theta$ with $\\mathcal U\\in B_{\\gamma_0}$ and $\\mathcal W_i\\in B_{\\gamma_i}$. Since $|I|\\leq\\kappa<\\operatorname{cf}(\\theta)$, [lem-weil-pbc-cofinality-small-family-bound] gives $\\sup_i\\gamma_i<\\theta$. Put $\\gamma=\\max(\\gamma_0,\\sup_i\\gamma_i)<\\theta$. Monotonicity places the outer and every inner family in $B_\\gamma$, so their composite lies in $B_{\\gamma+1}\\subseteq B_\\theta$. If $I$ is empty its supremum is $0$, and the same argument works. Finally $R\\subseteq B_0\\subseteq B_\\theta$ ensures every original family has an equivalent representative, proving the last clause.",
+   "uses": [
+    "lem-weil-pbc-cofinality-small-family-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000X (lemma-coverings-site), final paragraph and condition (3); repair beta<beta_1 to beta<beta_2 and include the outer stage"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-list-cardinality",
+  "lem-weil-pbc-transfinite-recursion",
+  "lem-weil-pbc-cofinality-small-family-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sets.tex",
+  "place": "Tag 000X (lemma-coverings-site), support selection and transfinite closure proof; direct stage sets adaptation, with Tag 05N3 argument written out"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -77,15 +149,100 @@
    "results": "{\"t\": \"2026-10-14T03:10:04Z\", \"tool\": \"leanfinder\", \"query\": \"A pretopology on a small category can be replaced by small indexed covering families retaining prescribed families and the same presieves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pretopology.mem_toCoverage\", \"CategoryTheory.Precoverage.toPretopology_toPrecoverage\", \"CategoryTheory.Pretopology.toPrecoverage\", \"CategoryTheory.Pretopology.instCoeFunForallSetPresieve\", \"AlgebraicGeometry.Scheme.smallGrothendieckTopology_eq_toGrothendieck_smallPretopology\", \"CategoryTheory.MorphismProperty.pretopology_toPrecoverage\", \"CategoryTheory.MorphismProperty.coverage_eq_toCoverage_pretopology\", \"CategoryTheory.GrothendieckTopology.mem_toPretopology\"], \"digest\": \"f4b675c7b8cc17db\"}",
    "date": "2026-10-14",
    "verdict": "no match: returned pretopology conversions concern presieve supports and assume pullbacks; none selects indexed families from a class while retaining prescribed indexed families"
+  },
+  {
+   "tool": "grep",
+   "query": "combinatorially|covering.*ordinal|covering.*cardinal|representative.*cover",
+   "results": "{\"t\": \"2026-10-14T04:25:38Z\", \"tool\": \"grep\", \"query\": \"combinatorially|covering.*ordinal|covering.*cardinal|representative.*cover\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: Precoverage.coverings stores sets of presieves (Precoverage.lean:46-48); pretopology conversions do not select a set of original indexed families containing a prescribed set"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A class of covering families on a small category admits a set of representatives closed under composition and pullback",
+   "results": "{\"t\": \"2026-10-14T04:25:39Z\", \"tool\": \"leansearch\", \"query\": \"A class of covering families on a small category admits a set of representatives closed under composition and pullback\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small category with a class of indexed covers has a set of covers closed under identity composition and base change retaining prescribed covers and representing every support",
+   "results": "{\"t\": \"2026-10-14T04:25:39Z\", \"tool\": \"leanfinder\", \"query\": \"A small category with a class of indexed covers has a set of covers closed under identity composition and base change retaining prescribed covers and representing every support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.mem_smallGrothendieckTopology\", \"CategoryTheory.Coverage\", \"CategoryTheory.Precoverage\", \"AlgebraicGeometry.Scheme.exists_cover_of_mem_grothendieckTopology\", \"CategoryTheory.GrothendieckTopology.CoversTop.cover\", \"AlgebraicGeometry.Scheme.mem_toGrothendieck_smallPretopology\", \"AlgebraicGeometry.Scheme.Cover.mem_grothendieckTopology\", \"AlgebraicGeometry.Scheme.grothendieckTopology_cover\"], \"digest\": \"79c04d9208261a28\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: Precoverage.coverings stores sets of presieves (Precoverage.lean:46-48); pretopology conversions do not select a set of original indexed families containing a prescribed set"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Precoverage, Set",
+   "results": "{\"t\": \"2026-10-14T04:25:40Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Precoverage, Set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Precoverage.coverings\", \"CategoryTheory.Precoverage.mk\", \"CategoryTheory.Precoverage.instCoeFunForallSetPresieve\", \"CategoryTheory.Precoverage.ext\", \"CategoryTheory.Precoverage.ext_iff\", \"CategoryTheory.Precoverage.hasPairwisePullbacks_of_mem\", \"CategoryTheory.Precoverage.hasPullbacks_of_mem\", \"CategoryTheory.Precoverage.mem_coverings_of_isIso\"], \"digest\": \"d0fac98b040b8031\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: Precoverage.coverings stores sets of presieves (Precoverage.lean:46-48); pretopology conversions do not select a set of original indexed families containing a prescribed set"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Replace a proper class pretopology by a set of indexed families with the same arrow supports and containing an arbitrary prescribed set of families",
+   "results": "{\"t\": \"2026-10-14T04:25:53Z\", \"tool\": \"leanfinder\", \"query\": \"Replace a proper class pretopology by a set of indexed families with the same arrow supports and containing an arbitrary prescribed set of families\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.pretopology_toPrecoverage\", \"CategoryTheory.MorphismProperty.coverage_eq_toCoverage_pretopology\", \"CategoryTheory.Pretopology.ext_iff\", \"CategoryTheory.Pretopology.toPrecoverage\", \"CategoryTheory.Pretopology.ext\", \"CategoryTheory.Pretopology.mem_toCoverage\", \"CategoryTheory.Precoverage.toPretopology_toPrecoverage\", \"CategoryTheory.Pretopology.instCoeFunForallSetPresieve\"], \"digest\": \"d98529bc59e1f946\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: Precoverage.coverings stores sets of presieves (Precoverage.lean:46-48); pretopology conversions do not select a set of original indexed families containing a prescribed set"
+  },
+  {
+   "tool": "grep",
+   "query": "combinatorially|covering.*ordinal|covering.*cardinal|representative.*cover",
+   "results": "{\"t\": \"2026-10-14T04:25:38Z\", \"tool\": \"grep\", \"query\": \"combinatorially|covering.*ordinal|covering.*cardinal|representative.*cover\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: Precoverage.coverings stores sets of presieves (Precoverage.lean:46-48); pretopology conversions do not select a set of original indexed families containing a prescribed set"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A class of covering families on a small category admits a set of representatives closed under composition and pullback",
+   "results": "{\"t\": \"2026-10-14T04:25:39Z\", \"tool\": \"leansearch\", \"query\": \"A class of covering families on a small category admits a set of representatives closed under composition and pullback\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small category with a class of indexed covers has a set of covers closed under identity composition and base change retaining prescribed covers and representing every support",
+   "results": "{\"t\": \"2026-10-14T04:25:39Z\", \"tool\": \"leanfinder\", \"query\": \"A small category with a class of indexed covers has a set of covers closed under identity composition and base change retaining prescribed covers and representing every support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.mem_smallGrothendieckTopology\", \"CategoryTheory.Coverage\", \"CategoryTheory.Precoverage\", \"AlgebraicGeometry.Scheme.exists_cover_of_mem_grothendieckTopology\", \"CategoryTheory.GrothendieckTopology.CoversTop.cover\", \"AlgebraicGeometry.Scheme.mem_toGrothendieck_smallPretopology\", \"AlgebraicGeometry.Scheme.Cover.mem_grothendieckTopology\", \"AlgebraicGeometry.Scheme.grothendieckTopology_cover\"], \"digest\": \"79c04d9208261a28\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: Precoverage.coverings stores sets of presieves (Precoverage.lean:46-48); pretopology conversions do not select a set of original indexed families containing a prescribed set"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Precoverage, Set",
+   "results": "{\"t\": \"2026-10-14T04:25:40Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Precoverage, Set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Precoverage.coverings\", \"CategoryTheory.Precoverage.mk\", \"CategoryTheory.Precoverage.instCoeFunForallSetPresieve\", \"CategoryTheory.Precoverage.ext\", \"CategoryTheory.Precoverage.ext_iff\", \"CategoryTheory.Precoverage.hasPairwisePullbacks_of_mem\", \"CategoryTheory.Precoverage.hasPullbacks_of_mem\", \"CategoryTheory.Precoverage.mem_coverings_of_isIso\"], \"digest\": \"d0fac98b040b8031\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: Precoverage.coverings stores sets of presieves (Precoverage.lean:46-48); pretopology conversions do not select a set of original indexed families containing a prescribed set"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Replace a proper class pretopology by a set of indexed families with the same arrow supports and containing an arbitrary prescribed set of families",
+   "results": "{\"t\": \"2026-10-14T04:25:53Z\", \"tool\": \"leanfinder\", \"query\": \"Replace a proper class pretopology by a set of indexed families with the same arrow supports and containing an arbitrary prescribed set of families\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.pretopology_toPrecoverage\", \"CategoryTheory.MorphismProperty.coverage_eq_toCoverage_pretopology\", \"CategoryTheory.Pretopology.ext_iff\", \"CategoryTheory.Pretopology.toPrecoverage\", \"CategoryTheory.Pretopology.ext\", \"CategoryTheory.Pretopology.mem_toCoverage\", \"CategoryTheory.Precoverage.toPretopology_toPrecoverage\", \"CategoryTheory.Pretopology.instCoeFunForallSetPresieve\"], \"digest\": \"d98529bc59e1f946\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: Precoverage.coverings stores sets of presieves (Precoverage.lean:46-48); pretopology conversions do not select a set of original indexed families containing a prescribed set"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-sheaf-subcategory-comparison",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-small-set-of-covering-families",
+  "worker": "stage1",
+  "summary": "Checked 000X and 05N3; replaced rank cutoffs by explicit increasing sets of families, retained targets for empty supports and included the outer stage in the final cofinality bound. Reused finite-list cardinality and transfinite recursion Mathlib leaves; added only the exact small-family ordinal bound leaf. No statement change.",
+  "blueprint": "Detailed form, first strict-tower pullback functor: reduction to finite-limit sites in the proof of flatness of pulled-back terms (05VD, opening paragraph). Site-of-sheaves comparison used to make the finite-limit replacements. Set-theoretic choice of coverings used in Sites 03A1(1). The covering selection auxiliary argument is realized by steps 1-6; no change to the completed-pullback route."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-f114a2018",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-f114a2018 (reviewer sub-agent of L); spot-checked: The item and new cofinality node are mathematically sound, with sources and Mathlib match checked. Step 4 incorrectly allowed every pullback choice, while Sets definition-site (sets.tex:705) guarantees a covering for some choice; step 5 repeated this assumption. Corrected whole DAG JSON is in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-small-set-of-covering-families.json, selecting one pullback presentation per family/arrow by Choice.; 1 file(s) fixed by the reviewer"
+ }
 }
