@@ -6,9 +6,7 @@ Authors: SHEAF group Y2
 module
 
 public import Sheaf.Paper.ModuleCupResolutionRealization
-import Sheaf.Paper.ModuleCupNaiveDerivedCompatibility
-import Sheaf.Paper.ModuleCupResolutionData
-import Sheaf.Topology.RingedSpaceModuleCohomology
+import Sheaf.Paper.ModuleCupOnePairingHomology
 
 /-! # Equality of realized derived pairings on cocycle classes
 
@@ -54,6 +52,10 @@ local instance cupClassCongruenceIsGrothendieckAbelian : IsGrothendieckAbelian.{
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
 
+attribute [local irreducible] Functor.rightDerivedFunctor
+
+set_option maxHeartbeats 1000000 in
+-- Comparing the sheaf tensor presentations requires extra definitional equality work.
 /-- Equal realized derived pairings induce equal output classes on equal input classes.
 Source: Stacks Project, Section 20.31, Lemma 20.31.3 (0FKU), global specialization.
 (blueprint: lem-sc-module-cup-equal-derived-maps-class)
@@ -92,7 +94,18 @@ theorem moduleCup_equal_derived_maps_class {F G : X.Modules}
     (hb : D.right.class q b = E.right.class q b')
     (hc : c.val = D.pair p q ⊤ a.val b.val)
     (hc' : c'.val = E.pair p q ⊤ a'.val b'.val) :
-    D.target.class (p + q) c = E.target.class (p + q) c' := by sorry
+    D.target.class (p + q) c = E.target.class (p + q) c' := by
+  obtain ⟨C⟩ := exists_cupDerivedClassComparison X
+  obtain ⟨P⟩ := exists_cupDerivedHomologyTensor (k := Γ(X, ⊤))
+  obtain ⟨μ, hμ, hcompat⟩ := moduleCup_naive_derived_compatibility X
+  obtain ⟨νD, hνD, hdiagramD⟩ := hcompat D.left.integerComplex D.right.integerComplex
+  obtain ⟨νE, hνE, hdiagramE⟩ := hcompat E.left.integerComplex E.right.integerComplex
+  have hd := moduleCup_one_pairing_homology C P μ hμ D tD hD νD hνD hdiagramD
+    p q a b c hc
+  have he := moduleCup_one_pairing_homology C P μ hμ E tE hE νE hνE hdiagramE
+    p q a' b' c' hc'
+  apply (C.equiv (F ⊗ G) (p + q)).injective
+  exact hd.trans (by rw [hmaps, ha, hb]; exact he.symm)
 
 end
 end AlgebraicGeometry.Scheme.Modules

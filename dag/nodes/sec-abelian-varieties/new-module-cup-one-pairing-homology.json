@@ -1,0 +1,144 @@
+{
+ "id": "new-module-cup-one-pairing-homology",
+ "kind": "statement",
+ "title": "Homology formula for one realized resolution pairing",
+ "statement": "Let X be a scheme with its module-sheaf derived category in its own universe. Let C be a resolution-class comparison [lem-sc-module-cup-derived-class-comparison], and P a natural normalized derived homology tensor [lem-sc-module-cup-derived-homology-tensor]. Let μ be a natural derived global cup family. Let D be a computing resolution pairing [def-sc-module-cup-resolution-data], t a cochain realization [def-sc-module-cup-realization-complex-data], and ν a naive global tensor map satisfying the section-summand formula and the global naive/derived diagram [lem-sc-module-cup-naive-derived-compatibility]. For arbitrary nonnegative degrees p,q and input cycles a,b and output cycle c with c.val=D.pair(p,q,top)(a.val,b.val), C sends the output class to homology of μ followed by derived global sections of D.derivedMap(t), evaluated on P applied to the two transported input classes. No equality with another pairing and no degree-zero normalization is assumed.",
+ "stmt_deps": [
+  "lem-sc-module-cup-derived-class-comparison",
+  "lem-sc-module-cup-derived-homology-tensor",
+  "def-sc-module-cup-resolution-data",
+  "def-sc-module-cup-realization-complex-data",
+  "lem-sc-module-cup-naive-derived-compatibility"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "Global diagram following Lemma 20.31.3, evaluated on a single pair of cycles"
+ },
+ "proof": [
+  {
+   "text": "Use C.on_cycles for the three computing resolutions and P.on_cycles for the tensor of the two lifted input cycles. Naturality of cyclesMap and injectivity of iCycles reduce identification of the output lift to the section formula for ν and the Realizes equation. The extension component isomorphisms identify the original sections with their lifts.",
+   "uses": [
+    "lem-sc-module-cup-derived-class-comparison",
+    "lem-sc-module-cup-derived-homology-tensor",
+    "def-sc-module-cup-realization-complex-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the supplied diagram with R(Q(t)). Naturality of the comparison unit replaces its target leg by Q of the sectionwise map followed by the target comparison. Move inverse input augmentations through μ using its supplied naturality and cancel each against the augmentation in D.derivedMap. The private transport_pairing lemma proves this categorical cancellation.",
+   "uses": [
+    "def-sc-module-cup-realization-complex-data",
+    "lem-sc-module-cup-naive-derived-compatibility"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply homology to the transported diagram. The private localizedCycleClass_map lemma is homology-factorization naturality followed by homologyπ_naturality. The private evaluate_pairing lemma combines functoriality of homology with P.natural and P.on_cycles. Substitute the three C.on_cycles identities to obtain the formula.",
+   "uses": [
+    "lem-sc-module-cup-derived-class-comparison",
+    "lem-sc-module-cup-derived-homology-tensor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "E2 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "Formal evaluation of the supplied global compatibility diagram on lifted cocycles"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural tensor pairing on derived homology computes tensor product of cocycles",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk, CochainComplex.HomComplex.leftHomologyData'_H_coe, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CochainComplex.HomComplex.homologyAddEquiv, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass, CochainComplex.HomComplex.leftHomologyData_H_coe",
+   "date": "2026-10-14",
+   "verdict": "supporting infrastructure; no existing complete formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ_naturality",
+   "results": "1 hits: HomologicalComplex.homologyπ_naturality",
+   "date": "2026-10-14",
+   "verdict": "homology naturality used in the proved private helper"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCup.*homology|cupDerived.*comparison",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "supporting infrastructure; no existing complete formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of cohomology tensor pairing evaluated on cocycles",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupEqualDerivedMapsClass",
+  "group": "E2",
+  "date": "2026-10-14"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Comparison of cohomological cup products computed from acyclic resolutions",
+   "via": [
+    "lem-sc-module-cup-equal-derived-maps-class"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupOnePairingHomology",
+  "file": "lean/Sheaf/Paper/ModuleCupOnePairingHomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_one_pairing_homology",
+  "statement": "theorem moduleCup_one_pairing_homology\n    (C : CupDerivedClassComparison X) (P : CupDerivedHomologyTensor Γ(X, ⊤))\n    (μ : ∀ A B : DerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)),\n      (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj A ⊗\n        (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj B ⟶\n      (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj (A ⊗ B))\n    (hμ : ∀ (A A' B B' : DerivedCategory\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace))) (f : A ⟶ A') (g : B ⟶ B'),\n      ((RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.map f ⊗ₘ\n        (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.map g) ≫\n        μ A' B' = μ A B ≫\n        (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.map (f ⊗ₘ g))\n    {F G : X.Modules} (D : CupResolutionPairing F G)\n    (t : D.left.integerComplex ⊗ D.right.integerComplex ⟶ D.target.integerComplex)\n    (ht : D.Realizes t)\n    (ν : ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj D.left.integerComplex ⊗\n      ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj D.right.integerComplex ⟶\n      ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj (D.left.integerComplex ⊗ D.right.integerComplex))\n    (hν : ∀ (i j n : ℤ) (h : i + j = n)\n      (x : Γ(D.left.integerComplex.X i, ⊤)) (y : Γ(D.right.integerComplex.X j, ⊤)),\n      (ν.f n).hom\n        ((HomologicalComplex.ιTensorObj\n          (((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj D.left.integerComplex)\n          (((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj D.right.integerComplex) i j n h).hom\n          (TensorProduct.tmul Γ(X, ⊤) x y)) =\n        (HomologicalComplex.ιTensorObj D.left.integerComplex D.right.integerComplex\n          i j n h).val.app (op ⊤) (tmulSection x y))\n    (hdiagram :\n        (moduleCup_globalComparison X D.left.integerComplex ⊗ₘ\n        moduleCup_globalComparison X D.right.integerComplex) ≫\n          μ (DerivedCategory.Q.obj D.left.integerComplex)\n            (DerivedCategory.Q.obj D.right.integerComplex) ≫\n          (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.map\n            (Functor.LaxMonoidal.μ DerivedCategory.Q\n              D.left.integerComplex D.right.integerComplex) =\n      Functor.LaxMonoidal.μ DerivedCategory.Q\n        (((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj D.left.integerComplex)\n        (((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj D.right.integerComplex) ≫\n        DerivedCategory.Q.map ν ≫\n        moduleCup_globalComparison X (D.left.integerComplex ⊗ D.right.integerComplex))\n    (p q : ℕ)\n    (a : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.left.K).sc p).moduleCatLeftHomologyData.K)\n    (b : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.right.K).sc q).moduleCatLeftHomologyData.K)\n    (c : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.target.K).sc (p + q)).moduleCatLeftHomologyData.K)\n    (hc : c.val = D.pair p q ⊤ a.val b.val) :\n    C.equiv (F ⊗ G) (p + q) (D.target.class (p + q) c) =\n      (DerivedCategory.homologyFunctor (ModuleCat.{u} Γ(X, ⊤)) ((p + q : ℕ) : ℤ)).map\n        (μ ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F)\n          ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G) ≫\n          (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.map\n            (D.derivedMap t))\n        (P.pair (cupDerivedSections X F) (cupDerivedSections X G) p q\n          (C.equiv F p (D.left.class p a)) (C.equiv G q (D.right.class q b)))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-14"
+ },
+ "proof_deps": [
+  "lem-sc-module-cup-derived-class-comparison",
+  "lem-sc-module-cup-derived-homology-tensor",
+  "def-sc-module-cup-realization-complex-data",
+  "lem-sc-module-cup-naive-derived-compatibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-4c9af",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261014T152404-L-1128224",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-4c9af",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261014T152404-L-1128224",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean modules, node records, statements, proofs, axioms, and direct importer matched the packet and compiled successfully."
+ }
+}
