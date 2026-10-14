@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.CartesianChartClassPullback
 import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonNaturality
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
+import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
+import Sheaf.AlgebraicGeometry.CartesianHigherImageTransitions
 
 /-! # Naturality of the specified chart comparisons under exchange
 
