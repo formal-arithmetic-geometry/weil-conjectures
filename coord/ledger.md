@@ -14473,9 +14473,10 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:08 L: returned deliver/Y3/Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux (reviewer RETURN: (reviewer X-a61a8, head a61a8c34e) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.St)
 - 04:10 L: merged deliver/D2/Sheaf.RingTheory.DvrAbhyankarLocalResidue (stage 3; reviewer PASS; first push; landing 20261014T041056-L-1058903 (interface); batch 20261014T041054; modules 3; new nodes 2)
 - 04:10 L: merged deliver/G4/Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeComponent (stage 3; reviewer PASS; after a return; landing 20261014T041057-L-1059047 (interface); batch 20261014T041054; modules 7; new nodes 4; change records: coord/changes/affineDerivedPushforwardSheafEdge_canonical.md)
-- 04:10 L: merged deliver/R3/Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker (stage 3; reviewer PASS; after a return; landing 20261014T041057-L-1059261 (proof); batch 20261014T041054; modules 1; new nodes 0)
 - 04:10 L: merged deliver/R3/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (stage 3; reviewer PASS; first push; landing 20261014T041058-L-1059463 (proof); batch 20261014T041054; modules 1; new nodes 0)
 - 04:10 L: merged deliver/R4/Sheaf.RingTheory.DvrAbhyankarNormalizedFactor (stage 3; reviewer PASS; first push; landing 20261014T041058-L-1059617 (interface); batch 20261014T041054; modules 2; new nodes 1)
 - 04:10 L: merged deliver/U2/Sheaf.AlgebraicGeometry.SquareZeroTensorGradedQuotientMultiply (stage 3; reviewer PASS; after a return; landing 20261014T041058-L-1059772 (proof); batch 20261014T041054; modules 1; new nodes 0)
 - 04:10 L: merged deliver/W4/Sheaf.CategoryTheory.MapExtendHomology (stage 3; reviewer PASS; first push; landing 20261014T041059-L-1059964 (proof); batch 20261014T041054; modules 1; new nodes 0; change records: coord/changes/map-extend-homology-canonical-iso.md)
 - 04:10 L: merged deliver/X3/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore (stage 3; reviewer PASS; first push; landing 20261014T041059-L-1060115 (proof); batch 20261014T041054; modules 1; new nodes 0)
+
+- 12:16 L: batch 20261014T041054 dependency take-out
