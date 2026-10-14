@@ -3,41 +3,123 @@
  "blueprint": {
   "is": "lem-weil-restriction-of-scalars-exact",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Exactness of restriction of scalars",
- "statement": "Fix a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ with valuation ring\n$\\mathcal O_E$ and uniformizer $\\varpi_E$, a scheme $Y$, and an integer\n$n\\in\\mathbf Z_{\\geq1}$, and let $\\widehat{\\mathcal\nO}_{E,Y}\\twoheadrightarrow(A_{E,n})_Y$ be the reduction of the completed\ncoefficient sheaf [def-weil-completed-integral-coefficients]. Then the\nrestriction of scalars $\\operatorname{Res}_n$ is an exact functor\n\n$$\n \\operatorname{Res}_n:\n \\Sh(Y_{\\mathrm{proet}},A_{E,n})\n \\longrightarrow\\Sh(Y_{\\mathrm{proet}},\\mathcal O_E)\n$$\n\nbetween the categories of sheaves on the small pro-etale site\n[def-weil-pbc-proetale-site].",
+ "statement": "Fix a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ with valuation ring\n$\\mathcal O_E$ and uniformizer $\\varpi_E$, a scheme $Y$, and an integer\n$n\\in\\mathbf Z_{\\geq1}$, and let $\\widehat{\\mathcal\nO}_{E,Y}\\twoheadrightarrow(A_{E,n})_Y$ be the reduction of the completed\ncoefficient sheaf [def-weil-completed-integral-coefficients]. Then the\nrestriction of scalars $\\operatorname{Res}_n$ is an exact functor\n\n$$\n \\operatorname{Res}_n:\n \\Sh(Y_{\\mathrm{proet}},A_{E,n})\n \\longrightarrow\\Sh(Y_{\\mathrm{proet}},\\mathcal O_E)\n$$\n\nwhere the target means modules over $\\widehat{\\mathcal O}_{E,Y}$, not over the discrete constant sheaf $(\\mathcal O_E)_Y$, on the small pro-etale site\n[def-weil-pbc-proetale-site].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-restriction-of-scalars-exact.md",
   "place": "node lem-weil-restriction-of-scalars-exact, order 1456"
  },
  "stmt_deps": [
   "def-weil-completed-integral-coefficients",
-  "def-weil-pbc-proetale-site"
+  "def-weil-pbc-proetale-site",
+  "def-pc-sheaf-restrict-scalars"
  ],
  "proof": [
   {
-   "text": "Kernels, images and cokernels of morphisms of sheaves of modules on the small\npro-etale site [def-weil-pbc-proetale-site] are formed termwise on\nthe underlying sheaves of abelian groups, and $\\operatorname{Res}_n$ of\n[def-weil-completed-integral-coefficients] is the identity on underlying\nsheaves of abelian groups: the $\\widehat{\\mathcal O}_{E,Y}$-module structure\nit uses is the one induced by the ring surjection $\\widehat{\\mathcal\nO}_{E,Y}\\twoheadrightarrow(A_{E,n})_Y$. A short exact sequence of\n$A_{E,n}$-modules therefore remains short exact after restriction of scalars,\nwhich is the exactness asserted.",
+   "text": "Work on the small skeleton in the larger universe stipulated by [def-weil-pbc-proetale-site]. Abelian sheafification on this site is the functor of [lem-weil-pbc-sheafification-exact]. Set $R=\\widehat{\\mathcal O}_{E,Y}$ and $S=(A_{E,n})_Y$. The coefficient definition [def-weil-completed-integral-coefficients] supplies the projection $\\pi_n:R\\to S$ and identifies the two displayed module categories. By [def-pc-sheaf-restrict-scalars], restriction keeps the section groups, restriction maps and morphisms, with action $r m=\\pi_n(r)m$. Thus it is additive, and forgetting its $R$-action gives exactly the same abelian sheaf as forgetting the original $S$-action.",
    "uses": [
     "def-weil-pbc-proetale-site",
-    "def-weil-completed-integral-coefficients"
+    "lem-weil-pbc-sheafification-exact",
+    "def-weil-completed-integral-coefficients",
+    "def-pc-sheaf-restrict-scalars"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian (forgetting module structure preserves kernels and cokernels)"
+   }
+  },
+  {
+   "text": "For both $R$ and $S$, apply clause (1) of [lem-weil-pbc-module-sheaves-colimits-forgetful]: the forgetful functor to abelian sheaves is faithful and preserves kernels and cokernels. Consequently it also preserves images, since an image is the kernel of a cokernel. In particular a short exact sequence of $S$-module sheaves has a short exact underlying sequence of abelian sheaves. This assertion concerns sheaf cokernels, which are sheafifications of sectionwise cokernels; it does not assert surjectivity on sections.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian (forgetting module structure preserves kernels and cokernels)"
+   }
+  },
+  {
+   "text": "Let $0\\to M_1\\to M_2\\to M_3\\to0$ be such a short exact sequence. By Step 1 its restricted sequence has the same underlying abelian sequence; the composite of its two arrows remains zero because restriction keeps the morphisms and their composition. In the $R$-module category form the kernel of its first arrow, the cokernel of its second arrow, and the middle homology (the cokernel of the image inclusion into the kernel of the second arrow). By the preservation of kernels and cokernels in [lem-weil-pbc-module-sheaves-colimits-forgetful], the forgotten kernel, image and cokernel comparison maps identify the underlying image-to-kernel inclusion with that of the abelian sequence in Step 2. Therefore all three obstructions have zero underlying abelian sheaf. Faithfulness implies each is zero: its identity maps to the zero morphism, so its identity is zero. Thus the restricted sequence is short exact. This proves exactness of $\\operatorname{Res}_n$. No flatness or sectionwise lifting is used; the argument works along any sheaf ring morphism, so in particular along the stated reduction.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian (forgetting module structure preserves kernels and cokernels)"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-proetale-site",
-  "def-weil-completed-integral-coefficients"
+  "lem-weil-pbc-sheafification-exact",
+  "def-weil-completed-integral-coefficients",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-restriction-of-scalars-exact.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DA, lemma-abelian (forgetting module structure preserves kernels and cokernels)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrictScalars|preservesFinite",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for exactness of this restriction functor; definition, additive structure and forgetful-functor ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars on sheaves of modules preserves exact sequences",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along a morphism of sheaves of rings is an exact functor on sheaves of modules",
+   "results": "SheafOfModules.restrictScalars, SheafOfModules.restrictScalars_obj_val, SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf, SheafOfModules.instAdditiveRestrictScalars, SheafOfModules.instAbelian, SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf, PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf, instAbelianCondensedMod",
+   "date": "2026-10-14",
+   "verdict": "no match for exactness of this restriction functor; definition, additive structure and forgetful-functor ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "SheafOfModules.restrictScalars, SheafOfModules.instAdditiveRestrictScalars, SheafOfModules.restrictScalars_obj_val, SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-14",
+   "verdict": "no match for exactness of this restriction functor; definition, additive structure and forgetful-functor ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful functor from sheaves of modules to sheaves of abelian groups preserves and reflects exactness",
+   "results": "CategoryTheory.ShortComplex.exact_iff_exact_map_forget₂, SheafOfModules.instAbelian, CategoryTheory.Functor.reflects_exact_of_faithful, SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf, CategoryTheory.ShortComplex.exact_iff_of_hasForget, instAbelianCondensedMod, PresheafOfModules.instReflectsFiniteLimitsSheafOfModulesSheafAddCommGrpCatToSheaf, SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf",
+   "date": "2026-10-14",
+   "verdict": "no match for exactness of this restriction functor; definition, additive structure and forgetful-functor ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.toSheaf",
+   "results": "SheafOfModules.toSheaf, SheafOfModules.instFaithfulSheafAddCommGrpCatToSheaf, SheafOfModules.instAdditiveSheafAddCommGrpCatToSheaf, SheafOfModules.toSheaf_obj_obj, SheafOfModules.toSheafCompSheafToPresheafIso, SheafOfModules.toSheaf_map_hom, SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf, SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf",
+   "date": "2026-10-14",
+   "verdict": "no match for exactness of this restriction functor; definition, additive structure and forgetful-functor ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "toSheaf|PreservesFiniteColimits",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match for exactness of this restriction functor; definition, additive structure and forgetful-functor ingredients only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +142,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-restriction-of-scalars-exact",
+  "worker": "stage1",
+  "summary": "Replaced the unsupported termwise-cokernel argument with preservation and faithful detection via the existing general module-sheaf forgetful theorem. Clarified completed versus discrete coefficients. No new nodes. Searched source and all blueprint nodes; no exact finished project declaration or direct Mathlib match found.",
+  "blueprint": "Realizes the sole proof paragraph: same underlying abelian sheaf, then preservation of short exact sequences.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "General ringed-site tool, clause (1) for both coefficient ring sheaves; no change to the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-exact",
+    "why": "General sheafification tool on the size-controlled pro-etale site, verifying applicability of the forgetful result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-sheafification-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-eed27d395",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-eed27d395 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, sources, and unit/chapter route. Stacks 03DA supports the faithful kernel/cokernel argument for completed coefficient sheaves. Checked edge cases, duplicate/generalization candidates, and dependency cycles. Accepted general ringed-site tool uses; no target comparison theorem certified. No repairs required; review.md written."
+ }
 }
