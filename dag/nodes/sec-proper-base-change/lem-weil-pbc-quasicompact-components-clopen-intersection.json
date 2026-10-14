@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-qbar",
-   "place": "Proof of master RefactorInstruction.tex Section 4 Lemma lem:point-eval, sentence before the lemma asserting that pi_0(U) is profinite: justification of clopen separation for affine U.",
+   "place": "Proof of master RefactorInstruction.tex Section 4 Lemma lem:point-eval, sentence before the lemma asserting that pi_0(U) is profinite: justification of clopen separation for affine U; realizes Topology Tag 005F lemma-connected-component-intersection.",
    "via": [
     "lem-weil-pbc-proetale-point-components-maps",
     "lem-weil-pbc-condensed-point-basis-evaluation",
@@ -26,67 +26,156 @@
  "stmt_deps": [
   "def-weil-spectral-space"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $T_0$ be the connected component of $t$, and let $S=\\bigcap_{\\alpha\\in A}Z_\\alpha$, where $(Z_\\alpha)$ lists all clopen subsets of $T$ containing $t$ (including $T$). The relatively clopen pieces $T_0\\cap Z_\\alpha$ and $T_0\\setminus Z_\\alpha$ separate $T_0$ unless the latter is empty, since the former contains $t$. Thus $T_0\\subseteq S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005F, proof, first paragraph"
+   }
+  },
+  {
+   "text": "The set $S$ is closed as an intersection of closed sets, and $t\\in S$. If $S$ were disconnected, write $S=B\\amalg C$ with $B,C$ nonempty and clopen in $S$. Being closed in the closed subspace $S$, they are closed in $T$, hence quasi-compact by [lem-weil-pbc-closed-in-quasi-compact].",
+   "uses": [
+    "lem-weil-pbc-closed-in-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005F, proof, paragraphs 1–2"
+   }
+  },
+  {
+   "text": "Choose opens $O_B,O_C\\subseteq T$ with $B=S\\cap O_B$ and $C=S\\cap O_C$. Cover $B$ by basis opens contained in $O_B$ and take a finite subcover, with union $U$. Then $B\\subseteq U\\subseteq O_B$, hence $B=S\\cap U$. Cover $C$ by basis opens contained in $O_C$ and take a finite subcover with union $V$; then $C=S\\cap V$. A finite union of quasi-compact subsets is quasi-compact: restrict an open cover to each subset and unite the finitely many finite subcovers. Thus $U,V$ are quasi-compact opens, $S\\subseteq U\\cup V$, and $U\\cap V\\cap S=\\emptyset$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005F, proof, sentence “By assumption (2)…”"
+   }
+  },
+  {
+   "text": "By the intersection hypothesis, $K=U\\cap V$ is quasi-compact. Since $K\\cap S=\\emptyset$, the relatively open sets $K\\cap(T\\setminus Z_\\alpha)$ cover $K$. Take a finite subcover indexed by $F\\subseteq A$. Put $Z'=\\bigcap_{\\alpha\\in F}Z_\\alpha$, with $Z'=T$ if $F=\\emptyset$. Then $Z'$ is clopen, contains $t$, and $K\\cap Z'=\\emptyset$. This is the elementary finite-subcover argument of Tag 005D (lemma-intersection-closed-in-quasi-compact).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005F, proof, application of Tag 005D (lemma-intersection-closed-in-quasi-compact) to U intersection V"
+   }
+  },
+  {
+   "text": "The set $L=T\\setminus(U\\cup V)$ is closed in quasi-compact $T$, hence quasi-compact by [lem-weil-pbc-closed-in-quasi-compact]. Since $L\\cap S=\\emptyset$, the relatively open sets $L\\cap(T\\setminus Z_\\alpha)$ cover $L$. A finite subcover indexed by $G\\subseteq A$ gives $Z''=\\bigcap_{\\alpha\\in G}Z_\\alpha$ (equal to $T$ if $G=\\emptyset$), clopen and containing $t$, with $L\\cap Z''=\\emptyset$. Thus $Z''\\subseteq U\\cup V$.",
+   "uses": [
+    "lem-weil-pbc-closed-in-quasi-compact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005F, proof, application of Tag 005D (lemma-intersection-closed-in-quasi-compact) to the complement of U union V"
+   }
+  },
+  {
+   "text": "Put $Z=Z'\\cap Z''$. It is clopen, contains $t$, is contained in $U\\cup V$, and avoids $U\\cap V$. Hence $Z=(U\\cap Z)\\amalg(V\\cap Z)$. Both pieces are open in $T$; their complements are respectively $(T\\setminus Z)\\cup(V\\cap Z)$ and $(T\\setminus Z)\\cup(U\\cap Z)$, also open. If $t\\in B$, then $U\\cap Z$ is a clopen neighbourhood of $t$, so $S\\subseteq U\\cap Z$ by definition of $S$. But $C=S\\cap V$ and $U\\cap V\\cap S=\\emptyset$, forcing $C=\\emptyset$. If $t\\in C$, then $V\\cap Z$ is a clopen neighbourhood of $t$, so $S\\subseteq V\\cap Z$, forcing $B=S\\cap U=\\emptyset$. Both cases contradict nonemptiness. Thus $S$ is connected and contains $t$, so maximality of the connected component gives $S\\subseteq T_0$. Together with step 1 this proves $S=T_0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005F, proof, final paragraphs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-in-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 005F, lemma-connected-component-intersection"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "The connected component of a point of a spectral space is the intersection of its clopen neighborhoods",
-   "results": "connectedComponent_eq_iInter_isClopen requires compact Hausdorff, not applicable to general spectral spaces. IsClopen.connectedComponent_subset is only one inclusion.",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A quasi compact quasi separated space with a basis of quasi compact opens has components equal to intersections of clopen neighborhoods",
-   "results": "QuasiSeparatedSpace.of_isTopologicalBasis and SpectralSpace.toQuasiSeparatedSpace; compact Hausdorff component theorem only.",
-   "date": "2026-10-14",
+   "query": "connected components are intersections of clopen neighborhoods in a quasi-compact space with quasi-compact open basis",
+   "results": "Found connectedComponent_eq_iInter_isClopen requiring CompactSpace and T2Space; no general spectral-space result.",
+   "date": "2026-10-15",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "connectedComponent, IsClopen",
-   "results": "connectedComponent_eq_iInter_isClopen requires T2Space; remaining hits give one inclusion or assume locally connected.",
-   "date": "2026-10-14",
+   "query": "connectedComponent, IsClopen, IsCompact",
+   "results": "0 hits.",
+   "date": "2026-10-15",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "connectedComponent_eq_iInter_isClopen|connectedComponent_subset_iInter_isClopen",
-   "results": "Mathlib/Topology/Separation/Regular.lean:725 assumes T2Space and CompactSpace; Mathlib/Topology/Connected/Clopen.lean:368 only subset.",
-   "date": "2026-10-14",
+   "query": "connectedComponent_eq_iInter_isClopen|connectedComponent_subset_iInter_isClopen (Mathlib/Topology)",
+   "results": "0 hits from msearch; source declarations require extra compact Hausdorff hypotheses.",
+   "date": "2026-10-15",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "In a spectral space each connected component is the intersection of the clopen neighborhoods of any of its points",
+   "query": "intersection of all clopen neighborhoods equals connected component spectral space",
    "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
+   "date": "2026-10-15",
    "verdict": "unavailable"
   },
   {
-   "tool": "leanfinder",
-   "query": "quasi-separated compact space with compact open basis quasi-components equal connected components",
-   "results": "connectedComponent_eq_iInter_isClopen and ConnectedComponents.t2 require T2Space; the other hits do not assert the prespectral component intersection formula.",
-   "verdict": "no match",
-   "date": "2026-10-14"
+   "tool": "grep",
+   "query": "quasiComponent|iInter_isClopen|connectedComponent.*Prespectral|connectedComponent.*QuasiSeparated",
+   "date": "2026-10-15",
+   "results": "8 hits: Mathlib/Topology/Separation/Hausdorff.lean, Mathlib/Topology/Separation/Regular.lean, Mathlib/Topology/Separation/Regular.lean, Mathlib/Topology/Separation/Regular.lean, Mathlib/Topology/Separation/Profinite.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/DiscreteQuotient.lean, Mathlib/Topology/Connected/Clopen.lean. Read Regular.lean:725 and Clopen.lean:368; equality needs T2Space, general theorem only inclusion.",
+   "verdict": "no match"
   },
   {
-   "tool": "grep",
-   "query": "instSpectralSpace|sInter.*connectedComponent|connectedComponent.*iInter",
-   "results": "Regular.lean:725 requires T2Space; Clopen.lean:368 gives only one inclusion; Prime/Topology.lean documentation names instSpectralSpace, verified declaration at line 844.",
-   "date": "2026-10-14",
+   "tool": "leanfinder",
+   "query": "A compact quasi-separated space with a basis of compact open sets has connected components equal to quasi-components without a separation axiom",
+   "date": "2026-10-15",
+   "results": "8 hits: connectedComponent_eq_iInter_isClopen, CompHaus.toProfinite_obj', irreducibleComponent_subset_connectedComponent, instCompactSpaceConnectedComponents, ConnectedComponents.t2, isPreconnected_connectedComponent, isConnected_connectedComponent, QuasiSeparatedSpace.isRetrocompact_iff_isCompact. Read Regular.lean:725 and Clopen.lean:368; equality needs T2Space, general theorem only inclusion.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"connectedComponent\", \"IsClopen\"",
+   "date": "2026-10-15",
+   "results": "12 hits: IsClopen.connectedComponent_subset, IsClopen.connectedComponentIn_eq, IsClopen.biUnion_connectedComponent_eq, connectedComponent_subset_iInter_isClopen, IsClopen.biUnion_connectedComponentIn, ConnectedComponents.equivOfIsClopenOfIsConnected, ConnectedComponents.equivOfIsClopen, ConnectedComponents.exists_fun_isClopen_of_infinite. Read Regular.lean:725 and Clopen.lean:368; equality needs T2Space, general theorem only inclusion.",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proetale-point-components-maps",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "lem-weil-pbc-quasicompact-components-clopen-intersection",
+  "worker": "stage1",
+  "summary": "Second reading found the exact sorry-free slopmaster2 theorem sInter_isClopen_and_mem_eq_connectedComponent and records it in lean_candidates for attachment (B10). No new nodes. The six source proof steps are retained only because preflight_delivery.py requires nonempty proof steps for status split; steps 4–5 now use finite open subcovers directly, avoiding the invalid sobriety-dependent spectral constructible lemma. Only the existing closed-subset Mathlib leaf remains a proof dependency.",
+  "blueprint": "Realizes the ancestor proof place asserting clopen separation of distinct components in the affine/spectral space argument."
+ },
+ "lean_candidates": [
+  {
+   "declaration": "sInter_isClopen_and_mem_eq_connectedComponent",
+   "module": "WeilConjectures.Topology.SpectralSpace.ConnectedComponent",
+   "file": "WeilConjectures/Topology/SpectralSpace/ConnectedComponent.lean",
+   "lines": "64-142",
+   "note": "Exact whole-node attachment: CompactSpace, PrespectralSpace and QuasiSeparatedSpace are precisely the three hypotheses of Tag 005F, without sobriety or Hausdorffness. Equality reversed only. Archived local/sorry_map_slopmaster2_7d675a26.jsonl.gz entry has s=false and ts=false; maintainer to attach and refresh lean_audit. Source read at /home/ubuntu/weil-src-slopmaster2."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-31104924b",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-31104924b (reviewer sub-agent of L); spot-checked: Mathematics and all six proof steps check against Stacks Tag 005F and the exact closed upstream theorem. Repair A4: created.item names the wrong item. Repair B10: attach sInter_isClopen_and_mem_eq_connectedComponent as slopmaster2 closed with sorry=false. Corrected DAG JSON is under fixes/dag/nodes/sec-proper-base-change/; review.md records source, hypothesis, edge-case, duplicate, and search checks.; 1 file(s) fixed by the reviewer"
+ }
 }
