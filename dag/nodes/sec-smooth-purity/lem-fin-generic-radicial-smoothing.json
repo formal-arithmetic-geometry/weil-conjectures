@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fin-generic-radicial-smoothing",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A smooth dense open after a finite radicial base change",
@@ -13,46 +13,148 @@
   "place": "node lem-fin-generic-radicial-smoothing, order 1635"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-scheme-reduction",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-etale-sheaves",
+  "def-kun-dimension"
  ],
  "proof": [
   {
-   "text": "Write $K=k(S)$. In characteristic zero put $K'=K$.\nIn characteristic $p>0$, pass first to the perfect closure\n$K^{\\mathrm{perf}}$. The reduced finite-type\n$K^{\\mathrm{perf}}$-scheme $(X_{K^{\\mathrm{perf}}})_{\\mathrm{red}}$\nhas a dense smooth open. Indeed, at every generic point choose\na separating transcendence basis of its finitely generated\nresidue field over the perfect field; a primitive element for\nthe remaining finite separable extension has nonzero derivative.\nInverting that derivative and the finitely many denominators in\na finite presentation gives a smooth neighborhood by the\nJacobian criterion in [def-sbc-smooth-morphisms].\nThe neighborhoods cover all generic points.",
+   "text": "Apply [lem-pur-generic-geometrically-reduced-preparation] to $X\\to S$. Replace $S$ by the resulting nonempty $U$ and put $Y=(X\\times_S S\\prime)_{\\mathrm{red}}$. Thus $S\\prime$ is integral affine, $q$ is finite and a universal homeomorphism, $g:Y\\to S\\prime$ is flat of finite presentation, and $Y_{\\eta\\prime}$ is geometrically reduced. By the definition of universal homeomorphism every base change of $q$ is bijective on points. Consequently $q$ is surjective and universally injective, hence radicial by [def-weil-radicial-morphism]. This establishes precisely the required base change, without imposing geometric irreducibility on any fibre.",
    "uses": [
-    "def-sbc-smooth-morphisms"
+    "lem-pur-generic-geometrically-reduced-preparation",
+    "def-weil-universal-homeomorphism",
+    "def-weil-radicial-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0550, lemma-make-generic-fibre-geometrically-reduced"
+   }
   },
   {
-   "text": "This construction uses finitely many coefficients: generators\nof the nilpotent ideal defining the reduction, equations for\nthe finitely many chosen open neighborhoods, and the indicated\nJacobian identities. They lie in a finite purely inseparable\nextension $K'/K$. Enlarging $K'$ once more if necessary,\nthe descended ideal is nilpotent (use one common power for its\nfinitely many generators), and the descended opens are smooth\nby the same Jacobian identities. Their union contains every\ngeneric point, since this can be checked after the faithfully\nflat field extension to $K^{\\mathrm{perf}}$. The quotient by\nthe descended nilpotent ideal agrees with the reduction on\nthese opens, because a smooth algebra over a field is reduced.\nThus $(X_{K'})_{\\mathrm{red}}$ has the desired dense smooth open.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Choose an affine open $S=\\operatorname{Spec}A$, and generators\n$a_1,\\ldots,a_s$ of $K'/K$ with $a_i^{p^e}\\in K$\nfor one common $e$. Invert the denominators of these powers.\nThen $A'=A[a_1,\\ldots,a_s]\\subset K'$ is finite over $A$.\nThe equations $T_i^{p^e}-a_i^{p^e}$ show that each geometric\nfiber has at most one point; integrality gives a point in every\nfiber. Hence $\\operatorname{Spec}A'\\to\\operatorname{Spec}A$\nis finite, surjective and radicial. Spread the finitely presented\ngeneric smooth neighborhoods by clearing their denominators.\nRemove the closures in $S$ of the images of any remaining\nvertical irreducible components of $Y$. These images have nondense\nclosures, so this removes no generic point of $S$; and because\n$S'\\to S$ is a homeomorphism on underlying spaces it removes no\ngeneric point of $S'$ either. Write $S_1\\subseteq S$ for the\nsurviving open and $S'_1=S'\\times_SS_1$, so that\n$S'_1\\to S_1$ is again finite, surjective and radicial, and still a\nhomeomorphism on underlying spaces; the shrinking is therefore\nperformed on the base, and the descent step below may use it. The\nresulting smooth open is dense in $(X_{S'_1})_{\\mathrm{red}}$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "At each of its finitely many generic points the constructible\nstratification of [def-weil-pbc-constructible-complexes]\nsupplies an open neighborhood on which $F$ is locally constant.\nIntersect with their union. The complement contains no generic\npoint of any component of the generic fiber. A proper closed\nsubset of an irreducible finite-type scheme over a field has\nstrictly smaller dimension, which proves the last assertion.",
+   "text": "On the generic fibre apply [lem-pur-geometrically-reduced-dense-smooth-open]. Every smooth generic-fibre point has an open neighbourhood in $Y$ smooth over $S\\prime$: in affine charts $\\operatorname{Spec}B\\to\\operatorname{Spec}A$, apply [lem-weil-pbc-flat-smooth-fibre-smooth-at-prime] to the corresponding prime $\\mathfrak q$. Its three hypotheses hold: $B$ is finitely presented over $A$ (take the localization element $1$), the local map is flat because $g$ is flat, and the corresponding fibre prime is smooth by our choice of point. The conclusion, unpacked by [def-weil-pbc-singular-ideal], gives $b\\notin\\mathfrak q$ with $B_b$ smooth over $A$. These open charts have union $V_0$, smooth by the affine-local characterization in [def-sbc-smooth-morphisms]. Its generic fibre contains the dense smooth locus. It is dense in all of $Y$: for every nonempty open $O\\subseteq Y$, openness of $g$ from [lem-weil-pbc-flat-lfp-open] implies $g(O)$ is a nonempty open of integral $S\\prime$, hence contains $\\eta\\prime$. Therefore $O_{\\eta\\prime}$ is nonempty and meets $(V_0)_{\\eta\\prime}$.",
    "uses": [
-    "def-weil-pbc-constructible-complexes"
+    "lem-pur-geometrically-reduced-dense-smooth-open",
+    "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+    "def-weil-pbc-singular-ideal",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-flat-lfp-open"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056V, lemma-geometrically-reduced-dense-smooth-open; Algebra Tag 00TF, lemma-flat-fibre-smooth"
+   }
+  },
+  {
+   "text": "The spaces in use are Noetherian. Indeed $S$ is finite type over a field, $S\\prime$ is finite over an open of $S$, and $Y$ is finite type over $S\\prime$. On a finite affine covering the coordinate algebras are finite type over a field and Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian] (a field has only the ideals $0$ and $1$). For a Noetherian ring $B$, an ascending chain of ideals stabilizes: its union is an ideal with finitely many generators, all lying in one member of the chain. A descending chain of closed subsets of $\\operatorname{Spec}B$ corresponds to an ascending chain of radical ideals, so stabilizes. Thus each affine chart is a Noetherian space. A finite union of Noetherian open subspaces is Noetherian: an ascending chain of opens stabilizes on each chart and hence globally. In particular $Y$ has finitely many irreducible components by [lem-weil-pbc-noetherian-finite-components].",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-finite-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Hilbert basis theorem; Properties finite Noetherian affine covers"
+   }
+  },
+  {
+   "text": "For the sheaf assertion pull back $F$ to $Y$; it is constructible by [prop-constructible-pullback]. Choose its finite locally closed stratification from [def-constructible-constructible]. Let $W$ be the union of the interiors of its underlying strata in $Y$. This union contains every generic point $\\xi$ of $Y$: if a stratum is $O\\cap C$ with $O$ open and $C$ closed and contains $\\xi$, it contains $O\\cap\\overline{\\{\\xi\\}}$; removing the finitely many other components gives an open neighbourhood of $\\xi$ contained in this stratum. Thus $W$ is dense. On an interior $W_i$, the base change of its stratum immersion is a surjective immersion $Z_i\\times_YW_i\\to W_i$. It is a closed immersion locally on $W_i$ (an immersion with entire underlying image), and its defining ideal is contained in every prime, so its elements are nilpotent. After any ring base change the image ideal still consists of nilpotents: a finite sum of nilpotent commuting elements is nilpotent. Its spectrum map is therefore a homeomorphism after every base change, so this is a universal homeomorphism. The pullback of $F|_{W_i}$ to this stratum is locally constant by [lemma-constructible-pullback-locally-constant]. By [lemma-constructible-universal-homeomorphism-invariance] $F|_{W_i}$ is locally constant as well. These restrictions supply local trivializations on their union $W$. Set $V=V_0\\cap W$. It remains smooth and is dense, since both opens contain all generic points. Without $F$, take $V=V_0$.",
+   "uses": [
+    "prop-constructible-pullback",
+    "def-constructible-constructible",
+    "lem-weil-pbc-noetherian-finite-components",
+    "lemma-constructible-pullback-locally-constant",
+    "lemma-constructible-universal-homeomorphism-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-generic-radicial-smoothing.md",
+    "place": "Proof paragraph 4, expanded finite-stratification argument; Stacks 04DZ"
+   }
+  },
+  {
+   "text": "Finally let $Z$ be any irreducible component of the generic-fibre complement $Y_{\\eta\\prime}\\setminus V_{\\eta\\prime}$, and let $C$ be an irreducible component of $Y$ containing it. The closure $\\overline Z$ in $Y$ is irreducible, is contained in $C\\cap(Y\\setminus V)$, and is a proper closed subset of $C$ because $V$ contains the generic point of $C$. The dimension of $Y$ is finite by [lem-kun-dimension-finite-type], since $Y$ is finite type over the original field. Write $d=\\dim C$. Apply [new-node-irreducible-open-complement-dimension] to $C$ and its nonempty open $C\\cap V$. The complement $C\\setminus V$ is nonempty because it contains the nonempty $Z$. Hence the nonempty-complement clause gives an integer $e<d$ with $\\dim(C\\setminus V)\\leq e$, and in particular $\\dim(C\\setminus V)<d$. The generic fibre has the subspace topology in $Y$ by [def-pc-scheme-fibre]. Every strict chain of irreducible closed subsets in $Z$ gives a strict chain of their closures in $C\\setminus V$: closure intersected back with the subspace $Z$ is the original closed subset, which preserves strictness. Therefore $\\dim Z\\leq\\dim(C\\setminus V)<\\dim C$. Reduction has the same underlying space as $X_{S\\prime}$, so this is the stated comparison. If the generic fibre or complement is empty the assertion is vacuous, and $V=\\varnothing$ is allowed when shrinking removes all of $X$.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "new-node-irreducible-open-complement-dimension",
+    "def-weil-pbc-scheme-reduction",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-generic-radicial-smoothing.md",
+    "place": "Proof paragraph 4, dimension comparison by proper closed subsets"
+   }
   }
  ],
  "proof_deps": [
+  "lem-pur-generic-geometrically-reduced-preparation",
+  "def-weil-universal-homeomorphism",
+  "def-weil-radicial-morphism",
+  "lem-pur-geometrically-reduced-dense-smooth-open",
+  "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+  "def-weil-pbc-singular-ideal",
   "def-sbc-smooth-morphisms",
-  "def-weil-pbc-constructible-complexes"
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-finite-components",
+  "prop-constructible-pullback",
+  "def-constructible-constructible",
+  "lemma-constructible-pullback-locally-constant",
+  "lemma-constructible-universal-homeomorphism-invariance",
+  "lem-kun-dimension-finite-type",
+  "new-node-irreducible-open-complement-dimension",
+  "def-weil-pbc-scheme-reduction",
+  "def-pc-scheme-fibre"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-generic-radicial-smoothing.md",
-  "place": "## Proof"
+  "place": "Proof, with Stacks 0550 replacing the implicit perfect-closure descent"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "After shrinking integral base a finite radicial surjection makes reduced finite type scheme have dense smooth open with constructible sheaf locally constant",
+   "results": "Actual returned names/files: AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, Algebra.isOpen_smoothLocus, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsIntegral, Algebra.isOpen_unramifiedLocus; 8 hits. Read candidates: standard smooth charts and geometrically reduced definitions/base-change facts do not state this lemma; perfect-field density has the extra perfect-field hypothesis.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic smoothness after purely inseparable alteration of the base for arbitrary finite type schemes",
+   "results": "Actual returned names/files: AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, Algebra.FormallySmooth.of_perfectField, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, Algebra.Smooth.exists_finiteType, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.isSmooth_iff; 8 hits. Read candidates: standard smooth charts and geometrically reduced definitions/base-change facts do not state this lemma; perfect-field density has the extra perfect-field hypothesis.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth",
+   "results": "Actual returned names/files: AlgebraicGeometry.instIsStableUnderCompositionSchemeSmooth, AlgebraicGeometry.smooth_isStableUnderBaseChange, AlgebraicGeometry.instRespectsSchemeSmoothIsOpenImmersion, AlgebraicGeometry.Smooth, AlgebraicGeometry.instHasRingHomPropertySmoothSmooth, AlgebraicGeometry.instFlatOfSmooth, AlgebraicGeometry.instLocallyOfFinitePresentationOfSmooth, AlgebraicGeometry.instSmoothOfIsOpenImmersion; 12 hits. Read candidates: standard smooth charts and geometrically reduced definitions/base-change facts do not state this lemma; perfect-field density has the extra perfect-field hypothesis.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothLocus|smooth.*[Ff]iber|[Ff]iber.*smooth",
+   "results": "Actual returned names/files: Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; 15 hits. Read candidates: standard smooth charts and geometrically reduced definitions/base-change facts do not state this lemma; perfect-field density has the extra perfect-field hypothesis.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite purely inseparable base change generically geometrically reduced flat reduced family",
+   "results": "Actual search logged for NY/lem-fin-generic-radicial-smoothing at 2026-10-14T07:22:32Z: service unavailable: Internal Server Error; zero hits returned because the service failed. This addresses the generic preparation used by the item and is not evidence of absence.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps"
@@ -81,5 +183,59 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-fin-generic-radicial-smoothing",
+  "worker": "stage1",
+  "summary": "Replaced unsupported perfect-closure descent by Stacks 0550; lifted smooth generic-fibre points using the existing 00TF node; proved density by openness, local constancy by finite stratification and universal-homeomorphism invariance, and componentwise dimension drop. Two new statement nodes, one with an existing sorry-free project declaration.",
+  "blueprint": "Paragraphs 1-3 realized by preparation, generic smoothness and flat-lfp openness; paragraph 4 by explicit interiors of strata and componentwise dimension comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+    "why": "Generic tool used exactly as stated in the proof step; this unit has no replacement for this flat smooth-fibre / pullback / dimension fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic tool used exactly as stated in the proof step; this unit has no replacement for this flat smooth-fibre / pullback / dimension fact."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Generic tool used exactly as stated in the proof step; this unit has no replacement for this flat smooth-fibre / pullback / dimension fact."
+   },
+   {
+    "node": "lemma-constructible-pullback-locally-constant",
+    "why": "Generic tool used exactly as stated in the proof step; this unit has no replacement for this flat smooth-fibre / pullback / dimension fact."
+   },
+   {
+    "node": "lemma-constructible-universal-homeomorphism-invariance",
+    "why": "Generic tool used exactly as stated in the proof step; this unit has no replacement for this flat smooth-fibre / pullback / dimension fact."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic tool used exactly as stated in the proof step; this unit has no replacement for this flat smooth-fibre / pullback / dimension fact."
+   },
+   {
+    "node": "new-node-irreducible-open-complement-dimension",
+    "why": "Generic tool used exactly as stated in the proof step; this unit has no replacement for this flat smooth-fibre / pullback / dimension fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "prop-constructible-pullback",
+  "lemma-constructible-pullback-locally-constant",
+  "lemma-constructible-universal-homeomorphism-invariance",
+  "lem-kun-dimension-finite-type",
+  "new-node-irreducible-open-complement-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-ae9ede8a1",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-ae9ede8a1 (reviewer sub-agent of L); spot-checked: Read the full mathematics and sources; all five proof steps and both new statements pass. Corrected two records: added the actual logged unavailable LeanSearch attempt and the verified density theorem attachment. Its 19 recorded dependencies are sorry-free. Statements and proofs are unchanged; review.md documents sources, edge cases, duplicate checks, and accepted tool uses.; 2 file(s) fixed by the reviewer"
+ }
 }
