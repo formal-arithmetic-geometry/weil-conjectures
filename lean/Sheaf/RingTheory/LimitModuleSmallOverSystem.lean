@@ -15,6 +15,9 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.Quotient.Basic
+import Sheaf.RingTheory.LimitModuleEssentiallyFinitePresentationOverSystem
+import Mathlib.Data.Finsupp.Encodable
+import Mathlib.Algebra.Category.Grp.Ulift
 
 /-! # Small-universe module descent over an essentially finite type base system
 Source: Stacks Project, Algebra, Tags 00QV, 00QX and 00R1.
@@ -29,6 +32,18 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 
 namespace RingHom
+
+private theorem countable_of_essFiniteType (R S : Type*) [CommRing R] [CommRing S]
+    [Algebra R S] [Countable R] [Algebra.EssFiniteType R S] : Countable S := by
+  classical
+  let S₀ := Algebra.EssFiniteType.subalgebra R S
+  let W := Algebra.EssFiniteType.submonoid R S
+  obtain ⟨n, f, hf⟩ := (Algebra.FiniteType.iff_quotient_mvPolynomial'' (R := R) (S := S₀)).mp
+    inferInstance
+  have : Countable (MvPolynomial (Fin n) R) := by
+    exact (AddMonoidAlgebra.coeff_injective (R := R) (M := Fin n →₀ ℕ)).countable
+  have : Countable S₀ := hf.countable
+  exact (IsLocalization.mk'_surjective W (S := S)).countable
 
 /-- Single-ring descent with the module diagram in the universe of the limit module.
 The extra essential finite type hypothesis permits shrinking the finite stage modules.
@@ -131,6 +146,115 @@ theorem exists_limit_module_small_over_system
                   (letI := (κ i).toAlgebra
                    ∃ e : T ⊗[B.obj i] D.obj i ≃ₗ[T] N,
                      ∀ (y : T) (x : D.obj i), e (y ⊗ₜ[B.obj i] x) = y • ν i x)) := by
-  sorry
+  classical
+  let N' : AddCommGrpCat.{max u v} := AddCommGrpCat.of (ULift.{u} N)
+  let eN : N' ≃ₗ[T] N := ULift.moduleEquiv
+  obtain ⟨i₀, B, β, hBcol, κ, hκ, hBlocal, hκlocal, hBmap, τ₀, hτlocal,
+      hτfinite, hτcomp, hτnat, D, δ, hDcol, ν, hModule, hν, hνsmul, hmap,
+      hfinite, hpres, htrans, hlimit⟩ :=
+    exists_limit_module_essentially_finite_presentation_over_system F c hc hF hcLocal
+      T τ P W f hf hT N' s t H ⟨hN.some.trans eN.symm⟩
+  have hBcount (i : {i : I // i₀ ≤ i}) : Countable (B.obj i) := by
+    let : Algebra (F.obj i.1) (B.obj i) := (τ₀ i).toAlgebra
+    have : Algebra.EssFiniteType (F.obj i.1) (B.obj i) := hτfinite i
+    have : Algebra.EssFiniteType ℤ (F.obj i.1) := hFfinite i.1
+    have : Algebra.EssFiniteType ℤ (B.obj i) :=
+      Algebra.EssFiniteType.comp ℤ (F.obj i.1) (B.obj i)
+    exact countable_of_essFiniteType ℤ (B.obj i)
+  have hDcount (i : {i : I // i₀ ≤ i}) : Countable (D.obj i) := by
+    have := hBcount i
+    obtain ⟨H₀, ⟨e⟩⟩ := hpres i
+    have : Countable ((Fin t → B.obj i) ⧸ LinearMap.range H₀) :=
+      H₀.range.mkQ_surjective.countable
+    exact Countable.of_equiv _ e.toEquiv
+  let E : {i : I // i₀ ≤ i} ⥤ AddCommGrpCat.{v} :=
+    { obj := fun i ↦ AddCommGrpCat.of (Shrink.{v} (D.obj i))
+      map := fun {i j} g ↦ AddCommGrpCat.ofHom
+        (((Shrink.addEquiv.{v} (α := D.obj j)).symm.toAddMonoidHom.comp (D.map g).hom).comp
+          (Shrink.addEquiv.{v} (α := D.obj i)).toAddMonoidHom)
+      map_id := by intro i; ext x; simp
+      map_comp := by intro i j k g h; ext x; simp }
+  let e (i : {i : I // i₀ ≤ i}) : E.obj i ≃ₗ[B.obj i] D.obj i :=
+    Shrink.linearEquiv.{v} (B.obj i) (D.obj i)
+  let ε : E ⟶ (Functor.const _).obj N :=
+    { app := fun i ↦ AddCommGrpCat.ofHom
+        ((eN.toAddMonoidHom.comp (δ.app i).hom).comp (e i).toAddMonoidHom)
+      naturality := by
+        intro i j g
+        ext x
+        dsimp [E, e]
+        simp only [Shrink.linearEquiv, Shrink.addEquiv, Equiv.linearEquiv_apply,
+          Equiv.addEquiv_apply, Equiv.addEquiv_symm_apply, Equiv.apply_symm_apply]
+        change eN ((δ.app j).hom ((D.map g).hom ((e i) x))) =
+          eN ((δ.app i).hom ((e i) x))
+        exact congrArg eN (congrArg (fun k ↦ k.hom ((e i) x)) (δ.naturality g)) }
+  let ν' (i : {i : I // i₀ ≤ i}) : E.obj i →+ N := (ε.app i).hom
+  have hEcol : Nonempty (IsColimit (Cocone.mk N ε)) := by
+    let α : E ⋙ AddCommGrpCat.uliftFunctor.{u, v} ≅ D :=
+      NatIso.ofComponents
+        (fun i ↦ (AddEquiv.ulift.trans (e i).toAddEquiv).toAddCommGrpIso)
+        (by
+          intro i j g
+          ext x
+          dsimp [E, e]
+          change (equivShrink.{v} (D.obj j)).symm
+            ((equivShrink.{v} (D.obj j)) ((D.map g).hom
+              ((equivShrink.{v} (D.obj i)).symm x.down))) =
+            (D.map g).hom ((equivShrink.{v} (D.obj i)).symm x.down)
+          exact Equiv.symm_apply_apply _ _)
+    have hcol := (IsColimit.precomposeHomEquiv α (Cocone.mk N' δ)).symm hDcol.some
+    apply Nonempty.intro
+    apply isColimitOfReflects AddCommGrpCat.uliftFunctor.{u, v}
+    apply IsColimit.ofIsoColimit hcol
+    refine Cocone.ext (Iso.refl _) ?_
+    intro i
+    ext x
+    dsimp [α, ε, e, eN, N']
+    change (δ.app i).hom ((equivShrink.{v} (D.obj i)).symm x.down) =
+      ULift.up (((δ.app i).hom ((equivShrink.{v} (D.obj i)).symm x.down)).down)
+    rfl
+  refine ⟨i₀, B, β, hBcol, κ, hκ, hBlocal, hκlocal, hBmap, τ₀, hτlocal,
+    hτfinite, hτcomp, hτnat, E, ε, hEcol, ν', (fun i ↦ inferInstance), ?_, ?_,
+    ?_, ?_, ?_, ?_, ?_⟩
+  · intro i x
+    rfl
+  · intro i y x
+    change eN ((δ.app i).hom ((e i) (y • x))) =
+      κ i y • eN ((δ.app i).hom ((e i) x))
+    rw [← hν, ← hν, (e i).map_smul, hνsmul]
+    exact eN.map_smul _ _
+  · intro i j h y x
+    apply (e j).injective
+    dsimp [E, e]
+    simp only [Shrink.linearEquiv, Shrink.addEquiv, Equiv.linearEquiv_apply,
+      Equiv.addEquiv_apply, Equiv.addEquiv_symm_apply, Equiv.apply_symm_apply,
+      equivShrink_symm_smul]
+    exact hmap i j h y _
+  · intro i
+    have := hfinite i
+    exact Module.Finite.of_surjective (e i).symm.toLinearMap (e i).symm.surjective
+  · intro i
+    obtain ⟨H₀, ⟨e₀⟩⟩ := hpres i
+    exact ⟨H₀, ⟨e₀.trans (e i).symm⟩⟩
+  · intro i j h
+    refine ⟨(htrans i j h).1, ?_⟩
+    let : Algebra (B.obj i) (B.obj j) := (B.map (homOfLE h)).hom.toAlgebra
+    obtain ⟨e₀, he₀⟩ := (htrans i j h).2
+    refine ⟨((e i).baseChange (B.obj i) (B.obj j)).trans (e₀.trans (e j).symm), ?_⟩
+    intro y x
+    apply (e j).injective
+    simp only [LinearEquiv.trans_apply, LinearEquiv.baseChange_tmul,
+      LinearEquiv.apply_symm_apply, he₀, map_smul]
+    dsimp [E, e]
+    simp [Shrink.linearEquiv, Shrink.addEquiv]
+  · intro i
+    refine ⟨(hlimit i).1, ?_⟩
+    let : Algebra (B.obj i) T := (κ i).toAlgebra
+    obtain ⟨e₀, he₀⟩ := (hlimit i).2
+    refine ⟨((e i).baseChange (B.obj i) T).trans (e₀.trans eN), ?_⟩
+    intro y x
+    simp only [LinearEquiv.trans_apply, LinearEquiv.baseChange_tmul, he₀, map_smul]
+    change y • eN (ν i ((e i) x)) = y • eN ((δ.app i).hom ((e i) x))
+    rw [hν]
 
 end RingHom
