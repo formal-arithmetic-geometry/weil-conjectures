@@ -3,26 +3,52 @@
  "blueprint": {
   "is": "sbc-lem-strict-henselian-constant-cohomology",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Constant-sheaf cohomology of a strictly henselian local scheme",
- "statement": "Let $(R,\\mathfrak m)$ be a strictly henselian local ring, let\n$X=\\operatorname{Spec}R$, and let $A$ be a finite constant sheaf of\norder invertible in $R$. Then\n\n$$\nH^q(X_{\\Et},A)=\\begin{cases}A,&q=0,\\\\0,&q>0,\\end{cases}\n$$\n\nfor the etale cohomology of [def-weil-pbc-etale-cohomology].",
+ "statement": "Let $(R,\\mathfrak m)$ be a strictly henselian local ring [def-weil-pbc-henselian-terminology], let $X=\\operatorname{Spec}R$ [def-pc-scheme], and let $A$ be a finite abelian group whose order is invertible in $R$. Write $\\underline A$ for the associated constant étale sheaf [def-weil-pbc-constant-sheaf]. Then\n\n$$\nH^q(X_{\\mathrm{Et}},\\underline A)=\\begin{cases}A,&q=0,\\\\0,&q>0,\\end{cases}\n$$\n\nfor étale cohomology [def-weil-pbc-etale-cohomology].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-strict-henselian-constant-cohomology.md",
   "place": "node sbc-lem-strict-henselian-constant-cohomology, order 1441"
  },
  "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-etale-cohomology"
  ],
  "proof": [
   {
-   "text": "A finite etale cover of $\\operatorname{Spec}R$ is trivial: $R$ being\nstrictly henselian, every finite etale $R$-algebra is a finite product\nof copies of $R$ (the Hensel property and connectedness of\n$\\operatorname{Spec}R$). Hence the etale site of $X$ is contractible\nfor finite coefficients of order invertible in $R$, and the constant\nsheaf $A$ is the pullback of the constant sheaf on a point:\n$H^q(X_{\\Et},A)=H^q(\\mathrm{pt},A)$, zero for $q>0$ and $A$ for\n$q=0$ (*reference: Stacks Project, Etale Cohomology: the\ncohomology of a constant sheaf on a strictly henselian local scheme*).",
-   "uses": [],
-   "elementary": null
+   "text": "For $q>0$, write $q=n+1$ with $n\\ge0$. The constant sheaf $\\underline A$ is an abelian étale sheaf. Apply the vanishing clause of [lem-weil-pbc-strictly-henselian-etale-acyclic] with $S=X$, $\\mathcal F=\\underline A$ and $p=q\\ge1$ to obtain $H^q(X_{\\mathrm{Et}},\\underline A)=0$.",
+   "uses": [
+    "lem-weil-pbc-strictly-henselian-etale-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-strict-henselian-constant-cohomology.md",
+    "place": "## Proof, vanishing for q>0"
+   }
+  },
+  {
+   "text": "For $q=0$, apply [lem-sbc-strict-henselian-constant-hzero] to the abelian group $A$; it gives the canonical identification $H^0(X_{\\mathrm{Et}},\\underline A)\\simeq A$.",
+   "uses": [
+    "lem-sbc-strict-henselian-constant-hzero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-strict-henselian-constant-cohomology.md",
+    "place": "## Proof, degree zero"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-strictly-henselian-etale-acyclic",
+  "lem-sbc-strict-henselian-constant-hzero"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-strict-henselian-constant-cohomology.md",
@@ -30,7 +56,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -54,5 +80,29 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-rem-rest"
+ "unit": "sk-rem-rest",
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "sbc-lem-strict-henselian-constant-cohomology",
+  "worker": "stage1",
+  "summary": "Combine the existing strictly-henselian étale acyclicity node with the closed degree-zero constant-sheaf equivalence in StrictlyHenselian.lean. Reuse the existing general vanishing statement rather than creating a duplicate; retain the finite abelian and invertible-order hypotheses of the master statement.",
+  "blueprint": "The two proof steps realize the blueprint proof paragraph's positive-degree and degree-zero clauses.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strictly-henselian-etale-acyclic",
+    "why": "Generic strict-local vanishing for abelian étale sheaves supplies the positive-degree calculation requested here; sk-rem-rest has no separate existing acyclicity theorem. This preserves the strict-henselian cohomology route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strictly-henselian-etale-acyclic"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-614dd01b8",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-614dd01b8 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited sources. Verified both cases against Stacks 03QO and StrictlyHenselian.lean, including saved sorry-free closure evidence. Reused existing general acyclicity node, corrected attribution and degree-zero source metadata. Repairs and concrete checks are in review.md and fixes/.; 2 file(s) fixed by the reviewer"
+ }
 }
