@@ -41,9 +41,103 @@
   "def-weil-finite-type-morphism",
   "def-weil-quasi-separated-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a geometric point $\\bar x$ of $X$, and put $\\bar s=f\\bar x$, $A=S_{(\\bar s)}\\times_S T$ and $B=X_{(\\bar x)}\\times_S T$. The projection $h:Y\\to X$ is quasi-compact and quasi-separated by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence], applied to the base change of $g$. Clause (3) of [lem-weil-pbc-strict-henselization-functoriality] gives $u:X_{(\\bar x)}\\to S_{(\\bar s)}$ over $S$; base change gives $v=u\\times_S\\mathrm{id}_T:B\\to A$. The fibre-product universal property [def-pc-fibre-product] identifies $Y\\times_X X_{(\\bar x)}$ with $B$: both have precisely a compatible map to $T$ and to $X_{(\\bar x)}$. Under this identification the coefficient sheaf is the inverse image of $F$ by $B\\to T$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZU, lemma-base-change-f-star-general-stalks, proof; Tag 03Q9, theorem-higher-direct-images; Tag 03Q8, lemma-higher-direct-images"
+   }
+  },
+  {
+   "text": "Write $\\alpha:f^{-1}R^qg_*F\\to R^qh_*e^{-1}F$. The inverse-image stalk isomorphism [lem-weil-pbc-inverse-image-stalk-germ] identifies its source at $\\bar x$ with $(R^qg_*F)_{\\bar s}$. Apply [lem-weil-pbc-unrestricted-strict-henselization-stalk] first to $g,F,\\bar s$, and then to $h,e^{-1}F,\\bar x$. The hypotheses hold for $g$ by assumption and for $h$ by step 1. This gives invertible canonical restriction maps $a:(f^{-1}R^qg_*F)_{\\bar x}\\to H^q(A,F)$ and $b:(R^qh_*e^{-1}F)_{\\bar x}\\to H^q(B,F)$. These are the canonical maps defined in [def-weil-pbc-strict-henselization-restriction], not arbitrary isomorphisms of the two groups. No torsion assumption on $F$ is needed.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+    "def-weil-pbc-strict-henselization-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZU, lemma-base-change-f-star-general-stalks, proof; Tag 03Q9, theorem-higher-direct-images; Tag 03Q8, lemma-higher-direct-images"
+   }
+  },
+  {
+   "text": "Compute $\\alpha_{\\bar x}$ on neighbourhood representatives. By [sbc-lem-higher-direct-image-presheaf] and the canonical stalk isomorphism for sheafification [lem-weil-pbc-sheafification-geometric-stalk], the stalk $(R^qg_*F)_{\\bar s}$ is represented by classes $\\xi\\in H^q(T\\times_S V,F)$ on pointed etale neighbourhoods $(V,\\bar v)$ of $\\bar s$; the target stalk is represented by $H^q(Y\\times_X W,e^{-1}F)$ on pointed neighbourhoods $(W,\\bar w)$ of $\\bar x$ [def-weil-pbc-geometric-stalks]. By [lemma-weil-pbc-affine-neighbourhood-cofinal], choose $V$ affine and take $W$ to be an affine open neighbourhood of the image of $(\\bar v,\\bar x)$ in $V\\times_S X$; write $w:W\\to V$ for its projection. The chosen point factors through this open, and restricting to it preserves the germ. The source germ is sent to this induced neighbourhood by the germ equation of [lem-weil-pbc-inverse-image-stalk-germ]. The map of cohomology classes there is pullback along $T\\times_S W\\to T\\times_S V$. Here is the resolution calculation identifying that map: choose an injective resolution $F\\to I^\\bullet$ on $T$, and a resolution comparison $e^{-1}I^\\bullet\\to J^\\bullet$ on $Y$. By [lem-kun-bc-map-on-cohomology] the exchange is computed by its termwise underived exchange followed by that comparison. The representative formula in [def-weil-pbc-underived-exchange], on the exchanged square, shows that on sections over $W$ the underived exchange sends a section on $T\\times_S V$ to its inverse-image-unit pullback on $T\\times_S W$, and then to $J^\\bullet(T\\times_S W)$. This is exactly the cocycle recipe of [def-weil-pbc-cohomology-pullback]. The restrictions of $I^\\bullet$ and $J^\\bullet$ to these etale objects compute their cohomology, by clause (5) of [lem-weil-pbc-cohomology-pullback-functorial]; its clauses (1) and (2) justify using the chosen comparison. Thus this computes the specified higher exchange, not merely some natural map between its source and target.",
+   "uses": [
+    "sbc-lem-higher-direct-image-presheaf",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-kun-bc-map-on-cohomology",
+    "def-weil-pbc-cohomology-pullback",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-sheafification-geometric-stalk",
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "def-weil-pbc-underived-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZU, lemma-base-change-f-star-general-stalks, proof; Tag 03Q9, theorem-higher-direct-images; Tag 03Q8, lemma-higher-direct-images"
+   }
+  },
+  {
+   "text": "The canonical restrictions $a,b$ send a neighbourhood class to its pullback along the strict-local limit leg. To see the normalization directly, expand [def-weil-pbc-strict-henselization-restriction]: a germ is first restricted by the inverse-image unit along the limit leg, then the degree-$q$ mate is applied and sections are identified by Leray. Apply [lem-kun-bc-map-on-cohomology] also to the strict-local base-change square in that definition. The representative formula of [def-weil-pbc-underived-exchange] evaluates its termwise mate as inverse-image-unit pullback along the limit leg, followed by a resolution comparison on the strict-local fibre product. Clause (2) of [lem-weil-pbc-cohomology-pullback-functorial] permits comparison with a K-injective resolution there; exact sections and the Leray identification are the ones specified in the restriction definition. Thus the termwise computation sends a cocycle to its unit pullback followed by the resolution comparison; the defining recipe of [def-weil-pbc-cohomology-pullback] is exactly that same map. For a representative on $T\\times_S V$ and a compatible affine pointed refinement $W\\to V$ as in step 3, clause (4) of [lem-weil-pbc-strict-henselization-functoriality] says that $X_{(\\bar x)}\\to W\\to V$ equals $X_{(\\bar x)}\\xrightarrow{u}S_{(\\bar s)}\\to V$. Hence the two composites $B\\to T\\times_S W\\to T\\times_S V$ and $B\\xrightarrow{v}A\\to T\\times_S V$ are equal by their projections. Clause (4) of [lem-weil-pbc-cohomology-pullback-functorial] now gives, on this class, $b\\alpha_{\\bar x}(\\xi)=v^*a(\\xi)$, with the canonical inverse-image composition identifications on coefficients. This equality holds for every representative, so the stalk-colimit definition [def-weil-pbc-geometric-stalks] gives $b\\circ\\alpha_{\\bar x}=v^*\\circ a$. This verifies compatibility with the actual pullback map in the statement.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-restriction",
+    "def-weil-pbc-cohomology-pullback",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "def-weil-pbc-geometric-stalks",
+    "lem-kun-bc-map-on-cohomology",
+    "def-weil-pbc-underived-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZU, lemma-base-change-f-star-general-stalks, proof; Tag 03Q9, theorem-higher-direct-images; Tag 03Q8, lemma-higher-direct-images"
+   }
+  },
+  {
+   "text": "Since $a,b$ are isomorphisms, step 4 shows that $\\alpha_{\\bar x}$ is an isomorphism exactly when $v^*$ is. If $\\alpha$ is an isomorphism, every stalk map is an isomorphism simply by applying the stalk functor. Conversely suppose every $v^*$ is an isomorphism. All geometric stalks of $\\alpha$ are then bijective. Apply [lem-weil-pbc-sets-etale-iso-on-geometric-stalks] to its underlying map of sheaves of sets and the family of all geometric points of $X$, whose images cover $X$. It follows that $\\alpha$ is sectionwise bijective. Each inverse is an abelian-group homomorphism (apply the original homomorphism to the proposed sum and use injectivity), and the inverses commute with restriction (apply the original natural map and use injectivity). Thus these inverses give an inverse in abelian sheaves. This proves both implications, including when $X$ is empty.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZU, lemma-base-change-f-star-general-stalks, proof; Tag 03Q9, theorem-higher-direct-images; Tag 03Q8, lemma-higher-direct-images"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+  "def-weil-pbc-strict-henselization-restriction",
+  "sbc-lem-higher-direct-image-presheaf",
+  "def-weil-pbc-geometric-stalks",
+  "lem-kun-bc-map-on-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-sheafification-geometric-stalk",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EZU, lemma-base-change-f-star-general-stalks, proof; Tag 03Q9, theorem-higher-direct-images; Tag 03Q8, lemma-higher-direct-images"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -100,15 +194,109 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-14",
    "verdict": "no match: returned declarations concern structure-sheaf or topological stalks and etale ring maps, not either strict-local etale cohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale higher direct image base change on geometric stalks equals pullback on strict henselization cohomology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TopCat.Presheaf.stalkPullbackHom\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasColimits C] →\\n      {X Y : TopCat} →\\n        (f : X ⟶ Y) →\\n          (F : TopCat.Presheaf C Y) →\\n            (x : ↑X) →\\n              F.stalk ((CategoryTheory.ConcreteCategory.hom f) x) ⟶ ((TopCat.Pre\", \"doc\": \"Given a continuous map $f: X \\\\to Y$ between topological spaces, a presheaf $\\\\mathcal{F}$ on $Y$ with values in a category $\\\\mathcal{C}$, and a point $x \\\\in X$, this defines the canonical morphism from\"}\n  {\"name\": \"TopCat.Presheaf.stalkPullbackInv\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasColimits C] →\\n      {X Y : TopCat} →\\n        (f : X ⟶ Y) →\\n          (F : TopCat.Presheaf C Y) →\\n            (x : ↑X) →\\n              ((TopCat.Presheaf.pullback C f).obj F).stalk x ⟶ F.stalk ((Categor\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, $F$ be a presheaf on $Y$ with values in a category $C$ that has colimits, and $x$ be a point in $X$. This definition constructs the can\"}\n  {\"name\": \"TopCat.Presheaf.stalkPullbackIso\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasColimits C] →\\n      {X Y : TopCat} →\\n        (f : X ⟶ Y) →\\n          (F : TopCat.Presheaf C Y) →\\n            (x : ↑X) →\\n              F.stalk ((CategoryTheory.ConcreteCategory.hom f) x) ≅ ((TopCat.Pre\", \"doc\": \"For any category $\\\\mathcal{C}$ with colimits, topological spaces $X$ and $Y$, a continuous map $f: X \\\\to Y$, a presheaf $\\\\mathcal{F}$ on $Y$, and a point $x \\\\in X$, there is an isomorphism between the\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S) (p : PrimeSpectrum ↑R),\\n  CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.StructureSheaf.toPushforwardStalk f p) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.StructureSheaf.toStalk (↑R) p)\\n      ((TopCat.Presheaf.stalkFunctor CommRingCat p).ma\", \"doc\": \"For a ring homomorphism $ f : R \\to S $ and a point $ p $ in $ \\\\operatorname{Spec}(R) $, the composition of $ f $ with the canonical morphism from $ R $ to the pushforward of the structure sheaf on $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: topological presheaf stalks, definitions of site cohomology, and etale ring/scheme morphisms do not state the strict-local cohomology exchange criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of abelian sheaves on the small etale site are computed by cohomology over strict henselian local neighborhoods",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          ℕ → CategoryTheory.Functor (CategoryTheory.S\", \"doc\": \"For a fixed natural number $n$, this defines a functor that maps a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups to a presheaf of Ext groups. Specifically, it constructs a functo\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          CategoryTheory.Sheaf J AddCommGrpCat → ℕ → C\", \"doc\": \"For a fixed natural number $n$ and a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups, the cohomology presheaf is a contravariant functor $\\\\mathcal{C}^\\\\text{op} \\\\to \\\\text{AddCommGrp\"}\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"CategoryTheory.Functor.op_comp_isSheaf_of_preservesOneHypercovers\", \"module\": \"Mathlib/CategoryTheory/Sites/Continuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (F : CategoryTheory.Functor C D) {A : Type u} [inst_2 : CategoryTheory.Category.{t, u} A]\\n  (J : CategoryTheory.GrothendieckTopology C) (K : CategoryTheory.GrothendieckTopology D\", \"doc\": \"If a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ preserves one-step hypercovers with respect to Grothendieck topologies $ J $ on $ \\\\mathcal{C} $ and $ K $ on $ \\\\mathcal{D} $, and $ J $ is generated by\"}\n  {\"name\": \"CategoryTheory.Sheaf.instAddCommGroupH\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (F : CategoryTheory.Sheaf J AddCommGrpCat) →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [inst_2 : CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommG\", \"doc\": \"For any natural number $ n $, the $ n $-th sheaf cohomology group $ H^n(F) $ of a sheaf $ F $ is equipped with a canonical additive commutative group structure. This follows from the abelian category \"}\n  {\"name\": \"LightProfinite.instWEqualsLocallyBijectiveCoherentTopology\", \"module\": \"Mathlib/Condensed/Light/Instances\", \"type\": \"∀ (A : Type u') [inst : CategoryTheory.Category.{u, u'} A] [CategoryTheory.Limits.HasLimits A]\\n  [CategoryTheory.Limits.HasColimits A] {FA : A → A → Type v} {CA : A → Type u}\\n  [inst_3 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] [inst_4 : CategoryTheory.ConcreteCategory A FA]\\n  [CategoryTheory.Lim\", \"doc\": \"The coherent Grothendieck topology on the category of compact Hausdorff, totally disconnected, second-countable topological spaces (light profinite spaces) satisfies the locally bijective condition. S\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: topological presheaf stalks, definitions of site cohomology, and etale ring/scheme morphisms do not state the strict-local cohomology exchange criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"cohomology\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match: topological presheaf stalks, definitions of site cohomology, and etale ring/scheme morphisms do not state the strict-local cohomology exchange criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*hensel.*cohom|cohom.*strict.*hensel",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match: topological presheaf stalks, definitions of site cohomology, and etale ring/scheme morphisms do not state the strict-local cohomology exchange criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of etale higher direct images is detected by cohomology of strict local schemes",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-smooth-local-acyclicity",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-exchange-strict-local-cohomology",
+  "worker": "stage1",
+  "summary": "Checked Tag 0EZU with 03Q9 and 03Q8. Reused the unrestricted abelian-sheaf strict-local formula, inverse-image germ compatibility and qcqs base-change permanence. Expanded the exchange/pullback compatibility on pointed-neighbourhood cocycles, then applied the existing geometric-stalk isomorphism criterion. No new nodes or statement changes.",
+  "blueprint": "Constructibility clause of thm-weil-pbc-direct-image-finiteness-proper, through the recorded 0GL0 -> 0GKW -> 0GKV(a) -> 0GKD -> 0GJQ -> 0EZU ingredient; supplies strict-local testing to lem-weil-pbc-smooth-local-acyclicity.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Definition used to identify the actual objects or maps in the strict-local computation; no alternate unit route."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic inverse-image geometric-stalk isomorphism including its unit/germ normalization identifies the source stalk and its representatives."
+   },
+   {
+    "node": "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+    "why": "Generic Tag 03Q9 stalk formula for arbitrary abelian sheaves is needed twice; the torsion-only formula is insufficient and this unit has no unrestricted replacement."
+   },
+   {
+    "node": "def-weil-pbc-strict-henselization-restriction",
+    "why": "Specifies the canonical strict-local comparison map whose normalization is checked; no alternate proper-base-change argument is imported."
+   },
+   {
+    "node": "sbc-lem-higher-direct-image-presheaf",
+    "why": "Generic Tag 03Q8 description supplies cohomology representatives of stalk elements, a site tool not a replacement for the unit route."
+   },
+   {
+    "node": "lem-kun-bc-map-on-cohomology",
+    "why": "Generic injective-resolution normalization of degreewise exchange identifies the specified map with the computed section pullback."
+   },
+   {
+    "node": "def-weil-pbc-cohomology-pullback",
+    "why": "Definition used to identify the actual objects or maps in the strict-local computation; no alternate unit route."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-functorial",
+    "why": "Generic independence, etale restriction, and composition for cohomological pullback justify the cocycle computation and its two equal composites."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+  "def-weil-pbc-strict-henselization-restriction",
+  "sbc-lem-higher-direct-image-presheaf",
+  "lem-kun-bc-map-on-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-cohomology-pullback-functorial"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-4cc9d2e1e",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-4cc9d2e1e (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, and source passages. Verified 0EZU hypotheses, unrestricted abelian coefficients, canonical exchange/pullback compatibility in all five steps, unit/chapter route, dependency acyclicity, and edge cases. No new nodes or repairs. Detailed checks and accepted tool uses are recorded in review.md."
+ }
 }
