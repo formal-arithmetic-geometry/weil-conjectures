@@ -1,0 +1,156 @@
+{
+ "id": "lem-pc-derived-adjunction-normalization-unique",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine global Hom comparison: normalize pullback adjunctions using the original derived counit",
+   "via": [
+    "def-pc-affine-global-hom-base-change-map",
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Uniqueness of an adjunction with a fixed representative Hom formula",
+ "statement": "Let C,D,H,J be arbitrary categories, T:C→D and U:D→C with adjunction b:T⊣U, Q:C→H and P:D→J, L:H→J and R:J→H. Fix natural transformations ε:Q⋙L→T⋙P and β:U⋙Q→P⋙R and a morphism property W on D. Assume P localizes W and R⋙L is right derived from U⋙Q⋙L with unit β whiskered by L followed by the associator. If adjunctions a,a′:L⊣R both satisfy a.homEquiv(QM,PK)(ε_M;P(t))=Q(b.homEquiv(M,K)(t));β_K for all M,K,t:T(M)→K, then a=a′. No abelian or scheme assumptions are required.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 09T5 (derived adjunctions and universal properties); cohomology.tex Tag 06YJ (derived pullback). The normalization-uniqueness calculation is supplied explicitly by F2."
+ },
+ "proof": [
+  {
+   "text": "Apply each Hom formula to t=b.counit_K at M=U(K). The underived right triangle identity says its transpose is identity. Applying inverse transposition gives L(β_K);a.counit_(PK)=ε_(UK);P(b.counit_K), and the same equation for a′.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "These equations say the two counits have equal precomposition with the specified unit for R⋙L. Use the right-derived universal property (rightDerived_ext) to equate the counit natural transformations, then Adjunction.ext_counit to equate the adjunctions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "date": "2026-10-14",
+  "note": "Explicit triangle-identity and right-derived-extensionality proof; no unproved auxiliary result added."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A derived adjunction is uniquely determined by compatibility of its Hom equivalence with the original adjunction and the derived unit and counit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ext_counit",
+   "results": "CategoryTheory.Adjunction.ext_counit",
+   "date": "2026-10-14",
+   "verdict": "Generic adjunction APIs found; no matching normalization uniqueness or scheme counit transport theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived adjunction normalized to a fixed left derived functor counit natural transformation",
+   "results": "CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη_fac_app",
+   "date": "2026-10-14",
+   "verdict": "Generic adjunction APIs found; no matching normalization uniqueness or scheme counit transport theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rg homEquiv|ext_counit Mathlib/CategoryTheory/Adjunction/Basic.lean and Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; rg adjunction uniqueness and original transport in dag/nodes and lean/Sheaf",
+   "results": "Read derived and derived' constructors, ext_counit and ofNatIsoLeft Hom formulas. Existing GlobalHomOriginalCounitNormalization gives the counit iso and its factorization, but no adjunction equality.",
+   "date": "2026-10-14",
+   "verdict": "No existing theorem with this normalization statement."
+  },
+  {
+   "tool": "grep",
+   "query": "Second reading: rg ext_counit|rightDerived_ext|homEquiv_ofNatIsoLeft|derived.*unique in Mathlib/CategoryTheory, lean/WeilConjectures and lean/Sheaf; read WeilConjectures/Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "results": "Found Adjunction.derived_eq_ofNatIsoLeft upstream. It compares the specific Mathlib derived constructors and assumes both absolute left and right derived properties. It does not compare arbitrary adjunction witnesses selected by exists_schemeDerivedAdjunction. The generic normalization theorem proves uniqueness for those witnesses with only the absolute right-derived assumption.",
+   "verdict": "Related transport theorem, not a duplicate of either new declaration.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "derived_eq_ofNatIsoLeft|ext_counit|rightDerived_ext",
+   "results": "Found rightDerived_ext, the existing Mathlib derived-counit proof and ext_counit. Reading these and upstream derived_eq_ofNatIsoLeft confirms they are the primitives or constructor-specific results, not duplicates of the new normalization theorem.",
+   "date": "2026-10-14",
+   "verdict": "No duplicate or shorter applicable theorem; final independent second reading."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of two adjunction structures from equality of their transposition maps on representatives of a localization",
+   "results": "Eight results concern localization adjunctions, fully faithful adjoints and leftAdjointUniq. The latter supplies a natural isomorphism, not equality of adjunctions under the fixed representative equation.",
+   "date": "2026-10-14",
+   "verdict": "No duplicate or shorter applicable theorem; final independent second reading."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": "Nine results are Mathlib derived-adjunction constructors and their unit/counit formulas; none equates arbitrary normalized adjunction structures.",
+   "date": "2026-10-14",
+   "verdict": "No duplicate or shorter applicable theorem; final independent second reading."
+  }
+ ],
+ "mathlib_match": null,
+ "merged_into": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap",
+  "date": "2026-10-14",
+  "group": "F2"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.AdjunctionNormalization",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/AdjunctionNormalization.lean",
+  "declaration": "CategoryTheory.Adjunction.eq_of_normalization",
+  "statement": "theorem eq_of_normalization (b : T ⊣ U) (a a' : L ⊣ R) (Q : C ⥤ H) (P : D ⥤ J) (ε : Q ⋙ L ⟶ T ⋙ P) (β : U ⋙ Q ⟶ P ⋙ R) (W : MorphismProperty D) [P.IsLocalization W] [(R ⋙ L).IsRightDerivedFunctor (Functor.whiskerRight β L ≫ (Functor.associator P R L).hom) W] (ha : ∀ M K (t : T.obj M ⟶ K), a.homEquiv (Q.obj M) (P.obj K) (ε.app M ≫ P.map t) = Q.map (b.homEquiv M K t) ≫ β.app K) (ha' : ∀ M K (t : T.obj M ⟶ K), a'.homEquiv (Q.obj M) (P.obj K) (ε.app M ≫ P.map t) = Q.map (b.homEquiv M K t) ≫ β.app K) : a = a'",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-d7209",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261014T120308-L-2450025",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-d7209",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261014T120308-L-2450025",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three node records, the declared transport change, unchanged baseline interfaces, repaired search records, and successful delivery/importer compilation and axiom checks."
+ }
+}

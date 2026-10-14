@@ -16,6 +16,8 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import Sheaf.Algebra.Homology.ExtensionKFlatQuasiIso
+public import Sheaf.AlgebraicGeometry.GlobalHomOriginalCounitNormalization
+import Sheaf.AlgebraicGeometry.OriginalCounitAdjunctionTransport
 import Sheaf.AlgebraicGeometry.NormalizedInternalHomPullbackComparison
 import Sheaf.AlgebraicGeometry.AffineSectionsPushforwardNormalization
 
@@ -158,6 +160,82 @@ def canonicalPullbackAdjunction {T S : Scheme.{u}} (g : T ⟶ S) :
     ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) g)
     ((Classical.choose (Classical.choose_spec
       (Classical.choose_spec exists_derivedPullbackComposition))) g))
+
+omit [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)] in
+/-- The legacy pullback adjunction is the original-counit adjunction transported
+back along the unique change of universal counit. Proof: both legacy entry points
+select the same normalized adjunction. Apply the proved scheme-level transport.
+Source: Stacks Project, Cohomology, Tag 06YJ; Derived Categories, Tag 09T5
+(blueprint: def-pc-affine-global-hom-base-change-map). -/
+theorem canonicalPullbackAdjunction_eq_original_transport {T S : Scheme.{u}} (g : T ⟶ S) :
+    canonicalPullbackAdjunction g =
+      (schemeHomOriginalPullbackAdjunction g).ofNatIsoLeft
+        (schemeHomPullbackCounitIso g).symm := by
+  exact schemeHomPullbackAdjunction_eq_original_transport g
+
+attribute [local irreducible] canonicalPullbackAdjunction
+  schemeHomOriginalPullbackAdjunction schemeHomPullbackCounitIso
+
+omit [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)] in
+/-- Changing the universal counit transports the pullback-adjunction unit.
+Proof: use the proved change-of-adjunction equation and the unit formula for
+transport along an isomorphism of left adjoints.
+Source: Stacks Project, Cohomology, Tag 06YJ; Derived Categories, Tag 09T5
+(blueprint: def-pc-affine-global-hom-base-change-map). -/
+theorem canonicalPullbackAdjunction_unit_original {T S : Scheme.{u}} (g : T ⟶ S)
+    (A : schemeDerivedCategory S) :
+    (canonicalPullbackAdjunction g).unit.app A =
+      (schemeHomOriginalPullbackAdjunction g).unit.app A ≫
+        (schemeDerivedDirectImage g).map ((schemeHomPullbackCounitIso g).inv.app A) := by
+  rw [canonicalPullbackAdjunction_eq_original_transport]
+  rfl
+
+omit [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)] in
+/-- Changing the universal counit transports the pullback-adjunction counit.
+Proof: use the proved change-of-adjunction equation and the counit formula for
+transport along an isomorphism of left adjoints.
+Source: Stacks Project, Cohomology, Tag 06YJ; Derived Categories, Tag 09T5
+(blueprint: def-pc-affine-global-hom-base-change-map). -/
+theorem canonicalPullbackAdjunction_counit_original {T S : Scheme.{u}} (g : T ⟶ S)
+    (B : schemeDerivedCategory T) :
+    (canonicalPullbackAdjunction g).counit.app B =
+      (schemeHomPullbackCounitIso g).hom.app ((schemeDerivedDirectImage g).obj B) ≫
+        (schemeHomOriginalPullbackAdjunction g).counit.app B := by
+  rw [canonicalPullbackAdjunction_eq_original_transport]
+  rfl
+
+omit [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)] in
+/-- Forward transposition under the legacy adjunction inserts the inverse change
+of universal counit on its pullback input.
+Proof: substitute the change-of-adjunction equation in the Hom equivalence and
+apply Mathlib's formula for transporting an adjunction along its left functor.
+Source: Stacks Project, Cohomology, Tag 06YJ; Derived Categories, Tag 09T5
+(blueprint: def-pc-affine-global-hom-base-change-map). -/
+theorem canonicalPullbackAdjunction_homEquiv_original {T S : Scheme.{u}} (g : T ⟶ S)
+    (A : schemeDerivedCategory S) (B : schemeDerivedCategory T)
+    (f : (derivedPullback g).obj A ⟶ B) :
+    (canonicalPullbackAdjunction g).homEquiv A B f =
+      (schemeHomOriginalPullbackAdjunction g).homEquiv A B
+        ((schemeHomPullbackCounitIso g).inv.app A ≫ f) := by
+  rw [canonicalPullbackAdjunction_eq_original_transport]
+  exact Adjunction.homEquiv_ofNatIsoLeft_apply _ _ f
+
+omit [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)] in
+/-- Inverse transposition under the legacy adjunction inserts the change of
+universal counit on its pullback input.
+Proof: substitute the change-of-adjunction equation in the inverse Hom equivalence
+and apply Mathlib's inverse formula for transporting an adjunction.
+Source: Stacks Project, Cohomology, Tag 06YJ; Derived Categories, Tag 09T5
+(blueprint: def-pc-affine-global-hom-base-change-map). -/
+theorem canonicalPullbackAdjunction_homEquiv_symm_original
+    {T S : Scheme.{u}} (g : T ⟶ S)
+    (A : schemeDerivedCategory S) (B : schemeDerivedCategory T)
+    (f : A ⟶ (schemeDerivedDirectImage g).obj B) :
+    ((canonicalPullbackAdjunction g).homEquiv A B).symm f =
+      (schemeHomPullbackCounitIso g).hom.app A ≫
+        ((schemeHomOriginalPullbackAdjunction g).homEquiv A B).symm f := by
+  rw [canonicalPullbackAdjunction_eq_original_transport]
+  exact Adjunction.homEquiv_ofNatIsoLeft_symm_apply _ _ f
 
 set_option linter.unusedSectionVars false in
 -- Retain the original module-category instance in the public theorem signature.
@@ -347,7 +425,8 @@ theorem exists_globalHomPullbackComparison
             (pullback f g).toRingedSpace.sheaf).obj
               (op ((derivedPullback (pullback.fst f g)).obj M),
                 (derivedPullback (pullback.fst f g)).obj K)) := by
-  let a := canonicalPullbackAdjunction (pullback.fst f g)
+  let a := (schemeHomOriginalPullbackAdjunction (pullback.fst f g)).ofNatIsoLeft
+    (schemeHomPullbackCounitIso (pullback.fst f g)).symm
   let bS := canonicalTensorHomAdjunction X
   let bT := canonicalTensorHomAdjunction (pullback f g)
   have hS : IsCanonicalDerivedTensorHom X
@@ -378,7 +457,9 @@ theorem exists_globalHomPullbackComparison
           (pullback f g).toRingedSpace.sheaf).obj
             (op ((derivedPullback (pullback.fst f g)).obj M),
               (derivedPullback (pullback.fst f g)).obj K)),
-    a, bS, bT, t, γ, s, c, rfl, (fun _ => rfl), (fun _ => rfl), ht, hγ, hs, hc, rfl⟩
+    a, bS, bT, t, γ, s, c,
+    (canonicalPullbackAdjunction_eq_original_transport (pullback.fst f g)).symm,
+    (fun _ => rfl), (fun _ => rfl), ht, hγ, hs, hc, rfl⟩
 
 /-- Restricted global sections of gamma followed by the canonical pushforward comparison.
 The chosen phi satisfies all equations of exists_globalHomPullbackComparison.
