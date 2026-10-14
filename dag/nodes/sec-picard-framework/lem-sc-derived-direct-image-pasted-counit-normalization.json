@@ -1,0 +1,139 @@
+{
+ "id": "lem-sc-derived-direct-image-pasted-counit-normalization",
+ "kind": "statement",
+ "title": "Pasted derived units counit normalization",
+ "statement": "Fix the unbounded derived categories of O-module sheaves on every scheme [def-pc-derived-category]. Let f:X→Y and g:Y→Z be scheme morphisms [def-pc-scheme], and K a homotopy complex of O_X-modules. Write T(s) and U(s) for homotopy tensor pullback and direct image; b(s) for the homotopy adjunction induced by the choice in [lem-pc-module-pullback-adjunction]; epsilon(s) for the selected left-derived counit in [lem-pc-ringed-spaces-derived-pullback-composition]; beta(s) for the recorded right-derived unit [def-pc-ringed-spaces-derived-direct-image]; and a(s) for the pinned derived adjunction [lem-pc-global-hom-adjunction, def-pc-derived-base-change-map]. Put H=U(f)K and M=U(g)H. Then Lg*⋙Lf* applied to beta(g)_H followed by Rg*(beta(f)_K), followed by the counit of a(g).comp(a(f)) at QK, equals Lf*(epsilon(g)_M followed by Q(b(g).counit_H)), followed by epsilon(f)_H and Q(b(f).counit_K). The common expression is the concrete morphism named in [def-sc-derived-composition-counit-apex]. Equivalently, applying the composite derived Hom equivalence to that explicit expression gives the pasted derived units; the Lean statement records this forward form.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-global-hom-adjunction",
+  "def-pc-derived-base-change-map",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-sc-derived-composition-counit-apex",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W, 0D5S and 0D5T; counit normalization subcalculation in lem-sc-derived-pullback-composition-mate-unit. Official tag pages read online on 2026-10-14."
+ },
+ "proof": [
+  {
+   "text": "For each of f and g, evaluate the pinned Hom normalization at its underived counit. The right triangle identity identifies the underived adjunct with the identity. Apply the inverse Hom equivalence to obtain the individual derived counit factorization. This is the private proved counit_of_normalization helper.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-global-hom-adjunction",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the composite-adjunction counit and the functorial image of the pasted units. Naturality of the g-counit moves Rg(beta(f)) through it. Regroup Lf-images, substitute the g-factorization and then the f-factorization. The private pasted_counit helper proves these formal rewrites.",
+   "uses": [
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply injectivity of the inverse derived Hom equivalence to express the resulting counit equation in the forward Hom-equivalence form. Its inverse-forward law gives the asserted equality.",
+   "uses": [
+    "def-sc-derived-composition-counit-apex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-sc-derived-composition-counit-apex",
+  "lem-pc-global-hom-adjunction",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F4",
+  "date": "2026-10-14",
+  "note": "Agent expansion of the corresponding counit subcalculation of the parent proof, following the cited Stacks adjunction and composition results."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compatibility of derived pullback composition with adjunction counits and pasted derived units",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "counit of a composite derived adjunction applied to pasted right derived functor units",
+   "results": "Generic derived counit and unit factorization results, including Adjunction.derivedε_fac_app; none states the pinned scheme composition calculation.",
+   "date": "2026-10-14",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"comp_counit_app\" and \"conjugateEquiv_counit\"",
+   "results": "Adjunction.comp_counit_app and conjugateEquiv_counit_symm supply formal identities; no exact pinned normalization.",
+   "date": "2026-10-14",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "comp_counit_app|conjugateEquiv_counit_symm|derivedε_fac_app|composition_counit_normalization",
+   "results": "Grep of Mathlib/CategoryTheory finds Adjunction.comp_counit_app, conjugateEquiv_counit_symm and derivedε_fac_app. They give generic identities, but no explicit pinned scheme normalization. Also searched lean/Sheaf, lean/WeilConjectures and dag/nodes/sec-picard-framework.",
+   "date": "2026-10-14",
+   "verdict": "no existing exact statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackCompositionMateUnit",
+  "date": "2026-10-14",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Counit subcalculation of lem-sc-derived-pullback-composition-mate-unit.",
+   "via": [
+    "lem-sc-derived-pullback-composition-mate-unit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedDirectImagePastedCounitNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedDirectImagePastedCounitNormalization.lean",
+  "declaration": "AlgebraicGeometry.derivedDirectImage_pasted_counit_normalization",
+  "statement": "theorem derivedDirectImage_pasted_counit_normalization\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n      (ComplexShape.up ℤ)) :\n    ((schemeHomPullbackAdjunction.{u, w} g).comp\n      (schemeHomPullbackAdjunction.{u, w} f)).homEquiv\n        (((RingedSpace.moduleDirectImage (f ≫ g).toLRSHom.toShHom).mapHomotopyCategory\n          (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).obj K) (DerivedCategory.Qh.obj K)\n        (derivedCompositionCounitApex f g K) =\n      (RingedSpace.moduleDirectImage g.toLRSHom.toShHom).rightDerivedFunctorUnit.app\n        (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomotopyCategory\n          (ComplexShape.up ℤ)).obj K) ≫\n      (schemeDerivedDirectImage g).map\n        ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app K)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8d3ab",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261014T040539-L-999793",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8d3ab",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261014T040539-L-999793",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures and counit calculations with the nodes and pinned constructions; all four modules and direct importer DerivedDirectImageSquareMate compile cleanly; axiom checks match the single documented sorry."
+ }
+}

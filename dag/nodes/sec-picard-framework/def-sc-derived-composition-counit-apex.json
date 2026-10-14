@@ -1,0 +1,104 @@
+{
+ "id": "def-sc-derived-composition-counit-apex",
+ "kind": "definition",
+ "title": "Explicit pasted localized underived counit",
+ "statement": "For scheme morphisms f:X→Y and g:Y→Z and a homotopy complex K on X, define the explicit morphism from Lf Lg Q(Ug Uf K) to QK to be Lf(epsilon(g) at Ug Uf K followed by Q of the underived g-counit at Uf K), followed by epsilon(f) at Uf K and Q of the underived f-counit at K. The counits and adjunctions are the already selected data of [lem-pc-ringed-spaces-derived-pullback-composition] and [lem-pc-module-pullback-adjunction]. This is a concrete composition, not an existentially chosen object.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W, 0D5S and 0D5T: explicit counit composition used in the parent normalization."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F4",
+  "date": "2026-10-14",
+  "note": "Concrete construction; construction equation is reflexivity. Naming this morphism avoids repeated elaboration of the selected counit data."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compatibility of derived pullback composition with adjunction counits and pasted derived units",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "counit of a composite derived adjunction applied to pasted right derived functor units",
+   "results": "Generic derived counit and unit factorization results, including Adjunction.derivedε_fac_app; none states the pinned scheme composition calculation.",
+   "date": "2026-10-14",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"comp_counit_app\" and \"conjugateEquiv_counit\"",
+   "results": "Adjunction.comp_counit_app and conjugateEquiv_counit_symm supply formal identities; no exact pinned normalization.",
+   "date": "2026-10-14",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "comp_counit_app|conjugateEquiv_counit_symm|derivedε_fac_app|composition_counit_normalization",
+   "results": "Grep of Mathlib/CategoryTheory finds Adjunction.comp_counit_app, conjugateEquiv_counit_symm and derivedε_fac_app. They give generic identities, but no explicit pinned scheme normalization. Also searched lean/Sheaf, lean/WeilConjectures and dag/nodes/sec-picard-framework.",
+   "date": "2026-10-14",
+   "verdict": "no existing exact statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackCompositionMateUnit",
+  "date": "2026-10-14",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Counit subcalculation of lem-sc-derived-pullback-composition-mate-unit.",
+   "via": [
+    "lem-sc-derived-pullback-composition-mate-unit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedCompositionCounitApex",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedCompositionCounitApex.lean",
+  "declaration": "AlgebraicGeometry.derivedCompositionCounitApex",
+  "statement": "def derivedCompositionCounitApex\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n      (ComplexShape.up ℤ)) :\n    (derivedPullback g ⋙ derivedPullback f).obj\n      (DerivedCategory.Qh.obj\n        (((Scheme.Modules.pushforward g).mapHomotopyCategory (ComplexShape.up ℤ)).obj\n          (((Scheme.Modules.pushforward f).mapHomotopyCategory (ComplexShape.up ℤ)).obj K))) ⟶\n      DerivedCategory.Qh.obj K",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8d3ab",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261014T040539-L-999793",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8d3ab",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261014T040539-L-999793",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures and counit calculations with the nodes and pinned constructions; all four modules and direct importer DerivedDirectImageSquareMate compile cleanly; axiom checks match the single documented sorry."
+ }
+}

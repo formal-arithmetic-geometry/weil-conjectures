@@ -14458,3 +14458,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:03 L: batch 20261014T035541 dependency take-out
 - 04:05 L: merged deliver/D4/Sheaf.AlgebraicGeometry.TensorBoundaryKernelMapLocalMultiplication (stage 3; reviewer PASS; first push; landing 20261014T040538-L-999397 (interface); batch 20261014T040537; modules 3; new nodes 2)
 - 04:05 L: merged deliver/E4/Sheaf.Paper.CechPushforwardLambdaColumns (stage 3; reviewer PASS; first push; landing 20261014T040539-L-999522 (proof); batch 20261014T040537; modules 1; new nodes 0)
+- 04:05 L: merged deliver/F4/Sheaf.AlgebraicGeometry.DerivedPullbackCompositionMateUnit (stage 3; reviewer PASS; first push; landing 20261014T040539-L-999793 (interface); batch 20261014T040537; modules 4; new nodes 3; change records: coord/changes/derived-pullback-composition-mate-proof-scope.md)

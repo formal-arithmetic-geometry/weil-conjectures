@@ -17,50 +17,29 @@
  },
  "proof": [
   {
-   "text": "Let ε be the left-derived counits selected with p. The factorization equation for p says that Q(p.hom) followed by ε(fg) equals the successive ε(g) and ε(f), followed by the homotopy image of the underived tensor-pullback composition comparison.",
+   "text": "Compute the transpose of beta(fg) followed by the mate of p by the conjugate counit identity and naturality of p. The chosen-comparison counit normalization identifies it with the explicit pasted underived counits.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-sc-derived-pullback-composition-counit-normalization"
    ],
    "elementary": false
   },
   {
-   "text": "The Hom equivalence normalization of the pinned a(t) identifies the mate, across localization, of ε(t) with the recorded right-derived unit β(t). Indeed evaluate the normalization at the underived counit; the underived adjunct of that counit is the identity. Paste the two resulting mate squares for g and f. Mathlib mateEquiv_hcomp identifies their mate with the pasted β(g) and Rg*(β(f)).",
+   "text": "A private formal mate calculation identifies the composite unit followed by the mate with the forward composite Hom equivalence of the chosen-comparison transpose. Substitute the chosen-comparison normalization, then the proved forward pasted-unit normalization. Transitivity gives the unit equation.",
    "uses": [
-    "def-pc-derived-base-change-map",
-    "lem-pc-global-hom-adjunction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The underived tensor comparison is defined as the inverse conjugate of pushforwardComp. On homotopy categories its conjugate is the corresponding direct-image composition identification: pass to complex representatives and check degreewise units, counits and the underived conjugacy equation. The identification is the identity on sections over inverse-image opens, so its homotopy and localized components are identities.",
-   "uses": [
-    "lem-pc-module-pullback-adjunction",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Transpose the factorization of the first step using the preceding compatible mate squares. mateEquiv_conjugateEquiv_vcomp and conjugateEquiv_mateEquiv_vcomp identify the two sides with β(fg) followed by the derived mate of p.hom, and the pasted right-derived units, respectively. Evaluating this equality at K gives the claimed equation. The mate calculation uses no resolution or cancellation hypothesis; it applies to identity morphisms, zero complexes and empty schemes. To justify using the pinned Hom normalization on arbitrary derived test maps, choose a K-flat representative of their source and replace the intermediate complex of a localization roof by a K-flat resolution. Invertibility of the left-derived counits on these representatives (and their successive pullbacks), naturality, and inversion of localized quasi-isomorphisms extend the computation to all roofs. Yoneda then gives the component equation. The earlier assertion that no resolution is used referred only to the formal mate-pasting calculation, not to this extension of the representative formula.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pc-kflat-pullback-preservation"
+    "lem-sc-derived-direct-image-pasted-counit-normalization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "def-pc-derived-base-change-map",
-  "lem-pc-global-hom-adjunction",
-  "lem-pc-module-pullback-adjunction",
-  "lem-pc-kflat-resolution",
-  "lem-pc-kflat-pullback-preservation"
+  "lem-sc-derived-pullback-composition-counit-normalization",
+  "lem-sc-derived-direct-image-pasted-counit-normalization"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "R3",
-  "date": "2026-10-13",
-  "note": "Detailed mate-pasting expansion of the normalization step already in the parent proof, from the cited Stacks adjunction and composition results; not claimed as a verbatim statement of Stacks."
+  "group": "F4",
+  "date": "2026-10-14",
+  "note": "Complete formal transposition proof from two counit subcalculations. The pasted-unit subcalculation is proved; the chosen-comparison subcalculation remains one named theorem. No K-flat roof extension is required for the counit-based route."
  },
  "mathlib_searches": [
   {
@@ -134,13 +113,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R3",
+  "reviewer": "X-8d3ab",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261013T152019-L-954396",
+  "landing": "20261014T040539-L-999793",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched Lean signatures and counit calculations with the nodes and pinned constructions; all four modules and direct importer DerivedDirectImageSquareMate compile cleanly; axiom checks match the single documented sorry."
  }
 }
