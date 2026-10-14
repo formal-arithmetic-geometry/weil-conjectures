@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-finite-extension",
-   "place": "Proof, first sentence “Choose an integral lattice for K”: local Tor-amplitude bounds on principal localizations descend to the ring",
+   "place": "Proof, first sentence “Choose an integral lattice for K”: local Tor-amplitude bounds on principal localizations descend to the ring; the argument is the Tag 066N localization calculation.",
    "via": [
     "lem-weil-pbc-perfect-ring-principal-cover-glue",
     "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect",
@@ -30,9 +30,68 @@
   "lem-pur-derived-change-of-rings",
   "lem-pc-source-kflat-module-tensor-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an $R$-module $M$ and $n\\notin[a,b]$. Apply [lem-pc-kflat-resolution] on the singleton site specified in the statement to choose a K-flat resolution $P^\\bullet\\to K^\\bullet$. By [lem-pc-source-kflat-module-tensor-model], $C^\\bullet=P^\\bullet\\otimes_R M$ represents $K^\\bullet\\otimes_R^{\\mathbf L}M$; since $M$ is in degree zero there is one tensor summand per degree.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-source-kflat-module-tensor-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066N, proof of lemma-glue-tor-amplitude; explicit K-flat computation of the displayed localization identity"
+   }
+  },
+  {
+   "text": "For every $i$, put $B=R_{f_i}$. The ring map $R\\to B$ is flat by [lem-weil-pbc-localization-flat]. By [lem-weil-pbc-flat-tensor-exact], tensoring with $B$ preserves exact sequences. In particular, applying it to the cycle and boundary sequences shows $H^q(X^\\bullet\\otimes_R B)=H^q(X^\\bullet)\\otimes_R B$ for every complex $X^\\bullet$ and degree $q$: the kernel of the localized differential is the localized cycle module, its image is the localized boundary module, and their quotient is the localized cohomology. Thus $P^\\bullet\\otimes_R B\\to K^\\bullet\\otimes_R B$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066N, proof of lemma-glue-tor-amplitude; explicit K-flat computation of the displayed localization identity"
+   }
+  },
+  {
+   "text": "By [lem-pc-kflat-extension-of-scalars], $P^\\bullet\\otimes_R B$ is K-flat over $B$. Apply [lem-pc-source-kflat-module-tensor-model] over $B$ to compute $(K^\\bullet\\otimes_R B)\\otimes_B^{\\mathbf L}(M\\otimes_R B)$ by $(P^\\bullet\\otimes_R B)\\otimes_B(M\\otimes_R B)$. This complex is canonically isomorphic to $C^\\bullet\\otimes_R B$: in every degree the map sends $(p\\otimes s)\\otimes(m\\otimes t)$ to $(p\\otimes m)\\otimes st$, with inverse $(p\\otimes m)\\otimes u\\mapsto(p\\otimes u)\\otimes(m\\otimes1)$. The balancing relations make these inverse maps well-defined, and the differential acts only on $p$, so they commute with differentials. The assumed local Tor-amplitude bound therefore gives $H^n(C^\\bullet\\otimes_R B)=0$.",
+   "uses": [
+    "lem-pc-kflat-extension-of-scalars",
+    "lem-pc-source-kflat-module-tensor-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066N, proof of lemma-glue-tor-amplitude; explicit K-flat computation of the displayed localization identity"
+   }
+  },
+  {
+   "text": "Since the finite family $(f_i)$ generates the unit ideal, [lem-pc-homology-vanishing-localization-span] applied to $C^\\bullet$ gives $H^n(C^\\bullet)=0$. This is $H^n(K^\\bullet\\otimes_R^{\\mathbf L}M)=0$ by step 1. Varying $M$ and $n$ proves the required amplitude bound. The vanishing criterion also covers $r=0$; then the unit-ideal hypothesis forces $R$ to be the zero ring.",
+   "uses": [
+    "lem-pc-homology-vanishing-localization-span"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066N, proof of lemma-glue-tor-amplitude; explicit K-flat computation of the displayed localization identity"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pc-kflat-extension-of-scalars",
+  "lem-pc-homology-vanishing-localization-span"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066N, proof of lemma-glue-tor-amplitude"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -103,10 +162,52 @@
    "results": "0 hits: ",
    "date": "2026-10-14",
    "verdict": "no match: the retrieved cotangent, section, group and graph results do not state descent of Tor amplitude of arbitrary ring complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor localization cohomology commutes principal localization",
+   "results": "8 hits: CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor_obj, CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map, Rep.torIso, CategoryTheory.Tor'_obj_map",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization, Tor, homology",
+   "results": "0 hits; unknown identifier 'Tor'",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "H.*tensor.*Localization|localization.*homology",
+   "results": "2 hits: Mathlib/Algebra/Homology/Localization.lean:60,66; categorical localization of homology, not ring-local Tor amplitude",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived tensor product cohomology commutes with localization",
+   "results": "0 hits; Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude descends from standard open cover of a ring",
+   "results": "8 hits: affine basic-open cover and local morphism properties; no Tor-amplitude assertion",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tor.?amplitude|TorAmplitude",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-perfect-ring-principal-cover-glue",
   "by": "worker",
@@ -122,5 +223,54 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-tor-amplitude-principal-cover-glue",
+  "worker": "stage1",
+  "summary": "Expanded the Tag 066N derived localization identity on K-flat models, citing existing resolution, scalar-extension, tensor-model, flat localization, flat tensor exactness and principal-cover vanishing nodes. Removed an initially considered prime-localization comparison because its statement does not directly give the required principal comparison. No new nodes or statement change.",
+  "blueprint": "Realizes the ancestor proof clause that local Tor-amplitude bounds on principal localizations descend to the ring.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ordinary-module/K-flat or finite-cover tool needed for the Tag 066N calculation; no node of this unit gives this auxiliary statement."
+   },
+   {
+    "node": "lem-pc-source-kflat-module-tensor-model",
+    "why": "Generic ordinary-module/K-flat or finite-cover tool needed for the Tag 066N calculation; no node of this unit gives this auxiliary statement."
+   },
+   {
+    "node": "lem-weil-pbc-localization-flat",
+    "why": "Generic ordinary-module/K-flat or finite-cover tool needed for the Tag 066N calculation; no node of this unit gives this auxiliary statement."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic ordinary-module/K-flat or finite-cover tool needed for the Tag 066N calculation; no node of this unit gives this auxiliary statement."
+   },
+   {
+    "node": "lem-pc-kflat-extension-of-scalars",
+    "why": "Generic ordinary-module/K-flat or finite-cover tool needed for the Tag 066N calculation; no node of this unit gives this auxiliary statement."
+   },
+   {
+    "node": "lem-pc-homology-vanishing-localization-span",
+    "why": "Generic ordinary-module/K-flat or finite-cover tool needed for the Tag 066N calculation; no node of this unit gives this auxiliary statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pc-kflat-extension-of-scalars",
+  "lem-pc-homology-vanishing-localization-span"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-9e58d4e26",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-9e58d4e26 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, and unit/chapter route. All four proof steps establish ordinary-module Tor-amplitude descent, including zero-ring and nonflat-module cases. Checked the master target’s condensed coefficient category and ordered base-change morphism without assuming a comparison theorem. No repairs needed; accepted tool uses and concrete checks are recorded in review.md."
  }
 }
