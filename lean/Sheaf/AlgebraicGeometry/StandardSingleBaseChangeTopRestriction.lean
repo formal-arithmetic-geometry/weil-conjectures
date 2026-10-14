@@ -6,6 +6,7 @@ Authors: SHEAF group Q4
 module
 
 public import Sheaf.AlgebraicGeometry.StandardSingleBaseChangeMap
+import Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux
 
 /-! # Removing a redundant top-open restriction from the single comparison
 
@@ -65,6 +66,9 @@ theorem standardSingleBaseChange_topRestriction_comparison
             (Scheme.Modules.tensorPullbackObj (pullback.fst p g) M))),
       standardSingleBaseChangeMap p M g =
         (derivedPullback g).map e.hom ≫
-          standardSingleBaseChangeMap (j ≫ p) N g ≫ t.hom := by sorry
+          standardSingleBaseChangeMap (j ≫ p) N g ≫ t.hom := by
+  dsimp
+  obtain ⟨e⟩ := standardSingleBaseChange_topRestriction_source p M g
+  exact ⟨e, standardSingleBaseChange_topRestriction_compatibility p M g e⟩
 
 end AlgebraicGeometry

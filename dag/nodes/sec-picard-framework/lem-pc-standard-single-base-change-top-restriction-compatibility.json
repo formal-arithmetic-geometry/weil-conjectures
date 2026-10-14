@@ -1,0 +1,105 @@
+{
+ "id": "lem-pc-standard-single-base-change-top-restriction-compatibility",
+ "kind": "statement",
+ "title": "Compatibility after top restriction source comparison",
+ "statement": "Given the source comparison isomorphism e for the top restriction, there exists a target isomorphism t such that the standard single base-change map factors through e and the restricted comparison.",
+ "stmt_deps": [
+  "lem-pc-standard-single-base-change-top-restriction-source"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 08HY and 0D5S"
+ },
+ "proof": [
+  {
+   "text": "Apply source-open unit naturality, single pullback composition, and apex transport to identify the target maps and assemble the factorization.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "A3",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 08HY and 0D5S"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "standard single base change top restriction derived direct image",
+   "results": "No exact match in Mathlib; only constituent derived-category constructions found.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "top restriction derived direct image comparison",
+   "results": "No exact match; constituent pullback declarations only.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "schemeDerivedDirectImage restriction isomorphism",
+   "results": "No exact match.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "topRestriction standardSingleBaseChange",
+   "results": "No existing theorem found.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestriction",
+  "date": "2026-10-14",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-standard-single-base-change-top-restriction",
+   "place": "compatibility equation"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/StandardSingleBaseChangeTopRestrictionAux.lean",
+  "declaration": "AlgebraicGeometry.standardSingleBaseChange_topRestriction_compatibility",
+  "statement": "theorem standardSingleBaseChange_topRestriction_compatibility\n    {Y B A : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) (g : A ⟶ B) :\n    letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    ∀ (e : (schemeDerivedDirectImage p).obj\n          ((DerivedCategory.singleFunctor _ 0).obj M) ≅\n        (schemeDerivedDirectImage ((⊤ : Y.Opens).ι ≫ p)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj (M.restrict (⊤ : Y.Opens).ι))),\n      ∃ (t : (schemeDerivedDirectImage\n          (pullback.snd ((⊤ : Y.Opens).ι ≫ p) g)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj\n            (Scheme.Modules.tensorPullbackObj\n              (pullback.fst ((⊤ : Y.Opens).ι ≫ p) g)\n              (M.restrict (⊤ : Y.Opens).ι))) ≅\n        (schemeDerivedDirectImage (pullback.snd p g)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj\n            (Scheme.Modules.tensorPullbackObj (pullback.fst p g) M))),\n      standardSingleBaseChangeMap p M g =\n        (derivedPullback g).map e.hom ≫\n          standardSingleBaseChangeMap ((⊤ : Y.Opens).ι ≫ p)\n            (M.restrict (⊤ : Y.Opens).ι) g ≫ t.hom",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261014T004055-L-2831888",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261014T004055-L-2831888",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
