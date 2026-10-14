@@ -4,7 +4,8 @@ module
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenPinnedComposition
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenPinnedAdjunction
 public import Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
-import Sheaf.AlgebraicGeometry.OpenPinnedCounitHomotopyRestriction
+import Sheaf.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization
+import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictedCounitCancellation
 
 /-! # The open pullback square evaluated on a direct-image representative
 
@@ -17,6 +18,8 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
+
+set_option linter.unusedVariables false
 
 /-- Derived compatibility before the sectionwise mate identity.
 Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
@@ -74,6 +77,9 @@ theorem singleComplexOpen_pullback_counit_homotopy_factorization
             (morphismRestrict_ι f V)).inv.app ((F.mapHomotopyCategory (.up ℤ)).obj I) ≫
           (rX.mapHomotopyCategory (.up ℤ)).map
             (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f))
-              |>.mapHomotopyCategory (.up ℤ)).counit.app I)) := by sorry
+              |>.mapHomotopyCategory (.up ℤ)).counit.app I)) := by
+  have h₁ := singleComplexOpen_unit_square_factorization f V I
+  have h₂ := singleComplexOpen_restricted_counit_cancellation f V I
+  exact Eq.trans h₁ h₂
 
 end AlgebraicGeometry
