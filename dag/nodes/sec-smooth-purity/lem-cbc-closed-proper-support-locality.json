@@ -26,9 +26,82 @@
   "def-pc-fibre-product",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $i:Z=C_{\\mathrm{red}}\\hookrightarrow T$ for the reduced induced closed subscheme. Its underlying set is $C$ by [lem-weil-pbc-reduced-induced-closed-subscheme](2), and if $C$ is proper over $S$, this means that $p\\circ i$ is proper by [def-weil-pbc-closed-subset-proper-over-base]. For any $v:S\\prime\\to S$, put $Z\\prime=Z\\times_SS\\prime$. By the fibre-product universal property, $Z\\prime\\cong Z\\times_T(T\\times_SS\\prime)$; thus $Z\\prime\\to T\\prime$ is a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. Its underlying set is $v_T^{-1}(C)$, as follows. Cover $T$ by affine opens $U=\\operatorname{Spec}R$ and $v_T^{-1}(U)$ by affine opens $V=\\operatorname{Spec}B$. The reduced-structure statement gives $Z\\times_TU=\\operatorname{Spec}(R/I)$ with $C\\cap U=V(I)$. By [lem-weil-pbc-open-fibre-product] the restriction of $Z\\times_TT\\prime$ over $V$ is $\\operatorname{Spec}(R/I)\\times_{\\operatorname{Spec}R}\\operatorname{Spec}B$, and by [lem-weil-pbc-fibre-product-affine-spectra] it is $\\operatorname{Spec}((R/I)\\otimes_RB)$. The ring map $(R/I)\\otimes_RB\\to B/IB$, $\\bar r\\otimes b\\mapsto rb\\bmod IB$, is an isomorphism: its inverse sends $b\\bmod IB$ to $1\\otimes b$, which kills $IB$ since $1\\otimes rb=\\bar r\\otimes b=0$ for $r\\in I$. Consequently the image over $V$ consists of primes of $B$ containing $IB$; a prime contains $IB$ exactly when its contraction to $R$ contains $I$, which is exactly membership in $v_T^{-1}(C)\\cap V$. These affine opens cover $T\\prime$, proving the asserted equality. This argument also identifies the supports for all the covering base changes below.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-pbc-closed-subset-proper-over-base",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0CYP (coherent-lemma-base-change-closed-proper-over-base), scheme-theoretic inverse image paragraph"
+   }
+  },
+  {
+   "text": "The ambient projection $p\\prime:T\\prime\\to S\\prime$ is locally of finite type by [lem-weil-pbc-lft-base-change]. If $C$ is proper over $S$, then $Z\\prime\\to S\\prime$ is proper by [lem-weil-pbc-proper-base-change]. Applying [lem-weil-pbc-closed-subset-proper-over-base-properties](1) to the closed subscheme $Z\\prime\\subset T\\prime$ constructed in step 1 shows that its underlying subset $v_T^{-1}(C)$ is proper over $S\\prime$. This proves (1); no assertion that $Z\\prime$ is reduced is needed.",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0CYP; Tag 0CYL (coherent-lemma-closed-proper-over-base)"
+   }
+  },
+  {
+   "text": "For (2), each $S_i\\to S$ is an object of the small etale site of $S$, and their jointly surjective family covers its identity object by the covering-family definition in [def-weil-pbc-etale-site]. Hence [lem-weil-pbc-fpqc-finer-than-etale] makes it an fpqc covering. For each $i$ let $Z_i=Z\\times_SS_i\\subset T_i=T\\times_SS_i$. Step 1 identifies its underlying closed subset with $C_i$. The ambient $T_i\\to S_i$ is locally of finite type by [lem-weil-pbc-lft-base-change]. Since $C_i$ is proper by hypothesis, [lem-weil-pbc-closed-subset-proper-over-base-properties](1), now in its every-closed-structure direction, shows that $Z_i\\to S_i$ is proper. Reducedness of $Z_i$ is neither asserted nor required.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-weil-pbc-lft-base-change",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0F4J (descent-lemma-descending-property-proper-over-base), first three sentences"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-proper-morphism-fpqc-descent] to the morphism $Z\\to S$ and the fpqc covering from step 3. All its pullbacks $Z_i\\to S_i$ are proper by that step, so $Z\\to S$ is proper. By [def-weil-pbc-closed-subset-proper-over-base] this says that $C$ is proper over $S$, proving (2). The argument uses fpqc covering families, not quasi-compactness of $p$, $S$, or the covering members.",
+   "uses": [
+    "lem-weil-pbc-proper-morphism-fpqc-descent",
+    "def-weil-pbc-closed-subset-proper-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0F4J, final two sentences; Tag 02L1 (descent-lemma-descending-property-proper)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-proper-morphism-fpqc-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex; literature/stacks-project/descent.tex",
+  "place": "Tag 0CYP proof; Tag 0F4J proof via 0CYL and 02L1"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -95,12 +168,56 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-proper-support-sheaf-composition",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-cbc-closed-proper-support-locality",
+  "worker": "stage1",
+  "summary": "Four-step support-structure argument following 0CYP and 0F4J; reused 0CYL, reduced closed subschemes, closed-immersion base change, proper base change and etale-to-fpqc covers. Added generic fpqc descent of proper morphisms (02L1); reused the existing Mathlib leaf for local finite type base change (01T4). Corrected the draft false identification of a base change of a reduced scheme with its reduction; no statement change. Returned-delivery repair: rebased by deliver.py onto current origin/newtargets-dag, reread every cited statement, and made the etale-site covering definition an explicit step-3 citation. Independent second reading: supplied the missing open-restriction and affine fibre-product citations and explicit tensor-quotient maps in step 1. Retained the existing nested tool-use requests under the delivery checker's explicit later human decision; no top-level maintainer tool_uses field written.",
+  "blueprint": "Refinement comparison paragraph of thm-cbc-finite-torsion: base change and etale descent for the sheaf condition of proper supports.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "generic reduced closed structure on C"
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "generic construction of pulled-back closed support"
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "properness of the base-changed support scheme"
+   },
+   {
+    "node": "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "why": "0CYL independence of closed subscheme structure for locally finite type ambient morphisms"
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "generic fact that an etale cover is fpqc"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-fpqc-finer-than-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-f79ab7115",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-f79ab7115 (reviewer sub-agent of L); spot-checked: Mathematics passes: Stacks 0CYP, 0F4J, and 02L1 were checked hypothesis by hypothesis; all four proof steps, affine pullback calculation, fpqc descent, edge cases, DAG route, duplicates, and Mathlib searches were reviewed. The new statement-only node lacked required created.by, created.item, and created.date metadata. A complete corrected JSON is in fixes/dag/nodes/sec-smooth-purity/lem-weil-pbc-proper-morphism-fpqc-descent.json.; 1 file(s) fixed by the reviewer"
+ }
 }
