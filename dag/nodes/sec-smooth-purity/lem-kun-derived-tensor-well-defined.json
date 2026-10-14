@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-derived-tensor-well-defined",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Independence of the K-flat model",
@@ -26,12 +26,133 @@
   "def-kun-derived-tensor",
   "def-weil-pbc-derived-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Work on the ringed site $(T_{\\Et},\\Lambda_T)$ with the direct-sum total tensor and K-flatness of [def-kun-derived-tensor]. Write $\\alpha:P\\to Q$ for the given quasi-isomorphism and $C=\\operatorname{Cone}(\\alpha)$. The cone criterion [lem-pur-quasi-iso-cone-acyclic] makes $C$ acyclic. The cone clause of [lem-pc-kflat-cone-direct-sum] makes $C$ K-flat, since both $P$ and $Q$ are K-flat. No boundedness or termwise flatness is used.",
+   "uses": [
+    "def-kun-derived-tensor",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-pc-kflat-cone-direct-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YT, lemma-derived-tor-quasi-isomorphism-other-side; cone reformulation using Tag 07A3"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-acyclic-kflat-tensor-arbitrary] to $C$ and the arbitrary complex $F$. Thus $\\operatorname{Tot}(F\\otimes C)$ is acyclic. By [lem-pc-tensor-mapping-cone-iso] it is isomorphic to the cone of $1_F\\otimes\\alpha$. Apply the converse direction of [lem-pur-quasi-iso-cone-acyclic] to conclude that $1_F\\otimes\\alpha$ is a quasi-isomorphism. The sign symmetry in [def-kun-derived-tensor] conjugates this map to $\\alpha\\otimes1_F$, so tensoring on either side has the same property.",
+   "uses": [
+    "lem-pur-acyclic-kflat-tensor-arbitrary",
+    "lem-pc-tensor-mapping-cone-iso",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YT, lemma-derived-tor-quasi-isomorphism-other-side"
+   }
+  },
+  {
+   "text": "Fix a complex $F$ representing $K_2$. Work in the homotopy category of $\\Lambda_T$-module complexes. Quasi-isomorphisms have a right calculus of fractions by [lem-pc-quasi-isomorphisms-multiplicative-system]. For a derived morphism between K-flat complexes $P,P^{\\prime}$, [lem-pc-right-fraction-representation] gives a roof $P\\xleftarrow{s}M\\xrightarrow{a}P^{\\prime}$. Resolve $M$ by $r:R\\to M$ using [lem-kun-flat-resolution-existence], so the same roof has K-flat middle $R$ and left leg $sr$. Send it to $\\mathsf Q(a r\\otimes1_F)\\mathsf Q(sr\\otimes1_F)^{-1}$, where $\\mathsf Q$ is the localization of [def-weil-pbc-derived-categories]; Step 2 ensures the inverse exists. For two roofs giving the same morphism, [lem-pc-right-fraction-common-refinement] gives a common refinement with equal legs in the homotopy category. Resolve its middle once more. Its maps to the two K-flat middle complexes are quasi-isomorphisms: their composites with the left legs are quasi-isomorphisms, so this follows on cohomology by cancelling isomorphisms. Step 2 inverts their tensors; cancellation then makes the two displayed tensor roofs equal. Tensor respects the homotopies used here: for a degree -1 homotopy $h$ in the first factor, $H(x\\otimes y)=h(x)\\otimes y$ satisfies $dH+Hd=(dh+hd)\\otimes1$, since the two $d_F$ terms have opposite signs. Identities give identity roofs. For composition, take K-flat-middle roofs $P\\xleftarrow{s}R\\xrightarrow{a}P^{\\prime}$ and $P^{\\prime}\\xleftarrow{t}R^{\\prime}\\xrightarrow{b}P^{\\prime\\prime}$. The right-calculus axiom of [lem-pc-quasi-isomorphisms-multiplicative-system] supplies $v:V\\to R$ in the quasi-isomorphisms and $w:V\\to R^{\\prime}$ with $av=tw$. Resolve $V$ by $z:U\\to V$ with $U$ K-flat. Put $v_0=vz$ and $w_0=wz$; the composite roof is $(bw_0,sv_0)$. Write $J(f)=\\mathsf Q(f\\otimes1_F)$. Step 2 makes $J(v_0),J(s),J(t)$ invertible, and $J(a)J(v_0)=J(t)J(w_0)$. Hence $J(bw_0)J(sv_0)^{-1}=J(b)J(w_0)J(v_0)^{-1}J(s)^{-1}=J(b)J(t)^{-1}J(a)J(s)^{-1}$, exactly the composite of the assigned tensor roofs. No invertibility of $w_0$ is required. Thus the rule defines a functor on the full derived subcategory of K-flat representatives, not a choice-dependent map of complexes.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-right-fraction-representation",
+    "lem-kun-flat-resolution-existence",
+    "lem-pc-right-fraction-common-refinement",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor, preceding independence paragraph; explicit fraction argument (Categories Tags 04VI/04VJ and Derived Categories Tag 05RT)"
+   }
+  },
+  {
+   "text": "Choose two K-flat models $q:P\\to C_1$ and $q^{\\prime}:P^{\\prime}\\to C_1$ of a representing complex of $K_1$, as in [def-kun-derived-tensor]. In the derived category [def-weil-pbc-derived-categories], the specified isomorphism between their images is $u=\\mathsf Q(q^{\\prime})^{-1}\\mathsf Q(q)$. Apply the functor of Step 3 to $u$. It gives the canonical isomorphism $\\mathsf Q(P\\otimes F)\\cong\\mathsf Q(P^{\\prime}\\otimes F)$ between the two prescribed models of $K_1\\kunotimes{\\Lambda}K_2$. It depends only on $u$, by the refinement argument, and is an isomorphism since a functor sends the inverse of $u$ to its inverse. For a third model, $u_{23}u_{12}=u_{13}$ by cancellation of $\\mathsf Q(q_2)$, so functoriality gives the cocycle identity for the comparisons. Every derived object has a K-flat representative by [lem-kun-flat-resolution-existence]; consequently the construction on K-flat representatives defines the same object for any chosen representative of $K_1$, using its specified identification with $K_1$. This is independence up to canonical isomorphism; it does not assert a direct chain map between any two resolutions.",
+   "uses": [
+    "def-kun-derived-tensor",
+    "def-weil-pbc-derived-categories",
+    "lem-kun-flat-resolution-existence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor and preceding independence paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-derived-tensor",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-pc-kflat-cone-direct-sum",
+  "lem-pur-acyclic-kflat-tensor-arbitrary",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-representation",
+  "lem-kun-flat-resolution-existence",
+  "lem-pc-right-fraction-common-refinement",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YT/06YU: cone reformulation and explicit homotopy-category fraction proof of canonical independence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "KFlat|K-flat|derivedTensor|tensorDerived",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: flat modules and degreewise projective-derived Tor do not state unbounded K-flat tensor invariance or canonical model independence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\"",
+   "results": "Lean.mkFlatCtorOfStructCtorName",
+   "date": "2026-10-14",
+   "verdict": "no match: flat modules and degreewise projective-derived Tor do not state unbounded K-flat tensor invariance or canonical model independence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a quasi-isomorphism between K-flat complexes with an arbitrary complex preserves quasi-isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a quasi-isomorphism between K-flat complexes of sheaves with any unbounded complex is a quasi-isomorphism",
+   "results": "Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; Module.Flat.iff_preservesFiniteLimits_tensorLeft; Module.Flat.iff_lTensor_exact'; Module.Flat.iff_rTensor_exact'; Module.FaithfullyFlat.iff_exact_iff_rTensor_exact",
+   "date": "2026-10-14",
+   "verdict": "no match: flat modules and degreewise projective-derived Tor do not state unbounded K-flat tensor invariance or canonical model independence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An acyclic K-flat complex tensor any complex is acyclic and derived tensor is independent of its flat resolution",
+   "results": "Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; CategoryTheory.Tor_obj; CategoryTheory.Tor'; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor; Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact",
+   "date": "2026-10-14",
+   "verdict": "no match: flat modules and degreewise projective-derived Tor do not state unbounded K-flat tensor invariance or canonical model independence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quasiIso\", \"tensor\"",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: flat modules and degreewise projective-derived Tor do not state unbounded K-flat tensor invariance or canonical model independence"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesQuasiIso|kFlat|KFlat",
+   "results": "none (subdirectory Algebra/Homology)",
+   "date": "2026-10-14",
+   "verdict": "no match: flat modules and degreewise projective-derived Tor do not state unbounded K-flat tensor invariance or canonical model independence"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "undischarged_input",
@@ -67,5 +188,49 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-derived-tensor-well-defined",
+  "worker": "stage1",
+  "summary": "Expanded the cited classical input into the cone argument and canonical comparison via K-flat-refined roofs. Reused existing generic ringed-site and localization nodes. No new nodes, no statement correction, no assumed K-projectivity. Maintainer citation repair: Steps 3–4 use the existing same-unit lem-kun-flat-resolution-existence, whose statement supplies all required K-flat resolutions, instead of the off-unit generic resolution theorem.",
+  "blueprint": "The sole blueprint proof paragraph: quasi-isomorphism preservation (Steps 1–2) and independence of K-flat models (Steps 3–4).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-cone-direct-sum",
+    "why": "Generic ringed-site closure under cones supplies K-flatness of the cone; no same-unit statement is needed."
+   },
+   {
+    "node": "lem-pur-acyclic-kflat-tensor-arbitrary",
+    "why": "Generic acyclic K-flat tensor vanishing supplies the strict sublemma for the cone argument."
+   },
+   {
+    "node": "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "why": "Generic homotopy-category fraction calculus supplies the setting for canonical comparisons."
+   },
+   {
+    "node": "lem-pc-right-fraction-representation",
+    "why": "Generic localization roof representation supplies morphisms between K-flat models."
+   },
+   {
+    "node": "lem-pc-right-fraction-common-refinement",
+    "why": "Generic localization equality criterion supplies independence of roof choices."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-cone-direct-sum",
+  "lem-pur-acyclic-kflat-tensor-arbitrary",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-representation",
+  "lem-pc-right-fraction-common-refinement"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-13b141d91",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-13b141d91 (reviewer sub-agent of L); spot-checked: The mathematics and statement are correct. I repaired one citation fault: Steps 3–4 now use the existing same-unit lem-kun-flat-resolution-existence instead of the off-unit generic resolution theorem, with proof_deps and tool proposals updated. Corrected DAG JSON is in fixes/dag/nodes/sec-smooth-purity/lem-kun-derived-tensor-well-defined.json; review.md records all source, route, coefficient-category, target, edge-case, and dependency checks.; 1 file(s) fixed by the reviewer"
+ }
 }
