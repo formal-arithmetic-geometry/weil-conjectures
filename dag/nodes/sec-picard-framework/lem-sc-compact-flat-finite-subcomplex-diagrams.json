@@ -15,25 +15,53 @@
  ],
  "proof": [
   {
-   "text": "Proof. Fix the summand decompositions in every term of L_m. For each generator\nsummand, choose a finite support for its differential in the next degree. A finite\nset of summands in finitely many degrees can be enlarged to a finite subcomplex:\nadd those chosen supports, and repeat upwards. Boundedness above makes the\niteration terminate. The initial finite set bounds its nonzero degrees below.\nEach term of this subcomplex is a finite coproduct of the original compact flat\nsummands; its differential is the restriction determined by these inclusions.\n\nIndex by labelled pairs (m, a finite summand subcomplex of L_m). Order two pairs\nwith labels m ≤ m' when the iterated transition carries the earlier subcomplex\ninto the later one. Inclusion maps into L_m' are monic, so this factorization is\nunique, respects composition, and defines the diagram functor. The stage label\nis monotone. At stage n keep all labels at most n. A finite collection can be\ncarried to stage n and included in one finite subcomplex: compactness factors\nits finitely many generators through finite subcoproducts of L_n in each of its\nfinitely many degrees; close these supports under the differential. Thus the\nstage-n subdiagram is cofinal and the stage diagram is filtered. The zero\nsubcomplex at stage zero supplies nonemptiness, including the zero tower.\n\nThe stage-n subcomplexes have union L_n, because every summand lies in one of\nthem. A compatible family of maps out of these subcomplexes defines the unique\nmap out of L_n termwise, using the original coproduct summands. It commutes with\nthe differentials since every finite collection is contained in a subcomplex.\nThis proves the stated cochain-complex colimit universal property. Carry the\ncocones to later stages by the tower transitions to obtain strict compatibility.\nTheir components are monic: the finite summand inclusions are split monic and\nthe tower transitions are degreewise split monic. For stageBound, take the maximum\nof the upper bounds of L_0 through L_n. The finite-degree and finite-generator\nfields hold by construction, with the inherited compactness factorizations.\nAll these are existential witnesses; no definition selects an arbitrary object\nfrom an unproved existence theorem.",
+   "text": "Fix the actual generator families and coproduct isomorphisms supplied by hgen. For each generator choose a finite support for its differential. Truncate successor supports at a chosen upper bound b: the differential into every higher term is zero. The private finite_closed_support lemma, proved by strong induction on (b - degree + 1).toNat, closes every finite set of degree-labelled generators under these successor supports. Form each term as its literal finite subcoproduct. Its inclusion is monic by Mathlib MonoCoprod.mono_of_injective'. Restrict the differential by its uniquely determined factor through the next inclusion. Cancellation of that inclusion proves d squared is zero and constructs the inclusion chain map. The finite set of labelled generators bounds the nonzero degrees.",
+   "uses": [
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a chain map from any such finite piece to another stage, apply coproduct compactness to each of its finitely many generator summands, unite the finitely many supports and close that union under the target differential. This constructs a degreewise factor through one target finite piece. Cancellation of its monic inclusion proves that the factor is a chain map. This is the fully proved private factor_through_stable_piece lemma; no additional theorem with sorry is used.",
+   "uses": [
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Index by the small type of triples (stage, finite degree-labelled support, proof of differential stability). Order two triples when the first stage is at most the second and the iterated tower transition carries its inclusion through the second finite piece. Identity and composition give a preorder. Factors are unique by monicity, so they define a functor. Form each stage augmentation by composing the piece inclusion with Functor.ofSequence applied to the tower. Functoriality gives naturality and strict compatibility. Carry two pieces to stage n, apply the previous factorization construction, unite the resulting supports and close them. This gives a common upper object at stage n, and hence filteredness of the initial-stage preorder. Closing the empty support supplies an object even for the zero tower.",
+   "uses": [
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Every generator of every term of L_n lies in a finite piece labelled n by closing its singleton support. Thus the supremum of the degreewise images of the stage-n augmentations is top: factor the coproduct inverse isomorphism through that supremum using Sigma.desc. The proved source library subobjectEval_iSup and subobjectEval_injective identify the supremum of the corresponding subobjects of the complex with top. SheafOfModules.isGrothendieckAbelian supplies the Grothendieck abelian structure, inherited by cochain complexes. Apply Mathlib IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup to this filtered diagram of monomorphisms into L_n. It proves exactly the required colimit cocone.",
    "uses": [
     "def-pc-cochain-complex-modules",
-    "def-pc-flat-sheaf-modules",
-    "def-sc-flat-telescope-stage-map"
+    "def-sp-grothendieck-abelian"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "The augmentation maps are degreewise monic because finite subcoproduct inclusions and all composites of the given split monic tower transitions are monic. The upper bound of L_n itself bounds every piece appearing by stage n, by IsZero.of_mono; no maximum of bounds from earlier stages is needed. Each term is the actual finite subcoproduct of the original generators, and flatness and the coproduct-compact factorization property are inherited directly from hgen. Assemble these proved fields into CompactFlatFiniteSubcomplexDiagrams. The original theorem has no remaining sorry and its axioms are exactly propext, Classical.choice and Quot.sound.",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-cochain-complex-modules",
-  "def-pc-flat-sheaf-modules",
-  "def-sc-flat-telescope-stage-map"
+  "def-sp-grothendieck-abelian",
+  "def-pc-flat-sheaf-modules"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "P1",
+  "group": "P2",
   "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatTelescopeBarEnlargement.lean",
-  "place": "the finite-subcomplex paragraph beginning “Fix generator decompositions in each term”."
+  "place": "The finite-subcomplex paragraph, implemented directly by finite support closure and the existing Mathlib filtered-subobject colimit theorem; every private helper is proved."
  },
  "mathlib_searches": [
   {
@@ -114,11 +142,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P1",
+  "reviewer": "X-968b0",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261014T084701-L-89287",
+  "landing": "20261014T092936-L-609180",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged theorem and public definitions to the node and source argument; proof metadata agrees, delivery and sole direct importer compile cleanly, and all axiom probes use only the three permitted axioms."
  }
 }
