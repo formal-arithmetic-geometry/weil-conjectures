@@ -14712,5 +14712,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:35 L: merged deliver/Q3/Sheaf.Paper.ModuleCupGodementFMapSummands (stage 3; reviewer PASS; first push; landing 20261014T073558-L-3451672 (interface); batch 20261014T073555; modules 3; new nodes 2)
 
 - 15:40 L: batch 20261014T073816 dependency take-out
-- 07:42 L: merged deliver/M2/Sheaf.Paper.CechCupResolutionTotalPairing (stage 3; reviewer PASS; after a return; landing 20261014T074216-L-3520607 (interface); batch 20261014T074215; modules 2; new nodes 2; change records: coord/changes/CechCupResolutionTotalPairing-restored.md)
 - 07:42 L: merged deliver/U3/Sheaf.AlgebraicGeometry.SingleComplexOpenUnionCompatibleChainData (stage 3; reviewer PASS; first push; landing 20261014T074217-L-3520746 (proof); batch 20261014T074215; modules 1; new nodes 0)
+
+- 15:45 L: batch 20261014T074215 dependency take-out
