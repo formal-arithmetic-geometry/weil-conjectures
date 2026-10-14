@@ -19,6 +19,11 @@ each variable.
 
 @[expose] public section
 
+-- `GrothendieckTopology.W.monoidal` gives the monoidality of `W` directly; the instance going
+-- through enough points of the site is tried first and makes the search time out.
+attribute [-instance]
+  CategoryTheory.instIsMonoidalFunctorOppositeWOfHasSheafComposeForgetOfHasEnoughPoints
+
 universe u' u
 
 open CategoryTheory Abelian Limits MonoidalCategory
