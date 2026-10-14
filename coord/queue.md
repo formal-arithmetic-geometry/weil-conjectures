@@ -71,7 +71,7 @@
 | `Sheaf.Algebra.Homology.AffineTildeDerivedTensorMate` | 33 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIdentity` | 34 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.MayerVietorisCompositionLeftNormalization` | 36 | 1 | proof |
-| `Sheaf.CategoryTheory.Abelian.DerivedBottomUnitNormalizationFormula` | 36 | 1 | proof |
+| `Sheaf.CategoryTheory.Abelian.DerivedBottomCycleTransport` | 37 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineModelLimitHomEquationOfCoherentObjects` | 40 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineModelStageHomEquationOfCoherentObjects` | 40 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineModelComparisonDataFromHomEquations` | 41 | 1 | proof |
