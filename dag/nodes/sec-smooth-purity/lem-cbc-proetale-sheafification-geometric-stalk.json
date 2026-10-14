@@ -25,10 +25,105 @@
   "document": "literature/stacks-project/proetale.tex",
   "place": "Section Tag 0991 (section-points), Lemmas Tags 0F6B (lemma-cofinal-etale), 0F6C (lemma-geometric-lift-to-cover), and paragraph before Tag 0993 (lemma-classical-point); applied with Sites Tag 00Y8 (lemma-point-pushforward-sheaf), literature/stacks-project/sites.tex, clause (3)"
  },
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "Use the small skeleton and larger universe already specified for the pointed-neighbourhood category $\\mathcal N_{\\bar x}$. Its opposite is filtered by [def-weil-proetale-geometric-stalk]. For any abelian presheaf $F$, form classes $[V,\\bar v,s]$ of sections under restriction. Filteredness makes equality equivalent to equality after restriction to one common pointed refinement: a finite chain of generating restriction relations admits a common refinement, and the finitely many parallel arrows can then be equalized. Represent finitely many operands on a common refinement and add there. Common refinement and equalization show this is well-defined, and the group laws hold sectionwise. A compatible family of homomorphisms out of $F(V)$ descends uniquely to a homomorphism from this group of classes. Thus this group has the abelian colimit universal property; in particular every element is one section class and a class is zero exactly when it restricts to zero on a pointed refinement. Apply this construction to both presheaves in the statement.",
+   "uses": [
+    "def-weil-proetale-geometric-stalk",
+    "def-weil-size-convention",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0F6B (lemma-cofinal-etale), neighbourhood definition before it; elementary representative construction for abelian presheaves"
+   }
+  },
+  {
+   "text": "Let $\\{V_i\\to V\\}$ cover a pointed neighbourhood $(V,\\bar v)$. Base change this cover along $\\bar v:\\operatorname{Spec}\\Omega\\to V$. By [lem-galois-fpqc-covering-base-change] the pulled-back family is an fpqc cover $\\{Z_i=V_i\\times_V\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}\\Omega\\}$; the fpqc covering condition ensures some $Z_i$ is nonempty. Its map to $\\operatorname{Spec}\\Omega$ is weakly etale by [lem-weil-pbc-weakly-etale-composition-base-change]. Choose a point of $Z_i$ and an affine open $W=\\operatorname{Spec}B$ containing it. Apply [lem-weil-pbc-weakly-etale-source-locality] to an open covering of $Z_i$ containing $W$, so $W\\to\\operatorname{Spec}\\Omega$ is weakly etale. The affine equivalence in [def-weil-pbc-ind-etale-algebra] makes $B/\\Omega$ a weakly etale algebra. By [lem-weil-pbc-weak-etale-field], its residue field at the chosen point is separable algebraic over $\\Omega$. Since $\\Omega$ is algebraically closed it is separably closed (each nonconstant separable polynomial is a nonconstant polynomial); [lem-weil-pbc-separable-extension-embeds-separably-closed] gives an $\\Omega$-embedding of that residue field into $\\Omega$. The geometric-point description and affine-spectrum functoriality give $\\operatorname{Spec}\\Omega\\to W\\to Z_i\\to V_i$. The fibre-product equation says its composite to $V$ is exactly the fixed $\\bar v$, with the same field $\\Omega$. Thus $(V_i,\\bar v_i)\\to(V,\\bar v)$ is a pointed refinement. Its structure map to $X$ is weakly etale by composition. The selected $V_i$ is an original site object; the auxiliary fibre and affine open are bounded schemes, and the lift has the original field $\\Omega$. If $r:V_i^{\\mathrm{sk}}\\xrightarrow{\\sim}V_i$ is the chosen $X$-isomorphism from its skeleton representative, use the lift $r^{-1}\\circ\\bar v_i$ and the covering arrow $V_i^{\\mathrm{sk}}\\xrightarrow{r}V_i\\to V$; their composite is $\\bar v$. Restriction along $r$ is an isomorphism on presheaf sections since its inverse is restriction along $r^{-1}$.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-weil-pbc-weakly-etale-source-locality",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-weak-etale-field",
+    "lem-weil-pbc-separable-extension-embeds-separably-closed",
+    "def-weil-geometric-point",
+    "def-weil-affine-spectrum",
+    "lem-galois-fpqc-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0F6C (lemma-geometric-lift-to-cover); expanded via more-algebra.tex Tag 092Q (lemma-absolutely-flat-over-field), more-morphisms.tex Tags 094S and 094U, and fields.tex Tag 09GU"
+   }
+  },
+  {
+   "text": "Write $S=\\mathcal P^\\#$, $\\theta:\\mathcal P\\to S$, and $\\eta:S\\to S^\\#$ for the two units. By [def-weil-pbc-sheafification], the identity of the sheaf $S$ factors as $b\\eta=\\mathrm{id}_S$ for a unique $b:S^\\#\\to S$. Both $\\eta b$ and $\\mathrm{id}_{S^\\#}$ have composite $\\eta$ with $\\eta$, so uniqueness of extension from $S$ to the sheaf $S^\\#$ gives $\\eta b=\\mathrm{id}_{S^\\#}$. The induced map $\\theta^\\#:S\\to S^\\#$ is characterized by $\\theta^\\#\\theta=\\eta\\theta$, and uniqueness of extension from $\\mathcal P$ gives $\\theta^\\#=\\eta$. Hence $\\theta^\\#$ is an isomorphism. Apply [lem-weil-pbc-site-sheafification-iso-locally-bijective] to $\\theta$: every section of $S$ lifts to $\\mathcal P$ on a covering, and any two sections of $\\mathcal P$ with equal images agree on a covering. The cited theorem is for abelian presheaves, so no comparison between set-valued and abelian sheafification is needed.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-site-sheafification-iso-locally-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WH (proposition-sheafification-adjoint) and 00WK (lemma-sections-sheafification); abelian local-bijectivity equivalence supplied by the cited general-site Mathlib leaf: CategoryTheory.GrothendieckTopology.W_iff_isLocallyBijective, Mathlib/CategoryTheory/Sites/LocallyBijective.lean:114-158, and CategoryTheory.GrothendieckTopology.W_iff, Mathlib/CategoryTheory/Sites/Localization.lean:76-82. Tag 00WM only defines injective and surjective maps of sheaves and is not the theorem used here."
+   }
+  },
+  {
+   "text": "For a class $[V,\\bar v,t]$ in the target colimit, Step 3 gives a cover $\\{V_i\\to V\\}$ and sections $s_i\\in\\mathcal P(V_i)$ such that $\\theta(s_i)=t|_{V_i}$. Step 2 supplies an index $i$ and a lift of the fixed geometric point to $V_i$. The restriction relation in Step 1 identifies $[V,\\bar v,t]$ with $[V_i,\\bar v_i,\\theta(s_i)]$, the image of $[V_i,\\bar v_i,s_i]$. Hence the canonical homomorphism is surjective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0F6C and sites.tex Tag 00Y8 (lemma-point-pushforward-sheaf), clause (3); explicit local-representative proof"
+   }
+  },
+  {
+   "text": "If the image of $[V,\\bar v,s]$ is zero, Step 1 supplies a pointed refinement $(W,\\bar w)\\to(V,\\bar v)$ on which $\\theta(s|_W)=0$. Step 3 applied to $s|_W$ and $0$ gives a cover $\\{W_j\\to W\\}$ on which $s$ restricts to zero. Step 2 lifts the fixed $\\bar w$ to one $W_j$. The original class is therefore zero by its restriction relation. The kernel is zero, so the canonical homomorphism is injective. Combined with Step 4 this is a group isomorphism: its inverse is additive because unique preimages of $a,b$ have sum the unique preimage of $a+b$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0F6C and sites.tex Tag 00Y8 (lemma-point-pushforward-sheaf), clause (3); explicit zero-class proof"
+   }
+  },
+  {
+   "text": "For a morphism $a:\\mathcal P\\to\\mathcal Q$, the sheafification universal property gives the map $a^\\#:\\mathcal P^\\#\\to\\mathcal Q^\\#$ characterized by $a^\\#\\theta_{\\mathcal P}=\\theta_{\\mathcal Q}a$. On a representative $[V,\\bar v,s]$, both paths around the stalk comparison square give $[V,\\bar v,\\theta_{\\mathcal Q,V}(a_V(s))]$. Representatives generate the colimits by Step 1, so the square commutes. Since the components are isomorphisms by Steps 4–5, their inverses also commute (compose this square with the inverse components). This proves the claimed naturality.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WH (proposition-sheafification-adjoint); naturality on representatives"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-geometric-point",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-size-convention",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-separable-extension-embeds-separably-closed",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+  "lem-weil-pbc-weak-etale-field",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-pbc-weakly-etale-source-locality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 0F6B and 0F6C; geometric-point paragraph before Tag 0993, combined with sites.tex Tag 00Y8(3); local-bijectivity argument written out in the abelian case"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,6 +180,48 @@
    "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sheaves/Points.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean\", \"Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean\"]}",
    "date": "2026-10-14",
    "verdict": "candidate only; generic fiber functors assume a site point, and no hit constructs the pro-etale geometric point"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification preserves colimits of sections over pointed weakly etale neighborhoods of a geometric point",
+   "results": "{\"t\": \"2026-10-14T07:22:39Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafification preserves colimits of sections over pointed weakly etale neighborhoods of a geometric point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isColimitSheafifyCocone\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall\", \"AlgebraicGeometry.LocallyRingedSpace.coequalizerCoforkIsColimit\", \"AlgebraicGeometry.SheafedSpace.colimit_exists_rep\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.isColimitForgetToLocallyRingedSpace\", \"AlgebraicGeometry.SheafedSpace.isColimit_exists_rep\", \"CategoryTheory.isSheaf_pointwiseColimit\", \"AlgebraicGeometry.LocallyRingedSpace.instHasColimits\"], \"digest\": \"c006ca6de79ddb6a\"}",
+   "date": "2026-10-14",
+   "verdict": "no match for the geometric pro-etale construction; generic point fibers assume a site point, so the candidate is not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.presheafFiber",
+   "results": "{\"t\": \"2026-10-14T07:22:40Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.GrothendieckTopology.Point.presheafFiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Point.presheafFiber\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeFunctorOppositePresheafFiber\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize\", \"CategoryTheory.GrothendieckTopology.Point.shrinkYonedaCompPresheafFiberIso\", \"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber\", \"CategoryTheory.GrothendieckTopology.Point.W_isInvertedBy_presheafFiber'\", \"CategoryTheory.GrothendieckTopology.Point.sheafToPresheafCompPresheafFiberIso\", \"CategoryTheory.GrothendieckTopology.Point.presheafFiberCocone_pt\"], \"digest\": \"bc272b9fbda644e4\"}",
+   "date": "2026-10-14",
+   "verdict": "no match for the geometric pro-etale construction; generic point fibers assume a site point, so the candidate is not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "presheafFiber.*toSheafify|proetale.*Point",
+   "results": "{\"t\": \"2026-10-14T07:22:40Z\", \"tool\": \"grep\", \"query\": \"presheafFiber.*toSheafify|proetale.*Point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\"], \"digest\": \"98efdb20570bf07d\"}",
+   "date": "2026-10-14",
+   "verdict": "no match for the geometric pro-etale construction; generic point fibers assume a site point, so the candidate is not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proetale geometric stalk sheafification isomorphism",
+   "results": "{\"t\": \"2026-10-14T07:22:41Z\", \"tool\": \"leansearch\", \"query\": \"proetale geometric stalk sheafification isomorphism\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric point defines a fiber of the pro etale site and the sheafification unit is bijective on this fiber",
+   "results": "{\"t\": \"2026-10-14T07:23:49Z\", \"tool\": \"leanfinder\", \"query\": \"A geometric point defines a fiber of the pro etale site and the sheafification unit is bijective on this fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_map_bijective\", \"TopCat.Presheaf.app_bijective_of_stalkFunctor_map_bijective\", \"StandardEtalePresentation.lift_bijective\", \"CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.mk'\", \"CategoryTheory.Sheaf.isLocallyBijective_iff_isIso\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"CategoryTheory.GrothendieckTopology.instWEqualsLocallyBijectiveOfHasWeakSheafifyOfHasSheafComposeOfPreservesSheafificationOfReflectsIsomorphismsForget\", \"RingHom.Etale.of_bijective\"], \"digest\": \"94844588ec236d62\"}",
+   "date": "2026-10-14",
+   "verdict": "no match for the geometric pro-etale construction; generic point fibers assume a site point, so the candidate is not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit from an abelian presheaf to its associated sheaf is an isomorphism after applying a fiber functor of a site point",
+   "results": "{\"t\": \"2026-10-14T07:30:22Z\", \"tool\": \"leanfinder\", \"query\": \"The unit from an abelian presheaf to its associated sheaf is an isomorphism after applying a fiber functor of a site point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Point.instIsIsoMapFunctorOppositePresheafFiberToSheafify\", \"CategoryTheory.GrothendieckTopology.Point.presheafToSheafCompSheafFiber\", \"CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction\", \"CategoryTheory.GrothendieckTopology.W_sheafToPresheaf_map_iff_isIso\", \"CategoryTheory.GrothendieckTopology.W_sheafToPreheaf_map_iff_isIso\", \"CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber_id\", \"CategoryTheory.GrothendieckTopology.isIso_toPlus_of_isSheaf\", \"CategoryTheory.Presheaf.coherentExtensiveEquivalence_unitIso\"], \"digest\": \"528e1b1b9413787f\"}",
+   "date": "2026-10-14",
+   "verdict": "candidate only: the general fiber theorem assumes an already constructed site point; no pro-etale geometric-point construction"
   }
  ],
  "mathlib_match": null,
@@ -97,5 +234,44 @@
   "item": "lem-cbc-proetale-extension-zero",
   "by": "worker",
   "date": "2026-10-14"
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-cbc-proetale-sheafification-geometric-stalk",
+  "worker": "stage1",
+  "summary": "Kept the statement; expanded cover lifting after base change to the fixed geometric field, used the existing general abelian local-bijectivity leaf for the sheafification unit, and proved surjectivity, injectivity and naturality on section representatives. No new nodes or etale/proetale identification.",
+  "blueprint": "lem-cbc-proetale-extension-zero Proof, stalk-description sentence: the passage from the defining presheaf to its sheafification, made explicit by this auxiliary lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-weakly-etale-composition-base-change",
+    "why": "Generic weakly etale base change and composition supply geometric-cover refinements; no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-weakly-etale-source-locality",
+    "why": "Generic restriction to affine source opens needed for the field calculation."
+   },
+   {
+    "node": "lem-weil-pbc-weak-etale-field",
+    "why": "Generic weakly etale algebra over a field theorem supplies separable algebraic residue fields after base change."
+   },
+   {
+    "node": "lem-weil-pbc-separable-extension-embeds-separably-closed",
+    "why": "Generic field embedding supplies a lift with exactly the fixed geometric field, not a larger one."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-pbc-weakly-etale-source-locality",
+  "lem-weil-pbc-weak-etale-field",
+  "lem-weil-pbc-separable-extension-embeds-separably-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-16e90a3db",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-16e90a3db (reviewer sub-agent of L); spot-checked: Read the mathematics, cited statements and source passages in full. All six steps check out, including fixed-field cover lifting, abelian sheafification and naturality. Corrected Step 3’s source reference: Stacks 00WM is a definition; the verified Mathlib local-bijectivity declarations support the argument. No statements or targets changed. Accepted all four generic tool requests. review.md records edge cases, duplicate checks and an inherited dependency cycle; this delivery adds no cycle.; 1 file(s) fixed by the reviewer"
  }
 }
