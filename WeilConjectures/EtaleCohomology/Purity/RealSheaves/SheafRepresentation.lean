@@ -7,6 +7,10 @@ module
 
 public import Mathlib.RepresentationTheory.Coinvariants
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationData
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationDual
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationSections
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationStalk
 public import WeilConjectures.WeilSheaf.GeometricCoinvariants
 
 /-!
@@ -97,6 +101,7 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} [C.Over (Spec (.of K
   [GeometricallyConnected (C ↘ Spec (.of K))] (W : WeilGroup (C ↘ Spec (.of K))) (l : ℕ)
   [Fact l.Prime] [Fact (ringChar K ≠ l)]
 
+omit [GeometricallyConnected (C ↘ Spec (.of K))] in
 /-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection `sk-i-real-sheaves`):
 The lisse sheaf–representation equivalence.
 
@@ -128,7 +133,88 @@ theorem exists_equivalence_isLisse :
             Representation.invariants ((e.functor.obj F).obj.ρ.comp W.geometric.subtype),
           ∀ v, (f (F.obj.globalSections.frobenius v) : (e.functor.obj F).obj.V) =
             (e.functor.obj F).obj.ρ W.frobeniusLift (f v)) := by
-  sorry
+  have := W.connectedSpace_geometricFiber
+  have : Smooth (C ↘ Spec (.of K)) := SmoothOfRelativeDimension.smooth 1 _
+  have : Smooth (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure :=
+    inferInstanceAs (Smooth (Limits.pullback.snd _ _))
+  have := IsRegular.of_smooth (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure
+  obtain ⟨M, hM⟩ := ProEtale.exists_lisseMonodromy (l := l)
+    (Y := (C ↘ Spec (.of K)).geometricFiber) (Ω := K)
+  obtain ⟨B⟩ := nonempty_basePointData W
+  obtain ⟨e, he⟩ := exists_equivalence_fundamentalRep M B.weilMonodromyData (hM B.t)
+  choose f hf using he
+  set D := B.weilMonodromyData
+  have hf' (F : LisseWeilSheaf K l C) (g : W.carrier) (w) :
+      (f F).symm (fundamentalRep M D F.obj F.property g w) =
+        (e.functor.obj F).obj.ρ g ((f F).symm w) := by
+    rw [LinearEquiv.symm_apply_eq, hf, LinearEquiv.apply_symm_apply]
+  refine ⟨e, fun F x ↦ ?_, fun F ↦ ?_, fun F ↦ ?_⟩
+  · -- the stalk at `x̄`, transported to the base point along a path `π`
+    obtain ⟨π⟩ := PreGaloisCategory.nonempty_iso_of_fiberFunctor
+      (Scheme.FiniteEtale.fiber ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x))
+      (Scheme.FiniteEtale.fiber B.t)
+    set h := B.frobeniusLoop x π ≪≫ (B.frobPathPow _).symm
+    set m := (C ↘ Spec (.of K)).degreeOver x.1
+    obtain ⟨c, hc⟩ := isConj_iff.mp (B.isConj_frobenius x π)
+    set ρ := (e.functor.obj F).obj.ρ
+    have key (v : (F.obj.stalk x).carrier) :
+        M.monoLinear π (F.obj.toLisse F.property) ((F.obj.stalk x).frobenius v) =
+          fundamentalRep M D F.obj F.property (B.frobLift ^ m * B.geomHom h)
+            (M.monoLinear π _ v) := by
+      rw [monoLinear_stalk_frobenius, map_mul, ← B.geomEquiv_apply h, Module.End.mul_apply,
+        fundamentalRep_geometric, show B.geomEquiv = D.geomEquiv from rfl,
+        ContinuousMulEquiv.symm_apply_apply, map_pow, show B.frobLift = D.frobLift from rfl,
+        fundamentalRep_frobLift]
+      rw [LinearEquiv.coe_pow, Module.End.pow_apply, LinearEquiv.coe_toLinearMap]
+      rfl
+    let r : (e.functor.obj F).obj.V ≃ₗ[PadicAlgCl l] (e.functor.obj F).obj.V :=
+      LinearEquiv.ofLinearMap (ρ c⁻¹) (ρ c)
+        (by rw [← Module.End.mul_eq_comp, ← map_mul, inv_mul_cancel, map_one]; rfl)
+        (by rw [← Module.End.mul_eq_comp, ← map_mul, mul_inv_cancel, map_one]; rfl)
+    refine ⟨(WeilCoefficients.linearEquivOfIso ((M.mono π).app (F.obj.toLisse F.property))).trans
+      ((f F).symm.trans r), fun v ↦ ?_⟩
+    change ρ c⁻¹ ((f F).symm (M.monoLinear π _ ((F.obj.stalk x).frobenius v))) =
+      ρ (W.frobenius x) (ρ c⁻¹ ((f F).symm (M.monoLinear π _ v)))
+    rw [key, hf', ← Module.End.mul_apply, ← Module.End.mul_apply, ← map_mul, ← map_mul, ← hc]
+    congr 2
+    group
+  · -- duals
+    obtain ⟨b⟩ := nonempty_equiv_fundamentalRep_dual (M := M) D F.obj F.property
+    let fF : (e.functor.obj F).obj.ρ.Equiv (fundamentalRep M D F.obj F.property) :=
+      .mk (f F) fun g ↦ LinearMap.ext (hf F g)
+    let fd : (e.functor.obj ⟨F.obj.dual F.property, F.property.dual⟩).obj.ρ.Equiv
+        (fundamentalRep M D (F.obj.dual F.property) F.property.dual) :=
+      .mk (f _) fun g ↦ LinearMap.ext (hf _ g)
+    let dF : (fundamentalRep M D F.obj F.property).dual.Equiv (e.functor.obj F).obj.ρ.dual :=
+      .mk (f F).dualMap fun g ↦ LinearMap.ext fun φ ↦ LinearMap.ext fun w ↦ by
+        simp only [LinearMap.comp_apply, LinearEquiv.coe_coe, LinearEquiv.dualMap_apply,
+          Representation.dual_apply, Module.Dual.transpose_apply, hf]
+    exact ⟨(fd.trans b).trans dF⟩
+  · -- global sections
+    obtain ⟨a, ha⟩ := exists_globalSections_linearEquiv_invariants (M := M) D (hM B.t) F.obj
+      F.property
+      W.frobeniusLift W.deg_frobeniusLift
+    have hinv (w) : w ∈ Representation.invariants
+        ((fundamentalRep M D F.obj F.property).comp W.geometric.subtype) ↔
+        (f F).symm w ∈ Representation.invariants
+          ((e.functor.obj F).obj.ρ.comp W.geometric.subtype) := by
+      simp only [Representation.mem_invariants, MonoidHom.comp_apply, ← hf',
+        (f F).symm.injective.eq_iff]
+    let s := (f F).symm.ofSubmodules
+      (Representation.invariants ((fundamentalRep M D F.obj F.property).comp W.geometric.subtype))
+      (Representation.invariants ((e.functor.obj F).obj.ρ.comp W.geometric.subtype)) (by
+        ext w
+        simp only [Submodule.mem_map, LinearEquiv.coe_coe]
+        constructor
+        · rintro ⟨w, hw, rfl⟩
+          exact (hinv w).1 hw
+        · intro hw
+          exact ⟨f F w, (hinv _).2 (by rwa [LinearEquiv.symm_apply_apply]),
+            LinearEquiv.symm_apply_apply _ _⟩)
+    refine ⟨a.trans s, fun v ↦ ?_⟩
+    change (f F).symm (a (F.obj.globalSections.frobenius v) : _) = _
+    rw [ha, hf']
+    rfl
 
 /-- The linear isomorphism underlying an isomorphism of representations. -/
 private noncomputable def repLinearEquivOfIso {k G : Type*} [CommRing k] [Monoid G]
