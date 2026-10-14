@@ -6,10 +6,8 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 import Sheaf.AlgebraicGeometry.PerfectHomContinuity
 import Mathlib.Data.Finset.Order
 
