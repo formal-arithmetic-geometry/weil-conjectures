@@ -1,6 +1,7 @@
 module
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeCanonical
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafReverseUnit
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -19,14 +20,6 @@ Source: Stacks Project, Tags 0AVW and 08D4.
 (blueprint: lem-pc-affine-derived-pushforward-sheaf-edge-compatibility-component). -/
 theorem affineDerivedPushforwardSheafEdge_component
     (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ)
-    (ε : (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙
-      DerivedCategory.homologyFunctor
-        (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i ⋙
-      RingedSpace.moduleDirectImage (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom ⟶
-    (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙
-      schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙
-      DerivedCategory.homologyFunctor
-        (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i)
     (F : ModuleCat.{u} A ⥤
       SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
     [F.Additive] [F.PreservesZeroMorphisms] [F.PreservesHomology]
@@ -42,7 +35,7 @@ theorem affineDerivedPushforwardSheafEdge_component
           (((C.sc i).mapHomologyIso F).inv ≫
             ((DerivedCategory.homologyFunctorFactors _ i).app
               ((F.mapHomologicalComplex (.up ℤ)).obj C)).inv) ≫
-        ε.app ⟨_, hC⟩ =
+        (affineDerivedPushforwardSheafEdge_canonical A B φ i).app ⟨_, hC⟩ =
       ((C.sc i).mapHomologyIso
         (F ⋙ RingedSpace.moduleDirectImage
           (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom)).inv ≫
@@ -56,5 +49,28 @@ theorem affineDerivedPushforwardSheafEdge_component
             (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit).app
             ((HomotopyCategory.quotient _ (.up ℤ)).obj
               ((F.mapHomologicalComplex (.up ℤ)).obj C))) := by
-  sorry
+  let P := RingedSpace.moduleDirectImage
+    (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom
+  let D := (F.mapHomologicalComplex (.up ℤ)).obj C
+  let τ := affineDerivedPushforwardSheafReverseIso A B φ i
+  let a := (C.sc i).mapHomologyIso F
+  let b := (DerivedCategory.homologyFunctorFactors _ i).app D
+  let c := (C.sc i).mapHomologyIso (F ⋙ P)
+  let d := (DerivedCategory.homologyFunctorFactors _ i).app
+    ((P.mapHomologicalComplex (.up ℤ)).obj D)
+  let u := (DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).map
+    (P.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj D))
+  change P.map (a.inv ≫ b.inv) ≫ τ.inv.app ⟨_, hC⟩ = c.inv ≫ d.inv ≫ u
+  have hu := affineDerivedPushforwardSheafReverse_unit A B φ i D hC
+  change u ≫ τ.hom.app ⟨_, hC⟩ =
+    d.hom ≫ (D.sc i).leftExactHomologyComparison P ≫ P.map b.inv at hu
+  have hc := (C.sc i).leftExactHomologyComparison_map F P
+  change c.inv ≫ (D.sc i).leftExactHomologyComparison P = P.map a.inv at hc
+  apply (cancel_mono (τ.hom.app ⟨_, hC⟩)).1
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  rw [hu]
+  simp only [← Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  rw [hc, ← P.map_comp]
+  exact Category.comp_id _
 end AlgebraicGeometry

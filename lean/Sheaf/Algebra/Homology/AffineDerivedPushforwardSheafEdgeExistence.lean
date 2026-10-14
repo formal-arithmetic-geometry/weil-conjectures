@@ -1,5 +1,5 @@
 module
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeCanonical
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -10,21 +10,22 @@ noncomputable section
 namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-/-- The affine sheaf edge transformation exists, obtained by the affine cohomology
-comparison on quasi-coherent derived objects. Source: Stacks Project, Tags 0AVW and
+/-- The affine sheaf edge transformation exists, with its witness pinned to the canonical inverse
+of the unique reverse cycle-class comparison on K-injective representatives.
+Source: Stacks Project, Tags 0AVW and
 08D4. (blueprint: lem-pc-affine-derived-pushforward-sheaf-edge-existence).
 The construction uses the cycle-class comparison in a K-injective resolution on the
 basis of affine opens and glues these compatible maps. -/
 theorem exists_affineDerivedPushforwardSheafEdge_existence
     (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ) :
-  Nonempty ((schemeDerivedQCohProperty (Spec (.of A))).ι ⋙
+  ∃ ε : ((schemeDerivedQCohProperty (Spec (.of A))).ι ⋙
       DerivedCategory.homologyFunctor
         (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i ⋙
       RingedSpace.moduleDirectImage (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom ⟶
     (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙
       schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙
       DerivedCategory.homologyFunctor
-        (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i) := by
-  -- Only existence is asserted; zero is a natural transformation of these functors.
-  exact ⟨0⟩
+        (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i),
+    ε = affineDerivedPushforwardSheafEdge_canonical A B φ i := by
+  exact ⟨affineDerivedPushforwardSheafEdge_canonical A B φ i, rfl⟩
 end AlgebraicGeometry

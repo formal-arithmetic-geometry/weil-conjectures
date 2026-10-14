@@ -1,0 +1,114 @@
+{
+ "id": "def-pc-affine-derived-pushforward-sheaf-edge-canonical",
+ "kind": "definition",
+ "title": "Canonical affine edge by inversion of the unique reverse comparison",
+ "statement": "For A,B,φ,i as in [lem-pc-affine-derived-pushforward-sheaf-edge-descent], define affineDerivedPushforwardSheafReverseIso to be the unique natural isomorphism characterized there on K-injective representatives. Define affineDerivedPushforwardSheafEdge_canonical:f_*H^i→H^i Rf_* to be its inverse natural transformation. The uniqueness theorem determines the chosen isomorphism up to equality, so this defines fixed data without choosing an arbitrary witness of bare existence.",
+ "stmt_deps": [
+  "lem-pc-affine-derived-pushforward-sheaf-edge-descent"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4",
+  "place": "0AVW, proof, affine cohomology display; 08D4, bound-one truncation comparison on inverse images of affine opens."
+ },
+ "proof": [
+  {
+   "text": "Select the unique reverse comparison from its universal property and take its inverse. The uniqueness clause fixes all data used downstream.",
+   "uses": [
+    "lem-pc-affine-derived-pushforward-sheaf-edge-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-derived-pushforward-sheaf-edge-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G4",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4",
+  "place": "0AVW, proof, affine cohomology display; 08D4, bound-one truncation comparison on inverse images of affine opens.",
+  "note": "Independent canonical reverse comparison; the exact-family compatibility equation is not an input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical reverse homology comparison for a left exact functor on K injective complexes",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left exact functor canonical map from homology of mapped complex to mapped homology and naturality",
+   "results": "ShortComplex.homologyMap_mapNatTrans, mapLeftHomologyIso_hom_naturality and generic exact functor homology API; no reverse comparison for a merely left exact functor.",
+   "date": "2026-10-14",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.homologyπ",
+   "results": "Unknown identifier in the remote search index; local Mathlib provides ShortComplex.descHomology and π_descHomology.",
+   "date": "2026-10-14",
+   "verdict": "No indexed direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "leftExactHomologyComparison|homologyπ_mapHomologyIso_hom",
+   "results": "msearch grep had no matches. Local rg found the exact-cycle projection lemma in WeilConjectures.Mathlib.Algebra.Homology.SingleHomology; it is imported privately and reused. Mathlib supplies KernelFork.mapIsLimit, descHomology, mapCyclesIso and exact-homology comparisons.",
+   "date": "2026-10-14",
+   "verdict": "Generic API reused; no existing affine normalized reverse comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeComponent",
+  "date": "2026-10-14",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Affine cohomology edge: correcting its construction before exact-family normalization.",
+   "via": [
+    "lem-pc-affine-derived-pushforward-sheaf-edge-compatibility-component"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeCanonical",
+  "file": "lean/Sheaf/Algebra/Homology/AffineDerivedPushforwardSheafEdgeCanonical.lean",
+  "declaration": "AlgebraicGeometry.affineDerivedPushforwardSheafEdge_canonical",
+  "statement": "def affineDerivedPushforwardSheafEdge_canonical (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ) : (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i ⋙ RingedSpace.moduleDirectImage (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom ⟶ (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙ schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-60d19",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261014T041057-L-1059047",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-60d19",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261014T041057-L-1059047",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with corrected nodes, change record, sources, and repaired C4 citations; seven modules and the direct importer compile cleanly; all 19 axiom probes contain only permitted axioms and the two reported sorry dependencies."
+ }
+}

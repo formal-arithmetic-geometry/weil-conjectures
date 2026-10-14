@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-affine-derived-pushforward-sheaf-edge-descent",
+ "kind": "statement",
+ "title": "Unique descent of the canonical affine reverse comparison",
+ "statement": "Let A,B be commutative rings, φ:B→A, f=Spec(φ), i∈ℤ, with derived scheme-module categories [def-pc-derived-category, def-pc-derived-direct-image]. There is a unique natural isomorphism τ:H^i Rf_*→f_* H^i on D_QCoh(Spec A) whose component at Q(I), for every K-injective complex I with quasi-coherent cohomology, is H^i of the canonical isomorphism Rf_*Q(I)→Q(f_*I), followed by the localization/homology factor, the explicit left exact reverse homology comparison [def-pc-left-exact-homology-comparison], and f_* of the inverse localization/homology factor at I. This determines τ including its inverse by literal equality.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-left-exact-homology-comparison"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4",
+  "place": "0AVW, proof, affine cohomology display; 08D4, bound-one truncation comparison on inverse images of affine opens."
+ },
+ "proof": [
+  {
+   "text": "Kernel/cokernel universal properties make the explicit comparison natural for chain maps. Homotopic maps agree on homology, so this descends to the K-injective homotopy category.",
+   "uses": [
+    "def-pc-left-exact-homology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each affine open V of Spec B, its inverse image W is affine. Apply the degree-i lower-truncation comparison for derived sections on W and the upper-truncation comparison for the left exact section functor. These remove the two tails in degree i. Track the canonical truncation maps through the kernel-lift and homology-projection formulas proved in def-pc-left-exact-homology-comparison; their universal properties identify the resulting comparison with the displayed reverse map. Affine acyclicity makes this comparison invertible. Invertibility on the affine basis implies invertibility of the sheaf morphism.",
+   "uses": [
+    "lem-pc-affine-morphism-hi",
+    "lem-sc-affine-open-derived-truncation-comparison",
+    "lem-sc-left-exact-upper-truncation-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The K-injective homotopy category is equivalent to the derived category. Transport the reverse comparison through this equivalence and the right-derived-unit computation. All objects admit K-injective representatives; naturality with those representative isomorphisms determines every component and proves uniqueness.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-left-exact-homology-comparison",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-pc-affine-morphism-hi",
+  "lem-sc-affine-open-derived-truncation-comparison",
+  "lem-sc-left-exact-upper-truncation-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G4",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4",
+  "place": "0AVW, proof, affine cohomology display; 08D4, bound-one truncation comparison on inverse images of affine opens.",
+  "note": "Independent canonical reverse comparison; the exact-family compatibility equation is not an input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical reverse homology comparison for a left exact functor on K injective complexes",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left exact functor canonical map from homology of mapped complex to mapped homology and naturality",
+   "results": "ShortComplex.homologyMap_mapNatTrans, mapLeftHomologyIso_hom_naturality and generic exact functor homology API; no reverse comparison for a merely left exact functor.",
+   "date": "2026-10-14",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.homologyπ",
+   "results": "Unknown identifier in the remote search index; local Mathlib provides ShortComplex.descHomology and π_descHomology.",
+   "date": "2026-10-14",
+   "verdict": "No indexed direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "leftExactHomologyComparison|homologyπ_mapHomologyIso_hom",
+   "results": "msearch grep had no matches. Local rg found the exact-cycle projection lemma in WeilConjectures.Mathlib.Algebra.Homology.SingleHomology; it is imported privately and reused. Mathlib supplies KernelFork.mapIsLimit, descHomology, mapCyclesIso and exact-homology comparisons.",
+   "date": "2026-10-14",
+   "verdict": "Generic API reused; no existing affine normalized reverse comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeComponent",
+  "date": "2026-10-14",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Affine cohomology edge: correcting its construction before exact-family normalization.",
+   "via": [
+    "lem-pc-affine-derived-pushforward-sheaf-edge-compatibility-component"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeDescent",
+  "file": "lean/Sheaf/Algebra/Homology/AffineDerivedPushforwardSheafEdgeDescent.lean",
+  "declaration": "AlgebraicGeometry.existsUnique_affineDerivedPushforwardReverseComparison",
+  "statement": "theorem existsUnique_affineDerivedPushforwardReverseComparison (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ) : ∃! τ : (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙ schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i ≅ (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i ⋙ RingedSpace.moduleDirectImage (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom, ∀ (I : CochainComplex (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) [I.IsKInjective] (hI : schemeDerivedQCohProperty (Spec (.of A)) (DerivedCategory.Q.obj I)), τ.hom.app ⟨_, hI⟩ = affineKInjectiveReverseComparison A B φ i I",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-60d19",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261014T041057-L-1059047",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-60d19",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261014T041057-L-1059047",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with corrected nodes, change record, sources, and repaired C4 citations; seven modules and the direct importer compile cleanly; all 19 axiom probes contain only permitted axioms and the two reported sorry dependencies."
+ }
+}

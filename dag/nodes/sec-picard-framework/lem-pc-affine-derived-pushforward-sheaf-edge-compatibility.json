@@ -2,10 +2,11 @@
  "id": "lem-pc-affine-derived-pushforward-sheaf-edge-compatibility",
  "kind": "statement",
  "title": "Compatibility with derived unit",
- "statement": "Let A and B be commutative rings, phi : B → A, f = Spec(phi), and i an integer, with the derived categories [def-pc-derived-category] and direct image [def-pc-derived-direct-image]. Let epsilon : f_* H^i → H^i Rf_* be a natural transformation on D_QCoh(Spec A). Assume cycle normalization: for any cochain complex K with QK quasi-coherent, any left homology data T for K in degree i and U for f_*K in degree i, and any map k : f_*T.K → U.K commuting with the cycle inclusions, the composite f_*(T.pi followed by the inverse homology-data comparison and inverse Q/homology comparison) followed by epsilon at QK equals k followed by U.pi, the inverse homology-data comparison, the inverse Q/homology comparison, and homology of the actual right-derived unit at K. Then for every additive exact quasi-coherent-valued functor F from A-modules, with f_*F exact, every cochain complex C, and every proof that Q(F C) is quasi-coherent, the composite f_*F(H^i C) → f_*H^i(Q(F C)) → H^i(Rf_* Q(F C)) formed using the exact-homology comparisons and epsilon equals the comparison formed using exact homology of f_*F and homology of the actual right-derived unit at F C.",
+ "statement": "For A,B,φ,i with derived categories [def-pc-derived-category, def-pc-derived-direct-image], the fixed affineDerivedPushforwardSheafEdge_canonical [def-pc-affine-derived-pushforward-sheaf-edge-canonical] satisfies the derived-unit compatibility equation for every additive exact quasi-coherent-valued F with f_*F exact, and every admissible complex C. This is a property of the independently constructed canonical edge, not of every natural transformation.",
  "stmt_deps": [
   "def-pc-derived-category",
-  "def-pc-derived-direct-image"
+  "def-pc-derived-direct-image",
+  "def-pc-affine-derived-pushforward-sheaf-edge-canonical"
  ],
  "source": {
   "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4",
@@ -13,19 +14,23 @@
  },
  "proof": [
   {
-   "text": "Use the left homology data of C mapped by F and by F followed by f_*. The cycle objects and inclusions agree after f_*, so apply the cycle normalization with the identity comparison of cycles. The quotient maps are F(pi) and (F followed by f_*)(pi). The latter is an epimorphism since the composite functor preserves the left homology data. Expand the functorial homology isomorphisms, reassociate, and cancel this epimorphism. Mathlib ShortComplex.LeftHomologyData.map, ShortComplex.mapHomologyIso and the Epi instance of LeftHomologyData.pi provide every operation.",
-   "uses": [],
-   "elementary": true
+   "text": "Introduce F,C and apply the fixed-component compatibility theorem.",
+   "uses": [
+    "lem-pc-affine-derived-pushforward-sheaf-edge-compatibility-component"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-affine-derived-pushforward-sheaf-edge-compatibility-component"
+ ],
  "proof_origin": {
   "by": "agent",
   "group": "G4",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4",
-  "place": "0AVW, proof, cohomology display; 08D4, bound-one truncation comparison, applied on inverse images of affine opens.",
-  "note": "Formal cycle-to-cohomology cancellation argument for an explicitly normalized edge; no affine comparison construction or unproved compatibility component is used."
+  "place": "0AVW, proof, affine cohomology display; 08D4, bound-one truncation comparison on inverse images of affine opens.",
+  "note": "Repair of the false arbitrary-epsilon interface; explicit reverse comparison and canonical inversion."
  },
  "mathlib_searches": [
   {
@@ -74,7 +79,7 @@
   "module": "Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeCompatibility",
   "file": "lean/Sheaf/Algebra/Homology/AffineDerivedPushforwardSheafEdgeCompatibility.lean",
   "declaration": "AlgebraicGeometry.affineDerivedPushforwardSheafEdge_compatibility",
-  "statement": "theorem affineDerivedPushforwardSheafEdge_compatibility\n    (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ) :\n  (ε : (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙\n      DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i ⋙\n      RingedSpace.moduleDirectImage (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom ⟶\n    (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙\n      schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙\n      DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i) →\n    (∀ (K : CochainComplex\n        (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)\n      (hK : schemeDerivedQCohProperty (Spec (.of A)) (DerivedCategory.Q.obj K))\n      (T : (K.sc i).LeftHomologyData)\n      (U : ((((RingedSpace.moduleDirectImage\n        (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).mapHomologicalComplex\n          (.up ℤ)).obj K).sc i).LeftHomologyData)\n      (k : (RingedSpace.moduleDirectImage\n        (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).obj T.K ⟶ U.K),\n      (RingedSpace.moduleDirectImage\n        (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).map T.i = k ≫ U.i →\n      (RingedSpace.moduleDirectImage\n        (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).map\n        (T.π ≫ T.homologyIso.inv ≫\n          ((DerivedCategory.homologyFunctorFactors _ i).app K).inv) ≫ ε.app ⟨_, hK⟩ =\n      k ≫ U.π ≫ U.homologyIso.inv ≫\n        ((DerivedCategory.homologyFunctorFactors _ i).app\n          (((RingedSpace.moduleDirectImage\n            (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).mapHomologicalComplex\n              (.up ℤ)).obj K)).inv ≫\n        (DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).map\n          (((RingedSpace.moduleDirectImage\n            (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit).app\n            ((HomotopyCategory.quotient _ (.up ℤ)).obj K))) →\n    ∀ (F : ModuleCat.{u} A ⥤\n        SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n      [F.Additive] [F.PreservesZeroMorphisms] [F.PreservesHomology]\n      [(F ⋙ RingedSpace.moduleDirectImage\n        (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).PreservesZeroMorphisms]\n      [(F ⋙ RingedSpace.moduleDirectImage\n        (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).PreservesHomology]\n      (_hF : ∀ M, (F.obj M).IsQuasicoherent)\n      (C : CochainComplex (ModuleCat.{u} A) ℤ)\n      (hC : schemeDerivedQCohProperty (Spec (.of A))\n        (DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj C))),\n      (RingedSpace.moduleDirectImage (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).map\n          (((C.sc i).mapHomologyIso F).inv ≫\n            ((DerivedCategory.homologyFunctorFactors _ i).app\n              ((F.mapHomologicalComplex (.up ℤ)).obj C)).inv) ≫\n        ε.app ⟨_, hC⟩ =\n      ((C.sc i).mapHomologyIso\n        (F ⋙ RingedSpace.moduleDirectImage\n          (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom)).inv ≫\n        ((DerivedCategory.homologyFunctorFactors _ i).app\n          (((F ⋙ RingedSpace.moduleDirectImage\n            (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom)\n              |>.mapHomologicalComplex (.up ℤ)).obj C)).inv ≫\n        (DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).map\n          (((RingedSpace.moduleDirectImage\n            (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit).app\n            ((HomotopyCategory.quotient _ (.up ℤ)).obj\n              ((F.mapHomologicalComplex (.up ℤ)).obj C)))",
+  "statement": "theorem affineDerivedPushforwardSheafEdge_compatibility (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ) : ∀ (F : ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) [F.Additive] [F.PreservesZeroMorphisms] [F.PreservesHomology] [(F ⋙ RingedSpace.moduleDirectImage (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).PreservesZeroMorphisms] [(F ⋙ RingedSpace.moduleDirectImage (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).PreservesHomology] (_hF : ∀ M, (F.obj M).IsQuasicoherent) (C : CochainComplex (ModuleCat.{u} A) ℤ) (hC : schemeDerivedQCohProperty (Spec (.of A)) (DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj C))), (RingedSpace.moduleDirectImage (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).map (((C.sc i).mapHomologyIso F).inv ≫ ((DerivedCategory.homologyFunctorFactors _ i).app ((F.mapHomologicalComplex (.up ℤ)).obj C)).inv) ≫ (affineDerivedPushforwardSheafEdge_canonical A B φ i).app ⟨_, hC⟩ = ((C.sc i).mapHomologyIso (F ⋙ RingedSpace.moduleDirectImage (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom)).inv ≫ ((DerivedCategory.homologyFunctorFactors _ i).app (((F ⋙ RingedSpace.moduleDirectImage (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom) |>.mapHomologicalComplex (.up ℤ)).obj C)).inv ≫ (DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).map (((RingedSpace.moduleDirectImage (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit).app ((HomotopyCategory.quotient _ (.up ℤ)).obj ((F.mapHomologicalComplex (.up ℤ)).obj C)))",
   "branch": "sheaf-dag",
   "by": "J3",
   "date": "2026-10-14"
@@ -92,34 +97,57 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-9f8bc",
+  "reviewer": "X-60d19",
   "group": "G4",
   "result": "pass",
-  "landing": "20261014T025138-L-156560",
+  "landing": "20261014T041057-L-1059047",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures and proofs matched the corrected node, change record, source argument, forced-adaptation failure, importer compilations, and axiom probes."
+  "note": "independent Codex review: Matched delivered Lean with corrected nodes, change record, sources, and repaired C4 citations; seven modules and the direct importer compile cleanly; all 19 axiom probes contain only permitted axioms and the two reported sorry dependencies."
  },
  "statement_change": {
   "date": "2026-10-14",
   "by": "G4 stage 2",
-  "old_statement": "Given the affine sheaf edge ε, its composite with exact-homology comparisons agrees with homology of the right-derived functor unit for every exact quasi-coherent-valued F and every admissible complex C.",
-  "what": "The original Lean statement quantified over arbitrary epsilon. Its supposed proof applies an identical unnormalized component statement left with sorry. Taking epsilon zero cannot satisfy the asserted derived-unit equality in a nonzero degree-zero example for the identity affine morphism. Specify normalization on cycle classes before deriving the cohomology formula. The parent existence theorem must still construct such a normalized edge; bare Nonempty with the zero natural transformation supplies no normalization.",
+  "old_statement": "Let A and B be commutative rings, phi : B → A, f = Spec(phi), and i an integer, with the derived categories [def-pc-derived-category] and direct image [def-pc-derived-direct-image]. Let epsilon : f_* H^i → H^i Rf_* be a natural transformation on D_QCoh(Spec A). Assume cycle normalization: for any cochain complex K with QK quasi-coherent, any left homology data T for K in degree i and U for f_*K in degree i, and any map k : f_*T.K → U.K commuting with the cycle inclusions, the composite f_*(T.pi followed by the inverse homology-data comparison and inverse Q/homology comparison) followed by epsilon at QK equals k followed by U.pi, the inverse homology-data comparison, the inverse Q/homology comparison, and homology of the actual right-derived unit at K. Then for every additive exact quasi-coherent-valued functor F from A-modules, with f_*F exact, every cochain complex C, and every proof that Q(F C) is quasi-coherent, the composite f_*F(H^i C) → f_*H^i(Q(F C)) → H^i(Rf_* Q(F C)) formed using the exact-homology comparisons and epsilon equals the comparison formed using exact homology of f_*F and homology of the actual right-derived unit at F C.",
+  "what": "The Lean statement quantified over arbitrary epsilon (zero gives the nonzero-field identity counterexample), or allowed an unnormalized zero witness. Pin the canonical edge independently by its unique K-injective reverse comparison, not by the exact-family compatibility equation.",
   "source": {
    "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4",
-   "place": "0AVW, proof, cohomology display; 08D4, bound-one truncation comparison, applied on inverse images of affine opens."
+   "place": "0AVW, proof, affine cohomology display; 08D4, bound-one truncation comparison on inverse images of affine opens."
   },
   "citers": [],
+  "old_stmt_deps": [
+   "def-pc-derived-category",
+   "def-pc-derived-direct-image"
+  ],
   "old_proof": [
    {
-    "text": "Compare a K-injective resolution after F and after termwise direct image; exactness identifies both cycle classes, and the defining naturality square identifies the comparison with the right-derived unit.",
-    "uses": [
-     "def-pc-ringed-spaces-derived-direct-image"
-    ],
-    "elementary": false
+    "text": "Use the left homology data of C mapped by F and by F followed by f_*. The cycle objects and inclusions agree after f_*, so apply the cycle normalization with the identity comparison of cycles. The quotient maps are F(pi) and (F followed by f_*)(pi). The latter is an epimorphism since the composite functor preserves the left homology data. Expand the functorial homology isomorphisms, reassociate, and cancel this epimorphism. Mathlib ShortComplex.LeftHomologyData.map, ShortComplex.mapHomologyIso and the Epi instance of LeftHomologyData.pi provide every operation.",
+    "uses": [],
+    "elementary": true
    }
   ],
-  "old_proof_deps": [
-   "def-pc-ringed-spaces-derived-direct-image"
-  ]
+  "old_proof_deps": [],
+  "previous": {
+   "date": "2026-10-14",
+   "by": "G4 stage 2",
+   "old_statement": "Given the affine sheaf edge ε, its composite with exact-homology comparisons agrees with homology of the right-derived functor unit for every exact quasi-coherent-valued F and every admissible complex C.",
+   "what": "The original Lean statement quantified over arbitrary epsilon. Its supposed proof applies an identical unnormalized component statement left with sorry. Taking epsilon zero cannot satisfy the asserted derived-unit equality in a nonzero degree-zero example for the identity affine morphism. Specify normalization on cycle classes before deriving the cohomology formula. The parent existence theorem must still construct such a normalized edge; bare Nonempty with the zero natural transformation supplies no normalization.",
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4",
+    "place": "0AVW, proof, cohomology display; 08D4, bound-one truncation comparison, applied on inverse images of affine opens."
+   },
+   "citers": [],
+   "old_proof": [
+    {
+     "text": "Compare a K-injective resolution after F and after termwise direct image; exactness identifies both cycle classes, and the defining naturality square identifies the comparison with the right-derived unit.",
+     "uses": [
+      "def-pc-ringed-spaces-derived-direct-image"
+     ],
+     "elementary": false
+    }
+   ],
+   "old_proof_deps": [
+    "def-pc-ringed-spaces-derived-direct-image"
+   ]
+  }
  }
 }

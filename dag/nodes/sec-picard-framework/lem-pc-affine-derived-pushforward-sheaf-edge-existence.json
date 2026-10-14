@@ -2,10 +2,11 @@
  "id": "lem-pc-affine-derived-pushforward-sheaf-edge-existence",
  "kind": "statement",
  "title": "Existence of affine derived sheaf edge",
- "statement": "For commutative rings A and B, a ring map φ : B → A, and i : ℤ, there exists a natural transformation ε from f_* H^i to H^i Rf_* on D_QCoh(Spec A).",
+ "statement": "For commutative rings A and B, φ:B→A and i∈ℤ with derived categories [def-pc-derived-category, def-pc-derived-direct-image], there exists a natural transformation epsilon:f_*H^i→H^i Rf_* on D_QCoh(Spec A) equal to affineDerivedPushforwardSheafEdge_canonical [def-pc-affine-derived-pushforward-sheaf-edge-canonical].",
  "stmt_deps": [
   "def-pc-derived-category",
-  "def-pc-derived-direct-image"
+  "def-pc-derived-direct-image",
+  "def-pc-affine-derived-pushforward-sheaf-edge-canonical"
  ],
  "source": {
   "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4",
@@ -13,19 +14,23 @@
  },
  "proof": [
   {
-   "text": "The target category of sheaves of modules has zero morphisms. Mathlib supplies zero morphisms in the functor category, with zero natural transformation having zero at every object; naturality follows from composition with zero. Thus the zero natural transformation is a witness to Nonempty. This proves the stated bare existence, without claiming normalization or compatibility with the derived unit.",
-   "uses": [],
-   "elementary": true
+   "text": "Use the independently constructed canonical edge as the witness; equality is reflexivity.",
+   "uses": [
+    "def-pc-affine-derived-pushforward-sheaf-edge-canonical"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-pc-affine-derived-pushforward-sheaf-edge-canonical"
+ ],
  "proof_origin": {
   "by": "agent",
-  "group": "F3",
+  "group": "G4",
   "date": "2026-10-14",
-  "document": "Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean",
-  "place": "HasZeroMorphisms instance for the functor category, lines 150-155; zero_app, line 158",
-  "note": "Shortest route for the unchanged bare-existence signature. No canonical-edge compatibility is claimed. The unit realized record has no statement or proof step assigned to this node."
+  "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4",
+  "place": "0AVW, proof, affine cohomology display; 08D4, bound-one truncation comparison on inverse images of affine opens.",
+  "note": "Repair of the false arbitrary-epsilon interface; explicit reverse comparison and canonical inversion."
  },
  "mathlib_searches": [
   {
@@ -74,7 +79,7 @@
   "module": "Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeExistence",
   "file": "lean/Sheaf/Algebra/Homology/AffineDerivedPushforwardSheafEdgeExistence.lean",
   "declaration": "AlgebraicGeometry.exists_affineDerivedPushforwardSheafEdge_existence",
-  "statement": "theorem exists_affineDerivedPushforwardSheafEdge_existence (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ) : Nonempty ((schemeDerivedQCohProperty (Spec (.of A))).ι ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i ⋙ RingedSpace.moduleDirectImage (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom ⟶ (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙ schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i)",
+  "statement": "theorem exists_affineDerivedPushforwardSheafEdge_existence (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ) : ∃ ε : ((schemeDerivedQCohProperty (Spec (.of A))).ι ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i ⋙ RingedSpace.moduleDirectImage (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom ⟶ (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙ schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i), ε = affineDerivedPushforwardSheafEdge_canonical A B φ i",
   "branch": "sheaf-dag",
   "by": "J3",
   "date": "2026-10-14"
@@ -92,11 +97,34 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-f64c8",
-  "group": "F3",
+  "reviewer": "X-60d19",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261014T001717-L-2549231",
+  "landing": "20261014T041057-L-1059047",
   "kind": "interface",
-  "note": "independent Codex review: Delivered proof, node fields, import change, report, and direct importer matched the packet; all delivered modules and importer compiled, and axioms were permitted."
+  "note": "independent Codex review: Matched delivered Lean with corrected nodes, change record, sources, and repaired C4 citations; seven modules and the direct importer compile cleanly; all 19 axiom probes contain only permitted axioms and the two reported sorry dependencies."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "G4 stage 2",
+  "old_statement": "For commutative rings A and B, a ring map φ : B → A, and i : ℤ, there exists a natural transformation ε from f_* H^i to H^i Rf_* on D_QCoh(Spec A).",
+  "what": "The Lean statement quantified over arbitrary epsilon (zero gives the nonzero-field identity counterexample), or allowed an unnormalized zero witness. Pin the canonical edge independently by its unique K-injective reverse comparison, not by the exact-family compatibility equation.",
+  "source": {
+   "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4",
+   "place": "0AVW, proof, affine cohomology display; 08D4, bound-one truncation comparison on inverse images of affine opens."
+  },
+  "citers": [],
+  "old_stmt_deps": [
+   "def-pc-derived-category",
+   "def-pc-derived-direct-image"
+  ],
+  "old_proof": [
+   {
+    "text": "The target category of sheaves of modules has zero morphisms. Mathlib supplies zero morphisms in the functor category, with zero natural transformation having zero at every object; naturality follows from composition with zero. Thus the zero natural transformation is a witness to Nonempty. This proves the stated bare existence, without claiming normalization or compatibility with the derived unit.",
+    "uses": [],
+    "elementary": true
+   }
+  ],
+  "old_proof_deps": []
  }
 }
