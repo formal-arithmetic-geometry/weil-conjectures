@@ -4,10 +4,10 @@
   "is": null,
   "from": {
    "node": "def-weil-finite-tor-amplitude",
-   "place": "its statement (a notion the statement uses)",
+   "place": "statement, finite-stage paragraph and display: \"there are integers a ≤ b such that, for every sheaf M of A-modules placed in degree zero\", with cohomology vanishing outside [a,b]",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Tor amplitude of a pro-etale complex",
@@ -29,22 +29,64 @@
  "proof_origin": null,
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "grep -rniE 'tor.?amplitude|torDimension|tor_dimension|finiteTor|HasTorAmplitude' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "none",
-   "date": "2026-10-09",
+   "tool": "leanfinder",
+   "query": "Tor amplitude of a complex of sheaves of modules on a ringed site",
+   "results": "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.IsGE; DerivedCategory.IsLE; DerivedCategory.instIsGEObjSingleFunctor; DerivedCategory.instIsLEObjSingleFunctor",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HasTorAmplitude",
+   "results": "none; loogle: unknown identifier 'HasTorAmplitude'",
+   "date": "2026-10-14",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "grep -rln 'Abelian.Tor|def Tor|derivedTensor|DerivedTensor|SheafOfModules.*Monoidal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; read ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal/Tor.lean and ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Monoidal.lean",
-   "results": "CategoryTheory/Monoidal/Tor.lean: Tor C n as left derived functor of the tensor product, only for a monoidal abelian category with enough projectives (HasProjectiveResolutions), which sheaf categories on a site do not have; CategoryTheory/Sites/Monoidal.lean: monoidal structure on Sheaf J A (underived); RingTheory/Flat/Basic.lean: Module.Flat for modules over a ring. No derived tensor product on the derived category of sheaves of modules, no Tor amplitude.",
-   "date": "2026-10-09",
-   "verdict": "no match (Module.Flat and Tor exist only for modules over a ring / abelian categories with enough projectives)"
+   "query": "tor.?[Aa]mplitude|[Tt]or[Dd]imension|[Ff]initeTor",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude of a complex of sheaves of modules",
+   "results": "none; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite Tor dimension means derived tensor with every module has uniformly bounded cohomology",
+   "results": "CategoryTheory.isZero_Tor_succ_of_projective; CategoryTheory.isZero_Tor'_succ_of_projective; Rep.isZero_Tor_succ_of_projective; CategoryTheory.hasProjectiveDimensionLT_iff; CategoryTheory.HasProjectiveDimensionLT.mk; CategoryTheory.HasProjectiveDimensionLT.mk'; CategoryTheory.hasInjectiveDimensionLT_iff; CategoryTheory.HasInjectiveDimensionLT.mk",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "torAmplitude",
+   "results": "none; loogle: unknown identifier 'torAmplitude'",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|finiteTorAmplitude|HasDerivedMonoidalCategory|derivedTensor",
+   "results": "none; searched Mathlib/CategoryTheory",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite Tor dimension derived tensor modules bounded cohomology",
+   "results": "none; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +106,24 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-proetale-tor-amplitude",
+  "worker": "stage1",
+  "summary": "Audited the definition against Stacks Tag 08FZ and the pro-etale blueprint. The six existing statement dependencies already name the site, constant ring sheaf, module category, derived category, cohomology sheaves, and derived tensor product, so this definition requires no child nodes or proof steps. Related slopmaster2 definitions are generic categorical implementations and do not state this ringed-site formulation exactly; they are not attachments. Mathlib searches found no matching Tor-amplitude definition for sheaves on sites. Independent second reading of sorry_map_slopmaster2_7d675a26.jsonl.gz finds no reachable sorry for the candidate definitions; the nonattachment is due to the coefficient-category identification, not unfinished helper proofs.",
+  "blueprint": "The item realizes the statement of blueprint node def-weil-finite-tor-amplitude where it invokes Tor amplitude in [a,b], namely the displayed condition H^r(K tensor^L_A M)=0 outside [a,b], and finite Tor amplitude as existence of such an interval.",
+  "source_checks": {
+   "primary": "literature/stacks-project/sites-cohomology.tex:12376–12395, label sites-cohomology-definition-tor-amplitude, Tag 08FZ, clauses (1)–(2)",
+   "supplementary": "literature/stacks-project/more-algebra.tex:16860–16881, label more-algebra-definition-tor-amplitude, Tag 0652; this is the ring-module analogue, not the site definition"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-33172fd5a",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-33172fd5a (reviewer sub-agent of L); spot-checked: Read the item, all six cited statements, sources, and unit/chapter route in full. Definition matches Stacks 08FZ and passes zero, empty-scheme, shift, and nonregular-coefficient tests. Added the missing supplementary 0652 source label in split_report only. No new nodes, accepted attachments, tool uses, or target weakening. Concrete checks and inherited graph issues are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
