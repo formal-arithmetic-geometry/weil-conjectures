@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-weil-pbc-smooth-curve-artin-schreier",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Smooth characteristic-$p$ Artin–Schreier calculation",
@@ -13,59 +13,195 @@
   "place": "node lemma-weil-pbc-smooth-curve-artin-schreier, order 1147"
  },
  "stmt_deps": [
-  "def-weil-pbc-eight-curve-assertions"
+  "def-weil-pbc-eight-curve-assertions",
+  "def-sc-curves",
+  "def-sc-constant-sheaves",
+  "def-sc-etale-qcoherent-module",
+  "pqf-def-cohomology",
+  "def-pc-field-characteristic"
  ],
  "proof": [
   {
-   "text": "The constant Λ/rΛ sheaf is killed by r. On a connected smooth curve construct all eight fields from C1-C8. For C3 at a distinct prime use prime-annihilated primary cases and zero-object preservation by the explicitly additive coefficient-forgetting functor. For C4 and C6, split on (r:k) ≠ 0. In the equal-characteristic case invertible-order torsion forces source and inverse-image cohomology to be zero by the prime nonunit cohomology lemma. C5 and C7 use the existing proper calculations.",
+   "text": "Use the natural Ext/derived cohomology comparison to read the cited Ext long exact sequence in the derived cohomology groups used here. For a smooth connected one-dimensional component $D$, take the explicit Artin--Schreier row $0\\to\\underline{\\mathbf F_p}\\xrightarrow{i}G\\xrightarrow{\\wp}G\\to0$, where $G=(\\mathcal O_D)_{\\mathrm{et}}$ and $\\wp(s)=s^p-s$. The top coherent finiteness theorem applies at $d=1$ and makes $E=H^1(D,\\mathcal O_D)$ finite-dimensional: $D$ is Noetherian by finite-type-over-Noetherian and its structure module is quasi-coherent of finite type, hence coherent by the locally Noetherian criterion. The scalar-comparison theorem identifies $H^1(D,G)$ additively with $E$ and identifies the cohomology of sectionwise multiplication by $c$ with multiplication by $c$ on $E$. Transfer the sectionwise Frobenius map $s\\mapsto s^p$ through this identification to an additive map $F:E\\to E$. The section identity $\\mathrm{Fr}\\mu_c=\\mu_{c^p}\\mathrm{Fr}$ implies $F(cv)=c^pF(v)$ after taking cohomology; additivity follows from $(s+t)^p=s^p+t^p$ and the cohomology construction on additive resolutions. Choose resolution lifts of Frobenius and the identity; their difference lifts $\\wp$, and on cocycle classes its map is the difference of their maps. Thus $H^1(\\wp)=F-1$. Semilinear surjectivity now makes $H^1(\\wp)$ surjective. The Ga comparison/vanishing theorem says $H^q(D,G)=0$ for $q\\geq2$. In the Artin--Schreier long exact sequence, surjectivity of $H^1(\\wp)$ makes $H^2(D,\\mathbf F_p)$ inject into $H^2(D,G)=0$. For $q>2$ both adjacent Ga terms vanish, so exactness gives $H^q(D,\\mathbf F_p)=0$. This argument uses only a one-dimensional component and does not apply a connected-curve theorem to a point.",
    "uses": [
-    "lem-sc-c1",
-    "lem-sc-c2",
-    "lem-sc-c3",
-    "lem-sc-c4",
-    "lem-sc-c5",
-    "lem-sc-c6",
-    "lem-sc-c7",
-    "lem-sc-c8",
-    "lem-pbc-a3-prime-annihilated-primary-cases",
-    "lem-pbc-x2-prime-torsion-nonunit-cohomology"
+    "lem-sc-as-sequence",
+    "lem-weil-pbc-top-coherent-cohomology-finite",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-sc-additive-cohomology-scalar-comparison",
+    "lem-sc-lang-steinberg",
+    "lem-sc-ga-cohomology",
+    "def-weil-pbc-etale-cohomology",
+    "lem-weil-pbc-sheaf-ext-cohomology-long-exact",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0A3J and 0A3N, section-artin-schreier and lemma-vanishing-variety-char-p-p, proof, specialized to a smooth connected curve"
+   }
   },
   {
-   "text": "Finite-type curves are Noetherian. Index their clopen connected components by ConnectedComponents C, using a representative supplied by the proved surjectivity of the quotient map. Connected-component equality proves pairwise disjointness and coverage. Each component is a connected smooth IsCurve scheme: its Krull dimension is bounded by that of C, and the other morphism properties compose with the open inclusion. Apply the connected eight-field assembly to each component. This includes zero-dimensional components; the empty curve has an empty index.",
-   "uses": [],
-   "elementary": true
+   "text": "Decompose $C$ as a finite disjoint union of smooth connected one-dimensional curves and copies of $\\operatorname{Spec}k$ by the smooth-curve/points decomposition. Higher etale cohomology of each point component is zero by geometric-point cohomology. Constant-sheaf inverse-image identifies the coefficients on every component with its constant $\\mathbf F_p$ sheaf. The canonical finite-coproduct restriction isomorphisms therefore give $H^q(C,\\mathbf F_p)=0$ for all $q\\geq2$ by step 1 and the point calculation. This proves (1), (2) and (3), including empty index sets. For any open immersion $a:W\\hookrightarrow C$, identify $W$ with its open image. Finite-type-over-Noetherian and Noetherian-open inheritance show that $W$ is quasi-compact. In an affine chart $\\operatorname{Spec}A$ of $C$, every point of $W$ has a distinguished neighbourhood $\\operatorname{Spec}A_f$ contained in $W$. Since $A$ is a finitely generated $k$-algebra, adjoining the single generator $f^{-1}$ makes $A_f$ finitely generated; quasi-compactness gives finitely many such neighbourhoods covering $W$. This verifies finite type directly from its affine-cover definition. The diagonal of $W$ is the restriction of the closed diagonal of $C$ to $W\\times_kW$, cut out locally by the same defining ideal, hence is closed; thus $W$ is separated. Smoothness restricts by the cited smooth-open theorem, and the cited open-subspace dimension theorem gives $\\dim W\\leq1$. Consequently the preceding decomposition/vanishing argument applies also to $W$, and constant-sheaf inverse-image identifies $a^{-1}\\mathbf F_p$ with $\\mathbf F_{p,W}$. Both source and target of the actual restriction in (8) are zero, so it is surjective. The empty scheme has the empty product, the zero abelian group.",
+   "uses": [
+    "lem-sbc-smooth-curve-points-decomposition",
+    "lem-weil-pbc-geometric-point-cohomology",
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-open-subspace-dimension-monotone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A5B, lemma-constant-smooth-statements, first paragraph and Case II"
+   }
   },
   {
-   "text": "Apply finite clopen constant-coefficient assembly to those component assertions, with the actual module Λ/rΛ. This returns the unchanged bundled statement, with the canonical cohomology maps and no signature modification.",
+   "text": "Use the natural Ext/derived cohomology comparison to read the cited Ext long exact sequence in the derived cohomology groups used here. For the affine calculation, apply Artin--Schreier directly on $C$ and affine quasi-coherent acyclicity to $G=(\\mathcal O_C)_{\\mathrm{et}}$. Exactness gives $H^1(C,\\mathbf F_p)\\cong\\Gamma(C,\\mathcal O_C)/(F-1)\\Gamma(C,\\mathcal O_C)$ and $H^q(C,\\mathbf F_p)=0$ for $q>1$. No surjectivity of $F-1$ on this generally infinite-dimensional ring is used.",
    "uses": [
-    "lem-pbc-k2-clopen-constant-assertions"
+    "lem-sc-as-sequence",
+    "lem-sc-etale-affine-qcoherent",
+    "lem-weil-pbc-sheaf-ext-cohomology-long-exact",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3K, lemma-vanishing-affine-char-p-p, proof and opening Artin--Schreier sequence"
+   }
+  },
+  {
+   "text": "Use the natural Ext/derived cohomology comparison to read the cited Ext long exact sequence in the derived cohomology groups used here. Assume $C$ proper; connectedness is not assumed. Let $E_q=H^q(C,\\mathcal O_C)$. Proper coherent finiteness makes each $E_q$ finite-dimensional over $k$; $\\mathcal O_C$ is coherent since a finite-type scheme over a field is Noetherian. The Frobenius comparison node identifies $H^q(C_{\\mathrm{et}},G)$ with $E_q$ and $H^q(\\wp)$ with $F_q-1$: subtract resolution lifts of Frobenius and the identity, then evaluate on cocycle classes. Here $F_q$ is $p$-linear; $F_q-1$ is additive. The semilinear surjectivity theorem makes $F_q-1$ surjective. In the Artin--Schreier long exact sequence, the connecting map after $H^{q-1}(\\wp)$ is therefore zero, so $H^q(i)$ is injective with image $\\ker(F_q-1)$, for $q=1$; in degree zero injectivity is left exactness. Consequently the actual inclusion maps induce canonical isomorphisms $H^q(C,\\mathbf F_p)\\cong E_q^{F_q}$ for $q=0,1$. The fixed-point finiteness theorem makes these groups finite. Step 2 makes every group in degree $q\\geq2$ zero, proving (5), and gives $H^2(C,\\mathbf F_p)=\\operatorname{coker}(F_1-1)=0$. In particular the degree-one identification is with the Frobenius-fixed part of the actual coherent cohomology, not just an unspecified finite-vector-space model.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-euler-characteristic-well-defined",
+    "lem-weil-pbc-coherent-frobenius-comparison",
+    "lem-sc-lang-steinberg",
+    "lem-sc-fixed-points-finite",
+    "lem-sc-as-sequence",
+    "lem-weil-pbc-sheaf-ext-cohomology-long-exact",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0A3L and 0A3P, lemma-F-1 and lemma-finiteness-proper-variety-char-p-p, proof"
+   }
+  },
+  {
+   "text": "For an algebraically closed extension $k\\subseteq k'$, let $j:C_{k'}\\to C$ be the projection. The base-change-curve statement preserves smoothness, properness and the dimension bound, so step 4 applies also to $C_{k'}$. Ring pullback commutes with $s\\mapsto s^p-s$ and the constants inclusion; the Artin--Schreier pullback-rows node provides the morphism $u:j^{-1}G\\to G'$ and the equality $u\\circ j^{-1}i=i'$, where the target row uses the inverse-image constant sheaf. Identify it with the constant sheaf on $C_{k'}$ by constant-sheaf inverse-image; its constants inclusion sends the same residue class to the same prime-field section, so it is the Artin--Schreier inclusion used in step 4. Cohomology pullback naturality then gives $H^q(i')\\rho^q=H^q(u)j^*H^q(i)$ for $q=0,1$. Under the coherent comparison node, the right hand side sends $v$ to $b_q(v\\otimes1)$ and carries Frobenius to the semilinear tensor extension $F'_q(v\\otimes a)=F_q(v)\\otimes a^p$. Thus the canonical kernel identifications of step 4 carry $\\rho^q$ precisely to $E_q^{F_q}\\to(E_q\\otimes_kk')^{F'_q}$, $v\\mapsto v\\otimes1$. The fixed-point invariance theorem makes this map an isomorphism for $q=0,1$; in higher degrees both sides vanish by step 2. This proves (7) with the specified degree-one comparison map. It does not identify Frobenius with a $k'$-linear tensor extension: the $p$-power on the scalar is essential.",
+   "uses": [
+    "lem-sc-base-change-curve",
+    "lem-pbc-artin-schreier-pullback-rows",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-coherent-frobenius-comparison",
+    "lem-sc-frobenius-fixed-invariance",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3P, lemma-finiteness-proper-variety-char-p-p, last paragraph, and Tag 0HAN, lemma-F-2"
+   }
+  },
+  {
+   "text": "Read the conjunction using the eight-assertions definition: steps 2--5 establish (1), (2), (3), (5), (7) and (8) whenever their stated hypotheses apply. For (4) and (6) the additional prime-to-characteristic hypothesis cannot hold for the nonzero constant $\\mathbf F_p$ sheaf on a nonempty $C$: at every geometric point its fibre is the group $\\mathbf F_p$, and an integer prime to $p$ acts invertibly, hence cannot annihilate that group. On the empty scheme the constant sheaf and its cohomology are zero and the conclusions hold. Thus these two implications introduce no affine field-extension invariance claim. This gives every applicable assertion for the stated curve and constant sheaf.",
+   "uses": [
+    "def-weil-pbc-eight-curve-assertions",
+    "def-weil-pbc-C4",
+    "def-weil-pbc-C6",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A5B, lemma-constant-smooth-statements, Case II; hypotheses of the eight statements in situation-what-to-prove"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sc-c1",
-  "lem-sc-c2",
-  "lem-sc-c3",
-  "lem-sc-c4",
-  "lem-sc-c5",
-  "lem-sc-c6",
-  "lem-sc-c7",
-  "lem-sc-c8",
-  "lem-pbc-a3-prime-annihilated-primary-cases",
-  "lem-pbc-x2-prime-torsion-nonunit-cohomology",
-  "lem-pbc-k2-clopen-constant-assertions"
+  "lem-sc-as-sequence",
+  "lem-weil-pbc-top-coherent-cohomology-finite",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-sc-additive-cohomology-scalar-comparison",
+  "lem-sc-lang-steinberg",
+  "lem-sc-ga-cohomology",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-sheaf-ext-cohomology-long-exact",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "lem-sbc-smooth-curve-points-decomposition",
+  "lem-weil-pbc-geometric-point-cohomology",
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-weil-pbc-coherent-frobenius-comparison",
+  "lem-sc-fixed-points-finite",
+  "lem-sc-base-change-curve",
+  "lem-pbc-artin-schreier-pullback-rows",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-sc-frobenius-fixed-invariance",
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-C4",
+  "def-weil-pbc-C6",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-smooth-curve-artin-schreier.md",
-  "place": "Lean reduction by K2: existing connected calculations, exceptional torsion cases and finite clopen assembly"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0A3J, 0A3K, 0A3N, 0A3P and 0A5B; Artin--Schreier calculation and canonical Frobenius-fixed comparison"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Artin Schreier cohomology of a smooth curve over an algebraically closed field characteristic p finite proper invariance",
+   "results": "FunctionField.classNumber; FunctionField.RingOfIntegers.instFintypeClassGroupSubtypeMemSubalgebraPolynomialRingOfIntegers; FiniteField.Extension.exists_frob_pow_eq; FiniteField.instIsCyclicAlgEquivOfFinite; FiniteField.frobeniusAlgEquivOfAlgebraic; FiniteField.Extension.frob; AlgEquiv.fintype; FiniteField.nonempty_algHom_extension",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the Frobenius-compatible etale/coherent cohomology comparison or the characteristic-p curve calculation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology with constant ZMod p coefficients on a smooth algebraic curve in characteristic p vanishes above degree one and is invariant under algebraically closed base change when proper",
+   "results": "Algebra.FormallyEtale.subsingleton_h1Cotangent; Algebra.formallyEtale_iff; Algebra.IsStandardSmooth.subsingleton_h1Cotangent; Algebra.etaleLocus_eq_compl_support; Algebra.FormallyEtale.iff_exists_algEquiv_prod; Algebra.FormallyEtale.of_isSeparable_aux; Algebra.FormallyEtale.of_restrictScalars; Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the Frobenius-compatible etale/coherent cohomology comparison or the characteristic-p curve calculation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ArtinSchreier\"",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the Frobenius-compatible etale/coherent cohomology comparison or the characteristic-p curve calculation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Artin Schreier sequence cohomology smooth curve characteristic p",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "ArtinSchreier|artin_schreier|artin.schreier",
+   "results": "Mathlib/FieldTheory/KummerExtension.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the Frobenius-compatible etale/coherent cohomology comparison or the characteristic-p curve calculation"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -127,5 +263,94 @@
   "landing": "20261012T212208-L-1097599",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lemma-weil-pbc-smooth-curve-artin-schreier",
+  "worker": "stage1",
+  "summary": "Replaced the coefficient-mismatched seed by the direct Artin--Schreier proof. Two statement-only tools expose top coherent finiteness and canonical Frobenius compatibility. Vanishing uses top coherent finiteness and semilinear surjectivity, avoiding cyclic Picard/proper-or-affine dependencies; arbitrary open restrictions are proved by vanishing on the open itself. Points, empty and disconnected curves are included, with the literal constant F_p coefficients and the actual comparison map.",
+  "blueprint": "Proof: Artin--Schreier exact sequence and affine calculation (steps 1 and 3); finite-dimensional proper Frobenius kernel/cokernel calculation (step 4); final paragraph, proper coherent base change and invariance of the kernel (step 5); all applicable assertions, including finite disjoint unions and open restrictions (steps 2 and 6).",
+  "tool_uses": [
+   {
+    "node": "lem-sc-as-sequence",
+    "why": "Generic cohomology, semilinear algebra or geometric inheritance fact used in the numbered proof step recorded in citations.json; no curve-calculation clause or unit route is replaced."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic cohomology, semilinear algebra or geometric inheritance fact used in the numbered proof step recorded in citations.json; no curve-calculation clause or unit route is replaced."
+   },
+   {
+    "node": "lem-sc-additive-cohomology-scalar-comparison",
+    "why": "Generic cohomology, semilinear algebra or geometric inheritance fact used in the numbered proof step recorded in citations.json; no curve-calculation clause or unit route is replaced."
+   },
+   {
+    "node": "lem-sc-lang-steinberg",
+    "why": "Generic cohomology, semilinear algebra or geometric inheritance fact used in the numbered proof step recorded in citations.json; no curve-calculation clause or unit route is replaced."
+   },
+   {
+    "node": "lem-sc-ga-cohomology",
+    "why": "Generic cohomology, semilinear algebra or geometric inheritance fact used in the numbered proof step recorded in citations.json; no curve-calculation clause or unit route is replaced."
+   },
+   {
+    "node": "lem-sbc-smooth-curve-points-decomposition",
+    "why": "Generic cohomology, semilinear algebra or geometric inheritance fact used in the numbered proof step recorded in citations.json; no curve-calculation clause or unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-cohomology",
+    "why": "Generic cohomology, semilinear algebra or geometric inheritance fact used in the numbered proof step recorded in citations.json; no curve-calculation clause or unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+    "why": "Generic cohomology, semilinear algebra or geometric inheritance fact used in the numbered proof step recorded in citations.json; no curve-calculation clause or unit route is replaced."
+   },
+   {
+    "node": "lem-sc-etale-affine-qcoherent",
+    "why": "Generic cohomology, semilinear algebra or geometric inheritance fact used in the numbered proof step recorded in citations.json; no curve-calculation clause or unit route is replaced."
+   },
+   {
+    "node": "lem-pc-euler-characteristic-well-defined",
+    "why": "Generic cohomology, semilinear algebra or geometric inheritance fact used in the numbered proof step recorded in citations.json; no curve-calculation clause or unit route is replaced."
+   },
+   {
+    "node": "lem-sc-fixed-points-finite",
+    "why": "Generic cohomology, semilinear algebra or geometric inheritance fact used in the numbered proof step recorded in citations.json; no curve-calculation clause or unit route is replaced."
+   },
+   {
+    "node": "lem-sc-base-change-curve",
+    "why": "Generic cohomology, semilinear algebra or geometric inheritance fact used in the numbered proof step recorded in citations.json; no curve-calculation clause or unit route is replaced."
+   },
+   {
+    "node": "lem-sc-frobenius-fixed-invariance",
+    "why": "Generic cohomology, semilinear algebra or geometric inheritance fact used in the numbered proof step recorded in citations.json; no curve-calculation clause or unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Generic cohomology, semilinear algebra or geometric inheritance fact used in the numbered proof step recorded in citations.json; no curve-calculation clause or unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-as-sequence",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-sc-additive-cohomology-scalar-comparison",
+  "lem-sc-lang-steinberg",
+  "lem-sc-ga-cohomology",
+  "lem-sbc-smooth-curve-points-decomposition",
+  "lem-weil-pbc-geometric-point-cohomology",
+  "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-sc-fixed-points-finite",
+  "lem-sc-base-change-curve",
+  "lem-sc-frobenius-fixed-invariance",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-8cbe3ebd0",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-8cbe3ebd0 (reviewer sub-agent of L); spot-checked: Read the item and both new nodes in full; checked all six steps, cited statements, Stacks sources, unit/chapter route, edge cases, duplicate candidates and dependency cycles. The canonical Frobenius kernel map and literal F_p coefficients are preserved. No repairs needed. Detailed checks and accepted tool_uses are recorded in review.md."
  }
 }
