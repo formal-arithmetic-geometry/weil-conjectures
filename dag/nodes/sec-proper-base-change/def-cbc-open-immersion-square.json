@@ -3,25 +3,91 @@
  "blueprint": {
   "is": "def-cbc-open-immersion-square",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Open-immersion square",
- "statement": "An *open-immersion square* is a pair consisting of a\ncartesian square\n\n$$\n\\begin{array}{ccc}\nU'&\\xrightarrow{g_U}&U\\\\\nj'\\downarrow&&\\downarrow j\\\\\nX'&\\xrightarrow{g}&X\n\\end{array}\n$$\n\nin which $j:U\\hookrightarrow X$ and $j':U'\\hookrightarrow X'$ are\nopen immersions, so that\n$U'=U\\times_XX'$; no hypothesis on $g$ is made.",
+ "statement": "An *open-immersion square* consists of schemes $U',U,X',X$ [def-pc-scheme] and a cartesian square [def-weil-pbc-cartesian-square]\n\n$$\n\\begin{array}{ccc}\nU'&\\xrightarrow{g_U}&U\\\\\nj'\\downarrow&&\\downarrow j\\\\\nX'&\\xrightarrow{g}&X\n\\end{array}\n$$\n\nin which $j:U\\hookrightarrow X$ and $j':U'\\hookrightarrow X'$ are open immersions [def-weil-open-immersion]. Thus $j\\circ g_U=g\\circ j'$, and the cartesian-square datum includes a chosen isomorphism $U'\\xrightarrow{\\sim}U\\times_X X'$ compatible with both projections, where the fibre product is [def-pc-fibre-product]. No hypothesis on $g$ is made.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/def-cbc-open-immersion-square.md",
   "place": "node def-cbc-open-immersion-square, order 1172"
  },
  "stmt_deps": [
+  "def-pc-scheme",
   "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A cartesian square of schemes whose two vertical morphisms are open immersions",
+   "results": "8 hits, including AlgebraicGeometry.IsOpenImmersion.isPullback, hasPullback_of_left, hasPullback_of_right, instFstScheme, and Scheme.pullback_map_isOpenImmersion. These concern components or properties, not this chosen-square package.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPullback, AlgebraicGeometry.IsOpenImmersion",
+   "results": "12 hits, including AlgebraicGeometry.IsOpenImmersion.isPullback (Mathlib/AlgebraicGeometry/OpenImmersion.lean:767), read: assumes commutativity and equality of open ranges and proves IsPullback; not a definition of the package.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "structure.*OpenImmersionSquare|def.*openImmersionSquare|structure IsPullback|class IsOpenImmersion",
+   "results": "Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Defs.lean:61: structure IsPullback; source read at lines 61-65. No bundled open-immersion-square definition.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pullback square of schemes with open immersion vertical maps and arbitrary base change",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Definition of a commutative pullback square with the vertical morphisms open embeddings of schemes",
+   "results": "8 hits including Scheme.pullback_map_isOpenImmersion, Scheme.instHasPullbacksIsOpenImmersion, IsOpenImmersion.isPullback and pullback projection instances. No definition of the complete chosen-square package.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsOpenImmersion|isPullback",
+   "results": "Subdirectory argument AlgebraicGeometry/OpenImmersion.lean. 5 hits at lines 38-43; msearch prints the single-file hits with the line in its file field. Read actual source: abbrev AlgebraicGeometry.IsOpenImmersion at Mathlib/AlgebraicGeometry/OpenImmersion.lean:38-39. This is precisely the component notion already represented by def-weil-open-immersion.",
+   "date": "2026-10-14",
+   "verdict": "no match for item; component is an existing Mathlib leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Data of a pullback diagram in the category of schemes with open subscheme inclusions on its sides",
+   "results": "8 hits: Scheme.Pullback gluing constructions and AlgebraicGeometry.isPullback_opens_inf / isPullback_opens_inf_le. Read Restrict.lean:592-605: the latter are intersection squares of opens of one scheme, not this arbitrary-base-change datum.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPullback\", \"IsOpenImmersion\"",
+   "results": "4 hits: IsOpenImmersion.isPullback, isPullback_lift_id, image_preimage_eq_preimage_image_of_isPullback, Scheme.ker_ideal_of_isPullback_of_isOpenImmersion. Read OpenImmersion.lean:767-777: isPullback proves the property from commutativity and equality of open ranges; it does not define the square datum.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "structure.*(Open.*Square|Square.*Open)|def.*(openImmersionSquare|openSubschemeSquare)",
+   "results": "0 hits in pinned Mathlib sources; no bundled structure or definition found.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -47,5 +113,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-cbc-open-immersion-square",
+  "worker": "stage1",
+  "summary": "Definition-only split: explicitly names schemes, the existing cartesian-square datum (including its chosen identification), open immersions, and fibre products. Replaces the omnibus conventions pointer by direct notion dependencies. No new nodes or proof claims. Searches found component notions but no exact bundled project declaration or Mathlib declaration.",
+  "blueprint": "Realizes the full definition of def-cbc-open-immersion-square, namely the displayed cartesian square, both open-immersion conditions, and the absence of hypotheses on g. No unit proof step is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-3af1d7639",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-3af1d7639 (reviewer sub-agent of L); spot-checked: Read the full item, source, unit/chapter route, all cited dependency statements, Mathlib sources, duplicate candidates, and archived target declarations. The definition matches the blueprint: correct square orientation, chosen pullback identification, both open immersions, arbitrary g, and no coefficient or base-change morphism added. Edge cases and Mathlib/generalization searches pass; no new nodes or proof steps exist. Review written to review.md."
+ }
 }
