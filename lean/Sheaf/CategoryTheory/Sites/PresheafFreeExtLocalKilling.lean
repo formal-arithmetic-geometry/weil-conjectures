@@ -223,9 +223,7 @@ theorem exists_presheaf_ext_local_killing_witness
     ∃ (E : Cᵒᵖ ⥤ Type v) (f : E ⟶ P),
       Presheaf.IsLocallySurjective J f ∧
       (Ext.mk₀ ((presheafToSheaf J AddCommGrpCat).map
-        (Functor.whiskerRight f AddCommGrpCat.free))).comp x (Nat.zero_add q)
-        = (0 : Ext
-          ((presheafToSheaf J AddCommGrpCat).obj (E ⋙ AddCommGrpCat.free)) F q) := by
+        (Functor.whiskerRight f AddCommGrpCat.free))).comp x (Nat.zero_add q) = 0 := by
   obtain ⟨G, g, hg, hx⟩ := Ext.exists_epi_comp_eq_zero q hq x
   let : Epi g := hg
   obtain ⟨E, f, hf, l, hl⟩ := exists_presheaf_cover_lift P G g
