@@ -1,4 +1,6 @@
 module
+
+-- Retained as a standalone declaration so probe/importer checks see the original API.
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
