@@ -7,7 +7,13 @@ module
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 
-/-! # Additive functors and homology of extension by zero -/
+/-! # Additive functors and homology of extension by zero
+
+Source: `HomologicalComplex.mapExtendIso` in
+WeilConjectures/FromJoel/Algebra/Homology/Embedding/ExtendMap.lean and
+`HomologicalComplex.extendHomologyIso` in Mathlib/Algebra/Homology/Embedding/ExtendHomology.lean.
+(blueprint: lem-weil-pbc-map-extend-homology)
+-/
 
 @[expose] public noncomputable section
 
