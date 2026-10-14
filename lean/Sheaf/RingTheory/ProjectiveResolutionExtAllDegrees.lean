@@ -2,7 +2,7 @@ module
 public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
-import Sheaf.RingTheory.ProjectiveResolutionExtDegree
+import Sheaf.RingTheory.BoundedProjectiveResolutionDimension
 import Mathlib.CategoryTheory.Abelian.Projective.Dimension
 @[expose] public section
 universe u v
@@ -27,10 +27,10 @@ theorem projective_resolution_ext_all_degrees
   let := HasExt.standard (ModuleCat.{max u v} R)
   constructor
   · intro h Y i hi
-    let := (projective_resolution_ext_degree X n).mp h
+    let := (hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE X n).mp h
     exact HasProjectiveDimensionLT.subsingleton X (n + 1) i hi Y
   · intro h
-    apply (projective_resolution_ext_degree X n).mpr
+    apply (hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE X n).mpr
     apply HasProjectiveDimensionLT.mk
     intro i hi Y e
     exact (h Y i hi).elim _ _
