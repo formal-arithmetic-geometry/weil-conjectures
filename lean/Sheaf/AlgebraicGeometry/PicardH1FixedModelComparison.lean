@@ -20,7 +20,11 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 import Sheaf.AlgebraicGeometry.PicardAffineTargetNormalization
-import Sheaf.AlgebraicGeometry.PicardFixedModelResidueChainComparison
+import Sheaf.AlgebraicGeometry.PicardResidueHomologySourceResidueComparison
+import Sheaf.AlgebraicGeometry.PicardDescendedFibreCoefficientTrivial
+import Sheaf.AlgebraicGeometry.AffineBettiModelResidueMinimality
+import Mathlib.LinearAlgebra.Projection
+import Mathlib.LinearAlgebra.Basis.VectorSpace
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 /-! # Joint degree-one comparison for a fixed minimal source model
@@ -73,10 +77,167 @@ private theorem joint_free_coordinates
     rw [LinearEquiv.symm_apply_apply]
     rfl
 
-attribute [local irreducible] structureSheafAb structureSheafCohomologyPullback
-
+set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 800000 in
+-- The tensor and quotient comparison contains several dependent module instances.
+/-- The residue square yields joint finite free coordinates.
+Source: Stacks Project, Tag 0BF2, the finite free degree-one calculation.
+The argument uses only the supplied square, source minimality and target retracts. -/
+private theorem residue_joint_coordinates
+    (W : Scheme.{v}) (U : W.Opens) (p : Ideal Γ(W, U)) [p.IsPrime]
+    {n : ℕ} (m : ℕ)
+    (K : CochainComplex
+      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)
+    (C : Fin n → CochainComplex
+      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)
+    (hC : ∀ i, IsStrictlyPerfect W U (C i))
+    (hCzero : ∀ i, (C i).d 0 1 = 0)
+    (e0 : (K.X 0).val.obj (.op (Over.mk (𝟙 U))) ≃ₗ[Γ(W, U)] Γ(W, U))
+    (e1 : (K.X 1).val.obj (.op (Over.mk (𝟙 U))) ≃ₗ[Γ(W, U)] (Fin m → Γ(W, U)))
+    (B : Type v) (D : Fin n → Type v)
+    [AddCommGroup B] [∀ i, AddCommGroup (D i)]
+    (g : ∀ i, B → D i)
+    (eK : affineResidueCycleHomology W U p K ≃+ B)
+    (eC : ∀ i, affineResidueCycleHomology W U p (C i) ≃+ D i)
+    (φ : ∀ i, K ⟶ C i)
+    (hmaps : ∀ i z, eC i (affineResidueCycleHomologyMap (φ i) z) = g i (eK z))
+    (hreszero : ∀ j : ℤ, affineResidueDifferential W U p K j (j + 1) = 0) :
+    ∃ (q : ℕ) (b : (Fin m → Γ(W, U)) →ₗ[Γ(W, U)] (Fin q → Γ(W, U))),
+      (∀ a : Γ(W, U),
+        b (e1 ((K.d 0 1).val.app (.op (Over.mk (𝟙 U))) (e0.symm a))) = 0) ∧
+      ∃ (α : (p.ResidueField ⊗[Γ(W, U)] (Fin m → Γ(W, U))) ≃+ B)
+        (β : (p.ResidueField ⊗[Γ(W, U)] (Fin q → Γ(W, U))) →+ (∀ i, D i)),
+        ∀ z, β (b.baseChange p.ResidueField z) = fun i ↦ g i (α z) := by
+  classical
+  let qK := affineResidueCycleClass W U p K
+  let src := eK.toAddMonoidHom.comp qK
+  have hsurj : Function.Surjective src :=
+    eK.surjective.comp (affineResidueCycleClass_surjective_kernel W U p K).1
+  have hinj : Function.Injective src := by
+    apply (injective_iff_map_eq_zero src).mpr
+    intro x hx
+    have hx0 : qK x = 0 := eK.injective (hx.trans eK.map_zero.symm)
+    obtain ⟨y, hy⟩ := (affineResidueCycleClass_surjective_kernel W U p K).2 x |>.mp hx0
+    apply Subtype.ext
+    change x.val = 0
+    rw [show affineResidueDifferential W U p K 0 1 = 0 from hreszero 0] at hy
+    exact hy.symm
+  let toCycles : affineResidueTerm W U p K 1 ≃+ affineResidueCycles W U p K :=
+    { toFun := fun x ↦ ⟨x, by
+        change affineResidueDifferential W U p K 1 2 x = 0
+        rw [show affineResidueDifferential W U p K 1 2 = 0 from hreszero 1]
+        rfl⟩
+      invFun := fun x ↦ x.val
+      left_inv := fun _ ↦ rfl
+      right_inv := fun _ ↦ rfl
+      map_add' := fun _ _ ↦ rfl }
+  let coords : (p.ResidueField ⊗[Γ(W, U)] (Fin m → Γ(W, U))) ≃+
+      affineResidueTerm W U p K 1 := by
+    set_option backward.isDefEq.respectTransparency false in
+      exact (e1.symm.baseChange Γ(W, U) p.ResidueField).toAddEquiv
+  let α := coords.trans (toCycles.trans (AddEquiv.ofBijective src ⟨hinj, hsurj⟩))
+  let Z := fun i ↦ affineResidueCycles W U p (C i)
+  let βcycles := fun i ↦ (eC i).toAddMonoidHom.comp
+    (affineResidueCycleClass W U p (C i))
+  let bi := fun i ↦ (((φ i).f 1).val.app (.op (Over.mk (𝟙 U)))).hom.comp
+    e1.symm.toLinearMap
+  let t := LinearMap.pi bi
+  have hc (i) (z : p.ResidueField ⊗[Γ(W, U)] (Fin m → Γ(W, U))) :
+      ∃ hz : (bi i).baseChange p.ResidueField z ∈ Z i,
+        βcycles i ⟨(bi i).baseChange p.ResidueField z, hz⟩ =
+          g i (α z) := by
+    let x := toCycles (coords z)
+    let y := affineResidueCycleMap (φ i) x
+    have hval : (bi i).baseChange p.ResidueField z = y.val :=
+      LinearMap.congr_fun (LinearMap.baseChange_comp e1.symm.toLinearMap
+        (((φ i).f 1).val.app (.op (Over.mk (𝟙 U)))).hom) z
+    have hz : (bi i).baseChange p.ResidueField z ∈ Z i := by
+      rw [hval]
+      exact y.property
+    refine ⟨hz, ?_⟩
+    have hcycle : (⟨(bi i).baseChange p.ResidueField z, hz⟩ : Z i) = y :=
+      Subtype.ext hval
+    rw [hcycle]
+    exact (congrArg (eC i)
+      (affineResidueCycleHomologyMap_class (W := W) (U := U) (p := p) (φ i) x)).symm.trans
+        (hmaps i (qK x))
+  obtain ⟨T, hT⟩ : ∃ T : ∀ i, Submodule p.ResidueField (affineResidueTerm W U p (C i) 1),
+      ∀ i, IsCompl (Z i) (T i) :=
+    Classical.axiom_of_choice (fun i ↦ (Z i).exists_isCompl)
+  let pr := fun i ↦ (LinearMap.proj i :
+    (∀ i, ((C i).X 1).val.obj (.op (Over.mk (𝟙 U)))) →ₗ[Γ(W, U)]
+      ((C i).X 1).val.obj (.op (Over.mk (𝟙 U))))
+  let γ := AddMonoidHom.pi fun i ↦ (βcycles i).comp
+    (((Z i).projectionOnto (T i) (hT i)).toAddMonoidHom.comp
+      ((pr i).baseChange p.ResidueField).toAddMonoidHom)
+  have hγ (z) : γ (t.baseChange p.ResidueField z) = fun i ↦
+      g i (α z) := by
+    funext i
+    obtain ⟨hz, heq⟩ := hc i z
+    have hcoord : (pr i).baseChange p.ResidueField (t.baseChange p.ResidueField z) =
+        (bi i).baseChange p.ResidueField z := by
+      rw [← LinearMap.comp_apply, ← LinearMap.baseChange_comp]
+      rfl
+    have hproj : (Z i).projectionOnto (T i) (hT i)
+        ((pr i).baseChange p.ResidueField (t.baseChange p.ResidueField z)) =
+          ⟨(bi i).baseChange p.ResidueField z, hz⟩ := by
+      rw [hcoord]
+      exact Submodule.projectionOnto_apply_of_mem_left (hT i) hz
+    exact (congrArg (βcycles i) hproj).trans heq
+  have ht (a) : t (e1 ((K.d 0 1).val.app (.op (Over.mk (𝟙 U))) (e0.symm a))) = 0 := by
+    ext i
+    have hc : K.d 0 1 ≫ (φ i).f 1 = 0 := by
+      rw [← (φ i).comm 0 1, hCzero i, comp_zero]
+    have he := congrArg
+      (fun q ↦ (q.val.app (.op (Over.mk (𝟙 U)))) (e0.symm a)) hc
+    have hz : (0 : K.X 0 ⟶ (C i).X 1).val = 0 := rfl
+    simpa [t, bi, SheafOfModules.comp_val, PresheafOfModules.comp_app, hz] using he
+  choose r ι π hιπ using fun i ↦ (hC i).2 (1 : ℤ)
+  let A := Γ(W, U)
+  let V := Opposite.op (Over.mk (𝟙 U))
+  let E := fun i ↦ SheafOfModules.freeSectionsLinearEquiv
+    (R := (moduleRings W.toRingedSpace).over U) (ULift.{v} (Fin (r i))) V
+  let inc : ∀ i, ((C i).X 1).val.obj V →ₗ[A] (ULift.{v} (Fin (r i)) → A) :=
+    fun i ↦ (E i).toLinearMap.comp ((ι i).val.app V).hom
+  let ret : ∀ i, (ULift.{v} (Fin (r i)) → A) →ₗ[A] ((C i).X 1).val.obj V :=
+    fun i ↦ ((π i).val.app V).hom.comp (E i).symm.toLinearMap
+  have hret (i) : (ret i).comp (inc i) = LinearMap.id := by
+    ext x
+    change ((π i).val.app V).hom ((E i).symm ((E i) (((ι i).val.app V).hom x))) = x
+    rw [LinearEquiv.symm_apply_apply]
+    change ((ι i ≫ π i).val.app V) x = x
+    rw [hιπ i]
+    rfl
+  let ti := fun i ↦ (LinearMap.proj i).comp t
+  let d := fun a ↦ e1 ((K.d 0 1).val.app V (e0.symm a))
+  have hv (i) (a) : ((inc i).comp (ti i)) (d a) = 0 := by
+    change inc i ((t (d a)) i) = 0
+    rw [ht a]
+    exact (inc i).map_zero
+  obtain ⟨q, b, hb, proj, hproj⟩ := joint_free_coordinates A m n r d
+    (fun i ↦ (inc i).comp (ti i)) hv
+  let ρ := LinearMap.pi fun i ↦ (ret i).comp (proj i)
+  have hρ : ρ.comp b = t := by
+    apply LinearMap.ext
+    intro x
+    funext i
+    have hi : ((ret i).comp (proj i)).comp b = ti i := by
+      rw [LinearMap.comp_assoc, hproj, ← LinearMap.comp_assoc, hret, LinearMap.id_comp]
+    exact LinearMap.congr_fun hi x
+  let β := γ.comp (ρ.baseChange p.ResidueField).toAddMonoidHom
+  refine ⟨q, b, hb, α, β, ?_⟩
+  intro z
+  change γ (ρ.baseChange p.ResidueField (b.baseChange p.ResidueField z)) = _
+  rw [← LinearMap.comp_apply, ← LinearMap.baseChange_comp, hρ]
+  exact hγ z
+
+attribute [local irreducible] structureSheafAb structureSheafCohomologyPullback
+  derivedFiberBetti
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 400000 in
 -- The dependent geometric comparisons require additional elaboration heartbeats.
 /-- On an affine with trivial target bundles, construct the joint degree-one map
 out of a supplied minimal source complex and identify its residue map geometrically.
@@ -118,11 +279,11 @@ giving alpha. On each target, project from the free ambient term to the projecti
 term. Over the residue field choose a linear retraction of its degree-one term onto
 the kernel of the outgoing differential; this kernel is H-one because the incoming
 differential is zero. The source minimality makes the chain-map image lie in that
-kernel, so this retraction changes none of the image vectors. Compare the
-pulled-back source trivialization with the target trivialization; they differ by a
-nonzero residue scalar. Adjust the target cohomology identification by this scalar.
-The affine higher-direct-image comparison and naturality of canonical derived base
-change then identify this map with the structure-sheaf cohomology pullback of alpha.
+kernel, so this retraction changes none of the image vectors. Use the pullbacks of
+the one source trivialization for all target cohomology identifications. The chosen
+geometric residue square identifies the resulting maps with structure-sheaf H-one
+pullback. The private algebra lemma assembles the square with the projections and
+finite free retractions.
 The immersion identifies kappa(w) with kappa(s); affine evaluation identifies kappa(p)
 with kappa(w). Taking the product gives beta and the asserted square. When n is zero
 use q zero and the unique map. When m is zero the source H-one is zero by minimality.
@@ -191,53 +352,31 @@ theorem picard_h1_fixed_model_comparison
                   (((Over.pullback (S.fromSpecResidueField s)).map
                     (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
                       (ui i) (hui i))).left) 1 (α z) := by
-  classical
-  obtain ⟨C, hC⟩ := Classical.axiomOfChoice fun i ↦
-    picard_affine_target_normalization (fi i) (hOi i)
-      ((Modules.tensorPullback (ui i)).obj L) W k U hU (htrivial i)
-  obtain ⟨α, t, γ, ht, hγ⟩ := picard_fixed_model_residue_chain_comparison
-    f Xi fi ui hui hO L W k w s hw hLs U hwU hU htrivial m K hK hnegative hrank e0 e1 hE
-    C (fun i ↦ (hC i).1) (fun i ↦ (hC i).2.1) (fun i ↦ (hC i).2.2.1)
-    (fun i ↦ (hC i).2.2.2)
-  let p := RingHom.ker (W.evaluation U w hwU).hom
-  let : p.IsPrime := RingHom.ker_isPrime (W.evaluation U w hwU).hom
-  choose r ι π hιπ using fun i ↦ ((hC i).1).2 (1 : ℤ)
-  let A := Γ(W, U)
-  let V := Opposite.op (Over.mk (𝟙 U))
-  let E := fun i ↦ SheafOfModules.freeSectionsLinearEquiv
-    (R := (moduleRings W.toRingedSpace).over U) (ULift.{v} (Fin (r i))) V
-  let inc : ∀ i, ((C i).X 1).val.obj V →ₗ[A] (ULift.{v} (Fin (r i)) → A) :=
-    fun i ↦ (E i).toLinearMap.comp ((ι i).val.app V).hom
-  let ret : ∀ i, (ULift.{v} (Fin (r i)) → A) →ₗ[A] ((C i).X 1).val.obj V :=
-    fun i ↦ ((π i).val.app V).hom.comp (E i).symm.toLinearMap
-  have hret (i) : (ret i).comp (inc i) = LinearMap.id := by
-    ext x
-    change ((π i).val.app V).hom ((E i).symm ((E i) (((ι i).val.app V).hom x))) = x
-    rw [LinearEquiv.symm_apply_apply]
-    change ((ι i ≫ π i).val.app V) x = x
-    rw [hιπ i]
-    rfl
-  let ti := fun i ↦ (LinearMap.proj i).comp t
-  let d := fun a ↦ e1 ((K.d 0 1).val.app V (e0.symm a))
-  have hv (i) (a) : ((inc i).comp (ti i)) (d a) = 0 := by
-    change inc i ((t (d a)) i) = 0
-    rw [ht a]
-    exact (inc i).map_zero
-  obtain ⟨q, b, hb, proj, hproj⟩ := joint_free_coordinates A m n r d
-    (fun i ↦ (inc i).comp (ti i)) hv
-  let ρ := LinearMap.pi fun i ↦ (ret i).comp (proj i)
-  have hρ : ρ.comp b = t := by
-    apply LinearMap.ext
-    intro x
-    funext i
-    have hi : ((ret i).comp (proj i)).comp b = ti i := by
-      rw [LinearMap.comp_assoc, hproj, ← LinearMap.comp_assoc, hret, LinearMap.id_comp]
-    exact LinearMap.congr_fun hi x
-  let β := γ.comp (ρ.baseChange p.ResidueField).toAddMonoidHom
-  refine ⟨q, b, hb, α, β, ?_⟩
-  intro z
-  change γ (ρ.baseChange p.ResidueField (b.baseChange p.ResidueField z)) = _
-  rw [← LinearMap.comp_apply, ← LinearMap.baseChange_comp, hρ]
-  exact hγ z
+  set_option backward.isDefEq.respectTransparency true in
+    classical
+    obtain ⟨C, hC⟩ := Classical.axiomOfChoice fun i ↦
+      picard_affine_target_normalization (fi i) (hOi i)
+        ((Modules.tensorPullback (ui i)).obj L) W k U hU (htrivial i)
+    let p := RingHom.ker (W.evaluation U w hwU).hom
+    let : p.IsPrime := RingHom.ker_isPrime (W.evaluation U w hwU).hom
+    let τ := Classical.choice (picard_descended_fibre_coefficient_trivial f hO L s hLs)
+    obtain ⟨eK, eC, φ, hmaps⟩ := picard_residue_homology_chosen_geometric_maps
+      f Xi fi ui hui L W k w s hw τ U hwU hU p rfl K hK hE C
+      (fun i ↦ (hC i).1) (fun i ↦ (hC i).2.2.2)
+    have hreszero := affine_betti_model_residue_minimality W
+      ((schemeDerivedDirectImage (pullback.snd f k)).obj
+        ((DerivedCategory.singleFunctor
+          (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj
+            ((Modules.tensorPullback (pullback.fst f k)).obj L)))
+      w U hwU hU K hK.1 hrank hE
+    let B := Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1
+    let D := fun i ↦ Sheaf.H
+      (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1
+    let g : ∀ i, B → D i := fun i ↦ structureSheafCohomologyPullback
+      (((Over.pullback (S.fromSpecResidueField s)).map
+        (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
+          (ui i) (hui i))).left) 1
+    exact residue_joint_coordinates W U p m K C (fun i ↦ (hC i).1)
+      (fun i ↦ (hC i).2.2.1) e0 e1 B D g eK eC φ hmaps hreszero
 
 end AlgebraicGeometry.Scheme

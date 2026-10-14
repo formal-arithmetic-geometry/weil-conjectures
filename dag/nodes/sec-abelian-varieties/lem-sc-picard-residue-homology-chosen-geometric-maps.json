@@ -1,0 +1,149 @@
+{
+ "id": "lem-sc-picard-residue-homology-chosen-geometric-maps",
+ "kind": "statement",
+ "title": "Chosen chain maps and one common geometric residue comparison",
+ "statement": "For flat proper finitely presented families, an invertible coefficient, an immersion of the base, a common trivialization of the source residue fibre, and supplied strictly perfect affine models of the source and target direct images, choose one source residue-homology equivalence, compatible target equivalences, and one chain map to each target whose residue homology square is the canonical structure-sheaf H1 pullback. Only the chosen representatives are asserted to commute; no naturality for every representative or prescribed unrelated additive comparisons is asserted.\n\nExact Lean statement:\ntheorem picard_residue_homology_chosen_geometric_maps\n    [∀ Y : Scheme.{v},\n      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]\n    [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1}\n      (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))]\n    {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ}\n    (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    [∀ i, Flat (fi i)] [∀ i, IsProper (fi i)] [∀ i, LocallyOfFinitePresentation (fi i)]\n    (ui : ∀ i, Xi i ⟶ X) (hui : ∀ i, ui i ≫ f = fi i)\n    (L : X.Modules) [L.IsInvertible]\n    (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k]\n    (w : W) (s : S) (hw : k w = s)\n    (τ : (Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅\n      SheafOfModules.unit (pullback f (S.fromSpecResidueField s)).ringCatSheaf)\n    (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U)\n    (p : Ideal Γ(W, U)) [p.IsPrime]\n    (hp : p = RingHom.ker (W.evaluation U w hwU).hom)\n    (K : CochainComplex\n      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)\n    (hK : IsStrictlyPerfect W U K)\n    (hE : Nonempty ((SheafOfModules.overFunctor.{v}\n      (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj\n      ((schemeDerivedDirectImage (pullback.snd f k)).obj\n      ((DerivedCategory.singleFunctor\n        (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj\n          ((Modules.tensorPullback (pullback.fst f k)).obj L))) ≅\n        DerivedCategory.Q.obj K))\n    (C : Fin n → CochainComplex\n      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)\n    (hC : ∀ i, IsStrictlyPerfect W U (C i))\n    (hCi : ∀ i, Nonempty ((SheafOfModules.overFunctor.{v}\n      (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj\n      ((schemeDerivedDirectImage (pullback.snd (fi i) k)).obj\n        ((DerivedCategory.singleFunctor\n          (SheafOfModules.{v} (moduleRings (pullback (fi i) k).toRingedSpace)) 0).obj\n          ((Modules.tensorPullback (pullback.fst (fi i) k)).obj\n            ((Modules.tensorPullback (ui i)).obj L)))) ≅ DerivedCategory.Q.obj (C i)))\n :\n    ∃ (eK : affineResidueCycleHomology W U p K ≃+\n        Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1)\n      (eC : ∀ i, affineResidueCycleHomology W U p (C i) ≃+\n        Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1)\n      (φ : ∀ i, K ⟶ C i),\n      ∀ i z, eC i (affineResidueCycleHomologyMap (φ i) z) =\n        structureSheafCohomologyPullback\n          (((Over.pullback (S.fromSpecResidueField s)).map\n            (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)\n              (ui i) (hui i))).left) 1 (eK z)",
+ "stmt_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-module-pullback",
+  "def-pc-perfect-complex",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-derived-fiber-betti",
+  "def-sc-invertible-module",
+  "def-sc-structure-sheaf-cohomology-pullback",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-residue-field",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-affine-residue-cycle-class-quotient",
+  "lem-sc-affine-residue-cycle-homology-map"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BF2, proof, the functorial derived arrows E to Ei and their chosen chain representatives; Tags 0B91, 01XK, 06YJ and 010V",
+  "url": "https://stacks.math.columbia.edu/tag/0BF2"
+ },
+ "proof": [
+  {
+   "text": "Construct, for every base-changed ui, the coefficient arrow by transposing the pullback identity under the pullback/direct-image adjunction and composing derived direct images. Restrict this actual arrow to U and conjugate by the supplied model isomorphisms. Lift it to one chain map using the affine perfect representative theorem.",
+   "uses": [
+    "lem-pc-perfect-affine-map-representative",
+    "def-pc-derived-direct-image",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the quotient-to-homology comparison simultaneously using picard_residue_quotient_model_homology_naturality. The common scalar transport commutes with every module map, and the canonical cycle and quotient projections commute with the homology map. This algebraic naturality theorem is proved in Lean with only the standard axioms.",
+   "uses": [
+    "new-picard-residue-quotient-model-homology",
+    "lem-sc-affine-residue-cycle-homology-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On strictly perfect complexes, the K-flat pullback counit is invertible and natural. Transport its homology comparison through open restriction, chart and residue-field identifications to the explicit section-tensor model. Apply the source residue comparison with these coherent choices, rather than independent objectwise equivalences.",
+   "uses": [
+    "lem-sc-localized-strict-perfect-residue-homology",
+    "new-picard-residue-homology-comparison-source-residue"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derived base change identifies the direct-image residue fibres with the direct images of the fibre coefficients. The mate construction respects the coefficient units and direct-image composition. The affine higher-direct-image comparison then identifies the chosen arrows on H1 with coefficient pullback. Use the one source trivialization and its pullbacks on every target. The module-to-additive cohomology comparison identifies this with structureSheafCohomologyPullback. The immersion identifies the original residue fibres. Compose to obtain the common eK and target eCi. The empty family retains only the objectwise source comparison.",
+   "uses": [
+    "new-picard-residue-homology-comparison-source-fibre"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-affine-map-representative",
+  "def-pc-derived-direct-image",
+  "lem-pc-module-pullback-adjunction",
+  "new-picard-residue-quotient-model-homology",
+  "lem-sc-affine-residue-cycle-homology-map",
+  "lem-sc-localized-strict-perfect-residue-homology",
+  "new-picard-residue-homology-comparison-source-residue",
+  "new-picard-residue-homology-comparison-source-fibre"
+ ],
+ "proof_origin": {
+  "by": "Codex",
+  "kind": "written-by-agent",
+  "date": "2026-10-15",
+  "document": "Stacks Project",
+  "place": "Tag 0BF2: parent-facing chosen representatives, with the natural compatibility construction expanded"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For proper flat schemes, affine perfect models of the derived direct image have residue homology maps agreeing with pullback on first structure sheaf cohomology.",
+   "results": "HTTP 500 Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "Unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of cohomology of a derived direct image under a morphism of schemes over the base, computed by perfect complex residue field chain maps",
+   "results": "Scheme.Hom.naturality_assoc, Scheme.Hom.naturality, Scheme.Hom.map_appLE, Scheme.Hom.map_appLE_assoc, Scheme.Hom.comp_app_assoc",
+   "date": "2026-10-15",
+   "verdict": "These are sectionwise scheme naturality lemmas; none states the derived residue/cohomology comparison."
+  },
+  {
+   "tool": "rg",
+   "query": "residue.*homology.*natur|natur.*residue.*homology|derived.*direct.*image.*cohomology in Mathlib/AlgebraicGeometry and Mathlib/Algebra/Homology",
+   "results": "No matching theorem. Repository search found the existing objectwise comparisons and the stronger residue wrapper chain. Blueprint search for 0BF2 returned zero imported blueprint nodes.",
+   "date": "2026-10-15",
+   "verdict": "No matching Mathlib or blueprint leaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "maintainer",
+  "item": "Sheaf.AlgebraicGeometry.PicardH1FixedModelComparison",
+  "date": "2026-10-15",
+  "group": "BYPASS-picardh1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof of Tag 0BF2, the chosen derived coefficient arrows and their residue H1 square",
+   "via": [
+    "lem-sc-picard-h1-fixed-model-comparison",
+    "lem-sc-picard-h1-base-descent-local-model",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardResidueHomologySourceResidueComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardResidueHomologySourceResidueComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_residue_homology_chosen_geometric_maps",
+  "statement": "theorem picard_residue_homology_chosen_geometric_maps\n    [∀ Y : Scheme.{v},\n      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]\n    [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1}\n      (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))]\n    {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ}\n    (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    [∀ i, Flat (fi i)] [∀ i, IsProper (fi i)] [∀ i, LocallyOfFinitePresentation (fi i)]\n    (ui : ∀ i, Xi i ⟶ X) (hui : ∀ i, ui i ≫ f = fi i)\n    (L : X.Modules) [L.IsInvertible]\n    (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k]\n    (w : W) (s : S) (hw : k w = s)\n    (τ : (Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅\n      SheafOfModules.unit (pullback f (S.fromSpecResidueField s)).ringCatSheaf)\n    (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U)\n    (p : Ideal Γ(W, U)) [p.IsPrime]\n    (hp : p = RingHom.ker (W.evaluation U w hwU).hom)\n    (K : CochainComplex\n      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)\n    (hK : IsStrictlyPerfect W U K)\n    (hE : Nonempty ((SheafOfModules.overFunctor.{v}\n      (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj\n      ((schemeDerivedDirectImage (pullback.snd f k)).obj\n      ((DerivedCategory.singleFunctor\n        (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj\n          ((Modules.tensorPullback (pullback.fst f k)).obj L))) ≅\n        DerivedCategory.Q.obj K))\n    (C : Fin n → CochainComplex\n      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)\n    (hC : ∀ i, IsStrictlyPerfect W U (C i))\n    (hCi : ∀ i, Nonempty ((SheafOfModules.overFunctor.{v}\n      (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj\n      ((schemeDerivedDirectImage (pullback.snd (fi i) k)).obj\n        ((DerivedCategory.singleFunctor\n          (SheafOfModules.{v} (moduleRings (pullback (fi i) k).toRingedSpace)) 0).obj\n          ((Modules.tensorPullback (pullback.fst (fi i) k)).obj\n            ((Modules.tensorPullback (ui i)).obj L)))) ≅ DerivedCategory.Q.obj (C i)))\n :\n    ∃ (eK : affineResidueCycleHomology W U p K ≃+\n        Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1)\n      (eC : ∀ i, affineResidueCycleHomology W U p (C i) ≃+\n        Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1)\n      (φ : ∀ i, K ⟶ C i),\n      ∀ i z, eC i (affineResidueCycleHomologyMap (φ i) z) =\n        structureSheafCohomologyPullback\n          (((Over.pullback (S.fromSpecResidueField s)).map\n            (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)\n              (ui i) (hui i))).left) 1 (eK z)",
+  "branch": "sheaf-dag",
+  "by": "BYPASS-picardh1",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L-only",
+  "reviewer": "Codex",
+  "result": "pass",
+  "kind": "interface",
+  "note": "Read against Stacks Tags 0BF2, 0B91 and 01XK; one named geometric compatibility proof remains open. Empty-family and zero-complex cases checked."
+ }
+}
