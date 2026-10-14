@@ -228,7 +228,7 @@ theorem exists_presheaf_ext_local_killing_witness
   obtain ⟨E, f, hf, l, hl⟩ := exists_presheaf_cover_lift P G g
   refine ⟨E, f, hf, ?_⟩
   rw [← hl, ← Ext.mk₀_comp_mk₀_assoc, hx]
-  simp
+  exact Ext.comp_zero (Ext.mk₀ l) F q q (Nat.zero_add q)
 
 /-- The local Ext killing conclusion. (blueprint: lem-sc-presheaf-free-ext-local-killing)
 Proof: apply the preceding Yoneda witness theorem, which directly supplies the
