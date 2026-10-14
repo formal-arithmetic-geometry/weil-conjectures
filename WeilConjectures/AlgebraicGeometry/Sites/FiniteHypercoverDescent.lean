@@ -78,4 +78,15 @@ theorem TruncatedDescent.exists_and_exists_hom_and_exists_eq_and_isHypercover (h
       exact ⟨V, hV, f, k, d, fun n hn ↦ d.isIso_toCosk_app n hn,
         d.exists_isHypercover hc hV.isHypercover⟩⟩
 
+/-- **The truncation of a hypercover is the base change of the descended truncation**: for a
+descent datum `d` of the `N`-truncation of `U` at the stage `Dₖ`, the terms of `U.truncate N` are
+the base changes to the limit `X` of the terms of the descended `N`-truncated object `d.T`. -/
+noncomputable def TruncatedDescent.truncateIso {U : SemiSimplicialObject c.pt.Etale} {N : ℕ}
+    {k : I} (d : TruncatedDescent c U N k) (n : ℕ) (h : n ≤ N) :
+    (U.truncate N).obj n h ≅
+      (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app k)).obj (d.T.obj n h) :=
+  have := d.isIso_toCosk_app n h
+  asIso (d.toCosk.app n) ≪≫
+    (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app k)).mapIso (d.T.coskIso n h)
+
 end AlgebraicGeometry
