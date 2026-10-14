@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-pbc-site-bounded-constant-model",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c): finite lisse cohomology reductions on a single finite stratification; the local constant complex representation used by Tag 094H via Tag 094G",
+   "via": [
+    "lem-weil-pbc-locally-constant-tensor",
+    "lem-weil-pbc-nilpotent-reduction-lissity",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Local constant finite-module model for bounded cohomology on a site",
+ "statement": "Let $\\mathcal C$ be a small site with final object $X$ [def-weil-pbc-sites-and-cohomology], and let $B$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring]. Let $K\\in D(\\mathcal C,\\underline B)$ [def-weil-abstract-derived-category] and integers $a\\leq b$ satisfy $H^q(K)=0$ for $q\\notin[a,b]$ [def-weil-derived-cohomology-sheaves]. Suppose every $H^q(K)$ is locally isomorphic to the constant sheaf of a finitely generated $B$-module [def-weil-pbc-constant-sheaf, def-weil-finitely-generated-module]. There exists a covering $\\{U_j\\to X\\}$ such that on each localized site $\\mathcal C/U_j$ [def-pur-localized-ringed-site], $K|_{U_j}$ is isomorphic in the derived category to the termwise constant sheaf complex $\\underline{M_j^\\bullet}$, where $M_j^\\bullet$ is a cochain complex of finitely generated $B$-modules [def-weil-abstract-derived-category] and $M_j^q=0$ for $q\\notin[a,b]$. The differentials of $\\underline{M_j^\\bullet}$ are induced by the $B$-linear differentials of $M_j^\\bullet$. No existence of points of the site is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094G, lemma-locally-constant, the strengthened constant-model assertion explicitly proved in its induction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-finitely-generated-module",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "locally.constant.*complex|complex.*locally.constant",
+   "results": "Mathlib/Geometry/Manifold/Complex.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned declarations concern ordinary locally constant functions, condensed sheaf constructions, finite-type predicates, or generic derived-category structures, not this arbitrary-site local derived complex assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded derived complex with locally constant finite cohomology admits a local constant finite module complex representative",
+   "results": "0 hits | service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a site a bounded complex with finite locally constant cohomology is locally represented by a bounded constant complex of finite modules over a noetherian ring",
+   "results": "CompHausLike.LocallyConstantModule.functor; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CompHausLike.LocallyConstantModule.functor_obj_val; SheafOfModules.IsFiniteType; CondensedMod.ofSheafCompHaus; CondensedMod.ofSheafProfinite; LightCondMod.ofSheafLightProfinite; LightCondMod.LocallyConstant.functor",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned declarations concern ordinary locally constant functions, condensed sheaf constructions, finite-type predicates, or generic derived-category structures, not this arbitrary-site local derived complex assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\"",
+   "results": "HasDerivedCategory; HasDerivedCategory.standard; DerivedCategory; instCategoryDerivedCategory; DerivedCategory.instHasZeroObject; DerivedCategory.instPreadditive; DerivedCategory.instHasShiftInt; DerivedCategory.singleFunctor",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned declarations concern ordinary locally constant functions, condensed sheaf constructions, finite-type predicates, or generic derived-category structures, not this arbitrary-site local derived complex assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally on an arbitrary Grothendieck site bounded complexes of finite locally constant modules come from bounded complexes of finitely generated modules via the constant sheaf functor",
+   "results": "CompHausLike.LocallyConstantModule.functor; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafCompHaus; LightCondMod.LocallyConstant.functor; LightCondMod.ofSheafLightProfinite; CondensedMod.ofSheafProfinite; CompHausLike.LocallyConstantModule.functor_obj_val; CondensedMod.LocallyConstant.functor",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned declarations concern ordinary locally constant functions, condensed sheaf constructions, finite-type predicates, or generic derived-category structures, not this arbitrary-site local derived complex assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of sheaves with bounded finite locally constant homology is locally in the essential image of the constant sheaf derived functor",
+   "results": "LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone; CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone; CategoryTheory.Sheaf.IsConstant.mem_essImage; CategoryTheory.Sheaf.mem_essImage_of_isConstant; CompHausLike.LocallyConstantModule.functor; CompHausLike.LocallyConstant.functor; CategoryTheory.Sheaf.isConstant_iff_mem_essImage; LightCondensed.IsDiscrete",
+   "date": "2026-10-14",
+   "verdict": "no match: constant single-sheaf essential-image statements and condensed sets are not local derived finite-module complex models"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*(homology|complex)|LocallyConstant.*Derived",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match: constant single-sheaf essential-image statements and condensed sets are not local derived finite-module complex models"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf.IsConstant\"",
+   "results": "CategoryTheory.Sheaf.IsConstant; CategoryTheory.Sheaf.IsConstant.mem_essImage; CategoryTheory.Sheaf.IsConstant.mk; CategoryTheory.Sheaf.isConstant_congr; CategoryTheory.Sheaf.isConstant_of_iso; CategoryTheory.Sheaf.isConstant_iff_mem_essImage; CategoryTheory.Sheaf.isConstant_iff_of_equivalence; CategoryTheory.Sheaf.isConstant_of_forget",
+   "date": "2026-10-14",
+   "verdict": "no match: constant single-sheaf essential-image statements and condensed sets are not local derived finite-module complex models"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-locally-constant-tensor",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
