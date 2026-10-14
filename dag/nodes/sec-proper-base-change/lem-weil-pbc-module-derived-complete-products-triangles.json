@@ -29,69 +29,107 @@
   "def-weil-category-product",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Products of $A$-modules are exact: a product of injections is injective coordinatewise; a tuple in the kernel of a product map has a preimage coordinatewise in the corresponding images; and a tuple in a product of quotients has a tuple of lifts (choice). Thus the abelian category of $A$-modules has exact countable products. Clause (2) of [lem-weil-derived-limit-existence] supplies countable products in $D(A)$, for arbitrary unbounded representatives. Clause (1) then supplies the multiplication-tower derived limits and says that any two choices are isomorphic. In particular the universal quantifier over such limits in [def-weil-point-derived-complete-module-complex] is equivalent to vanishing of one choice.",
+   "uses": [
+    "lem-weil-derived-limit-existence",
+    "def-weil-point-derived-complete-module-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091S, definition-derived-complete and following paragraph, using Tag 091P, lemma-hom-from-Af"
+   }
+  },
+  {
+   "text": "For each $f\\in I$, apply [lem-weil-pbc-module-localization-tower-vanishing]. By [def-weil-point-derived-complete-module-complex], an object $L$ is derived $I$-complete exactly when every morphism $A_f[0][q]\\to L$ is zero for every $f\\in I$ and $q\\in\\mathbf Z$. The sign of the shift causes no restriction because $q$ ranges over all integers.",
+   "uses": [
+    "lem-weil-pbc-module-localization-tower-vanishing",
+    "def-weil-point-derived-complete-module-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091S, definition-derived-complete and following paragraph, using Tag 091P, lemma-hom-from-Af"
+   }
+  },
+  {
+   "text": "Let $P=\\prod_{n\\geq1}K_n$, existing by step 1. Fix $f\\in I$, $q\\in\\mathbf Z$ and $a:A_f[0][q]\\to P$. Each composite $\\mathrm{pr}_n\\circ a$ is zero by completeness of $K_n$ and step 2. By the uniqueness clause of [def-weil-category-product], $a$ equals the zero morphism, which has the same composites with all projections. Step 2 now gives completeness of $P$. This argument uses no interchange of tensor products with infinite products.",
+   "uses": [
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091S, definition-derived-complete and following paragraph, using Tag 091P, lemma-hom-from-Af"
+   }
+  },
+  {
+   "text": "First, completeness is stable under every shift: the shift automorphism in [def-weil-triangulated-category] identifies maps $A_f[0][q]\\to L[r]$ with maps $A_f[0]\\lbrack q-r\\rbrack\\to L$, by applying $[-r]$. If $L$ is complete these maps vanish for all $f,q$, so step 2 makes $L[r]$ complete. For a distinguished triangle with complete first and third objects $X,Z$, fix $W=A_f[0][q]$ and $a:W\\to Y$. Since $Z$ is complete, $v\\circ a=0$. Clause (ii) of [lem-weil-pbc-hom-into-triangle-exact] gives $b:W\\to X$ with $a=u\\circ b$. Completeness of $X$ gives $b=0$, hence $a=0$. Step 2 proves completeness of $Y$. If instead $X,Y$ are complete, rotate once to $Y\\to Z\\to X[1]\\to Y[1]$; its endpoints $Y,X[1]$ are complete, so the same middle-object argument proves completeness of $Z$. If $Y,Z$ are complete, rotate backwards to $Z[-1]\\to X\\to Y\\to Z$ (up to the conventional signs); its endpoints $Z[-1],Y$ are complete, so the same argument proves completeness of $X$. These rotations are allowed by TR2 in [def-weil-triangulated-category].",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091S, definition-derived-complete and following paragraph, using Tag 091P, lemma-hom-from-Af"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-derived-limit-existence",
+  "def-weil-point-derived-complete-module-complex",
+  "lem-weil-pbc-module-localization-tower-vanishing",
+  "def-weil-category-product",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-hom-into-triangle-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 091S, definition-derived-complete and following paragraph, using Tag 091P, lemma-hom-from-Af"
+ },
  "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "In the derived category of modules over a ring the subcategory of complexes derived complete with respect to an ideal is closed under products and distinguished triangles",
-   "results": "8 hits: HasDerivedCategory.standard, HasDerivedCategory, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory",
-   "date": "2026-10-14",
-   "verdict": "no match: the hits do not state derived-completeness closure or completeness of torsion homotopy limits; ordinary adic completion and the construction of D(A) are different statements"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"DerivedCategory\", \"IsAdicComplete\"",
-   "results": "0 hits: ",
-   "date": "2026-10-14",
-   "verdict": "no match: the hits do not state derived-completeness closure or completeness of torsion homotopy limits; ordinary adic completion and the construction of D(A) are different statements"
-  },
   {
    "tool": "grep",
    "query": "derivedComplete|DerivedComplete|derived.complete",
    "results": "0 hits: ",
    "date": "2026-10-14",
-   "verdict": "no match: the hits do not state derived-completeness closure or completeness of torsion homotopy limits; ordinary adic completion and the construction of D(A) are different statements"
+   "verdict": "no match: general derived-category, categorical-localization, dimension, or orthogonal-subcategory results do not give the multiplication-tower/localized-module comparison of 091P or the full arbitrary-ideal completeness assertion"
   },
   {
    "tool": "leansearch",
-   "query": "Derived complete complexes form a triangulated subcategory closed under products",
+   "query": "Derived complete complexes form a triangulated subcategory closed under arbitrary products",
    "results": "0 hits: ; service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
   },
   {
    "tool": "leanfinder",
-   "query": "Vanishing of derived Hom from a localization is preserved by products and cones",
-   "results": "8 hits: DerivedCategory.left_fac, DerivedCategory.right_fac, HasDerivedCategory.standard, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, CategoryTheory.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoObjCochainComplexCompSingleFunctorOfNatOfHasExt, CategoryTheory.ShortComplex.ShortExact.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoX₃CochainComplexMapSingleFunctorOfNatX₁, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, CategoryTheory.hasExt_of_hasDerivedCategory",
+   "query": "Derived complete module complexes over any commutative ring are closed under countable products and distinguished triangles",
+   "results": "8 hits: HasDerivedCategory, HasDerivedCategory.standard, DerivedCategory, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.IsGrothendieckAbelian.hasExt, HomologicalComplex.isGrothendieckAbelian",
    "date": "2026-10-14",
-   "verdict": "no match: the hits do not state derived-completeness closure or completeness of torsion homotopy limits; ordinary adic completion and the construction of D(A) are different statements"
-  },
-  {
-   "tool": "grep",
-   "query": "rightOrthogonal|right_orthogonal|IsDerivedComplete|isDerivedComplete",
-   "results": "16 hits: Mathlib/CategoryTheory/ObjectProperty/Orthogonal.lean, Mathlib/CategoryTheory/ObjectProperty/Orthogonal.lean, Mathlib/CategoryTheory/ObjectProperty/Orthogonal.lean, Mathlib/CategoryTheory/ObjectProperty/Orthogonal.lean, Mathlib/CategoryTheory/ObjectProperty/Orthogonal.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
-   "date": "2026-10-14",
-   "verdict": "related results only: orthogonal triangulated subcategories and finite-product closure do not identify constant-tower completeness with localization orthogonality (091P), nor assert the stated countable-product completeness theorem"
+   "verdict": "no match: general derived-category, categorical-localization, dimension, or orthogonal-subcategory results do not give the multiplication-tower/localized-module comparison of 091P or the full arbitrary-ideal completeness assertion"
   },
   {
    "tool": "loogle",
-   "query": "\"IsTriangulated\", \"products\"",
-   "results": "3 hits: CategoryTheory.ObjectProperty.instIsClosedUnderBinaryProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms, CategoryTheory.ObjectProperty.instIsClosedUnderFiniteProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms, CategoryTheory.ObjectProperty.instIsStableUnderFiniteProductsTrWOfIsTriangulated",
+   "query": "\"DerivedCategory\", \"IsAdicComplete\"",
+   "results": "0 hits: ",
    "date": "2026-10-14",
-   "verdict": "related results only: orthogonal triangulated subcategories and finite-product closure do not identify constant-tower completeness with localization orthogonality (091P), nor assert the stated countable-product completeness theorem"
+   "verdict": "no match: general derived-category, categorical-localization, dimension, or orthogonal-subcategory results do not give the multiplication-tower/localized-module comparison of 091P or the full arbitrary-ideal completeness assertion"
   },
   {
    "tool": "leanfinder",
-   "query": "Right orthogonal to an object in a derived category is closed under products and distinguished triangles",
-   "results": "8 hits: CategoryTheory.ObjectProperty.instIsTriangulatedClosed₂RightOrthogonal, CategoryTheory.ObjectProperty.instIsTriangulatedClosed₂LeftOrthogonal, CategoryTheory.ObjectProperty.instIsTriangulatedRightOrthogonalOfIsStableUnderShiftInt, CategoryTheory.ObjectProperty.instIsTriangulatedLeftOrthogonalOfIsStableUnderShiftInt, CategoryTheory.ObjectProperty.isLocal_trW, CategoryTheory.ObjectProperty.instIsStableUnderShiftRightOrthogonal, CategoryTheory.ObjectProperty.isColocal_trW, CategoryTheory.ObjectProperty.instIsStableUnderShiftLeftOrthogonal",
+   "query": "Right orthogonal objects in a derived category are closed under products and cones",
+   "results": "8 hits: CategoryTheory.ObjectProperty.instIsTriangulatedClosed₂RightOrthogonal, CategoryTheory.ObjectProperty.instIsTriangulatedClosed₂LeftOrthogonal, CategoryTheory.ObjectProperty.instIsTriangulatedRightOrthogonalOfIsStableUnderShiftInt, CategoryTheory.ObjectProperty.instIsStableUnderShiftRightOrthogonal, CategoryTheory.ObjectProperty.instIsTriangulatedLeftOrthogonalOfIsStableUnderShiftInt, CategoryTheory.ObjectProperty.isLocal_trW, CategoryTheory.ObjectProperty.instIsStableUnderShiftLeftOrthogonal, CategoryTheory.ObjectProperty.isColocal_trW",
    "date": "2026-10-14",
-   "verdict": "related results only: orthogonal triangulated subcategories and finite-product closure do not identify constant-tower completeness with localization orthogonality (091P), nor assert the stated countable-product completeness theorem"
+   "verdict": "no match: general derived-category, categorical-localization, dimension, or orthogonal-subcategory results do not give the multiplication-tower/localized-module comparison of 091P or the full arbitrary-ideal completeness assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-nilpotent-torsion-derived-limit-complete",
   "by": "worker",
@@ -107,5 +145,34 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-module-derived-complete-products-triangles",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved product existence and completeness via the localized-module Hom test, and two-out-of-three by explicit factorization and rotations. Added only the scalar localization/tower vanishing criterion of 091P, not a closure clause. Checked unbounded complexes, arbitrary ideals and the existing narrower principal-ideal Lean theorem.",
+  "blueprint": "Realizes the lattice reconstruction closure argument in the first proof sentence of thm-weil-pbc-finite-extension, along the recorded nilpotent-torsion-derived-limit-complete ancestry; no change to unit route.",
+  "tool_uses": [
+   {
+    "node": "def-weil-point-derived-complete-module-complex",
+    "why": "Defines the module (not pro-etale coefficient-sheaf) completeness condition used by the item; this unit does not supply another module definition."
+   },
+   {
+    "node": "def-weil-triangulated-category",
+    "why": "Supplies shifts and triangle rotation axioms for the elementary closure argument in the module derived category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-point-derived-complete-module-complex",
+  "def-weil-triangulated-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-84e892ef3",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-84e892ef3 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited statements; verified Stacks 091P/091S, all four proof steps, edge cases, duplicate candidates, dependency cycles, unit route, and archived master target coefficients and morphism. No repairs needed. Concrete checks are in review.md."
  }
 }
