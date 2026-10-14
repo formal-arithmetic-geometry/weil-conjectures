@@ -54,8 +54,10 @@ change morphisms are set up. It describes the state of \texttt{master} after the
 the coefficient rings, in which every non-finite coefficient ring is a \emph{condensed ring}
 pulled back to each $X_\proet$ from the pro-\'etale site of a point; the design notes for
 this refactor are \texttt{WeilConjectures/RefactorInstruction.tex}. It also records how the
-functors interact with a change of coefficient ring, and how $\Qlbar$-coefficients relate to
-the finite subextensions $E$.
+functors interact with a change of coefficient ring, how $\Qlbar$-coefficients relate to
+the finite subextensions $E$, how the (derived) pullback is made strong monoidal, and how
+the six functors are lifted to \emph{Weil objects}, i.e.\ complexes with a Frobenius
+structure isomorphism.
 \end{abstract}
 
 \tableofcontents
@@ -623,6 +625,86 @@ product $\otimes_{\Lambda_X}$, not a derived tensor over $\mathbb{Z}$ followed b
 quotient; $\RHom_{\Lambda_X}$ is its right adjoint.
 \end{choice}
 
+\subsection{The pullback is strong monoidal}
+\label{sec:sixB-monoidal}
+
+\paragraph{Underived.} The two factors of $f^*=\Ext_{\alpha_f}\circ\mathrm{mapMod}(f^*)$ are
+strong monoidal for the relative tensor products, by two general facts about module objects
+(\lean{CategoryTheory/ModuleObjects/MapModMonoidal}):
+\begin{itemize}
+\item \textbf{Transport along a braided functor.} For a braided strong monoidal $F\colon
+  \mathcal{C}\to\mathcal{D}$ preserving coequalizers and a commutative algebra object
+  $\mathcal{R}$, $\mathrm{mapMod}(F)\colon\Mod_{\mathcal{R}}(\mathcal{C})\to\Mod_{F\mathcal{R}}
+  (\mathcal{D})$ is strong monoidal (\lean{Functor.mapModCoreMonoidal},
+  \lean{Functor.monoidal_mapMod}). The comparison $FM\otimes_{F\mathcal{R}}FN\cong F(M\otimes_{
+  \mathcal{R}}N)$ is induced on the coequalizers presenting both sides by the tensorator
+  $\mu_F\colon FM\otimes FN\cong F(M\otimes N)$, $F$ preserving the coequalizer that presents
+  $M\otimes_{\mathcal{R}}N$. Braidedness is needed because the right action of $\mathcal{R}$
+  on a module object involves the braiding.
+\item \textbf{Change of scalars along an isomorphism.} For an isomorphism $\psi\colon\mathcal
+  S\to\mathcal R$ of commutative algebra objects, $\Res_\psi$ is strong monoidal
+  (\lean{Mod.comapCoreMonoidal}): the coequalizers presenting $M\otimes_{\mathcal S}N$ and
+  $M\otimes_{\mathcal R}N$ differ by the isomorphism $M\otimes\psi\otimes N$, and the
+  comparison is the identity on $M\otimes N$. Hence $\Ext_\varphi\cong\Res_{\varphi^{-1}}$ is
+  strong monoidal for an isomorphism $\varphi$ (\lean{Mod.monoidal_extendScalars}), the
+  structure being transported along this isomorphism.
+\end{itemize}
+
+\begin{proposition}[Monoidality of the module-object pullback]
+For every $f$ and every commutative condensed ring $\Lambda$, $f^*\colon\Mod_{\Lambda_Y}\to
+\Mod_{\Lambda_X}$ is strong monoidal (\lean{ProEtale.CondensedRing.monoidal_upperStar}):
+\[
+  f^*(M\otimes_{\Lambda_Y}N)\cong f^*M\otimes_{\Lambda_X}f^*N,\qquad f^*\Lambda_Y\cong\Lambda_X,
+\]
+coherently. The sheaf pullback $f^*$ is braided and preserves coequalizers (a left adjoint),
+and $\alpha_f$ is an isomorphism.
+\end{proposition}
+This is a second place where the Cartesian coefficient system is used: with $\alpha_f$ only a
+morphism, $\Ext_{\alpha_f}$ would merely be lax. The comparison isomorphisms are constructed;
+their balancing, linearity and the coherence axioms are \texttt{sorry}, all of them reducing,
+after precomposition with the coequalizer projections, to the coherences of $\mu_F$ and of the
+algebra structures.
+
+\begin{choice}[Monoidality of $Lf^*$ via the universal property of derived bifunctors]
+The comparison
+\[
+  m_{K,L}\colon Lf^*(K\lotimes_{\Lambda_Y}L)\longrightarrow Lf^*K\lotimes_{\Lambda_X}Lf^*L
+\]
+(\lean{ProEtale.CondensedRing.leftDerivedUpperStarTensor}) is \emph{produced} by the universal
+property of left derived bifunctors (\lean{Functor.leftDerived}$_2$\lean{Lift}), not written down on
+resolutions:
+\begin{enumerate}
+\item on complexes, the tensorator $\mu$ of the underived $f^*$ applied degreewise gives
+  $f^*A\otimes f^*B\to f^*(A\otimes B)$ for the total tensor product
+  (\lean{ProEtale.CondensedRing.upperStarTensorComplexHom});
+\item composed with the lax structure of $Q_h\colon K(\Mod_{\Lambda_X})\to\D(\Mod_{\Lambda_X})$
+  this is a transformation $Q_h(f^*A)\lotimes Q_h(f^*B)\to Q_h(f^*(A\otimes B))$ of bifunctors
+  on the homotopy category (\lean{ProEtale.CondensedRing.upperStarTensorCounit});
+\item $(K,L)\mapsto Lf^*K\lotimes Lf^*L$, with this transformation precomposed with the
+  counits of $Lf^*$, is a left derived bifunctor of $(A,B)\mapsto Q_h(f^*(A\otimes B))$
+  (\lean{ProEtale.CondensedRing.isLeftDerivedFunctor}$_2$\lean{_upperStarTensor}), and $(K,L)\mapsto
+  Lf^*(K\lotimes L)$ maps to the same target; $m$ is the induced morphism, characterized by
+  its compatibility with the counits (\lean{ProEtale.CondensedRing.leftDerivedUpperStarTensor_fac}).
+\end{enumerate}
+The unit comparison $Lf^*\Lambda_Y\cong Q_h(f^*\Lambda_Y)\cong\Lambda_X$
+(\lean{ProEtale.CondensedRing.leftDerivedUpperStarUnitIso}) uses that the counit of $Lf^*$ is an
+isomorphism ($f^*$ exact) and the underived unit comparison in degree $0$.
+\end{choice}
+
+\begin{proposition}[$Lf^*$ is strong monoidal]
+$m$ is an isomorphism (\lean{ProEtale.CondensedRing.isIso_leftDerivedUpperStarTensor},
+\lean{ProEtale.CondensedRing.leftDerivedUpperStarTensorIso}), and with $m^{-1}$ as tensorator
+$Lf^*\colon\D(\Mod_{\Lambda_Y})\to\D(\Mod_{\Lambda_X})$ is strong monoidal
+(\lean{ProEtale.CondensedRing.monoidal_leftDerivedUpperStar}).
+\end{proposition}
+All the data is constructed; that the degreewise maps commute with differentials, the
+naturalities, the derived-bifunctor property, the invertibility of $m$ and the coherence axioms
+are \texttt{sorry}. Each is checked on pairs (triples) of K-flat complexes, which $f^*$
+preserves, where both sides are computed by $f^*A\otimes f^*B$ and $f^*(A\otimes B)$ and $m$ is
+induced by $\mu$. The comparison $m$ is the input of the projection morphisms, hence of
+Verdier and Poincar\'e duality, and of the Weil structure on $\lotimes$
+(\S\ref{sec:weil-six}).
+
 \begin{choice}[No exceptional pullback on the ambient category]
 On module objects $Rf^!$ is \emph{not} defined on the unbounded $\D(\Mod_{\Lambda_X})$: it is
 constructed directly on the bounded constructible categories (\S\ref{sec:sixCons}), and only for
@@ -817,12 +899,33 @@ Then
 \]
 the pasting of $\mathrm{BC}$ for the proper square with the \emph{inverse} of the
 extension-by-zero exchange for the open square (\lean{Etale.lowerShriekBaseChange} on $\D^+$,
-\lean{ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange} on $\Dc(-,\Lambda)$).
+\lean{ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationBaseChangePasting}
+on $\Dc(-,\Lambda)$, for any $\Lambda$).
 \end{choice}
 Taking the inverse of $\mathrm{Ex}_i$ requires base change for extension by zero
-(Proposition~\ref{prop:bc-open} below) already in the definition. Independence of
-$\mathrm{Ex}_!^c$ from the compactification is not treated: all statements are relative to
-an explicit $c$.
+(Proposition~\ref{prop:bc-open} below) already in the definition. Note that $\mathrm{Ex}_!^c$
+lands in $Rf'^{\,c'}_!$ for the \emph{base-changed} compactification $c'$, not in the lower
+shriek $Rf'_!$ of the compactification chosen for $f'$.
+
+\begin{choice}[Independence of the compactification; $\mathrm{Ex}_!$ for the chosen $Rf_!$]
+For $\Lambda=\underline E$ ($E/\mathbb Q_\ell$ finite) and $\Lambda=\underline{\Qlbar}$, two
+compactifications $c_1,c_2$ of $f$ give isomorphic lower shrieks
+\[
+  Rf_!^{c_1}\cong Rf_!^{c_2}\colon\Dc(X,\Lambda)\to\Dc(Y,\Lambda)
+\]
+(\lean{ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso},
+\lean{ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl}).
+The compact-support base change morphism for the lower shrieks of the chosen
+compactifications $c_f$, $c_{f'}$ is then
+\[
+  \mathrm{Ex}_!\colon Lg^*\circ Rf_!\xrightarrow{\ \mathrm{Ex}_!^{c_f}\ }
+  Rf'^{\,c_f'}_!\circ Lg'^*\xrightarrow{\ \sim\ }Rf'_!\circ Lg'^*
+\]
+(\lean{ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange},
+\lean{ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl}).
+\end{choice}
+The independence isomorphisms are data and are currently \texttt{sorry}; no compatibility of
+them with each other (cocycle condition) or with $\mathrm{Ex}_!^c$ is stated.
 
 \subsection{The base change theorems}
 
@@ -864,6 +967,23 @@ Both are \texttt{sorry}, and (b) is stated separately from (a). The expected ded
 (b) from (a) is by restriction of scalars along $\mathbb Z\to\Lambda$, which is exact,
 conservative, and compatible with the base change mates.
 
+\begin{proposition}[Smooth base change, \'etale]
+\label{prop:sbc-etale}
+Let the square be cartesian with $g$ \emph{smooth} and $f$ quasi-compact and
+quasi-separated.
+\begin{enumerate}[label=(\alph*)]
+\item (\lean{Etale.isIso_baseChange_of_smooth}) For $K\in\D^+(X_{\mathrm{\acute et}},\Ab)$
+  whose cohomology sheaves are torsion of order invertible on $Y$
+  (\lean{Etale.DerivedCategory.Plus.orderInvertibleOnHomology}), $\mathrm{BC}_{sq}(K)$ is an
+  isomorphism.
+\item (\lean{Etale.isIso_baseChange_of_smooth_of_ring_order_invertible}) For a commutative
+  ring $\Lambda$ whose elements have additive order invertible in $\Gamma(Y,\cO_Y)$,
+  $\mathrm{BC}_{sq}$ is an isomorphism of functors on $\D^+(X_{\mathrm{\acute et}},\Lambda)$.
+\end{enumerate}
+\end{proposition}
+Both are \texttt{sorry}; they are statements about the same morphism $\mathrm{BC}_{sq}$ as
+proper base change. No $\ell$-adic version is stated yet.
+
 \begin{proposition}[Proper base change, $\ell$-adic]
 \label{prop:pbc-ladic}
 In the setting of \S\ref{sec:sixCons}, let the square be cartesian with $f$ proper; no
@@ -893,14 +1013,19 @@ hypothesis on $g$.
   as an additive group, $\mathrm{Ex}_!^c\colon Lg^*\circ Rf_!^c\to Rf'^{\,c'}_!\circ Lg'^*$ is
   an isomorphism of functors $\D^+(X_{\mathrm{\acute et}},\Lambda)\to
   \D^+(Y'_{\mathrm{\acute et}},\Lambda)$.
+\item (\lean{ProEtale.CondensedRing.isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting}
+  and its \lean{_padicAlgCl} version) For $\Lambda=\underline E$ and
+  $\Lambda=\underline{\Qlbar}$, $\mathrm{Ex}_!^c$ is an isomorphism of functors
+  $\Dc(X,\Lambda)\to\Dc(Y',\Lambda)$.
 \item (\lean{ProEtale.CondensedRing.isIso_boundedConstructibleLowerShriekBaseChange},
   \lean{ProEtale.CondensedRing.isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl})
-  For $\Lambda=\underline E$ and $\Lambda=\underline{\Qlbar}$, $\mathrm{Ex}_!^c$ is an
-  isomorphism of functors $\Dc(X,\Lambda)\to\Dc(Y',\Lambda)$.
+  Consequently, for the same $\Lambda$, $\mathrm{Ex}_!\colon Lg^*\circ Rf_!\to Rf'_!\circ Lg'^*$
+  is an isomorphism.
 \end{enumerate}
 \end{proposition}
 These are \emph{proved}, not sorried, modulo
-Propositions~\ref{prop:bc-open}--\ref{prop:pbc-ladic}: in the defining composite of
+Propositions~\ref{prop:bc-open}--\ref{prop:pbc-ladic} and (for (c)) the independence of the
+compactification: in the defining composite of
 $\mathrm{Ex}_!^c$, the second factor $Rp'_*\mathrm{Ex}_i^{-1}$ is an isomorphism by
 construction, and the first factor $\mathrm{BC}_p\,i_!$ is an isomorphism by proper base
 change for the proper $p$ applied to the proper square of $c'$. Properness enters only
@@ -989,6 +1114,151 @@ for transporting base change from finite $E$ to $\Qlbar$: by (Obj) every $K$ is
 $T_{E,\Qlbar}K_E$, and (Pull), (Push) relate the base change maps at $K$ and at $K_E$.
 
 %======================================================================
+\section{Weil objects}
+\label{sec:weil}
+%======================================================================
+
+\subsection{The definition}
+
+\begin{definition}[Weil object]
+\label{def:weil-object}
+Let $\Phi\colon\mathcal C\to\mathcal C$ be an endofunctor. A \emph{Weil object} of $\mathcal C$
+for $\Phi$ is a pair $(K,\varphi_K)$ of an object $K$ and an isomorphism
+\[
+  \varphi_K\colon\Phi(K)\xrightarrow{\ \sim\ }K,
+\]
+and a morphism $(K,\varphi_K)\to(L,\varphi_L)$ is a morphism $u\colon K\to L$ with $u\circ
+\varphi_K=\varphi_L\circ\Phi(u)$. The category of Weil objects is
+$\mathrm{IsoAlg}(\Phi)$ (\lean{CategoryTheory.Endofunctor.IsoAlgebra}), with forgetful functor
+to $\mathcal C$ (\lean{IsoAlgebra.forget}).
+\end{definition}
+
+\begin{choice}[Weil objects as algebras with invertible structure map]
+$\mathrm{IsoAlg}(\Phi)$ is the full subcategory of mathlib's category of $\Phi$-algebras
+$(K,\Phi K\to K)$ on those whose structure morphism is an isomorphism
+(\lean{Endofunctor.Algebra.IsIsoStr}). Consequently:
+\begin{itemize}
+\item $\varphi_K$ is \emph{structure data}, not the proposition that some isomorphism
+  $\Phi K\cong K$ exists;
+\item no group action is used: the single generator $\Phi$ with the coherently iterated
+  structure isomorphisms $\varphi_K^{[n]}\colon\Phi^nK\cong K$,
+  $\varphi^{[n+1]}_K=\varphi_K\circ\Phi(\varphi^{[n]}_K)$ (\lean{IsoAlgebra.strIterate}),
+  suffices; the $n$-fold Frobenius operators of the trace formula are their images, not
+  separately chosen operators.
+\end{itemize}
+\end{choice}
+
+The geometric instances take $\Phi$ to be the pullback along an automorphism $e\colon X\cong
+X$. Fixing an arbitrary pair $(X,e)$, rather than the geometric fibre of a fixed $X_0/\mathbb
+F_q$ with its Frobenius, is what the six functors need: a morphism $f\colon X\to Y$ is
+compatible with automorphisms $e_X$, $e_Y$ when
+\[
+  f\circ e_X=e_Y\circ f\qquad(\text{Lean: }\lean{hf}),
+\]
+and the \emph{Frobenius square} formed by $e_X$, $e_Y$ and two copies of $f$ is cartesian since
+its horizontal maps are isomorphisms (\lean{ProEtale.CondensedRing.weilFrobeniusSquare}).
+
+\paragraph{\'Etale Weil sheaves and complexes.} With $\Phi=e^*$ on
+$\Sh(X_{\mathrm{\acute et}},\mathcal A)$, resp.\ $\Phi=\D(e^*)$ on $\D(X_{\mathrm{\acute et}},
+\mathcal A)$ ($e^*$ is exact, so it acts levelwise), one gets Weil sheaves
+(\lean{AlgebraicGeometry.WeilSheaf}) and Weil complexes (\lean{AlgebraicGeometry.WeilComplex});
+for $X$ the geometric fibre of $X_0/\mathbb F_q$ and $e$ its geometric Frobenius these are the
+classical Weil sheaves and complexes \emph{on $X_0$}. As $e^*$ is t-exact, $\mathcal H^n$ lifts
+to $\mathrm{WeilComplex}\to\mathrm{WeilSheaf}$ (\lean{WeilComplex.homologyFunctor}).
+
+\begin{choice}[Weil objects of $\Dc(X,\Qlbar)$]
+In the setting of \S\ref{sec:sixCons}, for an automorphism $e$ of $X$ over $\operatorname{Spec}k$,
+the \emph{Frobenius pullback} is the restricted derived pullback
+\[
+  \Phi_X:=Le^*\colon\Dc(X,\Qlbar)\to\Dc(X,\Qlbar)
+\]
+(\lean{boundedConstructibleUpperStar}), and the Weil objects of $\Dc(X,\Qlbar)$ are
+$\mathrm{IsoAlg}(\Phi_X)$ (\lean{ProEtale.CondensedRing.WeilBoundedConstructible}). The
+coefficients are fixed by construction: $Le^*$ is extension of scalars along
+$\alpha_e\colon e^*\underline{\Qlbar}_X\cong\underline{\Qlbar}_X$. Forgetting constructibility,
+a Weil object of $\Dc$ is a Weil object of $\D(\Mod_{\underline{\Qlbar}_X})$ for
+$L(e^*)$ (\lean{WeilBoundedConstructible.toDerivedCategory}).
+\end{choice}
+\begin{remark}
+The geometric Frobenius of the geometric fibre of $X_0/\mathbb F_q$ is semilinear over
+$\overline{\mathbb F}_q$, not a morphism over $\operatorname{Spec}k$ for $k=\overline{\mathbb
+F}_q$, and the geometric fibre is not of finite type over $\mathbb F_q$. So it does not yet fit
+the hypothesis $e$ over $k$; this needs either the bounded constructible pullback beyond
+$k$-morphisms or a Frobenius-twist interface.
+\end{remark}
+
+\subsection{Six functors on Weil objects}
+\label{sec:weil-six}
+
+\begin{choice}[Transport along a commutation isomorphism]
+A functor $G$ lifts to Weil objects once it comes with a \emph{Frobenius comparison}
+isomorphism $b_G\colon\Phi\circ G\cong G\circ\Phi$; the Weil structure of $GK$ is
+\[
+  \varphi_{GK}\colon\Phi(GK)\xrightarrow{\ b_G\ }G(\Phi K)\xrightarrow{\ G(\varphi_K)\ }GK
+\]
+(\lean{IsoAlgebra.mapOfNatIso}). For a bifunctor $B$ with $b_B\colon\Phi B(K,L)\cong
+B(\Phi K,\Phi L)$ the same is done on the product (\lean{IsoAlgebra.mapOfNatIso}$_2$), and a
+contravariant variable enters through $\varphi_K^{-1}$ (\lean{IsoAlgebra.opFunctor}). Every
+lifted functor commutes \emph{strictly} with the forgetful functors.
+\end{choice}
+
+So each of the six functors requires only its comparison $b_G$, which is in every case one of
+the canonical morphisms already constructed for the six functors on $\Dc$:
+
+\medskip
+\noindent
+\begin{tabularx}{\textwidth}{@{}lXl@{}}
+\toprule
+Functor & Frobenius comparison $b_G$ & Lean \\
+\midrule
+$Lf^*$ & $\Phi_XLf^*\cong Lf^*\Phi_Y$: the pullback comparison $\theta$ of the Frobenius square
+  (composition isomorphisms; no base change theorem) &
+  \lean{weilUpperStar} \\
+$Rf_*$ & $\Phi_YRf_*\to Rf_*\Phi_X$: the base change morphism $\mathrm{BC}$ of the Frobenius
+  square, invertible because $e_X$, $e_Y$ are; no properness of $f$ &
+  \lean{weilLowerStar} \\
+$Rf_!$ & $\Phi_YRf_!\cong Rf_!\Phi_X$: the compact-support base change $\mathrm{Ex}_!$ of the
+  (cartesian) Frobenius square, Proposition~\ref{prop:bc-shriek}(c) &
+  \lean{weilLowerShriek} \\
+$Rf^!$ & $\Phi_XRf^!\to Rf^!\Phi_Y$: the mate of $b_!^{-1}$ along $Rf_!\dashv Rf^!$;
+  invertible since $\Phi_X$, $\Phi_Y$ are equivalences
+  (\lean{CategoryTheory.isIso_mateEquiv_of_isEquivalence}) &
+  \lean{weilUpperShriek} \\
+$\lotimes$ & $\Phi(K\lotimes L)\cong\Phi K\lotimes\Phi L$: the restriction to $\Dc$ of the
+  monoidal comparison $m$ of $Le^*$ (\S\ref{sec:sixB-monoidal}) & \lean{weilTensor} \\
+$\RHom$ & $\Phi\RHom(K,L)\to\RHom(\Phi K,\Phi L)$: adjoint of $\Phi K\lotimes\Phi\RHom(K,L)
+  \xrightarrow{m^{-1}}\Phi(K\lotimes\RHom(K,L))\xrightarrow{\Phi\,\mathrm{ev}}\Phi L$; Weil
+  structure $\RHom(\varphi_K^{-1},\varphi_L)\circ h$ & \lean{weilHom} \\
+\bottomrule
+\end{tabularx}
+\medskip
+
+(all in namespace \lean{ProEtale.CondensedRing}, folder \lean{WeilObject/BoundedConstructible};
+the comparisons are \lean{weilUpperStarComparison}, \lean{weilLowerStarComparison},
+\lean{weilLowerShriekComparison}, \lean{weilUpperShriekComparison},
+\lean{weilTensorComparison}, \lean{weilHomComparison}.)
+
+The point of this design is that nothing about Frobenius is proved separately: the comparisons
+are the base change and monoidality morphisms of the underlying six functors, specialized to
+the Frobenius square, and their invertibility comes from the base change theorems or from the
+horizontal maps being isomorphisms. In particular no proper base change is needed for $Rf_*$.
+
+\paragraph{Sorried input specific to Weil objects.}
+\begin{itemize}
+\item $\Phi_X=Le_X^*$ is an equivalence with inverse $L(e_X^{-1})^*$
+  (\lean{isEquivalence_boundedConstructibleUpperStar_of_iso}), and $\mathrm{BC}$ of a square with
+  invertible horizontal maps is an isomorphism
+  (\lean{isIso_boundedConstructibleBaseChange_of_isIso}). Both are formal, but need the identity
+  isomorphism $L(\mathrm{id})^*\cong\mathrm{id}$ of the module-object derived pullback, which is
+  not yet available.
+\item Naturality of $b_{\lotimes}$ and of $h$, and invertibility of $h$ (by Yoneda, $\Phi$ being
+  a strong monoidal equivalence; no dualizability of $K$ is needed).
+\end{itemize}
+Not yet treated: the canonical Weil structure on objects descended from $X_0$, and the
+identification of $\varphi^{[n]}$ with the structure for $e^n$ via iterated composition
+isomorphisms.
+
+%======================================================================
 \section{Summary}
 %======================================================================
 
@@ -1023,8 +1293,13 @@ $Rf_!\dashv Rf^!$ & composite of $\D(i_!)\dashv\D(i^*)$ and $Rg_*\dashv Rg^!$; u
 $\lotimes$, $\RHom$ & K-flat derived $\otimes$, right adjoint &
   K-flat derived $\otimes_{\Lambda_X}$, right adjoint\\
 on $\Dc$ & --- & restrictions of the above\\
+monoidality of $f^*$, $Lf^*$ & strong monoidal & strong monoidal: $\mathrm{mapMod}$ along a
+  braided functor and $\Ext$ along the isomorphism $\alpha_f$; $m$ for $Lf^*$ via the universal
+  property of derived bifunctors\\
 base change & $\mathrm{BC}$, $\mathrm{Ex}_!^c$ (\'etale) & $\mathrm{BC}$,
-  $\mathrm{Ex}_!^c$ on $\Dc$\\
+  $\mathrm{Ex}_!^c$ on $\Dc$; $\mathrm{Ex}_!$ for the chosen $Rf_!$ ($E$, $\Qlbar$)\\
+Weil objects & Weil sheaves and complexes (\'etale) & $\mathrm{IsoAlg}(Le^*)$ on
+  $\Dc(X,\Qlbar)$; all six functors lifted through their Frobenius comparisons\\
 \bottomrule
 \end{tabularx}
 \medskip
@@ -1042,7 +1317,14 @@ The layer B column is uniform in $\Lambda$; $\underline{\Qlbar}$ is one instance
 \item Compatibility of the base change maps with extension of scalars, to transport base
   change from finite $E$ to $\Qlbar$ via \S\ref{sec:Qlbar-colimit}; compatibility of change of
   coefficients with $\lotimes$, $\RHom$ and $Rf^!$.
-\item Independence of $\mathrm{Ex}_!^c$ from the compactification.
+\item The independence isomorphisms $Rf_!^{c_1}\cong Rf_!^{c_2}$ (stated, \texttt{sorry}) and
+  their coherence.
+\item The identity isomorphism $L(\mathrm{id})^*\cong\mathrm{id}$ of the module-object derived
+  pullback, which would make the Frobenius pullback an equivalence and remove most of the
+  Weil-specific \texttt{sorry}s; the coherences of the monoidal structures on $f^*$ and $Lf^*$.
+\item Applying Weil objects of $\Dc$ to the actual geometric Frobenius, which is not a
+  $k$-morphism; the canonical Weil structure on objects coming from $X_0$.
+\item Smooth base change in the $\ell$-adic setting.
 \item Comparing layer (B) with layer (A) via reduction modulo $\ell^n$.
 \end{itemize}
 
