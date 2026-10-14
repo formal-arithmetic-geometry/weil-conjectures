@@ -27,9 +27,71 @@
   "def-weil-derived-limit",
   "def-weil-point-derived-complete-module-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Products in the category of $A$-modules are exact: kernels are coordinatewise and a tuple in a product of surjective targets lifts by choosing a preimage in each coordinate. Apply clauses (1) and (2) of [lem-weil-derived-limit-existence] to this abelian category. Thus all countable products needed below exist in $D(A)$, and all towers in question have derived limits, unique up to isomorphism.",
+   "uses": [
+    "lem-weil-derived-limit-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091W, lemma-naive-derived-completion, proof with K=A[0]"
+   }
+  },
+  {
+   "text": "Fix $n$ and $f\\in I$, and choose $e\\geq1$ with $f^e\\operatorname{id}_{L_n}=0$. Put $P=\\prod_{j\\geq1}L_n$ and define $s:P\\to P$ by $\\mathrm{pr}_j s=f\\mathrm{pr}_{j+1}$. The product universal property [def-weil-category-product] gives, by induction on $r$, $\\mathrm{pr}_j s^r=f^r\\mathrm{pr}_{j+r}$: the induction step composes with $s$ and uses $\\mathrm{pr}_{j+r}s=f\\mathrm{pr}_{j+r+1}$. At $r=e$ every projection is zero, hence $s^e=0$. The finite geometric sum $t=1+s+\\cdots+s^{e-1}$ satisfies $(1-s)t=t(1-s)=1-s^e=1$. Thus the middle arrow in the Roos triangle [def-weil-derived-limit] for any $T(L_n,f)$ is invertible.",
+   "uses": [
+    "def-weil-category-product",
+    "def-weil-derived-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091W, lemma-naive-derived-completion, proof with K=A[0]"
+   }
+  },
+  {
+   "text": "Write this triangle as $T\\xrightarrow{p}P\\xrightarrow{1-s}P\\xrightarrow{\\delta}T[1]$. Consecutive composites vanish by [lem-weil-pbc-hom-into-triangle-exact]; invertibility of $1-s$ gives $p=0$ and $\\delta=0$. Rotate backwards to $P[-1]\\xrightarrow{-\\delta[-1]}T\\xrightarrow{p}P\\to P$ using [def-weil-triangulated-category]. Exactness of $\\operatorname{Hom}(T,-)$ at $T$, again [lem-weil-pbc-hom-into-triangle-exact], factors $\\operatorname{id}_T$ through the zero map $-\\delta[-1]$, so $\\operatorname{id}_T=0$. An object with zero identity is a zero object: every map out of it or into it factors through its identity and is therefore zero. Thus every $T(L_n,f)$ is zero. Since $f$ was arbitrary, [def-weil-point-derived-complete-module-complex] says that each $L_n$ is derived $I$-complete.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-weil-triangulated-category",
+    "def-weil-point-derived-complete-module-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091W, lemma-naive-derived-completion, proof with K=A[0]"
+   }
+  },
+  {
+   "text": "Put $Q=\\prod_{n\\geq1}L_n$. Clause (1) of [lem-weil-pbc-module-derived-complete-products-triangles] makes $Q$ derived $I$-complete. Any derived limit $H$ of the given tower has a distinguished Roos triangle $H\\to Q\\xrightarrow{1-u}Q\\to H[1]$ by [def-weil-derived-limit], where $\\mathrm{pr}_n u$ is the given transition $L_{n+1}\\to L_n$ composed with $\\mathrm{pr}_{n+1}$. Clause (2) of the same closure lemma applies to its two complete vertices $Q,Q$, giving derived completeness of $H$. By [def-weil-point-derived-complete-module-complex] this says precisely that $T(H,f)=0$ for every $f\\in I$. No common exponent across the indices $n$ is needed.",
+   "uses": [
+    "lem-weil-pbc-module-derived-complete-products-triangles",
+    "def-weil-derived-limit",
+    "def-weil-point-derived-complete-module-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091W, lemma-naive-derived-completion, proof with K=A[0]"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-derived-limit-existence",
+  "def-weil-category-product",
+  "def-weil-derived-limit",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "def-weil-triangulated-category",
+  "def-weil-point-derived-complete-module-complex",
+  "lem-weil-pbc-module-derived-complete-products-triangles"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 091W, lemma-naive-derived-completion, proof with K=A[0]"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,15 +134,66 @@
    "results": "8 hits: localCohomology, Hausdorffification, IsAdicComplete, AdicCompletion.map_exact, localCohomology.isoSelfLERadical, AdicCompletion, localCohomology.ofSelfLERadical, Hausdorffification.instIsHausdorff",
    "date": "2026-10-14",
    "verdict": "no match: ordinary completion and local cohomology do not state derived completeness of torsion limits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse limit in the derived category of complexes annihilated by powers of each element of an ideal is derived complete",
+   "results": "8 hits: localCohomology, localCohomology.diagram, Hausdorffification, AdicCompletion, IsAdicComplete, localCohomology.ofDiagram, Hausdorffification.of, IsAdicComplete.toIsPrecomplete",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not state derived-completeness closure or completeness of torsion homotopy limits; ordinary adic completion and the construction of D(A) are different statements"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsNilpotent\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not state derived-completeness closure or completeness of torsion homotopy limits; ordinary adic completion and the construction of D(A) are different statements"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|DerivedComplete|naive.*completion",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not state derived-completeness closure or completeness of torsion homotopy limits; ordinary adic completion and the construction of D(A) are different statements"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of nilpotent torsion complexes is derived complete",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy inverse limit of ideal torsion complexes is complete in the derived sense",
+   "results": "8 hits: Hausdorffification, IsAdicComplete.toIsPrecomplete, IsAdicComplete, AdicCompletion, Hausdorffification.instIsHausdorff, AdicCompletion.map_exact, isAdicComplete_iff, AdicCompletion.instIsHausdorff",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not state derived-completeness closure or completeness of torsion homotopy limits; ordinary adic completion and the construction of D(A) are different statements"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-rlim-perfect-complete",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-nilpotent-torsion-derived-limit-complete",
+  "worker": "stage1",
+  "summary": "Checked Tag 091W and expanded its nilpotence argument using the finite geometric inverse of the constant-tower shift. Added only the general products-and-triangles closure lemma stated immediately after Tag 091S; applied it to the Roos triangle. The arbitrary ideal and unbounded complexes are retained. No matching sorry-free project theorem or Mathlib leaf found.",
+  "blueprint": "Realizes the integral lattice reconstruction implicit in thm-weil-pbc-finite-extension, first proof sentence, through the given derived-limit-completeness ancestry.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-e4a652e5b",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-e4a652e5b (reviewer sub-agent of L); spot-checked: Read the complete mathematics and checked all four steps against Stacks 091W, 091S, 091P and cited DAG statements. No mathematical gap, duplicate, or target weakening found. Repaired the new node’s missing creation/audit metadata and defaults in fixes/. Detailed source, coefficient-category, base-change morphism, and edge-case checks are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
