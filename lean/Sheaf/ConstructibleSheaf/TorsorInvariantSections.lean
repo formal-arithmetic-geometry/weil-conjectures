@@ -6,7 +6,7 @@ Authors: SHEAF group R1
 module
 
 public import Sheaf.ConstructibleSheaf.TorsorAssociatedModule
-import Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf
+import Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf
 import Sheaf.ConstructibleSheaf.TorsorDiagonalEvaluationBijective
 
 /-!
