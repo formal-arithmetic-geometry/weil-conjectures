@@ -1,103 +1,68 @@
 ## What changed
 
-Audited the repair-queue item
-`Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore`.
-The repository already has the repaired, proved descent-and-openness theorem.
-Simplified the algebra descent proof of
-`AlgebraicGeometry.Scheme.stalk_normalization_depth_two_section_flat_core`:
-`algebraize` now acts directly on the two stalk maps and their composite,
-instead of introducing three ring aliases, two homomorphism aliases, and
-restating their flatness properties. Added a comment identifying the projection
-as the base change of the flat test. The theorem signature, visibility,
-docstrings, imports, and proof route stay identical. No consumer adaptation
-or interface change is required.
-
-The two DAG steps are retained: lift fibre points, descend through a faithfully
-flat local stalk map using `Module.Flat.of_flat_of_faithfullyFlat`, then apply
-`isOpen_setOf_finite_flat_stalks` and the restriction stalk criterion.
-The unit `sk-prop-input-spreading` is unchanged. Existing node metadata already
-records exactly these steps and dependencies, so no node update is needed.
+Audited `AlgebraicGeometry.Scheme.stalk_normalization_depth_two_section_flat_core`
+for the repair listed for upstream review #1428. The current repository already
+contains the corrected flat-test statement and the complete descent proof.
+The only Lean diff is a wording clarification in the first proof comment.
+No signature, definition, visibility or import changed.
 
 ## Proved and sorry left
 
-The declaration
-`AlgebraicGeometry.Scheme.stalk_normalization_depth_two_section_flat_core`
-(node `lem-sbc-stalk-normalization-depth-two-section-flat-core`) was already
-proved in the starting repository. Its simplified proof compiles.
-Starting textual holes: zero. Holes closed: zero. Holes added: zero.
-No `sorry` remains in the delivered module and no new theorem or module is added.
-This is a repair audit and proof simplification, not new proof progress.
-The final delivery dry run checks the transitive axioms of its declaration.
+`AlgebraicGeometry.Scheme.stalk_normalization_depth_two_section_flat_core` is proved
+and its axiom check reports only `propext`, `Classical.choice` and `Quot.sound`.
+It was already proved in the current repository: holes closed by this delivery: none;
+holes added: none; split-off declarations: none. No `sorry` remains in the module.
+This is a repair audit, with zero net proof progress, not a newly proved theorem.
 
 ## No longer needed
 
-None. Both existing proof imports are required:
-`Sheaf.AlgebraicGeometry.Morphisms.FiniteFlatTargetLocus` supplies the finite
-flat target locus, and
-`WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic` supplies the
-already proved algebra flatness descent theorem. No node or module is pruned.
-The Mathlib public imports used by the statement are preserved.
+None. Both recorded proof dependencies are used: finite flat target-locus openness
+and faithfully flat algebra descent. The public imports support the unchanged signature;
+the two proof dependencies remain plain imports. No module is pruned.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The brief says this module still contains `sorry`; the current repository
-contains none, and the original module compiles. The repair queue still refers
-to the obsolete false normalization-only statement from upstream review #1428.
-That statement was already corrected by the landed change record
+The assignment describes a proof item, but the repository already contains this proof
+and still lists it in `coord/repairs.txt` for the earlier false normalization-only
+statement. That earlier statement was corrected by the landed E4 change record
 `coord/changes/stalk-normalization-depth-two-section-flat-core.md`.
-The current statement assumes `Flat (pullback.snd p t)` explicitly and proves
-only descent and openness. It does not infer this assumption from depth two.
-The normalization caller
-`GaloisCover.stalk_normalization_depth_two_section_flat` explicitly assumes
-`hZ`, the rational generic-section point, and passes it to
-`GaloisCover.exists_stalk_normalization_split_formal_test` to obtain the test.
-Thus the missing rational-point assumption has already been restored at the
-normalization boundary, while the reusable core states the true general fact.
-No target statement or definition is changed.
-
-Checked degenerate cases: an empty fibre makes membership in the target flat
-locus vacuous; an empty test cannot provide b; a non-surjective flat test is
-sufficient because only the given point x must lie in its image. The proof
-lifts every source point over x, so no global surjectivity is assumed.
-
-Searches through Loogle, Lean Finder, and Mathlib grep found no shorter matching
-ring-map flatness descent theorem. The existing source-library theorem is an
-exact proved match and is retained. Compilation confirmed that the explicit
-local-hom instance bridge is required after `algebraize`, and it is retained.
+The current core assumes flatness of the pullback explicitly; it does not infer it
+from depth two. The normalization caller obtains the flat test through
+`exists_stalk_normalization_split_formal_test`, with its rational-point hypothesis `hZ`.
+The first report's claim of a newly delivered proof needed this baseline qualification.
+The unit's `realized` arrays are currently empty; this delivery does not change them
+or claim to complete the unit's realization bookkeeping.
 
 ## Second reading by F2
 
-1. Compared the complete delivered module with the repository using `diff -u`
-   and checked the text before the theorem's `:= by` byte for byte. PASS:
-   the only differences are two proof comments and the algebra descent block.
-   The sole declaration's signature, visibility, documentation and imports are
-   unchanged. No definition, target, node or change record is delivered.
-2. Compiled the delivered file independently with `lcompile.py`: no errors or
-   warnings. Compiled a scratch copy with `#print axioms
-   AlgebraicGeometry.Scheme.stalk_normalization_depth_two_section_flat_core`:
-   exactly `propext`, `Classical.choice`, `Quot.sound`. PASS: no `sorry`, forbidden
-   declaration or data chosen from an unproved existence statement occurs.
-3. PASS: no statements were split off or added, so no new-node or restatement
-   issue arises. Checked the empty-source and empty-fibre cases (the target
-   locus condition is vacuous), and the test-point hypothesis excludes an empty
-   test. Only the fibre over x is lifted; no global surjectivity is required.
-4. Read the two imported proof results and searched the library for flat-test,
-   faithful-flatness and descent formulations; repeated a Loogle search for
-   `Module.Flat, Module.FaithfullyFlat`. PASS: Mathlib's tensor-product descent
-   has a different premise; the source-library algebra descent used here is
-   the direct proved match. The similar stalk-test proof in
-   `SmoothLocalDepthTwoClosedFiberFlat` is private. Both proof imports are used;
-   public imports provide statement vocabulary. No old proof dependency is
-   omitted, so `No longer needed` is complete. The unit record is unchanged
-   (its existing `realized` lists are empty); the delivery retains the same
-   descent-and-openness subargument and bypasses no unit step.
-5. Compared the node's Lean signature, two proof steps, `proof_deps` and
-   `proof_origin` with the delivered proof. PASS: the algebra descent node and
-   finite-flat-target-locus node are exactly its two non-Mathlib dependencies.
-   The point lift, local faithfully flat stalk map, flat composite, restriction
-   stalk isomorphism and stalk criterion occur as recorded. No metadata repair
-   is needed.
+1. Compared the sole delivered Lean module with the current repository using `diff`:
+   only one inline comment differs. All existing signatures and definitions are byte
+   for byte unchanged. No change record or forced adaptation is required. Verdict: pass.
+2. Compiled the module locally with `lcompile.py`, with no errors or warnings.
+   A scratch copy with `#print axioms` reports exactly `propext`, `Classical.choice`,
+   `Quot.sound`. No sorry, forbidden declaration, or hollow definition is present.
+   The witness of a pullback point is supplied by a proved existence theorem and used
+   only inside this proof, not to define public data. Verdict: pass.
+3. There are no new or split-off statements. Checked the current statement on an empty
+   source (the target locus is all of L), an empty fibre (membership is vacuous), and
+   the identity test (the assumed pullback flatness supplies flatness directly).
+   The specified point b rules out an empty test. No normalization-only assertion or
+   arbitrary data chosen from an unproved existence theorem is introduced. Verdict: pass.
+4. Read the proof from the target downward: lift each fibre point, descend stalk
+   flatness along a flat local map, use finite flat-locus openness, then restriction
+   stalk isomorphisms and the flatness criterion. Independent Loogle search for
+   `RingHom.Flat`, LeanFinder search for descent along a faithfully flat local ring
+   homomorphism, and repository searches confirmed the existing building blocks.
+   The upstream global flat-surjective source descent theorem requires surjectivity
+   of the whole projection, which the chosen test point alone does not supply.
+   The present pointwise argument is appropriate; do not rewrite it.
+   Both proof imports are used. Read `dag/units/sk-prop-input-spreading.json`:
+   the formal splitting, rational-point and descent route is preserved. Verdict: pass.
+5. Read node `lem-sbc-stalk-normalization-depth-two-section-flat-core`, its statement,
+   proof steps, proof_deps and proof_origin, and the finite target-locus and algebra
+   descent declarations. The two recorded dependencies match the actual proof, and
+   the proof_origin already records the corrected flat-test boundary. No node edit
+   is needed. Verdict: pass.
 
-Second reading changed only this report: added the independent checks and their
-verdicts. The first worker's proof simplification is retained unchanged. There
-are zero holes closed, zero holes added, and no pruned modules.
+Second reading changed the report to distinguish the existing proof from new progress,
+record the repair audit, and document all five checks. The Lean proof was left intact.
