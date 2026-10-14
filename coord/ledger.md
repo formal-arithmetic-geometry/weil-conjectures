@@ -14146,3 +14146,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:08 L: merged deliver/V2/Sheaf.AlgebraicGeometry.Modules.ExteriorSheafAffineUnit (stage 3; reviewer PASS; first push; landing 20261014T010856-L-3168988 (interface); batch 20261014T010832; modules 2; new nodes 1)
 - 01:08 L: merged deliver/V2/Sheaf.AlgebraicGeometry.Morphisms.FieldTorsorGaloisComponents (stage 3; reviewer PASS; first push; landing 20261014T010856-L-3169166 (interface); batch 20261014T010832; modules 2; new nodes 1)
 - 01:08 L: merged deliver/V2/Sheaf.AlgebraicGeometry.SelfTorConormalExteriorSectionModel (stage 3; reviewer PASS; first push; landing 20261014T010857-L-3169318 (interface); batch 20261014T010832; modules 3; new nodes 2)
+- 01:08 L: merged deliver/W2/Sheaf.Paper.CechCupPullbackCompat (stage 3; reviewer PASS; first push; landing 20261014T010857-L-3169470 (interface); batch 20261014T010832; modules 2; new nodes 1)
