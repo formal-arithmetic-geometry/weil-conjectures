@@ -31,9 +31,100 @@
   "def-weil-pbc-ring-map-quasi-finite-at-prime",
   "def-kun-topological-dimension-at-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $k=\\kappa(\\mathfrak p)$ and $X=\\operatorname{Spec}F$. Choose finite $R$-algebra generators $t_1,\\ldots,t_n$ of $T$. The elements $t_i\\otimes1$ generate $F$ as a $k$-algebra: every element of the tensor product is a finite sum of pure tensors, and if $t=P(t_1,\\ldots,t_n)$ then $t\\otimes a=aP_k(t_1\\otimes1,\\ldots,t_n\\otimes1)$, where the coefficients of $P_k$ are the images in $k$ of the coefficients of $P$. Thus $F$ is a finite type algebra over the field $k$; no Noetherian hypothesis on $R$ or $T$ is needed.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PK, lemma-isolated-point-fibre, proof: the fibre algebra is of finite type over the residue field; Tag 00F3, definition-finite-type"
+   }
+  },
+  {
+   "text": "Apply [lem-wf-affine-noetherian-components] with $A=F$ and the field $k$. It gives that $F$ is Noetherian and that every descending chain of closed subsets of $X$ stabilizes.",
+   "uses": [
+    "lem-wf-affine-noetherian-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN, lemma-Noetherian-permanence; affine closed-set argument in literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-geometry/lem-wf-affine-noetherian-components.md"
+   }
+  },
+  {
+   "text": "The one-member affine cover $X=\\operatorname{Spec}F$ makes $X$ locally Noetherian by [pqf-def-locnoeth]. It is also quasi-compact: if an open cover had no finite subcover, successively choose a member not contained in the union of the previously chosen finitely many members. The complements of these successive finite unions would form a strictly descending infinite chain of closed subsets, contradicting step 2. Consequently $X$ is a Noetherian scheme (locally Noetherian and quasi-compact).",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-weil-pbc-quasi-compact-scheme",
+    "def-weil-affine-spectrum",
+    "lem-wf-affine-noetherian-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OV, definition-noetherian; elementary open-cover argument of Topology Tag 04ZA, lemma-Noetherian-quasi-compact"
+   }
+  },
+  {
+   "text": "Assume $\\varphi$ is quasi-finite at $\\mathfrak q$. By [def-weil-pbc-ring-map-quasi-finite-at-prime], the singleton $\\{\\overline{\\mathfrak q}\\}$ is an open neighbourhood in $X$. Its only nonempty irreducible closed subset is itself, so its Krull dimension is zero. Every neighbourhood of $\\overline{\\mathfrak q}$ is nonempty and has nonnegative dimension. The minimum defining dimension at the point is therefore exactly zero.",
+   "uses": [
+    "def-weil-pbc-ring-map-quasi-finite-at-prime",
+    "def-kun-topological-dimension-at-point",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0H7C, lemma-isolated-dim-0-locally-noetherian, first implication; Topology Tag 0055, definition-Krull"
+   }
+  },
+  {
+   "text": "Conversely, suppose $\\dim_{\\overline{\\mathfrak q}}X=0$. Since dimension at a point is the minimum of the dimensions of its open neighbourhoods, there is an open neighbourhood $U$ of $\\overline{\\mathfrak q}$ with $\\dim U=0$. Regard $U$ as an open subscheme of the Noetherian scheme $X$ from step 3. By [lem-weil-pbc-noetherian-open-subscheme-noetherian], $U$ is Noetherian, so [lem-sc-zero-dim-noetherian-finite-discrete] applies and its topology is discrete. In particular $\\{\\overline{\\mathfrak q}\\}$ is open in $U$. Since $U$ is open in $X$, a subset open in $U$ is open in $X$, by the definition of the subspace topology.",
+   "uses": [
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-sc-zero-dim-noetherian-finite-discrete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0H7C, lemma-isolated-dim-0-locally-noetherian, converse; Tag 0AAX, lemma-locally-Noetherian-dimension-0"
+   }
+  },
+  {
+   "text": "The openness of $\\{\\overline{\\mathfrak q}\\}$ obtained in step 5 is precisely quasi-finiteness of $\\varphi$ at $\\mathfrak q$ by [def-weil-pbc-ring-map-quasi-finite-at-prime]. Together with step 4 this proves the asserted equivalence.",
+   "uses": [
+    "def-weil-pbc-ring-map-quasi-finite-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PL, definition-quasi-finite, item (1), with condition (1) of Tag 00PK, lemma-isolated-point-fibre"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "lem-wf-affine-noetherian-components",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "def-kun-topological-dimension-at-point",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sc-zero-dim-noetherian-finite-discrete"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0397, lemma-locally-quasi-finite-rel-dimension-0, second proof; Properties Tag 0H7C, lemma-isolated-dim-0-locally-noetherian, with the quasi-compact affine-fibre restriction of Tag 0AAX"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -83,15 +174,101 @@
    "results": "; 8 hits: PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero, PrimeSpectrum.unique_of_ringKrullDimLE_zero, Ring.KrullDimLE.subsingleton_primeSpectrum, AlgebraicGeometry.genericPoint_eq_bot_of_affine, AlgebraicGeometry.Scheme.height_of_isClosed, ringKrullDim_eq_one_iff_of_isLocalRing_isDomain, Ring.KrullDimLE.existsUnique_isPrime, Ring.KrullDimLE.of_isLocalization",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a locally Noetherian scheme a point has dimension zero if and only if its singleton is open",
+   "results": "; 8 hits: AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, IsLocalRing.closedPoint_mem_iff, IsLocalRing.closed_point_mem_iff, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.IsAffineOpen.of_subsingleton, AlgebraicGeometry.genericPoint_eq_bot_of_affine, AlgebraicGeometry.IsLocallyArtinian.iff_isLocallyNoetherian_and_discreteTopology, AlgebraicGeometry.Scheme.height_of_isClosed; read Mathlib/AlgebraicGeometry/Artinian.lean:66-74: IsLocallyArtinian.of_topologicalKrullDim_le_zero assumes global dimension <= 0, not dimension at a point; the item additionally needs an attained-neighbourhood minimum and the affine fibre construction.",
+   "date": "2026-10-14",
+   "verdict": "no match for the item; auxiliary results only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topologicalKrullDim\", \"DiscreteTopology\"",
+   "results": "; 1 hits: topologicalKrullDim_zero_of_discreteTopology",
+   "date": "2026-10-14",
+   "verdict": "no match for the item; auxiliary results only"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDimAt|isOpen_singleton.*[Dd]im|[Dd]im.*isOpen_singleton",
+   "results": "; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match for the item; auxiliary results only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi finite at a prime of a finite type ring map if and only if the fibre has dimension zero at that point",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type algebra over a field a prime is isolated in its spectrum if and only if its topological dimension at the point is zero",
+   "results": "; 8 hits: Algebra.Presentation.localizationAway_dimension_zero, Ring.KrullDimLE.subsingleton_primeSpectrum, PrimeSpectrum.unique_of_ringKrullDimLE_zero, Ring.KrullDimLE.of_isLocalization, PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero, Ring.KrullDimLE.existsUnique_isPrime, IsLocalRing.finrank_cotangentSpace_eq_zero_iff, ringKrullDim_eq_one_iff_of_isLocalRing_isDomain",
+   "date": "2026-10-14",
+   "verdict": "no match for the item; auxiliary results only"
+  },
+  {
+   "tool": "grep",
+   "query": "of_topologicalKrullDim_le_zero|discreteTopology.*[Nn]oetherian|[Nn]oetherian.*discreteTopology",
+   "results": "; 5 hits: Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Artinian.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the item; auxiliary results only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-descend-quasifinite-affine",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+  "worker": "stage1",
+  "summary": "Verified the unchanged statement against 0397 second proof and 00PK conditions (1) and (4). Wrote tensor-generator and quasi-compactness arguments explicitly, reused the existing affine finite-type Noetherianity and zero-dimensional Noetherian discreteness nodes, and proved both implications without a replacement lemma or a new node. Project-source searches yielded no exact attachment. Mathlib has auxiliary Artinian/discreteness results but no one-line match for the local-dimension equivalence with the DAG definition.",
+  "blueprint": "Realizes the existing from.place: the 095K finite section-cover/Noetherian-approximation input of thm-weil-pbc-direct-image-finiteness-proper, via descend-quasifinite-affine; returning from the descended bound d=0 to quasi-finiteness using the second proof of 0397. No unit step is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-zero-dim-noetherian-finite-discrete",
+    "why": "Generic discreteness theorem for any zero-dimensional Noetherian scheme, applied to an open fibre neighbourhood; the proper-base-change unit gives no substitute."
+   },
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "The generic definition of locally Noetherian schemes, used on the single affine cover of the fibre."
+   },
+   {
+    "node": "def-weil-pbc-quasi-compact-scheme",
+    "why": "The generic definition of quasi-compactness, used to convert the open-cover argument to a Noetherian scheme."
+   },
+   {
+    "node": "def-kun-topological-dimension-at-point",
+    "why": "The generic definition of dimension at a point as an attained minimum, used in both implications."
+   },
+   {
+    "node": "def-kun-topological-krull-dimension",
+    "why": "The generic chain definition of Krull dimension, used to compute the dimension of a singleton."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-kun-topological-dimension-at-point",
+  "def-kun-topological-krull-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-67a7d9759",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-67a7d9759 (reviewer sub-agent of L); spot-checked: Read the item, report, all cited statements and source locations in full. All six steps follow Stacks 0397/00PK/00PL and 0H7C/0AAX with correct hypotheses and neighbourhood-minimum dimension. Checked edge cases, DAG reuse, acyclicity, unit/chapter route, declared tool uses, and archived master coefficient categories and base-change direction. No new nodes or repairs; concrete checks recorded in review.md."
+ }
 }
