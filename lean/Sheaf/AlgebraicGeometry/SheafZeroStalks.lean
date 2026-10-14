@@ -43,3 +43,6 @@ This compatibility module intentionally contains no declarations after duplicate
 
 -- Second reading (W2, 2026-10-14): no declarations or proof holes; compilation is clean.
 -- The stale repair assignment verifies the prior landing and closes no additional holes.
+
+-- Second reading (U2, 2026-10-14): clean compatibility compile; zero declarations or holes.
+-- This verifies the prior repair and does not certify the unavailable upstream theorem.
