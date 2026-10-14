@@ -14078,3 +14078,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:41 L: merged deliver/V2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (stage 3; reviewer PASS; first push; landing 20261014T004115-L-2839338 (proof); batch 20261014T004054; modules 1; new nodes 0)
 - 00:41 L: merged deliver/V2/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore (stage 3; reviewer PASS; first push; landing 20261014T004115-L-2839503 (proof); batch 20261014T004054; modules 1; new nodes 0)
 - 00:41 L: merged deliver/V2/Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling (stage 3; reviewer PASS; first push; landing 20261014T004116-L-2839651 (proof); batch 20261014T004054; modules 1; new nodes 0)
+- 00:41 L: merged deliver/V2/Sheaf.Paper.CartierEquality (stage 3; reviewer PASS; first push; landing 20261014T004116-L-2839807 (proof); batch 20261014T004054; modules 1; new nodes 0)
