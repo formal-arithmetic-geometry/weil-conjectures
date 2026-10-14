@@ -14350,8 +14350,9 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:51 L: merged deliver/U2/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T025143-L-158731 (proof); batch 20261014T025133; modules 1; new nodes 0)
 - 02:51 L: merged deliver/U2/Sheaf.RingTheory.ProjectiveResolutionExtDegree (stage 3; reviewer PASS; first push; landing 20261014T025144-L-158831 (proof); batch 20261014T025133; modules 1; new nodes 0)
 - 02:51 L: merged deliver/V1/Sheaf.AlgebraicGeometry.PerfectHomOpenTransportSquare (stage 3; reviewer PASS; after a return; landing 20261014T025144-L-158979 (interface); batch 20261014T025133; modules 1; new nodes 0; change records: coord/changes/perfect-hom-open-transport-square-imports.md)
-- 02:51 L: merged deliver/V4/Sheaf.Paper.ModuleCupPullbackCycleStep (stage 3; reviewer PASS; after a return; landing 20261014T025145-L-159082 (proof); batch 20261014T025133; modules 1; new nodes 0; change records: coord/changes/module-cup-pullback-cycle-step.md)
 - 02:53 L: returned deliver/B2/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (reviewer RETURN: (reviewer X-37478, head 37478ffa0) H10 (compile regression; stage-3 review points 2 and 5): In lean/Sheaf/CategoryTheory)
 
 - 11:00 L: batch 20261014T025133 dependency take-out
 - 03:01 L: returned deliver/T2/Sheaf.AlgebraicGeometry.SquareZeroTensorGradedBoundaryProjection (reviewer RETURN: (reviewer X-701dc, head 701dc67aa) H10: lean/Sheaf/AlgebraicGeometry/SquareZeroTensorGradedBoundaryProjection.lean fails)
+
+- 11:03 L: batch 20261014T025133 dependency take-out
