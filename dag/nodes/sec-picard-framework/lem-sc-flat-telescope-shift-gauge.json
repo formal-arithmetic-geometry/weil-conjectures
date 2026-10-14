@@ -22,48 +22,59 @@
  ],
  "proof": [
   {
-   "text": "Compute the canonical shift comparison using bounded-above flat stages, their countable sum, and the cone of one minus transition. Use degree-zero and translated unit models.",
+   "text": "Construct the local gauge components on flat telescope shift representatives, with stage-map naturality and the equation on literal telescopes. This is the local supplied-tensorator model calculation, without any global natural automorphism.",
    "uses": [
-    "def-sc-flat-telescope-stage-map",
-    "def-pc-derived-pullback",
-    "lem-pc-kflat-closure"
+    "lem-sc-flat-telescope-model-shift-gauge"
    ],
    "elementary": false
   },
   {
-   "text": "Normalize the unit by the supplied monoidal unit map. Rewrite translation as tensor with the translated unit by the Koszul comparison and the translated left unitor. Apply the supplied inverse tensorator. Its two unit equations identify the unit normalizations, and its associativity equation identifies the tensor rewrites on the two summands of the transition cone. Take the ratio with the original representative comparison.",
+   "text": "The source functor Qh followed by derived pullback inverts homotopy quasi-isomorphisms. For any map between model representatives, use a common stage-map refinement a;s=b. Precompose the desired naturality square with the invertible image of a, apply model naturality to a and b and cancel. This proves naturality for every map between representatives.",
    "uses": [
-    "def-sc-scheme-canonical-shift-unit-iso",
-    "def-sc-scheme-canonical-tensor-shift",
-    "def-pc-scheme-derived-tensor-structure"
+    "def-pc-derived-pullback",
+    "lem-sc-flat-telescope-stage-map-refinement"
    ],
    "elementary": false
   },
   {
-   "text": "The model ratios commute with the sum inclusions and transition maps, hence the cone differential. Compare K-flat resolutions and apply the right Kan universal property of the supplied counit to descend the ratio and its reverse to inverse natural transformations on Qh followed by derived pullback. The equation on each telescope is the displayed shift gauge equation.",
+   "text": "For any complex P take the compatible bounded-flat tower resolving its good truncations. Let a be the sum of the augmentations to P and φ one minus transition. Compatibility gives φ;a=0. The cone desc map with zero shifted component augments the literal telescope to P. Its two cone restrictions and the flat truncation telescope comparison prove it is a quasi-isomorphism. Applying the quotient gives a resolution of every homotopy object by a telescope representative.",
    "uses": [
-    "def-pc-derived-pullback",
-    "lem-pc-kflat-resolution",
-    "lem-pur-right-kan-extension-coherent-shift"
+    "lem-pc-flat-truncation-tower",
+    "lem-pc-flat-truncation-telescope-comparison",
+    "def-sc-flat-telescope-stage-map"
    ],
    "elementary": false
+  },
+  {
+   "text": "Extend the hom components of the local gauge through the full resolving class using exists_natTrans_from_resolvingClass, applied with both functors equal to Qh followed by derived pullback. The right calculus of fractions and inversion of quasi-isomorphisms are the recorded homotopy localization instances.",
+   "uses": [
+    "lem-sc-nattrans-from-resolving-class",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each resolution s:R→X, naturality and equality with the local component at R give β_X=L(s) inverse;r_R;L(s). All three factors are invertible, so β assembles to a natural automorphism. Substitution of its component equations at the telescope and its translate gives the required gauge identity.",
+   "uses": [
+    "lem-sc-flat-telescope-model-shift-gauge"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-derived-pullback",
-  "def-pc-scheme-derived-tensor-structure",
   "def-sc-flat-telescope-stage-map",
-  "def-sc-scheme-canonical-shift-unit-iso",
-  "def-sc-scheme-canonical-tensor-shift",
-  "lem-pc-kflat-closure",
-  "lem-pc-kflat-resolution",
-  "lem-pur-right-kan-extension-coherent-shift"
+  "lem-pc-flat-truncation-telescope-comparison",
+  "lem-pc-flat-truncation-tower",
+  "lem-sc-flat-telescope-model-shift-gauge",
+  "lem-sc-flat-telescope-stage-map-refinement",
+  "lem-sc-nattrans-from-resolving-class"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "A2",
+  "group": "Q3",
   "document": "https://stacks.math.columbia.edu/tag/06YJ",
-  "place": "Parent lem-sc-normalized-flat-telescope-stage-comparison, steps 1–2: supplied-tensorator normalization, an agent expansion; Tags 06YS and 06YJ supply only the flat-model and derived-pullback constructions."
+  "place": "Local supplied-tensorator model calculation followed by common stage-map refinements, explicit truncation-telescope augmentations, and resolving-class descent; no Kan uniqueness step is needed."
  },
  "mathlib_searches": [
   {
@@ -137,9 +148,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261014T050525-L-1684626",
+  "landing": "20261014T052131-L-1877109",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
