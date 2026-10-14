@@ -14902,3 +14902,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:07 L: merged deliver/X3/Sheaf.AlgebraicGeometry.NormalConstantGenericUnit (stage 3; reviewer PASS; first push; landing 20261014T170740-L-2556854 (interface); batch 20261014T170736; modules 2; new nodes 1)
 - 17:14 L: returned deliver/J2/Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparison (reviewer RETURN: (reviewer X-f2fe0, head f2fe04fa2) 6: In dag/nodes/sec-smooth-base-change/lem-sbc-open-injective-coefficient-lower-compa)
 - 17:18 L: merged deliver/W4/Sheaf.AlgebraicGeometry.RelativeMVDirectImageRows (stage 3; reviewer PASS; first push; landing 20261014T171840-L-2711156 (interface); batch 20261014T171839; modules 3; new nodes 2)
+- 17:18 L: merged deliver/W4/Sheaf.AlgebraicGeometry.ScalarCupModuleCupCompatibility (stage 3; reviewer PASS; first push; landing 20261014T171841-L-2711344 (interface); batch 20261014T171839; modules 2; new nodes 1)

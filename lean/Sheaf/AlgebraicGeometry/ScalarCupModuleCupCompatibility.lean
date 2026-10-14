@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import Sheaf.Paper.ModuleCupResolutionData
+import Sheaf.Paper.ModuleCupPairingExists
+import Sheaf.AlgebraicGeometry.ScalarCupResolutionClassCompatibility
 
 /-! # Scalar and module cup compatibility
 
@@ -22,6 +24,53 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped TensorProduct
 open Opposite TopologicalSpace
 namespace AlgebraicGeometry.Scheme.Modules
+
+private theorem cupCycleClass_surjective_local {R : Type w} [Ring R]
+    (K : CochainComplex (ModuleCat.{w} R) ℕ) (n : ℕ) :
+    Function.Surjective (cupCycleClass K n) := by
+  exact (ModuleCat.epi_iff_surjective
+    ((K.sc n).moduleCatCyclesIso.inv ≫ (K.sc n).homologyπ)).mp inferInstance
+
+private theorem cupPair_exists_cycle_local {X : Scheme.{w}} {F G : X.Modules}
+    (D : CupResolutionPairing F G) (p q : ℕ)
+    (a : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+      (ComplexShape.up ℕ)).obj D.left.K).sc p).moduleCatLeftHomologyData.K)
+    (b : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+      (ComplexShape.up ℕ)).obj D.right.K).sc q).moduleCatLeftHomologyData.K) :
+    ∃ c : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+      (ComplexShape.up ℕ)).obj D.target.K).sc (p + q)).moduleCatLeftHomologyData.K,
+      c.val = D.pair p q ⊤ a.val b.val := by
+  have ha := a.property
+  have hb := b.property
+  change (D.left.K.d p ((ComplexShape.up ℕ).next p)).val.app (op ⊤) a.val = 0 at ha
+  change (D.right.K.d q ((ComplexShape.up ℕ).next q)).val.app (op ⊤) b.val = 0 at hb
+  rw [ComplexShape.next_eq' (ComplexShape.up ℕ) (by simp :
+    (ComplexShape.up ℕ).Rel p (p + 1))] at ha
+  rw [ComplexShape.next_eq' (ComplexShape.up ℕ) (by simp :
+    (ComplexShape.up ℕ).Rel q (q + 1))] at hb
+  refine ⟨⟨D.pair p q ⊤ a.val b.val, ?_⟩, rfl⟩
+  change (D.target.K.d (p + q) ((ComplexShape.up ℕ).next (p + q))).val.app (op ⊤)
+    (D.pair p q ⊤ a.val b.val) = 0
+  rw [ComplexShape.next_eq' (ComplexShape.up ℕ) (by simp :
+    (ComplexShape.up ℕ).Rel (p + q) (p + q + 1))]
+  rw [D.leibniz, ha, hb]
+  simp
+
+private theorem cupResolutionClass_surjective_local {X : Scheme.{w}} {F : X.Modules}
+    (D : CupAcyclicResolution F) (n : ℕ) : Function.Surjective (D.class n) := by
+  let : EnoughInjectives X.Modules :=
+    (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
+  let := RingedSpace.globalSectionsFunctor_additive X.toRingedSpace
+  let T := (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+    (ComplexShape.up ℕ)
+  have : IsIso (HomologicalComplex.homologyMap (T.map D.comparison) n) := D.computes n
+  exact ((ModuleCat.epi_iff_surjective
+    (D.I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) n).inv).mp
+      inferInstance).comp
+    (((ModuleCat.epi_iff_surjective
+      (HomologicalComplex.homologyMap (T.map D.comparison) n)).mp inferInstance).comp
+        (cupCycleClass_surjective_local (T.obj D.K) n))
+
 
 /-- The scalar Ext cup agrees with any cup computed by acyclic module resolutions.
 Source: Stacks Project, Cohomology, section-cup-product and Tag 0FKV.
@@ -61,6 +110,16 @@ theorem scalarCup_moduleCup_compatibility
         c.val = D.pair p q ⊤ a.val b.val →
           cup (D.left.class p a) (D.right.class q b) = D.target.class (p + q) c)
     (a : scalarCohomology f F p) (b : scalarCohomology f G q) :
-    scalarCohomologyCup f F G p q a b = cup a b := by sorry
+    scalarCohomologyCup f F G p q a b = cup a b := by
+  obtain ⟨D⟩ := exists_moduleCupResolutionPairing F G
+  obtain ⟨a', ha⟩ := cupResolutionClass_surjective_local D.left p a
+  obtain ⟨b', hb⟩ := cupResolutionClass_surjective_local D.right q b
+  rw [← ha, ← hb]
+  obtain ⟨c', hc'⟩ := cupPair_exists_cycle_local D p q a' b'
+  have hcup' := hcup D a' b' c' hc'
+  rw [hcup']
+  exact scalarCup_resolution_class_compatibility f F G p q D a' b' c' hc'
+
+
 
 end AlgebraicGeometry.Scheme.Modules
