@@ -1,0 +1,169 @@
+{
+ "id": "new-p4-self-tor-affine-chart-sections",
+ "kind": "statement",
+ "title": "Normalized sections of the open pushforward of an associated affine module",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], $U$ an affine open [def-weil-affine-spectrum], $A=\\Gamma(Y,U)$, and $M$ an $A$-module [def-weil-sheaf-of-modules-category]. Let $L=\\widetilde M$ on $\\operatorname{Spec}A$ [lem-weil-pbc-spec-module-tilde-sections], $j:U\\to Y$ the inclusion, $\\phi:U\\simeq\\operatorname{Spec}A$ the canonical chart, and $C=j_*\\phi^{\\mathrm{res}}L$, using open restriction [lem-weil-pbc-module-restriction-open-immersion-colimits] and module pushforward [def-pc-module-pullback]. There exists an $A$-linear equivalence $e:M\\simeq C(U)$, and $C|_U$ is quasi-coherent [pqf-def-coherent]. Put $W=j^{-1}U$ and let $\\tau:M\\to\\Gamma(\\operatorname{Spec}A,L)$ be the tilde-Gamma unit [lem-weil-pbc-affine-tilde-gamma-adjunction]. For every $m\\in M$, $e(m)$ equals the inverse chart restriction section isomorphism applied to $\\tau(m)|_{\\phi(W)}$. This formula includes the zero module and empty affine open.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-pc-module-pullback",
+  "pqf-def-coherent",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01I7",
+  "place": "Tags 01I7 (lemma-compare-constructions), 01HV (lemma-spec-sheaves), 0096 (lemma-adjoint-pullback-pushforward-modules)."
+ },
+ "proof": [
+  {
+   "text": "Compose the tilde unit with restriction to the image of the full chart and the inverse restriction section comparison. Each map is additive and bijective: the unit is an isomorphism, the chart image is top, and the section comparison is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For scalar a, the Spec module action is GammaSpecIso inverse a restricted to the image open. Move this scalar across the restriction comparison. The appIso-hom naturality formula and isoSpec_hom_appTop simplify the ring composite to the open inclusion app on U. Thus the composite is A-linear and defines the required equivalence, with the displayed evaluation formula by construction.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The associated module is quasi-coherent and restriction along the chart isomorphism preserves it. The open-immersion counit identifies restriction of its pushforward with this original chart module, so the restriction of C is quasi-coherent.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "P4",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/01I9",
+  "place": "Tags 01I7 (lemma-compare-constructions), 01HV (lemma-spec-sheaves), 0096 (lemma-adjoint-pullback-pushforward-modules).; explicit Lean assembly of existing proved comparison APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exists linear equivalence tensor product sections affine morphism",
+   "results": "msearch: 8 hits: AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.AffineSpace.homOfVector, AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly, AlgebraicGeometry.AffineSpace.homOverEquiv_symm_apply_coe, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv, AlgebraicGeometry.AffineSpace.homOverEquiv_apply, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop",
+   "date": "2026-10-14",
+   "available": true,
+   "verdict": "No exact combined local chart comparison; use the tilde adjunction and the existing affine chart unit theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "quasi-coherent module restricted affine open pullback tensor sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "available": false,
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde.adjunction",
+   "results": "msearch: 2 hits: AlgebraicGeometry.tilde.adjunction, AlgebraicGeometry.instIsIsoFunctorModuleCatCarrierUnitModulesSpecAdjunction",
+   "date": "2026-10-14",
+   "available": true,
+   "verdict": "No exact combined local chart comparison; use the tilde adjunction and the existing affine chart unit theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "affineChart_pullback_unit|sectionsRestrictFromSpecLinearEquiv|pullbackSpecΓEquiv",
+   "results": "msearch: 0 hits: ",
+   "date": "2026-10-14",
+   "available": true,
+   "verdict": "No exact combined local chart comparison; use the tilde adjunction and the existing affine chart unit theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfTorAffineTensorSections",
+  "date": "2026-10-14",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine chart tensor-section calculation in the conormal exterior section model: Normalized sections of the open pushforward of an associated affine module.",
+   "via": [
+    "new-v2-self-tor-affine-tensor-sections",
+    "new-q1-self-tor-conormal-exterior-section-model",
+    "new-t2-self-tor-conormal-wedge-chart-section-equiv",
+    "new-t2-self-tor-conormal-wedge-chart",
+    "new-u4-self-tor-basic-ideal-wedge-coordinates",
+    "new-e3-self-tor-ideal-wedge-coordinates",
+    "new-h3-self-tor-local-wedge-coordinates",
+    "new-e1-self-tor-nested-affine-coordinates",
+    "new-n1-self-tor-compatible-affine-maps",
+    "new-r4-self-tor-conormal-dual-chart-iso",
+    "lem-sc-self-tor-conormal-dual-chart",
+    "new-s3-koszul-conormal-nested-charts",
+    "new-w4-koszul-self-ext-local-alignment",
+    "new-s3-koszul-conormal-compatible-cover",
+    "lem-sc-koszul-self-ext-conormal-local-comparison",
+    "lem-sc-koszul-self-ext-conormal-comparison-surjection",
+    "lem-sc-koszul-self-ext-dual-exterior-conormal",
+    "lem-sc-koszul-self-ext-yoneda-surjection",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SelfTorAffineChartSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/SelfTorAffineChartSections.lean",
+  "declaration": "AlgebraicGeometry.exists_selfTor_affine_chart_sections",
+  "statement": "theorem exists_selfTor_affine_chart_sections\n    {Y : Scheme.{u}} (U : Y.affineOpens)\n    (M : ModuleCat.{u} (Γ(Y, U.1) : Type u)) :\n    let L := (tilde.functor Γ(Y, U.1)).obj M\n    let C := (Scheme.Modules.pushforward U.1.ι).obj\n      ((Scheme.Modules.restrictFunctor U.2.isoSpec.hom).obj L)\n    ∃ e : M ≃ₗ[Γ(Y, U.1)] C.val.obj (op U.1),\n      (C.restrict U.1.ι).IsQuasicoherent ∧ ∀ m : M,\n        e m = (Scheme.Modules.restrictAppIso U.2.isoSpec.hom L\n          (U.1.ι ⁻¹ᵁ U.1)).inv\n          (L.val.map (homOfLE le_top).op ((tilde.adjunction.unit.app M) m))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261014T020516-L-3813323",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261014T020516-L-3813323",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
