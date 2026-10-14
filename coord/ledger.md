@@ -14367,3 +14367,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:06 L: merged deliver/E1/Sheaf.AlgebraicGeometry.OpenFlatComplexStalkCounit (stage 3; reviewer PASS; first push; landing 20261014T030643-L-342573 (proof); batch 20261014T030639; modules 1; new nodes 0)
 - 03:06 L: merged deliver/E3/Sheaf.Algebra.Homology.AffineStalkBaseSecondLocalizationComparison (stage 3; reviewer PASS; first push; landing 20261014T030643-L-342708 (interface); batch 20261014T030639; modules 2; new nodes 1)
 - 03:06 L: merged deliver/E3/Sheaf.AlgebraicGeometry.StandardSingleUnionHomotopyChainData (stage 3; reviewer PASS; first push; landing 20261014T030644-L-342885 (interface); batch 20261014T030639; modules 3; new nodes 2)
+- 03:06 L: merged deliver/F3/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (stage 3; reviewer PASS; first push; landing 20261014T030644-L-343011 (proof); batch 20261014T030639; modules 1; new nodes 0)

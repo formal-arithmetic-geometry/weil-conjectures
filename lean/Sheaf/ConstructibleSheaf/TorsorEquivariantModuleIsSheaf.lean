@@ -138,9 +138,6 @@ theorem Scheme.GaloisCover.equivariantModulePresheaf_isSheaf
         right_inv := fun t ↦ by apply Subtype.ext; rfl }) (by
       intro W W' f
       rfl)
-  let : PreservesLimitsOfSize.{u, u + 1}
-      (CategoryTheory.forget (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) :=
-    preservesLimitsOfSize_shrink.{u + 1, u + 1, u, u + 1} _
   let : HasLimitsOfSize.{u, u + 1}
       (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) :=
     ModuleCat.hasLimitsOfSize.{u, u + 1, u + 1, u + 1}
