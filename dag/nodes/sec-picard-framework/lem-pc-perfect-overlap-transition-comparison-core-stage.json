@@ -1,0 +1,113 @@
+{
+ "id": "lem-pc-perfect-overlap-transition-comparison-core-stage",
+ "kind": "statement",
+ "title": "Eventual overlap transition existence",
+ "statement": "For the directed colimit setup, compact open cover, perfect local objects and their limit comparison isomorphisms, there are k ≥ j and hjk : j ≤ k such that the exact overlap restrictions of the pullbacks of A and B at k admit an isomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09RF",
+  "place": "Tags 09RE and 09RF"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-pullback",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the supplied local comparison isomorphisms to the compact overlap, descend the overlap morphism and its inverse through the directed colimit using perfect morphism descent, and enlarge the stage until both composites are identities. Transport the representatives through canonical derived-pullback composition and open-restriction comparison isomorphisms to obtain the displayed overlap isomorphism.",
+   "uses": [
+    "lem-pc-perfect-descend-morphisms",
+    "lem-pc-derived-pullback-perfect",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-descend-morphisms",
+  "lem-pc-derived-pullback-perfect",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "S4",
+  "document": "https://stacks.math.columbia.edu/tag/09RF",
+  "date": "2026-10-14",
+  "note": "Stage-3 split of eventual overlap transition descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "perfect morphism descent overlap transition",
+   "results": "No exact theorem found; library dependencies are used.",
+   "date": "2026-10-14",
+   "verdict": "No exact matching theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived overlap transition comparison",
+   "results": "No exact matching theorem; tools only",
+   "date": "2026-10-14",
+   "verdict": "No exact matching theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback preserves compatibility of local isomorphisms on an overlap of two opens",
+   "results": "No exact theorem; service unavailable during review.",
+   "date": "2026-10-14",
+   "verdict": "No exact matching theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore",
+  "date": "2026-10-14",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-overlap-transition-comparison-diagram-core",
+   "place": "Stage reduction of the core construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOverlapTransitionComparisonCore.lean",
+  "declaration": "AlgebraicGeometry.perfect_overlap_transition_comparison_core_stage",
+  "statement": "theorem perfect_overlap_transition_comparison_core_stage {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c) (i : I) (Z : Scheme.{u}) (t : Z ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation t] [QuasiCompact t] [QuasiSeparated t] [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [∀ (Z : Scheme.{u}) (U : Z.Opens), HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))] (j : I) (hij : i ≤ j) (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens), ∃ k : I, j ≤ k) : let Yj := pullback t (Spec.map (R.map (homOfLE hij))) let X := pullback t (Spec.map (c.ι.app i)) let gj := baseChangeMap t (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (c.ι.app i))) (Over.homMk (Spec.map (c.ι.app j)) (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])) ∀ (U V : Yj.Opens) (hcover : U ⊔ V = ⊤) (hU : IsCompact (U : Set Yj)) (hV : IsCompact (V : Set Yj)) (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme) (hA : U.toScheme.IsPerfect A) (hB : V.toScheme.IsPerfect B) (E : schemeDerivedCategory X), let PU := (schemeOpenRestriction X (gj ⁻¹ᵁ U)).mapDerivedCategory let PV := (schemeOpenRestriction X (gj ⁻¹ᵁ V)).mapDerivedCategory ∀ (φU : (derivedPullback (gj ∣_ U)).obj A ≅ PU.obj E) (φV : (derivedPullback (gj ∣_ V)).obj B ≅ PV.obj E), ∃ (k : I) (hjk : j ≤ k), let Yk := pullback t (Spec.map (R.map (homOfLE (hij.trans hjk)))) let f := baseChangeMap t (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk))))) (Over.homMk (Spec.map (R.map (homOfLE hjk))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) let U' := f ⁻¹ᵁ U let V' := f ⁻¹ᵁ V let A' := (derivedPullback (f ∣_ U)).obj A let B' := (derivedPullback (f ∣_ V)).obj B let SU := (schemeOpenOverlapRestriction Yk (homOfLE (show U' ⊓ V' ≤ U' from inf_le_left))).mapDerivedCategory let SV := (schemeOpenOverlapRestriction Yk (homOfLE (show U' ⊓ V' ≤ V' from inf_le_right))).mapDerivedCategory ∃ e : (SU.obj A' ≅ SV.obj B'), True",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8e18c",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261014T001734-L-2555518",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8e18c",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261014T001734-L-2555518",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module and direct importer compiled; target type, DAG route, declarations, report, and named sorry statements match the review requirements."
+ }
+}
