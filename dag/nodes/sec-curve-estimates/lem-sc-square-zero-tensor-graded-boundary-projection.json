@@ -30,11 +30,11 @@
  ],
  "proof": [
   {
-   "text": "First use the snake/triangle comparison for the compatible resolutions to identify delta-prime with the canonical section boundary. Apply rightDerived_triangle_connecting to global sections. Its triangle comparison\nidentifies its delta with moduleCohomologyBoundary after the canonical single-complex\nisomorphisms. Delta naturality for T.degree in degrees zero and one, followed by naturality\nof toRightDerivedZero, identifies the two section-boundary composites. Evaluate on z and\nuse degree_quotient to replace the third component by q. Compose with the inverse additive\ncoefficient comparison D.k; tensorGradedCoefficientProjection_apply identifies the left\nside. No multiplication rule is used. The argument includes n=0, e=0 and zero sections.",
+   "text": "Unfold the explicit additive coefficient projection. Use tensorGradedUnit to name the original chosen adjunction unit and explicitly give the target of the coefficient additive equivalence; these are definitional abbreviations of the unchanged complete theorem type. Apply congruence for the inverse coefficient comparison and transport hboundary through the degree map. Apply resolvedBoundary_naturality directly to global sections, the short exact sequence supplied by T, and T.degree(n(e+1)), with the supplied compatible injective resolutions. Identify the quotient component by T.degree_quotient and the target canonical boundary by unfolding moduleSectionBoundary and moduleCohomologyBoundary. No product or action identity is used.",
    "uses": [
-    "lem-sc-p1-right-derived-triangle-connecting",
-    "lem-sc-square-zero-tensor-graded-presentation",
+    "lem-sc-resolved-boundary-naturality",
     "lem-sc-square-zero-tensor-graded-product-projection",
+    "lem-sc-square-zero-tensor-graded-presentation",
     "def-sc-module-cohomology-boundary",
     "lem-sc-module-section-boundary-exact"
    ],
@@ -42,16 +42,17 @@
   }
  ],
  "proof_deps": [
-  "def-sc-module-cohomology-boundary",
-  "lem-sc-module-section-boundary-exact",
-  "lem-sc-p1-right-derived-triangle-connecting",
+  "lem-sc-resolved-boundary-naturality",
+  "lem-sc-square-zero-tensor-graded-product-projection",
   "lem-sc-square-zero-tensor-graded-presentation",
-  "lem-sc-square-zero-tensor-graded-product-projection"
+  "def-sc-module-cohomology-boundary",
+  "lem-sc-module-section-boundary-exact"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "agent": "T2 second reader",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 01DZ, module cohomology as a delta-functor; Tag 0B8S, its boundary for a square-zero extension. Applied to the degree projections of coherent.tex, Tag 09MS."
+  "place": "Tag 01DZ, delta-functor naturality, specialized to degree projections using the proved generic resolution/triangle comparison"
  },
  "mathlib_searches": [
   {
@@ -136,7 +137,7 @@
   "module": "Sheaf.AlgebraicGeometry.SquareZeroTensorGradedBoundaryProjection",
   "file": "lean/Sheaf/AlgebraicGeometry/SquareZeroTensorGradedBoundaryProjection.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.tensorGradedProjection_boundary",
-  "statement": "theorem tensorGradedProjection_boundary {X Z : Scheme.{u}} {j : Z ⟶ X} [IsClosedImmersion j] [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wD} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (Opposite.op ⊤)))] {L : X.Modules} {n : ℕ} (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n) (hshort : ∀ d : ℕ, (ShortComplex.kernelSequence ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app (L.tensorPow d))).ShortExact) (IA : InjectiveResolution T.I) (IB : InjectiveResolution (commAlgebraSheafModule X.sheaf T.B)) (IC : InjectiveResolution (commAlgebraSheafModule X.sheaf T.C)) (α : IA.cocomplex ⟶ IB.cocomplex) (β : IB.cocomplex ⟶ IC.cocomplex) (hαβ : α ≫ β = 0) (hιA : IA.ι ≫ α = (CochainComplex.single₀ _).map T.i ≫ IB.ι) (hιB : IB.ι ≫ β = (CochainComplex.single₀ _).map (tensorGradedAlgebraMap T.p) ≫ IC.ι) (hH : ∀ k : ℕ, ((ShortComplex.mk α β hαβ).map (HomologicalComplex.eval _ (ComplexShape.up ℕ) k)).ShortExact) (hΓ : ((ShortComplex.mk α β hαβ).map ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex (ComplexShape.up ℕ))).ShortExact) (δ' : T.C.right.obj.obj (op ⊤) →+ ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj T.I)) (hboundary : ∀ z : T.C.right.obj.obj (op ⊤), δ' z = (((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app (commAlgebraSheafModule X.sheaf T.C) ≫ (IC.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) 0).hom ≫ hΓ.δ 0 1 rfl ≫ (IA.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) 1).inv).hom z)) (e : ℕ) (z : T.C.right.obj.obj (op ⊤)) : tensorGradedCoefficientProjection T D e (δ' z) = (Iso.addCommGroupIsoToAddEquiv (D.k e)).symm (RingedSpace.moduleSectionBoundary X.toRingedSpace (ShortComplex.kernelSequence ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app (L.tensorPow (n * (e + 1))))) (hshort (n * (e + 1))) (Hom.app (T.q (n * (e + 1))) ⊤ z))",
+  "statement": "theorem tensorGradedProjection_boundary {X Z : Scheme.{u}} {j : Z ⟶ X}\n    [IsClosedImmersion j]\n    [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wD}\n      (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (Opposite.op ⊤)))]\n    {L : X.Modules} {n : ℕ} (T : TensorGradedPresentation j L)\n    (D : TensorBoundaryComparisonData j L n)\n    (hshort : ∀ d : ℕ, (ShortComplex.kernelSequence\n      (tensorGradedUnit j (L.tensorPow d))).ShortExact)\n    (IA : InjectiveResolution T.I)\n    (IB : InjectiveResolution (commAlgebraSheafModule X.sheaf T.B))\n    (IC : InjectiveResolution (commAlgebraSheafModule X.sheaf T.C))\n    (α : IA.cocomplex ⟶ IB.cocomplex) (β : IB.cocomplex ⟶ IC.cocomplex)\n    (hαβ : α ≫ β = 0)\n    (hιA : IA.ι ≫ α = (CochainComplex.single₀ _).map T.i ≫ IB.ι)\n    (hιB : IB.ι ≫ β = (CochainComplex.single₀ _).map\n      (tensorGradedAlgebraMap T.p) ≫ IC.ι)\n    (hH : ∀ k : ℕ, ((ShortComplex.mk α β hαβ).map\n      (HomologicalComplex.eval _ (ComplexShape.up ℕ) k)).ShortExact)\n    (hΓ : ((ShortComplex.mk α β hαβ).map\n      ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n        (ComplexShape.up ℕ))).ShortExact)\n    (δ' : T.C.right.obj.obj (op ⊤) →+\n      ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj T.I))\n    (hboundary : ∀ z : T.C.right.obj.obj (op ⊤), δ' z =\n      (((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app\n          (commAlgebraSheafModule X.sheaf T.C) ≫\n        (IC.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) 0).hom ≫\n        hΓ.δ 0 1 rfl ≫\n        (IA.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) 1).inv).hom z))\n    (e : ℕ) (z : T.C.right.obj.obj (op ⊤)) :\n    tensorGradedCoefficientProjection T D e (δ' z) =\n      (Iso.addCommGroupIsoToAddEquiv\n        (Y := AddCommGrpCat.of ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj\n          (kernel (tensorGradedUnit j (L.tensorPow (n * (e + 1))))))) (D.k e)).symm\n        (RingedSpace.moduleSectionBoundary X.toRingedSpace\n          (ShortComplex.kernelSequence\n            (tensorGradedUnit j (L.tensorPow (n * (e + 1))))) (hshort (n * (e + 1)))\n          (Hom.app (T.q (n * (e + 1))) ⊤ z))",
   "branch": "sheaf-dag",
   "by": "N4",
   "date": "2026-10-14"
@@ -154,11 +155,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-381d3",
-  "group": "N4",
+  "reviewer": "X-c0b26",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261014T004110-L-2836995",
+  "landing": "20261014T041920-L-1154854",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files and DAG nodes match the stated theorem interfaces; all five modules and the direct importer compile successfully."
+  "note": "independent Codex review: Delivered Lean signatures and proofs match their DAG nodes; original signature checks, standard axiom checks, both delivered modules, and the sole direct importer pass."
  }
 }

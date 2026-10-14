@@ -6,6 +6,7 @@ Authors: SHEAF group N4
 module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedProductProjection
+import Sheaf.CategoryTheory.Abelian.ResolvedBoundaryNaturality
 
 /-! # Naturality of homogeneous boundary projections
 
@@ -15,15 +16,18 @@ Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence.
 
 @[expose] public section
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry MonoidalCategory
 open Opposite TopologicalSpace
 namespace AlgebraicGeometry.Scheme.Modules
 universe u wC wD
 attribute [local irreducible] boundaryCoefficientCohomologyIso canonicalTensorBoundaryComparisons
-attribute [local irreducible] RingedSpace.moduleSectionBoundary
-  Functor.rightDerived tensorPullback
+attribute [local irreducible] RingedSpace.moduleSectionBoundary Functor.rightDerived tensorPullback
+  Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
+  InjectiveResolution.isoRightDerivedObj DerivedCategory.HomologySequence.δ
+  ShortComplex.ShortExact.δ tensorGradedAlgebraMap Functor.mapHomologicalComplex
+  Functor.rightDerivedFunctorPlus ShortComplex.ShortExact.singleTrianglePlus
 private theorem boundary_enoughInjectives (X : Scheme.{u}) :
     EnoughInjectives (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
@@ -55,8 +59,7 @@ theorem tensorGradedProjection_boundary {X Z : Scheme.{u}} {j : Z ⟶ X}
     {L : X.Modules} {n : ℕ} (T : TensorGradedPresentation j L)
     (D : TensorBoundaryComparisonData j L n)
     (hshort : ∀ d : ℕ, (ShortComplex.kernelSequence
-      ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app
-        (L.tensorPow d))).ShortExact)
+      (tensorGradedUnit j (L.tensorPow d))).ShortExact)
     (IA : InjectiveResolution T.I)
     (IB : InjectiveResolution (commAlgebraSheafModule X.sheaf T.B))
     (IC : InjectiveResolution (commAlgebraSheafModule X.sheaf T.C))
@@ -80,12 +83,41 @@ theorem tensorGradedProjection_boundary {X Z : Scheme.{u}} {j : Z ⟶ X}
         (IA.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) 1).inv).hom z))
     (e : ℕ) (z : T.C.right.obj.obj (op ⊤)) :
     tensorGradedCoefficientProjection T D e (δ' z) =
-      (Iso.addCommGroupIsoToAddEquiv (D.k e)).symm
+      (Iso.addCommGroupIsoToAddEquiv
+        (Y := AddCommGrpCat.of ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj
+          (kernel (tensorGradedUnit j (L.tensorPow (n * (e + 1))))))) (D.k e)).symm
         (RingedSpace.moduleSectionBoundary X.toRingedSpace
           (ShortComplex.kernelSequence
-            ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app
-              (L.tensorPow (n * (e + 1))))) (hshort (n * (e + 1)))
-          (Hom.app (T.q (n * (e + 1))) ⊤ z)) := by sorry
+            (tensorGradedUnit j (L.tensorPow (n * (e + 1))))) (hshort (n * (e + 1)))
+          (Hom.app (T.q (n * (e + 1))) ⊤ z)) := by
+  -- Keep the derived comparison maps opaque during concrete definition matching.
+  set_option maxRecDepth 300 in
+    set_option backward.isDefEq.respectTransparency true in
+      set_option backward.isDefEq.respectTransparency.types true in
+        let v := RingedSpace.globalSectionsFunctor X.toRingedSpace
+        let : PreservesFiniteLimits v := inferInstanceAs (PreservesFiniteLimits
+          (SheafOfModules.evaluation (moduleRings X.toRingedSpace) (op ⊤)))
+        let S : ShortComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+          ShortComplex.kernelSequence (tensorGradedUnit j (L.tensorPow (n * (e + 1))))
+        let hS : S.ShortExact := hshort (n * (e + 1))
+        unfold tensorGradedCoefficientProjection
+        change (Iso.addCommGroupIsoToAddEquiv
+          (Y := AddCommGrpCat.of ((v.rightDerived 1).obj S.X₁)) (D.k e)).symm
+            (((v.rightDerived 1).map (T.degree (n * (e + 1))).τ₁).hom (δ' z)) = _
+        refine congrArg (α := (v.rightDerived 1).obj S.X₁)
+          (Iso.addCommGroupIsoToAddEquiv
+            (Y := AddCommGrpCat.of ((v.rightDerived 1).obj S.X₁)) (D.k e)).symm ?_
+        refine (congrArg
+          (((v.rightDerived 1).map (T.degree (n * (e + 1))).τ₁).hom)
+          (hboundary z)).trans ?_
+        exact resolvedBoundary_naturality.{_, _, _, wC, wD} v
+          (ShortComplex.mk T.i (tensorGradedAlgebraMap T.p) T.hw) S
+          T.shortExact hS (T.degree (n * (e + 1)))
+          (T.q (n * (e + 1))) (T.degree_quotient (n * (e + 1)))
+          IA IB IC α β hαβ hιA hιB hH hΓ z (Hom.app (T.q (n * (e + 1))) ⊤ z)
+          (by rfl) (RingedSpace.moduleSectionBoundary X.toRingedSpace S hS) (by
+            unfold RingedSpace.moduleSectionBoundary RingedSpace.moduleCohomologyBoundary
+            rfl)
 
 end
 end AlgebraicGeometry.Scheme.Modules

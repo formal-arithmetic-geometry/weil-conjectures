@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-resolved-boundary-naturality",
+ "kind": "statement",
+ "title": "Naturality of the resolved derived boundary",
+ "statement": "Let A be an abelian category with enough injectives and a chosen derived category, let R be a ring with a chosen derived category for ModuleCat R, and let v:A→ModuleCat R be additive and left exact [def-sp-abelian, def-sp-left-exact-additive, def-sp-injective-resolutions, def-weil-abstract-derived-category]. Let S and T be short exact short complexes, φ:S→T a short-complex morphism, and q its third component. Choose compatible injective resolutions of S, degreewise short exact, whose image under v is short exact. Let z be an element of v(S₃), and z′ its image under v(q). Let b:v(T₃)→R¹v(T₁) be the canonical derived-triangle connecting map transported by the single-object comparison and preceded by toRightDerivedZero [lem-sp-derived-functor-single-identification]. Applying R¹v(φ₁) to the source resolution boundary of z, preceded by toRightDerivedZero and transported by isoRightDerivedObj, gives b(z′). The identities specifying q, z′, and b are supplied as equality hypotheses, not choices of objects.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015B (4), naturality of the right-derived delta-functor; Tag 01DZ for module cohomology"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "lem-sp-derived-functor-single-identification"
+ ],
+ "proof": [
+  {
+   "text": "Use rightDerived_triangle_connecting to obtain a delta-functor G whose underlying functors equal R^n v, together with its comparison with every compatible resolution and with the canonical derived triangle. Eliminate that functor equality. The first comparison identifies the source delta with the displayed resolution boundary, since exactness witnesses are proof-irrelevant.",
+   "uses": [
+    "lem-sc-p1-right-derived-triangle-connecting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the naturality field of G to φ at degree zero. Use the second triangle comparison at T and postcompose it with the homology/right-derived comparison isomorphism. Its inverse cancels, yielding precisely the target canonical boundary. Combine this identity with source resolution comparison and delta naturality. This is an equality of morphisms, so zero morphisms and split sequences require no exception.",
+   "uses": [
+    "def-weil-pbc-delta-functor",
+    "lem-sc-p1-right-derived-triangle-connecting"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Precompose the obtained morphism equality by toRightDerivedZero and move it past φ₃ using naturality. Evaluate it on z in ModuleCat R. Expand linear-map composition, substitute φ₃=q and v(q)(z)=z′, and replace the target composite by b using its supplied defining equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-delta-functor",
+  "lem-sc-p1-right-derived-triangle-connecting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "T2 second reader",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015B (4), using the existing rightDerived_triangle_connecting comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isoRightDerivedObj.*δ|triangle_connecting|resolvedBoundary",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.rightDerived_triangle_connecting",
+   "results": "loogle: unknown identifier 'CategoryTheory.rightDerived_triangle_connecting'",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "transport of injective resolution connecting morphism naturality right derived functor canonical triangle",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.iso_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the right derived connecting map computed with compatible injective resolutions and identified with the derived triangle connecting map",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SquareZeroTensorGradedBoundaryProjection",
+  "date": "2026-10-14",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS degree projection diagram and Tag 01DZ naturality of connecting maps",
+   "via": [
+    "lem-sc-square-zero-tensor-graded-boundary-projection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.ResolvedBoundaryNaturality",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/ResolvedBoundaryNaturality.lean",
+  "declaration": "CategoryTheory.resolvedBoundary_naturality",
+  "statement": "theorem resolvedBoundary_naturality\n    {A : Type u₁} [Category.{v₁} A] [Abelian A] [EnoughInjectives A]\n    {R : Type u₂} [Ring R]\n    [HasDerivedCategory.{w₁} A] [HasDerivedCategory.{w₂} (ModuleCat.{u₂} R)]\n    (v : A ⥤ ModuleCat.{u₂} R) [v.Additive] [PreservesFiniteLimits v]\n    (S T : ShortComplex A) (hS : S.ShortExact) (hT : T.ShortExact) (φ : S ⟶ T)\n    (q : S.X₃ ⟶ T.X₃) (hq : φ.τ₃ = q)\n    (IA : InjectiveResolution S.X₁) (IB : InjectiveResolution S.X₂)\n    (IC : InjectiveResolution S.X₃)\n    (α : IA.cocomplex ⟶ IB.cocomplex) (β : IB.cocomplex ⟶ IC.cocomplex)\n    (hαβ : α ≫ β = 0)\n    (hιA : IA.ι ≫ α = (CochainComplex.single₀ A).map S.f ≫ IB.ι)\n    (hιB : IB.ι ≫ β = (CochainComplex.single₀ A).map S.g ≫ IC.ι)\n    (hH : ∀ k : ℕ, ((ShortComplex.mk α β hαβ).map\n      (HomologicalComplex.eval A (ComplexShape.up ℕ) k)).ShortExact)\n    (hΓ : ((ShortComplex.mk α β hαβ).map\n      (v.mapHomologicalComplex (ComplexShape.up ℕ))).ShortExact) (z : v.obj S.X₃) (z' : v.obj T.X₃)\n    (hz : (v.map q).hom z = z')\n    (b : v.obj T.X₃ ⟶ (v.rightDerived 1).obj T.X₁)\n    (hb : b = v.toRightDerivedZero.app T.X₃ ≫\n        (v.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso 0).inv.app T.X₃ ≫\n        DerivedCategory.HomologySequence.δ\n          ((v.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι).mapTriangle.obj\n            hT.singleTrianglePlus) 0 1 (by norm_num) ≫\n        (v.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso 1).hom.app T.X₁) :\n    ((v.rightDerived 1).map φ.τ₁).hom\n      ((v.toRightDerivedZero.app S.X₃ ≫\n        (IC.isoRightDerivedObj v 0).hom ≫ hΓ.δ 0 1 rfl ≫\n          (IA.isoRightDerivedObj v 1).inv).hom z) = b.hom z'",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-c0b26",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T041920-L-1154854",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-c0b26",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T041920-L-1154854",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures and proofs match their DAG nodes; original signature checks, standard axiom checks, both delivered modules, and the sole direct importer pass."
+ }
+}
