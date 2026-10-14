@@ -1,0 +1,140 @@
+{
+ "id": "new-standard-abelian-ext-section-diagram",
+ "kind": "statement",
+ "title": "Standard-source abelian Ext section calculation",
+ "statement": "For a scheme morphism f:X→Y [def-pc-scheme], module F on X [def-weil-sheaf-of-modules-category], injective resolution I of F, and a quasi-isomorphism l:f_*I→K into a natural-indexed complex of injective Y-modules, let a:Γ(X,I)≅Γ(Y,f_*I) have inverse given degreewise by restriction along f⁻¹(Y)=X. Use the explicit standardSectionEdgeLift constructed by successive injective extension from the standard source resolution injectiveResolution(f_*F), not an arbitrary source resolution or lift. The homology of its section map, preceded by abelianResolutionIso for this standard source, equals inverse image on abelian Ext followed by the counit, abelianResolutionIso for I, and the section homology map of a followed by Γ(l). The comparisons and Ext map are those of [new-module-cohomology-ext-resolution-normalization] and [def-pc-flat-cohomology-comparison].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FB",
+  "place": "Remark 20.14.2, common section diagram; Section 20.14 (01F7), derived functoriality; Tags 03FD and 06XR, forgotten acyclicity and sections as Ext; standard source resolution and the explicit lift of 013P."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "new-module-cohomology-ext-resolution-normalization",
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Forget I and K to abelian sheaves. Forgotten injective modules are section-acyclic on every open; the pushed-forward forgotten I computes derived abelian direct image and its injective replacement K computes the same object.",
+   "uses": [
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "new-module-cohomology-ext-resolution-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The explicitly constructed standardSectionEdgeLift has source injectiveResolution(f_*F) and extends f_*F to f_*I to K. Thus its localized morphism is the canonical morphism of 01F7. Derived adjunction, evaluated at the constant integer source, identifies this with exact inverse image on Ext followed by coeff(f,identity); evaluation at 1 gives constIso(f).symm. The degreewise restriction equation for a identifies the global-section comparison. Apply the canonical acyclic comparisons to obtain the standard-source displayed equality.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison",
+    "new-module-cohomology-ext-resolution-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "new-module-cohomology-ext-resolution-normalization"
+ ],
+ "proof_origin": {
+  "by": "D3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01FB",
+  "place": "Remark 20.14.2, common section diagram; Section 20.14 (01F7), derived functoriality; Tags 03FD and 06XR, forgotten acyclicity and sections as Ext; standard source resolution and the explicit lift of 013P."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An augmentation lift from an injective resolution into a bounded below complex of injectives is unique up to homotopy and induces the same map on homology",
+   "results": "Eight hits including InjectiveResolution.descHomotopy and homotopyEquiv. They provide resolution transport, not the Ext section calculation.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InjectiveResolution.desc\"",
+   "results": "Twelve hits including desc, desc_commutes, descHomotopy. These remove arbitrary source resolution choices.",
+   "date": "2026-10-14",
+   "verdict": "No standard-source Ext section calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "descOfQuasiIso|homotopy_of_comp_quasiIso_of_injective; abelianResolutionIso|section_diagram|edge_factor",
+   "results": "msearch grep returned zero hits. Local rg found normalization and acyclic comparison naturality, and the assigned section diagram; no independent standard-source calculation.",
+   "date": "2026-10-14",
+   "verdict": "The missing calculation is isolated after proving choice independence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cohomology map from inverse image followed by the counit is represented on sections by an augmentation lift from a standard injective resolution",
+   "results": "UNAVAILABLE: service returned Internal Server Error. No verdict from this search.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionDiagram",
+  "date": "2026-10-14",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Common-section diagram step of the flat base change comparison used in henselian idempotent lifting, specialized to the standard source resolution and explicit augmentation lift; arbitrary source and lift choices removed separately.",
+   "via": [
+    "new-module-cohomology-ext-section-diagram",
+    "new-module-cohomology-ext-resolution-edge",
+    "new-module-cohomology-ext-edge-comparison",
+    "new-module-cohomology-ext-pullback-comparison",
+    "new-flat-base-change-target-leray-comparison",
+    "new-flat-base-change-affine-canonical-comparisons",
+    "new-flat-base-change-affine-target",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StandardAbelianExtSectionDiagram",
+  "file": "lean/Sheaf/AlgebraicGeometry/StandardAbelianExtSectionDiagram.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.standard_abelian_ext_section_diagram",
+  "statement": "theorem standard_abelian_ext_section_diagram {X Y : Scheme.{u}} (f : X ⟶ Y)\n    {F : X.Modules} (I : InjectiveResolution F) (K : CochainComplex Y.Modules ℕ)\n    (hK : ∀ n : ℕ, Injective (K.X n))\n    (l : ((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ K)\n    (hl : QuasiIso l)\n    (a : ((moduleSections X).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ≅\n      ((moduleSections Y).mapHomologicalComplex (.up ℕ)).obj\n        (((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex))\n    (ha : ∀ n : ℕ, a.inv.f n = (presheaf (I.cocomplex.X n)).map\n      (eqToHom (by simp) : (⊤ : X.Opens) ⟶ f ⁻¹ᵁ (⊤ : Y.Opens)).op) (p : ℕ) :\n    (abelianResolutionIso Y (injectiveResolution ((pushforward f).obj F)) p).hom ≫\n        (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (.up ℕ) p).map\n          (((moduleSections Y).mapHomologicalComplex (.up ℕ)).map\n            (standardSectionEdgeLift f I K hK l)) =\n      standardSectionExtHom f F p ≫\n        (abelianResolutionIso X I p).hom ≫\n        (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (.up ℕ) p).map\n          (a.hom ≫ ((moduleSections Y).mapHomologicalComplex (.up ℕ)).map l)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-0d7ee",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261014T030642-L-342139",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-0d7ee",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261014T030642-L-342139",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signatures and proof routes match DAG records; abelianEdgeHom preserves the original composite. Both delivered modules and direct importer ModuleCohomologyExtResolutionEdge compile cleanly; axiom checks show only permitted axioms and sorryAx from the documented remaining theorem."
+ }
+}

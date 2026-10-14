@@ -16,42 +16,20 @@
  ],
  "proof": [
   {
-   "text": "Forget I,J,K and the compatible augmentations. Forgotten injective modules are acyclic for abelian sections on every open, so forgotten I computes derived abelian direct image. Use the canonical acyclic comparisons to identify abelian Ext with section homology.",
+   "text": "Remove postcomposition with the codomain identity from abelianEdge_section_diagram_after_identity using Category.comp_id.",
    "uses": [
-    "lem-sc-injective-module-abelian-acyclic-zariski",
-    "new-module-cohomology-ext-resolution-normalization"
+    "new-abelian-edge-section-identity"
    ],
-   "elementary": false
-  },
-  {
-   "text": "The lift beta computes the morphism into the derived abelian direct image. Derived adjunction evaluated on the constant integer source identifies this with inverse image on Ext followed by the counit; terminal evaluation at 1 gives constIso(f).symm. The terminal section map is D.a by D.sections. Thus the common section diagram gives the asserted square.",
-   "uses": [
-    "def-pc-flat-cohomology-comparison",
-    "def-weil-pbc-module-cohomology-fmap"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Naturality of acyclic comparisons and homotopy invariance remove resolution and lift choices.",
-   "uses": [
-    "lem-sc-acyclic-comparison-natural",
-    "lem-weil-pbc-homotopic-maps-equal-cohomology"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-flat-cohomology-comparison",
-  "def-weil-pbc-module-cohomology-fmap",
-  "lem-sc-acyclic-comparison-natural",
-  "lem-sc-injective-module-abelian-acyclic-zariski",
-  "lem-weil-pbc-homotopic-maps-equal-cohomology",
-  "new-module-cohomology-ext-resolution-normalization"
+  "new-abelian-edge-section-identity"
  ],
  "proof_origin": {
-  "by": "C2 worker",
+  "by": "D3 worker",
   "document": "https://stacks.math.columbia.edu/tag/01FB",
-  "place": "Tag 01FB, common section diagram; Tag 01F7, canonical cohomology functoriality; Tag 03FD, forgotten injective acyclicity."
+  "place": "Tags 01FB, 015E and 013S; Lean proof of arbitrary-source and lift independence, followed by the standard-source Ext calculation."
  },
  "mathlib_searches": [
   {
@@ -142,17 +120,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W2",
+  "reviewer": "X-0d7ee",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261014T004117-L-2839977",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.abelianEdge_section_diagram"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.abelianEdge_section_diagram_after_identity"
-  ]
+  "landing": "20261014T030642-L-342139",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signatures and proof routes match DAG records; abelianEdgeHom preserves the original composite. Both delivered modules and direct importer ModuleCohomologyExtResolutionEdge compile cleanly; axiom checks show only permitted axioms and sorryAx from the documented remaining theorem."
  }
 }
