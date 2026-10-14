@@ -27,9 +27,112 @@
   "def-weil-pbc-direct-image",
   "def-weil-pbc-derived-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $W=U\\cap V$ and write $k_T:T\\hookrightarrow X$ for $T=U,V,W$. The affine-intersection criterion [lem-weil-pbc-quasi-separated-affine-cover-criterion] shows that opens of $X$ are quasi-separated. Choose finite affine covers of $U$ and $V$; the intersections of their members are quasi-compact by the same criterion, so their finite union $W$ is quasi-compact. Thus all three sources are qcqs. By [lem-weil-pbc-qcqs-morphism-permanence], each $k_T$ is quasi-compact. An open immersion is locally of finite type: inside an affine neighbourhood, principal opens contained in the open subscheme have coordinate ring $A[t]/(at-1)$. It is separated since its diagonal is an isomorphism. The same principal-open calculation applied to affine finite-type presentations for $f$ proves that $fk_T$ is locally of finite type; it is quasi-compact by the cited permanence lemma (source qc, target qs), hence finite type. Its diagonal is the restriction of the closed diagonal of $f$, hence closed. Therefore composition may be applied to $k_T,f$.",
+   "uses": [
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-open-immersion",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKN, label lemma-relative-mayer-vietoris, hypotheses for open inclusions"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-etale-constant-ring-module-equivalence] to identify sheaves valued in $\\Lambda$-modules, used in the extension-by-zero definition, with sheaves of modules over the constant ring sheaf $\\Lambda_X$, used in [def-weil-pbc-derived-categories]. This equivalence keeps the underlying abelian presheaves and their maps unchanged and is exact. Restriction and the sheafification defining extension by zero agree under it: restrict the scalar action to constant sections, or extend it uniquely along the constant-ring sheafification map. Thus the following maps and exact sequences are in the coefficient category of the statement. For a sheaf $F$ of $\\Lambda$-modules on $X_{\\Et}$, form $A(F)=k_{W!}(F|_W)$ and $B(F)=k_{U!}(F|_U)\\oplus k_{V!}(F|_V)$. For $T=U,V$, on any etale object $E\\to W$ the extension-by-zero presheaf for $k_T$ has value $F(E)$, since $E\\to X$ factors through $T$. Its sheafification restricted to $W$ is therefore $F|_W$: covers of an object over $W$ remain over $W$, and $F|_W$ is already a sheaf. Thus $k_W^{-1}k_{T!}(F|_T)=F|_W$. Under [lem-weil-pbc-extension-by-zero-adjunction], the identity of $F|_W$ now defines $A(F)\\to k_{T!}(F|_T)$. Take the negative of this map for $T=V$; define $B(F)\\to F$ by the two counits. Their composite is zero, since the two composites $A(F)\\to F$ both correspond to $\\mathrm{id}_{F|_W}$. The stalk formula [lem-weil-pbc-extension-by-zero-stalks], including its explicit map on germs, and the explicit counits in the adjunction identify the stalk sequence at a point in $W$ with $0\\to M\\xrightarrow{(1,-1)}M\\oplus M\\xrightarrow{(1,1)}M\\to0$, where $M=F_{\\bar x}$. At a point of $U\\setminus V$ or $V\\setminus U$ it is $0\\to0\\to M\\xrightarrow{1}M\\to0$. These exhaust the points since $U\\cup V=X$. All three sequences are exact. To justify detection, forget scalars using [lem-weil-pbc-module-sheaves-colimits-forgetful]; exact stalks [prop-weil-pbc-geometric-stalks-exact] make the kernel, middle homology and cokernel have zero stalks. Apply [lemma-weil-pbc-geometric-stalk-conservative] to each of their maps to zero. Faithfulness of forgetting scalars implies that a module with zero underlying sheaf is zero. Thus $0\\to A(F)\\to B(F)\\to F\\to0$ is short exact in module sheaves.",
+   "uses": [
+    "lem-weil-pbc-etale-constant-ring-module-equivalence",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKK, label lemma-mayer-vietoris-shriek, stalk calculation in its proof"
+   }
+  },
+  {
+   "text": "Represent $K$ by a bounded-below complex $L$. Restriction is exact by [prop-weil-pbc-inverse-image-modules-exact] and extension by zero is exact by [lem-weil-pbc-extension-by-zero-exact], so their termwise operations represent $K|_T$ and $k_{T!}(K|_T)$ and preserve a common lower bound. Naturality of the maps in step 2 makes its sequences in degrees $L^n$ a short exact sequence of complexes $0\\to A(L)\\to B(L)\\to L\\to0$. The module category is abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian]. Apply [lem-weil-pbc-complex-ses-triangle] to obtain the distinguished triangle $k_{W!}K|_W\\to k_{U!}K|_U\\oplus k_{V!}K|_V\\to K\\to(k_{W!}K|_W)[1]$. All its objects lie in $D^+$; the same mapping-cone construction gives the bounded-below triangle.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKK, label lemma-mayer-vietoris-shriek; Tag 0152, label lemma-derived-canonical-delta-functor"
+   }
+  },
+  {
+   "text": "Fix the compactification $(j,p)$ chosen for $f$. The functor $j_!$ is exact by [lem-weil-pbc-extension-by-zero-exact], hence its termwise derived functor is triangulated by [lem-sf-exact-functor-derived-triangulated]. The module categories on $\\overline X$ and $Y$ are Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian] and have K-injective resolutions by [lem-weil-pbc-kinjective-functorial-existence]. The module direct image $p_*$ is additive and left exact by [lem-weil-pbc-module-direct-image-left-exact]. Apply [lem-pc-right-derived-functor-triangulated] to $p_*$: $Rp_*$ preserves distinguished triangles and commutes with shifts. By [lem-weil-pbc-derived-functor-negative-vanishing] it preserves bounded-below objects; $j_!$ also does so termwise. Thus $Rf_!^{(j,p)}=Rp_*j_!$ is triangulated on $D^+$. Apply it to step 3. Additivity identifies the middle vertex with $Rf_!k_{U!}K|_U\\oplus Rf_!k_{V!}K|_V$, and shift compatibility identifies the last vertex with $(Rf_!k_{W!}K|_W)[1]$.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "def-weil-pbc-projection-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKN, label lemma-relative-mayer-vietoris, applying the triangulated compact-support functor; Tag 0159, label lemma-right-derived-properties"
+   }
+  },
+  {
+   "text": "For each $T=U,V,W$, choose the compactification $(k_T,1_X)$ of $k_T$. Here $1_X$ is proper (its diagonal is an isomorphism, its affine presentation is the identity, and every base change is an identity closed map). By [def-weil-pbc-projection-compactification], $R(k_T)_!^{(k_T,1_X)}=R(1_X)_*k_{T!}=k_{T!}$: identity direct image is the identity, and applying it to a resolution gives the same object in the derived category. Apply [lem-weil-pbc-etale-shriek-qcqs-composition] to $T\\xrightarrow{k_T}X\\xrightarrow{f}Y$, choosing for the composite exactly the compactification specified in the statement for $a,b,d$. This gives natural isomorphisms $Rf_!k_{U!}\\cong Ra_!$, $Rf_!k_{V!}\\cong Rb_!$, $Rf_!k_{W!}\\cong Rd_!$. Let their evaluations on the restricted complexes be $e_U,e_V,e_W$. The isomorphism on the middle vertex is $e_U\\oplus e_V$, on the third vertex the identity, and on the last vertex $e_W[1]$. If the arrows of the triangle in step 4 are $u,v,w$, define the new arrows by $(e_U\\oplus e_V)u e_W^{-1}$, $v(e_U\\oplus e_V)^{-1}$, and $e_W[1]w$. These formulas give an isomorphism of triangles, so the resulting triangle is distinguished and is exactly the triangle asserted for the chosen candidates.",
+   "uses": [
+    "def-weil-pbc-projection-compactification",
+    "lem-weil-pbc-etale-shriek-qcqs-composition",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKN, label lemma-relative-mayer-vietoris, composition identification (Tag 0F7J, label lemma-shriek-composition)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-open-immersion",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-etale-constant-ring-module-equivalence",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "def-weil-pbc-projection-compactification",
+  "lem-weil-pbc-etale-shriek-qcqs-composition",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0GKN and 0GKK, labels lemma-relative-mayer-vietoris and lemma-mayer-vietoris-shriek; signed stalk proof expanded"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -177,15 +280,89 @@
    "date": "2026-10-14",
    "verdict": "no match",
    "results": "Hits: SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.GeneratingSections.IsFiniteType, ChevalleyThm.chevalley_polynomialC, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential. Read signatures: these are sheafification/condensed constructions, finite local generators or constructible subsets, not compact-support etale cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "MayerVietoris|lowerShriek|shriek",
+   "results": "Hits: Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean. Read hits: ordinary free-sheaf Mayer Vietoris and scheme gluing/ideal-support facts, not relative compact-support pushforward for arbitrary small etale module complexes.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Mayer Vietoris compact support etale cohomology triangle",
+   "results": "Unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative derived compact support Mayer Vietoris triangle for small etale module sheaves",
+   "results": "Hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact. Read hits: ordinary free-sheaf Mayer Vietoris and scheme gluing/ideal-support facts, not relative compact-support pushforward for arbitrary small etale module complexes.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shriek\"",
+   "results": "Hits: . Read hits: ordinary free-sheaf Mayer Vietoris and scheme gluing/ideal-support facts, not relative compact-support pushforward for arbitrary small etale module complexes.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward of extension by zero gives a distinguished triangle for a two open cover of a scheme",
+   "results": "Hits: AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.Cover.LocallyDirected.ofIsBasisOpensRange_trans, AlgebraicGeometry.Scheme.IsLocallyDirected.tAux, AlgebraicGeometry.nonempty_isColimit_binaryCofanMk_of_isCompl, AlgebraicGeometry.Scheme.Cover.ι_glueMorphisms_assoc. Read hits: ordinary free-sheaf Mayer Vietoris and scheme gluing/ideal-support facts, not relative compact-support pushforward for arbitrary small etale module complexes.",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-compactification-constructibility",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-etale-shriek-relative-mayer-vietoris",
+  "worker": "stage1",
+  "summary": "Expanded the source Mayer Vietoris argument using signed stalk maps, a degreewise short exact sequence, triangulated compact-support pushforward, and the existing qcqs composition theorem. No new nodes or altered statements. Coefficients remain finite-ring modules on small etale sites. Maintainer repair: explicitly cite the existing constant-ring module equivalence at the coefficient-category handoff before the stalk sequence; the statement is unchanged.",
+  "blueprint": "Nearest ancestor thm-weil-pbc-direct-image-finiteness-proper, classical constructibility input, expanded by the first paragraph of Tag 0GL0: relative Mayer Vietoris reduction to affine source. Steps 1-3 realize the open-cover triangle and steps 4-5 its relative compact-support version.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic Colimits of sheaves of modules and the forgetful functor to abelian sheaves used in the explicit stalk/derived-category construction of the relative Mayer Vietoris triangle; it supplies infrastructure, not a replacement for the unit route."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact used in the explicit stalk/derived-category construction of the relative Mayer Vietoris triangle; it supplies infrastructure, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic Sheaves of Lambda-modules on the small etale site form a Grothendieck abelian category used in the explicit stalk/derived-category construction of the relative Mayer Vietoris triangle; it supplies infrastructure, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "Generic Direct image of etale sheaves of modules over a constant ring: module structure, additive and left exact used in the explicit stalk/derived-category construction of the relative Mayer Vietoris triangle; it supplies infrastructure, not a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-module-direct-image-left-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-acb876de5",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-acb876de5 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, and unit/chapter route. All five steps and edge cases check out against Stacks 0GKK, 0GKN, and 0F7J. Added the existing constant-ring module equivalence citation to make the coefficient-category identification explicit; statement unchanged. Corrected JSON and detailed review.md written. No new nodes or target-category comparisons assumed.; 1 file(s) fixed by the reviewer"
+ }
 }
