@@ -1,6 +1,6 @@
 # Work queue
 
-24 items; claim with `tools/claim.py next <group> [--stage N]`.
+23 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (24)
+## Stage 3: modules to prove (23)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -28,7 +28,6 @@
 | `Sheaf.Paper.ModuleCupEqualDerivedMapsClass` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativeMVDirectImageRows` | 29 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ScalarCupModuleCupCompatibility` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealization` | 33 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchange` | 34 | 1 | proof |
