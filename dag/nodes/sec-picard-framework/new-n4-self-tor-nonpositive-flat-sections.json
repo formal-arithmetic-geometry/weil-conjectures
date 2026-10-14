@@ -1,0 +1,181 @@
+{
+ "id": "new-n4-self-tor-nonpositive-flat-sections",
+ "kind": "statement",
+ "title": "Affine section coordinates for nonpositive termwise flat quotient resolutions",
+ "statement": "Let i:Z→Y be a closed immersion of schemes [def-weil-closed-immersion, def-pc-scheme], B=i_*O_Z, and q:K→B[0] a quasi-isomorphism [def-pc-quasi-iso-modules]. Assume K is a cochain complex of O_Y-module sheaves [def-pc-cochain-complex-modules], all its terms are flat [def-pc-flat-sheaf-modules], and K^j is zero for every j>0. For n≥0 put Q=H^{-n}(Tot(K⊗B[0])) [def-pc-tensor-complex-sheaves]. On each affine U put A_U=Γ(Y,U), I_U=ker(i)(U), P_U the chosen projective resolution of A_U/I_U, and T_U=P_U⊗(A_U/I_U) [def-weil-pbc-module-chain-complex-homology]. There exist A_U-linear equivalences c_U:H_n(T_U)≃Γ(U,Q) such that the following holds. For every basic inclusion V⊆U, let phi be ring restriction. For any supplied quotient homomorphism psi:A_U/I_U→A_V/I_V, chain map a:P_U→Res_phi(P_V), and chain map k:T_U→Res_phi(T_V) satisfying psi(mk(x))=mk(phi(x)), pi_V a_0=psi pi_U, and k_j(x⊗y)=a_j(x)⊗psi(y), restriction sends c_U(x) to c_V(e(H_n(k)(x))) for every x, where e is the exact restriction-of-scalars homology isomorphism. No algebraic comparison maps are constructed in this statement, and no arbitrary unbounded K-flat complex is compared with K.",
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-pc-quasi-iso-modules",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Tag 08DX(2), affine tensor calculation; Tags 06YG and 06YB for K-flat comparison, 01I9 for affine sections, and 00LS(1) for choosing augmented resolution lifts"
+ },
+ "proof": [
+  {
+   "text": "For every affine U, identify the restricted B with tilde(A/I) using the normalized quotient presentation. Sheafify the chosen projective quotient resolution, with its augmentation, and extend it to nonpositive cochain degrees. Exactness of tilde and extension gives a quasi-isomorphism to B|U[0]. The sheafified resolution has flat terms and no positive terms, hence is K-flat. The supplied global K is nonpositive and termwise flat, hence K-flat; its restriction is K-flat.",
+   "uses": [
+    "lem-sc-affine-quotient-resolution-sheafification",
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-pc-kflat-open-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let L_U be the sheafified and extended projective quotient resolution, with its normalized augmentation p_U. Construct the augmented zigzag K|U tensor B|U[0] ← K|U tensor L_U → B|U[0] tensor L_U → L_U tensor B|U[0]. Its first two arrows are tensors of p_U and q|U; the last is braiding. For each of the first two maps, its cone is identified with tensor of the acyclic augmentation cone with a K-flat complex. By the definition of K-flatness (and tensor symmetry for the other orientation) this cone is acyclic. The quasi-isomorphism/cone criterion makes each leg a quasi-isomorphism, so its homology map is invertible. Use the underived affine total-tensor identification, exact tilde homology, extension from chain degree n to cochain degree -n, and the affine tilde section unit to define c_U. Normalize the tensor comparison by its pure-tensor formula, not by an arbitrary pointwise choice of an isomorphism. The public open K-flat homology comparison is not used.",
+   "uses": [
+    "lem-pc-affine-chart-total-tensor",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pc-tensor-mapping-cone-iso",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any supplied quotient homomorphism psi and augmented chain maps a,k satisfying the three equations, associate a to the sheafified resolutions by the tilde adjunction. The augmentation equation makes the coefficient augmentation square commute. The pure tensor equation identifies the associated map of k. Compare the restricted augmented tensor zigzags; tensor functoriality and naturality of braiding make their squares commute. Taking homology and cancelling the isomorphism legs yields the equation for the normalized affine section units. This step constructs no algebraic lifts and compares no unbounded global resolution with the nonpositive one.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-pc-affine-chart-total-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-chart-total-tensor",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-kflat-open-restriction",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-sc-affine-quotient-resolution-sheafification",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N4",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Agent-written affine augmented tensor zigzag and restriction-square calculation following 08DX(2), limited to nonpositive termwise flat resolutions; the nonpositive-to-arbitrary resolution reduction is proved in the parent module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A nonpositive complex of flat sheaves resolving a closed immersion quotient computes affine Tor homology, naturally for basic open inclusions",
+   "results": "service unavailable: Internal Server Error",
+   "status": "unavailable",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine Tor homology sections for a nonpositive termwise flat resolution with an augmented chain comparison",
+   "results": "DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; DerivedCategory.isZero_of_isLE; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; CochainComplex.cm5b; DerivedCategory.isZero_of_isGE; CategoryTheory.isZero_Tor'_succ_of_projective; CategoryTheory.Abelian.LeftResolution.chainComplex; CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ.",
+   "date": "2026-10-14",
+   "verdict": "No affine normalized tensor-section comparison; the hits provide boundedness and algebraic resolution facts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFlat\"",
+   "results": "Matroid.IsFlat and its matroid closure lemmas; not sheaf flatness.",
+   "date": "2026-10-14",
+   "verdict": "No matching sheaf comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "selfTor.*nonpositive|nonpositive.*flat.*sections",
+   "results": "Search service: 0 hits. Local source search for Tor in Mathlib/AlgebraicGeometry/Modules and Mathlib/CategoryTheory/Monoidal/Tor.lean finds algebraic Tor definitions and projective vanishing, but no geometric comparison. Blueprint search for nonpositive flat returns 0 nodes.",
+   "date": "2026-10-14",
+   "verdict": "No existing theorem states this specialized geometric calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfTorOrdinaryLocalizedComparisons",
+  "date": "2026-10-14",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine self-Tor calculation in the local Koszul computation: the nonpositive flat resolution case and its normalized restriction square, after the arbitrary unbounded K-flat comparison is removed.",
+   "via": [
+    "new-h3-self-tor-ordinary-localized-comparisons",
+    "new-b3-self-tor-ordinary-resolution-sections",
+    "new-h2-self-tor-ambient-localized-comparisons",
+    "new-a3-self-tor-ambient-section-coordinates",
+    "lem-pc-self-tor-ambient-resolution-charts",
+    "new-p4-self-tor-augmented-resolution-charts",
+    "new-q1-self-tor-chosen-resolution-charts",
+    "new-t2-self-tor-target-restriction-coordinates",
+    "new-t2-self-tor-target-basic-localization",
+    "new-u4-self-tor-basic-ideal-wedge-coordinates",
+    "new-e3-self-tor-ideal-wedge-coordinates",
+    "new-h3-self-tor-local-wedge-coordinates",
+    "new-e1-self-tor-nested-affine-coordinates",
+    "new-n1-self-tor-compatible-affine-maps",
+    "new-r4-self-tor-conormal-dual-chart-iso",
+    "lem-sc-self-tor-conormal-dual-chart",
+    "new-s3-koszul-conormal-nested-charts",
+    "new-w4-koszul-self-ext-local-alignment",
+    "new-s3-koszul-conormal-compatible-cover",
+    "lem-sc-koszul-self-ext-conormal-local-comparison",
+    "lem-sc-koszul-self-ext-conormal-comparison-surjection",
+    "lem-sc-koszul-self-ext-dual-exterior-conormal",
+    "lem-sc-koszul-self-ext-yoneda-surjection",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SelfTorNonpositiveFlatSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/SelfTorNonpositiveFlatSections.lean",
+  "declaration": "AlgebraicGeometry.exists_selfTor_nonpositive_flat_sections",
+  "statement": "theorem exists_selfTor_nonpositive_flat_sections\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [IsClosedImmersion i]\n    (K : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (q : K ⟶ (CochainComplex.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n        ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)))\n    (hbounded : ∀ j : ℤ, 0 < j → IsZero (K.X j))\n    (hflat : ∀ j : ℤ, SheafOfModules.IsFlat (K.X j)) (hq : QuasiIso q) (n : ℕ) :\n    letI := SheafOfModules.monoidalCategory Y.sheaf\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := CochainComplex.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let Q := (CochainComplex.mapBifunctor K (S.obj B)\n      (curriedTensor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))).homology\n        (-(n : ℤ))\n    ∃ c : ∀ U : Y.affineOpens,\n        ((((tensorRight (ModuleCat.of (Γ(Y, U.1) : Type u)\n          ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U))).mapHomologicalComplex (.down ℕ)).obj\n            (projectiveResolution (ModuleCat.of (Γ(Y, U.1) : Type u)\n              ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U))).complex).homology n) ≃ₗ[Γ(Y, U.1)]\n              Q.val.obj (op U.1),\n      ∀ (V U : Y.affineOpens) (h : V.1 ≤ U.1)\n        (_hbasic : ∃ f : Γ(Y, U.1), Y.basicOpen f = V.1),\n          let A := (Γ(Y, U.1) : Type u)\n          let C := (Γ(Y, V.1) : Type u)\n          let I := i.ker.ideal U\n          let J := i.ker.ideal V\n          let φ := (Y.presheaf.map (homOfLE h).op).hom\n          let P := projectiveResolution (ModuleCat.of A (A ⧸ I))\n          let R := projectiveResolution (ModuleCat.of C (C ⧸ J))\n          let TA := (tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex\n            (.down ℕ)\n          let TC := (tensorRight (ModuleCat.of C (C ⧸ J))).mapHomologicalComplex\n            (.down ℕ)\n          ∀ (ψ : (A ⧸ I) →+* (C ⧸ J))\n            (a : P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n              (.down ℕ)).obj R.complex)\n            (k : TA.obj P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n              (.down ℕ)).obj (TC.obj R.complex)),\n            (∀ x : A, ψ (Ideal.Quotient.mk I x) = Ideal.Quotient.mk J (φ x)) →\n            (∀ x : P.complex.X 0, R.π.f 0 (a.f 0 x) = ψ (P.π.f 0 x)) →\n            (∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I),\n              k.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a.f j x) ⊗ₜ[C] (ψ y)) →\n            let e := ((TC.obj R.complex).sc n).mapHomologyIso\n              (ModuleCat.restrictScalars φ)\n          ∀ x, Q.val.map (homOfLE h).op (c U x) =\n            c V (e.hom (HomologicalComplex.homologyMap k n x))",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T052130-L-1876776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T052130-L-1876776",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

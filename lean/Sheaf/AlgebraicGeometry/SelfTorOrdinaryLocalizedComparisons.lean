@@ -14,12 +14,15 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
-import Sheaf.AlgebraicGeometry.AffineQuotientResolutionSheafification
+import Sheaf.AlgebraicGeometry.SelfTorNonpositiveFlatSections
+import Sheaf.Algebra.Homology.BoundedFlatReplacement
+import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
-import Sheaf.AlgebraicGeometry.Modules.IsKFlatRestriction
-import Sheaf.AlgebraicGeometry.AffineChartTotalTensor
-import Sheaf.AlgebraicGeometry.OpenKFlatTensorHomologyComparison
 import Sheaf.AlgebraicGeometry.QuotientResolutionTensorComparison
+import Mathlib.Algebra.Homology.BifunctorFlip
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-! # Chosen-lift affine sections of ordinary tensor
 
@@ -33,6 +36,173 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
+
+
+-- The cone-and-square arguments below are the generic-site proofs already used in
+-- OpenKFlatTensorHomologyComparison. Its public theorem works on the localized site;
+-- here the same proved argument is needed directly on the ambient scheme site.
+set_option synthInstance.maxSize 2048 in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem quasiIso_of_commuting_square
+    {S : Type u} [Category.{u} S] {J : GrothendieckTopology S}
+    {R : Sheaf J CommRingCat.{u}}
+    {A B C D : CochainComplex (SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
+    (f : A ⟶ B) (g : A ⟶ C) (h : B ⟶ D) (k : C ⟶ D)
+    (hf : QuasiIso f) (hg : QuasiIso g) (hh : QuasiIso h)
+    (comm : f ≫ h = g ≫ k) : QuasiIso k := by
+  have := hf
+  have := hg
+  have := hh
+  have hcomp : QuasiIso (g ≫ k) := by
+    rw [← comm]
+    infer_instance
+  have := hcomp
+  exact quasiIso_of_comp_left g k
+
+set_option synthInstance.maxSize 2048 in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem kFlat_tensor_right_of_quasiIso
+    {S : Type u} [Category.{u} S] {J : GrothendieckTopology S}
+    {R : Sheaf J CommRingCat.{u}}
+    {E E' K : CochainComplex
+      (SheafOfModules.{u}
+        ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
+    (α : E ⟶ E') (hα : QuasiIso α) (hK : K.IsKFlat) :
+    (letI := SheafOfModules.monoidalCategory R
+     QuasiIso (HomologicalComplex.mapBifunctorMap α (𝟙 K) (curriedTensor _) (.up ℤ))) := by
+  let := SheafOfModules.monoidalCategory R
+  let := (SheafOfModules.tensorClosed R).1.some
+  have hc := (CochainComplex.mappingCone.quasiIso_iff_acyclic α).1 hα
+  have ht := hK (CochainComplex.mappingCone α) hc
+  apply (CochainComplex.mappingCone.quasiIso_iff_acyclic _).2
+  intro i
+  exact (ht i).of_iso (CochainComplex.mapBifunctorMappingCone₁Iso α K (curriedTensor _))
+
+set_option synthInstance.maxSize 2048 in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem kFlat_tensor_left_of_quasiIso
+    {S : Type u} [Category.{u} S] {J : GrothendieckTopology S}
+    {R : Sheaf J CommRingCat.{u}}
+    {K L L' : CochainComplex
+      (SheafOfModules.{u}
+        ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
+    (α : L ⟶ L') (hα : QuasiIso α) (hK : K.IsKFlat) :
+    (letI := SheafOfModules.monoidalCategory R
+     QuasiIso (HomologicalComplex.mapBifunctorMap (𝟙 K) α (curriedTensor _) (.up ℤ))) := by
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.symmetricCategory R
+  let := (SheafOfModules.tensorClosed R).1.some
+  have hc := (CochainComplex.mappingCone.quasiIso_iff_acyclic α).1 hα
+  have ht := hK (CochainComplex.mappingCone α) hc
+  let F := curriedTensor (SheafOfModules.{u}
+    ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))
+  let e : (((F.mapBifunctorHomologicalComplex (.up ℤ) (.up ℤ)).obj
+      (CochainComplex.mappingCone α)).obj K) ≅
+      (((F.flip.mapBifunctorHomologicalComplex (.up ℤ) (.up ℤ)).obj
+      (CochainComplex.mappingCone α)).obj K) :=
+    HomologicalComplex.Hom.isoOfComponents
+      (fun p ↦ HomologicalComplex.Hom.isoOfComponents
+        (fun q ↦ β_ ((CochainComplex.mappingCone α).X p) (K.X q)) (by
+          intro q q' hqq'
+          exact (BraidedCategory.braiding_naturality_right
+            ((CochainComplex.mappingCone α).X p) (K.d q q')).symm)) (by
+        intro p p' hpp'
+        ext q : 1
+        exact (BraidedCategory.braiding_naturality_left
+          ((CochainComplex.mappingCone α).d p p') (K.X q)).symm)
+  have ht' : (CochainComplex.mapBifunctor K (CochainComplex.mappingCone α) F).Acyclic := by
+    intro i
+    exact (ht i).of_iso (HomologicalComplex₂.total.mapIso e (.up ℤ) ≪≫
+      HomologicalComplex.mapBifunctorFlipIso K (CochainComplex.mappingCone α) F (.up ℤ))
+  apply (CochainComplex.mappingCone.quasiIso_iff_acyclic _).2
+  intro i
+  exact (ht' i).of_iso (CochainComplex.mapBifunctorMappingCone₂Iso K α F)
+
+set_option synthInstance.maxSize 2048 in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem site_kFlat_tensor_quasiIso
+    {S : Type u} [Category.{u} S] {J : GrothendieckTopology S}
+    {R : Sheaf J CommRingCat.{u}}
+    {E E' N : CochainComplex
+      (SheafOfModules.{u}
+        ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
+    (α : E ⟶ E')
+    (hα : QuasiIso α)
+    (hE : E.IsKFlat)
+    (hE' : E'.IsKFlat) :
+    (letI := SheafOfModules.monoidalCategory R
+     QuasiIso (HomologicalComplex.mapBifunctorMap α (𝟙 N) (curriedTensor _) (.up ℤ))) := by
+  let := SheafOfModules.monoidalCategory R
+  obtain ⟨K, s, hK, _, hs, _⟩ := CochainComplex.exists_isKFlatResolution N
+  let f := HomologicalComplex.mapBifunctorMap α (𝟙 K) (curriedTensor _) (.up ℤ)
+  let g := HomologicalComplex.mapBifunctorMap (𝟙 E) s (curriedTensor _) (.up ℤ)
+  let h := HomologicalComplex.mapBifunctorMap (𝟙 E') s (curriedTensor _) (.up ℤ)
+  let k := HomologicalComplex.mapBifunctorMap α (𝟙 N) (curriedTensor _) (.up ℤ)
+  apply quasiIso_of_commuting_square f g h k
+  · exact kFlat_tensor_right_of_quasiIso α hα hK
+  · exact kFlat_tensor_left_of_quasiIso s hs hE
+  · exact kFlat_tensor_left_of_quasiIso s hs hE'
+  · change ((curriedTensor _).map₂CochainComplex.map α).app K ≫
+        ((curriedTensor _).map₂CochainComplex.obj E').map s =
+      ((curriedTensor _).map₂CochainComplex.obj E).map s ≫
+        ((curriedTensor _).map₂CochainComplex.map α).app N
+    exact (((curriedTensor _).map₂CochainComplex.map α).naturality s).symm
+
+
+set_option synthInstance.maxSize 2048 in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Two K-flat resolutions of the same complex give isomorphic tensor homology.
+The common roof is taken only in the derived category, never by a chain inverse.
+Source: Stacks Project, Tags 06YB and 06YT. -/
+private theorem tensor_homology_iso_of_resolutions
+    (Y : Scheme.{u})
+    (E K N T : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
+    (r : E ⟶ T) (q : K ⟶ T) (hE : E.IsKFlat) (hK : K.IsKFlat)
+    (hr : QuasiIso r) (hq : QuasiIso q) (j : ℤ) :
+    letI := SheafOfModules.monoidalCategory Y.sheaf
+    Nonempty ((CochainComplex.mapBifunctor E N (curriedTensor _)).homology j ≅
+      (CochainComplex.mapBifunctor K N (curriedTensor _)).homology j) := by
+  let M := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  let := HasDerivedCategory.standard M
+  let D := DerivedCategory.Q (C := M)
+  have : QuasiIso r := hr
+  have : QuasiIso q := hq
+  let e : D.obj E ≅ D.obj K := asIso (D.map r) ≪≫ (asIso (D.map q)).symm
+  obtain ⟨L, a, ha, b, he⟩ := DerivedCategory.right_fac e.hom
+  have : IsIso (D.map a) := ha
+  have ha' : QuasiIso a := (DerivedCategory.isIso_Q_map_iff_quasiIso M a).1 ha
+  have hb : IsIso (D.map b) := by
+    have hb' : D.map b = D.map a ≫ e.hom := by
+      rw [he, IsIso.hom_inv_id_assoc]
+    rw [hb']
+    infer_instance
+  have hb' : QuasiIso b := (DerivedCategory.isIso_Q_map_iff_quasiIso M b).1 hb
+  obtain ⟨F, s, hF, _, hs, _⟩ := CochainComplex.exists_isKFlatResolution L
+  have : QuasiIso a := ha'
+  have : QuasiIso b := hb'
+  have : QuasiIso s := hs
+  have hsa : QuasiIso (s ≫ a) := inferInstance
+  have hsb : QuasiIso (s ≫ b) := inferInstance
+  let := SheafOfModules.monoidalCategory Y.sheaf
+  let α := HomologicalComplex.mapBifunctorMap (s ≫ a) (𝟙 N) (curriedTensor _) (.up ℤ)
+  let β := HomologicalComplex.mapBifunctorMap (s ≫ b) (𝟙 N) (curriedTensor _) (.up ℤ)
+  have : QuasiIso α := site_kFlat_tensor_quasiIso (s ≫ a) hsa hF hE
+  have : QuasiIso β := site_kFlat_tensor_quasiIso (s ≫ b) hsb hF hK
+  exact ⟨(asIso (HomologicalComplex.homologyMap α j)).symm ≪≫
+    asIso (HomologicalComplex.homologyMap β j)⟩
+
+
+set_option synthInstance.maxSize 2048 in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 800000 in
+-- Total tensor and the bounded replacement involve large module-category instance terms.
 /-- The ordinary affine tensor comparison is compatible with one augmented algebraic
 comparison for each basic inclusion. Independence of the supplied comparison is not
 part of this statement.
@@ -41,32 +211,31 @@ Source: Stacks Project, Tag 08DX(2), affine calculation, Tags 06YG and 06YB for
 K-flat comparison, Tag 01I9 for affine sections, and Tag 00LS(1) for existence of lifts.
 (blueprint: new-h3-self-tor-ordinary-localized-comparisons).
 
-Proof: For each affine U, write A = Γ(Y,U), I = ker(i)(U), B = i_*O_Z.
-Identify B restricted to U with tilde(A/I) by the quotient presentation of the
-closed immersion. Sheafify the chosen projective resolution P_U and its augmentation,
-then extend from chain degree j to cochain degree -j. Exactness of tilde makes the
-augmentation a quasi-isomorphism. Projective terms give flat associated sheaves;
-bounded-above flat complexes are K-flat. Restriction preserves K-flatness of K.
-Compare K|U tensor B|U[0] with P_U~ tensor B|U[0] by the augmented zigzag
-K|U tensor B|U[0] <- K|U tensor P_U~ -> B|U[0] tensor P_U~
--> P_U~ tensor B|U[0], the last arrow being braiding. K-flat tensor invariance
-makes the first two arrows quasi-isomorphisms. The affine total tensor comparison,
-exact tilde homology comparison, extension homology in degree -n, and the tilde
-section unit give c_U. These are homology isomorphisms; no chain inverse is used.
+Proof: Apply the functorial bounded-above flat replacement to B[0], which
+vanishes in positive degrees. It supplies r:E -> B[0], with E nonpositive
+and termwise flat. Bounded-above flatness makes E K-flat. The new bounded
+chart lemma supplies its affine coordinates and restriction formula for
+supplied augmented algebraic comparison maps.
 
-For a basic inclusion V in U, ideal restriction gives the quotient homomorphism
-psi. Choose an augmented comparison a from P_U to the restricted P_V by projective
-lifting through the exact augmented resolution; tensor a with psi to obtain k.
-On the associated sheaf complexes, the augmentation square commutes: this follows
-from its equality on affine sections and full faithfulness of tilde. The pure
-tensor formula identifies the associated k with tensor of a and the quotient map.
-Restrict the U zigzag to V and compare it with the V zigzag using this square.
-Tensor functoriality and naturality of braiding give commuting squares. Homology
-and inversion of the quasi-isomorphism legs give the section equality for these
-chosen a and k. Exact restriction of scalars supplies the displayed homology iso.
-Naturality of the affine section unit completes the comparison. No assertion
-about other lifts is needed here. Zero rings, I = top, n = 0 and empty basic opens
-are covered by the same constructions and zero modules. -/
+Compare E and K over B[0] in the derived category. A common roof gives two
+quasi-isomorphisms from a common complex; replace that complex by a K-flat
+resolution F. Both maps F -> E and F -> K remain quasi-isomorphisms after
+tensoring with B[0]. Here the proof uses a K-flat replacement of B[0] in a
+commuting tensor square: tensoring a quasi-isomorphism with a K-flat factor
+is a quasi-isomorphism by the cone criterion, and the other two sides are
+quasi-isomorphisms for the same reason. Two-of-three proves the fourth side.
+Taking homology and inverting one leg gives an isomorphism of sheaves
+H^{-n}(E tensor B[0]) -> H^{-n}(K tensor B[0]). Compose every E-coordinate
+with its induced linear equivalence on sections to obtain c_U.
+
+For a basic inclusion, ideal restriction gives the containment required by
+exists_quotient_resolution_tensor_comparison. Apply it to the two chosen
+projective resolutions to construct psi, a, and k and their three equations.
+The bounded chart lemma gives their restriction equation for E. Naturality
+of the homology sheaf isomorphism transports this equation to K. No chain
+inverse, coherence of a chosen family of chain lifts, or data definition
+from a mere existence assertion is introduced. The construction covers zero
+rings, the zero quotient, degree zero, and empty basic opens. -/
 theorem exists_selfTor_ordinary_localized_comparisons
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [IsClosedImmersion i]
@@ -113,6 +282,41 @@ theorem exists_selfTor_ordinary_localized_comparisons
             let e := ((TC.obj R.complex).sc n).mapHomologyIso
               (ModuleCat.restrictScalars φ)
           ∀ x, Q.val.map (homOfLE h).op (c U x) =
-            c V (e.hom (HomologicalComplex.homologyMap k n x)) := by sorry
+            c V (e.hom (HomologicalComplex.homologyMap k n x)) := by
+  classical
+  let M := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
+  let S := CochainComplex.singleFunctor M 0
+  let T := S.obj B
+  let P : ObjectProperty (CochainComplex M ℤ) :=
+    fun F ↦ ∀ j : ℤ, 0 < j → IsZero (F.X j)
+  have hT : P T := by
+    intro j hj
+    exact HomologicalComplex.isZero_single_obj_X _ _ _ j (by omega)
+  obtain ⟨F, ε, hF⟩ := CochainComplex.exists_functorial_boundedAbove_flat_replacement
+    (Opens.grothendieckTopology Y.carrier) Y.sheaf 0
+  let E := F.obj ⟨T, hT⟩
+  let r := ε.app ⟨T, hT⟩
+  obtain ⟨hflat, hbound, _, hr⟩ := hF ⟨T, hT⟩
+  have hE : E.IsKFlat := CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace
+    Y.toRingedSpace E ⟨0, hbound⟩ hflat
+  let := SheafOfModules.monoidalCategory Y.sheaf
+  obtain ⟨e⟩ := tensor_homology_iso_of_resolutions Y E K T T r q hE hK hr hq
+    (-(n : ℤ))
+  obtain ⟨d, hd⟩ := exists_selfTor_nonpositive_flat_sections i E r hbound hflat hr n
+  refine ⟨fun U ↦ (d U).trans (Scheme.Modules.appLinearEquivOfIso e U.1), ?_⟩
+  intro V U h hbasic A C I J φ PU PV TA TC
+  have hI : ∀ x ∈ I, φ x ∈ J := by
+    intro x hx
+    exact i.ker.ideal_le_comap_ideal h hx
+  obtain ⟨ψ, a, k, hψ, ha, hk⟩ := exists_quotient_resolution_tensor_comparison
+    A C I J φ hI PU PV
+  refine ⟨ψ, a, k, hψ, ha, hk, ?_⟩
+  intro e' x
+  have hn := hd V U h hbasic ψ a k hψ ha hk x
+  have hs := PresheafOfModules.naturality_apply e.hom.val (homOfLE h).op (d U x)
+  change _ = e.hom.val.app (op V.1) _
+  exact hs.symm.trans (congrArg (e.hom.val.app (op V.1)) hn)
+
 
 end AlgebraicGeometry
