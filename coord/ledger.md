@@ -14929,3 +14929,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:03 L: returned deliver/K3/Sheaf.AlgebraicGeometry.BaseChangeTargetTransitionHigherImage (reviewer RETURN: (reviewer X-5f3af, head 5f3afef00) 7: The report lacks the mandatory `## Forced adaptations` section. Insert before `## )
 
 - 03:07 L: batch 20261014T185242 dependency take-out
+- 19:10 L: returned deliver/C2/Sheaf.AlgebraicGeometry.ProjectionFormulaFiniteObjectwise (reviewer RETURN: (reviewer X-346d1, head 346d132d3) 7: In coord/reports/C2/Sheaf.AlgebraicGeometry.ProjectionFormulaFiniteObjectwise.md, )
