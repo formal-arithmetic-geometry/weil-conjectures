@@ -14152,3 +14152,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 09:16 L: batch 20261014T010832 dependency take-out
 - 01:17 L: returned deliver/B3/Sheaf.AlgebraicGeometry.Morphisms.FixedOrbitProductEquiv (reviewer RETURN: (reviewer X-00a8b, head 00a8bcbb8) D3/AGENTS §5: the new sorry declarations' docstrings do not name their source or prov)
+- 01:23 L: returned deliver/A3/Sheaf.Paper.ModuleCupGodementCoefficientComplexes (reviewer RETURN: (reviewer X-e7670, head e7670f11f) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.ModuleCupGodem)
