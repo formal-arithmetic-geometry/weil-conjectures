@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fin-symmetric-product-finite",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A finite symmetric-product cover over a Noetherian base",
@@ -14,43 +14,95 @@
  },
  "stmt_deps": [
   "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-symmetric-product-morphism"
+  "def-weil-pbc-symmetric-product-morphism",
+  "lem-weil-pbc-symmetric-product-properties"
  ],
  "proof": [
   {
-   "text": "Write $X=(\\mathbf P^1_S)^n$, $T=\\mathbf P^n_S$, and let\n$\\sigma_n:X\\to T$ be the morphism of\n[lem-weil-pbc-symmetric-product-properties].\nThe Segre closed immersion of\n[lem-chow-segre] embeds\n$X$ in a projective space $\\mathbf P^M_S$.\nThe graph $X\\to X\\times_S T$ of $\\sigma_n$ is closed:\nit is the inverse image of the closed diagonal of the\nseparated scheme $T/S$, using\n[def-weil-pbc-scheme-conventions].\nComposing this graph with the base-changed Segre immersion gives\na closed immersion $X\\hookrightarrow\\mathbf P^M_T$ over $T$.\nConsequently $\\sigma_n$ is projective by\n[def-pc-projective-morphism].",
+   "text": "Apply [lem-weil-pbc-symmetric-product-finite] to the given scheme $S$ and integer $n\\ge1$. Its morphism uses exactly the coefficients $\\prod_i(x_it+y_i)=\\sum_{j=0}^nF_jt^j$ and the construction of [lem-weil-pbc-symmetric-product-properties], so it is the $\\sigma_n$ of this statement. The lemma gives that $\\sigma_n$ is finite. Its hypothesis is only that $S$ is a scheme; the present Noetherian hypothesis is therefore more than sufficient.",
    "uses": [
-    "lem-weil-pbc-symmetric-product-properties",
-    "lem-chow-segre",
-    "def-weil-pbc-scheme-conventions",
-    "def-pc-projective-morphism"
+    "lem-weil-pbc-symmetric-product-finite"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A4F, label lemma-reduce-to-P1, proof, final paragraph (finite surjective symmetric-product morphism; coefficient order reversed)"
+   }
   },
   {
-   "text": "Over an algebraically closed geometric point of $T$, the\ncorresponding nonzero binary form of degree $n$ factors\ninto $n$ linear forms. Unique factorization says that every\nordered factorization is obtained by ordering the same list\nof projective linear factors, counted with multiplicity.\nThe geometric fibre is therefore nonempty and has at most\n$n!$ points. A finite-type scheme over an algebraically\nclosed field with positive dimension would have infinitely\nmany closed points, so there are no additional nonclosed\npoints in this fibre.\nSince $T$ is Noetherian, [lem-fin-projective-finite-fibres]\nproves that $\\sigma_n$ is finite.\nIts nonempty geometric fibre over every point proves\nsurjectivity in the sense of\n[def-weil-pbc-scheme-conventions].",
+   "text": "Apply [lem-weil-pbc-symmetric-product-surjective] with the same $S$ and $n$. The coefficient formula and the constructed morphism in its statement are identical to those in the finiteness lemma, so its conclusion says that this same $\\sigma_n$ is surjective on underlying topological spaces. Together with step 1 this gives both assertions, with the meanings fixed by the conventions in the statement.",
    "uses": [
-    "lem-fin-projective-finite-fibres",
-    "def-weil-pbc-scheme-conventions"
+    "lem-weil-pbc-symmetric-product-surjective"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A4F, label lemma-reduce-to-P1, proof, final paragraph (finite surjective symmetric-product morphism; coefficient order reversed)"
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-symmetric-product-properties",
-  "lem-chow-segre",
-  "def-weil-pbc-scheme-conventions",
-  "def-pc-projective-morphism",
-  "lem-fin-projective-finite-fibres"
+  "lem-weil-pbc-symmetric-product-finite",
+  "lem-weil-pbc-symmetric-product-surjective"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-symmetric-product-finite.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A4F, label lemma-reduce-to-P1, proof, final paragraph (finite surjective symmetric-product morphism; coefficient order reversed); specialize the two existing DAG statements, which supply the asserted result over arbitrary bases."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "symmetricProduct|symmetric.product|universalFactorizationMap",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state finiteness and surjectivity of this symmetric-product scheme morphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The symmetric product of projective lines maps finitely and surjectively to projective space",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The symmetric product morphism from n copies of the projective line to projective n space is finite and surjective",
+   "results": "8 hits: AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, Projectivization.finite_of_finite, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective, Projectivization.finite_iff_of_finite",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state finiteness and surjectivity of this symmetric-product scheme morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"symmetric\", \"finite\"",
+   "results": "6 hits: LinearMap.IsSymmetric.subsingleton_of_no_eigenvalue_finiteDimensional, LinearMap.IsSymmetric.hasEigenvalue_iInf_of_finiteDimensional, LinearMap.IsSymmetric.hasEigenvalue_iSup_of_finiteDimensional, LinearMap.IsSymmetric.isFinitelySemisimple, CategoryTheory.symmetricOfHasFiniteCoproducts, CategoryTheory.symmetricOfHasFiniteCoproducts_braiding",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state finiteness and surjectivity of this symmetric-product scheme morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The morphism sending an ordered list of projective linear factors to the coefficients of their product is a finite surjective scheme morphism",
+   "results": "8 hits: MvPolynomial.finite_universalFactorizationMap, AlgebraicGeometry.pointsPi_surjective_of_isAffine, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.pointsPi_surjective, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective, ax_grothendieck_zeroLocus, Polynomial.instFinitePresentationUniversalFactorizationRing, AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective",
+   "date": "2026-10-14",
+   "verdict": "no match: universalFactorizationMap is an affine ring map for monic polynomial factorization, not this projective morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "universalFactorizationMap|symmetricProduct|symmetric.product",
+   "results": "5 hits: Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean, Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean, Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean, Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean, Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: universalFactorizationMap is an affine ring map for monic polynomial factorization, not this projective morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The map from ordered roots to coefficients of a homogeneous polynomial defines a finite surjective morphism of projective schemes",
+   "results": "8 hits: AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective, AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, ax_grothendieck_zeroLocus, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.fromOfGlobalSections",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern other Proj maps, affine space, global sections or Ax-Grothendieck, not the symmetric-product morphism"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -80,5 +132,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-fin-symmetric-product-finite",
+  "worker": "stage1",
+  "summary": "Replaced the incomplete geometric-fibre argument by specializations of the existing general finiteness and surjectivity statements. Checked the identical coefficient indexing and construction, all hypotheses and both conventions. No new nodes.",
+  "blueprint": "Realizes the conclusions of the first and second paragraphs of the node proof using already split general symmetric-product lemmas; unit sk-prop-sf-cbc has no proof steps.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-symmetric-product-finite",
+    "why": "General symmetric-product finiteness over arbitrary schemes; used as a black box for this Noetherian specialization. No separate general result in this unit is needed."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-product-surjective",
+    "why": "General symmetric-product surjectivity over arbitrary schemes; used as a black box for this Noetherian specialization. No separate general result in this unit is needed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-symmetric-product-finite",
+  "lem-weil-pbc-symmetric-product-surjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-f5255ecb3",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-f5255ecb3 (reviewer sub-agent of L); spot-checked: Read the full delivery and cited statements against master blueprint and Stacks 0A4F. Both steps specialize existing general lemmas for the identical morphism; accepted both tool_uses. Checked edge cases, DAG-wide reuse candidates, and dependency cycles. No new nodes or repairs; review.md records concrete checks."
+ }
 }
