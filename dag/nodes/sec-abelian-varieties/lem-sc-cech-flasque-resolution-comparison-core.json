@@ -14,17 +14,47 @@
  },
  "proof": [
   {
-   "text": "The construction and homological comparison are supplied as an intermediate theorem for subsequent workers.",
+   "text": "Use cupCechAlpha U D and cupCechBeta U D from def-sc-cup-cech-total as the actual comparison maps. Their degreewise component equalities are reflexivity, without choosing any witnesses from unproved existence statements.",
+   "uses": [
+    "def-sc-cup-cech-total"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define a:Gamma(X,D.K)→(cupCechDouble U D.K).flip.X 0 degreewise by moduleCechZero. Its chain-map equation is moduleCechZero_naturality; a followed by the next Cech differential is zero by moduleCechZero_d. These proved restriction identities belong to def-sc-module-cech-comparison.",
+   "uses": [
+    "def-sc-module-cech-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove degree-zero quasi-isomorphism of each single-term restriction augmentation directly, without injectivity. Project a zero cocycle to its singleton-cover coordinates. Pull its pair-coordinate differential equation to U_i∩U_j: the two restrictions coincide. The sheaf gluing theorem gives a global section since iSup U=top; projecting back gives the original cocycle. Sheaf separation proves injectivity of restriction. ShortComplex.quasiIso_iff_of_zeros then identifies this kernel isomorphism with QuasiIsoAt at zero. The Lean proof is the fully proved private helper cechAugmentation_quasiIsoAt_zero, adapted from the existing injective degree-zero proof by removing its unused injectivity hypothesis.",
    "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "At p=q+1 apply the proved source-library theorem TopCat.Sheaf.exactAt_cechComplex_of_isFlasque to the abelian sheaf underlying D.K.X n, with the instance supplied by hD n. Transport its zero homology along the proved TopCat.Presheaf.cechComplexFunctorHomologyIso. Forgetting module structure reflects zero objects, so categorical Cech homology is zero. The single-term source has zero positive homology, and its homology map is therefore an isomorphism. These steps apply to any index type, including the empty type.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Give the standard total-flip symmetry with sign (-1)^(i*j). Compose cupCechAlpha with the inverse flip isomorphism; its components are a.f n followed by the (0,n) inclusion, since the flip sign on the zero axis is one. Apply lem-sc-first-quadrant-column-augmentation to this map using the quasi-isomorphisms just proved. Cancel the invertible total-flip map by quasiIso_of_comp_right to obtain QuasiIso (cupCechAlpha U D), and finish the two existential maps and their formulas.",
+   "uses": [
+    "lem-sc-first-quadrant-column-augmentation"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-sc-cup-cech-total",
+  "def-sc-module-cech-comparison",
+  "lem-sc-first-quadrant-column-augmentation"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/01EQ",
-  "place": "Canonical comparison construction",
-  "group": "H4",
+  "place": "Canonical alpha/beta maps and first-quadrant comparison; flasque-complex case in Tag 0FKV; criterion Tag 0133",
+  "group": "M2",
   "date": "2026-10-14"
  },
  "mathlib_searches": [
@@ -97,13 +127,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H4",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261013T231535-L-1817473",
-  "kind": "interface",
+  "landing": "20261014T061027-L-2466189",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

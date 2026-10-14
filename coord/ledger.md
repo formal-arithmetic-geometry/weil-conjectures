@@ -14680,3 +14680,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:10 L: merged deliver/H3/Sheaf.AlgebraicGeometry.SelfTorNonpositiveFlatSections (stage 3; reviewer PASS; first push; landing 20261014T061026-L-2465610 (interface); batch 20261014T061020; modules 2; new nodes 1)
 - 06:10 L: merged deliver/K4/Sheaf.Paper.CechCupPullbackCompat (stage 3; reviewer PASS; first push; landing 20261014T061026-L-2465786 (proof); batch 20261014T061020; modules 1; new nodes 0)
 - 06:10 L: merged deliver/M1/Sheaf.Paper.ModuleCupPullbackFlasqueComplexes (stage 3; reviewer PASS; first push; landing 20261014T061027-L-2465939 (interface); batch 20261014T061020; modules 2; new nodes 1)
+- 06:10 L: merged deliver/M2/Sheaf.Paper.CechFlasqueComparisonCore (stage 3; reviewer PASS; first push; landing 20261014T061027-L-2466189 (proof); batch 20261014T061020; modules 1; new nodes 0)
