@@ -220,6 +220,9 @@ noncomputable def descentMap :
       (pullback.fst f f ≫ f)_*ᵃ[l].obj (⨁ fun _ : Fin n ↦ unit l (Limits.pullback f f)) :=
   descentMapFst f γ - descentMapSnd f
 
+set_option maxHeartbeats 2000000 in
+lemma descentMap_eq : descentMap (l := l) f γ = descentMapFst f γ - descentMapSnd f := rfl
+
 /-- The map `T ×_X (W ×_X W) ⟶ T ×_X W` induced by the first projection. -/
 noncomputable abbrev descentρ₁ (T : X.ProEt) :
     Limits.pullback T.hom (pullback.fst f f ≫ f) ⟶ Limits.pullback T.hom f :=
@@ -685,6 +688,98 @@ lemma isIso_descentTriv
   exact isIso_of_reflects_iso _ (Mod.forget _)
 
 end Descent
+
+section Adjunctions
+
+variable {X W P : Scheme.{u}}
+
+/-- The adjunction `g^* ⊣ g_*` and the congruence isomorphisms for `g = g'`. -/
+lemma homEquiv_adicUpperStarCongr {g g' : W ⟶ X} (h : g = g') {G : AdicSheaf l X}
+    {K : AdicSheaf l W} (Z : (g')^*ᵃ[l].obj G ⟶ K) :
+    (adicUpperStarLowerStarAdjunction l g).homEquiv G K
+        ((adicUpperStarCongr l h).hom.app G ≫ Z) =
+      (adicUpperStarLowerStarAdjunction l g').homEquiv G K Z ≫
+        (adicLowerStarCongr l h.symm).hom.app K := by
+  subst h
+  simp only [adicUpperStarCongr, eqToIso_refl, Iso.refl_hom, NatTrans.id_app, Category.id_comp]
+  have : (adicLowerStarCongr l (rfl : g = g)).hom.app K = 𝟙 _ :=
+    Mod.hom_ext _ _ (by rw [adicLowerStarCongr_hom_app_hom, lowerStarCongr_rfl]; rfl)
+  rw [this, Category.comp_id]
+
+/-- **Composites of adjunctions**: the adjoint of a composite of pullbacks is computed by the
+composite of the adjoints. -/
+lemma homEquiv_adicUpperStarComp (a : P ⟶ W) (f : W ⟶ X) {G : AdicSheaf l X} {M : AdicSheaf l W}
+    {K : AdicSheaf l P} (ψ : (f)^*ᵃ[l].obj G ⟶ M) (Y : (a)^*ᵃ[l].obj M ⟶ K) :
+    (adicUpperStarLowerStarAdjunction l (a ≫ f)).homEquiv G K
+        ((adicUpperStarComp l a f).hom.app G ≫ (a)^*ᵃ[l].map ψ ≫ Y) =
+      (adicUpperStarLowerStarAdjunction l f).homEquiv G M ψ ≫
+        (f)_*ᵃ[l].map ((adicUpperStarLowerStarAdjunction l a).homEquiv M K Y) ≫
+          (adicLowerStarComp l a f).hom.app K := by
+  have hu := unit_conjugateEquiv ((adicUpperStarLowerStarAdjunction l f).comp
+    (adicUpperStarLowerStarAdjunction l a)) (adicUpperStarLowerStarAdjunction l (a ≫ f))
+    (adicUpperStarComp l a f).hom G
+  rw [conjugateEquiv_adicUpperStarComp_hom] at hu
+  rw [Adjunction.homEquiv_unit, Functor.map_comp, ← Category.assoc, ← hu, Category.assoc,
+    ← (adicLowerStarComp l a f).hom.naturality, ← Category.assoc,
+    ← Adjunction.homEquiv_unit, Adjunction.comp_homEquiv]
+  dsimp only
+  erw [Equiv.trans_apply]
+  have h₁ : (adicUpperStarLowerStarAdjunction l a).homEquiv _ _ ((a)^*ᵃ[l].map ψ ≫ Y) =
+      ψ ≫ (adicUpperStarLowerStarAdjunction l a).homEquiv M K Y :=
+    Adjunction.homEquiv_naturality_left _ _ _
+  have h₂ : (adicUpperStarLowerStarAdjunction l f).homEquiv G ((a)_*ᵃ[l].obj K)
+      (ψ ≫ (adicUpperStarLowerStarAdjunction l a).homEquiv M K Y) =
+      (adicUpperStarLowerStarAdjunction l f).homEquiv G M ψ ≫
+        (f)_*ᵃ[l].map ((adicUpperStarLowerStarAdjunction l a).homEquiv M K Y) :=
+    Adjunction.homEquiv_naturality_right _ _ _
+  exact (congrArg (· ≫ (adicLowerStarComp l a f).hom.app K)
+    ((congrArg _ h₁).trans h₂)).trans (Category.assoc _ _ _)
+
+end Adjunctions
+
+variable {X W : Scheme.{u}}
+
+/-- **Descent of trivial `ℓ`-adic sheaves along a pro-étale cover** (the stack property of
+sheaves on the pro-étale site; SGA 4, Exp. VIII, 9.1, and Bhatt–Scholze, *The pro-étale topology
+for schemes*, §4.2: the pro-étale site is subcanonical and sheaves glue). Let `f : W ⟶ X` be
+weakly étale and `γ` a matrix of locally finite functions on `W ×_X W` which is a cocycle:
+trivial on the diagonal and `γ₁₃ = γ₂₃ γ₁₂` on `W ×_X W ×_X W`. Then the descent datum on
+`ℚ̄_ℓ,Wⁿ` given by `γ` is effective: there are an `ℓ`-adic sheaf `G` on `X` and a trivialisation
+`ε : f^* G ≅ ℚ̄_ℓ,Wⁿ` whose transition matrix on `W ×_X W` is `γ`. The sheaf `G` is the kernel of
+`f_* ℚ̄_ℓ,Wⁿ ⟶ (p₁ f)_* ℚ̄_ℓ,(W ×_X W)ⁿ`, `y ↦ γ · p₁^* y - p₂^* y`
+(`AlgebraicGeometry.ProEtale.AdicSheaf.descentSheaf`). -/
+theorem exists_iso_transitionMatrix_eq (f : W ⟶ X) [WeaklyEtale f] {n : ℕ}
+    (γ : Matrix (Fin n) (Fin n) (PadicAlgCl.locallyFiniteFunctions l ↥(Limits.pullback f f)))
+    (hdiag : γ.map (PadicAlgCl.locallyFiniteFunctionsComp l (pullback.diagonal f).base.hom) = 1)
+    (hcoc : γ.map (PadicAlgCl.locallyFiniteFunctionsComp l (tripleProj₁₃ f).base.hom) =
+      γ.map (PadicAlgCl.locallyFiniteFunctionsComp l
+        (pullback.snd (pullback.snd f f) (pullback.fst f f)).base.hom) *
+      γ.map (PadicAlgCl.locallyFiniteFunctionsComp l
+        (pullback.fst (pullback.snd f f) (pullback.fst f f)).base.hom)) :
+    ∃ (G : AdicSheaf l X) (ε : (f)^*ᵃ[l].obj G ≅ ⨁ fun _ : Fin n ↦ unit l W),
+      transitionMatrix ε (pullback.fst f f) (pullback.snd f f) pullback.condition = γ := by
+  have := isIso_descentTriv (l := l) hdiag hcoc
+  set ε := asIso (descentTriv (l := l) f γ)
+  refine ⟨descentSheaf f γ, ε, ?_⟩
+  have hε : (adicUpperStarLowerStarAdjunction l f).homEquiv _ _ ε.hom =
+      kernel.ι (descentMap (l := l) f γ) := Equiv.apply_symm_apply _ _
+  have key : (trivPull f ε (pullback.fst f f)).hom ≫ ofUnitMatrix γ =
+      (adicUpperStarCongr l pullback.condition).hom.app _ ≫
+        (trivPull f ε (pullback.snd f f)).hom := by
+    apply ((adicUpperStarLowerStarAdjunction l (pullback.fst f f ≫ f)).homEquiv _ _).injective
+    simp only [trivPull, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc]
+    rw [homEquiv_adicUpperStarCongr, homEquiv_adicUpperStarComp, homEquiv_adicUpperStarComp, hε,
+      Adjunction.homEquiv_naturality_right, ← freePull_eq, ← freePull_eq]
+    have hk : kernel.ι (descentMap (l := l) f γ) ≫ descentMapFst f γ =
+        kernel.ι (descentMap (l := l) f γ) ≫ descentMapSnd f := by
+      have h0 : kernel.ι (descentMap (l := l) f γ) ≫ (descentMapFst f γ - descentMapSnd f) = 0 := by
+        rw [← descentMap_eq]
+        exact kernel.condition _
+      rwa [Preadditive.comp_sub, sub_eq_zero] at h0
+    simp only [descentMapFst, descentMapSnd, Functor.map_comp, Category.assoc] at hk ⊢
+    exact hk
+  rw [transitionMatrix, transitionHom_eq, ← key, ← Category.assoc, Iso.inv_hom_id,
+    Category.id_comp, unitMatrix_ofUnitMatrix]
 
 end AdicSheaf
 
