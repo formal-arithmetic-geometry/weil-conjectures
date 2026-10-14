@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sbc-lem-bc-failure-field",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A failure is detected on the generic fibre",
- "statement": "With $f:X\\to S$ and $n$ as in [sbc-def-base-change-property] assume for\nsome $q\\geq1$ that $\\mathrm{BC}(f,n,q')$ holds universally for all\n$q'\\leq q-1$, but $\\mathrm{BC}(f,n,q)$ does not hold universally. Then there exist a commutative diagram\n\n$$\n\\begin{array}{ccccc}\nX & \\longleftarrow & X' & \\longleftarrow & Y\\\\\nf\\big\\downarrow & & \\big\\downarrow f' & & \\big\\downarrow e\\\\\nS & \\longleftarrow & S' & \\longleftarrow & \\operatorname{Spec}K\n\\end{array}\n$$\n\nwhere $X'=X\\times_SS'$, $Y=X'\\times_{S'}\\operatorname{Spec}K$, $S'$ is\nan affine scheme, $K$ is a\nfield, and $\\mathcal F$ is an abelian sheaf on\n$\\operatorname{Spec}K$ annihilated by $n$ such that\n\n$$\nf'^{-1}R^qg_*\\mathcal F\\longrightarrow R^qh_*e^{-1}\\mathcal F\n$$\n\nis not an isomorphism. If $S$ is separated, then moreover\n$S'\\to S$ is an affine morphism.\n(*Stacks Project, Lemma 59.88.6, [Tag `0F07`](https://stacks.math.columbia.edu/tag/0F07).*)",
+ "statement": "With $f:X\\to S$ and $n$ as in [sbc-def-base-change-property] assume for\nsome $q\\geq1$ that $\\mathrm{BC}(f,n,q')$ holds universally for all\n$0\\leq q'\\leq q-1$, but $\\mathrm{BC}(f,n,q)$ does not hold universally. Then there exist a commutative diagram\n\n$$\n\\begin{array}{ccccc}\nX & \\longleftarrow & X' & \\longleftarrow & Y\\\\\nf\\big\\downarrow & & \\big\\downarrow f' & & \\big\\downarrow e\\\\\nS & \\longleftarrow & S' & \\longleftarrow & \\operatorname{Spec}K\n\\end{array}\n$$\n\nwhere $X'=X\\times_SS'$, $Y=X'\\times_{S'}\\operatorname{Spec}K$, $S'$ is\nan affine scheme, $K$ is a\nfield, $g:\\operatorname{Spec}K\\to S'$ is the displayed structural morphism, $h:Y\\to X'$ and $e:Y\\to\\operatorname{Spec}K$ are the fibre-product projections, and $\\mathcal F$ is an abelian sheaf on\n$\\operatorname{Spec}K$ annihilated by $n$ such that\n\n$$\nf'^{-1}R^qg_*\\mathcal F\\longrightarrow R^qh_*e^{-1}\\mathcal F\n$$\n\nis not an isomorphism. If $S$ is separated, then moreover\n$S'\\to S$ is an affine morphism.\n(*Stacks Project, [Tag `0F07`](https://stacks.math.columbia.edu/tag/0F07).*)",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-failure-field/sbc-lem-bc-failure-field.md",
   "place": "node sbc-lem-bc-failure-field, order 1391",
@@ -19,68 +19,236 @@
   ]
  },
  "stmt_deps": [
-  "sbc-def-base-change-property"
+  "sbc-def-base-change-property",
+  "sbc-def-base-change-map"
  ],
  "proof": [
   {
-   "text": "Choose a counterexample, i.e. a morphism $S'\\to S$ with base change\n$f':X'=X\\times_SS'\\to S'$ for which $\\mathrm{BC}(f',n,q)$ fails: a\nquasi-compact quasi-separated $g:T\\to S'$ with $Y=X'\\times_{S'}T$ and\n$\\mathcal F$ annihilated by $n$ such that the map of\n[sbc-def-base-change-map] is not an isomorphism. Being an isomorphism\nis local on $X'$, and for an open $U\\subset S'$ the formation of\n$R^qg_*$, $R^qh_*$ and of the base-change map commutes with\nrestriction to $U$, $X'_U$ (restriction to an open is the pullback\nalong an etale morphism and the higher direct images are the\nsheafified cohomology presheaves); so the map already fails to be an\nisomorphism over some affine open $U\\subset S'$ and we may replace\n$S'$ by $U$, $T$ by $T\\times_{S'}U$. Thus $S'$ is affine, and $T$,\nbeing quasi-compact and quasi-separated over the affine $S'$, is\nquasi-compact and quasi-separated. By\n[sbc-lem-bc-injectivity] (for the base change $f'$ along $g$) the map\nis injective, so there is a\ngeometric point $\\bar x$ of $X'$ and an element $\\xi$ of\n$(R^qh_*e^{-1}\\mathcal F)_{\\bar x}$ not in the image of\n$(f'^{-1}R^qg_*\\mathcal F)_{\\bar x}$. For a morphism\n$\\pi:T'\\to T$ let $\\mathcal F'=\\pi^{-1}\\mathcal F$ and define\n$P(T')$ to be the property: the image $\\xi'$ of $\\xi$ in\n$(R^qh'_*(e')^{-1}\\mathcal F')_{\\bar x}$ is not in the image of\n$(f'^{-1}R^qg'_*\\mathcal F')_{\\bar x}$. We apply\n[sbc-lem-bc-minimal-counterexample] to $P$.",
+   "text": "Negating universal degree-q base change supplies a preliminary base change S_1→S, a qcqs morphism g:T→S_1, and an n-torsion sheaf F whose degree-q map fails. The universal hypotheses in degrees 0,…,q−1 persist after this preliminary base change: each further base change is also a base change of f, by associativity of fibre products. Apply [sbc-lem-etale-locality], clause (3), with V_i the affine opens of S_1 and U_i=X_1×_{S_1}V_i. The U_i form an open, hence etale, cover of X_1; U_i→S_1 factors through V_i→S_1, which is open and hence etale. Its Cartesian diagrams are precisely the restrictions of the failing square, with F_i the inverse-image restriction of F to V_i×_{S_1}T. If every restricted map were an isomorphism the original map would be, so one affine open S' gives a failing square. Replace T by T×_{S_1}S' and write p:X'→S' for the resulting base change of f. By [lem-weil-pbc-qcqs-morphism-permanence], clauses (3) and (2), g remains qcqs and T is a qcqs scheme. All later morphisms U→S' with U qcqs are qcqs by clause (1).",
    "uses": [
-    "sbc-def-base-change-map",
-    "sbc-lem-bc-injectivity",
-    "sbc-lem-bc-minimal-counterexample"
+    "sbc-def-base-change-property",
+    "sbc-lem-etale-locality",
+    "lem-weil-pbc-qcqs-morphism-permanence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F07, lemma-base-change-does-not-hold-pre, proof"
+   }
   },
   {
-   "text": "- *(1) Thickenings.* By [sbc-lem-thickening-etale-site]\nthe etale site of a scheme and of a thickening of it are the\nsame, so the cohomology sheaves involved are unchanged and\n$P(T'')$ iff $P(T')$.\n- *(2) Limits.* For $T'=\\varprojlim T_i$ with affine\ntransitions, $\\mathcal F'$ is the colimit of the pullbacks of\n$\\mathcal F_i$, and\nthe fixed-pulled-back-sheaf form of higher-direct-image continuity gives\n$\\varinjlim R^qh'_{i,*}e_i^{-1}\\mathcal F_i =R^qh'_*e'^{-1}\\mathcal F'$ and the analogue for\n$g'$-side; hence $P(T_i)$ for all $i$ implies $P(T')$.\n- *(3) Closed–open split.* Let $T'$ be with $P(T')$ and\n$Z\\subset T'$ closed with quasi-compact complement $V$. Choose an\ninjection $j^{-1}\\mathcal F'\\to\\mathcal J$ with $\\mathcal J$ an\ninjective sheaf of $\\mathbf Z/n\\mathbf Z$-modules on $V$, where\n$j:V\\hookrightarrow T'$; then\n$\\mathcal F'\\to j_*\\mathcal J\\oplus i_*i^{-1}\\mathcal F'$ is\ninjective (check on stalks, with $i:Z\\hookrightarrow T'$ the closed\nimmersion), so by\n[sbc-lem-bc-injectivity] (2), for the base change $f'$ along\n$g':T'\\to S'$ (quasi-compact and quasi-separated since $T'$ is and $S'$\nis affine), the image of $\\xi'$ is nonzero in\nthe direct-sum cokernel for\n$\\mathcal G=j_*\\mathcal J\\oplus i_*i^{-1}\\mathcal F'$. If it is\nnonzero in the second summand, then, since\n$i_*$ (also $i'_*$) is exact for closed immersions,\n$R^qg'_*i_*i^{-1}\\mathcal F'=R^q(g'\\circ i)_*i^{-1}\\mathcal F'$\nand $R^qh'_*e'^{-1}i_*i^{-1}\\mathcal F'=R^qh''_*e_Z^{-1} i^{-1}\\mathcal F'$ (Grothendieck spectral sequence), so\n$P(Z)$ holds. If it is nonzero in the first summand, then\napplying, for every $a\\leq q-1$, the property\n$\\mathrm{BC}(e',n,a)$ of the base change $e':Y'=X'\\times_{S'}T'\\to T'$\nof $f$ (along $T'\\to S'\\to S$) to the square with horizontal side the\nopen immersion $j:V\\to T'$ (quasi-compact as $V$ is quasi-compact and\n$T'$ quasi-separated, and separated) (this is where the universal\ncumulative hypothesis in all degrees $\\leq q-1$ is used) gives\n$e'^{-1}j_*\\mathcal J=j'_*e_V^{-1}\\mathcal J$ (degree $a=0$) and,\ntogether with $R^aj_*\\mathcal J=0$ for $a\\geq1$ ($\\mathcal J$ being\ninjective), the vanishing of the higher direct images\n$R^aj'_*e_V^{-1}\\mathcal J$ for $a=1,\\dots,q-1$; the\nrelative Leray spectral sequence for $h'\\circ j'$ shows\n$$\nR^qh'_*e'^{-1}j_*\\mathcal J\\longrightarrow\nR^q(h'\\circ j')_*e_V^{-1}\\mathcal J\n$$\nis injective, and applying\n[sbc-lem-bc-injectivity] (3), for the base change $f'$ along\n$g'\\circ j:V\\to S'$, to\n$j^{-1}\\mathcal F'\\subset\\mathcal J$ gives $P(V)$.\n- *(4) Empty scheme.* If $T'=\\emptyset$ then $Y'=X'\\times_{S'}T'=\\emptyset$,\nso $R^qh'_*(e')^{-1}\\mathcal F'=0$; hence $\\xi'=0$ lies in the image and\n$P(\\emptyset)$ fails.\n\nLean realization of (1): use [lem-sbc-source-transition-thickening] and [lem-sbc-target-transition-thickening] for the comparison isomorphisms. The proved compatibility of the base-change maps with transitions, followed by naturality in the coefficient sheaf, gives the commuting square. Use [lem-sbc-target-transition-comp] and uniqueness of the pullback lift to identify the transported element. On stalks the target comparison is injective and the source comparison is surjective, so membership in the two ranges is equivalent. Condition (3) is reduced below to two geometric coefficient comparisons; condition (4) was already proved.\nLean realization of (2): descend an arbitrary source image by [lem-sbc-source-image-limit-descent]. Subtract the transported original element from this stage image. By [lem-sbc-stalk-transport-composition] the difference restricts to zero at the limit; [lem-sbc-target-limit-zero-detection] kills it after a finite transition. By [lem-sbc-target-stalk-restriction-image] the stage image remains in the base-change range. Composition identifies the transported original element there, contradicting its survival. No survival statement is moved into a new node. Condition (3) is reduced below to two geometric coefficient comparisons.\nLean realization of condition (3) by J2: work by contraposition on the canonical target stalk at f. Restriction composition identifies the two restricted elements. Use [lem-sbc-closed-open-coefficient-embedding] to embed coefficients into the open injective and closed pushforward summands. The open coefficient image is zero by [lem-sbc-open-injective-coefficient-zero], and the closed coefficient image is in the base-change range by [lem-sbc-closed-coefficient-range]. Reconstruct the direct-sum image using its two projections and base-change naturality. Finally [sbc-lem-bc-injectivity] (2), exactness of geometric stalks, and the stalkwise cokernel sequence reflect that range membership back to the original element, contradicting survival. The coefficient embedding and all algebraic glue are fully proved; only the two geometric comparisons are left to prove. The proved private survival-stalk equivalence and homology-transformation component identity make canonical-stalk conversions explicit without changing any public definition or signature; the cokernel monomorphism is registered as a local instance for range reflection.",
+   "text": "By [sbc-lem-bc-injectivity], clause (1), the failing map is injective, using the universal degree-(q−1) hypothesis. Exactness of geometric stalks makes every stalk map injective; conservativity implies that one stalk map is not bijective. Choose its geometric point x and ξ outside its image. Use [def-sbc-canonical-base-change-stalk-transitions] for the source stalk A(U), target stalk B(U), base-change map b_U and target restriction r_φ, with p:X'→S', Λ=Z/nZ and the fixed F. We may take the initial square to be the canonical pullback square, so its identity comparison is the identity. Define P(U→T) by t_U(ξ)∉im(b_U). Thus P(T) holds. The comparison maps are linear and preserve the coefficient n-torsion condition. The passage to module coefficients uses [lem-weil-pbc-exchange-forget-coefficients] with Λ=Z/nZ and with the vertical and horizontal sides exchanged. An abelian sheaf killed by n has the unique Λ-action [a]z=az; conversely every Λ-module sheaf is killed by n. Clauses (1)–(3) identify the inverse images, derived direct images and actual base-change arrow after forgetting Λ, and exactness identifies their degree-q cohomology. Thus failure of the abelian map is failure of the module map. Choose ξ in this identified module target stalk and carry out the transition, limit and coefficient arguments in that module category throughout. Whenever the abelian injectivity and stalk lemmas are applied, apply them to the forgotten module square and use these canonical comparisons; kernels, cokernels and stalk elements retain their underlying abelian groups. At the final field square the same comparison identifies the failed module map with the abelian map in the conclusion. This uses a derived coefficient-comparison theorem, not merely the equivalence of the n-torsion sheaf categories.",
    "uses": [
-    "sbc-lem-thickening-etale-site",
     "sbc-lem-bc-injectivity",
-    "lem-sbc-target-transition-comp",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-sbc-canonical-base-change-stalk-transitions",
+    "lem-weil-pbc-exchange-forget-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F07, lemma-base-change-does-not-hold-pre, proof"
+   }
+  },
+  {
+   "text": "For a thickening i:U→V over T, [lem-sbc-source-transition-thickening] and [lem-sbc-target-transition-thickening] give isomorphisms on the source and target stalks, respectively; the target fibre square is Cartesian by its construction. Here is the compatibility calculation r_i b_V=b_U s. Work first with derived functors, writing u^* and Ru_* and suppressing the canonical composition isomorphisms; take degree-q cohomology and the fixed stalk afterwards. Write g_V:V→S', a:X'×_{S'}U→X'×_{S'}V, and F_V for the coefficient on V. The transitions are the adjunction-unit transitions of [def-sbc-module-higher-image-transitions]. Under the adjunction for h_U, and the identification h_U^*p^*=e_U^*i^*g_V^*, the transpose of r_i b_V is e_U^*i^*ε_{g_V}(F_V). The transpose of b_U s is e_U^* of the composite ε_i(i^*F_V) ∘ i^*ε_{g_V}(Ri_*i^*F_V) ∘ i^*g_V^*Rg_{V,*}(η_i(F_V)). Naturality of ε_{g_V} rewrites its last two factors as i^*η_i(F_V) ∘ i^*ε_{g_V}(F_V). The triangular identity ε_i(i^*F_V) ∘ i^*η_i(F_V)=1 therefore gives the same transpose. These are precisely the mate and transition formulas in the two cited definitions, so equality of transposes proves the required equality; the canonical coefficient composition maps identify F_U with i^*F_V. Consequently r_i sends im(b_V) onto im(b_U), since s is surjective, and reflects membership, since r_i is injective. By [lem-sbc-stalk-transport-composition], r_i(t_V ξ)=t_U ξ. Hence P(U) iff P(V). This verifies thickening invariance without treating an equivalence of sites as an equality of categories.",
+   "uses": [
     "lem-sbc-source-transition-thickening",
     "lem-sbc-target-transition-thickening",
+    "sbc-def-base-change-map",
+    "lem-sbc-stalk-transport-composition",
+    "def-sbc-module-higher-image-transitions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F07, lemma-base-change-does-not-hold-pre, proof"
+   }
+  },
+  {
+   "text": "Let D be a small cofiltered inverse system of qcqs T-schemes with affine transitions, with limit cone c, and suppose P(D_i) for every i. If t_c ξ=b_c η for some η∈A(c), [lem-sbc-source-image-limit-descent] supplies i and η_i with r_{c_i}(b_i η_i)=b_c η. By [lem-sbc-stalk-transport-composition], the element δ=b_i η_i−t_i ξ restricts to zero at c. Apply [lem-sbc-target-limit-zero-detection] to δ: some arrow j→i makes r_{ji}(δ)=0. Then t_j ξ=r_{ji}(b_i η_i), which belongs to im(b_j) by [lem-sbc-target-stalk-restriction-image]. This contradicts P(D_j). Thus P(c). All limit lemmas require S' affine, small cofiltered indexing, qcqs stages and affine transitions, precisely the assumptions here. In the directed-set version of the minimal-counterexample lemma the index category is small and cofiltered as required.",
+   "uses": [
     "lem-sbc-source-image-limit-descent",
     "lem-sbc-target-limit-zero-detection",
     "lem-sbc-target-stalk-restriction-image",
-    "lem-sbc-stalk-transport-composition",
-    "lem-sbc-closed-open-coefficient-embedding",
-    "lem-sbc-closed-coefficient-range",
-    "lem-sbc-open-injective-coefficient-zero"
+    "lem-sbc-stalk-transport-composition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F07, lemma-base-change-does-not-hold-pre, proof"
+   }
   },
   {
-   "text": "By [sbc-lem-bc-minimal-counterexample], $P(\\operatorname{Spec}K)$\nholds for some field $K$ with a morphism $\\operatorname{Spec}K\\to T\\to S'$,\nwhich is the assertion, with $S'$ the affine scheme chosen at the start.\nFinally, let $S$ be separated. Then the diagonal $S\\to S\\times S$ is a\nclosed immersion, hence affine, and any morphism from an affine\nscheme to $S$ is affine: for $V\\subset S$ affine open,\n$S'\\times_SV=(S'\\times V)\\times_{S\\times S}S$ is affine over the affine\nscheme $S'\\times V$, hence affine; so $S'\\to S$ is affine.",
+   "text": "For U→T qcqs and a closed immersion i:Z→U with quasi-compact open complement j:V→U, suppose both P(Z) and P(V) fail. Put ζ=t_U ξ. Transport composition gives r_i ζ∈im(b_Z) and r_j ζ∈im(b_V). Apply [lem-sbc-closed-open-coefficient-embedding] to F_U: there is a monomorphism F_U→G=j_*J⊕i_*i^*F_U, where J is the chosen injective Z/nZ-module sheaf containing j^*F_U. By [lem-sbc-open-injective-coefficient-zero], the open coefficient image of ζ is zero. Its hypotheses hold: S' is affine, q≥1, U is qcqs, V is quasi-compact and p has universal base change in every nonnegative degree less than q. The negative-degree maps, if the integer indexing convention is used, are automatically maps between zero higher images. By [lem-sbc-closed-coefficient-range], the closed coefficient image of ζ lies in the closed-summand base-change image. These are exactly the two implications in the cited statements; no exactness of j_* is asserted.",
+   "uses": [
+    "lem-sbc-stalk-transport-composition",
+    "lem-sbc-closed-open-coefficient-embedding",
+    "lem-sbc-open-injective-coefficient-zero",
+    "lem-sbc-closed-coefficient-range"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F07, lemma-base-change-does-not-hold-pre, proof"
+   }
+  },
+  {
+   "text": "The two summand components reconstruct the coefficient image of ζ in the cokernel for G: the open component is zero and the closed component is in the image, so that cokernel class is zero. The finite direct sum decomposition is preserved by inverse image, derived direct image and stalks: each additive functor sends the equations π_aι_b=δ_ab and ι_1π_1+ι_2π_2=1 to the same equations. Naturality of the base-change mate in the coefficient sheaf identifies the component base-change maps. Clause (2) of [sbc-lem-bc-injectivity], applied to the coefficient monomorphism F_U→G and the qcqs map U→S', injects the original cokernel into this cokernel. Exactness of geometric stalks preserves that injection and computes the stalk cokernel. Therefore ζ∈im(b_U), contrary to P(U). This proves P(U)⇒P(V) or P(Z), the closed–open condition.",
+   "uses": [
+    "sbc-lem-bc-injectivity",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "sbc-def-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F07, lemma-base-change-does-not-hold-pre, proof"
+   }
+  },
+  {
+   "text": "For U=∅ the fibre X'×_{S'}U is empty. On the small etale site of ∅ every object is empty and its empty covering forces sections of any abelian sheaf to be the zero group. Thus the only coefficient sheaf is zero, every complex on this site is zero, and its higher direct images are zero. Hence B(∅)=0, t_∅ ξ=0=b_∅(0), and P(∅) fails. Apply [sbc-lem-bc-minimal-counterexample] with the four conditions proved above and P(T): it gives a field K and Spec K→T with P(Spec K). The coefficient is the pullback of F, still annihilated by n; non-membership in the stalk image prevents the field-square map from being an isomorphism. Pasting its pullback square with X'→S'→S gives the required diagram.",
    "uses": [
     "sbc-lem-bc-minimal-counterexample"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F07, lemma-base-change-does-not-hold-pre, proof"
+   }
+  },
+  {
+   "text": "If S is separated its diagonal S→S×_{Spec Z}S is a closed immersion by [def-weil-proper-morphism]. For an affine open W=Spec B⊂S write S'=Spec A. The fibre-product universal property [def-pc-fibre-product] identifies S'×_S W→S'×_{Spec Z}W with the pullback of that diagonal along the pair of structural maps to S. By [lem-pc-closed-subscheme-base-change-ideal-image] this pullback is a closed immersion. By [lem-weil-pbc-fibre-product-affine-spectra], with R=Z, its target is Spec(A⊗_Z B). The affine-chart characterization in [def-weil-closed-immersion] therefore identifies S'×_S W with Spec((A⊗_Z B)/I) for an ideal I. Every inverse image of an affine open W is thus affine, so [pqf-def-affine-morphism] gives that S'→S is affine.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-pc-fibre-product",
+    "def-weil-closed-immersion",
+    "pqf-def-affine-morphism",
+    "lem-pc-closed-subscheme-base-change-ideal-image",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F07, lemma-base-change-does-not-hold-pre, proof"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sbc-closed-coefficient-range",
-  "lem-sbc-closed-open-coefficient-embedding",
-  "lem-sbc-open-injective-coefficient-zero",
-  "lem-sbc-source-image-limit-descent",
+  "sbc-def-base-change-property",
+  "sbc-lem-etale-locality",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "sbc-lem-bc-injectivity",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-sbc-canonical-base-change-stalk-transitions",
   "lem-sbc-source-transition-thickening",
-  "lem-sbc-stalk-transport-composition",
-  "lem-sbc-target-limit-zero-detection",
-  "lem-sbc-target-stalk-restriction-image",
-  "lem-sbc-target-transition-comp",
   "lem-sbc-target-transition-thickening",
   "sbc-def-base-change-map",
-  "sbc-lem-bc-injectivity",
+  "lem-sbc-stalk-transport-composition",
+  "def-sbc-module-higher-image-transitions",
+  "lem-sbc-source-image-limit-descent",
+  "lem-sbc-target-limit-zero-detection",
+  "lem-sbc-target-stalk-restriction-image",
+  "lem-sbc-closed-open-coefficient-embedding",
+  "lem-sbc-open-injective-coefficient-zero",
+  "lem-sbc-closed-coefficient-range",
   "sbc-lem-bc-minimal-counterexample",
-  "sbc-lem-thickening-etale-site"
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "pqf-def-affine-morphism",
+  "lem-pc-closed-subscheme-base-change-ideal-image",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-exchange-forget-coefficients"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-failure-field/sbc-lem-bc-failure-field.md",
-  "place": "Proof, with condition (1) realized by the X2 stage-3 transition-square argument; condition (2) realized by U2 using source-image descent and finite-stage zero detection; condition (3) realized by J2 via the closed/open coefficient comparisons and cokernel range reflection"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F07, lemma-base-change-does-not-hold-pre, proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "FieldFailure|UniversalBaseChangeProperty|SurvivesBaseChange",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match for the field-detection statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Failure of etale higher direct image base change is detected over a field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A failure of universal etale cohomology base change in degree q under base change in lower degrees is detected over a field",
+   "results": "Hits: Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.comp, Algebra.Etale.comp, Algebra.etaleLocus_eq_compl_support, KaehlerDifferential.isBaseChange_of_formallyEtale, RingHom.Etale.isStableUnderBaseChange, Algebra.FormallyEtale.iff_exists_algEquiv_prod",
+   "date": "2026-10-14",
+   "verdict": "no match for the field-detection statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"baseChange\"",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-14",
+   "verdict": "no match for the field-detection statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale cohomology base change counterexample specializes to Spec of a field using a minimal counterexample argument",
+   "results": "Hits: Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.IsEtaleAt.comp, Algebra.etaleLocus, RingHom.Etale.isStableUnderBaseChange, Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.comp, Algebra.mem_etaleLocus_iff, Algebra.Etale.baseChange",
+   "date": "2026-10-14",
+   "verdict": "no match for the field-detection statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\"",
+   "results": "Hits: Submodule.baseChange, LinearMap.baseChange, LinearEquiv.baseChange, LinearMap.baseChange_id, Submodule.baseChange_bot, Submodule.baseChange_top, Submodule.tmul_mem_baseChange_of_mem, Submodule.baseChange_mono",
+   "date": "2026-10-14",
+   "verdict": "no match for the field-detection statement"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*cohomology|cohomology.*etale",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match for the field-detection statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a quasi compact quasi separated scheme to a quasi separated scheme is qcqs",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any morphism from a quasi compact quasi separated scheme to a quasi separated scheme is quasi compact and quasi separated",
+   "results": "Hits: AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated, AlgebraicGeometry.QuasiSeparated.of_comp, AlgebraicGeometry.quasiSeparated_over_affine_iff, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty, AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace",
+   "date": "2026-10-14",
+   "verdict": "no match for the field-detection statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.quasiCompact_of_compactSpace",
+   "results": "Hits: AlgebraicGeometry.quasiCompact_of_compactSpace",
+   "date": "2026-10-14",
+   "verdict": "no match for the field-detection statement"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiCompact_of_compactSpace|QuasiSeparated.of_quasiSeparatedSpace",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the field-detection statement"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -117,5 +285,94 @@
   "landing": "20261012T095909-L-319265",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "sbc-lem-bc-failure-field",
+  "worker": "stage1",
+  "summary": "Read Tag 0F07 and the unit; replaced imported mixed proof/Lean notes by eight explicit steps using existing transition, limit, coefficient and stalk lemmas. No new nodes. Verified qcqs and coefficient hypotheses and ruled out attachment through sorried survival declarations. Second reader bound g and h, made the degree domain explicit, and cited both geometric facts in the final clause.",
+  "blueprint": "0F07 initial affine localization; conditions (1) thickenings, (2) limits, (3) closed–open, empty case, and field extraction; final affine-morphism clause.",
+  "tool_uses": [
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Generic Fibre product of schemes used in the field-detection argument; this unit has no replacement statement."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Generic Closed immersion of schemes used in the field-detection argument; this unit has no replacement statement."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Generic Separated, universally closed and proper morphisms used in the field-detection argument; this unit has no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic Quasi-compactness and quasi-separatedness of morphisms between qcqs schemes; finite presentation is stable under base change used in the field-detection argument; this unit has no replacement statement."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks used in the field-detection argument; this unit has no replacement statement."
+   },
+   {
+    "node": "pqf-def-affine-morphism",
+    "why": "Generic Affine morphisms used in the field-detection argument; this unit has no replacement statement."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic Exactness of geometric stalks used in the field-detection argument; this unit has no replacement statement."
+   },
+   {
+    "node": "sbc-def-base-change-map",
+    "why": "Generic Base-change map used in the field-detection argument; this unit has no replacement statement."
+   },
+   {
+    "node": "sbc-def-base-change-property",
+    "why": "Generic The recorded base-change property $BC(f,n,q)$ used in the field-detection argument; this unit has no replacement statement."
+   },
+   {
+    "node": "sbc-lem-bc-injectivity",
+    "why": "Generic Injectivity of the critical map and its cokernel used in the field-detection argument; this unit has no replacement statement."
+   },
+   {
+    "node": "sbc-lem-bc-minimal-counterexample",
+    "why": "Generic Minimal counterexamples occur over a point used in the field-detection argument; this unit has no replacement statement."
+   },
+   {
+    "node": "sbc-lem-etale-locality",
+    "why": "Generic Etale locality of the base-change map used in the field-detection argument; this unit has no replacement statement."
+   },
+   {
+    "node": "lem-pc-closed-subscheme-base-change-ideal-image",
+    "why": "Only the general stability of closed immersions under arbitrary base change is used for the final affine-morphism clause; the unit contains no statement of it."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Canonical derived coefficient comparison identifies the actual Z/nZ-module base-change maps used by the transition lemmas with the abelian base-change maps in the hypotheses and conclusion; no field-detection step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "pqf-def-affine-morphism",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "sbc-def-base-change-map",
+  "sbc-def-base-change-property",
+  "sbc-lem-bc-injectivity",
+  "sbc-lem-bc-minimal-counterexample",
+  "sbc-lem-etale-locality",
+  "lem-pc-closed-subscheme-base-change-ideal-image",
+  "lem-weil-pbc-exchange-forget-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-ee431918c",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-ee431918c (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, report, sources and unit/chapter route in full. Verified all eight steps, edge cases, dependency paths and duplicate candidates. Repaired one C1/E6 gap by citing the existing canonical coefficient-forgetting theorem and explicitly identifying module and abelian derived base-change maps. Statement unchanged; no new nodes. Corrected JSON is under fixes/dag/nodes/sec-smooth-base-change/; concrete checks are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
