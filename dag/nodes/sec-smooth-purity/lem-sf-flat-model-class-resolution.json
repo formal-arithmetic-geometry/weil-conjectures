@@ -1,0 +1,95 @@
+{
+ "id": "lem-sf-flat-model-class-resolution",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-flat-model",
+   "place": "Constructible variant proof: build the bounded-above resolution inductively in decreasing degree, then truncate with the constructible cokernel Q in degree a.",
+   "via": [
+    "lem-sf-etale-flat-constructible",
+    "lem-sf-flat-model"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Bounded flat model from a lifting class",
+ "statement": "Let $X$ be a scheme, $\\Lambda$ a commutative ring, and $C=\\operatorname{Sh}(X_{\\mathrm{Et}},\\operatorname{ModuleCat}(\\Lambda))$ [def-weil-pbc-etale-site; def-weil-pbc-etale-sheaves], with its usual tensor product. Write $D(C)$ and $Q$ for its derived category and localization functor [def-weil-abstract-derived-category], with K-flat derived tensor [def-kun-derived-tensor]. Call $F\\in C$ flat when $F\\otimes-$ is exact. Let $S,T$ be properties of objects of $C$. Suppose $T$ contains zero and is closed under isomorphisms, kernels and cokernels of maps between its objects. Suppose $S$ contains zero, is closed under isomorphisms and binary biproducts, and every $S$-object is flat and belongs to $T$. Suppose also that $S$ lifts epimorphisms onto $T$: for every epimorphism $p:A\\to B$ and map $g:G\\to B$ with $T(G)$ there exist $E$ with $S(E)$, an epimorphism $e:E\\to G$, and $h:E\\to A$ such that $p\\circ h=g\\circ e$. For integers $a,b$ and $K\\in D(C)$ such that every $H^n(K)$ belongs to $T$ and $H^i(K\\otimes^{\\mathbf L}F[0])=0$ for every $F\\in C$ and every $i<a$ or $i>b$, there is a cochain complex $P$ with $P^n=0$ outside $[a,b]$, every $P^n$ flat and in $T$, and $Q(P)\\cong K$.",
+ "source": {
+  "document": "WeilConjectures/CategoryTheory/DerivedCategory/FlatModelOfClass.lean",
+  "place": "exists_iso_Q_obj_flat_of_torAmplitudeIn_of_liftsAlongEpi, lines 72-124, specialized to small-etale ModuleCat sheaves; generic class refinement of Stacks 08CI (cohomology-lemma-tor-amplitude), whose ring-module version is 0654 (more-algebra-lemma-tor-amplitude). The lifting-class refinement itself is the source declaration, not a theorem asserted by those tags."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-kun-derived-tensor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "abstract theorem flat constructible model Tor amplitude lifting along epimorphisms",
+   "results": "DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isLE_Q_obj_iff",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "abstract theorem flat model Tor amplitude object property lifting along epimorphisms",
+   "results": "DerivedCategory.isLE_Q_obj_iff, DerivedCategory.IsLE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.IsGE, DerivedCategory.left_fac_of_isStrictlyGE",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.flat, ChainComplex.LiftsAlongEpi, torAmplitudeIn",
+   "results": "loogle: unknown identifier 'ObjectProperty.flat'",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LiftsAlongEpi",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LiftsAlongEpi|torAmplitudeIn|IsConstructibleSheaf",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived object with Tor amplitude and cohomology in a class closed under kernels and cokernels has a bounded flat model when flat objects lift epimorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-sf-etale-flat-constructible",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-flat-model",
+ "lean_candidates": [
+  {
+   "name": "DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn_of_liftsAlongEpi",
+   "module": "WeilConjectures.CategoryTheory.DerivedCategory.FlatModelOfClass",
+   "lines": [
+    72,
+    124
+   ],
+   "note": "Specialize C to small-etale ModuleCat sheaves, with the usual Grothendieck abelian, monoidal preadditive, braided closed tensor and functorial flat-resolution instances. Every S,T hypothesis is stated explicitly. Read the entire theorem and proof. Historical sorry map slopmaster2_7d675a26 records s=false, ts=false (map lines 62-121 include its docstring). Verified independently by this maintainer reader; attachment is reported in review.md. No lean_audit field was set."
+  }
+ ]
+}
