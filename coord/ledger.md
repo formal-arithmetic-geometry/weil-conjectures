@@ -14920,3 +14920,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:09 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteSelectionGeneral (stage 3; reviewer PASS; first push; landing 20261014T180945-L-3486112 (proof); batch 20261014T180944; modules 1; new nodes 0)
 - 18:13 L: merged deliver/S4/Sheaf.AlgebraicGeometry.LimitHigherDirectImageExchange (stage 3; reviewer PASS; first push; landing 20261014T181324-L-3532326 (interface); batch 20261014T181322; modules 4; new nodes 12)
 - 18:18 L: merged deliver/R4/Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparisonFactorization (stage 3; reviewer PASS; first push; landing 20261014T181803-L-3594152 (proof); batch 20261014T181801; modules 1; new nodes 0)
+- 18:31 L: merged deliver/K4/WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula (stage 3; reviewer PASS; first push; landing 20261014T183101-L-3874269 (proof); batch 20261014T183059; modules 1; new nodes 0)

@@ -11,6 +11,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionComp
 import Sheaf.AlgebraicGeometry.ProjectionFormulaFiniteObjectwise
 
 /-!
@@ -327,8 +329,76 @@ variable {X Y Z : Scheme.{u}}
 The identity case: the projection formula holds for `f = 𝟙 X`. -/
 theorem hasProjectionFormula_id (X : Scheme.{u})
     (K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    HasProjectionFormula A (𝟙 X) K L :=
-  sorry
+    HasProjectionFormula A (𝟙 X) K L := by
+  let c := HasCompactification.compactification (𝟙 X)
+  have hi : IsClosedImmersion c.i := c.isClosedImmersion_openImmersion inferInstance
+  let e := asIso (derivedOpenImmersionLowerShriekToLowerStar A c.i)
+  have hfull : D((c.i)_!open[A]).Full :=
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction A c.i).fullyFaithfulLOfIsIsoUnit.full
+  have hfaithful : D((c.i)_!open[A]).Faithful :=
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction A c.i).fullyFaithfulLOfIsIsoUnit.faithful
+  have : R((c.i)_*[A]).Full := Functor.Full.of_iso e
+  have : R((c.i)_*[A]).Faithful := Functor.Faithful.of_iso e
+  have hpi (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+      (N : _root_.DerivedCategory (Sheaf c.Z.smallEtaleTopology A)) :
+      IsIso (((rightDerivedLowerStarProjectionMap A c.i).app M).app N) := by
+    let eT := asIso (((derivedTensor A c.Z).map (e.inv.app M)).app N) ≪≫
+      ((derivedOpenImmersionLowerShriekProjectionIso A c.i).symm.app M).app N ≪≫ e.app _
+    have : IsIso ((derivedUpperStarLowerStarAdjunction A c.i).unit.app
+        (((derivedTensor A c.Z).obj (R((c.i)_*[A]).obj M)).obj N)) :=
+      (derivedUpperStarLowerStarAdjunction A c.i).isIso_unit_app_of_iso eT
+    rw [rightDerivedLowerStarProjectionMap_app_app, Adjunction.homEquiv_unit]
+    infer_instance
+  have hid (M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+      IsIso (((rightDerivedLowerStarProjectionMap A (𝟙 X)).app M).app N) := by
+    let eId := leftDerivedUpperStarIsoMapDerivedCategory A (𝟙 X) ≪≫
+      Functor.mapDerivedCategoryNatIso (upperStarId A X) ≪≫
+      Functor.mapDerivedCategoryIdIso _
+    have : (L((𝟙 X)^*[A])).IsEquivalence := Functor.isEquivalence_of_iso eId.symm
+    have : (R((𝟙 X)_*[A])).IsEquivalence :=
+      (derivedUpperStarLowerStarAdjunction A (𝟙 X)).isEquivalence_right_of_isEquivalence_left
+    rw [rightDerivedLowerStarProjectionMap_app_app, Adjunction.homEquiv_unit]
+    infer_instance
+  have : IsIso (rightDerivedLowerStarCompHom A c.i c.g (𝟙 X) c.comm) := by
+    unfold rightDerivedLowerStarCompHom
+    infer_instance
+  have hp : IsIso (((rightDerivedLowerStarProjectionMap A c.g).app
+      (R((c.i)_*[A]).obj K)).app L) := by
+    have := hpi K (L((c.g)^*[A]).obj L)
+    have := hid K L
+    have h := rightDerivedLowerStarProjectionMap_comp' A c.i c.g (𝟙 X) c.comm K L
+    have : IsIso (((rightDerivedLowerStarProjectionMap A c.g).app
+        (R((c.i)_*[A]).obj K)).app L ≫
+        R((c.g)_*[A]).map (((rightDerivedLowerStarProjectionMap A c.i).app K).app
+          (L((c.g)^*[A]).obj L)) ≫
+        (rightDerivedLowerStarCompHom A c.i c.g (𝟙 X) c.comm).app
+          (((derivedTensor A X).obj K).obj (L((c.i)^*[A]).obj (L((c.g)^*[A]).obj L))) ≫
+        R((𝟙 X)_*[A]).map (((derivedTensor A X).obj K).map
+          ((leftDerivedUpperStarComp A c.i c.g (𝟙 X) c.comm).inv.app L))) := by
+      rw [← h]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _
+      (R((c.g)_*[A]).map (((rightDerivedLowerStarProjectionMap A c.i).app K).app
+        (L((c.g)^*[A]).obj L)) ≫
+      (rightDerivedLowerStarCompHom A c.i c.g (𝟙 X) c.comm).app
+        (((derivedTensor A X).obj K).obj (L((c.i)^*[A]).obj (L((c.g)^*[A]).obj L))) ≫
+      R((𝟙 X)_*[A]).map (((derivedTensor A X).obj K).map
+        ((leftDerivedUpperStarComp A c.i c.g (𝟙 X) c.comm).inv.app L)))
+  have hp' : IsIso (((rightDerivedLowerStarProjectionMap A c.g).app
+      (D((c.i)_!open[A]).obj K)).app L) := by
+    have h := rightDerivedLowerStarProjectionMap_naturality_left A c.g (e.hom.app K) L
+    have : IsIso (((rightDerivedLowerStarProjectionMap A c.g).app
+        (D((c.i)_!open[A]).obj K)).app L ≫
+        R((c.g)_*[A]).map (((derivedTensor A c.Z).map (e.hom.app K)).app
+          (L((c.g)^*[A]).obj L))) := by
+      rw [← h]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _
+      (R((c.g)_*[A]).map (((derivedTensor A c.Z).map (e.hom.app K)).app
+        (L((c.g)^*[A]).obj L)))
+  change HasProjectionFormulaOfCompactification A c K L
+  rw [HasProjectionFormulaOfCompactification, projectionMapOfCompactification_app_app]
+  infer_instance
 
 end Coherence
 
