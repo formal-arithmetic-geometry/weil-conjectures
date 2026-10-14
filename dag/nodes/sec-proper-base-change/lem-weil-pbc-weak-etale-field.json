@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-weak-etale-field",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Weakly etale algebras over a field",
@@ -23,40 +23,157 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-weak-etale-tor], every $B$-module is flat. For a local ring\nwith this property, flatness of the quotient by $(b)$ gives $b=bc$ for some\n$c\\in(b)$. If $b$ is a nonunit, $1-c$ is a unit, so $b=0$. All local rings of\n$B$ are therefore fields; in particular $B$ is reduced.",
+   "text": "Every $k$-module is free after choosing a basis, and hence flat: tensoring a direct sum of copies of $k$ preserves injections coordinatewise. Thus the common flat-resolution bound over $k$ is zero. Apply the common-bound conclusion of [lem-weil-pbc-weak-etale-tor] to $k\\to B$: every $B$-module is flat. Fix a prime $\\mathfrak q$ of $B$. By [lem-weil-pbc-localization-ring-weakly-etale] and composition in [lem-weil-pbc-ind-etale-stability], $k\\to B_{\\mathfrak q}$ is weakly etale; the same Tor-bound argument shows every $B_{\\mathfrak q}$-module is flat.",
    "uses": [
-    "lem-weil-pbc-weak-etale-tor"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "We first treat a weakly etale field extension $k\\subset L$. By\n[lem-weil-pbc-ind-etale-stability] and the Tor formula, $L\\otimes_kL$ also\nhas every module flat. For any subfield $E\\subset L$ containing $k$, the map\n$E\\otimes_kE\\to L\\otimes_kL$ is faithfully flat. Flatness of every module\ndescends along a faithfully flat ring map, by the tensor criterion for\ninjectivity. Thus $E\\otimes_kE$ has every module flat. If $t\\in L$ were\ntranscendental, take $E=k(t)$. Then $E\\otimes_kE$ is a domain with the\nnonzero nonunit $t\\otimes1-1\\otimes t$, and its localization at the diagonal\nprime is not a field, a contradiction. Hence $L/k$ is algebraic. An\ninseparable element would instead give a finite subextension $E/k$ for which\n$E\\otimes_kE$ is nonreduced: its presentation by the minimal polynomial has a\nrepeated factor at the root already in $E$. This is the same contradiction.\nThus $L/k$ is separable algebraic.",
-   "uses": [
+    "lem-weil-pbc-weak-etale-tor",
+    "lem-weil-pbc-localization-ring-weakly-etale",
     "lem-weil-pbc-ind-etale-stability"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092Q (lemma-absolutely-flat-over-field), first two proof paragraphs; zero-bound argument is the blueprint first paragraph"
+   }
   },
   {
-   "text": "Apply this result to the fields $B_{\\mathfrak q}$. They are weakly etale over\n$k$, since localization is ind-Zariski and weak etaleness is preserved by\ncomposition. Given $b\\in B$, at each prime choose a monic separable\npolynomial annihilating its germ. This relation holds on a basic open\nneighbourhood. Finitely many such neighbourhoods cover $\\operatorname{Spec}B$;\nthe product of their polynomials annihilates $b$ in every local ring, hence\nin $B$. Thus every element of $B$ is integral over $k$. A finitely generated\nsubalgebra is consequently finite-dimensional and reduced, hence a product of\nfinite field extensions. Each factor embeds into some $B_{\\mathfrak q}$, so\neach extension is separable. These finite etale subalgebras form the filtered\npresentation of [def-weil-pbc-ind-etale-algebra]. This proves the field\ncalculation also recorded in\n[Stacks Project, Tag 092Q](https://stacks.math.columbia.edu/tag/092Q).",
+   "text": "Put $C=B_{\\mathfrak q}$, a local ring by [def-weil-pbc-localization-at-prime]. For a nonunit $b\\in C$, the quotient $C/(b)$ is flat by step 1. Apply [lem-exc-flat-quotient-element-equation] to find $e\\in(b)$ with $b=be$. Since $b$ lies in the maximal ideal so does $e$, whereas $1-e$ is a unit; hence $b(1-e)=0$ forces $b=0$. Thus every nonzero element is a unit, and $C$ is a field. Its maximal ideal is zero, so $B_{\\mathfrak q}=\\kappa(\\mathfrak q)$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-exc-flat-quotient-element-equation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092F (lemma-absolutely-flat), local-field argument expanded using Algebra Tag 04PS"
+   }
+  },
+  {
+   "text": "If $x\\in B$ is nilpotent, its image in each field $B_{\\mathfrak q}$ vanishes. The fraction equality defining localization says that for each $\\mathfrak q$ some $s\\notin\\mathfrak q$ has $sx=0$. If $x\\ne0$, its annihilator is a proper ideal. By [lem-weil-pbc-minimal-prime-over-proper-ideal] it is contained in a prime $\\mathfrak q$, contradicting the preceding $s$. Thus $B$ is reduced. Apply [lem-weil-pbc-weakly-etale-field-separable] to the weakly etale field extension $k\\to B_{\\mathfrak q}$ from steps 1-2: every residue field of $B$ is separable algebraic over $k$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-minimal-prime-over-proper-ideal",
+    "lem-weil-pbc-weakly-etale-field-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092Q (lemma-absolutely-flat-over-field), reducedness and residue-field paragraphs"
+   }
+  },
+  {
+   "text": "Let $A\\subseteq B$ be a finitely generated $k$-subalgebra. It is reduced, since a nilpotent in $A$ is nilpotent in $B$. Let $\\mathfrak p$ be a minimal prime of $A$. By [lem-weil-pbc-injective-minimal-prime-lift] choose $\\mathfrak q\\subset B$ contracting to $\\mathfrak p$. The map $A\\to B_{\\mathfrak q}$ has kernel $\\mathfrak p$: elements of $\\mathfrak q$ map into the zero maximal ideal of this field; conversely if $a/1=0$, some $s\\notin\\mathfrak q$ kills $a$, so primeness gives $a\\in\\mathfrak q$. Consequently $A/\\mathfrak p$ embeds in the separable algebraic field $B_{\\mathfrak q}$. It is itself a field: for $0\\ne a\\in A/\\mathfrak p$, a minimal-degree polynomial relation over $k$ has nonzero constant coefficient (otherwise cancel $a$ in the domain), and solving the relation expresses $a^{-1}$ as a polynomial in $a$. Hence $\\mathfrak p$ is maximal. The same injection shows every element of this field is separable over $k$, since its minimal polynomial is unchanged by an injective $k$-algebra map.",
+   "uses": [
+    "lem-weil-pbc-injective-minimal-prime-lift",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092Q (lemma-absolutely-flat-over-field), minimal-prime paragraph, using Algebra Tag 00FK"
+   }
+  },
+  {
+   "text": "Every ideal of the field $k$ is either zero or the whole ring, so $k$ is Noetherian. By [lem-weil-pbc-finite-type-algebra-noetherian], $A$ is Noetherian, and [lem-weil-pbc-noetherian-finitely-many-minimal-primes] gives finitely many minimal primes. Every prime of $A$ contains a minimal prime by [lem-weil-pbc-prime-contains-minimal-prime]; since the latter is maximal by step 4, these primes are equal. Thus $\\operatorname{Spec}A$ is finite. Apply [pqf-lem-finite-type-algebra-finite-spectrum] to obtain that $A$ is finite-dimensional over $k$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "pqf-lem-finite-type-algebra-finite-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092Q (lemma-absolutely-flat-over-field), dimension-zero paragraph; Algebra Tags 00FN, 00FR, 0ALW"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-reduced-noetherian-total-ring-fractions] for the reduced Noetherian ring $A$: its total ring of fractions is the finite product of the fields $A_{\\mathfrak p}$ at its minimal primes. Every nonzerodivisor $a\\in A$ is a unit. Indeed, by [lem-pc-minimal-prime-avoids-nonzerodivisor] it belongs to no minimal prime; all primes are minimal by step 5. If $(a)$ were proper, [lem-weil-pbc-minimal-prime-over-proper-ideal] would give a prime containing $a$, a contradiction. Thus all denominators in the total ring of fractions are already units, and $A\\cong Q(A)\\cong\\prod_{\\mathfrak p} A_{\\mathfrak p}$ as $k$-algebras. Since $\\mathfrak p$ is maximal and $A_{\\mathfrak p}$ is a field, $A/\\mathfrak p\\to A_{\\mathfrak p}$ is an isomorphism: the quotient is a field and every localization fraction is the image of the quotient numerator divided by its nonzero quotient denominator. By step 4 these factors are separable over $k$, and by step 5 they are finite-dimensional (quotients of $A$). Apply [lem-sc-finite-etale-algebra-criterion]: $A$ is finite etale over $k$.",
+   "uses": [
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "lem-pc-minimal-prime-avoids-nonzerodivisor",
+    "lem-weil-pbc-minimal-prime-over-proper-ideal",
+    "lem-sc-finite-etale-algebra-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092Q (lemma-absolutely-flat-over-field), final decomposition paragraph; decomposition via Algebra Tags 02LX and 00U3"
+   }
+  },
+  {
+   "text": "The finitely generated $k$-subalgebras of $B$ form a set directed by inclusion: the subalgebra generated by the union of two finite generating sets contains both. Their union is $B$, because every $b$ lies in $k[b]$. This directed union is their filtered colimit as $k$-algebras: compatible algebra maps on the subalgebras define a unique map on $B$, with operations respected by passing finitely many elements to a common subalgebra. Each term is finite etale by step 6. The definition [def-weil-pbc-ind-etale-algebra] therefore makes $B$ ind-etale. If $B=0$, the subalgebra diagram consists of the zero algebra, the field and prime arguments above have no instances, and the decomposition is the empty product; all conclusions hold.",
    "uses": [
     "def-weil-pbc-ind-etale-algebra"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092Q (lemma-absolutely-flat-over-field), filtered-colimit conclusion; explicit directed union"
+   }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-weak-etale-tor",
+  "lem-weil-pbc-localization-ring-weakly-etale",
   "lem-weil-pbc-ind-etale-stability",
+  "def-weil-pbc-localization-at-prime",
+  "lem-exc-flat-quotient-element-equation",
+  "lem-weil-pbc-minimal-prime-over-proper-ideal",
+  "lem-weil-pbc-weakly-etale-field-separable",
+  "lem-weil-pbc-injective-minimal-prime-lift",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "pqf-lem-finite-type-algebra-finite-spectrum",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-pc-minimal-prime-avoids-nonzerodivisor",
+  "lem-sc-finite-etale-algebra-criterion",
   "def-weil-pbc-ind-etale-algebra"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-weak-etale-field.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 092Q (lemma-absolutely-flat-over-field); expanded using the blueprint Tor route and existing total-ring-of-fractions decomposition"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every finitely generated subalgebra of a weakly etale algebra over a field is finite etale and residue fields are separable algebraic",
+   "results": "; 8 hits: Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_exists_algEquiv_prod, RingHom.Etale.toAlgebra, Algebra.Etale.finitePresentation, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, RingHom.etale_algebraMap",
+   "date": "2026-10-14",
+   "verdict": "no match: Etale.iff_exists_algEquiv_prod supplies only the finite etale classification, not weak etaleness implying it. Project etale_of_fg covers etaleness but not explicitly module finiteness or all clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.WeaklyEtale, Algebra.IsSeparable",
+   "results": "; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: Etale.iff_exists_algEquiv_prod supplies only the finite etale classification, not weak etaleness implying it. Project etale_of_fg covers etaleness but not explicitly module finiteness or all clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "WeaklyEtale|flat_lmul|indEtale_field",
+   "results": "; 15 hits: Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: Etale.iff_exists_algEquiv_prod supplies only the finite etale classification, not weak etaleness implying it. Project etale_of_fg covers etaleness but not explicitly module finiteness or all clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "weakly etale algebra over a field is ind etale",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every etale algebra over a field is a finite product of finite separable field extensions",
+   "results": "; 8 hits: Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.FormallyEtale.iff_isSeparable, Algebra.FormallyEtale.of_isSeparable, Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.comp, Algebra.FormallyEtale.instForallOfFinite",
+   "date": "2026-10-14",
+   "verdict": "no match: Etale.iff_exists_algEquiv_prod supplies only the finite etale classification, not weak etaleness implying it. Project etale_of_fg covers etaleness but not explicitly module finiteness or all clauses."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -83,5 +200,44 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-weak-etale-field",
+  "worker": "stage1",
+  "summary": "Kept the statement, supplied a seven-step proof of every clause following Stacks 092Q, repaired uncited flat-quotient/localization/minimal-prime/decomposition inputs, and replaced the compressed field-extension detour with the exact closed project theorem (new statement-only attachment node). One new Mathlib leaf supplies minimal-prime lifting.",
+  "blueprint": "Steps 1-3 realize Proof paragraph 1 and the residue-field opening of paragraph 3; the cited field-extension attachment realizes paragraph 2. Steps 4-6 realize the finite-subalgebra/decomposition sentences of paragraph 3 via the Stacks 092Q minimal-prime argument; step 7 realizes its last filtered-presentation sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-flat-quotient-element-equation",
+    "why": "Generic flat quotient element equation used in the explicit local-field calculation; no node of this unit states it."
+   },
+   {
+    "node": "pqf-lem-finite-type-algebra-finite-spectrum",
+    "why": "Generic finite-spectrum finite-type algebra finiteness criterion, after proving its finite-spectrum hypothesis; no node of this unit states it."
+   },
+   {
+    "node": "lem-pc-minimal-prime-avoids-nonzerodivisor",
+    "why": "Generic minimal-prime/nonzerodivisor fact used only to identify A with its total ring of fractions; no node of this unit states it."
+   },
+   {
+    "node": "lem-sc-finite-etale-algebra-criterion",
+    "why": "Generic classification of finite etale field algebras, applied only after finiteness and separable field factors are proved; no node of this unit states precisely this equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-flat-quotient-element-equation",
+  "pqf-lem-finite-type-algebra-finite-spectrum",
+  "lem-pc-minimal-prime-avoids-nonzerodivisor",
+  "lem-sc-finite-etale-algebra-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-d006fc907",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-d006fc907 (reviewer sub-agent of L); spot-checked: Read all seven steps, both new nodes, cited statements, sources, and unit/chapter route. Stacks 092Q/092P and 00FK support the mathematics; edge cases, hypotheses, duplicates, and cycles checked. Recorded the verified field-extension attachment in lean_candidates and corrected the Mathlib specialization wording. Whole corrected JSON files and detailed review.md written; no statements or targets weakened.; 2 file(s) fixed by the reviewer"
+ }
 }
