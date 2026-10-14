@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-extension-by-zero-adjunction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Adjunction for extension by zero",
@@ -17,26 +17,108 @@
  ],
  "proof": [
   {
-   "text": "For an open immersion the site over $U$ is the slice of\n[def-weil-pbc-proetale-site] over $U$: maps into $U$ are unique\nwhen they exist, and the coverings are the same coverings over the larger\nscheme. A morphism from the presheaf $P_M$ of [def-weil-extension-by-zero] to\na sheaf $N$ is therefore precisely a compatible family $M(V)\\to N(V)$ on\nobjects over $U$; on all other objects the source is zero. This is a morphism\n$M\\to j^*N$. Sheafification preserves maps to sheaves, so it gives\n$\\operatorname{Hom}(j_!M,N)=\\operatorname{Hom}(M,j^*N)$, naturally in both\narguments.",
+   "text": "Use the schemes, finite commutative coefficient ring $A$, open immersion $j:U\\hookrightarrow X$, and functor $j_!M=P_M^\\#$ of [def-weil-extension-by-zero]. By [lem-weil-proetale-weakly-etale-localization] (1)--(4), identify $U_{\\mathrm{proet}}$ with $X_{\\mathrm{proet}}/U$, its coefficient sheaf with $A_X|_U$, and restriction with $(j^*N)(V\\to U)=N(V\\to X)$. Each object over $X$ has at most one map to $U$. These identifications also identify module morphisms and their compositions; thus it suffices to construct the Hom bijection for this localized site.",
    "uses": [
-    "def-weil-pbc-proetale-site",
+    "def-weil-extension-by-zero",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), construction of the adjunction; specialized to an open immersion using proetale.tex Tag 09AE (definition-extension-zero)"
+   }
+  },
+  {
+   "text": "For a module-sheaf map $\\alpha:M\\to j^*N$, define $b_\\alpha:P_M\\to N$ objectwise: it is $\\alpha_{V\\to U}$ if $V\\to X$ factors through $U$, and the unique linear map $0\\to N(V)$ otherwise. Here $P_M$ and its restrictions are those of [def-weil-extension-by-zero]. For any arrow $a:W\\to V$, if $V$ factors through $U$ then $W$ does too and $N(a)\\alpha_V=\\alpha_W M(a)$ is exactly naturality of $\\alpha$ in the localized site. If $V$ does not factor through $U$, both sides of the naturality square have source $P_M(V)=0$. On an object over $U$, $A_X(V)$ acts through its identification with $A_U(V\\to U)$, so $\\alpha_{V\\to U}$ is $A_X(V)$-linear; on every other object the zero-source map is linear. Thus $b_\\alpha$ is a morphism of module presheaves.",
+   "uses": [
     "def-weil-extension-by-zero"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), construction of the adjunction; specialized to an open immersion using proetale.tex Tag 09AE (definition-extension-zero)"
+   }
+  },
+  {
+   "text": "Conversely, a module-presheaf map $b:P_M\\to N$ gives $\\alpha_b:M\\to j^*N$ by taking its components on objects factoring through $U$. The formula of [def-weil-extension-by-zero] identifies $P_M$ on these objects and arrows with $M$, so the module linearity and naturality of $b$ are precisely those required for $\\alpha_b$. The two constructions are inverse: on objects over $U$ both keep the same component, and on all other objects every map from $P_M(V)=0$ is unique. Precomposing by $t:M^\\prime\\to M$ replaces each nonzero component $b_V$ by $b_Vt_V$, and postcomposing by $s:N\\to N^\\prime$ replaces it by $s_Vb_V$; zero-source components remain unique. This proves naturality of the resulting presheaf Hom bijection in both variables.",
+   "uses": [
+    "def-weil-extension-by-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), construction of the adjunction; specialized to an open immersion using proetale.tex Tag 09AE (definition-extension-zero)"
+   }
+  },
+  {
+   "text": "Let $\\eta_M:P_M\\to P_M^\\#$ be the module-sheafification map. By [def-weil-presheaf-modules-sheafification], composition with $\\eta_M$ is a bijection from module-sheaf maps $P_M^\\#\\to N$ to module-presheaf maps $P_M\\to N$. Composing with step 3 gives $\\operatorname{Hom}(j_!M,N)\\cong\\operatorname{Hom}(M,j^*N)$, since $j_!M=P_M^\\#$ by [def-weil-extension-by-zero]. Write $P_t:P_{M^\\prime}\\to P_M$ for the presheaf map induced by $t:M^\\prime\\to M$, and let $\\beta:P_M^\\#\\to N$ be a module-sheaf map. Functoriality of sheafification gives $(j_!t)\\eta_{M^\\prime}=\\eta_M P_t$; for $s:N\\to N^\\prime$, associativity gives $(s\\beta)\\eta_M=s(\\beta\\eta_M)$. Together with step 3 these identities prove naturality of the sheaf Hom bijection. A natural Hom bijection is the defining adjunction, so $j_!\\dashv j^*$.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-extension-by-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules), universal factorization and following Hom formula; 03DI (lemma-extension-by-zero), last paragraph: explicit inverse and naturality verification"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proetale-site",
-  "def-weil-extension-by-zero"
+  "def-weil-extension-by-zero",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-presheaf-modules-sheafification"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-weil-extension-by-zero-adjunction.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DI (lemma-extension-by-zero), specialized to the monomorphism j; Tag 03CY module-sheafification universal property; proetale.tex Tag 09AE"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension.?by.?zero|pullbackPushforwardAdjunction|overFunctor",
+   "results": "19 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the item: module-sheafification and abstract pullback adjunctions are ingredients, not the concrete pro-etale zero-extension construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of sheaves of modules is left adjoint to restriction to an open subscheme",
+   "results": "Service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of module sheaves on a localized site is left adjoint to restriction",
+   "results": "8 hits: PresheafOfModules.sheafificationAdjunction, PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, PresheafOfModules.sheafifyHomEquiv', AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, LightCondensed.freeForgetAdjunction, PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app, PresheafOfModules.sheafifyHomEquiv",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the item: module-sheafification and abstract pullback adjunctions are ingredients, not the concrete pro-etale zero-extension construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.overFunctor",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the item: module-sheafification and abstract pullback adjunctions are ingredients, not the concrete pro-etale zero-extension construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural bijection between maps from the sheafification of a zero extended module presheaf to N and maps from M to the restriction of N",
+   "results": "8 hits: PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the item: module-sheafification and abstract pullback adjunctions are ingredients, not the concrete pro-etale zero-extension construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left adjoint to restriction for sheaves of modules on an over category",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, SheafOfModules.instIsLeftAdjointPullback, PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, PresheafOfModules.instIsRightAdjointPushforward",
+   "date": "2026-10-14",
+   "verdict": "no exact match: the abstract pullback adjunction requires identification of its left adjoint with the explicit zero-extension presheaf; Scheme.Modules uses the Zariski structure sheaf"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -59,5 +141,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-open-closed-triangle"
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-extension-by-zero-adjunction",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its coefficient category. Expanded the imported proof into the localization identification, explicit presheaf map in both directions, inverse and naturality checks, and module sheafification. Reused the existing localization theorem and Mathlib module-sheafification leaf; no new nodes. Found no exact project attachment or Mathlib leaf for the entire item.",
+  "blueprint": "The complete single paragraph of the blueprint proof: slice identification (step 1), compatible maps on objects over U and zero elsewhere (steps 2--3), sheafification and naturality (step 4). This provides the open counit used in step 1 of sk-prop-sf-open-closed-triangle without invoking geometric-stalk conservativity.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Its clauses (1)--(4) identify the pro-etale localized site, coefficients and restriction and give uniqueness of factorization. This is a generic site-identification tool from sk-def-sf-operations, not a replacement for the open--closed triangle route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-68ff94781",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-68ff94781 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, unit/chapter route, and Stacks 03DI, 03CY, and 09AE. All four steps give a linear, inverse, natural Hom correspondence; edge cases pass. No new nodes, circular dependencies, or implicit coefficient comparisons. Accepted localization tool use; detailed findings recorded in review.md."
+ }
 }
