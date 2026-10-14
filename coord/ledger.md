@@ -14757,3 +14757,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:37 L: merged deliver/P1/Sheaf.AlgebraicGeometry.CompactFlatGeneratorTowerResolution (stage 3; reviewer PASS; first push; landing 20261014T083745-L-4168253 (interface); batch 20261014T083740; modules 2; new nodes 1)
 
 - 16:44 L: batch 20261014T083740 dependency take-out
+- 08:46 L: merged deliver/B2/Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization (stage 3; reviewer PASS; after a return; landing 20261014T084659-L-88460 (interface); batch 20261014T084656; modules 3; new nodes 0; change records: coord/changes/retire-false-component-extension-factorization.md)

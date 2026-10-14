@@ -2,7 +2,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAux
 
 @[expose] public section
 universe u
@@ -69,21 +68,7 @@ theorem etaleResidueTriples_primeLocalization_component_extension_exists
         β ≫ (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =
           (ΓSpecIso s.B).inv ≫ (Spec s.B).Γevaluation s.q ≫ s.φ →
         β ≫ b = η.app s := by
-  obtain ⟨c, i, hiα, hiφ, b, hbi, hfac⟩ :=
-    etaleResidueTriples_primeLocalization_component_extension_aux
-      R p K χ q ψ hψ hK V η t
-  refine ⟨b, ?_⟩
-  intro s β hα hφ
-  obtain ⟨a, ha, hcancel⟩ := hfac s β hα hφ
-  apply hcancel
-  calc
-    (etaleResidueTriplesRingDiagram R p K χ).map a ≫ (β ≫ b) =
-        ((etaleResidueTriplesRingDiagram R p K χ).map a ≫ β) ≫ b :=
-      (Category.assoc _ _ _).symm
-    _ = i ≫ b := congrArg (fun f => f ≫ b) ha
-    _ = η.app c := hbi
-    _ = (etaleResidueTriplesRingDiagram R p K χ).map a ≫ η.app s :=
-      (η.naturality a).symm
+  sorry
 
 end AlgebraicGeometry.Scheme
 
