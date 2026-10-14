@@ -14677,3 +14677,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:10 L: merged deliver/F4/Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore (stage 3; reviewer PASS; first push; landing 20261014T061024-L-2465038 (interface); batch 20261014T061020; modules 3; new nodes 2)
 - 06:10 L: merged deliver/H3/Sheaf.AlgebraicGeometry.FlatTelescopeModelShiftGauge (stage 3; reviewer PASS; first push; landing 20261014T061024-L-2465201 (interface); batch 20261014T061020; modules 3; new nodes 3)
 - 06:10 L: merged deliver/H3/Sheaf.AlgebraicGeometry.SchemeTensorHomUncurrySummandNaturality (stage 3; reviewer PASS; first push; landing 20261014T061025-L-2465358 (proof); batch 20261014T061020; modules 1; new nodes 0)
+- 06:10 L: merged deliver/H3/Sheaf.AlgebraicGeometry.SelfTorNonpositiveFlatSections (stage 3; reviewer PASS; first push; landing 20261014T061026-L-2465610 (interface); batch 20261014T061020; modules 2; new nodes 1)
