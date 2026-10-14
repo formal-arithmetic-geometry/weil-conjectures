@@ -16,9 +16,9 @@
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteSelectionGeneral` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleNoetherianStalkDetector` | 4 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparison` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BaseChangeTargetTransitionHigherImage` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.LimitHigherDirectImageExchange` | 11 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparisonFactorization` | 11 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionsFactorization` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProjectionFormulaFiniteObjectwise` | 23 | 1 | proof |
@@ -32,11 +32,10 @@
 | `Sheaf.AlgebraicGeometry.AffineCoordinateComparisonCoherence` | 43 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates` | 50 | 1 | proof |
 
-Waiting, not claimable: 4 modules whose proof uses a node that has no Lean declaration yet.
+Waiting, not claimable: 3 modules whose proof uses a node that has no Lean declaration yet.
 
 | module | distance to a target | sorry |
 |---|---|---|
-| `Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparison` | 10 | 1 |
 | `Sheaf.AlgebraicGeometry.LimitHigherDirectImageExchange` | 11 | 1 |
 | `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula` | 22 | 1 |
 | `Sheaf.AlgebraicGeometry.ProjectionFormulaFiniteObjectwise` | 23 | 1 |
