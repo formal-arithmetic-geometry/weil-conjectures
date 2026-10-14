@@ -30,6 +30,11 @@ theorem schemeMVOrdinaryOpenCounit_square_section_element
           ((RingedSpace.moduleDirectImage (h ⁻¹ᵁ U).ι.toLRSHom.toShHom).obj M) ≫
         (RingedSpace.moduleDirectImage (h ∣_ U).toLRSHom.toShHom).map
           ((schemeOpenModuleAdjunction X (h ⁻¹ᵁ U)).counit.app M)).val.app W) x := by
-  sorry
+  -- The comparison maps and counits are restrictions on the underlying sections.
+  change M.val.presheaf.map _ (M.val.presheaf.map _ x) =
+    M.val.presheaf.map _ (M.val.presheaf.map _ x)
+  -- Combine the restrictions; the composite arrows agree since opens form a thin category.
+  simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp]
+  congr 1
 
 end AlgebraicGeometry
