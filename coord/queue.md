@@ -30,13 +30,11 @@
 | `Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling` | 12 | 0 | repair |
 | `Sheaf.AlgebraicGeometry.SheafZeroStalks` | 14 | 0 | repair |
 | `Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker` | 9 | 0 | repair |
-| `Sheaf.RingTheory.ProjectiveResolutionExtDegree` | 16 | 0 | repair |
 | `Sheaf.Topology.RingedModuleSkyscraper` | 10 | 0 | repair |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed` | 8 | 0 | repair |
 | `Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf` | 10 | 0 | repair |
 | `Sheaf.CategoryTheory.SiteSystemStrictificationData` | 10 | 1 | disputed |
 | `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 20 | 1 | disputed |
-| `Sheaf.RingTheory.ColimitFlatRelationDescent` | 26 | 1 | disputed |
 | `Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex` | 28 | 1 | disputed |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
@@ -50,7 +48,6 @@
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitHomotopyFactorization` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorIdealSectionCoefficientComparison` | 24 | 1 | proof |
 | `Sheaf.Paper.CechCupResolutionRepresentatives` | 24 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.BoundaryCoefficientTensorProduct` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OverlapConjugateRestriction` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCompatibility` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux` | 25 | 1 | proof |
@@ -74,12 +71,15 @@
 | `Sheaf.AlgebraicGeometry.MayerVietorisCompositionLeftNormalization` | 36 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.MayerVietorisCompositionRightNormalization` | 36 | 1 | proof |
 | `Sheaf.CategoryTheory.Abelian.DerivedBottomUnitNormalizationFormula` | 36 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.AffineModelComparisonOfBottomModels` | 39 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.AffineModelLimitHomEquationOfCoherentObjects` | 40 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.AffineModelStageHomEquationOfCoherentObjects` | 40 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.AffineModelComparisonDataFromHomEquations` | 41 | 1 | proof |
 | `Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization` | 41 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.AffineModelCoherentObjectComparisons` | 42 | 1 | proof |
 | `Sheaf.RingTheory.DvrUniformizerRootCompositumResidue` | 42 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SelfTorOrdinaryResolutionSections` | 44 | 1 | proof |
 | `Sheaf.RingTheory.DvrUniformizerRootCompositumMaximalIdeal` | 44 | 1 | proof |
 | `Sheaf.RingTheory.DvrUnitRootWeaklyUnramifiedDiagram` | 44 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SelfTorOrdinaryLocalizedComparisons` | 45 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectHomOpenMateResolutionNormalization` | 46 | 1 | proof |
 
 Waiting, not claimable: 14 modules whose proof uses a node that has no Lean declaration yet.
