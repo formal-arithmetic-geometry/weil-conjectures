@@ -2162,6 +2162,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.InternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.InternalHomGeneric
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericPerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricBiduality
+public import WeilConjectures.SixFunctors.Etale.Derived.GeometricBidualityInduction
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
