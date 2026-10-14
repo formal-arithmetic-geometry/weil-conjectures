@@ -729,6 +729,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologicalDimensio
 public import WeilConjectures.AlgebraicGeometry.Sites.FieldExtensionInjective
 public import WeilConjectures.AlgebraicGeometry.Sites.FieldTrace
 public import WeilConjectures.AlgebraicGeometry.Sites.FilteredColimitSections
+public import WeilConjectures.AlgebraicGeometry.Sites.FiniteHypercoverDescent
 public import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 public import WeilConjectures.AlgebraicGeometry.Sites.GaloisCech
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
@@ -747,6 +748,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.ModulePointFunctions
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.AlgebraicGeometry.Sites.PointConstantSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions
+public import WeilConjectures.AlgebraicGeometry.Sites.QcqsHypercoverRefinement
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnityConstant
 public import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
