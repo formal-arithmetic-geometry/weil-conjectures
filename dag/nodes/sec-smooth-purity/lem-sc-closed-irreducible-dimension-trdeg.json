@@ -24,9 +24,106 @@
   "def-kun-transcendence-degree",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-reduced-induced-closed-subscheme] to the closed subset $C$ to obtain a reduced closed immersion $i:Y\\to X$ whose image is $C$. By [def-weil-closed-immersion], $i$ identifies $|Y|$ homeomorphically with $C$ with its subspace topology. Thus $Y$ is nonempty and irreducible, and hence integral by [def-pc-integral-scheme]. The inverse image $\\eta_Y$ of $\\eta$ is a generic point of $Y$: the homeomorphism takes the closure of $\\{\\eta_Y\\}$ to the closure of $\\{\\eta\\}$ in $C$, which is all of $C$. By [lem-weil-pbc-homeomorphism-krull-dimension], $\\dim Y=\\dim C$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-closed-immersion",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-homeomorphism-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J3, 01J4, lemma-reduced-closed-subscheme and definition-reduced-induced-scheme; with Properties Tag 01ON, lemma-characterize-integral, and Topology Tag 0055"
+   }
+  },
+  {
+   "text": "The closed immersion $i$ is an immersion, hence locally of finite type by [lem-weil-pbc-immersion-base-change-lft] (2). The structure morphism of $X$ is locally of finite type since it is of finite type [def-weil-finite-type-morphism]. Their composite $Y\\to\\operatorname{Spec}K$ is locally of finite type by [lem-weil-pbc-proper-fp-permanence] (e). Only local finite type is needed here; no assertion of quasi-compactness of an arbitrary open immersion is used.",
+   "uses": [
+    "lem-weil-pbc-immersion-base-change-lft",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T5, lemma-immersion-locally-finite-type, and 01T3, lemma-composition-finite-type"
+   }
+  },
+  {
+   "text": "Use the affine cover in the definition [def-weil-finite-type-morphism] for $Y\\to\\operatorname{Spec}K$ and choose a member $U=\\operatorname{Spec}A$ containing $\\eta_Y$. Then $U$ is nonempty and $A$ is a finitely generated $K$-algebra; since $Y$ is integral, $A$ is an integral domain by [def-pc-integral-scheme]. Apply [lem-sc-integral-locally-algebraic-opens-dimension] to obtain $\\dim U=\\dim Y$. The affine identification and [lem-weil-pbc-homeomorphism-krull-dimension] give $\\dim U=\\dim\\operatorname{Spec}A$, and the explicit prime-chain identification in [def-weil-pbc-krull-dimension-ring] gives $\\dim\\operatorname{Spec}A=\\dim A$. Thus $\\dim C=\\dim A$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-pc-integral-scheme",
+    "lem-sc-integral-locally-algebraic-opens-dimension",
+    "lem-weil-pbc-homeomorphism-krull-dimension",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21, lemma-dimension-locally-algebraic, proof of (6) referring to (3): reduction to an affine open"
+   }
+  },
+  {
+   "text": "By [lem-sc-integral-function-field-affine-fraction] applied to the integral scheme $Y$ and its nonempty affine open $U$, the generic stalk $F=\\mathcal O_{Y,\\eta_Y}$ is a field of fractions of $A$ via the germ map $A\\to F$. Explicitly, the map $\\operatorname{Frac}(A)\\to F$, $g/h\\mapsto g_{\\eta_Y}h_{\\eta_Y}^{-1}$, is well-defined and injective by cross multiplication and injectivity of the germ map, and is surjective by the cited fraction description. It respects $K$ because germs of constant sections give the structure map $K\\to F$. By [def-weil-residue-field], $\\kappa_Y(\\eta_Y)=F/(0)$ since $F$ is a field; the map $F/(0)\\to F$, $[f]\\mapsto f$, is a $K$-field isomorphism. Thus $\\kappa_Y(\\eta_Y)$ is canonically a fraction field of $A$ with its prescribed $K$-structure.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RV, lemma-integral-scheme-rational-functions, integral case; Schemes Tag 01HV, lemma-spec-sheaves, stalk formula"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-type-domain-dimension-trdeg] with ground field $K$, finite type domain $A$, and fraction field $F$ from step 4. It gives $\\dim A=\\operatorname{trdeg}_K F$, hence $\\dim C=\\operatorname{trdeg}_K\\kappa_Y(\\eta_Y)$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P0, lemma-dimension-prime-polynomial-ring, first assertion; the algebra lemma explicitly invoked by Varieties 0A21(6)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-closed-immersion-residue-field-iso], $i$ induces an isomorphism $\\kappa_X(\\eta)\\to\\kappa_Y(\\eta_Y)$. It respects $K$ because the structure morphism of $Y$ is the composite through $i$. Such an isomorphism preserves algebraic independence: a polynomial over $K$ vanishes on a tuple if and only if it vanishes on its image, by injectivity and $K$-linearity, and the inverse isomorphism gives the reverse correspondence. Thus their transcendence degrees agree by [def-kun-transcendence-degree]. Substitution in step 5 proves $\\dim C=\\operatorname{trdeg}_K\\kappa_X(\\eta)$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QO, lemma-closed-immersion, affine quotient description; Fields Tag 030G, definition-transcendence-degree"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-homeomorphism-krull-dimension",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-weil-residue-field",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "def-kun-transcendence-degree"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0A21 and 0B1C, lemma-dimension-locally-algebraic (6), its proof via (3) and Algebra 00P0, on the reduced induced closed subscheme of C"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -83,15 +180,130 @@
    "results": "8 hits: Algebra.IsAlgebraic.rank_fractionRing, Algebra.IsAlgebraic.rank_fractionRing_mvPolynomial, Algebra.IsAlgebraic.rank_fractionRing_polynomial, Algebra.IsAlgebraic.lift_rank_of_isFractionRing, RatFunc.rank_ratFunc_ratFunc, Algebra.IsAlgebraic.rank_of_isFractionRing, RatFunc.finrank_ratFunc_ratFunc, Algebra.IsAlgebraic.finrank_of_isFractionRing; the returned ringed-space structure-sheaf and algebraic rank declarations do not state this small-etale-site or scheme dimension assertion.",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(trdeg|transcendence).*(dim|Dim)|(dim|Dim).*(trdeg|transcendence)",
+   "results": "0 hits: ; inspected results do not state the scheme dimension equality (rank hits concern module ranks or ideal-generator bounds).",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "dimension irreducible closed subset finite type scheme field transcendence degree generic point",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Krull dimension of an irreducible closed subset of a finite type scheme over a field equals the transcendence degree of its generic residue field",
+   "results": "8 hits: AlgebraicGeometry.Scheme.height_of_isClosed, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, Ring.KrullDimLE.of_isLocalization, ringKrullDim_quotient, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim, IsLocalization.AtPrime.ringKrullDim_eq_height, ringKrullDim_le_ringKrullDim_add_spanFinrank; inspected results do not state the scheme dimension equality (rank hits concern module ranks or ideal-generator bounds).",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topologicalKrullDim\", \"trdeg\"",
+   "results": "0 hits: ; inspected results do not state the scheme dimension equality (rank hits concern module ranks or ideal-generator bounds).",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(krullDim|KrullDim).*(rank|Rank)|(rank|Rank).*(krullDim|KrullDim)",
+   "results": "14 hits: Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/KrullDimension/Regular.lean, Mathlib/RingTheory/KrullDimension/Regular.lean, Mathlib/RingTheory/KrullDimension/Regular.lean; inspected results do not state the scheme dimension equality (rank hits concern module ranks or ideal-generator bounds).",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ringKrullDim\", \"trdeg\"",
+   "results": "0 hits: ; inspected results do not state the scheme dimension equality (rank hits concern module ranks or ideal-generator bounds).",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an integral algebraic scheme over a field its dimension is the transcendence degree of the field of rational functions",
+   "results": "8 hits: RatFunc.finrank_ratFunc_ratFunc, RatFunc.rank_ratFunc_ratFunc, Algebra.IsAlgebraic.rank_fractionRing_polynomial, Algebra.IsAlgebraic.rank_fractionRing_mvPolynomial, MvRatFunc.rank_eq_max_lift, Algebra.IsAlgebraic.rank_fractionRing, Algebra.IsAlgebraic.lift_rank_of_isFractionRing, functionField_iff; inspected results do not state the scheme dimension equality (rank hits concern module ranks or ideal-generator bounds).",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated algebra over a field that is a domain, the ring Krull dimension equals the transcendence degree of its fraction field",
+   "results": "8 hits: Algebra.IsAlgebraic.rank_fractionRing, Algebra.IsAlgebraic.finrank_of_isFractionRing, Algebra.IsAlgebraic.lift_rank_of_isFractionRing, Algebra.IsAlgebraic.rank_fractionRing_mvPolynomial, Algebra.IsAlgebraic.rank_fractionRing_polynomial, Algebra.IsAlgebraic.rank_of_isFractionRing, trdeg_lt_aleph0, RatFunc.rank_ratFunc_ratFunc. The rank declarations concern module rank under algebraicity, and trdeg_lt_aleph0 asserts finiteness only; none gives the dimension equality.",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-support-dimension-union",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-sc-closed-irreducible-dimension-trdeg",
+  "worker": "stage1",
+  "summary": "Kept the statement; realized Stacks 0A21(6) using the reduced induced closed subscheme, an integral affine chart, Algebra 00P0, and the generic residue-field identification. Reused all needed DAG statements; created no nodes. Checked the closed immersion and K-linearity hypotheses and recorded fresh Mathlib searches. Second reading made the canonical fraction-field and residue-field identifications explicit.",
+  "blueprint": "Proof, 'The dimension formula for finite-type domains gives dim S <= a' and 'The closure Z of the image of S has dimension at most a'. The six proof steps justify the generic-residue-field dimension equality used in both dimension bounds.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Existence of the reduced closed subscheme on C (01J3). This is a generic tool underneath the support-dimension argument; the unit has no statement giving it."
+   },
+   {
+    "node": "lem-weil-pbc-homeomorphism-krull-dimension",
+    "why": "Invariance of Krull dimension under the homeomorphisms with C and an affine spectrum. This is a generic tool underneath the support-dimension argument; the unit has no statement giving it."
+   },
+   {
+    "node": "lem-weil-pbc-immersion-base-change-lft",
+    "why": "Local finite type of the closed immersion (01T5). This is a generic tool underneath the support-dimension argument; the unit has no statement giving it."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Composition of locally finite type morphisms, clause (e) (01T3). This is a generic tool underneath the support-dimension argument; the unit has no statement giving it."
+   },
+   {
+    "node": "lem-sc-integral-locally-algebraic-opens-dimension",
+    "why": "Dimension unchanged on a nonempty open of an integral locally algebraic scheme (0A21(3)). This is a generic tool underneath the support-dimension argument; the unit has no statement giving it."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "The generic stalk is a fraction field of the affine chart (01RV, 01HV). This is a generic tool underneath the support-dimension argument; the unit has no statement giving it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "why": "The commutative algebra dimension theorem (00P0). This is a generic tool underneath the support-dimension argument; the unit has no statement giving it."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "why": "The ambient and closed subscheme generic residue fields agree. This is a generic tool underneath the support-dimension argument; the unit has no statement giving it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-homeomorphism-krull-dimension",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "lem-weil-pbc-closed-immersion-residue-field-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NL-df89171c7",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-df89171c7 (reviewer sub-agent of L); spot-checked: Read all six proof steps, cited statements and source locations. Stacks 0A21/0B1C, 01J3/01J4, 01HV/01RV, 01QO and 00P0 support the argument with all hypotheses intact. Checked K-compatible field maps, edge cases, duplicate candidates and dependency cycles; accepted the eight declared generic tool uses. No new nodes, repairs or target weakening. Concrete checks recorded in review.md."
+ }
 }
