@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Sheaf.AlgebraicGeometry.OrdinaryEvaluationTransportSummandProjection
+import Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverComponentIdentity
+import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationComponent
 
 /-! # Evaluation components with a fixed normalized tensor comparison
 
@@ -36,6 +39,19 @@ noncomputable local instance ordinaryComponentSchemePreadditive (Y : Scheme.{u})
     MonoidalPreadditive (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed Y.sheaf).1
 
+attribute [local irreducible] homComplexFunctor Scheme.Modules.overEquiv
+  schemeOrdinaryEvaluationComponent
+  Scheme.Modules.overEquivFunctorObjUnitIso HomologicalComplex.singleMapHomologicalComplex
+
+private theorem ordinaryTransport_congrMiddle
+    {C : Type*} [Category C] {A B D E G : C}
+    (a : A ⟶ B) (b : B ⟶ D) (c : E ⟶ G) {f g : D ⟶ E} (h : f = g) :
+    a ≫ b ≫ f ≫ c = a ≫ b ≫ g ≫ c := by
+  subst g
+  rfl
+
+-- These two forall hypotheses are used after `intro` in the proof below.
+set_option linter.unusedVariables false in
 /-- A fixed normalized tensor comparison transports all ordinary evaluation components.
 Source: Stacks Project, Tags 0A8X and 08DQ, the ordinary evaluation calculation;
 Tag 08DL, restriction of internal Hom.
@@ -147,6 +163,20 @@ theorem ordinaryEvaluation_component_over_transport (X : Scheme.{u}) (U : X.Open
         IsSchemeOrdinaryEvaluation U.toScheme (T.obj P) (T.obj F)
           ((c ≪≫ (((curriedTensor (SheafOfModules.{u}
             (moduleRings U.toScheme.toRingedSpace))).map₂CochainComplex).obj
-              (T.obj F)).mapIso d).inv ≫ T.map f ≫ (b F).hom) := by sorry
+              (T.obj F)).mapIso d).inv ≫ T.map f ≫ (b F).hom) := by
+  set_option backward.isDefEq.respectTransparency.types true in
+  set_option backward.isDefEq.respectTransparency true in
+    intro L T e he b hπ a d m hunit hsymm F c hc f hf
+    apply schemeOrdinaryEvaluation_of_components
+    intro O D π p q n r hpq
+    have ht := ordinaryEvaluation_transport_summand_projection X U P e b hπ
+      d m F c hc f p q n r hpq
+    have hv := ordinaryEvaluation_over_component_identity X U P e he b hπ
+      m hunit hsymm F p q n r hpq
+    have hl := congrArg (fun k =>
+      (Scheme.Modules.overEquiv U).functor.map k) (hf p q n r hpq)
+    have htotal := ht.trans
+      ((ordinaryTransport_congrMiddle _ _ _ hl).trans hv)
+    exact htotal
 
 end AlgebraicGeometry
