@@ -1,6 +1,6 @@
 # Work queue
 
-48 items; claim with `tools/claim.py next <group> [--stage N]`.
+47 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (48)
+## Stage 3: modules to prove (47)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -34,22 +34,21 @@
 | `Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictedCounitCancellation` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenUnionCompatibleChainData` | 25 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.TopRestrictionCoefficientCoherence` | 26 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization` | 25 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux` | 25 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.DerivedPullbackCompositionCounitNormalization` | 27 | 1 | proof |
+| `Sheaf.Paper.ModuleCupEqualDerivedMapsClass` | 27 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.HorizontalOrdinaryForwardFixedPasting` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverComponentIdentity` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleUnionHomotopyChainData` | 28 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.TensorPullbackCompositionHomotopyCounit` | 28 | 1 | proof |
-| `Sheaf.Paper.ModuleCupSinglePairingHomology` | 28 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.HorizontalTransferInverseFormula` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SchemeCanonicalTensorUnitComponent` | 29 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SchemeTensorHomUncurrySummandNaturality` | 30 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuity` | 31 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeDerivedTensorHomologyCoordinates` | 32 | 1 | proof |
-| `Sheaf.Paper.ModuleCupShiftedUnitChainTensor` | 32 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineStalkBaseSecondLocalizationComparison` | 33 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeDerivedTensorMate` | 33 | 1 | proof |
-| `Sheaf.Paper.ModuleCupHomologyEvaluationBijective` | 33 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FlatTelescopeArrowBarData` | 34 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FlatTelescopeBoundedNormalizationExtension` | 34 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffinePushforwardComparisonFactorization` | 35 | 1 | proof |
