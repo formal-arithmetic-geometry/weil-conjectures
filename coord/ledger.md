@@ -14400,3 +14400,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:31 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (stage 3; reviewer PASS; first push; landing 20261014T033109-L-605227 (proof); batch 20261014T033101; modules 1; new nodes 0)
 - 03:31 L: merged deliver/Q1/Sheaf.CategoryTheory.MapExtendHomology (stage 3; reviewer PASS; first push; landing 20261014T033110-L-605430 (proof); batch 20261014T033101; modules 1; new nodes 0)
 - 03:31 L: merged deliver/Q1/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone (stage 3; reviewer PASS; first push; landing 20261014T033110-L-605599 (proof); batch 20261014T033101; modules 1; new nodes 0)
+- 03:31 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T033111-L-605889 (proof); batch 20261014T033101; modules 1; new nodes 0)

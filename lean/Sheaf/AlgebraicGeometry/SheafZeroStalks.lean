@@ -49,3 +49,6 @@ This compatibility module intentionally contains no declarations after duplicate
 
 -- Second reading (J2, 2026-10-14): compiled cleanly; no declarations or proof holes.
 -- Verification of the recorded duplicate removal adds no mathematical proof progress.
+
+-- Verification (Q2, 2026-10-14): the assigned compatibility module has no declarations
+-- or proof holes. The prior duplicate-removal landing supplies the repair; no new proof.
