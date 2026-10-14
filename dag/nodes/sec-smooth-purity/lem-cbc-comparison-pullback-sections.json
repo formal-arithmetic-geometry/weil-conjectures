@@ -25,9 +25,123 @@
   "def-weil-pbc-etale-sheaf-of-sets",
   "lem-weil-pbc-sets-etale-inverse-image-composition-units"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $g:Z\\to Y$ define $r_g$ on $A_X(F)(Y)$ by the inverse-image unit on global sections followed by $c_{f,g,F}$. The unit formula (1) and associativity (2) give $r_h r_g=r_{gh}$: both send a section to its twice-pulled-back section and then use the equal composition comparisons. For an identity morphism the presheaf inverse-image formula is the original presheaf: at $V$ the pair $(V,\\mathrm{id})$ is initial in the category of pairs and hence terminal in its opposite. Sheafification leaves this sheaf unchanged by its universal property. Thus $r_{\\mathrm{id}}=\\mathrm{id}$. Naturality (0) in a sheaf morphism makes $F\\mapsto A_X(F)$ a functor of presheaves.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0GLZ, presheaf rule and its functoriality; Sites Tag 03CB for composition"
+   }
+  },
+  {
+   "text": "Let $\\{g_i:Y_i\\to Y\\}$ be a pro-etale covering. It is fpqc by the site definition. Apply fpqc descent to the scheme $Y$ and the set sheaf $f^{-1}F$ on $Y_{\\mathrm{et}}$. It gives the equalizer of its sections over $Y$, the $Y_i$, and $Y_i\\times_Y Y_j$. The composition-unit comparisons identify these terms, and both arrows, with $A_X(F)(Y)$, $A_X(F)(Y_i)$ and $A_X(F)(Y_i\\times_Y Y_j)$ and the restrictions from Step 1. Consequently $A_X(F)$ is a sheaf, including the empty cover of the empty object. The argument requires neither quasi-compactness nor quasi-separatedness of $Y$.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-etale-sections-fpqc-descent",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0GLZ, first proof paragraph; Tag 098A lemma-recognize-proetale-covering; Etale Cohomology Tag 09XN lemma-describe-pullback"
+   }
+  },
+  {
+   "text": "For an etale $e:U\\to X$, its inverse image on sets is restriction, as follows directly from the given presheaf construction. For $V\\to U$ etale, the composite $V\\to X$ is etale, and a pair $(W,\\varphi:V\\to U\\times_X W)$ is equivalently an $X$-map $V\\to W$. The pair $(V,V\\to U\\times_X V)$ is initial in this category, so the colimit over its opposite is $F(V)$ by restriction along $V\\to W$. These identifications are natural in $V$ and $F$. Restriction $V\\mapsto F(V\\to X)$ is a sheaf because an etale cover over $U$ is an etale cover of the same object over $X$. The sheafification universal property therefore gives $e^{-1}F\\cong F|_{U_{\\mathrm{et}}}$. Under it the unit on $W$ is restriction along $U\\times_X W\\to W$. Evaluating at $V=U$ gives a natural bijection $j_{F,U}:F(U)\\to A_X(F)(U)$, explicitly sending $s$ first to its inverse-image unit section $e^*s$ on $U\\times_XU$ and then restricting along the diagonal $U\\to U\\times_XU$. These bijections form $j_F:F\\cong\\nu_{X,*}A_X(F)$ by the unit/composition formulas.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-etale-localization-functor-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0GLZ, paragraph F = epsilon_* a(F); detail of etale restriction via the inverse-image construction"
+   }
+  },
+  {
+   "text": "Given a pro-etale sheaf $G$ and $\\alpha:F\\to\\nu_{X,*}G$, define $G_Y(V\\to Y)=G(V\\to X)$ for $f:Y\\to X$ weakly etale. This is well defined: the comparison inclusion over $Y$ makes an etale $V\\to Y$ weakly etale, and weakly etale composition makes $V\\to X$ an object. The fpqc-finer-than-etale lemma makes every etale covering family over $Y$ fpqc; its arrows are weakly etale by the comparison inclusion over $Y$. Hence it is a pro-etale covering of the same object over $X$ by the pro-etale site definition, and the sheaf equalizer for $G$ makes $G_Y$ an etale sheaf. Define $b_Y:F\\to f_*G_Y$ on $U\\to X$ as $\\alpha_U$ followed by restriction $G(U)\\to G(Y\\times_XU)$. All these objects exist by etale base change and weakly etale composition. Restriction functoriality makes $b_Y$ a morphism of sheaves. The sets inverse-image adjunction gives its unique transpose $t_Y:f^{-1}F\\to G_Y$. Put $\\beta_Y=\\Gamma(Y,t_Y):A_X(F)(Y)\\to G(Y)$.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0GLZ, construction of a(epsilon_*G) -> G, with alpha inserted before restriction"
+   }
+  },
+  {
+   "text": "The maps $\\beta_Y$ are natural for every $X$-map $g:Z\\to Y$, without assuming $g$ etale. Restriction defines $d_g:G_Y\\to g_*G_Z$, with component $G(V)\\to G(Z\\times_YV)$ at $V\\to Y$; let $\\rho_g:g^{-1}G_Y\\to G_Z$ be its transpose. Compare $a=\\rho_g\\circ g^{-1}(t_Y)$ and $b=t_Z\\circ c_{f,g,F}$, both from $g^{-1}f^{-1}F$ to $G_Z$. Take their transposes successively under $g^{-1}\\dashv g_*$ and $f^{-1}\\dashv f_*$. At $U\\to X$ these are maps $F(U)\\to G(Z\\times_XU)$: the transpose of $a$ sends $s$ first to $\\alpha_U(s)|_{Y\\times_XU}$ and then restricts to $Z\\times_XU$, by the defining equations for $t_Y$ and $\\rho_g$; the transpose of $b$ sends $s$ directly to $\\alpha_U(s)|_{Z\\times_XU}$, by the composition-unit formula (1) and the defining equation for $t_Z$. Restriction functoriality makes these values equal for every $U,s$, so injectivity of the two adjunction bijections gives $a=b$. Evaluate on the $g$-pullback of a section of $f^{-1}F$ over $Y$. The defining equation for $\\rho_g$ identifies the left value with $G(g)\\beta_Y$, and the right value is $\\beta_Zr_g$. Thus $\\beta$ is a sheaf morphism. For $\\psi:F'\\to F$, the defining maps satisfy $b_Y(\\alpha\\psi)=b_Y(\\alpha)\\psi$; for $\\chi:G\\to G'$, they satisfy $b_Y((\\nu_*\\chi)\\alpha)=f_*(\\chi|_{Y_{\\mathrm{et}}})b_Y(\\alpha)$. Naturality of the inverse-image adjunction and evaluation gives naturality of $\\beta$ in both variables.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-weakly-etale-composition-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0GLZ, putting the transposes together for all f; omitted verification supplied by taking the two successive adjunction transposes"
+   }
+  },
+  {
+   "text": "Conversely, a sheaf morphism $\\beta:A_X(F)\\to G$ gives $\\alpha=\\nu_{X,*}(\\beta)j_F$. Starting with $\\alpha$ and constructing $\\beta$, on etale $U$ and $s\\in F(U)$ the formula for $t_U$ sends the unit section on $U\\times_XU$ to $\\alpha_U(s)$ restricted there; pulling back along the diagonal sends it to $\\alpha_U(s)$ itself. Thus the reconstructed $\\alpha$ equals the original. For the other composite, start with $\\beta$. Fix $Y$ and any etale $V\\to Y$. Step 3 over $Y$ identifies $(V\\to Y)^{-1}f^{-1}F$ with the restriction of $f^{-1}F$ to $V$. Its sections are $A_X(F)(V)$ by the composition comparison. Hence the components $\\beta_V$ define a sheaf morphism $f^{-1}F\\to G_Y$. On a unit section coming from $s\\in F(U)$ at $Y\\times_X U$, naturality of $\\beta$ for $Y\\times_XU\\to U$ identifies its value with $\\alpha_U(s)$ restricted to $Y\\times_XU$. It therefore has transpose $b_Y$, so adjunction uniqueness makes it $t_Y$. At $V=Y$ this says the reconstructed $\\beta_Y$ is the original. We have obtained mutually inverse, natural bijections $\\operatorname{Hom}(A_X(F),G)\\cong\\operatorname{Hom}(F,\\nu_{X,*}G)$ with unit $j_F$.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-weakly-etale-composition-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0GLZ, final proof paragraph: full verification of the two mutually inverse Hom maps"
+   }
+  },
+  {
+   "text": "The comparison definition gives another left adjoint $\\nu_X^*$ to the same restriction functor. The Hom bijection of Step 6 sends the comparison unit $\\eta_F:F\\to\\nu_{X,*}\\nu_X^*F$ to $q_F:A_X(F)\\to\\nu_X^*F$. The comparison adjunction sends $j_F$ to $p_F:\\nu_X^*F\\to A_X(F)$. By the defining equations, $\\nu_{X,*}(p_F)\\eta_F=j_F$ and $\\nu_{X,*}(q_F)j_F=\\eta_F$. Therefore $p_Fq_F$ corresponds under Step 6 to $j_F$, just as $\\mathrm{id}_{A_X(F)}$ does, and $q_Fp_F$ corresponds under the comparison adjunction to $\\eta_F$, just as $\\mathrm{id}_{\\nu_X^*F}$ does. Injectivity of the two Hom bijections gives both inverse identities. Naturality of the bijections makes $p_F$ natural in $F$. At an etale $U$, its defining equation sends the comparison unit to $j_{F,U}$, exactly the identification in Step 3. This proves every clause, with the canonical isomorphism oriented $\\nu_X^*F\\cong A_X(F)$.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0GLZ, identify the left adjoint and its unit; explicit uniqueness argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-etale-sections-fpqc-descent",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-etale-localization-functor-adjoint",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-fpqc-finer-than-etale"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0GLZ lemma-describe-pullback-from-etale; Tag 098A and Etale Cohomology Tag 09XN; omitted adjunction verification supplied in Steps 5--7"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -98,15 +212,98 @@
    "results": "8 hit(s): AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.restrictFunctorΓ, AlgebraicGeometry.Scheme.instFullEtaleOverForget",
    "date": "2026-10-14",
    "verdict": "no match: etale forgetful functors, open restriction of structure sheaves and the Grothendieck abelian instance on proetale sheaves do not give the inverse-image sections formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image from the etale site to the proetale site evaluated on Y is the global sections of the etale inverse image on Y",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.instCategoryEtale, lightProfiniteToLightCondSetIsoTopCatToLightCondSet_inv_app_val_app_hom_hom, StandardEtalePair.homEquiv_symm_apply",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits; etale forgetful functors, pro-etale Grothendieck abelian instances and Zariski structure-sheaf module adjunctions do not state the set-sheaf comparison sections formula"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(pullback|sections)|comparison.*sections|describePullback",
+   "results": "0 hit(s): ",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits; etale forgetful functors, pro-etale Grothendieck abelian instances and Zariski structure-sheaf module adjunctions do not state the set-sheaf comparison sections formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of the inverse image from the etale to the proetale site",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheaf on weakly etale schemes sending Y to global sections of etale pullback is left adjoint to restriction to etale schemes",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits; etale forgetful functors, pro-etale Grothendieck abelian instances and Zariski structure-sheaf module adjunctions do not state the set-sheaf comparison sections formula"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEt.*(pullback|evaluate|Kan)|proetale.*(adjunction|inverse)",
+   "results": "0 hit(s): ",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected returned types; etale over-category forgetful functors, topological basis extension, Gamma-Spec maps and LightCondensed Kan extension do not give this comparison sections formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProEt\", \"sheafification\"",
+   "results": "0 hit(s): ",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected returned types; etale over-category forgetful functors, topological basis extension, Gamma-Spec maps and LightCondensed Kan extension do not give this comparison sections formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a sheaf left Kan extension from the small etale site at a weakly etale scheme agrees with global sections of its inverse image",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_hom_c_app, TopCat.Sheaf.extend_hom_app, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCBasicOpens, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, LightCondensed.lanPresheaf",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected returned types; etale over-category forgetful functors, topological basis extension, Gamma-Spec maps and LightCondensed Kan extension do not give this comparison sections formula"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-proetale-comparison-stalk",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-comparison"
+ "unit": "sk-prop-sf-comparison",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-cbc-comparison-pullback-sections",
+  "worker": "stage1",
+  "summary": "Kept the source-faithful set-sheaf statement; reused fpqc descent and sets inverse-image composition/units. Wrote presheaf coherence, descent, etale restriction, the adjunction Hom maps and both inverse checks explicitly. No new node or Lean attachment is needed.",
+  "blueprint": "Realizes corrected Proof Step 3 of lem-cbc-proetale-stalk-conservative through Step 3 of lem-cbc-proetale-comparison-stalk: evaluation of comparison inverse image on strict localization. No cofinality claim or coefficient change is introduced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "why": "Generic etale inverse-image adjunction, presheaf construction and composition/unit coherence supply the maps in Steps 1--6; the unit gives no such general scheme-map tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-sections-fpqc-descent",
+    "why": "Generic descent of sections of arbitrary etale set sheaves along fpqc coverings supplies the equalizer in Step 2; the comparison unit contains no replacement for this descent theorem."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Generic theorem that etale covering families are fpqc is used to restrict G to Y_et in Step 4. It supplies covering compatibility rather than replacing the comparison route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-etale-sections-fpqc-descent",
+  "lem-weil-pbc-fpqc-finer-than-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-7776c5070",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-7776c5070 (reviewer sub-agent of L); spot-checked: Full source, DAG, unit/chapter route, cited nodes, and edge cases checked. Steps 1–7 are valid and source-faithful; the documented epsilon^{-1}G typo is correctly repaired as nu_*G. Review written to review.md; no fixes needed."
+ }
 }
