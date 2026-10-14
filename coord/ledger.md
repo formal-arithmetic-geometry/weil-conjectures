@@ -14749,4 +14749,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 16:27 L: batch 20261014T082416 dependency take-out
 - 08:29 L: merged deliver/K3/Sheaf.AlgebraicGeometry.RecordedPerfectHomNormalization (stage 3; reviewer PASS; first push; landing 20261014T082919-L-4066280 (proof); batch 20261014T082917; modules 1; new nodes 0)
-- 08:29 L: merged deliver/R2/Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate (stage 3; reviewer PASS; after a return; landing 20261014T082919-L-4066388 (interface); batch 20261014T082917; modules 2; new nodes 1; change records: coord/changes/picard-external-cup-proof-elaboration.md)
+
+- 16:33 L: batch 20261014T082917 dependency take-out

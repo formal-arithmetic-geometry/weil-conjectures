@@ -6,7 +6,6 @@ Authors: SHEAF group R4
 module
 
 public import Sheaf.AlgebraicGeometry.PicardExternalCechCupBidegree
-import Sheaf.AlgebraicGeometry.PicardExternalCechCupRefinement
 
 /-! # The external Alexander--Whitney differential calculation
 Source: Stacks Project, Tags 0BED and 07MB.
@@ -20,21 +19,6 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
-
-private lemma additiveCech_comm {K L : CochainComplex AddCommGrpCat.{w} ℕ}
-    (γ : K ⟶ L) (n : ℕ) (z : K.X n) :
-    γ.f (n + 1) (K.d n (n + 1) z) = L.d n (n + 1) (γ.f n z) :=
-  (ConcreteCategory.congr_hom (γ.comm n (n + 1)) z).symm
-
-private lemma additiveCech_cast {R T : Type w} [Ring R] [Ring T]
-    {K : CochainComplex (ModuleCat.{w} R) ℕ} {L : CochainComplex (ModuleCat.{w} T) ℕ}
-    (γ : ((forget₂ (ModuleCat.{w} R) AddCommGrpCat.{w}).mapHomologicalComplex _).obj K ⟶
-      ((forget₂ (ModuleCat.{w} T) AddCommGrpCat.{w}).mapHomologicalComplex _).obj L)
-    {n m : ℕ} (h : n = m) (z : K.X n) :
-    γ.f m (eqToHom (congrArg K.X h) z) =
-      eqToHom (congrArg L.X h) (γ.f n z) := by
-  subst m
-  rfl
 
 /-- Assemble specified bidegree maps by the tensor-total coproduct universal property.
 Source: Stacks Project, Tag 0BED, equation-kunneth-on-cech.
@@ -81,12 +65,6 @@ theorem picardExternalCechCupDegreeMaps_ι
   simp
 
 /- Adjacent differential compatibility. -/
-attribute [local irreducible] externalCupScalarCechIso externalCupRefineCech
-  tensorPullback tensorPullbackObj in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1600000 in
--- Coercion transports between three categorical Cech product presentations need extra elaboration.
 /-- Coordinate differential compatibility for one tensor-total summand.
 Source: Stacks Project, Tag 07MB; this is the inclusion-level calculation
 used to assemble the total differential identity.
@@ -132,58 +110,7 @@ theorem picardExternalCechCupDegreeMaps_comm_ι
         ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))
           (ComplexShape.up ℕ)).d n (n + 1) ≫
       picardExternalCechCupDegreeMaps f g U V F G l (n + 1) := by
-  subst n
-  rw [← Category.assoc, picardExternalCechCupDegreeMaps_ι]
-  rw [HomologicalComplex.mapBifunctor.d_eq, Preadditive.add_comp,
-    Preadditive.comp_add, HomologicalComplex.mapBifunctor.ι_D₁_assoc,
-    HomologicalComplex.mapBifunctor.ι_D₂_assoc]
-  rw [HomologicalComplex.mapBifunctor.d₁_eq _ _ _ _ (by rfl : p + 1 = p + 1) q
-    (p + q + 1) (by dsimp; omega),
-    HomologicalComplex.mapBifunctor.d₂_eq _ _ _ _ p (by rfl : q + 1 = q + 1)
-      (p + q + 1) (by dsimp; omega)]
-  have hs₁ : ComplexShape.ε₁ (ComplexShape.up ℕ) (ComplexShape.up ℕ)
-      (ComplexShape.up ℕ) (p, q) = 1 := rfl
-  have hs₂ : ComplexShape.ε₂ (ComplexShape.up ℕ) (ComplexShape.up ℕ)
-      (ComplexShape.up ℕ) (p, q) = (-1 : ℤˣ) ^ p := rfl
-  rw [hs₁, hs₂, one_smul]
-  simp only [Linear.units_smul_comp, Category.assoc]
-  dsimp only [picardExternalCechCupDegreeMaps]
-  rw [HomologicalComplex.ι_mapBifunctorDesc, HomologicalComplex.ι_mapBifunctorDesc]
-  apply ModuleCat.hom_ext
-  apply TensorProduct.ext'
-  intro a b
-  let A := (picardCechFunctor f U).obj F
-  let B := (picardCechFunctor g V).obj G
-  let W : ι × κ → (Limits.pullback f g).Opens :=
-    fun ij ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓ pullback.snd f g ⁻¹ᵁ V ij.2
-  let C := (picardCechFunctor (pullback.fst f g ≫ f) W).obj
-    (externalCupCoefficients f g F G)
-  change C.d (p + q) (p + q + 1) (l p q (a ⊗ₜ[k] b)) =
-    eqToHom (congrArg C.X (by omega : (p + 1) + q = p + q + 1))
-      (l (p + 1) q (A.d p (p + 1) a ⊗ₜ[k] b)) +
-    (-1 : ℤˣ) ^ p • eqToHom (congrArg C.X (by omega : p + (q + 1) = p + q + 1))
-      (l p (q + 1) (a ⊗ₜ[k] B.d q (q + 1) b))
-  let S := externalCupScalarCechIso (pullback.fst f g ≫ f) W
-    (externalCupCoefficients f g F G)
-  apply (ConcreteCategory.bijective_of_isIso (S.hom.f (p + q + 1))).1
-  erw [additiveCech_comm S.hom]
-  simp only [map_add, Units.smul_def, map_zsmul, Units.val_pow_eq_pow_val, Units.val_neg,
-    Units.val_one]
-  erw [additiveCech_cast S.hom (by omega : (p + 1) + q = p + q + 1),
-    additiveCech_cast S.hom (by omega : p + (q + 1) = p + q + 1)]
-  erw [externalCup_bidegree_refinement f g U V F G p q _ (hl p q),
-    externalCup_bidegree_refinement f g U V F G (p + 1) q _ (hl (p + 1) q),
-    externalCup_bidegree_refinement f g U V F G p (q + 1) _ (hl p (q + 1))]
-  erw [additiveCech_comm (externalCupScalarCechIso f U F).hom p,
-    additiveCech_comm (externalCupScalarCechIso g V G).hom q]
-  erw [additiveCech_comm
-      (externalCupRefineCech (pullback.fst f g) U W Prod.fst
-        (fun _ ↦ inf_le_left) F) p,
-    additiveCech_comm
-      (externalCupRefineCech (pullback.snd f g) V W Prod.snd
-        (fun _ ↦ inf_le_right) G) q]
-  exact cechCupCochain_leibniz W ((tensorPullback (pullback.fst f g)).obj F)
-    ((tensorPullback (pullback.snd f g)).obj G) p q _ _
+  sorry
 
 end
 end AlgebraicGeometry.Scheme.Modules
