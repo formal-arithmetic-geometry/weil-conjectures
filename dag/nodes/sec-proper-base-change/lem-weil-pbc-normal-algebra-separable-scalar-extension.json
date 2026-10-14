@@ -1,10 +1,54 @@
 {
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-separable-field-geometrically-normal] to the given separable extension $K/k$. It says that $K$ is geometrically normal over $k$: for every field extension $E/k$, $K\\otimes_k E$ is normal. This uses separability in the finitely-generated-subextension sense stated in the hypothesis, not the narrower algebraic-separability class.",
+   "uses": [
+    "lem-weil-pbc-separable-field-geometrically-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3M, label lemma-base-change-normal-by-separable; Algebra Tags 0C30 and 06DF"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-geometrically-normal-tensor-normal] with its $A=K$ and its $B$ equal to the given normal algebra. Step 1 supplies geometric normality of $A$, while the item supplies normality of $B$. Its conclusion is that $K\\otimes_k B$ is normal, with no finite-type or nonzero restriction.",
+   "uses": [
+    "lem-weil-pbc-geometrically-normal-tensor-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3M, label lemma-base-change-normal-by-separable; Algebra Tags 0C30 and 06DF"
+   }
+  },
+  {
+   "text": "The maps $K\\otimes_k B\\to B\\otimes_k K$, $c\\otimes b\\mapsto b\\otimes c$, and $B\\otimes_k K\\to K\\otimes_k B$, $b\\otimes c\\mapsto c\\otimes b$, respect additivity and the balancing relations $(cu)\\otimes b=c\\otimes(ub)$ for $u\\in k$. Their composites fix pure tensors, so they are inverse maps. The tensor universal property and generation by pure tensors in [def-weil-pbc-module-tensor-product] extend these balanced maps uniquely. The multiplication formula specified in the item shows they preserve products and the unit. This ring isomorphism sends prime ideals bijectively to prime ideals and induces isomorphisms of their localizations by $x/s\\mapsto f(x)/f(s)$. Each localization on the target is therefore a domain; the induced fraction-field isomorphism carries monic equations and roots in both directions, so integral closedness is preserved. By [def-weil-pbc-normal-ring], $B\\otimes_k K$ is normal. For $B=0$ both tensor rings are zero and have no primes; disconnected $B$ is covered prime by prime.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3M, label lemma-base-change-normal-by-separable; Algebra Tags 0C30 and 06DF"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-separable-field-geometrically-normal",
+  "lem-weil-pbc-geometrically-normal-tensor-normal",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C3M, label lemma-base-change-normal-by-separable; Algebra Tags 0C30 and 06DF"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-reduced-algebraic-normalization-field-change",
   "by": "worker",
@@ -117,5 +161,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-normal-algebra-separable-scalar-extension",
+  "worker": "stage1",
+  "summary": "Followed 0C3M through 0C30 and 06DF, adding exactly their two general algebra inputs as statement-only nodes. Kept all hypotheses and expanded the tensor swap and preservation of normal prime localizations. No project attachment or Mathlib match.",
+  "blueprint": "Second paragraph of lemma-weil-pbc-normalization-exact-sequence: normality of the normalization after algebraically closed extension, via the existing normalization field-change item."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-a523bad3e",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-a523bad3e (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and cited sources in full. Stacks 0C3M, 0C30 and 06DF support the three-step proof without added finiteness or algebraicity hypotheses; edge cases, dependencies and duplicate candidates checked. Corrected incomplete metadata on both new nodes and one parser-error search verdict. Statements unchanged. Full findings in review.md; corrected JSON files under fixes/dag/nodes/sec-proper-base-change/.; 2 file(s) fixed by the reviewer"
  }
 }
