@@ -14118,3 +14118,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:08 L: merged deliver/H4/Sheaf.CategoryTheory.DerivedModuleRankOneCompact (stage 3; reviewer PASS; first push; landing 20261014T010844-L-3164331 (interface); batch 20261014T010832; modules 3; new nodes 2)
 - 01:08 L: merged deliver/J3/Sheaf.AlgebraicGeometry.DerivedPullbackKFlatCounitShiftAdjustment (stage 3; reviewer PASS; first push; landing 20261014T010844-L-3164476 (interface); batch 20261014T010832; modules 3; new nodes 2)
 - 01:08 L: merged deliver/J3/Sheaf.AlgebraicGeometry.Morphisms.DvrGaloisComponentsRootCotangent (stage 3; reviewer PASS; first push; landing 20261014T010845-L-3164649 (interface); batch 20261014T010832; modules 4; new nodes 3)
+- 01:08 L: merged deliver/K3/Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationDvrComparison (stage 3; reviewer PASS; first push; landing 20261014T010845-L-3164798 (interface); batch 20261014T010832; modules 3; new nodes 2)
