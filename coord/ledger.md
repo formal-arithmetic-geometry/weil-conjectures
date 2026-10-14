@@ -14686,3 +14686,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:25 L: returned deliver/XRd4f549ddc0d8d578/Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso (reviewer RETURN: (reviewer X-b3c5b, head b3c5b257f) A3 (forced-adaptation rule): ProperFlatOpenSquareMateIso is not forced by this delive)
 
 - 14:27 L: batch 20261014T061020 dependency take-out
+- 06:38 L: merged deliver/XRbb9b20b2b4a981ff/Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap (stage 3; reviewer PASS; first push; landing 20261014T063813-L-2812284 (proof); batch 20261014T063810; modules 1; new nodes 0; change records: coord/changes/dualityEquationBaseChangeMap-repair.md)
