@@ -22,7 +22,7 @@
 | `Sheaf.AlgebraicGeometry.PicardDegreeSheafFpqc` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula` | 20 | 1 | proof |
-| `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula` | 22 | 3 | proof |
+| `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula` | 22 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionsFactorization` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation` | 24 | 1 | proof |
 | `Sheaf.Paper.ModuleCupEqualDerivedMapsClass` | 27 | 1 | proof |
@@ -45,4 +45,4 @@ Waiting, not claimable: 5 modules whose proof uses a node that has no Lean decla
 | `Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic` | 6 | 1 |
 | `Sheaf.AlgebraicGeometry.BaseChangeClosedCoefficientRange` | 8 | 1 |
 | `Sheaf.AlgebraicGeometry.BaseChangeOpenInjectiveCoefficientZero` | 8 | 1 |
-| `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula` | 22 | 3 |
+| `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula` | 22 | 2 |
