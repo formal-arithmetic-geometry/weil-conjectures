@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.OverlapPairCanonicalComparisons
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.AlgebraicGeometry.OverlapSingleChartRestriction
 
 /-! # Restricting a conjugated transition to an iterated overlap
 
@@ -20,6 +21,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat
 namespace AlgebraicGeometry
 noncomputable section
+set_option allowUnsafeReducibility true
+attribute [local reducible] Precoverage.ZeroHypercover.pullback₁
+  Scheme.Cover.pullbackHom
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -121,11 +125,12 @@ def overlapConjugatedTransition {X Z H : Scheme.{u}} (U : X.OpenCover.{u})
   τa.hom ≫ (Scheme.Modules.pullback ha).map (e a).hom ≫
     D.hom ν ha hb hνa hνb ≫ (Scheme.Modules.pullback hb).map (e b).inv ≫ τb.inv
 
-/-- Restriction of a conjugated transition commutes with the iterated component comparisons.
+
+/-- Explicit-transition intermediate for the conjugated restriction theorem.
 A pair morphism whose base change is this restricted conjugate satisfies the pair square.
 There is no tensor stage morphism or recovery hypothesis in this statement.
 Source: Stacks Project, Tag 01ZR (2), first proof, and Tag 0095.
-(blueprint: lem-pc-overlap-conjugate-restriction).
+(blueprint: lem-pc-overlap-conjugate-restriction-explicit).
 
 Proof: Substitute the equation naming the conjugated transition. Expand the two
 direct restriction isomorphisms. Naturality moves the
@@ -141,6 +146,40 @@ identity and use associativity to obtain overlapPairSquare. Projection equations
 hz_b and hν give exactly the prescribed base and chart maps. This argument
 uses only naturality and invertible comparisons, and also applies to empty
 overlaps, repeated charts, zero modules, and identity base changes. -/
+theorem overlap_conjugate_restriction_explicit {X Y Z H : Scheme.{u}} (U : X.OpenCover.{u})
+    (q : Y ⟶ X) (p : Z ⟶ Y) (t : Z ⟶ X) (h : p ≫ q = t)
+    (N : (d : U.I₀) → (U.X d).Modules) (M : Z.Modules)
+    (e : ∀ d, (Scheme.Modules.pullback (U.pullbackHom t d)).obj (N d) ≅
+      (Scheme.Modules.pullback ((U.pullback₁ t).f d)).obj M)
+    (a b : U.I₀) (ν : H ⟶ Z)
+    (ha : H ⟶ (U.pullback₁ t).X a) (hb : H ⟶ (U.pullback₁ t).X b)
+    (hνa : ha ≫ (U.pullback₁ t).f a = ν) (hνb : hb ≫ (U.pullback₁ t).f b = ν)
+    (z : pullback (((U.pullback₁ q).pullback₁ p).f a)
+      (((U.pullback₁ q).pullback₁ p).f b) ⟶ H)
+    (hza : z ≫ ha = pullback.fst _ _ ≫ overlapIteratedChartHom U q p t h a)
+    (hzb : z ≫ hb = pullback.snd _ _ ≫ overlapIteratedChartHom U q p t h b)
+    (S T : H.Modules)
+    (τa : S ≅ (Scheme.Modules.pullback ha).obj
+      ((Scheme.Modules.pullback (U.pullbackHom t a)).obj (N a)))
+    (τb : T ≅ (Scheme.Modules.pullback hb).obj
+      ((Scheme.Modules.pullback (U.pullbackHom t b)).obj (N b))) (θ : S ⟶ T) :
+    let ξa := overlapDirectRestrictionIso U q p t h N a b a ha z
+      (pullback.fst _ _) hza S τa
+    let ξb := overlapDirectRestrictionIso U q p t h N a b b hb z
+      (pullback.snd _ _) hzb T τb
+    let W := (U.pullback₁ q).pullback₁ p
+    let D := (modulesPseudofunctor.toDescentData W.f).obj M
+    let ε := overlapIteratedComparison U q p t h N M e
+    let V : Y.OpenCover.{u} := U.pullback₁ q
+    let A := fun d ↦ (Scheme.Modules.pullback (U.pullbackHom q d)).obj (N d)
+    ∀ (φ : (Scheme.Modules.pullback (pullback.fst (V.f a) (V.f b))).obj (A a) ⟶
+        (Scheme.Modules.pullback (pullback.snd (V.f a) (V.f b))).obj (A b)),
+      modulesPseudofunctor.overlapPairBaseChangeHom (V.f a) (V.f b) p
+        (V.pullbackHom p a) (V.pullbackHom p b) (W.f a) (W.f b)
+        (V.pullbackHom_map p a) (V.pullbackHom_map p b) (A a) (A b) φ =
+        ξa.inv ≫ (Scheme.Modules.pullback z).map θ ≫ ξb.hom →
+      overlapPairSquare V A p D ε a b φ := by sorry
+
 theorem overlap_conjugate_restriction {X Y Z H : Scheme.{u}} (U : X.OpenCover.{u})
     (q : Y ⟶ X) (p : Z ⟶ Y) (t : Z ⟶ X) (h : p ≫ q = t)
     (N : (d : U.I₀) → (U.X d).Modules) (M : Z.Modules)
@@ -175,7 +214,11 @@ theorem overlap_conjugate_restriction {X Y Z H : Scheme.{u}} (U : X.OpenCover.{u
         (V.pullbackHom p a) (V.pullbackHom p b) (W.f a) (W.f b)
         (V.pullbackHom_map p a) (V.pullbackHom_map p b) (A a) (A b) φ =
         ξa.inv ≫ (Scheme.Modules.pullback z).map θ ≫ ξb.hom →
-      overlapPairSquare V A p D ε a b φ := by sorry
+      overlapPairSquare V A p D ε a b φ := by
+  intro θ hθ
+  subst θ
+  apply overlap_conjugate_restriction_explicit U q p t h N M e a b ν ha hb hνa hνb
+    z hza hzb S T τa τb
 
 end
 end AlgebraicGeometry

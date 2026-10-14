@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-overlap-single-chart-restriction",
+ "kind": "statement",
+ "title": "Canonical restriction equation for a single chart",
+ "statement": "For schemes X,Y,Z,H,K, an open cover U of X, maps q:Y→X, p:Z→Y, t:Z→X with p≫q=t, chart modules N_d, a module M on Z and direct component isomorphisms e_d:u_d^*N_d≅f_d^*M, fix one chart d. Write W for the iterated cover and d_d:W_d→U^t_d for the canonical chart map. Let C_d:w_d^*v_d^*N_d≅d_d^*u_d^*N_d be the three canonical composition and congruence factors. Given ν:H→Z, hd:H→U^t_d, r:K→W_d, z:K→H and k:K→Z with hd≫f_d=ν, r≫W.f d=k, z≫hd=r≫d_d, z≫ν=k, take S on H and τ:S≅hd^*u_d^*N_d. Let ξ:z^*S≅r^*w_d^*v_d^*N_d be pullback of τ, composition along z and hd using the given equality, inverse composition along r and d_d, and pullback of C_d inverse. Then ξ.hom≫r^*(epsilon_d.hom)≫comp(r,W.f d,k).hom equals z^*((τ≪hd^*e_d≪comp(hd,f_d,ν)).hom)≫comp(z,ν,k).hom. All compositions are in Lean order. This is a single-chart identity with no pair transition or pair-square conclusion.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01ZR",
+  "place": "Tag 01ZR (2), first proof; Tags 0095 and 0096, inverse image and its canonical adjunction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-local-overlap-transitions",
+  "def-pc-overlap-pair-canonical-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Factor epsilon_d into C_d followed by pullback of e_d and composition along d_d and the direct chart structure map. Expand ξ and cancel r^*(C_d inverse) against r^*(C_d).",
+   "uses": [
+    "def-pc-overlap-pair-canonical-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality moves the pullback of e_d through the inverse composition along r and d_d. Apply the inverse-image associativity identity along r,d_d,f_d. Apply naturality along z,hd to e_d and associativity along z,hd,f_d. The hypotheses identify both composite maps with k. Cancel the residual inverse comparison and use functoriality to obtain the displayed identity. The explicit generic calculation is recorded in the worker scratchpad; conversion to the concrete chart API remains to be finished.",
+   "uses": [
+    "def-pc-overlap-pair-canonical-comparisons",
+    "lem-sc-left-adjoint-composition-iso-associativity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-overlap-pair-canonical-comparisons",
+  "lem-sc-left-adjoint-composition-iso-associativity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01ZR",
+  "place": "Tag 01ZR (2), first proof, single-chart composition/naturality step; Tag 0095"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical transport of a tensor pullback morphism to the base changed pairwise overlap, compatible with iterated inverse images",
+   "results": "Hits: AlgebraicGeometry.Scheme.Pullback.t', AlgebraicGeometry.Scheme.Pullback.t, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm",
+   "date": "2026-10-13",
+   "verdict": "No exact match. Read the pullHom_hom, pullbackComp and adjunction composition APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_pullbackComp_inv|pseudofunctor_associativity|pullHom_hom",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match. Read the pullHom_hom, pullbackComp and adjunction composition APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a conjugated descent transition to an iterated pullback overlap commutes with the canonical component isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor.DescentData.pullHom_hom",
+   "results": "Hits: CategoryTheory.Pseudofunctor.DescentData.pullHom_hom",
+   "date": "2026-10-13",
+   "verdict": "No exact match. Read the pullHom_hom, pullbackComp and adjunction composition APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OverlapConjugateRestriction",
+  "date": "2026-10-14",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-overlap-conjugate-restriction",
+   "place": "Single-chart restriction equation in proof step 2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OverlapSingleChartRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/OverlapSingleChartRestriction.lean",
+  "declaration": "AlgebraicGeometry.overlap_single_chart_restriction",
+  "declarations": [
+   "AlgebraicGeometry.overlapCanonicalChartComparison",
+   "AlgebraicGeometry.overlapRestrictionIso",
+   "AlgebraicGeometry.overlap_single_chart_restriction"
+  ],
+  "statement": "theorem overlap_single_chart_restriction {X Y Z H K : Scheme.{u}}\n    (U : X.OpenCover.{u}) (q : Y ⟶ X) (p : Z ⟶ Y) (t : Z ⟶ X) (h : p ≫ q = t)\n    (N : (d : U.I₀) → (U.X d).Modules) (M : Z.Modules)\n    (e : ∀ d, (Scheme.Modules.pullback (U.pullbackHom t d)).obj (N d) ≅\n      (Scheme.Modules.pullback ((U.pullback₁ t).f d)).obj M)\n    (d : U.I₀) (ν : H ⟶ Z) (hd : H ⟶ (U.pullback₁ t).X d)\n    (hν : hd ≫ (U.pullback₁ t).f d = ν)\n    (r : K ⟶ ((U.pullback₁ q).pullback₁ p).X d) (z : K ⟶ H) (k : K ⟶ Z)\n    (hr : r ≫ ((U.pullback₁ q).pullback₁ p).f d = k)\n    (hz : z ≫ hd = r ≫ overlapIteratedChartHom U q p t h d)\n    (hzk : z ≫ ν = k) (S : H.Modules)\n    (τ : S ≅ (Scheme.Modules.pullback hd).obj\n      ((Scheme.Modules.pullback (U.pullbackHom t d)).obj (N d))) :\n    let ξ := overlapRestrictionIso (overlapIteratedChartHom U q p t h d) z hd r hz\n      ((Scheme.Modules.pullback (U.pullbackHom t d)).obj (N d)) _ S\n      (overlapCanonicalChartComparison U q p t h N d) τ\n    ξ.hom ≫ (Scheme.Modules.pullback r).map\n        (overlapIteratedComparison U q p t h N M e d).hom ≫\n        (pullbackCompOfEq r (((U.pullback₁ q).pullback₁ p).f d) k hr M).hom =\n      (Scheme.Modules.pullback z).map\n        (τ ≪≫ (Scheme.Modules.pullback hd).mapIso (e d) ≪≫\n          pullbackCompOfEq hd ((U.pullback₁ t).f d) ν hν M).hom ≫\n        (pullbackCompOfEq z ν k hzk M).hom",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-6f92d",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261014T052131-L-1876990",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-6f92d",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261014T052131-L-1876990",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules compile cleanly; target signature, nodes, report, imports, and documented sorry declarations match the packet."
+ }
+}
