@@ -7,6 +7,11 @@ module
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Data.ZMod.Basic
+import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsAcyclic
+import Sheaf.AlgebraicGeometry.TorsionAssembly
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 
 /-! # Unbounded proper base change for finite cyclic coefficients -/
 

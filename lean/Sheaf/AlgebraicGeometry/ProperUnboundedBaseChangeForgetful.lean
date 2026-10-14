@@ -6,6 +6,7 @@ module
 
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import Mathlib.Data.ZMod.Basic
+import Sheaf.AlgebraicGeometry.DerivedCategories
 
 /-! # Transfer of unbounded exchange isomorphisms through coefficient forgetting -/
 
