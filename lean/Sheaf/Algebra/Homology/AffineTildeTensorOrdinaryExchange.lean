@@ -7,10 +7,8 @@ module
 
 public import Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison
 public import Sheaf.Algebra.Homology.AffineBaseChangeTildeRepresentative
-import Sheaf.Algebra.Homology.AffineTildePushforwardCohomologyNormalization
 import Sheaf.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.TensorPullbackTilde
+public import Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchangePreNormalization
 
 /-! # Ordinary affine exchange in tensor coordinates
 
@@ -68,20 +66,7 @@ def affineTildeTensorOrdinaryTargetMap
         (((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M))) := by
   let T := affineTildeFunctor B
   let Cg := ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M
-  let σ := affineTildePushforwardComparison D B ψ
-  let F := ModuleCat.restrictScalars ψ ⋙ T
-  let P := Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom ψ))
-  let : (affineTildeFunctor D).Additive :=
-    instAdditiveModuleCatCarrierModulesSpecOfFunctor
-  let : P.Additive := inferInstance
-  let : (affineTildeFunctor D ⋙ P).PreservesZeroMorphisms :=
-    ⟨fun _ _ ↦ by
-      rw [Functor.comp_map, (affineTildeFunctor D).map_zero]
-      exact P.map_zero _ _⟩
-  let a : (F.mapHomologicalComplex (.up ℤ)).obj Cg ⟶
-      (P.mapHomologicalComplex (.up ℤ)).obj
-        (((affineTildeFunctor D).mapHomologicalComplex (.up ℤ)).obj Cg) :=
-    (σ.hom.mapHomologicalComplex (.up ℤ)).app Cg
+  let a := affineTildePushforwardComplexMap D B ψ Cg
   exact DerivedCategory.Q.map ((T.mapHomologicalComplex (.up ℤ)).map k) ≫
     DerivedCategory.Q.map a ≫
     (RingedSpace.moduleDirectImage
@@ -145,6 +130,13 @@ theorem affineTildeTensorOrdinaryExchange
           (((Scheme.Modules.tensorPullback p).mapHomotopyCategory (.up ℤ)).obj H) =
       affineTildeTensorOrdinaryTargetMap R A B D M φ ψ k ≫
         (schemeDerivedDirectImage f').map t.hom ≫
-        (schemeDerivedDirectImage f').map ((SingleComplexBaseChange.counit p).app H) := by sorry
+        (schemeDerivedDirectImage f').map ((SingleComplexBaseChange.counit p).app H) := by
+  dsimp only
+  have h := affineTildeTensorOrdinaryExchange_preNormalization R A B D M φ ψ hw k hk
+  dsimp only at h
+  rw [← (schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom ψ))).map_comp,
+    affineBaseChangeTildeRepresentativeIso_counit A D φ M hc]
+  simpa only [affineTildeTensorOrdinaryTargetMap, Category.assoc] using h
+
 
 end AlgebraicGeometry

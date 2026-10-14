@@ -24,12 +24,12 @@
   "lem-weil-pbc-tilde-pullback-base-change"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "F1",
-  "date": "2026-10-14",
+  "by": "worker",
+  "group": "P1",
+  "date": "2026-10-15",
   "document": "Stacks Project, Tags 01I9, 08DW and 08HY",
-  "place": "Affine associated-sheaf pullback, derived pullback, and naturality of the derived mate. The identity-transport equation follows from the explicit three-factor construction.",
-  "note": "Moved definition unchanged; identity-transport equation proved by expansion and functoriality."
+  "place": "The explicit three-factor affine representative and its counit cancellation",
+  "note": "Names the same termwise complex comparison; component formula is reflexivity, identity transport and counit cancellation are proved by functoriality and inverse identities."
  },
  "mathlib_searches": [
   {
@@ -107,7 +107,10 @@
   "declaration": "AlgebraicGeometry.affineBaseChangeTildeRepresentativeIso",
   "declarations": [
    "AlgebraicGeometry.affineBaseChangeTildeRepresentativeIso",
-   "AlgebraicGeometry.affineBaseChangeTildeRepresentativeIso_identity_hom"
+   "AlgebraicGeometry.affineBaseChangeTildeRepresentativeIso_identity_hom",
+   "AlgebraicGeometry.affineBaseChangeTildeComplexIso",
+   "AlgebraicGeometry.affineBaseChangeTildeComplexIso_hom_f",
+   "AlgebraicGeometry.affineBaseChangeTildeRepresentativeIso_counit"
   ],
   "statement": "def affineBaseChangeTildeRepresentativeIso\n    (A A' : Type u) [CommRing A] [CommRing A'] (φ : A →+* A')\n    (K : schemeDerivedCategory (Spec (.of A)))\n    (M : CochainComplex (ModuleCat.{u} A) ℤ)\n    (e : DerivedCategory.Q.obj\n      (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj M) ≅ K)\n    (hc : IsIso ((SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φ))).app\n      ((HomotopyCategory.quotient _ (.up ℤ)).obj\n        (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj M)))) :\n    DerivedCategory.Q.obj (((affineTildeFunctor A').mapHomologicalComplex (.up ℤ)).obj\n      (((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M)) ≅\n      (derivedPullback (Spec.map (CommRingCat.ofHom φ))).obj K",
   "branch": "sheaf-dag",
@@ -127,11 +130,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-d9e24",
-  "group": "F1",
+  "reviewer": "X-50747",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261014T025137-L-156195",
+  "landing": "20261014T204310-L-2517264",
   "kind": "interface",
-  "note": "independent Codex review: Matched Lean signatures, moved definition body, identity-case reduction, DAG records and report; all three delivered modules and direct importer AffineBaseChangeTildeOrdinaryComparison compile cleanly; axiom probes show only standard axioms plus sorryAx for the named remaining hole."
+  "note": "independent Codex review: Delivered files matched node statements, compiled cleanly, and adapted direct importers compiled against the changed dependencies."
  }
 }

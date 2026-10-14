@@ -25,6 +25,41 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
+/-- The unit-normalized tensor/tilde comparison on complexes, shared by the
+pullback representative and calculations with it. Source: Stacks, Tags 01I9 and 08DW.
+(blueprint: def-pc-affine-base-change-tilde-representative-iso). -/
+def affineBaseChangeTildeComplexIso
+    (A D : Type u) [CommRing A] [CommRing D] (φ : A →+* D)
+    (M : CochainComplex (ModuleCat.{u} A) ℤ) :
+    let E : SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace) ⥤
+        SheafOfModules.{u} (moduleRings (Spec (.of D)).toRingedSpace) :=
+      Scheme.Modules.tensorPullback (Spec.map (CommRingCat.ofHom φ))
+    let : E.Additive := SingleComplexBaseChange.tensorPullbackAdditive.{u, w} _
+    (E.mapHomologicalComplex (.up ℤ)).obj
+        (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj M) ≅
+      ((affineTildeFunctor D).mapHomologicalComplex (.up ℤ)).obj
+        (((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M) := by
+  let E : SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace) ⥤
+      SheafOfModules.{u} (moduleRings (Spec (.of D)).toRingedSpace) :=
+    Scheme.Modules.tensorPullback (Spec.map (CommRingCat.ofHom φ))
+  let : E.Additive := SingleComplexBaseChange.tensorPullbackAdditive.{u, w} _
+  let : (affineTildeFunctor A).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : (affineTildeFunctor D).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let θ : affineTildeFunctor A ⋙ E ≅
+      ModuleCat.extendScalars φ ⋙ affineTildeFunctor D :=
+    Classical.choose (Scheme.Modules.exists_tensorPullback_tilde_iso (CommRingCat.ofHom φ))
+  exact (Functor.mapHomologicalComplexCompIso θ (.up ℤ)).app M
+
+/-- Degreewise formula for the complex comparison.
+Source: Stacks, Tag 01I9; this is the defining termwise action of the comparison. -/
+theorem affineBaseChangeTildeComplexIso_hom_f
+    (A D : Type u) [CommRing A] [CommRing D] (φ : A →+* D)
+    (M : CochainComplex (ModuleCat.{u} A) ℤ) (i : ℤ) :
+    (affineBaseChangeTildeComplexIso A D φ M).hom.f i =
+      (Classical.choose (Scheme.Modules.exists_tensorPullback_tilde_iso
+        (CommRingCat.ofHom φ))).hom.app (M.X i) := by
+  rfl
+
 /-- The actual tilde representative of affine derived pullback.
 Source: Stacks Project, Tags 01I9 and 08DW.
 (blueprint: def-pc-affine-base-change-tilde-representative-iso).
@@ -42,30 +77,49 @@ def affineBaseChangeTildeRepresentativeIso
     DerivedCategory.Q.obj (((affineTildeFunctor A').mapHomologicalComplex (.up ℤ)).obj
       (((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M)) ≅
       (derivedPullback (Spec.map (CommRingCat.ofHom φ))).obj K := by
-  let TA := affineTildeFunctor A
-  let TB := affineTildeFunctor A'
-  let : TA.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
-  let : TB.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
   let f := Spec.map (CommRingCat.ofHom φ)
-  let P := (TA.mapHomologicalComplex (.up ℤ)).obj M
-  let C := ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M
-  let E : SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace) ⥤
-      SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace) :=
-    Scheme.Modules.tensorPullback f
-  let : E.Additive := SingleComplexBaseChange.tensorPullbackAdditive.{u, w} f
+  let P := ((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj M
   let : IsIso ((SingleComplexBaseChange.counit f).app
     ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := hc
-  let θ := Classical.choose (Scheme.Modules.exists_tensorPullback_tilde_iso
-    (CommRingCat.ofHom φ))
-  let θ' : TA ⋙ E ≅ ModuleCat.extendScalars φ ⋙ TB := θ
-  let δ : (E.mapHomologicalComplex (.up ℤ)).obj P ≅
-      (TB.mapHomologicalComplex (.up ℤ)).obj C :=
-    (Functor.mapHomologicalComplexCompIso θ' (.up ℤ)).app M
+  let δ := affineBaseChangeTildeComplexIso A A' φ M
   exact (DerivedCategory.Q.mapIso δ).symm ≪≫
     (asIso ((SingleComplexBaseChange.counit f).app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj P))).symm ≪≫
     (derivedPullback f).mapIso e
 
+
+/-- Cancelling the supplied pullback counit leaves exactly the inverse complex
+comparison. Source: Stacks, Tags 01I9 and 08HY. The representative has three factors:
+the inverse comparison, the inverse counit, and the image of the identity. Functoriality
+removes the last factor and the middle factor cancels against the counit. -/
+theorem affineBaseChangeTildeRepresentativeIso_counit
+    (A D : Type u) [CommRing A] [CommRing D] (φ : A →+* D)
+    (M : CochainComplex (ModuleCat.{u} A) ℤ)
+    (hc : IsIso ((SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φ))).app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj
+        (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj M)))) :
+    (affineBaseChangeTildeRepresentativeIso A D φ
+      (DerivedCategory.Q.obj
+        (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj M)) M
+      (Iso.refl _) hc).hom ≫
+      (SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φ))).app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj
+          (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj M)) =
+      DerivedCategory.Q.map (affineBaseChangeTildeComplexIso A D φ M).inv := by
+  let p := Spec.map (CommRingCat.ofHom φ)
+  let P := ((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj M
+  let c := (SingleComplexBaseChange.counit p).app
+    ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
+  let : IsIso c := hc
+  dsimp only [affineBaseChangeTildeRepresentativeIso]
+  simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_inv,
+    Functor.mapIso_hom, Iso.refl_hom, Category.assoc]
+  change DerivedCategory.Q.map (affineBaseChangeTildeComplexIso A D φ M).inv ≫
+    inv c ≫ (derivedPullback p).map (𝟙 _) ≫ c = _
+  erw [(derivedPullback p).map_id]
+  change DerivedCategory.Q.map (affineBaseChangeTildeComplexIso A D φ M).inv ≫
+    inv c ≫ 𝟙 _ ≫ c = _
+  simp only [Category.id_comp, IsIso.inv_hom_id, Category.comp_id]
 
 /-- The chosen pullback representative is compatible with transport from the identity
 representative. Source: Stacks Project, Tag 08HY. This follows directly from its
