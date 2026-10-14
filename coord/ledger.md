@@ -14374,3 +14374,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:06 L: merged deliver/J2/Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling (stage 3; reviewer PASS; first push; landing 20261014T030646-L-343734 (proof); batch 20261014T030639; modules 1; new nodes 0)
 - 03:06 L: merged deliver/J2/Sheaf.RingTheory.ProjectiveResolutionExtDegree (stage 3; reviewer PASS; first push; landing 20261014T030646-L-343953 (proof); batch 20261014T030639; modules 1; new nodes 0)
 - 03:06 L: merged deliver/M3/Sheaf.AlgebraicGeometry.TensorGradedCoefficientSheafAction (stage 3; reviewer PASS; first push; landing 20261014T030647-L-344174 (interface); batch 20261014T030639; modules 3; new nodes 2)
+- 03:06 L: merged deliver/N4/Sheaf.AlgebraicGeometry.EtaleSectionShortComplexCoefficientComparison (stage 3; reviewer PASS; first push; landing 20261014T030647-L-344399 (proof); batch 20261014T030639; modules 1; new nodes 0)

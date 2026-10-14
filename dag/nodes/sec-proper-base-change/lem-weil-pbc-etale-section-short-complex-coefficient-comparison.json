@@ -19,42 +19,55 @@
  ],
  "proof": [
   {
-   "text": "Adjoint phi to F->f_*G. Exact inverse image makes f_* preserve injectives. Lift the adjoint morphism into f_*J along the augmentation of I by injectivity, then extend inductively from successive images using exactness of I. Evaluate the resulting augmentation-preserving chain map using resolutionSectionShortComplexTransfer. Substitute the inverse-image identities for the target opens; the intersection square determines k by monicity of the open inclusion.",
+   "text": "Substitute hU and hV. Cancel the monomorphism (U intersection V).iota in hk to identify k with morphismRestrict f (U intersection V). Adjoint phi to psi:F->f_*G. Exactness of upperStar, already supplied by the inverse-image definition module, lets adj.map_injective prove injectivity of every term of f_*J. Extend psi followed by the augmentation across I.ι in degree zero using Injective.factorThru. Use I.exact₀.descToInjective and I.exact_succ.descToInjective for the successive extensions; CochainComplex.mkHom packages these into beta with the augmentation equality. Apply resolutionSectionShortComplexTransfer to beta. This is the proved local helper exists_lift_to_injective_complex, adapted from the library’s existing construction.",
    "uses": [
-    "def-weil-pbc-etale-resolution-section-transfer",
-    "prop-weil-pbc-inverse-image-exact"
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-etale-resolution-section-transfer"
    ],
    "elementary": false
   },
   {
-   "text": "The prescribed canonical global comparisons identify the whole homology map with pullback followed by the coefficient map, by the normalized coefficient-transfer theorem.",
+   "text": "Apply resolutionSection_canonical_coefficient_transfer to beta, psi and its augmentation equality. The adjunction equivalence cancels its inverse, so the coefficient morphism in the conclusion is the original phi. The first component of the explicit short-complex transfer is globalResolutionSectionTransfer.",
    "uses": [
     "lem-pbc-etale-additive-cech-canonical-coefficient-transfer"
    ],
+   "elementary": true
+  },
+  {
+   "text": "For a section cycle on an open W use the inverse of sectionsEquiv to construct its Hom cocycle; sectionsEquiv_naturality and iCycles_d prove closure. Adjoint beta degreewise to e:f^*I->J. Its augmentation equation lifts the adjoint of psi. Apply exactFunctor_resolution_cocycle to compute the transported Ext class followed by that coefficient morphism. Precompose with etaleOpenFreeSheafPullback. Naturality of the adjunction unit and sectionsEquiv identifies this representing cocycle with the transfer of the original section. This is the proved local helper coefficient_transfer_ext, generalizing the library’s pure-pullback cocycle calculation without new assumptions.",
+   "uses": [
+    "def-weil-pbc-etale-open-free-sheaf-pullback",
+    "lem-weil-pbc-exact-functor-resolution-cocycle",
+    "def-weil-pbc-etale-resolution-section-transfer"
+   ],
    "elementary": false
   },
   {
-   "text": "For an intersection class choose a section cycle and its unique free-abelian-representable Hom cocycle. Apply exact inverse image and the adjoint resolution lift. This represents pullback of the Ext class followed by phi. The section transfer evaluates the same cocycle by the sections adjunction. The square k and its two inverse-image composition comparisons give the first two factors of openSquareCoefficient, while restricted phi is its last factor. The prescribed open_cocycle normalizations identify both homology classes with these Ext classes. Homotopic lifts have equal homology maps, so the equality holds for every class and degree.",
+   "text": "Every homology class lifts along the epimorphism homologyπ. Apply homologyπ_naturality and the open_cocycle fields of the prescribed comparisons to its source and transferred cycles. The preceding Ext calculation identifies their Ext classes. Coefficient naturality of etaleOpenObjectCohomologyMap follows by unfolding its definition, mapExactFunctor_comp, mapExactFunctor_mk₀ and Ext associativity. Then etaleOpenObjectCohomologyMap_pullback identifies the remaining pullback class. This proves coefficient_transfer_open for every W, q and class. Apply it to W=U intersection V. Expand openCohomologyPullback and openSquareCoefficient and use Sheaf.H.map_comp_apply: the two inverse-image composition comparisons and the restricted coefficient morphism agree, with proof irrelevance identifying the square proofs.",
    "uses": [
     "def-weil-pbc-etale-resolution-section-canonical-comparison",
     "def-weil-pbc-etale-open-object-cohomology-map",
+    "lem-weil-pbc-etale-open-object-cohomology-pullback",
     "lem-weil-pbc-etale-limit-open-cohomology-cocone"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-etale-open-free-sheaf-pullback",
   "def-weil-pbc-etale-open-object-cohomology-map",
   "def-weil-pbc-etale-resolution-section-canonical-comparison",
   "def-weil-pbc-etale-resolution-section-transfer",
+  "def-weil-pbc-inverse-image",
   "lem-pbc-etale-additive-cech-canonical-coefficient-transfer",
   "lem-weil-pbc-etale-limit-open-cohomology-cocone",
-  "prop-weil-pbc-inverse-image-exact"
+  "lem-weil-pbc-etale-open-object-cohomology-pullback",
+  "lem-weil-pbc-exact-functor-resolution-cocycle"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Parent step 2: coefficient comparison on the fixed normalized resolutions, without boundaries or exactness.; Stacks Tags 0A50 and 01F7."
+  "place": "N4 Lean proof of the fixed normalized coefficient comparison, following Tag 0A50 section complexes; Tag 01F7, Remark 20.14.2, augmented comparisons; Tags 01FB and 03F3, cocycle transport and localization. Uses the existing proved global coefficient transfer, exact-functor resolution cocycle and open-object pullback theorems."
  },
  "mathlib_searches": [
   {
@@ -152,11 +165,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-14dcf",
-  "group": "S3",
+  "reviewer": "COMPILER",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261014T025142-L-158134",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered declarations and proofs with their DAG nodes, unchanged parent signature, cited sources, report and earlier repair; all five modules and the sole direct importer compile cleanly, and axioms match the reported decomposition."
+  "landing": "20261014T030647-L-344399",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
