@@ -1,0 +1,101 @@
+{
+ "id": "new-stage3-derived-module-rank-one-nonzero-map-chain",
+ "kind": "statement",
+ "title": "Nonzero homology class produces a rank-one derived map",
+ "statement": "Let S be any ring, K a derived object of ModuleCat S (in the stated lifted universe), and n an integer. If x in Hⁿ(K) is nonzero, there exists a nonzero morphism from the degree-zero single complex on ULift S to K⟦n⟧. Assume the derived category and the stated coproducts exist.",
+ "stmt_deps": [],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/064B",
+  "place": "projective-source localization comparison, specialized to the rank-one single complex"
+ },
+ "proof": [
+  {
+   "text": "Choose a complex representative of K. Represent x by a cycle and evaluate the cycle at the lifted unit of the free rank-one module; the resulting chain map descends through the derived localization and remains nonzero because its induced homology class is x.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H3",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/064B",
+  "place": "projective-source localization comparison, specialized to the rank-one single complex"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "nonzero cohomology of a derived module gives a nonzero morphism from the ring concentrated in degree zero to a shift",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleFunctor\", \"homology\"",
+   "results": "DerivedCategory.singleFunctorCompHomologyFunctorIso; no direct replacement for the cycle construction",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphisms from a single projective module to a derived object surject onto maps on homology",
+   "results": "CategoryTheory.ProjectiveResolution.extMk_surjective; CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective; CategoryTheory.Abelian.preadditiveCoyonedaObj_map_surjective; CategoryTheory.hasExt_of_enoughProjectives; CategoryTheory.ProjectiveResolution.isoExt; CochainComplex.IsKProjective.Qh_map_bijective; isZero_Ext_succ_of_projective; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; no direct replacement for the cycle construction",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*[Ss]urjective|[Ss]urjective.*homology",
+   "results": "Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Projective/Ext.lean; Mathlib/CategoryTheory/Abelian/Refinements.lean; Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean; no direct replacement for the cycle construction",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedModuleRankOneNonzeroMap",
+  "date": "2026-10-14",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-stage3-derived-module-rank-one-nonzero-map",
+   "place": "cycle-to-derived-map step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedModuleNonzeroClassMap",
+  "file": "lean/Sheaf/CategoryTheory/DerivedModuleNonzeroClassMap.lean",
+  "declaration": "CategoryTheory.derivedModule_nonzero_class_map",
+  "statement": "theorem derivedModule_nonzero_class_map {S : Type w} [Ring S] [HasDerivedCategory.{max w vH} (ModuleCat.{max w vH} S)] [HasCoproducts.{max w vH} (DerivedCategory (ModuleCat.{max w vH} S))] (K : DerivedCategory (ModuleCat.{max w vH} S)) (n : ℤ) (x : ((DerivedCategory.homologyFunctor (ModuleCat.{max w vH} S) n).obj K)) (hx : x ≠ 0) : ∃ f : (DerivedCategory.singleFunctor (ModuleCat.{max w vH} S) 0).obj (ModuleCat.of S (ULift.{vH} S)) ⟶ K⟦n⟧, f ≠ 0",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261014T020512-L-3811774",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261014T020512-L-3811774",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

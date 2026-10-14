@@ -3,6 +3,8 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Module.ULift
+import Sheaf.CategoryTheory.DerivedModuleNonzeroClassMap
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 @[expose] public section
 
@@ -31,6 +33,19 @@ theorem derivedModule_rankOne_nonzero_map
     ∃ n : ℤ, ∃ f :
       (DerivedCategory.singleFunctor (ModuleCat.{max w vH} S) 0).obj
         (ModuleCat.of S (ULift.{vH} S)) ⟶ K⟦n⟧, f ≠ 0 := by
-  sorry
+  have hclass : ∃ n : ℤ, ∃ x : ((DerivedCategory.homologyFunctor
+      (ModuleCat.{max w vH} S) n).obj K), x ≠ 0 := by
+    by_contra h
+    push Not at h
+    apply hK
+    apply DerivedCategory.isZero_of_forall_isZero_homology K
+    intro n
+    have : Subsingleton ((DerivedCategory.homologyFunctor
+        (ModuleCat.{max w vH} S) n).obj K) :=
+      ⟨fun a b ↦ by rw [h n a, h n b]⟩
+    exact ModuleCat.isZero_of_subsingleton _
+  obtain ⟨n, x, hx⟩ := hclass
+  obtain ⟨f, hf⟩ := derivedModule_nonzero_class_map K n x hx
+  exact ⟨n, f, hf⟩
 
 end CategoryTheory
