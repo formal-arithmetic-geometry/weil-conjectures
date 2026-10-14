@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fin-radicial-exchange-descent",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Descending the exchange property through a universal homeomorphism",
@@ -19,28 +19,224 @@
  ],
  "proof": [
   {
-   "text": "By [thm-weil-pbc-universal-homeomorphism-invariance], pullback\nby a universal homeomorphism is an exact equivalence of etale\ntopoi. It preserves constructibility in both directions: the\nunderlying spaces are homeomorphic, and finite locally constant\nsheaves correspond on every stratum under that equivalence.\nThe equivalence intertwines the direct-image functor for $j$\nwith the corresponding functor for its pullback, including their\nderived functors. Therefore it detects boundedness and\nconstructibility of $Rj_*F$.\nFor any Noetherian $T$ and morphism $T\\to S$, the pullback $T'=T\\times_SS'\\to T$\nis again a universal homeomorphism by\n[lem-weil-pbc-universal-homeomorphism-base-change].\nPull back the proposed exchange morphism to $Y_{T'}$.\nCompatibility of exchange with composition in\n[sbc-lem-base-change-composition] identifies it, through the\nsame equivalences, with the exchange over $S'$, which is an\nisomorphism by hypothesis. The pullback equivalence is\nconservative, so the original exchange is an isomorphism.",
+   "text": "Write $u:S'\\to S$, $X'=X\\times_SS'$, $Y'=Y\\times_SS'$, $a:X'\\to X$, $b:Y'\\to Y$, and $j':X'\\to Y'$. Work with the finite constant coefficient ring $\\Lambda$ of the constructible sheaf $F$, with $F'=a^{-1}F$, and put $K=Rj_*F$, $K'=Rj'_*F'$. A finite morphism is integral by [pqf-lem-finite-integral-lft]. Radicial means universally injective; therefore the integral, radicial, surjective criterion [lem-pc-integral-radicial-surjective-universal-homeomorphism] makes $u$ a universal homeomorphism. The projections $a,b$, and every further pullback of $u$, are universal homeomorphisms by [lem-weil-pbc-universal-homeomorphism-base-change].",
+   "uses": [
+    "pqf-lem-finite-integral-lft",
+    "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+    "lem-weil-pbc-universal-homeomorphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.md",
+    "place": "Proof"
+   }
+  },
+  {
+   "text": "For any universal homeomorphism $v:V'\\to V$ encountered here, [thm-weil-pbc-universal-homeomorphism-invariance] gives mutually inverse sheaf equivalences $v^{-1},v_*$. These equivalences lift to constant $\\Lambda$-module sheaves: the action and its equations are carried by the inverse functors, and their units and counits are the underlying ones, as specified in [prop-weil-pbc-inverse-image-modules-exact]. Thus both are exact and their units and counits are isomorphisms. Apply [lem-weil-pbc-exact-functor-derived-factorization] and [lem-weil-pbc-exact-functor-derived-functor] to these two exact functors. Applying their sheaf units and counits termwise gives inverse derived equivalences $v^{-1}$ and $Rv_*$. By [lem-weil-pbc-exact-functor-complex-cohomology], $\\mathcal H^r(v^{-1}C)=v^{-1}\\mathcal H^r(C)$; this equivalence reflects zero objects, cohomological bounds, and isomorphisms. In the square for $j$ and $b$, the canonical inverse-image square isomorphism and the derived adjunctions are the ones in [sbc-def-base-change-map]. Apply [lem-weil-mate-iso-along-equivalences] with $L=j^{-1}$, $R=Rj_*$, $L'=j'^{-1}$, $R'=Rj'_*$, $G=b^{-1}$ and $G'=a^{-1}$. Both $G,G'$ are equivalences. Hence its mate is the canonical exchange isomorphism $\\beta_u:b^{-1}K\\xrightarrow{\\sim}K'$, not merely an unspecified isomorphism between the two objects.",
    "uses": [
     "thm-weil-pbc-universal-homeomorphism-invariance",
-    "lem-weil-pbc-universal-homeomorphism-base-change",
-    "sbc-lem-base-change-composition"
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "sbc-def-base-change-map",
+    "lem-weil-mate-iso-along-equivalences"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.md",
+    "place": "Proof"
+   }
+  },
+  {
+   "text": "Here is constructibility descent for an arbitrary sheaf $G$ of $\\Lambda$-modules on $Y$. If $b^{-1}G$ is constructible, choose its finite stratification by reduced induced locally closed constructible subschemes, allowed by [def-weil-pbc-etale-constructible-sheaf]. The homeomorphism $|b|$ takes this partition to a locally closed constructible partition of $Y$: opens, closed sets and quasi-compactness are preserved, hence so are retrocompact opens and their finite Boolean combinations by [def-weil-constructible-subset]. Give each image stratum $Z$ its reduced induced structure; this choice is also allowed in [def-weil-pbc-etale-constructible-sheaf]. Put $P=Y'\\times_YZ$. Its projection to $Z$ is a universal homeomorphism by step 1, and $P_{\\mathrm{red}}\\to P$ is one by [lem-weil-pbc-reduction-universal-homeomorphism]. Their composite is universal: after any base change its two factors are homeomorphisms, so their composite is a homeomorphism. The reduced inverse-image stratum chosen above is $P_{\\mathrm{red}}$: locally, if $Z$ is defined by a radical ideal $I$ on an open affine $\\operatorname{Spec}A$, both reduced structures are the quotient of the corresponding ring $B$ upstairs by $\\sqrt{IB}$. Thus the two restrictions of $b^{-1}G$ agree on this stratum. Use [lemma-weil-pbc-universal-homeomorphism-site-equivalence] to descend a trivializing etale covering of that stratum to $Z$; covering reflection is [thm-weil-pbc-universal-homeomorphism-invariance]. On each descended etale object $V$, its pullback restriction is a constant finite module $M$. By [lemma-constructible-pullback-constant] the constant sheaf $M_V$ pulls back to that same constant sheaf. Full faithfulness of the module equivalence from step 2 therefore descends this isomorphism to $G|_V\\cong M_V$. Thus $G|_Z$ is finite locally constant as a module sheaf, with the same finite module values. This proves constructibility of $G$ without a Noetherian assumption on $Y$.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-weil-constructible-subset",
+    "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-reduction-universal-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.md",
+    "place": "Proof"
+   }
+  },
+  {
+   "text": "By hypothesis $K'$ has cohomology zero outside some interval $[m,n]$ and constructible cohomology in that interval. Apply $\\beta_u$ of step 2 and the cohomology comparison there: $b^{-1}\\mathcal H^r(K)\\cong\\mathcal H^r(K')$. Reflection of zero objects gives the same interval $[m,n]$ for $K$. Apply step 3 to each $G=\\mathcal H^r(K)$ to descend constructibility. This is exactly bounded constructibility by [def-weil-pbc-constructible-complexes].",
+   "uses": [
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.md",
+    "place": "Proof"
+   }
+  },
+  {
+   "text": "Fix an arbitrary morphism $t:T\\to S$ with $T$ Noetherian. Put $T'=T\\times_SS'$, $q:T'\\to T$, $r:T'\\to S'$. Then $tq=ur$. The projection $q$ is finite: on an affine chart $\\operatorname{Spec}A\\subset S$ write $u^{-1}\\operatorname{Spec}A=\\operatorname{Spec}B$ with $B$ finite over $A$. On an affine chart $\\operatorname{Spec}C$ of $T$ above this chart the pullback is $\\operatorname{Spec}(C\\otimes_AB)$ by [lem-weil-pbc-fibre-product-affine-spectra], generated over $C$ by $1\\otimes b_i$ for a finite module generating family $b_i$ of $B$. These affine charts give the definition of finiteness in [def-weil-finite-integral-morphism]. In particular $q$ is of finite type: the same module generators generate the algebra, and $q$ is quasi-compact because it is a homeomorphism by step 1. Consequently $T'$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. It is a universal homeomorphism over $T$ by step 1, and the map $r:T'\\to S'$ is therefore an allowed Noetherian test map for the hypothesis. No Noetherianity of $S$ or $S'$ has been assumed.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.md",
+    "place": "Proof"
+   }
+  },
+  {
+   "text": "For a base morphism $h:B\\to S$ write $\\beta_h:h_Y^{-1}Rj_*F\\to Rj_{B,*}h_X^{-1}F$ for the canonical exchange of [sbc-def-base-change-map]. The module-valued exchange satisfies the following pasting formula under that definition's canonical composition identifications:\n$$\\beta_{hk}=\\beta_k^{(h)}\\circ k_Y^{-1}(\\beta_h).$$\nIndeed the inverse-image square comparison is obtained from composition of inverse images applied termwise. For two pasted squares its comparison is the pasted comparison. To check coherence, evaluate the direct-image compositors $d$ of [lem-weil-pbc-inverse-image-composition](1) on an etale test object $W$: either order of composing them is restriction along the unique fibre-product isomorphism preserving all projections. Hence the two composites agree. The inverse-image compositors $c$ in clause (2) are the unique adjunction comparisons compatible with these $d$ and the composite units. Both bracketings have the unit obtained by inserting the three units successively, so uniqueness in clause (2) gives the same inverse-image compositor. Apply this equality to the two paths around the pasted Cartesian rectangle to obtain its square comparison. This equality also holds for modules: clause (2) of [prop-weil-pbc-inverse-image-modules-exact] makes the module structure uniquely determined by the underlying action map, and the abelian comparison commutes with that map by naturality. Its unique descent to derived categories is the same comparison specified in [sbc-def-base-change-map]. Apply clause (1) of [lem-weil-pbc-mate-pasting] to these comparisons, with $L_1=j^{-1}$, $L_2=j_B^{-1}$, $L_3=j_{B'}^{-1}$, $G=h_Y^{-1}$, $G_2=k_Y^{-1}$, $H=h_X^{-1}$, $H_2=k_X^{-1}$; clause (3) inserts the canonical composite-adjunction comparisons normalized in [sbc-def-base-change-map]. This proves the displayed equation for the actual canonical module exchange. Apply it to the two factorizations $T'\\to T\\to S$ and $T'\\to S'\\to S$. Writing $q_Y:Y_{T'}\\to Y_T$ and $r_Y:Y_{T'}\\to Y'$, it gives\n$$\\beta_q^{(t)}\\circ q_Y^{-1}(\\beta_t)=\\beta_r^{(u)}\\circ r_Y^{-1}(\\beta_u).$$\nBoth sides are the exchange for $T'\\to S$ with their common source and target identified by the canonical fibre-product comparisons.",
+   "uses": [
+    "sbc-def-base-change-map",
+    "lem-weil-pbc-inverse-image-composition",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.md",
+    "place": "Proof"
+   }
+  },
+  {
+   "text": "The right-hand side in step 6 is an isomorphism: $\\beta_u$ is one by step 2, and $\\beta_r^{(u)}$ is one by the hypothesis, applicable because $T'$ is Noetherian by step 5. The first factor $\\beta_q^{(t)}$ on the left is an isomorphism by exactly the mate argument of step 2 applied to $j_T$ and the universal homeomorphism $q_Y$ (and its pullback $q_X$), using [lem-weil-mate-iso-along-equivalences]. Cancelling that isomorphism shows $q_Y^{-1}(\\beta_t)$ is an isomorphism. Finally $q_Y^{-1}$ is conservative by the derived equivalence of step 2, so $\\beta_t$ is an isomorphism. Since $t:T\\to S$ was arbitrary with Noetherian $T$, this proves the required universal formation assertion over $S$, for the canonical exchange morphism, together with bounded constructibility from step 4.",
+   "uses": [
+    "lem-weil-mate-iso-along-equivalences"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.md",
+    "place": "Proof"
+   }
   }
  ],
  "proof_deps": [
-  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "pqf-lem-finite-integral-lft",
+  "lem-pc-integral-radicial-surjective-universal-homeomorphism",
   "lem-weil-pbc-universal-homeomorphism-base-change",
-  "sbc-lem-base-change-composition"
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "sbc-def-base-change-map",
+  "lem-weil-mate-iso-along-equivalences",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-constructible-subset",
+  "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-mate-pasting"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.md",
-  "place": "## Proof"
+  "place": "Proof, expanded via Stacks 04DF, 04DZ, 03SI and 0E47"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image of an open immersion and base change descend along a finite universal homeomorphism",
+   "results": "AlgebraicGeometry.Scheme.Hom.comp_appIso; AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.IsOpenImmersion.lift_app; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc; AlgebraicGeometry.IsOpenImmersion.app_eq_invApp_app_of_comp_eq_aux; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc; AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsUniversalHomeomorphism",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.IsUniversalHomeomorphism'",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "UniversalHomeomorphism|baseChange.*[Cc]onstructible",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale derived direct image base change descends along universal homeomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of etale topoi preserves constructible sheaves and reflects isomorphisms of derived base change maps",
+   "results": "AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.transport; CategoryTheory.Equivalence.hasSheafCompose; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*[Ee]quivalence|[Cc]onstructible.*[Ss]heaf",
+   "results": "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean; Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean; Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean; Mathlib/RingTheory/Etale/Finite.lean; Mathlib/RingTheory/Etale/Finite.lean",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence",
+   "results": "CategoryTheory.Equivalence; CategoryTheory.Equivalence.refl; CategoryTheory.Equivalence.instInhabited; CategoryTheory.Equivalence.instPowInt; CategoryTheory.Equivalence.instCategory; CategoryTheory.Equivalence.pow; CategoryTheory.Equivalence.powNat; CategoryTheory.Equivalence.functor",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image base change and bounded constructibility descend along finite surjective radicial morphisms",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; PrimeSpectrum.isConstructible_comap_image; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; PrimeSpectrum.isConstructible_range_comap; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange; AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsUniversalHomeomorphism",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.IsUniversalHomeomorphism'",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "UniversalHomeomorphism|baseChange.*[Cc]onstructible",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of etale sheaf categories along a universal homeomorphism detects bounded constructible complexes and base change",
+   "results": "CategoryTheory.Presheaf.coherentExtensiveEquivalence; CategoryTheory.Equivalence.hasSheafCompose; CategoryTheory.Equivalence.precoherent_isSheaf_iff; CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.transport; CategoryTheory.Equivalence.sheafCongrPrecoherent; CategoryTheory.Functor.IsDenseSubsite.instIsEquivalenceSheafSheafPushforwardContinuous; CategoryTheory.Presheaf.coherentExtensiveEquivalence_functor_obj_val; CategoryTheory.Equivalence.sheafCongr",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale derived direct image base change descends along universal homeomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*[Ee]quivalence|[Cc]onstructible.*[Ss]heaf",
+   "results": "Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean; Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean; Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/RingTheory/Etale/Finite.lean; Mathlib/RingTheory/Etale/Finite.lean",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -72,5 +268,124 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-fin-radicial-exchange-descent",
+  "worker": "stage1",
+  "summary": "Expanded the imported argument into seven steps with canonical module mate pasting, explicit constructibility descent through etale trivializations, and the finite-type Noetherian check for the test base T-prime. No new nodes, no statement changes, no Lean work. Removed the insufficient composition-isomorphism implication citation and used the existing generic mate-pasting equality instead.",
+  "blueprint": "Steps 1-4 realize the first paragraph: universal homeomorphism, exact equivalence, direct-image comparison and bounded constructibility descent. Steps 5-7 realize the second paragraph: test-base pullback, canonical exchange composition and conservative descent. The unit has no proof steps to replace; its compact-support route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-finite-integral-lft",
+    "why": "Generic geometric, sheaf or categorical tool for universal-homeomorphism descent; this unit supplies no replacement for this ingredient."
+   },
+   {
+    "node": "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+    "why": "Generic geometric, sheaf or categorical tool for universal-homeomorphism descent; this unit supplies no replacement for this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-universal-homeomorphism-base-change",
+    "why": "Generic geometric, sheaf or categorical tool for universal-homeomorphism descent; this unit supplies no replacement for this ingredient."
+   },
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "Generic geometric, sheaf or categorical tool for universal-homeomorphism descent; this unit supplies no replacement for this ingredient."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic geometric, sheaf or categorical tool for universal-homeomorphism descent; this unit supplies no replacement for this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic geometric, sheaf or categorical tool for universal-homeomorphism descent; this unit supplies no replacement for this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic geometric, sheaf or categorical tool for universal-homeomorphism descent; this unit supplies no replacement for this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic geometric, sheaf or categorical tool for universal-homeomorphism descent; this unit supplies no replacement for this ingredient."
+   },
+   {
+    "node": "sbc-def-base-change-map",
+    "why": "Generic geometric, sheaf or categorical tool for universal-homeomorphism descent; this unit supplies no replacement for this ingredient."
+   },
+   {
+    "node": "lem-weil-mate-iso-along-equivalences",
+    "why": "Generic geometric, sheaf or categorical tool for universal-homeomorphism descent; this unit supplies no replacement for this ingredient."
+   },
+   {
+    "node": "def-weil-pbc-etale-constructible-sheaf",
+    "why": "Generic geometric, sheaf or categorical tool for universal-homeomorphism descent; this unit supplies no replacement for this ingredient."
+   },
+   {
+    "node": "def-weil-constructible-subset",
+    "why": "Generic geometric, sheaf or categorical tool for universal-homeomorphism descent; this unit supplies no replacement for this ingredient."
+   },
+   {
+    "node": "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+    "why": "Generic geometric, sheaf or categorical tool for universal-homeomorphism descent; this unit supplies no replacement for this ingredient."
+   },
+   {
+    "node": "lemma-constructible-pullback-constant",
+    "why": "Generic geometric, sheaf or categorical tool for universal-homeomorphism descent; this unit supplies no replacement for this ingredient."
+   },
+   {
+    "node": "def-weil-pbc-constructible-complexes",
+    "why": "Generic geometric, sheaf or categorical tool for universal-homeomorphism descent; this unit supplies no replacement for this ingredient."
+   },
+   {
+    "node": "def-weil-finite-integral-morphism",
+    "why": "Generic geometric, sheaf or categorical tool for universal-homeomorphism descent; this unit supplies no replacement for this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic geometric, sheaf or categorical tool for universal-homeomorphism descent; this unit supplies no replacement for this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Generic geometric, sheaf or categorical tool for universal-homeomorphism descent; this unit supplies no replacement for this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic geometric, sheaf or categorical tool for universal-homeomorphism descent; this unit supplies no replacement for this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Generic geometric tool: reduction leaves every base-changed underlying space unchanged, needed only to compare reduced strata in constructibility descent; it replaces no step of the compact-support unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-finite-integral-lft",
+  "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+  "lem-weil-pbc-universal-homeomorphism-base-change",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "sbc-def-base-change-map",
+  "lem-weil-mate-iso-along-equivalences",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-constructible-subset",
+  "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+  "lemma-constructible-pullback-constant",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-reduction-universal-homeomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-fbe727a7c",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-fbe727a7c (reviewer sub-agent of L); spot-checked: Read the full item, all 22 cited dependency statements, unit/chapter route, and cited source passages. Verified constructibility descent, Noetherianity of T', and canonical module-valued exchange pasting and cancellation. No new nodes or repairs needed. review.md records checks, accepted tool uses, and inherited graph cycles unrelated to this delivery."
+ }
 }
