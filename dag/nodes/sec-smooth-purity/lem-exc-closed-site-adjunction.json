@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-exc-closed-site-adjunction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Adjunction for the closed-site lift",
@@ -17,28 +17,116 @@
  ],
  "proof": [
   {
-   "text": "The adjunction of [def-exc-closed-site-lift] is the opposite of\n[lem-exc-closed-lift-adjunction], and its unit is an isomorphism by\n[lem-exc-closed-lift-reduction]. The triangle identities are those of the\nalgebra adjunction with arrows reversed.",
+   "text": "Write $R(D)=D/ID$ and $H(\\overline C)=H_A(\\overline C)$. For $V=\\operatorname{Spec}\\overline C$ and $U=\\operatorname{Spec}D$, the functors of [def-exc-closed-site-lift] give $v(V)=\\operatorname{Spec}H(\\overline C)$ and $u(U)=\\operatorname{Spec}R(D)$. The contravariant Hom correspondence of [def-weil-affine-spectrum] and the natural bijection of [lem-exc-closed-lift-adjunction] give\n$$\\operatorname{Hom}_X(v(V),U)=\\operatorname{Hom}_A(D,H(\\overline C))\\cong\\operatorname{Hom}_{A/I}(R(D),\\overline C)=\\operatorname{Hom}_Z(V,u(U)).$$\nThe restriction to maps over the bases is exact: the triangle over $\\operatorname{Spec}A$ commutes precisely when the ring map preserves the $A$-algebra structure, For $A/I$, the triangle over $\\operatorname{Spec}(A/I)$ commutes precisely when the ring map preserves the $A/I$-algebra structure. Naturality in both variables follows from the cited natural algebra bijection and functoriality of Spec. Thus this is the Hom bijection for $v\\dashv u$.",
    "uses": [
     "def-exc-closed-site-lift",
-    "lem-exc-closed-lift-adjunction",
-    "lem-exc-closed-lift-reduction"
+    "def-weil-affine-spectrum",
+    "lem-exc-closed-lift-adjunction"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BK, lemma-closed-immersion-affines, first proof paragraph; Tag 097P, lemma-lift-ind-etale, final two proof paragraphs"
+   }
+  },
+  {
+   "text": "For completeness, let $\\alpha:\\mathrm{id}\\to HR$ and $\\beta:RH\\to\\mathrm{id}$ be the unit and counit of the algebra adjunction $R\\dashv H$ in [lem-exc-closed-lift-adjunction]. By [def-exc-closed-site-lift] and contravariant functoriality in [def-weil-affine-spectrum], define the site unit at $V=\\operatorname{Spec}\\overline C$ as $\\eta_V=\\operatorname{Spec}\\beta_{\\overline C}:V\\to uv(V)$ and its counit at $U=\\operatorname{Spec}D$ as $\\epsilon_U=\\operatorname{Spec}\\alpha_D:vu(U)\\to U$. For a ring map $f:D\\to D\\prime$, naturality $HR(f)\\circ\\alpha_D=\\alpha_{D\\prime}\\circ f$ gives, with $g=\\operatorname{Spec}f:U\\prime\\to U$, the equation $g\\circ\\epsilon_{U\\prime}=\\epsilon_U\\circ vu(g)$. For $h:\\overline C\\to\\overline C\\prime$, naturality $h\\circ\\beta_{\\overline C}=\\beta_{\\overline C\\prime}\\circ RH(h)$ gives, with $k=\\operatorname{Spec}h:V\\prime\\to V$, the equation $uv(k)\\circ\\eta_{V\\prime}=\\eta_V\\circ k$. Thus both site transformations are natural. The ring identities $H(\\beta_{\\overline C})\\circ\\alpha_{H(\\overline C)}=\\mathrm{id}$ and $\\beta_{R(D)}\\circ R(\\alpha_D)=\\mathrm{id}$ give respectively $\\epsilon_{v(V)}\\circ v(\\eta_V)=\\mathrm{id}_{v(V)}$ and $u(\\epsilon_U)\\circ\\eta_{u(U)}=\\mathrm{id}_{u(U)}$ after applying Spec. These are exactly the two site triangle identities.",
+   "uses": [
+    "lem-exc-closed-lift-adjunction",
+    "def-exc-closed-site-lift",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BK, lemma-closed-immersion-affines, first proof paragraph; Tag 097P, lemma-lift-ind-etale, final two proof paragraphs"
+   }
+  },
+  {
+   "text": "Under the reduction-induced Hom bijection of [lem-exc-closed-lift-adjunction], the identity of $H(\\overline C)$ maps to the specified reduction map $\\beta_{\\overline C}:H(\\overline C)/IH(\\overline C)\\to\\overline C$. This map is an isomorphism by [lem-exc-closed-lift-reduction]. Consequently its spectrum $\\eta_V$ from step 2 is an isomorphism, with inverse the spectrum of $\\beta_{\\overline C}^{-1}$; the two composites are identities by [def-weil-affine-spectrum]. For $k:V\\prime\\to V$, the equation $uv(k)\\circ\\eta_{V\\prime}=\\eta_V\\circ k$ implies $\\eta_V^{-1}\\circ uv(k)=k\\circ\\eta_{V\\prime}^{-1}$ by composing on the left with $\\eta_V^{-1}$ and on the right with $\\eta_{V\\prime}^{-1}$. These are exactly the naturality equations for the inverse. Hence $\\eta:\\mathrm{id}_{\\mathcal B_Z}\\xrightarrow{\\sim}uv$ is the asserted canonical identification, rather than a literal equality of chosen objects.",
+   "uses": [
+    "lem-exc-closed-lift-adjunction",
+    "lem-exc-closed-lift-reduction",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BK, lemma-closed-immersion-affines, first proof paragraph; Tag 097P, lemma-lift-ind-etale, final two proof paragraphs"
+   }
   }
  ],
  "proof_deps": [
   "def-exc-closed-site-lift",
+  "def-weil-affine-spectrum",
   "lem-exc-closed-lift-adjunction",
   "lem-exc-closed-lift-reduction"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-site-adjunction.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BK, lemma-closed-immersion-affines, first proof paragraph; Tag 097P, lemma-lift-ind-etale, final two proof paragraphs"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "closed.*adjunction|adjunction.*closed|closedSite|closedLift",
+   "results": "Mathlib/Condensed/Light/Monoidal.lean, Mathlib/Condensed/Light/InternallyProjective.lean, Mathlib/Condensed/Light/InternallyProjective.lean, Mathlib/Condensed/Light/InternallyProjective.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/Monoidal/Closed/Types.lean, Mathlib/CategoryTheory/Monoidal/Closed/Types.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: generic opposite adjunction and Spec facts do not supply the closed-lift algebra adjunction or its invertible reduction counit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction between affine ind etale schemes over a ring and its quotient with invertible unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectrum of the ind etale closed lift is left adjoint to base change along a quotient ring and base change after the lift is naturally the identity",
+   "results": "StandardEtalePair.homEquiv, StandardEtalePair.homEquiv_symm_apply, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, StandardEtalePair.homEquiv_apply_coe, StandardEtalePair.lift, StandardEtalePair.lift_X_left, Algebra.IsEtaleAt.comp, StandardEtalePresentation.lift_bijective",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: generic opposite adjunction and Spec facts do not supply the closed-lift algebra adjunction or its invertible reduction counit"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.op",
+   "results": "CategoryTheory.Adjunction.op, CategoryTheory.Adjunction.leftOp_eq, CategoryTheory.Adjunction.rightOp_eq, CategoryTheory.Adjunction.op_counit_app, CategoryTheory.Adjunction.op_unit_app, CategoryTheory.Adjunction.Triple.op_adj₁, CategoryTheory.Adjunction.Triple.op_adj₂, CategoryTheory.Adjunction.Quadruple.op_adj₁",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: generic opposite adjunction and Spec facts do not supply the closed-lift algebra adjunction or its invertible reduction counit"
+  },
+  {
+   "tool": "grep",
+   "query": "Adjunction|homEquiv",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: generic opposite adjunction and Spec facts do not supply the closed-lift algebra adjunction or its invertible reduction counit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint on ind etale algebras to quotient reduction becomes a left adjoint on affine spectra with isomorphic unit",
+   "results": "AlgebraicGeometry.ΓSpec.adjunction, AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction, AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ, AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine, AlgebraicGeometry.Spec.reflective, AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ, AlgebraicGeometry.ΓSpec.isIso_adjunction_counit, AlgebraicGeometry.instReflectiveLocallyRingedSpaceOppositeCommRingCatToLocallyRingedSpace",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: generic opposite adjunction and Spec facts do not supply the closed-lift algebra adjunction or its invertible reduction counit"
+  },
+  {
+   "tool": "grep",
+   "query": "ClosedLift|closedLift|quotient.*[Aa]djoint|[Aa]djoint.*quotient",
+   "results": "Mathlib/Analysis/InnerProductSpace/Rayleigh.lean, Mathlib/Analysis/InnerProductSpace/Rayleigh.lean, Mathlib/Analysis/InnerProductSpace/Rayleigh.lean, Mathlib/Analysis/InnerProductSpace/Rayleigh.lean, Mathlib/Topology/Separation/Hausdorff.lean, Mathlib/CategoryTheory/Abelian/FreydMitchell.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: general adjunction or unrelated quotient results do not state the closed-site lift adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"op\"",
+   "results": "CategoryTheory.Adjunction.hasLiftingProperty_iff, CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal, CategoryTheory.Adjunction.leftAdjointOplaxMonoidal_η, CategoryTheory.Adjunction.leftAdjointOplaxMonoidal_δ, typeToPointedForgetAdjunction, pointedToBipointedFstBipointedToPointedFstAdjunction, pointedToBipointedSndBipointedToPointedSndAdjunction",
+   "date": "2026-10-14",
+   "verdict": "no match: general adjunction or unrelated quotient results do not state the closed-site lift adjunction"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -62,5 +150,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-open-closed-triangle"
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-exc-closed-site-adjunction",
+  "worker": "stage1",
+  "summary": "Expanded opposite-adjunction argument into the natural Hom correspondence, explicit reversed unit/counit and triangle identities, and the canonical invertible unit. Reused the existing spectrum Mathlib leaf and the algebra adjunction and reduction nodes. No new nodes or statement changes.",
+  "blueprint": "All three sentences of the blueprint proof: opposite algebra adjunction (steps 1-2), invertible unit (step 3), reversed triangle identities (step 2)."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NR-94ffce0f3",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-94ffce0f3 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, unit/chapter route, and Stacks 097P/09BK. Verified the Hom correspondence, reversed unit/counit, both triangle identities, and canonical reduction isomorphism. Checked zero-ring and extreme-ideal cases, existing generalizations, and dependency acyclicity. No new nodes, repairs, accepted tool_uses, or target changes. Detailed checks are in review.md."
+ }
 }
