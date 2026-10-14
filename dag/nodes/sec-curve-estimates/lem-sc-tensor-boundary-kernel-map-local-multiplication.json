@@ -13,24 +13,24 @@
  ],
  "proof": [
   {
-   "text": "On a trivializing open write y=r ell^n under the ideal-kernel inclusion equation and write t=a ell^(n(e+1)). Expand the source kernel-to-pushforward comparison: its inverse ideal-kernel factor recovers r ell^n and its annihilated-module unit reduces the coefficient to Z.",
+   "text": "Represent y uniquely as the image of z under boundaryIdealKernelIso. Construct p in the target ideal tensor by the explicit boundaryIdealTensorProduct applied to t tensor z. The multiplication inclusions intertwine this pairing with tensorPowAddIso by braiding naturality, associator naturality, and the left unitor.",
    "uses": [
-    "lem-sc-square-zero-ideal-tensor-unit",
-    "lem-sc-tensor-boundary-kernel-map-naturality"
+    "lem-sc-square-zero-ideal-tensor-unit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use normalization of the pullback tensor comparison and naturality of the adjunction unit to compute the unit image of p. Use the lift hypothesis and restriction naturality to identify the section-degree comparison of the unit image of t with x evaluated at 1. Apply the coefficient tensor pairing formula. The right unitor in source degree zero converts the resulting pure tensor into whiskering by x.",
+   "uses": [
+    "lem-sc-boundary-pullback-tensor-unit",
+    "lem-sc-boundary-coefficient-tensor-product"
    ],
    "elementary": false
   },
   {
-   "text": "Induct on the exponent in boundaryPullbackPowIso: exponent zero uses pullbackObjUnitIso; the successor uses boundaryPullbackTensorIso. Induct on e in tensorPowMulIso and tensorPowAddIso to repartition the generator tensors. The coefficient comparison leaves the J factor fixed. Hence tensoring by x and undoing the target comparisons sends r ell^n to ar ell^(n(e+2)), exactly the asserted tensorPowAddIso product.",
+   "text": "Expand the kernel-to-pushforward isomorphisms and cancel the ideal-kernel comparison on z and p. The preceding coefficient equality says that the transported kernel map sends y to boundaryIdealKernelIso(p). Injectivity of the target comparison proves this equality. Apply its inclusion equation and the explicit ideal-pairing inclusion identity from the first step to obtain the required formula.",
    "uses": [
-    "lem-sc-square-zero-ideal-tensor-unit",
-    "lem-sc-tensor-boundary-kernel-map-naturality"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "A change of lift changes a by a section of J, so its product with r is zero by J squared equals zero. The equalities on a trivializing open cover glue by sheaf separation. The same generator calculation with the tensor unitors covers n=0, and zero sections, ideals and empty opens cause no exception.",
-   "uses": [
+    "lem-sc-tensor-boundary-kernel-map-naturality",
     "lem-sc-square-zero-ideal-tensor-unit"
    ],
    "elementary": true
@@ -38,12 +38,14 @@
  ],
  "proof_deps": [
   "lem-sc-square-zero-ideal-tensor-unit",
-  "lem-sc-tensor-boundary-kernel-map-naturality"
+  "lem-sc-tensor-boundary-kernel-map-naturality",
+  "lem-sc-boundary-pullback-tensor-unit",
+  "lem-sc-boundary-coefficient-tensor-product"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Expanded local quotient action and tensor coefficient calculation in Tag 09MS, by N4."
+  "place": "D4 Lean reduction of Tag 09MS, coherent-equation-ses, to tensor normalization and coefficient-degree coherence."
  },
  "mathlib_searches": [
   {
@@ -186,9 +188,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N4",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261014T033108-L-604732",
+  "landing": "20261014T040538-L-999397",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -14456,3 +14456,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:01 L: returned deliver/M2/Sheaf.AlgebraicGeometry.LocalMapPairOverlapBaseChange (reviewer RETURN: (reviewer X-05873, head 05873cd55) B9: In dag/nodes/sec-picard-framework/lem-pc-open-cover-tensor-descent-comparison-coh)
 
 - 12:03 L: batch 20261014T035541 dependency take-out
+- 04:05 L: merged deliver/D4/Sheaf.AlgebraicGeometry.TensorBoundaryKernelMapLocalMultiplication (stage 3; reviewer PASS; first push; landing 20261014T040538-L-999397 (interface); batch 20261014T040537; modules 3; new nodes 2)

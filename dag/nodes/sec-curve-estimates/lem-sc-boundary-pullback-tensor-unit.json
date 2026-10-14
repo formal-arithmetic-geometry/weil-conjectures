@@ -1,0 +1,175 @@
+{
+ "id": "lem-sc-boundary-pullback-tensor-unit",
+ "kind": "statement",
+ "title": "Normalization of the canonical boundary pullback tensor comparison",
+ "statement": "Let $j:Z\\to X$ be any morphism of schemes and let $M,N$ be $\\mathcal O_X$-modules [lem-sc-square-zero-ideal-tensor-unit]. Write $P$ for tensorPullback and $\\eta$ for its chosen adjunction unit. For every open $U$ of $X$ and sections $s\\in\\Gamma(U,M)$, $t\\in\\Gamma(U,N)$, boundaryPullbackTensorIso sends $\\eta_{M\\otimes N}(s\\otimes t)$ over $j^{-1}U$ to $\\eta_M(s)\\otimes\\eta_N(t)$. No closed-immersion, invertibility or square-zero hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CD, lemma-tensor-product-pullback (proof omitted); Tag 0096, pullback adjunction; expansion of the tensor coefficients in Tag 09MS, coherent-equation-ses."
+ },
+ "stmt_deps": [
+  "lem-sc-square-zero-ideal-tensor-unit"
+ ],
+ "proof": [
+  {
+   "text": "Expand the adjunction comparison with Mathlib pullback. The unit-leftAdjointUniq equation says that the tensor-pullback unit followed by this comparison is the Mathlib pullback unit, for M, N and M tensor N.",
+   "uses": [
+    "lem-sc-square-zero-ideal-tensor-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute the Mathlib pullback tensor comparison on the unit image of s tensor t. On the scalar-extension presheaf this is the map 1 tensor (s tensor t) to (1 tensor s) tensor (1 tensor t). This balanced map commutes with restriction. Its sheafification is the oplax tensor comparison of pullback; the localization monoidal structure is induced by this same comparison, so the inverse monoidal tensorator has exactly this formula. Sheafification preserves the equation on the images of these sections.",
+   "uses": [
+    "lem-sc-square-zero-ideal-tensor-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the definition of boundaryPullbackTensorIso, the final inverse adjunction comparisons on the two factors cancel those supplied by the first step. This gives the asserted equality for every open. Linearity includes zero sections and zero modules; sheafification and restriction give the same equation on the empty open.",
+   "uses": [
+    "lem-sc-square-zero-ideal-tensor-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-square-zero-ideal-tensor-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "D4 expansion of the canonical tensor maps implicit in Tags 01CD and 09MS; read via the Stacks tag pages."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "monoidal pullback adjunction unit tensor product sections closed immersion ideal kernel multiplication",
+   "results": "AlgebraicGeometry.Scheme.Pullback.SpecTensorTo_SpecOfPoint, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.pullbackSpecIso_inv_fst', AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst, AlgebraicGeometry.pullbackSpecIso_inv_fst, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.pullbackSpecIso_hom_fst, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.whiskerLeft_comp",
+   "results": "CategoryTheory.MonoidalCategory.whiskerLeft_comp",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*tmul|tmul.*unit|pullback.*tensor",
+   "results": "No hits in the searched Mathlib directory.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "results": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of tensor product pure sections under adjunction unit preserves tensor product",
+   "results": "ModuleCat.extendRestrictScalarsAdj_unit_app_apply, SheafOfModules.pullbackObjUnitToUnit, CategoryTheory.ExponentiableMorphism.coev_def, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, CategoryTheory.ChosenPullbacksAlong.Over.tensorHom_left, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.ExponentiableMorphism.ev_def",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical pullback tensor comparison sends the adjunction unit of a pure tensor to the tensor product of the two unit sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf of modules pullback monoidal comparison preserves tensor product adjunction unit pure tensor sections",
+   "results": "SheafOfModules.pullbackObjUnitToUnit; pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; pullback_map_ιFree_comp_pullbackObjFreeIso_hom; pullbackIso; pullbackObjFreeIso and naturality variants. No exact tensor-section or coefficient-power formula.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.OplaxMonoidal.δ_natural",
+   "results": "CategoryTheory.Functor.OplaxMonoidal.δ_natural: naturality of the oplax tensorator, not the required section normalization or power coherence.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*(tmul|tensor)|unit.*tmul|tensorPow.*(braid|comm)",
+   "results": "25 Mathlib hits, including Scheme.Pullback geometry and unrelated tensor algebra; no exact match. Independent local rg also read ProjectionFormula.tmulSection_unit_app_presheaf_map, PullbackMonoidal, and ClearDenominators.tensorPowAddIso_inv_app_tmulSection: none states the general required equation.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TensorBoundaryKernelMapLocalMultiplication",
+  "date": "2026-10-14",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS, coherent-equation-ses: identification of the ideal tensor coefficient and its multiplication by quotient tensor sections.",
+   "via": [
+    "lem-sc-tensor-boundary-kernel-map-local-multiplication",
+    "lem-sc-tensor-graded-action-kernel-second",
+    "lem-sc-square-zero-tensor-graded-action-projection-second",
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BoundaryPullbackTensorUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundaryPullbackTensorUnit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.boundaryPullbackTensorIso_unit_tmul",
+  "statement": "theorem boundaryPullbackTensorIso_unit_tmul {X Z : Scheme.{u}} (j : Z ⟶ X)\n    (M N : X.Modules) (U : X.Opens) (s : Γ(M, U)) (t : Γ(N, U)) :\n    (boundaryPullbackTensorIso j M N).hom.app (j ⁻¹ᵁ U)\n        (((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app (M ⊗ N)).app U\n          (tmulSection s t)) =\n      tmulSection (M := (tensorPullback j).obj M) (N := (tensorPullback j).obj N)\n        (((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app M).app U s)\n        (((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app N).app U t)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261014T040538-L-999397",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261014T040538-L-999397",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
