@@ -2,6 +2,8 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Sheaf.CategoryTheory.DerivedHomologyInjectiveSurjective
+import Sheaf.CategoryTheory.DerivedHomologyInjectiveInjective
 
 @[expose] public section
 
@@ -37,8 +39,11 @@ theorem derived_homology_injective_bijective
     Function.Bijective
       ((DerivedCategory.homologyFunctor A 0).map :
         (K ⟶ (DerivedCategory.singleFunctor A 0).obj I) →
-        ((DerivedCategory.homologyFunctor A 0).obj K ⟶
+      ((DerivedCategory.homologyFunctor A 0).obj K ⟶
           (DerivedCategory.homologyFunctor A 0).obj
-            ((DerivedCategory.singleFunctor A 0).obj I))) := by sorry
+            ((DerivedCategory.singleFunctor A 0).obj I))) := by
+  constructor
+  · exact derived_homology_injective_injective K I
+  · exact derived_homology_injective_surjective K I
 
 end CategoryTheory
