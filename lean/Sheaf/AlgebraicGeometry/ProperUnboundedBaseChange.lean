@@ -8,7 +8,8 @@ public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.GroupTheory.Torsion
-import Sheaf.AlgebraicGeometry.DerivedCategories
+import Sheaf.AlgebraicGeometry.ProperUnboundedBaseChangeModN
+import Sheaf.AlgebraicGeometry.ProperUnboundedBaseChangeForgetful
 
 /-! # Proper base change on unbounded derived categories
 
@@ -49,6 +50,10 @@ No boundedness assumption on E or Noetherian assumption on the schemes is used. 
 theorem Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring (hΛ : IsAddTorsion Λ)
     [IsProper f] (sq : IsPullback g' f' f g) :
     IsIso (Etale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) := by
-  sorry
+  obtain ⟨n, hn, hunit⟩ := (hΛ 1).exists_nsmul_eq_zero
+  have h : ∀ K, IsIso ((Etale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
+    fun K ↦ isIso_derivedBaseChangeMap_of_isIso_modN Λ n hunit sq
+      (Etale.isIso_derivedBaseChangeMap_of_isProper_modN n hn sq) K
+  exact NatIso.isIso_of_isIso_app _
 
 end AlgebraicGeometry

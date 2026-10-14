@@ -23,59 +23,33 @@
  ],
  "proof": [
   {
-   "text": "Choose $n\\geq1$ with $n1_\\Lambda=0$ and the ring homomorphism $\\varphi:\\mathbf Z/n\\mathbf Z\\to\\Lambda$, $[a]\\mapsto a1_\\Lambda$. It is well defined because replacing $a$ by $a+nb$ changes its image by $b(n1_\\Lambda)=0$. For a representing complex $C$ of $E$, let $C_n$ be the same complex of abelian sheaves, with $[a]m=(a1_\\Lambda)m$. The differentials are $\\mathbf Z/n\\mathbf Z$-linear. Kernels, images and cokernels have the same underlying abelian sheaves, so this termwise restriction preserves quasi-isomorphisms and gives $E_n\\in D(X_{\\mathrm{et}},\\mathbf Z/n\\mathbf Z)$ [def-weil-pbc-derived-categories]. Forgetting all coefficients gives literally the same underlying complex, hence $U_X^\\Lambda E=U_X^{\\mathbf Z/n}E_n$ in the abelian derived category.",
-   "uses": [
-    "def-weil-pbc-derived-categories"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n, reduction to fibres; Tag 0F0C, lemma-proper-base-change-mod-n, extended to torsion rings by coefficient forgetting"
-   }
+   "text": "Use additive torsion at 1_Λ to obtain a positive natural number n with n·1_Λ=0. This is Mathlib IsOfFinAddOrder.exists_nsmul_eq_zero, applied to hΛ(1).",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Apply [lem-kun-0f0c] to the original cartesian square and $E_n$. Its statement permits every $n\\geq1$, every proper $f$, arbitrary $g$, and an unbounded complex of $\\mathbf Z/n\\mathbf Z$-module sheaves. Thus $\\operatorname{Ex}^{\\mathbf Z/n}_{\\square,E_n}$ is an isomorphism. No invertibility of $n$ on a scheme, no finite coefficient algebra assumption, and no scheme of finite type over a field is required.",
+   "text": "Apply the finite cyclic-coefficient unbounded proper base-change theorem to n and the same cartesian square.",
    "uses": [
     "lem-kun-0f0c"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n, reduction to fibres; Tag 0F0C, lemma-proper-base-change-mod-n, extended to torsion rings by coefficient forgetting"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-kun-unbounded-abelian-exchange-comparison] first with coefficients $\\mathbf Z/n\\mathbf Z$ and complex $E_n$. Its fixed endpoint isomorphisms satisfy $t_n U^{\\mathbf Z/n}_{Y'}(\\operatorname{Ex}^{\\mathbf Z/n}_{\\square,E_n})=\\operatorname{Ex}^{\\mathbf Z}_{\\square,U_X^{\\mathbf Z/n}E_n}s_n$. The middle forgotten map is invertible by step 2, so the abelian exchange equals $t_n U^{\\mathbf Z/n}_{Y'}(\\operatorname{Ex}^{\\mathbf Z/n}_{\\square,E_n})s_n^{-1}$ and is invertible. Now apply the same comparison with coefficients $\\Lambda$ and complex $E$. By step 1 its abelian exchange is the very same map. Consequently $U^\\Lambda_{Y'}(\\operatorname{Ex}^{\\Lambda}_{\\square,E})=t_\\Lambda^{-1}\\operatorname{Ex}^{\\mathbf Z}_{\\square,U_X^\\Lambda E}s_\\Lambda$ is invertible. These equations identify the actual adjunction mates, rather than just isomorphic endpoint objects.",
+   "text": "Transfer this cyclic-coefficient exchange isomorphism to Λ at every object K using the annihilator equation. Assemble the componentwise IsIso instances into the natural-transformation isomorphism with NatIso.isIso_of_isIso_app.",
    "uses": [
-    "lem-kun-unbounded-abelian-exchange-comparison"
+    "lem-kun-proper-base-change-forgetful"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n, reduction to fibres; Tag 0F0C, lemma-proper-base-change-mod-n, extended to torsion rings by coefficient forgetting"
-   }
-  },
-  {
-   "text": "The functor $U^\\Lambda_{Y'}$ reflects isomorphisms by [lem-kun-unbounded-abelian-exchange-comparison]. Apply that assertion to the map whose forgotten image was proved invertible in step 3. The resulting isomorphism is precisely $g^{-1}Rf_*E\\to Rf'_*g'^{-1}E$ of the statement.",
-   "uses": [
-    "lem-kun-unbounded-abelian-exchange-comparison"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n, reduction to fibres; Tag 0F0C, lemma-proper-base-change-mod-n, extended to torsion rings by coefficient forgetting"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-derived-categories",
   "lem-kun-0f0c",
-  "lem-kun-unbounded-abelian-exchange-comparison"
+  "lem-kun-proper-base-change-forgetful"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 0F0G and 0F0C; explicit coefficient reduction through Tag 0D6J and canonical-mate coherence"
+  "place": "Tags 0F0C and 0F0G; positive annihilator of the ring unit followed by cyclic coefficient restriction and canonical mate comparison"
  },
  "mathlib_searches": [
   {
@@ -244,11 +218,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-a61cd",
-  "group": "C2",
+  "reviewer": "COMPILER",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261014T194627-L-1482207",
+  "landing": "20261014T214024-L-3378178",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files match the recorded DAG statements and compile successfully, including adapted importers and forced Proper re-export."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

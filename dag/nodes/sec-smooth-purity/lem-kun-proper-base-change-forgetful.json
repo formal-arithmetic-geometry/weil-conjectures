@@ -1,0 +1,118 @@
+{
+ "id": "lem-kun-proper-base-change-forgetful",
+ "kind": "statement",
+ "title": "Transfer of unbounded exchange invertibility from cyclic coefficients",
+ "statement": "Let Λ be a commutative ring, n a natural number with n·1_Λ=0, and let g', f', f, g be a cartesian square of schemes as in [def-weil-pbc-scheme-conventions]. Suppose the canonical exchange of [def-kun-unbounded-exchange] is an isomorphism of functors on D(X_et, Z/nZ). Then, for every K in D(X_et, Λ) of [def-weil-pbc-derived-categories], its canonical Λ-coefficient exchange is an isomorphism. No properness hypothesis is needed for this coefficient comparison. Universe lifting is used to place both coefficient categories in the same universe.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6J(3), with the canonical mate coherence stated by lem-kun-unbounded-abelian-exchange-comparison; coefficient restriction from the proof of lem-kun-proper-base-change-torsion-ring"
+ },
+ "stmt_deps": [
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "The relation n·1_Λ=0 gives the explicit map Z/nZ → Λ, [a] ↦ a·1. Restrict a representing complex termwise with action [a]m=(a·1)m. Restriction preserves kernels and cokernels, hence quasi-isomorphisms, and the restricted complex K_n has exactly the same underlying abelian complex as K. This also works for n=0 with ZMod 0=ℤ.",
+   "uses": [
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The assumed cyclic-coefficient exchange is invertible at K_n. Apply lem-kun-unbounded-abelian-exchange-comparison for Z/nZ: t_n U_n(Ex_n)=Ex_ab s_n, with s_n,t_n invertible. It follows that Ex_ab is invertible. Apply the same comparison for Λ; the equality of underlying complexes identifies exactly the same Ex_ab, and t_Λ U_Λ(Ex_Λ)=Ex_ab s_Λ makes U_Λ(Ex_Λ) invertible. The conservative forgetting functor then reflects invertibility of Ex_Λ. These equations concern the canonical mates, not just their endpoints.",
+   "uses": [
+    "lem-kun-unbounded-abelian-exchange-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-kun-unbounded-abelian-exchange-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6J(3); twice apply the canonical exchange comparison node to explicitly restricted coefficients"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"IsIso\"",
+   "date": "2026-10-15",
+   "results": "0 hits: ; read returned types. No unbounded coefficient-exchange comparison. Existing module/abelian comparison in lean/Sheaf is bounded below only.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact conservative restriction of coefficients identifies the canonical unbounded derived etale base change exchange maps via their adjunction mates",
+   "date": "2026-10-15",
+   "results": "unavailable: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "grep",
+   "query": "forget.*[dD]erived|[dD]erived.*forget|baseChange.*[iI]so",
+   "date": "2026-10-15",
+   "results": "13 hits: Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean, Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean, Mathlib/CategoryTheory/Sites/Hypercover/Subcanonical.lean, Mathlib/CategoryTheory/MorphismProperty/Representable.lean, Mathlib/CategoryTheory/MorphismProperty/Representable.lean, Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean, Mathlib/CategoryTheory/Sites/Hypercover/ZeroFamily.lean, Mathlib/CategoryTheory/MorphismProperty/Limits.lean; read returned types. No unbounded coefficient-exchange comparison. Existing module/abelian comparison in lean/Sheaf is bounded below only.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars from a ring killed by n to ZMod n is conservative and identifies the canonical derived etale exchange maps on unbounded complexes",
+   "date": "2026-10-15",
+   "results": "8 hits: Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.comp, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.Etale.comp, Algebra.FormallyEtale.iff_of_equiv, Algebra.FormallyEtale.of_equiv, Algebra.IsEtaleAt.comp; read returned types. No unbounded coefficient-exchange comparison. Existing module/abelian comparison in lean/Sheaf is bounded below only.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperUnboundedBaseChange",
+  "date": "2026-10-15",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-proper-base-change-torsion-ring",
+   "place": "unbounded proper base change over torsion coefficients",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperUnboundedBaseChangeForgetful",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperUnboundedBaseChangeForgetful.lean",
+  "declaration": "AlgebraicGeometry.isIso_derivedBaseChangeMap_of_isIso_modN",
+  "statement": "theorem isIso_derivedBaseChangeMap_of_isIso_modN\n    (n : ℕ) (hunit : n • (1 : Λ) = 0) (sq : IsPullback g' f' f g)\n    (hbase : IsIso (Etale.derivedBaseChangeMap\n      (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))) sq.toCommSq))\n    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :\n    IsIso ((Etale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app K)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T214024-L-3378178",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T214024-L-3378178",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
