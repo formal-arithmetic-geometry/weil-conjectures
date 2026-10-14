@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Fix the finite-stage arrow j→k.\nApply naturality of the supplied full two-label comparison θ to the given chain\nmap a; it need not descend to the bottom. Scalar reassociation identifies\nscalarExtensionHom with κE.hom followed by extension of a followed by κK.inv,\nwhere κ is affineModelScalarAssocIso. The two object triangles express the\ncomparison at the target as κ, θ, pullback of the source comparison and the\ninverse perfectHomComparison. Substitute these formulas and expand map_comp.\nCancel adjacent inverse pairs, use naturality of θ, then cancel its inverse\npair. The result is exactly the conjugated Hom transport written below.\nProof irrelevance identifies the generated pullback-instance proofs with the\nnamed arrow representation. The argument includes identity arrows, zero rings,\nzero complexes and coincident labelled objects.",
+   "text": "Fix j, k and the chain map a. Use the proved local stageMap_asHomMap equation to express perfectStageMap using affineModelStageArrow. Use homMap_pinned to express perfectHomMap through an equal pinned comparison. This pin is Classical.choose of the fully proved assertion that there is an isomorphism equal to the supplied comparison; pinnedIso_eq proves that exact equality. Rewrite the two supplied object triangles by the same equality. Apply the proved affineModel_scalarConjugation_nat to the ring maps F(j), F(j→k), F(k), their F.map_comp equality, the localized tilde functors, m.θ(j,k), the object comparisons and the two rewritten triangles. This lemma identifies scalarExtensionHom with scalar reassociation and uses naturality and inverse cancellation to give precisely the desired conjugated Hom equality. All local helpers are proved; there are no new mathematical hypotheses or postponed steps.",
    "uses": [
     "lem-pc-affine-model-coherent-object-comparisons",
     "def-pc-complex-scalar-extension-hom",
@@ -26,7 +26,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/09RE",
-  "place": "Definitional introduction of the explicitly stated affine comparison-data formula; source representations are given by real named functor definitions."
+  "place": "U2: the original scalar-reassociation and naturality argument, using the proved affineModel_scalarConjugation_nat API and exact-value local transport equations; derived pullback composition is as in Tag 0D5S."
  },
  "mathlib_searches": [
   {
@@ -110,11 +110,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P4",
+  "reviewer": "X-f86f2",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261014T045611-L-1573878",
+  "landing": "20261014T063823-L-2815810",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged theorem signature and proof with its node, coherent-object triangles, scalar-conjugation lemma, and transport definitions; delivery and sole direct importer compile cleanly; all six axiom checks exclude sorryAx."
  }
 }
