@@ -14126,3 +14126,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:08 L: merged deliver/N2/Sheaf.Algebra.Homology.KInjectiveProducts (stage 3; reviewer PASS; first push; landing 20261014T010847-L-3165662 (proof); batch 20261014T010832; modules 1; new nodes 0)
 - 01:08 L: merged deliver/N2/Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal (stage 3; reviewer PASS; first push; landing 20261014T010848-L-3165771 (proof); batch 20261014T010832; modules 1; new nodes 0)
 - 01:08 L: merged deliver/N2/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T010848-L-3165922 (proof); batch 20261014T010832; modules 1; new nodes 0)
+- 01:08 L: merged deliver/N4/Sheaf.AlgebraicGeometry.RawModuleScalarPullbackFormulas (stage 3; reviewer PASS; first push; landing 20261014T010849-L-3166069 (interface); batch 20261014T010832; modules 3; new nodes 3; change records: coord/changes/pullback-formula-split.md)
