@@ -10,7 +10,8 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.SchemeCanonicalShiftUnitIso
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
-
+import Sheaf.AlgebraicGeometry.FlatTelescopeBoundedNormalizationExtension
+import Sheaf.Algebra.Homology.KFlatTelescopeClosure
 
 /-! # Local shift gauge on flat telescope models
 
@@ -26,6 +27,11 @@ universe u w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated MonoidalCategory
 namespace AlgebraicGeometry
 
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 800000 in
+-- Comparing the two counits elaborates their large dependent functor types.
 /-- The supplied-tensorator gauge on concrete models, natural only for stage maps.
 No transformation on the entire homotopy category is supplied.
 
@@ -96,6 +102,79 @@ theorem exists_flat_telescope_model_shift_gauge
               tensorIso e (Iso.refl _) ≪≫
               schemeCanonicalShiftUnitIso Z
                 ((derivedPullback f).obj (DerivedCategory.Qh.obj X))).hom ≫
-            ((a X ⟨P, htel, Or.inl rfl⟩).hom)⟦(1 : ℤ)⟧' := by sorry
+            ((a X ⟨P, htel, Or.inl rfl⟩).hom)⟦(1 : ℤ)⟧' := by
+  classical
+  let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  let q := HomotopyCategory.quotient A (ComplexShape.up ℤ)
+  let L := DerivedCategory.Qh ⋙ derivedPullback f
+  let G := (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙
+    (DerivedCategory.Qh : HomotopyCategory
+      (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤
+      schemeDerivedCategory Z)
+  have hεK (P : CochainComplex A ℤ) (hP : CochainComplex.IsKFlat (R := Y.sheaf) P) :
+      IsIso (ε.app (q.obj P)) := by
+    obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
+      E, hE, hEmap, hEadd, δ, hδ, htri, hK⟩ :=
+      Classical.choose_spec (exists_derivedPullback f)
+    have hE' : E = Scheme.Modules.tensorPullback f :=
+      CategoryTheory.Functor.ext hE (fun _ _ s ↦ hEmap s)
+    subst E
+    let W := HomotopyCategory.quasiIso A (ComplexShape.up ℤ)
+    have : (derivedPullback f).IsLeftDerivedFunctor δ W := hδ
+    have : IsIso ((derivedPullback f).leftDerivedLift δ W (derivedPullback f) ε) :=
+      ((derivedPullback f).isLeftDerivedFunctor_iff_isIso_leftDerivedLift
+        δ W (derivedPullback f) ε).mp hε
+    have : IsIso (δ.app (q.obj P)) := hK P hP
+    rw [← Functor.leftDerived_fac_app (derivedPullback f) δ W (derivedPullback f) ε]
+    infer_instance
+  have htelK (P : CochainComplex A ℤ) (hP : isFlatTelescope Y P) :
+      CochainComplex.IsKFlat (R := Y.sheaf) P := by
+    obtain ⟨E, t, hb, hf, rfl⟩ := hP
+    apply (CochainComplex.kFlat_closure Y.sheaf).2.2.2.1 E t
+    intro n
+    exact (CochainComplex.kFlat_closure Y.sheaf).1 (E n) (hb n) (hf n)
+  have hεiso (X : HomotopyCategory A (ComplexShape.up ℤ))
+      (hX : flatTelescopeShiftRepresentative Y X) : IsIso (ε.app X) := by
+    obtain ⟨P, hP, h | h⟩ := hX
+    · subst X
+      exact hεK P (htelK P hP)
+    · subst X
+      have : IsIso (ε.app (q.obj P)) := hεK P (htelK P hP)
+      have he : ε.app ((q.obj P)⟦(1 : ℤ)⟧) =
+          (L.commShiftIso (1 : ℤ)).hom.app (q.obj P) ≫
+            (ε.app (q.obj P))⟦(1 : ℤ)⟧' ≫
+            (G.commShiftIso (1 : ℤ)).inv.app (q.obj P) := by
+        rw [← Category.assoc, NatTrans.shift_app_comm ε (1 : ℤ), Category.assoc,
+          Iso.hom_inv_id_app]
+        exact (Category.comp_id _).symm
+      rw [he]
+      infer_instance
+  obtain ⟨e, β, hβnat, hβshift⟩ := exists_bounded_flat_model_normalization f
+  obtain ⟨α, hαnat, hαshift⟩ :=
+    exists_flat_telescope_comparison_of_bounded_normalization f e β hβnat hβshift
+  let a := fun X hX ↦ α X hX ≪≫ (@asIso _ _ _ _ (ε.app X) (hεiso X hX)).symm
+  refine ⟨e, a, ?_, ?_⟩
+  · intro X X' hX hX' s hs
+    have : IsIso (ε.app X') := hεiso X' hX'
+    have : IsIso (ε.app X) := hεiso X hX
+    apply (cancel_mono (ε.app X')).1
+    dsimp only [a, Iso.trans_hom, Iso.symm_hom, asIso_inv]
+    rw [Category.assoc, Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+    rw [Category.assoc, ε.naturality]
+    simp only [Category.assoc, IsIso.inv_hom_id_assoc]
+    exact hαnat X X' hX hX' s hs
+  · intro P hP
+    dsimp only
+    let X := q.obj P
+    have : IsIso (ε.app X) := hεiso X ⟨P, hP, Or.inl rfl⟩
+    have : IsIso (ε.app (X⟦(1 : ℤ)⟧)) := hεiso _ ⟨P, hP, Or.inr rfl⟩
+    apply (cancel_mono ((ε.app X)⟦(1 : ℤ)⟧')).1
+    dsimp only [a, Iso.trans_hom, Iso.symm_hom, asIso_inv]
+    rw [Category.assoc, NatTrans.shift_app_comm ε (1 : ℤ)]
+    dsimp only [X, q, A]
+    simp only [Category.assoc, IsIso.inv_hom_id_assoc]
+    rw [Functor.map_comp]
+    simp only [Category.assoc, ← Functor.map_comp, IsIso.inv_hom_id, Category.comp_id]
+    simpa only [Iso.trans_hom, Category.assoc] using hαshift P hP
 
 end AlgebraicGeometry
