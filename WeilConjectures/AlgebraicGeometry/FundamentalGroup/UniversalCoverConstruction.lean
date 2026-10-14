@@ -461,7 +461,36 @@ theorem continuous_graph (x : Spec (.of K)) :
     Continuous fun g : Aut (fiber y) ↦ (Limits.pullback.lift (f := proj y) (g := proj y) (pt y)
       (pt y ≫ (transport g).hom)
       (by rw [Category.assoc, transport_hom, transportHom_proj])).base x := by
-  sorry
+  have hc := isLimitPairCone (diagram y) (limit.isLimit _) (p y) (map_p y) (proj y) (π_p y)
+  refine (isBasis_preimage_isAffineOpen _ _ hc).continuous_iff.mpr ?_
+  rintro _ ⟨_, ⟨j, V, -, rfl⟩, rfl⟩
+  let R (c : (fiber y).obj ((obj y).obj j)) : (Limits.pullback (p y j) (p y j) : Scheme.{u}) :=
+    (Limits.pullback.lift (point y j).left c.left
+      ((fiber_left_comp y _).trans (fiber_left_comp y c).symm)).base x
+  have key (g : Aut (fiber y)) : Limits.pullback.lift (f := proj y) (g := proj y) (pt y)
+      (pt y ≫ (transport g).hom) (by rw [Category.assoc, transport_hom, transportHom_proj]) ≫
+        (pairCone (diagram y) (p y) (map_p y) (proj y) (π_p y)).π.app j =
+      Limits.pullback.lift (point y j).left (g.inv.app _ (point y j)).left
+        ((fiber_left_comp y _).trans (fiber_left_comp y _).symm) := by
+    refine Limits.pullback.hom_ext ?_ ?_
+    · rw [Category.assoc, Limits.pullback.lift_fst]
+      refine (Limits.pullback.lift_fst_assoc _ _ _ _).trans ?_
+      exact (pt_π y j).trans (Limits.pullback.lift_fst _ _ _).symm
+    · rw [Category.assoc, Limits.pullback.lift_snd]
+      refine (Limits.pullback.lift_snd_assoc _ _ _ _).trans ?_
+      change pt y ≫ (transport g).hom ≫ limit.π (diagram y) j = _
+      rw [π_eq_toObj, transport_hom, transportHom_toObj, pt_toObj]
+      exact (Limits.pullback.lift_snd _ _ _).symm
+  have hcont : Continuous fun g : Aut (fiber y) ↦ g.inv.app ((obj y).obj j) (point y j) :=
+    Continuous.congr ((continuous_of_discreteTopology (f := fun σ : Aut ((fiber y).obj ((obj y).obj j)) ↦
+      σ.inv (point y j))).comp ((continuous_apply ((obj y).obj j)).comp
+      (continuous_induced_dom (f := autEmbedding (fiber y))))) fun _ ↦ rfl
+  convert (isOpen_discrete {c | R c ∈ V}).preimage hcont using 1
+  ext g
+  change _ ∈ V ↔ R _ ∈ V
+  simp only [R]
+  rw [← key g]
+  exact Iff.rfl
 
 end Graph
 
