@@ -3,40 +3,151 @@
  "blueprint": {
   "is": "lem-kun-kflat-criteria",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "K-flat criteria",
- "statement": "Let $\\Lambda$ be a commutative ring and $T$ a scheme, and work on\n$T_{\\Et}$ with $\\Lambda_T$-module sheaves.\n\n1. **(1)** Every bounded-above complex of flat $\\Lambda_T$-module\nsheaves is K-flat.\n1. **(2)** In a distinguished triangle of complexes of\n$\\Lambda_T$-module sheaves, if two of the three terms are K-flat then\nso is the third; in particular cones of maps between K-flat complexes\nare K-flat.\n1. **(3)** Filtered colimits of K-flat complexes are K-flat; in\nparticular every bounded-below complex of flat $\\Lambda_T$-module\nsheaves is K-flat.",
+ "statement": "Let $\\Lambda$ be a commutative ring and $T$ a scheme. Work on a small skeleton of $T_{\\Et}$ in the chosen universe [def-weil-pbc-etale-site; def-weil-size-convention], with the constant ring sheaf $\\Lambda_T$ [def-kun-constant-sheaf]. Complexes and K-flatness use the direct-sum total tensor convention of [def-kun-derived-tensor]; flat sheaves mean tensor-flat sheaves [def-pc-flat-sheaf-modules].\n\n(1) Every bounded-above complex of flat $\\Lambda_T$-module sheaves is K-flat.\n\n(2) In a distinguished triangle in the homotopy category $K(\\operatorname{Mod}(\\Lambda_T))$ (complexes modulo chain homotopy, with distinguished triangles the triangles isomorphic to mapping-cone triangles [lem-pur-homotopy-category-triangulated]), if two terms are K-flat, so is the third. In particular, the cone of a morphism between K-flat complexes is K-flat.\n\n(3) For every small filtered category $I$ and diagram $(K_i^\\bullet)_{i\\in I}$ of K-flat complexes, the degreewise sheaf colimit $\\varinjlim_i K_i^\\bullet$ is K-flat. In particular, a complex expressed as a small filtered degreewise colimit of bounded-above complexes of flat sheaves is K-flat.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kflat-criteria.md",
   "place": "node lem-kun-kflat-criteria, order 1713"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-size-convention",
+  "def-kun-constant-sheaf",
+  "def-kun-derived-tensor",
+  "def-pc-flat-sheaf-modules",
+  "lem-pur-homotopy-category-triangulated"
+ ],
  "proof": [
   {
-   "text": "(1) For a $\\Lambda_T$-module sheaf as in\n[def-weil-pbc-etale-sheaves] the notion of K-flatness is that of\n[def-kun-derived-tensor]. Let $\\mathcal F^\\bullet$ be a bounded-above complex of flat\nsheaves, $\\mathcal F^i=0$ for $i>N$, and let\n$\\mathcal A^\\bullet$ be an acyclic complex. By descending induction\non $N$ we show that $\\mathcal F^\\bullet\\otimes_\\Lambda\\mathcal A^\\bullet$ is acyclic. The stupid truncation of\n[def-kun-truncations] gives a short exact\nsequence of complexes\n\n$$\n0\\to\\mathcal F^N[-N]\\to\\mathcal F^\\bullet\\to\n\\sigma_{\\le N-1}\\mathcal F^\\bullet\\to0 ,\n$$\n\nand tensoring it with $\\mathcal A^\\bullet$ preserves exactness\nbecause it is exact degreewise (the terms $\\mathcal F^i$ are flat);\nthe resulting triangle shows that the middle term is acyclic whenever\nthe outer two are, by the long exact cohomology sequence. Now\n$\\mathcal F^N[-N]\\otimes_\\Lambda\\mathcal A^\\bullet$ is a shift of\n$\\mathcal F^N\\otimes_\\Lambda\\mathcal A^\\bullet$, which is acyclic as\n$\\mathcal F^N$ is flat, and\n$\\sigma_{\\le N-1}\\mathcal F^\\bullet\\otimes_\\Lambda\\mathcal A^\\bullet$\nis acyclic by induction. Hence\n$\\mathcal F^\\bullet\\otimes_\\Lambda\\mathcal A^\\bullet$ is acyclic, and\n$\\mathcal F^\\bullet$ is K-flat.\n(2) Tensoring a distinguished triangle with the acyclic complex\n$\\mathcal A^\\bullet$ gives a distinguished triangle; if two of its\nterms are acyclic then so is the third, by the long exact cohomology\nsequence. Hence if two terms of the original triangle are K-flat, the\nthird is as well. A cone is the third term of the triangle determined\nby the map.\n(3) Let $\\mathcal K^\\bullet=\\varinjlim_i\\mathcal K_i^\\bullet$ be a\nfiltered colimit of K-flat complexes. Filtered colimits of\n$\\Lambda_T$-module sheaves are exact and commute with tensor products,\nand homology commutes with filtered colimits, so for every acyclic\n$\\mathcal A^\\bullet$,\n\n$$\n\\mathcal K^\\bullet\\otimes_\\Lambda\\mathcal A^\\bullet\n=\\varinjlim_i\\bigl(\\mathcal K_i^\\bullet\\otimes_\\Lambda\\mathcal\nA^\\bullet\\bigr)\n$$\n\nis a filtered colimit of acyclic complexes, hence acyclic; thus\n$\\mathcal K^\\bullet$ is K-flat. A bounded-below complex\n$\\mathcal F^\\bullet$ of flat sheaves is the filtered colimit of its\nstupid truncations $\\sigma_{\\le n}\\mathcal F^\\bullet$\n([def-kun-truncations]), each of which is bounded, hence\nbounded above and flat, hence K-flat by (1).",
+   "text": "For (1), take the ringed site $(\\mathcal C,\\mathcal O)=(T_{\\Et},\\Lambda_T)$. The flatness and K-flatness conventions are precisely those in [def-pc-flat-sheaf-modules] and [def-kun-derived-tensor]. Apply [lem-pc-bounded-above-flat-kflat-site] to this site and the given bounded-above complex. Its hypotheses require only an upper degree bound and tensor-flat terms, both assumed; it supplies acyclicity after tensor with every acyclic complex, with no lower degree bound.",
    "uses": [
-    "def-weil-pbc-etale-sheaves",
+    "def-pc-flat-sheaf-modules",
     "def-kun-derived-tensor",
-    "def-kun-truncations"
+    "lem-pc-bounded-above-flat-kflat-site"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, sites-cohomology-lemma-bounded-flat-K-flat"
+   }
+  },
+  {
+   "text": "For a mapping-cone triangle $K_1\\to K_2\\to C(f)\\to K_1[1]$, fix any acyclic complex $A$. By [def-kun-derived-tensor], the two K-flat terms give acyclic total tensor complexes with $A$. Apply [lem-pc-kflat-tensor-cone-two-out-of-three], with the acyclic factor on the left, to obtain acyclicity for the third tensor complex. The sign symmetry $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ in bidegree $(p,q)$ identifies this with the convention of [def-kun-derived-tensor]. Since $A$ was arbitrary, the third term is K-flat. This proves the cone assertion.",
+   "uses": [
+    "def-kun-derived-tensor",
+    "lem-pc-kflat-tensor-cone-two-out-of-three"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A3, sites-cohomology-lemma-K-flat-two-out-of-three"
+   }
+  },
+  {
+   "text": "For a general distinguished triangle in the homotopy category, [lem-pur-homotopy-category-triangulated] identifies it up to homotopy-category isomorphism with a mapping-cone triangle. K-flatness is invariant under these isomorphisms: if $h:K^q\\to L^{q-1}$ is a chain homotopy, on $A^p\\otimes K^q$ use $H=(-1)^p(1\\otimes h)$. For the total differential of [def-pc-tensor-complex-sheaves], the two terms involving $d_A$ cancel and $dH+Hd=1\\otimes(dh+hd)$. Thus tensor carries homotopy inverse maps to homotopy inverse maps. Such maps induce inverse maps on cohomology, since $dh+hd$ acts trivially on cycles modulo boundaries. Hence tensor acyclicity, and so K-flatness [def-kun-derived-tensor], transfers along the three isomorphisms; the preceding step proves (2).",
+   "uses": [
+    "lem-pur-homotopy-category-triangulated",
+    "def-pc-tensor-complex-sheaves",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A3, passage from cone triangles to distinguished triangles; explicit homotopy calculation"
+   }
+  },
+  {
+   "text": "For (3), fix any acyclic complex $A$. The small-skeleton convention [def-weil-size-convention] satisfies the small-site hypothesis of [lem-pc-module-filtered-colimits-tensor]. That node identifies $\\operatorname{Tot}((\\varinjlim_i K_i)\\otimes A)$ with $\\varinjlim_i\\operatorname{Tot}(K_i\\otimes A)$ and says filtered module-sheaf colimits are exact. Every tensor complex on the right is acyclic by [def-kun-derived-tensor]. More explicitly, set $C_i=\\operatorname{Tot}(K_i\\otimes A)$ and $Z_i^n=\\ker d_{C_i}^n$. Acyclicity gives short exact sequences $0\\to Z_i^n\\to C_i^n\\to Z_i^{n+1}\\to0$, compatible with transition maps. Exactness of the filtered colimit gives the same sequences with colimits, and $\\colim Z_i^{n+1}\\to\\colim C_i^{n+1}$ is monic. Therefore the image of the colimit differential in degree $n-1$ and the kernel of its differential in degree $n$ are both $\\colim Z_i^n$. The colimit complex is acyclic. As $A$ was arbitrary, the colimit is K-flat. The final assertion follows by applying (1) to each diagram term and then this result.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-pc-module-filtered-colimits-tensor",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YR, sites-cohomology-lemma-colimit-K-flat; its exact-colimit proof applies to every small filtered category"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-sheaves",
+  "def-pc-flat-sheaf-modules",
   "def-kun-derived-tensor",
-  "def-kun-truncations"
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-kflat-tensor-cone-two-out-of-three",
+  "lem-pur-homotopy-category-triangulated",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-size-convention",
+  "lem-pc-module-filtered-colimits-tensor"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kflat-criteria.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YQ, 07A3, 06YR (labels lemma-bounded-flat-K-flat, lemma-K-flat-two-out-of-three, lemma-colimit-K-flat)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat|kFlat|k_flat",
+   "results": "Mathlib/Computability/TuringMachine/Tape.lean; Mathlib/Computability/TuringMachine/Tape.lean; Mathlib/Computability/TuringMachine/Tape.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: the grep hits are unrelated ListBlank.flatMap declarations in TuringMachine/Tape.lean"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flat complexes closed under mapping cones and filtered colimits",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preservesQuasiIso\"",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: search returned no declarations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\"",
+   "results": "Lean.mkFlatCtorOfStructCtorName",
+   "date": "2026-10-14",
+   "verdict": "no match: Lean.mkFlatCtorOfStructCtorName is unrelated to K-flat complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring an acyclic complex with a bounded above complex of flat objects gives an acyclic total complex",
+   "results": "Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX; Module.Flat.iff_lTensor_exact'; Module.Flat.iff_rTensor_exact'",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern flat modules or tensor definitions, not the K-flat complex criteria"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded above complexes of flat sheaves are K-flat and K-flat complexes are closed under cones and filtered colimits",
+   "results": "CategoryTheory.lan_flat_of_flat; Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; CategoryTheory.compatiblePreservingOfFlat; Module.Flat.iff_preservesFiniteLimits_tensorLeft; ModuleCat.preservesFiniteLimits_extendScalars_of_flat; Module.Flat.iff_lTensor_exact'; Module.FaithfullyFlat.iff_exact_iff_lTensor_exact",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern flat modules or tensor definitions, not the K-flat complex criteria"
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic|quasiIso",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: search returned no declarations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomologicalComplex\", \"acyclic\"",
+   "results": "HomologicalComplex.Acyclic; HomologicalComplex.acyclic_iff; HomologicalComplex.acyclic_of_isZero; HomologicalComplex.Acyclic.op; HomologicalComplex.acyclic_op_iff; HomologicalComplex.Acyclic.unop; HomologicalComplex.Acyclic.truncGE; HomologicalComplex.acyclic_truncGE_iff_isSupportedOutside",
+   "date": "2026-10-14",
+   "verdict": "no match: declarations concern acyclicity, opposite complexes and truncation, not the conjunction of K-flat criteria"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps"
@@ -62,5 +173,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-kflat-criteria",
+  "worker": "stage1",
+  "summary": "Corrected the false bounded-below corollary and specified homotopy-category triangles. Reused generic ringed-site bounded-above, tensor-cone and exact-filtered-colimit nodes; wrote homotopy invariance and the exact-colimit argument explicitly. No new nodes. See report for dual-number counterexamples and affected citers.",
+  "blueprint": "Opening setup and proof clauses (1), (2), (3); replaces the invalid descending induction and upper-stupid-truncation colimit with the Stacks route, and repairs the false final corollary.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic ringed-site tool specialized to the constant coefficient sheaf on the small etale site; no independent node of this unit supplies this prerequisite."
+   },
+   {
+    "node": "lem-pc-kflat-tensor-cone-two-out-of-three",
+    "why": "Generic ringed-site tool specialized to the constant coefficient sheaf on the small etale site; no independent node of this unit supplies this prerequisite."
+   },
+   {
+    "node": "lem-pc-module-filtered-colimits-tensor",
+    "why": "Generic ringed-site tool specialized to the constant coefficient sheaf on the small etale site; no independent node of this unit supplies this prerequisite."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-kflat-tensor-cone-two-out-of-three",
+  "lem-pc-module-filtered-colimits-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-e6b8baf9a",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-e6b8baf9a (reviewer sub-agent of L); spot-checked: Read the item, all four steps, cited statements, unit/chapter route, and sources in full. Stacks 06YQ, 07A3, 06YR, 03DB and 03EP support the repaired criteria; dual-number counterexamples confirm the blueprint errors. No new nodes, missing reachable dependencies, or cycles. Accepted all three declared generic tool_uses. Target categories and exchange maps remain unchanged. review.md records detailed checks and inherited downstream issues."
+ }
 }
