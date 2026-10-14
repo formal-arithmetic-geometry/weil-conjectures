@@ -29,11 +29,11 @@
 | `Sheaf.Paper.CechCupResolutionRepresentatives` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.InvertibleSymmetricAlgebraCoproduct` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OverlapConjugateRestriction` | 25 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictedCounitCancellation` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenUnionCompatibleChainData` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux` | 25 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebraAffine` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackCompositionCounitNormalization` | 27 | 1 | proof |
 | `Sheaf.Paper.ModuleCupEqualDerivedMapsClass` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverComponentIdentity` | 28 | 1 | proof |
