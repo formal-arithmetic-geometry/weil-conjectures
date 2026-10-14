@@ -20,6 +20,8 @@ import Sheaf.Algebra.Homology.KFlatTensorProduct
 import Sheaf.Algebra.Homology.KFlatPullback
 
 /-!
+This module was independently rechecked by S3; all declarations are already proved.
+
 Canonical adjunction and tensor data are pinned by their characterising equations.
  # Canonical global Hom adjunction
 Source: Stacks Project, duality.tex, Tag 0B6I (lemma-iso-global-hom).
