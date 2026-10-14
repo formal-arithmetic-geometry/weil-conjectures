@@ -7,6 +7,9 @@ module
 
 public import Sheaf.Paper.ModuleCupGlobalTensorPullback
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import Sheaf.Paper.ModuleCupAdjunctionCalculation
+import Sheaf.Paper.ModuleCupCochainCounitTensor
+import Sheaf.Paper.ModuleCupCochainComparisonSquares
 
 /-! # Adjunction transpose polygon for the global cup
 
@@ -62,6 +65,8 @@ attribute [local instance 2000] globalPullbackCommRing globalPullbackMonoidal
   globalPullbackSymmetric globalPullbackColimits globalPullbackPreadditive
   globalPullbackClosed globalPullbackFlatResolution
 
+set_option maxHeartbeats 1000000 in
+-- Elaborating the concrete localization and tensor instances requires additional heartbeats.
 /-- Compatibility of the explicit adjunction transpose of the tensor counits.
 Source: Stacks, Tags 0FP3 (Lemma 20.31.3), 0FP1 and 0FP0.
 (blueprint: lem-sc-module-cup-adjunction-polygon)
@@ -88,8 +93,8 @@ pairing. It applies in all degrees; neither K nor L is assumed flat or bounded. 
 theorem moduleCup_adjunction_polygon
     (qLax :
       (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).LaxMonoidal)
-    (hQ : qLax = (inferInstance :
-      (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).LaxMonoidal))
+    (hQ : qLax = DerivedCategory.laxMonoidalQ
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)))
     (β : (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
         (ComplexShape.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙
         (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor)
@@ -154,7 +159,26 @@ theorem moduleCup_adjunction_polygon
       (β.app K ⊗ₘ β.app L) ≫ μ (DerivedCategory.Q.obj K) (DerivedCategory.Q.obj L) ≫
         R.map (Functor.LaxMonoidal.μ DerivedCategory.Q K L ≫ DerivedCategory.Q.map φ) =
       Functor.LaxMonoidal.μ DerivedCategory.Q (T.obj K) (T.obj L) ≫
-        DerivedCategory.Q.map (moduleCup_naiveMap X K L ≫ T.map φ) ≫ β.app I := by sorry
+        DerivedCategory.Q.map (moduleCup_naiveMap X K L ≫ T.map φ) ≫ β.app I := by
+  dsimp only
+  rw [hμ]
+  dsimp only
+  intro K L I inst φ
+  let S := RingedSpace.globalSectionsFunctor X.toRingedSpace
+  let T := S.mapHomologicalComplex (ComplexShape.up ℤ)
+  let Q := DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))
+  let Q₀ := DerivedCategory.Q
+    (C := ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))
+  let F := P.mapHomologicalComplex (ComplexShape.up ℤ)
+  let a := moduleCup_cochainPullbackComparison X P D α
+  let : Q.LaxMonoidal := qLax
+  obtain ⟨ht, hc⟩ := moduleCup_cochain_comparison_squares X qLax hQ β hβ P adj D α dAdj δ
+    hTensor hCounit
+  exact moduleCup_polygon_calculation Q Q₀ T F D S.rightDerivedFunctor
+    (adj.mapHomologicalComplex (ComplexShape.up ℤ)) dAdj a β δ hNat
+    (fun A B ↦ ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans
+      (ComplexShape.up ℤ) P).app A).app B) ht hc K L I
+    (moduleCup_naiveMap X K L) (moduleCup_cochain_counit_tensor X P adj hOrdinary K L) φ
 
 end
 end AlgebraicGeometry.Scheme.Modules

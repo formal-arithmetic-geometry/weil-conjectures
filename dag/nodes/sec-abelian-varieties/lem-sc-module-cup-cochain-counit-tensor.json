@@ -1,0 +1,123 @@
+{
+ "id": "lem-sc-module-cup-cochain-counit-tensor",
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "title": "Ordinary counit and total tensor evaluation",
+ "statement": "For any scheme X and any additive strong monoidal left adjoint P to S=Γ(X,-), let e:P_c⊣S_c be the induced cochain adjunction. Assume μP(SM,SN);P(sectionTensorMap(M,N));ε(M⊗N)=εM⊗εN for all module sheaves M,N. For any integer cochain complexes K,L, P_c(naiveMap(K,L));e.ε(K⊗L)=δP_c(S_cK,S_cL);(e.εK⊗e.εL), where δP_c is the totalized ordinary inverse tensor comparison and naiveMap is the actual coproduct construction of [lem-sc-module-cup-naive-map-chain]. No derived categories or K-injectivity enter this statement.",
+ "stmt_deps": [
+  "lem-sc-module-cup-naive-map-chain",
+  "lem-sc-module-cup-global-tensor-pullback"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FP3",
+  "place": "Lemma 20.31.3, the adjunction polygon proof; assumed tensor and counit squares are Tags 0FP0/0FP1"
+ },
+ "proof": [
+  {
+   "text": "Precompose in every degree with tensor summand inclusions, using preservation of coproducts by P. The formula for the naive cup and naturality of the induced degreewise counit reduce the assertion to the assumed ordinary counit/tensor identity at K.X i,L.X j, after the inverse tensor constraint cancellation. Coproduct and cochain morphism extensionality conclude.",
+   "uses": [
+    "lem-sc-module-cup-naive-map-chain"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-cup-naive-map-chain"
+ ],
+ "proof_origin": {
+  "by": "Q2 second reader, following the source",
+  "document": "https://stacks.math.columbia.edu/tag/0FP3",
+  "place": "Lemma 20.31.3, separated into ordinary evaluation, quotient transport, and categorical combination"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupAdjunctionPolygon",
+  "date": "2026-10-14",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "adjunction polygon component: Ordinary counit and total tensor evaluation",
+   "via": [
+    "lem-sc-module-cup-adjunction-polygon",
+    "lem-sc-module-cup-kinjective-target",
+    "lem-sc-module-cup-naive-derived-compatibility",
+    "def-sc-module-cohomology-cup-product"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "monoidal natural transformation mate of counit tensor comparison; tensor total complex map additive functor coproduct counit evaluation; transport natural transformation between localization functors on homotopy and cochain complexes",
+   "results": "Generic adjunction tensor counit lemmas, tensor summand and coproduct lemmas, and localization lifts found. No exact statement of these specialized squares or the combining calculation. See sandbox searches.jsonl.",
+   "date": "2026-10-14",
+   "verdict": "supporting lemmas only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right_symm",
+   "results": "Found and used in the combining calculation. No specialized cup polygon theorem.",
+   "date": "2026-10-14",
+   "verdict": "supporting lemma only"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopyCategoryδNatTrans_app_app|quotientCompQhIso|ι_mapBifunctorComparison; leftDerivedFunctorCounit|mapHomotopyCategoryFactors|tensor.*counit|homEquiv.*naturality",
+   "results": "Located quotient tensor comparison, canonical localization isomorphism, induced counit, and coproduct formulas. Independent rg of lean/ found none of the new declaration names, and no existing concrete cochain evaluation identity.",
+   "date": "2026-10-14",
+   "verdict": "supporting lemmas only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "transport natural transformations through quotient localization tensor comparison counit",
+   "results": [],
+   "unavailable": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupCochainCounitTensor",
+  "file": "lean/Sheaf/Paper/ModuleCupCochainCounitTensor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_cochain_counit_tensor",
+  "statement": "theorem moduleCup_cochain_counit_tensor\n    (P : ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) ⥤\n      SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    [P.Additive] [P.Monoidal] [P.IsLeftAdjoint]\n    (adj : P ⊣ RingedSpace.globalSectionsFunctor X.toRingedSpace)\n    (hOrdinary : ∀ M N : SheafOfModules.{u} (moduleRings X.toRingedSpace),\n      Functor.LaxMonoidal.μ P\n          ((RingedSpace.globalSectionsFunctor X.toRingedSpace).obj M)\n          ((RingedSpace.globalSectionsFunctor X.toRingedSpace).obj N) ≫\n        P.map (moduleCup_sectionTensorMap X M N) ≫ adj.counit.app (M ⊗ N) =\n          adj.counit.app M ⊗ₘ adj.counit.app N)\n    (K L : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :\n    let T := (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℤ)\n    let F := P.mapHomologicalComplex (ComplexShape.up ℤ)\n    F.map (moduleCup_naiveMap X K L) ≫\n        (adj.mapHomologicalComplex (ComplexShape.up ℤ)).counit.app (K ⊗ L) =\n      ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans\n        (ComplexShape.up ℤ) P).app (T.obj K)).app (T.obj L) ≫\n        ((adj.mapHomologicalComplex (ComplexShape.up ℤ)).counit.app K ⊗ₘ\n          (adj.mapHomologicalComplex (ComplexShape.up ℤ)).counit.app L)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8f3a3",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261014T013043-L-3416738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8f3a3",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261014T013043-L-3416738",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean modules, node statements and metadata matched against the review packet; all four modules compile, the documented hQ interface correction is recorded with downstream coverage, and the remaining sorry is named, documented, and structurally appropriate."
+ }
+}

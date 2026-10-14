@@ -4,7 +4,7 @@
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-cube",
  "title": "Compatibility polygon for the explicit adjunction-transpose cup",
- "statement": "Let X be a scheme and S=Γ(X,-), T its cochain action, R its right derived functor. Supply the cochain localization lax tensor structure together with an equality to the canonical structure; all occurrences of its tensor comparison use this supplied structure. Let P be an additive strong monoidal left adjoint to S, with adjunction adj, and D a functor between the corresponding derived categories with an adjunction dAdj:D ⊣ R. Let α:Qh⋙D → P_h⋙Qh be natural, and δ_AB:D(A tensor B) ≅ DA tensor DB. Assume δ is natural in both arguments, meaning D(f tensor g) followed by δ equals δ followed by Df tensor Dg. Assume: the tensor polygon moduleCup_globalTensorDiagram of [lem-sc-module-cup-global-tensor-pullback] holds for every two homotopy complexes; D(βh_K) followed by the dAdj counit equals α_{S_hK} followed by the localized ordinary counit for every K; and P’s ordinary tensor comparison followed by P(moduleCup_sectionTensorMap) and the ordinary counit equals the tensor of the ordinary counits for every two sheaves. Supply μ together with its equality to the explicit family dAdj.homEquiv applied to δ_{RA,RB}.hom followed by the tensor of the dAdj counits. Supply β:T⋙Q → Q⋙R together with an equality identifying it with the right-derived unit transported by quotientCompQhIso. For any K,L,I with I K-injective and any φ:K tensor L → I, (β_K tensor β_L), μ_QK,QL, R(Q_tensor(K,L) followed by Qφ) equals Q_tensor(TK,TL), Q(moduleCup_naiveMap(K,L) followed by Tφ), β_I. No existence or naturality of a pairing is asserted: the pairing in this equation is the displayed transpose.",
+ "statement": "Let X be a scheme and S=Γ(X,-), T its cochain action, R its right derived functor. Supply the cochain localization lax tensor structure together with an equality to the canonical structure; all occurrences of its tensor comparison use this supplied structure. Let P be an additive strong monoidal left adjoint to S, with adjunction adj, and D a functor between the corresponding derived categories with an adjunction dAdj:D ⊣ R. Let α:Qh⋙D → P_h⋙Qh be natural, and δ_AB:D(A tensor B) ≅ DA tensor DB. Assume δ is natural in both arguments, meaning D(f tensor g) followed by δ equals δ followed by Df tensor Dg. Assume: the tensor polygon moduleCup_globalTensorDiagram of [lem-sc-module-cup-global-tensor-pullback] holds for every two homotopy complexes; D(βh_K) followed by the dAdj counit equals α_{S_hK} followed by the localized ordinary counit for every K; and P’s ordinary tensor comparison followed by P(moduleCup_sectionTensorMap) and the ordinary counit equals the tensor of the ordinary counits for every two sheaves. Supply μ together with its equality to the explicit family dAdj.homEquiv applied to δ_{RA,RB}.hom followed by the tensor of the dAdj counits. Supply β:T⋙Q → Q⋙R together with an equality identifying it with the right-derived unit transported by quotientCompQhIso. For any K,L,I with I K-injective and any φ:K tensor L → I, (β_K tensor β_L), μ_QK,QL, R(Q_tensor(K,L) followed by Qφ) equals Q_tensor(TK,TL), Q(moduleCup_naiveMap(K,L) followed by Tφ), β_I. No existence or naturality of a pairing is asserted: the pairing in this equation is the displayed transpose. The canonical normalization equation names DerivedCategory.laxMonoidalQ explicitly; it is not an inferInstance equation resolved in the scope of the supplied structure.",
  "source": {
   "document": "https://stacks.math.columbia.edu/tag/0FP3",
   "place": "cohomology-lemma-cup-product-compatibility; naive cup before the lemma; Remark 0B68 for the derived cup"
@@ -18,33 +18,34 @@
  ],
  "proof": [
   {
-   "text": "Use hQ to identify the supplied localization lax structure with the canonical one and hβ to identify the supplied comparison transformation with the transported canonical unit. Use hμ to substitute the explicit transpose. Apply the inverse Hom equivalence of dAdj to both composites. Hom-equivalence naturality and the assumed naturality of δ move the source comparison units and final localized map into the transpose. Substitute hCounit to replace each derived counit after the unit by α followed by the localized ordinary evaluation counit. This step uses the counit equation as a hypothesis, not the theorem proving that equation.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Unfold the tensor diagram of [lem-sc-module-cup-global-tensor-pullback] in the hypothesis hTensor and apply it at the two homotopy complexes of global sections. Naturality of α identifies the two routes from derived to ordinary pullback of their total tensor. The hypothesis hOrdinary identifies the evaluation maps on each degreewise tensor summand. No theorem extending the tensor diagram from K-flat pairs is required here: the full diagram is already a hypothesis.",
+   "text": "Construct the cochain comparison a explicitly and obtain its tensor/counit equations by [lem-sc-module-cup-cochain-comparison-squares].",
    "uses": [
-    "lem-sc-module-cup-global-tensor-pullback"
+    "def-sc-module-cup-cochain-pullback-comparison",
+    "lem-sc-module-cup-cochain-comparison-squares"
    ],
    "elementary": false
   },
   {
-   "text": "Precompose with each total tensor coproduct inclusion. The definition of moduleCup_naiveMap of lem-sc-module-cup-naive-map-chain gives the same tensor-section evaluation followed by φ on each summand. The homological-complex adjunction counit is degreewise the ordinary counit. Localize and transport with quotientCompQhIso, which is the definition of β. Injectivity of the Hom equivalence proves the desired equality. The normalization equations fix the maps even for zero, shifted, and unbounded complexes.",
+   "text": "Use [lem-sc-module-cup-cochain-counit-tensor] for the ordinary evaluation square and specialize the proved [lem-sc-module-cup-polygon-calculation]. The supplied equalities hQ and hμ identify the given structures with the canonical ones. This is a real reduction, not a renamed copy of the conclusion.",
    "uses": [
+    "lem-sc-module-cup-cochain-counit-tensor",
+    "lem-sc-module-cup-polygon-calculation",
     "lem-sc-module-cup-naive-map-chain"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-module-cup-naive-map-chain",
-  "lem-sc-module-cup-global-tensor-pullback"
+  "def-sc-module-cup-cochain-pullback-comparison",
+  "lem-sc-module-cup-cochain-comparison-squares",
+  "lem-sc-module-cup-cochain-counit-tensor",
+  "lem-sc-module-cup-polygon-calculation",
+  "lem-sc-module-cup-naive-map-chain"
  ],
  "proof_origin": {
-  "by": "A2 repair worker, following the source",
+  "by": "Q2 second reader, following the source",
   "document": "https://stacks.math.columbia.edu/tag/0FP3",
-  "place": "Lemma 20.31.3 polygon proof, using 0FP0 and 0FP1; explicit transpose, not arbitrary natural pairing"
+  "place": "Lemma 20.31.3, separated into ordinary evaluation, quotient transport, and categorical combination"
  },
  "status": "split",
  "created": {
@@ -110,9 +111,9 @@
   "module": "Sheaf.Paper.ModuleCupAdjunctionPolygon",
   "file": "lean/Sheaf/Paper/ModuleCupAdjunctionPolygon.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_adjunction_polygon",
-  "statement": "theorem moduleCup_adjunction_polygon\n    (qLax :\n      (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).LaxMonoidal)\n    (hQ : qLax = (inferInstance :\n      (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).LaxMonoidal))\n    (β : (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n        (ComplexShape.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙\n        (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor)\n    (hβ : β =\n      (Functor.isoWhiskerLeft\n        ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℤ))\n        (DerivedCategory.quotientCompQhIso\n          (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))))).inv ≫\n        Functor.whiskerLeft (HomotopyCategory.quotient _ (ComplexShape.up ℤ))\n          (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctorUnit ≫\n        (Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)))\n          (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor).hom)\n    (P : ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) ⥤\n      SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    [P.Additive] [P.Monoidal] [P.IsLeftAdjoint]\n    (adj : P ⊣ RingedSpace.globalSectionsFunctor X.toRingedSpace)\n    (D : DerivedCategory\n        (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) ⥤\n      DerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)))\n    (α : DerivedCategory.Qh ⋙ D ⟶\n      P.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)\n    (dAdj : D ⊣ (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor)\n    (δ : ∀ A B, D.obj (A ⊗ B) ≅ D.obj A ⊗ D.obj B)\n    (hNat : ∀ A A' B B' (f : A ⟶ A') (g : B ⟶ B'),\n      D.map (f ⊗ₘ g) ≫ (δ A' B').hom =\n        (δ A B).hom ≫ (D.map f ⊗ₘ D.map g))\n    (hTensor : ∀ K M, moduleCup_globalTensorDiagram X P D α δ K M)\n    (hCounit : ∀ K : HomotopyCategory\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ),\n      D.map ((RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctorUnit.app K) ≫\n        dAdj.counit.app (DerivedCategory.Qh.obj K) =\n      α.app (((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomotopyCategory\n        (ComplexShape.up ℤ)).obj K) ≫\n          DerivedCategory.Qh.map ((adj.mapHomotopyCategory (ComplexShape.up ℤ)).counit.app K))\n    (hOrdinary : ∀ M N : SheafOfModules.{u} (moduleRings X.toRingedSpace),\n      Functor.LaxMonoidal.μ P\n          ((RingedSpace.globalSectionsFunctor X.toRingedSpace).obj M)\n          ((RingedSpace.globalSectionsFunctor X.toRingedSpace).obj N) ≫\n        P.map (moduleCup_sectionTensorMap X M N) ≫ adj.counit.app (M ⊗ N) =\n          adj.counit.app M ⊗ₘ adj.counit.app N)\n    (μ : ∀ A B : DerivedCategory\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)),\n      (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj A ⊗\n        (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj B ⟶\n      (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj (A ⊗ B))\n    (hμ : μ = fun A B ↦\n      dAdj.homEquiv\n        ((RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj A ⊗\n          (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj B)\n        (A ⊗ B)\n        ((δ ((RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj A)\n          ((RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj B)).hom ≫\n          (dAdj.counit.app A ⊗ₘ dAdj.counit.app B))) :\n    letI := qLax\n    let S := RingedSpace.globalSectionsFunctor X.toRingedSpace\n    let T := S.mapHomologicalComplex (ComplexShape.up ℤ)\n    let R := S.rightDerivedFunctor\n    ∀ (K L I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n      [I.IsKInjective] (φ : K ⊗ L ⟶ I),\n      (β.app K ⊗ₘ β.app L) ≫ μ (DerivedCategory.Q.obj K) (DerivedCategory.Q.obj L) ≫\n        R.map (Functor.LaxMonoidal.μ DerivedCategory.Q K L ≫ DerivedCategory.Q.map φ) =\n      Functor.LaxMonoidal.μ DerivedCategory.Q (T.obj K) (T.obj L) ≫\n        DerivedCategory.Q.map (moduleCup_naiveMap X K L ≫ T.map φ) ≫ β.app I",
+  "statement": "theorem moduleCup_adjunction_polygon\n    (qLax :\n      (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).LaxMonoidal)\n    (hQ : qLax = DerivedCategory.laxMonoidalQ\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)))\n    (β : (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n        (ComplexShape.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙\n        (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor)\n    (hβ : β =\n      (Functor.isoWhiskerLeft\n        ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℤ))\n        (DerivedCategory.quotientCompQhIso\n          (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))))).inv ≫\n        Functor.whiskerLeft (HomotopyCategory.quotient _ (ComplexShape.up ℤ))\n          (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctorUnit ≫\n        (Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)))\n          (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor).hom)\n    (P : ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) ⥤\n      SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    [P.Additive] [P.Monoidal] [P.IsLeftAdjoint]\n    (adj : P ⊣ RingedSpace.globalSectionsFunctor X.toRingedSpace)\n    (D : DerivedCategory\n        (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) ⥤\n      DerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)))\n    (α : DerivedCategory.Qh ⋙ D ⟶\n      P.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)\n    (dAdj : D ⊣ (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor)\n    (δ : ∀ A B, D.obj (A ⊗ B) ≅ D.obj A ⊗ D.obj B)\n    (hNat : ∀ A A' B B' (f : A ⟶ A') (g : B ⟶ B'),\n      D.map (f ⊗ₘ g) ≫ (δ A' B').hom =\n        (δ A B).hom ≫ (D.map f ⊗ₘ D.map g))\n    (hTensor : ∀ K M, moduleCup_globalTensorDiagram X P D α δ K M)\n    (hCounit : ∀ K : HomotopyCategory\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ),\n      D.map ((RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctorUnit.app K) ≫\n        dAdj.counit.app (DerivedCategory.Qh.obj K) =\n      α.app (((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomotopyCategory\n        (ComplexShape.up ℤ)).obj K) ≫\n          DerivedCategory.Qh.map ((adj.mapHomotopyCategory (ComplexShape.up ℤ)).counit.app K))\n    (hOrdinary : ∀ M N : SheafOfModules.{u} (moduleRings X.toRingedSpace),\n      Functor.LaxMonoidal.μ P\n          ((RingedSpace.globalSectionsFunctor X.toRingedSpace).obj M)\n          ((RingedSpace.globalSectionsFunctor X.toRingedSpace).obj N) ≫\n        P.map (moduleCup_sectionTensorMap X M N) ≫ adj.counit.app (M ⊗ N) =\n          adj.counit.app M ⊗ₘ adj.counit.app N)\n    (μ : ∀ A B : DerivedCategory\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)),\n      (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj A ⊗\n        (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj B ⟶\n      (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj (A ⊗ B))\n    (hμ : μ = fun A B ↦\n      dAdj.homEquiv\n        ((RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj A ⊗\n          (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj B)\n        (A ⊗ B)\n        ((δ ((RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj A)\n          ((RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj B)).hom ≫\n          (dAdj.counit.app A ⊗ₘ dAdj.counit.app B))) :\n    letI := qLax\n    let S := RingedSpace.globalSectionsFunctor X.toRingedSpace\n    let T := S.mapHomologicalComplex (ComplexShape.up ℤ)\n    let R := S.rightDerivedFunctor\n    ∀ (K L I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n      [I.IsKInjective] (φ : K ⊗ L ⟶ I),\n      (β.app K ⊗ₘ β.app L) ≫ μ (DerivedCategory.Q.obj K) (DerivedCategory.Q.obj L) ≫\n        R.map (Functor.LaxMonoidal.μ DerivedCategory.Q K L ≫ DerivedCategory.Q.map φ) =\n      Functor.LaxMonoidal.μ DerivedCategory.Q (T.obj K) (T.obj L) ≫\n        DerivedCategory.Q.map (moduleCup_naiveMap X K L ≫ T.map φ) ≫ β.app I",
   "branch": "sheaf-dag",
-  "by": "XR9e6d7250028f1981",
+  "by": "Q2",
   "date": "2026-10-14"
  },
  "reviewed": {
@@ -128,11 +129,53 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "XREPAIR-9e6d7250028f1981",
-  "group": "XR9e6d7250028f1981",
+  "reviewer": "X-8f3a3",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261014T004117-L-2840312",
+  "landing": "20261014T013043-L-3416738",
   "kind": "interface",
-  "note": "\nREADY: fixed duplicate-instance leakage by privatizing proof imports; `lcompile.py --all` and polygon checks pass.\nDELIVERED: checks and fix"
+  "note": "independent Codex review: Delivered Lean modules, node statements and metadata matched against the review packet; all four modules compile, the documented hQ interface correction is recorded with downstream coverage, and the remaining sorry is named, documented, and structurally appropriate."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "Q2 stage 2",
+  "old_statement": "Let X be a scheme and S=Γ(X,-), T its cochain action, R its right derived functor. Supply the cochain localization lax tensor structure together with an equality to the canonical structure; all occurrences of its tensor comparison use this supplied structure. Let P be an additive strong monoidal left adjoint to S, with adjunction adj, and D a functor between the corresponding derived categories with an adjunction dAdj:D ⊣ R. Let α:Qh⋙D → P_h⋙Qh be natural, and δ_AB:D(A tensor B) ≅ DA tensor DB. Assume δ is natural in both arguments, meaning D(f tensor g) followed by δ equals δ followed by Df tensor Dg. Assume: the tensor polygon moduleCup_globalTensorDiagram of [lem-sc-module-cup-global-tensor-pullback] holds for every two homotopy complexes; D(βh_K) followed by the dAdj counit equals α_{S_hK} followed by the localized ordinary counit for every K; and P’s ordinary tensor comparison followed by P(moduleCup_sectionTensorMap) and the ordinary counit equals the tensor of the ordinary counits for every two sheaves. Supply μ together with its equality to the explicit family dAdj.homEquiv applied to δ_{RA,RB}.hom followed by the tensor of the dAdj counits. Supply β:T⋙Q → Q⋙R together with an equality identifying it with the right-derived unit transported by quotientCompQhIso. For any K,L,I with I K-injective and any φ:K tensor L → I, (β_K tensor β_L), μ_QK,QL, R(Q_tensor(K,L) followed by Qφ) equals Q_tensor(TK,TL), Q(moduleCup_naiveMap(K,L) followed by Tφ), β_I. No existence or naturality of a pairing is asserted: the pairing in this equation is the displayed transpose.",
+  "what": "The existing Lean hQ equation elaborated to qLax=qLax. Name DerivedCategory.laxMonoidalQ explicitly, so the Lean states the canonical normalization already required by the natural-language statement and Stacks polygon. No target statement changes.",
+  "source": {
+   "document": "https://stacks.math.columbia.edu/tag/0FP3",
+   "place": "Lemma 20.31.3 uses the canonical localization tensor constraint"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-module-cup-kinjective-target",
+    "holds": true,
+    "note": "Its construction supplies cupSourceLax, the canonical localization instance; the canonical normalization proof remains rfl. Its existential cup statement is unchanged."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Use hQ to identify the supplied localization lax structure with the canonical one and hβ to identify the supplied comparison transformation with the transported canonical unit. Use hμ to substitute the explicit transpose. Apply the inverse Hom equivalence of dAdj to both composites. Hom-equivalence naturality and the assumed naturality of δ move the source comparison units and final localized map into the transpose. Substitute hCounit to replace each derived counit after the unit by α followed by the localized ordinary evaluation counit. This step uses the counit equation as a hypothesis, not the theorem proving that equation.",
+    "uses": [],
+    "elementary": true
+   },
+   {
+    "text": "Unfold the tensor diagram of [lem-sc-module-cup-global-tensor-pullback] in the hypothesis hTensor and apply it at the two homotopy complexes of global sections. Naturality of α identifies the two routes from derived to ordinary pullback of their total tensor. The hypothesis hOrdinary identifies the evaluation maps on each degreewise tensor summand. No theorem extending the tensor diagram from K-flat pairs is required here: the full diagram is already a hypothesis.",
+    "uses": [
+     "lem-sc-module-cup-global-tensor-pullback"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Precompose with each total tensor coproduct inclusion. The definition of moduleCup_naiveMap of lem-sc-module-cup-naive-map-chain gives the same tensor-section evaluation followed by φ on each summand. The homological-complex adjunction counit is degreewise the ordinary counit. Localize and transport with quotientCompQhIso, which is the definition of β. Injectivity of the Hom equivalence proves the desired equality. The normalization equations fix the maps even for zero, shifted, and unbounded complexes.",
+    "uses": [
+     "lem-sc-module-cup-naive-map-chain"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-sc-module-cup-naive-map-chain",
+   "lem-sc-module-cup-global-tensor-pullback"
+  ]
  }
 }

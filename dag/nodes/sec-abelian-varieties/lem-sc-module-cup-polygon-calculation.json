@@ -1,0 +1,116 @@
+{
+ "id": "lem-sc-module-cup-polygon-calculation",
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "title": "Adjunction combination of the three comparison squares",
+ "statement": "Let C,C₀,E,E₀ be monoidal categories, Q:C→E and Q₀:C₀→E₀ lax monoidal functors, F⊣T and D⊣R adjunctions, a:Q₀⋙D→F⋙Q and b:T⋙Q₀→Q⋙R natural transformations. Suppose δ:D(A⊗B)≅DA⊗DB is natural, t:F(A⊗B)→FA⊗FB satisfies the tensor square with a, and D(bK);ε(QK)=a(TK);Q(εK). For K,L,I and m:TK⊗TL→T(K⊗L), assume F(m);ε(K⊗L)=t(TK,TL);(εK⊗εL). For every φ:K⊗L→I, (bK⊗bL);transpose(δ;ε⊗ε);R(μQ;Qφ)=μQ₀;Q₀(m;Tφ);bI. This purely categorical result uses only the stated equations.",
+ "stmt_deps": [],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FP3",
+  "place": "Lemma 20.31.3, the adjunction polygon proof; assumed tensor and counit squares are Tags 0FP0/0FP1"
+ },
+ "proof": [
+  {
+   "text": "Apply injectivity of the inverse adjunction Hom equivalence. Its left and right naturality compute the two transposes. Naturality of δ and the counit square replace the two derived counits; lax tensor naturality and the tensor square move to Q of the ordinary evaluation. Use the ordinary evaluation identity and naturality of a to identify the paths. Postcompose by R(Qφ) and use naturality of b.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "Q2 second reader, following the source",
+  "document": "https://stacks.math.columbia.edu/tag/0FP3",
+  "place": "Lemma 20.31.3, separated into ordinary evaluation, quotient transport, and categorical combination"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupAdjunctionPolygon",
+  "date": "2026-10-14",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "adjunction polygon component: Adjunction combination of the three comparison squares",
+   "via": [
+    "lem-sc-module-cup-adjunction-polygon",
+    "lem-sc-module-cup-kinjective-target",
+    "lem-sc-module-cup-naive-derived-compatibility",
+    "def-sc-module-cohomology-cup-product"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "monoidal natural transformation mate of counit tensor comparison; tensor total complex map additive functor coproduct counit evaluation; transport natural transformation between localization functors on homotopy and cochain complexes",
+   "results": "Generic adjunction tensor counit lemmas, tensor summand and coproduct lemmas, and localization lifts found. No exact statement of these specialized squares or the combining calculation. See sandbox searches.jsonl.",
+   "date": "2026-10-14",
+   "verdict": "supporting lemmas only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right_symm",
+   "results": "Found and used in the combining calculation. No specialized cup polygon theorem.",
+   "date": "2026-10-14",
+   "verdict": "supporting lemma only"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopyCategoryδNatTrans_app_app|quotientCompQhIso|ι_mapBifunctorComparison; leftDerivedFunctorCounit|mapHomotopyCategoryFactors|tensor.*counit|homEquiv.*naturality",
+   "results": "Located quotient tensor comparison, canonical localization isomorphism, induced counit, and coproduct formulas. Independent rg of lean/ found none of the new declaration names, and no existing concrete cochain evaluation identity.",
+   "date": "2026-10-14",
+   "verdict": "supporting lemmas only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "transport natural transformations through quotient localization tensor comparison counit",
+   "results": [],
+   "unavailable": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupAdjunctionCalculation",
+  "file": "lean/Sheaf/Paper/ModuleCupAdjunctionCalculation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_polygon_calculation",
+  "statement": "theorem moduleCup_polygon_calculation\n    {C C₀ E E₀ : Type*} [Category* C] [Category* C₀] [Category* E] [Category* E₀]\n    [MonoidalCategory C] [MonoidalCategory C₀]\n    [MonoidalCategory E] [MonoidalCategory E₀]\n    (Q : C ⥤ E) [Q.LaxMonoidal] (Q₀ : C₀ ⥤ E₀) [Q₀.LaxMonoidal]\n    (T : C ⥤ C₀) (F : C₀ ⥤ C) (D : E₀ ⥤ E) (R : E ⥤ E₀)\n    (adj : F ⊣ T) (dAdj : D ⊣ R)\n    (a : Q₀ ⋙ D ⟶ F ⋙ Q) (b : T ⋙ Q₀ ⟶ Q ⋙ R)\n    (δ : ∀ A B, D.obj (A ⊗ B) ≅ D.obj A ⊗ D.obj B)\n    (hNat : ∀ A A' B B' (f : A ⟶ A') (g : B ⟶ B'),\n      D.map (f ⊗ₘ g) ≫ (δ A' B').hom =\n        (δ A B).hom ≫ (D.map f ⊗ₘ D.map g))\n    (t : ∀ A B, F.obj (A ⊗ B) ⟶ F.obj A ⊗ F.obj B)\n    (ht : ∀ A B, D.map (Functor.LaxMonoidal.μ Q₀ A B) ≫ a.app (A ⊗ B) ≫\n      Q.map (t A B) = (δ (Q₀.obj A) (Q₀.obj B)).hom ≫\n        (a.app A ⊗ₘ a.app B) ≫ Functor.LaxMonoidal.μ Q (F.obj A) (F.obj B))\n    (hc : ∀ K, D.map (b.app K) ≫ dAdj.counit.app (Q.obj K) =\n      a.app (T.obj K) ≫ Q.map (adj.counit.app K))\n    (K L I : C) (m : T.obj K ⊗ T.obj L ⟶ T.obj (K ⊗ L))\n    (ho : F.map m ≫ adj.counit.app (K ⊗ L) =\n      t (T.obj K) (T.obj L) ≫ (adj.counit.app K ⊗ₘ adj.counit.app L))\n    (φ : K ⊗ L ⟶ I) :\n    (b.app K ⊗ₘ b.app L) ≫\n      dAdj.homEquiv _ _ ((δ _ _).hom ≫\n        (dAdj.counit.app (Q.obj K) ⊗ₘ dAdj.counit.app (Q.obj L))) ≫\n      R.map (Functor.LaxMonoidal.μ Q K L ≫ Q.map φ) =\n    Functor.LaxMonoidal.μ Q₀ (T.obj K) (T.obj L) ≫ Q₀.map (m ≫ T.map φ) ≫\n      b.app I",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8f3a3",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261014T013043-L-3416738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8f3a3",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261014T013043-L-3416738",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean modules, node statements and metadata matched against the review packet; all four modules compile, the documented hQ interface correction is recorded with downstream coverage, and the remaining sorry is named, documented, and structurally appropriate."
+ }
+}

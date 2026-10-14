@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-module-cup-cochain-comparison-squares",
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "title": "Cochain transport of tensor and counit squares",
+ "statement": "For a scheme X, take an additive strong monoidal left adjoint P⊣S=Γ(X,-), a derived functor D⊣R, a natural homotopy comparison α:Qh⋙D→P_h⋙Qh, and derived tensor isomorphisms δ. Assume the full homotopy tensor diagram and the homotopy counit/unit square. Let β be exactly the canonical right-derived unit transported to cochains, and a the explicitly constructed [def-sc-module-cup-cochain-pullback-comparison]. Then for all section complexes A,B, D(μQ(A,B));a(A⊗B);Q(δP_c(A,B))=δ(QA,QB);(aA⊗aB);μQ(P_cA,P_cB). For every sheaf complex K, D(βK);ε(QK)=a(S_cK);Q(e.εK). This only transports the assumed squares; it has no naive cup, pairing φ or cup transpose μ. The supplied cochain lax structure is explicitly assumed equal to DerivedCategory.laxMonoidalQ; its source tensor constraint is computed with that supplied structure.",
+ "stmt_deps": [
+  "def-sc-module-cup-cochain-pullback-comparison",
+  "lem-sc-module-cup-global-tensor-comparison",
+  "lem-sc-module-cup-global-counit-comparison"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FP3",
+  "place": "Lemma 20.31.3, the adjunction polygon proof; assumed tensor and counit squares are Tags 0FP0/0FP1"
+ },
+ "proof": [
+  {
+   "text": "Apply the assumed homotopy tensor and counit equations to quotient images. The quotient tensor constraints are identities, the induced oplax comparison and induced counit are the quotient of the cochain maps, and quotientCompQhIso identifies Qh of quotient maps with Q. Conjugate the equations by this natural isomorphism, substitute the concrete definitions of a and β, and cancel its inverse pairs.",
+   "uses": [
+    "def-sc-module-cup-cochain-pullback-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cup-cochain-pullback-comparison"
+ ],
+ "proof_origin": {
+  "by": "Q2 second reader, following the source",
+  "document": "https://stacks.math.columbia.edu/tag/0FP3",
+  "place": "Lemma 20.31.3, separated into ordinary evaluation, quotient transport, and categorical combination"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupAdjunctionPolygon",
+  "date": "2026-10-14",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "adjunction polygon component: Cochain transport of tensor and counit squares",
+   "via": [
+    "lem-sc-module-cup-adjunction-polygon",
+    "lem-sc-module-cup-kinjective-target",
+    "lem-sc-module-cup-naive-derived-compatibility",
+    "def-sc-module-cohomology-cup-product"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "monoidal natural transformation mate of counit tensor comparison; tensor total complex map additive functor coproduct counit evaluation; transport natural transformation between localization functors on homotopy and cochain complexes",
+   "results": "Generic adjunction tensor counit lemmas, tensor summand and coproduct lemmas, and localization lifts found. No exact statement of these specialized squares or the combining calculation. See sandbox searches.jsonl.",
+   "date": "2026-10-14",
+   "verdict": "supporting lemmas only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right_symm",
+   "results": "Found and used in the combining calculation. No specialized cup polygon theorem.",
+   "date": "2026-10-14",
+   "verdict": "supporting lemma only"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopyCategoryδNatTrans_app_app|quotientCompQhIso|ι_mapBifunctorComparison; leftDerivedFunctorCounit|mapHomotopyCategoryFactors|tensor.*counit|homEquiv.*naturality",
+   "results": "Located quotient tensor comparison, canonical localization isomorphism, induced counit, and coproduct formulas. Independent rg of lean/ found none of the new declaration names, and no existing concrete cochain evaluation identity.",
+   "date": "2026-10-14",
+   "verdict": "supporting lemmas only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "transport natural transformations through quotient localization tensor comparison counit",
+   "results": [],
+   "unavailable": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupCochainComparisonSquares",
+  "file": "lean/Sheaf/Paper/ModuleCupCochainComparisonSquares.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_cochain_comparison_squares",
+  "statement": "theorem moduleCup_cochain_comparison_squares\n    (qLax :\n      (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).LaxMonoidal)\n    (hQ : qLax = DerivedCategory.laxMonoidalQ\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)))\n    (β : (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n        (ComplexShape.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙\n        (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor)\n    (hβ : β =\n      (Functor.isoWhiskerLeft\n        ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℤ))\n        (DerivedCategory.quotientCompQhIso\n          (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))))).inv ≫\n        Functor.whiskerLeft (HomotopyCategory.quotient _ (ComplexShape.up ℤ))\n          (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctorUnit ≫\n        (Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)))\n          (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor).hom)\n    (P : ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) ⥤\n      SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    [P.Additive] [P.Monoidal] [P.IsLeftAdjoint]\n    (adj : P ⊣ RingedSpace.globalSectionsFunctor X.toRingedSpace)\n    (D : DerivedCategory\n        (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) ⥤\n      DerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)))\n    (α : DerivedCategory.Qh ⋙ D ⟶\n      P.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)\n    (dAdj : D ⊣ (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor)\n    (δ : ∀ A B, D.obj (A ⊗ B) ≅ D.obj A ⊗ D.obj B)\n    (hTensor : ∀ K M, moduleCup_globalTensorDiagram X P D α δ K M)\n    (hCounit : ∀ K : HomotopyCategory\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ),\n      D.map ((RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctorUnit.app K) ≫\n        dAdj.counit.app (DerivedCategory.Qh.obj K) =\n      α.app (((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomotopyCategory\n        (ComplexShape.up ℤ)).obj K) ≫\n          DerivedCategory.Qh.map ((adj.mapHomotopyCategory (ComplexShape.up ℤ)).counit.app K)) :\n    letI := qLax\n    let Q := DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    let Q₀ := DerivedCategory.Q\n      (C := ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))\n    let F := P.mapHomologicalComplex (ComplexShape.up ℤ)\n    let a := moduleCup_cochainPullbackComparison X P D α\n    let T := (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℤ)\n    (∀ A B, D.map (Functor.LaxMonoidal.μ Q₀ A B) ≫ a.app (A ⊗ B) ≫\n        Q.map (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans\n          (ComplexShape.up ℤ) P).app A).app B) =\n      (δ (Q₀.obj A) (Q₀.obj B)).hom ≫ (a.app A ⊗ₘ a.app B) ≫\n        Functor.LaxMonoidal.μ Q (F.obj A) (F.obj B)) ∧\n    (∀ K, D.map (β.app K) ≫\n        dAdj.counit.app (Q.obj K) =\n      a.app (T.obj K) ≫ Q.map\n        ((adj.mapHomologicalComplex (ComplexShape.up ℤ)).counit.app K))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8f3a3",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261014T013043-L-3416738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8f3a3",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261014T013043-L-3416738",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean modules, node statements and metadata matched against the review packet; all four modules compile, the documented hQ interface correction is recorded with downstream coverage, and the remaining sorry is named, documented, and structurally appropriate."
+ }
+}

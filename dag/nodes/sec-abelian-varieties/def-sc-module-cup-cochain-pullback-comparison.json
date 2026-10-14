@@ -1,0 +1,108 @@
+{
+ "id": "def-sc-module-cup-cochain-pullback-comparison",
+ "kind": "definition",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "title": "Canonical cochain pullback comparison",
+ "statement": "For a scheme X, an additive functor P from modules over Γ(X,O_X) to O_X-module sheaves, a functor D between their derived categories and a natural transformation α:Qh ⋙ D→P_h ⋙ Qh, construct the cochain natural transformation a:Q ⋙ D→P_c ⋙ Q by the inverse source localization comparison, the quotient-whiskered α, and the target localization comparison. These are specified maps; no existence witness is chosen.",
+ "stmt_deps": [
+  "lem-sc-module-cup-global-tensor-pullback"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FP3",
+  "place": "Lemma 20.31.3, the adjunction polygon proof; assumed tensor and counit squares are Tags 0FP0/0FP1"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupAdjunctionPolygon",
+  "date": "2026-10-14",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "adjunction polygon component: Canonical cochain pullback comparison",
+   "via": [
+    "lem-sc-module-cup-adjunction-polygon",
+    "lem-sc-module-cup-kinjective-target",
+    "lem-sc-module-cup-naive-derived-compatibility",
+    "def-sc-module-cohomology-cup-product"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "monoidal natural transformation mate of counit tensor comparison; tensor total complex map additive functor coproduct counit evaluation; transport natural transformation between localization functors on homotopy and cochain complexes",
+   "results": "Generic adjunction tensor counit lemmas, tensor summand and coproduct lemmas, and localization lifts found. No exact statement of these specialized squares or the combining calculation. See sandbox searches.jsonl.",
+   "date": "2026-10-14",
+   "verdict": "supporting lemmas only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right_symm",
+   "results": "Found and used in the combining calculation. No specialized cup polygon theorem.",
+   "date": "2026-10-14",
+   "verdict": "supporting lemma only"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopyCategoryδNatTrans_app_app|quotientCompQhIso|ι_mapBifunctorComparison; leftDerivedFunctorCounit|mapHomotopyCategoryFactors|tensor.*counit|homEquiv.*naturality",
+   "results": "Located quotient tensor comparison, canonical localization isomorphism, induced counit, and coproduct formulas. Independent rg of lean/ found none of the new declaration names, and no existing concrete cochain evaluation identity.",
+   "date": "2026-10-14",
+   "verdict": "supporting lemmas only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "transport natural transformations through quotient localization tensor comparison counit",
+   "results": [],
+   "unavailable": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupCochainComparisonSquares",
+  "file": "lean/Sheaf/Paper/ModuleCupCochainComparisonSquares.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_cochainPullbackComparison",
+  "statement": "def moduleCup_cochainPullbackComparison\n    (P : ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) ⥤\n      SheafOfModules.{u} (moduleRings X.toRingedSpace)) [P.Additive]\n    (D : DerivedCategory\n        (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) ⥤\n      DerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)))\n    (α : DerivedCategory.Qh ⋙ D ⟶\n      P.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh) :\n    DerivedCategory.Q ⋙ D ⟶\n      P.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8f3a3",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261014T013043-L-3416738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8f3a3",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261014T013043-L-3416738",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean modules, node statements and metadata matched against the review packet; all four modules compile, the documented hQ interface correction is recorded with downstream coverage, and the remaining sorry is named, documented, and structurally appropriate."
+ }
+}
