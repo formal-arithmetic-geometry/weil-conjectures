@@ -1,0 +1,119 @@
+{
+ "id": "lem-sbc-reduced-artinian-tensor-normalization-charts",
+ "kind": "statement",
+ "title": "Integral-closure chart cover from reduced Artinian affine tensor factors",
+ "statement": "Let $B,A$ be commutative rings (rings with commutative multiplication and identity) with a $B$-algebra structure on $A$, and let $(E_i)_{i\\in\\operatorname{Fin}(r)}$ be a finite family of commutative $B$-algebras. Suppose every $D_i=E_i\\otimes_B A$ is Artinian (descending chains of ideals stabilize) and reduced (only zero is nilpotent). Let $p:X\\to\\operatorname{Spec}B$ be identified over $B$ with $\\coprod_i\\operatorname{Spec}E_i$. Set $a:X\\times_{\\operatorname{Spec}B}\\operatorname{Spec}A\\to\\operatorname{Spec}A$ and assume $a$ is qcqs. For every point $x$ of its relative normalization [lem-weil-pbc-relative-normalization], there are $i$, a maximal ideal $P\\subset D_i$, and an open immersion $c:\\operatorname{Spec}S\\to a.\\mathrm{normalization}$ whose image contains $x$, where $F=D_i/P$ has the $A$-algebra structure induced by the right tensor inclusion and $S=\\operatorname{integralClosure}_A F$ [def-weil-pbc-integral-closure]. The composite of $c$ and the normalization structural map equals $\\operatorname{Spec}(A\\to S)$. No DVR, base prime or stalk comparison is assumed or asserted.",
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-relative-normalization"
+ ],
+ "source": {
+  "document": "Stacks Project; Mathlib",
+  "place": "Tags 035H and 0307; IsArtinianRing.equivPi; sigmaSpec"
+ },
+ "proof": [
+  {
+   "text": "Base change of the given finite coproduct gives the coproduct of Spec D_i, using pullbackSpecIso for each affine factor. Every reduced Artinian D_i is the finite product of D_i/P over its maximal ideals P; the quotient maps are the projections (IsArtinianRing.equivPi). The finiteness of the maximal spectrum ensures the complete family remains finite.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Integral closure of A in a finite product is the product of the coordinate integral closures. Projection preserves monic equations. Conversely, multiply finitely many monic annihilating polynomials for the coordinates to obtain a monic polynomial annihilating the entire tuple. The resulting ring isomorphism preserves every structural A-image.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The affine relative normalization construction (035H) and sigmaSpec identify a.normalization with the coproduct of Spec S_iP over A. Its summand inclusions are open immersions and cover its points; take one containing x. The equation over Spec A gives the requested structural composite. Integral closure commutes with localization (0307), so the affine descriptions agree on overlaps. If the indexing family is empty its coproduct and normalization have no point.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "kind": "written-by-agent",
+  "agent": "N2",
+  "document": "Stacks Project; Mathlib",
+  "place": "Tags 035H and 0307; IsArtinianRing.equivPi; sigmaSpec"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Relative normalization of spectra of reduced Artinian algebras decomposes into spectra of integral closures in residue fields",
+   "date": "2026-10-14",
+   "results": "{\"t\": \"2026-10-14T02:10:34Z\", \"tool\": \"leansearch\", \"query\": \"Relative normalization of spectra of reduced Artinian algebras decomposes into spectra of integral closures in residue fields\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative normalization of spectra of reduced Artinian algebras decomposes into spectra of integral closures in residue fields",
+   "date": "2026-10-14",
+   "results": "{\"t\": \"2026-10-14T02:10:35Z\", \"tool\": \"leanfinder\", \"query\": \"Relative normalization of spectra of reduced Artinian algebras decomposes into spectra of integral closures in residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsAlgebraicResidueFieldOfIsIntegral\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\"], \"digest\": \"c322d03e8f2895eb\"}",
+   "verdict": "Related APIs found; no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationObjIso|normalizationCoprodIso|equivPi",
+   "date": "2026-10-14",
+   "results": "{\"t\": \"2026-10-14T02:10:35Z\", \"tool\": \"grep\", \"query\": \"normalizationObjIso|normalizationCoprodIso|equivPi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Logic/Equiv/Prod.lean\", \"Mathlib/Logic/Equiv/Fin/Basic.lean\", \"Mathlib/Logic/Equiv/Fin/Basic.lean\", \"Mathlib/NumberTheory/RamificationInertia/Basic.lean\", \"Mathlib/Logic/Equiv/Basic.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean\", \"Mathlib/Logic/Equiv/Set.lean\"], \"digest\": \"cc67710ed57bd462\"}",
+   "verdict": "Related APIs found; no exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DvrGaloisComponentsStalkFactor",
+  "date": "2026-10-14",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait tame calculation: identify normalized component local rings and their structural root germs with actual scheme stalks.",
+   "via": [
+    "lem-sbc-dvr-galois-components-stalk-factor",
+    "lem-sbc-dvr-root-normalization-maximal-ideal",
+    "lem-sbc-dvr-galois-components-root-cotangent",
+    "lem-sbc-dvr-galois-components-root-not-square"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.ReducedArtinianTensorNormalizationCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/ReducedArtinianTensorNormalizationCharts.lean",
+  "declaration": "AlgebraicGeometry.Scheme.reduced_artinian_tensor_normalization_charts",
+  "statement": "theorem reduced_artinian_tensor_normalization_charts\n    (B A : CommRingCat.{u}) [Algebra B A]\n    (r : ℕ) (E : Fin r → Type u) [∀ i, CommRing (E i)] [∀ i, Algebra B (E i)]\n    (hD : ∀ i, IsArtinianRing (E i ⊗[B] A) ∧ _root_.IsReduced (E i ⊗[B] A))\n    (X : Scheme.{u}) (p : X ⟶ Spec B)\n    (e : X ≅ ∐ fun i : Fin r ↦ Spec (CommRingCat.of (E i)))\n    (he : e.hom ≫ Sigma.desc (fun i : Fin r ↦\n      Spec.map (CommRingCat.ofHom (algebraMap B (E i)))) = p) :\n    let a := pullback.snd p (Spec.map (CommRingCat.ofHom (algebraMap B A)))\n    ∀ (hqc : QuasiCompact a) (hqs : QuasiSeparated a),\n    letI := hqc\n    letI := hqs\n    ∀ x : a.normalization,\n    ∃ (i : Fin r) (P : Ideal (E i ⊗[B] A)) (hP : P.IsMaximal),\n    letI := hP\n    let F := (E i ⊗[B] A) ⧸ P\n    let alpha : A →+* F := (Ideal.Quotient.mk P).comp\n      (Algebra.TensorProduct.includeRight : A →ₐ[B] E i ⊗[B] A).toRingHom\n    letI := alpha.toAlgebra\n    let S := integralClosure A F\n    ∃ c : Spec (CommRingCat.of S) ⟶ a.normalization,\n      IsOpenImmersion c ∧\n      c ≫ a.fromNormalization = Spec.map (CommRingCat.ofHom (algebraMap A S)) ∧\n      x ∈ Set.range c",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261014T023935-L-15322",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261014T023935-L-15322",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

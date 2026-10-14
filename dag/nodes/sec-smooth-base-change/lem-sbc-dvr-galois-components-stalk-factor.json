@@ -18,21 +18,33 @@
  },
  "proof": [
   {
-   "text": "Use 09EV, or evaluation for n=1, to identify the punctured root spectrum with Spec Frac(A). Pull the given coproduct over K back across Spec A. Affine pullbacks give E_i tensor_B A = E_i tensor_K Frac(A). These are finite products of fields by separability. Integral closure in finite products is componentwise, so normalization on the affine target has components Spec S for the indicated field factors.",
-   "uses": [],
-   "elementary": false
+   "text": "The monic polynomial X^n-C(pi) makes A module finite over B. Base change therefore makes every E_i tensor_B A module finite over the field E_i, hence Artinian. Apply dvr_galois_root_tensor_reduced to get reducedness of each tensor algebra. Compose the coproduct equation over K with Spec K -> Spec B to obtain the same presentation over B.",
+   "uses": [
+    "lem-sbc-dvr-galois-root-tensor-reduced"
+   ],
+   "elementary": true
   },
   {
-   "text": "By the affine construction of relative normalization in 035H, a point x selects one such component and a prime Q in its integral closure. The affine-stalk localization isomorphism identifies the actual stalk with S_Q. The image prime is contraction along A to S, hence the stated root-prime condition gives Q contracting to (t). The affine maps are all over A; their stalk localization isomorphism therefore commutes with every structural germ s in A. Tag 0307 makes this identification compatible with localizing the integral closure. For r=0 there is no x.",
+   "text": "Apply reduced_artinian_tensor_normalization_charts with these Artinian and reduced tensor algebras. Obtain a maximal factor P and an open immersion c from Spec S containing x and commuting with the structural map to Spec A. Write x=c(y) and take Q=y.asIdeal.",
+   "uses": [
+    "lem-sbc-reduced-artinian-tensor-normalization-charts"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the equation c followed by fromNormalization = Spec(A -> S) at y. The ideal of the right side is Q.comap(algebraMap A S), so the given image-prime hypothesis supplies the contraction equality. Compose StructureSheaf.stalkIso with the inverse stalk isomorphism of c. Its algebra-map compatibility, stalkMap_comp and stalkMap_toStalk show that this composite sends every s in A to the actual structural germ at x. The private helper affine_chart_stalk_germs implements this argument completely.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-dvr-galois-root-tensor-reduced",
+  "lem-sbc-reduced-artinian-tensor-normalization-charts"
+ ],
  "proof_origin": {
   "by": "worker",
   "kind": "written-by-agent",
-  "agent": "V3",
+  "agent": "N2",
   "document": "Stacks Project",
   "place": "Tags 09EV, 035H and 0307"
  },
@@ -106,9 +118,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261014T020518-L-3814383",
+  "landing": "20261014T023935-L-15322",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

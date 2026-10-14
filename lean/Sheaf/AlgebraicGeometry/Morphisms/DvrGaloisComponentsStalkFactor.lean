@@ -16,6 +16,10 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Limits
 
+import Mathlib.RingTheory.TensorProduct.Finite
+import Sheaf.RingTheory.DvrGaloisRootTensorReduced
+import Sheaf.AlgebraicGeometry.Morphisms.ReducedArtinianTensorNormalizationCharts
+
 /-! # Normalized Galois component stalks as integral-closure local factors
 
 Source: Stacks Project, Tags 09EV, 035H and 0307.
@@ -28,30 +32,60 @@ open scoped TensorProduct
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
+/-- An affine open chart over an affine base identifies structural stalk germs. -/
+private theorem affine_chart_stalk_germs
+    {A S : CommRingCat.{u}} [Algebra A S] {Y : Scheme.{u}}
+    (f : Y ⟶ Spec A) (c : Spec S ⟶ Y) [IsOpenImmersion c]
+    (hc : c ≫ f = Spec.map (CommRingCat.ofHom (algebraMap A S)))
+    (y : Spec S) :
+    ∃ epsilon : Localization.AtPrime y.asIdeal ≃+* Y.presheaf.stalk (c y),
+      ∀ s : A, epsilon (algebraMap S (Localization.AtPrime y.asIdeal)
+        (algebraMap A S s)) =
+        (f.stalkMap (c y)).hom (StructureSheaf.toStalk A (f (c y)) s) := by
+  let ec := (asIso (c.stalkMap y)).commRingCatIsoToRingEquiv
+  refine ⟨(StructureSheaf.stalkIso S y).toRingEquiv.trans ec.symm, ?_⟩
+  intro s
+  have hnat : (c.stalkMap y).hom.comp
+      ((f.stalkMap (c y)).hom.comp (StructureSheaf.toStalk A (f (c y))).hom) =
+      (StructureSheaf.toStalk S y).hom.comp (algebraMap A S) := by
+    calc
+      _ = ((c ≫ f).stalkMap y).hom.comp
+          (StructureSheaf.toStalk A ((c ≫ f) y)).hom := by
+        rw [Hom.stalkMap_comp]
+        rfl
+      _ = _ := by
+        rw [hc]
+        exact congrArg CommRingCat.Hom.hom
+          (stalkMap_toStalk (CommRingCat.ofHom (algebraMap A S)) y)
+  apply ec.injective
+  change ec (ec.symm ((StructureSheaf.stalkIso S y)
+      (algebraMap S (Localization.AtPrime y.asIdeal) (algebraMap A S s)))) = _
+  rw [ec.apply_symm_apply]
+  exact ((StructureSheaf.stalkIso S y).commutes (algebraMap A S s)).trans
+    (RingHom.congr_fun hnat s).symm
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Identify the actual stalk and every structural germ with a generic field factor.
 
 Source: Stacks Project, Tags 09EV, 035H and 0307.
 (blueprint: lem-sbc-dvr-galois-components-stalk-factor)
 
-Proof: The root algebra A is a DVR by 09EV (for n = 1 use evaluation).
-Its punctured spectrum is Spec Frac(A), since pi = t^n. Pull the given
-coproduct isomorphism back to Spec A. On its i-th component the affine
-pullback ring is D_i = E_i tensor_B A = E_i tensor_K Frac(A).
-Finite separability of E_i/K makes D_i a finite product of fields; its
-field factors are D_i/P for maximal ideals P. Integral closure in a
-finite product is the product of the integral closures, componentwise:
-a monic equation restricts to each factor, and the product of finitely
-many monic equations works in the reverse direction. By 035H, relative
-normalization on the affine target is the spectrum of this integral
-closure. A point x consequently selects one index i, one field factor P,
-and a prime Q in S = integralClosure A (D_i/P). The standard affine-stalk
-localization isomorphism identifies its stalk with S_Q. The contraction
-of Q to A is precisely the image prime of x, hence is (t). These affine
-identifications are over A, so the localization isomorphism sends the
-structural image of every s in A to its germ at x, not merely the root.
-Tag 0307 ensures compatibility with the local description. The empty
-coproduct has no point x. This step uses no degree bound or invertibility
-of n: it is an identification, independent of the tame calculation. -/
+Proof: Monicity makes A finite over B, so each tensor D_i = E_i tensor_B A
+is finite over E_i and hence Artinian. The proved theorem
+dvr_galois_root_tensor_reduced gives reducedness using Eisenstein and
+separability. Compose the given coproduct equation over K with Spec K -> Spec B.
+Apply reduced_artinian_tensor_normalization_charts: relative normalization
+has a covering by open immersions c : Spec S -> a.normalization, where
+S is the integral closure of A in a maximal quotient D_i/P, and c is over A.
+Write x = c(y) and let Q be the prime ideal of y. Evaluating the equation
+c followed by fromNormalization = Spec(A -> S) at y identifies contraction
+of Q with the image prime of x; the supplied image condition gives (t).
+Compose the affine localization-to-stalk algebra equivalence with the
+inverse stalk isomorphism of the open immersion c. The helper
+affine_chart_stalk_germs proves that this composite preserves every
+structural germ using stalkMap_comp and stalkMap_toStalk, as well as the
+algebra-map compatibility of StructureSheaf.stalkIso. This uses no
+ramification, degree bound, invertibility of n, or DVR structure of A. -/
 theorem dvr_galois_components_stalk_factor
     (B : CommRingCat.{u}) [IsDomain B] [IsDiscreteValuationRing B]
     (pi : B) (hpi : Irreducible pi) (n : ℕ) (hnpos : 0 < n)
@@ -90,6 +124,49 @@ theorem dvr_galois_components_stalk_factor
     ∃ (epsilon : Localization.AtPrime Q ≃+* a.normalization.presheaf.stalk x),
       ∀ s : A, epsilon (algebraMap S (Localization.AtPrime Q) (algebraMap A S s)) =
         (a.fromNormalization.stalkMap x).hom
-          (StructureSheaf.toStalk A (a.fromNormalization x) s) := by sorry
+          (StructureSheaf.toStalk A (a.fromNormalization x) s) := by
+  dsimp only
+  intro hqc hqs
+  let := hqc
+  let := hqs
+  intro x hx
+  let A := AdjoinRoot ((Polynomial.X : Polynomial B) ^ n - Polynomial.C pi)
+  let (i : Fin r) : Algebra B (E i) :=
+    ((algebraMap (FractionRing B) (E i)).comp
+      (algebraMap B (FractionRing B))).toAlgebra
+  have hD (i : Fin r) :
+      IsArtinianRing (E i ⊗[B] A) ∧ _root_.IsReduced (E i ⊗[B] A) := by
+    have : Module.Finite B A :=
+      (Polynomial.monic_X_pow_sub_C pi (Nat.ne_of_gt hnpos)).finite_adjoinRoot
+    exact ⟨IsArtinianRing.of_finite (E i) _,
+      RingTheory.dvr_galois_root_tensor_reduced B pi hpi n hnpos (E i) (hE i)⟩
+  have heB : e.hom ≫ Sigma.desc (fun i : Fin r ↦
+      Spec.map (CommRingCat.ofHom (algebraMap B (E i)))) =
+      p ≫ Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B))) := by
+    rw [← he, Category.assoc]
+    congr 1
+    apply Sigma.hom_ext
+    intro i
+    simp only [Sigma.ι_desc_assoc, Sigma.ι_desc]
+    rw [← Spec.map_comp]
+    rfl
+  have hcharts :=
+    reduced_artinian_tensor_normalization_charts B (CommRingCat.of A) r E hD X
+      (p ≫ Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B))))
+      e heB hqc hqs x
+  obtain ⟨i, P, hP, c, hc, hcA, y, hy⟩ := hcharts
+  let := hP
+  let F := (E i ⊗[B] A) ⧸ P
+  let alpha : A →+* F := (Ideal.Quotient.mk P).comp
+    (Algebra.TensorProduct.includeRight : A →ₐ[B] E i ⊗[B] A).toRingHom
+  let := alpha.toAlgebra
+  let S := integralClosure A F
+  let := hc
+  subst x
+  refine ⟨i, P, hP, y.asIdeal, y.isPrime, ?_, ?_⟩
+  · have hpoint : (c ≫ _ ) y = _ := congrArg (fun f ↦ f y) hcA
+    rw [← hx]
+    exact (congrArg PrimeSpectrum.asIdeal hpoint).symm
+  · exact affine_chart_stalk_germs _ c hcA y
 
 end AlgebraicGeometry.Scheme
