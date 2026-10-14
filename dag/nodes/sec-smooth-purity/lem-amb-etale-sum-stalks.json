@@ -1,0 +1,176 @@
+{
+ "id": "lem-amb-etale-sum-stalks",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-etale-adjoint-locality",
+   "place": "Proof, first paragraph: $(u_!F)_{\\bar x}=\\bigoplus_{\\bar z\\in U_{\\bar x}}F_{\\bar z}$",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Geometric stalks of etale sum extension",
+ "statement": "Let $u:U\\to X$ be an etale morphism of schemes [def-weil-etale-morphism], let $A$ be a commutative ring, and let $F$ be a sheaf of modules over the constant ring $A_U$ on the small etale site of $U$ [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves]. Let $u_!F$ be the sheafified direct-sum presheaf [def-weil-pbc-etale-sum-extension]. For every geometric point $\\bar x:\\operatorname{Spec}\\Omega\\to X$ with $\\Omega$ algebraically closed [def-weil-geometric-point], there is a natural $A$-linear isomorphism\n$$\n(u_!F)_{\\bar x}\\xrightarrow{\\sim}\\bigoplus_{\\bar z:\\operatorname{Spec}\\Omega\\to U,\\ u\\bar z=\\bar x}F_{\\bar z}.\n$$\nStalks are geometric stalks [def-weil-pbc-geometric-stalks]. Under this isomorphism the germ represented by a section $s\\in F(V\\xrightarrow{a}U)$ in the summand indexed by $a$ of the presheaf on a pointed etale neighbourhood $(V,\\bar v)$ of $\\bar x$ is sent to the germ of $s$ in the summand indexed by $a\\bar v$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S5, proposition-describe-jshriek; module-valued form via literature/stacks-project/sites-modules.tex, Tag 0710, lemma-stalk-j-shriek"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The geometric stalk of etale extension by zero is the direct sum of stalks over all lifts of the geometric point",
+   "results": "; Algebra.mem_etaleLocus_iff, Algebra.etaleLocus, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.exists_etale_of_isEtaleAt, StandardEtalePair.instFormallyEtaleRing, Algebra.IsEtaleAt, Algebra.IsEtaleAt.comp, Algebra.FormallyEtale.localization_base",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the etale geometric-stalk formula or compact-support locality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"sheaf\"",
+   "results": "; TopCat.Presheaf.stalk, TopCat.Presheaf.stalkFunctor, TopCat.Presheaf.stalkCongr, TopCat.Presheaf.stalkFunctor_obj, TopCat.Presheaf.stalkSpecializes, TopCat.Presheaf.stalkSpecializes_refl, TopCat.Presheaf.stalkCongr_hom, TopCat.Presheaf.stalkCongr_inv",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the etale geometric-stalk formula or compact-support locality"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Ss]hriek|[Ss]hriek.*stalk|etaleLowerShriek",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the etale geometric-stalk formula or compact-support locality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "stalk extension by zero etale sum lifts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of the direct sum presheaf on a localized etale site has stalk the coproduct over the geometric fibre",
+   "results": "; ModuleCat.Tilde.stalkToFiberLinearMap, ModuleCat.Tilde.stalkToFiberLinearMap_germ, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, ModuleCat.Tilde.toStalk, ModuleCat.Tilde.stalkIso_hom, ModuleCat.Tilde.stalkIso",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the etale geometric-stalk formula or compact-support locality"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*coproduct|coproduct.*stalk|stalk.*[Ll]an",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the etale geometric-stalk formula or compact-support locality"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(shriek|extensionByZero|extension_by_zero)|((shriek|extensionByZero|extension_by_zero).*stalk)",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: general point fibre constructions and topological stalks do not state the slice extension coproduct formula or its geometric germ map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a point of a Grothendieck site, the stalk of extension from a slice site is a coproduct indexed by the fibre of the represented sheaf",
+   "results": "; CategoryTheory.GrothendieckTopology.Point.sheafFiber, CategoryTheory.GrothendieckTopology.Point.presheafFiber, StalkSkyscraperPresheafAdjunctionAuxs.fromStalk, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber, CategoryTheory.GrothendieckTopology.Point.presheafFiberDesc, TopCat.Presheaf.stalkFunctor, TopCat.stalkToFiber, StalkSkyscraperPresheafAdjunctionAuxs.toSkyscraperPresheaf_app",
+   "date": "2026-10-14",
+   "verdict": "no match: general point fibre constructions and topological stalks do not state the slice extension coproduct formula or its geometric germ map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"presheaf\"",
+   "results": "; TopCat.Presheaf.stalk, TopCat.Presheaf.stalkFunctor, TopCat.Presheaf.stalkCongr, TopCat.Presheaf.stalkFunctor_obj, TopCat.Presheaf.stalkSpecializes, TopCat.Presheaf.stalkSpecializes_refl, TopCat.Presheaf.stalkCongr_hom, TopCat.Presheaf.stalkCongr_inv",
+   "date": "2026-10-14",
+   "verdict": "no match: general point fibre constructions and topological stalks do not state the slice extension coproduct formula or its geometric germ map"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber.*(coprod|shriek)|stalk.*extension|over.*[Ss]talk",
+   "results": "Mathlib/AlgebraicGeometry/Properties.lean; Mathlib/AlgebraicGeometry/Limits.lean; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/AlgebraicGeometry/Stalk.lean; Mathlib/AlgebraicGeometry/Stalk.lean; Mathlib/AlgebraicGeometry/Stalk.lean; Mathlib/AlgebraicGeometry/SpreadingOut.lean; Mathlib/Topology/Sheaves/EtaleSpace.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: point-fibre definitions, extensionality, and topological stalk constructions do not state slice-extension geometric-stalk coproducts"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\", \"coproduct\"",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: point-fibre definitions, extensionality, and topological stalk constructions do not state slice-extension geometric-stalk coproducts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibre functor of sheaves on a site sends extension from an over category to a direct sum indexed by point lifts",
+   "results": "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w_apply; CategoryTheory.GrothendieckTopology.Point.sheafFiber; CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_eq_iff'; CategoryTheory.GrothendieckTopology.Point.presheafFiber_hom_ext_iff; CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber; CategoryTheory.GrothendieckTopology.Point.presheafFiber_hom_ext; CategoryTheory.GrothendieckTopology.Point.toPresheafFiberNatTrans_app; CategoryTheory.GrothendieckTopology.Point.Hom.presheafFiber_app",
+   "date": "2026-10-14",
+   "verdict": "no match: point-fibre definitions, extensionality, and topological stalk constructions do not state slice-extension geometric-stalk coproducts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Point fibre of a sheaf left Kan extension along the inclusion of a slice site is a coproduct of fibres",
+   "verdict": "no matching declaration",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.GrothendieckTopology.Point.presheafFiber",
+     "CategoryTheory.GrothendieckTopology.Point.sheafFiber",
+     "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber",
+     "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w_apply",
+     "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_presheafFiberDesc",
+     "CategoryTheory.GrothendieckTopology.Point.presheafFiberDesc",
+     "CategoryTheory.GrothendieckTopology.Point.Hom.presheafFiber_app",
+     "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_eq_iff'"
+    ],
+    "note": ""
+   }
+  },
+  {
+   "tool": "grep",
+   "query": "([Ff]iber|[Ss]talk).*(extensionByZero|lowerShriek|overPushforward)",
+   "verdict": "no matching declaration",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   }
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\", \"Over\"",
+   "verdict": "no matching declaration",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   }
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-amb-etale-adjoint-locality",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
