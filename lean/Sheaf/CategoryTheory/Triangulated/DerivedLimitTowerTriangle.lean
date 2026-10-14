@@ -6,7 +6,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.Algebra.Homology.Functor
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 
-import Sheaf.Algebra.Homology.KInjectiveProducts
+import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 import Sheaf.Algebra.Homology.TowerEvaluationKInjective
 import Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerRoosTriangle
 
@@ -24,7 +24,7 @@ inverse system which is X at levels at most n and zero above n, with identity
 transitions between nonzero terms. Thus evaluation preserves K-injective
 complexes by `Adjunction.preservesKInjectiveComplexes`. Form the termwise
 product P of these evaluated complexes. By
-`termwise_product_isKInjective_and_isLimit`, Q(P), with its localized
+`HomotopyCategory.isLimitFanQuotient` and the K-injective Hom comparison, Q(P), with its
 projections, is their product in the derived category. Define s by its
 components pr(n+1) followed by the transition to level n, and set t = 1-s.
 The differential commutes with t by naturality of the tower's differentials.
@@ -62,7 +62,53 @@ theorem derivedCategory_towerLimit_triangle
     tower_evaluation_isKInjective A I (Opposite.op n)
   let P : Fan K := HomologicalComplex.coneOfHasLimitEval (Discrete.functor K)
   let hP := HomologicalComplex.isLimitConeOfHasLimitEval (Discrete.functor K)
-  obtain ⟨_, ⟨hQP⟩⟩ := CochainComplex.termwise_product_isKInjective_and_isLimit K
+  let qP := HomotopyCategory.quotient (A) (.up ℤ)
+  let hqFan := HomotopyCategory.isLimitFanQuotient (A) (.up ℤ)
+    (HomologicalComplex.isLimitConeOfHasLimitEval (Discrete.functor K))
+  have hPI : CochainComplex.IsKInjective P.pt := by
+    rw [CochainComplex.isKInjective_iff_rightOrthogonal]
+    exact (HomotopyCategory.subcategoryAcyclic (A)).rightOrthogonal.prop_of_isLimit
+      hqFan (fun j ↦ CochainComplex.IsKInjective.rightOrthogonal (K j.as))
+  have : CochainComplex.IsKInjective P.pt := hPI
+  let hqP := (Fan.isLimitMapConeEquiv qP K P).symm hqFan
+  let L := DerivedCategory.Qh (C := A)
+  let pre (s : Cone ((Discrete.functor K ⋙ qP) ⋙ L)) :
+      Cone (Discrete.functor K ⋙ qP) :=
+    { pt := L.objPreimage s.pt
+      π := Discrete.natTrans fun j ↦
+        (Equiv.ofBijective _ (CochainComplex.IsKInjective.Qh_map_bijective
+          (L.objPreimage s.pt) (K j.as))).symm
+            ((L.objObjPreimageIso s.pt).hom ≫ s.π.app j) }
+  have key (s : Cone ((Discrete.functor K ⋙ qP) ⋙ L)) (j : Discrete ℕ) :
+      L.map ((pre s).π.app j) = (L.objObjPreimageIso s.pt).hom ≫ s.π.app j :=
+    (Equiv.ofBijective _ (CochainComplex.IsKInjective.Qh_map_bijective
+      (L.objPreimage s.pt) (K j.as))).apply_symm_apply _
+  have hd : IsLimit (L.mapCone (qP.mapCone P)) := by
+    refine
+      { lift := fun s ↦ (L.objObjPreimageIso s.pt).inv ≫ L.map (hqP.lift (pre s))
+        fac := ?_
+        uniq := ?_ }
+    · intro s j
+      dsimp only [Functor.mapCone_π_app]
+      have fac := hqP.fac (pre s) j
+      dsimp only [Functor.mapCone_π_app] at fac
+      rw [Category.assoc, ← L.map_comp, fac, key]
+      simp
+    · intro s m hm
+      dsimp only [Functor.mapCone_π_app] at hm
+      obtain ⟨m', hm'⟩ := (CochainComplex.IsKInjective.Qh_map_bijective
+        (L.objPreimage s.pt) P.pt).surjective ((L.objObjPreimageIso s.pt).hom ≫ m)
+      have eq : m' = hqP.lift (pre s) := by
+        apply hqP.uniq (pre s) m'
+        intro j
+        apply (CochainComplex.IsKInjective.Qh_map_bijective
+          (L.objPreimage s.pt) (K j.as)).injective
+        simp only [Functor.mapCone_π_app]
+        rw [L.map_comp, hm', Category.assoc, hm j, key]
+      rw [← eq, hm']
+      simp
+  have hQP : IsLimit (DerivedCategory.Q.mapCone P) :=
+    IsLimit.mapConeEquiv (DerivedCategory.quotientCompQhIso (A)) hd
   let iota : c.pt ⟶ P.pt := hP.lift
     (Fan.mk c.pt (fun n : ℕ ↦ c.π.app (Opposite.op n)))
   let s : P.pt ⟶ P.pt := hP.lift

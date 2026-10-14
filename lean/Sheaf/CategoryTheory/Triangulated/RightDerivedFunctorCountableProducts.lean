@@ -9,7 +9,6 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 import Mathlib.Algebra.Category.Grp.AB
-import Sheaf.Algebra.Homology.KInjectiveProducts
 import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
 
 /-!
@@ -35,7 +34,8 @@ Source: Stacks Project, Tag 08U1, proof of `lemma-RF-commutes-with-Rlim`.
 Proof: For a countable family `K n`, choose K-injective representatives `I n`, together
 with isomorphisms `Q(I n) ≅ K n`. The termwise product `P` of the representatives is
 K-injective and its localized projections form a product cone by
-`termwise_product_isKInjective_and_isLimit` (Tag 0BK6). The unit of the right derived
+`HomotopyCategory.isLimitFanQuotient` and the K-injective Hom comparison
+(Tag 0BK6). The unit of the right derived
 functor is invertible on each `I n` and on `P`. Its naturality on every projection
 identifies the image product cone with the localization of the cone obtained by applying
 `F` termwise to `P`. Since `F` preserves countable products, that cone is the termwise
@@ -83,8 +83,53 @@ theorem rightDerivedFunctor_preservesCountableProducts (X : Scheme.{u})
     let e (n : ℕ) := (Classical.choice (he n)).symm
     have : ∀ n, (I n).IsKInjective := hI
     let P := HomologicalComplex.coneOfHasLimitEval (Discrete.functor I)
-    obtain ⟨hPI, ⟨hPL⟩⟩ := CochainComplex.termwise_product_isKInjective_and_isLimit I
+    let qP := HomotopyCategory.quotient (X.Modules) (.up ℤ)
+    let hqFan := HomotopyCategory.isLimitFanQuotient (X.Modules) (.up ℤ)
+      (HomologicalComplex.isLimitConeOfHasLimitEval (Discrete.functor I))
+    have hPI : CochainComplex.IsKInjective P.pt := by
+      rw [CochainComplex.isKInjective_iff_rightOrthogonal]
+      exact (HomotopyCategory.subcategoryAcyclic (X.Modules)).rightOrthogonal.prop_of_isLimit
+        hqFan (fun j ↦ CochainComplex.IsKInjective.rightOrthogonal (I j.as))
     have : CochainComplex.IsKInjective P.pt := hPI
+    let hqP := (Fan.isLimitMapConeEquiv qP I P).symm hqFan
+    let L := DerivedCategory.Qh (C := X.Modules)
+    let pre (s : Cone ((Discrete.functor I ⋙ qP) ⋙ L)) :
+        Cone (Discrete.functor I ⋙ qP) :=
+      { pt := L.objPreimage s.pt
+        π := Discrete.natTrans fun j ↦
+          (Equiv.ofBijective _ (CochainComplex.IsKInjective.Qh_map_bijective
+            (L.objPreimage s.pt) (I j.as))).symm
+              ((L.objObjPreimageIso s.pt).hom ≫ s.π.app j) }
+    have key (s : Cone ((Discrete.functor I ⋙ qP) ⋙ L)) (j : Discrete ℕ) :
+        L.map ((pre s).π.app j) = (L.objObjPreimageIso s.pt).hom ≫ s.π.app j :=
+      (Equiv.ofBijective _ (CochainComplex.IsKInjective.Qh_map_bijective
+        (L.objPreimage s.pt) (I j.as))).apply_symm_apply _
+    have hd : IsLimit (L.mapCone (qP.mapCone P)) := by
+      refine
+        { lift := fun s ↦ (L.objObjPreimageIso s.pt).inv ≫ L.map (hqP.lift (pre s))
+          fac := ?_
+          uniq := ?_ }
+      · intro s j
+        dsimp only [Functor.mapCone_π_app]
+        have fac := hqP.fac (pre s) j
+        dsimp only [Functor.mapCone_π_app] at fac
+        rw [Category.assoc, ← L.map_comp, fac, key]
+        simp
+      · intro s m hm
+        dsimp only [Functor.mapCone_π_app] at hm
+        obtain ⟨m', hm'⟩ := (CochainComplex.IsKInjective.Qh_map_bijective
+          (L.objPreimage s.pt) P.pt).surjective ((L.objObjPreimageIso s.pt).hom ≫ m)
+        have eq : m' = hqP.lift (pre s) := by
+          apply hqP.uniq (pre s) m'
+          intro j
+          apply (CochainComplex.IsKInjective.Qh_map_bijective
+            (L.objPreimage s.pt) (I j.as)).injective
+          simp only [Functor.mapCone_π_app]
+          rw [L.map_comp, hm', Category.assoc, hm j, key]
+        rw [← eq, hm']
+        simp
+    have hPL : IsLimit (DerivedCategory.Q.mapCone P) :=
+      IsLimit.mapConeEquiv (DerivedCategory.quotientCompQhIso (X.Modules)) hd
     have hFPL := isLimitOfPreserves DerivedCategory.Q
       (isLimitOfPreserves G (HomologicalComplex.isLimitConeOfHasLimitEval (Discrete.functor I)))
     let α : Discrete.functor I ⋙ DerivedCategory.Q ≅ Discrete.functor K :=

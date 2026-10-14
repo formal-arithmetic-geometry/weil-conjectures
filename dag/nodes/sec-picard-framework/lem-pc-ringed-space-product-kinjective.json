@@ -26,35 +26,16 @@
  ],
  "proof": [
   {
-   "text": "Mathlib isLimitConeOfHasLimitEval constructs the termwise product in complexes. Lift the legs of a cone through the full homotopy quotient and apply that limit property. Projection equations follow by functoriality. For uniqueness, lift a candidate to a chain map, convert equality of projections into homotopies and assemble their components degreewise with productHomotopy. Only limits of the evaluated family are used.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0BK6, label lemma-product-K-injective, proof of the product universal property"
-   }
-  },
-  {
-   "text": "Given a chain map f from an acyclic complex K to the termwise product P, each composite f ≫ P.π.app ⟨j⟩ has a homotopy to zero by Mathlib IsKInjective.homotopyZero for I j [def-sp-kinjective-bridge]. Apply the private productHomotopy assembly from Step 1 to these homotopies; zero_comp identifies the zero projection composites. This supplies the nonempty_homotopy_zero field of IsKInjective P directly. No right-orthogonality criterion or exactness of products is used.",
+   "text": "Upstream review #1428 identifies CochainComplex.isKInjective_of_isLimitFan and DerivedCategory.isLimitFanMkQObjOfIsKInjective as the canonical pair; retire the duplicate local conjunction. In this snapshot the canonical source is unavailable. Its three local countable-product callers instead use the available HomotopyCategory.isLimitFanQuotient to obtain the product in the homotopy category, the rightOrthogonal closure under limits and isKInjective_iff_rightOrthogonal for K-injectivity, and IsKInjective.Qh_map_bijective to transfer the universal property to the derived category. Essential surjectivity of Qh pulls back arbitrary cone points; the Hom bijections pull back legs and candidates, and quotientCompQhIso identifies the final cone with Q.mapCone P. These are fully proved local specializations; no new global replacement theorem is added.",
    "uses": [
-    "def-sp-kinjective-bridge"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0BK6, label lemma-product-K-injective, proof of K-injectivity"
-   }
-  },
-  {
-   "text": "Use the K-injective Hom comparison [lem-weil-pbc-kinjective-hom-derived] for P and every I_t. The private mapProduct helper transfers a discrete limit through an essentially surjective functor whose maps on morphisms into the cone point and every diagram object are bijective: pull back each cone through an object preimage and the Hom bijections, lift with the original limit, and prove uniqueness using the same bijections. Apply it to Qh and the homotopy-category product of Step 1. Finally transport the limiting cone along quotientCompQhIso, obtaining exactly Q.mapCone P and thus the product [def-weil-category-product].",
-   "uses": [
+    "def-sp-kinjective-bridge",
     "lem-weil-pbc-kinjective-hom-derived",
     "def-weil-category-product"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0BK6, label lemma-product-K-injective, final product argument"
+    "place": "Tag 0BK6, label lemma-product-K-injective"
    }
   }
  ],
@@ -65,10 +46,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "M3",
+  "group": "U2",
   "date": "2026-10-14",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 0BK6; degreewise homotopy assembly, direct K-injectivity via homotopyZero, and Qh_map_bijective. Existing Steps 1 and 3 retained."
+  "document": "coord/upstream-review-20261013.md",
+  "place": "Repair #1428: retire the standalone local realization because all three callers now prove their required countable-product specializations directly. The full arbitrary-family statement has no verified Lean attachment in this snapshot; the upstream pair is an unverified citation only."
  },
  "mathlib_searches": [
   {
@@ -116,16 +97,7 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pki2710 (reviewer sub-agent of L); spot-checked: Tag 0BK6 statement matches (general abelian category, degreewise products exist; generalisation from ringed space named in second reading, citers lem-pc-derived-functor-commutes-derived-limit / lem-pc-ringed-space-rgamma-derived-limit apply it to Mod(O_X), which has products); no ATTACH: slopmaster2 Products.lean has only HomotopyCategory.isLimitFanQuotient and DerivedCategory.hasLimitsOfShape_discrete (existence, needs K-injective resolutions), not this statement; no Mathlib match; lem-pc-ringed-space-derived-products is existence of products, not duplicated and not needed. FIX more, RETURN less: (1) C1 Step 1 exactness of products in Ab now cites existing lem-pc-abelian-groups-exact-products (added to uses and proof_deps); (2) C4/E Step 3 now checks the hypothesis of lem-weil-pbc-kinjective-hom-derived (homotopic-to-zero form) from the Hom-complex-acyclic form of def-sp-kinjective-bridge, for I_t and I.; 1 file(s) fixed by the reviewer"
  },
- "lean": {
-  "module": "Sheaf.Algebra.Homology.KInjectiveProducts",
-  "declaration": "CochainComplex.termwise_product_isKInjective_and_isLimit",
-  "file": "lean/Sheaf/Algebra/Homology/KInjectiveProducts.lean",
-  "statement": "theorem termwise_product_isKInjective_and_isLimit {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C] {T : Type t} (I : T → CochainComplex C ℤ) [∀ s : T, (I s).IsKInjective] [∀ n : ℤ, HasLimit (Discrete.functor I ⋙ HomologicalComplex.eval C (ComplexShape.up ℤ) n)] : let P := HomologicalComplex.coneOfHasLimitEval (Discrete.functor I) IsKInjective P.pt ∧ Nonempty (IsLimit (DerivedCategory.Q.mapCone P))",
-  "branch": "sheaf-dag",
-  "by": "F1",
-  "date": "2026-10-11",
-  "existing": false
- },
+ "lean": null,
  "reviewed_lean": {
   "date": "2026-10-11",
   "by": "L",
@@ -149,13 +121,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "W2",
+  "reviewer": "X-4cad6",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261014T023941-L-17432",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [],
-  "sorry_after": []
+  "landing": "20261014T035546-L-888417",
+  "kind": "interface",
+  "note": "independent Codex review: Recorded retirement and node metadata match the delivery and earlier return; all four modules compile cleanly, all three original callers fail as reported, adapted signatures remain identical, and public/private proofs use only permitted axioms."
  }
 }
