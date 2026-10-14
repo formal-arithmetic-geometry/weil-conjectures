@@ -14249,3 +14249,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:05 L: merged deliver/N4/Sheaf.AlgebraicGeometry.MayerVietorisImageRestrictionLocalization (stage 3; reviewer PASS; first push; landing 20261014T020516-L-3813165 (interface); batch 20261014T020501; modules 2; new nodes 1)
 - 02:05 L: merged deliver/P4/Sheaf.AlgebraicGeometry.SelfTorAffineTensorSections (stage 3; reviewer PASS; first push; landing 20261014T020516-L-3813323 (interface); batch 20261014T020501; modules 3; new nodes 2)
 - 02:05 L: merged deliver/P4/Sheaf.AlgebraicGeometry.SelfTorChosenResolutionCharts (stage 3; reviewer PASS; first push; landing 20261014T020516-L-3813528 (interface); batch 20261014T020501; modules 3; new nodes 2)
+- 02:05 L: merged deliver/T2/Sheaf.AlgebraicGeometry.SquareZeroTensorGradedActionProjection (stage 3; reviewer PASS; first push; landing 20261014T020517-L-3813727 (interface); batch 20261014T020501; modules 3; new nodes 2)

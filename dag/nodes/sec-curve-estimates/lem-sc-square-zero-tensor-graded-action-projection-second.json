@@ -1,0 +1,165 @@
+{
+ "id": "lem-sc-square-zero-tensor-graded-action-projection-second",
+ "kind": "statement",
+ "title": "Homogeneous quotient action and coefficient projections (second)",
+ "statement": "Let j:Z→X be a closed immersion, L invertible, J=j.ker with J²=0, and n≥0 [def-pc-scheme, def-weil-closed-immersion, def-sc-invertible-module, def-sbc-closed-immersion-ideal-sheaf, def-sbc-ideal-sheaf-powers]. Fix a TensorGradedPresentation T [lem-sc-square-zero-tensor-graded-presentation] and the canonical comparison data D=(a_r,k_r) [lem-sc-square-zero-ideal-tensor-unit]. Set F=j^*(J⊗L^n), N=(j^*L)^n, H=H¹(Z,-) [def-pc-module-pullback, def-sc-ringed-space-module-cohomology]. Fix e≥0, f:O_Z→N and x:O_Z→N^(e+1). Define s=c(f^⊗1), t=c(x), and Q_r=k_r^(-1)∘H¹(X,π_(n(r+1)),1), using the explicit homogeneous sections and degree projections [lem-sc-square-zero-tensor-graded-product-projection]. Suppose σ is a local quotient action on K satisfying i(σ(p(b))y)=b i(y) and commuting with restrictions, μ is its global endomorphism action, and ρ(g)=H¹(X,μ(g)). Then for every z∈H¹(X,K), Q_(e+1)(ρ(t)z)=H(ρ_F^(-1);id_F⊗x)(H(ρ_F)(Q_0(z))). This statement asserts only action compatibility, with no section boundary, resolution, or derivation identity.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, coherent-equation-ses and the direct-sum exact sequence following it; Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, the quotient action in the first paragraph of its proof."
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-pc-quasi-coherent-sheaf",
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-invertible-module",
+  "def-sc-module-cohomology-boundary",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-weil-pbc-ringed-space-algebra-module",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-module-section-boundary-exact",
+  "lem-sc-square-zero-ideal-tensor-unit",
+  "lem-sc-square-zero-tensor-graded-presentation",
+  "lem-sc-square-zero-tensor-graded-product-projection",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "For the second equation only: The local lift formula determines the action uniquely since i is mono. Locally lift s and t through the degreewise units. The colimit cofan k expresses every kernel section locally as a finite sum of homogeneous sections. Use k_inclusion and b_multiply to compute the action; k_projection and k_orthogonal select only input degree n(e+1) for s and degree n for t. For n=0 use the diagonal relation. Restriction compatibility glues the resulting sheaf morphism identities.",
+   "uses": [
+    "lem-sc-square-zero-tensor-graded-presentation",
+    "lem-weil-pbc-closed-immersion-unit-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the second equation only: Apply H¹ and use ρ=H¹(μ). Each component of the canonical coefficient comparison is natural: ideal-kernel comparison, inverse annihilated-module unit, inverse affine edge, and tensor-degree comparison. Transport the action squares through these maps to obtain mulTensorPowSection f F e 1 and the right-unitor/tensor-by-x map. Evaluate on every z. No boundary product rule is used.",
+   "uses": [
+    "lem-sc-square-zero-ideal-tensor-unit",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "lem-sc-square-zero-tensor-graded-product-projection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-square-zero-ideal-tensor-unit",
+  "lem-sc-square-zero-tensor-graded-presentation",
+  "lem-sc-square-zero-tensor-graded-product-projection",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-weil-pbc-module-cohomology-fmap-functorial"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, coherent-equation-ses and the direct-sum exact sequence following it; Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, the quotient action in the first paragraph of its proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the action of a quotient algebra on the cohomology of a square zero ideal with homogeneous coefficient projections",
+   "results": "Eight cotangent cohomology hits, none for sheaf graded coefficient projections.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "Functor.map_comp and presheaf map_comp found: useful after a morphism identity, but neither proves graded coefficient-action compatibility.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorGradedAction|CoefficientProjection|cohomology.*[Aa]ction|[Aa]ction.*cohomology",
+   "results": "Mathlib search returned three generic group-action/cohomology mentions, no graded sheaf projection lemma. Separate library rg search found only the parent and its callers.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology functor transports a commuting square of module sheaf morphisms to a commuting square on cohomology",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SquareZeroTensorGradedActionProjection",
+  "date": "2026-10-14",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS graded direct-sum sequence: quotient multiplication on the ideal, before applying the derivation rule",
+   "via": [
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.tensorGradedAction_projection_second",
+  "file": "lean/Sheaf/AlgebraicGeometry/tensorGradedAction_projection_second.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorGradedAction_projection_second",
+  "statement": "theorem tensorGradedAction_projection_second {X Z : Scheme.{u}} (j : Z ⟶ X)\n    [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)\n    (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)\n    (hD : canonicalTensorBoundaryComparisons j L hI n = D)\n    (e : ℕ) (f : 𝟙_ Z.Modules ⟶ ((tensorPullback j).obj L).tensorPow n)\n    (x : 𝟙_ Z.Modules ⟶ (((tensorPullback j).obj L).tensorPow n).tensorPow (e + 1))\n    (σ : ∀ U : X.Opens, T.C.right.obj.obj (op U) →+*\n      Module.End ((moduleRings X.toRingedSpace).obj.obj (op U)) (T.I.val.obj (op U)))\n    (μ : T.C.right.obj.obj (op ⊤) →+* End T.I)\n    (ρ : T.C.right.obj.obj (op ⊤) →+*\n      Module.End ((moduleRings X.toRingedSpace).obj.obj (op ⊤))\n        ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj T.I))\n    (hlocal : ∀ (U : X.Opens) (b : T.B.right.obj.obj (op U)) (y : T.I.val.obj (op U)),\n      @id (T.B.right.obj.obj (op U))\n        (T.i.val.app (op U) (σ U (T.p.right.hom.app (op U) b) y)) =\n        b * @id (T.B.right.obj.obj (op U)) (T.i.val.app (op U) y))\n    (hrestrict : ∀ (U V : X.Opens) (a : V ⟶ U)\n      (g : T.C.right.obj.obj (op U)) (y : T.I.val.obj (op U)),\n      T.I.val.map a.op (σ U g y) = σ V (T.C.right.obj.map a.op g) (T.I.val.map a.op y))\n    (hglobal : ∀ (g : T.C.right.obj.obj (op ⊤)) (U : X.Opens)\n      (y : T.I.val.obj (op U)),\n      (μ g).val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y)\n    (haction : ∀ g : T.C.right.obj.obj (op ⊤), ρ g =\n      ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ g)).hom) :\n    let F : Z.Modules := (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n)\n    let N : Z.Modules := ((tensorPullback j).obj L).tensorPow n\n    let H := RingedSpace.moduleCohomology Z.toRingedSpace 1\n    (∀ z : (RingedSpace.moduleCohomology X.toRingedSpace 1).obj T.I,\n      tensorGradedCoefficientProjection T D (e + 1) (ρ (tensorGradedSection T D e x) z) =\n      H.map ((ρ_ F).inv ≫ F ◁ x)\n        (H.map (ρ_ F).hom (tensorGradedCoefficientProjection T D 0 z)))",
+  "by": "T2",
+  "date": "2026-10-14",
+  "branch": "sheaf-dag"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T020517-L-3813727",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T020517-L-3813727",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -6,6 +6,8 @@ Authors: SHEAF group N4
 module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedProductProjection
+import Sheaf.AlgebraicGeometry.tensorGradedAction_projection_first
+import Sheaf.AlgebraicGeometry.tensorGradedAction_projection_second
 
 /-! # Projection of homogeneous quotient actions
 
@@ -26,6 +28,8 @@ attribute [local irreducible] RingedSpace.moduleCohomology
   boundaryCoefficientCohomologyIso canonicalTensorBoundaryComparisons
 noncomputable section
 
+
+set_option linter.unusedVariables false in
 /-- The homogeneous quotient actions commute with the coefficient projections.
 This statement concerns only actions: it has no connecting map or resolution presentation.
 
@@ -83,7 +87,12 @@ theorem tensorGradedAction_projection {X Z : Scheme.{u}} (j : Z ⟶ X)
     (∀ z : (RingedSpace.moduleCohomology X.toRingedSpace 1).obj T.I,
       tensorGradedCoefficientProjection T D (e + 1) (ρ (tensorGradedSection T D e x) z) =
       H.map ((ρ_ F).inv ≫ F ◁ x)
-        (H.map (ρ_ F).hom (tensorGradedCoefficientProjection T D 0 z))) := by sorry
+        (H.map (ρ_ F).hom (tensorGradedCoefficientProjection T D 0 z))) := by
+  constructor
+  · exact tensorGradedAction_projection_first j L hI n T D hD e f x σ μ ρ
+      hlocal hrestrict hglobal haction
+  · exact tensorGradedAction_projection_second j L hI n T D hD e f x σ μ ρ
+      hlocal hrestrict hglobal haction
 
 end
 end AlgebraicGeometry.Scheme.Modules
