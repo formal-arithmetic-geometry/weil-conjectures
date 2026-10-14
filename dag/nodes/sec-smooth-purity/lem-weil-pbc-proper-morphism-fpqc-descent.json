@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-cbc-finite-torsion",
-   "place": "refinement comparison paragraph: etale descent of proper closed supports",
+   "place": "Proof, final paragraph beginning 'For another compactification': compatibility of comparison isomorphisms with refinement maps; via closed-proper-support locality, properness descends from etale refinements.",
    "via": [
     "lem-cbc-closed-proper-support-locality",
     "lem-cbc-proper-support-sheaf-composition",
@@ -26,9 +26,96 @@
   "def-pc-fibre-product",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $i$, properness of $f_i$ means that $f_i$ is separated, universally closed and of finite type. Finite type means locally of finite type and quasi-compact. Thus the hypotheses needed below hold for all $i$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W1 (definition-proper), Tag 01T0"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fpqc-descend-universally-closed] to the given fpqc family and the universally closed $f_i$. It gives that $f$ is universally closed.",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-universally-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02KS (lemma-descending-property-universally-closed)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fpqc-descend-locally-finite-type] to the same fpqc family and the locally finite type $f_i$. It gives that $f$ is locally of finite type.",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-locally-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02KX (lemma-descending-property-locally-finite-type)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-universally-closed-quasi-compact], the universally closed $f$ of step 2 is quasi-compact. Together with step 3, this says that $f$ is of finite type by definition.",
+   "uses": [
+    "lem-weil-pbc-universally-closed-quasi-compact",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 04XU (lemma-universally-closed-quasi-compact)"
+   }
+  },
+  {
+   "text": "Put $D=X\\times_S X$ and $\\delta:X\\to D$ equal to the diagonal. Pull the given fpqc family back along $D\\to S$. By [lem-galois-fpqc-covering-base-change], the projections $D_i=D\\times_S S_i\\to D$ form an fpqc covering. Apply [lem-weil-pbc-over-pullback-diagonal-closed-immersion] to the $S$-morphism $f:X\\to S$ and $S_i\\to S$: it says exactly that the base change of $\\delta$ along $S_i\\to S$ is closed because $f_i$ is separated. As $X\\times_D(D\\times_S S_i)\\cong X\\times_S S_i$, this is also the base change of $\\delta$ along $D_i\\to D$. The identification follows from the fibre-product universal property: for a test scheme $Z$, both represent pairs $a:Z\\to X$, $b:Z\\to S_i$ with $f a=g_i b$. Under this identification the map to $D_i$ is $(\\delta a,b)$ on both sides, so the isomorphism identifies the morphisms over $D_i$, not only their source schemes. Now [lem-pc-fpqc-descend-closed-immersion] applied to $\\delta$ and the cover of $D$ shows that $\\delta$ is a closed immersion. Thus $f$ is separated by definition.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-over-pullback-diagonal-closed-immersion",
+    "lem-pc-fpqc-descend-closed-immersion",
+    "def-pc-fibre-product",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02KU (lemma-descending-property-separated); Tag 02L6 (lemma-descending-property-closed-immersion)"
+   }
+  },
+  {
+   "text": "Steps 2, 4 and 5 give universal closedness, finite type and separatedness of $f$, respectively. These are the three defining conditions for properness. Hence $f$ is proper.",
+   "uses": [
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W1 (definition-proper)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-fpqc-descend-universally-closed",
+  "lem-weil-pbc-fpqc-descend-locally-finite-type",
+  "lem-weil-pbc-universally-closed-quasi-compact",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-over-pullback-diagonal-closed-immersion",
+  "lem-pc-fpqc-descend-closed-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02L1"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,15 +172,89 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-14",
    "verdict": "no match: no declaration of proper fpqc covering-family descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper morphisms descend along fpqc covering families",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties of schemes where $\\\\mathcal{P}'$ is stable under base change and composition, and $\\\\mathcal{P}$ is stable under base change. If the intersect\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.of_hom\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {𝒰 : CategoryTheory.PreZeroHypercover S} {𝒱 : CategoryTheory.PreZeroHypercover S}\\n  (f : 𝒱.Hom 𝒰) [AlgebraicGeometry.QuasiCompactCover 𝒱], AlgebraicGeometry.QuasiCompactCover 𝒰\", \"doc\": \"If $\\\\mathcal{V}$ is a quasi-compact pre-zero hypercover of a scheme $S$ and there exists a morphism $f: \\\\mathcal{V} \\\\to \\\\mathcal{U}$ to another pre-zero hypercover $\\\\mathcal{U}$ of $S$, then $\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.homCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (hf : P f)\\n  [inst : AlgebraicGeometry.Surjective f] [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.QuasiCompactCover (AlgebraicGeometry.Scheme.Hom.cover f hf).toPreZeroHypercover\", \"doc\": \"Given a surjective morphism $ f: X \\to S $ of schemes that satisfies a morphism property $ P $ and is quasi-compact, the singleton presieve $\\\\{f\\\\}$ forms a quasi-compact covering sieve in the precovera\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.instPullback₁Scheme\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} (𝒰 : CategoryTheory.PreZeroHypercover S) [AlgebraicGeometry.QuasiCompactCover 𝒰]\\n  {T : AlgebraicGeometry.Scheme} (f : T ⟶ S),\\n  AlgebraicGeometry.QuasiCompactCover (CategoryTheory.PreZeroHypercover.pullback₁ f 𝒰)\", \"doc\": \"Given a quasi-compact cover $\\\\mathcal{U}$ of a scheme $S$ and a morphism $f : T \\\\to S$ of schemes, the pullback of $\\\\mathcal{U}$ along $f$ forms a quasi-compact cover of $T$. This asserts that the pro\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits do not assert proper descent for arbitrary fpqc families"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme morphism is proper if its base changes along an fpqc family are proper",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiCompact\", \"doc\": \"If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f],\\n  IsProperMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a morphism of schemes that is universally closed, then $ f $ is a proper map, meaning that the preimage of every compact subset of $ Y $ is compact in $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.comp_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : Y ⟶ Z} [AlgebraicGeometry.IsProper g],\\n  AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g) ↔ AlgebraicGeometry.IsProper f\", \"doc\": \"If $ g: Y \\\\to Z $ is a proper morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is proper if and only if $ f: X \\\\to Y $ is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is multiplicative, meaning that the composition of two proper morphisms is again a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits do not assert proper descent for arbitrary fpqc families"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsProper @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism is proper if it is separated, universally closed and locally of finite type. \"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsProper f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsProper f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f] : AlgebraicGeometry.IsSeparated f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f] : AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits do not assert proper descent for arbitrary fpqc families"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProper.*[Dd]esc|[Dd]esc.*IsProper",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits do not assert proper descent for arbitrary fpqc families"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper morphisms descend along fpqc covering families",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-closed-proper-support-locality",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proper-morphism-fpqc-descent",
+  "worker": "stage1",
+  "summary": "Expanded proper descent into existing universally-closed and locally-finite-type family descent, quasi-compactness from universal closedness (one exact Mathlib leaf), and closed-immersion descent of the diagonal. No family restatement nodes remain.",
+  "blueprint": "Proof, final paragraph beginning 'For another compactification': compatibility of comparison isomorphisms with refinement maps; via closed-proper-support locality, properness descends from etale refinements. Steps 1-6 supply the generic properness-descent tool below that comparison argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-descend-universally-closed",
+    "why": "Generic descent of universal closedness for the same fpqc family; the current compact-support unit has no such tool."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-locally-finite-type",
+    "why": "Generic descent of locally finite type for the same fpqc family."
+   },
+   {
+    "node": "lem-weil-pbc-over-pullback-diagonal-closed-immersion",
+    "why": "Generic identification of base-changed diagonal closedness with separatedness; applies without qcqs hypotheses."
+   },
+   {
+    "node": "lem-pc-fpqc-descend-closed-immersion",
+    "why": "Generic family descent applied to the diagonal, rather than restating properness descent."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-descend-universally-closed",
+  "lem-weil-pbc-fpqc-descend-locally-finite-type",
+  "lem-weil-pbc-over-pullback-diagonal-closed-immersion",
+  "lem-pc-fpqc-descend-closed-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-993f9feba",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-993f9feba (reviewer sub-agent of L); spot-checked: Read the item, new node, cited statements and source locations in full. All six steps pass, including the diagonal identification over D_i and arbitrary fpqc-family descent. Stacks 04XU and Mathlib UniversallyClosed.lean:167–168 confirm the new leaf exactly. No duplicate, cycle, restated split or target weakening found. Corrected the new node’s missing standard metadata under fixes/dag/nodes/sec-smooth-purity/. Full checks and accepted tool_uses are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
