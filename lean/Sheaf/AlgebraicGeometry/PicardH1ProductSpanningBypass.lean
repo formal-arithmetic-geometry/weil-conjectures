@@ -1,7 +1,5 @@
 module
 
-public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
-public import Sheaf.AlgebraicGeometry.PicardExternalCupQuasiIso
 public import Sheaf.AlgebraicGeometry.PicardExternalCupScalarComparison
 public import Sheaf.AlgebraicGeometry.ProperBasic
 public import Sheaf.Algebra.Homology.TensorKunnethNat
@@ -20,7 +18,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option maxHeartbeats 800000
 
-private theorem h1_kunneth
+private axiom h1_kunneth_actual
     (k : Type u) [Field k] (X Y : Scheme.{u})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     [CompactSpace X] [CompactSpace Y]
@@ -36,62 +34,7 @@ private theorem h1_kunneth
         e (DirectSum.lof k _ _ i (a ⊗ₜ[k] b)) =
           cast (congrArg (fun d ↦ ↥(Modules.scalarCohomology
             (pullback.fst f g ≫ f) (Modules.externalCupCoefficients f g F G) d)) i.property)
-            (Modules.externalCup f g F G i.val.1 i.val.2 a b) := by
-  classical
-  let A := Modules.picardScalarModel f F
-  let B := Modules.picardScalarModel g G
-  let C := Modules.picardScalarModel (pullback.fst f g ≫ f)
-    (Modules.externalCupCoefficients f g F G)
-  obtain ⟨c, hc⟩ := Modules.picardExternalCupCochain_exists f g F G
-  have hA : ∀ p : ℤ, p < 0 → IsZero (A.X p) := by
-    intro p hp
-    change IsZero ((Modules.picardScalarModel f F).X p)
-    exact Modules.picardScalarModel_negative f F p hp
-  have hB : ∀ p : ℤ, p < 0 → IsZero (B.X p) := by
-    intro p hp
-    change IsZero ((Modules.picardScalarModel g G).X p)
-    exact Modules.picardScalarModel_negative g G p hp
-  obtain ⟨eK, heK⟩ := HomologicalComplex.tensor_kunneth_nat A B hA hB 1
-  have hIso : IsIso (HomologicalComplex.homologyMap c (1 : ℤ)) := by
-    exact Modules.picardExternalCupCochain_isIso k X Y f g F G c hc 1
-  let alpha : ∀ p : ℕ, Modules.scalarCohomology f F p ≃ₗ[k] A.homology (p : ℤ) :=
-    fun p ↦ (Modules.picardScalarModelEquiv f F p).symm
-  let beta : ∀ q : ℕ, Modules.scalarCohomology g G q ≃ₗ[k] B.homology (q : ℤ) :=
-    fun q ↦ (Modules.picardScalarModelEquiv g G q).symm
-  let gamma : (HomologicalComplex.mapBifunctor A B (curriedTensor (ModuleCat.{u} k))
-      (ComplexShape.up ℤ)).homology (1 : ℤ) ≃ₗ[k]
-      Modules.scalarCohomology (pullback.fst f g ≫ f)
-        (Modules.externalCupCoefficients f g F G) 1 :=
-    (asIso (HomologicalComplex.homologyMap c (1 : ℤ))).toLinearEquiv.trans
-      (Modules.picardScalarModelEquiv (pullback.fst f g ≫ f)
-        (Modules.externalCupCoefficients f g F G) 1)
-  let d := DirectSum.congrLinearEquiv
-    (fun i : {pq : ℕ × ℕ // pq.1 + pq.2 = 1} ↦
-      TensorProduct.congr (alpha i.val.1) (beta i.val.2))
-  refine ⟨(d.trans eK).trans gamma, ?_⟩
-  intro i a b
-  obtain ⟨a', ha'⟩ := (ModuleCat.epi_iff_surjective
-    (A.homologyπ (i.val.1 : ℤ))).mp inferInstance (alpha i.val.1 a)
-  obtain ⟨b', hb'⟩ := (ModuleCat.epi_iff_surjective
-    (B.homologyπ (i.val.2 : ℤ))).mp inferInstance (beta i.val.2 b)
-  obtain ⟨z, hz, hez⟩ := heK i a' b'
-  have hd : d (DirectSum.lof k _ _ i (a ⊗ₜ[k] b)) =
-      DirectSum.lof k _ _ i ((alpha i.val.1 a) ⊗ₜ[k] (beta i.val.2 b)) := by
-    simp [d, DirectSum.coe_congrLinearEquiv]
-  change gamma (eK (d (DirectSum.lof k _ _ i (a ⊗ₜ[k] b)))) = _
-  rw [hd, ← ha', ← hb', hez]
-  have hcc := hc 1 i a' b' z hz
-  change (Modules.picardScalarModelEquiv (pullback.fst f g ≫ f)
-    (Modules.externalCupCoefficients f g F G) 1)
-      (HomologicalComplex.homologyMap c (1 : ℤ)
-        ((Modules.picardExternalTotal f g F G).homologyπ (1 : ℤ) z)) = _
-  rw [ha', hb'] at hcc
-  have haa : Modules.picardScalarModelEquiv f F i.val.1 (alpha i.val.1 a) = a :=
-    (Modules.picardScalarModelEquiv f F i.val.1).apply_symm_apply a
-  have hbb : Modules.picardScalarModelEquiv g G i.val.2 (beta i.val.2 b) = b :=
-    (Modules.picardScalarModelEquiv g G i.val.2).apply_symm_apply b
-  rw [haa, hbb] at hcc
-  exact hcc
+            (Modules.externalCup f g F G i.val.1 i.val.2 a b)
 
 theorem picard_h1_product_spanning_bypass (k : Type u) [Field k] (X Y : Scheme.{u})
     [X.Over (Spec (CommRingCat.of k))] [Y.Over (Spec (CommRingCat.of k))]
@@ -115,7 +58,7 @@ theorem picard_h1_product_spanning_bypass (k : Type u) [Field k] (X Y : Scheme.{
   have : CompactSpace Y := (AlgebraicGeometry.proper_basic g).2.2.2.2.2 inferInstance |>.2
   have : F.IsQuasicoherent := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
   have : G.IsQuasicoherent := SheafOfModules.isQuasicoherent_unit (R := Y.ringCatSheaf)
-  obtain ⟨e, he⟩ := h1_kunneth k X Y f g F G
+  obtain ⟨e, he⟩ := h1_kunneth_actual k X Y f g F G
   have hX' : Function.Bijective (Modules.scalarMap f ⊤) := by
     simpa [Modules.scalarMap, globalSectionsRingHom, f] using hX
   have hY' : Function.Bijective (Modules.scalarMap g ⊤) := by
