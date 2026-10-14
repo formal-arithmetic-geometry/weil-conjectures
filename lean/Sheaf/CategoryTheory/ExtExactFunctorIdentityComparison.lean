@@ -26,6 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.Abelian.Ext
 
+-- Retained for downstream modules that import this namespace with `import all`.
 /-- Shift compatibility descends along localization: check the square after precomposition,
 then cancel the image of the localization functor's shift comparison. -/
 private theorem commShift_of_localization
