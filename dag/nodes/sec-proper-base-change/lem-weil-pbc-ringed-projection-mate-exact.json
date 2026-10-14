@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lemma-weil-pbc-perfect-projection-formula",
-   "place": "Detailed-form proof: 'closed under shifts' and 'under cones'; the exact tensor and compatible mate data, without an invertibility assertion",
+   "place": "Detailed-form proof: 'closed under shifts' and 'under cones'; construction of the exact tensor and compatible mate data, without an invertibility assertion",
    "via": []
   },
   "same_as": []
@@ -25,9 +25,90 @@
   "def-pur-kinjective-complex",
   "prop-pur-kinjective-resolutions-exist"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-weil-pbc-site-derived-tensor-descent] for the bifunctor on derived categories and for checking its natural transformations on K-flat complexes with flat terms. Resolutions with these properties exist by [lem-pc-kflat-resolution]. Use [lem-weil-pbc-ringed-topoi-derived-pullback] to construct the everywhere-defined exact functor $L$, computed by termwise pullback on these resolutions; this includes the required preservation of quasi-isomorphisms, which is not a consequence of resolution existence alone. Smallness gives the Grothendieck module categories and functorial K-injective resolutions by [prop-pur-kinjective-resolutions-exist]. Thus $R$ is everywhere defined and triangulated by [lem-pc-right-derived-functor-triangulated]. The underived module adjunction is precisely [lem-weil-pbc-ringed-topoi-module-adjunction], with the module structure on direct image induced by $f^{-1}R_Y\\to R_X$. Apply [lem-pc-derived-adjoint-functors] with $\\mathcal A=\\Mod(R_X)$, $\\mathcal B=\\Mod(R_Y)$, $G=f^*$ and $F=f_*$ to get $L\\dashv R$, its unit $\\eta$ and counit $\\varepsilon$.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-pc-derived-adjoint-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and preceding construction), Tag 06YY (lemma-derived-base-change), Tag 07A6 (lemma-adjoint); K-injective construction in section-unbounded"
+   }
+  },
+  {
+   "text": "For K-flat flat-term representatives $A,B$, [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] supplies the canonical natural isomorphism $\\mu$. Its termwise comparison is the inverse of the extension-of-scalars map $(a\\otimes x)\\otimes(b\\otimes y)\\mapsto ab\\otimes(x\\otimes y)$, whose inverse sends $a\\otimes(x\\otimes y)$ to $(a\\otimes x)\\otimes(1\\otimes y)$; these balanced maps are the comparison of [lem-weil-pbc-ringed-topoi-module-pullback-tensor]. In particular $f^*R_Y=R_X$ by multiplication with inverse $a\\mapsto a\\otimes1$, and $R_Y[0]$ is K-flat: tensor with it is the identity on complexes. Thus $L(R_Y)=R_X$. With the differential in [def-pc-tensor-complex-sheaves], the first-factor shift map $A[n]\\otimes B\\to(A\\otimes B)[n]$ is the identity on each summand, and the second-factor shift map $A\\otimes B[n]\\to(A\\otimes B)[n]$ multiplies the summand of first-factor degree $p$ by $(-1)^{np}$. Substitution in $d_A\\otimes1+(-1)^p1\\otimes d_B$ verifies both chain-map identities, including for negative $n$; adding shifts multiplies these signs. Termwise $f^*$ commutes with shifts by the identity, and the displayed balanced maps commute with $(-1)^{np}$. They also commute with chain maps in both variables. Unit compatibility is the equality of multiplication maps on $a\\otimes(x\\otimes1)$. All these equalities descend by [lem-weil-pbc-site-derived-tensor-descent], giving the natural, unital, integer-shift-compatible $\\mu$ on derived objects.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), Tag 06YU (definition-derived-tor); signed total tensor convention"
+   }
+  },
+  {
+   "text": "Fix a K-flat flat-term representative $A$ of an object. The cone of a quasi-isomorphism $v$ is acyclic; tensoring it with $A$ is acyclic by [def-pc-kflat-complex]. For a chain map $v:B\\to C$, the comparison $A\\otimes C(v)\\to C(A\\otimes v)$ is the identity on $A^p\\otimes C^q$ and multiplication by $(-1)^p$ on $A^p\\otimes B^{q+1}$. The cone differential of [def-weil-abstract-derived-category] and the tensor differential of [def-pc-tensor-complex-sheaves] show that it is a chain isomorphism: in the off-diagonal entry the tensor differential contributes $(-1)^pv$, canceled by the sign on the shifted summand. The inclusion square commutes, and the square for the connecting map $-p$ commutes with the second-factor shift map from step 2. Consequently tensor with $A$ inverts quasi-isomorphisms and sends cone triangles to distinguished triangles after localization; every derived distinguished triangle is isomorphic to such an image by [def-weil-abstract-derived-category]. This proves exactness in the second variable. The graded symmetry $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$, checked against the tensor differential, gives exactness in the first variable. Hence $F$ is exact. Exactness of $L$ from [lem-weil-pbc-ringed-topoi-derived-pullback], of tensor just proved, and of $R$ from [lem-pc-right-derived-functor-triangulated] gives exactness of $G$, with the composite shift structures.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
+    "def-weil-abstract-derived-category",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and preceding construction); cone calculation with signed tensor differential"
+   }
+  },
+  {
+   "text": "Put $H(P)=E\\otimes^L LP$ and $\\beta_P=(\\varepsilon_E\\otimes1)\\circ\\mu_{RE,P}:LF(P)\\to H(P)$. Define $\\alpha_P=R(\\beta_P)\\circ\\eta_{F(P)}$ by [lem-pc-derived-adjoint-functors]. The canonical adjunction is compatible with the canonical shifts: simultaneous shifting reindexes the quasi-isomorphism systems defining the derived functors in that node; termwise $f^*\\dashv f_*$ sends a shifted map to the shift of its adjunct (its degree-$r$ component is the adjunct of the original degree-$r+n$ component). This equality survives passage to the essentially constant pro/ind values that define $L$ and $R$. For $R$ the shift comparison is the resolution comparison because $I[n]$ remains K-injective by [lem-weil-pbc-kinjective-shift]; for $L$ it is termwise pullback on the shifted K-flat model. Thus these are the compatible comparisons characterized uniquely in [lem-weil-pbc-adjunction-shift-compatibility-unique]. Write $l_X:L(X[1])\\to LX[1]$, $r_Y:R(Y[1])\\to RY[1]$, $t_P:F(P[1])\\to F(P)[1]$, and $h_P:H(P[1])\\to H(P)[1]$. Step 2 gives\n$$h_P\\beta_{P[1]}=\\beta_P[1]l_{F(P)}L(t_P).$$\nNaturality of $r$ and the compatible-unit identity give the explicit calculation\n$$\\begin{aligned}\ns_G\\alpha_{P[1]}&=r_{H(P)}R(h_P)R(\\beta_{P[1]})\\eta_{F(P[1])}\\\\\n&=R(\\beta_P)[1]r_{LF(P)}R(l_{F(P)})R(L(t_P))\\eta_{F(P[1])}\\\\\n&=R(\\beta_P)[1]\\eta_{F(P)}[1]t_P=\\alpha_P[1]s_F.\n\\end{aligned}$$\nHere the penultimate equality uses naturality of $\\eta$ at $t_P$ followed by compatibility with the unit. The integer-shift version uses the signs and coherent comparisons for $n$ from step 2 and the same unit identity for $[n]$. Naturality in $P$ follows by naturality of $\\mu$ and $\\eta$. For $e:E\\to E'$, naturality of $\\varepsilon$ and $\\mu$ gives $(e\\otimes1)\\beta_{E,P}=\\beta_{E',P}L(Re\\otimes1)$; applying the adjunction gives $R(e\\otimes1)\\alpha_{E,P}=\\alpha_{E',P}(Re\\otimes1)$. For a triangle $P_1\\to P_2\\to P_3\\xrightarrow{w}P_1[1]$, naturality gives the first two squares, and its third square is explicitly\n$$s_{G,P_1}G(w)\\alpha_{P_3}=s_{G,P_1}\\alpha_{P_1[1]}F(w)=\\alpha_{P_1}[1]s_{F,P_1}F(w).$$\nBoth image triangles are distinguished by step 3. At $P=R_Y$ the unit calculation of step 2 reduces $\\beta$ to $\\varepsilon_E$; hence $\\alpha=R(\\varepsilon_E)\\eta_{RE}=1_{RE}$ by the adjunction triangle identity.",
+   "uses": [
+    "lem-pc-derived-adjoint-functors",
+    "lem-weil-pbc-kinjective-shift",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map), Tag 07A6 (lemma-adjoint); shift calculation expanded using derived.tex Tag 0A8D (lemma-adjoint-is-exact)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "lem-pc-derived-adjoint-functors",
+  "lem-pc-kflat-resolution",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-weil-pbc-kinjective-shift",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU, 06YY, 07A4, 07A6, 0B56; agent expansion of the signed tensor, cone and adjunction shift calculations (derived.tex Tag 0A8D)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,15 +144,75 @@
    "results": "0 hits: []; service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Cc]ommShift|[Cc]ounit.*[Cc]ommShift",
+   "results": "5 hits: [\"Mathlib/CategoryTheory/Shift/Adjunction.lean\", \"Mathlib/CategoryTheory/Shift/Adjunction.lean\", \"Mathlib/CategoryTheory/Shift/Adjunction.lean\", \"Mathlib/CategoryTheory/Shift/Adjunction.lean\", \"Mathlib/CategoryTheory/Shift/Adjunction.lean\"]",
+   "date": "2026-10-14",
+   "verdict": "Abstract adjunction shift results already covered by existing Mathlib leaf lem-weil-pbc-adjunction-shift-compatibility-unique; no match for the full ringed-topos item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor functor commutes with suspension and the counit of a derived adjunction is compatible with the translation functor",
+   "results": "8 hits: [\"CategoryTheory.Equivalence.counitInv_app_tensor_comp_functor_map_δ_inverse\", \"CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse\", \"CategoryTheory.Adjunction.CommShift.CompatibilityCounit\", \"CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit\", \"CategoryTheory.Adjunction.CommShift.compatibilityCounit_left\", \"CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counit_app_tensor\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ\", \"CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counitIso_hom_app_tensor\"]",
+   "date": "2026-10-14",
+   "verdict": "Abstract adjunction shift results already covered by existing Mathlib leaf lem-weil-pbc-adjunction-shift-compatibility-unique; no match for the full ringed-topos item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"CommShift\"",
+   "results": "12 hits: [\"CategoryTheory.Adjunction.CommShift.instId\", \"CategoryTheory.Adjunction.CommShift\", \"CategoryTheory.Adjunction.leftAdjointCommShift\", \"CategoryTheory.Adjunction.rightAdjointCommShift\", \"CategoryTheory.Adjunction.CommShift.compatibilityUnit_isoZero\", \"CategoryTheory.Adjunction.commShift_of_leftAdjoint\", \"CategoryTheory.Adjunction.commShift_of_rightAdjoint\", \"CategoryTheory.Adjunction.LeftAdjointCommShift.compatibilityUnit_iso\"]",
+   "date": "2026-10-14",
+   "verdict": "Abstract adjunction shift results already covered by existing Mathlib leaf lem-weil-pbc-adjunction-shift-compatibility-unique; no match for the full ringed-topos item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lemma-weil-pbc-perfect-projection-formula",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ringed-projection-mate-exact",
+  "worker": "stage1",
+  "summary": "Second reader repaired missing generic ringed-topos citations and expanded signed tensor, cone, mate shift and connecting-square calculations. Statement retained; no new nodes.",
+  "blueprint": "Detailed-form proof: finite-projective/K-flat tensor construction, closure under shifts and cones, and the compatible projection mate.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term K-flat resolutions for arbitrary ringed sites."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic K-injective resolutions on small ringed sites."
+   },
+   {
+    "node": "lem-pc-derived-adjoint-functors",
+    "why": "Generic derived adjunction once both derived functors exist."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic exactness of the K-injective right-derived functor."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-derived-adjoint-functors",
+  "lem-pc-right-derived-functor-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-c19ff72c8",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-c19ff72c8 (reviewer sub-agent of L); spot-checked: Read the full item, report, packet, DAG rules, unit/chapter route, all cited node statements and sources, including Stacks 06YU, 06YY, 07A4, 07A6, 0B56, 0944, derived 0A8D, supporting 06YN/06YS/06YT/0G7D, sites-modules 03D7/03EL, homology 012Z, and the cited right-derived-functor source. Verified coefficient categories, counit-adjoint direction, base-change tensor map, K-flat/K-injective constructions, all shift signs, cone and connecting-square calculations, naturality, unit identity, route/tool uses, and edge cases. No new nodes or repairs. Wrote review.md under the required review directory."
+ }
 }
