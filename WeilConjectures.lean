@@ -320,6 +320,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.KummerTorsor
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.LocalMonodromy
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.LocalMonodromyFrobenius
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.LocallyTrivial
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PathTransport
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PicTorsionPairing
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PicTorsionPairingMonodromy
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PicTorsionPairingTransport
@@ -1195,6 +1196,15 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafBoundaryPu
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafRepresentation
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSemicontinuity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentation
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationData
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationDual
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationSections
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationStalk
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilPath
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilPathFrobenius
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilPathFrobeniusElement
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilPathGeometric
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Adic
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
@@ -1959,6 +1969,7 @@ public import WeilConjectures.RepresentationTheory.ExteriorPower
 public import WeilConjectures.RepresentationTheory.ExteriorPowerDirectSum
 public import WeilConjectures.RepresentationTheory.ExteriorPowerFiltration
 public import WeilConjectures.RepresentationTheory.Filtration
+public import WeilConjectures.RepresentationTheory.FiniteDimensionalRealization
 public import WeilConjectures.RepresentationTheory.FiniteMatrixWitness
 public import WeilConjectures.RepresentationTheory.GeometricConstituents
 public import WeilConjectures.RepresentationTheory.GroupCohomology.CupNonvanishing
@@ -2378,6 +2389,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseAbelian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZero
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseGerm
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseRank
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalkPointwise

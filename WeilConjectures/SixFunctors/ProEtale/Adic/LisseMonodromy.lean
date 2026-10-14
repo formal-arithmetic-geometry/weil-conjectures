@@ -19,25 +19,25 @@ public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Restriction
 /-!
 # The monodromy of lisse `ℓ`-adic sheaves
 
-Let `Y` be a connected scheme, `Ω` a field with algebraic closure `Ω̄` and `ℚ̄_ℓ = PadicAlgCl ℓ`. For a
-geometric point `y : Spec Ω ⟶ Y` write `F_y` both for the fibre functor on finite étale
-`Y`-schemes and for the stalk functor `G ↦ Γ(Spec Ω, y^* G)` on lisse `ℓ`-adic sheaves on
-`Y_proét`. By `cor-galois-lisse-representations` (for `Λ = ℚ̄_ℓ`), the stalk functor at a
-geometric point `t` identifies lisse `ℚ̄_ℓ`-sheaves with the continuous finite-dimensional
-`ℚ̄_ℓ`-representations of `π₁(Y, t) = Aut F_t`, as an exact tensor equivalence compatible with
-base change; and `def-wf-fundamental-representation` transports stalks along paths, i.e.
-isomorphisms of fibre functors `F_y ≅ F_z`.
+Let `Y` be a connected scheme, `Ω` a field with algebraic closure `Ω̄` and
+`ℚ̄_ℓ = PadicAlgCl ℓ`. For a geometric point `y : Spec Ω̄ ⟶ Y` write `F_y` both for the
+fibre functor on finite étale `Y`-schemes and for the stalk functor `G ↦ Γ(Spec Ω̄, y^* G)`
+on lisse `ℓ`-adic sheaves on `Y_proét`. By `cor-galois-lisse-representations` (for
+`Λ = ℚ̄_ℓ`), the stalk functor at a geometric point `t` identifies lisse `ℚ̄_ℓ`-sheaves with the
+continuous finite-dimensional `ℚ̄_ℓ`-representations of `π₁(Y, t) = Aut F_t`, as an exact tensor
+equivalence compatible with base change; and `def-wf-fundamental-representation` transports
+stalks along paths, i.e. isomorphisms of fibre functors `F_y ≅ F_z`.
 
 This file packages these facts as a *monodromy* of lisse sheaves
 (`AlgebraicGeometry.ProEtale.LisseMonodromy`): for every path `τ : F_y ≅ F_z` a natural
 isomorphism `mono τ` from the stalk functor at `y` to the stalk functor at `z`, such that
 
 * `mono` is functorial in the path (`mono_refl`, `mono_trans`);
-* reparametrising a geometric point by an automorphism `a` of `Spec Ω` is transported by the
-  canonical identification `Γ(Spec Ω, (a ≫ y)^* G) ≅ Γ(Spec Ω, a^* y^* G) ≅ Γ(Spec Ω, y^* G)`
+* reparametrising a geometric point by an automorphism `a` of `Spec Ω̄` is transported by the
+  canonical identification `Γ(Spec Ω̄, (a ≫ y)^* G) ≅ Γ(Spec Ω̄, a^* y^* G) ≅ Γ(Spec Ω̄, y^* G)`
   (`mono_reparam`);
 * it is compatible with pullback along an endomorphism `f` of `Y`: the path `F_{y ≫ f} ≅ F_{z ≫ f}`
-  induced by `τ` acts on `Γ(Spec Ω, (y ≫ f)^* G) = Γ(Spec Ω, y^* f^* G)` as `τ` acts on the
+  induced by `τ` acts on `Γ(Spec Ω̄, (y ≫ f)^* G) = Γ(Spec Ω̄, y^* f^* G)` as `τ` acts on the
   stalks of `f^* G` (`mono_upperStar`, the compatibility of `cor-galois-lisse-representations`
   with base change);
 * global sections restrict to flat sections (`mono_globalSections`);
@@ -71,28 +71,33 @@ abbrev LisseSheaf : Type (u + 2) :=
 
 variable {Y Ω}
 
-/-- The stalk functor `G ↦ Γ(Spec Ω, y^* G)` at a geometric point `y`, on lisse sheaves. -/
-noncomputable abbrev lisseStalk (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) : LisseSheaf l Y ⥤ WeilCoefficients.{u} l :=
+/-- The stalk functor `G ↦ Γ(Spec Ω̄, y^* G)` at a geometric point `y`, on lisse sheaves. -/
+noncomputable abbrev lisseStalk (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) :
+    LisseSheaf l Y ⥤ WeilCoefficients.{u} l :=
   ObjectProperty.ι _ ⋙ AdicSheaf.forget Y ⋙ stalkFunctor l y
 
-/-- The identification `Γ(Spec Ω, (a ≫ y)^* G) ≅ Γ(Spec Ω, a^* y^* G) ≅ Γ(Spec Ω, y^* G)` of the
+/-- The identification `Γ(Spec Ω̄, (a ≫ y)^* G) ≅ Γ(Spec Ω̄, a^* y^* G) ≅ Γ(Spec Ω̄, y^* G)` of the
 stalks at a geometric point `y` and at its reparametrisation by an automorphism `a` of
-`Spec Ω`. -/
-noncomputable def reparamStalkIso (a : Spec (.of (AlgebraicClosure Ω)) ≅ Spec (.of (AlgebraicClosure Ω))) (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
+`Spec Ω̄`. -/
+noncomputable def reparamStalkIso
+    (a : Spec (.of (AlgebraicClosure Ω)) ≅ Spec (.of (AlgebraicClosure Ω)))
+    (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
     (G : Sheaf (Scheme.ProEt.topology Y) (WeilCoefficients.{u} l)) :
     (stalkFunctor l (a.hom ≫ y)).obj G ≅ (stalkFunctor l y).obj G :=
   (Sheaf.Γ _ _).mapIso ((upperStarComp _ a.hom y).app G) ≪≫
     (globalSectionsUpperStarIso _ a).app _
 
-/-- The identification `Γ(Spec Ω, (y ≫ f)^* G) ≅ Γ(Spec Ω, y^* f^* G)` of the stalk of `G` at
+/-- The identification `Γ(Spec Ω̄, (y ≫ f)^* G) ≅ Γ(Spec Ω̄, y^* f^* G)` of the stalk of `G` at
 `y ≫ f` with the stalk of `f^* G` at `y`. -/
-noncomputable def upperStarStalkIso {X : Scheme.{u}} (f : X ⟶ Y) (y : Spec (.of (AlgebraicClosure Ω)) ⟶ X)
+noncomputable def upperStarStalkIso {X : Scheme.{u}} (f : X ⟶ Y)
+    (y : Spec (.of (AlgebraicClosure Ω)) ⟶ X)
     (G : Sheaf (Scheme.ProEt.topology Y) (WeilCoefficients.{u} l)) :
     (stalkFunctor l (y ≫ f)).obj G ≅ (stalkFunctor l y).obj ((f)^*[_].obj G) :=
   (Sheaf.Γ _ _).mapIso ((upperStarComp _ y f).app G)
 
-/-- The identification `Γ(Spec Ω, (y ≫ f)^* G) ≅ Γ(Spec Ω, y^* f^* G)` is natural in `G`. -/
-lemma upperStarStalkIso_hom_naturality {X : Scheme.{u}} (f : X ⟶ Y) (y : Spec (.of (AlgebraicClosure Ω)) ⟶ X)
+/-- The identification `Γ(Spec Ω̄, (y ≫ f)^* G) ≅ Γ(Spec Ω̄, y^* f^* G)` is natural in `G`. -/
+lemma upperStarStalkIso_hom_naturality {X : Scheme.{u}} (f : X ⟶ Y)
+    (y : Spec (.of (AlgebraicClosure Ω)) ⟶ X)
     {G H : Sheaf (Scheme.ProEt.topology Y) (WeilCoefficients.{u} l)} (φ : G ⟶ H) :
     (stalkFunctor l (y ≫ f)).map φ ≫ (upperStarStalkIso l f y H).hom =
       (upperStarStalkIso l f y G).hom ≫ (stalkFunctor l y).map ((f)^*[_].map φ) := by
@@ -111,18 +116,23 @@ noncomputable abbrev LisseSheaf.unit : LisseSheaf l Y :=
 variable (Y Ω)
 
 /-- **The monodromy of lisse sheaves** on `Y`: the transport of stalks of lisse `ℓ`-adic sheaves
-along paths between geometric points with values in `Ω`, in the sense of
+along paths between geometric points with values in `Ω̄`, in the sense of
 `def-wf-fundamental-representation` ("the usual transport of the stalk"), with the
 compatibilities of `cor-galois-lisse-representations` (functoriality, base change, tensor
 products), see the module docstring. -/
 structure LisseMonodromy where
   /-- The transport `F_y ≅ F_z` of stalks of lisse sheaves along a path `τ : F_y ≅ F_z`. -/
-  mono {y z : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (τ : fiber y ≅ fiber z) : lisseStalk l y ≅ lisseStalk l z
+  mono {y z : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (τ : fiber y ≅ fiber z) :
+    lisseStalk l y ≅ lisseStalk l z
+  /-- Transport along the trivial path is the identity. -/
   mono_refl (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) : mono (Iso.refl (fiber y)) = Iso.refl _
-  mono_trans {y z w : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (τ : fiber y ≅ fiber z) (τ' : fiber z ≅ fiber w) :
+  /-- Transport along a composite path is the composite of the transports. -/
+  mono_trans {y z w : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (τ : fiber y ≅ fiber z)
+    (τ' : fiber z ≅ fiber w) :
     mono (τ ≪≫ τ') = mono τ ≪≫ mono τ'
   /-- The reparametrisation path acts by the canonical identification of the stalks. -/
-  mono_reparam (a : Spec (.of (AlgebraicClosure Ω)) ≅ Spec (.of (AlgebraicClosure Ω))) (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseSheaf l Y) :
+  mono_reparam (a : Spec (.of (AlgebraicClosure Ω)) ≅ Spec (.of (AlgebraicClosure Ω)))
+    (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseSheaf l Y) :
     (mono (fiberReparamIso a y)).hom.app G = (reparamStalkIso l a y G.obj.X).hom
   /-- Compatibility with pullback along an endomorphism `f` of `Y`. -/
   mono_upperStar (f : Y ⟶ Y) {y z : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (τ : fiber y ≅ fiber z)
@@ -130,11 +140,13 @@ structure LisseMonodromy where
     (mono (pullbackPathIso f τ)).hom.app G ≫ (upperStarStalkIso l f z G.obj.X).hom =
       (upperStarStalkIso l f y G.obj.X).hom ≫ (mono τ).hom.app (G.upperStar l f)
   /-- Global sections restrict to sections of the stalks which are invariant under transport. -/
-  mono_globalSections {y z : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (τ : fiber y ≅ fiber z) (G : LisseSheaf l Y) :
+  mono_globalSections {y z : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (τ : fiber y ≅ fiber z)
+    (G : LisseSheaf l Y) :
     (globalSectionsToUpperStar _ y).app G.obj.X ≫ (mono τ).hom.app G =
       (globalSectionsToUpperStar _ z).app G.obj.X
   /-- Transport preserves the evaluation pairing `(G^∨)_y × G_y → ℚ̄_ℓ` of the dual. -/
-  mono_evaluationPairing {y z : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (τ : fiber y ≅ fiber z) (G : LisseSheaf l Y)
+  mono_evaluationPairing {y z : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (τ : fiber y ≅ fiber z)
+    (G : LisseSheaf l Y)
     (hG : IsAdicLisseSheaf ((AdicSheaf.ihom G.obj).obj (AdicSheaf.unit l Y)))
     (d : (stalkFunctor l y).obj ((AdicSheaf.ihom G.obj).obj (AdicSheaf.unit l Y)).X)
     (v : (stalkFunctor l y).obj G.obj.X) :
@@ -157,10 +169,13 @@ noncomputable def monoLinear {y z : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (τ 
     (G : LisseSheaf l Y) : StalkSpace y G →ₗ[PadicAlgCl l] StalkSpace z G :=
   ((WeilCoefficients.toModuleCat l).map ((M.mono τ).hom.app G)).hom
 
-lemma monoLinear_refl (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseSheaf l Y) (v : StalkSpace y G) :
+/-- Transport along the trivial path is the identity. -/
+lemma monoLinear_refl (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
+    (G : LisseSheaf l Y) (v : StalkSpace y G) :
     M.monoLinear (Iso.refl (fiber y)) G v = v := by
   simp [monoLinear, M.mono_refl]
 
+/-- Transport along a composite path is the composite of the transports. -/
 lemma monoLinear_trans {y z w : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (τ : fiber y ≅ fiber z)
     (τ' : fiber z ≅ fiber w) (G : LisseSheaf l Y) (v : StalkSpace y G) :
     M.monoLinear (τ ≪≫ τ') G v = M.monoLinear τ' G (M.monoLinear τ G v) := by
@@ -177,6 +192,7 @@ noncomputable def rep (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseShe
     rw [Aut.Aut_mul_def, M.monoLinear_trans]
     rfl
 
+/-- The monodromy representation acts by transport. -/
 lemma rep_apply (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseSheaf l Y) (g : Aut (fiber t))
     (v : StalkSpace t G) : M.rep t G g v = M.monoLinear g G v :=
   rfl
@@ -187,13 +203,17 @@ representations (`cor-galois-lisse-representations` for `Λ = ℚ̄_ℓ`): the r
 faithful and full onto `π₁(Y, t)`-equivariant maps, and every continuous finite-dimensional
 representation of `π₁(Y, t)` is the monodromy representation of a lisse sheaf. -/
 structure IsEquivalenceAt (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) : Prop where
+  /-- The monodromy representations are continuous. -/
   continuous_rep (G : LisseSheaf l Y) (φ : Module.Dual (PadicAlgCl l) (StalkSpace t G))
     (v : StalkSpace t G) : Continuous fun g : Aut (fiber t) ↦ φ (M.rep t G g v)
+  /-- The stalk functor at `t` is faithful. -/
   faithful {G H : LisseSheaf l Y} (f g : G ⟶ H)
     (h : (lisseStalk l t).map f = (lisseStalk l t).map g) : f = g
+  /-- Every equivariant linear map of stalks is the stalk of a morphism. -/
   full {G H : LisseSheaf l Y} (φ : StalkSpace t G →ₗ[PadicAlgCl l] StalkSpace t H)
     (hφ : ∀ g v, φ (M.rep t G g v) = M.rep t H g (φ v)) :
     ∃ f : G ⟶ H, ((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map f)).hom = φ
+  /-- Every continuous finite-dimensional representation is a monodromy representation. -/
   essSurj (V : Type (u + 1)) [AddCommGroup V] [Module (PadicAlgCl l) V]
     [FiniteDimensional (PadicAlgCl l) V] (ρ : Representation (PadicAlgCl l) (Aut (fiber t)) V)
     (hρ : ∀ (φ : Module.Dual (PadicAlgCl l) V) (v : V), Continuous fun g ↦ φ (ρ g v)) :
@@ -201,7 +221,8 @@ structure IsEquivalenceAt (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) : Prop wh
       ∀ g v, e (M.rep t G g v) = ρ g (e v)
 
 /-- The stalk map of a morphism of lisse sheaves intertwines the monodromy representations. -/
-lemma rep_naturality (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) {G H : LisseSheaf l Y} (f : G ⟶ H)
+lemma rep_naturality (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
+    {G H : LisseSheaf l Y} (f : G ⟶ H)
     (g : Aut (fiber t)) (v : StalkSpace t G) :
     ((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map f)).hom (M.rep t G g v) =
       M.rep t H g (((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map f)).hom v) := by
@@ -213,7 +234,8 @@ lemma rep_naturality (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) {G H : LisseSh
 variable {M} in
 /-- A morphism of lisse sheaves whose stalk at a base point is bijective is an isomorphism, if
 the monodromy at that base point is an equivalence. -/
-lemma IsEquivalenceAt.isIso_of_bijective {t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (hM : M.IsEquivalenceAt t)
+lemma IsEquivalenceAt.isIso_of_bijective {t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y}
+    (hM : M.IsEquivalenceAt t)
     {G H : LisseSheaf l Y} (f : G ⟶ H)
     (hf : Function.Bijective ((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map f)).hom) :
     IsIso f := by
@@ -243,7 +265,8 @@ lemma IsEquivalenceAt.isIso_of_bijective {t : Spec (.of (AlgebraicClosure Ω)) �
     exact e.apply_symm_apply x
 
 /-- The identification of stalks along an equality of geometric points. -/
-lemma mono_eqToIso_hom_app {y z : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (h : y = z) (G : LisseSheaf l Y) :
+lemma mono_eqToIso_hom_app {y z : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (h : y = z)
+    (G : LisseSheaf l Y) :
     (M.mono (eqToIso (congrArg fiber h))).hom.app G =
       (Sheaf.Γ _ _).map ((upperStarCongr _ h).hom.app G.obj.X) := by
   subst h
@@ -259,13 +282,14 @@ lemma mono_symm {y z : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (τ : fiber y ≅
   exact (Iso.inv_ext (congrArg Iso.hom h).symm).symm
 
 /-- **Transport of a Frobenius-type operator along a path.** Let `s` be a geometric point with
-`s ≫ f = a ≫ s` for an endomorphism `f` of `Y` and an automorphism `a` of `Spec Ω`, and
+`s ≫ f = a ≫ s` for an endomorphism `f` of `Y` and an automorphism `a` of `Spec Ω̄`, and
 `ψ : f^* G ⟶ G`. The operator `G_s ≅ G_{a ≫ s} = G_{s ≫ f} = (f^* G)_s ⟶ G_s` is carried by the
 transport along a path `π : F_s ≅ F_t` to the transport along the loop
 `F_t ≅ F_s ≅ F_{a ≫ s} = F_{s ≫ f} ≅ F_{t ≫ f}` followed by `G_{t ≫ f} = (f^* G)_t ⟶ G_t`. -/
-theorem reparam_comp_upperStar_comp_mono (f : Y ⟶ Y) (a : Spec (.of (AlgebraicClosure Ω)) ≅ Spec (.of (AlgebraicClosure Ω)))
-    {s t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (hs : s ≫ f = a.hom ≫ s) (π : fiber s ≅ fiber t) (G : LisseSheaf l Y)
-    (ψ : G.upperStar l f ⟶ G) :
+theorem reparam_comp_upperStar_comp_mono (f : Y ⟶ Y)
+    (a : Spec (.of (AlgebraicClosure Ω)) ≅ Spec (.of (AlgebraicClosure Ω)))
+    {s t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (hs : s ≫ f = a.hom ≫ s) (π : fiber s ≅ fiber t)
+    (G : LisseSheaf l Y) (ψ : G.upperStar l f ⟶ G) :
     (M.mono (fiberReparamIso a s)).inv.app G ≫
         (M.mono (eqToIso (congrArg fiber hs.symm))).hom.app G ≫
         (upperStarStalkIso l f s G.obj.X).hom ≫ (lisseStalk l s).map ψ ≫ (M.mono π).hom.app G =
@@ -284,7 +308,8 @@ theorem reparam_comp_upperStar_comp_mono (f : Y ⟶ Y) (a : Spec (.of (Algebraic
 
 /-- The transport along the reparametrisation path and along an equality of geometric points,
 followed by `G_{s ≫ f} = (f^* G)_s ⟶ G_s`, computed on the underlying sheaves. -/
-theorem reparam_upperStar_apply (f : Y ⟶ Y) (a : Spec (.of (AlgebraicClosure Ω)) ≅ Spec (.of (AlgebraicClosure Ω)))
+theorem reparam_upperStar_apply (f : Y ⟶ Y)
+    (a : Spec (.of (AlgebraicClosure Ω)) ≅ Spec (.of (AlgebraicClosure Ω)))
     {s : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (hs : s ≫ f = a.hom ≫ s) (G : LisseSheaf l Y)
     (ψ : G.upperStar l f ⟶ G) (v : StalkSpace s G) :
     ((WeilCoefficients.toModuleCat l).map ((lisseStalk l s).map ψ)).hom
@@ -313,9 +338,12 @@ theorem reparam_upperStar_apply (f : Y ⟶ Y) (a : Spec (.of (AlgebraicClosure �
     rfl
   rw [h₁, h₂]
   rfl
+
 /-- `reparam_comp_upperStar_comp_mono` on elements. -/
-theorem reparam_comp_upperStar_comp_mono_apply (f : Y ⟶ Y) (a : Spec (.of (AlgebraicClosure Ω)) ≅ Spec (.of (AlgebraicClosure Ω)))
-    {s t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (hs : s ≫ f = a.hom ≫ s) (π : fiber s ≅ fiber t) (G : LisseSheaf l Y)
+theorem reparam_comp_upperStar_comp_mono_apply (f : Y ⟶ Y)
+    (a : Spec (.of (AlgebraicClosure Ω)) ≅ Spec (.of (AlgebraicClosure Ω)))
+    {s t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (hs : s ≫ f = a.hom ≫ s) (π : fiber s ≅ fiber t)
+    (G : LisseSheaf l Y)
     (ψ : G.upperStar l f ⟶ G) (v : StalkSpace s G) :
     M.monoLinear π G (((WeilCoefficients.toModuleCat l).map ((lisseStalk l s).map ψ)).hom
       (((WeilCoefficients.toModuleCat l).map (upperStarStalkIso l f s G.obj.X).hom).hom

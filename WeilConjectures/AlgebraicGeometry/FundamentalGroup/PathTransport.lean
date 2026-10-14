@@ -54,12 +54,14 @@ noncomputable def fiberReparamIso (a : Spec (.of Ω) ≅ Spec (.of Ω)) (y : Spe
       ext x
       exact fiber_ext y (Category.assoc a.inv x.left φ.hom.left).symm)
 
+/-- The reparametrisation path on points: precomposition with `a⁻¹`. -/
 @[simp]
 lemma fiberReparamIso_hom_app_left (a : Spec (.of Ω) ≅ Spec (.of Ω)) (y : Spec (.of Ω) ⟶ Y)
     (P : Y.FiniteEtale) (x : (fiber (a.hom ≫ y)).obj P) :
     ((fiberReparamIso a y).hom.app P x).left = a.inv ≫ x.left :=
   rfl
 
+/-- The inverse reparametrisation path on points: precomposition with `a`. -/
 @[simp]
 lemma fiberReparamIso_inv_app_left (a : Spec (.of Ω) ≅ Spec (.of Ω)) (y : Spec (.of Ω) ⟶ Y)
     (P : Y.FiniteEtale) (x : (fiber y).obj P) :
@@ -72,11 +74,13 @@ noncomputable def pullbackPathIso (f : X ⟶ Y) {y z : Spec (.of Ω) ⟶ X}
     (τ : fiber y ≅ fiber z) : fiber (y ≫ f) ≅ fiber (z ≫ f) :=
   (pullbackFiberIso f y).symm ≪≫ Functor.isoWhiskerLeft (pullback f) τ ≪≫ pullbackFiberIso f z
 
+/-- The trivial path induces the trivial path. -/
 lemma pullbackPathIso_refl (f : X ⟶ Y) (y : Spec (.of Ω) ⟶ X) :
     pullbackPathIso f (Iso.refl (fiber y)) = Iso.refl _ := by
   ext P x
   simp [pullbackPathIso]
 
+/-- Inducing paths along `f` is compatible with composition of paths. -/
 lemma pullbackPathIso_trans (f : X ⟶ Y) {y z w : Spec (.of Ω) ⟶ X} (τ : fiber y ≅ fiber z)
     (τ' : fiber z ≅ fiber w) :
     pullbackPathIso f (τ ≪≫ τ') = pullbackPathIso f τ ≪≫ pullbackPathIso f τ' := by
@@ -108,6 +112,7 @@ lemma eqToIso_fiber_hom_app_left {y z : Spec (.of Ω) ⟶ Y} (hyz : y = z) (h : 
   subst hyz
   rfl
 
+/-- Inducing paths along `f` is compatible with inverses of paths. -/
 lemma pullbackPathIso_symm (f : X ⟶ Y) {y z : Spec (.of Ω) ⟶ X} (τ : fiber y ≅ fiber z) :
     pullbackPathIso f τ.symm = (pullbackPathIso f τ).symm := by
   ext P x

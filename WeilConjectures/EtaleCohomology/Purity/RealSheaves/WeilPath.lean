@@ -89,6 +89,7 @@ noncomputable def toπ : Aut (fiber (B.t ≫ p.geometricFiberProj)) ≃* W.funda
       ext
       simp [Aut.Aut_mul_def] }
 
+/-- The automorphism of the fibre functor at `s` attached to `toπ e`. -/
 lemma toAutMulEquiv_toπ (e : Aut (fiber (B.t ≫ p.geometricFiberProj))) :
     haveI := W.connectedSpace
     toAutMulEquiv (fiber W.basePoint) W.fundamentalGroup (B.toπ e) =
@@ -117,6 +118,7 @@ noncomputable def geomAut : Aut (fiber B.t) →* W.fundamentalGroup where
     congr 1
     rw [Aut.Aut_mul_def, Aut.Aut_mul_def, pullbackPathIso_trans]
 
+/-- `geomAut` is the induced path along `C ⟶ C₀`, transported to `s`. -/
 lemma geomAut_apply (g : Aut (fiber B.t)) :
     B.geomAut g = B.toπ (pullbackPathIso p.geometricFiberProj g) := by
   simp [geomAut, downAut]

@@ -39,7 +39,8 @@ noncomputable def sectionsRes (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : 
   ((WeilCoefficients.toModuleCat l).map ((globalSectionsToUpperStar _ t).app G.obj.X)).hom
 
 /-- Restrictions of global sections are invariant under the monodromy. -/
-lemma rep_sectionsRes (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseSheaf l Y) (g : Aut (fiber t)) (a) :
+lemma rep_sectionsRes (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseSheaf l Y)
+    (g : Aut (fiber t)) (a) :
     M.rep t G g (sectionsRes t G a) = sectionsRes t G a := by
   have h := congrArg (fun φ ↦ ((WeilCoefficients.toModuleCat l).map φ).hom a)
     (M.mono_globalSections g G)
@@ -48,8 +49,8 @@ lemma rep_sectionsRes (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseShe
 
 /-- The restriction of the global section `v(1)` of a morphism `v : ℚ̄_ℓ ⟶ G` is the image of the
 restriction of the unit section under the stalk of `v`. -/
-lemma sectionsRes_globalSectionOfModHom (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseSheaf l Y)
-    (v : LisseSheaf.unit l ⟶ G) :
+lemma sectionsRes_globalSectionOfModHom (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
+    (G : LisseSheaf l Y) (v : LisseSheaf.unit l ⟶ G) :
     sectionsRes t G (globalSectionOfModHom v.hom) =
       ((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map v)).hom
         (sectionsRes t (LisseSheaf.unit l) (oneGlobalSection Y)) := by
@@ -68,7 +69,8 @@ lemma sectionsRes_one_ne_zero (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) :
   globalSectionsToUpperStar_oneGlobalSection_ne_zero t
 
 /-- The restriction of the unit section spans the stalk of `ℚ̄_ℓ`. -/
-lemma exists_smul_sectionsRes_one (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (x : StalkSpace t (LisseSheaf.unit l)) :
+lemma exists_smul_sectionsRes_one (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
+    (x : StalkSpace t (LisseSheaf.unit l)) :
     ∃ c : PadicAlgCl l, c • sectionsRes t (LisseSheaf.unit l) (oneGlobalSection Y) = x :=
   (finrank_eq_one_iff_of_nonzero' (K := PadicAlgCl l)
     (V := StalkSpace t (LisseSheaf.unit l)) _ (sectionsRes_one_ne_zero t)).1
@@ -247,7 +249,7 @@ theorem exists_globalSections_linearEquiv_invariants (hM : M.IsEquivalenceAt B.t
     exact ⟨a, Subtype.ext ha⟩
   refine ⟨LinearEquiv.ofBijective f₀ hbij, fun v ↦ ?_⟩
   change res (F.globalSections.frobenius v) = fundamentalRep M D F hF γ (res v)
-  rw [sectionsRes_frobenius]
+  rw [sectionsRes_frobenius M]
   have hmem : D.frobLift⁻¹ * γ ∈ W.geometric := by
     rw [MonoidHom.mem_ker, map_mul, map_inv, D.deg_frobLift, hγ, inv_mul_cancel]
   have hγ' : γ = D.frobLift * (D.frobLift⁻¹ * γ) := by group

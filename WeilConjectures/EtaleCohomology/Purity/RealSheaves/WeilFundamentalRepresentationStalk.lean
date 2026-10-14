@@ -59,6 +59,7 @@ noncomputable def _root_.AlgebraicGeometry.WeilSheaf.lisseFrobPowStr (F : WeilSh
       F.frobeniusPowIso n)
 
 omit [IsCurve (C ↘ Spec (.of K))] in
+/-- The iterated Weil structure of the underlying lisse sheaf is that of the Weil sheaf. -/
 lemma _root_.AlgebraicGeometry.WeilSheaf.lisseFrobPowStr_hom_hom (F : WeilSheaf K l C)
     (hF : F.IsLisse) (n : ℕ) :
     (F.lisseFrobPowStr hF n).hom.hom.hom = F.frobeniusPowStr n := by
@@ -67,6 +68,7 @@ lemma _root_.AlgebraicGeometry.WeilSheaf.lisseFrobPowStr_hom_hom (F : WeilSheaf 
   rfl
 
 omit [IsCurve (C ↘ Spec (.of K))] in
+/-- The Weil structure of the underlying lisse sheaf is that of the Weil sheaf. -/
 lemma _root_.AlgebraicGeometry.WeilSheaf.lisseFrobStr_hom_hom_hom' (F : WeilSheaf K l C)
     (hF : F.IsLisse) : (F.lisseFrobStr hF).hom.hom.hom = F.frobeniusStr := by
   change ((adicUpperStarIsoLowerStarInv l _).hom.app _ ≫ F.obj.str.hom).hom = _
@@ -148,8 +150,7 @@ theorem frobPowStalk_comp_frobStalkIso (F : WeilSheaf K l C) (hF : F.IsLisse) (m
     change (Sheaf.Γ _ _).map ((B.t)^*[_].map (F.lisseFrobPowStr hF (m + 1)).hom.hom.hom) = _
     rw [WeilSheaf.lisseFrobPowStr_hom_hom]
   rw [h₁, h₂, ← n₄]
-  simp only [upperStarStalkIso, Functor.mapIso_hom, Iso.app_hom, Functor.map_comp,
-    Category.assoc]
+  simp only [upperStarStalkIso, Functor.mapIso_hom, Iso.app_hom, Functor.map_comp]
   rw [WeilSheaf.lisseFrobPowStr_hom_hom]
   erw [reassoc_of% hC]
 
@@ -184,7 +185,7 @@ theorem frobPowStalk_zero (F : WeilSheaf K l C) (hF : F.IsLisse) :
   simp only [frobPowStalk, h₀, h₂, F.frobeniusPowStr_zero p, upperStarStalkIso,
     Functor.mapIso_hom, Iso.app_hom, Functor.map_comp]
   rw [M.mono_eqToIso_hom_app h]
-  simp only [← Functor.map_comp, Category.assoc]
+  simp only [← Functor.map_comp]
   erw [upperStar_id_coherence (l := l) B.t p h]
   exact CategoryTheory.Functor.map_id _ _
 

@@ -134,15 +134,18 @@ noncomputable def geomHom : Aut (fiber B.t) →* W.carrier :=
     (((B.geomAut).prod (1 : Aut (fiber B.t) →* Multiplicative ℤ)).codRestrict _
       B.mem_weilGroup_geomAut)
 
+/-- The image of `geomHom g` in `π₁(C₀, s) × ℤ` is `(geomAut g, 1)`. -/
 lemma weilGroupEquiv_geomHom (g : Aut (fiber B.t)) :
     haveI := W.geometricallyConnected
     (W.weilGroupEquiv (B.geomHom g) : W.fundamentalGroup × Multiplicative ℤ) = (B.geomAut g, 1) :=
   by simp [geomHom]
 
+/-- The image of `geomHom g` in `π₁(C₀, s)` is `geomAut g`. -/
 lemma toFundamentalGroup_geomHom (g : Aut (fiber B.t)) :
     W.toFundamentalGroup (B.geomHom g) = B.geomAut g := by
   rw [toFundamentalGroup_apply, weilGroupEquiv_geomHom]
 
+/-- `geomHom` takes values in the geometric part of the Weil group. -/
 lemma geomHom_mem (g : Aut (fiber B.t)) : B.geomHom g ∈ W.geometric := by
   rw [MonoidHom.mem_ker, W.deg_eq]
   exact congrArg Prod.snd (B.weilGroupEquiv_geomHom g)
@@ -198,6 +201,7 @@ noncomputable def geomEquiv : Aut (fiber B.t) ≃ₜ* W.geometric :=
     continuous_invFun :=
       (B.continuous_geomHomGeometric.homeoOfEquivCompactToT2 (f := e.toEquiv)).symm.continuous }
 
+/-- `geomEquiv` is `geomHom`. -/
 lemma geomEquiv_apply (g : Aut (fiber B.t)) : (B.geomEquiv g : W.carrier) = B.geomHom g := by
   rfl
 

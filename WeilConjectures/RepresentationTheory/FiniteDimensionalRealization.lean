@@ -93,6 +93,7 @@ def transport (ρ : Representation k G V) (e : V ≃ₗ[k] W) : Representation k
   map_one' := LinearMap.ext fun w ↦ by simp
   map_mul' g g' := LinearMap.ext fun w ↦ by simp
 
+/-- The transported representation on elements. -/
 @[simp]
 lemma transport_apply (ρ : Representation k G V) (e : V ≃ₗ[k] W) (g : G) (w : W) :
     ρ.transport e g w = e (ρ g (e.symm w)) := rfl

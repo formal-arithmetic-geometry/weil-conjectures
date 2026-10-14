@@ -43,10 +43,13 @@ Frobenius induced by the degree-one lift `γ`
 
 The Weil fundamental representation of `def-wf-fundamental-representation` is the geometric
 generic stalk `ℱ_η̄` with the monodromy action of `π₁(C₀, η̄)` extended to the Weil group by the
-Weil structure. Neither the monodromy action of the étale fundamental group on a stalk of an
-`ℓ`-adic pro-étale sheaf nor the functor `ℱ ↦ ρ_ℱ` is available, so the equivalence is
-existentially quantified, and the fact that it *is* the Weil fundamental representation is
-recorded by the properties of it that the blueprint uses: at a closed point `x`, the stalk
+Weil structure. It is constructed in
+`WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentation`
+(`AlgebraicGeometry.WeilGroup.fundamentalRep`) from a monodromy of lisse sheaves on the geometric
+curve (`AlgebraicGeometry.ProEtale.LisseMonodromy`, `cor-galois-lisse-representations`), at a
+base point which depends on choices; the equivalence is therefore existentially quantified,
+and the fact that it *is* the Weil fundamental representation is recorded by the properties of
+it that the blueprint uses: at a closed point `x`, the stalk
 `ℱ_x̄` with its local Frobenius `F_x` is `V` with `ρ (Frob_x)` (the stalk at `x̄` being
 transported to the base point along a path, which carries the geometric Frobenius of `κ(x)` to
 the Frobenius element `Frob_x` of `W(C₀)`); the equivalence is compatible with duals (it is a
@@ -101,7 +104,6 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} [C.Over (Spec (.of K
   [GeometricallyConnected (C ↘ Spec (.of K))] (W : WeilGroup (C ↘ Spec (.of K))) (l : ℕ)
   [Fact l.Prime] [Fact (ringChar K ≠ l)]
 
-omit [GeometricallyConnected (C ↘ Spec (.of K))] in
 /-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection `sk-i-real-sheaves`):
 The lisse sheaf–representation equivalence.
 
@@ -133,7 +135,10 @@ theorem exists_equivalence_isLisse :
             Representation.invariants ((e.functor.obj F).obj.ρ.comp W.geometric.subtype),
           ∀ v, (f (F.obj.globalSections.frobenius v) : (e.functor.obj F).obj.V) =
             (e.functor.obj F).obj.ρ W.frobeniusLift (f v)) := by
-  have := W.connectedSpace_geometricFiber
+  have : ConnectedSpace (C ↘ Spec (.of K)).geometricFiber :=
+    GeometricallyConnected.geometrically_connectedSpace (f := C ↘ Spec (.of K))
+      (Scheme.specAlgebraicClosure K).hom (C ↘ Spec (.of K)).geometricFiberProj
+      (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure (IsPullback.of_hasPullback _ _)
   have : Smooth (C ↘ Spec (.of K)) := SmoothOfRelativeDimension.smooth 1 _
   have : Smooth (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure :=
     inferInstanceAs (Smooth (Limits.pullback.snd _ _))

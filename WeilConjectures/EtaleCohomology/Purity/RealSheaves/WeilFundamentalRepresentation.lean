@@ -308,7 +308,8 @@ geometric part and at the lift of the Frobenius intertwines them everywhere: `W`
 `W.geometric` and the lift of the Frobenius. -/
 theorem intertwines_of_geometric_frobLift {V V' : Type*} [AddCommGroup V]
     [Module (PadicAlgCl l) V] [AddCommGroup V'] [Module (PadicAlgCl l) V']
-    (ρ : Representation (PadicAlgCl l) W.carrier V) (ρ' : Representation (PadicAlgCl l) W.carrier V')
+    (ρ : Representation (PadicAlgCl l) W.carrier V)
+    (ρ' : Representation (PadicAlgCl l) W.carrier V')
     (S : V →ₗ[PadicAlgCl l] V') (hgeom : ∀ u ∈ W.geometric, ∀ v, S (ρ u v) = ρ' u (S v))
     (hfrob : ∀ v, S (ρ D.frobLift v) = ρ' D.frobLift (S v)) (w : W.carrier) (v : V) :
     S (ρ w v) = ρ' w (S v) := by
@@ -412,7 +413,8 @@ omit [Fact (ringChar K ≠ l)] in
 /-- A morphism of `WeilCoefficients` is determined by its underlying `ℚ̄_ℓ`-linear map. -/
 lemma _root_.AlgebraicGeometry.WeilCoefficients.hom_ext_toModuleCat {A A' : WeilCoefficients.{u} l}
     {a b : A ⟶ A'}
-    (h : ((WeilCoefficients.toModuleCat l).map a).hom = ((WeilCoefficients.toModuleCat l).map b).hom) :
+    (h : ((WeilCoefficients.toModuleCat l).map a).hom =
+      ((WeilCoefficients.toModuleCat l).map b).hom) :
     a = b :=
   ModuleCat.hom_ext (LinearMap.ext fun x ↦ LinearMap.congr_fun h x)
 
@@ -448,7 +450,8 @@ theorem upperStar_comp_lisseFrobStr_of_frobStalk (hM : M.IsEquivalenceAt B.t)
     {F G : WeilSheaf K l C} (hF : F.IsLisse) (hG : G.IsLisse) (f : F.toLisse hF ⟶ G.toLisse hG)
     (hf : ∀ v, ((WeilCoefficients.toModuleCat l).map ((lisseStalk l B.t).map f)).hom
         (frobStalk M B F hF v) =
-      frobStalk M B G hG (((WeilCoefficients.toModuleCat l).map ((lisseStalk l B.t).map f)).hom v)) :
+      frobStalk M B G hG
+        (((WeilCoefficients.toModuleCat l).map ((lisseStalk l B.t).map f)).hom v)) :
     (ObjectProperty.homMk (((C ↘ Spec (.of K)).geometricGaloisFrobenius.hom)^*ᵃ[l].map f.hom) :
         (F.toLisse hF).upperStar l _ ⟶ (G.toLisse hG).upperStar l _) ≫ (G.lisseFrobStr hG).hom =
       (F.lisseFrobStr hF).hom ≫ f := by
@@ -466,8 +469,9 @@ theorem upperStar_comp_lisseFrobStr_of_frobStalk (hM : M.IsEquivalenceAt B.t)
 
 /-- **Fullness of the Weil fundamental representation**: a linear map of stalks intertwining the
 Weil fundamental representations is the stalk of a morphism of lisse Weil sheaves. On the
-geometric part it is the stalk of a morphism of lisse sheaves, by `cor-galois-lisse-representations`;
-commuting with `Φ`, this morphism commutes with the Weil structures. -/
+geometric part it is the stalk of a morphism of lisse sheaves, by
+`cor-galois-lisse-representations`; commuting with `Φ`, this morphism commutes with the Weil
+structures. -/
 theorem exists_stalkMap_eq (hM : M.IsEquivalenceAt B.t) {X Y : LisseWeilSheaf K l C}
     (φ : LisseMonodromy.StalkSpace B.t (X.obj.toLisse X.property) →ₗ[PadicAlgCl l]
       LisseMonodromy.StalkSpace B.t (Y.obj.toLisse Y.property))

@@ -43,6 +43,7 @@ noncomputable def frobLift : W.carrier :=
   haveI := W.geometricallyConnected
   W.weilGroupEquiv.symm ⟨(B.frobAut, Multiplicative.ofAdd 1), B.mem_weilGroup_frobAut⟩
 
+/-- The image of the Frobenius lift in `π₁(C₀, s) × ℤ` is `(frobAut, 1)`. -/
 lemma weilGroupEquiv_frobLift :
     haveI := W.geometricallyConnected
     (W.weilGroupEquiv B.frobLift : W.fundamentalGroup × Multiplicative ℤ) =
