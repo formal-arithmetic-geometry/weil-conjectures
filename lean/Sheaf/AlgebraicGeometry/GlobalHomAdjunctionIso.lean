@@ -387,17 +387,14 @@ theorem exists_schemeHomTensorPullbackIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (derivedPullback f).prod (derivedPullback f) ⋙ tensor (schemeDerivedCategory X),
       IsCanonicalPullbackTensorComparison f (fun K L ↦ t.hom.app (K, L)) := by
   obtain ⟨τ, hτ⟩ := exists_canonicalPullbackTensorComparison f
-  let c : tensor (schemeDerivedCategory Y) ⋙ derivedPullback f ⟶
-      (derivedPullback f).prod (derivedPullback f) ⋙ tensor (schemeDerivedCategory X) :=
-    { app := fun Z ↦ τ Z.1 Z.2
-      naturality := fun Z Z' a ↦ hτ.2 Z.1 Z'.1 Z.2 Z'.2 a.1 a.2 }
   obtain ⟨m, hm⟩ := canonicalPullbackTensor_monoidal_realization f τ hτ
-  have (Z : schemeDerivedCategory Y × schemeDerivedCategory Y) : IsIso (c.app Z) := by
-    change IsIso (τ Z.1 Z.2)
-    rw [← hm Z.1 Z.2]
-    infer_instance
-  exact ⟨NatIso.ofComponents (fun Z ↦ asIso (c.app Z))
-    (fun a ↦ c.naturality a), hτ⟩
+  refine ⟨NatIso.ofComponents (fun Z ↦ (m.μIso Z.1 Z.2).symm) ?_, ?_⟩
+  · intro Z Z' a
+    change (derivedPullback f).map (a.1 ⊗ₘ a.2) ≫ (m.μIso Z'.1 Z'.2).inv =
+      (m.μIso Z.1 Z.2).inv ≫ ((derivedPullback f).map a.1 ⊗ₘ (derivedPullback f).map a.2)
+    simpa only [hm] using hτ.2 Z.1 Z'.1 Z.2 Z'.2 a.1 a.2
+  · change IsCanonicalPullbackTensorComparison f (fun K L ↦ (m.μIso K L).inv)
+    simpa only [hm] using hτ
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
