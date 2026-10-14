@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-finrepair-constant-finite-comparison",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Constant coefficients under a finite normalization comparison",
- "statement": "Let $f:X\\to S$ be proper between finite-type $k$-schemes and\nlet $\\nu:Y\\to X$ be finite and surjective, in the conventions of\n[def-weil-pbc-scheme-conventions]. Suppose $\\nu$ is an\nisomorphism outside a reduced closed subscheme $i:Z\\hookrightarrow X$\nfor which $f|_Z$ is finite. Put $v=f\\nu$, and let $M$ be a\nfinite module over the ring of [sbc-def-coefficient-conventions].\nIf all $R^qv_*\\underline M$ are constructible, then so are all\n$R^qf_*\\underline M$. Moreover the natural map\n\n$$\nR^qf_*\\underline M\\longrightarrow R^qv_*\\underline M\n$$\n\nis an isomorphism for every $q\\geq2$.\nHere constructibility and direct image have the meanings of\n[def-weil-pbc-constructible-complexes], [def-weil-pbc-direct-image].",
+ "statement": "Let $f:X\\to S$ be proper between finite-type $k$-schemes and\nlet $\\nu:Y\\to X$ be finite and surjective, in the conventions of\n[def-weil-pbc-scheme-conventions]. Suppose $\\nu$ is an\nisomorphism outside a reduced closed subscheme $i:Z\\hookrightarrow X$\nfor which $f|_Z$ is finite. Put $v=f\\nu$, and let $M$ be a\nfinite module over the ring of [sbc-def-coefficient-conventions].\nIf all $R^qv_*\\underline M$ are constructible, then so are all\n$R^qf_*\\underline M$. Moreover the natural map\n\n$$\nR^qf_*\\underline M\\longrightarrow R^qv_*\\underline M\n$$\n\nis an isomorphism for every $q\\geq2$.\nHere constructibility and direct image have the meanings of\n[def-weil-pbc-constructible-complexes], [def-weil-pbc-direct-image].\nThe notation $\\underline M_T$ denotes the constant sheaf of [def-weil-pbc-constant-sheaf] on $T_{\\Et}$. The natural comparison is induced by the adjunction unit $\\underline M_X\\to\\nu_*\\nu^{-1}\\underline M_X$, identifying $\\nu^{-1}\\underline M_X$ with $\\underline M_Y$, and the composition comparison for derived direct images; inverse image is as in [def-weil-pbc-inverse-image].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-constant-finite-comparison.md",
   "place": "node lem-finrepair-constant-finite-comparison, order 1615"
@@ -16,52 +16,186 @@
   "def-weil-pbc-scheme-conventions",
   "sbc-def-coefficient-conventions",
   "def-weil-pbc-constructible-complexes",
-  "def-weil-pbc-direct-image"
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image"
  ],
  "proof": [
   {
-   "text": "The unit $\\underline M_X\\to\\nu_*\\underline M_Y$ is injective\nby the diagonal description of\n[lemma-weil-pbc-finite-stalk-formula]; the fibre of the\nsurjective finite $\\nu$ is nonempty at every geometric point.\nLet $Q$ be its cokernel. Both sheaves in this monomorphism are\nconstructible by [lem-fin-finite-morphism], so $Q$ is\nconstructible by [thm-constructible-serre].\nOutside $Z$ the unit is an isomorphism; hence $Q$ restricts to\nzero there, and its canonical map $Q\\to i_*i^*Q$ is an\nisomorphism on all geometric stalks. Use\n[lemma-weil-pbc-geometric-stalk-conservative] to identify them.",
+   "text": "Put $A=\\underline M_X$, $B=\\nu_*\\underline M_Y$, and let $a:A\\to B$ be the unit after the constant-sheaf pullback identification of [lemma-constructible-pullback-constant]. By [lem-weil-pbc-constant-sheaf-geometric-stalk], the stalk of a constant sheaf is $M$, with each constant section having germ the corresponding element of $M$. Under [lemma-weil-pbc-finite-stalk-formula], $a_{\\bar x}$ sends $m$ to $(m)_{\\bar y}$: the unit restricts the constant section $m$ to the constant section $m$ on the inverse image of each neighbourhood. The finite fibre over $\\bar x$ is nonempty: choose a point of $Y$ over $x$ using surjectivity, and embed its finite residue extension into the algebraically closed geometric residue field. Thus the diagonal $M\\to\\prod_{\\bar y}M$ is injective. Exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact] gives $(\\ker a)_{\\bar x}=0$ at every point; [lemma-weil-pbc-geometric-stalk-conservative], applied to $0\\to\\ker a$, implies $\\ker a=0$. All maps are $\\Lambda$-linear, so this is also a monomorphism of module sheaves. Define $Q=\\operatorname{coker}a$, obtaining $0\\to A\\to B\\to Q\\to0$.",
    "uses": [
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
     "lemma-weil-pbc-finite-stalk-formula",
-    "lem-fin-finite-morphism",
-    "thm-constructible-serre",
+    "prop-weil-pbc-geometric-stalks-exact",
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-constant-finite-comparison.md",
+    "place": "Proof, first paragraph; Stacks 03QP (proposition-finite-higher-direct-image-zero), 03PT (lemma-stalk-exact), 03PU (theorem-exactness-stalks)"
+   }
   },
   {
-   "text": "Closed-immersion exactness in [lem-fin-closed-immersion] and\nthe composition spectral sequence\n[lem-weil-pbc-grothendieck-spectral-sequence] give\n$R^qf_*Q=R^q(f|_Z)_*i^*Q$.\nSince $f|_Z$ is finite,\n[lem-fin-finite-morphism] makes $H=f_*Q$ constructible\nand makes these higher direct images zero for $q>0$.\nThe same finite exactness and composition spectral sequence\nidentify $R^qf_*\\nu_*\\underline M_Y$ with\n$R^qv_*\\underline M_Y$.\nThe long exact sequence of\n\n$$\n0\\to\\underline M_X\\to\\nu_*\\underline M_Y\\to Q\\to0\n$$\n\ntherefore gives\n\n$$\nf_*\\underline M_X\n=\\ker\\bigl(v_*\\underline M_Y\\to H\\bigr)\n$$\n\nand\n\n$$\n0\\to\\operatorname{coker}\\bigl(v_*\\underline M_Y\\to H\\bigr)\n\\to R^1f_*\\underline M_X\n\\to R^1v_*\\underline M_Y\\to0.\n$$",
+   "text": "The constant sheaves $A$ and $\\underline M_Y$ are finite locally constant: their global constant descriptions trivialize them on the single stratum consisting of the entire scheme. They are therefore constructible by [def-weil-pbc-constructible-complexes]. Apply [lem-fin-finite-morphism] to the finite map $\\nu$ with finite-type target $X$ to see that $B$ is constructible. Since the coefficient ring in [sbc-def-coefficient-conventions] is finite and commutative, [thm-constructible-serre] applies and shows that $Q=\\operatorname{coker}a$ is constructible.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "lem-fin-finite-morphism",
+    "sbc-def-coefficient-conventions",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-constant-finite-comparison.md",
+    "place": "Proof, first paragraph; Stacks 095R (lemma-finite-pushforward-constructible), 03RZ (lemma-constructible-abelian)"
+   }
+  },
+  {
+   "text": "Let $j:U=X\\setminus Z\\hookrightarrow X$. For an etale $W\\to U$, the assumption that $\\nu$ is an isomorphism over $U$ identifies $W\\times_XY$ with $W$. Hence the unit $a$ restricted to $U$ is an isomorphism, by the section formula for direct image in [def-weil-pbc-direct-image]. Exactness of inverse image [prop-weil-pbc-inverse-image-exact] implies $j^{-1}Q=0$; this can be checked on underlying abelian sheaves and hence also on module sheaves. Apply [lem-weil-pbc-open-closed-short-exact] to $Q$. Its left term $j_!j^{-1}Q$ is zero, so its canonical unit identifies $Q$ with $i_*G$, where $G=i^{-1}Q$. By [prop-constructible-pullback], $G$ is constructible on $Z$.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-open-closed-short-exact",
+    "prop-constructible-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-constant-finite-comparison.md",
+    "place": "Proof, first paragraph; Stacks 03Q1 (lemma-stalk-pullback), 095L (lemma-ses-associated-to-open), 095G (lemma-pullback-constructible)"
+   }
+  },
+  {
+   "text": "Apply [lem-fin-closed-immersion] to $i$ and $G$ to obtain $R^bi_*G=0$ for $b>0$. In the spectral sequence of [lem-weil-pbc-grothendieck-spectral-sequence] for $i$ followed by $f$, only the row $b=0$ remains: every differential to or from that row is zero, and the filtration in total degree $q$ has only one nonzero graded piece, in bidegree $(q,0)$. Indeed the zero graded pieces in positions $p<q$ give $F^0=F^q$, and $F^{q+1}=0$, so $F^q/F^{q+1}=R^qf_*i_*G$ identifies the abutment with this object. This gives $R^qf_*i_*G\\cong R^q(fi)_*G$. With $Q\\cong i_*G$, apply [lem-fin-finite-morphism] to the assumed finite map $fi:Z\\to S$. This proves that $H=f_*Q=(fi)_*G$ is constructible and $R^qf_*Q=0$ for $q>0$. The targets $X,S$ are of finite type as required, and $Z$ is a closed subscheme of $X$.",
    "uses": [
     "lem-fin-closed-immersion",
     "lem-weil-pbc-grothendieck-spectral-sequence",
     "lem-fin-finite-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-constant-finite-comparison.md",
+    "place": "Proof, second paragraph; Stacks 03QP (proposition-finite-higher-direct-image-zero); composition spectral sequence"
+   }
   },
   {
-   "text": "All sheaves used to take the indicated kernel and cokernel are\nconstructible, and the rightmost term in the short exact sequence\nis constructible by hypothesis. The weak-Serre property of\n[thm-constructible-serre] proves constructibility\nin degrees zero and one. In every degree $q\\geq2$, the adjacent\nterms $R^{q-1}f_*Q$ and $R^qf_*Q$ are zero, so the same long\nexact sequence gives the claimed isomorphism. This proves the\nremaining constructibility assertions as well.",
+   "text": "For an arbitrary short exact sequence of module sheaves on $Y$, [lemma-weil-pbc-finite-stalk-formula] computes its direct-image stalks as finite products of the original stalks. These products preserve exact sequences by [prop-weil-pbc-geometric-stalks-exact]; the homology sheaves of the resulting sequence have zero stalks, so [lemma-weil-pbc-geometric-stalk-conservative] applied to their maps from zero shows they vanish. Thus $\\nu_*$ is exact, also on module sheaves since kernels and cokernels carry the induced module structures. Choose an injective resolution $\\underline M_Y\\to I^\\bullet$, using [lem-weil-pbc-module-sheaves-enough-injectives]. Exactness makes $B\\to\\nu_*I^\\bullet$ a resolution, and [lem-weil-pbc-direct-image-preserves-injectives] makes every term injective. The computation of derived direct image in [def-weil-pbc-direct-image] therefore represents $Rf_*B$ by $f_*\\nu_*I^\\bullet$ and $Rv_*\\underline M_Y$ by $v_*I^\\bullet$. For every etale $W\\to S$, the associativity identification $(W\\times_SX)\\times_XY=W\\times_SY$ identifies these complexes term by term, including differentials. The canonical derived composition comparison is this identification on these injective representatives. Hence it gives natural isomorphisms $R^qf_*B\\cong R^qv_*\\underline M_Y$ for all $q\\geq0$, and composing with $R^qf_*(a)$ is exactly the unit/composition comparison specified in the statement.",
+   "uses": [
+    "lemma-weil-pbc-finite-stalk-formula",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-direct-image-preserves-injectives",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-constant-finite-comparison.md",
+    "place": "Proof, second paragraph; Stacks 03QP (proposition-finite-higher-direct-image-zero); Derived Categories, lemma-compose-derived-functors, proof: computation on injective resolutions"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-module-sheaves-enough-injectives] and the left-exact additive direct image of [def-weil-pbc-direct-image] to apply [lem-weil-pbc-derived-functor-long-exact] to $0\\to A\\to B\\to Q\\to0$. Substituting the identifications and vanishing proved above gives $0\\to f_*A\\to v_*\\underline M_Y\\to H\\to R^1f_*A\\to R^1v_*\\underline M_Y\\to0$. In particular $f_*A$ is the kernel of $v_*\\underline M_Y\\to H$, and with $C=\\operatorname{coker}(v_*\\underline M_Y\\to H)$ there is a short exact sequence $0\\to C\\to R^1f_*A\\to R^1v_*\\underline M_Y\\to0$. For $q\\geq2$, the same long exact sequence has segment $0=R^{q-1}f_*Q\\to R^qf_*A\\to R^qv_*\\underline M_Y\\to R^qf_*Q=0$; exactness shows the middle comparison is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-constant-finite-comparison.md",
+    "place": "Proof, second and third paragraphs; Stacks 015B (lemma-higher-derived-functors), parts (1) and (2)"
+   }
+  },
+  {
+   "text": "By hypothesis $v_*\\underline M_Y$ and $R^1v_*\\underline M_Y$ are constructible, and $H$ is constructible by step 4. The kernel and cokernel assertion of [thm-constructible-serre] makes $f_*A$ and $C$ constructible. Its extension assertion applied to the short exact sequence in step 6 makes $R^1f_*A$ constructible. For $q\\geq2$, step 6 identifies $R^qf_*A$ with the constructible sheaf $R^qv_*\\underline M_Y$ from the hypothesis. This proves all constructibility assertions and the specified natural isomorphisms.",
    "uses": [
     "thm-constructible-serre"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-constant-finite-comparison.md",
+    "place": "Proof, third paragraph; Stacks 03RZ (lemma-constructible-abelian)"
+   }
   }
  ],
  "proof_deps": [
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
   "lemma-weil-pbc-finite-stalk-formula",
-  "lem-fin-finite-morphism",
-  "thm-constructible-serre",
+  "prop-weil-pbc-geometric-stalks-exact",
   "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-pbc-constructible-complexes",
+  "lem-fin-finite-morphism",
+  "sbc-def-coefficient-conventions",
+  "thm-constructible-serre",
+  "def-weil-pbc-direct-image",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-open-closed-short-exact",
+  "prop-constructible-pullback",
   "lem-fin-closed-immersion",
-  "lem-weil-pbc-grothendieck-spectral-sequence"
+  "lem-weil-pbc-grothendieck-spectral-sequence",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-direct-image-preserves-injectives",
+  "lem-weil-pbc-derived-functor-long-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-constant-finite-comparison.md",
-  "place": "## Proof"
+  "place": "Proof, three paragraphs, expanded with Stacks 03QP, 03PT, 03PU, 03Q1, 095L, 095G, 095R, 03RZ and 015B"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible|finite.*stalk|etale.*cohomology",
+   "results": "; ['Mathlib/AlgebraicGeometry/Properties.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean']",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern morphism properties, general sheaf theory or constructible sets, not this etale higher-direct-image comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology comparison for a finite surjective morphism which is an isomorphism away from a closed subset finite over the base",
+   "results": "service unavailable: Internal Server Error; []",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher etale direct images of constant finite sheaves under a finite surjective modification are isomorphic in degree at least two when the exceptional locus is finite over the base",
+   "results": "; ['AlgebraicGeometry.IsEtale.of_comp', 'AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified', 'AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf', 'RingHom.Etale.respectsIso', 'Algebra.basicOpen_subset_etaleLocus_iff', 'Algebra.FormallyEtale.iff_of_equiv', 'StandardEtalePresentation.mapEquiv', 'AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit']",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern morphism properties, general sheaf theory or constructible sets, not this etale higher-direct-image comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, AlgebraicGeometry.IsFinite",
+   "results": "; []",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern morphism properties, general sheaf theory or constructible sets, not this etale higher-direct-image comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility of higher direct image of a constant sheaf from an exact sequence with acyclic cokernel supported on a closed subset",
+   "results": "; ['CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact', 'CategoryTheory.Sheaf.instIsGrothendieckAbelian', 'CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall', 'LightCondensed.instIsGrothendieckAbelianLightCondMod', 'CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact', 'CategoryTheory.instIsConstantObjSheafSheafCompose', 'CategoryTheory.Sheaf.H', 'Condensed.hasExactColimitsOfShape']",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern morphism properties, general sheaf theory or constructible sets, not this etale higher-direct-image comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|higher_direct_image|normalization.*cohomology|constructible.*sheaf",
+   "results": "; []",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern morphism properties, general sheaf theory or constructible sets, not this etale higher-direct-image comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact direct image functor preserving injectives computes higher direct images of a composite on one injective resolution",
+   "results": "; ['CategoryTheory.Functor.rightDerived_map_eq', 'CategoryTheory.InjectiveResolution.toRightDerivedZero_eq', \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc\", 'CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ', 'CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc', \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc\", 'CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality', 'CategoryTheory.InjectiveResolution.rightDerived_app_eq']",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: generic injective-resolution identities do not state this finite etale comparison; no new node needed for their elementary application"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -92,5 +226,89 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-finrepair-constant-finite-comparison",
+  "worker": "stage1",
+  "summary": "Kept all hypotheses and conclusions; made the natural comparison explicit and expanded the three blueprint paragraphs into seven checked steps. Reused existing nodes for constant stalks, inverse-image exactness, the canonical open-closed sequence, constructible pullback, enough injectives and the derived-functor long exact sequence. No new nodes. Second reading makes the composition comparison explicit on injective resolutions and records the additional tool proposal for the maintainer.",
+  "blueprint": "Steps 1–3 realize the first paragraph (unit monomorphism, constructible cokernel, support on Z); steps 4–6 realize the second paragraph (acyclic supported cokernel and finite comparison, low-degree exact sequence); steps 6–7 realize the third paragraph (degree >=2 and Serre closure).",
+  "tool_uses": [
+   {
+    "node": "lemma-constructible-pullback-constant",
+    "why": "Proposed generic site/derived-category tool for the finite comparison argument; the compact-support unit has no replacement for this foundational statement. Acceptance belongs to the maintainer."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Proposed generic site/derived-category tool for the finite comparison argument; the compact-support unit has no replacement for this foundational statement. Acceptance belongs to the maintainer."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-stalk-formula",
+    "why": "Proposed generic site/derived-category tool for the finite comparison argument; the compact-support unit has no replacement for this foundational statement. Acceptance belongs to the maintainer."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Proposed generic site/derived-category tool for the finite comparison argument; the compact-support unit has no replacement for this foundational statement. Acceptance belongs to the maintainer."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Proposed generic site/derived-category tool for the finite comparison argument; the compact-support unit has no replacement for this foundational statement. Acceptance belongs to the maintainer."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Proposed generic site/derived-category tool for the finite comparison argument; the compact-support unit has no replacement for this foundational statement. Acceptance belongs to the maintainer."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Proposed generic site/derived-category tool for the finite comparison argument; the compact-support unit has no replacement for this foundational statement. Acceptance belongs to the maintainer."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Proposed generic site/derived-category tool for the finite comparison argument; the compact-support unit has no replacement for this foundational statement. Acceptance belongs to the maintainer."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Proposed generic site/derived-category tool for the finite comparison argument; the compact-support unit has no replacement for this foundational statement. Acceptance belongs to the maintainer."
+   },
+   {
+    "node": "lem-weil-pbc-grothendieck-spectral-sequence",
+    "why": "Proposed generic site/derived-category tool for the finite comparison argument; the compact-support unit has no replacement for this foundational statement. Acceptance belongs to the maintainer."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Proposed generic site/derived-category tool for the finite comparison argument; the compact-support unit has no replacement for this foundational statement. Acceptance belongs to the maintainer."
+   },
+   {
+    "node": "lem-weil-pbc-direct-image-preserves-injectives",
+    "why": "Proposed generic site/derived-category tool for the finite comparison argument; the compact-support unit has no replacement for this foundational statement. Acceptance belongs to the maintainer."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Proposed generic site/derived-category tool for the finite comparison argument; the compact-support unit has no replacement for this foundational statement. Acceptance belongs to the maintainer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-constructible-serre",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-open-closed-short-exact",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-grothendieck-spectral-sequence",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-direct-image-preserves-injectives",
+  "lem-weil-pbc-derived-functor-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-907dc4922",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-907dc4922 (reviewer sub-agent of L); spot-checked: Reviewed the full item, unit route, master source, cited DAG statements, Stacks locations, coefficient category, natural comparison map, all seven proof steps, edge cases, Mathlib searches, and delivery-error A–F. The argument is mathematically sound, preserves all hypotheses and the q≥2 conclusion, introduces no new nodes or duplicates, and needs no fixes."
+ }
 }
