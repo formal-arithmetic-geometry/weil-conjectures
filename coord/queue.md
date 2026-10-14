@@ -25,7 +25,7 @@
 | `Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchange` | 34 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison` | 34 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData` | 34 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.RelativeMVDirectImageRowsCore` | 42 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.RelativeMVDirectImageRowsCore` | 41 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates` | 50 | 1 | proof |
 
 Waiting, not claimable: 1 modules whose proof uses a node that has no Lean declaration yet.
