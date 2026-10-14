@@ -440,6 +440,31 @@ lemma map_transport {y z : Spec (.of K) ⟶ Y} (τ : fiber y ≅ fiber z) :
     exact ConcreteCategory.congr_hom ((pullbackFiberIso f y).hom_inv_id_app P) _
 end Map
 
+
+section Graph
+
+/-- **Every point of `Ỹ_y ×_Y Ỹ_y` lies on the graph of the transport along a loop**: for every
+point `q` there are `g ∈ π₁(Y, y) = Aut F_y` and `x ∈ Ỹ_y` with `q = (x, g x)`. Indeed
+`Ỹ_y ×_Y Ỹ_y = lim A_j ×_Y A_j` and `A_j ×_Y A_j = ∐_{σ ∈ Aut A_j} A_j` for Galois `A_j`; the
+components containing the images of `q` form a compatible family, i.e. an element of
+`lim Aut A_j = π₁(Y, y)`. -/
+theorem exists_graph (q : (Limits.pullback (proj y) (proj y) : Scheme.{u})) :
+    ∃ (g : Aut (fiber y)) (x : cover y),
+      (Limits.pullback.lift (f := proj y) (g := proj y) (𝟙 _) (transport g).hom
+        (by rw [Category.id_comp, transport_hom, transportHom_proj])).base x = q := by
+  sorry
+
+/-- **The point `(ỹ, g ỹ)` of `Ỹ_y ×_Y Ỹ_y` depends continuously on `g ∈ π₁(Y, y)`**: its image
+in `A_j ×_Y A_j` only depends on `g⁻¹ a_j`, which is locally constant in `g`, and the preimages
+of opens of the `A_j ×_Y A_j` form a basis of the topology of `Ỹ_y ×_Y Ỹ_y`. -/
+theorem continuous_graph (x : Spec (.of K)) :
+    Continuous fun g : Aut (fiber y) ↦ (Limits.pullback.lift (f := proj y) (g := proj y) (pt y)
+      (pt y ≫ (transport g).hom)
+      (by rw [Category.assoc, transport_hom, transportHom_proj])).base x := by
+  sorry
+
+end Graph
+
 end QCQS
 
 end AlgebraicGeometry.Scheme.UniversalCover
