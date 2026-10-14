@@ -14631,3 +14631,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 13:30 L: batch 20261014T052436 dependency take-out
 - 05:32 L: returned deliver/B2/Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization (reviewer RETURN: (reviewer X-f1981, head f19813a84) E2 (review point 4): The remaining sorry is demonstrably false. With c.B = R, s.B = R)
+- 05:32 L: merged deliver/A4/Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker (stage 3; reviewer PASS; after a return; landing 20261014T053240-L-2010482 (interface); batch 20261014T053238; modules 2; new nodes 0; change records: coord/changes/withdraw-retired-pic-proper-ntorsion-coker-module.md)
