@@ -34,3 +34,6 @@ This compatibility module intentionally contains no declarations after duplicate
 
 -- Second reading (G2, 2026-10-14): compatibility module compiled without warnings;
 -- no declarations or proof holes remain. The unavailable upstream theorem is not certified here.
+
+-- Second reading (B4, 2026-10-14): compatibility-only verification; no declarations,
+-- new proof progress or certification of the absent upstream theorem.
