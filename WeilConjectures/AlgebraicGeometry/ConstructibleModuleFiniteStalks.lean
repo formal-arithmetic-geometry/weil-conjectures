@@ -48,7 +48,7 @@ theorem constructibleModule_finite_geometric_stalk
     Finite (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F) ∧
       Module.Finite Λ (((pointSmallEtale s).sheafFiber
         (A := ModuleCat.{u + 1} Λ)).obj F) := by
-  obtain ⟨S, _, hS⟩ := hF
+  obtain ⟨S, hS⟩ := hF
   have ht : s.base (default : Spec (.of Ω)) ∈ ⋃ k, S.stratum k := by
     rw [S.iUnion_stratum_eq_univ]
     exact Set.mem_univ _

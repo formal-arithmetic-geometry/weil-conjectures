@@ -78,7 +78,7 @@ theorem zariski_to_etale_is_morphism (X : Scheme.{u}) :
           PreservesFiniteLimits L ∧ PreservesFiniteColimits L := by
   obtain ⟨i, hi_forget, hi_cover, hi_limits, hi_terminal, hcont⟩ :=
     zariski_to_etale_core X
-  obtain ⟨hcontinuous, hflat, _⟩ := hcont
+  obtain ⟨hcontinuous, hflat⟩ := hcont
   let : RepresentablyFlat i := hflat
   let L := i.sheafPullback (Type (max (u + 1) v))
     (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology

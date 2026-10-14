@@ -44,7 +44,7 @@ cokernel projection is the image of `d : A₁,ₙ → A₀,ₙ`, so choose `e` w
 submodule closure under subtraction, and its zeroth component is zero by
 linearity of the component projection. The construction also works for `n=0`;
 row exactness is not used in this initial reduction. -/
-theorem zigzag_boundary_reduction
+theorem zigzagBoundary_reduction
     (A : HomologicalComplex₂ (ModuleCat.{v} R) (ComplexShape.down ℕ)
       (ComplexShape.down ℕ))
     (hrow : ∀ (p q : ℕ), 0 < p →

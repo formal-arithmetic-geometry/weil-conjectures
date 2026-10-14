@@ -72,7 +72,7 @@ theorem zigzag_trivial_if_row_boundary
         (DirectSum.component R (ZigzagIndex n)
           (fun i : ZigzagIndex n => (A.X i.1.1).X i.1.2) ⟨(0, n), by simp⟩ a)) :
     a ∈ zigzagBoundaries A n := by
-  obtain ⟨b, hbz, hb0⟩ := zigzag_boundary_reduction A hrow n a ha hboundary
+  obtain ⟨b, hbz, hb0⟩ := zigzagBoundary_reduction A hrow n a ha hboundary
   have hbb := zigzag_zero_component_boundary A hrow n (a - zigzagBoundary A n b) hbz hb0
   obtain ⟨c, hc⟩ := hbb
   refine ⟨b + c, ?_⟩

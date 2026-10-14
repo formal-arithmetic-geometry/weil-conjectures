@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Topology.Constructible
 
@@ -39,9 +39,9 @@ theorem exists_global_stratification_factoring_local
     (n : ℕ) (W : Fin n → X.Opens)
     (hW : ∀ a, IsAffineOpen (W a))
     (hcover : (⋃ a : Fin n, (W a : Set X)) = Set.univ)
-    (T : ∀ a, LocallyClosedStratification (W a))
+    (T : ∀ a, Stratification (W a))
     (hc : ∀ a b, Topology.IsConstructible ((T a).stratum b)) :
-    ∃ S : LocallyClosedStratification X,
+    ∃ S : Stratification X,
       (∀ i, Topology.IsConstructible (S.stratum i)) ∧
       ∀ i, ∃ (a : Fin n) (b : Fin (T a).n)
         (q : S.domain i ⟶ (T a).domain b),
@@ -123,7 +123,7 @@ theorem exists_global_stratification_factoring_local
     obtain ⟨a', hxV⟩ := Set.mem_iUnion.mp hxV
     obtain ⟨ha', hxa'⟩ := Set.mem_iUnion.mp hxV
     exact (not_lt_of_ge (hmin a' hxa')) ha'
-  let S : LocallyClosedStratification X := {
+  let S : Stratification X := {
     n := Fintype.card K
     stratum := fun i ↦ Set.range (f (e i))
     isLocallyClosed_stratum := fun i ↦ (f (e i)).isLocallyClosed_range

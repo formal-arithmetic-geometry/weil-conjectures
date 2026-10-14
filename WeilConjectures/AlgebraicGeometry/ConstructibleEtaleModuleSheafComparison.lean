@@ -30,39 +30,17 @@ Source: Stacks Project, Tags 095E (3), 03RU and 09XZ, and the global stratificat
 convention of `IsConstructibleEtaleModuleSheaf` and `IsConstructibleSheaf`.
 (blueprint: lem-weil-pbc-constructible-etale-module-sheaf-comparison).
 
-Proof:
-Copy the identical partition, domains, immersions and range equalities between the
-two stratification records. Constructibility of the strata is already a field of the
-underlying topological stratification. On each stratum apply the first equivalence of
-`finite_locally_constant_module_values_iff` (blueprint dependency
+Proof: use the same stratification in both directions. On each stratum apply the first
+equivalence of `finite_locally_constant_module_values_iff` (blueprint dependency
 `lem-weil-pbc-finite-locally-constant-module-values`), which identifies the existence
-of finite constant-value trivializations with `IsFiniteLocallyConstantSheaf`.
-Package the converted witnesses in each direction. Empty strata and the empty
-scheme are covered by the same equivalence. -/
-theorem isConstructibleEtaleModuleSheaf_iff
+of finite constant-value trivializations with `IsFiniteLocallyConstantSheaf`. -/
+theorem isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf
     {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsConstructibleEtaleModuleSheaf F ↔
       IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ => M →ₗ[Λ] N)
-        (CA := fun M : ModuleCat.{u + 1} Λ => M) F := by
-  constructor
-  · rintro ⟨S, _, hF⟩
-    let T : Stratification X :=
-      { toStratification := S.toStratification
-        domain := S.domain
-        immersion := S.immersion
-        isImmersion := S.isImmersion
-        range_immersion := S.range_immersion }
-    refine ⟨T, fun k => ?_⟩
-    exact (finite_locally_constant_module_values_iff _).1.mp (hF k)
-  · rintro ⟨S, hF⟩
-    let T : LocallyClosedStratification X :=
-      { toStratification := S.toStratification
-        domain := S.domain
-        immersion := S.immersion
-        isImmersion := S.isImmersion
-        range_immersion := S.range_immersion }
-    refine ⟨T, fun k => S.isConstructible_stratum k, fun k => ?_⟩
-    exact (finite_locally_constant_module_values_iff _).1.mpr (hF k)
+        (CA := fun M : ModuleCat.{u + 1} Λ => M) F :=
+  ⟨fun ⟨S, hF⟩ => ⟨S, fun k => (finite_locally_constant_module_values_iff _).1.mp (hF k)⟩,
+    fun ⟨S, hF⟩ => ⟨S, fun k => (finite_locally_constant_module_values_iff _).1.mpr (hF k)⟩⟩
 
 end AlgebraicGeometry.Scheme

@@ -66,7 +66,6 @@ Proof:
    and one (00YR, proof of 00YV, rings as sextuples). -/
 theorem sheaves_algebraicStructures_objects
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) :
-    Nonempty (HasFiniteProducts (Sheaf J (Type (max u v w)))) ∧
     (∀ (F G : Sheaf J (Type (max u v w))) (U : Cᵒᵖ),
       (F ⊗ G).obj.obj U = (F.obj.obj U × G.obj.obj U)) ∧
     (∀ U : Cᵒᵖ,
@@ -133,7 +132,7 @@ theorem sheaves_algebraicStructures_objects
               ((eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) =
             ((eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) ≫
               AddGrpObj.neg (X := (F.obj B).X))) := by
-  refine ⟨⟨inferInstance⟩, ?_, ?_, ?_, ?_⟩
+  refine ⟨?_, ?_, ?_, ?_⟩
   · intro F G U
     rfl
   · intro U

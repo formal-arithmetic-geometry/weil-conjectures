@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
@@ -59,12 +59,12 @@ theorem exists_constructible_stratification_finite_etale_of_affine_local
     (hlocal : ∃ (n : ℕ) (W : Fin n → X.Opens),
       (∀ a : Fin n, IsAffineOpen (W a)) ∧
       (⋃ a : Fin n, (W a : Set X)) = Set.univ ∧
-      ∀ a : Fin n, ∃ S : LocallyClosedStratification (W a),
+      ∀ a : Fin n, ∃ S : Stratification (W a),
         (∀ b : Fin S.n, Topology.IsConstructible (S.stratum b)) ∧
         ∀ b : Fin S.n,
           IsFinite (pullback.snd j (S.immersion b ≫ (W a).ι)) ∧
           Etale (pullback.snd j (S.immersion b ≫ (W a).ι))) :
-    ∃ S : LocallyClosedStratification X,
+    ∃ S : Stratification X,
       (∀ i : Fin S.n, Topology.IsConstructible (S.stratum i)) ∧
       ∀ i : Fin S.n,
         IsFinite (pullback.snd j (S.immersion i)) ∧

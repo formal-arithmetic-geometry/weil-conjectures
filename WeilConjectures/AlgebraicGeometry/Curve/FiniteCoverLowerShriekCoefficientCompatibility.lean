@@ -72,8 +72,9 @@ private theorem finiteCoverLowerShriek_isZero {R : Type (u + 1)} [CommRing R]
       ((Etale.upperStar (ModuleCat.{u + 1} R) v).map_isZero hG))
 
 /-- Finite etale pushforward preserves finite local constancy. Use the trivial
-stratification on the open and extend by zero over its closed complement. -/
-private theorem finiteCoverLowerShriek_constructible {k : Type u}
+stratification on the open and extend by zero over its closed complement.
+Source: Stacks Project, Tags 095B and 095R. -/
+theorem finiteCoverLowerShriek_constructible {k : Type u}
     [Field k] [IsAlgClosed k] {X U V : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
     (j : U ⟶ X) [IsOpenImmersion j] (r : ℕ) [Fact r.Prime]
@@ -98,22 +99,6 @@ private theorem finiteCoverLowerShriek_constructible {k : Type u}
   have : IsNoetherian X := isNoetherian_of_locallyOfFiniteType f
   exact Scheme.IsConstructibleSheaf.openImmersionLowerShriek
     j j.closedComplement j.range_closedComplement H
-
-/-- Constructibility substatement retained as a separately reviewable obligation.
-Source: Stacks Project, Tags 095B and 095R.
-(blueprint: v1-finite-cover-lower-shriek-constructible) -/
-theorem finiteCoverLowerShriek_constructible_pending {k : Type u}
-    [Field k] [IsAlgClosed k] {X U V : Scheme.{u}}
-    (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
-    (j : U ⟶ X) [IsOpenImmersion j] (r : ℕ) [Fact r.Prime]
-    (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))))
-    [Scheme.IsFiniteLocallyConstantSheaf G] (v : V ⟶ U) [IsFinite v] [Etale v] :
-    Scheme.IsConstructibleSheaf
-      ((Etale.openImmersionLowerShriek
-          (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) j).obj
-        ((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) v).obj
-          ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) v).obj G))) := by
-  exact finiteCoverLowerShriek_constructible f j r G v
 
 /-- Torsion substatement retained as a separately reviewable obligation.
 Source: Stacks Project, Tag 03SD.

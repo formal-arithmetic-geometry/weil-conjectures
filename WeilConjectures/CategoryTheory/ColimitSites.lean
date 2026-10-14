@@ -90,8 +90,6 @@ theorem filtered_index_nonempty (J : Type u) [SmallCategory J] [IsFiltered J] :
     Nonempty J := by
   exact IsFiltered.nonempty
 
--- The unchanged hcat signature contains an unused existential binder.
-set_option linter.unusedVariables false in
 /-- Source: Stacks Project, Sites, Situation 0A34 and Lemmas 09YL, 0A35
 (blueprint: lem-weil-pbc-colimit-of-sites-reduced).
 
@@ -162,8 +160,7 @@ theorem exists_colimit_site_reduced
         (P j).toGrothendieck (P k).toGrothendieck)]
     [∀ (j k : J) (a : j ⟶ k), PreservesFiniteColimits
       (sheafPullback (F.map a).toFunctor (Type u)
-        (P j).toGrothendieck (P k).toGrothendieck)]
-    (hcat : ∃ s : Category (colimit (F ⋙ Cat.objects)), True) :
+        (P j).toGrothendieck (P k).toGrothendieck)] :
     ∃ (V : Cocone F),
       Nonempty (IsColimit (Cat.objects.mapCocone V)) ∧
       Nonempty (IsColimit (Cat.arrows.mapCocone V)) ∧
@@ -299,7 +296,6 @@ theorem exists_colimit_site_reduced
                           θ.hom.app (op ((F.map t.hom).toFunctor.obj U))) =
                         Arrow.mk (D.map b ≫ (E t').hom)) := by
   classical
-  obtain ⟨_, _⟩ := hcat
   obtain ⟨s, L, hObj, hCompat, ⟨a, e, ⟨ha⟩, he⟩, hLift, hEqual, hFinite, hHom,
     hIso⟩ := exists_filteredColimit_category J F
   let O := colimit (F ⋙ Cat.objects)
@@ -514,7 +510,6 @@ theorem exists_colimit_site
                         Arrow.mk ((E t).hom ≫
                           θ.hom.app (op ((F.map t.hom).toFunctor.obj U))) =
                         Arrow.mk (D.map b ≫ (E t').hom)) := by
-  obtain ⟨s, _⟩ := exists_filteredColimit_category (J := J) (F := F)
-  exact exists_colimit_site_reduced (J := J) (F := F) P hfinite hcover hpullback ⟨s, trivial⟩
+  exact exists_colimit_site_reduced (J := J) (F := F) P hfinite hcover hpullback
 
 end CategoryTheory

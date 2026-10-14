@@ -31,7 +31,7 @@ theorem constructible_field_finite_separable_constant_datum
               (d.cover.etalePrecoverageToEtale i))
             (ModuleCat.{u + 1} Λ)).obj M) := by
   classical
-  obtain ⟨S, _, hS⟩ := hG
+  obtain ⟨S, hS⟩ := hG
   let x : Spec (CommRingCat.of k) := IsLocalRing.closedPoint k
   obtain ⟨j, hj⟩ := Set.mem_iUnion.mp
     (S.iUnion_stratum_eq_univ ▸ Set.mem_univ x)

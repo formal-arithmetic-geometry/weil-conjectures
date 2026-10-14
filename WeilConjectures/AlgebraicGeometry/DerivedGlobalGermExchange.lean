@@ -35,8 +35,10 @@ cohomology.tex, Tag 01F8; sites-cohomology.tex, Remark 08J6.
 (blueprint: lem-weil-pbc-derived-global-germ-exchange)
 
 Proof: Represent K by a bounded below injective complex I. Replace the exact inverse
-image of I by an injective complex J. By `derivedExchangeTermwise`, exchange is underived
-exchange on I followed by direct image of the replacement. After global sections,
+image of I by an injective complex J. By
+`Etale.existsUnique_derivedBaseChangeMapPlus_comparison` and
+`Etale.derivedBaseChangeMapPlus_eq_termwise`, exchange is underived exchange on I
+followed by direct image of the replacement. After global sections,
 Leray and the global germ identify this with the unit on I followed by replacement
 and then the target global germ. Underived equality is the mate formula for exchange
 and naturality of the global germ. The defining unit compatibility of right-derived

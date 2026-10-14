@@ -99,8 +99,8 @@ theorem zariski_to_etale_core (X : Scheme.{u}) :
       CoverPreserving (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology i ∧
       PreservesFiniteLimits i ∧
       Nonempty (IsTerminal (i.obj ⊤)) ∧
-      ∃ (_ : i.IsContinuous (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology),
-        ∃ (_ : RepresentablyFlat i), True := by
+      i.IsContinuous (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology ∧
+        RepresentablyFlat i := by
   -- The open-image adjunction supplies the limit comparisons in the planned argument.
   let i := openEtaleInclusion X
   let : i.IsRightAdjoint := (etaleImageAdjunction X).isRightAdjoint
@@ -124,6 +124,6 @@ theorem zariski_to_etale_core (X : Scheme.{u}) :
   have hforget : i ⋙ Scheme.Etale.forget X = X.restrictFunctor := by
     rfl
   exact ⟨i, hforget, hcover, inferInstance,
-    ⟨isTerminalTop.isTerminalObj i ⊤⟩, hcont, inferInstance, trivial⟩
+    ⟨isTerminalTop.isTerminalObj i ⊤⟩, hcont, inferInstance⟩
 
 end AlgebraicGeometry
