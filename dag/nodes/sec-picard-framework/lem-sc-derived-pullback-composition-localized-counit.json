@@ -1,0 +1,146 @@
+{
+ "id": "lem-sc-derived-pullback-composition-localized-counit",
+ "kind": "statement",
+ "title": "Selected pullback composition on localized underived counits",
+ "statement": "Fix the unbounded derived categories of sheaves of modules on all schemes [def-pc-derived-category]. For f:X→Y, g:Y→Z and a homotopy complex K on X, let U(s) denote homotopy pushforward, b(s) the chosen tensor-pullback homotopy adjunction [lem-pc-module-pullback-adjunction], epsilon(s) the selected left-derived counit [lem-pc-ringed-spaces-derived-pullback-composition], and p(f,g) the selected composition comparison [lem-pc-scheme-derived-mate-evaluation]. Then p(f,g) at Q(U(fg)K), followed by epsilon(fg) at U(fg)K and Q of the underived counit b(fg) at K, equals the concrete pasted morphism derivedCompositionCounitApex f g K [def-sc-derived-composition-counit-apex]. This uses no derived pullback/direct-image adjunction or right-derived unit.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-scheme-derived-mate-evaluation",
+  "def-sc-derived-composition-counit-apex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sheaves.tex",
+  "place": "Tags 079W (lemma-adjoint), 0D5S (derived pullback composition) and 0096 (module pullback adjunction); formal categorical subcalculation in parent steps 2 and 3. Official tag pages read 2026-10-14."
+ },
+ "proof": [
+  {
+   "text": "Precompose with p and use its left-derived lift factorization. The result is Lf(epsilon(g)), epsilon(f), and localization of the underived tensor comparison followed by the (fg)-counit.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a complex representative apply conjugateEquiv_counit_symm degreewise to the pinned underived adjunctions and pushforwardComp.inv. Its components are identities on sections, so this gives the pasted underived counits. Pass to the homotopy quotient and localization. Naturality of epsilon(f) at the g-counit gives the stated expression. This uses no cancellation or K-flat resolution.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sheaves.tex",
+  "place": "Tags 079W (lemma-adjoint), 0D5S (derived pullback composition) and 0096 (module pullback adjunction); formal categorical subcalculation in parent steps 2 and 3. Official tag pages read 2026-10-14.",
+  "note": "Expanded formal counit subcalculation from the parent node, using the selected Lean universal-property equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Counit normalization of derived pullback composition from the universal property of a left derived lift",
+   "results": "Functor.leftDerived_fac_app and leftDerived_fac_app_assoc are the generic factorization tools; no exact selected-scheme counit theorem.",
+   "date": "2026-10-14",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv_counit_symm\"",
+   "results": "CategoryTheory.conjugateEquiv_counit_symm found in Mathlib.CategoryTheory.Adjunction.Mates; supplies the underived degreewise mate equation, not its selected derived lift calculation.",
+   "date": "2026-10-14",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "counit_of_normalization|leftDerivedLift_fac|tensorPullbackComposition.*counit",
+   "results": "msearch grep returned 0 hits. Additional direct rg of both repository roots and Mathlib found no exact selected-scheme calculation; read Functor.leftDerived_fac_app and the homotopy adjunction API.",
+   "date": "2026-10-14",
+   "verdict": "no exact statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localized underived counits are compatible with the canonical composition comparison for derived pullback",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of a left derived functor comparison with the localized counit of a composite adjunction",
+   "results": "Second reader: eight generic derived adjunction results, including derived_counit and derivedε_fac_app. None identifies the selected composition lift with the pasted underived counits.",
+   "date": "2026-10-14",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerived_fac_app\"",
+   "results": "Second reader: leftDerived_fac_app and its reassociated form. Read the source: supplies the first factorization, but not the underived composite mate and homotopy/localization calculation.",
+   "date": "2026-10-14",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived_fac_app|conjugateEquiv_counit_symm|localized_counit",
+   "results": "Second reader: generic factorization and mate lemmas only in Mathlib. Separate rg over both project roots using localized counit and composition counit variants found no exact theorem. Read the selected lift equation, tensor adjunction, and concrete apex definition.",
+   "date": "2026-10-14",
+   "verdict": "no existing exact statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackCompositionCounitNormalization",
+  "date": "2026-10-14",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Steps 2 and 3 of lem-sc-derived-pullback-composition-counit-normalization",
+   "via": [
+    "lem-sc-derived-pullback-composition-counit-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackCompositionLocalizedCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackCompositionLocalizedCounit.lean",
+  "declaration": "AlgebraicGeometry.derivedPullbackComposition_localized_counit",
+  "statement": "theorem derivedPullbackComposition_localized_counit\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n      (ComplexShape.up ℤ)) :\n    let ε {A B : Scheme.{u}} (s : A ⟶ B) :=\n      (Classical.choose (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) s\n    let b {A B : Scheme.{u}} (s : A ⟶ B) :=\n      (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction s)).mapHomotopyCategory\n        (ComplexShape.up ℤ)\n    (canonicalDerivedPullbackComposition f g).hom.app\n        (DerivedCategory.Qh.obj\n          (((Scheme.Modules.pushforward (f ≫ g)).mapHomotopyCategory\n            (ComplexShape.up ℤ)).obj K)) ≫\n      (ε (f ≫ g)).app\n        (((Scheme.Modules.pushforward (f ≫ g)).mapHomotopyCategory\n          (ComplexShape.up ℤ)).obj K) ≫\n      DerivedCategory.Qh.map ((b (f ≫ g)).counit.app K) =\n      derivedCompositionCounitApex f g K",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-2d516",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261014T085853-L-234204",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-2d516",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261014T085853-L-234204",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, proofs and dependencies with both nodes and pinned constructions; both delivered modules and direct importer DerivedPullbackCompositionMateUnit compile cleanly; axioms match the documented remaining hole."
+ }
+}
