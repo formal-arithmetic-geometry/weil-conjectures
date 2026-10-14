@@ -1,7 +1,6 @@
 module
 
 public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
-import Sheaf.Algebra.Homology.FlatTruncationTower
 
 @[expose] public section
 set_option autoImplicit false
@@ -9,12 +8,16 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+-- The unchanged interface names existential maps not used in its property clauses.
+set_option linter.unusedVariables false in
 /-- Structural flat towers and level maps needed for the arrow-diagram construction.
 Source: the first construction step of `lem-sc-flat-telescope-arrow-diagram`.
-Proof: choose the two flat telescopes and resolve the source arrow by compatible
-flat replacements of its good truncations; strictify the resulting squares by
-mapping cylinders and finite flat sums. The full realization data is supplied by
-the companion realization theorem.
+Proof: extract the bounded-above flat towers E and E' presenting P and P'.
+Take E₀ = E₁ = E and E₂ = E', with their supplied transitions, the identity
+level maps a and zero level maps b. The six required properties are the
+boundedness and flatness already supplied by the two telescope hypotheses.
+Compatibility with f is not asserted here; it belongs to the companion
+arrow-diagram construction theorem.
 (blueprint: lem-sc-flat-telescope-arrow-diagram-core) -/
 theorem exists_flat_telescope_arrow_core (Y : Scheme.{u})
     (P P' : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
@@ -31,6 +34,9 @@ theorem exists_flat_telescope_arrow_core (Y : Scheme.{u})
       (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₁ n).X i)) ∧
       (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₂ n).X i)) ∧
       (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₂ n).X i)) := by
-  sorry
+  obtain ⟨E, t, hbound, hflat, _⟩ := hP
+  obtain ⟨E', t', hbound', hflat', _⟩ := hP'
+  exact ⟨E, E, E', t, t, t', (fun n ↦ 𝟙 (E n)), (fun _ ↦ 0),
+    hbound, hflat, hbound, hflat, hbound', hflat'⟩
 
 end AlgebraicGeometry

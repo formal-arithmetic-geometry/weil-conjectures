@@ -14651,3 +14651,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:40 L: merged deliver/H2/Sheaf.CategoryTheory.MapExtendHomology (stage 3; reviewer PASS; first push; landing 20261014T054051-L-2106801 (proof); batch 20261014T054047; modules 1; new nodes 0)
 - 05:40 L: merged deliver/K4/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (stage 3; reviewer PASS; first push; landing 20261014T054051-L-2106902 (proof); batch 20261014T054047; modules 1; new nodes 0)
 - 05:40 L: merged deliver/K4/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone (stage 3; reviewer PASS; first push; landing 20261014T054052-L-2107160 (proof); batch 20261014T054047; modules 1; new nodes 0)
+- 05:40 L: merged deliver/M1/Sheaf.AlgebraicGeometry.FlatTelescopeArrowDiagramCore (stage 3; reviewer PASS; first push; landing 20261014T054052-L-2107287 (proof); batch 20261014T054047; modules 1; new nodes 0)
