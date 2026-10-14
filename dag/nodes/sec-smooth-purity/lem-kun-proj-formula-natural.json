@@ -3,40 +3,119 @@
  "blueprint": {
   "is": "lem-kun-proj-formula-natural",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Naturality of the projection formula",
- "statement": "Consider a\ncartesian square as in\n[def-weil-pbc-cartesian-square]. Let $\\Lambda$ be a ring,\n$E\\in D(X_{\\Et},\\Lambda)$, and $K\\in D(Y_{\\Et},\\Lambda)$. The\nfollowing square commutes:\n\n$$\n\\begin{array}{ccc}\ng^{-1}(Rf_*E\\kunotimes{\\Lambda}K)\n&\\xrightarrow{\\;g^{-1}\\mathrm{PF}_f\\;}&\ng^{-1}Rf_*(E\\kunotimes{\\Lambda}f^{-1}K)\\\\\n\\Big\\downarrow{\\scriptstyle \\Ex\\otimes1}&&\n\\Big\\downarrow{\\scriptstyle \\Ex}\\\\\nRf'_*(g')^{-1}E\\kunotimes{\\Lambda}g^{-1}K\n&\\xrightarrow{\\;\\mathrm{PF}_{f'}\\;}&\nRf'_*\\bigl((g')^{-1}E\\kunotimes{\\Lambda}(f')^{-1}g^{-1}K\\bigr).\n\\end{array}\n$$\n\nHere the canonical monoidal identifications for inverse image are\nunderstood. Thus, whenever the displayed exchange and\nprojection-formula morphisms are isomorphisms, their inverses satisfy the same compatibility.",
+ "statement": "Consider a\ncartesian square as in\n[def-weil-pbc-cartesian-square]. Let $\\Lambda$ be a commutative ring,\n$E\\in D(X_{\\Et},\\Lambda)$, and $K\\in D(Y_{\\Et},\\Lambda)$. The\nfollowing square commutes:\n\n$$\n\\begin{array}{ccc}\ng^{-1}(Rf_*E\\kunotimes{\\Lambda}K)\n&\\xrightarrow{\\;g^{-1}\\mathrm{PF}_f\\;}&\ng^{-1}Rf_*(E\\kunotimes{\\Lambda}f^{-1}K)\\\\\n\\Big\\downarrow{\\scriptstyle \\Ex\\otimes1}&&\n\\Big\\downarrow{\\scriptstyle \\Ex}\\\\\nRf'_*(g')^{-1}E\\kunotimes{\\Lambda}g^{-1}K\n&\\xrightarrow{\\;\\mathrm{PF}_{f'}\\;}&\nRf'_*\\bigl((g')^{-1}E\\kunotimes{\\Lambda}(f')^{-1}g^{-1}K\\bigr).\n\\end{array}\n$$\n\nHere $\\mathrm{PF}$ is the map of [def-kun-projection-formula-map], $\\Ex$ is the unbounded exchange of [def-kun-unbounded-exchange], and the tensor is [def-kun-derived-tensor]. The canonical monoidal identifications for inverse image are\nunderstood. Thus, whenever the displayed exchange and\nprojection-formula morphisms are isomorphisms, their inverses satisfy the same compatibility.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-proj-formula-natural.md",
   "place": "node lem-kun-proj-formula-natural, order 1753"
  },
  "stmt_deps": [
-  "def-weil-pbc-cartesian-square"
+  "def-weil-pbc-cartesian-square",
+  "def-kun-projection-formula-map",
+  "def-kun-unbounded-exchange",
+  "def-kun-derived-tensor"
  ],
  "proof": [
   {
-   "text": "Both composites are the mates of the same composite built from the\nunit–counit pair of\n[def-weil-pbc-inverse-image], the monoidality of the inverse\nimages [lem-kun-inverse-image-monoidal], and the\n$\\theta$-identification: the left\nvertical map is $\\Ex$ of the $E$-factor, and the two projections\nformula maps are the mates of $\\varepsilon_f\\otimes1$ (resp. $\\varepsilon_{f'}\\otimes1$); the compatibility of $\\theta$ with\nthe identifications of the pulled-back square makes the two routes\nequal, hence the diagram commutes by the injectivity of the\nadjunction bijection.",
+   "text": "Use the unbounded derived adjunctions and exchange formula of [def-kun-unbounded-exchange], and the projection map of [def-kun-projection-formula-map]. Write $L=f^{-1}$, $R=Rf_*$, $L'=f'^{-1}$, $R'=Rf'_*$, $G=g^{-1}$, $H=g'^{-1}$, and $\\theta:L'G\\to HL$. Write $c^u$ for the inverse of the canonical tensor comparison of [lem-kun-inverse-image-monoidal], and suppress these comparisons only after making them. The square identification of [def-weil-pbc-cartesian-square] is monoidal for these canonical comparisons: after identifying the source and target of $\\theta_{A\\otimes B}$ with tensor products, it is $\\theta_A\\otimes\\theta_B$. Indeed inverse-image composition and its tensor comparison, on a local pure tensor $a\\otimes b$, send it to the pair of pulled-back labels; either order of composition gives the same pair. The sheafification universal property makes these bilinear rules equal on sheaves. On K-flat flat-term models the same equality holds in every bidegree of the total tensor, with the same differential signs in both routes. The canonical derived comparisons are these comparisons on those models; uniqueness of extension in [lem-weil-pbc-site-derived-tensor-descent] makes the equality hold on all derived objects. This checks tensor compatibility explicitly, rather than inferring it from compatibility with pasted squares alone.",
    "uses": [
-    "def-weil-pbc-inverse-image",
+    "def-kun-unbounded-exchange",
+    "def-kun-projection-formula-map",
+    "lem-kun-inverse-image-monoidal",
+    "def-weil-pbc-cartesian-square",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-proj-formula-natural.md",
+    "place": "## Proof: explicit expansion of the common-mate calculation, step 1"
+   }
+  },
+  {
+   "text": "Put $M=RE\\otimes K$, $N=E\\otimes LK$, $B=HE\\otimes L'GK$, and $\\rho=1_{HE}\\otimes\\theta_K^{-1}:HN\\to B$, using the tensor comparisons of [lem-kun-inverse-image-monoidal]. From [def-kun-projection-formula-map] put $a=(\\varepsilon_{f,E}\\otimes1)c^f_{RE,K}:LM\\to N$, so $\\varepsilon_{f,N}L(\\mathrm{PF}_f)=a$. From [def-kun-unbounded-exchange], put $\\beta_A=H(\\varepsilon_{f,A})\\theta_{RA}$, so $\\varepsilon_{f',HA}L'(\\Ex_A)=\\beta_A$. The transpose under $L'\\dashv R'$ of the top-then-right route $R'\\rho\\circ\\Ex_N\\circ G(\\mathrm{PF}_f)$ is\n$$\\rho\\,\\beta_N\\,L'G(\\mathrm{PF}_f)=\\rho\\,H(\\varepsilon_{f,N})\\,HL(\\mathrm{PF}_f)\\,\\theta_M=\\rho\\,H(a)\\,\\theta_M.$$\nThe first equality is the defining exchange transpose and naturality of the counit for $\\rho$; the second is naturality of $\\theta$ for $\\mathrm{PF}_f$; the third is the defining projection transpose. No exchange map is assumed invertible.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "def-kun-unbounded-exchange",
     "lem-kun-inverse-image-monoidal"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-proj-formula-natural.md",
+    "place": "## Proof: explicit expansion of the common-mate calculation, step 2"
+   }
+  },
+  {
+   "text": "Identify $GM$ with $GRE\\otimes GK$ by [lem-kun-inverse-image-monoidal]. By [def-kun-projection-formula-map], the transpose of the left-then-bottom route is\n$$(\\varepsilon_{f',HE}\\otimes1)c^{f'}_{R'HE,GK}L'(\\Ex_E\\otimes1)=(\\varepsilon_{f',HE}L'\\Ex_E\\otimes1)c^{f'}_{GRE,GK}=(\\beta_E\\otimes1)c^{f'}_{GRE,GK}.$$\nHere the middle equality is bifunctoriality of the tensor comparison and the final equality is the exchange transpose in [def-kun-unbounded-exchange]. The expression from step 2 is the same morphism: expand $a$, use tensor compatibility of $\\theta$ from step 1 and naturality of the comparison for $H$, and obtain $(H\\varepsilon_{f,E}\\theta_{RE})\\otimes(\\theta_K^{-1}\\theta_K)$ after the source comparison. The second factor is the identity, leaving $(\\beta_E\\otimes1)c^{f'}_{GRE,GK}$.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "def-kun-unbounded-exchange",
+    "lem-kun-inverse-image-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-proj-formula-natural.md",
+    "place": "## Proof: explicit expansion of the common-mate calculation, step 3"
+   }
+  },
+  {
+   "text": "The adjunction Hom bijection of [def-kun-unbounded-exchange] is injective. The equal transposes in steps 2 and 3 therefore give commutativity of the displayed square. For its four arrows write $a$ for the top, $b$ for the bottom, $u$ for the left and $v$ for the right; the equality is $va=bu$. When all four arrows are invertible, multiplying by inverses gives $a^{-1}v^{-1}=u^{-1}b^{-1}$, the commutativity of the reversed square.",
+   "uses": [
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-proj-formula-natural.md",
+    "place": "## Proof: explicit expansion of the common-mate calculation, step 4"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-inverse-image",
-  "lem-kun-inverse-image-monoidal"
+  "def-kun-unbounded-exchange",
+  "def-kun-projection-formula-map",
+  "lem-kun-inverse-image-monoidal",
+  "def-weil-pbc-cartesian-square",
+  "lem-weil-pbc-site-derived-tensor-descent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-proj-formula-natural.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the projection formula with base change for derived etale sheaves",
+   "results": "Reviewer POST to leansearch.net/search returned Internal Server Error; no absence conclusion from this service.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mate of a monoidal natural transformation commutes with the projection map of adjoint functors",
+   "results": "Verified the ND item searches.jsonl entry at 2026-10-14T12:26:12Z: 8 hits, headed by CategoryTheory.mateEquiv_counit, mateEquiv_apply, mateEquiv, unit_mateEquiv, mateEquiv_counit_symm, unit_mateEquiv_symm, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, mateEquiv_symm_apply. Read Mathlib/CategoryTheory/Adjunction/Mates.lean:123-134 and Monoidal/Functor.lean:1036-1039; these give individual abstract mate identities, not the whole derived etale projection/base-change square.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"naturality\"",
+   "results": "Verified the ND item searches.jsonl entry at 2026-10-14T12:26:12Z: 0 hits, no service error.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|mate.*tensor",
+   "results": "Verified ND item searches.jsonl at 2026-10-14T12:26:03Z: 0 hits in Mathlib. Reviewer independently repeated rg -n -i with this pattern across /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib, also 0 hits.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +139,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-proj-formula-natural",
+  "worker": "stage1",
+  "summary": "Second reading repaired the coefficient typing and cited the existing unbounded derived exchange and projection-map definitions; wrote explicit transposes and tensor compatibility. No new nodes.",
+  "blueprint": "The sole proof paragraph: step 1 checks theta tensor compatibility, steps 2 and 3 compute the two common mates, step 4 applies injectivity and inverse composition.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Step 1 uses its two-variable uniqueness of natural transformations on K-flat flat-term representatives to extend the explicit monoidality equation for theta to all derived objects. The unit monoidality lemma gives the individual canonical comparisons, but does not state this localization uniqueness principle; no geometric Kunneth or projection-isomorphism step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-f2c9ff02d",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-f2c9ff02d (reviewer sub-agent of L); spot-checked: Read the mathematics in full and verified all four mate-calculus steps against the cited statements and Stacks 07A4, 07A7, 0B56 and 0E48. Repaired missing Mathlib-search records and the structured tensor-descent tool declaration. Coefficient correction is justified; no target weakened, new node, or dependency cycle. Corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
+ }
 }
