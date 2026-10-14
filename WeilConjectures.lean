@@ -2564,6 +2564,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseGerm
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCover
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverContinuity
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverDescent
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverEquivalence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExists
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseRank

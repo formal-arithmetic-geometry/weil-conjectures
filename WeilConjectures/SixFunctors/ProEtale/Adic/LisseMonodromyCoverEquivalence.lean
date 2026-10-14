@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverDescent
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverContinuity
 public import WeilConjectures.WeilSheaf.StalkTensor
 public import WeilConjectures.WeilSheaf.LisseDuality
 
@@ -113,15 +113,6 @@ variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}} {Ω : Type u} [Field Ω]
   (hU : ∀ (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseSheaf l Y), ∃ n : ℕ,
     Nonempty ((U.proj y)^*ᵃ[l].obj G.obj ≅ ⨁ fun _ : Fin n ↦ AdicSheaf.unit l (U.cover y)))
   [IsLocallyNoetherian Y] [CompactSpace Y] [IsRegular Y] [ConnectedSpace Y]
-
-include hU in
-/-- **The monodromy representations are continuous.** -/
-theorem lisseMonodromy_continuous_rep (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
-    (G : LisseSheaf l Y)
-    (φ : Module.Dual (PadicAlgCl l) (LisseMonodromy.StalkSpace t G))
-    (v : LisseMonodromy.StalkSpace t G) :
-    Continuous fun g : Aut (fiber t) ↦ φ ((U.lisseMonodromy hU).rep t G g v) := by
-  sorry
 
 /-- An element of the stalk of `M` killed by `φ : M ⟶ N` comes from the stalk of the kernel of
 `φ`: the stalk functor is left exact. -/
