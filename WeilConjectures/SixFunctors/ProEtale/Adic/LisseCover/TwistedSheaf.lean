@@ -303,4 +303,254 @@ theorem isSheaf_twistedSectionsPresheaf {S : Type u} (c : ↥(pullback f f) → 
   obtain ⟨i, x, hx⟩ := 𝒰.exists_eq u
   exact ⟨i, x, hx⟩
 
+section Restrict
+
+variable {W : Scheme.{u}} (j : W ⟶ V) {S : Type*}
+
+/-- The map `W ×_Y W ⟶ V ×_Y V` induced by `j : W ⟶ V`. -/
+noncomputable abbrev pairRestrict : pullback (j ≫ f) (j ≫ f) ⟶ pullback f f :=
+  pullback.map (j ≫ f) (j ≫ f) f f j j (𝟙 Y) (by simp) (by simp)
+
+variable (c : ↥(pullback f f) → S → S)
+
+/-- The restriction of a descent cocycle along `j : W ⟶ V`. -/
+noncomputable def restrictCocycle : ↥(pullback (j ≫ f) (j ≫ f)) → S → S :=
+  fun z ↦ c ((pairRestrict j).base z)
+
+/-- The map `W ×_Y T ⟶ V ×_Y T` induced by `j : W ⟶ V`. -/
+noncomputable abbrev pullbackMapLeft {T : Scheme.{u}} (π : T ⟶ Y) :
+    pullback (j ≫ f) π ⟶ pullback f π :=
+  pullback.map (j ≫ f) π f π j (𝟙 T) (𝟙 Y) (by simp) (by simp)
+
+variable {j c}
+
+lemma IsDescentCocycle.restrict (hc : IsDescentCocycle f c) :
+    IsDescentCocycle (j ≫ f) (restrictCocycle j c) := by
+  refine ⟨fun s ↦ (hc.isLocallyConstant s).comp_continuous (pairRestrict j).base.hom.continuous,
+    fun z ↦ hc.bijective _, fun w ↦ ?_, fun w ↦ ?_⟩
+  · have e : pullback.diagonal (j ≫ f) ≫ pairRestrict j = j ≫ pullback.diagonal f :=
+      pullback.hom_ext (by simp) (by simp)
+    change c ((pullback.diagonal (j ≫ f) ≫ pairRestrict j).base w) = id
+    rw [e, Scheme.Hom.comp_apply]
+    exact hc.diagonal _
+  · let T₃ : tripleProduct (j ≫ f) ⟶ tripleProduct f :=
+      pullback.map _ _ _ _ (pairRestrict j) (pairRestrict j) j (by simp) (by simp)
+    have e₁ : T₃ ≫ tripleProj₁₃ f = tripleProj₁₃ (j ≫ f) ≫ pairRestrict j := by
+      apply pullback.hom_ext <;> simp [T₃]
+    have e₂ : T₃ ≫ pullback.fst _ _ = pullback.fst _ _ ≫ pairRestrict j := by simp [T₃]
+    have e₃ : T₃ ≫ pullback.snd _ _ = pullback.snd _ _ ≫ pairRestrict j := by simp [T₃]
+    have := hc.cocycle (T₃.base w)
+    simp only [← Scheme.Hom.comp_apply, e₁, e₂, e₃] at this
+    exact this
+
+lemma IsTwistedSection.restrict {T : Scheme.{u}} {π : T ⟶ Y} {σ : ↥(pullback f π) → S}
+    (hσ : IsTwistedSection f c π σ) :
+    IsTwistedSection (j ≫ f) (restrictCocycle j c) π (σ ∘ (pullbackMapLeft j π).base) := by
+  let P₂ : pullback (pullback.snd (j ≫ f) π) (pullback.snd (j ≫ f) π) ⟶
+      pullback (pullback.snd f π) (pullback.snd f π) :=
+    pullback.map _ _ _ _ (pullbackMapLeft j π) (pullbackMapLeft j π) (𝟙 T) (by simp) (by simp)
+  have e₁ : P₂ ≫ pullback.fst _ _ = pullback.fst _ _ ≫ pullbackMapLeft j π := by simp [P₂]
+  have e₂ : P₂ ≫ pullback.snd _ _ = pullback.snd _ _ ≫ pullbackMapLeft j π := by simp [P₂]
+  have e₃ : P₂ ≫ twistedPairMap f π = twistedPairMap (j ≫ f) π ≫ pairRestrict j := by
+    apply pullback.hom_ext <;> simp [P₂]
+  refine ⟨hσ.1.comp_continuous (pullbackMapLeft j π).base.hom.continuous, fun w ↦ ?_⟩
+  have := hσ.2 (P₂.base w)
+  simp only [← Scheme.Hom.comp_apply, e₁, e₂, e₃] at this
+  exact this
+
+variable {T : Scheme.{u}} {π : T ⟶ Y}
+
+/-- Twisted sections are determined by their restrictions to a cover `W` of the image of the
+base. -/
+lemma IsTwistedSection.eq_of_restrict_eq (hcov : ∀ t, ∃ w, (j ≫ f).base w = π.base t)
+    {σ₁ σ₂ : ↥(pullback f π) → S} (h₁ : IsTwistedSection f c π σ₁)
+    (h₂ : IsTwistedSection f c π σ₂)
+    (h : σ₁ ∘ (pullbackMapLeft j π).base = σ₂ ∘ (pullbackMapLeft j π).base) : σ₁ = σ₂ := by
+  funext x
+  obtain ⟨w, hw⟩ := hcov ((pullback.snd f π).base x)
+  obtain ⟨x', -, hx'⟩ := Scheme.Pullback.exists_preimage_pullback (f := j ≫ f) (g := π) w _ hw
+  have hx : (pullback.snd f π).base x =
+      (pullback.snd f π).base ((pullbackMapLeft j π).base x') := by
+    rw [← Scheme.Hom.comp_apply]
+    simp [hx']
+  obtain ⟨r, hr₁, hr₂⟩ := Scheme.Pullback.exists_preimage_pullback (f := pullback.snd f π)
+    (g := pullback.snd f π) x _ hx
+  rw [← hr₁, h₁.2 r, h₂.2 r, hr₂]
+  exact congrArg _ (congrFun h x')
+
+/-- **Twisted sections extend from a cover `W` of the image of the base.** -/
+lemma IsTwistedSection.exists_restrict_eq (hc : IsDescentCocycle f c)
+    (hcov : ∀ t, ∃ w, (j ≫ f).base w = π.base t) [WeaklyEtale (j ≫ f)]
+    [QuasiCompact (pullback.snd (j ≫ f) π)] {τ : ↥(pullback (j ≫ f) π) → S}
+    (hτ : IsTwistedSection (j ≫ f) (restrictCocycle j c) π τ) :
+    ∃ σ, IsTwistedSection f c π σ ∧ σ ∘ (pullbackMapLeft j π).base = τ := by
+  classical
+  set J := pullbackMapLeft j π
+  set sP := pullback.snd f π
+  set sW := pullback.snd (j ≫ f) π
+  have hJs : J ≫ sP = sW := by simp [J, sP, sW]
+  have hJf : J ≫ pullback.fst f π = pullback.fst (j ≫ f) π ≫ j := by simp [J]
+  have hsW : Function.Surjective sW.base := by
+    intro t
+    obtain ⟨w, hw⟩ := hcov t
+    obtain ⟨x', -, hx'⟩ := Scheme.Pullback.exists_preimage_pullback (f := j ≫ f) (g := π) w t hw
+    exact ⟨x', hx'⟩
+  have : Surjective sW := ⟨hsW⟩
+  -- the cover `R' = (V ×_Y T) ×_T (W ×_Y T)` of `V ×_Y T`
+  set a₁ := pullback.fst sP sW
+  set a₂ := pullback.snd sP sW
+  have hm : (a₁ ≫ pullback.fst f π) ≫ f = (a₂ ≫ pullback.fst (j ≫ f) π ≫ j) ≫ f := by
+    simp only [Category.assoc, pullback.condition]
+    simp only [← Category.assoc]
+    exact congrArg (· ≫ π) pullback.condition
+  set mR := pullback.lift (a₁ ≫ pullback.fst f π) (a₂ ≫ pullback.fst (j ≫ f) π ≫ j) hm
+  let φ : ↥(pullback sP sW) → S := fun r ↦ c (mR.base r) (τ (a₂.base r))
+  have hφlc : IsLocallyConstant φ := by
+    rw [IsLocallyConstant.iff_eventually_eq]
+    intro r₀
+    have h₁ := (IsLocallyConstant.iff_eventually_eq _).1
+      (hτ.1.comp_continuous a₂.base.hom.continuous) r₀
+    have h₂ := (IsLocallyConstant.iff_eventually_eq _).1
+      ((hc.isLocallyConstant (τ (a₂.base r₀))).comp_continuous mR.base.hom.continuous) r₀
+    filter_upwards [h₁, h₂] with r hr₁ hr₂
+    simp only [Function.comp_apply] at hr₁ hr₂
+    simp only [φ, hr₁, hr₂]
+  -- `φ` is constant on the fibres of `a₁`
+  have hφfib (r₁ r₂ : ↥(pullback sP sW)) (h : a₁.base r₁ = a₁.base r₂) : φ r₁ = φ r₂ := by
+    obtain ⟨ρ, hρ₁, hρ₂⟩ := Scheme.Pullback.exists_preimage_pullback (f := a₁) (g := a₁) r₁ r₂ h
+    set b₁ := pullback.fst a₁ a₁
+    set b₂ := pullback.snd a₁ a₁
+    have hb : (b₁ ≫ a₂) ≫ sW = (b₂ ≫ a₂) ≫ sW := by
+      have e1 : a₂ ≫ sW = a₁ ≫ sP := pullback.condition.symm
+      have e2 : b₁ ≫ a₁ = b₂ ≫ a₁ := pullback.condition
+      rw [Category.assoc, Category.assoc, e1, reassoc_of% e2]
+    let Ψ : pullback a₁ a₁ ⟶ pullback sW sW := pullback.lift _ _ hb
+    have hΨ₁ : Ψ ≫ pullback.fst sW sW = b₁ ≫ a₂ := pullback.lift_fst _ _ _
+    have hΨ₂ : Ψ ≫ pullback.snd sW sW = b₂ ≫ a₂ := pullback.lift_snd _ _ _
+    have hm₂ : mR ≫ pullback.snd f f = a₂ ≫ pullback.fst (j ≫ f) π ≫ j := pullback.lift_snd _ _ _
+    have hm₁ : mR ≫ pullback.fst f f = a₁ ≫ pullback.fst f π := pullback.lift_fst _ _ _
+    have hW₁ : twistedPairMap (j ≫ f) π ≫ pairRestrict j ≫ pullback.fst f f =
+        pullback.fst sW sW ≫ pullback.fst (j ≫ f) π ≫ j := by simp +zetaDelta
+    have hW₂ : twistedPairMap (j ≫ f) π ≫ pairRestrict j ≫ pullback.snd f f =
+        pullback.snd sW sW ≫ pullback.fst (j ≫ f) π ≫ j := by simp +zetaDelta
+    have hΦ : (b₁ ≫ mR) ≫ pullback.snd f f =
+        (Ψ ≫ twistedPairMap (j ≫ f) π ≫ pairRestrict j) ≫ pullback.fst f f := by
+      rw [Category.assoc, hm₂, Category.assoc, Category.assoc, hW₁, reassoc_of% hΨ₁]
+    let Φ : pullback a₁ a₁ ⟶ tripleProduct f := pullback.lift _ _ hΦ
+    have hΦ₁₃ : Φ ≫ tripleProj₁₃ f = b₂ ≫ mR := by
+      apply pullback.hom_ext
+      · rw [Category.assoc, pullback.lift_fst, pullback.lift_fst_assoc, Category.assoc, hm₁,
+          Category.assoc, hm₁, ← Category.assoc, ← Category.assoc]
+        exact congrArg (· ≫ pullback.fst f π) pullback.condition
+      · rw [Category.assoc, pullback.lift_snd, pullback.lift_snd_assoc, Category.assoc,
+          Category.assoc, hW₂, Category.assoc, hm₂, reassoc_of% hΨ₂]
+    have hco := hc.cocycle (Φ.base ρ)
+    have hτρ := hτ.2 (Ψ.base ρ)
+    have e₁ : Φ ≫ pullback.fst _ _ = b₁ ≫ mR := pullback.lift_fst _ _ _
+    have e₂ : Φ ≫ pullback.snd _ _ = Ψ ≫ twistedPairMap (j ≫ f) π ≫ pairRestrict j :=
+      pullback.lift_snd _ _ _
+    simp only [← Scheme.Hom.comp_apply, hΦ₁₃, e₁, e₂] at hco
+    have hco' := congrFun hco (τ (a₂.base (b₂.base ρ)))
+    simp only [restrictCocycle] at hτρ
+    simp only [Scheme.Hom.comp_apply, Function.comp_apply] at hco' hτρ
+    have p₁ : (pullback.fst sW sW).base (Ψ.base ρ) = a₂.base (b₁.base ρ) := by
+      rw [← Scheme.Hom.comp_apply, hΨ₁, Scheme.Hom.comp_apply]
+    have p₂ : (pullback.snd sW sW).base (Ψ.base ρ) = a₂.base (b₂.base ρ) := by
+      rw [← Scheme.Hom.comp_apply, hΨ₂, Scheme.Hom.comp_apply]
+    rw [p₁, p₂] at hτρ
+    change c (mR.base r₁) (τ (a₂.base r₁)) = c (mR.base r₂) (τ (a₂.base r₂))
+    rw [← hρ₁, ← hρ₂, hco', hτρ]
+  -- the descended function
+  have ha₁ : Function.Surjective a₁.base := by
+    intro x
+    obtain ⟨x', hx'⟩ := hsW (sP.base x)
+    obtain ⟨r, hr, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := sP) (g := sW) x x'
+      hx'.symm
+    exact ⟨r, hr⟩
+  choose ra hra using ha₁
+  let σ : ↥(pullback f π) → S := fun x ↦ φ (ra x)
+  have hσa (r : ↥(pullback sP sW)) : σ (a₁.base r) = φ r := hφfib _ _ (hra _)
+  have hcov' : Presieve.ofArrows (fun _ : Unit ↦ pullback sP sW) (fun _ ↦ a₁) ∈
+      Scheme.proetalePrecoverage (pullback f π) := by
+    rw [Presieve.ofArrows_pUnit]
+    have : Surjective a₁ := ⟨fun x ↦ ⟨ra x, hra x⟩⟩
+    exact Scheme.Hom.singleton_mem_propQCPrecoverage (P := @WeaklyEtale) inferInstance
+  refine ⟨σ, ⟨IsLocallyConstant.iff_isOpen_fiber.2 fun s ↦ ?_, fun w ↦ ?_⟩, ?_⟩
+  · refine Scheme.isOpen_of_isOpen_preimage_of_mem_proetalePrecoverage _ hcov' _ fun _ ↦ ?_
+    have : a₁.base ⁻¹' (σ ⁻¹' {s}) = φ ⁻¹' {s} := by
+      ext r
+      simp +zetaDelta [hσa]
+    rw [this]
+    exact hφlc.isOpen_fiber s
+  · -- the twisted condition, through a point of `R_T ×_{V ×_Y T} R'`
+    set r₁ := pullback.fst sP sP
+    set r₂ := pullback.snd sP sP
+    obtain ⟨ζ, hζ₁, hζ₂⟩ := Scheme.Pullback.exists_preimage_pullback (f := r₂) (g := a₁) w
+      (ra (r₂.base w)) (hra _).symm
+    set d₁ := pullback.fst r₂ a₁
+    set d₂ := pullback.snd r₂ a₁
+    have e₀ : d₁ ≫ r₂ = d₂ ≫ a₁ := pullback.condition
+    have eR : r₁ ≫ sP = r₂ ≫ sP := pullback.condition
+    have eA : a₁ ≫ sP = a₂ ≫ sW := pullback.condition
+    have hΛ : (d₁ ≫ r₁) ≫ sP = (d₂ ≫ a₂) ≫ sW := by
+      rw [Category.assoc, eR, reassoc_of% e₀, eA, Category.assoc]
+    let Λ : pullback r₂ a₁ ⟶ pullback sP sW := pullback.lift _ _ hΛ
+    have hΛ₁ : Λ ≫ a₁ = d₁ ≫ r₁ := pullback.lift_fst _ _ _
+    have hΛ₂ : Λ ≫ a₂ = d₂ ≫ a₂ := pullback.lift_snd _ _ _
+    have hm₂ : mR ≫ pullback.snd f f = a₂ ≫ pullback.fst (j ≫ f) π ≫ j := pullback.lift_snd _ _ _
+    have hm₁ : mR ≫ pullback.fst f f = a₁ ≫ pullback.fst f π := pullback.lift_fst _ _ _
+    have hT₁ : twistedPairMap f π ≫ pullback.fst f f = r₁ ≫ pullback.fst f π :=
+      pullback.lift_fst _ _ _
+    have hT₂ : twistedPairMap f π ≫ pullback.snd f f = r₂ ≫ pullback.fst f π :=
+      pullback.lift_snd _ _ _
+    have hΦ' : (d₁ ≫ twistedPairMap f π) ≫ pullback.snd f f =
+        (d₂ ≫ mR) ≫ pullback.fst f f := by
+      rw [Category.assoc, hT₂, reassoc_of% e₀, Category.assoc, hm₁]
+    let Φ' : pullback r₂ a₁ ⟶ tripleProduct f := pullback.lift _ _ hΦ'
+    have hΦ'₁₃ : Φ' ≫ tripleProj₁₃ f = Λ ≫ mR := by
+      apply pullback.hom_ext
+      · rw [Category.assoc, pullback.lift_fst, pullback.lift_fst_assoc, Category.assoc, hT₁,
+          Category.assoc, hm₁, reassoc_of% hΛ₁]
+      · rw [Category.assoc, pullback.lift_snd, pullback.lift_snd_assoc, Category.assoc, hm₂,
+          Category.assoc, hm₂, reassoc_of% hΛ₂]
+    have hco := hc.cocycle (Φ'.base ζ)
+    have e₁ : Φ' ≫ pullback.fst _ _ = d₁ ≫ twistedPairMap f π := pullback.lift_fst _ _ _
+    have e₂ : Φ' ≫ pullback.snd _ _ = d₂ ≫ mR := pullback.lift_snd _ _ _
+    simp only [← Scheme.Hom.comp_apply, hΦ'₁₃, e₁, e₂] at hco
+    have hco' := congrFun hco (τ (a₂.base (d₂.base ζ)))
+    simp only [Scheme.Hom.comp_apply, Function.comp_apply] at hco'
+    have q₁ : r₁.base w = a₁.base (Λ.base ζ) := by
+      rw [← Scheme.Hom.comp_apply, hΛ₁, Scheme.Hom.comp_apply, hζ₁]
+    have q₂ : a₂.base (Λ.base ζ) = a₂.base (d₂.base ζ) := by
+      rw [← Scheme.Hom.comp_apply, hΛ₂, Scheme.Hom.comp_apply]
+    have q₃ : r₂.base w = a₁.base (d₂.base ζ) := by
+      rw [← hζ₁, ← Scheme.Hom.comp_apply, e₀, Scheme.Hom.comp_apply]
+    change σ (r₁.base w) = c ((twistedPairMap f π).base w) (σ (r₂.base w))
+    rw [q₁, hσa, q₃, hσa]
+    change c (mR.base (Λ.base ζ)) (τ (a₂.base (Λ.base ζ))) =
+      c ((twistedPairMap f π).base w) (c (mR.base (d₂.base ζ)) (τ (a₂.base (d₂.base ζ))))
+    rw [q₂, hco', hζ₁]
+  · -- the restriction is `τ`
+    funext x'
+    have hδ : J ≫ sP = 𝟙 _ ≫ sW := by rw [hJs, Category.id_comp]
+    let δ : pullback (j ≫ f) π ⟶ pullback sP sW := pullback.lift J (𝟙 _) hδ
+    have h₁ : δ ≫ a₁ = J := pullback.lift_fst _ _ _
+    have h₂ : δ ≫ a₂ = 𝟙 _ := pullback.lift_snd _ _ _
+    have hm₂ : mR ≫ pullback.snd f f = a₂ ≫ pullback.fst (j ≫ f) π ≫ j := pullback.lift_snd _ _ _
+    have hm₁ : mR ≫ pullback.fst f f = a₁ ≫ pullback.fst f π := pullback.lift_fst _ _ _
+    have hδm : δ ≫ mR = (pullback.fst (j ≫ f) π ≫ j) ≫ pullback.diagonal f := by
+      apply pullback.hom_ext
+      · rw [Category.assoc, hm₁, reassoc_of% h₁, hJf]
+        simp
+      · rw [Category.assoc, hm₂, reassoc_of% h₂]
+        simp
+    simp only [Function.comp_apply]
+    rw [← h₁, Scheme.Hom.comp_apply, hσa]
+    change c (mR.base (δ.base x')) (τ (a₂.base (δ.base x'))) = τ x'
+    rw [← Scheme.Hom.comp_apply, hδm, ← Scheme.Hom.comp_apply δ a₂, h₂, Scheme.Hom.comp_apply,
+      hc.diagonal]
+    rfl
+
+end Restrict
+
 end AlgebraicGeometry
