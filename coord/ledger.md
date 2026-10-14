@@ -14297,7 +14297,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:39 L: merged deliver/B2/Sheaf.AlgebraicGeometry.HigherDirectImageOverMapCoefficient (stage 3; reviewer PASS; first push; landing 20261014T023931-L-13619 (interface); batch 20261014T023929; modules 1; new nodes 0; change records: coord/changes/B2-coefficient-structural-congruence.md)
 - 02:39 L: merged deliver/C1/Sheaf.AlgebraicGeometry.SelfTorAugmentedResolutionCharts (stage 3; reviewer PASS; first push; landing 20261014T023931-L-13770 (interface); batch 20261014T023929; modules 4; new nodes 3)
 - 02:39 L: merged deliver/C1/Sheaf.RingTheory.LimitModuleLocalizationRingData (stage 3; reviewer PASS; first push; landing 20261014T023932-L-14022 (interface); batch 20261014T023929; modules 2; new nodes 1)
-- 02:39 L: merged deliver/C3/Sheaf.AlgebraicGeometry.ClosedImmersionResidueFieldIso (stage 3; reviewer PASS; first push; landing 20261014T023932-L-14180 (interface); batch 20261014T023929; modules 3; new nodes 0; change records: coord/changes/isIso_residueFieldMap_of_isClosedImmersion.md)
 - 02:39 L: merged deliver/F2/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore (stage 3; reviewer PASS; first push; landing 20261014T023933-L-14308 (proof); batch 20261014T023929; modules 1; new nodes 0)
 - 02:39 L: merged deliver/F3/Sheaf.RingTheory.PrimeLocalizationEtaleAlgebraModel (stage 3; reviewer PASS; first push; landing 20261014T023933-L-14489 (proof); batch 20261014T023929; modules 1; new nodes 0)
 - 02:39 L: merged deliver/K3/Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitRepresentative (stage 3; reviewer PASS; first push; landing 20261014T023934-L-14694 (interface); batch 20261014T023929; modules 3; new nodes 2)
@@ -14312,7 +14311,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:39 L: merged deliver/T4/Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal (stage 3; reviewer PASS; first push; landing 20261014T023938-L-16201 (proof); batch 20261014T023929; modules 1; new nodes 0)
 - 02:39 L: merged deliver/T4/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (stage 3; reviewer PASS; first push; landing 20261014T023938-L-16448 (proof); batch 20261014T023929; modules 1; new nodes 0)
 - 02:39 L: merged deliver/T4/Sheaf.Paper.CartierEquality (stage 3; reviewer PASS; first push; landing 20261014T023939-L-16612 (proof); batch 20261014T023929; modules 1; new nodes 0)
-- 02:39 L: merged deliver/U1/Sheaf.Paper.CechCupPullbackCompat (stage 3; reviewer PASS; first push; landing 20261014T023939-L-16739 (interface); batch 20261014T023929; modules 2; new nodes 1)
 - 02:39 L: merged deliver/V2/Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed (stage 3; reviewer PASS; first push; landing 20261014T023940-L-16907 (proof); batch 20261014T023929; modules 1; new nodes 0)
 - 02:39 L: merged deliver/V2/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (stage 3; reviewer PASS; first push; landing 20261014T023940-L-17109 (proof); batch 20261014T023929; modules 1; new nodes 0)
 - 02:39 L: merged deliver/V3/Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationLocalizationComparison (stage 3; reviewer PASS; after a return; landing 20261014T023940-L-17256 (interface); batch 20261014T023929; modules 2; new nodes 0; change records: coord/changes/root-normalization-localization-mono.md)
@@ -14328,3 +14326,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:43 L: returned deliver/D2/Sheaf.Algebra.Homology.TensorBicomplex (reviewer RETURN: (reviewer X-ae6f7, head ae6f73591) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.Ten)
 - 02:44 L: returned deliver/N1/Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation (reviewer RETURN: (reviewer X-31297, head 31297db4d) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Sq)
 - 02:45 L: returned deliver/Y3/Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker (reviewer RETURN: (reviewer X-ac9bc, head ac9bce15d) F (brief points 5 and 7): In coord/reports/Y3/Sheaf.AlgebraicGeometry.Curve.PicProper)
+
+- 10:49 L: batch 20261014T023929 dependency take-out
