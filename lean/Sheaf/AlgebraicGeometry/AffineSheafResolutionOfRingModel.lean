@@ -5,6 +5,7 @@ Authors: SHEAF groups H1 and W2
 -/
 module
 
+public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.QuasiIso
@@ -228,5 +229,98 @@ theorem exists_affine_sheaf_resolution_of_ring_model
   have : IsIso q := HomologicalComplex.Hom.isIso_of_components q
   let e := (F.mapHomologicalComplex (.up ℤ)).map f ≫ q
   exact ⟨Q, hQ, hQfree, e, by dsimp [e]; infer_instance⟩
+
+end AlgebraicGeometry.Scheme.Modules
+
+set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+universe v u' v'
+open CategoryTheory CategoryTheory.Limits
+
+namespace CategoryTheory
+
+/-- Exact associated objects and the termwise affine counit compute global-section
+homology, without claiming that global sections are exact on all sheaves. -/
+noncomputable def sectionsHomologyIso
+    {C : Type u} [Category.{v} C] [Abelian C]
+    {D : Type u'} [Category.{v'} D] [Abelian D]
+    (L : C ⥤ D) (R : D ⥤ C) [L.Additive] [R.Additive]
+    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    (unit : 𝟭 C ≅ L ⋙ R) (ε : R ⋙ L ⟶ 𝟭 D)
+    (K : CochainComplex D ℤ) (hε : ∀ n : ℤ, IsIso (ε.app (K.X n))) (n : ℤ) :
+    ((R.mapHomologicalComplex (.up ℤ)).obj K).homology n ≅ R.obj (K.homology n) := by
+  let H := (R.mapHomologicalComplex (.up ℤ)).obj K
+  let q : (L.mapHomologicalComplex (.up ℤ)).obj H ⟶ K :=
+    { f i := ε.app (K.X i)
+      comm' i j hij := (ε.naturality (K.d i j)).symm }
+  have : ∀ i : ℤ, IsIso (q.f i) := hε
+  have : IsIso q := HomologicalComplex.Hom.isIso_of_components q
+  let c : L.obj (H.homology n) ≅ K.homology n :=
+    ((H.sc n).mapHomologyIso L).symm ≪≫
+      (HomologicalComplex.homologyFunctor D (.up ℤ) n).mapIso (asIso q)
+  exact unit.app (H.homology n) ≪≫ R.mapIso c
+
+
+end CategoryTheory
+
+namespace AlgebraicGeometry.Scheme.Modules
+
+/-- Global sections commute with homology of a termwise quasi-coherent complex
+on an affine scheme, via the exact associated-sheaf functor and its counit.
+Source: Stacks Project, Tags 01IB and 01HV. -/
+theorem nonempty_affineSectionsHomologyIso
+    (X : Scheme.{u}) [IsAffine X] (K : CochainComplex X.Modules ℤ)
+    (hqc : ∀ n : ℤ, (K.X n).IsQuasicoherent) (n : ℤ) :
+    Nonempty ((((SheafOfModules.evaluation.{u} X.ringCatSheaf (.op ⊤)).mapHomologicalComplex
+        (.up ℤ)).obj K).homology n ≅
+      (SheafOfModules.evaluation.{u} X.ringCatSheaf (.op ⊤)).obj (K.homology n)) := by
+  let A := Γ(X, ⊤)
+  let T := tilde.functor A
+  let R := restrictFunctor X.toSpecΓ
+  let G := SheafOfModules.evaluation.{u} X.ringCatSheaf (.op ⊤)
+  let F := T ⋙ R
+  let H := pushforward X.toSpecΓ
+  let α : G ≅ H ⋙ moduleSpecΓFunctor (R := A) :=
+    NatIso.ofComponents (fun M ↦ LinearEquiv.toModuleIso
+      (X₁ := G.obj M) (X₂ := moduleSpecΓFunctor.obj (H.obj M))
+      { __ := AddEquiv.refl _
+        map_smul' a m := (pushforward_spec_smul X M a m).symm })
+      (by intro M N f; rfl)
+  let adj : F ⊣ G :=
+    ((tilde.adjunction (R := A)).comp (restrictAdjunction X.toSpecΓ)).ofNatIsoRight α.symm
+  let E : (Spec A).Modules ≌ X.Modules := CategoryTheory.Equivalence.mk
+    (restrictFunctor X.isoSpec.hom) (restrictFunctor X.isoSpec.inv)
+    ((restrictFunctorComp X.isoSpec.inv X.isoSpec.hom).symm ≪≫
+      restrictFunctorCongr X.isoSpec.inv_hom_id ≪≫ restrictFunctorId).symm
+    ((restrictFunctorComp X.isoSpec.hom X.isoSpec.inv).symm ≪≫
+      restrictFunctorCongr X.isoSpec.hom_inv_id ≪≫ restrictFunctorId)
+  let : R.Full := E.fullyFaithfulFunctor.full
+  let : R.Faithful := E.fullyFaithfulFunctor.faithful
+  let : T.IsLeftAdjoint := (tilde.adjunction (R := A)).isLeftAdjoint
+  let := preservesBinaryBiproducts_of_preservesBinaryCoproducts T
+  let : T.Additive := Functor.additive_of_preservesBinaryBiproducts T
+  let : G.Additive := ⟨rfl⟩
+  let : T.Full := (tilde.fullyFaithfulFunctor (R := A)).full
+  let : T.Faithful := (tilde.fullyFaithfulFunctor (R := A)).faithful
+  let : F.Additive := adj.left_adjoint_additive
+  have : IsIso adj.unit := inferInstance
+  have : PreservesFiniteLimits T := by
+    let : ∀ {M N : ModuleCat.{u} A} (f : M ⟶ N),
+        PreservesLimit (parallelPair f 0) T :=
+      fun {_ _} f ↦ tilde_preservesKernel (A : Type u) f
+    exact Functor.preservesFiniteLimits_of_preservesKernels _
+  let : PreservesFiniteLimits R := by
+    change PreservesFiniteLimits (restrictFunctor X.toSpecΓ)
+    infer_instance
+  let : PreservesFiniteColimits R := by
+    change PreservesFiniteColimits (restrictFunctor X.toSpecΓ)
+    infer_instance
+  let : PreservesFiniteLimits F := comp_preservesFiniteLimits _ _
+  let : PreservesFiniteColimits F := comp_preservesFiniteColimits _ _
+  let ε := Classical.choose (exists_affineChart_counit X)
+  have hε := Classical.choose_spec (exists_affineChart_counit X)
+  exact ⟨CategoryTheory.sectionsHomologyIso F G (asIso adj.unit) ε K (fun i ↦ hε _ (hqc i)) n⟩
+
 
 end AlgebraicGeometry.Scheme.Modules

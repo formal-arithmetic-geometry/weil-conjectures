@@ -8,8 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
-import Sheaf.AlgebraicGeometry.ProperFlatCohomologyModel
-import Sheaf.AlgebraicGeometry.ProperCohomologyFiniteFreeResolution
+import Sheaf.AlgebraicGeometry.DescentFirstProperFlatCechModel
 
 /-! # Bounded flat models for proper relatively flat cohomology
 
@@ -65,11 +64,6 @@ theorem exists_proper_flat_cech_model {X T : Scheme.{u}} (f : X ⟶ T) (F : X.Mo
         [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ,
         Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj C).homology q ≅
           (higherDirectImage f' q).obj ((Modules.pullback g').obj F))  := by
-  obtain ⟨U, C, d, ht, hU, hCge, hCle, hCflat, hCqc, hpc, hcomp⟩ :=
-    exists_proper_flat_cohomology_model f F hF t
-  have : IsAffine U.toScheme := hU
-  obtain ⟨Q, hQle, hQfree, e, he⟩ :=
-    exists_proper_cohomology_finite_free_resolution U C d hCle hCqc hpc
-  exact ⟨U, C, Q, d, ht, hCge, hCle, hCflat, hQle, hQfree, ⟨e, he⟩, hcomp⟩
+  exact descent_first_exists_proper_flat_cech_model f F hF t
 
 end AlgebraicGeometry.Scheme.Modules

@@ -5,6 +5,7 @@ Authors: SHEAF group R2
 -/
 module
 
+public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
@@ -15,7 +16,7 @@ import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 import Sheaf.AlgebraicGeometry.FinitePresentationIntegralFiltration
 import Sheaf.AlgebraicGeometry.IntegralIdealProperCohomology
 import Sheaf.AlgebraicGeometry.CohomologyFiniteExtension
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import Sheaf.CategoryTheory.TruncationHypercohomology
 import Mathlib.Data.Int.Interval
 import all Sheaf.AlgebraicGeometry.DerivedDirectImageBoundedBelowQCoh
@@ -128,6 +129,16 @@ private theorem finite_sections_proper {X T : Scheme.{u}} (f : X ⟶ T) [IsPrope
   let eR : Γ((higherDirectImage f q).obj ℱ, ⊤) →ₗ[R] ℱ.H q :=
     { e.toAddMonoidHom with map_smul' := fun a x ↦ e.map_smulₛₗ a x }
   exact Module.Finite.equiv (LinearEquiv.ofBijective eR he).symm
+
+
+/-- Higher direct images of a finitely presented quasi-coherent module have finite
+global sections over a Noetherian affine base under a proper morphism.
+Source: Stacks Project, Tag 02O6, by integral-ideal devissage. -/
+theorem finite_sections_proper_on_affine {X T : Scheme.{u}} (f : X ⟶ T) [IsProper f]
+    [HasInjectiveResolutions X.Modules] (F : X.Modules) [F.IsFinitePresentation]
+    [IsAffine T] [IsNoetherianRing Γ(T, ⊤)] [F.IsQuasicoherent] (q : ℕ) :
+    Module.Finite Γ(T, ⊤) Γ((higherDirectImage f q).obj F, ⊤) :=
+  finite_sections_proper f F q
 
 
 /-- Affine-local finite cohomology gives coherent higher direct images (Tag 02O5). -/
