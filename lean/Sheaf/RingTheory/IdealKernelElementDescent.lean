@@ -12,7 +12,8 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.RingTheory.Ideal.Maps
 
-import Sheaf.RingTheory.ColimitFlatRelationDescent
+import Sheaf.RingTheory.ColimitFlatRelationDescentElementwise
+import Mathlib.Algebra.Category.Ring.FilteredColimits
 
 /-!
 # Descent of one element of an ideal multiplication kernel
@@ -101,7 +102,8 @@ theorem exists_stage_ideal_kernel_element_vanishes
     rw [heq, map_sum] at hk
     simpa only [TensorProduct.lift.tmul, LinearMap.comp_apply, LinearMap.lsmul_apply,
       Submodule.subtype_apply] using hk
-  obtain ⟨j, f, m, c, y, hx, hc⟩ := exists_stage_flat_relation_factorization
+  obtain ⟨j, f, m, c, y, hx, hc⟩ :=
+    exists_stage_flat_relation_factorization_of_preserves
     A B N φ hcomm hscalar ψ hψ hlimitScalar hflat i (fun p ↦ (a p : A.obj i)) x hrel
   let := Module.compHom (N.obj j) (φ j)
   have hη (r : A.obj i) (z : N.obj i) :

@@ -1,131 +1,167 @@
 {
-  "id": "lem-weil-pbc-finite-ideal-kernel-descent",
-  "kind": "statement",
-  "title": "Finite subsets of an ideal multiplication kernel die at a later stage",
-  "statement": "Let Lambda be a nonempty directed preorder, A and B functors to commutative rings, N a functor to abelian groups, and take their categorical colimits [def-weil-pbc-category-colimit]. Each N_i is a B_i-module; the transition maps are semilinear over those of B. Let phi_i:A_i->B_i commute with all transitions, and psi:colimit A->colimit B commute with the coprojections. Equip colimit N with a colimit B-module structure compatible with its coprojections. Suppose colimit N is flat over colimit A through psi [def-weil-pbc-flat-ring-map]. Fix i and any ideal I of A_i. For every finite subset E of I tensor_{A_i} N_i whose elements multiply to zero, there are j, f:i->j and an additive map theta:I tensor_{A_i} N_i -> (I.map alpha_f) tensor_{A_j} N_j with theta(a tensor x)=alpha_f(a) tensor eta_f(x) and theta(k)=0 for every k in E. The A_i and A_j actions on N are through phi_i and phi_j. No Noetherian, local-ring or finite-module assumption is imposed.",
-  "stmt_deps": [
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-flat-ring-map"
-  ],
-  "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Tag 00R6, proof from choosing a fixed index through vanishing of the Tor transition map; Remark 00M6. Official text checked at https://stacks.math.columbia.edu/tag/00R6."
-  },
-  "proof": [
-    {
-      "text": "For each element of the finite subset, expand it into finitely many pure tensors. Its zero multiplication gives a finite linear relation. Apply [lem-weil-pbc-colimit-flat-relation-descent] at the original independent carrier universes. Construct the canonical semilinear tensor map; tensor balancing and the column equations show it kills the element. This is the existing single-element argument assembled locally because the corrected single-element theorem has a common-universe interface. The independent-universe relation dependency is still STATEMENT-DISPUTED, so this caller inherits that unresolved statement issue.",
-      "uses": [
-        "lem-weil-pbc-colimit-flat-relation-descent"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "By induction on a finite set of indices, directedness gives one l above i and all witness stages. Construct the canonical tensor map theta_l using TensorProduct.map on the semilinear ideal and module transitions. For the empty subset take l=i.",
-      "uses": [],
-      "elementary": true
-    },
-    {
-      "text": "For a witness map f:i->j and g:j->l, A.map(g) comp A.map(f)=A.map(i->l), because the shape is a preorder. Ideal.map_map gives (I A_j) A_l=I A_l. Construct the additive tensor transition delta from the extended ideal tensor module at j to the one at l. Its composition with the witness map equals theta_l: verify on pure tensors by A and N functoriality, and extend by tensor induction. Therefore theta_l kills every element of the prescribed subset.",
-      "uses": [],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-weil-pbc-finite-ideal-kernel-descent",
+ "kind": "statement",
+ "title": "Finite subsets of an ideal multiplication kernel die at a later stage",
+ "statement": "Let Lambda be a nonempty directed preorder, A and B functors to commutative rings, N a functor to abelian groups, and take their categorical colimits [def-weil-pbc-category-colimit]. Each N_i is a B_i-module; the transition maps are semilinear over those of B. Let phi_i:A_i->B_i commute with all transitions, and psi:colimit A->colimit B commute with the coprojections. Equip colimit N with a colimit B-module structure compatible with its coprojections. Suppose colimit N is flat over colimit A through psi [def-weil-pbc-flat-ring-map]. Fix i and any ideal I of A_i. For every finite subset E of I tensor_{A_i} N_i whose elements multiply to zero, there are j, f:i->j and an additive map theta:I tensor_{A_i} N_i -> (I.map alpha_f) tensor_{A_j} N_j with theta(a tensor x)=alpha_f(a) tensor eta_f(x) and theta(k)=0 for every k in E. The A_i and A_j actions on N are through phi_i and phi_j. No Noetherian, local-ring or finite-module assumption is imposed. The forgetful functor from commutative rings to sets is assumed to preserve the specified colimit of the first ring diagram A.",
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00R6, proof from choosing a fixed index through vanishing of the Tor transition map; Remark 00M6. Official text checked at https://stacks.math.columbia.edu/tag/00R6."
+ },
+ "proof": [
+  {
+   "text": "For each element of the finite subset, expand it into finitely many pure tensors. Its zero multiplication gives a finite linear relation. Apply [lem-weil-pbc-colimit-flat-relation-descent] at the original independent carrier universes. Construct the canonical semilinear tensor map; tensor balancing and the column equations show it kills the element. This is the existing single-element argument assembled locally because the corrected single-element theorem has a common-universe interface. Supply the explicit PreservesColimit instance for A to this application.",
+   "uses": [
     "lem-weil-pbc-colimit-flat-relation-descent"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00R6, taking one common stage for the finitely many xi; tensor transition construction and composition are formalized explicitly. Forced universe adaptation: assemble the per-element tensor argument directly from finite-relation factorization; remaining common-stage construction unchanged. Independent-universe dependency remains disputed."
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "In a directed colimit of rings and modules with flat limit any finite subset of an ideal multiplication kernel vanishes at a later stage",
-      "date": "2026-10-13",
-      "results": "service unavailable: Internal Server Error"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "In a directed colimit of rings and modules with flat limit any finite subset of an ideal multiplication kernel vanishes at a later stage",
-      "date": "2026-10-13",
-      "results": "AdicCompletion.flat_of_isNoetherian, localCohomology.hasColimitDiagram, Module.FaithfullyFlat.iff_flat_and_proper_ideal, Module.Flat.of_forall_exists_factorization, localCohomology.ofDiagram, Module.Flat.iff_forall_exists_factorization, Module.DirectLimit.of.zero_exact, Module.FaithfullyFlat.iff_flat_and_ideal_smul_eq_top",
-      "verdict": "no exact match; the equational flatness criterion and direct-limit zero criterion are partial tools"
-    },
-    {
-      "tool": "grep",
-      "query": "exists.*kernel|exists_finset_lTensor_eq_zero|kernel_vanishes|Finite.tensorProduct",
-      "date": "2026-10-13",
-      "results": "Mathlib/RingTheory/TensorProduct/Finite.lean, Mathlib/RingTheory/TensorProduct/Finite.lean, Mathlib/RingTheory/TensorProduct/Finite.lean, Mathlib/RingTheory/TensorProduct/Finite.lean, Mathlib/RingTheory/TensorProduct/Finite.lean",
-      "verdict": "no exact match; signatures inspected"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.RingTheory.ColimitMaximalKernelDescent",
-    "date": "2026-10-13",
-    "group": "G1"
+  {
+   "text": "By induction on a finite set of indices, directedness gives one l above i and all witness stages. Construct the canonical tensor map theta_l using TensorProduct.map on the semilinear ideal and module transitions. For the empty subset take l=i.",
+   "uses": [],
+   "elementary": true
   },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-finite-etale-lifting",
-      "place": "Finite-generator kernel descent in Tag 00R6, steps 1–6 of lem-weil-pbc-colimit-eventually-flat, before applying Tag 00MO.",
-      "via": [
-        "lem-weil-pbc-colimit-maximal-kernel-descent",
-        "lem-weil-pbc-colimit-eventually-flat",
-        "lem-weil-pbc-criterion-flatness-fibre",
-        "lem-weil-pbc-smooth-retract-standard-smooth",
-        "lem-weil-pbc-popescu-delocalize-base",
-        "lem-weil-pbc-popescu-reduce-to-field",
-        "lem-weil-pbc-popescu-smoothing",
-        "lem-weil-pbc-henselian-pair-approximation",
-        "lem-weil-pbc-finite-etale-lifting-approximation",
-        "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "lean_audit": {
-    "master": {
-      "state": "none"
-    },
-    "slopmaster2": {
-      "state": "none"
-    }
-  },
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.RingTheory.FiniteIdealKernelDescent",
-    "file": "lean/Sheaf/RingTheory/FiniteIdealKernelDescent.lean",
-    "declaration": "RingTheory.exists_stage_finite_ideal_kernel_vanishes",
-    "statement": "theorem exists_stage_finite_ideal_kernel_vanishes\n    {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]\n    (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w})\n    (N : Λ ⥤ AddCommGrpCat.{z}) [HasColimit A] [HasColimit B] [HasColimit N]\n    [∀ i, Module (B.obj i) (N.obj i)]\n    (φ : ∀ i, A.obj i →+* B.obj i)\n    (hcomm : ∀ (i j : Λ) (f : i ⟶ j),\n      (B.map f).hom.comp (φ i) = (φ j).comp (A.map f).hom)\n    (hscalar : ∀ (i j : Λ) (f : i ⟶ j) (b : B.obj i) (x : N.obj i),\n      (N.map f).hom (b • x) = (B.map f).hom b • (N.map f).hom x)\n    (ψ : (colimit A : CommRingCat.{v}) →+* (colimit B : CommRingCat.{w}))\n    (hψ : ∀ i, ψ.comp (colimit.ι A i).hom = (colimit.ι B i).hom.comp (φ i))\n    [Module (colimit B : CommRingCat.{w}) (colimit N : AddCommGrpCat.{z})]\n    (hlimitScalar : ∀ (i : Λ) (b : B.obj i) (x : N.obj i),\n      (colimit.ι N i).hom (b • x) = (colimit.ι B i).hom b • (colimit.ι N i).hom x)\n    (hflat : letI := Module.compHom (colimit N : AddCommGrpCat.{z}) ψ\n      Module.Flat (colimit A : CommRingCat.{v}) (colimit N : AddCommGrpCat.{z}))\n    (i : Λ) (I : Ideal (A.obj i)) :\n    letI := Module.compHom (N.obj i) (φ i)\n    ∀ (s : Finset (I ⊗[A.obj i] N.obj i)),\n      (∀ k ∈ s,\n        TensorProduct.lift ((LinearMap.lsmul (A.obj i) (N.obj i)).comp I.subtype) k = 0) →\n    ∃ (j : Λ) (f : i ⟶ j),\n      letI := Module.compHom (N.obj i) (φ i)\n      letI := Module.compHom (N.obj j) (φ j)\n      ∃ θ : I ⊗[A.obj i] N.obj i →+\n          (I.map (A.map f).hom) ⊗[A.obj j] N.obj j,\n        (∀ (a : I) (x : N.obj i), θ (a ⊗ₜ[A.obj i] x) =\n          (⟨(A.map f).hom a, Ideal.mem_map_of_mem (A.map f).hom a.property⟩ :\n            I.map (A.map f).hom) ⊗ₜ[A.obj j] (N.map f).hom x) ∧\n        (∀ k ∈ s, θ k = 0)",
-    "branch": "sheaf-dag",
-    "by": "G1",
-    "date": "2026-10-13"
-  },
-  "reviewed": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "G1",
-    "result": "pass",
-    "landing": "20261013T115023-L-3323872",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "X-5b07c",
-    "group": "P1",
-    "result": "pass",
-    "landing": "20261014T052440-L-1914123",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered files compile; original caller reproduces the reported universe error against the changed dependency, adapted caller compiles, signatures and DAG/report records match the authorized changes."
+  {
+   "text": "For a witness map f:i->j and g:j->l, A.map(g) comp A.map(f)=A.map(i->l), because the shape is a preorder. Ideal.map_map gives (I A_j) A_l=I A_l. Construct the additive tensor transition delta from the extended ideal tensor module at j to the one at l. Its composition with the witness map equals theta_l: verify on pure tensors by A and N functoriality, and extend by tensor induction. Therefore theta_l kills every element of the prescribed subset.",
+   "uses": [],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-flat-relation-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00R6, taking one common stage for the finitely many xi; tensor transition construction and composition are formalized explicitly. Forced universe adaptation: assemble the per-element tensor argument directly from finite-relation factorization; remaining common-stage construction unchanged. The explicit preservation hypothesis expresses the algebraic ring colimit used in Tag 00R6 and prevents the large-index/small-ring categorical-colimit error."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "In a directed colimit of rings and modules with flat limit any finite subset of an ideal multiplication kernel vanishes at a later stage",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a directed colimit of rings and modules with flat limit any finite subset of an ideal multiplication kernel vanishes at a later stage",
+   "date": "2026-10-13",
+   "results": "AdicCompletion.flat_of_isNoetherian, localCohomology.hasColimitDiagram, Module.FaithfullyFlat.iff_flat_and_proper_ideal, Module.Flat.of_forall_exists_factorization, localCohomology.ofDiagram, Module.Flat.iff_forall_exists_factorization, Module.DirectLimit.of.zero_exact, Module.FaithfullyFlat.iff_flat_and_ideal_smul_eq_top",
+   "verdict": "no exact match; the equational flatness criterion and direct-limit zero criterion are partial tools"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*kernel|exists_finset_lTensor_eq_zero|kernel_vanishes|Finite.tensorProduct",
+   "date": "2026-10-13",
+   "results": "Mathlib/RingTheory/TensorProduct/Finite.lean, Mathlib/RingTheory/TensorProduct/Finite.lean, Mathlib/RingTheory/TensorProduct/Finite.lean, Mathlib/RingTheory/TensorProduct/Finite.lean, Mathlib/RingTheory/TensorProduct/Finite.lean",
+   "verdict": "no exact match; signatures inspected"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ColimitMaximalKernelDescent",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Finite-generator kernel descent in Tag 00R6, steps 1–6 of lem-weil-pbc-colimit-eventually-flat, before applying Tag 00MO.",
+   "via": [
+    "lem-weil-pbc-colimit-maximal-kernel-descent",
+    "lem-weil-pbc-colimit-eventually-flat",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteIdealKernelDescent",
+  "file": "lean/Sheaf/RingTheory/FiniteIdealKernelDescent.lean",
+  "declaration": "RingTheory.exists_stage_finite_ideal_kernel_vanishes",
+  "statement": "theorem exists_stage_finite_ideal_kernel_vanishes\n    {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]\n    (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w})\n    (N : Λ ⥤ AddCommGrpCat.{z}) [HasColimit A] [HasColimit B] [HasColimit N]\n    [PreservesColimit A (forget CommRingCat.{v})]\n    [∀ i, Module (B.obj i) (N.obj i)]\n    (φ : ∀ i, A.obj i →+* B.obj i)\n    (hcomm : ∀ (i j : Λ) (f : i ⟶ j),\n      (B.map f).hom.comp (φ i) = (φ j).comp (A.map f).hom)\n    (hscalar : ∀ (i j : Λ) (f : i ⟶ j) (b : B.obj i) (x : N.obj i),\n      (N.map f).hom (b • x) = (B.map f).hom b • (N.map f).hom x)\n    (ψ : (colimit A : CommRingCat.{v}) →+* (colimit B : CommRingCat.{w}))\n    (hψ : ∀ i, ψ.comp (colimit.ι A i).hom = (colimit.ι B i).hom.comp (φ i))\n    [Module (colimit B : CommRingCat.{w}) (colimit N : AddCommGrpCat.{z})]\n    (hlimitScalar : ∀ (i : Λ) (b : B.obj i) (x : N.obj i),\n      (colimit.ι N i).hom (b • x) = (colimit.ι B i).hom b • (colimit.ι N i).hom x)\n    (hflat : letI := Module.compHom (colimit N : AddCommGrpCat.{z}) ψ\n      Module.Flat (colimit A : CommRingCat.{v}) (colimit N : AddCommGrpCat.{z}))\n    (i : Λ) (I : Ideal (A.obj i)) :\n    letI := Module.compHom (N.obj i) (φ i)\n    ∀ (s : Finset (I ⊗[A.obj i] N.obj i)),\n      (∀ k ∈ s,\n        TensorProduct.lift ((LinearMap.lsmul (A.obj i) (N.obj i)).comp I.subtype) k = 0) →\n    ∃ (j : Λ) (f : i ⟶ j),\n      letI := Module.compHom (N.obj i) (φ i)\n      letI := Module.compHom (N.obj j) (φ j)\n      ∃ θ : I ⊗[A.obj i] N.obj i →+\n          (I.map (A.map f).hom) ⊗[A.obj j] N.obj j,\n        (∀ (a : I) (x : N.obj i), θ (a ⊗ₜ[A.obj i] x) =\n          (⟨(A.map f).hom a, Ideal.mem_map_of_mem (A.map f).hom a.property⟩ :\n            I.map (A.map f).hom) ⊗ₜ[A.obj j] (N.map f).hom x) ∧\n        (∀ k ∈ s, θ k = 0)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T115023-L-3323872",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "XREPAIR-eedb48d351b955d4",
+  "group": "XReedb48d351b955d4",
+  "result": "pass",
+  "landing": "20261014T123028-L-2779298",
+  "kind": "interface",
+  "note": "\nREADY: Restored the withdrawn module’s public command API via `Mathlib.Init`, fixing the reported probe errors. Regression checked; all eight supplied Lean files compile individually. Report updated; nothing delivered or pushed.\nDELIVERED: checks and fix"
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "N1 stage 2",
+  "old_statement": "Let Lambda be a nonempty directed preorder, A and B functors to commutative rings, N a functor to abelian groups, and take their categorical colimits [def-weil-pbc-category-colimit]. Each N_i is a B_i-module; the transition maps are semilinear over those of B. Let phi_i:A_i->B_i commute with all transitions, and psi:colimit A->colimit B commute with the coprojections. Equip colimit N with a colimit B-module structure compatible with its coprojections. Suppose colimit N is flat over colimit A through psi [def-weil-pbc-flat-ring-map]. Fix i and any ideal I of A_i. For every finite subset E of I tensor_{A_i} N_i whose elements multiply to zero, there are j, f:i->j and an additive map theta:I tensor_{A_i} N_i -> (I.map alpha_f) tensor_{A_j} N_j with theta(a tensor x)=alpha_f(a) tensor eta_f(x) and theta(k)=0 for every k in E. The A_i and A_j actions on N are through phi_i and phi_j. No Noetherian, local-ring or finite-module assumption is imposed.",
+  "what": "Add explicit preservation of the specified A-colimit by the ring forgetful functor, as required by reviewer X-3bf66. This expresses the algebraic direct-limit condition in the source. The module is unclaimed and is corrected under the launcher's 2026-10-14 unclaimed-module rule; this is an interface correction, not the signature-preserving exception for another group's module.",
+  "source": {
+   "document": "literature/stacks-project/algebra.tex",
+   "place": "Algebra, Tag 00R6, proof from choosing a fixed index through vanishing of the Tor transition map; Remark 00M6. Official text checked at https://stacks.math.columbia.edu/tag/00R6."
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-colimit-maximal-kernel-descent",
+    "holds": false,
+    "note": "The independent-universe caller needs the same missing preservation condition. Its unclaimed interface is corrected and its complete original proof retained in this coordinated packet."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "For each element of the finite subset, expand it into finitely many pure tensors. Its zero multiplication gives a finite linear relation. Apply [lem-weil-pbc-colimit-flat-relation-descent] at the original independent carrier universes. Construct the canonical semilinear tensor map; tensor balancing and the column equations show it kills the element. This is the existing single-element argument assembled locally because the corrected single-element theorem has a common-universe interface. The independent-universe relation dependency is still STATEMENT-DISPUTED, so this caller inherits that unresolved statement issue.",
+    "uses": [
+     "lem-weil-pbc-colimit-flat-relation-descent"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "By induction on a finite set of indices, directedness gives one l above i and all witness stages. Construct the canonical tensor map theta_l using TensorProduct.map on the semilinear ideal and module transitions. For the empty subset take l=i.",
+    "uses": [],
+    "elementary": true
+   },
+   {
+    "text": "For a witness map f:i->j and g:j->l, A.map(g) comp A.map(f)=A.map(i->l), because the shape is a preorder. Ideal.map_map gives (I A_j) A_l=I A_l. Construct the additive tensor transition delta from the extended ideal tensor module at j to the one at l. Its composition with the witness map equals theta_l: verify on pure tensors by A and N functoriality, and extend by tensor induction. Therefore theta_l kills every element of the prescribed subset.",
+    "uses": [],
+    "elementary": true
+   }
+  ]
+ }
 }
