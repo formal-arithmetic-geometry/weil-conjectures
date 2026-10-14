@@ -1,164 +1,160 @@
 {
- "id": "lem-pc-perfect-overlap-transition-comparison-diagram-core",
- "kind": "statement",
- "title": "Core prescribed overlap transition construction",
- "statement": "Let I be a directed preorder, R a diagram of commutative rings, c its colimit cocone, i an index, and t:Z to Spec R_i finitely presented. Use shared derived categories on schemes and localized open sites [def-pc-derived-category]. For j greater than or equal to i put Yj=Z base changed to R_j, X=Z base changed to c.pt and let gj:X to Yj be the canonical map. Let compact opens U,V cover Yj, let A,B be perfect derived objects on these opens [def-pc-perfect-complex], and let phiU,phiV identify their derived pullbacks with the exact restrictions of E on X [def-pc-derived-pullback, def-pc-derived-open-restriction-maps]. There exist k greater than or equal to j, with canonical f:Yk to Yj and g:X to Yk, a coherent diagram d:SchemeTwoOpenComparisonDiagram X Yk g (f inverse U) (f inverse V) (gj inverse U) (gj inverse V) [def-pc-two-open-comparison-diagram], an isomorphism e:SU A' to SV B' where A',B' are the f-pullbacks of A,B, and isomorphisms thetaU:d.HU A' to RU E and thetaV:d.HV B' to RV E such that gammaU inverse at A' followed by SP(thetaU.hom) and tauU at E equals HW(e.hom) followed by gammaV inverse at B', SQ(thetaV.hom) and tauV at E. All restrictions and comparison maps are the exact ones fixed in the diagram structure. Only the local objects and their overlap equation occur; there is no quantification over a stage object or realizations. This is the core construction used before the target wrapper. The core theorem additionally assumes the stage-existence lemma: every pair of opens admits a later index. The wrapper supplies this by choosing the current index. In Lean this identical proposition is named perfectOverlapCoreStatement to cache parameter metadata; its explicit definition retains every quantifier, local binding and equation just described.",
- "source": {
-  "document": "https://stacks.math.columbia.edu/tag/09RF",
-  "place": "Tag 09RF two-open induction, paragraph descending the isomorphism c before Tag 08DG; Tag 09RE for morphism descent; 08DW and 0D5S for canonical coherence."
- },
- "stmt_deps": [
-  "def-pc-derived-category",
-  "def-pc-perfect-complex",
-  "def-pc-derived-pullback",
-  "def-pc-derived-open-restriction-maps",
-  "def-pc-two-open-comparison-diagram"
- ],
- "proof": [
-  {
-   "text": "Unfold perfectOverlapCoreStatement. Obtain the stage theorem at its outer arguments, unfold perfectOverlapStageStatement in that local hypothesis, and Apply the corrected stage theorem to obtain k,hjk,d, functorial transports, the overlap isomorphism e, the transported identifications θU,θV and their induced-transition equality.",
-   "uses": [
-    "lem-pc-perfect-overlap-transition-comparison-core-stage"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Obtain the coherence theorem at its outer arguments and unfold perfectOverlapCoherenceStatement in the local hypothesis. Apply the corrected coherence theorem to d,e,θU,θV and that equality. Package the existing core existential without changing its statement.",
-   "uses": [
-    "lem-pc-perfect-overlap-transition-comparison-core-coherence"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-pc-perfect-overlap-transition-comparison-core-stage",
-  "lem-pc-perfect-overlap-transition-comparison-core-coherence"
- ],
- "proof_origin": {
-  "by": "worker",
-  "agent": "H1",
-  "date": "2026-10-14",
-  "document": "https://stacks.math.columbia.edu/tag/09RF",
-  "note": "Repair E2/F6: prescribed induced-transition equality is retained from descent through packaging; no counterexample/realization route remains. H10: the named transparent proposition is the former inline statement verbatim; all binders and conclusions are retained. Unfolding it recovers the original theorem type. This caches statement elaboration and parameter metadata without adding any hole."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "Perfect complexes on two compact open subschemes have a prescribed overlap isomorphism descending over a filtered colimit of rings",
-   "results": "8 hits: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq",
-   "date": "2026-10-14",
-   "verdict": "No exact matching theorem; tools only"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Functor.mapIso",
-   "results": "12 hits: CategoryTheory.Functor.mapIso; CategoryTheory.Functor.mapIso_refl; CategoryTheory.Functor.mapIso_symm; CategoryTheory.Functor.mapIso_hom; CategoryTheory.Functor.mapIso_inv; CategoryTheory.Functor.mapIso_trans; CategoryTheory.Functor.mapIso_injective; CategoryTheory.Functor.preimageIso_mapIso",
-   "date": "2026-10-14",
-   "verdict": "No exact matching theorem; tools only"
-  },
-  {
-   "tool": "grep",
-   "query": "perfect.*(colimit|descen)|derived.*(pullback|restriction)",
-   "results": "0 hits: ",
-   "date": "2026-10-14",
-   "verdict": "No exact matching theorem; tools only"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Derived pullback preserves compatibility of local isomorphisms on an overlap of two opens",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonDiagram",
-  "date": "2026-10-14",
-  "group": "B4"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-pc-perfect-overlap-transition-comparison-diagram",
-   "place": "Intermediate construction used by the target proof.",
-   "via": []
-  },
-  "same_as": []
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOverlapTransitionComparisonCore.lean",
-  "declaration": "AlgebraicGeometry.perfect_overlap_transition_comparison_core",
-  "statement": "theorem perfect_overlap_transition_comparison_core\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)\n    (i : I) (Z : Scheme.{u}) (t : Z ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation t] [QuasiCompact t] [QuasiSeparated t]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    (j : I) (hij : i ≤ j)\n    (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),\n      ∃ k : I, j ≤ k)\n    : perfectOverlapCoreStatement R c hc i Z t j hij hstage",
-  "branch": "sheaf-dag",
-  "by": "B4",
-  "date": "2026-10-14",
-  "declarations": [
-   "AlgebraicGeometry.perfect_overlap_transition_comparison_core",
-   "AlgebraicGeometry.perfectOverlapCoreStatement"
-  ],
-  "note": "H10: the named transparent proposition is the former inline statement verbatim; all binders and conclusions are retained. Unfolding it recovers the original theorem type. This caches statement elaboration and parameter metadata without adding any hole."
- },
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B4",
-  "result": "pass",
-  "landing": "20261013T215554-L-894194",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F4",
-  "result": "pass",
-  "landing": "20261014T061024-L-2465038",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.perfect_overlap_transition_comparison_core_stage"
-  ],
-  "sorry_after": []
- },
- "statement_change": {
-  "date": "2026-10-14",
-  "by": "H1 stage 2",
-  "old_statement": "Let I be a directed preorder, R a diagram of commutative rings, c its colimit cocone, i an index, and t:Z to Spec R_i finitely presented. Use shared derived categories on schemes and localized open sites [def-pc-derived-category]. For j greater than or equal to i put Yj=Z base changed to R_j, X=Z base changed to c.pt and let gj:X to Yj be the canonical map. Let compact opens U,V cover Yj, let A,B be perfect derived objects on these opens [def-pc-perfect-complex], and let phiU,phiV identify their derived pullbacks with the exact restrictions of E on X [def-pc-derived-pullback, def-pc-derived-open-restriction-maps]. There exist k greater than or equal to j, with canonical f:Yk to Yj and g:X to Yk, a coherent diagram d:SchemeTwoOpenComparisonDiagram X Yk g (f inverse U) (f inverse V) (gj inverse U) (gj inverse V) [def-pc-two-open-comparison-diagram], an isomorphism e:SU A' to SV B' where A',B' are the f-pullbacks of A,B, and isomorphisms thetaU:d.HU A' to RU E and thetaV:d.HV B' to RV E such that gammaU inverse at A' followed by SP(thetaU.hom) and tauU at E equals HW(e.hom) followed by gammaV inverse at B', SQ(thetaV.hom) and tauV at E. All restrictions and comparison maps are the exact ones fixed in the diagram structure. Only the local objects and their overlap equation occur; there is no quantification over a stage object or realizations. This is the core construction used before the target wrapper. The core theorem additionally assumes the stage-existence lemma: every pair of opens admits a later index. The wrapper supplies this by choosing the current index.",
-  "what": "H10 representation repair only: name the entire original result proposition with a transparent definition. No binder, hypothesis, quantifier, equation or mathematical conclusion changes. Three original-signature examples compile after unfolding the exact definitions, and the sole direct importer compiles unchanged against fresh artifacts. No sorry is split or renamed.",
+  "id": "lem-pc-perfect-overlap-transition-comparison-diagram-core",
+  "kind": "statement",
+  "title": "Core prescribed overlap transition construction",
+  "statement": "Let I be a directed preorder, R a diagram of commutative rings, c its colimit cocone, i an index, and t:Z to Spec R_i finitely presented. Use shared derived categories on schemes and localized open sites [def-pc-derived-category]. For j greater than or equal to i put Yj=Z base changed to R_j, X=Z base changed to c.pt and let gj:X to Yj be the canonical map. Let compact opens U,V cover Yj, let A,B be perfect derived objects on these opens [def-pc-perfect-complex], and let phiU,phiV identify their derived pullbacks with the exact restrictions of E on X [def-pc-derived-pullback, def-pc-derived-open-restriction-maps]. There exist k greater than or equal to j, with canonical f:Yk to Yj and g:X to Yk, a coherent diagram d:SchemeTwoOpenComparisonDiagram X Yk g (f inverse U) (f inverse V) (gj inverse U) (gj inverse V) [def-pc-two-open-comparison-diagram], an isomorphism e:SU A' to SV B' where A',B' are the f-pullbacks of A,B, and isomorphisms thetaU:d.HU A' to RU E and thetaV:d.HV B' to RV E such that gammaU inverse at A' followed by SP(thetaU.hom) and tauU at E equals HW(e.hom) followed by gammaV inverse at B', SQ(thetaV.hom) and tauV at E. All restrictions and comparison maps are the exact ones fixed in the diagram structure. Only the local objects and their overlap equation occur; there is no quantification over a stage object or realizations. This is the core construction used before the target wrapper. The core theorem additionally assumes the stage-existence lemma: every pair of opens admits a later index. The wrapper supplies this by choosing the current index. In Lean this identical proposition is named perfectOverlapCoreStatement to cache parameter metadata; its explicit definition retains every quantifier, local binding and equation just described.",
   "source": {
-   "document": "https://stacks.math.columbia.edu/tag/09RF",
-   "place": "Tag 09RF two-open induction, paragraph descending the isomorphism c before Tag 08DG; Tag 09RE for morphism descent; 08DW and 0D5S for canonical coherence."
+    "document": "https://stacks.math.columbia.edu/tag/09RF",
+    "place": "Tag 09RF two-open induction, paragraph descending the isomorphism c before Tag 08DG; Tag 09RE for morphism descent; 08DW and 0D5S for canonical coherence."
   },
-  "citers": [
-   {
-    "id": "lem-pc-perfect-overlap-transition-comparison-diagram",
-    "holds": true,
-    "note": "The full proposition and outer binders are definitionally the original statement; the named cache adds no mathematical condition. The unchanged direct Lean importer passes."
-   }
+  "stmt_deps": [
+    "def-pc-derived-category",
+    "def-pc-perfect-complex",
+    "def-pc-derived-pullback",
+    "def-pc-derived-open-restriction-maps",
+    "def-pc-two-open-comparison-diagram"
   ],
-  "old_proof": [
-   {
-    "text": "Apply perfect_overlap_transition_comparison_core_stage to the compact cover, perfect local objects, and supplied comparison isomorphisms, obtaining k, hjk, and an overlap isomorphism e at the pulled-back stage.",
-    "uses": [
-     "lem-pc-perfect-overlap-transition-comparison-core-stage"
+  "proof": [
+    {
+      "text": "Unfold perfectOverlapCoreStatement. Obtain the stage theorem at its outer arguments, unfold perfectOverlapStageStatement in that local hypothesis, and Apply the corrected stage theorem to obtain k,hjk,d, functorial transports, the overlap isomorphism e, the transported identifications θU,θV and their induced-transition equality.",
+      "uses": [
+        "lem-pc-perfect-overlap-transition-comparison-core-stage"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Obtain the coherence theorem at its outer arguments and unfold perfectOverlapCoherenceStatement in the local hypothesis. Apply the corrected coherence theorem to d,e,θU,θV and that equality. Package the existing core existential without changing its statement.",
+      "uses": [
+        "lem-pc-perfect-overlap-transition-comparison-core-coherence"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-pc-perfect-overlap-transition-comparison-core-stage",
+    "lem-pc-perfect-overlap-transition-comparison-core-coherence"
+  ],
+  "proof_origin": {
+    "by": "worker",
+    "agent": "H1",
+    "date": "2026-10-14",
+    "document": "https://stacks.math.columbia.edu/tag/09RF",
+    "note": "Repair E2/F6: prescribed induced-transition equality is retained from descent through packaging; no counterexample/realization route remains. H10: the named transparent proposition is the former inline statement verbatim; all binders and conclusions are retained. Unfolding it recovers the original theorem type. This caches statement elaboration and parameter metadata without adding any hole."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "Perfect complexes on two compact open subschemes have a prescribed overlap isomorphism descending over a filtered colimit of rings",
+      "results": "8 hits: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq",
+      "date": "2026-10-14",
+      "verdict": "No exact matching theorem; tools only"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Functor.mapIso",
+      "results": "12 hits: CategoryTheory.Functor.mapIso; CategoryTheory.Functor.mapIso_refl; CategoryTheory.Functor.mapIso_symm; CategoryTheory.Functor.mapIso_hom; CategoryTheory.Functor.mapIso_inv; CategoryTheory.Functor.mapIso_trans; CategoryTheory.Functor.mapIso_injective; CategoryTheory.Functor.preimageIso_mapIso",
+      "date": "2026-10-14",
+      "verdict": "No exact matching theorem; tools only"
+    },
+    {
+      "tool": "grep",
+      "query": "perfect.*(colimit|descen)|derived.*(pullback|restriction)",
+      "results": "0 hits: ",
+      "date": "2026-10-14",
+      "verdict": "No exact matching theorem; tools only"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Derived pullback preserves compatibility of local isomorphisms on an overlap of two opens",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-14"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonDiagram",
+    "date": "2026-10-14",
+    "group": "B4"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-pc-perfect-overlap-transition-comparison-diagram",
+      "place": "Intermediate construction used by the target proof.",
+      "via": []
+    },
+    "same_as": []
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-semicon",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore",
+    "file": "lean/Sheaf/AlgebraicGeometry/PerfectOverlapTransitionComparisonCore.lean",
+    "declaration": "AlgebraicGeometry.perfect_overlap_transition_comparison_core",
+    "statement": "theorem perfect_overlap_transition_comparison_core\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)\n    (i : I) (Z : Scheme.{u}) (t : Z ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation t] [QuasiCompact t] [QuasiSeparated t]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    (j : I) (hij : i ≤ j)\n    (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),\n      ∃ k : I, j ≤ k)\n    : perfectOverlapCoreStatement R c hc i Z t j hij hstage",
+    "branch": "sheaf-dag",
+    "by": "B4",
+    "date": "2026-10-14",
+    "declarations": [
+      "AlgebraicGeometry.perfect_overlap_transition_comparison_core",
+      "AlgebraicGeometry.perfectOverlapCoreStatement"
     ],
-    "elementary": false
-   },
-   {
-    "text": "Apply perfect_overlap_transition_comparison_core_coherence at that same k, hjk, and supplied e. It constructs d, θU, and θV and proves the compatibility equation with d.toDiagram.HW.map e.hom. Package k, hjk, d, e, θU, θV and this equation into the target existential.",
-    "uses": [
-     "lem-pc-perfect-overlap-transition-comparison-core-coherence"
+    "note": "H10: the named transparent proposition is the former inline statement verbatim; all binders and conclusions are retained. Unfolding it recovers the original theorem type. This caches statement elaboration and parameter metadata without adding any hole."
+  },
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "B4",
+    "result": "pass",
+    "landing": "20261013T215554-L-894194",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "X-6ef1a",
+    "group": "H1",
+    "result": "pass",
+    "landing": "20261014T050526-L-1684913",
+    "kind": "interface",
+    "note": "independent Codex review: Matched delivered Lean with node statements, declared interface repairs, source descent argument, and report; fresh core artifacts, unchanged direct importer, original statement checks, and axiom checks passed."
+  },
+  "statement_change": {
+    "date": "2026-10-14",
+    "by": "H1 stage 2",
+    "old_statement": "Let I be a directed preorder, R a diagram of commutative rings, c its colimit cocone, i an index, and t:Z to Spec R_i finitely presented. Use shared derived categories on schemes and localized open sites [def-pc-derived-category]. For j greater than or equal to i put Yj=Z base changed to R_j, X=Z base changed to c.pt and let gj:X to Yj be the canonical map. Let compact opens U,V cover Yj, let A,B be perfect derived objects on these opens [def-pc-perfect-complex], and let phiU,phiV identify their derived pullbacks with the exact restrictions of E on X [def-pc-derived-pullback, def-pc-derived-open-restriction-maps]. There exist k greater than or equal to j, with canonical f:Yk to Yj and g:X to Yk, a coherent diagram d:SchemeTwoOpenComparisonDiagram X Yk g (f inverse U) (f inverse V) (gj inverse U) (gj inverse V) [def-pc-two-open-comparison-diagram], an isomorphism e:SU A' to SV B' where A',B' are the f-pullbacks of A,B, and isomorphisms thetaU:d.HU A' to RU E and thetaV:d.HV B' to RV E such that gammaU inverse at A' followed by SP(thetaU.hom) and tauU at E equals HW(e.hom) followed by gammaV inverse at B', SQ(thetaV.hom) and tauV at E. All restrictions and comparison maps are the exact ones fixed in the diagram structure. Only the local objects and their overlap equation occur; there is no quantification over a stage object or realizations. This is the core construction used before the target wrapper. The core theorem additionally assumes the stage-existence lemma: every pair of opens admits a later index. The wrapper supplies this by choosing the current index.",
+    "what": "H10 representation repair only: name the entire original result proposition with a transparent definition. No binder, hypothesis, quantifier, equation or mathematical conclusion changes. Three original-signature examples compile after unfolding the exact definitions, and the sole direct importer compiles unchanged against fresh artifacts. No sorry is split or renamed.",
+    "source": {
+      "document": "https://stacks.math.columbia.edu/tag/09RF",
+      "place": "Tag 09RF two-open induction, paragraph descending the isomorphism c before Tag 08DG; Tag 09RE for morphism descent; 08DW and 0D5S for canonical coherence."
+    },
+    "citers": [
+      {
+        "id": "lem-pc-perfect-overlap-transition-comparison-diagram",
+        "holds": true,
+        "note": "The full proposition and outer binders are definitionally the original statement; the named cache adds no mathematical condition. The unchanged direct Lean importer passes."
+      }
     ],
-    "elementary": false
-   }
-  ]
- }
+    "old_proof": [
+      {
+        "text": "Apply perfect_overlap_transition_comparison_core_stage to the compact cover, perfect local objects, and supplied comparison isomorphisms, obtaining k, hjk, and an overlap isomorphism e at the pulled-back stage.",
+        "uses": [
+          "lem-pc-perfect-overlap-transition-comparison-core-stage"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "Apply perfect_overlap_transition_comparison_core_coherence at that same k, hjk, and supplied e. It constructs d, θU, and θV and proves the compatibility equation with d.toDiagram.HW.map e.hom. Package k, hjk, d, e, θU, θV and this equation into the target existential.",
+        "uses": [
+          "lem-pc-perfect-overlap-transition-comparison-core-coherence"
+        ],
+        "elementary": false
+      }
+    ]
+  }
 }
