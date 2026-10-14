@@ -20,7 +20,7 @@ open CategoryTheory Limits
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
-set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency false
 attribute [local irreducible] lowerStarPlusTransition
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
@@ -328,12 +328,10 @@ Source: Stacks Tag 09Z1, functoriality of the higher direct image.
 (blueprint: lem-sbc-higher-image-transition-isIso-of-lower) -/
 noncomputable def higherDirectImageMap {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
     {F F' : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (f : F ⟶ F') :
-    higherDirectImage Λ h q F ⟶ higherDirectImage Λ h q F' := by
-  let m := (DerivedCategory.Plus.homologyFunctor _ q).map
+    higherDirectImage Λ h q F ⟶ higherDirectImage Λ h q F' :=
+  (DerivedCategory.Plus.homologyFunctor _ q).map
     (R+((h)_*[ModuleCat.{u + 1} Λ]).map
       ((DerivedCategory.Plus.singleFunctor _ 0).map f))
-  unfold higherDirectImage
-  exact m
 
 /-- The mapping API is the nested single-complex, direct-image and homology map.
 Source: Stacks Tag 09Z1, functoriality of higher direct images.
@@ -368,21 +366,20 @@ noncomputable def baseChangeTargetFunctorHigherImageIso
     {X T Y : Scheme.{u}} (e : Y ⟶ T) (h : Y ⟶ X) (q : ℤ)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     (baseChangeTargetFunctor Λ e h q).obj F ≅
-      higherDirectImage Λ h q (((e)^*[ModuleCat.{u + 1} Λ]).obj F) := by
-  let ii := (baseChangeTargetFunctorIso Λ e h q).app F
-  unfold higherDirectImage
-  exact ii
+      higherDirectImage Λ h q (((e)^*[ModuleCat.{u + 1} Λ]).obj F) :=
+  (DerivedCategory.Plus.homologyFunctor
+    (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).mapIso
+    (R+((h)_*[ModuleCat.{u + 1} Λ]).mapIso
+      ((((e)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app F))
 
 /-- Map a coefficient isomorphism through higher direct image, with explicit object types.
 (blueprint: lem-sbc-higher-image-transition-isIso-of-lower) -/
 noncomputable def higherDirectImageMapIso {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
     {F F' : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (f : F ≅ F') :
-    higherDirectImage Λ h q F ≅ higherDirectImage Λ h q F' := by
-  let ii := (DerivedCategory.Plus.homologyFunctor _ q).mapIso
+    higherDirectImage Λ h q F ≅ higherDirectImage Λ h q F' :=
+  (DerivedCategory.Plus.homologyFunctor _ q).mapIso
     (R+((h)_*[ModuleCat.{u + 1} Λ]).mapIso
       ((DerivedCategory.Plus.singleFunctor _ 0).mapIso f))
-  unfold higherDirectImage
-  exact ii
 
 /-- The coefficient-isomorphism API uses the same mapped coefficient morphism.
 Source: Stacks Tag 09Z1, functoriality of higher direct images.

@@ -17,24 +17,37 @@
  ],
  "proof": [
   {
-   "text": "Expand the target transition and its single-complex comparisons. Naturality of the derived triangle transition moves the source comparison across the transition. Compatibility of exact pullback composition with placing F in degree zero turns the derived coefficient square into the single functor applied to δ; transports along the arrow equality agree by proof irrelevance. Apply the target derived direct image and degree-q homology, then use naturality for the final coefficient map f. This is precisely the normalization equality, independently of q or cartesianness. The target functor comparison is written with explicit higher-image object types using baseChangeTargetFunctorHigherImageIso; this is the same existing exact single-complex isomorphism.",
+   "text": "The derived triangle transition is natural in its complex: write it as the identity-pullback comparison followed by the derived base-change natural transformation for the degenerate square. Its naturality gives Rh_*(c) followed by the transition at the target of c equal to the transition at its source followed by Rh'_* a*(c). No cartesianness is needed.",
    "uses": [
-    "lem-sbc-pullback-single-comp",
-    "def-sbc-module-higher-image-transitions",
-    "def-sbc-canonical-base-change-stalk-transitions"
+    "def-sbc-module-higher-image-transitions"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Use the already proved upperStarPlusComp_single identity. A generic cancellation lemma gives its forward orientation. Generalize the composite arrow a ≫ e and substitute the square equality to obtain the transported forward orientation for (e',π). Naturality of the e' pullback-single comparison moves the coefficient map f through it. Combine this with the inverse orientation for (a,e). Thus the full derived coefficient composite is a* of the source single comparison, the a single comparison, and the single functor applied to the underived coefficient map δ.",
+   "uses": [
+    "lem-sbc-pullback-single-comp"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand the target transition, target coefficient map, target-functor higher-image comparison, higher-image transition and higher-image map. An abstract categorical normalization lemma combines the two previous identities, using only preservation of composition by derived direct image and homology. Instantiate this proved lemma with the exact category structures and endpoints extracted from the two identities. The existing structural congruence tactic constructs kernel-checked equality conversions to the public expression, avoiding expensive definitional comparison of derived-object expressions.",
+   "uses": [
+    "def-sbc-module-higher-image-transitions",
+    "lem-sbc-higher-image-transition-isIso-of-lower"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sbc-canonical-base-change-stalk-transitions",
   "def-sbc-module-higher-image-transitions",
+  "lem-sbc-higher-image-transition-isIso-of-lower",
   "lem-sbc-pullback-single-comp"
  ],
  "proof_origin": {
-  "by": "worker B4 stage 3; second reader J2 (2026-10-15)",
-  "document": "Stacks Project and source library",
-  "place": "Explicit formal calculation of the coefficient and mate-pasting steps in lem-sbc-target-sheaf-comparison-naturality."
+  "by": "worker K3 stage 3, 2026-10-15",
+  "document": "Stacks Project Tags 0F07 and 09Z1; existing Lean pullback-single compatibility",
+  "place": "Complete Lean normalization using upperStarPlusComp_single, transition naturality, functoriality and kernel-checked structural congruence."
  },
  "mathlib_searches": [
   {
@@ -104,11 +117,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-3bea0",
-  "group": "J2",
+  "reviewer": "X-03ebc",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261014T170738-L-2556305",
+  "landing": "20261014T200412-L-1836311",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compile cleanly, the direct importer compiles, and statements, interfaces, nodes, change record, report, and permitted remaining sorry all satisfy the stage-3 brief."
+  "note": "independent Codex review: Delivered Lean modules and DAG nodes matched against the packet and repository; all delivered modules and direct importers compiled, and the original dependency proof timed out while the adapted version passed."
  }
 }
