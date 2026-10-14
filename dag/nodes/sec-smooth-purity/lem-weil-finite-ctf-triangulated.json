@@ -4,14 +4,14 @@
   "is": null,
   "from": {
    "node": "def-weil-finite-tor-amplitude",
-   "place": "its statement (a notion the statement uses)",
+   "place": "statement, finite-stage paragraph: \"Define D^b_ctf(Y,A) as the full triangulated subcategory of such objects\"",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite-stage finite-Tor-amplitude complexes form a triangulated subcategory",
- "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, an integer $n\\geq1$, and a scheme $Y$; put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$, and let $D^b_c(Y,A)\\subset D(Y_{\\mathrm{proet}},A)$ be the full triangulated subcategory of bounded complexes with constructible cohomology sheaves [def-weil-finite-torsion-constructibility, lem-weil-proetale-dbc-triangulated]. Let $P$ be the property of $K\\in D(Y_{\\mathrm{proet}},A)$: $K\\in D^b_c(Y,A)$ and $K$ has finite Tor amplitude [def-weil-proetale-tor-amplitude]. Then $P$ is closed under isomorphisms and defines a full triangulated subcategory of $D(Y_{\\mathrm{proet}},A)$ [def-weil-triangulated-subcategory]: $0$ satisfies $P$; $K$ satisfies $P$ if and only if $K[m]$ does, for every $m\\in\\mathbf Z$ (if $K$ has Tor amplitude in $[a,b]$ then $K[m]$ has Tor amplitude in $[a-m,b-m]$); and for every distinguished triangle $K\\to L\\to M\\to K[1]$ with $K$ and $M$ satisfying $P$, also $L$ satisfies $P$ (if $K$ and $M$ have Tor amplitude in $[a,b]$, so does $L$).",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, an integer $n\\geq1$, and a scheme $Y$; put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension], and let $D^b_c(Y,A)\\subset D(Y_{\\mathrm{proet}},A)$ be the full triangulated subcategory of bounded complexes with constructible cohomology sheaves [def-weil-finite-torsion-constructibility, lem-weil-proetale-dbc-triangulated]. Let $P$ be the property of $K\\in D(Y_{\\mathrm{proet}},A)$: $K\\in D^b_c(Y,A)$ and $K$ has finite Tor amplitude [def-weil-proetale-tor-amplitude]. Then $P$ is closed under isomorphisms and defines a full triangulated subcategory of $D(Y_{\\mathrm{proet}},A)$ [def-weil-triangulated-subcategory]: $0$ satisfies $P$; $K$ satisfies $P$ if and only if $K[m]$ does, for every $m\\in\\mathbf Z$ (if $K$ has Tor amplitude in $[a,b]$ then $K[m]$ has Tor amplitude in $[a-m,b-m]$); and for every distinguished triangle $K\\to L\\to M\\to K[1]$ with $K$ and $M$ satisfying $P$, also $L$ satisfies $P$ (if $K$ and $M$ have Tor amplitude in $[a,b]$, so does $L$).",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Cohomology on Sites, Lemma 21.46.4 (Tag 08G2, label lemma-cone-tor-amplitude), part (2), for the ringed site $(Y_{\\mathrm{proet}},(A_{E,n})_Y)$; together with lem-weil-proetale-dbc-triangulated for the constructibility part"
@@ -20,11 +20,100 @@
   "def-weil-finite-torsion-constructibility",
   "lem-weil-proetale-dbc-triangulated",
   "def-weil-proetale-tor-amplitude",
+  "def-weil-triangulated-subcategory",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-l-adic-coefficient-extension], the valuation ring $\\mathcal O_E$ is a DVR with finite residue field and $\\varpi_E$ generates its maximal ideal. Apply [lem-weil-valued-dvr-finite-quotients] with $n\\geq1$ to obtain that $A=\\mathcal O_E/\\varpi_E^n$ is finite. Consequently [lem-weil-proetale-dbc-triangulated] applies to this coefficient ring on the scheme $Y$: the bounded constructible property is invariant under isomorphisms, contains zero, is invariant under all integer shifts, and is closed under taking the middle term of a distinguished triangle. It remains to verify these properties for finite Tor amplitude.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FZ, definition-tor-amplitude, specialized to the constant coefficient ring; constructibility from the cited existing node"
+   }
+  },
+  {
+   "text": "Apply the clause \"Derived tensor is exact in each variable\" of [lem-weil-pbc-ringed-projection-mate-exact] to the identity morphism of the ringed topos presented by $(Y_{\\mathrm{proet}},A_Y)$. For every sheaf $F$ of $A_Y$-modules in degree zero, $T_F(K)=K\\otimes_A^L F$ is thus an additive exact functor, with $T_F(K[m])\\cong T_F(K)[m]$, preserving distinguished triangles. Here exactness includes the shift isomorphism by [def-weil-triangulated-category]. The constant commutative ring sheaf and the small-site convention are exactly those used in [def-weil-proetale-tor-amplitude]; no change to the etale site or to completed coefficients occurs.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "def-weil-triangulated-category",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor and the construction immediately preceding it; Tag 08G2, lemma-cone-tor-amplitude, proof hint"
+   }
+  },
+  {
+   "text": "For an isomorphism $K\\cong L$, the functor $T_F$ sends it to an isomorphism, and the cohomology functors of [def-weil-abstract-derived-category] send that to isomorphisms $H^i(T_F(K))\\cong H^i(T_F(L))$. Therefore vanishing outside any fixed interval is identical for $K$ and $L$. Also additivity gives $T_F(0)\\cong0$: the identity of its value is the image of $1_0=0$ and hence is zero. All its cohomology objects are zero. By [def-weil-proetale-tor-amplitude], zero has Tor amplitude in $[0,0]$, and finite Tor amplitude is invariant under isomorphisms. Step 1 supplies the constructibility clauses.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FZ, definition-tor-amplitude; Tag 06YU, definition-derived-tor"
+   }
+  },
+  {
+   "text": "With the cohomological shift convention of [def-weil-abstract-derived-category], $(C[m])^i=C^{i+m}$ and its differential differs by the sign $(-1)^m$, which does not change kernels or images. Thus $H^i(C[m])\\cong H^{i+m}(C)$. Combine this with Step 2 to get $H^i(T_F(K[m]))\\cong H^{i+m}(T_F(K))$. If $K$ has Tor amplitude in $[a,b]$, these cohomology sheaves vanish for $i\\notin[a-m,b-m]$, for every $F$. This is exactly the shifted Tor bound in [def-weil-proetale-tor-amplitude]. Conversely, apply the forward implication to $K[m]$ with shift $-m$ and use $(K[m])[-m]\\cong K$. Step 1 supplies the bounded constructible equivalence.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FZ, definition-tor-amplitude; Tag 06YU, definition-derived-tor; cohomological shift convention"
+   }
+  },
+  {
+   "text": "Consider a distinguished triangle $K\\to L\\to M\\to K[1]$. If the endpoint Tor intervals are $[a_1,b_1]$ and $[a_2,b_2]$, set $a=\\min(a_1,a_2)$ and $b=\\max(b_1,b_2)$. Since each endpoint interval lies in $[a,b]$, both endpoints have Tor amplitude in this common interval by [def-weil-proetale-tor-amplitude]. For each degree-zero module sheaf $F$, Step 2 gives a distinguished triangle $T_F(K)\\to T_F(L)\\to T_F(M)\\to T_F(K)[1]$. Apply [lem-sf-derived-homology-long-exact] in the abelian category of $A_Y$-modules. For $i\\notin[a,b]$ the exact segment is $0=H^i(T_F(K))\\to H^i(T_F(L))\\to H^i(T_F(M))=0$, Exactness says that the image of the zero map into the middle object is the kernel of its zero map to zero. The former is zero and the latter is the whole middle object, so the middle object is zero. This works for every $F$, so $L$ has Tor amplitude in $[a,b]$. If the endpoint interval was already $[a,b]$, it stays unchanged. Step 1 shows that $L$ is bounded constructible as well.",
+   "uses": [
+    "def-weil-proetale-tor-amplitude",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G2, lemma-cone-tor-amplitude, clause (2) and proof hint; Tag 08FZ, definition-tor-amplitude"
+   }
+  },
+  {
+   "text": "The full subcategory defined by the conjunction $P$ inherits the ambient morphisms. Steps 1 and 3 give zero and closure under isomorphisms; Step 4 gives all integer shifts and the reverse implication; Step 5 gives closure under extensions. These are precisely the hypotheses in [def-weil-triangulated-subcategory], so the inherited shift and distinguished triangles make it a full triangulated subcategory, as asserted.",
+   "uses": [
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G2, lemma-cone-tor-amplitude; full-subcategory criterion from Derived Categories Tag 05QM"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-weil-proetale-dbc-triangulated",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-weil-triangulated-category",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-abstract-derived-category",
+  "lem-sf-derived-homology-long-exact",
   "def-weil-triangulated-subcategory"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08FZ (definition-tor-amplitude), 06YU (definition-derived-tor), 08G2 (lemma-cone-tor-amplitude), clause (2) and proof hint, with the omitted vanishing argument written out"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -32,10 +121,59 @@
    "results": "ObjectProperty.IsTriangulated and IsTriangulatedClosed₂ (CategoryTheory/Triangulated/Subcategory.lean), the general notion of a triangulated subcategory; nothing on Tor amplitude or on derived categories of sheaves of modules on a site.",
    "date": "2026-10-09",
    "verdict": "no match (only the general notion ObjectProperty.IsTriangulated, already the Mathlib leaf def-weil-triangulated-subcategory)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complexes of sheaves with bounded constructible cohomology and finite Tor amplitude form a triangulated subcategory",
+   "results": "DerivedCategory.TStructure.t, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.IsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.IsLE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjSingleFunctor",
+   "date": "2026-10-14",
+   "verdict": "no match: ingredients only, no ringed-site Tor-amplitude property"
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.IsTriangulated",
+   "results": "none; loogle: unknown identifier 'ObjectProperty.IsTriangulated'",
+   "date": "2026-10-14",
+   "verdict": "no match: ingredients only, no ringed-site Tor-amplitude property"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|finiteTor|TorAmplitude",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: ingredients only, no ringed-site Tor-amplitude property"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Tor dimension is invariant under shifts and extensions in derived categories of modules on a ringed site",
+   "results": "DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, CategoryTheory.HasInjectiveDimensionLT.mk, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.IsLE",
+   "date": "2026-10-14",
+   "verdict": "no match: ingredients only, no ringed-site Tor-amplitude property"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite Tor amplitude complexes form a triangulated subcategory",
+   "results": "none; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTriangulated|tor.?dimension",
+   "results": "Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Subcategory.lean ; searched Mathlib/CategoryTheory/Triangulated",
+   "date": "2026-10-14",
+   "verdict": "no match: ingredients only, no ringed-site Tor-amplitude property"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitude\"",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: ingredients only, no ringed-site Tor-amplitude property"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -55,5 +193,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-finite-ctf-triangulated",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 08G2 proof hint into six steps, keeping all clauses and the pro-etale constant coefficient category. Reused exact derived tensor on ringed topoi and the general long exact cohomology theorem; no new nodes. Added the coefficient-extension definition dependency, verified finiteness and the shift sign, and searched Mathlib twice. Etale Lean candidates do not state the pro-etale item.",
+  "blueprint": "Realizes the finite-stage sentence of def-weil-finite-tor-amplitude defining D^b_ctf(Y,A) as a full triangulated subcategory; no change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Verifies the finite coefficient hypothesis needed for the existing pro-etale constructibility lemma."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Uses only exactness of derived tensor in each variable, on the identity ringed topos; no unit-local general ringed-site exactness node states it."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "General long exact cohomology sequence in an abelian derived category, needed by the Stacks 08G2 proof hint."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-0eefd28b6",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-0eefd28b6 (reviewer sub-agent of L); spot-checked: Read the mathematics in full; review.md records all six steps, cited statements and source locations, edge cases, duplicate/cycle checks, and master target coefficient/morphism checks. No new nodes or repairs. Accepted all three declared generic tool uses; no étale/pro-étale or condensed-coefficient comparison is assumed."
+ }
 }
