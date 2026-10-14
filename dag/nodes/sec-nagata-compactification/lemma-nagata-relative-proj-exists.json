@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-nagata-relative-proj-exists",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Existence and affine compatibility of relative Proj",
@@ -18,29 +18,119 @@
  ],
  "proof": [
   {
-   "text": "Choose the index set of all affine opens $V\\subseteq X$. For each $V$ put\n$P_V=\\operatorname{Proj}(\\Gamma(V,\\mathcal A))$. If $W\\subseteq V$ is a\nprincipal affine open, quasi-coherence gives the coefficientwise graded\nlocalization\n\n$$\n\\Gamma(V,\\mathcal A)[s^{-1}]\\;\\xrightarrow{\\sim}\\;\n\\Gamma(W,\\mathcal A),\n$$\n\nand the affine Proj construction gives an isomorphism from $P_W$ onto the\ninverse image of $W$ in $P_V$. To cover an arbitrary overlap $V\\cap V'$,\nindex the gluing datum by triples $(V,V',W)$ with $W$ affine and\n$W\\subseteq V\\cap V'$, together with a principal refinement inside $W$.\nThe associated isomorphism is the map on each standard chart induced by the\ndisplayed localization. Every overlap is covered by such indices, and the\nmaps are isomorphisms because localization is transitive.",
-   "uses": [],
-   "elementary": null
+   "text": "Use the scheme $X$ and graded algebra $\\mathcal A$ of [def-nagata-relative-proj]. Index by all affine opens $U$ of $X$, and put $P_U=\\operatorname{Proj}(\\Gamma(U,\\mathcal A))$, with structure map $p_U$ induced by the base ring map to degree zero. By [lem-nagata-proj-affine-restriction], restriction gives $r^U_V:P_V\\to P_U$ for every affine inclusion $V\\subseteq U$, over $U$, identifying $P_V$ with $p_U^{-1}(V)$. These are precisely the local pieces and restriction maps required for relative gluing. No intersection of affine opens is assumed affine.",
+   "uses": [
+    "def-nagata-relative-proj",
+    "lem-nagata-proj-affine-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NO, 01NQ: local objects and restriction maps"
+   }
   },
   {
-   "text": "The identity and inverse axioms are the cases $V=V'$ and exchange of the two\naffine indices. On a triple overlap all routes send a fraction\n$x/s^m$ to its image in the localization at the product of the three\ndenominators; hence the cocycle axiom is exactly\n[lemma-nagata-proj-chart-ring-cocycle]. The datum therefore satisfies\nthe scheme-gluing axioms, so the Mathlib\nconstruction `AlgebraicGeometry.Scheme.GlueData.glued` produces a\nscheme $P$ and a morphism $P\\to X$ (the degree-zero maps agree on every\noverlap). Its restriction to $V$ is the specified $P_V$ by the restriction\nfield of the same gluing construction. A second affine cover produces the\nsame overlap datum after passing to the common refinement by affine opens;\nthe uniqueness field of `Scheme.GlueData.glued` gives a unique\nisomorphism over $X$ that\nrespects all the local identifications. (No uniqueness among arbitrary\nautomorphisms over $X$ is asserted.) The same argument on a third\nrefinement proves compatibility with further restrictions.",
+   "text": "The identity and composition assertions of [lem-nagata-proj-affine-restriction] give $r^U_U=\\mathrm{id}$ and $r^U_W=r^U_V\\circ r^V_W$ for every triple $W\\subseteq V\\subseteq U$. Together with the preimage isomorphisms from step 1, these verify every hypothesis of [lem-weil-pbc-relative-glueing-affine-opens]. Apply that node to obtain a scheme $P$, a morphism $\\pi:P\\to X$, and isomorphisms $i_U:\\pi^{-1}(U)\\to P_U$ over every affine open $U$, such that $i_U\\circ\\mathrm{incl}\\circ i_V^{-1}=r^U_V$. This proves existence and the asserted affine compatibility, including structural-map compatibility.",
    "uses": [
-    "lemma-nagata-proj-chart-ring-cocycle"
+    "lem-nagata-proj-affine-restriction",
+    "lem-weil-pbc-relative-glueing-affine-opens"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NQ, proof applying Tags 01LH, 01NO, 01NP"
+   }
+  },
+  {
+   "text": "For nested affine opens $W\\subseteq V\\subseteq U$, the two restriction routes under the $i$ identifications are $r^U_W$ and $r^U_V\\circ r^V_W$, hence equal by [lem-nagata-proj-affine-restriction]. For arbitrary open restrictions cover the open by affine opens contained in it using [lem-weil-pbc-affine-opens-basis]; the same equality on those opens proves equality of the restriction morphisms by [lem-weil-pbc-scheme-morphism-gluing]. Thus restriction isomorphisms commute with iterated restriction, and all maps remain over the base.",
+   "uses": [
+    "lem-nagata-proj-affine-restriction",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NP, 01LH: transitivity and restriction"
+   }
+  },
+  {
+   "text": "Let $(P',\\pi',i'_U)$ be any second realization with the specified compatible local identifications over all affine opens. On $\\pi^{-1}(U)$ define $a_U=(i'_U)^{-1}\\circ i_U$, viewed as a morphism into $P'$. On an overlap use affine opens $W\\subseteq U\\cap V$. The compatibility equations from step 2 show that both $a_U$ and $a_V$ there are the inclusion into $P'$ composed with $(i'_W)^{-1}\\circ i_W$. The opens $\\pi^{-1}(W)$ cover the overlap: [lem-weil-pbc-affine-opens-basis] gives an affine open $W$ inside $U\\cap V$ around every image point. Hence [lem-weil-pbc-scheme-morphism-gluing] gives a unique $a:P\\to P'$ with these restrictions. It is over $X$ since $\\pi'\\circ a$ and $\\pi$ agree on the same cover. Reversing the local comparisons gives $b:P'\\to P$; both $ba$ and $ab$ are identities on their respective covers, so that node's uniqueness clause gives $ba=\\mathrm{id}$ and $ab=\\mathrm{id}$. Any comparison respecting the $i_U$ has local maps $a_U$, and is equal to $a$ by the same uniqueness clause.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01LH, uniqueness of the glued compatible local system; morphism-gluing argument"
+   }
+  },
+  {
+   "text": "Let $(Q,q,j_U)$ be a realization glued from a chosen affine cover $\\{U\\}$, where $j_U:q^{-1}(U)\\to P_U$ are the chosen identifications. On each $q^{-1}(U)$ define $c_U=i_U^{-1}\\circ j_U$ as a map to the all-affine realization $P$. For affine $W\\subseteq U\\cap V$, [lem-nagata-proj-affine-restriction] identifies $q^{-1}(W)$ with $P_W$ through either chart: the overlap equivalence in the chosen gluing is the one induced by $r^U_W$ and $r^V_W$. On this open both $c_U$ and $c_V$ equal the inclusion into $P$ composed with $i_W^{-1}$ and that identification. These opens cover $q^{-1}(U\\cap V)$ by [lem-weil-pbc-affine-opens-basis]. Equality on this cover and then [lem-weil-pbc-scheme-morphism-gluing] give a unique $c:Q\\to P$. Define $d_U=j_U^{-1}\\circ i_U$ on $\\pi^{-1}(U)$. On $\\pi^{-1}(W)$ both overlap restrictions equal the inclusion into $Q$ composed with the inverse of its identification with $P_W$ and $i_W$. They therefore glue to $d:P\\to Q$. Locally $d_Uc_U=\\mathrm{id}$ and $c_Ud_U=\\mathrm{id}$; morphism-gluing uniqueness gives $dc=\\mathrm{id}$ and $cd=\\mathrm{id}$ globally. The structural maps agree locally, so $c,d$ are over $X$. Any chart-preserving comparison has these local restrictions and is unique. For three covers, their direct and composite comparisons induce the identity on $P_W$ for every affine $W$ contained in a member of each cover; these $W$ cover $X$ by the basis theorem. Morphism-gluing uniqueness makes the comparisons equal. Restricting this equality to any open proves compatibility with further restriction.",
+   "uses": [
+    "lem-nagata-proj-affine-restriction",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01LH, comparison on common affine refinements; Tag 01NQ"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-nagata-proj-chart-ring-cocycle"
+  "def-nagata-relative-proj",
+  "lem-nagata-proj-affine-restriction",
+  "lem-weil-pbc-relative-glueing-affine-opens",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-affine-opens-basis"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/lemma-nagata-relative-proj-exists.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NQ (lemma-glue-relative-proj), proof using 01NO, 01NP and 01LH; chart-preserving uniqueness expanded using gluing of morphisms"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative Proj of a quasi-coherent graded algebra exists by gluing projective spectra on affine opens and restricts compatibly to affine opens",
+   "results": "AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec, AlgebraicGeometry.Proj.toSpecZero, AlgebraicGeometry.Proj.basicOpenToSpec, AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections, AlgebraicGeometry.Proj.isAffineOpen_basicOpen",
+   "date": "2026-10-14",
+   "verdict": "no match: local absolute Proj maps and charts do not assert cartesian affine-base restriction of a graded algebra sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj",
+   "results": "AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.affineOpenCover, AlgebraicGeometry.Proj.basicOpen, AlgebraicGeometry.Proj.isAffineOpen_basicOpen, AlgebraicGeometry.Proj.basicOpenToSpec, AlgebraicGeometry.Proj.basicOpen_pow, AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.Proj.isBasis_basicOpen",
+   "date": "2026-10-14",
+   "verdict": "no match: local absolute Proj maps and charts do not assert cartesian affine-base restriction of a graded algebra sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeProj|relative.proj|baseChange|localization",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: local absolute Proj maps and charts do not assert cartesian affine-base restriction of a graded algebra sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relative projective spectrum of a quasi-coherent graded algebra sheaf exists and has compatible affine restriction isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing projective spectra of sections of a graded algebra sheaf on an arbitrary scheme",
+   "results": "AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.toSpecZero, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec, AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.Proj.basicOpenToSpec, AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec",
+   "date": "2026-10-14",
+   "verdict": "no match: local absolute Proj maps and charts do not assert cartesian affine-base restriction of a graded algebra sheaf"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed",
@@ -77,5 +167,21 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-def-nagata-sketch-data"
+ "unit": "sk-def-nagata-sketch-data",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lemma-nagata-relative-proj-exists",
+  "worker": "stage1",
+  "summary": "Replaced unsupported localization and gluing claims with affine restriction maps (01NO/01NP), reused the existing relative gluing Mathlib leaf, and expanded chart-preserving uniqueness and cover comparisons using the existing morphism-gluing leaf. The statement is unchanged.",
+  "blueprint": "Realizes both paragraphs of the imported proof: affine local pieces and compatible restrictions; global gluing, restrictions, cover independence and unique chart-preserving comparison.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-4069faad9",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-4069faad9 (reviewer sub-agent of L); spot-checked: Read the item, sole new node, cited statements, and sources in full. Stacks 01NO/01NP justify affine restriction; 01LH/01NQ and morphism gluing justify all five steps and chart-preserving uniqueness. Checked edge cases, duplicates, hypotheses, searches, and cycles. No repairs needed; concrete checks recorded in review.md."
+ }
 }
