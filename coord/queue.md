@@ -1,6 +1,6 @@
 # Work queue
 
-16 items; claim with `tools/claim.py next <group> [--stage N]`.
+15 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (16)
+## Stage 3: modules to prove (15)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -26,7 +26,6 @@
 | `Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchange` | 34 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison` | 34 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativeMVDirectImageRowsPreoverlap` | 41 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.AffineCoordinateComparisonCoherence` | 43 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates` | 50 | 1 | proof |
 
 Waiting, not claimable: 1 modules whose proof uses a node that has no Lean declaration yet.
