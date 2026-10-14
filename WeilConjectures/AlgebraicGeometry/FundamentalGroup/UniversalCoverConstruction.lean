@@ -717,6 +717,7 @@ noncomputable def autAt (j : Index y) (g : Aut (fiber y)) : Aut ((obj y).obj j) 
   (existsUnique_autAt y j g).exists.choose
 
 omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
+/-- The defining property of `autAt`. -/
 lemma autAt_spec (j : Index y) (g : Aut (fiber y)) :
     (fiber y).map (autAt y j g).inv (point y j) = g.inv.app ((obj y).obj j) (point y j) :=
   (existsUnique_autAt y j g).exists.choose_spec

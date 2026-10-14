@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverLoop
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverContinuity
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Transition
+public import WeilConjectures.SixFunctors.ProEtale.Adic.TrivialDescent
 public import WeilConjectures.RepresentationTheory.IntegralModel
 
 /-!
@@ -21,9 +22,10 @@ sheaf `ℚ̄_ℓⁿ` on `Ỹ_t` along it gives a lisse sheaf on `Y` whose monodr
 
 ## Main statements
 
-- `AlgebraicGeometry.ProEtale.AdicSheaf.exists_iso_transitionMatrix_eq`: descent of trivial
-  `ℓ`-adic sheaves along a single-morphism pro-étale cover, for a cocycle of matrices of
-  locally finite functions (the stack property of sheaves).
+- `AlgebraicGeometry.Scheme.UniversalCovers.exists_lisseSheaf_rep`: every continuous
+  finite-dimensional representation is the monodromy representation of a lisse sheaf, the
+  descent (`AlgebraicGeometry.ProEtale.AdicSheaf.exists_iso_transitionMatrix_eq`) of the trivial
+  sheaf along the loop cocycle.
 - `AlgebraicGeometry.ProEtale.AdicSheaf.resOver_freeSection`: the restriction of sections of a
   trivialised sheaf along an endomorphism of the cover acts through the transition matrix.
 -/
@@ -307,29 +309,6 @@ lemma bijective_constSection [ConnectedSpace W] :
 
 end Constant
 
-variable {X W : Scheme.{u}}
-
-/-- **Descent of trivial `ℓ`-adic sheaves along a pro-étale cover** (the stack property of
-sheaves on the pro-étale site; SGA 4, Exp. VIII, 9.1, and Bhatt–Scholze, *The pro-étale topology
-for schemes*, §4.2: the pro-étale site is subcanonical and sheaves glue). Let `f : W ⟶ X` be a
-single-morphism pro-étale cover (weakly étale, surjective and quasi-compact) and `γ` a matrix of
-locally finite functions on `W ×_X W` which is a cocycle: trivial on the diagonal and
-`γ₁₃ = γ₂₃ γ₁₂` on `W ×_X W ×_X W`. Then the descent datum on `ℚ̄_ℓ,Wⁿ` given by `γ` is
-effective: there are an `ℓ`-adic sheaf `G` on `X` and a trivialisation `ε : f^* G ≅ ℚ̄_ℓ,Wⁿ`
-whose transition matrix on `W ×_X W` is `γ`. -/
-theorem exists_iso_transitionMatrix_eq (f : W ⟶ X) [WeaklyEtale f] [Surjective f]
-    [QuasiCompact f] {n : ℕ}
-    (γ : Matrix (Fin n) (Fin n) (PadicAlgCl.locallyFiniteFunctions l ↥(Limits.pullback f f)))
-    (hdiag : γ.map (PadicAlgCl.locallyFiniteFunctionsComp l (pullback.diagonal f).base.hom) = 1)
-    (hcoc : γ.map (PadicAlgCl.locallyFiniteFunctionsComp l (tripleProj₁₃ f).base.hom) =
-      γ.map (PadicAlgCl.locallyFiniteFunctionsComp l
-        (pullback.snd (pullback.snd f f) (pullback.fst f f)).base.hom) *
-      γ.map (PadicAlgCl.locallyFiniteFunctionsComp l
-        (pullback.fst (pullback.snd f f) (pullback.fst f f)).base.hom)) :
-    ∃ (G : AdicSheaf l X) (ε : (f)^*ᵃ[l].obj G ≅ ⨁ fun _ : Fin n ↦ unit l W),
-      transitionMatrix ε (pullback.fst f f) (pullback.snd f f) pullback.condition = γ := by
-  sorry
-
 end AdicSheaf
 
 end AlgebraicGeometry.ProEtale
@@ -361,6 +340,7 @@ noncomputable def loopMatrix : Matrix (Fin n) (Fin n)
     rintro _ ⟨q, -, rfl⟩
     exact hmem _ i j⟩
 
+/-- The entries of the loop cocycle. -/
 lemma loopMatrix_apply (i j : Fin n) (q : ↥(Limits.pullback (U.proj t) (U.proj t))) :
     (loopMatrix (U := U) t R hR i j).1 q = R (U.loop t q) i j :=
   rfl

@@ -55,6 +55,7 @@ noncomputable def comps {Z : B.ProEt} (x : (⨁ fun _ : Fin n ↦ unit l B).X.ob
 noncomputable abbrev sectionsFunctor (Z : B.ProEt) : AdicSheaf l B ⥤ WeilCoefficients.{u} l :=
   AdicSheaf.forget B ⋙ sheafToPresheaf _ _ ⋙ (evaluation _ _).obj (op Z)
 
+/-- The sections functor on morphisms. -/
 lemma sectionsFunctor_map_apply {Z : B.ProEt} {M N : AdicSheaf l B} (φ : M ⟶ N)
     (x : M.X.obj.obj (op Z)) : ((sectionsFunctor Z).map φ).hom x = φ.hom.hom.app (op Z) x :=
   rfl
@@ -83,7 +84,9 @@ noncomputable def ofComps {Z : B.ProEt} (c : Fin n → PadicAlgCl.locallyFiniteF
     (⨁ fun _ : Fin n ↦ unit l B).X.obj.obj (op Z) :=
   ∑ i, (biproduct.ι (fun _ : Fin n ↦ unit l B) i).hom.hom.app (op Z) (ULift.up (c i))
 
-lemma comps_ofComps {Z : B.ProEt} (c : Fin n → PadicAlgCl.locallyFiniteFunctions l Z.left) :
+/-- The components of the section with given components. -/
+lemma comps_ofComps {Z : B.ProEt}
+    (c : Fin n → PadicAlgCl.locallyFiniteFunctions l Z.left) :
     comps (ofComps (l := l) (B := B) c) = c := by
   classical
   funext j
@@ -146,7 +149,9 @@ noncomputable def toLowerStarUnit : unit l W ⟶ (a)_*ᵃ[l].obj (unit l P) :=
   (adicUpperStarLowerStarAdjunction l a).unit.app (unit l W) ≫
     (a)_*ᵃ[l].map (adicUpperStarUnitIso l a).hom
 
-lemma toLowerStarUnit_hom : (toLowerStarUnit (l := l) a).hom = adicConstantSheafToLowerStar l a := by
+/-- Pulling back functions along `a`, on underlying sheaves. -/
+lemma toLowerStarUnit_hom :
+    (toLowerStarUnit (l := l) a).hom = adicConstantSheafToLowerStar l a := by
   rw [toLowerStarUnit, Mod.comp_hom', adicLowerStar_map_hom, adicUpperStarLowerStarAdjunction,
     Adjunction.modAdjunction_unit_app_hom]
   simp only [adicUpperStarUnitIso, Mod.regularIsoOfIsIso_hom_hom]
@@ -160,10 +165,12 @@ noncomputable def freePull :
   (adicUpperStarLowerStarAdjunction l a).unit.app _ ≫
     (a)_*ᵃ[l].map (freeUpperStarIso l (Fin n) a).hom
 
+/-- Pulling back columns of functions is the adjoint of `a^* ℚ̄_ℓ,Wⁿ ≅ ℚ̄_ℓ,Pⁿ`. -/
 lemma freePull_eq : freePull (l := l) (n := n) a =
     (adicUpperStarLowerStarAdjunction l a).homEquiv _ _ (freeUpperStarIso l (Fin n) a).hom :=
   ((adicUpperStarLowerStarAdjunction l a).homEquiv_unit _ _ _).symm
 
+/-- Pulling back columns of functions, componentwise. -/
 lemma freePull_π (i : Fin n) :
     freePull (l := l) a ≫ (a)_*ᵃ[l].map (biproduct.π (fun _ : Fin n ↦ unit l P) i) =
       biproduct.π (fun _ : Fin n ↦ unit l W) i ≫ toLowerStarUnit a := by
@@ -221,6 +228,8 @@ noncomputable def descentMap :
   descentMapFst f γ - descentMapSnd f
 
 set_option maxHeartbeats 2000000 in
+-- The kernel needs time to unfold the composites of sheaf morphisms in `descentMap`.
+/-- The descent map is the difference of its two halves. -/
 lemma descentMap_eq : descentMap (l := l) f γ = descentMapFst f γ - descentMapSnd f := rfl
 
 /-- The map `T ×_X (W ×_X W) ⟶ T ×_X W` induced by the first projection. -/
@@ -410,6 +419,7 @@ section Kernel
 
 variable {B : Scheme.{u}} {M N : AdicSheaf l B} (φ : M ⟶ N) (U : B.ProEt)
 
+/-- The sections functor is left exact. -/
 instance : PreservesFiniteLimits (sectionsFunctor (l := l) U) := by
   unfold sectionsFunctor
   infer_instance
@@ -514,7 +524,8 @@ lemma bijective_descentTrivApp
       exact pullback.lift_fst _ _ _
   have hσ₂ : σ ≫ descentρ₂ f T' = 𝟙 _ := pullback.hom_ext (by simp [σ]) (by simp [σ, ψ])
   have hσ₃ : σ ≫ pullback.snd _ _ = ψ := pullback.lift_snd _ _ _
-  have hpt₁ (x) : (descentρ₁ f T').base (σ.base x) = u.left.base ((pullback.fst T'.hom f).base x) := by
+  have hpt₁ (x) : (descentρ₁ f T').base (σ.base x) =
+      u.left.base ((pullback.fst T'.hom f).base x) := by
     rw [← Scheme.Hom.comp_apply, hσ₁, Scheme.Hom.comp_apply]
     rfl
   have hpt₂ (x) : (descentρ₂ f T').base (σ.base x) = x := by
@@ -537,7 +548,8 @@ lemma bijective_descentTrivApp
     exact (sub_eq_zero.1 h.symm).symm
   have hmap (y : (⨁ fun _ : Fin n ↦ unit l W).X.obj.obj
       (op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj T'))) (j : Fin n) (z) :
-      (comps ((⨁ fun _ : Fin n ↦ unit l W).X.obj.map u.op y) j).1 z = (comps y j).1 (u.left.base z) := by
+      (comps ((⨁ fun _ : Fin n ↦ unit l W).X.obj.map u.op y) j).1 z =
+        (comps y j).1 (u.left.base z) := by
     rw [comps_map]
     rfl
   constructor
@@ -640,7 +652,8 @@ lemma bijective_descentTrivApp
     simp only [yc, AddSubmonoidClass.coe_finsetSum, ContinuousMap.sum_apply, MulMemClass.coe_mul,
       ContinuousMap.mul_apply, PadicAlgCl.locallyFiniteFunctionsComp_apply_coe,
       ContinuousMap.comp_apply]
-    refine (Finset.sum_congr rfl fun j _ ↦ (congrArg₂ (· * ·) (hd j) (congrArg (c j).1 hf) :)).trans ?_
+    refine (Finset.sum_congr rfl fun j _ ↦
+      (congrArg₂ (· * ·) (hd j) (congrArg (c j).1 hf) :)).trans ?_
     simp [c]
 
 variable {f γ} in
