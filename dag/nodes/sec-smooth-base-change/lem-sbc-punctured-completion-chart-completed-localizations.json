@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "The affine base-change section formula constructs d_i, sending z tensor m to the product of the structural C-section z with the pullback of m. Since f_i is invertible on V_i, base change over U is the same as base change over Spec A on this chart. The equation D.over identifies p⁻¹V_i with the principal open defined by f_i in E. Affineness of E identifies its sections with localization of completed global sections. Compose this localization map with sections of the overlap isomorphism and d_i inverse to obtain alpha_i. On m/f_i^n this is d_i inverse of the restriction of D.toCompleted^*(m) divided by the structural section f_i^n. The pure-tensor and fraction formulas give d_chart and d_prime. Multiplication by structural C-sections gives alpha_smul and d_scalar. Empty principal opens have zero modules, so the constructions apply there too.",
+   "text": "For each chart V, paste the pullback over U with the restriction square to obtain a pullback over Spec A. Apply Mathlib isIso_pushoutSection_of_isAffineOpen and isIso_pushoutSection_iff to the affine opens top, top, and V. Transport the section pushout along the two ΓSpecIso identifications, then use CommRingCat.isPushout_tensorProduct and isoIsPushout to construct a ring equivalence Q from C tensor_A Γ(Y,V) to overlap sections. The inl and inr equations give the structural C-section and chart pullback generator formulas. chartSectionModule_smul identifies the original chart action with the structural A-action; baseChange of this identity gives the C-linear equivalence d.",
    "uses": [
     "def-sbc-punctured-completion-chart-section-modules",
     "def-sbc-punctured-completion-matching-sections",
@@ -23,6 +23,36 @@
     "def-weil-pbc-adic-completion"
    ],
    "elementary": false
+  },
+  {
+   "text": "D.over implies toCompleted followed by s is the overlap structural morphism. D.overlap_base identifies the chart inverse image with the inverse image of W=s⁻¹D(φ(f)). Since D(f) lies in U, W lies in the opensRange of the open immersion toCompleted; Hom.isIso_app therefore makes its section map, transported along the equality of opens, an isomorphism F. Naturality proves F respects the structural C-actions.",
+   "uses": [
+    "def-sbc-punctured-completion-chart-section-modules",
+    "def-sbc-punctured-completion-matching-sections",
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For affine E, W equals E.basicOpen of the structural image of φ(f). IsAffineOpen.isLocalization_of_eq_basicOpen makes Γ(E,W) a localization of Γ(E,top). Restrict along A and use IsLocalizedModule.linearEquiv to construct e from the specified localized completed section module. Its generator equation is linearEquiv_apply. To verify e respects the localized C-action, compare the two A-linear maps by IsLocalizedModule.ext; on m/1 the assertion is multiplicativity of restriction. LocalizedModule.induction_on and exists_localized_s_module.choose_spec identify the localized scalar action with the localized multiplication map.",
+   "uses": [
+    "def-sbc-punctured-completion-chart-section-modules",
+    "def-sbc-punctured-completion-matching-sections",
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define alpha=e followed by F followed by d inverse, restricting the C-linear composite to A. Its scalar identity follows from that of e and C-linearity. Cancellation of d with its inverse, linearEquiv_apply, and naturality of toCompleted prove the completed generator formula. The inr generator equation gives d(1 tensor m), and C-linearity gives d_scalar. Choose these jointly constructed pairs for every index. The argument has no nonempty-open or nonzero-element assumptions, so also covers f=0, empty charts, and the empty index family.",
+   "uses": [
+    "def-sbc-punctured-completion-chart-section-modules",
+    "def-sbc-punctured-completion-matching-sections",
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -33,9 +63,9 @@
  ],
  "proof_origin": {
   "kind": "agent",
-  "by": "J4",
+  "by": "G4",
   "document": "Stacks Project",
-  "place": "Tag 0BLH, affine chart section construction; Tag 05EL, item (1)."
+  "place": "Tags 0BLH (affine chart comparison) and 05EL item (1); direct Mathlib affine-section pushout and module localization construction, 2026-10-14."
  },
  "mathlib_searches": [
   {
@@ -110,17 +140,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261013T234507-L-2161398",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.CompletionGluingData.exists_chart_completed_localizations"
-  ],
-  "sorry_after": []
+  "landing": "20261014T020510-L-3811175",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
