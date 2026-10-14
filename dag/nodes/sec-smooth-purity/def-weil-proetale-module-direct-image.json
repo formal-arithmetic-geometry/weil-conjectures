@@ -7,11 +7,11 @@
    "place": "its statement (a notion the statement uses)",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Direct image of pro-etale module sheaves",
- "statement": "Let $f:X\\to Y$ be a morphism of schemes and let $A$ be a commutative ring. Use the small pro-etale sites $X_{\\mathrm{proet}}$, $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], the constant sheaves of rings $A_X$, $A_Y$ and the abelian categories $\\Sh(X_{\\mathrm{proet}},A)$, $\\Sh(Y_{\\mathrm{proet}},A)$ of sheaves of $A_X$-, resp. $A_Y$-modules defined there. For an object $V\\to Y$ of $Y_{\\mathrm{proet}}$ the base change $V\\times_YX\\to X$ is weakly etale [def-weil-scheme-morphism-properties] (flatness and flatness of the diagonal are stable under base change), so $u_f(V)=V\\times_YX$ is an object of $X_{\\mathrm{proet}}$, and $V\\mapsto u_f(V)$ is a functor $u_f:Y_{\\mathrm{proet}}\\to X_{\\mathrm{proet}}$ which carries coverings to coverings and commutes with fibre products. For a sheaf $F$ of $A_X$-modules on $X_{\\mathrm{proet}}$, the *direct image* $f_*F$ is the presheaf\n\n$$\n (f_*F)(V)=F(V\\times_YX),\\qquad V\\in Y_{\\mathrm{proet}},\n$$\n\nwith restriction maps those of $F$ along $u_f$; it is a sheaf on $Y_{\\mathrm{proet}}$, and it is an $A_Y$-module through the map of sheaves of rings $A_Y\\to f_*A_X$ induced, by the universal property of sheafification, from the map of constant presheaves $A\\to A_X(V\\times_YX)$. On morphisms $f_*$ acts by $(f_*\\varphi)_V=\\varphi_{V\\times_YX}$. This defines an additive functor\n\n$$\n f_*:\\Sh(X_{\\mathrm{proet}},A)\\longrightarrow\\Sh(Y_{\\mathrm{proet}},A).\n$$",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and let $A$ be a commutative ring. Use the small pro-etale sites $X_{\\mathrm{proet}}$, $Y_{\\mathrm{proet}}$, their size convention, the constant sheaves of rings $A_X$, $A_Y$, and the categories $\\Sh(X_{\\mathrm{proet}},A)$, $\\Sh(Y_{\\mathrm{proet}},A)$ of sheaves of modules [def-weil-pbc-proetale-site]. Use the morphism of sites and the constant-ring structure map of [def-weil-proetale-inverse-image]: its base-change functor is\n$$\n u_f:Y_{\\mathrm{proet}}\\longrightarrow X_{\\mathrm{proet}},\\qquad (V\\to Y)\\longmapsto(V\\times_YX\\to X),\n$$\nwhich carries coverings to coverings and commutes with fibre products, and its ring map $\\rho^f_A:A_Y\\to f_*A_X$ extends the map of constant presheaves $a\\mapsto a|_{V\\times_YX}$ by sheafification.\n\nFor a sheaf $F$ of $A_X$-modules, define its direct image by\n$$\n (f_*F)(V)=F(V\\times_YX).\n$$\nThe restrictions are those of $F$ along $u_f$. Its underlying abelian presheaf is the direct-image sheaf of [def-weil-proetale-inverse-image]. Give it the $A_Y$-module structure\n$$\n A_Y(V)\\times F(V\\times_YX)\\longrightarrow F(V\\times_YX),\\qquad (a,s)\\longmapsto\\rho^f_{A,V}(a)s.\n$$\nHere module sheaves and their morphisms have the sectionwise meaning of [def-weil-sheaf-of-modules-category]. On morphisms put $(f_*\\varphi)_V=\\varphi_{V\\times_YX}$. Restriction compatibility and the module axioms are the corresponding equalities for $F$ after substitution along $u_f$ and restriction of scalars along $\\rho^f_A$; the components of $f_*\\varphi$ are $A_Y(V)$-linear since $\\varphi_{V\\times_YX}$ is $A_X(V\\times_YX)$-linear. Identities, composition and addition of morphisms are computed componentwise, so these assignments define an additive functor\n$$\n f_*:\\Sh(X_{\\mathrm{proet}},A)\\longrightarrow\\Sh(Y_{\\mathrm{proet}},A).\n$$\n\nSource for this construction: Stacks Project, proetale.tex, Tag 09A5 (label proetale-section-morphism), introductory paragraph; sites-modules.tex, Tag 03D6 (label sites-modules-definition-pushforward), clause (1). Tag 03D7 is the adjunction lemma, not the definition of pushforward.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-derived-direct-image.md",
   "place": "node def-weil-derived-direct-image, order 1468: the functor $f_*:\\Sh(X_{\\mathrm{proet}},A)\\to\\Sh(Y_{\\mathrm{proet}},A)$",
@@ -27,8 +27,10 @@
   ]
  },
  "stmt_deps": [
+  "def-pc-scheme",
   "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category"
  ],
  "proof": [],
  "proof_deps": [],
@@ -36,28 +38,70 @@
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "grep -rn 'def sheafPushforwardContinuous' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/",
-   "results": "CategoryTheory/Sites/Continuous.lean:362 `Functor.sheafPushforwardContinuous : Sheaf K A ⥤ Sheaf J A` for a continuous functor `G : C ⥤ D`",
-   "date": "2026-10-09",
-   "verdict": "generalization: pushforward of sheaves along a continuous functor of sites; specializing it needs the base-change functor $u_f$ between small pro-etale sites and its continuity, which Mathlib does not have, so not a one-line specialization"
+   "query": "pushforward|sheafPushforwardContinuous",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole: generic module pushforward exists, but continuity of the pro-etale base-change functor and the constant-ring structure map are additional project inputs"
   },
   {
    "tool": "grep",
-   "query": "grep -n 'def pushforward' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
-   "results": "`SheafOfModules.pushforward : SheafOfModules R ⥤ SheafOfModules S` along a continuous functor with a ring map `S ⟶ F.sheafPushforwardContinuous R` (line 44)",
-   "date": "2026-10-09",
-   "verdict": "generalization: the module version of the same, same missing input"
+   "query": "overPullback|pullback.*[Cc]ontinuous|[Cc]ontinuous.*pullback",
+   "results": "Mathlib/AlgebraicGeometry/Sites/BigZariski.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole: generic module pushforward exists, but continuity of the pro-etale base-change functor and the constant-ring structure map are additional project inputs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pushforward sheaves of modules along a continuous functor of sites",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "direct image of sheaves of modules over a constant ring on small pro-etale sites by base change",
+   "results": "LightCondMod.ofSheafLightProfinite; SheafOfModules.pullback; SheafOfModules.pushforward; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafProfinite; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; AlgebraicGeometry.Scheme.Modules.pushforward; SheafOfModules.instIsRightAdjointPushforward",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole: generic module pushforward exists, but continuity of the pro-etale base-change functor and the constant-ring structure map are additional project inputs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "precomposition along a continuous functor followed by restriction of scalars defines direct image of modules",
+   "results": "PresheafOfModules.pushforward; PresheafOfModules.pushforward_obj_obj; PresheafOfModules.pushforward₀_obj; PresheafOfModules.pushforward₀; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map; PresheafOfModules.pushforward_obj_map_apply; PresheafOfModules.pushforward_obj_map_apply'; PresheafOfModules.pushforward_map_app_apply",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole: generic module pushforward exists, but continuity of the pro-etale base-change functor and the constant-ring structure map are additional project inputs"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward",
+   "results": "SheafOfModules.pushforwardId; SheafOfModules.pushforward; SheafOfModules.instIsLeftAdjointOverOverRingCatPushforwardIdSheafOver; SheafOfModules.overPushforwardOverAdj; SheafOfModules.isLeftAdjoint_pushforward_of_isIso; SheafOfModules.pushforwardCongr; SheafOfModules.pushforwardNatIso; SheafOfModules.pushforwardNatTrans",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole: generic module pushforward exists, but continuity of the pro-etale base-change functor and the constant-ring structure map are additional project inputs"
   },
   {
    "tool": "grep",
-   "query": "grep -n '^def\\|^abbrev\\|^instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Proetale.lean; grep -rn 'ProEt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/",
-   "results": "Proetale.lean defines `proetaleTopology` (big site), `Scheme.ProEt S` with `ProEt.topology S` (small site), `ProEt.forget`; ElladicCohomology.lean uses them. No functor `Y.ProEt ⥤ X.ProEt` for a morphism `X ⟶ Y` (base change) and no continuity statement for one",
-   "date": "2026-10-09",
-   "verdict": "no match"
+   "query": "def pushforward|def pushforward₀|instance.*[Aa]dditive",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Localization.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Basic.lean; Mathlib/Algebra/Category/ModuleCat/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "Generic sheaf/presheaf module pushforward and restriction of scalars found; these require the site-continuity and constant-ring map supplied by def-weil-proetale-inverse-image, rather than constructing the entire pro-etale datum."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaves of modules direct image restriction of scalars ring homomorphism continuous sites functor",
+   "results": "SheafOfModules.restrictScalars; SheafOfModules.pushforwardSections; AlgebraicGeometry.Scheme.Modules.restrictFunctor; SheafOfModules.restrictScalars_obj_val; SheafOfModules.pushforward_obj_val; PresheafOfModules.pushforward_obj_obj; SheafOfModules.pushforward; SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-14",
+   "verdict": "Generic sheaf/presheaf module pushforward and restriction of scalars found; these require the site-continuity and constant-ring map supplied by def-weil-proetale-inverse-image, rather than constructing the entire pro-etale datum."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.pushforward",
+   "results": "PresheafOfModules.pushforwardId; PresheafOfModules.pushforward; PresheafOfModules.pushforwardCompToPresheaf; PresheafOfModules.pushforwardComp; PresheafOfModules.pushforward_obj_obj; PresheafOfModules.pushforward_id_comp; PresheafOfModules.pushforward_comp_id; PresheafOfModules.pushforward_assoc",
+   "date": "2026-10-14",
+   "verdict": "Generic sheaf/presheaf module pushforward and restriction of scalars found; these require the site-continuity and constant-ring map supplied by def-weil-proetale-inverse-image, rather than constructing the entire pro-etale datum."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -77,5 +121,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-proetale-module-direct-image",
+  "worker": "stage1",
+  "summary": "Definition split using existing notions only: reused the base-change morphism of sites, direct-image sheaf, and constant-ring structure map already stated in def-weil-proetale-inverse-image; made the scalar action and the elementary functor/additivity verification explicit. Replaced the grab-bag scheme-properties citation by def-pc-scheme. No hypotheses or coefficient categories changed. No new nodes and no proof claims beyond the cited construction and sectionwise equalities. The construction source is Tag 03D6, sites-modules-definition-pushforward, clause (1), together with Tag 09A5, proetale-section-morphism, introductory paragraph; these precise references are now recorded in the statement. The inherited source.external reference to Tag 03D7 concerns only adjunction and remains unchanged because source is maintainer-owned. Searches found generic Mathlib pushforward but no complete one-line pro-etale specialization.",
+  "blueprint": "def-weil-derived-direct-image, statement clause introducing the underived functor f_* before deriving it; sk-def-sf-operations clause (ii)."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-bc34d6dc3",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-bc34d6dc3 (reviewer sub-agent of L); spot-checked: Read the complete item, report, dependencies, unit/chapter route, cited sources and exact master target sources. Construction and edge cases check out; no coefficient-category comparison is assumed. Repaired one B5 citation fault by recording Tag 03D6 and Tag 09A5 in split-owned fields. Whole corrected JSON and concrete checks are in fixes/ and review.md; no new nodes or accepted tool_uses.; 1 file(s) fixed by the reviewer"
+ }
 }
