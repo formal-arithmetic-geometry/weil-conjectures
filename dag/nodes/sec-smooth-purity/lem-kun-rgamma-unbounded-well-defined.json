@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-rgamma-unbounded-well-defined",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Independence of the K-injective resolution",
@@ -13,32 +13,122 @@
   "place": "node lem-kun-rgamma-unbounded-well-defined, order 1662"
  },
  "stmt_deps": [
-  "def-kun-rgamma-unbounded"
+  "def-kun-rgamma-unbounded",
+  "def-weil-pbc-kinjective-resolutions",
+  "def-weil-pbc-derived-categories",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-global-sections-functor"
  ],
  "proof": [
   {
-   "text": "Two K-injective resolutions of $K$ are chain-homotopy equivalent, and\na bounded-below complex of injective objects is K-injective, by\n[prop-weil-pbc-kinjective-resolutions-exist]; a comparison\n$I\\to J$ over $K$ between K-injective resolutions in the sense of\n[def-weil-pbc-kinjective-resolutions] is therefore a homotopy\nequivalence. The functor $\\Gamma(T_{\\Et},-)$\ncarries chain-homotopy equivalences to homotopy equivalences of\ncomplexes of $\\Lambda$-modules, hence to isomorphisms in the derived\ncategory, so $\\Gamma(T_{\\Et},I)$ is independent of the chosen\nK-injective resolution $I$ of $K$, i.e. the object\n$\\RGamma(T_{\\Et},K)$ of [def-kun-rgamma-unbounded] is well\ndefined.",
+   "text": "Choose a cochain representative $C$ of $K$, and write the two resolutions as $s:C\\to I$ and $t:C\\to J$. This is the meaning of the resolution notation in [def-kun-rgamma-unbounded] and [def-weil-pbc-kinjective-resolutions]. Put $\\mathcal A=\\Mod(T_{\\Et},\\Lambda)$ as in [def-weil-pbc-derived-categories], and let $Q:K(\\mathcal A)\\to D(\\mathcal A)$ be the localization of [def-weil-abstract-derived-category]. Both $Q(s)$ and $Q(t)$ are invertible because $s,t$ are quasi-isomorphisms. A comparison $f:I\\to J$ over $C$ (strictly or up to homotopy) therefore satisfies $Q(f)=Q(t)Q(s)^{-1}$.",
    "uses": [
-    "prop-weil-pbc-kinjective-resolutions-exist",
+    "def-kun-rgamma-unbounded",
     "def-weil-pbc-kinjective-resolutions",
+    "def-weil-pbc-derived-categories",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, equivalence (1) and (3); the comparison and sections calculations are written out here"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-kinjective-hom-derived], lift $Q(s)Q(t)^{-1}:QJ\\to QI$ to a homotopy class represented by $g:J\\to I$. Since $I$ and $J$ are K-injective, injectivity of the same Hom bijection gives $[g f]=[1_I]$ and $[f g]=[1_J]$. Thus there are degree-minus-one families $h,k$ with $g f-1_I=d_Ih+hd_I$ and $f g-1_J=d_Jk+kd_J$. This proves that the given comparison, rather than just some map between $I$ and $J$, is a homotopy equivalence.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, equivalence (1) and (3); the comparison and sections calculations are written out here"
+   }
+  },
+  {
+   "text": "Global sections are evaluation at the terminal object [def-weil-pbc-global-sections-functor]; for $\\Lambda$-module sheaves this evaluation has its inherited $\\Lambda$-module structure and acts on maps by evaluation. It preserves sums, compositions and identities pointwise. Evaluating the identities from step 2 in each degree gives $\\Gamma(g)\\Gamma(f)-1=d\\Gamma(h)+\\Gamma(h)d$ and $\\Gamma(f)\\Gamma(g)-1=d\\Gamma(k)+\\Gamma(k)d$. Thus the two sections maps are inverse in the homotopy category of $\\Lambda$-modules. Their images are inverse in $D(\\Lambda)$, since the localization of [def-weil-abstract-derived-category] factors through the homotopy category. No exactness of sections is asserted or needed.",
+   "uses": [
+    "def-weil-pbc-global-sections-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, equivalence (1) and (3); the comparison and sections calculations are written out here"
+   }
+  },
+  {
+   "text": "The Hom bijection of [lem-weil-pbc-kinjective-hom-derived] also lifts $Q(t)Q(s)^{-1}$ to a comparison class $[f]$; injectivity with source $C$ and target $J$ gives $[f s]=[t]$. Any two comparisons over $C$ have this same image in $D(\\mathcal A)$, hence are homotopic by injectivity with source $I$ and target $J$. The evaluated homotopy from step 3 shows that their sections maps agree in $D(\\Lambda)$. For three resolutions $s_a:C\\to I_a$, the comparison classes have derived images $Q(s_b)Q(s_a)^{-1}$, whose products satisfy $\\alpha_{bc}\\alpha_{ab}=\\alpha_{ac}$ and $\\alpha_{aa}=1$; injectivity gives these identities already in the homotopy category, hence after sections. For resolutions of possibly different cochain representatives, let $u_a:QI_a\\xrightarrow{\\sim}K$ be the specified identifications with $K$ (the representative identification composed with the inverse resolution map). Set $\\beta_{ab}=u_b^{-1}u_a$. Surjectivity of the cited Hom bijection with source $I_a$ and K-injective target $I_b$ gives a class $[f_{ab}]$ with $Q([f_{ab}])=\\beta_{ab}$, and injectivity makes this class unique. The equations $\\beta_{bc}\\beta_{ab}=u_c^{-1}u_bu_b^{-1}u_a=\\beta_{ac}$ and $\\beta_{aa}=1$ imply $[f_{bc}f_{ab}]=[f_{ac}]$ and $[f_{aa}]=[1]$ by injectivity. In particular $[f_{ba}]$ is inverse to $[f_{ab}]$. Evaluating the homotopies expressing these equations as in step 3 gives identity, inverse and cocycle equations for their sections maps in $D(\\Lambda)$. These choice-independent, composable isomorphisms give precisely canonical independence of $\\RGamma$ as defined in [def-kun-rgamma-unbounded].",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
     "def-kun-rgamma-unbounded"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, equivalence (1) and (3); the comparison and sections calculations are written out here"
+   }
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-kinjective-resolutions-exist",
+  "def-kun-rgamma-unbounded",
   "def-weil-pbc-kinjective-resolutions",
-  "def-kun-rgamma-unbounded"
+  "def-weil-pbc-derived-categories",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-pbc-global-sections-functor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-rgamma-unbounded-well-defined.md",
-  "place": "## Proof"
+  "place": "Proof paragraph, expanded using Stacks Tag 070I (derived.tex, lemma-K-injective)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of two K-injective resolutions are canonically isomorphic in the unbounded derived category",
+   "results": "CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc, CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self, CategoryTheory.InjectiveResolution.iso_hom_naturality, CategoryTheory.InjectiveResolution.Hom.hom'_f, CategoryTheory.InjectiveResolution.iso_inv_naturality_assoc, CategoryTheory.InjectiveResolution.quasiIso, CategoryTheory.InjectiveResolution.instQuasiIsoIntι', CategoryTheory.InjectiveResolution.Hom.hom'_f_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole item; comparison and functorial homotopy facts only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKInjective\"",
+   "results": "CochainComplex.IsKInjective, CochainComplex.isKInjective_of_injective, HomotopyEquiv.isKInjective, CochainComplex.isKInjective_of_iso, CochainComplex.isKInjective_iff_of_iso, CochainComplex.instIsKInjectiveExtendNatIntEmbeddingUpNatOfInjectiveX, CochainComplex.instIsKInjectiveObjIntShiftFunctor, CochainComplex.isKInjective_shift_iff",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole item; comparison and functorial homotopy facts only"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopy|map_homotopy|quasiIso_iff",
+   "results": "Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole item; comparison and functorial homotopy facts only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections preserves homotopy equivalences of K-injective resolutions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor sends homotopy equivalences of cochain complexes to homotopy equivalences",
+   "results": "CategoryTheory.Functor.mapHomotopyEquiv, CategoryTheory.Functor.mapHomotopyEquiv_hom, CategoryTheory.Functor.mapHomotopyEquiv_homotopyHomInvId, CategoryTheory.Functor.mapHomotopyEquiv_homotopyInvHomId, CategoryTheory.Functor.mapHomotopyEquiv_inv, CategoryTheory.Functor.mapHomotopyCategory_map, CategoryTheory.Functor.mapHomotopy_hom, CategoryTheory.Functor.mapHomotopy",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole item; comparison and functorial homotopy facts only"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso_iff|Qh_map_bijective",
+   "results": "41, 50, 55, 57, 75",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole item; comparison and functorial homotopy facts only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -62,5 +152,24 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-rgamma-unbounded-well-defined",
+  "worker": "NN",
+  "summary": "Expanded arbitrary-comparison invertibility, preservation of homotopies by termwise sections, uniqueness, and the identity/composition cocycle. Reused the existing K-injective Hom Mathlib leaf; no new nodes. Removed the unused bounded-below assertion and unnecessary existence proposition from the proof.",
+  "blueprint": [
+   "Proof paragraph, comparison between two K-injective resolutions",
+   "Proof paragraph, sections preserve homotopy equivalences",
+   "Final independence conclusion, expanded to uniqueness and cocycle identities"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-e1398c657",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-e1398c657 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, source places, and unit/chapter route. Verified all four steps, constant-ring module coefficients, comparison uniqueness and cocycles, and small cases including a noninvertible chain map that is a homotopy equivalence. No new nodes, missing citations, or dependency cycles; no target weakened. Concrete checks recorded in review.md."
+ }
 }
