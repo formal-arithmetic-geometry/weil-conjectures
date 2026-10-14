@@ -25,9 +25,69 @@
   "def-pc-scheme-fibre",
   "def-kun-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-sbc-composite-fibre-local-models] to write $A=\\mathcal O_{X_s,x}$, $B=\\mathcal O_{U_s,u}$, $C=\\mathcal O_{U_x,u}$. The rings are Noetherian local; the map $A\\to B$ is local and flat since $a$ is flat at $u$, and $B/\\mathfrak m_A B\\cong C$. The lemma also supplies finite-type affine neighbourhoods in all three fibres, with the same stalks and residue fields as the original points. No Noetherian hypothesis on $S$ is required.",
+   "uses": [
+    "lem-sbc-composite-fibre-local-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0HA1; Morphisms Tags 01T3, 01T4, 01T6, 01U8"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-height-formula] to the flat map $A\\to B$ at the maximal ideal of $B$. Locality makes its contraction the maximal ideal of $A$; localization at either maximal ideal changes nothing. Its equality therefore reads $\\dim B=\\dim A+\\dim(B/\\mathfrak m_A B)=\\dim A+\\dim C$, where the last equality uses the closed-fibre isomorphism of Step 1.",
+   "uses": [
+    "lem-weil-pbc-flat-height-formula",
+    "lem-sbc-composite-fibre-local-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ON (lemma-dimension-base-fibre-equals-total)"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-dimension-formula] to the three finite-type affine neighbourhoods from Step 1. The stalk and residue identifications there give $\\dim_u U_s=\\dim B+\\operatorname{trdeg}_{\\kappa(s)}\\kappa(u)$, $\\dim_u U_x=\\dim C+\\operatorname{trdeg}_{\\kappa(x)}\\kappa(u)$, and $\\dim_x X_s=\\dim A+\\operatorname{trdeg}_{\\kappa(s)}\\kappa(x)$. The passage from the affine neighbourhood to the whole fibre uses [lem-weil-pbc-dimension-at-point-open-subspace], which states equality of dimension at the point for an open subspace. Apply [lem-kun-dimension-finite-type] on each finite-type affine neighbourhood: its global dimension is finite, hence its dimension at the point is finite by the defining minimum over neighbourhoods. The displayed formulas consequently have finite nonnegative local-ring and transcendence-degree terms.",
+   "uses": [
+    "lem-sbc-composite-fibre-local-models",
+    "lem-kun-dimension-formula",
+    "lem-weil-pbc-dimension-at-point-open-subspace",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FX (lemma-dimension-fibre-at-a-point); Tag 02JS proof"
+   }
+  },
+  {
+   "text": "Use [lem-sbc-transcendence-degree-tower] for the compatible field maps $\\kappa(s)\\to\\kappa(x)\\to\\kappa(u)$: $t_{su}=t_{xu}+t_{sx}$. Substituting this and $\\dim B=\\dim A+\\dim C$ into Step 3 gives $\\dim_u U_s=\\dim A+\\dim C+t_{xu}+t_{sx}=(\\dim C+t_{xu})+(\\dim A+t_{sx})=\\dim_u U_x+\\dim_x X_s$. All terms here are finite because the three neighbourhoods are finite type over fields; equivalently one can add the displayed formulas in extended dimensions, with no subtraction or cancellation.",
+   "uses": [
+    "lem-sbc-transcendence-degree-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JS proof, tower identity; Fields Tag 030H"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-dimension-finite-type",
+  "lem-kun-dimension-formula",
+  "lem-sbc-composite-fibre-local-models",
+  "lem-sbc-transcendence-degree-tower",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-flat-height-formula"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02JS, flat equality case, expanded through Tags 02FX and 00ON"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -94,7 +154,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sbc-smooth-relative-dimension-permanence",
   "by": "worker",
@@ -110,5 +170,39 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "worker": "stage1",
+  "summary": "Kept the statement and expanded Stacks 02JS using existing dimension tools: geometric fibre-stalk preparation, existing flat height formula, existing finite-type-over-field dimension formula on affine fibre neighbourhoods, and the Mathlib tower formula. Two new nodes: one structural geometric lemma without a dimension equality, and one Mathlib leaf. Removed draft children duplicating existing dimension tools.",
+  "blueprint": "Expands the ancestor clause about pointwise dimension of a composite with a flat first map (through the sliced charts retaining relative dimension one).",
+  "tool_uses": [
+   {
+    "node": "lem-kun-dimension-formula",
+    "why": "Generic finite-type-over-field dimension formula on affine fibre opens; no dimension formula is supplied by this unit."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-open-subspace",
+    "why": "Generic open-subspace dimension invariance; no replacement of the unit route."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finite-type-over-field dimension finiteness ensures finite addition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-dimension-formula",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-kun-dimension-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-e0bab982e",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-e0bab982e (reviewer sub-agent of L); spot-checked: Read the delivery mathematics in full. All four proof steps and both new nodes agree with Stacks 02JS, 02FX, 0HA1, 00ON and 030H; the Mathlib tower specialization is exact. Hypotheses, edge cases, duplicate candidates, route and archived target boundaries pass. Corrected missing creation/audit metadata in both new-node JSON files under fixes; mathematical fields unchanged. Concrete checks and accepted tool uses are recorded in review.md.; 2 file(s) fixed by the reviewer"
  }
 }
