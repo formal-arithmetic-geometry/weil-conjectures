@@ -14086,3 +14086,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:55 L: returned deliver/S3/Sheaf.AlgebraicGeometry.EtaleLimitOpenCompatibleBoundaries (reviewer RETURN: (reviewer X-9c4a7, head 9c4a71f25) H2 / point 6: restore dag/nodes/sec-proper-base-change/lem-weil-pbc-etale-limit-open-)
 
 - 08:57 L: batch 20261014T004054 dependency take-out
+- 00:57 L: returned deliver/A3/Sheaf.Paper.ModuleCupGodementCoefficientComplexes (reviewer RETURN: (reviewer X-3b433, head 3b4331706) H9: in lean/Sheaf/Paper/ModuleCupGodementCoefficientComplexes.lean, remove the unused)
