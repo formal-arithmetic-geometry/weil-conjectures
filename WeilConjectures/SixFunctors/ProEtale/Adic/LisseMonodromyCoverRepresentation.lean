@@ -123,7 +123,8 @@ lemma adicUpperStar_map_ι_freeUpperStarIso_hom (g : W ⟶ V) (i : Fin n) :
         (freeUpperStarIso l (Fin n) g).hom =
       (adicUpperStarUnitIso l g).hom ≫ biproduct.ι (fun _ : Fin n ↦ unit l W) i := by
   have h1 : biproduct.ι (fun _ : Fin n ↦ unit l W) i ≫ (freeUpperStarIso l (Fin n) g).inv =
-      (adicUpperStarUnitIso l g).inv ≫ (g)^*ᵃ[l].map (biproduct.ι (fun _ : Fin n ↦ unit l V) i) := by
+      (adicUpperStarUnitIso l g).inv ≫
+        (g)^*ᵃ[l].map (biproduct.ι (fun _ : Fin n ↦ unit l V) i) := by
     simp [freeUpperStarIso]
   rw [← Iso.inv_comp_eq, ← Category.assoc, ← h1, Category.assoc, Iso.inv_hom_id,
     Category.comp_id]
@@ -332,3 +333,207 @@ theorem exists_iso_transitionMatrix_eq (f : W ⟶ X) [WeaklyEtale f] [Surjective
 end AdicSheaf
 
 end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.Scheme.UniversalCovers
+
+open ProEtale FiniteEtale AdicSheaf
+
+variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}} {Ω : Type u} [Field Ω]
+  {U : Scheme.UniversalCovers Y Ω}
+
+section Cocycle
+
+variable (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) {n : ℕ}
+  (R : Aut (fiber t) →* Matrix (Fin n) (Fin n) (PadicAlgCl l))
+  (hR : ∀ i j, Continuous fun g ↦ R g i j)
+
+/-- **The loop cocycle of a matrix representation** `R` of `π₁(Y, t)`: the matrix of locally
+finite functions `q ↦ R (loop q)` on `Ỹ_t ×_Y Ỹ_t`. Its entries are locally finite since the
+matrix coefficients of `R` lie in a finite extension of `ℚ_ℓ`. -/
+noncomputable def loopMatrix : Matrix (Fin n) (Fin n)
+    (PadicAlgCl.locallyFiniteFunctions l ↥(Limits.pullback (U.proj t) (U.proj t))) :=
+  fun i j ↦ ⟨⟨fun q ↦ R (U.loop t q) i j, (hR i j).comp (U.continuous_loop t)⟩, by
+    obtain ⟨E, hE, hmem⟩ := PadicAlgCl.exists_finiteDimensional_forall_mem l R hR
+    have : FiniteDimensional ℚ_[l] (Subalgebra.toSubmodule E.toSubalgebra) := hE
+    intro x
+    refine ⟨Set.univ, Filter.univ_mem, Submodule.finiteDimensional_of_le
+      (S₂ := Subalgebra.toSubmodule E.toSubalgebra) (Submodule.span_le.2 ?_)⟩
+    rintro _ ⟨q, -, rfl⟩
+    exact hmem _ i j⟩
+
+lemma loopMatrix_apply (i j : Fin n) (q : ↥(Limits.pullback (U.proj t) (U.proj t))) :
+    (loopMatrix (U := U) t R hR i j).1 q = R (U.loop t q) i j :=
+  rfl
+
+/-- The loop cocycle is trivial on the diagonal. -/
+lemma loopMatrix_diagonal :
+    (loopMatrix (U := U) t R hR).map (PadicAlgCl.locallyFiniteFunctionsComp l
+      (pullback.diagonal (U.proj t)).base.hom) = 1 := by
+  ext i j : 1
+  refine Subtype.ext (ContinuousMap.ext fun x ↦ ?_)
+  simp only [Matrix.map_apply, PadicAlgCl.locallyFiniteFunctionsComp_apply_coe,
+    ContinuousMap.comp_apply, loopMatrix_apply]
+  rw [loop_diagonal, map_one, Matrix.one_apply, Matrix.one_apply]
+  split_ifs <;> rfl
+
+/-- The loop cocycle satisfies the cocycle condition. -/
+lemma loopMatrix_cocycle :
+    (loopMatrix (U := U) t R hR).map
+        (PadicAlgCl.locallyFiniteFunctionsComp l (tripleProj₁₃ (U.proj t)).base.hom) =
+      (loopMatrix (U := U) t R hR).map (PadicAlgCl.locallyFiniteFunctionsComp l
+        (pullback.snd (pullback.snd (U.proj t) (U.proj t))
+          (pullback.fst (U.proj t) (U.proj t))).base.hom) *
+      (loopMatrix (U := U) t R hR).map (PadicAlgCl.locallyFiniteFunctionsComp l
+        (pullback.fst (pullback.snd (U.proj t) (U.proj t))
+          (pullback.fst (U.proj t) (U.proj t))).base.hom) := by
+  ext i j : 1
+  refine Subtype.ext (ContinuousMap.ext fun τ ↦ ?_)
+  simp only [Matrix.map_apply, Matrix.mul_apply, PadicAlgCl.locallyFiniteFunctionsComp_apply_coe,
+    ContinuousMap.comp_apply, loopMatrix_apply]
+  rw [loop_tripleProj₁₃, map_mul, Matrix.mul_apply]
+  simp only [AddSubmonoidClass.coe_finsetSum, ContinuousMap.sum_apply, MulMemClass.coe_mul,
+    ContinuousMap.mul_apply, PadicAlgCl.locallyFiniteFunctionsComp_apply_coe,
+    ContinuousMap.comp_apply, loopMatrix_apply]
+
+end Cocycle
+
+section Rep
+
+variable (hU : ∀ (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseSheaf l Y), ∃ n : ℕ,
+    Nonempty ((U.proj y)^*ᵃ[l].obj G.obj ≅ ⨁ fun _ : Fin n ↦ AdicSheaf.unit l (U.cover y)))
+
+/-- The sections of a vector of constants, as a `ℚ̄_ℓ`-linear map. -/
+noncomputable def constSectionLinearMap (W : Scheme.{u}) (n : ℕ) :
+    (Fin n → PadicAlgCl l) →ₗ[PadicAlgCl l] (WeilCoefficients.toModuleCat l).obj
+      ((Sheaf.Γ (Scheme.ProEt.topology W) (WeilCoefficients.{u} l)).obj
+        (⨁ fun _ : Fin n ↦ unit l W).X) where
+  toFun := constSection
+  map_add' c c' := by
+    simp only [constSection, freeSection, Pi.add_apply, map_add, adicConstantGlobalSection_add,
+      Finset.sum_add_distrib]
+  map_smul' a c := by
+    rw [RingHom.id_apply, ModuleCat.restrictScalars.smul_def]
+    simp only [constSection, freeSection, Finset.smul_sum]
+    refine Finset.sum_congr rfl fun i _ ↦ ?_
+    rw [← map_smul]
+    congr 1
+    rw [adicConstantGlobalSection, adicConstantGlobalSection]
+    rw [← LinearMap.map_smul ((Sheaf.ΓNatIsoSheafSections (Scheme.ProEt.topology W)
+      (WeilCoefficients.{u} l) (Scheme.ProEt.isTerminalMkId W)).inv.app
+        (adicConstantSheaf l W)).hom]
+    congr 1
+
+include hU in
+/-- **Every continuous finite-dimensional representation is a monodromy representation**, for
+the monodromy from universal covers on which lisse sheaves are free. The lisse sheaf attached
+to `ρ` is the descent of `ℚ̄_ℓⁿ` along the universal cover `p : Ỹ_t ⟶ Y` for the loop cocycle
+of the matrix of `ρ` (`AlgebraicGeometry.Scheme.UniversalCovers.loopMatrix`,
+`AlgebraicGeometry.ProEtale.AdicSheaf.exists_iso_transitionMatrix_eq`): in the coordinates of
+the trivialisation over `Ỹ_t`, the transport along a loop `g` is the restriction along
+`(transport g)⁻¹`, which acts on constant sections by the transition matrix along the graph of
+`g`, that is by the matrix of `ρ(g)`
+(`AlgebraicGeometry.ProEtale.AdicSheaf.resOver_freeSection`). -/
+theorem exists_lisseSheaf_rep (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
+    (V : Type (u + 1)) [AddCommGroup V] [Module (PadicAlgCl l) V]
+    [FiniteDimensional (PadicAlgCl l) V] (ρ : Representation (PadicAlgCl l) (Aut (fiber t)) V)
+    (hρ : ∀ (φ : Module.Dual (PadicAlgCl l) V) (v : V), Continuous fun g ↦ φ (ρ g v)) :
+    ∃ (G : LisseSheaf l Y) (e : LisseMonodromy.StalkSpace t G ≃ₗ[PadicAlgCl l] V),
+      ∀ g v, e ((U.lisseMonodromy hU).rep t G g v) = ρ g (e v) := by
+  classical
+  set n := Module.finrank (PadicAlgCl l) V
+  let b := Module.finBasis (PadicAlgCl l) V
+  let R : Aut (fiber t) →* Matrix (Fin n) (Fin n) (PadicAlgCl l) :=
+    { toFun g := LinearMap.toMatrix b b (ρ g)
+      map_one' := by rw [map_one, LinearMap.toMatrix_one]
+      map_mul' g h := by rw [map_mul, LinearMap.toMatrix_mul] }
+  have hR (i j : Fin n) : Continuous fun g ↦ R g i j := by
+    simp only [R, MonoidHom.coe_mk, OneHom.coe_mk, LinearMap.toMatrix_apply]
+    exact hρ (b.coord i) (b j)
+  have := U.weaklyEtale_proj t
+  have : Surjective (U.proj t) := ⟨U.surjective_proj t⟩
+  have := U.quasiCompact_proj t
+  have := U.connectedSpace t
+  obtain ⟨G, ε, hε⟩ := exists_iso_transitionMatrix_eq (U.proj t) (loopMatrix (U := U) t R hR)
+    (loopMatrix_diagonal t R hR) (loopMatrix_cocycle t R hR)
+  have hG : IsAdicLisseSheaf G := ⟨Presieve.singleton (U.proj t),
+    Scheme.Hom.singleton_mem_propQCPrecoverage (P := @WeaklyEtale) inferInstance,
+    fun V f hf ↦ by cases hf; exact ⟨n, ⟨ε⟩⟩⟩
+  let G' : LisseSheaf l Y := ⟨G, hG⟩
+  -- the linear map `ℚ̄_ℓⁿ → G_t` of constant sections over `Ỹ_t`
+  let Ψ : (Fin n → PadicAlgCl l) →ₗ[PadicAlgCl l] LisseMonodromy.StalkSpace t G' :=
+    ((WeilCoefficients.toModuleCat l).map ((U.ptRes l t).app G.X)).hom ∘ₗ
+      ((WeilCoefficients.toModuleCat l).map ((Sheaf.Γ _ _).map (trivId ε).inv.hom)).hom ∘ₗ
+        constSectionLinearMap (U.cover t) n
+  have hΨ : Function.Bijective Ψ := by
+    have := isIso_ptRes_app hU t G'
+    refine (ConcreteCategory.bijective_of_isIso ((U.ptRes l t).app G.X)).comp
+      ((ConcreteCategory.bijective_of_isIso ((Sheaf.Γ _ _).map (trivId ε).inv.hom)).comp
+        bijective_constSection)
+  -- the monodromy acts on constant sections through `R`
+  have hrep (g : Aut (fiber t)) (c : Fin n → PadicAlgCl l) :
+      (U.lisseMonodromy hU).rep t G' g (Ψ c) = Ψ (R g *ᵥ c) := by
+    rw [LisseMonodromy.rep_apply, LisseMonodromy.monoLinear, lisseMonodromy_mono]
+    change ((monoIso hU g).hom.app G').hom (((U.ptRes l t).app G.X).hom _) = _
+    rw [monoIso_hom_app_ptRes_apply, transportRes_hom_app]
+    change ((U.ptRes l t).app G.X).hom _ = ((U.ptRes l t).app G.X).hom _
+    congr 1
+    set h := (U.transport g).inv
+    have he : h ≫ U.proj t = U.proj t := U.transport_inv_proj g
+    have key := resOver_freeSection ε h he fun i ↦ algebraMap _ _ (c i)
+    -- the transition matrix of `h, 𝟙` is the constant matrix `R g`
+    let c' : U.cover t ⟶ Limits.pullback (U.proj t) (U.proj t) :=
+      pullback.lift (h ≫ 𝟙 _) (𝟙 _) (by rw [Category.comp_id, Category.id_comp, he])
+    have hc'snd : c' ≫ pullback.snd _ _ = 𝟙 _ := pullback.lift_snd _ _ _
+    have : WeaklyEtale (c' ≫ pullback.snd (U.proj t) (U.proj t)) := by
+      rw [hc'snd]; infer_instance
+    have : WeaklyEtale c' := WeaklyEtale.of_comp c' (pullback.snd (U.proj t) (U.proj t))
+    have hab₀ : (h ≫ 𝟙 _) ≫ U.proj t = 𝟙 _ ≫ U.proj t := by simp [he]
+    have hT : unitMatrix (transitionHom ε (h ≫ 𝟙 _) (𝟙 _) hab₀) =
+        (R g).map (algebraMap _ _) := by
+      change transitionMatrix ε (h ≫ 𝟙 _) (𝟙 _) hab₀ = _
+      rw [transitionMatrix_congr ε (pullback.lift_fst (h ≫ 𝟙 _) (𝟙 _) hab₀).symm
+        (pullback.lift_snd (h ≫ 𝟙 _) (𝟙 _) hab₀).symm
+        hab₀ (by rw [Category.assoc, Category.assoc, pullback.condition]),
+        transitionMatrix_comp ε c' _ _ pullback.condition
+          (by rw [Category.assoc, Category.assoc, pullback.condition]), hε]
+      ext i j : 1
+      refine Subtype.ext (ContinuousMap.ext fun x ↦ ?_)
+      simp only [Matrix.map_apply, PadicAlgCl.locallyFiniteFunctionsComp_apply_coe,
+        ContinuousMap.comp_apply, loopMatrix_apply]
+      rw [loop_apply_of_eq_comp t c' (h ≫ 𝟙 _) g (pullback.hom_ext (by simp [c', graph_fst])
+        (by simp [c', graph_snd, h]))]
+      rfl
+    have hconst : (fun i ↦ PadicAlgCl.locallyFiniteFunctionsComp l h.base.hom
+        (algebraMap (PadicAlgCl l) _ (c i))) = fun i ↦ algebraMap _ _ (c i) := rfl
+    rw [hT, hconst] at key
+    have hmul : (R g).map (algebraMap (PadicAlgCl l)
+        (PadicAlgCl.locallyFiniteFunctions l (U.cover t))) *ᵥ (fun i ↦ algebraMap _ _ (c i)) =
+        fun i ↦ algebraMap _ _ ((R g *ᵥ c) i) := by
+      funext i
+      exact (RingHom.map_mulVec (algebraMap _ _) (R g) c i).symm
+    rw [hmul] at key
+    change ((Sheaf.Γ _ _).map (trivId ε).inv.hom ≫ (resOver _ h he).app G.X).hom
+      (freeSection fun i ↦ algebraMap _ _ (c i)) = ((Sheaf.Γ _ _).map (trivId ε).inv.hom).hom
+        (freeSection fun i ↦ algebraMap (PadicAlgCl l)
+          (PadicAlgCl.locallyFiniteFunctions l (U.cover t)) ((R g *ᵥ c) i))
+    have hid (x : (Sheaf.Γ (Scheme.ProEt.topology (U.cover t)) (WeilCoefficients.{u} l)).obj
+        ((U.proj t)^*ᵃ[l].obj G).X) :
+        ((Sheaf.Γ _ _).map (trivId ε).inv.hom).hom (((Sheaf.Γ _ _).map (trivId ε).hom.hom).hom x) =
+          x := by
+      rw [← ModuleCat.comp_apply, ← Functor.map_comp, ← Mod.comp_hom', Iso.hom_inv_id,
+        Mod.id_hom', CategoryTheory.Functor.map_id]
+      rfl
+    rw [← key, hid]
+    rfl
+  refine ⟨G', (LinearEquiv.ofBijective Ψ hΨ).symm.trans b.equivFun.symm, fun g v ↦ ?_⟩
+  obtain ⟨c, rfl⟩ := hΨ.2 v
+  rw [hrep, LinearEquiv.trans_apply, LinearEquiv.trans_apply,
+    LinearEquiv.ofBijective_symm_apply_apply, LinearEquiv.ofBijective_symm_apply_apply]
+  apply b.equivFun.injective
+  rw [LinearEquiv.apply_symm_apply, Module.Basis.equivFun_apply,
+    ← LinearMap.toMatrix_mulVec_repr b b, ← Module.Basis.equivFun_apply,
+    LinearEquiv.apply_symm_apply]
+  rfl
+end Rep
+
+end AlgebraicGeometry.Scheme.UniversalCovers

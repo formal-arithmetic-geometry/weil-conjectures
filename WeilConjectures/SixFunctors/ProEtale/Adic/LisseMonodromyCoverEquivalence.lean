@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverContinuity
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverRepresentation
 public import WeilConjectures.WeilSheaf.StalkTensor
 public import WeilConjectures.WeilSheaf.LisseDuality
 
@@ -26,8 +27,9 @@ functor identifies lisse sheaves with continuous finite-dimensional representati
   section (`AlgebraicGeometry.Scheme.UniversalCovers.exists_globalSection_of_invariant`);
 - the monodromy representations are continuous
   (`AlgebraicGeometry.Scheme.UniversalCovers.lisseMonodromy_continuous_rep`);
-- essential surjectivity (`AlgebraicGeometry.Scheme.UniversalCovers.lisseMonodromy_essSurj`) is
-  stated, with the missing input explained in its docstring.
+- essential surjectivity (`AlgebraicGeometry.Scheme.UniversalCovers.lisseMonodromy_essSurj`):
+  the lisse sheaf attached to a representation is obtained by descent along the universal cover
+  (`AlgebraicGeometry.Scheme.UniversalCovers.exists_lisseSheaf_rep`).
 -/
 
 @[expose] public section
@@ -227,6 +229,7 @@ theorem lisseMonodromy_full (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) {G H : 
   exact h
 
 include hU in
+omit [IsLocallyNoetherian Y] [CompactSpace Y] [IsRegular Y] [ConnectedSpace Y] in
 /-- **Every continuous finite-dimensional representation is a monodromy representation**
 (blueprint: `cor-galois-lisse-representations`, essential surjectivity for `Λ = ℚ̄_ℓ`). On a
 connected regular Noetherian scheme, every continuous finite-dimensional `ℚ̄_ℓ`-representation
@@ -239,17 +242,18 @@ Proposition 7.4.10): `π₁(Y, t)` being compact, `ρ` is defined over the ring 
 of a finite extension `E` of `ℚ_ℓ` and preserves an `𝒪_E`-lattice `Λ ⊆ V`; the reductions
 `Λ / ϖⁿ` are continuous representations of `π₁(Y, t)` on finite sets, hence finite étale covers
 of `Y`, which define finite locally constant sheaves `L_n`, and `G = (lim_n L_n) ⊗_{𝒪_E} ℚ̄_ℓ`.
-It is not formalised here: it needs, besides the universal covers, the comparison between lisse
-`ℚ̄_ℓ`-sheaves in the Bhatt–Scholze model and adic systems of `𝒪_E / ϖⁿ`-sheaves (lisse
-`𝒪_E`-lattices), which the project does not provide yet. -/
+Here the lisse sheaf is instead obtained directly by descent of `ℚ̄_ℓⁿ` along the universal cover
+`Ỹ_t ⟶ Y` for the loop cocycle of the matrix of `ρ`
+(`AlgebraicGeometry.Scheme.UniversalCovers.exists_lisseSheaf_rep`). -/
 theorem lisseMonodromy_essSurj (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
     (V : Type (u + 1)) [AddCommGroup V] [Module (PadicAlgCl l) V]
     [FiniteDimensional (PadicAlgCl l) V] (ρ : Representation (PadicAlgCl l) (Aut (fiber t)) V)
     (hρ : ∀ (φ : Module.Dual (PadicAlgCl l) V) (v : V), Continuous fun g ↦ φ (ρ g v)) :
     ∃ (G : LisseSheaf l Y) (e : LisseMonodromy.StalkSpace t G ≃ₗ[PadicAlgCl l] V),
-      ∀ g v, e ((U.lisseMonodromy hU).rep t G g v) = ρ g (e v) := by
-  sorry
+      ∀ g v, e ((U.lisseMonodromy hU).rep t G g v) = ρ g (e v) :=
+  exists_lisseSheaf_rep hU t V ρ hρ
 
+omit [CompactSpace Y] in
 /-- **The monodromy from universal covers is an equivalence at every base point** (blueprint:
 `cor-galois-lisse-representations`, the case `Λ = ℚ̄_ℓ`). -/
 theorem lisseMonodromy_isEquivalenceAt (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) :
