@@ -1,0 +1,106 @@
+{
+ "id": "lem-sc-cartesian-higher-image-stalk-colimit",
+ "kind": "statement",
+ "title": "Stalkwise filtered-colimit presentation of cartesian higher images",
+ "statement": "Under the hypotheses of lem-sc-cartesian-higher-image-germ-vanishing, the stalkwise system of stage higher-image fibers, indexed by the opposite of I and with transition maps induced by cartesianHigherImageTransition, admits a filtered colimit cocone canonically isomorphic to the limiting higher-image fiber; the cocone legs correspond to cartesianHigherImageLeg and the diagram maps correspond to the transition maps.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EYM",
+  "place": "Lemma 59.51.8, second proof; local affine etale cohomology continuity"
+ },
+ "stmt_deps": [
+  "def-sc-cartesian-higher-image-stage",
+  "def-sc-cartesian-higher-image-limit",
+  "def-sc-cartesian-higher-image-leg",
+  "def-sc-cartesian-higher-image-transition",
+  "def-weil-geometric-point"
+ ],
+ "proof": [
+  {
+   "text": "Descend an affine etale neighbourhood of the geometric point and the finite cohomology data representing a stalk section to a stage. Apply continuity of etale cohomology for the resulting qcqs affine inverse system, then transport through sheafification, inverse-image composition, and the exchange comparison to obtain the filtered-colimit cocone and its leg and transition identities.",
+   "uses": [
+    "lem-sc-cartesian-derived-image-map-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-cartesian-derived-image-map-exchange"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0EYM",
+  "place": "Second proof, local affine etale cohomology continuity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "geometric stalk fibers of higher direct images commute with affine inverse limits",
+   "results": "service unavailable; no direct result",
+   "verdict": "No direct match",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric stalk fibers higher direct image inverse limit affine transitions",
+   "results": "Only generic stalk and sheaf-fiber APIs",
+   "verdict": "No direct match",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "grep",
+   "query": "germ.*higher.*image|higher.*image.*germ",
+   "results": "No existing varying-base stalk continuity theorem",
+   "verdict": "No direct match",
+   "date": "2026-10-15"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartesianHigherImageGermVanishing",
+  "date": "2026-10-15",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cartesian-higher-image-germ-vanishing",
+   "place": "geometric continuity step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartesianHigherImageGermVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartesianHigherImageGermVanishing.lean",
+  "declaration": "AlgebraicGeometry.Etale.cartesianHigherImage_stalk_colimit",
+  "statement": "theorem cartesianHigherImage_stalk_colimit\n    {k : Type u} [Field k]\n    {I : Type u} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ Over (Spec (.of k)))\n    [∀ i, QuasiCompact (D.obj i).hom] [∀ i, QuasiSeparated (D.obj i).hom]\n    [∀ {i j : I} (a : i ⟶ j), IsAffineHom (D.map a).left]\n    (c : Cone D) (hc : IsLimit ((Over.forget _).mapCone c))\n    [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]\n    {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [QuasiCompact f] [QuasiSeparated f]\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (q : ℕ) (s : c.pt.left) :\n    let G : I → AddCommGrpCat.{u + 1} := fun i ↦\n      ((c.pt.left.uliftPointSmallEtale s).sheafFiber\n        (A := AddCommGrpCat.{u + 1})).obj\n        (cartesianHigherImageStage D c f F q i)\n    let L := ((c.pt.left.uliftPointSmallEtale s).sheafFiber\n      (A := AddCommGrpCat.{u + 1})).obj\n      (cartesianHigherImageLimit D c f F q)\n    ∃ (H : Iᵒᵖ ⥤ AddCommGrpCat.{u + 1}) (t : Cocone H), Nonempty (IsColimit t) ∧\n      ∃ (e : ∀ i : I, H.obj (Opposite.op i) ≅ (G i)) (einf : t.pt ≅ L),\n        (∀ i, t.ι.app (Opposite.op i) ≫ einf.hom =\n          (e i).hom ≫\n            ((c.pt.left.uliftPointSmallEtale s).sheafFiber\n              (A := AddCommGrpCat.{u + 1})).map\n              (cartesianHigherImageLeg D c f F q i)) ∧\n        (∀ {i j : I} (a : j ⟶ i), H.map (Opposite.op a) =\n          (e i).hom ≫\n            ((c.pt.left.uliftPointSmallEtale s).sheafFiber\n              (A := AddCommGrpCat.{u + 1})).map\n              (cartesianHigherImageTransition D c f F q a) ≫\n            (e j).inv) ",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261014T184835-L-93480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261014T184835-L-93480",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
