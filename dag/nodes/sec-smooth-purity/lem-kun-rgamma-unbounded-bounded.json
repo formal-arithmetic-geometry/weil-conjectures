@@ -3,43 +3,155 @@
  "blueprint": {
   "is": "lem-kun-rgamma-unbounded-bounded",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Agreement with the bounded derived global sections",
- "statement": "Let $T$ be a scheme, $\\Lambda$ a commutative ring and\n$K\\in\\Dplus(T_{\\Et},\\Lambda)$. Then $\\RGamma(T_{\\Et},K)$ of\n[def-kun-rgamma-unbounded] agrees canonically with\n$\\Gamma(T,\\operatorname{Kinj}(K))$ of\n[def-weil-pbc-etale-cohomology].",
+ "statement": "Let $T$ be a scheme, $\\Lambda$ a commutative ring, and $K\\in D^+(T_{\\Et},\\Lambda)$ [def-weil-pbc-derived-categories]. Let $C$ be a complex representing $K$ and let $a:C\\to I$ and $b:C\\to J=\\operatorname{Kinj}(C)$ be K-injective resolutions [def-weil-pbc-kinjective-resolutions]. Put $\\Gamma(T,M)=M(T)$, with its $\\Lambda$-module structure and applied termwise to complexes [def-weil-sheaf-of-modules-category]. Then the unbounded derived global sections $\\RGamma(T_{\\Et},K)=\\Gamma(T,I)$ of [def-kun-rgamma-unbounded] is canonically isomorphic in $D(\\Lambda)$ [def-weil-abstract-derived-category] to $\\Gamma(T,J)$. Here $\\Gamma(T,J)$ is the bounded-below K-injective construction of [def-weil-pbc-etale-cohomology], carried out in $\\Mod(T_{\\Et},\\Lambda)$; for $\\Lambda=\\mathbf Z$ it is exactly that definition. The comparison is the image under termwise global sections and localization of the unique homotopy class $u:I\\to J$ with $u\\circ a$ homotopic to $b$, and is natural in $K$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-rgamma-unbounded-bounded.md",
   "place": "node lem-kun-rgamma-unbounded-bounded, order 1663"
  },
  "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-kinjective-resolutions",
+  "def-weil-sheaf-of-modules-category",
   "def-kun-rgamma-unbounded",
+  "def-weil-abstract-derived-category",
   "def-weil-pbc-etale-cohomology"
  ],
  "proof": [
   {
-   "text": "The object $\\RGamma(T_{\\Et},K)$ of\n[def-kun-rgamma-unbounded] is $\\Gamma(T_{\\Et},I)$ for a\nK-injective resolution $K\\to I$, while\n[def-weil-pbc-etale-cohomology] uses the functorial K-injective\nresolution $\\operatorname{Kinj}(K)$. The two resolutions are\nchain-homotopy equivalent, and the comparison between them is a\nhomotopy equivalence, by\n[prop-weil-pbc-kinjective-resolutions-exist]; applying\n$\\Gamma(T_{\\Et},-)$ therefore gives a canonical isomorphism in\n$D(\\Lambda)$.",
+   "text": "Choose a complex $C$ representing $K$ and resolutions $a:C\\to I$, $b:C\\to J$ using [prop-weil-pbc-kinjective-resolutions-exist]. They are quasi-isomorphisms with K-injective targets by [def-weil-pbc-kinjective-resolutions]. By [def-kun-rgamma-unbounded] the first construction is $\\Gamma(T,I)$. The second is the termwise-section recipe of [def-weil-pbc-etale-cohomology] with the same coefficient category $\\Mod(T_{\\Et},\\Lambda)$, not a change to the underlying abelian-sheaf resolution.",
    "uses": [
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "def-weil-pbc-kinjective-resolutions",
     "def-kun-rgamma-unbounded",
-    "def-weil-pbc-etale-cohomology",
-    "prop-weil-pbc-kinjective-resolutions-exist"
+    "def-weil-pbc-etale-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079P, theorem-K-injective-embedding-grothendieck; applied to module sheaves as in prop-weil-pbc-kinjective-resolutions-exist"
+   }
+  },
+  {
+   "text": "Write $Q$ for localization. Since $Qa$ and $Qb$ are invertible [def-weil-abstract-derived-category], form $\\alpha=Qb\\circ(Qa)^{-1}:QI\\to QJ$. The bijection of [lem-weil-pbc-kinjective-hom-derived], applied with target $J$, gives a unique homotopy class $u:I\\to J$ mapping to $\\alpha$; with target $I$ it gives a class $v:J\\to I$ mapping to $\\alpha^{-1}$. Injectivity with targets $I$ and $J$ gives $vu=1_I$ and $uv=1_J$ in the homotopy category. Injectivity with source $C$ and target $J$ also gives $ua=b$. Thus representatives $u,v$ are mutually inverse up to chain homotopy and the comparison respects the augmentations.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, clauses (1) and (3); agent-written comparison argument expanding the blueprint proof"
+   }
+  },
+  {
+   "text": "Global sections on module sheaves [def-weil-sheaf-of-modules-category] is additive: sums and composites of sheaf morphisms are sums and composites on sections at $T$. A cochain homotopy $h$ between $f,g$ satisfies $f^n-g^n=d^{n-1}h^n+h^{n+1}d^n$. Evaluating at $T$ gives the identical equation for $\\Gamma(f),\\Gamma(g),\\Gamma(h)$. Apply this to the two inverse homotopies from step 2. The maps $\\Gamma(u)$ and $\\Gamma(v)$ are homotopy inverses, hence are inverse in $D(\\Lambda)$, since localization factors through the homotopy category [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, clauses (1) and (3); agent-written comparison argument expanding the blueprint proof"
+   }
+  },
+  {
+   "text": "For any other augmentation-compatible comparison $u'$, $Q(u'a)=Qb$ implies $Qu'=\\alpha$. Injectivity of [lem-weil-pbc-kinjective-hom-derived] makes $u'$ homotopic to $u$, so step 3 gives the same isomorphism after global sections. For a morphism $f:K\\to K'$ represented between derived objects $QC$ and $QC'$, lift $Qa'\\,f\\,(Qa)^{-1}$ uniquely to a homotopy class $I\\to I'$ and $Qb'\\,f\\,(Qb)^{-1}$ uniquely to a class $J\\to J'$, using the same bijection with K-injective targets. The two composites from $I$ to $J'$ both localize to $Qb'\\,f\\,(Qa)^{-1}$; injectivity with target $J'$ identifies them. Step 3 therefore makes the square commute after global sections. For $f=1_K$, the derived lift is $Qa\\,(Qa)^{-1}=1_{QI}$, so injectivity identifies its homotopy class with $1_I$. For $f:K\\to K'$ and $g:K'\\to K''$, the composite of the lifts localizes to $(Qa''\\,g\\,(Qa')^{-1})(Qa'\\,f\\,(Qa)^{-1})=Qa''\\,(gf)\\,(Qa)^{-1}$; injectivity with target $I''$ identifies it with the lift of $gf$. For the $J$ resolutions the identity lift has image $Qb\\,(Qb)^{-1}=1_{QJ}$, and the composite has image $(Qb\\prime\\prime\\,g\\,(Qb\\prime)^{-1})(Qb\\prime\\,f\\,(Qb)^{-1})=Qb\\prime\\prime\\,(gf)\\,(Qb)^{-1}$; injectivity with targets $J$ and $J\\prime\\prime$ gives the identity and composition equations. This proves canonicity, naturality and independence of choices, completing the claimed agreement.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, clauses (1) and (3); agent-written comparison argument expanding the blueprint proof"
+   }
   }
  ],
  "proof_deps": [
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "def-weil-pbc-kinjective-resolutions",
   "def-kun-rgamma-unbounded",
   "def-weil-pbc-etale-cohomology",
-  "prop-weil-pbc-kinjective-resolutions-exist"
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-rgamma-unbounded-bounded.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Agent-written augmentation-compatible comparison expanding the blueprint proof; inputs: Tag 070I (lemma-K-injective), clauses (1) and (3), and Tag 079P (theorem-K-injective-embedding-grothendieck)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerived.*Plus|globalSections.*[Cc]ompat|[Cc]ompat.*globalSections",
+   "results": "Hits: Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean, Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean, Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean, Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean, Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean; types read; generic right-derived and homotopy APIs do not state the project coefficient comparison.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded below derived global sections agrees with unbounded derived functor",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded below and unbounded derived global sections agree via K-injective resolutions",
+   "results": "Hits: DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CochainComplex.isKInjective_of_injective, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.isLE_Q_obj_iff; types read; generic right-derived and homotopy APIs do not state the project coefficient comparison.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "additive functor applied to homotopy equivalent K-injective resolutions computes the same derived functor",
+   "results": "Hits: CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj, CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory; types read; generic right-derived and homotopy APIs do not state the project coefficient comparison.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctor\"",
+   "results": "Hits: CategoryTheory.Functor.HasRightDerivedFunctor, CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension', CategoryTheory.Functor.HasRightDerivedFunctor.mk, CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension, CategoryTheory.Functor.hasRightDerivedFunctor_iff, CategoryTheory.Functor.hasRightDerivedFunctor_iff_of_iso, CategoryTheory.Functor.IsRightDerivedFunctor, CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit; types read; generic right-derived and homotopy APIs do not state the project coefficient comparison.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyEquiv.*map|map.*HomotopyEquiv|homotopy equivalence",
+   "results": "Hits: Mathlib/Algebra/Homology/Factorizations/CM5b.lean, Mathlib/Algebra/Homology/Factorizations/CM5b.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; types read; generic right-derived and homotopy APIs do not state the project coefficient comparison.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "additive functor maps homotopy equivalences of complexes to homotopy equivalences",
+   "results": "Hits: CategoryTheory.Functor.mapHomotopyEquiv, CategoryTheory.Functor.mapHomotopyEquiv_hom, CategoryTheory.Functor.mapHomotopyEquiv_homotopyHomInvId, CategoryTheory.Functor.mapHomotopyEquiv_homotopyInvHomId, CategoryTheory.Functor.mapHomotopy_hom, CategoryTheory.Functor.mapHomotopy, CategoryTheory.Functor.mapHomotopyEquiv_inv, CategoryTheory.Functor.mapHomotopyCategory_map; types read; generic right-derived and homotopy APIs do not state the project coefficient comparison.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopyEquiv.map",
+   "results": "Hits: ; types read; generic right-derived and homotopy APIs do not state the project coefficient comparison.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "functor sends chain homotopy equivalence to homotopy equivalence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +175,54 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-rgamma-unbounded-bounded",
+  "worker": "stage1",
+  "summary": "Repaired the coefficient ambiguity and expanded the blueprint comparison into the unique homotopy-class construction, explicit inverse homotopies, termwise section equations, and naturality. Reused the K-injective Hom bijection leaf; no new nodes.",
+  "blueprint": "The single proof paragraph: chosen and functorial resolutions, homotopy equivalence, global sections, canonical isomorphism.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "Generic existence of resolutions needed by the blueprint comparison; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic bijection from homotopy classes into K-injective targets to derived morphisms needed by the blueprint comparison; no node of this unit supplies it."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Generic module-sheaf sections and their linearity needed by the blueprint comparison; no node of this unit supplies it."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Generic localization and its factorization through homotopy classes needed by the blueprint comparison; no node of this unit supplies it."
+   },
+   {
+    "node": "def-weil-pbc-kinjective-resolutions",
+    "why": "Generic meaning of K-injective resolution needed by the blueprint comparison; no node of this unit supplies it."
+   },
+   {
+    "node": "def-weil-pbc-etale-cohomology",
+    "why": "Generic bounded-below recipe needed by the blueprint comparison; no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-kinjective-resolutions",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NL-44cec3905",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-44cec3905 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, source passages, and unit/chapter route. Stacks 079P and 070I support resolution existence and the augmentation-compatible comparison; homotopy equations verify sections, inverses, and naturality. The explicit module-coefficient recipe preserves arbitrary-ring scope. Edge cases and the acyclic dependency closure checked; no new nodes or repairs. Findings recorded in review.md."
+ }
 }
