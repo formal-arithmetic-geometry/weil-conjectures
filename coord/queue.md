@@ -1,6 +1,6 @@
 # Work queue
 
-34 items; claim with `tools/claim.py next <group> [--stage N]`.
+33 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (34)
+## Stage 3: modules to prove (33)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -23,19 +23,18 @@
 | `Sheaf.AlgebraicGeometry.RawModuleScalarSourceClassFormula` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionsFactorization` | 23 | 1 | proof |
+| `Sheaf.Paper.CechCupPullbackCompat` | 23 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianResolutionComparisonEvaluation` | 24 | 1 | proof |
 | `Sheaf.Paper.CechCupResolutionRepresentatives` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization` | 25 | 1 | proof |
 | `Sheaf.Paper.ModuleCupEqualDerivedMapsClass` | 27 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OpenModuleContractionTransport` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativeMVDirectImageRows` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate` | 30 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ScalarCupModuleCupCompatibility` | 30 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ScalarModuleCohomologyPullbackComparison` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleOpenTensorCoefficientCoherence` | 30 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeDerivedTensorHomologyCoordinates` | 32 | 1 | proof |
-| `Sheaf.Paper.CupCechTotalCochainMapExists` | 32 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealization` | 33 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchange` | 34 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison` | 34 | 1 | proof |
