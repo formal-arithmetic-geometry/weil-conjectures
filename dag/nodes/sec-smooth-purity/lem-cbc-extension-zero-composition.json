@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-cbc-extension-zero-composition",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Composition of open immersions",
@@ -13,28 +13,109 @@
   "place": "node lem-cbc-extension-zero-composition, order 1581"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-extension-by-zero"
  ],
  "proof": [
   {
-   "text": "All three functors are left adjoint to the corresponding inverse\nimage functors, and the two candidates are the left adjoints of the\nsame functor $((j_2j_1)^{-1}=(j_1)^{-1}(j_2)^{-1})$, so they are\ncanonically isomorphic (the comparison being the mate of the\nidentification of inverse images); naturality and the coherence\nequations follow from the adjunction calculus, as in\n[def-weil-pbc-extension-by-zero].",
+   "text": "Fix the commutative coefficient ring $\\Lambda$ (take $\\Lambda=\\mathbf Z$ for abelian sheaves). Write $L_j=j_!$ and use the restriction model $R_j$ for its right adjoint, supplied by [lem-weil-pbc-extension-by-zero-adjunction]: for an object $a:W\\to U$ of the small etale site, $(R_jG)(a)=G(j\\circ a)$, with the same maps on sections and on sheaf morphisms. Write $\\theta_{j,G}:j^{-1}G\\xrightarrow{\\sim}R_jG$ for the cited natural identification. The adjunction with $R_j$ has Hom bijection $f\\mapsto\\theta_{j,G}\\circ\\Phi_j(f)$, where $\\Phi_j$ is the cited Hom bijection for $j^{-1}$; its inverse sends $a:F\\to R_jG$ to $\\Phi_j^{-1}(\\theta_{j,G}^{-1}\\circ a)$. These maps are inverse and natural because $\\Phi_j$ and $\\theta_j$ are, so they specify $L_j\\dashv R_j$ and its unit. On every such object and morphism, $R_{j_1}R_{j_2}G(a)=G(j_2\\circ j_1\\circ a)=R_{j_2j_1}G(a)$; thus these restriction models compose as equal functors. Likewise $R_{\\mathrm{id}}=\\mathrm{id}$. For three immersions all parenthesizations evaluate to $G(j_3\\circ j_2\\circ j_1\\circ a)$ and the section maps coincide. These are statements about the chosen restriction model, not an assertion that arbitrary chosen inverse-image constructions are strictly equal. All composites in use are open immersions: by [def-weil-open-immersion] each identifies its source with an open subscheme of its target, an open subset of an open subset is open, and restricting the structure sheaf twice is restricting it once. Thus the cited adjunction applies to every composite as well as to each given immersion.",
    "uses": [
-    "def-weil-pbc-extension-by-zero"
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "def-weil-open-immersion"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S3 (definition-extension-zero), parts (2),(3), and following restriction paragraph; Modules on Sites Tag 03DI"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-composite-adjunction], $L_{j_2}L_{j_1}$ is left adjoint to $R_{j_1}R_{j_2}=R_{j_2j_1}$; its unit at $F$ is $R_{j_1}(\\eta_{j_2,L_{j_1}F})\\circ\\eta_{j_1,F}$. Apply [lem-weil-pbc-conjugate-iso-unit-equation] to this adjunction and $L_{j_2j_1}\\dashv R_{j_2j_1}$, with the identity isomorphism of the right adjoints. It gives a unique natural isomorphism $c_{j_1,j_2}:L_{j_2}L_{j_1}\\to L_{j_2j_1}$ satisfying $R_{j_2j_1}(c_{j_1,j_2,F})\\circ R_{j_1}(\\eta_{j_2,L_{j_1}F})\\circ\\eta_{j_1,F}=\\eta_{j_2j_1,F}$. This is precisely the canonical comparison (the mate of the restriction identification in step 1). Its components are isomorphisms, and its naturality says $L_{j_2j_1}(b)\\circ c_F=c_{F'}\\circ L_{j_2}L_{j_1}(b)$ for every $b:F\\to F'$. This proves both the displayed isomorphism and its naturality.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0DV0 (lemma-compose-counits) and 0B65 (lemma-transformation-between-functors-and-adjoints)"
+   }
+  },
+  {
+   "text": "For an identity immersion write $I=L_{\\mathrm{id}}$ and $\\alpha:\\mathrm{id}\\to I$ for its unit, since $R_{\\mathrm{id}}=\\mathrm{id}$. Comparing $I\\dashv\\mathrm{id}$ with the identity adjunction by [lem-weil-pbc-conjugate-iso-unit-equation] gives an isomorphism $e:I\\to\\mathrm{id}$ satisfying $e_F\\circ\\alpha_F=\\mathrm{id}_F$. Let $L=L_j$, $R=R_j$, and unit $\\eta$. The composite-unit formulas of [def-weil-pbc-composite-adjunction] show that $L(e_F):LI(F)\\to L(F)$ satisfies the comparison unit equation: $R(L(e_F))\\circ\\eta_{I(F)}\\circ\\alpha_F=\\eta_F\\circ e_F\\circ\\alpha_F=\\eta_F$, using naturality of $\\eta$. For the other order, $e_{L(F)}:IL(F)\\to L(F)$ satisfies $R(e_{L(F)})\\circ R(\\alpha_{L(F)})\\circ\\eta_F=\\eta_F$. Uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation] therefore identifies $c_{\\mathrm{id},j}$ with $L(e)$ and $c_{j,\\mathrm{id}}$ with $e_L$. After the identity identifications these are exactly the two unit laws.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0B65 and 0DV0; naturality of the unit and the comparison unit equation"
+   }
+  },
+  {
+   "text": "For three immersions $X_0\\hookrightarrow X_1\\hookrightarrow X_2\\hookrightarrow X_3$ set $\\mathcal C_i=\\Mod((X_i)_{\\Et},\\Lambda)$, let $L_{ij}$ extend by zero along the indicated composite, and let $R_{ji}$ be its restriction model from step 1. All six adjunctions exist by [lem-weil-pbc-extension-by-zero-adjunction]. The calculation in step 1 gives exactly $R_{ki}=R_{ji}R_{kj}$ for every triple. The comparisons constructed in step 2 are exactly the unique unit-compatible $c_{ijk}$ of [lem-sc-left-adjoint-composition-iso-associativity]. That node therefore gives $c_{023,F}\\circ L_{23}(c_{012,F})=c_{013,F}\\circ c_{123,L_{01}F}$. The left side composes the first two immersions first and the right side the last two first, proving the required three-fold compatibility.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-sc-left-adjoint-composition-iso-associativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-extension-zero-composition.md",
+    "place": "Proof, final clause: coherence equations follow from the adjunction calculus; generic categorical equation in the cited associativity node"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-extension-by-zero"
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "def-weil-open-immersion",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-sc-left-adjoint-composition-iso-associativity"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-extension-zero-composition.md",
-  "place": "## Proof"
+  "place": "Proof; the adjunction-calculus details are written out using Stacks 03S3, 03DI, 0B65 and 0DV0 and the existing categorical associativity leaf"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composition of extension by zero along open immersions of schemes natural isomorphism identity associativity",
+   "results": "AlgebraicGeometry.Scheme.Hom.appIso_inv_app_presheafMap; AlgebraicGeometry.Scheme.Hom.app_invApp'_assoc; AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc; AlgebraicGeometry.Scheme.Hom.appIso_inv_app_assoc; AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv_assoc; AlgebraicGeometry.Scheme.Hom.appIso_inv_appLE_assoc; AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app",
+   "date": "2026-10-14",
+   "verdict": "no match: open-immersion structural sheaf facts and Zariski module restriction, not etale extension by zero"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointCompIso\"",
+   "results": "CategoryTheory.Adjunction.leftAdjointCompIso; CategoryTheory.Adjunction.leftAdjointCompIso_hom; CategoryTheory.Adjunction.leftAdjointCompIso_comp_id; CategoryTheory.Adjunction.leftAdjointCompIso_id_comp; CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv; CategoryTheory.Adjunction.leftAdjointCompIso_inv_app; CategoryTheory.Adjunction.leftAdjointCompIso_hom_app; CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match for etale extension by zero; generic adjunction coherence is reused through existing nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompIso|extensionByZero|extension by zero",
+   "results": "Mathlib/NumberTheory/MulChar/Basic.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for etale extension by zero; generic adjunction coherence is reused through existing nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition of extension by zero on small etale sheaves along open immersions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherence naturality identity associativity canonical isomorphisms between left adjoints",
+   "results": "CategoryTheory.Adjunction.leftAdjointCompIso_comp_id; CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc; CategoryTheory.Adjunction.leftAdjointCompNatTrans_assoc; CategoryTheory.Adjunction.leftAdjointUniq_trans_app; CategoryTheory.Adjunction.leftAdjointCompIso_hom_app; CategoryTheory.Adjunction.leftAdjointUniq_trans_assoc; CategoryTheory.Adjunction.leftAdjointCompIso_id_comp; CategoryTheory.Adjunction.CoreUnitCounit.left_triangle",
+   "date": "2026-10-14",
+   "verdict": "no match for etale extension by zero; generic adjunction coherence is reused through existing nodes"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +141,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-cbc-extension-zero-composition",
+  "worker": "stage1",
+  "summary": "Replaced the preserved clause-node and unverified identity leaf by a four-step adjunction proof using existing DAG nodes. Restriction models are explicitly evaluated to verify strict-composition hypotheses. Canonical comparison, naturality, both identity laws and three-fold coherence are proved without any new node. Corrected stale search records and regenerated verbatim citations.",
+  "blueprint": "Step 1 realizes the identification of inverse images in the blueprint proof; step 2 realizes uniqueness of left adjoints and naturality; steps 3 and 4 supply its identity and three-fold coherence equations.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "The unit route explicitly invokes extension-by-zero adjunction; this existing etale adjunction theorem supplies that fact and its restriction model, which the definition alone no longer asserts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-extension-by-zero-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-b9fcfd3c1",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-b9fcfd3c1 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, and sources. All four adjunction/coherence steps and edge cases check out; no new nodes, missing dependencies, or cycles. Accepted the declared adjunction tool use. Target morphisms and coefficient categories remain distinct and unchanged. Detailed checks recorded in review.md."
+ }
 }
