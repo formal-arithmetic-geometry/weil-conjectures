@@ -4,10 +4,10 @@
   "is": null,
   "from": {
    "node": "def-weil-finite-coefficient-point",
-   "place": "unspecified",
+   "place": "Statement, definition of D^b_fg(O_E): \"consisting of bounded derived-complete complexes with finitely generated cohomology modules\".",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Derived completeness of a complex of modules",
@@ -26,21 +26,56 @@
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "grep -rn 'derived complete\\|derived-complete\\|DerivedComplete\\|derivedComplete' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
-   "results": "none",
-   "date": "2026-10-09",
+   "query": "derived.?complete|DerivedComplete|derivedComplete",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completeness of a complex of modules with respect to an ideal defined by vanishing of the derived inverse limit of multiplication by each element of the ideal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object K of the derived category of modules over a commutative ring is derived complete for an ideal I when the homotopy limit of the constant tower with transition multiplication by f vanishes for every f in I",
+   "results": "IsAdicComplete; localCohomology; Hausdorffification; AdicCompletion; IsPrecomplete; IsAdicComplete.toIsPrecomplete; localCohomology.diagram; AdicCompletion.module. Hits concern ordinary adic completeness, adic completion, and (in the first phrasing) local cohomology; none defines the vanishing-of-multiplication-towers predicate on D(A).",
+   "date": "2026-10-14",
+   "verdict": "no match: IsAdicComplete is ordinary module completeness, not this derived-category predicate"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedComplete\"",
+   "results": "No hits.",
+   "date": "2026-10-14",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "grep -rln 'IsAdicComplete' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory",
-   "results": "IsAdicComplete / IsPrecomplete (RingTheory/AdicCompletion/Basic.lean): adic completeness of a module, not derived completeness of an object of the derived category",
-   "date": "2026-10-09",
+   "query": "homotopy.?limit|derived.?limit|IsAdicComplete",
+   "results": "25 displayed hits, all for IsAdicComplete and its instances/theorems in Mathlib/RingTheory/AdicCompletion and Mathlib/NumberTheory. Read Mathlib/RingTheory/AdicCompletion/Basic.lean:45-56: IsHausdorff, IsPrecomplete and IsAdicComplete concern modules and I-adic Cauchy sequences, not homotopy limits in D(A).",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ideal-adically derived complete complex characterized by vanishing homotopy inverse limit of K under repeated scalar multiplication; not ordinary adic completeness of a module",
+   "results": "IsAdicComplete.toIsPrecomplete; IsAdicComplete; isAdicComplete_iff; isPrecomplete_iff; AdicCompletion; IsAdic.isAdicComplete_iff; IsPrecomplete; IsAdic.isPrecomplete_iff. Hits concern ordinary adic completeness, adic completion, and (in the first phrasing) local cohomology; none defines the vanishing-of-multiplication-towers predicate on D(A).",
+   "date": "2026-10-14",
+   "verdict": "no match: IsAdicComplete is ordinary module completeness, not this derived-category predicate"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopyLimit\"",
+   "results": "No hits.",
+   "date": "2026-10-14",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +95,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-admissible"
+ "unit": "sk-def-sf-admissible",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-point-derived-complete-module-complex",
+  "worker": "stage1",
+  "summary": "Read Stacks Tags 091N and 091S and their labels in more-algebra.tex; the statement is already the ring-level definition, not the reduction-tower sheaf definition. Retained the statement and its two dependencies after reading both dependency statements: the ordinary abstract derived category, and the Roos-triangle definition of a derived limit. A definition has no proof steps or proof dependencies. No existence or uniqueness theorem is asserted here; the predicate quantifies over every derived limit and makes no choice of data. No new nodes are required. Replaced inherited searches with actual logged searches (LeanFinder and Loogle twice, grep twice, LeanSearch unavailable), filled blueprint provenance and searched same_as.",
+  "blueprint": "Realizes the phrase \"bounded derived-complete complexes\" in the definition of D^b_fg(O_E) in def-weil-finite-coefficient-point; this is a notion used in that statement, not a proof step of the ambient-adjoint unit."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-068fac0d4",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-068fac0d4 (reviewer sub-agent of L); spot-checked: Read the complete item, report, dependencies and unit/chapter route. Stacks 091N/091S match the arbitrary-ideal multiplication-tower definition in ordinary D(A). Checked duplicates, search logs, source declarations, dependency cycles and edge cases. No new nodes, comparison theorem claims or repairs. Full findings written to review.md."
+ }
 }
