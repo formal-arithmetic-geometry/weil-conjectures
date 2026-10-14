@@ -13981,3 +13981,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:17 L: merged deliver/G4/Sheaf.AlgebraicGeometry.AffineBaseChangeModelIsosOfSchemeComparisons (stage 3; reviewer PASS; first push; landing 20261014T001719-L-2549837 (proof); batch 20261014T001711; modules 1; new nodes 1)
 - 00:17 L: merged deliver/H1/Sheaf.Algebra.Homology.LocalizationModelKernel (stage 3; reviewer PASS; first push; landing 20261014T001719-L-2549988 (interface); batch 20261014T001711; modules 3; new nodes 2)
 - 00:17 L: merged deliver/H1/Sheaf.AlgebraicGeometry.SelfTorConormalWedgeChart (stage 3; reviewer PASS; first push; landing 20261014T001720-L-2550147 (interface); batch 20261014T001711; modules 3; new nodes 2)
+- 00:17 L: merged deliver/H4/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone (stage 3; reviewer PASS; first push; landing 20261014T001720-L-2550293 (proof); batch 20261014T001711; modules 1; new nodes 0)

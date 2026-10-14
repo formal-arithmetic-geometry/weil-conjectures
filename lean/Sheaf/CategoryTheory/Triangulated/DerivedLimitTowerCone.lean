@@ -5,7 +5,6 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Countable
 
 import Mathlib.Data.Countable.Basic
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers
 
 /-! # Limit cone for a tower of complexes
 Source: Mathlib, CategoryTheory.Limits.hasLimit_of_equalizer_and_product
@@ -33,7 +32,6 @@ theorem derivedCategory_towerLimit_cone
   let : HasCountableProducts (CochainComplex A ℤ) :=
     ⟨fun _ ↦ inferInstance⟩
   let : HasLimit I.asFunctor := hasLimit_of_equalizer_and_product I.asFunctor
-  refine ⟨limit.cone I.asFunctor, ?_⟩
-  exact ⟨limit.isLimit I.asFunctor⟩
+  exact ⟨limit.cone I.asFunctor, ⟨limit.isLimit I.asFunctor⟩⟩
 
 end CategoryTheory
