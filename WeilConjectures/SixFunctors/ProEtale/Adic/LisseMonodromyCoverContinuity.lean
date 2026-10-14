@@ -47,6 +47,7 @@ noncomputable def stalkUnitVal (t : Spec (.of K) ⟶ Z)
       (((Sheaf.Γ _ _).map (upperStarAdicConstantSheafHom l t)).hom x)).down.1
     (IsLocalRing.closedPoint K)
 
+/-- The value of stalk elements of the constant sheaf is `ℚ̄_ℓ`-linear. -/
 lemma stalkUnitVal_smul (t : Spec (.of K) ⟶ Z) (c : PadicAlgCl l)
     (x : (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj ((t)^*[_].obj (adicConstantSheaf l Z))) :
     stalkUnitVal t ((ULift.up c : ULift.{u + 1} (PadicAlgCl l)) • x) = c * stalkUnitVal t x := by

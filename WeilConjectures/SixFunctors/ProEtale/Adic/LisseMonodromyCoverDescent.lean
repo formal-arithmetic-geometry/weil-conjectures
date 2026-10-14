@@ -62,13 +62,28 @@ lemma overLift_comp_pullbackComp_hom_app {Y T : Scheme.{u}} (V : Y.ProEt) (h : T
   rw [← cancel_epi (pullback.snd (𝟙 V.left) h)]
   apply pullback.hom_ext
   · apply pullback.hom_ext
-    · simp [overLift, diagLift, overPullbackObjMkIdIso]
+    · simp only [Functor.const_obj_obj, Functor.id_obj, Functor.comp_obj, overLift,
+          MorphismProperty.Over.homMk_hom, Over.homMk_left,
+          MorphismProperty.Over.pullbackComp_hom_app_left, pullback.map_id, Category.id_comp,
+          Category.assoc, overPullbackObjMkIdIso, MorphismProperty.Over.isoMk_inv_left, asIso_inv,
+          diagLift, MorphismProperty.Over.pullback_map_left, IsIso.hom_inv_id_assoc, limit.lift_π,
+          PullbackCone.mk_π_app]
       erw [pullbackLeftPullbackSndIso_inv_fst, pullback.lift_fst]
       exact pullback.condition.symm
-    · simp [overLift, diagLift, overPullbackObjMkIdIso]
+    · simp only [Functor.const_obj_obj, Functor.id_obj, Functor.comp_obj, overLift,
+          MorphismProperty.Over.homMk_hom, Over.homMk_left,
+          MorphismProperty.Over.pullbackComp_hom_app_left, pullback.map_id, Category.id_comp,
+          Category.assoc, overPullbackObjMkIdIso, MorphismProperty.Over.isoMk_inv_left, asIso_inv,
+          diagLift, MorphismProperty.Over.pullback_map_left, IsIso.hom_inv_id_assoc, limit.lift_π,
+          PullbackCone.mk_π_app]
       erw [pullbackLeftPullbackSndIso_inv_fst_snd, pullback.lift_snd_assoc, Category.id_comp]
       exact pullback.condition.symm
-  · simp [overLift, diagLift, overPullbackObjMkIdIso]
+  · simp only [Functor.const_obj_obj, Functor.id_obj, Functor.comp_obj, overLift,
+        MorphismProperty.Over.homMk_hom, Over.homMk_left,
+        MorphismProperty.Over.pullbackComp_hom_app_left, pullback.map_id, Category.id_comp,
+        Category.assoc, overPullbackObjMkIdIso, MorphismProperty.Over.isoMk_inv_left, asIso_inv,
+        diagLift, MorphismProperty.Over.pullback_map_left, IsIso.hom_inv_id_assoc, limit.lift_π,
+        PullbackCone.mk_π_app]
     erw [pullbackLeftPullbackSndIso_inv_snd_snd, pullback.lift_snd, Category.comp_id]
     rfl
 
@@ -94,7 +109,9 @@ lemma map_comp_germ_diagLift {Y : Scheme.{u}} (P : Sheaf (ProEt.topology Y) A) {
   refine MorphismProperty.Over.Hom.ext ?_
   apply pullback.hom_ext
   · erw [MorphismProperty.Comma.comp_left]
-    simp [overLift, diagLift]
+    simp only [Functor.id_obj, Functor.const_obj_obj, diagLift, MorphismProperty.Over.homMk_hom,
+        Over.homMk_left, MorphismProperty.Over.pullback_map_left, Category.assoc, limit.lift_π,
+        PullbackCone.mk_π_app, limit.lift_π_assoc, cospan_left, overLift]
     exact Category.id_comp _
   · erw [MorphismProperty.Comma.comp_left]
     simp [overLift, diagLift]
@@ -147,14 +164,17 @@ noncomputable def graph (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (g : Aut (f
     U.cover t ⟶ pullback (U.proj t) (U.proj t) :=
   pullback.lift (𝟙 _) (U.transport g).hom (by rw [Category.id_comp, U.transport_proj])
 
+/-- The graph of a loop, followed by the first projection, is the identity. -/
 lemma graph_fst (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (g : Aut (fiber t)) :
     U.graph t g ≫ pullback.fst _ _ = 𝟙 _ :=
   pullback.lift_fst _ _ _
 
+/-- The graph of a loop, followed by the second projection, is the transport. -/
 lemma graph_snd (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (g : Aut (fiber t)) :
     U.graph t g ≫ pullback.snd _ _ = (U.transport g).hom :=
   pullback.lift_snd _ _ _
 
+/-- The graph of a loop lies over `Y`. -/
 lemma graph_fst_proj (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (g : Aut (fiber t)) :
     U.graph t g ≫ pullback.fst (U.proj t) (U.proj t) ≫ U.proj t = U.proj t := by
   rw [← Category.assoc, graph_fst, Category.id_comp]
@@ -212,7 +232,7 @@ theorem resOver_fst_apply_eq_resOver_snd_apply (t : Spec (.of (AlgebraicClosure 
       (U.cover t).fromSpecResidueField_apply x _
     refine ⟨w, K, inferInstance, inferInstance, s₀ ≫ U.graph t g, specializes_rfl,
       specializes_of_eq ?_, ?_⟩
-    · show w = (U.graph t g).base (s₀.base (IsLocalRing.closedPoint K))
+    · change w = (U.graph t g).base (s₀.base (IsLocalRing.closedPoint K))
       rw [hs₀]
       exact hx.symm
     · have h₀ : ((globalSectionsToUpperStar (WeilCoefficients.{u} l) (U.graph t g)).app
@@ -296,10 +316,16 @@ lemma diagLift_comp_pullback_map_coverProEtHom (t : Spec (.of (AlgebraicClosure 
   refine MorphismProperty.Over.Hom.ext ?_
   erw [MorphismProperty.Comma.comp_left]
   apply pullback.hom_ext
-  · simp [diagLift, overPullbackObjMkIdIso]
+  · simp only [Functor.id_obj, Functor.const_obj_obj, diagLift, MorphismProperty.Over.homMk_hom,
+        Over.homMk_left, MorphismProperty.Over.pullback_map_left, Category.assoc, limit.lift_π,
+        PullbackCone.mk_π_app, overPullbackObjMkIdIso, MorphismProperty.Over.isoMk_inv_left,
+        asIso_inv, IsIso.eq_inv_comp]
     erw [pullback.lift_fst_assoc, Category.id_comp]
     exact pullback.condition.symm.trans (Category.comp_id _)
-  · simp [diagLift, overPullbackObjMkIdIso]
+  · simp only [Functor.id_obj, Functor.const_obj_obj, diagLift, MorphismProperty.Over.homMk_hom,
+        Over.homMk_left, MorphismProperty.Over.pullback_map_left, Category.assoc, limit.lift_π,
+        PullbackCone.mk_π_app, overPullbackObjMkIdIso, MorphismProperty.Over.isoMk_inv_left,
+        asIso_inv, IsIso.eq_inv_comp]
     erw [pullback.lift_snd, Category.comp_id]
     rfl
 

@@ -16,7 +16,18 @@ Let `Y` be a connected regular Noetherian scheme with universal profinite étale
 on which lisse sheaves are free, and let `M` be the monodromy of lisse sheaves obtained from them
 (`AlgebraicGeometry.Scheme.UniversalCovers.lisseMonodromy`). At every base point `t`, the stalk
 functor identifies lisse sheaves with continuous finite-dimensional representations of
-`π₁(Y, t)` (`AlgebraicGeometry.Scheme.UniversalCovers.lisseMonodromy_isEquivalenceAt`).
+`π₁(Y, t)` (`AlgebraicGeometry.Scheme.UniversalCovers.lisseMonodromy_isEquivalenceAt`):
+
+- the stalk functor is faithful (`AlgebraicGeometry.Scheme.UniversalCovers.lisseStalk_faithful`):
+  on the irreducible scheme `Y` a morphism of lisse sheaves vanishing on one stalk vanishes;
+- it is full onto equivariant maps
+  (`AlgebraicGeometry.Scheme.UniversalCovers.lisseMonodromy_full`): an equivariant map is an
+  invariant element of the stalk of the lisse sheaf `𝓗om(G, H)`, which descends to a global
+  section (`AlgebraicGeometry.Scheme.UniversalCovers.exists_globalSection_of_invariant`);
+- the monodromy representations are continuous
+  (`AlgebraicGeometry.Scheme.UniversalCovers.lisseMonodromy_continuous_rep`);
+- essential surjectivity (`AlgebraicGeometry.Scheme.UniversalCovers.lisseMonodromy_essSurj`) is
+  stated, with the missing input explained in its docstring.
 -/
 
 @[expose] public section
@@ -40,7 +51,8 @@ variable {l : ℕ} [Fact l.Prime] {Z : Scheme.{u}}
 lemma transpose_comp_ihomRegularIso_hom_app_hom {G H : AdicSheaf l Z}
     (v : AdicSheaf.unit l Z ⟶ (AdicSheaf.ihom G).obj H) :
     (Mod.transpose v ≫ Mod.ihomRegularIso.hom.app H).hom =
-      (λ_ G.X).inv ≫ (MonObj.one (X := adicConstantSheaf l Z) ≫ v.hom) ▷ G.X ≫ Mod.evaluation G H := by
+      (λ_ G.X).inv ≫ (MonObj.one (X := adicConstantSheaf l Z) ≫ v.hom) ▷ G.X ≫
+        Mod.evaluation G H := by
   have h₁ := Mod.uncurryHom_transpose v
   rw [Mod.uncurryHom, Mod.uncurryHom, Mod.evaluation_regular] at h₁
   have hunit : (ρ_ H.X).inv ≫ H.X ◁ MonObj.one ≫ Mod.rightAct H = 𝟙 _ := by
@@ -69,7 +81,8 @@ lemma transpose_comp_ihomRegularIso_hom_app_hom {G H : AdicSheaf l Z}
         rw [Mod.comp_hom', comp_whiskerRight, Category.assoc]
         erw [h₁]
         rfl
-    _ = (λ_ G.X).inv ≫ (MonObj.one (X := adicConstantSheaf l Z) ≫ v.hom) ▷ G.X ≫ Mod.evaluation G H := by
+    _ = (λ_ G.X).inv ≫ (MonObj.one (X := adicConstantSheaf l Z) ≫ v.hom) ▷ G.X ≫
+          Mod.evaluation G H := by
         rw [reassoc_of% e₂, comp_whiskerRight, Category.assoc]
 
 /-- The map of stalks of the morphism `G ⟶ H` corresponding to `v : ℚ̄_ℓ ⟶ 𝓗om(G, H)` is the
@@ -79,7 +92,8 @@ lemma map_transpose_comp_ihomRegularIso_hom_app_hom_apply
     [Φ.LaxMonoidal] {G H : AdicSheaf l Z} (v : AdicSheaf.unit l Z ⟶ (AdicSheaf.ihom G).obj H)
     (x : Φ.obj G.X) :
     (Φ.map (Mod.transpose v ≫ Mod.ihomRegularIso.hom.app H).hom).hom x =
-      Mod.evaluationPairing Φ G H ((ε Φ ≫ Φ.map (MonObj.one (X := adicConstantSheaf l Z) ≫ v.hom)).hom 1) x := by
+      Mod.evaluationPairing Φ G H
+        ((ε Φ ≫ Φ.map (MonObj.one (X := adicConstantSheaf l Z) ≫ v.hom)).hom 1) x := by
   rw [transpose_comp_ihomRegularIso_hom_app_hom, Functor.map_comp, Functor.map_comp,
     ← left_unitality_inv, Category.assoc, Category.assoc, ← μ_natural_left_assoc,
     ← comp_whiskerRight_assoc]
@@ -92,7 +106,8 @@ lemma map_transpose_comp_ihomRegularIso_hom_app_hom_apply
 lemma globalSectionsToUpperStar_globalSectionOfModHom' {K : Type u} [Field K]
     (t : Spec (.of K) ⟶ Z) {N : AdicSheaf l Z} (v : AdicSheaf.unit l Z ⟶ N) :
     ((globalSectionsToUpperStar _ t).app N.X).hom (globalSectionOfModHom v) =
-      (ε (stalkFunctor l t) ≫ (stalkFunctor l t).map (MonObj.one (X := adicConstantSheaf l Z) ≫ v.hom)).hom 1 := by
+      (ε (stalkFunctor l t) ≫
+        (stalkFunctor l t).map (MonObj.one (X := adicConstantSheaf l Z) ≫ v.hom)).hom 1 := by
   have hε := NatTrans.IsMonoidal.unit (τ := globalSectionsToUpperStar (WeilCoefficients.{u} l) t)
   have n := (globalSectionsToUpperStar (WeilCoefficients.{u} l) t).naturality
     (MonObj.one (X := adicConstantSheaf l Z) ≫ v.hom)
@@ -121,7 +136,8 @@ lemma exists_stalkFunctor_map_kernel_ι_eq {K : Type u} [Field K] {Z : Scheme.{u
     (hx : ((stalkFunctor l t).map φ.hom).hom x = 0) :
     ∃ y, ((stalkFunctor l t).map (kernel.ι φ).hom).hom y = x := by
   let F := AdicSheaf.forget Z ⋙ stalkFunctor l t
-  refine ⟨((PreservesKernel.iso F φ).inv).hom ((ModuleCat.kernelIsoKer (F.map φ)).inv.hom ⟨x, hx⟩), ?_⟩
+  refine ⟨((PreservesKernel.iso F φ).inv).hom
+    ((ModuleCat.kernelIsoKer (F.map φ)).inv.hom ⟨x, hx⟩), ?_⟩
   change ((PreservesKernel.iso F φ).inv ≫ F.map (kernel.ι φ)).hom _ = x
   rw [PreservesKernel.iso_inv_ι, ← ModuleCat.comp_apply, ModuleCat.kernelIsoKer_inv_kernel_ι]
   rfl
@@ -174,7 +190,8 @@ omit [IsLocallyNoetherian Y] [CompactSpace Y] [IsRegular Y] [ConnectedSpace Y] i
 /-- **The stalk functor is full onto equivariant maps** (blueprint:
 `cor-galois-lisse-representations`). An equivariant map `φ : G_t → H_t` is an invariant element
 of the stalk `𝓗om(G, H)_t = Hom(G_t, H_t)`, hence the restriction of a global section of the
-lisse sheaf `𝓗om(G, H)` (`AlgebraicGeometry.Scheme.UniversalCovers.exists_globalSection_of_invariant`),
+lisse sheaf `𝓗om(G, H)`
+(`AlgebraicGeometry.Scheme.UniversalCovers.exists_globalSection_of_invariant`),
 that is, of a morphism `G ⟶ H`. -/
 theorem lisseMonodromy_full (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) {G H : LisseSheaf l Y}
     (φ : LisseMonodromy.StalkSpace t G →ₗ[PadicAlgCl l] LisseMonodromy.StalkSpace t H)
@@ -210,7 +227,21 @@ theorem lisseMonodromy_full (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) {G H : 
   exact h
 
 include hU in
-/-- **Every continuous finite-dimensional representation is a monodromy representation.** -/
+/-- **Every continuous finite-dimensional representation is a monodromy representation**
+(blueprint: `cor-galois-lisse-representations`, essential surjectivity for `Λ = ℚ̄_ℓ`). On a
+connected regular Noetherian scheme, every continuous finite-dimensional `ℚ̄_ℓ`-representation
+`ρ` of `π₁(Y, t)` is isomorphic to the monodromy representation on the stalk `G_t` of a lisse
+sheaf `G`.
+
+This is the standard construction of the lisse sheaf attached to a representation
+(SGA 4½, *Rapport*, 2.10; Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 7.4.7 and
+Proposition 7.4.10): `π₁(Y, t)` being compact, `ρ` is defined over the ring of integers `𝒪_E`
+of a finite extension `E` of `ℚ_ℓ` and preserves an `𝒪_E`-lattice `Λ ⊆ V`; the reductions
+`Λ / ϖⁿ` are continuous representations of `π₁(Y, t)` on finite sets, hence finite étale covers
+of `Y`, which define finite locally constant sheaves `L_n`, and `G = (lim_n L_n) ⊗_{𝒪_E} ℚ̄_ℓ`.
+It is not formalised here: it needs, besides the universal covers, the comparison between lisse
+`ℚ̄_ℓ`-sheaves in the Bhatt–Scholze model and adic systems of `𝒪_E / ϖⁿ`-sheaves (lisse
+`𝒪_E`-lattices), which the project does not provide yet. -/
 theorem lisseMonodromy_essSurj (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
     (V : Type (u + 1)) [AddCommGroup V] [Module (PadicAlgCl l) V]
     [FiniteDimensional (PadicAlgCl l) V] (ρ : Representation (PadicAlgCl l) (Aut (fiber t)) V)
