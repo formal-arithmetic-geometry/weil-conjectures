@@ -19,19 +19,10 @@
  "statement": "For a cartesian affine scheme square and its cartesian global-section spectrum square [def-pc-scheme], a point z0 of Spec Γ(X', top), and a cochain complex P of modules on X, put z=X'.isoSpec.inv(z0), P0=(X.isoSpec.inv)*P, Q=P at g'(z), and Q0=P0 at g0'(z0) [def-pc-single-complex-base-change-stalk-condition]. Fix eA and eD to the actual canonicalSpectrumStalkEquiv maps of X.isoSpec.inv and X'.isoSpec.inv, including the point transport from isoSpec naturality [lem-pc-affine-spectrum-canonical-stalk-ring-coordinates]. Let H be the additive chain isomorphism obtained by tensorStalkIso for the original square, isoPullbackAdditiveStalkIso along j=X'.isoSpec.inv [lem-pc-iso-pullback-stalk-cohomology], the stalk of the inverse composition comparison alpha [def-pc-tensor-pullback-composition-iso], and the inverse spectrum tensorStalkIso, with the mapHomologicalComplex composition isomorphisms inserted exactly as in affineSpectrumTensorAdditiveIso. There exists a chain isomorphism q:Q≅Res_eA(Q0) such that H.hom.f k (d tensor x)=eD(d) tensor (q.hom.f k x) in every degree k and for all d in D and x in Q.X k. No R-to-A, R-to-B or tensor-to-D compatibility assertion is included; those ring equations are proved independently.",
  "proof": [
   {
-   "text": "Compose the extension/restriction adjunction unit for the invertible stalk ring map of X.isoSpec.inv with the restricted inverse canonical pullback-stalk comparison. Transport the source point by isoSpec naturality and map this natural linear isomorphism to cochain complexes, giving q and its inverse.",
+   "text": "Obtain q from the chain-isomorphism component and apply the fixed-q generator equation, yielding the displayed existential formula.",
    "uses": [
-    "lem-pc-affine-spectrum-canonical-stalk-ring-coordinates",
-    "def-pc-single-complex-base-change-stalk-condition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Represent x by a section germ. The first tensor-stalk isomorphism sends d tensor x to d times the germ of the pullback adjunction unit. The additive comparison along j transports this germ and the coefficient d by j.stalkMap. The composition mate identifies successive pullback-unit germs with the composite pullback-unit germ; the inverse spectrum tensor-stalk map returns eD(d) tensor q(x). This argument works degreewise and for zero modules.",
-   "uses": [
-    "lem-pc-iso-pullback-stalk-cohomology",
-    "def-pc-tensor-pullback-composition-iso",
-    "def-pc-single-complex-base-change-stalk-condition"
+    "lem-pc-affine-spectrum-canonical-tensor-generator-formula-q",
+    "lem-pc-affine-spectrum-canonical-tensor-generator-formula-of-q"
    ],
    "elementary": false
   }
@@ -40,7 +31,9 @@
   "def-pc-single-complex-base-change-stalk-condition",
   "def-pc-tensor-pullback-composition-iso",
   "lem-pc-affine-spectrum-canonical-stalk-ring-coordinates",
-  "lem-pc-iso-pullback-stalk-cohomology"
+  "lem-pc-iso-pullback-stalk-cohomology",
+  "lem-pc-affine-spectrum-canonical-tensor-generator-formula-q",
+  "lem-pc-affine-spectrum-canonical-tensor-generator-formula-of-q"
  ],
  "proof_origin": {
   "by": "worker",
@@ -116,12 +109,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T234508-L-2161957",
+  "landing": "20261014T010840-L-3162513",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

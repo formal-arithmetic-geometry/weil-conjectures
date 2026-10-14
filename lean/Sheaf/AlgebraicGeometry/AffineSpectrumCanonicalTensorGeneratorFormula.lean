@@ -3,6 +3,8 @@ module
 public import Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalStalkRingCoordinates
 public import Sheaf.AlgebraicGeometry.IsoPullbackStalkCohomology
 public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+import Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalTensorGeneratorFormulaQ
+import Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalTensorGeneratorFormulaOfQ
 /-! # Canonical affine spectrum comparison on tensor generators
 
 Source: Stacks Project, Tags 0098, 0096, and 0DJ8.
@@ -21,6 +23,8 @@ namespace AlgebraicGeometry.SingleComplexBaseChange
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
+set_option maxHeartbeats 800000 in
+-- The fixed stalk comparison requires substantial definitional reduction.
 /-- Existence of input-complex coordinates compatible with the fixed comparison,
 using the actual affine-spectrum stalk ring maps.
 
@@ -131,6 +135,11 @@ theorem exists_canonicalSpectrum_tensor_generator_formula
           (algebraMap (A g' z) (A g' z ⊗[R f g' z] B f' z))] x) =
         eD d ⊗ₜ[A0, (tensorMap (Spec.map f.appTop) (Spec.map f'.appTop)
           (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0).comp
-          (algebraMap A0 (A0 ⊗[R0] B0))] (show Q0.X k from q.hom.f k x)) := by sorry
+          (algebraMap A0 (A0 ⊗[R0] B0))] (show Q0.X k from q.hom.f k x)) := by
+  dsimp only
+  obtain ⟨q⟩ := exists_canonicalSpectrum_tensor_generator_formula_q
+    f f' g g' sq sq0 z0 P
+  refine ⟨q, ?_⟩
+  exact canonicalSpectrum_tensor_generator_formula_of_q f f' g g' sq sq0 z0 P q
 
 end AlgebraicGeometry.SingleComplexBaseChange

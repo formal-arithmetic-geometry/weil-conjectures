@@ -14106,3 +14106,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:08 L: merged deliver/D3/Sheaf.RingTheory.ProjectiveResolutionExtDegree (stage 3; reviewer PASS; first push; landing 20261014T010839-L-3162057 (proof); batch 20261014T010832; modules 1; new nodes 0)
 - 01:08 L: merged deliver/D4/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (stage 3; reviewer PASS; first push; landing 20261014T010839-L-3162185 (proof); batch 20261014T010832; modules 1; new nodes 0)
 - 01:08 L: merged deliver/E2/Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedMaps (stage 3; reviewer PASS; first push; landing 20261014T010839-L-3162361 (interface); batch 20261014T010832; modules 3; new nodes 2)
+- 01:08 L: merged deliver/E3/Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalTensorGeneratorFormula (stage 3; reviewer PASS; first push; landing 20261014T010840-L-3162513 (interface); batch 20261014T010832; modules 3; new nodes 2)
