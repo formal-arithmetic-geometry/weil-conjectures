@@ -11,7 +11,6 @@ public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 import Mathlib.FieldTheory.FinTrdeg
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 import Sheaf.FieldTheory.FinitelyGeneratedFieldCompleteIntersectionModel
 import Sheaf.RingTheory.FractionFieldCompleteIntersectionCotangent
 
@@ -59,7 +58,6 @@ theorem cartier_equality
       (FiniteDimensional k K →
         Module.finrank K (KaehlerDifferential k K) =
           Module.finrank K (Algebra.H1Cotangent k K)) := by
-  -- The complete-intersection model supplies the two finite-dimensional comparisons.
   classical
   have : Algebra.EssFiniteType k K := IntermediateField.fg_top_iff.mp hfg
   obtain ⟨s, hs⟩ := exists_finset_isTranscendenceBasis k K
@@ -79,7 +77,10 @@ theorem cartier_equality
     exists_fractionField_completeIntersection_cotangent_model k K n f hreg e
   have hH : Module.Finite K (H1Cotangent k K) := Module.Finite.equiv eH.symm
   have hΩ : Module.Finite K (KaehlerDifferential k K) := Module.Finite.equiv eΩ.symm
-  have hker := δ.finrank_range_add_finrank_ker
+  have hker : Module.finrank K (LinearMap.range δ) +
+      Module.finrank K (LinearMap.ker δ) = Module.finrank K (Fin f.length → K) := by
+    rw [← δ.quotKerEquivRange.finrank_eq]
+    exact (LinearMap.ker δ).finrank_quotient_add_finrank
   have hcoker := (LinearMap.range δ).finrank_quotient_add_finrank
   simp only [Module.finrank_fin_fun] at hker
   have hker' : Module.finrank K (LinearMap.range δ) +
