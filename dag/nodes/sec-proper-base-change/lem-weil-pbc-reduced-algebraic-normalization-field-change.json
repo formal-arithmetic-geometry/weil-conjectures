@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Geometry and separable field change of reduced algebraic normalization",
- "statement": "Let $k$ be a field [def-weil-field] and $X$ a reduced scheme [def-pc-reduced-scheme] of finite type over $k$ [def-weil-finite-type-morphism]. Define $X^\\nu$ as the disjoint union of the normalizations [def-sc-normalization] of the finitely many irreducible components [def-weil-irreducible-components] of $X$, with their reduced induced structures, and let $\\nu:X^\\nu\\to X$ be the canonical map. Then $\\nu$ is finite and surjective [def-weil-finite-integral-morphism, def-weil-surjective-morphism]. The subset $N\\subseteq X$ of points whose local rings are integrally closed domains is a dense open, and $\\nu^{-1}(N)\\to N$ is an isomorphism. For every open subscheme $W\\subseteq X$, $\\nu^{-1}(W)\\to W$ is canonically the normalization of $W$. If $K/k$ is a separable field extension (every finitely generated subextension is separably generated), the canonical comparison $(X_K)^\\nu\\to X^\\nu\\times_k K$ is an isomorphism over $X_K=X\\times_k K$ [def-pc-base-change]; no algebraicity or finiteness of $K/k$ is assumed. In particular this comparison is an isomorphism for every extension of an algebraically closed base field $k$.",
+ "statement": "Let $k$ be a field [def-weil-field] and $X$ a reduced scheme [def-pc-reduced-scheme] of finite type over $k$ [def-weil-finite-type-morphism]. Define $X^\\nu$ as the disjoint union of the normalizations [def-sc-normalization] of the finitely many irreducible components [def-weil-irreducible-components] of $X$, with their reduced induced structures, and let $\\nu:X^\\nu\\to X$ be the canonical map. Then $\\nu$ is finite and surjective [def-weil-finite-integral-morphism, def-weil-surjective-morphism]. The subset $N\\subseteq X$ of points whose local rings are integrally closed domains [def-weil-pbc-normal-ring] is a dense open, and $\\nu^{-1}(N)\\to N$ is an isomorphism. For every open subscheme $W\\subseteq X$, $\\nu^{-1}(W)\\to W$ is canonically the normalization of $W$. If $K/k$ is a separable field extension [def-pc-field-extension, def-weil-pbc-separable-field-extension] (every finitely generated subextension is separably generated), the canonical comparison $(X_K)^\\nu\\to X^\\nu\\times_k K$ is an isomorphism over $X_K=X\\times_k K$ [def-pc-base-change]; no algebraicity or finiteness of $K/k$ is assumed. In particular this comparison is an isomorphism for every extension of an algebraically closed base field $k$.",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Tags 0BXR (lemma-normalization-locally-algebraic), 0C3N (lemma-normalization-and-change-of-fields); Morphisms Tags 035Q (lemma-normalization-normal), 035K (lemma-normalization-localization), 0CDV (lemma-normalization-in-terms-of-components). The normal locus equals the isomorphism locus: on an affine chart Spec A with finite integral closure B, it is the complement of the support of the finite A-module B/A."
@@ -24,11 +24,141 @@
   "def-weil-irreducible-components",
   "def-weil-finite-integral-morphism",
   "def-weil-surjective-morphism",
-  "def-pc-base-change"
+  "def-pc-base-change",
+  "def-weil-pbc-normal-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-field-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The spectrum of a field is Noetherian (its only ideals are 0 and 1). By [lem-weil-pbc-finite-type-over-noetherian], $X$ is Noetherian; [lem-weil-pbc-noetherian-finitely-many-components] gives its finitely many components $C_i$ with reduced induced structure. Each $C_i$ is integral and finite type over $k$. Apply [lem-sc-normalization-exists] to $C_i$: $C_i^\\nu\\to C_i$ is finite and surjective. On an affine $\\operatorname{Spec}A\\subset X$, the inverse images in these sources are affine with coordinate rings finite over $A/\\mathfrak p_i$, hence finite over $A$ using the same generators. Their finite disjoint union is the spectrum of their finite product, a finite $A$-module. Thus $\\nu$ is finite. Every point belongs to some $C_i$ and has a preimage in $C_i^\\nu$, so $\\nu$ is surjective. The empty scheme gives the empty coproduct and satisfies both assertions.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sc-normalization-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXR (lemma-normalization-locally-algebraic), finiteness and component construction; Morphisms 0CDV (lemma-normalization-in-terms-of-components)."
+   }
+  },
+  {
+   "text": "Fix an affine $\\operatorname{Spec}A\\subset X$. By [lem-weil-pbc-reduced-noetherian-total-ring-fractions], $Q(A)$ is the finite product of the fields $\\operatorname{Frac}(A/\\mathfrak p_i)$ for the minimal primes meeting this chart. By [def-sc-normalization] and [lem-weil-pbc-integral-closure-commutes-localization], the component normalizations over this chart have coordinate rings $B_i=\\overline{A/\\mathfrak p_i}^{\\operatorname{Frac}(A/\\mathfrak p_i)}$. Thus $\\nu^{-1}\\operatorname{Spec}A=\\operatorname{Spec}B$, $B=\\prod_i B_i\\subset Q(A)$. This is exactly the integral closure of $A$ in $Q(A)$: projection of a monic equation proves one inclusion; for a tuple integral in each coordinate, lift the coefficients of its finitely many coordinate monic polynomials to $A$ and multiply them. In each coordinate its own polynomial is a factor, so the resulting monic product annihilates the tuple. This also handles an empty product.",
+   "uses": [
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "def-sc-normalization",
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms Tag 035P (lemma-description-normalization), affine description; Tag 0CDV (lemma-normalization-in-terms-of-components)."
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-integral-closure-finite-normal-product] to $A\\to Q(A)$ and the finite product of its component fraction fields (fields are integrally closed domains). It says that every prime localization of $B$ is an integrally closed domain, so $B$ is normal. Choose finite $A$-module generators $b_j$ of $B$ from step 1, write $b_j=a_j/s_j$ in $Q(A)$ with each $s_j$ a nonzerodivisor, and put $s=\\prod_j s_j$. Then $sB\\subset A$ and $A_s=B_s$. Multiplication by $s$ is injective on $B$, since $B\\subset Q(A)$ and $s$ is a unit in $Q(A)$. By [lem-weil-pbc-reduced-zerodivisors-union-minimal-primes], $s$ avoids every minimal prime; hence $D(s)$ contains every generic point of the chart and is dense. This gives a dense open over which $\\nu$ is an isomorphism.",
+   "uses": [
+    "lem-sbc-integral-closure-finite-normal-product",
+    "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXR (lemma-normalization-locally-algebraic); Morphisms 035Q (lemma-normalization-normal); explicit finite-generator denominator argument."
+   }
+  },
+  {
+   "text": "For $\\mathfrak p\\in\\operatorname{Spec}A$, [lem-weil-pbc-integral-closure-commutes-localization] identifies $B_{\\mathfrak p}$ with the integral closure of $A_{\\mathfrak p}$ in $Q(A)_{\\mathfrak p}=Q(A_{\\mathfrak p})$. The latter identification follows from [lem-weil-pbc-reduced-noetherian-total-ring-fractions]: localization kills precisely the field factors whose minimal primes are not contained in $\\mathfrak p$, and keeps the others, exactly the minimal primes of $A_{\\mathfrak p}$ by the inclusion-preserving prime correspondence [lem-weil-pbc-primes-of-localization]. If $A_{\\mathfrak p}$ is an integrally closed domain, this closure is $A_{\\mathfrak p}$. Conversely, if $A_{\\mathfrak p}=B_{\\mathfrak p}$, this local ring is a normal domain: its maximal ideal contracts to a prime $\\mathfrak q$ of $B$ and $(B_{\\mathfrak p})_{\\mathfrak qB_{\\mathfrak p}}=B_{\\mathfrak q}$. A local ring localized at its maximal ideal is itself, and $B_{\\mathfrak q}$ is a normal domain by step 3. Therefore the normal points of the chart are precisely the primes where $(B/A)_{\\mathfrak p}=0$. For generators $m_1,\\ldots,m_h$ of $B/A$, vanishing at $\\mathfrak p$ means some $u_j\\notin\\mathfrak p$ kills each $m_j$; their product kills all generators. Consequently these primes form $\\operatorname{Spec}A\\setminus V(\\operatorname{Ann}_A(B/A))$, an open containing $D(s)$ from step 3. On this open the localized inclusion $A\\to B$ is an isomorphism. These local descriptions agree on overlaps because they use the intrinsic local ring, so they give the dense open $N$ and $\\nu^{-1}(N)\\cong N$.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "lem-weil-pbc-primes-of-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms Tags 0C3B (lemma-stalk-normalization) and 035K (lemma-normalization-localization); finite-module annihilator calculation written out."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-affine-open-section-vanishing-prime], a principal open is affine with its coordinate ring the stated localization. For a principal open $D(f)\\subset\\operatorname{Spec}A$, [lem-weil-pbc-integral-closure-commutes-localization] gives $B_f=\\overline{A_f}^{Q(A)_f}$. The total-fractions description [lem-weil-pbc-reduced-noetherian-total-ring-fractions] identifies $Q(A)_f$ with $Q(A_f)$ by discarding the component field factors in which $f=0$. Step 2 applied to $A_f$ therefore identifies $\\operatorname{Spec}B_f\\to\\operatorname{Spec}A_f$ with the normalization. Cover any open $W\\subset X$ by such principal opens in affine charts. On a further principal restriction $D(fg)$ both iterated maps send $b/f^n$ to that same fraction in $B_{fg}$; equality can be tested on principal opens inside each overlap. Thus the identifications agree on overlaps and glue canonically to identify $\\nu^{-1}(W)\\to W$ with the normalization of $W$. Empty opens contribute no charts.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms Tag 035K (lemma-normalization-localization), expanded using Algebra 0307."
+   }
+  },
+  {
+   "text": "Let $K/k$ be separable in the stated, possibly transcendental, sense. On the above affine chart set $A_K=A\\otimes_k K$ and $B_K=B\\otimes_k K$. The normal-algebra scalar-extension theorem [lem-weil-pbc-normal-algebra-separable-scalar-extension] applies to the normal $B$ of step 3 and makes $B_K$ normal. By [lem-weil-pbc-module-over-field-flat] and the injectivity characterization in [def-weil-pbc-flat-ring-map], tensoring $A\\hookrightarrow B$ and multiplication by the nonzerodivisor $s$ preserves injectivity. Thus $A_K\\hookrightarrow B_K$, and $s$ is a nonzerodivisor on both rings; the same finite generators show $B_K$ is finite over $A_K$, and $sB_K\\subset A_K$. A normal ring is reduced: if a nonzero nilpotent $b$ existed, choose a maximal ideal containing its proper annihilator; then $b/1$ would be a nonzero nilpotent in a domain localization, a contradiction. Hence $B_K$, and its subring $A_K$, are reduced. Both are finite-type $K$-algebras and therefore Noetherian by the affine instance of [lem-weil-pbc-finite-type-over-noetherian].",
+   "uses": [
+    "lem-weil-pbc-normal-algebra-separable-scalar-extension",
+    "lem-weil-pbc-module-over-field-flat",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N (lemma-normalization-and-change-of-fields), separable case; Tag 0C3M (lemma-base-change-normal-by-separable)."
+   }
+  },
+  {
+   "text": "The inclusion $B_K\\subset (A_K)_s\\subset Q(A_K)$ is injective because $s$ is a nonzerodivisor on $B_K$ and $sB_K\\subset A_K$. It identifies $Q(B_K)$ with $Q(A_K)$ explicitly: a nonzerodivisor $a$ of $A_K$ is one on $B_K$, since $ab=0$ implies $a(sb)=0$ in $A_K$, hence $sb=0$ and $b=0$. Conversely, if $t$ is a nonzerodivisor of $B_K$, then $st\\in A_K$ is a nonzerodivisor there, and a fraction $b/t$ equals $(sb)/(st)$ in $Q(A_K)$. The Noetherian ring $B_K$ has finitely many minimal primes by [lem-weil-pbc-noetherian-finitely-many-minimal-primes]. Apply [lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions] to the reduced Noetherian ring $B_K$: its normality makes it integrally closed in this common total fraction ring. By [lem-weil-pbc-finite-algebra-is-integral], every element of $B_K$ is integral over $A_K$. Any element of $Q(A_K)$ integral over $A_K$ is also integral over $B_K$ (the same monic equation), hence belongs to $B_K$. Therefore $B_K$ is exactly the integral closure of $A_K$ in $Q(A_K)$. By step 2 this identifies $\\operatorname{Spec}B_K$ with the normalization of $\\operatorname{Spec}A_K$. To identify the canonical comparison, flatness as in step 6 preserves injectivity of multiplication by every nonzerodivisor $a$ of $A$, so $A\\to A_K$ extends uniquely to $\\iota:Q(A)\\to Q(A_K)$, $x/a\\mapsto (x\\otimes1)/(a\\otimes1)$. The comparison is Spec of the ring isomorphism $B_K\\to\\overline{A_K}^{Q(A_K)}$, $b\\otimes c\\mapsto c\\iota(b)$. On restriction to $D(f)$ this sends $(b/f^n)\\otimes c$ to $c\\iota(b)/\\iota(f)^n$; on any further principal restriction both composites have this formula. Principal opens inside affine overlaps cover those overlaps, so these local maps agree and glue to the canonical comparison over $X_K$.",
+   "uses": [
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N (lemma-normalization-and-change-of-fields), separable-case integral-closure identification; Algebra Tag 030C (lemma-characterize-reduced-ring-normal)."
+   }
+  },
+  {
+   "text": "If $k$ is algebraically closed and $K/k$ is arbitrary, take any finitely generated subextension $L/k$. The Mathlib field tool [lem-weil-pbc-algclosed-fg-field-separating-basis] supplies a finite transcendence basis with separable algebraic remainder. Thus each such $L/k$ is separably generated, exactly condition (2) of [def-weil-pbc-separable-field-extension]. So $K/k$ satisfies the hypothesis of steps 6 and 7, giving the stated special case without assuming that $K/k$ is algebraic or finite.",
+   "uses": [
+    "lem-weil-pbc-algclosed-fg-field-separating-basis",
+    "def-weil-pbc-separable-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N (lemma-normalization-and-change-of-fields); Algebra Tag 030Z (lemma-perfect), specialization to an algebraically closed field."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-normalization-exists",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "def-sc-normalization",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-sbc-integral-closure-finite-normal-product",
+  "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-normal-algebra-separable-scalar-extension",
+  "lem-weil-pbc-module-over-field-flat",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-algclosed-fg-field-separating-basis",
+  "def-weil-pbc-separable-field-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0BXR and 0C3N, following the affine integral-closure route; normal-locus support and common-denominator computations expanded using Morphisms 035P/035K/0C3B and Algebra 0307/030C."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -92,15 +222,60 @@
    "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalization. Read Mathlib/AlgebraicGeometry/Normalization.lean:588-616; only relative normalization and smooth-base-change isomorphism, not absolute normalization and arbitrary separable scalar extension.",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure in the total fraction ring of a reduced finite type algebra commutes with separable extension of scalars",
+   "results": "8 hits: IsIntegralClosure.isFractionRing_of_finite_extension, IsIntegralClosure.isLocalization_of_isSeparable, integralClosure.isFractionRing_of_finite_extension, IsIntegralClosure.isFractionRing_of_algebraic, integralClosure.isFractionRing_of_algebraic, integralClosure.isIntegrallyClosedOfFiniteExtension, IsLocalization.Away.integralClosure, IsIntegralClosure.isField. Read Mathlib/AlgebraicGeometry/Normalization.lean:582-618; relative normalization and smooth base change do not give this absolute normalization comparison for arbitrary separable field extensions.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalizationPullback",
+   "results": "7 hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback, AlgebraicGeometry.Scheme.Hom.normalizationPullback, AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth, AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationPullback_fst, AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationPullback_fst_assoc. Read Mathlib/AlgebraicGeometry/Normalization.lean:582-618; relative normalization and smooth base change do not give this absolute normalization comparison for arbitrary separable field extensions.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationPullback|normalization.*separ|normal.*locus",
+   "results": "8 hits: Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean. Read Mathlib/AlgebraicGeometry/Normalization.lean:582-618; relative normalization and smooth base change do not give this absolute normalization comparison for arbitrary separable field extensions.",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lemma-weil-pbc-normalization-exact-sequence",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+  "worker": "stage1",
+  "summary": "Proved finite surjective normalization componentwise; supplied the affine integral-closure dictionary, dense common-denominator open, exact normal-locus/finite-quotient calculation and arbitrary open restriction. Proved separable field change through normality of B tensor K and equality of its total fraction ring with that of A tensor K, without claiming components remain integral. Reused the existing localization and total-fractions nodes. Added one unsplit normal-scalar-extension tool and one Mathlib separating-basis leaf. Mathematical statement unchanged; added definition citations for normality and nonalgebraic separability.",
+  "blueprint": "Ancestor proof first paragraph (surjectivity, dense isomorphism locus), second paragraph (normality and normalization after algebraically closed extension), and open-restriction paragraph; no cohomological claims are split here.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-integral-closure-finite-normal-product",
+    "why": "Generic ring-theoretic closure in a finite product of normal domains establishes normality of the affine normalization B; it is not a replacement for the curve-calculation route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-integral-closure-finite-normal-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-80a80281f",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-80a80281f (reviewer sub-agent of L); spot-checked: Full mathematical review passes: all eight steps and both new nodes checked against Stacks 0BXR/0C3N/0C3M, supporting algebra sources, and the exact Mathlib separating-basis theorem. Canonical comparison orientation, hypotheses, edge cases, duplicates, and route checked. Added missing metadata to both new nodes in whole corrected JSON files under fixes/dag/nodes/sec-proper-base-change/. Accepted the declared finite-normal-product algebra tool. Detailed checks are in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }

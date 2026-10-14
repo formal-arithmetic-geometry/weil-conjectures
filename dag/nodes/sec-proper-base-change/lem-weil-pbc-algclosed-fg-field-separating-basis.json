@@ -1,0 +1,125 @@
+{
+ "kind": "statement",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": {
+  "declaration": "exists_isTranscendenceBasis_and_isSeparable_of_perfectField",
+  "file": "Mathlib/FieldTheory/SeparablyGenerated.lean",
+  "how": "specializes in one line: apply exists_isTranscendenceBasis_and_isSeparable_of_perfectField at lines 312-316 to k,L; IsAlgClosed.perfectField (Mathlib/FieldTheory/IsAlgClosed/Basic.lean:373-375) supplies PerfectField k. IntermediateField.fg_top_iff (Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean:92-93) supplies Algebra.EssFiniteType k L from finite generation as a field. The output is a Finset L with IsTranscendenceBasis and Algebra.IsSeparable over its intermediate field; algebraicity is included in the transcendence-basis condition. All indicated source lines were read.",
+  "line": 312
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-algclosed-fg-field-separating-basis",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-normalization-exact-sequence",
+   "place": "Proof, second paragraph: \"After an algebraically closed extension\"; the separating-basis fact verifies that such extensions satisfy the separable hypothesis of the algebraic normalization comparison.",
+   "via": [
+    "lem-weil-pbc-reduced-algebraic-normalization-field-change"
+   ]
+  },
+  "same_as": []
+ },
+ "title": "A finitely generated extension of an algebraically closed field has a separating basis",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field] (every nonconstant polynomial over $k$ has a root in $k$) and $L/k$ a field extension [def-pc-field-extension] generated as a field by finitely many elements. There are finitely many elements $t_1,\\ldots,t_r\\in L$ forming a transcendence basis of $L/k$ [def-weil-pbc-transcendence-basis], such that $L/k(t_1,\\ldots,t_r)$ is separable algebraic [def-weil-pbc-separable-algebraic-extension]. The empty basis is allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 030Z (lemma-perfect), together with Definition 030O (definition-separable-field-extension): algebraically closed fields have pth roots and hence are perfect; finite generation specializes separability to a separating basis."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every extension of an algebraically closed field is separable in the sense that every finitely generated subextension has a separating transcendence basis",
+   "results": "8 hits: IsAlgClosure.separable, IsSepClosed.of_isAlgClosed, Algebra.IsAlgebraic.isSepClosed, separableClosure.isAlgebraic, perfectField_iff_isSeparable_algebraicClosure, IsSepClosure.isSeparable, IsSepClosed, IsSepClosure.separable",
+   "date": "2026-10-14",
+   "verdict": "match: exists_isTranscendenceBasis_and_isSeparable_of_perfectField, with the algebraically closed perfect-field instance and the finite-field-generation/essential-finite-type equivalence (source files read)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated field extension of a perfect field admits a separating transcendence basis",
+   "results": "8 hits: exists_isTranscendenceBasis_and_isSeparable_of_perfectField, IntermediateField.FG.exists_finset_maximalFor_isTranscendenceBasis_separableClosure, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType, IntermediateField.exists_finset_maximalFor_isTranscendenceBasis_separableClosure, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow', Field.Emb.Cardinal.instIsSeparableSubtypeMemIntermediateFieldAdjoinImageToTypeOrdRankCompCoeBasisWellOrderedBasisLeastExtIioSingletonSet",
+   "date": "2026-10-14",
+   "verdict": "match: exists_isTranscendenceBasis_and_isSeparable_of_perfectField, with the algebraically closed perfect-field instance and the finite-field-generation/essential-finite-type equivalence (source files read)."
+  },
+  {
+   "tool": "loogle",
+   "query": "PerfectField, Algebra.IsSeparablyGenerated",
+   "results": "1 hits: instIsSeparablyGeneratedOfPerfectFieldOfEssFiniteType",
+   "date": "2026-10-14",
+   "verdict": "match: exists_isTranscendenceBasis_and_isSeparable_of_perfectField, with the algebraically closed perfect-field instance and the finite-field-generation/essential-finite-type equivalence (source files read)."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isTranscendenceBasis_and_isSeparable_of_perfectField|instIsSeparablyGeneratedOfPerfectField|fg_iff.*[Ee]ssFiniteType|essFiniteType_iff",
+   "results": "4 hits: Mathlib/FieldTheory/FinTrdeg.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean, Mathlib/FieldTheory/SeparablyGenerated.lean",
+   "date": "2026-10-14",
+   "verdict": "match: exists_isTranscendenceBasis_and_isSeparable_of_perfectField, with the algebraically closed perfect-field instance and the finite-field-generation/essential-finite-type equivalence (source files read)."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAlgClosed.*[Pp]erfect|[Pp]erfect.*IsAlgClosed",
+   "results": "4 hits: Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsSepClosed.lean",
+   "date": "2026-10-14",
+   "verdict": "match: exists_isTranscendenceBasis_and_isSeparable_of_perfectField, with the algebraically closed perfect-field instance and the finite-field-generation/essential-finite-type equivalence (source files read)."
+  },
+  {
+   "tool": "grep",
+   "query": "EssFiniteType.*fg|fg.*EssFiniteType|essFiniteType",
+   "results": "6 hits: Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean",
+   "date": "2026-10-14",
+   "verdict": "match: exists_isTranscendenceBasis_and_isSeparable_of_perfectField, with the algebraically closed perfect-field instance and the finite-field-generation/essential-finite-type equivalence (source files read)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every field extension of a perfect field is separable even when transcendental",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a perfect field an essentially finite type field algebra is separably generated",
+   "results": "8 hits: exists_isTranscendenceBasis_and_isSeparable_of_perfectField, Algebra.IsAlgebraic.isSeparable_of_perfectField, Field.exists_primitive_element, perfectField_of_isSeparable_of_perfectField_top, perfectField_iff_isSeparable_algebraicClosure, Algebra.IsSeparable, Field.primitive_element_inf_aux, IsSepClosure.separable",
+   "date": "2026-10-14",
+   "verdict": "match: independently reread exists_isTranscendenceBasis_and_isSeparable_of_perfectField at SeparablyGenerated.lean:312-316 and the two hypothesis adapters named in mathlib_match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSeparablyGenerated\"",
+   "results": "9 hits: Algebra.IsSeparablyGenerated, instIsSeparablyGeneratedOfIsSeparable, instIsSeparablyGeneratedOfPerfectFieldOfEssFiniteType, Algebra.isSeparable_iff_isSeparablyGenerated_and_isAlgebraic, AlgEquiv.isSeparablyGenerated, Algebra.IsSeparablyGenerated.isSeparable, Algebra.IsSeparablyGenerated.mk, Algebra.isSeparablyGenerated_iff",
+   "date": "2026-10-14",
+   "verdict": "match: independently reread exists_isTranscendenceBasis_and_isSeparable_of_perfectField at SeparablyGenerated.lean:312-316 and the two hypothesis adapters named in mathlib_match."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSeparablyGeneratedOfPerfectField|exists_isTranscendenceBasis.*perfectField",
+   "results": "1 hits: Mathlib/FieldTheory/SeparablyGenerated.lean",
+   "date": "2026-10-14",
+   "verdict": "match: independently reread exists_isTranscendenceBasis_and_isSeparable_of_perfectField at SeparablyGenerated.lean:312-316 and the two hypothesis adapters named in mathlib_match."
+  }
+ ],
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
