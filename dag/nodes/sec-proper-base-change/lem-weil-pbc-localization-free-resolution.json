@@ -26,9 +26,79 @@
   "def-pur-localized-ringed-site",
   "def-weil-presheaf-modules-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on the slice $\\mathcal C/U$ of [def-pur-localized-ringed-site], where $f$ restricts to a global section. Put $P(V/U)=\\bigoplus_{n\\ge0}\\mathcal O(V)$ (finite-support sequences), and $L(V/U)=\\mathcal O(V)[1/f|_V]$. Concretely, the latter consists of fractions $a/f^n$ with $(a,n)\\sim(b,m)$ iff some $k\\ge0$ satisfies $f^k(f^m a-f^n b)=0$; use the usual common-denominator addition and multiplication. Restriction applies the ring restriction to coefficients and to $f$, so preserves this relation. The displayed formulas give linear maps $D:P\\to P$ and $Q:P\\to L$, commuting with every restriction. In particular $D$ increases a finite support bound by at most one.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997 (lemma-hom-from-Af), displayed free resolution in the proof, with the sectionwise verification expanded"
+   }
+  },
+  {
+   "text": "Fix $V/U$, write $R=\\mathcal O(V)$ and $f=f|_V$. If $D(x)=0$, its zeroth coordinate says $x_0=0$; successively $x_i-fx_{i-1}=0$ implies $x_i=0$. Thus $D$ is injective on every object. Also $Q(Dx)=\\sum_i x_i/f^i-\\sum_i fx_i/f^{i+1}=0$, since the sums have finite support and $f$ is invertible in $R[1/f]$. Every fraction $a/f^n$ is $Q(a e_n)$, so $Q$ is surjective on every object.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997 (lemma-hom-from-Af), displayed free resolution in the proof, with the sectionwise verification expanded"
+   }
+  },
+  {
+   "text": "For $x\\in\\ker Q$ choose $N\\ge0$ such that $x_i=0$ for $i>N$, including $N=0$ for the zero sequence. Set $a=\\sum_{i=0}^N f^{N-i}x_i$. Common-denominator addition gives $Q(x)=a/f^N$. By the fraction relation explicitly given in step 1, $a/f^N=0/1$ means that there is $k\\ge0$ with $f^k a=0$. No cancellation of $f$ in $R$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997 (lemma-hom-from-Af), displayed free resolution in the proof, with the sectionwise verification expanded"
+   }
+  },
+  {
+   "text": "Set $M=N+k$ and $s_j=\\sum_{i=0}^j f^{j-i}x_i$ for $0\\le j\\le M$. Then $s_0=x_0$, $s_j-fs_{j-1}=x_j$ for $1\\le j\\le M$, and $s_M=f^k a=0$. Define $y_j=s_j$ for $j<M$ and $y_j=0$ for $j\\ge M$. These identities give $D(y)_j=x_j$ for $j\\le M$, including $j=M$, and both sides vanish for $j>M$. When $M=0$, $x_0=a=0$ and $y=0$ gives the same conclusion. Hence $\\ker Q=\\operatorname{im}D$. The sequence of presheaves is exact: its sectionwise kernels and quotients, with induced restrictions, have the kernel and cokernel universal properties, checked separately at every object.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997 (lemma-hom-from-Af), displayed free resolution in the proof, with the sectionwise verification expanded"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-site-module-sheafification-exact] to the ringed slice site and this exact presheaf sequence. It gives an exact sequence $0\\to P^\\#\\xrightarrow{D^\\#}P^\\#\\xrightarrow{Q^\\#}L^\\#\\to0$ of $\\mathcal O_U$-modules. This is exact module sheafification for a varying ring sheaf, not merely sheafification for constant coefficients.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-module-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EI (lemma-sheafification-exact), applied on the slice site"
+   }
+  },
+  {
+   "text": "By [def-weil-presheaf-modules-sheafification], maps $P^\\#\\to G$ to any $\\mathcal O_U$-module sheaf $G$ correspond to presheaf maps $P\\to G$. Such maps correspond exactly to families of module sheaf maps $\\mathcal O_U\\to G$: restrict to each coordinate, or sum their values on a finite-support sequence. These inverse assignments commute with restrictions. Thus $P^\\#$ has the universal property of $\\bigoplus_{n\\ge0}\\mathcal O_U$. By the definition in the item, $L^\\#=\\mathcal O_U[1/f]$. On the $n$th coordinate inclusion, $D(a e_n)=a e_n-fa e_{n+1}$ and $Q(a e_n)=a/f^n$. Their sheafifications therefore satisfy $D^\\#\\iota_n=\\iota_n-f\\iota_{n+1}$ and $Q^\\#\\iota_n(a)=a/f^n$ on sections from $\\mathcal O_U$. The coproduct universal property makes these equalities determine the two maps uniquely; finite sums give exactly the displayed formulas on local finite-support representatives. This proves the entire displayed sequence, without assuming that a sheaf coproduct has sectionwise finite-support sections globally.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997 (lemma-hom-from-Af), displayed free resolution in the proof, with the sectionwise verification expanded"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0997 (lemma-hom-from-Af), displayed free resolution in the proof, with the sectionwise verification expanded"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -106,15 +176,87 @@
    "results": "25 displayed hits: Module.DirectLimit quotient construction (Algebra/Colimit/Module.lean:61), zero_exact uses, and unrelated Hom-complex shift identities; no sheaf localization telescope resolution.",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "telescope|localization.*resolution|resolution.*localization",
+   "results": "Hits: Mathlib/Tactic/DefEqTransformations.lean, Mathlib/Tactic/Algebraize.lean, Mathlib/Tactic/Translate/TagUnfoldBoundary.lean, Mathlib/Tactic/Translate/TagUnfoldBoundary.lean, Mathlib/Tactic/Translate/TagUnfoldBoundary.lean, Mathlib/Tactic/Translate/Reorder.lean, Mathlib/Tactic/Translate/Reorder.lean, Mathlib/Tactic/Translate/Reorder.lean; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact sequence presenting localization of a sheaf of modules by one minus multiplication shift",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf localization at a section has a two term free resolution by countable coproducts",
+   "results": "Hits: SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.generatorsOfIsCokernelFree, SheafOfModules.LocalGeneratorsData, SheafOfModules.presentationOfIsCokernelFree, SheafOfModules.LocalGeneratorsData.I, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.relationsOfIsCokernelFree_I; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact telescope sequence from two countable direct sums of a ring to its localization at a single element",
+   "results": "Hits: exact_of_isLocalized_span, exact_of_localized_span, IsLocalizedModule.map_exact, exact_of_isLocalized_maximal, LocalizedModule.map_exact, exact_of_localized_maximal, ModuleCat.localizedModule_functor_map_exact, Profinite.NobelingProof.succ_exact; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away",
+   "results": "Hits: IsLocalization.Away, IsLocalization.Away.invSelf, selfZPow, IsLocalization.Away.sec, IsLocalization.Away.of_associated, IsLocalization.Away.iff_of_associated, IsLocalization.atUnit, IsLocalization.Away.isDomain; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "DirectLimit.*(exact|quotient)|localization.*resolution|one.*shift",
+   "results": "Hits: Mathlib/Algebra/Group/AddChar.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Ring.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "DirectSum.*(exact|localiz)|(exact|localiz).*DirectSum|one_sub.*shift",
+   "results": "Actual search: 10 hits; Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Category/FGModuleCat/Colimits.lean, Mathlib/Algebra/MonoidAlgebra/ToDirectSum.lean, Mathlib/Algebra/MonoidAlgebra/ToDirectSum.lean, Mathlib/Algebra/MonoidAlgebra/ToDirectSum.lean, Mathlib/Algebra/DirectSum/Module.lean, Mathlib/Algebra/Lie/SemiDirect.lean, Mathlib/Algebra/DirectSum/Basic.lean. Ordinary module colimit/cokernel/coproduct ingredients or unrelated direct-sum lemmas; none states the sheaf localization resolution.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cokernel of identity minus the successor map on a countable direct sum of modules is the sequential colimit",
+   "results": "Actual search: 8 hits; ModuleCat.cokernelIsColimit, ModuleCat.directLimitIsColimit, TopModuleCat.isColimitCoker, ModuleCat.coproductCoconeIsColimit, ModuleCat.HasColimit.isColimitColimitCocone, ModuleCat.cokernelCocone, ModuleCat.HasColimit.colimitCocone, ModuleCat.FilteredColimits.colimitCoconeIsColimit. Ordinary module colimit/cokernel/coproduct ingredients or unrelated direct-sum lemmas; none states the sheaf localization resolution.",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-local-hom-tower-criterion",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-localization-free-resolution",
+  "worker": "stage1",
+  "summary": "Expanded the free resolution in Stacks 0997 by an explicit finite-support kernel preimage, retaining the power-torsion factor needed for zero divisors. Reused the general ringed-site exact-sheafification Mathlib leaf and identified the sheaf coproduct by its universal property. No new nodes and no statement change.",
+  "blueprint": "Detailed form, final Stacks comparison in def-weil-pbc-completed-pullback: the localization resolution used for the local Hom tower criterion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-b9cb2dc86",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-b9cb2dc86 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, Stacks 0997/03CY/03EI sources, unit/chapter route, and relevant archived master targets. Verified all six steps, zero-divisor and boundary cases, sheaf coproduct identification, dependencies, and duplicate/generalization candidates. No repairs needed; review.md records checks and the accepted exact-sheafification tool use. This auxiliary resolution does not certify the separate condensed-coefficient comparison."
+ }
 }
