@@ -15,8 +15,10 @@ public import Mathlib.Init
 The single retained theorem is
 `AlgebraicGeometry.Scheme.GaloisCover.equivariantModulePresheaf_isSheaf`,
 in `Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf`.
-Callers import that module directly. This retired module has no declarations
-or imports; the equivariant sheaf statement and its proof remain in the canonical module.
+Callers import that module directly. This retired module has no declarations or
+mathematical imports; its only import is
+Mathlib.Init for the build probe. The equivariant sheaf statement and its proof remain
+in the canonical module.
 (blueprint: lem-weil-pbc-torsor-equivariant-presheaf-sheaf)
 -/
 
