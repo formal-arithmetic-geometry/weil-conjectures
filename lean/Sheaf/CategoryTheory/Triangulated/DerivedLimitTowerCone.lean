@@ -31,7 +31,7 @@ theorem derivedCategory_towerLimit_cone
   intro I
   let : HasCountableProducts (CochainComplex A ℤ) :=
     ⟨fun _ ↦ inferInstance⟩
-  let : HasLimit I.asFunctor := hasLimit_of_equalizer_and_product I.asFunctor
-  exact ⟨limit.cone I.asFunctor, ⟨limit.isLimit I.asFunctor⟩⟩
+  let c := limitConeOfEqualizerAndProduct I.asFunctor
+  exact ⟨c.cone, ⟨c.isLimit⟩⟩
 
 end CategoryTheory
