@@ -47,6 +47,10 @@ lemma Etale.comp_left_eq {X Y Z : T.Etale} (f : X ⟶ Y) (g : Y ⟶ Z) :
 @[simp]
 lemma Etale.id_left_eq (X : T.Etale) : (𝟙 X : X ⟶ X).left = 𝟙 X.left := rfl
 
+/-- Morphisms in the small étale site are determined by their underlying morphisms. -/
+lemma Etale.hom_ext {X Y : T.Etale} {f g : X ⟶ Y} (h : f.left = g.left) : f = g :=
+  MorphismProperty.Over.Hom.ext h
+
 /-- A section `ξ ∈ E(V)` is *universal* relative to `u : U ⟶ T` along `v : V ⟶ U` if for every
 étale `T`-scheme `W` and every factorisation `w : W ⟶ U` of its structure morphism through `u`,
 the map `a ↦ a^* ξ` from `U`-morphisms `W ⟶ V` to `E(W)` is bijective. When `v ≫ u` is the
@@ -177,6 +181,37 @@ lemma IsUniversalSection.baseChange (h : IsUniversalSection E u V v ξ) (ho : o 
   convert hb.comp hφ using 1
   ext a
   simp [φ, op_comp]
+
+/-- To check universality it suffices to consider the étale `T`-schemes of the form
+`W ⟶ U ⟶ T`. -/
+lemma IsUniversalSection.of_mk
+    (h : ∀ (W : Scheme.{u}) (w : W ⟶ U) [AlgebraicGeometry.Etale w],
+      Function.Bijective (fun a : {a : Etale.mk (w ≫ u) ⟶ V // a.left ≫ v = w} ↦
+        E.map a.1.op ξ)) :
+    IsUniversalSection E u V v ξ := by
+  intro W w hw
+  have : AlgebraicGeometry.Etale w := etale_of_comp_eq (V := W) hw
+  let eW : Etale.mk (w ≫ u) ≅ W := MorphismProperty.Over.isoMk (Iso.refl _) (by
+    change 𝟙 _ ≫ W.hom = w ≫ u
+    rw [Category.id_comp, hw])
+  let φ : {a : W ⟶ V // a.left ≫ v = w} ≃ {a : Etale.mk (w ≫ u) ⟶ V // a.left ≫ v = w} :=
+    { toFun a := ⟨eW.hom ≫ a.1, by
+        rw [Etale.comp_left_eq, Category.assoc, a.2]
+        exact Category.id_comp _⟩
+      invFun a := ⟨eW.inv ≫ a.1, by
+        rw [Etale.comp_left_eq, Category.assoc, a.2]
+        exact Category.id_comp _⟩
+      left_inv a := Subtype.ext (by simp)
+      right_inv a := Subtype.ext (by simp) }
+  have hiso : Function.Bijective (E.map eW.hom.op) :=
+    (isIso_iff_bijective _).1 (inferInstanceAs (IsIso ((E.mapIso eW.op).hom)))
+  have key : (fun a : {a : Etale.mk (w ≫ u) ⟶ V // a.left ≫ v = w} ↦ E.map a.1.op ξ) ∘ φ =
+      E.map eW.hom.op ∘ (fun a : {a : W ⟶ V // a.left ≫ v = w} ↦ E.map a.1.op ξ) := by
+    ext a
+    simp [φ, op_comp]
+  have := (h W.left w).comp φ.bijective
+  rw [key] at this
+  exact (Function.Bijective.of_comp_iff' hiso _).1 this
 
 end BaseChange
 
