@@ -4,45 +4,146 @@
   "is": null,
   "from": {
    "node": "def-weil-rationalization-karoubi",
-   "place": "its statement (a notion the statement uses)",
+   "place": "statement, displayed formula Hom_C[1/varpi_E](K,L) = Hom_C(K,L) tensor_{O_E} E, identifying scalar localization with extension to E",
    "via": [
     "def-weil-linear-scalar-localization"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The l-adic field is the localization of its integers at a uniformizer",
- "statement": "Let $E/\\Ql$ be a finite extension with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$ [def-weil-l-adic-coefficient-extension]. Then the inclusion $\\mathcal O_E\\subset E$ makes $E$ a localization of $\\mathcal O_E$ at $\\varpi_E$ [def-weil-ring-localization-away]: the induced ring map $\\mathcal O_E[1/\\varpi_E]\\to E$, $x/\\varpi_E^n\\mapsto x\\varpi_E^{-n}$, is an isomorphism. Consequently, for every $\\mathcal O_E$-module $M$, $M\\otimes_{\\mathcal O_E}\\mathcal O_E[1/\\varpi_E]\\cong M\\otimes_{\\mathcal O_E}E$ as $E$-modules.",
+ "statement": "Let $E/\\Ql$ be a finite extension with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$ [def-weil-l-adic-coefficient-extension]. Then the inclusion $\\mathcal O_E\\subset E$ makes $E$ a localization of $\\mathcal O_E$ at $\\varpi_E$ [def-weil-ring-localization-away]: the induced ring map $\\mathcal O_E[1/\\varpi_E]\\to E$, $x/\\varpi_E^n\\mapsto x\\varpi_E^{-n}$, is an isomorphism. Consequently, for every $\\mathcal O_E$-module $M$, $M\\otimes_{\\mathcal O_E}\\mathcal O_E[1/\\varpi_E]\\cong M\\otimes_{\\mathcal O_E}E$ as $E$-modules. Here tensor products are tensor products of modules [def-weil-pbc-module-tensor-product], and the left-hand side has its $E$-module structure transported through the displayed ring isomorphism.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
   "place": "node def-weil-rationalization-karoubi, the identification Hom ⊗_{O_E} E of the rationalization (implicit: O_E[1/ϖ_E]=E)"
  },
  "stmt_deps": [
   "def-weil-l-adic-coefficient-extension",
-  "def-weil-ring-localization-away"
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $R=\\mathcal O_E$ and $\\pi=\\varpi_E$. By [lem-weil-l-adic-extension-integers-dvr], $R$ is a subring of the field $E$ and a uniformizer is nonzero. Using the fractions and operations of [def-weil-ring-localization-away], define $\\phi:R[1/\\pi]\\to E$ by $\\phi(x/\\pi^n)=x\\pi^{-n}$. If $\\pi^k(x\\pi^m-y\\pi^n)=0$, then cancellation in $E$ gives $x\\pi^{-n}=y\\pi^{-m}$, so this is well defined. The fraction addition and multiplication formulas show directly that $\\phi$ preserves addition, multiplication, and $1$, and $\\phi(x/1)=x$. Conversely, equality of the two images implies $x\\pi^m-y\\pi^n=0$ in $R$, so the fractions are equal (take $k=0$). Thus $\\phi$ is an injective $R$-algebra homomorphism.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO (algebra-definition-localization), fraction construction preceding the definition"
+   }
+  },
+  {
+   "text": "For $z=0$, $z=\\phi(0/1)$. For $z\\ne0$, clause 5 of [lem-weil-l-adic-extension-integers-dvr] gives $z=u\\pi^m$, where $u\\in R^\\times$ and $m\\in\\mathbf Z$. If $m\\ge0$, then $u\\pi^m\\in R$ and $z=\\phi((u\\pi^m)/1)$. If $m=-n<0$, with $n\\ge1$, then $z=\\phi(u/\\pi^n)$. This proves surjectivity. Together with Step 1 it gives the claimed ring isomorphism, and hence the localization assertion in [def-weil-ring-localization-away].",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO (algebra-definition-localization), fraction construction preceding the definition"
+   }
+  },
+  {
+   "text": "Let $M$ be any $R$-module. Write $\\psi=\\phi^{-1}$. The bilinear universal property and generation by pure tensors in [def-weil-pbc-module-tensor-product] give maps $F(m\\otimes t)=m\\otimes\\phi(t)$ and $G(m\\otimes e)=m\\otimes\\psi(e)$. They respect the balancing relations because $\\phi$ and $\\psi$ fix $R$. Both composites fix every pure tensor, so they are identity maps. Transport the $E$-action on $M\\otimes_R R[1/\\pi]$ by $e(m\\otimes t)=m\\otimes\\psi(e)t$. Then $F(e(m\\otimes t))=m\\otimes e\\phi(t)=eF(m\\otimes t)$; generation by pure tensors proves $E$-linearity. This proves the final clause without a flatness or finiteness hypothesis on $M$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (algebra-lemma-tensor-product), universal property and generation by pure tensors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
+  "place": "Explicit verification of the implicit identification O_E[1/varpi_E]=E in the scalar-localization formula; fraction and tensor constructions from Stacks 00CO and 00CX"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "grep -rn 'IsLocalization.Away' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/DiscreteValuationRing/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Valuation/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/NumberTheory/Padics/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalRing/",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
+   "query": "isLocalization.*[Aa]way|[Aa]way.*[Ff]raction|exists.*[Uu]nit.*pow",
+   "results": "Mathlib/RingTheory/DiscreteValuationRing/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the full item; fraction-field and DVR factorization candidates provide only ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, IsLocalization.Away",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match for the full item; fraction-field and DVR factorization candidates provide only ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fraction field of a discrete valuation ring is its localization away from a uniformizer",
+   "results": "Valuation.Integers.isFractionRing, ValuationRing.instIsFractionRingInteger, WithVal.instIsFractionRing, IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain, IsDedekindDomainDvr.is_dvr_at_nonzero_prime, ValuationSubring.instIsFractionRingSubtypeMem, ValuationRing.isFractionRing_iff, instIsDiscreteValuationRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation",
+   "date": "2026-10-14",
+   "verdict": "no match for the full item; fraction-field and DVR factorization candidates provide only ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fraction field of a discrete valuation ring is the localization at a uniformizer",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   },
   {
    "tool": "grep",
-   "query": "grep -rn 'isLocalization_away\\|IsFractionRing.*Away\\|Away.*IsFractionRing' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "only RingHomProperties, Spectrum/Prime/Topology, AlgebraicGeometry results about basic opens; nothing for a DVR and its uniformizer",
-   "date": "2026-10-09",
-   "verdict": "no match"
+   "query": "isField|[Ff]raction|[Aa]way",
+   "results": "Mathlib/RingTheory/DiscreteValuationRing/TFAE.lean, Mathlib/RingTheory/DiscreteValuationRing/TFAE.lean, Mathlib/RingTheory/DiscreteValuationRing/TFAE.lean, Mathlib/RingTheory/DiscreteValuationRing/TFAE.lean, Mathlib/RingTheory/DiscreteValuationRing/TFAE.lean, Mathlib/RingTheory/DiscreteValuationRing/Basic.lean, Mathlib/RingTheory/DiscreteValuationRing/Basic.lean, Mathlib/RingTheory/DiscreteValuationRing/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the full item; fraction-field and DVR factorization candidates provide only ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization away from a nonzero nonunit of a discrete valuation ring is a field",
+   "results": "IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain, IsDedekindDomainDvr.is_dvr_at_nonzero_prime, Valuation.Integers.isFractionRing, IsDiscreteValuationRing.toIsLocalRing, ValuationRing.instIsFractionRingInteger, ValuationSubring.instIsFractionRingSubtypeMem, IsDiscreteValuationRing.not_isField, Valuation.valuationSubring_isDiscreteValuationRing",
+   "date": "2026-10-14",
+   "verdict": "no match for the full item; fraction-field and DVR factorization candidates provide only ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away, Field",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match for the full item; fraction-field and DVR factorization candidates provide only ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFractionRing, IsLocalization.Away",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match for the full item: fraction-ring candidates do not invert a specified uniformizer; the prime-spectrum criterion requires a separate basic-open identification and does not state the tensor clause"
+  },
+  {
+   "tool": "grep",
+   "query": "isLocalization_away|isLocalizationAway|isFractionRing.*[Aa]way|[Aa]way.*isFractionRing",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the full item: fraction-ring candidates do not invert a specified uniformizer; the prime-spectrum criterion requires a separate basic-open identification and does not state the tensor clause"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverting a generator of the maximal ideal in a DVR gives the fraction field",
+   "results": "Valuation.Integers.isFractionRing, IsDiscreteValuationRing.exists_lift_of_le_one, ValuationRing.instIsFractionRingInteger, ValuationRing.isInteger_or_isInteger, ValuationRing.isFractionRing_iff, Valuation.Integers.maximalIdeal_eq_setOf_le_v_algebraMap, instIsDiscreteValuationRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation, ValuationSubring.instIsFractionRingSubtypeMem",
+   "date": "2026-10-14",
+   "verdict": "no match for the full item: fraction-ring candidates do not invert a specified uniformizer; the prime-spectrum criterion requires a separate basic-open identification and does not state the tensor clause"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +163,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-l-adic-integers-localization-uniformizer",
+  "worker": "stage1",
+  "summary": "Explicit fraction map, injectivity by cross multiplication, surjectivity by the existing integer-power factorization, and mutually inverse tensor maps. No new nodes. Added the existing module tensor definition as a statement dependency and made the transported E-action explicit.",
+  "blueprint": "The three steps justify the implicit coefficient-ring identification in the displayed Hom tensor E formula of def-weil-rationalization-karoubi.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient-field structure theorem, used only for its nonzero uniformizer and unit-times-integer-power clauses; the operations unit has no number-theoretic proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-e4f9981ff",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-e4f9981ff (reviewer sub-agent of L); spot-checked: Read the complete delivery, cited DAG nodes, unit/chapter route, master blueprint source, and Stacks Tags 00CO/00CX. Verified the localization map, injectivity, surjectivity via the DVR unit-times-uniformizer decomposition, transported E-action, tensor isomorphism, hypotheses, coefficient category, edge cases, searches, and absence of duplicates or cycles. No repairs needed; review.md written."
+ }
 }
