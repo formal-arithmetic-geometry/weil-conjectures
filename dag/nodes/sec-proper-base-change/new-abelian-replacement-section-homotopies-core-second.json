@@ -3,9 +3,7 @@
  "kind": "statement",
  "title": "Second section homotopy from the counit homotopy",
  "statement": "theorem second_section_homotopy_of_counit {X Y : Scheme.{u}} (f : X ⟶ Y)\n    {F : X.Modules} (I : InjectiveResolution F)\n    (J : InjectiveResolution ((pushforward f).obj F)) (K : CochainComplex Y.Modules ℕ)\n    (l : ((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ K)\n    (hl : QuasiIso l) (β : J.cocomplex ⟶ K)\n    (hβ : J.ι.f 0 ≫ β.f 0 = (pushforward f).map (I.ι.f 0) ≫ l.f 0) :\n    ∃ q : ((moduleSections Y).mapHomologicalComplex (.up ℕ)).obj K ⟶\n        ((abelianSections X).mapHomologicalComplex (.up ℕ)).obj\n          (standardAbelianResolution X F).cocomplex,\n      Nonempty (Homotopy\n        (((moduleSections Y).mapHomologicalComplex (.up ℕ)).map β ≫ q)\n        (counitSectionMap f F J)) ∧\n      ∀ (a : ((moduleSections X).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ≅\n          ((moduleSections Y).mapHomologicalComplex (.up ℕ)).obj\n            (((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex))\n        (_ha : ∀ n : ℕ, a.inv.f n = (presheaf (I.cocomplex.X n)).map\n          (eqToHom (by simp) : (⊤ : X.Opens) ⟶ f ⁻¹ᵁ (⊤ : Y.Opens)).op),\n      Nonempty (Homotopy\n        ((a.hom ≫ ((moduleSections Y).mapHomologicalComplex (.up ℕ)).map l) ≫ q)\n        (((abelianSections X).mapHomologicalComplex (.up ℕ)).map\n          (forgottenResolutionMap X I)))",
- "stmt_deps": [
-  "new-abelian-replacement-section-homotopies-core"
- ],
+ "stmt_deps": [],
  "source": {
   "document": "https://stacks.math.columbia.edu/tag/013S",
   "place": "013S"
