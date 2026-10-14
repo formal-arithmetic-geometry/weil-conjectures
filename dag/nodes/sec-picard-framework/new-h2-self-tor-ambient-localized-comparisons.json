@@ -16,42 +16,40 @@
  },
  "proof": [
   {
-   "text": "Identify the restricted closed structure sheaf with tilde(A/I), then sheafify the chosen projective resolution and augmentation.",
+   "text": "Choose a global K-flat resolution q:K→B[0] using exists_isKFlatResolution. Apply the natural K-flat derived tensor comparison to the two constant singleton families K and B[0]. The image of q under Q is invertible; tensor it with the identity of B[0] and compose with the comparison. Apply the derived homology functor and homologyFunctorFactors. Taking the inverse gives a genuine isomorphism from H^{-n}(Tot(K tensor B[0])) to the ambient derived tensor homology Q.",
    "uses": [
-    "lem-sc-affine-quotient-resolution-sheafification"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Extend the sheafified resolution to nonpositive degrees. Its terms are flat, and bounded-above flat K-flatness makes the natural affine derived tensor computation applicable. Exactness of tilde and affine sections gives d_U on the chain homology H_n(T_U), without isoLeftDerivedObj or any Tor transport.",
-   "uses": [
-    "lem-pc-bounded-above-flat-kflat",
-    "lem-pc-affine-derived-pullback-tensor-tilde"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a basic inclusion localize the projective resolution. Exact localization preserving projectives and the projective comparison lift produce one a into the target chosen resolution. The induced quotient map gives psi and tensoring gives k with the stated pure tensor identity. Naturality of the K-flat derived tensor comparison and the affine section unit, together with mapHomologyIso for exact restriction of scalars, gives the equation for this chosen lift. No independence of lifts is used.",
-   "uses": [
-    "lem-weil-pbc-projective-resolution-lift",
+    "lem-pc-kflat-resolution",
     "lem-pc-kflat-derived-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_selfTor_ordinary_resolution_sections to K,q and n. Compose each ordinary affine coordinate d_U with the sectionwise linear equivalence induced by the preceding sheaf homology isomorphism. This constructs c_U without choosing any object or morphism in a definition.",
+   "uses": [
+    "new-b3-self-tor-ordinary-resolution-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a basic inclusion V⊆U, ideal_le_comap_ideal shows that ring restriction carries I_U into I_V. Apply the already-proved exists_quotient_resolution_tensor_comparison to the two chosen quotient resolutions; it constructs psi,a,k and all three required equations, without localization or flatness assumptions. Apply the ordinary coordinate naturality to these lifts. Naturality of the sheaf homology isomorphism transports the equation to c_U and c_V.",
+   "uses": [
+    "new-p4-quotient-resolution-tensor-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-pc-bounded-above-flat-kflat",
   "lem-pc-kflat-derived-tensor-comparison",
-  "lem-sc-affine-quotient-resolution-sheafification",
-  "lem-weil-pbc-projective-resolution-lift"
+  "lem-pc-kflat-resolution",
+  "new-b3-self-tor-ordinary-resolution-sections",
+  "new-p4-quotient-resolution-tensor-comparison"
  ],
  "proof_origin": {
-  "by": "worker",
-  "agent": "H2",
+  "by": "agent",
+  "group": "B3",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/08DX",
-  "place": "Tag 08DX(2), lemma-quasi-coherence-tensor-product; Tags 06YG and 00LS(1), chosen local resolution comparison"
+  "place": "Tag 08DX(2): ordinary affine computation separated from passage through the K-flat derived tensor comparison (Tag 06YH); algebraic lifts from Tag 00LS(1)"
  },
  "mathlib_searches": [
   {
@@ -155,9 +153,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261014T040540-L-999989",
+  "landing": "20261014T043248-L-1304037",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -12,9 +12,9 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
-import Sheaf.AlgebraicGeometry.AffineQuotientResolutionSheafification
-import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.AlgebraicGeometry.SelfTorOrdinaryResolutionSections
+import Sheaf.AlgebraicGeometry.QuotientResolutionTensorComparison
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 
 /-! # Ambient self-Tor coordinates on affine sections
@@ -28,6 +28,13 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option synthInstance.maxSize 2048 in
+
+set_option maxHeartbeats 800000 in
+-- The unbounded tensor comparison needs elaboration fuel for its total-complex instances.
 
 /-- Ambient affine coordinates compatible with one localized resolution comparison for each
 basic inclusion. This asserts existence of comparison lifts, not compatibility with all lifts.
@@ -97,6 +104,44 @@ theorem exists_selfTor_ambient_localized_comparisons
             let e := ((TC.obj R.complex).sc n).mapHomologyIso
               (ModuleCat.restrictScalars φ)
           ∀ x, Q.val.map (homOfLE h).op (c U x) =
-            c V (e.hom (HomologicalComplex.homologyMap k n x)) := by sorry
+            c V (e.hom (HomologicalComplex.homologyMap k n x)) := by
+  classical
+  let := SheafOfModules.monoidalCategory Y.sheaf
+  let C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
+  let N := (CochainComplex.singleFunctor C 0).obj B
+  obtain ⟨K, q, hK, _, hq, _⟩ := CochainComplex.exists_isKFlatResolution N
+  have : QuasiIso q := hq
+  obtain ⟨comparison⟩ := kFlat_derivedTensor_comparison_natIso Y
+    ((Functor.const (Discrete PUnit.{1})).obj K)
+    ((Functor.const (Discrete PUnit.{1})).obj N) (fun _ ↦ hK)
+  let eK : DerivedCategory.Q.obj K ≅ (DerivedCategory.singleFunctor C 0).obj B :=
+    asIso (DerivedCategory.Q.map q) ≪≫
+      ((DerivedCategory.singleFunctorIsoCompQ C 0).app B).symm
+  let eN := (DerivedCategory.singleFunctorIsoCompQ C 0).app B
+  let eTensor : (DerivedCategory.singleFunctor C 0).obj B ⊗
+      (DerivedCategory.singleFunctor C 0).obj B ≅
+        DerivedCategory.Q.obj (CochainComplex.mapBifunctor K N (curriedTensor C)) :=
+    (tensorIso eK eN.symm).symm ≪≫
+      (comparison.app ⟨PUnit.unit⟩).app ⟨PUnit.unit⟩
+  let e := ((DerivedCategory.homologyFunctor C (-(n : ℤ))).mapIso eTensor ≪≫
+    (DerivedCategory.homologyFunctorFactors C (-(n : ℤ))).app
+      (CochainComplex.mapBifunctor K N (curriedTensor C))).symm
+  obtain ⟨d, hd⟩ := exists_selfTor_ordinary_resolution_sections i K q hK hq n
+  let eu := fun U : Y.affineOpens ↦
+    (show _ ≃ₗ[Γ(Y, U.1)] _ from
+      ((SheafOfModules.evaluation Y.ringCatSheaf (op U.1)).mapIso e).toLinearEquiv)
+  let c := fun U : Y.affineOpens ↦ (d U).trans (eu U)
+  refine ⟨c, ?_⟩
+  intro V U h hbasic A D I J φ P R TA TC
+  obtain ⟨ψ, a, k, hψ, ha, hk⟩ := exists_quotient_resolution_tensor_comparison
+    A D I J φ (fun x hx ↦ i.ker.ideal_le_comap_ideal h hx) P R
+  refine ⟨ψ, a, k, hψ, ha, hk, ?_⟩
+  intro es x
+  have hn := hd V U h hbasic ψ a k hψ ha hk x
+  change _ = e.hom.val.app (op V.1) _
+  have he := (PresheafOfModules.naturality_apply e.hom.val
+    (homOfLE h).op (d U x)).symm
+  exact he.trans (congrArg (fun y ↦ e.hom.val.app (op V.1) y) hn)
 
 end AlgebraicGeometry
