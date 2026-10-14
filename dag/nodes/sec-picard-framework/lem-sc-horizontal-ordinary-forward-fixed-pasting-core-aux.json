@@ -25,26 +25,34 @@
  ],
  "proof": [
   {
-   "text": "Transpose the fixed component under the pinned adjunction, apply the two derived base-change pasting laws, and cancel units and counits.",
+   "text": "Obtain j and b with their specified ambient component formulas from rectangle_qcoh_comparison_lifts. Compute the ambient components of the inverse fixed upper comparison by the fully faithful preimage map identity, and identify b with the inverse fixed base comparison by faithfulness.",
    "uses": [
-    "lem-pc-derived-base-change-horizontal-pasting",
-    "lem-pc-derived-base-change-pasting",
+    "lem-sc-rectangle-qcoh-comparison-lifts",
     "lem-sc-horizontal-duality-mate-comparisons"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply rectangle_qcoh_ordinary_compatibility to the inverse fixed upper comparison and the obtained j,b. Apply horizontal_transfer_eq_of_inverse_formula to identify j.hom with the canonical transfer. Precompose the rectangle equality with b.inv and postcompose with direct image of s.hom followed by j.hom; cancel the three isomorphism/inverse pairs, substitute b and the transfer identity.",
+   "uses": [
+    "lem-sc-rectangle-qcoh-ordinary-compatibility",
+    "lem-sc-horizontal-transfer-inverse-formula"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-base-change-horizontal-pasting",
-  "lem-pc-derived-base-change-pasting",
-  "lem-sc-horizontal-duality-mate-comparisons"
+  "lem-sc-rectangle-qcoh-comparison-lifts",
+  "lem-sc-horizontal-duality-mate-comparisons",
+  "lem-sc-rectangle-qcoh-ordinary-compatibility",
+  "lem-sc-horizontal-transfer-inverse-formula"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "K4",
+  "agent": "C2",
   "date": "2026-10-14",
   "document": "Stacks Project",
-  "place": "Explicit fixed comparisons and the omitted verification of 0ATM before inversion."
+  "place": "Rectangle ordinary compatibility followed by explicit comparison cancellation."
  },
  "mathlib_searches": [
   {
@@ -113,10 +121,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K4",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261014T001726-L-2552496",
-  "kind": "proof",
+  "landing": "20261014T063814-L-2812853",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
