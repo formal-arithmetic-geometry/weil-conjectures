@@ -14179,3 +14179,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:30 L: merged deliver/P2/Sheaf.Algebra.Homology.LocalizationDerivedFractions (stage 3; reviewer PASS; first push; landing 20261014T013041-L-3415748 (proof); batch 20261014T013031; modules 1; new nodes 0)
 - 01:30 L: merged deliver/P2/Sheaf.AlgebraicGeometry.Morphisms.FieldTorsorComponentGaloisGroup (stage 3; reviewer PASS; first push; landing 20261014T013041-L-3415968 (proof); batch 20261014T013031; modules 1; new nodes 0)
 - 01:30 L: merged deliver/P3/Sheaf.AlgebraicGeometry.PerfectDescendMorphisms (stage 3; reviewer PASS; first push; landing 20261014T013042-L-3416197 (proof); batch 20261014T013031; modules 1; new nodes 0)
+- 01:30 L: merged deliver/P3/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (stage 3; reviewer PASS; first push; landing 20261014T013042-L-3416446 (proof); batch 20261014T013031; modules 1; new nodes 0)

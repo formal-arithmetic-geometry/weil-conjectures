@@ -115,10 +115,9 @@ theorem exactFunctorIdentityComparison
     change 𝟙 _ ≫ z.hom ≫ (shiftFunctor _ _).map (𝟙 _) = z.hom
     simp
   -- Specialize the composition comparison to the identity functor and simplify identities.
-  have hcomp := mapExactFunctor_comp_mk₀_eq (𝟭 C) (𝟭 C) F
+  have h := mapExactFunctor_comp_mk₀_eq (𝟭 C) (𝟭 C) F
     (e ≪≫ (𝟭 C).rightUnitor.symm) x
-  simpa [hid] using hcomp
-
+  simpa [hid] using h
 
 
 end CategoryTheory.Abelian.Ext
