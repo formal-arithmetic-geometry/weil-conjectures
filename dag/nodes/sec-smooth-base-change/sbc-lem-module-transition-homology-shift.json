@@ -1,0 +1,120 @@
+{
+ "id": "sbc-lem-module-transition-homology-shift",
+ "kind": "statement",
+ "title": "Derived module transition commutes with homology shift comparison",
+ "statement": "For any ring Λ, triangle Y′ → Y → S, derived module sheaves K,K′, coefficient morphism v : D⁺a* K → K′, and integer q, the transition at the shifted objects followed by the degree-zero homology shift comparison equals the original comparison followed by degree-q homology of the transition. The canonical morphisms are those of def-sbc-module-higher-image-transitions.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09Z1; canonical derived adjunction and shift comparisons"
+ },
+ "stmt_deps": [
+  "def-sbc-module-higher-image-transitions",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Import all DerivedAdjunctionCommShift and apply its existing private generic theorem derivedUnit_commShift to each module-sheaf adjunction. Use Adjunction.CommShift.mk' to supply compatibility of the whole adjunction. No duplicate helper is declared.",
+   "uses": [
+    "lem-weil-pbc-derived-adjunction-commshift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Import all AbelianDerivedDirectImageTransitionShift and apply its existing private generic plusNatIso_commShift and plusCompIso_commShift to the exact pullback comparison. Apply its existing generic Adjunction.transitionThrough_shift to the two module-sheaf derived adjunctions. Expand the mate into lowerStarPlusTransition followed by the coefficient map.",
+   "uses": [
+    "def-sbc-module-higher-image-transitions",
+    "lem-sbc-abelian-derived-transition-shift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply degree-zero homology to that equality. Naturality of isoShiftZero and shiftIso converts the shifted morphism into its degree-q homology; reassociate the composites. This is valid for every integer q, including zero and negative degrees.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-adjunction-commshift",
+  "def-sbc-module-higher-image-transitions",
+  "lem-sbc-abelian-derived-transition-shift"
+ ],
+ "proof_origin": {
+  "by": "M2 repair worker",
+  "document": "Lean generic calculations in DerivedAdjunctionCommShift and AbelianDerivedDirectImageTransitionShift; Mathlib shift naturality",
+  "place": "Existing private generic derivedUnit_commShift, plusNatIso_commShift, plusCompIso_commShift and transitionThrough_shift accessed via proof-only import all; homology shiftIso naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image transition of sheaves of modules commutes with the homology shift comparison",
+   "results": "Eight generic derived functor/localization hits; none states this module-sheaf transition formula.",
+   "verdict": "no match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.shift_app_comm",
+   "results": "Found the generic shift naturality theorem, used in the mate calculation.",
+   "verdict": "ingredient",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerStarPlusTransition.*commShift|homology_shift_naturality",
+   "results": "No Mathlib match; library rg found an AddCommGrpCat transition-shift theorem, whose public specialization cannot be applied to ModuleCat. Its proved private generic calculation is reused.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived adjunction between bounded-below derived categories commutes with shifts and its mate commutes with homology shift isomorphisms",
+   "results": "UNAVAILABLE: LeanSearch returned Internal Server Error. The attempt is recorded by msearch.py in searches.jsonl; Loogle/LeanFinder and Mathlib-source grep were available and searched. No absence verdict is inferred from this failed service.",
+   "date": "2026-10-14"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageRawTransitionToHomCore",
+  "date": "2026-10-14",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-image-raw-transition-to-hom-core"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageTransitionHomologyShift",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageTransitionHomologyShift.lean",
+  "declaration": "AlgebraicGeometry.Etale.higherDirectImageTransition_homologyShift",
+  "statement": "theorem higherDirectImageTransition_homologyShift\n    (Λ : Type (u + 1)) [CommRing Λ] {Y Y' S : Scheme.{u}}\n    (a : Y' ⟶ Y) (h : Y ⟶ S) (q : ℤ)\n    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))\n    (K' : DerivedCategory.Plus (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ)))\n    (v : D+((a)^*[ModuleCat.{u + 1} Λ]).obj K ⟶ K') :\n    (DerivedCategory.Plus.homologyFunctor\n      (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).map\n      (lowerStarPlusTransition Λ a h (a ≫ h) rfl (K⟦q⟧) ≫\n        R+((a ≫ h)_*[ModuleCat.{u + 1} Λ]).map\n          ((D+((a)^*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app K ≫\n            (shiftFunctor _ q).map v)) ≫\n      (DerivedCategory.Plus.homologyFunctor _ 0).map\n        ((R+((a ≫ h)_*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app K') ≫\n      ((DerivedCategory.Plus.homologyFunctor _ 0).isoShiftZero ℤ).inv.app\n        ((R+((a ≫ h)_*[ModuleCat.{u + 1} Λ]).obj K')⟦q⟧) ≫\n      ((DerivedCategory.Plus.homologyFunctor _ 0).shiftIso q 0 q (add_zero q)).hom.app\n        (R+((a ≫ h)_*[ModuleCat.{u + 1} Λ]).obj K') =\n    ((DerivedCategory.Plus.homologyFunctor _ 0).map\n        ((R+((h)_*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app K) ≫\n      ((DerivedCategory.Plus.homologyFunctor _ 0).isoShiftZero ℤ).inv.app\n        ((R+((h)_*[ModuleCat.{u + 1} Λ]).obj K)⟦q⟧) ≫\n      ((DerivedCategory.Plus.homologyFunctor _ 0).shiftIso q 0 q (add_zero q)).hom.app\n        (R+((h)_*[ModuleCat.{u + 1} Λ]).obj K)) ≫\n      (DerivedCategory.Plus.homologyFunctor _ q).map\n        (lowerStarPlusTransition Λ a h (a ≫ h) rfl K ≫\n          R+((a ≫ h)_*[ModuleCat.{u + 1} Λ]).map v)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-6d415",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261014T010846-L-3165316",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-6d415",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261014T010846-L-3165316",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG nodes, report, target signature, and direct importer compile and agree"
+ }
+}

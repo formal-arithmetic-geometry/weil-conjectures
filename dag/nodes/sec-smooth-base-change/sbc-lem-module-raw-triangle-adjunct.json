@@ -1,0 +1,116 @@
+{
+ "id": "sbc-lem-module-raw-triangle-adjunct",
+ "kind": "statement",
+ "title": "Adjunct of raw triangle pullback",
+ "statement": "For Λ, a : Y′ → Y, h : Y → S, any integer q, derived module sheaves K,K′, v : D⁺a* K → K′, U étale over S, and a represented class z, the derived adjunct of the raw triangle pullback of z equals the adjunct of z followed by the mate of the canonical pullback-composition comparison, at K[q] and K′[q] with coefficient map (D⁺a*).commShiftIso(q).hom(K) followed by v[q]. This is an equality of derived morphisms before applying homology.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 09Z1; canonical adjunction comparisons"
+ },
+ "stmt_deps": [
+  "sbc-lem-higher-image-raw-triangle-restriction",
+  "def-sbc-module-higher-image-transitions",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Invert the existing upperStarPlusComp_single commuting square to obtain the comparison from the single of the composite pullback to the iterated derived pullback of the single. The inverse square identity follows by cancellation with the comparison isomorphisms.",
+   "uses": [
+    "lem-sbc-pullback-single-comp"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the raw triangle pullback into its four factors. Combine its first two factors with the single comparison by the previous square.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the inverse of the derived adjunction hom equivalence to both sides. Naturality of the left-adjoint comparison moves the adjunct through it; the counit identity cancels the adjunction equivalence. This proves the equality of derived morphisms without applying homology or making any assumption on the degree q.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-pullback-single-comp"
+ ],
+ "proof_origin": {
+  "by": "M2 second reader",
+  "document": "Lean pullback/single comparison and Mathlib adjunction naturality",
+  "place": "upperStarPlusComp_single; Adjunction.homEquiv_naturality_left_symm; Equiv.symm_apply_apply"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of an adjunction hom set equivalence with a natural transformation between left adjoints",
+   "results": "Found generic hom-equivalence naturality lemmas, used in the inverse-equivalence proof; no raw triangle specialized theorem.",
+   "verdict": "ingredients",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.homEquiv_naturality_left",
+   "results": "Unqualified name not found; the leanfinder and grep searches located its fully qualified inverse form.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "shift_app_comm|homEquiv_naturality_left_symm",
+   "results": "Found Mathlib homEquiv_naturality_left_symm; rg found upperStarPlusComp_single in EtalePullbackSingleComp, which closes the source-comparison part.",
+   "verdict": "ingredients",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of adjunction hom equivalences for composition comparison of left adjoints",
+   "results": "UNAVAILABLE: LeanSearch returned Internal Server Error. The attempt is recorded by msearch.py in searches.jsonl; Loogle/LeanFinder and Mathlib-source grep were available and searched. No absence verdict is inferred from this failed service.",
+   "date": "2026-10-14"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageRawTransitionToHomCore",
+  "date": "2026-10-14",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-image-raw-transition-to-hom-core"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageRawTriangleAdjunct",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageRawTriangleAdjunct.lean",
+  "declaration": "AlgebraicGeometry.Etale.higherDirectImageRawTrianglePullback_adjunct",
+  "statement": "theorem higherDirectImageRawTrianglePullback_adjunct\n    (Λ : Type (u + 1)) [CommRing Λ] {Y Y' S : Scheme.{u}}\n    (a : Y' ⟶ Y) (h : Y ⟶ S) (q : ℤ)\n    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))\n    (K' : DerivedCategory.Plus (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ)))\n    (v : D+((a)^*[ModuleCat.{u + 1} Λ]).obj K ⟶ K') (U : S.Etale)\n    (z : (higherDirectImagePresheaf Λ h q K).obj (op U)) :\n    (derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) (a ≫ h)).homEquiv _ _\n      (((((a ≫ h)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app\n          ((freeSheaf Λ S).obj U)) ≫\n        higherDirectImageRawTrianglePullback Λ a h (a ≫ h) rfl q K K' v U z) =\n    (derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) h).homEquiv _ _\n      (((((h)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app\n          ((freeSheaf Λ S).obj U)) ≫ z) ≫\n      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) h).derivedPlus.transitionThrough\n        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (a ≫ h)).derivedPlus\n        D+((a)^*[ModuleCat.{u + 1} Λ])\n        (upperStarPlusComp (ModuleCat.{u + 1} Λ) a h).hom (K⟦q⟧) (K'⟦q⟧)\n        ((D+((a)^*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app K ≫\n          (shiftFunctor _ q).map v)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-6d415",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261014T010846-L-3165316",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-6d415",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261014T010846-L-3165316",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG nodes, report, target signature, and direct importer compile and agree"
+ }
+}

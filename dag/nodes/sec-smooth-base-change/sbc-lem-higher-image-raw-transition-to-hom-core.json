@@ -14,22 +14,35 @@
  ],
  "proof": [
   {
-   "text": "Expand the canonical comparison and transition maps and use naturality of the derived adjunction unit and the triangle identity, together with functoriality of homology and the shift comparison.",
+   "text": "Use the raw derived-adjunction comparison, obtained from the existing pullback/single comparison and inverse hom-equivalence naturality, at the shifted coefficient objects. Expand the mate into the canonical lowerStarPlusTransition followed by the coefficient map.",
    "uses": [
-    "sbc-lem-higher-image-raw-triangle-restriction",
+    "sbc-lem-module-raw-triangle-adjunct",
     "def-sbc-module-higher-image-transitions"
    ],
    "elementary": false
+  },
+  {
+   "text": "The canonical transition commutes with the homology shift comparison. This is proved by shift compatibility of the derived adjunction unit/counit and pullback-composition comparison, followed by naturality of isoShiftZero and shiftIso.",
+   "uses": [
+    "sbc-lem-module-transition-homology-shift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate higherDirectImagePresheafToHom with its existing app_apply formula. Apply degree-zero homology to the adjunct equality, use the previous shift identity, and reassociate. Extensionality gives the original morphism equality; no hypotheses or definitions change.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "sbc-lem-higher-image-raw-triangle-restriction",
-  "def-sbc-module-higher-image-transitions"
+  "sbc-lem-module-raw-triangle-adjunct",
+  "def-sbc-module-higher-image-transitions",
+  "sbc-lem-module-transition-homology-shift"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "Stacks Project",
-  "place": "Tags 03Q8 and 09Z1"
+  "by": "M2 second reader",
+  "document": "Lean canonical comparisons and Mathlib adjunction/shift naturality",
+  "place": "higherDirectImageRawTrianglePullback_adjunct; higherDirectImageTransition_homologyShift; higherDirectImagePresheafToHom_app_apply"
  },
  "mathlib_searches": [
   {
@@ -90,13 +103,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J1",
+  "reviewer": "X-6d415",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261013T222404-L-1223262",
+  "landing": "20261014T010846-L-3165316",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files, DAG nodes, report, target signature, and direct importer compile and agree"
  }
 }
