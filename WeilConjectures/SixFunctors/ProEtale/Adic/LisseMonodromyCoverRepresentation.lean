@@ -240,6 +240,95 @@ lemma resOver_freeSection (h : W ⟶ W) (e : h ≫ p = p)
 
 end Restriction
 
+section Constant
+
+variable {W : Scheme.{u}} {n : ℕ}
+
+/-- The section of `ℚ̄_ℓ,Wⁿ` given by a vector of constants. -/
+noncomputable def constSection (c : Fin n → PadicAlgCl l) :
+    (Sheaf.Γ (Scheme.ProEt.topology W) (WeilCoefficients.{u} l)).obj
+      (⨁ fun _ : Fin n ↦ unit l W).X :=
+  freeSection fun i ↦ algebraMap _ _ (c i)
+
+/-- The projections of free sections. -/
+lemma Γ_map_π_freeSection (f : Fin n → PadicAlgCl.locallyFiniteFunctions l W) (j : Fin n) :
+    ((Sheaf.Γ _ _).map (biproduct.π (fun _ : Fin n ↦ unit l W) j).hom).hom (freeSection f) =
+      adicConstantGlobalSection (f j) := by
+  classical
+  simp only [freeSection, map_sum]
+  rw [Finset.sum_eq_single j]
+  · rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← Mod.comp_hom', biproduct.ι_π_self,
+      Mod.id_hom', CategoryTheory.Functor.map_id]
+    rfl
+  · intro i _ hij
+    let F := AdicSheaf.forget W ⋙ Sheaf.Γ (Scheme.ProEt.topology W) (WeilCoefficients.{u} l)
+    change (F.map (biproduct.π (fun _ : Fin n ↦ unit l W) j)).hom
+      ((F.map (biproduct.ι (fun _ : Fin n ↦ unit l W) i)).hom _) = 0
+    rw [← ConcreteCategory.comp_apply, ← F.map_comp, biproduct.ι_π_ne _ hij, F.map_zero]
+    rfl
+  · simp
+
+/-- Every section of `ℚ̄_ℓ,V` is the section of a function. -/
+lemma exists_adicConstantGlobalSection_eq
+    (x : (Sheaf.Γ (Scheme.ProEt.topology W) (WeilCoefficients.{u} l)).obj (adicConstantSheaf l W)) :
+    ∃ a, adicConstantGlobalSection a = x := by
+  refine ⟨(((Sheaf.ΓNatIsoSheafSections (Scheme.ProEt.topology W) (WeilCoefficients.{u} l)
+    (Scheme.ProEt.isTerminalMkId W)).hom.app (adicConstantSheaf l W)).hom x).down, ?_⟩
+  rw [adicConstantGlobalSection, ULift.up_down, ← ConcreteCategory.comp_apply,
+    Iso.hom_inv_id_app]
+  rfl
+
+/-- On a connected scheme, the sections of a vector of constants are all the sections of
+`ℚ̄_ℓ,Wⁿ`. -/
+lemma bijective_constSection [ConnectedSpace W] :
+    Function.Bijective (constSection (l := l) (W := W) (n := n)) := by
+  classical
+  refine ⟨fun c c' h ↦ funext fun j ↦ ?_, fun x ↦ ?_⟩
+  · have := congrArg ((Sheaf.Γ _ _).map (biproduct.π (fun _ : Fin n ↦ unit l W) j).hom).hom h
+    rw [constSection, constSection, Γ_map_π_freeSection, Γ_map_π_freeSection] at this
+    have := congrArg (fun f : PadicAlgCl.locallyFiniteFunctions l W ↦
+      f.1 (Classical.arbitrary W)) (adicConstantGlobalSection_injective this)
+    simpa using this
+  · choose a ha using fun i ↦ exists_adicConstantGlobalSection_eq (l := l) (W := W)
+      (((Sheaf.Γ _ _).map (biproduct.π (fun _ : Fin n ↦ unit l W) i).hom).hom x)
+    refine ⟨fun i ↦ (a i).1 (Classical.arbitrary W), ?_⟩
+    have hx : x = ∑ i, ((Sheaf.Γ _ _).map (biproduct.ι (fun _ : Fin n ↦ unit l W) i).hom).hom
+        (((Sheaf.Γ _ _).map (biproduct.π (fun _ : Fin n ↦ unit l W) i).hom).hom x) := by
+      let F := AdicSheaf.forget W ⋙ Sheaf.Γ (Scheme.ProEt.topology W) (WeilCoefficients.{u} l)
+      have e := congrArg (fun φ ↦ (F.map φ).hom x) (biproduct.total
+        (f := fun _ : Fin n ↦ unit l W))
+      simp only [CategoryTheory.Functor.map_id, F.map_sum, ModuleCat.hom_sum,
+        LinearMap.sum_apply, F.map_comp] at e
+      exact e.symm
+    rw [hx, constSection, freeSection]
+    refine Finset.sum_congr rfl fun i _ ↦ ?_
+    rw [← ha i, ← PadicAlgCl.locallyFiniteFunctions_eq_algebraMap]
+
+end Constant
+
+variable {X W : Scheme.{u}}
+
+/-- **Descent of trivial `ℓ`-adic sheaves along a pro-étale cover** (the stack property of
+sheaves on the pro-étale site; SGA 4, Exp. VIII, 9.1, and Bhatt–Scholze, *The pro-étale topology
+for schemes*, §4.2: the pro-étale site is subcanonical and sheaves glue). Let `f : W ⟶ X` be a
+single-morphism pro-étale cover (weakly étale, surjective and quasi-compact) and `γ` a matrix of
+locally finite functions on `W ×_X W` which is a cocycle: trivial on the diagonal and
+`γ₁₃ = γ₂₃ γ₁₂` on `W ×_X W ×_X W`. Then the descent datum on `ℚ̄_ℓ,Wⁿ` given by `γ` is
+effective: there are an `ℓ`-adic sheaf `G` on `X` and a trivialisation `ε : f^* G ≅ ℚ̄_ℓ,Wⁿ`
+whose transition matrix on `W ×_X W` is `γ`. -/
+theorem exists_iso_transitionMatrix_eq (f : W ⟶ X) [WeaklyEtale f] [Surjective f]
+    [QuasiCompact f] {n : ℕ}
+    (γ : Matrix (Fin n) (Fin n) (PadicAlgCl.locallyFiniteFunctions l ↥(Limits.pullback f f)))
+    (hdiag : γ.map (PadicAlgCl.locallyFiniteFunctionsComp l (pullback.diagonal f).base.hom) = 1)
+    (hcoc : γ.map (PadicAlgCl.locallyFiniteFunctionsComp l (tripleProj₁₃ f).base.hom) =
+      γ.map (PadicAlgCl.locallyFiniteFunctionsComp l
+        (pullback.snd (pullback.snd f f) (pullback.fst f f)).base.hom) *
+      γ.map (PadicAlgCl.locallyFiniteFunctionsComp l
+        (pullback.fst (pullback.snd f f) (pullback.fst f f)).base.hom)) :
+    ∃ (G : AdicSheaf l X) (ε : (f)^*ᵃ[l].obj G ≅ ⨁ fun _ : Fin n ↦ unit l W),
+      transitionMatrix ε (pullback.fst f f) (pullback.snd f f) pullback.condition = γ := by
+  sorry
+
 end AdicSheaf
 
 end AlgebraicGeometry.ProEtale
