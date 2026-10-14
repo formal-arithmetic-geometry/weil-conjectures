@@ -17,50 +17,45 @@
  },
  "proof": [
   {
-   "text": "Let pi=Y x_S T -> Y and pi'=B x_S T -> B. The pullback map b and pi' exhibit B x_S T as pi inverse B: construct the comparison to the inverse-image open by the pullback universal property; the inverse is the pair of maps to B and T. The two projection equations prove the inverse laws by pullback.hom_ext. Transport the open restriction/direct-image isomorphism of Tag 08FE through this scheme isomorphism and the derived pullback/direct-image adjunctions along it. Thus restriction of Rpi_* is isomorphic to Lb* followed by Rpi'_*.",
+   "text": "Construct the ordinary cartesian open mate and prove it is invertible sectionwise. Derive it with the fixed right-derived comparison APIs and exact open restriction, and transport to the supplied adjunctions.",
    "uses": [
-    "lem-pc-restrict-derived-direct-image-open",
-    "lem-pc-ringed-spaces-derived-adjoint",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-perfect-hom-open-module-mate",
+    "lem-pc-perfect-hom-open-mate-resolution-normalization"
    ],
    "elementary": false
   },
   {
-   "text": "For the projection adjunctions pinned by their ordinary tensor adjunctions and derived units/counits, the mate of the displayed inverse pullback comparison is this open direct-image comparison. Verify the normalization on K-flat representatives using the left-derived counit equation defining perfectHomComposition. Under the pinned derived Hom equivalence, transposing this equation gives the ordinary restriction/direct-image section map. Compute direct image on a K-injective complex I; its restriction to the inverse-image open is K-injective. On each open W of B, the two complexes have the same sections I(pi inverse W), and the transposed comparison is the identity with the same differentials. The universal properties of the derived functors extend this identification to arbitrary derived objects. Hence every component of the mate is invertible.",
+   "text": "Transport the canonical counit equation to every supplied adjunction. For right-adjoint identity conjugations use conjugateEquiv_counit; for the open adjunction use the automorphism sigma sigma-zero inverse. Naturality of this automorphism and of the inverse pullback comparison proves the transported equation. Cancel sigma-zero inverse followed by sigma-zero to recover precisely the fixed supplied comparison. These steps are proved in the private helpers openMateAdjunctionTransport and openMateSuppliedCounit.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-ringed-spaces-derived-adjoint",
-    "def-pc-derived-base-change-map",
-    "lem-sc-derived-k-injective-restrict-open",
-    "lem-pc-perfect-hom-transport"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For arbitrary supplied projection adjunctions, conjugate the mate by the right-adjoint uniqueness isomorphisms from the pinned adjunctions. Naturality and the uniqueness unit/counit equations prove that this is the new mate. Changing the supplied open adjunction replaces sigma by the left-adjoint uniqueness isomorphism; whiskering and taking its mate inserts invertible factors. Thus all supplied adjunctions have invertible mate. Apply NatIso.isIso_of_isIso_app. For the empty open the local derived category is zero, and for the full open this is the identity square; no other hypotheses are used.",
-   "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-pc-perfect-hom-open-mate-resolution-normalization",
+    "lem-pc-perfect-hom-transport",
     "def-pc-derived-mayer-vietoris-canonical-data"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "The K-injective normalization equation and mateEquiv_counit show equality of the mate and the explicit comparison at QI by injectivity of the adjunction Hom equivalence. For arbitrary E, use the fixed K-injective schemeMVResolution and its isomorphism to E; naturality of both transformations and cancellation of the functorial image of this isomorphism extend the equality. Every comparison component is invertible, so NatIso.isIso_of_isIso_app proves the theorem.",
+   "uses": [
+    "lem-pc-perfect-hom-open-mate-resolution-normalization",
+    "def-pc-derived-mayer-vietoris-canonical-data",
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-base-change-map",
   "def-pc-derived-mayer-vietoris-canonical-data",
-  "lem-pc-perfect-hom-transport",
-  "lem-pc-restrict-derived-direct-image-open",
-  "lem-pc-ringed-spaces-derived-adjoint",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-sc-derived-k-injective-restrict-open"
+  "lem-pc-perfect-hom-open-mate-resolution-normalization",
+  "lem-pc-perfect-hom-open-module-mate",
+  "lem-pc-perfect-hom-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "V1",
+  "group": "F3",
   "date": "2026-10-14",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 08FE, 08BS, 079W, 0D5S",
-  "note": "Agent-written mate normalization and cartesian-presentation argument; source tags read on the Stacks website."
+  "place": "Lemma lemma-restrict-direct-image-open (Tag 08FE), Lemma lemma-restrict-K-injective-to-open (Tag 08BS), Lemma lemma-adjoint (Tag 079W), and Lemma lemma-derived-pullback-composition (Tag 0D5S)",
+  "note": "Complete combining Lean proof, including arbitrary-adjunction transport; only the canonical K-injective normalization equation remains."
  },
  "mathlib_searches": [
   {
@@ -132,11 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-c31ff",
-  "group": "V1",
+  "reviewer": "COMPILER",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261014T022552-L-4047894",
+  "landing": "20261014T033105-L-603421",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with both DAG nodes, source statements, import change record, report, and earlier return; compiled both modules and the sole direct importer; verified axioms."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

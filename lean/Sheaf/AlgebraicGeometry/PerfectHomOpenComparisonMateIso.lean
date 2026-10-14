@@ -6,6 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
+import Sheaf.AlgebraicGeometry.PerfectHomOpenMateResolutionNormalization
 
 /-! # The open direct-image mate of the fixed pullback comparison
 
@@ -21,6 +22,98 @@ set_option backward.isDefEq.respectTransparency false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
+
+private theorem openMateAdjunctionTransport {C D C' D' : Type*}
+    [Category C] [Category D] [Category C'] [Category D']
+    {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
+    {G : C ⥤ C'} {H : D ⥤ D'}
+    (a₀ a : L ⊣ R) (a₀' a' : L' ⊣ R')
+    (κ : G ⋙ L' ≅ L ⋙ H) (τ : G ≅ G) (β : R ⋙ G ≅ H ⋙ R')
+    (E : D)
+    (h : L'.map (β.hom.app E) ≫ a₀'.counit.app (H.obj E) =
+      κ.hom.app (R.obj E) ≫ H.map (a₀.counit.app E)) :
+    let c := (conjugateIsoEquiv a a₀) (Iso.refl _)
+    let c' := (conjugateIsoEquiv a₀' a') (Iso.refl _)
+    let γ := Functor.isoWhiskerRight c G ≪≫ Functor.isoWhiskerLeft R τ ≪≫
+      β ≪≫ Functor.isoWhiskerLeft H c'
+    L'.map (γ.hom.app E) ≫ a'.counit.app (H.obj E) =
+      L'.map (τ.hom.app (R.obj E)) ≫ κ.hom.app (R.obj E) ≫ H.map (a.counit.app E) := by
+  dsimp only
+  let c := (conjugateIsoEquiv a a₀) (Iso.refl _)
+  let c' := (conjugateIsoEquiv a₀' a') (Iso.refl _)
+  have hc : L.map (c.hom.app E) ≫ a₀.counit.app E = a.counit.app E := by
+    simpa only [c, conjugateIsoEquiv_apply_hom, Iso.refl_hom,
+      NatTrans.id_app, Category.id_comp] using
+      conjugateEquiv_counit a a₀ (𝟙 L) E
+  have hc' : L'.map (c'.hom.app (H.obj E)) ≫ a'.counit.app (H.obj E) =
+      a₀'.counit.app (H.obj E) := by
+    simpa only [c', conjugateIsoEquiv_apply_hom, Iso.refl_hom,
+      NatTrans.id_app, Category.id_comp] using
+      conjugateEquiv_counit a₀' a' (𝟙 L') (H.obj E)
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+    Functor.map_comp, Category.assoc]
+  change L'.map (G.map (c.hom.app E)) ≫ L'.map (τ.hom.app (R.obj E)) ≫
+    L'.map (β.hom.app E) ≫ L'.map (c'.hom.app (H.obj E)) ≫
+    a'.counit.app (H.obj E) = _
+  rw [hc', h]
+  rw [← L'.map_comp_assoc, τ.hom.naturality (c.hom.app E), L'.map_comp_assoc]
+  have hn := κ.hom.naturality (c.hom.app E)
+  dsimp only [Functor.comp_map] at hn
+  rw [reassoc_of% hn, ← H.map_comp, hc]
+
+
+private theorem openMateSuppliedCounit
+    {S Y T : Scheme.{u}} (s : Y ⟶ S) (B : Y.Opens) (r : T ⟶ S)
+    [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι)
+    (ap : derivedPullback (pullback.fst s r) ⊣
+      schemeDerivedDirectImage (pullback.fst s r))
+    (ap' : derivedPullback (pullback.fst (B.ι ≫ s) r) ⊣
+      schemeDerivedDirectImage (pullback.fst (B.ι ≫ s) r))
+    (I : CochainComplex
+      (SheafOfModules.{u} (moduleRings (pullback s r).toRingedSpace)) ℤ)
+    [I.IsKInjective] :
+    let b := perfectHomOpenMap s B r
+    let σ : schemeMVDerivedRestriction Y B ≅ derivedPullback B.ι :=
+      (conjugateIsoEquiv a (schemeMVAdjunction Y B)).symm (Iso.refl _)
+    let he : b ≫ pullback.fst s r = pullback.fst (B.ι ≫ s) r ≫ B.ι := by
+      simp [b, perfectHomOpenMap, pullback.map]
+    let κ := perfectHomComposition b (pullback.fst s r) ≪≫
+      eqToIso (congrArg (fun f ↦ derivedPullback f) he) ≪≫
+      (perfectHomComposition (pullback.fst (B.ι ≫ s) r) B.ι).symm ≪≫
+      Functor.isoWhiskerRight σ.symm (derivedPullback (pullback.fst (B.ι ≫ s) r))
+    (derivedPullback (pullback.fst (B.ι ≫ s) r)).map
+        ((perfectHomOpenSuppliedComparison s B r a ap ap').hom.app
+          (DerivedCategory.Q.obj I)) ≫
+        ap'.counit.app ((derivedPullback b).obj (DerivedCategory.Q.obj I)) =
+      κ.inv.app ((schemeDerivedDirectImage (pullback.fst s r)).obj
+        (DerivedCategory.Q.obj I)) ≫
+        (derivedPullback b).map (ap.counit.app (DerivedCategory.Q.obj I)) := by
+  classical
+  dsimp only
+  let a₀ := canonicalPullbackAdjunction B.ι
+  let ap₀ := canonicalPullbackAdjunction (pullback.fst s r)
+  let ap₀' := canonicalPullbackAdjunction (pullback.fst (B.ι ≫ s) r)
+  let σ := (conjugateIsoEquiv a (schemeMVAdjunction Y B)).symm (Iso.refl _)
+  let σ₀ := (conjugateIsoEquiv a₀ (schemeMVAdjunction Y B)).symm (Iso.refl _)
+  let κ := perfectHomComposition (perfectHomOpenMap s B r) (pullback.fst s r) ≪≫
+    eqToIso (congrArg (fun f ↦ derivedPullback f) (perfectHomOpenSquare s B r).w.symm) ≪≫
+    (perfectHomComposition (pullback.fst (B.ι ≫ s) r) B.ι).symm ≪≫
+    Functor.isoWhiskerRight σ₀.symm (derivedPullback (pullback.fst (B.ι ≫ s) r))
+  have h := openMateAdjunctionTransport ap₀ ap ap₀' ap' κ.symm (σ ≪≫ σ₀.symm)
+    (perfectHomOpenDerivedComparison s B r) (DerivedCategory.Q.obj I)
+    (perfectHomOpenComparison_counit_resolution s B r I)
+  change _ = _ at h
+  simp only [perfectHomOpenSuppliedComparison, κ, σ, σ₀, a₀, ap₀, ap₀',
+    Iso.trans_inv, Iso.symm_inv, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerRight_inv, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+    Iso.trans_hom, Functor.map_comp, Category.assoc] at h ⊢
+  simpa only [← Functor.map_comp_assoc, Iso.inv_hom_id_app,
+    Functor.map_id, Category.id_comp, Category.comp_id] using h
+
 
 /-- The right mate of the fixed open pullback square is invertible, independently
 of the testing and coefficient objects.
@@ -73,6 +166,36 @@ theorem perfect_hom_open_comparison_mate_isIso
         schemeDerivedDirectImage (pullback.fst s r))
       (ap' : derivedPullback (pullback.fst (B.ι ≫ s) r) ⊣
         schemeDerivedDirectImage (pullback.fst (B.ι ≫ s) r)),
-      IsIso (mateEquiv ap ap' (TwoSquare.mk _ _ _ _ κ₀.inv)).natTrans := by sorry
+      IsIso (mateEquiv ap ap' (TwoSquare.mk _ _ _ _ κ₀.inv)).natTrans := by
+  classical
+  dsimp only
+  intro ap ap'
+  let β := perfectHomOpenSuppliedComparison s B r a ap ap'
+  let α := (mateEquiv ap ap' (TwoSquare.mk _ _ _ _
+    (perfectHomComposition (perfectHomOpenMap s B r) (pullback.fst s r) ≪≫
+      eqToIso (congrArg (fun f ↦ derivedPullback f) (perfectHomOpenSquare s B r).w.symm)
+        ≪≫ (perfectHomComposition (pullback.fst (B.ι ≫ s) r) B.ι).symm ≪≫
+      Functor.isoWhiskerRight
+        ((conjugateIsoEquiv a (schemeMVAdjunction Y B)).symm (Iso.refl _)).symm
+        (derivedPullback (pullback.fst (B.ι ≫ s) r))).inv)).natTrans
+  change IsIso α
+  have hQ (I : CochainComplex
+      (SheafOfModules.{u} (moduleRings (pullback s r).toRingedSpace)) ℤ)
+      [I.IsKInjective] : α.app (DerivedCategory.Q.obj I) =
+        β.hom.app (DerivedCategory.Q.obj I) := by
+    apply (ap'.homEquiv _ _).symm.injective
+    simp only [Adjunction.homEquiv_symm_apply]
+    exact (mateEquiv_counit ap ap' _ (DerivedCategory.Q.obj I)).trans
+      (openMateSuppliedCounit s B r a ap ap' I).symm
+  have hE (E : schemeDerivedCategory (pullback s r)) : α.app E = β.hom.app E := by
+    let I := schemeMVResolution (pullback s r) E
+    let e := schemeMVResolutionIso (pullback s r) E
+    apply (cancel_epi ((schemeDerivedDirectImage (pullback.fst s r) ⋙
+      schemeMVDerivedRestriction Y B).map e.hom)).mp
+    rw [α.naturality, β.hom.naturality, hQ I]
+  have (E : schemeDerivedCategory (pullback s r)) : IsIso (α.app E) := by
+    rw [hE E]
+    infer_instance
+  exact NatIso.isIso_of_isIso_app α
 
 end AlgebraicGeometry
