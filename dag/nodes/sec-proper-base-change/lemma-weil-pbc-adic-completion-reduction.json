@@ -3,34 +3,235 @@
  "blueprint": {
   "is": "lemma-weil-pbc-adic-completion-reduction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite reduction of adic completion",
- "statement": "For every $a\\geq1$, projection to level $a$ induces a functorial\nisomorphism\n\n$$\n\\left(R\\varprojlim_nK_n\\right)\\otimes^L_\\Lambda P_a\n\\xrightarrow{\\sim}K_a.\n$$",
+ "statement": "Let $X$ be a scheme, $\\Lambda$ a commutative Noetherian ring, $I=(f_1,\\ldots,f_r)$ a finitely generated ideal, $P_n=\\Lambda/I^n$ for $n\\geq1$, and $K\\in D(X_{\\mathrm{proet}},\\Lambda)$ satisfy [def-weil-pbc-complete-coefficient-datum]. Thus $\\Lambda/I$ is additive torsion and every $P_n$ in degree zero is perfect over $\\Lambda$. All coefficient sheaves in this statement are constant: write $\\Lambda_X$ and $(P_n)_X$, and put $K_n=K\\otimes^L_{\\Lambda_X}(P_n)_X$. Regard the reductions as $\\Lambda_X$-objects by restriction of scalars. Compute their strict reduction tower using one K-flat representative of $K$ [def-weil-derived-tensor], and let $L=R\\lim_n K_n$ be its total right derived inverse limit [lem-weil-pbc-ringed-strict-tower-homotopy-limit], with canonical evaluation $p_a:L\\to K_a$.\n\nFor every $a\\geq1$, the adjoint of $p_a$ under derived extension and restriction of scalars [lem-weil-pbc-ringed-topoi-module-adjunction, lem-pc-derived-adjoint-functors] is a functorial isomorphism in $D(X_{\\mathrm{proet}},P_a)$:\n$$L\\otimes^L_{\\Lambda_X}(P_a)_X\\xrightarrow{\\sim}K_a.$$\nNo derived completeness hypothesis on $K$ is imposed.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.md",
   "place": "node lemma-weil-pbc-adic-completion-reduction, order 1260"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-complete-coefficient-datum",
+  "def-weil-derived-tensor",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pc-derived-adjoint-functors"
+ ],
  "proof": [
   {
-   "text": "Use the preceding comparison to replace the quotient tower by\n$K\\otimes^LQ_m$. Since $P_a$ is perfect, tensoring with $P_a$ commutes\nwith both products in the product-cone model. For $m\\geq a$, the\ndifferential of $Q_m\\otimes^L P_a$ is zero. Its degree-zero transition is\nthe identity, whereas every composite of $a$ successive transitions in a\nnegative degree contains a factor $f_j^a\\in I^a$ and is zero over $P_a$.\nThus the negative-degree towers are pro-zero and the degree-zero tower is\nthe constant tower $P_a$. After tensoring with $K$, its product-cone limit\nis $K\\otimes^LP_a=K_a$. The surviving degree-zero projection is precisely\nthe displayed map. This also exposes the finite Tor-amplitude input: the\nbounded finite-projective complex representing $P_a$ is what permits it to\npass through the two countable products.",
-   "uses": [],
-   "elementary": null
+   "text": "Choose a K-flat representative $C$ of $K$, with flat terms, using [lem-pc-kflat-resolution]. Use the Koszul complexes $Q_m$ and strict transitions of [def-weil-pbc-intrinsic-koszul-completion]. By [lemma-weil-pbc-koszul-quotient-limit], their quotient augmentations induce a natural isomorphism $c_K:R\\lim_m(C\\otimes(Q_m)_X)\\to L$. This comparison is induced by the strict maps, not an arbitrary isomorphism of vertices. The hypotheses are precisely the constant-coefficient Noetherian datum in the statement.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-pbc-intrinsic-koszul-completion",
+    "lemma-weil-pbc-koszul-quotient-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.md",
+    "place": "Proof, first sentence: replace the quotient tower by the Koszul tower"
+   }
+  },
+  {
+   "text": "Fix $a$. Choose a bounded finite-projective ring complex representing $P_a$ by [def-pc-perfect-ring-complex]. Its derived isomorphism to $P_a[0]$ is represented by a chain map by [lem-pc-ring-derived-map-representative], applied in the category of $\\Lambda$-modules; this map is a quasi-isomorphism since it induces the given isomorphism on cohomology. Constant presheaves preserve this quasi-isomorphism termwise, and exact sheafification [lem-weil-pbc-sheafification-exact] preserves it. Thus the coefficient package [def-weil-pbc-strict-perfect-coefficient-package] gives a bounded finite-projective resolution $E^\\bullet\\to(P_a)_X$, whose terms are retracts of finite sums of $\\Lambda_X$. Tensoring with one such term commutes with products: for a free term the comparison is the coordinatewise identity $(\\prod_m F_m)^N=\\prod_m F_m^N$, and restriction to the images of the same idempotent gives the retract case. Boundedness of $E$ makes every diagonal of the total tensor a finite sum, so this proves the chain isomorphism $(\\prod_m M_m)\\otimes E\\cong\\prod_m(M_m\\otimes E)$ for arbitrary complexes $M_m$. A bounded complex of these flat terms is K-flat: filter it by its finitely many degrees; tensoring an acyclic complex gives acyclic successive quotients, hence an acyclic total complex. Countable products are exact by [lem-weil-proetale-countable-products-exact], and termwise products represent derived products by [lem-weil-derived-limit-products-core]. Thus the displayed chain identity computes the derived product comparison, even if the $M_m$ and $C$ are unbounded. It commutes with $1-s$ since each projection is the tensor of the corresponding projection and the transition is tensored with $1_E$. Tensor also commutes with the two finite summands and the differential of a mapping cone. Consequently the specified product-cone model satisfies $(R\\lim M_m)\\otimes^L(P_a)_X\\cong R\\lim(M_m\\otimes^L(P_a)_X)$.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-products-core",
+    "def-weil-derived-tensor",
+    "def-pc-perfect-ring-complex",
+    "lem-pc-ring-derived-map-representative",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.md",
+    "place": "Proof, second and last sentences: explicit bounded finite-projective product calculation"
+   }
+  },
+  {
+   "text": "Apply step 2 to $M_m=C\\otimes(Q_m)_X$. The total tensor model [def-weil-derived-tensor] identifies its reduced tower with $C\\otimes((Q_m)_X\\otimes(P_a)_X)$: $C$ is K-flat and $Q_m$ is bounded finite free, so replacing $E$ by $(P_a)_X$ here is a quasi-isomorphism (its cone is $C$ tensored with the bounded finite-free tensor of the acyclic cone of $E\\to(P_a)_X$). The tensor reassociation sends $(c\\otimes q)\\otimes z$ to $c\\otimes(q\\otimes z)$ and respects the total differential. Discard levels $m<a$. This does not change the product-cone limit: the kernel of the projection from the full product to the tail product is the finite product of the removed levels, and $s$ on this kernel is strictly triangular with $s^{a-1}=0$; thus $1-s$ has inverse $1+s+\\cdots+s^{a-2}$, and its cone is contractible. For $a=1$ nothing is removed.",
+   "uses": [
+    "def-weil-derived-tensor",
+    "def-weil-pbc-intrinsic-koszul-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.md",
+    "place": "Proof, reduction to m at least a, and the tensor model"
+   }
+  },
+  {
+   "text": "For $m\\geq a$, every $f_j^m$ is zero in $P_a$, so the Koszul differential in $Q_m\\otimes P_a$ is zero. Its degree $-d$ summands are copies of $P_a$ indexed by subsets $J\\subseteq\\{1,\\ldots,r\\}$ of size $d$. By the explicit transitions of [def-weil-pbc-intrinsic-koszul-completion], the map over $a$ successive levels on the $J$-summand is multiplication by $\\prod_{j\\in J}f_j^a$. For $d>0$ this is zero because any one factor belongs to $I^a$. For $d=0$ it is the identity. Therefore, after tensoring with $C$, the tail tower splits as the constant tower $C\\otimes(P_a)_X$ in Koszul degree zero plus a finite sum of shifted towers whose transition over $a$ levels is zero as a chain map. There are no cross differentials between these summands, since the Koszul differential is zero.",
+   "uses": [
+    "def-weil-pbc-intrinsic-koszul-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.md",
+    "place": "Proof, zero differentials and the explicit a-fold transition"
+   }
+  },
+  {
+   "text": "The negative-degree summand towers of step 4 have zero derived inverse limit by the pro-zero clause of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. For the constant tower on $N=C\\otimes(P_a)_X$, the product map is $(x_m)\\mapsto(x_m-x_{m+1})$; its kernel is the diagonal copy of $N$ and it is split surjective, with section $y\\mapsto x$ defined by $x_a=0$ and $x_{m+1}=x_m-y_m$. These finite sums commute with the differential. Its product-cone fibre is therefore $N$, with evaluation equal to the identity under this identification. Finite direct sums commute with the product-cone formula, so the entire reduced Koszul tower has limit $N$, via its degree-zero augmentation. Together with steps 1–3 this proves an isomorphism $L\\otimes^L(P_a)_X\\to K_a$.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.md",
+    "place": "Proof, pro-zero towers and the constant degree-zero tower"
+   }
+  },
+  {
+   "text": "For clarity, the adjunction used here is supplied by [lem-weil-pbc-ringed-topoi-module-adjunction] for the identity topos morphism with ring map $\\Lambda_X\\to(P_a)_X$, and by [lem-pc-derived-adjoint-functors] after derivation. Restriction is exact because it leaves the underlying module sheaves and kernels/cokernels unchanged, so its termwise functor is its right derived functor. The everywhere-defined left derived extension is [lem-pur-derived-change-of-rings]. It remains to identify the map. The comparison $c_K$ of [lemma-weil-pbc-koszul-quotient-limit] is induced by $Q_m\\to P_m$. At level $a$, the adjoint of the composite $R\\lim(C\\otimes Q_m)\\to C\\otimes Q_a\\to C\\otimes P_a$ is evaluation after tensor with $P_a$, followed by the augmentation and multiplication $Q_a\\otimes^L P_a\\to P_a\\otimes^L P_a\\to P_a$. On the K-flat model this composite is $c\\otimes q\\otimes z\\mapsto c\\otimes\\overline q z$ in Koszul degree zero and zero in negative Koszul degrees. This is exactly the degree-zero augmentation used in step 5. Hence the isomorphism constructed there is the adjoint of $p_a$, as defined by derived change of rings [lem-pur-derived-change-of-rings]. All the maps used are induced by products, strict tower maps, tensor comparisons and augmentations; their formulas commute with maps of $C$. They consequently descend through K-flat resolutions to the natural transformations in the derived categories, proving functoriality in $K$. The computation in steps 2–5 takes place after restriction to $\\Lambda_X$. Restriction reflects isomorphisms in the derived categories: it is exact and faithful on module sheaves, and the cohomology sheaves of the cone of a restricted morphism are the restrictions of the cohomology sheaves of its cone. Their vanishing therefore implies the original cone is acyclic. The identified adjoint is consequently an isomorphism in $D(X_{\\mathrm{proet}},P_a)$ itself.",
+   "uses": [
+    "lemma-weil-pbc-koszul-quotient-limit",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-derived-tensor",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-pc-derived-adjoint-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.md",
+    "place": "Proof, surviving degree-zero projection is the displayed map"
+   }
   }
  ],
  "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-derived-tensor",
+  "def-weil-pbc-intrinsic-koszul-completion",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-pc-derived-adjoint-functors",
+  "lem-pc-kflat-resolution",
+  "lem-pc-ring-derived-map-representative",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-proetale-countable-products-exact",
   "lemma-weil-pbc-koszul-quotient-limit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.md",
-  "place": "## Proof"
+  "place": "## Proof, with explicit product, transition and projection calculations; compare Stacks Tags 099M and 091Z"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse limit tensor finite quotient P_a Koszul tower",
+   "date": "2026-10-14",
+   "results": "8 hits: AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProduct_tmul",
+   "verdict": "no match: ordinary module completion, or unrelated tensor declarations, not this derived sheaf tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits product cone derived inverse limit tensor",
+   "date": "2026-10-14",
+   "results": "0 hits: ; loogle: Unknown identifier `CategoryTheory.Limits`",
+   "verdict": "no match: ordinary module completion, or unrelated tensor declarations, not this derived sheaf tower assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "pro-zero|product-cone|Koszul",
+   "date": "2026-10-14",
+   "results": "0 hits: ; subdirectory Mathlib",
+   "verdict": "no match: ordinary module completion, or unrelated tensor declarations, not this derived sheaf tower assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite reduction of derived adic completion",
+   "date": "2026-10-14",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse limit tensor finite quotient P_a Koszul tower",
+   "date": "2026-10-14",
+   "results": "8 hits: AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProduct_tmul",
+   "verdict": "no match: ordinary module completion, or unrelated tensor declarations, not this derived sheaf tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits product cone derived inverse limit tensor",
+   "date": "2026-10-14",
+   "results": "0 hits: ; loogle: Unknown identifier `CategoryTheory.Limits`",
+   "verdict": "no match: ordinary module completion, or unrelated tensor declarations, not this derived sheaf tower assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "pro-zero|product-cone|Koszul",
+   "date": "2026-10-14",
+   "results": "0 hits: ; subdirectory Mathlib",
+   "verdict": "no match: ordinary module completion, or unrelated tensor declarations, not this derived sheaf tower assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite reduction of derived adic completion",
+   "date": "2026-10-14",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*complet|complet.*derived|tensor.*prod",
+   "date": "2026-10-14",
+   "results": "25 hits: Mathlib/CategoryTheory/CopyDiscardCategory/Basic.lean, Mathlib/CategoryTheory/CopyDiscardCategory/Basic.lean, Mathlib/CategoryTheory/CopyDiscardCategory/Basic.lean, Mathlib/CategoryTheory/Action/Monoidal.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean; subdirectory CategoryTheory",
+   "verdict": "no match: ordinary module completion, or unrelated tensor declarations, not this derived sheaf tower assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived completion of a complex modulo a perfect ideal power quotient recovers its derived reduction",
+   "date": "2026-10-14",
+   "results": "8 hits: AdicCompletion.of_apply, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion.map_val_apply, AdicCompletion.mk_apply_coe, AdicCompletion.mkₐ_apply_coe, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, AdicCompletion.factor_eval_eq_evalₐ",
+   "verdict": "no match: ordinary module completion, or unrelated tensor declarations, not this derived sheaf tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, tensor",
+   "date": "2026-10-14",
+   "results": "0 hits: ; loogle: unknown identifier 'tensor'",
+   "verdict": "no match: ordinary module completion, or unrelated tensor declarations, not this derived sheaf tower assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of reductions tensor a perfect quotient is the reduction",
+   "date": "2026-10-14",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopy inverse limit of derived quotient reductions has unchanged tensor with a perfect quotient module",
+   "date": "2026-10-14",
+   "results": "8 hits: AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype",
+   "verdict": "no match: ordinary module completion, or unrelated tensor declarations, not this derived sheaf tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDerivedLimit\"",
+   "date": "2026-10-14",
+   "results": "0 hits: ",
+   "verdict": "no match: ordinary module completion, or unrelated tensor declarations, not this derived sheaf tower assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*complet|complet.*derived|IsDerivedLimit",
+   "date": "2026-10-14",
+   "results": "0 hits: ; subdirectory RingTheory",
+   "verdict": "no match: ordinary module completion, or unrelated tensor declarations, not this derived sheaf tower assertion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -55,5 +256,43 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lemma-weil-pbc-adic-completion-reduction",
+  "worker": "stage1",
+  "summary": "Made the implicit constant-coefficient datum and the strict derived-limit functor explicit; expanded the existing Koszul argument into six steps with the finite-projective product calculation, tail removal, zero-transition calculation, constant tower and identification of the specified adjoint. No new nodes.",
+  "blueprint": "Realizes every sentence of the imported node proof: comparison (1), perfect tensor/products (2–3), zero differentials and transitions (4), limit calculation (5), specified map and naturality (6).",
+  "source_correction": {
+   "reason": "STATEMENT-DISPUTED: the imported standalone formula has free symbols K_n, Lambda and P_a; restore the setting supplied by its preceding definition and Koszul comparison. Its arbitrary-tower reading is false.",
+   "counterexample": "Lambda=Z, I=(2), K_1=Z/2, K_n=0 for n>1 with zero transitions: the derived limit is zero but K_1 is not. This is not a reduction tower of a single K."
+  },
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exact countable products of module sheaves on the small pro-etale site are the generic input needed for the termwise product-cone calculation; the unit gives no substitute."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic everywhere-defined K-flat derived extension of sheaf coefficients, needed to define the reduction and its morphisms."
+   },
+   {
+    "node": "lem-pc-derived-adjoint-functors",
+    "why": "Generic derivation of an adjunction once its derived functors exist; applied to exact restriction and derived extension at the identity topos."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-countable-products-exact",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-derived-adjoint-functors"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-39562e354",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-39562e354 (reviewer sub-agent of L); spot-checked: Full mathematical review completed. The corrected constant-coefficient statement, six proof steps, hypotheses, adjoint map, cited sources, edge cases, dependency closure, tool uses, and duplicate comparison all check out. Review written to review.md; no repairs needed."
+ }
 }
