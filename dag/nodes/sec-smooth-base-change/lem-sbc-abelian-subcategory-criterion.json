@@ -1,0 +1,70 @@
+{
+ "id": "lem-sbc-abelian-subcategory-criterion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-heart-abelian",
+   "place": "Proof, first sentence: the classical abelianity theorem, via BBD 1.2.4's general criterion",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Abelian subcategory criterion",
+ "statement": "Let $\\mathcal T$ be a triangulated category [def-weil-triangulated-category], and let $\\iota:\\mathcal A\\to\\mathcal T$ be a fully faithful additive functor from an additive category $\\mathcal A$ (a preadditive category with a zero object and finite biproducts). Suppose that $\\operatorname{Hom}_{\\mathcal T}(\\iota X,\\iota Y[n])=0$ for all $X,Y\\in\\mathcal A$ and $n<0$. Suppose also that for every $f:X\\to Y$ in $\\mathcal A$ and every distinguished triangle $\\iota X\\xrightarrow{\\iota f}\\iota Y\\to S\\to\\iota X[1]$, there are $K,Q\\in\\mathcal A$ and a distinguished triangle $\\iota K[1]\\to S\\to\\iota Q\\to\\iota K[2]$. Then $\\mathcal A$ is abelian [def-sp-abelian].",
+ "source": {
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "Proposition 1.2.4, implication (ii) implies (i), with hypothesis 1.2.0 and Definition 1.2.3, pp. 27-28"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-sp-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful additive subcategory of a triangulated category is abelian if negative shifted Hom groups vanish and every cone has a triangle K[1] to cone to Q",
+   "results": "CategoryTheory.Functor.instIsTriangulatedHomologicalKernel, CategoryTheory.Functor.mem_homologicalKernel_trW_iff, CategoryTheory.Functor.mem_homologicalKernel_W_iff, CategoryTheory.Functor.IsHomological.mk', CategoryTheory.Functor.IsHomological, DerivedCategory.instIsTriangulated, HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic, DerivedCategory.instPretriangulated",
+   "date": "2026-10-14",
+   "verdict": "candidate results inspected; see mathlib_match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.AbelianSubcategory.abelian",
+   "results": "CategoryTheory.Triangulated.AbelianSubcategory.abelian",
+   "date": "2026-10-14",
+   "verdict": "match: local declaration read and checked"
+  },
+  {
+   "tool": "grep",
+   "query": "noncomputable def abelian",
+   "results": "Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean",
+   "date": "2026-10-14",
+   "verdict": "match: local declaration read and checked"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fully faithful additive subcategory of a triangulated category is abelian under negative Hom vanishing and admissible morphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Triangulated.AbelianSubcategory.abelian",
+  "file": "Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean",
+  "line": 308,
+  "how": "exact: abelian at line 308; hι is the negative-Hom hypothesis at line 44, admissibleMorphism at lines 193-198 is exactly the second triangle condition; hypotheses at lines 200 and 222 include full, faithful, additive and finite products, and hA at line 271 requires every morphism admissible."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "prop-weil-heart-abelian",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest"
+}
