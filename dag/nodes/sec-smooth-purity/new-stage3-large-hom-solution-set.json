@@ -1,0 +1,113 @@
+{
+ "id": "new-stage3-large-hom-solution-set",
+ "kind": "statement",
+ "title": "Solution set for a universe-enlarged Hom functor",
+ "statement": "Let C be an abelian category with Hom types in Type w, well-powered relative to w, and with coproducts indexed by Type max(w,vH). For any G in C, the explicit functor X |-> ULift Hom(G,X) to Type max(w,vH) modules over End(G)^op satisfies the solution-set condition with indexing sets in Type w. There is no separator condition on G, no derived category, and no adjoint is asserted.",
+ "stmt_deps": [],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0F5S",
+  "place": "Lemma 19.14.1, first proof, images of sums; agent-written quotient parametrization using Mathlib CategoryTheory.Abelian.subobjectIsoSubobjectOp"
+ },
+ "proof": [
+  {
+   "text": "For a module M in Type max(w,vH), form P as the coproduct of M copies of G. By well-poweredness and the abelian subobject/quotient correspondence, choose a Type w list of quotient maps q_N:P -> Q_N covering all quotients up to isomorphism. Keep those for which m |-> i_m q_N is additive and End(G)^op-linear. This subtype remains w-small and provides module maps f_N:M -> ULift Hom(G,Q_N).",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For any module map h:M -> ULift Hom(G,X), unlift its values to get d:P -> X. Factor d through its image as q followed by the monomorphism j:Q -> X. Linearity of h and cancellation against j imply that m |-> i_m q is linear. Thus this quotient lies in the restricted family. Its representative Q_N maps to X by g and satisfies f_N followed by the lifted Hom map of g equals h, proving the solution-set condition. The zero-object and zero-module cases use zero maps.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/0F5S",
+  "place": "Lemma 19.14.1, first proof, images of sums; agent-written quotient parametrization using Mathlib CategoryTheory.Abelian.subobjectIsoSubobjectOp",
+  "note": "Second reading replaced the equivalence-only restatement with this separate argument component."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A well powered abelian category with sufficiently large coproducts gives a small solution set for the universe lifted Hom functor",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The lifted Hom functor satisfies the solution set condition using quotients of the coproduct of copies of its defining object indexed by a module",
+   "date": "2026-10-14",
+   "results": "8 hits: PresheafOfModules.freeYoneda.instSmall, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.d, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.exists_d_comp_eq_d, CategoryTheory.IsGrothendieckAbelian.instHasCoseparator, CategoryTheory.Abelian.IsGrothendieckAbelian.OppositeModuleEmbedding.embedding, CategoryTheory.SolutionSetCondition, CategoryTheory.solutionSetCondition_of_isRightAdjoint, PresheafOfModules.freeYoneda",
+   "digest": "b675696b1648c53f",
+   "verdict": "No complete match. Candidates were checked against the universe sizes and hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SolutionSetCondition\"",
+   "date": "2026-10-14",
+   "results": "4 hits: CategoryTheory.SolutionSetCondition, CategoryTheory.solutionSetCondition_of_isRightAdjoint, CategoryTheory.isRightAdjoint_of_preservesLimits_of_solutionSetCondition, CategoryTheory.SolutionSetCondition.of_isCardinalAccessible",
+   "digest": "4608f79d54230384",
+   "verdict": "No complete match. Candidates were checked against the universe sizes and hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "SolutionSetCondition|solutionSet",
+   "date": "2026-10-14",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean",
+   "digest": "e191c3a84fe03098",
+   "verdict": "No complete match. Candidates were checked against the universe sizes and hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.GabrielPopescuLargeHomRightAdjoint",
+  "date": "2026-10-14",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-stage3-gabriel-popescu-large-hom-right-adjoint",
+   "place": "Solution set for a universe-enlarged Hom functor",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.LargeHomSolutionSet",
+  "file": "lean/Sheaf/CategoryTheory/LargeHomSolutionSet.lean",
+  "declaration": "CategoryTheory.large_hom_solutionSetCondition",
+  "statement": "theorem large_hom_solutionSetCondition\n    {C : Type u} [Category.{w} C] [Abelian C] [WellPowered.{w} C]\n    [HasCoproducts.{max w vH} C] (G : C) :\n    SolutionSetCondition.{w} (preadditiveCoyonedaObj G ⋙\n      ModuleCat.uliftFunctor.{vH, w} (End G)ᵐᵒᵖ)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261014T001730-L-2553779",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261014T001730-L-2553779",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

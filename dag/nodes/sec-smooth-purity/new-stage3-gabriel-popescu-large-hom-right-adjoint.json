@@ -10,29 +10,31 @@
  },
  "proof": [
   {
-   "text": "For a family X_i in A indexed at the displayed size, form its derived coproduct K in D(A) and P=H^0(K). For an injective I, its degree-zero complex is K-injective, so Hom_A(P,I) is naturally Hom_D(K,I[0]), hence the product of Hom_A(X_i,I). For general Y choose 0 -> Y -> I^0 -> I^1 with the two I^j injective. Both Hom_A(P,-) and the product of Hom_A(X_i,-) are left exact; identifying their kernels gives the same natural isomorphism for Y. The induced maps X_i -> P therefore form a coproduct. Transfer along ShrinkHoms.equivalence.",
-   "uses": [],
+   "text": "Transfer the displayed derived coproducts to A, shrink the index universe to max(w,vH), and transport them along ShrinkHoms.equivalence.",
+   "uses": [
+    "new-stage3-derived-large-coproducts-transfer"
+   ],
    "elementary": false
   },
   {
-   "text": "For S=End(G)^op in ShrinkHoms A and a module M in Type max(w,vH), use the canonical free presentation with generators indexed by M and relations indexed by the kernel of the free-module surjection. The indices lie in Type max(w,vH). Replace free modules by coproducts of G. Finite-support coefficient columns define the induced morphism by the action of End(G) and the coproduct universal property. Define the representing object as its cokernel.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "The cokernel universal property identifies maps from this object to X with module maps M -> Hom(G,X), naturally in M and X. The equivalence between a small module and its ULift preserves the latter identification. This determines the left adjoint and its functorial action by the universal property. Compose with the inverse ShrinkHoms equivalence to obtain the right-adjoint property for the exact functor displayed in the Lean statement. No separator condition or exactness is used.",
-   "uses": [],
+   "text": "Remove the initial equivalence with Functor.isRightAdjoint_comp_iff_right. The Hom functor and module lift preserve w-sized limits, and ShrinkHoms A has w-sized limits by its Grothendieck structure. Apply the general adjoint-functor theorem to the w-small solution set for the enlarged Hom functor.",
+   "uses": [
+    "new-stage3-large-hom-solution-set"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "new-stage3-derived-large-coproducts-transfer",
+  "new-stage3-large-hom-solution-set"
+ ],
  "proof_origin": {
   "by": "worker",
-  "group": "H3",
+  "group": "Q2",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/0F5S",
-  "place": "Lemma 19.14.1, second proof: free presentation and cokernel construction; universe extension from the original abelian-core node large-coproduct step",
-  "note": "Free presentation follows the source; derived-to-abelian large-coproduct step expands the original core plan using injective targets."
+  "place": "Lemma 19.14.1, first proof; original derived-to-abelian coproduct step",
+  "note": "Real reduction: separate coproduct transfer and solution-set condition, then the Mathlib general adjoint-functor theorem; not an equivalence-only restatement."
  },
  "mathlib_searches": [
   {
@@ -105,12 +107,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H3",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261013T234511-L-2163178",
+  "landing": "20261014T001730-L-2553779",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

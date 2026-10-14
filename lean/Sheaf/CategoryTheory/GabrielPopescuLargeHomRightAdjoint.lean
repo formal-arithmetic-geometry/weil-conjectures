@@ -7,6 +7,9 @@ module
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Ulift
+import Mathlib.CategoryTheory.Preadditive.Yoneda.Limits
+import Sheaf.CategoryTheory.DerivedLargeCoproductsTransfer
+import Sheaf.CategoryTheory.LargeHomSolutionSet
 
 /-! Adjoint existence for the universe-enlarged Hom functor. -/
 
@@ -58,6 +61,13 @@ theorem gabriel_popescu_large_hom_isRightAdjoint
     (G : ShrinkHoms A) :
     ((ShrinkHoms.equivalence.{w} A).functor ⋙ preadditiveCoyonedaObj G ⋙
       ModuleCat.uliftFunctor.{vH, w} (End G)ᵐᵒᵖ).IsRightAdjoint := by
-  sorry
+  have : HasCoproducts.{max w vA vH} A :=
+    derived_large_coproducts_transfer.{w, uA, vA, vH}
+  have : HasCoproducts.{max w vH} A := hasCoproducts_shrink.{max w vH, vA}
+  have : HasCoproducts.{max w vH} (ShrinkHoms A) := fun _ =>
+    Adjunction.hasColimitsOfShape_of_equivalence (ShrinkHoms.equivalence.{w} A).inverse
+  rw [Functor.isRightAdjoint_comp_iff_right]
+  apply isRightAdjoint_of_preservesLimits_of_solutionSetCondition
+  exact large_hom_solutionSetCondition G
 
 end CategoryTheory

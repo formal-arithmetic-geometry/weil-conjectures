@@ -1,0 +1,113 @@
+{
+ "id": "new-stage3-derived-large-coproducts-transfer",
+ "kind": "statement",
+ "title": "Large coproducts descend from the derived category",
+ "statement": "Let A be a locally w-small Grothendieck abelian category with a chosen w-Hom derived category. If D(A) has coproducts indexed by types in universe max(w,vA,vH), where vA is the Hom universe of A, then A has coproducts indexed at the same size. No preservation assertion for arbitrary derived coproducts is made.",
+ "stmt_deps": [],
+ "source": {
+  "document": "dag/nodes/sec-smooth-purity/new-stage3-gabriel-popescu-large-hom-right-adjoint.json",
+  "place": "Original proof step 1: agent-written derived-to-abelian coproduct transfer, extending Stacks Project Tag 0F5S"
+ },
+ "proof": [
+  {
+   "text": "For a family X_i form K, the coproduct of X_i[0] in D(A), and P=H^0(K). Applying H^0 to the injections gives the cofan X_i -> P. For each injective I, the degree-zero complex I[0] is K-injective, and exactness of Hom(-,I) identifies Hom_D(K,I[0]) with Hom_A(P,I). The derived coproduct property identifies this with product_i Hom_A(X_i,I), naturally in I.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For Y use an injective copresentation 0 -> Y -> I^0 -> I^1. The comparison Hom_A(P,-) -> product_i Hom_A(X_i,-) is natural and both sides are left exact. Its bijectivity on I^0 and I^1 implies bijectivity on their kernels, hence on Y. This is the coproduct universal property; the empty case gives a zero object.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q2",
+  "date": "2026-10-14",
+  "document": "dag/nodes/sec-smooth-purity/new-stage3-gabriel-popescu-large-hom-right-adjoint.json",
+  "place": "Original proof step 1: agent-written derived-to-abelian coproduct transfer, extending Stacks Project Tag 0F5S",
+  "note": "Second reading replaced the equivalence-only restatement with this separate argument component."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If the derived category of a Grothendieck abelian category has coproducts of a larger size, then the abelian category has coproducts of that size",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coproducts in an abelian category obtained from coproducts of degree zero objects in its derived category via zeroth cohomology",
+   "date": "2026-10-14",
+   "results": "8 hits: HomologicalComplex.isGrothendieckAbelian, CategoryTheory.IsGrothendieckAbelian.hasExt, HasDerivedCategory, CategoryTheory.HasExt, CategoryTheory.hasExt_of_hasDerivedCategory, DerivedCategory.instAdditiveCochainComplexIntQ, CategoryTheory.HasExt.standard, DerivedCategory.instPreadditive",
+   "digest": "c023382b54158d66",
+   "verdict": "No complete match. Candidates were checked against the universe sizes and hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasCoproducts\", \"DerivedCategory\"",
+   "date": "2026-10-14",
+   "results": "0 hits: ",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "No complete match. Candidates were checked against the universe sizes and hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "HasCoproducts|hasCoproducts",
+   "date": "2026-10-14",
+   "results": "0 hits: ",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "No complete match. Candidates were checked against the universe sizes and hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.GabrielPopescuLargeHomRightAdjoint",
+  "date": "2026-10-14",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-stage3-gabriel-popescu-large-hom-right-adjoint",
+   "place": "Large coproducts descend from the derived category",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedLargeCoproductsTransfer",
+  "file": "lean/Sheaf/CategoryTheory/DerivedLargeCoproductsTransfer.lean",
+  "declaration": "CategoryTheory.derived_large_coproducts_transfer",
+  "statement": "theorem derived_large_coproducts_transfer\n    {A : Type uA} [Category.{vA} A] [Abelian A]\n    [IsGrothendieckAbelian.{w} A] [HasDerivedCategory.{w} A]\n    [HasCoproducts.{max w vA vH} (DerivedCategory A)] :\n    HasCoproducts.{max w vA vH} A",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261014T001730-L-2553779",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261014T001730-L-2553779",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
