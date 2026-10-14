@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fin-projective-curve-betti-cardinalities",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Betti cardinalities in a smooth projective curve family",
@@ -16,46 +16,206 @@
   "def-pc-projective-morphism",
   "def-sc-curves",
   "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-sc-genus",
+  "def-weil-geometric-fibre",
+  "def-sc-constant-sheaves",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-weil-constructible-subset"
  ],
  "proof": [
   {
-   "text": "A smooth geometric fibre is regular. Its finitely many irreducible\ncomponents are disjoint, since a regular local ring is a domain.\nThus its connected components are integral smooth proper curves.\nBy [lem-sc-global-functions], each contributes one copy of\n$\\kappa(\\bar s)$ to $H^0(\\mathcal O)$, and by\n[def-sc-genus] its genus is its $H^1(\\mathcal O)$ dimension.\nCohomology on a finite disjoint union is the direct sum of the\ncomponent cohomologies, so\n\n$$\nc_s=h^0(X_{\\bar s},\\mathcal O),\\qquad\ng_s=h^1(X_{\\bar s},\\mathcal O).\n$$",
+   "text": "Fix $s\\in S$, set $k=\\overline{\\kappa(s)}$, and put $C=X_{\\bar s}$. By [lem-pc-projective-proper], $f$ is proper. Apply [lem-pc-proper-base-change] to $\\operatorname{Spec}k\\to S$: the structure map $C\\to\\operatorname{Spec}k$ is smooth and proper. Properness includes separatedness and finite type by [def-weil-proper-morphism]. The pure-dimension-one hypothesis implies $\\dim C\\leq1$, so $C$ is a smooth curve in [def-sc-curves]; the empty fibre is allowed.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-pc-proper-base-change",
+    "def-weil-proper-morphism",
+    "def-sc-curves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WC (lemma-locally-projective-proper), 01W4 (lemma-base-change-proper), 01VB (lemma-base-change-smooth)"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-smooth-curve-points-decomposition] to $C$. It gives a finite disjoint decomposition into open-and-closed smooth connected one-dimensional curves $D_i$ and points $\\operatorname{Spec}k$. A point summand would be an irreducible component of dimension zero: it is clopen, and no irreducible subset can meet two disjoint clopen summands. This contradicts purity, so there are no point summands. The $D_i$ are precisely the connected components, since they are connected and clopen and cover $C$. Thus $|I|=c_s$. Each $D_i$ is proper by [lem-weil-pbc-closed-immersion-proper](c), applied to its closed immersion into the proper $C$.",
+   "uses": [
+    "lem-sbc-smooth-curve-points-decomposition",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A5B (lemma-constant-smooth-statements), opening component reduction; morphisms.tex Tags 01W5 and 01W3"
+   }
+  },
+  {
+   "text": "By [lem-sc-ringed-space-module-sheaves-enough-injectives], embed $\\mathcal O_C$ into an injective $I^0$, embed its cokernel into an injective $I^1$, and repeat on successive cokernels. The differential $I^n\\to I^{n+1}$ is the quotient map onto the preceding cokernel followed by its chosen embedding; its kernel is the preceding image. This constructs an injective resolution $\\mathcal O_C\\to I^\\bullet$. By [lem-sc-ringed-space-restrict-injective-resolution], its restriction to each open $D_i$ is an injective resolution of $\\mathcal O_{D_i}$. In each degree the sheaf gluing axiom on the disjoint open cover gives $\\Gamma(C,I^n)=\\prod_i\\Gamma(D_i,I^n|_{D_i})$, with differentials acting coordinatewise. The kernel of a coordinatewise map is the product of its kernels, and its image is the product of its images (choose a preimage in each of the finitely many coordinates). Writing $Z_i^r$ and $B_i^r$ for component cycles and boundaries, the map $\\prod_i Z_i^r\\to\\prod_i(Z_i^r/B_i^r)$ is surjective (choose representatives in each coordinate) with kernel $\\prod_i B_i^r$. Hence its quotient, the cohomology of the product complex, is the product of the component cohomologies. With the injective-resolution definition [def-sc-ringed-space-module-cohomology], this yields $H^r(C,\\mathcal O_C)\\cong\\bigoplus_i H^r(D_i,\\mathcal O_{D_i})$ for every $r\\geq0$, as $k$-vector spaces: the restriction and gluing maps are $k$-linear. For $I=\\varnothing$ the global-sections complex is zero.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-sc-ringed-space-restrict-injective-resolution",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01E1 (lemma-cohomology-of-open), proof; injectives.tex Tag 01DI (lemma-sheaves-modules-space)"
+   }
+  },
+  {
+   "text": "For every $D_i$, [lem-sc-global-functions] gives $H^0(D_i,\\mathcal O_{D_i})=k$: its final clause applies directly to a proper smooth connected curve. By [def-sc-genus], $\\dim_kH^1(D_i,\\mathcal O_{D_i})=g(D_i)$. Taking dimensions in step 3, by concatenating bases of the finitely many summands, gives $h^0(C,\\mathcal O_C)=c_s$ and $h^1(C,\\mathcal O_C)=\\sum_i g(D_i)=g_s$. The empty sum is zero.",
    "uses": [
     "lem-sc-global-functions",
     "def-sc-genus"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY7 (definition-genus), together with the global-functions lemma of the blueprint"
+   }
   },
   {
-   "text": "Smoothness includes flatness by [def-sbc-smooth-morphisms];\napply [lem-fin-projective-flat-coherent-ranks] to\n$\\mathcal G=\\mathcal O_X$. It proves constructibility of both\nfunctions, without assuming all components have the same genus.\nThe twist trivialization of [def-sc-mu-trivialization] and the\ncurve computation [thm-sc-proper-cohomology] give ranks\n$1,2g(D),1$ in degrees $0,1,2$ on each component.\nVanishing above degree two is\n[lem-sc-cohomological-dimension]. Sum over components and\ntake cardinalities to obtain the formula and its constructibility.",
+   "text": "The already proved properness of $f$ implies finite type by [def-weil-proper-morphism]. Since $S$ is Noetherian, [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian, in particular locally Noetherian. The structure module $\\mathcal O_X$ is quasi-coherent and of finite type: on $\\operatorname{Spec}A$ it is $\\widetilde A$, and the identity is a surjection from one copy of $\\mathcal O_X$. These are the conditions of [pqf-def-coherent]. Hence [pqf-lem-coherent-ft-locnoeth] makes $\\mathcal O_X$ coherent. By [lem-pc-smooth-flat], $f$ is flat. The definition [def-weil-flat-morphism] says exactly that the stalk $\\mathcal O_{X,x}$ is flat over $\\mathcal O_{S,f(x)}$ for every $x$, so the structure module is flat over $S$.",
    "uses": [
-    "def-sbc-smooth-morphisms",
-    "lem-fin-projective-flat-coherent-ranks",
-    "def-sc-mu-trivialization",
-    "thm-sc-proper-cohomology",
-    "lem-sc-cohomological-dimension"
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-def-coherent",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-smooth-flat",
+    "def-weil-flat-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XZ (lemma-coherent-Noetherian); morphisms.tex Tags 01T6 (lemma-finite-type-noetherian), 01VF (lemma-smooth-flat), 01U3 (definition-flat)"
+   }
+  },
+  {
+   "text": "Apply [lem-fin-projective-flat-coherent-ranks] to the original projective $f:X\\to S$ and $\\mathcal G=\\mathcal O_X$. Its coherence and flatness over $S$ were verified in step 5, and $S$ is Noetherian by hypothesis. The fibre module is $\\mathcal O_{X_{\\bar s}}$, since on affine charts the base-change tensor product of the structure module is the structure module of the fibre. In degrees zero and one the theorem gives constructibility of $h^0(X_{\\bar s},\\mathcal O)$ and $h^1(X_{\\bar s},\\mathcal O)$. Step 4 identifies these functions with $c_s$ and $g_s$, respectively.",
+   "uses": [
+    "lem-fin-projective-flat-coherent-ranks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-projective-flat-coherent-ranks.md",
+    "place": "node lem-fin-projective-flat-coherent-ranks, order 1609"
+   }
+  },
+  {
+   "text": "The prime $\\ell$ is a unit in $k$, because it is invertible on $S$. Apply [lem-sc-primitive-root] with $n=\\ell$ to choose a primitive root $\\zeta\\in k$. Each $D_i$ is smooth, proper, connected, nonempty and one-dimensional over the algebraically closed $k$ by steps 1-2. Therefore [thm-sc-proper-cohomology], with this primitive-root trivialization, gives component cohomology isomorphic to $\\mathbf Z/\\ell\\mathbf Z$, $(\\mathbf Z/\\ell\\mathbf Z)^{2g(D_i)}$, and $\\mathbf Z/\\ell\\mathbf Z$ in degrees zero, one, and two, respectively, and zero above two. Only the abstract groups and their cardinalities are used; no choice of roots needs to vary with $s$.",
+   "uses": [
+    "lem-sc-primitive-root",
+    "thm-sc-proper-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RQ (lemma-cohomology-smooth-projective-curve), with the primitive-root identification"
+   }
+  },
+  {
+   "text": "By [lemma-constructible-pullback-constant], the restriction of the constant abelian sheaf $\\mathbf F_\\ell$ to $D_i$ is the same constant sheaf on $D_i$. Apply [lem-weil-pbc-finite-coproduct-cohomology-assembly] to the finite clopen decomposition in step 2. It identifies $H^r(C,\\mathbf F_\\ell)$ with the product of the component cohomology groups computed in step 7. A tuple in a product of $a$ copies of $\\mathbf Z/\\ell\\mathbf Z$ has $\\ell$ independent choices in each coordinate, hence cardinality $\\ell^a$. Thus the degree-zero and degree-two groups have cardinality $\\ell^{|I|}=\\ell^{c_s}$, the degree-one group has cardinality $\\ell^{\\sum_i2g(D_i)}=\\ell^{2g_s}$, and above degree two the product of zero groups is the zero group, of cardinality one. An empty product is also a one-element group, giving the asserted formula for empty fibres.",
+   "uses": [
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-finite-coproduct-cohomology-assembly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A5B (lemma-constant-smooth-statements), opening reduction; constant-sheaf pullback as in the blueprint lemma-constructible-pullback-constant"
+   }
+  },
+  {
+   "text": "By constructibility in step 6 there are finite constructible partitions on which $c_s$ and $g_s$ are constant. Their common refinement consists of the pairwise intersections of their pieces, which are constructible by [def-weil-constructible-subset]. On each refined piece the functions $\\ell^{c_s}$ and $\\ell^{2g_s}$ are constant. They therefore are constructible functions; the constant function one is constructible as well. This proves the required constructibility for every fixed degree $r$.",
+   "uses": [
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005H (lemma-constructible): Boolean closure of constructible subsets"
+   }
   }
  ],
  "proof_deps": [
+  "lem-pc-projective-proper",
+  "lem-pc-proper-base-change",
+  "def-weil-proper-morphism",
+  "def-sc-curves",
+  "lem-sbc-smooth-curve-points-decomposition",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sc-ringed-space-restrict-injective-resolution",
+  "def-sc-ringed-space-module-cohomology",
   "lem-sc-global-functions",
   "def-sc-genus",
-  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-def-coherent",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-smooth-flat",
+  "def-weil-flat-morphism",
   "lem-fin-projective-flat-coherent-ranks",
-  "def-sc-mu-trivialization",
+  "lem-sc-primitive-root",
   "thm-sc-proper-cohomology",
-  "lem-sc-cohomological-dimension"
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+  "def-weil-constructible-subset"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-projective-curve-betti-cardinalities.md",
-  "place": "## Proof"
+  "place": "Proof, expanded componentwise using Stacks Tags 0A5B, 03RQ, 01E1, 01XZ and the existing coherent-rank lemma"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "betti|etale.*cohomology|cohomology.*etale",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern algebraic smoothness or class numbers, not etale curve cohomology cardinalities and their constructibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology Betti numbers of smooth projective curves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cardinality of etale cohomology of smooth projective curves in a family is constructible",
+   "results": "FunctionField.classNumber, ClassGroup.cardM, FunctionField.RingOfIntegers.instFintypeClassGroupSubtypeMemSubalgebraPolynomialRingOfIntegers, Polynomial.cardPowDegreeIsAdmissible, Algebra.IsStandardSmoothOfRelativeDimension.out, chevalley_mvPolynomial_mvPolynomial, PrimeSpectrum.ConstructibleSetData.degBound, ChevalleyThm.numBound",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern algebraic smoothness or class numbers, not etale curve cohomology cardinalities and their constructibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.IsProper",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern algebraic smoothness or class numbers, not etale curve cohomology cardinalities and their constructibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology of an algebraic curve over an algebraically closed field has ranks 1 2g 1",
+   "results": "Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential, IsLocalRing.finrank_cotangentSpace_eq_zero, Algebra.SubmersivePresentation.rank_kaehlerDifferential, Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth, FunctionField.classNumber, IsLocalRing.finrank_CotangentSpace_eq_one, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, IsLocalRing.finrank_cotangentSpace_eq_zero_iff",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern algebraic smoothness or class numbers, not etale curve cohomology cardinalities and their constructibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite constant sheaf cohomology on proper smooth curves over an algebraically closed field dimensions genus",
+   "results": "FunctionField class numbers, cotangent cohomology, Hilbert 90, singular homology of totally disconnected spaces, and group cohomology of a trivial group; no etale curve family cardinality theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -93,5 +253,79 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-fin-projective-curve-betti-cardinalities",
+  "worker": "stage1",
+  "summary": "Kept the statement and the coherent-rank route. Reused the existing smooth-curve/point decomposition and clopen etale-cohomology assembly; wrote coherent cohomology assembly from a restricted injective resolution. Verified coherence and base-flatness of the structure module before applying the rank lemma, replaced the incorrect definition-only flatness citation, and made primitive-root existence and finite-partition constructibility explicit. No new nodes.",
+  "blueprint": "First proof paragraph: steps 1-4 give the connected components and the coherent h0/h1 identities. Second paragraph: steps 5-6 verify the structure-module hypotheses and constructibility; steps 7-9 compute cardinalities and transfer constructibility.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic permanence of properness and smoothness under the geometric-fibre base change; the unit has no permanence statement."
+   },
+   {
+    "node": "lem-sbc-smooth-curve-points-decomposition",
+    "why": "Generic finite clopen decomposition of a smooth curve, including empty curves; the unit does not state the component theorem."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic permanence of properness for the clopen components, so the connected-curve theorem applies."
+   },
+   {
+    "node": "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "why": "Existence of the module injective resolution used only to assemble coherent cohomology over a finite clopen cover."
+   },
+   {
+    "node": "lem-sc-ringed-space-restrict-injective-resolution",
+    "why": "The resolution restricts to an injective resolution on each component; needed for the coherent h0/h1 assembly."
+   },
+   {
+    "node": "lem-sc-global-functions",
+    "why": "Connected proper smooth curve global functions compute each coherent degree-zero summand, as in the imported proof."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic criterion making the rank-one structure module coherent before applying the unit coherent-rank lemma."
+   },
+   {
+    "node": "lem-sc-primitive-root",
+    "why": "Existence of a primitive root required by the statement of the imported connected-curve cohomology theorem."
+   },
+   {
+    "node": "thm-sc-proper-cohomology",
+    "why": "The connected-curve calculation supplies the cohomology groups of each component, as in the imported proof."
+   },
+   {
+    "node": "lemma-constructible-pullback-constant",
+    "why": "Generic constant-sheaf restriction, needed to identify the coefficients in the clopen cohomology assembly."
+   },
+   {
+    "node": "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+    "why": "Generic finite clopen assembly for etale cohomology; no unit lemma states this product formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-sbc-smooth-curve-points-decomposition",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sc-ringed-space-restrict-injective-resolution",
+  "lem-sc-global-functions",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-sc-primitive-root",
+  "thm-sc-proper-cohomology",
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-finite-coproduct-cohomology-assembly"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-84096bea4",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-84096bea4 (reviewer sub-agent of L); spot-checked: Reviewed item, all nine steps, 23 dependency statements, unit/chapter route, master blueprint, and cited Stacks sources. Base-change morphism, small étale coefficient category, hypotheses, edge cases, constructibility, and cardinality calculations check out. No new nodes or repairs required. Full review: review.md."
+ }
 }
