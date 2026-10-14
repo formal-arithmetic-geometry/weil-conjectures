@@ -14723,4 +14723,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:52 L: merged deliver/M3/Sheaf.AlgebraicGeometry.SchemeTensorHomUncurrySummandNaturality (stage 3; reviewer PASS; after a return; landing 20261014T075200-L-3630614 (interface); batch 20261014T075159; modules 1; new nodes 0; change records: coord/changes/scheme-uncurry-local-transparency.md)
 - 07:55 L: merged deliver/XR916f3f6fae119923/Sheaf.Paper.CechCupSignedAxisPairing (stage 3; reviewer PASS; first push; landing 20261014T075511-L-3666558 (proof); batch 20261014T075509; modules 1; new nodes 1; change records: coord/changes/cech-cup-signed-axis-restoration-M2.md)
 - 07:55 L: merged deliver/G2/Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuity (stage 3; reviewer PASS; first push; landing 20261014T075511-L-3666753 (interface); batch 20261014T075509; modules 4; new nodes 3; change records: coord/changes/perfect-overlap-hom-continuity-data.md)
-- 07:55 L: merged deliver/V4/Sheaf.AlgebraicGeometry.PicardModuleCechExternalPairing (stage 3; reviewer PASS; after a return; landing 20261014T075512-L-3666925 (interface); batch 20261014T075509; modules 2; new nodes 2; change records: coord/changes/picard-module-cech-external-pairing-restore.md)
+
+- 15:58 L: batch 20261014T075509 dependency take-out
