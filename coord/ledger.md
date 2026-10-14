@@ -14546,3 +14546,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:45 L: merged deliver/R1/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore (stage 3; reviewer PASS; first push; landing 20261014T044558-L-1452833 (proof); batch 20261014T044551; modules 1; new nodes 0)
 - 04:45 L: merged deliver/T4/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (stage 3; reviewer PASS; after a return; landing 20261014T044558-L-1452948 (proof); batch 20261014T044551; modules 1; new nodes 0)
 - 04:47 L: returned deliver/M3/Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitHomotopyFactorization (reviewer RETURN: (reviewer X-6feb6, head 6feb68ee3) B2/B3: Both new DAG statements must define S independently and cite their definition )
+- 04:51 L: returned deliver/D4/Sheaf.Topology.RingedModuleSkyscraper (reviewer RETURN: (reviewer X-ee0b9, head ee0b9e946) F/6: In dag/nodes/sec-picard-framework/def-pc-ringed-module-skyscraper.json, replace )
