@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-affine-coordinate-derived-comparison",
+ "kind": "statement",
+ "title": "Natural derived affine comparison on all K-flat labelled models",
+ "statement": "For a commuting coordinate square [def-pc-affine-coordinate-comparison-data] and a K-flat module complex M, invert the fixed derived-pullback counit [lem-pc-perfect-hom-cochain-counit] on the concrete chart model [lem-pc-affine-coordinate-module-models] and compose it with localization of the inverse underived comparison [lem-pc-affine-coordinate-tensor-comparison]. Conjugate by the supplied chart model isomorphisms to obtain H_b(EφM)≅Lp*(H_aM). This is natural for every morphism between K-flat complexes, including all morphisms between the two Boolean-labelled models. Consequently these components define a simultaneous AffineCoordinateComparisonFamily.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Tag 08DW(2) natural affine comparison, with Tag 06Y1 K-flatness and Tag 0D5S fixed derived counits."
+ },
+ "stmt_deps": [
+  "def-pc-affine-coordinate-comparison-data",
+  "lem-pc-affine-coordinate-module-models",
+  "lem-pc-perfect-hom-cochain-counit",
+  "lem-pc-affine-coordinate-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Concrete coordinate models are K-flat, so the fixed counit is invertible. Construct the isomorphism by composing the localized inverse homotopy comparison and the inverse counit; conjugate by the supplied chart model isomorphisms.",
+   "uses": [
+    "lem-pc-affine-coordinate-module-models",
+    "lem-pc-perfect-hom-cochain-counit",
+    "lem-pc-affine-coordinate-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply inverseCounitModelNaturality and conjugateComparisonNaturality to prove naturality between any two K-flat models. Restrict to the full induced category on the Boolean labels, supplying the relevant K-flat proof by cases on each label. This preserves arbitrary cross morphisms.",
+   "uses": [
+    "lem-pc-counit-comparison-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-coordinate-module-models",
+  "lem-pc-perfect-hom-cochain-counit",
+  "lem-pc-affine-coordinate-tensor-comparison",
+  "lem-pc-counit-comparison-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Tag 08DW(2) natural affine comparison, with Tag 06Y1 K-flatness and Tag 0D5S fixed derived counits."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural affine derived pullback of K-flat module complexes compatible with scalar extension composition",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, KaehlerDifferential.tensorKaehlerEquiv_left_inv, Module.Flat.isBaseChange",
+   "date": "2026-10-14",
+   "verdict": "No complete affine-coordinate coherence theorem. Relevant adjunction and termwise functor APIs used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-14",
+   "verdict": "No complete affine-coordinate coherence theorem. Relevant adjunction and termwise functor APIs used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*comp|mapHomologicalComplexCompIso",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+   "date": "2026-10-14",
+   "verdict": "No complete affine-coordinate coherence theorem. Relevant adjunction and termwise functor APIs used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of natural affine tilde scalar extension comparisons with composition and the counit of derived pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "Unavailable; no result evaluated. Other searches and direct source checks used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineCoordinateComparisonCoherence",
+  "date": "2026-10-15",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 08DW(2) natural affine comparison, with Tag 06Y1 K-flatness and Tag 0D5S fixed derived counits.",
+   "via": [
+    "lem-pc-affine-coordinate-comparison-coherence",
+    "lem-pc-affine-model-coherent-object-comparisons",
+    "lem-pc-affine-model-comparison-of-bottom-models",
+    "lem-pc-affine-base-change-model-isos-core",
+    "lem-pc-affine-base-change-model-isos-of-scheme-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineCoordinateDerivedComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCoordinateDerivedComparison.lean",
+  "declaration": "AlgebraicGeometry.affineCoordinateChartObjectComparison_naturality",
+  "declarations": [
+   "AlgebraicGeometry.affineCoordinateObjectDerivedComparison",
+   "AlgebraicGeometry.affineCoordinateObjectDerivedComparison_naturality",
+   "AlgebraicGeometry.affineCoordinateChartObjectComparison",
+   "AlgebraicGeometry.affineCoordinateChartObjectComparison_naturality",
+   "AlgebraicGeometry.affineCoordinateDerivedComparison"
+  ],
+  "statement": "theorem affineCoordinateChartObjectComparison_naturality (a b : AffineComparisonCoordinate.{u, w}) (φ : a.A →+* b.A) (p : b.X ⟶ a.X) (hp : b.σ.hom ≫ p = Spec.map (CommRingCat.ofHom φ) ≫ a.σ.hom) (M N : CochainComplex (ModuleCat.{u} a.A) ℤ) (hM : AffineComparisonKFlat a.A M) (hN : AffineComparisonKFlat a.A N) (f : M ⟶ N) : ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ) ⋙ b.H).map f ≫ (affineCoordinateChartObjectComparison a b φ p hp N hN).hom = (affineCoordinateChartObjectComparison a b φ p hp M hM).hom ≫ (a.H ⋙ derivedPullback p).map f",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-852cd",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T191827-L-824617",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-852cd",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T191827-L-824617",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded node statements and proof route; all modules and the direct importer compile cleanly, with no mechanical findings or forbidden declarations."
+ }
+}

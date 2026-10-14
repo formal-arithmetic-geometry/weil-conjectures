@@ -1,0 +1,119 @@
+{
+ "id": "lem-pc-affine-coordinate-comparison-family-base",
+ "kind": "statement",
+ "title": "The canonical two-label family evaluates to the chart comparisons",
+ "statement": "There exists a simultaneous AffineCoordinateComparisonFamily [def-pc-affine-coordinate-comparison-data] whose component at either Boolean label is the chart object comparison constructed in [lem-pc-affine-coordinate-derived-comparison] at the corresponding complex. This is an explicit construction, natural on the full induced category including cross morphisms. The equality of components is definitional; no composition law is assumed here.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Tag 08DW(2) natural affine comparison restricted to two supplied models."
+ },
+ "stmt_deps": [
+  "def-pc-affine-coordinate-comparison-data",
+  "lem-pc-affine-coordinate-derived-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use affineCoordinateDerivedComparison as the family. Its components are defined by the stated chart object comparisons. After introducing the coordinate square, models, their K-flatness proofs, and the label, reflexivity proves the component equality.",
+   "uses": [
+    "lem-pc-affine-coordinate-derived-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-coordinate-derived-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Tag 08DW(2) natural affine comparison restricted to two supplied models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural affine derived pullback of K-flat module complexes compatible with scalar extension composition",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, KaehlerDifferential.tensorKaehlerEquiv_left_inv, Module.Flat.isBaseChange",
+   "date": "2026-10-14",
+   "verdict": "No complete affine-coordinate coherence theorem. Relevant adjunction and termwise functor APIs used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-14",
+   "verdict": "No complete affine-coordinate coherence theorem. Relevant adjunction and termwise functor APIs used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*comp|mapHomologicalComplexCompIso",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+   "date": "2026-10-14",
+   "verdict": "No complete affine-coordinate coherence theorem. Relevant adjunction and termwise functor APIs used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of natural affine tilde scalar extension comparisons with composition and the counit of derived pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "Unavailable; no result evaluated. Other searches and direct source checks used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineCoordinateComparisonCoherence",
+  "date": "2026-10-15",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 08DW(2) natural affine comparison restricted to two supplied models.",
+   "via": [
+    "lem-pc-affine-coordinate-comparison-coherence",
+    "lem-pc-affine-model-coherent-object-comparisons",
+    "lem-pc-affine-model-comparison-of-bottom-models",
+    "lem-pc-affine-base-change-model-isos-core",
+    "lem-pc-affine-base-change-model-isos-of-scheme-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineCoordinateComparisonFamilyBase",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCoordinateComparisonFamilyBase.lean",
+  "declaration": "AlgebraicGeometry.exists_affineCoordinateComparisonFamilyBase",
+  "declarations": [
+   "AlgebraicGeometry.exists_affineCoordinateComparisonFamilyBase"
+  ],
+  "statement": "theorem exists_affineCoordinateComparisonFamilyBase : ∃ δ : AffineCoordinateComparisonFamily.{u, w}, ∀ (a b : AffineComparisonCoordinate.{u, w}) (φ : a.A →+* b.A) (p : b.X ⟶ a.X) (hp : b.σ.hom ≫ p = Spec.map (CommRingCat.ofHom φ) ≫ a.σ.hom) (M N : CochainComplex (ModuleCat.{u} a.A) ℤ) (hM : AffineComparisonKFlat a.A M) (hN : AffineComparisonKFlat a.A N) (j : Bool), (δ a b φ p hp M N hM hN).app j = affineCoordinateChartObjectComparison a b φ p hp (cond j M N) (by cases j <;> assumption)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-852cd",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T191827-L-824617",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-852cd",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T191827-L-824617",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded node statements and proof route; all modules and the direct importer compile cleanly, with no mechanical findings or forbidden declarations."
+ }
+}

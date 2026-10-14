@@ -17,40 +17,33 @@
  ],
  "proof": [
   {
-   "text": "Fix the derived-pullback counits used by perfectHomComposition. On a K-flat tilde complex the original counit is invertible; uniqueness of left-derived functors transfers invertibility to this fixed counit. Combine its inverse with the natural tilde/scalar-extension isomorphism. For each affine coordinate, the pushforward equivalence has inverse tensor pullback. Localize it and use the specified hd and hH to transport the natural comparison to the supplied localized tilde functor. Restrict this construction to the full induced category on the two labelled models, retaining cross morphisms.",
+   "text": "Construct the canonical natural family of chart object comparisons on the full category of the two labelled K-flat models. Its two components are explicitly the chart object comparisons.",
    "uses": [
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-kflat-extension-of-scalars",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-affine-square-kflat-model-iso"
+    "lem-pc-affine-coordinate-comparison-family-base"
    ],
    "elementary": false
   },
   {
-   "text": "For composable squares, scalar extension preserves K-flatness. The fixed composition comparison is characterized by the composite counit equation, so successive comparisons agree with the direct comparison on these models. The underived tilde comparison respects scalar-extension reassociation: on pure tensors both routes send c tensor (b tensor m) to cb tensor m, and the pinned adjunction identifies this with ModuleCat.extendScalarsComp. Transport through each coordinate equivalence; adjacent unit/counit factors and hH factors cancel by naturality. The equalities of ring and scheme composites give the displayed eqToIso factors. Evaluate at both labels to obtain the two equations.",
+   "text": "Apply the one-model chart cocycle first to M and then to N. Rewrite the family components at true and false by their defining equalities and simplify cond. This gives the two required composition equations without changing the family or any supplied chart data.",
    "uses": [
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-kflat-extension-of-scalars",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-affine-coordinate-comparison-chart-cocycle"
    ],
    "elementary": false
   },
   {
-   "text": "The proved transport wrapper expands functoriality of mapIso and the supplied projection triangle. Naturality of the fixed composition isomorphism moves any bottom identification through it. Substitute the affine-family composition equation at each label; this yields AffineComparisonTransportTriangle. This is generic categorical algebra and introduces no new hypothesis or hole.",
+   "text": "The existing transport wrapper expands mapIso functoriality and the projection triangle. Naturality of the fixed composition isomorphism moves each bottom identification through it. Apply the two just-proved component equations to obtain AffineComparisonTransportTriangle; this original proof is retained.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-pc-kflat-extension-of-scalars",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-pc-affine-square-kflat-model-iso"
+  "lem-pc-affine-coordinate-comparison-family-base",
+  "lem-pc-affine-coordinate-comparison-chart-cocycle"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08DW",
-  "place": "Natural affine comparison transported through coordinate equivalences, with the composition equation made explicit using the fixed counits of Tag 0D5S."
+  "place": "T4: canonical global-sections adjunction mates, degreewise homotopy coherence, and the fixed derived counit composition equation; all new helper modules are fully proved."
  },
  "mathlib_searches": [
   {
@@ -112,9 +105,6 @@
   "file": "lean/Sheaf/AlgebraicGeometry/AffineCoordinateComparisonCoherence.lean",
   "declaration": "AlgebraicGeometry.exists_affineCoordinateComparisonFamily",
   "declarations": [
-   "AlgebraicGeometry.AffineComparisonCoordinate",
-   "AlgebraicGeometry.AffineComparisonKFlat",
-   "AlgebraicGeometry.AffineCoordinateComparisonFamily",
    "AlgebraicGeometry.AffineComparisonTransportTriangle",
    "AlgebraicGeometry.exists_affineCoordinateComparisonFamily",
    "AlgebraicGeometry.exists_affineCoordinateComparisonTransportFamily"
@@ -137,11 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-ff028",
-  "group": "U2",
+  "reviewer": "X-852cd",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261014T084702-L-89554",
+  "landing": "20261014T191827-L-824617",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures, constructions and remaining obligation with all three node records, source arguments, change record and report; verified compilation and axioms."
+  "note": "independent Codex review: Delivered files match the recorded node statements and proof route; all modules and the direct importer compile cleanly, with no mechanical findings or forbidden declarations."
  }
 }

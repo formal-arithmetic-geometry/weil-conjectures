@@ -5,16 +5,9 @@ Authors: SHEAF group U2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectHomTransport
-public import Mathlib.AlgebraicGeometry.Modules.Tilde
-public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
-public import Mathlib.Algebra.Homology.BifunctorShift
-public import Mathlib.CategoryTheory.InducedCategory
-public import Sheaf.Algebra.Homology.KFlatModuleBaseChange
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.AlgebraicGeometry.AffineSquareKFlatModelIso
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+public import Sheaf.AlgebraicGeometry.AffineCoordinateComparisonData
+import Sheaf.AlgebraicGeometry.AffineCoordinateComparisonFamilyBase
+import Sheaf.AlgebraicGeometry.AffineCoordinateComparisonChartCocycle
 
 /-! # Composition of affine-coordinate comparisons
 Source: Stacks Project, Tags 08DW, 06Y1 and 0D5S.
@@ -24,54 +17,12 @@ Source: Stacks Project, Tags 08DW, 06Y1 and 0D5S.
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
+set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
-
-/-- An affine coordinate and its specified localized tilde functor. All data are supplied.
-Source: the affine-coordinate square in Stacks, Tag 08DW(2).
-(blueprint: lem-pc-affine-coordinate-comparison-coherence). -/
-structure AffineComparisonCoordinate where
-  A : CommRingCat.{u}
-  X : Scheme.{u}
-  σ : Spec A ≅ X
-  d : schemeDerivedCategory (Spec A) ≌ schemeDerivedCategory X
-  hd : DerivedCategory.Q ⋙ d.functor ≅
-    (@Functor.mapHomologicalComplex ℤ
-      (SheafOfModules.{u} (moduleRings (Spec A).toRingedSpace))
-      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) _ _ _ _
-      (SheafOfModules.pushforward σ.hom.toRingCatSheafHom)
-      ⟨fun _ _ ↦ rfl⟩ (.up ℤ)) ⋙ DerivedCategory.Q
-  H : CochainComplex (ModuleCat.{u} A) ℤ ⥤ schemeDerivedCategory X
-  hH : H ≅
-    (@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A)
-      (SheafOfModules.{u} (moduleRings (Spec A).toRingedSpace)) _ _ _ _
-      (@id (ModuleCat.{u} A ⥤ SheafOfModules.{u}
-        (moduleRings (Spec A).toRingedSpace)) (tilde.functor A))
-      ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)) ⋙ DerivedCategory.Q ⋙ d.functor
-
-/-- The acyclic-tensor criterion for a supplied model; no model is chosen.
-Source: Stacks Project, Tag 06Y1.
-(blueprint: lem-pc-affine-coordinate-comparison-coherence). -/
-abbrev AffineComparisonKFlat (A : CommRingCat.{u})
-    (M : CochainComplex (ModuleCat.{u} A) ℤ) : Prop :=
-  ∀ L : CochainComplex (ModuleCat.{u} A) ℤ, L.Acyclic →
-    (CochainComplex.mapBifunctor L M
-      (MonoidalCategory.curriedTensor (ModuleCat.{u} A))).Acyclic
-
-/-- Comparison on the full category of two labelled models, including cross morphisms.
-Source: Stacks Project, Tag 08DW(2), natural affine comparison.
-(blueprint: lem-pc-affine-coordinate-comparison-coherence). -/
-abbrev AffineCoordinateComparisonFamily : Type _ :=
-  ∀ (a b : AffineComparisonCoordinate.{u, w}) (φ : a.A →+* b.A) (p : b.X ⟶ a.X),
-    b.σ.hom ≫ p = Spec.map (CommRingCat.ofHom φ) ≫ a.σ.hom →
-    ∀ (M N : CochainComplex (ModuleCat.{u} a.A) ℤ),
-      AffineComparisonKFlat a.A M → AffineComparisonKFlat a.A N →
-      (inducedFunctor (fun q : Bool ↦ cond q M N) ⋙
-        (ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ) ⋙ b.H ≅
-      inducedFunctor (fun q : Bool ↦ cond q M N) ⋙ a.H ⋙ derivedPullback p)
 
 /-- Naturality form of one object triangle: propagation of any supplied identification.
 Source: Stacks Project, Tag 0D5S, and naturality of the composition comparison.
@@ -125,10 +76,12 @@ restrict to the full induced category of the two labels. For a composable pair,
 scalar extension preserves K-flatness by Tag 06Y1, so both successive counits
 are invertible. The defining counit equation of perfectHomComposition identifies
 successive derived comparisons with the direct one. The underived equation is
-tensor reassociation: on pure tensors it sends c tensor (b tensor m) to cb tensor m.
-It agrees with ModuleCat.extendScalarsComp by the pinned extension/restriction
-adjunction. Transport through the coordinate equivalences; their adjacent unit
-and counit factors cancel, and naturality cancels hH and its inverse. Equality
+proved by taking adjunction mates: coordinate global-sections comparisons are
+identity maps on underlying sections and compose strictly. Pasting their mates
+identifies the scalar factor with ModuleCat.extendScalarsComp and the tensor
+factor with the pinned pushforward mate. Transport through the coordinate
+equivalences; their adjacent unit and counit factors cancel, and naturality
+cancels hH and its inverse. Equality
 of the composite ring and scheme maps gives the two eqToIso factors below.
 Thus the iso equation holds at each label, retaining every cross morphism.
 There is no boundedness or flatness assumption; coincident labels, identity maps,
@@ -175,7 +128,19 @@ theorem exists_affineCoordinateComparisonFamily :
           (perfectHomComposition q p).app (a.H.obj N) ≪≫
           (eqToIso (congrArg (fun t ↦ derivedPullback t) hr)).app
             (a.H.obj N) =
-          (δ a c χ r hs M N hM hN).app false) := by sorry
+          (δ a c χ r hs M N hM hN).app false) := by
+  obtain ⟨δ, hδ⟩ := exists_affineCoordinateComparisonFamilyBase.{u, w}
+  refine ⟨δ, ?_⟩
+  intro a b c φ ψ χ hc p q r hr hp hq hs M N hM hN
+  constructor
+  · simpa only [hδ a b φ p hp M N hM hN true,
+      hδ b c ψ q hq _ _ _ _ true,
+      hδ a c χ r hs M N hM hN true, cond_true] using
+      affineCoordinateChartObjectComparison_cocycle a b c φ ψ χ hc p q r hr hp hq hs M hM
+  · simpa only [hδ a b φ p hp M N hM hN false,
+      hδ b c ψ q hq _ _ _ _ false,
+      hδ a c χ r hs M N hM hN false, cond_false] using
+      affineCoordinateChartObjectComparison_cocycle a b c φ ψ χ hc p q r hr hp hq hs N hN
 
 
 /-- Affine-coordinate comparisons with the naturality form of their composition law.

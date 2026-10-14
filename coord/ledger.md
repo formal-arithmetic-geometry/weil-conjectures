@@ -14930,3 +14930,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 03:07 L: batch 20261014T185242 dependency take-out
 - 19:10 L: returned deliver/C2/Sheaf.AlgebraicGeometry.ProjectionFormulaFiniteObjectwise (reviewer RETURN: (reviewer X-346d1, head 346d132d3) 7: In coord/reports/C2/Sheaf.AlgebraicGeometry.ProjectionFormulaFiniteObjectwise.md, )
+- 19:18 L: merged deliver/T4/Sheaf.AlgebraicGeometry.AffineCoordinateComparisonCoherence (stage 3; reviewer PASS; first push; landing 20261014T191827-L-824617 (interface); batch 20261014T191824; modules 10; new nodes 9; change records: coord/changes/T4-affine-coordinate-comparison-data.md)

@@ -1,0 +1,147 @@
+{
+ "id": "lem-pc-perfect-hom-cochain-counit",
+ "kind": "statement",
+ "title": "Invertibility and the composition equation of the fixed derived-pullback counits",
+ "statement": "Use exactly the additive structures and left-derived counits selected in exists_derivedPullbackComposition, hence the counits defining perfectHomComposition [lem-pc-perfect-hom-transport]. The fixed counit is invertible at the quotient of each K-flat module-sheaf complex [def-pc-kflat-complex]. For composable maps f,g and a homotopy complex K, perfectHomComposition(f,g) followed by the direct counit equals Lf applied to the g counit, followed by the f counit on the g tensor-pullback model, followed by localization of the underived composition mate. The same underived mate lifts degreewise to complexes and homotopy categories. Derived pullback and its universal property are those of [def-pc-derived-pullback].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Tag 0D5S composition of derived pullbacks, with Tag 06YJ K-flat computation and the fixed perfectHomComposition construction."
+ },
+ "stmt_deps": [
+  "lem-pc-perfect-hom-transport",
+  "def-pc-derived-pullback",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Expose the precise witnesses already used by perfectHomComposition; additive structures are propositions and the counits are specified by the left-derived universal property. This introduces no arbitrary model choice.",
+   "uses": [
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extract the original K-flat counit invertibility theorem from derived pullback. Both the original and the fixed counits give the same left-derived functor. The universal comparison between them is invertible, and its factorization equation transfers invertibility at K-flat complexes.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the defining leftDerivedLift factorization equation of perfectHomComposition at K. Remove the identity components of associators; the three remaining factors are exactly the claimed counit equation. Lift the fixed underived mate to complexes and homotopy by mapHomologicalComplexCompIso and mapHomotopyCategoryCompIso.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-hom-transport",
+  "def-pc-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Tag 0D5S composition of derived pullbacks, with Tag 06YJ K-flat computation and the fixed perfectHomComposition construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural affine derived pullback of K-flat module complexes compatible with scalar extension composition",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, KaehlerDifferential.tensorKaehlerEquiv_left_inv, Module.Flat.isBaseChange",
+   "date": "2026-10-14",
+   "verdict": "No complete affine-coordinate coherence theorem. Relevant adjunction and termwise functor APIs used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-14",
+   "verdict": "No complete affine-coordinate coherence theorem. Relevant adjunction and termwise functor APIs used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*comp|mapHomologicalComplexCompIso",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+   "date": "2026-10-14",
+   "verdict": "No complete affine-coordinate coherence theorem. Relevant adjunction and termwise functor APIs used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of natural affine tilde scalar extension comparisons with composition and the counit of derived pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "Unavailable; no result evaluated. Other searches and direct source checks used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineCoordinateComparisonCoherence",
+  "date": "2026-10-15",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 0D5S composition of derived pullbacks, with Tag 06YJ K-flat computation and the fixed perfectHomComposition construction.",
+   "via": [
+    "lem-pc-affine-coordinate-comparison-coherence",
+    "lem-pc-affine-model-coherent-object-comparisons",
+    "lem-pc-affine-model-comparison-of-bottom-models",
+    "lem-pc-affine-base-change-model-isos-core",
+    "lem-pc-affine-base-change-model-isos-of-scheme-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomCochainCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomCochainCounit.lean",
+  "declaration": "AlgebraicGeometry.perfectHomTensorCounit_comp",
+  "declarations": [
+   "AlgebraicGeometry.perfectHomTensorAdditive",
+   "AlgebraicGeometry.perfectHomTensorComplex",
+   "AlgebraicGeometry.perfectHomTensorCounit",
+   "AlgebraicGeometry.perfectHomTensorCounit_isIso",
+   "AlgebraicGeometry.perfectHomTensorHomotopy",
+   "AlgebraicGeometry.perfectHomTensorComp",
+   "AlgebraicGeometry.perfectHomTensorHomotopyComp",
+   "AlgebraicGeometry.perfectHomTensorComplexComp",
+   "AlgebraicGeometry.perfectHomTensorHomotopy_map",
+   "AlgebraicGeometry.perfectHomTensorHomotopyComp_hom_app",
+   "AlgebraicGeometry.perfectHomTensorCounit_comp"
+  ],
+  "statement": "theorem perfectHomTensorCounit_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (K : HomotopyCategory (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (.up ℤ)) : (perfectHomComposition f g).hom.app (DerivedCategory.Qh.obj K) ≫ (perfectHomTensorCounit (f ≫ g)).app K = (derivedPullback f).map ((perfectHomTensorCounit g).app K) ≫ (perfectHomTensorCounit f).app ((perfectHomTensorHomotopy g).obj K) ≫ DerivedCategory.Qh.map ((perfectHomTensorHomotopyComp f g).hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-852cd",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T191827-L-824617",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-852cd",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T191827-L-824617",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded node statements and proof route; all modules and the direct importer compile cleanly, with no mechanical findings or forbidden declarations."
+ }
+}

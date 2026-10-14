@@ -1,0 +1,131 @@
+{
+ "id": "lem-pc-affine-coordinate-module-models",
+ "kind": "statement",
+ "title": "Concrete coordinate cochain models preserve K-flatness",
+ "statement": "For an affine coordinate a [def-pc-affine-coordinate-comparison-data], let CT_a be termwise tilde followed by termwise pushforward along a.σ.hom. Its localization is naturally isomorphic to the supplied a.H by a.hH and a.hd. Pushforward along a scheme isomorphism is an explicitly constructed equivalence with inverse pushforward along the inverse map. If M satisfies the acyclic-tensor K-flat criterion, CT_a(M) is K-flat as a cochain complex of module sheaves. The factored termwise chart agrees naturally with termwise application of the composite module functor.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06Y1",
+  "place": "Tag 06Y1 preservation under scalar extension, Tag 08DW affine tilde construction; coordinate transport along an isomorphism."
+ },
+ "stmt_deps": [
+  "def-pc-affine-coordinate-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the chart functor and the pushforward equivalence using pushforwardComp, pushforwardCongr, pushforwardId, and the supplied scheme isomorphism. Compose hH with hd for the localized model isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Tilde preserves the supplied K-flat criterion; identify chart pushforward with tensor pullback along the inverse scheme isomorphism by uniqueness of left adjoints. Pullback preserves K-flatness, and invariance under the resulting termwise isomorphism proves the claim.",
+   "uses": [
+    "lem-pc-affine-tilde-kflat",
+    "lem-pc-kflat-pullback-preservation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-tilde-kflat",
+  "lem-pc-kflat-pullback-preservation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/06Y1",
+  "place": "Tag 06Y1 preservation under scalar extension, Tag 08DW affine tilde construction; coordinate transport along an isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural affine derived pullback of K-flat module complexes compatible with scalar extension composition",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, KaehlerDifferential.tensorKaehlerEquiv_left_inv, Module.Flat.isBaseChange",
+   "date": "2026-10-14",
+   "verdict": "No complete affine-coordinate coherence theorem. Relevant adjunction and termwise functor APIs used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-14",
+   "verdict": "No complete affine-coordinate coherence theorem. Relevant adjunction and termwise functor APIs used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*comp|mapHomologicalComplexCompIso",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+   "date": "2026-10-14",
+   "verdict": "No complete affine-coordinate coherence theorem. Relevant adjunction and termwise functor APIs used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of natural affine tilde scalar extension comparisons with composition and the counit of derived pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "Unavailable; no result evaluated. Other searches and direct source checks used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineCoordinateComparisonCoherence",
+  "date": "2026-10-15",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 06Y1 preservation under scalar extension, Tag 08DW affine tilde construction; coordinate transport along an isomorphism.",
+   "via": [
+    "lem-pc-affine-coordinate-comparison-coherence",
+    "lem-pc-affine-model-coherent-object-comparisons",
+    "lem-pc-affine-model-comparison-of-bottom-models",
+    "lem-pc-affine-base-change-model-isos-core",
+    "lem-pc-affine-base-change-model-isos-of-scheme-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineCoordinateModuleModels",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCoordinateModuleModels.lean",
+  "declaration": "AlgebraicGeometry.affineCoordinateComplex_isKFlat",
+  "declarations": [
+   "AlgebraicGeometry.affineCoordinateModules",
+   "AlgebraicGeometry.affineCoordinateComplex",
+   "AlgebraicGeometry.affineCoordinateModules_preservesZero",
+   "AlgebraicGeometry.affineCoordinateComplexFactorIso",
+   "AlgebraicGeometry.affineCoordinateModelIso",
+   "AlgebraicGeometry.affineCoordinateModuleEquivalence",
+   "AlgebraicGeometry.affineCoordinateComplex_isKFlat"
+  ],
+  "statement": "theorem affineCoordinateComplex_isKFlat (a : AffineComparisonCoordinate.{u, w}) (M : CochainComplex (ModuleCat.{u} a.A) ℤ) (hM : AffineComparisonKFlat a.A M) : CochainComplex.IsKFlat (R := a.X.sheaf) ((affineCoordinateComplex a).obj M)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-852cd",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T191827-L-824617",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-852cd",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T191827-L-824617",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded node statements and proof route; all modules and the direct importer compile cleanly, with no mechanical findings or forbidden declarations."
+ }
+}

@@ -1,0 +1,147 @@
+{
+ "id": "lem-pc-affine-coordinate-tensor-comparison",
+ "kind": "statement",
+ "title": "Canonical affine scalar/tensor comparison and its composition law",
+ "statement": "For affine coordinates and a commuting square as in [def-pc-affine-coordinate-comparison-data], define the module comparison as the mate of the global-sections/pushforward comparison, using tilde adjunction, coordinate pushforward equivalence [lem-pc-affine-coordinate-module-models], scalar extension/restriction adjunction, and the fixed tensor/pushforward adjunctions [lem-pc-perfect-hom-cochain-counit]. For composable commuting squares, these comparisons compose with exactly ModuleCat.extendScalarsComp and the fixed underived tensor-pullback composition mate. Termwise lifting and passage to homotopy preserve the same composition identity. The acyclic module model conventions are those of [def-pc-base-derived-tensor-cohomology-model].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Tag 08DW(2) natural affine comparison; Tag 01I9 affine tilde/global-sections adjunction; Tag 0D5S compatibility with the fixed composition mates."
+ },
+ "stmt_deps": [
+  "def-pc-affine-coordinate-comparison-data",
+  "lem-pc-affine-coordinate-module-models",
+  "lem-pc-perfect-hom-cochain-counit",
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "proof": [
+  {
+   "text": "Construct coordinate global sections and its right-adjoint square comparison by pushforward composition and pushforwardSpecMapCompΓIso. On a global section each factor is the identity; therefore the right-adjoint comparisons compose.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take the adjunction mates of these canonical comparisons. Apply the adjunction-square pasting theorem; the scalar composition map is exactly the mate of restrictScalarsComp and the tensor map is exactly the fixed mate of pushforwardComp. Evaluate at each module to get the module-level equation.",
+   "uses": [
+    "lem-pc-adjunction-square-composition",
+    "lem-pc-affine-coordinate-module-models",
+    "lem-pc-perfect-hom-cochain-counit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Factor termwise application through the composite chart functor, so degreewise components reduce to the module comparison without unfolding the full mate construction. Apply the module equation degreewise, then map it through the homotopy quotient. The mapHomotopyCategoryCompIso factors identify the resulting tensor comparison with the fixed one.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-adjunction-square-composition",
+  "lem-pc-affine-coordinate-module-models",
+  "lem-pc-perfect-hom-cochain-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Tag 08DW(2) natural affine comparison; Tag 01I9 affine tilde/global-sections adjunction; Tag 0D5S compatibility with the fixed composition mates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural affine derived pullback of K-flat module complexes compatible with scalar extension composition",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, KaehlerDifferential.tensorKaehlerEquiv_left_inv, Module.Flat.isBaseChange",
+   "date": "2026-10-14",
+   "verdict": "No complete affine-coordinate coherence theorem. Relevant adjunction and termwise functor APIs used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-14",
+   "verdict": "No complete affine-coordinate coherence theorem. Relevant adjunction and termwise functor APIs used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*comp|mapHomologicalComplexCompIso",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+   "date": "2026-10-14",
+   "verdict": "No complete affine-coordinate coherence theorem. Relevant adjunction and termwise functor APIs used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of natural affine tilde scalar extension comparisons with composition and the counit of derived pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "Unavailable; no result evaluated. Other searches and direct source checks used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineCoordinateComparisonCoherence",
+  "date": "2026-10-15",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 08DW(2) natural affine comparison; Tag 01I9 affine tilde/global-sections adjunction; Tag 0D5S compatibility with the fixed composition mates.",
+   "via": [
+    "lem-pc-affine-coordinate-comparison-coherence",
+    "lem-pc-affine-model-coherent-object-comparisons",
+    "lem-pc-affine-model-comparison-of-bottom-models",
+    "lem-pc-affine-base-change-model-isos-core",
+    "lem-pc-affine-base-change-model-isos-of-scheme-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineCoordinateTensorComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCoordinateTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.affineCoordinateHomotopyComparison_comp",
+  "declarations": [
+   "AlgebraicGeometry.affineCoordinateGamma",
+   "AlgebraicGeometry.affineCoordinateAdjunction",
+   "AlgebraicGeometry.affineCoordinateGammaComparison",
+   "AlgebraicGeometry.affineCoordinateGammaComparison_comp",
+   "AlgebraicGeometry.affineCoordinateTensorComparison_comp",
+   "AlgebraicGeometry.affineCoordinateHomotopy",
+   "AlgebraicGeometry.affineCoordinateHomotopyIso",
+   "AlgebraicGeometry.affineCoordinateComplexComparison",
+   "AlgebraicGeometry.affineCoordinateComplexComparison_hom_f",
+   "AlgebraicGeometry.affineCoordinateHomotopy_map",
+   "AlgebraicGeometry.affineCoordinateHomotopyComparison",
+   "AlgebraicGeometry.affineCoordinateHomotopyComparison_hom_app",
+   "AlgebraicGeometry.affineCoordinateHomotopyComparison_comp"
+  ],
+  "statement": "theorem affineCoordinateHomotopyComparison_comp (a b c : AffineComparisonCoordinate.{u, w}) (φ : a.A →+* b.A) (ψ : b.A →+* c.A) (p : b.X ⟶ a.X) (q : c.X ⟶ b.X) (hp : b.σ.hom ≫ p = Spec.map (CommRingCat.ofHom φ) ≫ a.σ.hom) (hq : c.σ.hom ≫ q = Spec.map (CommRingCat.ofHom ψ) ≫ b.σ.hom) (hs : c.σ.hom ≫ (q ≫ p) = Spec.map (CommRingCat.ofHom (ψ.comp φ)) ≫ a.σ.hom) (M : CochainComplex (ModuleCat.{u} a.A) ℤ) : (perfectHomTensorHomotopy q).mapIso ((affineCoordinateHomotopyComparison a b φ p hp).app M) ≪≫ (affineCoordinateHomotopyComparison b c ψ q hq).app (((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M) = (perfectHomTensorHomotopyComp q p).app ((affineCoordinateHomotopy a).obj M) ≪≫ (affineCoordinateHomotopyComparison a c (ψ.comp φ) (q ≫ p) hs).app M ≪≫ (affineCoordinateHomotopy c).mapIso ((NatIso.mapHomologicalComplex (ModuleCat.extendScalarsComp φ ψ) (.up ℤ)).app M)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-852cd",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T191827-L-824617",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-852cd",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T191827-L-824617",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded node statements and proof route; all modules and the direct importer compile cleanly, with no mechanical findings or forbidden declarations."
+ }
+}
