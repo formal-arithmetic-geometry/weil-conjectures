@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-compact-flat-finite-subcomplex-diagrams",
+ "kind": "statement",
+ "title": "Finite compact-flat subcomplex diagrams",
+ "statement": "Let Y be a scheme and A its category of module sheaves [def-pc-cochain-complex-modules]. Let L_n be a bounded-above tower of cochain complexes, with degreewise split monic transitions l_n. Suppose every L_n^i is a coproduct of flat module sheaves [def-pc-flat-sheaf-modules] G_j, each coproduct-compact: every map from G_j to a small coproduct factors through a finite subcoproduct. There exist a small preorder I, a monotone stage map sigma:I→N, and a functor D:I→CoCh(A), with the following properties. I_n={j|sigma(j)≤n} is filtered and nonempty. For every n there is a specified cocone D|I_n→L_n which is a colimit, all of whose components are degreewise monic. For j∈I_n these cocones commute strictly with l_n. Every D(j) vanishes outside a finite interval of integer degrees. For every n the upper bounds of D(j), j∈I_n, have a common bound. Every D(j)^i is a finite coproduct of coproduct-compact flat sheaves, with the same finite-subcoproduct factorization property. No target telescope or bar complex is involved.",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatTelescopeBarEnlargement.lean",
+  "place": "the finite-subcomplex paragraph beginning “Fix generator decompositions in each term”."
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-quasi-iso-modules",
+  "def-sc-flat-telescope-stage-map"
+ ],
+ "proof": [
+  {
+   "text": "Proof. Fix the summand decompositions in every term of L_m. For each generator\nsummand, choose a finite support for its differential in the next degree. A finite\nset of summands in finitely many degrees can be enlarged to a finite subcomplex:\nadd those chosen supports, and repeat upwards. Boundedness above makes the\niteration terminate. The initial finite set bounds its nonzero degrees below.\nEach term of this subcomplex is a finite coproduct of the original compact flat\nsummands; its differential is the restriction determined by these inclusions.\n\nIndex by labelled pairs (m, a finite summand subcomplex of L_m). Order two pairs\nwith labels m ≤ m' when the iterated transition carries the earlier subcomplex\ninto the later one. Inclusion maps into L_m' are monic, so this factorization is\nunique, respects composition, and defines the diagram functor. The stage label\nis monotone. At stage n keep all labels at most n. A finite collection can be\ncarried to stage n and included in one finite subcomplex: compactness factors\nits finitely many generators through finite subcoproducts of L_n in each of its\nfinitely many degrees; close these supports under the differential. Thus the\nstage-n subdiagram is cofinal and the stage diagram is filtered. The zero\nsubcomplex at stage zero supplies nonemptiness, including the zero tower.\n\nThe stage-n subcomplexes have union L_n, because every summand lies in one of\nthem. A compatible family of maps out of these subcomplexes defines the unique\nmap out of L_n termwise, using the original coproduct summands. It commutes with\nthe differentials since every finite collection is contained in a subcomplex.\nThis proves the stated cochain-complex colimit universal property. Carry the\ncocones to later stages by the tower transitions to obtain strict compatibility.\nTheir components are monic: the finite summand inclusions are split monic and\nthe tower transitions are degreewise split monic. For stageBound, take the maximum\nof the upper bounds of L_0 through L_n. The finite-degree and finite-generator\nfields hold by construction, with the inherited compactness factorizations.\nAll these are existential witnesses; no definition selects an arbitrary object\nfrom an unproved existence theorem.",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "def-pc-flat-sheaf-modules",
+    "def-sc-flat-telescope-stage-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "def-sc-flat-telescope-stage-map"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P1",
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatTelescopeBarEnlargement.lean",
+  "place": "the finite-subcomplex paragraph beginning “Fix generator decompositions in each term”."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above split tower of complexes built from coproduct compact flat sheaves is the compatible filtered colimit of finite subcomplexes with finite compact flat terms",
+   "results": "8 hits: LightCondensed.isColimitLocallyConstantPresheaf, Condensed.isColimitLocallyConstantPresheaf, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, Condensed.hasExactColimitsOfShape, LightCondensed.isColimitLocallyConstantPresheafDiagram, Condensed.isColimitLocallyConstantPresheafDiagram, instHasColimitsOfShapeCondensedOfHasWeakSheafifyCompHausCoherentTopology, LightCondensed.fintypeCatAsCofanIsColimit",
+   "date": "2026-10-14",
+   "verdict": "No exact finite-subcomplex or relative bar-enlargement theorem; related constructions only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded above split tower of complexes built from coproduct compact flat sheaves is the compatible filtered colimit of finite subcomplexes with finite compact flat terms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsFiltered, CochainComplex",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "No exact finite-subcomplex or relative bar-enlargement theorem; related constructions only."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*subcomplex|subcomplex.*colimit",
+   "results": "18 hits: Mathlib/Topology/CWComplex/Classical/Subcomplex.lean, Mathlib/Topology/CWComplex/Classical/Subcomplex.lean, Mathlib/Topology/CWComplex/Classical/Subcomplex.lean, Mathlib/Topology/CWComplex/Classical/Subcomplex.lean, Mathlib/Topology/CWComplex/Classical/Subcomplex.lean, Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean, Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplicesColimit.lean, Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean",
+   "date": "2026-10-14",
+   "verdict": "No exact finite-subcomplex or relative bar-enlargement theorem; related constructions only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactFlatTelescopeBarEnlargement",
+  "date": "2026-10-14",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-piece and target-chain bar argument in the telescope comparison supporting finite duality. the finite-subcomplex paragraph beginning “Fix generator decompositions in each term”.",
+   "via": [
+    "lem-sc-compact-flat-telescope-bar-enlargement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompactFlatFiniteSubcomplexDiagrams",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactFlatFiniteSubcomplexDiagrams.lean",
+  "declaration": "AlgebraicGeometry.exists_compact_flat_finite_subcomplex_diagrams",
+  "statement": "theorem exists_compact_flat_finite_subcomplex_diagrams (Y : Scheme.{u})\n    (L : ℕ → CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (l : ∀ n : ℕ, L n ⟶ L (n + 1))\n    (hb : ∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((L n).X i))\n    (hsplit : ∀ (n : ℕ) (i : ℤ), IsSplitMono ((l n).f i))\n    (hgen :\n      ∀ (n : ℕ) (i : ℤ), ∃ (I : Type u)\n        (G : I → SheafOfModules.{u} (moduleRings Y.toRingedSpace)),\n        Nonempty ((L n).X i ≅ ∐ G) ∧\n        (∀ j : I, SheafOfModules.IsFlat (G j)) ∧\n        ∀ (j : I) (K : Type u)\n          (H : K → SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n          (f : G j ⟶ ∐ H),\n          ∃ (S : Finset K) (g : G j ⟶ ∐ (fun k : {k // k ∈ S} ↦ H k.1)),\n            g ≫ Sigma.desc (fun k : {k // k ∈ S} ↦ Sigma.ι H k.1) = f)\n :\n    Nonempty (CompactFlatFiniteSubcomplexDiagrams Y L l)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.compactFlatStageInclusion",
+   "AlgebraicGeometry.CompactFlatFiniteSubcomplexDiagrams",
+   "AlgebraicGeometry.exists_compact_flat_finite_subcomplex_diagrams"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261014T084701-L-89287",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261014T084701-L-89287",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
