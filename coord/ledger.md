@@ -14005,3 +14005,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:17 L: merged deliver/Q4/Sheaf.AlgebraicGeometry.AffineChartNormalizedSectionModels (stage 3; reviewer PASS; first push; landing 20261014T001730-L-2553958 (interface); batch 20261014T001711; modules 3; new nodes 2)
 - 00:17 L: merged deliver/Q4/Sheaf.AlgebraicGeometry.DerivedPullbackKFlatConeCounitNormalization (stage 3; reviewer PASS; first push; landing 20261014T001731-L-2554234 (interface); batch 20261014T001711; modules 2; new nodes 1)
 - 00:17 L: merged deliver/Q4/Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationPresentationData (stage 3; reviewer PASS; first push; landing 20261014T001731-L-2554345 (interface); batch 20261014T001711; modules 2; new nodes 1)
+- 00:17 L: merged deliver/R2/Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedCore (stage 3; reviewer PASS; first push; landing 20261014T001732-L-2554473 (interface); batch 20261014T001711; modules 3; new nodes 2)

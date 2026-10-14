@@ -1,6 +1,7 @@
 module
 public import Sheaf.AlgebraicGeometry.PerfectHomPushPullCocone
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
+import Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedMaps
 @[expose] public section
 universe u w
 open CategoryTheory CategoryTheory.Limits
@@ -31,6 +32,8 @@ theorem perfect_hom_open_restricted_core_exists
     Nonempty (PerfectHomPushPullData R c (B.ι ≫ s)
       ((schemeMVDerivedRestriction Y B).obj Q)
       (F ⋙ schemeMVDerivedRestriction Y B)
-      ((schemeMVDerivedRestriction Y B).mapCocone d)) := by sorry
+      ((schemeMVDerivedRestriction Y B).mapCocone d)) := by
+  obtain ⟨e⟩ := perfect_hom_open_restricted_equiv_fields_exists R c s B Q F d h
+  exact perfect_hom_open_restricted_maps_exists R c s B Q F d h hStage hLimit e
 end
 end AlgebraicGeometry
