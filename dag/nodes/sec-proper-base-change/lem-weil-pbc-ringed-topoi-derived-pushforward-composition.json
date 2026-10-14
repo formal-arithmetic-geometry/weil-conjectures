@@ -25,9 +25,137 @@
   "def-pur-kinjective-complex",
   "prop-pur-kinjective-resolutions-exist"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each of $h=f,g,gf$, the tensor-formula module pullback $h^*$ is left adjoint to the module direct image $h_*$, by [lem-weil-pbc-ringed-topoi-module-adjunction]. Both are additive (their maps preserve sums). Termwise application preserves shifts and the finite biproduct cone differential, so the induced functors on homotopy categories are exact. The cone-triangle description and localization of [def-weil-abstract-derived-category] then make $Qh_*$ exact into the target derived category. Thus [lem-weil-pbc-termwise-adjunction-homotopy] gives the adjunction on unbounded homotopy categories. The everywhere-defined $Lh^*$ and its K-flat comparison are supplied by [lem-weil-pbc-ringed-topoi-derived-pullback]. K-injective resolutions exist by the hypothesis and [prop-pur-kinjective-resolutions-exist]; apply [lem-weil-pbc-kinjective-total-derived] to $Qh_*$ on the homotopy category. Thus the right derived comparison $Qh_*I\\to Rh_*QI$ is invertible for every K-injective $I$. The existence hypotheses of [lem-pc-derived-adjoint-functors] are now satisfied, giving $Lh^*\\dashv Rh_*$. Choose the canonical adjunction of [lem-pc-pre-derived-adjoint-functors-general], whose formula on a fraction $t:P\\to M$, a resolution $s:K\\to I$, and $a:P\\to h_*I$ is the localized underived adjunct, preceded by the left-derived comparison and followed by $Q(s)^{-1}$. This fixes the adjunction, rather than selecting an arbitrary adjunction between the same functors.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-pc-derived-adjoint-functors",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, label lemma-adjoint; section-unbounded; derived.tex Tags 09T5 and 0FND"
+   }
+  },
+  {
+   "text": "Identify $(gf)_*$ with $g_*f_*$ on modules. The underlying abelian direct images agree, and the $C$-action on either side is induced by the same composite $f^{-1}g^{-1}C\\to f^{-1}B\\to A$, so the identification is linear and natural. Compose the two module adjunctions by [def-weil-pbc-composite-adjunction]. Take the inverse image of this identity under the conjugation bijection of [def-weil-pbc-adjunction-conjugate] to obtain the canonical isomorphism $\\theta:f^*g^*\\xrightarrow{\\sim}(gf)^*$. Write $c_h:h^*h_*\\to1$ for the underived module counits. By the definition of conjugation and the composite counit formula, $\\theta$ satisfies, for every $A$-module complex $I$, the identity $c_{gf,I}\\circ\\theta_{g_*f_*I}=c_{f,I}\\circ f^*(c_{g,f_*I})$. These equations hold termwise on complexes and in the homotopy category, since the adjunctions there are induced termwise.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8, label lemma-push-pull-composition-modules; the composite counit equation written out"
+   }
+  },
+  {
+   "text": "Let $M\\in D(C)$ and choose $p:P\\to M_0$ with $QM_0\\cong M$, $P$ K-flat with flat terms, by [lem-pc-kflat-resolution]. By [lem-weil-pbc-ringed-pullback-preserves-kflat], $g^*P$ is again K-flat with flat terms. The comparisons of [lem-weil-pbc-ringed-topoi-derived-pullback] therefore identify $Lf^*Lg^*QP$ with $Qf^*g^*P$ and $L(gf)^*QP$ with $Q(gf)^*P$. Compose these identifications with $Q\\theta_P$ to obtain $\\alpha_{QP}:Lf^*Lg^*QP\\xrightarrow{\\sim}L(gf)^*QP$. This is natural for all homotopy maps between K-flat complexes: each left-derived comparison is natural and so is $\\theta$. Each functor in this comparison inverts quasi-isomorphisms, so clause (2) of [lem-weil-pbc-localization-universal-property] descends the comparison through the localization of the K-flat subcategory. That localization is equivalent to $D(C)$ by [lem-weil-pbc-site-derived-tensor-descent]. Consequently it gives a canonical natural isomorphism $\\alpha:Lf^*Lg^*\\xrightarrow{\\sim}L(gf)^*$ on all of $D(C)$, independent of $p$. No assertion that arbitrary termwise pullback preserves quasi-isomorphisms is used.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, label lemma-derived-pullback-composition; K-flat localization and naturality made explicit"
+   }
+  },
+  {
+   "text": "The composite adjunction [def-weil-pbc-composite-adjunction] makes $Lf^*Lg^*$ left adjoint to $Rg_*Rf_*$. Conjugate $\\alpha:Lf^*Lg^*\\to L(gf)^*$ between this adjunction and $L(gf)^*\\dashv R(gf)_*$, using [def-weil-pbc-adjunction-conjugate]. Its conjugate is a canonical natural isomorphism $\\kappa:R(gf)_*\\to Rg_*Rf_*$. Explicitly, if $e_h$ denotes the canonical derived adjunction bijection in the direction from maps into $Rh_*$ to maps out of $Lh^*$, then $\\kappa$ is characterized by $e_f(e_g(\\kappa_K\\circ b))=e_{gf}(b)\\circ\\alpha_M$ for every $b:M\\to R(gf)_*K$. This is precisely the composite hom bijection and the conjugation formula; its inverse is the conjugate of $\\alpha^{-1}$.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, label lemma-derived-pushforward-composition; uniqueness of right adjoints as an explicit conjugation"
+   }
+  },
+  {
+   "text": "Fix a K-injective $A$-module complex $I$, and a quasi-isomorphism $j:f_*I\\to J$ with $J$ K-injective over $B$. Use the K-injective comparisons [lem-weil-pbc-kinjective-total-derived] to identify $R(gf)_*QI$ with $Qg_*f_*I$, $Rf_*QI$ with $Qf_*I$, and $Rg_*Rf_*QI$ with $Qg_*J$. To compare $\\kappa_{QI}$ with $Q(g_*j)$ it suffices to compare postcomposition on all maps into $Qg_*f_*I$. Indeed, equality for the identity map already gives equality of their components. For $M=QM_0$, write any such map as $b=Q(a)Q(t)^{-1}$, with $t:P\\to M_0$ a quasi-isomorphism and $a:P\\to g_*f_*I$, by [lem-pc-quasi-isomorphisms-multiplicative-system, lem-pc-right-fraction-representation]. Replace $P$ by a K-flat resolution with flat terms using [lem-pc-kflat-resolution]; composing both arrows with that resolution leaves the same fraction. Thus we may assume $P$ K-flat with flat terms, and $g^*P$ has those properties by [lem-weil-pbc-ringed-pullback-preserves-kflat].",
+   "uses": [
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-right-fraction-representation",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT, label lemma-acyclic (quasi-isomorphisms form a multiplicative system); categories.tex Tag 04VI, label lemma-morphisms-right-localization; K-flat refinement uses sites-cohomology.tex Tag 06YS"
+   }
+  },
+  {
+   "text": "Apply the fraction formula of [lem-pc-pre-derived-adjoint-functors-general] to the $g$-adjunction, with $s=j$, denominator $t$, and map $g_*j\\circ a:P\\to g_*J$. Under the K-flat comparison $Lg^*M\\cong Qg^*P$, it sends $Q(g_*j)\\circ b$ to $Q(j)^{-1}\\circ Q(c_{g,J}\\circ g^*(g_*j\\circ a))$. Naturality of the module counit gives $c_{g,J}\\circ g^*g_*j=j\\circ c_{g,f_*I}$, so this equals $Q(c_{g,f_*I}\\circ g^*a)$. Next apply the same fraction formula to the $f$-adjunction, taking resolution $\\mathrm{id}_I$ and the K-flat representative $g^*P$ of $Lg^*M$. The resulting map out of $Lf^*Lg^*M\\cong Qf^*g^*P$ is $Q(c_{f,I}\\circ f^*c_{g,f_*I}\\circ f^*g^*a)$. On the other hand, the formula for $e_{gf}(b)$, with resolution $\\mathrm{id}_I$ and denominator $t$, gives $Q(c_{gf,I}\\circ(gf)^*a)$ out of $L(gf)^*M\\cong Q(gf)^*P$. Precomposing with $\\alpha_M$ inserts $Q\\theta_P$. Naturality of $\\theta$ and the counit equation from step 2 give $c_{gf,I}\\circ(gf)^*a\\circ\\theta_P=c_{gf,I}\\circ\\theta_{g_*f_*I}\\circ f^*g^*a=c_{f,I}\\circ f^*c_{g,f_*I}\\circ f^*g^*a$. Thus $Q(g_*j)$ satisfies exactly the characterization of $\\kappa_{QI}$ in step 4 for every $b$, and equals $\\kappa_{QI}$. The inverse $Q(j)^{-1}$ was used only in $D(B)$; $f_*I$ was never assumed K-injective.",
+   "uses": [
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FND, label lemma-pre-derived-adjoint-functors-general, fraction adjunction calculation; sites-cohomology.tex Tag 0D6E normalization expanded by the worker"
+   }
+  },
+  {
+   "text": "Since $\\kappa_{QI}$ is an isomorphism and equals $Q(g_*j)$, [lem-weil-pbc-unbounded-derived-iso-cohomology] implies $H^n(Q(g_*j))$ is an isomorphism for every integer $n$. By [def-weil-abstract-derived-category], these maps identify with $H^n(g_*j)$, so $g_*j$ is a quasi-isomorphism, as asserted. For a different K-injective resolution $j':f_*I\\to J'$, the bijection [lem-weil-pbc-kinjective-hom-derived] lifts the derived comparison $Qj'\\circ(Qj)^{-1}:QJ\\to QJ'$ to a unique homotopy class $h:J\\to J'$, with $hj$ homotopic to $j'$. Applying the additive $g_*$ preserves this homotopy by [lem-weil-pbc-termwise-adjunction-homotopy], and hence $Q(g_*h)Q(g_*j)=Q(g_*j')$. These are exactly the resolution identifications of [lem-weil-pbc-kinjective-total-derived]. Finally $\\alpha$ and its conjugate $\\kappa$ are natural on the derived categories by steps 3 and 4. Therefore the representative formula just proved respects all derived morphisms and all resolution identifications, giving the required naturality and normalization.",
+   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, label lemma-derived-pushforward-composition; derived.tex K-injective comparison and cohomology criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-pc-derived-adjoint-functors",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-representation",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E via Tag 0D6D and Tag 07A6; source adjunction route followed, with fraction-level normalization and naturality written out using derived.tex Tag 0FND"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -77,10 +205,80 @@
    "results": "8 hits: CategoryTheory.NatTrans.rightDerived_comp, SheafOfModules.pushforwardNatTrans_comp, CategoryTheory.sheafCompose_comp, CategoryTheory.Functor.rightDerivedNatTrans_comp, CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app, CategoryTheory.NatTrans.leftDerived_comp, AlgebraicGeometry.Scheme.Modules.pushforwardComp, CategoryTheory.Functor.sheafPushforwardContinuousComp_hom_app_val_app",
    "date": "2026-10-14",
    "verdict": "no match: returned natural-transformation composition laws and underived sheaf pushforwards; none asserts total unbounded ringed-topos composition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total right derived direct image of a composite of morphisms of ringed topoi is canonically the composite with comparison represented by applying the second pushforward to a K-injective resolution",
+   "results": "8 hits: SheafOfModules.pushforwardNatTrans_comp, CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app, CategoryTheory.Functor.sheafPushforwardContinuousComp_hom_app_val_app, SheafOfModules.pushforwardComp_hom_app_val_app, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val, CategoryTheory.NatTrans.rightDerived_comp, SheafOfModules.pushforwardComp, CategoryTheory.Functor.sheafPushforwardContinuousComp",
+   "date": "2026-10-14",
+   "verdict": "no match: underived continuous-site pullback/pushforward or natural-transformation composition; no total unbounded ringed-topos direct-image composition with the required normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Cc]omp|[Cc]omp.*rightDerived",
+   "results": "7 hits: Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: underived continuous-site pullback/pushforward or natural-transformation composition; no total unbounded ringed-topos direct-image composition with the required normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived direct images of morphisms of ringed topoi compose canonically",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.derived\"",
+   "results": "12 hits: CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedε_fac_app_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match: underived continuous-site pullback/pushforward or natural-transformation composition; no total unbounded ringed-topos direct-image composition with the required normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a geometric morphism of topoi and a structural map of ring sheaves, tensor inverse image of modules is left adjoint to direct image with restricted action",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.instIsLeftAdjointPullback",
+   "date": "2026-10-14",
+   "verdict": "no match: underived continuous-site pullback/pushforward or natural-transformation composition; no total unbounded ringed-topos direct-image composition with the required normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars after inverse image of module sheaves is adjoint to pushforward for arbitrary morphisms of ringed topoi",
+   "results": "8 hits: SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-14",
+   "verdict": "no match: underived continuous-site pullback/pushforward or natural-transformation composition; no total unbounded ringed-topos direct-image composition with the required normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullbackPushforwardAdjunction\"",
+   "results": "4 hits: PresheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-14",
+   "verdict": "no match: underived continuous-site pullback/pushforward or natural-transformation composition; no total unbounded ringed-topos direct-image composition with the required normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackPushforwardAdjunction|def pushforwardComp|def pullbackComp",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: underived continuous-site pullback/pushforward or natural-transformation composition; no total unbounded ringed-topos direct-image composition with the required normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction between tensor pullback and pushforward of module sheaves on ringed topoi",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical composition of unbounded total right derived functors for arbitrary ringed topoi follows from adjunction and composition of derived pullback",
+   "results": "8 hits: CategoryTheory.NatTrans.rightDerived_comp, SheafOfModules.pullbackComp, CategoryTheory.Functor.rightDerivedNatTrans_comp, CategoryTheory.LocalizerMorphism.hasPointwiseRightDerivedFunctorAt_iff_of_isRightDerivabilityStructure, CategoryTheory.LocalizerMorphism.hasPointwiseRightDerivedFunctor_iff_of_isRightDerivabilityStructure, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit, CategoryTheory.NatTrans.leftDerived_comp",
+   "date": "2026-10-14",
+   "verdict": "no match: underived continuous-site pullback/pushforward or natural-transformation composition; no total unbounded ringed-topos direct-image composition with the required normalization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-ring-sheaf-change-adjunction",
   "by": "worker",
@@ -96,5 +294,49 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "worker": "stage1",
+  "summary": "Kept the complete unbounded ringed-topos statement. Reused the existing module adjunction, K-flat resolving-class localization, derived adjunction, and fraction nodes. Constructed pullback composition on K-flat representatives, conjugated it, and proved the prescribed K-injective map equals that conjugate by two explicit fraction adjunction calculations. No new nodes or false claim of preservation of K-injectives.",
+  "blueprint": "def-weil-pbc-four-arrows: source paragraph on canonical ringed-topos exchange arrows and the coefficient-change comparisons on finite-level corners; realizes the direct-image composition ingredient of lem-weil-pbc-ring-sheaf-change-adjunction, not a new proper-base-change route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic unbounded derived-category adjunction/fraction tool used to establish the canonical ringed-topos composition and its resolution normalization; it replaces no step of the proper-base-change unit."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic unbounded derived-category adjunction/fraction tool used to establish the canonical ringed-topos composition and its resolution normalization; it replaces no step of the proper-base-change unit."
+   },
+   {
+    "node": "lem-pc-derived-adjoint-functors",
+    "why": "Generic unbounded derived-category adjunction/fraction tool used to establish the canonical ringed-topos composition and its resolution normalization; it replaces no step of the proper-base-change unit."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic unbounded derived-category adjunction/fraction tool used to establish the canonical ringed-topos composition and its resolution normalization; it replaces no step of the proper-base-change unit."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic unbounded derived-category adjunction/fraction tool used to establish the canonical ringed-topos composition and its resolution normalization; it replaces no step of the proper-base-change unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-derived-adjoint-functors",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-00c815c4d",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-00c815c4d (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, seven proof steps, sources, and unit/chapter route. Stacks 0D6E/0D6D/07A6 and 0FND support composition and the explicit Q(g_*j) normalization. Checked nonflat coefficients, unboundedness, resolution independence, duplicates, and cycles. No new nodes or repairs. Accepted declared generic tools; no target-level coefficient comparison is certified. Details in review.md."
  }
 }
