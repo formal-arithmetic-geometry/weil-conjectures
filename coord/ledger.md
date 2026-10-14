@@ -14380,3 +14380,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:17 L: returned deliver/U2/Sheaf.Algebra.Homology.KInjectiveProducts (reviewer RETURN: (reviewer X-4afbf, head 4afbfa12b) H2/H3 (brief point 6): dag/nodes/sec-picard-framework/lem-pc-ringed-space-product-kin)
 
 - 11:18 L: batch 20261014T030639 dependency take-out
+- 03:18 L: returned deliver/H3/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (reviewer RETURN: (reviewer X-135a7, head 135a748e7) A (brief point 2): The removed declaration is used through `import all`; no adaptatio)
