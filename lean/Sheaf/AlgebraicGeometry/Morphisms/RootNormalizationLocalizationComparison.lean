@@ -15,7 +15,8 @@ public import Mathlib.RingTheory.Localization.FractionRing
 
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
-import Sheaf.AlgebraicGeometry.Morphisms.NormalizationStalkBaseChange
+import Sheaf.AlgebraicGeometry.Morphisms.RootCoverNormalizationCartesian
+import Sheaf.AlgebraicGeometry.Morphisms.AffineLocalizationPullbackStalk
 
 /-! # Root normalization after principal-prime localization -/
 
@@ -24,6 +25,21 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
+private theorem adjoinRoot_localization_of_map_eq
+    {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
+    (M : Submonoid R) (F : Polynomial R) (F0 : Polynomial S)
+    (hF0 : F0 = F.map (algebraMap R S)) (hd : F0 ∣ F.map (algebraMap R S))
+    (h : let γ := AdjoinRoot.map (algebraMap R S) F (F.map (algebraMap R S)) dvd_rfl
+      let := γ.toAlgebra
+      IsLocalization (M.map (AdjoinRoot.of F)) (AdjoinRoot (F.map (algebraMap R S)))) :
+    let γ := AdjoinRoot.map (algebraMap R S) F F0 hd
+    let := γ.toAlgebra
+    IsLocalization (M.map (AdjoinRoot.of F)) (AdjoinRoot F0) := by
+  subst F0
+  exact h
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
 /-- The geometric root-normalization comparison over an already constructed
 principal-prime localization. The DVR and its uniformizer are fixed data; the generic
@@ -115,6 +131,67 @@ theorem root_normalization_localization_comparison
               (AlgebraicGeometry.StructureSheaf.toStalk A0 (a0.fromNormalization x0)
                 (AdjoinRoot.root
                   ((Polynomial.X : Polynomial B) ^ Nat.card G - Polynomial.C pi)))) =
-              (a.fromNormalization.stalkMap x).hom t := by sorry
+              (a.fromNormalization.stalkMap x).hom t := by
+  classical
+  intro A N q V hN
+  let := hN
+  intro _ p hp
+  let := hp
+  intro _ a hep hfin x hx hcontract C t pi A0 N0 q0 j0 a0
+  let := T.isFinite
+  have : IsAffineHom j0 := by dsimp only [j0]; infer_instance
+  have : IsAffineHom (T.π ≫ j0) := by infer_instance
+  have hqc : QuasiCompact a0 := by dsimp only [a0, j0, q0]; infer_instance
+  have hqs : QuasiSeparated a0 := by dsimp only [a0, j0, q0]; infer_instance
+  let := hqc
+  let := hqs
+  obtain ⟨c, hsq⟩ := root_cover_normalization_cartesian
+    i G W H B g hpi ψ k hk hbranch T ρ hT hrootloc hN hp hep hqc hqs
+  have hfinite : IsFinite a0.fromNormalization :=
+    MorphismProperty.of_isPullback (P := @IsFinite) hsq hfin
+  let F := (Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g
+  let F0 := (Polynomial.X : Polynomial B) ^ Nat.card G - Polynomial.C pi
+  let γ : A →+* A0 := AdjoinRoot.map (algebraMap H B) F F0 (by simp [F, F0, pi])
+  let : Algebra A A0 := γ.toAlgebra
+  let M := (Ideal.span {g}).primeCompl.map (AdjoinRoot.of F)
+  have hloc : IsLocalization M A0 :=
+    adjoinRoot_localization_of_map_eq (Ideal.span {g}).primeCompl F F0
+      (by simp [F, F0, pi]) (by simp [F, F0, pi]) hrootloc
+  let := hloc
+  have hdis : Disjoint (M : Set A) ((a.fromNormalization x).asIdeal : Set A) := by
+    apply Set.disjoint_left.mpr
+    rintro z ⟨r, hr, rfl⟩ hz
+    apply hr
+    rw [← hcontract]
+    change AdjoinRoot.of F r ∈ Ideal.span {AdjoinRoot.root F}
+    rwa [hx] at hz
+  obtain ⟨x0, hcx, e, he⟩ := exists_lift_stalkEquiv_of_isLocalization
+    (CommRingCat.of A) (CommRingCat.of A0) M c a0.fromNormalization
+    a.fromNormalization hsq x hdis
+  refine ⟨hqc, hqs, hfinite, x0, ?_, e, ?_⟩
+  · have hpoint : (Spec.map (CommRingCat.ofHom γ) (a0.fromNormalization x0)).asIdeal =
+        (a.fromNormalization x).asIdeal := by
+      have hw := congrArg (fun f ↦ f x0) hsq.w
+      simpa only [Hom.comp_apply, hcx] using congrArg PrimeSpectrum.asIdeal hw.symm
+    change (a0.fromNormalization x0).asIdeal = Ideal.span {AdjoinRoot.root F0}
+    have hm := IsLocalization.map_under M A0 (a0.fromNormalization x0).asIdeal
+    change Ideal.map γ (Ideal.comap γ (a0.fromNormalization x0).asIdeal) =
+      (a0.fromNormalization x0).asIdeal at hm
+    change Ideal.comap γ (a0.fromNormalization x0).asIdeal =
+      (a.fromNormalization x).asIdeal at hpoint
+    rw [← hm, hpoint, hx, Ideal.map_span, Set.image_singleton]
+    change Ideal.span {γ (AdjoinRoot.root F)} = Ideal.span {AdjoinRoot.root F0}
+    rw [show γ (AdjoinRoot.root F) = AdjoinRoot.root F0 from AdjoinRoot.map_root ..]
+  · change e ((a0.fromNormalization.stalkMap x0).hom
+      (StructureSheaf.toStalk A0 (a0.fromNormalization x0) (AdjoinRoot.root F0))) =
+        (a.fromNormalization.stalkMap x).hom
+          (StructureSheaf.toStalk A (a.fromNormalization x) (AdjoinRoot.root F))
+    have hroot : γ (AdjoinRoot.root F) = AdjoinRoot.root F0 := AdjoinRoot.map_root ..
+    have he' := he (AdjoinRoot.root F)
+    change e ((a0.fromNormalization.stalkMap x0).hom
+      (StructureSheaf.toStalk A0 (a0.fromNormalization x0)
+        (γ (AdjoinRoot.root F)))) = (a.fromNormalization.stalkMap x).hom t at he'
+    exact (congrArg (fun z : A0 ↦ e ((a0.fromNormalization.stalkMap x0).hom
+      (StructureSheaf.toStalk A0 (a0.fromNormalization x0) z))) hroot).symm.trans he'
 
 end AlgebraicGeometry.Scheme

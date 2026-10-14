@@ -14360,3 +14360,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:05 L: returned deliver/N1/Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation (reviewer RETURN: (reviewer X-f9ba3, head f9ba314c9) E2/E7, brief point 4: tensorGradedPresentation_core_multiply remains an admitted FALS)
 - 03:06 L: merged deliver/A4/Sheaf.AlgebraicGeometry.FieldScalarPresheafPullbackMono (stage 3; reviewer PASS; first push; landing 20261014T030640-L-341427 (interface); batch 20261014T030639; modules 2; new nodes 1)
 - 03:06 L: merged deliver/B2/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (stage 3; reviewer PASS; after a return; landing 20261014T030641-L-341604 (proof); batch 20261014T030639; modules 1; new nodes 0)
+- 03:06 L: merged deliver/C2/Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationLocalizationComparison (stage 3; reviewer PASS; first push; landing 20261014T030641-L-341778 (interface); batch 20261014T030639; modules 3; new nodes 2)

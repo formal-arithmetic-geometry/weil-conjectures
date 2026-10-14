@@ -13,30 +13,32 @@
  },
  "proof": [
   {
-   "text": "Use the supplied root-algebra localization certificate. The coefficientwise image of X^n-g is X^n-pi, and AdjoinRoot.map sends the root to the root. The supplied contraction equality ensures that the root prime avoids all inverted coefficient elements.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Identify Spec B -> Spec H with the stalk morphism at (g), using the affine spectrum stalk localization equivalence. Apply lem-sbc-normalization-stalk-base-change to q:N->Spec H and a. Pullback associativity and the pasted cartesian squares hT and hbranch identify the localized source with the model pullback of T. A DVR uniformizer has D(pi)=Spec Frac(B), so this is the same punctured cover. The model map is qcqs, and its normalization is finite by base change and transport of the original finite normalization.",
+   "text": "Register T.isFinite explicitly. The generic spectrum map is affine, so its composite with T.pi is affine. The pullback a0 is qcqs by Mathlib instances. Obtain the cartesian comparison c of root-cover normalizations. Finiteness of a0.fromNormalization follows from this square by finite base change.",
    "uses": [
-    "lem-sbc-normalization-stalk-base-change"
+    "lem-sbc-root-cover-normalization-cartesian"
    ],
    "elementary": false
   },
   {
-   "text": "Extend the root prime under the localization; it is the root ideal (s), since the coefficient map carries g to pi and the quotient localization carries t to s. Lift the given normalization point into the cartesian base change, and transport it across the normalization isomorphism to x0. Localization gives an isomorphism of stalks at these corresponding points because every denominator is already a unit. Compose with the normalization stalk isomorphism. Both maps commute with the structural algebra maps, and the root-algebra localization sends t to s. Naturality of stalk maps and structural germs gives the displayed root equality.",
-   "uses": [],
+   "text": "Normalize the supplied coefficient-localization certificate to X^n-pi using equality elimination for the defining polynomial (a proved private helper). The contraction equality and the stated root prime imply that its coefficient denominators are disjoint from the image of x. Apply the general affine-localization pullback stalk lemma to the normalization square, obtaining x0 and a structural-germ-preserving ring equivalence.",
+   "uses": [
+    "lem-sbc-affine-localization-pullback-stalk"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Evaluate the cartesian square at x0. The resulting prime contraction equality, IsLocalization.map_under, Ideal.map_span and AdjoinRoot.map_root identify the model prime with the span of the root. Specialize the structural-germ identity to the original root and use AdjoinRoot.map_root to prove the required equality.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-normalization-stalk-base-change"
+  "lem-sbc-root-cover-normalization-cartesian",
+  "lem-sbc-affine-localization-pullback-stalk"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "C2",
   "kind": "written-by-agent",
-  "agent": "V3 second reader",
   "document": "Stacks Project; Mathlib.AlgebraicGeometry.Normalization",
   "place": "Tag 0307 (lemma-integral-closure-localize); affine normalization and localization of the root chart"
  },
@@ -117,12 +119,12 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-bffd3",
-  "group": "V3",
+  "reviewer": "COMPILER",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261014T023940-L-17256",
+  "landing": "20261014T030641-L-341778",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures match both nodes; hbranch repairs the branch defect; the original caller fails as reported, the minimal adaptation and downstream importer compile cleanly, and axiom checks show only standard axioms plus the reported retained sorryAx."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "statement_change": {
   "date": "2026-10-14",
