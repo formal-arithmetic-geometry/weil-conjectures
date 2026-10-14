@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fin-noetherian-chow-modification",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A projective modification of a reduced proper scheme",
@@ -14,42 +14,112 @@
  },
  "stmt_deps": [
   "def-pc-projective-morphism",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-reduced-scheme"
  ],
  "proof": [
   {
-   "text": "Apply [lemma-nagata-dense-affine-cover-exists] to obtain finitely many\naffine opens $U_i$ containing all generic points of $X$.\nTheir intersection $U$ is dense and is scheme-theoretically dense\nin each $U_i$: a function on a reduced affine scheme vanishing\nat all its generic points belongs to all minimal primes and is zero.\nBy [lem-chow-affine-immersion], embed $U_i$\nin a projective space over $S$, and take its closed model $Z_i$\nby [lem-chow-closed-model].\nThe closure $W$ of the diagonal copy of $U$ in $\\prod_i Z_i$\nis the model of [lem-chow-graph].\nPut $V_i=W\\times_{Z_i}U_i$ and $Y=\\bigcup_iV_i$.\nThe projections glue to $\\pi:Y\\to X$ by\n[lem-chow-glue].\nThe fibre calculation of [lem-chow-preimage]\nand [thm-chow-lemma]\nshow that $\\pi$ is proper and is an isomorphism over $U$.\nFinally [cor-chow-lemma-proper]\nmakes the resulting immersion $Y\\to\\mathbf P^N_S$ closed.\nAll hypotheses of this construction hold on the given Noetherian\nscheme; no descent of an arbitrary proper morphism to a\nNoetherian approximation is needed.",
+   "text": "Write $f:X\\to S$ for the given proper morphism. By [def-weil-proper-morphism], $f$ is separated and of finite type. The base $S$ is Noetherian, so [lem-weil-pbc-chow-noetherian] applies. Choose the data in its existential conclusion: an integer $N\\geq0$, a scheme $Y$, a proper surjective map $\\pi:Y\\to X$, an immersion $i:Y\\to\\mathbf P^N_S$ over $S$, and a dense open $U\\subseteq X$ with $\\pi^{-1}(U)\\to U$ an isomorphism. The relation $p\\circ i=f\\circ\\pi$, with $p:\\mathbf P^N_S\\to S$, is part of the cited statement.",
    "uses": [
-    "lemma-nagata-dense-affine-cover-exists",
-    "lem-chow-affine-immersion",
-    "lem-chow-closed-model",
-    "lem-chow-graph",
-    "lem-chow-glue",
-    "lem-chow-preimage",
-    "thm-chow-lemma",
-    "cor-chow-lemma-proper"
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-chow-noetherian"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0200 (lemma-chow-Noetherian), statement and proof"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-proper-composition], $h=f\\circ\\pi:Y\\to S$ is proper. The structural morphism $p:\\mathbf P^N_S\\to S$ is proper by [lemma-nagata-projective-space-base-change-proper], applied to the finite coordinate set $\\{0,\\ldots,N\\}$, and therefore separated by [def-weil-proper-morphism]. Apply [lem-weil-pbc-proper-over-separated] with source $Y$, target $\\mathbf P^N_S$, base $S$, proper structure morphism $h$, and morphism $i$; the required equality $p\\circ i=h$ is supplied by step 1. Thus $i$ is proper. It is already an immersion, so [lem-weil-pbc-proper-immersion-closed] makes $i$ a closed immersion. This uses only the stated properties of the chosen data, without identifying it with another construction.",
+   "uses": [
+    "lem-weil-pbc-proper-composition",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-immersion-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
+    "place": "Tags 01W3 (lemma-composition-proper), 01W6 (lemma-image-proper-scheme-closed), part (2), and 01IQ (lemma-immersion-when-closed); the proper-case argument of the blueprint cor-chow-lemma-proper"
+   }
+  },
+  {
+   "text": "The proper structure morphism $h=f\\circ\\pi$ from step 2 is of finite type by [def-weil-proper-morphism], hence quasi-compact by [def-weil-finite-type-morphism]. The closed immersion $i:Y\\hookrightarrow\\mathbf P^N_S$ from step 2 satisfies $p\\circ i=h$ by step 1, and $N\\geq0$. It therefore witnesses H-projectivity of $h$; together with quasi-compactness this is precisely projectivity in [def-pc-projective-morphism]. The proper $\\pi$ and dense-open isomorphism of step 1 give the remaining conclusions.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-pc-projective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W8 (definition-projective), H-projective clause; blueprint def-pc-projective-morphism (H-projective plus quasi-compact convention)"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-nagata-dense-affine-cover-exists",
-  "lem-chow-affine-immersion",
-  "lem-chow-closed-model",
-  "lem-chow-graph",
-  "lem-chow-glue",
-  "lem-chow-preimage",
-  "thm-chow-lemma",
-  "cor-chow-lemma-proper"
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-chow-noetherian",
+  "lem-weil-pbc-proper-composition",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "def-weil-finite-type-morphism",
+  "def-pc-projective-morphism"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-noetherian-chow-modification.md",
-  "place": "## Proof"
+  "place": "Proof; Noetherian Chow existence followed by the explicit proper-to-separated and proper-immersion argument for the final closed embedding"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "chow|projective.*modification",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not construct a Chow modification with the dense-open isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chow lemma projective birational modification of a proper scheme",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper scheme over an affine Noetherian scheme admits a projective modification which is an isomorphism over a dense open subset",
+   "results": "AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj, AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.valuativeCriterion_existence",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not construct a Chow modification with the dense-open isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsProjective",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.IsProjective'",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not construct a Chow modification with the dense-open isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chow lemma a separated finite type morphism over a Noetherian base is dominated by a quasi projective scheme with a proper map isomorphic over a dense open",
+   "results": "AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not construct a Chow modification with the dense-open isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "modification|birational|Chow",
+   "results": "Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ.lean, Mathlib/AlgebraicGeometry/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/Dominant.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not construct a Chow modification with the dense-open isomorphism"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -84,5 +154,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-fin-noetherian-chow-modification",
+  "worker": "stage1",
+  "summary": "Reused Noetherian Chow existence and explicitly proved the resulting immersion closed using proper composition, projective-space properness, properness over a separated target, and proper immersions being closed. Statement unchanged; no new nodes.",
+  "blueprint": "The cover, graph and gluing through the dense-open isomorphism are carried by step 1 via lem-weil-pbc-chow-noetherian (0200). Step 2 writes out the final closed-embedding argument of cor-chow-lemma-proper using existing generic lemmas. Step 3 verifies the projective convention.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-chow-noetherian",
+    "why": "Generic Noetherian Chow theorem realizing the item’s cover/graph construction; the unit has no competing Chow theorem."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic composition property used to verify quasi-compactness of the resulting structure morphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-chow-noetherian",
+  "lem-weil-pbc-proper-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-c88428a9d",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-c88428a9d (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, report, unit/chapter route, and cited source passages in full. Stacks 0200 supplies the Chow data; 01W3, projective-space properness, 01W6 and 01IQ justify the closed immersion; 01W8 and the blueprint definition verify projectivity. Edge cases and duplicate candidates checked; no new nodes, cycles, missing dependencies, target weakening or coefficient-category substitution. No fixes needed. Concrete checks recorded in review.md."
+ }
 }
