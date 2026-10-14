@@ -32,9 +32,102 @@
   "def-weil-connected-scheme",
   "def-pc-geometrically-irreducible"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-pc-smooth-flat], the assumed smooth $f$ is flat. By [sbc-lem-smooth-geometrically-reduced], its geometric fibres are reduced. The properness and finite-presentation hypotheses are already assumed. By [lem-pc-proper-base-change](1), both $X_s$ over $\\kappa(s)$ and $X_{\\bar s}$ over $\\overline{\\kappa(s)}$ are proper. The description in [def-weil-geometric-fibre] identifies the latter with the field-extension base change of $X_s$.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-pc-proper-base-change",
+    "def-weil-geometric-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E0N, label lemma-proper-flat-geom-red, hypotheses; smooth specialization uses Tags 01VF and 056T"
+   }
+  },
+  {
+   "text": "Apply clauses (1) and (2) of [thm-pc-semicontinuity-base-change] with $\\mathcal F=\\mathcal O_X$ and $q=0$. The module $\\mathcal O_X$ is free of rank one over itself, hence of finite presentation, and is flat over $S$: at $x$ its stalk is $\\mathcal O_{X,x}$, flat over $\\mathcal O_{S,f(x)}$ by [def-weil-flat-morphism] and Step 1. Its pullback to a fibre is that fibre's structure sheaf. Thus $A_s=H^0(X_s,\\mathcal O_{X_s})$ is finite-dimensional and $\\beta(s)=\\dim_{\\kappa(s)}A_s$ is upper semicontinuous. No reducedness of $S$ is needed: the reduced-base hypothesis belongs only to clause (3), which is not used.",
+   "uses": [
+    "thm-pc-semicontinuity-base-change",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BDN, label lemma-jump-loci-geometric, finiteness of fibre cohomology and upper semicontinuity (source clause (2)), applied to the structure sheaf"
+   }
+  },
+  {
+   "text": "Fix $s$, put $k=\\kappa(s)$ and $K=\\overline{k}$. The morphism $\\operatorname{Spec}K\\to\\operatorname{Spec}k$ is flat by [lem-pc-field-extension-fpqc-cover]. Apply the affine-base clause of [lem-pc-flat-base-change-cohom] to $X_s\\to\\operatorname{Spec}k$. Properness includes finite type and thus quasi-compactness by [def-weil-proper-morphism] and [def-weil-pbc-scheme-conventions]. Its diagonal is a closed immersion; the inverse image of any affine open under the diagonal is affine by [def-weil-closed-immersion], hence quasi-compact, giving quasi-separatedness by [def-weil-pbc-scheme-conventions]. Its structure sheaf is quasi-coherent: on an affine chart it is the sheaf associated to the ring itself. This gives $A_s\\otimes_k K\\cong\\Gamma(X_{\\bar s},\\mathcal O_{X_{\\bar s}})$. By [lem-weil-pbc-proper-reduced-algclosed-global-sections-product], the right side is $\\prod_{c\\in C_s}K$ with $C_s$ finite, because Step 1 gives properness and reducedness. Tensoring a finite $k$-basis of $A_s$ gives a $K$-basis of $A_s\\otimes_kK$ (identify $A_s$ with $k^d$ using that basis and tensor the inverse coordinate maps); the coordinate vectors of $K^{C_s}$ form a basis indexed by $C_s$. Therefore $\\beta(s)=|C_s|=n(s)$. For an empty fibre both vector spaces are zero and both dimensions are zero.",
+   "uses": [
+    "lem-pc-field-extension-fpqc-cover",
+    "lem-pc-flat-base-change-cohom",
+    "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+    "def-weil-proper-morphism",
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E0N, label lemma-proper-flat-geom-red, identification of component count with zeroth cohomology dimension; Tag 0BUG and flat base change"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-proper-component-count-lower-semicontinuous] to $f$, using flatness from Step 1 and the assumed properness and finite presentation. It gives for every $s$ an open neighbourhood $V_s$ on which $n(t)\\geq n(s)$. This uses no geometric reducedness, and proves the lower-semicontinuity half of the argument.",
+   "uses": [
+    "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E0N, label lemma-proper-flat-geom-red, first sentence, invoking Tag 0BUI"
+   }
+  },
+  {
+   "text": "For every $s$, upper semicontinuity of $\\beta=n$ from Steps 2 and 3 gives an open neighbourhood $W_s$ on which $n(t)<n(s)+1$, hence $n(t)\\leq n(s)$ since these values are integers. On $V_s\\cap W_s$ this and Step 4 force $n(t)=n(s)$. This proves local constancy, also at $n(s)=0$. Finiteness was established in Step 3. If $S$ is empty the pointwise assertions are vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E0N, label lemma-proper-flat-geom-red, final sentence: lower and upper semicontinuity imply local constancy"
+   }
+  },
+  {
+   "text": "If $X_s$ is geometrically connected, [lem-weil-geometrically-connected-algebraic-closure] makes $X_{\\bar s}$ connected and nonempty, so $n(s)=1$. Take the neighbourhood from Step 5. For every $t$ there, $n(t)=1$, so $X_{\\bar t}$ is connected: its sole connected component is the whole nonempty space. The reverse implication of [lem-weil-geometrically-connected-algebraic-closure], over $\\kappa(t)$, shows that $X_t$ is geometrically connected. Thus this is exactly the claimed open neighbourhood, and an empty fibre is never erroneously treated as connected.",
+   "uses": [
+    "lem-weil-geometrically-connected-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0387 (lemma-characterize-geometrically-connected) and 054N (lemma-geometrically-connected-check-after-extension), algebraically closed extension criterion; consequence of Tag 0E0N"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-smooth-flat",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-pc-proper-base-change",
+  "def-weil-geometric-fibre",
+  "thm-pc-semicontinuity-base-change",
+  "def-weil-flat-morphism",
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-pc-flat-base-change-cohom",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous",
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0E0N, label lemma-proper-flat-geom-red: lower semicontinuity from 0BUI and upper semicontinuity from 0BDN after 0BUG"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -77,15 +170,99 @@
    "results": "{\"t\": \"2026-10-14T08:13:52Z\", \"tool\": \"leanfinder\", \"query\": \"The number of connected components of geometric fibers of a smooth proper map is locally constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopologicalSpace.Fiber.instFiniteFiberCoeLocallyConstant\", \"IsLocallyConstant.of_constant_on_connected_components\", \"IsCoveringMap.constOn_of_comp\", \"IsLocallyConstant.exists_eq_const\", \"LocallyConstant.exists_eq_const\", \"IsCoveringMap.const_of_comp\", \"IsSeparatedMap.const_of_comp\", \"IsLocallyConstant.apply_eq_of_isPreconnected\"], \"digest\": \"500fb45780840fd4\"}",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth proper finitely presented morphism of schemes the number of geometric connected components of fibres is locally constant",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  DiscreteTopology ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X] [∀ (i : ι), IsLocalRing ↑(R i)],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is a compact space and each $R_i$ is a local ring, then the function mapping morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\operatorname{Spec}(R_i) \\\\to X$ is surj\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] (y : ↥Y),\\n  (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' {y}).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a finite morphism of schemes. For any point $y \\\\in Y$, the fiber $f^{-1}(\\\\{y\\\\})$ is a finite set.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  JacobsonSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper flat family with reduced geometric fibres has locally constant zeroth geometric Betti number",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace\", \"module\": \"Mathlib/AlgebraicTopology/SingularHomology/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasCoproducts C]\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.CategoryWithHomology C] (n : ℕ) (R : C) (X : TopCat)\\n  [TotallyDisconnectedSpace ↑X],\\n  n ≠ 0 → CategoryTheory.Limits.IsZero ((\", \"doc\": \"For any totally disconnected topological space $ X $ and any natural number $ n \\neq 0 $, the $ n $-th singular homology group of $ X $ is trivial, i.e., $ H_n(X) = 0 $.\"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M] [Module.Flat R M], IsLocallyConstant (Module.rankAtStalk M)\", \"doc\": \"If $ M $ is a finitely presented and flat module over a commutative semiring $ R $, then the function assigning to each prime ideal $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ the rank of the localiza\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f]\\n  [AlgebraicGeometry.Surjective f] [CategoryTheory.Mono f], CategoryTheory.IsIso f\", \"doc\": \"If $ f : X \\to Y $ is a morphism of schemes that is flat, quasi-compact, surjective, and a monomorphism, then $ f $ is an isomorphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace\", \"module\": \"Mathlib/AlgebraicTopology/SingularHomology/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasCoproducts C]\\n  [inst_2 : CategoryTheory.Preadditive C] (n : ℕ) (R : C) (X : TopCat) [TotallyDisconnectedSpace ↑X],\\n  n ≠ 0 → HomologicalComplex.ExactAt (((AlgebraicTopology.singularChainComplexFunctor C).obj\", \"doc\": \"For any totally disconnected topological space $X$ and any non-zero integer $n$, the singular chain complex associated to $X$ is exact at degree $n$. This means the image of the differential map at de\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicTopology.singularHomologyFunctorZeroOfTotallyDisconnectedSpace\", \"module\": \"Mathlib/AlgebraicTopology/SingularHomology/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasCoproducts C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : CategoryTheory.CategoryWithHomology C] →\\n          (R : C) →\\n            (X : TopCat) →\\n              [TotallyDisconne\", \"doc\": \"For a totally disconnected topological space $ X $, the 0th singular homology group of $ X $ with coefficients in $ R $ is isomorphic to the coproduct of copies of $ R $ indexed by the points of $ X $\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyConnected\", \"IsProper\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*component|component.*locallyConstant",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"line\": \"231\", \"text\": \"  NatIso.ofComponents (fun S ↦ locallyConstantIsoContinuousMap _ _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"74\", \"text\": \"lemma GeometricallyReduced.isReduced_of_flat_of_finite_irreducibleComponents\"}\n  {\"file\": \"Mathlib/Topology/LocallyConstant/Basic.lean\", \"line\": \"184\", \"text\": \"    (h : ∀ x, ∀ y ∈ connectedComponent x, f y = f x) : IsLocallyConstant f :=\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper smooth scheme morphism geometric fibre connected component count locally constant",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-good-curves-generic-diagram",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proper-flat-geometric-components-locally-constant",
+  "worker": "stage1",
+  "summary": "Followed 0E0N with both semicontinuity inequalities written explicitly. Reused smoothness, flat coherent base change, semicontinuity and geometric-connectedness nodes. Created two statement-only inputs, 0BUI and the algebraically-closed reduced-scheme product clause of 0BUG. Checked empty fibres and arbitrary bases.",
+  "blueprint": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7). Auxiliary input: Tag 0E0N, label lemma-proper-flat-geom-red, specialized to smooth morphisms (smooth implies flat with geometrically reduced fibres)",
+  "tool_uses": [
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic smooth-implies-flat input for the 0E0N hypotheses. It is used as a black box inside the existing 0E0N auxiliary route, not to replace a unit step."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic stability under base change, needed for the proper residue-field and geometric fibres. It is used as a black box inside the existing 0E0N auxiliary route, not to replace a unit step."
+   },
+   {
+    "node": "thm-pc-semicontinuity-base-change",
+    "why": "Generic cohomology upper semicontinuity, clauses (1)-(2), applied to O_X; no node of this unit supplies it. It is used as a black box inside the existing 0E0N auxiliary route, not to replace a unit step."
+   },
+   {
+    "node": "lem-pc-field-extension-fpqc-cover",
+    "why": "Generic field-extension flatness for coherent base change. It is used as a black box inside the existing 0E0N auxiliary route, not to replace a unit step."
+   },
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "Generic coherent flat base change on residue-field schemes identifies geometric H^0. It is used as a black box inside the existing 0E0N auxiliary route, not to replace a unit step."
+   },
+   {
+    "node": "lem-weil-geometrically-connected-algebraic-closure",
+    "why": "Generic geometric-connectedness criterion required for the final open-neighbourhood consequence. It is used as a black box inside the existing 0E0N auxiliary route, not to replace a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-smooth-flat",
+  "lem-pc-proper-base-change",
+  "thm-pc-semicontinuity-base-change",
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-pc-flat-base-change-cohom",
+  "lem-weil-geometrically-connected-algebraic-closure"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-456fbb226",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-456fbb226 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited statements. Checked all six steps against Stacks 0E0N, 0BUI, 0BUG, 0BDN, 02KH, and 0387/054N; tested empty, reducible, disconnected, and nonreduced cases. No duplicate, restated split, or new circularity found. Accepted six generic tool uses; verified archived master target categories and morphism directions without treating coherent base change as a target comparison. No repairs needed. Detailed checks and unrelated inherited DAG defects recorded in review.md."
+ }
 }
