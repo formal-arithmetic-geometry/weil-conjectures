@@ -14571,3 +14571,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:02 L: merged deliver/A2/Sheaf.AlgebraicGeometry.FlatTelescopeStageMapRefinement (stage 3; reviewer PASS; first push; landing 20261014T050215-L-1646070 (interface); batch 20261014T050213; modules 2; new nodes 1)
 - 05:02 L: merged deliver/A4/Sheaf.AlgebraicGeometry.BoundaryCoefficientTensorProduct (stage 3; reviewer PASS; first push; landing 20261014T050215-L-1646225 (interface); batch 20261014T050213; modules 4; new nodes 3)
 - 05:02 L: merged deliver/C2/Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed (stage 3; reviewer PASS; first push; landing 20261014T050216-L-1646405 (proof); batch 20261014T050213; modules 1; new nodes 0)
+- 05:02 L: merged deliver/F2/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (stage 3; reviewer PASS; first push; landing 20261014T050216-L-1646506 (proof); batch 20261014T050213; modules 1; new nodes 0)

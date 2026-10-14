@@ -129,7 +129,7 @@ theorem Scheme.GaloisCover.equivariantModulePresheaf_isSheaf
   let : DiscreteTopology N.V := ⟨rfl⟩
   let Q := c.equivariantModulePresheaf ℓ N ⋙ ModuleCat.restrictScalars
     (ULift.ringEquiv.toRingHom : ULift.{u + 1} (ZMod ℓ) →+* ZMod ℓ)
-  let G := equivarianceSubfunctor ℓ c N
+  let G : Subfunctor (functionPresheaf c N.V) := equivarianceSubfunctor ℓ c N
   let e : Q ⋙ CategoryTheory.forget (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) ≅ G.toFunctor :=
     NatIso.ofComponents (fun W ↦ equivEquivIso
       { toFun := fun s ↦ ⟨s.val.toContinuousMap, s.property⟩
