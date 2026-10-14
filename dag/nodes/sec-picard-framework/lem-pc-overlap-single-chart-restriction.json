@@ -17,14 +17,14 @@
  ],
  "proof": [
   {
-   "text": "Factor epsilon_d into C_d followed by pullback of e_d and composition along d_d and the direct chart structure map. Expand ξ and cancel r^*(C_d inverse) against r^*(C_d).",
+   "text": "Factor the six canonical isomorphisms using the proved private six_factor_hom identity. In restriction_with_comparison, expand the restriction comparison and cancel the pullback of C inverse against the pullback of C by functoriality and the inverse-hom identity.",
    "uses": [
     "def-pc-overlap-pair-canonical-comparisons"
    ],
    "elementary": true
   },
   {
-   "text": "Naturality moves the pullback of e_d through the inverse composition along r and d_d. Apply the inverse-image associativity identity along r,d_d,f_d. Apply naturality along z,hd to e_d and associativity along z,hd,f_d. The hypotheses identify both composite maps with k. Cancel the residual inverse comparison and use functoriality to obtain the displayed identity. The explicit generic calculation is recorded in the worker scratchpad; conversion to the concrete chart API remains to be finished.",
+   "text": "The private compOfEq_assoc is the component of Mathlib Scheme.Modules.pseudofunctor_associativity, after substituting the named composite maps; compOfEq_naturality is naturality of pullbackComp. The private restriction_calc applies associativity along r, delta, f, moves e through the comparison by naturality, cancels the inverse comparison, moves e through the z, hd comparison by naturality, and applies associativity along z, hd, f. The equations hr, hz, hnu and hzk identify the composites with k. The proved restriction_six_factors combines this calculation with the six-factor decomposition. Instantiate it at the canonical chart maps and the three factors defining overlapCanonicalChartComparison; the chart structure equation is pullback.lift_fst. No intermediate theorem is left unproved.",
    "uses": [
     "def-pc-overlap-pair-canonical-comparisons",
     "lem-sc-left-adjoint-composition-iso-associativity"
@@ -118,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-6f92d",
-  "group": "Q2",
+  "reviewer": "COMPILER",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261014T052131-L-1876990",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered modules compile cleanly; target signature, nodes, report, imports, and documented sorry declarations match the packet."
+  "landing": "20261014T054720-L-2186387",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
