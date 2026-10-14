@@ -10,22 +10,28 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Proof: put V = D(algebraMap H C h), B = D(h). Finite faithful flatness is\npreserved by localization, so V -> B is finite and faithfully flat. It is\netale because its composite with the open immersion B -> Spec H is etale.\nIt is connected and nonempty because C is a domain and the localized element\nis nonzero. The group laws make each ρ ζ invertible. By hrot the deck-graph map\nfrom the disjoint union of G copies of V to V ×_B V is bijective on geometric\nfibres. Both schemes are finite etale over V; hence this map is an isomorphism.\nTherefore V -> B is a G-torsor. Finite etale descent gives its quotient by K,\ncorresponding to the finite coset permutation set. Affine descent identifies\nits coordinate ring with C[1/h]^K. This is (C^K)[1/h]: the denominator is fixed,\nand an invariant fraction has invariant numerator because localization in the\ndomain at a nonzero element is injective. The intersection of equalizers F is\nexactly C^K, so the quotient is the displayed open U. Its structural map to B\nis finite etale; compose with B -> Spec H to obtain the claimed etale map.\nFor K trivial this is V itself; for K = G it is B. No assumption on the order\nof G being invertible is required for a torsor quotient.",
-   "uses": [
-    "lem-weil-pbc-connected-torsor-subgroup-quotient"
-   ],
-   "elementary": false
+   "text": "Using basicOpenIsoSpecAway and HasRingHomProperty.Spec_iff, convert hEt into Algebra.Etale H (Localization.Away (algebraMap H C h)). Let T = Localization.Away h. IsLocalization.Away.tensorRightEquiv identifies T tensor_H C with this localization. Transport etaleness to the tensor product and apply Algebra.Etale.of_restrictScalars to obtain etaleness over T. Module finiteness survives base change.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let sigma(zeta)=rho(zeta.val) for zeta in K. The displayed intersection F equals AlgHom.fixedPoints sigma by Algebra.mem_iInf, AlgHom.mem_equalizer, and AlgHom.mem_fixedPoints. Apply the proved source-library theorem AlgHom.finite_and_etale_fixedPoints to AlgHom.baseChangeFamily T sigma. AlgHom.tensorFixedPointsEquiv identifies its fixed points with T tensor_H AlgHom.fixedPoints sigma, since T is flat over H and K is finite. Thus T tensor_H F is etale over T. These two results are in WeilConjectures.Mathlib.RingTheory.TotallySplit; neither introduces a new proof obligation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose with the etale localization H -> T using Algebra.Etale.comp. The second tensorRightEquiv identifies T tensor_H F with Localization.Away (algebraMap H F h). Transfer etaleness along this H-algebra equivalence and then back to the displayed basic-open map by basicOpenIsoSpecAway and Spec_iff. The domain, nonzero, group-law, faithful-flatness, and rotation hypotheses are not needed for this finite-family fixed-points argument. The theorem signature stays unchanged.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-connected-torsor-subgroup-quotient"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "group": "P4",
-  "document": "Stacks Project",
-  "place": "Tag 03SF (consulted online at https://stacks.math.columbia.edu/tag/03SF)",
-  "note": "Extract the etale quotient step and exact-stabilizer monomorphism step of the original node, without changing its statement. The scheme-theoretic subgroup-quotient tool is already proved; the affine invariant-ring identification and compatibility remain."
+  "group": "A4",
+  "document": "Stacks Project; source Lean library",
+  "place": "Tag 03SF, affine subgroup invariants; WeilConjectures.Mathlib.RingTheory.TotallySplit, AlgHom.finite_and_etale_fixedPoints and AlgHom.tensorFixedPointsEquiv",
+  "note": "Complete algebraic proof using the existing proved fixed-points and flat-base-change tools; no connected torsor construction needed."
  },
  "mathlib_searches": [
   {
@@ -111,10 +117,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P4",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261014T022550-L-4047213",
-  "kind": "interface",
+  "landing": "20261014T025135-L-155141",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
