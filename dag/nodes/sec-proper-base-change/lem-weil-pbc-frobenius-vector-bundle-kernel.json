@@ -31,9 +31,137 @@
   "def-weil-pbc-abelian-etale-sheaves",
   "def-weil-pbc-constructible-abelian-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a finite affine open cover $S=\\bigcup_a W_a$ trivializing $E$, with $W_a=\\operatorname{Spec}A_a$ and rank $n_a$. Such a cover exists by the given local trivializations, the affine-open basis and quasi-compactness. The locally Noetherian hypothesis implies that $S$ is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated], so the global refinement lemma will apply in step 7. Work on one chart $W=\\operatorname{Spec}A$, writing its basis as $e_1,\\ldots,e_n$. By [lem-weil-pbc-etale-inverse-image-restriction], restriction to this open agrees with abelian inverse image. By [def-sc-etale-qcoherent-module] and [def-pc-module-pullback], on any etale $T\\to W$ the pulled-back free module has basis $e_i$ and its sections are tuples in $\\Gamma(T,\\mathcal O_T)^n$: tensoring a finite free module sends its basis to that of the free target-ring module. Write $F(e_j)=\\sum_i c_{ij}e_i$, $c_{ij}\\in A$. Additivity, semilinearity and naturality then give $(F-1)(\\sum_j x_je_j)=\\sum_i(\\sum_j c_{ij}x_j^p-x_i)e_i$ on every such $T$.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-sc-etale-qcoherent-module",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKU, proof, affine trivialization and matrix formula"
+   }
+  },
+  {
+   "text": "For an affine etale $T=\\operatorname{Spec}R\\to W$ and target section $b=\\sum_i b_ie_i$, define $B_b=R[x_1,\\ldots,x_n]/(b_i+x_i-\\sum_j c_{ij}x_j^p)_{i=1}^n$, with the coefficients mapped from $A$ to $R$, and $Q_b=\\operatorname{Spec}B_b$. Each partial derivative of $x_j^p$ is zero because $p=0$ in $R$, so the Jacobian of these $n$ equations in $n$ variables is the identity matrix. Its determinant is $1$, including when $n=0$. Thus this is a square Jacobian presentation [def-exc-jacobian-presentation], and [lem-exc-etale-jacobian-presentation] makes $R\\to B_b$ etale of finite presentation. By the affine description of [def-weil-etale-morphism], $Q_b\\to T$ is etale. The images of the variables satisfy $\\sum_j c_{ij}x_j^p-x_i=b_i$, so their tuple is a preimage of $b$ on $Q_b$.",
+   "uses": [
+    "def-exc-jacobian-presentation",
+    "lem-exc-etale-jacobian-presentation",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKU, proof of surjectivity, polynomial presentation and differential calculation; square-Jacobian criterion 00T6, 00T7, 00U9"
+   }
+  },
+  {
+   "text": "For every point $t\\in T$ choose an algebraic closure $k$ of its residue field. The matrix $(c_{ij}(t))$ defines the additive $p$-linear map $k^n\\to k^n$, $x\\mapsto(\\sum_j c_{ij}(t)x_j^p)_i$, since $(x+y)^p=x^p+y^p$. Its field has characteristic $p$, and its vector space has finite dimension $n$. Apply [lem-sc-lang-steinberg] to solve $(F_t-1)x=b(t)$. Sending the variables of $B_b$ to these coordinates gives a ring map $B_b\\to k$ over $R$, hence a point of $Q_b$ above $t$ by [def-weil-affine-spectrum]. Thus $Q_b\\to T$ is surjective, so it is a one-member etale covering by [def-weil-pbc-etale-site]. For a general etale object and target section, first take an affine open cover and refine by the inverse images of the trivializing charts, then take these polynomial covers on affine refinements. This proves local surjectivity on every site object. By [lem-weil-pbc-abelian-sheaf-epi-locally-surjective], $F-1$ is an epimorphism of abelian sheaves; its cokernel is zero in the abelian category. No faithful-flatness claim is needed beyond this etale covering. A sectionwise universe lift carries this calculation to the lifted sheaves by $x\\mapsto\\operatorname{ULift.up}(x)$ and its inverse, preserving the transported addition, scalar action and the displayed equations.",
+   "uses": [
+    "lem-sc-lang-steinberg",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKU, proof, nonempty geometric fibres and local preimage; Tag 0A3L, lemma-F-1"
+   }
+  },
+  {
+   "text": "On the chart $W$ put $P=\\operatorname{Spec}(A[x_1,\\ldots,x_n]/(x_i-\\sum_j c_{ij}x_j^p)_i)$. Step 2 with $b=0$ shows $P\\to W$ is etale, and $P$ and $W$ are affine, hence quasi-compact and quasi-separated. The sectionwise subgroup of sections killed by $F-1$ is itself a sheaf: glue its sections in $E$, and their image under $F-1$ is zero since it is zero on the cover. Every sheaf morphism killed by $F-1$ factors uniquely through this subgroup, so it is the categorical kernel by [def-weil-pbc-abelian-etale-sheaves]. For affine etale $T=\\operatorname{Spec}R\\to W$, an $A$-algebra map from the displayed quotient to $R$ is exactly a tuple solving $\\sum_j c_{ij}x_j^p-x_i=0$. By step 1 that tuple is exactly a section of $K:=\\operatorname{Ker}(F-1)$ over $T$. This correspondence commutes with restriction because it sends each variable to its coordinate. It extends to every etale $T$ by an affine open cover: coordinate tuples glue as sections, and the resulting morphisms to $P$ glue as scheme morphisms, uniquely on overlaps. Therefore the underlying sheaf of sets of $K|_W$ is the section sheaf $h_P$. The identification is valid in the chosen universe by lifting each coordinate tuple and each morphism along the same sectionwise bijection. This proves representability directly, rather than assuming that abelian inverse image of $E_{\\mathrm{et}}$ equals the quasi-coherent module on an arbitrary closed stratum.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sc-etale-qcoherent-module",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKU, proof of constructibility, displayed representing affine scheme"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-stratified-finite] to $P\\to W$: both schemes are affine and the map is etale by step 4, so all its quasi-compactness and quasi-separatedness hypotheses hold. Obtain a finite constructible locally closed immersed stratification $W=\\coprod_b Z_b$ with $P_b:=P\\times_W Z_b\\to Z_b$ finite etale. For the stratum immersion $i_b:Z_b\\to W$, [lem-galois-inverse-image-representable] gives $i_b^{-1}h_P\\cong h_{P_b}$, since $P\\to W$ is an object of $W_{\\mathrm{et}}$. By [lem-weil-pbc-etale-inverse-image-algebraic-structures], the underlying set sheaf of the abelian inverse image $i_b^{-1}(K|_W)$ is exactly this inverse image of its underlying set sheaf. Hence it is $h_{P_b}$. This uses represented sheaf pullback; it does not identify quasi-coherent sections before and after a closed base change.",
+   "uses": [
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-galois-inverse-image-representable",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKU, final paragraph, expanded via Tag 03S8 proof, Tag 03S0 and Tag 03Q1(4)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-etale-yoneda-local-trivializations], $h_{P_b}$ is locally constant with finite geometric stalks. Apply [lem-weil-pbc-finite-local-abelian-forget] to the abelian sheaf $i_b^{-1}(K|_W)$: it becomes locally constant as an abelian sheaf and its stalks are finite sets. On a nonempty member of a constant trivializing cover, its constant abelian group is isomorphic to the stalk at any algebraically closed geometric point, and so is finite; empty members can be dropped. Thus this is finite local constancy in precisely the abelian sense of [def-weil-pbc-constructible-abelian-sheaf], not merely finite generation of an abelian group. Repeat steps 4--6 on each of the finitely many charts $W_a$.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-yoneda-local-trivializations",
+    "lem-weil-pbc-finite-local-abelian-forget",
+    "def-weil-pbc-constructible-abelian-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKU, final sentence, Tag 03S8(1) expanded using 03RV and the abelian clauses of 03RU"
+   }
+  },
+  {
+   "text": "The finite affine open cover from step 1 and its finite local stratifications from step 5 meet the hypotheses of [lem-weil-pbc-etale-stratification-local-gluing-core], since $S$ is quasi-compact and quasi-separated. Choose the resulting single finite constructible locally closed immersed stratification of $S$. Write a stratum immersion as $j=f\\circ g$, where $f:Z_{a,b}\\to W_a\\to S$ is one local stratum immersion and $g:H\\to Z_{a,b}$ is the actual factorization morphism provided by that node. By [lem-weil-pbc-inverse-image-composition] and [lem-weil-pbc-etale-inverse-image-restriction], $G:=f^{-1}K$ is the finite locally constant abelian sheaf of step 6 and $j^{-1}K\\cong g^{-1}G$. Choose its etale trivializing cover $v_i:V_i\\to Z_{a,b}$ with finite abelian values $A_i$. By [lem-weil-pbc-etale-covering-base-change], $U_i=H\\times_{Z_{a,b}}V_i\\to H$ is an etale covering; write $q_i:U_i\\to V_i$ and $k_i:U_i\\to H$ for its projections. Since $gk_i=v_iq_i$, the composition isomorphisms give $k_i^{-1}g^{-1}G\\cong q_i^{-1}v_i^{-1}G\\cong q_i^{-1}\\underline{A_i}$. Here inverse image preserves the same constant finite value, by the following elementary universal-property calculation, rather than an additional geometric lemma. For a finite set $A$, its constant presheaf is the coproduct indexed by $A$ of the singleton presheaf, so [def-weil-pbc-constant-sheaf] and the sheafification adjunction [def-weil-pbc-sheafification] identify its constant set sheaf with $\\coprod_{a\\in A}*$. By [lem-weil-pbc-etale-inverse-image-algebraic-structures], set inverse image is a left adjoint and preserves the terminal sheaf. It therefore carries this coproduct to $\\coprod_{a\\in A}*$: the coproduct universal property follows by applying its adjunction to $\\operatorname{Hom}(\\coprod_{a\\in A}*,q_*B)=\\prod_{a\\in A}\\operatorname{Hom}(*,q_*B)$. These comparisons are natural in maps of finite sets; finite-limit compatibility and the algebraic-structure clause of the same node consequently carry addition $A_i\\times A_i\\to A_i$, zero and negation to the very same operations. Thus $q_i^{-1}\\underline{A_i}\\cong\\underline{A_i}$ as abelian sheaves. The cover $\\{U_i\\to H\\}$ consequently trivializes $j^{-1}K$ with the same finite abelian values. Applying [def-weil-pbc-constructible-abelian-sheaf] to the single finite global partition proves constructibility of $K$. If $S$ is empty take the empty stratification; rank zero charts have $B_b=R$, kernel the zero abelian sheaf and solution cover the identity. Together with step 3 this proves both conclusions without any invertibility or global constant-rank hypothesis on $F$.",
+   "uses": [
+    "lem-weil-pbc-etale-stratification-local-gluing-core",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "def-weil-pbc-constructible-abelian-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKU, initial locality reduction and final constructibility; Tags 03S0 and 095A, global partition refinement as in 095E"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-sc-etale-qcoherent-module",
+  "def-pc-module-pullback",
+  "def-exc-jacobian-presentation",
+  "lem-exc-etale-jacobian-presentation",
+  "def-weil-etale-morphism",
+  "lem-sc-lang-steinberg",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-etale-stratified-finite",
+  "lem-galois-inverse-image-representable",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-finite-etale-yoneda-local-trivializations",
+  "lem-weil-pbc-finite-local-abelian-forget",
+  "def-weil-pbc-constructible-abelian-sheaf",
+  "lem-weil-pbc-etale-stratification-local-gluing-core",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-etale-covering-base-change",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKU, lemma-frobenius-linear-on-vb, proof; 03S8(1) expanded to the cited stratification and finite-local-constancy lemmas"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,22 +197,30 @@
    "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
    "date": "2026-10-14",
    "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Constructibility of fixed points of a semilinear endomorphism of a locally free sheaf in positive characteristic",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ChevalleyThm.chevalley_polynomialC\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ {R : Type u_6} [inst : CommRing R] (M : Submodule ℤ R),\\n  1 ∈ M →\\n    ∀ (S : PrimeSpectrum.ConstructibleSetData (Polynomial R)),\\n      (∀ C ∈ S, ∀ (j : Fin C.n) (k : ℕ), (C.g j).coeff k ∈ M) →\\n        ∃ T,\\n          PrimeSpectrum.comap Polynomial.C '' S.toSet = T.toSet ∧\\n            ∀ C ∈ T, C.n ≤\", \"doc\": \"Let $ R $ be a commutative ring, $ M $ a $\\\\mathbb{Z}$-submodule of $ R $ containing $ 1 $, and $ S $ a constructible set data in $ R[X] $ such that all coefficients of polynomials in $ S $ belong to $\"}\n  {\"name\": \"PrimeSpectrum.isConstructible_comap_C\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {s : Set (PrimeSpectrum (Polynomial R))},\\n  Topology.IsConstructible s → Topology.IsConstructible (PrimeSpectrum.comap Polynomial.C '' s)\", \"doc\": \"For any commutative semiring $ R $, if a set $ s $ in the prime spectrum of the polynomial ring $ R[X] $ is constructible, then the preimage of $ s $ under the constant polynomial embedding $ R \\to R[X\"}\n  {\"name\": \"ModuleCat.Tilde.exists_const\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (s : ↑(M.tildeInModuleCat.obj (Opposite.op U))),\\n  ∀ x ∈ U,\\n    ∃ V,\\n      ∃ (_ : x ∈ V),\\n        ∃ i f g,\\n          ∃ (hg : ∀ x ∈ V, g ∈ x.asIdeal.primeCompl),\\n            Mo\", \"doc\": \"For any section $ s $ of the sheaf $ \\\\widetilde{M} $ over an open subset $ U \\\\subseteq \\\\operatorname{Spec}(R) $, and for any point $ x \\\\in U $, there exists an open neighborhood $ V \\\\subseteq U $ of $\"}\n  {\"name\": \"Module.End.genEigenrange\", \"module\": \"Mathlib/LinearAlgebra/Eigenspace/Basic\", \"type\": \"{R : Type v} →\\n  {M : Type w} →\\n    [inst : CommRing R] → [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → Module.End R M → R → ℕ∞ → Submodule R M\", \"doc\": \"For an $ R $-module endomorphism $ f $, scalar $ \\\\mu \\\\in R $, and extended natural number $ k $, this submodule is defined as the intersection over all $ l \\\\in \\\\mathbb{N} $ with $ l \\\\leq k $ of the im\"}\n  {\"name\": \"Module.charP_end\", \"module\": \"Mathlib/Algebra/CharP/LinearMaps\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M] {p : ℕ}\\n  [hchar : CharP R p], (∃ x, Ideal.torsionOf R M x = ⊥) → CharP (M →ₗ[R] M) p\", \"doc\": \"If a semiring $ R $ has characteristic $ p $ and there exists an element $ x $ in the $ R $-module $ M $ such that the annihilator ideal of $ x $ is trivial (i.e., $ \\\\{0\\\\} $), then the endomorphism ri\"}\n  {\"name\": \"PrimeSpectrum.BasicConstructibleSetData.map_n\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommSemiring R] [inst_1 : CommSemiring S] (φ : R →+* S)\\n  (C : PrimeSpectrum.BasicConstructibleSetData R), (PrimeSpectrum.BasicConstructibleSetData.map φ C).n = C.n\", \"doc\": \"Given a ring homomorphism $\\\\varphi : R \\\\to S$ and basic constructible set data $C$ in $R$, the natural number $n$ associated with the image of $C$ under $\\\\varphi$ is equal to the original $n$ of $C$.\"}\n  {\"name\": \"Module.End.genEigenrange_nat\", \"module\": \"Mathlib/LinearAlgebra/Eigenspace/Basic\", \"type\": \"∀ {R : Type v} {M : Type w} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {f : Module.End R M}\\n  {μ : R} {k : ℕ}, f.genEigenrange μ ↑k = ((f - μ • 1) ^ k).range\", \"doc\": \"For any $ R $-module endomorphism $ f $, scalar $ \\\\mu \\\\in R $, and natural number $ k $, the generalized eigenspace associated with $ \\\\mu $ up to power $ k $ is equal to the image of the linear map $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}",
-   "date": "2026-10-14",
-   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-frobenius-vector-bundle-kernel",
+  "worker": "stage1",
+  "summary": "Checked 0GKU and kept its statement. Wrote the affine matrix calculation, square-Jacobian solution cover, fieldwise solvability, represented kernel, finite-etale strata, abelian finite local constancy and one global refinement. Reused all existing auxiliary nodes, with no new nodes. Distinguished represented kernel base change from quasi-coherent module pullback; retained the finite-cardinality abelian convention and sectionwise universe transport. Returned route repair: step 7 now cites the closed composition comparison and Mathlib covering-base-change tool, and derives preservation of constant finite abelian values explicitly from the constant-sheaf definition, sheafification adjunction and existing inverse-image algebraic-structure statement. The rejected sk-prop-sf-cbc node is absent.",
+  "blueprint": "Classical torsion constructibility input: 0GKW final sentence invokes 0GKV for prime constant coefficients. Expanded by 0GKV case (b), final sentence: Applying lemma-frobenius-linear-on-vb we win. The seven steps expand precisely the invoked 0GKU input, below the fixed proper-base-change unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-2db5150ad",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-2db5150ad (reviewer sub-agent of L); spot-checked: Read the complete packet, item, report, unit/chapter route, Tag 0GKU source, and all cited node statements. All seven proof steps are mathematically sound with hypotheses and coefficient category preserved; polynomial etale covers, Lang–Steinberg surjectivity, represented kernels, finite-etale stratification, and global inverse-image refinement check out. Edge cases rank zero, empty scheme, coefficients 0/1, and nonreduced characteristic-p rings were tested. No duplicate, circular, restated, false, or uncited major claim found; no repairs or new nodes are required."
+ }
 }
