@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.MayerVietorisRestrictionLocalizationChain
+public import Sheaf.AlgebraicGeometry.MayerVietorisImageChainData
+import Sheaf.AlgebraicGeometry.MayerVietorisOpenCompositionRestrictedSourceUnit
+import Sheaf.AlgebraicGeometry.MayerVietorisOpenCompositionRestrictionFactors
 
 /-! # Left-hand composition normalization
 
@@ -22,6 +24,11 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
 
+set_option backward.isDefEq.respectTransparency.types false in
+set_option linter.unusedVariables false in
+-- Retain the original unused F binder for exact statement compatibility.
+set_option maxHeartbeats 800000 in
+-- The exact restriction factors require additional categorical instance conversions.
 /-- Left-hand composition normalization to the complex-composition composite.
 Source: Stacks Project, Tags 08FE, 0D5T and 079V.
 
@@ -63,6 +70,19 @@ theorem schemeMV_composition_left_normalization
        R.map ((schemeMVDirectImageLocalization (h ∣_ W)).app J ≫
          (schemeDerivedDirectImage (h ∣_ W)).map
            (LX.mapDerivedCategoryFactors.inv.app I) ≫
-         (schemeMVOpenRestrictionComparison h W).inv.app (DerivedCategory.Q.obj I))) := by sorry
+         (schemeMVOpenRestrictionComparison h W).inv.app (DerivedCategory.Q.obj I))) := by
+  let LX := schemeOpenRestriction X (h ⁻¹ᵁ W)
+  let J := (LX.mapHomologicalComplex (.up ℤ)).obj I
+  let β := (schemeMVDirectImageComposition (h ⁻¹ᵁ W).ι h).symm ≪≫
+    eqToIso (congrArg schemeDerivedDirectImage (morphismRestrict_ι h W).symm) ≪≫
+    schemeMVDirectImageComposition (h ∣_ W) W.ι
+  have hc := schemeMVOpenComposition_restricted_source_unit X Y h W β rfl I
+  have hf := schemeMVOpenComposition_restriction_factors X Y h W I
+  dsimp only [] at hc hf ⊢
+  rw [hf]
+  have hp := congrArg (fun t ↦ t ≫ (schemeDerivedDirectImage W.ι).map
+    ((schemeDerivedDirectImage (h ∣_ W)).map (LX.mapDerivedCategoryFactors.inv.app I) ≫
+      (schemeMVOpenRestrictionComparison h W).inv.app (DerivedCategory.Q.obj I))) hc
+  simpa only [Functor.map_comp, Category.assoc] using hp
 
 end AlgebraicGeometry

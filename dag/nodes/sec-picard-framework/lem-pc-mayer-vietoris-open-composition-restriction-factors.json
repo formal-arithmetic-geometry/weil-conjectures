@@ -1,0 +1,113 @@
+{
+ "id": "lem-pc-mayer-vietoris-open-composition-restriction-factors",
+ "kind": "statement",
+ "title": "Exact restriction factors across open composition",
+ "statement": "For a scheme morphism h, an open W and an arbitrary complex I on X, Rh of the open-image localization followed by the canonical open comparison equals Rh of the open-localization unit on the termwise restriction J, followed by the canonical composition comparison at QJ, followed by the target-open derived direct image of the restricted derived direct image of the inverse exact X-restriction factor and the inverse derived restriction comparison. This equation has no h-localization unit and no underived complex-composition map. Definitions: [def-pc-mayer-vietoris-image-chain-data], [def-pc-derived-mayer-vietoris-canonical-data]. Exact Lean statement:\ntheorem schemeMVOpenComposition_restriction_factors\n    (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ T : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    [∀ T : Y.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :\n    let LX := schemeOpenRestriction X (h ⁻¹ᵁ W)\n    let J := (LX.mapHomologicalComplex (.up ℤ)).obj I\n    let β := (schemeMVDirectImageComposition (h ⁻¹ᵁ W).ι h).symm ≪≫\n      eqToIso (congrArg schemeDerivedDirectImage (morphismRestrict_ι h W).symm) ≪≫\n      schemeMVDirectImageComposition (h ∣_ W) W.ι\n    (schemeDerivedDirectImage h).map (schemeMVOpenImageLocalization X (h ⁻¹ᵁ W) I) ≫\n      (schemeMVOpenComparison h W (DerivedCategory.Q.obj I)).hom =\n    (schemeDerivedDirectImage h).map ((schemeMVDirectImageLocalization (h ⁻¹ᵁ W).ι).app J) ≫\n      β.hom.app (DerivedCategory.Q.obj J) ≫\n      (schemeDerivedDirectImage W.ι).map\n        ((schemeDerivedDirectImage (h ∣_ W)).map (LX.mapDerivedCategoryFactors.inv.app I) ≫\n          (schemeMVOpenRestrictionComparison h W).inv.app (DerivedCategory.Q.obj I))",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08FE, 0D5T and 079V; official pages read 2026-10-14"
+ },
+ "stmt_deps": [
+  "def-pc-mayer-vietoris-image-chain-data",
+  "def-pc-derived-mayer-vietoris-canonical-data"
+ ],
+ "proof": [
+  {
+   "text": "Expand the open-image localization into its unit and inverse exact source-restriction factor, and expand the canonical open comparison into the beta component and target-open direct image of the inverse restriction comparison. Apply functoriality of Rh. Naturality of beta along the inverse exact source-restriction factor moves that factor to Rj_Y R(h|W). Associate and combine the final two maps by functoriality of Rj_Y. This is the formal naturality square with a unit precomposed and an inverse comparison postcomposed.",
+   "uses": [
+    "def-pc-mayer-vietoris-image-chain-data",
+    "def-pc-derived-mayer-vietoris-canonical-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project, Cohomology of Sheaves",
+    "place": "Tags 08FE, 0D5T and 079V; official pages read 2026-10-14"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-mayer-vietoris-image-chain-data",
+  "def-pc-derived-mayer-vietoris-canonical-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "N1",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08FE, 0D5T and 079V; official pages read 2026-10-14"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a composition isomorphism of derived direct image functors transports an exact restriction comparison through the composition unit",
+   "results": "Generic restriction-composition and localization comparison lemmas; no exact source-presentation or exact restriction-factor formula.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "CategoryTheory.NatTrans.naturality; it gives the formal naturality square, but not the source-presentation specialization.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "composition_left_normalization|OpenComposition_complex_localization|schemeMVOpenImageLocalization|schemeMVOpenComparison",
+   "results": "The existing complex unit equation and the explicit comparison definitions were found and read. No theorem giving either displayed intermediate in the required source presentation was found.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of a natural transformation on identity morphisms identifies the localization units of termwise restriction followed by pushforward",
+   "results": "Service unavailable: Internal Server Error; no results. The other search kinds and local source searches were used.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MayerVietorisCompositionLeftNormalization",
+  "date": "2026-10-14",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-mayer-vietoris-composition-left-normalization",
+   "place": "Exact restriction factors across open composition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MayerVietorisOpenCompositionRestrictionFactors",
+  "file": "lean/Sheaf/AlgebraicGeometry/MayerVietorisOpenCompositionRestrictionFactors.lean",
+  "declaration": "AlgebraicGeometry.schemeMVOpenComposition_restriction_factors",
+  "statement": "theorem schemeMVOpenComposition_restriction_factors\n    (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ T : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    [∀ T : Y.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :\n    let LX := schemeOpenRestriction X (h ⁻¹ᵁ W)\n    let J := (LX.mapHomologicalComplex (.up ℤ)).obj I\n    let β := (schemeMVDirectImageComposition (h ⁻¹ᵁ W).ι h).symm ≪≫\n      eqToIso (congrArg schemeDerivedDirectImage (morphismRestrict_ι h W).symm) ≪≫\n      schemeMVDirectImageComposition (h ∣_ W) W.ι\n    (schemeDerivedDirectImage h).map (schemeMVOpenImageLocalization X (h ⁻¹ᵁ W) I) ≫\n      (schemeMVOpenComparison h W (DerivedCategory.Q.obj I)).hom =\n    (schemeDerivedDirectImage h).map ((schemeMVDirectImageLocalization (h ⁻¹ᵁ W).ι).app J) ≫\n      β.hom.app (DerivedCategory.Q.obj J) ≫\n      (schemeDerivedDirectImage W.ι).map\n        ((schemeDerivedDirectImage (h ∣_ W)).map (LX.mapDerivedCategoryFactors.inv.app I) ≫\n          (schemeMVOpenRestrictionComparison h W).inv.app (DerivedCategory.Q.obj I))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-70ad5",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261014T061028-L-2466374",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-70ad5",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261014T061028-L-2466374",
+  "kind": "interface",
+  "note": "independent Codex review: All three Lean signatures match their nodes; existing signature unchanged. Delivered modules and direct importer MayerVietorisImageCompositionLocalization compile cleanly. Axioms are standard, with sorryAx only for the documented restriction-factor obligation and its dependent proof."
+ }
+}
