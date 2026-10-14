@@ -1,0 +1,128 @@
+{
+ "id": "lem-pd-picard-fpqc-local-equality",
+ "kind": "statement",
+ "title": "Fpqc-local equality of Picard classes determines their relative class",
+ "statement": "Let $f:X\\to B$ be a morphism of schemes [def-pc-picard-presheaf] such that $\\mathcal O_T\\to f_{T,*}\\mathcal O_{X_T}$ is an isomorphism for every scheme $T$ over $B$. Let $L,L\\prime\\in\\operatorname{Pic}(X_T)$, and suppose the sieve of arrows $g:U\\to T$ for which $g_X^*L=g_X^*L\\prime$ is an fpqc covering [def-weil-pbc-fpqc-covering]. Then the images of $L,L\\prime$ in the relative Picard sheaf [def-pc-picard-functor] are equal.",
+ "source": {
+  "document": "Stacks Project and WeilConjectures.AlgebraicGeometry.Picard.Defs",
+  "place": "Tags 0D27 (proof, kernel equals image) and 023T; exists_iso_tensorObj_of_toPicardFunctor_app_eq, ratio-cocycle proof generalized from fppf to fpqc"
+ },
+ "stmt_deps": [
+  "def-pc-picard-presheaf",
+  "def-pc-picard-functor",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof": [
+  {
+   "text": "Refine the fpqc equalizer sieve to an fpqc covering family. Its base change to X_T is fpqc. Form the tensor quotient K=L tensor dual(L-prime); it is trivial over the members of the base-changed covering. Compare its canonical descent datum with that of the pullback P of the base unit module. DescentCocycle.exists_iso_twist produces a ratio cocycle cX and an isomorphism with the twist of the descent datum of P. Universal triviality of the direct image identifies global functions on every X_Y with functions on Y, so cX.ofBaseChange gives a base cocycle cT whose pullback is cX. These are the already proved ratio-cocycle APIs in Picard.TwistedDescent.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Twist the canonical descent datum of the base unit by cT. Effective fpqc descent produces a quasi-coherent base module N; descent of invertibility makes N invertible. Compatibility of twisting with pullback identifies the descent data of f_T^*N and K. Fully faithful fpqc module descent yields f_T^*N isomorphic to K. Cancel the dual of L-prime to obtain L isomorphic to L-prime tensor f_T^*N.",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the reverse implication of toPicardFunctor_app_eq_iff: two invertible modules differing by a module pulled back from the base have equal images in the relative Picard sheaf.",
+   "uses": [
+    "lem-pc-pic-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fpqc-descent",
+  "lem-pc-pic-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project and WeilConjectures.AlgebraicGeometry.Picard.Defs",
+  "place": "Agent adaptation of Tags 0D27 and 023T and the existing ratio-cocycle Lean argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fpqc local equality of line bundles implies equality in the relative Picard sheaf when the structure sheaf has universally trivial direct image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative Picard sheaf is separated for the fpqc topology",
+   "results": "CategoryTheory.Sheaf.hasSeparator; CategoryTheory.Sheaf.isSeparated; CategoryTheory.Sheaf.isSeparating; CategoryTheory.Sheaf.isSeparator; CategoryTheory.Presheaf.IsSheaf.isSeparated; PresheafOfModules.freeYoneda.isSeparating; CategoryTheory.Presieve.IsSheaf.isSeparated; CategoryTheory.Presieve.isSeparated_of_isSheaf",
+   "date": "2026-10-14",
+   "verdict": "No exact match for relative Picard fpqc separatedness."
+  },
+  {
+   "tool": "grep",
+   "query": "picardFunctor|Picard",
+   "results": "Mathlib/Analysis/ODE/ExistUnique.lean; Mathlib/Analysis/ODE/ExistUnique.lean; Mathlib/Analysis/ODE/ExistUnique.lean; Mathlib/Analysis/ODE/ExistUnique.lean; Mathlib/Analysis/ODE/ExistUnique.lean; Mathlib/Analysis/ODE/PicardLindelof.lean; Mathlib/Analysis/ODE/PicardLindelof.lean; Mathlib/Analysis/ODE/PicardLindelof.lean",
+   "date": "2026-10-14",
+   "verdict": "No exact match for relative Picard fpqc separatedness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardDegreeSheafFpqcUniqueness",
+  "date": "2026-10-15",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pd-jacobian-general-field",
+   "place": "Step 7 (functorial identification): fpqc separatedness in the degree-Picard sheaf condition",
+   "via": [
+    "lem-pd-degree-picard-sheaf-fpqc-uniqueness",
+    "lem-pd-degree-picard-sheaf-fpqc"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardFpqcLocalEquality",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardFpqcLocalEquality.lean",
+  "declaration": "AlgebraicGeometry.toPicardFunctor_app_eq_of_fpqc_equalizer",
+  "statement": "theorem toPicardFunctor_app_eq_of_fpqc_equalizer {X S : Scheme.{u}} (f : X ⟶ S)\n    (hf : ∀ T : Over S, IsIso (pushforwardUnitMap (pullback.snd f T.hom)))\n    {T : Over S} (L L' : (picardPresheaf f).obj (op T))\n    (hR : Presheaf.equalizerSieve (F := picardPresheaf f) L L' ∈ (fpqcTopology.over S) T) :\n    (toPicardFunctor f).app (op T) L = (toPicardFunctor f).app (op T) L'",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261014T163359-L-2150771",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261014T163359-L-2150771",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
