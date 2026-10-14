@@ -33,9 +33,57 @@
   "def-pc-fibre-product",
   "def-weil-connected-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $W=\\operatorname{Spec}L$, with structure morphism induced by the field extension $k\\to L$ [def-pc-field-extension]. By [def-weil-affine-spectrum] its underlying space has exactly one point. This space is nonempty, and two disjoint nonempty subsets cannot exist in a singleton. Hence it has no decomposition into two nonempty clopen subsets and is connected by [def-weil-connected-scheme]. This requires only that $L$ is a field, not that $L/k$ is finite or algebraic.",
+   "uses": [
+    "def-pc-field-extension",
+    "def-weil-affine-spectrum",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0363, label lemma-separably-closed-field-connected-components, proof; Tag 0385, label lemma-bijection-connected-components"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-separably-closed-geometrically-connected] to the connected $k$-scheme $W$ of step 1. Its hypotheses are exactly that $k$ is separably closed and that $W$ is a scheme over $k$ and connected. It follows that $W$ is geometrically connected over $k$. This supplies the geometric-connectedness input of the proof of Tag 0363 without a new tensor-product lemma; the reused node has an independently finished project proof.",
+   "uses": [
+    "lem-weil-separably-closed-geometrically-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0363, label lemma-separably-closed-field-connected-components, proof; Tag 0385, label lemma-bijection-connected-components"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-geometrically-connected-product-components] with its $X=W$ and $Y=Z$. Step 2 supplies the only extra hypothesis. Thus $q:W\\times_k Z\\to Z$ induces the stated bijection. By [def-pc-fibre-product], swapping the two projections gives mutually inverse morphisms $Z\\times_kW\\rightleftarrows W\\times_k Z$: their composites have the original projections, so uniqueness in the universal property makes both composites identities. The swap commutes with the projections to $Z$, identifying $q$ with $p$. Write $h$ for the underlying swap homeomorphism. If $C$ is a component, then $h(C)$ is nonempty and connected by continuity. If a nonempty connected subset $D$ contains $h(C)$, continuity of $h^{-1}$ makes $h^{-1}(D)$ connected and containing $C$; maximality gives $h^{-1}(D)=C$, hence $D=h(C)$. Thus $h$ sends components to components, and applying this argument to $h^{-1}$ gives the inverse component bijection. Therefore the bijection for $q$ is precisely the component map induced by $p$. When $Z$ is empty both fibre products are empty and the bijection is the unique map between empty component sets; otherwise the argument uses no finiteness of either component set.",
+   "uses": [
+    "lem-weil-pbc-geometrically-connected-product-components",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0363, label lemma-separably-closed-field-connected-components, proof; Tag 0385, label lemma-bijection-connected-components"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-field-extension",
+  "def-weil-affine-spectrum",
+  "def-weil-connected-scheme",
+  "lem-weil-separably-closed-geometrically-connected",
+  "lem-weil-pbc-geometrically-connected-product-components",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0363, label lemma-separably-closed-field-connected-components, proof; Tag 0385, label lemma-bijection-connected-components; geometric-connectedness input reused from the existing closed second-assertion node"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -92,15 +140,58 @@
    "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.SpecToEquivOfField, PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff, PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable, AlgebraicGeometry.Scheme.Pullback.carrierEquiv, CategoryTheory.PreGaloisCategory.connected_component_unique, AlgebraicGeometry.isField_of_universallyClosed, CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected",
    "date": "2026-10-14",
    "verdict": "no exact match: spectrum point classifications and purely inseparable homeomorphisms do not give arbitrary-extension component invariance; connectedComponentsHomeomorph additionally needs geometric connectedness and openness of the projection"
+  },
+  {
+   "tool": "grep",
+   "query": "connectedComponentsHomeomorph|of_isSepClosed",
+   "results": "{\"t\": \"2026-10-14T10:40:35Z\", \"tool\": \"grep\", \"query\": \"connectedComponentsHomeomorph|of_isSepClosed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\"], \"digest\": \"612026862bac5cda\"}",
+   "date": "2026-10-14",
+   "verdict": "no exact match: component homeomorphism requires geometric connectedness and openness; purely inseparable spectrum results do not cover arbitrary extensions. The project closed theorem supplies the missing geometric-connectedness input."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Connected components of any scheme over a separably closed field are invariant under extension of the field",
+   "results": "{\"t\": \"2026-10-14T10:40:35Z\", \"tool\": \"leansearch\", \"query\": \"Connected components of any scheme over a separably closed field are invariant under extension of the field\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyConnected\", \"ConnectedComponents\"",
+   "results": "{\"t\": \"2026-10-14T10:40:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"GeometricallyConnected\\\", \\\"ConnectedComponents\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no exact match: component homeomorphism requires geometric connectedness and openness; purely inseparable spectrum results do not cover arbitrary extensions. The project closed theorem supplies the missing geometric-connectedness input."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of an arbitrary scheme over a separably closed field along a field extension induces a bijection on connected components",
+   "results": "{\"t\": \"2026-10-14T10:40:35Z\", \"tool\": \"leanfinder\", \"query\": \"Base change of an arbitrary scheme over a separably closed field along a field extension induces a bijection on connected components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isField_of_universallyClosed\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"AlgebraicGeometry.IsSeparated.instMap\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\", \"AlgebraicGeometry.Scheme.isSeparated_iff\"], \"digest\": \"d3725cb76f421ec5\"}",
+   "date": "2026-10-14",
+   "verdict": "no exact match: component homeomorphism requires geometric connectedness and openness; purely inseparable spectrum results do not cover arbitrary extensions. The project closed theorem supplies the missing geometric-connectedness input."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-geometric-component-count-base-change",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-sepclosed-field-components-bijection",
+  "worker": "stage1",
+  "summary": "Retained the exact arbitrary-scheme statement of Stacks 0363. Proved Spec L connected from its one-point space, reused the existing closed separably-closed geometric-connectedness theorem, then applied a new Mathlib leaf for Stacks 0385. Wrote the swap and its compatibility with the projection; checked empty schemes and arbitrary field extensions.",
+  "blueprint": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7). Auxiliary input: Tag 0E0N, label lemma-proper-flat-geom-red, specialized to smooth morphisms (smooth implies flat with geometrically reduced fibres); Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous; Tag 0BUI, replacement of the base by an etale neighbourhood; the count is unchanged; Tag 055F comparison diagram: both projections induce component bijections by Tag 0363, first assertion; realizes the component-bijection input to the 055F comparison diagrams using Tag 0363 and its Tag 0385 product argument."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-9bff820dd",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-9bff820dd (reviewer sub-agent of L); spot-checked: Read the item and new node in full. Stacks 0363/0385, the independent closed geometric-connectedness theorem, Mathlib openness/component-map specialization, factor-swap compatibility, edge cases and duplicate searches pass. Corrected missing provenance/audit metadata in the new leaf’s whole JSON under fixes/. Detailed checks are in review.md; no mathematical statements changed.; 1 file(s) fixed by the reviewer"
+ }
 }
