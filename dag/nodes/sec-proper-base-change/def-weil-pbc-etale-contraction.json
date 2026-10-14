@@ -3,24 +3,93 @@
  "blueprint": {
   "is": "def-weil-pbc-etale-contraction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Successive adjoining of etale sections",
- "statement": "Starting with $R_0=R$, let $R_{n+1}$ be the tensor product over $R_n$ of one\nrepresentative of every faithfully flat etale $R_n$-algebra of finite\npresentation. An arbitrary tensor product here means the filtered colimit of\nits finite tensor products, including the empty tensor product $R_n$. Set\n$R^{\\mathrm e}=\\varinjlim_nR_n$. Representatives are chosen in a fixed\nuniverse throughout.",
+ "statement": "Let $R$ be a commutative ring. Starting with $R_0=R$, choose, for each $n$, a set $S_n$ containing one representative of every isomorphism class of faithfully flat $R_n$-algebras [def-weil-pbc-faithfully-flat-ring-map] that are etale (meaning that $\\operatorname{Spec}B\\to\\operatorname{Spec}R_n$ is etale in [def-weil-etale-morphism], with spectrum as in [def-weil-affine-spectrum]) and of finite presentation [def-weil-pbc-finitely-presented-algebra]. Representatives are chosen in a fixed universe throughout.\n\nThe coproducts of commutative base algebras and the small colimits of commutative rings used below exist by [lem-weil-pbc-commutative-algebras-colimits-exist]; colimit notation and canonical maps are as in [def-weil-pbc-category-colimit].\n\nFor each finite subset $E\\subseteq S_n$, let $B_{n,E}=\\bigotimes_{B\\in E,R_n}B$ be the coproduct in commutative $R_n$-algebras: maps $B_{n,E}\\to D$ of $R_n$-algebras correspond to families of $R_n$-algebra maps $B\\to D$ for $B\\in E$. For $E=\\varnothing$ this is $R_n$. If $E\\subseteq E'$, use the map $B_{n,E}\\to B_{n,E'}$ induced by the canonical maps of the factors; on pure tensors it adjoins $1$ in each new factor. Define $R_{n+1}=\\varinjlim_{E\\subseteq S_n,\\ E\\text{ finite}}B_{n,E}$, with structural map $R_n\\to R_{n+1}$ induced by the empty subset. This is the meaning of the arbitrary tensor product over $R_n$ of all the chosen representatives.\n\nSet $R^{\\mathrm e}=\\varinjlim_{n\\in\\mathbf N}R_n$ using these structural maps. Each colimit is taken in commutative rings, with its canonical ring maps: maps from it to any commutative ring $D$ correspond to families of ring maps from the terms to $D$ compatible with the transition maps. Thus both colimits specify actual rings by their universal properties, up to the unique isomorphism respecting their canonical maps.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-etale-contraction.md",
   "place": "node def-weil-pbc-etale-contraction, order 1226"
  },
  "stmt_deps": [
-  "def-weil-pbc-ind-etale-algebra"
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-commutative-algebras-colimits-exist",
+  "def-weil-pbc-category-colimit"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "successive adjoining faithfully flat etale algebras tensor products filtered colimit",
+   "results": "Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.baseChange, Algebra.FormallyEtale.instTensorProduct, Algebra.Etale.comp, Algebra.FormallyEtale.comp, Algebra.Smooth.exists_finiteType, Algebra.Smooth.exists_subalgebra_finiteType, Algebra.IsEtaleAt.comp",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete iterated construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.Etale, Algebra.IsEtale, FilteredColimit",
+   "results": "loogle: unknown identifier 'Algebra.IsEtale'",
+   "date": "2026-10-14",
+   "verdict": "inconclusive: unknown identifier; superseded by valid Algebra.Etale query"
+  },
+  {
+   "tool": "grep",
+   "query": "faithfully flat.*etale|filtered colimit.*tensor",
+   "results": "Invalid subdirectory Mathlib/ (duplicated Mathlib path); zero hits are not evidence of absence; rerun without subdirectory.",
+   "date": "2026-10-14",
+   "verdict": "inconclusive; corrected by subsequent grep"
+  },
+  {
+   "tool": "leansearch",
+   "query": "construction adjoining every faithfully flat etale algebra by iterated tensor products",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ind etale contraction of a commutative ring obtained as a sequential direct limit of tensor coproducts of all etale covers",
+   "results": "Algebra.Etale.exists_subalgebra_fg, RingHom.Etale.toAlgebra, Algebra.IsEtaleAt.comp, RingHom.etale_algebraMap, Algebra.Etale.comp, StandardEtalePair.instFormallyEtaleRing, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmooth.exists_etale_mvPolynomial",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete iterated construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale",
+   "results": "Algebra.Etale.inst, Algebra.Etale, Algebra.Etale.formallyEtale, Algebra.Etale.instSmooth, Algebra.Etale.instUnramified, Algebra.Etale.finitePresentation, Algebra.Etale.of_isLocalizationAway, Algebra.Etale.iff_formallyUnramified_and_smooth",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete iterated construction"
+  },
+  {
+   "tool": "grep",
+   "query": "IndEtaleContraction|EtaleContraction|etale.*contraction|étale.*contraction",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete iterated construction"
+  },
+  {
+   "tool": "grep",
+   "query": "faithfully flat.*etale|filtered colimit.*tensor",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete iterated construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sequential colimit of coproducts of representatives of faithfully flat etale commutative algebras",
+   "results": "Algebra.Etale.exists_subalgebra_fg, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.FormallyEtale.instForallOfFinite, Algebra.Smooth.exists_finiteType, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.Etale.toAlgebra, Algebra.Etale.comp",
+   "date": "2026-10-14",
+   "verdict": "no match: returned descent, polynomial presentation, finite-product and composition results, not the iterated construction"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -44,5 +113,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-etale-contraction",
+  "worker": "stage1",
+  "summary": "Split this construction definition using existing faithful-flat ring-map, etale morphism and finitely-presented algebra definitions; specify finite tensor coproducts, empty tensor, transition maps and colimit universal properties inline. Removed the unused ind-etale definition: being ind-etale is a property proved by the separate lemma, not data needed here. No new nodes or proof steps. Related project IndEtaleContraction uses a non-skeletal small model, so no exact attachment is asserted. Second reading explicitly cites the existing affine-spectrum definition and marks the invalid Loogle query inconclusive. Maintainer reading adds the existing colimit definition and commutative-algebra colimit-existence leaf, supplying the existence of the finite coproducts and both small colimits without introducing a new lemma.",
+  "blueprint": "Realizes the entire statement of def-weil-pbc-etale-contraction, order 1226: successive tensor products of representatives, finite-subset colimits including the empty subset, sequential colimit and fixed universe. The blueprint definition has no proof.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-32a924515",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-32a924515 (reviewer sub-agent of L); spot-checked: Read the definition, cited statements, blueprint route, and source locations in full. Added existing colimit-definition and commutative-algebra colimit-existence citations; corrected JSON is under fixes/dag/nodes. Checked transition compatibility, empty tensors, zero-ring and field cases, searches, duplicates, and acyclicity. No target weakened; no comparison theorem or exact Lean attachment assumed. Details in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
