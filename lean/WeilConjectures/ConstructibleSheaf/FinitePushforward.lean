@@ -18,6 +18,7 @@ import Mathlib.CategoryTheory.Presentable.Directed
 import Sheaf.AlgebraicGeometry.ConstructibleAffineFreePresentationGeneral
 import Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit
 import Mathlib.CategoryTheory.Presentable.Limits
+import Sheaf.AlgebraicGeometry.ConstructibleFiniteSelection
 
 /-!
 # Constructible sheaves embed into finite pushforwards of constant sheaves
