@@ -24,9 +24,108 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct $\\mathcal D'$ inside $\\operatorname{Sh}(\\mathcal D)$ as follows. Start with all $h_V^\\#$, the terminal sheaf and $\\mathcal O_{\\mathcal D}$, and repeatedly adjoin a chosen fibre product for every pair of arrows with common target between objects already present. Take the union over $n\\in\\mathbf N$ and take all morphisms between its objects. At each stage there are only a set of arrows, so only a set of new objects. The cited sectionwise-limit theorem supplies the terminal object and every required fibre product. Any finite collection of objects and arrows occurs at some stage, so the union is closed under fibre products and has the terminal object; these give all finite limits. For instance equalizers are pullbacks of the diagonal $B\\to B\\times B$ along $(a,b):A\\to B\\times B$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CI (sites-lemma-topos-good-site), finite-limit closure construction"
+   }
+  },
+  {
+   "text": "Give $\\mathcal D'$ epimorphic covering families. Apply the comparison lemma to this prescribed subcategory: it supplies the small site structure, subcanonicity, and the equivalence $e$ with $(e_*G)(B)=\\operatorname{Hom}_{\\operatorname{Sh}(\\mathcal D)}(B,G)$. Now construct $\\mathcal C'$ in $\\operatorname{Sh}(\\mathcal C)$ by the same closure process, starting with all $h_U^\\#$, the terminal sheaf, $\\mathcal O_{\\mathcal C}$, and all $f^{-1}B$ for $B\\in\\mathcal D'$. This last collection is a set because $\\mathcal D'$ is small. The sectionwise-limit theorem again supplies all pullbacks. Apply the comparison lemma again to obtain $g$ with $(g_*F)(A)=\\operatorname{Hom}_{\\operatorname{Sh}(\\mathcal C)}(A,F)$. Thus both sites have finite limits and both equivalences have the specified Hom formula.",
+   "uses": [
+    "lem-weil-pbc-sheaf-subcategory-comparison",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03A1 (sites-lemma-special-equivalence), 03CI (sites-lemma-topos-good-site), and 03A2 (sites-lemma-morphism-topoi-comes-from-morphism-sites), construction"
+   }
+  },
+  {
+   "text": "Define $v:\\mathcal D'\\to\\mathcal C'$ by $v(B)=f^{-1}B$, also on arrows. It is well defined by the starting collection of $\\mathcal C'$. Limits in the two full subcategories are their ambient sheaf limits, and $f^{-1}$ preserves finite limits by hypothesis. Thus $v$ preserves finite limits, including the terminal object.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A2 construction and Remark sites-remark-morphism-topoi-comes-from-morphism-sites"
+   }
+  },
+  {
+   "text": "Verify that $v$ sends epimorphic covering families to epimorphic families. A left adjoint preserves each existing colimit: for a colimit $Q$ of $(B_i)$, adjunction identifies $\\operatorname{Hom}(f^{-1}Q,F)$ with compatible families of maps $f^{-1}B_i\\to F$, giving the colimit universal property. The relevant coproducts exist by taking sectionwise presheaf coproducts and sheafifying: the presheaf-colimit theorem gives the first universal property and the sheafification adjunction gives the second. If $p:\\coprod_i B_i\\to B$ is epi, the cited kernel-pair theorem makes it a coequalizer. Applying $f^{-1}$ gives a coequalizer, hence an epi (two maps equal after its coequalizer arrow are equal by uniqueness). Since $f^{-1}(\\coprod_i B_i)\\cong\\coprod_i f^{-1}B_i$, this is the desired covering family. The comparison lemma identifies these families with coverings. Choose representative sets of coverings on both sites to include these images; adjoining such families changes neither topology nor sheaves. The remaining continuity condition is the pullback comparison, already an isomorphism by step 3.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer",
+    "lem-weil-pbc-presheaf-colimits-sectionwise",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sheaf-subcategory-comparison",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A2 proof, continuity; Tag 086K (sites-lemma-coequalizer-surjection)"
+   }
+  },
+  {
+   "text": "The existing left-exact site-inverse-image theorem applies to $v$: its domain $\\mathcal D'$ has finite limits, $v$ preserves them and sends coverings to coverings, and both sites are small. It gives the morphism $h:\\operatorname{Sh}(\\mathcal C')\\to\\operatorname{Sh}(\\mathcal D')$ with $h_*H=H\\circ v$ and finite-limit-preserving left adjoint $h^{-1}$. All constructions may be taken in a common universe containing the set of objects and morphisms of the replacement sites, with sheaf values in a larger universe.",
+   "uses": [
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00X6 (sites-proposition-get-morphism), as used in sites-remark-morphism-topoi-comes-from-morphism-sites"
+   }
+  },
+  {
+   "text": "For $F\\in\\operatorname{Sh}(\\mathcal C)$ and $B\\in\\mathcal D'$, compute $(h_*g_*F)(B)=\\operatorname{Hom}_{\\operatorname{Sh}(\\mathcal C)}(f^{-1}B,F)\\cong\\operatorname{Hom}_{\\operatorname{Sh}(\\mathcal D)}(B,f_*F)=(e_*f_*F)(B)$. The equalities are the comparison lemma's Hom formulas, and the bijection is precisely the given adjunction. It is natural in both $B$ and $F$, so defines $\\theta:e_*f_*\\xrightarrow{\\sim}h_*g_*$. This identifies the direct images of $e\\circ f$ and $h\\circ g$. It identifies the inverse images compatibly with their adjunctions as well: for every test object $T$, applying the two adjunctions to $\\theta$ gives natural bijections between the Hom functors of $f^{-1}e^{-1}T$ and $g^{-1}h^{-1}T$. The Yoneda Hom-bijection theorem gives the resulting isomorphism and its inverse; the triangular identities make it the mate of $\\theta$.",
+   "uses": [
+    "lem-weil-pbc-sheaf-subcategory-comparison",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A2 proof, displayed adjunction calculation"
+   }
+  },
+  {
+   "text": "Supply the ring data explicitly. Finite-product-preserving functors carry a ring object's operations $+,0,-,\\cdot,1$ and each ring axiom diagram to those of a ring object. Natural transformations between such functors commute with these operations by naturality at the operation maps and at the product projections. The algebraic-structure theorem identifies these with actual sheaves of rings. Thus put $\\mathcal O_{\\mathcal C'}=g_*\\mathcal O_{\\mathcal C}$ and $\\mathcal O_{\\mathcal D'}=e_*\\mathcal O_{\\mathcal D}$; the counits $g^{-1}g_*\\mathcal O_{\\mathcal C}\\to\\mathcal O_{\\mathcal C}$ and $e^{-1}e_*\\mathcal O_{\\mathcal D}\\to\\mathcal O_{\\mathcal D}$ are ring isomorphisms, since $g,e$ are equivalences. Let $\\bar f^\\sharp:\\mathcal O_{\\mathcal D}\\to f_*\\mathcal O_{\\mathcal C}$ be the adjunct of the given ring map. Define the direct-image ring map of $h$ to be $\\mathcal O_{\\mathcal D'}\\xrightarrow{e_*\\bar f^\\sharp}e_*f_*\\mathcal O_{\\mathcal C}\\xrightarrow{\\theta_{\\mathcal O_{\\mathcal C}}}h_*\\mathcal O_{\\mathcal C'}$, and let $h^\\sharp$ be its adjunct. Both adjunctions on ring objects use the same unit and counit maps as on sets, because those maps commute with the operations. Under the canonical unit/counit identifications for $g,e$, the structure map of $e\\circ f$ in direct-image form is $e_*\\bar f^\\sharp$, and that of $h\\circ g$ is the displayed composite. Their compatibility with $\\theta$ is therefore the defining equality, not an additional assertion about transport. Consequently step 6 is an isomorphism of ringed-topos morphisms, with the required transported rings and canonical ring maps.",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CR (sites-modules-lemma-morphism-ringed-topoi-comes-from-morphism-ringed-sites), omitted ring-sheaf details; Sites Section 00YR"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-sheaf-subcategory-comparison",
+  "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer",
+  "lem-weil-pbc-presheaf-colimits-sectionwise",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CR, using the constructions and Hom calculation of Sites Tags 03A1, 03CI and 03A2; ring compatibility details supplied explicitly"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +161,45 @@
    "results": "{\"t\": \"2026-10-13T23:57:26Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric morphisms of sheaf categories admit a left exact continuous site presentation compatible with ring objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasSheafify.isLeftExact\", \"CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf\", \"CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf\", \"CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf\", \"CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts\", \"CondensedMod.ofSheafCompHaus\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp\"], \"digest\": \"b4478b3b81f1f008\"}",
    "date": "2026-10-14",
    "verdict": "no match: inspected hits concern sheafification, ordinary modules or internal projectivity, not this arbitrary ring-sheaf theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every morphism of ringed topoi can be presented by a continuous finite limit preserving functor between small sites",
+   "results": "{\"t\": \"2026-10-14T01:21:51Z\", \"tool\": \"leanfinder\", \"query\": \"Every morphism of ringed topoi can be presented by a continuous finite limit preserving functor between small sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"LightProfinite.instWEqualsLocallyBijectiveCoherentTopology\", \"instCategoryLightCondensed\", \"LightCondensed.ofSheafForgetLightProfinite\", \"CategoryTheory.HasGlobalSectionsFunctor\", \"Condensed.ofSheafForgetCompHaus\", \"LightProfinite.hasSheafify\"], \"digest\": \"6be17f18bf49ecf5\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: hits give module adjunctions or dense-subsite APIs, not arbitrary ringed-topos presentations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsContinuous\", \"PreservesFiniteLimits\"",
+   "results": "{\"t\": \"2026-10-14T01:21:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsContinuous\\\", \\\"PreservesFiniteLimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: hits give module adjunctions or dense-subsite APIs, not arbitrary ringed-topos presentations"
+  },
+  {
+   "tool": "grep",
+   "query": "ringed.*topo|topo.*presentation|good.*site",
+   "results": "{\"t\": \"2026-10-14T01:21:52Z\", \"tool\": \"grep\", \"query\": \"ringed.*topo|topo.*presentation|good.*site\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: hits give module adjunctions or dense-subsite APIs, not arbitrary ringed-topos presentations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric morphisms of ringed sheaf topoi admit left exact continuous small site presentations",
+   "results": "{\"t\": \"2026-10-14T01:21:52Z\", \"tool\": \"leansearch\", \"query\": \"Geometric morphisms of ringed sheaf topoi admit left exact continuous small site presentations\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric morphisms between Grothendieck topoi can be represented by left exact functors between sites with transported ring objects",
+   "results": "{\"t\": \"2026-10-14T01:21:53Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric morphisms between Grothendieck topoi can be represented by left exact functors between sites with transported ring objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.bijective_pushforwardSections\", \"CategoryTheory.Functor.IsCoverDense.faithful_sheafPushforwardContinuous\", \"SheafOfModules.instIsRightAdjointPushforward\", \"CategoryTheory.Functor.sheafAdjunctionContinuous\", \"LightCondMod.instPreservesEpimorphismsLightCondSetForget\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"instCategoryLightCondensed\"], \"digest\": \"5afd89e4eb497d47\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: hits give module adjunctions or dense-subsite APIs, not arbitrary ringed-topos presentations"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-ringed-topos-flat-module-pullback",
   "by": "worker",
@@ -80,5 +214,39 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ringed-topos-site-presentation",
+  "worker": "stage1",
+  "summary": "Constructed both replacement sites as small full finite-limit-closed subcategories of sheaves; one new prescribed-subcategory comparison lemma (03A1), reused existing limits, effective epimorphism and continuous left-exact functor nodes. Wrote out the adjunction calculation and ring-map compatibility omitted by 03CR. No statement change or Lean attachment.",
+  "blueprint": "Detailed form, first strict-tower pullback functor: reduction to finite-limit sites in the proof of flatness of pulled-back terms (05VD, opening paragraph).",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "General sheaf/category infrastructure used as a tool in the site-presentation construction; this unit has no replacement statement for it."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "why": "General sheaf/category infrastructure used as a tool in the site-presentation construction; this unit has no replacement statement for it."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Adjunction preserves existing small colimits, used for coproducts and coequalizers to verify continuity; this is category-theoretic infrastructure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-44e49da1f",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-44e49da1f (reviewer sub-agent of L); spot-checked: Read all mathematics and cited statements; checked Stacks 03CR, 03A1, 03CI, 03A2, 000X and archived target signatures. All seven steps and the new comparison lemma are sound. Added missing new-node metadata in fixes; review.md documents edge cases, accepted tool uses, and pre-existing dependency cycles.; 1 file(s) fixed by the reviewer"
  }
 }
