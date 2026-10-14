@@ -14822,3 +14822,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:44 L: batch 20261014T104039 dependency take-out
 - 10:44 L: returned deliver/S1/Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit (reviewer RETURN: (reviewer X-2de7c, head 2de7c21b1) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.No)
 - 10:46 L: returned deliver/G4/Sheaf.AlgebraicGeometry.AbelianResolutionComparisonEvaluation (reviewer RETURN: (reviewer X-343f1, head 343f18ae2) F1: report.md is missing the mandatory `## Forced adaptations` section. Insert before)
+- 10:46 L: merged deliver/B2/Sheaf.AlgebraicGeometry.ScalarModuleCohomologyPullbackComparison (stage 3; reviewer PASS; first push; landing 20261014T104636-L-1525798 (interface); batch 20261014T104634; modules 1; new nodes 0; change records: coord/changes/scalar-module-cohomology-pullback-proof-context.md)

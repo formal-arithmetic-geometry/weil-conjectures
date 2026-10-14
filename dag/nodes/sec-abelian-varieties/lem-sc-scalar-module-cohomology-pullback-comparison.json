@@ -14,7 +14,54 @@
  },
  "proof": [
   {
-   "text": "The proof is the compatible injective-resolution comparison described in the declaration docstring: identify scalar Ext classes with module resolution cycles via evaluation at the unit, compare pullback or signed tensor pairing, and transport through the canonical cohomology comparison maps. Resolution independence removes choices.",
+   "text": "Use the actual choices D in moduleCohomologyFMap of the tensor-pullback unit. Represent the input class on D.J by a closed module morphism from the structure module, using exists_moduleExtEquiv and InjectiveResolution.extMk_surjective. Evaluation at 1 identifies its global section with the chosen resolution cycle.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Scalar restriction preserves injectives by fieldScalarRestriction_preservesInjectives, transported through the sectionwise restriction-of-scalars isomorphism. Construct the natural identity-on-sections isomorphism between scalar restriction of module direct image and direct image of scalar sheaves; its linearity follows from a being over Spec k. Scalar direct image preserves injectives because its inverse-image left adjoint is exact.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "lem-sc-field-scalar-restriction-injectives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "After scalar restriction, D.lambda is a quasi-isomorphism between nonnegative complexes of injectives. Mathlib CochainComplex.quasiIso_iff_of_injective gives a homotopy inverse. Compose the scalar image of D.beta with this inverse to obtain tau into the scalar direct image of D.I. The homotopy identity at degree zero, precomposed with the closed augmentation, and D.compatible show that tau lifts precisely the adjoint of scalarPullbackCoefficient. Its composite with the scalar image of D.lambda is homotopic to the scalar image of D.beta.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-sc-field-scalar-restriction-injectives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the inverse-image/direct-image adjoint gamma of tau, componentwise on complexes. Apply the proved generic tool exactFunctor_resolution_cocycle to transport the resolution cocycle and compose its coefficient. Mathlib InjectiveResolution.mk₀_comp_extMk then precomposes the source unit morphism. The generic tool permits independent module Ext universe w and scalar Ext universe w+1. This identifies the scalar pullback class with the closed scalar unit morphism theta on D.I.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "lem-weil-pbc-exact-functor-resolution-cocycle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant-sheaf pullback isomorphism is defined by uniqueness of left adjoints. Its hom-equivalence formula proves that evaluation at 1 of theta is tau applied to the original global section. Use the equivalence between structure-module unit maps and scalar unit maps to construct the corresponding closed module morphism on D.I, and its concrete global-section cycle c-prime.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply global sections and forget scalars to the homotopy comparing tau with D.beta. The canonical direct-image sections comparison D.a is the identity on the underlying abelian-group complex, by D.sections. The forgetful cycles and homology comparison isomorphisms commute with the class maps. Naturality and homotopy invariance of homology, followed by cancellation of the invertible H(Gamma lambda), show that D.map takes the input class to the class of c-prime.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the scalarCohomologyExtEquiv cocycle formula to c-prime. Its scalar unit morphism is theta, by the unit-morphism equivalence. The exact-functor cocycle calculation and injectivity of scalarCohomologyExtEquiv identify the two pullbacks. No degree, quasi-coherence, flatness, or nonempty-space assumption is introduced.",
    "uses": [
     "def-sc-field-linear-module-cohomology-operations",
     "def-weil-pbc-module-cohomology-fmap"
@@ -24,12 +71,16 @@
  ],
  "proof_deps": [
   "def-sc-field-linear-module-cohomology-operations",
-  "def-weil-pbc-module-cohomology-fmap"
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-sc-field-scalar-restriction-injectives",
+  "lem-weil-pbc-exact-functor-resolution-cocycle"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "Stacks Project",
-  "place": "Tag 01F7, functoriality of cohomology"
+  "group": "B2",
+  "date": "2026-10-14",
+  "document": "Stacks Project, Cohomology of Sheaves; Mathlib",
+  "place": "Tag 01F7, compatible resolution lifts; CochainComplex.quasiIso_iff_of_injective; exactFunctor_resolution_cocycle and Mathlib source precomposition; explicit forgetful homology calculations in the Lean proof."
  },
  "mathlib_searches": [
   {
@@ -96,11 +147,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R1",
+  "reviewer": "X-6596c",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261014T034911-L-815187",
+  "landing": "20261014T104636-L-1525798",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged theorem signature and node statement with the resolution-cocycle proof, updated proof dependencies, local context changes, and report; delivery compiles cleanly and all proved declarations use only the three permitted axioms."
  }
 }
