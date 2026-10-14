@@ -14910,3 +14910,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:30 L: merged deliver/Q3/WeilConjectures.ConstructibleSheaf.FinitePushforward (stage 3; reviewer PASS; first push; landing 20261014T173045-L-2910045 (interface); batch 20261014T173043; modules 3; new nodes 2)
 - 17:35 L: returned deliver/Z2/Sheaf.AlgebraicGeometry.MeromorphicModule (reviewer RETURN: (reviewer X-578d8, head 578d8eb16) F (report; coord/brief-stage3.md §4): In coord/reports/Z2/Sheaf.AlgebraicGeometry.Mer)
 - 17:35 L: returned deliver/Z2/Sheaf.AlgebraicGeometry.ConstantGroupScheme (reviewer RETURN: (reviewer X-420c0, head 420c06c7a) d: Add Sheaf.AlgebraicGeometry.ConstantGroupSchemeMorphismsClopenAdditive to `coord/c)
+- 17:35 L: returned deliver/XR4ee1424d1f9ed605/Sheaf.AlgebraicGeometry.ClosedImmersionResidueFieldIso (reviewer RETURN: (the landing tools, head 55307de9d) the delivery did not land: lean/Sheaf/AlgebraicGeometry/ClosedImmersionResidueFieldI)
