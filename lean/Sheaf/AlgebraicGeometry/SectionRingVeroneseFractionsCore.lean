@@ -12,8 +12,6 @@ public import Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionKernel
 The canonical map from the section-fraction presentation, sending a class
 `[n, ξ]` to the homogeneous fraction `ξ / s^n`, is constructed by descending
 the explicit numerator map through the section-fraction relations.
-The theorem records bijectivity of this specific canonical map together with its
-generator formula.
 Source: Stacks Project, Properties, Tags 0B5L, 01PW, and 01Q1.
 -/
 
