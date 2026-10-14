@@ -25,9 +25,77 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $T\\cong\\operatorname{Spec}A$ using [def-pc-scheme]. By [def-weil-affine-spectrum], the Zariski closed sets are $V(I)=\\{\\mathfrak q:I\\subseteq\\mathfrak q\\}$. Since $V(\\mathfrak p)$ contains $\\mathfrak p$ and is contained in every closed set containing it, the closure of the point $\\mathfrak p$ is $V(\\mathfrak p)$, the primes containing $\\mathfrak p$. Closedness of every point therefore says every prime is maximal: if $\\mathfrak p\\subsetneq J\\subsetneq A$, apply [lem-weil-pbc-minimal-prime-over-proper-ideal] to $J$ to obtain a prime $\\mathfrak q\\supseteq J$. Then $\\mathfrak q\\ne\\mathfrak p$ lies in $V(\\mathfrak p)$, contradicting closedness of the singleton. Apply [lem-weil-pbc-zero-dimensional-spectrum-profinite] to conclude that $|T|$ is compact Hausdorff and totally disconnected. No reducedness or finiteness is required.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-zero-dimensional-spectrum-profinite",
+    "lem-weil-pbc-minimal-prime-over-proper-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09AY, first sentence of proof; Algebra Tag 04MG; Algebra Tag 00E0, lemma-Zariski-topology, prime existence over a proper ideal"
+   }
+  },
+  {
+   "text": "Fix a point corresponding to $\\mathfrak p\\subset A$. Every prime is minimal as well as maximal, since an inclusion between two maximal proper ideals is an equality. By clause (1) of [lem-weil-pbc-spec-domain-stalks-function-field], $\\mathcal O_{T,t}\\cong A_{\\mathfrak p}$; it is local with maximal ideal $\\mathfrak p A_{\\mathfrak p}$ by [def-weil-pbc-localization-at-prime]. Apply [lem-weil-pbc-minimal-prime-localization-radical] to $I=0$ to identify this maximal ideal with $\\sqrt{0}$. Every prime contains every nilpotent element (if $a^n=0$ lies in a prime, repeated primality gives $a$ in it); hence every prime of $A_{\\mathfrak p}$ contains its maximal ideal and must equal it. Its residue field is the assumed separably closed $\\kappa(t)$. Apply [lem-weil-pbc-dimension-zero-local-strictly-henselian] to this local ring. Thus all local rings of $T$ are strictly henselian.",
+   "uses": [
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-minimal-prime-localization-radical",
+    "lem-weil-pbc-dimension-zero-local-strictly-henselian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09AY, third sentence of proof; Algebra Tag 06RS"
+   }
+  },
+  {
+   "text": "For the given abelian etale sheaf $F$, apply [lem-weil-pbc-gabber-strict-henselian-zariski-comparison] using step 2. Its direct image $\\epsilon_*F$ is the abelian Zariski sheaf assigning $F(U\\hookrightarrow T)$ to every open $U$. It gives an isomorphism $H^i(T_{\\rm Zar},\\epsilon_*F)\\cong H^i(T_{\\rm et},F)$ for every $i\\ge0$. This is comparison with the direct image, not an assertion that $F$ itself is a Zariski sheaf.",
+   "uses": [
+    "lem-weil-pbc-gabber-strict-henselian-zariski-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09AY, final sentence of proof; Tag 09AX"
+   }
+  },
+  {
+   "text": "By [def-sc-topological-abelian-cohomology], cohomology on the open-set site of $|T|$ is the Zariski cohomology of the scheme. Apply [lem-cbc-profinite-topological-cohomology-vanishing] to $|T|$ from step 1 and $G=\\epsilon_*F$ from step 3: for $i>0$ the source of the comparison is zero. Since that comparison is an isomorphism, its target $H^i(T_{\\rm et},F)$ is zero as well.",
+   "uses": [
+    "def-sc-topological-abelian-cohomology",
+    "lem-cbc-profinite-topological-cohomology-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09AY, second and final sentences; Cohomology Tag 0A3F"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-zero-dimensional-spectrum-profinite",
+  "lem-weil-pbc-minimal-prime-over-proper-ideal",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-minimal-prime-localization-radical",
+  "lem-weil-pbc-dimension-zero-local-strictly-henselian",
+  "lem-weil-pbc-gabber-strict-henselian-zariski-comparison",
+  "def-sc-topological-abelian-cohomology",
+  "lem-cbc-profinite-topological-cohomology-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09AY, lemma-affine-only-closed-points, proof via 04MG, 06RS, 09AX and 0A3F"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -84,15 +152,65 @@
    "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, Algebra.H1Cotangent.exact_map_δ, Algebra.Extension.exact_cotangentComplex_toKaehler, Algebra.etaleLocus_eq_compl_support, Algebra.Generators.H1Cotangent.exact_map_δ'",
    "date": "2026-10-14",
    "verdict": "no match: read returned signatures; structure-sheaf limits, cotangent exactness, and dense-subsite sheaf isomorphisms do not assert the required etale cohomology theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology of an affine scheme with all points closed and separably closed residue fields is zero in positive degrees",
+   "results": "8 hits: Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.formallyEtale_iff, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.etaleLocus_eq_compl_support, Algebra.etaleLocus_eq_univ_iff, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, Algebra.Etale.formallyEtale",
+   "date": "2026-10-14",
+   "verdict": "no match: returned singular homology, condensed sheaf constructions, cohomology definitions, injective-sheaf vanishing, or cotangent-complex facts do not state arbitrary-sheaf cohomology vanishing on the open-set site"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smallEtaleTopology\", \"cohomology\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: returned singular homology, condensed sheaf constructions, cohomology definitions, injective-sheaf vanishing, or cotangent-complex facts do not state arbitrary-sheaf cohomology vanishing on the open-set site"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*acyclic|closed.*points.*cohomology|cohomology.*strictlyHenselian",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: returned singular homology, condensed sheaf constructions, cohomology definitions, injective-sheaf vanishing, or cotangent-complex facts do not state arbitrary-sheaf cohomology vanishing on the open-set site"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology of zero dimensional affine schemes with separably closed residue fields vanishes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine zero dimensional scheme with strictly henselian local rings is acyclic for arbitrary abelian etale sheaves",
+   "results": "8 hits: Algebra.formallyEtale_iff, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.etaleLocus_eq_univ_iff, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.Scheme.Etale, Algebra.Etale.formallyEtale, Algebra.FormallyEtale.of_unramified_and_smooth, AlgebraicGeometry.instIsAffineOfSubsingletonCarrierCarrierCommRingCat",
+   "date": "2026-10-14",
+   "verdict": "no match: returned singular homology, condensed sheaf constructions, cohomology definitions, injective-sheaf vanishing, or cotangent-complex facts do not state arbitrary-sheaf cohomology vanishing on the open-set site"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-proetale-functions-quotient-sections",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-comparison"
+ "unit": "sk-prop-sf-comparison",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-cbc-affine-sepclosed-etale-acyclic",
+  "worker": "stage1",
+  "summary": "Followed Tag 09AY without changing the statement: profinite spectrum, strictly henselian stalks, comparison with the Zariski direct image, and profinite topological cohomology vanishing. Reused existing general algebra and comparison nodes; created only the missing topological vanishing lemma.",
+  "blueprint": "Realizes the acyclicity input in Proof Step 4 of lem-cbc-proetale-stalk-conservative, via lem-cbc-proetale-functions-quotient-sections."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-cc77b703c",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-cc77b703c (reviewer sub-agent of L); spot-checked: Read the mathematics, cited sources, DAG candidates, route, and archived target declarations in full. Repaired step 1’s missing prime-existence citation and completed the new node’s metadata. Statements unchanged; no mathematical gap, duplicate, or cycle found. Concrete checks and accepted tool uses are recorded in review.md; corrected JSON files are under fixes/dag/nodes/sec-smooth-purity/.; 2 file(s) fixed by the reviewer"
+ }
 }
