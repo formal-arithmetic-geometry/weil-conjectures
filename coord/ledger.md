@@ -13968,3 +13968,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:17 L: merged deliver/B2/Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationCompletion (stage 3; reviewer PASS; first push; landing 20261014T001713-L-2547413 (interface); batch 20261014T001711; modules 3; new nodes 2)
 - 00:17 L: merged deliver/B2/Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf (stage 3; reviewer PASS; first push; landing 20261014T001713-L-2547589 (proof); batch 20261014T001711; modules 1; new nodes 0)
 - 00:17 L: merged deliver/E1/Sheaf.Algebra.Homology.DerivedExtensionRingEquivRawCounit (stage 3; reviewer PASS; first push; landing 20261014T001713-L-2547783 (interface); batch 20261014T001711; modules 3; new nodes 2)
+- 00:17 L: merged deliver/E1/Sheaf.Algebra.Homology.SecondLocalizationOrdinaryBSquare (stage 3; reviewer PASS; first push; landing 20261014T001714-L-2547936 (interface); batch 20261014T001711; modules 2; new nodes 1)
