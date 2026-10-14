@@ -100,4 +100,5 @@ theorem cartier_equality
   have hzero : Algebra.trdeg k K = 0 := by
     exact trdeg_eq_zero
   rw [hzero, zero_add] at heq
+  -- The cardinal equality specializes to the finite-dimensional equality.
   exact_mod_cast heq.symm

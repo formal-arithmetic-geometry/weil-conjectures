@@ -1,71 +1,71 @@
 ## What changed
 
-Copied the existing proved `cartier_equality` theorem into the F2 sandbox for review. The only source change is an explanatory proof comment before the finite-basis construction. The theorem already compiles and contains no `sorry`.
+Copied the already-proved `cartier_equality` theorem into the F2 sandbox and added
+one explanatory comment at the final finite-dimensional specialization. The proof
+compiles and introduces no new declarations or imports.
 
 ## Proved and sorry left
 
-`cartier_equality` is already proved on the repository baseline (one of one theorem). Holes closed by this delivery: none. Holes added: none. There are no `sorry` declarations in the delivered module, no split-off statements, and no net hole reduction.
+`cartier_equality` has a complete proof (one theorem of one); F2 closed zero holes. There are no `sorry`s left and
+no `sorry` declarations were added. The repository baseline already contained this
+complete proof, so this delivery closes no additional hole.
 
 ## No longer needed
 
-No imports, nodes, or modules were removed. The existing proof uses both complete-intersection dependency modules and the finite transcendence-basis construction.
+No imports, nodes, or modules were removed. The proof uses the complete-intersection
+model, fraction-field cotangent model, and finite transcendence-basis dependencies
+recorded by `lem-weil-pbc-cartier-equality`.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The brief describes this item as still containing `sorry`, but the repository module already contains the complete compiling proof landed previously. No statement or definition was changed.
+The item remains listed in `coord/repairs.txt` for upstream review #1428, but the
+qualified field-generation hypothesis has already been repaired. The brief
+describes this module as containing `sorry`, but the current repository
+already contains a compiling proof (landed previously). The DAG proof plan agrees
+with the implementation; no statement or definition was changed.
 
 ## New nodes
 
 None.
 
-## Earlier second reading (a previous round; superseded)
-
-The theorem statement is unchanged and the proof compiles through `lcompile.py`. The
-proof has no `sorry`, forbidden declarations, or new nodes; its imports and model
-lemmas match the DAG route.
-
 ## Second reading by F2
 
-1. Compared the sandbox module with the repository using `diff -u`. The sole
-   difference is the comment before `Algebra.EssFiniteType`; all signatures,
-   definitions, imports, visibility, and proof terms are unchanged. In particular
-   the hypothesis is field generation `(⊤ : IntermediateField k K).FG`, not
-   finite generation as an algebra. Read the existing field-generation change
-   records; none requires a further interface edit. Verdict: unchanged statement.
-2. Compiled the delivered file through `lcompile.py` (also the delivery probe).
-   Compiled a scratch copy with `#print axioms cartier_equality`: exactly
-   `propext`, `Classical.choice`, and `Quot.sound`, with no `sorryAx`. The module
-   contains no holes or forbidden declarations and introduces no data definitions.
-   Verdict: a kernel-checked proof, including its imported dependencies.
-3. There are no split-off statements or new nodes to check or search for.
-   Read both model theorem signatures: the first supplies a regular sequence
-   with `c ≤ n`, `n - c = s.card`, and `f.length = c`, a domain structure and
-   the fraction-field equivalence; the second uses precisely that regularity,
-   domain structure and equivalence to supply the kernel/cokernel models.
-   No arbitrary witness is installed as a public data definition. Verdict: no split.
-4. Read the proof top to bottom. Finite field generation gives essential finite
-   type and a finite transcendence basis; reindexing a finite generating set
-   preserves its range. The two model lemmas supply the required finite vector
-   spaces, and the two quotient dimension equations imply the untruncated
-   natural-number equality using `c ≤ n`. Casting to Cardinal preserves that
-   equality; finite-dimensional extensions have transcendence degree zero.
-   This also covers an empty transcendence basis and the identity extension.
-   Searched Sheaf, WeilConjectures and Mathlib FieldTheory/RingTheory for a
-   theorem combining transcendence degree with Kähler or H1 dimensions; the
-   separably generated differential theorem has stronger hypotheses and does
-   not replace this route. The two Sheaf imports and FinTrdeg are proof-only;
-   public imports provide the statement's vocabulary. No dependency was removed,
-   so `## No longer needed` is complete. Read `sk-thm-p1.json`: its realized
-   statement and steps are untouched, and this subordinate argument bypasses
-   none of them. Verdict: retain the existing proof and imports.
-5. Opened `lem-weil-pbc-cartier-equality.json`. Its three proof steps and
-   `proof_deps` match the finite-basis/model construction, cotangent comparison,
-   and rank-nullity/cardinal calculation in Lean. Its `proof_origin` names
-   the same Tag 07E1 route. No node edit is necessary. Verdict: DAG agrees.
+1. Interface: `diff -u` against the repository shows only one added explanatory
+   comment before `exact_mod_cast heq.symm`. The full `cartier_equality` signature,
+   declaration visibility, imports, and definitions are byte-for-byte unchanged.
+   In particular `IntermediateField.FG` remains the hypothesis, not algebra finite
+   type, and the untruncated equality is still in `Cardinal`. Pass.
+2. Proof: compiled the delivered file with `lcompile.py` (exit 0, no warnings).
+   A scratch copy with `#print axioms cartier_equality` reports exactly `propext`,
+   `Classical.choice`, and `Quot.sound`, with no `sorryAx`. No sorry, axiom, unsafe,
+   opaque, implemented_by, extern, or data definition is added. Pass.
+3. Split statements: none. There are zero new declarations and zero new nodes;
+   no restatement or arbitrary witness is introduced into a definition. The
+   existential model and linear map are eliminated only inside a theorem proof.
+   Pass; small-case testing of new statements is inapplicable.
+4. Route and pruning: read both model theorem signatures and the full cotangent
+   model proof. The first supplies c <= n, n-c = s.card, length f = c,
+   regularity, the domain instance, and the fraction-field equivalence. The second
+   supplies the kernel and cokernel equivalences used by the proof. Rank-nullity
+   and the quotient dimension formula give the claimed natural-number equality;
+   the basis-cardinality theorem casts it to Cardinal. In the finite case zero
+   transcendence degree gives the equality with its orientation reversed at the
+   final cast. This also covers an empty transcendence basis; no separability or
+   characteristic assumption was added. The Loogle search `Algebra.H1Cotangent`
+   found finiteness for finitely presented algebras and vanishing for formally
+   smooth algebras, neither a shortcut for arbitrary finitely generated field
+   extensions. Repository searches found no alternate Cartier formula. All public
+   imports provide notions in the signature (differentials, H1Cotangent, trdeg,
+   finrank, FG); the private imports supply the basis, dimension lemmas, and two
+   models. No dependency module was removed. Read `dag/units/sk-thm-p1.json`:
+   its realized route is untouched. Pass.
+5. DAG: read `lem-weil-pbc-cartier-equality.json`; its three proof steps match
+   finite basis/model selection, cotangent kernel/cokernel comparison, and the
+   dimension calculation. All six old proof dependencies are retained and used
+   through these steps; the document origin still describes Tag 07E1's route.
+   No DAG field needs changing for an explanatory comment. Pass.
 
-Changed this report to record the independent checks. The earlier worker's
-claim of an exact source copy needs the qualification that it added one
-explanatory proof comment. No mathematical repair was needed. Of the module's
-one theorem, one is already proved; holes closed in this delivery: none;
-holes added: none; split off: none; net hole reduction: zero. This is a review
-of the existing queued repair, not new proof progress.
+Second reading changed the report to distinguish the existing complete proof
+from F2's zero newly closed holes. The delivered Lean change remains solely the
+first worker's explanatory comment. This delivery records review of an already
+repaired queued item; it is not new proof progress or a decomposition.
