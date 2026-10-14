@@ -31,9 +31,113 @@
   "def-weil-derived-limit",
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By uniqueness of extended absolute values, $\\mathcal O_E=E\\cap\\mathcal O_L$ and $0<|t|_L<1$. The DVR decomposition in $\\mathcal O_L$ gives $t=u v^e$ with $u$ a unit and $e\\geq1$. Completeness of $E$ implies $\\mathcal O_E\\cong\\varprojlim_n\\mathcal O_E/t^n$: choose compatible lifts, whose successive differences lie in $t^n\\mathcal O_E$, take their Cauchy limit in $E$, and use the closed unit ball to keep it in $\\mathcal O_E$; injectivity follows from $|t|_E^n\\to0$. Apply the finiteness-over-complete-ring theorem to $A=\\mathcal O_E$, $I=(t)$, $M=\\mathcal O_L$. Its separatedness hypothesis follows from $|t|_L<1$. Its finite-quotient hypothesis holds because $\\mathcal O_L/t\\mathcal O_L=\\mathcal O_L/v^e\\mathcal O_L$ is a finite set. Thus $\\mathcal O_L$ is a finite torsion-free $\\mathcal O_E$-module, hence free. Inverting $t$ gives $\\mathcal O_L[1/t]=L$ (since $t=u v^e$), so its rank is $d=[L:E]$. Choose a basis $b_1,\\ldots,b_d$.",
+   "uses": [
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-l-adic-extension-complete",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-weil-pbc-finite-over-complete-ring",
+    "lem-sc-dvr-fg-torsionfree-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031D (lemma-finite-over-complete-ring); DVR finite torsion-free freeness, with the coefficient data as in Bhatt--Scholze 6.8.1"
+   }
+  },
+  {
+   "text": "For each $n$, the chosen basis and its coordinate inverse give inverse $(\\mathcal O_E/t^n)_Y$-module maps $(\\mathcal O_E/t^n)_Y^{\\oplus d}\\leftrightarrows(\\mathcal O_L/t^n\\mathcal O_L)_Y$, commuting with quotient transitions. The same inverse equations hold after constant sheafification. Ordinary inverse limits may be taken over $m=en$: a compatible family at these indices extends uniquely to index $m$ by reduction from any $en\\geq m$, independently of that choice. Taking limits of the basis maps gives $R^{\\oplus d}\\cong S$, with the prescribed $R$-action, proving finite freeness. Apply the completed-constant-coefficient quotient theorem to $\\mathcal O_E,(t)$ and to $\\mathcal O_L,(v)$: $R/t^nR\\cong(\\mathcal O_E/t^n)_Y$ and $S/v^mS\\cong(\\mathcal O_L/v^m)_Y$, compatibly with all quotient maps. Its flatness over the discrete constant DVR sheaf also makes multiplication by $t$ on $R$, and by $v$ on $S$, injective: tensor the injective multiplication map of the DVR with its flat completed sheaf. On $S$, $t=u v^e$ is consequently injective too.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), pp. 58-59; finite-free coefficient argument in the first paragraph of the blueprint scalar-extension composition proof"
+   }
+  },
+  {
+   "text": "Choose a K-flat resolution $P\\to K$ with flat terms. Ordinary extension is represented by $Q=P\\otimes_R S$; change of rings preserves K-flatness and flat terms. For a ring sheaf $T$ and a regular global element $a$, the two-term Koszul complex $[T\\xrightarrow{a^n}T]$ in degrees $[-1,0]$ maps quasi-isomorphically to $T/a^nT$ by the quotient in degree zero. Its transition has components $a,1$, so these maps commute with transitions and degree-zero units. Tensoring with a K-flat representative preserves these quasi-isomorphisms. The Koszul reflector therefore identifies the strict derived quotient limit with a locally derived $(a)$-complete object and identifies its canonical unit with the quotient completion unit. Exact countable products represent the derived products; the strict-tower homotopy-limit triangle is computed by the product cone, with the compatible quotient maps giving the zero shifted-product component of the unit. The assumed Roos triangle makes $K$ a derived limit of its quotient tower. Any two such derived limits are isomorphic, so $K$ is locally derived $(t)$-complete because the Koszul reflector's value is. Apply the reflector's unit criterion: the specified quotient unit $\\eta_{R,t}:K\\to C_{R,t}(K)$ is consequently an isomorphism. This argument uses isomorphism of limit objects only to establish local completeness, never to identify a chosen lift of the reduction map.\n\nThe basis in step 2 identifies the underlying $R$-complex of $Q$ with $P^{\\oplus d}$, and identifies its $t^n$ quotients and quotient maps with the finite sums of those of $P$. Sectionwise countable products commute with this finite sum, and the cone differential is the corresponding finite block sum. Thus the underlying $R$-map of $\\eta_{S,t}:Q\\to C_{S,t}(Q)$ is $\\eta_{R,t}^{\\oplus d}$ and is an isomorphism. Restriction of scalars detects acyclicity: kernels and sheafified cokernels have the same underlying abelian sheaves. Hence $\\eta_{S,t}$ is an isomorphism in $D(S)$. Apply the Koszul reflector for $S,t$, whose regularity was checked in step 2; its unit criterion shows that $Q$ is locally derived $(t)$-complete as an $S$-object.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-kflat-change-of-rings",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-proetale-countable-products-exact",
+    "def-weil-derived-complete",
+    "lem-weil-derived-limit-existence",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.4.12, pp. 22-23, and Definition 3.4.10; finite sums applied to the multiplication telescope"
+   }
+  },
+  {
+   "text": "The one-generator augmented extended Cech complexes for $S,t$ and $S,v$ are respectively $[S\\to S[1/t]]$ and $[S\\to S[1/v]]$, in degrees $[0,1]$, with augmentation to $S$ the degree-zero identity. They are canonically identical: $t=u v^e$ gives $1/t=u^{-1}/v^e$ and $1/v=u v^{e-1}/t$, defining inverse localization maps which fix $S$. The extended-Cech completion theorem identifies the derived internal Hom from these augmented complexes as the corresponding reflection units. Since $Q$ is locally $(t)$-complete, its first reflection unit is an isomorphism; the identical augmented complexes give an isomorphism for the $(v)$ reflection unit. Its value is locally $(v)$-complete, so $Q$ itself is locally $(v)$-complete. The Koszul reflector for $S,v$ now gives an isomorphism of its specified quotient completion unit $\\eta_v:Q\\to C_{S,v}(Q)$, by the regular Koszul-to-quotient comparison in step 3. Its cone triangle and this unit exhibit the Roos completeness condition for $Q$.\n\nIdentify that quotient tower termwise: $(P\\otimes_R S)\\otimes_S S/v^mS\\to P\\otimes_R(\\mathcal O_L/v^m)_Y$ sends $(p\\otimes s)\\otimes\\bar z$ to $p\\otimes\\overline{s}z$, with inverse $p\\otimes\\bar z\\mapsto(p\\otimes1)\\otimes\\bar z$. These inverse formulas commute with the differential and quotient transitions and send the map from $Q$ to its original coefficient-reduction map. Therefore the isomorphism of the two product cones carries $\\eta_v$ to exactly $\\chi_{L/E,K}$, including its zero shifted-product component. The scalar-extension well-definedness theorem identifies this cone with the stated integral functor and its derived-limit realization. This proves all isomorphism and derived $v$-completeness claims.",
+   "uses": [
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "def-weil-integral-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10, Lemma 3.4.12 and Proposition 3.5.1; the quotient maps identify the strict integral-extension cone"
+   }
+  },
+  {
+   "text": "For a map of K-flat representatives $f:P\\to P'$, each quotient square commutes because both routes send $p\\otimes s$ to $f(p)\\otimes\\overline{s}$. The product squares commute with $1-s$, so the induced cone square gives $\\chi_{K'}(f\\otimes1)=R\\lim_m(f\\otimes1)\\chi_K$. The derived change-of-rings and integral-extension well-definedness statements, and naturality of the Koszul reflector unit, carry this equality to all morphisms of the derived category. No basis enters the definition of $\\chi$. When $L=E$ take the same uniformizer; the inverse multiplication maps $P\\otimes_R R\\leftrightarrows P$ identify every quotient square with the reduction of $P$. Thus $\\chi$ is precisely the canonical completeness unit. For different choices of a uniformizer of the same field the powers define the same ideals and the same quotient maps, giving the same conclusion.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), pp. 58-59; finite-free coefficient argument in the first paragraph of the blueprint scalar-extension composition proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-l-adic-extension-complete",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-weil-pbc-finite-over-complete-ring",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-proetale-countable-products-exact",
+  "def-weil-derived-complete",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-extended-cech-completion-model",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "def-weil-integral-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Consequences of Bhatt--Scholze Lemmas 3.4.12 and 6.8.2(1), Stacks 099B and 0A0E; basis, augmented localization complexes and quotient-map arguments written out"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -104,15 +208,93 @@
    "results": "AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductInvOfPiFintype, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_surjective_of_finite, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProduct_tmul",
    "date": "2026-10-14",
    "verdict": "no match: classical adic completion of modules only; no derived complete sheaf comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ringed topos and a globally regular element a the derived inverse limit of H tensor T over a powers is the derived completion reflector and its unit is an isomorphism exactly on complete complexes",
+   "results": "CondensedMod.IsSolid.isIso_solidification_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, AdicCompletion.tensor_map_id_left_eq_map",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary adic module completion or general derived/complex infrastructure; not the regular-element quotient-tower unit criterion on a ringed site"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"limit\"",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary adic module completion or general derived/complex infrastructure; not the regular-element quotient-tower unit criterion on a ringed site"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.?complet|[Kk]oszul.*complet|complet.*[Kk]oszul",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary adic module completion or general derived/complex infrastructure; not the regular-element quotient-tower unit criterion on a ringed site"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived adic completion of sheaves of modules at a regular element is a reflector computed by the homotopy inverse limit of derived quotients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For modules on a ringed site with exact countable products and a nonzerodivisor a the canonical map to the Roos cone of derived reductions is an isomorphism if some Roos triangle with the reduction maps exists. Completeness is invariant under replacing a by a unit times a positive power.",
+   "results": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, CategoryTheory.instIsIsoToRightDerivedZero', DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CochainComplex.cm5b.instQuasiIsoIntP, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self, CategoryTheory.instIsIsoFromLeftDerivedZero'",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary adic module completion or general derived/complex infrastructure; not the regular-element quotient-tower unit criterion on a ringed site"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomologicalComplex\", \"limit\"",
+   "results": "HomologicalComplex.instHasFiniteColimits, HomologicalComplex.instHasFiniteLimits, HomologicalComplex.instHasColimitsOfShape, HomologicalComplex.instHasLimitsOfShape, HomologicalComplex.instPreservesFiniteColimitsEvalOfHasFiniteColimits, HomologicalComplex.instPreservesFiniteLimitsEvalOfHasFiniteLimits, HomologicalComplex.instPreservesFiniteColimitsSingle, HomologicalComplex.instPreservesFiniteLimitsSingle",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary adic module completion or general derived/complex infrastructure; not the regular-element quotient-tower unit criterion on a ringed site"
+  },
+  {
+   "tool": "grep",
+   "query": "ofTensorProductEquivOfFiniteNoetherian|instHasLimitsOfShape",
+   "results": "Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary module adic completion or presheaf tensor objects, not derived completion and scalar extension of integral pro-etale coefficient sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite extension of l adic valuation rings gives finite free completed coefficient sheaves and ordinary derived scalar extension of a derived complete complex is its completed tensor product",
+   "results": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary module adic completion or presheaf tensor objects, not derived completion and scalar extension of integral pro-etale coefficient sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a derived complete sheaf complex with a finite rank free coefficient algebra preserves adic completeness when the two uniformizers have cofinal powers",
+   "results": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary module adic completion or presheaf tensor objects, not derived completion and scalar extension of integral pro-etale coefficient sheaves"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-scalar-extension-composition",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-finite-free-completed-scalar-comparison",
+  "worker": "stage1",
+  "summary": "Coefficient finiteness and compatible basis maps prove completed sheaf freeness. Existing Koszul and augmented Cech reflectors establish invertibility of the specified strict quotient completion unit; explicit tensor formulas identify it with the comparison. No new nodes remain.",
+  "blueprint": "lem-weil-scalar-extension-composition, Proof first paragraph, finite-free completed integral coefficient extension; no unit or chapter route changed"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-a353abc85",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-a353abc85 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, report, route, and relevant sources. Verified the specified strict-cone unit via regular Koszul and Cech reflectors, coefficient freeness, ramified cases, and naturality. No new nodes or repairs. Accepted generic tool uses and unrelated pre-existing snapshot cycles are documented in review.md; target coefficient categories remain distinct."
+ }
 }
