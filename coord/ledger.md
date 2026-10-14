@@ -14026,3 +14026,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:31 L: returned deliver/R2/Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxModelPointing (reviewer RETURN: (reviewer X-039e3, head 039e376a2) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.RingTheory.EtaleResi)
 
 - 08:31 L: batch 20261014T001711 dependency take-out
+- 00:32 L: returned deliver/U4/Sheaf.AlgebraicGeometry.MayerVietorisImageChainSquares (reviewer RETURN: (reviewer X-92179, head 92179f469) F (brief point 7, report accuracy): In coord/reports/U4/Sheaf.AlgebraicGeometry.Mayer)
