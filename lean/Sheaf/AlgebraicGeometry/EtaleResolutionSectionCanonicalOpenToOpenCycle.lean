@@ -125,7 +125,7 @@ theorem resolutionSection_canonical_open_to_open_cycle {X : Scheme.{u}}
   rw [Abelian.Ext.mapExactFunctor_comp, Abelian.Ext.mapExactFunctor_mk₀,
     Abelian.Ext.mk₀_comp_mk₀_assoc]
   rw [Abelian.Ext.comp_assoc_of_third_deg_zero]
-  have hc := Abelian.Ext.exactFunctorCompositionComparison FB T FA e x
+  have hc := Abelian.Ext.mapExactFunctor_comp_mk₀_eq FB T FA e x
   have hc' := congrArg (fun y ↦
     ((Abelian.Ext.mk₀ (etaleOpenFreeSheafUnit A ≫
       FA.map ((etaleOpenFreeSheaf X).map a))).comp y (zero_add q)).comp

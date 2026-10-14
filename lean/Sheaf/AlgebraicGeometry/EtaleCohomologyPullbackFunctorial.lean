@@ -54,7 +54,7 @@ theorem cohomologyPullbackFunctorial {X Y Z : Scheme.{u}} (u : X ⟶ Y) (v : Y �
     rw [CategoryTheory.Abelian.Ext.mapExactFunctor_comp,
       CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀,
       CategoryTheory.Abelian.Ext.mk₀_comp_mk₀_assoc]
-    rw [CategoryTheory.Abelian.Ext.exactFunctorCompositionComparison
+    rw [CategoryTheory.Abelian.Ext.mapExactFunctor_comp_mk₀_eq
       ((v)^*[AddCommGrpCat.{u + 1}]) ((u)^*[AddCommGrpCat.{u + 1}])
       ((u ≫ v)^*[AddCommGrpCat.{u + 1}])
       (upperStarComp AddCommGrpCat.{u + 1} u v)]
