@@ -20,7 +20,7 @@
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionsFactorization` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProjectionFormulaFiniteObjectwise` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation` | 24 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PicardDerivedFibreNaturality` | 29 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ScalarCupResolutionClassCompatibility` | 31 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealization` | 33 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchange` | 34 | 1 | proof |
