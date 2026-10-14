@@ -1,111 +1,107 @@
 {
- "id": "def-pc-standard-single-base-change-top-restriction-source-iso",
- "kind": "definition",
- "title": "Canonical top restriction source isomorphism",
- "statement": "noncomputable def standardSingleBaseChange_topRestriction_sourceIso\n    {Y B : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) :\n    letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (schemeDerivedDirectImage p).obj\n          ((DerivedCategory.singleFunctor _ 0).obj M) ≅\n        (schemeDerivedDirectImage ((⊤ : Y.Opens).ι ≫ p)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj (M.restrict (⊤ : Y.Opens).ι))",
- "stmt_deps": [],
- "source": {
-  "document": "Stacks Project",
-  "place": "Tags 08HY and 0D5S"
- },
- "proof": [
-  {
-   "text": "Construct the canonical isomorphism by composing the derived unit for the top-open isomorphism, the derived direct-image composition comparison, and the exact single-complex restriction comparison.",
-   "uses": [
+  "id": "def-pc-standard-single-base-change-top-restriction-source-iso",
+  "kind": "definition",
+  "title": "Canonical top restriction source isomorphism",
+  "statement": "noncomputable def standardSingleBaseChange_topRestriction_sourceIso\n    {Y B : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) :\n    letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (schemeDerivedDirectImage p).obj\n          ((DerivedCategory.singleFunctor _ 0).obj M) ≅\n        (schemeDerivedDirectImage ((⊤ : Y.Opens).ι ≫ p)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj (M.restrict (⊤ : Y.Opens).ι))",
+  "stmt_deps": [],
+  "source": {
+    "document": "Stacks Project",
+    "place": "Tags 08HY and 0D5S"
+  },
+  "proof": [
+    {
+      "text": "Construct the canonical isomorphism by composing the derived unit for the top-open isomorphism, the derived direct-image composition comparison, and the exact single-complex restriction comparison.",
+      "uses": [
+        "lem-pc-standard-single-base-change-top-restriction-iso-pullback-unit",
+        "def-pc-relative-mv-maps",
+        "def-pc-single-complex-open-restriction-data"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "lem-pc-standard-single-base-change-top-restriction-iso-pullback-unit",
     "def-pc-relative-mv-maps",
     "def-pc-single-complex-open-restriction-data"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-pc-standard-single-base-change-top-restriction-iso-pullback-unit",
-  "def-pc-relative-mv-maps",
-  "def-pc-single-complex-open-restriction-data"
- ],
- "proof_origin": {
-  "by": "worker",
-  "group": "G1",
-  "date": "2026-10-14",
-  "document": "Stacks Project",
-  "place": "Tags 08HY and 0D5S"
- },
- "mathlib_searches": [
-  {
-   "tool": "LeanSearch",
-   "query": "derived direct image composition isomorphism top restriction",
-   "results": "No exact match; existing project comparison declarations used.",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "relativeMVImageComp",
-   "results": "No exact match in Mathlib.",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "singleComplexOpenPullbackIso relativeMVImageComp",
-   "results": "Found the existing declarations imported by the proof.",
-   "date": "2026-10-14",
-   "verdict": "existing project declarations"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux",
-  "date": "2026-10-14",
-  "group": "G1"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-pc-standard-single-base-change-top-restriction",
-   "place": "source comparison construction",
-   "via": [
-    "lem-pc-standard-single-base-change-top-restriction"
-   ]
-  }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-coherence",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux",
-  "file": "lean/Sheaf/AlgebraicGeometry/StandardSingleBaseChangeTopRestrictionAux.lean",
-  "declaration": "AlgebraicGeometry.standardSingleBaseChange_topRestriction_sourceIso",
-  "statement": "def standardSingleBaseChange_topRestriction_sourceIso\n    {Y B : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) :\n    letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (schemeDerivedDirectImage p).obj\n          ((DerivedCategory.singleFunctor _ 0).obj M) ≅\n        (schemeDerivedDirectImage ((⊤ : Y.Opens).ι ≫ p)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj (M.restrict (⊤ : Y.Opens).ι))",
-  "branch": "sheaf-dag",
-  "by": "G1",
-  "date": "2026-10-14"
- },
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "X-c775f",
-  "group": "G1",
-  "result": "pass",
-  "landing": "20261014T022543-L-4044816",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "X-a498c",
-  "group": "Y3",
-  "result": "pass",
-  "landing": "20261014T063824-L-2816066",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered signatures, constructions, proofs and remaining coefficient-coherence statement match their nodes; all four modules compile cleanly, and axiom checks show only permitted axioms plus documented sorryAx.",
-  "sorry_before": [
-   "AlgebraicGeometry.standardSingleBaseChange_topRestriction_compatibility"
   ],
-  "sorry_after": []
- }
+  "proof_origin": {
+    "by": "worker",
+    "group": "G1",
+    "date": "2026-10-14",
+    "document": "Stacks Project",
+    "place": "Tags 08HY and 0D5S"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "LeanSearch",
+      "query": "derived direct image composition isomorphism top restriction",
+      "results": "No exact match; existing project comparison declarations used.",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "relativeMVImageComp",
+      "results": "No exact match in Mathlib.",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "singleComplexOpenPullbackIso relativeMVImageComp",
+      "results": "Found the existing declarations imported by the proof.",
+      "date": "2026-10-14",
+      "verdict": "existing project declarations"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux",
+    "date": "2026-10-14",
+    "group": "G1"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-pc-standard-single-base-change-top-restriction",
+      "place": "source comparison construction",
+      "via": [
+        "lem-pc-standard-single-base-change-top-restriction"
+      ]
+    }
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-coherence",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux",
+    "file": "lean/Sheaf/AlgebraicGeometry/StandardSingleBaseChangeTopRestrictionAux.lean",
+    "declaration": "AlgebraicGeometry.standardSingleBaseChange_topRestriction_sourceIso",
+    "statement": "def standardSingleBaseChange_topRestriction_sourceIso\n    {Y B : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) :\n    letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (schemeDerivedDirectImage p).obj\n          ((DerivedCategory.singleFunctor _ 0).obj M) ≅\n        (schemeDerivedDirectImage ((⊤ : Y.Opens).ι ≫ p)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj (M.restrict (⊤ : Y.Opens).ι))",
+    "branch": "sheaf-dag",
+    "by": "G1",
+    "date": "2026-10-14"
+  },
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "X-c775f",
+    "group": "G1",
+    "result": "pass",
+    "landing": "20261014T022543-L-4044816",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "X-c775f",
+    "group": "G1",
+    "result": "pass",
+    "landing": "20261014T022543-L-4044816",
+    "kind": "interface",
+    "note": "independent Codex review: Delivered Lean signatures and proofs match all four nodes; both modules and direct importer StandardSingleBaseChangeTopRestriction compile cleanly; hash-verified original parent reproduces the reported failure; two-line adaptation is necessary and preserves its signature; axioms and documented remaining sorry comply."
+  }
 }

@@ -7,9 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.HorizontalDualityMateComparisons
 public import Sheaf.AlgebraicGeometry.QCohInverseBaseChangeMate
-import Sheaf.AlgebraicGeometry.RectangleQCohComparisonLifts
-import Sheaf.AlgebraicGeometry.RectangleQCohOrdinaryCompatibility
-import Sheaf.AlgebraicGeometry.HorizontalTransferInverseFormula
+import Sheaf.AlgebraicGeometry.DerivedBaseChangeHorizontalPasting
+import Sheaf.AlgebraicGeometry.DerivedBaseChangePasting
 
 /-! # Forward ordinary geometric pasting with fixed comparisons
 
@@ -77,35 +76,6 @@ noncomputable def horizontalOrdinaryBaseComparison
     {Y S T : Scheme.{u}} (g : S ⟶ Y) (h : T ⟶ S) :
     qcPullback g ⋙ qcPullback h ≅ qcPullback (h ≫ g) := horizontalMateComp h g
 
-private theorem horizontalMateComp_hom_app
-    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
-    {A B C : Scheme.{u}} (f : A ⟶ B) (g : B ⟶ C) (E : schemeDerivedQCohCategory C) :
-    (schemeDerivedQCohProperty A).ι.map ((horizontalMateComp f g).hom.app E) =
-      (horizontalMateAmbientComp f g).hom.app E.obj := by
-  simp [horizontalMateComp, horizontalMateLiftIso, Functor.FullyFaithful.preimageIso]
-
-private theorem horizontalMateComp_inv_app
-    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
-    {A B C : Scheme.{u}} (f : A ⟶ B) (g : B ⟶ C) (E : schemeDerivedQCohCategory C) :
-    (schemeDerivedQCohProperty A).ι.map ((horizontalMateComp f g).inv.app E) =
-      (horizontalMateAmbientComp f g).inv.app E.obj := by
-  simp [horizontalMateComp, horizontalMateLiftIso, Functor.FullyFaithful.preimageIso]
-
-private theorem cancel_ordinary_comparisons
-    {C D : Type*} [Category* C] [Category* D] (Q : C ⥤ D)
-    {A B : C} {M M' N : D} (s : A ≅ B) (j : Q.obj B ≅ N) (b : M ≅ M')
-    (outer : M ⟶ N) (inner : M' ⟶ Q.obj A)
-    (past : outer ≫ j.inv ≫ Q.map s.inv = b.hom ≫ inner) :
-    b.inv ≫ outer = inner ≫ Q.map s.hom ≫ j.hom := by
-  have h := congrArg (fun v ↦ b.inv ≫ v ≫ Q.map s.hom ≫ j.hom) past
-  simpa only [Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id,
-    CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
-    Iso.inv_hom_id_assoc] using h
-
-set_option maxHeartbeats 400000 in
--- Type checking the pinned adjunction/comparison families needs additional kernel reductions.
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 /-- A single component of the fixed-comparison mate calculation.
 Source: Stacks Project, Tags 0ATM and 0D5S.
 Proof: transpose the component under the pinned adjunction, apply the two
@@ -137,62 +107,7 @@ theorem horizontal_ordinary_forward_fixed_pasting_core_aux
     (horizontalOrdinaryBaseComparison g h).hom.app ((qcDirectImage f).obj E) ≫
           β.app E =
         γ E ≫ (qcDirectImage p).map (s.hom.app E) ≫
-          k.app ((qcPullback (pullback.fst f (h ≫ g))).obj E) := by
-  classical
-  let := quasiSeparatedSpace_of_quasiSeparated (pullback.snd f (h ≫ g))
-  let := quasiSeparatedSpace_of_quasiSeparated (pullback.snd (pullback.snd f g) h)
-  intro s e q p k β γ
-  obtain ⟨j, b, hj, hb⟩ := rectangle_qcoh_comparison_lifts f g h e.hom
-    (pullbackLeftPullbackSndIso_hom_fst f g h)
-    (pullbackLeftPullbackSndIso_hom_snd f g h)
-  have hs : ∀ E : schemeDerivedQCohCategory X,
-      (schemeDerivedQCohProperty (pullback (pullback.snd f g) h)).ι.map
-          (s.inv.app E) =
-        (horizontalMateAmbientComp e.hom (pullback.fst f (h ≫ g))).hom.app E.obj ≫
-          eqToHom (congrArg (fun r ↦ (derivedPullback r).obj E.obj)
-            (pullbackLeftPullbackSndIso_hom_fst f g h)) ≫
-          (horizontalMateAmbientComp (pullback.fst (pullback.snd f g) h)
-            (pullback.fst f g)).inv.app E.obj := by
-    intro E
-    set_option backward.isDefEq.respectTransparency false in
-      set_option backward.isDefEq.respectTransparency.types false in
-        simp only [s, e, horizontalOrdinaryUpperComparison, Iso.trans_inv,
-          NatTrans.comp_app, Iso.symm_inv, eqToIso.inv, Functor.map_comp,
-          horizontalMateComp_hom_app, horizontalMateComp_inv_app, eqToHom_map,
-          eqToHom_app, Category.assoc]
-  have hL : (qcPullback e.hom).IsEquivalence :=
-    (horizontalMateEquivalence e).isEquivalence_functor
-  have rect := rectangle_qcoh_ordinary_compatibility f g h e.hom
-    (pullbackLeftPullbackSndIso_hom_fst f g h)
-    (pullbackLeftPullbackSndIso_hom_snd f g h) s.symm hL hs j b hj hb E
-  have hk := horizontal_transfer_eq_of_inverse_formula e q p
-    (pullbackLeftPullbackSndIso_hom_snd f g h) k rfl j hj
-  have hb' : b = (horizontalOrdinaryBaseComparison g h).symm := by
-    apply Iso.ext
-    ext D
-    change (schemeDerivedQCohProperty Z).ι.map (b.hom.app D) =
-      (schemeDerivedQCohProperty Z).ι.map
-        ((horizontalOrdinaryBaseComparison g h).inv.app D)
-    rw [hb D]
-    change (horizontalMateAmbientComp h g).inv.app D.obj =
-      (schemeDerivedQCohProperty Z).ι.map ((horizontalMateComp h g).inv.app D)
-    exact (horizontalMateComp_inv_app h g D).symm
-  change β.app E ≫ j.inv.app ((qcPullback (pullback.fst f (h ≫ g))).obj E) ≫
-      (qcDirectImage p).map (s.inv.app E) = b.hom.app ((qcDirectImage f).obj E) ≫ γ E
-    at rect
-  have hrect := cancel_ordinary_comparisons (qcDirectImage p) (s.app E)
-    (j.app ((qcPullback (pullback.fst f (h ≫ g))).obj E))
-    (b.app ((qcDirectImage f).obj E)) (β.app E) (γ E) rect
-  have hkE : k.app ((qcPullback (pullback.fst f (h ≫ g))).obj E) =
-      j.hom.app ((qcPullback (pullback.fst f (h ≫ g))).obj E) :=
-    hk ((qcPullback (pullback.fst f (h ≫ g))).obj E)
-  have hbE : b.inv.app ((qcDirectImage f).obj E) =
-      (horizontalOrdinaryBaseComparison g h).hom.app ((qcDirectImage f).obj E) :=
-    congrArg (fun z ↦ z.inv.app ((qcDirectImage f).obj E)) hb'
-  exact (congrArg (fun z ↦ z ≫ β.app E) hbE.symm).trans
-    (hrect.trans (congrArg (fun z ↦ γ E ≫ (qcDirectImage p).map (s.hom.app E) ≫ z)
-      hkE.symm))
-
+          k.app ((qcPullback (pullback.fst f (h ≫ g))).obj E) := by sorry
 
 /- Fixed-comparison mate calculation for ordinary forward pasting.
 Source: Stacks Project, Tags 0ATM and 0D5S.

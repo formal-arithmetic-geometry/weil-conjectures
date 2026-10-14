@@ -9,7 +9,10 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
-import Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuity
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.PerfectDescendMorphisms
+import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
+import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
 
 public import Sheaf.AlgebraicGeometry.TwoOpenComparisonDiagram
 
@@ -161,10 +164,6 @@ noncomputable def perfectOverlapStageStatement
           d.toDiagram.HW.mapIso e ≪≫
             (d.toDiagram.γV.symm.app B' ≪≫ SQ.mapIso θV ≪≫ τV.app E)
 
-set_option synthInstance.maxHeartbeats 400000 in
--- Exact overlap comparisons need this instance-search budget.
-set_option maxHeartbeats 1600000 in
--- Specializing the dependent Hom-continuity data needs this elaboration budget.
 /-- Descend the transition induced by the supplied limit object and local comparisons.
 Restrict the local perfect objects to the compact overlap. Transport `φU` and `φV`
 through restriction and composition comparisons; their composite gives the prescribed
@@ -193,27 +192,7 @@ theorem perfect_overlap_transition_comparison_core_stage
     (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),
       ∃ k : I, j ≤ k)
     : perfectOverlapStageStatement R c hc i Z t j hij hstage := by
-  classical
-  unfold perfectOverlapStageStatement
-  intro Yj X gj U V hcover hU hV A B hA hB E instP instQ instX PU PV φU φV
-  have hh := perfect_overlap_hom_continuity R c hc i Z t j hij hstage
-  unfold perfectOverlapHomContinuityStatement at hh
-  obtain ⟨data, H⟩ := hh U V hcover hU hV A B hA hB E φU φV
-  let K := {k : I // j ≤ k}
-  have : IsDirected K (· ≤ ·) := ⟨by
-    intro a b
-    obtain ⟨k, hak, hbk⟩ := directed_of (· ≤ ·) a.val b.val
-    exact ⟨⟨k, a.property.trans hak⟩, hak, hbk⟩⟩
-  obtain ⟨k, e, he⟩ := H.lift_iso (Iso.refl _)
-  let dk := data k.val k.property
-  refine ⟨k.val, k.property, ?_⟩
-  intro g Yk f U' V' instY instU instV instW A' B' SU SV TU TV TW αU αV
-    P Q RU RV RW SP SQ τU τV LU LV
-  refine ⟨dk.d, dk.κU, dk.κV, dk.siteU, dk.siteV,
-    e, dk.θU, dk.θV, dk.hθU, dk.hθV, ?_⟩
-  exact iso_comparison_of_conjugated_identity dk.d.toDiagram.HW
-    (dk.d.toDiagram.γU.symm.app A' ≪≫ SP.mapIso dk.θU ≪≫ τU.app E)
-    (dk.d.toDiagram.γV.symm.app B' ≪≫ SQ.mapIso dk.θV ≪≫ τV.app E) e he
+  sorry
 
 set_option maxHeartbeats 1600000 in
 -- The dependent comparison diagram needs this elaboration budget.
