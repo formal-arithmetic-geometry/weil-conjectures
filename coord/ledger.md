@@ -14497,3 +14497,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:19 L: merged deliver/U1/Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling (stage 3; reviewer PASS; first push; landing 20261014T041920-L-1155216 (proof); batch 20261014T041913; modules 1; new nodes 0)
 - 04:19 L: merged deliver/V2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (stage 3; reviewer PASS; first push; landing 20261014T041921-L-1155366 (proof); batch 20261014T041913; modules 1; new nodes 0)
 - 04:19 L: merged deliver/V2/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T041921-L-1155514 (proof); batch 20261014T041913; modules 1; new nodes 0)
+- 04:20 L: returned deliver/X3/Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap (reviewer RETURN: (reviewer X-9dc0c, head 9dc0c0adc) d: coord/changes/affine-global-hom-redundant-change-of-rings-import-X3.md:30 does not)
