@@ -28,9 +28,95 @@
   "def-sp-injective-resolutions",
   "def-sp-left-exact-additive"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $M=\\nu_X^{-1}I$. Apply [lem-weil-pbc-site-higher-direct-image-sheafified-presheaf] to the continuous inclusion $u_X:X_{\\mathrm{et}}\\to X_{\\mathrm{proet}}$ of [def-weil-pbc-site-comparison-morphism]. For a fixed $q>0$ this identifies $R^q\\nu_{X,*}M$ with the sheafification of $P(V)=H^q(u_X(V),M)$, where the latter is derived evaluation over the pro-etale object $V$. It suffices to show that $P$ is zero on affine etale objects and hence has zero sheafification. No direct-image evaluation is assumed exact.",
+   "uses": [
+    "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099V, label lemma-relative-comparison, proof first paragraph"
+   }
+  },
+  {
+   "text": "Let $v:U\\to X$ be an affine etale object. Set $J=v^{-1}_{\\mathrm{et}}I$. The statement of [lem-sbc-etale-abelian-restriction-injectives] gives that $J$ is injective as an abelian sheaf on $U_{\\mathrm{et}}$. In particular, this is injectivity in precisely the coefficient category needed for affine vanishing, not injectivity in a finite-ring module category.",
+   "uses": [
+    "lem-sbc-etale-abelian-restriction-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099V, label lemma-relative-comparison, proof first paragraph"
+   }
+  },
+  {
+   "text": "The slice over $U$ of $X_{\\mathrm{proet}}$ is $U_{\\mathrm{proet}}$ by clause (1) of [lem-weil-proetale-weakly-etale-localization]; etale $v$ is an object of the pro-etale site by the inclusion of [def-weil-pbc-site-comparison-morphism]. Under this identification $M|_U\\cong\\nu_U^{-1}J$. Here is the identification on sections and restrictions: for $t:T\\to U$ weakly etale, [lem-cbc-comparison-pullback-sections] writes the two sides as $\\Gamma(T_{\\mathrm{et}},(vt)^{-1}_{\\mathrm{et}}I)$ and $\\Gamma(T_{\\mathrm{et}},t^{-1}_{\\mathrm{et}}v^{-1}_{\\mathrm{et}}I)$. The composition isomorphism of [lem-weil-pbc-sets-etale-inverse-image-composition-units] identifies these groups. The inverse-image functors preserve finite limits by [def-weil-pbc-sites-and-cohomology] (3). Naturality with the two projections from $I\\times I$ makes the composition isomorphism for $I\\times I$ the product of the two isomorphisms for $I$. Naturality with $+:I\\times I\\to I$ therefore says that the isomorphism preserves addition. Naturality with the zero map from the terminal sheaf and with $-:I\\to I$ gives zero and negation compatibility. The same reasoning applies to the natural section formula of [lem-cbc-comparison-pullback-sections]. By the underlying-set convention in [def-weil-pbc-sites-and-cohomology] (3), these are exactly the abelian inverse images and their group laws. For an arrow $a:T'\\to T$ over $U$, both restriction maps are section pullback followed by the composition identification. The associativity identity (2) and the unit identities (0)-(1) in the composition node make the two composites equal. Thus the objectwise maps form an isomorphism of abelian sheaves; they do not merely identify section sets.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-cbc-comparison-pullback-sections",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099V, label lemma-relative-comparison, proof first paragraph"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-cohomology-over-object-localization] to the abelian sheaf $M$ and the pro-etale object $U$. Combining it with the slice and coefficient identifications of step 3 gives $P(U)\\cong H^q(U_{\\mathrm{proet}},\\nu_U^{-1}J)$. The scheme $U$ is affine, $J$ is injective in abelian etale sheaves by step 2, and $q>0$. Therefore [lem-cbc-abelian-affine-comparison-vanishing] makes this group zero. This proves vanishing for every affine etale object, even when $X$ is not affine.",
+   "uses": [
+    "lem-weil-pbc-cohomology-over-object-localization",
+    "lem-cbc-abelian-affine-comparison-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099V, label lemma-relative-comparison, proof first paragraph"
+   }
+  },
+  {
+   "text": "Every etale object $V\\to X$ has an affine open cover by [lem-pc-fppf-affine-open-cover]. The open inclusions are etale by [lem-weil-pbc-open-immersion-etale]; composing with $V\\to X$ gives etale $X$-objects, as in [lem-weil-pbc-etale-inverse-image-restriction]. Their joint surjectivity makes this a covering in [def-weil-pbc-etale-site]. Thus every element of $P(V)$ restricts to zero on a covering by affine objects. To conclude directly from the universal property [def-weil-pbc-sheafification], let $H$ be any abelian sheaf and $a:P\\to H$ any presheaf morphism. For $s\\in P(V)$ its image $a_V(s)$ restricts to zero on that cover; uniqueness in the sheaf axiom [def-weil-pbc-sites-and-cohomology] implies $a_V(s)=0$. Hence every such $a$ is zero. In particular the sheafification unit is zero, so its identity and zero endomorphisms have the same composite with the unit. The universal property forces them to be equal, proving $P^\\#=0$. Step 1 now gives $R^q\\nu_{X,*}(\\nu_X^{-1}I)=0$. For the empty object every term of an injective resolution of $M$ has zero sections by the sheaf axiom for the empty cover, so its derived evaluation $P(\\varnothing)$ is zero as well; no finite-cover or quasi-compactness hypothesis was used.",
+   "uses": [
+    "lem-pc-fppf-affine-open-cover",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099V, label lemma-relative-comparison, proof first paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-cbc-abelian-affine-comparison-vanishing",
+  "lem-cbc-comparison-pullback-sections",
+  "lem-pc-fppf-affine-open-cover",
+  "lem-sbc-etale-abelian-restriction-injectives",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099V, label lemma-relative-comparison, proof first paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -80,10 +166,38 @@
    "results": "8 hits: CategoryTheory.Sheaf.isLocallyInjective_forget, CategoryTheory.Presheaf.isLocallyInjective_forget, CategoryTheory.Presheaf.isLocallyInjective_forget_iff, CategoryTheory.Sheaf.isLocallyInjective_sheafToPresheaf_map_iff, CategoryTheory.Presheaf.comp_isLocallyInjective_iff, CategoryTheory.Presheaf.isLocallyInjective_of_injective, CategoryTheory.Presheaf.isLocallyInjective_presheafToSheaf_map_iff, CategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective",
    "date": "2026-10-14",
    "verdict": "no match: locally injective sheaf morphisms concern componentwise injectivity, not injective objects or higher comparison direct images"
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*acyclic|acyclic.*comparison",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: local injectivity of morphisms is not injectivity of objects; vanishing on injective inputs does not imply comparison pullbacks are acyclic"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"Sheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: local injectivity of morphisms is not injectivity of objects; vanishing on injective inputs does not imply comparison pullbacks are acyclic"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The proetale comparison inverse image of an injective abelian etale sheaf is acyclic for comparison direct image",
+   "results": "8 hits: CategoryTheory.Presheaf.isLocallyInjective_forget_iff, CategoryTheory.Presheaf.isLocallyInjective_forget, CategoryTheory.Presheaf.comp_isLocallyInjective_iff, CategoryTheory.Sheaf.isLocallyInjective_forget, CochainComplex.isKInjective_of_injective, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective, CategoryTheory.Presheaf.isLocallyInjective_presheafToSheaf_map_iff",
+   "date": "2026-10-14",
+   "verdict": "no match: local injectivity of morphisms is not injectivity of objects; vanishing on injective inputs does not imply comparison pullbacks are acyclic"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images to the etale site of pulled back injective sheaves of abelian groups vanish",
+   "results": "8 hits: CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Sheaf.isLocallyInjective_forget, CategoryTheory.Sheaf.instIsLocallyInjectiveAppArrowPLocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization, CategoryTheory.Presheaf.isLocallyInjective_of_injective, CategoryTheory.Presheaf.isLocallyInjective_presheafToSheaf_map_iff, PresheafOfModules.instIsLocallyInjectiveToSheafify, CategoryTheory.Sheaf.isLocallyInjective_iff_injective, CategoryTheory.Sheaf.isLocallyInjective_sheafToPresheaf_map_iff",
+   "date": "2026-10-14",
+   "verdict": "no match: local injectivity of morphisms is not injectivity of objects; vanishing on injective inputs does not imply comparison pullbacks are acyclic"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-abelian-etale-proetale-cohomology-comparison",
   "by": "worker",
@@ -107,5 +221,49 @@
    "lines": "107-110",
    "note": "Read source: generic Grothendieck abelian coefficient theorem specializes to ordinary abelian sheaves. Its body is sorry; candidate only, no finished attachment."
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-cbc-abelian-comparison-injective-acyclicity",
+  "worker": "stage1",
+  "summary": "Retained the arbitrary abelian-sheaf statement. Proved it using the generic sheafified cohomology formula, etale restriction injectivity, explicit localization of comparison inverse image, affine vanishing, and the sheafification universal property. Added one statement-only affine abelian vanishing node; finite-ring module vanishing cannot supply it.",
+  "blueprint": "Realizes the cohomology-comparison input to lem-cbc-proetale-stalk-conservative Proof Step 4 through functions quotient sections and 099V first paragraph. The unit has no proof steps to replace.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-etale-abelian-restriction-injectives",
+    "why": "Generic site localization, cohomology or scheme-local tool needed to realize Stacks 099V; no statement of this comparison unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-over-object-localization",
+    "why": "Generic site localization, cohomology or scheme-local tool needed to realize Stacks 099V; no statement of this comparison unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "why": "Generic site localization, cohomology or scheme-local tool needed to realize Stacks 099V; no statement of this comparison unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+    "why": "Generic site localization, cohomology or scheme-local tool needed to realize Stacks 099V; no statement of this comparison unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic site localization, cohomology or scheme-local tool needed to realize Stacks 099V; no statement of this comparison unit supplies this general fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-etale-abelian-restriction-injectives",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-74797617a",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-74797617a (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. All five steps agree with Stacks 099V/099U; abelian coefficients, localization, restriction compatibility and sheafification are valid. No duplicate or circular dependency found. Repaired the new node’s missing creation/audit metadata in fixes/dag/nodes/sec-smooth-purity/lem-cbc-abelian-affine-comparison-vanishing.json. Statements and targets remain unchanged. Concrete checks and accepted tool_uses are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
