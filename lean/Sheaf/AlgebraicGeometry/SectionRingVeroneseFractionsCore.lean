@@ -63,29 +63,22 @@ theorem sectionRing_veronese_fraction_core
             L.tensorPowMulIso d n ≪≫ (λ_ _).symm).hom.app ⊤ (ξ.val (n • d)))) =
       HomogeneousLocalization.Away.mk (sectionRingGrade L) s.property n
         ξ.val ξ.property := by
-  have hformula (n : ℕ) (ξ : sectionRingGrade L (n • d)) :
-      sectionRingVeroneseFractionCanonicalMap X L d s
-        (sectionFraction (L.tensorPow d) (𝟙_ X.Modules) (s.val d) n
-          ((sectionRingVeroneseNumeratorIso X L d n).hom.app ⊤ (ξ.val (n • d)))) =
-        HomogeneousLocalization.Away.mk (sectionRingGrade L) s.property n
-          ξ.val ξ.property := by
-    change sectionRingVeroneseFractionMap X L d s
-      (DirectSum.of
-        (fun i : ℕ ↦ Γ((𝟙_ X.Modules) ⊗ (L.tensorPow d).tensorPow i, ⊤)) n
-        ((sectionRingVeroneseNumeratorIso X L d n).hom.app ⊤ (ξ.val (n • d)))) = _
-    simp only [sectionRingVeroneseFractionMap, DirectSum.toAddMonoid_of,
-      AddMonoidHom.comp_apply]
-    rw [sectionRingVeroneseNumerator_cancel X L d n ξ]
-    rfl
-  refine ⟨⟨?_, ?_⟩, hformula⟩
-  · exact (QuotientAddGroup.injective_lift_iff _ _
-      (sectionRingVeroneseFractionMap_kernel X L d s).le).2
-      (sectionRingVeroneseFractionMap_kernel X L d s)
-  · intro z
-    obtain ⟨n, a, ha, rfl⟩ :=
-      HomogeneousLocalization.Away.mk_surjective (sectionRingGrade L) s.property z
-    exact ⟨sectionFraction (L.tensorPow d) (𝟙_ X.Modules) (s.val d) n
-      ((sectionRingVeroneseNumeratorIso X L d n).hom.app ⊤ (a (n • d))),
-      hformula n ⟨a, ha⟩⟩
+  have hker :
+      (sectionFractionRelations (L.tensorPow d) (𝟙_ X.Modules) (s.val d)).toAddSubgroup =
+        (sectionRingVeroneseFractionMap X L d s).ker :=
+    sectionRingVeroneseFractionMap_kernel X L d s
+  refine ⟨⟨?_, ?_⟩, ?_⟩
+  · exact (QuotientAddGroup.injective_lift_iff _ _ hker.le).2 hker
+  · exact QuotientAddGroup.lift_surjective_of_surjective _ _
+      (sectionRingVeroneseFractionMap_surjective X L d s) hker.le
+  intro n ξ
+  change sectionRingVeroneseFractionMap X L d s
+    (DirectSum.of
+      (fun i : ℕ ↦ Γ((𝟙_ X.Modules) ⊗ (L.tensorPow d).tensorPow i, ⊤)) n
+      ((sectionRingVeroneseNumeratorIso X L d n).hom.app ⊤ (ξ.val (n • d)))) = _
+  simp only [sectionRingVeroneseFractionMap, DirectSum.toAddMonoid_of,
+    AddMonoidHom.comp_apply]
+  rw [sectionRingVeroneseNumerator_cancel X L d n ξ]
+  rfl
 
 end AlgebraicGeometry.Scheme.Modules
