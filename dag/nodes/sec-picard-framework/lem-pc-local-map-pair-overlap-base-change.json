@@ -15,39 +15,42 @@
  },
  "proof": [
   {
-   "text": "Construct the actual overlap morphism d by subtracting the two canonical descent-square composites. The pullback W times_X Y is canonically the overlap of the pulled-back charts: use the universal lifts in both directions, and check their two projections.",
+   "text": "Construct the universal test on W times_X Y with the two canonical chart lifts. Every other test factors through it by first lifting to W and then to W times_X Y. Check all three projection equations using pullback hom_ext. The proved private pairCompatibility_iff_test lemma reduces all-test compatibility to this universal test using descent pullHom_hom.",
    "uses": [
     "def-pc-local-map-pair-compatibility"
    ],
    "elementary": true
   },
   {
-   "text": "Compare native and tensor pullback by the unique left-adjoint comparison to pushforward. The canonical toDescentDataCompPullFunctorIso followed by the image of this comparison is an isomorphism from the pulled canonical descent datum to the canonical datum of the tensor pullback. Its chart components are precisely openCoverTensorPullbackComparison, by its defining pullbackComp, pullbackCongr and adjunction comparison. Compute the pullback of each composite defining d by overlap_base_change_formula. Naturality moves the chart maps through these comparisons; the descent isomorphisms commute with transition maps, so the resulting conjugated composites are exactly those of r^q.",
+   "text": "Use openCoverTensorDescentComparison_existsUnique to obtain the uniquely determined isomorphism comparisonObj with the prescribed chart hom and inverse maps. Its statement fixes all data up to equality (descent Hom extensionality and Iso.ext), so this use of Classical.choose is not a choice of arbitrary existence data. comparisonObj_components is proved from choose_spec and supplies both component equations without normalizing a composed natural-isomorphism construction.",
    "uses": [
-    "lem-pc-module-pullback-adjunction",
-    "def-pc-open-cover-tensor-pullback-comparison",
-    "lem-pc-overlap-base-change-formula"
+    "lem-pc-open-cover-tensor-descent-comparison-coherence",
+    "def-pc-open-cover-tensor-pullback-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Additivity says that the pulled difference is zero if and only if those composites agree. Cancel the invertible comparisons. A square on the universal pulled-back overlap implies every universal-test square by pulling along the unique universal lift of its two chart maps and using descent pullHom naturality. Conversely evaluate PairCompatibility on that universal overlap. This proves both implications, including empty overlaps, identity base change and zero modules.",
+   "text": "The private square_conjugate_iff cancels the chart isomorphisms. square_pullFunctor_iff uses pullFunctorObjHom_eq and mapComp' naturality to identify the pulled square with the square for the original chart maps. square_pull_iff uses pullHom_hom and mapComp' naturality to identify this square with equality of the original composites pulled along the projection. Combine these equivalences with the universal-test criterion in universal_baseChange_square_iff.",
    "uses": [
     "def-pc-local-map-pair-compatibility"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply that categorical equivalence to the explicitly constructed universal chart maps and comparisonObj for F and G. Its chart projections identify the transported family definitionally. Pullback additivity (Functor.map_sub) and sub_eq_zero identify the equality of composites with vanishing of the explicit overlap defect.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-local-map-pair-compatibility",
-  "lem-pc-module-pullback-adjunction",
-  "def-pc-open-cover-tensor-pullback-comparison",
-  "lem-pc-overlap-base-change-formula"
+  "lem-pc-open-cover-tensor-descent-comparison-coherence",
+  "def-pc-open-cover-tensor-pullback-comparison"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Tag 01ZR (3), first proof; explicit comparison argument written by F2"
+  "place": "Tag 01ZR (3), first gluing proof; universal-test reduction and canonical comparison coherence proved by M2, 2026-10-14"
  },
  "mathlib_searches": [
   {
@@ -156,11 +159,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F2",
+  "reviewer": "X-405cf",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261014T020509-L-3810660",
+  "landing": "20261014T044557-L-1452507",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered modules, node records, report, and change record satisfy all stage-3 checks; both modules and the direct importer compile, with permitted axioms only."
  }
 }

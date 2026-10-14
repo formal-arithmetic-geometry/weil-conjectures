@@ -1,0 +1,152 @@
+{
+ "id": "lem-pc-open-cover-tensor-descent-comparison-coherence",
+ "kind": "statement",
+ "title": "Unique descent isomorphism with the explicit chart tensor-pullback comparisons",
+ "statement": "Let U be an open cover of a scheme X [def-pc-scheme], q:Y → X a morphism, and M an O_X-module [def-pc-module-pullback]. Let D be the canonical descent datum of M on U pulled to the base-changed charts, and E the canonical datum on those charts of the tensor pullback of M. There is exactly one descent isomorphism D ≅ E whose hom and inverse chart components are respectively the hom and inverse components of openCoverTensorPullbackComparison [def-pc-open-cover-tensor-pullback-comparison]. These fixed chart maps determine all its data, up to equality of isomorphisms. No hypothesis on q, the modules or the overlaps is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-pc-open-cover-tensor-pullback-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 0095 and 0096; canonical pullback composition and unique left-adjoint comparison; Mathlib DescentData.toDescentDataCompPullFunctorIso"
+ },
+ "proof": [
+  {
+   "text": "Compose the canonical toDescentDataCompPullFunctorIso with the canonical descent functor applied to the unique comparison of the native and tensor left adjoints to pushforward. This constructs an isomorphism of the two specified descent data.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Its chart component is inverse isoMapOfCommSq for the chart square followed by restriction of the unique left-adjoint comparison. Expand isoMapOfCommSq_eq. The modulesPseudofunctor_mapComp'_hom_app_eq and modulesPseudofunctor_mapComp'_inv_app_eq equations give pullbackComp, pullbackCongr for the chart-square equality, and inverse pullbackComp. These are exactly the first three factors of openCoverTensorPullbackComparison; the restricted adjoint comparison is its fourth factor. Check the component equality using functor composition and associativity.",
+   "uses": [
+    "def-pc-open-cover-tensor-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constructed canonical isomorphism has the prescribed hom components. Cancel each invertible chart hom to get its prescribed inverse component. Any two such isomorphisms have equal hom chart components; descent Hom extensionality makes their hom morphisms equal, and Iso.ext makes the isomorphisms equal. Hence the characterization determines all data uniquely. The construction and uniqueness include empty covers, zero modules and identity maps.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-open-cover-tensor-pullback-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 0095 and 0096; Mathlib descent comparison; complete canonical-comparison Lean proof by M2 second reader, 2026-10-14"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Explicit chart tensor pullback comparisons commute with canonical descent transition maps",
+   "results": "Scheme.Pullback.Triplet.tensorCongr_trans and GlueData.t'_comp_eq_pullbackSymmetry; no module-descent chart formula",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor.DescentData.toDescentDataCompPullFunctorIso",
+   "results": "Canonical natural isomorphism for pulled canonical descent data; chart formula requires scheme pullback and tensor comparison normalization",
+   "date": "2026-10-14",
+   "verdict": "useful general construction, not the explicit formula"
+  },
+  {
+   "tool": "grep",
+   "query": "openCoverTensor.*comm|toDescentDataCompPullFunctorIso",
+   "results": "DescentData.lean canonical comparison and Precoverage.lean use; repository search found no matching explicit chart transition commutativity theorem",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical tensor pullback chart comparisons determine a unique isomorphism of descent data",
+   "results": "Service unavailable: Internal Server Error; used LeanFinder, Loogle and source grep instead",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of descent data from a natural isomorphism of pullback functors with prescribed components",
+   "results": "toDescentDataCompPullFunctorIso and isoMk construct canonical descent isomorphisms; no specialization identifying the explicit tensor chart components",
+   "date": "2026-10-14",
+   "verdict": "second reading: general construction is useful"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor.DescentData.isoMk",
+   "results": "isoMk, isoMk_hom_hom and isoMk_inv_hom provide componentwise isomorphism construction, not the scheme tensor chart formula",
+   "date": "2026-10-14",
+   "verdict": "second reading: no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq.*toDescentData|tensorPullback.*descent|isoMapOfCommSq.*pullbackComp",
+   "results": "No matching theorem. Separate search of lean/ for openCoverTensor and toDescentDataCompPullFunctorIso found canonical native comparison uses and tensor composition coherence, but no exact explicit tensor descent characterization. Read Mathlib DescentData.lean and source PullbackUnit.lean component formulas.",
+   "date": "2026-10-14",
+   "verdict": "second reading: no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocalMapPairOverlapBaseChange",
+  "date": "2026-10-14",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation: finite-presentation map descent and agreement of local lifts on overlaps before gluing",
+   "via": [
+    "lem-pc-local-map-pair-overlap-base-change",
+    "lem-pc-fp-local-map-pair-composites-defect-zero-core",
+    "lem-pc-fp-local-map-pair-composites-compatible",
+    "lem-pc-fp-local-map-pair-defect-zero",
+    "lem-pc-fp-local-map-pair-eventually",
+    "lem-pc-fp-local-map-overlap-equations",
+    "lem-pc-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenCoverTensorDescentComparisonCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenCoverTensorDescentComparisonCoherence.lean",
+  "declaration": "AlgebraicGeometry.openCoverTensorDescentComparison_existsUnique",
+  "statement": "theorem openCoverTensorDescentComparison_existsUnique\n    {X Y : Scheme.{u}} (U : X.OpenCover.{u}) (q : Y ⟶ X) (M : X.Modules) :\n    let D := (Pseudofunctor.DescentData.pullFunctor modulesPseudofunctor\n      (f := U.f) (f' := fun x ↦ pullback.fst q (U.f x)) (p := q) (α := id)\n      (p' := fun x ↦ U.pullbackHom q x) (fun x ↦ U.pullbackHom_map q x)).obj\n      ((modulesPseudofunctor.toDescentData U.f).obj M)\n    let E := (modulesPseudofunctor.toDescentData\n      (fun x ↦ pullback.fst q (U.f x))).obj ((Scheme.Modules.tensorPullback q).obj M)\n    ∃! e : D ≅ E, ∀ a : U.I₀,\n      e.hom.hom a = (Scheme.Modules.openCoverTensorPullbackComparison q U a).hom.app M ∧\n      e.inv.hom a = (Scheme.Modules.openCoverTensorPullbackComparison q U a).inv.app M",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-405cf",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261014T044557-L-1452507",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-405cf",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261014T044557-L-1452507",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules, node records, report, and change record satisfy all stage-3 checks; both modules and the direct importer compile, with permitted axioms only."
+ }
+}
