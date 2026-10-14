@@ -14,20 +14,23 @@
  ],
  "proof": [
   {
-   "text": "Lift the homotopy map to a cochain map between the indicated (possibly translated) telescope models. Resolve its arrow diagram using flat covers of the bounded-above truncations and compatible-pair lifts. At successive stages retain the preceding commutative square. Mapping cylinders rectify the homotopies of the transition squares; their terms are finite sums of flat terms and stay bounded above. Diagonalize the countable stages, using larger stages to accommodate the finite supports of sections in the coproducts.",
+   "text": "Absorb each allowed translate into a telescope presentation. Shift the tower termwise; the shift functor preserves sums and the mapping-cone shift isomorphism identifies its telescope with the shifted original. Boundedness and flatness are preserved degreewise. Transport the given homotopy morphism through the resulting isomorphisms, and lift it to a cochain morphism by fullness of the quotient functor.",
    "uses": [
-    "lem-pc-kflat-bounded-flat-replacement",
-    "lem-pc-flat-truncation-tower",
     "def-sc-flat-telescope-stage-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the compatible arrow-diagram construction to the cochain arrow. It supplies a common bounded-flat tower, strict sum squares to two target telescope presentations, target homotopy isomorphisms, and an augmentation g to the original source whose stage augmentations are quasi-isomorphisms to its good truncations. Its two cone restrictions and the arrow equality are part of this construction.",
+   "uses": [
+    "lem-sc-flat-telescope-arrow-diagram"
    ],
    "elementary": false
   },
   {
-   "text": "Take the transition cones of the resulting sum maps. This gives two stage-induced maps from a common flat telescope. The augmentation to the source is a quasi-isomorphism by the flat truncation telescope comparison. If the squares initially agree only after localization, right-fraction equality supplies a further source refinement on which they agree in the homotopy category; repeat the compatible flat diagram construction for this source. Composition of the tower maps and quasi-isomorphisms gives a;s=b. Translate and transport the diagrams by the original homotopy isomorphisms. Zero and identity arrow diagrams give the corresponding edge cases.",
+   "text": "The flat truncation telescope comparison applied to q and the two restrictions of g proves g is a quasi-isomorphism. The quotient carries it to a homotopy quasi-isomorphism; composing with the original source isomorphism preserves this property. The common source is a telescope representative by its explicit tower. Each strict sum square gives a stage-map witness with k=0; shift-zero naturality and the composite target isomorphisms give the required transported maps. Postcompose the arrow equality with the original target isomorphism and cancel its inverse to obtain a;s=b.",
    "uses": [
     "lem-pc-flat-truncation-telescope-comparison",
-    "lem-pc-right-fraction-common-refinement",
-    "lem-pc-kflat-bounded-flat-replacement",
     "def-sc-flat-telescope-stage-map"
    ],
    "elementary": false
@@ -36,15 +39,13 @@
  "proof_deps": [
   "def-sc-flat-telescope-stage-map",
   "lem-pc-flat-truncation-telescope-comparison",
-  "lem-pc-flat-truncation-tower",
-  "lem-pc-kflat-bounded-flat-replacement",
-  "lem-pc-right-fraction-common-refinement"
+  "lem-sc-flat-telescope-arrow-diagram"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "J2",
-  "document": "https://stacks.math.columbia.edu/tag/06YJ",
-  "place": "Explicit split of the parent model construction and common-replacement argument."
+  "group": "A2",
+  "document": "https://stacks.math.columbia.edu/tag/077J",
+  "place": "Compatible flat arrow-diagram construction followed by the existing telescope comparison; shift transport and stage-map witnesses are proved directly from Mathlib APIs."
  },
  "mathlib_searches": [
   {
@@ -116,11 +117,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-7f59d",
-  "group": "J2",
+  "reviewer": "COMPILER",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261014T043531-L-1335547",
+  "landing": "20261014T050215-L-1646070",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files and DAG metadata match the packet; all four modules and direct importer compile successfully, with only the two documented named sorry theorems remaining."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
