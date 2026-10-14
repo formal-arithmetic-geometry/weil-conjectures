@@ -5,6 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeStalkTransition
+import Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparisonFactorization
+import Sheaf.CategoryTheory.RightDerivedSingleUnitHomologyComparison
+import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 
 /-! # Lower-degree comparison for open injective coefficients
 
@@ -13,7 +16,7 @@ Source: Stacks Project, Tag 0F07, condition (3).
 
 @[expose] public section
 
-open CategoryTheory Limits
+open CategoryTheory Limits CategoryTheory.Functor
 open scoped CategoryTheory.Functor
 
 universe u
@@ -56,6 +59,27 @@ theorem open_injective_coefficient_lower_comparison
                 (((j)_*[ModuleCat.{u + 1} Λ]).obj J) ≫
                 (DerivedCategory.Plus.singleFunctor _ 0).map
                   ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit.app J))))) := by
-  sorry
+  have hf := open_injective_coefficient_lower_comparison_factorization Λ e j eV a wa sq n J
+  rw [hf, Functor.map_comp]
+  let G := ((j)_*[ModuleCat.{u + 1} Λ])
+  have hu : IsIso (G.rightDerivedPlusSingleUnit J) := by
+    let M := (HomotopyCategory.Plus.singleFunctor _ 0).obj J
+    have (k : ℤ) : Injective (M.obj.as.X k) := by
+      by_cases hk : k = 0
+      · subst k
+        exact Injective.of_iso (HomologicalComplex.singleObjXSelf (.up ℤ) 0 J).symm
+          inferInstance
+      · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hk).injective
+    have : IsIso (G.rightDerivedFunctorPlusUnit.app M) := inferInstance
+    dsimp [Functor.rightDerivedPlusSingleUnit]
+    infer_instance
+  have hb := hbc j eV a sq J
+  have hb' : IsIso ((DerivedCategory.Plus.homologyFunctor _ n).map
+      ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj J))) := by
+    simpa [baseChangeHomologyMap, baseChangeHomologyNatTrans,
+      baseChangeSourceFunctor, baseChangeTargetFunctor] using hb
+  infer_instance
+
 
 end AlgebraicGeometry.Etale

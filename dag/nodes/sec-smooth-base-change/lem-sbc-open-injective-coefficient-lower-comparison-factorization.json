@@ -1,0 +1,100 @@
+{
+ "id": "lem-sbc-open-injective-coefficient-lower-comparison-factorization",
+ "kind": "statement",
+ "title": "Open injective coefficient lower comparison factorization",
+ "statement": "For the square and injective coefficient of lem-sbc-open-injective-coefficient-lower-comparison, the displayed derived unit/pullback/counit map equals the homology map of the composite of the canonical single-complex unit for j_*J with the derived base-change map for the square.",
+ "source": {
+  "document": "Stacks Project Tag 0F07",
+  "place": "closed-open lower comparison, derived mate calculation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Expand the derived base-change mate and the canonical single-complex comparison; naturality of the derived unit and the adjunction triangle identities identify the composite with the displayed map.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project Tag 0F07",
+  "place": "formal derived-category mate computation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived adjunction counit on single complex rightDerivedPlusSingleUnit",
+   "date": "2026-10-15",
+   "results": "No exact declaration; generic derived counit factorization found.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "derivedPlus_counit_app_fac rightDerivedPlusSingleUnit",
+   "date": "2026-10-15",
+   "results": "Found Adjunction.derivedPlus_counit_app_fac; no complete single-complex theorem.",
+   "verdict": "partial supporting lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedPlusSingleUnit counit compatibility",
+   "date": "2026-10-15",
+   "results": "Found derivedPlus_counit_app_fac and transition compatibility; no exact factorization.",
+   "verdict": "supporting declarations only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparison",
+  "date": "2026-10-15",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-open-injective-coefficient-lower-comparison",
+   "place": "derived mate identification",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparisonFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenInjectiveCoefficientLowerComparisonFactorization.lean",
+  "declaration": "AlgebraicGeometry.Etale.open_injective_coefficient_lower_comparison_factorization",
+  "statement": "theorem open_injective_coefficient_lower_comparison_factorization\n    (Λ : Type (u + 1)) [CommRing Λ]\n    {Y T V W : Scheme.{u}}\n    (e : Y ⟶ T) (j : V ⟶ T) (eV : W ⟶ V) (a : W ⟶ Y)\n    [IsOpenImmersion j] [QuasiCompact j] [QuasiSeparated j]\n    (wa : a ≫ e = eV ≫ j) (sq : IsPullback eV a j e)\n    (n : ℤ) (J : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective J] :\n    ((DerivedCategory.Plus.homologyFunctor _ n).map\n      ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) a).derivedPlus.unit.app\n        (D+((e)^*[ModuleCat.{u + 1} Λ]).obj\n          ((DerivedCategory.Plus.singleFunctor\n            (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj\n              (((j)_*[ModuleCat.{u + 1} Λ]).obj J))) ≫\n        R+((a)_*[ModuleCat.{u + 1} Λ]).map\n          ((upperStarPlusComp (ModuleCat.{u + 1} Λ) a e).inv.app _ ≫\n            eqToHom (by rw [wa]) ≫\n            (upperStarPlusComp (ModuleCat.{u + 1} Λ) eV j).hom.app _ ≫\n            D+((eV)^*[ModuleCat.{u + 1} Λ]).map\n              ((((j)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app\n                (((j)_*[ModuleCat.{u + 1} Λ]).obj J) ≫\n                (DerivedCategory.Plus.singleFunctor _ 0).map\n                  ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit.app J))))) =\n      (DerivedCategory.Plus.homologyFunctor _ n).map\n        (D+((e)^*[ModuleCat.{u + 1} Λ]).map\n            (CategoryTheory.Functor.rightDerivedPlusSingleUnit\n              ((j)_*[ModuleCat.{u + 1} Λ]) J) ≫\n          (Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app\n            ((DerivedCategory.Plus.singleFunctor\n              (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj J))",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-9dfa9",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261014T174623-L-3170531",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-9dfa9",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261014T174623-L-3170531",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered packet, node metadata, Lean files, and importer EtaleOpenInjectiveLerayEdge matched and compiled successfully"
+ }
+}
