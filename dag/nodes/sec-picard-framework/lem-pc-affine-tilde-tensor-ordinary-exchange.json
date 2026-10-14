@@ -1,0 +1,155 @@
+{
+ "id": "lem-pc-affine-tilde-tensor-ordinary-exchange",
+ "kind": "statement",
+ "title": "Ordinary affine exchange in tensor coordinates",
+ "statement": "Let R,A,B,D be commutative rings, A and B R-algebras. Assume sheaf derived categories for every scheme [def-pc-derived-category]. Let M be an unbounded A-module complex, phi:A→D and psi:B→D ring maps inducing a commutative spectrum square with f:Spec A→Spec R, g:Spec B→Spec R, p:Spec D→Spec A and fprime:Spec D→Spec B. Let k:B tensor_R res_R M→res_psi(D tensor_phi M) be a B-complex map taking b tensor q to psi(b) tensor q in each degree. Let H be the homotopy class of tilde M and s the ordinary source iso [lem-pc-affine-tilde-tensor-source-comparison]. Assume the fixed p-pullback counit c_H is invertible and let t be the prescribed identity affine tilde representative [def-pc-affine-base-change-tilde-representative-iso]. Write q for Q(tilde_B k), followed by the canonical affine pushforward complex comparison [lem-pc-affine-tilde-pushforward-cohomology-normalization] and the fprime right-derived unit. Then Q(s.hom), followed by Qh of ordinary homotopy exchange [lem-pc-derived-base-change-unit-compatibility] and the fprime right-derived unit on p-pullback H, equals q followed by Rfprime_*(t.hom) and Rfprime_*(c_H). This is an ordinary coefficient and exchange calculation followed by localization; it has no derived tensor model, derived source-comparison isomorphism, K-flatness or cartesian-square hypothesis.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06Y6; https://stacks.math.columbia.edu/tag/08DW; https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Tag 08HY, ordinary adjoint of exchange; Tags 01I9 and 06Y6, unit-normalized tilde/scalar extension and coefficient map."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "lem-pc-affine-tilde-tensor-source-comparison",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-pc-affine-tilde-pushforward-cohomology-normalization",
+  "lem-pc-derived-base-change-unit-compatibility",
+  "def-pc-affine-base-change-tilde-representative-iso"
+ ],
+ "proof": [
+  {
+   "text": "Transpose ordinary exchange under the termwise tensor-pullback adjunction for fprime. Its definition is pushforward of the p-pullback unit followed by composition of pushforwards. The tensor/tilde iso sends the pullback-unit section of q to 1 tensor q. The affine pushforward comparison uses the tilde unit, restriction of sections, and tilde counit. Applying the adjunction triangle identities gives b tensor q mapped to psi(b) tensor q. The assumption on k fixes these generators, and tensor induction followed by complex extensionality proves equality of chain maps.",
+   "uses": [
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-pc-affine-tilde-pushforward-cohomology-normalization",
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-derived-base-change-unit-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map the ordinary identity to homotopy and derived categories using the composition isomorphisms defining moduleHomotopyBaseChange. Naturality of the right-derived unit moves the inverse target tensor/tilde comparison to its displayed final position. The result is the asserted equation, before target normalization. Zero rings and zero complexes obey the same generator calculation. The prescribed representative t is Q of the inverse tensor/tilde comparison followed by the inverse fixed p-counit (and pullback of the identity). Hence t.hom composed with this counit is that inverse tensor/tilde comparison; apply Rf-prime and functoriality to obtain the displayed normalization.",
+   "uses": [
+    "lem-pc-derived-base-change-unit-compatibility",
+    "def-pc-affine-base-change-tilde-representative-iso"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-base-change-tilde-representative-iso",
+  "lem-pc-affine-tilde-pushforward-cohomology-normalization",
+  "lem-pc-derived-base-change-unit-compatibility",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-tilde-pullback-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H2",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tag 08HY, ordinary adjoint of exchange; Tags 01I9 and 06Y6, unit-normalized tilde/scalar extension and coefficient map.",
+  "note": "Expanded categorical normalization of parent proof step; checked zero rings, zero complexes and non-cartesian squares."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact associated sheaf functor commutes with derived scalar extension and its counit for an affine morphism",
+   "results": "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardSections_unitHomEquiv",
+   "date": "2026-10-14",
+   "verdict": "Generic categorical or tensor tools only; no exact affine counit normalization or ordinary exchange formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "CategoryTheory.Functor.leftDerivedUnique",
+   "date": "2026-10-14",
+   "verdict": "Generic categorical or tensor tools only; no exact affine counit normalization or ordinary exchange formula."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorUnit|leftDerivedUnique",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+   "date": "2026-10-14",
+   "verdict": "Generic categorical or tensor tools only; no exact affine counit normalization or ordinary exchange formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine derived pullback agrees with associated sheaf of derived extension of scalars through counit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary base change exchange for associated sheaves sends b tensor m to psi b tensor m",
+   "results": "PresheafOfModules.Monoidal.tensorObjMap, PresheafOfModules.Monoidal.tensorObj_map_tmul, PresheafOfModules.Monoidal.tensorObj, IsBaseChange.tensorEquiv, TensorProduct.isBaseChange, isBaseChange_tensorProduct_map, LinearMap.rTensor_baseChange, IsBaseChange.of_equiv",
+   "date": "2026-10-14",
+   "verdict": "Generic categorical or tensor tools only; no exact affine counit normalization or ordinary exchange formula."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleBaseChange|tensorPullback.*tilde|leftDerivedUnique",
+   "results": "Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+   "date": "2026-10-14",
+   "verdict": "Generic categorical or tensor tools only; no exact affine counit normalization or ordinary exchange formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived_fac_app",
+   "results": "CategoryTheory.Functor.leftDerived_fac_app",
+   "date": "2026-10-14",
+   "verdict": "Generic categorical or tensor tools only; no exact affine counit normalization or ordinary exchange formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineTildeDerivedTensorMate",
+  "date": "2026-10-14",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Derived affine tensor mate, proof step 2: ordinary coefficient exchange",
+   "via": [
+    "lem-pc-affine-tilde-derived-tensor-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchange",
+  "file": "lean/Sheaf/Algebra/Homology/AffineTildeTensorOrdinaryExchange.lean",
+  "declaration": "AlgebraicGeometry.affineTildeTensorOrdinaryExchange",
+  "statement": "theorem affineTildeTensorOrdinaryExchange\n    (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]\n    [Algebra R A] [Algebra R B]\n    (M : CochainComplex (ModuleCat.{u} A) ℤ)\n    (φ : A →+* D) (ψ : B →+* D)\n    (hw : Spec.map (CommRingCat.ofHom φ) ≫\n        Spec.map (CommRingCat.ofHom (algebraMap R A)) =\n      Spec.map (CommRingCat.ofHom ψ) ≫\n        Spec.map (CommRingCat.ofHom (algebraMap R B)))\n    (k : (((ModuleCat.extendScalars (algebraMap R B)).mapHomologicalComplex (.up ℤ)).obj\n        (((ModuleCat.restrictScalars (algebraMap R A)).mapHomologicalComplex\n          (.up ℤ)).obj M)) ⟶\n      ((ModuleCat.restrictScalars ψ).mapHomologicalComplex (.up ℤ)).obj\n        (((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M))\n    (hk : ∀ (i : ℤ) (b : B) (q : M.X i),\n      k.f i (b ⊗ₜ[R,algebraMap R B] q) = ψ b ⊗ₜ[A,φ] q)\n    (hc : IsIso ((SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φ))).app\n      ((HomotopyCategory.quotient _ (.up ℤ)).obj\n        (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj M)))) :\n    let f := Spec.map (CommRingCat.ofHom (algebraMap R A))\n    let g := Spec.map (CommRingCat.ofHom (algebraMap R B))\n    let p := Spec.map (CommRingCat.ofHom φ)\n    let f' := Spec.map (CommRingCat.ofHom ψ)\n    let H := (HomotopyCategory.quotient _ (.up ℤ)).obj\n      (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj M)\n    let t := affineBaseChangeTildeRepresentativeIso A D φ\n      (DerivedCategory.Q.obj\n        (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj M)) M (Iso.refl _) hc\n    DerivedCategory.Q.map (affineTildeTensorOrdinarySourceIso R A B M).hom ≫\n        DerivedCategory.Qh.map ((moduleHomotopyBaseChange f f' g p hw).app H) ≫\n        (RingedSpace.moduleDirectImage f'.toLRSHom.toShHom).rightDerivedFunctorUnit.app\n          (((Scheme.Modules.tensorPullback p).mapHomotopyCategory (.up ℤ)).obj H) =\n      affineTildeTensorOrdinaryTargetMap R A B D M φ ψ k ≫\n        (schemeDerivedDirectImage f').map t.hom ≫\n        (schemeDerivedDirectImage f').map ((SingleComplexBaseChange.counit p).app H)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-9e097",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261014T085852-L-233721",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-9e097",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261014T085852-L-233721",
+  "kind": "interface",
+  "note": "independent Codex review: Existing signatures and raw-map factors match the base; both new obligations match their nodes and cited constructions. All three modules and the sole direct importer compile cleanly; axiom checks agree with the two reported remaining sorries."
+ }
+}

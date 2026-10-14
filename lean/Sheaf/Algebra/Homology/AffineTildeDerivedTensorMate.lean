@@ -9,6 +9,8 @@ public import Sheaf.Algebra.Homology.AffineBaseChangeTildeRepresentative
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+public import Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison
+public import Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchange
 
 /-! # The derived affine tensor mate before taking homology
 
@@ -21,7 +23,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe u w wM
 open CategoryTheory CategoryTheory.Limits
-open scoped TensorProduct
+open scoped TensorProduct ChangeOfRings
 noncomputable section
 namespace AlgebraicGeometry
 
@@ -95,6 +97,26 @@ def affineTildeTensorCoefficientComplexMap
     (ρ.inv.mapHomologicalComplex (.up ℤ)).app C ≫
     ((ModuleCat.restrictScalars ψ).mapHomologicalComplex (.up ℤ)).map z
 
+
+omit [∀ Y : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
+private theorem affineTildeTensorCoefficientComplexMap_tmul
+    (φ : A →+* D) (ψ : B →+* D)
+    (hφ : (algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B)) = φ)
+    (hψ : (algebraMap (A ⊗[R] B) D).comp
+      Algebra.TensorProduct.includeRight.toRingHom = ψ)
+    (i : ℤ) (b : B) (q : M.X i) :
+    (affineTildeTensorCoefficientComplexMap R A B D M m φ ψ hφ hψ).f i
+        (b ⊗ₜ[R,algebraMap R B] q) = ψ b ⊗ₜ[A,φ] q := by
+  subst φ
+  subst ψ
+  dsimp only [affineTildeTensorCoefficientComplexMap]
+  simp only [eqToHom_refl]
+  change m.ordinaryToLocalized.f i
+      (m.ordinaryIso.hom.f i (b ⊗ₜ[R,algebraMap R B] q)) = _
+  rw [m.ordinaryIso_tmul, m.ordinaryToLocalized_tmul]
+  rfl
+
 /-- The raw derived tensor counit followed by the coefficient map, ordinary affine
 pushforward comparison and right-derived pushforward unit. This construction uses
 no base-change mate, pullback counit or cohomological degree.
@@ -117,34 +139,40 @@ def affineTildeDerivedTensorToPushforward
   let : T.PreservesHomology := tilde_preservesHomology B
   let : PreservesFiniteLimits T := T.preservesFiniteLimits_of_preservesHomology
   let : PreservesFiniteColimits T := T.preservesFiniteColimits_of_preservesHomology
-  let N := ((ModuleCat.restrictScalars (algebraMap R A)).mapHomologicalComplex (.up ℤ)).obj M
-  let N' := ((ModuleCat.extendScalars (algebraMap R B)).mapHomologicalComplex (.up ℤ)).obj N
-  let Cg := ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M
-  let σ := affineTildePushforwardComparison D B ψ
-  let F := ModuleCat.restrictScalars ψ ⋙ T
-  let P := Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom ψ))
-  let : (affineTildeFunctor D).Additive :=
-    instAdditiveModuleCatCarrierModulesSpecOfFunctor
-  let : P.Additive := inferInstance
-  let : (affineTildeFunctor D ⋙ P).PreservesZeroMorphisms :=
-    ⟨fun _ _ ↦ by
-      rw [Functor.comp_map, (affineTildeFunctor D).map_zero]
-      exact P.map_zero _ _⟩
-  let k := affineTildeTensorCoefficientComplexMap R A B D M m φ ψ hφ hψ
-  let a : (F.mapHomologicalComplex (.up ℤ)).obj Cg ⟶
-      (P.mapHomologicalComplex (.up ℤ)).obj
-        (((affineTildeFunctor D).mapHomologicalComplex (.up ℤ)).obj Cg) :=
-    (σ.hom.mapHomologicalComplex (.up ℤ)).app Cg
-  exact T.mapDerivedCategory.map
-      (m.counit.app ((HomotopyCategory.quotient _ _).obj N)) ≫
-    (T.mapDerivedCategoryFactors.app N').hom ≫
-    DerivedCategory.Q.map ((T.mapHomologicalComplex (.up ℤ)).map k) ≫
-    DerivedCategory.Q.map a ≫
-    (RingedSpace.moduleDirectImage
-      (Spec.map (CommRingCat.ofHom ψ)).toLRSHom.toShHom).rightDerivedFunctorUnit.app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj
-          (((affineTildeFunctor D).mapHomologicalComplex (.up ℤ)).obj Cg))
+  have hF₀ : affineExactTildeDerived.{u, w, wM} B =
+      Functor.mapDerivedCategory.{wM, w} (affineTildeFunctor B) := rfl
+  exact affineTildeTensorDerivedCounit R A B D M m
+      (affineExactTildeDerived.{u, w, wM} B) hF₀ ≫
+    affineTildeTensorOrdinaryTargetMap R A B D M φ ψ
+      (affineTildeTensorCoefficientComplexMap R A B D M m φ ψ hφ hψ)
 
+private theorem affineTildeDerivedTensorToPushforward_factor
+    (φ : A →+* D) (ψ : B →+* D)
+    (hφ : (algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B)) = φ)
+    (hψ : (algebraMap (A ⊗[R] B) D).comp
+      Algebra.TensorProduct.includeRight.toRingHom = ψ) :
+    let T := affineTildeFunctor B
+    let : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    let : T.PreservesHomology := tilde_preservesHomology B
+    let : PreservesFiniteLimits T := T.preservesFiniteLimits_of_preservesHomology
+    let : PreservesFiniteColimits T := T.preservesFiniteColimits_of_preservesHomology
+    let hF₀ : affineExactTildeDerived.{u, w, wM} B = T.mapDerivedCategory := rfl
+    affineTildeDerivedTensorToPushforward R A B D M m φ ψ hφ hψ =
+      affineTildeTensorDerivedCounit R A B D M m
+        (affineExactTildeDerived.{u, w, wM} B) hF₀ ≫
+      affineTildeTensorOrdinaryTargetMap R A B D M φ ψ
+        (affineTildeTensorCoefficientComplexMap R A B D M m φ ψ hφ hψ) := by
+  rfl
+
+attribute [local irreducible] tilde Functor.mapDerivedCategory
+  affineTildePushforwardComparison Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
+  Scheme.Modules.tensorPullback affineBaseChangeTildeRepresentativeIso
+  affineTildeTensorOrdinarySourceIso schemeDerivedBaseChangeMap derivedPullback
+  affineTildeTensorDerivedCounit affineTildeTensorOrdinaryTargetMap
+  affineTildeDerivedTensorToPushforward
+
+
+set_option linter.unusedVariables false in
 /-- The affine base-change mate on the derived scalar-extension object, before
 applying any homology functor. Its source comparison is independent of D.
 Source: Stacks Project, Tags 0DJ8 (affine proof and equation-bc), 06Y6 and 08HY.
@@ -199,6 +227,51 @@ theorem exists_affineTildeDerivedTensorMate
         (Spec.map (CommRingCat.ofHom (algebraMap R B)))
         (Spec.map (CommRingCat.ofHom φ)) hw K =
       affineTildeDerivedTensorToPushforward R A B D M m φ ψ hφ hψ ≫
-        (schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom ψ))).map t.hom := by sorry
+        (schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom ψ))).map t.hom := by
+  clear hM hK
+  let f := Spec.map (CommRingCat.ofHom (algebraMap R A))
+  let g := Spec.map (CommRingCat.ofHom (algebraMap R B))
+  let p := Spec.map (CommRingCat.ofHom φ)
+  let f' := Spec.map (CommRingCat.ofHom ψ)
+  let H : HomotopyCategory
+      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (.up ℤ) :=
+    (HomotopyCategory.quotient _ (.up ℤ)).obj
+    (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj M)
+  let T := affineTildeFunctor B
+  let : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : T.PreservesHomology := tilde_preservesHomology B
+  let : PreservesFiniteLimits T := T.preservesFiniteLimits_of_preservesHomology
+  let : PreservesFiniteColimits T := T.preservesFiniteColimits_of_preservesHomology
+  have hF₀ : affineExactTildeDerived.{u, w, wM} B =
+      T.mapDerivedCategory := rfl
+  obtain ⟨χ, hχ⟩ := exists_affineTildeTensorSourceComparison.{u, w, wM} R A B D M m
+    (affineExactTildeDerived.{u, w, wM} B) hF₀
+  let σ := χ
+  let t := affineBaseChangeTildeRepresentativeIso A D φ
+    (DerivedCategory.Q.obj
+      (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj M)) M (Iso.refl _) hc
+  suffices hsigma : σ.hom ≫
+      schemeDerivedBaseChangeMap f f' g p hw (DerivedCategory.Qh.obj H) =
+      affineTildeDerivedTensorToPushforward R A B D M m φ ψ hφ hψ ≫
+        (schemeDerivedDirectImage f').map t.hom by
+    exact ⟨σ, hsigma⟩
+  let : (Scheme.Modules.tensorPullback g).Additive :=
+    SingleComplexBaseChange.tensorPullbackAdditive.{u, w} g
+  let : (Scheme.Modules.tensorPullback p).Additive :=
+    SingleComplexBaseChange.tensorPullbackAdditive.{u, w} p
+  let c := (SingleComplexBaseChange.counit p).app H
+  have : IsIso c := hc
+  have hsource := hχ φ ψ hw
+  have he := affineTildeTensorOrdinaryExchange.{u, w} R A B D M φ ψ hw
+    (affineTildeTensorCoefficientComplexMap R A B D M m φ ψ hφ hψ)
+    (affineTildeTensorCoefficientComplexMap_tmul R A B D M m φ ψ hφ hψ) hc
+  have hr := affineTildeDerivedTensorToPushforward_factor R A B D M m φ ψ hφ hψ
+  have hexchange := congrArg (fun k ↦
+    affineTildeTensorDerivedCounit R A B D M m
+      (affineExactTildeDerived.{u, w, wM} B) hF₀ ≫ k) he
+  have hresult := hsource.trans (by simpa only [Category.assoc] using hexchange)
+  have : IsIso ((schemeDerivedDirectImage f').map c) := inferInstance
+  apply (cancel_mono ((schemeDerivedDirectImage f').map c)).mp
+  simpa only [σ, Category.assoc, hr] using hresult
 
 end AlgebraicGeometry

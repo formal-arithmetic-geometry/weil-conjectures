@@ -1,0 +1,165 @@
+{
+ "id": "lem-pc-affine-tilde-tensor-source-comparison",
+ "kind": "statement",
+ "title": "Counit-normalized affine derived tensor source",
+ "statement": "Let R,A,B,D be commutative rings, with R-algebra structures on A and B and an (A tensor_R B)-algebra structure on D. Assume sheaf derived categories for every scheme and module derived categories over R and B [def-pc-derived-category]. Let M be an arbitrary unbounded A-module complex and m any BaseDerivedTensorCohomologyModel R A B M D [def-pc-base-derived-tensor-cohomology-model]. Put f:Spec A→Spec R and g:Spec B→Spec R for the maps induced by the R-algebra structures. Let F0 be the functor on derived categories induced by exact associated sheaf over B, supplied with its equality to (affineTildeFunctor B).mapDerivedCategory. There is an isomorphism chi from F0(m.derived(Qh(res_R M))) to Lg*(Rf_*Q(tilde M)), constructed independently of the coefficient maps to D. For every pair phi:A→D, psi:B→D, put p=Spec(phi):Spec D→Spec A and fprime=Spec(psi):Spec D→Spec B, and assume p followed by f equals fprime followed by g. Then chi.hom followed by the pinned base-change mate and Rfprime_* of the p-pullback counit equals the concrete derived scalar-extension counit prefix followed by Q of the ordinary tensor/tilde source comparison, localized ordinary exchange and the fprime right-derived unit. This universal source transport equation involves no coefficient complex map or target representative and does not assert the final affine tensor mate equality.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06Y6; https://stacks.math.columbia.edu/tag/08DW; https://stacks.math.columbia.edu/tag/08HY; https://stacks.math.columbia.edu/tag/0AVW",
+  "place": "Tags 06Y6 and 08DW(2): universal K-flat scalar-extension and affine derived pullback; Tags 08C2 and 0AVW: affine pushforward of a quasi-coherent resolution; Tag 08HY: pinned mate and derived-unit compatibility."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-pc-affine-tilde-pushforward-cohomology-normalization",
+  "def-pc-derived-pullback",
+  "def-pc-derived-base-change-map",
+  "lem-pc-derived-base-change-unit-compatibility"
+ ],
+ "proof": [
+  {
+   "text": "Resolve res_R M by a termwise flat K-flat complex P with quasi-isomorphic augmentation. The universal counit of m is invertible on P and natural along the augmentation, so m on res_R M is computed by extension of P to B. Exact tilde sends the augmentation to a quasi-isomorphism.",
+   "uses": [
+    "lem-pc-source-module-kflat-resolution",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By lem-pc-affine-tilde-kflat, tilde P is K-flat. The K-flat counit clause of def-pc-derived-pullback makes the fixed g-pullback counit invertible there. The unit-normalized tensor/tilde comparison identifies the two ordinary extensions; both sides of the desired equation are its counit map followed by the augmentation. Naturality of the counits gives the equation on res_R M after canceling the localized augmentation. Compose with pullback of Q of the ordinary affine pushforward iso to obtain chi and the stated equation. The construction is independent of the coefficient map to D. The affine right-derived pushforward unit on tilde M is invertible by a K-injective resolution and affinePushforward_resolution_quasiIso; naturality and cancellation show this. Compose its derived g-pullback with the source comparison. For any commutative affine square, precompose derivedBaseChange_unit_compatibility with the source comparison and substitute its counit normalization. Associativity gives the asserted universal transport equation.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "lem-pc-affine-tilde-kflat",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-pc-affine-tilde-pushforward-cohomology-normalization",
+    "lem-pc-affine-pushforward-resolution-quasi-iso",
+    "lem-pc-derived-base-change-unit-compatibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-derived-pullback",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-pushforward-resolution-quasi-iso",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-tilde-kflat",
+  "lem-pc-affine-tilde-pushforward-cohomology-normalization",
+  "lem-pc-derived-base-change-unit-compatibility",
+  "lem-pc-source-module-kflat-resolution",
+  "lem-weil-pbc-tilde-pullback-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H2",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 06Y6 and 08DW(2): comparison via K-flat models and universal counits; exact tilde in 06Z0.",
+  "note": "Source identification, actual affine pushforward-unit invertibility and square transport through pinned derived-unit compatibility; ordinary coefficient exchange is separate."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact associated sheaf functor commutes with derived scalar extension and its counit for an affine morphism",
+   "results": "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardSections_unitHomEquiv",
+   "date": "2026-10-14",
+   "verdict": "Generic categorical or tensor tools only; no exact affine counit normalization or ordinary exchange formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "CategoryTheory.Functor.leftDerivedUnique",
+   "date": "2026-10-14",
+   "verdict": "Generic categorical or tensor tools only; no exact affine counit normalization or ordinary exchange formula."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorUnit|leftDerivedUnique",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+   "date": "2026-10-14",
+   "verdict": "Generic categorical or tensor tools only; no exact affine counit normalization or ordinary exchange formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine derived pullback agrees with associated sheaf of derived extension of scalars through counit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary base change exchange for associated sheaves sends b tensor m to psi b tensor m",
+   "results": "PresheafOfModules.Monoidal.tensorObjMap, PresheafOfModules.Monoidal.tensorObj_map_tmul, PresheafOfModules.Monoidal.tensorObj, IsBaseChange.tensorEquiv, TensorProduct.isBaseChange, isBaseChange_tensorProduct_map, LinearMap.rTensor_baseChange, IsBaseChange.of_equiv",
+   "date": "2026-10-14",
+   "verdict": "Generic categorical or tensor tools only; no exact affine counit normalization or ordinary exchange formula."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleBaseChange|tensorPullback.*tilde|leftDerivedUnique",
+   "results": "Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+   "date": "2026-10-14",
+   "verdict": "Generic categorical or tensor tools only; no exact affine counit normalization or ordinary exchange formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived_fac_app",
+   "results": "CategoryTheory.Functor.leftDerived_fac_app",
+   "date": "2026-10-14",
+   "verdict": "Generic categorical or tensor tools only; no exact affine counit normalization or ordinary exchange formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineTildeDerivedTensorMate",
+  "date": "2026-10-14",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Derived affine tensor mate, proof step 1: source counit comparison",
+   "via": [
+    "lem-pc-affine-tilde-derived-tensor-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison",
+  "file": "lean/Sheaf/Algebra/Homology/AffineTildeTensorSourceComparison.lean",
+  "declaration": "AlgebraicGeometry.exists_affineTildeTensorSourceComparison",
+  "statement": "theorem exists_affineTildeTensorSourceComparison\n    (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]\n    [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) D]\n    [HasDerivedCategory.{wM} (ModuleCat.{u} R)]\n    [HasDerivedCategory.{wM} (ModuleCat.{u} B)]\n    (M : CochainComplex (ModuleCat.{u} A) ℤ)\n    (m : ModuleCat.BaseDerivedTensorCohomologyModel R A B M D)\n    (F₀ : DerivedCategory.{wM} (ModuleCat.{u} B) ⥤\n      schemeDerivedCategory.{u, w} (Spec (.of B)))\n    (hF₀ : F₀ = Functor.mapDerivedCategory.{wM, w} (affineTildeFunctor B)) :\n    let f := Spec.map (CommRingCat.ofHom (algebraMap R A))\n    let g := Spec.map (CommRingCat.ofHom (algebraMap R B))\n    let H := (HomotopyCategory.quotient _ (.up ℤ)).obj\n      (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj M)\n    ∃ χ : F₀.obj\n          (m.derived.obj (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj\n            (((ModuleCat.restrictScalars (algebraMap R A)).mapHomologicalComplex\n              (.up ℤ)).obj M)))) ≅\n        (derivedPullback g).obj ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj H)),\n      ∀ (φ : A →+* D) (ψ : B →+* D)\n        (hw : Spec.map (CommRingCat.ofHom φ) ≫ f =\n          Spec.map (CommRingCat.ofHom ψ) ≫ g),\n        let p := Spec.map (CommRingCat.ofHom φ)\n        let f' := Spec.map (CommRingCat.ofHom ψ)\n        χ.hom ≫ schemeDerivedBaseChangeMap f f' g p hw (DerivedCategory.Qh.obj H) ≫\n          (schemeDerivedDirectImage f').map ((SingleComplexBaseChange.counit p).app H) =\n        affineTildeTensorDerivedCounit R A B D M m F₀ hF₀ ≫\n          DerivedCategory.Q.map (affineTildeTensorOrdinarySourceIso R A B M).hom ≫\n          DerivedCategory.Qh.map ((moduleHomotopyBaseChange f f' g p hw).app H) ≫\n          (RingedSpace.moduleDirectImage f'.toLRSHom.toShHom).rightDerivedFunctorUnit.app\n            (((Scheme.Modules.tensorPullback p).mapHomotopyCategory (.up ℤ)).obj H)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-9e097",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261014T085852-L-233721",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-9e097",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261014T085852-L-233721",
+  "kind": "interface",
+  "note": "independent Codex review: Existing signatures and raw-map factors match the base; both new obligations match their nodes and cited constructions. All three modules and the sole direct importer compile cleanly; axiom checks agree with the two reported remaining sorries."
+ }
+}
