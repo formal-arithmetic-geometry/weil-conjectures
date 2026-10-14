@@ -1,0 +1,104 @@
+{
+ "id": "lem-pc-fp-local-map-pair-composites-defect-zero-core",
+ "kind": "statement",
+ "title": "Core eventual pair defect zero",
+ "statement": "Under the hypotheses of finitePresentation_local_map_pair_eventually_defect_zero, there is a stage l ≥ k such that at every later stage the overlap defect is zero in every universal-test descent square.",
+ "stmt_deps": [
+  "lem-pc-fp-local-map-pair-defect-zero"
+ ],
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), overlap defect construction"
+ },
+ "proof": [
+  {
+   "text": "Construct the overlap defect on the quasi-compact overlap and apply finite-presentation eventual test-map vanishing; transport the resulting equality through the canonical comparisons.",
+   "uses": [
+    "lem-pc-fp-test-map-zero-eventually"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-test-map-zero-eventually"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3)",
+  "via": "explicit composite equality reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "eventual pairwise compatibility finite presentation overlap",
+   "results": "No exact result",
+   "date": "2026-10-14",
+   "verdict": "none"
+  },
+  {
+   "tool": "loogle",
+   "query": "PairCompatibility",
+   "results": "No exact result",
+   "date": "2026-10-14",
+   "verdict": "none"
+  },
+  {
+   "tool": "grep",
+   "query": "PairCompatibility|PairDefectZero",
+   "results": "Only local project definitions",
+   "date": "2026-10-14",
+   "verdict": "none"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationLocalMapPairEventuallyCompositesCompatible",
+  "date": "2026-10-14",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-fp-local-map-pair-defect-zero",
+   "place": "explicit equality form of the overlap square",
+   "via": [
+    "lem-pc-fp-test-map-zero-eventually"
+   ]
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationLocalMapPairEventuallyCompositesCompatible",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationLocalMapPairEventuallyCompositesCompatible.lean",
+  "declaration": "AlgebraicGeometry.finitePresentation_local_map_pair_eventually_composites_defect_zero_core",
+  "statement": "theorem finitePresentation_local_map_pair_eventually_composites_defect_zero_core {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [QuasiSeparated f] (k : I) (hik : i ≤ k) (F G : (pullback f (Spec.map (R.map (homOfLE hik)))).Modules) (hF : F.IsFinitePresentation) (hFq : F.IsQuasicoherent) (hG : G.IsFinitePresentation) (hGq : G.IsQuasicoherent) (U₀ : (pullback f (Spec.map (R.map (homOfLE hik)))).OpenCover.{u}) (a b : U₀.I₀) [IsAffine (U₀.X a)] [IsAffine (U₀.X b)] (δ : (Scheme.Modules.tensorPullback (overlapLimitMap R c f hik)).obj F ⟶ (Scheme.Modules.tensorPullback (overlapLimitMap R c f hik)).obj G) (r₀ : ∀ x, (Scheme.Modules.pullback (U₀.f x)).obj F ⟶ (Scheme.Modules.pullback (U₀.f x)).obj G) (hr : ∀ x, let p := overlapLimitMap R c f hik let e := Scheme.Modules.openCoverTensorPullbackComparison p U₀ x e.inv.app F ≫ (Scheme.Modules.pullback (U₀.pullbackHom p x)).map (r₀ x) ≫ e.hom.app G = (Scheme.Modules.pullback ((U₀.pullback₁ p).f x)).map δ) : ∃ (l : I) (_hkl : k ≤ l), ∀ (m : I) (hkm : k ≤ m), l ≤ m → let q := baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hik)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hik.trans hkm))))) (Over.homMk (Spec.map (R.map (homOfLE hkm))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) let U := U₀.pullback₁ q let Q := modulesPseudofunctor.toDescentData U.f let C := Scheme.Modules.tensorPullback q let r : ∀ x, (Q.obj (C.obj F)).obj x ⟶ (Q.obj (C.obj G)).obj x := fun x ↦ let e := Scheme.Modules.openCoverTensorPullbackComparison q U₀ x e.inv.app F ≫ (Scheme.Modules.pullback (U₀.pullbackHom q x)).map (r₀ x) ≫ e.hom.app G Pseudofunctor.DescentData.PairDefectZero r a b",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T010834-L-3160340",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T010834-L-3160340",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
