@@ -28,9 +28,100 @@
   "lem-pur-derived-change-of-rings",
   "def-pc-perfect-ring-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a bounded-above finite-free representative $P$ of $C$ using [def-pc-ring-pseudo-coherent-complex]. A finite free module tensors as a finite direct sum, so tensoring preserves exact sequences coordinatewise. Thus [lem-pc-module-bounded-flat-kflat] makes $P$ K-flat. Its conclusion is precisely ordinary-module K-flatness [def-pc-module-kflat-complex]: for every acyclic module complex $L$, the total tensor with $P$ is acyclic. On the identity-cover one-object site this is also the sheaf K-flat condition, since sections, tensor products and cohomology are the ordinary module operations. Thus [lem-pc-source-kflat-module-tensor-model] computes $C\\otimes_R^L M$ by $P\\otimes_R M[0]$ for every module $M$, including residue fields and localization rings. Fix also the following elementary fraction calculation for any module complex $T$ and multiplicative set $S$: $H^j(S^{-1}T)=S^{-1}H^j(T)$. Indeed a localized cycle $x/s$ has $t\\,dx=0$ for some $t\\in S$, so equals the localization of the cycle $tx$ divided by $ts$; if a cycle becomes a boundary, an equality $x/s=dy/u$ can be cleared by a further denominator, showing the class of $x/s$ is zero in localized cohomology. These give mutually inverse maps on cycles modulo boundaries. The same calculation applies to $T=P\\otimes_R M$, and ordinary tensor associativity identifies its localization with $P_f\\otimes_{R_f}M_f$. For scalar extension to a ring $S$, apply [lem-pur-derived-change-of-rings] on the one-object ringed site with only identity covers: sheaves of modules are ordinary modules, and its K-flat calculation identifies $C\\otimes_R^L S$ with $P\\otimes_R S$ in $D(S)$, including the target module structure, not merely after restriction to $D(R)$.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-source-kflat-module-tensor-model",
+    "lem-pur-derived-change-of-rings",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 068V, lemma-check-perfect-pointwise, (3) implies (1); direct matrix construction of Tag 068U"
+   }
+  },
+  {
+   "text": "Fix $j\\notin[a,b]$ and a maximal ideal $\\mathfrak m$. Its residue-field vanishing, computed by step 1, permits [lem-weil-pbc-free-complex-residue-degree-cancellation] at degree $j$. For some $f\\notin\\mathfrak m$, $P_f$ is homotopy equivalent to a complex with zero term in degree $j$, so $H^j(P_f)=0$. Further localization at $\\mathfrak m$ and the fraction calculation give $H^j(P)_{\\mathfrak m}=0$. This holds for every maximal ideal. Apply [lem-weil-pbc-linear-map-bijective-at-maximal-localizations] to the zero map $H^j(P)\\to0$: all its maximal localizations are bijective, hence it is bijective and $H^j(C)=H^j(P)=0$. This proves ordinary cohomology vanishing outside the interval, without assuming $C$ was bounded below.",
+   "uses": [
+    "lem-weil-pbc-free-complex-residue-degree-cancellation",
+    "lem-weil-pbc-linear-map-bijective-at-maximal-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 068V, lemma-check-perfect-pointwise, (3) implies (1); direct matrix construction of Tag 068U"
+   }
+  },
+  {
+   "text": "Fix a maximal ideal $\\mathfrak m$ and apply [lem-weil-pbc-free-complex-residue-degree-cancellation] to $P$ at $i=a-1$. It applies because $a-1<a$. Obtain $f\\notin\\mathfrak m$ and a bounded-above finite-free complex $Q$ with $Q^{a-1}=0$, homotopy equivalent to $P_f$. The zero middle term splits $Q$ as the direct sum of its terms in degrees $\\leq a-2$ and in degrees $\\geq a$; there are no cross differentials. The lower summand is acyclic: in each degree below $a-1$ its cohomology is that of $P_f$, which is zero by step 2 and the fraction calculation. Projection onto the upper summand $U$ is therefore a quasi-isomorphism. Consequently $U$ represents $C_f$, is bounded and finite free, and is zero below $a$. No assertion that an acyclic complex stays acyclic under arbitrary ordinary tensor is used.",
+   "uses": [
+    "lem-weil-pbc-free-complex-residue-degree-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 068V, lemma-check-perfect-pointwise, (3) implies (1); direct matrix construction of Tag 068U"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak m_f\\subset R_f$ be the extension of $\\mathfrak m$; its residue field is $R/\\mathfrak m$ because $f\\notin\\mathfrak m$. Tensoring the chain homotopy equivalence in step 3 preserves its equations $dh+hd$, so the fibre of $Q$ has the same cohomology as that of $P$. The fibre of its lower summand has no terms above $a-2$, hence $H^{b+1}(U\\otimes\\kappa(\\mathfrak m_f))=0$ since $a\\leq b$. Apply [lem-weil-pbc-free-complex-residue-degree-cancellation] over $R_f$ at degree $b+1$. It gives $g\\in R_f\\setminus\\mathfrak m_f$ and a bounded finite-free complex $V$ over $(R_f)_g$, zero below $a$ and at $b+1$, homotopy equivalent to $U_g$. Splitting at the zero term gives $V=W\\oplus T$, with $W$ supported in $[a,b]$ and $T$ supported above $b+1$. The cohomology of $T$ is zero by step 2 and the fraction calculation, so projection onto $W$ is a quasi-isomorphism. Write $g=r/f^n$; $r\\notin\\mathfrak m$, and $(R_f)_g=R_{fr}$. Thus for $h=fr\\notin\\mathfrak m$ we have a bounded finite-free representative $W$ of $C_h$ supported in $[a,b]$.",
+   "uses": [
+    "lem-weil-pbc-free-complex-residue-degree-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 068V, lemma-check-perfect-pointwise, (3) implies (1); direct matrix construction of Tag 068U"
+   }
+  },
+  {
+   "text": "Choose such $h_{\\mathfrak m}$ for every maximal ideal. The ideal generated by them is the unit ideal: otherwise [lem-weil-pbc-proper-ideal-contained-in-maximal] would put it in a maximal ideal $\\mathfrak n$, contradicting $h_{\\mathfrak n}\\notin\\mathfrak n$. Membership of $1$ in the generated ideal is a finite linear combination, so finitely many $h_1,\\ldots,h_r$ suffice. Every $C_{h_j}$ is perfect by its bounded finite-free representative in step 4 and [def-pc-perfect-ring-complex] (finite free modules are finitely generated projective: lift the finitely many basis vectors through any surjection). Apply [lem-weil-pbc-perfect-ring-principal-cover-glue] to conclude $C$ is perfect. If $R$ is the zero ring, every unital $R$-module is zero and the conclusion holds directly, with an empty cover.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "def-pc-perfect-ring-complex",
+    "lem-weil-pbc-perfect-ring-principal-cover-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 068V, lemma-check-perfect-pointwise, (3) implies (1); direct matrix construction of Tag 068U"
+   }
+  },
+  {
+   "text": "Now let $M$ be any $R$-module and $j\\notin[a,b]$. At a maximal ideal $\\mathfrak m$ choose $h\\notin\\mathfrak m$ and $W$ as in step 4. The fraction calculation of step 1 and tensor associativity identify $H^j(P\\otimes_R M)_h$ with $H^j(P_h\\otimes_{R_h}M_h)$. Both $P_h$ and $W$ are bounded-above finite free, hence K-flat by [lem-pc-module-bounded-flat-kflat]; by [lem-pc-source-kflat-module-tensor-model], their derived isomorphism as representatives of $C_h$ identifies this group with $H^j(W\\otimes_{R_h}M_h)$. The latter is zero because its term in degree $j$ is zero. Further localization therefore gives $H^j(C\\otimes_R^L M)_{\\mathfrak m}=0$ for every maximal ideal. Apply [lem-weil-pbc-linear-map-bijective-at-maximal-localizations] to its zero map to conclude the group itself is zero. This proves the full uniform Tor conclusion.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-source-kflat-module-tensor-model",
+    "lem-weil-pbc-linear-map-bijective-at-maximal-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 068V, lemma-check-perfect-pointwise, (3) implies (1); direct matrix construction of Tag 068U"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-free-complex-residue-degree-cancellation",
+  "lem-weil-pbc-linear-map-bijective-at-maximal-localizations",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "def-pc-perfect-ring-complex",
+  "lem-weil-pbc-perfect-ring-principal-cover-glue",
+  "def-pc-module-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 068V, lemma-check-perfect-pointwise, (3) implies (1); direct matrix construction of Tag 068U"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,15 +164,84 @@
    "results": "8 hits: CategoryTheory.HasProjectiveDimensionLT, CategoryTheory.HasProjectiveDimensionLE, CategoryTheory.projectiveDimension_ne_top_iff, CategoryTheory.HasProjectiveDimensionLT.mk', CategoryTheory.projectiveDimension_le_iff, CategoryTheory.HasProjectiveDimensionLT.mk, CategoryTheory.projectiveDimension_lt_iff, CategoryTheory.hasProjectiveDimensionLT_iff",
    "date": "2026-10-14",
    "verdict": "no match: projective dimension and Ext criteria are not a criterion for pseudo-coherent derived residue fibres"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudo coherent ring complex with uniformly bounded maximal residue field derived fibers is perfect",
+   "results": "8 hits: PreTilt.instPerfectRing, instCommRingBDeRhamPlus, PreTilt, Algebra.quasiFinite_iff, BDeRhamPlus, Algebra.FormallySmooth.of_perfectField, BDeRham, Algebra.instFiniteResidueFieldOfFormallyUnramified",
+   "date": "2026-10-14",
+   "verdict": "no match: field perfection and projective-complex Tor or Ext vanishing do not detect pseudo-coherent perfectness from residue fibres"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform Tor vanishing with residue fields detects bounded finite projective representatives of pseudo coherent complexes",
+   "results": "8 hits: DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, CochainComplex.isKProjective_of_projective, Rep.isZero_Tor_succ_of_projective, CochainComplex.IsKProjective, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex",
+   "date": "2026-10-14",
+   "verdict": "no match: field perfection and projective-complex Tor or Ext vanishing do not detect pseudo-coherent perfectness from residue fibres"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"ResidueField\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: field perfection and projective-complex Tor or Ext vanishing do not detect pseudo-coherent perfectness from residue fibres"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|perfect.*residue|residue.*perfect",
+   "results": "6 hits: Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/RingTheory/Ideal/Quotient/HasFiniteQuotients.lean, Mathlib/RingTheory/RamificationInertia/Ramification.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: field perfection and projective-complex Tor or Ext vanishing do not detect pseudo-coherent perfectness from residue fibres"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pseudo coherent complexes perfectness from uniform bounded residue field fibers",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-rlim-perfect-complete",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect",
+  "worker": "stage1",
+  "summary": "Read 068V and expanded its two uses of 068U into chain-level cancellation, ordinary cohomology detection and two cuts giving a finite-free model in the exact interval. Kept arbitrary commutative rings, maximal residue fields and all module tensors; reused existing K-flat models and maximal-localization detection; new children are statement-only cancellation and finite-cover perfect gluing.",
+  "blueprint": "Proof, first sentence 'Choose an integral lattice for K': algebraic perfectness test for the reconstructed integral model, via the residue-field and inverse-limit lifting lemmas",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic ordinary-module K-flatness computes all fibre and tensor models; the proper-base-change unit does not supply this algebraic theorem."
+   },
+   {
+    "node": "lem-pc-source-kflat-module-tensor-model",
+    "why": "Generic ordinary-module derived tensor comparison on K-flat representatives, rather than a sheaf perfectness theorem."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Scalar extension computed on K-flat complexes on the one-object ringed site supplies the target-ring module structure; a generic change-of-rings tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-1d5427824",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-1d5427824 (reviewer sub-agent of L); spot-checked: Independent full mathematical review completed. The item matches Stacks 068V, and both helper nodes match 068U and 066Y with hypotheses, base-change category, and edge cases checked. All six proof steps, citations, routes, duplicate searches, and non-elementary uses were verified; no repairs are needed."
+ }
 }
