@@ -364,9 +364,109 @@ lemma exists_descLift [Surjective p] [WeaklyEtale (j ≫ f)] [QuasiCompact (j �
   have e : descLift hjp hq hw a ha = Λ :=
     hq.hom_ext (by rw [descLift_q, hfac]) (by rw [descLift_trivπ, hΛv])
   rw [e, hΛidx]
-
 end Descended
 
 end Coaction
+
+lemma idx_ι {N : ℕ} {W : Scheme.{u}} (a : Fin N) (x : W) :
+    idx N W ((Sigma.ι (fun _ : ULift.{u} (Fin N) ↦ W) ⟨a⟩).base x) = a := by
+  simp [idx, sigmaIdx_ι]
+
+variable {Y V : Scheme.{u}} {f : V ⟶ Y} {N : ℕ} {c : ↥(pullback f f) → Fin N → Fin N}
+
+/-- **Affine descent of a finite twisted sheaf.** Let `s : S ⟶ Y` be an open immersion from an
+affine scheme, and `p : W ⟶ S` a flat surjection from an affine scheme with a map `j : W ⟶ V`
+over `Y`, with `j ≫ f` weakly étale and quasi-compact. Then the restriction to étale
+`S`-schemes of the sheaf of sets defined by a descent cocycle `c` on `Fin N` is represented by a
+finite étale `n : N ⟶ S`, with a universal section `ξ`, which takes every value at some
+point over every point of `W`. -/
+theorem exists_isUniversalSection (hc : IsDescentCocycle f c) {S W : Scheme.{u}} (s : S ⟶ Y)
+    [IsOpenImmersion s] [IsAffine S] [IsAffine W] (j : W ⟶ V) (p : W ⟶ S) (hjp : j ≫ f = p ≫ s)
+    [Flat p] [Surjective p] [WeaklyEtale (j ≫ f)] [QuasiCompact (j ≫ f)] :
+    ∃ (Nsch : Scheme.{u}) (n : Nsch ⟶ S) (_ : Etale n) (_ : IsFinite n)
+      (ξ : (twistedSectionsPresheaf f c).obj (op (Scheme.Etale.mk (n ≫ s)))),
+      Scheme.IsUniversalSection (twistedSectionsPresheaf f c) s (Scheme.Etale.mk (n ≫ s)) n ξ ∧
+      ∀ {K : Type u} [Field K] (wk : Spec (.of K) ⟶ W) (a : Fin N),
+        ∃ (nk : Spec (.of K) ⟶ Nsch) (h : (wk ≫ j) ≫ f = nk ≫ n ≫ s),
+          ξ.1 ((pullback.lift (wk ≫ j) nk h).base (IsLocalRing.closedPoint K)) = a := by
+  obtain ⟨Nsch, n, q, hq, hγq⟩ := exists_isPullback_of_coaction p (trivπ N W) (coact hc hjp)
+    (coact_trivπ hc hjp) (coact_counit hc hjp) (coact_coassoc hc hjp)
+  have hpq : (@Surjective ⊓ @Flat ⊓ @QuasiCompact : MorphismProperty Scheme) p :=
+    ⟨⟨inferInstance, inferInstance⟩, inferInstance⟩
+  have : Etale (trivπ N W) :=
+    IsZariskiLocalAtSource.sigmaDesc (P := @Etale) fun _ ↦ inferInstance
+  have hn : Etale n :=
+    MorphismProperty.of_isPullback_of_descendsAlong (P := @Etale) hq.flip hpq
+      (inferInstanceAs (Etale (trivπ N W)))
+  have := IsFinite.descendsAlong_surjective_inf_flat_inf_quasicompact
+  have hnf : IsFinite n :=
+    MorphismProperty.of_isPullback_of_descendsAlong (P := @IsFinite) hq.flip hpq
+      (inferInstanceAs (IsFinite (trivπ N W)))
+  have hcov {T : Scheme.{u}} {π : T ⟶ Y} {w : T ⟶ S} (hw : w ≫ s = π) :
+      ∀ t, ∃ w₀, (j ≫ f).base w₀ = π.base t := by
+    intro t
+    obtain ⟨w₀, hw₀⟩ := p.surjective (w.base t)
+    exact ⟨w₀, by rw [hjp, Scheme.Hom.comp_apply, hw₀, ← Scheme.Hom.comp_apply, hw]⟩
+  -- the universal section
+  let NE : Y.Etale := Scheme.Etale.mk (n ≫ s)
+  obtain ⟨σ₀, hσ₀, hσ₀τ⟩ := IsTwistedSection.exists_restrict_eq hc (hcov (π := NE.hom) rfl)
+    (isTwistedSection_descLift hc hjp hq hγq (π := NE.hom) rfl (𝟙 Nsch) (Category.id_comp _))
+  let ξ : (twistedSectionsPresheaf f c).obj (op NE) := ⟨σ₀, hσ₀⟩
+  -- its pullbacks along `S`-morphisms `a : W' ⟶ N`
+  have hrestr (W' : Y.Etale) (w' : W'.left ⟶ S) (hw' : w' ≫ s = W'.hom) (a : W' ⟶ NE)
+      (ha : a.left ≫ n = w') (x : ↥(pullback (j ≫ f) W'.hom)) :
+      ((twistedSectionsPresheaf f c).map a.op ξ).1 ((pullbackMapLeft j W'.hom).base x) =
+        idx N W ((descLift hjp hq hw' a.left ha).base x) := by
+    rw [twistedSectionsPresheaf_map_coe, Function.comp_apply, ← Scheme.Hom.comp_apply]
+    have e₁ : pullbackMapLeft j W'.hom ≫ pullbackMapRight f a.left (MorphismProperty.Over.w a) =
+        pullbackMapRight (j ≫ f) a.left (MorphismProperty.Over.w a) ≫
+          pullbackMapLeft j NE.hom := pullback.hom_ext (by simp) (by simp)
+    have e₂ : pullbackMapRight (j ≫ f) a.left (MorphismProperty.Over.w a) ≫
+        descLift hjp hq (π := NE.hom) rfl (𝟙 Nsch) (Category.id_comp _) =
+          descLift hjp hq hw' a.left ha := by
+      refine hq.hom_ext ?_ ?_
+      · rw [Category.assoc, descLift_q, descLift_q, pullbackMapRight_snd_assoc]
+        erw [Category.comp_id]
+      · rw [Category.assoc, descLift_trivπ, descLift_trivπ]
+        exact pullback.lift_fst _ _ _
+    rw [e₁, Scheme.Hom.comp_apply]
+    change (σ₀ ∘ (pullbackMapLeft j NE.hom).base) _ = _
+    rw [hσ₀τ, ← e₂, Scheme.Hom.comp_apply]
+  refine ⟨Nsch, n, hn, hnf, ξ, fun W' w' hw' ↦ ⟨fun a b hab ↦ ?_, fun e ↦ ?_⟩, ?_⟩
+  · have hab' := congrArg Subtype.val hab
+    have h := descLift_injective hjp hq hw' a.2 b.2 fun x ↦ by
+      rw [← hrestr W' w' hw' a.1 a.2 x, ← hrestr W' w' hw' b.1 b.2 x]
+      exact congrFun hab' _
+    exact Subtype.ext (MorphismProperty.Over.Hom.ext h)
+  · obtain ⟨b, hb, hbτ⟩ := exists_descLift hc hjp hq hγq hw' (e.2.restrict (j := j))
+    let a : W' ⟶ NE := MorphismProperty.Over.homMk b (by
+      change b ≫ n ≫ s = W'.hom
+      rw [reassoc_of% hb, hw']) trivial
+    exact ⟨⟨a, hb⟩, Subtype.ext (IsTwistedSection.eq_of_restrict_eq (hcov hw')
+      ((twistedSectionsPresheaf f c).map a.op ξ).2 e.2
+        (funext fun x ↦ (hrestr W' w' hw' a hb x).trans (hbτ x)))⟩
+  · intro K _ wk a
+    let nk : Spec (.of K) ⟶ Nsch := wk ≫ Sigma.ι (fun _ : ULift.{u} (Fin N) ↦ W) ⟨a⟩ ≫ q
+    have hnk : nk ≫ n = wk ≫ p := by
+      simp only [nk, Category.assoc, hq.w, Sigma.ι_desc_assoc, Category.id_comp]
+    have h : (wk ≫ j) ≫ f = nk ≫ n ≫ s := by rw [reassoc_of% hnk, Category.assoc, hjp]
+    refine ⟨nk, h, ?_⟩
+    have hl : pullback.lift (f := f) (g := NE.hom) (wk ≫ j) nk h =
+        pullback.lift (f := j ≫ f) (g := NE.hom) wk nk (by rw [← Category.assoc]; exact h) ≫
+          pullbackMapLeft j NE.hom := pullback.hom_ext (by simp) (by simp)
+    have hd : pullback.lift (f := j ≫ f) (g := NE.hom) wk nk (by rw [← Category.assoc]; exact h) ≫
+        descLift hjp hq (π := NE.hom) rfl (𝟙 Nsch) (Category.id_comp _) =
+          wk ≫ Sigma.ι (fun _ : ULift.{u} (Fin N) ↦ W) ⟨a⟩ := by
+      refine hq.hom_ext ?_ ?_
+      · rw [Category.assoc, descLift_q, pullback.lift_snd_assoc]
+        erw [Category.comp_id]
+      · rw [Category.assoc, descLift_trivπ, pullback.lift_fst, Category.assoc,
+          Sigma.ι_desc, Category.comp_id]
+    change σ₀ ((pullback.lift (f := f) (g := NE.hom) (wk ≫ j) nk h).base _) = a
+    rw [hl, Scheme.Hom.comp_apply]
+    change (σ₀ ∘ (pullbackMapLeft j NE.hom).base) _ = _
+    rw [hσ₀τ]
+    dsimp only
+    rw [← Scheme.Hom.comp_apply, hd, Scheme.Hom.comp_apply, idx_ι]
 
 end AlgebraicGeometry.TwistedDescent

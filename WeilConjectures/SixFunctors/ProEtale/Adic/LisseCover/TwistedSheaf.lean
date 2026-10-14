@@ -25,7 +25,7 @@ extends uniquely, by transport along the cocycle.
 
 @[expose] public section
 
-universe u
+universe u w
 
 open CategoryTheory Limits Opposite
 
@@ -59,12 +59,12 @@ lemma exists_pullbackMapRight_eq {T T' : Scheme.{u}} {π : T ⟶ Y} {π' : T' �
   · rw [← Scheme.Hom.comp_apply, hL₁, hy₁]
   · rw [← Scheme.Hom.comp_apply, hL₂, hy₂]
 
-@[simp]
+@[reassoc (attr := simp)]
 lemma pullbackMapRight_fst {T T' : Scheme.{u}} {π : T ⟶ Y} {π' : T' ⟶ Y} (t : T' ⟶ T)
     (ht : t ≫ π = π') : pullbackMapRight f t ht ≫ pullback.fst f π = pullback.fst f π' := by
   simp [pullbackMapRight]
 
-@[simp]
+@[reassoc (attr := simp)]
 lemma pullbackMapRight_snd {T T' : Scheme.{u}} {π : T ⟶ Y} {π' : T' ⟶ Y} (t : T' ⟶ T)
     (ht : t ≫ π = π') : pullbackMapRight f t ht ≫ pullback.snd f π = pullback.snd f π' ≫ t := by
   simp [pullbackMapRight]
@@ -151,8 +151,8 @@ lemma exists_pairMapRight_eq {T T' : Scheme.{u}} {π : T ⟶ Y} {π' : T' ⟶ Y}
 variable (f) in
 /-- The presheaf of sections of the sheaf of sets defined by a descent cocycle `c`, on the
 small étale site of `Y`. -/
-noncomputable def twistedSectionsPresheaf {S : Type u} (c : ↥(pullback f f) → S → S) :
-    Y.Etaleᵒᵖ ⥤ Type u where
+noncomputable def twistedSectionsPresheaf {S : Type w} (c : ↥(pullback f f) → S → S) :
+    Y.Etaleᵒᵖ ⥤ Type (max u w) where
   obj U := {σ : ↥(pullback f U.unop.hom) → S // IsTwistedSection f c U.unop.hom σ}
   map {U U'} g := ↾fun σ ↦
     ⟨σ.1 ∘ (pullbackMapRight f g.unop.left (MorphismProperty.Over.w g.unop)).base,
@@ -172,7 +172,7 @@ noncomputable def twistedSectionsPresheaf {S : Type u} (c : ↥(pullback f f) �
       (MorphismProperty.Over.w g'.unop)]
     rfl
 
-lemma twistedSectionsPresheaf_map_coe {S : Type u} (c : ↥(pullback f f) → S → S)
+lemma twistedSectionsPresheaf_map_coe {S : Type w} (c : ↥(pullback f f) → S → S)
     {U U' : Y.Etale} (g : U' ⟶ U) (σ : (twistedSectionsPresheaf f c).obj (op U)) :
     ((twistedSectionsPresheaf f c).map g.op σ).1 =
       σ.1 ∘ (pullbackMapRight f g.left (MorphismProperty.Over.w g)).base :=
@@ -198,7 +198,7 @@ lemma etale_left {U U' : Y.Etale} (g : U' ⟶ U) : Etale g.left := by
 
 variable (f) in
 /-- **Twisted sections glue along jointly surjective étale families.** -/
-lemma isSheafFor_ofArrows_twistedSectionsPresheaf {S : Type u} (c : ↥(pullback f f) → S → S)
+lemma isSheafFor_ofArrows_twistedSectionsPresheaf {S : Type w} (c : ↥(pullback f f) → S → S)
     {U : Y.Etale} {ι : Type*} (Ui : ι → Y.Etale) (π : ∀ i, Ui i ⟶ U)
     (hsurj : ∀ u : U.left, ∃ i, ∃ x, (π i).left.base x = u) :
     (Presieve.ofArrows Ui π).IsSheafFor (twistedSectionsPresheaf f c) := by
@@ -293,7 +293,7 @@ lemma isSheafFor_ofArrows_twistedSectionsPresheaf {S : Type u} (c : ↥(pullback
 
 variable (f) in
 /-- **The sections of a descent cocycle form a sheaf on the small étale site.** -/
-theorem isSheaf_twistedSectionsPresheaf {S : Type u} (c : ↥(pullback f f) → S → S) :
+theorem isSheaf_twistedSectionsPresheaf {S : Type w} (c : ↥(pullback f f) → S → S) :
     Presheaf.IsSheaf Y.smallEtaleTopology (twistedSectionsPresheaf f c) := by
   rw [isSheaf_iff_isSheaf_of_type, Scheme.smallEtaleTopology,
     Scheme.smallGrothendieckTopology_eq_toGrothendieck_smallPretopology _ le_rfl,
