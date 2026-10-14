@@ -83,10 +83,10 @@ open Scheme Functor
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-set_option synthInstance.maxHeartbeats 200000 -- instance search on complexes of module objects
-
 /-! ### Complexes -/
 
+set_option synthInstance.maxHeartbeats 200000 in
+-- instance search on complexes of module objects
 /-- The degreewise comparison `(f^* A ⊗ f^* B)^n ⟶ f^* ((A ⊗ B)^n)` for complexes `A` and `B`
 of module objects over `Λ_Y`: on the summand `f^* A^p ⊗ f^* B^q` with `p + q = n`, the tensorator
 `μ : f^* A^p ⊗ f^* B^q ⟶ f^* (A^p ⊗ B^q)` followed by `f^*` of the inclusion of the summand. -/
@@ -100,6 +100,8 @@ noncomputable def upperStarTensorComplexHomX
     Functor.LaxMonoidal.μ (f)^*⟦Λ⟧ (A.X p) (B.X q) ≫
       (f)^*⟦Λ⟧.map (HomologicalComplex.ιTensorObj A B p q n h)
 
+set_option synthInstance.maxHeartbeats 200000 in
+-- instance search on complexes of module objects
 /-- The degreewise comparisons `upperStarTensorComplexHomX` commute with the differentials. -/
 lemma upperStarTensorComplexHom_comm
     (A B : CochainComplex
@@ -112,6 +114,8 @@ lemma upperStarTensorComplexHom_comm
         upperStarTensorComplexHomX Λ f A B n' :=
   sorry
 
+set_option synthInstance.maxHeartbeats 200000 in
+-- instance search on complexes of module objects
 /-- The comparison `f^* A ⊗ f^* B ⟶ f^* (A ⊗ B)` of complexes of module objects, induced
 degreewise by the tensorator of the strong monoidal pullback `f^*`. -/
 noncomputable def upperStarTensorComplexHom
