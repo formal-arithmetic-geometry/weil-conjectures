@@ -1,5 +1,6 @@
 module
 public import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitPresentation
+import Sheaf.Algebra.Homology.BaseDerivedExtensionResolution
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -10,8 +11,9 @@ namespace AlgebraicGeometry
 /-- Existence of the universal derived scalar-extension pair for a bounded-above
 termwise-flat stalk complex under the affine presentation hypothesis.
 Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S.
-The proof constructs the left derived functor by the K-flat resolution model and
-checks the counit on bounded-above flat complexes.
+Apply the general K-projective scalar-extension construction to the stalk ring map
+and retain its universal pair. This pair exists independently of the input complex;
+its boundedness and flatness hypotheses are not needed here.
 (blueprint: lem-pc-standard-single-flat-counit-localization-pair). -/
 theorem standardSingleFlatCounit_localization_pair
     (h_affine : ∀ {Y₀ B₀ A₀ : Scheme.{u}} (p₀ : Y₀ ⟶ B₀)
@@ -33,5 +35,17 @@ theorem standardSingleFlatCounit_localization_pair
           (ModuleCat.extendScalars (g.stalkMap a).hom).mapHomotopyCategory (.up ℤ) ⋙
             DerivedCategory.Qh),
         LF.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ)) := by
-  sorry
+  have _ := @h_affine
+  have _ := hM
+  dsimp
+  intro P hPbound hPflat
+  let := HasDerivedCategory.standard
+    (ModuleCat.{u} (B.presheaf.stalk (g a)))
+  let := HasDerivedCategory.standard
+    (ModuleCat.{u} (A.presheaf.stalk a))
+  let : Algebra (B.presheaf.stalk (g a)) (A.presheaf.stalk a) :=
+    (g.stalkMap a).hom.toAlgebra
+  obtain ⟨LF, ε, hLF, _⟩ := ModuleCat.exists_baseDerivedExtension_resolution
+    (B.presheaf.stalk (g a)) (A.presheaf.stalk a)
+  exact ⟨LF, ε, hLF⟩
 end AlgebraicGeometry
