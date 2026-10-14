@@ -68,7 +68,7 @@ theorem standardSingleBaseChange_topRestriction_comparison
         (derivedPullback g).map e.hom ≫
           standardSingleBaseChangeMap (j ≫ p) N g ≫ t.hom := by
   dsimp
-  obtain ⟨e⟩ := standardSingleBaseChange_topRestriction_source p M g
-  exact ⟨e, standardSingleBaseChange_topRestriction_compatibility p M g e⟩
+  let e := standardSingleBaseChange_topRestriction_sourceIso p M
+  exact ⟨e, standardSingleBaseChange_topRestriction_compatibility p M g e rfl⟩
 
 end AlgebraicGeometry
