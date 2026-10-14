@@ -16,37 +16,35 @@
  },
  "proof": [
   {
-   "text": "In bidegree (r,q) evaluate the source tuple at refine composed with the target tuple, then restrict the section of I^r from the inverse-image intersection to the target intersection. Restrictions commute with all faces and with the coefficient differential, so these maps give a cochain map of forgotten total complexes. Pass to homology and transport the forgetful homology isomorphisms to obtain s.",
+   "text": "Apply exists_unique_cechPushforward_tuple_total to the target resolution complex, obtaining a cochain map t of forgotten totals and its formula on every bidegree summand. The component maps are explicitly constructed, and no arbitrary existence witness is stored in a definition.",
    "uses": [
-    "def-sc-cech-refinement-cochain-map",
-    "def-sc-cech-complex-augmentations"
+    "lem-sc-cech-pushforward-tuple-total"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For alpha, the summand formula at (n,0) reduces the square to equality of two composites of restrictions of global sections. Prove moduleCechZero_tuple using the product projections, then use presheaf functoriality and uniqueness of open inclusions. The hypothesis ha identifies the top-open restriction with a inverse. For beta, use the formula at (0,n), the component formula for gamma and naturality of I augmentation. These prove the two cochain squares directly.",
+   "uses": [
+    "def-sc-cech-complex-augmentations",
+    "def-sc-cech-refinement-cochain-map"
    ],
    "elementary": false
   },
   {
-   "text": "On the (r,0) alpha summands, restrictions of global sections commute with tuple restriction. The pinned formula for a inverse identifies the section complexes and proves the alpha equation.",
-   "uses": [
-    "def-sc-cech-complex-augmentations"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "On the (0,q) beta summands, naturality of the resolution augmentation moves it past restriction. What remains is exactly hgamma, giving the beta equation after homology. Empty tuple sets give zero groups and degree zero uses the same equations.",
-   "uses": [
-    "def-sc-cech-refinement-cochain-map",
-    "def-sc-cech-complex-augmentations"
-   ],
+   "text": "Define s by conjugating H(t) with the source inverse and target forward canonical forgetting-scalars homology isomorphisms. Apply HomologicalComplex.homologyMap_comp to each cochain square, and ShortComplex.mapHomologyIso_inv_naturality and mapHomologyIso_hom_naturality to its two augmentation maps. Associativity gives the two required equalities; cechRefinementHomology is precisely the same conjugation applied to gamma. The private forgotten_homology_square proves this calculation for arbitrary module coefficient rings.",
+   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-cech-refinement-cochain-map",
-  "def-sc-cech-complex-augmentations"
+  "lem-sc-cech-pushforward-tuple-total",
+  "def-sc-cech-complex-augmentations",
+  "def-sc-cech-refinement-cochain-map"
  ],
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/01FD",
-  "place": "Tag 01FD, the morphism B-double-prime to A, the right upper square, and the augmentation pentagon"
+  "place": "Tag 01FD, the map B-double-prime to A and the two augmentation squares; component calculations and homology transports formalized by E4"
  },
  "mathlib_searches": [
   {
@@ -131,11 +129,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-c0cad",
-  "group": "G3",
+  "reviewer": "X-f8000",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261014T034909-L-814412",
+  "landing": "20261014T061023-L-2464805",
   "kind": "interface",
-  "note": "independent Codex review: Matched unchanged theorem signature, delivered proofs and new obligations with their DAG records and Stacks 01FD/01EX/015E; checked axioms and compiled all four modules plus sole direct importer Sheaf.Paper.CechRefinementResolutionDiagram."
+  "note": "independent Codex review: Matched unchanged signatures, tuple-total obligation and augmentation proofs with their DAG records and Stacks 01FD; both delivered modules and sole direct importer compile cleanly; axioms checked."
  }
 }

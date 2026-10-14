@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-cech-pushforward-tuple-total",
+ "kind": "statement",
+ "title": "Unique tuple restriction map on forgotten pushed-forward Cech totals",
+ "statement": "Let $f:X'\\to X$ be a morphism of schemes [def-pc-scheme], $U=(U_i)_{i\\in\\iota}$ and $U'=(U'_j)_{j\\in\\iota'}$ arbitrary families of opens, and $c:\\iota'\\to\\iota$ with $U'_j\\subseteq f^{-1}(U_{c(j)})$. Let $K$ be any cochain complex of $\\mathcal O_{X'}$-modules in nonnegative degrees [def-pc-cochain-complex-modules]. Put $P=f_*K$. Write $T_U(P)$ and $T_{U'}(K)$ for the module Cech total complexes [def-sc-cech-complex-augmentations], and $e,e'$ for the functors forgetting the respective global-section scalar rings to additive groups. There exists a unique cochain map $t:eT_U(P)\\to e'T_{U'}(K)$ such that, for all $r,q,n\\in\\mathbf N$ with $r+q=n$, $e(\\iota_{r,q})t^n=\\rho_{r,q}e'(\\iota'_{r,q})$. Here $\\iota,\\iota'$ are the canonical total summand inclusions and $\\rho_{r,q}$ is the following explicit additive map: identify a Cech cochain with its tuple sections using the canonical product-to-intersection equivalences, evaluate it at $c\\circ y$ for a target tuple $y:\\operatorname{Fin}(q+1)\\to\\iota'$, and restrict the resulting section of $K^r$ on $f^{-1}(\\bigcap_j U_{c(y_j)})$ to $\\bigcap_j U'_{y_j}$. The inclusion used for restriction is cechRefinementIntersection [def-sc-cech-refinement-cochain-map]. The map cechPushforwardTupleMap constructs $\\rho$ from additive evaluation, restriction and those equivalences; it does not choose a witness of this existence theorem. No resolution, augmentation, covering or cohomology assumption occurs.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-sc-cech-complex-augmentations",
+  "def-sc-cech-refinement-cochain-map"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Tag 01FD, construction of the double-complex map B-double-prime to A (proof paragraphs 1 and 3)"
+ },
+ "proof": [
+  {
+   "text": "Construct rho by the explicit tuple evaluation and restriction formula. Naturality of the presheaf restrictions under each coefficient differential makes rho commute with the resolution-direction differential. For each omitted vertex, the two composites of open inclusions have the same endpoints, hence are equal. Presheaf functoriality and additivity then identify the alternating Cech differential sums.",
+   "uses": [
+    "def-sc-cech-refinement-cochain-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In total degree n, the bidegrees (r,q) with r+q=n form a finite set. Forgetting scalars preserves the finite coproduct of module summands. Assemble rho followed by the target summand inclusions using this coproduct universal property. The differential is the sum of the coefficient differential and (-1)^r times the Cech differential. The two identities of step 1 prove that these assembled maps commute with it.",
+   "uses": [
+    "def-sc-cech-complex-augmentations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A map out of each finite coproduct is determined by its composites with the summand inclusions. The specified formula therefore determines every t^n and hence t uniquely. Empty tuple products are zero objects, so the formulas also apply to empty families; in degree zero there is just the (0,0) summand.",
+   "uses": [
+    "def-sc-cech-complex-augmentations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-cech-refinement-cochain-map",
+  "def-sc-cech-complex-augmentations"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Tag 01FD, tuplewise map of double complexes B-double-prime to A; finite totalization and uniqueness written out by E4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unique cochain map on total Cech complexes from tuple restriction on each bidegree",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech refinement between total double complexes commutes with augmentation",
+   "results": "Eight hits on total and bifunctor summand-map formulas, including HomologicalComplex₂.ιTotal_map. These assume a double-complex morphism already supplied; none constructs the cross-scheme forgotten tuple map.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*refin|refin.*cech",
+   "results": "Only Stone-Cech refinement matches in Mathlib; no Cech-complex refinement map. Local library search found the coefficient refinement construction, but no pushed-forward total tuple map.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CechRefinementPushforwardTotal",
+  "group": "E4",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 01FD, the tuplewise double-complex map B-double-prime to A used in the Cech/pullback compatibility below the cube proof",
+   "via": [
+    "lem-sc-cech-refinement-pushforward-total",
+    "lem-sc-cech-refinement-resolution-canonical-beta",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-cech-refinement-comparison-square",
+    "lem-sc-cech-refinement-resolution-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CechPushforwardTupleTotal",
+  "file": "lean/Sheaf/Paper/CechPushforwardTupleTotal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_unique_cechPushforward_tuple_total",
+  "statement": "theorem exists_unique_cechPushforward_tuple_total {X X' : Scheme.{v}} (f : X' ⟶ X)\n    {ι ι' : Type v} (U : ι → X.Opens) (U' : ι' → X'.Opens)\n    (refine : ι' → ι) (hrefine : ∀ i, U' i ≤ f ⁻¹ᵁ U (refine i))\n    (K : CochainComplex X'.Modules ℕ) :\n    let P := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj K\n    let e := forget₂ (ModuleCat.{v} Γ(X, ⊤)) AddCommGrpCat.{v}\n    let e' := forget₂ (ModuleCat.{v} Γ(X', ⊤)) AddCommGrpCat.{v}\n    ∃! t : (e.mapHomologicalComplex (ComplexShape.up ℕ)).obj\n        ((moduleCechTotalFunctor U).obj P) ⟶\n      (e'.mapHomologicalComplex (ComplexShape.up ℕ)).obj\n        ((moduleCechTotalFunctor U').obj K),\n      ∀ (r q n : ℕ) (h : r + q = n),\n        e.map (((moduleCechDoubleFunctor U).obj P).ιTotal\n          (ComplexShape.up ℕ) r q n h) ≫ t.f n =\n        cechPushforwardTupleMap f U U' refine hrefine (K.X r) q ≫\n          e'.map (((moduleCechDoubleFunctor U').obj K).ιTotal\n            (ComplexShape.up ℕ) r q n h)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.cechPushforwardTupleMap",
+   "AlgebraicGeometry.Scheme.Modules.cechPushforwardTupleMap_apply",
+   "AlgebraicGeometry.Scheme.Modules.exists_unique_cechPushforward_tuple_total"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-f8000",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261014T061023-L-2464805",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-f8000",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261014T061023-L-2464805",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged signatures, tuple-total obligation and augmentation proofs with their DAG records and Stacks 01FD; both delivered modules and sole direct importer compile cleanly; axioms checked."
+ }
+}
