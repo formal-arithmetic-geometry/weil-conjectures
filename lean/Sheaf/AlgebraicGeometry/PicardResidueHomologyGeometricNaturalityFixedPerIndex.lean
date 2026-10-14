@@ -35,6 +35,10 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
+/- STATEMENT-DISPUTED: eK and eC are arbitrary additive equivalences, with no
+hypothesis making them compatible with the geometric cohomology pullback.
+The returned universal represented-map helper is false: its zero-map specialization
+would force the geometric cohomology pullback to vanish. The target remains unproved. -/
 /-- (blueprint: new-picard-residue-homology-geometric-naturality-fixed-per-index)
 For a fixed finite-family index, the derived arrow and homology equation are
 constructed by the geometric comparison, derived direct-image functoriality,

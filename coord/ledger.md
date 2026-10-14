@@ -14272,3 +14272,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:25 L: merged deliver/G4/Sheaf.AlgebraicGeometry.PinnedTensorSquareLeftSummand (stage 3; reviewer PASS; first push; landing 20261014T022544-L-4045158 (proof); batch 20261014T022537; modules 1; new nodes 0)
 - 02:25 L: merged deliver/G4/Sheaf.CategoryTheory.MapExtendHomology (stage 3; reviewer PASS; first push; landing 20261014T022544-L-4045265 (proof); batch 20261014T022537; modules 1; new nodes 0)
 - 02:25 L: merged deliver/G4/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone (stage 3; reviewer PASS; first push; landing 20261014T022545-L-4045412 (proof); batch 20261014T022537; modules 1; new nodes 0)
+- 02:25 L: merged deliver/H3/Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex (stage 3; reviewer PASS; after a return; landing 20261014T022545-L-4045515 (proof); batch 20261014T022537; modules 1; new nodes 0)
