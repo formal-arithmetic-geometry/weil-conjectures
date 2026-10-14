@@ -23,3 +23,5 @@ This compatibility module intentionally contains no declarations after duplicate
 -/
 
 @[expose] public section
+
+-- The canonical upstream theorem is not re-exported by these compatibility imports.
