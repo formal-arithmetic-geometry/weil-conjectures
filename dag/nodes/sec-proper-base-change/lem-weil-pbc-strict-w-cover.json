@@ -3,50 +3,151 @@
  "blueprint": {
   "is": "lem-weil-pbc-strict-w-cover",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Properties of the strict w-local cover",
- "statement": "The algebra $C_A$ is faithfully flat and ind-etale\n[def-weil-pbc-ind-etale-algebra] over $A$. Its spectrum is w-local\n[def-weil-pbc-w-local], its maximal local rings are strictly henselian\n[def-weil-pbc-henselian-terminology], and its closed points surject onto\n$\\operatorname{Spec}A$.",
+ "statement": "Let $A$ be a commutative ring, and let $C_A$ be the strict w-local cover algebra of [def-weil-pbc-strict-w-cover]. The map $A\\to C_A$ is faithfully flat [def-weil-pbc-faithfully-flat-ring-map] and ind-etale [def-weil-pbc-ind-etale-algebra]. Its spectrum is w-local [def-weil-pbc-w-local], its local rings at maximal ideals are strictly henselian [def-weil-pbc-henselian-terminology], and the induced map from its closed points onto $\\operatorname{Spec}A$ is surjective.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-strict-w-cover.md",
   "place": "node lem-weil-pbc-strict-w-cover, order 1229"
  },
  "stmt_deps": [
+  "def-weil-pbc-strict-w-cover",
+  "def-weil-pbc-faithfully-flat-ring-map",
   "def-weil-pbc-ind-etale-algebra",
   "def-weil-pbc-w-local",
   "def-weil-pbc-henselian-terminology"
  ],
  "proof": [
   {
-   "text": "Use the notation of [def-weil-pbc-strict-w-cover]. The map $W\\to E$ is\nfaithfully flat and ind-etale by [lem-weil-pbc-etale-contraction]. Its fibre\nover a maximal ideal of $W$ is an algebraic algebra over a field, by\n[lem-weil-pbc-weak-etale-field]; all its primes are maximal also in $E$.\nHence $T=V(IE)$ consists of closed points.\n[lem-weil-pbc-retained-localization] makes $C_A$ w-local with these closed\npoints and unchanged local rings there. Those rings are strictly henselian by\n[lem-weil-pbc-etale-contraction]. Faithful flatness of $E/W$ shows that $T$\nsurjects onto the closed points of $W$, which surject onto\n$\\operatorname{Spec}A$ by [lem-weil-pbc-w-localization-points]. The composite\n$A\\to C_A$ is ind-etale by [lem-weil-pbc-ind-etale-stability], and hence\nflat. The just proved surjectivity makes it faithfully flat.",
+   "text": "Put $W=A^w$, $E=W^{\\mathrm e}$, $T=V(IE)$, and $C_A=E_{[T]}$, as in [def-weil-pbc-strict-w-cover]. By [lem-weil-pbc-w-localization-points], the closed points of $\\operatorname{Spec}W$ form the closed subset $V(I)$ and map onto $\\operatorname{Spec}A$: the point $(x,x)$ maps to $x$. By [lem-weil-pbc-etale-contraction], $W\\to E$ is faithfully flat and ind-etale and every maximal localization $E_q$ is strictly henselian.",
    "uses": [
     "def-weil-pbc-strict-w-cover",
-    "lem-weil-pbc-etale-contraction",
-    "lem-weil-pbc-weak-etale-field",
-    "lem-weil-pbc-retained-localization",
     "lem-weil-pbc-w-localization-points",
-    "lem-weil-pbc-ind-etale-stability"
+    "lem-weil-pbc-etale-contraction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097X, lemma-get-w-local-algebraic-residue-field-extensions, first paragraph of proof (properties (1), (3), (7), (9))"
+   }
+  },
+  {
+   "text": "We check that every $q\\in T$ is maximal in $E$, rather than merely closed in a fibre. Its contraction $m=q\\cap W$ contains $I$, so is a closed point of $\\operatorname{Spec}W$ and is maximal. The fibre $B=E\\otimes_W\\kappa(m)=E/mE$ is ind-etale by base-change stability [lem-weil-pbc-ind-etale-stability], hence weakly etale. By [lem-weil-pbc-weak-etale-field], each finitely generated $\\kappa(m)$-subalgebra of $B$ is finite etale. Thus every element of $B$ is algebraic over $\\kappa(m)$: its powers lie in a finite-dimensional subalgebra. The domain $E/q$, a quotient of $B$, is consequently algebraic over $\\kappa(m)$. For any nonzero $b\\in E/q$, take a monic relation of least degree; its constant coefficient is nonzero, since otherwise cancellation of $b$ would give a shorter relation. Dividing the relation by $b$ expresses $b^{-1}$ as a polynomial in $b$. Hence $E/q$ is a field, and $q$ is maximal in $E$. This two-line algebraic-domain argument is written out here, not introduced as a new node.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-weak-etale-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097X, lemma-get-w-local-algebraic-residue-field-extensions, first paragraph of proof (properties (1), (3), (7), (9))"
+   }
+  },
+  {
+   "text": "The subset $T=V(IE)$ is Zariski closed and, by step 2, consists of closed points of $\\operatorname{Spec}E$. Apply [lem-weil-pbc-retained-localization] with $R=E$ and this $T$. It gives $E\\to C_A$ ind-Zariski, $\\operatorname{Spec}C_A$ w-local, and its closed points identified with $T$. At the closed point corresponding to $q\\in T$ the pair description is $(q,q)$, so the canonical local ring is $E_q$. Step 1 makes $E_q$ strictly henselian. Write this local-ring isomorphism as $\\alpha:E_q\\xrightarrow{\\sim}(C_A)_{(q,q)}$. Restricting scalars along $\\alpha$ makes each finite algebra over the latter ring a finite $E_q$-algebra, and its quotient by the maximal ideal is unchanged. Each idempotent in that quotient therefore has a unique lift by henselianity of $E_q$. The induced residue-field isomorphism makes the residue field separably closed. These are exactly the two conditions in [def-weil-pbc-henselian-terminology]. Thus every maximal local ring of $C_A$ is strictly henselian.",
+   "uses": [
+    "lem-weil-pbc-retained-localization",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097X, lemma-get-w-local-algebraic-residue-field-extensions, first paragraph of proof (properties (1), (3), (7), (9))"
+   }
+  },
+  {
+   "text": "For every $x\\in\\operatorname{Spec}A$, step 1 supplies a closed point $m$ of $\\operatorname{Spec}W$ over $x$. Since $W\\to E$ is faithfully flat, [lem-weil-pbc-faithfully-flat-surjective-spectrum] supplies a prime $q$ of $E$ contracting to $m$. The inclusion $I\\subseteq m$ implies $IE\\subseteq q$, so $q\\in T$. Step 3 identifies $q$ with a closed point of $\\operatorname{Spec}C_A$, whose image in $\\operatorname{Spec}E$ is $q$ by the canonical pair description of [lem-weil-pbc-retained-localization]. Its image in $\\operatorname{Spec}A$ is therefore $x$. This proves the claimed closed-point surjectivity.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-retained-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097X, lemma-get-w-local-algebraic-residue-field-extensions, first paragraph of proof (properties (1), (3), (7), (9))"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-w-localization], $A\\to W$ is ind-Zariski. The same holds for $E\\to C_A$ by step 3, and $W\\to E$ is ind-etale by step 1. Ind-Zariski is a special case of ind-etale in [def-weil-pbc-ind-etale-algebra]. Composition stability [lem-weil-pbc-ind-etale-stability] makes $A\\to C_A$ ind-etale, and that node also makes it weakly etale. In particular it is flat, by the flatness condition in [def-weil-pbc-ind-etale-algebra]. Step 4 makes the entire spectrum map surjective because its restriction to closed points already is. Apply [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] to conclude faithful flatness.",
+   "uses": [
+    "def-weil-pbc-w-localization",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097X, lemma-get-w-local-algebraic-residue-field-extensions, first paragraph of proof (properties (1), (3), (7), (9))"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-strict-w-cover",
+  "lem-weil-pbc-w-localization-points",
   "lem-weil-pbc-etale-contraction",
+  "lem-weil-pbc-ind-etale-stability",
   "lem-weil-pbc-weak-etale-field",
   "lem-weil-pbc-retained-localization",
-  "lem-weil-pbc-w-localization-points",
-  "lem-weil-pbc-ind-etale-stability"
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-weil-pbc-w-localization",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-strict-w-cover.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 097X, lemma-get-w-local-algebraic-residue-field-extensions, first paragraph of proof (properties (1), (3), (7), (9))"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "faithfully flat ind-etale w-local strictly henselian closed points surject Spec A",
+   "results": "8 hits: Algebra.etaleLocus, AlgebraicGeometry.flat_and_surjective_SpecMap_iff, Algebra.IsStandardEtale.of_surjective, Algebra.IsEtaleAt, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, PrimeSpectrum.specComap_surjective_of_faithfullyFlat, Algebra.mem_etaleLocus_iff, Algebra.IsEtaleAt.comp",
+   "date": "2026-10-14",
+   "verdict": "no match for the full strict w-local cover assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, FaithfullyFlat, IsLocalRing.IsStrictlyHenselian",
+   "results": "0 hits:  | loogle: unknown identifier 'FaithfullyFlat'",
+   "date": "2026-10-14",
+   "verdict": "no match for the full strict w-local cover assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "strictly henselian|faithfully flat|ind-etale",
+   "results": "0 hits:  (directory RingTheory/ProEtale)",
+   "date": "2026-10-14",
+   "verdict": "no match for the full strict w-local cover assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A faithfully flat ind-etale strict w-local cover with strictly henselian local rings",
+   "results": "0 hits:  | service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every ring admits a w strictly local ind etale faithfully flat extension whose closed points cover its prime spectrum",
+   "results": "8 hits: Algebra.etaleLocus, Algebra.exists_etale_of_isEtaleAt, Algebra.IsEtaleAt, Algebra.mem_etaleLocus_iff, RingHom.Etale.ofLocalizationSpanTarget, RingHom.Etale.propertyIsLocal, RingHom.Etale.ofLocalizationSpan, Algebra.Etale.of_isLocalization_Away",
+   "date": "2026-10-14",
+   "verdict": "no match for the full strict w-local cover assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "WStrictLocalization|WLocalization|IsWLocalRing",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match for the full strict w-local cover assertion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -76,5 +177,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-strict-w-cover",
+  "worker": "stage1",
+  "summary": "Made the construction and faithful-flatness statement dependencies explicit; split the single imported paragraph into five steps following Stacks 097X, proving maximality of the retained points directly and citing existing faithful-flatness spectrum criteria. No new nodes. Project Lean covers some clauses but no found declaration gives the closed-point surjectivity clause for this construction.",
+  "blueprint": "The sole blueprint proof paragraph: steps 1–2 establish the contraction and maximality of T; step 3 proves retained w-locality and strict henselianity; step 4 proves closed-point surjectivity; step 5 proves ind-etaleness and faithful flatness."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-fc148d84e",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-fc148d84e (reviewer sub-agent of L); spot-checked: Read the item, unit route, every cited node, exact blueprint source, Stacks Tags 097X/097A and 00HQ, and delivery-error rules A–F. Verified all five proof steps, hypotheses, base-change and coefficient context, edge cases, citations, DAG route, duplicate search, and Mathlib searches. Wrote review.md; no repairs or dropped nodes needed."
+ }
 }
