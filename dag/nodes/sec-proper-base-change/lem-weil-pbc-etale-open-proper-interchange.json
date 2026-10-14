@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-direct-image-finiteness-proper",
-   "place": "Since the finite ring $\\Lambda=P_n$ is annihilated by an integer, $F_{\\Et}$ is a torsion abelian sheaf, so the classical input of the source note (Th. 1.1 of SGA 4 1/2 and [Tag 095U](https://stacks.math.columbia.edu/tag/095U)) applies to $f_{\\Et}$: the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$.; classical constructibility input expanded using proof of 0GL0, second paragraph: Rf_! = Rp_! composed with Ri_!, then factor affine-space projections; third equality in the compactification composition calculation",
+   "place": "Classical proper/open interchange input: the Cartesian open-immersion specialization of Tag 0F7B used to identify extension by zero with proper derived pushforward.",
    "via": [
     "lem-weil-pbc-etale-shriek-qcqs-composition",
     "lem-weil-pbc-etale-compactification-constructibility",
@@ -26,76 +26,102 @@
   "def-pc-fibre-product",
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-extension-by-zero"
+  "def-weil-pbc-extension-by-zero",
+  "lem-cbc-proper-open-interchange-coherence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the existing proper/open interchange theorem [lem-cbc-proper-open-interchange-coherence] to the Cartesian square with top-left $T_V$, top-right $T$, bottom-left $V$, bottom-right $B$, horizontal open immersions $b$ and $i$, and proper vertical maps $p_V$ and $p$. Its hypotheses hold because $i$ is quasi-compact open (hence an open immersion), $b$ is its base change and therefore an open immersion by [lem-weil-pbc-open-immersion-base-change], and $p_V$ is the base change of the proper morphism $p$ and hence proper by [lem-weil-pbc-proper-base-change]. The theorem supplies a canonical natural isomorphism $i_!Rp_{V,*}\\xrightarrow{\\sim}Rp_*b_!$ on the bounded-below derived categories of finite commutative-ring etale module sheaves, exactly the asserted functor isomorphism.",
+   "uses": [
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, lemma-shriek-proper-and-open, Cartesian open-immersion specialization, case (b)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, lemma-shriek-proper-and-open, Cartesian open-immersion specialization"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Extension by zero along an open immersion commutes with derived direct image along a proper morphism in a Cartesian square with torsion coefficients",
-   "results": "; Hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback Read signatures: ordinary structure-sheaf pushforward, open restriction, inverse-limit factorization or constructible subsets; none provides the stated compactification triangle or derived etale torsion interchange.",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A proper map and an open immersion in a pullback square give an isomorphism j shriek R f star equals R f star j shriek for etale torsion module complexes",
-   "results": "; Hits: AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullback_snd_isIso_of_range_subset, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullback_snd_isIso_of_range_subset, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Hom.comp_appIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc Read signatures: ordinary structure-sheaf pushforward, open restriction, inverse-limit factorization or constructible subsets; none provides the stated compactification triangle or derived etale torsion interchange.",
+   "results": "; Hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
    "date": "2026-10-14",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "\"shriek\"",
-   "results": "; No hits.",
+   "query": "shriek, proper, open immersion, derived direct image",
+   "results": "loogle: <input>:1:30: expected 'in'; Hits: ",
    "date": "2026-10-14",
-   "verdict": "no match"
+   "verdict": "unavailable"
   },
   {
    "tool": "grep",
    "query": "shriek|proper.*[Ee]xchange|[Ee]xchange.*proper",
-   "results": "; Hits: Mathlib/CategoryTheory/Monoidal/Category.lean, Mathlib/Combinatorics/Matroid/IndepAxioms.lean, Mathlib/Combinatorics/Matroid/IndepAxioms.lean, Mathlib/Combinatorics/Matroid/IndepAxioms.lean, Mathlib/Combinatorics/Matroid/IndepAxioms.lean, Mathlib/Combinatorics/Matroid/IndepAxioms.lean, Mathlib/Combinatorics/Matroid/Basic.lean, Mathlib/Combinatorics/Matroid/Basic.lean Read signatures: ordinary structure-sheaf pushforward, open restriction, inverse-limit factorization or constructible subsets; none provides the stated compactification triangle or derived etale torsion interchange.",
+   "results": "No hits.",
    "date": "2026-10-14",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "Proper pushforward commutes with extension by zero on small etale sites",
-   "results": "service unavailable: Internal Server Error; No hits.",
+   "results": "service unavailable: Internal Server Error; Hits: ",
    "date": "2026-10-14",
    "verdict": "unavailable"
   },
   {
-   "tool": "leanfinder",
-   "query": "In a pullback square of schemes, direct image with proper support interchanges with an open embedding for derived torsion sheaves",
-   "results": "Second-reader search: 8 hits; AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder, AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_right, AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_left, AlgebraicGeometry.Scheme.Pullback.range_map, AlgebraicGeometry.IsOpenImmersion.image_preimage_eq_preimage_image_of_isPullback, AlgebraicGeometry.Scheme.image_preimage_eq_of_isPullback, AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst_assoc. Read returned signatures: properness criteria and scheme pullback/image identities do not state compactification existence or derived etale extension-by-zero exchange.",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"extensionByZero\"",
-   "results": "Second-reader search: 0 hits; . Read returned signatures: properness criteria and scheme pullback/image identities do not state compactification existence or derived etale extension-by-zero exchange.",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
    "tool": "grep",
-   "query": "compactification|extensionByZero|lowerShriek",
-   "results": "Second-reader search: 0 hits; . Read returned signatures: properness criteria and scheme pullback/image identities do not state compactification existence or derived etale extension-by-zero exchange.",
+   "query": "LowerShriek.*LowerStar|extension[Bb]yZero.*pushforward",
+   "results": "No hits.",
    "date": "2026-10-14",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-shriek-qcqs-composition",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-etale-open-proper-interchange",
+  "worker": "stage1",
+  "summary": "The item is the Cartesian open-immersion specialization of the already existing stronger proper/open interchange node. I retained the finite-ring bounded-below etale setting and supplied one proof step applying that theorem; no new node was needed.",
+  "blueprint": "Realizes the classical proper/open interchange input in the proof of thm-weil-pbc-direct-image-finiteness-proper, namely the Tag 0F7B Cartesian open-immersion specialization.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-proper-open-interchange-coherence",
+    "why": "This stronger theorem from another unit directly supplies the proper/open derived etale interchange; the present unit has no separate statement of that generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-proper-open-interchange-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-e13e1269e",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-e13e1269e (reviewer sub-agent of L); spot-checked: Reviewed the item, cited nodes, unit/chapter route, Tag 0F7B source, base-change hypotheses, coefficient category, edge cases, duplicate search, and recorded tool use. No mathematical or structural faults found; review.md written."
+ }
 }
