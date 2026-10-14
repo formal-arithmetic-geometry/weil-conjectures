@@ -4,10 +4,10 @@
   "is": null,
   "from": {
    "node": "def-weil-finite-torsion-constructibility",
-   "place": "its statement (a notion the statement uses)",
+   "place": "Final paragraph of def-weil-finite-torsion-constructibility: the full class of complexes with finitely many nonzero constructible cohomology sheaves is asserted to be triangulated.",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Bounded constructible pro-etale complexes form a triangulated subcategory",
@@ -22,9 +22,108 @@
   "def-weil-proetale-constructible-sheaf",
   "def-weil-triangulated-subcategory"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\operatorname{Mod}(\\Lambda_Y)$ on $Y_{\\mathrm{proet}}$, with universe sizes chosen as in the category of module sheaves. It is abelian. Its derived category is precisely $D(Y_{\\mathrm{proet}},\\Lambda)$, and the functors $H^i$ of $D(\\mathcal A)$ are the sheaves $\\mathcal H^i$ appearing in the statement. Let $\\mathcal B$ be the full subcategory of the globally constructible sheaves. These are choices of the category and its full subcategory, without changing the constructibility convention. The zero sheaf is locally constant with zero stalks on the single stratum $Y$; transporting the finite partition and its local trivializations through an isomorphism shows that $\\mathcal B$ is strictly full. Also $\\Lambda$ is Noetherian: an ascending chain of ideals is an ascending chain of subsets of its finite underlying set and stabilizes.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-proetale-constructible-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Proof of Tag 09AL, label lemma-compare-constructible-derived: identify the ambient module category and the constructible cohomology class."
+   }
+  },
+  {
+   "text": "For two objects $F,G\\in\\mathcal B$, choose their finite stratifications and take the common finite stratification of pairwise fibre products given by [lem-weil-pbc-constructible-stratification-intersection]. The restrictions of $F$ and $G$ to each refined stratum are locally constant with finite module stalks. Here is the inverse-image check needed for the refinement. The pro-etale base-change functor carries covering families to covering families. First check the coefficient ring without assuming its identification: by the sheafification universal property, for any ring sheaf $R$ on the target, $\\operatorname{Hom}(f^{-1}\\Lambda_Y,R)=\\operatorname{Hom}(\\Lambda_Y,f_*R)=\\operatorname{Hom}_{\\mathrm{Ring}}(\\Lambda,\\Gamma(f_*R))=\\operatorname{Hom}_{\\mathrm{Ring}}(\\Lambda,\\Gamma(R))=\\operatorname{Hom}(\\Lambda_X,R)$. The middle equality evaluates the displayed direct-image formula at the final object. These natural bijections identify $f^{-1}\\Lambda_Y$ with $\\Lambda_X$; the identification is the canonical structure map of [def-weil-proetale-inverse-image], because its adjoint sends each scalar to its constant section. Now [def-weil-pbc-proetale-operations] applies. An inverse image sends the constant module sheaf $\\underline M$ to $\\underline M$: for any target module sheaf $N$, the module adjunction and the universal property of the constant sheaf identify both Hom sets with $\\operatorname{Hom}_\\Lambda(M,\\Gamma(N))$, since direct image evaluated at the final object is $\\Gamma(N)$. For composable scheme maps $f$ and $g$, the direct-image formula identifies $(fg)_*$ with $f_*g_*$ via the associativity of fibre products. Composing the two inverse-image adjunction bijections gives $\\operatorname{Hom}(g^*f^*F,N)=\\operatorname{Hom}(F,f_*g_*N)=\\operatorname{Hom}((fg)^*F,N)$; hence the left adjoints are naturally isomorphic. In particular, restriction to a refined stratum through either projection is the restriction from $Y$. For a weakly etale object $j:U_j\\to Y$, [lem-weil-proetale-weakly-etale-localization] identifies $Y_{\\mathrm{proet}}/U_j$ with $(U_j)_{\\mathrm{proet}}$ and identifies the restricted constant ring with $\\Lambda_{U_j}$. Under this identification restriction is the scheme inverse image $j^*$: the right adjoint to restriction sends a sheaf $H$ to $V\\mapsto H(V\\times_YU_j)$. Indeed a map $F\\to(V\\mapsto H(V\\times_YU_j))$ gives $F(W)\\to H(W)$ for $W\\to U_j$ by restriction along the graph $W\\to W\\times_YU_j$; conversely a map $F|_{U_j}\\to H$ gives its component at $V$ by $F(V)\\to F(V\\times_YU_j)\\to H(V\\times_YU_j)$. Naturality makes these constructions inverse. This is the direct image of $j$ in [def-weil-proetale-inverse-image], so uniqueness of left adjoints identifies restriction with $j^*$. Put $U'_j=X\\times_YU_j$, with projections $j':U'_j\\to X$ and $f_j:U'_j\\to U_j$. The equality $fj'=jf_j$ and the already established composition isomorphisms now give $j'^*f^*F\\cong f_j^*j^*F$. This is the required compatibility of inverse image with the localized restriction. Thus pulling back a trivializing covering gives constant modules with the same values $M$ on its base change. On a nonempty trivializing member choose a point and an algebraic closure of its residue field, giving a geometric point of that member and of its stratum. Pointed neighbourhoods factoring through the member are cofinal: refine any neighbourhood by its fibre product with that member, using the chosen two lifts. Consequently its restricted stalk is the stalk of the original sheaf at that geometric point. By [lem-weil-proetale-weakly-etale-localization] the constant local model on this localized site is the constant module sheaf on the member's own small pro-etale site. Its stalk is canonically $M$ by [lem-weil-proetale-constant-sheaf-stalk], with no finiteness assumption on $M$. Hence finite stalks make each such $M$ finite; empty members can be omitted. The pulled-back local models are therefore finite too. The ring identification and the module inverse image here are exactly those used by the definition of constructible sheaf.",
+   "uses": [
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-proetale-locally-constant-sheaf",
+    "def-weil-proetale-geometric-stalk",
+    "def-weil-proetale-constructible-sheaf",
+    "def-weil-pbc-sheafification",
+    "def-pur-localized-ringed-site",
+    "def-weil-geometric-point",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-proetale-constant-sheaf-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proof of Tag 03RZ, label lemma-constructible-abelian: common finite partition; the refinement argument works globally for the given finite partitions. The inverse-image constant-sheaf check is the elementary adjunction calculation, also used in proetale.tex Tag 09AK."
+   }
+  },
+  {
+   "text": "For a morphism $u:F\\to G$ with $F,G\\in\\mathcal B$, restrict to the common strata of step 2. The module inverse image is exact (including kernels and cokernels), by [def-weil-pbc-proetale-operations]. Apply [lem-weil-pbc-locally-constant-derived-serre] on the small pro-etale site of each stratum, with $B=\\Lambda$, which is Noetherian by step 1. That lemma says the kernel and cokernel of the restricted morphism are locally constant of finite type. By [lem-weil-proetale-weakly-etale-localization] and [lem-weil-proetale-constant-sheaf-stalk], stalks of each constant local model are its module values. Since a finite-type module over the finite ring $\\Lambda$ is finite as a set, their stalks are finite. The same finite stratification thus witnesses constructibility of $\\ker u$ and $\\operatorname{coker}u$. For $0\\to F\\to E\\to G\\to0$, use exactly the same common stratification of the two outside terms. Exact inverse image restricts this to a short exact sequence on each stratum, and the extension clause of the same lemma makes the restricted $E$ locally constant of finite type, hence with finite stalks. That finite stratification witnesses $E\\in\\mathcal B$. Together with step 1 this gives every weak-Serre hypothesis, for the global definition rather than an affine-local substitute.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-locally-constant-derived-serre",
+    "def-weil-proetale-constructible-sheaf",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-proetale-constant-sheaf-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093U, label lemma-kernel-finite-locally-constant, applied stratumwise; this supplies the global finite-partition variant of proetale.tex Tag 09B5, label lemma-constructible-serre."
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-cohomology-in-weak-serre-subcategory] to $\\mathcal A$ and $\\mathcal B$. Step 1 supplies the abelian category and its derived cohomology, and steps 1 and 3 supply every closure hypothesis. The bounded version of that lemma gives a strictly full triangulated subcategory $D_{\\mathcal B}(\\mathcal A)\\cap D^b(\\mathcal A)$ of $D(\\mathcal A)$ with its inherited shifts and distinguished triangles.",
+   "uses": [
+    "lem-sbc-cohomology-in-weak-serre-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06UQ, label lemma-cohomology-in-serre-subcategory, including its bounded versions; this is the general result used in the proof of Tag 09AL."
+   }
+  },
+  {
+   "text": "By the definition of $D^b(\\mathcal A)$, membership means that only finitely many $H^i$ are nonzero. By the identification in step 1, membership in $D_{\\mathcal B}(\\mathcal A)$ means exactly that every $\\mathcal H^i$ is constructible. Thus the property of the subcategory in step 4 is exactly $P$. Strict fullness gives invariance under isomorphisms; the inherited triangulated structure gives zero, all shifts, and closure of the middle vertex of a distinguished triangle whose outside vertices satisfy $P$. Applying shift closure first to $[n]$ and then to $[-n]$, whose composite is isomorphic to the identity, gives the claimed if and only if for shifts.",
+   "uses": [
+    "def-weil-pbc-bounded-derived-subcategories",
+    "def-weil-triangulated-subcategory",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06UQ, label lemma-cohomology-in-serre-subcategory; Section Tag 06UP, label section-triangulated-sub, definition of the bounded class."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-proetale-constructible-sheaf",
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-pbc-sheafification",
+  "def-pur-localized-ringed-site",
+  "def-weil-geometric-point",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "lem-weil-pbc-locally-constant-derived-serre",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-triangulated-subcategory",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Proof of Tag 09AL from 09B5 and Derived Categories Tag 06UQ; the global finite-stratification version of the sheaf step is written explicitly following etale-cohomology.tex Tag 03RZ and sites-modules.tex Tag 093U."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -32,10 +131,45 @@
    "results": "ObjectProperty.IsSerreClass (Mathlib/CategoryTheory/Abelian/SerreClass/Basic.lean, Serre classes, closed under subobjects and quotients, stronger than weak Serre); ObjectProperty.IsTriangulated; DerivedCategory.homologyFunctor (HomologySequence.lean:34) with the long exact homology sequence; no lemma that complexes with bounded cohomology in a weak Serre subcategory form a triangulated subcategory, and nothing on constructible pro-etale sheaves.",
    "date": "2026-10-09",
    "verdict": "no match (ingredients only: the homology long exact sequence and ObjectProperty.IsTriangulated)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded derived complexes with constructible cohomology sheaves on the pro-etale site form a triangulated subcategory",
+   "results": "DerivedCategory.TStructure.t; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.IsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.IsLE; DerivedCategory.isLE_Q_obj_iff",
+   "date": "2026-10-14",
+   "verdict": "no match: results give ambient derived-category structure, finite-type module sheaves, condensed sheaves, or constructible subsets; none gives the asserted closure of globally stratified constructible pro-etale sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyProperty|IsSerreClass|constructible",
+   "results": "No hits (Mathlib/Algebra/Homology/DerivedCategory)",
+   "date": "2026-10-14",
+   "verdict": "no match: results give ambient derived-category structure, finite-type module sheaves, condensed sheaves, or constructible subsets; none gives the asserted closure of globally stratified constructible pro-etale sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible complexes of pro-etale module sheaves form a triangulated subcategory",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsTriangulated\"",
+   "results": "DerivedCategory.instIsTriangulated; DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh; DerivedCategory.Plus.instIsTriangulatedPlusQh; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory",
+   "date": "2026-10-14",
+   "verdict": "no match: results give ambient derived-category structure, finite-type module sheaves, condensed sheaves, or constructible subsets; none gives the asserted closure of globally stratified constructible pro-etale sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology objects in a weak Serre subcategory define a triangulated subcategory of bounded derived complexes",
+   "results": "DerivedCategory.TStructure.t; DerivedCategory.IsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.IsLE; DerivedCategory.instIsTriangulated; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.isGE_Q_obj_iff",
+   "date": "2026-10-14",
+   "verdict": "no match: results give ambient derived-category structure, finite-type module sheaves, condensed sheaves, or constructible subsets; none gives the asserted closure of globally stratified constructible pro-etale sheaves"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -55,5 +189,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-proetale-dbc-triangulated",
+  "worker": "stage1",
+  "summary": "Kept the statement and global finite-stratification convention unchanged. Proved sheaf weak Serre closure using existing common-refinement and any-site locally-constant closure nodes and the exact pro-etale module inverse image. Applied the existing abstract weak-Serre bounded derived-category theorem and identified its objects with P. A proposed new global closure node was removed because this argument belongs in the proof. No new nodes, Lean or builds.",
+  "blueprint": "Justifies the final paragraph of def-weil-finite-torsion-constructibility, which calls the finite constructible cohomology class a full triangulated subcategory; the sheaf input serves its second paragraph. No unit or chapter route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-2e57e04e0",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-2e57e04e0 (reviewer sub-agent of L); spot-checked: Read the full mathematics and checked Stacks 09B5, 09AL, 093U, and 06UQ against the global finite-stratification predicate. Repaired two missing existing citations: weakly étale localization and constant-sheaf stalks; expanded restriction compatibility. Statement unchanged; dependency checks found no cycle. Corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
+ }
 }
