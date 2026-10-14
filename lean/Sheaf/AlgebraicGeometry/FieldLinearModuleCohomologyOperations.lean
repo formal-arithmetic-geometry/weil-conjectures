@@ -618,6 +618,22 @@ theorem scalarCohomologyExtMap_smul (F : SheafOfModules.{u} X.ringCatSheaf) (n :
         (scalarUnitEndomorphism f r) r (scalarUnitEndomorphism_comp f r) n
         (moduleExtEquiv F n a)
 
+/-- Injectivity of the scalar Ext comparison.
+The comparison is injective because restriction of scalars along the field structure map
+is conservative on the derived global-sections Ext classes (Stacks Project, Tag 01F7).
+(blueprint: lem-sc-field-linear-ext-map-injective) -/
+theorem scalarCohomologyExtMap_injective (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) :
+    Function.Injective (scalarCohomologyExtMap f F n) := by
+  sorry
+
+/-- Surjectivity of the scalar Ext comparison.
+Every Ext class of k-sheaves is represented by the restricted injective-resolution comparison,
+using exactness of tensoring vector spaces over a field (Stacks Project, Tag 01F7).
+(blueprint: lem-sc-field-linear-ext-map-surjective) -/
+theorem scalarCohomologyExtMap_surjective (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) :
+    Function.Surjective (scalarCohomologyExtMap f F n) := by
+  sorry
+
 /-- scalar Cohomology Ext Map bijective.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations).
@@ -626,7 +642,7 @@ adjoint tensors with the structure sheaf, which is exact over the field k. Compa
 two derived global-sections functors using evaluation at 1 and the constant-sheaf adjunction. -/
 theorem scalarCohomologyExtMap_bijective (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) :
     Function.Bijective (scalarCohomologyExtMap f F n) := by
-  sorry
+  exact ⟨scalarCohomologyExtMap_injective f F n, scalarCohomologyExtMap_surjective f F n⟩
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
