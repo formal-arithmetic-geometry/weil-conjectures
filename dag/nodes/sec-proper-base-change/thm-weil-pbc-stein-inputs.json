@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "thm-weil-pbc-stein-inputs",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The two classical inputs of Stein connectedness",
- "statement": "Let $(A,I)$ be an affine henselian pair with $S=\\operatorname{Spec}A$, and in\nthe Stein factorization $p=s\\circ q$ of\n[def-weil-pbc-stein-factorization] of a proper $p:Y\\to S$ let\n$S'=\\operatorname{Spec}B$. The two inputs are:\n\n- (i) *finiteness.* $A\\to B$ is finite, equivalently $p_*\\mathcal O_Y$ is a\n  coherent, hence finitely generated, $\\mathcal O_S$-algebra. For $A$\n  Noetherian this is Stacks Project, More on Morphisms, Section 37.53 (Tag\n  [03GX](https://stacks.math.columbia.edu/tag/03GX)); for a general affine\n  base it is not proved in this blueprint. The route available here is the\n  approximation chain of this chapter: descend $Y\\to S$ to a finitely\n  presented model over a Noetherian base\n  ([lem-weil-pbc-etale-finite-data-descent]), apply the Noetherian statement\n  there, and use the affine limit formula of\n  [lem-weil-pbc-etale-section-continuity] for the structure sheaf to identify\n  $H^0(Y,\\mathcal O_Y)$ with the base change of the model. That chain is not\n  written out.\n- (ii) *connectedness.* Every irreducible closed subset of $Y$ meets\n  $Y_0=Y\\times_SS_0$ in a nonempty connected subset. This is the\n  henselian-pair proper-base-change input, Stacks Project, Etale Cohomology,\n  Lemma 59.91.1 (Tag [0A0B](https://stacks.math.columbia.edu/tag/0A0B), the\n  comparison $\\Gamma(X,\\mathcal F)=\\Gamma(Z,\\mathcal F|_Z)$ for sheaves on\n  the underlying topological space of a henselian pair; the connectedness\n  consequence used here is the Stein-factorization step of its proof, Theorem\n  37.53.5, Tag [03H2](https://stacks.math.columbia.edu/tag/03H2)); it is a\n  classical theorem about henselian pairs and is not proved in this\n  blueprint.\n\nA third input, used by Stage 1 of the degree-zero comparison, is the Zariski\ncomparison $\\Gamma(Y,G)\\cong\\Gamma(Y_0,G|_{Y_0})$ for the *constructible*\ntorsion sheaf $G$ that occurs there. The locally constant form proved in\n[lemma-weil-pbc-spectral-restriction] does not give it, its statement carrying\na counterexample for sheaves that are not locally constant, so that\ncomparison is an obligation as well.",
+ "statement": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology], let $p:Y\\to S=\\operatorname{Spec}A$ be proper [def-weil-proper-morphism], and put $Y_0=Y\\times_S\\operatorname{Spec}(A/I)$ [def-pc-fibre-product]. Write $Y\\xrightarrow{q}\\operatorname{Spec}B\\xrightarrow{s}S$ for the Stein factorization [def-weil-pbc-stein-factorization], so $B=\\Gamma(Y,\\mathcal O_Y)$.\n\n(i) The ring map $A\\to B$ is integral. If, in addition, $A$ is Noetherian [def-weil-pbc-noetherian-ring], then $B$ is a finite $A$-module and $s$ is finite [def-weil-finite-integral-morphism]; moreover $p_*\\mathcal O_Y$ is coherent [pqf-def-coherent]. Finiteness is asserted only with this additional Noetherian hypothesis.\n\n(ii) For every irreducible closed subset $C\\subseteq Y$ [def-weil-irreducible-components], the intersection $C\\cap |Y_0|$ is connected and nonempty [def-weil-connected-scheme], where the closed immersion $Y_0\\to Y$ identifies $|Y_0|$ with $p^{-1}(V(I))$.\n\n(iii) For every sheaf of sets $G$ on the underlying Zariski topological space of $Y$ (a presheaf satisfying unique gluing for every open cover), restriction induces a bijection $\\Gamma(Y,G)\\to\\Gamma(Y_0,i^{-1}G)$, where $i:|Y_0|\\hookrightarrow |Y|$ and $i^{-1}$ is the topological inverse image [def-weil-pbc-topological-inverse-image], with values in sets. Thus the comparison is available for the underlying Zariski sheaf of a constructible torsion sheaf as well; no local constancy hypothesis is needed.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/thm-weil-pbc-stein-inputs.md",
   "place": "node thm-weil-pbc-stein-inputs, order 1093",
@@ -27,72 +27,216 @@
   ]
  },
  "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
   "def-weil-pbc-stein-factorization",
-  "lem-weil-pbc-etale-finite-data-descent",
-  "lem-weil-pbc-etale-section-continuity",
-  "lemma-weil-pbc-spectral-restriction",
-  "def-weil-pbc-henselian-terminology"
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-coherent",
+  "def-weil-irreducible-components",
+  "def-weil-connected-scheme",
+  "def-weil-pbc-topological-inverse-image"
  ],
  "proof": [
   {
-   "text": "The existing Noetherian finiteness proof identifies sections of the zeroth higher direct image with sections of the structure sheaf, and uses finite generation of coherent proper direct images. Its surjective linear map makes the ring of global sections finite over the affine base. Transport across the global-sections isomorphism of Spec A proves IsFinite for the Stein base map.",
-   "uses": [
-    "lem-pc-cohomology-sections-affine-base",
-    "lem-pc-coherent-hi"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Realize C by the explicitly constructed vanishing-ideal subscheme Z, with closed immersion i and range i = C. The closed embedding identifies Z homeomorphically with C, hence Z is irreducible. The composite f = i followed by p is proper.",
-   "uses": [
-    "lem-weil-pbc-closed-subset-closed-subscheme",
-    "lem-weil-pbc-proper-fp-permanence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply affine Stein factorization to f. The first map q = Z.toSpecΓ is proper and each inverse image of a singleton is connected and nonempty. Thus q is surjective, and its target Spec B, with B = Γ(Z, O_Z), is irreducible. The canonical ring map A to B is integral.",
+   "text": "Apply [lem-weil-pbc-stein-factorization-affine] to $p$. It gives that the induced $A\\to B$ is integral, proving the general-base assertion in (i). Nothing here gives finiteness without a Noetherian hypothesis.",
    "uses": [
     "lem-weil-pbc-stein-factorization-affine"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 03H2, theorem-stein-factorization-general, (2) and (4)"
+   }
   },
   {
-   "text": "Use integral extension of henselian pairs to give (B,K) a henselian structure, K = I.map φ. Irreducibility of Spec B means its nilradical N is prime (Mathlib PrimeSpectrum.irreducibleSpace_iff_isPrime_nilradical). Apply connectedSpace_zeroLocus_sup_of_henselian to N and K. Since V(N) is all of Spec B, the equality V(N + K) = V(N) intersect V(K) gives connectedness of V(K).",
+   "text": "For the finite assertion only, assume $A$ Noetherian. The one affine chart $\\operatorname{Spec}A$ makes $S$ locally Noetherian by [pqf-def-locnoeth]. Properness makes $p$ locally of finite type by [def-weil-proper-morphism], and [pqf-lem-locnoeth-lft] then makes $Y$ locally Noetherian. The structure sheaf is quasi-coherent of finite type: on an affine chart it is $\\widetilde R$, and its identity map is a surjection from the rank-one free module to itself. Hence [pqf-lem-coherent-ft-locnoeth] makes $\\mathcal O_Y$ coherent.",
    "uses": [
-    "lem-weil-pbc-integral-over-henselian-pair",
+    "pqf-def-locnoeth",
+    "def-weil-proper-morphism",
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-coherent-ft-locnoeth",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XZ, lemma-coherent-Noetherian; Morphisms Tag 01T6, lemma-finite-type-noetherian"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-coherent-hi] to the proper $p$, the locally Noetherian $S$, and the coherent $\\mathcal O_Y$ from Step 2. Its $i=0$ assertion gives coherence of $p_*\\mathcal O_Y$, and its affine-base assertion gives finiteness of $H^0(Y,\\mathcal O_Y)=B$ as an $A$-module. The affine morphism $s=\\operatorname{Spec}(A\\to B)$ is consequently finite by [def-weil-finite-integral-morphism]. This proves the remaining assertions of (i). The following steps require no Noetherian hypothesis.",
+   "uses": [
+    "lem-pc-coherent-hi",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 02O5, proposition-proper-pushforward-coherent, i=0; 02O6, lemma-proper-over-affine-cohomology-finite"
+   }
+  },
+  {
+   "text": "The quotient morphism $\\operatorname{Spec}(A/I)\\to S$ is a closed immersion by [lem-weil-pbc-spec-quotient-closed-immersion]. Its base change $Y_0\\to Y$ is a closed immersion by [lem-weil-pbc-closed-immersion-base-change], hence a homeomorphism onto its closed image by [def-weil-closed-immersion]. That image is $p^{-1}(V(I))$: by [lem-weil-pbc-fibre-product-points] a point $y$ lies in the image exactly when a point $a_0\\in\\operatorname{Spec}(A/I)$ maps to $p(y)$ and their residue-field tensor product has a prime. The first condition says $I\\subseteq p(y)$ by [def-weil-affine-spectrum]. In that case the residue field of $a_0$ is the residue field at $p(y)$, so the tensor product is $\\kappa(y)$ and has the zero prime. Finally $p$ is separated and finite type by [def-weil-proper-morphism]; [lem-weil-pbc-qcqs-over-affine] and [lem-weil-pbc-qcqs-scheme-spectral] make $Y$ spectral.",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-fibre-product-points",
+    "def-weil-affine-spectrum",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-qcqs-scheme-spectral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/properties.tex",
+    "place": "Tag 0A0B, lemma-zariski-h0-proper-over-henselian-pair, first paragraph of proof; Properties Tag 094L, lemma-quasi-compact-quasi-separated-spectral"
+   }
+  },
+  {
+   "text": "Fix an irreducible closed $C\\subseteq Y$. By [lem-weil-pbc-closed-subset-closed-subscheme] choose a closed immersion $j:Z\\to Y$ with image $C$. By [def-weil-closed-immersion], $j$ is a homeomorphism onto $C$, so $Z$ is irreducible and nonempty. By (c) and (a) of [lem-weil-pbc-proper-fp-permanence], $f=p\\circ j$ is proper. It suffices to prove $f^{-1}(V(I))$ connected and nonempty: the homeomorphism $j$ carries this set onto $C\\cap p^{-1}(V(I))=C\\cap|Y_0|$.",
+   "uses": [
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A0B, proof: replace X by an irreducible closed subscheme"
+   }
+  },
+  {
+   "text": "Use [def-weil-pbc-stein-factorization] for this proper $f$, writing $f=v\\circ u$ with $u:Z\\to\\operatorname{Spec}D$, $D=\\Gamma(Z,\\mathcal O_Z)$ and $v=\\operatorname{Spec}\\varphi$ for $\\varphi:A\\to D$. By [lem-weil-pbc-stein-factorization-affine], $\\varphi$ is integral, $u$ is proper, and each topological fibre $u^{-1}(d)$ is connected and nonempty. In particular $u$ is surjective. By [lem-weil-pbc-integral-over-henselian-pair], $(D,ID)$ is henselian.",
+   "uses": [
+    "def-weil-pbc-stein-factorization",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-integral-over-henselian-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A0B, Stein factorization paragraph, citing Tags 03H2 and 09XK"
+   }
+  },
+  {
+   "text": "The target $\\operatorname{Spec}D$ is irreducible: if it is the union of two closed subsets, their inverse images under the continuous surjection $u$ cover the irreducible $Z$, so one inverse image is all of $Z$ and that closed subset is all of the target. Nonemptiness follows from $Z\\ne\\varnothing$. By [lem-weil-pbc-scheme-sober] it has a generic point, corresponding to a prime $\\mathfrak r\\subseteq D$. By [def-weil-affine-spectrum], its closure is $V(\\mathfrak r)$ (a closed set $V(J)$ contains the point exactly when $J\\subseteq\\mathfrak r$). Thus $V(\\mathfrak r)=\\operatorname{Spec}D$. Apply [lem-weil-pbc-henselian-pair-prime-connected] to the henselian pair $(D,ID)$ from Step 6 and this prime: $V(\\mathfrak r+ID)=V(\\mathfrak r)\\cap V(ID)=V(ID)$ is connected and nonempty. The displayed equality follows prime by prime from containment of the sum of ideals.",
+   "uses": [
+    "lem-weil-pbc-scheme-sober",
+    "def-weil-affine-spectrum",
     "lem-weil-pbc-henselian-pair-prime-connected"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A0B, image T and its intersection with V(I), using More on Algebra Tag 09Y6"
+   }
   },
   {
-   "text": "The proper surjection q is a closed quotient map. The connected-fibre quotient-preimage criterion gives connectedness of q inverse image V(K). The factorization identity f = q followed by Spec φ and the spectrum zero-locus preimage formula identify this set with f inverse image V(I). Its continuous image under i is exactly C intersect p inverse image V(I), hence this intersection is connected, including nonemptiness. The existing independent nonempty_inter_preimage_zeroLocus lemma remains available but is not needed by this proof.",
+   "text": "The proper surjection $u$ is a closed map: proper means universally closed by [def-weil-proper-morphism], and we take base change along the identity. It is a quotient map, since if $u^{-1}(T)$ is closed then $T=u(u^{-1}(T))$ is closed; the converse holds by continuity. All fibres are connected by Step 6. The closed connected subset $V(ID)\\subseteq\\operatorname{Spec}D$ from Step 7 therefore has connected, nonempty inverse image by [lem-weil-pbc-connected-fibres-quotient-preimage-connected]. A prime $\\mathfrak d\\subseteq D$ belongs to $v^{-1}(V(I))$ iff $I\\subseteq\\varphi^{-1}(\\mathfrak d)$ iff $ID\\subseteq\\mathfrak d$, so $v^{-1}(V(I))=V(ID)$, by [def-weil-affine-spectrum]. Consequently $u^{-1}(V(ID))=f^{-1}(V(I))$. Step 5 now proves (ii).",
    "uses": [
+    "def-weil-proper-morphism",
     "lem-weil-pbc-connected-fibres-quotient-preimage-connected",
-    "def-weil-pbc-stein-factorization"
+    "def-weil-affine-spectrum"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A0B, final paragraph of proof, applying Topology Tag 0377"
+   }
+  },
+  {
+   "text": "For every $y\\in Y$, the closed set $\\overline{\\{y\\}}$ is irreducible: if it is covered by two relatively closed subsets, one contains $y$ and, being closed in its closure, contains all of $\\overline{\\{y\\}}$. Apply (ii) to this closed irreducible subset. Step 4 supplies the other hypotheses, that $Y$ is spectral and $|Y_0|$ is closed. Thus [lem-weil-pbc-h0-spectral-closed-restriction], for the sheaf of sets $G$, gives exactly the bijection in (iii), with the topological inverse image and restriction unit described in [def-weil-pbc-topological-inverse-image]. There is no local constancy assumption in this criterion.",
+   "uses": [
+    "lem-weil-pbc-h0-spectral-closed-restriction",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A0B, opening sentence of proof applying Tag 09ZG, lemma-h0-topological"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
   "def-weil-pbc-stein-factorization",
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-proper-morphism",
   "lem-pc-coherent-hi",
-  "lem-pc-cohomology-sections-affine-base",
+  "lem-weil-pbc-closed-immersion-base-change",
   "lem-weil-pbc-closed-subset-closed-subscheme",
   "lem-weil-pbc-connected-fibres-quotient-preimage-connected",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-h0-spectral-closed-restriction",
   "lem-weil-pbc-henselian-pair-prime-connected",
   "lem-weil-pbc-integral-over-henselian-pair",
   "lem-weil-pbc-proper-fp-permanence",
-  "lem-weil-pbc-stein-factorization-affine"
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-spec-quotient-closed-immersion",
+  "lem-weil-pbc-stein-factorization-affine",
+  "pqf-def-coherent",
+  "pqf-def-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-lem-locnoeth-lft"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "Stacks Project, Tags 0A0B and 03H2",
-  "place": "F1 Lean realization of lemma-zariski-h0-proper-over-henselian-pair: closed-subscheme reduction, integral Stein factorization, henselian affine connectedness and the closed quotient criterion; existing Noetherian finiteness proof retained."
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A0B, lemma-zariski-h0-proper-over-henselian-pair and proof; Noetherian finiteness uses coherent.tex Tags 01XZ, 02O5, 02O6 and morphisms.tex Tag 01T6; general integral Stein factorization uses more-morphisms.tex Tag 03H2."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper scheme over a henselian pair, each irreducible closed subset meets the closed fibre in a nonempty connected subset and restriction of sheaf sections is bijective",
+   "results": "8 hits: AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, AlgebraicGeometry.Scheme.preimage_eq_top_of_closedPoint_mem, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.pointsPi_surjective, AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.irreducibleSpace_of_isIntegral",
+   "date": "2026-10-14",
+   "verdict": "no match: no hit states all clauses; field/integral-scheme finiteness is not general Noetherian-base finiteness, and integral-appTop supplies only integrality."
+  },
+  {
+   "tool": "grep",
+   "query": "steinFactorization|henselian.*connected|bijective_unit_app_top",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: no hit states all clauses; field/integral-scheme finiteness is not general Noetherian-base finiteness, and integral-appTop supplies only integrality."
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing, IsConnected",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: no hit states all clauses; field/integral-scheme finiteness is not general Noetherian-base finiteness, and integral-appTop supplies only integrality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of a sheaf on a proper scheme over a henselian pair equal global sections on its closed fibre",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stein factorization of a proper morphism to the spectrum of a noetherian ring has finite ring of global sections; over a henselian pair its closed fibre is connected",
+   "results": "8 hits: AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsFinite",
+   "date": "2026-10-14",
+   "verdict": "no match: no hit states all clauses; field/integral-scheme finiteness is not general Noetherian-base finiteness, and integral-appTop supplies only integrality."
+  },
+  {
+   "tool": "grep",
+   "query": "finite_appTop_of_universallyClosed|integral_appTop",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: no hit states all clauses; field/integral-scheme finiteness is not general Noetherian-base finiteness, and integral-appTop supplies only integrality."
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -201,5 +345,54 @@
   "landing": "20261012T135231-L-1662598",
   "kind": "interface",
   "note": "independent Codex review: Packet, delivered files, DAG records, report, and direct importers all agree; delivered set and four reader-gate importers compile cleanly."
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "thm-weil-pbc-stein-inputs",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: general-base finiteness is false, as shown by the square-zero projective example in report.md. Corrected (i) to integral in general and finite/coherent for A Noetherian, matching 03H2 and 02O5. Completed the independent connectedness argument with the existing closed-subscheme, integral Stein, henselian-prime connectedness and quotient-preimage nodes. Added the missing general sheaf comparison through existing 09ZG, rather than the locally constant-only imported node. No new nodes.",
+  "blueprint": "Realizes input (i) with its missing Noetherian qualification, input (ii) via the full Stein argument in 0A0B, and the final paragraph comparison obligation. Corrects the claimed general finiteness and invalid local-constancy counterexample; the unit still uses Stein connectedness plus restriction on spectral spaces.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic coherence criterion needed to apply proper coherent cohomology to O_Y; no node of this unit gives it."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Generic proper coherent cohomology supplies Noetherian finiteness; the item itself explicitly directs this use."
+   },
+   {
+    "node": "lem-weil-pbc-stein-factorization-affine",
+    "why": "Generic integral Stein theorem supplies proper connected fibres, exactly the stated Stein route."
+   },
+   {
+    "node": "lem-weil-pbc-integral-over-henselian-pair",
+    "why": "Generic ring theorem transports henselianity along the integral Stein map."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-pair-prime-connected",
+    "why": "Generic henselian prime-zero-locus connectedness is the algebraic input of the same Stein route."
+   },
+   {
+    "node": "lem-weil-pbc-h0-spectral-closed-restriction",
+    "why": "Generic sheaf-of-sets restriction criterion 09ZG supplies the constructible case; the local-constancy-only node of this unit is insufficient."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-coherent-hi",
+  "lem-weil-pbc-stein-factorization-affine",
+  "lem-weil-pbc-integral-over-henselian-pair",
+  "lem-weil-pbc-henselian-pair-prime-connected",
+  "lem-weil-pbc-h0-spectral-closed-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NL-3219d5ad3",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-3219d5ad3 (reviewer sub-agent of L); spot-checked: Read the complete item, all 29 cited node statements, unit/chapter route, delivery report, and Stacks sources. Steps 1–9 are mathematically supported with correct hypotheses, base-change morphism, and sets-valued Zariski sheaf coefficient category. The corrected Noetherian finiteness qualification is justified by the square-zero counterexample and Tags 03H2, 02O5, and 02O6. No new nodes, duplicates, circularity, or repairs found. Review written to review.md."
  }
 }
