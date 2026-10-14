@@ -24,11 +24,132 @@
   "def-weil-pbc-derived-categories",
   "lem-asd-finite-etale-twist-line",
   "def-pc-divisor-line-bundle",
-  "lem-amb-kummer-any-base"
+  "lem-amb-kummer-any-base",
+  "def-kun-derived-tensor",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\Lambda=\\mathbf Z/N$ and $V=T-D$. The dual ideal $L$ of [def-pc-divisor-line-bundle] has a canonical section $s_D$, dual to $\\mathcal I_D\\hookrightarrow\\mathcal O_T$. On an open chart where $\\mathcal I_D=(f_a)$ with $f_a$ a nonzerodivisor, the ideal is free on $f_a$, its dual is free on $e_a=f_a^{-1}$, and $s_D=f_ae_a$. On $V=T-D$, $f_a$ is a unit, so $s_D$ is a nowhere zero section and gives a specified trivialization $\\tau_D:\\mathcal O_V\\cong L|_V$. On overlaps $e_b=(f_a/f_b)e_a$, hence these formulas agree. The frame torsor $P_D=\\underline{\\operatorname{Isom}}(\\mathcal O_T,L)$ of [lem-sc-line-bundle-torsor] is therefore a $\\mathbf G_m$-torsor with the specified section $\\tau_D$ on $V$.",
+   "uses": [
+    "def-pc-divisor-line-bundle",
+    "lem-sc-line-bundle-torsor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md",
+    "place": "Proof paragraph 1: divisor section and trivialization"
+   }
+  },
+  {
+   "text": "Apply [lem-amb-relative-torsor-cohomology] to $(P_D,\\tau_D)$ with $G=\\mathbf G_m$. This gives a specified class $\\alpha_D\\in H^1(T,V;\\mathbf G_m)$, independent of chart equations and refinements, whose forgotten-support image is the torsor class of $L$. For explicit changes of equations, $f'_a=u_af_a$ gives $e'_a=u_a^{-1}e_a$ and $f'_ae'_a=f_ae_a$; it is the same line bundle with the same section, not just an unspecified lift of its Picard class. The relative lemma supplies the comparison with derived sections; no assertion that an arbitrary ordinary Cech cover computes all derived cohomology is needed.",
+   "uses": [
+    "lem-amb-relative-torsor-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md",
+    "place": "Proof paragraphs 1-2: relative torsor class"
+   }
+  },
+  {
+   "text": "Since $N$ is invertible on $T$, [lem-amb-kummer-any-base] supplies the short exact Kummer sequence $0\\to\\mu_N\\to\\mathbf G_m\\xrightarrow{N}\\mathbf G_m\\to0$. Apply its relative connecting map, provided by [lem-amb-relative-torsor-cohomology], to $\\alpha_D$: $\\beta_D=\\delta_{T,V}(\\alpha_D)\\in H^2(T,V;\\mu_N)$. The relative lemma's compatibility with forgetting support gives $\\operatorname{forget}(\\beta_D)=\\delta_T([L])$, exactly $c_{1,\\Lambda}(L)$. Only the abelian-sheaf Kummer sequence is used: $\\mathbf G_m$ is not a $\\Lambda$-module and is never tensored over $\\Lambda$.",
+   "uses": [
+    "lem-amb-kummer-any-base",
+    "lem-amb-relative-torsor-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md",
+    "place": "Proof paragraph 3: Kummer boundary; Stacks Tag 03PL, lemma-kummer-sequence"
+   }
+  },
+  {
+   "text": "Use the canonical comparisons from module-derived sections to abelian-derived sections for the sheaf $\\mu_N$ on $T$ and its restriction on $V$. By [lem-weil-pbc-etale-module-cohomology-forget] they induce isomorphisms on every cohomology group, hence are quasi-isomorphisms. They commute with restriction because both restriction maps send a section to its restriction. Taking their cones therefore identifies $H^2(T,V;\\mu_N)$ with the relative cohomology computed in $\\Lambda$-module sheaves; the projection from the shifted cone to the $T$-sections complex also commutes with these comparisons. Taking degree two in [lem-amb-closed-support-hom], with coefficient ring $\\Lambda$ and $K=\\mu_N[0]$, identifies it with $\\operatorname{Hom}_{D(T_{\\mathrm{et}},\\Lambda)}(i_*\\Lambda_D,\\mu_{N,T}[2])$. Define $c_{D,\\Lambda}$ to be the morphism corresponding to $\\beta_D$. The forget-support map is precomposition with $\\Lambda_T\\to i_*\\Lambda_D$: applying derived Hom to this map is the first arrow into the ordinary sections complex in the support cone. Thus step 3 is precisely the required first Chern class assertion. This is a support-Hom identification and uses no purity isomorphism. The forget-support compatibility can be checked directly using [lem-weil-pbc-open-closed-short-exact] for $F=\\Lambda_T$. Apply derived Hom into $\\mu_N$ to $j_!\\Lambda_V\\to\\Lambda_T\\to i_*\\Lambda_D$. [lem-weil-pbc-extension-by-zero-adjunction] identifies Hom out of $j_!\\Lambda_V$ with sections on $V$, and the counit induces restriction. Thus the relative fibre projects to sections on $T$ by precomposition with the displayed unit. This fixes the maps, not just an abstract isomorphism of cohomology groups.",
+   "uses": [
+    "lem-weil-pbc-etale-module-cohomology-forget",
+    "lem-amb-closed-support-hom",
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md",
+    "place": "Proof paragraphs 3-4: support-Hom; Stacks Tag 0A45, lemma-cohomology-with-support-triangle"
+   }
+  },
+  {
+   "text": "The closed immersion $i$ is finite: locally it is induced by a quotient ring, generated by $1$ as a module. [lemma-weil-pbc-finite-direct-image-exact] gives exactness of $i_*$ on abelian sheaves. Kernels and sheafified cokernels in [def-weil-sheaf-of-modules-category] have their underlying abelian kernels and cokernels, so $i_*$ is also exact on constant-coefficient module sheaves. Hence $Ri_*\\Lambda_D=i_*\\Lambda_D$ and $Ri_*A_D=i_*A_D$ for these degree-zero objects. Apply the exact derived change-of-rings functor [lem-pur-derived-change-of-rings] along $\\Lambda_T\\to A_T$ to $c_{D,\\Lambda}$. Its source is canonically $i_*A_D$: [lemma-weil-pbc-finite-stalk-formula] computes the stalks of $i_*\\Lambda_D$ as $\\Lambda$ on $D$ and zero off $D$; [lem-kun-stalk-as-pullback], [lem-kun-inverse-image-monoidal], and [lem-kun-pullback-constant] compute its derived tensor with $A_T$ as respectively $\\Lambda\\otimes^L_\\Lambda A=A$ and zero. The canonical comparison to $i_*A_D$, induced by scalar multiplication and adjunction, is the identity on these stalks. Exact stalks [prop-weil-pbc-geometric-stalks-exact] and conservative stalks [lemma-weil-pbc-geometric-stalk-conservative] imply that every cohomology sheaf of its cone vanishes. The target is $(\\mu_{N,T}\\otimes^L_\\Lambda A_T)[2]$. Apply [lem-asd-finite-etale-twist-line] with $A=\\Lambda$: $\\mu_{N,T}$ is a flat $\\Lambda_T$-line. Its degree-zero complex is K-flat because the exact tensor functor preserves kernels and images and therefore acyclicity. The K-flat computation of [lem-pur-derived-change-of-rings] identifies this target with the ordinary tensor $A_T(1)[2]$. Define $c_{D,A}$ as the extended map under these canonical isomorphisms. The same stalk calculation sends $\\Lambda_T\\to i_*\\Lambda_D$ to $u_D:A_T\\to i_*A_D$. Applying scalar extension to the equality of step 4 gives $c_{D,A}u_D=c_1(\\mathcal O_T(D))$, with exactly the stated scalar-extended Kummer definition of $c_1$. This proves the scalar-extension clause as well. No flatness of $A$ over $\\Lambda$ is required.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lem-kun-inverse-image-monoidal",
+    "lem-kun-stalk-as-pullback",
+    "lem-kun-pullback-constant",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "def-weil-sheaf-of-modules-category",
+    "lem-asd-finite-etale-twist-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md",
+    "place": "Proof last paragraph: derived scalar extension; Stacks Tag 07A4, lemma-pullback-tensor-product"
+   }
+  },
+  {
+   "text": "Let $h:T'\\to T$ and assume $D'$ is Cartier. Pull the above charts back: $f'_a=h^*f_a$ generates the pulled-back ideal and is a nonzerodivisor by this assumption, Indeed locally $(f'_a)=(g)$ for a regular generator $g$, so writing $f'_a=ag$ and $g=bf'_a$ gives $ba=1$ by cancellation of $g$; hence $a$ is a unit and $f'_a$ is regular. Thus $e'_a=(f'_a)^{-1}$ is its dual basis. The transition equality $e'_b=h^*(f_a/f_b)e'_a$ and section equality $s_{D'}=f'_ae'_a$ identify $(h^*L,h^*s_D)$ with $(\\mathcal O_{T'}(D'),s_{D'})$. This computation requires no flatness of $h$. Pullback of the frame torsor is taken with the coefficient map $h^{-1}\\mathbf G_{m,T}\\to\\mathbf G_{m,T'}$, not an assumed isomorphism of those two sheaves. Naturality of the relative torsor class and of its connecting maps in [lem-amb-relative-torsor-cohomology] now sends $\\alpha_D$ and $\\beta_D$ to $\\alpha_{D'}$ and $\\beta_{D'}$: the maps of Kummer sequences send $u$ to its pulled-back unit and satisfy $h^*(u^N)=h^*(u)^N$. The canonical map $h^{-1}\\mu_{N,T}\\to\\mu_{N,T'}$ is an isomorphism. Use [lem-asd-finite-etale-twist-line] with $A=\\Lambda$ to choose an etale cover with a primitive-root generator. On its pulled-back cover the same root is a generator: the factorization of $X^N-1$ into its distinct root factors, with invertible pairwise differences, pulls back to the identical factorization. Thus the map is the identity on the two constant rank-one $\\Lambda$-modules there. For $N=1$ both are zero. Apply the natural support-Hom identification [lem-amb-closed-support-hom]; its source comparison $h^{-1}i_*\\Lambda_D\\to i'_*\\Lambda_{D'}$ is the identity $\\Lambda\\to\\Lambda$ on the pulled-back support and $0\\to0$ elsewhere by [lemma-weil-pbc-finite-stalk-formula] and [lem-kun-stalk-as-pullback], so is an isomorphism by [lemma-weil-pbc-geometric-stalk-conservative]. Exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact] applies these comparisons to complexes and their cohomology sheaves. Finally [lem-kun-inverse-image-monoidal] and [lem-kun-pullback-constant] identify the pullback of derived extension to $A$ with derived extension after pullback. All these comparison maps are the indicated unit or tensor maps, so their naturality applies to the morphism, giving $h^{-1}c_{D,A}=c_{D',A}$, including equality after forgetting support. For clarity, the support-Hom naturality used here is the canonical relative-fibre comparison of step 4: pulling back a morphism $i_*\\Lambda_D\\to K[2]$ and precomposing with inverse closed exchange induces pullback on sections on $T$ and $V$, since each comparison carries the constant generator $1$ to $1$. The map on relative fibres is therefore exactly the pullback used on $\\beta_D$, giving equality of supported morphisms, not only their images after forgetting support. The exact module inverse image of [prop-weil-pbc-inverse-image-modules-exact] preserves the open-closed triangle of step 4. Finally the derived tensor comparison [lem-kun-inverse-image-monoidal] applied with the constant $\\Lambda$-complex $A$, and [lem-kun-pullback-constant], give the scalar-extension comparison. On the flat roots-of-unity target this is the ordinary tensor comparison of step 5. All maps are the specified adjunction, unit and tensor maps, so substituting these comparisons into the definition of $c_{D,A}$ gives the asserted equality for $A$.",
+   "uses": [
+    "lem-amb-relative-torsor-cohomology",
+    "def-pc-divisor-line-bundle",
+    "lem-amb-kummer-any-base",
+    "lem-amb-closed-support-hom",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-kun-inverse-image-monoidal",
+    "lem-kun-pullback-constant",
+    "lem-kun-stalk-as-pullback",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-asd-finite-etale-twist-line",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md",
+    "place": "Proof penultimate paragraph: Cartier-preserving base change"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-divisor-line-bundle",
+  "def-weil-sheaf-of-modules-category",
+  "lem-amb-closed-support-hom",
+  "lem-amb-kummer-any-base",
+  "lem-amb-relative-torsor-cohomology",
+  "lem-asd-finite-etale-twist-line",
+  "lem-kun-inverse-image-monoidal",
+  "lem-kun-pullback-constant",
+  "lem-kun-stalk-as-pullback",
+  "lem-pur-derived-change-of-rings",
+  "lem-sc-line-bundle-torsor",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md",
+  "place": "Proof relative-cone route, entirely on the ordinary small etale site, for Z/N and arbitrary finite A"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -106,15 +227,144 @@
    "results": "No hits",
    "date": "2026-10-14",
    "verdict": "no match: read signatures concern Proj, affine space, cotangent differentials or etale loci, not this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|Chern|cohomologyWithSupport",
+   "results": "No hits; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-14",
+   "verdict": "no match: read returned signatures; ideal supports, scheme sections and Cech H1 do not construct the relative etale Cartier Kummer morphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Kummer boundary of a Cartier divisor and cohomology with support on the small etale site",
+   "results": "No hits; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle trivialized off a closed divisor has a supported etale Kummer first Chern class, natural under pullback and derived extension of finite coefficients",
+   "results": "Algebra.etaleLocus_eq_compl_support; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; Algebra.smoothLocus_eq_compl_support_inter; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero",
+   "date": "2026-10-14",
+   "verdict": "no match: read returned signatures; ideal supports, scheme sections and Cech H1 do not construct the relative etale Cartier Kummer morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"support\"",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.supportSet; AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_support; AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support; AlgebraicGeometry.Scheme.IdealSheafData.support; AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet; AlgebraicGeometry.Scheme.IdealSheafData.support_radical; AlgebraicGeometry.Scheme.IdealSheafData.support_pow; AlgebraicGeometry.Scheme.IdealSheafData.support_pow_succ",
+   "date": "2026-10-14",
+   "verdict": "no match: read returned signatures; ideal supports, scheme sections and Cech H1 do not construct the relative etale Cartier Kummer morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relative first Chern class of an invertible sheaf with a specified trivialization lies in degree two etale cohomology with closed support",
+   "results": "CategoryTheory.PresheafOfGroups.OneCocycle.class; CategoryTheory.PresheafOfGroups.H1; CategoryTheory.PresheafOfGroups.instOneH1; CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous; CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous.class_eq; CategoryTheory.Sheaf.H; CategoryTheory.PresheafOfGroups.OneCocycle.class_eq_iff; CategoryTheory.PresheafOfGroups.OneCohomologyRelation",
+   "date": "2026-10-14",
+   "verdict": "no match: read returned signatures; ideal supports, scheme sections and Cech H1 do not construct the relative etale Cartier Kummer morphism"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-asd-ordinary-finite-p1-adjunction",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-asd-ordinary-supported-kummer",
+  "worker": "stage1",
+  "summary": "Construct the relative divisor torsor class, take its abelian-sheaf Kummer boundary, compare module cohomology and supported Hom, then extend scalars. Verify exactness of closed pushforward, flatness of the roots-of-unity line, and pullback of the specified maps. No statement change or new nodes.",
+  "blueprint": "thm-asd-smooth-tensor Proof paragraphs 2-3: affine-line adjunctions use the projective-line diagonal supported Kummer class via lem-asd-ordinary-finite-p1-adjunction. The relative-cone construction follows lem-amb-cartier-kummer-map Proof.",
+  "tool_uses": [
+   {
+    "node": "def-pc-divisor-line-bundle",
+    "why": "Generic The module $\\mathcal{O}_X(D)$ of an effective Cartier divisor for the ordinary-etale relative Kummer construction; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Generic Category of sheaves of modules over a sheaf of rings for the ordinary-etale relative Kummer construction; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lem-kun-inverse-image-monoidal",
+    "why": "Generic Monoidality of the derived inverse image for the ordinary-etale relative Kummer construction; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lem-kun-pullback-constant",
+    "why": "Generic Inverse image of a constant sheaf for the ordinary-etale relative Kummer construction; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lem-kun-stalk-as-pullback",
+    "why": "Generic A stalk is inverse image to a geometric point for the ordinary-etale relative Kummer construction; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions for the ordinary-etale relative Kummer construction; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lem-sc-line-bundle-torsor",
+    "why": "Generic Line bundles and $\\mathbf G_m$-torsors for the ordinary-etale relative Kummer construction; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-etale-module-cohomology-forget",
+    "why": "Generic Natural comparison of etale module cohomology with underlying abelian cohomology for the ordinary-etale relative Kummer construction; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic Extension by zero is left adjoint to restriction (étale site) for the ordinary-etale relative Kummer construction; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Generic The open-closed short exact sequence of an etale sheaf for the ordinary-etale relative Kummer construction; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Generic Exactness of finite direct image for the ordinary-etale relative Kummer construction; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-stalk-formula",
+    "why": "Generic Geometric stalk formula for finite direct image for the ordinary-etale relative Kummer construction; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks for the ordinary-etale relative Kummer construction; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic Exactness of geometric stalks for the ordinary-etale relative Kummer construction; no statement of this unit supplies this interface."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact for the ordinary-etale relative Kummer construction; no statement of this unit supplies this interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-divisor-line-bundle",
+  "def-weil-sheaf-of-modules-category",
+  "lem-kun-inverse-image-monoidal",
+  "lem-kun-pullback-constant",
+  "lem-kun-stalk-as-pullback",
+  "lem-pur-derived-change-of-rings",
+  "lem-sc-line-bundle-torsor",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-01cdb498f",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-01cdb498f (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md. Checked all six steps, 25 cited statements and source passages, canonical support/base-change maps, nonflat scalar extension, DAG overlaps and cycles, and edge cases. Accepted all 15 declared tool_uses. Verified archived target coefficients and exchange definitions; no repairs or target weakening."
+ }
 }
