@@ -14302,3 +14302,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:39 L: merged deliver/F3/Sheaf.RingTheory.PrimeLocalizationEtaleAlgebraModel (stage 3; reviewer PASS; first push; landing 20261014T023933-L-14489 (proof); batch 20261014T023929; modules 1; new nodes 0)
 - 02:39 L: merged deliver/K3/Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitRepresentative (stage 3; reviewer PASS; first push; landing 20261014T023934-L-14694 (interface); batch 20261014T023929; modules 3; new nodes 2)
 - 02:39 L: merged deliver/M2/Sheaf.AlgebraicGeometry.FieldScalarRestrictionInjectives (stage 3; reviewer PASS; first push; landing 20261014T023934-L-14799 (interface); batch 20261014T023929; modules 7; new nodes 7)
+- 02:39 L: merged deliver/M2/Sheaf.AlgebraicGeometry.tensorGradedAction_projection_first (stage 3; reviewer PASS; first push; landing 20261014T023934-L-14905 (interface); batch 20261014T023929; modules 2; new nodes 1)
