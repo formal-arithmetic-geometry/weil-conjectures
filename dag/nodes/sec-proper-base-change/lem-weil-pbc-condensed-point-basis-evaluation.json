@@ -29,9 +29,61 @@
   "def-pc-scheme",
   "lem-weil-pbc-profinite-point-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an affine weakly contractible $U$, the quotient $\\pi_0(|U|)$ is profinite and maps from $U$ to the finite-quotient objects $X[S]$ are exactly continuous maps $\\pi_0(|U|)\\to S$, compatibly in $S$ and in $U$, by [lem-weil-pbc-proetale-point-components-maps].",
+   "uses": [
+    "lem-weil-pbc-proetale-point-components-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.13(1); exact master RefactorInstruction.tex, Section 4, proof of Lemma point-pullback formula."
+   }
+  },
+  {
+   "text": "The left Kan extension defining the geometric inverse image $p_X^*=\\pi_X^{-1}a^*$ evaluates on $U$ by the preceding finite-quotient correspondence: the resulting colimit is the value $F(\\pi_0(|U|))$. This identification is natural in $F$ and in maps of weakly contractible affines, since all transition maps are induced by precomposition and the quotient map on components.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-proetale-point-components-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.13(1), inverse-image site computation; Hemo–Richarz–Scholbach Example 3.1."
+   }
+  },
+  {
+   "text": "Because $U$ is weakly contractible, sheafification does not change this left-Kan-extension section on $U$: apply [lem-weil-pbc-proetale-sheafification-wcontractible-sections]. Thus the sheaf inverse image itself satisfies $(p_X^*F)(U)\\cong F(\\pi_0(|U|))$, with the same naturality.",
+   "uses": [
+    "lem-weil-pbc-proetale-sheafification-wcontractible-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.13(1), sheafification on weakly contractible objects."
+   }
+  },
+  {
+   "text": "For abelian groups and commutative rings, the comparison is induced by the same maps of underlying sections; addition and multiplication are computed pointwise, so the bijection preserves those operations. The quotient topology assertion is exactly the definition of the topology on $\\pi_0(|U|)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "/home/ubuntu/weil-newtargets-master/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, proof of Lemma point-pullback formula and the paragraph following it."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-point-components-maps",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-proetale-sheafification-wcontractible-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.13(1) and inverse-image computation; Hemo–Richarz–Scholbach Example 3.1; exact master RefactorInstruction.tex Section 4."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,10 +122,25 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-condensed-lfp-local-triviality",
   "by": "worker",
   "date": "2026-10-13"
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-condensed-point-basis-evaluation",
+  "worker": "stage1",
+  "summary": "Split the point-basis evaluation into the finite-quotient/component correspondence and the weakly contractible sheafification step, then wrote the naturality and algebra-structure argument. No existing declaration states the item.",
+  "blueprint": "Realizes the first-sentence descent and inverse-image computation in the blueprint ancestor thm-weil-pbc-qbar, via the point-pullback and coefficient-continuity route."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-05b72c0c7",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-05b72c0c7 (reviewer sub-agent of L); spot-checked: Mathematics and route pass. Repair metadata: item created.item named the wrong node; both new nodes omitted created.by and created.date. Corrected full JSON files are in fixes/dag/nodes/sec-proper-base-change/.; 3 file(s) fixed by the reviewer"
  }
 }
