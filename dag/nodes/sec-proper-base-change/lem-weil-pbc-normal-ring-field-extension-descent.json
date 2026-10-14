@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-pbc-normal-ring-field-extension-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7). Auxiliary input: Tag 0GK5, label lemma-dim-1-projective-completion-after-insep, assertions (1)-(5); normalization interpreted componentwise as in its normalization section; proof of 0GK5: normalization-geonormal-insep; Tag 0BXT proof: Observe that Y is geometrically normal over k′ (lemma-geometrically-normal). Supporting Normality descends under scalar field extension.",
+   "via": [
+    "lem-weil-pbc-normality-perfect-closure-test",
+    "lem-weil-pbc-normalization-geonormal-insep",
+    "lem-weil-pbc-field-curve-completion-insep",
+    "lem-weil-pbc-good-curves-generic-diagram",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Normality descends under scalar field extension",
+ "statement": "Let $F\\subseteq E$ be fields [def-weil-field, def-pc-field-extension], and let $B$ be a commutative $F$-algebra (a commutative ring with a unital ring map from $F$). Form the commutative tensor-product algebra $B\\otimes_F E$ [def-weil-pbc-module-tensor-product], with multiplication $(b\\otimes e)(b^{\\prime}\\otimes e^{\\prime})=bb^{\\prime}\\otimes ee^{\\prime}$ and unit $1\\otimes1$. If $B\\otimes_F E$ is a normal ring, then $B$ is a normal ring [def-weil-pbc-normal-ring]: every prime localization of $B$ is an integrally closed domain. No finiteness, domain, nonzero, algebraicity or separability assumption is made on $B$ or on $E/F$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 033G, label lemma-descent-normal, specialized to B -> B tensor_F E. The map is faithfully flat: an F-basis of E containing 1 identifies scalar extension of any B-module with a direct sum of copies of that module."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normality of a commutative algebra descends along extension of the scalar field",
+   "results": "OK: 8 hits; Normal.tower_top_of_normal, IntermediateField.restrictScalars_normal, Normal.of_equiv_equiv, IsNormalClosure.normal, IntermediateField.AdjoinDouble.normal_algebraicClosure, IntermediateField.AdjoinSimple.normal_algebraicClosure, normalClosure.normal, AlgHom.normal_bijective; ",
+   "date": "2026-10-14",
+   "verdict": "no match: field-theoretic Normal is a different notion; going down, prime lifting and local flatness hits do not give descent of integrally closed domain prime localizations. No integral-closed scalar descent declaration found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat descent of normal rings with integrally closed domain prime localizations",
+   "results": "OK: 8 hits; instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed, Algebra.HasGoingDown.of_flat, Ideal.exists_isPrime_liesOver_of_faithfullyFlat, instFlatAtPrime, RingHom.Flat.ofLocalizationPrime, Module.FaithfullyFlat.of_flat_of_isLocalHom, Algebra.ZariskisMainProperty, RingHom.Flat.ofLocalizationSpanTarget; ",
+   "date": "2026-10-14",
+   "verdict": "no match: field-theoretic Normal is a different notion; going down, prime lifting and local flatness hits do not give descent of integrally closed domain prime localizations. No integral-closed scalar descent declaration found."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, \"faithfully\"",
+   "results": "OK: 0 hits; ; ",
+   "date": "2026-10-14",
+   "verdict": "no match: field-theoretic Normal is a different notion; going down, prime lifting and local flatness hits do not give descent of integrally closed domain prime localizations. No integral-closed scalar descent declaration found."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed.*[Tt]ensor|[Tt]ensor.*IsIntegrallyClosed|normal.*descent|descent.*normal",
+   "results": "OK: 0 hits; ; ",
+   "date": "2026-10-14",
+   "verdict": "no match: field-theoretic Normal is a different notion; going down, prime lifting and local flatness hits do not give descent of integrally closed domain prime localizations. No integral-closed scalar descent declaration found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normality descends under extension of the scalar field",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If all localizations at prime ideals of an algebra after extending scalars are integrally closed domains, then the original algebra has integrally closed domain localizations",
+   "results": "OK: 8 hits; IsIntegrallyClosed.of_localization, isIntegrallyClosed_of_isLocalization, IsIntegrallyClosed.of_localization_maximal, IsIntegrallyClosed.of_isLocalization_maximal, isIntegrallyClosed_ofLocalizationMaximal, instIsIntegralAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl, IsIntegrallyClosed.of_localization_submonoid, IsLocalization.Away.integralClosure",
+   "date": "2026-10-14",
+   "verdict": "no match: localization criteria assume a domain and a specified intersection condition; of_isIntegrallyClosed_of_isIntegrallyClosedIn assumes integral closedness in the target. None states arbitrary field-scalar descent of normal prime localizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, TensorProduct",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-14",
+   "verdict": "no match: localization criteria assume a domain and a specified intersection condition; of_isIntegrallyClosed_of_isIntegrallyClosedIn assumes integral closedness in the target. None states arbitrary field-scalar descent of normal prime localizations."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed.of|IsIntegrallyClosed.*[Ff]lat|[Ff]lat.*IsIntegrallyClosed|IsTranscendenceBasis.*[Pp]erfect",
+   "results": "OK: 14 hits; Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean, Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean, Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean, Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean, Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean, Mathlib/RingTheory/LocalProperties/Semilocal.lean, Mathlib/RingTheory/Trace/Quotient.lean, Mathlib/RingTheory/Smooth/Field.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: localization criteria assume a domain and a specified intersection condition; of_isIntegrallyClosed_of_isIntegrallyClosedIn assumes integral closedness in the target. None states arbitrary field-scalar descent of normal prime localizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-normality-perfect-closure-test",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

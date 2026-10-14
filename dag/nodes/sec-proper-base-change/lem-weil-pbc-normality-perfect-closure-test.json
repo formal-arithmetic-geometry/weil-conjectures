@@ -32,9 +32,100 @@
   "def-pc-fibre-product",
   "def-weil-pbc-normal-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume (2). Its universal quantifier includes the given field extension $K/k$, so it gives (1) immediately.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038O, label lemma-geometrically-normal, (2) implies (6)."
+   }
+  },
+  {
+   "text": "For the converse assume (1), and fix an arbitrary extension $L/k$. Apply [lem-weil-common-extension-fields] to $K/k$ and $L/k$ to obtain embeddings into a common field $M$ agreeing on $k$. For each finitely generated subextension $E/K$ of $M/K$, [lem-weil-pbc-perfect-field-separating-basis] supplies a separating transcendence basis because $K$ has exactly its perfectness hypothesis. Thus every such $E/K$ is separably generated, and $M/K$ is separable in the nonalgebraic sense of [def-weil-pbc-separable-field-extension]. We do not assume $M/K$ is algebraic or finitely generated.",
+   "uses": [
+    "lem-weil-common-extension-fields",
+    "lem-weil-pbc-perfect-field-separating-basis",
+    "def-weil-pbc-separable-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030Z (lemma-perfect), definition-perfect and Definition 030O (definition-separable-field-extension); common field: fields.tex Tag 0H7K (lemma-common-extension-field)."
+   }
+  },
+  {
+   "text": "Let $U=\\operatorname{Spec}A$ be an affine open of $T$. For any extension $H/k$, its base change is $U_H=\\operatorname{Spec}(A\\otimes_k H)$, and these are open subschemes covering $T_H$. Here the affine identification is checked by the universal properties: a ring map from $A\\otimes_k H$ is precisely a pair of maps from $A$ and $H$ agreeing on $k$, hence a pair of spectrum maps; check on affine test schemes and glue. Base changing the inclusion gives the inverse-image open: maps into $T_H$ whose projection lands in $U$ are exactly the maps into $U_H$, by the same fibre-product property. Restricting a structure sheaf to an open does not change its stalk at a point in that open, since its neighborhoods contained in the open are cofinal. By (1), all stalks of $U_K$ are normal domains. The spectrum-stalk identification of [lem-weil-pbc-spec-domain-stalks-function-field](1) then says every prime localization of $A\\otimes_k K$ is a normal domain, so this algebra is a normal ring by [def-weil-pbc-normal-ring].",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038O (lemma-geometrically-normal), affine reduction (5); schemes.tex Tag 01HV (lemma-spec-sheaves), part (6)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-normal-algebra-separable-scalar-extension] with base field $K$, normal algebra $B=A\\otimes_k K$ from step 3, and separable extension $M/K$ from step 2. It proves that $(A\\otimes_k K)\\otimes_K M$ is normal. The ring isomorphism $(a\\otimes c)\\otimes m\\mapsto a\\otimes cm$, with inverse $a\\otimes m\\mapsto(a\\otimes1)\\otimes m$, identifies this algebra with $A\\otimes_k M$. For $u\\in K$, the outer balancing relation has equal images $a\\otimes(uc)m=a\\otimes c(um)$; $k$-balancing is $av\\otimes cm=a\\otimes vcm$ for $v\\in k$. The inverse respects $k$-balancing because $(av\\otimes1)\\otimes m=(a\\otimes v)\\otimes m=(a\\otimes1)\\otimes vm$. Both maps preserve products and units. On generators their composites are the identity: $a\\otimes m\\mapsto a\\otimes m$, and $(a\\otimes c)\\otimes m\\mapsto(a\\otimes1)\\otimes cm=(a\\otimes c)\\otimes m$. A ring isomorphism identifies primes, localizations and monic equations in fraction fields, preserving normality. Thus $A\\otimes_k M$ is normal.",
+   "uses": [
+    "lem-weil-pbc-normal-algebra-separable-scalar-extension",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3M (lemma-base-change-normal-by-separable), affine form, varieties.tex; tensor balancing identifies the iterated base change."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-normal-ring-field-extension-descent] with the field extension $M/L$ and $B=A\\otimes_k L$. Define $\\phi: (A\\otimes_k L)\\otimes_L M\\to A\\otimes_k M$ by $(a\\otimes l)\\otimes m\\mapsto a\\otimes lm$ and $\\psi$ in the reverse direction by $a\\otimes m\\mapsto(a\\otimes1)\\otimes m$. For $c\\in k$ the $k$-balancing identity is $ac\\otimes lm=a\\otimes clm$; for $u\\in L$ the outer balancing identity is $a\\otimes(ul)m=a\\otimes l(um)$. Thus $\\phi$ is well defined. For $\\psi$, $ (ac\\otimes1)\\otimes m=(a\\otimes c)\\otimes m=(a\\otimes1)\\otimes cm$, so it is $k$-balanced. Both maps preserve products on pure tensors and send the unit to the unit. Their composites satisfy $\\phi\\psi(a\\otimes m)=a\\otimes m$ and $\\psi\\phi((a\\otimes l)\\otimes m)=(a\\otimes1)\\otimes lm=(a\\otimes l)\\otimes m$ by $L$-balancing, so they are inverse ring isomorphisms. Step 4 supplies normality of $A\\otimes_k M$, hence of this scalar extension: a ring isomorphism identifies primes and their localizations, and maps monic polynomial equations and fractions bijectively, preserving the normal-domain condition. The descent lemma requires no algebraicity, separability or finite generation of $M/L$. Hence $A\\otimes_k L$ is normal.",
+   "uses": [
+    "lem-weil-pbc-normal-ring-field-extension-descent",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 033G (lemma-descent-normal), scalar extension specialization."
+   }
+  },
+  {
+   "text": "For each affine open $U$ chosen in step 3, step 5 and [lem-weil-pbc-spec-domain-stalks-function-field](1) show that every stalk of $U_L$ is an integrally closed domain. The opens $U_L$ cover $T_L$, and their stalks agree with those of $T_L$ by the cofinal-neighborhood argument in step 3. Consequently every local ring of $T_L$ is an integrally closed domain. Since $L/k$ was arbitrary, (2) follows. If $T$ is empty there are no stalks and both assertions are vacuous; no quasi-compactness or separatedness entered the affine argument.",
+   "uses": [
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038O (lemma-geometrically-normal), (5) implies (2), using the affine cover."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-separable-field-extension",
+  "lem-weil-common-extension-fields",
+  "lem-weil-pbc-normal-algebra-separable-scalar-extension",
+  "lem-weil-pbc-normal-ring-field-extension-descent",
+  "lem-weil-pbc-perfect-field-separating-basis",
+  "lem-weil-pbc-spec-domain-stalks-function-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 038O (lemma-geometrically-normal): alternative affine proof of (6) -> (2), using common overfields, Tag 0C3M and Tag 033G; no appeal to 038O itself as a black box."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -91,15 +182,84 @@
    "results": "[grep] OK 20 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/IsPerfectClosure.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.FieldTheory.PerfectClosure\"}\n  {\"file\": \"Mathlib/FieldTheory/IsPerfectClosure.lean\", \"line\": \"13\", \"text\": \"# `IsPerfectClosure` predicate\"}\n  {\"file\": \"Mathlib/FieldTheory/IsPerfectClosure.lean\", \"line\": \"15\", \"text\": \"This file contains `IsPerfectClosure` which asserts that `L` is a perfect closure of `K` under a\"}\n  {\"file\": \"Mathlib/FieldTheory/IsPerfectClosure.lean\", \"line\": \"30\", \"text\": \"- `IsPerfectClosure`: if `i : K →+* L` is `p`-radical ring homomorphism, then it makes `L` a\"}\n  {\"file\": \"Mathlib/FieldTheory/IsPerfectClosure.lean\", \"line\": \"34\", \"text\": \"  that you need to write `[PerfectRing L p] [IsPerfectClosure i p]`. This is similar to\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Tower.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.FieldTheory.PurelyInseparable.PerfectClosure\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"line\": \"19\", \"text\": \"- `perfectClosure`: the relative perfect closure of `F` in `E`, it consists of the elements\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"line\": \"22\", \"text\": \"  It is also the maximal purely inseparable subextension of `E / F` (`le_perfectClosure_iff`).\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"line\": \"26\", \"text\": \"- `le_perfectClosure_iff`: an intermediate field of `E / F` is contained in the relative perfect\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"line\": \"29\", \"text\": \"- `perfectClosure.perfectRing`, `perfectClosure.perfectField`: if `E` is a perfect field, then the\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"line\": \"30\", \"text\": \"  (relative) perfect closure `perfectClosure F E` is perfect.\"}\n  {\"file\": \"Mathlib/FieldTheory/PerfectClosure.lean\", \"line\": \"16\", \"text\": \"- `PerfectClosure`: the perfect closure of a characteristic `p` ring, which is the smallest\"}\n  {\"file\": \"Mathlib/FieldTheory/PerfectClosure.lean\", \"line\": \"19\", \"text\": \"- `PerfectClosure.mk K p (n, x)`: for `n : ℕ` and `x : K` this is `x ^ (p ^ -n)` viewed as\"}\n  {\"file\": \"Mathlib/FieldTheory/PerfectClosure.lean\", \"line\": \"20\", \"text\": \"  an element of `PerfectClosure K p`. Every element of `PerfectClosure K p` is of this form\"}\n  {\"file\": \"Mathlib/FieldTheory/PerfectClosure.lean\", \"line\": \"21\", \"text\": \"  (`PerfectClosure.mk_surjective`).\"}\n  {\"file\": \"Mathlib/FieldTheory/PerfectClosure.lean\", \"line\": \"23\", \"text\": \"- `PerfectClosure.of`: the structure map from `K` to `PerfectClosure K p`.\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"line\": \"646\", \"text\": \"def Subalgebra.perfectClosure : Subalgebra R A where\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"line\": \"662\", \"text\": \"theorem Subalgebra.mem_perfectClosure_iff {x : A} :\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"line\": \"663\", \"text\": \"    x ∈ perfectClosure R A p ↔ ∃ n : ℕ, x ^ p ^ n ∈ (algebraMap R A).rangeS := Iff.rfl\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"line\": \"678\", \"text\": \"    simp_rw [RingHom.mem_range, ← RingHom.mem_rangeS, ← Subalgebra.mem_perfectClosure_iff] at h h' ⊢\"}",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme is geometrically normal if base change to a perfect purely inseparable overfield is normal",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc",
+   "date": "2026-10-14",
+   "verdict": "no match: normalization/reducedness and normal field extensions do not assert this scheme normality criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal scheme scalar extension to perfect closure tests normality after all field extensions",
+   "results": "OK: 8 hits; Algebra.FormallySmooth.of_perfectField, Algebra.IsGeometricallyReduced, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, perfectClosure.perfectRing, Ring.instIsGaloisFractionRingNormalClosure, Algebra.isGeometricallyReduced_iff, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct",
+   "date": "2026-10-14",
+   "verdict": "no match: normalization/reducedness and normal field extensions do not assert this scheme normality criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyNormal\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-14",
+   "verdict": "no match: normalization/reducedness and normal field extensions do not assert this scheme normality criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "geometricallyNormal|geometrically_normal|geometric.*normal",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-14",
+   "verdict": "no match: normalization/reducedness and normal field extensions do not assert this scheme normality criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric normality of a scheme tested over perfect closure",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-normalization-geonormal-insep",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-normality-perfect-closure-test",
+  "worker": "stage1",
+  "summary": "Statement checked against 038O and 046W and left unchanged. Wrote the converse using a common extension of K and L, separable scalar extension from perfect K, and descent along M/L. Created a separating-basis Mathlib leaf and a statement-only field-scalar normality descent node. Explicit affine tensor and stalk computations avoid any finite-type assumption. Second reading expanded both balancing checks and made preservation of normality under the ring isomorphism explicit; independently repeated the Mathlib and duplicate searches.",
+  "blueprint": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7). Auxiliary input: Tag 0GK5, label lemma-dim-1-projective-completion-after-insep, assertions (1)-(5); normalization interpreted componentwise as in its normalization section; proof of 0GK5: normalization-geonormal-insep; Tag 0BXT proof: Observe that Y is geometrically normal over k′ (lemma-geometrically-normal).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-common-extension-fields",
+    "why": "Generic amalgamation of field extensions K/k and L/k; this is not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-normal-algebra-separable-scalar-extension",
+    "why": "Generic ascent of normal ring localizations along separable field extension M/K, not a curve or coefficient comparison."
+   },
+   {
+    "node": "lem-weil-pbc-spec-domain-stalks-function-field",
+    "why": "Only clause (1), generic identification of Spec ring stalks with prime localizations, is used to check affine normality."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-common-extension-fields",
+  "lem-weil-pbc-normal-algebra-separable-scalar-extension",
+  "lem-weil-pbc-spec-domain-stalks-function-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NM-c5f6057e5",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-c5f6057e5 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics, cited statements, source passages, and unit/chapter route. All six steps and both new statements pass; 038O/046W, 030Z, Mathlib SeparablyGenerated.lean:312–315, and 033G support the hypotheses and conclusions. No duplicate or cycle found. Corrected missing created.by/date, merged_into, and lean_audit metadata in both new-node JSON files under fixes/. Statements and targets unchanged; detailed checks and accepted tool uses are in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }
