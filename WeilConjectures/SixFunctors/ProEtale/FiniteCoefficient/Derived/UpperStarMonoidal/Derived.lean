@@ -28,7 +28,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Upp
   `AlgebraicGeometry.ProEtale.isLeftDerivedFunctor₂_leftDerivedUpperStar_derivedTensor`: they are
   total left derived functors.
 
-See `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMonoidal` for an overview.
+See `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMonoidal` for an
+overview.
 -/
 
 @[expose] public section

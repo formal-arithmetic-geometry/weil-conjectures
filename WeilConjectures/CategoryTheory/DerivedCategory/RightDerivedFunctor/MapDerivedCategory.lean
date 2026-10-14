@@ -199,8 +199,8 @@ D(C) --R(F ⋙ G)--> D(E)
 D(D) ------G-------'
 ```
 -/
-noncomputable def rightDerivedFunctorCompMapDerivedCategoryIsoViaRightDerived (F : C ⥤ D) (G : D ⥤ E)
-    [F.Additive] [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
+noncomputable def rightDerivedFunctorCompMapDerivedCategoryIsoViaRightDerived (F : C ⥤ D)
+    (G : D ⥤ E) [F.Additive] [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
     (F ⋙ G).rightDerivedFunctor ≅ F.rightDerivedFunctor ⋙ G.mapDerivedCategory :=
   have := isRightDerivedFunctor_rightDerivedFunctor_comp_of_exact F G
   rightDerivedUnique (F ⋙ G).rightDerivedFunctor

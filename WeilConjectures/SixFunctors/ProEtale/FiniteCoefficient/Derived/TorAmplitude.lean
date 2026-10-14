@@ -15,8 +15,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Ten
 
 Let `A` be a monoidal Grothendieck abelian coefficient category and `X` a scheme, so that the
 derived category `D(X_proét)` of `A`-valued pro-étale sheaves on `X` carries the derived tensor
-product `- ⊗ᴸ -` of `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor` and the bounded
-constructible objects of `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible`.
+product `- ⊗ᴸ -` of `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor` and the
+bounded constructible objects of
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible`.
 
 This file is the pro-étale counterpart of
 `WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude`: it cuts out the small category of
@@ -41,8 +42,8 @@ As on the étale side, Tor amplitude is the site-independent `DerivedCategory.to
 
 The blueprint's second small category `D_c^[a, b](X, A)` is
 `AlgebraicGeometry.ProEtale.DerivedCategoryConstructibleIn` of
-`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible`. The statements that speak about it
-always pair it with a Tor amplitude bound, and use the object property
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible`. The statements that
+speak about it always pair it with a Tor amplitude bound, and use the object property
 `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleTorAmplitudeIn` (see the note in
 `WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude`).
 

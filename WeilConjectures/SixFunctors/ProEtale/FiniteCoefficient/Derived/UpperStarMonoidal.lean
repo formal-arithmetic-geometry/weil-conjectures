@@ -77,12 +77,12 @@ The results depend on `sorryAx` through `AlgebraicGeometry.ProEtale.derivedTenso
 ## File structure
 
 This module only imports its parts:
-- `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMonoidal.KFlat`: the complexes whose
-  pullback is K-flat;
-- `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMonoidal.Vanishing`: tensoring with
-  K-flat complexes, and vanishing of `K ⊗ᴸ M`;
-- `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMonoidal.Derived`: the two derived
-  bifunctors;
-- `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMonoidal.Comparison`: the tensor and unit
-  comparisons.
+- `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMonoidal.KFlat`: the
+  complexes whose pullback is K-flat;
+- `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMonoidal.Vanishing`:
+  tensoring with K-flat complexes, and vanishing of `K ⊗ᴸ M`;
+- `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMonoidal.Derived`: the
+  two derived bifunctors;
+- `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMonoidal.Comparison`: the
+  tensor and unit comparisons.
 -/

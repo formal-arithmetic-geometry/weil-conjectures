@@ -27,8 +27,8 @@ where `η` is the unit of `j_! ⊣ j^*` and the isomorphism comes from the inver
 `AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison`. It is an isomorphism.
 
 The projection map `PF : Rf_!K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^*L)` of the blueprint
-(`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Exchange`) goes in the opposite direction: its
-open part is the inverse `(derivedOpenImmersionLowerShriekProjectionIso j).inv`.
+(`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Exchange`) goes in the opposite
+direction: its open part is the inverse `(derivedOpenImmersionLowerShriekProjectionIso j).inv`.
 
 ## Main definitions and results
 

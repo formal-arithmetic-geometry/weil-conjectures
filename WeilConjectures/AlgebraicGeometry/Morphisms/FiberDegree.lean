@@ -137,7 +137,8 @@ lemma Scheme.Hom.finrankΓ_SpecMap (R S : Type u) [CommRing R] [CommRing S] [Alg
     Iso.inv_hom_id, Category.id_comp]
   rfl
 
-lemma Scheme.Hom.appLE_top_top_fiberDegree {Y X : Scheme.{u}} (f : Y ⟶ X) (h : (⊤ : Y.Opens) ≤ f ⁻¹ᵁ ⊤) :
+lemma Scheme.Hom.appLE_top_top_fiberDegree {Y X : Scheme.{u}} (f : Y ⟶ X)
+    (h : (⊤ : Y.Opens) ≤ f ⁻¹ᵁ ⊤) :
     f.appLE ⊤ ⊤ h = f.appTop :=
   f.appLE_eq_app
 

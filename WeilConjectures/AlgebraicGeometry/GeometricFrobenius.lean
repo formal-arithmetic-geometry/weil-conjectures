@@ -679,7 +679,8 @@ theorem geometricFrobeniusField_hom :
 Frobenius of the algebraic closure fixes the finite base field pointwise. -/
 @[reassoc (attr := simp)]
 theorem geometricFrobeniusField_hom_comp_specAlgebraicClosure :
-    (geometricFrobeniusField k).hom ≫ AlgebraicGeometry.specAlgebraicClosure k = AlgebraicGeometry.specAlgebraicClosure k := by
+    (geometricFrobeniusField k).hom ≫ AlgebraicGeometry.specAlgebraicClosure k =
+      AlgebraicGeometry.specAlgebraicClosure k := by
   simp only [geometricFrobeniusField_hom, AlgebraicGeometry.specAlgebraicClosure, ← Spec.map_comp]
   congr 1
   ext x
@@ -698,7 +699,8 @@ morphism `a_X` only up to `σ`
 (`geometricFrobenius_hom_comp_geometricFiberToAlgebraicClosure`). It is not the
 relative `#k`-power Frobenius of `X` over `k̄`, see the module implementation notes. -/
 def geometricFrobenius : f.geometricFiber ≅ f.geometricFiber :=
-  asIso (pullback.map f (AlgebraicGeometry.specAlgebraicClosure k) f (AlgebraicGeometry.specAlgebraicClosure k)
+  asIso (pullback.map f (AlgebraicGeometry.specAlgebraicClosure k) f
+    (AlgebraicGeometry.specAlgebraicClosure k)
     (𝟙 X₀) (geometricFrobeniusField k).hom (𝟙 (Spec (.of k)))
     (by simp) (by simp))
 

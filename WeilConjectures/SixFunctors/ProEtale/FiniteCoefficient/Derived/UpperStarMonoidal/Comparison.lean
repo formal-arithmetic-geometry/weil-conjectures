@@ -25,7 +25,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Upp
   `AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorNatIso g`: it is a natural isomorphism.
 - `AlgebraicGeometry.ProEtale.leftDerivedUpperStarUnitIso g`: the canonical `Lg^* Λ_Y ≅ Λ_Z`.
 
-See `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMonoidal` for an overview.
+See `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMonoidal` for an
+overview.
 -/
 
 @[expose] public section

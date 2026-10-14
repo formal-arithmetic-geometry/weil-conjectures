@@ -24,8 +24,9 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison
 The comparison functor `ν^* : Sh(X_ét, A) ⥤ Sh(X_proét, A)` of
 `WeilConjectures.SixFunctors.ProEtale.Comparison.Defs` is exact, so it induces functors
 `D(ν^*) : D(X_ét) ⥤ D(X_proét)` and `D⁺(ν^*) : D⁺(X_ét) ⥤ D⁺(X_proét)` by applying it termwise
-to complexes. As for the pullback in `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar`,
-these functors and the right derived functor `R⁺ν_*` are not given definitions of their own:
+to complexes. As for the pullback in
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar`, these functors and
+the right derived functor `R⁺ν_*` are not given definitions of their own:
 they are the generic constructions `D(-)`, `D+(-)` and `R+(-)` of the folder
 `WeilConjectures.CategoryTheory.DerivedCategory`, recorded below as `example`s.
 

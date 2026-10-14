@@ -130,7 +130,8 @@ lemma ProEtale.eqToHom_lowerStar_app_hom_app {Z Y : Scheme.{u}} {g g' : Z ⟶ Y}
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- The components of the composition isomorphism `f_* ⋙ g_* ≅ (f ≫ g)_*` are the restriction
 maps along the base change isomorphisms `MorphismProperty.Over.pullbackComp`. -/
-lemma ProEtale.coefficient_lowerStarComp_hom_app_hom_app {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+lemma ProEtale.coefficient_lowerStarComp_hom_app_hom_app {R S T : Scheme.{u}} (h₁ : T ⟶ S)
+    (h₂ : S ⟶ R)
     (G : Sheaf (Scheme.ProEt.topology T) A) (V : R.ProEt) :
     ((lowerStarComp A h₁ h₂).hom.app G).hom.app (op V) =
       G.obj.map ((MorphismProperty.Over.pullbackComp h₁ h₂).hom.app V).op := by
@@ -209,7 +210,8 @@ lemma ProEtale.associator_isoWhiskerLeft_upperStarComp_hom_app {W X Y : Scheme.{
   simp
 
 /-- The composition isomorphism of the pullbacks is conjugate to that of the pushforwards. -/
-lemma ProEtale.coefficient_conjugateEquiv_upperStarComp_inv {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+lemma ProEtale.coefficient_conjugateEquiv_upperStarComp_inv {X Y Z : Scheme.{u}} (f : X ⟶ Y)
+    (g : Y ⟶ Z) :
     conjugateEquiv (upperStarLowerStarAdjunction A (f ≫ g))
         ((upperStarLowerStarAdjunction A g).comp (upperStarLowerStarAdjunction A f))
         (upperStarComp A f g).inv = (lowerStarComp A f g).inv := by

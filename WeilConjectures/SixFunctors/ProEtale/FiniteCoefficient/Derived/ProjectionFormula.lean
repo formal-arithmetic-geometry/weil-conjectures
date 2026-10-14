@@ -63,8 +63,8 @@ projection formula asserts that the former is an isomorphism on the relevant obj
 
 As in the blueprint, every stage is reduced to the étale projection formula along `ν^*`: the
 comparison carries the étale projection map of `Rg_*` to the pro-étale one
-(`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjectionComparison`) and `ν^*`
-commutes with extension by zero. The étale inputs are
+(`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjectionComparison`) and
+`ν^*` commutes with extension by zero. The étale inputs are
 `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite` at the finite
 stages (`sk-thm-sf-pf-finite`) and
 `AlgebraicGeometry.Etale.hasProjectionFormula_of_derivedCompleteIntegral` at the integral stage

@@ -12,8 +12,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 /-!
 # Étale sheaves of modules on the spectrum of a separably closed field
 
-This is the étale counterpart of `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.AlgClosedField`.
-Let `X` be a scheme isomorphic to `Spec K` for a separably closed field `K` (for instance an
+This is the étale counterpart of
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.AlgClosedField`. Let `X` be a scheme
+isomorphic to `Spec K` for a separably closed field `K` (for instance an
 algebraically closed one), and let `Λ` be a commutative ring. Taking sections over `X` is exact
 on étale sheaves of `Λ`-modules
 (`AlgebraicGeometry.Scheme.preservesEpimorphisms_sheafSections_of_iso`), so the constant sheaf

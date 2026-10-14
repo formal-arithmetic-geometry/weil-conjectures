@@ -16,8 +16,9 @@ monoidal, as the composite of the lax monoidal inclusion of sheaves into preshea
 evaluation at `U`, which is strictly monoidal for the pointwise tensor product of presheaves.
 The global sections functor `Γ` gets the transported structure along
 `Γ ≅ (G ↦ G(X))`. With these structures, the identifications `Γ(W, g_* G) ≅ Γ(Z, G)` and
-`Γ(Z, e^* G) ≅ Γ(W, G)` of `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections`
-are monoidal natural isomorphisms.
+`Γ(Z, e^* G) ≅ Γ(W, G)` of
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections` are monoidal
+natural isomorphisms.
 
 ## Main results
 

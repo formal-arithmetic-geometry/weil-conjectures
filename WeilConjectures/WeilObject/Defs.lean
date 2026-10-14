@@ -55,8 +55,8 @@ Two layers are provided, each with its forgetful functor to the underlying categ
 
 Since `e^*` is t-exact, a Weil complex induces for every `n` a Weil sheaf structure
 `e^* Hⁿ(K) ≅ Hⁿ(e^* K) ≅ Hⁿ(K)` on its `n`-th homology sheaf. This is packaged as the
-functor `AlgebraicGeometry.WeilObject.WeilComplex.homologyFunctor` into `AlgebraicGeometry.WeilObject.WeilSheaf`,
-built from the general transport of algebras
+functor `AlgebraicGeometry.WeilObject.WeilComplex.homologyFunctor` into
+`AlgebraicGeometry.WeilObject.WeilSheaf`, built from the general transport of algebras
 `CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIso` along the homology commutation isomorphism
 `CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso` of the exact functor `e^*`.
 

@@ -27,9 +27,9 @@ the total right derived functor of the pushforward `ḡ_*` of pro-étale Weil sh
 (`AlgebraicGeometry.ProEtaleWeilSheaf.rightDerivedLowerShriek`), for the compactification
 chosen by `AlgebraicGeometry.HasCompactification.compactification`. Forgetting the Weil
 structures it is the pro-étale `Rf̄_! = Rḡ_* ∘ ī_!` of
-`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek`. Since the Frobenius is built into the
-categories of pro-étale Weil sheaves, no transport of the compactification along the Frobenius
-is needed.
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek`. Since the Frobenius is
+built into the categories of pro-étale Weil sheaves, no transport of the compactification along the
+Frobenius is needed.
 
 That `Rf_!` carries Weil complexes to Weil complexes is the finiteness theorem for `Rf_!`
 (SGA 4½, *Th. finitude*), `AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedLowerShriek`,

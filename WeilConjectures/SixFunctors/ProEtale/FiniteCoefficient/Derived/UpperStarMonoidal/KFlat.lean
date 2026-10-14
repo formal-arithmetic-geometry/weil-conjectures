@@ -23,7 +23,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
   is K-flat, and `AlgebraicGeometry.ProEtale.isLeftDerivabilityStructure_kFlatUpperStar`:
   they form a left derivability structure.
 
-See `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMonoidal` for an overview.
+See `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMonoidal` for an
+overview.
 -/
 
 @[expose] public section
