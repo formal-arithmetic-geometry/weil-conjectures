@@ -102,6 +102,8 @@ Source: Stacks Project, Tag 0BK6, Lemma 13.31.5
 The degreewise product assumption is expressed as existence of the limits of the discrete
 family after evaluation in each integer degree. Mathlib's `coneOfHasLimitEval` constructs
 exactly the termwise product complex, with its induced differentials and projections.
+Unlike `HomotopyCategory.isLimitFanQuotient`, this statement does not assume that `C`
+has all products indexed by `T`: only the evaluated family must admit products.
 K-injectivity is the `IsKInjective` convention of `def-sp-kinjective-bridge`; the chosen
 localization universe is that of `def-weil-abstract-derived-category`.
 
@@ -128,7 +130,6 @@ theorem termwise_product_isKInjective_and_isLimit
     let P := HomologicalComplex.coneOfHasLimitEval (Discrete.functor I)
     IsKInjective P.pt ∧ Nonempty (IsLimit (DerivedCategory.Q.mapCone P)) := by
   classical
-  -- Only products of this evaluated family are assumed; no global product instance is needed.
   let P := HomologicalComplex.coneOfHasLimitEval (Discrete.functor I)
   let q := HomotopyCategory.quotient C (.up ℤ)
   let hP := HomologicalComplex.isLimitConeOfHasLimitEval (Discrete.functor I)
