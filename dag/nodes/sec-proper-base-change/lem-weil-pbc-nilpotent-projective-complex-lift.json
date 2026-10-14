@@ -25,9 +25,77 @@
   "def-weil-pbc-projective-module",
   "lem-pur-derived-change-of-rings"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Take $\\mathcal P$ to be the class of all projective $A$-modules. Using the lifting-along-surjections characterization in [def-weil-pbc-projective-module], a map out of $P_1\\oplus P_2$ lifts componentwise if both summands are projective; conversely a map out of a summand lifts by precomposing with the projection and restricting a lift. Thus $P_1$ and $P_1\\oplus P_2$ belong to $\\mathcal P$ if and only if $P_1,P_2$ do. If a module $T$ satisfies $T/IT=0$, then $T=IT=I^2T=\\cdots=I^NT=0$. For any map $u$ surjective modulo $I$, its cokernel $T$ satisfies $T/IT=0$: every target element is a sum of an image element and an element of $I$ times the target, so $T=IT$. Hence $u$ is surjective. This verifies hypotheses (1), (2), (3) of the general class lifting theorem without a finiteness hypothesis.",
+   "uses": [
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09AR, first three hypotheses of Tag 0BCA; nilpotent Nakayama argument written explicitly"
+   }
+  },
+  {
+   "text": "For each degree $i$, apply [lem-weil-pbc-nilpotent-projective-module-lift] to the projective $A/I$-module $E^i$ to choose a projective $A$-module $T_i$ with $T_i/IT_i\\cong E^i$. Together with the assumed boundedness above of $E^\\bullet$, these are exactly hypothesis (4) of the class lifting theorem. No choice of differentials on the $T_i$ is asserted.",
+   "uses": [
+    "lem-weil-pbc-nilpotent-projective-module-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09AR, hypothesis (4), citing Algebra Tag 07LV"
+   }
+  },
+  {
+   "text": "Choose $b\\in\\mathbf Z$ with $E^i=0$ for $i>b$. The formula $H^i(E)=\\ker(d^i)/\\operatorname{im}(d^{i-1})$ gives $H^i(E)=0$ in those degrees. The supplied derived isomorphism therefore gives $H^i(C\\otimes_A^{\\mathbf L}A/I)=0$ for $i>b$, since cohomology factors through the derived localization. Apply [lem-weil-pbc-nilpotent-derived-upper-bound] to obtain $H^i(C)=0$ for $i>b$.",
+   "uses": [
+    "lem-weil-pbc-nilpotent-derived-upper-bound",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09AR, hypothesis (5), using the upper-bound filtration argument of Tag 0H75"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-bounded-above-projective-model] to $C$ and the upper bound just obtained. It gives a complex $L^\\bullet$ of projective $A$-modules with $L^i=0$ for $i>b$ and $Q(L^\\bullet)\\cong C$. Thus hypothesis (5) of the general class lifting theorem holds; pseudo-coherence or finite Tor amplitude of $C$ has not been assumed.",
+   "uses": [
+    "lem-weil-pbc-bounded-above-projective-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09AR, hypothesis (5); Derived Categories Tag 0646"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-complex-lift-class-projective] with $R=A$, $K=C$, the given ideal $I$, the given complex $E^\\bullet$, and the class $\\mathcal P$ from step 1. The given derived reduction isomorphism supplies its initial datum; steps 1, 2, 4 verify all five hypotheses. Its conclusion supplies a bounded-above complex $P^\\bullet$ of projective $A$-modules representing $C$ and an isomorphism $P^\\bullet/IP^\\bullet\\cong E^\\bullet$ of complexes, precisely both required conclusions.",
+   "uses": [
+    "lem-sc-complex-lift-class-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09AR, application of Tag 0BCA, lemma-lift-complex"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-nilpotent-projective-module-lift",
+  "lem-weil-pbc-nilpotent-derived-upper-bound",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-bounded-above-projective-model",
+  "lem-sc-complex-lift-class-projective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09AR, lemma-lift-complex-projectives; upper-bound-only reading of Tag 0H75 made explicit in a separate input"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -84,10 +152,45 @@
    "results": "0 hits: ",
    "date": "2026-10-14",
    "verdict": "no match: ordinary resolutions and comparison maps between resolutions over one category do not lift a prescribed quotient complex; no nilpotent change-of-rings theorem found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a bounded above projective complex model of derived reduction modulo a nilpotent ideal",
+   "results": "{\"t\": \"2026-10-14T02:33:11Z\", \"tool\": \"leanfinder\", \"query\": \"Lift a bounded above projective complex model of derived reduction modulo a nilpotent ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.ofComplex\", \"CategoryTheory.ProjectiveResolution.liftFSucc\", \"CochainComplex.isKProjective_of_projective\", \"CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex\", \"CategoryTheory.ProjectiveResolution.complex\", \"ModuleCat.projectiveResolution\", \"CategoryTheory.ProjectiveResolution.of_def\", \"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\"], \"digest\": \"072a20ad344148a7\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: none of these statements lifts a specified projective quotient complex"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex whose derived tensor with a nilpotent quotient ring is bounded above is itself bounded above",
+   "results": "{\"t\": \"2026-10-14T02:33:24Z\", \"tool\": \"leanfinder\", \"query\": \"A complex whose derived tensor with a nilpotent quotient ring is bounded above is itself bounded above\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.isGE_iff\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\"], \"digest\": \"f8d7b3eb02697d54\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: none of these statements lifts a specified projective quotient complex"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nilpotent\", \"Complex\"",
+   "results": "{\"t\": \"2026-10-14T02:33:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"nilpotent\\\", \\\"Complex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: none of these statements lifts a specified projective quotient complex"
+  },
+  {
+   "tool": "grep",
+   "query": "IsNilpotent.*(Projective|Complex)|(Projective|Complex).*IsNilpotent",
+   "results": "{\"t\": \"2026-10-14T02:33:01Z\", \"tool\": \"grep\", \"query\": \"IsNilpotent.*(Projective|Complex)|(Projective|Complex).*IsNilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: none of these statements lifts a specified projective quotient complex"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift projective complexes and projective modules across nilpotent quotient rings",
+   "results": "{\"t\": \"2026-10-14T02:33:11Z\", \"tool\": \"leansearch\", \"query\": \"Lift projective complexes and projective modules across nilpotent quotient rings\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-pseudo-coherent-nilpotent-invariance",
   "by": "worker",
@@ -102,5 +205,39 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-nilpotent-projective-complex-lift",
+  "worker": "stage1",
+  "summary": "Checked Tag 09AR against the item, retained its statement, and verified the five hypotheses of the existing general projective-class lifting theorem. Three smaller inputs are stated separately: projective module lifting, upper bound detection by nilpotent derived reduction, and bounded-above projective models. Nilpotent Nakayama and closure under summands are explicit elementary arguments.",
+  "blueprint": "Realizes amplification-proper proof (c), TOW local-model input, through the recorded pseudo-coherence ancestry; retains the imported unit route.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-projective-module",
+    "why": "The generic projective lifting characterization verifies sums/summands; no unit-local definition replaces it."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Generic cohomology functors through localization justify transferring upper vanishing; this is a module-algebra input to TOW."
+   },
+   {
+    "node": "lem-sc-complex-lift-class-projective",
+    "why": "Generic class lifting theorem Tag 0BCA supplies the cone construction after all five hypotheses are established; no theorem of this unit states this more general algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-projective-module",
+  "def-weil-abstract-derived-category",
+  "lem-sc-complex-lift-class-projective"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-0defea0e2",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-0defea0e2 (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and cited statements; verified Stacks 09AR, 0BCA, 07LV, 0H75, 0645 and 0646. All five hypotheses hold, the upper-bound argument needs no finite Tor amplitude, and the quotient conclusion is an isomorphism of complexes. No duplicate or delivery-created cycle found. Accepted the generic class-lifting tool; recorded inherited dependency cycles and coefficient-category boundaries in review.md. No repairs needed."
  }
 }
