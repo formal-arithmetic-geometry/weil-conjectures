@@ -14350,3 +14350,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:51 L: merged deliver/U2/Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed (stage 3; reviewer PASS; first push; landing 20261014T025143-L-158581 (proof); batch 20261014T025133; modules 1; new nodes 0)
 - 02:51 L: merged deliver/U2/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T025143-L-158731 (proof); batch 20261014T025133; modules 1; new nodes 0)
 - 02:51 L: merged deliver/U2/Sheaf.RingTheory.ProjectiveResolutionExtDegree (stage 3; reviewer PASS; first push; landing 20261014T025144-L-158831 (proof); batch 20261014T025133; modules 1; new nodes 0)
+- 02:51 L: merged deliver/V1/Sheaf.AlgebraicGeometry.PerfectHomOpenTransportSquare (stage 3; reviewer PASS; after a return; landing 20261014T025144-L-158979 (interface); batch 20261014T025133; modules 1; new nodes 0; change records: coord/changes/perfect-hom-open-transport-square-imports.md)

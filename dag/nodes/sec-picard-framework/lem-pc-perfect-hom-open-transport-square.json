@@ -16,16 +16,31 @@
  },
  "proof": [
   {
-   "text": "The two composites B x_S T' -> Y x_S T of the open cartesian arrows and the base-change arrows agree by pullback.hom_ext, checking their first and second projections.",
+   "text": "Use import all PerfectHomTransport to reuse its proved private associativity and conjugated transport calculations cc_assoc, trTo_assoc, trTo_congr, and homMap_trTo. Prove the additional source-composition calculation trTo_comp_source from cc_assoc using its hom and inv components, functoriality and inverse cancellation. All helpers are proved, not new holes.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For h = baseChangeMap s g and k = baseChangeMap (B.ι ≫ s) g, prove b(T') ≫ h = k ≫ b(T) by pullback.hom_ext. The first projection follows from the supplied he equations and baseChangeMap_fst. The second follows from pullback.lift_snd and baseChangeMap_snd.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Paste the fixed derived pullback composition comparisons around that commuting square. Associativity equates the two paths, and naturality of sigma equates their final whiskered factors. Evaluate at M and Q, use functoriality and naturality to move pullback of f, and cancel inverse comparison components. Substituting the supplied comparison equations gives exactly the displayed Hom transport square.",
+   "text": "Define d(r,f) by transport along b(r) to the composite projection q(r) ≫ B.ι, then conjugate by perfectHomComposition q(r) B.ι. Apply trTo_assoc on the two paths around the cartesian square and trTo_congr to identify them. Apply trTo_comp_source to obtain d(T',perfectHomMap s g f) = perfectHomMap (B.ι ≫ s) g (d(T,f)).",
    "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition",
     "lem-pc-perfect-hom-transport",
-    "def-pc-derived-mayer-vietoris-canonical-data"
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Substitute κ(r) = κ₀(r). Expanding the displayed κ₀ shows its conjugated Hom map equals pullback(q(r)).map(σ.hom at M), followed by d(r,f), followed by pullback(q(r)).map(σ.inv at Q). Naturality of perfectHomComparison with respect to the two σ components and the preceding d compatibility finish the assertion. Only the stated restriction functor and adjunction are used; no push-pull representing cocone or perfectness result is needed.",
+   "uses": [
+    "def-pc-derived-mayer-vietoris-canonical-data",
+    "lem-pc-perfect-hom-transport"
    ],
    "elementary": false
   }
@@ -37,11 +52,11 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "E2",
+  "group": "V1",
   "date": "2026-10-14",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 079W, 08FE, 08BT, 0D5S; perfect.tex Tag 09RE",
-  "note": "Agent-written detailed argument for the cartesian open restriction step; source tags read on the Stacks website."
+  "place": "Tag 0D5S; perfect.tex Tag 09RE",
+  "note": "Repair X-84d86: import all PerfectHomTransport exposes the existing private transport calculations for direct reuse. All six duplicated theorem declarations and both duplicated private transport definitions are removed. Only source-composition compatibility and naturality helpers are added, all proved. No new holes or shared interface changes."
  },
  "mathlib_searches": [
   {
@@ -112,11 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E2",
+  "reviewer": "X-b6a41",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261014T010839-L-3162361",
+  "landing": "20261014T025144-L-158979",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged full theorem signature with the node and repository; checked proof steps, dependencies, pruning, and prior repair. Delivery and both direct importers compile cleanly; all four proved declarations use only the three allowed axioms."
  }
 }
