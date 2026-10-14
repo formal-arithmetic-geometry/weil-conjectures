@@ -1,0 +1,141 @@
+{
+ "id": "lem-sbc-dvr-generic-galois-normalization",
+ "kind": "statement",
+ "title": "Finite normal relative normalization of a generic Galois cover over a DVR",
+ "statement": "Let B and A be commutative DVR domains [def-sc-discrete-valuation-ring], K=Frac(B), and q:Spec A -> Spec B any morphism. Let E_i be finitely many finite Galois field extensions of K [def-weil-field, def-weil-vector-space-dimension]. Let p:X -> Spec K be isomorphic over Spec K to their spectra coproduct. Let j:Spec K -> Spec B be canonical and a=pullback.snd(p followed by j,q). For any quasi-compact and quasi-separated structure on a, its relative normalization [lem-weil-pbc-relative-normalization] has finite structural morphism to Spec A and every stalk is an integrally closed domain. Empty families and non-dominant q are allowed.",
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-field",
+  "def-weil-vector-space-dimension",
+  "lem-weil-pbc-relative-normalization"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 032L (finite separable integral closure), 033C (smooth ascent of normality), 035L (normal relative normalization) and 0307 (localization)."
+ },
+ "proof": [
+  {
+   "text": "Finite Galois extensions are finite separable, so their structural maps are etale. The finite coproduct is finite: lift the finite index to the ring universe, identify the coproduct of spectra with the spectrum of the finite product using sigmaSpec, and use finite-dimensionality of that product. Reindexing the coproduct and the given over-base isomorphism transport finiteness and etaleness to p.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Choose a uniformizer pi of B. Every nonzero element b of B is a unit times pi^n, hence divides some pi^n. Localization away from pi is therefore a fraction ring. Transport its localization structure to K, proving that j is an open immersion. Pullback pasting factors a as a finite etale morphism b followed by the open immersion g=pullback.snd(j,q). Identify g with the inclusion of its image open V to obtain a=c followed by V inclusion, with c finite etale.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The stalks of Spec A are normal by localization of the normal DVR A. On each affine open of Spec A apply finiteEtale_open_integralClosure_finite to the finite etale cover c of V. The relative normalization affine chart isomorphism normalizationObjIso and fromNormalization_app identify its structural map with this finite algebra map, so fromNormalization is finite.",
+   "uses": [
+    "lem-sbc-finite-etale-open-integral-closure",
+    "lem-weil-pbc-relative-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source of a is locally Noetherian because a is etale over the Noetherian Spec A. On standard smooth affine charts, normality of the base stalks gives normal base section rings. Smooth.isNormalRing gives normal prime localizations of the source chart rings, and the affine stalk-localization equivalence makes all source stalks normal domains.",
+   "uses": [
+    "lem-weil-pbc-smooth-over-normal-ring-normal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply relativeNormalization_normal_stalks to this locally Noetherian normal source and a. Combine its normal domain stalks with the preceding finiteness result. The existing theorems include empty sources and empty opens, so no nonemptiness assumption is introduced.",
+   "uses": [
+    "lem-sbc-relative-normalization-normal-stalks"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-finite-etale-open-integral-closure",
+  "lem-weil-pbc-relative-normalization",
+  "lem-weil-pbc-smooth-over-normal-ring-normal",
+  "lem-sbc-relative-normalization-normal-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "kind": "written-by-agent",
+  "agent": "V3",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 032L (finite separable integral closure), 033C (smooth ascent of normality), 035L (normal relative normalization) and 0307 (localization).",
+  "note": "Complete Lean proof; no sorry or additional axiom."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The normalization of a finite etale cover of an open subscheme of the spectrum of a discrete valuation ring is finite and has integrally closed domain stalks",
+   "results": "Service unavailable: Internal Server Error; msearch records the failed attempt.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative normalization of a discrete valuation ring in a finite etale cover of its generic point is finite and normal",
+   "results": "Scheme.Hom.instIsIntegralNormalization, instIsIntegralHomFromNormalization, instIsReducedNormalization and normalizationDesc.",
+   "date": "2026-10-14",
+   "verdict": "No finite-normal generic-cover theorem; existing project finiteEtale_open_integralClosure_finite and relativeNormalization_normal_stalks provide the needed general tools."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*IsFinite|isFinite.*Normalization|finite.*integralClosure",
+   "results": "Mathlib Normalization supplies integralness, not finiteness; project FiniteEtaleOpenIntegralClosure and RelativeNormalizationNormalStalks cover finiteness and normality separately.",
+   "date": "2026-10-14",
+   "verdict": "No exact Mathlib match; assemble from existing project declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DvrGaloisComponentsStalkPrincipal",
+  "date": "2026-10-14",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case: the normalized tame cover, root charts, and the local DVR calculation; Finite normal relative normalization of a generic Galois cover over a DVR",
+   "via": [
+    "lem-sbc-dvr-galois-components-stalk-principal",
+    "lem-sbc-dvr-galois-components-root-cotangent",
+    "lem-sbc-dvr-root-normalization-maximal-ideal",
+    "lem-sbc-root-normalization-root-not-square",
+    "lem-sbc-root-normalization-cotangent-root"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.DvrGenericGaloisNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DvrGenericGaloisNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.dvr_generic_galois_normalization",
+  "statement": "theorem dvr_generic_galois_normalization\n    (B A : CommRingCat.{u}) [IsDomain B] [IsDiscreteValuationRing B]\n    [IsDomain A] [IsDiscreteValuationRing A]\n    (q : Spec A ⟶ Spec B)\n    (r : ℕ) (E : Fin r → Type u) [∀ i, Field (E i)]\n    [∀ i, Algebra (FractionRing B) (E i)]\n    (hE : ∀ i, FiniteDimensional (FractionRing B) (E i) ∧\n      IsGalois (FractionRing B) (E i))\n    (X : Scheme.{u}) (p : X ⟶ Spec (CommRingCat.of (FractionRing B)))\n    (e : X ≅ ∐ fun i : Fin r ↦ Spec (CommRingCat.of (E i)))\n    (he : e.hom ≫ Sigma.desc (fun i : Fin r ↦\n      Spec.map (CommRingCat.ofHom (algebraMap (FractionRing B) (E i)))) = p) :\n    let j := Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B)))\n    let a := pullback.snd (p ≫ j) q\n    ∀ (hqc : QuasiCompact a) (hqs : QuasiSeparated a),\n    letI := hqc\n    letI := hqs\n    IsFinite a.fromNormalization ∧\n      ∀ x : a.normalization, IsDomain (a.normalization.presheaf.stalk x) ∧\n        IsIntegrallyClosed (a.normalization.presheaf.stalk x)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261014T020519-L-3814608",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261014T020519-L-3814608",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

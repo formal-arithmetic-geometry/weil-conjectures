@@ -15,18 +15,41 @@
  },
  "proof": [
   {
-   "text": "Proof: For n > 1, Tag 09EV identifies A with the DVR obtained by adjoining a\nuniformizer root; for n = 1 evaluation identifies A with B. Inverting pi in A\ninverts its root, so the generic fibre is Spec Frac(A). Pulling the given\ncoproduct across this fibre gives the spectra of E_i tensor_K Frac(A).\nEach is a finite product of finite separable field extensions of Frac(A),\nsince E_i/K is finite Galois. The integral closure of the DVR A in each\nfield factor is finite over A (the separable trace pairing bounds it by a\nfinite free lattice), and is a normal one-dimensional Noetherian ring.\nIts local rings above the closed point are DVRs, by Tag 00PD, and have\nprincipal maximal ideals. Relative normalization of these affine factors\nis their integral closure; localization commutes with integral closure\nby Tag 0307. Normalization respects the finite disjoint union and the\nspecified over-base isomorphism, so the actual stalk C at x is one of\nthese local rings. Its maximal ideal is therefore principal. An empty\ncoproduct has no x. No invertibility or degree bound on n is needed.",
+   "text": "Apply dvr_uniformizer_root_algebra to A=B[T]/(T^n-pi), obtaining domainhood, DVR structure and m_A=(t). This handles n=1 by the same Eisenstein proof.",
+   "uses": [
+    "lem-sbc-dvr-uniformizer-root-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply dvr_generic_galois_normalization to the displayed base change. Its structural normalization morphism is finite and its stalk C at x is a normal domain. Finiteness over the Noetherian Spec A makes the normalized scheme locally Noetherian, so C is Noetherian.",
+   "uses": [
+    "lem-sbc-dvr-generic-galois-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The root-prime condition identifies the image prime s with m_A=(t), which is nonzero because A is a DVR. Its prime localization is a DVR by Mathlib IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain. Spec.stalkIso transports this to the actual base stalk R.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The finite normalization morphism has quasi-finite stalk map R -> C. The comap on prime spectra is strictly monotone: comparable primes with equal contractions are equal by Algebra.QuasiFinite.eq_of_le_of_under_eq. Hence dim(C) <= dim(R)=1. The normal Noetherian domain C is therefore a Dedekind domain. Since C is local, Mathlib maximalIdeal_isPrincipal_of_isDedekindDomain proves that its maximal ideal is principal.",
    "uses": [],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-dvr-uniformizer-root-algebra",
+  "lem-sbc-dvr-generic-galois-normalization"
+ ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "kind": "written-by-agent",
-  "agent": "J3",
-  "document": "Stacks Project",
-  "place": "Tags 09EV, 09E8, 00PD and 0307"
+  "agent": "V3",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 09EV, 032L, 035L, 0307 and 00PD",
+  "note": "Complete Lean proof from two fully proved new lemmas; #print axioms gives only propext, Classical.choice and Quot.sound for all three public theorems."
  },
  "mathlib_searches": [
   {
@@ -100,9 +123,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261014T010845-L-3164649",
+  "landing": "20261014T020519-L-3814608",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
