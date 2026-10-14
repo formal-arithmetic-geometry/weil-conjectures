@@ -11,6 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Order.Antisymmetrization
+import Sheaf.AlgebraicGeometry.AffineChartSectionRingPresentations
+import WeilConjectures.AlgebraicGeometry.Modules.FaithfullyFlatDescent
+import Sheaf.AlgebraicGeometry.AffineIsomorphicSourceNormalizedModels
 
 /-! # Normalized section models for affine upper-tail charts
 
@@ -26,6 +29,119 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+
+namespace Scheme.Modules
+
+private lemma affine_model_qc_pushforward_iso {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [IsIso f] (M : X.Modules) [M.IsQuasicoherent] :
+    ((pushforward f).obj M).IsQuasicoherent := by
+  let A := (pushforward f).obj M
+  let e : A ≅ M.restrict (inv f) :=
+    (restrictFunctorId.app A).symm ≪≫
+      (restrictFunctorCongr (IsIso.inv_hom_id f)).symm.app A ≪≫
+      (restrictFunctorComp (inv f) f).app A ≪≫
+      (restrictFunctor (inv f)).mapIso ((restrictFunctorAdjCounitIso f).app M)
+  exact (SheafOfModules.isQuasicoherent Y.ringCatSheaf).prop_of_iso e.symm inferInstance
+
+/-- Morphisms out of a quasi-coherent module on an affine scheme are determined by their effect
+on global sections. -/
+private lemma affine_model_hom_ext
+    {X : Scheme.{u}} [IsAffine X] {M N : X.Modules} [M.IsQuasicoherent]
+    {α β : M ⟶ N} (h : ∀ m : Γ(M, ⊤), α.app ⊤ m = β.app ⊤ m) :
+    α = β := by
+  have := affine_model_qc_pushforward_iso X.toSpecΓ M
+  apply (pushforward X.toSpecΓ).map_injective
+  exact hom_ext_of_isQuasicoherent_Spec h
+
+/-- A `Γ(X, ⊤)`-linear map between the global sections of quasi-coherent modules on an affine
+scheme comes from a morphism of modules. -/
+private lemma affine_model_hom_exists
+    {X : Scheme.{u}} [IsAffine X] {M N : X.Modules}
+    [M.IsQuasicoherent] [N.IsQuasicoherent] (χ : Γ(M, ⊤) →ₗ[Γ(X, ⊤)] Γ(N, ⊤)) :
+    ∃ φ : M ⟶ N, ∀ m : Γ(M, ⊤), φ.app ⊤ m = χ m := by
+  have := affine_model_qc_pushforward_iso X.toSpecΓ M
+  have := affine_model_qc_pushforward_iso X.toSpecΓ N
+  obtain ⟨φ', hφ'⟩ := exists_hom_app_top_eq' (M := (pushforward X.toSpecΓ).obj M)
+    (N := (pushforward X.toSpecΓ).obj N) χ.toAddMonoidHom fun a m ↦ by
+      have key (P : X.Modules) (x : Γ((pushforward X.toSpecΓ).obj P, ⊤)) :
+          ((ΓSpecIso Γ(X, ⊤)).inv ≫ (Spec Γ(X, ⊤)).presheaf.map
+            (homOfLE (le_top : (⊤ : (Spec Γ(X, ⊤)).Opens) ≤ ⊤)).op).hom a • x =
+            (a • (show Γ(P, ⊤) from x) : Γ(P, ⊤)) := by
+        have h1 := congr(Hom.app
+          $(pushforward_map_smulHom X.toSpecΓ P ((ΓSpecIso Γ(X, ⊤)).inv a)) ⊤ x)
+        rw [pushforward_map_app, smulHom_app_apply] at h1
+        refine h1.symm.trans ?_
+        erw [smulHom_app_apply]
+        have h2 : X.toSpecΓ.appTop ((ΓSpecIso Γ(X, ⊤)).inv a) = a := by
+          rw [← CommRingCat.comp_apply, toSpecΓ_appTop, Iso.inv_hom_id]
+          rfl
+        rw [h2, show (homOfLE (le_top : X.toSpecΓ ⁻¹ᵁ (⊤ : (Spec Γ(X, ⊤)).Opens) ≤ ⊤)).op = 𝟙 _
+          from Subsingleton.elim _ _, CategoryTheory.Functor.map_id]
+        rfl
+      exact (congrArg χ (key M m)).trans ((χ.map_smul a m).trans (key N (χ m)).symm)
+  refine ⟨(pushforward X.toSpecΓ).preimage φ', fun m ↦ ?_⟩
+  have := congr(Hom.app $((pushforward X.toSpecΓ).map_preimage φ') ⊤ m)
+  exact this.trans (hφ' m)
+
+
+end Scheme.Modules
+
+/-- Conjugating section coordinates transports the affine Hom equivalence. -/
+private theorem affine_hom_of_section_coordinates
+    {X : Scheme.{u}} [IsAffine X] {S : CommRingCat.{u}}
+    (ρ : S ≃+* Γ(X, ⊤)) (P Q : ModuleCat.{u} S)
+    (M N : X.Modules) [M.IsQuasicoherent] [N.IsQuasicoherent]
+    (eM : P ≃+ Γ(M, ⊤)) (eN : Q ≃+ Γ(N, ⊤))
+    (hM : ∀ b z, eM (b • z) = ρ b • eM z)
+    (hN : ∀ b z, eN (b • z) = ρ b • eN z) :
+    ∃ α : (P ⟶ Q) ≃ (M ⟶ N),
+      ∀ f z, (α f).app ⊤ (eM z) = eN (f z) := by
+  classical
+  have hMs (b : S) (z : Γ(M, ⊤)) :
+      eM.symm (ρ b • z) = b • eM.symm z := by
+    apply eM.injective
+    rw [eM.apply_symm_apply, hM, eM.apply_symm_apply]
+  let ψ : (M ⟶ N) → (P ⟶ Q) := fun f ↦ ModuleCat.ofHom
+    { toFun := fun z ↦ eN.symm (f.app ⊤ (eM z))
+      map_add' := by intro z w; simp only [map_add]
+      map_smul' := by
+        intro b z
+        apply eN.injective
+        rw [eN.apply_symm_apply, hN, eN.apply_symm_apply, hM,
+          Scheme.Modules.Hom.app_smul]
+        rfl }
+  have hψ : Function.Bijective ψ := by
+    constructor
+    · intro f g hfg
+      apply Scheme.Modules.affine_model_hom_ext
+      intro z
+      obtain ⟨w, rfl⟩ := eM.surjective z
+      have h := congrArg (fun k : P ⟶ Q ↦ eN (k w)) hfg
+      change eN (eN.symm (f.app ⊤ (eM w))) =
+        eN (eN.symm (g.app ⊤ (eM w))) at h
+      simpa only [eN.apply_symm_apply] using h
+    · intro f
+      let χ : Γ(M, ⊤) →ₗ[Γ(X, ⊤)] Γ(N, ⊤) :=
+        { toFun := fun z ↦ eN (f (eM.symm z))
+          map_add' := by intro z w; simp only [map_add]
+          map_smul' := by
+            intro b z
+            obtain ⟨a, rfl⟩ := ρ.surjective b
+            rw [hMs, map_smul, hN]
+            rfl }
+      obtain ⟨g, hg⟩ := Scheme.Modules.affine_model_hom_exists χ
+      refine ⟨g, ?_⟩
+      ext z
+      change eN.symm (g.app ⊤ (eM z)) = f z
+      rw [hg]
+      change eN.symm (eN (f (eM.symm (eM z)))) = f z
+      simp only [eM.symm_apply_apply, eN.symm_apply_apply]
+  let E := Equiv.ofBijective ψ hψ
+  refine ⟨E.symm, ?_⟩
+  intro f z
+  have h := congrArg (fun k : P ⟶ Q ↦ eN (k z)) (E.apply_symm_apply f)
+  change eN (eN.symm ((E.symm f).app ⊤ (eM z))) = eN (f z) at h
+  simpa only [eN.apply_symm_apply] using h
 
 /-- Object reconstruction and full faithfulness in normalized section coordinates.
 Source: Stacks Project, Tag 01ZR (affine proof), and Tag 01I6.
@@ -148,6 +264,50 @@ theorem affine_chart_normalized_section_models
             pullbackΓ (U.pullbackHom q a) N (δN m)) ∧
           (∀ s z, (β s).app ⊤ (eₓM z) = eₓN (s z)) ∧
           IsAffine (Uk.X a) ∧
-          (∀ b, v.appTop (ρ₀ (r₁ b)) = (Uk.pullbackHom p a).appTop (ρₓ b)) := by sorry
+          (∀ b, v.appTop (ρ₀ (r₁ b)) = (Uk.pullbackHom p a).appTop (ρₓ b)) := by
+  classical
+  intro rep g F t B P Q r₀ q₀
+  let kₜ := rep.obj t
+  let s := pullback.snd (Spec.map (R.map (homOfLE kₜ.property))) g
+  have geometry := affine_chart_section_ring_presentations R c hc i f j hij U a ha
+  have : IsIso s := geometry.1
+  have : IsAffine (U.X a) := ha
+  have : M.IsQuasicoherent := hMq
+  have : N.IsQuasicoherent := hNq
+  let ρ₀ := geometry.2.2.choose
+  have hρ₀ := geometry.2.2.choose_spec
+  have models := affine_isomorphic_source_normalized_models s M N hMq hNq
+  let δM := models.choose
+  let δN := models.choose_spec.choose
+  have H := models.choose_spec.choose_spec
+  have model₀ := H _ geometry.2.1 (U.pullbackHom q₀ a) (colimit F) r₀ ρ₀ hρ₀.1
+  let e₀M := model₀.choose
+  let e₀N := model₀.choose_spec.choose
+  have h₀ := model₀.choose_spec.choose_spec
+  have : IsAffine ((U.pullback₁ q₀).X a) := geometry.2.1
+  have hom₀ := affine_hom_of_section_coordinates ρ₀ _ _ _ _ e₀M e₀N h₀.1 h₀.2.1
+  let α := hom₀.choose
+  refine ⟨δM, δN, ρ₀.toRingHom, e₀M, e₀N, α,
+    h₀.1, h₀.2.1, h₀.2.2.1, h₀.2.2.2, hom₀.choose_spec, ?_⟩
+  intro x htx
+  have stage := hρ₀.2 x htx
+  let ρₓ := stage.choose
+  have hρₓ := stage.choose_spec
+  let hjk := (rep.obj x).property
+  let q := baseChangeMap f
+    (T := Over.mk (Spec.map (R.map (homOfLE hij))))
+    (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))
+    (Over.homMk (Spec.map (R.map (homOfLE hjk)))
+      (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))
+  let r := (F.map (homOfLE htx)).hom
+  have modelₓ := H _ hρₓ.2.1 (U.pullbackHom q a) (F.obj x) r ρₓ hρₓ.1
+  let eₓM := modelₓ.choose
+  let eₓN := modelₓ.choose_spec.choose
+  have hₓ := modelₓ.choose_spec.choose_spec
+  have : IsAffine ((U.pullback₁ q).X a) := hρₓ.2.1
+  have homₓ := affine_hom_of_section_coordinates ρₓ _ _ _ _ eₓM eₓN hₓ.1 hₓ.2.1
+  let β := homₓ.choose
+  exact ⟨ρₓ.toRingHom, eₓM, eₓN, β,
+    hₓ.1, hₓ.2.1, hₓ.2.2.1, hₓ.2.2.2, homₓ.choose_spec, hρₓ.2.1, hρₓ.2.2⟩
 
 end AlgebraicGeometry

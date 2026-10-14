@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-affine-chart-section-ring-presentations",
+ "kind": "statement",
+ "title": "Ring presentations of affine upper-tail charts",
+ "statement": "Let $I$ be a directed preorder, $R:I\\to\\mathbf{CRing}$, and let $c$ be a limiting cone of $R^{\\mathrm{op}}\\circ\\operatorname{Spec}$ whose vertex is affine [def-pc-scheme, def-weil-affine-spectrum]. Let $i\\le j$, $f:X_i\\to\\operatorname{Spec}R(i)$, and let $U$ cover its $j$-base change with affine chart $A=U(a)$ [def-pc-base-change, def-pc-fibre-product]. Let rep choose representatives of the antisymmetrization of the upper tail $j\\le k$, let $t$ be the class of $j$, let $g:A\\to\\operatorname{Spec}R(j)$ be the second projection, and let $F=\\mathrm{rep}\\circ\\mathrm{upperTailChartDiagram}(R,j,g)^{\\mathrm{rightOp}}\\circ\\Gamma$ [new-affine-chart-upper-tail-limit-data]. Put $s:\\operatorname{Spec}R(\\mathrm{rep}(t))\\times_{\\operatorname{Spec}R(j)} A\\to A$ and $r_0:F(t)\\to\\operatorname{colim}F$ the colimit inclusion. Then s is an isomorphism and the direct limit cover chart $W_0=(U.\\mathrm{pullback}_1(q_0))(a)$ is affine. There is a ring isomorphism $\\rho_0:\\operatorname{colim}F\\simeq\\Gamma(W_0)$ with $\\rho_0(r_0(s^\\sharp(b)))=q_{0,a}^\\sharp(b)$ for $b\\in\\Gamma(A)$. For every $x\\ge t$, let $k=\\mathrm{rep}(x)$, let $q$ be the base-change map from stage $k$ to stage $j$, let $p$ be the map from the limit to stage $k$, let $r=F(t\\to x)$ and $r_1:F(x)\\to\\operatorname{colim}F$, and set $U_k=U.\\mathrm{pullback}_1(q)$, $V=U_k.\\mathrm{pullback}_1(p)$. There is a ring isomorphism $\\rho_x:F(x)\\simeq\\Gamma(U_k(a))$ with $\\rho_x(r(s^\\sharp(b)))=q_a^\\sharp(b)$ for all b, and $U_k(a)$ is affine. For the canonical lift $v:V(a)\\to W_0$, the identity $v^\\sharp(\\rho_0(r_1(b)))=p_a^\\sharp(\\rho_x(b))$ holds for every $b\\in F(x)$. All maps and their pullback lifts are the literal ones in lean.statement. There is no assertion about modules.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01ZR (lemma-descend-modules-finite-presentation), first affine proof; Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit); Tags 0095 and 0096"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-pc-base-change",
+  "new-affine-chart-upper-tail-limit-data"
+ ],
+ "proof": [
+  {
+   "text": "The representative of t is equivalent to j in the upper-tail preorder, so the transition arrow is an isomorphism, as is its image under R and Spec. Pullback of that isomorphism gives IsIso s.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply upperTailChartCone_isLimit. The representative functor is an equivalence of preorder categories with inverse the quotient functor; reindex the cone along it. Every chart and vertex is affine by affine base change. Compare the reindexed cone with Spec of the chosen colimit cocone of F. The spectrum/global-sections equivalence and uniqueness of limits give the vertex ring isomorphism.",
+   "uses": [
+    "new-affine-chart-upper-tail-limit-data",
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pullback pasting identifies the cone vertex with W0 and its stage x with Uk(a), compatibly with the projections to A. Apply global sections to these isomorphisms to define ρ0,ρx. The projection equations give the two identities on s.appTop(b). On V(a), the cone compatibility at x and the two projection equations for the pasting maps give v.appTop(ρ0(r1(b))) = (Uk.pullbackHom p a).appTop(ρx(b)).",
+   "uses": [
+    "def-pc-fibre-product",
+    "new-affine-chart-upper-tail-limit-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "new-affine-chart-upper-tail-limit-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q4",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tag 01ZR affine first proof: module-independent chart and ring identifications in step 1 of lem-pc-affine-chart-normalized-section-models"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine scheme global sections pullback tensor product equivalence",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine scheme limits global sections colimit ring pullback charts compatible cocone",
+   "results": "Eight hits, including nonempty_isColimit_Γ_mapCocone and exists_appTop_π_eq_of_isAffine_of_isLimit in Mathlib.AlgebraicGeometry.AffineTransitionLimit. These give the colimit ring mechanism, not the simultaneous pullback-pasting equations.",
+   "verdict": "supporting APIs only",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "upperTailChartCone|isColimit.*[ΓG]|[ΓG].*isColimit|isColimit.*[Aa]ffine",
+   "results": "msearch returned general colimit APIs; local rg and node reads found upperTailChartCone_isLimit and Spec-small-colimit-limit. No duplicate chart ring presentation theorem.",
+   "verdict": "supporting APIs only",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineChartNormalizedSectionModels",
+  "date": "2026-10-14",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 01ZR affine first proof: module-independent chart and ring identifications in step 1 of lem-pc-affine-chart-normalized-section-models",
+   "via": [
+    "lem-pc-affine-chart-normalized-section-models",
+    "lem-pc-affine-chart-canonical-hom-naturality",
+    "lem-pc-affine-chart-ordinary-hom-comparison",
+    "lem-pc-affine-chart-ordinary-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineChartSectionRingPresentations",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineChartSectionRingPresentations.lean",
+  "declaration": "AlgebraicGeometry.affine_chart_section_ring_presentations",
+  "statement": "theorem affine_chart_section_ring_presentations\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    (j : I) (hij : i ≤ j)\n    (U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u})\n    (a : U.I₀) (ha : IsAffine (U.X a))\n    :\n    let rep := (OrderEmbedding.ofAntisymmetrization\n      (α := {k : I // j ≤ k})).monotone.functor\n    let g := U.f a ≫ pullback.snd f (Spec.map (R.map (homOfLE hij)))\n    let F := rep ⋙ (upperTailChartDiagram R j g).rightOp ⋙ Scheme.Γ\n    let t := toAntisymmetrization (· ≤ ·) (⟨j, le_rfl⟩ : {k : I // j ≤ k})\n    let kₜ := rep.obj t\n    let s := pullback.snd (Spec.map (R.map (homOfLE kₜ.property))) g\n    let r₀ := (colimit.ι F t).hom\n    let q₀ := baseChangeMap f\n      (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n      (T' := Over.mk (c.π.app (op i)))\n      (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))\n    IsIso s ∧ IsAffine ((U.pullback₁ q₀).X a) ∧\n    ∃ (ρ₀ : ↑(colimit F) ≃+* Γ((U.pullback₁ q₀).X a, ⊤)),\n      (∀ b, ρ₀ (r₀ (s.appTop b)) = (U.pullbackHom q₀ a).appTop b) ∧\n      ∀ (x : Antisymmetrization {k : I // j ≤ k} (· ≤ ·)) (htx : t ≤ x),\n        let k := (rep.obj x).val\n        let hjk := (rep.obj x).property\n        let q := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n          (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n          (Over.homMk (Spec.map (R.map (homOfLE hjk)))\n            (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))\n        let p := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n          (T' := Over.mk (c.π.app (op i)))\n          (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op))\n        let q₀ := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n          (T' := Over.mk (c.π.app (op i)))\n          (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))\n        let w : p ≫ q = q₀ := by\n          rw [← baseChangeMap_comp]\n          congr 1\n          ext\n          simpa using c.w (homOfLE hjk).op\n        let r := (F.map (homOfLE htx)).hom\n        let r₁ := (colimit.ι F x).hom\n        let Uk : (pullback f (Spec.map\n          (R.map (homOfLE (hij.trans hjk))))).OpenCover.{u} := U.pullback₁ q\n        let V : (pullback f (c.π.app (op i))).OpenCover.{u} := Uk.pullback₁ p\n        let v : V.X a ⟶ (U.pullback₁ q₀).X a := pullback.lift (V.f a)\n          (Uk.pullbackHom p a ≫ U.pullbackHom q a)\n          (by\n            dsimp only [V]\n            rw [Category.assoc, U.pullbackHom_map,\n              ← Category.assoc, Uk.pullbackHom_map, Category.assoc, w])\n        ∃ (ρₓ : ↑(F.obj x) ≃+* Γ((U.pullback₁ q).X a, ⊤)),\n          (∀ b, ρₓ (r (s.appTop b)) = (U.pullbackHom q a).appTop b) ∧\n          IsAffine (Uk.X a) ∧\n          (∀ b, v.appTop (ρ₀ (r₁ b)) = (Uk.pullbackHom p a).appTop (ρₓ b))",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261014T001730-L-2553958",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261014T001730-L-2553958",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

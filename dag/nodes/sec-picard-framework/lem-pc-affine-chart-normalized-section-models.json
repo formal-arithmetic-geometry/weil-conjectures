@@ -16,36 +16,40 @@
  ],
  "proof": [
   {
-   "text": "The starting representative is equivalent to j, hence its spectrum map and its pulled-back second projection are isomorphisms. Inverting the section pullback unit gives δM and δN. Apply upperTailChartCone_isLimit and reindex along the quotient-tail equivalence. Affine base change makes every stage and vertex affine. Affine spectrum/global-sections duality identifies the vertex ring with colimit F. Pullback pasting identifies the vertex and stage charts with W₀(a) and Wₓ(a), giving ρ₀ and ρₓ. The cocone equation gives their displayed compatibility on V(a).",
+   "text": "Obtain IsIso s, affineness of the limit chart, and its ring presentation ρ0 from affine_chart_section_ring_presentations. Apply affine_isomorphic_source_normalized_models once to s,M,N, obtaining fixed δM,δN and a model function H for every affine destination. Apply H to the limit chart using the ring compatibility from the first theorem. This constructs e0M,e0N and the four scalar and unit identities.",
    "uses": [
-    "new-affine-chart-upper-tail-limit-data",
-    "def-pc-fibre-product"
+    "lem-pc-affine-chart-section-ring-presentations",
+    "lem-pc-affine-isomorphic-source-normalized-models"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use affine quasi-coherent reconstruction and the unit-normalized scalar-extension/pullback identification at the starting chart, each stage and the vertex. Transport across the chart and ring isomorphisms from step 1. This gives the additive section equivalences, their semilinearity and their common unit normalizations. Fully faithfulness of affine reconstruction gives α and β, acting sectionwise by conjugation with these equivalences.",
+   "text": "For x≥t, obtain ρx, affineness and the two ring compatibility identities from affine_chart_section_ring_presentations. Apply the same function H, hence with exactly the same δM,δN, to the stage chart and r=F(t→x). This gives exM,exN and their four identities. Forget invertibility of ρ0 and ρx to obtain the ring homomorphisms in the original conclusion.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-tilde-pullback-base-change",
-    "pqf-def-coherent"
+    "lem-pc-affine-chart-section-ring-presentations",
+    "lem-pc-affine-isomorphic-source-normalized-models"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Construct α and β from the already proved affine reconstruction Hom equivalence, using the private affine_hom_of_section_coordinates. A sheaf morphism is sent to eN.inverse composed with its top-section map composed with eM. Conversely conjugate a module morphism by eM.inverse and eN; surjectivity of the ring isomorphism gives linearity over the chart section ring. The affine Hom existence and uniqueness lemmas prove this function is bijective. Its inverse is the required Hom equivalence, and its inverse identity is precisely the required section formula. Package these Hom equivalences with the scalar models, the affine stage proof and the iterated-chart ring identity.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-tilde-pullback-base-change",
-  "new-affine-chart-upper-tail-limit-data",
-  "pqf-def-coherent"
+  "lem-pc-affine-chart-section-ring-presentations",
+  "lem-pc-affine-isomorphic-source-normalized-models",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "R2",
+  "group": "Q4",
   "date": "2026-10-14",
   "document": "Stacks Project",
-  "place": "Steps 1–2 of lem-pc-affine-chart-canonical-hom-naturality, expanded in normalized tensor coordinates."
+  "place": "Tag 01ZR affine first proof and Tag 01I6; explicit two-part reduction preserving the original normalized section models statement."
  },
  "mathlib_searches": [
   {
@@ -114,12 +118,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261013T231542-L-1820031",
+  "landing": "20261014T001730-L-2553958",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
