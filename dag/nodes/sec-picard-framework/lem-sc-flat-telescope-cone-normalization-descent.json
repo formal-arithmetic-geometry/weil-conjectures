@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-flat-telescope-cone-normalization-descent",
+ "kind": "statement",
+ "title": "Cone extension and descent of supplied normalized sum maps",
+ "statement": "Let f : Z → Y be a proper morphism of Noetherian schemes [def-weil-proper-morphism], with derived categories in a common universe [def-pc-derived-category], a supplied strong monoidal structure on F=Lf* [def-pc-derived-pullback, def-pc-scheme-derived-tensor-structure], and additive termwise pullback H [def-pc-module-pullback]. Write L=Q_Y⋙F, G=H^h⋙Q_Z, B=boundedFlatShiftRepresentative [def-sc-bounded-flat-shift-representative], T=flatTelescopeShiftRepresentative [def-sc-flat-telescope-stage-map]. Fix e:F(1_Y[1])≅1_Z[1] and b_e(X)=F(c_Y(Q_Y X)^(-1));δ_F(1_Y[1],Q_Y X);(e⊗id);c_Z(F(Q_Y X)), using [def-sc-scheme-canonical-shift-unit-iso]. Let β_X:LX≅GX for X∈B be natural for all homotopy maps between B objects. For every bounded-flat tower E with stagewise upper bounds, supply morphisms σ₀(E):L(q(⊕E))→G(q(⊕E)) and σ₁(E):L(q(⊕E)[1])→G(q(⊕E)[1]). Assume for every stage n their precomposites with L(qι_n) and L(qι_n[1]) are respectively β_(qE_n);G(qι_n) and β_(qE_n[1]);G(qι_n[1]). Assume both σ families are natural for Sigma.map of every family of stage maps between bounded-flat towers. Assume σ₁(E);commShift_G(q⊕E)=b_e(q⊕E);σ₀(E)[1]. Then there exist α_X:LX→GX for X∈T, natural for stage maps [def-sc-flat-telescope-stage-map], equal to β_X.hom for every X∈T∩B, and satisfying α_(qP[1]);commShift_G(qP)=b_e(qP);α_(qP)[1] for each literal flat telescope P. This lemma supplies neither the sum maps nor their compatibility equations.",
+ "source": {
+  "document": "dag/nodes/sec-picard-framework/lem-sc-flat-telescope-normalization-morphisms.json; Stacks Tags 06YS and 06YJ",
+  "place": "Cone extension and descent of supplied normalized sum maps in steps 1--2 of the inherited agent expansion, not a literal assertion of the tags."
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-module-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-sc-scheme-canonical-shift-unit-iso",
+  "def-sc-scheme-canonical-tensor-shift",
+  "def-weil-proper-morphism",
+  "def-sc-bounded-flat-shift-representative",
+  "def-sc-flat-telescope-stage-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply supplied naturality on the stage sums to one minus transition. Resolve the arrow square with flat complexes and compatible homotopies; form its explicit mapping cone using σ₀ and its shifted counterpart σ₁. The supplied sum shift equation identifies the connecting component with the fixed translated-unit formula. The resulting comparisons are natural for maps of towers, by applying the same arrow-diagram construction to the tower-map square.",
+   "uses": [
+    "def-sc-flat-telescope-stage-map",
+    "lem-pc-kflat-closure",
+    "def-pc-derived-pullback",
+    "def-sc-scheme-canonical-shift-unit-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Common flat arrow-diagram refinements compare presentations. Their localized augmentations are invertible, so cancellation identifies transported cone maps and gives stage naturality, including integer translates and homotopy-isomorphism transports. Compare a bounded representative with its constant-tower presentation: coprojection formulas and bounded naturality give agreement with β. Translate the resolved cone square and use the supplied sum shift equality to obtain the telescope shift equality, with the unchanged e.",
+   "uses": [
+    "lem-sc-flat-telescope-stage-map-refinement",
+    "def-sc-flat-telescope-stage-map",
+    "def-sc-scheme-canonical-shift-unit-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-sc-flat-telescope-stage-map",
+  "def-sc-scheme-canonical-shift-unit-iso",
+  "lem-pc-kflat-closure",
+  "lem-sc-flat-telescope-stage-map-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E1",
+  "date": "2026-10-14",
+  "document": "dag/nodes/sec-picard-framework/lem-sc-flat-telescope-normalization-morphisms.json",
+  "place": "Cone extension and descent of supplied normalized sum maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extend supplied normalized comparison morphisms on countable sums of flat complexes across mapping telescope cones using common refinements",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural comparison of mapping telescope cones from shift compatible morphisms on countable direct sums of bounded above flat complexes",
+   "date": "2026-10-14",
+   "results": "8 hits: CochainComplex.mappingCone.mapHomologicalComplexXIso_eq, CochainComplex.mappingCone.mapHomologicalComplexXIso, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, HomologicalComplex.coneOfHasLimitEval_pt_d, HomotopyCategory.spectralObjectMappingCone_ω₁, CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.mappingCone.map_δ, CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat",
+   "verdict": "No exact theorem for the recorded scheme-derived comparison; generic APIs used in the proof where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.*[Nn]atur|[Nn]atur.*mappingCone",
+   "date": "2026-10-14",
+   "results": "4 hits: Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean, Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean",
+   "verdict": "No exact theorem for the recorded scheme-derived comparison; generic APIs used in the proof where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatTelescopeNormalizationMorphisms",
+  "date": "2026-10-14",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Sum and cone construction in the inherited normalization expansion of lem-sc-finite-duality; Cone extension and descent of supplied normalized sum maps",
+   "via": [
+    "lem-sc-flat-telescope-normalization-morphisms",
+    "lem-sc-flat-telescope-bounded-normalization-extension",
+    "lem-sc-flat-telescope-model-shift-gauge",
+    "lem-sc-flat-telescope-shift-gauge",
+    "lem-sc-normalized-flat-telescope-stage-comparison",
+    "lem-sc-normalized-flat-telescope-comparison",
+    "lem-sc-normalized-kflat-representative-comparison",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatTelescopeConeNormalizationDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeConeNormalizationDescent.lean",
+  "declaration": "AlgebraicGeometry.exists_flat_telescope_cone_normalization_descent",
+  "statement": "theorem exists_flat_telescope_cone_normalization_descent\n    {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [Functor.Monoidal (derivedPullback f)]\n    [(Scheme.Modules.tensorPullback f).Additive]\n    (e : (derivedPullback f).obj ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) ≅\n        (𝟙_ (schemeDerivedCategory Z))⟦(1 : ℤ)⟧)\n    (β : ∀ X : HomotopyCategory\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ),\n        boundedFlatShiftRepresentative Y X →\n          ((DerivedCategory.Qh ⋙ derivedPullback f).obj X ≅\n            ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n              (DerivedCategory.Qh : HomotopyCategory\n                (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n                schemeDerivedCategory Z)).obj X))\n    (hβnat : (∀ (X X' : HomotopyCategory\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))\n          (hX : boundedFlatShiftRepresentative Y X) (hX' : boundedFlatShiftRepresentative Y X')\n          (s : X ⟶ X'),\n          (DerivedCategory.Qh ⋙ derivedPullback f).map s ≫ (β X' hX').hom =\n            (β X hX).hom ≫\n              ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n                (DerivedCategory.Qh : HomotopyCategory\n                  (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n                  schemeDerivedCategory Z)).map s))\n    (σ₀ : ∀ (E : ℕ → CochainComplex\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n        (hb : ∀ n : ℕ, ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((E n).X i))\n        (hf : ∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E n).X i)),\n        let X := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (∐ E)\n        (DerivedCategory.Qh ⋙ derivedPullback f).obj X ⟶\n          ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n            (DerivedCategory.Qh : HomotopyCategory\n              (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n              schemeDerivedCategory Z)).obj X)\n    (σ₁ : ∀ (E : ℕ → CochainComplex\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n        (hb : ∀ n : ℕ, ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((E n).X i))\n        (hf : ∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E n).X i)),\n        let X := ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (∐ E))⟦(1 : ℤ)⟧\n        (DerivedCategory.Qh ⋙ derivedPullback f).obj X ⟶\n          ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n            (DerivedCategory.Qh : HomotopyCategory\n              (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n              schemeDerivedCategory Z)).obj X)\n    (hσ0ι : ∀ (E : ℕ → CochainComplex\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n        (hb : ∀ n : ℕ, ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((E n).X i))\n        (hf : ∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E n).X i)) (n : ℕ),\n        (DerivedCategory.Qh ⋙ derivedPullback f).map\n          ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map (Sigma.ι E n)) ≫\n            σ₀ E hb hf =\n          (β\n            ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (E n))\n            ⟨E n, hb n, hf n, Or.inl rfl⟩).hom ≫\n            ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n            (DerivedCategory.Qh : HomotopyCategory\n              (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n              schemeDerivedCategory Z)).map\n            ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map (Sigma.ι E n)))\n    (hσ1ι : ∀ (E : ℕ → CochainComplex\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n        (hb : ∀ n : ℕ, ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((E n).X i))\n        (hf : ∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E n).X i)) (n : ℕ),\n        (DerivedCategory.Qh ⋙ derivedPullback f).map\n          (((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map (Sigma.ι E n))⟦(1 : ℤ)⟧') ≫\n            σ₁ E hb hf =\n          (β (((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (E n))⟦(1 : ℤ)⟧)\n            ⟨E n, hb n, hf n, Or.inr rfl⟩).hom ≫\n            ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n            (DerivedCategory.Qh : HomotopyCategory\n              (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n              schemeDerivedCategory Z)).map (((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map\n              (Sigma.ι E n))⟦(1 : ℤ)⟧'))\n    (hσ0nat : ∀ (E E' : ℕ → CochainComplex\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n        (hb : ∀ n : ℕ, ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((E n).X i))\n        (hf : ∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E n).X i))\n        (hb' : ∀ n : ℕ, ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((E' n).X i))\n        (hf' : ∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E' n).X i))\n        (a : ∀ n : ℕ, E n ⟶ E' n),\n        (DerivedCategory.Qh ⋙ derivedPullback f).map\n          ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map (Limits.Sigma.map a)) ≫\n            σ₀ E' hb' hf' =\n          σ₀ E hb hf ≫\n            ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n            (DerivedCategory.Qh : HomotopyCategory\n              (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n              schemeDerivedCategory Z)).map\n            ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map (Limits.Sigma.map a)))\n    (hσ1nat : ∀ (E E' : ℕ → CochainComplex\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n        (hb : ∀ n : ℕ, ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((E n).X i))\n        (hf : ∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E n).X i))\n        (hb' : ∀ n : ℕ, ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((E' n).X i))\n        (hf' : ∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E' n).X i))\n        (a : ∀ n : ℕ, E n ⟶ E' n),\n        (DerivedCategory.Qh ⋙ derivedPullback f).map\n          (((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map (Limits.Sigma.map a))⟦(1 : ℤ)⟧') ≫\n            σ₁ E' hb' hf' =\n          σ₁ E hb hf ≫\n            ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n            (DerivedCategory.Qh : HomotopyCategory\n              (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n              schemeDerivedCategory Z)).map (((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map\n              (Limits.Sigma.map a))⟦(1 : ℤ)⟧'))\n    (hσshift : ∀ (E : ℕ → CochainComplex\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n        (hb : ∀ n : ℕ, ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((E n).X i))\n        (hf : ∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E n).X i)),\n        let X := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (∐ E)\n        let G := (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n          (DerivedCategory.Qh : HomotopyCategory\n            (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n            schemeDerivedCategory Z)\n        σ₁ E hb hf ≫\n            (G.commShiftIso (1 : ℤ)).hom.app X =\n          (derivedPullback f).map ((DerivedCategory.Qh.commShiftIso (1 : ℤ)).hom.app X) ≫\n            ((derivedPullback f).mapIso\n                (schemeCanonicalShiftUnitIso Y (DerivedCategory.Qh.obj X)).symm ≪≫\n              asIso (Functor.OplaxMonoidal.δ (derivedPullback f)\n                ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) (DerivedCategory.Qh.obj X)) ≪≫\n              tensorIso e (Iso.refl _) ≪≫\n              schemeCanonicalShiftUnitIso Z\n                ((derivedPullback f).obj (DerivedCategory.Qh.obj X))).hom ≫\n            σ₀ E hb hf⟦(1 : ℤ)⟧') :\n      ∃ α : ∀ X : HomotopyCategory\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ),\n        flatTelescopeShiftRepresentative Y X →\n          ((DerivedCategory.Qh ⋙ derivedPullback f).obj X ⟶\n            ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n              (DerivedCategory.Qh : HomotopyCategory\n                (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n                schemeDerivedCategory Z)).obj X),\n        (∀ (X X' : HomotopyCategory\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))\n          (hX : flatTelescopeShiftRepresentative Y X) (hX' : flatTelescopeShiftRepresentative Y X')\n          (s : X ⟶ X'), flatTelescopeStageMap Y s →\n          (DerivedCategory.Qh ⋙ derivedPullback f).map s ≫ (α X' hX') =\n            (α X hX) ≫\n              ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n                (DerivedCategory.Qh : HomotopyCategory\n                  (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n                  schemeDerivedCategory Z)).map s) ∧\n        (∀ (X : HomotopyCategory\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))\n          (hX : flatTelescopeShiftRepresentative Y X)\n          (hb : boundedFlatShiftRepresentative Y X), α X hX = (β X hb).hom) ∧\n        ∀ (P : CochainComplex\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n        (htel : isFlatTelescope Y P),\n        let X := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P\n        let G := (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n          (DerivedCategory.Qh : HomotopyCategory\n            (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n            schemeDerivedCategory Z)\n        (α (X⟦(1 : ℤ)⟧) ⟨P, htel, Or.inr rfl⟩) ≫\n            (G.commShiftIso (1 : ℤ)).hom.app X =\n          (derivedPullback f).map ((DerivedCategory.Qh.commShiftIso (1 : ℤ)).hom.app X) ≫\n            ((derivedPullback f).mapIso\n                (schemeCanonicalShiftUnitIso Y (DerivedCategory.Qh.obj X)).symm ≪≫\n              asIso (Functor.OplaxMonoidal.δ (derivedPullback f)\n                ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) (DerivedCategory.Qh.obj X)) ≪≫\n              tensorIso e (Iso.refl _) ≪≫\n              schemeCanonicalShiftUnitIso Z\n                ((derivedPullback f).obj (DerivedCategory.Qh.obj X))).hom ≫\n            (α X ⟨P, htel, Or.inl rfl⟩)⟦(1 : ℤ)⟧'",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261014T082418-L-4009213",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261014T082418-L-4009213",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
