@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fin-lisse-field-dual",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Duals of complexes with finite locally constant cohomology",
@@ -13,33 +13,181 @@
   "place": "node lem-fin-lisse-field-dual, order 1630"
  },
  "stmt_deps": [
+  "def-weil-pbc-derived-categories",
   "def-weil-pbc-constructible-complexes",
-  "def-weil-pbc-derived-categories"
+  "def-pur-derived-internal-hom",
+  "def-pur-sheaf-hom",
+  "def-weil-pbc-inverse-image",
+  "def-weil-size-convention"
  ],
  "proof": [
   {
-   "text": "A finite locally constant $\\lambda$-sheaf $E$ is, etale\nlocally, $\\lambda^r$ for a finite $r$. On such a neighborhood\nthe internal Hom functor $\\mathcal Hom(E,-)$ is the finite product\nof $r$ copies of the identity. It is exact. Consequently\n$\\mathcal Ext^{a}(E,\\lambda)=0$ for $a>0$, and\n$\\mathcal Hom(E,\\lambda)$ is finite locally constant.\nThese computations use internal Hom as defined in\n[def-weil-derived-pullback-tensor-hom].\nApply the finite truncation filtration of $C$ and its spectral\nsequence from [thm-sp-truncation-e2]. All internal Ext rows\nexcept row zero vanish by this calculation, giving the formula\nin the statement and boundedness. For a sheaf $E$ the pullback\ncomparison is the identity between the two duals of $\\lambda^r$\non each trivializing etale neighborhood. It is therefore an\nisomorphism by [lemma-weil-pbc-geometric-stalk-conservative].\nApply the exact pullback functor to the finite truncation triangles\nof $C$; induction through these triangles proves the comparison\nfor $C$. No assertion about global Ext vanishing is used.",
+   "text": "Work on a small equivalent site in the module universe, using [def-weil-size-convention]. Use the K-injective definition of derived internal Hom, rather than the pro-etale operations definition. Restriction to a slice site commutes with this construction: choose a K-injective resolution $I$ of the second argument. Its restriction $I|_U$ is K-injective by [lem-pur-kinjective-restrict-localized]. The restriction of the Hom complex is the Hom complex of the restrictions: evaluated on $V/U$, each sheaf Hom consists of maps on the same further slice site, and products and the differential are computed sectionwise. The differential is $d_I f-(-1)^n f d_P$ on both sides. This proves the restriction identification, including its naturality, from [def-pur-sheaf-hom] and [def-pur-hom-complex]. Restriction preserves kernels sectionwise and preserves cokernels because local lifts and relations are checked on precisely the same covering families in each slice. Thus the restricted resolution is still a quasi-isomorphism.",
    "uses": [
-    "def-weil-derived-pullback-tensor-hom",
-    "thm-sp-truncation-e2",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "def-pur-derived-internal-hom",
+    "lem-pur-kinjective-restrict-localized",
+    "def-pur-sheaf-hom",
+    "def-pur-hom-complex",
+    "def-weil-size-convention"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J7 (section-internal-hom), 08JB (lemma-restriction-RHom-to-U)"
+   }
+  },
+  {
+   "text": "Let $E$ be a finite locally constant $\\lambda $-module sheaf. By the lisse definition it is locally the constant sheaf of a finite-dimensional $\\lambda $-vector space. Choosing a basis identifies it on a trivializing etale covering with $\\lambda ^r$, for finite $r$ which can vary with the covering member. Apply [lem-weil-pbc-ringed-site-bounded-free-rhom-model] with $P=\\lambda ^r[0]$ and $N=\\lambda [0]$. Its Hom complex is $\\lambda ^r$ in degree zero and zero elsewhere. Step 1 identifies this with the restriction of $R\\mathcal Hom(E,\\lambda _T)$. Thus this derived Hom has no cohomology outside degree zero, and degree zero is the ordinary sheaf Hom $\\mathcal  Hom(E,\\lambda _T)$, by its definition. This sheaf is locally $\\lambda ^r$, hence finite locally constant. This includes $r=0$. No global Ext group is asserted to vanish.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JI (lemma-Rhom-complex-of-direct-summands-finite-free), after 08JB"
+   }
+  },
+  {
+   "text": "Write $D(K)=R\\mathcal Hom(K,\\lambda _T)$. Choose $a\\leq  b$ with $\\mathcal  H^i(C)=0$ outside $[a,b]$, and induct on the interval length, with the zero object as base case. The standard truncation triangle is $A\\to  C\\to  B\\to  A[1]$, where $A=\\tau_{\\leq  b-1}C$ and $B=\\mathcal  H^b(C)[-b]$. The kernel description of canonical truncation gives $\\mathcal  H^i(A)=\\mathcal  H^i(C)$ for $i<b$, zero for $i\\geq  b$, and the displayed identification of $B$. Explicitly, replace $C$ by $P=\\tau_{\\leq b}C$, whose inclusion is a quasi-isomorphism. The quotient $P/\\tau_{\\leq b-1}P$ has only the terms $\\operatorname{im}(d^{b-1})$ in degree $b-1$ and $\\ker(d^b)$ in degree $b$, with the inclusion differential. Its projection onto $\\mathcal H^b(C)[-b]$ is a quasi-isomorphism: the kernel is the two-term identity complex on $\\operatorname{im}(d^{b-1})$. This gives the stated top truncation canonically in the derived category. Apply [lem-weil-pbc-ringed-internal-hom-exact-restriction] to get $D(B)\\to  D(C)\\to  D(A)\\to  D(B)[1]$. For a sheaf $E$, the degree-$n$ terms of the Hom complexes for $D(E[-b])$ and $D(E)[b]$ are both $\\mathcal Hom(E,I^{n+b})$. Their differentials are respectively $d_I$ and $(-1)^b d_I$; multiplication in degree $n$ by $(-1)^{bn}$ is a chain isomorphism. Thus $D(E[-b])=D(E)[b]$. Step 2 places $D(B)$ only in degree $-b$, while induction places $D(A)$ in $[-b+1,-a]$. In the cohomology long exact sequence, $\\mathcal  H^{-b-1}(D(A))$ and $\\mathcal  H^{-b}(D(A))$ vanish, so $\\mathcal  H^{-b}(D(B))\\to \\mathcal  H^{-b}(D(C))$ is an isomorphism. For $q\\geq -b+1$ the two surrounding terms from $D(B)$ vanish, so $\\mathcal  H^q(D(C))\\to \\mathcal  H^q(D(A))$ is an isomorphism; below $-b$ all terms vanish. This proves the formula in the statement and the bound $[-b,-a]$, using the canonical edge identifications of the truncations. The zero case is represented by the zero complex. Step 2 proves finite local constancy of all the resulting cohomology sheaves.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sf-derived-truncation-triangle",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sf-derived-homology-long-exact",
+    "def-pur-hom-complex",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC (lemma-RHom-triangulated); finite truncation induction replacing the inapplicable covariant spectral sequence citation"
+   }
+  },
+  {
+   "text": "For $v:T'\\to  T$, [prop-weil-pbc-inverse-image-modules-exact] identifies $v^*$ with exact module inverse image and identifies $v^{-1}\\lambda _T$ with $\\lambda _{T'}$. Consequently pullback commutes with kernels, images and cokernels. Termwise pullback therefore commutes with cohomology and canonical truncation, and carries quasi-isomorphisms and cone triangles to quasi-isomorphisms and cone triangles. It preserves the cohomological bounds. Pulling back an etale trivializing covering gives a covering of $T'$ on which the pulled-back sheaf has the same finite constant module values.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC (sites-modules.tex, lemma-flat-pullback-exact), used with constant coefficients"
+   }
+  },
+  {
+   "text": "Describe the canonical comparison explicitly. Represent $K$ by $P$, resolve $\\lambda _T$ by a K-injective complex $I$, and choose a K-injective resolution $v^*I\\to  J$. Exactness of pullback means that $J$ represents $\\lambda _{T'}$. To construct the sheaf-Hom comparison, an inverse-image presheaf generator represented by a section $f$ of $\\mathcal Hom(F,G)$ on an etale neighborhood $U$ is sent to the pulled-back map $v^*F|_{U\\times_T T'}\\to v^*G|_{U\\times_T T'}$. Restricting $f$ and then pulling back gives the restriction of this map; addition and scalar multiplication also commute. These maps respect the presheaf relations and glue after sheafification, by [def-weil-pbc-inverse-image] and [def-pur-sheaf-hom]. Applied degreewise, this gives $v^*\\mathcal  Hom(P^i,I^j)\\to \\mathcal  Hom(v^*P^i,v^*I^j)$. Using the projections from the product defining each Hom-complex term, then postcomposing with $v^*I\\to  J$, gives the chain map $v^*\\mathcal  Hom^\\bullet(P,I)\\to \\mathcal  Hom^\\bullet(v^*P,J)$ representing the comparison. Its differential commutes because pullback preserves addition and composition and the differential is $d_I f-(-1)^n f d_P$. The map is pullback of evaluation, hence is the canonical comparison. On a neighborhood trivializing $E$ as $\\lambda ^r$, steps 1-2 identify this comparison with the identity on the $r$ coordinate functionals. The base-changed covering covers $T'$, so each cohomology sheaf map is an isomorphism at every geometric stalk. Apply [lemma-weil-pbc-geometric-stalk-conservative] to the underlying abelian sheaves. The comparison for $E$ is therefore a quasi-isomorphism and so an isomorphism in the derived category. The degreewise sign $(-1)^{bn}$ from step 3 commutes with pullback and postcomposition, so the comparison for $E[-b]$ is the shift by $b$ of that for $E$, and is an isomorphism.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom",
+    "prop-pur-kinjective-resolutions-exist",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J7 (section-internal-hom), 08JB (lemma-restriction-RHom-to-U), 08JI (bounded-free RHom computation)"
+   }
+  },
+  {
+   "text": "Induct again through the triangle $A\\to  C\\to  B\\to  A[1]$ of step 3. Pulling back its dual triangle gives $v^*D(B)\\to  v^*D(C)\\to  v^*D(A)\\to  v^*D(B)[1]$. Dualizing the pulled-back triangle gives $D'(v^*B)\\to  D'(v^*C)\\to  D'(v^*A)\\to  D'(v^*B)[1]$, where $D'=R\\mathcal Hom(-,\\lambda _{T'})$. The step-5 comparisons form a morphism of these triangles: for a chain map $f:P\\to Q$, the cone has terms $Q^n\\oplus P^{n+1}$ and differential matrix $\\begin{pmatrix}d_Q&f\\0&-d_P\\end{pmatrix}$. In the Hom differential $d_I h-(-1)^n h d_{\\mathrm{Cone}(f)}$, applying pullback and postcomposition with the fixed chain map $v^*I\\to J$ preserves each of these four entries, including the minus sign. The cone inclusions and projections are coordinate inclusions and projections and hence commute as well. Thus the square for the connecting arrow commutes with the same shift sign as the other squares. The endpoint comparisons are isomorphisms by induction and step 5. More explicitly, the cohomology sequences and the bounds of step 3 identify degree $-b$ with the $B$ terms and degrees at least $-b+1$ with the $A$ terms, compatibly with this morphism of triangles. Below $-b$ both sides vanish. Every cohomology map of the middle comparison is an isomorphism, so that comparison is an isomorphism in the derived category. This proves the assertion for arbitrary $v$.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sf-derived-homology-long-exact",
+    "def-pur-hom-complex",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC (lemma-RHom-triangulated), finite truncation induction and the cone differential"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-derived-pullback-tensor-hom",
-  "thm-sp-truncation-e2",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "def-pur-derived-internal-hom",
+  "lem-pur-kinjective-restrict-localized",
+  "def-pur-sheaf-hom",
+  "def-pur-hom-complex",
+  "def-weil-size-convention",
+  "def-weil-pbc-constructible-complexes",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sf-derived-truncation-triangle",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-pur-kinjective-resolutions-exist",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-pbc-inverse-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-lisse-field-dual.md",
-  "place": "## Proof"
+  "place": "Proof: local free calculation and finite truncation induction; corrected coefficient-site and spectral-sequence citations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derived.*(internalHom|internal.hom)|RHom|locallyFree",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: none states derived internal duality of finite locally constant etale complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived internal Hom of locally free sheaves and pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Module.Dual",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: none states derived internal duality of finite locally constant etale complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal dual of a bounded complex of finite locally constant sheaves over a finite field commutes with pullback and reverses cohomology degrees",
+   "results": "CategoryTheory.Sheaf.cohomologyPresheafFunctor, CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstant.functorIso, CharacterModule.dual_rTensor_conj_homEquiv, CompHausLike.LocallyConstant.functorToPresheavesIso, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map",
+   "date": "2026-10-14",
+   "verdict": "no match: none states derived internal duality of finite locally constant etale complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom|MonoidalClosed|dual",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: none states derived internal duality of finite locally constant etale complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor, SheafOfModules",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: none states derived internal duality of finite locally constant etale complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of derived sheaf Hom from a finite locally free module; duality of locally constant complexes",
+   "results": "CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.instAddCommGroupH, LightCondensed.free, SheafOfModules.instAbelian",
+   "date": "2026-10-14",
+   "verdict": "no match: none states derived internal duality of finite locally constant etale complexes"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -69,5 +217,99 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-fin-lisse-field-dual",
+  "worker": "stage1",
+  "summary": "Kept the statement; replaced the pro-etale operations definition by the generic ringed-site internal Hom definition, and replaced the inapplicable covariant hypercohomology spectral sequence by the finite truncation induction already proposed in the blueprint. Reused generic restriction, bounded-free RHom, etale module inverse image and cohomology-triangle nodes. No new nodes. Maintainer reader repair: normalized doubled TeX backslashes in proof text and replaced the stale pro-etale-definition-bound triangle citation by the existing generic ringed-site calculus lemma.",
+  "blueprint": "Original proof sentences 1-5: steps 1-2; finite truncation and cohomology formula: step 3; sheaf pullback computation: steps 4-5; final truncation induction: step 6. The cited thm-sp-truncation-e2 cannot apply to a contravariant first-variable derived Hom.",
+  "tool_uses": [
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Generic ringed-site, etale pullback or derived-category calculus needed for the original local-free/truncation route; the compact-support base-change unit provides no replacement."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "Generic ringed-site, etale pullback or derived-category calculus needed for the original local-free/truncation route; the compact-support base-change unit provides no replacement."
+   },
+   {
+    "node": "def-pur-sheaf-hom",
+    "why": "Generic ringed-site, etale pullback or derived-category calculus needed for the original local-free/truncation route; the compact-support base-change unit provides no replacement."
+   },
+   {
+    "node": "def-pur-hom-complex",
+    "why": "Generic ringed-site, etale pullback or derived-category calculus needed for the original local-free/truncation route; the compact-support base-change unit provides no replacement."
+   },
+   {
+    "node": "def-weil-size-convention",
+    "why": "Generic ringed-site, etale pullback or derived-category calculus needed for the original local-free/truncation route; the compact-support base-change unit provides no replacement."
+   },
+   {
+    "node": "def-weil-pbc-constructible-complexes",
+    "why": "Generic ringed-site, etale pullback or derived-category calculus needed for the original local-free/truncation route; the compact-support base-change unit provides no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "why": "Generic ringed-site, etale pullback or derived-category calculus needed for the original local-free/truncation route; the compact-support base-change unit provides no replacement."
+   },
+   {
+    "node": "def-sbc-standard-tstructure-derived-category",
+    "why": "Generic ringed-site, etale pullback or derived-category calculus needed for the original local-free/truncation route; the compact-support base-change unit provides no replacement."
+   },
+   {
+    "node": "lem-sf-derived-truncation-triangle",
+    "why": "Generic ringed-site, etale pullback or derived-category calculus needed for the original local-free/truncation route; the compact-support base-change unit provides no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Steps 3 and 6 use contravariant triangle exactness for the generic ringed-site internal Hom defined by def-pur-derived-internal-hom. This is homological algebra for the existing local-free/truncation route, not a replacement geometric base-change theorem; the item unit supplies no such calculus lemma."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic ringed-site, etale pullback or derived-category calculus needed for the original local-free/truncation route; the compact-support base-change unit provides no replacement."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic ringed-site, etale pullback or derived-category calculus needed for the original local-free/truncation route; the compact-support base-change unit provides no replacement."
+   },
+   {
+    "node": "def-weil-pbc-derived-categories",
+    "why": "Generic ringed-site, etale pullback or derived-category calculus needed for the original local-free/truncation route; the compact-support base-change unit provides no replacement."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic ringed-site, etale pullback or derived-category calculus needed for the original local-free/truncation route; the compact-support base-change unit provides no replacement."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic ringed-site, etale pullback or derived-category calculus needed for the original local-free/truncation route; the compact-support base-change unit provides no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-derived-internal-hom",
+  "lem-pur-kinjective-restrict-localized",
+  "def-pur-sheaf-hom",
+  "def-pur-hom-complex",
+  "def-weil-size-convention",
+  "def-weil-pbc-constructible-complexes",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sf-derived-truncation-triangle",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sf-derived-homology-long-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-derived-categories",
+  "prop-pur-kinjective-resolutions-exist",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-44d6eafdf",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-44d6eafdf (reviewer sub-agent of L); spot-checked: Read all six steps, cited statements and source locations. Repaired doubled TeX escapes and replaced the ambiguous pro-étale-bound triangle citation with the existing generic ringed-site lemma. Statement unchanged; local duality, shifts and canonical pullback comparison check out. review.md and corrected whole JSON written.; 1 file(s) fixed by the reviewer"
+ }
 }
