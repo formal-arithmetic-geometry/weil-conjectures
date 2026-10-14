@@ -19,9 +19,6 @@ public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
-import Sheaf.AlgebraicGeometry.AffineResidueModelNaturality
-import Sheaf.AlgebraicGeometry.PicardDerivedFibreNaturality
-
 /-! Per-index component of positive-family geometric naturality.
 
 Source: Stacks Project, Tags 0B91, 0BF2 and 01XK.
@@ -41,11 +38,6 @@ the target comparison with conjugation. A representative would then have to
 induce conjugation, although every residue chain map is C-linear. The corrected
 quantifiers choose one geometric source comparison, then compatible target
 comparisons for all indices. See the change record for the full counterexample. -/
-set_option maxHeartbeats 1600000 in
--- The model comparisons elaborate several derived and section functors.
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option linter.unusedVariables false in
 /-- Choose a common source comparison and construct the naturality data per index.
 Source: Stacks Project, Tags 0B91, 0BF2 and 01XK.
 (blueprint: new-picard-residue-homology-geometric-naturality-fixed-per-index)
@@ -122,22 +114,6 @@ theorem picard_residue_homology_geometric_naturality_fixed_positive_per_index
             structureSheafCohomologyPullback
               (((Over.pullback (S.fromSpecResidueField s)).map
                 (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
-                  (ui i) (hui i))).left) 1 (eK z) := by
-  classical
-  obtain ⟨eg, hg⟩ := picard_derived_fibre_naturality f Xi fi ui hui L W k w s hw τ
-  obtain ⟨m⟩ := hE
-  obtain ⟨er, hr⟩ := affine_residue_model_naturality W w U hwU hU p hp _ K hK m
-  refine ⟨er.trans eg, ?_⟩
-  intro i
-  obtain ⟨egi, hb⟩ := hg i
-  obtain ⟨mi⟩ := hCi i
-  obtain ⟨eri, hi⟩ := hr _
-    (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k) (C i) (hC i) mi
-  refine ⟨eri.trans egi,
-    m.inv ≫ (SheafOfModules.overFunctor.{v}
-      (moduleRings W.toRingedSpace) U).mapDerivedCategory.map
-        (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k) ≫ mi.hom, ?_⟩
-  intro φ hφ z
-  exact (congrArg egi (hi φ hφ z)).trans (hb (er z))
+                  (ui i) (hui i))).left) 1 (eK z) := by sorry
 
 end AlgebraicGeometry.Scheme

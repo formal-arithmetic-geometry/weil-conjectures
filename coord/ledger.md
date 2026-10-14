@@ -14925,6 +14925,7 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:48 L: merged deliver/E1/Sheaf.AlgebraicGeometry.CartesianHigherImageGermVanishing (stage 3; reviewer PASS; first push; landing 20261014T184835-L-93480 (interface); batch 20261014T184832; modules 2; new nodes 2)
 - 18:48 L: merged deliver/F4/Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup (stage 3; reviewer PASS; after a return; landing 20261014T184836-L-93856 (proof); batch 20261014T184832; modules 1; new nodes 0)
 - 18:48 L: merged deliver/M3/WeilConjectures.CategoryTheory.DerivedCategory.Perfect (stage 3; reviewer PASS; first push; landing 20261014T184836-L-94155 (proof); batch 20261014T184832; modules 1; new nodes 0)
-- 18:52 L: merged deliver/H4/Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex (stage 3; reviewer PASS; first push; landing 20261014T185244-L-201577 (interface); batch 20261014T185242; modules 11; new nodes 10)
 - 18:52 L: merged deliver/M3/WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar (stage 3; reviewer PASS; first push; landing 20261014T185245-L-201837 (interface); batch 20261014T185242; modules 1; new nodes 0; change records: coord/changes/clopen-derived-shriek-star-instance-proof.md)
 - 19:03 L: returned deliver/K3/Sheaf.AlgebraicGeometry.BaseChangeTargetTransitionHigherImage (reviewer RETURN: (reviewer X-5f3af, head 5f3afef00) 7: The report lacks the mandatory `## Forced adaptations` section. Insert before `## )
+
+- 03:07 L: batch 20261014T185242 dependency take-out
