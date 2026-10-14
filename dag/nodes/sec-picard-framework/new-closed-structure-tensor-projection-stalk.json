@@ -15,7 +15,12 @@
  ],
  "proof": [
   {
-   "text": "At x=i(z), use tensor stalks, closed-pushforward stalks, and pullback stalks to identify the source with M_x tensor over O_Y,x O_Z,z and the target with O_Z,z tensor over O_Y,x M_x. Take germs of the section formula. The pullback unit has germ 1 tensor m. Represent the two germs on a common open neighbourhood (the closed-embedding neighbourhood cofinality allows the O_Z section to be represented over i⁻¹U). The map sends m tensor r to r tensor m. Pure tensors generate, so this is the scalar-extension symmetry isomorphism.",
+   "text": "Identify the stalk of the unit module with the stalk ring using the filtered-colimit comparison for the composite forgetful functor CommRingCat to RingCat to AddCommGrpCat. The comparison carries each unit-module germ to the corresponding ring germ. To prove linearity, represent the scalar and vector on a common open neighbourhood and apply preservation of multiplication by the ring germ map. This is the fully proved private helper projection_unit_stalk_iso, following the existing private calculation in ClosedImmersionUnitStalkKernel.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For x=i(z), take the stalk-tensor isomorphism Phi, the tensor-pullback stalk isomorphism delta, and closed-pushforward stalk maps for B=i_*O_Z and P=i^*M. Composing the B comparison with the unit-stalk comparison gives an additive equivalence b:B_x to O_Z,z. Its semilinearity makes b an O_Y,x-linear equivalence beta to the scalar-restricted ring. Tensor beta with the identity of M_x and compose with tensor symmetry to obtain an additive equivalence q:M_x tensor B_x to O_Z,z tensor M_x. Compose the P comparison with delta to obtain the target additive equivalence epsilon. On a germ of s tensor r, the assumed section formula, the pushforward germ formula, the stalk scalar formula, and the pullback-unit germ formula give epsilon(alpha_x(germ(s tensor r)))=q(germ(s) tensor germ(r)). For arbitrary pure stalk tensors, represent both entries by sections on Y and restrict to the intersection of their neighbourhoods. Phi sends the corresponding pure tensor section germ to the pure stalk tensor. Additive tensor induction therefore shows epsilon composed with alpha_x composed with Phi inverse equals q. Injectivity and surjectivity follow by cancellation and lifting through these equivalences; the concrete-category criterion gives IsIso.",
    "uses": [
     "lem-pc-ringed-space-module-stalk-tensor",
     "lem-weil-pbc-module-stalk-pullback",
@@ -24,7 +29,7 @@
    "elementary": false
   },
   {
-   "text": "For x outside the closed image, the closed-pushforward stalk theorem makes both i_*O_Z and i_*i^*M have zero stalk. The tensor-stalk isomorphism makes the source zero; the unique map between zero abelian groups is an isomorphism. This covers the remaining points.",
+   "text": "For x outside the closed image, the closed-pushforward stalk theorem makes both B_x and (i_*P)_x subsingleton. The tensor of M_x with B_x is subsingleton, and the stalk-tensor equivalence transports this to (M tensor B)_x. The given stalk morphism is injective because its source is subsingleton and surjective because its target is subsingleton and its source contains zero. The concrete-category bijectivity criterion proves IsIso.",
    "uses": [
     "lem-weil-pbc-closed-pushforward-stalks",
     "lem-pc-ringed-space-module-stalk-tensor"
@@ -39,7 +44,7 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "Codex, second reader H1",
+  "agent": "Codex E1",
   "date": "2026-10-14",
   "based_on": {
    "document": "https://stacks.math.columbia.edu",
@@ -115,13 +120,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261013T234511-L-2163028",
-  "kind": "interface",
+  "landing": "20261014T001714-L-2548111",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
