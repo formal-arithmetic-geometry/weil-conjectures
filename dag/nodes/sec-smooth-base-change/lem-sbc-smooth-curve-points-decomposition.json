@@ -23,9 +23,104 @@
   "def-weil-open-immersion",
   "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The field k is Noetherian (its only ideals are 0 and k), and Spec k is a one-point quasi-compact locally Noetherian scheme. Apply [lem-weil-pbc-finite-type-over-noetherian] to C \\to Spec k to obtain that C is Noetherian. By [lem-weil-pbc-noetherian-finite-components] its irreducible components form a finite family.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finite-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0BA8, lemma-Noetherian-irreducible-components"
+   }
+  },
+  {
+   "text": "By [lem-sc-irreducible-components-cover], the irreducible components cover C. Form the finite graph whose vertices are the irreducible components and whose edges join intersecting components. For each graph component a let U_a be the union of its vertices. These unions are disjoint, cover C, and are closed as finite unions of closed sets; each is open because its complement is the union of the other U_b. An irreducible space is connected: a separation into two nonempty clopen sets contradicts its definition. Along an edge the union of two connected sets meeting at a point is connected, since a separation would put both sets in the same part; induction along graph paths makes U_a connected. Thus the U_a are precisely the nonempty connected components of C, and there are finitely many; when C is empty there are none.",
+   "uses": [
+    "def-weil-irreducible-components",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "lemma-irreducible and lemma-Noetherian: finite-component topological argument"
+   }
+  },
+  {
+   "text": "Give U_a its open-subscheme structure C_a. Its inclusion is an open immersion by [def-weil-open-immersion]. It is also a closed immersion by [def-weil-closed-immersion]: its image is closed, and on stalks the map to the pushforward is the identity at points in U_a and has zero target outside U_a, whose complement is open. Smoothness of C_a over k is [lem-weil-pbc-smooth-restrict-open-subschemes](a), with V = Spec k. Smoothness includes local finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], whose finite polynomial presentations in particular give locally finite type. C_a is quasi-compact as a closed subset of the quasi-compact C, so it is finite type by [def-weil-finite-type-morphism]. Its diagonal is the pullback of the closed immersion diagonal of C along C_a times_k C_a \\to C times_k C; [lem-pc-closed-imm-base-change] makes this a closed immersion, proving separatedness by [def-weil-proper-morphism].",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "def-sbc-smooth-morphisms",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-pc-closed-imm-base-change",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A5B, lemma-constant-smooth-statements, opening reduction"
+   }
+  },
+  {
+   "text": "By [def-sc-curves], C is a smooth curve, so [lem-sc-smooth-regular] gives regular local rings at every point. The stalks of C_a equal the corresponding stalks of C, and C_a is locally Noetherian as an open subscheme of the Noetherian C. Hence C_a is regular [def-weil-regular-scheme]. It is nonempty and connected by step 2, so [lem-sc-regular-connected-integral] gives integrality. Since U_a is closed in C, every chain of irreducible closed subsets of U_a is also such a chain in C; by [def-kun-topological-krull-dimension] its dimension is at most one. Nonemptiness gives a chain of length zero, so its dimension is either zero or one.",
+   "uses": [
+    "def-sc-curves",
+    "lem-sc-smooth-regular",
+    "def-weil-regular-scheme",
+    "lem-sc-regular-connected-integral",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0569, lemma-regular-normal; Tag 033N, lemma-normal-locally-Noetherian"
+   }
+  },
+  {
+   "text": "Partition the finite component indices into I of dimension one and J of dimension zero. For i in I set D_i = C_i; step 3 and [def-sc-curves] give exactly the asserted connected smooth curves. For j in J apply [lem-weil-pbc-zero-dim-integral-point] to the integral finite-type k-scheme C_j of dimension zero from steps 3-4: its structure morphism identifies it with Spec k as a k-scheme. By [lem-weil-pbc-scheme-coproduct-family] form the coproduct of all C_a. The inclusions give a morphism from that coproduct to C; its inverse on each disjoint open U_a is the inverse of the identification with C_a followed by its coprojection. These local inverses glue because the U_a have empty pairwise intersections, and both composites restrict to identities on the covering opens. Thus this is an isomorphism over k. Replace the J summands by their structure isomorphisms and reorder the finite family into I and J; the resulting coprojections are the component inclusions from step 3. The empty C gives the empty coproduct.",
+   "uses": [
+    "def-sc-curves",
+    "lem-weil-pbc-zero-dim-integral-point",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 06LH, lemma-algebraic-scheme-dim-0; etale-cohomology.tex Tag 0A5B, lemma-constant-smooth-statements"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-sc-curves",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-regular-scheme",
+  "lem-pc-closed-imm-base-change",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-regular-connected-integral",
+  "lem-sc-smooth-regular",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-zero-dim-integral-point"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A5B, first sentence of proof, with Tags 0569, 033N and 06LH supplying the geometric component facts"
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -85,12 +180,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "sbc-thm-algebraically-closed-invariance",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-thm-vanishing"
+ "unit": "sk-thm-vanishing",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-sbc-smooth-curve-points-decomposition",
+  "worker": "stage1",
+  "summary": "Second reading: finite irreducible components are supplied by an existing Mathlib leaf; a finite intersection graph gives the clopen connected components explicitly. Restriction, regularity, dimension cases, rational-point identification and coproduct assembly are written with matching citations. No new nodes.",
+  "blueprint": "Realizes the ancestor blueprint sentence 'apply thm-sc-constant-invariance ... reduction from the possibly disconnected curve to its one-dimensional connected components requires separating the point components' by making the finite component and point reductions explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-zero-dim-integral-point",
+    "why": "Generic geometric tool: integral dimension-zero finite-type schemes over an algebraically closed field are rational points; the smooth-base-change unit has no statement of this fact. This retains the first worker’s split_report declaration for maintainer review, not a top-level accepted tool_uses entry."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-zero-dim-integral-point"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-8fac92645",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-8fac92645 (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements and source passages. All five steps establish the decomposition, including empty and mixed-dimensional cases. No new nodes, duplicate split, circular dependency or target weakening found. Accepted lem-weil-pbc-zero-dim-integral-point as a generic tool. Exact master coefficient categories and base-change orientation checked. Detailed findings written to review.md."
+ }
 }
