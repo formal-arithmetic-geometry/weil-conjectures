@@ -68,10 +68,7 @@ theorem sectionRing_veronese_fraction_core
             L.tensorPowMulIso d n ≪≫ (λ_ _).symm).hom.app ⊤ (ξ.val (n • d)))) =
       HomogeneousLocalization.Away.mk (sectionRingGrade L) s.property n
         ξ.val ξ.property := by
-  have hker :
-      (sectionFractionRelations (L.tensorPow d) (𝟙_ X.Modules) (s.val d)).toAddSubgroup =
-        (sectionRingVeroneseFractionMap X L d s).ker :=
-    sectionRingVeroneseFractionMap_kernel X L d s
+  have hker := sectionRingVeroneseFractionMap_kernel X L d s
   refine ⟨⟨?_, ?_⟩, ?_⟩
   · exact (QuotientAddGroup.injective_lift_iff _ _ hker.le).2 hker
   · exact QuotientAddGroup.lift_surjective_of_surjective _ _
