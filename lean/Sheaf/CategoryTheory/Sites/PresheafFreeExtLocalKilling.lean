@@ -15,6 +15,9 @@ import Sheaf.CategoryTheory.Abelian.ExtEpiEffacement
 Source: Stacks Project, Derived Categories, Tag 06XU; Cohomology on Sites, Tag 03F9.
 (blueprint: lem-sc-presheaf-free-ext-local-killing)
 (blueprint: lem-sc-presheaf-free-ext-local-killing-witness)
+
+The witness conclusion contains the vanishing equation directly; it has no
+vacuous existential proof witness or ``True`` padding.
 -/
 
 @[expose] public section
