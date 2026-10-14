@@ -14846,3 +14846,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:36 L: merged deliver/B2/Sheaf.Paper.CechCupPullbackCompat (stage 3; reviewer PASS; after a return; landing 20261014T123659-L-2885328 (proof); batch 20261014T123657; modules 1; new nodes 0)
 - 12:37 L: merged deliver/H1/Sheaf.Paper.CechCupResolutionRepresentatives (stage 3; reviewer PASS; after a return; landing 20261014T123700-L-2885500 (proof); batch 20261014T123657; modules 1; new nodes 0)
 - 12:41 L: returned deliver/D2/Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex (reviewer RETURN: (reviewer X-55ee2, head 55ee2fcc5) F — Missing mandatory forced-adaptation evidence (review brief, Forced adaptations). )
+- 12:41 L: returned deliver/V2/WeilConjectures.SixFunctors.Etale.Derived.UpperShriek (reviewer RETURN: (reviewer X-a2451, head a24518378) H10 / mandatory reader gate: WeilConjectures.EtaleCohomology.Purity.Smooth.Convention)
