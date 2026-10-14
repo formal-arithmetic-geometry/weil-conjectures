@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-picard-external-cech-cup-leibniz",
+ "kind": "statement",
+ "title": "Pure-tensor signed Leibniz identity for three external Cech bidegrees",
+ "statement": "Let k be a field, f:X→Spec k and g:Y→Spec k, U:I→Opens(X) and V:J→Opens(Y) arbitrary families, and F,G modules. Use the scalar Cech complexes A=C_U(F), B=C_V(G), C=C_W(pr₁*F tensor pr₂*G) of [def-sc-picard-external-right-cech-models], with W_(i,j)=pr₁⁻¹U_i intersect pr₂⁻¹V_j. Fix p,q in ℕ and three k-linear maps h:A^p tensor_k B^q→C^(p+q), h₁:A^(p+1) tensor_k B^q→C^(p+1+q), h₂:A^p tensor_k B^(q+1)→C^(p+q+1). Suppose each has its prescribed front/back coordinates [lem-sc-picard-external-cech-cup-bidegree]. For a∈A^p and b∈B^q, d_C(h(a tensor b))=transport(h₁(d_A(a) tensor b))+(-1)^p transport(h₂(a tensor d_B(b))), where the transports identify (p+1)+q and p+(q+1) with (p+q)+1. No map in any other bidegree, total complex, covering or finiteness hypothesis is needed.",
+ "stmt_deps": [
+  "lem-sc-picard-external-cech-cup-bidegree",
+  "def-sc-picard-external-right-cech-models",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-cech-cup-product"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/07MB",
+  "place": "Section 20.25, calculation after equation 20.25.3.2, coefficients in degree zero; Tag 0BED equation-kunneth-on-cech for external coordinates"
+ },
+ "proof": [
+  {
+   "text": "Apply target Cech coordinate extensionality. The three prescribed front/back formulas express h, h₁ and h₂ on pure tensors by pulled section coordinates. Naturality of the normalized pullback adjunction units, presheaf composition and tensor-section restriction identify the successive restrictions when the scalar Cech differentials are expanded. This is the external version of the face calculation underlying cechCupCochain_leibniz; no total coproduct is involved.",
+   "uses": [
+    "lem-sc-picard-external-cech-cup-bidegree",
+    "def-sc-picard-external-right-cech-models",
+    "lem-pc-module-pullback-adjunction",
+    "def-sc-cech-cup-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the alternating face sums. The front terms indexed 0,...,p match target faces 0,...,p. The final front term and first back term have identical restricted sections and coefficients (-1)^(p+1) and (-1)^p, hence cancel. The remaining back terms r=1,...,q+1 match target faces p+r with coefficient (-1)^(p+r). Splitting the finite target sum at p+1 proves the coordinate identity. Degree transports identify equal tuple lengths, so coordinate extensionality gives the statement. For p=0 or q=0 the cancellation still holds, in characteristic two the paired terms sum to zero, and empty index families and zero modules give vacuous or zero coordinate identities.",
+   "uses": [
+    "def-sc-cech-cup-product",
+    "def-sc-picard-external-right-cech-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-cech-cup-product",
+  "def-sc-picard-external-right-cech-models",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-picard-external-cech-cup-bidegree"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/07MB",
+  "place": "Signed alternating-face calculation after equation 20.25.3.2, restricted to three bidegrees; external restriction details written by H1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "External Alexander Whitney product of scalar Cech cochains satisfies signed Leibniz on pure tensors",
+   "results": "8 hits: inhomogeneousCochains.d, inhomogeneousCochains.d_hom_apply, ContinuousCohomology.MultiInd.d_succ, ContinuousCohomology.MultiInd.d, Rep.barComplex.d_single, Rep.standardComplex.d_of, AlgebraicTopology.AlternatingCofaceMapComplex.objD, AlgebraicTopology.AlternatingFaceMapComplex.obj_d_eq; no external scalar Cech pure-tensor Leibniz theorem. Project search finds cechCupCochain_leibniz for one scheme and one family, not the two-scheme scalar pairing.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cech|Alexander|Leibniz",
+   "results": "1 hits: Mathlib/Algebra/Homology/LocalCohomology.lean; no external scalar Cech pure-tensor Leibniz theorem. Project search finds cechCupCochain_leibniz for one scheme and one family, not the two-scheme scalar pairing.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Alexander\"",
+   "results": "0 hits: ; no external scalar Cech pure-tensor Leibniz theorem. Project search finds cechCupCochain_leibniz for one scheme and one family, not the two-scheme scalar pairing.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "External Alexander Whitney Cech cup pure tensors signed Leibniz differential",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate",
+  "date": "2026-10-14",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof, application of the general theorem of the cube: the external Cech cup construction used downstream, specifically its inclusion-level differential calculation; coordinate proof step 2, the signed face calculation before tensor-total assembly",
+   "via": [
+    "lem-sc-picard-external-cech-cup-differential-coordinate",
+    "lem-sc-picard-external-cech-cup-differential",
+    "lem-sc-picard-external-cech-cup-component",
+    "lem-sc-picard-external-right-cech-comparison",
+    "lem-sc-picard-right-cech-cup-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalCechCupLeibniz",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCechCupLeibniz.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternalCechCupBidegree_leibniz",
+  "statement": "theorem picardExternalCechCupBidegree_leibniz\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    {ι κ : Type w} (U : ι → X.Opens) (V : κ → Y.Opens) (F : X.Modules) (G : Y.Modules)\n    (p q : ℕ)\n    (h : ((curriedTensor (ModuleCat.{w} k)).obj\n        (((picardCechFunctor f U).obj F).X p)).obj (((picardCechFunctor g V).obj G).X q) ⟶\n      ((picardCechFunctor (pullback.fst f g ≫ f)\n        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G)).X (p + q))\n    (h₁ : ((curriedTensor (ModuleCat.{w} k)).obj\n        (((picardCechFunctor f U).obj F).X (p + 1))).obj (((picardCechFunctor g V).obj G).X q) ⟶\n      ((picardCechFunctor (pullback.fst f g ≫ f)\n        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G)).X ((p + 1) + q))\n    (h₂ : ((curriedTensor (ModuleCat.{w} k)).obj\n        (((picardCechFunctor f U).obj F).X p)).obj (((picardCechFunctor g V).obj G).X (q + 1)) ⟶\n      ((picardCechFunctor (pullback.fst f g ≫ f)\n        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G)).X (p + (q + 1)))\n    (hh : IsPicardExternalCechCupBidegree f g U V F G p q h)\n    (hh₁ : IsPicardExternalCechCupBidegree f g U V F G (p + 1) q h₁)\n    (hh₂ : IsPicardExternalCechCupBidegree f g U V F G p (q + 1) h₂)\n    (a : ((picardCechFunctor f U).obj F).X p)\n    (b : ((picardCechFunctor g V).obj G).X q) :\n    ((picardCechFunctor (pullback.fst f g ≫ f)\n        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G)).d\n        (p + q) (p + q + 1) (h (a ⊗ₜ[k] b)) =\n      (eqToHom (congrArg (fun n ↦\n        ((picardCechFunctor (pullback.fst f g ≫ f)\n        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G)).X n)\n        (Nat.add_right_comm p 1 q))) \n          (h₁ (((picardCechFunctor f U).obj F).d p (p + 1) a ⊗ₜ[k] b)) +\n      (-1 : ℤ) ^ p • (eqToHom (congrArg (fun n ↦\n        ((picardCechFunctor (pullback.fst f g ≫ f)\n        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G)).X n)\n        (Nat.add_assoc p q 1).symm))\n          (h₂ (a ⊗ₜ[k] ((picardCechFunctor g V).obj G).d q (q + 1) b))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261014T004102-L-2834186",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261014T004102-L-2834186",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
