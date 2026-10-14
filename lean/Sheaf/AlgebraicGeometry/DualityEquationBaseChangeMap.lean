@@ -11,9 +11,8 @@ public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
 import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-!
-The construction is the mate of the inverse canonical base-change square, using only
-the supplied direct-image/right-adjoint adjunctions. No auxiliary pullback adjunction
-or derived-pullback counit is chosen by this definition.
+The map is constructed as the mate of the inverse ordinary base-change transformation,
+so no auxiliary pullback adjunction or independently chosen counit enters its data.
 
 # Canonical base-change map for a right adjoint
 
@@ -46,9 +45,9 @@ to `D_QCoh` (`derivedPullback_tensor_preserve_QCoh` and
 `schemeDerivedDirectImage_qcqs_hasRightAdjoint` give the preservation). The conjugate
 `θ : Rg_{X,*} a' ⟶ a Rg_*` of `β` for the composite adjunctions is an isomorphism, and
 the map is `Lg_X^* a(η'_K) ≫ Lg_X^* (θ_{Lg^* K})⁻¹ ≫ ε_{a'(Lg^* K)}`.
-We compute it directly as the mate of `β⁻¹` under `adjf` and `adjf'`. The iterated
-mates identity identifies this with the displayed composite for any auxiliary
-pullback/direct-image adjunctions. Thus no such auxiliary choice is part of the data.
+The implementation takes the mate of `β⁻¹` under `adjf` and `adjf'`. The iterated
+mates identity identifies it with the displayed composite and cancels both auxiliary
+pullback adjunctions. No extra counit is selected by this definition.
 Source: Stacks Project, duality.tex, Tag 0AA8, equation-base-change-map
 (blueprint: def-sc-duality-equation-base-change-map). -/
 noncomputable def dualityEquationBaseChangeMap
