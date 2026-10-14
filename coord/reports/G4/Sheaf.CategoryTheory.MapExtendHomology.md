@@ -1,61 +1,59 @@
 ## What changed
 
-Refactored the proof of `mapExtendHomology_nonempty_iso` to name the complex comparison
-and its image under the homology functor. The assigned module already contains a complete
-proof, so this is a readability refactoring of an existing proof, not new proof progress.
-The current repair queue still lists this module for duplicate removal; the duplicate helpers
-are already absent. Compiled successfully with lcompile.py, without warnings.
-
-The proof maps `HomologicalComplex.mapExtendIso` through the integer homology functor and
-composes with `HomologicalComplex.extendHomologyIso`. Both imported modules are needed.
-The statement and public visibility are unchanged; the unit route is unchanged.
+The sandbox proves `mapExtendHomology_nonempty_iso` by mapping
+`HomologicalComplex.mapExtendIso` through integer homology and composing with
+`extendHomologyIso`. Compared with the current repository, it inlines the two
+proof-local `let` bindings `comparison` and `homologyComparison`. The existing
+signature, docstring, imports, visibility and definitions are unchanged.
+This simplification closes no hole.
 
 ## Proved and sorry left
 
-`mapExtendHomology_nonempty_iso` is already proved in the repository; there are zero sorries
-in this module. This session closes zero holes and adds zero holes. No decomposition or new
-nodes were needed. The node is `lem-weil-pbc-map-extend-homology`.
+`mapExtendHomology_nonempty_iso` was already proved in the repository. Its node
+is `lem-weil-pbc-map-extend-homology`. Holes closed: zero. Holes added: zero.
+There are no remaining sorry declarations in this module, and none split off.
+The local compile and scratch `#print axioms` check pass; the only axioms are
+`propext`, `Classical.choice`, and `Quot.sound`.
 
 ## No longer needed
 
-None. The existing two imports are used by the statement and the proof respectively.
-No nodes or modules are pruned by this session.
+None. The public Mathlib import supplies the homology and extension objects in
+the signature and `extendHomologyIso` in the proof. The plain upstream import
+supplies `HomologicalComplex.mapExtendIso` only for the proof. The existing
+node has no `proof_deps` to remove. No module is pruned.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The dispatch brief says this item still contains sorry, but the repository module has none.
-Its DAG node already records the complete route and an AUTO proof landing by E3 on
-2026-10-14 (`20261014T020508-L-3810435`). This is a stale assignment, not a remaining
-mathematical obligation. Do not count this session as additional proof progress.
+The dispatcher assigned an already-completed module: no open proof remains
+for stage 3. The first report's claim that the copy is unchanged is inaccurate
+against the current repository: the difference is the inlining described above.
+Its historical X3 review attribution is stale: the current node records B2's
+AUTO proof landing on 2026-10-14, with empty `sorry_before` and `sorry_after`.
+No statement was changed to manufacture progress.
 
 ## Second reading by G4
 
-1. Compared the sole delivered module with the repository using `diff -u`.
-   PASS: only the proof body changed, introducing two local `let` bindings.
-   The existing declaration signature, visibility, docstring, and imports are
-   byte-for-byte unchanged. Read the earlier `map-extend-homology.md` change
-   record; this delivery preserves that landed duplicate-removal repair.
-2. PASS: compiled the delivered file locally with `lcompile.py` without errors
-   or warnings. Compiled a scratch copy with
-   `#print axioms mapExtendHomology_nonempty_iso`; its axioms are exactly
-   `propext`, `Classical.choice`, and `Quot.sound`. The delivered file has no
-   `sorry`, forbidden declaration forms, or hollow definitions.
-3. PASS (not applicable): no statements were split off, no new declarations
-   or nodes were added, and no holes remain. The degree-zero boundary case is
-   included in the existing `extendHomologyIso` for embeddingUpNat; the zero
-   complex and zero functor cases also follow from the same two isomorphisms.
-4. PASS: read the upstream `mapExtendIso` construction and searched the local
-   Lean library for extension/homology comparisons. The proof already takes
-   the direct route: map that existing complex isomorphism through homology,
-   then compose with Mathlib's `extendHomologyIso`. Both imports are used;
-   ExtendMap is correctly a proof-only plain import. No old proof-dependency
-   node or import becomes unused. Read `sk-thm-p1.json`: this auxiliary node
-   is below its realized unit steps, and the unit route stays unchanged.
-5. PASS: read `lem-weil-pbc-map-extend-homology.json`. Its two proof steps and
-   proof_origin describe precisely the two composed isomorphisms; the empty
-   proof_deps agrees with the use of existing upstream/Mathlib declarations.
-   Its recorded Lean signature matches the unchanged delivered declaration.
+1. Compared the complete delivered module with the repository using `diff`.
+   PASS: the sole difference is inside the proof body, inlining two local let
+   bindings. All existing signatures are byte-for-byte identical. No change
+   record is needed, and no other module or definition is changed.
+2. PASS: compiled the delivered module through `lcompile.py` without errors or
+   warnings. A scratch copy with `#print axioms mapExtendHomology_nonempty_iso`
+   reports precisely `propext`, `Classical.choice`, and `Quot.sound`. There are
+   no sorries, forbidden declarations, or data definitions in this module.
+3. PASS: no statements are split off or added, so no new-node searches are
+   applicable. Read the actual upstream `mapExtendIso` construction and
+   Mathlib `extendHomologyIso`: both construct the required isomorphisms.
+   The latter applies whenever the embedding sends q to its integer coercion,
+   including q=0, and the argument imposes no exactness assumption on E.
+4. PASS: this is the direct existing-library route, composing two isomorphisms.
+   Both imports are needed, and the proof-only import is already plain.
+   Read `dag/units/sk-thm-p1.json`: this helper is below its realized unit steps;
+   the unit route is unchanged. No old proof dependency becomes unnecessary.
+5. PASS: the existing node's two proof steps and `proof_origin` describe exactly
+   mapExtendIso followed by homologyFunctor.mapIso and extendHomologyIso.
+   Its empty `proof_deps` is consistent with these upstream/Mathlib declarations.
 
-Second reading changed only this report; no Lean or DAG repair was needed.
-This is a readability refactoring of an already proved theorem: zero holes
-closed, zero holes added, zero split off, and no pruning.
+Second reading changed only this report, correcting the claimed unchanged copy
+and historical review attribution and recording the independent checks. The
+Lean proof already present in the sandbox needed no repair.
