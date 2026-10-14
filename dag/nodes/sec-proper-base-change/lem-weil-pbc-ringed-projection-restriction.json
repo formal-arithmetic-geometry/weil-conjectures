@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-ringed-projection-restriction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Detailed form: 'Hence it contains every perfect complex'; restores the locality step of Stacks 0944 before the finite-complex argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Localization comparisons for the ringed projection mate",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes with small pro-etale sites [def-weil-pbc-proetale-site, def-weil-proetale-inverse-image]. Let $R_Y$ be a sheaf of commutative rings and fix an identification $f^{-1}R_Y\\cong R_X$. Use the ordinary unbounded derived operations [def-weil-pbc-proetale-operations] and derived tensor computed by K-flat total complexes [def-pc-kflat-complex, lem-pc-kflat-resolution, def-pc-tensor-complex-sheaves]. For an object $V\\to Y$ of $Y_{\\mathrm{proet}}$, put $U=X\\times_YV$ and let $f_V$ be the induced morphism from the localized topos of $X_{\\mathrm{proet}}$ at $U$ to that of $Y_{\\mathrm{proet}}$ at $V$. Write $j_V^*$ and $j_U^*$ for restriction to these localized sites and restrict the coefficient sheaves there. For $E\\in D(R_X)$ and $P,M,N\\in D(R_Y)$ there are canonical natural isomorphisms\n$$j_V^*Rf_*E\\cong R(f_V)_*j_U^*E,\\qquad j_U^*Lf^*P\\cong Lf_V^*j_V^*P,\\qquad j_V^*(M\\otimes^L N)\\cong j_V^*M\\otimes^L j_V^*N.$$\nUnder these isomorphisms, restriction of the adjoint-of-counit projection map for $(f,E,P)$ is exactly the adjoint-of-counit projection map for $(f_V,j_U^*E,j_V^*P)$, including the canonical shift comparisons. A morphism in $D(R_Y)$ is an isomorphism if, for every site object $V$, some covering $\\{V_i\\to V\\}$ makes all its restrictions to $V_i$ isomorphisms. No quasi-compactness or uniform cohomological bound is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0FN5 (lemma-localize-cartesian-square-modules), 07A4 (lemma-pullback-tensor-product); slice-topos restriction of the counit map 0B56."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to slice sites commutes with derived tensor pullback and derived direct image and detects isomorphisms locally",
+   "results": "8 hits: ['SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal', 'SheafOfModules.pullbackComp', 'AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback', 'AlgebraicGeometry.Scheme.Modules.restrictFunctorComp', 'SheafOfModules.pullbackIso', 'SheafOfModules.conjugateEquiv_pullbackComp_inv', 'CategoryTheory.GrothendieckTopology.overMapPullbackComp', 'CategoryTheory.Presieve.isSheafFor_over_map_op_comp_iff']; ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits give abstract triangulated adjunctions or underived restriction, not the derived ringed-site structures and their canonical comparison required here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K injective restriction to a localized site computes the restriction of a derived pushforward with arbitrary ring sheaves",
+   "results": "8 hits: ['CategoryTheory.Presheaf.isLocallyInjective_presheafToSheaf_map_iff', 'CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW', 'PresheafOfModules.instIsLocallyInjectiveToSheafify', \"CategoryTheory.Presheaf.isLocallyInjective_toSheafify'\", 'CategoryTheory.Presheaf.isLocallyInjective_of_whisker', 'CategoryTheory.Sheaf.isLocallyInjective_sheafToPresheaf_map_iff', 'CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val', 'CategoryTheory.Presheaf.isLocallyInjective_whisker_iff']; ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits give abstract triangulated adjunctions or underived restriction, not the derived ringed-site structures and their canonical comparison required here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"restrict\"",
+   "results": "12 hits: ['PresheafOfModules.restrictₛₗ', 'PresheafOfModules.restriction', 'PresheafOfModules.restriction_app', 'PresheafOfModules.restrictₛₗ_apply', 'PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap', 'PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap', 'PresheafOfModules.instFullRestrictScalarsIdFunctorOppositeRingCat', 'PresheafOfModules.restrictScalarsObj']; ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits give abstract triangulated adjunctions or underived restriction, not the derived ringed-site structures and their canonical comparison required here"
+  },
+  {
+   "tool": "grep",
+   "query": "(restrict|localiz).*(KInjective|KFlat)|ringed.*(localiz|restrict)",
+   "results": "17 hits: ['Mathlib/Geometry/RingedSpace/OpenImmersion.lean', 'Mathlib/Geometry/RingedSpace/OpenImmersion.lean', 'Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean', 'Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean', 'Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean', 'Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean', 'Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean', 'Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean']; ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits give abstract triangulated adjunctions or underived restriction, not the derived ringed-site structures and their canonical comparison required here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of a ringed topos commutes with derived direct image and tensor product",
+   "results": "0 hits: []; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lemma-weil-pbc-perfect-projection-formula",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}
