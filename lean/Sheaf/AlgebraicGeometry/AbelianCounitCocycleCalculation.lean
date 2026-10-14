@@ -47,6 +47,20 @@ local instance cocycle_pushforward_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (abelianPushforward f).Additive :=
   ⟨by intros; ext U x; rfl⟩
 
+/-- The common Ext-to-derived-sections part of the resolution comparisons.
+Source: Stacks Project, Tags 03FD and 06XR. This is the composition of the
+terminal-source Ext precomposition with the site-sections comparison. -/
+@[irreducible]
+def abelianExtSectionsIso (X : Scheme.{u})
+    (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (p : ℕ) :
+    AddCommGrpCat.of (H F p) ≅
+      ((abelianSections X).rightDerived p).obj
+        ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj F) :=
+  (Abelian.Ext.precompAddEquiv (terminalSourceIso X)
+    ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj F) p).toAddCommGrpIso ≪≫
+    siteSectionsObjIso (Opens.grothendieckTopology X) ⊤
+      ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj F) p
+
 /-- Ext compared with sections of an abelian injective resolution of a module.
 Source: Stacks Project, Tag 06XR. -/
 @[irreducible]
@@ -56,10 +70,7 @@ def abelianInjectiveResolutionIso (X : Scheme.{u})
       ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj F)) (p : ℕ) :
     AddCommGrpCat.of (H F p) ≅
       (((abelianSections X).mapHomologicalComplex (.up ℕ)).obj R.cocomplex).homology p :=
-  (Abelian.Ext.precompAddEquiv (terminalSourceIso X)
-    ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj F) p).toAddCommGrpIso ≪≫
-    siteSectionsObjIso (Opens.grothendieckTopology X) ⊤
-      ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj F) p ≪≫
+  abelianExtSectionsIso X F p ≪≫
     (abelianSections X).rightDerivedObjIsoOfResolution R.ι
       (fun n ↦ Functor.rightAcyclic_of_injective (R.cocomplex.X n)) p
 

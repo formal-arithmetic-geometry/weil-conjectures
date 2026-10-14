@@ -6,9 +6,7 @@ Authors: SHEAF group G2
 module
 
 public import Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation
-import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNormalization
 import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
-import Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 
 /-! # Evaluation of the target acyclic-resolution comparison
 
@@ -55,6 +53,48 @@ theorem abelian_resolution_comparison_evaluation (X : Scheme.{u})
     ((HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (.up ℕ) p).map
       (((abelianSections X).mapHomologicalComplex (.up ℕ)).map φ))
       ((abelianResolutionIso X I p).hom z) =
-    (abelianInjectiveResolutionIso X F R p).hom z := by sorry
+    (abelianInjectiveResolutionIso X F R p).hom z := by
+  let T := SheafOfModules.toSheaf (moduleRings X.toRingedSpace)
+  let ι := (HomologicalComplex.singleMapHomologicalComplex T (.up ℕ) 0).inv.app F ≫
+    (T.mapHomologicalComplex (.up ℕ)).map I.ι
+  have : QuasiIso ι := by
+    dsimp only [ι]
+    have : QuasiIso ((T.mapHomologicalComplex (.up ℕ)).map I.ι) := inferInstance
+    exact quasiIso_comp _ _
+  have hw : ι ≫ φ = (CochainComplex.single₀ _).map (𝟙 (T.obj F)) ≫ R.ι := by
+    rw [(CochainComplex.single₀ _).map_id, Category.id_comp]
+    simpa only [ι, Category.assoc] using hφ
+  have hc := acyclicComparison_naturality (abelianSections X) ι R.ι
+    (fun n ↦ forgottenInjectiveAcyclic X (I.cocomplex.X n))
+    (fun n ↦ Functor.rightAcyclic_of_injective (R.cocomplex.X n))
+    (𝟙 (T.obj F)) φ hw p
+  rw [((abelianSections X).rightDerived p).map_id, Category.comp_id] at hc
+  have hh :
+      ((abelianSections X).rightDerivedObjIsoOfResolution ι
+        (fun n ↦ forgottenInjectiveAcyclic X (I.cocomplex.X n)) p).hom ≫
+        HomologicalComplex.homologyMap
+          (((abelianSections X).mapHomologicalComplex (.up ℕ)).map φ) p =
+      ((abelianSections X).rightDerivedObjIsoOfResolution R.ι
+        (fun n ↦ Functor.rightAcyclic_of_injective (R.cocomplex.X n)) p).hom := by
+    rw [← cancel_mono
+      ((abelianSections X).rightDerivedObjIsoOfResolution R.ι
+        (fun n ↦ Functor.rightAcyclic_of_injective (R.cocomplex.X n)) p).inv]
+    rw [Category.assoc, hc]
+    simp only [Iso.hom_inv_id]
+  have hsource : abelianResolutionIso X I p =
+      abelianExtSectionsIso X F p ≪≫
+        (abelianSections X).rightDerivedObjIsoOfResolution ι
+          (fun n ↦ forgottenInjectiveAcyclic X (I.cocomplex.X n)) p := by
+    delta abelianResolutionIso abelianExtSectionsIso
+    exact (Iso.trans_assoc _ _ _).symm
+  have he : (abelianResolutionIso X I p).hom ≫
+      HomologicalComplex.homologyMap
+        (((abelianSections X).mapHomologicalComplex (.up ℕ)).map φ) p =
+      (abelianInjectiveResolutionIso X F R p).hom := by
+    rw [hsource]
+    delta abelianInjectiveResolutionIso
+    simp only [Iso.trans_hom, Category.assoc]
+    rw [hh]
+  exact ConcreteCategory.congr_hom he z
 
 end AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution
