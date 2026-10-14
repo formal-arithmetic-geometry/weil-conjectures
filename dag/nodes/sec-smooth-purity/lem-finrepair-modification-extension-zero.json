@@ -3,53 +3,169 @@
  "blueprint": {
   "is": "lem-finrepair-modification-extension-zero",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Extension by zero under a proper modification",
- "statement": "Let $\\pi:Y\\to X$ be proper and let $j:U\\hookrightarrow X$ be open\nsuch that $\\pi^{-1}(U)\\to U$ is an isomorphism, with morphisms as in\n[def-weil-pbc-scheme-conventions].\nWrite $j':U'=\\pi^{-1}(U)\\hookrightarrow Y$.\nFor an etale $\\Lambda$-sheaf $G$ on $U$, let $G'$ be its\npullback to $U'$. Then\n\n$$\n\\pi_*j'_!G'\\simeq j_!G,\\qquad R^q\\pi_*j'_!G'=0\\quad(q>0),\n$$\n\nusing the inverse image and extension by zero of\n[def-weil-pbc-inverse-image], [def-weil-pbc-extension-by-zero].",
+ "statement": "Let $\\Lambda$ be a finite commutative ring. Let $\\pi:Y\\to X$ be a proper morphism of schemes [def-weil-proper-morphism] and $j:U\\hookrightarrow X$ an open immersion [def-weil-open-immersion]. Put $U'=Y\\times_XU$ [def-pc-fibre-product], let $j':U'\\hookrightarrow Y$ be its open immersion and $h:U'\\to U$ its projection, and assume $h$ is an isomorphism. For any sheaf $G$ of $\\Lambda$-modules on the small etale site $U_{\\Et}$ [def-weil-pbc-etale-sheaves], put $G'=h^{-1}G$ [def-weil-pbc-inverse-image]. With extension by zero [def-weil-pbc-extension-by-zero] and derived direct image [def-weil-pbc-direct-image], the canonical adjunction map is an isomorphism and the positive higher direct images vanish:\n$$\n j_!G\\xrightarrow{\\sim}\\pi_*j'_!G',\\qquad R^q\\pi_*j'_!G'=0\\quad(q>0).\n$$\nHere the canonical map is adjoint under $\\pi^{-1}\\dashv\\pi_*$ to the inverse of the extension-by-zero base-change map $j'_!h^{-1}G\\xrightarrow{\\sim}\\pi^{-1}j_!G$. No finiteness or constructibility of $G$ and no invertibility assumption on $\\#\\Lambda$ is required.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-modification-extension-zero.md",
   "place": "node lem-finrepair-modification-extension-zero, order 1594"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-inverse-image",
-  "def-weil-pbc-extension-by-zero"
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-shriek-base-change-map"
  ],
  "proof": [
   {
-   "text": "Extension by zero commutes with pullback here: the map\n$\\pi^*j_!G\\to j'_!G'$ is obtained from its identity restriction on\n$U'$, and is an isomorphism on every geometric stalk.\nOver a point of $U'$ both stalks are the stalk of $G$;\noutside $U'$ both are zero.\nThis uses the stalk descriptions in\n[def-weil-pbc-inverse-image], [def-weil-pbc-extension-by-zero]\nand conservativity in\n[lemma-weil-pbc-geometric-stalk-conservative].\nAdjunction supplies $j_!G\\to\\pi_*j'_!G'$.",
+   "text": "Write $F=j'_!G'$ and $E=j_!G$. Apply [lem-weil-pbc-etale-shriek-base-change-modules] to the cartesian square $(j',h,\\pi,j)$: an open immersion is etale by [lem-weil-pbc-open-immersion-etale], and the general etale extension construction is exactly the open extension by zero: by [def-weil-pbc-extension-by-zero], the indexing set $\\operatorname{Hom}_X(V,U)$ has at most one member, giving the same presheaf before sheafification. This gives $b:F\\xrightarrow{\\sim}\\pi^{-1}E$. The adjunction of [def-weil-pbc-inverse-image] gives the $\\Lambda$-linear map $a=\\pi_*(b^{-1})\\circ\\eta_{\\pi,E}:E\\to\\pi_*F$. This fixes the map whose stalks will be tested.",
    "uses": [
+    "lem-weil-pbc-etale-shriek-base-change-modules",
     "def-weil-pbc-inverse-image",
     "def-weil-pbc-extension-by-zero",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "lem-weil-pbc-open-immersion-etale"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6 (lemma-shriek-base-change), module-sheaf clause and its adjunction proof; Morphisms Tag 02GP (lemma-open-immersion-etale)"
+   }
   },
   {
-   "text": "At a geometric point $\\bar x$ of $U$, the fibre of $\\pi$ is\none geometric point and the restricted sheaf is $G_{\\bar x}$.\nAt a geometric point of $X\\setminus U$, the entire fibre is\ndisjoint from $U'$, and the restricted sheaf is zero.\nThe proper geometric-fibre formula of\n[cor-weil-pbc-geometric-fiber-finite] therefore identifies\nthe displayed adjunction morphism with an isomorphism on all\nstalks, and makes every positive-degree stalk $R^q\\pi_*j'_!G'$\nzero. Apply\n[lemma-weil-pbc-geometric-stalk-conservative] once more.",
+   "text": "Fix any geometric point $\\bar x:P=\\operatorname{Spec}\\Omega\\to X$, put $Y_{\\bar x}=Y\\times_XP$, and denote its projections by $i:Y_{\\bar x}\\to Y$ and $r:Y_{\\bar x}\\to P$. Apply the derived formula of [cor-weil-pbc-geometric-fiber-finite] to $\\pi$ and $K=F[0]$. It gives the canonical exchange isomorphism $\\bar x^{-1}R\\pi_*F\\simeq Rr_*i^{-1}F$. This formula requires only a finite ring and a bounded-below complex, not finite stalks of $F$. Properness is exactly the hypothesis on $\\pi$, and $F[0]$ is bounded below.",
    "uses": [
-    "cor-weil-pbc-geometric-fiber-finite",
+    "cor-weil-pbc-geometric-fiber-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDF (lemma-proper-base-change-stalk), via Tag 0DDE"
+   }
+  },
+  {
+   "text": "Suppose $\\bar x$ lies outside $U$. Every geometric point $\\bar y$ of $Y_{\\bar x}$ maps outside $U'$: a point in $U'$ would have image in $U$. By [lem-weil-pbc-extension-by-zero-stalks], $F_{i\\bar y}=0$. By [lem-weil-pbc-inverse-image-stalk-germ], $(i^{-1}F)_{\\bar y}=F_{i\\bar y}=0$ on underlying abelian sheaves. Apply [lemma-weil-pbc-geometric-stalk-conservative] to $0\\to i^{-1}F$ to get $i^{-1}F=0$; a module sheaf with zero underlying abelian sheaf is zero. Consequently step 2 gives $\\bar x^{-1}R\\pi_*F=0$ (the zero complex is an injective resolution of zero). Also $E_{\\bar x}=0$ by the same extension-by-zero stalk lemma.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-weil-pbc-inverse-image-stalk-germ",
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S5 (proposition-describe-jshriek), 03Q1 (lemma-stalk-pullback), and 0DDF"
+   }
+  },
+  {
+   "text": "Suppose instead $\\bar x=j\\bar u$ lies in $U$. The universal property of the fibre product gives $Y\\times_XP=(Y\\times_XU)\\times_UP=U'\\times_UP$. Base-changing the inverse of $h$ supplies an inverse to $r:Y_{\\bar x}\\to P$; hence the fibre is $P$ as a scheme, not only a singleton of points. Let $\\bar y:P\\to Y$ be the resulting lift of $\\bar x$, and $\\bar u':P\\to U'$ its factorization, so $h\\bar u'=\\bar u$. The stalk formulas of [lem-weil-pbc-extension-by-zero-stalks] and [lem-weil-pbc-inverse-image-stalk-germ], applied also to $h$, give $F_{\\bar y}=(G')_{\\bar u'}=(h^{-1}G)_{\\bar u'}\\cong G_{\\bar u}$ and $E_{\\bar x}\\cong G_{\\bar u}$. By [lem-weil-pbc-geometric-point-pullback-stalk], $\\Gamma(P,i^{-1}F)\\cong F_{\\bar y}$ and sections on $P_{\\Et}$ are exact. Under the scheme isomorphism $r$, direct image is identity (on an etale object its defining fibre product is that object), so applying it to an injective resolution leaves that resolution unchanged; thus $Rr_*i^{-1}F$ has degree-zero cohomology $i^{-1}F$ and zero positive cohomology.\nIn degree zero the canonical exchange in step 2 is the underived exchange: [lem-weil-pbc-exchange-forget-coefficients] (3) identifies its underlying abelian morphism, and [lem-weil-pbc-derived-exchange-termwise] computes that morphism using underived exchange on an injective resolution. Naturality of underived exchange with the augmentation $F[0]\\to I$ identifies the degree-zero map with $\\operatorname{Ex}^0_F$ (exact inverse image preserves the degree-zero kernel, and left exact direct image identifies it with the direct image of $F$). The representative-section formula of [def-weil-pbc-underived-exchange], together with [def-weil-pbc-direct-image], sends a section over $V\\times_XY$ to its pullback on $(V\\times_XY)\\times_YP$, followed by evaluation at the point above $\\bar v$. Write $t:(\\pi_*F)_{\\bar x}\\xrightarrow{\\sim}\\Gamma(P,i^{-1}F)\\xrightarrow{\\sim}F_{\\bar y}$ for this degree-zero isomorphism. For a pointed etale neighbourhood $(V,\\bar v)$ of $\\bar x$ and $s\\in E(V)$, $a$ sends $s$ to $b^{-1}(\\eta_{\\pi,E}(V)s)$ on $V\\times_XY$. Therefore $b_{\\bar y}t a_{\\bar x}$ sends the germ of $s$ to the germ of $\\eta_{\\pi,E}(V)s$. The compatibility in [lem-weil-pbc-inverse-image-stalk-germ] gives $c_{\\pi,\\bar y,E}\\,b_{\\bar y}\\,t\\,a_{\\bar x}=\\mathrm{id}_{E_{\\bar x}}$. Every stalk element has such a representative, and $c_{\\pi,\\bar y,E}$, $b_{\\bar y}$ and $t$ are isomorphisms; hence $a_{\\bar x}=(c_{\\pi,\\bar y,E}b_{\\bar y}t)^{-1}$ is an isomorphism. Naturality with respect to scalar endomorphisms makes all these identifications $\\Lambda$-linear.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lem-weil-pbc-derived-exchange-termwise",
+    "def-weil-pbc-underived-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0DDF, 03Q1 (3), 03S5; Remark 04JN (remark-stalk-pullback); Cohomology on Sites Section 0735 (section-base-change-map), Remark 07A7 (remark-base-change), Lemma 0D6J (lemma-modules-abelian-unbounded); blueprint lem-weil-pbc-derived-exchange-termwise, statement"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-geometric-point-pullback-stalk], $\\Gamma(P,\\bar x^{-1}M)=M_{\\bar x}$ and $\\Gamma(P,-)$ is exact. Inverse image is exact by [prop-weil-pbc-inverse-image-modules-exact], so taking degree $q$ cohomology of step 2 and then sections computes $(R^q\\pi_*F)_{\\bar x}$. Steps 3 and 4 show it is zero for every $q>0$ at every geometric point, and show $a$ is an isomorphism at every geometric stalk in degree zero. Apply [lemma-weil-pbc-geometric-stalk-conservative] to $0\\to R^q\\pi_*F$ and to $a$ on underlying abelian sheaves. A bijective linear sheaf map has a linear inverse, and zero underlying abelian sheaf means zero module sheaf. Therefore $a$ is an isomorphism of $\\Lambda$-module sheaves and all $R^q\\pi_*F$, $q>0$, vanish.",
+   "uses": [
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDF, Tag 03Q1 (1), Remark 04JN, Theorem 03PU (theorem-exactness-stalks)"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-etale-shriek-base-change-modules",
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-open-immersion-etale",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-inverse-image-stalk-germ",
   "lemma-weil-pbc-geometric-stalk-conservative",
-  "cor-weil-pbc-geometric-fiber-finite"
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-derived-exchange-termwise",
+  "def-weil-pbc-underived-exchange",
+  "prop-weil-pbc-inverse-image-modules-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-modification-extension-zero.md",
-  "place": "## Proof"
+  "place": "Proof, both paragraphs, expanded using Stacks Tags 03S6, 03S5, 03Q1, 0DDF and 04JN"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of extension by zero along a proper morphism that is an isomorphism over the open support vanish",
+   "results": "DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE, DerivedCategory.isGE_iff, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.isLE_iff, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.isZero_of_isGE, HomologicalComplex.isSupported_iff_of_quasiIso",
+   "date": "2026-10-14",
+   "verdict": "no match: no proper modification theorem for etale extension by zero"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, CategoryTheory.Sheaf",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: no proper modification theorem for etale extension by zero"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*base.change|extensionByZero|lowerShriek|extension by zero",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: no proper modification theorem for etale extension by zero"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward of extension by zero from an open subset over which the map is an isomorphism",
+   "results": "none; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper base change theorem for torsion etale sheaves geometric fibre stalks of higher direct image",
+   "results": "Algebra.IsEtaleAt.comp, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, KaehlerDifferential.isBaseChange_of_formallyEtale, AlgebraicGeometry.IsEtale.of_comp, RingHom.Etale.isStableUnderBaseChange, Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars",
+   "date": "2026-10-14",
+   "verdict": "no match: no proper modification theorem for etale extension by zero"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology proper morphism direct image of a sheaf supported on the isomorphism locus",
+   "results": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern affine limits, etale morphisms, or structure-sheaf restriction, not the proper etale module-sheaf assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "jShriek|extensionByZero|IsProper.*Sheaf|Sheaf.*IsProper",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern affine limits, etale morphisms, or structure-sheaf restriction, not the proper etale module-sheaf assertion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -75,5 +191,69 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-finrepair-modification-extension-zero",
+  "worker": "stage1",
+  "summary": "Made the finite coefficient ring of the finrepair context explicit; replaced definition-only stalk citations by existing statement nodes and used the derived fibre formula so no finiteness of G is assumed. Expanded the two fibre cases and checked the actual adjunction map on germs. No new nodes.",
+  "blueprint": "Proof paragraph 1 is realized by step 1; paragraph 2 by steps 2–5. Finite coefficients are the scope of the adjacent def-finrepair-property-c and the unit finite-stage clause.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-shriek-base-change-modules",
+    "why": "Generic foundational etale sheaf tool used in the imported fibre argument; no node of this unit supplies this operation. Proposed role documented in the second-reading report for maintainer review."
+   },
+   {
+    "node": "cor-weil-pbc-geometric-fiber-finite",
+    "why": "Generic foundational etale sheaf tool used in the imported fibre argument; no node of this unit supplies this operation. Proposed role documented in the second-reading report for maintainer review."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Generic foundational etale sheaf tool used in the imported fibre argument; no node of this unit supplies this operation. Proposed role documented in the second-reading report for maintainer review."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic foundational etale sheaf tool used in the imported fibre argument; no node of this unit supplies this operation. Proposed role documented in the second-reading report for maintainer review."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic foundational etale sheaf tool used in the imported fibre argument; no node of this unit supplies this operation. Proposed role documented in the second-reading report for maintainer review."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Generic foundational etale sheaf tool used in the imported fibre argument; no node of this unit supplies this operation. Proposed role documented in the second-reading report for maintainer review."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic foundational etale sheaf tool used in the imported fibre argument; no node of this unit supplies this operation. Proposed role documented in the second-reading report for maintainer review."
+   },
+   {
+    "node": "lem-weil-pbc-derived-exchange-termwise",
+    "why": "Computes the canonical derived exchange from underived exchange on resolutions; a foundational operation, not an alternative modification argument."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Preserves the actual module exchange under forgetting coefficients so the abelian termwise theorem applies; no coefficient-category identification is assumed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-derived-exchange-termwise",
+  "lem-weil-pbc-exchange-forget-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-54ec7edbd",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-54ec7edbd (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. The five-step argument is valid with finite discrete étale coefficients and the specified canonical map. Repaired two citation gaps using existing nodes: open immersions are étale, and the degree-zero derived exchange agrees with the underived restriction map. Corrected JSON and detailed review.md written; no targets weakened, new nodes added, or cycles introduced.; 1 file(s) fixed by the reviewer"
+ }
 }
