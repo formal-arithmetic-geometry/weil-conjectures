@@ -1,6 +1,6 @@
 # Work queue
 
-25 items; claim with `tools/claim.py next <group> [--stage N]`.
+24 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,12 +8,11 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (25)
+## Stage 3: modules to prove (24)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
 | `Sheaf.CategoryTheory.SiteSystemStrictificationData` | 7 | 1 | disputed |
-| `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 20 | 1 | disputed |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
 | `WeilConjectures.ConstructibleSheaf.FinitePushforward` | 3 | 2 | proof |
