@@ -1,6 +1,6 @@
 # Work queue
 
-24 items; claim with `tools/claim.py next <group> [--stage N]`.
+23 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (24)
+## Stage 3: modules to prove (23)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -17,7 +17,6 @@
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
 | `WeilConjectures.ConstructibleSheaf.FinitePushforward` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.NormalConstantGenericUnit` | 4 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.NormalConstantOpenUnit` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BaseChangeClosedCoefficientRange` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparison` | 10 | 1 | proof |
