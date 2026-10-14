@@ -15,6 +15,7 @@ The scalar-restricted sheaf theorem has a single implementation in
 `AlgebraicGeometry.Scheme.GaloisCover.equivariantModulePresheaf_isSheaf` available
 to callers without a second declaration or gluing proof.
 This compatibility module intentionally contains no additional declarations.
+The canonical implementation remains centralized in the imported module.
 Callers should import this module when they need the canonical theorem under
 the historical compatibility path.
 (blueprint: lem-weil-pbc-torsor-equivariant-presheaf-sheaf)
