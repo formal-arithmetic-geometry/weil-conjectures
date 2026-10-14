@@ -619,6 +619,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.CohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.ConnectedConstant
 public import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
 public import WeilConjectures.AlgebraicGeometry.Sites.DerivedStalk
