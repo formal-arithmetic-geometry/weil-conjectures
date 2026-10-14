@@ -1,0 +1,102 @@
+{
+ "id": "lem-sbc-dvr-uniformizer-root-compositum-maximal-ideal",
+ "kind": "statement",
+ "title": "Weak unramifiedness in the uniformizer-root compositum",
+ "statement": "In the uniformizer-root case of Abhyankar's lemma, the extension of the maximal ideal of A to the selected normalized DVR T is the maximal ideal of T.",
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BRM, 09EV, 09EQ and 09E7."
+ },
+ "proof": [
+  {
+   "text": "The root calculation makes the normalized U-extension finite etale, hence index one. Multiplicativity of indices and the further base-change lemma preserve index one. The weakly unramified criterion then identifies the extended maximal ideal with the maximal ideal of T.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "kind": "written-by-agent",
+  "agent": "F4",
+  "document": "Stacks Project",
+  "place": "Tags 0BRM, 09EV, 09EQ and 09E7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An etale extension of a discrete valuation ring obtained by adjoining a root of a unit",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoin an e-th root of a unit in a discrete valuation ring by an etale extension and lift a local map of DVRs",
+   "date": "2026-10-14",
+   "results": "StandardEtalePair.lift, lift_X, homEquiv and the standard-etale instances were returned. None constructs the local DVR square or its fraction-field generation.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "StandardEtalePair|isDedekindDomain.of_formallyUnramified",
+   "date": "2026-10-14",
+   "results": "Found the standard-etale API and isDedekindDomain.of_formallyUnramified. The latter needs an already specified finite domain.",
+   "verdict": "No local unit-root diagram theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.DvrAbhyankarLocalMaximalIdeal",
+  "date": "2026-10-14",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-dvr-abhyankar-local-maximal-ideal",
+   "place": "Tags 0BRM, 09EV, 09EQ and 09E7.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.DvrUniformizerRootCompositumMaximalIdeal",
+  "file": "lean/Sheaf/RingTheory/DvrUniformizerRootCompositumMaximalIdeal.lean",
+  "declaration": "RingTheory.dvr_uniformizer_root_compositum_map_maximalIdeal",
+  "statement": "theorem dvr_uniformizer_root_compositum_map_maximalIdeal\n    (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]\n    (pi : B) (hpi : Irreducible pi)\n    (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]\n    [Algebra B A]\n    (U : Type u) [CommRing U] [IsDomain U] [IsDiscreteValuationRing U]\n    [Algebra B U] [IsLocalHom (algebraMap B U)]\n    (e : ℕ) (he : IsUnit (e : B))\n    (theta : A) (hroot : theta ^ e = algebraMap B A pi)\n    (hindexU : (IsLocalRing.maximalIdeal B).map (algebraMap B U) =\n      IsLocalRing.maximalIdeal U ^ e)\n    (hsep : Algebra.IsSeparable (IsLocalRing.ResidueField B) (IsLocalRing.ResidueField U))\n    (E : Type u) [Field E] [Algebra (FractionRing B) E]\n    [Algebra B E] [IsScalarTower B (FractionRing B) E]\n    [FiniteDimensional (FractionRing B) E] [Algebra.IsSeparable (FractionRing B) E]\n    [Algebra U E] [IsFractionRing U E] [IsScalarTower B U E]\n    (F : Type u) [Field F] [Algebra A F] (iE : E →+* F)\n    (hcomm : ∀ b : B, iE (algebraMap B E b) =\n      algebraMap A F (algebraMap B A b))\n    (hgen : Algebra.adjoin A (Set.range iE) = ⊤)\n    (T : Type u) [CommRing T] [IsDomain T] [IsDiscreteValuationRing T]\n    [Algebra A T] [IsLocalHom (algebraMap A T)]\n    [Algebra T F] [IsFractionRing T F] [IsScalarTower A T F]\n    (j : U →+* T) (hj : IsLocalHom j)\n    (hjB : ∀ b : B, j (algebraMap B U b) =\n      algebraMap A T (algebraMap B A b))\n    (hjE : ∀ c : U, algebraMap T F (j c) = iE (algebraMap U E c)) :\n    (IsLocalRing.maximalIdeal A).map (algebraMap A T) = IsLocalRing.maximalIdeal T",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261014T043251-L-1305038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261014T043251-L-1305038",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
