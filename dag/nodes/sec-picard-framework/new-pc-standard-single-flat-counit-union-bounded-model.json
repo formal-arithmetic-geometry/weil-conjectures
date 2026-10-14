@@ -1,0 +1,103 @@
+{
+ "id": "new-pc-standard-single-flat-counit-union-bounded-model",
+ "kind": "statement",
+ "title": "Bounded-above model for the union direct image",
+ "statement": "Let p:Y→B be a quasi-compact and quasi-separated morphism of schemes, let B and A be affine schemes, let g:A→B, and let U,V be opens of Y. Let N be a quasi-coherent module on U∪V flat over B. Assume StandardSingleFlatCounitOnOpen(p,g,T) for T=U,V,U∩V [def-pc-standard-single-flat-counit-presentation-on-open]. Using the standard derived categories of module sheaves, there exist a complex K of module sheaves on B, an integer b with K^i=0 for i>b, and an isomorphism R((U∪V)→B)_*(N[0])≅Q(K). No termwise flatness, pullback comparison or counit equation is asserted.",
+ "stmt_deps": [
+  "def-pc-standard-single-flat-counit-presentation-on-open"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08BV and 0DJ9"
+ },
+ "proof": [
+  {
+   "text": "Use the relative Mayer--Vietoris construction and truncation argument described in the source.",
+   "uses": [
+    "lem-pc-kinjective-mayer-vietoris-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kinjective-mayer-vietoris-presentation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08BV and 0DJ9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded above flat complex representative derived category",
+   "results": "No exact match; generic flat replacement infrastructure only.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "boundedAbove flat replacement derived category",
+   "results": "No exact match.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedAbove.*flat.*replacement",
+   "results": "Only the imported replacement theorem; no union model theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionCore",
+  "date": "2026-10-14",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-pc-standard-single-flat-counit-union-core",
+   "place": "intermediate step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UnionBoundedAboveModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnionBoundedAboveModel.lean",
+  "declaration": "AlgebraicGeometry.exists_boundedAbove_union_model",
+  "statement": "theorem exists_boundedAbove_union_model {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p] [IsAffine B] [IsAffine A] (g : A ⟶ B) (U V : Y.Opens) (N : (U ⊔ V).toScheme.Modules) [N.IsQuasicoherent] (hN : N.IsFlatOver ((U ⊔ V).ι ≫ p)) (hPU : StandardSingleFlatCounitOnOpen p g U) (hPV : StandardSingleFlatCounitOnOpen p g V) (hPUV : StandardSingleFlatCounitOnOpen p g (U ⊓ V)) : letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard (SheafOfModules.{u} (moduleRings X.toRingedSpace)) letI := HasDerivedCategory.standard A.Modules letI := HasDerivedCategory.standard B.Modules ∃ K : CochainComplex (SheafOfModules.{u} (moduleRings B.toRingedSpace)) ℤ, (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (K.X i)) ∧ Nonempty (((schemeDerivedDirectImage ((U ⊔ V).ι ≫ p)).obj ((DerivedCategory.singleFunctor _ 0).obj N) ≅ DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj K)))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-4afdf",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261014T004058-L-2832491",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-4afdf",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261014T004058-L-2832491",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged item signature and delivered lemmas matched their nodes and cited arguments; all three modules and the sole direct importer compile cleanly; axioms are permitted foundations plus sorryAx from the two recorded holes."
+ }
+}

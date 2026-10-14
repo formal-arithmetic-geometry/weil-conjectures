@@ -1,0 +1,101 @@
+{
+ "id": "new-pc-bounded-above-model-flat-replacement",
+ "kind": "statement",
+ "title": "Flat replacement of a bounded-above model",
+ "statement": "For a derived sheaf-module object E admitting a bounded-above complex representative, there is a bounded-above termwise flat complex representative of E.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 077J"
+ },
+ "proof": [
+  {
+   "text": "Choose a bounded representative K, its upper bound b, and an isomorphism e:E≅Q(K) from the hypothesis. Apply lem-pc-kflat-bounded-flat-replacement on the ringed site of B to K with bound b, obtaining a termwise flat complex F zero above b and a quasi-isomorphism ε:F→K. Localization makes Q(ε) invertible. The composite e followed by Q(ε) inverse identifies E with Q(F). No Mayer--Vietoris construction or truncation is needed.",
+   "uses": [
+    "lem-pc-kflat-bounded-flat-replacement"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-bounded-flat-replacement"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 077J"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded above flat complex representative derived category",
+   "results": "No exact match; generic flat replacement infrastructure only.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "boundedAbove flat replacement derived category",
+   "results": "No exact match.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedAbove.*flat.*replacement",
+   "results": "Only the imported replacement theorem; no union model theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionCore",
+  "date": "2026-10-14",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-pc-standard-single-flat-counit-union-core",
+   "place": "intermediate step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BoundedAboveModelFlatReplacement",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedAboveModelFlatReplacement.lean",
+  "declaration": "AlgebraicGeometry.exists_flat_model_of_boundedAbove_model",
+  "statement": "theorem exists_flat_model_of_boundedAbove_model {B : Scheme.{u}} [hB : HasDerivedCategory (SheafOfModules.{u} (moduleRings B.toRingedSpace))] [hBM : HasDerivedCategory B.Modules] (E : schemeDerivedCategory B) (h : ∃ K : CochainComplex (SheafOfModules.{u} (moduleRings B.toRingedSpace)) ℤ, (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (K.X i)) ∧ Nonempty (E ≅ DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj K))) : ∃ K : CochainComplex (SheafOfModules.{u} (moduleRings B.toRingedSpace)) ℤ, (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (K.X i)) ∧ (∀ i : ℤ, SheafOfModules.IsFlat (K.X i)) ∧ Nonempty (E ≅ DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj K))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-4afdf",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261014T004058-L-2832491",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-4afdf",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261014T004058-L-2832491",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged item signature and delivered lemmas matched their nodes and cited arguments; all three modules and the sole direct importer compile cleanly; axioms are permitted foundations plus sorryAx from the two recorded holes."
+ }
+}
