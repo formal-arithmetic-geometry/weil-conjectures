@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMap
 public import Sheaf.AlgebraicGeometry.RawModuleScalarSourceFactors
 public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare
 import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula
+import Sheaf.AlgebraicGeometry.RawModuleScalarHomEvaluation
 
 /-! # The bundled scalar Hom composite
 
@@ -22,6 +23,17 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
+private theorem map_three_factors
+    {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {X Y Z T : C} {P Q : D}
+    (c : P ⟶ F.obj X) (b : F.obj T ⟶ Q)
+    (m : X ⟶ Y) (z : Y ⟶ Z) (t : Z ⟶ T) (x : X ⟶ T)
+    (h : x = m ≫ z ≫ t) :
+    c ≫ F.map x ≫ b = c ≫ F.map m ≫ F.map z ≫ F.map t ≫ b := by
+  rw [h, Functor.map_comp, Functor.map_comp]
+  simp only [Category.assoc]
+
+set_option backward.isDefEq.respectTransparency true in
 /-- Expand the scalar map on a raw module pullback, retaining all module factors.
 Source: Stacks Project, Tags 03FD and 03Q8, raw-map expansion.
 (blueprint: lem-sbc-raw-module-scalar-hom-composite-formula).
@@ -54,6 +66,13 @@ theorem rawModuleScalar_hom_composite_formula
         ((upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.map z) ≫
       (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus.map
         (moduleCoefficientFactor Λ G (q : ℤ) A B f) ≫
-      scalarCoefficientFactor Λ A.hom G (q : ℤ) := by sorry
+      scalarCoefficientFactor Λ A.hom G (q : ℤ) := by
+  exact (rawModuleScalarHom_evaluate Λ k G q U A _).trans
+    (map_three_factors (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus
+      (scalarSourceFactor Λ (A.hom ≫ k) ((freeSheaf Λ S).obj U)
+        (RawModuleScalarComparison.freeAbelian S U)
+        (RawModuleScalarComparison.freeMap Λ S U))
+      (scalarCoefficientFactor Λ A.hom G (q : ℤ)) _ _ _ _
+      (rawModuleScalar_pullback_module_formula Λ k G q U A B f z))
 
 end AlgebraicGeometry.Etale

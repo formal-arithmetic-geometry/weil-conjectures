@@ -14,24 +14,30 @@
  ],
  "proof": [
   {
-   "text": "Evaluate the defining composite rawModuleAbelianHomMap: derived scalar forgetting on Hom groups, right composition by b, and left composition by c. The named scalar coefficient and source factors are exactly b and c. Apply rawModuleScalar_pullback_module_formula inside derived scalar forgetting to replace its raw input with the module source factor, derived module inverse image of z and module coefficient factor. Distribute the derived forgetting map across these three factors with Functor.map_comp: no source coherence or naturality equation is used. This handles zero classes, degree zero, identity arrows and zero coefficients.",
+   "text": "Apply the proved rawModuleScalarHom_evaluate equation to the raw pullback class at A. This identifies the bundled additive map with scalarSourceFactor, derived scalar forgetting of the raw pullback, and scalarCoefficientFactor.",
    "uses": [
-    "def-sbc-raw-module-abelian-hom-map",
+    "lem-sbc-raw-scalar-hom-evaluation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use rawModuleScalar_pullback_module_formula for the raw input. The private generic map_three_factors lemma substitutes this equality, applies Functor.map_comp twice, and reassociates. Specialize it to derived scalar forgetting and the displayed source and coefficient factors, then compose the two equalities. There are no nonzero or positive-degree hypotheses and no source coherence or comparison naturality is used.",
+   "uses": [
     "lem-sbc-raw-scalar-pullback-module-formula"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sbc-raw-module-abelian-hom-map",
+  "lem-sbc-raw-scalar-hom-evaluation",
   "lem-sbc-raw-scalar-pullback-module-formula"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "N4",
+  "group": "W3",
   "date": "2026-10-14",
-  "document": "Stacks Project; explicit library construction",
-  "place": "Tags 03FD and 03Q8; expansion of the bundled additive map"
+  "document": "Stacks Project; explicit library constructions and the proved scalar Hom evaluation equation",
+  "place": "Tags 03FD and 03Q8; generic functorial expansion of the bundled scalar map"
  },
  "mathlib_searches": [
   {
@@ -128,10 +134,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N4",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261014T090920-L-366641",
-  "kind": "interface",
+  "landing": "20261014T094005-L-732486",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
