@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sbc-lem-smooth-relative-dimension-locally-constant",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Local constancy of the relative dimension",
@@ -21,12 +21,90 @@
  "stmt_deps": [
   "def-sbc-smooth-morphisms"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "The sorry-free project declaration `AlgebraicGeometry.Smooth.isLocallyConstant_topologicalKrullDimAt_asFiber` has exactly the stated hypotheses and conclusion, so the item follows by direct attachment to that declaration.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "/home/ubuntu/weil-src-slopmaster2/WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+    "place": "lines 463-498"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "/home/ubuntu/weil-src-slopmaster2/WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+  "place": "AlgebraicGeometry.Smooth.isLocallyConstant_topologicalKrullDimAt_asFiber, lines 463-498; Stacks Tag 02G1, lemma-smooth-omega-finite-locally-free"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "local constancy of relative dimension for smooth morphism schemes",
+   "results": "AlgebraicGeometry.isSmoothOfRelativeDimension_iff; AlgebraicGeometry.IsSmoothOfRelativeDimension; AlgebraicGeometry.IsSmooth.exists_isStandardSmooth; no theorem for local constancy of fibre dimension",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Free rank locally constant, LocallyFree",
+   "results": "Loogle rejected the query: Unknown identifier `rank`; this search gives no mathematical absence evidence.",
+   "date": "2026-10-15",
+   "verdict": "invalid query; no conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "rank.*locally constant|locally free.*rank",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean:231 Scheme.Hom.isLocallyConstant_finrank (finite flat locally finitely presented morphisms), not the relative-differential fibre-dimension statement",
+   "date": "2026-10-15",
+   "verdict": "generalization: only finite-flat morphism finrank"
+  },
+  {
+   "tool": "leansearch",
+   "query": "rank of finite locally free module is locally constant",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallyConstant.*(dim|rank)|relativeDimension",
+   "results": "SmoothOfRelativeDimension charts; FlatRank.lean:232-233 Scheme.Hom.isLocallyConstant_finrank requires a finite flat morphism. No fibre-dimension local-constancy declaration in Mathlib.",
+   "date": "2026-10-15",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth scheme morphism has a locally constant function giving dimension at the canonical point of each residue-field fibre",
+   "results": "8 hits: IsSmoothOfRelativeDimension, isSmoothOfRelativeDimension_iff, standard-smooth charts and IsSmooth; no theorem stating the conclusion.",
+   "date": "2026-10-15",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocallyConstant, \"rank\"",
+   "results": "Module.isLocallyConstant_rankAtStalk and Module.isLocallyConstant_rankAtStalk_freeLocus, and Scheme.Hom.isLocallyConstant_finrank. The first two concern modules on affine spectra, the third finite flat morphisms; none is the whole item.",
+   "date": "2026-10-15",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallyConstant.*[Kk]rull|[Kk]rull.*isLocallyConstant",
+   "results": "0 hits (independent second-reader search).",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocallyConstant, \"dim\"",
+   "results": "0 hits (independent second-reader search).",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "undischarged_input",
@@ -61,5 +139,29 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-def-smooth"
+ "unit": "sk-def-smooth",
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "sbc-lem-smooth-relative-dimension-locally-constant",
+  "worker": "stage1",
+  "summary": "Verified the exact sorry-free slopmaster2 attachment AlgebraicGeometry.Smooth.isLocallyConstant_topologicalKrullDimAt_asFiber. Added the required direct-attachment proof step for delivery preflight; no new nodes or Mathlib leaves, and the statement is unchanged.",
+  "blueprint": "The item is the blueprint node itself; the direct attachment realizes its sole recorded Stacks 02G1 input."
+ },
+ "lean_candidates": [
+  {
+   "declaration": "AlgebraicGeometry.Smooth.isLocallyConstant_topologicalKrullDimAt_asFiber",
+   "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth",
+   "file": "WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "lines": "463-498",
+   "note": "Exact whole-node attachment: arbitrary schemes X,Y and Smooth f; IsLocallyConstant of topologicalKrullDimAt (f.asFiber x). topologicalKrullDimAt is the infimum of dimensions of open neighbourhoods (KrullDimension.lean:343-344), and asFiber is the canonical point over x of the residue-field fibre (Mathlib/AlgebraicGeometry/Fiber.lean:116-120). local/sorry_map_slopmaster2_7d675a26.jsonl.gz records s=false and ts=false. No proof split is required (stage 1 section 2, Lean in slopmaster2 finishes a node)."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-189ed032b",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-189ed032b (reviewer sub-agent of L); spot-checked: Read the full item, report, cited mathematics, and unit/chapter route. Verified exact slopmaster2 attachment against its signature, fibre and dimension definitions, and sorry-map s=false/ts=false record. Checked Stacks 02G1, 02H6, and 0055, edge cases, and existing DAG candidates. No new nodes, repairs, or accepted tool_uses. Detailed checks are in review.md."
+ }
 }
