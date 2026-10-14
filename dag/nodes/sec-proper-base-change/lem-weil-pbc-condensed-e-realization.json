@@ -26,9 +26,192 @@
   "def-weil-pbc-completed-base-change-map",
   "def-weil-pbc-cartesian-square"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First verify the geometric hypotheses. The field $k$ is Noetherian: its only ideals are $0$ and $k$. Its spectrum is affine and locally Noetherian. By [pqf-lem-locnoeth-lft] each finite-type $k$-scheme here is locally Noetherian, and [lem-weil-pbc-qcqs-over-affine] makes it quasi-compact and quasi-separated, hence Noetherian. By [lem-kun-dimension-finite-type] it has finite topological Krull dimension. Since $\\operatorname{char}k\\ne\\ell$, the nonzero scalar $\\ell$ has an inverse in $k$, whose image is an inverse in every local ring. Thus all hypotheses of the integral characterization, compactness and lattice lemmas used below hold. Use [lem-weil-pbc-condensed-lfp-local-triviality] to identify $E_T^c$ with the sheaf $E_T(V)=C(|V|,E)$ and to turn the archived finite-presentation condition into local finite freeness on each noetherian stratum. The converse holds because a free rank $r$ module has presentation $0\\to(E_T)^r$. Thus the archived subcategory is precisely the bounded complexes with stratified lisse cohomology. For integral coefficients put $A=\\mathcal O_E$. The completed coefficient datum identifies $A_T(V)$ with compatible continuous functions to $A/\\varpi^n$, hence with $C(|V|,A)$: continuity to the inverse-limit topology is equivalent to continuity of all reductions. Locally on a quasi-compact site object, any continuous map to $E$ has bounded image, hence lies in $\\varpi^{-n}A$ for some $n$; consequently the sheaf localization $A_T[1/\\varpi]$ is $E_T$. This uses quasi-compact objects only as a covering basis, and asserts no uniform denominator on a non-quasi-compact object. In particular the coefficient ring in the realization is the archived ring, not the discrete constant sheaf $E$. More precisely, the integral coefficient is also the point pullback $p_T^*C(-,A)$. On an affine weakly contractible $V$, [lem-weil-pbc-condensed-point-basis-evaluation] gives $C(\\pi_0(|V|),A)$; continuous functions from $|V|$ to the totally disconnected $A$ factor through the quotient $\\pi_0(|V|)$, and continuity of the factor is exactly the quotient-topology condition. The projections $C(-,A)\\to C(-,A/\\varpi^n)$ give a natural map to $A_T$; on these $V$ it is the bijection between continuous functions to an inverse limit and compatible functions to its finite quotients. The covering assertion [lem-weil-pbc-proetale-affine-wcontractible-covering-family] makes this a sheaf isomorphism. This identifies the integral coefficient maps for every scheme morphism with the point-pullback composition maps: their reductions both send a function to its pullback, and maps into the limit are equal when all their projections agree.",
+   "uses": [
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-pbc-condensed-point-basis-evaluation",
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "lem-weil-pbc-profinite-point-pullback",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 4.2.12, 6.8.2; Definition 6.8.8; archived finite-presentation bridge supplied by the cited existing node"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-integral-stratified-perfect-characterization], an integral object has bounded stratified constructible cohomology, its cohomology sheaves and truncations remain integral objects, and its category is closed under cones. Scalar localization of module sheaves is exact: as an underlying abelian sheaf it is the filtered colimit of the sequence $M\\xrightarrow{\\varpi}M\\xrightarrow{\\varpi}\\cdots$, by the usual fraction relation $m/\\varpi^n=(\\varpi m)/\\varpi^{n+1}$. Exactness follows from the two cited colimit statements, which also show that its termwise action commutes with cohomology. On a local integral presentation, tensoring with $E_T$ gives a finite presentation over $E_T$, which is locally free by step 1. Thus $J_T^0(K)=E_T\\otimes^L_{A_T}K=K[1/\\varpi]$ lands in the archived category. It inverts the scalar $\\varpi$; on a localized morphism $u/\\varpi^n$ define $J_T(u/\\varpi^n)=\\varpi^{-n}J_T^0(u)$. The fraction relation respects composition, so this defines an exact $E$-linear functor from the raw rationalized category.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "def-weil-pbc-rational-category",
+    "lem-weil-linear-scalar-localization-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Propositions 6.6.11, 6.8.11(3), 6.8.14(2); explicit construction of its scalar-localized functor"
+   }
+  },
+  {
+   "text": "For integral $K,L$, restrict $J_TL$ to $A_T$-modules: it is the telescope of $L\\xrightarrow{\\varpi}L\\to\\cdots$. The family of copies of $L$ has a common lower bound by step 2. On bounded-below representatives the telescope is the cone of $1-s$ on the direct sum of copies of $L$, where $s$ sends summand $n$ into summand $n+1$ by multiplication by $\\varpi$. The map $1-s$ is injective: in a finitely supported kernel vector its first component is zero and the later components are successively zero. Its cokernel is the filtered colimit by the defining relations. Thus its cone is quasi-isomorphic to $L[1/\\varpi]$. Apply [lem-weil-pbc-integral-constructible-bounded-below-compactness] to the two coproducts in the telescope triangle. Derived Hom is exact, so it carries this triangle to the telescope of the complexes $R\\operatorname{Hom}(K,L)$ under multiplication by $\\varpi$. Exact filtered colimits, as cited in step 2, identify the cohomology of that telescope with the localization of the cohomology of $R\\operatorname{Hom}(K,L)$. For completeness the scalar-extension/restriction adjunction used here is obtained as follows: on sheaves a map $E_T\\otimes_{A_T}N\\to P$ corresponds to $n\\mapsto\\phi(1\\otimes n)$, with inverse $e\\otimes n\\mapsto e\\psi(n)$; balancing and sheafification make these inverse. Both localization and restriction are exact, so [lem-pc-pre-derived-adjoint-functors-general] derives this adjunction everywhere (their termwise derived functors are already defined, by [lem-weil-pbc-exact-functor-derived-functor]). It therefore gives, in every shift degree $q$, $\\operatorname{Hom}_{E_T}(J_TK,J_TL[q])=\\operatorname{Hom}_{A_T}(K,L[q])[1/\\varpi]$. The map is the actual scalar-extension map, so it respects identities and compositions. Degree zero is exactly the Hom in the raw rationalization, proving full faithfulness.",
+   "uses": [
+    "lem-weil-pbc-integral-constructible-bounded-below-compactness",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-pbc-rational-category",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and proof of Proposition 6.8.14(2)"
+   }
+  },
+  {
+   "text": "Every lisse $E_T$-sheaf has a constructible integral model by [lem-weil-pbc-lisse-e-constructible-integral-lattice]; the model, placed in degree zero, belongs to the integral category by [lem-weil-pbc-integral-stratified-perfect-characterization]. The essential image of $J$ is closed under shifts and cones: full faithfulness lifts any morphism between image objects to a fraction $u/\\varpi^n$, and its cone is isomorphic to the image of the integral cone of $u$, as follows. For $u:K_0\\to L_0$, put $a=J(u)/\\varpi^n$. The square from the arrow $a:J(K_0)\\to J(L_0)$ to $J(u):J(K_0)\\to J(L_0)$ has identity on the source and multiplication by $\\varpi^n$ on the target, since $\\varpi^n a=J(u)$. Both vertical maps are isomorphisms. The triangulated-category axioms therefore give an isomorphism of their cone triangles, so the cone of $a$ is isomorphic to $J(\\operatorname{Cone}(u))$. For a stratified lisse sheaf, first use [lem-weil-pbc-reduced-induced-closed-subscheme] to replace the ambient scheme by its reduction $i:T_{\\mathrm{red}}\\hookrightarrow T$. The exact sequence of [lem-weil-pbc-proetale-ringed-open-closed] with empty open complement gives $F\\cong i_*i^{-1}F$, and $i^{-1}i_*\\cong1$. The coefficient sheaves are identified by step 1. An integral model on $T_{\\mathrm{red}}$ therefore gives one on $T$ by exact $i_*$: use its supporting reduced strata, on which $i^{-1}i_*\\cong1$, and the integral characterization. We can hence work on a reduced ambient scheme. Now induct on the dimension of the remaining closed subset, first refining the finite stratification to a filtration by closed subsets: successively take a dense open subset of the remaining closed space on which each original locally closed piece meeting a generic point is open, and remove it. For the remaining closed subset, [lem-sc-noetherian-closed-subset-finite-components] gives finitely many irreducible components, and [lem-sc-scheme-sober] gives their generic points (give the subset its reduced closed subscheme structure by [lem-weil-pbc-reduced-induced-closed-subscheme]; it is Noetherian since locally its ring is a quotient of a Noetherian ring, and ascending ideal chains lift to such chains in that ring). Around each generic point remove all other components; these are closed and do not contain that generic point. The resulting neighborhoods are pairwise disjoint, because every point lies in a component. The original locally closed stratum containing that generic point has the form $O\\cap F$; its closed part $F$ contains the whole component, since it contains its generic point. Intersect the neighborhood with $O$, so it lies inside that stratum. The inclusion of each resulting reduced neighborhood factors through its original stratum as a scheme morphism, not just set-theoretically: in the open part of the stratum immersion, every section of its defining ideal has zero residue at all points of the neighborhood, hence lies in its nilradical and is zero because that neighborhood is reduced. The quotient-ring description of [def-weil-closed-immersion] gives the factorization. Thus pulling back the original lisse restriction makes the sheaf lisse on this neighborhood. Their finite union is the required open layer. Its quasi-compactness follows from [lem-weil-pbc-noetherian-open-subscheme-noetherian]. The remaining closed subset misses every generic point. A chain of irreducible closed subsets in it can be extended by a component of the previous closed subset containing its largest member; this component is strictly larger because its generic point was removed. By the chain definition [def-kun-topological-krull-dimension], dimension strictly decreases. Finite dimension makes the filtration finite; alternatively the minimal-closed-subset condition of [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] rules out an infinite strictly descending residual chain. Each open layer is a finite disjoint union of pieces lying within original strata. The base case is the empty closed subset, whose only sheaf is zero. Choose the first open layer and its closed complement. The exact open-closed sequence of [lem-weil-pbc-proetale-ringed-open-closed] writes the sheaf as an extension of the extension-by-zero of its open restriction and the closed direct image of its closed restriction. Integral models for these restrictions extend by the same exact functors; their local descriptions are unchanged on their supporting strata and zero off their support, so they are integral by the characterization. Step 3 lifts the extension class and its cone as above. Finally, for a bounded complex induct on its cohomological interval using the standard truncation triangles [def-sbc-standard-tstructure-derived-category]; each cohomology sheaf is already in the image, so closure under cones gives an integral model for the complex. This proves essential surjectivity without adding a Karoubi envelope.",
+   "uses": [
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-triangulated-category",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13 and proof of Proposition 6.8.14(2): stratification and bounded truncation devissage"
+   }
+  },
+  {
+   "text": "By step 1, the integral and field coefficients are point pullbacks, and their coefficient structure maps are the composition isomorphisms of [lem-weil-pbc-profinite-point-pullback]. Thus ordinary module pullback is the exact inverse image with the identified action, as stated in [def-weil-pbc-proetale-operations]. Pulling back the finite stratification and its local perfect complexes preserves the stratified perfect description: inverse images of strata are locally closed, and base changes of pro-etale covers are pro-etale covers. A local finite free complex over $A_U$ becomes the same finite free complex over $A_T$. By [lem-weil-pbc-integral-stratified-perfect-characterization] the result is integral and already complete. The completion-unit comparison in [def-weil-pbc-completed-pullback] is therefore an isomorphism from this ordinary integral pullback to the specified completed pullback, with the finite quotient identifications of [lem-weil-pbc-constant-completion-equivalence]. For the scalar comparison use the localization construction of step 2: exact inverse image, being a left adjoint [def-weil-proetale-inverse-image], preserves the colimit of the multiplication-by-$\\varpi$ sequence. It therefore identifies $h^{-1}(K[1/\\varpi])$ with $(h^{-1}K)[1/\\varpi]$ termwise. Both functors are exact, so the same natural comparison descends to the derived category by [lem-weil-pbc-exact-functor-derived-functor], giving $J_TLh^*_{\\mathrm{comp}}\\cong Lh_c^*J_U$. The comparison sends a local fraction $m/\\varpi^n$ to the pulled-back section divided by $\\varpi^n$. For two morphisms, both composites send that fraction to its twice-pulled-back section with the same denominator; for the identity the section is unchanged. These equalities on the colimit cocone determine the sheaf maps, hence their derived maps. Together with the monoidal composition equations in [lem-weil-pbc-profinite-point-pullback], this verifies identity and composition compatibility without taking derived tensor associativity from a node that does not state it.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-profinite-point-pullback",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Remark 6.8.15; comparison with the defined completed pullback"
+   }
+  },
+  {
+   "text": "The schemes are finite type over a field of characteristic different from $\\ell$; thus the integral direct-image constructibility theorem [lem-sf-integral-direct-image-constructible] applies, using the equality of completed coefficient categories in [lem-weil-pbc-integral-stratified-perfect-characterization]. In particular $Rh_*M$ is again integral, with a bound independent of the quotient level. Its actual ambient direct image equals the derived inverse limit used there by [prop-weil-pbc-direct-image-limits]. For the scalar-extension comparison, regard $M[1/\\varpi]$ as the filtered colimit of $M$ under scalar multiplication. The terms have a common lower bound by the integral characterization, and $h$ is qcqs: the inverse image of an affine open of $U$ is open in the Noetherian $T$ and therefore quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. The same argument for the diagonal $T\\to T\\times_U T$ makes it quasi-compact, proving quasi-separatedness. Also $h$ is locally of finite type by clause (f) of [lem-weil-pbc-proper-fp-permanence], applied to $T\\xrightarrow{h}U\\to\\operatorname{Spec}k$; together with quasi-compactness this is finite type. Thus the direct-image theorem is applied to a morphism of finite type, not just to two schemes individually of finite type. Apply [lem-weil-pbc-condensed-qcqs-pushforward-continuity] to coefficients $C(-,A)$: the natural point-pullback identification with $A_T$ was proved in step 1, including its compatibility with coefficient maps. The canonical map $(Rh_*M)[1/\\varpi]\\to Rh_{c,*}(M[1/\\varpi])$ is an isomorphism on every cohomology sheaf by that continuity assertion, hence an isomorphism in the derived category. Its coefficient action is the one adjoint to the coefficient pullback; scalar restriction leaves the underlying direct-image sheaves unchanged. This is $J_URh_{\\mathrm{rat},*}\\cong Rh_{c,*}J_T$ and proves preservation of the condensed constructible subcategory, using essential surjectivity from step 4.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-sf-integral-direct-image-constructible",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "lem-weil-pbc-condensed-point-basis-evaluation",
+    "def-weil-pbc-condensed-e-module-category",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.2; Remark 6.8.15; bounded-below qcqs continuity used for localization"
+   }
+  },
+  {
+   "text": "Use the integral pullback/direct-image adjunction and localize its Hom bijections. The functor and natural-transformation formulas in [prop-weil-pbc-rational-transport] preserve compositions and identities, so the localized units and counits still satisfy the two triangle identities. The comparisons of steps 5 and 6 are an adjoint pair of comparisons: the direct-image comparison is the adjunct of the scalar-extension pullback comparison followed by the integral counit, because both send a fraction $m/\\varpi^n$ by the same counit map divided by $\\varpi^n$. This is the module scalar-extension adjunction explicitly derived in step 3, followed by the scheme module adjunction of [def-weil-pbc-proetale-operations]. For coefficient restriction, [lem-weil-pbc-ring-sheaf-change-adjunction] applies with $R_T=A_T$, $S_T=E_T$ and their identified point-pullback coefficient maps from step 1; its adjunct equation gives exactly this compatibility on restrictions. Consequently its unit equation is $J(\\eta_N)=\\eta^c_{JN}$ and its counit equation is $J(\\epsilon_M)=\\epsilon^c_{JM}$ after inserting these comparisons. These equations can also be checked by adjunction: both sides of the unit equation correspond to the identity of the pullback object and both sides of the counit equation correspond to the identity of the direct-image object. This proves the asserted adjunction compatibility. Step 5 proves composition compatibility, so its square-composition comparison also agrees.",
+   "uses": [
+    "prop-weil-pbc-rational-transport",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; explicit adjunction check for the scalar-extension comparisons"
+   }
+  },
+  {
+   "text": "It remains to check the specified ordered exchange. Fix compatible witnesses provided by integral membership. In the strict-tower normalization of [lem-weil-pbc-strict-tower-exchange-mate-normalization], write $e$ for the ambient integral unit-square-counit mate. The specified tower exchange is exactly $H'\\mathcal R(e)H^{-1}$, not merely a family of its evaluations. Apply the functor $R\\lim$ to this equality and insert the source comparison $s$ and target comparison $c^{-1}$ prescribed in [def-weil-pbc-completed-base-change-map]. Naturality of the reduction-tower completion unit, and the direct-image/limit comparison of [prop-weil-pbc-direct-image-limits], identify the resulting composite with $e$ conjugated by the ordinary-to-completed pullback maps of step 5: explicitly $\\Ex^{\\mathrm{comp}}=(Rh'_*\\gamma_{g',M})\\circ e\\circ\\gamma_{g,Rh_*M}^{-1}$, where $\\gamma$ denotes that completion unit. Here the two occurrences of $R\\lim H$ and $R\\lim H'$ cancel the reduction comparisons used in $s$ and $c$ respectively, while the input and output completion units are isomorphisms because the objects are integral. This calculation uses the strict equality before taking $R\\lim$; no joint faithfulness of level evaluations is assumed. Localize this equality using [prop-weil-pbc-rational-transport]. By step 7 its three factors become, in order, the rational unit, the rational pullback square comparison, and the rational counit. Apply $J$ and step 7 again: the three factors are precisely the condensed unit, its composition square comparison, and the condensed counit specified in [def-weil-pbc-condensed-e-module-category]. Therefore their ordered composite equals the specified restricted condensed exchange. No step uses invertibility of exchange.",
+   "uses": [
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "def-weil-pbc-completed-base-change-map",
+    "prop-weil-pbc-direct-image-limits",
+    "prop-weil-pbc-rational-transport",
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Additional specified-map comparison: strict-tower normalization and functorial completion of its ambient mate; not a claim attributed to Proposition 6.8.14"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-condensed-point-basis-evaluation",
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "lem-weil-pbc-profinite-point-pullback",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-pbc-rational-category",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-weil-pbc-integral-constructible-bounded-below-compactness",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-triangulated-category",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-inverse-image",
+  "lem-sf-integral-direct-image-constructible",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "def-weil-pbc-condensed-e-module-category",
+  "lem-weil-pbc-proper-fp-permanence",
+  "prop-weil-pbc-rational-transport",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "def-weil-pbc-completed-base-change-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2) route, expanded for the archived module category and specified exchange"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -134,15 +317,129 @@
    "results": "12 hits: CategoryTheory.Localization.Construction.whiskeringLeftEquivalence, CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.functor, CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.inverse, CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.functor_obj_obj_obj, CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.counitIso, CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.inverse_obj_obj, CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.unitIso, CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.functor_obj_obj_map",
    "date": "2026-10-14",
    "verdict": "no match: generic finite-presentation, pullback, localization or discrete condensed infrastructure; no equivalence with the specified condensed E coefficient category and completed exchange"
+  },
+  {
+   "tool": "grep",
+   "query": "rationaliz|condensedRingObj|boundedConstructible",
+   "results": "1 hits: Mathlib/Analysis/Real/Pi/Bounds.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: returned general infrastructure does not state this pro-etale adic assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence between rationalized integral constructible complexes and condensed E module objects",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension from completed integral l-adic sheaves to continuous field coefficients is a fully faithful and essentially surjective derived functor",
+   "results": "8 hits: Condensed.profiniteSolid, LightCondMod.LocallyConstant.fullyFaithfulFunctor, Condensed.profiniteSolidification, CondensedMod.LocallyConstant.fullyFaithfulFunctor, LightCondMod.LocallyConstant.instFullModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.LocallyConstant.instFullModuleCatFunctor, CondensedMod.LocallyConstant.instFullModuleCatFunctor",
+   "date": "2026-10-14",
+   "verdict": "no match: returned general infrastructure does not state this pro-etale adic assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Equivalence\"",
+   "results": "3 hits: Condensed.StoneanCompHaus.equivalence, Condensed.ProfiniteCompHaus.equivalence, Condensed.StoneanProfinite.equivalence",
+   "date": "2026-10-14",
+   "verdict": "no match: returned general infrastructure does not state this pro-etale adic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rationalization of integral constructible proetale complexes realizes condensed E module objects compatibly with pullback and pushforward adjunctions",
+   "results": "8 hits: Condensed.profiniteSolid, Condensed.profiniteFree, CondensedMod.ofSheafProfinite, Condensed.profiniteSolidification, LightCondMod.ofSheafLightProfinite, Condensed.profiniteSolidCounit, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-14",
+   "verdict": "no match: returned general infrastructure does not state this pro-etale adic assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "nt-target-proetale-e",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-condensed-e-realization",
+  "worker": "stage1",
+  "summary": "Expanded the coefficient realization, full faithfulness, lattice and truncation devissage, integral/ordinary operations, adjunction compatibility, and equality of the specified strict-tower exchange. Reused the archived LFP and qcqs continuity nodes; created only three independent integral lemmas. Returned-delivery repair: completed definition dependencies of all three statement-only support nodes and explicitly cited scheme finiteness, finite component/generic point existence and Noetherian open compactness; statement strings unchanged. Second reading: expanded cone scaling and reduced-stratum scheme factorization, with existing reduced-subscheme citation.",
+  "blueprint": "Realizes the integral-lattice and rationalization sentence of thm-weil-pbc-finite-extension; no change to its torsion proper-base-change route.",
+  "tool_uses": [
+   {
+    "node": "def-sbc-standard-tstructure-derived-category",
+    "why": "Generic coefficient, derived-adjunction, truncation or integral-stability tool; does not replace any step of the proper-base-change unit route."
+   },
+   {
+    "node": "def-weil-triangulated-category",
+    "why": "Generic coefficient, derived-adjunction, truncation or integral-stability tool; does not replace any step of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic coefficient, derived-adjunction, truncation or integral-stability tool; does not replace any step of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Generic coefficient, derived-adjunction, truncation or integral-stability tool; does not replace any step of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-linear-scalar-localization-triangulated",
+    "why": "Generic coefficient, derived-adjunction, truncation or integral-stability tool; does not replace any step of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic coefficient, derived-adjunction, truncation or integral-stability tool; does not replace any step of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic coefficient, derived-adjunction, truncation or integral-stability tool; does not replace any step of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "why": "Generic coefficient, derived-adjunction, truncation or integral-stability tool; does not replace any step of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Geometric finiteness prerequisite for the noetherian finite-dimensional integral support lemmas; no coefficient-realization statement supplies this scheme-dimension fact."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Generic-point stratification devissage terminates on the Noetherian closed residual subset; this is a topological tool, not a replacement of the coefficient route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Open layers and inverse images of affine opens are quasi-compact because their source schemes are Noetherian; used also for the diagonal qcqs check."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Clause (f) shows a k-morphism between the given schemes is locally of finite type; the coefficient route does not supply this scheme-morphism tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-triangulated-category",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-995095ea4",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-995095ea4 (reviewer sub-agent of L); spot-checked: Read all eight steps and three new nodes; checked Bhatt–Scholze 6.6.11 and 6.8.11–14, cited Stacks passages, and exact master coefficient/category and unit–square–counit definitions. Common bounds, lattice devissage, completion-map cancellation, edge cases, duplicates and route checks pass. Accepted declared generic tool uses. No repairs or target changes; detailed findings are in review.md."
+ }
 }
