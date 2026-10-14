@@ -102,7 +102,7 @@ theorem finiteCoverLowerShriek_constructible {k : Type u}
 
 /-- Torsion substatement retained as a separately reviewable obligation.
 Source: Stacks Project, Tag 03SD.
-(blueprint: v1-finite-cover-lower-shriek-torsion) -/
+(auxiliary lemma; not a blueprint node) -/
 theorem finiteCoverLowerShriek_torsion {k : Type u}
     [Field k] [IsAlgClosed k] {X U V : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
@@ -174,7 +174,7 @@ This statement contains no cohomology assertions and does not assume a unit retr
 
 Source: Stacks Project, Tag 03SD, `lemma-vanishing-easier`, first paragraph;
 Tag 095R, `lemma-finite-pushforward-constructible`.
-(blueprint: v1-finite-cover-lower-shriek-coefficient-compatibility)
+(auxiliary lemma; not a blueprint node)
 
 Proof: Write F = j_!G and K = j_!(v_*v^*G). Pullback preserves finite locally constant
 sheaves. A finite etale map is etale-locally a finite disjoint union of copies of its base;

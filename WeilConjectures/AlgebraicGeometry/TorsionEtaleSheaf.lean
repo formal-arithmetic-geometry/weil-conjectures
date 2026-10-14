@@ -9,6 +9,7 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
+public import WeilConjectures.Data.PNat.DvdOrder
 
 /-!
 # Torsion abelian sheaves on the small étale site
@@ -26,31 +27,11 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Positive integers indexing the torsion filtration. Source: blueprint
-`sec-proper-base-change/sk-def-pbc`, statement (blueprint: def-weil-pbc-torsion-etale-sheaf). -/
-structure PositiveNat where
-  val : ℕ
-  pos : 0 < val
-
-/-- The divisibility order on positive integers. Source: blueprint
-`sec-proper-base-change/sk-def-pbc`, statement (blueprint: def-weil-pbc-torsion-etale-sheaf). -/
-instance : PartialOrder PositiveNat where
-  le n m := n.val ∣ m.val
-  lt n m := n.val ∣ m.val ∧ ¬m.val ∣ n.val
-  le_refl n := dvd_refl n.val
-  le_trans _ _ _ hnm hmk := dvd_trans hnm hmk
-  le_antisymm n m hnm hmn := by
-    cases n
-    cases m
-    congr
-    exact Nat.dvd_antisymm hnm hmn
-  lt_iff_le_not_ge := by intro a b; rfl
-
 /-- The kernel inclusion for positive integers ordered by divisibility. Source: blueprint
 `sec-proper-base-change/sk-def-pbc`, statement (blueprint: def-weil-pbc-torsion-etale-sheaf). -/
 theorem torsionKernelTransition_condition {T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
-    (n m : PositiveNat) (hnm : n.1 ∣ m.1) :
+    (n m : PNat.DvdOrder) (hnm : n.val ∣ m.val) :
     kernel.ι (n.val • 𝟙 F) ≫ (m.val • 𝟙 F) = 0 := by
   obtain ⟨r, hr⟩ := hnm
   rw [hr, mul_nsmul, Preadditive.comp_nsmul, kernel.condition,
@@ -59,9 +40,9 @@ theorem torsionKernelTransition_condition {T : Scheme.{u}}
 /-- The canonical kernel inclusions satisfy the identity law. Source: blueprint
 `sec-proper-base-change/sk-def-pbc`, statement (blueprint: def-weil-pbc-torsion-etale-sheaf). -/
 theorem torsionKernelTransition_id {T : Scheme.{u}}
-    (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : PositiveNat) :
+    (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : PNat.DvdOrder) :
     kernel.lift (n.val • 𝟙 F) (kernel.ι (n.val • 𝟙 F))
-        (torsionKernelTransition_condition F n n (dvd_refl n.1)) = 𝟙 _ := by
+        (torsionKernelTransition_condition F n n (dvd_refl n.val)) = 𝟙 _ := by
   apply (cancel_mono (kernel.ι (n.val • 𝟙 F))).1
   simp only [kernel.lift_ι, Category.id_comp]
 
@@ -69,7 +50,7 @@ theorem torsionKernelTransition_id {T : Scheme.{u}}
 `sec-proper-base-change/sk-def-pbc`, statement (blueprint: def-weil-pbc-torsion-etale-sheaf). -/
 theorem torsionKernelTransition_comp {T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
-    (n m k : PositiveNat) (hnm : n.1 ∣ m.1) (hmk : m.1 ∣ k.1) :
+    (n m k : PNat.DvdOrder) (hnm : n.val ∣ m.val) (hmk : m.val ∣ k.val) :
     kernel.lift (m.val • 𝟙 F) (kernel.ι (n.val • 𝟙 F))
         (torsionKernelTransition_condition F n m hnm) ≫
       kernel.lift (k.val • 𝟙 F) (kernel.ι (m.val • 𝟙 F))
@@ -91,7 +72,7 @@ composition lemmas give a functor `D`; the kernel inclusions give a cocone `c`; 
 `colimit.desc D c` is the canonical map whose `IsIso` property defines torsion. -/
 noncomputable def IsTorsionAbelianSheaf {T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) : Prop :=
-  let D : PositiveNat ⥤ Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1} :=
+  let D : PNat.DvdOrder ⥤ Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1} :=
     { obj := fun n => kernel (n.val • 𝟙 F)
       map := fun {n m} hnm => kernel.lift (m.val • 𝟙 F) (kernel.ι (n.val • 𝟙 F))
         (torsionKernelTransition_condition F n m hnm.down.down)

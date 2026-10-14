@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 public import Mathlib.CategoryTheory.Sites.Sheafification
 
 /-!
@@ -58,9 +58,8 @@ is `K.homology q`, hence the classical `q`-th right derived direct image.
 `Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso` identifies this with
 homology of the total bounded-below derived pushforward of `F` in degree zero.
 No separate arbitrary K-injective resolution comparison is needed. -/
-theorem higherDirectImageSheafifiedPresheaf {X S : Scheme.{u}} (p : X ⟶ S)
+noncomputable def higherDirectImageSheafifiedPresheaf {X S : Scheme.{u}} (p : X ⟶ S)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
-    Nonempty
       ((presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
           ((MorphismProperty.Over.pullback @Etale ⊤ p).op ⋙
             { obj := fun U ↦
@@ -129,9 +128,9 @@ theorem higherDirectImageSheafifiedPresheaf {X S : Scheme.{u}} (p : X ⟶ S)
       S.smallEtaleTopology AddCommGrpCat.{u + 1}).symm (.up ℕ)).app K ≪≫
       (Functor.mapHomologicalComplexIdIso _ (.up ℕ)).app K
   -- Exact sheafification commutes with homology, then PlusSingle gives the total derived value.
-  exact ⟨a.mapIso eP ≪≫ ((L.sc q).mapHomologyIso a).symm ≪≫
+  exact a.mapIso eP ≪≫ ((L.sc q).mapHomologyIso a).symm ≪≫
     (HomologicalComplex.homologyFunctor _ (.up ℕ) q).mapIso eK ≪≫
     (R.isoRightDerivedObj f q).symm ≪≫
-    (f.homologyRightDerivedFunctorPlusObjSingleFunctorIso F q).symm⟩
+    (f.homologyRightDerivedFunctorPlusObjSingleFunctorIso F q).symm
 
 end AlgebraicGeometry

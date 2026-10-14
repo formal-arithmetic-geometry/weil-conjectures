@@ -1973,6 +1973,7 @@ public import WeilConjectures.ConstructibleSheaf.TorsorSectionRepresentation
 public import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 public import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
 public import WeilConjectures.Convergence
+public import WeilConjectures.Data.PNat.DvdOrder
 public import WeilConjectures.DeligneLaumon.AffineLine.AffineCurveUpper
 public import WeilConjectures.DeligneLaumon.AffineLine.Concentration
 public import WeilConjectures.DeligneLaumon.AffineLine.ConstantTwist
