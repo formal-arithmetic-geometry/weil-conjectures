@@ -84,7 +84,6 @@ theorem cartier_equality
     exact (LinearMap.ker δ).finrank_quotient_add_finrank
   have hcoker := (LinearMap.range δ).finrank_quotient_add_finrank
   simp only [Module.finrank_fin_fun] at hker
-  have hker := hker.trans hlen
   rw [Module.finrank_fin_fun] at hcoker
   have hdim : s.card + Module.finrank K (H1Cotangent k K) =
       Module.finrank K (KaehlerDifferential k K) := by

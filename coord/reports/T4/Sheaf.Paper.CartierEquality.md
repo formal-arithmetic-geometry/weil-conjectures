@@ -1,69 +1,97 @@
 ## What changed
 
-No signature, definition, import, or DAG route changed. The proof now composes `hker` with the
-sequence-length equality directly, removing the repeated type annotation of `hker'`. The assigned
-repair is already implemented in the supplied repository: `cartier_equality` assumes
-`(⊤ : IntermediateField k K).FG`, not `Algebra.FiniteType k K`, and has a complete
-proof. This delivery records verification of the existing repair for the second reader.
-The sandbox contains this small proof simplification of the assigned module.
+Verified the existing repair of `cartier_equality` requested by upstream review #1428.
+The repository and sandbox already assume `(⊤ : IntermediateField k K).FG`, rather
+than `Algebra.FiniteType k K`. The proof now lets `omega` combine the sequence-length equality `hlen` directly
+with the two rank-nullity equations, removing a redundant shadowing of `hker`.
+This report replaces the earlier attempt’s stale change description and second-reading
+section. A fresh second reader must verify this delivery.
 
-The proof follows the recorded route: choose a finite transcendence basis and finite
-field generators, apply the complete-intersection fraction-field model and cotangent
-comparison, transport finite dimensionality, and combine the two rank-nullity equations.
-The equality is stated in Cardinal without truncated subtraction. The finite-extension
-case follows from zero transcendence degree. No arbitrary witness is used to define data.
+The proof enumerates finite field generators and a finite transcendence basis, applies
+`exists_completeIntersection_fractionField_model` and
+`exists_fractionField_completeIntersection_cotangent_model`, and combines the kernel
+and cokernel rank-nullity formulas. Its Cardinal equality avoids truncated subtraction.
+The finite-extension consequence follows by substituting zero transcendence degree.
+The existing node statement, Lean record, and proof dependencies match this route.
+No statement, definition, import, DAG route, or target signature is changed.
 
 ## Proved and sorry left
 
-`cartier_equality` (node `lem-weil-pbc-cartier-equality`) already has no local sorry.
-Holes closed by this worker: none. Holes added: none. Holes remaining in the assigned
-module: none. This is verification of an already completed repair, not new proof progress.
-The original module compiled through lcompile.py with exit code 0 and no warnings.
-The delivery dry run additionally checks the declarations with the maintainer's axiom probe.
+`cartier_equality` has a complete proof and no local sorry. Holes closed in this
+delivery: none. Holes added: none. Holes remaining in the assigned module: none.
+This is verification of an already implemented repair, not new proof progress.
+The sandbox module compiled cleanly with `lcompile.py` (exit code 0).
+The unchanged caller `Sheaf.RingTheory.PthRootResidueDimensionBalance` also compiled
+cleanly against the sandbox overlay (exit code 0); its temporary source copy was
+removed from the delivery. The delivery dry run checks the assigned module’s axioms.
 
 ## No longer needed
 
-None. No imports, nodes, or modules were removed. The two complete-intersection model
-modules and the finite-transcendence-basis Mathlib import are used by the existing proof.
-The node agrees with these dependencies; the blueprint unit's route is preserved.
+None. Both complete-intersection model imports are used, as is Mathlib’s finite
+transcendence-basis construction. No nodes or modules are pruned; the unit route stays.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The assignment says this module still contains sorry, but the supplied version contains
-none and compiles. It remains listed in `coord/repairs.txt` for upstream review #1428,
-although the weakened `Algebra.FiniteType` hypothesis has already been replaced by finite
-field generation. The node also records an earlier accepted proof delivery. The dispatcher
-should retire this stale repair after the second reader confirms the current version.
+The repair queue is stale: the supplied repository already contains the requested
+finite-field-generation hypothesis, the corresponding DAG statement and proof, and the
+adapted call in `Sheaf.RingTheory.PthRootResidueDimensionBalance`. Its call supplies
+`IntermediateField.fg_top K L` using the finite residue-field extension established
+immediately above it. No further caller adaptation is forced or included.
 
-The existing complete-intersection and cotangent-model statements were read in full.
-A fresh Lean Finder search found standard-smooth differential-rank lemmas, which require
-extra smoothness hypotheses and do not replace the general Cartier argument.
+The earlier sandbox report described a proof simplification that was already identical
+to the repository and included an old second reading. That second reading was removed.
+The first dry run refused a report-only delivery; the redundant proof binding above
+was therefore removed and the resulting proof checked afresh.
+Existing landed change records document the hypothesis repair. The dispatcher should
+retire this repair once the second reader confirms the current version.
+
+A fresh Lean Finder search returned standard-smooth differential criteria and
+cotangent-space results, which do not replace the general Cartier equality. A local
+search found no existing Cartier theorem in WeilConjectures or Mathlib. The two model
+lemmas were read in full; their signatures supply exactly the objects and comparisons
+used by this proof. The finite-extension edge case follows in Lean from `trdeg_eq_zero`;
+the field-generation hypothesis also permits transcendental finitely generated fields,
+so the reviewed degeneracy has been removed.
 
 ## Second reading by T4
 
-1. I compared the delivered module with `lean/Sheaf/Paper/CartierEquality.lean` in the
-repository. The theorem signature, hypothesis `(⊤ : IntermediateField k K).FG`, conclusion,
-definitions, and imports are unchanged byte for byte; only the local proof binding was
-simplified. The node's statement and the Lean declaration agree clause by clause.
+1. **Interface preservation — pass.** Compared the complete delivered module with
+   `lean/Sheaf/Paper/CartierEquality.lean` in the read-only repository. The sole diff
+   deletes `have hker := hker.trans hlen` inside the proof. The existing theorem
+   signature is byte for byte unchanged; no definitions, visibility, imports, or
+   target signatures change. Existing landed change records already document the
+   finite-field-generation repair.
+2. **Proof and axioms — pass.** Independently compiled the delivered file with
+   `lcompile.py` without errors or warnings. A scratch copy with
+   `#print axioms cartier_equality` reports only `propext`, `Classical.choice`, and
+   `Quot.sound`, with no `sorryAx`. The delivered source contains no sorry, axiom,
+   unsafe, opaque, implemented_by, or extern. The finite generating set is enumerated
+   explicitly; the imported model constructions are proved, so there is no data
+   chosen from an unproved mere-existence theorem.
+3. **Split statements — pass, none.** No new declarations, split statements, nodes,
+   or holes are added. Read both imported model theorems in full: one constructs a
+   regular-sequence fraction-field model with `n - c = s.card`, and the other gives
+   kernel and cokernel equivalences, without assuming the dimension conclusion.
+   Checked the zero-transcendence-degree and finite-extension cases, including the
+   empty generating set for the identity extension. The equations are valid also
+   for zero coordinate dimensions; `c ≤ n` prevents truncated subtraction from
+   weakening the rank-nullity argument.
+4. **Route and pruning — pass.** Reviewed the finite-basis construction, both model
+   applications, dimension transport, natural-number cancellation, Cardinal cast,
+   and finite-extension consequence. `omega` uses `hlen` directly, so the deleted
+   binding is redundant. An independent Loogle search for `Algebra.H1Cotangent`
+   found presentation and smoothness criteria, not the general dimension balance;
+   local searches likewise found no replacement formula. Each proof-only import
+   is plain `import`; public imports supply vocabulary used in the signature.
+   All existing proof dependencies remain used, so `## No longer needed` is complete.
+   Read `dag/units/sk-thm-p1.json`: its realized statement and steps are unchanged,
+   and this local simplification bypasses no unit.
+5. **DAG consistency — pass.** Read the Cartier node and checked its Lean record,
+   proof steps, proof dependencies, and source-based proof origin against the code.
+   Its finite-basis Mathlib match and both model-node declarations are exactly those
+   applied. The remaining dependencies describe transcendence bases and dimension.
+   The node already records the actual route, so no node edit is necessary.
 
-2. I compiled the sandbox module with `lcompile.py`; it exits 0 with no warnings. The proof
-uses the finite transcendence-basis, complete-intersection, and cotangent-model declarations
-recorded in `proof_deps`, then rank-nullity and the finite-extension zero-transcendence-degree
-fact. There are no `sorry`, `axiom`, `unsafe`, `opaque`, `extern`, or hollow definitions.
-
-3. The node has no new split-off statement. Its existing proof steps are strictly smaller than
-the target and their cited declarations say the facts used: the model supplies `n - c = d`,
-the cotangent model supplies the kernel/cokernel equivalences, and the linear algebra identities
-supply the dimension calculation. The Mathlib/project searches recorded in `searches.jsonl`
-found no declaration replacing the general Cartier equality.
-
-4. The proof is pruned only by replacing the intermediate `hker'` name with the existing
-`hker` name after composing it with `hlen`; no import or dependency is removed. The unit route
-is preserved, including both complete-intersection model modules and the finite transcendence
-basis step.
-
-5. I checked the finite-extension edge case: `trdeg_eq_zero` reduces the Cardinal equality to
-the equality of the two finite ranks, and `exact_mod_cast` transfers it to naturals. No
-statement correction or forced adaptation is present in this delivery.
-
-I changed only the proof binding described in point 4 and added this second-reading record.
+Second reading changed only this report by adding the independent review above;
+no further Lean repair was needed. This delivery verifies one already proved theorem,
+closes zero new holes, adds zero holes, and prunes no modules.
