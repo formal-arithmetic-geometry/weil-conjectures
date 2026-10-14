@@ -16,38 +16,46 @@
  ],
  "proof": [
   {
-   "text": "Choose the actual restricted diagram, cone, complexes, coefficient diagram and colimit cocone. The existing geometric constructions give the limit, compactness, quasi-separatedness, affine transitions and coefficient colimit. Terms below zero vanish by HomologicalComplex.isZero_single_obj_X.",
+   "text": "Use restrictedAffineDiagram, restrictedAffineCone, restrictedAffineK, restrictedAffineG and restrictedAffineL as actual witnesses. Apply restrictedAffineConeIsLimit, restrictedAffineDiagram_compact, restrictedAffineDiagram_quasiSeparated, restrictedAffineDiagram_affine and restrictedAffineLIsColimit for their geometric and colimit properties. Negative terms of K and L are zero by HomologicalComplex.isZero_single_obj_X, since n < 0 implies n != 0. A proved private assembly lemma packages the supplied witnesses and properties while keeping their types abstract, avoiding repeated kernel expansion of the dependent existential.",
    "uses": [
     "def-sbc-restricted-affine-coefficient-construction"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The still-open construction must use the actual restricted single-complex transition and concrete cone comparisons, never arbitrary witnesses of an existential construction. Only the single-maps definitions are imported here; no transition-law or cone-naturality theorem is applied in the delivered proof.",
+   "text": "Use the concrete restrictedAffineSingleTransition and restrictedAffineSingleConeIso. A proved private coherence lemma transports restrictedAffineSingleTransition_laws and restrictedAffineSingleConeIso_naturality across equalities to the chosen geometric and complex witnesses, retaining explicit HEq equalities to the concrete transition and cone isomorphism. Thus the chosen maps remain exactly the prescribed maps, rather than arbitrary existential witnesses.",
    "uses": [
-    "def-sbc-restricted-affine-single-maps"
+    "def-sbc-restricted-affine-single-maps",
+    "lem-sbc-restricted-affine-single-transition-laws",
+    "lem-sbc-restricted-affine-single-cone-naturality"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For stage arrows the corrected concrete stage equation is proved by unfolding the transition and canonical restricted-cohomology map. The main theorem still requires construction of its cone comparison and colimit data; no cone-leg theorem is applied in this delivery.",
+   "text": "Prove the stage and limit cohomology-object identifications by reflexivity and use eqToIso of these named equalities as the comparison isomorphisms. A proved generic equality-transport naturality lemma reduces each comparison equation to HEq of its concrete maps, without expanding the cohomology object structures. Rewrite the cone isomorphism to restrictedAffineSingleConeIso and apply restrictedAffineSingleConeIso_inv_leg; the generic proved rawAffineRestrictedCohomologyMap_formula identifies the resulting map without expanding its raw cohomology objects. For stage arrows rewrite the transition to restrictedAffineSingleTransition and use the proved heterogeneous form of restricted_affine_stage_naturality.",
    "uses": [
+    "lem-sbc-restricted-affine-single-cone-leg",
     "lem-sbc-restricted-affine-natural-coefficient-system-stage",
-    "def-sbc-raw-affine-restricted-cohomology"
+    "def-sbc-raw-affine-restricted-cohomology",
+    "lem-sbc-raw-affine-restricted-cohomology-map-formula"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sbc-restricted-affine-coefficient-construction",
   "def-sbc-restricted-affine-single-maps",
+  "lem-sbc-restricted-affine-single-transition-laws",
+  "lem-sbc-restricted-affine-single-cone-naturality",
+  "lem-sbc-restricted-affine-single-cone-leg",
   "lem-sbc-restricted-affine-natural-coefficient-system-stage",
-  "def-sbc-raw-affine-restricted-cohomology"
+  "def-sbc-raw-affine-restricted-cohomology",
+  "lem-sbc-raw-affine-restricted-cohomology-map-formula"
  ],
  "proof_origin": {
-  "by": "agent U1 second reader",
-  "document": "Stacks Project",
-  "place": "Tags 09Z1 and 0EZM; plan for the reopened theorem using actual single-complex constructions. No verified proof of this theorem is delivered. H9 repair: removed unused transition-law, cone-naturality and cone-leg dependencies and uses; these were not applied by the delivered Lean proof."
+  "by": "worker B3",
+  "document": "Stacks Project, Tags 09Z1 and 0EZM",
+  "place": "Concrete affine restriction and coefficient colimit construction; Lean assembly from the explicit single-complex laws and cone comparisons."
  },
  "mathlib_searches": [
   {
@@ -122,13 +130,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-64396",
-  "group": "U1",
+  "reviewer": "COMPILER",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261013T201810-L-3977531",
+  "landing": "20261014T035543-L-887056",
   "kind": "interface",
-  "note": "independent Codex review: Matched both Lean signatures to their delivered nodes, the concrete stage equality to its definitions, and the documented correction to the change record; delivery and sole direct importer RestrictedAffineComplexSystemNatural compile cleanly; axiom audit passes."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

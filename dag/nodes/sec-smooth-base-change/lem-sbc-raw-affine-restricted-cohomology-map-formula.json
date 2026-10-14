@@ -1,0 +1,113 @@
+{
+ "id": "lem-sbc-raw-affine-restricted-cohomology-map-formula",
+ "kind": "statement",
+ "title": "Explicit formula for a canonical restricted cohomology map",
+ "statement": "Let S, Y and Y' be schemes, a : Y' → Y, h : Y → S, h' : Y' → S and w : a ≫ h = h'. Let F and F' be abelian etale sheaves on Y and Y', and let phi : a*F → F'. For a natural degree p and an etale U → S, the map rawAffineRestrictedCohomologyMap [def-sbc-raw-affine-restricted-cohomology] is heterogeneously equal to the following explicit composite: rawAffineComplexPullback along rawAffineRestrictedMap, applied to the degree-zero single complex of F restricted to U ×_S Y, followed by cohomology of Q of the single-complex inverse-image comparison followed by singleFunctor.map of rawAffineRestrictedCoefficient. The full formula and all universes are recorded verbatim in lean.statement. No affine, quasi-compact, directed-system, or limit hypotheses are needed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EZM",
+  "place": "Canonical cohomology pullback followed by the map induced by a coefficient morphism; the explicit restriction construction is def-sbc-raw-affine-restricted-cohomology."
+ },
+ "stmt_deps": [
+  "def-sbc-raw-affine-restricted-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Expand the definition of rawAffineRestrictedCohomologyMap. Its local q is rawAffineRestrictedMap a h h' w U and its local R is the restriction of F along the second projection. Its value is rawAffineComplexPullback on the single complex of R, followed by cohomology of Q of the single comparison and single map of the restricted coefficient morphism. Substituting q and R gives exactly the displayed expression, so HEq reflexivity proves the formula. The use of HEq allows the raw cohomology object wrappers to remain folded in applications. The argument works unchanged for zero coefficients, degree zero, and identity scheme maps, since it is the defining composite, with no cancellation or nonzero assumptions.",
+   "uses": [
+    "def-sbc-raw-affine-restricted-cohomology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-raw-affine-restricted-cohomology"
+ ],
+ "proof_origin": {
+  "by": "worker B3",
+  "document": "Stacks Project, Tag 0EZM; the explicit library restriction definition",
+  "place": "Definitional formula, proved by Lean reflexivity, supplying an API for the raw map without repeated expansion in larger diagrams."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology map from pullback followed by a coefficient morphism on single complexes",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error. Other search kinds and local source search were used.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical cohomology map of restricted sheaves is derived pullback followed by the map of single coefficient complexes",
+   "results": "8 hits: groupCohomology.resNatTrans, groupCohomology.resNatTrans_app, Sheaf.ΓRes_map, Presheaf.map_restrict, Sheaf.ΓRes_naturality, Sheaf.ΓRes_map_assoc, morphismRestrict_app, Γ_map_morphismRestrict. None is this library-specific raw restricted derived-cohomology formula.",
+   "date": "2026-10-14",
+   "verdict": "No exact match; the formula is definitional in the source library."
+  },
+  {
+   "tool": "loogle",
+   "query": "HEq, _ = _",
+   "results": "12 hits, including eq_of_heq, heq_of_eq, type_eq_of_heq, heq_of_eq_of_heq, heq_of_heq_of_eq, eqRec_heq. These provide heterogeneous-equality conversions, not the restricted cohomology formula.",
+   "date": "2026-10-14",
+   "verdict": "No exact map formula; use HEq reflexivity."
+  },
+  {
+   "tool": "grep",
+   "query": "rawAffineRestrictedCohomologyMap",
+   "results": "0 Mathlib hits. Local ripgrep identifies the definition in Sheaf/AlgebraicGeometry/RawAffineRestrictedCohomology.lean.",
+   "date": "2026-10-14",
+   "verdict": "Library-specific map; use its explicit definition."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RestrictedAffineNaturalCoefficientSystem",
+  "date": "2026-10-14",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Affine-object reduction in the proof of Tag 09Z1: after restriction to U times_S X_i, identify the canonical pullback followed by coefficient maps used on both stage arrows and cone legs.",
+   "via": [
+    "lem-sbc-restricted-affine-natural-coefficient-system",
+    "lem-sbc-restricted-affine-complex-system-natural",
+    "lem-sbc-abelian-raw-cocone-complex-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawAffineRestrictedCohomologyMapFormula",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawAffineRestrictedCohomologyMapFormula.lean",
+  "declaration": "AlgebraicGeometry.Etale.rawAffineRestrictedCohomologyMap_formula",
+  "statement": "theorem rawAffineRestrictedCohomologyMap_formula {S Y Y' : Scheme.{v}} (a : Y' ⟶ Y)\n    (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ)\n    (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (F' : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (φ : (upperStar AddCommGrpCat.{v + 1} a).obj F ⟶ F') (U : S.Etale) :\n    HEq (rawAffineRestrictedCohomologyMap a h h' w p F F' φ U)\n      (rawAffineComplexPullback (p : ℤ) (rawAffineRestrictedMap a h h' w U)\n          ((CochainComplex.singleFunctor _ 0).obj\n            ((upperStar AddCommGrpCat.{v + 1} (pullback.snd U.hom h)).obj F)) ≫\n        (cohomology AddCommGrpCat.{v + 1} (pullback U.hom h') (p : ℤ)).map\n          (DerivedCategory.Q.map\n            (((upperStar AddCommGrpCat.{v + 1}\n                (rawAffineRestrictedMap a h h' w U)).mapCochainComplexSingleFunctor 0).hom.app\n                ((upperStar AddCommGrpCat.{v + 1} (pullback.snd U.hom h)).obj F) ≫\n              (CochainComplex.singleFunctor _ 0).map\n                (rawAffineRestrictedCoefficient a h h' w F F' φ U))))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261014T035543-L-887056",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261014T035543-L-887056",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
