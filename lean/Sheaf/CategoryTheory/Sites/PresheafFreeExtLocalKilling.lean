@@ -108,7 +108,7 @@ private theorem epi_locally_surjective
     have hh := congrArg (fun k : H ⟶ H ↦ k.hom.app (Opposite.op U) s)
       (IsIso.inv_hom_id i)
     exact hh
-  exact ht ▸ t.property
+  exact (ht ▸ t.property)
 
 private theorem exists_presheaf_cover_lift
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
