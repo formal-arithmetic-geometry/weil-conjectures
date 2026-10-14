@@ -25,6 +25,7 @@ open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 -- Stage-3 B4 delivery: quotient-lift proof verified locally.
+-- The kernel equality is used directly to certify the quotient lift.
 
 /-- The canonical map from section-fraction classes to homogeneous fractions.
 Source: Stacks Project, Properties, Tag 0B5L and Lemma 01PW(2).
