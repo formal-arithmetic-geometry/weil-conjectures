@@ -1,45 +1,51 @@
 ## What changed
 
-Delivered the proof of `SheafOfModules.tensorClosed`. The proof uses the existing
-`monoidalCategory`, `symmetricCategory`, `monoidalClosed`, `tensorHomEquiv`, and
-additivity lemmas, then verifies the stated three-variable naturality by rewriting
-with the tensor-Hom naturality lemmas. Added a proof comment documenting the final
-reassociation and identity cancellation.
+Verified the existing proof of `SheafOfModules.tensorClosed` in
+`lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/TensorClosed.lean`. The proof constructs
+`MonoidalPreadditive` from the additive tensor functors supplied by `MonoidalFree`, uses the
+existing `monoidalClosed` and `tensorHomEquiv`, and proves simultaneous naturality by the
+three tensor-Hom naturality lemmas. No source changes were needed.
 
 ## Proved and sorry left
 
-The declaration `SheafOfModules.tensorClosed` is proved. No `sorry` remains in the
-item module, and no new declarations were added.
+`SheafOfModules.tensorClosed` is fully proved. No `sorry` remains in the module and no new
+holes were added.
 
 ## No longer needed
 
-No imports or DAG nodes were removed: all existing imports are used by the module's
-statement or proof dependencies.
+None. All imports retained by the module are used by its statement or proof.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-Nothing found. The existing proof route and statement agree with the node.
-
-## Second reading by C2
-
-1. **Statements and accidental changes.** Compared the delivered module with the repository
-   version. The declaration signature of `SheafOfModules.tensorClosed` is unchanged byte for
-   byte; only a proof comment and simp-lemma ordering differ.
-2. **Proof and axioms.** Compiled the module with `lcompile.py`; it succeeds with no warnings,
-   no `sorry`, and no forbidden declarations. `#print axioms SheafOfModules.tensorClosed`
-   reports only `propext`, `Classical.choice`, and `Quot.sound`.
-3. **Split-off statements.** No statements were split off and no new nodes or declarations were
-   added. The proof uses the existing `tensorHomEquiv` naturality lemmas and the existing
-   additive tensor actions.
-4. **Short route and pruning.** The proof takes the existing source structures directly and
-   closes naturality by the tensor-Hom lemmas and associativity simplification. All imports remain
-   needed by the statement or proof; no proof dependency or module can be pruned.
-5. **DAG and unit route.** The node's statement, proof dependencies, and proof origin remain
-   consistent with the Lean proof, and the unit route through the existing monoidal and internal-Hom
-   structures is preserved.
-
-Changed only the final proof comment and simp-lemma ordering; no mathematical or interface change.
+Nothing found. The existing proof agrees with the DAG route and compiles successfully with
+`lcompile.py`.
 
 ## New nodes
 
 None.
+
+## Second reading by C2
+
+1. **Visible changes and statement preservation.** Compared the sandbox module with the repository
+version. The declaration signatures, definitions, and imports are byte-for-byte unchanged; the
+only difference is removal of an explanatory comment. No change record is needed.
+
+2. **Compilation and axioms.** Compiled the module with `lcompile.py` successfully. A scratch
+`#print axioms SheafOfModules.tensorClosed` reports only `propext`, `Classical.choice`, and
+`Quot.sound`. There are no `sorry`, `axiom`, `unsafe`, `opaque`, `extern`, or
+`implemented_by` declarations.
+
+3. **Statement and split-node review.** The module has no split-off declarations. The existing
+`tensorClosed` statement is unchanged and packages the additive, closed, and three-variable
+naturality data exactly as the DAG node. A Mathlib leanfinder search found only unrelated
+specialized condensed/sheaf structures, so no duplicate declaration replaces this result.
+
+4. **Proof route and pruning.** The proof follows the recorded route: it uses the existing
+`MonoidalFree` additivity, `monoidalClosed`, `tensorHomEquiv`, and the three naturality lemmas.
+All retained imports are used by the statement or proof; no proof dependency can be pruned.
+The unit route and its realized node are preserved.
+
+5. **DAG consistency.** The node's proof steps and `proof_deps` match the declarations used in
+the Lean proof, and no new nodes or changes are required. Verdict: pass.
+
+**Changes made:** appended this second-reading record only; no Lean code or DAG files changed.
