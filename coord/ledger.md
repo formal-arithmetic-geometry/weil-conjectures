@@ -14631,7 +14631,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 13:30 L: batch 20261014T052436 dependency take-out
 - 05:32 L: returned deliver/B2/Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization (reviewer RETURN: (reviewer X-f1981, head f19813a84) E2 (review point 4): The remaining sorry is demonstrably false. With c.B = R, s.B = R)
-- 05:32 L: merged deliver/A4/Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker (stage 3; reviewer PASS; after a return; landing 20261014T053240-L-2010482 (interface); batch 20261014T053238; modules 2; new nodes 0; change records: coord/changes/withdraw-retired-pic-proper-ntorsion-coker-module.md)
 - 05:32 L: merged deliver/N3/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (stage 3; reviewer PASS; first push; landing 20261014T053240-L-2010645 (proof); batch 20261014T053238; modules 1; new nodes 0)
 - 05:32 L: merged deliver/N3/Sheaf.RingTheory.DvrUniformizerRootCompositumMaximalIdeal (stage 3; reviewer PASS; first push; landing 20261014T053241-L-2010847 (proof); batch 20261014T053238; modules 1; new nodes 0)
 - 05:32 L: merged deliver/U1/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore (stage 3; reviewer PASS; first push; landing 20261014T053241-L-2010952 (proof); batch 20261014T053238; modules 1; new nodes 0)
@@ -14640,7 +14639,8 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:32 L: merged deliver/X2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (stage 3; reviewer PASS; first push; landing 20261014T053242-L-2011525 (proof); batch 20261014T053238; modules 1; new nodes 0)
 - 05:32 L: merged deliver/X2/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T053243-L-2011627 (proof); batch 20261014T053238; modules 1; new nodes 0)
 - 05:32 L: merged deliver/X2/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone (stage 3; reviewer PASS; first push; landing 20261014T053243-L-2011779 (proof); batch 20261014T053238; modules 1; new nodes 0)
-- 05:32 L: merged deliver/Y3/Sheaf.Paper.CechCupPullbackCompat (stage 3; reviewer PASS; after a return; landing 20261014T053244-L-2011935 (proof); batch 20261014T053238; modules 1; new nodes 0)
 - 05:33 L: returned deliver/Q3/Sheaf.AlgebraicGeometry.TensorGradedKernelLocalIdeal (reviewer RETURN: (reviewer X-0d052, head 0d0528726) H9 / stage-3 brief point 5: In lean/Sheaf/AlgebraicGeometry/TensorGradedKernelLocalId)
 - 05:35 L: returned deliver/F2/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (reviewer RETURN: (reviewer X-f0406, head f0406fadf) F (second reading; brief point 2): the helper is not unused. In lean/Sheaf/CategoryTh)
 - 05:35 L: returned deliver/F2/Sheaf.Algebra.Homology.TensorBicomplex (reviewer RETURN: (reviewer X-9c100, head 9c100ab46) 2 / reader gate: the new `let F := ...; (Functor.uncurry.obj F).map ...` body changes)
+
+- 13:37 L: batch 20261014T053238 dependency take-out
