@@ -284,9 +284,6 @@ public import WeilConjectures.AlgebraicGeometry.Curve.ResidueSequence
 public import WeilConjectures.AlgebraicGeometry.Curve.ResidueTrace
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.Curve.RootsOfUnityTop
-public import WeilConjectures.AlgebraicGeometry.Curve.SepClosedComparison
-public import WeilConjectures.AlgebraicGeometry.Curve.SepClosedComparisonCore
-public import WeilConjectures.AlgebraicGeometry.Curve.SepClosedComparisonCurve
 public import WeilConjectures.AlgebraicGeometry.Curve.SeparatingFunction
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations
@@ -986,8 +983,6 @@ public import WeilConjectures.CategoryTheory.ExtExactFunctorCocycle
 public import WeilConjectures.CategoryTheory.ExtExactFunctorIdentityComparison
 public import WeilConjectures.CategoryTheory.FilteredColimitCategoryFiniteFunctorLift
 public import WeilConjectures.CategoryTheory.FilteredModuleSheafColimitLocalRepresentatives
-public import WeilConjectures.CategoryTheory.Filtration
-public import WeilConjectures.CategoryTheory.FiniteFiltrationInduction
 public import WeilConjectures.CategoryTheory.FinitePrecoverage
 public import WeilConjectures.CategoryTheory.FinitePresieveFilteredColimit
 public import WeilConjectures.CategoryTheory.Functor.KanExtension.ProjectionFormula
@@ -1149,8 +1144,6 @@ public import WeilConjectures.CategoryTheory.TowerSplitEnvelope
 public import WeilConjectures.CategoryTheory.TransportScalarActionDiagrams
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsProperties
-public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
-public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTowerCone
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
@@ -1226,9 +1219,7 @@ public import WeilConjectures.ConstructibleSheaf.FreeLifting
 public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.LisseLocus
-public import WeilConjectures.ConstructibleSheaf.LocallyConstantCoverFiltration
 public import WeilConjectures.ConstructibleSheaf.LocallyConstantReduction
-public import WeilConjectures.ConstructibleSheaf.LocallyConstantRetraction
 public import WeilConjectures.ConstructibleSheaf.LowerStarOpenStalk
 public import WeilConjectures.ConstructibleSheaf.LowerStarSpecialization
 public import WeilConjectures.ConstructibleSheaf.Monoidal
