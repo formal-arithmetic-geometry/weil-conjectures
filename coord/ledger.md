@@ -14104,3 +14104,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:08 L: merged deliver/D2/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone (stage 3; reviewer PASS; first push; landing 20261014T010838-L-3161799 (proof); batch 20261014T010832; modules 1; new nodes 0)
 - 01:08 L: merged deliver/D3/Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf (stage 3; reviewer PASS; first push; landing 20261014T010838-L-3161907 (proof); batch 20261014T010832; modules 1; new nodes 0)
 - 01:08 L: merged deliver/D3/Sheaf.RingTheory.ProjectiveResolutionExtDegree (stage 3; reviewer PASS; first push; landing 20261014T010839-L-3162057 (proof); batch 20261014T010832; modules 1; new nodes 0)
+- 01:08 L: merged deliver/D4/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (stage 3; reviewer PASS; first push; landing 20261014T010839-L-3162185 (proof); batch 20261014T010832; modules 1; new nodes 0)
