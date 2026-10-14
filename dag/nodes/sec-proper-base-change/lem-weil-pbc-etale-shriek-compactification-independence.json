@@ -27,9 +27,111 @@
   "def-weil-pbc-direct-image",
   "def-weil-pbc-derived-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [prop-nagata-compactification-category] to $h:T\\to B$. Its hypotheses hold since $B$ is qcqs and $h$ is separated of finite type. Write $\\operatorname{Comp}(h)$ for its cofiltered category, with no density condition on its objects. An arrow $u:c_1\\to c_2$ is a proper $B$-map $u:\\overline T_1\\to\\overline T_2$ with $u j_1=j_2$ and $p_2u=p_1$. Set $F_c=Rp_*j_!$, as in [def-weil-pbc-projection-compactification]. Common refinements and equalizers of parallel arrows below are those asserted by the cofilteredness statement.",
+   "uses": [
+    "prop-nagata-compactification-category",
+    "def-weil-pbc-projection-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I, label lemma-shriek-well-defined, proof"
+   }
+  },
+  {
+   "text": "Use the natural composition isomorphism $\\kappa_{b,a}:R(ba)_*\\xrightarrow{\\sim}Rb_*Ra_*$ of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] on the small etale ringed topoi with constant coefficient sheaf $\\Lambda$. It restricts to the bounded-below categories: direct images there are computed on bounded-below injective representatives by [def-weil-pbc-direct-image]. These representatives exist by [lem-weil-pbc-module-sheaves-enough-injectives] and [lem-weil-pbc-dplus-injective-representative]; [lem-weil-pbc-direct-image-preserves-injectives] says that $a_*$ preserves each injective term of $I$; it also preserves zero terms. Thus $a_*I$ is bounded below and termwise injective, and is K-injective by [lem-weil-pbc-dplus-injective-representative]. In the normalization of $\\kappa$, we can therefore take the resolution $a_*I\\to J$ to be the identity. For three composable maps, both composites of $\\kappa$ on $QI$ are just the underived identification $(cba)_*I\\cong c_*b_*a_*I$. For an identity map they are the identity identification. These underived identifications are coherent on module sheaves: on an etale test object they are restriction along the unique associativity map of the iterated fibre product preserving all projections [def-pc-fibre-product]; both orders give that same map, and it is $\\Lambda$-linear by the module formula in [def-weil-pbc-direct-image]. Since every bounded-below object is isomorphic to such a $QI$, naturality proves associativity and the unit laws for $\\kappa$ on all objects. Thus we may use coherent identifications $R(ba)_*=Rb_*Ra_*$ in the following formulas.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-direct-image-preserves-injectives",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, label lemma-derived-pushforward-composition; injective computation of composition and its coherence"
+   }
+  },
+  {
+   "text": "For $u:c_1\\to c_2$ use the comparison construction [def-weil-pbc-proper-open-comparison], with $X=T$, to obtain $\\alpha_u:j_{2!}\\to Ru_*j_{1!}$. It is natural in $K$: the restriction, section and derived direct-image identifications defining $\\theta_{u,K}$ in [lem-weil-pbc-proper-open-identification] are functorial. Thus for $f:K\\to L$, writing $G=Ru_*j_{1!}$, they give $f\\theta_{u,K}=\\theta_{u,L}j_2^{-1}G(f)$, or equivalently $j_2^{-1}G(f)\\theta_{u,K}^{-1}=\\theta_{u,L}^{-1}f$. The natural adjunction bijection in [def-weil-pbc-proper-open-comparison] sends this equality to $G(f)\\alpha_{u,K}=\\alpha_{u,L}j_{2!}(f)$, which is precisely naturality of $\\alpha_u$. Every component is invertible by [lem-weil-pbc-proper-open-comparison-iso], hence $\\alpha_u$ is a natural isomorphism (the naturality equation for its inverse follows by multiplying the naturality equation on both sides by the inverse components). The hypotheses are exactly a proper $u$, two open immersions with $uj_1=j_2$, finite $\\Lambda$ and bounded-below $K$. No cartesian condition on $u^{-1}(j_2(T))$ is required. By [lem-weil-pbc-proper-open-comparison-composition], for $v:c_2\\to c_3$ we have $\\alpha_{vu}=(Rv_*\\alpha_u)\\alpha_v$ under the composition identification, and the identity comparison is the identity.",
+   "uses": [
+    "def-weil-pbc-proper-open-comparison",
+    "lem-weil-pbc-proper-open-identification",
+    "lem-weil-pbc-proper-open-comparison-iso",
+    "lem-weil-pbc-proper-open-comparison-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7G (lemma-shriek-lqf-and-proper, separated open case), 0F7C (lemma-shriek-proper-and-open-compose); used in 0F7I"
+   }
+  },
+  {
+   "text": "Define $C_u:F_{c_2}\\xrightarrow{\\sim}F_{c_1}$ to be $Rp_{2,*}\\alpha_u$ followed by $\\kappa_{p_2,u}^{-1}$ at $j_{1!}$; here $p_2u=p_1$. Applying a functor to an isomorphism and composing isomorphisms gives an isomorphism. The preceding two steps imply $C_{vu}=C_uC_v$ and $C_{\\mathrm{id}}=\\mathrm{id}$. Explicitly, the composite $C_uC_v$ first expands the direct images to $Rp_{3,*}Rv_*Ru_*$, and its comparison factor is $Rp_{3,*}((Rv_*\\alpha_u)\\alpha_v)=Rp_{3,*}\\alpha_{vu}$. Moving the composition isomorphisms past $\\alpha_u$ uses their naturality; associativity of $\\kappa$ identifies the expansion with $\\kappa_{p_3,vu}$. This is precisely $C_{vu}$. The same calculation with identity maps gives the unit law. Thus refinements act contravariantly by coherent isomorphisms of the candidates.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I, label lemma-shriek-well-defined, proof"
+   }
+  },
+  {
+   "text": "For a common refinement $e\\xrightarrow{r}c$, $e\\xrightarrow{s}d$ supplied by [prop-nagata-compactification-category], define $I_{c,d}^{e}=C_s^{-1}C_r:F_c\\xrightarrow{\\sim}F_d$. If $t:e'\\to e$ is a further refinement, the comparison through $e'$ is $(C_tC_s)^{-1}(C_tC_r)=C_s^{-1}C_r$ by the composition law and cancellation of $C_t^{-1}C_t$. All these equations are equations of natural transformations, so this produces natural comparisons.",
+   "uses": [
+    "prop-nagata-compactification-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I, label lemma-shriek-well-defined, proof"
+   }
+  },
+  {
+   "text": "Consider two common refinements $(e,r,s)$ and $(e',r',s')$ of $c,d$. By [prop-nagata-compactification-category], choose $a:z\\to e$, $b:z\\to e'$. The arrows $ra,r'b:z\\to c$ may differ; cofilteredness gives $t:z_1\\to z$ equalizing them. Apply the parallel-arrow equalizer clause once more to $sat,s'bt:z_1\\to d$, obtaining $t':z_2\\to z_1$ that equalizes this pair. The first equality remains true after precomposing with $t'$. On $z_2$ the two pairs of arrows to $c,d$ are therefore equal. Consequently the two ratios of $C$ maps are equal there. By the cancellation calculation in step 5, passing from either $e$ or $e'$ to $z_2$ leaves its ratio unchanged. Hence $I_{c,d}^{e}=I_{c,d}^{e'}$, including independence of the arrows of the common refinement. Denote the common value by $I_{c,d}$. This also explains why density and uniqueness of arrows out of dense objects are unnecessary.",
+   "uses": [
+    "prop-nagata-compactification-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I, label lemma-shriek-well-defined, proof"
+   }
+  },
+  {
+   "text": "For $c=d$ choose the common refinement $c$ with both arrows the identity. Its ratio is $\\mathrm{id}_{F_c}$, so $I_{c,c}=\\mathrm{id}$. For three compactifications $c,d,k$, [prop-nagata-compactification-category] gives one common refinement $e$ with arrows $r_c,r_d,r_k$. Independence permits computing all three comparisons through this same $e$. Then $I_{d,k}I_{c,d}=(C_{r_k}^{-1}C_{r_d})(C_{r_d}^{-1}C_{r_c})=C_{r_k}^{-1}C_{r_c}=I_{c,k}$. This is the required cocycle condition, and proves all clauses of the statement.",
+   "uses": [
+    "prop-nagata-compactification-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I, label lemma-shriek-well-defined, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-nagata-compactification-category",
+  "def-weil-pbc-projection-compactification",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-direct-image-preserves-injectives",
+  "def-pc-fibre-product",
+  "def-weil-pbc-proper-open-comparison",
+  "lem-weil-pbc-proper-open-identification",
+  "lem-weil-pbc-proper-open-comparison-iso",
+  "lem-weil-pbc-proper-open-comparison-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7I, lemma-shriek-well-defined; cofilteredness cancellation expanded, derived composition checked using 0D6E"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -177,15 +279,103 @@
    "date": "2026-10-14",
    "verdict": "no match",
    "results": "Hits: SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.GeneratingSections.IsFiniteType, ChevalleyThm.chevalley_polynomialC, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential. Read signatures: these are sheafification/condensed constructions, finite local generators or constructible subsets, not compact-support etale cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image with compact support on etale sites is canonically independent of compactification for torsion coefficients",
+   "results": "Hits: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.Scheme.Modules.restrictFunctor, topCatToSheafCompHausLike_map_val_app, LightCondensed.lanLightCondSet. Read returned signatures: scheme module pushforward/restriction, affine section limit statements or condensed sheaf constructions; none is the derived etale compactification independence theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shriek\"",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|compactification.*[Dd]erived|[Dd]erived.*compactification",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale compact support derived functor independent of compactification",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical isomorphisms between higher direct images of extension by zero under two proper compactifications of schemes",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.pushforwardCongr, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Hom.map_appLE', AlgebraicGeometry.Scheme.Modules.pushforwardCongr_inv_app_app. Read returned signatures: scheme module pushforward/restriction, affine section limit statements or condensed sheaf constructions; none is the derived etale compactification independence theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "properSupport|exceptional.*pushforward|etale.*cohomology",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-compactification-constructibility",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-etale-shriek-compactification-independence",
+  "worker": "stage1",
+  "summary": "Kept the finite-ring qcqs etale statement. Reused the cofiltered compactification category, the proper-open comparison construction, invertibility and composition lemmas, and module derived pushforward composition. Expanded cancellation, parallel-arrow equalization, identity and cocycle arguments. No new nodes, no Lean writing or compilation.",
+  "blueprint": "Since the finite ring $\\Lambda=P_n$ is annihilated by an integer, $F_{\\Et}$ is a torsion abelian sheaf, so the classical input of the source note (Th. 1.1 of SGA 4 1/2 and [Tag 095U](https://stacks.math.columbia.edu/tag/095U)) applies to $f_{\\Et}$: the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$.; classical constructibility input expanded using proof of 0GL0: use of Rf_! independent of compactification",
+  "tool_uses": [
+   {
+    "node": "prop-nagata-compactification-category",
+    "why": "Generic qcqs cofiltered compactification theorem supplies common refinements and equalizers, as required by 0F7I; the proper-base-change unit has no such category theorem."
+   },
+   {
+    "node": "lem-weil-pbc-proper-open-identification",
+    "why": "Generic finite-module identification on the open supplies the functorial theta used by the comparison; not a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-proper-open-comparison-iso",
+    "why": "Generic proper-open comparison invertibility supplies the local refinement isomorphism, not the compactification independence being proved."
+   },
+   {
+    "node": "lem-weil-pbc-proper-open-comparison-composition",
+    "why": "Generic proper-open comparison composition and identity laws supply the local coherence needed in 0F7I; no statement of this unit supplies these laws."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-nagata-compactification-category",
+  "lem-weil-pbc-proper-open-identification",
+  "lem-weil-pbc-proper-open-comparison-iso",
+  "lem-weil-pbc-proper-open-comparison-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-db2687d80",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-db2687d80 (reviewer sub-agent of L); spot-checked: Read the item and all cited statements and sources in full. All seven steps check: finite-ring module coefficients, arbitrary proper refinements, derived coherence, equalization, identity and cocycle. No duplicates or dependency cycle found. Verified reachable targets against archived master Proper.lean; accepted four declared tool uses. Findings written to review.md; no repairs needed."
+ }
 }
