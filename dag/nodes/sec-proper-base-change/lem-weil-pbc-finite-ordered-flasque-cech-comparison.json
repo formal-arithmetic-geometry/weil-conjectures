@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-finite-ordered-flasque-cech-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Final Stacks comparison clause: the local extended Cech model used to construct the derived completion unit (099D(d), through 099E).",
+   "via": [
+    "lem-weil-pbc-ring-complex-functorial",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Two finite ordered Cech comparisons for a flasque resolution",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $F$ a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], and $e:F[0]\\to G^\\bullet$ a quasi-isomorphism of nonnegative cochain complexes [def-weil-abstract-derived-category]. Suppose each $G^q$ has flasque underlying abelian sheaf [def-sc-zariski-flasque]. Let $(V_i)_{0\\leq i<r}$ be a finite open cover of $X$, allowing $r=0$ when $X$ is empty. For each nonempty subset $S\\subseteq\\{0,\\ldots,r-1\\}$ put $V_S=\\bigcap_{i\\in S}V_i$, and suppose the section augmentation $\\Gamma(V_S,F)[0]\\to\\Gamma(V_S,G^\\bullet)$ is a quasi-isomorphism. For $p,q\\geq0$ define $L^p=\\prod_{|S|=p+1}\\Gamma(V_S,F)$ with the alternating restriction differential. Define the commuting double complex $D^{p,q}=\\prod_{|S|=p+1}\\Gamma(V_S,G^q)$, with horizontal alternating restriction differential and vertical resolution differential, with all terms zero outside $p,q\\geq0$, and total differential $d_h+(-1)^p d_v$ [def-sp-double-complex-total]. Then the two cochain maps $\\alpha:\\Gamma(X,G^\\bullet)\\to\\operatorname{Tot}(D)$ and $\\beta:L^\\bullet\\to\\operatorname{Tot}(D)$ are quasi-isomorphisms, where $\\alpha$ is restriction into the $p=0$ summands and $\\beta$ is the section map of $e$ into the $q=0$ summands. Their degree-zero composites with $\\Gamma(X,F)\\to\\Gamma(X,G^0)$ and with $\\Gamma(X,F)\\to L^0$ agree. These component-defined maps commute with coefficient maps, restriction to open subsets carrying the restricted cover, and a scheme morphism $h:Y\\to X$ with the inverse-image indexed cover $h^{-1}V_i$, whenever supplied $\\mathcal O_X$-linear coefficient and cochain resolution maps $F\\to h_*F'$ and $G^\\bullet\\to h_*G'^\\bullet$ commute with augmentations (where $F'$ and $G'^\\bullet$ are the coefficient sheaf and resolution on $Y$). The quasi-isomorphism assertion on $Y$ assumes the same flasqueness and section-augmentation hypotheses there. No flatness of $h$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Agent cochain-level formulation of Tag 09SZ (lemma-flasque-acyclic-cech) and Tag 01ET (lemma-cech-spectral-sequence-application), using the canonical double-complex maps in Tag 01EQ (lemma-cech-cohomology) and the ordered complex of Tag 01FJ (lemma-ordered-alternating), together with Tag 01FM (lemma-alternating-usual), the ordered/usual homotopy equivalence; all labels in cohomology.tex."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sc-zariski-flasque",
+  "def-sp-double-complex-total"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an acyclic finite open cover and a flasque resolution the canonical alternating Cech double complex comparison maps are quasi isomorphisms natural under morphisms of ringed spaces",
+   "results": "CochainComplex.cm5b.instQuasiIsoIntP; InjectiveResolution.instQuasiIsoIntι′; InjectiveResolution.quasiIso; CochainComplex.quasiIsoAt₀_iff; Rep.standardComplex.quasiIso_forget₂_εToSingle₀; ProjectiveResolution.instQuasiIsoIntπ′; HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso; Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app. Their signatures concern general resolutions/localization or a monoid complex, not the two finite ordered open-cover comparison maps.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Acyclic resolution of a sheaf computes Cech cohomology via natural maps into the total double complex of an open cover",
+   "results": "GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, shortComplex_X₃, shortComplex_X₂, sheafCondition_iff_comp_coyoneda, shortComplex_f, shortComplex_g, shortComplex; Sheaf.cohomologyPresheaf. No flasque ordered double-complex comparison.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"quasiIso\"",
+   "results": "0 hits.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flasque|Godement|cech.*[Qq]uasi|[Qq]uasi.*[Cc]ech",
+   "results": "CategoryTheory/Sites: 0 hits.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "godement|flasque|Cech.*[Qq]uasi|[Qq]uasi.*Cech",
+   "results": "Topology/Sheaves: Flasque.lean lines 14,16,20,24,25; read its flasque definition and exact-sequence properties, including of_shortExact_of_isFlasque₁₂ and isFlasque_skyscraperSheaf_of_hasZeroObject. No ordered Cech comparison.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural quasi isomorphism comparing finite acyclic Cech complex and sections of a flasque resolution",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "flabby|alternating.*cech|cech.*quasi|cech.*flasque",
+   "results": "0 hits in Mathlib for the case-insensitive flabby/alternating-Cech/quasi/flasque pattern.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite covering of a topological space a flabby sheaf has exact augmented alternating Cech cochain complex, giving totalization quasi-isomorphisms for a double resolution",
+   "results": "Eight hits: MayerVietorisSquare short-complex exactness and short exactness, generic injective-resolution exactness, CM5b quasi-isomorphism, and K-injective auxiliary homotopy. None states the ordered cover double-complex maps.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\"",
+   "results": "Twelve returned names: Lean trace-children substring matches and categorical CechNerveTerminalFrom constructions. None states a sheaf resolution or ordered Cech quasi-isomorphism.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-ring-complex-functorial",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
