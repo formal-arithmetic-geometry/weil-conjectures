@@ -14243,3 +14243,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:05 L: merged deliver/J3/Sheaf.Algebra.Homology.OpenOverInternalHomCycleHomologySquares (stage 3; reviewer PASS; first push; landing 20261014T020513-L-3812079 (proof); batch 20261014T020501; modules 1; new nodes 0)
 - 02:05 L: merged deliver/J4/Sheaf.Algebra.Homology.BaseTensorUnitCohomologyModel (stage 3; reviewer PASS; first push; landing 20261014T020513-L-3812179 (interface); batch 20261014T020501; modules 3; new nodes 2)
 - 02:05 L: merged deliver/K3/Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationChainCalculation (stage 3; reviewer PASS; first push; landing 20261014T020514-L-3812459 (interface); batch 20261014T020501; modules 3; new nodes 2)
+- 02:05 L: merged deliver/N2/Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker (stage 3; reviewer PASS; after a return; landing 20261014T020514-L-3812631 (proof); batch 20261014T020501; modules 1; new nodes 0)

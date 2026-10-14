@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group N2
+-/
 module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
@@ -5,9 +10,18 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.GroupTheory.QuotientGroup.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
-import Sheaf.AlgebraicGeometry.Curve.PicardDecomposition
+import WeilConjectures.AlgebraicGeometry.Curve.Picard
 import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionDiv
-import Mathlib.Algebra.Group.TypeTags.Hom
+
+/-!
+# The multiplication-by-n cokernel of the Picard group of a proper curve
+
+The source-library splitting of the degree homomorphism reduces the cokernel to the
+integer coordinate; the degree-zero coordinate is n-divisible.
+
+Source: blueprint `lem-sc-pic-proper-ntorsion`, final cokernel calculation.
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory
@@ -16,8 +30,11 @@ namespace AlgebraicGeometry
 Source: blueprint `lem-sc-pic-proper-ntorsion`, final cokernel calculation.
 (blueprint: lem-sc-pic-proper-ntorsion-coker)
 
-Proof: the Picard decomposition gives a subgroup P0 with underlying set `f.picZero`
-and an equivalence `Pic(C) ≃ ℤ × P0`. Degree-zero divisibility makes the nth-power
+Proof: connectedness and smoothness give irreducibility, and the dimension-one
+hypothesis gives smooth relative dimension one. The source-library theorem
+`Scheme.exists_mulEquiv_prod_ker_picDegreeHom` gives `Pic(C) ≃ ℤ × P0`, where
+P0 is the kernel of the degree homomorphism. Its underlying set is `f.picZero`
+by `Scheme.coe_ker_picDegreeHom`. Degree-zero divisibility makes the nth-power
 map on P0 surjective. Compose the first coordinate with the integer cast into ZMod n.
 This homomorphism is surjective since integer cast is surjective. Its kernel is the
 nth-power image: an nth power maps to zero modulo n; conversely, if the integer
@@ -31,7 +48,20 @@ theorem Scheme.Hom.pic_proper_ntorsion_coker
     Nonempty (C.Pic ⧸ (powMonoidHom n : C.Pic →* C.Pic).range ≃*
       Multiplicative (ZMod n)) := by
   classical
-  obtain ⟨P0, hP0, e, -, -⟩ := f.exists_mulEquiv_prod_picZero
+  let : C.Over (Spec (.of k)) := ⟨f⟩
+  have : ConnectedSpace C := IsConnectedCurve.connectedSpace' f
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : IsRegular C := IsRegular.of_smooth f
+  have : IrreducibleSpace C := IsRegular.irreducibleSpace C
+  have : SmoothOfRelativeDimension 1 f :=
+    (smoothOfRelativeDimension_iff_topologicalKrullDim_eq f 1).mpr
+      (IsConnectedCurve.krullDim_eq_one (f := f))
+  have : SmoothOfRelativeDimension 1 (C ↘ Spec (.of k)) :=
+    ‹SmoothOfRelativeDimension 1 f›
+  have : IsProper (C ↘ Spec (.of k)) := ‹IsProper f›
+  let P0 := (Scheme.picDegreeHom k C).ker
+  have hP0 : (P0 : Set C.Pic) = f.picZero := Scheme.coe_ker_picDegreeHom
+  obtain ⟨e, -⟩ := Scheme.exists_mulEquiv_prod_ker_picDegreeHom (k := k) (C := C)
   have hdiv : Function.Surjective (fun x : P0 ↦ x ^ n) := by
     intro L
     obtain ⟨M, hM, hpow⟩ := f.pic_proper_ntorsion_div n _hn L (by
