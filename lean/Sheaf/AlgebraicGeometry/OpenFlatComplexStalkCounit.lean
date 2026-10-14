@@ -6,6 +6,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+import all Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
+import all Sheaf.Algebra.Homology.StalkKFlatTensorHomology
+import all Sheaf.Algebra.Homology.BaseDerivedTensorOrdinaryRingComparison
+import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
+import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
 
 /-! # Local comparison factors
 
@@ -22,25 +27,48 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+private theorem tensorStalkIsoAt
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    {Y X : Scheme.{u}} (f : X ⟶ Y) (x : X) (y : Y) (h : f x = y)
+    (K : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) :
+    Nonempty
+      ((((ModuleCat.extendScalars
+        ((Y.presheaf.stalkCongr (.of_eq h)).inv ≫ f.stalkMap x).hom).mapHomologicalComplex
+          (.up ℤ)).obj
+        (((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).mapHomologicalComplex
+          (.up ℤ)).obj K)) ≅
+      (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex
+        (.up ℤ)).obj (((Scheme.Modules.tensorPullback f).mapHomologicalComplex
+          (.up ℤ)).obj K))) := by
+  subst y
+  let := stalk_additive Y.toRingedSpace (f x)
+  let := stalk_additive X.toRingedSpace x
+  let : (Scheme.Modules.tensorPullback f).Additive :=
+    SingleComplexBaseChange.tensorPullbackAdditive f
+  obtain ⟨t, _⟩ := Scheme.Modules.exists_tensorPullback_stalk_iso f x
+  simp only [TopCat.Presheaf.stalkCongr, TopCat.Presheaf.stalkSpecializes_refl,
+    Category.id_comp]
+  exact ⟨(Functor.mapHomologicalComplexCompIso (Iso.refl _) (.up ℤ)).app K ≪≫
+    (NatIso.mapHomologicalComplex t.symm (.up ℤ)).app K ≪≫
+      (Functor.mapHomologicalComplexCompIso (Iso.refl _) (.up ℤ)).symm.app K⟩
+
+set_option linter.unusedVariables false in
 /-- The stalk scalar-extension counit computes the local sheaf pullback counit
 on a bounded-above flat sheaf complex, including transport of both local rings.
 
-Proof: a bounded-above complex of flat sheaves is K-flat. Take its termwise stalk
-at xS and transport through the inverse open-stalk isomorphism; exact stalks
-preserve acyclic complexes and flat stalks give a K-flat complex P. The natural
-tensor-pullback stalk isomorphism, conjugated by the open-stalk ring isomorphisms,
-identifies ordinary pullback of K at xV with scalar extension of P along the
-original stalk map of g. The resLE equation j ≫ S.ι = V.ι ≫ g proves equality of
-these ring maps. Exact stalks commute with derived homology. Resolve sheaf
-complexes by K-flat complexes and apply the tensor-stalk comparison to descend a
-natural isomorphism between the stalk of derived pullback and derived scalar
-extension. For the given universal pair LF, ε, uniqueness of the left-derived
-functor transports this isomorphism while preserving its counit. On K the counit
-is invertible, and its comparison with the sheaf counit is the ordinary tensor
-stalk identity on pure tensors, followed by localization. Taking homology gives
-l, r and their equation. Neither a direct image nor a coefficient module enters
-this calculation. Zero complexes, zero rings and identity maps use the same
-natural identities; no degree or nonzero-ring exception is needed.
+Proof: bounded-above flatness makes K K-flat, hence the fixed sheaf pullback
+counit is invertible on K. The stalk criterion and restriction through the
+inverse open-stalk ring isomorphism make P K-flat, so the given universal scalar
+extension counit is invertible on P. The tensor-pullback stalk isomorphism,
+transported through both open-stalk ring isomorphisms, identifies ordinary
+pullback of K at xV with scalar extension of P along g.stalkMap a. The commuting
+stalk-ring square of resLE identifies the transported ring map. Passing through
+the homotopy and derived category quotient factors and exact stalk homology
+gives the target isomorphism r. Let c be the stalk of homology of the sheaf
+counit, and e the homology of the scalar extension counit. Define
+l = c ≪≫ r.symm ≪≫ e.symm; inverse cancellation proves the required equation.
+Zero complexes, zero rings and identity maps use the same identities.
 Source: Stacks Project, cohomology.tex, Lemma lemma-check-K-flat-stalks (Tag 06YB),
 Lemma lemma-derived-pullback-composition (Tag 0D5S); perfect.tex, equation-bc (Tag 0DJ7).
 (blueprint: lem-pc-open-flat-complex-stalk-counit). -/
@@ -88,6 +116,110 @@ theorem openFlatComplex_stalk_counit
         F.map ((DerivedCategory.homologyFunctor _ n).map
             ((SingleComplexBaseChange.counit j).app qK)) =
           l.hom ≫ (DerivedCategory.homologyFunctor _ n).map
-            (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ r.hom := by sorry
+            (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ r.hom := by
+  classical
+  let := fun X : Scheme.{u} ↦ HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace))
+  let R := B.presheaf.stalk (g a)
+  let T := A.presheaf.stalk a
+  let := HasDerivedCategory.standard (ModuleCat.{u} R)
+  let := HasDerivedCategory.standard (ModuleCat.{u} T)
+  let xS : S.toScheme := ⟨g a, hS⟩
+  let xV : V.toScheme := ⟨a, hV⟩
+  let j := g.resLE S V hVS
+  let U := ModuleCat.restrictScalars (S.stalkIso xS).inv.hom
+  let W := ModuleCat.restrictScalars (V.stalkIso xV).inv.hom
+  let Z := RingedSpace.moduleStalkFunctor S.toScheme.toRingedSpace xS
+  let F := RingedSpace.moduleStalkFunctor V.toScheme.toRingedSpace xV ⋙ W
+  let Q := (Z.mapHomologicalComplex (.up ℤ)).obj K
+  let P := (U.mapHomologicalComplex (.up ℤ)).obj Q
+  let qK := (HomotopyCategory.quotient _ (.up ℤ)).obj K
+  dsimp only
+  intro LF ε hLF n
+  have hK := CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace
+    S.toScheme.toRingedSpace K hbound hflat
+  have hc := SingleComplexBaseChange.counit_isIso_of_isKFlat j K hK
+  let := hc
+  have hQ := (RingedSpace.isKFlat_iff_stalk_isKFlat
+    S.toScheme.toRingedSpace K).mp hK xS
+  have hP := ringIso_kFlat (S.stalkIso xS).symm.commRingCatIsoToRingEquiv Q hQ
+  have hPa : ∀ L : CochainComplex (ModuleCat.{u} R) ℤ, L.Acyclic →
+      (CochainComplex.mapBifunctor L P (MonoidalCategory.curriedTensor _)).Acyclic := by
+    rw [← HomotopyCategory.kFlat_quotient_obj_iff,
+      HomotopyCategory.kFlat_iff_preserves_acyclic] at hP
+    intro L hL
+    exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).mp
+      (hP ((HomotopyCategory.quotient _ _).obj L)
+        ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic L).mpr hL)).2
+  let := ModuleCat.scalarExtensionCounit_isIso_of_kFlat
+    (g.stalkMap a).hom P hPa LF ε hLF
+  have hx : j xV = xS := by
+    apply Subtype.ext
+    simp [j, xV, xS]
+  let jmap : S.toScheme.presheaf.stalk xS ⟶ V.toScheme.presheaf.stalk xV :=
+    (S.toScheme.presheaf.stalkCongr (.of_eq hx)).inv ≫ j.stalkMap xV
+  have hf : (V.stalkIso xV).inv.hom.comp (g.stalkMap a).hom =
+      jmap.hom.comp (S.stalkIso xS).inv.hom := by
+    have hh := Arrow.iso_w (g.resLEStalkMap hVS xV)
+    have hh' := congrArg (fun z ↦ z ≫ (V.stalkIso xV).inv) hh
+    simp only [Scheme.Hom.resLEStalkMap, Arrow.isoMk_inv_left,
+      Arrow.isoMk_hom_right, Iso.trans_inv, Category.assoc,
+      Iso.hom_inv_id, Category.comp_id] at hh'
+    have hp := S.ι.stalkMap_congr_point (j xV) xS hx
+    rw [← Scheme.Opens.stalkIso_inv, ← Scheme.Opens.stalkIso_inv] at hp
+    have hp' := congrArg (fun z ↦
+      (B.presheaf.stalkCongr (.of_eq (congrArg Subtype.val hx))).inv ≫ z ≫
+        (S.toScheme.presheaf.stalkCongr (.of_eq hx)).inv) hp
+    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id,
+      Iso.inv_hom_id_assoc] at hp'
+    change (g.stalkMap a ≫ (V.stalkIso xV).inv).hom =
+      ((S.stalkIso xS).inv ≫ jmap).hom
+    apply congrArg CommRingCat.Hom.hom
+    erw [hh']
+    dsimp only [jmap]
+    erw [← Category.assoc, hp']
+    rfl
+  obtain ⟨s, _⟩ := ModuleCat.exists_extensionComplexIso
+    (g.stalkMap a).hom jmap.hom
+    (S.stalkIso xS).symm.commRingCatIsoToRingEquiv
+    (V.stalkIso xV).symm.commRingCatIsoToRingEquiv hf P Q (Iso.refl _)
+  let := stalk_additive V.toScheme.toRingedSpace xV
+  let := stalk_preservesHomology V.toScheme.toRingedSpace xV
+  let : PreservesFiniteLimits (RingedSpace.moduleStalkFunctor
+      V.toScheme.toRingedSpace xV) :=
+    Functor.preservesFiniteLimits_of_preservesHomology _
+  let : PreservesFiniteColimits (RingedSpace.moduleStalkFunctor
+      V.toScheme.toRingedSpace xV) :=
+    Functor.preservesFiniteColimits_of_preservesHomology _
+  let : PreservesFiniteLimits F := comp_preservesFiniteLimits _ _
+  let : PreservesFiniteColimits F := comp_preservesFiniteColimits _ _
+  obtain ⟨t'⟩ := tensorStalkIsoAt j xV xS hx K
+  let ordinary := s ≪≫ (W.mapHomologicalComplex (.up ℤ)).mapIso t'
+  let H := DerivedCategory.homologyFunctor (ModuleCat.{u} T) n
+  let D := ((ModuleCat.extendScalars (g.stalkMap a).hom).mapHomologicalComplex
+    (.up ℤ)).obj P
+  let : HasDerivedCategory V.toScheme.Modules :=
+    HasDerivedCategory.standard V.toScheme.Modules
+  let C := ((Scheme.Modules.tensorPullback j).mapHomologicalComplex (.up ℤ)).obj K
+  let r := H.mapIso (DerivedCategory.Qh.mapIso
+      (((ModuleCat.extendScalars (g.stalkMap a).hom).mapHomotopyCategoryFactors
+        (.up ℤ)).app P)) ≪≫
+    H.mapIso ((DerivedCategory.quotientCompQhIso (ModuleCat.{u} T)).app D) ≪≫
+    H.mapIso (DerivedCategory.Q.mapIso ordinary) ≪≫
+    ((DerivedCategory.homologyFunctorFactors (ModuleCat.{u} T) n).app
+      ((F.mapHomologicalComplex (.up ℤ)).obj C)) ≪≫
+    (F.mapHomologicalComplexHomologyIso (.up ℤ) n).app
+      (((Scheme.Modules.tensorPullback j).mapHomologicalComplex (.up ℤ)).obj K) ≪≫
+    F.mapIso ((DerivedCategory.homologyFunctorFactors _ n).symm.app C) ≪≫
+    F.mapIso ((DerivedCategory.homologyFunctor _ n).mapIso
+      ((DerivedCategory.quotientCompQhIso _).symm.app C))
+  let c := F.mapIso ((DerivedCategory.homologyFunctor _ n).mapIso
+    (asIso ((SingleComplexBaseChange.counit j).app qK)))
+  let e := H.mapIso (asIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
+  refine ⟨c ≪≫ r.symm ≪≫ e.symm, r, ?_⟩
+  change c.hom = (c ≪≫ r.symm ≪≫ e.symm).hom ≫ e.hom ≫ r.hom
+  simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc, Iso.inv_hom_id_assoc,
+    Iso.inv_hom_id, Category.comp_id]
+
 
 end AlgebraicGeometry
