@@ -23,7 +23,7 @@ theorem projective_resolution_ext_degree
   let := HasExt.standard (ModuleCat.{max u v} R)
   constructor
   · rintro ⟨P, hP⟩
-    rw [HasProjectiveDimensionLE, hasProjectiveDimensionLT_iff]
+    apply HasProjectiveDimensionLT.mk
     intro i hi Y a
     obtain ⟨f, hf, rfl⟩ := P.extMk_surjective a (i + 1) rfl
     have hfzero : f = 0 := (hP i (by omega)).eq_of_src _ _
