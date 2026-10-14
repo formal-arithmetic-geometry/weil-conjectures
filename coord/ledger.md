@@ -14821,3 +14821,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 18:44 L: batch 20261014T104039 dependency take-out
 - 10:44 L: returned deliver/S1/Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit (reviewer RETURN: (reviewer X-2de7c, head 2de7c21b1) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.No)
+- 10:46 L: returned deliver/G4/Sheaf.AlgebraicGeometry.AbelianResolutionComparisonEvaluation (reviewer RETURN: (reviewer X-343f1, head 343f18ae2) F1: report.md is missing the mandatory `## Forced adaptations` section. Insert before)
