@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Sheaf.AlgebraicGeometry.DerivedPullbackKFlatCounitData
-import Sheaf.AlgebraicGeometry.DerivedPullbackKFlatConeCounitEquality
+import Sheaf.AlgebraicGeometry.DerivedPullbackKFlatCounitShiftAdjustment
 
 /-! # K-flat counit connecting-map normalization
 
@@ -93,6 +93,42 @@ theorem exists_derivedPullback_kFlat_cone_counit_normalization
                 tensorIso e (Iso.refl _) ≪≫
                 schemeCanonicalShiftUnitIso Z ((derivedPullback f).obj T.obj₁)).hom ≫
                   (ε.app C.obj₁)⟦(1 : ℤ)⟧'  := by
-  sorry
+  obtain ⟨_, ε₀, hε₀⟩ := exists_derivedPullback_kFlat_counit_data f
+  obtain ⟨e, a, hs⟩ := exists_derivedPullback_kFlat_counit_shift_adjustment f ε₀ hε₀
+  let ε := a.hom ≫ ε₀
+  have hε : ∀ P : CochainComplex
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ,
+      CochainComplex.IsKFlat (R := Y.sheaf) P →
+      IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
+    intro P hP
+    have := hε₀ P hP
+    change IsIso (a.hom.app _ ≫ ε₀.app _)
+    infer_instance
+  refine ⟨e, ε, hε, ?_⟩
+  intro P Q p _ _
+  let C := CochainComplex.mappingCone.triangleh p
+  let G := (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙
+    (DerivedCategory.Qh : HomotopyCategory
+      (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤
+      schemeDerivedCategory Z)
+  have hn := ε.naturality C.mor₃
+  have hshift := hs C.obj₁
+  let a := ((derivedPullback f).mapIso
+      (schemeCanonicalShiftUnitIso Y (DerivedCategory.Qh.obj C.obj₁)).symm ≪≫
+    asIso (Functor.OplaxMonoidal.δ (derivedPullback f)
+      ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) (DerivedCategory.Qh.obj C.obj₁)) ≪≫
+    tensorIso e (Iso.refl _) ≪≫
+    schemeCanonicalShiftUnitIso Z ((derivedPullback f).obj (DerivedCategory.Qh.obj C.obj₁)))
+  change ε.app (C.obj₁⟦(1 : ℤ)⟧) ≫ (G.commShiftIso (1 : ℤ)).hom.app C.obj₁ =
+    (derivedPullback f).map ((DerivedCategory.Qh.commShiftIso (1 : ℤ)).hom.app C.obj₁) ≫
+      a.hom ≫ (ε.app C.obj₁)⟦(1 : ℤ)⟧' at hshift
+  change ε.app C.obj₃ ≫
+    (G.map C.mor₃ ≫ (G.commShiftIso (1 : ℤ)).hom.app C.obj₁) =
+    (derivedPullback f).map (DerivedCategory.Qh.map C.mor₃ ≫
+      (DerivedCategory.Qh.commShiftIso (1 : ℤ)).hom.app C.obj₁) ≫
+      a.hom ≫ (ε.app C.obj₁)⟦(1 : ℤ)⟧'
+  rw [← Category.assoc, ← hn, Category.assoc, hshift, Functor.map_comp]
+  simp only [Functor.comp_map, Category.assoc]
+
 
 end AlgebraicGeometry

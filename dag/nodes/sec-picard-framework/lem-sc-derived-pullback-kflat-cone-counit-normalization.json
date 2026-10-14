@@ -18,29 +18,34 @@
  },
  "proof": [
   {
-   "text": "Obtain the shifted-unit isomorphism, counit natural transformation, and K-flat invertibility from the dedicated K-flat counit-data interface.",
+   "text": "Obtain a counit ε₀ invertible on K-flat representatives from the existing counit-data theorem. Discard its unrelated shifted-unit comparison.",
    "uses": [
     "lem-sc-derived-pullback-kflat-counit-data"
    ],
    "elementary": false
   },
   {
-   "text": "Unresolved after the statement correction: choose the counit and shifted-unit comparison jointly so that their shift square agrees with the supplied inverse tensorator, then apply the corrected cone equality. K-flat invertibility alone does not supply this square. The former proof is withdrawn and the original existential normalization theorem is reopened, without asserting a new compatible-data construction.",
+   "text": "Apply the counit shift-adjustment theorem to ε₀. It gives a natural automorphism a of Qh followed by derived pullback and a shifted-unit isomorphism e such that ε=a.hom followed by ε₀ satisfies the translated-unit shift square. Every ε component at a K-flat representative is invertible, by composition with a component of a.",
    "uses": [
-    "lem-sc-derived-pullback-kflat-cone-counit-equality"
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply naturality of ε to the cone projection C.mor₃, then compose with the target shift comparison. Substitute the shift square at C.obj₁. Expand the two localized triangles, rewrite functoriality of composition and associativity. This gives exactly the requested cone connecting-map equality. The proof does not use the cone-equality theorem as an imported dependency.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-derived-pullback-kflat-counit-data",
-  "lem-sc-derived-pullback-kflat-cone-counit-equality"
+  "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "D2",
+  "group": "Q4",
   "document": "https://stacks.math.columbia.edu/tag/06YJ",
-  "place": "Repair of false fixed-data decomposition; original existential normalization statement remains an open theorem."
+  "place": "K-flat computation; the supplied-tensorator counit shift-square step is separated, and the cone implication is proved directly in Lean."
  },
  "mathlib_searches": [
   {
@@ -136,13 +141,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-27116",
-  "group": "D2",
+  "reviewer": "COMPILER",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261013T234505-L-2160616",
+  "landing": "20261014T001731-L-2554234",
   "kind": "interface",
-  "note": "independent Codex review: Delivered equality and forced normalization adaptation compile; signatures, DAG, change record, proof axioms, and reader failure/adaptation all match."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
