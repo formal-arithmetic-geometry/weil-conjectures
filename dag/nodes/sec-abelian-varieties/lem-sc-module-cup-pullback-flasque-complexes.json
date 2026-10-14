@@ -20,52 +20,47 @@
  ],
  "proof": [
   {
-   "text": "Take the concrete Godement models for the six coefficients. Over V send a product-of-stalks section to the section over f-inverse V whose x-prime coordinate is the image of its f(x-prime) coordinate under the coefficient stalk map. This is O_X(V)-linear with target viewed by pushforward and commutes with restrictions. The germ unit and evaluation commute: both routes take the germ or evaluate the same coordinate. Iterate this construction to obtain augmented cosimplicial f-maps and maps of the alternating complexes.",
+   "text": "Obtain six augmented Godement models using models_exist on F,G,F tensor G and the three pulled-back coefficients. Take φ,ψ as the adjunction units and χ as the tensor unit followed by pushforward of the section-normalized tensor comparison. Its normalization proves the pure tensor compatibility hypothesis. Apply the generic Godement f-map summand lemma to these given models to obtain compatible μ,μ₁ and l,r,t with their augmentation squares.",
    "uses": [
     "lem-sc-module-cup-godement-model-pairing-models-exist",
-    "def-sc-module-cup-godement-model",
-    "def-sc-module-cup-godement-codegeneracies",
-    "lem-sc-module-cup-godement-relations",
-    "def-pc-module-pullback"
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-sc-module-cup-godement-fmap-summands"
    ],
    "elementary": false
   },
   {
-   "text": "Use coordinatewise tensoring and the front/back faces of Alexander--Whitney to form pairings. The section normalization of the tensor comparison makes image-of-tensor equal tensor-of-images on each stalk coordinate. The iterated f-maps commute with front and back faces, yielding the strict pairing equation. For the target coefficient compose with the Godement map of tau. Leibniz and the germ tensor equation give the augmented pairings.",
-   "uses": [
-    "lem-sc-module-cup-godement-model-pairing-pairing",
-    "lem-sc-module-cup-godement-aw",
-    "lem-weil-pbc-module-pullback-tensor"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The augmented stalk complexes contract by the extra evaluation codegeneracy, hence all six augmentations are quasi-isomorphisms. Each nonnegative term is a product of stalk skyscrapers and is flasque; negative terms vanish. These assertions supply precisely the quasi-isomorphism, strict-support and flasqueness clauses, without passing to injective comparisons or global cohomology.",
+   "text": "For each of the six given models, model_quasiIso supplies the quasi-isomorphism and modelFlasque (the proved helper of cosimplicial_input) supplies termwise flasqueness. The extension-by-zero complex has IsStrictlyGE 0 by the Mathlib embedding support instance.",
    "uses": [
     "lem-sc-module-cup-godement-model-quasi-iso",
-    "lem-sc-module-cup-godement-object-flasque"
+    "lem-sc-module-cup-godement-cosimplicial-input"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved aw_components construction in cosimplicial_aw_natural to obtain u and u₁ with components awComponent. The coproduct inclusion lemma identifies each inclusion followed by that component with awSummand. In bidegree (0,0), awSummand_zero identifies this with ZeroPair. Evaluate the two morphism equalities on the augmented pure tensor sections and compose with the zero-pair equations to prove the two augmentation clauses. In arbitrary nonnegative bidegree, evaluate the inclusion/component equations on both schemes; compose the first with t, apply the generic f-map summand equation, and compose with the reverse of the second. This proves the displayed section equality and assembles the existential witnesses.",
+   "uses": [
+    "lem-sc-module-cup-cosimplicial-aw-natural",
+    "def-sc-module-cup-aw-components",
+    "lem-sc-module-cup-godement-fmap-summands"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-module-cup-godement-model-pairing-models-exist",
-  "def-sc-module-cup-godement-model",
-  "def-sc-module-cup-godement-codegeneracies",
-  "lem-sc-module-cup-godement-relations",
-  "def-pc-module-pullback",
-  "lem-sc-module-cup-godement-model-pairing-pairing",
-  "lem-sc-module-cup-godement-aw",
   "lem-weil-pbc-module-pullback-tensor",
+  "lem-sc-module-cup-godement-fmap-summands",
   "lem-sc-module-cup-godement-model-quasi-iso",
-  "lem-sc-module-cup-godement-object-flasque"
+  "lem-sc-module-cup-godement-cosimplicial-input",
+  "lem-sc-module-cup-cosimplicial-aw-natural",
+  "def-sc-module-cup-aw-components"
  ],
  "proof_origin": {
-  "by": "E3 stage-3 worker",
+  "by": "M1 stage-3 worker",
   "document": "https://stacks.math.columbia.edu/tag/0FKU",
-  "place": "section-cup-product, naive products and Lemma 20.31.3; Tag 0FKS, cohomology-lemma-godement-resolution, extended coordinatewise to a scheme morphism; explicit coordinate extension of the Godement argument to f-maps, before computing comparisons",
+  "place": "Existing Godement model, exactness and flasqueness APIs; explicit Alexander--Whitney component assembly; cross-scheme coefficient compatibility split into lem-sc-module-cup-godement-fmap-summands",
   "date": "2026-10-14",
-  "group": "E3"
+  "group": "M1"
  },
  "mathlib_searches": [
   {
@@ -143,9 +138,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261014T042430-L-1211766",
+  "landing": "20261014T061027-L-2465939",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

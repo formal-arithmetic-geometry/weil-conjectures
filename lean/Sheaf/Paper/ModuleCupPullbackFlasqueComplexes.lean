@@ -9,6 +9,11 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Topology.Sheaves.Flasque
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+import Sheaf.Paper.ModuleCupGodementModelsExist
+import Sheaf.Paper.ModuleCupGodementFMapSummands
+import Sheaf.Paper.ModuleCupGodementModelQuasiIso
+import all Sheaf.Paper.ModuleCupGodementCosimplicialInput
+import all Sheaf.Paper.ModuleCupCosimplicialAWNaturality
 
 /-! # Flasque tensor complexes across a scheme morphism
 
@@ -27,6 +32,8 @@ open AlgebraicGeometry TopologicalSpace
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
+set_option maxHeartbeats 800000 in
+-- Six model specializations and section identities elaborate large tensor-complex types.
 /-- Integer flasque resolutions and tensor chain pairings admit simultaneous f-maps.
 This assertion concerns complexes and sections only, with no injective comparisons
 or cohomology-class maps.
@@ -123,7 +130,88 @@ theorem moduleCup_pullback_flasque_complexes (X X' : Scheme.{v}) (f : X' ⟶ X)
               ((HomologicalComplex.ιTensorObj K₁ L₁ (p : ℤ) (q : ℤ)
                 ((p + q : ℕ) : ℤ) (by simp)).val.app (op (f ⁻¹ᵁ V))
                   (tmulSection ((l.f (p : ℤ)).val.app (op V) x)
-                    ((r.f (q : ℤ)).val.app (op V) y))) := by sorry
+                    ((r.f (q : ℤ)).val.app (op V) y))) := by
+  obtain ⟨A, a, hA, sA⟩ := moduleCup_godement_models_exist X F
+  obtain ⟨B, b, hB, sB⟩ := moduleCup_godement_models_exist X G
+  obtain ⟨C, c, hC, sC⟩ := moduleCup_godement_models_exist X (F ⊗ G)
+  obtain ⟨A₁, a₁, hA₁, sA₁⟩ := moduleCup_godement_models_exist X' ((tensorPullback f).obj F)
+  obtain ⟨B₁, b₁, hB₁, sB₁⟩ := moduleCup_godement_models_exist X' ((tensorPullback f).obj G)
+  obtain ⟨C₁, c₁, hC₁, sC₁⟩ := moduleCup_godement_models_exist X'
+    ((tensorPullback f).obj F ⊗ (tensorPullback f).obj G)
+  obtain ⟨μ, μ₁, hμ, hμ₁, l, r, t, ha, hb, hc, hpair⟩ :=
+    moduleCup_godement_fmap_summands X X' f F G
+      ((tensorPullback f).obj F) ((tensorPullback f).obj G)
+      ((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app F)
+      ((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app G)
+      ((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app (F ⊗ G) ≫
+        (pushforward f).map ((Classical.choose (module_pullback_tensor f) F G).hom))
+      (by
+        intro V x y
+        change (Classical.choose (module_pullback_tensor f) F G).hom.app (f ⁻¹ᵁ V)
+          (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app
+            (F ⊗ G)).val.app (op V) (tmulSection x y)) = _
+        exact (Classical.choose_spec (module_pullback_tensor f)).2 F G V x y)
+      A B C A₁ B₁ C₁ a b c a₁ b₁ c₁
+      hA hB hC hA₁ hB₁ hC₁ sA sB sC sA₁ sB₁ sC₁
+  obtain ⟨u, hu⟩ := aw_components X A B C μ
+  obtain ⟨u₁, hu₁⟩ := aw_components X' A₁ B₁ C₁ μ₁
+  have hge (Y : Scheme.{v}) (D : CosimplicialObject Y.Modules) :
+      (moduleCup_cosimplicialComplex Y D).IsStrictlyGE 0 := by
+    unfold moduleCup_cosimplicialComplex
+    infer_instance
+  refine ⟨moduleCup_cosimplicialComplex X A, moduleCup_cosimplicialComplex X B,
+    moduleCup_cosimplicialComplex X C, a, b, c,
+    moduleCup_godement_model_quasiIso X F A a hA,
+    moduleCup_godement_model_quasiIso X G B b hB,
+    moduleCup_godement_model_quasiIso X (F ⊗ G) C c hC,
+    hge X A, hge X B, hge X C, modelFlasque hA, modelFlasque hB, modelFlasque hC,
+    u, ?_, moduleCup_cosimplicialComplex X' A₁, moduleCup_cosimplicialComplex X' B₁,
+    moduleCup_cosimplicialComplex X' C₁, a₁, b₁, c₁,
+    moduleCup_godement_model_quasiIso X' ((tensorPullback f).obj F) A₁ a₁ hA₁,
+    moduleCup_godement_model_quasiIso X' ((tensorPullback f).obj G) B₁ b₁ hB₁,
+    moduleCup_godement_model_quasiIso X'
+      ((tensorPullback f).obj F ⊗ (tensorPullback f).obj G) C₁ c₁ hC₁,
+    hge X' A₁, hge X' B₁, hge X' C₁,
+    modelFlasque hA₁, modelFlasque hB₁, modelFlasque hC₁,
+    u₁, ?_, l, r, t, ha, hb, hc, ?_⟩
+  · intro V x y
+    have hz : HomologicalComplex.ιTensorObj (moduleCup_cosimplicialComplex X A)
+        (moduleCup_cosimplicialComplex X B) 0 0 0 (by simp) ≫ u.f 0 =
+        moduleCup_cosimplicialZeroPair X A B C μ := by
+      rw [hu, moduleCup_ι_awComponent, moduleCup_awSummand_zero]
+    have h := congrArg
+      (fun (z : (moduleCup_cosimplicialComplex X A).X 0 ⊗
+          (moduleCup_cosimplicialComplex X B).X 0 ⟶
+          (moduleCup_cosimplicialComplex X C).X 0) ↦ z.app V
+        (tmulSection ((a.f 0).val.app (op V) x) ((b.f 0).val.app (op V) y))) hz
+    rw [Hom.comp_app, ConcreteCategory.comp_apply] at h
+    exact h.trans (hμ V x y)
+  · intro V x y
+    have hz : HomologicalComplex.ιTensorObj (moduleCup_cosimplicialComplex X' A₁)
+        (moduleCup_cosimplicialComplex X' B₁) 0 0 0 (by simp) ≫ u₁.f 0 =
+        moduleCup_cosimplicialZeroPair X' A₁ B₁ C₁ μ₁ := by
+      rw [hu₁, moduleCup_ι_awComponent, moduleCup_awSummand_zero]
+    have h := congrArg
+      (fun (z : (moduleCup_cosimplicialComplex X' A₁).X 0 ⊗
+          (moduleCup_cosimplicialComplex X' B₁).X 0 ⟶
+          (moduleCup_cosimplicialComplex X' C₁).X 0) ↦ z.app V
+        (tmulSection ((a₁.f 0).val.app (op V) x) ((b₁.f 0).val.app (op V) y))) hz
+    rw [Hom.comp_app, ConcreteCategory.comp_apply] at h
+    exact h.trans (hμ₁ V x y)
+  · intro p q V x y
+    have hs := moduleCup_ι_awComponent X A B C μ (p : ℤ) (q : ℤ)
+      ((p + q : ℕ) : ℤ) (by simp)
+    have hs₁ := moduleCup_ι_awComponent X' A₁ B₁ C₁ μ₁ (p : ℤ) (q : ℤ)
+      ((p + q : ℕ) : ℤ) (by simp)
+    have h := congrArg (fun z ↦ z.app V (tmulSection x y)) hs
+    have h₁ := congrArg (fun z ↦ z.app (f ⁻¹ᵁ V)
+      (tmulSection ((l.f (p : ℤ)).val.app (op V) x)
+        ((r.f (q : ℤ)).val.app (op V) y))) hs₁
+    rw [Hom.comp_app, ConcreteCategory.comp_apply] at h h₁
+    rw [hu, hu₁]
+    exact (congrArg ((t.f ((p + q : ℕ) : ℤ)).val.app (op V)) h).trans
+      ((hpair p q V x y).trans h₁.symm)
+
 
 end
 end AlgebraicGeometry.Scheme.Modules
