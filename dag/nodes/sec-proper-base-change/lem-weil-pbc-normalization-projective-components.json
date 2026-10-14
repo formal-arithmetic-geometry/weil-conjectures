@@ -19,7 +19,7 @@
  },
  "kind": "statement",
  "title": "Normalization projective components",
- "statement": "Let $k$ be a field [def-weil-field] and $C$ a projective $k$-scheme [def-pc-scheme, def-kun-projective]. Let $N\\to C$ be the normalization, meaning the disjoint union of the normalizations [def-sc-normalization] of the reduced irreducible components [def-weil-irreducible-components, def-weil-pbc-scheme-reduction, lem-weil-pbc-scheme-coproduct-family]. Then $N\\to C$ is finite and surjective [def-weil-pbc-scheme-conventions], $N$ is projective and proper over $k$, and $N=\\coprod_{i\\in I}N_i$ for a finite set $I$, where each $N_i$ is nonempty, normal (every local ring is an integrally closed domain), integral and both open and closed in $N$ [def-weil-pbc-normal-ring, def-pc-integral-scheme, def-weil-open-immersion]. Each $N_i$ is projective and proper over $k$. If $\\dim C\\le1$ [def-kun-topological-krull-dimension], then $\\dim N_i\\le1$ for all $i$. The map $N\\to C$ factors through $C_{\\mathrm{red}}$ as its normalization. The set $I$ is empty if and only if $C$ is empty.",
+ "statement": "Let $k$ be a field [def-weil-field] and $C$ a projective $k$-scheme [def-pc-scheme, def-kun-projective]. Let $N\\to C$ be the normalization, meaning the disjoint union of the normalizations [def-sc-normalization] of the reduced irreducible components [def-weil-irreducible-components, def-weil-pbc-scheme-reduction, lem-weil-pbc-reduced-induced-closed-subscheme, lem-weil-pbc-scheme-coproduct-family]. Then $N\\to C$ is finite and surjective [def-weil-pbc-scheme-conventions], $N$ is projective and proper over $k$, and $N=\\coprod_{i\\in I}N_i$ for a finite set $I$, where each $N_i$ is nonempty, normal (every local ring is an integrally closed domain), integral and both open and closed in $N$ [def-weil-pbc-normal-ring, def-pc-integral-scheme, def-weil-open-immersion]. Each $N_i$ is projective and proper over $k$. If $\\dim C\\le1$ [def-kun-topological-krull-dimension], then $\\dim N_i\\le1$ for all $i$. The map $N\\to C$ factors through $C_{\\mathrm{red}}$ as its normalization. The set $I$ is empty if and only if $C$ is empty.",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Tags 0BXR (lemma-normalization-locally-algebraic), 0GK4 (lemma-normalize-projective), 033M (properties.tex, lemma-normal-Noetherian); dimension via Tags 00OK (algebra.tex, lemma-integral-sub-dim-equal) and 00OY (algebra.tex, lemma-Noether-normalization)"
@@ -36,11 +36,170 @@
   "def-weil-pbc-normal-ring",
   "def-pc-integral-scheme",
   "def-weil-open-immersion",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-pc-projective-proper], the structure map $C\\to\\operatorname{Spec}k$ is proper. Properness includes finite type and quasi-compactness [def-weil-pbc-scheme-conventions]. Since the base $\\operatorname{Spec}k$ is affine, its inverse image $C$ is quasi-compact [def-weil-pbc-quasi-compact-scheme]. The field $k$ is Noetherian: its only ideals are $0$ and $k$. Thus $\\operatorname{Spec}k$ is locally Noetherian [pqf-def-locnoeth], and [pqf-lem-locnoeth-lft] makes $C$ locally Noetherian. Together with quasi-compactness this says that $C$ is Noetherian. Apply [lem-sc-noetherian-closed-subset-finite-components] with $E=C$ to get a finite set $I$ of its irreducible components whose union is $C$.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "def-weil-pbc-scheme-conventions",
+    "pqf-lem-locnoeth-lft",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "def-weil-pbc-quasi-compact-scheme",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXR (lemma-normalization-locally-algebraic), proof: Noetherianity and finiteness of irreducible components; inputs 01WC, 01T6, 0BA8"
+   }
+  },
+  {
+   "text": "Give each component $Z_i$ its reduced induced closed subscheme structure using [lem-weil-pbc-reduced-induced-closed-subscheme]. It is nonempty and irreducible by [def-weil-irreducible-components], and reduced by the cited construction; hence it is integral by the equivalence in [def-pc-integral-scheme]. Its inclusion $a_i:Z_i\\to C$ is a closed immersion and therefore finite by [lem-weil-pbc-closed-immersion-finite]. Apply [lem-fin-finite-over-projective] to $S=\\operatorname{Spec}k$, $T=C$, $h=a_i$: the base is Noetherian as checked in step 1 and is affine. Use the revised lemma's affine-base conclusion (take $U=S$), which supplies a closed immersion into $\\mathbf P^N_k$ and hence makes $Z_i$ projective over $k$. By [lem-pc-projective-proper], it is proper and hence of finite type over $k$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-irreducible-components",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-fin-finite-over-projective",
+    "lem-pc-projective-proper",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXR and section-normalization, componentwise construction; Schemes 01J3/01J4; Morphisms 035C, 0B3I and 0C4P"
+   }
+  },
+  {
+   "text": "Put $N_i=Z_i^{\\nu}$ with map $\\nu_i:N_i\\to Z_i$, as in [def-sc-normalization]. The hypotheses of [lem-sc-normalization-exists] now hold: $Z_i$ is integral and of finite type over the field $k$. Its statement gives that $\\nu_i$ is finite and surjective and that $\\dim N_i=\\dim Z_i$. Since $Z_i$ is nonempty and $\\nu_i$ is surjective, $N_i$ is nonempty. By [lem-weil-pbc-finite-composition], the map $a_i\\nu_i:N_i\\to C$ is finite.",
+   "uses": [
+    "def-sc-normalization",
+    "lem-sc-normalization-exists",
+    "lem-weil-pbc-finite-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXR (lemma-normalization-locally-algebraic); dimension clause of the existing integral normalization lemma; Morphisms 01WK"
+   }
+  },
+  {
+   "text": "Choose the generic point $\\eta_i$ of $Z_i$ by [lem-sc-scheme-sober], and put $K=\\mathcal O_{Z_i,\\eta_i}$. By [lem-sc-integral-function-field-affine-fraction], each nonempty affine open $U=\\operatorname{Spec}A$ of $Z_i$ has $A$ a domain with fraction field $K=k(Z_i)$. By the affine description in [def-fin-normalization-extension] applied to $L=K$, which identifies this construction with [def-sc-normalization], its inverse image in $N_i$ is $\\operatorname{Spec}\\overline A$, the integral closure of $A$ in $K$. Apply [lem-weil-pbc-integral-closure-finite-extension-normal] to the degree-one extension $K/K$: $\\overline A$ is a normal domain with fraction field $K$. For a point of this affine chart corresponding to a prime $\\mathfrak q$, [lem-weil-pbc-spec-domain-stalks-function-field] identifies its structure-sheaf stalk with $\\overline A_{\\mathfrak q}$. The stalk in this open chart equals the stalk in $N_i$, since neighborhoods contained in the chart are cofinal among all neighborhoods of the point. This prime localization is a normal domain by [lem-weil-pbc-localization-normal-domain], so every local ring of $N_i$ is an integrally closed domain. These affine charts also prove integrality. In each chart, the zero prime of $\\overline A$ maps to the zero prime of $A$, hence to $\\eta_i$. It is the only prime over $\\eta_i$: if a prime $\\mathfrak q\\subset\\overline A$ contracts to zero and contains a nonzero $b$, write $b=a/s$ in $K=\\operatorname{Frac}(A)$ with $a,s\\in A$ nonzero; then $a=sb\\in\\mathfrak q\\cap A$, a contradiction. Every nonempty affine open of $Z_i$ contains $\\eta_i$ by [lem-sc-integral-function-field-affine-fraction]. Consequently every point over $\\eta_i$ belongs to every one of these inverse-image charts. Their zero primes therefore represent one and the same point of $N_i$, the unique point over $\\eta_i$. Every point belongs to a chart and is a specialization of that generic point, so $N_i$ is irreducible. Its affine charts are reduced since their rings are domains, and it is nonempty by step 3. Thus the equivalence in [def-pc-integral-scheme] gives that $N_i$ is integral.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-sc-normalization",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-localization-normal-domain",
+    "def-pc-integral-scheme",
+    "def-fin-normalization-extension",
+    "lem-weil-pbc-spec-domain-stalks-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035Q (lemma-normalization-normal), clause (1), written on integral-component affine charts; Algebra 034L and 00GY; affine description: blueprint sec-curve-estimates/sk-prop-cd-affine/def-fin-normalization-extension.md, L=K; stalk identification: Schemes 01HV (lemma-spec-sheaves), clause (6)"
+   }
+  },
+  {
+   "text": "The normalization in the statement is $N=\\coprod_{i\\in I}N_i$. By [lem-weil-pbc-scheme-coproduct-family], each coprojection identifies $N_i$ with an open and closed subscheme, and these images are disjoint and cover $N$. The maps $a_i\\nu_i:N_i\\to C$ induce the stated map $\\nu:N\\to C$. It is finite: enumerate the finite set $I$ and inductively apply [lem-weil-pbc-finite-coproduct] to the finite maps of step 3. In the empty-family base case the inverse image of any affine $\\operatorname{Spec}R$ is $\\varnothing=\\operatorname{Spec}0$, and $0$ is generated as an $R$-module by the empty list, so the map is finite by [def-weil-finite-integral-morphism]. It is surjective: each point of $C$ lies in a component $Z_i$ by step 1 and has a preimage in $N_i$ by step 3.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-coproduct",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXR, clause (1); Morphisms 0CYI (lemma-finite-union-finite), including the empty case explicitly"
+   }
+  },
+  {
+   "text": "Apply [lem-fin-finite-over-projective] over the Noetherian base $\\operatorname{Spec}k$ first to the finite map $\\nu:N\\to C$ of step 5 and then to each finite map $a_i\\nu_i:N_i\\to C$ of step 3. The base $S=\\operatorname{Spec}k$ is affine, so in each application take the affine open $U=S$ in the revised lemma. Its affine-base conclusion supplies a global closed embedding over $k$ for $N$ and for each $N_i$. Since $C$ is projective, this proves that $N$ and every $N_i$ are projective over $k$. Applying [lem-pc-projective-proper] to these structure morphisms proves that all of them are proper over $k$.",
+   "uses": [
+    "lem-fin-finite-over-projective",
+    "lem-pc-projective-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0GK4 (lemma-normalize-projective), proof: finite over projective and projective implies proper"
+   }
+  },
+  {
+   "text": "The reduction $C_{\\mathrm{red}}\\to C$ is the identity on underlying spaces by [def-weil-pbc-scheme-reduction], so it has exactly the same irreducible components. Every $Z_i$ is reduced. Therefore [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] factors $a_i$ through $C_{\\mathrm{red}}$. Explicitly, on $\\operatorname{Spec}R\\subset C$ its component is cut out by a radical ideal $J_i$, and $\\sqrt{(0)}\\subseteq J_i$; its map to the reduction is induced by $R/\\sqrt{(0)}\\to R/J_i$. The reduced induced structure on the same closed subset of $C_{\\mathrm{red}}$ is again $\\operatorname{Spec}(R/J_i)$, by the affine description and uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme]. Thus the component normalizations used to construct $N$ are exactly those of $C_{\\mathrm{red}}$. Their maps induce $N\\to C_{\\mathrm{red}}$ by the coproduct mapping property [lem-weil-pbc-scheme-coproduct-family], and its composite with $C_{\\mathrm{red}}\\to C$ is $\\nu$, since this equality holds on each summand. This is the normalization of $C_{\\mathrm{red}}$ in the componentwise meaning stipulated in the statement.",
+   "uses": [
+    "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035O (lemma-normalization-reduced); affine componentwise argument using Schemes 01J3 and 0356"
+   }
+  },
+  {
+   "text": "Suppose $\\dim C\\le1$. A chain of irreducible closed subsets of the closed subspace $Z_i$ is also a chain of irreducible closed subsets of $C$, with the same strict inclusions. By [def-kun-topological-krull-dimension], $\\dim Z_i\\le\\dim C$. Combine this with the equality $\\dim N_i=\\dim Z_i$ already supplied by [lem-sc-normalization-exists] in step 3 to obtain $\\dim N_i\\le1$.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "lem-sc-normalization-exists"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0GK5 (lemma-dim-1-projective-completion-after-insep), use of normalized projective components; dimension equality from the existing normalization lemma"
+   }
+  },
+  {
+   "text": "If $I$ is empty, the components' union in step 1 is empty and hence $C$ is empty. Conversely, if $C$ is empty there is no nonempty irreducible subset, hence no irreducible component by [def-weil-irreducible-components], so $I$ is empty. In this case $N$ is the empty coproduct and the claims about individual $N_i$ are vacuous.",
+   "uses": [
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXR, componentwise normalization; empty case from the definition of irreducible components"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-proper",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-lem-locnoeth-lft",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "def-weil-pbc-quasi-compact-scheme",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-irreducible-components",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-fin-finite-over-projective",
+  "def-sc-normalization",
+  "lem-sc-normalization-exists",
+  "lem-weil-pbc-finite-composition",
+  "lem-sc-scheme-sober",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-localization-normal-domain",
+  "def-fin-normalization-extension",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-coproduct",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-scheme-reduction",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0BXR and 0GK4, expanded componentwise using existing DAG lemmas; 035Q and 035O in morphisms.tex"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,15 +235,115 @@
    "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of a projective scheme over a field is finite surjective projective and has finitely many normal integral components",
+   "results": "8 hits; names/files: AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*[Pp]roject|[Pp]roject.*normalization",
+   "results": "0 hits; names/files: ; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization of a projective scheme over a field is projective and a finite disjoint union of integral normal components",
+   "results": "0 hits; names/files: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite normalization preserves projectivity and dimension for algebraic schemes",
+   "results": "8 hits; names/files: AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"IsProjective\"",
+   "results": "0 hits; names/files: ; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Absolute normalization of a finite type scheme over a field is finite with normal irreducible components",
+   "results": "8 hits; names/files: AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.finite_appTop_of_universallyClosed; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"IsIntegral\"",
+   "results": "5 hits; names/files: AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*[Nn]ormal|[Nn]ormal.*normalization",
+   "results": "25 hits; names/files: Mathlib/Util/AtomM/Recurse.lean, Mathlib/Util/AtomM/Recurse.lean, Mathlib/Tactic/FieldSimp.lean, Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean, Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean, Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean, Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean, Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-field-curve-completion-insep",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-normalization-projective-components",
+  "worker": "stage1",
+  "summary": "Split componentwise using existing Noetherian-components, integral normalization, normal integral closure, localization, finite-coproduct, and finite-over-projective lemmas. All clauses and the empty case are proved; no new nodes. Checked exact cited statements and flagged a defective imported proof of the otherwise valid normalization-exists tool. Repaired the returned delivery against the current DAG: steps 2 and 6 explicitly apply the corrected finite-over-projective lemma only over the affine Noetherian base Spec k; all citation statements were reread and quotes refreshed. Maintainer reader added existing-node citations for the reduced induced component structures, the affine normalization description (L=K), and the affine structure-sheaf stalk localization; no mathematical assertion or hypothesis changed.",
+  "blueprint": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7). Auxiliary input: Tag 0GK5, label lemma-dim-1-projective-completion-after-insep, assertions (1)-(5); normalization interpreted componentwise as in its normalization section; proof of 0GK5: normalization-projective-components",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic scheme-theoretic tool used as stated in the componentwise normalization argument; it does not replace any step of the proper-base-change unit."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme-theoretic tool used as stated in the componentwise normalization argument; it does not replace any step of the proper-base-change unit."
+   },
+   {
+    "node": "lem-fin-finite-over-projective",
+    "why": "Generic scheme-theoretic tool used as stated in the componentwise normalization argument; it does not replace any step of the proper-base-change unit."
+   },
+   {
+    "node": "lem-sc-normalization-exists",
+    "why": "Generic scheme-theoretic tool used as stated in the componentwise normalization argument; it does not replace any step of the proper-base-change unit."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic scheme-theoretic tool used as stated in the componentwise normalization argument; it does not replace any step of the proper-base-change unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-fin-finite-over-projective",
+  "lem-sc-normalization-exists",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-335fb300f",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-335fb300f (reviewer sub-agent of L); spot-checked: Read the full mathematics and sources; verified all nine steps, edge cases, and affine-base projectivity. Repaired three missing existing-node citations: reduced induced components, affine normalization charts, and affine stalk localization. No hypotheses or conclusions changed; no new nodes or cycles. review.md and corrected DAG JSON written. Confirmed the pre-existing normalization proof defect without relying on it.; 1 file(s) fixed by the reviewer"
+ }
 }
