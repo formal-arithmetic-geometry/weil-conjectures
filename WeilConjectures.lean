@@ -930,7 +930,6 @@ public import WeilConjectures.CategoryTheory.InverseMateEquivalence
 public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 public import WeilConjectures.CategoryTheory.MapExtendHomology
 public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
-public import WeilConjectures.CategoryTheory.ModuleObjects.Basic
 public import WeilConjectures.CategoryTheory.ModuleObjects.Bimod
 public import WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Monoidal.Bimod
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
-public import WeilConjectures.CategoryTheory.ModuleObjects.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 
 /-!
 
@@ -46,7 +46,7 @@ namespace Mod
 lemma braiding_whiskerRight_smul (M : Mod C R) :
     (β_ R R).hom ▷ M.X ≫ (α_ R R M.X).hom ≫ R ◁ γ[R,M.X] ≫ γ[R,M.X] =
       (α_ R R M.X).hom ≫ R ◁ γ[R,M.X] ≫ γ[R,M.X] := by
-  rw [← mul_smul, ← comp_whiskerRight_assoc, IsCommMonObj.mul_comm, mul_smul]
+  rw [← mul_act, ← comp_whiskerRight_assoc, IsCommMonObj.mul_comm, mul_act]
 
 variable (R) in
 /-- A left module object over a commutative algebra object, regarded as a bimodule: the right
@@ -55,16 +55,16 @@ action is the braiding followed by the left action. -/
 def toBimodObj (M : Mod C R) : Bimod (Mon.mk R) (Mon.mk R) where
   X := M.X
   actLeft := γ[R,M.X]
-  one_actLeft := M.one_smul
-  left_assoc := M.mul_smul
+  one_actLeft := one_act M.X
+  left_assoc := mul_act M.X
   actRight := (β_ M.X R).hom ≫ γ[R,M.X]
   actRight_one := by
     change M.X ◁ η[R] ≫ (β_ M.X R).hom ≫ γ[R,M.X] = (ρ_ M.X).hom
-    rw [braiding_naturality_right_assoc, one_smul, braiding_leftUnitor]
+    rw [braiding_naturality_right_assoc, one_act, braiding_leftUnitor]
   right_assoc := by
     change M.X ◁ μ[R] ≫ (β_ M.X R).hom ≫ γ[R,M.X] =
       (α_ M.X R R).inv ≫ ((β_ M.X R).hom ≫ γ[R,M.X]) ▷ R ≫ (β_ M.X R).hom ≫ γ[R,M.X]
-    rw [braiding_naturality_right_assoc, mul_smul, comp_whiskerRight, Category.assoc,
+    rw [braiding_naturality_right_assoc, mul_act, comp_whiskerRight, Category.assoc,
       braiding_naturality_left_assoc, braiding_tensor_right_hom, braiding_tensor_left_hom]
     simp only [Category.assoc, Iso.inv_hom_id_assoc, braiding_whiskerRight_smul]
   middle_assoc := by
@@ -82,19 +82,19 @@ def toBimod : Mod C R ⥤ Bimod (Mon.mk R) (Mon.mk R) where
   obj := toBimodObj R
   map f :=
     { hom := f.hom
-      left_act_hom := smul_hom f
+      left_act_hom := act_hom f
       right_act_hom := by
         change ((β_ _ R).hom ≫ γ[R,_]) ≫ f.hom = f.hom ▷ R ≫ (β_ _ R).hom ≫ γ[R,_]
-        rw [Category.assoc, smul_hom, braiding_naturality_left_assoc] }
+        rw [Category.assoc, act_hom, braiding_naturality_left_assoc] }
 
-instance moduleObjectInstance_Bimod_1 : (toBimod R : Mod C R ⥤ _).Faithful where
+instance : (toBimod R : Mod C R ⥤ _).Faithful where
   map_injective h := hom_ext _ _ (congrArg Bimod.Hom.hom h)
 
 /-- `toBimod` is fully faithful. -/
 def fullyFaithfulToBimod : (toBimod R : Mod C R ⥤ _).FullyFaithful where
   preimage f := Hom.mk' f.hom f.left_act_hom
 
-instance moduleObjectInstance_Bimod_2 : (toBimod R : Mod C R ⥤ _).Full := fullyFaithfulToBimod.full
+instance : (toBimod R : Mod C R ⥤ _).Full := fullyFaithfulToBimod.full
 
 variable (R) in
 /-- The left module object underlying a bimodule object. -/
@@ -117,7 +117,7 @@ lemma fromBimod_obj_smul (P : Bimod (Mon.mk R) (Mon.mk R)) :
 /-- Forgetting the right action of the bimodule associated with a module object gives back the
 module object. -/
 def fromBimodToBimodIso : toBimod R ⋙ fromBimod R ≅ 𝟭 (Mod C R) :=
-  NatIso.ofComponents (fun M ↦ moduleObject_isoMk (Iso.refl M.X) (by
+  NatIso.ofComponents (fun M ↦ isoMk (Iso.refl M.X) (by
     erw [Category.comp_id, whiskerLeft_id, Category.id_comp])) (fun f ↦ by
       ext
       exact (Category.comp_id f.hom).trans (Category.id_comp f.hom).symm)

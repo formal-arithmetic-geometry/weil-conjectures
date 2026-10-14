@@ -21,8 +21,8 @@ monoidal structure on `Mod C R` (`Mod.symmetricCategory`).
 The descent (`Mod.braidingHomX`) and the `R`-linearity of the induced map
 (`Mod.braidingHom`) use the symmetry of `C`: for a merely braided `C` the braiding does not
 respect the relations defining `M ⊗_R N`. The hexagon identities are checked after
-precomposition with the epimorphisms `moduleObject_tensorπ`, using the description of the associator of
-`Mod C R` in terms of the associator of `C` (`Mod.moduleObject_tensorπ_associator_hom`).
+precomposition with the epimorphisms `tensorObjπ`, using the description of the associator of
+`Mod C R` in terms of the associator of `C` (`Mod.tensorObjπ_associator_hom`).
 
 -/
 
@@ -41,22 +41,22 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C]
   [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorRight X)]
   [BraidedCategory C] {R : C} [MonObj R] [IsCommMonObj R]
 
-instance moduleObjectInstance_Symmetric_1 (M N : Mod C R) (X : C) : Epi (moduleObject_tensorπ M N ▷ X) :=
-  (tensorRight X).map_epi (moduleObject_tensorπ M N)
+instance (M N : Mod C R) (X : C) : Epi (tensorObjπ M N ▷ X) :=
+  (tensorRight X).map_epi (tensorObjπ M N)
 
-instance moduleObjectInstance_Symmetric_2 (M N : Mod C R) (X : C) : Epi (X ◁ moduleObject_tensorπ M N) :=
-  (tensorLeft X).map_epi (moduleObject_tensorπ M N)
+instance (M N : Mod C R) (X : C) : Epi (X ◁ tensorObjπ M N) :=
+  (tensorLeft X).map_epi (tensorObjπ M N)
 
 /-- The associator of the relative tensor product is induced by the associator of `C`. -/
 @[reassoc]
-lemma moduleObject_tensorπ_associator_hom (M N P : Mod C R) :
-    moduleObject_tensorπ M N ▷ P.X ≫ moduleObject_tensorπ (M ⊗ N) P ≫ (α_ M N P).hom.hom =
-      (α_ M.X N.X P.X).hom ≫ M.X ◁ moduleObject_tensorπ N P ≫ moduleObject_tensorπ M (N ⊗ P) := by
-  change moduleObject_tensorπ M N ▷ P.X ≫ moduleObject_tensorπ (M ⊗ N) P ≫
+lemma tensorObjπ_associator_hom (M N P : Mod C R) :
+    tensorObjπ M N ▷ P.X ≫ tensorObjπ (M ⊗ N) P ≫ (α_ M N P).hom.hom =
+      (α_ M.X N.X P.X).hom ≫ M.X ◁ tensorObjπ N P ≫ tensorObjπ M (N ⊗ P) := by
+  change tensorObjπ M N ▷ P.X ≫ tensorObjπ (M ⊗ N) P ≫
     (Bimod.whiskerRight (toBimodTensorIso M N).hom ((toBimod R).obj P)).hom ≫
       (Bimod.AssociatorBimod.hom _ _ _) ≫
         (Bimod.whiskerLeft ((toBimod R).obj M) (toBimodTensorIso N P).inv).hom = _
-  dsimp only [moduleObject_tensorπ]
+  dsimp only [tensorObjπ]
   rw [Bimod.whiskerRight_hom]
   erw [ι_colimMap_assoc]
   simp only [parallelPairHom_app_one]
@@ -74,18 +74,18 @@ lemma moduleObject_tensorπ_associator_hom (M N P : Mod C R) :
 /-- The inverse of the associator of the relative tensor product is induced by the inverse of the
 associator of `C`. -/
 @[reassoc]
-lemma moduleObject_tensorπ_associator_inv (M N P : Mod C R) :
-    M.X ◁ moduleObject_tensorπ N P ≫ moduleObject_tensorπ M (N ⊗ P) ≫ (α_ M N P).inv.hom =
-      (α_ M.X N.X P.X).inv ≫ moduleObject_tensorπ M N ▷ P.X ≫ moduleObject_tensorπ (M ⊗ N) P := by
-  have := moduleObject_tensorπ_associator_hom_assoc M N P (α_ M N P).inv.hom
+lemma tensorObjπ_associator_inv (M N P : Mod C R) :
+    M.X ◁ tensorObjπ N P ≫ tensorObjπ M (N ⊗ P) ≫ (α_ M N P).inv.hom =
+      (α_ M.X N.X P.X).inv ≫ tensorObjπ M N ▷ P.X ≫ tensorObjπ (M ⊗ N) P := by
+  have := tensorObjπ_associator_hom_assoc M N P (α_ M N P).inv.hom
   rw [← comp_hom', Iso.hom_inv_id, id_hom', Category.comp_id] at this
   rw [this, Iso.inv_hom_id_assoc]
 
 @[reassoc]
 lemma whiskerLeft_smul_tensorπ (M N : Mod C R) :
-    M.X ◁ γ[R,N.X] ≫ moduleObject_tensorπ M N =
-      (α_ M.X R N.X).inv ≫ ((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X ≫ moduleObject_tensorπ M N := by
-  rw [moduleObject_tensorπ_condition, Category.assoc, Iso.inv_hom_id_assoc]
+    M.X ◁ γ[R,N.X] ≫ tensorObjπ M N =
+      (α_ M.X R N.X).inv ≫ ((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X ≫ tensorObjπ M N := by
+  rw [tensorObjπ_condition, Category.assoc, Iso.inv_hom_id_assoc]
 
 end CategoryTheory.Mod
 
@@ -121,9 +121,9 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C]
 
 /-- The braiding of `C` descends to the relative tensor product. -/
 noncomputable def braidingHomX (M N : Mod C R) : (M ⊗ N).X ⟶ (N ⊗ M).X :=
-  coequalizer.desc ((β_ M.X N.X).hom ≫ moduleObject_tensorπ N M) (by
-    change ((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X ≫ (β_ M.X N.X).hom ≫ moduleObject_tensorπ N M =
-      ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) ≫ (β_ M.X N.X).hom ≫ moduleObject_tensorπ N M
+  coequalizer.desc ((β_ M.X N.X).hom ≫ tensorObjπ N M) (by
+    change ((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X ≫ (β_ M.X N.X).hom ≫ tensorObjπ N M =
+      ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) ≫ (β_ M.X N.X).hom ≫ tensorObjπ N M
     rw [comp_whiskerRight, Category.assoc, Category.assoc]
     erw [braiding_naturality_left_assoc, braiding_naturality_left_assoc, whiskerLeft_smul_tensorπ,
       braiding_naturality_right_assoc]
@@ -131,16 +131,16 @@ noncomputable def braidingHomX (M N : Mod C R) : (M ⊗ N).X ⟶ (N ⊗ M).X :=
     erw [braiding_tensor_left_comp_whiskerLeft_braiding_assoc])
 
 @[reassoc (attr := simp)]
-lemma moduleObject_tensorπ_braidingHomX (M N : Mod C R) :
-    moduleObject_tensorπ M N ≫ braidingHomX M N = (β_ M.X N.X).hom ≫ moduleObject_tensorπ N M :=
+lemma tensorObjπ_braidingHomX (M N : Mod C R) :
+    tensorObjπ M N ≫ braidingHomX M N = (β_ M.X N.X).hom ≫ tensorObjπ N M :=
   coequalizer.π_desc _ _
 
 /-- The braiding of `C` induces a morphism of `R`-modules `M ⊗_R N ⟶ N ⊗_R M`. -/
 noncomputable def braidingHom (M N : Mod C R) : M ⊗ N ⟶ N ⊗ M :=
   Hom.mk' (braidingHomX M N) (by
     change γ[R,(M ⊗ N).X] ≫ braidingHomX M N = R ◁ braidingHomX M N ≫ γ[R,(N ⊗ M).X]
-    rw [← cancel_epi (R ◁ moduleObject_tensorπ M N), whiskerLeft_tensorπ_smul_assoc, moduleObject_tensorπ_braidingHomX,
-      ← whiskerLeft_comp_assoc, moduleObject_tensorπ_braidingHomX, whiskerLeft_comp_assoc,
+    rw [← cancel_epi (R ◁ tensorObjπ M N), whiskerLeft_tensorπ_smul_assoc, tensorObjπ_braidingHomX,
+      ← whiskerLeft_comp_assoc, tensorObjπ_braidingHomX, whiskerLeft_comp_assoc,
       whiskerLeft_tensorπ_smul]
     erw [braiding_naturality_left_assoc, whiskerLeft_smul_tensorπ]
     rw [comp_whiskerRight]
@@ -153,18 +153,18 @@ lemma braidingHom_hom (M N : Mod C R) : (braidingHom M N).hom = braidingHomX M N
 @[reassoc (attr := simp)]
 lemma braidingHom_braidingHom (M N : Mod C R) : braidingHom M N ≫ braidingHom N M = 𝟙 _ := by
   ext
-  rw [← cancel_epi (moduleObject_tensorπ M N)]
+  rw [← cancel_epi (tensorObjπ M N)]
   simp
 
 @[reassoc (attr := simp)]
-lemma moduleObject_tensorπ_whiskerRight_braidingHomX (M N : Mod C R) (X : C) :
-    moduleObject_tensorπ M N ▷ X ≫ braidingHomX M N ▷ X = (β_ M.X N.X).hom ▷ X ≫ moduleObject_tensorπ N M ▷ X := by
-  rw [← comp_whiskerRight, moduleObject_tensorπ_braidingHomX, comp_whiskerRight]
+lemma tensorObjπ_whiskerRight_braidingHomX (M N : Mod C R) (X : C) :
+    tensorObjπ M N ▷ X ≫ braidingHomX M N ▷ X = (β_ M.X N.X).hom ▷ X ≫ tensorObjπ N M ▷ X := by
+  rw [← comp_whiskerRight, tensorObjπ_braidingHomX, comp_whiskerRight]
 
 @[reassoc (attr := simp)]
 lemma whiskerLeft_tensorπ_braidingHomX (M N : Mod C R) (X : C) :
-    X ◁ moduleObject_tensorπ M N ≫ X ◁ braidingHomX M N = X ◁ (β_ M.X N.X).hom ≫ X ◁ moduleObject_tensorπ N M := by
-  rw [← whiskerLeft_comp, moduleObject_tensorπ_braidingHomX, whiskerLeft_comp]
+    X ◁ tensorObjπ M N ≫ X ◁ braidingHomX M N = X ◁ (β_ M.X N.X).hom ≫ X ◁ tensorObjπ N M := by
+  rw [← whiskerLeft_comp, tensorObjπ_braidingHomX, whiskerLeft_comp]
 
 /-- The braiding of the relative tensor product, induced by the braiding of `C`. -/
 @[simps]
@@ -179,23 +179,23 @@ noncomputable instance braidedCategory : BraidedCategory (Mod C R) where
   braiding := braiding
   braiding_naturality_right M {N P} f := by
     ext
-    rw [← cancel_epi (moduleObject_tensorπ M N)]
-    simp [moduleObject_tensorπ_whiskerLeft_assoc, moduleObject_tensorπ_whiskerRight]
+    rw [← cancel_epi (tensorObjπ M N)]
+    simp [tensorObjπ_whiskerLeft_assoc, tensorObjπ_whiskerRight]
   braiding_naturality_left {M N} f P := by
     ext
-    rw [← cancel_epi (moduleObject_tensorπ M P)]
-    simp [moduleObject_tensorπ_whiskerLeft, moduleObject_tensorπ_whiskerRight_assoc]
+    rw [← cancel_epi (tensorObjπ M P)]
+    simp [tensorObjπ_whiskerLeft, tensorObjπ_whiskerRight_assoc]
   hexagon_forward M N P := by
     ext
-    rw [← cancel_epi (moduleObject_tensorπ M N ▷ P.X ≫ moduleObject_tensorπ (M ⊗ N) P)]
-    simp [moduleObject_tensorπ_associator_hom_assoc, moduleObject_tensorπ_whiskerRight_assoc]
-    erw [moduleObject_tensorπ_associator_hom, moduleObject_tensorπ_whiskerLeft]
+    rw [← cancel_epi (tensorObjπ M N ▷ P.X ≫ tensorObjπ (M ⊗ N) P)]
+    simp [tensorObjπ_associator_hom_assoc, tensorObjπ_whiskerRight_assoc]
+    erw [tensorObjπ_associator_hom, tensorObjπ_whiskerLeft]
     simp
   hexagon_reverse M N P := by
     ext
-    rw [← cancel_epi (M.X ◁ moduleObject_tensorπ N P ≫ moduleObject_tensorπ M (N ⊗ P))]
-    simp [moduleObject_tensorπ_associator_inv_assoc, moduleObject_tensorπ_whiskerLeft_assoc]
-    erw [moduleObject_tensorπ_associator_inv, moduleObject_tensorπ_whiskerRight]
+    rw [← cancel_epi (M.X ◁ tensorObjπ N P ≫ tensorObjπ M (N ⊗ P))]
+    simp [tensorObjπ_associator_inv_assoc, tensorObjπ_whiskerLeft_assoc]
+    erw [tensorObjπ_associator_inv, tensorObjπ_whiskerRight]
     simp
 
 lemma braiding_hom_hom (M N : Mod C R) : (β_ M N).hom.hom = braidingHomX M N := rfl

@@ -6,7 +6,8 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.CategoryTheory.Monoidal.Preadditive
-public import WeilConjectures.CategoryTheory.ModuleObjects.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 
 /-!
 
@@ -14,8 +15,10 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Basic
 
 If `C` is a preadditive monoidal category whose tensor product is additive in each variable
 (`MonoidalPreadditive C`), then for every algebra object `R : C` the category `Mod C R` of left
-`R`-module objects is preadditive: sums and negatives of `R`-linear morphisms are computed in `C`.
-The forgetful functor `Mod C R ⥤ C` is additive.
+`R`-module objects is preadditive: sums and negatives of `R`-linear morphisms are computed in `C`
+(`WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian`). This file adds the whiskering lemmas
+for negation, subtraction and scalar multiples, and the simp lemmas for differences and scalar
+multiples of `R`-linear morphisms.
 
 -/
 
@@ -69,59 +72,12 @@ namespace CategoryTheory.Mod
 variable {C : Type u} [Category.{v} C] [MonoidalCategory C] [Preadditive C]
   [MonoidalPreadditive C] {R : C} [MonObj R]
 
-section
-
 variable {M N : Mod C R}
-
-instance moduleObjectInstance_Preadditive_1 : Zero (M ⟶ N) := ⟨Hom.mk' 0 (by simp)⟩
-
-instance moduleObjectInstance_Preadditive_2 : Add (M ⟶ N) :=
-  ⟨fun f g ↦ Hom.mk' (f.hom + g.hom) (by
-    change γ[R,M.X] ≫ (f.hom + g.hom) = R ◁ (f.hom + g.hom) ≫ γ[R,N.X]
-    simp [comp_add, add_comp])⟩
-
-instance moduleObjectInstance_Preadditive_3 : Neg (M ⟶ N) :=
-  ⟨fun f ↦ Hom.mk' (-f.hom) (by
-    change γ[R,M.X] ≫ (-f.hom) = R ◁ (-f.hom) ≫ γ[R,N.X]
-    simp [comp_neg])⟩
-
-instance moduleObjectInstance_Preadditive_4 : Sub (M ⟶ N) :=
-  ⟨fun f g ↦ Hom.mk' (f.hom - g.hom) (by
-    change γ[R,M.X] ≫ (f.hom - g.hom) = R ◁ (f.hom - g.hom) ≫ γ[R,N.X]
-    simp [comp_sub])⟩
-
-instance moduleObjectInstance_Preadditive_5 : SMul ℕ (M ⟶ N) :=
-  ⟨fun n f ↦ Hom.mk' (n • f.hom) (by
-    change γ[R,M.X] ≫ (n • f.hom) = R ◁ (n • f.hom) ≫ γ[R,N.X]
-    simp [comp_nsmul, nsmul_comp])⟩
-
-instance moduleObjectInstance_Preadditive_6 : SMul ℤ (M ⟶ N) :=
-  ⟨fun n f ↦ Hom.mk' (n • f.hom) (by
-    change γ[R,M.X] ≫ (n • f.hom) = R ◁ (n • f.hom) ≫ γ[R,N.X]
-    simp [comp_zsmul, zsmul_comp])⟩
-
-@[simp] lemma moduleObject_zero_hom : (0 : M ⟶ N).hom = 0 := rfl
-
-@[simp] lemma moduleObject_add_hom (f g : M ⟶ N) : (f + g).hom = f.hom + g.hom := rfl
-
-@[simp] lemma moduleObject_neg_hom (f : M ⟶ N) : (-f).hom = -f.hom := rfl
 
 @[simp] lemma sub_hom (f g : M ⟶ N) : (f - g).hom = f.hom - g.hom := rfl
 
 @[simp] lemma nsmul_hom (n : ℕ) (f : M ⟶ N) : (n • f).hom = n • f.hom := rfl
 
 @[simp] lemma zsmul_hom (n : ℤ) (f : M ⟶ N) : (n • f).hom = n • f.hom := rfl
-
-instance moduleObjectInstance_Preadditive_7 : AddCommGroup (M ⟶ N) :=
-  Function.Injective.addCommGroup (fun f ↦ f.hom) (fun _ _ h ↦ hom_ext _ _ h) rfl
-    (fun _ _ ↦ rfl) (fun _ ↦ rfl) (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (fun _ _ ↦ rfl)
-
-end
-
-instance moduleObjectInstance_Preadditive_8 : Preadditive (Mod C R) where
-  add_comp _ _ _ _ _ _ := hom_ext _ _ (add_comp _ _ _ _ _ _)
-  comp_add _ _ _ _ _ _ := hom_ext _ _ (comp_add _ _ _ _ _ _)
-
-instance moduleObjectInstance_Preadditive_9 : (forget R : Mod C R ⥤ C).Additive where
 
 end CategoryTheory.Mod

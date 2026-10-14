@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Monoidal.CommMon_
 public import Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 
 /-!
 
@@ -16,21 +17,14 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 
 Let `F : C ⥤ D` be a lax monoidal functor between monoidal categories and `R : C` an algebra
 object, so that `F.obj R` is an algebra object of `D` (`Functor.monObjObj`, a scoped instance of
-`CategoryTheory.Obj`). This file lifts `F` to module objects:
+`CategoryTheory.Obj`). The induced functor
+`Functor.mapMod F R : Mod C R ⥤ Mod D (F.obj R)` and the module structure `Functor.modObjObj` on
+`F.obj M` are defined in `WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod`; here
+`Functor.modObjObj` is made a scoped instance of `CategoryTheory.Obj`, and:
 
-* `Functor.moduleObject_modObjObj`: an `R`-module object `M` makes `F.obj M` an `F.obj R`-module object, with
-  the action `F.obj R ⊗ F.obj M ⟶ F.obj (R ⊗ M) ⟶ F.obj M` induced by the lax structure map
-  `μ F R M` of `F` and the action of `R` on `M`. This is the `moduleObject_mapMod` construction of the
-  six-functor formalism for module objects: for a strong monoidal `F` it is the obvious
-  transport, for a lax monoidal `F` (such as a pushforward of sheaves) it uses the lax
-  multiplication maps.
-* `Functor.moduleObject_mapMod F : Mod C R ⥤ Mod D (F.obj R)`, the induced functor, which commutes with
-  the forgetful functors (`Functor.moduleObject_mapMod_comp_forget`) and with restriction of scalars
-  (`Functor.moduleObject_mapModComapIso`), and is additive when `F` is.
-* `NatTrans.IsMonoidal.isMonHom_app`: the components of a monoidal natural transformation at an
-  algebra object are morphisms of algebra objects, so that a monoidal natural transformation
-  `τ : F ⟶ F'` induces the restriction of scalars `Mod.comap (τ.app R)`.
-* `Functor.moduleObject_mapModCompIso`: for a monoidal natural isomorphism `τ : F ⋙ G ⟶ H`, transporting
+* `Functor.mapMod` commutes with the forgetful functors (`Functor.mapMod_comp_forget`) and with
+  restriction of scalars (`Functor.mapModComapIso`), and is exact when `F` is.
+* `Functor.mapModCompIso`: for a monoidal natural isomorphism `τ : F ⋙ G ⟶ H`, transporting
   module objects along `F` and then `G` is transporting them along `H` and restricting scalars
   along `τ.app R`.
 
@@ -39,7 +33,7 @@ The second part concerns a *monoidal adjunction* `adj : F ⊣ G` in the sense of
 are mates). The unit `R ⟶ G.obj (F.obj R)` is then a morphism of algebra objects
 (`Adjunction.isMonHom_unit_app`), and the adjunction lifts to module objects:
 ```
-Adjunction.moduleObject_mapModAdjunction adj R : F.moduleObject_mapMod ⊣ G.moduleObject_mapMod ⋙ Mod.comap (adj.unit.app R)
+Adjunction.mapModAdjunction adj R : F.mapMod ⊣ G.mapMod ⋙ Mod.comap (adj.unit.app R)
 ```
 (an `F.obj R`-linear map `F.obj M ⟶ N` is the same as an `R`-linear map `M ⟶ G.obj N`, where
 `R` acts on `G.obj N` through the unit). The lift of `adj` is the elementary input for the
@@ -62,7 +56,7 @@ variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
   {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
   {E : Type u₃} [Category.{v₃} E] [MonoidalCategory E]
 
-/-! ### The functor `moduleObject_mapMod` -/
+/-! ### The functor `mapMod` -/
 
 namespace Functor
 
@@ -70,59 +64,31 @@ section MapMod
 
 variable (F : C ⥤ D) [F.LaxMonoidal] {R : C} [MonObj R]
 
-/-- The image of an `R`-module object `M` under a lax monoidal functor `F` is an
-`F.obj R`-module object, for the action `F.obj R ⊗ F.obj M ⟶ F.obj (R ⊗ M) ⟶ F.obj M`. -/
-abbrev moduleObject_modObjObj (M : C) [ModObj R M] : ModObj (F.obj R) (F.obj M) where
-  smul := Functor.LaxMonoidal.μ F R M ≫ F.map γ[R,M]
-  one_smul := by
-    change η[F.obj R] ▷ F.obj M ≫ Functor.LaxMonoidal.μ F R M ≫ F.map γ[R,M] =
-      (λ_ (F.obj M)).hom
-    rw [obj.η_def, comp_whiskerRight, Category.assoc, μ_natural_left_assoc, ← F.map_comp,
-      ModObj.one_smul_self, left_unitality]
-  mul_smul := by
-    change μ[F.obj R] ▷ F.obj M ≫ Functor.LaxMonoidal.μ F R M ≫ F.map γ[R,M] =
-      (α_ (F.obj R) (F.obj R) (F.obj M)).hom ≫
-        F.obj R ◁ (Functor.LaxMonoidal.μ F R M ≫ F.map γ[R,M]) ≫
-          Functor.LaxMonoidal.μ F R M ≫ F.map γ[R,M]
-    rw [obj.μ_def, comp_whiskerRight, Category.assoc, μ_natural_left_assoc, ← F.map_comp,
-      ModObj.mul_smul_self, MonoidalCategory.whiskerLeft_comp, Category.assoc,
-      μ_natural_right_assoc, ← associativity_assoc, F.map_comp, F.map_comp]
+scoped[CategoryTheory.Obj] attribute [instance] CategoryTheory.Functor.modObjObj
 
-scoped[CategoryTheory.Obj] attribute [instance] CategoryTheory.Functor.moduleObject_modObjObj
-
-lemma moduleObject_modObjObj_smul (M : C) [ModObj R M] :
+lemma modObjObj_smul (M : C) [ModObj R M] :
     γ[F.obj R, F.obj M] = Functor.LaxMonoidal.μ F R M ≫ F.map γ[R,M] := rfl
 
-/-- A lax monoidal functor `F : C ⥤ D` sends `R`-module objects to `F.obj R`-module objects:
-the functor `Mod C R ⥤ Mod D (F.obj R)`. -/
-@[simps]
-def moduleObject_mapMod : Mod C R ⥤ Mod D (F.obj R) where
-  obj M := ⟨F.obj M.X⟩
-  map {M N} f := Mod.Hom.mk' (F.map f.hom) (by
-    change (Functor.LaxMonoidal.μ F R M.X ≫ F.map γ[R,M.X]) ≫ F.map f.hom =
-      F.obj R ◁ F.map f.hom ≫ Functor.LaxMonoidal.μ F R N.X ≫ F.map γ[R,N.X]
-    rw [Category.assoc, ← F.map_comp, Mod.smul_hom, F.map_comp, μ_natural_right_assoc])
-
-lemma moduleObject_mapMod_obj_smul (M : Mod C R) :
-    γ[F.obj R, (F.moduleObject_mapMod.obj M).X] =
+lemma mapMod_obj_smul (M : Mod C R) :
+    γ[F.obj R, ((F.mapMod R).obj M).X] =
       Functor.LaxMonoidal.μ F R M.X ≫ F.map γ[R,M.X] := rfl
 
-/-- `moduleObject_mapMod` commutes with the forgetful functors. -/
-lemma moduleObject_mapMod_comp_forget : F.moduleObject_mapMod ⋙ Mod.forget (F.obj R) = Mod.forget R ⋙ F := rfl
+/-- `mapMod` commutes with the forgetful functors. -/
+lemma mapMod_comp_forget : F.mapMod R ⋙ Mod.forget (F.obj R) = Mod.forget R ⋙ F := rfl
 
-instance faithful_mapMod [F.Faithful] : (F.moduleObject_mapMod (R := R)).Faithful where
+instance faithful_mapMod [F.Faithful] : (F.mapMod R).Faithful where
   map_injective h := Mod.hom_ext _ _ (F.map_injective congr(($h).hom))
 
 section Comap
 
 variable {S : C} [MonObj S] (φ : R ⟶ S) [IsMonHom φ]
 
-/-- `moduleObject_mapMod` commutes with restriction of scalars: the `F.obj R`-module objects
+/-- `mapMod` commutes with restriction of scalars: the `F.obj R`-module objects
 `F.obj (N with scalars restricted along φ)` and `(F.obj N) with scalars restricted along
 F.map φ` coincide. -/
 @[simps!]
-def moduleObject_mapModComapIso : Mod.comap φ ⋙ F.moduleObject_mapMod ≅ F.moduleObject_mapMod ⋙ Mod.comap (F.map φ) :=
-  NatIso.ofComponents (fun N ↦ Mod.moduleObject_isoMk (Iso.refl _) (by
+def mapModComapIso : Mod.comap φ ⋙ F.mapMod R ≅ F.mapMod S ⋙ Mod.comap (F.map φ) :=
+  NatIso.ofComponents (fun N ↦ Mod.isoMk (Iso.refl _) (by
     rw [Iso.refl_hom, Category.comp_id, MonoidalCategory.whiskerLeft_id, Category.id_comp]
     change Functor.LaxMonoidal.μ F R N.X ≫ F.map (φ ▷ N.X ≫ γ[S,N.X]) =
       F.map φ ▷ F.obj N.X ≫ Functor.LaxMonoidal.μ F S N.X ≫ F.map γ[S,N.X]
@@ -130,44 +96,34 @@ def moduleObject_mapModComapIso : Mod.comap φ ⋙ F.moduleObject_mapMod ≅ F.m
 
 end Comap
 
-section Preadditive
-
-variable [Preadditive C] [Preadditive D] [MonoidalPreadditive C] [MonoidalPreadditive D]
-  [F.Additive]
-
-instance additive_mapMod : (F.moduleObject_mapMod (R := R)).Additive where
-  map_add := by intros; ext; simp
-
-end Preadditive
-
-/-! ### Exactness of `moduleObject_mapMod` -/
+/-! ### Exactness of `mapMod` -/
 
 section Exact
 
 variable [Abelian C] [Abelian D] [MonoidalPreadditive C] [MonoidalPreadditive D]
   [PreservesFiniteColimits (tensorLeft R)] [PreservesFiniteColimits (tensorLeft (F.obj R))]
 
-/-- If `F` is left exact, then so is `F.moduleObject_mapMod`: finite limits of module objects are computed
+/-- If `F` is left exact, then so is `F.mapMod`: finite limits of module objects are computed
 in the ambient categories on both sides. -/
 instance preservesFiniteLimits_mapMod [PreservesFiniteLimits F] :
-    PreservesFiniteLimits (F.moduleObject_mapMod (R := R)) where
+    PreservesFiniteLimits (F.mapMod R) where
   preservesFiniteLimits J _ _ :=
-    have : PreservesLimitsOfShape J (F.moduleObject_mapMod ⋙ Mod.forget (F.obj R)) :=
+    have : PreservesLimitsOfShape J (F.mapMod R ⋙ Mod.forget (F.obj R)) :=
       inferInstanceAs (PreservesLimitsOfShape J (Mod.forget R ⋙ F))
     have : ReflectsLimitsOfShape J (Mod.forget (F.obj R) : Mod D (F.obj R) ⥤ D) :=
       reflectsLimitsOfShape_of_reflectsIsomorphisms
-    preservesLimitsOfShape_of_reflects_of_preserves F.moduleObject_mapMod (Mod.forget (F.obj R))
+    preservesLimitsOfShape_of_reflects_of_preserves (F.mapMod R) (Mod.forget (F.obj R))
 
-/-- If `F` is right exact, then so is `F.moduleObject_mapMod`: finite colimits of module objects are
+/-- If `F` is right exact, then so is `F.mapMod`: finite colimits of module objects are
 computed in the ambient categories on both sides. -/
 instance preservesFiniteColimits_mapMod [PreservesFiniteColimits F] :
-    PreservesFiniteColimits (F.moduleObject_mapMod (R := R)) where
+    PreservesFiniteColimits (F.mapMod R) where
   preservesFiniteColimits J _ _ :=
-    have : PreservesColimitsOfShape J (F.moduleObject_mapMod ⋙ Mod.forget (F.obj R)) :=
+    have : PreservesColimitsOfShape J (F.mapMod R ⋙ Mod.forget (F.obj R)) :=
       inferInstanceAs (PreservesColimitsOfShape J (Mod.forget R ⋙ F))
     have : ReflectsColimitsOfShape J (Mod.forget (F.obj R) : Mod D (F.obj R) ⥤ D) :=
       reflectsColimitsOfShape_of_reflectsIsomorphisms
-    preservesColimitsOfShape_of_reflects_of_preserves F.moduleObject_mapMod (Mod.forget (F.obj R))
+    preservesColimitsOfShape_of_reflects_of_preserves (F.mapMod R) (Mod.forget (F.obj R))
 
 end Exact
 
@@ -198,19 +154,6 @@ end Comp
 
 end Functor
 
-/-! ### Restriction of scalars along equal morphisms -/
-
-namespace Mod
-
-variable {R S : C} [MonObj R] [MonObj S] {φ ψ : R ⟶ S} [IsMonHom φ] [IsMonHom ψ]
-
-/-- Restriction of scalars along two equal morphisms of algebra objects. -/
-@[simps!]
-def comapIsoOfEq (h : φ = ψ) : (comap φ : Mod C S ⥤ Mod C R) ≅ comap ψ :=
-  NatIso.ofComponents (fun N ↦ Mod.moduleObject_isoMk (Iso.refl _) (by subst h; simp)) (fun _ ↦ by ext; simp)
-
-end Mod
-
 /-! ### Change of scalars along an isomorphism -/
 
 namespace Mod
@@ -224,8 +167,8 @@ variable [HasCoequalizers C] [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorL
 inverse the restriction of scalars along the inverse isomorphism. -/
 noncomputable def comapEquivalenceOfIsIso : Mod C S ≌ Mod C R :=
   Equivalence.mk (comap φ) (comap (asIso φ).inv)
-    (moduleObject_comapId.symm ≪≫ comapIsoOfEq (by simp) ≪≫ moduleObject_comapComp (asIso φ).inv φ)
-    ((moduleObject_comapComp φ (asIso φ).inv).symm ≪≫ comapIsoOfEq (by simp) ≪≫ moduleObject_comapId)
+    ((comapId S).symm ≪≫ comapCongr (by simp) ≪≫ comapComp (asIso φ).inv φ)
+    ((comapComp φ (asIso φ).inv).symm ≪≫ comapCongr (by simp) ≪≫ comapId R)
 
 /-- Extension of scalars along an isomorphism of algebra objects is restriction of scalars
 along the inverse isomorphism, by uniqueness of left adjoints. -/
@@ -253,20 +196,6 @@ lemma IsMonHom.of_eq {M N : C} {h₁ h₁' : MonObj M} {h₂ h₂' : MonObj N} (
     @IsMonHom _ _ _ M N h₁' h₂' f := by
   subst e₁ e₂
   exact hf
-
-/-! ### Components of monoidal natural transformations -/
-
-namespace NatTrans
-
-variable {F F' : C ⥤ D} [F.LaxMonoidal] [F'.LaxMonoidal] (τ : F ⟶ F') [NatTrans.IsMonoidal τ]
-  (R : C) [MonObj R]
-
-/-- The component at an algebra object `R` of a monoidal natural transformation `τ : F ⟶ F'`
-between lax monoidal functors is a morphism of algebra objects `F.obj R ⟶ F'.obj R`. -/
-instance IsMonoidal.isMonHom_app : IsMonHom (τ.app R) :=
-  ((Functor.mapMonNatTrans τ).app (Mon.mk R)).isMonHom_hom
-
-end NatTrans
 
 /-! ### Monoidal adjunctions on module objects -/
 
@@ -305,13 +234,13 @@ variable {R} (M : Mod C R) (N : Mod D (F.obj R))
 
 /-- The `R`-linearity of the adjoint `M ⟶ G.obj N` of an `F.obj R`-linear map
 `F.obj M ⟶ N`, where `R` acts on `G.obj N` through the unit. -/
-lemma moduleObject_mapMod_homEquiv_smul_hom (φ : F.moduleObject_mapMod.obj M ⟶ N) :
+lemma mapMod_homEquiv_smul_hom (φ : (F.mapMod R).obj M ⟶ N) :
     γ[R,M.X] ≫ adj.homEquiv M.X N.X φ.hom =
       R ◁ adj.homEquiv M.X N.X φ.hom ≫
-        γ[R,((G.moduleObject_mapMod ⋙ Mod.comap (adj.unitAlgHom R)).obj N).X] := by
+        γ[R,((G.mapMod (F.obj R) ⋙ Mod.comap (adj.unitAlgHom R)).obj N).X] := by
   have hφ : F.map γ[R,M.X] ≫ φ.hom =
       Functor.OplaxMonoidal.δ F R M.X ≫ F.obj R ◁ φ.hom ≫ γ[F.obj R,N.X] := by
-    rw [← Mod.smul_hom, F.moduleObject_mapMod_obj_smul, ← Category.assoc, ← Category.assoc,
+    rw [← Mod.act_hom φ, Mod.act, F.mapMod_obj_smul, ← Category.assoc, ← Category.assoc,
       Functor.Monoidal.δ_μ, Category.id_comp]
   change _ = _ ≫ adj.unit.app R ▷ G.obj N.X ≫
     Functor.LaxMonoidal.μ G (F.obj R) N.X ≫ G.map γ[F.obj R,N.X]
@@ -324,14 +253,15 @@ lemma moduleObject_mapMod_homEquiv_smul_hom (φ : F.moduleObject_mapMod.obj M �
 
 /-- The `F.obj R`-linearity of the adjoint `F.obj M ⟶ N` of an `R`-linear map `M ⟶ G.obj N`,
 where `R` acts on `G.obj N` through the unit. -/
-lemma moduleObject_mapMod_homEquiv_symm_smul_hom (ψ : M ⟶ (G.moduleObject_mapMod ⋙ Mod.comap (adj.unitAlgHom R)).obj N) :
-    γ[F.obj R,(F.moduleObject_mapMod.obj M).X] ≫ (adj.homEquiv M.X N.X).symm ψ.hom =
+lemma mapMod_homEquiv_symm_smul_hom
+    (ψ : M ⟶ (G.mapMod (F.obj R) ⋙ Mod.comap (adj.unitAlgHom R)).obj N) :
+    γ[F.obj R,((F.mapMod R).obj M).X] ≫ (adj.homEquiv M.X N.X).symm ψ.hom =
       F.obj R ◁ (adj.homEquiv M.X N.X).symm ψ.hom ≫ γ[F.obj R,N.X] := by
   have hψ : γ[R,M.X] ≫ ψ.hom = (adj.unit.app R ⊗ₘ ψ.hom) ≫
       Functor.LaxMonoidal.μ G (F.obj R) N.X ≫ G.map γ[F.obj R,N.X] := by
-    rw [Mod.smul_hom, tensorHom_def', Category.assoc]
+    rw [Mod.act_hom, tensorHom_def', Category.assoc]
     rfl
-  rw [homEquiv_counit, F.moduleObject_mapMod_obj_smul, Category.assoc, ← F.map_comp_assoc, hψ, F.map_comp,
+  rw [homEquiv_counit, F.mapMod_obj_smul, Category.assoc, ← F.map_comp_assoc, hψ, F.map_comp,
     F.map_comp, Category.assoc, Category.assoc, adj.counit_naturality,
     adj.map_μ_comp_counit_app_tensor_assoc, ← μ_natural_assoc]
   erw [Functor.Monoidal.μ_δ_assoc]
@@ -343,28 +273,28 @@ end HomEquiv
 /-- A monoidal adjunction `F ⊣ G` lifts to module objects: an `F.obj R`-linear map
 `F.obj M ⟶ N` is the same as an `R`-linear map `M ⟶ G.obj N`, where `R` acts on `G.obj N`
 through the unit `R ⟶ G.obj (F.obj R)`. -/
-noncomputable def moduleObject_mapModAdjunction :
-    F.moduleObject_mapMod (R := R) ⊣ G.moduleObject_mapMod ⋙ Mod.comap (adj.unitAlgHom R) :=
+noncomputable def mapModAdjunction :
+    F.mapMod R ⊣ G.mapMod (F.obj R) ⋙ Mod.comap (adj.unitAlgHom R) :=
   Adjunction.mkOfHomEquiv
     { homEquiv M N :=
-        { toFun φ := Mod.Hom.mk' (adj.homEquiv M.X N.X φ.hom) (adj.moduleObject_mapMod_homEquiv_smul_hom M N φ)
+        { toFun φ := Mod.Hom.mk' (adj.homEquiv M.X N.X φ.hom) (adj.mapMod_homEquiv_smul_hom M N φ)
           invFun ψ := Mod.Hom.mk' ((adj.homEquiv M.X N.X).symm ψ.hom)
-            (adj.moduleObject_mapMod_homEquiv_symm_smul_hom M N ψ)
+            (adj.mapMod_homEquiv_symm_smul_hom M N ψ)
           left_inv φ := by ext; simp
           right_inv ψ := by ext; simp }
       homEquiv_naturality_left_symm _ _ := Mod.hom_ext _ _ (adj.homEquiv_naturality_left_symm _ _)
       homEquiv_naturality_right _ _ := Mod.hom_ext _ _ (adj.homEquiv_naturality_right _ _) }
 
 @[simp]
-lemma moduleObject_mapModAdjunction_unit_app_hom (M : Mod C R) :
-    ((adj.moduleObject_mapModAdjunction R).unit.app M).hom = adj.unit.app M.X := by
-  simp only [moduleObject_mapModAdjunction, Adjunction.mkOfHomEquiv_unit_app]
+lemma mapModAdjunction_unit_app_hom (M : Mod C R) :
+    ((adj.mapModAdjunction R).unit.app M).hom = adj.unit.app M.X := by
+  simp only [mapModAdjunction, Adjunction.mkOfHomEquiv_unit_app]
   exact adj.homEquiv_id M.X
 
 @[simp]
-lemma moduleObject_mapModAdjunction_counit_app_hom (N : Mod D (F.obj R)) :
-    ((adj.moduleObject_mapModAdjunction R).counit.app N).hom = adj.counit.app N.X := by
-  simp only [moduleObject_mapModAdjunction, Adjunction.mkOfHomEquiv_counit_app]
+lemma mapModAdjunction_counit_app_hom (N : Mod D (F.obj R)) :
+    ((adj.mapModAdjunction R).counit.app N).hom = adj.counit.app N.X := by
+  simp only [mapModAdjunction, Adjunction.mkOfHomEquiv_counit_app]
   exact adj.homEquiv_symm_id N.X
 
 end Adjunction
@@ -390,13 +320,13 @@ instance isMonHom_compAlgHom : IsMonHom (compAlgHom F G τ R) :=
 
 variable [IsIso τ]
 
-/-- `moduleObject_mapMod` of a composition: for a monoidal natural isomorphism `τ : F ⋙ G ⟶ H` of lax
+/-- `mapMod` of a composition: for a monoidal natural isomorphism `τ : F ⋙ G ⟶ H` of lax
 monoidal functors, transporting an `R`-module object first along `F` and then along `G` is
 transporting it along `H` and restricting scalars along `τ.app R`. -/
 @[simps!]
-noncomputable def moduleObject_mapModCompIso :
-    F.moduleObject_mapMod (R := R) ⋙ G.moduleObject_mapMod ≅ H.moduleObject_mapMod ⋙ Mod.comap (compAlgHom F G τ R) :=
-  NatIso.ofComponents (fun M ↦ Mod.moduleObject_isoMk (asIso (τ.app M.X)) (by
+noncomputable def mapModCompIso :
+    F.mapMod R ⋙ G.mapMod (F.obj R) ≅ H.mapMod R ⋙ Mod.comap (compAlgHom F G τ R) :=
+  NatIso.ofComponents (fun M ↦ Mod.isoMk (asIso (τ.app M.X)) (by
     change (Functor.LaxMonoidal.μ G (F.obj R) (F.obj M.X) ≫
         G.map (Functor.LaxMonoidal.μ F R M.X ≫ F.map γ[R,M.X])) ≫ τ.app M.X =
       G.obj (F.obj R) ◁ τ.app M.X ≫ τ.app R ▷ H.obj M.X ≫ Functor.LaxMonoidal.μ H R M.X ≫

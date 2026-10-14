@@ -23,8 +23,8 @@ Let `(C, ⊗, 𝟙)` be a monoidal category and `φ : R ⟶ S` a morphism of alg
 * *Restriction of scalars* along `φ` is the functor `Mod.comap φ : Mod C S ⥤ Mod C R` of
   Mathlib: an `S`-module object `N` becomes an `R`-module object with action
   `R ⊗ N ⟶ S ⊗ N ⟶ N`. It is faithful, commutes with the forgetful functors, and is additive
-  when `C` is monoidal preadditive. We record its compatibility with identities and compositions
-  (`Mod.moduleObject_comapId`, `Mod.moduleObject_comapComp`).
+  when `C` is monoidal preadditive. Its compatibility with identities and compositions is
+  `Mod.comapId`, `Mod.comapComp`.
 
 * *Extension of scalars* along `φ` is the functor `Mod.extendScalars φ : Mod C R ⥤ Mod C S`,
   `M ↦ S ⊗_R M`, defined when `C` is braided with coequalizers preserved by the tensor product,
@@ -90,41 +90,12 @@ variable {R S : C} [MonObj R] [MonObj S] (φ : R ⟶ S) [IsMonHom φ]
 
 lemma comap_obj_smul (N : Mod C S) : γ[R,((comap φ).obj N).X] = φ ▷ N.X ≫ γ[S,N.X] := rfl
 
-instance moduleObjectInstance_ExtendScalars_1 : (comap φ : Mod C S ⥤ Mod C R).Faithful where
+instance : (comap φ : Mod C S ⥤ Mod C R).Faithful where
   map_injective h := by
     have := congrArg Hom.hom h
     exact hom_ext _ _ this
 
 lemma comap_comp_forget : comap φ ⋙ forget R = (forget S : Mod C S ⥤ C) := rfl
-
-/-- Restriction of scalars along the identity is the identity. -/
-@[simps!]
-def moduleObject_comapId : (comap (𝟙 R) : Mod C R ⥤ Mod C R) ≅ 𝟭 (Mod C R) :=
-  NatIso.ofComponents (fun M ↦ moduleObject_isoMk (Iso.refl M.X) (by
-    change (𝟙 R ▷ M.X ≫ γ[R,M.X]) ≫ 𝟙 _ = R ◁ 𝟙 _ ≫ γ[R,M.X]
-    simp)) (fun f ↦ by
-      ext
-      exact (Category.comp_id f.hom).trans (Category.id_comp f.hom).symm)
-
-variable {T : C} [MonObj T] (ψ : S ⟶ T) [IsMonHom ψ]
-
-/-- Restriction of scalars along a composition is the composition of the restrictions. -/
-@[simps!]
-def moduleObject_comapComp : (comap (φ ≫ ψ) : Mod C T ⥤ Mod C R) ≅ comap ψ ⋙ comap φ :=
-  NatIso.ofComponents (fun M ↦ moduleObject_isoMk (Iso.refl M.X) (by
-    change ((φ ≫ ψ) ▷ M.X ≫ γ[T,M.X]) ≫ 𝟙 _ = R ◁ 𝟙 _ ≫ φ ▷ M.X ≫ ψ ▷ M.X ≫ γ[T,M.X]
-    simp)) (fun f ↦ by
-      ext
-      exact (Category.comp_id f.hom).trans (Category.id_comp f.hom).symm)
-
-section Preadditive
-
-variable [Preadditive C] [MonoidalPreadditive C]
-
-instance moduleObjectInstance_ExtendScalars_2 : (comap φ : Mod C S ⥤ Mod C R).Additive where
-  map_add := hom_ext _ _ rfl
-
-end Preadditive
 
 end Restriction
 
@@ -243,11 +214,11 @@ noncomputable def isColimitExtendπ :
       Cofork ((S ◁ φ ≫ μ[S]) ▷ M.X) ((α_ S R M.X).hom ≫ S ◁ γ[R,M.X])) :=
   coequalizerIsCoequalizer _ _
 
-instance moduleObjectInstance_ExtendScalars_3 : Epi (extendπ φ M) := by
+instance : Epi (extendπ φ M) := by
   dsimp [extendπ]
   infer_instance
 
-instance moduleObjectInstance_ExtendScalars_4 (X : C) : Epi (X ◁ extendπ φ M) :=
+instance (X : C) : Epi (X ◁ extendπ φ M) :=
   (tensorLeft X).map_epi (extendπ φ M)
 
 /-- The action of `S` on `S ⊗_R M` is induced by the multiplication of `S`. -/
@@ -308,7 +279,7 @@ lemma actRight_whiskerRight_whiskerLeft_extendπ :
   rw [← whisker_exchange_assoc, extendπ_condition]
   simp only [Category.assoc]
   rw [associator_naturality_right_assoc, ← whiskerLeft_comp_assoc, ← whiskerLeft_comp_assoc,
-    smul_hom]
+    act_hom]
 
 @[reassoc]
 lemma whiskerLeft_whiskerLeft_extendπ_smul :
@@ -423,7 +394,7 @@ lemma extendUnitHom_extendHomOfHom {N : Mod C S} (g : M.X ⟶ N.X) (hg) :
 variable {M} in
 /-- The `S`-linear map `S ⊗_R M ⟶ N` extending an `R`-linear map `M ⟶ N`. -/
 noncomputable def extendHom {N : Mod C S} (f : M ⟶ (comap φ).obj N) : extendScalarsObj φ M ⟶ N :=
-  extendHomOfHom φ f.hom (smul_hom f)
+  extendHomOfHom φ f.hom (act_hom f)
 
 variable {M} in
 @[reassoc (attr := simp)]
@@ -445,7 +416,7 @@ noncomputable def extendHomEquiv (N : Mod C S) :
   invFun := extendHom φ
   left_inv g := extendScalarsObj_hom_ext φ (by
     rw [extendπ_extendHom, comp_hom', comap_map_hom, extendUnit_hom, whiskerLeft_comp_assoc,
-      ← smul_hom g, whiskerLeft_extendUnitHom_smul'_assoc])
+      ← act_hom g, whiskerLeft_extendUnitHom_smul'_assoc])
   right_inv f := hom_ext _ _ (by simp)
 
 /-- Extension of scalars is left adjoint to restriction of scalars. -/
@@ -462,17 +433,17 @@ noncomputable def extendRestrictAdjunction : extendScalars φ ⊣ comap φ :=
           (extendUnit φ _ ≫ (comap φ).map f) ≫ (comap φ).map g
         rw [Functor.map_comp, Category.assoc] }
 
-instance moduleObjectInstance_ExtendScalars_5 : (extendScalars φ).IsLeftAdjoint := (extendRestrictAdjunction φ).isLeftAdjoint
+instance : (extendScalars φ).IsLeftAdjoint := (extendRestrictAdjunction φ).isLeftAdjoint
 
-instance moduleObjectInstance_ExtendScalars_6 : (comap φ : Mod C S ⥤ Mod C R).IsRightAdjoint :=
+instance : (comap φ : Mod C S ⥤ Mod C R).IsRightAdjoint :=
   (extendRestrictAdjunction φ).isRightAdjoint
 
 /-- Extension of scalars preserves colimits, being a left adjoint. -/
-noncomputable instance moduleObjectInstance_ExtendScalars_7 : PreservesColimitsOfSize.{v, u} (extendScalars φ) :=
+noncomputable instance : PreservesColimitsOfSize.{v, u} (extendScalars φ) :=
   (extendRestrictAdjunction φ).leftAdjoint_preservesColimits
 
 /-- Restriction of scalars preserves limits, being a right adjoint. -/
-noncomputable instance moduleObjectInstance_ExtendScalars_8 : PreservesLimitsOfSize.{v, u} (comap φ : Mod C S ⥤ Mod C R) :=
+noncomputable instance : PreservesLimitsOfSize.{v, u} (comap φ : Mod C S ⥤ Mod C R) :=
   (extendRestrictAdjunction φ).rightAdjoint_preservesLimits
 
 end Adjunction
@@ -483,7 +454,8 @@ section Compatibilities
 
 /-- Extension of scalars along the identity is the identity. -/
 noncomputable def extendScalarsId : extendScalars (𝟙 R) ≅ 𝟭 (Mod C R) :=
-  (extendRestrictAdjunction (𝟙 R)).leftAdjointUniq (Adjunction.id.ofNatIsoRight moduleObject_comapId.symm)
+  (extendRestrictAdjunction (𝟙 R)).leftAdjointUniq
+    (Adjunction.id.ofNatIsoRight (comapId R).symm)
 
 variable {T : C} [MonObj T] [IsCommMonObj S] (ψ : S ⟶ T) [IsMonHom ψ]
 
@@ -492,7 +464,7 @@ noncomputable def extendScalarsComp :
     extendScalars (φ ≫ ψ) ≅ extendScalars φ ⋙ extendScalars ψ :=
   (extendRestrictAdjunction (φ ≫ ψ)).leftAdjointUniq
     (((extendRestrictAdjunction φ).comp (extendRestrictAdjunction ψ)).ofNatIsoRight
-      (moduleObject_comapComp φ ψ).symm)
+      (comapComp φ ψ).symm)
 
 end Compatibilities
 
@@ -500,7 +472,7 @@ section Preadditive
 
 variable [Preadditive C] [MonoidalPreadditive C]
 
-instance moduleObjectInstance_ExtendScalars_9 : (extendScalars φ).Additive where
+instance : (extendScalars φ).Additive where
   map_add {M N f g} := extendScalarsObj_hom_ext φ (by
     simp [MonoidalPreadditive.whiskerLeft_add, Preadditive.add_comp, Preadditive.comp_add])
 
@@ -648,7 +620,7 @@ lemma coextendScalarsObj_smul : γ[S,(coextendScalarsObj φ N).X] = coextendSMul
 noncomputable def coextendι : (coextendScalarsObj φ N).X ⟶ (ihom S).obj N.X :=
   equalizer.ι (coextendFst φ N) (coextendSnd S N)
 
-instance moduleObjectInstance_ExtendScalars_10 : Mono (coextendι φ N) := by
+instance : Mono (coextendι φ N) := by
   dsimp [coextendι]
   infer_instance
 
@@ -750,7 +722,7 @@ variable {N N' : Mod C R} (f : N ⟶ N')
 /-- The `S`-linear map `Hom_R(S, N) ⟶ Hom_R(S, N')` induced by an `R`-linear map `N ⟶ N'`. -/
 noncomputable def coextendScalarsMap : coextendScalarsObj φ N ⟶ coextendScalarsObj φ N' :=
   coextendHomMk φ (coextendEv φ N ≫ f.hom)
-    (by rw [coextendEv_linear_assoc, smul_hom, whiskerLeft_comp_assoc])
+    (by rw [coextendEv_linear_assoc, act_hom, whiskerLeft_comp_assoc])
     (by rw [whiskerLeft_smul_coextendEv_assoc])
 
 @[reassoc (attr := simp)]
@@ -825,8 +797,8 @@ noncomputable def coextendHom {M : Mod C S} (f : (comap φ).obj M ⟶ N) :
     (by
       have h : φ ▷ M.X ≫ γ[S,M.X] ≫ f.hom = R ◁ f.hom ≫ γ[R,N.X] := by
         rw [← Category.assoc]
-        exact smul_hom f
-      rw [comp_whiskerRight, Category.assoc, mul_smul_assoc, associator_naturality_left_assoc,
+        exact act_hom f
+      rw [comp_whiskerRight, Category.assoc, mul_act_assoc, associator_naturality_left_assoc,
         ← whisker_exchange_assoc, whiskerLeft_comp_assoc, h])
     (by rw [ModObj.mul_smul_self_flip_assoc])
 
@@ -840,7 +812,7 @@ variable {N} in
 @[reassoc (attr := simp)]
 lemma coextendHom_hom_coextendCounitHom {M : Mod C S} (f : (comap φ).obj M ⟶ N) :
     (coextendHom φ f).hom ≫ coextendCounitHom φ N = f.hom := by
-  rw [coextendHom, coextendHomMk_hom_coextendCounitHom, one_smul_assoc, Iso.inv_hom_id_assoc]
+  rw [coextendHom, coextendHomMk_hom_coextendCounitHom, one_act_assoc, Iso.inv_hom_id_assoc]
 
 /-- `R`-linear maps `M ⟶ N` correspond to `S`-linear maps `M ⟶ Hom_R(S, N)`. -/
 @[simps]
@@ -851,7 +823,7 @@ noncomputable def coextendHomEquiv (M : Mod C S) :
   left_inv f := hom_ext _ _ (by simp)
   right_inv g := coextendScalarsObj_hom_ext φ (by
     rw [whiskerLeft_coextendHom_hom_coextendEv, comp_hom', comap_map_hom, coextendCounit_hom,
-      smul_hom_assoc, smul_coextendCounitHom])
+      act_hom_assoc, smul_coextendCounitHom])
 
 /-- Restriction of scalars is left adjoint to coextension of scalars. -/
 noncomputable def restrictCoextendAdjunction : comap φ ⊣ coextendScalars φ :=
@@ -867,17 +839,17 @@ noncomputable def restrictCoextendAdjunction : comap φ ⊣ coextendScalars φ :
         rw [whiskerLeft_coextendHom_hom_coextendEv, comp_hom', comp_hom', whiskerLeft_comp_assoc,
           whiskerLeft_coextendScalarsMap_coextendEv, whiskerLeft_coextendHom_hom_coextendEv_assoc] }
 
-instance moduleObjectInstance_ExtendScalars_11 : (comap φ : Mod C S ⥤ Mod C R).IsLeftAdjoint :=
+instance : (comap φ : Mod C S ⥤ Mod C R).IsLeftAdjoint :=
   (restrictCoextendAdjunction φ).isLeftAdjoint
 
-instance moduleObjectInstance_ExtendScalars_12 : (coextendScalars φ).IsRightAdjoint := (restrictCoextendAdjunction φ).isRightAdjoint
+instance : (coextendScalars φ).IsRightAdjoint := (restrictCoextendAdjunction φ).isRightAdjoint
 
 /-- Restriction of scalars preserves colimits, being a left adjoint. -/
-noncomputable instance moduleObjectInstance_ExtendScalars_13 : PreservesColimitsOfSize.{v, u} (comap φ : Mod C S ⥤ Mod C R) :=
+noncomputable instance : PreservesColimitsOfSize.{v, u} (comap φ : Mod C S ⥤ Mod C R) :=
   (restrictCoextendAdjunction φ).leftAdjoint_preservesColimits
 
 /-- Coextension of scalars preserves limits, being a right adjoint. -/
-noncomputable instance moduleObjectInstance_ExtendScalars_14 : PreservesLimitsOfSize.{v, u} (coextendScalars φ) :=
+noncomputable instance : PreservesLimitsOfSize.{v, u} (coextendScalars φ) :=
   (restrictCoextendAdjunction φ).rightAdjoint_preservesLimits
 
 end Adjunction
@@ -890,7 +862,8 @@ variable [IsMonHom φ]
 
 /-- Coextension of scalars along the identity is the identity. -/
 noncomputable def coextendScalarsId : coextendScalars (𝟙 R) ≅ 𝟭 (Mod C R) :=
-  (restrictCoextendAdjunction (𝟙 R)).rightAdjointUniq (Adjunction.id.ofNatIsoLeft moduleObject_comapId.symm)
+  (restrictCoextendAdjunction (𝟙 R)).rightAdjointUniq
+    (Adjunction.id.ofNatIsoLeft (comapId R).symm)
 
 variable {T : C} [MonObj T] (ψ : S ⟶ T) [IsMonHom ψ]
 
@@ -899,7 +872,7 @@ noncomputable def coextendScalarsComp :
     coextendScalars (φ ≫ ψ) ≅ coextendScalars φ ⋙ coextendScalars ψ :=
   (restrictCoextendAdjunction (φ ≫ ψ)).rightAdjointUniq
     (((restrictCoextendAdjunction ψ).comp (restrictCoextendAdjunction φ)).ofNatIsoLeft
-      (moduleObject_comapComp φ ψ).symm)
+      (comapComp φ ψ).symm)
 
 end Compatibilities
 
@@ -907,7 +880,7 @@ section Preadditive
 
 variable [IsMonHom φ] [Preadditive C] [MonoidalPreadditive C]
 
-instance moduleObjectInstance_ExtendScalars_15 : (coextendScalars φ).Additive := (restrictCoextendAdjunction φ).right_adjoint_additive
+instance : (coextendScalars φ).Additive := (restrictCoextendAdjunction φ).right_adjoint_additive
 
 end Preadditive
 

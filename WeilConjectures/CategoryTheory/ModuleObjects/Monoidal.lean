@@ -179,41 +179,41 @@ lemma tensorObj_X : (M ⊗ N).X =
   rfl
 
 /-- The projection `M ⊗ N ⟶ M ⊗_R N`. -/
-noncomputable def moduleObject_tensorπ : M.X ⊗ N.X ⟶ (M ⊗ N).X :=
+noncomputable def tensorObjπ : M.X ⊗ N.X ⟶ (M ⊗ N).X :=
   coequalizer.π (((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X) ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X])
 
 @[reassoc]
-lemma moduleObject_tensorπ_condition :
-    ((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X ≫ moduleObject_tensorπ M N =
-      ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) ≫ moduleObject_tensorπ M N :=
+lemma tensorObjπ_condition :
+    ((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X ≫ tensorObjπ M N =
+      ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) ≫ tensorObjπ M N :=
   coequalizer.condition _ _
 
-/-- `moduleObject_tensorπ M N` exhibits `M ⊗_R N` as the coequalizer of the two actions of `R`. -/
+/-- `tensorObjπ M N` exhibits `M ⊗_R N` as the coequalizer of the two actions of `R`. -/
 noncomputable def isColimitTensorπ :
-    IsColimit (Cofork.ofπ (moduleObject_tensorπ M N) (moduleObject_tensorπ_condition M N) :
+    IsColimit (Cofork.ofπ (tensorObjπ M N) (tensorObjπ_condition M N) :
       Cofork (((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X) ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X])) :=
   coequalizerIsCoequalizer _ _
 
-instance moduleObjectInstance_Monoidal_1 : Epi (moduleObject_tensorπ M N) := by
-  dsimp [moduleObject_tensorπ]
+instance : Epi (tensorObjπ M N) := by
+  dsimp [tensorObjπ]
   infer_instance
 
 /-- The action of `R` on `M ⊗_R N` is induced by the action of `R` on `M`. -/
 @[reassoc]
 lemma whiskerLeft_tensorπ_smul :
-    R ◁ moduleObject_tensorπ M N ≫ γ[R,(M ⊗ N).X] = (α_ R M.X N.X).inv ≫ γ[R,M.X] ▷ N.X ≫ moduleObject_tensorπ M N :=
+    R ◁ tensorObjπ M N ≫ γ[R,(M ⊗ N).X] = (α_ R M.X N.X).inv ≫ γ[R,M.X] ▷ N.X ≫ tensorObjπ M N :=
   Bimod.TensorBimod.whiskerLeft_π_actLeft ((toBimod R).obj M) ((toBimod R).obj N)
 
 variable {M N}
 
 @[reassoc]
-lemma moduleObject_tensorπ_whiskerLeft {N' : Mod C R} (f : N ⟶ N') :
-    moduleObject_tensorπ M N ≫ (M ◁ f).hom = M.X ◁ f.hom ≫ moduleObject_tensorπ M N' :=
+lemma tensorObjπ_whiskerLeft {N' : Mod C R} (f : N ⟶ N') :
+    tensorObjπ M N ≫ (M ◁ f).hom = M.X ◁ f.hom ≫ tensorObjπ M N' :=
   ι_colimMap _ _
 
 @[reassoc]
-lemma moduleObject_tensorπ_whiskerRight {M' : Mod C R} (f : M ⟶ M') :
-    moduleObject_tensorπ M N ≫ (f ▷ N).hom = f.hom ▷ N.X ≫ moduleObject_tensorπ M' N :=
+lemma tensorObjπ_whiskerRight {M' : Mod C R} (f : M ⟶ M') :
+    tensorObjπ M N ≫ (f ▷ N).hom = f.hom ▷ N.X ≫ tensorObjπ M' N :=
   ι_colimMap _ _
 
 end TensorProduct
@@ -223,19 +223,19 @@ section Preadditive
 variable [Preadditive C] [MonoidalPreadditive C]
 
 /-- The relative tensor product is additive in each variable. -/
-instance moduleObjectInstance_Monoidal_2 : MonoidalPreadditive (Mod C R) where
+instance : MonoidalPreadditive (Mod C R) where
   whiskerLeft_zero {M _ _} := hom_ext _ _ (by
-    rw [← cancel_epi (moduleObject_tensorπ _ _), moduleObject_tensorπ_whiskerLeft]
+    rw [← cancel_epi (tensorObjπ _ _), tensorObjπ_whiskerLeft]
     simp)
   zero_whiskerRight {M _ _} := hom_ext _ _ (by
-    rw [← cancel_epi (moduleObject_tensorπ _ _), moduleObject_tensorπ_whiskerRight]
+    rw [← cancel_epi (tensorObjπ _ _), tensorObjπ_whiskerRight]
     simp)
   whiskerLeft_add {M _ _} f g := hom_ext _ _ (by
-    rw [← cancel_epi (moduleObject_tensorπ _ _), moduleObject_tensorπ_whiskerLeft]
-    simp [Preadditive.comp_add, moduleObject_tensorπ_whiskerLeft, Preadditive.add_comp])
+    rw [← cancel_epi (tensorObjπ _ _), tensorObjπ_whiskerLeft]
+    simp [Preadditive.comp_add, tensorObjπ_whiskerLeft, Preadditive.add_comp])
   add_whiskerRight f g := hom_ext _ _ (by
-    rw [← cancel_epi (moduleObject_tensorπ _ _), moduleObject_tensorπ_whiskerRight]
-    simp [Preadditive.comp_add, moduleObject_tensorπ_whiskerRight, Preadditive.add_comp])
+    rw [← cancel_epi (tensorObjπ _ _), tensorObjπ_whiskerRight]
+    simp [Preadditive.comp_add, tensorObjπ_whiskerRight, Preadditive.add_comp])
 
 end Preadditive
 

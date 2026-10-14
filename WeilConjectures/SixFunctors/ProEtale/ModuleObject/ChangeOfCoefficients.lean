@@ -41,7 +41,7 @@ squares, by the mate and conjugate constructions of
 `WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare`:
 
 * **restriction of scalars commutes with the pushforward**, strictly
-  (`ProEtale.CondensedRing.comapLowerStarIso`): both composites are `moduleObject_mapMod(f_*)` followed by
+  (`ProEtale.CondensedRing.comapLowerStarIso`): both composites are `mapMod(f_*)` followed by
   the restriction of scalars along the common composite of the square; and in the derived
   categories (`ProEtale.CondensedRing.derivedComapLowerStarIso`), when `Λ'_X` is flat over
   `Λ_X`, so that the restriction of scalars preserves K-injective complexes;
@@ -145,7 +145,7 @@ section UpperLowerStar
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- Restriction of scalars commutes with the pushforward:
-`f_*^Λ' ⋙ Res_{a_Y} ≅ Res_{a_X} ⋙ f_*^Λ`, both being `moduleObject_mapMod(f_*)` followed by the restriction
+`f_*^Λ' ⋙ Res_{a_Y} ≅ Res_{a_X} ⋙ f_*^Λ`, both being `mapMod(f_*)` followed by the restriction
 of scalars along the common composite of the square `a_Y ≫ η_f = η_f ≫ f_* a_X`. -/
 noncomputable def comapLowerStarIso :
     (f)_*⟦Λ'⟧ ⋙ Mod.comap (coefficientMap a Y) ≅ Mod.comap (coefficientMap a X) ⋙ (f)_*⟦Λ⟧ :=
@@ -177,12 +177,12 @@ isomorphisms. -/
 noncomputable def comapUpperStarIso :
     (f)^*⟦Λ'⟧ ⋙ Mod.comap (coefficientMap a X) ≅ Mod.comap (coefficientMap a Y) ⋙ (f)^*⟦Λ⟧ :=
   Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft ((f)^*[Ab.{u + 1}].moduleObject_mapMod (R := condensedRingObj Λ' Y))
+    Functor.isoWhiskerLeft ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ' Y))
       (Mod.extendScalarsComapIsoOfIsIso ((f)^*[Ab.{u + 1}].map (coefficientMap a Y))
         (coefficientMap a X) (condensedPullbackHom Λ f) (condensedPullbackHom Λ' f)
         (map_coefficientMap_comp_condensedPullbackHom a f).symm) ≪≫
     (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight ((f)^*[Ab.{u + 1}].moduleObject_mapModComapIso (coefficientMap a Y)).symm
+    Functor.isoWhiskerRight ((f)^*[Ab.{u + 1}].mapModComapIso (coefficientMap a Y)).symm
       (Mod.extendScalars (condensedPullbackHom Λ f)) ≪≫
     Functor.associator _ _ _
 
@@ -269,11 +269,11 @@ noncomputable def comapOpenImmersionLowerShriekIso :
   Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft (Mod.comap (condensedPullbackHom Λ' j))
       ((ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1}
-        j).projectionFormula.moduleObject_mapModLeftComapIso (coefficientMap a X)) ≪≫
+        j).projectionFormula.mapModLeftComapIso (coefficientMap a X)) ≪≫
     (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight ((Mod.moduleObject_comapComp _ _).symm ≪≫
-      Mod.comapIsoOfEq (map_coefficientMap_comp_condensedPullbackHom a j) ≪≫
-      Mod.moduleObject_comapComp _ _) _ ≪≫
+    Functor.isoWhiskerRight ((Mod.comapComp _ _).symm ≪≫
+      Mod.comapCongr (map_coefficientMap_comp_condensedPullbackHom a j) ≪≫
+      Mod.comapComp _ _) _ ≪≫
     Functor.associator _ _ _
 
 /-- **(Shriek) for an open immersion**, underived: `j_!^Λ ⋙ Ext_{a_X} ≅ Ext_{a_U} ⋙ j_!^Λ'`, the

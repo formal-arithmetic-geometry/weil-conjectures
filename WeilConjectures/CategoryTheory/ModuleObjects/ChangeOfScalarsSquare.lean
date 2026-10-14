@@ -22,8 +22,8 @@ commutative square of morphisms of algebra objects
        ↓              ↓
     F R_X --F φ_X--> F S_X
 ```
-with `R_X, S_X : C` and `R_Y, S_Y : D`. The "`moduleObject_mapMod` followed by restriction of scalars"
-pushforwards `F.moduleObject_mapMod ⋙ comap η : Mod C R_X ⥤ Mod D R_Y` built from `η_R` and `η_S` are then
+with `R_X, S_X : C` and `R_Y, S_Y : D`. The "`mapMod` followed by restriction of scalars"
+pushforwards `F.mapMod ⋙ comap η : Mod C R_X ⥤ Mod D R_Y` built from `η_R` and `η_S` are then
 compatible with the restrictions of scalars along `φ_X` and `φ_Y`
 (`Mod.comapMapModComapIso`): restricting scalars along `φ_Y` after pushing forward is pushing
 forward after restricting scalars along `φ_X`, both sides being the restriction of scalars along
@@ -42,9 +42,9 @@ and conjugates (`Adjunction.pullIsoOfComapIso`, `Adjunction.pushHomOfComapIso`):
 
 The file also records two further formal compatibilities of restriction of scalars:
 
-* with the linearization `moduleObject_mapModLeft` of a functor satisfying a projection formula, which is
+* with the linearization `mapModLeft` of a functor satisfying a projection formula, which is
   the shape of the extension by zero along an open immersion
-  (`Functor.ProjectionFormula.moduleObject_mapModLeftComapIso`);
+  (`Functor.ProjectionFormula.mapModLeftComapIso`);
 * with the extension of scalars along *isomorphisms* of algebra objects, which is the shape of
   the pullback along an open immersion (`Mod.extendScalarsComapIsoOfIsIso`).
 
@@ -64,7 +64,7 @@ open scoped CategoryTheory.Obj
 
 namespace CategoryTheory
 
-/-! ### Restriction of scalars and the `moduleObject_mapMod`-then-`comap` pushforward -/
+/-! ### Restriction of scalars and the `mapMod`-then-`comap` pushforward -/
 
 namespace Mod
 
@@ -79,16 +79,16 @@ variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
   (sq : φ_Y ≫ η_S = η_R ≫ F.map φ_X)
 
 /-- Given a commutative square `φ_Y ≫ η_S = η_R ≫ F φ_X` of morphisms of algebra objects, the
-restriction of scalars along `φ_Y` after the pushforward `F.moduleObject_mapMod ⋙ comap η_S` is the
-pushforward `F.moduleObject_mapMod ⋙ comap η_R` after the restriction of scalars along `φ_X`: both are
-`F.moduleObject_mapMod` followed by the restriction of scalars along the common composite of the square. -/
+restriction of scalars along `φ_Y` after the pushforward `F.mapMod ⋙ comap η_S` is the
+pushforward `F.mapMod ⋙ comap η_R` after the restriction of scalars along `φ_X`: both are
+`F.mapMod` followed by the restriction of scalars along the common composite of the square. -/
 noncomputable def comapMapModComapIso :
-    (F.moduleObject_mapMod ⋙ comap η_S) ⋙ comap φ_Y ≅ comap φ_X ⋙ (F.moduleObject_mapMod ⋙ comap η_R) :=
+    (F.mapMod S_X ⋙ comap η_S) ⋙ comap φ_Y ≅ comap φ_X ⋙ (F.mapMod R_X ⋙ comap η_R) :=
   Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft F.moduleObject_mapMod
-      ((moduleObject_comapComp φ_Y η_S).symm ≪≫ comapIsoOfEq sq ≪≫ moduleObject_comapComp η_R (F.map φ_X)) ≪≫
+    Functor.isoWhiskerLeft (F.mapMod _)
+      ((comapComp φ_Y η_S).symm ≪≫ comapCongr sq ≪≫ comapComp η_R (F.map φ_X)) ≪≫
     (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight (F.moduleObject_mapModComapIso φ_X).symm (comap η_R) ≪≫
+    Functor.isoWhiskerRight (F.mapModComapIso φ_X).symm (comap η_R) ≪≫
     Functor.associator _ _ _
 
 /-- The underlying morphism of the components of `Mod.comapMapModComapIso` is the identity. -/
@@ -120,12 +120,12 @@ scalars along the inverse, and the square `ψ ≫ b⁻¹ = a⁻¹ ≫ φ` commut
 noncomputable def extendScalarsComapIsoOfIsIso :
     extendScalars b ⋙ comap ψ ≅ comap φ ⋙ extendScalars a :=
   Functor.isoWhiskerRight (extendScalarsIsoComapInv b) (comap ψ) ≪≫
-    (moduleObject_comapComp ψ (asIso b).inv).symm ≪≫
-    comapIsoOfEq (by
+    (comapComp ψ (asIso b).inv).symm ≪≫
+    comapCongr (by
       rw [← cancel_mono (asIso b).hom, Category.assoc, Category.assoc, Iso.inv_hom_id,
         Category.comp_id, asIso_hom, ← sq, ← cancel_epi (asIso a).hom, Iso.hom_inv_id_assoc,
         asIso_hom]) ≪≫
-    moduleObject_comapComp (asIso a).inv φ ≪≫
+    comapComp (asIso a).inv φ ≪≫
     Functor.isoWhiskerLeft (comap φ) (extendScalarsIsoComapInv a).symm
 
 end ExtendScalarsOfIsIso
@@ -143,7 +143,7 @@ variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
 adjoints of the (equal) restrictions of scalars. -/
 noncomputable def extendScalarsIsoOfEq (h : φ = ψ) : extendScalars φ ≅ extendScalars ψ :=
   (extendRestrictAdjunction φ).leftAdjointUniq
-    ((extendRestrictAdjunction ψ).ofNatIsoRight (comapIsoOfEq h).symm)
+    ((extendRestrictAdjunction ψ).ofNatIsoRight (comapCongr h).symm)
 
 end ExtendScalarsOfEq
 
@@ -181,9 +181,9 @@ projection formula with respect to the strong monoidal `S` is compatible with re
 scalars: restricting the `B'`-action of `P M` along `φ : B ⟶ B'` is the linearization `P_B`
 applied to `M` with its `S B'`-action restricted along `S φ`. Both actions are
 `B ⊗ P M ≅ P (S B ⊗ M) ⟶ P (S B' ⊗ M) ⟶ P M`, by the naturality of the projection formula. -/
-noncomputable def moduleObject_mapModLeftComapIso :
-    pf.moduleObject_mapModLeft B' ⋙ Mod.comap φ ≅ Mod.comap (S.map φ) ⋙ pf.moduleObject_mapModLeft B :=
-  NatIso.ofComponents (fun M ↦ Mod.moduleObject_isoMk (Iso.refl _) (by
+noncomputable def mapModLeftComapIso :
+    pf.mapModLeft B' ⋙ Mod.comap φ ≅ Mod.comap (S.map φ) ⋙ pf.mapModLeft B :=
+  NatIso.ofComponents (fun M ↦ Mod.isoMk (Iso.refl _) (by
     rw [Iso.refl_hom, Category.comp_id, MonoidalCategory.whiskerLeft_id, Category.id_comp]
     change φ ▷ P.obj M.X ≫ (pf.iso B' M.X).inv ≫ P.map γ[S.obj B',M.X] =
       (pf.iso B M.X).inv ≫ P.map (S.map φ ▷ M.X ≫ γ[S.obj B',M.X])

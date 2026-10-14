@@ -37,12 +37,12 @@ closed subschemes, using the existing notion `Scheme.Stratification` (`Construct
 restriction to a stratum is the pullback along its immersion `Xₐ ⟶ X`. Restriction along a
 morphism `g` of schemes (to a stratum, or to a member of a pro-étale cover) uses only that the
 pullback `g^*` of pro-étale sheaves is lax monoidal (`ProEtale.monoidal_upperStar`): it
-sends `R` to a ring object `g^* R` and `R`-modules to `g^* R`-modules (`Functor.moduleObject_mapMod`).
+sends `R` to a ring object `g^* R` and `R`-modules to `g^* R`-modules (`Functor.mapMod`).
 
-`ProEtale.IsConstructibleModuleObject R M`: there is a stratification such that for each stratum `Xₐ`,
-`M|_{Xₐ}` is pro-étale locally finitely presented over `R|_{Xₐ}`. For `R = 𝒪_{E,X}` these are
-the constructible `𝒪_E`-sheaves; for `R = E_X` (with `E` a field) they are the constructible
-`E`-sheaves, lisse on the strata.
+`ProEtale.IsConstructibleModuleObject R M`: there is a stratification such that for each
+stratum `Xₐ`, `M|_{Xₐ}` is pro-étale locally finitely presented over `R|_{Xₐ}`. For
+`R = 𝒪_{E,X}` these are the constructible `𝒪_E`-sheaves; for `R = E_X` (with `E` a field)
+they are the constructible `E`-sheaves, lisse on the strata.
 
 -/
 
@@ -69,7 +69,7 @@ cover `{Uᵢ ⟶ X}` such that each `M|_{Uᵢ}` is the cokernel of a morphism
 def IsLocallyFinitelyPresented (M : Mod (Sheaf (Scheme.ProEt.topology X) A) R) : Prop :=
   ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒰.I₀,
     Mod.IsFinitelyPresented ((ProEtale.upperStar A (𝒰.f i)).obj R)
-      (((ProEtale.upperStar A (𝒰.f i)).moduleObject_mapMod (R := R)).obj M)
+      (((ProEtale.upperStar A (𝒰.f i)).mapMod R).obj M)
 
 end Local
 
@@ -87,7 +87,7 @@ stratification are lisse. -/
 def IsConstructibleModuleObject (M : Mod (Sheaf (Scheme.ProEt.topology X) A) R) : Prop :=
   ∃ S : Scheme.Stratification X, ∀ a : Fin S.n,
     IsLocallyFinitelyPresented ((ProEtale.upperStar A (S.immersion a)).obj R)
-      (((ProEtale.upperStar A (S.immersion a)).moduleObject_mapMod (R := R)).obj M)
+      (((ProEtale.upperStar A (S.immersion a)).mapMod R).obj M)
 
 end Constructible
 

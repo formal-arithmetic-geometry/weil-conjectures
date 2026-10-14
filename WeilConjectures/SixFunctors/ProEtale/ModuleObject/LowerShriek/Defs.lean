@@ -25,7 +25,7 @@ abelian sheaves and the change of scalars along the canonical coefficient morphi
   `Mod_{j^* Λ_X} ⥤ Mod_{Λ_X}`, sending `M` to `j_! M` with the `Λ_X`-action
   `Λ_X ⊗ j_! M ≅ j_!(j^* Λ_X ⊗ M) ⟶ j_! M`
   (`ProEtale.CondensedRing.linearOpenImmersionLowerShriek`, the lift
-  `Adjunction.moduleObject_mapModLeft` of `WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula`).
+  `Adjunction.mapModLeft` of `WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula`).
   The extension by zero on module objects over `Λ_U` is the restriction of scalars along
   `α_j : j^* Λ_X ⟶ Λ_U` followed by the linear extension by zero,
   ```
@@ -33,9 +33,9 @@ abelian sheaves and the change of scalars along the canonical coefficient morphi
   ```
   (`ProEtale.CondensedRing.openImmersionLowerShriek`, notation `(j)_!open⟦Λ⟧`). Its
   underlying sheaf is `j_! M`, and it is exact. Since `α_j` is an isomorphism, `j_!` is left
-  adjoint to `j^* = Ext_{α_j} ∘ moduleObject_mapMod(j^*)` on module objects
+  adjoint to `j^* = Ext_{α_j} ∘ mapMod(j^*)` on module objects
   (`ProEtale.CondensedRing.openImmersionLowerShriekUpperStarAdjunction`): the adjunction
-  `linear j_! ⊣ moduleObject_mapMod(j^*)` composed with `Res_{α_j} ⊣ Coext_{α_j}`, and
+  `linear j_! ⊣ mapMod(j^*)` composed with `Res_{α_j} ⊣ Coext_{α_j}`, and
   `Coext_{α_j} ≅ Ext_{α_j}` for an isomorphism `α_j`.
 * For a compactification `X ⟶[i] Z ⟶[g] Y` of `f : X ⟶ Y`, the lower shriek is
   `f_! := i_! ⋙ g_*` (`ProEtale.CondensedRing.compactificationLowerShriek`), and for `f`
@@ -91,7 +91,7 @@ noncomputable def linearOpenImmersionLowerShriek :
     Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
       ((j)^*[Ab.{u + 1}].obj (condensedRingObj Λ X)) ⥤
       Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) :=
-  (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).moduleObject_mapModLeft
+  (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).mapModLeft
     (condensedRingObj Λ X)
 
 omit [IsCommMonObj Λ] in
@@ -100,14 +100,14 @@ lemma linearOpenImmersionLowerShriek_comp_forget :
     linearOpenImmersionLowerShriek Λ j ⋙ Mod.forget (condensedRingObj Λ X) =
       Mod.forget _ ⋙ (j)_!open[Ab.{u + 1}] := rfl
 
-/-- The linear extension by zero is left adjoint to the transport `moduleObject_mapMod(j^*)` of module
+/-- The linear extension by zero is left adjoint to the transport `mapMod(j^*)` of module
 objects along the strong monoidal `j^*`. -/
 noncomputable def linearOpenImmersionLowerShriekAdjunction :
-    linearOpenImmersionLowerShriek Λ j ⊣ (j)^*[Ab.{u + 1}].moduleObject_mapMod (R := condensedRingObj Λ X) :=
-  (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).moduleObject_mapModLeftAdjunction
+    linearOpenImmersionLowerShriek Λ j ⊣ (j)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ X) :=
+  (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).mapModLeftAdjunction
 
 instance linearOpenImmersionLowerShriek_additive : (linearOpenImmersionLowerShriek Λ j).Additive :=
-  inferInstanceAs ((ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).moduleObject_mapModLeft
+  inferInstanceAs ((ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).mapModLeft
     (condensedRingObj Λ X)).Additive
 
 /-- The extension by zero on abelian sheaves preserves finite colimits, being a left adjoint. -/
@@ -123,14 +123,14 @@ is. -/
 instance preservesFiniteLimits_linearOpenImmersionLowerShriek :
     PreservesFiniteLimits (linearOpenImmersionLowerShriek Λ j) :=
   inferInstanceAs (PreservesFiniteLimits
-    ((ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).moduleObject_mapModLeft
+    ((ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).mapModLeft
       (condensedRingObj Λ X)))
 
 /-- The linear extension by zero is right exact. -/
 instance preservesFiniteColimits_linearOpenImmersionLowerShriek :
     PreservesFiniteColimits (linearOpenImmersionLowerShriek Λ j) :=
   inferInstanceAs (PreservesFiniteColimits
-    ((ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).moduleObject_mapModLeft
+    ((ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).mapModLeft
       (condensedRingObj Λ X)))
 
 /-- The extension by zero `j_! : Mod_{Λ_U} ⥤ Mod_{Λ_X}` along an open immersion
@@ -173,12 +173,12 @@ instance preservesFiniteColimits_openImmersionLowerShriek :
 instance preservesHomology_openImmersionLowerShriek : (j)_!open⟦Λ⟧.PreservesHomology := {}
 
 /-- The adjunction `j_! ⊣ j^*` on module objects along an open immersion: the adjunction
-`linear j_! ⊣ moduleObject_mapMod(j^*)` composed with the adjunction `Res_{α_j} ⊣ Coext_{α_j}`, and
+`linear j_! ⊣ mapMod(j^*)` composed with the adjunction `Res_{α_j} ⊣ Coext_{α_j}`, and
 `Coext_{α_j} ≅ Ext_{α_j}` since `α_j` is an isomorphism. -/
 noncomputable def openImmersionLowerShriekUpperStarAdjunction : (j)_!open⟦Λ⟧ ⊣ (j)^*⟦Λ⟧ :=
   ((Mod.restrictCoextendAdjunction (condensedPullbackHom Λ j)).comp
     (linearOpenImmersionLowerShriekAdjunction Λ j)).ofNatIsoRight
-    (Functor.isoWhiskerLeft ((j)^*[Ab.{u + 1}].moduleObject_mapMod (R := condensedRingObj Λ X))
+    (Functor.isoWhiskerLeft ((j)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ X))
       (Mod.extendScalarsIsoCoextendScalars (condensedPullbackHom Λ j)).symm)
 
 instance : (j)_!open⟦Λ⟧.IsLeftAdjoint :=

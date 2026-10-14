@@ -17,20 +17,20 @@ Let `Λ` be a commutative condensed ring, with coefficient ring objects
 `η_f : Λ_Y ⟶ f_* Λ_X` and `α_f : f^* Λ_Y ⟶ Λ_X`
 (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic`). This file
 defines the ordinary adjoint pair `f^* ⊣ f_*` on the categories `Mod_{Λ_X}` of module
-objects, by the "`moduleObject_mapMod` followed by change of scalars" recipe:
+objects, by the "`mapMod` followed by change of scalars" recipe:
 
-* the pushforward `f_* : Mod_{Λ_X} ⥤ Mod_{Λ_Y}` is `moduleObject_mapMod(f_*)`, which sends an
+* the pushforward `f_* : Mod_{Λ_X} ⥤ Mod_{Λ_Y}` is `mapMod(f_*)`, which sends an
   `Λ_X`-module to an `f_* Λ_X`-module since `f_*` is lax monoidal, followed by restriction
   of scalars along `η_f` (`ProEtale.CondensedRing.lowerStar`, notation `(f)_*⟦Λ⟧`). Its
   underlying sheaf is `f_* M`, with `Λ_Y` acting through `η_f`.
-* the pullback `f^* : Mod_{Λ_Y} ⥤ Mod_{Λ_X}` is `moduleObject_mapMod(f^*)`, which sends an
+* the pullback `f^* : Mod_{Λ_Y} ⥤ Mod_{Λ_X}` is `mapMod(f^*)`, which sends an
   `Λ_Y`-module to an `f^* Λ_Y`-module since `f^*` is strong monoidal, followed by
   extension of scalars along `α_f` (`ProEtale.CondensedRing.upperStar`, notation
   `(f)^*⟦Λ⟧`). Its underlying sheaf is `Λ_X ⊗_{f^* Λ_Y} f^* M`, the ordinary ringed-topos
   pullback.
 * the adjunction `f^* ⊣ f_*` (`ProEtale.CondensedRing.upperStarLowerStarAdjunction`) is the
   composition of the lift of the monoidal adjunction `f^* ⊣ f_*` to module objects
-  (`Adjunction.moduleObject_mapModAdjunction`) with the adjunction between extension and restriction of
+  (`Adjunction.mapModAdjunction`) with the adjunction between extension and restriction of
   scalars along `α_f`, using that `η_f` is the mate of `α_f`.
 
 The constructions are formal and use no finiteness or completeness hypothesis on `Λ`. Since the
@@ -83,12 +83,12 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 section LowerStar
 
 /-- The pushforward `f_* : Mod_{Λ_X} ⥤ Mod_{Λ_Y}` on module objects over `Λ`:
-`moduleObject_mapMod(f_*)` followed by restriction of scalars along `η_f : Λ_Y ⟶ f_* Λ_X`. The
+`mapMod(f_*)` followed by restriction of scalars along `η_f : Λ_Y ⟶ f_* Λ_X`. The
 underlying sheaf of `f_* M` is `f_* M`, with `Λ_Y` acting through `η_f`. -/
 noncomputable def lowerStar :
     Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) ⥤
       Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y) :=
-  (f)_*[Ab.{u + 1}].moduleObject_mapMod ⋙ Mod.comap (condensedPushforwardHom Λ f)
+  (f)_*[Ab.{u + 1}].mapMod _ ⋙ Mod.comap (condensedPushforwardHom Λ f)
 
 @[inherit_doc lowerStar]
 scoped notation "(" f ")_*⟦" Λ "⟧" => lowerStar Λ f
@@ -131,12 +131,12 @@ end LowerStar
 section UpperStar
 
 /-- The pullback `f^* : Mod_{Λ_Y} ⥤ Mod_{Λ_X}` on module objects over `Λ`:
-`moduleObject_mapMod(f^*)` followed by extension of scalars along `α_f : f^* Λ_Y ⟶ Λ_X`. The
+`mapMod(f^*)` followed by extension of scalars along `α_f : f^* Λ_Y ⟶ Λ_X`. The
 underlying sheaf of `f^* M` is `Λ_X ⊗_{f^* Λ_Y} f^* M`. -/
 noncomputable def upperStar :
     Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y) ⥤
       Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) :=
-  (f)^*[Ab.{u + 1}].moduleObject_mapMod ⋙ Mod.extendScalars (condensedPullbackHom Λ f)
+  (f)^*[Ab.{u + 1}].mapMod _ ⋙ Mod.extendScalars (condensedPullbackHom Λ f)
 
 @[inherit_doc upperStar]
 scoped notation "(" f ")^*⟦" Λ "⟧" => upperStar Λ f
@@ -145,20 +145,20 @@ scoped notation "(" f ")^*⟦" Λ "⟧" => upperStar Λ f
 the `f^* Λ_Y`-module `f^* M`. -/
 lemma upperStar_comp_forget :
     (f)^*⟦Λ⟧ ⋙ Mod.forget (condensedRingObj Λ X) =
-      (f)^*[Ab.{u + 1}].moduleObject_mapMod ⋙ Mod.extendScalars (condensedPullbackHom Λ f) ⋙
+      (f)^*[Ab.{u + 1}].mapMod _ ⋙ Mod.extendScalars (condensedPullbackHom Λ f) ⋙
         Mod.forget (condensedRingObj Λ X) := rfl
 
 lemma upperStar_obj
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
     (f)^*⟦Λ⟧.obj M =
-      Mod.extendScalarsObj (condensedPullbackHom Λ f) ((f)^*[Ab.{u + 1}].moduleObject_mapMod.obj M) := rfl
+      Mod.extendScalarsObj (condensedPullbackHom Λ f) (((f)^*[Ab.{u + 1}].mapMod _).obj M) := rfl
 
 instance upperStar_additive : (f)^*⟦Λ⟧.Additive := by
   unfold upperStar
   infer_instance
 
 /-- The pullback `f^*` on module objects is right exact, being a composition of a left adjoint
-with the exact functor `moduleObject_mapMod(f^*)`. It is also left exact
+with the exact functor `mapMod(f^*)`. It is also left exact
 (`ProEtale.CondensedRing.preservesFiniteLimits_upperStar`). -/
 instance preservesFiniteColimits_upperStar : PreservesFiniteColimits (f)^*⟦Λ⟧ := by
   unfold upperStar
@@ -171,7 +171,7 @@ end UpperStar
 section Adjunction
 
 /-- The *linear* pushforward `Mod_{f^* Λ_Y} ⥤ Mod_{Λ_Y}` of module objects over `Λ`:
-`moduleObject_mapMod(f_*)` followed by restriction of scalars along the unit `Λ_Y ⟶ f_* f^* Λ_Y`. Its
+`mapMod(f_*)` followed by restriction of scalars along the unit `Λ_Y ⟶ f_* f^* Λ_Y`. Its
 underlying sheaf functor is `f_*`, and `f_*` on module objects over `Λ_X` is its composition
 with the restriction of scalars along `α_f`
 (`ProEtale.CondensedRing.comapPullbackHomCompIso`). It is the pushforward that enters the
@@ -180,7 +180,7 @@ noncomputable def linearLowerStar :
     Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       ((f)^*[Ab.{u + 1}].obj (condensedRingObj Λ Y)) ⥤
       Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y) :=
-  (f)_*[Ab.{u + 1}].moduleObject_mapMod ⋙
+  (f)_*[Ab.{u + 1}].mapMod _ ⋙
     Mod.comap ((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unitAlgHom
       (condensedRingObj Λ Y))
 
@@ -205,16 +205,16 @@ and the unit `Λ_Y ⟶ f_* f^* Λ_Y`, is restricting scalars along their composi
 noncomputable def comapPullbackHomCompIso :
     Mod.comap (condensedPullbackHom Λ f) ⋙ linearLowerStar Λ f ≅ (f)_*⟦Λ⟧ :=
   (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight ((f)_*[Ab.{u + 1}].moduleObject_mapModComapIso (condensedPullbackHom Λ f)) _ ≪≫
+    Functor.isoWhiskerRight ((f)_*[Ab.{u + 1}].mapModComapIso (condensedPullbackHom Λ f)) _ ≪≫
     Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ ((Mod.moduleObject_comapComp _ _).symm ≪≫
-      Mod.comapIsoOfEq (unitAlgHom_comp_map_condensedPullbackHom Λ f))
+    Functor.isoWhiskerLeft _ ((Mod.comapComp _ _).symm ≪≫
+      Mod.comapCongr (unitAlgHom_comp_map_condensedPullbackHom Λ f))
 
 /-- The adjunction `f^* ⊣ f_*` on module objects over `Λ`: a `Λ_X`-linear map
 `Λ_X ⊗_{f^* Λ_Y} f^* M ⟶ N` is the same as an `f^* Λ_Y`-linear map `f^* M ⟶ N`, which
 is the same as a `Λ_Y`-linear map `M ⟶ f_* N`. -/
 noncomputable def upperStarLowerStarAdjunction : (f)^*⟦Λ⟧ ⊣ (f)_*⟦Λ⟧ :=
-  (((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).moduleObject_mapModAdjunction
+  (((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).mapModAdjunction
     (condensedRingObj Λ Y)).comp
     (Mod.extendRestrictAdjunction (condensedPullbackHom Λ f))).ofNatIsoRight
     (comapPullbackHomCompIso Λ f)
@@ -242,11 +242,11 @@ section Exact
 
 /-- The pullback `f^*` on module objects over `Λ` is left exact: since `α_f` is an isomorphism
 (`ProEtale.isIso_condensedPullbackHom`), the extension of scalars along it is the restriction of
-scalars along its inverse, and `f^*` on module objects is the left exact `moduleObject_mapMod(f^*)` up to this
+scalars along its inverse, and `f^*` on module objects is the left exact `mapMod(f^*)` up to this
 equivalence. -/
 instance preservesFiniteLimits_upperStar : PreservesFiniteLimits (f)^*⟦Λ⟧ :=
   preservesFiniteLimits_of_natIso (Functor.isoWhiskerLeft
-    ((f)^*[Ab.{u + 1}].moduleObject_mapMod (R := condensedRingObj Λ Y))
+    ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y))
     (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f))).symm
 
 /-- The pullback `f^*` on module objects over `Λ` is exact. -/
@@ -273,8 +273,8 @@ noncomputable def comapCondensedPushforwardHomComp :
       Mod.comap (condensedPushforwardHom Λ g ≫
         (g)_*[Ab.{u + 1}].map (condensedPushforwardHom Λ f)) ≅
       Mod.comap (condensedPushforwardHom Λ (f ≫ g)) :=
-  (Mod.moduleObject_comapComp _ _).symm ≪≫
-    Mod.comapIsoOfEq (by rw [condensedPushforwardHom_comp, Category.assoc])
+  (Mod.comapComp _ _).symm ≪≫
+    Mod.comapCongr (by rw [condensedPushforwardHom_comp, Category.assoc])
 
 /-- The composition isomorphism `f_* ⋙ g_* ≅ (f ≫ g)_*` of pushforwards on module objects over
 `Λ`: on underlying sheaves it is the composition isomorphism `ProEtale.lowerStarComp`,
@@ -285,11 +285,11 @@ noncomputable def lowerStarComp : (f)_*⟦Λ⟧ ⋙ (g)_*⟦Λ⟧ ≅ (f ≫ g)_
   Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight
-        ((g)_*[Ab.{u + 1}].moduleObject_mapModComapIso (condensedPushforwardHom Λ f)) _ ≪≫
+        ((g)_*[Ab.{u + 1}].mapModComapIso (condensedPushforwardHom Λ f)) _ ≪≫
       Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _ (Mod.moduleObject_comapComp _ _).symm) ≪≫
+      Functor.isoWhiskerLeft _ (Mod.comapComp _ _).symm) ≪≫
     (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight (Functor.moduleObject_mapModCompIso (f)_*[Ab.{u + 1}] (g)_*[Ab.{u + 1}]
+    Functor.isoWhiskerRight (Functor.mapModCompIso (f)_*[Ab.{u + 1}] (g)_*[Ab.{u + 1}]
       (ProEtale.lowerStarComp Ab.{u + 1} f g).hom (condensedRingObj Λ X)) _ ≪≫
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (comapCondensedPushforwardHomComp Λ f g)

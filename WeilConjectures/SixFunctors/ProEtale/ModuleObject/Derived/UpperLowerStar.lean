@@ -55,14 +55,14 @@ below derived categories the pullback is the levelwise functor `D+((f)^*⟦Λ⟧
 The two displayed formulas are theorems about the total derived functors, not definitions:
 
 * `ProEtale.CondensedRing.rightDerivedLowerStarIso`:
-  `R((f)_*⟦Λ⟧) ≅ R(moduleObject_mapMod(f_*)) ⋙ D(Res_{η_f})`. The restriction of scalars along
+  `R((f)_*⟦Λ⟧) ≅ R(mapMod(f_*)) ⋙ D(Res_{η_f})`. The restriction of scalars along
   `η_f : Λ_Y ⟶ f_* Λ_X` is exact, so right deriving the composite
-  `(f)_*⟦Λ⟧ = moduleObject_mapMod(f_*) ⋙ Res_{η_f}` amounts to right deriving `moduleObject_mapMod(f_*)` and restricting
+  `(f)_*⟦Λ⟧ = mapMod(f_*) ⋙ Res_{η_f}` amounts to right deriving `mapMod(f_*)` and restricting
   scalars levelwise (`Functor.rightDerivedFunctorCompMapDerivedCategoryIso`).
 * `ProEtale.CondensedRing.leftDerivedUpperStarIso`:
-  `L((f)^*⟦Λ⟧) ≅ D(moduleObject_mapMod(f^*)) ⋙ L(Ext_{α_f})`. The exact functor `moduleObject_mapMod(f^*)` preserves
-  K-flat complexes, so left deriving the composite `(f)^*⟦Λ⟧ = moduleObject_mapMod(f^*) ⋙ Ext_{α_f}` amounts
-  to applying `moduleObject_mapMod(f^*)` levelwise and left deriving the extension of scalars, both being
+  `L((f)^*⟦Λ⟧) ≅ D(mapMod(f^*)) ⋙ L(Ext_{α_f})`. The exact functor `mapMod(f^*)` preserves
+  K-flat complexes, so left deriving the composite `(f)^*⟦Λ⟧ = mapMod(f^*) ⋙ Ext_{α_f}` amounts
+  to applying `mapMod(f^*)` levelwise and left deriving the extension of scalars, both being
   computed on the same K-flat resolution in `Mod_{Λ_Y}`
   (`Functor.leftDerivedFunctorCompMapDerivedCategoryIso`).
 
@@ -86,11 +86,11 @@ The two displayed formulas are theorems about the total derived functors, not de
 
 ## Sorried input
 
-- `ProEtale.CondensedRing.preservesKFlatComplexes_mapMod_upperStar`: `moduleObject_mapMod(f^*)` sends
+- `ProEtale.CondensedRing.preservesKFlatComplexes_mapMod_upperStar`: `mapMod(f^*)` sends
   K-flat complexes of `Λ_Y`-modules to K-flat complexes of `f^* Λ_Y`-modules. Indeed
   `f^*` is strong monoidal, exact and commutes with colimits, so it commutes with the relative
   tensor product of complexes of module objects and preserves acyclicity. From it follows that
-  the pullback `(f)^*⟦Λ⟧ = moduleObject_mapMod(f^*) ⋙ Ext_{α_f}` on module objects preserves
+  the pullback `(f)^*⟦Λ⟧ = mapMod(f^*) ⋙ Ext_{α_f}` on module objects preserves
   quasi-isomorphisms between K-flat complexes
   (`ProEtale.CondensedRing.preservesKFlatQuasiIso_upperStar`), which is the functor-specific
   input of the K-flat machinery making `L((f)^*⟦Λ⟧)` meaningful; the other ingredient is that
@@ -150,16 +150,16 @@ noncomputable example :
   R+((f)_*⟦Λ⟧)
 
 /-- The derived pushforward on module objects is the total right derived functor of
-`moduleObject_mapMod(f_*) : Mod_{Λ_X} ⥤ Mod_{f_* Λ_X}` followed by the levelwise restriction of scalars
+`mapMod(f_*) : Mod_{Λ_X} ⥤ Mod_{f_* Λ_X}` followed by the levelwise restriction of scalars
 along `η_f : Λ_Y ⟶ f_* Λ_X`: the restriction of scalars is exact, so right deriving the
-composite `(f)_*⟦Λ⟧ = moduleObject_mapMod(f_*) ⋙ Res_{η_f}` amounts to right deriving `moduleObject_mapMod(f_*)` and
+composite `(f)_*⟦Λ⟧ = mapMod(f_*) ⋙ Res_{η_f}` amounts to right deriving `mapMod(f_*)` and
 restricting scalars levelwise. -/
 noncomputable def rightDerivedLowerStarIso :
     R((f)_*⟦Λ⟧) ≅
-      R((f)_*[Ab.{u + 1}].moduleObject_mapMod (R := condensedRingObj Λ X)) ⋙
+      R((f)_*[Ab.{u + 1}].mapMod (condensedRingObj Λ X)) ⋙
         D(Mod.comap (condensedPushforwardHom Λ f)) :=
   Functor.rightDerivedFunctorCompMapDerivedCategoryIso
-    ((f)_*[Ab.{u + 1}].moduleObject_mapMod (R := condensedRingObj Λ X))
+    ((f)_*[Ab.{u + 1}].mapMod (condensedRingObj Λ X))
     (Mod.comap (condensedPushforwardHom Λ f))
 
 end DerivedLowerStar
@@ -169,20 +169,20 @@ end DerivedLowerStar
 section DerivedUpperStar
 
 instance preservesHomology_mapMod_upperStar :
-    ((f)^*[Ab.{u + 1}].moduleObject_mapMod (R := condensedRingObj Λ Y)).PreservesHomology := {}
+    ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).PreservesHomology := {}
 
-/-- The pullback `moduleObject_mapMod(f^*) : Mod_{Λ_Y} ⥤ Mod_{f^* Λ_Y}` sends K-flat complexes to
+/-- The pullback `mapMod(f^*) : Mod_{Λ_Y} ⥤ Mod_{f^* Λ_Y}` sends K-flat complexes to
 K-flat complexes. See the module docstring for the argument. -/
 instance preservesKFlatComplexes_mapMod_upperStar :
-    ((f)^*[Ab.{u + 1}].moduleObject_mapMod (R := condensedRingObj Λ Y)).PreservesKFlatComplexes := sorry
+    ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).PreservesKFlatComplexes := sorry
 
-/-- The pullback `(f)^*⟦Λ⟧ = moduleObject_mapMod(f^*) ⋙ Ext_{α_f}` on module objects over `Λ` preserves
-quasi-isomorphisms between K-flat complexes: `moduleObject_mapMod(f^*)` is exact and preserves K-flat
+/-- The pullback `(f)^*⟦Λ⟧ = mapMod(f^*) ⋙ Ext_{α_f}` on module objects over `Λ` preserves
+quasi-isomorphisms between K-flat complexes: `mapMod(f^*)` is exact and preserves K-flat
 complexes, and the extension of scalars preserves quasi-isomorphisms between K-flat
 complexes. This is the functor-specific input of the K-flat left derivability structure. -/
 instance preservesKFlatQuasiIso_upperStar : (f)^*⟦Λ⟧.PreservesKFlatQuasiIso :=
   Functor.preservesKFlatQuasiIso_comp
-    ((f)^*[Ab.{u + 1}].moduleObject_mapMod (R := condensedRingObj Λ Y))
+    ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y))
     (Mod.extendScalars (condensedPullbackHom Λ f))
 
 /-- The total left derived functor `Lf^* : D(Mod_{Λ_Y}) ⥤ D(Mod_{Λ_X})` of the pullback
@@ -198,16 +198,16 @@ noncomputable example :
   L((f)^*⟦Λ⟧)
 
 /-- The derived pullback on module objects is the levelwise pullback
-`D(moduleObject_mapMod(f^*)) : D(Mod_{Λ_Y}) ⥤ D(Mod_{f^* Λ_Y})` followed by the derived extension of
-scalars `Λ_X ⊗ᴸ_{f^* Λ_Y} -` along `α_f`: `moduleObject_mapMod(f^*)` is exact and preserves K-flat
-complexes, so left deriving the composite `(f)^*⟦Λ⟧ = moduleObject_mapMod(f^*) ⋙ Ext_{α_f}` amounts to
-applying `moduleObject_mapMod(f^*)` levelwise and left deriving the extension of scalars. -/
+`D(mapMod(f^*)) : D(Mod_{Λ_Y}) ⥤ D(Mod_{f^* Λ_Y})` followed by the derived extension of
+scalars `Λ_X ⊗ᴸ_{f^* Λ_Y} -` along `α_f`: `mapMod(f^*)` is exact and preserves K-flat
+complexes, so left deriving the composite `(f)^*⟦Λ⟧ = mapMod(f^*) ⋙ Ext_{α_f}` amounts to
+applying `mapMod(f^*)` levelwise and left deriving the extension of scalars. -/
 noncomputable def leftDerivedUpperStarIso :
     L((f)^*⟦Λ⟧) ≅
-      D((f)^*[Ab.{u + 1}].moduleObject_mapMod (R := condensedRingObj Λ Y)) ⋙
+      D((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)) ⋙
         L(Mod.extendScalars (condensedPullbackHom Λ f)) :=
   Functor.leftDerivedFunctorCompMapDerivedCategoryIso
-    ((f)^*[Ab.{u + 1}].moduleObject_mapMod (R := condensedRingObj Λ Y))
+    ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y))
     (Mod.extendScalars (condensedPullbackHom Λ f))
 
 /-- The derived pullback on module objects is the levelwise functor: since `f^*` on module

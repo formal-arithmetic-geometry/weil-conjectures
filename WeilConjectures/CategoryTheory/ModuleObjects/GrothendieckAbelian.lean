@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
 public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 
 /-!
@@ -23,19 +24,17 @@ symmetric monoidal for the relative tensor product `⊗_R`
 inherits the remaining properties of `C` needed by the K-flat machinery:
 
 * `Mod.monoidalClosed`: `Mod C R` is closed monoidal;
-* `Mod.isGrothendieckAbelian`: `Mod C R` is Grothendieck abelian;
+* `Mod C R` is Grothendieck abelian, as an instance deduced from `Mod.isGrothendieckAbelian`;
 * `Mod.hasFunctorialFlatResolution`: `Mod C R` admits functorial flat resolutions if `C` does.
 
 ## Sorried input
 
-All three instances are currently `sorry`ed. The intended arguments are:
+The instances `Mod.monoidalClosed` and `Mod.hasFunctorialFlatResolution` are currently `sorry`ed.
+The intended arguments are:
 
 * The internal hom `Hom_R(M, N)` is the equalizer of the two maps `[M, N] ⇉ [R ⊗ M, N]`, adjoint
   to `R ⊗ M ⊗ [M, N] ⟶ R ⊗ N ⟶ N` and to `R ⊗ M ⊗ [M, N] ⟶ M ⊗ [M, N] ⟶ N`, with the
   `R`-action induced by that of `N`.
-* Colimits and finite limits of module objects are computed in `C` (`R ⊗ -` preserves colimits
-  because `C` is closed), so `Mod C R` satisfies AB5, and `R ⊗ G` is a separator for a separator
-  `G` of `C`, since `Hom_R(R ⊗ G, M) ≅ Hom(G, M)`.
 * If `F` is flat in `C`, then `R ⊗ F` is flat in `Mod C R` because `(R ⊗ F) ⊗_R M ≅ F ⊗ M`; and
   a functorial flat resolution `P(M) ⟶ M` in `C` gives the functorial epimorphism
   `R ⊗ P(M) ⟶ R ⊗ M ⟶ M` of `R`-modules.
@@ -60,9 +59,10 @@ noncomputable instance monoidalClosed : MonoidalClosed (Mod C R) :=
   sorry
 
 /-- The category of module objects over a commutative algebra object in a closed symmetric
-monoidal Grothendieck abelian category is Grothendieck abelian. -/
-instance isGrothendieckAbelian_moduleObject : IsGrothendieckAbelian.{v} (Mod C R) :=
-  sorry
+monoidal Grothendieck abelian category is Grothendieck abelian, see `Mod.isGrothendieckAbelian`:
+tensoring with an object is a left adjoint, so it preserves colimits. -/
+instance : IsGrothendieckAbelian.{v} (Mod C R) :=
+  isGrothendieckAbelian R
 
 /-- If `C` admits functorial flat resolutions, then so does `Mod C R`, by the free modules
 `R ⊗ F` on flat objects `F` of `C`. -/

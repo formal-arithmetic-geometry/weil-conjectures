@@ -98,7 +98,7 @@ noncomputable def padicIntegersRingObjToContinuousMapRingObj :
   (sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
     (Profinite.padicIntegersCondensedRingToPadicSubfieldCondensedRing ℓ E.1)
 
-instance moduleObjectInstance_EllAdicRationalization_1 : IsMonHom (padicIntegersRingObjToContinuousMapRingObj.{u} ℓ E) :=
+instance : IsMonHom (padicIntegersRingObjToContinuousMapRingObj.{u} ℓ E) :=
   inferInstanceAs (IsMonHom
     ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
       (Profinite.padicIntegersCondensedRingToPadicSubfieldCondensedRing.{u} ℓ E.1)))

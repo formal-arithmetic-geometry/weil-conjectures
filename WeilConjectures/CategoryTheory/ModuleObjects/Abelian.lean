@@ -15,21 +15,19 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Preadditive
 
 /-!
 
-# The category of module objects is abelian
+# Kernels, cokernels and biproducts of module objects
 
-Let `C` be an abelian monoidal category whose tensor product is additive in each variable, and
-let `R : C` be an algebra object such that `R ⊗ -` is right exact. Then the category `Mod C R` of
-left `R`-module objects is abelian, and kernels and cokernels are computed on the underlying
-objects of `C`: the forgetful functor `Mod C R ⥤ C` preserves them.
+Let `C` be a preadditive monoidal category whose tensor product is additive in each variable, and
+let `R : C` be an algebra object. This file constructs kernels, cokernels, biproducts and the zero
+object of the category `Mod C R` of left `R`-module objects on the underlying objects of `C`, so
+that the forgetful functor `Mod C R ⥤ C` preserves them. That `Mod C R` is abelian when `C` is
+abelian and `R ⊗ -` is right exact is `CategoryTheory.Mod.instAbelian`.
 
 * Kernels need no exactness: the action of `R` on `M` restricts to the kernel of an `R`-linear
   map `f : M ⟶ N` because `R ◁ kernel.ι f ≫ γ ≫ f = R ◁ (kernel.ι f ≫ f) ≫ γ = 0`.
 * Cokernels use that `R ◁ cokernel.π f` is a cokernel of `R ◁ f`, which is where right
   exactness of `R ⊗ -` enters.
 * Binary biproducts and the zero object are computed in `C` as well.
-
-Consequently the forgetful functor `Mod C R ⥤ C` is exact: it preserves finite limits and finite
-colimits.
 
 -/
 
@@ -51,7 +49,7 @@ variable {M N : Mod C R} (f : M ⟶ N) [HasKernel f.hom]
 /-- The action of `R` on the kernel of an `R`-linear map. -/
 noncomputable def kernelSMul : R ⊗ kernel f.hom ⟶ kernel f.hom :=
   kernel.lift f.hom (R ◁ kernel.ι f.hom ≫ γ[R,M.X]) (by
-    rw [Category.assoc, smul_hom, ← whiskerLeft_comp_assoc, kernel.condition,
+    rw [Category.assoc, act_hom, ← whiskerLeft_comp_assoc, kernel.condition,
       MonoidalPreadditive.whiskerLeft_zero, zero_comp])
 
 @[reassoc (attr := simp)]
@@ -70,7 +68,7 @@ noncomputable def kernelObj : Mod C R :=
         change μ[R] ▷ _ ≫ kernelSMul f = (α_ R R _).hom ≫ R ◁ kernelSMul f ≫ kernelSMul f
         ext
         simp only [Category.assoc, kernelSMul_ι]
-        rw [← whisker_exchange_assoc, mul_smul, associator_naturality_right_assoc,
+        rw [← whisker_exchange_assoc, mul_act, associator_naturality_right_assoc,
           ← whiskerLeft_comp_assoc R (kernelSMul f), kernelSMul_ι, whiskerLeft_comp_assoc] }
   ⟨kernel f.hom⟩
 
@@ -88,19 +86,19 @@ noncomputable def kernelFork : KernelFork f :=
 /-- The kernel fork computed in `C` is a limit. -/
 noncomputable def isLimitKernelFork : IsLimit (kernelFork f) :=
   KernelFork.IsLimit.ofι (kernelι f) (by ext; simp)
-    (fun g hg ↦ Hom.mk' (kernel.lift f.hom g.hom (by rw [← comp_hom', hg, moduleObject_zero_hom])) (by
+    (fun g hg ↦ Hom.mk' (kernel.lift f.hom g.hom (by rw [← comp_hom', hg, zero_hom])) (by
       change γ[R,_] ≫ _ = R ◁ _ ≫ kernelSMul f
       ext
-      rw [Category.assoc, kernel.lift_ι, smul_hom, Category.assoc, kernelSMul_ι,
+      rw [Category.assoc, kernel.lift_ι, act_hom, Category.assoc, kernelSMul_ι,
         ← whiskerLeft_comp_assoc, kernel.lift_ι]))
     (fun g hg ↦ by ext; simp)
     (fun g hg m hm ↦ hom_ext _ _ (by
       rw [← cancel_mono (kernel.ι f.hom)]
       simpa using congrArg Hom.hom hm))
 
-instance moduleObjectInstance_Abelian_1 : HasKernel f := ⟨⟨⟨_, isLimitKernelFork f⟩⟩⟩
+instance : HasKernel f := ⟨⟨⟨_, isLimitKernelFork f⟩⟩⟩
 
-instance moduleObjectInstance_Abelian_2 : PreservesLimit (parallelPair f 0) (forget R : Mod C R ⥤ C) :=
+instance : PreservesLimit (parallelPair f 0) (forget R : Mod C R ⥤ C) :=
   preservesLimit_of_preserves_limit_cone (isLimitKernelFork f)
     ((KernelFork.isLimitMapConeEquiv _ _).symm (kernelIsKernel f.hom))
 
@@ -118,13 +116,13 @@ noncomputable def isColimitWhiskerLeftCokernel :
         Cofork (R ◁ f.hom) 0) :=
   isColimitOfHasCokernelOfPreservesColimit (tensorLeft R) f.hom
 
-instance moduleObjectInstance_Abelian_3 : Epi (R ◁ cokernel.π f.hom) :=
+instance : Epi (R ◁ cokernel.π f.hom) :=
   Cofork.IsColimit.epi (isColimitWhiskerLeftCokernel f)
 
 /-- The action of `R` on the cokernel of an `R`-linear map. -/
 noncomputable def cokernelSMul : R ⊗ cokernel f.hom ⟶ cokernel f.hom :=
   (isColimitWhiskerLeftCokernel f).desc (CokernelCofork.ofπ (γ[R,N.X] ≫ cokernel.π f.hom) (by
-    rw [← smul_hom_assoc, cokernel.condition, comp_zero]))
+    rw [← act_hom_assoc, cokernel.condition, comp_zero]))
 
 @[reassoc (attr := simp)]
 lemma π_cokernelSMul :
@@ -141,7 +139,7 @@ noncomputable def cokernelObj : Mod C R :=
           rw [id_whiskerLeft]
           infer_instance
         rw [← cancel_epi (𝟙_ C ◁ cokernel.π f.hom), whisker_exchange_assoc, π_cokernelSMul,
-          one_smul_assoc, leftUnitor_naturality]
+          one_act_assoc, leftUnitor_naturality]
       mul_smul := by
         change μ[R] ▷ _ ≫ cokernelSMul f = (α_ R R _).hom ≫ R ◁ cokernelSMul f ≫ cokernelSMul f
         have : Epi ((R ⊗ R) ◁ cokernel.π f.hom) := by
@@ -149,7 +147,7 @@ noncomputable def cokernelObj : Mod C R :=
           rw [tensor_whiskerLeft]
           infer_instance
         rw [← cancel_epi ((R ⊗ R) ◁ cokernel.π f.hom), whisker_exchange_assoc, π_cokernelSMul,
-          mul_smul_assoc, tensor_whiskerLeft_assoc, Iso.inv_hom_id_assoc,
+          mul_act_assoc, tensor_whiskerLeft_assoc, Iso.inv_hom_id_assoc,
           ← whiskerLeft_comp_assoc, π_cokernelSMul, whiskerLeft_comp_assoc, π_cokernelSMul] }
   ⟨cokernel f.hom⟩
 
@@ -167,18 +165,18 @@ noncomputable def cokernelCofork : CokernelCofork f :=
 /-- The cokernel cofork computed in `C` is a colimit. -/
 noncomputable def isColimitCokernelCofork : IsColimit (cokernelCofork f) :=
   CokernelCofork.IsColimit.ofπ (cokernelπ f) (by ext; simp)
-    (fun g hg ↦ Hom.mk' (cokernel.desc f.hom g.hom (by rw [← comp_hom', hg, moduleObject_zero_hom])) (by
+    (fun g hg ↦ Hom.mk' (cokernel.desc f.hom g.hom (by rw [← comp_hom', hg, zero_hom])) (by
       change cokernelSMul f ≫ _ = R ◁ _ ≫ γ[R,_]
       rw [← cancel_epi (R ◁ cokernel.π f.hom), π_cokernelSMul_assoc, cokernel.π_desc,
-        ← whiskerLeft_comp_assoc, cokernel.π_desc, smul_hom]))
+        ← whiskerLeft_comp_assoc, cokernel.π_desc, act_hom]))
     (fun g hg ↦ by ext; simp)
     (fun g hg m hm ↦ hom_ext _ _ (by
       rw [← cancel_epi (cokernel.π f.hom)]
       simpa using congrArg Hom.hom hm))
 
-instance moduleObjectInstance_Abelian_4 : HasCokernel f := ⟨⟨⟨_, isColimitCokernelCofork f⟩⟩⟩
+instance : HasCokernel f := ⟨⟨⟨_, isColimitCokernelCofork f⟩⟩⟩
 
-instance moduleObjectInstance_Abelian_5 : PreservesColimit (parallelPair f 0) (forget R : Mod C R ⥤ C) :=
+instance : PreservesColimit (parallelPair f 0) (forget R : Mod C R ⥤ C) :=
   preservesColimit_of_preserves_colimit_cocone (isColimitCokernelCofork f)
     ((CokernelCofork.isColimitMapCoconeEquiv _ _).symm (cokernelIsCokernel f.hom))
 
@@ -256,7 +254,7 @@ noncomputable def binaryBicone : BinaryBicone M N where
 noncomputable def isBilimitBinaryBicone : (binaryBicone M N).IsBilimit :=
   isBinaryBilimitOfTotal _ (by ext; simp [binaryBicone, biprodObj])
 
-instance moduleObjectInstance_Abelian_6 : HasBinaryBiproducts (Mod C R) where
+instance : HasBinaryBiproducts (Mod C R) where
   has_binary_biproduct M N := .mk ⟨_, isBilimitBinaryBicone M N⟩
 
 end Biproducts
@@ -278,45 +276,14 @@ noncomputable def zeroObj : Mod C R :=
 lemma isZero_zeroObj : IsZero (zeroObj : Mod C R) :=
   (IsZero.iff_id_eq_zero _).2 (by ext; exact (isZero_zero C).eq_of_src _ _)
 
-instance moduleObjectInstance_Abelian_7 : HasZeroObject (Mod C R) := ⟨⟨_, isZero_zeroObj⟩⟩
+instance : HasZeroObject (Mod C R) := ⟨⟨_, isZero_zeroObj⟩⟩
 
-instance moduleObjectInstance_Abelian_8 [HasBinaryBiproducts C] : HasFiniteProducts (Mod C R) :=
+instance [HasBinaryBiproducts C] : HasFiniteProducts (Mod C R) :=
   hasFiniteProducts_of_has_binary_and_terminal
 
-instance moduleObjectInstance_Abelian_9 [HasBinaryBiproducts C] : HasFiniteBiproducts (Mod C R) :=
+instance [HasBinaryBiproducts C] : HasFiniteBiproducts (Mod C R) :=
   HasFiniteBiproducts.of_hasFiniteProducts
 
 end ZeroObject
-
-end CategoryTheory.Mod
-
-namespace CategoryTheory.Mod
-
-variable {C : Type u} [Category.{v} C] [MonoidalCategory C] [Abelian C] [MonoidalPreadditive C]
-  {R : C} [MonObj R] [PreservesFiniteColimits (tensorLeft R)]
-
-instance moduleObjectInstance_Abelian_10 : HasKernels (Mod C R) where
-  has_limit _ := inferInstance
-
-instance moduleObjectInstance_Abelian_11 : HasCokernels (Mod C R) where
-  has_colimit _ := inferInstance
-
-instance moduleObjectInstance_Abelian_12 {M N : Mod C R} (f : M ⟶ N) : IsIso (Abelian.coimageImageComparison f) :=
-  have := IsIso.of_isIso_fac_right
-    (Abelian.PreservesCoimage.hom_coimageImageComparison (forget R : Mod C R ⥤ C) f).symm
-  isIso_of_reflects_iso _ (forget R : Mod C R ⥤ C)
-
-/-- If `C` is abelian and `R ⊗ -` is right exact, the category of left `R`-module objects is
-abelian. -/
-noncomputable instance moduleObjectInstance_Abelian_13 : Abelian (Mod C R) :=
-  Abelian.ofCoimageImageComparisonIsIso
-
-/-- The forgetful functor from module objects is left exact: it preserves kernels. -/
-instance moduleObjectInstance_Abelian_14 : PreservesFiniteLimits (forget R : Mod C R ⥤ C) :=
-  Functor.preservesFiniteLimits_of_preservesKernels _
-
-/-- The forgetful functor from module objects is right exact: it preserves cokernels. -/
-instance moduleObjectInstance_Abelian_15 : PreservesFiniteColimits (forget R : Mod C R ⥤ C) :=
-  Functor.preservesFiniteColimits_of_preservesCokernels _
 
 end CategoryTheory.Mod
