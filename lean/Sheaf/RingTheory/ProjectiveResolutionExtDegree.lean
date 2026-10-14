@@ -20,7 +20,7 @@ Source: Stacks Project, Algebra, Lemma 065R, parts (1)--(3).
 theorem projective_resolution_ext_degree
     {R : Type u} [CommRing R] (X : ModuleCat.{max u v} R) (n : ℕ) :
     HasProjectiveResolutionLE X n ↔ HasProjectiveDimensionLE X n := by
-  let _ := HasExt.standard (ModuleCat.{max u v} R)
+  let := HasExt.standard (ModuleCat.{max u v} R)
   constructor
   · rintro ⟨P, hP⟩
     apply HasProjectiveDimensionLT.mk
