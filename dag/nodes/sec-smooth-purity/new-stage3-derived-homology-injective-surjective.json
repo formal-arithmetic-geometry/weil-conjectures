@@ -7,19 +7,24 @@
  },
  "proof": [
   {
-   "text": "Represent K by a cochain complex and use the K-injective model I[0]. For surjectivity, lift a map on cycles modulo boundaries using injectivity; for injectivity, extend a factor through the image of the preceding differential to obtain a null homotopy. Transport across the localization and the canonical homology isomorphisms.",
+   "text": "For a cochain complex P and a morphism g from its degree-zero homology to that of I[0], compose g with HomologicalComplex.singleObjHomologySelfIso to obtain a morphism to I. Extend this along the monomorphism P.homologyι 0 using Injective.factorThru. Precompose the extension with P.pOpcycles 0 and use HomologicalComplex.d_pOpcycles to construct a chain map with HomologicalComplex.mkHomToSingle. Cancel the target homology isomorphism and the epimorphism P.homologyπ 0. Naturality of homologyπ, cyclesMap_i, homology_π_ι, and Injective.comp_factorThru prove that the constructed chain map induces exactly g. This is the fully proved private helper homology_to_single_surjective; it uses only Mathlib.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Choose a complex P and an isomorphism e: Q(P) ≅ K using the essential surjectivity of DerivedCategory.Q. Transport the prescribed derived homology map along e and the natural isomorphism DerivedCategory.homologyFunctorFactors, apply the preceding chain-level construction, and take e.inv followed by Q.map of the resulting chain map. Naturality of homologyFunctorFactors and the two inverse-isomorphism identities give the required equality on homology. No K-injective replacement, representation of arbitrary derived morphisms by chain maps, or additional Sheaf theorem is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "group": "H3",
+  "group": "U1",
   "date": "2026-10-14",
   "document": "dag/nodes/sec-smooth-purity/new-stage3-derived-homology-injective-bijective.json",
   "place": "Proof step 1: injective-target derived homology comparison",
-  "note": "Strict decomposition of the bijectivity assertion into its two logical halves."
+  "note": "Complete Mathlib-only proof: explicit opcycles extension and transport through localization; no new holes."
  },
  "mathlib_searches": [
   {
@@ -93,10 +98,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H3",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261014T010843-L-3164090",
-  "kind": "interface",
+  "landing": "20261014T013046-L-3418121",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
