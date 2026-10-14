@@ -67,6 +67,7 @@ theorem exactFunctorIdentityComparison
       (Ext.mk₀ (e.hom.app X)).comp x (zero_add n) := by
   -- The pinned Ext.Map has no mapExactFunctor_eq_of_iso or mapExactFunctor_id API.
   -- Use its localization comparison directly, without an EnoughInjectives hypothesis.
+  -- Use the standard derived-category localization for this Ext computation.
   let := HasDerivedCategory.standard C
   let Q := DerivedCategory.Q (C := C)
   let η := NatIso.mapHomologicalComplex e (ComplexShape.up ℤ) ≪≫

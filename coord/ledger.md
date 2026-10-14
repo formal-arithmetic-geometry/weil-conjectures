@@ -14660,3 +14660,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:47 L: merged deliver/E4/Sheaf.AlgebraicGeometry.OverlapSingleChartRestriction (stage 3; reviewer PASS; first push; landing 20261014T054720-L-2186387 (proof); batch 20261014T054718; modules 1; new nodes 0)
 - 05:47 L: merged deliver/E4/Sheaf.Paper.CechCupResolutionRepresentatives (stage 3; reviewer PASS; after a return; landing 20261014T054720-L-2186619 (interface); batch 20261014T054718; modules 2; new nodes 1)
 - 05:47 L: merged deliver/F1/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore (stage 3; reviewer PASS; first push; landing 20261014T054721-L-2186873 (proof); batch 20261014T054718; modules 1; new nodes 0)
+- 05:47 L: merged deliver/F2/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (stage 3; reviewer PASS; after a return; landing 20261014T054721-L-2187072 (proof); batch 20261014T054718; modules 1; new nodes 0)
