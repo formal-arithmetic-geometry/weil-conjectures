@@ -81,9 +81,15 @@ abbrev tensorClosed (R : Sheaf J CommRingCat.{u}) :
         whiskerLeft_add := fun {X Y Z} f g ↦ (tensorLeft X).map_add (f := f) (g := g)
         add_whiskerRight := fun {X Y Z} f g ↦ (tensorRight X).map_add (f := f) (g := g) }
   · intro F F' G G' H H' f g h t
-    rw [tensorHom_def, Category.assoc, tensorHomEquiv_whiskerRight_comp,
-      tensorHomEquiv_whiskerLeft_comp, tensorHomEquiv_comp_homObjMap]
-    -- Reassociate the induced internal-Hom maps and cancel identities.
-    simp only [Category.assoc, homObjMap_comp_homObjMap, Category.comp_id]
+    rw [tensorHom_def, Category.assoc]
+    calc
+      tensorHomEquiv F' G' H' (f ▷ G' ≫ F ◁ g ≫ t ≫ h) =
+          tensorHomEquiv F G' H' (F ◁ g ≫ t ≫ h) ≫ homObjMap f (𝟙 H') :=
+        tensorHomEquiv_whiskerRight_comp f _
+      _ = (g ≫ tensorHomEquiv F G H' (t ≫ h)) ≫ homObjMap f (𝟙 H') := by
+        rw [tensorHomEquiv_whiskerLeft_comp]
+      _ = g ≫ tensorHomEquiv F G H t ≫ homObjMap f h := by
+        rw [tensorHomEquiv_comp_homObjMap]
+        simp only [Category.assoc, homObjMap_comp_homObjMap, Category.comp_id]
 
 end SheafOfModules
