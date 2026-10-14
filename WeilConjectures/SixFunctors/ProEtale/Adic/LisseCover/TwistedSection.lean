@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Topology.LocallyConstant.Basic
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.UniversalCover
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.GaloisCategory
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
@@ -26,13 +27,17 @@ defines a sheaf of sets `F_c` on `Y_proét` which is pro-étale locally constant
 `σ : V ×_Y T → S` compatible with `c` on `(V ×_Y T) ×_T (V ×_Y T)`
 (`AlgebraicGeometry.IsTwistedSection`).
 
-The input from the theory of the pro-étale fundamental group is
-`AlgebraicGeometry.exists_isTwistedSection_universalCover`: on a connected regular Noetherian
-scheme, every pro-étale locally constant sheaf of sets becomes constant on the universal
-profinite étale cover `Ỹ_y`, i.e. it has a section over `Ỹ_y` through every point. This is
-Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 7.4.10 (on a geometrically unibranch
-scheme every locally constant sheaf of sets on `Y_proét` is a disjoint union of finite étale
-`Y`-schemes) combined with the splitting of finite étale `Y`-schemes over `Ỹ_y`.
+On a connected regular Noetherian scheme every pro-étale locally constant sheaf of sets becomes
+constant on the universal profinite étale cover `Ỹ_y`, i.e. it has a section over `Ỹ_y` through
+every point (`AlgebraicGeometry.exists_isTwistedSection_universalCover`). The input from the
+theory of the pro-étale fundamental group is Bhatt–Scholze, *The pro-étale topology for
+schemes*, Lemma 7.4.10: on a geometrically unibranch scheme every locally constant sheaf of sets
+on `Y_proét` is a disjoint union of finite étale `Y`-schemes
+(`AlgebraicGeometry.exists_isTwistedSection_finiteEtale`, the only unproved input). It is
+combined with the splitting of finite étale `Y`-schemes over `Ỹ_y` at all geometric points
+(`AlgebraicGeometry.Scheme.UniversalCovers.exists_comp_eq_of_finiteEtale`), deduced from
+`AlgebraicGeometry.Scheme.UniversalCovers.bijective_fiber` in the Galois category of finite
+étale `Ỹ_y`-schemes.
 
 We also record the connectedness principle
 (`AlgebraicGeometry.IsTwistedSection.apply_eq_of_preconnectedSpace`): over a connected `T`, a
@@ -47,6 +52,8 @@ universe u
 open CategoryTheory Limits
 
 namespace AlgebraicGeometry
+
+open Scheme.FiniteEtale
 
 variable {Y V : Scheme.{u}} (f : V ⟶ Y)
 
@@ -186,20 +193,95 @@ theorem exists_isTwistedSection_finiteEtale [IsLocallyNoetherian Y] [CompactSpac
         σ ((pullback.lift v p' h).base (IsLocalRing.closedPoint K)) = s := by
   sorry
 
+/-- The points of the fibre of a finite coproduct of finite étale schemes come from the
+summands. -/
+lemma Scheme.FiniteEtale.exists_fiber_map_sigmaι {X : Scheme.{u}} {Ω : Type u} [Field Ω]
+    [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X) {N : ℕ} (Z : Fin N → X.FiniteEtale)
+    (d : (fiber s).obj (∐ Z)) :
+    ∃ i, ∃ x : (fiber s).obj (Z i), (fiber s).map (Sigma.ι Z i) x = d := by
+  obtain ⟨⟨i⟩, x, hx⟩ := Types.jointly_surjective _
+    (isColimitOfPreserves (fiber s ⋙ FintypeCat.incl) (colimit.isColimit (Discrete.functor Z))) d
+  exact ⟨i, x, hx⟩
+
 /-- **Finite étale schemes split over the universal cover at every geometric point.** For a
 finite étale `p : P ⟶ Y`, every geometric point of `P` over a geometric point `t` of the
 universal cover `Ỹ_y` is the image of `t` under a `Y`-morphism `Ỹ_y ⟶ P`. Indeed the
-`Y`-morphisms `Ỹ_y ⟶ P` are sections of the finite étale `P ×_Y Ỹ_y ⟶ Ỹ_y`, hence open and
-closed immersions, pairwise disjoint over the connected `Ỹ_y`; there are as many of them as
-geometric points of `P` over `y` (`AlgebraicGeometry.Scheme.UniversalCovers.bijective_fiber`),
-so their images cover the fibre over the base point, and the complement of their union is a
-finite étale `Ỹ_y`-scheme with an empty fibre, hence empty. -/
+`Y`-morphisms `a : Ỹ_y ⟶ P` give sections of the finite étale `P ×_Y Ỹ_y ⟶ Ỹ_y`, hence a
+morphism `∐_a Ỹ_y ⟶ P ×_Y Ỹ_y` of finite étale `Ỹ_y`-schemes. It is bijective on the geometric
+fibres at the base point (`AlgebraicGeometry.Scheme.UniversalCovers.bijective_fiber`), hence an
+isomorphism, `Ỹ_y` being connected
+(`AlgebraicGeometry.Scheme.FiniteEtale.isIso_of_isIso_fiber_map`), hence bijective on the geometric
+fibres at `t`. -/
 theorem Scheme.UniversalCovers.exists_comp_eq_of_finiteEtale {Ω : Type u} [Field Ω]
     (U : Scheme.UniversalCovers Y Ω) (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
     {P : Scheme.{u}} (p : P ⟶ Y) [IsFinite p] [Etale p] {K : Type u} [Field K] [IsAlgClosed K]
     (t : Spec (.of K) ⟶ U.cover y) (p' : Spec (.of K) ⟶ P) (h : t ≫ U.proj y = p' ≫ p) :
     ∃ a : U.cover y ⟶ P, a ≫ p = U.proj y ∧ t ≫ a = p' := by
-  sorry
+  have := U.connectedSpace y
+  set π := U.proj y
+  let PF : Y.FiniteEtale := ⟨Scheme.Etale.mk p, inferInstanceAs (IsFinite p)⟩
+  let Q : (U.cover y).FiniteEtale :=
+    ⟨Scheme.Etale.mk (pullback.snd p π), inferInstanceAs (IsFinite (pullback.snd p π))⟩
+  let top : (U.cover y).FiniteEtale :=
+    ⟨Scheme.Etale.mk (𝟙 (U.cover y)), inferInstanceAs (IsFinite (𝟙 (U.cover y)))⟩
+  let A := {g : U.cover y ⟶ P // g ≫ p = π}
+  have hbij := U.bijective_fiber y PF
+  have : Finite A := Finite.of_injective _ hbij.1
+  let e := Finite.equivFin A
+  let N := Nat.card A
+  -- the sections of `Q` given by the `Y`-morphisms `Ỹ_y ⟶ P`
+  let σ (a : A) : top ⟶ Q := ObjectProperty.homMk (MorphismProperty.Over.homMk
+    (pullback.lift a.1 (𝟙 _) (by simp [a.2])) (by simp [Q, top]; rfl) trivial)
+  let φ : ∐ (fun _ : Fin N ↦ top) ⟶ Q := Sigma.desc fun i ↦ σ (e.symm i)
+  have hσleft (a : A) : (σ a).hom.left = pullback.lift a.1 (𝟙 _) (by simp [a.2]) := rfl
+  -- the unique point of the fibre of `top`
+  let star {L : Type u} [Field L] [IsSepClosed L] (s : Spec (.of L) ⟶ U.cover y) :
+      (fiber s).obj top := fiberMk s top s (Category.comp_id s)
+  have hstar {L : Type u} [Field L] [IsSepClosed L] (s : Spec (.of L) ⟶ U.cover y)
+      (x : (fiber s).obj top) : x = star s :=
+    fiber_ext s ((Category.comp_id _).symm.trans (fiber_left_comp s x))
+  have hφσ {L : Type u} [Field L] [IsSepClosed L] (s : Spec (.of L) ⟶ U.cover y) (i : Fin N) :
+      ((fiber s).map φ ((fiber s).map (Sigma.ι _ i) (star s))).left =
+        pullback.lift (s ≫ (e.symm i).1) s (by simp [(e.symm i).2, π]) := by
+    rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, Sigma.ι_desc, fiber_map_left]
+    apply pullback.hom_ext
+    · simp [hσleft, star]
+    · simp only [Category.assoc, pullback.lift_snd, fiberMk_left, star, hσleft]
+      exact Category.comp_id _
+  -- the comparison map is an isomorphism, as it is bijective on the fibre at the base point
+  have hiso : IsIso φ := by
+    have hs : U.pt y ≫ π = y := U.pt_proj y
+    have : IsIso ((fiber (U.pt y)).map φ) := by
+      rw [ConcreteCategory.isIso_iff_bijective]
+      refine ⟨fun d₁ d₂ hd ↦ ?_, fun q ↦ ?_⟩
+      · obtain ⟨i, x, rfl⟩ := exists_fiber_map_sigmaι (U.pt y) _ d₁
+        obtain ⟨j, x', rfl⟩ := exists_fiber_map_sigmaι (U.pt y) _ d₂
+        rw [hstar _ x, hstar _ x'] at hd ⊢
+        have h₁ := congrArg (fun z ↦ z.left ≫ pullback.fst p π) hd
+        simp only [hφσ, pullback.lift_fst] at h₁
+        have hij : e.symm i = e.symm j := hbij.1 (fiber_ext y h₁)
+        rw [e.symm.injective hij]
+      · have hq : q.left ≫ pullback.snd p π = U.pt y := fiber_left_comp (U.pt y) q
+        let x := fiberMk y PF (q.left ≫ pullback.fst p π) (by
+          rw [Category.assoc, show pullback.fst p π ≫ PF.obj.hom = pullback.snd p π ≫ π from
+            pullback.condition, ← Category.assoc, hq]
+          exact hs)
+        obtain ⟨a, ha⟩ := hbij.2 x
+        refine ⟨(fiber (U.pt y)).map (Sigma.ι _ (e a)) (star _), fiber_ext _ ?_⟩
+        rw [hφσ]
+        apply pullback.hom_ext
+        · simpa [x] using congrArg (fun z ↦ z.left) ha
+        · simpa using hq.symm
+    exact isIso_of_isIso_fiber_map (U.pt y) φ
+  -- hence also bijective on the fibre at `t`
+  have hbt : Function.Bijective ((fiber t).map φ) := ConcreteCategory.bijective_of_isIso _
+  obtain ⟨d, hd⟩ := hbt.2 (fiberMk t Q (pullback.lift p' t h.symm) (pullback.lift_snd _ _ _))
+  obtain ⟨i, x, rfl⟩ := exists_fiber_map_sigmaι t _ d
+  rw [hstar _ x] at hd
+  have h₁ := congrArg (fun z ↦ z.left ≫ pullback.fst p π) hd
+  simp only [hφσ, pullback.lift_fst, fiberMk_left] at h₁
+  exact ⟨(e.symm i).1, (e.symm i).2, h₁⟩
+
 
 /-- **Pro-étale locally constant sheaves of sets are constant on the universal cover.** Let `Y`
 be a connected regular Noetherian scheme, `Ỹ_y = U.cover y` its universal profinite étale cover
