@@ -20,9 +20,55 @@
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-faithfully-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "View each S_i as an R-module. Since R to S_i is faithfully flat, it is flat. The underlying R-module S is the filtered colimit of the underlying modules S_i, so the existing filtered-colimit flatness lemma gives that S is flat over R.",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-filtered-colimit-flat-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 090N, proof first sentence citing Lemma 05UT (lemma-colimit-flat), lines 9285-9289"
+   }
+  },
+  {
+   "text": "Fix a maximal ideal m of R. For every i, the new maximal-ideal nonvanishing lemma gives S_i/mS_i nonzero from faithful flatness of R to S_i. Apply the tensor-colimit statement to the R-module R/mR: the colimit of the modules S_i tensor_R R/mR, identified with S_i/mS_i, is S tensor_R R/mR, identified with S/mS. The transition maps are unital algebra maps, so the class of 1 in this colimit cannot be zero: if it became zero at a later stage, the image of 1 there would be zero, contradicting that every S_j/mS_j is nonzero. Hence S/mS is nonzero for every maximal m.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-maximal-ideal-nonzero",
+    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 090N, proof middle sentences citing Lemma 00HP and the identification S/mS = colim S_i/mS_i, lines 9290-9298"
+   }
+  },
+  {
+   "text": "The flat map R to S has S/mS nonzero for every maximal ideal m, so the flat-module faithful-flatness criterion applies and proves that R to S is faithfully flat.",
+   "uses": [
+    "lem-weil-pbc-flat-faithfully-flat-maximal-ideals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 090N, proof final sentence invoking Lemma 00HP/00HQ, lines 9298-9302"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-faithfully-flat-maximal-ideal-nonzero",
+  "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "lem-weil-pbc-flat-faithfully-flat-maximal-ideals"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 090N, lemma-colimit-faithfully-flat, lines 9285-9302"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -82,12 +128,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-contraction",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-directed-colimit-faithfully-flat-algebras",
+  "worker": "stage1",
+  "summary": "Split Tag 090N into flatness of the filtered colimit, nonzero maximal-ideal fibres via tensor-colimit and the stagewise faithful-flat criterion, and the final faithful-flatness criterion. Added the statement-only node lem-weil-pbc-faithfully-flat-maximal-ideal-nonzero for the stagewise nonzero maximal-ideal fibres; existing nodes state filtered-colimit flatness, tensor-colimit compatibility, and the final maximal-ideal criterion. Mathlib searches were rerun and found no theorem for the complete statement.",
+  "blueprint": "Realizes the blueprint ancestor lem-weil-pbc-etale-contraction proof paragraph: “Consequently all the stated colimit maps are faithfully flat.”",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-3be6912af",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-3be6912af (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass. Repair metadata: item created.item incorrectly names lem-weil-pbc-etale-contraction; new node created lacks by/date. Corrected whole-node JSON files are under fixes/dag/nodes/sec-proper-base-change/. Full audit is in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }
