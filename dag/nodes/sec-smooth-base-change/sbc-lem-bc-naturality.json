@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "sbc-lem-bc-naturality",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lem-kun-unbounded-exchange-natural"
+  ]
  },
  "kind": "statement",
  "title": "Naturality of the base-change map",
@@ -18,11 +20,48 @@
  ],
  "proof": [
   {
-   "text": "By [sbc-def-base-change-map] the map\n$\\operatorname{BC}_{f,g}$ is the composite of the unit $\\eta_e$ of the\nadjunction $Le^*\\dashv Re_*$, the two canonical identifications of the\ncomposite functors coming from $ge=fh$, and the counit $\\varepsilon_f$\nof $Lf^*\\dashv Rf_*$. Units and counits of adjunctions are natural\ntransformations, the canonical identifications of composite functors\nare natural in the argument, and a composite of natural transformations\nis natural; hence $\\operatorname{BC}_{f,g}(-)$ is a natural\ntransformation of functors $D(T_{\\Et},\\Lambda)\\to D(X_{\\Et},\\Lambda)$,\nwhich is the commutativity of the displayed square.",
+   "text": "Fix the square and $u:K\\to K'$. Unpack [sbc-def-base-change-map] as functors $F_0=Lf^*Rg_*$, $F_1=Lf^*Rg_*Re_*Le^*$, $F_2=Lf^*R(ge)_*Le^*$, $F_3=Lf^*Rf_*Rh_*Le^*$, $F_4=Rh_*Le^*$. Write $a_K=Lf^*Rg_*(\\eta_{e,K})$, $b_K:F_1K\\to F_2K$ and $c_K:F_2K\\to F_3K$ for the two canonical functor identifications, and $d_K=\\varepsilon_{f,F_4K}$. Thus $\\operatorname{BC}_{f,g}(K)=d_K\\circ c_K\\circ b_K\\circ a_K$. Here juxtaposition of functors denotes ordinary functional order, not Lean's diagrammatic order.",
    "uses": [
     "sbc-def-base-change-map"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-bc/sbc-lem-bc-naturality.md",
+    "place": "Proof, 1: expanded defining naturality and composition equations"
+   }
+  },
+  {
+   "text": "The unit in [sbc-def-base-change-map] is a morphism of functors: its defining naturality equation is $Re_*Le^*(u)\\circ\\eta_{e,K}=\\eta_{e,K'}\\circ u$. Apply the functor $Lf^*Rg_*$ and its composition law to obtain $F_1(u)\\circ a_K=a_{K'}\\circ F_0(u)$. This is just the unit's naturality axiom (Stacks 0037, categories-definition-adjoint, following paragraph); no geometric base-change theorem is used.",
+   "uses": [
+    "sbc-def-base-change-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-bc/sbc-lem-bc-naturality.md",
+    "place": "Proof, 2: expanded defining naturality and composition equations"
+   }
+  },
+  {
+   "text": "The canonical identifications in [sbc-def-base-change-map] are isomorphisms of the indicated composite functors, so their defining naturality equations at $u$ give $F_2(u)\\circ b_K=b_{K'}\\circ F_1(u)$ and $F_3(u)\\circ c_K=c_{K'}\\circ F_2(u)$. The counit's naturality axiom, evaluated at $F_4(u)$, gives $F_4(u)\\circ d_K=d_{K'}\\circ F_3(u)$. These are instances of the definition of a morphism of functors (Stacks 001I, categories-definition-transformation-functors) and of the counit of the given adjunction (Stacks 0037, categories-definition-adjoint).",
+   "uses": [
+    "sbc-def-base-change-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-bc/sbc-lem-bc-naturality.md",
+    "place": "Proof, 3: expanded defining naturality and composition equations"
+   }
+  },
+  {
+   "text": "Substitute the three equations of the preceding step and then the unit equation, using associativity:\n$$F_4(u)\\circ d_K\\circ c_K\\circ b_K\\circ a_K\n=d_{K'}\\circ F_3(u)\\circ c_K\\circ b_K\\circ a_K\n=d_{K'}\\circ c_{K'}\\circ F_2(u)\\circ b_K\\circ a_K\n=d_{K'}\\circ c_{K'}\\circ b_{K'}\\circ F_1(u)\\circ a_K\n=d_{K'}\\circ c_{K'}\\circ b_{K'}\\circ a_{K'}\\circ F_0(u).$$\nBy the composite defining [sbc-def-base-change-map], this reads $Rh_*Le^*(u)\\circ\\operatorname{BC}_{f,g}(K)=\\operatorname{BC}_{f,g}(K')\\circ Lf^*Rg_*(u)$, precisely the displayed commutative square.",
+   "uses": [
+    "sbc-def-base-change-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-bc/sbc-lem-bc-naturality.md",
+    "place": "Proof, 4: expanded defining naturality and composition equations"
+   }
   }
  ],
  "proof_deps": [
@@ -31,11 +70,61 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-bc/sbc-lem-bc-naturality.md",
-  "place": "## Proof"
+  "place": "Proof; elementary expansion checked against categories.tex, Tags 001I and 0037"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "naturality|comp_app",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match for the specific unbounded etale base-change map; general categorical naturality and whiskering are definitional ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived base change morphism for a Cartesian square of schemes is natural in an unbounded complex of etale sheaves",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.Scheme.Hom.naturality, KaehlerDifferential.isBaseChange_of_formallyEtale",
+   "date": "2026-10-14",
+   "verdict": "no match for the specific unbounded etale base-change map; general categorical naturality and whiskering are definitional ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-14",
+   "verdict": "no match for the specific unbounded etale base-change map; general categorical naturality and whiskering are definitional ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of a composite of units counits and natural isomorphisms of functors",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A composite of whiskered natural transformations has commuting naturality squares",
+   "results": "8 hits: CategoryTheory.Functor.whiskerLeft_comp_whiskerRight, CategoryTheory.Functor.NatTrans.hcomp_eq_whiskerLeft_comp_whiskerRight, CategoryTheory.Functor.whiskerRight_comp, CategoryTheory.Functor.whiskerLeft_comp_whiskerRight_assoc, CategoryTheory.Functor.whiskerRight_comp_assoc, CategoryTheory.Functor.whiskerLeft_comp, CategoryTheory.TwoSquare.whiskerVertical_app, CategoryTheory.Functor.whiskerLeft_comp_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match for the specific unbounded etale base-change map; general categorical naturality and whiskering are definitional ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "structure NatTrans|naturality :|def vcomp|comp_app",
+   "results": "25 hits: Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/FiberedCategory/BasedCategory.lean, Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean, Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean, Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean, Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean, Mathlib/CategoryTheory/ShrinkYoneda.lean, Mathlib/CategoryTheory/ShrinkYoneda.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the specific unbounded etale base-change map; general categorical naturality and whiskering are definitional ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "naturality|def vcomp",
+   "results": "5 hits: 16, 19, 50, 56, 57",
+   "date": "2026-10-14",
+   "verdict": "no match for the specific unbounded etale base-change map; general categorical naturality and whiskering are definitional ingredients"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -61,5 +150,20 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-def-bc"
+ "unit": "sk-def-bc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "sbc-lem-bc-naturality",
+  "worker": "stage1",
+  "summary": "Kept the unbounded statement. The tagged project lemma baseChange_naturality covers only DerivedCategory.Plus, so it is not an exact attachment. Expanded the defining composite into four arrows, wrote each constituent naturality equation, and pasted them by an explicit associativity calculation. All steps are elementary from the definition; no new nodes. Searched Mathlib and the whole blueprint.",
+  "blueprint": "Proof, only paragraph: step 1 expands the composite; step 2 realizes unit naturality; step 3 realizes canonical-identification and counit naturality; step 4 realizes composition naturality and the displayed square."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-96ba34e49",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-96ba34e49 (reviewer sub-agent of L); spot-checked: Read the item, report, cited definitions, blueprint route, and source passages in full. All four naturality substitutions type-check and pass identity, zero, empty-scheme, and unbounded-complex checks. No new nodes or repairs. The bounded-below implementation is correctly declined as an unbounded attachment. Detailed checks and existing dependency limitations are recorded in review.md."
+ }
 }
