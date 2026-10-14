@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-field-scalar-restriction-injectives",
+ "kind": "lemma",
+ "title": "Restriction of module sheaves to a field preserves injectives",
+ "statement": "Let $k$ be a field [def-weil-field], $X$ a topological space, $R$ a sheaf of rings, and $\\alpha:k\\to R(X)$ a unital ring homomorphism. On sheaves of $R$-modules [def-weil-sheaf-of-modules-category], form the functor to sheaves of $k$-vector spaces which on an open $U$ restricts the action along $k\\xrightarrow{\\alpha}R(X)\\to R(U)$ and leaves sections and maps unchanged. This functor preserves injective objects [def-sp-injective-resolutions]. In Lean it is the composite of forgetToSheafModuleCat at the terminal open and sheafCompose with ModuleCat.restrictScalars alpha. This asserts only injective preservation, not any cohomology or Ext comparison.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/modules.tex; literature/stacks-project/homology.tex",
+  "place": "Cohomology Tag 02N5, flat direct image preserves injectives; Modules Tag 02N4, exactness of flat pullback; Homology Tag 015Z, right adjoint to a monomorphism-preserving functor preserves injectives. Applied to the identity map from (X,R) to (X,constant k)."
+ },
+ "proof": [
+  {
+   "text": "Write O for R and let k act through α on global sections and hence on every\nopen by restriction. The left adjoint to the displayed functor sends a sheaf V of\nk-vector spaces to the sheafification of U ↦ O(U) ⊗[k] V(U). Its restriction maps\nsend a ⊗ v to a|W ⊗ v|W. The tensor universal property gives the adjunction on\npresheaves, and the sheafification adjunction gives it on sheaves. At a point x,\nthis left adjoint has stalk O_x ⊗[k] V_x: tensor and stalks commute with the\nfiltered colimits of sections. Tensoring over a field is exact, so this left\nadjoint preserves monomorphisms, as tested on stalks. Given a monomorphism of\nk-sheaves and a map to the restricted injective module sheaf, transpose the map,\nextend it across the resulting module-sheaf monomorphism by injectivity, and\ntranspose back. This proves injectivity of its restriction. The empty space and\nzero ring sheaf cause no exception; there are no points to test in the former\ncase and all module sheaves are zero in the latter. No Ext assertion is used.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/modules.tex; literature/stacks-project/homology.tex",
+    "place": "Cohomology Tag 02N5, flat direct image preserves injectives; Modules Tag 02N4, exactness of flat pullback; Homology Tag 015Z, right adjoint to a monomorphism-preserving functor preserves injectives. Applied to the identity map from (X,R) to (X,constant k)."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T4",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/modules.tex; literature/stacks-project/homology.tex",
+  "place": "Cohomology Tag 02N5, flat direct image preserves injectives; Modules Tag 02N4, exactness of flat pullback; Homology Tag 015Z, right adjoint to a monomorphism-preserving functor preserves injectives. Applied to the identity map from (X,R) to (X,constant k)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of module sheaves to a field preserves injective objects",
+   "results": "Service unavailable: Internal Server Error; other searches and source inspection used.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "SheafOfModules restriction to field preserves injective objects exact left adjoint",
+   "results": "Eight hits: module sheafification and sheaf abelian instances, local injectivity, and GabrielPopescu.preservesInjectiveObjects. None states preservation for this scalar-restriction functor.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "fieldScalarRestriction|forgetToSheafModuleCat.*injective; preservesInjective|injective.*restrict in both library roots and Mathlib",
+   "results": "No scalar-restriction result. Mathlib Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms supplies the final adjunction argument but requires an exact tensor left adjoint to be constructed. FlatModulePullbackExact is for morphisms of schemes, not the constant-field ringed space on an arbitrary topological space. Blueprint search found no matching node.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "The field-linear cohomology comparison used for the Kunneth cup product in the theorem-of-cube argument: its restricted-scalar injective resolution.",
+   "via": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FieldScalarRestrictionInjectives",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldScalarRestrictionInjectives.lean",
+  "declaration": "SheafOfModules.fieldScalarRestriction_preservesInjectives",
+  "statement": "theorem fieldScalarRestriction_preservesInjectives\n    {k : Type u} [Field k] (X : TopCat.{u})\n    (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})\n    (α : k →+* R.obj.obj (op ⊤)) :\n    Functor.PreservesInjectiveObjects\n      (forgetToSheafModuleCat.{u} R (op ⊤) isTerminalTop.op ⋙\n        sheafCompose (Opens.grothendieckTopology X) (ModuleCat.restrictScalars α))",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-767dc",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T020517-L-3813991",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-767dc",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T020517-L-3813991",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with node statements, proof dependencies, change record and report; existing signatures and definitions are unchanged. Both modules and all 47 direct importers compile cleanly; axiom checks confirm the single reported lower obligation."
+ }
+}

@@ -21,6 +21,8 @@ public import Mathlib.Topology.Sheaves.Functors
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Sites.Adjunction
 import Sheaf.AlgebraicGeometry.ModuleResolutionHomologyExt
+import Sheaf.AlgebraicGeometry.FieldScalarRestrictionInjectives
+import Mathlib.Algebra.FiveLemma
 import Mathlib.Algebra.Homology.ConcreteCategory
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.RingTheory.Flat.CategoryTheory
@@ -51,6 +53,9 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 variable {k : Type u} [Field k] {X : Scheme.{u}}
 variable (f : X ⟶ Spec (CommRingCat.of k))
+local instance : Abelian (SheafOfModules.{u} X.ringCatSheaf) := inferInstance
+local instance : Abelian
+    (Sheaf (Opens.grothendieckTopology X) (ModuleCat.{u} k)) := inferInstance
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 private theorem ext_transport_smul
@@ -66,6 +71,72 @@ private theorem ext_transport_smul
   rw [Abelian.Ext.mapExactFunctor_comp, Abelian.Ext.mapExactFunctor_mk₀,
     ← Abelian.Ext.comp_assoc_of_second_deg_zero, Abelian.Ext.mk₀_comp_mk₀,
     h, Abelian.Ext.mk₀_smul, Abelian.Ext.smul_comp]
+
+-- An ordinary corepresenting bijection extends to Ext by injective dimension shifting.
+private theorem extComparison_bijective
+    {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{w} C] [EnoughInjectives C]
+    {D : Type u'} [Category.{v'} D] [Abelian D] [HasExt.{w'} D]
+    (R : C ⥤ D) [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]
+    (hR : ∀ (I : C), Injective I → Injective (R.obj I))
+    (A : C) (B : D) (g : B ⟶ R.obj A)
+    (h₀ : ∀ F : C, Function.Bijective (fun f : A ⟶ F ↦ g ≫ R.map f))
+    (F : C) (n : ℕ) :
+    Function.Bijective (((CategoryTheory.Abelian.Ext.mk₀ g).precomp (R.obj F) (zero_add n)).comp
+      (R.mapExtAddHom A F n)) := open CategoryTheory.Abelian in by
+  let c (F : C) (n : ℕ) :=
+    ((Ext.mk₀ g).precomp (R.obj F) (zero_add n)).comp (R.mapExtAddHom A F n)
+  change Function.Bijective (c F n)
+  induction n generalizing F with
+  | zero =>
+    refine ⟨fun x y hxy ↦ ?_, fun z ↦ ?_⟩
+    · obtain ⟨x, rfl⟩ := (Ext.mk₀_bijective _ _).2 x
+      obtain ⟨y, rfl⟩ := (Ext.mk₀_bijective _ _).2 y
+      change (Ext.mk₀ g).comp ((Ext.mk₀ x).mapExactFunctor R) rfl =
+        (Ext.mk₀ g).comp ((Ext.mk₀ y).mapExactFunctor R) rfl at hxy
+      rw [Ext.mapExactFunctor_mk₀, Ext.mapExactFunctor_mk₀,
+        Ext.mk₀_comp_mk₀, Ext.mk₀_comp_mk₀] at hxy
+      exact congrArg Ext.mk₀ ((h₀ F).1 ((Ext.mk₀_bijective _ _).1 hxy))
+    · obtain ⟨z, rfl⟩ := (Ext.mk₀_bijective _ _).2 z
+      obtain ⟨f, hf⟩ := (h₀ F).2 z
+      refine ⟨Ext.mk₀ f, ?_⟩
+      change (Ext.mk₀ g).comp ((Ext.mk₀ f).mapExactFunctor R) rfl = _
+      rw [Ext.mapExactFunctor_mk₀, Ext.mk₀_comp_mk₀]
+      exact congrArg Ext.mk₀ hf
+  | succ n hn =>
+    let I : InjectivePresentation F := Classical.arbitrary _
+    have : Injective I.J := I.injective
+    have : Injective (R.obj I.J) := hR I.J I.injective
+    let S := ShortComplex.mk I.f (cokernel.π I.f) (cokernel.condition I.f)
+    have hS : S.ShortExact := { exact := ShortComplex.exact_cokernel I.f }
+    have hSR : (S.map R).ShortExact := hS.map_of_exact R
+    refine AddMonoidHom.bijective_of_surjective_of_bijective_of_right_exact
+      ((Ext.mk₀ S.g).postcomp A (add_zero n)) (hS.extClass.postcomp A rfl)
+      ((Ext.mk₀ (R.map S.g)).postcomp B (add_zero n)) (hSR.extClass.postcomp B rfl)
+      (c S.X₂ n) (c S.X₃ n) (c S.X₁ (n + 1)) ?_ ?_
+      ((ShortComplex.ab_exact_iff_function_exact _).mp
+        (Ext.covariant_sequence_exact₃' A hS n (n + 1) rfl))
+      ((ShortComplex.ab_exact_iff_function_exact _).mp
+        (Ext.covariant_sequence_exact₃' B hSR n (n + 1) rfl))
+      (hn _).2 (hn _) ?_ ?_
+    · ext x
+      change ((Ext.mk₀ g).comp (x.mapExactFunctor R) (zero_add n)).comp
+        (Ext.mk₀ (R.map S.g)) (add_zero n) =
+        (Ext.mk₀ g).comp ((x.comp (Ext.mk₀ S.g) (add_zero n)).mapExactFunctor R)
+          (zero_add n)
+      rw [Ext.mapExactFunctor_comp, Ext.mapExactFunctor_mk₀]
+      exact Ext.comp_assoc _ _ _ (zero_add n) (add_zero n) (zero_add n)
+    · ext x
+      change ((Ext.mk₀ g).comp (x.mapExactFunctor R) (zero_add n)).comp hSR.extClass rfl =
+        (Ext.mk₀ g).comp ((x.comp hS.extClass rfl).mapExactFunctor R) (zero_add (n + 1))
+      rw [Ext.mapExactFunctor_comp, Ext.mapExactFunctor_extClass]
+      exact Ext.comp_assoc _ _ _ (zero_add n) rfl (zero_add (n + 1))
+    · intro x
+      exact Ext.covariant_sequence_exact₁ A hS x
+        (Ext.eq_zero_of_injective (I := I.J) _) rfl
+    · intro x
+      exact Ext.covariant_sequence_exact₁ B hSR x
+        (Ext.eq_zero_of_injective (I := R.obj I.J) _) rfl
+
 
 /-- scalar Map.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
@@ -618,21 +689,92 @@ theorem scalarCohomologyExtMap_smul (F : SheafOfModules.{u} X.ringCatSheaf) (n :
         (scalarUnitEndomorphism f r) r (scalarUnitEndomorphism_comp f r) n
         (moduleExtEquiv F n a)
 
-/-- Injectivity of the scalar Ext comparison.
-The comparison is injective because restriction of scalars along the field structure map
-is conservative on the derived global-sections Ext classes (Stacks Project, Tag 01F7).
-(blueprint: lem-sc-field-linear-ext-map-injective) -/
-theorem scalarCohomologyExtMap_injective (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) :
-    Function.Injective (scalarCohomologyExtMap f F n) := by
-  sorry
+section
 
-/-- Surjectivity of the scalar Ext comparison.
-Every Ext class of k-sheaves is represented by the restricted injective-resolution comparison,
-using exactness of tensoring vector spaces over a field (Stacks Project, Tag 01F7).
-(blueprint: lem-sc-field-linear-ext-map-surjective) -/
-theorem scalarCohomologyExtMap_surjective (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) :
-    Function.Surjective (scalarCohomologyExtMap f F n) := by
-  sorry
+attribute [local semireducible] scalarSheaf
+
+private noncomputable def fieldUnitSectionsEquiv (Y : Scheme.{u})
+    (M : SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :
+    (SheafOfModules.unit (moduleRings Y.toRingedSpace) ⟶ M) ≃+
+      (RingedSpace.globalSectionsFunctor Y.toRingedSpace).obj M where
+  toFun f := (M.unitHomEquiv f).val (Opposite.op ⊤)
+  invFun a := M.unitHomEquiv.symm (M.val.sectionsMk
+    (fun U ↦ M.val.map (homOfLE (show U.unop ≤ ⊤ from le_top)).op a)
+    (by
+      intro U V f
+      rw [← PresheafOfModules.map_comp_apply]
+      rfl))
+  left_inv f := by
+    apply M.unitHomEquiv.injective
+    apply Subtype.ext
+    funext U
+    simp only [Equiv.apply_symm_apply]
+    exact (M.unitHomEquiv f).property _
+  right_inv a := by
+    change (M.unitHomEquiv (M.unitHomEquiv.symm _)).val (Opposite.op ⊤) = a
+    rw [Equiv.apply_symm_apply]
+    change M.val.map (𝟙 _) a = a
+    simp
+  map_add' f g := by
+    change (f.val.app (Opposite.op ⊤) + g.val.app (Opposite.op ⊤))
+      (1 : (moduleRings Y.toRingedSpace).obj.obj (Opposite.op ⊤)) = _
+    rfl
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarUnitHom_bijective (G : SheafOfModules.{u} X.ringCatSheaf) :
+    Function.Bijective (fun φ : SheafOfModules.unit X.ringCatSheaf ⟶ G ↦
+      scalarUnitMorphism f ≫ (scalarFunctor f).map φ) := by
+  let adj := constantSheafAdj (Opens.grothendieckTopology X) (ModuleCat.{u} k)
+    isTerminalTop
+  let e := (adj.homEquiv (ModuleCat.of k k) (scalarSheaf f G)).symm.trans
+    (constantScalarUnitIso (X := X) (k := k)).homFromEquiv
+  have hev : Function.Bijective
+      (fun q : ModuleCat.of k k ⟶ (scalarSheaf f G).obj.obj (op ⊤) ↦ q 1) := by
+    constructor
+    · intro q q' h
+      apply ModuleCat.hom_ext
+      apply LinearMap.ext
+      intro r
+      have hq := q.hom.map_smul r (1 : k)
+      have hq' := q'.hom.map_smul r (1 : k)
+      change q.hom 1 = q'.hom 1 at h
+      rw [h] at hq
+      simpa only [smul_eq_mul, mul_one] using hq.trans hq'.symm
+    · intro x
+      exact ⟨ModuleCat.ofHom (Y := (scalarSheaf f G).obj.obj (op ⊤))
+        (LinearMap.toSpanSingleton k
+        ((scalarSheaf f G).obj.obj (op ⊤)) x), one_smul k x⟩
+  let t (φ : SheafOfModules.unit X.ringCatSheaf ⟶ G) :=
+    scalarUnitLinear f ≫ (scalarHom f φ).hom.app (op ⊤)
+  have ht : Function.Bijective t := by
+    apply (hev.of_comp_iff' t).mp
+    have heval : (fun q : ModuleCat.of k k ⟶
+        (scalarSheaf f G).obj.obj (op ⊤) ↦ q 1) ∘ t =
+        (fun φ : SheafOfModules.unit X.ringCatSheaf ⟶ G ↦
+          (φ.val.app (op ⊤) (1 : Γ(X, ⊤)) : (scalarSheaf f G).obj.obj (op ⊤))) := by
+      funext φ
+      unfold t scalarUnitLinear
+      change (φ.val.app (op ⊤)).hom (scalarMap f ⊤ 1) =
+        (φ.val.app (op ⊤)).hom (1 : Γ(X, ⊤))
+      rw [map_one]
+    rw [heval]
+    with_unfolding_all exact (fieldUnitSectionsEquiv X G).bijective
+  have he : (fun φ : SheafOfModules.unit X.ringCatSheaf ⟶ G ↦
+      scalarUnitMorphism f ≫ (scalarFunctor f).map φ) = e ∘ t := by
+    funext φ
+    change scalarUnitMorphism f ≫ scalarHom f φ =
+      constantScalarUnitIso.inv ≫
+        (adj.homEquiv (ModuleCat.of k k) (scalarSheaf f G)).symm (t φ)
+    unfold scalarUnitMorphism
+    change (constantScalarUnitIso.inv ≫
+      (adj.homEquiv (ModuleCat.of k k)
+        (scalarSheaf f (SheafOfModules.unit X.ringCatSheaf))).symm
+          (scalarUnitLinear f)) ≫ scalarHom f φ = _
+    erw [Category.assoc, ← adj.homEquiv_naturality_right_symm]
+    rfl
+  rw [he]
+  exact e.bijective.comp ht
 
 /-- scalar Cohomology Ext Map bijective.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
@@ -642,7 +784,51 @@ adjoint tensors with the structure sheaf, which is exact over the field k. Compa
 two derived global-sections functors using evaluation at 1 and the constant-sheaf adjunction. -/
 theorem scalarCohomologyExtMap_bijective (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) :
     Function.Bijective (scalarCohomologyExtMap f F n) := by
-  exact ⟨scalarCohomologyExtMap_injective f F n, scalarCohomologyExtMap_surjective f F n⟩
+  have hI : (scalarFunctor f).PreservesInjectiveObjects := by
+    have hi := SheafOfModules.fieldScalarRestriction_preservesInjectives
+      X.toTopCat X.ringCatSheaf
+      (((Scheme.ΓSpecIso (CommRingCat.of k)).inv ≫ f.appTop).hom)
+    refine ⟨fun {I} hI ↦ ?_⟩
+    let q := (((Scheme.ΓSpecIso (CommRingCat.of k)).inv ≫ f.appTop).hom)
+    let S := SheafOfModules.forgetToSheafModuleCat.{u} X.ringCatSheaf (op ⊤)
+      isTerminalTop.op ⋙ sheafCompose (Opens.grothendieckTopology X)
+        (ModuleCat.restrictScalars q)
+    have e : scalarSheaf f I ≅ S.obj I :=
+      ObjectProperty.isoMk _ (NatIso.ofComponents
+        (fun U ↦ ModuleCat.restrictScalarsComp'App q
+          (X.ringCatSheaf.obj.map (isTerminalTop.op.to U)).hom (scalarMap f U.unop)
+          (by unfold scalarMap; rfl) (I.val.obj U)) (by
+            intro U V i
+            ext x
+            rfl))
+    exact Injective.of_iso e.symm (hi.injective_obj hI)
+  have h₀ : ∀ G : SheafOfModules.{u} X.ringCatSheaf,
+      Function.Bijective (fun φ : SheafOfModules.unit X.ringCatSheaf ⟶ G ↦
+        scalarUnitMorphism f ≫ (scalarFunctor f).map φ) := by
+    exact scalarUnitHom_bijective f
+  have hExt := extComparison_bijective (scalarFunctor f)
+    (fun I h ↦ hI.injective_obj h) _ _ (scalarUnitMorphism f) h₀ F n
+  unfold scalarCohomologyExtMap scalarExtMap
+  change Function.Bijective
+    ((((Abelian.Ext.mk₀ (scalarUnitMorphism f)).precomp _ (zero_add n)).comp
+      ((scalarFunctor f).mapExtAddHom _ F n)).comp (moduleExtEquiv F n).toAddMonoidHom)
+  exact hExt.comp (moduleExtEquiv F n).bijective
+
+/-- Injectivity follows by taking the first component of scalarCohomologyExtMap_bijective.
+Source: Stacks Project, Cohomology, Tag 01F7.
+(blueprint: lem-sc-field-linear-ext-map-injective) -/
+theorem scalarCohomologyExtMap_injective (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) :
+    Function.Injective (scalarCohomologyExtMap f F n) :=
+  (scalarCohomologyExtMap_bijective f F n).1
+
+/-- Surjectivity follows by taking the second component of scalarCohomologyExtMap_bijective.
+Source: Stacks Project, Cohomology, Tag 01F7.
+(blueprint: lem-sc-field-linear-ext-map-surjective) -/
+theorem scalarCohomologyExtMap_surjective (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) :
+    Function.Surjective (scalarCohomologyExtMap f F n) :=
+  (scalarCohomologyExtMap_bijective f F n).2
+
+end
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in

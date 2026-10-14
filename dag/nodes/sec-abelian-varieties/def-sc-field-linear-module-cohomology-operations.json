@@ -46,12 +46,20 @@
     "lem-sc-module-resolution-homology-ext"
    ],
    "elementary": false
+  },
+  {
+   "text": "T4 reduction of the last obligation, scalarCohomologyExtMap_bijective: identify maps from the structure sheaf with global sections by evaluation at 1, with inverse given by restrictions and scalar multiplication. Evaluation at 1 also identifies linear maps from k with vector-space sections. The constant-sheaf adjunction and constantScalarUnitIso show that this Hom bijection is precisely precomposition by scalarUnitMorphism after scalarFunctor. Identify scalarFunctor with terminal-open restriction followed by field restriction using restrictScalarsComp'App. The fieldScalarRestriction_preservesInjectives theorem supplies preservation of injectives. A private generic induction on Ext degree now applies: degree zero is the Hom bijection via mk₀; for the successor, embed the coefficient in an injective, apply both covariant long exact sequences, and use the surjective/bijective right-exact five-lemma. mapExactFunctor_comp, mapExactFunctor_mk₀, mapExactFunctor_extClass and Ext associativity give the commuting squares. Finally compose this bijection with the existing moduleExtEquiv. The only new hole is injective preservation, strictly below the Ext comparison. All existing signatures and definitions are unchanged.",
+   "uses": [
+    "lem-sc-field-scalar-restriction-injectives"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-module-resolution-homology-ext"
+  "lem-sc-module-resolution-homology-ext",
+  "lem-sc-field-scalar-restriction-injectives"
  ],
- "proof_origin": "Z2 explicit-data definition repair, Stacks 01F7 and 0BED; partial repair only. K1 stage-3 second reading: sectionwise functor laws; partial proof. H3 stage-3 partial proof using Mathlib sheaf reflection, adjunction additivity, flat Kan extension, field tensor exactness, reflective monoidal closedness, and the monoidal sheafification comparison. U3 stage-3: resolution-comparison glue using Mathlib injective-resolution and Ext APIs; fixed-resolution sections-to-Ext comparison split off. C3 stage-3: proved restricted-field linearity by an explicit scalar endomorphism, the constant-sheaf adjunction, the recorded cocycle characterization, and a generic Ext composition identity.",
+ "proof_origin": "Z2 explicit-data definition repair, Stacks 01F7 and 0BED; partial repair only. K1 stage-3 second reading: sectionwise functor laws; partial proof. H3 stage-3 partial proof using Mathlib sheaf reflection, adjunction additivity, flat Kan extension, field tensor exactness, reflective monoidal closedness, and the monoidal sheafification comparison. U3 stage-3: resolution-comparison glue using Mathlib injective-resolution and Ext APIs; fixed-resolution sections-to-Ext comparison split off. C3 stage-3: proved restricted-field linearity by an explicit scalar endomorphism, the constant-sheaf adjunction, the recorded cocycle characterization, and a generic Ext composition identity. T4 stage-3: reduced the final Ext-comparison obligation to field scalar restriction preserving injectives, with complete terminal-section Hom comparison and Ext dimension shifting; locally cache abelian instances to keep the full file within the compiler limit.",
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -204,18 +212,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M2",
+  "reviewer": "X-767dc",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261014T004108-L-2836496",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.Modules.scalarCohomologyExtMap_bijective"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.Modules.scalarCohomologyExtMap_injective",
-   "AlgebraicGeometry.Scheme.Modules.scalarCohomologyExtMap_surjective"
-  ]
+  "landing": "20261014T020517-L-3813991",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with node statements, proof dependencies, change record and report; existing signatures and definitions are unchanged. Both modules and all 47 direct importers compile cleanly; axiom checks confirm the single reported lower obligation."
  }
 }
