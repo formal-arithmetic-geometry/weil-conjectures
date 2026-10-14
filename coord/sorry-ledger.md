@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **830**, closure **12**, holes in definitions **4**, definitions with undetermined data **2** (closure **0**).
+Holes now: library **832**, closure **12**, holes in definitions **4**, definitions with undetermined data **2** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -20,13 +20,13 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 618 | 10 |
+| Sheaf | 620 | 10 |
 | WeilConjectures | 212 | 2 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2178 | 85 | 2093 | 6 | 1 |
-| 660345513 (Application of proof-dependency imports) | library | 2120 | 83 | 2037 | 6 | 1 |
+| 889327369 (Queue at the start of stage 3) | library | 2178 | 87 | 2091 | 6 | 1 |
+| 660345513 (Application of proof-dependency imports) | library | 2120 | 85 | 2035 | 6 | 1 |
 | 660345513 (Application of proof-dependency imports) | closure | 1979 | 10 | 1969 | 4 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
@@ -35,9 +35,9 @@ No closure delta is quoted across 660345513: proof-dependency imports changed th
 |---|---:|
 | proved | 3368 |
 | decomposed | 48 |
-| moved | 3901 |
+| moved | 3905 |
 | pruned | 119 |
-| other | 470 |
+| other | 473 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
 
@@ -75,12 +75,12 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | H4 | 55 | 52 | 41 | 11 | 30/55 (54.5%) |
 | J1 | 122 | 129 | 75 | 54 | 53/122 (43.4%) |
 | J2 | 102 | 104 | 70 | 34 | 51/102 (50.0%) |
-| J3 | 116 | 122 | 76 | 46 | 53/116 (45.7%) |
+| J3 | 117 | 123 | 77 | 46 | 54/117 (46.2%) |
 | J4 | 59 | 51 | 39 | 12 | 26/59 (44.1%) |
 | K1 | 115 | 128 | 87 | 41 | 58/115 (50.4%) |
 | K2 | 119 | 117 | 83 | 34 | 64/119 (53.8%) |
 | K3 | 106 | 106 | 75 | 31 | 55/106 (51.9%) |
-| K4 | 59 | 44 | 34 | 10 | 24/59 (40.7%) |
+| K4 | 60 | 44 | 35 | 9 | 24/60 (40.0%) |
 | M1 | 136 | 135 | 92 | 43 | 65/136 (47.8%) |
 | M2 | 127 | 129 | 103 | 26 | 69/127 (54.3%) |
 | M3 | 105 | 106 | 71 | 35 | 51/105 (48.6%) |
@@ -90,7 +90,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | N3 | 86 | 81 | 65 | 16 | 45/86 (52.3%) |
 | N4 | 54 | 52 | 48 | 4 | 29/54 (53.7%) |
 | P1 | 117 | 137 | 92 | 45 | 66/117 (56.4%) |
-| P2 | 129 | 121 | 79 | 42 | 54/129 (41.9%) |
+| P2 | 131 | 123 | 82 | 41 | 56/131 (42.7%) |
 | P3 | 100 | 93 | 81 | 12 | 52/100 (52.0%) |
 | P4 | 51 | 47 | 39 | 8 | 26/51 (51.0%) |
 | Q1 | 106 | 107 | 74 | 33 | 54/106 (50.9%) |
@@ -119,10 +119,11 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | V4 | 49 | 43 | 36 | 7 | 24/49 (49.0%) |
 | W2 | 113 | 118 | 78 | 40 | 54/113 (47.8%) |
 | W3 | 83 | 83 | 58 | 25 | 40/83 (48.2%) |
-| W4 | 47 | 43 | 36 | 7 | 27/47 (57.4%) |
+| W4 | 48 | 43 | 36 | 7 | 27/48 (56.2%) |
 | X2 | 119 | 116 | 94 | 22 | 63/119 (52.9%) |
 | X3 | 100 | 95 | 62 | 33 | 43/100 (43.0%) |
 | XR33076d633fce5c89 | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
+| XR701758115908ba19 | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | XR70f81a388df1a824 | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | XR916f3f6fae119923 | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | XR9e6d7250028f1981 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
@@ -137,6 +138,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | Y2 | 108 | 110 | 98 | 12 | 59/108 (54.6%) |
 | Y3 | 103 | 90 | 56 | 34 | 45/103 (43.7%) |
 | Z2 | 3 | 4 | 0 | 4 | 1/3 (33.3%) |
+| launcher prover | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
 
 Nearest targets (claims from the scanned git tree; live leases may differ):
 
@@ -144,12 +146,12 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 |---|---:|---:|---|
 | WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty | 0 | 1 | ORCHESTRA |
 | WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine | 0 | 1 | ORCHESTRA |
-| Sheaf.AlgebraicGeometry.CartesianHigherImageAffineSectionVanishing | 13 | 1 | J3 |
-| Sheaf.AlgebraicGeometry.CartesianHigherImageChartComparison | 15 | 1 | V1 |
-| Sheaf.AlgebraicGeometry.PicardResidueHomologySourceResidueComparison | 22 | 1 | XR701758115908ba19 |
+| Sheaf.AlgebraicGeometry.CartesianHigherImageAffineSectionLocalVanishing | 14 | 1 | F3 |
+| Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality | 16 | 1 | F3 |
+| Sheaf.AlgebraicGeometry.PicardResidueHomologySourceResidueComparison | 22 | 1 | M2 |
 | Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation | 24 | 1 | H3 |
-| Sheaf.AlgebraicGeometry.ScalarCupResolutionClassCompatibility | 31 | 1 | W4 |
-| Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison | 34 | 1 | B3 |
+| Sheaf.AlgebraicGeometry.ScalarCupResolutionClassCompatibility | 29 | 1 | K1 |
+| Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison | 34 | 1 | G4 |
 | Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData | 34 | 1 | A4 |
 | Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchangePreNormalization | 35 | 1 | U4 |
 | Sheaf.AlgebraicGeometry.RelativeMVDirectImageRowsCore | 41 | 1 | A4 |
