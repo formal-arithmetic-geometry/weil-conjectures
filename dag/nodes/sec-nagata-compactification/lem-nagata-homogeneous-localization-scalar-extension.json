@@ -22,9 +22,60 @@
  "stmt_deps": [
   "def-nagata-homogeneous-localization-degree-zero"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $H=A_{(f),0}$ and $K=C_{(f_S),0}$. The fraction relation in [def-nagata-homogeneous-localization-degree-zero] says $a/f^m=b/f^n$ iff $f^k(f^n a-f^m b)=0$ for some $k\\geq0$. Equivalently, for some $L\\geq m,n$ we have $f^{L-m}a=f^{L-n}b$ in $A_{Ld}$: for the forward direction take $L=m+n+k$, and for the reverse direction multiply this equality by $f^{m+n}$ to obtain a localization relation. Thus fractions can be compared at a common later denominator without cancelling $f$. In $C$, the relation $c/f_S^m=c\\prime/f_S^n$ means $f_S^k(f_S^n c-f_S^m c\\prime)=0$ for some $k\\geq0$; taking $L=m+n+k$ gives $f_S^{L-m}c=f_S^{L-n}c\\prime$. Conversely that equality multiplied by $f_S^{m+n}$ gives $f_S^L(f_S^n c-f_S^m c\\prime)=0$.",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01N2 (lemma-base-change-map-proj), omitted standard-open calculation; fraction convention of Tag 01M4 (lemma-standard-open)"
+   }
+  },
+  {
+   "text": "The graded piece identification in the statement needs no flatness: the degree-$j$ inclusion $i_j:A_j\\to A$ and projection $p_j:A\\to A_j$ are $R$-linear and satisfy $p_j i_j=1$. The maps on tensors, $s\\otimes a\\mapsto s\\otimes i_j(a)$ and $s\\otimes a\\mapsto s\\otimes p_j(a)$, respect balanced relations and still have composite $1$. Thus $S\\otimes_R A_j$ identifies with its image $C_j$ in $C$, and every element of $C_j$ is a finite sum of tensors with numerator in $A_j$. For each $m$, the $R$-linear map $u_m:A_{md}\\to H$, $a\\mapsto a/f^m$, gives by the balanced tensor-product definition an $S$-linear map $q_m:C_{md}=S\\otimes_R A_{md}\\to S\\otimes_R H$, with $q_m(\\sum_i s_i\\otimes a_i)=\\sum_i s_i\\otimes(a_i/f^m)$. This formula respects tensor relations because $u_m$ is additive and $R$-linear. Moreover $q_{m+1}(f_S c)=q_m(c)$: on a pure tensor this is $s\\otimes(fa/f^{m+1})=s\\otimes(a/f^m)$, and pure tensors generate. Iterating gives $q_L(f_S^{L-m}c)=q_m(c)$. If $c/f_S^m=c'/f_S^n$, step 1 gives equality of their numerators after passing to some $L$; applying $q_L$ proves $q_m(c)=q_n(c')$. Hence $\\mu:K\\to S\\otimes_R H$, $c/f_S^m\\mapsto q_m(c)$, is well defined. Addition is computed by putting both fractions over $f_S^L$ and using additivity of $q_L$, so $\\mu$ is $S$-linear.",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01N2 (lemma-base-change-map-proj), omitted standard-open calculation; fraction convention of Tag 01M4 (lemma-standard-open)"
+   }
+  },
+  {
+   "text": "For $s\\in S$ and $a/f^m\\in H$ set $b(s,a/f^m)=(s\\otimes a)/f_S^m$. Equality of fractions in $H$ passes to equality in $K$ by the common-denominator equality in step 1. Putting two fractions over a common denominator proves additivity in the second variable; additivity in the first variable is the tensor relation, and $b(sr,a/f^m)=b(s,ra/f^m)$ for $r\\in R$. Thus $b$ is balanced and induces the $S$-linear map $\\lambda:S\\otimes_R H\\to K$ with the asserted formula. On pure tensors $\\mu\\lambda(s\\otimes(a/f^m))=s\\otimes(a/f^m)$, so this composite is the identity. For any $c/f_S^m$, write $c=\\sum_i s_i\\otimes a_i$ in $C_{md}$. Then $\\lambda\\mu(c/f_S^m)=\\sum_i(s_i\\otimes a_i)/f_S^m=c/f_S^m$, so the other composite is the identity.",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01N2 (lemma-base-change-map-proj), omitted standard-open calculation; fraction convention of Tag 01M4 (lemma-standard-open)"
+   }
+  },
+  {
+   "text": "For $a\\in A_{md}$ and $a'\\in A_{nd}$, multiplication in the source tensor algebra and in the fraction ring gives $\\lambda((s\\otimes(a/f^m))(t\\otimes(a'/f^n)))=(st\\otimes aa')/f_S^{m+n}=\\lambda(s\\otimes(a/f^m))\\lambda(t\\otimes(a'/f^n))$. Distributing over finite sums proves multiplicativity on all elements. The unit $1\\otimes(1/1)$ maps to $1/1$, and $s\\otimes(1/1)$ maps to the coefficient $s$ in $K$. Thus $\\lambda$ is an $S$-algebra homomorphism; step 3 makes it bijective, hence an $S$-algebra isomorphism. Every use of equality was by a power-annihilated relation rather than cancellation, so zero-divisors and arbitrary $R\\to S$ are allowed.",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01N2 (lemma-base-change-map-proj), omitted standard-open calculation; fraction convention of Tag 01M4 (lemma-standard-open)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-homogeneous-localization-degree-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01N2 (lemma-base-change-map-proj): expansion of the standard-open calculation omitted in its one-sentence proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,10 +132,52 @@
    "results": "324; 514",
    "date": "2026-10-14",
    "verdict": "no match: graded tensor multiplication and scalar-tower instances do not state the degree-zero fraction-ring scalar-extension isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degree zero homogeneous localization is filtered colimit of graded components under multiplication by homogeneous element",
+   "results": "HomogeneousLocalization; HomogeneousLocalization.Away.mk; HomogeneousLocalization.mk; HomogeneousLocalization.Away; HomogeneousLocalization.deg; HomogeneousLocalization.Away.mk_surjective; HomogeneousLocalization.Away.isLocalizationElem; HomogeneousLocalization.Away.isLocalization_mul",
+   "date": "2026-10-14",
+   "verdict": "no match: homogeneous fraction operations or tensor grading, not the degree-zero scalar-extension isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization tensor filtered colimit",
+   "results": "0 hits; loogle: Unknown identifier `tensor`",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the degree-zero homogeneous localization scalar-extension isomorphism; malformed Loogle pattern is inconclusive"
+  },
+  {
+   "tool": "grep",
+   "query": "filteredColimit|filtered colimit",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match: homogeneous fraction operations or tensor grading, not the degree-zero scalar-extension isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "tensor product commutes with degree zero homogeneous localization",
+   "results": "0 hits; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change of degree zero homogeneous fractions of a graded algebra",
+   "results": "HomogeneousLocalization.awayMap_mk; HomogeneousLocalization.awayMap_fromZeroRingHom; HomogeneousLocalization.map_mk; HomogeneousLocalization.awayMapₐ; HomogeneousLocalization.awayMapAux_mk; HomogeneousLocalization.algebraMap_eq; HomogeneousLocalization.Away.isLocalization_mul; HomogeneousLocalization.Away.mk",
+   "date": "2026-10-14",
+   "verdict": "no match: homogeneous fraction operations or tensor grading, not the degree-zero scalar-extension isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor|baseChange",
+   "results": "Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean; Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean; Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean; Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean; Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: homogeneous fraction operations or tensor grading, not the degree-zero scalar-extension isomorphism"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-nagata-affine-proj-scalar-extension",
   "by": "worker",
@@ -100,5 +193,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-nagata-homogeneous-localization-scalar-extension",
+  "worker": "stage1",
+  "summary": "Expanded the omitted algebraic calculation using common-denominator equality and the defining balanced tensor relations. Constructed both maps and verified inverse, multiplicative, unit and scalar properties without any flatness or cancellation assumption. No new nodes or statement change. Second reading made the C fraction relation and split graded-piece tensor identification explicit.",
+  "blueprint": "First paragraph of lemma-nagata-relative-proj-exists: affine Proj restriction identification, specifically its degree-zero chart-ring scalar extension, through the two recorded ancestor intermediates."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-9f6e3a3cc",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-9f6e3a3cc (reviewer sub-agent of L); spot-checked: Read the complete item, cited definition, report, unit/chapter route, and Stacks 01N2/01M4 sources. All four fraction/tensor calculations are valid without flatness or cancellation; checked nilpotent denominators, zero rings, zero-divisors, and nonflat base change killing f. No duplicate statement, circular dependency, new node, or required repair found. Detailed checks recorded in review.md."
  }
 }
