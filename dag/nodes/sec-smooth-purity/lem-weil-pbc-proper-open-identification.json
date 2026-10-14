@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-proper-open-identification",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The specified comparison isomorphism",
@@ -19,34 +19,165 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-proper-open-section] the morphism $s$ is an\nopen immersion with $ps=\\operatorname{id}_X$ and closed image in\n$V$, and $b s=j_1$; hence $j_{1!}=b_!s_!$, and the restriction\n$b^{-1}b_!$ being the identity for the open immersion $b$, the\nrestriction of the extension by zero of\n[def-weil-pbc-extension-by-zero] gives\n$b^{-1}j_{1!}K=s_!K$. Applying\n[lem-weil-pbc-derived-open-restriction] to the morphism\n$u:T_1\\to T_2$, the open immersion $j_2:X\\hookrightarrow T_2$ and\nthe object $j_{1!}K$ of the derived category, the fibre product\nthere being $V=T_1\\times_{T_2}X$ with maps $b$ and $p$,\nidentifies $j_2^{-1}Ru_*j_{1!}K$ with $Rp_*b^{-1}j_{1!}K$, the\nderived direct image being that of\n[def-weil-pbc-direct-image]. Substituting the previous\nidentification gives $j_2^{-1}Ru_*j_{1!}K\\cong Rp_*s_!K$, and\n[lem-weil-pbc-clopen-section-direct-image] gives\n$Rp_*s_!K\\cong K$; the composite of these identifications is the\nspecified isomorphism $\\theta_{u,K}$ named in\n[def-weil-pbc-proper-open-comparison].",
+   "text": "By [lem-weil-pbc-proper-open-section], $b$ identifies $V$ with an open subscheme of $T_1$, and $s$ is an open immersion with closed image and $ps=\\operatorname{id}_X$. Also $bs=j_1$ by the defining pair $(j_1,\\operatorname{id}_X)$ in [def-weil-pbc-proper-open-comparison]. The square with top $\\operatorname{id}_X$, left $s$, right $j_1$ and bottom $b$ is cartesian: if $t:Z\\to X$ and $v:Z\\to V$ satisfy $j_1t=bv$, then $bst=bv$ and the open immersion $b$ is a monomorphism, so $v=st$. Indeed, identifying $V$ with its open image, the underlying map into $V$ is determined by its composite with $b$, and its sheaf map is determined by restriction of the same composite to opens of $V$. Thus $(\\operatorname{id}_X,s)$ gives the inverse of the first projection $X\\times_{T_1}V\\to X$. Both vertical arrows are open immersions, so this is an open-immersion square as in [def-cbc-open-immersion-square].",
    "uses": [
     "lem-weil-pbc-proper-open-section",
-    "def-weil-pbc-extension-by-zero",
-    "lem-weil-pbc-derived-open-restriction",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-clopen-section-direct-image",
+    "def-weil-pbc-proper-open-comparison",
+    "def-cbc-open-immersion-square"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-identification.md",
+    "place": "Proof, first sentence; cartesian square written out"
+   }
+  },
+  {
+   "text": "Apply [cor-cbc-derived-extension-zero-base-change] to that square, with $g=b$, $j=j_1$, $j'=s$ and $g_U=\\operatorname{id}_X$. Its finite commutative coefficient hypothesis is exactly the coefficient convention in [def-weil-pbc-proper-open-comparison], and $K$ is bounded below by hypothesis. Under the identity inverse-image identification its canonical map gives $e_{u,K}:b^{-1}j_{1!}K\\xrightarrow{\\sim}s_!K$. This proves the first identification using the specified base-change map, rather than an unspecified isomorphism of these objects.",
+   "uses": [
+    "cor-cbc-derived-extension-zero-base-change",
     "def-weil-pbc-proper-open-comparison"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-identification.md",
+    "place": "Proof, first identification"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-extension-by-zero-exact] the sheaf functor $j_{1!}$ is additive and exact and preserves quasi-isomorphisms when applied degreewise. By [lem-weil-pbc-exact-functor-bounded-below], if $\\mathcal H^r(K)=0$ for $r<n$, then $\\mathcal H^r(j_{1!}K)\\cong j_{1!}\\mathcal H^r(K)=0$ for $r<n$. Thus $L=j_{1!}K$ belongs to $D^+(T_{1,\\Et},\\Lambda)$, as required for the next step.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-identification.md",
+    "place": "Proof, application of derived-open-restriction: bounded-below input"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-derived-open-restriction] with $f=u:T_1\\to T_2$, $a=j_2:X\\hookrightarrow T_2$ and $L=j_{1!}K$. Its fibre product is exactly $V$, its open projection is $b$, and its restricted morphism is $p$. This gives the restriction isomorphism $r_{u,K}:j_2^{-1}Ru_*j_{1!}K\\xrightarrow{\\sim}Rp_*b^{-1}j_{1!}K$. No proper-base-change theorem is being applied here: the cited statement is open restriction for an arbitrary scheme morphism.",
+   "uses": [
+    "lem-weil-pbc-derived-open-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-identification.md",
+    "place": "Proof, middle sentence"
+   }
+  },
+  {
+   "text": "The hypotheses of [lem-weil-pbc-clopen-section-direct-image] hold by Step 1: $s$ is open with closed image, $ps=\\operatorname{id}_X$, and $K$ has the stated finite coefficients and lower bound. Its component-restriction isomorphism is $c_{p,s,K}:Rp_*s_!K\\xrightarrow{\\sim}K$.",
+   "uses": [
+    "lem-weil-pbc-clopen-section-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-identification.md",
+    "place": "Proof, final identification"
+   }
+  },
+  {
+   "text": "The functor $Rp_*$ sends $e_{u,K}$ to an isomorphism: its inverse is $Rp_*(e_{u,K}^{-1})$, since functors preserve identities and composition. Therefore $c_{p,s,K}\\circ Rp_*(e_{u,K})\\circ r_{u,K}$ is an isomorphism, with inverse $r_{u,K}^{-1}\\circ Rp_*(e_{u,K}^{-1})\\circ c_{p,s,K}^{-1}$. The three maps used in Steps 2, 4 and 5 are respectively the base-change, open-restriction and component-restriction maps specified in [def-weil-pbc-proper-open-comparison]. Its displayed definition of $\\theta_{u,K}$ is exactly this composite, so the isomorphism proved here is the specified one.",
+   "uses": [
+    "def-weil-pbc-proper-open-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-identification.md",
+    "place": "Proof, final sentence"
+   }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-proper-open-section",
-  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-proper-open-comparison",
+  "def-cbc-open-immersion-square",
+  "cor-cbc-derived-extension-zero-base-change",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-exact-functor-bounded-below",
   "lem-weil-pbc-derived-open-restriction",
-  "def-weil-pbc-direct-image",
-  "lem-weil-pbc-clopen-section-direct-image",
-  "def-weil-pbc-proper-open-comparison"
+  "lem-weil-pbc-clopen-section-direct-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-identification.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extensionByZero|openImmersionLowerShriek|derivedOpenRestriction",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: Zariski structure-sheaf modules or general underived sheaf pushforward, not this specified small-etale derived isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: Zariski structure-sheaf modules or general underived sheaf pushforward, not this specified small-etale derived isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of derived proper direct image of extension by zero along an open immersion is canonically the original etale sheaf complex",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.restrict_map; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_hom_c_app; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.Scheme.Hom.appIso",
+   "date": "2026-10-14",
+   "verdict": "no match: Zariski structure-sheaf modules or general underived sheaf pushforward, not this specified small-etale derived isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open restriction of derived direct image commutes with extension by zero for a clopen section",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "extension.by.zero|clopen.*section|proper.*base.change",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Pretopology.lean; Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean; Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean; Mathlib/AlgebraicGeometry/Morphisms/Flat.lean; Mathlib/AlgebraicGeometry/Morphisms/Basic.lean; Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: Zariski structure-sheaf modules or general underived sheaf pushforward, not this specified small-etale derived isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a cartesian square of schemes pullback of extension by zero equals extension by zero of pullback on derived categories of etale modules",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pullback; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l",
+   "date": "2026-10-14",
+   "verdict": "no match: Zariski structure-sheaf modules or general underived sheaf pushforward, not this specified small-etale derived isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPushforward\"",
+   "results": "CategoryTheory.Functor.sheafPushforwardContinuous; CategoryTheory.Adjunction.sheafPushforwardContinuous; CategoryTheory.Functor.sheafPushforwardContinuousId; CategoryTheory.Functor.sheafPushforwardContinuous_obj_obj_obj; CategoryTheory.Functor.sheafPushforwardContinuousIso; CategoryTheory.Functor.sheafPushforwardContinuousId'; CategoryTheory.Functor.sheafPushforwardContinuousComp; CategoryTheory.Functor.sheafPushforwardContinuousComp'",
+   "date": "2026-10-14",
+   "verdict": "no match: Zariski structure-sheaf modules or general underived sheaf pushforward, not this specified small-etale derived isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek.*(Iso|iso)|extension.*zero|IsOpenImmersion.*Mono",
+   "results": "Mathlib/NumberTheory/MulChar/Basic.lean; Mathlib/NumberTheory/MulChar/Basic.lean; Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean; Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean; Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean; Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean; Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean; Mathlib/NumberTheory/Cyclotomic/Discriminant.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: broad extension/zero pattern returns number-theory and ring-theory declarations unrelated to sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open and closed embedding with a retraction has derived pushforward of the extended sheaf equal to the original sheaf",
+   "results": "TopCat.Presheaf.isSheaf_of_isOpenEmbedding; AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.PresheafedSpace.ofRestrict_c_app; AlgebraicGeometry.Scheme.ofRestrict_app; AlgebraicGeometry.Scheme.Modules.restrictFunctor; TopCat.Sheaf.extend_hom_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+   "date": "2026-10-14",
+   "verdict": "no match: underived topological sheaves or Zariski structure-sheaf modules, not the specified small-etale derived composite"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|extensionByZero|extendByZero",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: no lower-shriek or extension-by-zero declaration under AlgebraicGeometry"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -79,5 +210,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proper-open-identification",
+  "worker": "stage1",
+  "summary": "Expanded the imported paragraph into six checked steps. Replaced unsupported functor identities attributed to the extension-by-zero definition with the existing canonical derived extension-zero base-change theorem; established its cartesian square explicitly and checked bounded-below input. Kept the statement and specified composite unchanged. No new nodes.",
+  "blueprint": "Proof first sentence realized by steps 1–2; middle sentence by steps 3–4; component identification and specified composite by steps 5–6.",
+  "tool_uses": [
+   {
+    "node": "cor-cbc-derived-extension-zero-base-change",
+    "why": "Generic canonical derived extension-zero exchange for the cartesian open square; the unit does not state this exchange independently."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic module exactness of open extension by zero, needed to type the restriction input."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "Generic exact-functor cohomology calculation verifies the lower bound for that input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-cbc-derived-extension-zero-base-change",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-exact-functor-bounded-below"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-fcf627e88",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-fcf627e88 (reviewer sub-agent of L); spot-checked: Read the item, cited statements and source passages in full. All six steps have matching hypotheses and canonical-map endpoints; finite commutative coefficients and bounded-below inputs are preserved. No new nodes, duplicates, cycles or repairs found. Accepted all three proposed generic tool uses. Concrete source checks and edge cases are recorded in review.md; no target comparison theorem is inferred from this auxiliary lemma."
+ }
 }
