@@ -22,22 +22,19 @@
  ],
  "proof": [
   {
-   "text": "Model the sum of tower stages by the telescope of finite partial sums. Finite sums are bounded-flat; stage naturality and the coproduct comparisons identify its comparison with a coproduct of invertible components.",
+   "text": "Destruct the literal telescope as the cone of p=one minus transition on sum E. Apply the sum-comparison lemma to obtain a literal flat telescope R with q(sum E) isomorphic to qR and alpha(qR) invertible. The supplied normalized shift equation at R, together with invertibility of every comparison iso and of the shift of alpha(qR), proves alpha(qR[1]) invertible by cancellation. Conjugate these two components by the homotopy isomorphism and its shift to get invertible maps a at q(sum E) and a-prime at q(sum E)[1].",
    "uses": [
-    "def-pc-derived-pullback",
-    "def-sc-flat-telescope-stage-map",
-    "lem-pc-kflat-closure"
+    "lem-sc-flat-telescope-sum-comparison-is-iso",
+    "def-sc-scheme-canonical-shift-unit-iso",
+    "def-sc-scheme-canonical-tensor-shift"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use stage naturality and the normalized shift square to obtain the three squares of the transition-cone triangles. The first two components are invertible, hence so is the third by CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂. Use common flat refinements to identify the literal telescope with the transition-cone presentation.",
+   "text": "Read the existing triangulated structure of derivedPullback from the specification of exists_derivedPullback; use this structure, without identifying it with the normalized translated-unit comparison. Both L=Qh followed by derivedPullback and G=termwise pullback followed by Qh send the homotopy cone triangle of p to distinguished triangles. Transported naturality gives the four squares for p, the cone inclusion, the connecting morphism, and p[1]. The fourth vertical component d is the source shift comparison inverse, followed by a-prime and the target shift comparison. It is invertible but need not equal a[1]. The proved private cone_five_lemma applies to these five-term squares: cancellation and coyoneda exactness prove the cone component monic; lift the target connecting image through d, factor using source exactness, and correct the remaining error using invertibility of a. Yoneda bijectivity then proves the cone component invertible. This is all written in Lean and uses no new hole.",
    "uses": [
     "def-pc-derived-pullback",
-    "def-sc-flat-telescope-stage-map",
-    "def-sc-scheme-canonical-shift-unit-iso",
-    "def-sc-scheme-canonical-tensor-shift",
-    "lem-sc-flat-telescope-stage-map-refinement"
+    "def-sc-flat-telescope-stage-map"
    ],
    "elementary": false
   }
@@ -47,15 +44,14 @@
   "def-sc-flat-telescope-stage-map",
   "def-sc-scheme-canonical-shift-unit-iso",
   "def-sc-scheme-canonical-tensor-shift",
-  "lem-pc-kflat-closure",
-  "lem-sc-flat-telescope-stage-map-refinement"
+  "lem-sc-flat-telescope-sum-comparison-is-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "G2",
+  "group": "E1",
   "date": "2026-10-14",
-  "document": "dag/nodes/sec-picard-framework/lem-sc-flat-telescope-bounded-normalization-extension.json",
-  "place": "Separate construction of forward morphisms from invertibility in the inherited sum/cone plan."
+  "document": "dag/nodes/sec-picard-framework/lem-sc-flat-telescope-normalization-unshifted-is-iso.json",
+  "place": "Sum step retained as a strict intermediate; explicit five-term Yoneda chase replaces the requirement that the transported comparison be a morphism of triangles."
  },
  "mathlib_searches": [
   {
@@ -147,9 +143,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261014T073334-L-3423433",
+  "landing": "20261014T081307-L-3872586",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
