@@ -1,0 +1,169 @@
+{
+ "id": "lem-sc-tensor-coefficient-action-on-summand",
+ "kind": "statement",
+ "title": "Action on one ideal summand equals tensor multiplication",
+ "statement": "Let $j:Z\\to X$ be a closed immersion of schemes, $L$ an invertible $\\mathcal O_X$-module and $J=\\ker j$ with $J^2=0$ [def-pc-scheme, def-weil-closed-immersion, def-sc-invertible-module, def-sbc-closed-immersion-ideal-sheaf, def-sbc-ideal-sheaf-powers]. Let $n\\ge0$, let $T$ be a TensorGradedPresentation with ideal module $I$, injections $k_d:K_d\\to I$, where $K_d=\\ker(\\eta_{L^d})$, and section inclusions $c_d$ [lem-sc-square-zero-tensor-graded-presentation, lem-pc-module-pullback-adjunction]. Let $D$ equal canonicalTensorBoundaryComparisons for $j,L,J^2=0,n$ [lem-sc-square-zero-ideal-tensor-unit]. Let $f:\\mathcal O_Z\\to (j^*L)^n$ and $s=\\operatorname{tensorGradedSection}(T,D,0,\\operatorname{tensorPowSection}(f,1))$ [lem-sc-square-zero-tensor-graded-product-projection]. Suppose $\\sigma_U:C(U)\\to\\operatorname{End}_{\\mathcal O_X(U)}(I(U))$ are ring maps satisfying $i(\\sigma_U(p(b))y)=b i(y)$ and commuting with all restrictions. Let $\\mu:C(X)\\to\\operatorname{End}(I)$ be a ring map with $(\\mu(g))_U(y)=\\sigma_U(g|_U)y$ [def-weil-pbc-comm-algebra-sheaf, def-weil-pbc-ringed-space-algebra-module]. For each $e\\ge0$ put $F=j^*(J\\otimes L^n)$, $N=(j^*L)^n$, $A_r=F\\otimes N^r$. Define $S_r:j_*A_r\\simeq K_{n(r+1)}$ to be the pushed-forward inverse boundaryCoefficientDegreeIso followed by the inverse adjunction unit on $J\\otimes L^{n(r+1)}$ and boundaryIdealKernelIso [lem-sc-square-zero-ideal-tensor-unit]. Then $k_{n(e+1)}\\gg\\mu(s)=S_e^{-1}\\gg j_*(\\operatorname{mulTensorPowSection}(f,F,e,1))\\gg S_{e+1}\\gg k_{n(e+2)}$. This is only the action on the single indicated source summand; it asserts no equation for the action on the entire direct sum.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, coherent-equation-ses and the graded direct sum; Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, the first paragraph defining the quotient action."
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-pc-quasi-coherent-sheaf",
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-invertible-module",
+  "def-sc-module-cohomology-boundary",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-weil-pbc-ringed-space-algebra-module",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-module-section-boundary-exact",
+  "lem-sc-square-zero-ideal-tensor-unit",
+  "lem-sc-square-zero-tensor-graded-presentation",
+  "lem-sc-square-zero-tensor-graded-product-projection",
+  "pqf-def-cohomology",
+  "lem-weil-pbc-closed-immersion-unit-quotient"
+ ],
+ "proof": [
+  {
+   "text": "On an open trivializing L, locally lift the restricted section f through the\nclosed-immersion unit in degree n. By b_quotient its image in C is the restriction\nof tensorGradedSection. Apply hlocal to this lift and the image under k of an ideal\ntensor section. Use k_inclusion and b_multiply to compute their product in degree\nn+n(e+1). Under boundaryIdealKernelIso its inclusion is multiplication of the ideal\nfactor and the tensor-power factor. The inverse unit on the annihilated ideal and\nboundaryCoefficientDegreeIso identify this operation with pushforward of\nmulTensorPowSection f F e 1. These comparisons are canonical: uniqueness of the\nadjunction comparison respects the monoidal tensor product, and the ideal-kernel\ncomparison is fixed by its inclusion equation. Cancel the monic i to obtain the\nidentity in I. Changing the lift adds a kernel element, whose product with the\nideal section is zero by squareZero. Restriction compatibility hrestrict and\nhglobal identify these local calculations with the specified global action.\nSheaf separation gives the asserted morphism equality. This also covers n=0:\nthe monoidal unit comparisons give the same product in degree zero.",
+   "uses": [
+    "lem-sc-square-zero-tensor-graded-presentation",
+    "lem-weil-pbc-closed-immersion-unit-quotient",
+    "lem-sc-square-zero-ideal-tensor-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-square-zero-tensor-graded-presentation",
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-sc-square-zero-ideal-tensor-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Detailed local sheaf calculation for Tag 09MS equation-ses and graded direct sum, using Tag 0B8S quotient action."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "graded.*(action|kernel)|homogeneous.*(sheaf|module)",
+   "results": "25 hits: Mathlib/Algebra/GradedMulAction.lean, Mathlib/Algebra/GradedMulAction.lean, Mathlib/Algebra/GradedMulAction.lean, Mathlib/Algebra/GradedMulAction.lean, Mathlib/Algebra/GradedMulAction.lean, Mathlib/Algebra/GradedMonoid.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/Algebra/Module/GradedModule.lean; no exact sheaf-level statement.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by a homogeneous section on a graded square zero ideal sheaf maps each kernel summand of degree d into degree a+d",
+   "results": "8 hits: Ideal.mul_homogeneous_element_mem_of_mem, HomogeneousIdeal.toIdeal_irrelevant, HomogeneousIdeal.irrelevant, DirectSum.coe_of_mul_apply_of_le, DirectSum.coe_decompose_mul_of_right_mem, DirectSum.coe_mul_of_apply_of_le, DirectSum.coe_decompose_mul_of_right_mem_of_le, DirectSum.coe_of_mul_apply; no exact sheaf-level statement.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit.hom_ext",
+   "results": "1 hits: CategoryTheory.Limits.IsColimit.hom_ext; no exact sheaf-level statement.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homogeneous multiplication on a graded square zero ideal sheaf and its identification with tensor multiplication on one coefficient",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "boundaryCoefficientDegreeIso|tensorGradedCoefficient_action|tensorCoefficientKernelMap",
+   "results": "0 hits: ; no exact sheaf-level statement.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The action on one homogeneous summand of a square zero ideal sheaf agrees with multiplication by a section after pullback tensor coefficient and kernel comparison isomorphisms",
+   "results": "8 hits: KaehlerDifferential.D_tensorProductTo, Algebra.Extension.tensorCotangentInvFun_smul_mk, KaehlerDifferential.cotangentComplexBaseChange_tmul, AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop, KaehlerDifferential.kerCotangentToTensor_toCotangent, KaehlerDifferential.kerCotangentToTensor, AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι, sectionOfRetractionKerToTensorAux_prop; no exact sheaf-level statement.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TensorGradedCoefficientSheafAction",
+  "date": "2026-10-14",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS graded direct-sum sequence: the homogeneous quotient action on the ideal, before taking H¹; first step of lem-sc-square-zero-tensor-graded-action-projection-first. Action on one ideal summand equals tensor multiplication.",
+   "via": [
+    "lem-sc-square-zero-tensor-graded-coefficient-sheaf-action",
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorCoefficientActionOnSummand",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorCoefficientActionOnSummand.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorGradedCoefficient_action_on_summand",
+  "statement": "theorem tensorGradedCoefficient_action_on_summand {X Z : Scheme.{u}} (j : Z ⟶ X)\n    [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)\n    (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)\n    (hD : canonicalTensorBoundaryComparisons j L hI n = D)\n    (e : ℕ) (f : 𝟙_ Z.Modules ⟶ ((tensorPullback j).obj L).tensorPow n)\n    (σ : ∀ U : X.Opens, T.C.right.obj.obj (op U) →+*\n      Module.End ((moduleRings X.toRingedSpace).obj.obj (op U)) (T.I.val.obj (op U)))\n    (μ : T.C.right.obj.obj (op ⊤) →+* End T.I)\n    (hlocal : ∀ (U : X.Opens) (b : T.B.right.obj.obj (op U)) (y : T.I.val.obj (op U)),\n      @id (T.B.right.obj.obj (op U))\n        (T.i.val.app (op U) (σ U (T.p.right.hom.app (op U) b) y)) =\n        b * @id (T.B.right.obj.obj (op U)) (T.i.val.app (op U) y))\n    (hrestrict : ∀ (U V : X.Opens) (a : V ⟶ U)\n      (g : T.C.right.obj.obj (op U)) (y : T.I.val.obj (op U)),\n      T.I.val.map a.op (σ U g y) = σ V (T.C.right.obj.map a.op g) (T.I.val.map a.op y))\n    (hglobal : ∀ (g : T.C.right.obj.obj (op ⊤)) (U : X.Opens)\n      (y : T.I.val.obj (op U)),\n      (μ g).val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) :\n    letI := square_zero_ideal_tensor_unit_isIso j L hI (n * (e + 1))\n    letI := square_zero_ideal_tensor_unit_isIso j L hI (n * ((e + 1) + 1))\n    T.k (n * (e + 1)) ≫ μ (tensorGradedSection T D 0 (tensorPowSection f 1)) =\n      ((pushforward j).mapIso (boundaryCoefficientDegreeIso j L n e).symm ≪≫\n      (asIso ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app\n        (j.ker.toModules ⊗ L.tensorPow (n * (e + 1))))).symm ≪≫\n      boundaryIdealKernelIso j (L.tensorPow (n * (e + 1)))).inv ≫\n        (pushforward j).map\n          (mulTensorPowSection f ((tensorPullback j).obj\n            (j.ker.toModules ⊗ L.tensorPow n)) e 1) ≫\n      ((pushforward j).mapIso (boundaryCoefficientDegreeIso j L n (e + 1)).symm ≪≫\n      (asIso ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app\n        (j.ker.toModules ⊗ L.tensorPow (n * ((e + 1) + 1))))).symm ≪≫\n      boundaryIdealKernelIso j (L.tensorPow (n * ((e + 1) + 1)))).hom ≫\n        T.k (n * ((e + 1) + 1))",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261014T030647-L-344174",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261014T030647-L-344174",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
