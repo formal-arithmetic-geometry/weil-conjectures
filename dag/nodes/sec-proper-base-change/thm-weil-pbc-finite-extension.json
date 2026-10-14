@@ -3,41 +3,124 @@
  "blueprint": {
   "is": "thm-weil-pbc-finite-extension",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Proper base change over a finite extension",
- "statement": "For every finite $E/\\Ql$, every cartesian square\n[def-weil-pbc-cartesian-square] with $f$ proper, and every\n$K\\in\\Dbc(X,E)$,\n$$\n Lg^*Rf_*K\\xrightarrow{\\sim}Rf'_*Lg'^*K\n \\quad\\text{in }\\Dbc(Y',E).\n$$",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$, with $A=\\mathcal O_E$, uniformizer $\\varpi$, and $I=(\\varpi)$, using [def-weil-pbc-adic-coefficient-datum]. Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square [def-weil-pbc-cartesian-square] of noetherian finite-dimensional schemes $X,Y,X',Y'$ on which $\\ell$ is invertible. Assume $f$ and $f'$ are proper and that the geometric fibers of $f$ have dimension at most some $e\\geq0$, as in [cor-weil-pbc-constructible-complete]. Use the raw rational categories $\\Dbc(T,E)=\\Dbc(T_{\\Proet},A)[1/\\varpi]$ of [def-weil-pbc-rational-category]. Denote by $Rf_*,Rf'_*,Lg^*,Lg'^*$ the rational extensions, as in [prop-weil-pbc-rational-transport], of the integral direct images and completed pullbacks in that corollary. The specified rational exchange is the extension of its completed integral exchange. For every $K\\in\\Dbc(X,E)$ its component is an isomorphism\n$$\n Lg^*Rf_*K\\xrightarrow{\\sim}Rf'_*Lg'^*K\n \\quad\\text{in }\\Dbc(Y',E).\n$$\n",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.md",
   "place": "node thm-weil-pbc-finite-extension, order 1357"
  },
  "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
   "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-scheme-conventions"
+  "cor-weil-pbc-constructible-complete",
+  "def-weil-pbc-rational-category",
+  "prop-weil-pbc-rational-transport"
  ],
  "proof": [
   {
-   "text": "Choose an integral lattice for $K$: the isomorphism of\n[cor-weil-pbc-constructible-complete] is an isomorphism of\n$\\mathcal O_E$-linear functors on the integral constructible categories, so\nby [prop-weil-pbc-rational-transport] it remains an isomorphism after\nrationalization. The independence and coherence assertions are inherited\nfrom the integral level.",
+   "text": "By [def-weil-pbc-rational-category], rationalization has the same objects as the integral category. Regard $K$ as its integral object $K_0\\in\\Dbc(X_{\\Proet},A)$; this is part of the category definition, not a lattice-existence theorem. Apply [cor-weil-pbc-constructible-complete] to $K_0$. All four schemes are noetherian and finite-dimensional, both vertical maps are proper, and the fiber bound is supplied. Its annihilator condition holds with $N=\\ell$: by [def-weil-l-adic-coefficient-extension], $|\\ell|_E=|\\ell|_\\ell=\\ell^{-1}<1$, so $\\ell\\in\\mathfrak m_E=(\\varpi)=I$ and $\\ell$ annihilates $A/I$; it is invertible on all four schemes. We obtain the specified integral natural isomorphism $\\eta$ between the two composite functors, with both endpoints in the integral category on $Y'$.",
+   "uses": [
+    "def-weil-pbc-rational-category",
+    "cor-weil-pbc-constructible-complete",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.md",
+    "place": "## Proof; explicit rationalization of the integral exchange"
+   }
+  },
+  {
+   "text": "First check the individual functor hypotheses of [prop-weil-pbc-rational-transport], not only its composites. Apply [cor-weil-pbc-constructible-complete] to the cartesian square with both vertical arrows $f$ and horizontal identities of $X,Y$. It applies to every integral constructible object on $X$, with the stated fiber bound $e$, and its displayed composites give preservation by $Rf_*$. Apply it likewise with both vertical arrows $f'$ and horizontal identities of $X',Y'$ to obtain preservation by $Rf'_*$. The fiber bound for $f'$ is $e$: for a geometric point $y':\\operatorname{Spec}\\Omega\\to Y'$, the given cartesian identification gives $X'\\times_{Y'}\\operatorname{Spec}\\Omega\\cong X\\times_Y\\operatorname{Spec}\\Omega$ with structure map $g y'$, so these geometric fibers are isomorphic. For either horizontal morphism $h=g$ or $h=g'$, apply the corollary to the cartesian square with vertical identities on the source and target of $h$ and both horizontal arrows $h$, with fiber bound zero. This gives preservation by $Lh^*_{\\mathrm{comp}}$ on every integral constructible object on its source. All these squares have noetherian finite-dimensional corners, proper vertical maps and the same invertible annihilator $N=\\ell$ as in step 1. Identity direct image is the identity because termwise direct image for the identity map does nothing to a K-injective representative. Completed identity pullback is the identity on complete objects: by [def-weil-pbc-completed-pullback] it is ordinary identity pullback followed by derived completion, whose completion unit is an isomorphism on complete objects. Thus the four restrictions are defined without assuming a uniform cohomological reduction interval from the termwise local-model bounds. The left derived constructions preserve shifts and cones on their resolving complexes; the right derived direct image does so on K-injective representatives, since shifts and cones of K-injectives remain K-injective by the Hom characterization of [lem-weil-pbc-kinjective-hom-derived]. Termwise additive operations commute with the two finite summands and differential in a cone. Together with [prop-weil-pbc-rlim-functoriality], these constructions give triangulated functors on the full constructible subcategories.\n\nUse [prop-weil-pbc-rational-transport] on the integral functors and exchange of step 1. Here scalar linearity can be checked directly in the constructions of [def-weil-pbc-completed-pullback]: inverse image and tensor send multiplication by $a\\in A$ to multiplication by the same constant $a$, and a compatible family in an inverse limit is multiplied componentwise. Ordinary module direct image has the same property on sections. For the left derived constructions, represent a map by a roof $C\\xleftarrow{s}P\\xrightarrow{u}D$ in the resolving class used to compute the operation. Multiplying the map by $a$ replaces $u$ by $au$, leaving $s$ fixed. The termwise operation sends this to $F(au)=aF(u)$, so the derived roof $F(u)F(s)^{-1}$ is also multiplied by $a$. For the right derived constructions (direct image and inverse limit), fix K-injective representatives $C\\to I_C,D\\to I_D$. By [lem-weil-pbc-kinjective-hom-derived], a derived morphism has a unique homotopy-class representative $h:I_C\\to I_D$. The representative for $ah$ is its scalar multiple: localization is $A$-linear, so injectivity of that Hom bijection proves this equality without requiring a scalar-linear resolution-choice functor. Applying ordinary direct image or inverse limit termwise sends $ah$ to $aF(h)$. Both also preserve homotopies, since applying the additive termwise operation to $h_1-h_2=dt+td$ gives the same equation. Addition is preserved by these same formulas. Thus the integral operations are $A$-linear, and restrictions to the full constructible subcategories preserve these equalities. The corollary supplies their triangulated composites on those categories. Rational transport gives the extended exchange with component $\\eta_{K_0}\\otimes1$. The extension of each composite agrees with the composite of the extensions: on a pure morphism $u\\otimes b$ both send it to $F(G(u))\\otimes b$, and these pure tensors generate each Hom module. Uniqueness in rational transport then identifies the specified rational exchange with this extension.",
    "uses": [
     "cor-weil-pbc-constructible-complete",
-    "prop-weil-pbc-rational-transport"
+    "prop-weil-pbc-rational-transport",
+    "def-weil-pbc-completed-pullback",
+    "prop-weil-pbc-rlim-functoriality",
+    "lem-weil-pbc-kinjective-hom-derived"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.md",
+    "place": "## Proof; explicit rationalization of the integral exchange"
+   }
+  },
+  {
+   "text": "Let $v=\\eta_{K_0}^{-1}$ in the integral category on $Y'$. Composition and identities in [def-weil-linear-scalar-localization] give\n$$(v\\otimes1)\\circ(\\eta_{K_0}\\otimes1)=(v\\circ\\eta_{K_0})\\otimes1=\\mathrm{id}\\otimes1,$$\nand likewise $(\\eta_{K_0}\\otimes1)\\circ(v\\otimes1)=\\mathrm{id}\\otimes1$. Thus $v\\otimes1$ is the inverse of the specified rational exchange. Every rational object is covered by step 1, so this proves the assertion for all $K$, including zero and objects killed by a power of $\\varpi$.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.md",
+    "place": "## Proof; explicit rationalization of the integral exchange"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-rational-category",
   "cor-weil-pbc-constructible-complete",
-  "prop-weil-pbc-rational-transport"
+  "def-weil-l-adic-coefficient-extension",
+  "prop-weil-pbc-rational-transport",
+  "def-weil-pbc-completed-pullback",
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-linear-scalar-localization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.md",
-  "place": "## Proof"
+  "place": "## Proof; explicit rationalization of the integral exchange"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper base change for bounded constructible derived categories with finite extension of l-adic rational coefficients",
+   "results": "Condensed.profiniteSolid; CondensedMod.IsSolid; LightCondensed.instIsGrothendieckAbelianLightCondMod; LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology; Condensed.instAB4CondensedMod; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; Condensed.instAB4StarCondensedMod",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*base.?change|base.?change.*proper",
+   "results": "Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/Sites/Pretopology.lean; Mathlib/AlgebraicGeometry/Sites/Pretopology.lean; Mathlib/AlgebraicGeometry/Sites/Affine.lean; Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean; Mathlib/AlgebraicGeometry/Sites/Small.lean; Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper base change for rational l-adic constructible complexes",
+   "results": "0 hits | service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", CategoryTheory.IsIso",
+   "results": "CategoryTheory.TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact; CategoryTheory.TwoSquare.instIsIsoFunctorRanBaseChangeOfGuitartExact; CategoryTheory.TwoSquare.isIso_lanBaseChange_app; CategoryTheory.TwoSquare.isIso_ranBaseChange_app; CategoryTheory.TwoSquare.isIso_lanBaseChange_app_iff; CategoryTheory.TwoSquare.isIso_ranBaseChange_app_iff",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exchange map for derived pushforward along a proper morphism and pullback is an isomorphism after inverting a uniformizer",
+   "results": "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; AlgebraicGeometry.Scheme.Cover.pushforwardIso_f; AlgebraicGeometry.Scheme.Modules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pushforwardNatIso_inv",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*base.?change|base.?change.*constructible",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -65,5 +148,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "thm-weil-pbc-finite-extension",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the imported universal quantifier includes schemes outside the domain of its rational-category definition. Made that domain and the hypotheses of the existing integral corollary explicit, and specified raw rationalization and its exchange. Expanded the integral-object, linearity, extended-exchange and inverse calculations using existing nodes only.",
+  "blueprint": "Realizes the entire ## Proof paragraph of thm-weil-pbc-finite-extension: integral object, integral exchange, rationalization, and inverse identities. The final independence/coherence sentence is not an extra clause of the item."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-07eb889bf",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-07eb889bf (reviewer sub-agent of L); spot-checked: Repaired step 2's unsupported inference of a common cohomological reduction interval (C4/E1) by applying the integral corollary to identity squares for all four functors. Read the item, cited statements and sources; verified the raw-rational exchange and its distinction from the master's condensed target. Statement and targets unchanged. Corrected JSON and concrete checks are in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
