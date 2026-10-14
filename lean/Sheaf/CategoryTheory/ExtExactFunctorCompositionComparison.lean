@@ -42,6 +42,7 @@ private lemma singleComparison_hom {A B : Type*} [Category A] [Category B] [Abel
   erw [Category.id_comp]
   rfl
 /-- Exact functors respect composition after transport by a natural isomorphism.
+The comparison is established on localized single complexes and then shifted.
 Source: Stacks Project, derived.tex, Tag 015F (lemma-right-derived-exact-functor:
 every complex computes an exact functor), and Mathlib Ext.Map's definition through
 localized shifted morphisms.

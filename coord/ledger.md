@@ -14588,3 +14588,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:05 L: merged deliver/N2/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore (stage 3; reviewer PASS; first push; landing 20261014T050529-L-1685979 (proof); batch 20261014T050523; modules 1; new nodes 0)
 - 05:05 L: merged deliver/N2/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T050529-L-1686241 (proof); batch 20261014T050523; modules 1; new nodes 0)
 - 05:05 L: merged deliver/P2/Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso (stage 3; reviewer PASS; first push; landing 20261014T050530-L-1686441 (proof); batch 20261014T050523; modules 1; new nodes 0)
+- 05:05 L: merged deliver/P2/Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison (stage 3; reviewer PASS; first push; landing 20261014T050530-L-1686598 (proof); batch 20261014T050523; modules 1; new nodes 0)
