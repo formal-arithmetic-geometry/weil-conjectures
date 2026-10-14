@@ -6,7 +6,6 @@ Authors: SHEAF group K1
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
-import Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison
 
 /-!
 # Ext identity comparison
@@ -63,62 +62,60 @@ theorem exactFunctorIdentityComparison
     (x.mapExactFunctor F).comp (Ext.mk₀ (e.hom.app Y)) (add_zero n) =
       (Ext.mk₀ (e.hom.app X)).comp x (zero_add n) := by
   let := HasDerivedCategory.standard C
-  have hid {A B : C} (z : Ext.{w} A B n) : z.mapExactFunctor (𝟭 C) = z := by
-    let Q := DerivedCategory.Q (C := C)
-    let ε := Functor.mapHomologicalComplexIdIso C (ComplexShape.up ℤ)
-    have : NatTrans.CommShift ε.hom ℤ := by
-      constructor
-      intro m
-      ext K i
-      simp [ε, Functor.commShiftIso_id_hom_app]
-    let δ := Functor.isoWhiskerRight ε Q ≪≫ Q.leftUnitor ≪≫ Q.rightUnitor.symm
-    have : NatTrans.CommShift Q.rightUnitor.inv ℤ :=
-      NatTrans.CommShift.of_iso_inv Q.rightUnitor ℤ
-    have : NatTrans.CommShift δ.hom ℤ := by dsimp [δ]; infer_instance
-    have h := ((𝟭 C).mapHomologicalComplexUpToQuasiIsoLocalizerMorphism
-      (ComplexShape.up ℤ)).equiv_smallShiftedHomMap Q Q
-        (((𝟭 C).mapCochainComplexSingleFunctor 0).app A)
-        (((𝟭 C).mapCochainComplexSingleFunctor 0).app B) (𝟭 _) δ z
-    have hx (Z : C) :
-        Q.map (((𝟭 C).mapCochainComplexSingleFunctor 0).app Z).inv ≫
-          δ.hom.app ((CochainComplex.singleFunctor C 0).obj Z) =
-        𝟙 (Q.obj ((CochainComplex.singleFunctor C 0).obj Z)) := by
-      dsimp [δ]
-      simp only [Category.comp_id, ← Q.map_comp]
-      rw [← Q.map_id]
-      congr 1
-      ext i
-      dsimp [Functor.mapCochainComplexSingleFunctor,
-        HomologicalComplex.singleMapHomologicalComplex, ε,
-        Functor.mapHomologicalComplexIdIso, CochainComplex.singleFunctor,
-        CochainComplex.singleFunctors, HomologicalComplex.single]
-      by_cases hi : i = 0
-      · subst i; simp
-      · have hz := HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0 Z i hi
-        exact hz.eq_of_src _ _
-    have hy (Z : C) :
-        δ.inv.app ((CochainComplex.singleFunctor C 0).obj Z) ≫
-          Q.map (((𝟭 C).mapCochainComplexSingleFunctor 0).app Z).hom =
-        𝟙 (Q.obj ((CochainComplex.singleFunctor C 0).obj Z)) := by
-      rw [← cancel_epi (δ.hom.app ((CochainComplex.singleFunctor C 0).obj Z))]
-      simp only [Iso.hom_inv_id_app_assoc]
-      rw [← cancel_epi (Q.map (((𝟭 C).mapCochainComplexSingleFunctor 0).app Z).inv)]
-      erw [Category.comp_id, hx]
-      dsimp only [Iso.app_inv, Iso.app_hom]
-      rw [← Q.map_comp, Iso.inv_hom_id_app, Q.map_id]
-      rfl
-    apply Ext.ext
-    change _ = z.hom
-    change (z.mapExactFunctor (𝟭 C)).hom = _ at h
-    rw [h, hx, hy]
-    simp only [ShiftedHom.comp_mk₀, ShiftedHom.mk₀_comp, ShiftedHom.id_map]
-    change 𝟙 _ ≫ z.hom ≫ (shiftFunctor _ _).map (𝟙 _) = z.hom
-    simp
-  -- Specialize the composition comparison to the identity functor and simplify identities.
-  have hcomp := mapExactFunctor_comp_mk₀_eq (𝟭 C) (𝟭 C) F
-    (e ≪≫ (𝟭 C).rightUnitor.symm) x
-  simpa [hid] using hcomp
-
-
+  let Q := DerivedCategory.Q (C := C)
+  let ε := Functor.mapHomologicalComplexIdIso C (ComplexShape.up ℤ)
+  let η := NatIso.mapHomologicalComplex e (ComplexShape.up ℤ)
+  have : NatTrans.CommShift ε.hom ℤ := by
+    constructor
+    intro m
+    ext K i
+    simp [ε, Functor.commShiftIso_id_hom_app]
+  have : NatTrans.CommShift η.hom ℤ := by
+    constructor
+    intro m
+    ext K i
+    dsimp [η]
+    erw [Category.id_comp, Category.comp_id]
+  let δ := Functor.isoWhiskerRight (η ≪≫ ε) Q ≪≫ Q.leftUnitor ≪≫ Q.rightUnitor.symm
+  have : NatTrans.CommShift Q.rightUnitor.inv ℤ :=
+    NatTrans.CommShift.of_iso_inv Q.rightUnitor ℤ
+  have : NatTrans.CommShift δ.hom ℤ := by dsimp [δ]; infer_instance
+  have h := (F.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism
+    (ComplexShape.up ℤ)).equiv_smallShiftedHomMap Q Q
+      ((F.mapCochainComplexSingleFunctor 0).app X)
+      ((F.mapCochainComplexSingleFunctor 0).app Y) (𝟭 _) δ x
+  have hx (Z : C) :
+      Q.map ((F.mapCochainComplexSingleFunctor 0).app Z).inv ≫
+        δ.hom.app ((CochainComplex.singleFunctor C 0).obj Z) =
+      (DerivedCategory.singleFunctor C 0).map (e.hom.app Z) := by
+    dsimp [δ]
+    simp only [Category.comp_id, ← Q.map_comp]
+    change Q.map _ = Q.map _
+    congr 1
+    ext i
+    dsimp [Functor.mapCochainComplexSingleFunctor,
+      HomologicalComplex.singleMapHomologicalComplex, η, ε,
+      NatIso.mapHomologicalComplex, Functor.mapHomologicalComplexIdIso,
+      CochainComplex.singleFunctor, CochainComplex.singleFunctors, HomologicalComplex.single]
+    by_cases hi : i = 0
+    · subst i; simp
+    · have hz := HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0 (F.obj Z) i hi
+      exact hz.eq_of_src _ _
+  have hy (Z : C) :
+      δ.inv.app ((CochainComplex.singleFunctor C 0).obj Z) ≫
+        Q.map ((F.mapCochainComplexSingleFunctor 0).app Z).hom ≫
+          (DerivedCategory.singleFunctor C 0).map (e.hom.app Z) = 𝟙 _ := by
+    rw [← hx Z]
+    dsimp only [Iso.app_hom, Iso.app_inv]
+    rw [← Q.map_comp_assoc, Iso.hom_inv_id_app]
+    erw [Q.map_id, Category.id_comp, Iso.inv_hom_id_app]
+  apply Ext.ext
+  simp only [Ext.comp_hom, Ext.mk₀_hom, ShiftedHom.comp_mk₀, ShiftedHom.mk₀_comp]
+  change (x.mapExactFunctor F).hom = _ at h
+  rw [h]
+  simp only [ShiftedHom.comp_mk₀, ShiftedHom.mk₀_comp, ShiftedHom.id_map,
+    Category.assoc, ← Functor.map_comp, hy, hx]
+  change _ ≫ x.hom ≫ (shiftFunctor _ _).map (𝟙 _) = _
+  simp
 
 end CategoryTheory.Abelian.Ext
