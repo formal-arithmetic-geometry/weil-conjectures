@@ -14539,3 +14539,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:45 L: merged deliver/C4/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (stage 3; reviewer PASS; first push; landing 20261014T044555-L-1451721 (proof); batch 20261014T044551; modules 1; new nodes 0)
 - 04:45 L: merged deliver/F2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (stage 3; reviewer PASS; first push; landing 20261014T044555-L-1451853 (proof); batch 20261014T044551; modules 1; new nodes 0)
 - 04:45 L: merged deliver/F2/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone (stage 3; reviewer PASS; first push; landing 20261014T044556-L-1451964 (proof); batch 20261014T044551; modules 1; new nodes 0)
+- 04:45 L: merged deliver/G2/Sheaf.RingTheory.DvrEtaleUnitRootDiagram (stage 3; reviewer PASS; first push; landing 20261014T044556-L-1452063 (interface); batch 20261014T044551; modules 3; new nodes 2)

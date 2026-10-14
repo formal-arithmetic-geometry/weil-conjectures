@@ -1,0 +1,120 @@
+{
+ "id": "lem-sbc-dvr-unit-root-local-square",
+ "kind": "statement",
+ "title": "Local DVR square and rational presentation for a root of a unit",
+ "statement": "Let A and T be discrete valuation ring domains [def-sc-discrete-valuation-ring], and let T be a local A-algebra. Let e>0 be a natural number invertible in A, and let v be a unit in A. There exist DVR domains A' and T', local algebra maps A->A', T->T' and A'->T' forming a commuting square, and r in A' with r^e equal to the image of v. The residue extension k(A')/k(A) is separable [def-weil-pbc-separable-algebraic-extension], and T->T' is injective. For every x in T', there are polynomials p,q in T[X] such that q(r_T) is nonzero and x*q(r_T)=p(r_T), where r_T is the image of r in T'. No fraction field is part of this statement.",
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BRM, first claim of the proof; the local unit-root square, with the localization fraction presentation made explicit."
+ },
+ "proof": [
+  {
+   "text": "Put C=A[X]/(X^e-v) and D=T[X]/(X^e-v_T). The positive exponent makes D finite free and faithful over T. The integral lying-over theorem chooses a maximal ideal q of D contracting to m_T. The coefficient-induced map phi:C->D takes the root to the root. Contract q to p in C. Commutativity on coefficients and locality of A->T give p contracted to A equals m_A.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-sbc-dvr-unit-root-at-prime] over A at p and over T at q (mapping invertibility of e to T). This gives DVR domains A'=C_p and T'=D_q, the local horizontal maps, the separable residue extension for A'/A, and injectivity of T->T'. The localization map associated to phi gives the local vertical map A'->T'. Its equality on C proves commutativity of the square and identifies the two root images. The defining root relation gives r^e=v.",
+   "uses": [
+    "lem-sbc-dvr-unit-root-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For x in D_q, use the localization fraction presentation x=a/b with b outside q. Choose polynomial representatives for a and b by surjectivity of the AdjoinRoot quotient. Polynomial evaluation commutes with the map to D_q and the root identification. The image of b is a unit, hence nonzero; the localization fraction equation then yields x*q(r)=p(r).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-dvr-unit-root-at-prime"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "kind": "written-by-agent",
+  "agent": "G2",
+  "document": "Stacks Project",
+  "place": "Tag 0BRM, first claim; explicit root algebras, lying over, localRingHom and polynomial quotient representatives."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A local discrete valuation ring extension obtained by adjoining a root of a unit has separable residue extension",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoin a root of a unit to a discrete valuation ring and localize to obtain an etale DVR extension",
+   "date": "2026-10-14",
+   "results": "Returned StandardEtalePair.instEtaleRing and standard-etale APIs; none constructs the simultaneous local DVR square.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDiscreteValuationRing|IsRegularLocalRing|isDedekindDomain in Mathlib/RingTheory/Etale and Unramified; AdjoinRoot and unit_root in both library roots",
+   "date": "2026-10-14",
+   "results": "Found isDedekindDomain.of_formallyUnramified (already needs a finite domain), the root-divisor regularity theorem (requires the root in the prime, whereas here it is a unit), and standard-etale APIs. No theorem constructs this square or its rational root presentation.",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.DvrEtaleUnitRootDiagram",
+  "date": "2026-10-14",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Unit-root cover in the trait case: the ring construction, before passage to fraction fields.",
+   "via": [
+    "lem-sbc-dvr-etale-unit-root-diagram",
+    "lem-sbc-dvr-abhyankar-local-residue",
+    "lem-sbc-dvr-tame-tensor-factor-residue-separable",
+    "lem-sbc-dvr-tame-tensor-factor-unramified"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.DvrUnitRootLocalSquare",
+  "file": "lean/Sheaf/RingTheory/DvrUnitRootLocalSquare.lean",
+  "declaration": "RingTheory.dvr_unit_root_local_square",
+  "statement": "theorem dvr_unit_root_local_square\n    (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]\n    (e : ℕ) (hepos : 0 < e) (he : IsUnit (e : A)) (v : Aˣ)\n    (T : Type u) [CommRing T] [IsDomain T] [IsDiscreteValuationRing T]\n    [Algebra A T] [IsLocalHom (algebraMap A T)] :\n    ∃ (A' : Type u) (_ : CommRing A') (_ : IsDomain A')\n      (_ : IsDiscreteValuationRing A') (aAA' : Algebra A A'),\n    letI := aAA'\n    ∃ (hAA' : IsLocalHom (algebraMap A A')) (r : A'),\n    letI := hAA'\n    r ^ e = algebraMap A A' (v : A) ∧\n    Algebra.IsSeparable (IsLocalRing.ResidueField A) (IsLocalRing.ResidueField A') ∧\n    ∃ (T' : Type u) (_ : CommRing T') (_ : IsDomain T')\n      (_ : IsDiscreteValuationRing T') (aTT' : Algebra T T') (aA'T' : Algebra A' T'),\n    letI := aTT'\n    letI := aA'T'\n    ∃ (_ : IsLocalHom (algebraMap T T')) (_ : IsLocalHom (algebraMap A' T')),\n    (∀ a : A, algebraMap T T' (algebraMap A T a) =\n      algebraMap A' T' (algebraMap A A' a)) ∧\n    Function.Injective (algebraMap T T') ∧\n    ∀ x : T', ∃ p q : Polynomial T,\n      q.eval₂ (algebraMap T T') (algebraMap A' T' r) ≠ 0 ∧\n      x * q.eval₂ (algebraMap T T') (algebraMap A' T' r) =\n        p.eval₂ (algebraMap T T') (algebraMap A' T' r)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261014T044556-L-1452063",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261014T044556-L-1452063",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

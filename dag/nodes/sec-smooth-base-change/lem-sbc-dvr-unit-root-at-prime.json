@@ -1,0 +1,122 @@
+{
+ "id": "lem-sbc-dvr-unit-root-at-prime",
+ "kind": "statement",
+ "title": "DVR and separable residue extension at a unit-root prime",
+ "statement": "Let R be a DVR domain [def-sc-discrete-valuation-ring], let e>0 be a natural number which is a unit in R, and let v be a unit of R. Let q be a prime ideal of the explicit root algebra B=R[X]/(X^e-v) whose contraction to R is its maximal ideal. Then L=B_q is a domain and a DVR, the canonical map R->L is local and injective, and its induced residue extension k(L)/k(R) is separable [def-weil-pbc-separable-algebraic-extension]. The root algebra itself is not assumed to be a domain.",
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BRM, first claim of the proof, local factors of the finite etale unit-root algebra; Tag 00PD, the unit-times-uniformizer-power criterion for a DVR."
+ },
+ "proof": [
+  {
+   "text": "The polynomial P=X^e-v is monic of positive degree, hence B=R[X]/(P) is finite free over R. The defining equation makes its root a unit. Its derivative evaluates to e times the (e-1)-st power of the root, a unit. Use the standard-etale pair (P,P') and the root evaluation isomorphism to show B/R is etale.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For L=B_q, the equality q contracted to R equals the maximal ideal of R proves that R->L is local. Flatness is transitive along R->B->L; a flat local algebra is faithfully flat, so the map is injective. Finiteness of B gives that L is Noetherian. Localization preserves formal unramifiedness and essential finite type.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose a uniformizer pi of R. The formally unramified local algebra theorem gives m_R L=m_L and a separable residue extension. Mapping the principal description m_R=(pi) gives m_L=(a), with a the image of pi. Flatness preserves regular multiplication by pi, so multiplication by a is injective.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Krull intersection in the Noetherian local ring L says a nonzero x misses m_L^N for some N. Induction on N writes x=a^n*u with u a unit: if x is a unit, take n=0; otherwise x is in (a), write x=a*y, and y misses m_L^(N-1), so continue. If xy=0 and x is nonzero, this factorization and cancellation of a^n force y=0. Thus L is a domain. Regularity of a makes it nonzero, and m_L=(a) makes it a nonunit and irreducible. The unit-times-power factorization criterion proves L is a DVR. Package its domain, DVR, local map, separable residue extension and injectivity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "kind": "written-by-agent",
+  "agent": "G2",
+  "document": "Stacks Project",
+  "place": "Tags 0BRM and 00PD; the domain and DVR assertions are proved explicitly by Krull intersection and uniformizer factorization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A prime localization of a finite etale algebra over a discrete valuation ring above its closed point is a discrete valuation ring",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prime localization of a monic unit root algebra over a DVR is a discrete valuation ring with separable residue extension",
+   "date": "2026-10-14",
+   "results": "Returned IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain, IsDiscreteValuationRing.TFAE and cotangent-space criteria. These already require a domain; they do not prove the local root algebra is a domain.",
+   "verdict": "No exact match; use the standard-etale and unramified local-ring APIs and prove the factorization argument."
+  },
+  {
+   "tool": "grep",
+   "query": "Etale|FormallyUnramified in RegularLocalRing; isDomain in DiscreteValuationRing and local-ring modules; IsHausdorff in AdicCompletion/Noetherian; map_maximalIdeal in Unramified/LocalRing",
+   "date": "2026-10-14",
+   "results": "Found Algebra.FormallyUnramified.map_maximalIdeal, the separable residue-field instance, IsHausdorff.of_isLocalRing, and IsDiscreteValuationRing.ofHasUnitMulPowIrreducibleFactorization. The private factorization helpers in CohenCompletionDVR use the same Krull-intersection argument but are unavailable outside that module.",
+   "verdict": "No single exact theorem; the new theorem is fully proved from these Mathlib APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.DvrEtaleUnitRootDiagram",
+  "date": "2026-10-14",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Unit-root cover in the trait case: local factors of the finite etale root algebra are DVRs and have separable residue extension.",
+   "via": [
+    "lem-sbc-dvr-unit-root-local-square",
+    "lem-sbc-dvr-etale-unit-root-diagram",
+    "lem-sbc-dvr-abhyankar-local-residue",
+    "lem-sbc-dvr-tame-tensor-factor-residue-separable",
+    "lem-sbc-dvr-tame-tensor-factor-unramified"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.DvrUnitRootAtPrime",
+  "file": "lean/Sheaf/RingTheory/DvrUnitRootAtPrime.lean",
+  "declaration": "RingTheory.dvr_unit_root_atPrime",
+  "statement": "theorem dvr_unit_root_atPrime\n    (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]\n    (e : ℕ) (hepos : 0 < e) (he : IsUnit (e : R)) (v : Rˣ)\n    (q : Ideal (AdjoinRoot ((Polynomial.X : Polynomial R) ^ e - Polynomial.C (v : R))))\n    [q.IsPrime]\n    (hq : q.comap (algebraMap R _) = IsLocalRing.maximalIdeal R) :\n    ∃ hdom : IsDomain (Localization.AtPrime q),\n    letI := hdom\n    ∃ hdvr : IsDiscreteValuationRing (Localization.AtPrime q),\n    letI := hdvr\n    ∃ hlocal : IsLocalHom (algebraMap R (Localization.AtPrime q)),\n    letI := hlocal\n    Algebra.IsSeparable (IsLocalRing.ResidueField R)\n      (IsLocalRing.ResidueField (Localization.AtPrime q)) ∧\n    Function.Injective (algebraMap R (Localization.AtPrime q))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261014T044556-L-1452063",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261014T044556-L-1452063",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
