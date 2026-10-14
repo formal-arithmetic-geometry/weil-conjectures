@@ -196,18 +196,19 @@ Cohomology on Sites, Tag 03F9 (local lifting in the vanishing argument).
 (blueprint: lem-sc-presheaf-free-ext-local-killing)
 (blueprint: lem-sc-presheaf-free-ext-local-killing-witness)
 
-Proof: represent the class by a degree-q Yoneda extension using Tag 06XU and let
-G -> Z[P] be its last epimorphism. At each object V construct E(V) as the subtype
-of P(V) times G(V) consisting of pairs (p,g) for which g maps to the image of the
-free generator p in Z[P](V). Restrictions act on both coordinates; naturality of
-the generator map proves that they preserve the defining equality. Projection to
-the first coordinate defines f:E -> P. This is locally surjective because the last
-map of the extension is an epimorphism of abelian sheaves. E(V) remains in Type v.
-Projection to the second coordinate gives a natural map E -> G; the free abelian
-and sheafification adjunctions extend it to Z[E] -> G, whose composite with the
-last epimorphism is Z[f]. Pulling the last short exact sequence back along Z[f]
-therefore gives a split short exact sequence. Its Ext class is zero, so the entire
-pulled-back Yoneda product is zero. For q=1 this is the sole short exact sequence.
+Proof: apply Ext.exists_epi_comp_eq_zero, whose fraction argument from Tag 06XU
+provides an epimorphism g : G -> Z[P] that kills x. At each object V construct
+E(V) as the subtype of P(V) times G(V) consisting of pairs (p,t) for which g(t)
+is the image of the free generator p in Z[P](V). Restrictions act on both
+coordinates; naturality of the generator map proves that they preserve the
+defining equality. Projection to the first coordinate defines f : E -> P.
+This is locally surjective because g is an epimorphism of abelian sheaves;
+the private image-subsheaf argument proves the required local surjectivity
+without enlarging the value universe. E(V) remains in Type v. Projection to
+the second coordinate extends by FreeAbelianGroup.lift and sheafifyLift to
+l : Z[E] -> G. Checking on free generators gives l followed by g equal to Z[f].
+Ext composition associativity therefore identifies pullback along Z[f] with
+pullback along l of the zero pullback along g. This is zero, including for q=1.
 No representative of a mere existence theorem is used to define public data. -/
 theorem exists_presheaf_ext_local_killing_witness
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}

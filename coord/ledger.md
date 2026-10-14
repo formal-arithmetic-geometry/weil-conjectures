@@ -14224,3 +14224,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:05 L: merged deliver/B3/Sheaf.AlgebraicGeometry.OpenPinnedTensorRestrictionStalkUnit (stage 3; reviewer PASS; first push; landing 20261014T020505-L-3809218 (proof); batch 20261014T020501; modules 1; new nodes 0)
 - 02:05 L: merged deliver/B4/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (stage 3; reviewer PASS; first push; landing 20261014T020505-L-3809370 (proof); batch 20261014T020501; modules 1; new nodes 0)
 - 02:05 L: merged deliver/B4/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T020506-L-3809480 (proof); batch 20261014T020501; modules 1; new nodes 0)
+- 02:05 L: merged deliver/B4/Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling (stage 3; reviewer PASS; first push; landing 20261014T020506-L-3809625 (proof); batch 20261014T020501; modules 1; new nodes 0)
