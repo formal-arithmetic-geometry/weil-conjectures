@@ -14285,3 +14285,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:25 L: merged deliver/P2/Sheaf.Paper.LimitTowerOverLocalSystem (stage 3; reviewer PASS; after a return; landing 20261014T022550-L-4047083 (interface); batch 20261014T022537; modules 2; new nodes 1)
 - 02:25 L: merged deliver/P4/Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorStabilizerSectionOpen (stage 3; reviewer PASS; first push; landing 20261014T022550-L-4047213 (interface); batch 20261014T022537; modules 3; new nodes 2)
 - 02:25 L: merged deliver/P4/Sheaf.AlgebraicGeometry.Morphisms.CartierStalkNormalizationProduct (stage 3; reviewer PASS; first push; landing 20261014T022551-L-4047434 (interface); batch 20261014T022537; modules 3; new nodes 2)
+- 02:25 L: merged deliver/T3/Sheaf.CategoryTheory.DerivedModuleNonzeroClassMap (stage 3; reviewer PASS; first push; landing 20261014T022551-L-4047616 (proof); batch 20261014T022537; modules 1; new nodes 0)
