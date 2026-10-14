@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-stalks-of-cohomology",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Stalks of cohomology sheaves",
@@ -14,30 +14,123 @@
  },
  "stmt_deps": [
   "def-weil-pbc-derived-categories",
-  "def-weil-pbc-geometric-stalks"
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-inverse-image",
+  "def-weil-derived-cohomology-sheaves"
  ],
  "proof": [
   {
-   "text": "Choose a K-injective (or any) representative\n$\\mathcal Q^\\bullet$ of $Q$; the stalk of the $q$-th cohomology\nsheaf of $\\mathcal Q^\\bullet$ is the $q$-th cohomology of the\nstalked complex, because the stalk functor is exact by\n[prop-weil-pbc-geometric-stalks-exact] so it commutes with\nkernels and images of the differentials. By\n[lem-kun-stalk-as-pullback] the stalked complex is\n$Q_{\\bar t}$, which is the assertion.",
+   "text": "By [def-weil-pbc-derived-categories], represent $Q$ by any cochain complex $C^\\bullet$ of abelian sheaves on $T_{\\Et}$. Put $Z^q=\\Ker(d^q:C^q\\to C^{q+1})$ and $B^q=\\Im(d^{q-1}:C^{q-1}\\to C^q)$. The identity $d^qd^{q-1}=0$ gives $B^q\\subset Z^q$, and the cohomology definition gives $\\mathcal H^q(Q)=Z^q/B^q$. No boundedness or injectivity of $C^\\bullet$ is needed.",
    "uses": [
-    "prop-weil-pbc-geometric-stalks-exact",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalks-of-cohomology.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "Write $S=(-)_{\\bar t}$. Apply the exactness assertion of [prop-weil-pbc-geometric-stalks-exact] to $0\\to Z^q\\to C^q\\to B^{q+1}\\to0$ and $0\\to B^{q+1}\\to C^{q+1}\\to C^{q+1}/B^{q+1}\\to0$: the second sequence makes $S(B^{q+1})\\to S(C^{q+1})$ injective, so the first identifies $S(Z^q)$ with $\\Ker S(d^q)$ and $S(B^{q+1})$ with $\\Im S(d^q)$. Applying this with $q-1$ also gives $S(B^q)=\\Im S(d^{q-1})$. Finally apply exactness to $0\\to B^q\\to Z^q\\to Z^q/B^q\\to0$. Thus $S(\\mathcal H^q(Q))\\cong S(Z^q)/S(B^q)=H^q(S(C^\\bullet))$. These identifications use the indicated kernel inclusions and quotient maps, hence are canonical.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor, kernel/image factorization in the proof; applied to the three displayed short exact sequences"
+   }
+  },
+  {
+   "text": "The calculation of step 2 is natural for chain maps: a map of complexes sends cycles to cycles and boundaries to boundaries, and the induced map on the quotient is the cohomology map on both sides of the comparison. If a chain map is a quasi-isomorphism, its maps on cohomology sheaves are isomorphisms, and applying $S$ preserves these isomorphisms; step 2 therefore shows that its termwise stalk is a quasi-isomorphism. By the localization definition of [def-weil-pbc-derived-categories], termwise $S$ thus defines the derived stalk functor, with $S(C^\\bullet)$ representing the stalk of $Q$. The natural comparison descends too: it commutes with chain maps and hence with the inverses of quasi-isomorphisms in the localization. Now use only the statement of [lem-kun-stalk-as-pullback] to identify this derived stalk with the inverse image $Q_{\\bar t}$. Step 2 gives $\\mathcal H^q(Q)_{\\bar t}\\cong\\mathcal H^q(Q_{\\bar t})$, the canonical identification denoted by equality in the statement, independently of the representative.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
     "lem-kun-stalk-as-pullback"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalks-of-cohomology.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-derived-categories",
   "prop-weil-pbc-geometric-stalks-exact",
   "lem-kun-stalk-as-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalks-of-cohomology.md",
-  "place": "## Proof"
+  "place": "## Proof, expanded with the short-exact-sequence argument of Stacks Tag 010N (homology.tex, lemma-exact-functor)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homology.*[Ii]so|[Ii]so.*homology|stalk.*homology",
+   "results": "['Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean', 'Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean', 'Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean', 'Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean', 'Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean', 'Mathlib/CategoryTheory/Preadditive/Injective/Resolution.lean', 'Mathlib/CategoryTheory/Preadditive/Injective/Resolution.lean', 'Mathlib/CategoryTheory/Preadditive/Injective/Resolution.lean']",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor between abelian categories commutes with cohomology of complexes",
+   "results": "[]; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric stalk of the cohomology sheaf of an unbounded complex of etale abelian sheaves is the cohomology of its stalk complex",
+   "results": "['StalkSkyscraperPresheafAdjunctionAuxs.fromStalk', 'TopCat.stalkToFiber', 'TopCat.Presheaf.stalkFunctor_obj', 'smoothSheafCommRing.forgetStalk', 'ModuleCat.Tilde.toOpen_germ_apply', 'ModuleCat.Tilde.stalkToFiberLinearMap_germ', 'TopCat.Presheaf.stalkFunctor', 'ModuleCat.Tilde.toStalk']",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapHomologicalComplex, homology",
+   "results": "[]; loogle: unknown identifier 'Functor.mapHomologicalComplex'",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive exact functor between abelian categories preserves homology of every chain complex",
+   "results": "['CategoryTheory.Functor.preservesHomology_of_map_exact', 'CategoryTheory.Functor.preservesHomologyOfExact', 'CategoryTheory.ShortComplex.Exact.map_of_preservesLeftHomologyOf', 'CategoryTheory.ShortComplex.Exact.map_of_preservesRightHomologyOf', 'CategoryTheory.ShortComplex.Exact.map', 'CategoryTheory.ShortComplex.LeftHomologyData.exact_map_iff', 'CategoryTheory.Functor.exact_tfae', 'CategoryTheory.ShortComplex.RightHomologyData.exact_map_iff']",
+   "date": "2026-10-14",
+   "verdict": "generalization: abstract homology-preservation ingredient, not the complete etale-point pullback comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyObjIso\"",
+   "results": "[]",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyObjIso|preservesHomology_of",
+   "results": "[]",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologyIso\"",
+   "results": "['CategoryTheory.ShortComplex.mapHomologyIso', \"CategoryTheory.ShortComplex.mapHomologyIso'\", \"CategoryTheory.ShortComplex.mapHomologyIso'_eq_mapHomologyIso\", 'CategoryTheory.ShortComplex.LeftHomologyData.mapHomologyIso_eq', \"CategoryTheory.ShortComplex.RightHomologyData.mapHomologyIso'_eq\", \"CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality\", \"CategoryTheory.ShortComplex.mapHomologyIso'_inv_naturality\", 'CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality']",
+   "date": "2026-10-14",
+   "verdict": "generalization: abstract homology-preservation ingredient, not the complete etale-point pullback comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso|preservesHomology_of",
+   "results": "['Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean', 'Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean', 'Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean', 'Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean', 'Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean', 'Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean']",
+   "date": "2026-10-14",
+   "verdict": "generalization: abstract homology-preservation ingredient, not the complete etale-point pullback comparison"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -66,5 +159,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-stalks-of-cohomology",
+  "worker": "stage1",
+  "summary": "Expanded the imported exactness argument into explicit cycle, boundary and quotient calculations on an arbitrary representative, then used the existing stalk-as-pullback statement. No new nodes: all extra calculations are elementary consequences of the cited exactness theorem. Preserved the abelian-sheaf and unbounded setting; equality denotes the canonical cohomology identification. Added inverse image and cohomology definition dependencies. Project search found no exact attachment; generic Mathlib preservation of homology is an ingredient, not the full point-pullback statement.",
+  "blueprint": "The single ## Proof paragraph: step 1 chooses an arbitrary complex, step 2 proves commutation with kernels, images and the cohomology quotient, and step 3 identifies the stalked complex with pullback and checks independence of representative.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-06c7b3c5c",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-06c7b3c5c (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, master blueprint, unit/chapter route, and Stacks 010N/015F. All three steps correctly establish the canonical comparison for unbounded derived abelian sheaves. Checked edge cases, duplicate/generalization candidates, and archived target coefficient categories and morphism directions. No new nodes, missing dependencies, cycles, or repairs. Concrete checks recorded in review.md."
+ }
 }
