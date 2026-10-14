@@ -32,60 +32,258 @@
   "def-weil-pbc-etale-constructible-sheaf",
   "def-weil-derived-cohomology-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By finite-type-over-Noetherian, $Y$ and $\\mathbf A^1_Y$ are Noetherian. Their affine coordinate rings are Noetherian, so the affine-Noetherian underlying-space theorem makes $\\mathbf A^1_Y$ a Noetherian topological space. Every open in such a space is quasi-compact: otherwise finite unions from a covering have no maximal member, contradicting ascending-chain termination for opens. Choose a finite principal cover $U=\\bigcup_{i=1}^rD(s_i)$ inside $\\operatorname{Spec}R[t]$. Every finite intersection is again principal, $D(s_{i_1}\\cdots s_{i_k})$, hence affine. It is smooth of relative dimension one over $Y$: affine-space smoothness gives the projection, and restriction through a principal open preserves it by smooth-relative-dimension permanence. Here $D(s)\\to\\operatorname{Spec}B$ is smooth of relative dimension zero directly from the smooth definition: $B_s=B[v]/(sv-1)$ is finitely presented, and $s$ invertible modulo a square-zero ideal stays invertible, since $(1+i)^{-1}=1-i$ when $i^2=0$, so every infinitesimal lifting uniquely factors through the localization. Its nonempty fibres are open subschemes of a point, hence dimension zero. The empty open has zero image and needs no argument. It remains to prove the assertion for every such principal open, then glue by relative Mayer--Vietoris.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-affine-noetherian-underlying-space",
+    "sbc-lem-affine-space-smooth",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKY; affine-cover expansion required to apply 0GKX"
+   }
+  },
+  {
+   "text": "Fix a principal open $W$ and write $h:W\\to Y$. Let $N>0$ annihilate the additive group of the finite ring $\\Lambda$ and factor $N=\\prod_\\ell\\ell^{n_\\ell}$. Choose integers $e_\\ell$ which are 1 modulo $\\ell^{n_\\ell}$ and 0 modulo the other factors (Bezout gives these residues). Multiplication by $e_\\ell$ defines pairwise orthogonal idempotents on $L|_W$ with sum 1, so $L|_W=\\bigoplus_\\ell F_\\ell$, each $\\ell^{n_\\ell}F_\\ell=0$. These are finite locally constant $\\Lambda$-module sheaves: on any constant trivializing cover, take the same idempotent summands of the finite fibre module. A derived additive functor preserves this finite split sum, so it suffices to treat one $F=F_\\ell$. The zero-ring/zero-sheaf case is already zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKY, coefficient-primary reduction"
+   }
+  },
+  {
+   "text": "Apply the prime-to-primary filtration cover input to the affine Noetherian $W$ and $F$. It gives $g:T\\to W$, affine clopen components $T_a$, filtrations by constant finite modules on each $T_a$, and constant fibre cardinality $d$ prime to $\\ell$. The module trace-degree theorem gives a $\\Lambda$-linear $t:g_*g^{-1}F\\to F$ with $t\\eta=d\\,\\mathrm{id}_F$. Choose an integer $a$ with $ad\\equiv1\\pmod{\\ell^n}$; since $\\ell^nF=0$, the map $at$ retracts $\\eta$. Finite direct-image exactness for abelian sheaves implies exactness for these module sheaves too: the underlying direct image is the abelian direct image and a sequence of module sheaves is exact exactly when its underlying abelian sequence is exact. Using the module direct-image construction, take an injective resolution of a degree-zero module sheaf. Exactness makes its termwise direct image a resolution of its direct image, so the computation of derived direct image gives $Rg_*=g_*$ on degree-zero sheaves. Choose a compactification of $hg$ by Nagata: $T$ is finite over the affine $W$, hence affine and quasi-compact and quasi-separated, and $hg$ is separated of finite type over the affine $Y$. A finite morphism is proper, so the identity compactification gives $Rg_!=Rg_*$. Shriek composition and compactification independence identify $Rh_!g_*g^{-1}F\\cong R(hg)_!g^{-1}F$. Applying the additive $Rh_!$ to the split maps shows $Rh_!F$ is a retract of this latter object, hence each of its cohomology sheaves is a retract as well.",
+   "uses": [
+    "lem-weil-pbc-etale-lisse-finite-etale-filtration",
+    "lem-weil-pbc-finite-etale-module-trace-degree",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-finite-proper",
+    "def-weil-pbc-projection-compactification",
+    "lem-weil-pbc-etale-shriek-qcqs-composition",
+    "lem-weil-pbc-etale-shriek-compactification-independence",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "def-weil-pbc-direct-image",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKY trace and composition paragraph; 03SH, 01WN, 0F7J, 0F7I"
+   }
+  },
+  {
+   "text": "For every chosen compactification, $Rh_!^c=Rp_*j_!$ is additive and triangulated: extension by zero is exact and hence induces a triangulated derived functor; module direct image is additive left exact, module sheaves have enough injectives, and the generic right-derived-direct-image theorem makes $Rp_*$ triangulated. Thus the composite carries sheaf short-exact triangles to distinguished triangles. Each $hg|_{T_a}:T_a\\to Y$ is affine: $g$ is finite (hence affine by definition), $W$ is affine, and the $T_a$ are affine. A morphism between affine schemes is separated: for a ring map $B\\to C$, the diagonal is the closed immersion induced by the surjective multiplication map $C\\otimes_B C\\to C$. It is smooth of relative dimension one by permanence for the etale map $g|_{T_a}$ followed by the smooth $h$. It is of finite type since $h$ is finitely presented and $g$ is finite. Nagata supplies compactifications of these component morphisms. Apply the constant-coefficient affine-smooth-curve input to every constant finite module occurring in the filtration on $T_a$. For a filtration step $0\\to A\\to B\\to C\\to0$, its image triangle gives a long exact cohomology sequence. If the cohomology of the images of $A$ and $C$ is constructible, write the cohomology of the image of $B$ as an extension of a cokernel between the preceding constructible terms and a kernel between the following ones. The Serre theorem proves it constructible. Induction from the zero filtration term therefore proves constructibility for each $(hg|_{T_a})_!(g^{-1}F|_{T_a})$. On a finite disjoint clopen union extension by zero and restriction identify a sheaf with the direct sum of these component sheaves; applying the additive shriek functor (using shriek composition with each clopen inclusion, whose compactification is the open inclusion followed by the identity of T) gives the corresponding finite direct sum of images. These cohomology sheaves are constructible by Serre extension closure. Step 3 makes the original output a retract; the image of the splitting idempotent is constructible by kernels/cokernels closure. Thus $Rh_!F$, and then the finite sum $Rh_!(L|_W)$, have constructible cohomology for every chosen compactification.",
+   "uses": [
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "thm-constructible-serre",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-sf-derived-ses-triangle",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-etale-shriek-qcqs-composition",
+    "def-weil-pbc-projection-compactification",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKY final sentence invoking Tag 0GKX; Tag 03RZ filtration and retract closure"
+   }
+  },
+  {
+   "text": "Induct on the number of principal opens covering $U$. The one-open case is step 4. For $U=W_1\\cup V$ with $V$ the union of the remaining opens, the intersection $W_1\\cap V$ is covered by the at most $r-1$ principal opens $W_1\\cap W_i$; all their finite intersections remain principal. The induction hypothesis applies both to $V$ and to $W_1\\cap V$, with the restricted sheaf. The restricted maps are separated of finite type: the opens are quasi-compact in the Noetherian $U$, and their affine principal covers have finitely presented coordinate algebras over $R$. Choose their compactifications by Nagata. Relative Mayer--Vietoris for these quasi-compact opens gives a triangle $R(W_1\\cap V\\to Y)_!L\\to R(W_1\\to Y)_!L\\oplus R(V\\to Y)_!L\\to Rf_!^cL\\to$. In its cohomology sequence the third term is an extension of a cokernel and a kernel involving cohomology of the first two terms. Serre closure proves it constructible in every degree. The relative Mayer--Vietoris statement is for arbitrary chosen compactifications, so this proves the required assertion for the given $c$ without changing the candidate shriek.",
+   "uses": [
+    "lem-weil-pbc-etale-shriek-relative-mayer-vietoris",
+    "thm-constructible-serre",
+    "lem-sf-derived-homology-long-exact",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKY affine-cover completion; relative Mayer--Vietoris and 03RZ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-affine-noetherian-underlying-space",
+  "sbc-lem-affine-space-smooth",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-etale-lisse-finite-etale-filtration",
+  "lem-weil-pbc-finite-etale-module-trace-degree",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-finite-proper",
+  "def-weil-pbc-projection-compactification",
+  "lem-weil-pbc-etale-shriek-qcqs-composition",
+  "lem-weil-pbc-etale-shriek-compactification-independence",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "def-weil-pbc-direct-image",
+  "thm-nagata-compactification",
+  "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+  "thm-constructible-serre",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-sf-derived-ses-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-etale-shriek-relative-mayer-vietoris"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKY primary/trace/filtration route; expand affine-cover gap with relative Mayer--Vietoris and use finite-ring 0GJ0 variant"
+ },
  "mathlib_searches": [
   {
-   "tool": "loogle",
-   "query": "\"shriek\"",
-   "results": "; No hits. Read returned signatures: none states the etale compact-support assertion or the generic-finiteness neighborhood theorem; ordinary structure-sheaf pushforward, constructible subsets, derived-category localization, and the implication finite morphism implies finite fibers do not suffice.",
+   "tool": "leanfinder",
+   "query": "constructibility of compactly supported direct image of constant finite module on affine smooth relative curve over finite type integer base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] {s : Set ↥X},\\n  Topology.IsLocallyConstructible s →\\n    Topology.IsLocallyConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and locally of finite presentation morphism of schemes. If $s$ is a locally constructible subset of $X$, then its image $f(s)$ is a locally constructible subset of \"}\n  {\"name\": \"PrimeSpectrum.isConstructible_comap_image\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.FinitePresentation →\\n    ∀ {s : Set (PrimeSpectrum S)}, Topology.IsConstructible s → Topology.IsConstructible (PrimeSpectrum.comap f '' s)\", \"doc\": \"If $ f: R \\\\to S $ is a finitely presented ring homomorphism and $ s \\\\subseteq \\\\operatorname{Spec}(S) $ is a constructible set in the Zariski topology, then the image of $ s $ under the induced map $ \\\\\"}\n  {\"name\": \"PrimeSpectrum.isConstructible_range_comap\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.FinitePresentation → Topology.IsConstructible (Set.range (PrimeSpectrum.comap f))\", \"doc\": \"If $ f : R \\\\to S $ is a ring homomorphism of finite presentation between commutative semirings, then the image of the induced map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $, defined by taki\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"PrimeSpectrum.isConstructible_comap_C\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {s : Set (PrimeSpectrum (Polynomial R))},\\n  Topology.IsConstructible s → Topology.IsConstructible (PrimeSpectrum.comap Polynomial.C '' s)\", \"doc\": \"For any commutative semiring $ R $, if a set $ s $ in the prime spectrum of the polynomial ring $ R[X] $ is constructible, then the preimage of $ s $ under the constant polynomial embedding $ R \\to R[X\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {s : Set ↥Y},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' s)\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes and any constructible subset $ s \\\\subseteq Y $, the preimage $ f^{-1}(s) $ is a constructible subset of $ X $.\"}\n  {\"name\": \"ChevalleyThm.chevalley_polynomialC\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ {R : Type u_6} [inst : CommRing R] (M : Submodule ℤ R),\\n  1 ∈ M →\\n    ∀ (S : PrimeSpectrum.ConstructibleSetData (Polynomial R)),\\n      (∀ C ∈ S, ∀ (j : Fin C.n) (k : ℕ), (C.g j).coeff k ∈ M) →\\n        ∃ T,\\n          PrimeSpectrum.comap Polynomial.C '' S.toSet = T.toSet ∧\\n            ∀ C ∈ T, C.n ≤\", \"doc\": \"Let $ R $ be a commutative ring, $ M $ a $\\\\mathbb{Z}$-submodule of $ R $ containing $ 1 $, and $ S $ a constructible set data in $ R[X] $ such that all coefficients of polynomials in $ S $ belong to $\"}\nRead the returned signatures: none states this etale sheaf filtration or constructibility theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finiteness theorem for etale cohomology with compact supports constant torsion coefficients in smooth relative dimension one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.FormallyEtale.instForallOfFinite\", \"module\": \"Mathlib/RingTheory/Etale/Pi\", \"type\": \"∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I] [∀ (i : I), Algebra.FormallyEtale R (A i)],\\n  Algebra.FormallyEtale R ((i : I) → A i)\", \"doc\": \"If $ I $ is a finite set and each algebra $ A_i $ over a commutative ring $ R $ is formally étale, then the product algebra $ \\\\prod_{i \\\\in I} A_i $ is also formally étale over $ R $.\"}\n  {\"name\": \"KaehlerDifferential.finite\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"∀ (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.EssFiniteType R S], Module.Finite S Ω[S⁄R]\", \"doc\": \"If $ S $ is a commutative ring that is finitely generated as an $ R $-algebra (essential finite type) over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{S/R} $ is finitel\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.EssFiniteType R A]\\n  [Algebra.FormallySmooth R A], Module.FinitePresentation A Ω[A⁄R]\", \"doc\": \"If $ A $ is an $ R $-algebra that is essentially of finite type and formally smooth over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is finitely presented as an \"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\nRead the returned signatures: none states this etale sheaf filtration or constructibility theorem.",
    "date": "2026-10-14",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "\"constructible\", \"sheaf\"",
-   "results": "; No hits. Read returned signatures: none states the etale compact-support assertion or the generic-finiteness neighborhood theorem; ordinary structure-sheaf pushforward, constructible subsets, derived-category localization, and the implication finite morphism implies finite fibers do not suffice.",
+   "results": "[loogle] OK 0 hit(s)\nRead the returned signatures: none states this etale sheaf filtration or constructibility theorem.",
    "date": "2026-10-14",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "shriek|compactSupport.*constructible|constructible.*cohomology",
-   "results": "; No hits. Read returned signatures: none states the etale compact-support assertion or the generic-finiteness neighborhood theorem; ordinary structure-sheaf pushforward, constructible subsets, derived-category localization, and the implication finite morphism implies finite fibers do not suffice.",
+   "query": "constructible.*sheaf|sheaf.*constructible|constructible.*cohomology",
+   "results": "[grep] OK 0 hit(s)\nRead the returned signatures: none states this etale sheaf filtration or constructibility theorem.",
    "date": "2026-10-14",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "Derived etale compact support preserves locally constant sheaves on open subsets of relative affine line",
-   "results": "service unavailable: Internal Server Error; No hits. Read returned signatures: none states the etale compact-support assertion or the generic-finiteness neighborhood theorem; ordinary structure-sheaf pushforward, constructible subsets, derived-category localization, and the implication finite morphism implies finite fibers do not suffice.",
+   "query": "constant finite coefficients compact support direct image affine smooth relative curve constructible",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\nRead the returned signatures: none states this etale sheaf filtration or constructibility theorem.",
    "date": "2026-10-14",
    "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For an open of the affine line over a finite type integer scheme compact support direct image of a finite locally constant sheaf is constructible",
-   "results": "; Hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, Topology.IsConstructible.image_of_isOpenEmbedding, PrimeSpectrum.exists_range_eq_of_isConstructible, Topology.isConstructible_preimage_iff_of_isOpenEmbedding, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, Topology.IsConstructible.image_of_isClosedEmbedding, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, Topology.IsConstructible.preimage Read returned signatures: none states the etale compact-support assertion or the generic-finiteness neighborhood theorem; ordinary structure-sheaf pushforward, constructible subsets, derived-category localization, and the implication finite morphism implies finite fibers do not suffice.",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Finiteness theorem for compactly supported cohomology of a lisse finite coefficient sheaf on an open relative affine curve",
-   "results": "; Hits: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, SheafOfModules.GeneratingSections.IsFiniteType.finite, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.Scheme.Hom.finite_app, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, SheafOfModules.IsFiniteType Read returned signatures: none states the etale compact-support assertion or the generic-finiteness neighborhood theorem; ordinary structure-sheaf pushforward, constructible subsets, derived-category localization, and the implication finite morphism implies finite fibers do not suffice.",
-   "date": "2026-10-14",
-   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+  "worker": "stage1",
+  "summary": "Retained statement; expanded the 0GKY primary-coefficient trace and constant-filtration argument. Added finite principal-cover Mayer--Vietoris to avoid assuming the open is affine, and a finite-ring filtration input using 0DV5 to avoid the missing geometric-unibranch hypothesis of 0GJ0. Two new strictly smaller statement-only nodes.",
+  "blueprint": "thm-weil-pbc-direct-image-finiteness-proper classical constructibility input expanded through 0GKZ final sentence, 0GKY primary/trace/filtration reduction and 0GKX constant case.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic geometric or exactness input needed for the 0GKY finite-etale filtration and affine-cover argument; no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-sc-affine-noetherian-underlying-space",
+    "why": "Generic geometric or exactness input needed for the 0GKY finite-etale filtration and affine-cover argument; no node of this unit supplies this statement."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic geometric or exactness input needed for the 0GKY finite-etale filtration and affine-cover argument; no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic geometric or exactness input needed for the 0GKY finite-etale filtration and affine-cover argument; no node of this unit supplies this statement."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Generic geometric or exactness input needed for the 0GKY finite-etale filtration and affine-cover argument; no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic geometric or exactness input needed for the 0GKY finite-etale filtration and affine-cover argument; no node of this unit supplies this statement."
+   },
+   {
+    "node": "def-sbc-smooth-morphisms",
+    "why": "General exact-functor or derived-category tool for the compactification filtration and long exact cohomology sequence; no node of the present unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-etale-module-trace-degree",
+    "why": "General exact-functor or derived-category tool for the compactification filtration and long exact cohomology sequence; no node of the present unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "General exact-functor or derived-category tool for the compactification filtration and long exact cohomology sequence; no node of the present unit supplies this statement."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "General exact-functor or derived-category tool for the compactification filtration and long exact cohomology sequence; no node of the present unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "General exact-functor or derived-category tool for the compactification filtration and long exact cohomology sequence; no node of the present unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "General exact-functor or derived-category tool for the compactification filtration and long exact cohomology sequence; no node of the present unit supplies this statement."
+   },
+   {
+    "node": "lem-sf-derived-ses-triangle",
+    "why": "General exact-functor or derived-category tool for the compactification filtration and long exact cohomology sequence; no node of the present unit supplies this statement."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "General exact-functor or derived-category tool for the compactification filtration and long exact cohomology sequence; no node of the present unit supplies this statement."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Existence of auxiliary compactifications for finite covers, clopen components, and the two-open Mayer--Vietoris induction; the candidate shriek statements require chosen compactifications. General tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-affine-noetherian-underlying-space",
+  "sbc-lem-affine-space-smooth",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-finite-proper",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-finite-etale-module-trace-degree",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-sf-derived-ses-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "thm-nagata-compactification"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-8e19296f4",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-8e19296f4 (reviewer sub-agent of L); spot-checked: Read the mathematics in full and wrote review.md. Checked all five steps and both new nodes against 0GKY, 0GKX, 0GJ0, 0DV5 and the cited trace, shriek and derived-category sources. Verified hypotheses, edge cases, coefficient categories, duplicate candidates and tool uses. No circular dependency through the delivery or repair needed; inherited source metadata and distant DAG defects are documented."
+ }
 }
