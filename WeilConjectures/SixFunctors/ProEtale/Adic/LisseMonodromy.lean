@@ -13,8 +13,8 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.EvaluationPairing
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteEtaleLisse
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.StalkEvaluation
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Restriction
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Restriction
 
 /-!
 # The monodromy of lisse `ℓ`-adic sheaves

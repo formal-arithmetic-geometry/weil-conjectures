@@ -12,8 +12,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
-public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
 
 /-!
 # Pro-étale cohomological dimension through the comparison morphism
