@@ -1,6 +1,6 @@
 # Work queue
 
-48 items; claim with `tools/claim.py next <group> [--stage N]`.
+46 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (48)
+## Stage 3: modules to prove (46)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -27,15 +27,13 @@
 | `Sheaf.AlgebraicGeometry.AlgebraTensorPullbackComparison` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorGradedKernelLocalIdeal` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorPowerAlgebraCoproduct` | 24 | 1 | proof |
+| `Sheaf.Paper.CechCupResolutionRepresentatives` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OverlapConjugateRestriction` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictedCounitCancellation` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCompatibility` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux` | 25 | 1 | proof |
-| `Sheaf.Paper.CechCupSignedAxisPairing` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackCompositionCounitNormalization` | 27 | 1 | proof |
-| `Sheaf.Paper.CechFlasqueComparisonClasses` | 27 | 1 | proof |
-| `Sheaf.Paper.CechFlasqueComparisonCore` | 27 | 1 | proof |
 | `Sheaf.Paper.CechRefinementPushforwardTotal` | 27 | 1 | proof |
 | `Sheaf.Paper.ModuleCupEqualDerivedMapsClass` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HorizontalOrdinaryForwardFixedPasting` | 28 | 1 | proof |
