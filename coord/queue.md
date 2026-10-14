@@ -1,6 +1,6 @@
 # Work queue
 
-17 items; claim with `tools/claim.py next <group> [--stage N]`.
+16 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (17)
+## Stage 3: modules to prove (16)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -19,9 +19,8 @@
 | `Sheaf.AlgebraicGeometry.CartesianHigherImageGermVanishing` | 12 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionsFactorization` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProjectionFormulaFiniteObjectwise` | 23 | 1 | proof |
-| `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation` | 24 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex` | 28 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PicardDerivedFibreNaturality` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ScalarCupResolutionClassCompatibility` | 31 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealization` | 33 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchange` | 34 | 1 | proof |
