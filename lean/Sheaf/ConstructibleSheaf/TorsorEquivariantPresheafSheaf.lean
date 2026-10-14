@@ -24,4 +24,5 @@ the historical compatibility path.
 
 @[expose] public section
 
--- The implementation is intentionally centralized in the imported module.
+-- The duplicate-removal repair is complete: the imported module contains the sole proof.
+-- Keep this public import so historical callers receive that same declaration.
