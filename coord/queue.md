@@ -1,6 +1,6 @@
 # Work queue
 
-51 items; claim with `tools/claim.py next <group> [--stage N]`.
+48 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (51)
+## Stage 3: modules to prove (48)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -23,7 +23,6 @@
 | `Sheaf.AlgebraicGeometry.RawModuleAbelianHomTargetFormula` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula` | 19 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientUnshifted` | 20 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFormula` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianCounitResolutionCalculation` | 23 | 1 | proof |
 | `Sheaf.Paper.CechCupPullbackCompat` | 23 | 2 | proof |
@@ -34,35 +33,33 @@
 | `Sheaf.AlgebraicGeometry.OverlapConjugateRestriction` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictedCounitCancellation` | 25 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCompatibility` | 25 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization` | 25 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux` | 25 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.DerivedPullbackCompositionCounitNormalization` | 27 | 1 | proof |
-| `Sheaf.Paper.ModuleCupEqualDerivedMapsClass` | 27 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.HorizontalOrdinaryForwardFixedPasting` | 28 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SingleComplexOpenUnionCompatibleChainData` | 25 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.TopRestrictionCoefficientCoherence` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverComponentIdentity` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleUnionHomotopyChainData` | 28 | 1 | proof |
-| `Sheaf.Paper.CechPushforwardTupleTotal` | 28 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.TensorPullbackCompositionHomotopyCounit` | 28 | 1 | proof |
+| `Sheaf.Paper.ModuleCupSinglePairingHomology` | 28 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.HorizontalTransferInverseFormula` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SchemeCanonicalTensorUnitComponent` | 29 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SchemeTensorHomUncurrySummandNaturality` | 30 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuity` | 31 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeDerivedTensorHomologyCoordinates` | 32 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.FlatTelescopeArrowDiagram` | 32 | 1 | proof |
+| `Sheaf.Paper.ModuleCupShiftedUnitChainTensor` | 32 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineStalkBaseSecondLocalizationComparison` | 33 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeDerivedTensorMate` | 33 | 1 | proof |
-| `Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIdentity` | 34 | 1 | proof |
+| `Sheaf.Paper.ModuleCupHomologyEvaluationBijective` | 33 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FlatTelescopeArrowBarData` | 34 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FlatTelescopeBoundedNormalizationExtension` | 34 | 1 | proof |
+| `Sheaf.Algebra.Homology.AffinePushforwardComparisonFactorization` | 35 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BoundedFlatModelNormalization` | 35 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.MayerVietorisOpenCompositionRestrictionFactors` | 37 | 1 | proof |
 | `Sheaf.CategoryTheory.Abelian.DerivedBottomCycleTransport` | 37 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.AffineModelStageHomEquationOfCoherentObjects` | 40 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.AffineModelCoherentObjectComparisons` | 41 | 1 | proof |
 | `Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization` | 41 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.AffineModelCoherentObjectComparisons` | 42 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit` | 47 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SelfTorNonpositiveChosenComparisons` | 47 | 1 | proof |
-| `Sheaf.CategoryTheory.DerivedMatePastedUnit` | 48 | 1 | proof |
 
 Waiting, not claimable: 14 modules whose proof uses a node that has no Lean declaration yet.
 
