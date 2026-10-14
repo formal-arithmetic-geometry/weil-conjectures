@@ -14217,3 +14217,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:04 L: returned deliver/Q3/Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso (reviewer RETURN: (reviewer X-e81b5, head e81b5f88f) H10 (compilation; stage-3 reader gate): lean/Sheaf/AlgebraicGeometry/MixedHomTensorPu)
 - 02:05 L: merged deliver/XRa3e07659d1a5d330/Sheaf.Paper.CechCupPullbackCompat (stage 3; reviewer PASS; first push; landing 20261014T020502-L-3808366 (proof); batch 20261014T020501; modules 1; new nodes 0)
 - 02:05 L: merged deliver/A2/Sheaf.Algebra.Homology.KInjectiveProducts (stage 3; reviewer PASS; first push; landing 20261014T020503-L-3808473 (proof); batch 20261014T020501; modules 1; new nodes 0)
+- 02:05 L: merged deliver/A2/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (stage 3; reviewer PASS; first push; landing 20261014T020503-L-3808668 (proof); batch 20261014T020501; modules 1; new nodes 0)
