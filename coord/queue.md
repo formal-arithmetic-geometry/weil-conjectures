@@ -12,11 +12,11 @@
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
+| `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData` | 34 | 1 | disputed |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` | 0 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CartesianHigherImageAffineSectionLocalVanishing` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardDerivedFibreResidueBridge` | 24 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData` | 34 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates` | 50 | 1 | proof |
 
 Waiting, not claimable: 1 modules whose proof uses a node that has no Lean declaration yet.
