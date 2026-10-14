@@ -7,7 +7,7 @@
    "place": "step 5 of its split (source: Pro-etale Cohomology, proof of Lemma Tag 09AK (label lemma-compare-constructible): reduction to $X$ qcqs, induction on the number of strata, a closed stratum $Z=X_k$ near $x$, the sequence of Lemma Tag 09AH, and the comparisons Lemma Tag 09AF ($j_!$) and Tag 09A6 ($i_*$); with literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf, Lemma 6.1.11, p. 43, Lemma 6.2.3 (4), p. 45 ($k_!\\circ\\nu^*\\simeq\\nu^*\\circ k_!$) and Corollary 5.1.9, p. 35, in place of the five lemma)",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Locally, a stratum of a constructible partition is closed with quasi-compact complement",
@@ -20,9 +20,58 @@
   "def-weil-locally-closed-subset",
   "def-weil-constructible-subset"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $Y_k$ is locally closed, write $Y_k=W\\cap Z$ with $W$ open and $Z$ closed. We have $y\\in W$. By [lem-weil-pbc-affine-opens-basis], applied to the scheme $Y$, the open $W$ and $y\\in W$, choose an affine open $V$ with $y\\in V\\subseteq W$. Then $Y_k\\cap V=Z\\cap V$ is closed in $V$ by the subspace topology.",
+   "uses": [
+    "def-weil-locally-closed-subset",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma Tag 01IT (label lemma-basis-affine-opens); locally closed definition in Topology, Basic notions Tag 004E"
+   }
+  },
+  {
+   "text": "For every $\\nu$, write $Y_\\nu=W_\\nu\\cap Z_\\nu$ with $W_\\nu$ open and $Z_\\nu$ closed in $Y$. Then $Y_\\nu\\cap V=(W_\\nu\\cap V)\\cap(Z_\\nu\\cap V)$, with the first factor open and the second closed in $V$, so it is locally closed. Since $V$ is open in $Y$ and $Y_\\nu$ is constructible in $Y$, [lem-weil-pbc-constructible-open-restriction] applied with $X=Y$, $U=V$ and $E=Y_\\nu$ proves constructibility in $V$.",
+   "uses": [
+    "def-weil-locally-closed-subset",
+    "lem-weil-pbc-constructible-open-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma Tag 005J (inverse image under an open immersion)"
+   }
+  },
+  {
+   "text": "The complement $C=V\\setminus(Y_k\\cap V)$ is open by Step 1 and constructible in $V$ by Step 2 and the Boolean-complement clause of [def-weil-constructible-subset]. Since $V$ is an affine scheme, [lem-weil-pbc-affine-scheme-qcqs] makes it quasi-compact. Apply [lem-weil-pbc-constructible-is-retrocompact] to the topological space $V$ and its constructible subset $C$: the whole space $V$ is a quasi-compact open test subset, so $C\\cap V=C$ is quasi-compact.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-constructible-is-retrocompact",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma Tag 005H (label lemma-constructible) and Lemma Tag 09YH (label lemma-constructible-is-retrocompact), with Algebra Lemma Tag 00E8 (label lemma-quasi-compact)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-locally-closed-subset",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-constructible-open-restriction",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-constructible-is-retrocompact",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemmas Tags 005J (lemma-open-immersion-constructible-inverse-image), 005H (lemma-constructible) and 09YH (lemma-constructible-is-retrocompact); Schemes Lemma Tag 01IT (lemma-basis-affine-opens); Algebra Lemma Tag 00E8 (lemma-quasi-compact)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -37,10 +86,38 @@
    "results": "none",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "locally closed constructible stratum has affine neighborhood where it is closed with quasi-compact complement",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsConstructible, IsRetrocompact",
+   "results": "Actual logged hits: IsRetrocompact.isConstructible, Topology.IsConstructible.image_of_isOpenEmbedding, Topology.IsConstructible.image_of_isClosedEmbedding, Topology.isConstructible_preimage_iff_of_isOpenEmbedding, Topology.IsConstructible.preimage, Topology.IsConstructible.empty_union_induction",
+   "date": "2026-10-14",
+   "verdict": "no exact match; ingredient results only"
+  },
+  {
+   "tool": "grep",
+   "query": "isCompact_univ|isBasis_affine|isTopologicalBasis.*affine|IsConstructible.preimage",
+   "results": "Actual logged hits: Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean, Mathlib/AlgebraicGeometry/FunctionField.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match; ingredient results only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a scheme an open neighborhood of a point contains an affine open neighborhood, and a constructible subset of a quasi compact space is quasi compact",
+   "results": "Actual logged hits: AlgebraicGeometry.quasiSeparatedSpace_iff_affine, AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens, IsCompact.isConstructible, Topology.IsLocallyConstructible.isConstructible_of_subset_of_isCompact, Topology.IsLocallyConstructible.isConstructible, AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover, AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen, AlgebraicGeometry.IsAffineOpen.isQuasiSeparated",
+   "date": "2026-10-14",
+   "verdict": "no exact match; ingredient results only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +137,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-comparison"
+ "unit": "sk-prop-sf-comparison",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-sf-constructible-partition-local-closed-stratum",
+  "worker": "stage1",
+  "summary": "Three-step local closed-stratum argument using existing nodes only: locally closed intersection, affine neighbourhood basis, restriction of constructibility, Boolean complement, affine quasi-compactness and constructible retrocompactness. Second reading supplied two missing existing-node citations and expanded the restriction calculation. No new nodes.",
+  "blueprint": "Step 5 of lem-sf-proetale-constructible-origin: choose an affine neighbourhood where the selected locally closed stratum is closed and its complement is quasi-compact.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constructible-is-retrocompact",
+    "why": "Step 3 uses this generic topological fact to make the constructible complement quasi-compact; the sk-prop-sf-comparison unit has no route node supplying it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constructible-is-retrocompact"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-c43a1b8da",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-c43a1b8da (reviewer sub-agent of L); spot-checked: Read the full item and all cited statements; checked the three proof steps against Stacks 004E, 005H, 005J, 09YH, 01IT and 00E8, the unit/chapter route, and empty/one-stratum cases. Mathematics is correct. Corrected three record faults: missing off-unit tool-use declaration, stale source route, and omitted actual search records. Whole corrected JSON and review.md are written; no new nodes or target weakening.; 1 file(s) fixed by the reviewer"
+ }
 }
