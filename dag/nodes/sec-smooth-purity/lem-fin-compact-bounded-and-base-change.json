@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fin-compact-bounded-and-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Compact direct images needed by the generic argument",
@@ -15,38 +15,184 @@
  "stmt_deps": [
   "def-weil-pbc-constructible-complexes",
   "def-weil-pbc-scheme-conventions",
-  "sbc-def-base-change-map"
+  "def-amb-etale-compact-support",
+  "def-cbc-exchange-map"
  ],
  "proof": [
   {
-   "text": "Choose the compactification $f=pj$ supplied by\n[thm-nagata-compactification]. By\n[def-amb-etale-compact-support], $Rf_!K=Rp_*j_!K$.\nThe extension by zero is bounded constructible by\n[lem-fin-extension-by-zero]; the proper direct image is\nbounded constructible by [lem-fin-proper-bounded-constructible].\nIn the base-changed compactification the exchange is the composite\nof the extension-by-zero comparison in\n[sbc-prop-extension-by-zero-and-arbitrary-base-change] and\nthe proper comparison in [thm-weil-pbc-bounded-below].\nBoth are isomorphisms. This proof uses no ordinary direct-image\nfiniteness for an open immersion and asserts no bound on the\ndimensions of the fibers of the chosen compactification.",
+   "text": "Put $A=\\mathbf F_\\ell$ (with $\\ell$ prime). The field spectrum is Noetherian: its only ideals are zero and the unit ideal. The finite-type-over-Noetherian theorem gives that $X$ and $S$ are Noetherian. In particular $S$ is quasi-compact and quasi-separated: a finite cover by Noetherian affines makes its topological space Noetherian, so every open, including an intersection of two affine opens, is quasi-compact. Apply Nagata to the separated finite-type $f$ and obtain a compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p}S$. By the definition of compactification, $j$ is a quasi-compact open immersion and $p$ is proper. Since proper morphisms are finite type, finite-type Noetherian permanence applied to $p$ first gives that $\\overline X$ is Noetherian, hence quasi-compact. Clause (e) of the cited permanence lemma makes the composite of $p$ with the structure morphism of $S$ locally of finite type. Its target is the affine one-point scheme $\\operatorname{Spec}k$, whose whole inverse image is the quasi-compact $\\overline X$; thus this composite is quasi-compact and consequently finite type over the same field. The ordinary small-etale compact-support definition identifies $Rf_!K$ with $Rp_*j_!K$.",
    "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
     "thm-nagata-compactification",
+    "def-nagata-compactification",
+    "def-weil-pbc-scheme-conventions",
     "def-amb-etale-compact-support",
-    "lem-fin-extension-by-zero",
-    "lem-fin-proper-bounded-constructible",
-    "sbc-prop-extension-by-zero-and-arbitrary-base-change",
-    "thm-weil-pbc-bounded-below"
+    "lem-weil-pbc-proper-fp-permanence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-compact-bounded-and-base-change.md",
+    "place": "Proof, first two sentences; Nagata: Stacks Tag 0F41, flat.tex theorem-nagata; Noetherian permanence: Tag 01T6"
+   }
+  },
+  {
+   "text": "Choose $a\\le b$ with $\\mathcal H^q(K)=0$ outside $[a,b]$. Extension by zero along $j$ is exact by the cited extension-by-zero proposition. Thus the exact-functor cohomology comparison gives $\\mathcal H^q(j_!K)\\cong j_!\\mathcal H^q(K)$. For $q\\in[a,b]$, each right hand side is constructible by the extension-by-zero constructibility lemma, applied with ambient scheme $\\overline X$, which is finite type over the field. For the other $q$ it is zero, since an additive functor sends zero to zero. Therefore $j_!K$ is bounded constructible on $\\overline X$, by the definition of that category.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-fin-extension-by-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-compact-bounded-and-base-change.md",
+    "place": "Proof, extension-by-zero sentence; Stacks Tag 03S6, etale-cohomology.tex lemma-shriek-base-change"
+   }
+  },
+  {
+   "text": "The coefficient ring $A=\\mathbf F_\\ell$ is finite and killed by $\\ell$; $\\ell$ is invertible on every scheme over the given field because its characteristic differs from $\\ell$. Thus these are the finite coefficients required by the proper bounded-constructibility lemma. Apply that lemma to $p:\\overline X\\to S$ and the bounded constructible complex $j_!K$ from step 2. Both schemes are finite type over the field by step 1 and $p$ is proper. It follows that $Rp_*j_!K$, and hence $Rf_!K$, belongs to $D^b_c(S,A)$.",
+   "uses": [
+    "sbc-def-coefficient-conventions",
+    "lem-fin-proper-bounded-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-compact-bounded-and-base-change.md",
+    "place": "Proof, proper-direct-image sentence"
+   }
+  },
+  {
+   "text": "Let $v:S\\prime\\to S$ be any of the stated morphisms. Using the base-change compactification definition, form $\\overline X\\prime=\\overline X\\times_S S\\prime$, with $p\\prime:\\overline X\\prime\\to S\\prime$, $w:\\overline X\\prime\\to\\overline X$, and $j\\prime:X\\prime=X\\times_S S\\prime\\hookrightarrow\\overline X\\prime$. The compactification-base-change lemma says that $(j\\prime,p\\prime)$ is a compactification of $f\\prime$. In particular $p\\prime$ is proper and finite type; since $S\\prime$ is Noetherian, $\\overline X\\prime$ is Noetherian by finite-type Noetherian permanence. The open subscheme $X\\prime$ is locally Noetherian, and its underlying open subset of the Noetherian topological space $\\overline X\\prime$ is quasi-compact, so $X\\prime$ is also Noetherian. The ordinary compact-support definition is consequently applicable to this compactification too. The extension-by-zero base-change proposition, applied to the square for $j$ and $w$, supplies the isomorphism $w^{-1}j_!K\\xrightarrow{\\sim}j\\prime_!v_X^{-1}K$ for complexes. This step requires no finite-type-over-the-original-field hypothesis on $S\\prime$.",
+   "uses": [
+    "lemma-nagata-compactification-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-amb-etale-compact-support",
+    "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+    "def-nagata-compactification-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-compact-bounded-and-base-change.md",
+    "place": "Proof, base-changed compactification and extension-by-zero comparison; Stacks Tag 03S6"
+   }
+  },
+  {
+   "text": "The complex $j_!K$ is bounded below and all its cohomology is killed by $\\ell$, hence torsion. Apply bounded-below proper base change to the Cartesian square for $p$ and $v$ to obtain an isomorphism $v^{-1}Rp_*(j_!K)\\to Rp\\prime_*w^{-1}(j_!K)$ after forgetting coefficients. The exchange-forget-coefficients lemma identifies this specified abelian exchange with the underlying exchange in $A$-module derived categories and reflects its invertibility. Hence the displayed proper exchange is an isomorphism in $D^+(S\\prime_{\\mathrm{et}},A)$ itself. This uses only properness of $p$, bounded-below torsion cohomology of $j_!K$, and the Cartesian square; it does not require $S\\prime$ to have finite type over a field.",
+   "uses": [
+    "thm-weil-pbc-bounded-below",
+    "lem-weil-pbc-exchange-forget-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-compact-bounded-and-base-change.md",
+    "place": "Proof, proper comparison; Stacks Tag 095T, etale-cohomology.tex theorem-proper-base-change, with bounded-below extension supplied by cited theorem"
+   }
+  },
+  {
+   "text": "For the constant ring $A$, inverse image equals module pullback $u^*$ and is exact, by inverse-image exactness. Thus the notation $v^*,v_X^*$ agrees with $v^{-1},v_X^{-1}$. In the compact-support exchange definition, the inverse image acting on $j_!K$ is along the ambient projection $w:\\overline X\\prime\\to\\overline X$ (the displayed $g^{-1}j_!K$ there is a typing error: its $g$ has target $S$, not $\\overline X$). With this explicitly typed extension-zero comparison, its representative using $(j,p)$ and its base change is precisely the composite $v^{-1}Rp_*j_!K\\to Rp\\prime_*w^{-1}j_!K\\to Rp\\prime_*j\\prime_!v_X^{-1}K$. The first arrow is the isomorphism from step 5. The second is the image under $Rp\\prime_*$ of the isomorphism from step 4, so its inverse is the image of the inverse of that isomorphism. The compact-support identifications identify the endpoints with $v^*Rf_!K$ and $Rf\\prime_!v_X^*K$. The inverse of the composite is the composite of these two inverses in reverse order. This proves the asserted invertibility of the specified compact-support exchange.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-cbc-exchange-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-compact-bounded-and-base-change.md",
+    "place": "Proof, final comparison-composite argument"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
   "thm-nagata-compactification",
+  "def-nagata-compactification",
+  "def-weil-pbc-scheme-conventions",
   "def-amb-etale-compact-support",
-  "lem-fin-extension-by-zero",
-  "lem-fin-proper-bounded-constructible",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-pbc-constructible-complexes",
   "sbc-prop-extension-by-zero-and-arbitrary-base-change",
-  "thm-weil-pbc-bounded-below"
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-fin-extension-by-zero",
+  "sbc-def-coefficient-conventions",
+  "lem-fin-proper-bounded-constructible",
+  "lemma-nagata-compactification-base-change",
+  "def-nagata-compactification-base-change",
+  "thm-weil-pbc-bounded-below",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-cbc-exchange-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-compact-bounded-and-base-change.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a separated finite type morphism of schemes over a field and finite torsion coefficients, compactly supported derived direct image preserves bounded constructibility and commutes with arbitrary base change",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, PrimeSpectrum.isConstructible_comap_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, PrimeSpectrum.BasicConstructibleSetData.map_g, PrimeSpectrum.isConstructible_range_comap, PrimeSpectrum.BasicConstructibleSetData.map, AlgebraicGeometry.IsFinite.of_comp",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state etale compact-support finiteness or base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LowerShriek\"",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state etale compact-support finiteness or base change"
+  },
+  {
+   "tool": "grep",
+   "query": "LowerShriek|compactSupport|Constructible.*Derived",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state etale compact-support finiteness or base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology with compact supports proper base change bounded constructible complexes finite coefficient ring",
+   "results": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, LightCondMod.ofSheafLightProfinite, CondensedMod.ofSheafProfinite, AlgebraicGeometry.IsEtale.of_comp, CompHausLike.LocallyConstantModule.functor, LightCondAb.ofSheafLightProfinite",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state etale compact-support finiteness or base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported etale derived pushforward preserves bounded constructible complexes and satisfies base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*cohomology|properBaseChange|boundedConstructible",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state etale compact-support finiteness or base change"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerShriek|isIso_baseChange|D[bB]c",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not state etale compact-support finiteness and exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward with proper support of torsion sheaves on the etale topology, finiteness and change of base",
+   "results": "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.Scheme.Modules.pushforward; AlgebraicGeometry.Scheme.Modules.pushforwardComp; SheafOfModules.bijective_pushforwardSections; SheafOfModules.pushforward; SheafOfModules.pushforward_obj_val; AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward; AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not state etale compact-support finiteness and exchange"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\"",
+   "results": "Submodule.baseChange; LinearMap.baseChange; LinearEquiv.baseChange; LinearMap.baseChange_id; Submodule.baseChange_bot; Submodule.baseChange_top; Submodule.tmul_mem_baseChange_of_mem; Submodule.baseChange_mono",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not state etale compact-support finiteness and exchange"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -81,5 +227,69 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-fin-compact-bounded-and-base-change",
+  "worker": "stage1",
+  "summary": "Expanded the compactification proof into six steps, checking finite-type and Noetherian hypotheses, deriving bounded extension by zero from its sheaf statement and exactness, and using the coefficient-forgetting comparison to justify proper base change in module categories. No new nodes.",
+  "blueprint": "Original Proof: compactification and ordinary-etale definition (step 1), extension-by-zero bounded constructibility (step 2), proper finiteness (step 3), base-changed compactification and open exchange (step 4), proper exchange (step 5), composite identifying the specified map (step 6).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) used as stated in the compactification argument; this unit contains no replacement for this tool."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic Nagata compactification, [stacks-project] used as stated in the compactification argument; this unit contains no replacement for this tool."
+   },
+   {
+    "node": "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+    "why": "Generic Extension by zero base change used as stated in the compactification argument; this unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic An exact functor commutes with cohomology of cochain complexes used as stated in the compactification argument; this unit contains no replacement for this tool."
+   },
+   {
+    "node": "lemma-nagata-compactification-base-change",
+    "why": "Generic Base change of a compactification used as stated in the compactification argument; this unit contains no replacement for this tool."
+   },
+   {
+    "node": "thm-weil-pbc-bounded-below",
+    "why": "Generic Bounded-below derived proper base change used as stated in the compactification argument; this unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Generic The derived exchange morphism commutes with forgetting the coefficient ring used as stated in the compactification argument; this unit contains no replacement for this tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact used as stated in the compactification argument; this unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic locally-finite-type composition, clause (e), verifies the compactification is locally of finite type over the field; quasi-compactness follows separately from its Noetherian source. No finiteness route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "thm-nagata-compactification",
+  "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lemma-nagata-compactification-base-change",
+  "thm-weil-pbc-bounded-below",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-84c04c657",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-84c04c657 (reviewer sub-agent of L); spot-checked: Read the item, all six steps, cited statements and source locations in full. Compactification hypotheses, bounded constructibility, module-coefficient proper exchange, and the specified composite check out. No new nodes or circular dependencies. The existing exchange-definition typing error is disclosed and explicitly corrected in the argument. No condensed pro-etale comparison is assumed. Detailed checks and accepted tool uses are recorded in review.md."
+ }
 }
