@@ -1,0 +1,94 @@
+{
+ "id": "lem-weil-pbc-ringed-site-cech-refinement-square",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical torsion constructibility input: 0GKW final sentence invokes 0GKV for prime constant coefficients. Expanded by 0GKV case (b): f_* O_X = O_S and R^1 f_* O_X is finite locally free. Etale form: compatibility of 03P2 comparison with restriction between etale base objects and with scalar multiplication. The naturality comparison is checked after refining the pulled-back affine open cover.",
+   "via": [
+    "lem-weil-pbc-qcoherent-cohomology-comparison-pullback",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Canonical ringed-site Cech comparison commutes with refinement after site pullback",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites [def-weil-pbc-sites-and-cohomology], with final objects, finite fibre products and all objects, arrows, coefficients and index sets small in a common universe. Let $f:\\mathcal D\\to\\mathcal C$ be a morphism of sites given by a continuous functor $u:\\mathcal C\\to\\mathcal D$ preserving the final object and finite fibre products. Let $\\mathcal O_{\\mathcal C},\\mathcal O_{\\mathcal D}$ be sheaves of rings and $\\rho:\\mathcal O_{\\mathcal C}\\to f_*\\mathcal O_{\\mathcal D}$ a ring-sheaf map. For module sheaves $M,N$ on these ringed sites [def-weil-sheaf-of-modules-category], let $h:M\\to f_*N$ be $\\mathcal O_{\\mathcal C}$-linear via $\\rho$. Assume enough injectives in both module categories [def-sp-injective-resolutions]. Let $\\mathcal U=(U_i\\to1_{\\mathcal C})_{i\\in I}$ and $\\mathcal V=(V_j\\to1_{\\mathcal D})_{j\\in J}$ be finite coverings. Fix $r:J\\to I$ and maps $a_j:V_j\\to u(U_{r(j)})$. For a tuple $\\mathbf j=(j_0,\\ldots,j_p)$ write $V_{\\mathbf j}$ for its fibre product and $a_{\\mathbf j}:V_{\\mathbf j}\\to u(U_{r(j_0)}\\times\\cdots\\times U_{r(j_p)})$ for the map given by the projections. Define the additive Cech cochain map [def-weil-pbc-site-cech-complex] by\n$$\\gamma(s)_{\\mathbf j}=N(a_{\\mathbf j})\\bigl(h_{U_{r(j_0)}\\times\\cdots\\times U_{r(j_p)}}(s_{r(j_0)\\ldots r(j_p)})\\bigr).$$\nFor either module category define $H^q$ as right-derived evaluation at the final object, using a nonnegative injective resolution, and define $e^q_{\\mathcal U,M}:\\check H^q(\\mathcal U,M)\\to H^q(\\mathcal C,M)$ as $H^q(\\alpha)^{-1}H^q(\\beta)$: $\\alpha$ is restriction of global resolution sections to the first-quadrant total Cech-resolution complex [def-sp-double-complex-total], with Cech degree $t$ first and differential $d_C+(-1)^t d_I$, and $\\beta$ is its coefficient augmentation. Define $e^q_{\\mathcal V,N}$ in the same way. The canonical map $h_H:H^q(\\mathcal C,M)\\to H^q(\\mathcal D,N)$ is obtained by resolving $M,N$, resolving the termwise direct image of the resolution of $N$, lifting $h$ to that replacement, and inverting the resulting quasi-isomorphism on global sections. Then these canonical comparison maps are independent of resolutions and, for every $q\\ge0$,\n$$h_H\\circ e^q_{\\mathcal U,M}=e^q_{\\mathcal V,N}\\circ H^q(\\gamma).$$\nThere is no acyclicity assumption on $M,N$ or the pulled-back cover. For abelian sheaves take the constant integer ring sheaves; in this case $h_H$ is inverse-image cohomology pullback followed by the map induced by the adjoint $f^{-1}M\\to N$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AX, label lemma-cech-cohomology, canonical augmentations; agent general ringed-site refinement version of cohomology.tex Tag 01FD, label lemma-functoriality-cech, tuple formula and augmented pentagon. Module augmentations: sites-cohomology.tex Tag 03FC, label lemma-injective-module-trivial-cech; the direct-image replacement normalization uses Tag 08J6, label remark-before-Leray."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-site-cech-complex",
+  "def-sp-double-complex-total"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical Cech to derived cohomology comparison for sheaves of modules on ringed sites commutes with pullback and cover refinement",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, there is a natural isomorphism expressing that the composition of sheafificat\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback\", \"module\": \"Mathlib/CategoryTheory/Sites/ConcreteSheafification\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type w}\\n  [inst_1 : CategoryTheory.Category.{w', w} D] {FD : D → D → Type u_1} {CD : D → Type t}\\n  [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [instCC : CategoryTheory.ConcreteCategory\", \"doc\": \"For a category $\\\\mathcal{C}$ with Grothendieck topology $J$, a presheaf $P: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{D}$, a covering sieve $S$ on $X$, and a morphism $f: Y \\\\to X$, the action of the plus c\"}\n  {\"name\": \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {G : CategoryTheory.Functor C D} {A : Type w}\\n  [inst_2 : CategoryTheory.Category.{w', w} A] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckT\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a cocontinuous functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and functors $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\math\"}\n  {\"name\": \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {G : CategoryTheory.Functor C D} {A : Type w}\\n  [inst_2 : CategoryTheory.Category.{w', w} A] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckT\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a cocontinuous functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and functors $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\math\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Refining a pulled back covering commutes with the Cech edge map to sheaf cohomology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Meq.pullback_refine\", \"module\": \"Mathlib/CategoryTheory/Sites/ConcreteSheafification\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type w}\\n  [inst_1 : CategoryTheory.Category.{w', w} D] {FD : D → D → Type u_1} {CD : D → Type t}\\n  [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [inst_3 : CategoryTheory.ConcreteCategory\", \"doc\": \"Given a presheaf $ P $, objects $ X $ and $ Y $, covering sieves $ S $ and $ T $ on $ X $, a morphism $ h:S\\\\to T $ between sieves, a morphism $ f:Y\\\\to X $, and a matching family $ x $ for $ T $, the p\"}\n  {\"name\": \"CategoryTheory.Meq.pullback_apply\", \"module\": \"Mathlib/CategoryTheory/Sites/ConcreteSheafification\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type w}\\n  [inst_1 : CategoryTheory.Category.{w', w} D] {FD : D → D → Type u_1} {CD : D → Type t}\\n  [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [inst_3 : CategoryTheory.ConcreteCategory\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a presheaf $P: \\\\mathcal{C}^\\\\text{op} \\\\to \\\\mathcal{D}$, a covering sieve $S$ on an object $X$, and a morphism $f: Y \\\\to X$, the pullback\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.diagramPullback_app\", \"module\": \"Mathlib/CategoryTheory/Sites/Plus\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type w}\\n  [inst_1 : CategoryTheory.Category.{w', w} D]\\n  [inst_2 :\\n    ∀ (P : CategoryTheory.Functor Cᵒᵖ D) (X : C) (S : J.Cover X), CategoryTheory.Limits.HasMultiequalizer (S.index P)]\\n  (P : C\", \"doc\": \"For a morphism $ f: X \\to Y $ in a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a contravariant functor $ P: \\\\mathcal{C}^\\\\text{op} \\to \\\\mathcal{D} $, and a covering sieve $S$ on $Y$, the app\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.diagramPullback\", \"module\": \"Mathlib/CategoryTheory/Sites/Plus\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      {D : Type w} →\\n        [inst_1 : CategoryTheory.Category.{w', w} D] →\\n          [inst_2 :\\n              ∀ (P : CategoryTheory.Functor Cᵒᵖ D) (X : C) (S : J.Cover X),\\n                C\", \"doc\": \"For a morphism $ f: X \\to Y $ in a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, and a contravariant functor $ P: \\\\mathcal{C}^{\\\\text{op}} \\to \\\\mathcal{D} $, this defines a natural tr\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback\", \"module\": \"Mathlib/CategoryTheory/Sites/ConcreteSheafification\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type w}\\n  [inst_1 : CategoryTheory.Category.{w', w} D] {FD : D → D → Type u_1} {CD : D → Type t}\\n  [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [instCC : CategoryTheory.ConcreteCategory\", \"doc\": \"For a category $\\\\mathcal{C}$ with Grothendieck topology $J$, a presheaf $P: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{D}$, a covering sieve $S$ on $X$, and a morphism $f: Y \\\\to X$, the action of the plus c\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toPullbackObj\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] →\\n        (S : J.MayerVietorisSquare) →\\n          (P : CategoryTheory.Functor Cᵒᵖ (Type v')) →\\n            P.obj (Opposite.op S.X₄\", \"doc\": \"Given a presheaf $P$ on the opposite category $\\\\mathcal{C}^{\\\\text{op}}$ and a Mayer-Vietoris square $S$ in $\\\\mathcal{C}$ satisfying sheaf gluing conditions, this function maps an element of $P(X_4)$ t\"}\n  {\"name\": \"CategoryTheory.Meq.pullback\", \"module\": \"Mathlib/CategoryTheory/Sites/ConcreteSheafification\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {D : Type w} →\\n        [inst_1 : CategoryTheory.Category.{w', w} D] →\\n          {FD : D → D → Type u_1} →\\n            {CD : D → Type t} →\\n              [inst_2 : (X Y : D) → FunLike (\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a presheaf $P: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{D}$, a covering sieve $S$ on an object $X$, and a morphism $f: Y \\\\to X$, this const\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.glue\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] →\\n        {S : J.MayerVietorisSquare} →\\n          {P : CategoryTheory.Functor Cᵒᵖ (Type v')} →\\n            S.SheafCondition P →\\n  \", \"doc\": \"Given a presheaf $ P $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, and a Mayer-Vietoris square $ S $ satisfying the sheaf condition, this constructs the glued section over $ S.X_4 \"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"cohomology\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(refinement|edge|comparison)|((refinement|edge|comparison).*cech)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech comparison natural under morphisms of ringed sites and refinements",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-qcoherent-cohomology-comparison-pullback",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

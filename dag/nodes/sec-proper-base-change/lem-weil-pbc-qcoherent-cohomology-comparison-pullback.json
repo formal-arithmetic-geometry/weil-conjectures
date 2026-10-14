@@ -37,9 +37,120 @@
   "def-weil-pbc-cohomology-pullback",
   "def-weil-pbc-module-cohomology-fmap"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a finite affine open cover $\\mathcal U=(U_i)$ of $X$. More generally any finite open covering admits a finite affine refinement by [lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings]. Apply [lem-weil-pbc-separated-affine-open-intersection] with $A=\\mathbf Z$ to the separated structural map to $\\operatorname{Spec}\\mathbf Z$, and iterate: every nonempty tuple intersection $U_{i_0\\ldots i_p}$ is affine. This uses separatedness, not merely quasi-separatedness. The same conclusions hold for $Y$. Open intersections are the tuple fibre products in the etale site by [lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites].",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+    "lem-weil-pbc-separated-affine-open-intersection",
+    "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P2, separated-case affine-cover paragraph"
+   }
+  },
+  {
+   "text": "Put $E=L(F_{\\mathrm{et}})$. For $L=\\mathrm{id}$ and an affine tuple intersection $j:W\\hookrightarrow X$, [lem-weil-pbc-module-restriction-open-immersion-colimits], clause (2), says that $F|_W$ is quasi-coherent. By [lem-weil-pbc-etale-cohomology-over-open], $H^r(W,F_{\\mathrm{et}})$ computed over the object $W$ of $X_{\\mathrm{et}}$ is canonically $H^r(W_{\\mathrm{et}},(F|_W)_{\\mathrm{et}})$. Apply [lem-sc-etale-affine-qcoherent] to $W$ and $F|_W$ to make this zero for $r>0$. For a coefficient lift use [new-etale-finite-affine-cech-basis] with the affine objects of $X_{\\mathrm{et}}$: its finite affine families are cofinal and closed under tuple fibre products. On each such family [new-etale-affine-tensor-cech-vanishing] gives positive Cech vanishing for the lifted tensor-section sheaf, which is precisely $E$ by [def-sc-etale-qcoherent-module]. The explicit/categorical Cech identification is [lem-weil-pbc-site-cech-mathlib-comparison]. Thus all three hypotheses of [lem-weil-pbc-cech-vanishing-criterion] hold and $H^r(W,E)=0$ for every affine etale object $W$ and $r>0$. The basis and criterion are used in the common larger universe, where the site skeleton, finite indices and lifted groups are small. No preservation of injectives by coefficient lift is asserted. Repeat for $G$ on $Y$.",
+   "uses": [
+    "lem-sc-etale-affine-qcoherent",
+    "new-etale-finite-affine-cech-basis",
+    "new-etale-affine-tensor-cech-vanishing",
+    "def-sc-etale-qcoherent-module",
+    "lem-weil-pbc-site-cech-mathlib-comparison",
+    "lem-weil-pbc-cech-vanishing-criterion",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-etale-cohomology-over-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P2, affine acyclicity; sites-cohomology.tex Tag 03F9, lemma-cech-vanish-collection"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-acyclic-cech-edge-compatibility] and step 2, the normalized etale edge $e_{\\mathcal U,E}:\\check H^q(\\mathcal U,E)\\to H^q(X_{\\mathrm{et}},E)$ is an isomorphism. For module cohomology use the canonical comparison [def-sc-module-cech-comparison]: its restriction augmentation $\\alpha$ induces an isomorphism, and [lem-sc-module-cech-beta-affine-quasi-iso] makes its coefficient augmentation $\\beta$ a quasi-isomorphism on this affine-intersection family. Hence its module edge $m_{\\mathcal U,F}$ is an isomorphism. On every tuple, the associated etale sheaf evaluates to $\\Gamma(U_{\\mathbf i},F)$, or its lift. Define the cochain isomorphism $d_{\\mathcal U,F}:\\check C(\\mathcal U,E)\\to\\check C(\\mathcal U,F)$ coordinatewise by identity or $\\operatorname{ULift.down}$. It commutes with the differential: each signed face restriction commutes with down by the definition of $L$, and down preserves addition. It is invertible coordinatewise by identity or up. Set $c^q_{X,F}=m_{\\mathcal U,F}\\,H^q(d_{\\mathcal U,F})\\,e_{\\mathcal U,E}^{-1}$. In degree zero both edges identify a glued section with that section, so $c^0$ has the stated normalization. The two total-complex index conventions give the same normalized edge: with Cech degree $t$ and resolution degree $r$, multiplication by $(-1)^{tr}$ identifies the differential $d_C+(-1)^t d_I$ with $d_I+(-1)^r d_C$ [def-sp-double-complex-total]. It is the identity on both augmentation axes, so it changes neither $H(\\alpha)^{-1}H(\\beta)$ nor its degree-zero normalization.",
+   "uses": [
+    "lem-weil-pbc-acyclic-cech-edge-compatibility",
+    "def-sc-module-cech-comparison",
+    "lem-sc-module-cech-beta-affine-quasi-iso",
+    "def-sc-etale-qcoherent-module",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P2, separated-case equal Cech complexes; cohomology.tex Tag 01EQ, lemma-cech-cohomology"
+   }
+  },
+  {
+   "text": "The definition in step 3 is independent of the affine covering. Given two finite affine covers, take a finite affine refinement of their intersection covering by [lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings]. Apply [lem-weil-pbc-ringed-site-cech-refinement-square] with the identity site morphism and coefficient identity, first for etale abelian sheaves and then for Zariski modules. Both normalized edges commute with the refinement cochain maps. Coordinatewise down commutes with these maps because they only restrict sections and reindex tuples. For an affine refinement all four edges are invertible by step 3; therefore the two composites defining $c$ agree after cancellation. This constructs the simultaneous canonical family without a choice depending on a morphism or a scalar.",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+    "lem-weil-pbc-ringed-site-cech-refinement-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01FD, lemma-functoriality-cech, identity-morphism refinement case; sites-cohomology.tex Tag 03AX"
+   }
+  },
+  {
+   "text": "For $g:Y\\to X$, choose a finite affine refinement $\\mathcal V=(V_j)$ of the open cover $(g^{-1}U_i)$ by [lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings], with index map $r$ and $V_j\\subseteq g^{-1}U_{r(j)}$. These inverse images need not be affine; only $\\mathcal V$ and $\\mathcal U$ are used as acyclic covers. The etale base-change functor defines a morphism of sites by [lem-weil-pbc-sets-etale-inverse-image-exact]. Apply [lem-weil-pbc-ringed-site-cech-refinement-square] to its adjoint coefficient map $E\\to g_*L(G_{\\mathrm{et}})$: the resulting cohomology map is exactly $H^q(\\psi_{\\mathrm{et}})g_{\\mathrm{et}}^*$, with the resolution/unit normalization of [def-weil-pbc-cohomology-pullback]. Apply the same lemma to the ringed Zariski sites and the module map $F\\to g_*G$ adjoint to $\\psi$; its resolution construction is the map $\\psi_{\\mathrm{Zar}}^*$ of [def-weil-pbc-module-cohomology-fmap]. The two refinement cochain maps have the same coordinates: for a tuple $\\mathbf j$, structurally pull back $s_{r(\\mathbf j)}$, apply $\\psi$, and restrict to $V_{\\mathbf j}$. Coordinatewise down commutes with this formula since the lifted map is $\\operatorname{ULift.map}$ of that additive map. Thus $d_{\\mathcal V,G}\\gamma_{\\mathrm{et}}=\\gamma_{\\mathrm{Zar}}d_{\\mathcal U,F}$. Insert the two edge squares into the formula of step 3 and cancel the invertible etale edges to obtain $c^q_{Y,G}H^q(\\psi_{\\mathrm{et}})g_{\\mathrm{et}}^*=\\psi_{\\mathrm{Zar}}^*c^q_{X,F}$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+    "lem-weil-pbc-sets-etale-inverse-image-exact",
+    "lem-weil-pbc-ringed-site-cech-refinement-square",
+    "def-weil-pbc-cohomology-pullback",
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01FD, tuple formula and augmented comparison diagram; sites-cohomology.tex Tag 03AX"
+   }
+  },
+  {
+   "text": "Take $g=\\mathrm{id}_X$, $G=F$, and $\\psi$ multiplication by $a$. The section formula of [def-sc-etale-qcoherent-module] sends a tuple section to its product with $a|_{U_{\\mathbf i}}$, or to its lifted product. The identity pullback is identity on cohomology by [lem-weil-pbc-cohomology-pullback-functorial], clause 4. Step 5 now reads $c^q_{X,F}H^q(\\mu_a)=H^q(a\\cdot-)c^q_{X,F}$, which is the final clause.",
+   "uses": [
+    "def-sc-etale-qcoherent-module",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P2, canonical comparison; coefficient specialization of step 5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+  "lem-sc-etale-affine-qcoherent",
+  "new-etale-finite-affine-cech-basis",
+  "new-etale-affine-tensor-cech-vanishing",
+  "def-sc-etale-qcoherent-module",
+  "lem-weil-pbc-site-cech-mathlib-comparison",
+  "lem-weil-pbc-cech-vanishing-criterion",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-etale-cohomology-over-open",
+  "lem-weil-pbc-acyclic-cech-edge-compatibility",
+  "def-sc-module-cech-comparison",
+  "lem-sc-module-cech-beta-affine-quasi-iso",
+  "def-sp-double-complex-total",
+  "lem-weil-pbc-ringed-site-cech-refinement-square",
+  "lem-weil-pbc-sets-etale-inverse-image-exact",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-weil-pbc-cohomology-pullback-functorial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03P2, separated affine-cover proof, with explicit refinement and coefficient-universe compatibility from the canonical augmentations; cohomology.tex Tag 01FD"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -75,10 +186,17 @@
    "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent cohomology Zariski etale comparison with pullback and lifted coefficients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
   "by": "worker",
@@ -94,5 +212,89 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-qcoherent-cohomology-comparison-pullback",
+  "worker": "stage1",
+  "summary": "Proved the comparison using affine acyclic Cech covers, a coordinatewise lift/down isomorphism, and a common affine refinement for arbitrary scheme pullback. Reused the existing lifted affine vanishing and acyclic edge lemmas; added only the general ringed-site refinement square. No statement change. Maintainer reading supplies the ordinary-coefficient open-localization citations and makes total-index sign compatibility explicit.",
+  "blueprint": "Classical torsion constructibility input: 0GKW final sentence invokes 0GKV for prime constant coefficients. Expanded by 0GKV case (b): f_* O_X = O_S and R^1 f_* O_X is finite locally free. Etale form: compatibility of 03P2 comparison with restriction between etale base objects and with scalar multiplication.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+    "why": "Generic Cech/affine-cohomology tool used for the 03P2 comparison; it does not replace the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-separated-affine-open-intersection",
+    "why": "Generic Cech/affine-cohomology tool used for the 03P2 comparison; it does not replace the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+    "why": "Generic Cech/affine-cohomology tool used for the 03P2 comparison; it does not replace the proper-base-change unit route."
+   },
+   {
+    "node": "lem-sc-etale-affine-qcoherent",
+    "why": "Generic Cech/affine-cohomology tool used for the 03P2 comparison; it does not replace the proper-base-change unit route."
+   },
+   {
+    "node": "new-etale-finite-affine-cech-basis",
+    "why": "Generic Cech/affine-cohomology tool used for the 03P2 comparison; it does not replace the proper-base-change unit route."
+   },
+   {
+    "node": "new-etale-affine-tensor-cech-vanishing",
+    "why": "Generic Cech/affine-cohomology tool used for the 03P2 comparison; it does not replace the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-cech-mathlib-comparison",
+    "why": "Generic Cech/affine-cohomology tool used for the 03P2 comparison; it does not replace the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-cech-vanishing-criterion",
+    "why": "Generic Cech/affine-cohomology tool used for the 03P2 comparison; it does not replace the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-acyclic-cech-edge-compatibility",
+    "why": "Generic Cech/affine-cohomology tool used for the 03P2 comparison; it does not replace the proper-base-change unit route."
+   },
+   {
+    "node": "lem-sc-module-cech-beta-affine-quasi-iso",
+    "why": "Generic Cech/affine-cohomology tool used for the 03P2 comparison; it does not replace the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-exact",
+    "why": "Generic Cech/affine-cohomology tool used for the 03P2 comparison; it does not replace the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-functorial",
+    "why": "Generic Cech/affine-cohomology tool used for the 03P2 comparison; it does not replace the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-cohomology-over-open",
+    "why": "Converts evaluation cohomology over an affine open object of X_et to cohomology on its own etale site, with the associated restricted quasi-coherent coefficient; generic localization tool for the 03P2 affine-cover argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+  "lem-sc-etale-affine-qcoherent",
+  "new-etale-finite-affine-cech-basis",
+  "new-etale-affine-tensor-cech-vanishing",
+  "lem-weil-pbc-site-cech-mathlib-comparison",
+  "lem-weil-pbc-cech-vanishing-criterion",
+  "lem-weil-pbc-acyclic-cech-edge-compatibility",
+  "lem-sc-module-cech-beta-affine-quasi-iso",
+  "lem-weil-pbc-sets-etale-inverse-image-exact",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-etale-cohomology-over-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-d430f774b",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-d430f774b (reviewer sub-agent of L); spot-checked: Read the full mathematics and checked 03P2, 03AX/03F9, 01EQ/01FD, ringed-site normalization, and archived master target coefficients and exchange direction. Repaired C1/C4 localization citations, B3 total-complex convention/dependency, and incomplete new-node metadata. Six steps and the sole new node pass edge-case and duplicate checks; corrected dependency closure is acyclic. Whole corrected JSON files and detailed review.md are written.; 2 file(s) fixed by the reviewer"
  }
 }
