@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.SchemeCanonicalShiftUnitIso
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.NormalizedKFlatRepresentativeComparison
+import Sheaf.CategoryTheory.NatTransFromResolvingClass
+import Sheaf.Algebra.Homology.KFlatResolution
 
 /-! # A normalized counit on K-flat representatives
 
@@ -23,6 +26,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated MonoidalCategory
 namespace AlgebraicGeometry
 
+-- The construction supplies its own counit, independently of the supplied ε₀.
+set_option linter.unusedVariables false in
 /-- A K-flat counit can be normalized so that its translation square on K-flat
 representatives has the supplied translated-unit tensorator form.
 
@@ -95,6 +100,42 @@ theorem exists_normalized_derivedPullback_kFlat_counit
               tensorIso e (Iso.refl _) ≪≫
               schemeCanonicalShiftUnitIso Z
                 ((derivedPullback f).obj (DerivedCategory.Qh.obj X))).hom ≫
-            (ε.app X)⟦(1 : ℤ)⟧' := by sorry
+            (ε.app X)⟦(1 : ℤ)⟧' := by
+  let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  let H := HomotopyCategory A (ComplexShape.up ℤ)
+  let q := HomotopyCategory.quotient A (ComplexShape.up ℤ)
+  let Q := DerivedCategory.Qh (C := A)
+  let F := Q ⋙ derivedPullback f
+  let G := (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙
+    (DerivedCategory.Qh : HomotopyCategory
+      (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤
+      schemeDerivedCategory Z)
+  let W := HomotopyCategory.quasiIso A (ComplexShape.up ℤ)
+  have : W.HasRightCalculusOfFractions :=
+    by infer_instance
+  have hres : ∀ X : H, ∃ (R : H) (s : R ⟶ X),
+      kFlatShiftRepresentative Y R ∧ W s := by
+    intro X
+    obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    obtain ⟨P, s, hP, _, hs, _⟩ :=
+      CochainComplex.exists_isKFlatResolution (R := Y.sheaf) K
+    exact ⟨q.obj P, q.map s, ⟨P, hP, Or.inl rfl⟩,
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs⟩
+  have hinv : W.IsInvertedBy F := by
+    intro X X' s hs
+    have : IsIso (Q.map s) := Localization.inverts Q W s hs
+    exact inferInstanceAs (IsIso ((derivedPullback f).map (Q.map s)))
+  obtain ⟨e, α, hα, hsquare⟩ := exists_normalized_kFlat_representative_comparison f
+  obtain ⟨ε, hε⟩ := exists_natTrans_from_resolvingClass W
+    (kFlatShiftRepresentative Y) hres F G hinv (fun X hX ↦ (α X hX).hom) hα
+  refine ⟨e, ε, ?_, ?_⟩
+  · intro P hP
+    rw [hε (q.obj P) ⟨P, hP, Or.inl rfl⟩]
+    infer_instance
+  · intro P hP
+    dsimp only
+    rw [hε (q.obj P⟦(1 : ℤ)⟧) ⟨P, hP, Or.inr rfl⟩,
+      hε (q.obj P) ⟨P, hP, Or.inl rfl⟩]
+    exact hsquare P hP
 
 end AlgebraicGeometry

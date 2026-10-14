@@ -1,0 +1,144 @@
+{
+ "id": "lem-sc-normalized-kflat-representative-comparison",
+ "kind": "statement",
+ "title": "Joint normalized comparison restricted to K-flat representatives",
+ "statement": "Let f:Z→Y be a proper morphism of Noetherian schemes [def-weil-proper-morphism]. Use the derived categories [def-pc-derived-category], derived pullback F [def-pc-derived-pullback], termwise tensor pullback H [def-pc-module-pullback], the recorded derived tensor [def-pc-scheme-derived-tensor-structure], and the canonical shifted-unit comparison c [def-sc-scheme-canonical-shift-unit-iso] built from [def-sc-scheme-canonical-tensor-shift]. Assume F has a supplied strong monoidal structure and tensorPullback f is additive. Let q be the homotopy quotient, Q the derived localization, G=H⋙Q_Z, and let C consist of the homotopy objects literally equal to q(P) or q(P)[1] for a K-flat complex P [def-pc-kflat-complex]. There exist jointly e:F(O_Y[1])≅O_Z[1] and isomorphisms α_X:F(Q(X))≅G(X) for X∈C. For every homotopy map s:X→X' with both ends in C, F(Q(s))≫α_X'=α_X≫G(s). For every K-flat P with X=q(P), α_(X[1])≫commShift_G(X)=F(commShift_Q(X))≫b(Q(X))≫α_X[1], where b(K)=F(c_Y(K)⁻¹) followed by the supplied inverse tensorator at (O_Y[1],K), then e tensor identity, then c_Z(F(K)). No natural transformation or component at an object outside C is part of this assertion.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "K-flat representative construction and its supplied-tensorator shift coherence, restricted before homotopy-category descent (agent expansion, not a literal assertion of 06YJ)."
+ },
+ "stmt_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-sc-scheme-canonical-shift-unit-iso",
+  "def-pc-kflat-complex",
+  "def-weil-proper-morphism",
+  "def-pc-module-pullback",
+  "def-sc-scheme-canonical-tensor-shift"
+ ],
+ "proof": [
+  {
+   "text": "Compute derived pullback on K-flat representatives. Use the structure-sheaf complex and its translate for the unit and shifted unit. Termwise pullback identifies these with the analogous representatives over Z. Combine the representative comparison with the supplied monoidal unit map to obtain e.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-kflat-complex",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite P[1] as O_Y[1] tensor P by the first-variable Koszul comparison and shifted left unitor. Construct its comparison using the supplied inverse tensorator and the shifted-unit comparison e, jointly with the comparison at P. Tensorator associativity identifies the two translated tensor rewrites; the two unit equations identify their unit specializations. Thus the representative formulas agree on overlapping descriptions and give the displayed square. Naturality of the Koszul maps, unitors, tensorator and representative maps gives naturality between objects in C. Replacement maps are inverted on K-flat objects, so these comparisons are independent of the representative. Every component is a composite of isomorphisms. This step makes no extension to objects outside C; that is a separate right-fraction construction.",
+   "uses": [
+    "def-sc-scheme-canonical-shift-unit-iso",
+    "def-sc-scheme-canonical-tensor-shift",
+    "def-pc-derived-category",
+    "def-pc-derived-pullback",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-kflat-complex",
+  "def-pc-module-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-sc-scheme-canonical-shift-unit-iso",
+  "def-sc-scheme-canonical-tensor-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N2",
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "K-flat representative construction and its supplied-tensorator shift coherence, restricted before homotopy-category descent (agent expansion, not a literal assertion of 06YJ)."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "jointly normalized derived pullback comparison on K flat representatives naturality and shifted tensor unit coherence",
+   "date": "2026-10-14",
+   "results": "8 hits: CategoryTheory.NatTrans.instCommShiftPullbackShiftHomFunctorNatIsoComp, CategoryTheory.NatTrans.commShiftPullback, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, CategoryTheory.NatTrans.PullbackShift.natIsoComp, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Limits.map_lift_pullbackComparison",
+   "verdict": "Generic APIs only; no exact representative or resolving-class extension theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift.of_core",
+   "date": "2026-10-14",
+   "results": "1 hits: CategoryTheory.NatTrans.CommShift.of_core",
+   "verdict": "Generic APIs only; no exact representative or resolving-class extension theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*[Kk][Ff]lat|[Kk][Ff]lat.*normalized|counit.*shift",
+   "date": "2026-10-14",
+   "results": "20 hits: Mathlib/CategoryTheory/Shift/ShiftedHomOpposite.lean, Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean",
+   "verdict": "Generic APIs only; no exact representative or resolving-class extension theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct a jointly normalized K flat derived pullback comparison commuting with shifted tensor unit and supplied monoidal tensorator",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error. Recorded as unavailable, not as no match.",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NormalizedDerivedPullbackKFlatCounit",
+  "date": "2026-10-14",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Parent cone normalization step 3: K-flat representative construction and its supplied-tensorator shift coherence, restricted before homotopy-category descent (agent expansion, not a literal assertion of 06YJ).",
+   "via": [
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NormalizedKFlatRepresentativeComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedKFlatRepresentativeComparison.lean",
+  "declaration": "AlgebraicGeometry.exists_normalized_kFlat_representative_comparison",
+  "statement": "theorem exists_normalized_kFlat_representative_comparison\n    {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [Functor.Monoidal (derivedPullback f)]\n    [(Scheme.Modules.tensorPullback f).Additive] :\n    ∃ e : (derivedPullback f).obj ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) ≅\n        (𝟙_ (schemeDerivedCategory Z))⟦(1 : ℤ)⟧,\n      ∃ α : ∀ X : HomotopyCategory\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ),\n        kFlatShiftRepresentative Y X →\n          ((DerivedCategory.Qh ⋙ derivedPullback f).obj X ≅\n            ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n              (DerivedCategory.Qh : HomotopyCategory\n                (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n                schemeDerivedCategory Z)).obj X),\n        (∀ (X X' : HomotopyCategory\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))\n          (hX : kFlatShiftRepresentative Y X) (hX' : kFlatShiftRepresentative Y X')\n          (s : X ⟶ X'),\n          (DerivedCategory.Qh ⋙ derivedPullback f).map s ≫ (α X' hX').hom =\n            (α X hX).hom ≫\n              ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n                (DerivedCategory.Qh : HomotopyCategory\n                  (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n                  schemeDerivedCategory Z)).map s) ∧\n        ∀ (P : CochainComplex\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n        (hP : CochainComplex.IsKFlat (R := Y.sheaf) P),\n        let X := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P\n        let G := (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n          (DerivedCategory.Qh : HomotopyCategory\n            (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n            schemeDerivedCategory Z)\n        (α (X⟦(1 : ℤ)⟧) ⟨P, hP, Or.inr rfl⟩).hom ≫\n            (G.commShiftIso (1 : ℤ)).hom.app X =\n          (derivedPullback f).map ((DerivedCategory.Qh.commShiftIso (1 : ℤ)).hom.app X) ≫\n            ((derivedPullback f).mapIso\n                (schemeCanonicalShiftUnitIso Y (DerivedCategory.Qh.obj X)).symm ≪≫\n              asIso (Functor.OplaxMonoidal.δ (derivedPullback f)\n                ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) (DerivedCategory.Qh.obj X)) ≪≫\n              tensorIso e (Iso.refl _) ≪≫\n              schemeCanonicalShiftUnitIso Z\n                ((derivedPullback f).obj (DerivedCategory.Qh.obj X))).hom ≫\n            (α X ⟨P, hP, Or.inl rfl⟩).hom⟦(1 : ℤ)⟧'",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.kFlatShiftRepresentative",
+   "AlgebraicGeometry.exists_normalized_kFlat_representative_comparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261014T022549-L-4046769",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261014T022549-L-4046769",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
