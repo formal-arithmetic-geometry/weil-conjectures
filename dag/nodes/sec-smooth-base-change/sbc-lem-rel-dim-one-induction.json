@@ -3,42 +3,179 @@
  "blueprint": {
   "is": "sbc-lem-rel-dim-one-induction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The induction step in relative dimension one",
- "statement": "Let $f:X\\to S$ be an affine smooth morphism of relative dimension one\nwith $X$ affine, let $n$ be an integer invertible on $S$, and assume, for some $q\\geq1$, that\n$\\mathrm{BC}(f,n,q')$ holds universally for all $q'\\leq q-1$ in the\nsense of [sbc-def-base-change-property]. Then $\\mathrm{BC}(f,n,q)$\nholds universally, and hence $\\mathrm{BC}(f,n,q')$ holds universally\nfor all $q'\\leq q$.",
+ "statement": "Let $f:X\\to S$ be an affine morphism [pqf-def-affine-morphism] which is smooth of relative dimension one [def-sbc-smooth-morphisms], with $X$ affine. Let $n\\geq1$ be an integer invertible on $S$, and let $q\\geq1$ be an integer. Assume that $\\mathrm{BC}(f,n,q')$ holds universally for every $0\\leq q'\\leq q-1$, in the sense of [sbc-def-base-change-property]. Then $\\mathrm{BC}(f,n,q)$ holds universally, and hence $\\mathrm{BC}(f,n,q')$ holds universally for every $0\\leq q'\\leq q$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-induction/sbc-lem-rel-dim-one-induction.md",
   "place": "node sbc-lem-rel-dim-one-induction, order 1415"
  },
  "stmt_deps": [
+  "pqf-def-affine-morphism",
+  "def-sbc-smooth-morphisms",
   "sbc-def-base-change-property"
  ],
  "proof": [
   {
-   "text": "Suppose $\\mathrm{BC}(f,n,q)$ does not hold universally. By\n[sbc-lem-bc-universal-test] (whose hypothesis is the universal\ncumulative $\\mathrm{BC}(f,n,q')$, $q'\\leq q-1$, assumed here) there is\na universal curve test datum: after base\nchange and normalization, $X'=X\\times_SS'\\to S'$ is a base change of\n$f$ with $S'$ affine, hence (affine smooth morphisms of relative\ndimension one being stable under base change, as is immediate from\n[def-sbc-smooth-morphisms])\naffine smooth of relative dimension one with $X'$ affine, $S'$ is the\nspectrum of a normal domain with algebraically closed fraction field\n$L$, $K/L$ an extension of algebraically closed fields, and for some\n$d\\mid n$ the sheaf $R^qh_*(\\mathbf Z/d\\mathbf Z)$ is nonzero. This\ncontradicts [sbc-thm-universal-test-vanishing], whose hypotheses\nhold: $d$ is invertible on $S'$ because $d\\mid n$ and $n$ is invertible\non $S$ and on all its base changes (the $\\mathrm{BC}$-property\nbeing a statement about base changes of\n$f$); the normalization $S''\\to S'$ in $\\operatorname{Spec}K$ is\nintegral because the integral closure of the domain $A'$ in $K$ is\nintegral over $A'$ (commutative algebra). Hence $\\mathrm{BC}(f,n,q)$\nholds universally. (Equivalently: the hypotheses of the lemma are\ninherited by every base change $f'$ of $f$ with affine source, and the\nclass of smooth morphisms of relative dimension $\\leq1$ is stable under\nbase change, so the induction produces the universal form.)",
+   "text": "Suppose $\\mathrm{BC}(f,n,q)$ fails universally. The hypothesis supplies the universal cumulative lower-degree assumption of [sbc-lem-bc-universal-test], and $q\\geq1$: its phrase \"all $q'\\leq q-1$\" ranges over the nonnegative degrees on which [sbc-def-base-change-property] defines $\\mathrm{BC}$. That lemma gives two Cartesian squares $X\\leftarrow X'\\leftarrow Y$ above $S\\leftarrow S'\\leftarrow\\operatorname{Spec}K$, with $f':X'\\to S'$ a base change of $f$, $S'$ affine, integral and normal with algebraically closed function field $L$, $K$ algebraically closed, $\\operatorname{Spec}K\\to S'$ dominant, and an integer $d\\mid n$ with $R^qh_*(\\mathbf Z/d\\mathbf Z)\\ne0$ for the horizontal map $h:Y\\to X'$, while $e:Y\\to\\operatorname{Spec}K$ is the vertical map in the corrected diagram of the cited statement. Write $S'=\\operatorname{Spec}A$. Dominance means that $A\\to K$ is injective: its kernel is the prime giving the image point, which is the generic point $(0)$ of the integral scheme $S'$. Thus it extends to the inclusion $L=\\operatorname{Frac}A\\to K$, and the bottom arrow is the composite $\\operatorname{Spec}K\\to\\operatorname{Spec}L\\to\\operatorname{Spec}A$.",
    "uses": [
     "sbc-lem-bc-universal-test",
-    "def-sbc-smooth-morphisms",
+    "sbc-def-base-change-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYU, theorem-smooth-base-change, second proof: reduction by lemma-base-change-does-not-hold (Tag 0F08) and final curve-test argument"
+   }
+  },
+  {
+   "text": "By clause (1) of [lem-weil-pbc-affine-morphism-permanence], $f'$ is affine; since $S'$ is affine, clause (2) makes $X'$ affine. By clause (1) of [lem-sbc-smooth-relative-dimension-permanence], $f'$ is smooth of relative dimension one. These are statements about arbitrary base changes, so they apply to the first Cartesian square produced in step 1. In particular no affineness of the original base $S$ is being assumed.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYU, theorem-smooth-base-change, second proof: reduction by lemma-base-change-does-not-hold (Tag 0F08) and final curve-test argument"
+   }
+  },
+  {
+   "text": "The integer $n$ is invertible on $S'$: pull back its inverse on $S$ along $S'\\to S$ (as also specified in [sbc-def-base-change-property]). Write $n=da$ with $a\\in\\mathbf Z$. At every stalk of $\\mathcal O_{S'}$, if $v$ is the inverse of $n$, then $d(av)=(da)v=nv=1$. Consequently $d$ is invertible on $S'$. This argument also covers negative $d$; because $n\\geq1$ and $d\\mid n$, $d$ is nonzero.",
+   "uses": [
+    "sbc-def-base-change-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYU, theorem-smooth-base-change, second proof: reduction by lemma-base-change-does-not-hold (Tag 0F08) and final curve-test argument"
+   }
+  },
+  {
+   "text": "Apply [sbc-thm-universal-test-vanishing] to the second Cartesian square, with $X'$ in place of $X$, $S'$ in place of $S$, the inclusions $A\\subset L\\subset K$ of step 1, and the integer $d$. Step 1 supplies normality, the algebraically closed function field and extension; step 2 supplies affine smooth relative dimension one and the affine source; step 3 supplies invertibility of $d$. As $q\\geq1$, the theorem gives $R^qh_*(\\mathbf Z/d\\mathbf Z)=0$, contradicting its nonvanishing in step 1.",
+   "uses": [
     "sbc-thm-universal-test-vanishing"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYU, theorem-smooth-base-change, second proof: reduction by lemma-base-change-does-not-hold (Tag 0F08) and final curve-test argument"
+   }
+  },
+  {
+   "text": "The supposition in step 1 is therefore impossible, so $\\mathrm{BC}(f,n,q)$ holds universally. For any $0\\leq q'\\leq q$, either $q'=q$, when this conclusion applies, or $q'<q$, when integrality gives $q'\\leq q-1$ and the original hypothesis applies. By [sbc-def-base-change-property] this is precisely $\\mathrm{UBC}^{\\leq q}(f,n)$. There is no need to repeat the contradiction on a second base: step 1 already detected failure of the universal property.",
+   "uses": [
+    "sbc-def-base-change-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYU, theorem-smooth-base-change, second proof: reduction by lemma-base-change-does-not-hold (Tag 0F08) and final curve-test argument"
+   }
   }
  ],
  "proof_deps": [
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "sbc-def-base-change-property",
   "sbc-lem-bc-universal-test",
-  "def-sbc-smooth-morphisms",
   "sbc-thm-universal-test-vanishing"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-induction/sbc-lem-rel-dim-one-induction.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EYU, theorem-smooth-base-change, second proof: reduction by lemma-base-change-does-not-hold (Tag 0F08) and final curve-test argument"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an affine smooth morphism of relative dimension one universal etale base change in degrees less than q implies universal etale base change in degree q",
+   "results": "{\"t\": \"2026-10-14T09:05:26Z\", \"tool\": \"leanfinder\", \"query\": \"For an affine smooth morphism of relative dimension one universal etale base change in degrees less than q implies universal etale base change in degree q\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.of_comp\", \"RingHom.etale_iff_formallyUnramified_and_smooth\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\"], \"digest\": \"edc05942d304fda1\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern geometric etale morphisms or scheme limits, not the universal cohomological induction statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BaseChangeProperty\"",
+   "results": "{\"t\": \"2026-10-14T09:05:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"BaseChangeProperty\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern geometric etale morphisms or scheme limits, not the universal cohomological induction statement"
+  },
+  {
+   "tool": "grep",
+   "query": "BaseChangeProperty|higherDirectImage|CurveTestDatum",
+   "results": "{\"t\": \"2026-10-14T09:05:41Z\", \"tool\": \"grep\", \"query\": \"BaseChangeProperty|higherDirectImage|CurveTestDatum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern geometric etale morphisms or scheme limits, not the universal cohomological induction statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal smooth etale cohomology base change induction on cohomological degree for affine relative curves",
+   "results": "{\"t\": \"2026-10-14T09:05:42Z\", \"tool\": \"leansearch\", \"query\": \"Universal smooth etale cohomology base change induction on cohomological degree for affine relative curves\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonvanishing higher direct image of a constant finite cyclic etale sheaf detects a failure of universal base change for a smooth affine curve",
+   "results": "{\"t\": \"2026-10-14T09:05:42Z\", \"tool\": \"leanfinder\", \"query\": \"Nonvanishing higher direct image of a constant finite cyclic etale sheaf detects a failure of universal base change for a smooth affine curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"5cd81f59140bba87\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern geometric etale morphisms or scheme limits, not the universal cohomological induction statement"
+  },
+  {
+   "tool": "grep",
+   "query": "universalBaseChange|baseChangeHomology|SmoothOfRelativeDimension",
+   "results": "{\"t\": \"2026-10-14T09:15:07Z\", \"tool\": \"grep\", \"query\": \"universalBaseChange|baseChangeHomology|SmoothOfRelativeDimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"18a6bbc5671e56cf\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: geometric smooth/etale permanence results do not state the cohomological induction; no higherDirectImage result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth affine relative curve satisfies etale cohomological base change in the next degree if it holds in all smaller degrees",
+   "results": "{\"t\": \"2026-10-14T09:15:07Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth affine relative curve satisfies etale cohomological base change in the next degree if it holds in all smaller degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.of_comp\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"RingHom.etale_iff_formallyUnramified_and_smooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\"], \"digest\": \"03e8b97375e237ac\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: geometric smooth/etale permanence results do not state the cohomological induction; no higherDirectImage result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\"",
+   "results": "{\"t\": \"2026-10-14T09:15:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"higherDirectImage\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: geometric smooth/etale permanence results do not state the cohomological induction; no higherDirectImage result"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*etale",
+   "results": "{\"t\": \"2026-10-14T09:49:57Z\", \"tool\": \"grep\", \"query\": \"etale.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/RingHom/Etale.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\"], \"digest\": \"e26d3a14e2eb7d99\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: returned geometric etale or module-sheaf functor declarations do not state etale cohomological induction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\" \"baseChange\"",
+   "results": "{\"t\": \"2026-10-14T09:49:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"cohomology\\\" \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Function expected at\\n  \\\"cohomology\\\"\\nbut this term has type\\n  String\\n\\nNote: Expected a function because this term is being applied to the argument\\n  \\\"baseChange\\\"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "query error: Loogle rejected the missing comma; rerun with comma recorded separately"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of torsion sheaves on etale sites commute with pullback along smooth affine curves by induction in the degree",
+   "results": "{\"t\": \"2026-10-14T09:49:57Z\", \"tool\": \"leanfinder\", \"query\": \"Higher direct images of torsion sheaves on etale sites commute with pullback along smooth affine curves by induction in the degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"Algebra.etaleLocus_eq_compl_support\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\"], \"digest\": \"e1a5e8a24d37af13\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: returned geometric etale or module-sheaf functor declarations do not state etale cohomological induction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"baseChange\"",
+   "results": "{\"t\": \"2026-10-14T09:50:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"cohomology\\\", \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: zero hits"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +200,29 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-lem-induction"
+ "unit": "sk-lem-induction",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "sbc-lem-rel-dim-one-induction",
+  "worker": "stage1",
+  "summary": "Expanded the source contradiction into five steps with all hypotheses checked. Reused existing affine and relative-dimension permanence nodes instead of treating geometric stability as part of the smoothness definition. Made the dominant geometric generic morphism and the unit-divisibility argument explicit; removed the unused normalization-integrality assertion. Clarified the coefficient and degree domains fixed by the existing BC definition. No new nodes. The reference Lean proof has an open transitive dependency, so no attachment is claimed. Repair of the returned delivery: revalidated every proof citation against the current DAG; the reduction statement now labels the horizontal map h and vertical map e correctly. Updated step 1 and its verbatim quotation to that corrected interface.",
+  "blueprint": "The sole proof paragraph of sbc-lem-rel-dim-one-induction and the sole contradiction step of sk-lem-induction: failure datum (step 1), geometric base change (step 2), divisor invertibility (step 3), vanishing contradiction (step 4), cumulative universal conclusion (step 5).",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Clause (1) is the generic geometric stability tool explicitly required by the unit contradiction; neither sk-lem-induction nor its cited reduction/vanishing statements gives this permanence theorem. It supplies the same route rather than replacing it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-relative-dimension-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-30b147c11",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-30b147c11 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, blueprint route and Stacks 0F02/0F08/0EYU. All five steps check: the generic-point composite, horizontal h, cyclic abelian coefficients, permanence hypotheses and divisor invertibility match exactly. No new nodes or repairs. Accepted the declared smooth-permanence tool use. Archived master target interfaces checked; no arbitrary-coefficient comparison or finished Lean attachment assumed. Concrete checks and inherited DAG issues recorded in review.md."
+ }
 }
