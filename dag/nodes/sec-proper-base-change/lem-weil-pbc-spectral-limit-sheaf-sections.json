@@ -26,9 +26,91 @@
   "def-weil-pbc-topological-inverse-image",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First pass between abelian sheaves and their underlying sheaves of sets. For any directed diagram of abelian sheaves $A_j$, put $P(V)=\\varinjlim_j A_j(V)$ in abelian groups. The restriction maps are induced by those of the $A_j$. The universal properties of the group colimit and of sheafification give $\\operatorname{Hom}(P^\\#,B)=\\varprojlim_j\\operatorname{Hom}(A_j,B)$ for every abelian sheaf $B$, so $P^\\#$ is the abelian-sheaf colimit. By [def-weil-directed-colimit-abelian-groups] and [lem-weil-pbc-filtered-colimit-sets-elementwise], the underlying set of each $P(V)$ is the set colimit (both have representatives with equality at a common later stage). By [lem-pc-sites-sheafification-underlying-sets], $|P^\\#|$ is the set sheafification of $|P|$, hence the set-sheaf colimit by the same universal-property calculation. Likewise the presheaf inverse image in [def-weil-pbc-topological-inverse-image] is a directed colimit over neighbourhood opens; the same two representative descriptions and the same sheafification lemma show that its abelian inverse image has as underlying sheaf the set inverse image, including its section unit. Thus the cited set-sheaf results below apply to the underlying sets of the abelian sheaves without changing the canonical maps.",
+   "uses": [
+    "def-weil-directed-colimit-abelian-groups",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-topological-inverse-image",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0A33, label lemma-descend-opens, proof: algebraic-structure specialization, with Sites section-sheaves-algebraic-structures"
+   }
+  },
+  {
+   "text": "Put $U=p_i^{-1}U_i$, $U_j=f_{ij}^{-1}U_i$ for $j\\ge i$, and $G_j=p_j^{-1}F_j$. By [lem-weil-pbc-spectral-directed-limit-spectral], $X$ is spectral and $U$ is quasi-compact open. Any open covering of $U$ refines to a covering by quasi-compact basis opens contained in its members; choose a finite subcover by quasi-compactness. Their pairwise intersections are quasi-compact by [def-weil-spectral-space]. This verifies precisely hypothesis (2) of [lem-weil-pbc-sheaves-directed-colimit-sections]. Apply that node to the underlying set diagram of the $G_j$ and its colimit (Step 1) to obtain $F(U)=\\varinjlim_{j\\ge i}G_j(U)$. Restricting to $j\\ge i$ loses no cocone data: for any index $a$ choose $b\\ge a,i$ and use the map at $b$ after the transition from $a$; two choices agree at a common upper index. All maps are homomorphisms, so this bijection of underlying sets is an isomorphism of groups.",
+   "uses": [
+    "lem-weil-pbc-spectral-directed-limit-spectral",
+    "def-weil-spectral-space",
+    "lem-weil-pbc-sheaves-directed-colimit-sections",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0A33, label lemma-descend-opens, proof: first display; Sheaves lemma-directed-colimits-sections and Topology lemma-directed-inverse-limit-spectral-spaces"
+   }
+  },
+  {
+   "text": "For each $j\\ge i$, the open $U_j$ is quasi-compact by the spectrality of $f_{ij}$, and $U=p_j^{-1}U_j$ by $f_{ij}p_j=p_i$. Apply [lem-weil-pbc-spectral-limit-pullback-sections] to the underlying set sheaf of $F_j$ and $U_j$. With $H_{j,k}=(f_{jk}^{-1}F_j)(U_k)$ for $k\\ge j$, its conclusion gives $G_j(U)=\\varinjlim_{k\\ge j}H_{j,k}$, using the pullback units and canonical composition isomorphisms specified in that node. Step 1 identifies these with the abelian inverse images. The units and composition identifications are additive (the latter are the canonical identifications of the same left adjoints), so this is also a group isomorphism. These identifications are natural in $F_j$: a sheaf morphism commutes with the unit and with each composition identification, as is seen by precomposing with the section unit in the inverse-image adjunction. Therefore the outer transitions in Step 2 are exactly pullback followed by the coefficient maps adjoint to $\\alpha_{jj'}$.",
+   "uses": [
+    "lem-weil-pbc-spectral-limit-pullback-sections",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0A33, label lemma-descend-opens, proof: last display; application of lemma-compute-pullback-to-limit"
+   }
+  },
+  {
+   "text": "Write $\\beta_{jk}:f_{jk}^{-1}F_j\\to F_k$ for the adjoint of $\\alpha_{jk}$, so $\\beta_{jj}=\\mathrm{id}$ and $\\beta_{jl}=\\beta_{kl}\\circ f_{kl}^{-1}\\beta_{jk}$ under the canonical composition identification. Set $B_k=F_k(U_k)$ and $L=\\varinjlim_{k\\ge i}B_k$, with its maps $b_k$. Define $q_{j,k}:H_{j,k}\\to L$ by $q_{j,k}=b_k\\circ\\beta_{jk,U_k}$. For $l\\ge k$, applying the pullback unit and then $\\beta_{jl}$ equals applying $\\beta_{jk}$ and then the component of $\\alpha_{kl}$, by naturality of the unit and the displayed cocycle identity. Thus $q_{j,l}$ after the inner transition equals $q_{j,k}$. For $j\\le j'\\le k$, $\\beta_{j'k}\\circ f_{j'k}^{-1}\\beta_{jj'}=\\beta_{jk}$, so these maps also obey the outer transitions. They induce $q:\\varinjlim_j\\varinjlim_{k\\ge j}H_{j,k}\\to L$. Conversely send $B_k=H_{k,k}$ into the iterated colimit by its two coprojections. The preceding identities make these maps a cocone on $B_k$, giving $r:L\\to\\varinjlim_j\\varinjlim_{k\\ge j}H_{j,k}$. We have $qr=\\mathrm{id}$ on each $B_k$, since $\\beta_{kk}=\\mathrm{id}$. On each $H_{j,k}$, $rq$ equals its own coprojection: the outer transition from $j$ to $k$ sends it to $H_{k,k}$ by $\\beta_{jk}$. The universal property of the two colimits gives $rq=\\mathrm{id}$. This proves the required double-colimit identification without claiming that $\\beta_{jk}$ itself is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0A33, label lemma-descend-opens, proof: formal argument, expanded by its cocone universal properties"
+   }
+  },
+  {
+   "text": "Combining Steps 2, 3 and 4 gives $L\\cong F(U)$. On $B_k$, the map is its unit into $G_k(U)$ followed by the sheaf-colimit coprojection into $F(U)$, because $r$ used $H_{k,k}$ and the pullback-sections isomorphism sends this diagonal term by precisely that unit. This is the canonical map in the statement. The transition $B_j\\to B_k$ is pullback along $f_{jk}$ followed by $\\beta_{jk}$, which by adjunction is exactly $\\alpha_{jk,U_j}$. Every map constructed is additive, so the canonical bijection is an isomorphism of abelian groups.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0A33, label lemma-descend-opens, proof: canonical-map identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-directed-colimit-abelian-groups",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-spectral-directed-limit-spectral",
+  "def-weil-spectral-space",
+  "lem-weil-pbc-sheaves-directed-colimit-sections",
+  "lem-weil-pbc-spectral-limit-pullback-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 0A33, label lemma-descend-opens, proof using Sheaves Tag 009F (lemma-directed-colimits-sections), Sheaves Tag 0A32 (lemma-compute-pullback-to-limit), and Topology Tag 0A2Z (lemma-directed-inverse-limit-spectral-spaces); the formal double-colimit argument and abelian specialization are written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -88,7 +170,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-spectral-limit-cohomology",
   "by": "worker",
@@ -104,5 +186,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-spectral-limit-sheaf-sections",
+  "worker": "stage1",
+  "summary": "Repaired the split using existing directed-colimit sections and spectral-projection nodes; justified passage to underlying sets and wrote mutually inverse double-colimit maps with their coefficient cocycles. No new nodes.",
+  "blueprint": "Realizes the ancestor blueprint sentence that sections on quasi-compact opens are represented and identified at a finite stage.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-sheafification-underlying-sets",
+    "why": "Generic sheafification compatibility on any site, needed to apply the existing set-sheaf spectral statements to abelian sheaves; no same-unit node states this general compatibility."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-sheafification-underlying-sets"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-603e09e18",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-603e09e18 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, unit route, cited nodes, and Stacks sources (009F, 0A2Z, 0A32, 0A33). Hypotheses, abelian coefficient category, canonical transition maps, double-colimit argument, and edge cases check out. Review written to review.md; no repairs needed."
  }
 }
