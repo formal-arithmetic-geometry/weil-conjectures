@@ -18,58 +18,128 @@
   "lem-weil-proetale-weakly-etale-localization",
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "status": "unsplit",
+ "proof": [
+  {
+   "text": "Write $P$ for the displayed direct-sum presheaf. The local-sections theorem applies first to its underlying set presheaf. Its set sheafification acquires addition by choosing local representatives for two sections on a common refinement and adding them in $P$; local equality of representatives makes this independent of choices. Negation sends a local representative $p$ to $-p$; local equality makes it well-defined. Zero is the image of $0\\in P(W)$ on each object $W$. Restricting any of these representatives gives the representative of the restricted operation, so these operations define an abelian presheaf structure. The group identities hold on local representatives and therefore hold globally by sheaf uniqueness. Any map of abelian presheaves from $P$ to an abelian sheaf factors through the set sheafification and respects these operations locally, hence globally. By the universal property this is the abelian sheafification $j_!G$. Thus every section of $j_!G$ is locally the image of a section of $P$.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AG, lemma-jshriek-zero, proof"
+   }
+  },
+  {
+   "text": "Fix $s\\in(j_!G)(V)$ and choose a covering on which it is represented in $P$ as in step 1. The covering definition, applied to the affine $V$, refines it to finitely many affine arrows $T_a\\to V$ whose images cover $V$. Pull back the representatives to these affines. By stability of closed immersions under base change, $C_a=Z\\times_XT_a\\to T_a$ is a closed immersion; write $T_a=\\operatorname{Spec}A_a$ and $C_a=\\operatorname{Spec}(A_a/I_a)$ using the affine description of a closed immersion. No finiteness of $I_a$ is asserted. Open immersions are weakly etale and composing with the original covering arrows remains weakly etale, as stated in the weakly etale localization lemma.",
+   "uses": [
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AG, lemma-jshriek-zero, proof"
+   }
+  },
+  {
+   "text": "For each $a$, form $W_a=\\operatorname{Spec}(S_a^{-1}A_a)$ with $S_a$ the elements invertible modulo $I_a$. The localization lemma makes $W_a\\to T_a$ weakly etale, with image the points specializing to $C_a$, and makes every point of $W_a$ specialize within $W_a$ to a point over $C_a$. Composition gives an object $W_a\\to V\\to X$ of the pro-etale site. To see that the $W_a\\to V$ cover, choose any $v\\in V$ and a specialization $z\\in V_Z$ of $v$. Some $t\\in T_a$ lies above $z$ because the $T_a$ cover. It belongs to $C_a$. The map $T_a\\to V$ is flat since it is weakly etale, so generalization lifting supplies $t\\prime$ specializing to $t$ and mapping to $v$. Hence $t\\prime$ is in the image of $W_a$, and $v$ is in the image of $W_a\\to V$. To check the covering definition on every affine open $H\\subseteq V$, use the affine-transition assertion of the spectrum-colimit lemma on the two-object directed ring diagram $\\Gamma(V,\\mathcal O_V)\\to\\Gamma(W_a,\\mathcal O_{W_a})$. It says $W_a\\to V$ is affine. By the definition of an affine morphism, the inverse image $W_{a,H}$ of $H$ is an affine open of $W_a$. The finite family of these opens has images with union $H$, by the surjectivity just proved. Thus the affine-open condition holds for every $H$, and the weakly etale arrows $W_a\\to V$ are a pro-etale covering.",
+   "uses": [
+    "lem-weil-pbc-affine-closed-specialization-localization",
+    "lem-weil-pbc-flat-generalizations-lift",
+    "def-weil-weakly-etale-morphism",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-small-proetale-site",
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-pbc-spec-colimit-limit",
+    "pqf-def-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AG, lemma-jshriek-zero, proof"
+   }
+  },
+  {
+   "text": "If $W_a$ is nonempty and an $X$-morphism $W_a\\to U$ existed, choose a point of $W_a$ and then its specialization lying over $C_a$. Write $q$ for that latter point and $\\mathfrak q$ for its prime in $S_a^{-1}A_a$. Its contraction contains $I_a$, so the canonical map $A_a\\to\\kappa(q)$ annihilates $I_a$ and factors through $A_a/I_a$. Applying $\\operatorname{Spec}$ gives a morphism $\\operatorname{Spec}\\kappa(q)\\to C_a\\to Z$ compatible over $X$ with $\\operatorname{Spec}\\kappa(q)\\to W_a\\to U$. The fiber-product universal property gives a morphism from this nonempty one-point spectrum to $U\\times_XZ=\\varnothing$, a contradiction. Thus the indexing set for $P(W_a)$ is empty, and $P(W_a)=0$. If $W_a=\\varnothing$, it has a unique map to $U$; the empty covering and the sheaf axiom give $G(\\varnothing\\to U)=0$, so again $P(W_a)=0$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-proetale-covering",
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AG, lemma-jshriek-zero, proof"
+   }
+  },
+  {
+   "text": "The representatives of $s$ on $T_a$ restrict to elements of $P(W_a)=0$. Naturality of the sheafification map therefore gives $s|_{W_a}=0$ for all $a$. Since step 3 gives a covering, sheaf uniqueness implies $s=0$. Every section is zero, as required. If $V$ is empty, its empty cover gives the same conclusion directly.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AG, lemma-jshriek-zero, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets",
+  "def-weil-pbc-proetale-covering",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-closed-immersion",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-affine-closed-specialization-localization",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "def-weil-weakly-etale-morphism",
+  "def-weil-pbc-small-proetale-site",
+  "lem-weil-pbc-spec-colimit-limit",
+  "pqf-def-affine-morphism",
+  "def-pc-fibre-product",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-affine-spectrum"
+ ],
+ "status": "split",
  "mathlib_searches": [
   {
+   "tool": "leanfinder",
+   "query": "Extension by zero of an abelian pro-etale sheaf vanishes on an affine scheme whose points specialize into a disjoint closed fiber",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits concern structure-sheaf sections or generic zero operations, not extension-by-zero vanishing on the small pro-etale site"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"zero\"",
+   "results": "12 hits: PresheafOfModules.instZeroHom, PresheafOfModules.zero_app, CategoryTheory.plusPlusSheaf_preservesZeroMorphisms, PresheafOfModules.Sheafify.zero_smul, PresheafOfModules.Sheafify.smul_zero, CategoryTheory.PreZeroHypercover.isSheafFor_iff_of_iso, AlgebraicGeometry.StructureSheaf.const_zero, AlgebraicGeometry.Scheme.IdealSheafData.instZero",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits concern structure-sheaf sections or generic zero operations, not extension-by-zero vanishing on the small pro-etale site"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|extensionByZero|extension_by_zero",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits concern structure-sheaf sections or generic zero operations, not extension-by-zero vanishing on the small pro-etale site"
+  },
+  {
    "tool": "leansearch",
-   "query": "Extension by zero sheaf sections vanish on a weakly etale affine neighborhood whose points specialize into a disjoint closed subscheme",
-   "results": "service unavailable",
+   "query": "Extension by zero abelian pro-etale sheaf has zero sections near a disjoint closed subscheme",
+   "results": "service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Extension by zero pro-etale sheaf vanishes on affine specialization neighborhood disjoint from closed subscheme",
-   "results": "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "Sheafification, Presieve, IsEmpty, ClosedImmersion",
-   "results": "no hits: loogle: unknown identifier 'Sheafification'",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "extension.?by.?zero|shriek|specialization|closed.?immersion",
-   "results": "no hits",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Extension by zero sheaf has zero sections if each point of an affine scheme specializes to the closed complement",
-   "results": "8 hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.basicOpen_eq_bot_iff_forall_evaluation_eq_zero, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.LocallyRingedSpace.basicOpen_eq_bot_iff_forall_evaluation_eq_zero, AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact",
-   "date": "2026-10-14",
-   "verdict": "no exact match: second reader inspected signatures; hits concern structure-sheaf sections, formal etaleness, localization spectra, presheaf restrictions or zero morphisms, and do not give this pro-etale specialization/contractibility assertion."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"SheafOfModules\", \"zero\"",
-   "results": "4 hits: PresheafOfModules.instZeroHom, PresheafOfModules.zero_app, PresheafOfModules.Sheafify.zero_smul, PresheafOfModules.Sheafify.smul_zero",
-   "date": "2026-10-14",
-   "verdict": "no exact match: second reader inspected signatures; hits concern structure-sheaf sections, formal etaleness, localization spectra, presheaf restrictions or zero morphisms, and do not give this pro-etale specialization/contractibility assertion."
-  },
-  {
-   "tool": "grep",
-   "query": "shriek|extensionByZero|extension_by_zero|extend.*[Zz]ero",
-   "results": "25 hits: Mathlib/NumberTheory/Modular.lean, Mathlib/InformationTheory/KullbackLeibler/KLFun.lean, Mathlib/NumberTheory/ArithmeticFunction/LFunction.lean, Mathlib/NumberTheory/ArithmeticFunction/LFunction.lean, Mathlib/NumberTheory/ArithmeticFunction/LFunction.lean, Mathlib/NumberTheory/ArithmeticFunction/LFunction.lean, Mathlib/NumberTheory/ArithmeticFunction/LFunction.lean, Mathlib/Algebra/Field/Defs.lean",
-   "date": "2026-10-14",
-   "verdict": "no exact match: second reader inspected signatures; hits concern structure-sheaf sections, formal etaleness, localization spectra, presheaf restrictions or zero morphisms, and do not give this pro-etale specialization/contractibility assertion."
   }
  ],
  "mathlib_match": null,
@@ -94,7 +164,11 @@
   },
   "same_as": []
  },
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AG, lemma-jshriek-zero, proof"
+ },
  "merged_into": null,
  "lean_audit": {
   "master": {
@@ -107,5 +181,39 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proetale-shriek-specialization-zero",
+  "worker": "stage1",
+  "summary": "Expand Stacks 09AG into local representation, finite affine refinement, closed localization and flat generalization lifting, no-map vanishing, and sheaf uniqueness. Handle the empty scheme explicitly; distinguish the existing finitely-defined-closed-subset localization. Normalize doubled TeX escapes without changing hypotheses or conclusion.",
+  "blueprint": "Realizes the closed-neighbourhood vanishing tool below the first descent-formula sentence of thm-weil-pbc-qbar, preserving its coefficient-comparison route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic scheme geometry needed to describe the pulled-back closed fiber; the unit gives no replacement."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic composition and localization of weakly etale sites, used to regard W_a as an object; does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-spec-colimit-limit",
+    "why": "Use only its affine-transition assertion on a two-object ring diagram to check all affine opens in the covering definition; no limit theorem or replacement of a unit step is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-spec-colimit-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-75ad7bcc6",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-75ad7bcc6 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, sources, and unit/chapter route in full. Confirmed Stacks 09AG/096V/092B/03HV, empty cases, arbitrary ideals, flat lifting direction, and exact target coefficient/morphism boundary. Replaced mismatched item search records with actual logged queries; mathematics unchanged. Concrete checks and accepted tool uses are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
