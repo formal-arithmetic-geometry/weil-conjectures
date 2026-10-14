@@ -14329,3 +14329,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 10:49 L: batch 20261014T023929 dependency take-out
 - 02:51 L: merged deliver/A4/Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorInvariantPunctureEtale (stage 3; reviewer PASS; first push; landing 20261014T025135-L-155141 (proof); batch 20261014T025133; modules 1; new nodes 0)
+- 02:51 L: merged deliver/A4/Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorStabilizerSectionMono (stage 3; reviewer PASS; first push; landing 20261014T025135-L-155310 (proof); batch 20261014T025133; modules 1; new nodes 0)
