@@ -35,81 +35,51 @@
  ],
  "proof": [
   {
-   "text": "Replace the given localization of P by localization at the inverse image of T's maximal ideal; since T is local this gives the same ring.",
-   "uses": [],
+   "text": "Shrink P to the base universe using finite-type smallness. Apply the proved finite-presentation descent theorem to obtain one stage model Q₀ and its final pushout square. Over the upper tail define D_i as the pushout of Q₀ along F(i₀)→F(i). Pushout.desc defines transitions and the cocone to the shrink of P; pushout uniqueness proves identities, composition, and naturality. Pushout pasting gives every transition square and every final square.",
+   "uses": [
+    "lem-kun-fp-algebra-descent"
+   ],
    "elementary": false
   },
   {
-   "text": "Write P as a finite polynomial quotient.",
-   "uses": [],
+   "text": "The upper-tail inclusion is final: any i and i₀ have a common upper bound. Transfer the base colimit to this tail using Functor.Final.isColimitWhiskerEquiv, and obtain the model colimit from its final pushout squares. Its unique isomorphism to P gives e:colimit D≃P, with the structure-map equations. Stage structure maps are finite type by stability under pushout.",
+   "uses": [
+    "lem-weil-pbc-limit-finite-presentation-colimits"
+   ],
    "elementary": false
   },
   {
-   "text": "Lift the finitely many coefficients of its defining relations along the given colimit to a common index i₀.",
-   "uses": [],
+   "text": "Transport the original localization through the shrink equivalence and e to g:colimit D→T. Enlarge the denominator monoid to the complement of the contraction of the maximal ideal of T; precisely those elements map to units. Apply the prime-localization colimit theorem. Transport its cocone to T using the unique localization algebra equivalence. Retain the stage localization maps ιB and their IsLocalization predicates at the contracted primes. These maps are essentially finite type; the cocone maps are local, as compositions of local fraction maps and ring equivalences.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-localization-at-prime"
+   ],
    "elementary": false
   },
   {
-   "text": "At each later index take that polynomial quotient over F(i), and localize it at the inverse image of T's maximal ideal.",
+   "text": "Set τ_i=ιB_i σ_i and κ_i=β_i. The cocone and structure identities prove κ_i τ_i=τ π_i and transition naturality. Locality of κ_i implies locality of B_i. Reflect locality from κ_i τ_i, which equals the composite of the given local maps, to τ_i. Reflect locality from κ_j b_ij=κ_i to each transition. Compose finite type of σ_i with essential finite type of ιB_i.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The contraction to F(i) is maximal because the maps F(i) → c.pt → T are local.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Hence these rings and their structure, transition and limit maps are local; their structure maps are essentially of finite type.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Maps of polynomials carry the lifted relations to the later relations and induce the required naturality and composition.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Polynomial and quotient base change give the unlocalized scalar-extension identities.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Base change of localization followed by localization at the contracted prime proves both displayed localization predicates, with the canonical pure-tensor formulas.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "For the ring colimit, lift the finitely many numerator and denominator coefficients of any element to a stage; denominators outside the prime remain outside its inverse image.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "A fraction mapping to zero has a finite ideal-membership witness after multiplication by a denominator.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Lift that witness and its finitely many equalities to a later stage, so the fraction is zero there.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "These two properties give the colimit universal property.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "The tail is cofinal by directedness.",
-   "uses": [],
+   "text": "For i≤j, the colimit identity implies that the transition D_i→D_j maps the contracted-prime complement into the later complement. Apply the localized-pushout tensor theorem to the unlocalized transition pushout, the two stage localization maps, and the localized transition map. Apply it again to the final pushout with target colimit D, the stage localization and g. In the latter formula g e⁻¹ aQ=τ, so the pure tensor maps are exactly the required ones.",
+   "uses": [
+    "lem-weil-pbc-localized-pushout-tensor"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-kun-fp-algebra-descent",
+  "lem-weil-pbc-limit-finite-presentation-colimits",
+  "lem-weil-pbc-filtered-colimit-localization-at-prime",
+  "lem-weil-pbc-localized-pushout-tensor"
+ ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "C1",
+  "date": "2026-10-14",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Tag 00QV, polynomial-quotient and contracted-prime construction; Tag 00QX, ring construction paragraph"
+  "place": "Tag 00QV polynomial-quotient descent and prime localizations, as used in Tag 00QX; source read online. Finite-presentation descent and pushout pasting implement the same polynomial-quotient route."
  },
  "mathlib_searches": [
   {
@@ -180,11 +150,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-66eb4",
-  "group": "F2",
+  "reviewer": "COMPILER",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261014T020509-L-3810807",
+  "landing": "20261014T023932-L-14022",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compiled cleanly; adapted module fails against changed dependencies at the removed declaration and compiles after minimal forced edits; signatures, nodes, report, and direct importer checks match."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

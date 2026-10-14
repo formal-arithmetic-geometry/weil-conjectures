@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-localized-pushout-tensor",
+ "kind": "statement",
+ "title": "Tensor localization of a localized pushout square",
+ "statement": "Let R,A,S,C,L_A,L_C be commutative rings, with maps σ:R→A, ρ:R→S, a:A→C, b:S→C making C the pushout of σ and ρ (the colimit of their span [def-weil-pbc-category-colimit]). Let l_A:A→L_A and l_C:C→L_C be localizations at multiplicative submonoids M⊆A and N⊆C, respectively, in the sense of [lem-weil-pbc-localization-of-localization]. Assume a(M)⊆N and let m:L_A→L_C satisfy m l_A=l_C a. Give L_A its R-algebra structure l_A σ and S its R-algebra structure ρ. Then there is a ring map φ:L_A tensor_R S→L_C, φ(x tensor y)=m(x) l_C(b(y)), and a multiplicative submonoid U of L_A tensor_R S such that φ exhibits L_C as its localization at U. The tensor product is the module tensor [def-weil-pbc-module-tensor-product], with multiplication (x tensor y)(x' tensor y')=(xx') tensor (yy') and unit 1 tensor 1.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00QV, verification of assertion (4) for the polynomial-quotient pushout; expanded from localization base change and nested localization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-localization-of-localization"
+ ],
+ "proof": [
+  {
+   "text": "Put M′=a(M), L=(M′)⁻¹C. The map A→C induces t:L_A→L with t l_A=loc_C a. Localization base change gives a pushout square A→C, L_A→L. In Lean this is CommRingCat.isPushout_of_isLocalization applied to IsLocalization.map.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste this square horizontally with the given pushout R,A,S,C. Thus L is the pushout of R→L_A and R→S. Compare it with the canonical tensor-product pushout to obtain e:L_A tensor_R S≃L, whose restrictions are e(x tensor 1)=t(x) and e(1 tensor y)=loc_C(b(y)). Their product gives its formula on every pure tensor.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Since M′⊆N, l_C sends M′ to units and induces v:L→L_C with v loc_C=l_C. Localization uniqueness gives v t=m after precomposition with l_A. Nested localization makes v a localization at loc_C(N). Set φ=v e and transfer this localization across e, using U=e⁻¹(loc_C(N)), written as its image under e.symm. Multiplicativity and the two restrictions above give φ(x tensor y)=m(x) l_C(b(y)).",
+   "uses": [
+    "lem-weil-pbc-localization-of-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-base-change",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-localization-of-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C1",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Expanded verification of Tag 00QV (4), using Mathlib pushout and localization universal properties; source read at https://stacks.math.columbia.edu/tag/00QV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localizing a pushout of commutative rings at nested submonoids gives localization of a tensor product",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.isLocalization_of_submonoid_le",
+   "results": "IsLocalization.isLocalization_of_submonoid_le",
+   "date": "2026-10-14",
+   "verdict": "ingredients used in the proved Lean construction; no single exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isPushout_of_isLocalization|isLocalization_of_submonoid_le",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/LocalProperties/Basic.lean; Mathlib/RingTheory/LocalProperties/Basic.lean; Mathlib/AlgebraicGeometry/QuasiAffine.lean; Mathlib/RingTheory/Localization/BaseChange.lean; Mathlib/RingTheory/Localization/BaseChange.lean; Mathlib/RingTheory/Localization/BaseChange.lean",
+   "date": "2026-10-14",
+   "verdict": "ingredients used in the proved Lean construction; no single exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.LimitModuleLocalizationRingData",
+  "date": "2026-10-14",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 00QV verification of localization base change, used by Tag 00QX ring construction; one pushout square with nested denominator sets.",
+   "via": [
+    "lem-limit-module-localization-ring-data",
+    "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system-module-core",
+    "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system",
+    "lem-weil-pbc-limit-tower-essentially-finite-presentation",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LocalizedPushoutTensor",
+  "file": "lean/Sheaf/RingTheory/LocalizedPushoutTensor.lean",
+  "declaration": "RingHom.exists_localized_pushout_tensor",
+  "statement": "theorem exists_localized_pushout_tensor (R A S C LA LC : CommRingCat.{u}) (σ : R →+* A) (ρ : R →+* S) (a : A →+* C) (b : S →+* C) (hp : IsPushout (CommRingCat.ofHom σ) (CommRingCat.ofHom ρ) (CommRingCat.ofHom a) (CommRingCat.ofHom b)) (lA : A →+* LA) (lC : C →+* LC) (m : LA →+* LC) (hm : m.comp lA = lC.comp a) (M : Submonoid A) (N : Submonoid C) (hMN : M.map a ≤ N) (hLA : letI := lA.toAlgebra; IsLocalization M LA) (hLC : letI := lC.toAlgebra; IsLocalization N LC) : letI := σ.toAlgebra letI := ρ.toAlgebra letI := (lA.comp σ).toAlgebra ∃ φ : LA ⊗[R] S →+* LC, (∀ (x : LA) (y : S), φ (x ⊗ₜ[R] y) = m x * lC (b y)) ∧ (letI := φ.toAlgebra ∃ U : Submonoid (LA ⊗[R] S), IsLocalization U LC)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261014T023932-L-14022",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261014T023932-L-14022",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
