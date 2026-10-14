@@ -1,6 +1,6 @@
 # Work queue
 
-45 items; claim with `tools/claim.py next <group> [--stage N]`.
+43 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (45)
+## Stage 3: modules to prove (43)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -34,12 +34,10 @@
 | `Sheaf.AlgebraicGeometry.DerivedPullbackCompositionLocalizedCounit` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackConeSquareTransposition` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverComponentIdentity` | 28 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleUnionHomotopyChainData` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SymmetricAlgebraAffineSectionComparison` | 28 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PicardModuleCechExternalCup` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativeMVDirectImageRows` | 29 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ScalarCupModuleCupCompatibility` | 29 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ScalarModuleCohomologyPullbackComparison` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SchemeCanonicalTensorUnitComponent` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate` | 30 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeDerivedTensorHomologyCoordinates` | 32 | 1 | proof |
