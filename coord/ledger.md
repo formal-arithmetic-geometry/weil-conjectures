@@ -14213,3 +14213,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:59 L: returned deliver/H1/Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore (reviewer RETURN: (reviewer X-b0b9f, head b0b9fbc9c) H10 / reader gate: required direct-importer compilation remains unverified. Regenerat)
 
 - 10:01 L: batch 20261014T013031 dependency take-out
+- 02:01 L: returned deliver/S3/Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap (reviewer RETURN: (reviewer X-e1246, head e12463c18) C3: In dag/nodes/sec-picard-framework/lem-pc-extension-kflat-quasi-iso.json, the proo)
