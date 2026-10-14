@@ -17,6 +17,9 @@ public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
+import Sheaf.AlgebraicGeometry.PicardResidueHomologySourceResidueComparison
+import Sheaf.AlgebraicGeometry.PicardResidueHomologySourceFibreComparison
+
 /-! # Geometric naturality after passing to residue homology
 
 Source: Stacks Project, Tags 0B91, 0BF2 and 01XK.
@@ -78,7 +81,15 @@ theorem picard_residue_homology_geometric_comparison_source
         DerivedCategory.Q.obj K))
     :
     Nonempty (affineResidueCycleHomology W U p K ≃+
-        Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1) := by sorry
+        Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1) := by
+  let E := (schemeDerivedDirectImage (pullback.snd f k)).obj
+    ((DerivedCategory.singleFunctor
+      (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj
+        ((Modules.tensorPullback (pullback.fst f k)).obj L))
+  obtain ⟨e₁⟩ := picard_residue_homology_source_residue_comparison W E w
+    U hwU hU p hp K hK hE
+  obtain ⟨e₂⟩ := picard_residue_homology_source_fibre_comparison f L W k w s hw τ
+  exact ⟨e₁.trans e₂⟩
 
 end Scheme
 

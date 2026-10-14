@@ -1,0 +1,156 @@
+{
+ "id": "new-picard-residue-homology-comparison-source-fibre",
+ "kind": "statement",
+ "title": "picard_residue_homology_source_fibre_comparison",
+ "statement": "Under the complete signature below, the derived residue fibre of the direct image of the pulled-back line bundle is additively equivalent to degree-one structure-sheaf cohomology of X_s; no affine representative is assumed.\n\nExact Lean statement:\ntheorem picard_residue_homology_source_fibre_comparison\n    [∀ Y : Scheme.{v},\n      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]\n    {X S : Scheme.{v}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (L : X.Modules) [L.IsInvertible]\n    (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k]\n    (w : W) (s : S) (hw : k w = s)\n    (τ : (Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅\n      SheafOfModules.unit (pullback f (S.fromSpecResidueField s)).ringCatSheaf)\n    :\n    let E := (schemeDerivedDirectImage (pullback.snd f k)).obj\n      ((DerivedCategory.singleFunctor\n        (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj\n          ((Modules.tensorPullback (pullback.fst f k)).obj L))\n    Nonempty (derivedFiberCohomology W E 1 w ≃+\n      Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1)",
+ "stmt_deps": [
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-module-pullback",
+  "def-sc-derived-fiber-betti",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-invertible-module",
+  "def-sc-structure-sheaf-cohomology-pullback",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-residue-field"
+ ],
+ "source": {
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 0A1D, 0B91, 0BF2 and 01XK; derived base change, fibre trivialization and affine-base sections"
+ },
+ "proof": [
+  {
+   "text": "Tensor pullback agrees with ordinary pullback by uniqueness of left adjoints, so G=pullback.fst f k applied to L is invertible. The base change fW=pullback.snd f k is proper and flat, hence quasi-compact and separated. Apply isIso_derivedBaseChange_of_flat_invertible to fW and the residue point of w. Then apply isIso_canonicalSinglePullbackMap to the invertible coefficient G to replace its derived pullback in degree zero by its ordinary pullback. This identifies the derived fibre with the derived image of the ordinary fibre coefficient.",
+   "uses": [
+    "lem-pc-flat-invertible-canonical-derived-base-change",
+    "lem-pc-canonical-single-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The immersion k gives an isomorphism of residue fields, and hw transports the field at k(w) to that at s. Residue-point naturality identifies W.fromSpecResidueField w followed by k with S.fromSpecResidueField s preceded by the spectrum of that field isomorphism. Pullback universal properties identify the iterated fibre with X_s over this isomorphic spectrum. Use tensorPullbackCompositionIso to identify the pulled coefficient with the pullback of L_s. Pull back tau and use tensorPullbackObjUnitToUnit_isIso to replace it with the structure module.",
+   "uses": [
+    "def-pc-tensor-pullback-composition-iso",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply degree-one derived homology and sections on Spec kappa(w), transporting scalars through GammaSpecIso. The upstream homologyRightDerivedFunctorObjSingleFunctorIso computes the homology of the unbounded derived direct image as its first ordinary higher direct image. Scheme module sheaves have injective resolutions. Apply exists_addEquiv_sections_higherDirectImage_H to the quasi-compact separated fibre morphism and its quasi-coherent structure module over the affine field spectrum. Modules.H is abelian Sheaf.H, and the underlying sheaf of the unit module is structureSheafAb. Transport this cohomology along the fibre scheme isomorphism to X_s and forget the scalar actions.",
+   "uses": [
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "lem-pc-cohomology-sections-affine-base"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-flat-invertible-canonical-derived-base-change",
+  "lem-pc-canonical-single-pullback-comparison",
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-pc-cohomology-sections-affine-base"
+ ],
+ "proof_origin": {
+  "by": "Q2",
+  "kind": "written-by-agent",
+  "date": "2026-10-14",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 0A1D, 0B91, 0BF2 and 01XK; derived base change, fibre trivialization and affine-base sections"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of derived pullback residue point and proper flat base change",
+   "date": "2026-10-14",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.ofPointTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo",
+   "verdict": "No exact comparison; searched repository and upstream sources separately for project definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"quotient\"",
+   "date": "2026-10-14",
+   "results": "12 hits: HomologicalComplexUpToQuasiIso.homologyFunctorFactorsh_hom_app_quotient_obj, HomologicalComplexUpToQuasiIso.homologyFunctorFactorsh_inv_app_quotient_obj, HomologicalComplexUpToQuasiIso.homologyFunctorFactorsh_hom_app_quotient_obj_assoc, HomologicalComplexUpToQuasiIso.homologyFunctorFactorsh_inv_app_quotient_obj_assoc, DerivedCategory.homologyFunctorFactorsh_hom_app_quotient_obj, DerivedCategory.homologyFunctorFactorsh_inv_app_quotient_obj, DerivedCategory.homologyFunctorFactorsh_inv_app_quotient_obj_assoc, DerivedCategory.homologyFunctorFactorsh_hom_app_quotient_obj_assoc",
+   "verdict": "No exact comparison; searched repository and upstream sources separately for project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "residueSections|derivedFiberCohomology|cohomology.*directImage",
+   "date": "2026-10-14",
+   "results": "0 hits: ",
+   "verdict": "No exact comparison; searched repository and upstream sources separately for project definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homology as cycles modulo incoming boundaries in the category of modules",
+   "date": "2026-10-14",
+   "results": "8 hits: CategoryTheory.ShortComplex.moduleCatLeftHomologyData_H, CategoryTheory.ShortComplex.moduleCatLeftHomologyData_π_hom, CategoryTheory.ShortComplex.moduleCatLeftHomologyData, CategoryTheory.ShortComplex.moduleCatLeftHomologyData_f'_hom, CategoryTheory.ShortComplex.π_moduleCatCyclesIso_hom_apply, CategoryTheory.ShortComplex.abLeftHomologyData_H_coe, CategoryTheory.ShortComplex.moduleCatToCycles, CategoryTheory.ShortComplex.abLeftHomologyData_π",
+   "verdict": "Generic module homology quotient tools, especially ShortComplex.moduleCatHomologyIso; no affine derived or geometric comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine sections of strictly perfect complexes tensor residue field computes cohomology of a derived fibre",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricComparisonSource",
+  "date": "2026-10-14",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-picard-residue-homology-comparison-source",
+   "place": "Tags 0B91, 0BF2 and 01XK",
+   "via": []
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardResidueHomologySourceFibreComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardResidueHomologySourceFibreComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_residue_homology_source_fibre_comparison",
+  "statement": "theorem picard_residue_homology_source_fibre_comparison\n    [∀ Y : Scheme.{v},\n      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]\n    {X S : Scheme.{v}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (L : X.Modules) [L.IsInvertible]\n    (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k]\n    (w : W) (s : S) (hw : k w = s)\n    (τ : (Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅\n      SheafOfModules.unit (pullback f (S.fromSpecResidueField s)).ringCatSheaf)\n    :\n    let E := (schemeDerivedDirectImage (pullback.snd f k)).obj\n      ((DerivedCategory.singleFunctor\n        (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj\n          ((Modules.tensorPullback (pullback.fst f k)).obj L))\n    Nonempty (derivedFiberCohomology W E 1 w ≃+\n      Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-14"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261014T001729-L-2553537",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261014T001729-L-2553537",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
