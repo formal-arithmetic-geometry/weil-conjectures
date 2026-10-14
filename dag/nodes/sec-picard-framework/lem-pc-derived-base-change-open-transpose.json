@@ -1,0 +1,127 @@
+{
+ "id": "lem-pc-derived-base-change-open-transpose",
+ "kind": "lemma",
+ "title": "Transposition of the canonical base-change component for a single open",
+ "statement": "Fix derived module categories on every scheme. Let $g:X\\prime\\to X$ be any scheme morphism, $W\\subseteq X$ any open, $K\\in D(\\mathcal O_X)$, $K\\prime\\in D(\\mathcal O_{X\\prime})$ and $\\psi:Lg^*K\\to K\\prime$. Use the pinned adjunction, base-change map and pullback/open comparison of [def-pc-rf-mv-base-change-components]. Put $H_W=Rj_{W*}r_W$ and $H\\prime_W=Rj_{g^{-1}W,*}r_{g^{-1}W}$, and use $c_W: Rg_*H\\prime_W(K\\prime)\\cong H_W(Rg_*K\\prime)$ from [def-pc-derived-mayer-vietoris-canonical-data]. The $g$-adjunction transpose of the canonical open component $Lg^*H_W(K)\\to H\\prime_W(K\\prime)$ is $H_W(\\operatorname{adj}_g(\\psi))$ followed by $c_W^{-1}$. There is no cover, boundary, shift, flatness or quasi-coherence hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08HY (remark-base-change), 08FE (lemma-restrict-direct-image-open), 0D5T (lemma-derived-pushforward-composition); single-open unit square and adjunction injectivity"
+ },
+ "stmt_deps": [
+  "def-pc-rf-mv-base-change-components",
+  "def-pc-derived-mayer-vietoris-canonical-data"
+ ],
+ "proof": [
+  {
+   "text": "Postcompose the desired equality with the hom of the invertible canonical open comparison. Both maps now target Rj_W of the restriction of Rg(Kprime). Precomposition with the old-open unit is injective on maps into this right adjoint: transpose under exact restriction and cancel restriction of the unit, which is an isomorphism by the cited node. Reuse the existing private precomp_rightAdjoint_injective from DerivedBaseChangeOpenRestriction (proof-only import all) for this elementary cancellation; no new helper statement is introduced.",
+   "uses": [
+    "lem-pc-scheme-derived-open-unit-restriction-iso",
+    "def-pc-rf-mv-base-change-components",
+    "def-pc-derived-mayer-vietoris-canonical-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the g Hom equivalence replaces precomposition by the old-open unit with pullback of that unit before the open component. Apply mvOpenBaseChange_unit to identify this composite with psi followed by the new-open unit. Hom-equivalence naturality on the right turns its transpose into the transpose of psi followed by Rg of the new-open unit. The proved schemeMVOpenComparison_unit then identifies its composite with the comparison hom as the transpose of psi followed by the old-open unit at Rg(Kprime).",
+   "uses": [
+    "lem-pc-rf-mv-open-base-change-unit",
+    "lem-pc-derived-mayer-vietoris-open-comparison-unit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The right-hand path after the same precomposition is the same expression by naturality of the old-open unit. Cancel precomposition using step 1, and cancel the invertible comparison hom. Empty opens, top opens and zero psi require no extra argument.",
+   "uses": [
+    "def-pc-rf-mv-base-change-components"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-scheme-derived-open-unit-restriction-iso",
+  "def-pc-rf-mv-base-change-components",
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "lem-pc-rf-mv-open-base-change-unit",
+  "lem-pc-derived-mayer-vietoris-open-comparison-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "B2",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08HY and 08FE: use the two existing unit compatibilities and injectivity after restriction of the old-open unit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transpose of derived open base change map is inverse direct image open restriction comparison",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction transpose of open immersion derived base change equals the open restriction direct image comparison",
+   "results": "8 hits, including Scheme.Modules.restrictFunctorIsoPullback and restrictAdjunction unit/counit formulas; no unbounded derived comparison identity",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "schemeMV_directImage_boundary|mvCanonicalBoundary|triangleOfSESδ_naturality",
+   "results": "2 hits for triangleOfSESδ_naturality in Mathlib DerivedCategory.ShortExact and Ext.Map, no scheme open mate comparison",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisCanonicalPullback",
+  "date": "2026-10-14",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 induction: canonical relative Mayer--Vietoris connecting square, identify its overlap component as the transpose of the normalized open direct-image comparison",
+   "via": [
+    "lem-pc-rf-mv-canonical-boundary-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedBaseChangeOpenTranspose",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBaseChangeOpenTranspose.lean",
+  "declaration": "AlgebraicGeometry.derivedBaseChange_open_transpose",
+  "statement": "theorem derivedBaseChange_open_transpose\n    {X X' : Scheme.{u}} (g : X' ⟶ X) (W : X.Opens)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (ψ : (derivedPullback g).obj K ⟶ K') :\n    (mvDerivedPullbackAdjunction g).homEquiv\n      ((schemeDerivedDirectImage W.ι).obj\n        ((schemeOpenRestriction X W).mapDerivedCategory.obj K))\n      ((schemeDerivedDirectImage (g ⁻¹ᵁ W).ι).obj\n        ((schemeOpenRestriction X' (g ⁻¹ᵁ W)).mapDerivedCategory.obj K'))\n      (schemeDerivedBaseChangeMap W.ι (g ⁻¹ᵁ W).ι g\n          (g.resLE W (g ⁻¹ᵁ W) le_rfl) (Scheme.Hom.resLE_comp_ι g le_rfl)\n          ((schemeOpenRestriction X W).mapDerivedCategory.obj K) ≫\n        (schemeDerivedDirectImage (g ⁻¹ᵁ W).ι).map\n          ((mvPullbackOpenRestrictionIso g W).inv.app K ≫\n            (schemeOpenRestriction X' (g ⁻¹ᵁ W)).mapDerivedCategory.map ψ)) =\n      (schemeDerivedDirectImage W.ι).map\n        ((schemeOpenRestriction X W).mapDerivedCategory.map\n          ((mvDerivedPullbackAdjunction g).homEquiv K K' ψ)) ≫\n        (schemeMVOpenComparison g W K').inv",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-49676",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261014T013033-L-3412111",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-49676",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261014T013033-L-3412111",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG nodes, report, and change record match the stated proof and compile cleanly, including the direct importer reader-gate check."
+ }
+}

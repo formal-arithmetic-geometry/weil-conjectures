@@ -13,51 +13,43 @@
  ],
  "proof": [
   {
-   "text": "Transpose psi under the pinned g prime adjunction. Represent its transpose by a chain map into a K-injective replacement of the termwise direct image of the fixed target resolution. Restrict this map on the two opens and overlap to obtain a morphism of concrete short exact cover sequences. The target sequence is split in each degree because its first term is injective; Its first term is the fixed K-injective resolution. Each open restriction is K-injective by [lem-sc-derived-k-injective-restrict-open], and its open direct image is K-injective by [lem-weil-pbc-right-adjoint-preserves-kinjective], since open restriction is exact. The middle term is a finite biproduct of these K-injective complexes, hence K-injective by additivity of Hom from acyclic complexes. The termwise-split SES theorem identifies its direct-image boundary with the right-derived boundary using the existing shift.",
+   "text": "Identify mvCanonicalBoundary with schemeMVBoundary using canonical_boundary_eq for the overlap U intersection V. The existing canonicalMV_spec supplies naturality for any derived morphism K to L, so canonical boundary naturality follows by rewriting both endpoints.",
    "uses": [
     "def-pc-rf-mv-canonical-ses-shifts",
-    "lem-pc-derived-functor-termwise-split-ses-triangle",
-    "lem-pc-kinjective-mayer-vietoris-exact",
-    "lem-sc-kinjective-quasi-iso-comparison",
-    "lem-sc-derived-k-injective-restrict-open",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+    "def-pc-derived-mayer-vietoris-canonical-data",
+    "lem-pc-derived-mayer-vietoris-functorial"
    ],
    "elementary": false
   },
   {
-   "text": "Apply triangleOfSESδ_naturality to this morphism of sequences and transport using the fixed resolution and open comparisons. The unit and counit identities of the open adjunctions identify the overlap map with the right-adjoint mate of the pinned pullback/open comparison. Compatibility of composition mates is normalized by the same left-derived counits and right-derived units, so it yields the displayed overlap map, not a freely chosen comparison.",
+   "text": "Set alpha to the pinned g adjunction transpose of psi. Apply the proved direct-image boundary comparison to Kprime and its inverse-image cover. This gives Rg(delta prime) followed by the fixed right-derived shift equals c hom followed by the boundary of Rg(Kprime). Ordinary boundary naturality gives delta followed by alpha[1] equals overlap-restriction of alpha followed by that same boundary.",
    "uses": [
-    "def-pc-rf-mv-canonical-ses-shifts",
-    "lem-weil-pbc-complex-ses-triangle",
-    "def-pc-rf-mv-base-change-components",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Transpose the transported boundary equation back under the pinned g prime adjunction. mvCanonicalHomEquiv_shift supplies exactly the shift used in the conclusion. This completes the boundary square on X prime; later application of Rf prime star is deliberately absent.",
-   "uses": [
+    "lem-pc-derived-mayer-vietoris-direct-image-boundary",
     "def-pc-rf-mv-canonical-ses-shifts"
    ],
    "elementary": false
+  },
+  {
+   "text": "The single-open transposition lemma identifies the transpose of the displayed overlap component with overlap-restriction of alpha followed by c inverse. Apply injectivity of the pinned g Hom equivalence and postcompose with the invertible right-derived shift comparison. Hom-equivalence naturality on both sides, mvCanonicalHomEquiv_shift, the two preceding boundary equations and c inverse times c hom cancel to give the desired equality. The private boundary_pullback_of_transpose theorem proves this categorical algebra in Lean.",
+   "uses": [
+    "lem-pc-derived-base-change-open-transpose",
+    "def-pc-rf-mv-canonical-ses-shifts"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-rf-mv-canonical-ses-shifts",
-  "lem-pc-derived-functor-termwise-split-ses-triangle",
-  "lem-pc-kinjective-mayer-vietoris-exact",
-  "lem-sc-kinjective-quasi-iso-comparison",
-  "lem-weil-pbc-complex-ses-triangle",
-  "def-pc-rf-mv-base-change-components",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-sc-derived-k-injective-restrict-open",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "lem-pc-derived-mayer-vietoris-functorial",
+  "lem-pc-derived-mayer-vietoris-direct-image-boundary",
+  "lem-pc-derived-base-change-open-transpose"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "T4",
+  "agent": "B2",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 08BV and 08HY; Tag 0DJ9 induction diagram, the boundary square before applying the subsequent direct image"
+  "place": "Tags 08BV, 08HY, 08FE and 0D5T; reuse the proved direct-image boundary and split only the boundary-free single-open mate identification"
  },
  "mathlib_searches": [
   {
@@ -134,13 +126,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-940bd",
-  "group": "T4",
+  "reviewer": "X-49676",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261013T222417-L-1227906",
+  "landing": "20261014T013033-L-3412111",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compile cleanly; original Boundary fails against changed dependencies while adapted Boundary compiles; signatures, imports, forced edits, nodes, report, and sole named sorry agree with the packet and review rules."
+  "note": "independent Codex review: Delivered files, DAG nodes, report, and change record match the stated proof and compile cleanly, including the direct importer reader-gate check."
  }
 }

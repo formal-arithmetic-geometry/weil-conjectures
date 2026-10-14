@@ -6,21 +6,70 @@ Authors: SHEAF group T4
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisCanonicalData
-import Sheaf.AlgebraicGeometry.DerivedDirectImageSplitTriangle
+import all Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial
+import Sheaf.AlgebraicGeometry.DerivedBaseChangeOpenTranspose
 
 /-! Canonical compatibility for relative Mayer--Vietoris.
 Source: Stacks Project, Tags 08BV, 08HY and 0DJ9. -/
 
 @[expose] public section
-universe u w
+universe u w v u' v'
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Pretriangulated
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 noncomputable section
 namespace AlgebraicGeometry
+
+attribute [local instance 2000] schemeMVModuleAbelian
+
+
+private theorem boundary_pullback_of_transpose
+    {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]
+    [HasShift C ℤ] [HasShift D ℤ]
+    (L : C ⥤ D) (R : D ⥤ C) [L.CommShift ℤ] [R.CommShift ℤ]
+    (a : L ⊣ R) {A K : C} {B K' : D}
+    (δ : A ⟶ K⟦(1 : ℤ)⟧) (δ' : B ⟶ K'⟦(1 : ℤ)⟧)
+    (ψ : L.obj K ⟶ K') (t : L.obj A ⟶ B)
+    (T : C) (c : R.obj B ≅ T) (h : A ⟶ T) (ε : T ⟶ (R.obj K')⟦(1 : ℤ)⟧)
+    (hshift : (a.homEquiv K K' ψ)⟦(1 : ℤ)⟧' =
+      a.homEquiv (K⟦(1 : ℤ)⟧) (K'⟦(1 : ℤ)⟧)
+        ((L.commShiftIso (1 : ℤ)).hom.app K ≫ ψ⟦(1 : ℤ)⟧') ≫
+          (R.commShiftIso (1 : ℤ)).hom.app K')
+    (hnat : δ ≫ (a.homEquiv K K' ψ)⟦(1 : ℤ)⟧' = h ≫ ε)
+    (himage : R.map δ' ≫ (R.commShiftIso (1 : ℤ)).hom.app K' = c.hom ≫ ε)
+    (hmate : a.homEquiv A B t = h ≫ c.inv) :
+    L.map δ ≫ (L.commShiftIso (1 : ℤ)).hom.app K ≫ ψ⟦(1 : ℤ)⟧' = t ≫ δ' := by
+  apply (a.homEquiv A (K'⟦(1 : ℤ)⟧)).injective
+  apply (cancel_mono ((R.commShiftIso (1 : ℤ)).hom.app K')).mp
+  rw [a.homEquiv_naturality_left δ (_ ≫ _),
+    a.homEquiv_naturality_right t δ', hmate]
+  simp only [Category.assoc]
+  rw [← hshift, himage, Iso.inv_hom_id_assoc]
+  exact hnat
+
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+
+private theorem canonical_boundary_eq (X : Scheme.{u}) (U V : X.Opens)
+    (hcover : U ⊔ V = ⊤) (K : schemeDerivedCategory X) :
+    mvCanonicalBoundary X U V (U ⊓ V) rfl hcover K =
+      schemeMVBoundary X U V hcover K := by
+  unfold mvCanonicalBoundary mvCanonicalOpenComparison schemeMVBoundary
+  simp only [Iso.trans_inv, Functor.mapIso_inv, Category.assoc]
+  unfold mvOpenRestrictionAdjunction
+  rfl
+
+set_option maxHeartbeats 800000 in
+-- Fixed-resolution transport uses nested derived comparisons.
+private theorem canonical_boundary_naturality (X : Scheme.{u}) (U V : X.Opens)
+    (hcover : U ⊔ V = ⊤) (K L : schemeDerivedCategory X) (φ : K ⟶ L) :
+    mvCanonicalBoundary X U V (U ⊓ V) rfl hcover K ≫ φ⟦(1 : ℤ)⟧' =
+      (schemeDerivedDirectImage (U ⊓ V).ι).map
+        ((schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory.map φ) ≫
+          mvCanonicalBoundary X U V (U ⊓ V) rfl hcover L := by
+  rw [canonical_boundary_eq, canonical_boundary_eq]
+  exact (canonicalMV_spec X U V hcover).2 K L φ
 
 /-- Naturality of the concrete SES boundary under pullback to the inverse-image
 cover, before applying any further direct image. All shifts and SES comparisons
@@ -69,6 +118,41 @@ theorem mvCanonicalBoundary_pullback
         (schemeDerivedDirectImage (g' ⁻¹ᵁ (U ⊓ V)).ι).map
           ((mvPullbackOpenRestrictionIso g' (U ⊓ V)).inv.app K ≫
             (schemeOpenRestriction X' (g' ⁻¹ᵁ (U ⊓ V))).mapDerivedCategory.map ψ)) ≫ δ' := by
-  sorry
+  let := mvCanonicalPullbackShift g'
+  let R := schemeDerivedDirectImage g'
+  let a := mvDerivedPullbackAdjunction g'
+  let W := U ⊓ V
+  let H := (schemeOpenRestriction X W).mapDerivedCategory ⋙ schemeDerivedDirectImage W.ι
+  let α := a.homEquiv K K' ψ
+  let δ := mvCanonicalBoundary X U V W rfl hcover K
+  have hcover' : (g' ⁻¹ᵁ U) ⊔ (g' ⁻¹ᵁ V) = ⊤ := by
+    rw [← Scheme.Hom.preimage_sup, hcover, Scheme.Hom.preimage_top]
+  let δ' := mvCanonicalBoundary X' (g' ⁻¹ᵁ U) (g' ⁻¹ᵁ V) (g' ⁻¹ᵁ W)
+    (Scheme.Hom.preimage_inf g').symm hcover' K'
+  let t := schemeDerivedBaseChangeMap W.ι (g' ⁻¹ᵁ W).ι g'
+      (g'.resLE W (g' ⁻¹ᵁ W) le_rfl) (Scheme.Hom.resLE_comp_ι g' le_rfl)
+      ((schemeOpenRestriction X W).mapDerivedCategory.obj K) ≫
+    (schemeDerivedDirectImage (g' ⁻¹ᵁ W).ι).map
+      ((mvPullbackOpenRestrictionIso g' W).inv.app K ≫
+        (schemeOpenRestriction X' (g' ⁻¹ᵁ W)).mapDerivedCategory.map ψ)
+  let c := schemeMVOpenComparison g' W K'
+  let ε := mvCanonicalBoundary X U V W rfl hcover (R.obj K')
+  change (derivedPullback g').map δ ≫
+    ((derivedPullback g').commShiftIso (1 : ℤ)).hom.app K ≫ ψ⟦(1 : ℤ)⟧' = t ≫ δ'
+  have hnat : δ ≫ α⟦(1 : ℤ)⟧' = H.map α ≫ ε :=
+    canonical_boundary_naturality X U V hcover K (R.obj K') α
+  have hδ' : δ' = schemeMVBoundary X' (g' ⁻¹ᵁ U) (g' ⁻¹ᵁ V) hcover' K' := by
+    dsimp only [δ', W]
+    simpa only [Scheme.Hom.preimage_inf] using
+      canonical_boundary_eq X' (g' ⁻¹ᵁ U) (g' ⁻¹ᵁ V) hcover' K'
+  have himage : R.map δ' ≫ (R.commShiftIso (1 : ℤ)).hom.app K' = c.hom ≫ ε := by
+    rw [hδ']
+    dsimp only [ε, W]
+    rw [canonical_boundary_eq]
+    exact schemeMV_directImage_boundary X' X g' U V hcover hcover' K'
+  exact boundary_pullback_of_transpose (derivedPullback g') R a δ δ' ψ t
+    (H.obj (R.obj K')) c (H.map α) ε
+    (mvCanonicalHomEquiv_shift g' K K' ψ (1 : ℤ)) hnat himage
+    (derivedBaseChange_open_transpose g' W K K' ψ)
 
 end AlgebraicGeometry
