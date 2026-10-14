@@ -12,22 +12,39 @@
  ],
  "proof": [
   {
-   "text": "Proof: put V = D(h) and B = D(ι g). Finite faithful flatness makes V -> B\nsurjective and finite, and hEt makes it etale. The domain assumption makes V\nconnected. The unique rotation hypothesis makes it a Galois cover with deck group G.\nPull delta back to V. The selected section is fixed by K: deck precomposition\nhas the label given by fixedPunctureDescentAction, and a section on the connected\nnonempty V is determined by that label. The Galois equivalence descends this\nK-invariant section to V/K, giving a map to Y over Spec R. The quotient is affine,\nwith coordinate ring C[1/h]^K. This is (C^K)[1/h]: the denominator h is fixed;\ninvariance of a/h^n implies invariance of a because localization of the domain C\nat nonzero h is injective. Thus V/K is the displayed basic open of Spec F and its\nquotient map is q. The descent factorization gives q followed by s equal to the\nselected section; descent over B gives the displayed base equation.\nThis assertion constructs a factorization only; openness is a separate step.",
+   "text": "D(h_C) is nonempty and irreducible: the zero prime supplies a point since h_C is nonzero, and the puncture is open in the spectrum of a domain. A morphism into a split finite cover over T from this connected source has clopen inverse images of its summands; the summand containing the zero prime contains the entire image. Lifting through that open summand and projecting to T shows it is exactly the split section with the evaluated label. This is proved locally, reproducing the reconstruction argument whose original declaration in SplitAction is private.",
    "uses": [
+    "lem-sbc-affine-torsor-split-label-laws"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each zeta in K, the stabilizer equation hK identifies the evaluated label of deck(zeta) followed by the selected split section with x. Apply reconstruction to conclude that this composite is the selected section. The finite map j to the affine D(g) makes Y affine (Mathlib IsAffineOpen.Spec_basicOpen and isAffine_of_isAffineHom).",
+   "uses": [
+    "lem-sbc-affine-torsor-split-label-laws"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply affine invariant basic-open descent to the selected section and the established invariance, obtaining s with q followed by s equal to that section. The restriction identity Hom.resLE_comp_ι and composition of Spec maps give q followed by the natural U-to-Spec-R map b equal to k followed by t. Deck maps fix k followed by t by fixedPunctureDeck_base and hk. Apply uniqueness of affine invariant basic-open descent to this structural map: both s followed by p (using fixedSplitSection_base) and b pull back to k followed by t, hence they agree. Package s and its two equations. No Galois classification theorem, localization-invariants axiom or new sorry is used.",
+   "uses": [
+    "lem-sbc-affine-invariant-basic-open-descent",
     "lem-sbc-affine-torsor-split-label-laws"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sbc-affine-torsor-split-label-laws"
+  "lem-sbc-affine-torsor-split-label-laws",
+  "lem-sbc-affine-invariant-basic-open-descent"
  ],
  "proof_origin": {
+  "kind": "written-by-agent",
   "by": "worker",
-  "group": "C3",
+  "group": "N3",
   "document": "Stacks Project",
-  "place": "Tag 03SF",
-  "note": "Repair of X-c85ad: separate descent of the selected section from conditional openness; no dependency on the parent theorem."
+  "place": "Tag 03SF, stabilizer quotient argument",
+  "note": "The complete Lean proof establishes label reconstruction, invariance and the base equation; the affine invariant-ring calculation is proved in a new generic module, without Galois-cover classification."
  },
  "mathlib_searches": [
   {
@@ -94,12 +111,12 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-f73fe",
-  "group": "C3",
+  "reviewer": "COMPILER",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261014T020507-L-3809926",
+  "landing": "20261014T023936-L-15472",
   "kind": "interface",
-  "note": "independent Codex review: Matched all four Lean signatures to their nodes, the statement repair to its change record, and the proofs to their dependencies; both delivered modules and AffineTorsorOrbitComponentDescent compile cleanly, with only permitted axioms plus sorryAx from the two reported holes."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "statement_change": {
   "date": "2026-10-14",

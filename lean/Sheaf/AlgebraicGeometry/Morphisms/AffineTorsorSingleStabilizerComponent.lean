@@ -10,6 +10,9 @@ public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
 public import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSplitAction
 
 import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorStabilizerSectionOpen
+import Sheaf.AlgebraicGeometry.Morphisms.AffineInvariantBasicOpenDescent
+import Mathlib.Topology.Connected.Clopen
+import Mathlib.AlgebraicGeometry.Properties
 
 /-! # Stabilizer components of a split affine torsor cover -/
 
@@ -19,6 +22,53 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
+private theorem descent_split_ι_clopen (T : Scheme.{u}) (d : ℕ) (i : Fin d) :
+    IsClopen (Set.range (Sigma.ι (fun _ : Fin d ↦ T) i)) := by
+  have hc : (Set.range (Sigma.ι (fun _ : Fin d ↦ T) i))ᶜ =
+      ⋃ j : {j : Fin d // j ≠ i}, Set.range (Sigma.ι (fun _ : Fin d ↦ T) j.1) := by
+    ext z
+    constructor
+    · intro hz
+      let j := (sigmaOpenCover (fun _ : Fin d ↦ T)).idx z
+      have hj : j ≠ i := by
+        intro he
+        exact hz (he ▸ (sigmaOpenCover (fun _ : Fin d ↦ T)).covers z)
+      exact Set.mem_iUnion.mpr ⟨⟨j, hj⟩, (sigmaOpenCover (fun _ : Fin d ↦ T)).covers z⟩
+    · intro hz hi
+      obtain ⟨j, y, hy⟩ := Set.mem_iUnion.mp hz
+      obtain ⟨w, hw⟩ := hi
+      exact j.2 (congrArg Sigma.fst
+        ((sigmaι_eq_iff (fun _ : Fin d ↦ T) _ _ _ _).mp (hy.trans hw.symm)))
+  refine ⟨?_, IsOpenImmersion.isOpen_range _⟩
+  rw [← isOpen_compl_iff, hc]
+  exact isOpen_iUnion fun _ ↦ IsOpenImmersion.isOpen_range _
+
+private theorem descent_section_reconstruction {Y S T V : Scheme.{u}} [ConnectedSpace V]
+    (p : Y ⟶ S) (t : T ⟶ S) (k : V ⟶ T) (d : ℕ)
+    (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T)
+    (hδ : δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T) = pullback.snd p t)
+    (s : V ⟶ Y) (hs : s ≫ p = k ≫ t) (x : V) :
+    s = fixedSplitSection p t k d δ (fixedSplitLabel p t k d δ s hs x) := by
+  let f := pullback.lift s k hs ≫ δ.hom
+  let i := fixedSplitLabel p t k d δ s hs x
+  have hrange : Set.range f ⊆ Set.range (Sigma.ι (fun _ : Fin d ↦ T) i) :=
+    (isConnected_range f.continuous).isPreconnected.subset_isClopen (descent_split_ι_clopen T d i)
+      ⟨f x, ⟨x, rfl⟩, (sigmaOpenCover (fun _ : Fin d ↦ T)).covers (f x)⟩
+  let l := IsOpenImmersion.lift (Sigma.ι (fun _ : Fin d ↦ T) i) f hrange
+  have hl : l ≫ Sigma.ι (fun _ : Fin d ↦ T) i = f :=
+    IsOpenImmersion.lift_fac _ _ _
+  have hlk : l = k := by
+    have he := congrArg (fun a ↦ a ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T)) hl
+    simpa only [f, Category.assoc, Sigma.ι_desc, Category.comp_id, hδ,
+      pullback.lift_snd] using he
+  dsimp only [fixedSplitSection]
+  have he := congrArg (fun a ↦ a ≫ δ.inv ≫ pullback.fst p t) hl
+  simpa only [hlk, f, Category.assoc, Iso.hom_inv_id_assoc,
+    pullback.lift_fst] using he.symm
+
+
+-- The shorter affine argument does not need every torsor hypothesis in this fixed interface.
+set_option linter.unusedVariables false in
 /-- The selected split section descends to a map from the stabilizer quotient.
 
 Source: Stacks Project, Tag 03SF, finite Galois covers and permutation sets.
@@ -84,7 +134,61 @@ theorem affine_torsor_single_stabilizer_component_section
       s ≫ p = (Scheme.Opens.ι (X := Spec (CommRingCat.of F)) U ≫
         Spec.map (CommRingCat.ofHom (algebraMap H F))) ≫
           Spec.map (CommRingCat.ofHom ι) ∧
-      q ≫ s = fixedSplitSection p t k d δ x := by sorry
+      q ≫ s = fixedSplitSection p t k d δ x := by
+  classical
+  dsimp only
+  let F := (⨅ ζ : K, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)
+  let U : (Spec (CommRingCat.of F)).Opens :=
+    PrimeSpectrum.basicOpen (algebraMap H F (ι g))
+  let V := Scheme.Opens.toScheme (X := Spec (CommRingCat.of C))
+    (PrimeSpectrum.basicOpen (algebraMap H C (ι g)))
+  let q := (Spec.map (CommRingCat.ofHom F.val.toRingHom)).resLE
+    U (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) (by
+      change PrimeSpectrum.basicOpen (algebraMap H C (ι g)) ≤
+        PrimeSpectrum.basicOpen (algebraMap H C (ι g))
+      rfl)
+  let b := (Scheme.Opens.ι (X := Spec (CommRingCat.of F)) U ≫
+    Spec.map (CommRingCat.ofHom (algebraMap H F))) ≫ Spec.map (CommRingCat.ofHom ι)
+  let z : V := fixedPunctureGeneric C (algebraMap H C (ι g)) hne
+  have : Nonempty V := ⟨z⟩
+  have : IrreducibleSpace (Spec (CommRingCat.of C) : Scheme) := inferInstance
+  have : IrreducibleSpace V :=
+    (Scheme.Opens.ι (X := Spec (CommRingCat.of C))
+      (PrimeSpectrum.basicOpen (algebraMap H C (ι g)))).isOpenEmbedding.irreducibleSpace
+  have hfix : ∀ ζ : K,
+      fixedPunctureDeck H C (ι g) G ρ ζ.val ≫ fixedSplitSection p t k d δ x =
+        fixedSplitSection p t k d δ x := by
+    intro ζ
+    have hl := (hK ζ.val).mp ζ.property
+    change fixedPunctureLabel R H g ι C G ρ hne p T t k hk d δ hδ ζ.val x = x at hl
+    have hr : fixedPunctureDeck H C (ι g) G ρ ζ.val ≫ fixedSplitSection p t k d δ x =
+        fixedSplitSection p t k d δ
+          (fixedPunctureLabel R H g ι C G ρ hne p T t k hk d δ hδ ζ.val x) := by
+      unfold fixedPunctureLabel
+      exact descent_section_reconstruction p t k d δ hδ _ _ z
+    exact hr.trans (congrArg (fixedSplitSection p t k d δ) hl)
+  have : IsAffine (Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g)) :=
+    IsAffineOpen.Spec_basicOpen g
+  have : IsAffine Y := isAffine_of_isAffineHom j
+  obtain ⟨s, hs, _⟩ := affine_invariant_basic_open_descent
+    H C (ι g) hne G ρ K (fixedSplitSection p t k d δ x) hfix
+  have hqb : q ≫ b = k ≫ t := by
+    dsimp only [q, b]
+    rw [hk]
+    simp only [Category.assoc, Hom.resLE_comp_ι_assoc]
+    rw [← Spec.map_comp_assoc]
+    rfl
+  have hbasefix : ∀ ζ : K, fixedPunctureDeck H C (ι g) G ρ ζ.val ≫ (k ≫ t) = k ≫ t := by
+    intro ζ
+    rw [hk]
+    simpa only [Category.assoc] using congrArg
+      (fun a ↦ a ≫ Spec.map (CommRingCat.ofHom ι))
+      (fixedPunctureDeck_base H C (ι g) G ρ ζ.val)
+  obtain ⟨sbase, _, huniq⟩ := affine_invariant_basic_open_descent
+    H C (ι g) hne G ρ K (k ≫ t) hbasefix
+  have hsp : q ≫ (s ≫ p) = k ≫ t := by
+    rw [← Category.assoc, hs, fixedSplitSection_base p t k d δ hδ]
+  exact ⟨s, (huniq (s ≫ p) hsp).trans (huniq b hqb).symm, hs⟩
 
 
 /-- Open/base-map part of stabilizer descent.

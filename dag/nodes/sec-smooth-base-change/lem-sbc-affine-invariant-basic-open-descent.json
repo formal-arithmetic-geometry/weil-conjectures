@@ -1,0 +1,137 @@
+{
+ "id": "lem-sbc-affine-invariant-basic-open-descent",
+ "kind": "lemma",
+ "title": "Unique descent of an invariant affine basic-open morphism",
+ "statement": "Let H be a commutative ring, C a domain H-algebra, h in H with h_C=algebraMap H C h nonzero, G a group, rho:G -> End_H(C) any family of H-algebra endomorphisms (no action laws required), and K a subgroup. Let F be the intersection over zeta in K of the equalizer subalgebras of rho(zeta) and id, let h_F=algebraMap H F h, U=D(h_F) in Spec F, V=D(h_C) in Spec C, and q:V -> U the restriction of Spec(F -> C). The restricted deck maps are fixedPunctureDeck of [lem-sbc-affine-torsor-split-label-laws]. For any affine scheme Z and a:V -> Z such that deck(zeta) followed by a equals a for every zeta in K, there is a unique s:U -> Z such that q followed by s equals a. Neither G nor K is required to be finite.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03SF, affine stabilizer quotient application; the explicit domain-localization calculation and its generalization are written by N3 and completely checked in Lean."
+ },
+ "stmt_deps": [
+  "lem-sbc-affine-torsor-split-label-laws"
+ ],
+ "proof": [
+  {
+   "text": "Put LC=Localization.Away h_C and LF=Localization.Away h_F. The inclusion induces e:LF -> LC by Localization.awayMap. Localization.awayMap_injective_iff and injectivity of the subalgebra inclusion show e is injective. IsLocalization.injective and powers_le_nonZeroDivisors_of_noZeroDivisors give injectivity of C -> LC.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each zeta define v(zeta):LC -> LC using IsLocalization.Away.lift of rho(zeta) followed by C -> LC. The denominator is a unit and is fixed because rho(zeta) is an H-algebra map. IsLocalization.Away.lift_eq gives v(zeta)(algebraMap c)=algebraMap(rho(zeta)c).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For an invariant y in LC, IsLocalization.Away.surj writes y*algebraMap(h_C)^n=algebraMap(c). Apply v(zeta) to this equation; the fixed denominator and invariance of y give algebraMap(rho(zeta)c)=algebraMap(c). Injectivity gives rho(zeta)c=c for each zeta, so Algebra.mem_iInf and AlgHom.mem_equalizer give c in F.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The element algebraMap(c in F)*invSelf(h_F)^n of LF maps to y: multiply both sides by algebraMap(h_C)^n, use IsLocalization.Away.mul_invSelf, the localization map equation and the fraction equation, then cancel the unit denominator. Thus every invariant y has a preimage under e.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Identify U and V with Spec LF and Spec LC using basicOpenIsoSpecAway. The restricted q and deck maps correspond to Spec e and Spec v respectively. Check these identities by composing with the open-immersion Spec localization maps, using basicOpenIsoSpecAway_hom_SpecMap, Hom.resLE_comp_ι and Spec.map_comp; injectivity of the localization morphisms as monomorphisms gives cancellation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Conjugate a by these isomorphisms and Z.isoSpec. Spec.preimage gives phi:Gamma(Z) -> LC. Invariance and Spec.map_injective show v(zeta)(phi(r))=phi(r). Choose preimages of each phi(r) under e, which are unique because e is injective. Applying e verifies all four ring-homomorphism laws, so these preimages form phiF:Gamma(Z) -> LF.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take s=U -> Spec LF -> Spec Gamma(Z) -> Z from phiF. The localization naturality identity and e composed with phiF=phi give q composed with s=a. For any competing s, Spec.preimage yields a ring map phiPrime with e composed with phiPrime=phi. Injectivity of e gives phiPrime=phiF, and full faithfulness of Spec plus cancellation of the affine isomorphisms gives equality with s.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "written-by-agent",
+  "by": "agent",
+  "group": "N3",
+  "document": "Stacks Project",
+  "place": "Tag 03SF motivates the application; N3 supplies the elementary affine ring calculation, fully proved from Mathlib."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An invariant morphism from an affine principal open descends uniquely to the spectrum of the fixed subring",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from the spectrum of a domain invariant under a finite group descends uniquely to the spectrum of the invariant subring",
+   "results": "Eight results concerning invariant-ring prime orbits, quotient field maps and fixed fields; none states this affine basic-open Hom factorization.",
+   "date": "2026-10-14",
+   "verdict": "related ingredients, no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away",
+   "results": "Read IsLocalization.Away.lift, .surj, .algebraMap_isUnit and Localization.awayMap_injective_iff; these provide the localization calculation.",
+   "date": "2026-10-14",
+   "verdict": "ingredients used in complete proof"
+  },
+  {
+   "tool": "grep",
+   "query": "fixed.*localiz|localiz.*fixed|invariant.*localiz; basicOpenIsoSpecAway; Spec.preimage",
+   "results": "Read Mathlib RingTheory/Localization/Away/Basic.lean, AlgebraicGeometry/Restrict.lean, and AlgebraicGeometry/GammaSpecAdjunction.lean. Searched both library roots and the DAG for invariant affine descent; no existing declaration has the factorization statement. Blueprint search invariant localization returned zero matching blueprint nodes.",
+   "date": "2026-10-14",
+   "verdict": "ingredients used, no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSingleStabilizerComponent",
+  "date": "2026-10-14",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-affine-torsor-single-stabilizer-component-section",
+   "place": "Affine invariant-ring localization calculation in the stabilizer-section factorization proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineInvariantBasicOpenDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineInvariantBasicOpenDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_invariant_basic_open_descent",
+  "statement": "theorem affine_invariant_basic_open_descent\n    (H : CommRingCat.{u}) (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]\n    (h : H) (hne : algebraMap H C h ≠ 0)\n    (G : Type u) [Group G] (ρ : G → C →ₐ[H] C) (K : Subgroup G)\n    {Z : Scheme.{u}} [IsAffine Z]\n    (a : Scheme.Opens.toScheme (X := Spec (CommRingCat.of C))\n      (PrimeSpectrum.basicOpen (algebraMap H C h)) ⟶ Z)\n    (ha : ∀ ζ : K, fixedPunctureDeck H C h G ρ ζ.val ≫ a = a) :\n    let F := (⨅ ζ : K, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)\n    let U : (Spec (CommRingCat.of F)).Opens := PrimeSpectrum.basicOpen (algebraMap H F h)\n    let q := (Spec.map (CommRingCat.ofHom F.val.toRingHom)).resLE\n      U (PrimeSpectrum.basicOpen (algebraMap H C h)) (by\n        change PrimeSpectrum.basicOpen (algebraMap H C h) ≤\n          PrimeSpectrum.basicOpen (algebraMap H C h)\n        rfl)\n    ∃! s : Scheme.Opens.toScheme (X := Spec (CommRingCat.of F)) U ⟶ Z, q ≫ s = a",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261014T023936-L-15472",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261014T023936-L-15472",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
