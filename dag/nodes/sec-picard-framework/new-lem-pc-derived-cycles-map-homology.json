@@ -1,0 +1,119 @@
+{
+ "id": "new-lem-pc-derived-cycles-map-homology",
+ "kind": "statement",
+ "title": "Homology of the localized canonical cycle map",
+ "statement": "Let C be an abelian category with derived category [def-pc-derived-category], K a cochain complex and n any integer. Define the chain map cycles_n(K)[-n] \\to K by the canonical cycle inclusion in degree n and zero elsewhere, and define its derived map using singleFunctorIsoCompQ and Q. The inverse specified single/homology comparison followed by the degree-n homology of this map equals homologyπ(K,n) followed by the inverse localization/homology factor isomorphism at K.",
+ "stmt_deps": [
+  "def-pc-derived-category"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/05TC; https://stacks.math.columbia.edu/tag/05TD",
+  "place": "05TC (2), canonical double truncation; 05TD (3), actual derived unit. Canonical-map calculation written by R2 from the parent node and the named library comparisons."
+ },
+ "proof": [
+  {
+   "text": "Construct the chain map using mkHomFromSingle and iCycles_d. Expand the derived single/homology comparison; its single/localization factor is the identity. Apply naturality of the inverse localization/homology factor isomorphism.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose with the invertible single/cycles identification. Use single/cycles/homology compatibility and homologyπ naturality. The induced cycles map is the single/cycles identification: composing both with the monic cycle inclusion reduces this to the sole component of mkHomFromSingle. Cancel the isomorphisms.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/05TC; https://stacks.math.columbia.edu/tag/05TD",
+  "place": "05TC (2), canonical double truncation; 05TD (3), actual derived unit. Canonical-map calculation written by R2 from the parent node and the named library comparisons.",
+  "note": "Complete Lean proof; no sorry or new unproved dependency."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical cycle map homology and right derived unit naturality with bottom truncation",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical cycles homology smart truncation naturality right derived functor unit",
+   "date": "2026-10-14",
+   "results": "8 hits, including homologyFunctorFactors and smart-truncation naturality. No exact canonical-unit identity. A separate query for factorization from a single object returned fractions lemmas rather than the canonical factorization.",
+   "verdict": "Use the existing comparison APIs and prove the canonical identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"liftCycles\"; \"homologyπ_naturality\"",
+   "date": "2026-10-14",
+   "results": "12 liftCycles hits, including liftCycles_i and liftCycles_comp_cyclesMap; 8 homology quotient naturality hits, including HomologicalComplex.homologyπ_naturality.",
+   "verdict": "Supporting maps and equations exist; no exact statement."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedNatTrans_app|homologyFunctor_map_eTruncLTCompETruncGEIso_hom_app|homologyπ_naturality",
+   "date": "2026-10-14",
+   "results": "Mathlib rightDerivedNatTrans_app and homologyπ_naturality; source-library double-truncation homology formula and single-source homology extensionality. Searches in Sheaf and WeilConjectures found no duplicate of these new canonical formulas.",
+   "verdict": "Use these proved APIs; no new unfinished prerequisite."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Abelian.DerivedBottomCycleTransport",
+  "date": "2026-10-14",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-lem-pc-derived-bottom-cycle-transport",
+   "place": "Canonical-cycle transport, proved constituent calculation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.DerivedCyclesMap",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/DerivedCyclesMap.lean",
+  "declaration": "DerivedCategory.cyclesDerivedMap_homology",
+  "statement": "theorem cyclesDerivedMap_homology (n : ℤ) (K : CochainComplex C ℤ) :\n    (singleFunctorCompHomologyFunctorIso C n).inv.app ((K.sc n).cycles) ≫\n      (homologyFunctor C n).map (cyclesDerivedMap n K) =\n    (K.sc n).homologyπ ≫ (homologyFunctorFactors C n).inv.app K",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261014T054723-L-2187586",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261014T054723-L-2187586",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

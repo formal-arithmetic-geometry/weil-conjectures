@@ -1,0 +1,130 @@
+{
+ "id": "new-lem-pc-derived-cycles-unit-naturality",
+ "kind": "statement",
+ "title": "Derived-unit naturality on the canonical cycle map",
+ "statement": "Let C,D and additive S:C \\to D have derived categories and the injective hypotheses of [src-right-derived-functor-plus-compatibility]. Let K be a cochain complex, n any integer, M in D+(C), and q:QK \\to inclusion(M). The canonical lift of S(iCycles(K,n)), followed by homologyπ of S(K), inverse localization/homology comparison, homology of the actual unbounded derived unit, homology of RS(q), and homology of inverse bounded-below/unbounded compatibility at M equals the actual single-object unit on cycles_n(K) of [new-lem-pc-derived-single-shift-normalization], followed by degree-n homology of R+S applied to the fully faithful preimage of cyclesDerivedMap(K,n) followed by q [new-lem-pc-derived-cycles-map-homology]. No left exactness or concentration hypothesis on M is needed.",
+ "stmt_deps": [
+  "src-right-derived-functor-plus-compatibility",
+  "new-lem-pc-derived-cycles-map-homology",
+  "new-lem-pc-derived-single-shift-normalization"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/05TC; https://stacks.math.columbia.edu/tag/05TD",
+  "place": "05TC (2), canonical double truncation; 05TD (3), actual derived unit. Canonical-map calculation written by R2 from the parent node and the named library comparisons."
+ },
+ "proof": [
+  {
+   "text": "The defining rightDerivedNatTrans_app equation for the inverse uniqueness comparison proves that bounded-below/unbounded compatibility intertwines the actual units. On the single object the quotient/single preimage is the identity; the coefficient-functor single comparison is Q of the corresponding chain isomorphism.",
+   "uses": [
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The mapped cycle chain map factors through the cycle chain map of S(K) by the canonical liftCycles. Prove this in degree n by from_single_hom_ext and liftCycles_i. Apply the proved cycle-map homology formula and naturality of the single/homology comparison.",
+   "uses": [
+    "new-lem-pc-derived-cycles-map-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the unbounded derived unit for the cycle chain map, followed by q, and naturality of inverse compatibility give equality with the bounded-below actual single unit. Apply homology, substitute the preceding mapped-cycle calculation, and unfold rightDerivedPlusSingleUnitHomologyAt.",
+   "uses": [
+    "new-lem-pc-derived-single-shift-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "src-right-derived-functor-plus-compatibility",
+  "new-lem-pc-derived-cycles-map-homology",
+  "new-lem-pc-derived-single-shift-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/05TC; https://stacks.math.columbia.edu/tag/05TD",
+  "place": "05TC (2), canonical double truncation; 05TD (3), actual derived unit. Canonical-map calculation written by R2 from the parent node and the named library comparisons.",
+  "note": "Complete Lean proof; no sorry or new unproved dependency."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical cycle map homology and right derived unit naturality with bottom truncation",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical cycles homology smart truncation naturality right derived functor unit",
+   "date": "2026-10-14",
+   "results": "8 hits, including homologyFunctorFactors and smart-truncation naturality. No exact canonical-unit identity. A separate query for factorization from a single object returned fractions lemmas rather than the canonical factorization.",
+   "verdict": "Use the existing comparison APIs and prove the canonical identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"liftCycles\"; \"homologyπ_naturality\"",
+   "date": "2026-10-14",
+   "results": "12 liftCycles hits, including liftCycles_i and liftCycles_comp_cyclesMap; 8 homology quotient naturality hits, including HomologicalComplex.homologyπ_naturality.",
+   "verdict": "Supporting maps and equations exist; no exact statement."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedNatTrans_app|homologyFunctor_map_eTruncLTCompETruncGEIso_hom_app|homologyπ_naturality",
+   "date": "2026-10-14",
+   "results": "Mathlib rightDerivedNatTrans_app and homologyπ_naturality; source-library double-truncation homology formula and single-source homology extensionality. Searches in Sheaf and WeilConjectures found no duplicate of these new canonical formulas.",
+   "verdict": "Use these proved APIs; no new unfinished prerequisite."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Abelian.DerivedBottomCycleTransport",
+  "date": "2026-10-14",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-lem-pc-derived-bottom-cycle-transport",
+   "place": "Canonical-cycle transport, proved constituent calculation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.DerivedCyclesUnitNaturality",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/DerivedCyclesUnitNaturality.lean",
+  "declaration": "CategoryTheory.Functor.rightDerived_cycles_unit_naturality",
+  "statement": "theorem rightDerived_cycles_unit_naturality (n : ℤ) (K : CochainComplex C ℤ)\n    (M : DerivedCategory.Plus C) (q : DerivedCategory.Q.obj K ⟶\n      DerivedCategory.Plus.ι.obj M) :\n    ((((S.mapHomologicalComplex (.up ℤ)).obj K).sc n).liftCycles\n        (S.map (K.sc n).iCycles) (by\n          change S.map (K.sc n).iCycles ≫ S.map (K.sc n).g = 0\n          rw [← S.map_comp, (K.sc n).iCycles_g, S.map_zero])) ≫\n      (((S.mapHomologicalComplex (.up ℤ)).obj K).sc n).homologyπ ≫\n      (DerivedCategory.homologyFunctorFactors D n).inv.app\n        ((S.mapHomologicalComplex (.up ℤ)).obj K) ≫\n      (DerivedCategory.homologyFunctor D n).map\n        (S.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient C (.up ℤ)).obj K)) ≫\n      (DerivedCategory.homologyFunctor D n).map (S.rightDerivedFunctor.map q) ≫\n      (DerivedCategory.homologyFunctor D n).map\n        (S.rightDerivedFunctorPlusCompatibility.inv.app M) =\n    S.rightDerivedPlusSingleUnitHomologyAt n ((K.sc n).cycles) ≫\n      (DerivedCategory.Plus.homologyFunctor D n).map\n        (S.rightDerivedFunctorPlus.map\n          (DerivedCategory.Plus.ι.preimage\n            (X := (DerivedCategory.Plus.singleFunctor C n).obj ((K.sc n).cycles))\n            (Y := M) (DerivedCategory.cyclesDerivedMap n K ≫ q)))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261014T054723-L-2187586",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261014T054723-L-2187586",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
