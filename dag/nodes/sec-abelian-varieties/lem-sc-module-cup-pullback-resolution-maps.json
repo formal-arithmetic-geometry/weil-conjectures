@@ -1,0 +1,225 @@
+{
+ "id": "lem-sc-module-cup-pullback-resolution-maps",
+ "kind": "statement",
+ "title": "Pullback maps between computing cup resolutions",
+ "statement": "Let $f:X'\\to X$ be a morphism of schemes [def-pc-scheme] and let $F,G$ be $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], with sheaf tensor product [def-pur-sheaf-tensor-product]. Write $f^*$ for tensor pullback [def-pc-module-pullback], and let $\\tau:f^*(F\\otimes G)\\to f^*F\\otimes f^*G$ be the canonical section-normalized comparison [lem-weil-pbc-module-pullback-tensor]. There exist computing resolution pairings $D$ for $F,G$ on $X$ and $E$ for $f^*F,f^*G$ on $X'$ [def-sc-module-cup-resolution-data], and additive cochain maps $l,r,t$ between their respective left, right and target global section complexes. For every degree $n$, source global kernel cycle $z$ and target kernel cycle $z'$ whose underlying section is the appropriate degree map of $z$, the class of $z'$ is respectively $f^*[z]$, $f^*[z]$, or $H^n(\\tau)f^*[z]$, using the canonical computing class maps and pullback [def-weil-pbc-module-cohomology-fmap]. For every $p,q\\geq0$ and global sections $a$ of $D_{\\rm left}^p$, $b$ of $D_{\\rm right}^q$, one has $t^{p+q}(D_{\\rm pair}^{p,q}(a,b))=E_{\\rm pair}^{p,q}(l^p(a),r^q(b))$. No cup product on cohomology is supplied as input and no cover or flatness hypothesis is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "section-cup-product, naive cup products and Lemma 20.31.3; Godement resolution Tag 0FKS; resolution pullback diagram Tag 01FD"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-tensor",
+  "def-sc-module-cup-resolution-data",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Take the Godement models for F, G and F tensor G on X and for their pulled-back coefficients on X-prime. On each open V define the map of product-of-stalks objects by sending the coordinate at f(x-prime) through the stalk map of the adjunction unit, for each x-prime in f-inverse(V). The germ unit commutes with this map because both values are the germ of the pulled-back section. Evaluation commutes because both routes evaluate the same coordinate at x-prime. Iteration therefore commutes with every inserted unit and every evaluation, hence defines maps of the augmented cosimplicial resolutions. Taking alternating differentials and global sections gives additive cochain maps l, r and t. No tensor-pullback exactness is used.",
+   "uses": [
+    "lem-sc-module-cup-godement-relations",
+    "lem-sc-module-cup-godement-model-pairing-models-exist",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0FKS",
+    "place": "cohomology-lemma-godement-resolution; coordinatewise extension to a morphism of ringed spaces"
+   }
+  },
+  {
+   "text": "For the two Godement models, use their coordinatewise tensor maps and Alexander--Whitney pairing. At each stalk the tensor-pullback comparison sends the image of a section tensor to the tensor of its two images. The cosimplicial maps from the first step commute with the front and back faces. In each bidegree the two routes thus evaluate to the same tensor coordinate. Composing the map for F tensor G with the map of its Godement resolution induced by the canonical tensor-pullback comparison gives the target map t and the displayed strict pairing equation. The signed Leibniz rule and degree-zero augmentation tensor equation equip the two models with pairings.",
+   "uses": [
+    "lem-sc-module-cup-godement-aw",
+    "lem-weil-pbc-module-pullback-tensor",
+    "def-sc-module-cup-resolution-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0FKU",
+    "place": "section-cup-product, naive cup products and Lemma 20.31.3; Godement resolution Tag 0FKS; resolution pullback diagram Tag 01FD"
+   }
+  },
+  {
+   "text": "All terms of the Godement resolutions are flasque, and their augmented stalk complexes contract by evaluation. Choose injective comparisons over the augmentations. Flasque acyclicity and the acyclic-resolution comparison criterion make these comparisons isomorphisms on global homology. They produce the computing pairings D and E.",
+   "uses": [
+    "lem-sc-module-cup-flasque-acyclicity",
+    "lemma-weil-pbc-leray-acyclicity",
+    "def-sp-injective-resolutions",
+    "def-sc-module-cup-resolution-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0FKS",
+    "place": "cohomology-lemma-godement-resolution and computing flasque resolution comparison"
+   }
+  },
+  {
+   "text": "For each of the three coefficients, compare the augmented Godement map with the injective diagram defining the cohomology f-map. Resolve the pushforward of the target injective resolution by a complex of injectives. The source Godement complex has two maps into this complex: the source comparison followed by the injective f-map lift, and the Godement f-map followed by the pushforward target comparison and the injective replacement. They agree on the coefficient augmentation. The comparison homotopy for a quasi-isomorphic nonnegative augmentation and injective target makes the two maps homotopic. Global sections and homology identify them. Cancel the source and target computing homology isomorphisms and the pushforward-replacement homology isomorphism. This is precisely the defining formula of moduleCohomologyFMap under the two class maps. The third coefficient is the tensor unit followed by the tensor comparison, so target coefficient naturality supplies H(tensor comparison) after pullback. The concrete cycle projection commutes with the cochain maps by the homology-projection naturality, yielding the three class equations. Assemble the two pairings and three maps.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "def-sp-injective-resolutions",
+    "def-sc-module-cup-resolution-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01FD",
+    "place": "cohomology-lemma-functoriality-cech, injective-resolution comparison diagram, with Godement global sections in place of the Cech total complex"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-cup-godement-relations",
+  "lem-sc-module-cup-godement-model-pairing-models-exist",
+  "def-pc-module-pullback",
+  "lem-sc-module-cup-godement-aw",
+  "lem-weil-pbc-module-pullback-tensor",
+  "def-sc-module-cup-resolution-data",
+  "lem-sc-module-cup-flasque-acyclicity",
+  "lemma-weil-pbc-leray-acyclicity",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-weil-pbc-module-cohomology-fmap-functorial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "Coordinatewise Godement maps for a scheme morphism and the injective comparison argument above, extending the source constructions in Tags 0FKS, 0FKU and 01FD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "sheaf cohomology cup product natural in coefficient morphisms",
+   "results": "8 hits: CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans, CategoryTheory.PresheafOfGroups.OneCochain.mul_ev, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.PresheafOfGroups.OneCochain.instMul, groupCohomology.mapCocycles₂_comp_i, CategoryTheory.PresheafOfGroups.OneCocycle.ev_trans, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, groupCohomology.mapCocycles₁_comp_i",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap",
+   "results": "12 hits: HomologicalComplex.homologyMap, HomologicalComplex.homologyMap_id, HomologicalComplex.instIsIsoHomologyMap, HomologicalComplex.epi_homologyMap_of_epi_of_not_rel, HomologicalComplex.mono_homologyMap_of_mono_of_not_rel, HomologicalComplex.homologyMapIso_hom, HomologicalComplex.homologyMapIso_inv, HomologicalComplex.homologyFunctor_map",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cup.*naturality|naturality.*cup",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Godement resolutions and tensor pairings natural under a morphism of ringed spaces",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Computing resolution cochain maps for pullback sheaf cohomology and compatible cup pairings",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toPullbackObj, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.glue, CategoryTheory.Meq.pullback_apply, TopCat.Sheaf.interUnionPullbackConeLift_right, TopCat.Sheaf.interUnionPullbackConeLift_left, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue, CategoryTheory.PresheafOfGroups.OneCohomologyRelation",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.Hom.comm",
+   "results": "3 hits: HomologicalComplex.Hom.comm, ChainComplex.mkHom_f_succ_succ, CochainComplex.mkHom_f_succ_succ",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "godement|cup.*pullback|pullback.*cup",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial flasque resolutions on different ringed spaces preserve Alexander Whitney pairing",
+   "results": "8 hits, including injective-resolution naturality and alternating-face-map functoriality; no cross-ringed-space paired computing-resolution construction.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.Hom.comm",
+   "results": "3 hits: cochain commutation and mkHom component equations; used to check the concrete additive cycle transport, not a replacement for resolution existence.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|godement|AlexanderWhitney",
+   "results": "0 Mathlib hits. Repository search for pullback/resolution and cup/pullback found no general replacement; scalarCup_pullback_naturality requires schemes over a common field.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CechCupPullbackCompat",
+  "date": "2026-10-14",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof of Tag 0BF3: invoke the Kunneth cup product on the special fibre; pullback compatibility in Step 4 of lem-sc-picard-cech-cup-pullback-compat",
+   "via": [
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupPullbackResolutionMaps",
+  "file": "lean/Sheaf/Paper/ModuleCupPullbackResolutionMaps.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_pullback_resolution_maps",
+  "statement": "theorem moduleCup_pullback_resolution_maps (X X' : Scheme.{v}) (f : X' ⟶ X)\n    (F G : X.Modules) :\n    ∃ (D : CupResolutionPairing F G)\n      (E : CupResolutionPairing ((tensorPullback f).obj F) ((tensorPullback f).obj G))\n      (l : ((RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙\n        forget₂ _ AddCommGrpCat.{v}).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj D.left.K ⟶\n      ((RingedSpace.globalSectionsFunctor X'.toRingedSpace ⋙\n        forget₂ _ AddCommGrpCat.{v}).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj E.left.K)\n      (r : ((RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙\n        forget₂ _ AddCommGrpCat.{v}).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj D.right.K ⟶\n      ((RingedSpace.globalSectionsFunctor X'.toRingedSpace ⋙\n        forget₂ _ AddCommGrpCat.{v}).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj E.right.K)\n      (t : ((RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙\n        forget₂ _ AddCommGrpCat.{v}).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj D.target.K ⟶\n      ((RingedSpace.globalSectionsFunctor X'.toRingedSpace ⋙\n        forget₂ _ AddCommGrpCat.{v}).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj E.target.K),\n      (∀ (n : ℕ)\n        (a : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj D.left.K).sc n).moduleCatLeftHomologyData.K)\n        (a' : ((((RingedSpace.globalSectionsFunctor X'.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj E.left.K).sc n).moduleCatLeftHomologyData.K),\n        a'.val = l.f n a.val →\n          E.left.class n a' =\n            moduleCohomologyPullback f F n (D.left.class n a)) ∧\n      (∀ (n : ℕ)\n        (b : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj D.right.K).sc n).moduleCatLeftHomologyData.K)\n        (b' : ((((RingedSpace.globalSectionsFunctor X'.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj E.right.K).sc n).moduleCatLeftHomologyData.K),\n        b'.val = r.f n b.val →\n          E.right.class n b' =\n            moduleCohomologyPullback f G n (D.right.class n b)) ∧\n      (∀ (n : ℕ)\n        (c : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj D.target.K).sc n).moduleCatLeftHomologyData.K)\n        (c' : ((((RingedSpace.globalSectionsFunctor X'.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj E.target.K).sc n).moduleCatLeftHomologyData.K),\n        c'.val = t.f n c.val →\n          E.target.class n c' =\n            (RingedSpace.moduleCohomology X'.toRingedSpace n).map\n              ((Classical.choose (module_pullback_tensor f)) F G).hom\n              (moduleCohomologyPullback f (@id X.Modules (F ⊗ G)) n\n                (D.target.class n c))) ∧\n      (∀ (p q : ℕ) (a : Γ(D.left.K.X p, ⊤)) (b : Γ(D.right.K.X q, ⊤)),\n        t.f (p + q) (D.pair p q ⊤ a b) =\n          E.pair p q ⊤ (l.f p a) (r.f q b))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-14"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261014T023939-L-16739",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261014T023939-L-16739",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
