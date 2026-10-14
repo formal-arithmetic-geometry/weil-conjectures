@@ -14151,3 +14151,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:23 L: returned deliver/A3/Sheaf.Paper.ModuleCupGodementCoefficientComplexes (reviewer RETURN: (reviewer X-e7670, head e7670f11f) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.ModuleCupGodem)
 
 - 09:23 L: batch 20261014T010832 dependency take-out
+- 01:25 L: returned deliver/S3/Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap (reviewer RETURN: (reviewer X-92ef5, head 92ef546d3) A10: Add the forced adaptation for `lean/Sheaf/AlgebraicGeometry/AffineSectionsSquare)
