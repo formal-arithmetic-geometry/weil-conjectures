@@ -10,20 +10,12 @@ public import Mathlib.CategoryTheory.Presentable.Finite
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Finite.BaseChange
-import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
-import Sheaf.AlgebraicGeometry.ConstructibleFiniteSelection
-import Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePresentation
-import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
+import Sheaf.AlgebraicGeometry.ConstructibleAffineFreePresentationGeneral
 import Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.NormalScheme
-import Sheaf.AlgebraicGeometry.StrictHenselization
-import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
-import Sheaf.RingTheory.EtaleColimitNormalLocalDomain
-import Sheaf.RingTheory.StrictHenselizationTriples
-import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Mathlib.CategoryTheory.Presentable.Limits
+import Mathlib.CategoryTheory.Presentable.Directed
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Sheaf.AlgebraicGeometry.ConstructibleLimitDescentGeneral
 
 /-!
 # Constructible sheaves embed into finite pushforwards of constant sheaves
@@ -98,6 +90,57 @@ theorem Etale.isIso_unit_constantSheaf_of_isIntegrallyClosed {Y : Scheme.{u}} [I
           ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) :=
   sorry
 
+private noncomputable def affineFreeHomEquiv
+    {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
+    (W : X.Etale) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    ((presheafToSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+      (uliftYoneda.{u + 1}.obj W ⋙ ModuleCat.free Λ) ⟶ F) ≃
+      F.obj.obj (Opposite.op W) :=
+  ((sheafificationAdjunction X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).homEquiv _ _).trans
+    (((ModuleCat.adj Λ).whiskerRight X.Etaleᵒᵖ).homEquiv _ _ |>.trans uliftYonedaEquiv)
+
+private theorem affineFreeHomEquiv_comp
+    {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
+    (W : X.Etale) {F H : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (p : (presheafToSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+      (uliftYoneda.{u + 1}.obj W ⋙ ModuleCat.free Λ) ⟶ F) (f : F ⟶ H) :
+    affineFreeHomEquiv W H (p ≫ f) = f.hom.app (Opposite.op W) (affineFreeHomEquiv W F p) := by
+  simp only [affineFreeHomEquiv, Equiv.trans_apply, Adjunction.homEquiv_naturality_right]
+  rfl
+
+private noncomputable def affineFreeCoyonedaIso
+    {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] (W : X.Etale) :
+    coyoneda.obj (Opposite.op ((presheafToSheaf X.smallEtaleTopology
+      (ModuleCat.{u + 1} Λ)).obj (uliftYoneda.{u + 1}.obj W ⋙ ModuleCat.free Λ))) ≅
+      (sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (Opposite.op W) ⋙
+        CategoryTheory.forget (ModuleCat.{u + 1} Λ) :=
+  NatIso.ofComponents (fun F ↦ (affineFreeHomEquiv W F).toIso) (by
+    intro F H f
+    ext p
+    exact affineFreeHomEquiv_comp W p f)
+
+private theorem affineFree_finitelyPresentable
+    {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
+    (W : X.Etale) [IsAffine W.left] :
+    IsFinitelyPresentable.{u}
+      ((presheafToSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+        (uliftYoneda.{u + 1}.obj W ⋙ ModuleCat.free Λ)) := by
+  let := Cardinal.fact_isRegular_aleph0.{u}
+  have : PreservesFilteredColimitsOfSize.{u, u}
+      (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  let E := (sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (Opposite.op W)
+  have : PreservesFilteredColimitsOfSize.{u, u} E := by
+    refine ⟨fun I _ _ ↦ ⟨fun {D} ↦ ?_⟩⟩
+    have : IsIso ((colimit.isColimit (D ⋙ E)).desc (E.mapCocone (colimit.cocone D))) :=
+      (ConcreteCategory.isIso_iff_bijective _).2
+      (etale_sections_filtered_colimit X Λ W I D (colimit.cocone D) (colimit.isColimit D))
+    exact preservesColimit_of_preserves_colimit_cocone (colimit.isColimit D)
+      ((colimit.isColimit (D ⋙ E)).ofPointIso)
+  rw [isFinitelyPresentable_iff_preservesFilteredColimitsOfSize]
+  refine ⟨fun I _ _ ↦ ?_⟩
+  exact preservesColimitsOfShape_of_natIso (affineFreeCoyonedaIso W).symm
+
 /-- **Constructible sheaves are finitely presentable.** On a quasi-compact quasi-separated
 scheme `X`, with `Λ` Noetherian, a constructible sheaf of `Λ`-modules `F` is a finitely
 presentable object of the category of sheaves: `Hom(F, -)` commutes with filtered colimits
@@ -108,8 +151,30 @@ through a stage, and two such factorisations agree at a later stage.
 theorem Etale.isFinitelyPresentable_of_isConstructibleSheaf [IsNoetherianRing Λ]
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F] :
-    IsFinitelyPresentable.{u} F :=
-  sorry
+    IsFinitelyPresentable.{u} F := by
+  let := Cardinal.fact_isRegular_aleph0.{u}
+  classical
+  let P : X.Etale → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) := fun W ↦
+    (presheafToSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+      (uliftYoneda.{u + 1}.obj W ⋙ ModuleCat.free Λ)
+  obtain ⟨n, m, U, V, hU, hV, f, g, w, ⟨hg⟩⟩ :=
+    Scheme.exists_affine_free_etale_presentation_general X Λ F
+  have hfree (W : X.Etale) (hW : IsAffine W.left) : IsFinitelyPresentable.{u} (P W) := by
+    have := hW
+    exact affineFree_finitelyPresentable W
+  have hsum (k : ℕ) (W : Fin k → X.Etale) (hW : ∀ i, IsAffine (W i).left) :
+      IsFinitelyPresentable.{u} (∐ fun i ↦ P (W i)) := by
+    have (i : Discrete (Fin k)) : IsFinitelyPresentable.{u}
+        ((Discrete.functor (fun i ↦ P (W i))).obj i) := hfree (W i.as) (hW i.as)
+    exact isCardinalPresentable_of_isColimit' _
+      (colimit.isColimit (Discrete.functor (fun i ↦ P (W i)))) Cardinal.aleph0.{u}
+      ((hasCardinalLT_aleph0_iff _).2 inferInstance)
+  have (i : WalkingParallelPair) : IsFinitelyPresentable.{u} ((parallelPair f 0).obj i) := by
+    cases i
+    · exact hsum m V hV
+    · exact hsum n U hU
+  exact isCardinalPresentable_of_isColimit' _ hg Cardinal.aleph0.{u}
+    ((hasCardinalLT_aleph0_iff _).2 inferInstance)
 
 /-- **The finite-pushforward embedding over a Noetherian base.** A constructible sheaf of
 `Λ`-modules `C` on a Noetherian scheme `U` admits a monomorphism
@@ -142,8 +207,27 @@ theorem Etale.exists_isNoetherian_upperStar_iso [IsNoetherianRing Λ] {U : Schem
     [QuasiSeparatedSpace U] (C : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [IsConstructibleSheaf C] :
     ∃ (U' : Scheme.{u}) (ν : U ⟶ U') (C' : Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
-      IsNoetherian U' ∧ IsConstructibleSheaf C' ∧ Nonempty (((ν)^*[_]).obj C' ≅ C) :=
-  sorry
+      IsNoetherian U' ∧ IsConstructibleSheaf C' ∧ Nonempty (((ν)^*[_]).obj C' ≅ C) := by
+  obtain ⟨N⟩ := U.nonempty_noetherianApproximation
+  obtain ⟨I, hI, hd, hn, G, hG⟩ := IsFiltered.exists_directed N.Iᵒᵖ
+  let := hI
+  let := hd
+  let := hn
+  let := hG
+  let D := G.leftOp ⋙ N.D
+  let c := (Cone.mk U N.π).whisker G.leftOp
+  have hc : IsLimit c := (Functor.Initial.isLimitWhiskerEquiv G.leftOp _).symm N.isLimit
+  let : ∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f) :=
+    fun {_ _} f ↦ N.isAffineHom_map (G.leftOp.map f)
+  let : ∀ i : Iᵒᵖ, CompactSpace (D.obj i) :=
+    fun i ↦ N.compactSpace_obj (G.leftOp.obj i)
+  let : ∀ i : Iᵒᵖ, IsNoetherian (D.obj i) :=
+    fun i ↦ N.isNoetherian_obj (G.leftOp.obj i)
+  let : ∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i) :=
+    fun i ↦ IsLocallyNoetherian.quasiSeparatedSpace
+  obtain ⟨i, C', hC', e⟩ := Scheme.exists_constructible_limit_descent_general D c hc Λ C
+  exact ⟨D.obj (Opposite.op i), c.π.app (Opposite.op i), C',
+    N.isNoetherian_obj _, hC', e⟩
 
 /-- **Pulling back a finite-pushforward embedding.** If `C'` on `U'` embeds into a finite sum
 of pushforwards of constant sheaves along finite, finitely presented morphisms, then so does

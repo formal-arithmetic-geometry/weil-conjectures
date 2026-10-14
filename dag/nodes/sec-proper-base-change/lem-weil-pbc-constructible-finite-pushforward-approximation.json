@@ -26,19 +26,21 @@
  ],
  "proof": [
   {
-   "text": "*Step 1: descend the coefficient sheaf.* Choose $n\\ge1$ killing $C$ by [lem-weil-pbc-constructible-abelian-bounded-exponent]. By [lem-weil-pbc-sheaves-killed-by-n-zmod-modules] and [lem-weil-pbc-constructible-abelian-zn-module-constructible], regard $C$ as a constructible sheaf $\\widetilde C$ of $\\mathbf Z/n$-modules. The Noetherian descent statement [lem-weil-pbc-constructible-module-noetherian-descent] supplies an affine inverse-system presentation $U\\simeq\\varprojlim U_\\lambda$ with Noetherian quasi-compact quasi-separated stages and affine transition maps, an index $\\lambda$, a constructible $\\mathbf Z/n$-module sheaf $\\widetilde C_\\lambda$ on $U_\\lambda$, and an isomorphism $\\nu_\\lambda^{-1}\\widetilde C_\\lambda\\cong\\widetilde C$. Forgetting the module structure gives the required constructible torsion abelian sheaf $C_\\lambda$ and $\\nu_\\lambda^{-1}C_\\lambda\\cong C$.",
+   "text": "Choose a Noetherian approximation of U over the integers [prop-nagata-noetherian-inverse-system]. Reindex its opposite filtered category by a nonempty directed partial order using [lem-weil-pbc-cofiltered-limit-directed-reindex], and transport its limit cone by initiality. Each stage is Noetherian by the existing NoetherianApproximation.isNoetherian_obj instance. Apply [new-constructible-limit-descent-general] to the constructible module sheaf to obtain a constructible sheaf at one Noetherian stage and its pullback isomorphism. For the torsion abelian-sheaf statement, first choose a common annihilator and pass to the corresponding Z/n-module sheaf, then forget its module structure.",
    "uses": [
+    "prop-nagata-noetherian-inverse-system",
+    "lem-weil-pbc-cofiltered-limit-directed-reindex",
+    "new-constructible-limit-descent-general",
     "lem-weil-pbc-constructible-abelian-bounded-exponent",
     "lem-weil-pbc-sheaves-killed-by-n-zmod-modules",
-    "lem-weil-pbc-constructible-abelian-zn-module-constructible",
-    "lem-weil-pbc-constructible-module-noetherian-descent"
+    "lem-weil-pbc-constructible-abelian-zn-module-constructible"
    ],
    "elementary": false
   },
   {
-   "text": "*Step 2: the finite-pushforward embedding at the Noetherian stage.* Apply [lem-weil-pbc-constructible-module-finite-pushforward-noetherian] to $\\widetilde C_\\lambda$. It gives finite morphisms $h_{\\lambda,i}:V_{\\lambda,i}\\to U_\\lambda$, finite $\\mathbf Z/n$-modules $M_i$, and a monomorphism of module sheaves $\\widetilde C_\\lambda\\hookrightarrow\\bigoplus_i(h_{\\lambda,i})_*\\underline{M_i}$. The forgetful functor is exact and preserves finite biproducts, direct images, and constant sheaves by [lem-weil-pbc-module-sheaves-colimits-forgetful], [def-weil-additive-category], [def-weil-pbc-direct-image], and [def-weil-pbc-constant-sheaf]. Thus its underlying map is a monomorphism $C_\\lambda\\hookrightarrow\\bigoplus_i(h_{\\lambda,i})_*\\underline{M_i}$ of abelian sheaves; each $M_i$ is a finite abelian group.",
+   "text": "*Step 2: the finite-pushforward embedding at the Noetherian stage.* Apply [lem-weil-pbc-constructible-finite-pushforward-noetherian] to $\\widetilde C_\\lambda$. It gives finite morphisms $h_{\\lambda,i}:V_{\\lambda,i}\\to U_\\lambda$, finite $\\mathbf Z/n$-modules $M_i$, and a monomorphism of module sheaves $\\widetilde C_\\lambda\\hookrightarrow\\bigoplus_i(h_{\\lambda,i})_*\\underline{M_i}$. The forgetful functor is exact and preserves finite biproducts, direct images, and constant sheaves by [lem-weil-pbc-module-sheaves-colimits-forgetful], [def-weil-additive-category], [def-weil-pbc-direct-image], and [def-weil-pbc-constant-sheaf]. Thus its underlying map is a monomorphism $C_\\lambda\\hookrightarrow\\bigoplus_i(h_{\\lambda,i})_*\\underline{M_i}$ of abelian sheaves; each $M_i$ is a finite abelian group.",
    "uses": [
-    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-finite-pushforward-noetherian",
     "lem-weil-pbc-module-sheaves-colimits-forgetful",
     "def-weil-additive-category",
     "def-weil-pbc-direct-image",
@@ -55,11 +57,13 @@
   }
  ],
  "proof_deps": [
+  "prop-nagata-noetherian-inverse-system",
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "new-constructible-limit-descent-general",
   "lem-weil-pbc-constructible-abelian-bounded-exponent",
   "lem-weil-pbc-sheaves-killed-by-n-zmod-modules",
   "lem-weil-pbc-constructible-abelian-zn-module-constructible",
-  "lem-weil-pbc-constructible-module-noetherian-descent",
-  "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+  "lem-weil-pbc-constructible-finite-pushforward-noetherian",
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "def-weil-additive-category",
   "def-weil-pbc-direct-image",
@@ -68,8 +72,8 @@
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-constructible-finite-pushforward-approximation.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09Z7; X2 realizes the descent step directly for Noetherian coefficient rings by directed approximation and the general limit-descent theorem"
  },
  "mathlib_searches": [
   {
@@ -204,5 +208,15 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261014T141505-L-226422",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
