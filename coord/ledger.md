@@ -14381,3 +14381,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 11:18 L: batch 20261014T030639 dependency take-out
 - 03:18 L: returned deliver/H3/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (reviewer RETURN: (reviewer X-135a7, head 135a748e7) A (brief point 2): The removed declaration is used through `import all`; no adaptatio)
+- 03:30 L: returned deliver/G4/Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeComponent (reviewer RETURN: (reviewer X-41124, head 411243944) C4: In dag/nodes/sec-picard-framework/lem-pc-affine-derived-pushforward-sheaf-edge-de)
