@@ -13996,3 +13996,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:17 L: merged deliver/K3/Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationLocalization (stage 3; reviewer PASS; first push; landing 20261014T001726-L-2552299 (interface); batch 20261014T001711; modules 2; new nodes 2)
 - 00:17 L: merged deliver/K4/Sheaf.AlgebraicGeometry.HorizontalOrdinaryForwardFixedPasting (stage 3; reviewer PASS; first push; landing 20261014T001726-L-2552496 (proof); batch 20261014T001711; modules 1; new nodes 1)
 - 00:17 L: merged deliver/K4/Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorEquivariantDescent (stage 3; reviewer PASS; first push; landing 20261014T001727-L-2552752 (interface); batch 20261014T001711; modules 3; new nodes 2)
+- 00:17 L: merged deliver/N2/Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedData (stage 3; reviewer PASS; first push; landing 20261014T001727-L-2552863 (proof); batch 20261014T001711; modules 1; new nodes 0)

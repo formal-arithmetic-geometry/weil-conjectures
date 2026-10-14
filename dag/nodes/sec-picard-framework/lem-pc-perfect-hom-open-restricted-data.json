@@ -16,7 +16,7 @@
  },
  "proof": [
   {
-   "text": "Proof: For the supplied adjunction a, set sigma = (conjugateIsoEquiv a (schemeMVAdjunction Y B)).symm (Iso.refl _). Thus sigma : L -> LB.ι* is the mate of the identity on the common right adjoint. For any r : T -> Spec(R_i), let b_r be perfectHomOpenBaseChangeMap s B r, p = pullback.fst s r and p' = pullback.fst (B.ι followed by s) r. Its fst equation is b_r followed by p = p' followed by B.ι. The concrete comparison kappa_r is perfectHomComposition b_r p, followed by eqToIso of that fst equation, followed by (perfectHomComposition p' B.ι).symm, followed by sigma.symm whiskered by Lp'*. The restriction of a Hom f is kappa_r(M).inv followed by Lb_r*(f), followed by kappa_r(Q).hom: this is exactly perfectHomOpenRestrictionMap s B r a f.",
+   "text": "Construct perfectHomOpenBaseChangeMap by pullback.map and perfectHomOpenPullbackComparison by the fixed composition comparisons, the cartesian fst equality and the mate of the identity between the supplied adjunction and schemeMVAdjunction. Define perfectHomOpenRestrictionMap by conjugating derived pullback on morphisms with this comparison. These existing definitions remain concrete.",
    "uses": [
     "def-pc-derived-mayer-vietoris-canonical-data",
     "lem-pc-perfect-hom-transport",
@@ -25,56 +25,33 @@
    "elementary": false
   },
   {
-   "text": "Write L for restriction to B, pi_j for the original projection, A_j for Lpi_j*, and J_j = Rpi_j* A_j Q. Choose the derived adjunction a_j of Tag 079W compatible with the fixed pullback counit and direct-image unit. Its equivalence is eta_j(M) : Hom(A_j M,A_j Q) -> Hom(M,J_j). Define rho_j = eta_j(F_j)(h.stageEquiv j F_j (id)). Its inverse is (h.stageEquiv j J_j).symm (eta_j(J_j).symm (id)). Naturality in M of eta_j and h.stageEquiv proves eta_j(M)(h.stageEquiv j M f) = f followed by rho_j. Applying this identity to rho_j and its proposed inverse proves both inverse laws. Do the same at the apex, using h.limitEquiv and h.limitNatural.",
+   "text": "The current Lean proof obtains an arbitrary hB from perfect_hom_open_restricted_data_exists. This existence theorem remains open.",
    "uses": [
-    "lem-pc-perfect-hom-push-pull-cocone",
-    "lem-pc-ringed-spaces-derived-adjoint"
+    "lem-pc-perfect-hom-open-restricted-data-exists"
    ],
    "elementary": false
   },
   {
-   "text": "Put U_j = pi_j inverse-image B and v_j = pi_j restricted to B. Restriction gives L rho_j : L F_j -> L J_j. Compose it with the component of the explicitly constructed schemeMVOpenRestrictionComparison pi_j B at A_j Q. This identifies L J_j with Rv_j* (restriction to U_j of A_j Q). The cartesian square identifies U_j.toScheme with the pullback of B.ι followed by s along the same ring map: the forward map is pullback.lift of v_j and the restricted second projection; the inverse is pullback.lift of the open inclusion and second projection, factored through U_j. The two inverse laws follow by pullback.hom_ext and the open inclusion monomorphism. Denote this isomorphism by k_j. The counit-pinned pullback composition isomorphisms on the square give restriction to U_j of A_j Q = Lk_j* (Lpi'_j* (L Q)), up to natural isomorphism. Here restriction along an open inclusion is its exact derived pullback, by the underived restriction/tensor-pullback adjunction and its derived universal property. The inverse-image comparison is the composite of these two composition isomorphisms and the equality of the square's morphisms, not an arbitrary iso. Transport direct image across k_j using the right-derived composition comparison and the identity comparison; k_j is an isomorphism, so its adjunction counit is invertible. We obtain a representing isomorphism sigma_j : L F_j -> Rpi'_j* (Lpi'_j* (L Q)). Repeat this construction at the apex to obtain sigma_inf.",
+   "text": "The current Lean proof pairs hB with perfect_hom_open_restricted_data_pinned. STATEMENT-DISPUTED: that open lemma falsely asserts the pinned equations for arbitrary independently supplied hB, as its sign-twist counterexample shows. Hence this compiled proof is not a closed proof of the parent; a future repair must construct a particular compatible hB from h.",
    "uses": [
-    "lem-pc-restrict-derived-direct-image-open",
-    "def-pc-derived-mayer-vietoris-canonical-data",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For every M on B, define the new stage equivalence by postcomposition with sigma_j, followed by the inverse Hom equivalence of the restricted projection adjunction. Define its apex equivalence in the same way with sigma_inf. Adjunction naturality and associativity prove the two testing-object naturality equations. Restriction is exact and preserves quasi-coherent sheaves, hence stageQCoh and limitQCoh.",
-   "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint",
-    "lem-pc-derived-open-restriction-qcoh-iff"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For j <= k, define the original representing transition J_j -> J_k by applying eta_k(J_j) to perfectStageMap R s j.property hjk (eta_j(J_j).symm (id)). The h.stageMap identity at id says F.map(j,k) followed by rho_k equals rho_j followed by this transition. At the apex, the analogous formula using perfectLimitMap gives the corresponding equation for the cocone leg. Apply L to these equations. Naturality of the sectionwise restriction comparison, and its determining right-derived unit equation, identify the resulting transitions with the representing transitions for the restricted projections. The pullback composition associativity equation identifies the square's two pasted inverse-image comparisons; after applying the Hom adjunction, adjacent comparison and inverse components cancel. The remaining composites are exactly perfectStageMap R (B.ι followed by s) and perfectLimitMap R c (B.ι followed by s). Thus postcomposition by L(F.map(j,k)) and L(d.ι.app j) satisfies the required stageMap and limitMap fields for every M. For the additional two equations, the original representing identity eta(M)(h.stageEquiv M f) = f followed by rho is restricted to B. The mate identities for sigma and the restriction comparison identify this restricted adjunction formula with kappa(M).inv followed by Lb*(f) followed by kappa(Q).hom. This is the displayed equation with the specified perfectHomOpenRestrictionMap, at a stage and at the apex. Package these fields and equations. Since L has fully faithful right adjoint, its counit is invertible, so every testing object on B is isomorphic to L of its open direct image; testing object naturality extends these pinned equations to all objects on B. The argument uses neither compactness nor perfectness. For the empty open every Hom set is a singleton; for the full open the same comparison formulas apply. For Q = 0, representability makes every representing object zero, so the construction still works. No arbitrary existence witness is used in a definition.",
-   "uses": [
-    "lem-pc-perfect-hom-transport",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-perfect-hom-push-pull-cocone",
-    "def-pc-derived-mayer-vietoris-canonical-data"
+    "lem-pc-perfect-hom-open-restricted-data-pinned"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-derived-mayer-vietoris-canonical-data",
-  "lem-pc-derived-open-restriction-qcoh-iff",
-  "lem-pc-perfect-hom-push-pull-cocone",
+  "lem-pc-perfect-hom-open-restricted-data-exists",
+  "lem-pc-perfect-hom-open-restricted-data-pinned",
   "lem-pc-perfect-hom-transport",
-  "lem-pc-restrict-derived-direct-image-open",
-  "lem-pc-ringed-spaces-derived-adjoint",
   "lem-pc-ringed-spaces-derived-pullback-composition"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "F1",
+  "group": "N2",
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tags 079W and 08FE; perfect.tex Tag 09RE",
-  "note": "Detailed categorical construction written by the worker; source statements checked at the official Stacks tag pages."
+  "note": "Second reading: records the actual existing Lean reduction and its disputed dependency, not the unimplemented detailed construction in the docstring."
  },
  "mathlib_searches": [
   {
@@ -156,19 +133,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U2",
+  "reviewer": "X-7f51e",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261013T231549-L-1822161",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.perfect_hom_open_restricted_data"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.perfect_hom_open_restricted_data_pinned"
-  ]
+  "landing": "20261014T001727-L-2552863",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered module, unchanged target signatures, disputed sign-twist reasoning, DAG metadata, report, and temporary dependency-overlay compilation all agree; no prohibited changes found."
  }
 }

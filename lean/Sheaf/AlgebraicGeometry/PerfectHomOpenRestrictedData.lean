@@ -71,6 +71,15 @@ end
 
 noncomputable section
 
+/- STATEMENT-DISPUTED: hB is arbitrary representing data, not the restriction of h.
+Negating all its stage and apex equivalences preserves naturality and transition
+compatibility, but changes the asserted pinned equations. For the full open of
+Spec(Q), a one-object constant ring diagram, and Q the structure sheaf in degree
+zero, the identity and its negative are distinct. The same fixed h and a cannot
+satisfy the displayed equations for both choices of hB. Yoneda determines a
+representing isomorphism from an equivalence; it does not uniquely choose that
+equivalence on a fixed representing object. The existential parent needs one
+compatible hB constructed from h, not this assertion about every hB. -/
 /-- The restricted stage and limit equivalences are the explicit restriction maps.
 The proof transports the original representing equivalences across the canonical
 open restriction and pullback composition comparisons. Naturality of the
