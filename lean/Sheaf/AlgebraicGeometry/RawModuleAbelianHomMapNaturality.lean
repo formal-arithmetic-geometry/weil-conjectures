@@ -6,6 +6,8 @@ Authors: SHEAF group M4
 module
 
 public import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMap
+import Sheaf.AlgebraicGeometry.RawModuleAbelianHomSourceFormula
+import Sheaf.AlgebraicGeometry.RawModuleAbelianHomTargetFormula
 
 /-! # Naturality of the fixed raw scalar comparison
 
@@ -20,6 +22,7 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
+set_option backward.isDefEq.respectTransparency true in
 /-- The concrete scalar comparison commutes with the five-factor raw pullback.
 Source: Stacks Project, Tags 03FD and 03Q8, with the inverse-image adjunction of 03D7.
 (blueprint: lem-sbc-raw-module-abelian-hom-map-naturality).
@@ -59,6 +62,12 @@ theorem rawModuleAbelianHomMap_naturality
               (Over.w f).symm).inv.app
                 ((sheafCompose _
                   (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G))
-            U (rawModuleAbelianHomMap Λ k G q U B z) := by sorry
+            U (rawModuleAbelianHomMap Λ k G q U B z) := by
+  intro A B f z
+  have hs := rawModuleAbelianHomMap_source_formula Λ k G q U A B f z
+  have ht := rawModuleAbelianHomMap_target_formula Λ k G q U A B f z
+  have hc := rawModuleScalar_coefficient_square Λ G (q : ℤ) A B f
+  exact hs.trans
+    ((congrArg (fun t ↦ rawModuleScalarSourcePrefix Λ k G q U A B f z ≫ t) hc).trans ht.symm)
 
 end AlgebraicGeometry.Etale

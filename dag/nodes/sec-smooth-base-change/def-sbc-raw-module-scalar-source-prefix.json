@@ -1,0 +1,99 @@
+{
+ "id": "def-sbc-raw-module-scalar-source-prefix",
+ "kind": "definition",
+ "title": "Concrete common source prefix",
+ "statement": "For a commutative ring Λ in Type(u+1), schemes W,S, k:W→S, a module sheaf G on W, q∈N, U∈S.Etale, A,B∈Over(W), f:A→B and a module raw derived class z at B, construct the morphism from the abelian single source at A to derived abelian inverse image of the derived forgotten shifted module coefficient at B. It is abelianSourceFactor(f.left,B.hom≫k,A.hom≫k) followed by derived abelian inverse image of scalarSourceFactor at B composed with the derived forgotten z. This is explicit categorical composition and involves no coefficient comparison tail.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03D7 and 03Q8; source, class and coefficient factor calculation of lem-sbc-raw-module-abelian-hom-map-naturality"
+ },
+ "stmt_deps": [
+  "def-sbc-higher-image-raw-diagram",
+  "def-sbc-raw-module-scalar-pullback-comparison",
+  "def-sbc-raw-scalar-source-factors"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "T3",
+  "document": "Stacks Project; Mathlib exact derived functors",
+  "place": "Tags 03D7 and 03Q8; explicit raw factor decomposition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Source factor expansion of derived scalar forgetting and naturality of coefficient factor",
+   "date": "2026-10-14",
+   "results": "Eight hits about polynomial universal factorization and CategoryTheory.Factorisation.forget_map; no scalar sheaf comparison formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "date": "2026-10-14",
+   "results": "Six hits; CategoryTheory.Functor.map_comp supplies functoriality, but not either concrete scalar formula."
+  },
+  {
+   "tool": "grep",
+   "query": "rawModuleScalar.*formula|rawModuleScalar_source_square",
+   "date": "2026-10-14",
+   "results": "msearch returned zero hits. Local rg found the map formula, separate pullback formulas, source square and coefficient square. Some cannot be imported together because they redeclare scalarSourceFactor, scalarCoefficientFactor or derivedPullbackIso."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The source and coefficient factors of derived scalar forgetting commute with inverse image pullback of sheaves",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: service returned Internal Server Error. No negative mathematical verdict."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapNaturality",
+  "date": "2026-10-14",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Explicit scalar-forgetting comparison of raw derived Hom for the class descent and eventual vanishing steps",
+   "via": [
+    "lem-sbc-raw-module-abelian-hom-map-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarSourcePrefix",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarSourcePrefix.lean",
+  "declaration": "AlgebraicGeometry.Etale.rawModuleScalarSourcePrefix",
+  "statement": "def rawModuleScalarSourcePrefix\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)\n    (A B : Over W) (f : A ⟶ B)\n    (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op B))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261014T061032-L-2467783",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261014T061032-L-2467783",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
