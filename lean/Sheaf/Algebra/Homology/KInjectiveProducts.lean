@@ -133,6 +133,7 @@ theorem termwise_product_isKInjective_and_isLimit
   let P := HomologicalComplex.coneOfHasLimitEval (Discrete.functor I)
   let q := HomotopyCategory.quotient C (.up ℤ)
   let hP := HomologicalComplex.isLimitConeOfHasLimitEval (Discrete.functor I)
+  -- Use this family's evaluated limits; no global product instance is required.
   have hq : IsLimit (q.mapCone P) := by
     refine
       { lift := fun s ↦ q.map (hP.lift
