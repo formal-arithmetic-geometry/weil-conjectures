@@ -1,0 +1,115 @@
+{
+ "id": "lem-sc-picard-module-cech-external-cup",
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "status": "split",
+ "title": "Module comparison of one external Cech cup bidegree",
+ "statement": "Let k be a field, f:X→Spec k and g:Y→Spec k scheme morphisms, F,G quasi-coherent modules, and U,V open covers. Use the scalar Cech complexes [def-sc-picard-external-right-cech-models] and product cover W. Fix natural degrees p,q, ordinary canonical module comparisons cF,cG,cP in degrees p,q,p+q [def-sc-module-cech-comparison], and an ordinary module cup satisfying IsModuleCupProduct [def-sc-module-cohomology-cup-product] for the two projection pullbacks. Let l be a bidegree pairing with the prescribed external front/back coordinates [lem-sc-picard-external-cech-cup-bidegree]. For factor cycles a,b and a product cycle t whose inclusion is l applied to the tensor of their inclusions, cP applied to the class of t, transported through the explicit additive scalar/module Cech identifications, equals cup of moduleCohomologyPullback [def-weil-pbc-module-cohomology-fmap] along the first and second projections applied to cF([a]) and cG([b]), with the same identifications. This statement uses only ordinary module pullback and cup, not scalar Ext operations or a tensor total complex.",
+ "stmt_deps": [
+  "def-sc-picard-external-right-cech-models",
+  "lem-sc-picard-external-cech-cup-bidegree",
+  "def-sc-module-cech-comparison",
+  "def-sc-module-cohomology-cup-product",
+  "def-weil-pbc-module-cohomology-fmap"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKV",
+  "place": "Cech/sheaf cup comparison; Tag 01FD, refinement comparison; Tag 07MB, front/back pairing; Tag 0BED, equation-kunneth-on-cech."
+ },
+ "proof": [
+  {
+   "text": "Apply the already proved picardModuleCech_externalPairing with the given external bidegree map, canonical comparisons, ordinary module cup and cycles. Its expanded coordinate hypothesis is IsPicardExternalCechCupBidegree: n2CupFront and n2CupBack are definitionally equal to cupFront and cupBack. Its expanded resolution-pairing hypothesis is exactly IsModuleCupProduct. The conclusion, including all three additive scalar/module Cech homology transports, is identical. Lean checks both hypothesis identifications and the conclusion with a definitionally equal expanded signature.",
+   "uses": [
+    "lem-sc-picard-module-cech-external-pairing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-module-cech-external-pairing"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Tags 01FD, 07MB, 0FKV and 0BED; existing library theorem picardModuleCech_externalPairing",
+  "place": "W3 2026-10-14: reuse the proved ordinary external-pairing comparison. This theorem and its helper already implement the refinement, additive cycle transport and resolution cup comparison argument; no new split or proof obligation is introduced."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cech comparison commutes with external cup product of pullbacks on product of schemes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.t'_fst_snd, AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_snd, AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_fst, AlgebraicGeometry.Scheme.Pullback.t_fst_snd, AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_snd, AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_fst, AlgebraicGeometry.Scheme.Pullback.pullbackFstιToV_snd, AlgebraicGeometry.Scheme.Pullback.t'_snd_snd",
+   "verdict": "No Mathlib theorem with the project-specific scalar/module external cup comparison; reuse the proved library picardModuleCech_externalPairing.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cech\", \"homology\"",
+   "results": "0 hits: ",
+   "verdict": "No Mathlib theorem with the project-specific scalar/module external cup comparison; reuse the proved library picardModuleCech_externalPairing.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "cechCup|Cech.*[Cc]up|externalCup",
+   "results": "0 hits: ",
+   "verdict": "No Mathlib theorem with the project-specific scalar/module external cup comparison; reuse the proved library picardModuleCech_externalPairing.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical Cech comparison identifies the external front back cup of cocycles with ordinary module cohomology cup of projection pullbacks",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardModuleCechExternalCup",
+  "date": "2026-10-14",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Identification of the Cech Kunneth map with projection pullback followed by cup, Tag 0BED.",
+   "via": [
+    "lem-sc-picard-scalar-cech-external-cup-core",
+    "lem-sc-picard-scalar-cech-external-cup"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardModuleCechExternalCup",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardModuleCechExternalCup.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardModuleCech_externalCup",
+  "statement": "theorem picardModuleCech_externalCup\n    {k : Type w} [Field k] {X Y : Scheme.{w}}\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    (F : X.Modules) [F.IsQuasicoherent] (G : Y.Modules) [G.IsQuasicoherent]\n    {ι κ : Type w} (U : ι → X.Opens) (V : κ → Y.Opens)\n    (hUc : iSup U = ⊤) (hVc : iSup V = ⊤) (p q : ℕ)\n    (cF : ((cechComplexFunctor U).obj F.presheafModuleCat).homology p ⟶\n      (RingedSpace.moduleCohomology X.toRingedSpace p).obj F)\n    (hcF : IsModuleCechComparison U F p cF)\n    (cG : ((cechComplexFunctor V).obj G.presheafModuleCat).homology q ⟶\n      (RingedSpace.moduleCohomology Y.toRingedSpace q).obj G)\n    (hcG : IsModuleCechComparison V G q cG)\n    (cP : ((cechComplexFunctor\n      (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n        pullback.snd f g ⁻¹ᵁ V ij.2)).obj\n          (externalCupCoefficients f g F G).presheafModuleCat).homology (p + q) ⟶\n      (RingedSpace.moduleCohomology (Limits.pullback f g).toRingedSpace (p + q)).obj\n        (externalCupCoefficients f g F G))\n    (hcP : IsModuleCechComparison\n      (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n        pullback.snd f g ⁻¹ᵁ V ij.2) (externalCupCoefficients f g F G) (p + q) cP)\n    (cup : (RingedSpace.moduleCohomology (Limits.pullback f g).toRingedSpace p).obj\n        ((tensorPullback (pullback.fst f g)).obj F) →ₗ[Γ(Limits.pullback f g, ⊤)]\n      (RingedSpace.moduleCohomology (Limits.pullback f g).toRingedSpace q).obj\n        ((tensorPullback (pullback.snd f g)).obj G) →ₗ[Γ(Limits.pullback f g, ⊤)]\n      (RingedSpace.moduleCohomology (Limits.pullback f g).toRingedSpace (p + q)).obj\n        (externalCupCoefficients f g F G))\n    (hcup :\n      ∀ (D : CupResolutionPairing\n                ((tensorPullback (pullback.fst f g)).obj F)\n                ((tensorPullback (pullback.snd f g)).obj G))\n          (a : ((((RingedSpace.globalSectionsFunctor\n          (Limits.pullback f g).toRingedSpace).mapHomologicalComplex\n            (ComplexShape.up ℕ)).obj D.left.K).sc p).moduleCatLeftHomologyData.K)\n          (b : ((((RingedSpace.globalSectionsFunctor\n          (Limits.pullback f g).toRingedSpace).mapHomologicalComplex\n            (ComplexShape.up ℕ)).obj D.right.K).sc q).moduleCatLeftHomologyData.K)\n          (c : ((((RingedSpace.globalSectionsFunctor\n          (Limits.pullback f g).toRingedSpace).mapHomologicalComplex\n            (ComplexShape.up ℕ)).obj D.target.K).sc (p + q)).moduleCatLeftHomologyData.K),\n          c.val = D.pair p q ⊤ a.val b.val →\n            cup (D.left.class p a) (D.right.class q b) = D.target.class (p + q) c)\n    (l : ((curriedTensor (ModuleCat.{w} k)).obj\n      (((picardCechFunctor f U).obj F).X p)).obj\n        (((picardCechFunctor g V).obj G).X q) ⟶\n      ((picardCechFunctor (pullback.fst f g ≫ f)\n        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n          pullback.snd f g ⁻¹ᵁ V ij.2)).obj\n            (externalCupCoefficients f g F G)).X (p + q))\n    (hl :\n      ∀ (a : ((picardCechFunctor f U).obj F).X p)\n              (b : ((picardCechFunctor g V).obj G).X q) (y : Fin (p + q + 1) → ι × κ),\n              TopCat.Presheaf.cechComplexFunctorXAddEquiv\n                (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n                  pullback.snd f g ⁻¹ᵁ V ij.2)\n                (scalarPresheaf (pullback.fst f g ≫ f) (externalCupCoefficients f g F G))\n                (p + q) (l (a ⊗ₜ[k] b)) y =\n                tmulSection\n                  (((fun (Q : X.Opens) (W : (Limits.pullback f g).Opens)\n                      (h : W ≤ pullback.fst f g ⁻¹ᵁ Q) (s : Γ(F, Q)) ↦\n                    ((tensorPullback (pullback.fst f g)).obj F).presheaf.map (homOfLE h).op\n                      (((Classical.choose (exists_tensorPullbackAdjunction\n                        (pullback.fst f g))).unit.app F).val.app (op Q) s))\n                    (⨅ l, U (y (n2CupFront p q l)).1) _\n                    (by\n                      intro x hx\n                      change (pullback.fst f g).base x ∈ ⨅ l, U (y (n2CupFront p q l)).1\n                      rw [← SetLike.mem_coe, TopologicalSpace.Opens.coe_iInf, Set.mem_iInter]\n                      intro l\n                      exact (iInf_le (fun j ↦ pullback.fst f g ⁻¹ᵁ U (y j).1 ⊓\n                        pullback.snd f g ⁻¹ᵁ V (y j).2) (n2CupFront p q l) hx).1)\n                    (TopCat.Presheaf.cechComplexFunctorXAddEquiv U (scalarPresheaf f F) p a\n                      (fun l ↦ (y (n2CupFront p q l)).1))))\n                  (((fun (Q : Y.Opens) (W : (Limits.pullback f g).Opens)\n                      (h : W ≤ pullback.snd f g ⁻¹ᵁ Q) (s : Γ(G, Q)) ↦\n                    ((tensorPullback (pullback.snd f g)).obj G).presheaf.map (homOfLE h).op\n                      (((Classical.choose (exists_tensorPullbackAdjunction\n                        (pullback.snd f g))).unit.app G).val.app (op Q) s))\n                    (⨅ l, V (y (n2CupBack p q l)).2) _\n                    (by\n                      intro x hx\n                      change (pullback.snd f g).base x ∈ ⨅ l, V (y (n2CupBack p q l)).2\n                      rw [← SetLike.mem_coe, TopologicalSpace.Opens.coe_iInf, Set.mem_iInter]\n                      intro l\n                      exact (iInf_le (fun j ↦ pullback.fst f g ⁻¹ᵁ U (y j).1 ⊓\n                        pullback.snd f g ⁻¹ᵁ V (y j).2) (n2CupBack p q l) hx).2)\n                    (TopCat.Presheaf.cechComplexFunctorXAddEquiv V (scalarPresheaf g G) q b\n                      (fun l ↦ (y (n2CupBack p q l)).2)))))\n    (a : ((picardCechFunctor f U).obj F).cycles p)\n    (b : ((picardCechFunctor g V).obj G).cycles q)\n    (t : ((picardCechFunctor (pullback.fst f g ≫ f)\n      (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n        pullback.snd f g ⁻¹ᵁ V ij.2)).obj\n          (externalCupCoefficients f g F G)).cycles (p + q))\n    (ht : ((picardCechFunctor (pullback.fst f g ≫ f)\n      (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n        pullback.snd f g ⁻¹ᵁ V ij.2)).obj\n          (externalCupCoefficients f g F G)).iCycles (p + q) t =\n      l ((((picardCechFunctor f U).obj F).iCycles p a) ⊗ₜ[k]\n        (((picardCechFunctor g V).obj G).iCycles q b))) :\n    cP ((TopCat.Presheaf.cechComplexFunctorHomologyIso _\n      (externalCupCoefficients f g F G).presheafModuleCat (p + q)).inv\n      ((TopCat.Presheaf.cechComplexFunctorHomologyIso _\n        (scalarPresheaf (pullback.fst f g ≫ f) (externalCupCoefficients f g F G))\n          (p + q)).hom\n        (((picardCechFunctor (pullback.fst f g ≫ f)\n          (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n            pullback.snd f g ⁻¹ᵁ V ij.2)).obj\n              (externalCupCoefficients f g F G)).homologyπ (p + q) t))) =\n      cup (moduleCohomologyPullback (pullback.fst f g) F p\n        (cF ((TopCat.Presheaf.cechComplexFunctorHomologyIso U F.presheafModuleCat p).inv\n          ((TopCat.Presheaf.cechComplexFunctorHomologyIso U (scalarPresheaf f F) p).hom\n            (((picardCechFunctor f U).obj F).homologyπ p a)))))\n        (moduleCohomologyPullback (pullback.snd f g) G q\n          (cG ((TopCat.Presheaf.cechComplexFunctorHomologyIso V G.presheafModuleCat q).inv\n            ((TopCat.Presheaf.cechComplexFunctorHomologyIso V (scalarPresheaf g G) q).hom\n              (((picardCechFunctor g V).obj G).homologyπ q b)))))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261014T093337-L-657923",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261014T093337-L-657923",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
