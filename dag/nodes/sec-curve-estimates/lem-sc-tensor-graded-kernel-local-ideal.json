@@ -13,32 +13,43 @@
  ],
  "proof": [
   {
-   "text": "The closed-immersion unit quotient formula gives kernel J L^d in every degree. Taking exact sheaf coproducts and using the two coproduct structures of A gives the direct-sum kernel of p. Each kernel stalk element is therefore a finite sum of homogeneous elements with coefficients in the stalk ideal J_x.",
+   "text": "Use tensorGradedDegreeData_exists to express ker(p) as the coproduct of the degreewise unit kernels. For each degree the limiting kernel fork of closedImmersion_unit_kernel factors its kernel inclusion through image(J tensor L^d -> L^d). Transfer from the chosen adjunction in that theorem to tensorGradedUnit by unit_leftAdjointUniq_hom_app and cancellation of the resulting isomorphism. The whisker-exchange identity and left-unitor naturality give a commutative square from ideal multiplication on L^d to ideal multiplication on B. Its image map, composed with the kernel factor, gives a map into image(J tensor B -> B). Descend these maps using the kernel coproduct and check the inclusion equation on its coprojections.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-unit-quotient",
     "lem-sc-tensor-graded-degree-data",
-    "lem-pc-stalk-direct-sums"
+    "lem-weil-pbc-closed-immersion-unit-kernel"
    ],
    "elementary": false
   },
   {
-   "text": "Represent the finite coefficient and module germs for both a and b on a common neighborhood and shrink to realize their finite-sum equations. Restrict to an affine neighborhood V of x contained in U. The ideal-section range formula puts the coefficients in J.ideal V. Linearity of b_d expresses each term as the image of a coefficient times an algebra section, so both sums lie in the extended ideal.",
+   "text": "Sections of a kernel are the kernel of the map on sections, so lift each given section to ker(p) and apply the factorization above. The epimorphism factorThruImage of ideal multiplication is locally surjective after forgetting to abelian sheaves; locally lift the image section to J tensor B. Local surjectivity of the tensor sheafification then represents this lift by an ordinary tensor of sections on a smaller neighborhood. Naturality of the tensorator and of ideal multiplication makes this representation compatible with every further restriction. These local-lifting and restriction arguments are proved in private helpers in the module.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On every affine subopen, induct on the ordinary tensor. Zero and addition use ideal closure. For a pure tensor the whisker-right and left-unitor section formulas identify its image with the structure-map image of the ideal coefficient times the algebra section. range_toModulesι_app places the coefficient in J.ideal, so Ideal.mem_map_of_mem and Ideal.mul_mem_right give membership in the extended ideal.",
    "uses": [
     "def-sbc-closed-immersion-ideal-sheaf"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply the local image argument to both kernel sections, intersect the resulting neighborhoods, and choose an affine neighborhood of x in their intersection. Naturality of the multiplication-image inclusion and its factorization equation identify the resulting memberships with the two restrictions in the statement.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-pur-sheaf-tensor-product",
   "def-sbc-closed-immersion-ideal-sheaf",
-  "lem-pc-stalk-direct-sums",
   "lem-sc-tensor-graded-degree-data",
-  "lem-weil-pbc-closed-immersion-unit-quotient"
+  "lem-weil-pbc-closed-immersion-unit-kernel"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 09MS, direct-sum ideal sequence"
+  "place": "Tag 09MS, direct-sum ideal sequence; closed-immersion kernel formula of Tag 04CJ (1), with local tensor sheafification in place of stalk representatives"
  },
  "mathlib_searches": [
   {
@@ -151,11 +162,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-88550",
-  "group": "N1",
+  "reviewer": "X-2d01a",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261014T050528-L-1685784",
+  "landing": "20261014T061028-L-2466529",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files and DAG records matched against the review packet, baseline declarations, target statements, and compiled delivery overlay"
+  "note": "independent Codex review: Matched the unchanged theorem signature with the packet baseline and node; verified proof steps, dependencies, local command scope, report, clean compilation, necessary imports, and standard axioms for all six proved declarations."
  }
 }
