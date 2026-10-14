@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Sheaf.AlgebraicGeometry.ClosedImmersionResidueFieldIso
+import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 import Sheaf.AlgebraicGeometry.FieldPointFactorsThroughClosedImmersion
 
 /-!
@@ -56,7 +56,7 @@ theorem fieldPoint_factorsThrough_immersion
   letI : IsClosedImmersion c := inferInstance
   letI : IsOpenImmersion o := inferInstance
   letI : IsIso (c.residueFieldMap z) :=
-    Scheme.Hom.isIso_residueFieldMap_of_isClosedImmersion c z
+    Scheme.Hom.isIso_residueFieldMap c z
   letI : IsIso (o.residueFieldMap (c.base z)) := inferInstance
   have hres : IsIso (iota.residueFieldMap z) := by
     rw [← hfac, Scheme.residueFieldMap_comp]
