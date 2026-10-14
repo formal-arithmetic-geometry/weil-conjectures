@@ -15,7 +15,8 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 public import Sheaf.AlgebraicGeometry.SelfTorAffineSection
 
-import Sheaf.AlgebraicGeometry.AffineQuotientResolutionSheafification
+import Sheaf.AlgebraicGeometry.SelfTorTargetRestrictionCoordinates
+import Sheaf.RingTheory.SelfTorRestrictionConormalWedge
 
 /-! # Target self-Tor coordinates and principal localization of algebraic wedge images
 
@@ -82,6 +83,28 @@ theorem exists_selfTor_target_basic_localization
               (selfTorAffineSection i U _ ((c U) (selfTorIdealWedge i U n b)))) =
           (t V).hom.val.app (op (Over.mk (𝟙 (i ⁻¹ᵁ V.1))))
             (selfTorAffineSection i V _ ((c V) (selfTorIdealWedge i V n
-              (fun j ↦ i.ker.toModules.val.map (homOfLE h).op (b j))))) := by sorry
+              (fun j ↦ i.ker.toModules.val.map (homOfLE h).op (b j))))) := by
+  classical
+  dsimp only
+  obtain ⟨t, ht⟩ := exists_selfTor_target_restriction_coordinates.{u, w} i n
+  refine ⟨t, ?_⟩
+  intro V U h hbasic b
+  obtain ⟨q, hq, hx⟩ := ht V U h hbasic
+  have hg (j : Fin n) :
+      (Y.presheaf.map (homOfLE h).op).hom (selfTorIdealSection i U (b j)) =
+        selfTorIdealSection i V (i.ker.toModules.val.map (homOfLE h).op (b j)) := by
+    exact (PresheafOfModules.naturality_apply i.ker.toModulesι.val
+      (homOfLE h).op (b j)).symm
+  have hw := selfTor_restriction_conormal_wedge
+    (Γ(Y, U.1) : Type u) (Γ(Y, V.1) : Type u) (i.ker.ideal U) (i.ker.ideal V)
+    (Y.presheaf.map (homOfLE h).op).hom n q hq
+    (fun j ↦ selfTorIdealSection i U (b j))
+    (fun j ↦ selfTorIdealSection i V (i.ker.toModules.val.map (homOfLE h).op (b j))) hg
+  change q (selfTorConormalComparison _ _ n (selfTorIdealWedge i U n b)) =
+    selfTorConormalComparison _ _ n (selfTorIdealWedge i V n
+      (fun j ↦ i.ker.toModules.val.map (homOfLE h).op (b j))) at hw
+  exact (hx (selfTorConormalComparison _ _ n (selfTorIdealWedge i U n b))).trans
+    (congrArg (fun x ↦ (t V).hom.val.app (op (Over.mk (𝟙 (i ⁻¹ᵁ V.1))))
+      (selfTorAffineSection i V _ x)) hw)
 
 end AlgebraicGeometry

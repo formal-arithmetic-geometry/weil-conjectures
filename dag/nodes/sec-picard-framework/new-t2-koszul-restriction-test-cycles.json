@@ -1,0 +1,142 @@
+{
+ "id": "new-t2-koszul-restriction-test-cycles",
+ "kind": "statement",
+ "title": "Compatible Koszul test cycles in two quotient resolutions",
+ "statement": "Let A,B be commutative rings, I,J ideals, φ:A→B a ring homomorphism, n≥0, g:Fin n→I and g':Fin n→J with φ(g_j)=g'_j. Let P,Q be projective resolutions of A/I and B/J. Suppose a:P→Q restricted to A is an augmented chain comparison over a quotient ring map ψ:A/I→B/J. Suppose k:P⊗_A A/I→(Q⊗_B B/J) restricted to A is a chain map taking x⊗y to a(x)⊗ψ(y). Then there exist normalized augmentation-preserving Koszul lifts aA:K_A(g)→P and aB:K_B(g')→Q [def-weil-pbc-koszul-complex], with cycle representatives of the standard top wedges tensored with 1 in each quotient-tensored Koszul complex. Their cycle images in the two tensor resolutions satisfy iCycles(cyclesMap(aB)(zB))=k(iCycles(cyclesMap(aA)(zA))). No flatness or regularity assumption is made.",
+ "stmt_deps": [
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00LS",
+  "place": "Parent step 2, chain-level part before Tor normalization: Stacks 062H scalar-extension construction and 00LS augmentation lifts."
+ },
+ "proof": [
+  {
+   "text": "Use koszul_augmentation_lift_exists to obtain aA. Build the normalized scalar-extension isomorphism explicitly: base-change each standard exterior basis and identify equal subset indices. RingHom.map_det proves its equation on every standard basis wedge; the contraction formula proves commutation with differentials. Give extendScalars its additive instance from its adjunction with restriction, and induce that adjunction on complexes. The adjoint of aA composed with a gives a map from the extended Koszul complex into Q. Precompose with the inverse of the normalized isomorphism to obtain aB. The unit equation of the adjunction and the wedge equation give aB(wedge_B)=a(aA(wedge_A)) in every degree. In degree zero, cancel the zeroEquiv isomorphism and check the resulting B-linear map on 1; ha and ψ(1)=1 prove the normalized augmentation.",
+   "uses": [
+    "new-e1-koszul-augmentation-lift-exists",
+    "lem-weil-pbc-exterior-power-free-basis",
+    "lem-weil-pbc-koszul-differential"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove every quotient-tensored Koszul differential vanishes using boundary_wedge, exterior generation, and the fact that every tuple entry belongs to the ideal. iCyclesIso therefore gives cycle representatives zA,zB of the standard wedges tensored with 1. Naturality of cyclesMap_i rewrites the required equation as one on their wedge images under the two lifts. The tensor formula hk, ψ(1)=1 and the preceding normalized lift equation close it. Degree zero and zero quotients require no separate hypotheses.",
+   "uses": [
+    "new-q2-koszul-generator-chain-map",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-e1-koszul-augmentation-lift-exists",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-weil-pbc-koszul-differential",
+  "new-q2-koszul-generator-chain-map",
+  "def-weil-pbc-koszul-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "T2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/00LS",
+  "place": "Parent step 2 chain-level comparison; Lean proof using standard exterior bases, scalar-extension adjunction, zeroEquiv, quotient vanishing of the Koszul differentials, and cyclesMap_i naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "\\bTor.?\\b.*(localiz|restrict|baseChange)|IsSelfTor|koszul",
+   "results": "Mathlib/Algebra/Homology/LocalCohomology.lean",
+   "date": "2026-10-14",
+   "verdict": "No exact match for the resolution certificate, cycle transport, normalized wedge restriction, or sheaf coordinate statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Augmentation preserving chain maps between projective resolutions over different rings carry standard Koszul wedge cycles to each other and induce Tor maps normalized on conormal exterior wedges",
+   "results": "CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π', CategoryTheory.ProjectiveResolution.liftFOne_zero_comm, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero', CategoryTheory.ProjectiveResolution.liftFSucc, CategoryTheory.ProjectiveResolution.Hom.hom_comp_π, CategoryTheory.ProjectiveResolution.lift_commutes, CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π'_assoc, CategoryTheory.ProjectiveResolution.iso_hom_naturality",
+   "date": "2026-10-14",
+   "verdict": "No exact match for the resolution certificate, cycle transport, normalized wedge restriction, or sheaf coordinate statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The natural map on Tor induced by a ring homomorphism preserves exterior products of conormal ideal classes, and affine sheaf homology commutes with principal localization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfTorTargetBasicLocalization",
+  "date": "2026-10-14",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Parent step 2, chain-level part before Tor normalization: Stacks 062H scalar-extension construction and 00LS augmentation lifts.",
+   "via": [
+    "new-t2-self-tor-target-basic-localization",
+    "new-u4-self-tor-basic-ideal-wedge-coordinates",
+    "new-e3-self-tor-ideal-wedge-coordinates",
+    "new-h3-self-tor-local-wedge-coordinates",
+    "new-e1-self-tor-nested-affine-coordinates",
+    "new-n1-self-tor-compatible-affine-maps",
+    "new-r4-self-tor-conormal-dual-chart-iso",
+    "lem-sc-self-tor-conormal-dual-chart",
+    "new-s3-koszul-conormal-nested-charts",
+    "new-w4-koszul-self-ext-local-alignment",
+    "new-s3-koszul-conormal-compatible-cover",
+    "lem-sc-koszul-self-ext-conormal-local-comparison",
+    "lem-sc-koszul-self-ext-conormal-comparison-surjection",
+    "lem-sc-koszul-self-ext-dual-exterior-conormal",
+    "lem-sc-koszul-self-ext-yoneda-surjection",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.KoszulRestrictionTestCycles",
+  "file": "lean/Sheaf/RingTheory/KoszulRestrictionTestCycles.lean",
+  "declaration": "AlgebraicGeometry.exists_koszul_restriction_test_cycles",
+  "statement": "theorem exists_koszul_restriction_test_cycles (A B : Type u) [CommRing A] [CommRing B] (I : Ideal A) (J : Ideal B) (φ : A →+* B) (n : ℕ) (g : Fin n → I) (g' : Fin n → J) (hg : ∀ j, φ (g j) = g' j) (P : ProjectiveResolution (ModuleCat.of A (A ⧸ I))) (Q : ProjectiveResolution (ModuleCat.of B (B ⧸ J))) (ψ : (A ⧸ I) →+* (B ⧸ J)) (a : P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex (.down ℕ)).obj Q.complex) (k : ((tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex (.down ℕ)).obj P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex (.down ℕ)).obj (((tensorRight (ModuleCat.of B (B ⧸ J))).mapHomologicalComplex (.down ℕ)).obj Q.complex)) (ha : ∀ x : P.complex.X 0, Q.π.f 0 (a.f 0 x) = ψ (P.π.f 0 x)) (hk : ∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I), k.f j (x ⊗ₜ[A] y) = (show Q.complex.X j from a.f j x) ⊗ₜ[B] (ψ y)) : let KA := ExteriorAlgebra.koszulComplex A n (fun j ↦ (g j : A)) let KB := ExteriorAlgebra.koszulComplex B n (fun j ↦ (g' j : B)) let TA := (tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex (.down ℕ) let TB := (tensorRight (ModuleCat.of B (B ⧸ J))).mapHomologicalComplex (.down ℕ) ∃ (aA : KA ⟶ P.complex) (aB : KB ⟶ Q.complex), aA.f 0 ≫ P.π.f 0 = ModuleCat.ofHom (I.mkQ.comp (exteriorPower.zeroEquiv A (Fin n →₀ A)).toLinearMap) ∧ aB.f 0 ≫ Q.π.f 0 = ModuleCat.ofHom (J.mkQ.comp (exteriorPower.zeroEquiv B (Fin n →₀ B)).toLinearMap) ∧ ∃ (zA : (TA.obj KA).cycles n) (zB : (TB.obj KB).cycles n), (TA.obj KA).iCycles n zA = (exteriorPower.ιMulti A n (fun j ↦ Finsupp.single j 1)) ⊗ₜ[A] (1 : A ⧸ I) ∧ (TB.obj KB).iCycles n zB = (exteriorPower.ιMulti B n (fun j ↦ Finsupp.single j 1)) ⊗ₜ[B] (1 : B ⧸ J) ∧ (TB.obj Q.complex).iCycles n (HomologicalComplex.cyclesMap (TB.map aB) n zB) = k.f n ((TA.obj P.complex).iCycles n (HomologicalComplex.cyclesMap (TA.map aA) n zA))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T001735-L-2555674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T001735-L-2555674",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

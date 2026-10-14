@@ -1,0 +1,112 @@
+{
+ "id": "new-t2-self-tor-restriction-certificate",
+ "kind": "definition",
+ "title": "Resolution certificate for algebraic self-Tor restriction",
+ "statement": "For commutative rings A,B, ideals I,J, a ring homomorphism φ:A→B and n≥0, an underlying function q:Tor_n^A(A/I,A/I)→Tor_n^B(B/J,B/J) [def-weil-pbc-tor-modules] is certified when for every pair of augmented projective quotient resolutions P,Q there exist a quotient ring map ψ commuting with φ, an A-linear augmented chain comparison a:P→Q restricted along φ, and a tensor chain comparison k taking x⊗y to a(x)⊗ψ(y). For every pair of cycles z,w with iCycles(w)=k(iCycles(z)), the Tor-to-resolution-homology isomorphisms identify q applied to the class of z with the class of w. This specifies the whole map, not just conormal wedge classes.",
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00LS",
+  "place": "Parent step 2: make precise the augmented projective-resolution comparison under change of rings; Stacks 00LS and 06YH."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "\\bTor.?\\b.*(localiz|restrict|baseChange)|IsSelfTor|koszul",
+   "results": "Mathlib/Algebra/Homology/LocalCohomology.lean",
+   "date": "2026-10-14",
+   "verdict": "No exact match for the resolution certificate, cycle transport, normalized wedge restriction, or sheaf coordinate statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Augmentation preserving chain maps between projective resolutions over different rings carry standard Koszul wedge cycles to each other and induce Tor maps normalized on conormal exterior wedges",
+   "results": "CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π', CategoryTheory.ProjectiveResolution.liftFOne_zero_comm, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero', CategoryTheory.ProjectiveResolution.liftFSucc, CategoryTheory.ProjectiveResolution.Hom.hom_comp_π, CategoryTheory.ProjectiveResolution.lift_commutes, CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π'_assoc, CategoryTheory.ProjectiveResolution.iso_hom_naturality",
+   "date": "2026-10-14",
+   "verdict": "No exact match for the resolution certificate, cycle transport, normalized wedge restriction, or sheaf coordinate statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The natural map on Tor induced by a ring homomorphism preserves exterior products of conormal ideal classes, and affine sheaf homology commutes with principal localization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfTorTargetBasicLocalization",
+  "date": "2026-10-14",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Parent step 2: make precise the augmented projective-resolution comparison under change of rings; Stacks 00LS and 06YH.",
+   "via": [
+    "new-t2-self-tor-target-basic-localization",
+    "new-u4-self-tor-basic-ideal-wedge-coordinates",
+    "new-e3-self-tor-ideal-wedge-coordinates",
+    "new-h3-self-tor-local-wedge-coordinates",
+    "new-e1-self-tor-nested-affine-coordinates",
+    "new-n1-self-tor-compatible-affine-maps",
+    "new-r4-self-tor-conormal-dual-chart-iso",
+    "lem-sc-self-tor-conormal-dual-chart",
+    "new-s3-koszul-conormal-nested-charts",
+    "new-w4-koszul-self-ext-local-alignment",
+    "new-s3-koszul-conormal-compatible-cover",
+    "lem-sc-koszul-self-ext-conormal-local-comparison",
+    "lem-sc-koszul-self-ext-conormal-comparison-surjection",
+    "lem-sc-koszul-self-ext-dual-exterior-conormal",
+    "lem-sc-koszul-self-ext-yoneda-surjection",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SelfTorRestrictionCertificate",
+  "file": "lean/Sheaf/RingTheory/SelfTorRestrictionCertificate.lean",
+  "declaration": "AlgebraicGeometry.IsSelfTorRestrictionMap",
+  "statement": "def IsSelfTorRestrictionMap (A B : Type u) [CommRing A] [CommRing B] (I : Ideal A) (J : Ideal B) (φ : A →+* B) (n : ℕ) (q : (((Tor' (ModuleCat.{u} A) n).obj (ModuleCat.of A (A ⧸ I))).obj (ModuleCat.of A (A ⧸ I))) → (((Tor' (ModuleCat.{u} B) n).obj (ModuleCat.of B (B ⧸ J))).obj (ModuleCat.of B (B ⧸ J)))) : Prop",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T001735-L-2555674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T001735-L-2555674",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

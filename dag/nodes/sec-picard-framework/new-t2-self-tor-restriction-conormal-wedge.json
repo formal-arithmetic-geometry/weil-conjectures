@@ -1,0 +1,145 @@
+{
+ "id": "new-t2-self-tor-restriction-conormal-wedge",
+ "kind": "statement",
+ "title": "Certified algebraic Tor restriction preserves normalized conormal wedges",
+ "statement": "Let A,B be commutative rings, I,J ideals, φ:A→B, n≥0, and let q:Tor_n^A(A/I,A/I)→Tor_n^B(B/J,B/J) have the resolution certificate [new-t2-self-tor-restriction-certificate]. If g:Fin n→I and g':Fin n→J satisfy φ(g_j)=g'_j, then q carries selfTorConormalComparison_A applied to the pure wedge of the cotangent classes of g_j to selfTorConormalComparison_B applied to the pure wedge of the cotangent classes of g'_j [new-r4-self-tor-conormal-comparison]. This is purely algebraic and requires neither flatness nor regularity.",
+ "stmt_deps": [
+  "new-t2-self-tor-restriction-certificate",
+  "new-r4-self-tor-conormal-comparison"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09PQ",
+  "place": "Parent step 2, normalized algebraic-image part: Stacks 09PQ resolution-independent products and 00LS comparison lifts."
+ },
+ "proof": [
+  {
+   "text": "Choose the library projective quotient resolutions P,Q. Unpack the certificate to obtain ψ,a,k, their augmentation and tensor equations, and the equation for corresponding resolution cycles. Apply exists_koszul_restriction_test_cycles to obtain compatible normalized Koszul lifts and standard wedge cycle representatives.",
+   "uses": [
+    "new-t2-self-tor-restriction-certificate",
+    "new-t2-koszul-restriction-test-cycles"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply selfTorConormalComparison_spec over A and B to the two normalized lifts and standard-basis tuples. Finsupp.linearCombination_single reduces their exterior conormal arguments to the wedges of g and g'. Naturality of homologyπ rewrites these two values as the homology classes of the image cycles in P and Q.",
+   "uses": [
+    "new-r4-self-tor-conormal-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the certificate equation to the image cycles. Substitute the two normalization equations, cancel the inverse/hom composite of the P Tor isomorphism, and use injectivity of the Q Tor isomorphism. This proves the displayed wedge equation.",
+   "uses": [
+    "new-t2-self-tor-restriction-certificate"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-t2-self-tor-restriction-certificate",
+  "new-t2-koszul-restriction-test-cycles",
+  "new-r4-self-tor-conormal-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "T2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/00LS",
+  "place": "Parent step 2, normalized algebraic-image part: Stacks 09PQ resolution-independent products and 00LS comparison lifts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "\\bTor.?\\b.*(localiz|restrict|baseChange)|IsSelfTor|koszul",
+   "results": "Mathlib/Algebra/Homology/LocalCohomology.lean",
+   "date": "2026-10-14",
+   "verdict": "No exact match for the resolution certificate, cycle transport, normalized wedge restriction, or sheaf coordinate statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Augmentation preserving chain maps between projective resolutions over different rings carry standard Koszul wedge cycles to each other and induce Tor maps normalized on conormal exterior wedges",
+   "results": "CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π', CategoryTheory.ProjectiveResolution.liftFOne_zero_comm, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero', CategoryTheory.ProjectiveResolution.liftFSucc, CategoryTheory.ProjectiveResolution.Hom.hom_comp_π, CategoryTheory.ProjectiveResolution.lift_commutes, CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π'_assoc, CategoryTheory.ProjectiveResolution.iso_hom_naturality",
+   "date": "2026-10-14",
+   "verdict": "No exact match for the resolution certificate, cycle transport, normalized wedge restriction, or sheaf coordinate statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The natural map on Tor induced by a ring homomorphism preserves exterior products of conormal ideal classes, and affine sheaf homology commutes with principal localization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfTorTargetBasicLocalization",
+  "date": "2026-10-14",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Parent step 2, normalized algebraic-image part: Stacks 09PQ resolution-independent products and 00LS comparison lifts.",
+   "via": [
+    "new-t2-self-tor-target-basic-localization",
+    "new-u4-self-tor-basic-ideal-wedge-coordinates",
+    "new-e3-self-tor-ideal-wedge-coordinates",
+    "new-h3-self-tor-local-wedge-coordinates",
+    "new-e1-self-tor-nested-affine-coordinates",
+    "new-n1-self-tor-compatible-affine-maps",
+    "new-r4-self-tor-conormal-dual-chart-iso",
+    "lem-sc-self-tor-conormal-dual-chart",
+    "new-s3-koszul-conormal-nested-charts",
+    "new-w4-koszul-self-ext-local-alignment",
+    "new-s3-koszul-conormal-compatible-cover",
+    "lem-sc-koszul-self-ext-conormal-local-comparison",
+    "lem-sc-koszul-self-ext-conormal-comparison-surjection",
+    "lem-sc-koszul-self-ext-dual-exterior-conormal",
+    "lem-sc-koszul-self-ext-yoneda-surjection",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SelfTorRestrictionConormalWedge",
+  "file": "lean/Sheaf/RingTheory/SelfTorRestrictionConormalWedge.lean",
+  "declaration": "AlgebraicGeometry.selfTor_restriction_conormal_wedge",
+  "statement": "theorem selfTor_restriction_conormal_wedge (A B : Type u) [CommRing A] [CommRing B] (I : Ideal A) (J : Ideal B) (φ : A →+* B) (n : ℕ) (q : (((Tor' (ModuleCat.{u} A) n).obj (ModuleCat.of A (A ⧸ I))).obj (ModuleCat.of A (A ⧸ I))) → (((Tor' (ModuleCat.{u} B) n).obj (ModuleCat.of B (B ⧸ J))).obj (ModuleCat.of B (B ⧸ J)))) (hq : IsSelfTorRestrictionMap A B I J φ n q) (g : Fin n → I) (g' : Fin n → J) (hg : ∀ j, φ (g j) = g' j) : q (selfTorConormalComparison A I n (exteriorPower.ιMulti (A ⧸ I) n (fun j ↦ I.toCotangent (g j)))) = selfTorConormalComparison B J n (exteriorPower.ιMulti (B ⧸ J) n (fun j ↦ J.toCotangent (g' j)))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T001735-L-2555674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T001735-L-2555674",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

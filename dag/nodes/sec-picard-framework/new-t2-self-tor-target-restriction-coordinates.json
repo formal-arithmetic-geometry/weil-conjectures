@@ -1,0 +1,155 @@
+{
+ "id": "new-t2-self-tor-target-restriction-coordinates",
+ "kind": "statement",
+ "title": "Derived-homology affine Tor coordinates respect all certified restrictions",
+ "statement": "Let i:Z→Y be a closed immersion, n≥0, B=i_*O_Z, and Q=i^*H^{-n}(B[0]⊗^L B[0]) for the fixed derived tensor. For an affine U let T_U be tilde over Γ(Y,U), transported to U and then pushed to Y and tensor-pulled to Z; let M_U=Tor_n^{Γ(Y,U)}(Γ(Y,U)/I_U,Γ(Y,U)/I_U), where I_U is the closed-immersion ideal. There is a family t_U:T_U(M_U)|_{i^{-1}U}≅Q|_{i^{-1}U}. For each affine principal inclusion V⊆U there is q:M_U→M_V certified by [new-t2-self-tor-restriction-certificate] over the structure-sheaf restriction ring homomorphism, such that t_U applied to the restriction of selfTorAffineSection_U(x) equals t_V applied to selfTorAffineSection_V(q(x)) for every x∈M_U [new-t2-self-tor-affine-section]. The exterior comparison and ideal-section tuples do not occur.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-weil-pbc-tor-modules",
+  "new-t2-self-tor-restriction-certificate",
+  "new-t2-self-tor-affine-section"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00LS",
+  "place": "Parent step 1 and restriction-comparison part of step 2: Stacks 06YH, 06YG and 00LS, with affine associated sheaves (01I6)."
+ },
+ "proof": [
+  {
+   "text": "Resolve each affine quotient A/I by projective modules and sheafify its augmentation. Projective terms are summands of free terms and their associated sheaves are flat. Extend to nonpositive cochain degrees; bounded-above flatness gives K-flatness. The augmentation comparison computes the restriction of the fixed derived tensor. Exact associated sheaves commute with homology, and the projective-resolution isomorphism identifies this with the associated Tor module. The ideal annihilates homology, so tensor pullback gives the asserted chart isomorphism. Choose all chart isomorphisms by these augmentation comparisons.",
+   "uses": [
+    "lem-sc-affine-quotient-resolution-sheafification",
+    "lem-pc-bounded-above-flat-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the chosen augmented resolution at f and compare it with the chosen resolution on V. Localization is flat, so preserves exactness and projectivity; the quotient map gives the tensor chain comparison. Its homology map q has the certificate for every pair P,Q: augmented resolution comparisons are homotopic, so replacing P,Q does not change the homology map.",
+   "uses": [
+    "new-t2-self-tor-restriction-certificate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The K-flat augmentation comparison commutes with localization and restriction. Hence the equation holds for every algebraic homology class x. The tilde adjunction unit and tensor-pullback adjunction unit give exactly the explicit sections selfTorAffineSection, and naturality yields the stated equation. Empty charts and zero quotients are included; degree zero uses the quotient augmentation.",
+   "uses": [
+    "new-t2-self-tor-affine-section",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-quotient-resolution-sheafification",
+  "lem-pc-bounded-above-flat-kflat",
+  "new-t2-self-tor-restriction-certificate",
+  "new-t2-self-tor-affine-section",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "T2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/00LS",
+  "place": "Parent step 1 and restriction-comparison part of step 2: Stacks 06YH, 06YG and 00LS, with affine associated sheaves (01I6)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "\\bTor.?\\b.*(localiz|restrict|baseChange)|IsSelfTor|koszul",
+   "results": "Mathlib/Algebra/Homology/LocalCohomology.lean",
+   "date": "2026-10-14",
+   "verdict": "No exact match for the resolution certificate, cycle transport, normalized wedge restriction, or sheaf coordinate statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Augmentation preserving chain maps between projective resolutions over different rings carry standard Koszul wedge cycles to each other and induce Tor maps normalized on conormal exterior wedges",
+   "results": "CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π', CategoryTheory.ProjectiveResolution.liftFOne_zero_comm, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero', CategoryTheory.ProjectiveResolution.liftFSucc, CategoryTheory.ProjectiveResolution.Hom.hom_comp_π, CategoryTheory.ProjectiveResolution.lift_commutes, CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π'_assoc, CategoryTheory.ProjectiveResolution.iso_hom_naturality",
+   "date": "2026-10-14",
+   "verdict": "No exact match for the resolution certificate, cycle transport, normalized wedge restriction, or sheaf coordinate statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The natural map on Tor induced by a ring homomorphism preserves exterior products of conormal ideal classes, and affine sheaf homology commutes with principal localization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfTorTargetBasicLocalization",
+  "date": "2026-10-14",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Parent step 1 and restriction-comparison part of step 2: Stacks 06YH, 06YG and 00LS, with affine associated sheaves (01I6).",
+   "via": [
+    "new-t2-self-tor-target-basic-localization",
+    "new-u4-self-tor-basic-ideal-wedge-coordinates",
+    "new-e3-self-tor-ideal-wedge-coordinates",
+    "new-h3-self-tor-local-wedge-coordinates",
+    "new-e1-self-tor-nested-affine-coordinates",
+    "new-n1-self-tor-compatible-affine-maps",
+    "new-r4-self-tor-conormal-dual-chart-iso",
+    "lem-sc-self-tor-conormal-dual-chart",
+    "new-s3-koszul-conormal-nested-charts",
+    "new-w4-koszul-self-ext-local-alignment",
+    "new-s3-koszul-conormal-compatible-cover",
+    "lem-sc-koszul-self-ext-conormal-local-comparison",
+    "lem-sc-koszul-self-ext-conormal-comparison-surjection",
+    "lem-sc-koszul-self-ext-dual-exterior-conormal",
+    "lem-sc-koszul-self-ext-yoneda-surjection",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SelfTorTargetRestrictionCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/SelfTorTargetRestrictionCoordinates.lean",
+  "declaration": "AlgebraicGeometry.exists_selfTor_target_restriction_coordinates",
+  "statement": "theorem exists_selfTor_target_restriction_coordinates {Z Y : Scheme.{u}} (i : Z ⟶ Y) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [IsClosedImmersion i] (n : ℕ) : let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf) let S := DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0 let Q := (Scheme.Modules.tensorPullback i).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj (S.obj B ⊗ S.obj B)) let T := fun U : Y.affineOpens ↦ tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙ Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i ∃ t : ∀ U : Y.affineOpens, ((T U).obj _).over (i ⁻¹ᵁ U.1) ≅ Q.over (i ⁻¹ᵁ U.1), ∀ (V U : Y.affineOpens) (h : V.1 ≤ U.1) (_hbasic : ∃ f : Γ(Y, U.1), Y.basicOpen f = V.1), ∃ q : (((Tor' (ModuleCat.{u} (Γ(Y, U.1) : Type u)) n).obj (ModuleCat.of _ ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U))).obj (ModuleCat.of _ ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U))) → (((Tor' (ModuleCat.{u} (Γ(Y, V.1) : Type u)) n).obj (ModuleCat.of _ ((Γ(Y, V.1) : Type u) ⧸ i.ker.ideal V))).obj (ModuleCat.of _ ((Γ(Y, V.1) : Type u) ⧸ i.ker.ideal V))), IsSelfTorRestrictionMap (Γ(Y, U.1) : Type u) (Γ(Y, V.1) : Type u) (i.ker.ideal U) (i.ker.ideal V) (Y.presheaf.map (homOfLE h).op).hom n q ∧ ∀ x, (t U).hom.val.app (op (Over.mk (homOfLE (i.preimage_mono h)))) (((T U).obj _).val.map (homOfLE (i.preimage_mono h)).op (selfTorAffineSection i U _ x)) = (t V).hom.val.app (op (Over.mk (𝟙 (i ⁻¹ᵁ V.1)))) (selfTorAffineSection i V _ (q x))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T001735-L-2555674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T001735-L-2555674",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
