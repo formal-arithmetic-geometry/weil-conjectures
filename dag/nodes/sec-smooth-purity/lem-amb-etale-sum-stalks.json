@@ -24,9 +24,90 @@
   "def-weil-geometric-point",
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P(V)=\\bigoplus_{a:V\\to U\\text{ over }X}F(V,a)$, with restrictions as in the definition of sum extension, and put $L=\\varinjlim_{(V,\\bar v)}P(V)$ in $A$-modules. Fix a small presentation of the small etale site in the universe used for these stalk colimits. Module sheafification has underlying abelian sheaf the abelian sheafification, by the module-sheafification definition. The sheafification unit therefore induces an isomorphism $\\theta:L\\to(u_!F)_{\\bar x}$ by preservation of geometric stalks under abelian sheafification. This map is $A$-linear since the unit and all restriction maps are $A$-linear. An inverse of a bijective $A$-linear map is $A$-linear: apply $\\theta$ to the additivity and scalar identities for the proposed inverse.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-sheafification-geometric-stalk",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0710, lemma-stalk-j-shriek, first displayed colimit; Tag 03CY, lemma-sheafification-presheaf-modules; lemma-stalk-exact-modules (3)"
+   }
+  },
+  {
+   "text": "Write $B=\\bigoplus_{u\\bar z=\\bar x}F_{\\bar z}$. For every pointed etale neighbourhood $(V,\\bar v)$ of $\\bar x$ and every $X$-map $a:V\\to U$, etale cancellation makes $a$ etale, so $(V,\\bar v)$ over $U$ is a pointed neighbourhood of $\\bar z=a\\bar v$. Send the $a$-summand section $s$ to its germ in the $\\bar z$-summand of $B$, and extend by finite sums. If $h:(V\\prime,\\bar v\\prime)\\to(V,\\bar v)$ is a refinement, then $(ah)\\bar v\\prime=a\\bar v$ and the germs of $s$ and $h^*s$ agree by the stalk colimit relations. These maps are thus a cocone, yielding an $A$-linear map $e:L\\to B$.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0710, lemma-stalk-j-shriek, assignment of (V,y,phi,s) to x=u(phi)(y)"
+   }
+  },
+  {
+   "text": "For each lift $\\bar z$, construct a map $i_{\\bar z}:F_{\\bar z}\\to L$ as follows. A pointed etale neighbourhood $(W,\\bar w)$ of $\\bar z$ has structure map $b:W\\to U$. Since both $b$ and $u$ are etale, $ub:W\\to X$ is etale; view $(W,\\bar w)$ as a neighbourhood of $\\bar x$. Send $t\\in F(W,b)$ to the class in $L$ of $t$ in the $b$-summand of $P(W)$. For every pointed $U$-map $h:W\\prime\\to W$, restriction in $P$ sends that summand to the $bh$-summand and the colimit relation identifies the two classes. The maps are a cocone for the stalk diagram defining $F_{\\bar z}$, so they uniquely induce $i_{\\bar z}$. Taking finite sums defines $i:B\\to L$.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0710, lemma-stalk-j-shriek, final colimit indexed by (phi:V to U,y) with u(phi)(y)=x; explicit inverse to the displayed regrouping"
+   }
+  },
+  {
+   "text": "For a section $t\\in F(W,b)$ at a neighbourhood of $\\bar z$, $e i_{\\bar z}$ sends its germ to that same germ in the $\\bar z$-summand. The colimit universal property gives $e i_{\\bar z}$ equal to the summand inclusion for every $\\bar z$, hence $ei=\\mathrm{id}_B$ by finite sums. Conversely, for $s\\in F(V,a)$ in any summand of $P(V)$ at $(V,\\bar v)$, $ie$ sends its class first to its germ at $a\\bar v$, then back to its original class, using precisely the same neighbourhood $(V,a,\\bar v)$ in the definition of $i_{a\\bar v}$. Thus $ie$ is the identity on every summand of every coprojection $P(V)\\to L$, and hence on $L$ by the colimit universal property. Therefore $e$ and $i$ are inverse $A$-linear isomorphisms.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-etale-sum-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0710, lemma-stalk-j-shriek, the two final displayed equalities, with inverse identities expanded"
+   }
+  },
+  {
+   "text": "The required isomorphism is $e\\theta^{-1}$. A section $s$ in the $a$-summand of $P(V)$ represents $\\theta([s])$ in the sheaf stalk, so this isomorphism sends it to its germ in the $a\\bar v$-summand, exactly as asserted. For a morphism $\\alpha:F\\to G$, both composites in the naturality square send each such $s$ to the germ of $\\alpha_{(V,a)}(s)$ in the same summand. Equality follows first on finite sums, then from the stalk colimit universal property. Sheafification-unit naturality identifies this square with the one for $(u_!F)_{\\bar x}$.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-category-colimit",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S5, proposition-describe-jshriek, last paragraph (etale-cohomology.tex); Tag 0710, lemma-stalk-j-shriek, generator formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-sheafification-geometric-stalk",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0710, lemma-stalk-j-shriek, proof; generator formula in etale-cohomology.tex Tag 03S5, proposition-describe-jshriek"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -153,10 +234,130 @@
     "top": [],
     "note": ""
    }
+  },
+  {
+   "tool": "grep",
+   "query": "presheafFiber.*(coprod|sum)|sheafFiber.*(coprod|sum)",
+   "results": {
+    "t": "2026-10-14T11:07:33Z",
+    "tool": "grep",
+    "query": "presheafFiber.*(coprod|sum)|sheafFiber.*(coprod|sum)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not state the etale sum-extension stalk formula with its germ map"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Ss]hriek|[Ss]hriek.*stalk|sheafFiber.*[Ss]hriek",
+   "results": {
+    "t": "2026-10-14T11:07:33Z",
+    "tool": "grep",
+    "query": "stalk.*[Ss]hriek|[Ss]hriek.*stalk|sheafFiber.*[Ss]hriek",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not state the etale sum-extension stalk formula with its germ map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric stalk of extension by zero along an etale morphism is a sum over the fibre",
+   "results": {
+    "t": "2026-10-14T11:07:33Z",
+    "tool": "leansearch",
+    "query": "Geometric stalk of extension by zero along an etale morphism is a sum over the fibre",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\", \"coproduct\"",
+   "results": {
+    "t": "2026-10-14T11:07:33Z",
+    "tool": "loogle",
+    "query": "\"sheafFiber\", \"coproduct\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not state the etale sum-extension stalk formula with its germ map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric stalk of sheafified etale direct sum extension is the direct sum of geometric stalks over lifts of the point",
+   "results": {
+    "t": "2026-10-14T11:07:33Z",
+    "tool": "leanfinder",
+    "query": "The geometric stalk of sheafified etale direct sum extension is the direct sum of geometric stalks over lifts of the point",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.Tilde.toStalk",
+     "ModuleCat.Tilde.stalkToFiberLinearMap_germ",
+     "ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap",
+     "ModuleCat.Tilde.toOpen_germ_apply",
+     "ModuleCat.Tilde.toOpen_germ",
+     "ModuleCat.Tilde.stalkToFiberLinearMap",
+     "smoothSheafCommRing.ι_forgetStalk_hom_apply",
+     "smoothSheafCommRing.ι_forgetStalk_hom"
+    ],
+    "digest": "bc7125b0d762dcbf"
+   },
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not state the etale sum-extension stalk formula with its germ map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf on a slice site, extension by direct sums has point fibre the coproduct of the fibres over that point",
+   "results": {
+    "t": "2026-10-14T11:07:34Z",
+    "tool": "leanfinder",
+    "query": "For a sheaf on a slice site, extension by direct sums has point fibre the coproduct of the fibres over that point",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.isColimitFreeCofan",
+     "CategoryTheory.GrothendieckTopology.Point.sheafFiber",
+     "PresheafOfModules.freeYonedaCoproduct",
+     "SheafOfModules.freeCofan",
+     "SheafOfModules.free",
+     "CategoryTheory.Sheaf.freeYoneda",
+     "SheafOfModules.mapFree",
+     "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w_apply"
+    ],
+    "digest": "94203e5e2004ace9"
+   },
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not state the etale sum-extension stalk formula with its germ map"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-amb-etale-adjoint-locality",
   "by": "worker",
@@ -172,5 +373,39 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-amb-etale-sum-stalks",
+  "worker": "stage1",
+  "summary": "Read Stacks 03S5 and 0710 and expanded the regrouping of the stalk colimit into mutually inverse maps on germs. Reused etale composition/cancellation and sheafification-stalk nodes; no new nodes and no statement change. The section formula and naturality are checked on coprojections.",
+  "blueprint": "Realizes the first-paragraph stalk formula in lem-amb-etale-adjoint-locality, including the explicit germ map, through the sheafified direct-sum definition.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-etale-sum-extension",
+    "why": "The defining direct-sum presheaf, required by the item itself."
+   },
+   {
+    "node": "def-weil-presheaf-modules-sheafification",
+    "why": "The definition identifies underlying abelian sheafification and supplies its linear unit and functoriality; no new sheafification construction is used."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Composition and cancellation make the same pointed neighbourhood a legitimate object over X or U; these generic scheme facts do not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-7b518234b",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-7b518234b (reviewer sub-agent of L); spot-checked: Reviewed the complete item, proof steps, cited DAG statements, unit/chapter route, and source locations Tag 0710, 03S5, 03CY, 02GN, and 02GW. The geometric-lift indexing, A-linear coefficient typing, sheafification-stalk comparison, cocone maps, inverse identities, naturality, and edge cases are correct. No new nodes or repairs are needed; review.md records the checks."
  }
 }
