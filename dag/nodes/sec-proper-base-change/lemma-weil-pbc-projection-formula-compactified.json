@@ -3,40 +3,168 @@
  "blueprint": {
   "is": "lemma-weil-pbc-projection-formula-compactified",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Compactified finite-level projection formula",
- "statement": "For a chosen compactification and a perfect $Q$ on $Y$, the ordered composite\n\n$$\n\\begin{aligned}\n(Rf_!^{(j,p)}E)\\otimes^LQ\n&=(Rp_*j_!E)\\otimes^LQ\\\\\n&\\xrightarrow{\\pi_{p,j_!E,Q}}\nRp_*(j_!E\\otimes^LLp^*Q)\\\\\n&\\xrightarrow{Rp_*\\theta_j}\nRp_*j_!(E\\otimes^LLf^*Q)\n=Rf_!^{(j,p)}(E\\otimes^LLf^*Q)\n\\end{aligned}\n$$\n\nis an isomorphism. Here $\\theta_j$ is the open-piece isomorphism and the\ninverse is $\\rho_{p,j_!E,Q}\\,Rp_*(\\theta_j^{-1})$ in reverse order.",
+ "statement": "Let $f:X\\to Y$ have the chosen compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$, $f=pj$, with $j$ a quasi-compact open immersion and $p$ proper [def-weil-pbc-projection-compactification]. Work on the small pro-etale sites in the fixed universes. Fix a sheaf of commutative rings $R_Y$ on $Y_{\\mathrm{proet}}$, put $R_{\\overline X}=p^{-1}R_Y$ and $R_X=j^{-1}R_{\\overline X}$, and use the composite inverse-image identification for $f$. All categories are the ordinary uncompleted unbounded derived categories of these module sheaves and the operations are those of [def-weil-pbc-proetale-operations]. Let $E\\in D(R_X)$ be arbitrary and let $Q\\in D(R_Y)$ be site-perfect: locally on every site object it has a bounded representative with terms direct summands of finite free coefficient sheaves [def-weil-pbc-strict-perfect-coefficient-package]. No common global bound is assumed.\n\nWrite $c_{j,p}:Lf^*Q\\xrightarrow{\\sim}Lj^*Lp^*Q$ for the composition comparison [lem-weil-pbc-proetale-derived-pullback-composition]. The map $\\pi_{p,j_!E,Q}$ is the adjoint of the derived counit tensored with $1_Q$, using the pullback-tensor comparison; this is the same formula as [def-weil-pbc-projection-formula-arrows], now for $Q$. Let $\\alpha_{j,E,M}:j_!(E\\otimes^L Lj^*M)\\to j_!E\\otimes^L M$ be the adjunction projection map, the transpose of the unit tensored with $Lj^*M$, with the normalization of [lemma-weil-pbc-projection-formula-open-piece]. For $M=Lp^*Q$ this map is invertible. Put\n$$\\theta_j=j_!(1_E\\otimes c_{j,p}^{-1})\\circ\\alpha_{j,E,Lp^*Q}^{-1}.$$\nThen the ordered composite\n$$\n(Rf_!^{(j,p)}E)\\otimes^LQ=(Rp_*j_!E)\\otimes^LQ\n\\xrightarrow{\\pi_{p,j_!E,Q}}Rp_*(j_!E\\otimes^LLp^*Q)\n\\xrightarrow{Rp_*\\theta_j}Rp_*j_!(E\\otimes^LLf^*Q)\n=Rf_!^{(j,p)}(E\\otimes^LLf^*Q)\n$$\nis an isomorphism. With $\\rho_{p,j_!E,Q}=\\pi_{p,j_!E,Q}^{-1}$, its inverse is\n$$\\rho_{p,j_!E,Q}\\circ Rp_*(\\theta_j^{-1}).$$\nOn each local strict-perfect representative, $\\rho$ agrees with the signed-totalization inverse of [def-weil-pbc-projection-formula-arrows].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-compactified.md",
   "place": "node lemma-weil-pbc-projection-formula-compactified, order 1271"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-projection-compactification",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-pbc-projection-formula-arrows",
+  "lemma-weil-pbc-projection-formula-open-piece"
+ ],
  "proof": [
   {
-   "text": "The assertion is local on $Y$. On a cover choose a strict-perfect package\nfor $Q$. The first arrow and its displayed inverse are the proper-piece\ninverse pair. The second arrow and its inverse come from the open-piece\ninverse pair, using\n$Lj^*Lp^*Q=Lf^*Q$. Associativity gives\n\n$$\n\\rho_{p,j_!E,Q}(Rp_*\\theta_j^{-1})\n(Rp_*\\theta_j)\\pi_{p,j_!E,Q}=1\n$$\n\nand\n\n$$\n(Rp_*\\theta_j)\\pi_{p,j_!E,Q}\n\\rho_{p,j_!E,Q}(Rp_*\\theta_j^{-1})=1.\n$$",
-   "uses": [],
-   "elementary": null
+   "text": "The exact adjunction $j_!\\dashv j^*$ is supplied by [lem-pur-site-restriction-module-adjunction-exact], after identifying $X_{\\mathrm{proet}}$ with $\\overline X_{\\mathrm{proet}}/X$ using [lem-weil-proetale-weakly-etale-localization]. Its exact functors act termwise on the unbounded derived categories by [lem-sf-exact-functor-derived-triangulated]. Their derived adjunction follows from [lem-pc-pre-derived-adjoint-functors-general]: since both functors preserve quasi-isomorphisms, every arrow in its resolution diagrams is already an isomorphism after localization; evaluation at the identity quasi-isomorphism gives the representing cone and cocone. Its characterization sends the termwise unit and counit to their localization classes. For a localized open immersion, use its localized coefficient ring and its exact extension-by-zero/restriction pair in these same resolution diagrams; evaluation at the identity again identifies the derived unit and counit with their termwise classes. Thus the adjunction projection map $\\alpha$ is globally defined for arbitrary $M$, by transposing the unit tensored with $Lj^*M$, and specializes to exactly the map whose inverse the open-piece statement names.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lemma-weil-pbc-projection-formula-open-piece"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI/03DJ, lemma-extension-by-zero and lemma-extension-by-zero-exact; derived adjunction by the cited general theorem"
+   }
   },
   {
-   "text": "These are precisely the two inverse equations for the ordered composite.\nThey prove that the globally defined forward map is an isomorphism; uniqueness\nof an inverse glues the local reverse maps.",
-   "uses": [],
-   "elementary": null
+   "text": "Here is the localization comparison for $j_!$ needed below, including its normalization. For any object $W\\to\\overline X$ of the pro-etale site, set $W_X=X\\times_{\\overline X}W$. Write $v:W\\to\\overline X$, $v_X:W_X\\to X$, $j_W:W_X\\to W$, and $r_W=v^*$, $r_X=v_X^*$. By [lem-weil-pbc-open-immersion-base-change] and [lem-pc-quasi-compact-base-change], $j_W$ is a quasi-compact open immersion. Together with the proper identity map of $W$ it gives the chosen compactification $(j_W,1_W)$ of [def-weil-pbc-projection-compactification]. By [lem-weil-proetale-weakly-etale-localization], the small sites of $W$ and $W_X$ are the respective slice sites, so the localized module operations used here are those for these schemes. Apply [lem-weil-pbc-ringed-projection-restriction] to $v$ and the site object $X$ to obtain $j^*Rv_*\\cong R(v_X)_*j_W^*$, with its counit-compatible normalization. The adjunctions in [def-weil-pbc-proetale-operations] and step 1 give, naturally in $H$,\n$$\\operatorname{Hom}(r_Wj_!E,H)\\cong\\operatorname{Hom}(E,j^*Rv_*H)\\cong\\operatorname{Hom}(E,R(v_X)_*j_W^*H)\\cong\\operatorname{Hom}(r_XE,j_W^*H)\\cong\\operatorname{Hom}(j_{W!}r_XE,H).$$\nThe representing-object universal property therefore gives $r_Wj_!E\\cong j_{W!}r_XE$. The map is the mate of the restriction square. Apply the displayed Hom chain to the identity: its adjunct is the restricted unit of $j_!\\dashv j^*$, so this comparison carries that unit to the local unit. Using also the restriction-pullback and restriction-tensor comparisons in the restriction node, transposing the restricted unit tensored with $Lj^*M$ gives the local transpose. Hence restriction of $\\alpha_{j,E,M}$ is precisely $\\alpha_{j_W,r_XE,r_WM}$, rather than an unspecified isomorphism of its endpoints.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-restriction",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-pc-quasi-compact-base-change",
+    "def-weil-pbc-projection-compactification",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-compactified.md",
+    "place": "Proof, open-piece localization, expanded by the Hom adjunction calculation"
+   }
+  },
+  {
+   "text": "Put $A=j_!E$. For each object $V$ of $Y_{\\mathrm{proet}}$, choose a covering $\\{V_i\\to V\\}$ and bounded finite-projective representatives $F_i^\\bullet\\simeq Q|_{V_i}$ using [def-weil-pbc-strict-perfect-coefficient-package]. By [lem-weil-pbc-ringed-projection-restriction], restriction of $\\pi_{p,A,Q}$ is the adjoint-of-counit map for the localized ringed morphism $p_i$ and $A|_{\\overline X\\times_YV_i}$. Apply [lemma-weil-pbc-projection-formula-totalization] to that ringed morphism, that arbitrary object, and $F_i^\\bullet$. It says both composites of $\\pi$ and $\\rho$ are identities. Write $u_i:F_i^\\bullet\\xrightarrow{\\sim}Q|_{V_i}$, $a_i=1_{R(p_i)_*A_i}\\otimes u_i$, and $b_i=R(p_i)_*(1_{A_i}\\otimes Lp_i^*u_i)$, where $A_i$ is the restriction of $A$. Naturality of the counit and of the pullback-tensor comparison, followed by the adjunction bijection, gives $\\pi_{p_i,A_i,Q|_{V_i}}a_i=b_i\\pi_{p_i,A_i,F_i}$. Both $a_i$ and $b_i$ are isomorphisms because they are images of $u_i$ under functors. Thus $\\pi_{p_i,A_i,Q|_{V_i}}=b_i\\pi_{p_i,A_i,F_i}a_i^{-1}$ has inverse $a_i\\rho_{p_i,A_i,F_i}b_i^{-1}$: the two products reduce respectively to $b_i(\\pi_F\\rho_F)b_i^{-1}=1$ and $a_i(\\rho_F\\pi_F)a_i^{-1}=1$. Hence each restriction of the global projection map is invertible. The local detection clause of the restriction node proves that the global $\\pi_{p,A,Q}$ is invertible; define $\\rho$ to be its inverse. Restriction of this global inverse is the specified local $\\rho$, since functors preserve inverse equations and an inverse is unique. For a global strict-perfect representative this is the inverse of [lemma-weil-pbc-projection-formula-proper-piece]. The use of totalization on slices does not assume those slices satisfy an additional geometric properness theorem: totalization holds for any ringed morphism.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-weil-pbc-ringed-projection-restriction",
+    "lemma-weil-pbc-projection-formula-totalization",
+    "lemma-weil-pbc-projection-formula-proper-piece"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-compactified.md",
+    "place": "Proof, first arrow and proper-piece inverse pair; local detection replaces inverse gluing"
+   }
+  },
+  {
+   "text": "The same packages give the required local tests for the open arrow. For any object $T\\to\\overline X$, choose a strict-perfect covering of $Y$ and pull it back to $T$. Such a covering of $Y$ exists by applying [def-weil-pbc-strict-perfect-coefficient-package] to the final site object. The base-change functor in [def-weil-proetale-inverse-image] is covering-preserving, so the resulting objects $T_a$ cover $T$. On each $T_a$, the restriction-pullback comparison of [lem-weil-pbc-ringed-projection-restriction] identifies $(Lp^*Q)|_{T_a}$ with the pullback of a bounded package. That pullback is a bounded finite-projective complex: the exact coefficient-identified pullback in [def-weil-pbc-proetale-operations] sends $R_Y$ to the chosen source ring, sends finite sums to finite sums as a left adjoint, and sends $p_ri_r=1$ to the same splitting equation. It is computed termwise, so the bounded representative is valid. By step 2 the restriction of $\\alpha_{j,E,Lp^*Q}$ is the normalized open adjunction projection map for this package and $E|_{X\\times_{\\overline X}T_a}$. The open-piece theorem [lemma-weil-pbc-projection-formula-open-piece] gives its inverse; hence each restricted $\\alpha$ is invertible. Apply the local detection clause of the restriction node on $\\overline X$ to conclude that $\\alpha_{j,E,Lp^*Q}$ is globally invertible. Again its global inverse restricts to the local inverse by uniqueness, without a descent assertion for arbitrary derived morphisms.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-ringed-projection-restriction",
+    "def-weil-pbc-proetale-operations",
+    "lemma-weil-pbc-projection-formula-open-piece"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-compactified.md",
+    "place": "Proof, strict-perfect cover and open-piece inverse pair; finite-free splittings pulled back termwise"
+   }
+  },
+  {
+   "text": "Apply the current statement of [lem-weil-pbc-proetale-derived-pullback-composition] with $(Z,W,V)=(X,\\overline X,Y)$, $(h,k)=(j,p)$ and $(R_Z,R_W,R_V)=(R_X,R_{\\overline X},R_Y)$. These are sheaves of commutative rings: $R_Y$ is commutative by hypothesis, and its specified inverse images retain that ring identity. The two coefficient identifications are the defining equalities $R_{\\overline X}=p^{-1}R_Y$ and $R_X=j^{-1}R_{\\overline X}$; the identification for $f=pj$ is explicitly their composite as required by the cited statement. Thus $c_{j,p}:Lf^*Q\\to Lj^*Lp^*Q$ is a canonical isomorphism. Therefore $\\theta_j=j_!(1_E\\otimes c_{j,p}^{-1})\\alpha^{-1}$ is an isomorphism, with inverse $\\alpha\\,j_!(1_E\\otimes c_{j,p})$. Applying the functor $Rp_*$ gives inverse arrows $b=Rp_*\\theta_j$ and $b^{-1}=Rp_*(\\theta_j^{-1})$, because a functor preserves composition and identities. This makes the shorthand $Lj^*Lp^*Q=Lf^*Q$ in the blueprint a typed isomorphism with the correct direction.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-compactified.md",
+    "place": "Proof, Lj*Lp*Q = Lf*Q, interpreted through the canonical comparison"
+   }
+  },
+  {
+   "text": "Write $a=\\pi_{p,j_!E,Q}$ and $a^{-1}=\\rho_{p,j_!E,Q}$. By associativity and the inverse equations of steps 3 and 5,\n$$(a^{-1}b^{-1})(ba)=a^{-1}(b^{-1}b)a=a^{-1}a=1,\\qquad(ba)(a^{-1}b^{-1})=b(aa^{-1})b^{-1}=bb^{-1}=1.$$\nThus $ba$ has exactly the inverse stated. The equalities $Rf_!^{(j,p)}=Rp_*j_!$ at both endpoints are the definition in [def-weil-pbc-projection-compactification]. This proves the assertion for all $E$, including unbounded $E$, without a uniform bound on the local packages.",
+   "uses": [
+    "def-weil-pbc-projection-compactification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-compactified.md",
+    "place": "Proof, the two displayed inverse equations and the conclusion"
+   }
   }
  ],
  "proof_deps": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pc-pre-derived-adjoint-functors-general",
   "lemma-weil-pbc-projection-formula-open-piece",
-  "lemma-weil-pbc-projection-formula-proper-piece"
+  "lem-weil-pbc-ringed-projection-restriction",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "def-weil-pbc-projection-compactification",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lemma-weil-pbc-projection-formula-totalization",
+  "lemma-weil-pbc-projection-formula-proper-piece",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-compactified.md",
-  "place": "## Proof"
+  "place": "Proof, expanded with ringed-site localization, normalized adjunction mates, and local detection instead of gluing derived inverses"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projectionMapOfCompactification|lowerShriek",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match: no hit states this ordinary ringed pro-etale derived compactification formula; scheme module restriction and pushforward hits are underived, Tor hits are general homological algebra, and Loogle hits are Lean compiler projections"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactified derived projection formula for perfect sheaves",
+   "results": "service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported derived direct image projection formula for a perfect complex using an open immersion followed by a proper morphism",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match: no hit states this ordinary ringed pro-etale derived compactification formula; scheme module restriction and pushforward hits are underived, Tor hits are general homological algebra, and Loogle hits are Lean compiler projections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor with a perfect complex commutes with compact support pushforward",
+   "results": "Hits: CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor'_map_app, CategoryTheory.Tor_obj, CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_map, SheafOfModules.pushforwardNatIso",
+   "date": "2026-10-14",
+   "verdict": "no match: no hit states this ordinary ringed pro-etale derived compactification formula; scheme module restriction and pushforward hits are underived, Tor hits are general homological algebra, and Loogle hits are Lean compiler projections"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\"",
+   "results": "Hits: Lean.AuxParentProjectionInfo, Lean.ProjectionFunctionInfo, Lean.instInhabitedAuxParentProjectionInfo, Lean.instInhabitedProjectionFunctionInfo, Lean.instReprAuxParentProjectionInfo, Lean.instReprProjectionFunctionInfo, Lean.projectionFnInfoExt, Lean.AuxParentProjectionInfo.fromClass",
+   "date": "2026-10-14",
+   "verdict": "no match: no hit states this ordinary ringed pro-etale derived compactification formula; scheme module restriction and pushforward hits are underived, Tor hits are general homological algebra, and Loogle hits are Lean compiler projections"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +191,44 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lemma-weil-pbc-projection-formula-compactified",
+  "worker": "stage1",
+  "summary": "Made rings, derived categories, perfectness, pullback-composition direction and inverse normalization explicit. Expanded locality using existing ringed projection restriction and a Hom calculation for extension by zero. The global inverse is obtained after local detection, not by asserting descent of derived morphisms. No new nodes. Returned-delivery repair: revalidated the composition citation against its current commutative-ring statement and made the specialization and all coefficient hypotheses explicit in step 5. Second reading explicitly writes the conjugation equation and inverse products for local representative changes.",
+  "blueprint": "Proof paragraph 1: local strict-perfect packages, proper inverse pair, open inverse pair and Lj*Lp* identification; displayed inverse equations and paragraph 2: global isomorphism by local detection.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact localized module adjunction is a generic ringed-site tool needed to define the normalized open arrow."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic equivalence of a weakly etale small site with a localization, needed to apply the ringed-site open-piece theorem."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic exact-functor localization theorem used to obtain the termwise derived extension by zero."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic derived adjunction theorem, specialized to exact functors to justify the open adjunction on unbounded derived categories."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pc-pre-derived-adjoint-functors-general"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-b1eeb4f1a",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-b1eeb4f1a (reviewer sub-agent of L); spot-checked: Read the complete item, report, fifteen cited statements and relevant sources. All six steps preserve coefficient hypotheses, map normalization and inverse order; local detection validly replaces inverse gluing. No new nodes or repairs. Four generic tool uses accepted; review.md records detailed checks and edge cases."
+ }
 }
