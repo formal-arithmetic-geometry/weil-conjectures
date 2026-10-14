@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 

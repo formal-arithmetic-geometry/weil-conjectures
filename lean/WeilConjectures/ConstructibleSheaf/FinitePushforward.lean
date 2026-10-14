@@ -16,6 +16,18 @@ import Mathlib.CategoryTheory.Presentable.Limits
 import Mathlib.CategoryTheory.Presentable.Directed
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.ConstructibleLimitDescentGeneral
+import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import Sheaf.AlgebraicGeometry.ConstructibleFiniteSelection
+import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
+import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.NormalScheme
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
+import Sheaf.RingTheory.EtaleColimitNormalLocalDomain
+import Sheaf.RingTheory.StrictHenselizationTriples
+import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Constructible sheaves embed into finite pushforwards of constant sheaves
