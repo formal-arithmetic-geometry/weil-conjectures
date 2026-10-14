@@ -37,7 +37,12 @@ theorem mapExtendHomology_nonempty_iso
       (((E.mapHomologicalComplex (.up ℤ)).obj
           (K.extend ComplexShape.embeddingUpNat)).homology (q : ℤ) ≅
         ((E.mapHomologicalComplex (.up ℕ)).obj K).homology q) := by
-  exact ⟨(HomologicalComplex.homologyFunctor B (.up ℤ) (q : ℤ)).mapIso
-    (HomologicalComplex.mapExtendIso K ComplexShape.embeddingUpNat E) ≪≫
-      ((E.mapHomologicalComplex (.up ℕ)).obj K).extendHomologyIso
-        ComplexShape.embeddingUpNat (j := q) rfl⟩
+  let comparison :
+      (E.mapHomologicalComplex (.up ℤ)).obj (K.extend ComplexShape.embeddingUpNat) ≅
+        ((E.mapHomologicalComplex (.up ℕ)).obj K).extend ComplexShape.embeddingUpNat :=
+    HomologicalComplex.mapExtendIso K ComplexShape.embeddingUpNat E
+  let homologyComparison :=
+    (HomologicalComplex.homologyFunctor B (.up ℤ) (q : ℤ)).mapIso comparison
+  exact ⟨homologyComparison ≪≫
+    ((E.mapHomologicalComplex (.up ℕ)).obj K).extendHomologyIso
+      ComplexShape.embeddingUpNat (j := q) rfl⟩
