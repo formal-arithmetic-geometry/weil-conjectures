@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.RingTheory.Ideal.Maps
 
-import Sheaf.RingTheory.IdealKernelElementDescent
+import Sheaf.RingTheory.ColimitFlatRelationDescent
 
 /-!
 # Descent of finite subsets of an ideal multiplication kernel
@@ -49,7 +49,8 @@ private theorem exists_ideal_tensor_map
 Source: Stacks Project, Algebra, Tag 00R6, descent of finitely many generators xi.
 (blueprint: lem-weil-pbc-finite-ideal-kernel-descent)
 
-Proof: Apply single-element descent to every element of the finite subset.
+Proof: Assemble single-element descent from finite-relation factorization for
+every element of the finite subset, keeping the independent carrier universes.
 Directedness gives an index l above i and all the finitely many witness stages;
 for the empty subset l=i suffices. Construct the canonical ideal-tensor map to
 l from the semilinear ring and module transitions. For each witness stage j,
@@ -61,6 +62,9 @@ in the preorder, and tensor induction gives equality on every tensor.
 Thus an element killed at its witness stage remains zero at l. The canonical
 map to l kills all elements of the finite subset and has the required formula.
 No flatness argument is repeated here and no generation assumption is used. -/
+-- STATEMENT-DISPUTED: The independent-universe statement still depends on the disputed
+-- independent-universe finite-relation theorem. The common-universe single-element
+-- theorem cannot justify this signature; its further correction is a separate item.
 theorem exists_stage_finite_ideal_kernel_vanishes
     {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]
     (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w})
@@ -108,8 +112,39 @@ theorem exists_stage_finite_ideal_kernel_vanishes
           (⟨(A.map f).hom a, Ideal.mem_map_of_mem (A.map f).hom a.property⟩ :
             I.map (A.map f).hom) ⊗ₜ[A.obj j] (N.map f).hom x) ∧ θ k = 0 := by
     intro k
-    exact exists_stage_ideal_kernel_element_vanishes A B N φ hcomm hscalar
-      ψ hψ hlimitScalar hflat i I k (hs k k.property)
+    have hk := hs k k.property
+    obtain ⟨n, a, x, heq⟩ := TensorProduct.exists_sum_tmul_eq (k : I ⊗[A.obj i] N.obj i)
+    have hrel : ∑ p, (φ i) (a p) • x p = 0 := by
+      change ∑ p, (a p : A.obj i) • x p = 0
+      rw [heq, map_sum] at hk
+      simpa only [TensorProduct.lift.tmul, LinearMap.comp_apply, LinearMap.lsmul_apply,
+        Submodule.subtype_apply] using hk
+    obtain ⟨j, f, m, c, y, hx, hc⟩ := exists_stage_flat_relation_factorization
+      A B N φ hcomm hscalar ψ hψ hlimitScalar hflat i (fun p ↦ (a p : A.obj i)) x hrel
+    let := Module.compHom (N.obj j) (φ j)
+    obtain ⟨θ, ht⟩ := exists_ideal_tensor_map (A.map f).hom I
+      (I.map (A.map f).hom) (fun a ha ↦ Ideal.mem_map_of_mem _ ha) (N.map f).hom (hR i j f)
+    refine ⟨j, f, θ, ht, ?_⟩
+    let b : Fin n → I.map (A.map f).hom :=
+      fun p ↦ ⟨(A.map f).hom (a p), Ideal.mem_map_of_mem _ (a p).property⟩
+    rw [heq, map_sum]
+    simp only [ht, hx]
+    change ∑ p, b p ⊗ₜ[A.obj j] (∑ q, (φ j) (c p q) • y q) = 0
+    have hbalance (p : Fin n) (q : Fin m) :
+        b p ⊗ₜ[A.obj j] ((φ j) (c p q) • y q) =
+          (c p q • b p) ⊗ₜ[A.obj j] y q := by
+      exact (TensorProduct.smul_tmul (c p q) (b p) (y q)).symm
+    simp only [TensorProduct.tmul_sum, hbalance]
+    rw [Finset.sum_comm]
+    apply Finset.sum_eq_zero
+    intro q _
+    rw [← TensorProduct.sum_tmul]
+    have hzero : ∑ p, c p q • b p = 0 := by
+      apply Subtype.ext
+      simp only [Submodule.coe_sum, Submodule.coe_smul, Submodule.coe_zero]
+      change ∑ p, c p q * (A.map f).hom (a p) = 0
+      simpa only [mul_comm] using hc q
+    rw [hzero, TensorProduct.zero_tmul]
   choose j f θ ht hz using hpoint
   have hb : ∀ t : Finset Λ, ∃ l : Λ, i ≤ l ∧ ∀ a ∈ t, a ≤ l := by
     intro t

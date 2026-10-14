@@ -1,132 +1,132 @@
 {
-  "id": "lem-weil-pbc-ideal-kernel-element-descent",
-  "kind": "statement",
-  "title": "A single ideal multiplication-kernel element dies at a later stage",
-  "statement": "Let $\\Lambda$ be a nonempty directed preorder and $A,B:\\Lambda\\to\\mathrm{CommRing}$, $N:\\Lambda\\to\\mathrm{Ab}$ functors with specified categorical colimits [def-weil-pbc-category-colimit]. Write $\\alpha_f,\\beta_f,\\eta_f$ for their transition maps and $a_i,b_i,n_i$ for their coprojections. Give each $N_i$ a $B_i$-module structure satisfying $\\eta_f(bx)=\\beta_f(b)\\eta_f(x)$. Let $\\varphi_i:A_i\\to B_i$ satisfy $\\beta_f\\varphi_i=\\varphi_j\\alpha_f$, and let $\\psi:A_\\infty\\to B_\\infty$ satisfy $\\psi a_i=b_i\\varphi_i$. Give $N_\\infty$ a $B_\\infty$-module structure with $n_i(bx)=b_i(b)n_i(x)$, and assume it is flat over $A_\\infty$ through $\\psi$ [def-weil-pbc-flat-ring-map]. Fix $i$, any ideal $I\\subset A_i$, and any $k\\in I\\otimes_{A_i}N_i$ whose multiplication in $N_i$ is zero. There exist $j$, $f:i\\to j$, and an additive map $\\theta:I\\otimes_{A_i}N_i\\to (I.\\mathrm{map}(\\alpha_f))\\otimes_{A_j}N_j$ such that $\\theta(a\\otimes x)=\\alpha_f(a)\\otimes\\eta_f(x)$ for every $a\\in I$, $x\\in N_i$, and $\\theta(k)=0$. The $A_i,A_j$ actions are through $\\varphi_i,\\varphi_j$. No Noetherian, local-ring or finite-module assumption is imposed.",
-  "stmt_deps": [
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-flat-ring-map"
-  ],
-  "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Tags 00R6 and 00HK, descent of one kernel element and equational flatness."
+ "id": "lem-weil-pbc-ideal-kernel-element-descent",
+ "kind": "statement",
+ "title": "A single ideal multiplication-kernel element dies at a later stage",
+ "statement": "Let $\\Lambda$ be a nonempty directed preorder and $A,B:\\Lambda\\to\\mathrm{CommRing}$, $N:\\Lambda\\to\\mathrm{Ab}$ functors with specified categorical colimits [def-weil-pbc-category-colimit]. Write $\\alpha_f,\\beta_f,\\eta_f$ for their transition maps and $a_i,b_i,n_i$ for their coprojections. Give each $N_i$ a $B_i$-module structure satisfying $\\eta_f(bx)=\\beta_f(b)\\eta_f(x)$. Let $\\varphi_i:A_i\\to B_i$ satisfy $\\beta_f\\varphi_i=\\varphi_j\\alpha_f$, and let $\\psi:A_\\infty\\to B_\\infty$ satisfy $\\psi a_i=b_i\\varphi_i$. Give $N_\\infty$ a $B_\\infty$-module structure with $n_i(bx)=b_i(b)n_i(x)$, and assume it is flat over $A_\\infty$ through $\\psi$ [def-weil-pbc-flat-ring-map]. Fix $i$, any ideal $I\\subset A_i$, and any $k\\in I\\otimes_{A_i}N_i$ whose multiplication in $N_i$ is zero. There exist $j$, $f:i\\to j$, and an additive map $\\theta:I\\otimes_{A_i}N_i\\to (I.\\mathrm{map}(\\alpha_f))\\otimes_{A_j}N_j$ such that $\\theta(a\\otimes x)=\\alpha_f(a)\\otimes\\eta_f(x)$ for every $a\\in I$, $x\\in N_i$, and $\\theta(k)=0$. The $A_i,A_j$ actions are through $\\varphi_i,\\varphi_j$. No Noetherian, local-ring or finite-module assumption is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tags 00R6 and 00HK, descent of one kernel element and equational flatness."
+ },
+ "proof": [
+  {
+   "text": "Write k as sum_p a_p tensor x_p using TensorProduct.exists_sum_tmul_eq. The multiplication-zero hypothesis becomes sum_p phi_i(a_p)*x_p=0.",
+   "uses": [],
+   "elementary": true
   },
-  "proof": [
-    {
-      "text": "Write k as sum_p a_p tensor x_p using TensorProduct.exists_sum_tmul_eq. The multiplication-zero hypothesis becomes sum_p phi_i(a_p)*x_p=0.",
-      "uses": [],
-      "elementary": true
-    },
-    {
-      "text": "Apply [lem-weil-pbc-colimit-flat-relation-descent] to this finite relation. Obtain j, f, coefficients c_pq in A_j and y_q in N_j with eta_f(x_p)=sum_q phi_j(c_pq)*y_q and sum_p alpha_f(a_p)*c_pq=0 for all q.",
-      "uses": [
-        "lem-weil-pbc-colimit-flat-relation-descent"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Construct the canonical tensor map by TensorProduct.map on the semilinear ideal map and module map. Expanding its value on k and using the row equations gives sum_p sum_q alpha_f(a_p) tensor phi_j(c_pq)*y_q. Tensor balancing moves c_pq to the ideal factor. Interchange the finite sums and use additivity in the ideal factor: each q-term becomes (sum_p c_pq*alpha_f(a_p)) tensor y_q. Commutativity and the column equations make each ideal factor zero. Thus theta(k)=0.",
-      "uses": [],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
+  {
+   "text": "Apply [lem-weil-pbc-colimit-flat-relation-descent] to this finite relation. Obtain j, f, coefficients c_pq in A_j and y_q in N_j with eta_f(x_p)=sum_q phi_j(c_pq)*y_q and sum_p alpha_f(a_p)*c_pq=0 for all q.",
+   "uses": [
     "lem-weil-pbc-colimit-flat-relation-descent"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00R6 kernel descent, using the equivalent finite-relation form of flatness in Tag 00HK; actual Lean assembly uses finite sums and balancing instead of tensor colimits."
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "A finite linear relation in a stage module is trivial at a later stage if the colimit module is flat over the colimit ring",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-13"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A finite linear relation in a stage module is trivial at a later stage if the colimit module is flat over the colimit ring",
-      "results": "Module.Flat.of_forall_isTrivialRelation, Module.Flat.iff_forall_isTrivialRelation, Module.Flat.of_forall_exists_factorization, Module.Flat.iff_forall_exists_factorization, Module.Flat.isTrivialRelation_of_sum_smul_eq_zero, Module.Flat.tfae_equational_criterion, Module.Flat.exists_factorization_of_apply_eq_zero_of_free, Module.Flat.exists_factorization_of_comp_eq_zero_of_free",
-      "date": "2026-10-13",
-      "verdict": "no exact stage-descent theorem; flatness and colimit tools only"
-    },
-    {
-      "tool": "grep",
-      "query": "isTrivialRelation|exists_sum_tmul_eq|colimit_exists_rep",
-      "results": "Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/RingTheory/Flat/EquationalCriterion.lean",
-      "date": "2026-10-13",
-      "verdict": "no exact stage-descent theorem; flatness and colimit tools only"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.RingTheory.ColimitMaximalKernelDescent",
-    "date": "2026-10-13",
-    "group": "G1"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-finite-etale-lifting",
-      "place": "Finite-generator kernel descent in Tag 00R6, steps 1–6 of lem-weil-pbc-colimit-eventually-flat, before applying Tag 00MO.",
-      "via": [
-        "lem-weil-pbc-finite-ideal-kernel-descent",
-        "lem-weil-pbc-colimit-maximal-kernel-descent",
-        "lem-weil-pbc-colimit-eventually-flat",
-        "lem-weil-pbc-criterion-flatness-fibre",
-        "lem-weil-pbc-smooth-retract-standard-smooth",
-        "lem-weil-pbc-popescu-delocalize-base",
-        "lem-weil-pbc-popescu-reduce-to-field",
-        "lem-weil-pbc-popescu-smoothing",
-        "lem-weil-pbc-henselian-pair-approximation",
-        "lem-weil-pbc-finite-etale-lifting-approximation",
-        "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "lean_audit": {
-    "master": {
-      "state": "none"
-    },
-    "slopmaster2": {
-      "state": "none"
-    }
-  },
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.RingTheory.IdealKernelElementDescent",
-    "file": "lean/Sheaf/RingTheory/IdealKernelElementDescent.lean",
-    "declaration": "RingTheory.exists_stage_ideal_kernel_element_vanishes",
-    "statement": "theorem exists_stage_ideal_kernel_element_vanishes\n    {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]\n    (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w})\n    (N : Λ ⥤ AddCommGrpCat.{z}) [HasColimit A] [HasColimit B] [HasColimit N]\n    [∀ i, Module (B.obj i) (N.obj i)]\n    (φ : ∀ i, A.obj i →+* B.obj i)\n    (hcomm : ∀ (i j : Λ) (f : i ⟶ j),\n      (B.map f).hom.comp (φ i) = (φ j).comp (A.map f).hom)\n    (hscalar : ∀ (i j : Λ) (f : i ⟶ j) (b : B.obj i) (x : N.obj i),\n      (N.map f).hom (b • x) = (B.map f).hom b • (N.map f).hom x)\n    (ψ : (colimit A : CommRingCat.{v}) →+* (colimit B : CommRingCat.{w}))\n    (hψ : ∀ i, ψ.comp (colimit.ι A i).hom = (colimit.ι B i).hom.comp (φ i))\n    [Module (colimit B : CommRingCat.{w}) (colimit N : AddCommGrpCat.{z})]\n    (hlimitScalar : ∀ (i : Λ) (b : B.obj i) (x : N.obj i),\n      (colimit.ι N i).hom (b • x) = (colimit.ι B i).hom b • (colimit.ι N i).hom x)\n    (hflat : letI := Module.compHom (colimit N : AddCommGrpCat.{z}) ψ\n      Module.Flat (colimit A : CommRingCat.{v}) (colimit N : AddCommGrpCat.{z}))\n    (i : Λ) (I : Ideal (A.obj i)) :\n    letI := Module.compHom (N.obj i) (φ i)\n    ∀ (k : I ⊗[A.obj i] N.obj i),\n      TensorProduct.lift ((LinearMap.lsmul (A.obj i) (N.obj i)).comp I.subtype) k = 0 →\n    ∃ (j : Λ) (f : i ⟶ j),\n      letI := Module.compHom (N.obj i) (φ i)\n      letI := Module.compHom (N.obj j) (φ j)\n      ∃ θ : I ⊗[A.obj i] N.obj i →+\n          (I.map (A.map f).hom) ⊗[A.obj j] N.obj j,\n        (∀ (a : I) (x : N.obj i), θ (a ⊗ₜ[A.obj i] x) =\n          (⟨(A.map f).hom a, Ideal.mem_map_of_mem (A.map f).hom a.property⟩ :\n            I.map (A.map f).hom) ⊗ₜ[A.obj j] (N.map f).hom x) ∧\n        θ k = 0",
-    "branch": "sheaf-dag",
-    "by": "G1",
-    "date": "2026-10-13"
-  },
-  "reviewed": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "G1",
-    "result": "pass",
-    "landing": "20261013T115023-L-3323872",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "G1",
-    "result": "pass",
-    "landing": "20261013T115023-L-3323872",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "text": "Construct the canonical tensor map by TensorProduct.map on the semilinear ideal map and module map. Expanding its value on k and using the row equations gives sum_p sum_q alpha_f(a_p) tensor phi_j(c_pq)*y_q. Tensor balancing moves c_pq to the ideal factor. Interchange the finite sums and use additivity in the ideal factor: each q-term becomes (sum_p c_pq*alpha_f(a_p)) tensor y_q. Commutativity and the column equations make each ideal factor zero. Thus theta(k)=0.",
+   "uses": [],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-flat-relation-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00R6 kernel descent, using the equivalent finite-relation form of flatness in Tag 00HK; actual Lean assembly uses finite sums and balancing instead of tensor colimits."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite linear relation in a stage module is trivial at a later stage if the colimit module is flat over the colimit ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite linear relation in a stage module is trivial at a later stage if the colimit module is flat over the colimit ring",
+   "results": "Module.Flat.of_forall_isTrivialRelation, Module.Flat.iff_forall_isTrivialRelation, Module.Flat.of_forall_exists_factorization, Module.Flat.iff_forall_exists_factorization, Module.Flat.isTrivialRelation_of_sum_smul_eq_zero, Module.Flat.tfae_equational_criterion, Module.Flat.exists_factorization_of_apply_eq_zero_of_free, Module.Flat.exists_factorization_of_comp_eq_zero_of_free",
+   "date": "2026-10-13",
+   "verdict": "no exact stage-descent theorem; flatness and colimit tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "isTrivialRelation|exists_sum_tmul_eq|colimit_exists_rep",
+   "results": "Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/RingTheory/Flat/EquationalCriterion.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact stage-descent theorem; flatness and colimit tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ColimitMaximalKernelDescent",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Finite-generator kernel descent in Tag 00R6, steps 1–6 of lem-weil-pbc-colimit-eventually-flat, before applying Tag 00MO.",
+   "via": [
+    "lem-weil-pbc-finite-ideal-kernel-descent",
+    "lem-weil-pbc-colimit-maximal-kernel-descent",
+    "lem-weil-pbc-colimit-eventually-flat",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.IdealKernelElementDescent",
+  "file": "lean/Sheaf/RingTheory/IdealKernelElementDescent.lean",
+  "declaration": "RingTheory.exists_stage_ideal_kernel_element_vanishes",
+  "statement": "theorem exists_stage_ideal_kernel_element_vanishes\n    {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]\n    (A : Λ ⥤ CommRingCat.{u}) (B : Λ ⥤ CommRingCat.{u})\n    (N : Λ ⥤ AddCommGrpCat.{u}) [HasColimit A] [HasColimit B] [HasColimit N]\n    [∀ i, Module (B.obj i) (N.obj i)]\n    (φ : ∀ i, A.obj i →+* B.obj i)\n    (hcomm : ∀ (i j : Λ) (f : i ⟶ j),\n      (B.map f).hom.comp (φ i) = (φ j).comp (A.map f).hom)\n    (hscalar : ∀ (i j : Λ) (f : i ⟶ j) (b : B.obj i) (x : N.obj i),\n      (N.map f).hom (b • x) = (B.map f).hom b • (N.map f).hom x)\n    (ψ : (colimit A : CommRingCat.{u}) →+* (colimit B : CommRingCat.{u}))\n    (hψ : ∀ i, ψ.comp (colimit.ι A i).hom = (colimit.ι B i).hom.comp (φ i))\n    [Module (colimit B : CommRingCat.{u}) (colimit N : AddCommGrpCat.{u})]\n    (hlimitScalar : ∀ (i : Λ) (b : B.obj i) (x : N.obj i),\n      (colimit.ι N i).hom (b • x) = (colimit.ι B i).hom b • (colimit.ι N i).hom x)\n    (hflat : letI := Module.compHom (colimit N : AddCommGrpCat.{u}) ψ\n      Module.Flat (colimit A : CommRingCat.{u}) (colimit N : AddCommGrpCat.{u}))\n    (i : Λ) (I : Ideal (A.obj i)) :\n    letI := Module.compHom (N.obj i) (φ i)\n    ∀ (k : I ⊗[A.obj i] N.obj i),\n      TensorProduct.lift ((LinearMap.lsmul (A.obj i) (N.obj i)).comp I.subtype) k = 0 →\n    ∃ (j : Λ) (f : i ⟶ j),\n      letI := Module.compHom (N.obj i) (φ i)\n      letI := Module.compHom (N.obj j) (φ j)\n      ∃ θ : I ⊗[A.obj i] N.obj i →+\n          (I.map (A.map f).hom) ⊗[A.obj j] N.obj j,\n        (∀ (a : I) (x : N.obj i), θ (a ⊗ₜ[A.obj i] x) =\n          (⟨(A.map f).hom a, Ideal.mem_map_of_mem (A.map f).hom a.property⟩ :\n            I.map (A.map f).hom) ⊗ₜ[A.obj j] (N.map f).hom x) ∧\n        θ k = 0",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T115023-L-3323872",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-5b07c",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261014T052440-L-1914123",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile; original caller reproduces the reported universe error against the changed dependency, adapted caller compiles, signatures and DAG/report records match the authorized changes."
+ }
 }

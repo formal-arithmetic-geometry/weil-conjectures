@@ -13,7 +13,6 @@ public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.RingTheory.Ideal.Maps
 
 import Sheaf.RingTheory.ColimitFlatRelationDescent
-import Mathlib.LinearAlgebra.TensorProduct.Finiteness
 
 /-!
 # Descent of one element of an ideal multiplication kernel
@@ -24,13 +23,13 @@ Source: Stacks Project, Algebra, Tag 00R6, tensor-colimit descent paragraph.
 
 @[expose] public section
 
-universe u v w z
+universe u
 open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace RingTheory
 
 private theorem exists_ideal_tensor_map
-    {R : Type v} {S : Type w} {M : Type z} {P : Type u}
+    {R : Type u} {S : Type u} {M : Type u} {P : Type u}
     [CommRing R] [CommRing S] [AddCommGroup M] [AddCommGroup P]
     [Module R M] [Module S P]
     (α : R →+* S) (I : Ideal R) (J : Ideal S)
@@ -65,21 +64,21 @@ The zero tensor has the empty pure-tensor expression; no nonzero hypothesis
 or finite generation assumption is needed. -/
 theorem exists_stage_ideal_kernel_element_vanishes
     {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]
-    (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w})
-    (N : Λ ⥤ AddCommGrpCat.{z}) [HasColimit A] [HasColimit B] [HasColimit N]
+    (A : Λ ⥤ CommRingCat.{u}) (B : Λ ⥤ CommRingCat.{u})
+    (N : Λ ⥤ AddCommGrpCat.{u}) [HasColimit A] [HasColimit B] [HasColimit N]
     [∀ i, Module (B.obj i) (N.obj i)]
     (φ : ∀ i, A.obj i →+* B.obj i)
     (hcomm : ∀ (i j : Λ) (f : i ⟶ j),
       (B.map f).hom.comp (φ i) = (φ j).comp (A.map f).hom)
     (hscalar : ∀ (i j : Λ) (f : i ⟶ j) (b : B.obj i) (x : N.obj i),
       (N.map f).hom (b • x) = (B.map f).hom b • (N.map f).hom x)
-    (ψ : (colimit A : CommRingCat.{v}) →+* (colimit B : CommRingCat.{w}))
+    (ψ : (colimit A : CommRingCat.{u}) →+* (colimit B : CommRingCat.{u}))
     (hψ : ∀ i, ψ.comp (colimit.ι A i).hom = (colimit.ι B i).hom.comp (φ i))
-    [Module (colimit B : CommRingCat.{w}) (colimit N : AddCommGrpCat.{z})]
+    [Module (colimit B : CommRingCat.{u}) (colimit N : AddCommGrpCat.{u})]
     (hlimitScalar : ∀ (i : Λ) (b : B.obj i) (x : N.obj i),
       (colimit.ι N i).hom (b • x) = (colimit.ι B i).hom b • (colimit.ι N i).hom x)
-    (hflat : letI := Module.compHom (colimit N : AddCommGrpCat.{z}) ψ
-      Module.Flat (colimit A : CommRingCat.{v}) (colimit N : AddCommGrpCat.{z}))
+    (hflat : letI := Module.compHom (colimit N : AddCommGrpCat.{u}) ψ
+      Module.Flat (colimit A : CommRingCat.{u}) (colimit N : AddCommGrpCat.{u}))
     (i : Λ) (I : Ideal (A.obj i)) :
     letI := Module.compHom (N.obj i) (φ i)
     ∀ (k : I ⊗[A.obj i] N.obj i),
