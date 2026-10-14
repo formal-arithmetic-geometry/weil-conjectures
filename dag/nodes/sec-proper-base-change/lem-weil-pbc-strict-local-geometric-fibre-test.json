@@ -21,7 +21,7 @@
  },
  "kind": "statement",
  "title": "Strict-local comparison reduced to a geometric strict-local fibre",
- "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], let $\\bar x$ be a geometric point of $X$, and let $\\bar s=f\\bar x$ [def-weil-geometric-point]. Put $A=S_{(\\bar s)}$ and $B=X_{(\\bar x)}$ [def-weil-pbc-strict-henselization-limit], with their canonical map $B\\to A$ [lem-weil-pbc-strict-henselization-functoriality]. Let $K$ be any separably closed field [def-pc-separably-closed], let $u:\\operatorname{Spec}K\\to A$ be any scheme morphism, let $F$ be an abelian etale sheaf on $\\operatorname{Spec}K$ [def-weil-pbc-abelian-etale-sheaves], and let $q\\geq0$. Then the following two canonical pullback maps [def-weil-pbc-cohomology-pullback] are isomorphisms simultaneously: $$H^q(A\\times_S\\operatorname{Spec}K,F)\\longrightarrow H^q(B\\times_S\\operatorname{Spec}K,F),$$ $$H^q(\\operatorname{Spec}K,F)\\longrightarrow H^q(B\\times_A\\operatorname{Spec}K,F).$$ Fibre products are those of [def-pc-fibre-product]; etale cohomology [def-weil-pbc-etale-cohomology] on each fibre product uses the inverse image [def-weil-pbc-inverse-image] under its projection to $\\operatorname{Spec}K$. No smoothness, properness, finite-type, torsion, or algebraicity condition on $u$ is assumed.",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], let $\\bar x$ be a geometric point of $X$, and let $\\bar s=f\\bar x$ [def-weil-geometric-point]. Put $A=S_{(\\bar s)}$ and $B=X_{(\\bar x)}$ [def-weil-pbc-strict-henselization-limit], with their canonical map $h:B\\to A$ [lem-weil-pbc-strict-henselization-functoriality]. Let $K$ be any separably closed field [def-pc-separably-closed], let $u:\\operatorname{Spec}K\\to A$ be a morphism, and write $t:\\operatorname{Spec}K\\to S$ for its composite with the structural map of $A$. Let $F$ be an abelian etale sheaf on $\\operatorname{Spec}K$ [def-weil-pbc-abelian-etale-sheaves], and let $q\\geq0$. Then the canonical pullback map [def-weil-pbc-cohomology-pullback] $$H^q(A\\times_S\\operatorname{Spec}K,F)\\longrightarrow H^q(B\\times_S\\operatorname{Spec}K,F)$$ is an isomorphism if and only if, for EVERY morphism $v:\\operatorname{Spec}K\\to A$ whose composite with $A\\to S$ is $t$, the canonical pullback map $$H^q(\\operatorname{Spec}K,F)\\longrightarrow H^q(B\\times_{A,v}\\operatorname{Spec}K,F)$$ is an isomorphism. Fibre products are those of [def-pc-fibre-product], and on each scheme the coefficients are the inverse image [def-weil-pbc-inverse-image] of $F$ under the projection to $\\operatorname{Spec}K$; cohomology is [def-weil-pbc-etale-cohomology]. In particular, the first comparison implies the second comparison for the originally selected $u$. No smoothness, properness, finite-type, torsion, or algebraicity condition on $u$ or $v$ is assumed.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 0EZV, lemma-check-stalks-better"
@@ -38,9 +38,137 @@
   "lem-weil-pbc-strict-henselization-functoriality",
   "def-pc-separably-closed"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $T=\\operatorname{Spec}K$, $E=A\\times_ST$, $Y=B\\times_ST$, $p=h\\times_ST:Y\\to E$, and $a:E\\to T$. Choose an affine open chart of $S$ containing $\\bar s$; $t$ factors through it because it factors through the local scheme $A$ and any open containing its closed point contains all its points. In the strict-local limit one can restrict to pointed affine neighbourhoods mapping into this chart: pull back any neighbourhood along the chart and choose an affine open containing its distinguished point. By the defining ring colimit for $A$ and the universal properties of tensor products and colimits, $E=\\operatorname{Spec}C$ with $C=\\varinjlim_i C_i$, where $C_i$ are etale $K$-algebras obtained by base change of these affine etale neighbourhoods. Concretely, a compatible family of maps from their tensors to a $K$-algebra is exactly a compatible family of maps from the original coordinate rings agreeing on the chart ring. Etale base change and the finite-separable-product theorem, followed by triviality of finite separable extensions of $K$, give $C_i\\cong K^{I_i}$ for finite sets $I_i$. The limit interpretation is justified by the small-colimit spectrum theorem. These decompositions are as $K$-algebras, NOT as $A$-algebras; no claim that different $v$ give the same $A$-fibre is made.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-pc-sepclosed-finite-sep-trivial",
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZV, first paragraph; Algebra Tag 00U3; Limits Tag 01YW"
+   }
+  },
+  {
+   "text": "For every prime $z$ of $C$, its pullback to each finite product $K^{I_i}$ selects a unique factor, by the finite-product spectrum statement. If $c\\in C$ is represented by $(\\lambda_j)_j\\in K^{I_i}$ and the selected factor is $j_0$, the corresponding idempotent $e_{j_0}$ is outside $z$ and kills $c-\\lambda_{j_0}$. Consequently every element of $C_z$ is a scalar in $K$: denominators outside $z$ have nonzero selected scalar and can be inverted in $K$. The structural map $K\\to C_z$ is injective since it is a map from a field to a nonzero local ring. Thus $C_z\\cong K$, compatibly with the structural maps. Every prime is therefore maximal, and the zero-dimensional spectrum theorem makes $|E|$ profinite. Points of $E$ are exactly $K$-morphisms $T\\to E$, equivalently lifts $v:T\\to A$ of $t$, since each residue field is canonically $K$. The given $u$ supplies one such point, so $E$ is nonempty. Finite stages can have unused factors; no surjectivity of their transition maps is assumed.",
+   "uses": [
+    "lem-weil-pbc-spec-finite-product-fields",
+    "lem-weil-pbc-zero-dimensional-spectrum-profinite",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZV, finite-product presentation; Algebra Tags 00ED and 04MG"
+   }
+  },
+  {
+   "text": "For each $z\\in E$, choose a geometric point $\\bar z:\\operatorname{Spec}\\Omega\\to E$ inducing an embedding $K=\\kappa(z)\\to\\Omega$, with $\\Omega$ algebraically closed. Clopen pointed neighbourhoods of $z$ are cofinal among the pointed etale neighbourhoods of $\\bar z$. Indeed choose an affine open $\\operatorname{Spec}D$ around the distinguished point of such a neighbourhood. Its fibre $D\\otimes_C K$ is etale over $K$ by etale base change; the finite-separable-product theorem and separable closedness identify it with a finite product of copies of $K$. Thus its given map to $\\Omega$ selects a factor and comes from a $K$-point: the pointed map $D\\to\\Omega$ factors through $D\\to K=C_z$. By the affine-etale ring criterion, $D$ is a finitely presented $C$-algebra. Write the finitely many generator images in $C_z$ as fractions and invert the product of their denominators, all outside $z$. Each defining relation vanishes in $C_z$, so invert one further element outside $z$ annihilating it, for each of the finitely many relations. This produces a $C$-map $D\\to C_s$, $s\\notin z$, hence a section over $D(s)$ through the prescribed point. The clopen basis supplies $z\\in W\\subseteq D(s)$, and restriction gives a pointed map $W\\to\\operatorname{Spec}D$. By the clopen-idempotent theorem, each such $W$ is $D(e)=\\operatorname{Spec}C_e$ for an idempotent $e$ of $C$, so it is an affine etale neighbourhood. Two such clopen refinements have common refinement their intersection. To equalize two pointed maps from a clopen into a neighbourhood, first shrink around $z$ into an affine open of that neighbourhood containing their common distinguished point. On its finitely many algebra generators the two maps have differences zero in $C_z$; invert finitely many annihilators outside $z$ and take a smaller clopen. The maps then agree, since they agree on every generator. This proves cofinality, including the equalization condition, for every choice of $\\Omega$ and embedding $K\\to\\Omega$. Hence the stalk of any abelian sheaf at $\\bar z$ is computed on the same clopen system, independently of $\\Omega$. A germ has a representative on a clopen $W$; gluing it with the zero section on the disjoint open complement gives a global section with that germ. Therefore $\\Gamma(E,G)=0$ implies that every geometric stalk of $G$ vanishes, and geometric-stalk conservativity gives $G=0$. The argument also applies to $T=\\operatorname{Spec}K$; its clopen neighbourhood system has the single nonempty object $T$, so for every geometric point of $T$ the germ map $F(T)\\to F_{\\bar t}$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-weil-pbc-profinite-clopen-basis",
+    "def-weil-pbc-geometric-stalks",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-pc-sepclosed-finite-sep-trivial",
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 09AY and 03PN; clopen basis from Topology Tag 08ZZ; explicit localization argument; Algebra Tag 00EE, lemma-disjoint-decomposition"
+   }
+  },
+  {
+   "text": "Every point of the affine scheme $E$ is closed and every residue field is the separably closed field $K$, by step 2. Apply the affine closed-point acyclicity theorem to EVERY abelian sheaf on $E$: all positive right derived functors of $\\Gamma(E,-)$ vanish. The category of abelian etale sheaves has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]; global sections is additive and left exact since evaluation preserves kernels. Apply [lem-weil-pbc-derived-functor-long-exact] to a short exact sequence: its segment $\\Gamma(E,G_1)\\to\\Gamma(E,G_2)\\to\\Gamma(E,G_3)\\to H^1(E,G_1)=0$ therefore says $\\Gamma(E,-)$ is exact. Combined with the zero-detection argument of step 3, it reflects isomorphisms: a sheaf morphism has invertible global sections precisely when its kernel and cokernel have zero global sections, precisely when both vanish. The same acyclicity theorem applies to $T$, so $H^q(T,F)=0$ for $q>0$.",
+   "uses": [
+    "lem-cbc-affine-sepclosed-etale-acyclic",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-weil-pbc-module-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09AY, lemma-affine-only-closed-points; derived.tex Tag 015B, lemma-higher-derived-functors (1),(2); injectives.tex Tag 01DU, theorem-sheaves-modules-injectives"
+   }
+  },
+  {
+   "text": "Put $G=a^{-1}F$. The map $p$ is affine: both $E$ and $Y$ are affine schemes, and $p$ is induced by their coordinate-ring homomorphism. Hence it is quasi-compact and quasi-separated. The canonical Leray comparison for $p$, with the explicit derived-unit description of cohomology pullback, identifies $H^q(Y,p^{-1}G)$ with $\\Gamma(E,R^qp_*p^{-1}G)$, because exactness of $\\Gamma(E,-)$ lets it commute with kernels, images and cokernels of a representing complex. For $q=0$ the first comparison in the statement is $\\Gamma(E,\\eta)$ for the unit $\\eta:G\\to p_*p^{-1}G$. It is invertible iff $\\eta$ is an isomorphism by step 4. For $q>0$ its source vanishes and it is invertible iff $\\Gamma(E,R^qp_*p^{-1}G)=0$, iff $R^qp_*p^{-1}G=0$. Composition of inverse images identifies $p^{-1}G$ with the coefficient sheaf pulled back from $T$ to $Y$. Thus we have reduced the first comparison to a sheaf isomorphism in degree zero or a sheaf vanishing in positive degree, without any torsion assumption.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, injective-complex paragraph; derived-unit Leray description"
+   }
+  },
+  {
+   "text": "Fix $z\\in E$, equivalently a lift $v:T\\to A$, and a geometric point $\\bar z:\\operatorname{Spec}\\Omega\\to E$ over it as in step 3. Cofinality of the clopen neighbourhoods from step 3 identifies the strict localization of $E$ at $\\bar z$ with $\\operatorname{Spec}C_z=T$: the clopen-idempotent theorem writes each affine clopen as $D(e)=\\operatorname{Spec}C_e$. The ring colimit of these $C_e$ is the ordinary localization $C_z$: its natural map to $C_z$ is surjective since every fraction $c/s$ is defined on a clopen inside $D(s)$, and is injective since a section zero in $C_z$ is annihilated by some element outside $z$ and becomes zero on a smaller clopen inside its basic open. Thus the ring colimit over pointed etale neighbourhoods is $C_z$, since every denominator outside $z$ is inverted on a clopen neighbourhood contained in its basic open, and step 2 identifies that localization with $K$. The unrestricted strict-henselization stalk theorem applies to the affine, hence qcqs, morphism $p$ and the abelian sheaf $p^{-1}G$. It gives $(R^qp_*p^{-1}G)_{\\bar z}\\cong H^q(Y\\times_E T,F)$. Fibre-product associativity, checked by their projections, identifies $Y\\times_E T$ with $B\\times_{A,v}T$. By the inverse-image stalk-and-germ theorem for $a:E\\to T$, the source stalk $G_{\\bar z}$ is $F_{a\\bar z}$; step 3 on $T$ identifies this canonically with $F(T)=H^0(T,F)$. For $q=0$ the stalk of $\\eta$ is the section-pullback unit $H^0(T,F)\\to H^0(B\\times_{A,v}T,F)$: a clopen representative of a germ restricts along the section in step 3, and its unit image restricts along the base-changed section, giving exactly the fibre pullback. For $q>0$, $H^q(T,F)=0$ by step 4, so the fibre comparison is invertible exactly when this higher-direct-image stalk vanishes. The clopen system is independent of the chosen $\\Omega$ by step 3, so these identifications hold for every geometric point over $z$. This identifies the actual canonical maps, not just abstract groups.",
+   "uses": [
+    "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+    "def-weil-pbc-strict-henselization-limit",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, theorem-higher-direct-images; corrected geometric-fibre calculation for Tag 0EZV; Tag 03Q1, lemma-stalk-pullback (3) and germ compatibility; Algebra Tag 00EE, lemma-disjoint-decomposition"
+   }
+  },
+  {
+   "text": "For $q=0$, geometric-stalk conservativity says that the unit in step 5 is an isomorphism iff its stalk map at EVERY geometric point of $E$ is an isomorphism. For $q>0$ apply the same statement to $0\\to R^qp_*p^{-1}G$, so vanishing is equivalent to vanishing at EVERY geometric stalk. By steps 2, 3 and 6 these conditions are precisely the comparisons for every lift $v:T\\to A$ over $t$. This proves the corrected equivalence and, by taking $v=u$, the one-way implication needed by the existing smooth-local-acyclicity citer. The original assertion for only one selected lift is false; the nodal-curve counterexample and the invalid $A$-linear identification in the source are recorded in report.md.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PN, theorem-exactness-stalks; repair of Tag 0EZV"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-pc-sepclosed-finite-sep-trivial",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "lem-weil-pbc-zero-dimensional-spectrum-profinite",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-profinite-clopen-basis",
+  "def-weil-pbc-geometric-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-cbc-affine-sepclosed-etale-acyclic",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+  "lem-weil-pbc-inverse-image-stalk-germ"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Correction of Tag 0EZV, lemma-check-stalks-better, using Tags 09AY and 03Q9; finite-equation clopen argument written explicitly"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -97,15 +225,149 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-14",
    "verdict": "no match: returned declarations concern structure-sheaf or topological stalks and etale ring maps, not either strict-local etale cohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology over a split ind-etale separably closed field base is detected by all geometric fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A] [Algebra.EssFiniteType K A],\\n  Algebra.FormallyEtale K A ↔ ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"Algebra.FormallyEtale.of_isSeparable_aux\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [Algebra.IsSeparable K L]\\n  [Algebra.EssFiniteType K L], Algebra.FormallyEtale K L\", \"doc\": \"If $ L $ is a separable algebra over a field $ K $ and is finitely generated as a $ K $-algebra, then $ L $ is formally étale over $ K $.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.FormallyEtale.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B\", \"doc\": \"If $ A $ is a formally unramified $ R $-algebra and $ B $ is a formally étale $ R $-algebra, then $ B $ is a formally étale $ A $-algebra.\"}\n  {\"name\": \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings with $ A $ and $ B $ as $ R $-algebras, and $ B $ as an $ A $-algebra satisfying the scalar tower condition $ R \\to A \\to B $. If $ A $ is formally unram\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_isSeparable\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [Algebra.EssFiniteType K L],\\n  Algebra.FormallyEtale K L ↔ Algebra.IsSeparable K L\", \"doc\": \"For a commutative ring $ K $ and a $ K $-algebra $ L $ of essential finite type, $ L $ is formally étale over $ K $ if and only if $ L $ is separable over $ K $.\"}\n  {\"name\": \"RingHom.formallyEtale_algebraMap\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  (algebraMap R S).FormallyEtale ↔ Algebra.FormallyEtale R S\", \"doc\": \"The canonical ring homomorphism from $ R $ to $ S $ is formally étale if and only if $ S $ is a formally étale algebra over $ R $. This equivalence establishes that the formal étaleness of the algebra\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not state etale sheaf cohomology detection over strict localizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselization cohomology base change comparison tested at every lift of a geometric point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_eq\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {R' : Type u'}\\n  {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S'] {P' : Algebra.Extension R' S'}\\n  [inst_6 : Algebra R R'] [inst_7 : Algebra S S'] [inst_8 : Algebra R S']\", \"doc\": \"For algebra extension homomorphisms $ f, g : P \\\\to P' $, the induced linear maps on the first cotangent cohomology modules $ H^1(P) \\\\to H^1(P') $ are equal whenever $ f = g $.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"Algebra.Extension.tensorH1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $ R, S, T $ with compatible algebra structures and an algebra homomorphism $ f: P \\\\to Q $, if $ f $ induces a formally étale ring homomorphism and the kernel map $ f.\\\\text{mapK\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"Algebra.tensorH1CotangentOfIsLocalization_toLinearMap\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] (M : Submonoid S)\\n  [inst_7 : IsLocalization M T],\\n  ↑(Algebra.tensorH1CotangentOfIsLoc\", \"doc\": \"For a submonoid $M$ of a commutative ring $S$ and its localization $T$ at $M$, the linear map associated to the tensor product of the first cotangent cohomology modules $H^1_{\\text{Cotangent}}(R \\to T)$\"}\n  {\"name\": \"Algebra.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (S' : Type u_2) →\\n            [inst_3 : CommRing S'] →\\n              [inst_4 : Algebra R S'] →\\n                (T : Type w) →\\n                  [inst_5 : CommRing T] →\\n \", \"doc\": \"The $ S' $-linear map from the first cotangent cohomology module of $ R \\to S' $ to that of $ S \\to T $, induced by the canonical algebra homomorphism between the generator-based extensions of $ S' $ an\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"For algebra extensions $ P $ and $ Q $, the composition of the base-changed cotangent complex map with the lifted base change of the cotangent space homomorphism induced by $ Q \\\\circ P $ equals the co\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not state etale sheaf cohomology detection over strict localizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"stalk\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"TopCat.Presheaf.stalk\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X : TopCat} (ℱ : TopCat.Presheaf C X) (x : ↑X) : C\", \"doc\": \"The stalk of a presheaf `F` at a point `x` is calculated as the colimit of the functor\\nnbhds x ⥤ opens F.X ⥤ C\\n\"}\n  {\"name\": \"TopCat.Presheaf.stalkFunctor\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X : TopCat} (x : ↑X) : CategoryTheory.Functor (TopCat.Presheaf C X) C\", \"doc\": \"Stalks are functorial with respect to morphisms of presheaves over a fixed `X`. \"}\n  {\"name\": \"TopCat.Presheaf.stalkCongr\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X : TopCat} (F : TopCat.Presheaf C X) {x y : ↑X} (e : Inseparable x y) : F.stalk x ≅ F.stalk y\", \"doc\": \"The stalks are isomorphic on inseparable points \"}\n  {\"name\": \"TopCat.Presheaf.stalkFunctor_obj\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X : TopCat} (ℱ : TopCat.Presheaf C X) (x : ↑X) : (TopCat.Presheaf.stalkFunctor C x).obj ℱ = ℱ.stalk x\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X : TopCat} (F : TopCat.Presheaf C X) {x y : ↑X} (h : x ⤳ y) : F.stalk y ⟶ F.stalk x\", \"doc\": \"If `x` specializes to `y`, then there is a natural map `F.stalk y ⟶ F.stalk x`. \"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_refl\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X : TopCat} (F : TopCat.Presheaf C X) (x : ↑X) : F.stalkSpecializes ⋯ = CategoryTheory.CategoryStruct.id (F.stalk x)\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.stalkCongr_hom\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X : TopCat} (F : TopCat.Presheaf C X) {x y : ↑X} (e : Inseparable x y) : (F.stalkCongr e).hom = F.stalkSpecializes ⋯\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.stalkCongr_inv\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X : TopCat} (F : TopCat.Presheaf C X) {x y : ↑X} (e : Inseparable x y) : (F.stalkCongr e).inv = F.stalkSpecializes ⋯\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.stalkFunctor_preserves_mono\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X : TopCat} {FC : C → C → Type u_1} {CC : C → Type v} [(X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [instCC : CategoryTheory.ConcreteCategory C FC] [CategoryTheory.Limits.PreservesFilteredColimits (CategoryTheory.\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_comp\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X : TopCat} (F : TopCat.Presheaf C X) {x y z : ↑X} (h : x ⤳ y) (h' : y ⤳ z) : CategoryTheory.CategoryStruct.comp (F.stalkSpecializes h') (F.stalkSpecializes h) = F.stalkSpecializes ⋯\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.stalkPullbackIso\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x : ↑X) : F.stalk ((CategoryTheory.ConcreteCategory.hom f) x) ≅ ((TopCat.Presheaf.pullback C f).obj F).stalk x\", \"doc\": \"The isomorphism `ℱ_{f(x)} ≅ (f⁻¹ℱ)ₓ`. \"}\n  {\"name\": \"TopCat.Presheaf.stalkPushforward\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C X) (x : ↑X) : ((TopCat.Presheaf.pushforward C f).obj F).stalk ((CategoryTheory.ConcreteCategory.hom f) x) ⟶ F.stalk x\", \"doc\": \"For a presheaf `F` on a space `X`, a continuous map `f : X ⟶ Y` induces a morphisms between the\\nstalk of `f _ * F` at `f x` and the stalk of `F` at `x`.\\n\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not state etale sheaf cohomology detection over strict localizations"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel|StrictHensel|indEtale.*cohomology|cohomology.*indEtale",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not state etale sheaf cohomology detection over strict localizations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology comparison over a strict localization is equivalent to comparison over every geometric fibre",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-smooth-local-acyclicity",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-strict-local-geometric-fibre-test",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: Tag 0EZV fixed-lift assertion fails for a nodal normalization branch. Corrected to all lifts over the same geometric point and proved by split ind-etale base geometry, clopen germ extension, 09AY exact conservative sections, and unrestricted 03Q9 stalks. Reused existing nodes; no new nodes. Existing citer uses only the surviving first-to-selected-fibre implication.",
+  "blueprint": "Proof, first paragraph: \"the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$\". Constructibility clause, via the existing 0GL0 -> 0GKW -> 0GKV case (a) -> 0GKD branch; 0GKD invokes 0GJQ, 0GJR and 0GJW. Ingredient of Tag 0GJQ: Tag 0EZV, lemma-check-stalks-better",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-ring-base-change",
+    "why": "Generic geometry, etale sheaf, or cohomology tool used in the all-lifts repair of 0EZV; the proper-base-change unit does not provide this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-over-field-product",
+    "why": "Generic geometry, etale sheaf, or cohomology tool used in the all-lifts repair of 0EZV; the proper-base-change unit does not provide this general statement."
+   },
+   {
+    "node": "lem-pc-sepclosed-finite-sep-trivial",
+    "why": "Generic geometry, etale sheaf, or cohomology tool used in the all-lifts repair of 0EZV; the proper-base-change unit does not provide this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-spec-small-colimit-limit",
+    "why": "Generic geometry, etale sheaf, or cohomology tool used in the all-lifts repair of 0EZV; the proper-base-change unit does not provide this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-spec-finite-product-fields",
+    "why": "Generic geometry, etale sheaf, or cohomology tool used in the all-lifts repair of 0EZV; the proper-base-change unit does not provide this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "why": "Generic geometry, etale sheaf, or cohomology tool used in the all-lifts repair of 0EZV; the proper-base-change unit does not provide this general statement."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic geometry, etale sheaf, or cohomology tool used in the all-lifts repair of 0EZV; the proper-base-change unit does not provide this general statement."
+   },
+   {
+    "node": "lem-cbc-affine-sepclosed-etale-acyclic",
+    "why": "Generic geometry, etale sheaf, or cohomology tool used in the all-lifts repair of 0EZV; the proper-base-change unit does not provide this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic geometry, etale sheaf, or cohomology tool used in the all-lifts repair of 0EZV; the proper-base-change unit does not provide this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "why": "Generic geometry, etale sheaf, or cohomology tool used in the all-lifts repair of 0EZV; the proper-base-change unit does not provide this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Generic geometry, etale sheaf, or cohomology tool used in the all-lifts repair of 0EZV; the proper-base-change unit does not provide this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+    "why": "Generic geometry, etale sheaf, or cohomology tool used in the all-lifts repair of 0EZV; the proper-base-change unit does not provide this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic inverse-image stalk theorem with explicit germ compatibility identifies the degree-zero source and unit; no statement of the proper-base-change unit supplies this general sheaf fact."
+   },
+   {
+    "node": "lem-weil-pbc-spec-clopen-idempotent",
+    "why": "Generic affine scheme tool identifies clopen refinements with affine spectra C_e and makes the strict-local ring-colimit argument explicit."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Generic long exact sequence of right derived functors, used only to deduce exact global sections from H^1 vanishing; no proper-base-change theorem is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic enough-injectives theorem for small etale abelian sheaves supplies the hypothesis of the right-derived long exact sequence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-pc-sepclosed-finite-sep-trivial",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-cbc-affine-sepclosed-etale-acyclic",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-17aeaee63",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-17aeaee63 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited statements/sources. Verified the nodal counterexample to 0EZV, the all-lifts correction, all seven proof steps, and preservation of the sole citer’s implication. Repaired C1 in step 4 by adding existing long-exact-sequence and enough-injectives citations. No targets weakened or new nodes added. Wrote review.md and corrected item JSON under fixes/.; 1 file(s) fixed by the reviewer"
+ }
 }
