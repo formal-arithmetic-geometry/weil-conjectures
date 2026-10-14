@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-heart-short-exact-triangles",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Short exact sequences in the heart are triangles",
@@ -18,49 +18,269 @@
  ],
  "proof": [
   {
-   "text": "Throughout, axiom 1 of [def-weil-t-structure] gives $\\mathcal T^{\\le\nn-1}\\subseteq\\mathcal T^{\\le n}$ and $\\mathcal T^{\\ge n+1}\\subseteq\n\\mathcal T^{\\ge n}$, and axiom 2, shifted, gives $\\Hom(A,B)=0$ for\n$A\\in\\mathcal T^{\\le n}$, $B\\in\\mathcal T^{\\ge n+1}$. We use the long exact\n$\\Hom$ sequences of distinguished triangles freely.",
+   "text": "Shift the three axioms of [def-weil-t-structure] to level $n$. They give $\\mathcal T^{\\le n-1}\\subseteq\\mathcal T^{\\le n}$, $\\mathcal T^{\\ge n+1}\\subseteq\\mathcal T^{\\ge n}$, vanishing $\\operatorname{Hom}(P,Q)=0$ for $P\\le n<Q$, and a triangle $A\\xrightarrow a K\\xrightarrow b B\\xrightarrow d A[1]$ with $A\\le n$, $B\\ge n+1$. In all following steps, exactness of covariant Hom means [lem-weil-pbc-hom-into-triangle-exact], and exactness of contravariant Hom means [lem-weil-pbc-hom-out-of-triangle-exact], applied also to signed rotations supplied by [def-weil-triangulated-category]. Thus each vanishing composite has the asserted factorization; neither lemma asserts uniqueness without an additional vanishing argument.",
    "uses": [
-    "def-weil-t-structure"
+    "def-weil-t-structure",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.1, 1.3.3 proof; compare Stacks Tags 0146 and 0149, derived.tex, lemma-composition-zero and lemma-representable-homological"
+   }
   },
   {
-   "text": "*(1).* Let $A\\to K\\to B\\to A[1]$ be a triangle as in axiom 3 (shifted to\nlevel $n$). For $A'\\in\\mathcal T^{\\le n}$ the sequence\n$\\Hom(A',B[-1])\\to\\Hom(A',A)\\to\\Hom(A',K)\\to\\Hom(A',B)$ has both outer\nterms zero ($B[-1],B\\in\\mathcal T^{\\ge n+1}$), so $A$ represents\n$\\Hom(-,K)$ on $\\mathcal T^{\\le n}$. Hence $A=:\\tau^{\\le n}K$ is unique up\nto unique isomorphism and functorial in $K$, right adjoint to the\ninclusion; dually $B=:\\tau^{\\ge n+1}K$ represents $\\Hom(K,-)$ on $\\mathcal\nT^{\\ge n+1}$. The third morphism is unique because $\\Hom(A[1],B)=0$ (the\nargument of (4) below). Two consequences: $K\\in\\mathcal T^{\\le n}$ iff\n$\\tau^{\\ge n+1}K=0$, and $K\\in\\mathcal T^{\\ge n+1}$ iff $\\Hom(A',K)=0$ for\nall $A'\\in\\mathcal T^{\\le n}$ (then $\\tau^{\\le n}K\\to K$ is zero, so\n$\\tau^{\\le n}K=0$); dually $\\mathcal T^{\\le n}$ is the left orthogonal of\n$\\mathcal T^{\\ge n+1}$. For $K\\in\\mathcal T^{\\le0}$ the object\n$\\tau^{\\ge0}K$ is an extension of $K$ and $(\\tau^{\\le-1}K)[1]$, so it lies\nin $\\mathcal T^{\\le0}$ by (2) (whose proof uses only the orthogonality just\nshown); dually $\\tau^{\\le0}$ preserves $\\mathcal T^{\\ge0}$. So $H^0$ takes\nvalues in $\\mathcal A$. For the commutation, the octahedral axiom applied\nto $\\tau^{\\le-1}K\\to\\tau^{\\le0}K\\to K$ (the first map is the truncation of\n$\\tau^{\\le0}K$, since both represent $\\Hom(-,K)$ on $\\mathcal T^{\\le-1}$)\ngives a distinguished triangle\n$\\tau^{\\ge0}\\tau^{\\le0}K\\to\\tau^{\\ge0}K\\to\\tau^{\\ge1}K\\to$, whose first\nterm lies in $\\mathcal T^{\\le0}$ and whose third lies in $\\mathcal\nT^{\\ge1}$. By uniqueness it is the truncation triangle of $\\tau^{\\ge0}K$,\nso $\\tau^{\\ge0}\\tau^{\\le0}K\\cong\\tau^{\\le0}\\tau^{\\ge0}K$.",
-   "uses": [],
-   "elementary": null
+   "text": "For $P\\le n$, covariant Hom exactness and $\\operatorname{Hom}(P,B[-1])=\\operatorname{Hom}(P,B)=0$ show that composition with $a$ bijects $\\operatorname{Hom}(P,A)$ with $\\operatorname{Hom}(P,K)$. Dually, for $Q\\ge n+1$, $\\operatorname{Hom}(A[1],Q)=\\operatorname{Hom}(A,Q)=0$ show that precomposition with $b$ bijects $\\operatorname{Hom}(B,Q)$ with $\\operatorname{Hom}(K,Q)$. For a map $K\\to K'$, these bijections uniquely define maps $A\\to A'$ and $B\\to B'$. Uniqueness proves preservation of identities and composition, naturality of $a,b$, and the two adjunctions. Two choices are uniquely isomorphic under/over $K$: apply the bijections to the structure maps in both directions; the composites are identities by their uniqueness. TR3 extends the map on $A,K$ to a triangle morphism, and its component on $B$ must be the already constructed one by the second bijection. In particular it respects $d$. For two possible $d,d'$ on fixed $a,b$, TR3 gives $h:B\\to B$ with $hb=b$ and $d'h=d$. Contravariant Hom exactness factors $h-1$ through $d$ via a map $A[1]\\to B$, which is zero since $A[1]\\le n-1$ and $B\\ge n+1$. Thus $h=1$ and $d=d'$. This proves uniqueness of the entire truncation triangle fixing $K$. The Hom bijections respect addition, so the truncation functors are additive.",
+   "uses": [
+    "def-weil-t-structure",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.3; 1.1.9–1.1.10 for uniqueness of triangle morphisms"
+   }
   },
   {
-   "text": "*(2).* By (1), $\\mathcal T^{\\ge n+1}$ is the right orthogonal of $\\mathcal\nT^{\\le n}$, and a right orthogonal is closed under extensions: for\n$A'\\in\\mathcal T^{\\le n}$ the sequence\n$\\Hom(A',X)\\to\\Hom(A',Y)\\to\\Hom(A',Z)$ is exact with zero outer terms.\nDually for $\\mathcal T^{\\le n}$, and $\\mathcal A$ is the intersection.",
-   "uses": [],
-   "elementary": null
+   "text": "These bijections also give the orthogonal characterizations without a boundedness assumption. If $\\operatorname{Hom}(P,K)=0$ for every $P\\le n$, taking $P=A$ gives $\\operatorname{Hom}(A,A)=0$, so $A=0$. Hom exactness for $0\\to K\\xrightarrow b B\\to0$ makes composition with $b$ a bijection on every represented Hom set; evaluating at $B$ and $K$ supplies a two-sided inverse, so $K\\simeq B\\ge n+1$. Conversely this membership gives the stated vanishing by orthogonality. If instead $\\operatorname{Hom}(K,Q)=0$ for every $Q\\ge n+1$, the second bijection of step 2 with $Q=B$ gives $\\operatorname{Hom}(B,B)=0$, hence $B=0$. Covariant Hom exactness for $A\\xrightarrow a K\\to0\\to A[1]$ makes composition with $a$ bijective on $\\operatorname{Hom}(W,-)$ for every $W$; taking $W=K,A$ gives an inverse for $a$. Thus $K\\simeq A\\le n$. Conversely $K\\le n$ implies this Hom vanishing by orthogonality. In particular $\\tau^{\\le n}K=0$ iff $K\\ge n+1$, and $\\tau^{\\ge n+1}K=0$ iff $K\\le n$.",
+   "uses": [
+    "def-weil-t-structure",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.4, first paragraph"
+   }
   },
   {
-   "text": "*(3).* The object $S$ is an extension of $Y$ and $X[1]$, both in\n$\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge-1}$, so $S$ lies there by (2);\nconsequently $\\tau^{\\le-1}S\\in\\mathcal T^{\\le-1}\\cap\\mathcal T^{\\ge-1}$\nand $\\tau^{\\ge0}S\\in\\mathcal A$ by (1), and these are $H^{-1}(S)[1]$ and\n$H^0(S)$. Let $T\\in\\mathcal A$. The sequence\n$\\Hom(X[1],T)\\to\\Hom(S,T)\\to\\Hom(Y,T)\\to\\Hom(X,T)$ is exact with\n$\\Hom(X[1],T)=0$, and $\\Hom(\\tau^{\\ge0}S,T)=\\Hom(S,T)$ by adjunction. So\n$\\Hom(\\tau^{\\ge0}S,T)$ is the set of $h:Y\\to T$ with $hf=0$, that is,\n$Y\\to\\tau^{\\ge0}S$ is a cokernel of $f$. Dually, $\\Hom(T,Y[-1])=0$ and\n$\\Hom(T,(\\tau^{\\le-1}S)[-1])=\\Hom(T,\\tau^{\\le0}(S[-1]))=\\Hom(T,S[-1])$, so\n$\\Hom(T,(\\tau^{\\le-1}S)[-1])$ is the set of $h:T\\to X$ with $fh=0$, and\n$(\\tau^{\\le-1}S)[-1]\\to X$ is a kernel of $f$.",
-   "uses": [],
-   "elementary": null
+   "text": "If $X\\to Y\\to Z\\to X[1]$ is distinguished and $X,Z\\ge n+1$, covariant Hom exactness gives $\\operatorname{Hom}(P,Y)=0$ for every $P\\le n$, since its two neighbouring groups vanish. Step 3 implies $Y\\ge n+1$. If $X,Z\\le n$, then for each $Q\\ge n+1$ the exact sequence $\\operatorname{Hom}(Z,Q)\\to\\operatorname{Hom}(Y,Q)\\to\\operatorname{Hom}(X,Q)$ has zero outer groups. Thus $\\operatorname{Hom}(Y,Q)=0$ for all such $Q$, and step 3 gives $Y\\le n$. Intersecting at level zero proves extension closure of the heart. This proves clause (2) before using it in clause (1).",
+   "uses": [
+    "def-weil-t-structure",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.4, extension stability"
+   }
   },
   {
-   "text": "*(4).* Keep the triangle of (3). If $X\\xrightarrow fY\\xrightarrow gZ\n\\xrightarrow\\delta X[1]$ is distinguished with $Z\\in\\mathcal A$, then\n$S\\cong Z\\in\\mathcal T^{\\ge0}$, so $\\tau^{\\le-1}S=0$ and $\\ker f=0$, while\n$\\tau^{\\ge0}S=S$, so $g$ is a cokernel of $f$ by (3); the sequence is short\nexact. Conversely, let $0\\to X\\to Y\\to Z\\to0$ be short exact. Then $\\ker\nf=0$ gives $\\tau^{\\le-1}S=0$ by (3), so $S\\in\\mathcal A$ and $Y\\to S$ is a\ncokernel of $f$. The unique isomorphism $S\\cong Z$ under $Y$ carries the\ntriangle of (3) to a distinguished triangle $X\\to Y\\to Z\\to X[1]$. If\n$\\delta,\\delta'$ both complete $(f,g)$, the morphism axiom gives\n$h:Z\\to Z$ with $hg=g$ and $\\delta'h=\\delta$. Then $(h-1)g=0$, so\n$h-1$ factors through $\\delta$ via some $X[1]\\to Z$; but\n$\\Hom(X[1],Z)=0$ because $X[1]\\in\\mathcal T^{\\le-1}$ and $Z\\in\\mathcal\nT^{\\ge0}$. So $h=1$ and $\\delta'=\\delta$.",
-   "uses": [],
-   "elementary": null
+   "text": "For $K\\le b$, rotate its truncation triangle at $a-1$ to $K\\to\\tau^{\\ge a}K\\to(\\tau^{\\le a-1}K)[1]\\to$. If $a\\le b$, both endpoints are $\\le b$, hence $\\tau^{\\ge a}K\\le b$ by step 4. Still assuming $a\\le b$, for $K\\ge a$, inverse rotation of the truncation triangle at $b$ gives endpoints $(\\tau^{\\ge b+1}K)[-1]\\ge b+2\\ge a$ and $K\\ge a$, so $\\tau^{\\le b}K\\ge a$. In particular both $\\tau^{\\ge0}\\tau^{\\le0}K$ and $\\tau^{\\le0}\\tau^{\\ge0}K$ lie in the heart. The universal properties also show $\\tau^{\\le a}\\tau^{\\le b}\\simeq\\tau^{\\le a}$ for $a\\le b$: both represent $\\operatorname{Hom}(-,K)$ on $\\mathcal T^{\\le a}$. For $Q\\ge b$, the left adjunction twice identifies $\\operatorname{Hom}(\\tau^{\\ge b}\\tau^{\\ge a}K,Q)$ with $\\operatorname{Hom}(\\tau^{\\ge a}K,Q)=\\operatorname{Hom}(K,Q)$, since $Q\\ge b\\ge a$. Thus $\\tau^{\\ge b}\\tau^{\\ge a}\\simeq\\tau^{\\ge b}$ by the uniqueness of the representing object. These identifications are natural because they preserve the representing maps.",
+   "uses": [
+    "def-weil-t-structure",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.4, last paragraphs"
+   }
   },
   {
-   "text": "*(5).* Rotating triangles, it suffices to show that $H^0X\\to H^0Y\\to H^0Z$\nis exact at $H^0Y$ for every distinguished $X\\to Y\\to Z\\to X[1]$.\n\n(a) If $X,Y,Z\\in\\mathcal T^{\\ge0}$, then $0\\to H^0X\\to H^0Y\\to H^0Z$ is\nexact: for $K\\in\\mathcal T^{\\ge0}$ and $T\\in\\mathcal A$, (1) gives\n$H^0K=\\tau^{\\le0}K$ and $\\Hom(T,H^0K)=\\Hom(T,K)$, and\n$0=\\Hom(T,Z[-1])\\to\\Hom(T,X)\\to\\Hom(T,Y)\\to\\Hom(T,Z)$ is exact; conclude by\nYoneda in the abelian category $\\mathcal A$. Dually, if $X,Y,Z\\in\\mathcal\nT^{\\le0}$, then $H^0X\\to H^0Y\\to H^0Z\\to0$ is exact, using\n$\\Hom(H^0K,T)=\\Hom(K,T)$ for $K\\in\\mathcal T^{\\le0}$.\n\n(b) If $Z\\in\\mathcal T^{\\ge0}$, the octahedral axiom applied to\n$\\tau^{\\le-1}X\\to X\\to Y$ gives distinguished triangles\n$\\tau^{\\le-1}X\\to Y\\to Y''\\to$ and $\\tau^{\\ge0}X\\to Y''\\to Z\\to$. By (2)\n$Y''\\in\\mathcal T^{\\ge0}$, so the first is the truncation triangle and\n$Y''\\cong\\tau^{\\ge0}Y$. Since $H^0\\tau^{\\ge0}=H^0$ by the commutation in\n(1), (a) applied to $\\tau^{\\ge0}X\\to\\tau^{\\ge0}Y\\to Z$ gives the exact\nsequence $0\\to H^0X\\to H^0Y\\to H^0Z$. Dually, if $X\\in\\mathcal T^{\\le0}$,\napplying the octahedral axiom to $Y\\to Z\\to\\tau^{\\ge1}Z$ gives a\ntriangle $X\\to\\tau^{\\le0}Y\\to\\tau^{\\le0}Z\\to$ and an exact sequence\n$H^0X\\to H^0Y\\to H^0Z\\to0$.\n\n(c) In general, apply the octahedral axiom to $\\tau^{\\le0}X\\to X\\to Y$.\nIt gives distinguished triangles $\\tau^{\\le0}X\\to Y\\to W\\to$ and\n$\\tau^{\\ge1}X\\to W\\to Z\\to$, with $Y\\to W\\to Z$ equal to the given map\n$Y\\to Z$. By the second half of (b), $H^0X=H^0\\tau^{\\le0}X\\to H^0Y\\to\nH^0W\\to0$ is exact. Rotating the second triangle to $W\\to Z\\to\n(\\tau^{\\ge1}X)[1]\\to W[1]$, whose third term lies in $\\mathcal T^{\\ge0}$,\nthe first half of (b) shows that $H^0W\\to H^0Z$ is a monomorphism. Hence\n$\\ker(H^0Y\\to H^0Z)=\\ker(H^0Y\\to H^0W)=\\operatorname{im}(H^0X\\to H^0Y)$.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply TR4 to $\\tau^{\\le-1}K\\to\\tau^{\\le0}K\\to K$. The composite is the truncation map at $-1$, by the universal property in step 5. The three cones are $H=\\tau^{\\ge0}\\tau^{\\le0}K$, $\\tau^{\\ge1}K$, and $\\tau^{\\ge0}K$. The octahedron therefore gives a distinguished triangle $H\\to\\tau^{\\ge0}K\\to\\tau^{\\ge1}K\\to H[1]$, with the comparison maps commuting with the structure maps from $\\tau^{\\le0}K$ and $K$. As $H\\le0$ and $\\tau^{\\ge1}K\\ge1$, step 2 identifies its first term with $\\tau^{\\le0}\\tau^{\\ge0}K$. The comparison is the unique map characterized by those commuting squares: first factor $\\tau^{\\le0}K\\to\\tau^{\\ge0}K$ through $\\tau^{\\ge0}\\tau^{\\le0}K$ using the left adjunction, then factor to $\\tau^{\\le0}\\tau^{\\ge0}K$ using the right adjunction. These factorizations are natural, so the isomorphism is canonical and natural. Together with step 5 this defines the additive heart-valued functor $H^0$. Shifting the representing bijections proves $\\tau^{\\le a}(K[r])\\simeq(\\tau^{\\le a+r}K)[r]$, and likewise for $\\tau^{\\ge a}$. In particular $H^{-1}(S)\\simeq(\\tau^{\\ge-1}\\tau^{\\le-1}S)[-1]$. The nested-truncation identifications imply $H^0(\\tau^{\\le0}K)\\simeq H^0K$ and $H^0(\\tau^{\\ge0}K)\\simeq H^0K$, compatibly with the canonical truncation maps.",
+   "uses": [
+    "def-weil-t-structure",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.5, octahedron (1.3.5.1) at a=b=0; 1.3.6 definition of H⁰"
+   }
+  },
+  {
+   "text": "Let $f:X\\to Y$ be in the heart and choose a distinguished triangle $X\\xrightarrow fY\\to S\\to X[1]$ using TR1. Its rotation exhibits $S$ as an extension of $X[1]$ by $Y$. Both lie in $\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge-1}$, so step 4 puts $S$ there. Step 5 puts $\\tau^{\\le-1}S$ in degree $-1$ alone and $\\tau^{\\ge0}S$ in the heart. Consequently $K=(\\tau^{\\le-1}S)[-1]$ and $Q=\\tau^{\\ge0}S$ are heart objects. Step 6 identifies them with $H^{-1}(S)$ and $H^0(S)$ respectively.",
+   "uses": [
+    "def-weil-t-structure",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.6 proof, first paragraph"
+   }
+  },
+  {
+   "text": "For any heart object $T$, contravariant Hom exactness gives $\\operatorname{Hom}(X[1],T)\\to\\operatorname{Hom}(S,T)\\to\\operatorname{Hom}(Y,T)\\to\\operatorname{Hom}(X,T)$. The first term vanishes, and the left adjunction identifies $\\operatorname{Hom}(Q,T)$ with $\\operatorname{Hom}(S,T)$. Thus $Y\\to S\\to Q$ is a cokernel of $f$, including uniqueness of factorization. In the inverse-rotated triangle, covariant Hom exactness gives $\\operatorname{Hom}(T,Y[-1])\\to\\operatorname{Hom}(T,S[-1])\\to\\operatorname{Hom}(T,X)\\to\\operatorname{Hom}(T,Y)$, with first group zero. The right adjunction and shift compatibility identify $\\operatorname{Hom}(T,K)$ with $\\operatorname{Hom}(T,S[-1])$. Therefore the displayed map $K\\to S[-1]\\to X$ is a kernel of $f$. These are universal properties inside the full heart, not an appeal to a general Yoneda lemma. This proves clause (3).",
+   "uses": [
+    "def-weil-t-structure",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.6 proof; 1.2.2 kernel and cokernel construction"
+   }
+  },
+  {
+   "text": "Use the abelian structure of the heart from [prop-weil-heart-abelian]. If $X\\xrightarrow fY\\xrightarrow gZ\\to X[1]$ is distinguished with $X,Y,Z$ in the heart, steps 7–8 with $S=Z$ give $\\ker f=0$ and say that $g$ is a cokernel of $f$. Thus $f$ is monic and the sequence is short exact. Conversely, for a short exact sequence choose the cone $S$ of $f$. Since $\\ker f=0$, step 8 gives $\\tau^{\\le-1}S=0$. The truncation triangle then identifies $S$ with $\\tau^{\\ge0}S$, so $S$ is in the heart. Both $Y\\to S$ and $g:Y\\to Z$ are cokernels of $f$ in that abelian category. Their universal properties give inverse maps $S\\simeq Z$ commuting with the maps from $Y$. Conjugate the cone triangle by this isomorphism using TR1 to obtain the required $\\delta$. If $\\delta,\\delta'$ both work, TR3 with identities on $X,Y$ gives $h:Z\\to Z$ with $hg=g$ and $\\delta'h=\\delta$. Contravariant Hom exactness factors $h-1$ through $\\delta$ via $X[1]\\to Z$, which vanishes since $X[1]\\le-1$ and $Z\\ge0$. Hence $h=1$ and $\\delta'=\\delta$. This proves clause (4).",
+   "uses": [
+    "def-weil-t-structure",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "prop-weil-heart-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.6 and admissibility 1.2.2–1.2.5; uniqueness from 1.1.9–1.1.10"
+   }
+  },
+  {
+   "text": "For a distinguished triangle with all three terms $\\ge0$, step 2 gives natural bijections $\\operatorname{Hom}(T,H^0K)\\simeq\\operatorname{Hom}(T,K)$ for heart objects $T$. Covariant Hom exactness, including $\\operatorname{Hom}(T,Z[-1])=0$, says that the first map $H^0X\\to H^0Y$ is a kernel of the second: maps killed by the second factor uniquely through the first. This is precisely $0\\to H^0X\\to H^0Y\\to H^0Z$ exact. For a triangle with all terms $\\le0$, use instead $\\operatorname{Hom}(H^0K,T)\\simeq\\operatorname{Hom}(K,T)$. Contravariant Hom exactness and $\\operatorname{Hom}(X[1],T)=0$ show that $H^0Y\\to H^0Z$ is a cokernel of $H^0X\\to H^0Y$. In the abelian heart a cokernel is epic and its kernel is the image of the preceding map. This proves $H^0X\\to H^0Y\\to H^0Z\\to0$ exact. Only the supplied abelian structure and these kernel/cokernel universal properties enter.",
+   "uses": [
+    "def-weil-t-structure",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "prop-weil-heart-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.6 proof, Cas 1 and its dual"
+   }
+  },
+  {
+   "text": "Suppose only $Z\\ge0$. Apply TR4 to $\\tau^{\\le-1}X\\to X\\to Y$, choosing a cone $Y''$ of the composite. It gives triangles $\\tau^{\\le-1}X\\to Y\\to Y''\\to$ and $\\tau^{\\ge0}X\\to Y''\\to Z\\to$. Their squares state that $Y\\to Y''\\to Z$ is the original $g$ and that the square from $X\\to Y$ to $\\tau^{\\ge0}X\\to Y''$ commutes. Step 4 gives $Y''\\ge0$, so the first triangle is the truncation triangle at $-1$ by step 2; hence $Y''\\simeq\\tau^{\\ge0}Y$ compatibly with $Y\\to Y''$. The second triangle has all terms $\\ge0$, so step 10 applies. The natural $H^0$-isomorphisms of step 6 identify its first two terms and arrows with $H^0X\\to H^0Y$. Thus $0\\to H^0X\\to H^0Y\\to H^0Z$ is exact.",
+   "uses": [
+    "def-weil-t-structure",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.6 proof, Cas 2*; expanded octahedral construction as in blueprint (5)(b)"
+   }
+  },
+  {
+   "text": "Suppose only $X\\le0$. Complete $Y\\to Z\\to\\tau^{\\ge1}Z$ to a triangle $Y'\\to Y\\to\\tau^{\\ge1}Z\\to$ (TR1 and inverse rotation). Write $L=\\tau^{\\le0}Z$ and $R=\\tau^{\\ge1}Z$. For $Y\\to Z\\to R$, the cones of the first map, second map and composite are respectively $X[1]$, $L[1]$ and $Y'[1]$, using the rotations of the original triangle, the truncation triangle and the chosen triangle. TR4 gives $X[1]\\xrightarrow\\alpha Y'[1]\\xrightarrow\\beta L[1]\\to X[2]$. Its commuting squares give $v[1]\\alpha=f[1]$ and $l[1]\\beta=g[1]v[1]$, where $v:Y'\\to Y$ and $l:L\\to Z$. Shifting by $[-1]$ gives the distinguished triangle with first two arrows $\\alpha[-1]$ and $\\beta[-1]$ and the negative shifted connecting map (this sign follows from three inverse rotations). Thus one obtains a triangle $X\\to Y'\\to\\tau^{\\le0}Z\\to$ and squares with $X\\to Y\\to Z$: the square on first arrows commutes, and $Y'\\to Y\\to Z$ equals $Y'\\to\\tau^{\\le0}Z\\to Z$. Step 4 gives $Y'\\le0$. Therefore $Y'\\to Y\\to\\tau^{\\ge1}Z$ is a truncation triangle at zero, so $Y'\\simeq\\tau^{\\le0}Y$ compatibly with $Y'\\to Y$. Apply the right-exact half of step 10 to $X\\to Y'\\to\\tau^{\\le0}Z$. By step 6 and the indicated commuting squares its image is $H^0X\\to H^0Y\\to H^0Z\\to0$, with the original arrows. This establishes the other half of blueprint (5)(b), including the necessary map comparisons.",
+   "uses": [
+    "def-weil-t-structure",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.6 proof, Cas 2; TR4′ is TR4 after signed inverse rotations"
+   }
+  },
+  {
+   "text": "For an arbitrary triangle $X\\to Y\\to Z\\to X[1]$, apply TR4 to $\\tau^{\\le0}X\\to X\\to Y$. With $W$ the cone of the composite it supplies triangles $\\tau^{\\le0}X\\to Y\\to W\\to$ and $\\tau^{\\ge1}X\\to W\\to Z\\to$, and the equation $Y\\to W\\to Z=g$. Step 12 on the first triangle gives an exact sequence $H^0X\\to H^0Y\\to H^0W\\to0$, using step 6 on its first map. Rotate the second triangle to $W\\to Z\\to(\\tau^{\\ge1}X)[1]\\to$. Its third term is $\\ge0$, so step 11 makes $H^0W\\to H^0Z$ monic. Hence a map to $H^0Y$ is killed by $H^0g$ exactly when it is killed by $H^0Y\\to H^0W$; the latter has kernel equal to the image of $H^0X\\to H^0Y$. This proves exactness at $H^0Y$ for every distinguished triangle.",
+   "uses": [
+    "def-weil-t-structure",
+    "def-weil-triangulated-category",
+    "prop-weil-heart-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.6 proof, Cas général"
+   }
+  },
+  {
+   "text": "The additivity established in steps 2 and 6, and step 13 applied also to rotated triangles, show that $H^0$ is homological in the terminology of [def-sp-homological-functor] (the covariant cohomological convention of BBD). Apply [lem-sp-long-exact-of-triangle] to this functor, with its abelian target given by [prop-weil-heart-abelian], and use the tautological shifted functors $H^i(K)=H^0(K[i])$. It gives exactly $\\cdots\\to H^iX\\to H^iY\\to H^iZ\\to H^{i+1}X\\to\\cdots$, naturally in the triangle. The boundary is $H^0$ of the shifted third map, with the standard shift comparison; signed rotations change neighbouring maps by signs, which do not change their kernels or images. This proves clause (5).",
+   "uses": [
+    "def-sp-homological-functor",
+    "lem-sp-long-exact-of-triangle",
+    "prop-weil-heart-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.6; compare Stacks derived.tex, definition-homological and equation-long-exact-cohomology-sequence"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-t-structure"
+  "def-weil-t-structure",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "prop-weil-heart-abelian",
+  "def-sp-homological-functor",
+  "lem-sp-long-exact-of-triangle"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/lem-weil-heart-short-exact-triangles.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "Proposition 1.3.3, paragraphs 1.3.4, Proposition 1.3.5, Theorem 1.3.6, pp. 29–32; kernel/cokernel and connecting-map details from 1.2.2–1.2.5 and 1.1.9–1.1.10"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a pretriangulated category applying Hom from or into an object to a distinguished triangle gives an exact sequence of abelian groups",
+   "results": "CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₁; CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂; CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₃; CategoryTheory.Pretriangulated.Triangle.yoneda_exact₂; CategoryTheory.Pretriangulated.Triangle.yoneda_exact₃; CategoryTheory.Pretriangulated.preadditiveYoneda_map_distinguished; CategoryTheory.ShortComplex.ShortExact.singleTriangle; DerivedCategory.triangleOfSES",
+   "date": "2026-10-14",
+   "verdict": "partial match: Hom exactness is already represented by lem-weil-pbc-hom-into-triangle-exact and lem-weil-pbc-hom-out-of-triangle-exact"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma (co)?yoneda_exact|lemma comp_distTriang_mor_zero",
+   "results": "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean; Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean; Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean; Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean; Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+   "date": "2026-10-14",
+   "verdict": "partial match: Hom exactness is already represented by lem-weil-pbc-hom-into-triangle-exact and lem-weil-pbc-hom-out-of-triangle-exact"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Applying covariant and contravariant Hom to a distinguished triangle gives exact sequences",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂",
+   "results": "CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂",
+   "date": "2026-10-14",
+   "verdict": "partial match: Hom exactness is already represented by lem-weil-pbc-hom-into-triangle-exact and lem-weil-pbc-hom-out-of-triangle-exact"
+  },
+  {
+   "tool": "grep",
+   "query": "shortExact_iff_exists_distTriang|isHomological_homology|truncGELEIsoLEGE|isLE₂|isGE₂",
+   "results": "Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean",
+   "date": "2026-10-14",
+   "verdict": "partial match: Hom exactness is already represented by lem-weil-pbc-hom-into-triangle-exact and lem-weil-pbc-hom-out-of-triangle-exact"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary t-structure, truncation adjunctions commute, the heart is extension closed, kernels and cokernels are truncations of cones, short exact sequences are distinguished triangles, and zeroth cohomology is cohomological",
+   "results": "DerivedCategory.TStructure.t; CategoryTheory.Triangulated.TStructure.IsGE; CategoryTheory.Triangulated.TStructure.IsLE; CategoryTheory.Triangulated.TStructure.le; CategoryTheory.Triangulated.TStructure.ge; CategoryTheory.Triangulated.TStructure.instIsGEObjTruncGE; CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished; CategoryTheory.Triangulated.TStructure",
+   "date": "2026-10-14",
+   "verdict": "partial match only: truncation and extension primitives or general homological-functor exactness; not all five clauses for the abstract heart"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The heart of an arbitrary t-structure has short exact sequences precisely given by distinguished triangles and cohomology is a homological functor",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure",
+   "results": "CategoryTheory.Triangulated.TStructure; CategoryTheory.Triangulated.TStructure.IsGE; CategoryTheory.Triangulated.TStructure.IsLE; CategoryTheory.Triangulated.TStructure.bounded; CategoryTheory.Triangulated.TStructure.minus; CategoryTheory.Triangulated.TStructure.plus; CategoryTheory.Triangulated.TStructure.ge; CategoryTheory.Triangulated.TStructure.le",
+   "date": "2026-10-14",
+   "verdict": "partial match only: truncation and extension primitives or general homological-functor exactness; not all five clauses for the abstract heart"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology functor of a t-structure to its abelian heart is homological and a short complex of the heart is short exact if and only if there exists a distinguished triangle with these arrows",
+   "results": "DerivedCategory.triangleOfSES_distinguished; CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished; CategoryTheory.Functor.IsHomological.exact; DerivedCategory.triangleOfSES; CategoryTheory.ShortComplex.ShortExact.singleTriangle; DerivedCategory.mem_distTriang_iff; CategoryTheory.Functor.homologySequence_exact₂; CategoryTheory.Functor.homologySequence_exact₃",
+   "date": "2026-10-14",
+   "verdict": "partial match only: truncation and extension primitives or general homological-functor exactness; not all five clauses for the abstract heart"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps"
@@ -110,5 +330,21 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-heart-short-exact-triangles",
+  "worker": "stage1",
+  "summary": "All five clauses retained, without boundedness or nondegeneracy. Replaced the uncited free use of Hom exactness by the existing two Mathlib leaves, expanded all universal properties and octahedral map comparisons, and reused the long-exact-sequence leaf. No new nodes. Project ShortExact/Homology declarations are closed partial coverage, not an exact attachment of every clause; Mathlib supplies additional commutation and extension-closure primitives. Independent second reading expanded the orthogonal and extension dual arguments, stated the nested-truncation index bound explicitly, and identified all three cones in the right-exact octahedron.",
+  "blueprint": "Steps 1–3 realize blueprint setup and (1) adjunction/uniqueness; step 4 realizes (2); steps 5–6 finish (1); steps 7–8 realize (3); step 9 realizes (4); steps 10–14 realize (5)(a),(b),(c) and the long exact sequence.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-65c8c2dcb",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-65c8c2dcb (reviewer sub-agent of L); spot-checked: Read the full mathematics, all fourteen steps, seven cited statements, BBD 1.1.9–1.1.10 and 1.2.2–1.3.6, and Stacks 0146/0149. All five clauses hold without boundedness; shift bounds, octahedral map comparisons, edge cases, and dependencies check out. Corrected step 14’s nonexistent Stacks label to definition-homological. Whole corrected JSON and concrete checks are in fixes/ and review.md. No new nodes or target changes.; 1 file(s) fixed by the reviewer"
  }
 }
