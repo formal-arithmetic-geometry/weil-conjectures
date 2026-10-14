@@ -14410,3 +14410,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:31 L: merged deliver/T3/Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationChainMapExists (stage 3; reviewer PASS; first push; landing 20261014T033114-L-607174 (interface); batch 20261014T033101; modules 2; new nodes 1)
 - 03:31 L: merged deliver/U2/Sheaf.Algebra.Category.ModuleCat.RingScalarExtension (stage 3; reviewer PASS; first push; landing 20261014T033115-L-607375 (proof); batch 20261014T033101; modules 1; new nodes 0)
 - 03:31 L: merged deliver/V1/Sheaf.RingTheory.DvrTameTensorFactorMaximalIdeal (stage 3; reviewer PASS; first push; landing 20261014T033115-L-607564 (interface); batch 20261014T033101; modules 2; new nodes 1)
+- 03:31 L: merged deliver/V4/Sheaf.AlgebraicGeometry.Morphisms.AffineLocalizationPullbackStalk (stage 3; reviewer PASS; first push; landing 20261014T033115-L-607789 (proof); batch 20261014T033101; modules 1; new nodes 0)

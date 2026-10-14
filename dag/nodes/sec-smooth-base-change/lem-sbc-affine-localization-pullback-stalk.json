@@ -13,22 +13,27 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine neighborhood Spec D of x. Its base change is Spec of D localized at the image of M. The ideal of x avoids these denominators because its contraction to R is g(x). Extend it using localization prime correspondence. Transport this point through the affine-open inclusion and the cartesian comparison to obtain x0 with c(x0)=x.",
+   "text": "PrimeSpectrum.localization_comap_range puts g(x) in the image of Spec(algebraMap R S) from the disjointness assumption. Scheme.exists_preimage_of_isPullback supplies x0 with c(x0)=x.",
    "uses": [],
    "elementary": false
   },
   {
-   "text": "Localizing D first at the image of M and then at the extended prime gives D localized at the original prime, by transitivity of localization. Thus the projection stalk map is an isomorphism. Invert it and transport across c(x0)=x to define e. Naturality of composite stalk maps and stalkMap_toStalk for Spec(algebraMap R S) give the asserted identity for all r.",
+   "text": "IsPreimmersion.of_isLocalization and IsLocalization.flat show that the localization spectrum map is a flat preimmersion. Flat.SpecMap_iff and MorphismProperty.of_isPullback transfer both properties to c. Its stalk map at x0 is surjective. Flat.stalkMap and Module.FaithfullyFlat.of_flat_of_isLocalHom make that map faithfully flat; RingHom.FaithfullyFlat.injective makes it injective. Invert it using RingEquiv.ofBijective.",
    "uses": [],
    "elementary": false
+  },
+  {
+   "text": "Apply Scheme.Hom.stalkMap_congr_hom to the commuting square and expand both composite stalk maps with stalkMap_comp. Transport the coefficient-to-stalk map along the equality of image points (by equality induction). AlgebraicGeometry.stalkMap_toStalk identifies the localization-spectrum coefficient germ. Evaluate the resulting equality of ring homomorphisms at r and use injectivity of the inverse equivalence to establish the required formula.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "kind": "written-by-agent",
-  "by": "C2",
-  "document": "Mathlib.AlgebraicGeometry.Stalk; Mathlib.RingTheory.Localization.Ideal; original root localization comparison proof",
-  "place": "Localization prime correspondence and transitivity; lem-sbc-root-normalization-localization-comparison step 3"
+  "by": "V4",
+  "document": "Mathlib.AlgebraicGeometry.Morphisms.Preimmersion; Mathlib.AlgebraicGeometry.Morphisms.Flat; Mathlib.AlgebraicGeometry.PullbackCarrier; Mathlib.AlgebraicGeometry.Spec; Mathlib.RingTheory.Spectrum.Prime.Topology",
+  "place": "IsPreimmersion.of_isLocalization; Flat.SpecMap_iff and Flat.stalkMap; Scheme.exists_preimage_of_isPullback; stalkMap_toStalk; PrimeSpectrum.localization_comap_range. Shorter realization of the original localization-comparison proof."
  },
  "mathlib_searches": [
   {
@@ -108,10 +113,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261014T030641-L-341778",
-  "kind": "interface",
+  "landing": "20261014T033115-L-607789",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
