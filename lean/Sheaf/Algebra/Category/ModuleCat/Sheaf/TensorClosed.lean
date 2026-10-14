@@ -76,14 +76,23 @@ abbrev tensorClosed (R : Sheaf J CommRingCat.{u}) :
   let := monoidalCategory R
   let := symmetricCategory R
   refine ⟨⟨?_⟩, ⟨monoidalClosed⟩, tensorHomEquiv, ?_⟩
-  · exact
+  · -- MonoidalFree supplies additivity of both tensor functors from the adjunction.
+    exact
       { whiskerLeft_zero := fun {X Y Z} ↦ (tensorLeft X).map_zero Y Z
         zero_whiskerRight := fun {X Y Z} ↦ (tensorRight X).map_zero Y Z
         whiskerLeft_add := fun {X Y Z} f g ↦ (tensorLeft X).map_add (f := f) (g := g)
         add_whiskerRight := fun {X Y Z} f g ↦ (tensorRight X).map_add (f := f) (g := g) }
   · intro F F' G G' H H' f g h t
-    rw [tensorHom_def, Category.assoc, tensorHomEquiv_whiskerRight_comp,
-      tensorHomEquiv_whiskerLeft_comp, tensorHomEquiv_comp_homObjMap]
-    simp only [Category.assoc, homObjMap_comp_homObjMap, Category.comp_id]
+    -- Naturality in the two tensor factors precedes naturality in the target.
+    rw [tensorHom_def, Category.assoc]
+    calc
+      tensorHomEquiv F' G' H' (f ▷ G' ≫ F ◁ g ≫ t ≫ h) =
+          tensorHomEquiv F G' H' (F ◁ g ≫ t ≫ h) ≫ homObjMap f (𝟙 H') :=
+        tensorHomEquiv_whiskerRight_comp f _
+      _ = (g ≫ tensorHomEquiv F G H' (t ≫ h)) ≫ homObjMap f (𝟙 H') := by
+        rw [tensorHomEquiv_whiskerLeft_comp]
+      _ = g ≫ tensorHomEquiv F G H t ≫ homObjMap f h := by
+        rw [tensorHomEquiv_comp_homObjMap]
+        simp only [Category.assoc, homObjMap_comp_homObjMap, Category.comp_id]
 
 end SheafOfModules
