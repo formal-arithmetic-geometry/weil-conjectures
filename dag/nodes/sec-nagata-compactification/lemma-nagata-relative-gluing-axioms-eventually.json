@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-nagata-relative-gluing-axioms-eventually",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The relative gluing axioms hold at the selected stage",
@@ -17,12 +17,58 @@
  ],
  "proof": [
   {
-   "text": "Every required equality holds after base change to $S$. Equality of opens\nand equality of morphisms therefore hold above their selected witness\nstages. The common upper bound includes all finitely many pair and triple\nconditions, so they hold simultaneously in the named datum.",
-   "uses": [],
-   "elementary": null
+   "text": "Fix the raw datum and all equality-stage choices of [def-nagata-relative-gluing-valid-stage]. By [lemma-nagata-relative-gluing-datum-descends], its charts, overlap opens and both overlap-map directions base change to those of $\\mathsf R_X$. The latter record includes the identity, inverse and triple-cocycle equations by [def-nagata-relative-finite-affine-presentation]. Thus the listed equations have equal limit base changes. Here inclusions and common domains are exactly the canonical inclusions and fibre products fixed in the valid-stage definition: their identifications are characterized by the same chart and base projections, so the fibre-product universal property identifies the composites being compared. We use the compactness and limit-equality inputs retained for each listed open equation and the finite-presentation and coefficient-equality inputs retained for each listed parallel-map equation; we do not infer gluing axioms at the raw stage.",
+   "uses": [
+    "def-nagata-relative-gluing-valid-stage",
+    "lemma-nagata-relative-gluing-datum-descends",
+    "def-nagata-relative-finite-affine-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-relative-gluing-axioms-eventually.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "Let $F$ be the finite set consisting of the raw stage and all the selected open- and map-equality stages, and put $s=\\lambda_{\\mathrm{rel}}=u(F)$ as in [def-nagata-relative-gluing-valid-stage]. Apply [lemma-nagata-directed-finite-upper-bound] to this same $F$ with the fixed binary upper bounds and auxiliary order. Every selected equality stage and the raw stage are $\\leq s$. Hence $s$ lies in the indexing tail of every selected equation, and is above its selected witness stage. This is one bound for the whole finite list, including all orientations and all chart triples.",
+   "uses": [
+    "def-nagata-relative-gluing-valid-stage",
+    "lemma-nagata-directed-finite-upper-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-relative-gluing-axioms-eventually.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "For each open equation listed in [def-nagata-relative-gluing-valid-stage], apply [lemma-nagata-qc-open-eq-eventually] to its retained qcqs ambient scheme, its two quasi-compact opens with equal inverse images at the limit, and its selected equality stage. Step 2 supplies the inequality required to evaluate the lemma at $s$. Its conclusion is equality of the inverse-image opens under the canonical first projection. These are exactly the opens in $\\mathsf R_{X,s}$ by the valid-stage definition. In particular $W_{jj,s}=T_{j,s}$, $W_{jk,s}=V_{kj,s}$, and $g_{jkl,s}^{-1}(W_{kz,s})=a_{jkl,s}^{-1}(W_{jz,s})$ for every indexed piece and triple. This includes the forward condition for the reversed ordered pair; the backward condition for the original pair is deduced after the orientation-agreement equations in step 4. The inverse-image expressions agree with the base changes of the raw expressions because the projection square commutes: taking inverse images along either composite gives the same subset.",
+   "uses": [
+    "def-nagata-relative-gluing-valid-stage",
+    "lemma-nagata-qc-open-eq-eventually"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-relative-gluing-axioms-eventually.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "For each parallel-map equation listed in [def-nagata-relative-gluing-valid-stage], apply [lemma-nagata-morphism-eq-eventually] to the two raw-base morphisms on the canonical common domain and to the finite-presentation, affine-cover, generator and coefficient-equality choices retained for that equation. Its selected stage is one of the elements of $F$, so step 2 gives $s\\geq\\lambda_{\\varphi=\\psi}$ and the lemma gives equality of the two base-changed maps at $s$. This proves both inverse identities on every overlap piece, forward and backward agreement on intersections, agreement with the reversed orientation, the diagonal identity, and each triple cocycle on its specified fibre-product common domain. The valid-stage definition uses these very base changes; composition and identities agree under the canonical identifications, since both sides have the same chart and base projections. For the backward open condition on a right overlap piece for $(j,k)$, intersect that piece with each left piece for $(k,j)$. These intersections cover it because step 3 gives $V_{jk,s}=W_{kj,s}$. On each intersection the orientation-agreement equation identifies the backward map with the forward map for $(k,j)$; apply the forward inverse-image equality from step 3 with the ordered triple $(k,j,z)$. Membership in the resulting opens agrees on this cover, hence agrees on the entire right piece. Together with the open equations of step 3, these are the matching-open, inverse and triple-overlap identities asserted for the named datum. No global gluing construction or existence of a glued scheme is used.",
+   "uses": [
+    "def-nagata-relative-gluing-valid-stage",
+    "lemma-nagata-morphism-eq-eventually"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-relative-gluing-axioms-eventually.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
+  "def-nagata-relative-finite-affine-presentation",
+  "def-nagata-relative-gluing-valid-stage",
   "lemma-nagata-directed-finite-upper-bound",
   "lemma-nagata-morphism-eq-eventually",
   "lemma-nagata-qc-open-eq-eventually",
@@ -33,9 +79,59 @@
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-relative-gluing-axioms-eventually.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a finite scheme gluing datum descended along an inverse limit with affine transitions, overlap open equalities, inverse morphism identities and triple cocycle identities hold at a common sufficiently large stage",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.Scheme.Cover.gluedCover_t', AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.OpenCover.map_glueMorphismsOverOfLocallyDirected_left, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.Scheme.OpenCover.map_glueMorphismsOfLocallyDirected",
+   "date": "2026-10-14",
+   "verdict": "no exact match: individual eventual-equality theorems or gluing structures do not assert all equations at this project-selected stage"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.GlueData",
+   "results": "12 hits: AlgebraicGeometry.Scheme.GlueData, AlgebraicGeometry.Scheme.GlueData.glued, AlgebraicGeometry.Scheme.GlueData.gluedScheme, AlgebraicGeometry.Scheme.GlueData.toLocallyRingedSpaceGlueData, AlgebraicGeometry.Scheme.Cover.gluedCover, AlgebraicGeometry.Scheme.GlueData.openCover, AlgebraicGeometry.Scheme.GlueData.toGlueData, AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram",
+   "date": "2026-10-14",
+   "verdict": "no exact match: individual eventual-equality theorems or gluing structures do not assert all equations at this project-selected stage"
+  },
+  {
+   "tool": "grep",
+   "query": "gluing.*(limit|eventually)|cocycle.*(limit|eventually)|exists.*(GlueData|glueData)",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/RelativeGluing.lean, Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match: individual eventual-equality theorems or gluing structures do not assert all equations at this project-selected stage"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite scheme gluing data and their cocycle equations descend to a sufficiently large stage of an inverse limit of schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many equalities of quasi compact open subsets and morphisms of finite presentation schemes true at an inverse limit are simultaneously true at some finite stage",
+   "results": "8 hits: AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty', AlgebraicGeometry.exists_preimage_eq",
+   "date": "2026-10-14",
+   "verdict": "no exact match: individual eventual-equality theorems or gluing structures do not assert all equations at this project-selected stage"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_hom_comp_eq_comp_of_locallyOfFiniteType|structure GlueData|cocycle",
+   "results": "4 hits: 635, 697, 1304, 1358",
+   "date": "2026-10-14",
+   "verdict": "no exact match: individual eventual-equality theorems or gluing structures do not assert all equations at this project-selected stage"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_hom_comp_eq_comp_of_locallyOfFiniteType|exists_map_preimage_eq_map_preimage|structure GlueData",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/Gluing.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match: individual eventual-equality theorems or gluing structures do not assert all equations at this project-selected stage"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -77,5 +173,20 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-approximation"
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lemma-nagata-relative-gluing-axioms-eventually",
+  "worker": "stage1",
+  "summary": "Expanded the imported proof into four steps using the existing selected-stage definition, raw comparison property, finite presentation record, finite upper-bound lemma, and both eventual-equality lemmas. Checked the explicit equation lists, retained compactness/finite-presentation inputs, canonical domains and all orientations. No new nodes or change of statement. Second reading made the backward open condition explicit using reversed-orientation agreement on the covering intersections.",
+  "blueprint": "Realizes ## Proof: sentence 1 in step 1, the common finite bound of sentence 3 in step 2, and the open and morphism equalities of sentence 2 in steps 3 and 4; concludes sentence 3 simultaneously for all pairs and triples."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-e449ebcd5",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-e449ebcd5 (reviewer sub-agent of L); spot-checked: Read the full item, dependencies, blueprint, detailed source, Stacks Tags 01Z4/01ZM, unit route, and delivery report. The four proof steps correctly establish all open, inverse-map, orientation, diagonal, and cocycle equations at the common selected stage, with canonical fibre-product domains and checked hypotheses. Edge cases and Mathlib searches were reviewed; no new nodes, repairs, or tool uses are needed. Review written to review.md."
+ }
 }
