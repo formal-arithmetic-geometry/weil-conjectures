@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-cech-pushforward-lambda-columns",
+ "kind": "statement",
+ "title": "Resolution-column quasi-isomorphisms of the pushed-forward Cech complex",
+ "statement": "Let $f:X'\\to X$ be a morphism of schemes [def-pc-scheme], $U=(U_i)_{i\\in I}$ any family of open subsets of $X$, $A^\\bullet$ a complex of injective $\\mathcal O_{X'}$-modules in degrees $\\mathbf N$, and $K^\\bullet$ a complex of injective $\\mathcal O_X$-modules in degrees $\\mathbf N$ [def-pc-cochain-complex-modules]. For every quasi-isomorphism $\\lambda:f_*A^\\bullet\\to K^\\bullet$ [def-pc-module-pullback, def-pc-quasi-iso-modules] and every Cech degree $q$, the resolution-direction column of $\\check C(U,\\lambda)$ [def-sc-cech-complex-augmentations] is a quasi-isomorphism. This column is the degree-$q$ component of the flipped bicomplex map. No covering or quasi-coherence condition is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-pc-module-pullback",
+  "def-pc-quasi-iso-modules",
+  "def-sc-cech-complex-augmentations"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Tag 01FD, arrow B-double-prime to B-prime; Tag 01EX and Derived Categories Tag 015E, acyclicity on tuple intersections"
+ },
+ "proof": [
+  {
+   "text": "On each tuple intersection V, pushforwards of injectives are acyclic for sections by 01EX and injectives are section-acyclic. The bounded-below acyclic comparison theorem 015E therefore makes evaluation of lambda on V a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-module-pushforward-injective-acyclic",
+    "lem-weil-pbc-leray-acyclicity-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A degree-q resolution column is the product of the section complexes over all (q+1)-tuples. A tuple is a cocycle exactly when each component is a cocycle. It is a boundary exactly when each component is a boundary: choose component preimages to obtain a product preimage. Hence product homology is the product of homology, and the product map is an isomorphism on homology. The finite-product open used by the Cech functor is the intersection V; its restriction and scalar action are the same. Empty tuple sets give zero complexes.",
+   "uses": [
+    "def-sc-cech-complex-augmentations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pushforward-injective-acyclic",
+  "lem-weil-pbc-leray-acyclicity-quasi-iso",
+  "def-sc-cech-complex-augmentations"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Tag 01FD, arrow B-double-prime to B-prime; Tag 01EX and Derived Categories Tag 015E, acyclicity on tuple intersections"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech double complex refinement pushforward commutes with augmentations and global section restrictions",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech refinement map injective resolution augmentation naturality total cohomology",
+   "results": "Eight results, including InjectiveResolution.desc_commutes and Hom.ι_comp_hom. No arbitrary-complex Cech augmentation or pushed-forward tuple-total naturality theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyMap\", \"IsIso\"",
+   "results": "Twelve ShortComplex results about preservation of homology and componentwise isomorphisms. No Cech refinement theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*refin|refin.*cech; moduleCech.*naturality; quasiIso.*(pi|Pi|prod|Prod)",
+   "results": "Mathlib refinement matches concern Stone-Cech compactification. Library ModuleCechLiftSquares proves squares only for two injective resolutions. cupCechDouble gives the same termwise object but no arbitrary-complex augmentation API. FirstQuadrantTotalComparison gives total comparison, not sectionwise acyclicity or refinement. Blueprint search for Cech refinement, Cech quasi-isomorphism and 01FD gives no imported blueprint node.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CechRefinementResolutionBeta",
+  "group": "G3",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 01FD, arrow B-double-prime to B-prime; Tag 01EX and Derived Categories Tag 015E, acyclicity on tuple intersections",
+   "via": [
+    "lem-sc-cech-refinement-resolution-canonical-beta",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-cech-refinement-comparison-square",
+    "lem-sc-cech-refinement-resolution-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CechPushforwardLambdaColumns",
+  "file": "lean/Sheaf/Paper/CechPushforwardLambdaColumns.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.cech_pushforward_lambda_columns",
+  "statement": "theorem cech_pushforward_lambda_columns {X X' : Scheme.{v}} (f : X' ⟶ X)\n    {ι : Type v} (U : ι → X.Opens) (A : CochainComplex X'.Modules ℕ)\n    (K : CochainComplex X.Modules ℕ)\n    (hA : ∀ n : ℕ, Injective (A.X n)) (hK : ∀ n : ℕ, Injective (K.X n))\n    (l : ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj A ⟶ K)\n    (hl : QuasiIso l) (q : ℕ) :\n    QuasiIso (((HomologicalComplex₂.flipFunctor (ModuleCat.{v} Γ(X, ⊤))\n      (ComplexShape.up ℕ) (ComplexShape.up ℕ)).map\n        ((moduleCechDoubleFunctor U).map l)).f q)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-c0cad",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261014T034909-L-814412",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-c0cad",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261014T034909-L-814412",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged theorem signature, delivered proofs and new obligations with their DAG records and Stacks 01FD/01EX/015E; checked axioms and compiled all four modules plus sole direct importer Sheaf.Paper.CechRefinementResolutionDiagram."
+ }
+}

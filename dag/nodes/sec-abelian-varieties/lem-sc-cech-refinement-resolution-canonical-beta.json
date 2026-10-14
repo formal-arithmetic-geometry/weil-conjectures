@@ -32,50 +32,51 @@
  "statement": "Let $f:X\\prime\\to X$ be a scheme morphism [def-pc-scheme], $U$ an open cover of $X$, $U\\prime$ an arbitrary family of opens of $X\\prime$, and $c$ a specified index map with $U\\prime_i\\subset f^{-1}(U_{c(i)})$. Let $F$ be a quasi-coherent module [pqf-def-coherent], $p\\geq0$, and $\\gamma$ a cochain map with the prescribed tuple formula [def-sc-cech-refinement-cochain-map]. Assume enough injectives for the module categories and additivity of global sections. Let $D$ be any resolution data [def-weil-pbc-module-cohomology-fmap] for the tensor-pullback adjunction unit: resolutions $D.J$ of $F$ and $D.I$ of $f^*F$, an injective complex $D.K$, a quasi-isomorphism $\\lambda:f_*D.I\\to D.K$, an augmented lift $b:D.J\\to D.K$, and the pinned sections comparison $a$. Put $r=e_J^{-1}H(\\Gamma b)H(a\\Gamma\\lambda)^{-1}e_I$, where $e_J,e_I$ are the forgetting-scalars homology identifications. Write $a=H^p(\\alpha_U)$ and $a\\prime=H^p(\\alpha_{U\\prime})$, after forgetting scalars. The covering condition on $U$ makes $a$ invertible. For the explicitly constructed map $t=a^{-1}r a\\prime$, the augmentation equation $H^p(\\beta_U)t=H^p(\\gamma)H^p(\\beta_{U\\prime})$ holds. This statement asserts only augmentation compatibility for this fixed map, not existence of a map satisfying two squares.",
  "proof": [
   {
-   "text": "Form the four Cech double complexes B, B-prime, B-double-prime and A of Tag 01FD using D.J, D.K, the pushforward of D.I and D.I. The maps are induced by D.beta, D.lambda, and the prescribed tuplewise pullback/restriction formula. Functoriality and restriction naturality verify the two chain directions and total signs.",
+   "text": "Apply the termwise Cech-total functor to D.beta and D.lambda. For arbitrary module complexes the alpha and beta cochain maps are concrete summand maps. Alpha naturality follows from restriction naturality; beta naturality and D.compatible give beta_J followed by total(beta) equals the pushed-forward augmentation followed by total(lambda). Pass to homology and forget scalars.",
    "uses": [
-    "def-sc-cech-refinement-cochain-map",
-    "def-sc-module-cech-comparison",
+    "def-sc-cech-complex-augmentations",
     "def-weil-pbc-module-cohomology-fmap"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For every intersection of source opens, sections of D.lambda are a quasi-isomorphism, by acyclicity of pushforwards of injectives and of injectives. Apply the first-quadrant total column comparison (with transposition to place resolution columns correctly) to obtain an invertible map on total homology B-double-prime -> B-prime. Compose the map from B to B-prime, this inverse, and the refinement map to A to construct t.",
+   "text": "Every resolution column of Cech(lambda) is a quasi-isomorphism by cech_pushforward_lambda_columns. Apply first-quadrant total-column comparison and then homology to get the explicit isomorphism l on forgotten total homology.",
    "uses": [
-    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+    "lem-sc-cech-pushforward-lambda-columns",
     "lem-sc-first-quadrant-total-column-comparison"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The augmentation compatibility equation in D makes the pentagon commute; its tuplewise formula is hgamma. Take homology and transport through forgetting scalars to obtain H(beta_B) composed with t = H(gamma) composed with H(beta_A). Restriction naturality gives the global-section squares. The pinned section comparison D.a identifies global sections of D.I and of its pushforward. Inverting the global-sections map of D.lambda gives exactly the displayed raw sections map r and hence the second square.",
+   "text": "Apply exists_cechRefinement_pushforward_total to the target resolution I, the given tuple formula hgamma, and the pinned section comparison D.a. This gives s from the pushed-forward target total homology to the target-family total homology, with its alpha and beta squares. It does not involve the source resolution J, the lift beta, or the replacement K.",
    "uses": [
-    "def-sc-cech-refinement-cochain-map",
-    "def-sc-module-cech-comparison",
-    "def-weil-pbc-module-cohomology-fmap"
+    "lem-sc-cech-refinement-pushforward-total",
+    "def-sc-cech-refinement-cochain-map"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The restriction squares and D.sections identify the zigzag map's alpha composite with r followed by target alpha. Source alpha is invertible by def-sc-module-cech-comparison. Cancel it to identify that map with the displayed fixed map, and substitute into the augmentation equation.",
+   "text": "Use the private categorical lemma refinement_diagram_cancel with b=H(total(beta)), l=H(total(lambda)), and s. The alpha squares imply g alpha_K l.inverse s=the target alpha, since H(a.hom)H(a.inv)=identity. Invert g, substitute into the beta-lift alpha square, and cancel source alpha (invertible because U covers). This identifies b l.inverse s with the fixed source-alpha-transported map in the conclusion. Finally substitute the beta pentagon and cancel l l.inverse to obtain the prescribed gamma beta equation. The canonical forgetful homology isomorphisms appear explicitly throughout. Normalize the scheme and ringed-space presentations of the section-ring forgetful functor by the proved reflexive equality scheme_section_forget_eq; this gives exactly the unchanged native zigzag r of the statement.",
    "uses": [
-    "def-sc-module-cech-comparison"
+    "def-sc-module-cech-comparison",
+    "def-sc-cech-complex-augmentations"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-cech-refinement-cochain-map",
-  "def-sc-module-cech-comparison",
+  "def-sc-cech-complex-augmentations",
   "def-weil-pbc-module-cohomology-fmap",
-  "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
-  "lem-sc-first-quadrant-total-column-comparison"
+  "lem-sc-cech-pushforward-lambda-columns",
+  "lem-sc-first-quadrant-total-column-comparison",
+  "lem-sc-cech-refinement-pushforward-total",
+  "def-sc-cech-refinement-cochain-map",
+  "def-sc-module-cech-comparison"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 01FD, Lemma 20.15.1 and its resolution diagram, specialized to the adjunction unit"
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Lemma 20.15.1: the concrete four-bicomplex diagram and its augmentation pentagon; categorical cancellation implemented by G3 on 2026-10-14"
  },
  "mathlib_searches": [
   {
@@ -136,13 +137,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K1",
+  "reviewer": "X-c0cad",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261013T181108-L-2603015",
+  "landing": "20261014T034909-L-814412",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched unchanged theorem signature, delivered proofs and new obligations with their DAG records and Stacks 01FD/01EX/015E; checked axioms and compiled all four modules plus sole direct importer Sheaf.Paper.CechRefinementResolutionDiagram."
  }
 }

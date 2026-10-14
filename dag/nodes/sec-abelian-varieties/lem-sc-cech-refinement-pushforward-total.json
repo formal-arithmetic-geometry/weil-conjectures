@@ -1,0 +1,141 @@
+{
+ "id": "lem-sc-cech-refinement-pushforward-total",
+ "kind": "statement",
+ "title": "Tuplewise refinement on the pushed-forward target resolution",
+ "statement": "Let $f:X'\\to X$ be a scheme morphism [def-pc-scheme], $U=(U_i)_{i\\in I}$ and $U'=(U'_j)_{j\\in I'}$ arbitrary families of opens, and $c:I'\\to I$ a map with $U'_j\\subseteq f^{-1}(U_{c(j)})$. Let $F$ be an $\\mathcal O_X$-module, $I^\\bullet$ an injective resolution of $f^*F$ [def-sp-injective-resolutions, def-pc-module-pullback], and $\\gamma$ a cochain map with the prescribed refinement tuple formula [def-sc-cech-refinement-cochain-map]. Let $a:\\Gamma(X',I^\\bullet)\\simeq\\Gamma(X,f_*I^\\bullet)$ be an isomorphism of additive-group complexes whose inverse components are the canonical top-open restrictions. Put $P=f_*I^\\bullet$ and $\\eta:F\\to P^0$ equal to the adjunction unit followed by the pushed-forward resolution augmentation. For each $p\\in\\mathbf N$ there exists an additive map $s:H^p(\\operatorname{Tot}\\check C(U,P))\\to H^p(\\operatorname{Tot}\\check C(U',I^\\bullet))$ satisfying $H^p(\\alpha_P)s=H^p(a^{-1})H^p(\\alpha_I)$ and $H^p(\\beta_\\eta)s=H^p(\\gamma)H^p(\\beta_I)$ [def-sc-cech-complex-augmentations], with the canonical forgetting-scalars homology isomorphisms inserted at the section ends. No source resolution, lift, injective replacement, or covering hypothesis is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sp-injective-resolutions",
+  "def-pc-module-pullback",
+  "def-sc-cech-refinement-cochain-map",
+  "def-sc-cech-complex-augmentations"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Tag 01FD, the morphism B-double-prime to A, the right upper square, and the augmentation pentagon"
+ },
+ "proof": [
+  {
+   "text": "In bidegree (r,q) evaluate the source tuple at refine composed with the target tuple, then restrict the section of I^r from the inverse-image intersection to the target intersection. Restrictions commute with all faces and with the coefficient differential, so these maps give a cochain map of forgotten total complexes. Pass to homology and transport the forgetful homology isomorphisms to obtain s.",
+   "uses": [
+    "def-sc-cech-refinement-cochain-map",
+    "def-sc-cech-complex-augmentations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the (r,0) alpha summands, restrictions of global sections commute with tuple restriction. The pinned formula for a inverse identifies the section complexes and proves the alpha equation.",
+   "uses": [
+    "def-sc-cech-complex-augmentations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On the (0,q) beta summands, naturality of the resolution augmentation moves it past restriction. What remains is exactly hgamma, giving the beta equation after homology. Empty tuple sets give zero groups and degree zero uses the same equations.",
+   "uses": [
+    "def-sc-cech-refinement-cochain-map",
+    "def-sc-cech-complex-augmentations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-cech-refinement-cochain-map",
+  "def-sc-cech-complex-augmentations"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Tag 01FD, the morphism B-double-prime to A, the right upper square, and the augmentation pentagon"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech double complex refinement pushforward commutes with augmentations and global section restrictions",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech refinement map injective resolution augmentation naturality total cohomology",
+   "results": "Eight results, including InjectiveResolution.desc_commutes and Hom.ι_comp_hom. No arbitrary-complex Cech augmentation or pushed-forward tuple-total naturality theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyMap\", \"IsIso\"",
+   "results": "Twelve ShortComplex results about preservation of homology and componentwise isomorphisms. No Cech refinement theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*refin|refin.*cech; moduleCech.*naturality; quasiIso.*(pi|Pi|prod|Prod)",
+   "results": "Mathlib refinement matches concern Stone-Cech compactification. Library ModuleCechLiftSquares proves squares only for two injective resolutions. cupCechDouble gives the same termwise object but no arbitrary-complex augmentation API. FirstQuadrantTotalComparison gives total comparison, not sectionwise acyclicity or refinement. Blueprint search for Cech refinement, Cech quasi-isomorphism and 01FD gives no imported blueprint node.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CechRefinementResolutionBeta",
+  "group": "G3",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 01FD, the morphism B-double-prime to A, the right upper square, and the augmentation pentagon",
+   "via": [
+    "lem-sc-cech-refinement-resolution-canonical-beta",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-cech-refinement-comparison-square",
+    "lem-sc-cech-refinement-resolution-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CechRefinementPushforwardTotal",
+  "file": "lean/Sheaf/Paper/CechRefinementPushforwardTotal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_cechRefinement_pushforward_total",
+  "statement": "theorem exists_cechRefinement_pushforward_total\n    {X X' : Scheme.{v}} (f : X' ⟶ X) {ι ι' : Type v}\n    (U : ι → X.Opens) (U' : ι' → X'.Opens)\n    (refine : ι' → ι) (hrefine : ∀ i, U' i ≤ f ⁻¹ᵁ U (refine i))\n    (F : X.Modules) (I : InjectiveResolution ((tensorPullback f).obj F)) (p : ℕ)\n    (gamma : ((forget₂ (ModuleCat.{v} Γ(X, ⊤)) AddCommGrpCat.{v}).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj ((cechComplexFunctor U).obj F.presheafModuleCat) ⟶\n      ((forget₂ (ModuleCat.{v} Γ(X', ⊤)) AddCommGrpCat.{v}).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj\n          ((cechComplexFunctor U').obj ((tensorPullback f).obj F).presheafModuleCat))\n    (hgamma : IsCechRefinementMap f U U' refine hrefine F gamma)\n    (a : ((RingedSpace.globalSectionsFunctor X'.toRingedSpace ⋙\n        forget₂ _ AddCommGrpCat.{v}).mapHomologicalComplex (ComplexShape.up ℕ)).obj\n          I.cocomplex ≅\n      ((RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙\n        forget₂ _ AddCommGrpCat.{v}).mapHomologicalComplex (ComplexShape.up ℕ)).obj\n          (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex))\n    (ha : ∀ n : ℕ, a.inv.f n = (Scheme.Modules.presheaf (I.cocomplex.X n)).map\n      (eqToHom (by simp) : (⊤ : X'.Opens) ⟶ f ⁻¹ᵁ (⊤ : X.Opens)).op) :\n    let P := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex\n    let e := forget₂ (ModuleCat.{v} Γ(X, ⊤)) AddCommGrpCat.{v}\n    let e' := forget₂ (ModuleCat.{v} Γ(X', ⊤)) AddCommGrpCat.{v}\n    let S := (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)\n    ∃ s : e.obj (((moduleCechTotalFunctor U).obj P).homology p) ⟶\n        e'.obj (((moduleCechDouble U' I).total (ComplexShape.up ℕ)).homology p),\n      e.map (HomologicalComplex.homologyMap (moduleCechComplexAlpha U P) p) ≫ s =\n        (((S.obj P).sc p).mapHomologyIso e).inv ≫\n          HomologicalComplex.homologyMap a.inv p ≫\n          (((RingedSpace.globalSectionsComplex I).sc p).mapHomologyIso e').hom ≫\n          e'.map (HomologicalComplex.homologyMap (moduleCechAlpha U' I) p) ∧\n      e.map (HomologicalComplex.homologyMap\n          (moduleCechComplexBeta U P (cechPushforwardAugmentation f F I)\n            (cechPushforwardAugmentation_d f F I)) p) ≫ s =\n        cechRefinementHomology gamma p ≫\n          e'.map (HomologicalComplex.homologyMap (moduleCechBeta U' I) p)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.cechPushforwardAugmentation",
+   "AlgebraicGeometry.Scheme.Modules.cechPushforwardAugmentation_d",
+   "AlgebraicGeometry.Scheme.Modules.exists_cechRefinement_pushforward_total"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-c0cad",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261014T034909-L-814412",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-c0cad",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261014T034909-L-814412",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged theorem signature, delivered proofs and new obligations with their DAG records and Stacks 01FD/01EX/015E; checked axioms and compiled all four modules plus sole direct importer Sheaf.Paper.CechRefinementResolutionDiagram."
+ }
+}

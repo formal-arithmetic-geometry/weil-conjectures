@@ -1,0 +1,145 @@
+{
+ "id": "def-sc-cech-complex-augmentations",
+ "kind": "definition",
+ "title": "Functorial Cech total complexes and augmentations for arbitrary module complexes",
+ "statement": "For a scheme $X$ [def-pc-scheme], a family $U=(U_i)_{i\\in I}$ of open subsets, and a complex $K^\\bullet$ of $\\mathcal O_X$-modules in degrees $\\mathbf N$ [def-pc-cochain-complex-modules], apply the coefficient Cech functor [def-sc-module-cech-comparison] termwise and totalize. Restrictions of global sections into the $(n,0)$ summands give a cochain map $\\alpha_K:\\Gamma(X,K^\\bullet)\\to\\operatorname{Tot}\\check C(U,K^\\bullet)$. A module map $a:F\\to K^0$ satisfying $a d_K=0$ gives a cochain map $\\beta_a:\\check C(U,F)\\to\\operatorname{Tot}\\check C(U,K^\\bullet)$ into the $(0,n)$ summands. These maps are natural under coefficient cochain maps (for beta, provided the augmentations commute), and specialize definitionally to the existing resolution maps $\\alpha$ and $\\beta$. The double functor packages the existing termwise functor rather than defining another Cech object.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-sc-module-cech-comparison"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Tag 01FD, construction of B, B-prime and B-double-prime and the two lower squares; Tag 01EQ, the two augmentation axes"
+ },
+ "proof": [
+  {
+   "text": "Apply the additive Cech functor termwise, and compose with the existing first-quadrant total functor. Define alpha and beta components by restrictions and coefficient augmentation followed by the corresponding total summand inclusions.",
+   "uses": [
+    "def-sc-module-cech-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use moduleCechZero_d and moduleCechZero_naturality for the alpha cochain equation. For beta, the resolution-direction differential is zero by a d=0, and Cech naturality proves the other direction. The total signs are 1 on the beta axis.",
+   "uses": [
+    "def-sc-module-cech-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The total-map equation on summand inclusions reduces alpha naturality to moduleCechZero_naturality and beta naturality to functoriality and the augmentation equation. Specialization to existing injective-resolution maps is reflexivity.",
+   "uses": [
+    "def-sc-module-cech-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cech-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Tag 01FD, construction of B, B-prime and B-double-prime and the two lower squares; Tag 01EQ, the two augmentation axes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech double complex refinement pushforward commutes with augmentations and global section restrictions",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech refinement map injective resolution augmentation naturality total cohomology",
+   "results": "Eight results, including InjectiveResolution.desc_commutes and Hom.ι_comp_hom. No arbitrary-complex Cech augmentation or pushed-forward tuple-total naturality theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyMap\", \"IsIso\"",
+   "results": "Twelve ShortComplex results about preservation of homology and componentwise isomorphisms. No Cech refinement theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*refin|refin.*cech; moduleCech.*naturality; quasiIso.*(pi|Pi|prod|Prod)",
+   "results": "Mathlib refinement matches concern Stone-Cech compactification. Library ModuleCechLiftSquares proves squares only for two injective resolutions. cupCechDouble gives the same termwise object but no arbitrary-complex augmentation API. FirstQuadrantTotalComparison gives total comparison, not sectionwise acyclicity or refinement. Blueprint search for Cech refinement, Cech quasi-isomorphism and 01FD gives no imported blueprint node.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CechRefinementResolutionBeta",
+  "group": "G3",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 01FD, construction of B, B-prime and B-double-prime and the two lower squares; Tag 01EQ, the two augmentation axes",
+   "via": [
+    "lem-sc-cech-refinement-resolution-canonical-beta",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-cech-refinement-comparison-square",
+    "lem-sc-cech-refinement-resolution-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CechComplexAugmentations",
+  "file": "lean/Sheaf/Paper/CechComplexAugmentations.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCechTotalFunctor",
+  "statement": "def moduleCechTotalFunctor {X : Scheme.{v}} {ι : Type v} (U : ι → X.Opens) :\n    CochainComplex X.Modules ℕ ⥤ CochainComplex (ModuleCat.{v} Γ(X, ⊤)) ℕ",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.moduleCechDoubleFunctor",
+   "AlgebraicGeometry.Scheme.Modules.moduleCechTotalFunctor",
+   "AlgebraicGeometry.Scheme.Modules.moduleCechComplexAlphaComponent",
+   "AlgebraicGeometry.Scheme.Modules.moduleCechComplexAlpha_comm",
+   "AlgebraicGeometry.Scheme.Modules.moduleCechComplexAlpha",
+   "AlgebraicGeometry.Scheme.Modules.moduleCechComplexBetaComponent",
+   "AlgebraicGeometry.Scheme.Modules.moduleCechComplexBeta_comm",
+   "AlgebraicGeometry.Scheme.Modules.moduleCechComplexBeta",
+   "AlgebraicGeometry.Scheme.Modules.moduleCechComplexAlpha_naturality",
+   "AlgebraicGeometry.Scheme.Modules.moduleCechComplexBeta_naturality",
+   "AlgebraicGeometry.Scheme.Modules.moduleCechComplexAlpha_resolution",
+   "AlgebraicGeometry.Scheme.Modules.moduleCechComplexBeta_resolution"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-c0cad",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261014T034909-L-814412",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-c0cad",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261014T034909-L-814412",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged theorem signature, delivered proofs and new obligations with their DAG records and Stacks 01FD/01EX/015E; checked axioms and compiled all four modules plus sole direct importer Sheaf.Paper.CechRefinementResolutionDiagram."
+ }
+}
