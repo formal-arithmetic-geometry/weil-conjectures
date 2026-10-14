@@ -1,0 +1,132 @@
+{
+ "id": "lem-sbc-dvr-tame-tensor-factor-maximal-ideal",
+ "kind": "statement",
+ "title": "Maximal ideal equality after tame DVR base change",
+ "statement": "Let $B$ and $A$ be DVR domains [def-sc-discrete-valuation-ring], and give $A$ a finite faithful $B$-algebra structure. Let $n>0$ be a unit in $B$ and assume $\\mathfrak m_B A=\\mathfrak m_A^n$. Let $E/\\operatorname{Frac}(B)$ be finite separable [def-pc-field-extension, def-weil-pbc-separable-algebraic-extension], with its composite $B$-algebra structure, and let $C=\\operatorname{integralClosure}_B(E)$ [def-weil-pbc-integral-closure]. Assume for every prime $R$ of $C$ above $\\mathfrak m_B$ that both its ramification index and residue degree divide $n$. For every maximal ideal $P$ of $D=E\\otimes_B A$, give $F=D/P$ its $A$-algebra structure by the right tensor inclusion and put $S=\\operatorname{integralClosure}_A(F)$. Assume $S$ is finite as an $A$-module [def-weil-finitely-generated-module]. For every prime ideal Q of S contracting to the maximal ideal of A, let S_Q be the localization at Q. The extension of the maximal ideal of A to S_Q equals the maximal ideal of S_Q.",
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 032L (finite separable normalization), 0BRM (Abhyankar lemma), and 09E7 (adic smoothness of DVRs)."
+ },
+ "proof": [
+  {
+   "text": "Finite faithfulness of A over B induces a finite fraction-field extension K1/K. Since A is normal and integral over B, it is the integral closure of B in K1. The assumed ideal identity says its ramification index over B is n. The kernel of A -> F contracts to zero in B and hence is zero by integrality. Thus F is a field factor of the generic tensor E tensor_K K1.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The integral closure C of B in E is finite by [lem-weil-pbc-noetherian-normal-separable-integral-closure-finite], and is a Dedekind domain. Localize at each prime above m_B to get a DVR. The assumed e,f divisibilities and invertibility of n make e prime to the residue characteristic and f prime to it; the inseparable residue degree, a power of that characteristic dividing f, is therefore one. In residue characteristic zero, separability is automatic.",
+   "uses": [
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Abhyankar lemma 0BRM to each resulting tame DVR and K1/K, whose base ramification index n is divisible by e. Integrality over A and over B in F are equivalent by integrality of A/B; localization of integral closure identifies S_Q with the normalized tensor factor of 0BRM. It is adically formally smooth over A. Use the appropriate consequence of 09E7: The extension of the maximal ideal of A to S_Q equals the maximal ideal of S_Q.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The extension of the maximal ideal of A to S_Q equals the maximal ideal of S_Q.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "kind": "written-by-agent",
+  "agent": "S1",
+  "document": "Stacks Project",
+  "place": "The argument of Tags 0BRM and 09E7, specialized to a tensor quotient and separated into its two local invariants."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Abhyankar lemma tame base change maximal ideal equality and separable residue extension",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Abhyankar lemma tame discrete valuation ring base change unramified",
+   "date": "2026-10-14",
+   "results": "Algebra.IsUnramifiedAt.of_restrictScalars, .comp, .of_liesOver, IsUnramifiedAt.of_liesOver_of_ne_bot; Algebra.Unramified.comp, .baseChange.",
+   "verdict": "These APIs do not establish the tame normalized tensor-factor invariants."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallyUnramified.of_map_maximalIdeal",
+   "date": "2026-10-14",
+   "results": "Mathlib.RingTheory.Unramified.LocalRing: criterion from maximal ideal equality and residue separability.",
+   "verdict": "Combines the two invariants, but does not supply either invariant under tame base change."
+  },
+  {
+   "tool": "grep",
+   "query": "Abhyankar|abhyankar",
+   "date": "2026-10-14",
+   "results": "No hits in Mathlib. Project hits concern geometric root constructions, not this finite faithful DVR/tensor quotient interface.",
+   "verdict": "No matching theorem with this algebraic interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.DvrTameTensorFactorUnramified",
+  "date": "2026-10-14",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case, tame root calculation; Maximal ideal equality after tame DVR base change",
+   "via": [
+    "lem-sbc-dvr-tame-tensor-factor-unramified"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.DvrTameTensorFactorMaximalIdeal",
+  "file": "lean/Sheaf/RingTheory/DvrTameTensorFactorMaximalIdeal.lean",
+  "declaration": "RingTheory.dvr_tame_tensor_factor_map_maximalIdeal",
+  "statement": "theorem dvr_tame_tensor_factor_map_maximalIdeal\n    (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]\n    (n : ℕ) (hnpos : 0 < n) (hn : IsUnit (n : B))\n    (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]\n    [Algebra B A] [Module.Finite B A] [FaithfulSMul B A]\n    (hindex : (IsLocalRing.maximalIdeal B).map (algebraMap B A) =\n      IsLocalRing.maximalIdeal A ^ n)\n    (E : Type u) [Field E] [Algebra (FractionRing B) E]\n    (hE : FiniteDimensional (FractionRing B) E ∧ Algebra.IsSeparable (FractionRing B) E) :\n    letI : Algebra B E :=\n      ((algebraMap (FractionRing B) E).comp (algebraMap B (FractionRing B))).toAlgebra\n    let C := integralClosure B E\n    (∀ (R : Ideal C) (hR : R.IsPrime),\n      letI := hR\n      R.comap (algebraMap B C) = IsLocalRing.maximalIdeal B →\n        R.ramificationIdx B ∣ n ∧ R.inertiaDeg B ∣ n) →\n    let D := E ⊗[B] A\n    ∀ (P : Ideal D) (hP : P.IsMaximal),\n    let := hP\n    let F := D ⧸ P\n    let alpha : A →+* F := (Ideal.Quotient.mk P).comp\n      (Algebra.TensorProduct.includeRight : A →ₐ[B] D).toRingHom\n    letI := alpha.toAlgebra\n    let S := integralClosure A F\n    Module.Finite A S →\n    ∀ (Q : Ideal S) (hQ : Q.IsPrime),\n    let := hQ\n    Q.comap (algebraMap A S) = IsLocalRing.maximalIdeal A →\n      (IsLocalRing.maximalIdeal A).map (algebraMap A (Localization.AtPrime Q)) =\n        IsLocalRing.maximalIdeal (Localization.AtPrime Q)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261014T030648-L-344555",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261014T030648-L-344555",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
