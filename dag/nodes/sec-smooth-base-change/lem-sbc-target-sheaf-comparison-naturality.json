@@ -15,36 +15,52 @@
  ],
  "proof": [
   {
-   "text": "The explicit pullback comparison maps commute with a morphism over T: compose with the projections to U and X, use Over.w and pullback.lift_fst/lift_snd, then apply pullback.hom_ext. The coefficient comparison is the stated upperStarComp composite.",
+   "text": "Construct the single-pullback lift a of φ and the iterated-pullback map b. The explicit comparisons cU and cV obey cU≫a=b≫cV: check projections to V and X and apply pullback uniqueness. The four triangles over X and the coefficient structure maps commute by pullback.lift_fst, pullback.lift_snd and Over.w.",
    "uses": [
-    "def-pc-fibre-product",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The explicit coefficient comparison square is upperStar_coefficient_square with the actual pullback projection arrows and the just-proved scheme equalities. This proves the supplied coefficient hypothesis of higherDirectImage_coefficient_square.",
+   "uses": [
+    "lem-sbc-upper-star-coefficient-square",
     "def-weil-pbc-inverse-image"
    ],
    "elementary": true
   },
   {
-   "text": "Expand the two restriction transitions before homology. Move coefficient maps past lowerStarPlusTransition using naturality of the derived unit and counit. Apply composition of the lower-star transitions to both routes through the pullback comparison; the geometric commutation identifies the resulting composite transition maps. The pullback-comparison composition identity, including its final inverse sheaf comparison, identifies their coefficient suffixes. Exact pullback-single comparisons and their naturality identify the baseChangeTargetFunctorIso prefixes. Cancel inverse composition comparisons, then apply integer-degree homology. Negative degrees require no additional hypothesis.",
+   "text": "Normalize baseChangeTargetTransition, including the final coefficient identification, using baseChangeTargetTransition_higherImage. Expand the hom of the unchanged explicit target comparison using the proved comparison_hom API. The lower-star transition is invertible as before; higherDirectImageTransition_isIso_of_lower packages the isomorphism inference without unfolding derived constructions.",
    "uses": [
-    "lem-sbc-lower-star-plus-transition-comp",
-    "lem-sbc-pullback-comparison-comp",
-    "def-sbc-canonical-base-change-stalk-transitions",
+    "lem-sbc-target-transition-higher-image",
+    "lem-sbc-higher-image-transition-isIso-of-lower",
+    "def-sbc-canonical-base-change-stalk-transitions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply higherDirectImage_coefficient_square to the actual arrows a,b,cV,cU and the coefficient square. Paste this equality with target-transition normalization and the two comparison_hom equalities by abstract-category associativity. The final coefficient-decorated transition is exactly higherDirectImageOverMap. This proves the original statement for every integer q. The coefficient-map API keeps the higher-image endpoint objects consistent. Its OverMap equation supplies the last pasting hypothesis. The pasting theorem is instantiated explicitly at the endpoint objects and arrows of the proved equalities; Lean checks the resulting term, without transports of the derived-functor objects.",
+   "uses": [
+    "lem-sbc-higher-image-coefficient-square",
     "def-sbc-module-higher-image-transitions"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-fibre-product",
-  "def-weil-pbc-inverse-image",
-  "lem-sbc-lower-star-plus-transition-comp",
-  "lem-sbc-pullback-comparison-comp",
   "def-sbc-canonical-base-change-stalk-transitions",
-  "def-sbc-module-higher-image-transitions"
+  "def-sbc-module-higher-image-transitions",
+  "def-weil-pbc-inverse-image",
+  "lem-sbc-higher-image-coefficient-square",
+  "lem-sbc-higher-image-transition-isIso-of-lower",
+  "lem-sbc-target-transition-higher-image",
+  "lem-sbc-upper-star-coefficient-square"
  ],
  "proof_origin": {
-  "by": "worker U3 stage 3",
-  "document": "Stacks Project",
-  "place": "Tags 0F07 and 09Z1; explicit derived-adjunction expansion of the canonical restriction square."
+  "by": "worker B4 stage 3",
+  "document": "Stacks Project and source library",
+  "place": "Tags 0F07 and 09Z1; concrete pullback uniqueness, coefficient coherence, target normalization, and proved higher-image composition."
  },
  "mathlib_searches": [
   {
@@ -112,13 +128,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U3",
+  "reviewer": "X-fa9c8",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261012T110321-L-622914",
+  "landing": "20261014T084659-L-88600",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered signatures, comparison constructions, proof route and two remaining lemmas with their nodes and sources; all five modules and sole direct importer compile cleanly, and axiom checks agree with the documented holes."
  }
 }
