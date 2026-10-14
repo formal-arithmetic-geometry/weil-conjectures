@@ -15,25 +15,41 @@
  },
  "proof": [
   {
-   "text": "Construct the edge transformation from the sheaf-level edge, the supplied ordinary comparison, and the tilde/Gamma counit. The coordinate identity for Q(T_A C) follows from exactness of tilde, naturality of the comparison, the tilde adjunction triangle identity, and the derived-unit normalization.",
+   "text": "Obtain the natural sheaf edge epsilon from lem-pc-affine-derived-pushforward-sheaf-edge. Set J = inclusion followed by H^i, and Gamma = affine global sections. Define alpha as J Gamma whiskered with the supplied sigma, followed by J whiskered with the pushforward of the tilde/Gamma counit, followed by epsilon. This is an actual composition of natural transformations.",
    "uses": [
     "lem-pc-affine-derived-pushforward-sheaf-edge",
     "def-pc-affine-pushforward-comparison-coordinates"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For the canonical representative let k be the inverse exact-tilde homology comparison followed by the inverse Q/homology comparison. The representative coordinate b is the adjunction unit followed by Gamma(k). Counit naturality and the left triangle identity give T_A(b) followed by the counit equal to k. Apply naturality of sigma to b, functoriality of pushforward, and the sheaf edge normalization at T_A.",
+   "uses": [
+    "lem-pc-affine-derived-pushforward-sheaf-edge",
+    "def-pc-affine-pushforward-comparison-coordinates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The remaining equation is precisely the ordinary comparison factorization: evaluate sigma at H^i(C), then apply the exact homology comparison for T_A followed by pushforward, the Q/homology comparison, and the derived unit. Remove the identity morphisms on the target by functoriality.",
+   "uses": [
+    "lem-pc-affine-pushforward-comparison-factorization"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-affine-pushforward-comparison-coordinates",
-  "lem-pc-affine-derived-pushforward-sheaf-edge"
+  "lem-pc-affine-derived-pushforward-sheaf-edge",
+  "lem-pc-affine-pushforward-comparison-factorization"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "Q4",
+  "group": "G3",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4",
-  "place": "identity-representative part of affine cohomology edge normalization",
-  "note": "Strict intermediate statement introduced because the full coordinate calculation had type mismatches; target proof derives the general equality by eliminating the object equality."
+  "place": "perfect.tex, affine morphism equivalence proof, identity representative calculation.",
+  "note": "Explicit natural transformation construction and adjunction cancellation in Lean; one strict ordinary-comparison calculation split off, with no existential edge or quasi-coherence hypothesis."
  },
  "mathlib_searches": [
   {
@@ -98,12 +114,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q4",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261013T222409-L-1225228",
+  "landing": "20261014T063818-L-2813875",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

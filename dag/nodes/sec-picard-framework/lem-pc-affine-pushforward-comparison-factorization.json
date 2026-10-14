@@ -1,0 +1,118 @@
+{
+ "id": "lem-pc-affine-pushforward-comparison-factorization",
+ "kind": "statement",
+ "title": "Ordinary affine pushforward comparison factorization on cohomology",
+ "statement": "For rings A and B, a ring homomorphism phi : B -> A, an integer i, and a supplied natural isomorphism sigma from restriction of scalars followed by tilde_B to tilde_A followed by ordinary pushforward, assume the latter exact functor preserves zero maps and homology. For every cochain complex C, the defined affinePushforwardCohomologyMapOfComparison equals sigma at H^i(C), followed by the inverse exact homology comparison for tilde_A followed by pushforward, followed by the inverse derived Q/homology comparison, followed by H^i of the actual right-derived pushforward unit on tilde_A(C). No quasi-coherence proof or existential natural transformation is involved.",
+ "stmt_deps": [
+  "def-pc-affine-pushforward-comparison-coordinates",
+  "def-pc-derived-direct-image"
+ ],
+ "source": {
+  "document": "Stacks Project, perfect.tex, Tag 0AVW; Mathlib.Algebra.Homology.ShortComplex.PreservesHomology; Mathlib.Algebra.Homology.DerivedCategory.HomologySequence",
+  "place": "Affine morphism equivalence proof, ordinary comparison naturality; ShortComplex.homologyMap_mapNatTrans and naturality of DerivedCategory.homologyFunctorFactors.inv."
+ },
+ "proof": [
+  {
+   "text": "Expand affinePushforwardCohomologyMapOfComparison. Naturality of the inverse DerivedCategory.homologyFunctorFactors moves H(Q(sigma_C)) leftwards and replaces it with the ordinary homology map of sigma_C.",
+   "uses": [
+    "def-pc-affine-pushforward-comparison-coordinates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use Mathlib ShortComplex.homologyMap_mapNatTrans on the degree-i short complex of C: that homology map is the forward exact comparison for F = res_phi followed by tilde_B, sigma at H^i(C), and the inverse comparison for G = tilde_A followed by pushforward. Cancel the adjacent inverse and forward comparisons for F. Associate the remaining factors and identify Scheme.Modules.pushforward with its ringed-space definition. This argument uses neither boundedness nor nonzero rings.",
+   "uses": [
+    "def-pc-affine-pushforward-comparison-coordinates"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-pushforward-comparison-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G3",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4",
+  "place": "perfect.tex, affine morphism equivalence proof, identity representative calculation.",
+  "note": "Explicit natural transformation construction and adjunction cancellation in Lean; one strict ordinary-comparison calculation split off, with no existential edge or quasi-coherence hypothesis."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.homologyMap_mapNatTrans",
+   "results": "The online index returned unknown identifier; the local Mathlib signature was read and used in the proof attempt.",
+   "date": "2026-10-14",
+   "verdict": "Generic naturality lemma, no exact affine factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homology comparison is natural with respect to a natural transformation between exact functors",
+   "results": "NatTrans.app_homology and ShortComplex homology comparison naturality results.",
+   "date": "2026-10-14",
+   "verdict": "Generic ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyMap_mapNatTrans|homologyFunctorFactors",
+   "results": "Mathlib.Algebra.Homology.ShortComplex.PreservesHomology:725 and DerivedCategory.HomologySequence:39-51.",
+   "date": "2026-10-14",
+   "verdict": "Generic ingredients; no exact library theorem for the displayed affine factorization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of homology comparisons for an exact functor and a natural transformation",
+   "results": "UNAVAILABLE: service returned Internal Server Error on 2026-10-14. No search result or mathematical verdict is asserted. The other services and pinned Mathlib sources were searched.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIdentity",
+  "date": "2026-10-14",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-pushforward-cohomology-edge-identity",
+   "place": "Ordinary comparison naturality in the identity-representative calculation"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffinePushforwardComparisonFactorization",
+  "file": "lean/Sheaf/Algebra/Homology/AffinePushforwardComparisonFactorization.lean",
+  "declaration": "AlgebraicGeometry.affinePushforwardComparison_factorization",
+  "statement": "theorem affinePushforwardComparison_factorization\n    (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ)\n    (σ : ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B ≅\n      affinePushforwardTilde A ⋙\n        Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom φ)))\n    [(affinePushforwardTilde A ⋙ RingedSpace.moduleDirectImage\n      (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).PreservesZeroMorphisms]\n    [(affinePushforwardTilde A ⋙ RingedSpace.moduleDirectImage\n      (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).PreservesHomology]\n    (C : CochainComplex (ModuleCat A) ℤ) :\n    affinePushforwardCohomologyMapOfComparison A B φ σ C i =\n      σ.hom.app (C.homology i) ≫\n        ((C.sc i).mapHomologyIso\n          (affinePushforwardTilde A ⋙ RingedSpace.moduleDirectImage\n            (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom)).inv ≫\n        ((DerivedCategory.homologyFunctorFactors\n          (SheafOfModules (moduleRings (Spec (.of B)).toRingedSpace)) i).app\n          (((affinePushforwardTilde A ⋙ RingedSpace.moduleDirectImage\n            (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).mapHomologicalComplex\n              (.up ℤ)).obj C)).inv ≫\n        (DerivedCategory.homologyFunctor\n          (SheafOfModules (moduleRings (Spec (.of B)).toRingedSpace)) i).map\n          ((RingedSpace.moduleDirectImage\n            (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit.app\n            ((HomotopyCategory.quotient _ (.up ℤ)).obj\n              (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj C)))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261014T063818-L-2813875",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261014T063818-L-2813875",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
