@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
 public import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSplitAction
 
+import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSingleStabilizerComponent
+import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorRepresentativeComponentCover
+
 /-! # Descent of individual orbit components of a split finite étale cover -/
 
 @[expose] public section
@@ -87,6 +90,34 @@ theorem affine_torsor_orbit_component_descent
       e.hom ≫ Sigma.desc (fun i : Fin m ↦
         Scheme.Opens.ι (X := Spec (CommRingCat.of (F i))) (U i) ≫
           Spec.map (CommRingCat.ofHom (algebraMap H (F i)))) =
-        pullback.snd p (Spec.map (CommRingCat.ofHom ι)) := by sorry
+        pullback.snd p (Spec.map (CommRingCat.ofHom ι)) := by
+  classical
+  dsimp only
+  let F := fun i : Fin m ↦
+    (⨅ ζ : K i, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)
+  let U := fun i : Fin m ↦
+    (PrimeSpectrum.basicOpen (algebraMap H (F i) (ι g)) :
+      (Spec (CommRingCat.of (F i))).Opens)
+  have hcomponents := fun i : Fin m ↦
+    affine_torsor_single_stabilizer_component R H g ι C G ρ hρone hρmul hne
+      p j hj hEt hrot d T t k hk δ hδ (r i) (K i) (hstabilizer i)
+  choose f hopen hbase hsection using hcomponents
+  let : ∀ i, IsOpenImmersion (f i) := hopen
+  obtain ⟨hcover, hdisjoint⟩ := affine_torsor_representative_component_cover
+    R H g ι C G ρ hρone hρmul hne p j hj hEt hrot d m r K T t k hk δ hδ
+    hcomplete hdistinct hstabilizer f hbase hsection
+  have hcolim := nonempty_isColimit_cofanMk_of f hcover hdisjoint
+  have : IsIso (Sigma.desc f) :=
+    (Cofan.nonempty_isColimit_iff_isIso_sigmaDesc (Cofan.mk _ f)).mp hcolim
+  have hmap : Sigma.desc f ≫ pullback.snd p (Spec.map (CommRingCat.ofHom ι)) =
+      Sigma.desc (fun i : Fin m ↦
+        Scheme.Opens.ι (X := Spec (CommRingCat.of (F i))) (U i) ≫
+          Spec.map (CommRingCat.ofHom (algebraMap H (F i)))) := by
+    apply Sigma.hom_ext
+    intro i
+    simpa only [Sigma.ι_desc_assoc, Sigma.ι_desc] using hbase i
+  refine ⟨(asIso (Sigma.desc f)).symm, ?_⟩
+  change inv (Sigma.desc f) ≫ _ = _
+  rw [← hmap, ← Category.assoc, IsIso.inv_hom_id, Category.id_comp]
 
 end AlgebraicGeometry.Scheme

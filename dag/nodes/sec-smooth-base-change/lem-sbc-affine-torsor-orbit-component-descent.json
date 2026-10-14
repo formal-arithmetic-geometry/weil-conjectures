@@ -12,22 +12,35 @@
  ],
  "proof": [
   {
-   "text": "put h = algebraMap H C (ι g). Finite faithful flatness gives a faithfully\nflat finite cover D(h) of D(ι g). The étale and unique-rotation conditions identify\nits fibre square with the disjoint union of its G deck transformations: the natural\nmap is finite étale and bijective on geometric fibres. Pull the supplied splitting\nback to D(h). Its connectedness (C is a domain and h is nonzero) makes each deck\ntransformation permute the split sections. Evaluation at the generic point is the\nspecified fixedPunctureDescentAction. Completeness and distinctness index exactly\nits orbits, and hstabilizer gives their stabilizers. Effective descent of finite\nétale schemes therefore identifies each component with the stabilizer quotient.\nIts coordinate ring is the invariant subring of C[1/h]. This is (C^K)[1/h]: write\nan invariant fraction as a/h^n; for each ζ in K, the difference ρ(ζ)(a)-a becomes\nzero after localization. Injectivity into C[1/h] implies the difference was zero.\nThe reverse inclusion follows because h comes from H. The basic-open/localization\nisomorphism identifies this component with D(h) in Spec(C^K). Taking the coproduct\nof these component identifications gives e. Every descent and localization map is\nover Spec H, so coproduct universality gives the stated structural-map equation.\nFor d = 0 completeness forces m = 0; both sides are empty. No product-spectrum\nidentification is used here.",
+   "text": "Apply the single-stabilizer-component theorem to each r(i) and K(i). Choose the resulting maps f_i with their open-immersion proofs, base projection equations, and pullback-section equations. This uses only the exact stabilizers, not completeness or distinctness.",
    "uses": [
-    "lem-sbc-affine-torsor-split-label-laws"
+    "lem-sbc-affine-torsor-single-stabilizer-component"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply the representative-component-cover theorem to these actual maps f_i. Completeness gives supremum opensRange equal to top and distinctness gives pairwise disjointness.",
+   "uses": [
+    "lem-sbc-affine-torsor-representative-component-cover"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Mathlib nonempty_isColimit_cofanMk_of gives a colimit cofan for the disjoint open cover. Cofan.nonempty_isColimit_iff_isIso_sigmaDesc gives IsIso(Sigma.desc f). Take the inverse of asIso(Sigma.desc f). Sigma.hom_ext and Sigma.ι_desc prove Sigma.desc f followed by the pullback projection is Sigma.desc of the component structural maps. Compose this equality with the inverse; IsIso.inv_hom_id and Category.id_comp give the required structural-map equation. The argument includes the empty family without a case split.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-affine-torsor-split-label-laws"
+  "lem-sbc-affine-torsor-single-stabilizer-component",
+  "lem-sbc-affine-torsor-representative-component-cover"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "R1",
-  "document": "Stacks Project",
-  "place": "Tag 03SF, Galois covers of connected schemes; Tag 0EYG, fixed-subalgebra construction",
-  "note": "Separate orbit-component descent from finite-product assembly."
+  "group": "E3",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tag 03SF; Mathlib.AlgebraicGeometry.Limits.nonempty_isColimit_cofanMk_of",
+  "note": "Reduce to one-component descent and disjoint coverage; complete Lean coproduct assembly and projection equation. Existing statement is unchanged."
  },
  "mathlib_searches": [
   {
@@ -99,12 +112,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T231542-L-1819874",
+  "landing": "20261014T001715-L-2548475",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
