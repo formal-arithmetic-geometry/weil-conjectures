@@ -14268,7 +14268,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:25 L: merged deliver/F2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (stage 3; reviewer PASS; first push; landing 20261014T022542-L-4044469 (proof); batch 20261014T022537; modules 1; new nodes 0)
 - 02:25 L: merged deliver/F2/Sheaf.Paper.CartierEquality (stage 3; reviewer PASS; first push; landing 20261014T022542-L-4044628 (proof); batch 20261014T022537; modules 1; new nodes 0)
 - 02:25 L: merged deliver/G1/Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux (stage 3; reviewer PASS; after a return; landing 20261014T022543-L-4044816 (interface); batch 20261014T022537; modules 2; new nodes 2; change records: coord/changes/standardSingleBaseChange_topRestriction_compatibility.md)
-- 02:25 L: merged deliver/G3/Sheaf.AlgebraicGeometry.ScalarExternalCupModuleComparison (stage 3; reviewer PASS; after a return; landing 20261014T022543-L-4044956 (interface); batch 20261014T022537; modules 3; new nodes 0; change records: coord/changes/scalar-external-cup-module-comparison.md)
 - 02:25 L: merged deliver/G4/Sheaf.AlgebraicGeometry.PinnedTensorSquareLeftSummand (stage 3; reviewer PASS; first push; landing 20261014T022544-L-4045158 (proof); batch 20261014T022537; modules 1; new nodes 0)
 - 02:25 L: merged deliver/G4/Sheaf.CategoryTheory.MapExtendHomology (stage 3; reviewer PASS; first push; landing 20261014T022544-L-4045265 (proof); batch 20261014T022537; modules 1; new nodes 0)
 - 02:25 L: merged deliver/G4/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone (stage 3; reviewer PASS; first push; landing 20261014T022545-L-4045412 (proof); batch 20261014T022537; modules 1; new nodes 0)
@@ -14291,5 +14290,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:25 L: merged deliver/V1/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T022552-L-4048095 (proof); batch 20261014T022537; modules 1; new nodes 0)
 - 02:25 L: merged deliver/V1/Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling (stage 3; reviewer PASS; first push; landing 20261014T022553-L-4048257 (proof); batch 20261014T022537; modules 1; new nodes 0)
 - 02:25 L: merged deliver/V1/Sheaf.RingTheory.ZariskisMainAway (stage 3; reviewer PASS; first push; landing 20261014T022553-L-4048405 (proof); batch 20261014T022537; modules 1; new nodes 0)
-- 02:25 L: merged deliver/W2/Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker (stage 3; reviewer PASS; after a return; landing 20261014T022553-L-4048584 (proof); batch 20261014T022537; modules 1; new nodes 0)
 - 02:32 L: returned deliver/K3/Sheaf.AlgebraicGeometry.TensorSinglePullbackComposition (reviewer RETURN: (reviewer X-d9d1e, head d9d1efb95) H10: lean/Sheaf/AlgebraicGeometry/TensorSinglePullbackComposition.lean timed out at 6)
+
+- 10:35 L: batch 20261014T022537 dependency take-out

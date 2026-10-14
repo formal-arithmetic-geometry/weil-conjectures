@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 The SHEAF contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group N2
--/
 module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
@@ -10,18 +5,9 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.GroupTheory.QuotientGroup.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
-import WeilConjectures.AlgebraicGeometry.Curve.Picard
+import Sheaf.AlgebraicGeometry.Curve.PicardDecomposition
 import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionDiv
-
-/-!
-# The multiplication-by-n cokernel of the Picard group of a proper curve
-
-The source-library splitting of the degree homomorphism reduces the cokernel to the
-integer coordinate; the degree-zero coordinate is n-divisible.
-
-Source: blueprint `lem-sc-pic-proper-ntorsion`, final cokernel calculation.
--/
-
+import Mathlib.Algebra.Group.TypeTags.Hom
 @[expose] public section
 universe u
 open CategoryTheory
@@ -30,11 +16,8 @@ namespace AlgebraicGeometry
 Source: blueprint `lem-sc-pic-proper-ntorsion`, final cokernel calculation.
 (blueprint: lem-sc-pic-proper-ntorsion-coker)
 
-Proof: connectedness and smoothness give irreducibility, and the dimension-one
-hypothesis gives smooth relative dimension one. The source-library theorem
-`Scheme.exists_mulEquiv_prod_ker_picDegreeHom` gives `Pic(C) ≃ ℤ × P0`, where
-P0 is the kernel of the degree homomorphism. Its underlying set is `f.picZero`
-by `Scheme.coe_ker_picDegreeHom`. Degree-zero divisibility makes the nth-power
+Proof: the Picard decomposition gives a subgroup P0 with underlying set `f.picZero`
+and an equivalence `Pic(C) ≃ ℤ × P0`. Degree-zero divisibility makes the nth-power
 map on P0 surjective. Compose the first coordinate with the integer cast into ZMod n.
 This homomorphism is surjective since integer cast is surjective. Its kernel is the
 nth-power image: an nth power maps to zero modulo n; conversely, if the integer
@@ -48,30 +31,24 @@ theorem Scheme.Hom.pic_proper_ntorsion_coker
     Nonempty (C.Pic ⧸ (powMonoidHom n : C.Pic →* C.Pic).range ≃*
       Multiplicative (ZMod n)) := by
   classical
-  let : C.Over (Spec (.of k)) := ⟨f⟩
-  have : ConnectedSpace C := IsConnectedCurve.connectedSpace' f
-  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
-  have : IsRegular C := IsRegular.of_smooth f
-  have : IrreducibleSpace C := IsRegular.irreducibleSpace C
-  have : SmoothOfRelativeDimension 1 f :=
-    (smoothOfRelativeDimension_iff_topologicalKrullDim_eq f 1).mpr
-      (IsConnectedCurve.krullDim_eq_one (f := f))
-  have : SmoothOfRelativeDimension 1 (C ↘ Spec (.of k)) :=
-    ‹SmoothOfRelativeDimension 1 f›
-  have : IsProper (C ↘ Spec (.of k)) := ‹IsProper f›
-  -- Only the surjectivity part of the degree splitting is needed for the cokernel.
-  let d := Scheme.picDegreeHom k C
-  have hd : Function.Surjective d := Scheme.surjective_picDegreeHom
+  obtain ⟨P0, hP0, e, -, -⟩ := f.exists_mulEquiv_prod_picZero
+  have hdiv : Function.Surjective (fun x : P0 ↦ x ^ n) := by
+    intro L
+    obtain ⟨M, hM, hpow⟩ := f.pic_proper_ntorsion_div n _hn L (by
+      rw [← hP0]
+      exact L.property)
+    refine ⟨⟨M, by change M ∈ (P0 : Set C.Pic); rw [hP0]; exact hM⟩, ?_⟩
+    exact Subtype.ext hpow
   let φ : C.Pic →* Multiplicative (ZMod n) :=
-    (Int.castAddHom (ZMod n)).toMultiplicative.comp d
+    (Int.castAddHom (ZMod n)).toMultiplicative.comp
+      ((MonoidHom.fst (Multiplicative ℤ) P0).comp e.toMonoidHom)
   have hφ : Function.Surjective φ := by
     intro a
     obtain ⟨z, hz⟩ := ZMod.intCast_surjective (Multiplicative.toAdd a)
-    obtain ⟨L, hL⟩ := hd (Multiplicative.ofAdd z)
-    refine ⟨L, ?_⟩
-    change Multiplicative.ofAdd ((d L).toAdd : ZMod n) = a
-    rw [hL]
-    exact congrArg Multiplicative.ofAdd hz
+    refine ⟨e.symm (Multiplicative.ofAdd z, 1), ?_⟩
+    change Multiplicative.ofAdd (((e (e.symm (Multiplicative.ofAdd z, 1))).1.toAdd : ℤ) :
+      ZMod n) = a
+    simpa using congrArg Multiplicative.ofAdd hz
   have hker : (powMonoidHom n : C.Pic →* C.Pic).range = φ.ker := by
     ext L
     constructor
@@ -81,24 +58,19 @@ theorem Scheme.Hom.pic_proper_ntorsion_coker
       change Multiplicative.ofAdd (n • Multiplicative.toAdd (φ M)) = 1
       simp
     · intro hL
-      have hz : (((d L).toAdd : ℤ) : ZMod n) = 0 := by
+      have hz : (((e L).1.toAdd : ℤ) : ZMod n) = 0 := by
         exact congrArg Multiplicative.toAdd hL
       obtain ⟨z, hz⟩ := (ZMod.intCast_zmod_eq_zero_iff_dvd _ _).mp hz
-      obtain ⟨M, hM⟩ := hd (Multiplicative.ofAdd z)
-      have hdeg : d (L / M ^ n) = 1 := by
-        rw [map_div, map_pow, hM]
-        have hpow : Multiplicative.ofAdd z ^ n = d L := by
-          apply Multiplicative.toAdd.injective
-          simpa [nsmul_eq_mul, mul_comm] using hz.symm
-        simp [hpow]
-      have hzero : L / M ^ n ∈ f.picZero := by
-        have hker : (d.ker : Set C.Pic) = f.picZero := Scheme.coe_ker_picDegreeHom
-        rw [← hker]
-        exact hdeg
-      obtain ⟨R, _, hR⟩ := f.pic_proper_ntorsion_div n _hn (L / M ^ n) hzero
-      refine ⟨R * M, ?_⟩
-      change (R * M) ^ n = L
-      rw [mul_pow, hR, div_mul_cancel]
+      obtain ⟨M, hM⟩ := hdiv (e L).2
+      refine ⟨e.symm (Multiplicative.ofAdd z, M), ?_⟩
+      change (e.symm (Multiplicative.ofAdd z, M)) ^ n = L
+      apply e.injective
+      rw [map_pow, e.apply_symm_apply]
+      apply Prod.ext
+      · change Multiplicative.ofAdd (n • z) = (e L).1
+        apply Multiplicative.toAdd.injective
+        simpa [nsmul_eq_mul, mul_comm] using hz.symm
+      · exact hM
   exact ⟨(QuotientGroup.quotientMulEquivOfEq hker).trans
     (QuotientGroup.quotientKerEquivOfSurjective φ hφ)⟩
 end AlgebraicGeometry
