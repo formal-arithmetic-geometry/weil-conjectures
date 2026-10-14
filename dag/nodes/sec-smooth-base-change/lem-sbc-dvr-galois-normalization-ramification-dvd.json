@@ -1,0 +1,122 @@
+{
+ "id": "lem-sbc-dvr-galois-normalization-ramification-dvd",
+ "kind": "statement",
+ "title": "Ramification and residue degrees in a Galois normalization divide the field degree",
+ "statement": "Let $B$ be a DVR domain [def-sc-discrete-valuation-ring], let $K=\\operatorname{Frac}(B)$, let $E/K$ be a finite Galois extension [def-weil-field, def-weil-vector-space-dimension], and let $n\\in\\mathbf N$ satisfy $[E:K]\\mid n$. Give $E$ the composite $B$-algebra structure and put $C=\\operatorname{integralClosure}_B(E)$ [def-weil-pbc-integral-closure]. For every prime ideal $R\\subset C$ contracting to the maximal ideal of $B$, both its ramification index $e(R/B)$ and its residue degree $f(R/B)$ divide $n$. Here the index is the length of $C_R/\\mathfrak m_B C_R$, and the residue degree is $[\\kappa(R):\\kappa(\\mathfrak m_B)]$. No invertibility hypothesis on $n$ is required.",
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-field",
+  "def-weil-vector-space-dimension",
+  "def-weil-pbc-integral-closure"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09EB (lemma-galois-conclusion), with Tag 032L for finiteness of the integral closure."
+ },
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-noetherian-normal-separable-integral-closure-finite] to C. Mathlib IsIntegralClosure.isDedekindDomain and isFractionRing_of_finite_extension equip C with its Dedekind-domain and fraction-field structures. IsIntegralClosure.module_free makes C free over the principal ideal domain B, hence flat.",
+   "uses": [
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the finite group Gal(E/K) to C using IsIntegralClosure.MulSemiringAction. IsGaloisGroup.of_isFractionRing gives the integral Galois action. For any R above m_B, Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn yields r*(e*f)=Nat.card Gal(E/K). The common-index and common-residue-degree lemmas identify e,f with R.ramificationIdx B and R.inertiaDeg B. IsGalois.card_aut_eq_finrank identifies the right side with [E:K].",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Each factor e and f divides r*(e*f), hence [E:K]. Compose these divisibilities with [E:K] divides n.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "kind": "written-by-agent",
+  "agent": "N2",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tag 09EB (lemma-galois-conclusion), with Tag 032L for finiteness of the integral closure."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a finite Galois extension of the fraction field of a DVR each ramification index and residue degree of its integral closure divides the field extension degree",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn",
+   "date": "2026-10-14",
+   "results": "Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn",
+   "verdict": "Component APIs only; no direct match for the full interface. The Lean proof uses the relevant components."
+  },
+  {
+   "tool": "grep",
+   "query": "ramificationIdxIn_eq_ramificationIdx|ncard_primesOver_mul_ramificationIdxIn",
+   "date": "2026-10-14",
+   "results": "Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean",
+   "verdict": "Component APIs only; no direct match for the full interface. The Lean proof uses the relevant components."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.DvrGaloisRootFactorUniformizer",
+  "date": "2026-10-14",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case, tame root calculation: Ramification and residue degrees in a Galois normalization divide the field degree",
+   "via": [
+    "lem-sbc-dvr-galois-root-factor-uniformizer",
+    "lem-sbc-dvr-root-normalization-maximal-ideal",
+    "lem-sbc-dvr-galois-components-root-cotangent",
+    "lem-sbc-dvr-galois-components-root-not-square"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.DvrGaloisNormalizationRamificationDvd",
+  "file": "lean/Sheaf/RingTheory/DvrGaloisNormalizationRamificationDvd.lean",
+  "declaration": "RingTheory.dvr_galois_normalization_ramification_dvd",
+  "statement": "theorem dvr_galois_normalization_ramification_dvd\n    (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]\n    (E : Type u) [Field E] [Algebra (FractionRing B) E]\n    (n : ℕ)\n    (hE : FiniteDimensional (FractionRing B) E ∧\n      IsGalois (FractionRing B) E ∧ Module.finrank (FractionRing B) E ∣ n) :\n    letI : Algebra B E :=\n      ((algebraMap (FractionRing B) E).comp (algebraMap B (FractionRing B))).toAlgebra\n    let C := integralClosure B E\n    ∀ (R : Ideal C) (hR : R.IsPrime),\n    letI := hR\n    R.comap (algebraMap B C) = IsLocalRing.maximalIdeal B →\n      R.ramificationIdx B ∣ n ∧ R.inertiaDeg B ∣ n",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261014T025141-L-157748",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261014T025141-L-157748",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
