@@ -14510,3 +14510,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:26 L: merged deliver/F1/Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed (stage 3; reviewer PASS; first push; landing 20261014T042653-L-1239202 (proof); batch 20261014T042650; modules 1; new nodes 0)
 - 04:26 L: merged deliver/J2/Sheaf.AlgebraicGeometry.PullbackTensorTotalCompositionLocalized (stage 3; reviewer PASS; first push; landing 20261014T042653-L-1239414 (proof); batch 20261014T042650; modules 1; new nodes 0)
 - 04:28 L: returned deliver/T4/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (reviewer RETURN: (reviewer X-2affc, head 2affc29f6) G1 / review point 2 (downstream interface and forced-adaptation failure): restore the)
+- 04:28 L: returned deliver/K4/Sheaf.Algebra.Homology.KInjectiveProducts (reviewer RETURN: (reviewer X-dae4e, head dae4e39ad) H9: unused import. In lean/Sheaf/Algebra/Homology/KInjectiveProducts.lean, delete `pu)
