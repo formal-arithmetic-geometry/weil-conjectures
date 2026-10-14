@@ -14,21 +14,27 @@
  ],
  "proof": [
   {
-   "text": "The cartesian square makes a a base change of i, hence a closed immersion surjective on points. These two properties are stable under base change (the corresponding Mathlib scheme morphism instances).",
+   "text": "Give i its Surjective instance from hi. Use MorphismProperty.of_isPullback on sq.flip to obtain both IsClosedImmersion a and Surjective a. Apply Etale.isEquivalence_upperStar_of_thickening to a.",
+   "uses": [
+    "sbc-lem-thickening-etale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The additive sheaf equivalence induces an equivalence on the unbounded derived categories by Functor.isEquivalence_mapDerivedCategory. Its restriction D+(a*) is full and faithful: cancel the full faithful inclusions using mapDerivedCategoryPlusCompatibility, Full.of_comp_faithful_iso and Faithful.of_comp_iso. Therefore the unit of D+(a*) adjoint to R+(a*) is invertible by Adjunction.unit_isIso_of_L_fully_faithful.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Apply [sbc-lem-thickening-etale-site] to a. Its derived pullback adjunction is an equivalence, so its unit is invertible. The transition Rh2_* to Rh1_*a^{-1} is the direct image of that unit followed by the composition isomorphism. To see the derived equivalence directly, apply the additive equivalence and its exact inverse degreewise to bounded-below complexes: they preserve quasi-isomorphisms and their inverse natural isomorphisms descend to the localization. For the identification of the transition, use the composite-unit formula [def-weil-pbc-composite-adjunction] and the conjugate-defined right-adjoint comparison [def-weil-pbc-adjunction-conjugate]. Substitute these formulas; naturality moves the intervening counit past the unit, and the triangle identity cancels the unit-counit pair for g (respectively h2). The remaining map is the direct image of the invertible unit for i (respectively a).",
+   "text": "Substitute h1 = a followed by h2. The private proved helper transition_eq_unit identifies the defining mate with Rh2 applied to the unit for a followed by the right-adjoint composition comparison. Apply the inverse hom-set equivalence of the h1 adjunction to both sides. conjugateEquiv_counit rewrites the conjugate comparison; naturality of the left comparison moves Rh2(unit_a) past it. Expand the composite counit by Adjunction.comp_counit_app, use naturality of the h2 counit, then the left triangle identity for a. Thus the transition is a composite of isomorphisms.",
    "uses": [
-    "sbc-lem-thickening-etale-site",
     "def-weil-pbc-composite-adjunction",
     "def-weil-pbc-adjunction-conjugate"
    ],
    "elementary": false
   },
   {
-   "text": "The cartesian comparison identifies a^{-1}e2^{-1} with e1^{-1}i^{-1}. All coefficient and single-complex comparisons are isomorphisms, and degree-q homology preserves them.",
+   "text": "Expand baseChangeTargetTransition. The lowerStarPlusTransition is an isomorphism by the preceding calculation. The two pullback composition comparisons, equality transport from sq.w and degree-zero single-functor comparison are isomorphisms. Direct image and degree-q homology preserve these isomorphisms, giving the conclusion for every integer q.",
    "uses": [],
    "elementary": true
   }
@@ -41,7 +47,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-failure-field/sbc-lem-bc-failure-field.md",
-  "place": "Proof, condition (1): thickenings; transition compatibility made explicit"
+  "place": "Proof, condition (1): thickenings; implemented by S1 using the existing topological-invariance theorem and the adjunction mate calculation"
  },
  "mathlib_searches": [
   {
@@ -115,13 +121,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T042426-L-1824132",
-  "kind": "interface",
+  "landing": "20261014T140637-L-118536",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
