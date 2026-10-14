@@ -1,0 +1,158 @@
+{
+ "id": "lem-sc-module-cup-derived-class-comparison",
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupDerivedClassComparison",
+  "date": "2026-10-14",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "The general theorem of the cube application: module-cohomology cup comparison in the downstream Picard/Kunneth argument.",
+   "via": [
+    "lem-sc-module-cup-realization-evaluation",
+    "lem-sc-module-cup-resolution-invariance",
+    "def-sc-module-cohomology-cup-product",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Right derived global sections cohomology computed by injective resolution, with cycle representatives",
+   "results": "8 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extMk, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass",
+   "date": "2026-10-14",
+   "verdict": "supporting infrastructure; no exact representative comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "InjectiveResolution.isoRightDerivedObj",
+   "results": "loogle: unknown identifier 'InjectiveResolution.isoRightDerivedObj'",
+   "date": "2026-10-14",
+   "verdict": "supporting infrastructure; no exact representative comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctorFactors|isoRightDerivedObj_hom_naturality",
+   "results": "25 hits: Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+   "date": "2026-10-14",
+   "verdict": "supporting infrastructure; no exact representative comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "homology of right derived functor evaluated on a single complex is the classical right derived functor",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupDerivedClassComparison",
+  "file": "lean/Sheaf/Paper/ModuleCupDerivedClassComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_cupDerivedClassComparison",
+  "statement": "theorem exists_cupDerivedClassComparison : Nonempty (CupDerivedClassComparison X)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-14"
+ },
+ "title": "Comparison of module cup classes with derived global sections",
+ "statement": "For every scheme X, assume HasDerivedCategory for sheaves of O_X-modules. There is a family of Gamma(X,O_X)-linear equivalences from H^n(X,F), defined as the right-derived global sections functor, to degree-n homology of RΓ(F[0]), for every module sheaf F and every natural n. For every computing resolution D of F [def-sc-module-cup-resolution-data] and global cocycle a in degree n, the integer extension of Γ(D.K) contains a cycle z whose component, under the extension identification, is the underlying section of a. The equivalence sends D.class n a to the image of the localized homology class of z [new-module-cup-derived-homology-tensor] under the canonical right-derived comparison unit followed by RΓ of the inverse localized augmentation [def-sc-module-cup-realization-complex-data]. The units are moduleCup_globalComparison and moduleCup_comparisonNatTrans, as defined in [lem-sc-module-cup-naive-derived-compatibility] and [lem-sc-module-cup-kinjective-target].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01DZ",
+  "place": "cohomology computed by injective resolutions; Tag 0FKU for derived comparison"
+ },
+ "stmt_deps": [
+  "def-sc-module-cup-resolution-data",
+  "def-sc-module-cup-realization-complex-data",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-sc-module-cup-kinjective-target",
+  "lem-sc-module-cup-naive-derived-compatibility",
+  "new-module-cup-derived-homology-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Install enough injectives for module sheaves. For each coefficient F, use the actual Mathlib injectiveResolution F. Its extension to integer degrees is bounded below and consists of injectives, so CochainComplex.isKInjective_of_injective proves it K-injective. The right-derived unit on it is an isomorphism by the existing RightDerivedFunctor.Defs instance; moduleCup_globalComparison transports that unit through quotientCompQhIso. Compose InjectiveResolution.isoRightDerivedObj, the inverse extension/mapExtend homology isomorphism, the inverse homologyFunctorFactors isomorphism, and homology of the comparison followed by the inverse localized augmentation. Each factor is an actual isomorphism, giving injectiveClassIso and its linear equivalence.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-sc-ringed-space-module-cohomology",
+    "lem-sc-module-cup-kinjective-target",
+    "def-sc-module-cup-realization-complex-data",
+    "lem-sc-module-cup-naive-derived-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend the comparison D.K to D.I, followed by InjectiveResolution.homotopyEquiv D.I J, to integer degrees. D.over and homotopyEquiv_hom_ι give augmentation_comparison. Naturality of moduleCup_comparisonNatTrans and cancellation of the invertible augmentation give global_transport. Mathlib isoRightDerivedObj_hom_naturality identifies the natural-degree homology transport; naturality of mapExtendIso and extendHomologyIso identifies its integer-degree version. Naturality of homologyFunctorFactors gives injectiveClassIso_transport. These are proved local lemmas and do not use the product resolution-invariance theorem.",
+   "uses": [
+    "lem-sc-module-cup-kinjective-target"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Convert a from the explicit kernel presentation to L.cycles n by moduleCatCyclesIso.inv. Define z by applying sectionCyclesIso.inv. The hom_inv identity, cyclesMap_i and extendCyclesIso_hom_iCycles prove its component equation. The naturality equation for homologyπ and homologyπ_extendHomologyIso_hom gives sectionCyclesIso_homologyπ. Evaluate injectiveClassIso_transport on K.homologyπ n z and substitute this equation; unfolding D.class, cupCycleClass and cupLocalizedCycleClass gives the required class formula. No new unproved lemma or choice of unspecified data is used. The same equations apply at n=0 and for zero cycles.",
+   "uses": [
+    "def-sc-module-cup-resolution-data",
+    "new-module-cup-derived-homology-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cup-realization-complex-data",
+  "def-sc-module-cup-resolution-data",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-sc-module-cup-kinjective-target",
+  "lem-sc-module-cup-naive-derived-compatibility",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "new-module-cup-derived-homology-tensor"
+ ],
+ "proof_origin": {
+  "by": "D2 stage-3 worker; repaired and checked the prior N4/K1 construction",
+  "document": "https://stacks.math.columbia.edu/tag/01DZ",
+  "place": "cohomology-equation-cohomology-modules; Tag 0FKU, identification with RΓ and representative comparison by injective resolutions"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261014T020507-L-3810095",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261014T020507-L-3810095",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
