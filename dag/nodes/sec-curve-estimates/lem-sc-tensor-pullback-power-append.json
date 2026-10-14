@@ -1,0 +1,139 @@
+{
+ "id": "lem-sc-tensor-pullback-power-append",
+ "kind": "statement",
+ "title": "Tensor pullback preserves appending one tensor factor",
+ "statement": "Let j:Z→X be a morphism of schemes [def-pc-scheme], B an arbitrary O_X-module, P=tensorPullback j, β the tensor comparison and p_e the recursive tensor-power pullback comparison [lem-sc-square-zero-ideal-tensor-unit]. For every e≥0, let a_B,e: B^e tensor B → B^(e+1) be (B^e tensor ρ_B inverse) followed by tensorPowAddIso(B,e,1).inv. Then β(B^e,B).inv followed by P(a_B,e) and p_(e+1).hom equals (p_e.hom tensor identity(PB)) followed by a_(PB),e. No closed immersion, ideal, coefficient module, block size, section or invertibility hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CD, functorial pullback of tensor products and its associator/unit coherence; Tag 09MS, tensor powers in coherent-equation-ses. The recursive append calculation is the pullback part of step 2 of lem-sc-tensor-ideal-section-coefficient-comparison."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-sc-square-zero-ideal-tensor-unit"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved private pullback_power_add in BoundaryCoefficientDegreeSplit at e and 1. Its base normalization uses pullback_monoidal_unit_comparison. The transported monoidal unit map gives the degree-zero inverse comparison; right unitality identifies the inverse right unitor followed by the degree-one inverse comparison with the pullback of the inverse right unitor. Precompose by the inverse degree-e comparison tensored with the identity. Tensorator naturality and whisker exchange reduce to pullback_power_add; cancel the inverse degree-(e+1) comparison. This works for e=0 and arbitrary B, including the tensor unit.",
+   "uses": [
+    "lem-sc-boundary-coefficient-degree-split",
+    "lem-sc-pullback-monoidal-unit-comparison",
+    "lem-sc-square-zero-ideal-tensor-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-boundary-coefficient-degree-split",
+  "lem-sc-pullback-monoidal-unit-comparison",
+  "lem-sc-square-zero-ideal-tensor-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CD, functorial pullback of tensor products and its associator/unit coherence; Tag 09MS, tensor powers in coherent-equation-ses. The recursive append calculation is the pullback part of step 2 of lem-sc-tensor-ideal-section-coefficient-comparison. Second reader E4 closes the statement using the existing proved private pullback_power_add and monoidal right unitality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Monoidal functor tensor power comparison commutes with appending one factor using the right unitor and tensor power addition",
+   "date": "2026-10-14",
+   "results": "8 hits: CategoryTheory.MonoidalFunctor.mapPi, CategoryTheory.MonoidalCategory.externalProductCompDiagIso, CategoryTheory.MonoidalCategory.tensoringRight_η, CategoryTheory.MonoidalCategory.tensoringRight_ε, CategoryTheory.Functor.Monoidal.commTensorRight, CategoryTheory.unitOfTensorIsoUnit, AugmentedSimplexCategory.inr_comp_tensorHom, CategoryTheory.unitOfTensorIsoUnit_hom_app; no exact recursive pullback-power append statement.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal.map_rightUnitor_inv",
+   "date": "2026-10-14",
+   "results": "1 hits: CategoryTheory.Functor.Monoidal.map_rightUnitor_inv; no exact recursive pullback-power append statement.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundaryPullbackPowIso|tensorPowAddIso",
+   "date": "2026-10-14",
+   "results": "0 hits: ; no exact recursive pullback-power append statement.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Monoidal pullback comparison for tensor powers preserves appending one tensor factor using unitors and tensor power addition",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TensorIdealSectionCoefficientComparison",
+  "date": "2026-10-14",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "The tensor-power coefficient regrouping in the graded ideal sequence of Tag 09MS, specifically preservation of appending one factor under pullback in step 2 of lem-sc-tensor-ideal-section-coefficient-comparison.",
+   "via": [
+    "lem-sc-tensor-ideal-section-coefficient-comparison",
+    "lem-sc-tensor-coefficient-action-on-summand",
+    "lem-sc-square-zero-tensor-graded-coefficient-sheaf-action",
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorPullbackPowerAppend",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorPullbackPowerAppend.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.boundaryPullbackPowIso_append",
+  "statement": "theorem boundaryPullbackPowIso_append {X Z : Scheme.{u}} (j : Z ⟶ X)\n    (B : X.Modules) (e : ℕ) :\n    (boundaryPullbackTensorIso j (B.tensorPow e) B).inv ≫\n        (tensorPullback j).map\n          ((B.tensorPow e ◁ (ρ_ B).inv) ≫ (B.tensorPowAddIso e 1).inv) ≫\n        (boundaryPullbackPowIso j B (e + 1)).hom =\n      (boundaryPullbackPowIso j B e).hom ▷ (tensorPullback j).obj B ≫\n        (((tensorPullback j).obj B).tensorPow e ◁ (ρ_ ((tensorPullback j).obj B)).inv) ≫\n        (((tensorPullback j).obj B).tensorPowAddIso e 1).inv",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-34861",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261014T054050-L-2106170",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-34861",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261014T054050-L-2106170",
+  "kind": "interface",
+  "note": "independent Codex review: Matched both Lean statements and proofs with their DAG nodes, preserved interface, change record, report, and earlier return; both modules compile cleanly and both public theorems use only the three permitted axioms."
+ }
+}

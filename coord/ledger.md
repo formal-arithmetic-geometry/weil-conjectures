@@ -14645,3 +14645,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 13:37 L: batch 20261014T053238 dependency take-out
 - 05:40 L: merged deliver/A3/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (stage 3; reviewer PASS; first push; landing 20261014T054049-L-2105999 (proof); batch 20261014T054047; modules 1; new nodes 0)
+- 05:40 L: merged deliver/E4/Sheaf.AlgebraicGeometry.TensorIdealSectionCoefficientComparison (stage 3; reviewer PASS; after a return; landing 20261014T054050-L-2106170 (interface); batch 20261014T054047; modules 2; new nodes 1; change records: coord/changes/tensorIdealSectionMultiply_coefficient_comparison_proof_settings.md)

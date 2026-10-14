@@ -19,36 +19,43 @@
  ],
  "proof": [
   {
-   "text": "Use hD to replace D by canonicalTensorBoundaryComparisons. Expand boundarySectionDegreeIso as boundaryPullbackPowIso followed by tensorPowMulIso. Expand boundaryCoefficientDegreeIso into its pullback of the tensor-power regrouping and associator, its pullback tensorator, and its tensor-power pullback comparison. Expand tensorIdealSectionMultiply as its explicit composite. Only module tensor maps occur.",
+   "text": "Replace D by the canonical package using hD. section_degree_zero proves that tensorPowSection f 1 followed by the inverse section-degree comparison is f followed by boundaryPullbackPowIso in degree n inverted, then the pullback of the exponent cast n=n(0+1). The proof uses the existing private tensorPowMulIso_one_inv in BoundaryCoefficientDegreeSplit, cancels the right unitors, and uses exponent naturality of boundaryPullbackPowIso. raw_cast removes this section cast by equality elimination and proof irrelevance.",
    "uses": [
     "lem-sc-square-zero-ideal-tensor-unit",
-    "lem-sc-tensor-homogeneous-kernel-action"
+    "lem-sc-tensor-homogeneous-kernel-action",
+    "lem-sc-boundary-coefficient-degree-split"
    ],
    "elementary": true
   },
   {
-   "text": "Naturality of the pullback tensorator moves the section through the tensor comparison. The degree-one tensorPowSection f 1 includes the inverse right unitor, which cancels the degree-one tensor-power regrouping. On the coefficient side, keep the ideal factor fixed, group the first n copies with it, group the remaining factors into e blocks of n, and append one further block through f. These are the same ordered factors as raw ideal multiplication. The regrouping identity follows by induction on tensor-power exponents: addition associativity is induction on the first exponent, with the pentagon in the successor case; multiplication regrouping respects addition by induction on the number of blocks using that identity. The analogous pullback regrouping is induction on the exponent using tensorator naturality and associativity. The zero cases are the unit comparisons and triangle identity. This proves the displayed equality of composites, with no invertibility assumption on the ideal.",
+   "text": "Factor each coefficient comparison into the pullback of blockIso and coeffIso. The proved private tensorPowMulIso_add_inv in SectionRingVeroneseNumeratorTransition gives block_concat_inv by tensoring with the unchanged ideal factor and applying the associator pentagon. tensorPowMulIso_one_inv, the proved private identity in BoundaryCoefficientDegreeSplit, cancels the degree-one unit factor; exponent naturality gives block_append. These are actual closed library tensor identities, not assumptions about section-ring numerators.",
    "uses": [
+    "lem-sc-section-ring-veronese-numerator-transition",
     "lem-sc-square-zero-ideal-tensor-unit",
-    "lem-pc-module-pullback-adjunction"
+    "lem-sc-boundary-coefficient-degree-split"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Tensor powers of an isomorphism preserve concatenation, by the proved private powIso_add induction. Combine this with boundaryPullbackPowIso_append to obtain pullback_pow_append_iso. The private coefficient_append calculation uses the transported monoidal tensorator, its naturality, associativity and unitors to conjugate pullback multiplication to mulTensorPowSection. Precompose the desired identity by the inverse degree-e coefficient comparison and postcompose by the degree-(e+1) comparison. Naturality moves the pulled-back blockIso through the right unitor, the section, and the tensorator; combine the functor maps and apply block_append. The remaining composite is precisely coefficient_append. Cancel the two isomorphisms. Every argument includes n=0 and e=0.",
+   "uses": [
+    "lem-sc-tensor-pullback-power-append",
+    "lem-sc-square-zero-ideal-tensor-unit"
    ],
    "elementary": false
-  },
-  {
-   "text": "The output-degree equality h is the arithmetic identity n(e+1)+n=n(e+2). All transports of that equality agree by proof irrelevance. Thus the comparison holds also at n=0 and e=0. The proof uses no graded algebra presentation, quotient action or cohomology.",
-   "uses": [],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-module-pullback-adjunction",
+  "lem-sc-section-ring-veronese-numerator-transition",
   "lem-sc-square-zero-ideal-tensor-unit",
-  "lem-sc-tensor-homogeneous-kernel-action"
+  "lem-sc-tensor-homogeneous-kernel-action",
+  "lem-sc-tensor-pullback-power-append",
+  "lem-sc-boundary-coefficient-degree-split"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 09MS, tensor powers in coherent-equation-ses and its graded direct sum; Modules Tag 01CD, pullback of tensor products. This spells out the coefficient comparison part of lem-sc-tensor-coefficient-action-on-summand. The explicit categorical calculation spells out the original parent node's local proof."
+  "place": "Tag 09MS, tensor powers in coherent-equation-ses; Tag 01CD, functorial tensor pullback. E4 writes the actual categorical combination, reusing the already-proved private tensor addition/regrouping identities and using the proved pullback append coherence of lem-sc-tensor-pullback-power-append."
  },
  "mathlib_searches": [
   {
@@ -172,11 +179,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P3",
+  "reviewer": "X-34861",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261014T034910-L-814814",
+  "landing": "20261014T054050-L-2106170",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched both Lean statements and proofs with their DAG nodes, preserved interface, change record, report, and earlier return; both modules compile cleanly and both public theorems use only the three permitted axioms."
  }
 }
