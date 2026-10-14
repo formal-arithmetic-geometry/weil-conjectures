@@ -15,13 +15,9 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
-import Sheaf.AlgebraicGeometry.AffineQuotientResolutionSheafification
+import Sheaf.AlgebraicGeometry.DerivedSelfTorAffineCoordinates
+import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
-import Sheaf.AlgebraicGeometry.Modules.IsKFlatRestriction
-import Sheaf.AlgebraicGeometry.AffineChartTotalTensor
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
-import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 import Sheaf.AlgebraicGeometry.QuotientResolutionTensorComparison
 
@@ -36,6 +32,11 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- Derived tensor transport unfolds the large sheaf and derived category instance terms.
+set_option synthInstance.maxSize 2048 in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Nonpositive flat resolutions have affine coordinates compatible with one
 augmented quotient-resolution lift on each basic inclusion. Compatibility with
 arbitrary supplied lifts is a separate algebraic homotopy argument.
@@ -43,38 +44,27 @@ arbitrary supplied lifts is a separate algebraic homotopy argument.
 Source: Stacks Project, Tags 08DX(2), 06YG, 06YB, 01I9, and 00LS(1).
 (blueprint: new-h3-self-tor-nonpositive-chosen-comparisons).
 
-Proof: On an affine U, put A = Gamma(U), I = ker(i)(U), and B = i_*O_Z.
-The closed-immersion quotient presentation identifies B restricted to U with
- tilde(A/I), normalized by the quotient section map. Sheafify the chosen
-projective resolution P_U of A/I and its augmentation; exactness of tilde gives
-an augmented resolution. Extend chain degree j to cochain degree -j, obtaining
-p_U : L_U -> B|U[0]. Projective module terms are flat, and associated sheaf
-terms are flat. Both L_U and K|U are bounded above and termwise flat, so are
-K-flat. The zigzag
-K|U tensor B|U[0] <- K|U tensor L_U -> B|U[0] tensor L_U
--> L_U tensor B|U[0]
-uses id tensor p_U, q|U tensor id, and braiding. The first two arrows are
-quasi-isomorphisms: their mapping cones are tensors of an acyclic augmentation
-cone with a K-flat complex. Take homology and invert those two homology maps.
-The affine total-tensor comparison, exact tilde homology comparison, extension
-homology in degree -n, and normalized tilde section unit give c_U. Choose this
-normalization on every chart, rather than unrelated pointwise isomorphisms.
+Proof: Bounded-above termwise flatness makes K K-flat. Apply the natural
+K-flat derived tensor comparison to the constant families K and B[0]. The
+quasi-isomorphism q becomes an isomorphism d under derived localization. Tensor
+d inverse with the identity of Q(B[0]), then compose with the K-flat comparison.
+Apply homology in degree -n and the homology factorization isomorphism. This gives
+a global sheaf isomorphism from intrinsic derived self-Tor to the stated homology.
 
-On a basic inclusion V in U, restriction carries I_U into I_V, giving psi.
-Projectivity of the source resolution and exactness of the restricted target
-resolution lift the augmentation to a chain map a. Tensor degreewise with psi
-to obtain k; this gives the three displayed quotient, augmentation, and pure
-tensor equations. Via the tilde adjunction, a gives a map of the sheafified
-resolutions on V. Its augmentation square commutes, since it does so on affine
-sections and tilde is fully faithful. The pure tensor equation identifies its
-tensor map with k. Restrict the U zigzag to V and compare it with the V zigzag.
-Tensor functoriality and naturality of braiding make every square commute.
-Taking homology and cancelling the invertible legs makes the normalized
-coordinate maps commute. Naturality of the tilde section unit and the exact
-restriction-of-scalars homology comparison give the displayed element equation
-for this chosen lift. No independence from other augmented lifts is claimed.
-For degree zero the augmentation calculation is unchanged; for I = top and
-empty charts the relevant quotient modules vanish and the same maps apply. -/
+Take normalized affine coordinates for intrinsic derived self-Tor from
+exists_derived_selfTor_affine_coordinates. Compose each coordinate equivalence
+with the linear equivalence on sections induced by the global sheaf isomorphism.
+For a basic inclusion V in U, restriction carries the kernel ideal on U into
+that on V. The augmented quotient-resolution tensor comparison therefore provides
+psi, a and k with the quotient, augmentation and pure-tensor equations.
+
+Apply the intrinsic coordinate restriction equation to these supplied comparisons.
+Naturality of the global sheaf isomorphism identifies restriction of its U section
+map with its V section map after restriction. Substitute the intrinsic equation
+and apply the V section map to both sides. This proves the desired equation for
+the composed coordinates, using the same restriction-of-scalars homology comparison.
+The algebraic lifting theorem does not require projective restricted target terms.
+Degree zero, zero quotients, and empty basic opens use these same constructions. -/
 theorem exists_selfTor_nonpositive_chosen_comparisons
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [IsClosedImmersion i]
@@ -122,6 +112,38 @@ theorem exists_selfTor_nonpositive_chosen_comparisons
             let e := ((TC.obj R.complex).sc n).mapHomologyIso
               (ModuleCat.restrictScalars φ)
           ∀ x, Q.val.map (homOfLE h).op (c U x) =
-            c V (e.hom (HomologicalComplex.homologyMap k n x)) := by sorry
+            c V (e.hom (HomologicalComplex.homologyMap k n x)) := by
+  classical
+  let M := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  let := HasDerivedCategory.standard M
+  let := SheafOfModules.monoidalCategory Y.sheaf
+  let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
+  let S := CochainComplex.singleFunctor M 0
+  let T := S.obj B
+  have hK : K.IsKFlat := CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace
+    Y.toRingedSpace K ⟨0, hbounded⟩ hflat
+  let F := (Functor.const PUnit.{1}).obj K
+  let G := (Functor.const PUnit.{1}).obj T
+  obtain ⟨comparison⟩ := kFlat_derivedTensor_comparison_natIso Y F G (fun _ ↦ hK)
+  let e := (comparison.app PUnit.unit.{1}).app PUnit.unit.{1}
+  have : QuasiIso q := hq
+  let d := asIso (DerivedCategory.Q.map q)
+  let H := DerivedCategory.homologyFunctor M (-(n : ℤ))
+  let eQ := H.mapIso ((MonoidalCategory.tensorIso d (Iso.refl _)).symm ≪≫ e) ≪≫
+    (DerivedCategory.homologyFunctorFactors M (-(n : ℤ))).app _
+  obtain ⟨c, hc⟩ := exists_derived_selfTor_affine_coordinates i n
+  refine ⟨fun U ↦ (c U).trans (Scheme.Modules.appLinearEquivOfIso eQ U.1), ?_⟩
+  intro V U h hbasic A C I J φ P R TA TC
+  have hI : ∀ x ∈ I, φ x ∈ J := by
+    intro x hx
+    exact i.ker.ideal_le_comap_ideal h hx
+  obtain ⟨ψ, a, k, hψ, ha, hk⟩ := exists_quotient_resolution_tensor_comparison
+    A C I J φ hI P R
+  refine ⟨ψ, a, k, hψ, ha, hk, ?_⟩
+  intro e' x
+  have hn := hc V U h hbasic ψ a k hψ ha hk x
+  have hs := PresheafOfModules.naturality_apply eQ.hom.val (homOfLE h).op (c U x)
+  change _ = eQ.hom.val.app (op V.1) _
+  exact hs.symm.trans (congrArg (eQ.hom.val.app (op V.1)) hn)
 
 end AlgebraicGeometry

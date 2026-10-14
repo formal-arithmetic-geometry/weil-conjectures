@@ -14708,3 +14708,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:28 L: merged deliver/V4/Sheaf.Paper.ModuleCupShiftedUnitChainTensor (stage 3; reviewer PASS; first push; landing 20261014T072853-L-3370855 (proof); batch 20261014T072851; modules 1; new nodes 0)
 - 07:30 L: merged deliver/V4/Sheaf.Paper.ModuleCupHomologyEvaluationBijective (stage 3; reviewer PASS; first push; landing 20261014T073058-L-3392598 (proof); batch 20261014T073056; modules 1; new nodes 0)
 - 07:33 L: merged deliver/G2/Sheaf.AlgebraicGeometry.FlatTelescopeBoundedNormalizationExtension (stage 3; reviewer PASS; first push; landing 20261014T073334-L-3423433 (interface); batch 20261014T073332; modules 5; new nodes 4)
+- 07:35 L: merged deliver/P1/Sheaf.AlgebraicGeometry.SelfTorNonpositiveChosenComparisons (stage 3; reviewer PASS; first push; landing 20261014T073557-L-3451455 (interface); batch 20261014T073555; modules 2; new nodes 1)
