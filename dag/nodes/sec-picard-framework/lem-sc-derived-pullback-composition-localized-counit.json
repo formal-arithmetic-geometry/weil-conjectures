@@ -17,29 +17,36 @@
  },
  "proof": [
   {
-   "text": "Precompose with p and use its left-derived lift factorization. The result is Lf(epsilon(g)), epsilon(f), and localization of the underived tensor comparison followed by the (fg)-counit.",
+   "text": "For arbitrary additive adjunctions a1, a2 and a and a right-adjoint comparison e, pass to a complex representative of K. Rewrite all three homotopy counits as quotients of complex counits. Functoriality reduces the equality to chain maps, and degreewise conjugateEquiv_counit_symm a (a2.comp a1) e.inv proves the composite-counit identity. This is the private proved helper composite_counit.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-module-pullback-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "On a complex representative apply conjugateEquiv_counit_symm degreewise to the pinned underived adjunctions and pushforwardComp.inv. Its components are identities on sections, so this gives the pasted underived counits. Pass to the homotopy quotient and localization. Naturality of epsilon(f) at the g-counit gives the stated expression. This uses no cancellation or K-flat resolution.",
+   "text": "The inverse of Scheme.Modules.pushforwardComp f g is the identity on sections. Degreewise extensionality and quotient functoriality prove that its mapped homotopy component is the identity. Substitute this in composite_counit for the three pinned tensor-pullback adjunctions, removing the image of the identity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Extract the selected IsLeftDerivedFunctor witness and the selected comparison hom equation from exists_derivedPullbackComposition. Apply the generic private proved localized_counit helper: leftDerived_fac_app replaces p followed by epsilon(fg) with the pasted counits and the localized tensor mate; substitute the underived counit identity from the previous steps. Naturality of epsilon(f) at the g-counit moves its tensor-pullback image through epsilon(f), and map_comp gives the explicit apex expression. Finish with derivedCompositionCounitApex_eq.",
    "uses": [
-    "lem-pc-module-pullback-adjunction"
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-sc-derived-composition-counit-apex"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
   "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-pc-module-pullback-adjunction"
+  "def-sc-derived-composition-counit-apex"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sheaves.tex",
-  "place": "Tags 079W (lemma-adjoint), 0D5S (derived pullback composition) and 0096 (module pullback adjunction); formal categorical subcalculation in parent steps 2 and 3. Official tag pages read 2026-10-14.",
-  "note": "Expanded formal counit subcalculation from the parent node, using the selected Lean universal-property equations."
+  "place": "Tags 079W, 0D5S and 0096; Mathlib CategoryTheory.Adjunction.Mates conjugateEquiv_counit_symm and CategoryTheory.Functor.Derived.LeftDerived leftDerived_fac_app.",
+  "note": "G4 proved the whole formal counit subcalculation using the existing selected composition equation and three fully proved private helpers. No new nodes, assumptions or remaining holes. Official Stacks tag pages read 2026-10-14."
  },
  "mathlib_searches": [
   {
@@ -136,11 +143,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-2d516",
-  "group": "T1",
+  "reviewer": "X-7a0de",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261014T085853-L-234204",
+  "landing": "20261014T101746-L-1176926",
   "kind": "interface",
-  "note": "independent Codex review: Matched Lean signatures, proofs and dependencies with both nodes and pinned constructions; both delivered modules and direct importer DerivedPullbackCompositionMateUnit compile cleanly; axioms match the documented remaining hole."
+  "note": "independent Codex review: Delivery matches the node and base theorem statement; delivered module and direct importer compile cleanly, with allowed axioms only."
  }
 }

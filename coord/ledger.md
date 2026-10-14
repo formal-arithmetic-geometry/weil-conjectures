@@ -14807,3 +14807,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:04 L: merged deliver/A4/Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverComponentIdentity (stage 3; reviewer PASS; first push; landing 20261014T100433-L-1021472 (interface); batch 20261014T100431; modules 3; new nodes 2)
 
 - 18:11 L: batch 20261014T100431 dependency take-out
+- 10:17 L: merged deliver/G4/Sheaf.AlgebraicGeometry.DerivedPullbackCompositionLocalizedCounit (stage 3; reviewer PASS; first push; landing 20261014T101746-L-1176926 (interface); batch 20261014T101745; modules 1; new nodes 0; change records: coord/changes/G4-localized-composition-counit-proof-environment.md)
