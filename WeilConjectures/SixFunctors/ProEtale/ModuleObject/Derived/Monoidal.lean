@@ -11,17 +11,23 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.M
 
 /-!
 
-# The derived pullback commutes with the derived tensor product
+# The monoidal structure of the derived pullback on module objects over `Λ`
 
-Let `Λ` be a commutative condensed ring and `f : X ⟶ Y` a morphism of schemes. The pullback
-`f^*` of module objects over `Λ` is strong monoidal for the relative tensor products
+Let `Λ` be a commutative condensed ring and `f : X ⟶ Y` a morphism of schemes. The derived
+pullback `Lf^* = L((f)^*⟦Λ⟧) : D(Mod_{Λ_Y}) ⥤ D(Mod_{Λ_X})` of
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar` is strong monoidal for
+the derived tensor products `- ⊗ᴸ_{Λ} -` of
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor`:
+```
+m_{K,L} : Lf^* (K ⊗ᴸ_{Λ_Y} L) ≅ Lf^* K ⊗ᴸ_{Λ_X} Lf^* L,    Lf^* Λ_Y ≅ Λ_X.
+```
+This comparison is the input of the derived projection morphisms, hence of Verdier duality and
+Poincaré duality.
+
+The pullback `f^*` of module objects over `Λ` is strong monoidal for the relative tensor products
 (`ProEtale.CondensedRing.monoidal_upperStar`), with comparison isomorphisms
-`μ : f^* M ⊗_{Λ_X} f^* N ≅ f^* (M ⊗_{Λ_Y} N)`. This file constructs from `μ` the comparison
-```
-m_{K,L} : Lf^* (K ⊗ᴸ L) ≅ Lf^* K ⊗ᴸ Lf^* L
-```
-of the derived pullback with the derived tensor product
-(`ProEtale.CondensedRing.leftDerivedUpperStarTensorIso`), in three steps:
+`μ : f^* M ⊗_{Λ_X} f^* N ≅ f^* (M ⊗_{Λ_Y} N)`. The comparison `m` is constructed from `μ`
+(`ProEtale.CondensedRing.leftDerivedUpperStarTensorIso`) in three steps:
 
 1. **Complexes.** For complexes `A` and `B` of module objects over `Λ_Y`, `μ` applied degreewise
    gives a map of complexes `f^* A ⊗ f^* B ⟶ f^* (A ⊗ B)` for the total tensor product of
@@ -41,6 +47,12 @@ of the derived pullback with the derived tensor product
    `m : Lf^* (- ⊗ᴸ -) ⟶ Lf^* - ⊗ᴸ Lf^* -` (`ProEtale.CondensedRing.leftDerivedUpperStarTensor`),
    characterized by its compatibility with the counits.
 
+The unit comparison `ProEtale.CondensedRing.leftDerivedUpperStarUnitIso` is
+`Lf^* (Qh 𝟙) ≅ Qh (f^* 𝟙) ≅ Qh 𝟙`: the counit of `Lf^*`, an isomorphism since `f^*` is exact,
+followed by the unit comparison of `monoidal_upperStar` in degree `0`. Together with the inverse
+of `m` as tensorator, it makes `Lf^*` strong monoidal
+(`ProEtale.CondensedRing.monoidal_leftDerivedUpperStar`).
+
 ## Sorried input
 
 All the data is constructed; the following properties are `sorry`ed.
@@ -59,12 +71,17 @@ All the data is constructed; the following properties are `sorry`ed.
 - `ProEtale.CondensedRing.isIso_leftDerivedUpperStarTensor`: the comparison `m` is an
   isomorphism. On a pair of K-flat complexes both sides are computed by `f^* A ⊗ f^* B` and
   `f^* (A ⊗ B)`, and `m` is induced by `μ`, an isomorphism.
+- the associativity and the unitality of `monoidal_leftDerivedUpperStar`. They are checked on
+  pairs (resp. triples) of K-flat complexes, where all the comparisons are induced by the
+  coherent tensorator `μ`.
 
 ## Main definitions
 
 - `ProEtale.CondensedRing.leftDerivedUpperStarTensor`: the comparison
   `Lf^* (K ⊗ᴸ L) ⟶ Lf^* K ⊗ᴸ Lf^* L`, as a natural transformation of bifunctors.
 - `ProEtale.CondensedRing.leftDerivedUpperStarTensorIso`: the comparison isomorphism.
+- `ProEtale.CondensedRing.leftDerivedUpperStarUnitIso`: the unit comparison `Lf^* 𝟙 ≅ 𝟙`.
+- `ProEtale.CondensedRing.monoidal_leftDerivedUpperStar`: the strong monoidal structure on `Lf^*`.
 
 -/
 
@@ -83,7 +100,34 @@ open Scheme Functor
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-set_option synthInstance.maxHeartbeats 200000 -- instance search on complexes of module objects
+/-! ### Instances
+
+Direct instances for complexes of module objects over `Λ_Z`. Finding them from the generic
+instances on `Mod` exceeds the default heartbeat limit, so they are recorded once here. -/
+
+set_option synthInstance.maxHeartbeats 200000 in
+-- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
+instance hasTensor_cochainComplex (Z : Scheme.{u})
+    (A B : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) ℤ) :
+    HomologicalComplex.HasTensor A B :=
+  inferInstance
+
+set_option synthInstance.maxHeartbeats 200000 in
+-- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
+noncomputable instance monoidalCategoryStruct_cochainComplex (Z : Scheme.{u}) :
+    MonoidalCategoryStruct
+      (CochainComplex (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))
+        ℤ) :=
+  inferInstance
+
+set_option synthInstance.maxHeartbeats 200000 in
+-- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
+noncomputable instance monoidalCategory_cochainComplex (Z : Scheme.{u}) :
+    MonoidalCategory
+      (CochainComplex (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))
+        ℤ) :=
+  inferInstance
 
 /-! ### Complexes -/
 
@@ -239,5 +283,35 @@ pullback with the derived tensor product. -/
 noncomputable def leftDerivedUpperStarTensorIso :
     leftDerivedUpperStarTensorLeft Λ f ≅ leftDerivedUpperStarTensorRight Λ f :=
   asIso (leftDerivedUpperStarTensor Λ f)
+
+/-! ### The monoidal structure -/
+
+/-- The derived pullback of the tensor unit `Λ_Y` is the tensor unit `Λ_X`: the counit
+`Lf^* (Qh 𝟙) ≅ Qh (f^* 𝟙)` of the derived pullback of the exact functor `f^*`, followed by the
+unit comparison `f^* 𝟙 ≅ 𝟙` of the strong monoidal pullback of module objects, in degree `0`. -/
+noncomputable def leftDerivedUpperStarUnitIso :
+    L((f)^*⟦Λ⟧).obj (𝟙_ _) ≅ 𝟙_ _ :=
+  asIso ((f)^*⟦Λ⟧.leftDerivedFunctorCounit.app (𝟙_ _)) ≪≫
+    DerivedCategory.Qh.mapIso
+      (((f)^*⟦Λ⟧.mapHomotopyCategoryFactors (ComplexShape.up ℤ)).app (𝟙_ _) ≪≫
+        (HomotopyCategory.quotient _ _).mapIso
+          ((HomologicalComplex.singleMapHomologicalComplex (f)^*⟦Λ⟧
+              (ComplexShape.up ℤ) 0).app (𝟙_ _) ≪≫
+            (HomologicalComplex.single _ _ 0).mapIso (Functor.Monoidal.εIso (f)^*⟦Λ⟧).symm))
+
+/-- The derived pullback `Lf^* : D(Mod_{Λ_Y}) ⥤ D(Mod_{Λ_X})` on module objects over `Λ` is
+strong monoidal for the derived tensor products, with tensorator the inverse of
+`leftDerivedUpperStarTensorIso` and unit comparison `leftDerivedUpperStarUnitIso`. -/
+noncomputable instance monoidal_leftDerivedUpperStar : L((f)^*⟦Λ⟧).Monoidal :=
+  Functor.CoreMonoidal.toMonoidal
+    { εIso := (leftDerivedUpperStarUnitIso Λ f).symm
+      μIso K L := (((leftDerivedUpperStarTensorIso Λ f).app K).app L).symm
+      μIso_hom_natural_left φ L :=
+        NatTrans.congr_app ((leftDerivedUpperStarTensorIso Λ f).inv.naturality φ) L
+      μIso_hom_natural_right K ψ :=
+        ((leftDerivedUpperStarTensorIso Λ f).inv.app K).naturality ψ
+      associativity := sorry
+      left_unitality := sorry
+      right_unitality := sorry }
 
 end AlgebraicGeometry.ProEtale.CondensedRing
