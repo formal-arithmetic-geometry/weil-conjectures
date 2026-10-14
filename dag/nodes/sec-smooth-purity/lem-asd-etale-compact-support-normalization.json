@@ -30,11 +30,189 @@
   "def-weil-proper-morphism",
   "def-weil-etale-morphism",
   "def-weil-finite-type-morphism",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "First fix the derived normalizations. Exactness and the sheaf adjunction $u_{\\Sigma!}\\dashv u^*$ are supplied by [lem-weil-pbc-etale-restriction-injectives]. Apply both functors degreewise. Their unit and counit are chain maps and descend to homotopy categories by [lem-weil-pbc-termwise-adjunction-homotopy]; exact functors invert quasi-isomorphisms by [lem-weil-pbc-exact-functor-derived-factorization]. Descend the unit, counit and triangle identities by [lem-weil-pbc-localization-universal-property]. This gives the adjunction on the whole unbounded categories, with the original evaluation counit in every degree. Do this also for all etale maps appearing below. The specified sheaf map $\\beta$ of [def-weil-pbc-etale-shriek-base-change-map] is invertible by [lem-weil-pbc-etale-shriek-base-change-modules]; descend $\\beta$ and its inverse degreewise. We always use $C^\\Sigma=\\beta^{-1}$, rather than an unspecified isomorphism between the two functors.",
+   "uses": [
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "lem-weil-pbc-etale-shriek-base-change-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII, Proposition 6.2.11 and proof, pp. 430-431; compactification exchange construction 5.2.2; clopen-graph realization and unbounded extension written out here"
+   }
+  },
+  {
+   "text": "Put $V=\\overline U\\times_X U$, $v:V\\to\\overline U$, $q:V\\to U$, and $s=(j,1):U\\to V$. The map $v$ is etale by [lem-weil-pbc-etale-base-change-finite-limits]. The graph $s$ is open: inside the open $U\\times_XU$ it is the diagonal of $u$, which is open by the definition of unramified in [def-weil-unramified-morphism] and [def-weil-etale-morphism]. Here $U\\times_XU$ is open in $V$ by [lem-weil-pbc-open-immersion-base-change]. The map $q$ is proper by [lem-weil-pbc-proper-base-change], hence separated, and $qs=1$. Thus [lem-weil-pbc-open-section-clopen] gives $V=s(U)\\amalg W$. On a scheme decomposed into two disjoint opens, a module sheaf is a pair: restrictions give the pair, and gluing over the disjoint cover reconstructs the sheaf, with sections the product of the two section modules. Therefore $q^*M$ has a natural projection $P_M:q^*M\\to s_!M$, identity on $s(U)$ and zero on $W$. This projection is natural and commutes with all inverse images: pulling back the two opens preserves this pair description. The same projection is a chain map on any unbounded complex. This uses a binary decomposition, not an infinite product or a boundedness assumption.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "def-weil-unramified-morphism",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-open-section-clopen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII, Proposition 6.2.11 and proof, pp. 430-431; compactification exchange construction 5.2.2; clopen-graph realization and unbounded extension written out here"
+   }
+  },
+  {
+   "text": "Use the inverse of the specified sum-extension comparison for the square $(r,u)$ to form\n$$\\delta_K:r^*Du_{\\Sigma!}K\\xrightarrow{\\beta^{-1}}Dv_{\\Sigma!}q^*K\\xrightarrow{Dv_{\\Sigma!}P_K}Dv_{\\Sigma!}Ds_!K\\xrightarrow{\\lambda}Dj_!K.$$\nThe last comparison $\\lambda$ is the adjunction-preserving composition comparison: $v_{\\Sigma!}s_!$ and $j_!$ are left adjoints to $s^*v^*=j^*$, so their units determine $\\lambda$ uniquely by [def-weil-pbc-adjunction-conjugate]. Equivalently on a summand indexed by a lift $T\\to U\\xrightarrow{s}V$ it is the same section indexed by its composite into $U\\xrightarrow{j}\\overline U$; this specifies the normalization. All these functors and maps are exact and termwise, and step 1 descends them. Transpose $\\delta$ under the canonical derived adjunction $r^*\\dashv Rr_*$ of [def-kun-unbounded-exchange], to define\n$$a_{u,(j,r),K}=Rr_*(\\delta_K)\\circ\\eta_{r,Du_{\\Sigma!}K}:Du_{\\Sigma!}K\\longrightarrow Rr_*Dj_!K.$$\nThis constructs a natural transformation on all of $D(U_{\\mathrm{et}},A)$ before asserting it is invertible.",
+   "uses": [
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "lem-weil-pbc-etale-shriek-base-change-modules",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII, Proposition 6.2.11 and proof, pp. 430-431; compactification exchange construction 5.2.2; clopen-graph realization and unbounded extension written out here"
+   }
+  },
+  {
+   "text": "Check the actual exchange by transposition. Write $t:\\overline U'\\to\\overline U$ and $E_j:t^*Dj_!\\to Dj'_!h^*$ for the specified inverse open-extension comparison. Let $\\theta:r'^*g^*\\to t^*r^*$ be the inverse-image square comparison. The projections of step 2 give, on exact derived functors,\n$$\\delta'_{h^*K}\\circ r'^*(C^\\Sigma_K)=E_{j,K}\\circ t^*(\\delta_K)\\circ\\theta_{Du_{\\Sigma!}K}.\\tag{*}$$\nTo verify this identity without testing derived morphisms on stalks, pull the graph decomposition back to $V'=\\overline U'\\times_{X'}U'$. On its graph component both sides take the section of the corresponding lift to that same section, and on the complementary component both sides are zero. The comparisons $\\beta$ are adjunction-preserving: by their defining conjugacy they are the left-adjoint comparisons of the equality of the restriction/direct-image functors on the localized sites. Thus the comparisons in the two pasted rectangles coincide by [lem-weil-pbc-mate-pasting], and the composition comparison $\\lambda$ is normalized by those same adjunctions. This makes the preceding component calculation an equality of sheaf natural transformations; [lem-weil-pbc-localization-universal-property] descends it to (*) on arbitrary complexes. Now transpose $C^{(j,r)}_K\\circ g^*a_K$ under $r'^*\\dashv Rr'_*$. The definition of proper exchange in [def-kun-unbounded-exchange] gives its transpose as the right side of (*): naturality moves $a_K$ past the pulled-back counit, and $\\varepsilon_r\\circ r^*a_K=\\delta_K$ by the triangle identity. The transpose of $a'_{h^*K}\\circ C^\\Sigma_K$ is the left side of (*). Injectivity of the adjunction bijection proves\n$$C^{(j,r)}\\circ g^*a=(a'h^*)\\circ C^\\Sigma.$$\nNo equality of derived morphisms has been inferred merely from equality on cohomology.",
+   "uses": [
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-localization-universal-property",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII, Proposition 6.2.11 and proof, pp. 430-431; compactification exchange construction 5.2.2; clopen-graph realization and unbounded extension written out here"
+   }
+  },
+  {
+   "text": "Prove $a$ invertible at every geometric point $\\bar x:\\operatorname{Spec}\\Omega\\to X$, with $\\Omega$ algebraically closed. The proper exchange for $r$ is invertible on every unbounded complex by [lem-kun-proper-base-change-torsion-ring]; it applies since the ring $A$ is torsion, with no invertibility-of-its-order hypothesis. The open and sum-extension exchanges are invertible by [lem-weil-pbc-etale-shriek-base-change-modules]. Hence step 4 identifies $\\bar x^*a_K$ with the same construction for $u_\\Omega:U_\\Omega\\to\\operatorname{Spec}\\Omega$. By [lem-kun-0ezp] an etale scheme over $\\Omega$ is a disjoint union of copies of $\\operatorname{Spec}\\Omega$. There are finitely many copies here: the base change of a finite affine cover of the finite-type fibre is quasi-compact, and the component opens cover it, so a finite subcover contains all components. More explicitly, the affine cover of $u^{-1}(B)$ for an affine neighbourhood $B$ of $x$ base changes to finitely many affine schemes over $\\Omega$, each quasi-compact; thus $U_\\Omega$ is quasi-compact. Each component $z:\\operatorname{Spec}\\Omega\\to\\overline U_\\Omega$ is an open section of the proper $r_\\Omega$. By [lem-weil-pbc-open-section-clopen] it is clopen. Therefore $U_\\Omega$ is clopen in $\\overline U_\\Omega$. The pair decomposition of step 2 identifies $Dj_{\\Omega!}K_\\Omega$ with $(K_\\Omega,0)$, and the module categories on the finitely many copies of $\\operatorname{Spec}\\Omega$ are module categories by [lem-weil-pbc-geometric-point-pullback-stalk]. Pushforward of this object to $\\operatorname{Spec}\\Omega$ is the finite product of its component complexes, equal to their finite sum. This computes the unbounded derived pushforward too: the pair equivalence takes acyclic complexes and K-injective complexes to pairs of such complexes; on each individual field-point factor global sections is an exact equivalence, and on their finite product category global sections is the finite product functor, which is exact (it is not an equivalence when there is more than one point). The zero complex on the complement is itself K-injective, and a complex in a binary product category is K-injective exactly when its two factors are: the homotopy Hom groups from an acyclic pair split into the two Hom groups. Thus one may resolve the point factors and keep the complement zero. Applying a K-injective resolution therefore changes the finite product only by a quasi-isomorphism, as in [lem-weil-pbc-exact-functor-derived-functor] and [def-amb-etale-compact-support]. The graph projection $\\delta$ is the matrix which retains the equal-sheet entry and kills the unequal-sheet entries. Its transpose $a$ is consequently the identity on the finite sum of component complexes. This includes the empty fibre, when both sides are zero. Exact geometric stalks [prop-weil-pbc-geometric-stalks-exact], [lemma-weil-pbc-geometric-stalk-conservative], and [lem-weil-pbc-unbounded-derived-iso-cohomology] now detect that $a_K$ is invertible for every $K$: the underlying abelian sheaf of the kernel and cokernel of each $H^n(a_K)$ has zero stalks, hence vanishes, and a bijective module-sheaf map has a module-linear inverse. Setwise forgetting the coefficient action therefore introduces no extra hypothesis. Set $c=a^{-1}$.",
+   "uses": [
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-weil-pbc-etale-shriek-base-change-modules",
+    "lem-kun-0ezp",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-open-section-clopen",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "def-amb-etale-compact-support",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII, Proposition 6.2.11 and proof, pp. 430-431; compactification exchange construction 5.2.2; clopen-graph realization and unbounded extension written out here"
+   }
+  },
+  {
+   "text": "In degree zero the adjoint map $a_M$ sends the summand indexed by a lift $T\\to U$ to the section of $j_!M$ on $\\overline U\\times_XT$ supported on that lift's graph. That graph is clopen by step 2 with $U$ replaced by $T$: it is an open section of the separated proper projection. The section vanishes off that graph. Its support is closed, since vanishing of a section is local and hence defines an open locus. This closed support lies in the graph, which is isomorphic to $T$ over $T$. With its reduced closed-subscheme structure its map to $T$ is a closed immersion: affine-locally it is $\\operatorname{Spec}(B/I)\\to\\operatorname{Spec}B$, so it is finite type, separated and universally closed. It is therefore proper by [def-weil-proper-morphism]. These summand maps respect restrictions and sums, hence induce the map from the sheafified sum presheaf [def-weil-pbc-etale-sum-extension]. On each etale sheet its inverse recovers the original section; thus $c$ is precisely the proper-support-to-sheet-components comparison required in the statement, with the normalization of SGA's trace comparison. This is the inverse of the constructed map, not an independent choice of stalkwise isomorphisms.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-open-section-clopen"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII, Proposition 6.2.11 and proof, pp. 430-431; compactification exchange construction 5.2.2; clopen-graph realization and unbounded extension written out here"
+   }
+  },
+  {
+   "text": "For a proper refinement $p:\\overline U_1\\to\\overline U_2$ with $pj_1=j_2$, construct its unbounded comparison as follows. Pull back over the open $j_2(U)$. The map $U\\to p^{-1}(j_2(U))$ is an open section of a proper map, hence clopen by [lem-weil-pbc-open-section-clopen]. Proper exchange [lem-kun-proper-base-change-torsion-ring], the inverse open-extension comparison [lem-weil-pbc-etale-shriek-base-change-modules], and restriction to this clopen component give $j_2^*Rp_*Dj_{1!}K\\cong K$. Transpose its inverse under $Dj_{2!}\\dashv j_2^*$ to obtain $b_p:Dj_{2!}K\\to Rp_*Dj_{1!}K$, identity over $U$. This is the unbounded version of the usual proper-refinement recipe; it does not apply a bounded-below theorem to an unbounded object. At geometric points outside $j_2(U)$ proper exchange reduces its target to zero, since the pulled-back $j_{1!}$ is zero there by [lem-weil-pbc-extension-by-zero-stalks]. Inside $U$ the clopen pair calculation of step 5 makes $b_p$ identity. The same stalk/cohomology criteria as step 5 make $b_p$ invertible. Use [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to obtain $\\rho_p:Rr_{2*}Dj_{2!}\\to Rr_{1*}Dj_{1!}$. Then $\\rho_p a_2=a_1$. More explicitly, put $B=Du_{\\Sigma!}K$ and use $r_1=r_2p$. Under the composite adjunction the transpose of $\\rho_p a_2$ is the map $p^*r_2^*B\\xrightarrow{p^*\\delta_2}p^*Dj_{2!}K\\xrightarrow{p^*b_p}p^*Rp_*Dj_{1!}K\\xrightarrow{\\varepsilon_p}Dj_{1!}K$; that of $a_1$ is $\\delta_1$. To compare them, the sheaf open-base-change map identifies $p^*j_{2!}K$ with extension by zero from $p^{-1}(j_2(U))$. This inverse image has the clopen component $j_1(U)$ and its complement. The transpose $\\varepsilon_p p^*b_p$ is projection to $j_1(U)$: the adjunction defining $b_p$ fixes its restriction there to identity, and on the other component the target is zero. After the etale sum-base-change identification of step 3, $p^*\\delta_2$ retains the lifts whose image in $\\overline U_2\\times_XU$ is its graph; the subsequent projection retains among these precisely the lifts on the graph in $\\overline U_1\\times_XU$. Thus the composite is identity on each graph summand and zero on every other summand, which is exactly $\\delta_1$. These are equalities of termwise sheaf maps, descended as in step 1. The composite counit formula and [lem-weil-pbc-mate-pasting] identify the displayed transposes with the original transformations, so the adjunction bijection proves their equality. Consequently $c_1\\rho_p=c_2$. For two refinements the same identity gives $\\rho_{pq}=a_1c_3=\\rho_p\\rho_q$, and an identity refinement gives $a_ic_i=1$. Thus the comparisons agree under the prescribed proper refinements, on every unbounded complex.",
+   "uses": [
+    "lem-weil-pbc-open-section-clopen",
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-weil-pbc-etale-shriek-base-change-modules",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII, Proposition 6.2.11 and proof, pp. 430-431; compactification exchange construction 5.2.2; clopen-graph realization and unbounded extension written out here"
+   }
+  },
+  {
+   "text": "Transport the sum/evaluation adjunction of step 1 along $c:Rr_*Dj_!\\cong Du_{\\Sigma!}$. It gives the counit $\\varepsilon_\\Sigma\\circ(cu^*)$ and the corresponding transported unit. The right adjoint supplied by [thm-amb-etale-exceptional-adjoint] is therefore identified with $u^*$ by the unique adjunction-preserving right-adjoint comparison. Explicitly the comparison at $L$ is the transpose under $Du_{\\Sigma!}\\dashv u^*$ of $Ru_!u^\\times L\\xrightarrow{\\varepsilon_!}L$, after using $a:Du_{\\Sigma!}\\to Ru_!$; its inverse is the opposite transpose, and the triangle identities show that their composites are identities. The uniqueness and compatibility with units and counits are the conjugacy bijection [def-weil-pbc-adjunction-conjugate]. This proves the counit normalization without assuming that an arbitrarily chosen exceptional adjunction already has the sum counit.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII, Proposition 6.2.11 and proof, pp. 430-431; compactification exchange construction 5.2.2; clopen-graph realization and unbounded extension written out here"
+   }
+  },
+  {
+   "text": "Finally invert $a$ in the exact identity from step 4 and cancel it on both sides. This gives $(c'h^*)C^{(j,r)}=C^\\Sigma(g^*c)$ in the requested direction. For the identity change of base the inverse-image comparison is identity; its mate is identity by [lem-weil-pbc-mate-pasting], and the conjugate defining $\\beta$ is identity by [def-weil-pbc-adjunction-conjugate]. For two changes of base, paste their inverse-image squares. The proper exchanges compose by the two pasting clauses of [lem-weil-pbc-mate-pasting], and the etale comparisons compose by conjugacy of the same restriction/direct-image squares; descent preserves composition by [lem-weil-pbc-localization-universal-property]. Their product is therefore the exchange for the composite change of base. Step 4 then intertwines these composites with the same $c$ as for the single square. For an identity morphism $u$, its sheet functor is identity, and step 3 is exactly the refinement map from its compactification to $(1,1)$; after that prescribed comparison $c$ is identity. This is the identity normalization, also when an identity morphism is presented using a nontrivial compactification.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII, Proposition 6.2.11 and proof, pp. 430-431; compactification exchange construction 5.2.2; clopen-graph realization and unbounded extension written out here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-kun-unbounded-exchange",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-proper-morphism",
+  "def-weil-unramified-morphism",
+  "lem-kun-0ezp",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-open-section-clopen",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact",
   "thm-amb-etale-exceptional-adjoint"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+  "place": "XVII, Proposition 6.2.11 and proof, pp. 430-431; compactification exchange construction 5.2.2; clopen-graph realization and unbounded extension written out here",
+  "note": "Follows the fibrewise comparison in XVII 6.2.11, with the graph projection and all derived mate equalities supplied explicitly rather than assumed from bounded-below statements."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -133,15 +311,192 @@
    "results": "0 hits: . Condensed locally constant adjunctions, free presheaf adjunctions and topological compact supports do not identify compactification-defined unbounded etale support or its specified exchange.",
    "date": "2026-10-14",
    "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*shriek|shriek.*etale|sumExtension|compactification",
+   "results": "Mathlib/NumberTheory/ModularForms/Cusps.lean; Mathlib/Analysis/CStarAlgebra/Multiplier.lean; Mathlib/Topology/Separation/CompletelyRegular.lean; Mathlib/Topology/Separation/CompletelyRegular.lean; Mathlib/Topology/Category/Profinite/Projective.lean; Mathlib/Topology/Category/Stonean/Adjunctions.lean; Mathlib/Topology/Category/Stonean/Adjunctions.lean; Mathlib/Topology/Category/Stonean/Adjunctions.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits concern ordinary scheme structure modules, general presheaf adjunctions, algebraic etaleness or topological compactifications, not this ordinary-etale compactification normalization and specified derived exchange"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Separated etale compact support pushforward equals sum extension on unbounded derived categories",
+   "results": "0 hits; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactification defined etale compact support derived pushforward equals exact sum extension compatibly with canonical base change",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc; AlgebraicGeometry.Scheme.Modules.pushforward_map_app; AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map; AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp; AlgebraicGeometry.Scheme.Modules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits concern ordinary scheme structure modules, general presheaf adjunctions, algebraic etaleness or topological compactifications, not this ordinary-etale compactification normalization and specified derived exchange"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Adjunction\"",
+   "results": "CategoryTheory.Presheaf.uliftYonedaAdjunction; CategoryTheory.Presheaf.uliftYonedaAdjunction_unit_app_app; CategoryTheory.Presheaf.uliftYonedaAdjunction_homEquiv_app; PresheafOfModules.freeAdjunctionUnit; PresheafOfModules.freeAdjunction; PresheafOfModules.freeAdjunctionUnit_app; PresheafOfModules.freeAdjunction_homEquiv; PresheafOfModules.freeAdjunction_unit_app",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits concern ordinary scheme structure modules, general presheaf adjunctions, algebraic etaleness or topological compactifications, not this ordinary-etale compactification normalization and specified derived exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact etale sum extension is canonically isomorphic to proper pushforward of extension by zero using the clopen graph of an etale morphism",
+   "results": "AlgebraicGeometry.IsEtale.of_comp; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; StandardEtalePair.homEquiv; Algebra.etaleLocus_eq_compl_support; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; StandardEtalePair.HasMap.map; Algebra.IsEtaleAt.comp; Algebra.basicOpen_subset_etaleLocus_iff",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits concern ordinary scheme structure modules, general presheaf adjunctions, algebraic etaleness or topological compactifications, not this ordinary-etale compactification normalization and specified derived exchange"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|sumExtension|compactSupport",
+   "results": "0 hits; subdirectory AlgebraicGeometry",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits concern ordinary scheme structure modules, general presheaf adjunctions, algebraic etaleness or topological compactifications, not this ordinary-etale compactification normalization and specified derived exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compactification compact support etale sum extension",
+   "results": "8 hits: HasCompactMulSupport.extend_one, HasCompactSupport.extend_zero, HasCompactMulSupport.mulTSupport_extend_one_subset, HasCompactSupport.tsupport_extend_zero_subset, ContDiffMapSupportedInClass.map_zero_on_compl, ContDiffMapSupportedIn.zero_on_compl', ContDiffMapSupportedIn.zero_on_compl, ContMDiff.extend_one",
+   "date": "2026-10-14",
+   "verdict": "no exact match: topological support and presheaf module pushforward do not state the ordinary etale compactified sum-extension normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|sumExtension|lowerShriek",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no exact match: topological support and presheaf module pushforward do not state the ordinary etale compactified sum-extension normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"pushforward\"",
+   "results": "12 hits: PresheafOfModules.pushforward₀Obj, PresheafOfModules.pushforward₀_obj, PresheafOfModules.pushforward₀, PresheafOfModules.pushforwardId, PresheafOfModules.pushforward, PresheafOfModules.pushforward₀Obj_obj_carrier, PresheafOfModules.pushforward₀CompToPresheaf, PresheafOfModules.pushforwardCompToPresheaf",
+   "date": "2026-10-14",
+   "verdict": "no exact match: topological support and presheaf module pushforward do not state the ordinary etale compactified sum-extension normalization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "prop-asd-smooth-base-change",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-asd-etale-compact-support-normalization",
+  "worker": "stage1",
+  "summary": "Constructed the inverse comparison by clopen graph projection and derived adjunction; proved the actual exchange identity by transposition before fibrewise invertibility, then verified unbounded refinement, counit and pasting normalizations. No new nodes or coefficient-category identification.",
+  "blueprint": "prop-asd-smooth-base-change proof paragraph 2 and coherence clause (iii): etale chart comparison, sum over the finite fibre, and its specified compact-support exchange.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-0ezp",
+    "why": "Generic exact-derived, geometric-fibre, open-section or adjunction/mate tool used for its displayed statement; the compact-support unit has no replacement for this underlying tool."
+   },
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Generic exact-derived, geometric-fibre, open-section or adjunction/mate tool used for its displayed statement; the compact-support unit has no replacement for this underlying tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic exact-derived, geometric-fibre, open-section or adjunction/mate tool used for its displayed statement; the compact-support unit has no replacement for this underlying tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-restriction-injectives",
+    "why": "Generic exact-derived, geometric-fibre, open-section or adjunction/mate tool used for its displayed statement; the compact-support unit has no replacement for this underlying tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-shriek-base-change-modules",
+    "why": "Generic exact-derived, geometric-fibre, open-section or adjunction/mate tool used for its displayed statement; the compact-support unit has no replacement for this underlying tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic exact-derived, geometric-fibre, open-section or adjunction/mate tool used for its displayed statement; the compact-support unit has no replacement for this underlying tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact-derived, geometric-fibre, open-section or adjunction/mate tool used for its displayed statement; the compact-support unit has no replacement for this underlying tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Generic exact-derived, geometric-fibre, open-section or adjunction/mate tool used for its displayed statement; the compact-support unit has no replacement for this underlying tool."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Generic exact-derived, geometric-fibre, open-section or adjunction/mate tool used for its displayed statement; the compact-support unit has no replacement for this underlying tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic exact-derived, geometric-fibre, open-section or adjunction/mate tool used for its displayed statement; the compact-support unit has no replacement for this underlying tool."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic exact-derived, geometric-fibre, open-section or adjunction/mate tool used for its displayed statement; the compact-support unit has no replacement for this underlying tool."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic exact-derived, geometric-fibre, open-section or adjunction/mate tool used for its displayed statement; the compact-support unit has no replacement for this underlying tool."
+   },
+   {
+    "node": "lem-weil-pbc-open-section-clopen",
+    "why": "Generic exact-derived, geometric-fibre, open-section or adjunction/mate tool used for its displayed statement; the compact-support unit has no replacement for this underlying tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic exact-derived, geometric-fibre, open-section or adjunction/mate tool used for its displayed statement; the compact-support unit has no replacement for this underlying tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic exact-derived, geometric-fibre, open-section or adjunction/mate tool used for its displayed statement; the compact-support unit has no replacement for this underlying tool."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic exact-derived, geometric-fibre, open-section or adjunction/mate tool used for its displayed statement; the compact-support unit has no replacement for this underlying tool."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Generic exact-derived, geometric-fibre, open-section or adjunction/mate tool used for its displayed statement; the compact-support unit has no replacement for this underlying tool."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic exact-derived, geometric-fibre, open-section or adjunction/mate tool used for its displayed statement; the compact-support unit has no replacement for this underlying tool."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic exact-derived, geometric-fibre, open-section or adjunction/mate tool used for its displayed statement; the compact-support unit has no replacement for this underlying tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-0ezp",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-open-section-clopen",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-ecad09b62",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-ecad09b62 (reviewer sub-agent of L); spot-checked: Read the item, all nine steps, every cited node statement, sources and blueprint route in full. Checked SGA XVII 6.2.11 and 5.2.2–5.2.3, Stacks comparisons, unbounded torsion proper base change, exchange directions, refinement transposes and edge cases. No repairs needed; accepted 19 generic tool uses. Target coefficient categories remain distinct; no seeded master-map bridge is certified. Detailed checks are in review.md."
+ }
 }
