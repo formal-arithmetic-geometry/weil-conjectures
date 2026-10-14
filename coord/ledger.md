@@ -14594,3 +14594,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:10 L: merged deliver/N2/Sheaf.RingTheory.ProjectiveResolutionExtDegree (stage 3; reviewer PASS; first push; landing 20261014T051040-L-1749855 (proof); batch 20261014T051038; modules 1; new nodes 0)
 - 05:10 L: merged deliver/P1/Sheaf.CategoryTheory.MapExtendHomology (stage 3; reviewer PASS; first push; landing 20261014T051041-L-1750031 (proof); batch 20261014T051038; modules 1; new nodes 0)
 - 05:10 L: merged deliver/P1/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (stage 3; reviewer PASS; first push; landing 20261014T051041-L-1750224 (proof); batch 20261014T051038; modules 1; new nodes 0)
+- 05:12 L: merged deliver/D4/Sheaf.Topology.RingedModuleSkyscraper (stage 3; reviewer PASS; after a return; landing 20261014T051231-L-1771808 (interface); batch 20261014T051229; modules 1; new nodes 0; change records: coord/changes/ringed-module-skyscraper-scheme-specialization.md)
