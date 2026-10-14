@@ -1,0 +1,105 @@
+{
+ "id": "def-pc-mayer-vietoris-restriction-localization-chain",
+ "kind": "definition",
+ "title": "Explicit restriction-localization chain",
+ "statement": "For a morphism h:X→Y, an open W and any complex I on X, construct a map from derived restriction of Q(h_*I) to R(h|W)_* of derived restriction of QI. Compose the exact Y-restriction factor, Q of the underived restriction/direct-image comparison, the direct-image localization unit on the restricted complex, and R(h|W)_* of the inverse exact X-restriction factor. These are actual maps, not a choice from an existence theorem. The definition is irreducible so downstream composition uses its declared endpoints. Definitions: [def-pc-mayer-vietoris-image-chain-data], [def-pc-derived-mayer-vietoris-canonical-data], [def-pc-derived-mayer-vietoris-open-counit-model].",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08FE, 0D5T and 079V; official pages read 2026-10-14"
+ },
+ "stmt_deps": [
+  "def-pc-mayer-vietoris-image-chain-data",
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "def-pc-derived-mayer-vietoris-open-counit-model"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived localization unit compatibility for open restriction and direct image",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable; no exact statement found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived direct image open restriction localization comparison naturality composition units",
+   "results": "['AlgebraicGeometry.Scheme.Modules.restrictFunctorComp', 'AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality_assoc', 'AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app', 'AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality', 'AlgebraicGeometry.Scheme.Hom.appIso_inv_naturality', 'AlgebraicGeometry.Scheme.Hom.appIso_inv_naturality_assoc', 'AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc', 'AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality']",
+   "date": "2026-10-13",
+   "verdict": "generic ingredients; no exact complex transport statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "['CategoryTheory.NatTrans.naturality', 'CategoryTheory.Limits.PullbackCone.isoMk', 'CategoryTheory.Limits.PushoutCocone.isoMk', 'CategoryTheory.Limits.PullbackCone.isoMk_hom_hom', 'CategoryTheory.Limits.PullbackCone.isoMk_inv_hom', 'CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom', 'CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom', 'CategoryTheory.Grothendieck.map_map']",
+   "date": "2026-10-13",
+   "verdict": "generic ingredients; no exact complex transport statement"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*fac|pushforwardCongr",
+   "results": "['Mathlib/AlgebraicGeometry/Modules/Sheaf.lean', 'Mathlib/AlgebraicGeometry/Modules/Sheaf.lean', 'Mathlib/AlgebraicGeometry/Modules/Sheaf.lean', 'Mathlib/AlgebraicGeometry/Modules/Sheaf.lean', 'Mathlib/AlgebraicGeometry/Modules/Sheaf.lean', 'Mathlib/CategoryTheory/Abelian/RightDerived.lean', 'Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean', 'Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean']",
+   "date": "2026-10-13",
+   "verdict": "generic ingredients; no exact complex transport statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MayerVietorisImageLocalizationCompatibility",
+  "date": "2026-10-14",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-mayer-vietoris-image-localization-compatibility",
+   "place": "complex transport of the restriction unit normalization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MayerVietorisRestrictionLocalizationChain",
+  "file": "lean/Sheaf/AlgebraicGeometry/MayerVietorisRestrictionLocalizationChain.lean",
+  "declaration": "AlgebraicGeometry.schemeMVRestrictionLocalizationChain",
+  "statement": "def schemeMVRestrictionLocalizationChain\n    (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ T : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    [∀ T : Y.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :\n    (schemeMVDerivedRestriction Y W).obj\n        (DerivedCategory.Q.obj\n          (((RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex\n            (.up ℤ)).obj I)) ⟶\n      (schemeDerivedDirectImage (h ∣_ W)).obj\n        ((schemeMVDerivedRestriction X (h ⁻¹ᵁ W)).obj (DerivedCategory.Q.obj I))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-14"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261014T010836-L-3161104",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261014T010836-L-3161104",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
