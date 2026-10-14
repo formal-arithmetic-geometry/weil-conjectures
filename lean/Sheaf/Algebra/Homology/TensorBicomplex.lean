@@ -11,9 +11,13 @@ public import Mathlib.CategoryTheory.Functor.Currying
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 
 /-!
-# The unsigned tensor bicomplex
+# Tensoring a chain map with a module map
 
-Source: Stacks Project, Algebra, Tag 00M3, first paragraph of the proof.
+The unsigned tensor bicomplex and its maps are compatibility abbreviations for
+Mathlib `Functor.mapBifunctorHomologicalComplex` and `Functor.uncurry.obj`.
+The names remain available to downstream modules; no separate construction is used.
+
+Source: Stacks Project, Algebra, Tag 00M3, functoriality paragraph.
 (blueprint: def-weil-pbc-tensor-bicomplex)
 -/
 
@@ -28,8 +32,8 @@ namespace HomologicalComplex₂
 variable {R : Type u} [CommRing R]
 
 /-- The commuting tensor bicomplex, with terms `Pᵢ ⊗ Qⱼ` and no totalization signs.
--- The construction is the canonical Mathlib bifunctor.
--- Its terms and commuting differentials are inherited definitionally.
+This compatibility abbreviation is the canonical Mathlib bifunctor object.
+Its terms and commuting differentials are inherited definitionally.
 Source: Stacks Project, Algebra, Tag 00M3, proof, first paragraph.
 (blueprint: def-weil-pbc-tensor-bicomplex) -/
 abbrev tensorBicomplex (P Q : ChainComplex (ModuleCat.{u} R) ℕ) :
@@ -37,7 +41,8 @@ abbrev tensorBicomplex (P Q : ChainComplex (ModuleCat.{u} R) ℕ) :
   ((Functor.mapBifunctorHomologicalComplex (curriedTensor (ModuleCat.{u} R)) (.down ℕ)
       (.down ℕ)).obj P).obj Q
 
-/-- A pair of chain maps acts termwise on the tensor bicomplex.
+/-- Compatibility abbreviation for the canonical Mathlib bifunctor map.
+A pair of chain maps acts termwise on the tensor bicomplex.
 Source: Stacks Project, Algebra, Tag 00M3, functoriality paragraph.
 (blueprint: def-weil-pbc-tensor-bicomplex) -/
 abbrev tensorBicomplexMap {P P' Q Q' : ChainComplex (ModuleCat.{u} R) ℕ}
