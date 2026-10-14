@@ -14801,3 +14801,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:49 L: batch 20261014T094637 dependency take-out
 - 09:51 L: merged deliver/T4/Sheaf.AlgebraicGeometry.PicardExternalCechCupLeibniz (stage 3; reviewer PASS; after a return; landing 20261014T095138-L-867123 (interface); batch 20261014T095137; modules 2; new nodes 2; change records: coord/changes/picard-external-cech-cup-leibniz-coordinate.md)
 - 09:51 L: merged deliver/V3/Sheaf.AlgebraicGeometry.SymmetricAlgebraAffineSectionComparison (stage 3; reviewer PASS; after a return; landing 20261014T095139-L-867373 (interface); batch 20261014T095137; modules 1; new nodes 0; change records: coord/changes/symmetric-algebra-affine-section-proof-elaboration.md)
+- 09:56 L: returned deliver/N4/Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare (reviewer RETURN: (reviewer X-a8e60, head a8e60b780) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Ra)
