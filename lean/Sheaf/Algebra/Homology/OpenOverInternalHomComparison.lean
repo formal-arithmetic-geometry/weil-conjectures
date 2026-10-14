@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Sheaf.AlgebraicGeometry.InternalHomOverEquiv
 import Sheaf.Algebra.Homology.InternalHomOverNaturality
+import Sheaf.AlgebraicGeometry.InternalHomRestrictScheme
 
 /-! # Composite open restriction comparison -/
 
@@ -56,10 +56,35 @@ theorem openOver_internalHom_comparison (X : Scheme.{u})
     ∃ e : ∀ M N : X.Modules,
       F.obj (SheafOfModules.homObj (R := X.sheaf) M N) ≅
         SheafOfModules.homObj (R := V.toScheme.sheaf.over W) (F.obj M) (F.obj N),
-      ∀ (M M' N N' : X.Modules) (f : M' ⟶ M) (g : N ⟶ N'),
+    ∀ (M M' N N' : X.Modules) (f : M' ⟶ M) (g : N ⟶ N'),
         F.map (SheafOfModules.homObjMap (R := X.sheaf) f g) ≫ (e M' N').hom =
           (e M N).hom ≫ SheafOfModules.homObjMap (R := V.toScheme.sheaf.over W)
             (F.map f) (F.map g) := by
-  sorry
+  classical
+  intro F
+  obtain ⟨s, hs⟩ := AlgebraicGeometry.internalHom_restrict_scheme V
+  let O := SheafOfModules.overFunctor V.toScheme.ringCatSheaf W
+  let e (M N : X.Modules) := O.mapIso (s M N) ≪≫
+    SheafOfModules.overHomObjIso
+      ((Scheme.Modules.restrictFunctor V.ι).obj M)
+      ((Scheme.Modules.restrictFunctor V.ι).obj N) W
+  refine ⟨e, ?_⟩
+  intro M M' N N' f g
+  have h₁ := hs f g
+  have h₂ := overHomObjIso_naturality
+    (R := V.toScheme.sheaf) W
+      ((Scheme.Modules.restrictFunctor V.ι).map f)
+      ((Scheme.Modules.restrictFunctor V.ι).map g)
+  change O.map ((Scheme.Modules.restrictFunctor V.ι).map
+      (SheafOfModules.homObjMap (R := X.sheaf) f g)) ≫ (e M' N').hom = _
+  dsimp only [e, Iso.trans_hom]
+  change O.map ((Scheme.Modules.restrictFunctor V.ι).map
+      (SheafOfModules.homObjMap (R := X.sheaf) f g)) ≫ O.map (s M' N').hom ≫ _ = _
+  have h₁' := congrArg O.map h₁
+  simp only [Functor.map_comp] at h₁'
+  rw [← Category.assoc, h₁']
+  rw [Category.assoc, h₂]
+  simp only [Category.assoc]
+  rfl
 
 end CategoryTheory
