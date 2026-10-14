@@ -92,7 +92,9 @@ private theorem equivarianceSubfunctor_isSheaf
     exact hf g y
   exact ContinuousMap.congr_fun hab x
 
-/-- Equivariant locally constant functions satisfy etale sheaf gluing before
+/-- The canonical equivariant locally constant module presheaf sheaf theorem.
+
+Equivariant locally constant functions satisfy etale sheaf gluing before
 sheafification, including after transport of the coefficient ring.
 Source: Stacks Project, Tags 04TR, 04TS and 0DV5 (3).
 (blueprint: lem-weil-pbc-torsor-equivariant-presheaf-sheaf)
