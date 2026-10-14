@@ -3,25 +3,84 @@
  "blueprint": {
   "is": "def-sc-etale-torsion-cd",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Etale torsion cohomological dimension bound",
- "statement": "For a scheme $X$ and an integer $c\\geq0$, write\n$\\operatorname{cd}_{\\rm tor}(X)\\leq c$ if\n$H^q(X,F)=0$ for every torsion\nabelian etale sheaf\n$F$ and every $q>c$, where cohomology is the ordinary\nderived section functor of [def-weil-pbc-etale-cohomology].\nFor a field $K$, write $\\operatorname{cd}_{\\rm tor}(K)\\leq c$\nfor this condition on $\\operatorname{Spec}K$.",
+ "statement": "For a scheme $X$ [def-pc-scheme] and an integer $c\\geq0$, write\n$\\operatorname{cd}_{\\rm tor}(X)\\leq c$ if\n$H^q(X,F)=0$ for every torsion abelian etale sheaf\n$F$ on the small etale site of $X$ [def-weil-pbc-etale-sheaves]\nand every integer $q>c$, where $H^q(X,F)$ is the ordinary\nderived-section cohomology group of [def-weil-pbc-etale-cohomology].\nHere torsion has the local-section meaning of\n[def-weil-pbc-etale-sheaves]: every local section is locally\nkilled by a positive integer; a single integer annihilating $F$\nis not required.\nFor a field $K$, write $\\operatorname{cd}_{\\rm tor}(K)\\leq c$\nfor this condition on the affine scheme $\\operatorname{Spec}K$\n[def-weil-affine-spectrum].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/def-sc-etale-torsion-cd.md",
   "place": "node def-sc-etale-torsion-cd, order 1545"
  },
  "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-etale-sheaves"
+  "def-weil-affine-spectrum"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "torsion.*cohomological|cohomological.*dimension|HasCohomologicalDimension",
+   "results": "Zero hits in the pinned Mathlib source.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "torsion etale cohomological dimension of a scheme",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme has torsion etale cohomological dimension at most c if the cohomology of every torsion abelian etale sheaf vanishes in degrees greater than c",
+   "results": "Eight hits: projective/injective Ext-dimension predicates and formally etale cotangent cohomology. None defines a torsion-restricted small-etale global-sections bound.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomological\", \"dimension\"",
+   "results": "Zero hits; service returned successfully.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology|torsion",
+   "results": "Eleven hits in Mathlib/CategoryTheory/Sites/SheafCohomology: generic Sheaf.H and cohomologyPresheaf API and Cech/MayerVietoris documentation. Basic.lean:57-59 defines H as Ext, not the torsion cohomological dimension predicate.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological dimension bounded by n means that higher right derived functors of global sections vanish on torsion sheaves of abelian groups on the small etale site",
+   "results": "Eight hits: injective Ext-dimension predicates and DerivedCategory.isLE_iff/isGE_iff with Q transport. These concern one object or all Ext inputs, not the torsion-restricted global-sections bound.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An upper bound on the right derived functors of sections for all torsion abelian sheaves on an etale site",
+   "results": "Eight hits: generic sheaf abelian/Grothendieck instances, LightCondMod instance, Functor.rightDerived, its vanishing on injectives, localCohomology.diagram, and Sheaf.H. Read RightDerived.lean:111-113,153-159 and SheafCohomology/Basic.lean:57-59; none defines the predicate for every torsion etale sheaf.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|CohomologicalDimension|torsion.*dimension|dimension.*torsion",
+   "results": "Three hits: a torsion-dimension import and polynomial module finite-dimensional torsion documentation/theorem; none concerns etale sheaf cohomological dimension.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -46,5 +105,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-sc-etale-torsion-cd",
+  "worker": "stage1",
+  "summary": "Checked the definition against its master blueprint source, the existing sheaf and cohomology nodes, and source Lean. Made the existing notions explicit, adding scheme and affine-spectrum dependencies; the torsion quantifier is local, with no uniform annihilator. No exact project attachment, Mathlib leaf, duplicate definition, or new node was found. As a definition, it has no proof steps.",
+  "blueprint": "Realizes the complete definition in def-sc-etale-torsion-cd.md: the universal vanishing predicate for a scheme and its abbreviation for Spec of a field. The imported blueprint node has no proof, and blueprint.from remains null.",
+  "same_as_search": "blueprint_refs.py search 'torsion cohomological dimension' and 'cd}_{', with whole-DAG keyword inspection: other hits are vanishing theorems or the distinct relative/class-restricted FullCD notion, not this definition."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NL-51cb2faa5",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-51cb2faa5 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements and sources, report, and unit/chapter route. The arbitrary-scheme bound preserves local torsion and ordinary derived-section cohomology. Checked zero sheaf, empty scheme, c=0/1, field notation, and related DAG definitions. No new nodes, proof gaps, target changes, repairs, or tool_uses. Review written to review.md."
+ }
 }
