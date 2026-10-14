@@ -1,0 +1,124 @@
+{
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "id": "lem-sc-flat-telescope-stage-naturality",
+ "kind": "statement",
+ "title": "Common-refinement cancellation extends stage naturality",
+ "statement": "Let Y be a scheme [def-pc-scheme] with its derived category [def-pc-derived-category], let D be any category, F : D(O_Y) → D and G : K(O_Y) → D be functors, and a_X : (Q_Y⋙F)(X) → G(X) for every flat telescope shift representative X [def-sc-flat-telescope-stage-map]. If a is natural for flatTelescopeStageMap morphisms, it is natural for every homotopy morphism between these representatives.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YS; https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "Common-refinement cancellation in step 3 of lem-sc-flat-telescope-bounded-normalization-extension; explicit refinement is an inherited agent expansion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-sc-flat-telescope-stage-map"
+ ],
+ "proof": [
+  {
+   "text": "For s:X→X′ obtain stage maps a:R→X and b:R→X′, with a a quasi-isomorphism and a;s=b. Q_Y and F send a to an isomorphism. Precompose the naturality equality with F(Q_Y(a)), rewrite using functoriality and a;s=b, use stage naturality for both b and a, and cancel.",
+   "uses": [
+    "lem-sc-flat-telescope-stage-map-refinement",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "lem-sc-flat-telescope-stage-map-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-14",
+  "document": "dag/nodes/sec-picard-framework/lem-sc-flat-telescope-bounded-normalization-extension.json",
+  "place": "Step 3, localization cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality follows after precomposition with invertible common refinements",
+   "date": "2026-10-14",
+   "results": "Eight generic NatIso/NatTrans naturality lemmas.",
+   "verdict": "No exact restricted-family statement; categorical cancellation proves it."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.cancel_epi",
+   "date": "2026-10-14",
+   "results": "CategoryTheory.cancel_epi in Mathlib.CategoryTheory.Category.Basic.",
+   "verdict": "Used to cancel the invertible refinement."
+  },
+  {
+   "tool": "grep",
+   "query": "stage.*naturality|naturality.*refinement",
+   "date": "2026-10-14",
+   "results": "No matches.",
+   "verdict": "No existing telescope-family naturality theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality follows from naturality on stage maps after cancellation of a common quasi-isomorphism refinement",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error (msearch.py).",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatTelescopeBoundedNormalizationExtension",
+  "date": "2026-10-14",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Common refinement naturality step of lem-sc-flat-telescope-bounded-normalization-extension",
+   "via": [
+    "lem-sc-flat-telescope-bounded-normalization-extension",
+    "lem-sc-flat-telescope-model-shift-gauge",
+    "lem-sc-flat-telescope-shift-gauge",
+    "lem-sc-normalized-flat-telescope-stage-comparison",
+    "lem-sc-normalized-flat-telescope-comparison",
+    "lem-sc-normalized-kflat-representative-comparison",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatTelescopeStageNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeStageNaturality.lean",
+  "declaration": "AlgebraicGeometry.flat_telescope_stage_naturality",
+  "statement": "theorem flat_telescope_stage_naturality\n    {Y : Scheme.{u}} [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {D : Type v} [Category.{v'} D]\n    (F : schemeDerivedCategory Y ⥤ D)\n    (G : HomotopyCategory\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ) ⥤ D)\n    (α : ∀ X : HomotopyCategory\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ),\n      flatTelescopeShiftRepresentative Y X →\n        ((DerivedCategory.Qh ⋙ F).obj X ⟶ G.obj X))\n    (hα : ∀ (X X' : HomotopyCategory\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))\n      (hX : flatTelescopeShiftRepresentative Y X)\n      (hX' : flatTelescopeShiftRepresentative Y X') (s : X ⟶ X'),\n      flatTelescopeStageMap Y s →\n        (DerivedCategory.Qh ⋙ F).map s ≫ α X' hX' = α X hX ≫ G.map s) :\n    ∀ (X X' : HomotopyCategory\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))\n      (hX : flatTelescopeShiftRepresentative Y X)\n      (hX' : flatTelescopeShiftRepresentative Y X') (s : X ⟶ X'),\n      (DerivedCategory.Qh ⋙ F).map s ≫ α X' hX' = α X hX ≫ G.map s",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261014T073334-L-3423433",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261014T073334-L-3423433",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -22,48 +22,32 @@
  ],
  "proof": [
   {
-   "text": "For a bounded-flat tower E_n, take the countable sum of the supplied comparisons beta. Compute derived pullback on these K-flat sums and use the coproduct comparisons for termwise tensor pullback. Naturality intertwines every transition, hence one minus transition.",
+   "text": "Construct the stage-natural normalized forward morphisms a, with agreement with beta on bounded telescope representatives.",
    "uses": [
-    "def-pc-derived-pullback",
-    "lem-pc-kflat-closure",
-    "def-sc-flat-telescope-stage-map"
+    "lem-sc-flat-telescope-normalization-morphisms"
    ],
    "elementary": false
   },
   {
-   "text": "Use the sum comparison and its translate on the two summands of the transition cone. The supplied beta shift equation identifies the connecting component, so these maps commute with the cone differential. The reverse comparisons give inverse cone maps. Applying the same calculation to tower maps gives cone-map naturality, and translating gives the required shift square with the unchanged e.",
+   "text": "Agreement with the supplied bounded isomorphisms proves IsIso on bounded representatives. Common-refinement cancellation extends stage naturality to all homotopy maps between the representatives, supplying the naturality hypothesis of telescope invertibility propagation. Package each component with asIso; the required stage naturality and shift equations are definitionally the original forward-map equations.",
    "uses": [
-    "def-sc-flat-telescope-stage-map",
-    "def-sc-scheme-canonical-shift-unit-iso",
-    "def-sc-scheme-canonical-tensor-shift",
-    "lem-pc-kflat-closure"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Compare presentations using common flat tower refinements. Both transported components agree after precomposition with the invertible localized augmentation; tower naturality proves this agreement, and cancellation gives equality. Thus components are well defined on the model homotopy objects and commute with stage maps including their isomorphism transports. The zero tower needs no nonzero assumption and upper bounds may depend on the stage.",
-   "uses": [
-    "lem-sc-flat-telescope-stage-map-refinement",
-    "def-pc-derived-pullback",
-    "def-sc-flat-telescope-stage-map"
+    "lem-sc-flat-telescope-normalization-is-iso",
+    "lem-sc-flat-telescope-stage-naturality"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-pullback",
-  "def-sc-flat-telescope-stage-map",
-  "def-sc-scheme-canonical-shift-unit-iso",
-  "def-sc-scheme-canonical-tensor-shift",
-  "lem-pc-kflat-closure",
-  "lem-sc-flat-telescope-stage-map-refinement"
+  "lem-sc-flat-telescope-normalization-morphisms",
+  "lem-sc-flat-telescope-normalization-is-iso",
+  "lem-sc-flat-telescope-stage-naturality"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "H3",
+  "group": "G2",
   "date": "2026-10-14",
-  "document": "dag/nodes/sec-picard-framework/lem-sc-flat-telescope-model-shift-gauge.json",
-  "place": "Countable-sum, transition-cone and presentation-independence parts of steps 1 and 3 of lem-sc-flat-telescope-model-shift-gauge, with the bounded normalization supplied as input. Stacks 06YS and 06YJ supply models; normalization is the inherited agent expansion."
+  "document": "dag/nodes/sec-picard-framework/lem-sc-flat-telescope-bounded-normalization-extension.json",
+  "place": "Construction/invertibility decomposition, assembled by asIso in Lean."
  },
  "mathlib_searches": [
   {
@@ -146,9 +130,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H3",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261014T061024-L-2465201",
+  "landing": "20261014T073334-L-3423433",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

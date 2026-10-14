@@ -7,8 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
 public import Sheaf.AlgebraicGeometry.BoundedFlatModelNormalization
-import Sheaf.Algebra.Homology.KFlatTelescopeClosure
-import Sheaf.AlgebraicGeometry.FlatTelescopeStageMapRefinement
+import Sheaf.AlgebraicGeometry.FlatTelescopeNormalizationMorphisms
+import Sheaf.AlgebraicGeometry.FlatTelescopeNormalizationIsIso
+import Sheaf.AlgebraicGeometry.FlatTelescopeStageNaturality
 
 /-! # Extension of bounded normalization to telescopes
 
@@ -126,6 +127,26 @@ theorem exists_flat_telescope_comparison_of_bounded_normalization
               tensorIso e (Iso.refl _) ≪≫
               schemeCanonicalShiftUnitIso Z
                 ((derivedPullback f).obj (DerivedCategory.Qh.obj X))).hom ≫
-            (α X ⟨P, htel, Or.inl rfl⟩).hom⟦(1 : ℤ)⟧' := by sorry
+            (α X ⟨P, htel, Or.inl rfl⟩).hom⟦(1 : ℤ)⟧' := by
+  obtain ⟨a, hnat, hbounded, hshift⟩ :=
+    exists_flat_telescope_normalization_morphisms f e β hβnat hβshift
+  have hboundedIso (X : HomotopyCategory
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))
+      (hX : flatTelescopeShiftRepresentative Y X)
+      (hb : boundedFlatShiftRepresentative Y X) : IsIso (a X hX) := by
+    rw [hbounded X hX hb]
+    infer_instance
+  have hnatAll := flat_telescope_stage_naturality (derivedPullback f)
+    ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙
+      (DerivedCategory.Qh : HomotopyCategory
+        (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤
+        schemeDerivedCategory Z)) a hnat
+  have hiso := flat_telescope_normalization_isIso f e a hnatAll hshift hboundedIso
+  let α := fun X hX ↦ @asIso _ _ _ _ (a X hX) (hiso X hX)
+  refine ⟨α, ?_, ?_⟩
+  · intro X X' hX hX' s hs
+    exact hnat X X' hX hX' s hs
+  · intro P htel
+    exact hshift P htel
 
 end AlgebraicGeometry
