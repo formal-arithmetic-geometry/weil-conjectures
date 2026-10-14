@@ -1,0 +1,142 @@
+{
+ "id": "lem-sbc-root-normalization-generic-stalk-galois-model",
+ "kind": "statement",
+ "title": "Galois integral-closure model for root-normalization residues",
+ "statement": "theorem root_normalization_generic_stalk_galois_model {L U : Scheme.{u}} (i : U ⟶ L) (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U) (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R) (β : pullback i φ ≅ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen f)) (hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen f) = pullback.snd i φ) (H : CommRingCat.{u}) [IsNoetherianRing H] (b : R ⟶ H) (hg : IsSMulRegular H (b.hom f)) [IsDomain (H ⧸ Ideal.span {b.hom f})] : let g := b.hom f let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g) let N := Spec (CommRingCat.of A) let q := Spec.map (CommRingCat.ofHom (algebraMap H A)) let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g) (∀ (Q : Ideal A) (hQ : Q.IsPrime), letI := hQ AdjoinRoot.root ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g) ∈ Q → IsRegularLocalRing (Localization.AtPrime Q)) → ∀ (hN : IsLocallyNoetherian N), letI := hN let p := pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ) ∀ (hp : IsFinite p), letI := hp let a := p ≫ V.ι Etale p → IsFinite a.fromNormalization → ∀ (D : Scheme.{u}) (j : D ⟶ N), IsRegular D → IsIntegral D → IsEffectiveCartierCenter j → (∀ z : N, z ∈ V ↔ z ∉ Set.range j) → ∀ (η : D), IsGenericPoint η Set.univ → ∀ (x : a.normalization), a.fromNormalization x = j η → ∃ (S : CommRingCat.{u}) (T : Subgroup G) (alg : Algebra (N.presheaf.stalk (j η)) S), letI := alg ∃ (act : MulSemiringAction T S), letI := act IsDomain (N.presheaf.stalk (j η)) ∧ IsDomain S ∧ Module.Finite (N.presheaf.stalk (j η)) S ∧ Module.Flat (N.presheaf.stalk (j η)) S ∧ IsGaloisGroup T (N.presheaf.stalk (j η)) S ∧ ∃ (q₀ : Ideal S), q₀.IsPrime ∧ (letI := (a.fromNormalization.residueFieldMap x).hom.toAlgebra Module.finrank (N.residueField (a.fromNormalization x)) (a.normalization.residueField x)) = q₀.inertiaDeg (N.presheaf.stalk (j η))",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-relative-normalization",
+  "def-sbc-normal-dominant-galois",
+  "def-pc-fibre-product",
+  "def-weil-regular-scheme",
+  "def-pc-integral-scheme",
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-residue-field",
+  "def-weil-vector-space-dimension",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0307 and 09EB; local model subargument of root-normalization residue-degree calculation"
+ },
+ "proof": [
+  {
+   "text": "The monic quotient A is free over H, so g and t are regular. A/(t)=H/(g) is a domain; (t) has height one by the principal ideal theorem and is not minimal. Its regular localization is a DVR. The support of the integral Cartier centre is V(t), identifying j(eta) with (t).",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Compatibility of beta identifies the generic fibre of p with a G-torsor. Select the connected field factor determined by the generization of x and its stabilizer subgroup T of G. T acts faithfully with fixed fraction field K, so the factor is a finite Galois extension.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Integral closure commutes with localization. Identify the relative normalization over the DVR stalk with the product of integral closures in its generic field factors. Let S be the factor containing x; finiteness of normalization makes S module finite over the stalk. S is a domain and torsion free, hence flat over the DVR. The stabilizer action preserves S and its invariants are the DVR (normality). Thus IsGaloisGroup T R0 S holds.",
+   "uses": [
+    "lem-sbc-normalization-stalk-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The point x corresponds to a prime q of S. The stalk and integral-closure comparisons preserve the canonical residue maps, so the two residue extensions are isomorphic over isomorphic base fields. Their finranks agree. No arithmetic degree formula or divisibility statement is used.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-normalization-stalk-base-change"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "worker",
+  "group": "K2",
+  "document": "Stacks Project",
+  "place": "Tags 0307 and 09EB; root-chart argument in the parent node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalization stalk over the generic point of a root divisor is the integral closure of a discrete valuation ring in a Galois factor with stabilizer subgroup",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite Galois extension of a discrete valuation ring each residue degree divides the order of the Galois group",
+   "date": "2026-10-14",
+   "results": "Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn and related arithmetic lemmas; no geometric comparison",
+   "verdict": "Arithmetic theorem used in corrected core; geometric model still needed"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn",
+   "date": "2026-10-14",
+   "results": "Found the fundamental identity; no scheme local-model construction",
+   "verdict": "No geometric model theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "inertiaDegIn_eq_inertiaDeg; stabilizer.*integral closure; galois.*model",
+   "date": "2026-10-14",
+   "results": "Mathlib arithmetic lemmas and parent prose, no root-stalk model declaration; blueprint_refs search found no matching blueprint node",
+   "verdict": "New geometric comparison needed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.NormalizationResidueDegreeDvdCore",
+  "date": "2026-10-14",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-root-normalization-generic-stalk-residue-separable",
+   "place": "Galois residue-degree subargument: geometric local model before the arithmetic identity",
+   "via": [
+    "lem-sbc-root-normalization-generic-stalk-residue-degree-dvd",
+    "lem-sbc-root-normalization-generic-stalk-residue-degree-dvd-core"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationGenericStalkGaloisModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootNormalizationGenericStalkGaloisModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.root_normalization_generic_stalk_galois_model",
+  "statement": "theorem root_normalization_generic_stalk_galois_model {L U : Scheme.{u}} (i : U ⟶ L) (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U) (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R) (β : pullback i φ ≅ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen f)) (hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen f) = pullback.snd i φ) (H : CommRingCat.{u}) [IsNoetherianRing H] (b : R ⟶ H) (hg : IsSMulRegular H (b.hom f)) [IsDomain (H ⧸ Ideal.span {b.hom f})] : let g := b.hom f let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g) let N := Spec (CommRingCat.of A) let q := Spec.map (CommRingCat.ofHom (algebraMap H A)) let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g) (∀ (Q : Ideal A) (hQ : Q.IsPrime), letI := hQ AdjoinRoot.root ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g) ∈ Q → IsRegularLocalRing (Localization.AtPrime Q)) → ∀ (hN : IsLocallyNoetherian N), letI := hN let p := pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ) ∀ (hp : IsFinite p), letI := hp let a := p ≫ V.ι Etale p → IsFinite a.fromNormalization → ∀ (D : Scheme.{u}) (j : D ⟶ N), IsRegular D → IsIntegral D → IsEffectiveCartierCenter j → (∀ z : N, z ∈ V ↔ z ∉ Set.range j) → ∀ (η : D), IsGenericPoint η Set.univ → ∀ (x : a.normalization), a.fromNormalization x = j η → ∃ (S : CommRingCat.{u}) (T : Subgroup G) (alg : Algebra (N.presheaf.stalk (j η)) S), letI := alg ∃ (act : MulSemiringAction T S), letI := act IsDomain (N.presheaf.stalk (j η)) ∧ IsDomain S ∧ Module.Finite (N.presheaf.stalk (j η)) S ∧ Module.Flat (N.presheaf.stalk (j η)) S ∧ IsGaloisGroup T (N.presheaf.stalk (j η)) S ∧ ∃ (q₀ : Ideal S), q₀.IsPrime ∧ (letI := (a.fromNormalization.residueFieldMap x).hom.toAlgebra Module.finrank (N.residueField (a.fromNormalization x)) (a.normalization.residueField x)) = q₀.inertiaDeg (N.presheaf.stalk (j η))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-02daf",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261014T001725-L-2552030",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-02daf",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261014T001725-L-2552030",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signatures and proofs match the delivered nodes and recorded correction; all modules and the sole direct importer compile cleanly; original caller failure, minimal adaptation, and expected axiom sets verified."
+ }
+}

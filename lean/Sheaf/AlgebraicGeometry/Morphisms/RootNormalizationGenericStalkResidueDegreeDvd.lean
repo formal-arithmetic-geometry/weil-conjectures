@@ -16,6 +16,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.Localization.Ideal
 
 import Sheaf.AlgebraicGeometry.Morphisms.NormalizationResidueDegreeDvdCore
+import Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationGenericStalkGaloisModel
 
 /-! # Residue degrees of root normalization at the divisor generic point
 
@@ -89,15 +90,20 @@ theorem root_normalization_generic_stalk_residue_degree_dvd
           (a.normalization.residueField x) ∣ Nat.card G := by
   dsimp only
   intro hroot hN hp hEtale hNorm D j hD hDi hj hcomp η hη x hx
-  let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C (b.hom f))
-  let N := Spec (CommRingCat.of A)
-  let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A (b.hom f))
-  let q := Spec.map (CommRingCat.ofHom (algebraMap H A))
-  let p := pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ)
-  let a := p ≫ V.ι
-  exact normalization_residue_degree_dvd_core (V := V.toScheme) G p a hEtale hNorm j hD hDi hj V (by
-    intro z
-    change z ∈ V ↔ z ∉ Set.range j
-    exact hcomp z) η hη x hx
+  have hmodel := root_normalization_generic_stalk_galois_model i G W R φ f β hβ H b hg
+  dsimp only at hmodel
+  have hlocal := hmodel hroot hN hp hEtale hNorm D j hD hDi hj hcomp η hη x hx
+  obtain ⟨S, T, alg, hlocal⟩ := hlocal
+  let := alg
+  obtain ⟨act, hlocal⟩ := hlocal
+  let := act
+  obtain ⟨hR, hS, hfinite, hflat, hgal, q₀, hq₀, hdegree⟩ := hlocal
+  have := hR
+  have := hS
+  have := hfinite
+  have := hflat
+  have := hgal
+  have := hq₀
+  exact hdegree.symm ▸ normalization_residue_degree_dvd_core G T q₀
 
 end AlgebraicGeometry.Scheme

@@ -2,15 +2,10 @@
  "id": "lem-sbc-root-normalization-generic-stalk-residue-degree-dvd-core",
  "kind": "statement",
  "title": "Abstract normalization residue degree divisibility calculation",
- "statement": "theorem normalization_residue_degree_dvd_core {N V P D : Scheme.{u}} (G : Type (u + 1)) [Group G] [Finite G] (p : P ⟶ V) [IsFinite p] (a : P ⟶ N) [QuasiCompact a] [QuasiSeparated a] (hEtale : Etale p) (hNorm : IsFinite a.fromNormalization) (j : D ⟶ N) (hD : IsRegular D) (hDi : IsIntegral D) (hj : IsEffectiveCartierCenter j) (O : N.Opens) (hcomp : ∀ z : N, z ∈ O ↔ z ∉ Set.range j) (η : D) (hη : IsGenericPoint η Set.univ) (x : a.normalization) (hx : a.fromNormalization x = j η) : letI := (a.fromNormalization.residueFieldMap x).hom.toAlgebra Module.finrank (N.residueField (a.fromNormalization x)) (a.normalization.residueField x) ∣ Nat.card G",
+ "statement": "theorem normalization_residue_degree_dvd_core {R : Type u} {S : Type v} [CommRing R] [CommRing S] [IsDomain R] [IsDomain S] [Algebra R S] [Module.Finite R S] [Module.Flat R S] (G : Type w) [Group G] [Finite G] (T : Subgroup G) [MulSemiringAction T S] [IsGaloisGroup T R S] (q : Ideal S) [q.IsPrime] : q.inertiaDeg R ∣ Nat.card G",
  "stmt_deps": [
-  "def-weil-etale-morphism",
-  "def-weil-finite-integral-morphism",
-  "def-nagata-effective-cartier-ideal",
-  "def-weil-regular-scheme",
-  "def-pc-integral-scheme",
-  "def-weil-residue-field",
-  "def-weil-vector-space-dimension"
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-flat-ring-map"
  ],
  "source": {
   "document": "Stacks Project",
@@ -18,28 +13,18 @@
  },
  "proof": [
   {
-   "text": "Localize at the generic Cartier point and identify the normalization stalk with the integral closure of the resulting DVR.",
+   "text": "Apply Mathlib Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn at q.under R. Rewrite the common inertia degree using Ideal.inertiaDegIn_eq_inertiaDeg. The residue degree divides the product, hence Nat.card T. Compose with Subgroup.card_subgroup_dvd_card.",
    "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "The generic finite etale algebra splits into Galois factors whose degrees divide the finite group order.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Apply the Galois DVR degree formula [L:K]=r*e*f to conclude that each residue degree f divides the group order.",
-   "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "kind": "from-document",
   "by": "worker",
-  "group": "D3",
+  "group": "K2",
   "document": "Stacks Project",
-  "place": "Tag 09EB"
+  "place": "Tag 09EB; Mathlib finite flat Galois domain version and Lagrange theorem"
  },
  "mathlib_searches": [
   {
@@ -93,7 +78,7 @@
   "module": "Sheaf.AlgebraicGeometry.Morphisms.NormalizationResidueDegreeDvdCore",
   "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/NormalizationResidueDegreeDvdCore.lean",
   "declaration": "AlgebraicGeometry.Scheme.normalization_residue_degree_dvd_core",
-  "statement": "theorem normalization_residue_degree_dvd_core {N V P D : Scheme.{u}} (G : Type (u + 1)) [Group G] [Finite G] (p : P ⟶ V) [IsFinite p] (a : P ⟶ N) [QuasiCompact a] [QuasiSeparated a] (hEtale : Etale p) (hNorm : IsFinite a.fromNormalization) (j : D ⟶ N) (hD : IsRegular D) (hDi : IsIntegral D) (hj : IsEffectiveCartierCenter j) (O : N.Opens) (hcomp : ∀ z : N, z ∈ O ↔ z ∉ Set.range j) (η : D) (hη : IsGenericPoint η Set.univ) (x : a.normalization) (hx : a.fromNormalization x = j η) : letI := (a.fromNormalization.residueFieldMap x).hom.toAlgebra Module.finrank (N.residueField (a.fromNormalization x)) (a.normalization.residueField x) ∣ Nat.card G",
+  "statement": "theorem normalization_residue_degree_dvd_core {R : Type u} {S : Type v} [CommRing R] [CommRing S] [IsDomain R] [IsDomain S] [Algebra R S] [Module.Finite R S] [Module.Flat R S] (G : Type w) [Group G] [Finite G] (T : Subgroup G) [MulSemiringAction T S] [IsGaloisGroup T R S] (q : Ideal S) [q.IsPrime] : q.inertiaDeg R ∣ Nat.card G",
   "branch": "sheaf-dag",
   "by": "D3",
   "date": "2026-10-14"
@@ -109,19 +94,50 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-7f671",
-  "group": "C2",
+  "reviewer": "X-02daf",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261013T231532-L-1816149",
-  "kind": "proof",
-  "note": "independent Codex review: Unchanged Lean signature matched the node; comment-only diff and report agree; counterexample is valid; compilation and axiom probe passed with the original sorryAx.",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.normalization_residue_degree_dvd_core"
+  "landing": "20261014T001725-L-2552030",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signatures and proofs match the delivered nodes and recorded correction; all modules and the sole direct importer compile cleanly; original caller failure, minimal adaptation, and expected axiom sets verified."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "K2 stage 2",
+  "old_statement": "theorem normalization_residue_degree_dvd_core {N V P D : Scheme.{u}} (G : Type (u + 1)) [Group G] [Finite G] (p : P ⟶ V) [IsFinite p] (a : P ⟶ N) [QuasiCompact a] [QuasiSeparated a] (hEtale : Etale p) (hNorm : IsFinite a.fromNormalization) (j : D ⟶ N) (hD : IsRegular D) (hDi : IsIntegral D) (hj : IsEffectiveCartierCenter j) (O : N.Opens) (hcomp : ∀ z : N, z ∈ O ↔ z ∉ Set.range j) (η : D) (hη : IsGenericPoint η Set.univ) (x : a.normalization) (hx : a.fromNormalization x = j η) : letI := (a.fromNormalization.residueFieldMap x).hom.toAlgebra Module.finrank (N.residueField (a.fromNormalization x)) (a.normalization.residueField x) ∣ Nat.card G",
+  "what": "The original scheme interface is false: p and a are unrelated to G, and its Cartier assumptions do not imply that the ambient stalk is a DVR. Replace the purported abstract geometry with the actual Galois arithmetic calculation. The unchanged root-chart caller supplies a finite flat Galois local model with subgroup T via a separate geometric comparison theorem. No Challenge target changes.",
+  "source": {
+   "document": "Stacks Project",
+   "place": "Tag 09EB; generalization in Mathlib.NumberTheory.RamificationInertia.Galois"
+  },
+  "citers": [],
+  "old_stmt_deps": [
+   "def-weil-etale-morphism",
+   "def-weil-finite-integral-morphism",
+   "def-nagata-effective-cartier-ideal",
+   "def-weil-regular-scheme",
+   "def-pc-integral-scheme",
+   "def-weil-residue-field",
+   "def-weil-vector-space-dimension"
   ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.normalization_residue_degree_dvd_core"
+  "old_proof": [
+   {
+    "text": "Localize at the generic Cartier point and identify the normalization stalk with the integral closure of the resulting DVR.",
+    "uses": [],
+    "elementary": false
+   },
+   {
+    "text": "The generic finite etale algebra splits into Galois factors whose degrees divide the finite group order.",
+    "uses": [],
+    "elementary": false
+   },
+   {
+    "text": "Apply the Galois DVR degree formula [L:K]=r*e*f to conclude that each residue degree f divides the group order.",
+    "uses": [],
+    "elementary": false
+   }
   ]
  }
 }

@@ -1,49 +1,44 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group K2
+-/
 module
 
-public import Mathlib.AlgebraicGeometry.Normalization
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
-public import WeilConjectures.AlgebraicGeometry.Regular
+public import Mathlib.NumberTheory.RamificationInertia.Galois
+import Mathlib.GroupTheory.Coset.Card
+
+/-! # The Galois arithmetic part of normalization residue-degree divisibility
+
+Source: Stacks Project, Tag 09EB. The geometric comparison with normalization is
+supplied separately; the Galois action is an explicit hypothesis here.
+-/
 
 @[expose] public section
-universe u
-open CategoryTheory CategoryTheory.Limits
+universe u v w
 namespace AlgebraicGeometry.Scheme
 
-/- STATEMENT-DISPUTED: G is unrelated to p or a; no torsor or Galois hypothesis is present.
-Take N = Spec R[t], P = V = Spec C[t], p = identity, and a induced by R[t] -> C[t].
-Take D = Spec R with j the zero section, O = D(t), and G the trivial group.
-The relative normalization of N in P is P, since C[t] is integral over R[t].
-At the point (t) of P the residue extension is C/R, of degree 2, but Nat.card G = 1.
-All hypotheses hold: p is finite etale; a is finite, hence qcqs; the normalization map
-is finite; D is regular and integral; j is an effective Cartier centre; O is its complement.
-Thus the claimed divisibility is 2 | 1. Tag 09EB requires a finite Galois extension;
-it does not connect an arbitrary group G to that extension. The caller retains a G-torsor
-but this interface discards it, as well as the compatibility between a, p, and O. -/
+/-- The residue degree of a prime in a finite flat Galois extension of domains divides
+any finite group containing its Galois group as a subgroup.
 
-/--
-The arithmetic residue-degree calculation for a finite etale morphism over the generic
-point of a Cartier divisor.  This is the local Galois/DVR calculation (Stacks Project,
-Tag 09EB): after identifying the normalization stalk with the integral closure of the
-DVR stalk, the residue degree divides the degree of the generic Galois algebra, hence
-(the latter being a stabilizer quotient) divides the order of the torsor group.
-The geometric construction of the root chart is deliberately absent from this lemma;
-it is supplied by the caller.
-(blueprint: lem-sbc-root-normalization-generic-stalk-residue-degree-dvd-core)
--/
+Source: Stacks Project, Tag 09EB. Apply the fundamental Galois identity at the prime
+under `q`. Galois transitivity identifies its common inertia degree with `q.inertiaDeg R`.
+This degree divides the product of the number of primes, ramification index and residue
+degree, which is the order of `T`. Lagrange's theorem then gives divisibility by `|G|`.
+The finite flat domain version in Mathlib is more general than the DVR case of the source.
+(blueprint: lem-sbc-root-normalization-generic-stalk-residue-degree-dvd-core) -/
 theorem normalization_residue_degree_dvd_core
-    {N V P D : Scheme.{u}} (G : Type (u + 1)) [Group G] [Finite G]
-    (p : P ⟶ V) [IsFinite p] (a : P ⟶ N) [QuasiCompact a] [QuasiSeparated a]
-    (hEtale : Etale p) (hNorm : IsFinite a.fromNormalization)
-    (j : D ⟶ N) (hD : IsRegular D) (hDi : IsIntegral D)
-    (hj : IsEffectiveCartierCenter j)
-    (O : N.Opens)
-    (hcomp : ∀ z : N, z ∈ O ↔ z ∉ Set.range j)
-    (η : D) (hη : IsGenericPoint η Set.univ)
-    (x : a.normalization) (hx : a.fromNormalization x = j η) :
-    letI := (a.fromNormalization.residueFieldMap x).hom.toAlgebra
-    Module.finrank (N.residueField (a.fromNormalization x))
-      (a.normalization.residueField x) ∣ Nat.card G := by
-  sorry
+    {R : Type u} {S : Type v} [CommRing R] [CommRing S]
+    [IsDomain R] [IsDomain S] [Algebra R S] [Module.Finite R S] [Module.Flat R S]
+    (G : Type w) [Group G] [Finite G] (T : Subgroup G)
+    [MulSemiringAction T S] [IsGaloisGroup T R S]
+    (q : Ideal S) [q.IsPrime] : q.inertiaDeg R ∣ Nat.card G := by
+  have h := Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn
+    (q.under R) S T
+  rw [Ideal.inertiaDegIn_eq_inertiaDeg (q.under R) q T] at h
+  have hd : q.inertiaDeg R ∣ Nat.card T := by
+    rw [← h, ← Nat.mul_assoc]
+    exact dvd_mul_left _ _
+  exact hd.trans T.card_subgroup_dvd_card
 
 end AlgebraicGeometry.Scheme
