@@ -34,16 +34,40 @@
  ],
  "proof": [
   {
-   "text": "Apply the Noetherian-object argument of Stacks Tag 09Z6 (3). For a finite family of the maps, take its joint kernel. If this kernel is nonzero, choose a geometric stalk where it is nonzero and add a map that is injective on that stalk; the joint kernel strictly decreases. The ascending-chain argument for constructible subsheaves of a constructible sheaf over a Noetherian ring shows that this process terminates after finitely many additions. At termination every geometric stalk of the joint kernel is zero, so conservativity of geometric stalks makes the finite joint map monomorphic. Reindex the selected family by Fin n.",
-   "uses": [],
+   "text": "For every finite set S of indices form the actual biproduct lift f_S and its kernel. The kernel inclusion is mono into the constructible source, so the kernel is constructible over the Noetherian ring. Its underlying abelian support is constructible. Exactness of module stalks, the kernel comparison, and the forgetful stalk comparison identify this support with the locus where f_S is not injective at the algebraic closure of the residue field. Zero stalks exclude every geometric support witness over the same point. No constructibility of the targets is required.",
+   "uses": [
+    "lem-weil-pbc-constructible-module-subobject-noetherian",
+    "new-constructible-module-support-general",
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The intersection of all failure loci is empty: at each point the hypothesis supplies an index whose singleton family has injective stalk map. The Noetherian scheme is spectral, so compactness of the constructible topology gives finitely many finite families whose failure loci have empty intersection. Let S be their finite union.",
+   "uses": [
+    "lem-weil-pbc-spectral-constructible-finite-intersection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each residue-field algebraic-closure point one selected family K is injective. The biproduct projection from the union S to K intertwines their joint maps. Given two maps into F with equal composites with f_S, apply the stalk functor, project to K, and cancel the injective map f_K. Conservativity of these stalks makes the original maps equal, hence f_S is mono. Reindex S by its equivalence with Fin (card S), using projections to transfer monicity. Empty schemes and empty finite sets are handled by the same proof.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-constructible-module-subobject-noetherian",
+  "new-constructible-module-support-general",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-spectral-constructible-finite-intersection",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
  "proof_origin": {
-  "by": "agent",
+  "by": "Q1 stage 3",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 09Z6 (3), Noetherian-object finite-selection argument"
+  "place": "Tag 09Z6 (3), finite selection via constructible kernel supports and constructible-topology compactness (Tag 095N / Topology Tag 0901). Replaces the invalid descending-chain termination argument."
  },
  "lean": {
   "existing": false,
@@ -92,10 +116,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261014T173045-L-2910045",
-  "kind": "interface",
+  "landing": "20261014T180945-L-3486112",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
