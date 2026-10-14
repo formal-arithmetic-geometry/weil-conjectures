@@ -9,6 +9,8 @@ public import Mathlib.Topology.LocallyConstant.Basic
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.UniversalCover
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!
 # Pro-étale locally constant sheaves of sets, in cocycle form
@@ -137,25 +139,96 @@ lemma IsTwistedSection.apply_eq_of_preconnectedSpace [WeaklyEtale f] [Surjective
     trivial
   exact hx'.symm
 
+/-- **Pullback of twisted sections.** A section of the sheaf of sets defined by `c` over
+`π : T ⟶ Y` pulls back along a morphism `t : T' ⟶ T` over `Y` to a section over `T'`. -/
+lemma IsTwistedSection.comp {S : Type*} {c : ↥(pullback f f) → S → S} {T T' : Scheme.{u}}
+    {π : T ⟶ Y} {π' : T' ⟶ Y} (t : T' ⟶ T) (ht : t ≫ π = π') {σ : ↥(pullback f π) → S}
+    (hσ : IsTwistedSection f c π σ) :
+    IsTwistedSection f c π' (σ ∘ (pullback.map f π' f π (𝟙 V) t (𝟙 Y) (by simp)
+      (by simp [ht])).base) := by
+  set m := pullback.map f π' f π (𝟙 V) t (𝟙 Y) (by simp) (by simp [ht])
+  have hm : m ≫ pullback.snd f π = pullback.snd f π' ≫ t := pullback.lift_snd _ _ _
+  set M := pullback.map (pullback.snd f π') (pullback.snd f π') (pullback.snd f π)
+    (pullback.snd f π) m m t hm.symm hm.symm
+  have hM₁ : M ≫ pullback.fst _ _ = pullback.fst _ _ ≫ m := pullback.lift_fst _ _ _
+  have hM₂ : M ≫ pullback.snd _ _ = pullback.snd _ _ ≫ m := pullback.lift_snd _ _ _
+  have hMp : M ≫ twistedPairMap f π = twistedPairMap f π' := by
+    apply pullback.hom_ext
+    · simp only [Category.assoc, pullback.lift_fst]
+      rw [reassoc_of% hM₁]
+      simp [m]
+    · simp only [Category.assoc, pullback.lift_snd]
+      rw [reassoc_of% hM₂]
+      simp [m]
+  refine ⟨hσ.1.comp_continuous m.base.hom.continuous, fun w ↦ ?_⟩
+  have h := hσ.2 (M.base w)
+  simp only [Function.comp_apply]
+  rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply, ← hM₁, ← hM₂, ← hMp]
+  exact h
+
+/-- **Locally constant sheaves of sets on a geometrically unibranch scheme are unions of finite
+étale ones** (Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 7.4.10, with Lemma
+7.3.9), in cocycle form. Let `Y` be a connected regular (hence normal, hence geometrically
+unibranch) Noetherian scheme, `f : V ⟶ Y` a single-morphism pro-étale cover and `c` a descent
+cocycle on the constant sheaf `S_V`, defining a pro-étale locally constant sheaf of sets `F_c` on
+`Y`. Then `F_c` is a disjoint union of sheaves represented by finite étale `Y`-schemes: through
+every point `s` of the stalk of `F_c` at a geometric point `v̄ ≫ f` (identified with `S` through
+`v̄ : Spec K ⟶ V`) passes a section of `F_c` over a finite étale `p : P ⟶ Y`, at a geometric
+point `p̄` of `P` over `v̄ ≫ f`. Namely, `P` represents the summand of `F_c` containing `s`, and
+the section is its tautological one. -/
+theorem exists_isTwistedSection_finiteEtale [IsLocallyNoetherian Y] [CompactSpace Y]
+    [IsRegular Y] [ConnectedSpace Y] (f : V ⟶ Y) [WeaklyEtale f] [Surjective f]
+    [QuasiCompact f] {S : Type*} {c : ↥(pullback f f) → S → S} (hc : IsDescentCocycle f c)
+    {K : Type u} [Field K] [IsAlgClosed K] (v : Spec (.of K) ⟶ V) (s : S) :
+    ∃ (P : Scheme.{u}) (p : P ⟶ Y) (_ : IsFinite p) (_ : Etale p) (σ : ↥(pullback f p) → S)
+      (p' : Spec (.of K) ⟶ P) (h : v ≫ f = p' ≫ p),
+      IsTwistedSection f c p σ ∧
+        σ ((pullback.lift v p' h).base (IsLocalRing.closedPoint K)) = s := by
+  sorry
+
+/-- **Finite étale schemes split over the universal cover at every geometric point.** For a
+finite étale `p : P ⟶ Y`, every geometric point of `P` over a geometric point `t` of the
+universal cover `Ỹ_y` is the image of `t` under a `Y`-morphism `Ỹ_y ⟶ P`. Indeed the
+`Y`-morphisms `Ỹ_y ⟶ P` are sections of the finite étale `P ×_Y Ỹ_y ⟶ Ỹ_y`, hence open and
+closed immersions, pairwise disjoint over the connected `Ỹ_y`; there are as many of them as
+geometric points of `P` over `y` (`AlgebraicGeometry.Scheme.UniversalCovers.bijective_fiber`),
+so their images cover the fibre over the base point, and the complement of their union is a
+finite étale `Ỹ_y`-scheme with an empty fibre, hence empty. -/
+theorem Scheme.UniversalCovers.exists_comp_eq_of_finiteEtale {Ω : Type u} [Field Ω]
+    (U : Scheme.UniversalCovers Y Ω) (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
+    {P : Scheme.{u}} (p : P ⟶ Y) [IsFinite p] [Etale p] {K : Type u} [Field K] [IsAlgClosed K]
+    (t : Spec (.of K) ⟶ U.cover y) (p' : Spec (.of K) ⟶ P) (h : t ≫ U.proj y = p' ≫ p) :
+    ∃ a : U.cover y ⟶ P, a ≫ p = U.proj y ∧ t ≫ a = p' := by
+  sorry
+
 /-- **Pro-étale locally constant sheaves of sets are constant on the universal cover.** Let `Y`
 be a connected regular Noetherian scheme, `Ỹ_y = U.cover y` its universal profinite étale cover
 at a geometric point `y`, `f : V ⟶ Y` a single-morphism pro-étale cover and `c` a descent
 cocycle on the constant sheaf `S_V`. Then the sheaf of sets defined by `c` has a section over
-`Ỹ_y` through every point of `V ×_Y Ỹ_y` and every value in `S`.
-
-Indeed `c` defines a sheaf of sets `F_c` on `Y_proét` which is pro-étale locally constant. Since
-`Y` is normal, hence geometrically unibranch, `F_c` is a disjoint union of sheaves represented by
-finite étale `Y`-schemes (Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 7.4.10,
-with Lemma 7.3.9 for the dictionary between locally constant sheaves and geometric covers). Each
-of them splits over `Ỹ_y` (`AlgebraicGeometry.Scheme.UniversalCovers.bijective_fiber`, `Ỹ_y`
-being connected), so the pullback of `F_c` to `Ỹ_y` is constant, and the global sections of a
-constant sheaf on the connected `Ỹ_y` take every value at every point. -/
+`Ỹ_y` through every point of `V ×_Y Ỹ_y` and every value in `S`: the sheaf is a union of finite
+étale ones (`AlgebraicGeometry.exists_isTwistedSection_finiteEtale`), which split over `Ỹ_y`
+(`AlgebraicGeometry.Scheme.UniversalCovers.exists_comp_eq_of_finiteEtale`). -/
 theorem exists_isTwistedSection_universalCover {Ω : Type u} [Field Ω] [IsLocallyNoetherian Y]
     [CompactSpace Y] [IsRegular Y] [ConnectedSpace Y] (U : Scheme.UniversalCovers Y Ω)
     (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (f : V ⟶ Y) [WeaklyEtale f] [Surjective f]
     [QuasiCompact f] {S : Type*} {c : ↥(pullback f f) → S → S} (hc : IsDescentCocycle f c)
     (x : ↥(pullback f (U.proj y))) (s : S) :
     ∃ σ, IsTwistedSection f c (U.proj y) σ ∧ σ x = s := by
-  sorry
+  -- a geometric point over `x`
+  set x' := (pullback f (U.proj y)).fromSpecAlgebraicClosureResidueField x
+  have hx' : x'.base (IsLocalRing.closedPoint _) = x := by
+    simp only [x', Scheme.fromSpecAlgebraicClosureResidueField, Scheme.Hom.comp_apply]
+    exact Scheme.fromSpecResidueField_apply (X := pullback f (U.proj y)) x _
+  obtain ⟨P, p, _, _, σ, p', h, hσ, hσs⟩ :=
+    exists_isTwistedSection_finiteEtale f hc (x' ≫ pullback.fst _ _) s
+  obtain ⟨a, ha, hap⟩ := U.exists_comp_eq_of_finiteEtale y p (x' ≫ pullback.snd _ _) p' (by
+    rw [Category.assoc, ← pullback.condition, ← Category.assoc, h])
+  have hm : x' ≫ pullback.map f (U.proj y) f p (𝟙 V) a (𝟙 Y) (by simp) (by simp [ha]) =
+      pullback.lift (x' ≫ pullback.fst _ _) p' h :=
+    pullback.hom_ext (by simp) (by simpa using hap)
+  refine ⟨_, hσ.comp a ha, ?_⟩
+  simp only [Function.comp_apply]
+  rw [← hx', ← Scheme.Hom.comp_apply, hm]
+  exact hσs
 
 end AlgebraicGeometry
