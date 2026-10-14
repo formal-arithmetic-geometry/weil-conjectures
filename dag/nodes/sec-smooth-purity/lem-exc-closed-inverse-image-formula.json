@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-exc-closed-inverse-image-formula",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A presheaf formula for closed inverse image",
@@ -14,32 +14,155 @@
  },
  "stmt_deps": [
   "def-weil-pbc-proetale-modules",
-  "def-weil-pbc-proetale-operations"
+  "def-weil-pbc-proetale-operations",
+  "def-exc-closed-site-lift",
+  "def-weil-pbc-ind-etale-basis",
+  "def-weil-pbc-sheafification"
  ],
  "proof": [
   {
-   "text": "Work with sheaves on the bases by [lem-weil-pbc-ind-etale-basis]. Underived\ndirect image is $(i_*G)(W)=G(u(W))$. A morphism $F\\to i_*G$ therefore gives\n$F(v(V))\\to G(u(v(V)))=G(V)$, hence $P_F\\to G$. Conversely $P_F\\to G$\ndefines\n$$\n F(W)\\longrightarrow F(v(u(W)))\\longrightarrow G(u(W)),\n$$\nwhere the first arrow is restriction along the counit $v(u(W))\\to W$ of\n[def-exc-closed-site-lift], [lem-exc-closed-site-adjunction]. The triangle\nidentities, or evaluation of these formulas, show that the two constructions\nare inverse. Sheafification does not change maps to $G$. Thus $P_F^a$ has\nthe adjunction that defines $i^*$ in the pro-etale operations, proving the\nformula.",
+   "text": "Write $X=\\operatorname{Spec}A$ and $Z=\\operatorname{Spec}(A/I)$: here \"affine closed immersion\" means a closed immersion of affine schemes, as in the basis construction. Restrict sheaves to $\\mathcal B_X$ and $\\mathcal B_Z$. The basis lemma determines the sheaves and all their morphisms, so a calculation of the adjunction on these bases determines the full-site inverse image. Base change is $u(W)=W\\times_X Z$ and the closed lift is $v$. By the site-adjunction lemma, choose its unit $\\eta_V:V\\to uv(V)$ (an isomorphism) and counit $\\varepsilon_W:vu(W)\\to W$. Direct image on these bases is $(i_*G)(W)=G(u(W))$ by the direct-image formula for pro-etale inverse image. Work first with sheaves of sets; exactly the same component formulas apply to abelian sheaves.",
    "uses": [
     "lem-weil-pbc-ind-etale-basis",
     "def-exc-closed-site-lift",
+    "lem-exc-closed-site-adjunction",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BL (lemma-closed-immersion-affines-apply), proof of (1); Tag 09BK (lemma-closed-immersion-affines)"
+   }
+  },
+  {
+   "text": "Define the presheaf $P_F$ by $P_F(V)=F(v(V))$, with restriction $F(v(a))$ for $a:V'\\to V$. For $\\beta:F\\to i_*G$, put $\\alpha_V=G(\\eta_V)\\circ\\beta_{v(V)}:F(v(V))\\to G(V)$. Conversely, for $\\alpha:P_F\\to G$, put $\\beta_W=\\alpha_{u(W)}\\circ F(\\varepsilon_W)$. These are natural transformations: for $a:V'\\to V$ use $uv(a)\\circ\\eta_{V'}=\\eta_V\\circ a$ and naturality of $\\beta$ at $v(a)$; for $b:W'\\to W$ use $b\\circ\\varepsilon_{W'}=\\varepsilon_W\\circ vu(b)$ and naturality of $\\alpha$ at $u(b)$. All maps are homomorphisms when $F,G$ are abelian sheaves.",
+   "uses": [
+    "def-exc-closed-site-lift",
     "lem-exc-closed-site-adjunction"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-inverse-image-formula.md",
+    "place": "## Proof: the two displayed Hom constructions"
+   }
+  },
+  {
+   "text": "The composites are identities, not just maps in the required direction. Starting with $\\alpha$, its reconstructed component is $G(\\eta_V)\\alpha_{uv(V)}F(\\varepsilon_{v(V)})$. Naturality of $\\alpha$ at $\\eta_V$ rewrites this as $\\alpha_V F(v(\\eta_V))F(\\varepsilon_{v(V)})=\\alpha_V$, by $\\varepsilon_{v(V)}\\circ v(\\eta_V)=1$. Starting with $\\beta$, the reconstructed component is $G(\\eta_{u(W)})\\beta_{vu(W)}F(\\varepsilon_W)$. Naturality of $\\beta$ at $\\varepsilon_W$ rewrites this as $G(\\eta_{u(W)})G(u(\\varepsilon_W))\\beta_W=\\beta_W$, by $u(\\varepsilon_W)\\circ\\eta_{u(W)}=1$. Pre- or post-composing either formula with a sheaf map commutes with every displayed restriction. Thus the bijection $\\operatorname{Hom}(F,i_*G)\\cong\\operatorname{Hom}(P_F,G)$ is natural in both variables.",
+   "uses": [
+    "lem-exc-closed-site-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-inverse-image-formula.md",
+    "place": "## Proof: triangle identities / evaluation of the formulas"
+   }
+  },
+  {
+   "text": "By the universal property of sheafification, maps $P_F\\to G$ for a sheaf $G$ factor uniquely through $P_F^\\#$. Consequently $L(F)=P_F^\\#$ is left adjoint to $i_*$ on basis sheaves, hence on full-site sheaves by step 1. The pro-etale inverse-image definition gives $i^{-1}\\dashv i_*$ as well. Apply uniqueness of left adjoints with $R_1=R_2=i_*$ and the identity comparison of right adjoints: this gives the canonical natural isomorphism $L\\cong i^{-1}$ carrying the two units to each other. This argument applies separately to sets and abelian groups, since the Hom formulas and universal property hold in both categories.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BL (lemma-closed-immersion-affines-apply), (1); Sites Tags 00WH and Categories 0B65"
+   }
+  },
+  {
+   "text": "The same identification also respects the ring and module structures. Precomposition with $v$ preserves products sectionwise, and set sheafification preserves finite products by the sheafification finite-limit lemma (the bases are small in the chosen universes). Therefore $L$ preserves finite products. Apply $L$ to addition, zero, negation, multiplication, one, and the action map $R_X\\times F\\to F$, where $R_X=\\Lambda_{X,\\Proet}$. Product identification gives operations on $L(R_X)$ and $L(F)$; every ring or left-module axiom is an equality between composites of these maps, so applying the functor proves the same equality. No commutativity of $\\Lambda$ is used. The unit preserves these operations: its presheaf component at $W$ is restriction along $\\varepsilon_W$, followed by the sheafification map. For a product it is the pair of the two component units. Write $c:L\\xrightarrow{\\sim}i^{-1}$ for step 4. Naturality at the projections gives $i^{-1}(p_A)c_{A\\times B}=c_A L(p_A)$ and $i^{-1}(p_B)c_{A\\times B}=c_B L(p_B)$. Thus $c_{A\\times B}=c_A\\times c_B$ under the product identifications; the final-object component is its unique map. Naturality at an operation $\\mu:A_1\\times\\cdots\\times A_n\\to B$ now reads $c_B L(\\mu)=i^{-1}(\\mu)(c_{A_1}\\times\\cdots\\times c_{A_n})$, also for nullary operations. This proves compatibility with every ring, abelian-group and module operation explicitly. In particular $L(F)$ with its abelian operations is the abelian sheafification of $V\\mapsto F(v(V))$: maps to any abelian sheaf factor through set sheafification and preserve addition by this same product argument.",
+   "uses": [
+    "lem-weil-pbc-sheafification-sets-exact",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-proetale-modules",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WJ (lemma-sheafification-exact); product-operation argument extending Tag 09BL to modules"
+   }
+  },
+  {
+   "text": "The coefficient comparison proposition gives the canonical ring isomorphism $c_i:i^{-1}R_X\\xrightarrow{\\sim}R_Z$ for every finite discrete ring, including a noncommutative one. Via step 5, $L(F)$ is a module over $i^{-1}R_X$. Give it the $R_Z$-action $r\\cdot m=c_i^{-1}(r)m$. This is exactly the module inverse image with identified coefficients; for commutative coefficients the tensor formula of the operations definition identifies it explicitly with $i^*F$: $m\\otimes r\\mapsto c_i^{-1}(r)m$, with inverse $m\\mapsto m\\otimes1$. Balancing gives $(c_i^{-1}(r)m)\\otimes1=m\\otimes r$, so both composites are identities; the maps commute with restrictions. For general left modules the identical extension-of-scalars calculation uses $R_Z\\otimes_{i^{-1}R_X}i^{-1}F$, $r\\otimes m\\mapsto c_i^{-1}(r)m$, with inverse $m\\mapsto1\\otimes m$. Thus the abelian sheafification $P_F^\\#$ carries the induced coefficient-module structure and is canonically $i^*F$. The argument gives sheafification, and nowhere assumes that $P_F$ itself is a sheaf.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-inverse-image-formula.md",
+    "place": "## Proof: identification with i^* in the pro-etale operations; coefficient identification from prop-weil-pbc-proetale-constant-ring-map"
+   }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-ind-etale-basis",
   "def-exc-closed-site-lift",
-  "lem-exc-closed-site-adjunction"
+  "lem-exc-closed-site-adjunction",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "def-weil-pbc-proetale-modules",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-pbc-proetale-operations"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-inverse-image-formula.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09BK and 09BL (1), with the blueprint Hom calculation expanded and finite-ring module operations checked explicitly"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of a sheaf along a closed immersion is sheafification of precomposition with the left adjoint lift on affine ind etale bases",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_of_isOpenImmersion, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isOpenImmersion, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction",
+   "date": "2026-10-14",
+   "verdict": "no match for the full closed ind-etale inverse-image formula; general sheafification/pullback tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Adjunction",
+   "results": "CategoryTheory.plusPlusAdjunction, CategoryTheory.sheafificationAdjunction, CategoryTheory.HasSheafify.mk', CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction, CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction, CategoryTheory.GrothendieckTopology.W_adj_unit_app, CategoryTheory.sheafComposeNatIso, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans",
+   "date": "2026-10-14",
+   "verdict": "no match for the full closed ind-etale inverse-image formula; general sheafification/pullback tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|closed.*[Ii]nverse|sheaf.*[Aa]djunction",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Abelian.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the full closed ind-etale inverse-image formula; general sheafification/pullback tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion inverse image sheafification precomposition with adjoint functor",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an adjunction v left adjoint to u, sheaf pullback along u is sheafification of the presheaf F composed with v opposite",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, SheafOfModules.sheafificationCompPullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, CategoryTheory.Sheaf.adjunction, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction, CategoryTheory.Functor.sheafPullback",
+   "date": "2026-10-14",
+   "verdict": "no match for the full closed ind-etale inverse-image formula; general sheafification/pullback tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|sheafPullback|presheaf.*[Aa]djunction",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the full closed ind-etale inverse-image formula; general sheafification/pullback tools only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -69,5 +192,44 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-open-closed-triangle"
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-exc-closed-inverse-image-formula",
+  "worker": "stage1",
+  "summary": "Expanded the Hom adjunction into natural component formulas with the actual unit isomorphism, checked both inverses via triangle identities, cited sheafification and adjoint uniqueness, and supplied finite-product and finite-ring coefficient compatibility without adding a commutativity hypothesis. No new nodes. Statement unchanged; filled missing statement dependencies for the basis, lift, and sheafification.",
+  "blueprint": "Realizes the whole blueprint proof: basis/direct image in step 1; forward/backward Hom constructions in step 2; triangle identities in step 3; sheafification and adjoint identification in step 4; implicit module compatibility in steps 5-6.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ind-etale-basis",
+    "why": "Restriction to the affine ind-etale basis determines sheaves and maps; required by the existing closed-lift route, not an alternative proof of the open-closed triangle."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic uniqueness of left adjoints identifies the constructed adjunction with inverse image, with its unit; no lemma in this unit states this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-sets-exact",
+    "why": "Generic finite-product preservation of sheafification carries the coefficient action through sheafification; no node in this unit states the general sheafification theorem."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Identifies inverse-image finite coefficient ring with the coefficient ring on Z, including noncommutative rings; a coefficient tool needed to pass from the underlying inverse image to the module inverse image."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-1103c501b",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-1103c501b (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, master blueprint, and Stacks 09BK/09BL, 00WH/00WJ and 0B65. All six steps are valid, including triangle identities and noncommutative coefficient transport. No new nodes or repairs. Accepted all four tool requests. review.md records edge cases, target coefficient/morphism distinctions, and inherited dependency cycles not introduced by this delivery."
+ }
 }
