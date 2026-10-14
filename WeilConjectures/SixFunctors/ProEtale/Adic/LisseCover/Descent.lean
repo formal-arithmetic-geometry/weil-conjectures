@@ -64,14 +64,14 @@ theorem nonempty_iso_of_transitionMatrix_eq_one (f : W ⟶ T) [WeaklyEtale f] [S
     Nonempty (M ≅ ⨁ fun _ : Fin n ↦ unit l T) := by
   have hι (g : W ⟶ T) (i : Fin n) :
       biproduct.ι (fun _ : Fin n ↦ unit l W) i ≫ (freeUpperStarIso l (Fin n) g).inv =
-        (adicUpperStarUnitIso l g).inv ≫ (g)^*ᵃ[l].map (biproduct.ι _ i) := by
+        (adicUpperStarUnitIso l g).inv ≫ (g)^*ᵃ[l].map (biproduct.ι (fun _ : Fin n ↦ unit l T) i) := by
     simp [freeUpperStarIso]
   have hι' {P : Scheme.{u}} (g : P ⟶ W) (i : Fin n) :
       biproduct.ι (fun _ : Fin n ↦ unit l P) i ≫ (freeUpperStarIso l (Fin n) g).inv =
-        (adicUpperStarUnitIso l g).inv ≫ (g)^*ᵃ[l].map (biproduct.ι _ i) := by
+        (adicUpperStarUnitIso l g).inv ≫ (g)^*ᵃ[l].map (biproduct.ι (fun _ : Fin n ↦ unit l W) i) := by
     simp [freeUpperStarIso]
   -- the transition isomorphism is the identity
-  have htr : (transitionIso ε (pullback.fst f f) (pullback.snd f f) pullback.condition).hom =
+  have htr : transitionHom ε (pullback.fst f f) (pullback.snd f f) pullback.condition =
       𝟙 _ := by
     apply unitMatrix_injective
     rw [← transitionMatrix, hε, unitMatrix_id]
@@ -79,7 +79,8 @@ theorem nonempty_iso_of_transitionMatrix_eq_one (f : W ⟶ T) [WeaklyEtale f] [S
       (adicUpperStarCongr l (pullback.condition (f := f) (g := f))).hom.app M =
         (trivPull f ε (pullback.snd f f)).inv := by
     rw [← cancel_mono (trivPull f ε (pullback.snd f f)).hom, Iso.inv_hom_id, Category.assoc]
-    simpa [transitionIso] using htr
+    rw [transitionHom_eq] at htr
+    exact htr
   -- the columns of `ε⁻¹` descend
   have hdesc (i : Fin n) : ∃ w : unit l T ⟶ M, (adicUpperStarUnitIso l f).inv ≫
       (f)^*ᵃ[l].map w = biproduct.ι (fun _ : Fin n ↦ unit l W) i ≫ ε.inv := by
@@ -88,13 +89,15 @@ theorem nonempty_iso_of_transitionMatrix_eq_one (f : W ⟶ T) [WeaklyEtale f] [S
         (trivPull f ε p).inv = (adicUpperStarUnitIso l p).inv ≫
           (p)^*ᵃ[l].map (biproduct.ι (fun _ : Fin n ↦ unit l W) i ≫ ε.inv) ≫
             (adicUpperStarComp l p f).inv.app M := by
-      simp only [trivPull, Iso.trans_inv, Iso.app_inv, Functor.mapIso_inv, Functor.map_comp,
-        Category.assoc]
+      rw [trivPull, Iso.trans_inv, Iso.trans_inv, Iso.app_inv, Functor.mapIso_inv,
+        Functor.map_comp]
+      simp only [Category.assoc]
       rw [reassoc_of% hι' p i]
-    rw [← hp, ← hp, ← htr']
-    simp only [adicUpperStarCompIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-      Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
-    rfl
+    rw [adicUpperStarCompIso, Iso.trans_hom, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      NatTrans.comp_app]
+    rw [← reassoc_of% hp (pullback.fst f f), reassoc_of% htr',
+      reassoc_of% hp (pullback.snd f f), Iso.inv_hom_id_app]
+    erw [Category.comp_id]
   choose w hw using hdesc
   let φ : (⨁ fun _ : Fin n ↦ unit l T) ⟶ M := biproduct.desc w
   have hφ : (freeUpperStarIso l (Fin n) f).inv ≫ (f)^*ᵃ[l].map φ = ε.inv := by

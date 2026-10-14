@@ -104,6 +104,29 @@ lemma continuous_glOfMatrix_apply (M M' : Matrix (Fin n) (Fin n) (locallyFiniteF
       Matrix (Fin n) (Fin n) E) i j :=
   ⟨(M i j).1.continuous.subtype_mk _, (M' i j).1.continuous.subtype_mk _⟩
 
+/-- The values of `glOfMatrix`, as matrices over `ℚ̄_ℓ`. -/
+lemma glOfMatrix_map (M M' : Matrix (Fin n) (Fin n) (locallyFiniteFunctions l T))
+    (hMM' : M * M' = 1) (hM'M : M' * M = 1) (hM : ∀ i j t, (M i j).1 t ∈ E)
+    (hM' : ∀ i j t, (M' i j).1 t ∈ E) (t : T) :
+    ((glOfMatrix M M' hMM' hM'M hM hM' t : GL (Fin n) E) : Matrix (Fin n) (Fin n) E).map
+      (algebraMap E (PadicAlgCl l)) = M.map (locallyFiniteFunctionsEval t) :=
+  Matrix.ext fun _ _ ↦ rfl
+
+/-- The inverses of the values of `glOfMatrix`, as matrices over `ℚ̄_ℓ`. -/
+lemma glOfMatrix_inv_map (M M' : Matrix (Fin n) (Fin n) (locallyFiniteFunctions l T))
+    (hMM' : M * M' = 1) (hM'M : M' * M = 1) (hM : ∀ i j t, (M i j).1 t ∈ E)
+    (hM' : ∀ i j t, (M' i j).1 t ∈ E) (t : T) :
+    (((glOfMatrix M M' hMM' hM'M hM hM' t)⁻¹ : GL (Fin n) E) : Matrix (Fin n) (Fin n) E).map
+      (algebraMap E (PadicAlgCl l)) = M'.map (locallyFiniteFunctionsEval t) :=
+  Matrix.ext fun _ _ ↦ rfl
+
+/-- Evaluating a matrix of composed locally finite functions. -/
+lemma map_locallyFiniteFunctionsComp_map_eval {T' : Type*} [TopologicalSpace T']
+    (M : Matrix (Fin n) (Fin n) (locallyFiniteFunctions l T)) (c : C(T', T)) (t : T') :
+    (M.map (locallyFiniteFunctionsComp l c)).map (locallyFiniteFunctionsEval t) =
+      M.map (locallyFiniteFunctionsEval (c t)) :=
+  Matrix.ext fun _ _ ↦ rfl
+
 variable [FiniteDimensional ℚ_[l] E]
 
 /-- A function with values in `E` with continuous entries is a locally finite function. -/
@@ -125,6 +148,13 @@ lemma matrixOfGL_apply (σ : T → GL (Fin n) E)
     (hσ : ∀ i j, Continuous fun t ↦ (σ t : Matrix (Fin n) (Fin n) E) i j) (i j : Fin n)
     (t : T) : (matrixOfGL σ hσ i j).1 t = ((σ t : Matrix (Fin n) (Fin n) E) i j : PadicAlgCl l) :=
   rfl
+
+/-- The values of `matrixOfGL`. -/
+lemma matrixOfGL_map (σ : T → GL (Fin n) E)
+    (hσ : ∀ i j, Continuous fun t ↦ (σ t : Matrix (Fin n) (Fin n) E) i j) (t : T) :
+    (matrixOfGL σ hσ).map (locallyFiniteFunctionsEval t) =
+      (σ t : Matrix (Fin n) (Fin n) E).map (algebraMap E (PadicAlgCl l)) :=
+  Matrix.ext fun _ _ ↦ rfl
 
 lemma matrixOfGL_mul (σ τ : T → GL (Fin n) E)
     (hσ : ∀ i j, Continuous fun t ↦ (σ t : Matrix (Fin n) (Fin n) E) i j)

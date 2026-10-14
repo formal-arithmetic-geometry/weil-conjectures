@@ -90,13 +90,13 @@ theorem IsAdicLisseSheaf.exists_iso_upperStar_universalCover [IsLocallyNoetheria
   let g := transitionMatrix e (pullback.fst f f) (pullback.snd f f) pullback.condition
   let g' := transitionMatrix e (pullback.snd f f) (pullback.fst f f) pullback.condition.symm
   have hgg' : g * g' = 1 := by
-    rw [← transitionMatrix_trans]
+    rw [← transitionMatrix_trans e _ _ _ _ _ rfl]
     exact transitionMatrix_self _ _ _
   have hg'g : g' * g = 1 := by
-    rw [← transitionMatrix_trans]
+    rw [← transitionMatrix_trans e _ _ _ _ _ rfl]
     exact transitionMatrix_self _ _ _
   -- a finite extension `E` containing their values
-  obtain ⟨E, hE, hEmem⟩ := exists_finiteDimensional_forall_mem (l := l) (T := pullback f f)
+  obtain ⟨E, hE, hEmem⟩ := exists_finiteDimensional_forall_mem (l := l) (T := ↥(pullback f f))
     ((Finset.univ.image fun p : Fin n × Fin n ↦ g p.1 p.2) ∪
       Finset.univ.image fun p : Fin n × Fin n ↦ g' p.1 p.2)
   have hgE (i j : Fin n) (z) : (g i j).1 z ∈ E :=
@@ -104,21 +104,74 @@ theorem IsAdicLisseSheaf.exists_iso_upperStar_universalCover [IsLocallyNoetheria
   have hg'E (i j : Fin n) (z) : (g' i j).1 z ∈ E :=
     hEmem _ (Finset.mem_union_right _ (Finset.mem_image_of_mem _ (Finset.mem_univ (i, j)))) z
   -- the cocycle `γ = g⁻¹ : V ×_Y V → GL_n(E)`
-  let γ : pullback f f → GL (Fin n) E := glOfMatrix g' g hg'g hgg' hg'E hgE
+  let γ : ↥(pullback f f) → GL (Fin n) E := glOfMatrix g' g hg'g hgg' hg'E hgE
   have hγc (i j : Fin n) := continuous_glOfMatrix_apply g' g hg'g hgg' hg'E hgE i j
+  have hinj : Function.Injective fun A : Matrix (Fin n) (Fin n) E ↦
+      A.map (algebraMap E (PadicAlgCl l)) :=
+    Matrix.map_injective (algebraMap E (PadicAlgCl l)).injective
+  have hγmap (z : ↥(pullback f f)) : ((γ z : GL (Fin n) E) : Matrix (Fin n) (Fin n) E).map
+      (algebraMap E (PadicAlgCl l)) = g'.map (locallyFiniteFunctionsEval z) :=
+    glOfMatrix_map g' g hg'g hgg' hg'E hgE z
   have hγdiag (v : V) : γ ((pullback.diagonal f).base v) = 1 := by
-    sorry
-  have hγcocycle (w : tripleProduct f) : γ ((tripleProj₁₃ f).base w) =
+    have key : transitionMatrix e (pullback.diagonal f ≫ pullback.snd f f)
+        (pullback.diagonal f ≫ pullback.fst f f) (by simp) = g'.map
+          (locallyFiniteFunctionsComp l (pullback.diagonal f).base.hom) :=
+      transitionMatrix_comp e _ _ _ _ _
+    rw [transitionMatrix_congr e (pullback.diagonal_snd f) (pullback.diagonal_fst f) _ rfl,
+      transitionMatrix_self] at key
+    apply Units.ext
+    apply hinj
+    dsimp only
+    rw [hγmap, Units.val_one, Matrix.map_one _ (map_zero _) (map_one _)]
+    have := congrArg (fun N ↦ N.map (locallyFiniteFunctionsEval v)) key
+    simp only [map_locallyFiniteFunctionsComp_map_eval,
+      Matrix.map_one _ (map_zero _) (map_one _)] at this
+    exact this.symm
+  have hγcocycle (w : ↥(tripleProduct f)) : γ ((tripleProj₁₃ f).base w) =
       γ ((pullback.fst (pullback.snd f f) (pullback.fst f f)).base w) *
         γ ((pullback.snd (pullback.snd f f) (pullback.fst f f)).base w) := by
-    sorry
+    set q₁₂ := pullback.fst (pullback.snd f f) (pullback.fst f f)
+    set q₂₃ := pullback.snd (pullback.snd f f) (pullback.fst f f)
+    set q₁₃ := tripleProj₁₃ f
+    have hA : pullback.snd f f ≫ f = pullback.fst f f ≫ f := pullback.condition.symm
+    have hB : q₁₂ ≫ pullback.snd f f = q₂₃ ≫ pullback.fst f f := pullback.condition
+    have h₁₃f : q₁₃ ≫ pullback.fst f f = q₁₂ ≫ pullback.fst f f := pullback.lift_fst _ _ _
+    have h₁₃s : q₁₃ ≫ pullback.snd f f = q₂₃ ≫ pullback.snd f f := pullback.lift_snd _ _ _
+    -- all morphisms from the triple product to `Y` agree
+    have e₁ : (q₁₂ ≫ pullback.snd f f) ≫ f = (q₁₂ ≫ pullback.fst f f) ≫ f := by
+      rw [Category.assoc, Category.assoc, hA]
+    have e₂ : (q₂₃ ≫ pullback.fst f f) ≫ f = (q₁₂ ≫ pullback.fst f f) ≫ f := by
+      rw [← hB, e₁]
+    have e₃ : (q₂₃ ≫ pullback.snd f f) ≫ f = (q₁₂ ≫ pullback.fst f f) ≫ f := by
+      rw [Category.assoc, hA, ← Category.assoc, e₂]
+    have : WeaklyEtale (q₁₃ ≫ pullback.fst f f) := by
+      rw [h₁₃f]
+      infer_instance
+    have : WeaklyEtale q₁₃ := WeaklyEtale.of_comp _ (pullback.fst f f)
+    have h₁₃ := transitionMatrix_comp e q₁₃ (pullback.snd f f) (pullback.fst f f)
+      pullback.condition.symm (by rw [h₁₃f, h₁₃s, e₃])
+    have h₁₂ := transitionMatrix_comp e q₁₂ (pullback.snd f f) (pullback.fst f f)
+      pullback.condition.symm e₁
+    have h₂₃ := transitionMatrix_comp e q₂₃ (pullback.snd f f) (pullback.fst f f)
+      pullback.condition.symm (by rw [e₂, e₃])
+    have htr := transitionMatrix_trans e (q₂₃ ≫ pullback.snd f f) (q₁₂ ≫ pullback.snd f f)
+      (q₁₂ ≫ pullback.fst f f) (by rw [e₁, e₃]) e₁ e₃
+    rw [transitionMatrix_congr e h₁₃s.symm h₁₃f.symm _ (by rw [h₁₃f, h₁₃s, e₃]), h₁₃, h₁₂,
+      transitionMatrix_congr e rfl hB _ (by rw [e₂, e₃]), h₂₃] at htr
+    apply Units.ext
+    apply hinj
+    dsimp only
+    rw [Units.val_mul, Matrix.map_mul, hγmap, hγmap, hγmap]
+    have := congrArg (fun N ↦ N.map (locallyFiniteFunctionsEval w)) htr
+    simp only [Matrix.map_mul, map_locallyFiniteFunctionsComp_map_eval] at this
+    exact this
   have hcoc (k : ℕ) : IsDescentCocycle f
-      (fun z (s : GL (Fin n) E ⧸ congruenceSubgroup E n k) ↦ γ z • s) where
-    isLocallyConstant s := isLocallyConstant_smul_mk γ (fun i j ↦ (hγc i j).1)
-      (fun i j ↦ (hγc i j).2) k s
-    bijective z := MulAction.bijective (γ z)
-    diagonal v := funext fun s ↦ by simp [hγdiag v]
-    cocycle w := funext fun s ↦ by simp [hγcocycle w, mul_smul]
+      (fun z (s : GL (Fin n) E ⧸ congruenceSubgroup E n k) ↦ γ z • s) :=
+    { isLocallyConstant := fun s ↦ isLocallyConstant_smul_mk γ (fun i j ↦ (hγc i j).1)
+        (fun i j ↦ (hγc i j).2) k s
+      bijective := fun z ↦ MulAction.bijective (γ z)
+      diagonal := fun v ↦ funext fun s ↦ by simp [hγdiag v]
+      cocycle := fun w ↦ funext fun s ↦ by simp [hγcocycle w, mul_smul] }
   -- 2.–3. the cocycle is trivial over `V ×_Y Ỹ_y`
   obtain ⟨σ, hσlc, hσ⟩ := CocycleTrivialization.exists_cocycle_trivialization
     (p₁ := (pullback.fst (pullback.snd f π) (pullback.snd f π)).base)
@@ -135,9 +188,38 @@ theorem IsAdicLisseSheaf.exists_iso_upperStar_universalCover [IsLocallyNoetheria
   have hHH' : H * H' = 1 := matrixOfGL_mul _ _ _ _ fun x ↦ inv_mul_cancel (σ x)
   have hH'H : H' * H = 1 := matrixOfGL_mul _ _ _ _ fun x ↦ mul_inv_cancel (σ x)
   have : IsIso (ofUnitMatrix H) := isIso_ofUnitMatrix H (Matrix.isUnit_det_of_right_inverse hHH')
-  let εT := trivBaseChange e π (pullback.snd f π) (pullback.fst f π) pullback.condition ≪≫
+  have hq : pullback.snd f π ≫ π = pullback.fst f π ≫ f := pullback.condition.symm
+  let εT := trivBaseChange e π (pullback.snd f π) (pullback.fst f π) hq ≪≫
     asIso (ofUnitMatrix H)
   refine nonempty_iso_of_transitionMatrix_eq_one (pullback.snd f π) εT ?_
-  sorry
+  have hinvH : inv (ofUnitMatrix H) = ofUnitMatrix H' := by
+    refine IsIso.inv_eq_of_hom_inv_id ?_
+    rw [← ofUnitMatrix_mul, hH'H, ofUnitMatrix_one]
+  set m := twistedPairMap f π
+  set r₁ := pullback.fst (pullback.snd f π) (pullback.snd f π)
+  set r₂ := pullback.snd (pullback.snd f π) (pullback.snd f π)
+  have hm₁ : m ≫ pullback.fst f f = r₁ ≫ pullback.fst f π := pullback.lift_fst _ _ _
+  have hm₂ : m ≫ pullback.snd f f = r₂ ≫ pullback.fst f π := pullback.lift_snd _ _ _
+  have : WeaklyEtale (m ≫ pullback.fst f f) := by rw [hm₁]; infer_instance
+  have : WeaklyEtale m := WeaklyEtale.of_comp _ (pullback.fst f f)
+  have hr : r₁ ≫ pullback.snd f π = r₂ ≫ pullback.snd f π := pullback.condition
+  have hr' : (r₁ ≫ pullback.fst f π) ≫ f = (r₂ ≫ pullback.fst f π) ≫ f := by
+    rw [Category.assoc, Category.assoc, pullback.condition, ← Category.assoc, ← Category.assoc,
+      hr]
+  rw [transitionMatrix_trans_iso, transitionMatrix_baseChange e π _ _ hq r₁ r₂ _ hr',
+    transitionMatrix_congr e hm₁.symm hm₂.symm _ (by rw [hm₁, hm₂, hr']),
+    transitionMatrix_comp e m _ _ pullback.condition]
+  refine matrix_ext_eval fun w ↦ ?_
+  simp only [Matrix.map_mul, map_locallyFiniteFunctionsComp_map_eval, asIso_hom, asIso_inv,
+    hinvH, unitMatrix_ofUnitMatrix, Matrix.map_one _ (map_zero _) (map_one _)]
+  have hγinv (z : ↥(pullback f f)) : (transitionMatrix e (pullback.fst f f) (pullback.snd f f)
+      pullback.condition).map (locallyFiniteFunctionsEval z) =
+        (((γ z)⁻¹ : GL (Fin n) E) : Matrix (Fin n) (Fin n) E).map (algebraMap E (PadicAlgCl l)) :=
+    (glOfMatrix_inv_map g' g hg'g hgg' hg'E hgE z).symm
+  rw [matrixOfGL_map, matrixOfGL_map, hγinv, ← Matrix.map_mul, ← Matrix.map_mul, ← Units.val_mul,
+    ← Units.val_mul]
+  have hσw := hσ w
+  rw [hσw, show ∀ a b : GL (Fin n) E, a⁻¹ * b⁻¹ * (b * a) = 1 from fun a b ↦ by group,
+    Units.val_one, Matrix.map_one _ (map_zero _) (map_one _)]
 
 end AlgebraicGeometry.ProEtale
