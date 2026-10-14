@@ -14710,4 +14710,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:33 L: merged deliver/G2/Sheaf.AlgebraicGeometry.FlatTelescopeBoundedNormalizationExtension (stage 3; reviewer PASS; first push; landing 20261014T073334-L-3423433 (interface); batch 20261014T073332; modules 5; new nodes 4)
 - 07:35 L: merged deliver/P1/Sheaf.AlgebraicGeometry.SelfTorNonpositiveChosenComparisons (stage 3; reviewer PASS; first push; landing 20261014T073557-L-3451455 (interface); batch 20261014T073555; modules 2; new nodes 1)
 - 07:35 L: merged deliver/Q3/Sheaf.Paper.ModuleCupGodementFMapSummands (stage 3; reviewer PASS; first push; landing 20261014T073558-L-3451672 (interface); batch 20261014T073555; modules 3; new nodes 2)
-- 07:38 L: merged deliver/S3/Sheaf.Paper.CechCupSignedAxisPairing (stage 3; reviewer PASS; after a return; landing 20261014T073818-L-3476848 (proof); batch 20261014T073816; modules 1; new nodes 1; change records: coord/changes/cech-cup-signed-axis-restoration-M2.md)
+
+- 15:40 L: batch 20261014T073816 dependency take-out
