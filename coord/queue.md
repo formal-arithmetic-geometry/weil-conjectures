@@ -1,6 +1,6 @@
 # Work queue
 
-86 items; claim with `tools/claim.py next <group> [--stage N]`.
+84 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (86)
+## Stage 3: modules to prove (84)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -48,15 +48,13 @@
 | `Sheaf.AlgebraicGeometry.RestrictedAffineNaturalCoefficientSystem` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SquareZeroTensorGradedBoundaryProjection` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FieldScalarPresheafPullbackExists` | 21 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SquareZeroTensorGradedProductProjection` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardAbelianExtSectionDiagram` | 21 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.RingScalarExtension` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFormula` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation` | 22 | 2 | proof |
-| `Sheaf.AlgebraicGeometry.SquareZeroTensorGradedQuotientMultiply` | 22 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SquareZeroTensorSectionProductComparison` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorGradedActionKernelSecond` | 22 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.TensorCoefficientActionOnSummand` | 23 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.TensorCoefficientActionSupport` | 23 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.TensorGradedCoefficientSheafAction` | 22 | 1 | proof |
 | `Sheaf.Paper.CechCupPullbackCompat` | 23 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.LocalMapPairOverlapBaseChange` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenHomotopyTensorCounit` | 24 | 1 | proof |
@@ -77,12 +75,12 @@
 | `Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationChainAction` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationChainMapExists` | 28 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.StandardSingleUnionHomotopyChainData` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.NormalizedKFlatRepresentativeComparison` | 29 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.RelativeMVCoverHomotopyData` | 29 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.StandardSingleOpenRelativeArrow` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore` | 30 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate` | 30 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineBaseChangeTildeMateIdentityFactorization` | 31 | 1 | proof |
+| `Sheaf.Algebra.Homology.AffineStalkBaseSecondLocalizationComparison` | 33 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdge` | 34 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIdentity` | 34 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalTensorComparisonOne` | 34 | 1 | proof |
