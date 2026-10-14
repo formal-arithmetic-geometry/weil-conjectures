@@ -14,6 +14,9 @@ public import Mathlib.NumberTheory.RamificationInertia.Galois
 
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
+import Sheaf.AlgebraicGeometry.Morphisms.CartierGenericStalkGaloisModelCore
+import Mathlib.RingTheory.Flat.TorsionFree
+
 /-! # Galois models at generic Cartier DVR stalks
 
 Source: Stacks Project, Tags 0307 and 09EB. -/
@@ -76,6 +79,33 @@ theorem cartier_generic_stalk_galois_model
             (letI := (a.fromNormalization.residueFieldMap x).hom.toAlgebra
              Module.finrank (N.residueField (a.fromNormalization x))
                (a.normalization.residueField x)) = q₀.inertiaDeg (N.presheaf.stalk (j η)) := by
-  sorry
+  dsimp only
+  intro hetale hfinite D j hD hj hV η hη hdom hdvr x hx
+  let := hdom
+  let := hdvr
+  obtain ⟨S, T, alg, act, hS, hinj, hfiniteS, hfield, q₀, hq₀, e, f, hcomm⟩ :=
+    cartier_generic_stalk_galois_model_core (N := N) G W V κ p r hpb
+      hetale hfinite D j hD hj hV η hη hdom hdvr x hx
+  let := alg
+  let := act
+  let := hS
+  have : Module.IsTorsionFree (N.presheaf.stalk (j η)) S :=
+    Module.isTorsionFree_iff_algebraMap_injective.mpr hinj
+  let := FractionRing.liftAlgebra (N.presheaf.stalk (j η)) (FractionRing S)
+  let := IsFractionRing.mulSemiringAction T S (FractionRing S)
+  let := hfiniteS
+  let := hfield
+  have hgalois : IsGaloisGroup T (N.presheaf.stalk (j η)) S :=
+    IsGaloisGroup.of_isFractionRing T (N.presheaf.stalk (j η)) S
+      (FractionRing (N.presheaf.stalk (j η))) (FractionRing S)
+  have hflat : Module.Flat (N.presheaf.stalk (j η)) S := inferInstance
+  let := hq₀
+  let := Localization.AtPrime.algebraOfLiesOver
+    (q₀.under (N.presheaf.stalk (j η))) q₀
+  let := ((p ≫ V.ι).fromNormalization.residueFieldMap x).hom.toAlgebra
+  have hfin := Algebra.finrank_eq_of_equiv_equiv e f hcomm
+  refine ⟨S, T, alg, act, hdom, hS, hfiniteS, hflat, hgalois, q₀, hq₀, ?_⟩
+  rw [Ideal.inertiaDeg_def]
+  exact hfin
 
 end AlgebraicGeometry.Scheme

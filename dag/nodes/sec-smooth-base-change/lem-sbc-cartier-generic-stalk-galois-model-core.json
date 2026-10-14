@@ -1,0 +1,140 @@
+{
+ "id": "lem-sbc-cartier-generic-stalk-galois-model-core",
+ "kind": "statement",
+ "title": "Selected geometric field-factor model and its compatible residue square",
+ "statement": "Let N be a locally Noetherian scheme and V an open complement of the image of an integral effective Cartier centre j:D->N. Let eta be a generic point of D, and assume the actual stalk O_{N,j(eta)} is a domain and a discrete valuation ring. Let W be a finite etale Galois cover of a scheme U with finite group G, and let p:P->V be its pullback along kappa:V->U, witnessed by a map r:P->W.P and IsPullback r p W.pi kappa. Assume p is finite etale and its relative normalization over N is finite. For every normalization point x over j(eta), there are a commutative ring S, a subgroup T of G, a base-stalk algebra structure and a T-action on S, such that S is a domain and the base algebra map is injective. S is module finite over R0 = O_{N,j(eta)}. With the canonical induced algebra and T-action on fraction fields, IsGaloisGroup T Frac(R0) Frac(S) holds. There is a prime q0 of S, a ring isomorphism e from the residue field of N at a.fromNormalization(x) to the residue field of q0 contracted to R0, and a ring isomorphism f from the normalization residue field at x to the residue field of q0. These isomorphisms commute with the canonical algebra maps. Fraction fields mean localization at all nonzero elements; ideal residue fields mean the fraction fields of the prime quotients. No flatness, ring-level Galois assertion, inertia-degree equality or divisibility conclusion is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-relative-normalization",
+  "def-sbc-normal-dominant-galois",
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-residue-field",
+  "def-weil-vector-space-dimension",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-flat-ring-map",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-field"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0307 and 09EB; torsor field-factor and residue-comparison steps 2-4 of lem-sbc-root-normalization-generic-stalk-galois-model."
+ },
+ "proof": [
+  {
+   "text": "Localize at j(eta). The Cartier centre has field stalk at eta, so its ideal becomes the maximal ideal in the displayed DVR. Pulling the torsor back to its fraction field gives a finite etale torsor. Decompose it into field factors using the field torsor components theorem; choose the factor containing a generization of x. The torsor action restricts to its stabilizer subgroup T and makes this factor Galois with that group.",
+   "uses": [
+    "lem-sbc-field-torsor-galois-components"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the integral closure S of the DVR in the selected field factor. Stalk base change for normalization identifies the localized relative normalization with the product of these integral closures. Finite normalization makes S module finite. Its embedding into the field makes it a domain and makes the base map injective. The T-action preserves integral elements. Clearing denominators in algebraic equations shows that the fraction field of S is the selected field factor; the canonical lifted action agrees with the field action.",
+   "uses": [
+    "lem-sbc-normalization-stalk-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The point x yields a prime q0 in the selected integral closure. Its contraction is the maximal ideal of the DVR. Localization and the field-factor decomposition preserve the base ring maps, so their induced base and total residue-field isomorphisms commute with the canonical residue maps. These give the ring equivalences e and f and the stated square. Empty normalization fibres are vacuous; the trivial group gives S equal to the DVR.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-field-torsor-galois-components",
+  "lem-sbc-normalization-stalk-base-change"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "worker",
+  "group": "B4",
+  "document": "Stacks Project",
+  "place": "Tags 0307 and 09EB; geometric field-factor construction and residue square of lem-sbc-cartier-generic-stalk-galois-model, before its flatness, ring Galois descent and finrank calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite etale Galois torsor normalization discrete valuation ring residue field integral closure model",
+   "date": "2026-10-14",
+   "results": "8 hits: Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, instIsAlgebraicResidueFieldOfIsIntegral, Ring.instIsGaloisFractionRingNormalClosure, Algebra.instFiniteResidueFieldOfFormallyUnramified, Algebra.isUnramifiedAt_iff_map_eq, IsGaloisGroup.iff_isFractionRing, Ideal.Quotient.normal, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization",
+   "verdict": "Arithmetic helpers found; no geometric local model with the selected factor and compatible residue square."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.finrank_eq_of_equiv_equiv",
+   "date": "2026-10-14",
+   "results": "1 hits: Algebra.finrank_eq_of_equiv_equiv",
+   "verdict": "Arithmetic helpers found; no geometric local model with the selected factor and compatible residue square."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*galois|galois.*normalization|isTorsionFree_iff_algebraMap_injective",
+   "date": "2026-10-14",
+   "results": "10 hits: Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/Algebra/Algebra/Basic.lean, Mathlib/Algebra/Algebra/Basic.lean, Mathlib/NumberTheory/NumberField/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean, Mathlib/RingTheory/Localization/Ideal.lean, Mathlib/RingTheory/Trace/Quotient.lean, Mathlib/RingTheory/AdjoinRoot.lean",
+   "verdict": "Arithmetic helpers found; no geometric local model with the selected factor and compatible residue square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite etale Galois torsor normalization over Cartier discrete valuation stalk compatible residue field isomorphisms",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.CartierGenericStalkGaloisModel",
+  "date": "2026-10-14",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Generic Cartier DVR normalization argument used by lem-sbc-root-normalization-generic-stalk-galois-model: select a field factor and compare residue maps.",
+   "via": [
+    "lem-sbc-root-normalization-generic-stalk-galois-model",
+    "lem-sbc-cartier-generic-stalk-galois-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.CartierGenericStalkGaloisModelCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/CartierGenericStalkGaloisModelCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cartier_generic_stalk_galois_model_core",
+  "statement": "theorem cartier_generic_stalk_galois_model_core\n    {N U P : Scheme.{u}} [IsLocallyNoetherian N]\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (V : N.Opens) (κ : V.toScheme ⟶ U) (p : P ⟶ V.toScheme) [IsFinite p]\n    (r : P ⟶ W.P) (hpb : IsPullback r p W.π κ) :\n    let a := p ≫ V.ι\n    Etale p → IsFinite a.fromNormalization →\n    ∀ (D : Scheme.{u}) (j : D ⟶ N),\n      IsIntegral D → IsEffectiveCartierCenter j →\n      (∀ z : N, z ∈ V ↔ z ∉ Set.range j) →\n      ∀ (η : D), IsGenericPoint η Set.univ →\n      ∀ (hdom : IsDomain (N.presheaf.stalk (j η))),\n      letI := hdom\n      IsDiscreteValuationRing (N.presheaf.stalk (j η)) →\n      ∀ (x : a.normalization), a.fromNormalization x = j η →\n        ∃ (S : CommRingCat.{u}) (T : Subgroup G)\n          (alg : Algebra (N.presheaf.stalk (j η)) S),\n          letI := alg\n          ∃ (act : MulSemiringAction T S),\n          letI := act\n          ∃ (hS : IsDomain S),\n          letI := hS\n          ∃ (hinj : Function.Injective (algebraMap (N.presheaf.stalk (j η)) S)),\n          letI : Module.IsTorsionFree (N.presheaf.stalk (j η)) S :=\n            Module.isTorsionFree_iff_algebraMap_injective.mpr hinj\n          letI := FractionRing.liftAlgebra (N.presheaf.stalk (j η)) (FractionRing S)\n          letI := IsFractionRing.mulSemiringAction T S (FractionRing S)\n          Module.Finite (N.presheaf.stalk (j η)) S ∧\n          IsGaloisGroup T (FractionRing (N.presheaf.stalk (j η))) (FractionRing S) ∧\n          ∃ (q₀ : Ideal S) (hq₀ : q₀.IsPrime),\n            letI := hq₀\n            letI := Localization.AtPrime.algebraOfLiesOver\n              (q₀.under (N.presheaf.stalk (j η))) q₀\n            letI := (a.fromNormalization.residueFieldMap x).hom.toAlgebra\n            ∃ (e : N.residueField (a.fromNormalization x) ≃+*\n                (q₀.under (N.presheaf.stalk (j η))).ResidueField)\n              (f : a.normalization.residueField x ≃+* q₀.ResidueField),\n              (algebraMap (q₀.under (N.presheaf.stalk (j η))).ResidueField\n                q₀.ResidueField).comp e.toRingHom =\n                f.toRingHom.comp (algebraMap (N.residueField (a.fromNormalization x))\n                  (a.normalization.residueField x))",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261014T010835-L-3160906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261014T010835-L-3160906",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

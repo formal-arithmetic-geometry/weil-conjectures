@@ -14096,3 +14096,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:08 L: merged deliver/A4/Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation (stage 3; reviewer PASS; first push; landing 20261014T010834-L-3160448 (proof); batch 20261014T010832; modules 1; new nodes 3)
 - 01:08 L: merged deliver/B4/Sheaf.Algebra.Homology.DerivedExtensionRingEquivRawTransportIso (stage 3; reviewer PASS; first push; landing 20261014T010834-L-3160639 (proof); batch 20261014T010832; modules 1; new nodes 0)
 - 01:08 L: merged deliver/B4/Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorComponentImageOrbit (stage 3; reviewer PASS; first push; landing 20261014T010835-L-3160793 (proof); batch 20261014T010832; modules 1; new nodes 2)
+- 01:08 L: merged deliver/B4/Sheaf.AlgebraicGeometry.Morphisms.CartierGenericStalkGaloisModel (stage 3; reviewer PASS; first push; landing 20261014T010835-L-3160906 (interface); batch 20261014T010832; modules 2; new nodes 1)
