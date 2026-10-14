@@ -10,40 +10,47 @@
  },
  "proof": [
   {
-   "text": "Identify the restricted pushforward of the closed structure sheaf with the associated affine quotient and sheafify its chosen projective resolution.",
+   "text": "Use the natural linear equivalences c_U between algebraic self-Tor and affine sections of the ambient homology sheaf. These assert only section coordinates and the restriction equation.",
    "uses": [
-    "lem-sc-affine-quotient-resolution-sheafification"
+    "new-a3-self-tor-ambient-section-coordinates"
    ],
    "elementary": false
   },
   {
-   "text": "Extend the resolution into nonpositive cochain degrees. Projective terms sheafify to flat terms; use bounded-above flat K-flatness and the affine derived tensor formula to compute the ambient tensor. Exact tilde and isoLeftDerivedObj identify its homology with the associated self-Tor module.",
+   "text": "The closed structure sheaf pushforward B is quasi-coherent because a closed immersion is affine. Its single object has quasi-coherent cohomology: degree zero is B, all other degrees are zero. Apply the canonical derived tensor quasi-coherent closure to infer quasi-coherence of Q, then restrict to each chart.",
    "uses": [
-    "lem-pc-bounded-above-flat-kflat",
-    "lem-pc-affine-derived-pullback-tensor-tilde"
+    "lem-pc-affine-morphism-hi",
+    "lem-pc-canonical-derived-tensor-qcoh"
    ],
    "elementary": false
   },
   {
-   "text": "For each supplied augmented a and pure-tensor comparison k, sheafify the augmentation square and invert its quasi-isomorphisms. Naturality of the derived tensor comparison, exact restriction-of-scalars homology, and the tilde unit gives the stated equation for q. This is the naturality part of the same ambient comparison, and involves no tensor pullback to Z.",
+   "text": "The normalized affine chart section equivalence d_U identifies the associated chart sheaf sections with algebraic Tor and proves quasi-coherence on the chart. Extend d_U inverse followed by c_U, and its inverse, to morphisms on the affine chart using the library affine Hom API. Affine Hom extensionality proves the two composites are identities. Use overEquiv to obtain t_U, with the prescribed top-section normalization.",
    "uses": [
-    "lem-pc-kflat-derived-tensor-comparison"
+    "new-p4-self-tor-affine-chart-sections"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply naturality of t_U to the inclusion V into U, replace its value on the normalized top section by c_U(x), apply the section-coordinate restriction equation, and use the normalization of t_V. This proves the required equation for every supplied augmented comparison.",
+   "uses": [
+    "new-a3-self-tor-ambient-section-coordinates"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-pc-bounded-above-flat-kflat",
-  "lem-pc-kflat-derived-tensor-comparison",
-  "lem-sc-affine-quotient-resolution-sheafification"
+  "lem-pc-affine-morphism-hi",
+  "lem-pc-canonical-derived-tensor-qcoh",
+  "new-a3-self-tor-ambient-section-coordinates",
+  "new-p4-self-tor-affine-chart-sections"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "C1",
+  "agent": "A3",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/08DX",
-  "place": "Lemma 36.3.9(2), with 06YG and 00LS; ambient computation before pullback"
+  "place": "Section coordinates, quasi-coherence from 08DX(1), affine reconstruction from sections and naturality; 01IB (lemma-equivalence-quasi-coherent) for reconstruction"
  },
  "mathlib_searches": [
   {
@@ -173,9 +180,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261014T023931-L-13770",
+  "landing": "20261014T033103-L-602571",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

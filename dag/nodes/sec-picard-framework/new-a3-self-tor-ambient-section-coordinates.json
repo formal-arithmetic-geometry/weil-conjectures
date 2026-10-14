@@ -1,0 +1,160 @@
+{
+ "id": "new-a3-self-tor-ambient-section-coordinates",
+ "kind": "statement",
+ "title": "Natural ambient self-Tor coordinates on affine section modules",
+ "statement": "Let $i:Z\\to Y$ be a closed immersion of schemes [def-weil-closed-immersion, def-pc-scheme], with the canonical derived category and tensor [def-pc-derived-category, def-pc-scheme-derived-tensor-structure], and let $n\\geq0$. Put $B=i_*\\mathcal O_Z$ and $Q=H^{-n}(B[0]\\otimes^{\\mathbf L}B[0])$. For every affine open $U$, put $A_U=\\Gamma(Y,U)$ and $I_U=\\ker(i^\\sharp)(U)$. There exist $A_U$-linear equivalences $c_U:\\operatorname{Tor}^{A_U}_n(A_U/I_U,A_U/I_U)\\simeq\\Gamma(U,Q)$, using the left-derived right-tensor convention. If $V\\subseteq U$ is basic, $\\varphi:A_U\\to A_V$ is restriction and $\\psi:A_U/I_U\\to A_V/I_V$ commutes with quotient maps, let $P,R$ be the chosen projective resolutions, $a:P\\to\\operatorname{Res}_{\\varphi}R$ an augmented comparison inducing $\\psi$, and $k:P\\otimes_{A_U}(A_U/I_U)\\to\\operatorname{Res}_{\\varphi}(R\\otimes_{A_V}(A_V/I_V))$ a chain map satisfying $k_j(x\\otimes y)=a_j(x)\\otimes\\psi(y)$ for all $j,x,y$. Let $q$ be its homology map, transported through the exact restriction-of-scalars homology isomorphism and the two ProjectiveResolution.isoLeftDerivedObj isomorphisms. Then $\\operatorname{res}_{U,V}(c_U(x))=c_V(q(x))$ for every $x$. This is a statement about section modules; it asserts no chart sheaf isomorphism.",
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Tag 08DX(2), lemma-quasi-coherence-tensor-product, with 06YG (K-flat computation) and 00LS (comparison homotopies)"
+ },
+ "proof": [
+  {
+   "text": "On an affine chart U with A = Gamma(Y,U), identify the restriction of i_* O_Z with tilde(A/I_U) and sheafify the chosen projective resolution and its augmentation.",
+   "uses": [
+    "lem-sc-affine-quotient-resolution-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend the projective resolution to nonpositive cochain degrees. Its associated sheaf terms are flat. Bounded-above flat K-flatness and the affine derived tensor comparison compute the restriction of the ambient tensor by the quotient tensor complex. Exactness of associated sheaf and affine sections identifies negative-n homology with algebraic Tor via isoLeftDerivedObj.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a basic inclusion, localize the resolution and compare its augmented lift a with the chosen target resolution. The quotient and augmentation equations identify the map on structure sheaves; the pure tensor equation identifies k. Projective comparison homotopies identify their homology maps. Naturality of the K-flat tensor comparison, restriction-of-scalars homology isomorphism and tilde unit then gives the displayed section restriction equation with q.",
+   "uses": [
+    "lem-pc-kflat-derived-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-kflat-derived-tensor-comparison",
+  "lem-sc-affine-quotient-resolution-sheafification"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "A3",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Affine section portion of the ambient self-Tor resolution comparison; Tags 08DX(2), 06YG, 00LS"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural linear equivalence from Tor of an affine quotient to sections of ambient derived tensor homology",
+   "results": "Algebra.tensorH1CotangentOfIsLocalization, tensorKaehlerQuotKerSqEquiv, Algebra.Extension.cotangentEquiv, QuotSMulTop.algebraMapTensorEquivTensorQuotSMulTop, tensorKaehlerQuotKerSqEquiv_symm_tmul_D, TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ, Algebra.Extension.contangentEquiv_tmul, Algebra.Extension.tensorCotangentInvFun",
+   "date": "2026-10-14",
+   "verdict": "supporting API only; no exact natural ambient section comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoLeftDerivedObj\"",
+   "results": "CategoryTheory.ProjectiveResolution.isoLeftDerivedObj, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc",
+   "date": "2026-10-14",
+   "verdict": "supporting API only; no exact natural ambient section comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "selfTor.*section.*coordinates|ambient.*Tor|Tor.*tilde",
+   "results": "Mathlib/GroupTheory/Nilpotent.lean, Mathlib/Topology/CantorBendixson.lean, Mathlib/Algebra/Module/ZLattice/Covolume.lean, Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Metric.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-14",
+   "verdict": "supporting API only; no exact natural ambient section comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural identification of algebraic Tor of an affine quotient with affine sections of derived tensor homology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfTorAmbientResolutionCharts",
+  "date": "2026-10-14",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine self-Tor comparison: ambient derived tensor computation and subsequent ordinary tensor pullback",
+   "via": [
+    "lem-pc-self-tor-ambient-resolution-charts",
+    "new-p4-self-tor-augmented-resolution-charts",
+    "new-q1-self-tor-chosen-resolution-charts",
+    "new-t2-self-tor-target-restriction-coordinates",
+    "new-t2-self-tor-target-basic-localization",
+    "new-u4-self-tor-basic-ideal-wedge-coordinates",
+    "new-e3-self-tor-ideal-wedge-coordinates",
+    "new-h3-self-tor-local-wedge-coordinates",
+    "new-e1-self-tor-nested-affine-coordinates",
+    "new-n1-self-tor-compatible-affine-maps",
+    "new-r4-self-tor-conormal-dual-chart-iso",
+    "lem-sc-self-tor-conormal-dual-chart",
+    "new-s3-koszul-conormal-nested-charts",
+    "new-w4-koszul-self-ext-local-alignment",
+    "new-s3-koszul-conormal-compatible-cover",
+    "lem-sc-koszul-self-ext-conormal-local-comparison",
+    "lem-sc-koszul-self-ext-conormal-comparison-surjection",
+    "lem-sc-koszul-self-ext-dual-exterior-conormal",
+    "lem-sc-koszul-self-ext-yoneda-surjection",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SelfTorAmbientSectionCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/SelfTorAmbientSectionCoordinates.lean",
+  "declaration": "AlgebraicGeometry.exists_selfTor_ambient_section_coordinates",
+  "statement": "theorem exists_selfTor_ambient_section_coordinates\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (n : ℕ) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let Q :=\n      ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj\n          (S.obj B ⊗ S.obj B))\n    ∃ c : ∀ U : Y.affineOpens,\n        ((tensorRight (ModuleCat.of (Γ(Y, U.1) : Type u)\n          ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U))).leftDerived n).obj\n          (ModuleCat.of (Γ(Y, U.1) : Type u)\n            ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U)) ≃ₗ[Γ(Y, U.1)]\n              Q.val.obj (op U.1),\n      ∀ (V U : Y.affineOpens) (h : V.1 ≤ U.1)\n        (_hbasic : ∃ f : Γ(Y, U.1), Y.basicOpen f = V.1),\n          let A := (Γ(Y, U.1) : Type u)\n          let C := (Γ(Y, V.1) : Type u)\n          let I := i.ker.ideal U\n          let J := i.ker.ideal V\n          let φ := (Y.presheaf.map (homOfLE h).op).hom\n          let P := projectiveResolution (ModuleCat.of A (A ⧸ I))\n          let R := projectiveResolution (ModuleCat.of C (C ⧸ J))\n          let TA := (tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex\n            (.down ℕ)\n          let TC := (tensorRight (ModuleCat.of C (C ⧸ J))).mapHomologicalComplex\n            (.down ℕ)\n          ∀ (ψ : (A ⧸ I) →+* (C ⧸ J))\n            (a : P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n              (.down ℕ)).obj R.complex)\n            (k : TA.obj P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n              (.down ℕ)).obj (TC.obj R.complex)),\n            (∀ x : A, ψ (Ideal.Quotient.mk I x) = Ideal.Quotient.mk J (φ x)) →\n            (∀ x : P.complex.X 0, R.π.f 0 (a.f 0 x) = ψ (P.π.f 0 x)) →\n            (∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I),\n              k.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a.f j x) ⊗ₜ[C] (ψ y)) →\n            let e := ((TC.obj R.complex).sc n).mapHomologyIso\n              (ModuleCat.restrictScalars φ)\n            let q := fun x ↦\n              (R.isoLeftDerivedObj (tensorRight (ModuleCat.of C (C ⧸ J))) n).inv\n                (e.hom (HomologicalComplex.homologyMap k n\n                  ((P.isoLeftDerivedObj (tensorRight (ModuleCat.of A (A ⧸ I))) n).hom x)))\n          ∀ x, Q.val.map (homOfLE h).op (c U x) = c V (q x)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261014T033103-L-602571",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261014T033103-L-602571",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
