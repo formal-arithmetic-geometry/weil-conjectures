@@ -14153,3 +14153,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:23 L: batch 20261014T010832 dependency take-out
 - 01:25 L: returned deliver/S3/Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap (reviewer RETURN: (reviewer X-92ef5, head 92ef546d3) A10: Add the forced adaptation for `lean/Sheaf/AlgebraicGeometry/AffineSectionsSquare)
 - 01:27 L: returned deliver/H3/Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex (reviewer RETURN: (reviewer X-6e9d2, head 6e9d2963b) E2: delete the false helper theorem and node; restore the target proof to `by sorry` )
+- 01:29 L: returned deliver/H1/Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore (reviewer RETURN: (reviewer X-af36a, head af36a34d7) E2: `perfect_overlap_transition_comparison_core_coherence` remains false for arbitrar)
