@@ -14042,3 +14042,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:40 L: merged deliver/D2/Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNormalization (stage 3; reviewer PASS; first push; landing 20261014T004059-L-2833121 (interface); batch 20261014T004054; modules 2; new nodes 1)
 - 00:41 L: merged deliver/D4/Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed (stage 3; reviewer PASS; first push; landing 20261014T004100-L-2833274 (proof); batch 20261014T004054; modules 1; new nodes 0)
 - 00:41 L: merged deliver/D4/Sheaf.CategoryTheory.MapExtendHomology (stage 3; reviewer PASS; first push; landing 20261014T004100-L-2833379 (proof); batch 20261014T004054; modules 1; new nodes 0)
+- 00:41 L: merged deliver/E2/Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedEquivFields (stage 3; reviewer PASS; first push; landing 20261014T004101-L-2833514 (proof); batch 20261014T004054; modules 1; new nodes 0)
