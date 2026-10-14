@@ -1,0 +1,117 @@
+{
+ "id": "lem-pc-perfect-hom-comparison-triangle",
+ "kind": "statement",
+ "title": "Projection comparison triangle for derived pullback",
+ "statement": "Assume scheme derived categories [def-pc-derived-category] for every scheme [def-pc-scheme]. Let s:X→S, let T,T′,T″ be objects of the over category of S, and g:T′→T, h:T″→T′, t:T″→T satisfy h;g=t. For P in D(X), applying derived pullback [def-pc-derived-pullback] along baseChangeMap(s,h) to the inverse component of perfectHomComparison(s,g) [lem-pc-perfect-hom-transport], then composing with the inverse comparison for h, agrees with the fixed comparison perfectHomComposition for the two base-change maps, transported along baseChangeMap_comp and h;g=t, followed by the inverse comparison for t. This is an object-isomorphism identity, with no affine, model, colimit or perfectness assumptions.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Tag 0D5S, derived-pullback composition; the associativity clause of lem-pc-ringed-spaces-derived-pullback-composition applied to two base-change maps and a projection."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "lem-pc-perfect-hom-transport"
+ ],
+ "proof": [
+  {
+   "text": "Import all PerfectHomTransport to reuse its private proved theorem cc_assoc, without restating it. Evaluate that associativity identity at P for baseChangeMap(s,h), baseChangeMap(s,g), and the projection of T. Define compositionTo to append transport along a supplied equality of scheme arrows. Substituting the intermediate and final arrows reduces its triangle to that evaluated associativity equation. Identify the inverse perfectHomComparison component with compositionTo along baseChangeMap_fst by its explicit formula. Specialize the triangle and transport the composite base-change map using baseChangeMap_comp and ht.",
+   "uses": [
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-hom-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "U2 repair: reuse PerfectHomTransport.cc_assoc via a proof-only import all; explicit evaluation, equality transport and projection comparison identities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived pullback composition comparison associativity projection base change triangle",
+   "results": "CategoryTheory.Limits.pullbackComparison_comp_snd_assoc, CategoryTheory.Limits.pullbackComparison_comp_fst_assoc, CategoryTheory.Functor.relativelyRepresentable.pullback₃.map_p₂_comp_assoc, CategoryTheory.Functor.relativelyRepresentable.pullback₃.snd_fst'_eq_p₁_assoc, CategoryTheory.Functor.relativelyRepresentable.pullback₃.map_p₃_comp_assoc, CategoryTheory.Functor.relativelyRepresentable.pullback₃.map_p₁_comp_assoc, CategoryTheory.Functor.relativelyRepresentable.pullback₃.snd_snd_eq_p₃_assoc, CategoryTheory.Functor.relativelyRepresentable.pullback₃.fst_snd_eq_p₂_assoc",
+   "date": "2026-10-14",
+   "verdict": "Generic functor/isomorphism API only; no scheme derived projection triangle."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso",
+   "results": "CategoryTheory.Functor.mapIso, CategoryTheory.Functor.mapIso_refl, CategoryTheory.Functor.mapIso_symm, CategoryTheory.Functor.mapIso_hom, CategoryTheory.Functor.mapIso_inv, CategoryTheory.Functor.mapIso_trans, CategoryTheory.Functor.mapIso_injective, CategoryTheory.Functor.preimageIso_mapIso",
+   "date": "2026-10-14",
+   "verdict": "Generic functor/isomorphism API only; no scheme derived projection triangle."
+  },
+  {
+   "tool": "grep",
+   "query": "perfectHomComparison|baseChangeMap_comp",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "Generic functor/isomorphism API only; no scheme derived projection triangle."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived pullback natural isomorphism composition coherence projection comparison",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineModelCoherentObjectComparisons",
+  "date": "2026-10-14",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Parent coherent object comparisons step 2: compatibility of projection comparisons in bottom→stage→stage and bottom→stage→limit triangles.",
+   "via": [
+    "lem-pc-affine-model-coherent-object-comparisons",
+    "lem-pc-affine-model-comparison-of-bottom-models",
+    "lem-pc-affine-base-change-model-isos-core",
+    "lem-pc-affine-base-change-model-isos-of-scheme-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomComparisonTriangle",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomComparisonTriangle.lean",
+  "declaration": "AlgebraicGeometry.perfectHomComparison_triangle",
+  "statement": "theorem perfectHomComparison_triangle {X S : Scheme.{u}} (s : X ⟶ S) {T T' T'' : Over S} (g : T' ⟶ T) (h : T'' ⟶ T') (t : T'' ⟶ T) (ht : h ≫ g = t) (P : schemeDerivedCategory X) : (derivedPullback (baseChangeMap s h)).mapIso ((perfectHomComparison s g).app P).symm ≪≫ ((perfectHomComparison s h).app P).symm = (perfectHomComposition (baseChangeMap s h) (baseChangeMap s g) ≪≫ eqToIso (congrArg (fun f ↦ derivedPullback f) ((baseChangeMap_comp s h g).symm.trans (congrArg (baseChangeMap s) ht)))).app ((derivedPullback (pullback.fst s T.hom)).obj P) ≪≫ ((perfectHomComparison s t).app P).symm",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-ff028",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261014T084702-L-89554",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-ff028",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261014T084702-L-89554",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, constructions and remaining obligation with all three node records, source arguments, change record and report; verified compilation and axioms."
+ }
+}

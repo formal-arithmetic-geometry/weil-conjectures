@@ -14,6 +14,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.CategoryTheory.InducedCategory
 import Sheaf.Algebra.Homology.KFlatModuleBaseChange
+import Sheaf.AlgebraicGeometry.AffineCoordinateComparisonCoherence
+import Sheaf.AlgebraicGeometry.PerfectHomComparisonTriangle
 
 /-! # Coherent affine object comparisons
 Source: Stacks Project, Tags 09RE, 06Y1 and 0D5S.
@@ -374,6 +376,35 @@ structure AffineModelCoherentObjects where
 
 end
 
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private noncomputable abbrev affineModel_coordinate
+    [∀ X : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    (A : CommRingCat.{u}) (X : Scheme.{u}) (σ : Spec A ≅ X)
+    (d : schemeDerivedCategory (Spec A) ≌ schemeDerivedCategory X)
+    (hd : DerivedCategory.Q ⋙ d.functor ≅
+      (@Functor.mapHomologicalComplex ℤ
+        (SheafOfModules.{u} (moduleRings (Spec A).toRingedSpace))
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) _ _ _ _
+        (SheafOfModules.pushforward σ.hom.toRingCatSheafHom)
+        ⟨fun _ _ ↦ rfl⟩ (.up ℤ)) ⋙ DerivedCategory.Q) :
+    AffineComparisonCoordinate.{u, w} where
+  A := A
+  X := X
+  σ := σ
+  d := d
+  hd := hd
+  H := affineModelLocalizedTilde A X d
+  hH := NatIso.ofComponents (fun _ ↦ Iso.refl _)
+    (by
+      intro M N f
+      simp only [Iso.refl_hom, Category.comp_id, Category.id_comp,
+        affineModelLocalizedTilde_map, Functor.comp_map])
+
+attribute [local irreducible] perfectHomComposition derivedPullback
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Construct coherent object comparisons for the supplied stages and cocone point.
@@ -472,6 +503,128 @@ theorem exists_affineModelCoherentObjectComparisons
           (tilde.functor (F.obj ⟨i, le_rfl⟩)))
         ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj K)) ≅
       (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE (le_refl i)))))).obj Q) :
-    Nonempty (AffineModelCoherentObjects R c i Y s P Q F C E K d dlim) := by sorry
+    Nonempty (AffineModelCoherentObjects R c i Y s P Q F C E K d dlim) := by
+  classical
+  obtain ⟨δ, hδ⟩ := exists_affineCoordinateComparisonTransportFamily.{u, w}
+  let b : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i) := ⟨⟨i, le_rfl⟩, le_rfl⟩
+  let a (j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) :
+      AffineComparisonCoordinate.{u, w} :=
+    affineModel_coordinate (F.obj j.val) _ (σ j) (d j) (hd j)
+  let z : AffineComparisonCoordinate.{u, w} :=
+    affineModel_coordinate C.pt _ τ dlim hdlim
+  let Ej (j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) :=
+    ((ModuleCat.extendScalars (F.map (homOfLE j.property)).hom).mapHomologicalComplex
+      (.up ℤ)).obj E
+  let Kj (j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) :=
+    ((ModuleCat.extendScalars (F.map (homOfLE j.property)).hom).mapHomologicalComplex
+      (.up ℤ)).obj K
+  have hEj (j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) :
+      AffineComparisonKFlat (F.obj j.val) (Ej j) :=
+    CochainComplex.acyclic_mapBifunctor_extendScalars_of_kFlat
+      (F.map (homOfLE j.property)).hom E hE
+  have hKj (j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) :
+      AffineComparisonKFlat (F.obj j.val) (Kj j) :=
+    CochainComplex.acyclic_mapBifunctor_extendScalars_of_kFlat
+      (F.map (homOfLE j.property)).hom K hK
+  let θ : AffineModelStageArrowComparisons R i Y s F E K d := fun j k hjk ↦
+    δ (a j) (a k) (F.map (homOfLE hjk)).hom
+      (baseChangeMap s (affineModelStageArrow R j k hjk))
+      (htrans.1 j k hjk) (Ej j) (Kj j) (hEj j) (hKj j)
+  let θlim : AffineModelLimitArrowComparisons R c i Y s F C E K d dlim := fun j ↦
+    δ (a j) z (C.ι.app j.val).hom
+      (baseChangeMap s (affineModelLimitArrow R c j))
+      (htrans.2 j) (Ej j) (Kj j) (hEj j) (hKj j)
+  let γ (j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) :=
+    δ (a b) (a j) (F.map (homOfLE j.property)).hom
+      (baseChangeMap s (affineModelStageArrow R b j j.property))
+      (htrans.1 b j j.property) E K hE hK
+  let γlim := δ (a b) z (C.ι.app b.val).hom
+    (baseChangeMap s (affineModelLimitArrow R c b)) (htrans.2 b) E K hE hK
+  let αE : AffineModelStageObjects R i Y s P F E d := fun j ↦
+    (γ j).app true ≪≫
+      (derivedPullback (baseChangeMap s (affineModelStageArrow R b j j.property))).mapIso
+        aE ≪≫ ((perfectHomComparison s (affineModelStageArrow R b j j.property)).app P).symm
+  let αK : AffineModelStageObjects R i Y s Q F K d := fun j ↦
+    (γ j).app false ≪≫
+      (derivedPullback (baseChangeMap s (affineModelStageArrow R b j j.property))).mapIso
+        aK ≪≫ ((perfectHomComparison s (affineModelStageArrow R b j j.property)).app Q).symm
+  let βE : AffineModelLimitObject R c i Y s P F C E dlim :=
+    γlim.app true ≪≫
+      (derivedPullback (baseChangeMap s (affineModelLimitArrow R c b))).mapIso aE ≪≫
+        ((perfectHomComparison s (affineModelLimitArrow R c b)).app P).symm
+  let βK : AffineModelLimitObject R c i Y s Q F C K dlim :=
+    γlim.app false ≪≫
+      (derivedPullback (baseChangeMap s (affineModelLimitArrow R c b))).mapIso aK ≪≫
+        ((perfectHomComparison s (affineModelLimitArrow R c b)).app Q).symm
+  have hstage : affineModelStageObjectCoherence R i Y s P Q F E K d αE αK θ := by
+    intro j k hjk
+    have ht : affineModelStageArrow R j k hjk ≫
+        affineModelStageArrow R b j j.property =
+        affineModelStageArrow R b k k.property := by
+      ext
+      change Spec.map (R.map (homOfLE hjk)) ≫
+        Spec.map (R.map (homOfLE j.val.property)) =
+        Spec.map (R.map (homOfLE k.val.property))
+      rw [← Spec.map_comp, ← R.map_comp]
+      rfl
+    let hr := (baseChangeMap_comp s (affineModelStageArrow R j k hjk)
+      (affineModelStageArrow R b j j.property)).symm.trans
+        (congrArg (baseChangeMap s) ht)
+    have hc := congrArg CommRingCat.Hom.hom
+      (F.map_comp (homOfLE j.property) (homOfLE hjk))
+    have hh := hδ (a b) (a j) (a k) (F.map (homOfLE j.property)).hom
+      (F.map (homOfLE hjk)).hom (F.map (homOfLE k.property)).hom hc
+      (baseChangeMap s (affineModelStageArrow R b j j.property))
+      (baseChangeMap s (affineModelStageArrow R j k hjk))
+      (baseChangeMap s (affineModelStageArrow R b k k.property)) hr
+      (htrans.1 b j j.property) (htrans.1 j k hjk) (htrans.1 b k k.property)
+      E K hE hK
+    constructor
+    · have tr := hh.1 _ aE _ _
+        ((perfectHomComparison s (affineModelStageArrow R b j j.property)).app P)
+        ((perfectHomComparison s (affineModelStageArrow R b k k.property)).app P)
+        ((perfectHomComparison s (affineModelStageArrow R j k hjk)).app P)
+        (perfectHomComparison_triangle s _ _ _ ht P)
+      simpa only [affineModelScalarAssocIso, Iso.trans_assoc] using tr
+    · have tr := hh.2 _ aK _ _
+        ((perfectHomComparison s (affineModelStageArrow R b j j.property)).app Q)
+        ((perfectHomComparison s (affineModelStageArrow R b k k.property)).app Q)
+        ((perfectHomComparison s (affineModelStageArrow R j k hjk)).app Q)
+        (perfectHomComparison_triangle s _ _ _ ht Q)
+      simpa only [affineModelScalarAssocIso, Iso.trans_assoc] using tr
+  have hlim : affineModelLimitObjectCoherence R c i Y s P Q F C E K d dlim
+      αE αK βE βK θlim := by
+    intro j
+    have ht : affineModelLimitArrow R c j ≫
+        affineModelStageArrow R b j j.property = affineModelLimitArrow R c b := by
+      ext
+      change Spec.map (c.ι.app j.val) ≫ Spec.map (R.map (homOfLE j.val.property)) =
+        Spec.map (c.ι.app i)
+      rw [← Spec.map_comp, c.w (homOfLE j.val.property)]
+    let hr := (baseChangeMap_comp s (affineModelLimitArrow R c j)
+      (affineModelStageArrow R b j j.property)).symm.trans
+        (congrArg (baseChangeMap s) ht)
+    have hc := congrArg CommRingCat.Hom.hom (C.w (homOfLE j.property)).symm
+    have hh := hδ (a b) (a j) z (F.map (homOfLE j.property)).hom
+      (C.ι.app j.val).hom (C.ι.app b.val).hom hc
+      (baseChangeMap s (affineModelStageArrow R b j j.property))
+      (baseChangeMap s (affineModelLimitArrow R c j))
+      (baseChangeMap s (affineModelLimitArrow R c b)) hr
+      (htrans.1 b j j.property) (htrans.2 j) (htrans.2 b) E K hE hK
+    constructor
+    · have tr := hh.1 _ aE _ _
+        ((perfectHomComparison s (affineModelStageArrow R b j j.property)).app P)
+        ((perfectHomComparison s (affineModelLimitArrow R c b)).app P)
+        ((perfectHomComparison s (affineModelLimitArrow R c j)).app P)
+        (perfectHomComparison_triangle s _ _ _ ht P)
+      simpa only [affineModelScalarAssocIso, Iso.trans_assoc] using tr
+    · have tr := hh.2 _ aK _ _
+        ((perfectHomComparison s (affineModelStageArrow R b j j.property)).app Q)
+        ((perfectHomComparison s (affineModelLimitArrow R c b)).app Q)
+        ((perfectHomComparison s (affineModelLimitArrow R c j)).app Q)
+        (perfectHomComparison_triangle s _ _ _ ht Q)
+      simpa only [affineModelScalarAssocIso, Iso.trans_assoc] using tr
+  exact ⟨⟨αE, αK, βE, βK, θ, θlim, hstage, hlim⟩⟩
+
 
 end AlgebraicGeometry

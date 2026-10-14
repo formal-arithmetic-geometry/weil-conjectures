@@ -1,0 +1,147 @@
+{
+ "id": "lem-pc-affine-coordinate-comparison-coherence",
+ "kind": "statement",
+ "title": "Composition-compatible affine-coordinate comparisons on K-flat labelled models",
+ "statement": "Assume a derived category for the module sheaves on every scheme [def-pc-derived-category]. An affine coordinate consists of a commutative ring A, a scheme X [def-pc-scheme], an isomorphism Spec A ≅ X, a supplied derived equivalence d identified after localization with pushforward along this isomorphism, and a functor H from A-module cochain complexes identified naturally with termwise tilde, localization, and d. There exists a simultaneous family δ for every square σ_B ≫ p = Spec(φ) ≫ σ_A and every pair of acyclic-tensor K-flat complexes M,N [def-pc-module-kflat-complex]. It is a natural isomorphism from scalar extension followed by H_B to H_A followed by Lp* [def-pc-derived-pullback], on the full induced category of the two labels. For three coordinates, ring maps φ,ψ,χ with χ=ψ∘φ and scheme maps p,q,r with q≫p=r, the direct δ equals localized scalar reassociation, then δ for ψ on the extended pair, then Lq*(δ for φ), then the fixed perfectHomComposition comparison [lem-pc-perfect-hom-transport] and equality transport. This equality holds at each label. No target objects P,Q, bottom-model identifications, base-change diagram, cocone or propagated object isomorphisms occur in this statement. Extension preserves K-flatness [lem-pc-kflat-extension-of-scalars]; all data in the coordinate record are supplied, and no witness is chosen in a definition.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Tag 08DW(2) and its construction proof, Tag 06Y1 scalar-extension preservation, and Tag 0D5S derived-composition proof; the composition part of the parent node steps 1–2."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-module-kflat-complex",
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-kflat-extension-of-scalars"
+ ],
+ "proof": [
+  {
+   "text": "Fix the derived-pullback counits used by perfectHomComposition. On a K-flat tilde complex the original counit is invertible; uniqueness of left-derived functors transfers invertibility to this fixed counit. Combine its inverse with the natural tilde/scalar-extension isomorphism. For each affine coordinate, the pushforward equivalence has inverse tensor pullback. Localize it and use the specified hd and hH to transport the natural comparison to the supplied localized tilde functor. Restrict this construction to the full induced category on the two labelled models, retaining cross morphisms.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-kflat-extension-of-scalars",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-affine-square-kflat-model-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For composable squares, scalar extension preserves K-flatness. The fixed composition comparison is characterized by the composite counit equation, so successive comparisons agree with the direct comparison on these models. The underived tilde comparison respects scalar-extension reassociation: on pure tensors both routes send c tensor (b tensor m) to cb tensor m, and the pinned adjunction identifies this with ModuleCat.extendScalarsComp. Transport through each coordinate equivalence; adjacent unit/counit factors and hH factors cancel by naturality. The equalities of ring and scheme composites give the displayed eqToIso factors. Evaluate at both labels to obtain the two equations.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-kflat-extension-of-scalars",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved transport wrapper expands functoriality of mapIso and the supplied projection triangle. Naturality of the fixed composition isomorphism moves any bottom identification through it. Substitute the affine-family composition equation at each label; this yields AffineComparisonTransportTriangle. This is generic categorical algebra and introduces no new hypothesis or hole.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-kflat-extension-of-scalars",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-affine-square-kflat-model-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Natural affine comparison transported through coordinate equivalences, with the composition equation made explicit using the fixed counits of Tag 0D5S."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural affine derived pullback of K-flat module complexes compatible with scalar extension composition",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, KaehlerDifferential.tensorKaehlerEquiv_left_inv, Module.Flat.isBaseChange",
+   "date": "2026-10-14",
+   "verdict": "No affine-coordinate composition law; scalar reassociation APIs and flat-module criteria only."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsComp",
+   "results": "ModuleCat.extendScalarsComp, ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_id_comp, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc_assoc",
+   "date": "2026-10-14",
+   "verdict": "No affine-coordinate composition law; scalar reassociation APIs and flat-module criteria only."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPullback_tilde_kFlat_natIso|extendScalars.*Id|extendScalars.*id|kFlat_iff",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-14",
+   "verdict": "No affine-coordinate composition law; scalar reassociation APIs and flat-module criteria only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine derived pullback comparison compatible with composition of ring maps and affine coordinate isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineModelCoherentObjectComparisons",
+  "date": "2026-10-14",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Parent coherent-object construction, step 1 and the scalar-composition part of step 2; isolated before transport of the bottom isomorphisms.",
+   "via": [
+    "lem-pc-affine-model-coherent-object-comparisons",
+    "lem-pc-affine-model-comparison-of-bottom-models",
+    "lem-pc-affine-base-change-model-isos-core",
+    "lem-pc-affine-base-change-model-isos-of-scheme-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineCoordinateComparisonCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCoordinateComparisonCoherence.lean",
+  "declaration": "AlgebraicGeometry.exists_affineCoordinateComparisonFamily",
+  "declarations": [
+   "AlgebraicGeometry.AffineComparisonCoordinate",
+   "AlgebraicGeometry.AffineComparisonKFlat",
+   "AlgebraicGeometry.AffineCoordinateComparisonFamily",
+   "AlgebraicGeometry.AffineComparisonTransportTriangle",
+   "AlgebraicGeometry.exists_affineCoordinateComparisonFamily",
+   "AlgebraicGeometry.exists_affineCoordinateComparisonTransportFamily"
+  ],
+  "statement": "theorem exists_affineCoordinateComparisonFamily : ∃ δ : AffineCoordinateComparisonFamily.{u, w}, ∀ (a b c : AffineComparisonCoordinate.{u, w}) (φ : a.A →+* b.A) (ψ : b.A →+* c.A) (χ : a.A →+* c.A) (hc : χ = ψ.comp φ) (p : b.X ⟶ a.X) (q : c.X ⟶ b.X) (r : c.X ⟶ a.X) (hr : q ≫ p = r) (hp : b.σ.hom ≫ p = Spec.map (CommRingCat.ofHom φ) ≫ a.σ.hom) (hq : c.σ.hom ≫ q = Spec.map (CommRingCat.ofHom ψ) ≫ b.σ.hom) (hs : c.σ.hom ≫ r = Spec.map (CommRingCat.ofHom χ) ≫ a.σ.hom) (M N : CochainComplex (ModuleCat.{u} a.A) ℤ) (hM : AffineComparisonKFlat a.A M) (hN : AffineComparisonKFlat a.A N), (c.H.mapIso (eqToIso (congrArg (fun t ↦ ((ModuleCat.extendScalars t).mapHomologicalComplex (.up ℤ)).obj M) hc) ≪≫ (NatIso.mapHomologicalComplex (ModuleCat.extendScalarsComp φ ψ) (.up ℤ)).app M) ≪≫ (δ b c ψ q hq (((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M) (((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj N) (CochainComplex.acyclic_mapBifunctor_extendScalars_of_kFlat φ M hM) (CochainComplex.acyclic_mapBifunctor_extendScalars_of_kFlat φ N hN)).app true ≪≫ (derivedPullback q).mapIso ((δ a b φ p hp M N hM hN).app true) ≪≫ (perfectHomComposition q p).app (a.H.obj M) ≪≫ (eqToIso (congrArg (fun t ↦ derivedPullback t) hr)).app (a.H.obj M) = (δ a c χ r hs M N hM hN).app true) ∧ (c.H.mapIso (eqToIso (congrArg (fun t ↦ ((ModuleCat.extendScalars t).mapHomologicalComplex (.up ℤ)).obj N) hc) ≪≫ (NatIso.mapHomologicalComplex (ModuleCat.extendScalarsComp φ ψ) (.up ℤ)).app N) ≪≫ (δ b c ψ q hq (((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M) (((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj N) (CochainComplex.acyclic_mapBifunctor_extendScalars_of_kFlat φ M hM) (CochainComplex.acyclic_mapBifunctor_extendScalars_of_kFlat φ N hN)).app false ≪≫ (derivedPullback q).mapIso ((δ a b φ p hp M N hM hN).app false) ≪≫ (perfectHomComposition q p).app (a.H.obj N) ≪≫ (eqToIso (congrArg (fun t ↦ derivedPullback t) hr)).app (a.H.obj N) = (δ a c χ r hs M N hM hN).app false)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-ff028",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261014T084702-L-89554",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-ff028",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261014T084702-L-89554",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, constructions and remaining obligation with all three node records, source arguments, change record and report; verified compilation and axioms."
+ }
+}
