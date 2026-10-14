@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-weil-pbc-site-comparison-finite-level",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Exactness and full faithfulness at finite level",
@@ -12,47 +12,111 @@
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-site-comparison-finite-level.md",
   "place": "node prop-weil-pbc-site-comparison-finite-level, order 1285"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism"
+ ],
  "proof": [
   {
-   "text": "The inverse image of [def-weil-pbc-site-comparison-morphism] preserves finite\nlimits and is a left adjoint. On module sheaves it therefore preserves\nkernels and cokernels, and is exact. Equivalently on affine charts, the\nsection formula in [lem-weil-pbc-comparison-sections] preserves kernels, and\nan epimorphism lifts locally after an etale cover at the stage representing a\nsection. These covers are also pro-etale covers.",
+   "text": "By [def-weil-pbc-site-comparison-morphism], the module inverse image preserves finite limits and is a left adjoint. Kernels are finite limits, and cokernels are coequalizers of a map and zero; thus it preserves both. The module operations in that definition show that the functor is additive, so it is exact.",
    "uses": [
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-site-comparison-finite-level.md",
+    "place": "## Proof, first paragraph"
+   }
+  },
+  {
+   "text": "Let $v:W\\to T$ be any affine etale object. By [lem-weil-pbc-comparison-pullback], restriction of $\\nu_T^*F$ to $W_{\\Proet}$ is $\\nu_W^*(v^{-1}F)$. Apply [lem-weil-pbc-comparison-sections] with affine base $X=W$ and the singleton inverse system $U=W$: its sections on $W$ are $(v^{-1}F)(W)=F(W)$, since etale restriction is restriction to the slice. The unit sends $s\\in F(W)$ to the comma-colimit representative $(W,\\mathrm{id}_W,s)$ in [def-weil-pbc-site-comparison-morphism]; the displayed section identification sends this representative back to $s$. Therefore the unit is bijective on every affine etale object. Restriction to the affine etale site is an equivalence by [lem-weil-pbc-affine-etale-site-topos], hence detects isomorphisms of underlying abelian sheaves and therefore of module sheaves.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-comparison-sections",
     "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-comparison-sections"
+    "lem-weil-pbc-affine-etale-site-topos"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-site-comparison-finite-level.md",
+    "place": "## Proof, second paragraph: affine localization and unit on sections"
+   }
   },
   {
-   "text": "On every affine etale $W\\to T$, the same section formula identifies\n$(\\nu_T^*F)(W)$ with $F(W)$: apply it on an affine open of $T$, then use\nordinary etale gluing. Under this identification the unit is the identity on\nsections. The affine etale basis consequently proves that it is an\nisomorphism of etale sheaves.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "If $I$ is injective on $T_{\\Et}$, its restriction to any affine etale $W$ is\ninjective by the etale-restriction lemma. The adjunction, or its explicit\nsection construction, identifies $(\\nu_T^*I)|_W$ with $\\nu_W^*(I|_W)$. Its\npositive cohomology on $W$ vanishes by\n[lem-weil-pbc-comparison-injective-acyclicity]. Finally\n$R^q\\nu_{T,*}(\\nu_T^*I)$ is the sheafification of $W\\mapsto\nH^q(W_{\\Proet},(\\nu_T^*I)|_W)$: apply restriction to an injective resolution\nand then sheafify the cohomology of the resulting section complex.\nRestriction of that injective resolution computes cohomology on $W$ by\n[lem-weil-pbc-proetale-restriction-injectives]. The basis detection in\n[lem-weil-pbc-ind-etale-basis], or just the affine etale basis on the target,\nnow gives the required zero sheaf.",
+   "text": "Fix injective $I$ and an affine etale $v:W\\to T$. By [lem-weil-pbc-etale-restriction-injectives], $v^{-1}I$ is injective on $W_{\\Et}$. By [lem-weil-pbc-comparison-pullback], $(\\nu_T^*I)|_{W_{\\Proet}}\\cong\\nu_W^*(v^{-1}I)$. The object $W/W$ belongs to $\\mathcal B_W$ of [def-weil-pbc-ind-etale-basis], since its identity ring map is etale and hence ind-etale. Apply [lem-weil-pbc-comparison-injective-acyclicity] with affine base $W$ and basis object $W/W$. It gives $H^q(W_{\\Proet},(\\nu_T^*I)|_W)=0$ for every $q>0$.",
    "uses": [
-    "lem-weil-pbc-comparison-injective-acyclicity",
-    "lem-weil-pbc-proetale-restriction-injectives",
-    "lem-weil-pbc-ind-etale-basis"
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-comparison-injective-acyclicity"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-site-comparison-finite-level.md",
+    "place": "## Proof, third paragraph: restrict to an affine etale object and apply affine vanishing"
+   }
+  },
+  {
+   "text": "Put $G=\\nu_T^*I$. The small-site module category is Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck], so [lem-sp-grothendieck-enough-injectives] supplies a module injective resolution $G\\to J^\\bullet$. By [def-sp-left-exact-additive], $R^q\\nu_{T,*}G=\\mathcal H^q(\\nu_{T,*}J^\\bullet)$. By [def-weil-pbc-site-comparison-morphism], $(\\nu_{T,*}J^n)(W)=J^n(W)$. Kernels are sectionwise and cokernels are sheafified sectionwise cokernels by [def-weil-sheaf-of-modules-category]; consequently this cohomology sheaf is the sheafification of $W\\mapsto H^q(J^\\bullet(W))$. By [lem-weil-pbc-proetale-restriction-injectives], this last group is $H^q(W_{\\Proet},G|_W)$. Step 3 makes it zero on every affine etale $W$ when $q>0$. Every section of this sheafification is locally represented by a section of the presheaf; refine those neighborhoods by affine etale objects, where all representatives are zero. Thus the sheafification is zero locally, and the affine-etale equivalence [lem-weil-pbc-affine-etale-site-topos] gives $R^q\\nu_{T,*}G=0$.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "def-sp-left-exact-additive",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "lem-weil-pbc-affine-etale-site-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-site-comparison-finite-level.md",
+    "place": "## Proof, third paragraph: injective resolution and sheafification of section cohomology"
+   }
   }
  ],
  "proof_deps": [
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-ind-etale-basis",
   "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-pbc-comparison-sections",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-affine-etale-site-topos",
   "lem-weil-pbc-comparison-injective-acyclicity",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-comparison-sections",
+  "lem-weil-pbc-etale-restriction-injectives",
   "lem-weil-pbc-proetale-restriction-injectives",
-  "lem-weil-pbc-ind-etale-basis",
-  "lem-weil-pbc-etale-restriction-injectives"
+  "lem-weil-pbc-ring-sheaves-grothendieck"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-site-comparison-finite-level.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse image sheaf functor fully faithful unit and acyclic objects under direct image",
+   "results": "8 hits: CategoryTheory.fullyFaithfulSheafCompose, CategoryTheory.fullyFaithfulSheafComposeCompSheafToPresheaf, CategoryTheory.instFullSheafFunctorOppositeCompSheafComposeSheafToPresheafOfFaithful, CategoryTheory.instFullSheafSheafComposeOfFaithful, CategoryTheory.Functor.IsCoverDense.full_sheafPushforwardContinuous, CategoryTheory.Functor.IsDenseSubsite.full_sheafPushforwardContinuous, CategoryTheory.fullyFaithfulSheafToPresheaf, CategoryTheory.Functor.IsDenseSubsite.faithful_sheafPushforwardContinuous",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete site-comparison proposition"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPullback\", \"IsIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete site-comparison proposition"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*etale|etale.*proetale",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete site-comparison proposition"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -85,5 +149,29 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "prop-weil-pbc-site-comparison-finite-level",
+  "worker": "stage1",
+  "summary": "Second reading repaired affine localization, target-site basis detection, pullback compatibility and the module injective-resolution calculation. No new nodes.",
+  "blueprint": "First proof paragraph: step 1. Second paragraph: step 2, with affine base W. Third paragraph: step 3 (local vanishing) and step 4 (higher direct image sheafification).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-etale-site-topos",
+    "why": "Generic target-site equivalence used to detect isomorphisms of etale sheaves from affine etale sections; sk-thm-properbasechange has no local node stating this equivalence and the comparison route is otherwise unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-etale-site-topos"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-16bd2f64d",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-16bd2f64d (reviewer sub-agent of L); spot-checked: Mathematics and citations pass full review, including finite coefficients, pullback, affine vanishing, injective resolutions, and edge cases. Fixed missing split_report.tool_uses declaration for off-unit node lem-weil-pbc-affine-etale-site-topos; corrected DAG JSON is under fixes/dag/nodes/sec-proper-base-change/. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
