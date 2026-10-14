@@ -12,36 +12,52 @@
  ],
  "proof": [
   {
-   "text": "Compute left derived extension to B on Q using a K-flat R-resolution of B[0]; the balanced calculation is natural in Q and scalar endomorphisms.",
+   "text": "Put D=Aq tensor_R B, with the A tensor_R B algebra structure induced by A to Aq. Obtain base-derived tensor cohomology models L for Q and K for Aq tensor_A Q from nonempty_baseDerivedTensorCohomologyModel. Only the universal derived functors, their cohomology isomorphisms and their scalar-action fields will be used.",
    "uses": [
-    "lem-pc-balanced-derived-tensor-model",
-    "lem-pc-derived-tensor-action-naturality"
+    "def-pc-base-derived-tensor-cohomology-model"
    ],
    "elementary": false
   },
   {
-   "text": "Exact localization and tensor-product localization identify the localized total complex. A cycle z/s has localized differential zero; choose t killing dz. Then tz is a cycle and ts is the required denominator. Transport through the universal-counit comparison to the supplied functor F.",
+   "text": "Apply exists_baseTensorUnitCohomologyModel to L,K,uQ. This gives an ordinary A-complex C and A-linear cohomology isomorphisms e,e' identifying localizationModelMap with homology of the extension-restriction adjunction unit on C.",
    "uses": [
-    "lem-pc-balanced-derived-tensor-model",
-    "lem-pc-derived-tensor-action-naturality",
-    "lem-weil-pbc-localization-flat",
-    "lem-weil-pbc-localization-module-exact",
-    "lem-weil-pbc-localization-tensor-product"
+    "new-lem-pc-base-tensor-unit-cohomology-model"
    ],
    "elementary": false
+  },
+  {
+   "text": "Prove ordinary_fractions directly. Localization flatness makes E=extendScalars(A to Aq) exact; restriction G is exact, so E followed by G preserves homology. For T=C.sc(i), ShortComplex.homologyMap_mapNatTrans writes the homology unit as e0.hom followed by the module unit on T.homology followed by e1.inv. The module unit is IsLocalizedModule S by IsLocalization.tensorProduct_isLocalizedModule (the tensor-localization assertion with M=A and N=T.homology). IsLocalizedModule.surj applied to e1.hom(y) gives x,s with s*e1.hom(y)=unit(x). Transport back through the two A-linear homology comparisons to obtain s*y=H(unit)(e0.inv(x)).",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply ordinary_fractions to e'.hom(y) and choose the numerator e.inv(x). Injectivity and A-linearity of e'.hom, together with its commuting equation and e.hom(e.inv(x))=x, give the fraction equation in the model K. This is the private lemma model_fractions.",
+   "uses": [
+    "new-lem-pc-base-tensor-unit-cohomology-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let zeta:F isomorphic to L.derived and eta:L.derived isomorphic to K.derived be the universal-counit comparisons. Applying homology and the cohomologyIso fields gives B-linear isomorphisms e from H(F(Q_R)) to L.cohomology(i), and e' from H(F((Aq tensor_A Q)_R)) to K.cohomology(i). Naturality of zeta gives e' after H(F(uQ)) equal to localizationModelMap after e. Naturality of zeta composed with eta, followed by K.cohomologyIso_smul, intertwines the derived image of multiplication by algebraMap(s) with includeLeft(algebraMap(s)) on K.cohomology(i). Apply model_fractions to e'(y), take numerator e.inv(x), and use injectivity of e' to transport its equation back. Both commuting equations are proved as categorical morphism equalities before evaluating on elements.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-balanced-derived-tensor-model",
-  "lem-pc-derived-tensor-action-naturality",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "new-lem-pc-base-tensor-unit-cohomology-model",
   "lem-weil-pbc-localization-flat",
-  "lem-weil-pbc-localization-module-exact",
-  "lem-weil-pbc-localization-tensor-product"
+  "lem-weil-pbc-localization-tensor-over-base"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 06Y6 and 0DJ8; balanced derived tensor calculation followed by localization of cycles"
+  "place": "Tags 06Y6 and 0DJ8; P2 uses the existing balanced unit model, proves ordinary localization fractions by exact homology comparison, and transports through universal-counit naturality"
  },
  "mathlib_searches": [
   {
@@ -139,10 +155,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R4",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261014T010852-L-3167473",
-  "kind": "interface",
+  "landing": "20261014T013041-L-3415748",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
