@@ -13,33 +13,53 @@
  },
  "proof": [
   {
-   "text": "For an affine open V of Spec B, f inverse V is affine. Higher cohomology on quasi-coherent modules vanishes, so the bound-one truncation argument identifies the derived sections in degree i with sections of H^i. Carry this identification out using cycle classes in a K-injective resolution. It is natural in the derived object and restriction compatible.",
+   "text": "Direct image is additive and left exact: its composite with the faithful limit-reflecting module-sheaf forgetful functor is restriction of presheaves along the map on opens. Register enough injectives for module sheaves. Prove ordinary affine direct-image acyclicity in the private helper affineDirectImage_rightAcyclic: quasi-coherent modules are Cech-acyclic on affine opens by exactAt_cechComplex_basicOpen; injective module sheaves are flasque and hence Cech-acyclic; the class is stable under cokernels in short exact sequences by the sectionwise Cech argument. For a short exact sequence starting in this class, surjective_app_of_cechAcyclicOnAffines lifts sections on inverse images of affine opens. The affine basis and epi_of_forall_exists_app_eq make pushforward of the quotient epi. Apply the proved generic rightAcyclic_of_epi_map_g dimension-shifting criterion. Convert positive integer degrees to natural successor degrees and transport this vanishing with homologyRightDerivedFunctorObjSingleFunctorIso. This supplies the acyclicity premise of the unbounded quasi-coherent comparison without importing the cyclic AffineMorphism module.",
    "uses": [
-    "lem-pc-affine-morphism-hi",
-    "lem-sc-qcoh-acyclic-derived-pushforward-cohomology"
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-pc-affine-cech-complex",
+    "lem-pc-topological-ses-cech-sections-surjective",
+    "def-sp-acyclic",
+    "lem-pc-right-acyclic-of-epi-map-g",
+    "src-right-derived-functor-plus-compatibility",
+    "def-pc-ringed-spaces-derived-direct-image"
    ],
    "elementary": false
   },
   {
-   "text": "Glue the inverse section comparisons to epsilon : f_* H^i → H^i Rf_*. Compare F C with its K-injective resolution. The induced comparison from termwise pushforward is exactly the unit of the right-derived functor, by its defining naturality square. The exact-homology comparisons for F and f_*F identify a cycle with the same cohomology class on both sides of the displayed equation. Equality follows by precomposing with the epimorphism from cycles to cohomology and using the cokernel universal property. Equality on the affine basis gives equality of sheaf maps. Bound-one truncation removes both tails, so this calculation applies without a boundedness hypothesis.",
+   "text": "Let gamma be H^i Rf_* applied to the canonical lower-truncation projection at i, restricted to D_QCoh. The lower truncation still has quasi-coherent homology: the surviving degrees are identified with the original homology and the remaining degrees are zero. The quasi-coherent object property contains the zero free sheaf on the empty set. The ordinary H^i of this projection is invertible; the natural affine derived cohomology comparison transfers this invertibility to gamma. Thus gamma is a natural isomorphism.",
    "uses": [
-    "def-pc-ringed-spaces-derived-direct-image"
+    "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the generic normalized bottom-comparison theorem to f_* to obtain delta: H^i Rf_* tau_GE_i → f_* H^i. Define epsilon to be delta inverse followed by gamma inverse, both restricted to D_QCoh. For an exact F and complex C, apply the bottom-unit equation to the left homology data of C mapped by F and by F followed by f_*. Their cycle inclusions agree, so the cycle comparison is the identity. Postcompose the equation by delta inverse and gamma inverse and cancel their identities. The quotient (F followed by f_*)(pi) is epi because the composite preserves homology. Cancel this epi and expand mapHomologyIso. This is exactly the stated equality with the actual right-derived unit.",
+   "uses": [
+    "lem-pc-derived-bottom-unit-normalization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-pc-affine-cech-complex",
+  "lem-pc-topological-ses-cech-sections-surjective",
+  "def-sp-acyclic",
+  "lem-pc-right-acyclic-of-epi-map-g",
+  "src-right-derived-functor-plus-compatibility",
   "def-pc-ringed-spaces-derived-direct-image",
-  "lem-pc-affine-morphism-hi",
-  "lem-sc-qcoh-acyclic-derived-pushforward-cohomology"
+  "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-pc-derived-bottom-unit-normalization"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "Q4",
+  "group": "N4",
   "date": "2026-10-14",
-  "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4",
-  "place": "0AVW, proof, cohomology display; 08D4, bound-one truncation comparison, applied on inverse images of affine opens.",
-  "note": "Refinement of the canonical comparison argument in the cited tag pages, read online."
+  "document": "https://stacks.math.columbia.edu/tag/05TC; https://stacks.math.columbia.edu/tag/08D4; https://stacks.math.columbia.edu/tag/0AVW",
+  "place": "05TC (2), upper truncation of the lower-truncated object; the degree-zero left-exact comparison and its unit, as used in 08D4 with bound one and in the 0AVW cohomology display.",
+  "note": "Lean reduction via invertibility of the derived lower-truncation projection and a generic normalized bottom comparison. Cycle-to-homology cancellation is proved inline."
  },
  "mathlib_searches": [
   {
@@ -108,17 +128,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J3",
+  "reviewer": "X-288a1",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261013T231537-L-1817905",
+  "landing": "20261014T041918-L-1154435",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.exists_affineDerivedPushforwardSheafEdge"
-  ],
-  "sorry_after": []
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with the nodes, cited sources, dependency declarations and report; both delivered modules and both direct importers compile cleanly; axiom checks agree with the reported decomposition."
  }
 }

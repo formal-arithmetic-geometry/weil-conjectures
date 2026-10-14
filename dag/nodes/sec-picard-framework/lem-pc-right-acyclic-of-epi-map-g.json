@@ -1,0 +1,132 @@
+{
+ "id": "lem-pc-right-acyclic-of-epi-map-g",
+ "kind": "statement",
+ "title": "Dimension-shifting acyclicity criterion from epimorphic images of quotients",
+ "statement": "Let C and D be abelian categories [def-sp-abelian], with injective resolutions in C [def-sp-injective-resolutions]. Let F : C → D be an additive left exact functor, expressed in Lean by F.Additive and PreservesFiniteLimits F [def-sp-left-exact-additive]. Let P be a property of objects of C. Assume (1) every injective object I satisfies P; (2) for every short exact sequence 0 → X₁ → X₂ → X₃ → 0, P(X₁) and P(X₂) imply P(X₃), so P is closed under these cokernels of monomorphisms; and (3) for every such short exact sequence with P(X₁), F sends its quotient map X₂ → X₃ to an epimorphism, without requiring P(X₂) or P(X₃) for this hypothesis. Then every object A satisfying P is F-acyclic [def-sp-acyclic]: for each q : ℕ, (R^(q+1) F)(A) is zero.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "def-sp-acyclic"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/Abelian/RightDerived/Acyclic.lean",
+  "place": "Lines 316–353, especially theorem CategoryTheory.Functor.rightAcyclic_of_epi_map_g at line 329 and its preceding criterion docstring."
+ },
+ "proof": [
+  {
+   "text": "For any A in P, choose a monomorphism A → I with I injective and let Q be its cokernel. This is a short exact sequence. The injective hypothesis gives P(I), and the cokernel hypothesis gives P(Q). An injective object has a resolution concentrated in degree zero, so every positive right derived functor vanishes on I.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the long exact sequence for 0 → A → I → Q → 0. In degree zero, identify R⁰F with F by left exactness. The hypothesis makes F(I) → F(Q) epimorphic, and R¹F(I) = 0, so exactness forces R¹F(A) = 0. For the induction step, assume R^(q+1)F vanishes on every object in P, hence on Q. Exactness of R^(q+1)F(Q) → R^(q+2)F(A) → R^(q+2)F(I), whose outer objects are zero, forces R^(q+2)F(A) = 0. Induction proves F.rightAcyclic A. These are precisely the existing source proof’s base and successor cases.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "def-sp-left-exact-additive",
+    "def-sp-acyclic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "def-sp-acyclic"
+ ],
+ "proof_origin": {
+  "by": "existing Lean proof",
+  "document": "lean/WeilConjectures/CategoryTheory/Abelian/RightDerived/Acyclic.lean",
+  "place": "Lines 316–353, especially theorem CategoryTheory.Functor.rightAcyclic_of_epi_map_g at line 329 and its preceding criterion docstring.",
+  "note": "Attached existing proved declaration; no new Lean declaration or proof hole. The source proof embeds A into an injective I and sets Q = coker(A → I), which belongs to P. For R¹F(A), the epimorphism F(I) → F(Q), the degree-zero identification R⁰F ≅ F, and the long exact sequence give zero. Inductively R^(q+1)F(Q) is zero by the induction hypothesis, and R^(q+2)F(I) is zero by injectivity; exactness gives R^(q+2)F(A) = 0."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive left exact functor sends every object of a property to an acyclic object if the property contains injectives, is closed under cokernels of monomorphisms, and the functor maps quotients with kernel in the property to epimorphisms",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "acyclicity criterion additive left exact functor property contains injectives cokernels epimorphism quotient",
+   "results": "Generic injectivity and exact-functor tools, including preservesHomology_preadditiveYonedaObj_of_injective and Functor.exact_tfae; no matching criterion.",
+   "date": "2026-10-14",
+   "verdict": "generic tools; attached exact source-library theorem instead"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightAcyclic_of_epi_map_g",
+   "results": "Unknown identifier; zero hits in Mathlib.",
+   "date": "2026-10-14",
+   "verdict": "source-library declaration, not a Mathlib declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAcyclic_of_epi_map_g|acyclicity criterion|criterion for acyclicity in dag/nodes, lean/WeilConjectures/CategoryTheory/Abelian/RightDerived/Acyclic.lean and pinned Mathlib",
+   "results": "Exact theorem in source library Acyclic.lean:329. No corresponding theorem in pinned Mathlib; DAG mentions its use but has no node attached to the declaration. Read complete signature and proof at lines 316–353.",
+   "date": "2026-10-14",
+   "verdict": "exact existing source-library theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdge",
+  "date": "2026-10-14",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Affine acyclicity dimension-shifting criterion used in proof step 1 of the affine derived sheaf edge.",
+   "via": [
+    "lem-pc-affine-derived-pushforward-sheaf-edge",
+    "lem-pc-affine-pushforward-cohomology-edge-exists",
+    "lem-pc-affine-tilde-pushforward-cohomology-normalization-base",
+    "lem-pc-affine-tilde-pushforward-cohomology-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic",
+  "declaration": "CategoryTheory.Functor.rightAcyclic_of_epi_map_g",
+  "statement": "variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [HasInjectiveResolutions C]\n  [Abelian D] (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]\n\ntheorem rightAcyclic_of_epi_map_g (P : ObjectProperty C) (hinj : ∀ (I : C) [Injective I], P I)\n    (hX₃ : ∀ S : ShortComplex C, S.ShortExact → P S.X₁ → P S.X₂ → P S.X₃)\n    (hepi : ∀ S : ShortComplex C, S.ShortExact → P S.X₁ → Epi (F.map S.g)) {A : C}\n    (hA : P A) : F.rightAcyclic A",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-14",
+  "note": "Existing theorem attached as requested in return C4; no Lean module added."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-288a1",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T041918-L-1154435",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-288a1",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T041918-L-1154435",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with the nodes, cited sources, dependency declarations and report; both delivered modules and both direct importers compile cleanly; axiom checks agree with the reported decomposition."
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "id": "lem-pc-derived-bottom-unit-normalization",
+ "kind": "statement",
+ "title": "Bottom-cohomology comparison normalized by the actual right-derived unit",
+ "statement": "Let C and D be abelian categories with derived categories [def-pc-derived-category], and suppose C has enough injectives and K-injective resolutions [prop-pur-kinjective-resolutions-exist]. Let S:C→D be additive and left exact, and n an integer. There exists a natural isomorphism delta:H^n(RS(tau_GE_n(-)))→S(H^n(-)), where tau_GE is the standard lower truncation [def-sbc-standard-tstructure-derived-category]. For every cochain complex K, left homology data T for K and U for S(K) in degree n, and map k:S(T.K)→U.K satisfying S(T.i)=k composed with U.i, the composite k, U.pi, inverse U.homologyIso, inverse Q/homology comparison, homology of the actual right-derived unit at K, homology of RS applied to the lower-truncation projection QK→tau_GE_n(QK), and delta at QK equals S applied to T.pi, inverse T.homologyIso and inverse Q/homology comparison. No affine geometry, quasi-coherence, exact module-valued functor F, or invertibility of the derived lower-truncation projection is assumed or concluded.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/05TC; https://stacks.math.columbia.edu/tag/08D4; https://stacks.math.columbia.edu/tag/0AVW",
+  "place": "05TC (2), upper truncation of the lower-truncated object; the degree-zero left-exact comparison and its unit, as used in 08D4 with bound one and in the 0AVW cohomology display."
+ },
+ "proof": [
+  {
+   "text": "Construct the bottom comparison by the double-truncation argument of new-qcoh-sections-left-exact-bottom. Lift lower truncation at n to the bounded-below category; upper truncate at n and use 05TC (2) to identify degree-n derived homology. Double truncation is the degree-n cohomology object in degree n. Shift to degree zero and use the single-object comparison followed by rightDerivedZeroIsoSelf, which is the inverse of the actual degree-zero unit for a left exact functor. Transport through bounded-below/unbounded compatibility. This specifies a natural comparison; an arbitrary isomorphism witness is not sufficient.",
+   "uses": [
+    "new-qcoh-sections-left-exact-bottom",
+    "lem-sp-derived-functor-single-identification",
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent the lower truncation projection by the smart truncation of a complex K. Naturality of the right-derived unit reduces the displayed equation to the bottom-degree calculation on that truncated complex. A cycle of K maps to its class in the degree-n kernel of the smart truncation. The double-truncation identification sends it to the same class in H^n(K), and the degree-zero derived unit sends it to that class in an injective resolution. The bottom comparison inverts that unit. Thus the composite equals S applied to the cycle quotient. Left exactness preserves the cycle kernel. The equality S(T.i)=k followed by U.i identifies the cycle maps by monicity of U.i; kernel uniqueness and the homology-data cokernel quotient give the formula for any T and U. The construction is natural in complex maps and descends to the derived category; Plus compatibility preserves the unit, giving exactly the displayed unbounded-unit formula. This argument does not assert that R(S) inverts the lower-truncation projection.",
+   "uses": [
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-qcoh-sections-left-exact-bottom",
+  "lem-sp-derived-functor-single-identification",
+  "src-right-derived-functor-plus-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N4",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/05TC; https://stacks.math.columbia.edu/tag/08D4; https://stacks.math.columbia.edu/tag/0AVW",
+  "place": "05TC (2), upper truncation of the lower-truncated object; the degree-zero left-exact comparison and its unit, as used in 08D4 with bound one and in the 0AVW cohomology display.",
+  "note": "Unit-normalized refinement of the existing proved bottom-comparison construction; source pages read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "left exact right derived functor bottom homology comparison compatible unit",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bottom cohomology of a left exact right derived functor and its unit after lower truncation",
+   "results": "Functor.toRightDerivedZero, InjectiveResolution.toRightDerivedZero_eq, Functor.rightDerived and generic mapDerivedCategoryFactors. None states the normalized bottom comparison. The project has rightDerivedFunctor_truncated_bottom, but its statement does not specify normalization.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "truncGE.*rightDerived|rightDerived.*truncGE|toRightDerivedZero.*iCycles in Mathlib/Algebra/Homology and Mathlib/CategoryTheory/Abelian/RightDerived.lean; rg on both project roots; blueprint_refs search bottom unit",
+   "results": "Mathlib supplies InjectiveResolution.toRightDerivedZero'_comp_iCycles and its naturality. Project DerivedSectionsLeftExactBottom constructs an unnormalized natural isomorphism. AffineDerivedPushforwardSheafEdgeCompatibility requires a normalized affine edge but does not construct one. No matching normalized bottom theorem or blueprint node.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdge",
+  "date": "2026-10-14",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Proof step 3: affine cohomology comparison; normalize the bottom-degree comparison before removing the negative tail.",
+   "via": [
+    "lem-pc-affine-derived-pushforward-sheaf-edge",
+    "lem-pc-affine-pushforward-cohomology-edge-exists",
+    "lem-pc-affine-tilde-pushforward-cohomology-normalization-base",
+    "lem-pc-affine-tilde-pushforward-cohomology-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.DerivedBottomUnitNormalization",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/DerivedBottomUnitNormalization.lean",
+  "declaration": "CategoryTheory.Functor.exists_rightDerivedFunctor_truncated_bottom_unit",
+  "statement": "theorem exists_rightDerivedFunctor_truncated_bottom_unit\n    {C : Type uC} [Category.{vC} C] [Abelian C]\n    [EnoughInjectives C] [Abelian.HasKInjectiveResolutions C]\n    [HasDerivedCategory.{wC} C]\n    {D : Type uD} [Category.{vD} D] [Abelian D]\n    [HasDerivedCategory.{wD} D]\n    (S : C ⥤ D) [S.Additive] [PreservesFiniteLimits S] (n : ℤ) :\n    ∃ δ : DerivedCategory.TStructure.t.truncGE n ⋙ S.rightDerivedFunctor ⋙\n        DerivedCategory.homologyFunctor D n ≅\n      DerivedCategory.homologyFunctor C n ⋙ S,\n      ∀ (K : CochainComplex C ℤ)\n        (T : (K.sc n).LeftHomologyData)\n        (U : (((S.mapHomologicalComplex (.up ℤ)).obj K).sc n).LeftHomologyData)\n        (k : S.obj T.K ⟶ U.K),\n        S.map T.i = k ≫ U.i →\n        k ≫ U.π ≫ U.homologyIso.inv ≫\n          ((DerivedCategory.homologyFunctorFactors D n).app\n            ((S.mapHomologicalComplex (.up ℤ)).obj K)).inv ≫\n          (DerivedCategory.homologyFunctor D n).map\n            (S.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient C (.up ℤ)).obj K)) ≫\n          (DerivedCategory.homologyFunctor D n).map\n            (S.rightDerivedFunctor.map\n              ((DerivedCategory.TStructure.t.truncGEπ n).app (DerivedCategory.Q.obj K))) ≫\n          δ.hom.app (DerivedCategory.Q.obj K) =\n        S.map (T.π ≫ T.homologyIso.inv ≫\n          ((DerivedCategory.homologyFunctorFactors C n).app K).inv)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-288a1",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T041918-L-1154435",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-288a1",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T041918-L-1154435",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with the nodes, cited sources, dependency declarations and report; both delivered modules and both direct importers compile cleanly; axiom checks agree with the reported decomposition."
+ }
+}
