@@ -6,7 +6,10 @@ Authors: SHEAF group V4
 module
 
 public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
-import Sheaf.Algebra.Homology.BoundedFlatReplacement
+import Sheaf.AlgebraicGeometry.CompactFlatGeneratorTowerResolution
+import Sheaf.AlgebraicGeometry.CompactFlatTelescopeBarEnlargement
+import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
+import Mathlib.Algebra.Homology.HomotopyCategory.DegreewiseSplit
 
 /-! # Refining one augmented tower against one flat telescope
 
@@ -22,6 +25,78 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits CochainComplex.HomComplex
 namespace AlgebraicGeometry
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+private theorem isIso_split_cone_augmentation
+    {C : Type*} [Category C] [Abelian C]
+    (S : ShortComplex (CochainComplex C ℤ))
+    (σ : ∀ k : ℤ,
+      (S.map (HomologicalComplex.eval C (ComplexShape.up ℤ) k)).Splitting) :
+    IsIso ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).map
+      (CochainComplex.mappingCone.descShortComplex S)) := by
+  -- The retractions give the degree -1 part of the cone homotopy.
+  let γ : CochainComplex.HomComplex.Cochain S.X₂ (S.X₁⟦(1 : ℤ)⟧) (-1) :=
+    CochainComplex.HomComplex.Cochain.mk (fun p q hpq ↦
+      (σ p).r ≫ (S.X₁.XIsoOfEq (by omega : p = q + 1)).hom)
+  have h : Homotopy
+      (CochainComplex.mappingCone.descShortComplex S ≫ CochainComplex.homOfDegreewiseSplit S σ)
+      (CochainComplex.mappingCone.triangle S.f).mor₃ := by
+    refine CochainComplex.mappingCone.descHomotopy S.f _ _ 0 γ ?_ ?_
+    · -- On the first cone summand, the retraction cancels the negative projection.
+      ext p q hpq
+      rw [CochainComplex.HomComplex.Cochain.comp_v _ _ (add_zero (-1)) p q q hpq (add_zero q),
+        CochainComplex.HomComplex.Cochain.add_v, CochainComplex.HomComplex.Cochain.add_v,
+        CochainComplex.HomComplex.δ_zero, CochainComplex.HomComplex.Cochain.zero_v,
+        CochainComplex.HomComplex.Cochain.comp_v _ _ (zero_add (-1)) p p q (add_zero p) hpq,
+        CochainComplex.HomComplex.Cochain.comp_v _ _ (add_zero (-1)) p q q hpq (add_zero q)]
+      simp only [CochainComplex.HomComplex.Cochain.ofHom_v, HomologicalComplex.comp_f,
+        CochainComplex.mappingCone.inl_v_descShortComplex_f_assoc, zero_comp, zero_add,
+        CochainComplex.mappingCone.inl_v_triangle_mor₃_f]
+      have hf := (σ p).f_r
+      dsimp at hf
+      dsimp [γ, CochainComplex.shiftFunctorObjXIso]
+      rw [← Category.assoc, hf, Category.id_comp]
+      simp [HomologicalComplex.XIsoOfEq]
+    · -- On the second summand, expand g s = id - r f and use the chain-map identity.
+      ext p
+      simp only [CochainComplex.HomComplex.Cochain.ofHom_v, HomologicalComplex.comp_f,
+        CochainComplex.mappingCone.inr_f_descShortComplex_f_assoc,
+        CochainComplex.homOfDegreewiseSplit_f,
+        CochainComplex.cocycleOfDegreewiseSplit, CochainComplex.HomComplex.Cocycle.mk_coe,
+        CochainComplex.HomComplex.Cochain.mk_v,
+        CochainComplex.HomComplex.Cochain.add_v, CochainComplex.mappingCone.inr_f_triangle_mor₃_f]
+      rw [CochainComplex.HomComplex.δ_v (-1) 0 (by omega) γ p p (by omega) (p - 1) (p + 1) rfl rfl]
+      dsimp [γ]
+      simp only [Units.neg_smul, one_smul, Preadditive.comp_neg, Category.assoc, Category.comp_id,
+        add_zero, HomologicalComplex.XIsoOfEq_hom_comp_d]
+      have hg := (σ p).g_s
+      have hf := (σ (p + 1)).f_r
+      dsimp at hg hf
+      rw [← Category.assoc, hg]
+      simp only [Preadditive.sub_comp, Category.id_comp, Category.assoc, S.f.comm_assoc,
+        hf, Category.comp_id]
+      abel
+  let Q := HomotopyCategory.quotient C (ComplexShape.up ℤ)
+  let φ : CochainComplex.mappingCone.triangleh S.f ⟶
+      CochainComplex.trianglehOfDegreewiseSplit S σ :=
+    { hom₁ := 𝟙 _
+      hom₂ := 𝟙 _
+      hom₃ := Q.map (CochainComplex.mappingCone.descShortComplex S)
+      comm₁ := by simp
+      comm₂ := by
+        dsimp [Q]
+        rw [← Functor.map_comp, CochainComplex.mappingCone.inr_descShortComplex]
+        simp
+      comm₃ := by
+        have heq := HomotopyCategory.eq_of_homotopy _ _ h
+        have heq' := congrArg
+          (fun f ↦ f ≫ (Functor.commShiftIso Q (1 : ℤ)).hom.app S.X₁) heq.symm
+        simpa [Q, Functor.map_comp, Category.assoc] using heq'  }
+  exact CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂ φ
+    (HomotopyCategory.mappingCone_triangleh_distinguished S.f)
+    ((HomotopyCategory.distinguished_iff_iso_trianglehOfDegreewiseSplit _).2
+      ⟨S, σ, ⟨Iso.refl _⟩⟩) (by dsimp [φ]; infer_instance) (by dsimp [φ]; infer_instance)
 
 /-- A bounded flat tower augmented into one actual flat telescope can be refined,
 levelwise by quasi-isomorphisms, to admit a strict map into a tower presenting that
@@ -127,6 +202,53 @@ theorem exists_flat_telescope_target_refinement (Y : Scheme.{u})
           (Cochain.ofHom r) (add_zero _) = 0 ∧
         Limits.Sigma.map a ≫
             CochainComplex.mappingCone.inr (flatTelescopeDifferential F u) ≫ r =
-          Sigma.desc (fun n : ℕ ↦ c n ≫ p n) := by sorry
+          Sigma.desc (fun n : ℕ ↦ c n ≫ p n) := by
+  have _hfE := hf
+  obtain ⟨L, l, v, hbL, hv, hl, hsplit, hgen⟩ :=
+    exists_compact_flat_generator_tower_resolution Y E t hb
+  let pL : ∀ n : ℕ, L n ⟶ T := fun n ↦ v n ≫ p n
+  have hpL (n : ℕ) : l n ≫ pL (n + 1) = pL n := by
+    dsimp [pL]
+    rw [← Category.assoc, hl n, Category.assoc, hp n]
+  obtain ⟨R, F, s, u, d, a, hbR, hfR, hbF, hfF, hd, hs, ha, B, b, e, hzero, hsplitB, heiso, he⟩ :=
+    exists_compact_flat_telescope_bar_enlargement Y L l hbL hsplit hgen T hT pL hpL
+  classical
+  let S := ShortComplex.mk (flatTelescopeDifferential F u) b hzero
+  let σ (i : ℤ) := Classical.choice (hsplitB i)
+  let rB := CochainComplex.mappingCone.descShortComplex S
+  let r := rB ≫ e
+  have hrB := isIso_split_cone_augmentation S σ
+  have hr : IsIso ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map r) := by
+    dsimp [r]
+    rw [Functor.map_comp]
+    have := heiso
+    exact inferInstance
+  have hz : (CochainComplex.mappingCone.inl (flatTelescopeDifferential F u)).comp
+      (Cochain.ofHom r) (add_zero _) = 0 := by
+    ext i j hij : 1
+    rw [Cochain.comp_v _ _ (add_zero (-1)) i j j hij (add_zero j)]
+    simp only [Cochain.ofHom_v, HomologicalComplex.comp_f, r]
+    change (CochainComplex.mappingCone.inl S.f).v i j hij ≫
+      (CochainComplex.mappingCone.descShortComplex S).f j ≫ e.f j = 0
+    rw [CochainComplex.mappingCone.inl_v_descShortComplex_f_assoc,
+      Limits.zero_comp]
+  let c : ∀ n : ℕ, R n ⟶ E n := fun n ↦ d n ≫ v n
+  have hc (n : ℕ) : QuasiIso (c n) := by
+    have := hd n
+    have := hv n
+    dsimp [c]
+    infer_instance
+  have hsc (n : ℕ) : s n ≫ c (n + 1) = c n ≫ t n := by
+    dsimp [c]
+    rw [← Category.assoc, hs n, Category.assoc, hl n, ← Category.assoc]
+  refine ⟨R, F, s, u, c, a, hbR, hfR, hbF, hfF, hc, hsc, ha, r, hr, hz, ?_⟩
+  change Limits.Sigma.map a ≫
+    CochainComplex.mappingCone.inr S.f ≫ rB ≫ e = _
+  rw [← Category.assoc (CochainComplex.mappingCone.inr S.f) rB e]
+  rw [show CochainComplex.mappingCone.inr S.f ≫ rB = b from
+    CochainComplex.mappingCone.inr_descShortComplex S, he]
+  apply Sigma.hom_ext
+  intro n
+  simp only [Sigma.ι_desc, c, pL, Category.assoc]
 
 end AlgebraicGeometry

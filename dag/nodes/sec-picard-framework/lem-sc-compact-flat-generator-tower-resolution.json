@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-compact-flat-generator-tower-resolution",
+ "kind": "statement",
+ "title": "Strict split compact-flat-generator resolution of a bounded tower",
+ "statement": "Let $Y$ be any scheme and $A$ its category of module sheaves [def-pc-cochain-complex-modules]. Let $E_n$ be cochain complexes of $A$, with maps $t_n:E_n\\to E_{n+1}$, and suppose each $E_n$ is zero in degrees above some integer (no common upper bound is assumed). There are complexes $L_n$, maps $l_n:L_n\\to L_{n+1}$ and quasi-isomorphisms $v_n:L_n\\to E_n$ [def-pc-quasi-iso-modules], with $l_nv_{n+1}=v_nt_n$. Each $L_n$ is bounded above and every $l_n^i$ admits a retraction. For each $(n,i)$ there is a set $I$ in the scheme's universe and flat module sheaves $G_j$, $j\\in I$ [def-pc-flat-sheaf-modules], with $L_n^i\\cong\\bigoplus_{j\\in I}G_j$. Each $G_j$ is compact for coproducts in the following explicit sense: for every set $K$ in that universe, family $H_k$ of module sheaves, and morphism $f:G_j\\to\\bigoplus_{k\\in K}H_k$, there are a finite subset $S\\subset K$ and a morphism $g:G_j\\to\\bigoplus_{k\\in S}H_k$ such that $g$ followed by the canonical subcoproduct inclusion is $f$.",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeTargetRefinement.lean",
+  "place": "Original proof, first paragraph: relative generator resolution using 03EW, 077J and the cone induction of 06XX."
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "Use the affine-open extension-by-zero generators j_! O_U. They are flat;\ntheir Hom functor is sections on U. Quasi-compactness of U makes a section of a\nsheaf coproduct finitely supported, giving exactly the finite-subcoproduct\nfactorization in the conclusion. Arbitrary module sheaves are covered by sums\nof these generators. Resolve L_0 -> E_0 downward with that resolving class.\nGiven L_n -> E_n, resolve the bounded-above cone of L_n -> E_(n+1) by Q.\nCompose Q -> Cone -> L_n[1] and take its shifted cone to obtain L_(n+1).\nIts terms are sums of the old generators and the generators of Q; the map from\nL_n is degreewise split. The comparison triangle gives v_(n+1), initially\ncommuting up to homotopy. Extend the comparison homotopy along each degreewise\nsplit inclusion and subtract its boundary to get strict commutation. The\ncomparison of triangles makes v_(n+1) a quasi-isomorphism. Each stage has an\nupper bound, with no uniform bound required. Empty coproducts handle zero terms;\nzero complexes and arbitrary transitions need no exceptions. This construction\nuses no projectivity or lifting through a sheaf epimorphism.",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "def-pc-flat-sheaf-modules",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G1",
+  "document": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeTargetRefinement.lean",
+  "place": "Separation of the original agent-written relative generator resolution and finite-piece bar argument; preserves its constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded above tower of sheaf cochain complexes has a compact flat generator resolution with split transitions and a finite piece bar enlargement against a mapping telescope",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Resolve a bounded above tower of sheaf cochain complexes by sums of compact flat affine open generators with split transitions and strict natural quasi-isomorphisms",
+   "results": "8 hits: CochainComplex.cm5b, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt, DerivedCategory.left_fac_of_isStrictlyGE, CochainComplex.cm5b.instIsStrictlyGEI, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CochainComplex.IsKProjective, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt",
+   "date": "2026-10-14",
+   "verdict": "No matching tower-resolution or relative bar-enlargement theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsSplitMono, QuasiIso",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "No matching tower-resolution or relative bar-enlargement theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*generator|bar.*total|bar.*augmentation",
+   "results": "5 hits: Mathlib/Order/BooleanGenerators.lean, Mathlib/Order/BooleanGenerators.lean, Mathlib/Order/BooleanGenerators.lean, Mathlib/Order/BooleanGenerators.lean, Mathlib/Order/BooleanGenerators.lean",
+   "date": "2026-10-14",
+   "verdict": "No matching tower-resolution or relative bar-enlargement theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatTelescopeTargetRefinement",
+  "date": "2026-10-14",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proof of finite duality: compact affine-open generator resolution before finite-piece bar enlargement.",
+   "via": [
+    "lem-sc-flat-telescope-target-refinement",
+    "lem-sc-flat-telescope-arrow-bar-data",
+    "lem-sc-flat-telescope-arrow-cocycles",
+    "lem-sc-flat-telescope-arrow-diagram",
+    "lem-sc-flat-telescope-stage-map-refinement",
+    "lem-sc-normalized-flat-telescope-comparison",
+    "lem-sc-normalized-kflat-representative-comparison",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompactFlatGeneratorTowerResolution",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactFlatGeneratorTowerResolution.lean",
+  "declaration": "AlgebraicGeometry.exists_compact_flat_generator_tower_resolution",
+  "statement": "theorem exists_compact_flat_generator_tower_resolution (Y : Scheme.{u})\n    (E : ℕ → CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (t : ∀ n : ℕ, E n ⟶ E (n + 1))\n    (hb : ∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((E n).X i)) :\n    ∃ (L : ℕ → CochainComplex\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n      (l : ∀ n : ℕ, L n ⟶ L (n + 1)) (v : ∀ n : ℕ, L n ⟶ E n),\n      (∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((L n).X i)) ∧\n      (∀ n : ℕ, QuasiIso (v n)) ∧\n      (∀ n : ℕ, l n ≫ v (n + 1) = v n ≫ t n) ∧\n      (∀ (n : ℕ) (i : ℤ), IsSplitMono ((l n).f i)) ∧\n      ∀ (n : ℕ) (i : ℤ), ∃ (I : Type u)\n        (G : I → SheafOfModules.{u} (moduleRings Y.toRingedSpace)),\n        Nonempty ((L n).X i ≅ ∐ G) ∧\n        (∀ j : I, SheafOfModules.IsFlat (G j)) ∧\n        ∀ (j : I) (K : Type u)\n          (H : K → SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n          (f : G j ⟶ ∐ H),\n          ∃ (S : Finset K) (g : G j ⟶ ∐ (fun k : {k // k ∈ S} ↦ H k.1)),\n            g ≫ Sigma.desc (fun k : {k // k ∈ S} ↦ Sigma.ι H k.1) = f",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261014T081308-L-3872922",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261014T081308-L-3872922",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
