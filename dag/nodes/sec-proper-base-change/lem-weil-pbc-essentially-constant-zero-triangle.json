@@ -22,9 +22,59 @@
   "def-weil-triangulated-category",
   "def-weil-inverse-system"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $n\\geq1$. Write $u_i:A_i\\to B_i$ and $v_i:B_i\\to C_i$ for the triangle arrows, and $a_{j,i},b_{j,i},c_{j,i}$ for the transition maps. By the hypothesis at level $n$, choose $m\\geq n$ with $a_{m,n}=0$ (and $c_{m,n}=0$, although the latter is not needed). The triangle-morphism equation gives $b_{m,n}\\circ u_m=u_n\\circ a_{m,n}=0$.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0G3A (lemma-essentially-constant-2-out-of-3), zero-valued specialization; direct factorization using Tag 0149 (lemma-representable-homological)"
+   }
+  },
+  {
+   "text": "Apply clause (i) of [lem-weil-pbc-hom-out-of-triangle-exact] to the distinguished triangle at level $m$, with $W=B_n$ and $a=b_{m,n}$. Step 1 verifies exactly its vanishing hypothesis. It supplies $h:C_m\\to B_n$ such that $b_{m,n}=h\\circ v_m$.",
+   "uses": [
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0G3A (lemma-essentially-constant-2-out-of-3), zero-valued specialization; direct factorization using Tag 0149 (lemma-representable-homological)"
+   }
+  },
+  {
+   "text": "Apply the pro-zero hypothesis at level $m$ to choose $k\\geq m$ with $c_{k,m}=0$ (and $a_{k,m}=0$). The triangle-morphism equation is $v_m\\circ b_{k,m}=c_{k,m}\\circ v_k$. The inverse-system composition law therefore yields $b_{k,n}=b_{m,n}\\circ b_{k,m}=h\\circ v_m\\circ b_{k,m}=h\\circ c_{k,m}\\circ v_k=0$.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0G3A (lemma-essentially-constant-2-out-of-3), zero-valued specialization; direct factorization using Tag 0149 (lemma-representable-homological)"
+   }
+  },
+  {
+   "text": "Since $k\\geq m\\geq n$, Step 3 supplies a zero transition $B_k\\to B_n$ at the initially chosen level. This construction works for every $n\\geq1$, proving the asserted pro-zero property.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0G3A (lemma-essentially-constant-2-out-of-3), zero-valued specialization; direct factorization using Tag 0149 (lemma-representable-homological)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-inverse-system",
+  "lem-weil-pbc-hom-out-of-triangle-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Direct zero-valued argument for Tag 0G3A (lemma-essentially-constant-2-out-of-3), using the contravariant Hom exactness of Tag 0149 (lemma-representable-homological); not the Hom-colimit/five-lemma proof printed for Tag 0G3A."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,12 +106,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-bounded-derived-tower-pro-zero",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-essentially-constant-zero-triangle",
+  "worker": "stage1",
+  "summary": "Direct zero-valued proof: a middle transition factors through the third term by contravariant Hom exactness after killing the first transition; killing a later third transition then kills the middle composite. No new nodes or cross-unit tools.",
+  "blueprint": "Realizes the detailed comparison clause of def-weil-pbc-completed-pullback through the zero-valued two-out-of-three induction step."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-30232c7a8",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-30232c7a8 (reviewer sub-agent of L); spot-checked: All four proof steps are sound: Hom exactness (Stacks 0149; Mathlib yoneda_exact₂) factors the middle transition through C_m, and a later zero C-transition kills the composite. Checked Stacks 0G3A/0G3B, cited statements, route, duplicates, dependencies, edge cases, and archived proper-target context. No new nodes or accepted tool_uses. Corrected only proof_origin to mark the direct argument as agent-written; Tag 0G3A prints a different Hom-colimit proof. Full checks are in review.md; corrected JSON is under fixes/dag/nodes/.; 1 file(s) fixed by the reviewer"
+ }
 }
