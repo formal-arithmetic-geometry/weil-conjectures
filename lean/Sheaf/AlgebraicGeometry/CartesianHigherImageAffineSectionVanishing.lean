@@ -6,9 +6,7 @@ Authors: SHEAF group S4
 module
 
 public import Sheaf.AlgebraicGeometry.CartesianHigherImageTransitions
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
-import Sheaf.AlgebraicGeometry.DerivedEtaleCohomologyLimit
+import Sheaf.AlgebraicGeometry.CartesianHigherImageAffineSectionLocalVanishing
 
 /-! # Eventual vanishing of affine relative higher-image sections
 
@@ -55,6 +53,11 @@ theorem exists_cartesianHigherImage_affine_section_eq_zero
     (hx : (cartesianHigherImageLeg D c f F q i).hom.app (Opposite.op U) x = 0) :
     ∃ (j : I) (a : j ⟶ i),
       (cartesianHigherImageTransition D c f F q a).hom.app (Opposite.op U) x = 0 := by
-  sorry
+  classical
+  obtain ⟨j, a, J, _, V, r, hcover, hzero⟩ :=
+    exists_cartesianHigherImage_affine_section_local_zero D c hc f F q U i x hx
+  refine ⟨j, a, ?_⟩
+  exact cartesianHigherImage_section_eq_zero_of_finite_cover
+    D c hc f F q U i j a x J V r hcover hzero
 
 end AlgebraicGeometry.Etale
