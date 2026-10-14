@@ -8,7 +8,6 @@ module
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
 public import Mathlib.RingTheory.Localization.Away.Basic
 import Mathlib.RingTheory.ZariskisMainTheorem
-import Sheaf.RingTheory.ZariskisMainAway
 
 /-!
 # A finite subalgebra agreeing near a quasi-finite prime
@@ -53,7 +52,10 @@ theorem exists_finite_subalgebra_away_of_isQuasiFiniteAtPrime
     ∃ S' : Subalgebra R S, Module.Finite R S' ∧
       ∃ g : S', g.1 ∉ q.asIdeal ∧
         Function.Bijective (Localization.awayMap S'.val.toRingHom g) := by
-  have _ := zariskisMainProperty_of_isQuasiFiniteAtPrime R S q hq
+  have : QuasiFiniteAt R q.asIdeal := by
+    let e := PrimeSpectrum.preimageHomeomorphFiber R S (q.comap (algebraMap R S))
+    apply QuasiFiniteAt.of_isOpen_singleton_fiber q
+    rwa [← e.isOpen_image, Set.image_singleton]
   have H : ZariskisMainProperty R q.asIdeal :=
     ZariskisMainProperty.of_finiteType q.asIdeal
   obtain ⟨S', hS', g, hg, hbij⟩ :=

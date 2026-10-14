@@ -9,7 +9,6 @@ public import Sheaf.RingTheory.QuasiFiniteAtPrime
 public import Mathlib.RingTheory.KrullDimension.Basic
 import Mathlib.RingTheory.Ideal.Height
 import Mathlib.RingTheory.ZariskisMainTheorem
-import Sheaf.RingTheory.ZariskisMainAway
 
 /-!
 # Local dimension inequality for quasi-finite ring maps
@@ -50,7 +49,10 @@ theorem ringKrullDim_le_of_isQuasiFiniteAtPrime
       ringKrullDim (Localization.AtPrime (q.comap (algebraMap R S)).asIdeal) := by
   let T := integralClosure R S
   let q' := q.asIdeal.under T
-  have _ := zariskisMainProperty_of_isQuasiFiniteAtPrime R S q hq
+  have : QuasiFiniteAt R q.asIdeal := by
+    let e := PrimeSpectrum.preimageHomeomorphFiber R S (q.comap (algebraMap R S))
+    apply QuasiFiniteAt.of_isOpen_singleton_fiber q
+    rwa [← e.isOpen_image, Set.image_singleton]
   have hmain : ZariskisMainProperty R q.asIdeal :=
     ZariskisMainProperty.of_finiteType q.asIdeal
   obtain ⟨r, hrq, hrT, hr⟩ := zariskisMainProperty_iff.mp hmain

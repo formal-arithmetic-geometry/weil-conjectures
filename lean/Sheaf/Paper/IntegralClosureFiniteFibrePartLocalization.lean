@@ -13,7 +13,6 @@ import Sheaf.AlgebraicGeometry.IntegralClosureFiniteFibreChooseG
 import Sheaf.AlgebraicGeometry.IntegralClosureFiniteFibreImageClopen
 import Sheaf.RingTheory.FiniteQuotientComponentQuasiFinite
 import Mathlib.RingTheory.ZariskisMainTheorem
-import Sheaf.RingTheory.ZariskisMainAway
 
 /-!
 # Integral-closure localization of a finite fibre component
@@ -126,7 +125,11 @@ theorem integralClosure_finiteFibrePart_localization
     A B I C₁ C₂ e hcompat
   obtain ⟨U, hTU, hIso⟩ := exists_isIso_neighborhood_of_awayMap_bijective ι T (by
     intro p hp
-    have _ := Algebra.zariskisMainProperty_of_isQuasiFiniteAtPrime A B p (hqf p hp)
+    have : Algebra.QuasiFiniteAt A p.asIdeal := by
+      let e := PrimeSpectrum.preimageHomeomorphFiber A B (p.comap (algebraMap A B))
+      apply Algebra.QuasiFiniteAt.of_isOpen_singleton_fiber p
+      rw [← e.isOpen_image, Set.image_singleton]
+      exact hqf p hp
     exact Algebra.ZariskisMainProperty.of_finiteType p.asIdeal)
   obtain ⟨q, hq, _, _, ε', hε', himage, _, hmap,
       C₁', C₂', inst₁, inst₂, e', f₁, f₂, he', hprod⟩ :=
