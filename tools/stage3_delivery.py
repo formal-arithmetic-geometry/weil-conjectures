@@ -465,8 +465,9 @@ def check_changes(D, f, group, nodes_base):
         if m["role"] != "adapted":
             continue
         who = claim_holder(m["module"])
-        if who == group:
-            continue
+        if who in (group, None):
+            continue   # 2026-10-14 (launcher, under the human's mandate to remove process stalls): a module no group holds may
+                       # be changed like a held one; the reader still reviews it (66 refusals in 6 h, one item 30 times)
         d = m["diff"]
         # This exception is an adaptation, never a second interface change.
         changed = [k for k, old in d["old"].items()
