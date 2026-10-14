@@ -1,6 +1,6 @@
 {
  "kind": "statement",
- "status": "proved",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "Sheaf.AlgebraicGeometry.ThickeningSystemPushforwardLifting",
@@ -10,10 +10,16 @@
  "blueprint": {
   "is": null,
   "from": {
-   "node": "lem-weil-pbc-thickening-system-pushforward-lifting",
-   "place": "proof decomposition of the lifting theorem",
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Finite-etale lifting: the essential-surjectivity/algebraization route; explicit assembly of the termwise identifications in step 4 of lem-weil-pbc-thickening-system-pushforward-lifting (Remark 088F).",
    "via": [
-    "lem-weil-pbc-thickening-system-pushforward-lifting"
+    "lem-weil-pbc-thickening-system-pushforward-lifting",
+    "lem-weil-pbc-thickening-systems-pushforward-equivalence",
+    "lem-weil-pbc-thickening-systems-dictionary",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
    ]
   },
   "same_as": []
@@ -22,56 +28,107 @@
  "unit": "sk-thm-p1",
  "id": "lem-weil-pbc-thickening-system-pushforward-lifting-assembly",
  "title": "Assembly of adjacent pushforward identifications",
- "statement": "Given a coherent thickening system R and termwise isomorphisms e_n : P(R)_n ≅ H_n satisfying the adjacent transition equation, there is an isomorphism of inverse systems P(R) ≅ H.",
+ "statement": "Let $X$ be a Noetherian scheme, $\\mathcal J\\subseteq\\mathcal O_X$ a quasi-coherent sheaf of ideals, and $H$ a coherent formal module on $(X,\\mathcal J)$ [def-weil-pbc-coherent-formal-module], with underlying inverse system $H_\\bullet$. Let $(T_n)_{n\\ge0}$ be schemes with morphisms $i_n:T_n\\to T_{n+1}$ and $j_n:T_n\\to X$, equalities $j_{n+1}\\circ i_n=j_n$, and specified tensor-pullback/pushforward adjunctions [def-pc-module-pullback]. Let $R$ be a coherent thickening system on $(T_\\bullet,i_\\bullet)$ [def-weil-pbc-coherent-thickening-system], and $P(R)$ its explicit pushforward inverse system [lem-weil-pbc-thickening-system-pushforward-functor]. Write $p_n:P(R)_{n+1}\\to P(R)_n$ and $h_n:H_{n+1}\\to H_n$ for the adjacent transitions. Given isomorphisms $e_n:P(R)_n\\xrightarrow{\\sim}H_n$ with $e_n\\circ p_n=h_n\\circ e_{n+1}$ for all $n\\ge0$, there is an isomorphism of inverse systems $P(R)\\cong H_\\bullet$ [def-weil-inverse-system], whose components are $e_n$. Here the positive indexing in the formal-module and inverse-system definitions is reindexed by $n\\mapsto n+1$.",
  "source": {
   "document": "literature/stacks-project/coherent.tex",
   "place": "Remark 088F and equation 0880"
  },
  "proof": [
   {
-   "text": "Define the natural transformation with components e_n using NatTrans.ofOpSequence and the given adjacent compatibility. Define its inverse from e_n.inv; inverse naturality follows by cancelling the monomorphism e_n.hom and using the compatibility equation. The componentwise inverse identities make the two natural transformations inverse.",
+   "text": "Put $F=P(R)$ and $G=H_\\bullet$. The pushforward-functor statement supplies $F$ as an inverse system. A coherent formal module has an underlying inverse system $G$. Reindex the inverse-system definition from positive integers to $n\\ge0$. By that definition a morphism of inverse systems is precisely a component family commuting with adjacent transitions. Hence the given equations define a morphism $e:F\\to G$ with components $e_n$. In the functor presentation, compatibility with a transition $m\\to n$ follows by induction on $m-n$: the case $m=n$ is the identity equation; composing the equation for $m\\to n$ with the adjacent equation for $m+1\\to m$ gives the equation for $m+1\\to n$ by associativity.",
    "uses": [
-    "lem-weil-pbc-thickening-system-pushforward-functor"
+    "lem-weil-pbc-thickening-system-pushforward-functor",
+    "def-weil-pbc-coherent-formal-module",
+    "def-weil-inverse-system"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Remark 088F (remark-reformulate-existence-theorem), formal assembly of the systems; equation 0880 (equation-completion-functor)"
+   }
+  },
+  {
+   "text": "Let $d_n=e_n^{-1}:G_n\\to F_n$. Compose $e_n\\circ p_n=h_n\\circ e_{n+1}$ on the left with $d_n$ and on the right with $d_{n+1}$. The inverse identities and associativity give $p_n\\circ d_{n+1}=d_n\\circ h_n$. Thus the inverse-system morphism definition gives a morphism $d:G\\to F$ with components $d_n$. Explicitly, write $p_{m,n}:F_m\\to F_n$ and $h_{m,n}:G_m\\to G_n$ for the composites of adjacent transitions. For $m=n$, $p_{n,n}\\circ d_n=d_n\\circ h_{n,n}$ is the identity law. If $p_{m,n}\\circ d_m=d_n\\circ h_{m,n}$, then $p_{m+1,n}\\circ d_{m+1}=p_{m,n}\\circ p_m\\circ d_{m+1}=p_{m,n}\\circ d_m\\circ h_m=d_n\\circ h_{m,n}\\circ h_m=d_n\\circ h_{m+1,n}$. This proves compatibility with every transition by induction on $m-n$.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Remark 088F (remark-reformulate-existence-theorem), formal assembly of the systems; equation 0880 (equation-completion-functor)"
+   }
+  },
+  {
+   "text": "Composition of inverse-system morphisms is componentwise. At every $n$, $(d\\circ e)_n=d_n\\circ e_n=\\mathrm{id}_{F_n}$ and $(e\\circ d)_n=e_n\\circ d_n=\\mathrm{id}_{G_n}$. Equality of component families therefore proves $d\\circ e=\\mathrm{id}_F$ and $e\\circ d=\\mathrm{id}_G$. The pair $(e,d)$ is the required isomorphism, with the prescribed components.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Remark 088F (remark-reformulate-existence-theorem), formal assembly of the systems; equation 0880 (equation-completion-functor)"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-inverse-system",
+  "def-weil-pbc-coherent-formal-module",
   "lem-weil-pbc-thickening-system-pushforward-functor"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "Mathlib.CategoryTheory.Functor.OfSequence",
-  "place": "NatTrans.ofOpSequence and componentwise Iso identities"
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Remark 088F and equation 0880; explicit elementary componentwise assembly, not an invocation of Grothendieck existence"
  },
  "mathlib_searches": [
   {
-   "tool": "LeanSearch",
-   "query": "coherent sheaves on closed thickenings inverse system adic quotient transition",
-   "results": "msearch.py returned Internal Server Error (unavailable).",
-   "date": "2026-10-13",
-   "verdict": "unavailable; no mathematical verdict"
+   "tool": "leanfinder",
+   "query": "An isomorphism between inverse sequences in a category from termwise isomorphisms commuting with adjacent transition maps",
+   "results": "Finite ComposableArrows declarations only: CategoryTheory.ComposableArrows.scMapIso_inv, CategoryTheory.ComposableArrows.sc'MapIso_inv, CategoryTheory.ComposableArrows.isoMk_inv, CategoryTheory.ComposableArrows.isoMkSucc_inv, CategoryTheory.ComposableArrows.isoMk₅_inv, CategoryTheory.ComposableArrows.map'_inv_eq_inv_map', CategoryTheory.ComposableArrows.isoMk₄_inv, CategoryTheory.ComposableArrows.isoMk₂_inv",
+   "date": "2026-10-14",
+   "verdict": "no match among returned hits"
   },
   {
-   "tool": "LeanFinder",
-   "query": "equivalence coherent systems on infinitesimal thickenings and adic inverse systems of coherent sheaves",
-   "results": "localCohomology and equivalences of sheaf sites, not this tower construction.",
-   "date": "2026-10-13",
-   "verdict": "No matching theorem among the returned results."
-  },
-  {
-   "tool": "Loogle",
-   "query": "CategoryTheory.Functor, ℕ",
-   "results": "General categorical declarations; direct source search located Functor.ofOpSequence and NatTrans.ofOpSequence.",
-   "date": "2026-10-13",
-   "verdict": "Sequence constructors suffice for functoriality; they do not assert the geometric adic or lifting conditions."
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "CategoryTheory.NatIso.ofComponents, Mathlib/CategoryTheory/NatIso.lean:181; read lines 181-193. It requires naturality for every arrow.",
+   "date": "2026-10-14",
+   "verdict": "candidate: ofComponents needs naturality for all arrows, not merely adjacent ones"
   },
   {
    "tool": "grep",
-   "query": "thickeningSystems|CoherentThickeningSystem|IsCoherentFormalModule; Functor/OfSequence",
-   "results": "No earlier termwise tower functor, adic verification or object lifting theorem. Mathlib Functor/OfSequence has ofOpSequence and NatTrans.ofOpSequence. Blueprint searches for thickening, adic and inverse system found no same statement.",
-   "date": "2026-10-13",
-   "verdict": "The functor can be constructed from the sequence API; the two geometric substatements need new nodes."
+   "query": "ofOpSequence|ofComponents",
+   "results": "Functor.ofOpSequence and NatTrans.ofOpSequence in Mathlib/CategoryTheory/Functor/OfSequence.lean; read NatTrans.ofOpSequence at line 181 (adjacent compatibility gives a natural transformation, not an isomorphism).",
+   "date": "2026-10-14",
+   "verdict": "candidate constructors; not a single exact or one-line specialization for this geometric statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural transformations between functors from opposite natural numbers are determined by maps commuting with successor arrows",
+   "results": "Finite ComposableArrows declarations only: CategoryTheory.ComposableArrows.hom_ext_succ, CategoryTheory.ComposableArrows.hom_ext₁, CategoryTheory.ComposableArrows.hom_ext₁_iff, CategoryTheory.ComposableArrows.hom_ext₅, CategoryTheory.ComposableArrows.hom_ext₀, CategoryTheory.ComposableArrows.hom_ext₂, CategoryTheory.ComposableArrows.hom_ext₅_iff, CategoryTheory.ComposableArrows.hom_ext₄",
+   "date": "2026-10-14",
+   "verdict": "no match among returned hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "isomorphism of functors on opposite natural numbers from isomorphisms of each object compatible with successor maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.isIso_of_isIso_app",
+   "results": "0 hits; unknown identifier 'CategoryTheory.NatTrans.isIso_of_isIso_app'",
+   "date": "2026-10-14",
+   "verdict": "unknown identifier; corrected namespace in next search"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.isIso_of_isIso_app",
+   "results": "CategoryTheory.NatIso.isIso_of_isIso_app, Mathlib/CategoryTheory/NatIso.lean:204; requires an already constructed natural transformation and isomorphism instances for every component.",
+   "date": "2026-10-14",
+   "verdict": "candidate for the last assembly step, not a direct statement from adjacent compatibility"
   }
  ],
  "mathlib_match": null,
@@ -89,17 +146,16 @@
   "def-pc-module-pullback",
   "def-weil-pbc-coherent-formal-module",
   "def-weil-pbc-coherent-thickening-system",
-  "lem-weil-pbc-thickening-system-pushforward-functor"
+  "lem-weil-pbc-thickening-system-pushforward-functor",
+  "def-weil-inverse-system"
  ],
  "reviewed": {
-  "date": "2026-10-12",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U1",
+  "reviewer": "NT-Codex-NA-e81317c74",
+  "group": "NA",
   "result": "pass",
-  "landing": "20261012T223420-L-1642283",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-e81317c74 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and chapter/unit route. All three assembly steps are valid, correctly typed, and preserve the supplied components; indexing and noninvertible-transition cases checked. No new nodes, cycles, missing non-elementary citations, or coefficient-category comparisons asserted. Exact archived target categories and base-change directions checked; no target weakened. Detailed findings written to review.md."
  },
  "reviewed_proof": {
   "date": "2026-10-12",
@@ -110,5 +166,12 @@
   "landing": "20261012T223420-L-1642283",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-thickening-system-pushforward-lifting-assembly",
+  "worker": "stage1",
+  "summary": "Expanded the implicit geometric data and wrote adjacent compatibility, inverse naturality, and the two componentwise inverse identities. No new nodes: the inverse-system definition states precisely the morphism and composition rules. No closed project declaration found in either permitted upstream source checkout. Corrected blueprint.from to the imported finite-etale-lifting ancestor; the created.item module-name metadata breaks automatic ancestry recovery.",
+  "blueprint": "Realizes the final assembly in step 4 of the lifting parent, in the essential-surjectivity/algebraization branch of thm-weil-pbc-finite-etale-lifting (Remark 088F); no unit route change."
  }
 }
