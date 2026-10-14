@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **845**, closure **25**, holes in definitions **5**, definitions with undetermined data **2** (closure **0**).
+Holes now: library **836**, closure **17**, holes in definitions **5**, definitions with undetermined data **2** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -21,24 +21,24 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 627 | 20 |
-| WeilConjectures | 218 | 5 |
+| Sheaf | 620 | 14 |
+| WeilConjectures | 216 | 3 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2174 | 94 | 2080 | 4 | 1 |
-| 660345513 (Application of proof-dependency imports) | library | 2116 | 92 | 2024 | 4 | 1 |
-| 660345513 (Application of proof-dependency imports) | closure | 1979 | 20 | 1959 | 3 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 2175 | 87 | 2088 | 5 | 1 |
+| 660345513 (Application of proof-dependency imports) | library | 2117 | 85 | 2032 | 5 | 1 |
+| 660345513 (Application of proof-dependency imports) | closure | 1979 | 14 | 1965 | 4 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3352 |
+| proved | 3362 |
 | decomposed | 48 |
-| moved | 3885 |
-| pruned | 118 |
-| other | 458 |
+| moved | 3894 |
+| pruned | 119 |
+| other | 465 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
 
@@ -54,37 +54,37 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | C2 | 110 | 103 | 74 | 29 | 50/110 (45.5%) |
 | C3 | 107 | 106 | 74 | 32 | 52/107 (48.6%) |
 | C4 | 39 | 33 | 28 | 5 | 18/39 (46.2%) |
-| D2 | 127 | 125 | 86 | 39 | 59/127 (46.5%) |
+| D2 | 128 | 126 | 86 | 40 | 59/128 (46.1%) |
 | D3 | 96 | 101 | 66 | 35 | 47/96 (49.0%) |
 | D4 | 50 | 45 | 41 | 4 | 25/50 (50.0%) |
 | E1 | 142 | 157 | 102 | 55 | 78/142 (54.9%) |
-| E2 | 107 | 105 | 81 | 24 | 56/107 (52.3%) |
+| E2 | 108 | 105 | 81 | 24 | 56/108 (51.9%) |
 | E3 | 104 | 99 | 85 | 14 | 56/104 (53.8%) |
 | E4 | 37 | 37 | 26 | 11 | 19/37 (51.4%) |
 | F1 | 134 | 135 | 103 | 32 | 69/134 (51.5%) |
-| F2 | 131 | 133 | 97 | 36 | 60/131 (45.8%) |
+| F2 | 133 | 134 | 98 | 36 | 61/133 (45.9%) |
 | F3 | 85 | 86 | 55 | 31 | 39/85 (45.9%) |
 | F4 | 49 | 43 | 36 | 7 | 25/49 (51.0%) |
 | G1 | 135 | 136 | 111 | 25 | 74/135 (54.8%) |
-| G2 | 131 | 131 | 88 | 43 | 60/131 (45.8%) |
+| G2 | 132 | 131 | 88 | 43 | 60/132 (45.5%) |
 | G3 | 97 | 100 | 66 | 34 | 45/97 (46.4%) |
 | G4 | 52 | 44 | 28 | 16 | 18/52 (34.6%) |
 | H1 | 130 | 128 | 105 | 23 | 73/130 (56.2%) |
 | H2 | 108 | 106 | 88 | 18 | 64/108 (59.3%) |
-| H3 | 117 | 133 | 94 | 39 | 65/117 (55.6%) |
+| H3 | 118 | 133 | 94 | 39 | 65/118 (55.1%) |
 | H4 | 54 | 51 | 40 | 11 | 29/54 (53.7%) |
 | J1 | 122 | 129 | 75 | 54 | 53/122 (43.4%) |
-| J2 | 100 | 102 | 68 | 34 | 49/100 (49.0%) |
+| J2 | 102 | 104 | 70 | 34 | 51/102 (50.0%) |
 | J3 | 115 | 121 | 76 | 45 | 53/115 (46.1%) |
 | J4 | 59 | 51 | 39 | 12 | 26/59 (44.1%) |
-| K1 | 114 | 128 | 87 | 41 | 58/114 (50.9%) |
+| K1 | 115 | 128 | 87 | 41 | 58/115 (50.4%) |
 | K2 | 119 | 117 | 83 | 34 | 64/119 (53.8%) |
 | K3 | 105 | 105 | 75 | 30 | 55/105 (52.4%) |
 | K4 | 58 | 43 | 34 | 9 | 24/58 (41.4%) |
 | M1 | 136 | 135 | 92 | 43 | 65/136 (47.8%) |
 | M2 | 127 | 129 | 103 | 26 | 69/127 (54.3%) |
-| M3 | 102 | 103 | 69 | 34 | 50/102 (49.0%) |
-| M4 | 42 | 42 | 23 | 19 | 16/42 (38.1%) |
+| M3 | 103 | 104 | 71 | 33 | 51/103 (49.5%) |
+| M4 | 43 | 43 | 23 | 20 | 16/43 (37.2%) |
 | N1 | 132 | 134 | 108 | 26 | 74/132 (56.1%) |
 | N2 | 127 | 116 | 78 | 38 | 57/127 (44.9%) |
 | N3 | 86 | 81 | 65 | 16 | 45/86 (52.3%) |
@@ -93,18 +93,18 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | P2 | 129 | 121 | 79 | 42 | 54/129 (41.9%) |
 | P3 | 100 | 93 | 81 | 12 | 52/100 (52.0%) |
 | P4 | 51 | 47 | 39 | 8 | 26/51 (51.0%) |
-| Q1 | 104 | 105 | 74 | 31 | 54/104 (51.9%) |
+| Q1 | 106 | 107 | 74 | 33 | 54/106 (50.9%) |
 | Q2 | 103 | 106 | 79 | 27 | 52/103 (50.5%) |
-| Q3 | 99 | 98 | 68 | 30 | 45/99 (45.5%) |
+| Q3 | 100 | 99 | 70 | 29 | 46/100 (46.0%) |
 | Q4 | 46 | 49 | 26 | 23 | 20/46 (43.5%) |
 | R1 | 122 | 126 | 97 | 29 | 67/122 (54.9%) |
 | R2 | 120 | 120 | 75 | 45 | 52/120 (43.3%) |
 | R3 | 93 | 90 | 65 | 25 | 42/93 (45.2%) |
-| R4 | 55 | 46 | 41 | 5 | 26/55 (47.3%) |
-| S1 | 121 | 123 | 104 | 19 | 68/121 (56.2%) |
+| R4 | 56 | 47 | 41 | 6 | 26/56 (46.4%) |
+| S1 | 123 | 125 | 104 | 21 | 68/123 (55.3%) |
 | S2 | 121 | 125 | 98 | 27 | 63/121 (52.1%) |
 | S3 | 102 | 97 | 63 | 34 | 48/102 (47.1%) |
-| S4 | 43 | 41 | 32 | 9 | 22/43 (51.2%) |
+| S4 | 44 | 42 | 34 | 8 | 23/44 (52.3%) |
 | T1 | 108 | 108 | 80 | 28 | 55/108 (50.9%) |
 | T2 | 131 | 153 | 97 | 56 | 64/131 (48.9%) |
 | T3 | 98 | 93 | 75 | 18 | 52/98 (53.1%) |
@@ -119,10 +119,11 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | V4 | 49 | 43 | 36 | 7 | 24/49 (49.0%) |
 | W2 | 113 | 118 | 78 | 40 | 54/113 (47.8%) |
 | W3 | 83 | 83 | 58 | 25 | 40/83 (48.2%) |
-| W4 | 42 | 38 | 32 | 6 | 23/42 (54.8%) |
-| X2 | 117 | 114 | 93 | 21 | 62/117 (53.0%) |
-| X3 | 98 | 93 | 62 | 31 | 43/98 (43.9%) |
+| W4 | 45 | 41 | 34 | 7 | 25/45 (55.6%) |
+| X2 | 119 | 116 | 94 | 22 | 63/119 (52.9%) |
+| X3 | 100 | 95 | 62 | 33 | 43/100 (43.0%) |
 | XR33076d633fce5c89 | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
+| XR70f81a388df1a824 | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | XR916f3f6fae119923 | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | XR9e6d7250028f1981 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
 | XRa0a656f89c54729e | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
@@ -130,6 +131,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | XRa3e07659d1a5d330 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | XRb0cc22400e136910 | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | XRbb9b20b2b4a981ff | 2 | 0 | 0 | 0 | 0/2 (0.0%) |
+| XRd4f549ddc0d8d578 | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | XReedb48d351b955d4 | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | XRfef4bc449ceae451 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | Y2 | 108 | 110 | 98 | 12 | 59/108 (54.6%) |
@@ -142,24 +144,21 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 |---|---:|---:|---|
 | WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty | 0 | 1 | ORCHESTRA |
 | WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine | 0 | 1 | ORCHESTRA |
-| WeilConjectures.ConstructibleSheaf.FinitePushforward | 3 | 1 | Q3 |
-| Sheaf.AlgebraicGeometry.NormalConstantGenericUnit | 4 | 1 | X3 |
-| Sheaf.AlgebraicGeometry.NormalConstantOpenUnit | 4 | 1 | X3 |
-| Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic | 6 | 1 | X2 |
-| Sheaf.CategoryTheory.SiteSystemStrictificationData | 7 | 1 | M4 |
-| Sheaf.AlgebraicGeometry.BaseChangeClosedCoefficientRange | 8 | 1 | X2 |
-| Sheaf.AlgebraicGeometry.PicardDegreeSheafFpqc | 9 | 1 | M3 |
-| Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality | 10 | 1 | J2 |
-| Sheaf.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparison | 10 | 1 | J2 |
-| Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula | 20 | 1 | W4 |
-| WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula | 22 | 2 | F2 |
+| Sheaf.AlgebraicGeometry.BaseChangeTargetTransitionHigherImage | 11 | 1 | K3 |
+| Sheaf.AlgebraicGeometry.CartesianHigherImageGermDescent | 12 | 1 | E1 |
+| Sheaf.AlgebraicGeometry.CartesianHigherImageGermVanishing | 12 | 1 | E1 |
+| WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula | 22 | 1 | K4 |
 | Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionsFactorization | 23 | 1 | N3 |
+| Sheaf.AlgebraicGeometry.ProjectionFormulaFiniteObjectwise | 23 | 1 | C2 |
 | Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation | 24 | 1 | P1 |
 | Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex | 28 | 1 | H4 |
-| Sheaf.AlgebraicGeometry.RelativeMVDirectImageRows | 29 | 1 | W4 |
-| Sheaf.AlgebraicGeometry.ScalarCupModuleCupCompatibility | 30 | 1 | W4 |
+| Sheaf.AlgebraicGeometry.RelativeMVDirectImageRowsPreoverlap | 30 | 1 | W4 |
+| Sheaf.AlgebraicGeometry.ScalarCupResolutionClassCompatibility | 31 | 1 | W4 |
 | Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealization | 33 | 1 | W4 |
 | Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchange | 34 | 1 | P1 |
+| Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison | 34 | 1 | B3 |
+| Sheaf.AlgebraicGeometry.AffineCoordinateComparisonCoherence | 43 | 1 | T4 |
+| Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates | 50 | 1 | U3 |
 
 Modules pruned since the imports baseline:
 
@@ -197,6 +196,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.Algebra.ProjectiveDimensionWellDefined`
 - `Sheaf.Algebra.Schanuel`
 - `Sheaf.AlgebraicGeometry.AffineCohomologyLocalization`
+- `Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit`
 - `Sheaf.AlgebraicGeometry.AffineKoszulHomAlternatingCech`
 - `Sheaf.AlgebraicGeometry.AffinePseudoCoherentRHomQuasiCoherent`
 - `Sheaf.AlgebraicGeometry.AffineTruncationKernelFiniteLocallyFree`
@@ -313,6 +313,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.Abelian.CompatibleNullHomotopyAssembly`
 - `Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects`
 - `Sheaf.CategoryTheory.AdjunctionTransferFunctorialInjectives`
+- `Sheaf.CategoryTheory.ArrowsFunctor`
 - `Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence`
 - `Sheaf.CategoryTheory.BoundedSubobjectSize`
 - `Sheaf.CategoryTheory.BoundedSubobjectSurjection`
@@ -324,6 +325,8 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.CartanEilenbergVerticalNullhomotopy`
 - `Sheaf.CategoryTheory.CohomologyColimitSites`
 - `Sheaf.CategoryTheory.ColimitSiteCechComplex`
+- `Sheaf.CategoryTheory.ColimitSiteSections`
+- `Sheaf.CategoryTheory.ColimitSites`
 - `Sheaf.CategoryTheory.CoskeletonMatchingTuples`
 - `Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors`
 - `Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd`
@@ -337,6 +340,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.EssentiallyConstantSystem`
 - `Sheaf.CategoryTheory.ExactCoupleMorphism`
 - `Sheaf.CategoryTheory.ExistsDirectedReindexing`
+- `Sheaf.CategoryTheory.FilteredColimitCategories`
 - `Sheaf.CategoryTheory.FilteredHomotopySpectralSequence`
 - `Sheaf.CategoryTheory.FilteredPageTwoModel`
 - `Sheaf.CategoryTheory.FiniteContinuousModule`
@@ -372,11 +376,18 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.PushoutShortExactSequence`
 - `Sheaf.CategoryTheory.QuotientJShriek`
 - `Sheaf.CategoryTheory.RightLocalizationHomColimit`
+- `Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects`
 - `Sheaf.CategoryTheory.SimplicialMatchingObject`
 - `Sheaf.CategoryTheory.SiteCohomologyPullback`
+- `Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf`
 - `Sheaf.CategoryTheory.SiteCoveringsCommonRefinement`
+- `Sheaf.CategoryTheory.SiteEquivalenceMorphismOfSites`
+- `Sheaf.CategoryTheory.SiteEquivalenceMorphismTransport`
+- `Sheaf.CategoryTheory.SiteFilteredColimitSections`
 - `Sheaf.CategoryTheory.SiteLerayDegenerate`
+- `Sheaf.CategoryTheory.SiteMorphismComposition`
 - `Sheaf.CategoryTheory.SitePullbackAbelianExact`
+- `Sheaf.CategoryTheory.SiteSystemStrictification`
 - `Sheaf.CategoryTheory.Sites.BinaryContractedProductPresentation`
 - `Sheaf.CategoryTheory.Sites.CoherentContractedPowers`
 - `Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalization`
@@ -444,6 +455,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.Paper.SetsEtaleInverseImageConstantBaseChange`
 - `Sheaf.Paper.SheavesKilledByNZmodModules`
 - `Sheaf.Paper.SimplicialSetAddSimplices`
+- `Sheaf.Paper.SiteCoveringIsomorphicFamily`
 - `Sheaf.Paper.SiteCoveringMorphismsSameH0Map`
 - `Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf`
 - `Sheaf.Paper.SitePlusInjectiveSeparated`
@@ -473,7 +485,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.RingTheory.DVRValuationRingCharacterization`
 - `Sheaf.RingTheory.DirectedUnionSubringsFlatModule`
 - `Sheaf.RingTheory.Etale.QuasiFiniteAtPrime`
-- `Sheaf.RingTheory.EtaleColimitNormalLocalDomain`
 - `Sheaf.RingTheory.EtaleFiniteFactorDecomposition`
 - `Sheaf.RingTheory.EtaleRetractionFiniteTypeSplitting`
 - `Sheaf.RingTheory.ExistsNegativeValuationOfTensorSurjective`
@@ -546,6 +557,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.Topology.SurjectionKernelPairCoequalizer`
 - `WeilConjectures.AlgebraicGeometry.Cohomology.Projective`
 - `WeilConjectures.AlgebraicGeometry.Curve.DivisorSequence`
+- `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.AlgClosedExtension`
 
 Scanner limitations: macro-generated declarations, elaborated anonymous/private names, and tactic dependencies cannot be recovered from source. Synthetic names are source keys, not elaborated names.
 
