@@ -9,7 +9,7 @@
     "def-pur-integral-derived-operations"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Change of rings preserves K-flat complexes with flat terms",
@@ -22,27 +22,150 @@
   "def-pc-kflat-complex",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $R=\\mathcal O$, $S=\\mathcal O\\prime$, and $U=\\varphi_*$ for restriction of scalars. This leaves the underlying abelian sheaf and maps unchanged. Kernels are sectionwise and cokernels are sheafified sectionwise cokernels in both module categories, so their underlying abelian sheaves agree before and after $U$. Thus $U$ preserves and reflects exactness, and for every complex $F$ the underlying abelian sheaves of $H^i(UF)$ and $H^i(F)$ coincide; in particular $U$ preserves and reflects acyclicity.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, label lemma-abelian; kernel and cokernel descriptions immediately preceding the lemma"
+   }
+  },
+  {
+   "text": "For any $R$-module sheaf $M$ and $S$-module sheaf $N$, construct an isomorphism of $R$-module sheaves $U(N\\otimes_S(M\\otimes_R S))\\cong UN\\otimes_R M$. On local tensor generators send $n\\otimes(m\\otimes s)$ to $sn\\otimes m$ and send $n\\otimes m$ back to $n\\otimes(m\\otimes1)$. The first formula respects the inner $R$-balancing since $s\\varphi(r)n\\otimes m=sn\\otimes rm$, and the outer $S$-balancing since $tn\\otimes(m\\otimes s)$ and $n\\otimes(m\\otimes ts)$ both map to $tsn\\otimes m$. The second formula is $R$-balanced because $\\varphi(r)n\\otimes(m\\otimes1)=n\\otimes(m\\otimes\\varphi(r))=n\\otimes(rm\\otimes1)$. Give $UN\\otimes_R M$ its $S$-action on the $N$ factor: on presheaf tensors $t(n\\otimes m)=tn\\otimes m$, and module sheafification extends this action. To construct the first sheaf map, first extend the $R$-bilinear map $N\\times(M\\otimes_{p,R}S)\\to UN\\otimes_R M$ by the cited bilinear-extension theorem over $R$. Its $S$-balancing and $S$-linearity hold on the presheaf tensors by the displayed formulas and therefore on the sheafifications by uniqueness of extension (also on each localized site to test a local section of $S$). The tensor and sheafification universal properties over $S$ then give the first map. The second formula is an $R$-bilinear map into the restricted left-hand sheaf, so the tensor and sheafification universal properties over $R$ give the inverse map. Their composites are the identity: $sn\\otimes(m\\otimes1)=n\\otimes(m\\otimes s)$, and $1n\\otimes m=n\\otimes m$. Uniqueness of extension makes these identities identities of sheaf maps. Both maps are natural in $M$ and $N$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-module-sheafification-bilinear-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK, tensor product and its bilinear universal property; Tag 05V4, label lemma-flat-change-of-rings, displayed tensor identity"
+   }
+  },
+  {
+   "text": "Fix $p$ and a short exact sequence of $S$-module sheaves. By step 1 its restriction to $R$ is exact. Apply the exact functor $-\\otimes_R K^p$, exact by the termwise flatness hypothesis, and then identify the resulting sequence with the restriction of its tensor product over $S$ with $K^p\\otimes_R S$ using the natural maps of step 2. Reflection of exactness in step 1 proves that $-\\otimes_S(K^p\\otimes_R S)$ is exact. This proves flatness of each changed term.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-module-sheafification-bilinear-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05V4, label lemma-flat-change-of-rings, proof with the module denoted H on the left also on the right"
+   }
+  },
+  {
+   "text": "For an arbitrary complex $F$ of $S$-module sheaves, apply step 2 to $N=F^a$, $M=K^b$, and take direct sums over $a+b=n$. Restriction of scalars commutes with these sums: the underlying sheaf is the sheafification of sectionwise finite-support tuples; scalar action is componentwise through $\\varphi$, so sheafifying and restricting in either order gives the same sheaf. The sheafification adjunction verifies its coproduct universal property by maps from each summand. We obtain $U\\operatorname{Tot}(F\\otimes_S(K\\otimes_R S))\\cong\\operatorname{Tot}(UF\\otimes_R K)$. This is a chain isomorphism: the formula $f\\otimes(k\\otimes s)\\mapsto sf\\otimes k$ sends the two differential terms to $s\\,d_Ff\\otimes k$ and $(-1)^a sf\\otimes d_Kk$, respectively, exactly the total differential on the right. Every sum here uses finite-support representatives locally; no boundedness hypothesis is needed.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YL, tensor totalization preceding Definition 06YN; sites-modules Tag 03DB, label lemma-limits-colimits, direct-sum construction"
+   }
+  },
+  {
+   "text": "Now let $F$ be any acyclic complex of $S$-module sheaves. Step 1 makes $UF$ acyclic. By K-flatness of $K$, the complex $\\operatorname{Tot}(UF\\otimes_R K)$ is acyclic. The chain isomorphism of step 4 and reflection of acyclicity in step 1 make $\\operatorname{Tot}(F\\otimes_S(K\\otimes_R S))$ acyclic. This is precisely the definition of K-flatness over $S$. Together with step 3 it proves both conclusions.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN, label definition-K-flat; identity-topos coefficient-change special case of Tag 0G7E, label lemma-pullback-K-flat"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Direct coefficient-change proof of the special case of Tag 0G7E (lemma-pullback-K-flat), using the tensor identity of Tag 05V4 (sites-modules-lemma-flat-change-of-rings); avoids the general inverse-image resolution argument."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "grep -rn -i 'KFlat\\|K-flat\\|kflat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
+   "query": "KFlat|K.flat|kflat",
+   "results": "Hits: Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits concern individual ring modules or scalar-restriction ingredients, not K-flat complexes of sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of a K-flat complex of sheaves of modules is K-flat",
+   "results": "Hits: ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.of_flat_tensorProduct, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_flat_tensorProduct, Module.Flat.trans, Module.flat_iff_of_isLocalization, Module.Flat.iff_lTensor_exact'",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits concern individual ring modules or scalar-restriction ingredients, not K-flat complexes of sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\"",
+   "results": "Hits: Lean.mkFlatCtorOfStructCtorName",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits concern individual ring modules or scalar-restriction ingredients, not K-flat complexes of sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of rings preserves K-flat complexes of flat sheaves of modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring an acyclic complex with a K flat complex after base change of the coefficient ring remains acyclic",
+   "results": "Hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_lTensor_exact, Module.Flat.iff_rTensor_exact', Module.Flat.iff_rTensor_exact",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits concern individual ring modules or scalar-restriction ingredients, not K-flat complexes of sheaves"
   },
   {
    "tool": "grep",
-   "query": "grep -rn -i 'flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/; grep -n '^noncomputable def\\|^def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
-   "results": "no flatness notion for sheaves of modules; ChangeOfRings.lean has only `SheafOfModules.restrictScalars` and `restrictHomEquivOfIsLocallySurjective`, no extension of scalars of complexes",
-   "date": "2026-10-09",
-   "verdict": "no match"
+   "query": "extendScalars|restrictScalars",
+   "results": "Hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits concern individual ring modules or scalar-restriction ingredients, not K-flat complexes of sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules extension of coefficients preserves homotopically flat cochain complexes",
+   "results": "Hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CochainComplex.IsKProjective, CochainComplex.cm5b.I, CochainComplex.cm5b, CategoryTheory.Sheaf.cohomologyPresheaf, CochainComplex.IsKInjective, CochainComplex.cm5b.I_X",
+   "date": "2026-10-14",
+   "verdict": "no match: sheaf cohomology, K-projectivity, K-injectivity and factorization declarations do not assert coefficient-change preservation of K-flat complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "IsKFlat|kFlat|KFlat",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: zero hits"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +185,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-pur-kflat-change-of-rings",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Wrote the exact conservative restriction argument, explicit inverse balanced tensor maps, flatness test, total-complex differential comparison, and K-flatness test. Reused existing definition and bilinear-extension nodes; no new nodes. Read Tags 03DA, 05V4, 06YN and 0G7E; no project attachment or Mathlib match.",
+  "blueprint": "def-weil-derived-pullback-tensor-hom: integral-level ambient K-flat resolutions and compatible finite coefficient reductions; coefficient-change input through def-pur-integral-derived-operations.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic bilinear extension through module sheafification constructs the inverse tensor maps in step 2; the ambient six-operations unit has no such general sheafification theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-module-sheafification-bilinear-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-8ebfc4a71",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-8ebfc4a71 (reviewer sub-agent of L); spot-checked: The statement and mathematics pass source and edge-case checks. Step 3 omitted all dependencies for restriction exactness and the tensor comparison; step 5 listed only the K-flat definition despite using restriction, totalization, and sheafification facts. Corrected DAG JSON is in fixes/dag/nodes/sec-smooth-purity/lem-pur-kflat-change-of-rings.json, and review.md records the full checks.; 1 file(s) fixed by the reviewer"
+ }
 }
