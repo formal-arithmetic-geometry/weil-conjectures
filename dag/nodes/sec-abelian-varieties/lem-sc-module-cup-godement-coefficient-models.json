@@ -1,0 +1,144 @@
+{
+ "id": "lem-sc-module-cup-godement-coefficient-models",
+ "kind": "statement",
+ "title": "Compatible cosimplicial Godement models for coefficient morphisms",
+ "statement": "Let X be a scheme and phi:F to F1 and psi:G to G1 be morphisms of structure-module sheaves. There exist six augmented cosimplicial Godement models [def-sc-module-cup-godement-model] for F,G,F tensor G,F1,G1,F1 tensor G1, together with pointwise tensor cosimplicial pairings on the two triples. Their zero-degree pairings send the tensor of the two augmented sections to the augmented tensor section. There are cosimplicial coefficient maps f,g,k between the two triples. The alternating coface maps extended by zero commute with augmentations over phi,psi,phi tensor psi. In every cosimplicial degree the pointwise pairings commute with f,g,k. No exactness, flasqueness or tensor total-complex map is asserted.",
+ "source": {
+  "document": "https://arxiv.org/abs/1004.1491",
+  "place": "§1.1.4, printed pp. 15--16, canonical cosimplicial Godement pairing; Stacks Tag 0FKR, Lemma 0FKS and its functorial construction."
+ },
+ "stmt_deps": [
+  "def-sc-module-cup-godement-model",
+  "lem-sc-module-cup-godement-cosimplicial-input",
+  "lem-sc-module-cup-cosimplicial-aw-natural"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the six concrete augmented models with their specified codegeneracies. For a coefficient map q define T^0(q)=q and T^(n+1)(q)=T(T^n(q)). Reuse the existing proved private map_comp, unit_natural and multiply_natural helpers of ModuleCupGodementRelations through a proof-only import all. Their product-projection and stalk-evaluation proofs establish functoriality of T and naturality of its unit and multiplication. Induct on the insertion position and degree to prove that the iterated maps commute with every insertion and collapse. Transport by the model term equalities. The coface/codegeneracy generation theorem for the simplex category supplies cosimplicial maps. The degree-zero model augmentation identity and unit naturality prove the three augmentation squares; maps from a single complex are determined in degree zero.",
+   "uses": [
+    "lem-sc-module-cup-godement-model-pairing-models-exist",
+    "def-sc-module-cup-godement-model",
+    "def-sc-module-cup-godement-codegeneracies"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain one natural beta and a recursively generated pairing for F,G, and generate the second pairing for F1,G1 from that same beta. Obtain collapse compatibility from the canonical recurrence. Transport these pairings through the six model equalities. Their insertion and collapse identities, together with generation of the simplex category, make two cosimplicial tensor morphisms. The insertion identity at degree zero and the augmentation identities give the two section formulas.",
+   "uses": [
+    "new-module-cup-godement-iterate-pairings-canonical-exists",
+    "new-module-cup-godement-iterate-pairings-from-beta",
+    "new-module-cup-godement-iterate-pairings-canonical-collapse"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on n for p_n followed by T^n(phi tensor psi) equals tensorHom(T^n(phi),T^n(psi)) followed by p1_n. The base uses p0=p10=identity. For the successor expand both recurrences, use beta naturality, functoriality of T and the induction hypothesis. Conjugate this identity by the model term identifications to give the required degreewise coefficient square.",
+   "uses": [
+    "new-module-cup-godement-iterate-pairings-canonical-exists"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-cup-godement-model-pairing-models-exist",
+  "def-sc-module-cup-godement-model",
+  "def-sc-module-cup-godement-codegeneracies",
+  "new-module-cup-godement-iterate-pairings-canonical-exists",
+  "new-module-cup-godement-iterate-pairings-from-beta",
+  "new-module-cup-godement-iterate-pairings-canonical-collapse"
+ ],
+ "proof_origin": {
+  "by": "A3 stage-3 worker; explicit Lean construction",
+  "document": "https://arxiv.org/abs/1004.1491",
+  "place": "§1.1.4, pp. 15--16; Stacks Tag 0FKR, functorial Godement construction",
+  "date": "2026-10-14",
+  "group": "A3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Functorial Godement resolution natural Alexander Whitney coefficient morphisms",
+   "results": "8 hits: CategoryTheory.Idempotents.DoldKan.Γ_map_app, AlgebraicTopology.DoldKan.natTransPInfty_f, AlgebraicTopology.DoldKan.Γ₀.map, AlgebraicTopology.DoldKan.Γ₂N₁.natTrans_app_f_app, AlgebraicTopology.DoldKan.N₁_map_f, AlgebraicTopology.DoldKan.Γ₀_map_app, AlgebraicTopology.DoldKan.Γ₀.map_app, AlgebraicTopology.DoldKan.natTransPInfty",
+   "date": "2026-10-14",
+   "available": true,
+   "verdict": "No exact natural Godement coefficient/Alexander--Whitney theorem; use explicit constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.tensorHom",
+   "results": "1 hits: HomologicalComplex.tensorHom",
+   "date": "2026-10-14",
+   "available": true,
+   "verdict": "No exact natural Godement coefficient/Alexander--Whitney theorem; use explicit constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|godement|awComponent",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "available": true,
+   "verdict": "No exact natural Godement coefficient/Alexander--Whitney theorem; use explicit constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Alexander Whitney cochain map natural in morphisms of cosimplicial modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupGodementCoefficientComplexes",
+  "date": "2026-10-14",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Coefficient naturality in the Godement cup-product construction, steps 1 and 3 of lem-sc-module-cup-godement-coefficient-complexes",
+   "via": [
+    "lem-sc-module-cup-godement-coefficient-complexes",
+    "lem-sc-module-cup-coefficient-resolution-maps",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupGodementCoefficientModels",
+  "file": "lean/Sheaf/Paper/ModuleCupGodementCoefficientModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_godement_coefficient_models",
+  "statement": "theorem moduleCup_godement_coefficient_models (X : Scheme.{u})\n    (F G F₁ G₁ : X.Modules) (φ : F ⟶ F₁) (ψ : G ⟶ G₁) :\n    ∃ (A B C A₁ B₁ C₁ : CosimplicialObject X.Modules)\n      (a : (CochainComplex.singleFunctor X.Modules 0).obj F ⟶\n        moduleCup_cosimplicialComplex X A)\n      (b : (CochainComplex.singleFunctor X.Modules 0).obj G ⟶\n        moduleCup_cosimplicialComplex X B)\n      (c : (CochainComplex.singleFunctor X.Modules 0).obj (F ⊗ G) ⟶\n        moduleCup_cosimplicialComplex X C)\n      (a₁ : (CochainComplex.singleFunctor X.Modules 0).obj F₁ ⟶\n        moduleCup_cosimplicialComplex X A₁)\n      (b₁ : (CochainComplex.singleFunctor X.Modules 0).obj G₁ ⟶\n        moduleCup_cosimplicialComplex X B₁)\n      (c₁ : (CochainComplex.singleFunctor X.Modules 0).obj (F₁ ⊗ G₁) ⟶\n        moduleCup_cosimplicialComplex X C₁)\n      (μ : moduleCup_cosimplicialTensor X A B ⟶ C)\n      (μ₁ : moduleCup_cosimplicialTensor X A₁ B₁ ⟶ C₁)\n      (f : A ⟶ A₁) (g : B ⟶ B₁) (k : C ⟶ C₁),\n      ModuleCupGodementModel X F A a ∧ ModuleCupGodementModel X G B b ∧\n      ModuleCupGodementModel X (F ⊗ G) C c ∧\n      ModuleCupGodementModel X F₁ A₁ a₁ ∧ ModuleCupGodementModel X G₁ B₁ b₁ ∧\n      ModuleCupGodementModel X (F₁ ⊗ G₁) C₁ c₁ ∧\n      (∀ (V : X.Opens)\n        (x : Γ(((CochainComplex.singleFunctor X.Modules 0).obj F).X 0, V))\n        (y : Γ(((CochainComplex.singleFunctor X.Modules 0).obj G).X 0, V)),\n        (moduleCup_cosimplicialZeroPair X A B C μ).val.app (op V)\n          (tmulSection ((a.f 0).val.app (op V) x) ((b.f 0).val.app (op V) y)) =\n        (c.f 0).val.app (op V) (tmulSection x y)) ∧\n      (∀ (V : X.Opens)\n        (x : Γ(((CochainComplex.singleFunctor X.Modules 0).obj F₁).X 0, V))\n        (y : Γ(((CochainComplex.singleFunctor X.Modules 0).obj G₁).X 0, V)),\n        (moduleCup_cosimplicialZeroPair X A₁ B₁ C₁ μ₁).val.app (op V)\n          (tmulSection ((a₁.f 0).val.app (op V) x) ((b₁.f 0).val.app (op V) y)) =\n        (c₁.f 0).val.app (op V) (tmulSection x y)) ∧\n      a ≫ moduleCup_cosimplicialMap X f =\n        (CochainComplex.singleFunctor X.Modules 0).map φ ≫ a₁ ∧\n      b ≫ moduleCup_cosimplicialMap X g =\n        (CochainComplex.singleFunctor X.Modules 0).map ψ ≫ b₁ ∧\n      c ≫ moduleCup_cosimplicialMap X k =\n        (CochainComplex.singleFunctor X.Modules 0).map (φ ⊗ₘ ψ) ≫ c₁ ∧\n      ∀ n : SimplexCategory,\n        μ.app n ≫ k.app n = (f.app n ⊗ₘ g.app n) ≫ μ₁.app n",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-c1324",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261014T022540-L-4043749",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-c1324",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261014T022540-L-4043749",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean statements and proofs with their nodes; existing signature unchanged, delivery and sole direct importer compile cleanly, and all delivered declarations use only permitted axioms."
+ }
+}

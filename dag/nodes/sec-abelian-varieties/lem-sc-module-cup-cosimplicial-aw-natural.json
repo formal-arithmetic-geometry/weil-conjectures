@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-module-cup-cosimplicial-aw-natural",
+ "kind": "statement",
+ "title": "Naturality of the explicit Alexander--Whitney map",
+ "statement": "Let X be a scheme with an additive monoidal tensor structure on its module sheaves. Let A,B,C,A1,B1,C1 be cosimplicial module sheaves, with pointwise tensor morphisms mu:A tensor B to C and mu1:A1 tensor B1 to C1, and cosimplicial maps f:A to A1, g:B to B1, k:C to C1. Suppose mu_n followed by k_n equals tensorHom(f_n,g_n) followed by mu1_n in every cosimplicial degree. Extend their alternating coface complexes by zero to integer degrees [lem-sc-module-cup-godement-cosimplicial-input]. There exist two Alexander--Whitney tensor cochain maps t and t1 whose (0,0) summands are the induced zero-degree pairings and such that t followed by the extended cochain map of k equals tensorHom of the extended maps of f and g followed by t1. No exactness, flasqueness, augmentation or Godement-model hypothesis is required.",
+ "source": {
+  "document": "https://arxiv.org/abs/1004.1491",
+  "place": "§1.1.4, printed p. 16: front/back inclusions and formula immediately before (1.1.2)."
+ },
+ "stmt_deps": [
+  "lem-sc-module-cup-godement-cosimplicial-input"
+ ],
+ "proof": [
+  {
+   "text": "Use the explicit front/back summands and their coproduct descent for both pairings. Apply Mathlib HomologicalComplex.mapBifunctor.d_eq, ι_D₁, ι_D₂, d₁_eq and d₂_eq directly in the cochain-map proof, simplify the two signs, and use the signed Leibniz identity. This gives cochain maps with exactly these components; negative-degree summands have a zero factor. No duplicate tensor differential helper is declared.",
+   "uses": [
+    "def-sc-module-cup-aw-components",
+    "lem-sc-module-cup-aw-leibniz"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a nonnegative bidegree, write the extended coefficient maps using extendMap_f. Cancel the extension identifications. Naturality of f and g moves their components across the front and back simplex inclusions. Apply the assumed square for the pointwise pairings. This proves naturality on each tensor summand; the coproduct hom_ext gives equality of cochain maps. The zero-zero summand formula gives both displayed equations.",
+   "uses": [
+    "def-sc-module-cup-aw-components"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cup-aw-components",
+  "lem-sc-module-cup-aw-leibniz"
+ ],
+ "proof_origin": {
+  "by": "A3 stage-3 worker; explicit Lean construction",
+  "document": "https://arxiv.org/abs/1004.1491",
+  "place": "§1.1.4, pp. 15--16; Stacks Tag 0FKR, functorial Godement construction",
+  "date": "2026-10-14",
+  "group": "A3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Functorial Godement resolution natural Alexander Whitney coefficient morphisms",
+   "results": "8 hits: CategoryTheory.Idempotents.DoldKan.Γ_map_app, AlgebraicTopology.DoldKan.natTransPInfty_f, AlgebraicTopology.DoldKan.Γ₀.map, AlgebraicTopology.DoldKan.Γ₂N₁.natTrans_app_f_app, AlgebraicTopology.DoldKan.N₁_map_f, AlgebraicTopology.DoldKan.Γ₀_map_app, AlgebraicTopology.DoldKan.Γ₀.map_app, AlgebraicTopology.DoldKan.natTransPInfty",
+   "date": "2026-10-14",
+   "available": true,
+   "verdict": "No exact natural Godement coefficient/Alexander--Whitney theorem; use explicit constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.tensorHom",
+   "results": "1 hits: HomologicalComplex.tensorHom",
+   "date": "2026-10-14",
+   "available": true,
+   "verdict": "No exact natural Godement coefficient/Alexander--Whitney theorem; use explicit constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|godement|awComponent",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "available": true,
+   "verdict": "No exact natural Godement coefficient/Alexander--Whitney theorem; use explicit constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Alexander Whitney cochain map natural in morphisms of cosimplicial modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupGodementCoefficientComplexes",
+  "date": "2026-10-14",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Coefficient naturality in the Godement cup-product construction, steps 1 and 3 of lem-sc-module-cup-godement-coefficient-complexes",
+   "via": [
+    "lem-sc-module-cup-godement-coefficient-complexes",
+    "lem-sc-module-cup-coefficient-resolution-maps",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupCosimplicialAWNaturality",
+  "file": "lean/Sheaf/Paper/ModuleCupCosimplicialAWNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_cosimplicial_aw_natural",
+  "statement": "theorem moduleCup_cosimplicial_aw_natural (X : Scheme.{u})\n    [MonoidalPreadditive X.Modules]\n    (A B C A₁ B₁ C₁ : CosimplicialObject X.Modules)\n    (μ : moduleCup_cosimplicialTensor X A B ⟶ C)\n    (μ₁ : moduleCup_cosimplicialTensor X A₁ B₁ ⟶ C₁)\n    (f : A ⟶ A₁) (g : B ⟶ B₁) (k : C ⟶ C₁)\n    (hμ : ∀ n : SimplexCategory,\n      μ.app n ≫ k.app n = (f.app n ⊗ₘ g.app n) ≫ μ₁.app n) :\n    ∃ (t : HomologicalComplex.tensorObj (moduleCup_cosimplicialComplex X A)\n        (moduleCup_cosimplicialComplex X B) ⟶ moduleCup_cosimplicialComplex X C)\n      (t₁ : HomologicalComplex.tensorObj (moduleCup_cosimplicialComplex X A₁)\n        (moduleCup_cosimplicialComplex X B₁) ⟶ moduleCup_cosimplicialComplex X C₁),\n      HomologicalComplex.ιTensorObj (moduleCup_cosimplicialComplex X A)\n          (moduleCup_cosimplicialComplex X B) 0 0 0 (by simp) ≫ t.f 0 =\n        moduleCup_cosimplicialZeroPair X A B C μ ∧\n      HomologicalComplex.ιTensorObj (moduleCup_cosimplicialComplex X A₁)\n          (moduleCup_cosimplicialComplex X B₁) 0 0 0 (by simp) ≫ t₁.f 0 =\n        moduleCup_cosimplicialZeroPair X A₁ B₁ C₁ μ₁ ∧\n      t ≫ moduleCup_cosimplicialMap X k =\n        HomologicalComplex.tensorHom (moduleCup_cosimplicialMap X f)\n          (moduleCup_cosimplicialMap X g) ≫ t₁",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-c1324",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261014T022540-L-4043749",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-c1324",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261014T022540-L-4043749",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean statements and proofs with their nodes; existing signature unchanged, delivery and sole direct importer compile cleanly, and all delivered declarations use only permitted axioms."
+ }
+}

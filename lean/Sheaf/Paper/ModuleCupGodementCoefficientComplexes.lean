@@ -5,7 +5,13 @@ Authors: SHEAF group J3
 -/
 module
 
-public import Sheaf.Paper.ModuleCupGodementPairing
+public import Sheaf.Paper.ModuleCupResolutionData
+public import Mathlib.Topology.Sheaves.Flasque
+public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Paper.ModuleCupGodementCoefficientModels
+import Sheaf.Paper.ModuleCupGodementModelQuasiIso
+import all Sheaf.Paper.ModuleCupGodementCosimplicialInput
 
 /-! # Functorial flasque tensor complexes
 
@@ -19,7 +25,7 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
-open AlgebraicGeometry TopologicalSpace
+open AlgebraicGeometry TopologicalSpace AlgebraicTopology Simplicial
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Functorial flasque augmented complexes with a natural tensor chain pairing.
@@ -93,6 +99,44 @@ theorem moduleCup_godement_coefficient_complexes (X : Scheme.{v})
           c ≫ t = (CochainComplex.singleFunctor X.Modules 0).map
             (@id (F ⊗ G ⟶ F₁ ⊗ G₁) (φ ⊗ₘ ψ)) ≫ c₁ ∧
           u ≫ t = HomologicalComplex.tensorHom l r ≫ u₁ := by
-  sorry
+  obtain ⟨A, B, C, A₁, B₁, C₁, a, b, c, a₁, b₁, c₁, μ, μ₁, f, g, k,
+    hA, hB, hC, hA₁, hB₁, hC₁, hμ, hμ₁, ha, hb, hc, hpair⟩ :=
+    moduleCup_godement_coefficient_models X F G F₁ G₁ φ ψ
+  obtain ⟨u, u₁, hu, hu₁, hnat⟩ :=
+    moduleCup_cosimplicial_aw_natural X A B C A₁ B₁ C₁ μ μ₁ f g k hpair
+  have hge (D : CosimplicialObject X.Modules) :
+      (moduleCup_cosimplicialComplex X D).IsStrictlyGE 0 := by
+    unfold moduleCup_cosimplicialComplex
+    infer_instance
+  refine ⟨moduleCup_cosimplicialComplex X A, moduleCup_cosimplicialComplex X B,
+    moduleCup_cosimplicialComplex X C, a, b, c,
+    moduleCup_godement_model_quasiIso X F A a hA,
+    moduleCup_godement_model_quasiIso X G B b hB,
+    moduleCup_godement_model_quasiIso X (F ⊗ G) C c hC,
+    hge A, hge B, hge C, modelFlasque hA, modelFlasque hB, modelFlasque hC,
+    u, ?_, moduleCup_cosimplicialComplex X A₁, moduleCup_cosimplicialComplex X B₁,
+    moduleCup_cosimplicialComplex X C₁, a₁, b₁, c₁,
+    moduleCup_godement_model_quasiIso X F₁ A₁ a₁ hA₁,
+    moduleCup_godement_model_quasiIso X G₁ B₁ b₁ hB₁,
+    moduleCup_godement_model_quasiIso X (F₁ ⊗ G₁) C₁ c₁ hC₁,
+    hge A₁, hge B₁, hge C₁, modelFlasque hA₁, modelFlasque hB₁, modelFlasque hC₁,
+    u₁, ?_, moduleCup_cosimplicialMap X f, moduleCup_cosimplicialMap X g,
+    moduleCup_cosimplicialMap X k, ha, hb, hc, hnat⟩
+  · intro V x y
+    have h := congrArg
+      (fun (q : (moduleCup_cosimplicialComplex X A).X 0 ⊗
+          (moduleCup_cosimplicialComplex X B).X 0 ⟶
+          (moduleCup_cosimplicialComplex X C).X 0) ↦ q.app V
+        (tmulSection ((a.f 0).val.app (op V) x) ((b.f 0).val.app (op V) y))) hu
+    rw [Hom.comp_app, ConcreteCategory.comp_apply] at h
+    exact h.trans (hμ V x y)
+  · intro V x y
+    have h := congrArg
+      (fun (q : (moduleCup_cosimplicialComplex X A₁).X 0 ⊗
+          (moduleCup_cosimplicialComplex X B₁).X 0 ⟶
+          (moduleCup_cosimplicialComplex X C₁).X 0) ↦ q.app V
+        (tmulSection ((a₁.f 0).val.app (op V) x) ((b₁.f 0).val.app (op V) y))) hu₁
+    rw [Hom.comp_app, ConcreteCategory.comp_apply] at h
+    exact h.trans (hμ₁ V x y)
 
 end AlgebraicGeometry.Scheme.Modules

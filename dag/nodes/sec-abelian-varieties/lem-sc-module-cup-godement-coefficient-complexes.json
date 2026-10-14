@@ -12,44 +12,42 @@
  ],
  "proof": [
   {
-   "text": "Construct the six concrete Godement cosimplicial models. In degree n apply the (n+1)-fold stalk-product functor to phi, psi and phi tensor psi. Naturality of the germ unit and stalk evaluation makes these maps commute with the specified cofaces and codegeneracies and with the degree-zero augmentations. Take alternating coface complexes and extend by zero to integer degrees. This functorial action is the extra construction not supplied by the existential one-pair model statements.",
+   "text": "Obtain the six concrete augmented cosimplicial models, coefficient transformations, pointwise pairings and their naturality from the compatible-model construction.",
    "uses": [
-    "def-sc-module-cup-godement-model",
-    "lem-sc-module-cup-godement-model-pairing-models-exist"
+    "lem-sc-module-cup-godement-coefficient-models"
    ],
    "elementary": false
   },
   {
-   "text": "The augmented Godement stalk contraction proves all six augmentations are quasi-isomorphisms. Each nonnegative term is a product-of-stalks sheaf and is flasque; each negative term is zero. The six complexes are strictly nonnegative, and all their terms are flasque.",
+   "text": "Apply the stalk-contraction quasi-isomorphism theorem to all six model augmentations. For nonnegative degrees use the extension term isomorphism followed by the model equality to identify each term with a product of stalk skyscrapers, hence flasque. Negative terms are zero, so their restrictions are isomorphisms and they are flasque. Extension by zero supplies strict nonnegativity. The Lean proof reuses the existing private modelFlasque helper from ModuleCupGodementCosimplicialInput via a proof-only import all; its term identification and zero-term proof implement precisely this reduction.",
    "uses": [
+    "def-sc-module-cup-godement-model",
     "lem-sc-module-cup-godement-model-quasi-iso",
     "lem-sc-module-cup-godement-object-flasque"
    ],
    "elementary": false
   },
   {
-   "text": "Use coordinatewise stalk tensor pairings on the two triples of models. Their naturality in both coefficients gives a commuting square with the three cosimplicial coefficient maps. Apply the front/back Alexander--Whitney formula to the pairings. The formula commutes with coefficient maps because all its face maps do, giving u composed with t equals tensorHom(l,r) composed with u1. The zero-degree components agree with tensoring the augmentation sections, yielding both displayed formulas.",
+   "text": "Apply natural Alexander--Whitney to both compatible pointwise pairings. Evaluate its two zero-zero morphism equations on augmented tensor sections and use the section formulas from the models. Its naturality equation is exactly the required coefficient square for tensor cochain maps. Package all six complexes and augmentations.",
    "uses": [
-    "lem-sc-module-cup-godement-model-pairing",
-    "lem-sc-module-cup-cosimplicial-aw"
+    "lem-sc-module-cup-cosimplicial-aw-natural"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sc-module-cup-godement-coefficient-models",
   "def-sc-module-cup-godement-model",
-  "lem-sc-module-cup-godement-model-pairing-models-exist",
   "lem-sc-module-cup-godement-model-quasi-iso",
   "lem-sc-module-cup-godement-object-flasque",
-  "lem-sc-module-cup-godement-model-pairing",
-  "lem-sc-module-cup-cosimplicial-aw"
+  "lem-sc-module-cup-cosimplicial-aw-natural"
  ],
  "proof_origin": {
-  "by": "J3 stage-3 worker",
-  "document": "https://stacks.math.columbia.edu/tag/0FKR",
-  "place": "Functorial Godement construction portion of the coefficient-resolution argument",
+  "by": "A3 stage-3 worker; explicit Lean construction",
+  "document": "https://arxiv.org/abs/1004.1491",
+  "place": "§1.1.4, pp. 15--16; Stacks Tag 0FKR, functorial Godement construction",
   "date": "2026-10-14",
-  "group": "J3"
+  "group": "A3"
  },
  "mathlib_searches": [
   {
@@ -133,13 +131,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J3",
+  "reviewer": "X-c1324",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261013T181105-L-2602131",
+  "landing": "20261014T022540-L-4043749",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched all three Lean statements and proofs with their nodes; existing signature unchanged, delivery and sole direct importer compile cleanly, and all delivered declarations use only permitted axioms."
  }
 }
