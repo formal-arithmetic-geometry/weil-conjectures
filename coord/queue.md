@@ -1,6 +1,6 @@
 # Work queue
 
-98 items; claim with `tools/claim.py next <group> [--stage N]`.
+97 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (98)
+## Stage 3: modules to prove (97)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -59,14 +59,13 @@
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFormula` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation` | 22 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitRepresentative` | 23 | 1 | proof |
-| `Sheaf.Paper.CechCupPullbackCompat` | 23 | 1 | proof |
+| `Sheaf.Paper.CechCupPullbackCompat` | 23 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.LocalMapPairOverlapBaseChange` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationHomology` | 24 | 1 | proof |
 | `Sheaf.Paper.CechCupResolutionRepresentatives` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OverlapConjugateRestriction` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCompatibility` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux` | 25 | 2 | proof |
-| `Sheaf.Paper.ModuleCupGodementCoefficientComplexes` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackCompositionMateUnit` | 26 | 1 | proof |
 | `Sheaf.Paper.CechRefinementResolutionBeta` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OrdinaryEvaluationComponentOverTransport` | 27 | 1 | proof |
