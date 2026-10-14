@@ -4,10 +4,10 @@
   "is": null,
   "from": {
    "node": "def-weil-derived-limit",
-   "place": "a pointer of its statement (well-definedness of the definition)",
+   "place": "The Roos triangle in the definition of def-weil-derived-limit: well-definedness with respect to a levelwise morphism of towers; Stacks 0H9J supplies its noncanonical morphism of triangles.",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A morphism of inverse systems induces a (non-unique) morphism of derived limits",
@@ -23,20 +23,94 @@
   "def-weil-tower-transition-endomorphism",
   "def-weil-derived-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P=\\prod_nK_n$, $P\\prime=\\prod_nK\\prime_n$ and $a=\\prod_n\\varphi_n:P\\to P\\prime$. By the definition of the product morphism, $\\mathrm{pr}\\prime_n\\circ a=\\varphi_n\\circ\\mathrm{pr}_n$. Consequently $\\mathrm{pr}\\prime_n\\circ s\\prime\\circ a=f\\prime_n\\circ\\varphi_{n+1}\\circ\\mathrm{pr}_{n+1}=\\varphi_n\\circ f_n\\circ\\mathrm{pr}_{n+1}=\\mathrm{pr}\\prime_n\\circ a\\circ s$, using exactly the compatibility equation for a morphism of inverse systems. Uniqueness in the product universal property gives $s\\prime\\circ a=a\\circ s$. Subtracting from $a$ in the additive category gives $(1-s\\prime)\\circ a=a\\circ(1-s)$. This also follows directly from the compatibility clause of def-weil-tower-transition-endomorphism.",
+   "uses": [
+    "def-weil-category-product",
+    "def-weil-inverse-system",
+    "def-weil-tower-transition-endomorphism",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0H9J, remark-functoriality-derived-limit, with m(n)=n; Tag 0145, definition-triangulated-category, TR2 and TR3"
+   }
+  },
+  {
+   "text": "Rotate each given distinguished triangle once using TR2 in def-weil-triangulated-category, obtaining $P\\xrightarrow{1-s}P\\xrightarrow{\\delta}K[1]\\xrightarrow{-p[1]}P[1]$ and $P\\prime\\xrightarrow{1-s\\prime}P\\prime\\xrightarrow{\\delta\\prime}K\\prime[1]\\xrightarrow{-p\\prime[1]}P\\prime[1]$. The square on their first arrows, with vertical arrows $a,a$, commutes by step 1. Apply TR3, as stated in that same definition, to get $c:K[1]\\to K\\prime[1]$ with $c\\circ\\delta=\\delta\\prime\\circ a$ and $a[1]\\circ(-p[1])=(-p\\prime[1])\\circ c$. These are direct applications of the two defining axioms, rather than a separate triangle-completion lemma.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0H9J, remark-functoriality-derived-limit, with m(n)=n; Tag 0145, definition-triangulated-category, TR2 and TR3"
+   }
+  },
+  {
+   "text": "Since $[1]$ is an additive autoequivalence in def-weil-triangulated-category, it is full and faithful: choose $\\varphi:K\\to K\\prime$ with $\\varphi[1]=c$. Cancel the minus signs in the last equation of step 2 to get $a[1]\\circ p[1]=p\\prime[1]\\circ\\varphi[1]$. Faithfulness, together with preservation of composition by $[1]$, yields $a\\circ p=p\\prime\\circ\\varphi$. The other equation of step 2 is $\\varphi[1]\\circ\\delta=\\delta\\prime\\circ a$. Together with the middle square from step 1 these are precisely the three squares defining the required morphism of triangles. TR3 supplies an existence assertion, with no uniqueness condition; the final sentence of Tag 0H9J warns that the resulting map need not be unique, so this construction does not specify a canonical map or assert functorial choices.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0H9J, remark-functoriality-derived-limit, with m(n)=n; Tag 0145, definition-triangulated-category, TR2 and TR3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-category-product",
+  "def-weil-inverse-system",
+  "def-weil-tower-transition-endomorphism",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0H9J, remark-functoriality-derived-limit, with m(n)=n; Tag 0145, definition-triangulated-category, TR2 and TR3"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "grep -n 'lemma complete_distinguished_triangle_morphism\\|lemma exists_iso_of_arrow_iso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean; grep -rln -i 'homotopy limit\\|derived limit\\|holim' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory",
-   "results": "Pretriangulated.lean:189 `complete_distinguished_triangle_morphism₁` (TR3 completing a morphism on the first object from the second and third: exactly the tool of the proof); no derived/homotopy limit in Mathlib",
-   "date": "2026-10-09",
-   "verdict": "no match (the statement is about derived limits, absent from Mathlib); the proof is one application of `complete_distinguished_triangle_morphism₁` plus the commutation of [def-weil-tower-transition-endomorphism]"
+   "query": "homotopy.?limit|derived.?limit|complete_distinguished_triangle_morphism",
+   "results": "Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean; read Pretriangulated.lean:189-201. The completion lemma requires the commutative square, which step 1 establishes from tower compatibility.",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the tower statement; generic triangle completion is available"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commutative square on the second arrows of distinguished triangles extends to a morphism of triangles",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete a commutative square between the middle arrows of two distinguished triangles to a morphism on the first objects",
+   "results": "CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism₂, CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism₁, CategoryTheory.Pretriangulated.completeDistinguishedTriangleMorphism, CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism, CategoryTheory.Pretriangulated.Triangle.homMk, HomotopyCategory.Pretriangulated.complete_distinguished_triangle_morphism, CategoryTheory.Pretriangulated.completeDistinguishedTriangleMorphism_hom₁, CategoryTheory.Pretriangulated.TriangleMorphism; read Pretriangulated.lean:189-201. The completion lemma requires the commutative square, which step 1 establishes from tower compatibility.",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the tower statement; generic triangle completion is available"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"complete_distinguished_triangle_morphism\"",
+   "results": "CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism, CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism₁, CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism₂, HomotopyCategory.Pretriangulated.complete_distinguished_triangle_morphism, CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism, CategoryTheory.Pretriangulated.Opposite.complete_distinguished_triangle_morphism; read Pretriangulated.lean:189-201. The completion lemma requires the commutative square, which step 1 establishes from tower compatibility.",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the tower statement; generic triangle completion is available"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of inverse systems in a triangulated category induces a morphism between their derived limits by completing the Roos triangles",
+   "results": "HomologicalComplex.coneOfHasLimitEval_pt_d, CategoryTheory.Functor.homologySequenceδ, CategoryTheory.Functor.homologySequence_comp, CategoryTheory.Functor.comp_homologySequenceδ, CategoryTheory.Triangulated.TStructure.truncGEδLT, HomotopyCategory.Pretriangulated.complete_distinguished_triangle_morphism, HomologicalComplex.coneOfHasLimitEval_π_app_f, CategoryTheory.Pretriangulated.preadditiveYoneda_homologySequenceδ_apply; read Pretriangulated.lean:189-201. The completion lemma requires the commutative square, which step 1 establishes from tower compatibility.",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the tower statement; generic triangle completion is available"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +133,21 @@
   "unreachable"
  ],
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-derived-limit-morphism",
+  "worker": "stage1",
+  "summary": "Read Stacks 0H9J and 0145 and the existing definition statements. Wrote the componentwise product-square calculation, TR2/TR3 on the rotated triangles, and the explicit sign cancellation and full-faithful shift argument. No statement change, new node, attachment, or change to the unit route. Generic completion in Mathlib is not the full tower lemma: its commutation hypothesis is derived in step 1.",
+  "blueprint": "Realizes the noncanonical morphism-of-Roos-triangles well-definedness pointer of def-weil-derived-limit; the blueprint defines the triangle, while Stacks 0H9J supplies the argument at m(n)=n.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-0e96b42b8",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-0e96b42b8 (reviewer sub-agent of L); spot-checked: Read the item and report in full; no new nodes. Checked Stacks 0H9J, 08TC and 0145, all cited definitions, product compatibility, rotated TR3 signs, and both fixed connecting-map equations. Edge cases, reuse candidates, dependencies and unit route pass. Checked archived target categories and base-change arrows without accepting seeded comparisons. No repairs; findings recorded in review.md."
+ }
 }
