@@ -14,40 +14,52 @@
  ],
  "proof": [
   {
-   "text": "Take the inverse-image algebra sheaf j^{-1}B and extend its scalars to O_Z using the sheafified tensor product of commutative algebras. Push this algebra sheaf forward, using j^sharp for its O_X structure map; call it C. The coefficient map gives an algebra morphism p:B→C.",
+   "text": "Form the pushout D of r:j⁻¹O_X→O_Z and s:j⁻¹O_X→j⁻¹B in commutative ring sheaves. Let b and t be its two inclusions. Define C by pushing D forward with structure morphism j-sharp followed by j_*b, and p by the ring inverse-image unit followed by j_*t. Naturality of the unit, the pushout equation, and the ring adjunction identity show p is an algebra morphism. All data are constructed from the categorical pushout, not chosen from a mere existence theorem.",
    "uses": [
     "def-weil-pbc-comm-algebra-sheaf",
-    "def-pur-sheaf-tensor-product"
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any B.right-module G, inverse image commutes with restriction along B.hom: both underlying abelian sheaves are the same and their scalar actions agree by inverseImageOperation_ext, using restriction compatibility, inverse-image unit semilinearity and unit naturality. The identity section maps give inverseRestrictIso. Extending scalars carries this isomorphism to a change-of-rings isomorphism and its sheafification-unit formula follows from unit naturality. The scalar-action helper explicitly binds the arbitrary algebra B and uses B.right and B.hom in its signature; unlike the private affine helper, it does not specialize B to the structure algebra f_* O_U.",
+   "uses": [
+    "lem-pc-inverse-image-operation-ext"
    ],
    "elementary": false
   },
   {
-   "text": "Forgetting the algebra structure in the inverse-image and scalar-extension construction gives the module inverse image and the sheafified tensor product defining tensorPullback. Both use the same sectionwise tensors, restrictions and scalar actions. Identify the resulting underlying modules by an isomorphism e_0. Under this identification U(p) is the canonical adjunction unit followed by e_0.hom.",
+   "text": "Apply sheafTensorPushoutCancellation to the constructed pushout and to the inverse image of the regular B.right-module. Apply inverseImageRegularExtension to identify extension along t of that inverse-image regular module with the regular D-module. Compose the inverse-restriction, pushout and regular-extension isomorphisms; push it forward. The resulting module is definitionally U(C). On sections the canonical tensor unit is θ(1 tensor η_Ab(x)); inverse restriction fixes the abelian representative, the pushout comparison sends it to θ_t(1 tensor η_Ab(x)), and regular extension sends it to t(η_B(x)). This is exactly U(p).",
    "uses": [
+    "lem-weil-pbc-sheaf-tensor-pushout-cancellation",
+    "stage3-inverse-image-regular-extension",
     "lem-pc-module-pullback-adjunction",
     "def-pur-sheaf-tensor-product"
    ],
    "elementary": false
   },
   {
-   "text": "For the supplied adjunction a, compare it to the canonical adjunction a_0 using leftAdjointUniq. Compose pushforward of that isomorphism, evaluated at U(B), with e_0 to obtain e. The unit_leftAdjointUniq_hom_app identity gives U(p)=a.unit.app(U(B));e.hom. This comparison need not preserve algebra multiplication, which is why e is only required to be a module isomorphism. Zero algebras and empty schemes require no exception.",
+   "text": "For the supplied adjunction a, let a₀ be the chosen canonical tensor pullback adjunction. Compose pushforward of leftAdjointUniq a a₀ evaluated on U(B) with the canonical comparison. Mathlib Adjunction.unit_leftAdjointUniq_hom_app and associativity give the asserted equality. All section and tensor calculations apply unchanged for zero rings and empty opens.",
    "uses": [
     "lem-pc-module-pullback-adjunction"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pur-sheaf-tensor-product",
   "def-weil-pbc-comm-algebra-sheaf",
-  "lem-pc-module-pullback-adjunction"
+  "lem-pc-inverse-image-operation-ext",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-sheaf-tensor-pushout-cancellation",
+  "stage3-inverse-image-regular-extension"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "Q3",
+  "group": "S1",
   "date": "2026-10-14",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Tags 0095 and 0096, inverse image followed by extension of scalars; Tag 09MS, the coefficient quotient on the direct-sum algebra"
+  "place": "Tags 008X, 0095 and 0096; sheaf tensor pushout comparison (01SB/008A) and inverse-image regular extension (008X/008Y/008A)"
  },
  "mathlib_searches": [
   {
@@ -129,11 +141,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q3",
+  "reviewer": "X-e4e7b",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261014T052440-L-1914364",
+  "landing": "20261014T071234-L-3199546",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged Lean signature to the node, the proof to its recorded dependencies, and the explicit-binder repair to the earlier return; compilation is clean and all six declarations use only permitted axioms."
  }
 }
