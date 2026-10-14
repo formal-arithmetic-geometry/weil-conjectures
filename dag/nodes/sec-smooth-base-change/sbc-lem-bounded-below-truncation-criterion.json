@@ -3,38 +3,142 @@
  "blueprint": {
   "is": "sbc-lem-bounded-below-truncation-criterion",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Bounded-below truncation criterion",
- "statement": "Let $K\\in D^+_{\\mathcal P\\text{-tor}}(T_{\\Et})$. For fixed $n$, only\n$H^q(K)$ with $q\\leq n$ can contribute to $H^n(Rg_*K)$. Hence\n\n$$\nH^n(Rg_*\\tau_{\\leq n}K)\\xrightarrow{\\ \\sim\\ }H^n(Rg_*K),\n$$\n\nand the analogous statement holds after pullback and for $h_*$.",
+ "statement": "Let $\\mathcal P$ be a set of primes and let $g:T\\to S$ and $f:X\\to S$ be morphisms of schemes. Put $Y=T\\times_S X$, with projections $e:Y\\to T$ and $h:Y\\to X$, giving the cartesian square of [def-weil-pbc-cartesian-square]. Let $K\\in D^+_{\\mathcal P\\text{-tor}}(T_{\\Et})$ [sbc-def-derived-categories-with-allowable-torsion], and let $n\\in\\mathbf Z$. Use canonical truncations [def-sbc-standard-tstructure-derived-category], derived direct images [def-weil-pbc-direct-image], and derived inverse images [def-weil-pbc-derived-inverse-image]. The canonical inclusion $\\tau_{\\le n}K\\to K$ induces isomorphisms\n$$H^n(Rg_*\\tau_{\\le n}K)\\xrightarrow{\\sim}H^n(Rg_*K),$$\n$$H^n(f^{-1}Rg_*\\tau_{\\le n}K)\\xrightarrow{\\sim}H^n(f^{-1}Rg_*K),$$\nand\n$$H^n(Rh_*e^{-1}\\tau_{\\le n}K)\\xrightarrow{\\sim}H^n(Rh_*e^{-1}K).$$\nIn the truncation spectral sequence for $Rg_*K$, and its pullback and $Rh_*e^{-1}K$ versions, only cohomology sheaves $H^q(K)$ with $q\\le n$ can contribute in total degree $n$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-bounded-below-truncation-criterion.md",
   "place": "node sbc-lem-bounded-below-truncation-criterion, order 1439"
  },
  "stmt_deps": [
-  "sbc-def-derived-categories-with-allowable-torsion"
+  "def-weil-pbc-cartesian-square",
+  "sbc-def-derived-categories-with-allowable-torsion",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-derived-inverse-image"
  ],
  "proof": [
   {
-   "text": "The hypercohomology spectral sequence of\n[def-weil-pbc-hypercohomology-filtrations] has\n$E_2^{p,q}=R^pg_*H^q(K)$; for $p+q=n$ only $q\\leq n$ contributes since\n$g_*$ is $t$-left exact, so\n$H^n(Rg_*\\tau_{\\leq n}K)\\cong H^n(Rg_*K)$; pullback and $h$ are handled\nidentically.",
+   "text": "Choose $a$ with $H^q(K)=0$ for $q<a$ and a bounded below representative $K^\\bullet$ vanishing below $a$, using [def-sbc-standard-tstructure-derived-category]. Read [def-weil-pbc-hypercohomology-filtrations] with its $(f,f',g,g')$ renamed to our $(g,h,f,e)$. It supplies the three truncation spectral sequences with pages $R^pg_*H^q(K)$, $f^{-1}R^pg_*H^q(K)$, and $R^ph_*e^{-1}H^q(K)$. Their nonzero terms in total degree $n$ satisfy $a\\le q\\le n$: $p\\ge0$ and $p+q=n$ force $q\\le n$. This proves the contribution assertion, including $n<a$, when there are no such terms.",
    "uses": [
+    "def-sbc-standard-tstructure-derived-category",
     "def-weil-pbc-hypercohomology-filtrations"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-bounded-below-truncation-criterion.md",
+    "place": "## Proof; spectral-sequence and pullback argument (made explicit)"
+   }
+  },
+  {
+   "text": "Apply [thm-sp-truncation-e2] to $v=g_*$ and $K^\\bullet$. The hypotheses and identifications are supplied by [def-sp-etale-dictionary]: the sheaf categories are Grothendieck abelian, $g_*$ is left exact additive, and $Rv=Rg_*$ is computed by K-injective resolutions. Part 5 identifies the canonical map $c_n:H^n(Rg_*\\tau_{\\le n}K)\\to H^n(Rg_*K)$ induced by the inclusion as an isomorphism. This is the first claimed map; convergence and the finite diagonal alone would not justify its injectivity without this canonical-map assertion.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "def-sp-etale-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-bounded-below-truncation-criterion.md",
+    "place": "## Proof; spectral-sequence and pullback argument (made explicit)"
+   }
+  },
+  {
+   "text": "By [prop-weil-pbc-inverse-image-exact], $f^{-1}$ is exact. By [lem-weil-pbc-exact-functor-bounded-below], the natural isomorphisms $H^n(f^{-1}L)\\cong f^{-1}H^n(L)$ identify the second claimed map with $f^{-1}(c_n)$. Every functor takes an inverse to an inverse, so $f^{-1}(c_n)$ is an isomorphism.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-bounded-below-truncation-criterion.md",
+    "place": "## Proof; spectral-sequence and pullback argument (made explicit)"
+   }
+  },
+  {
+   "text": "The functor $e^{-1}$ is exact by [prop-weil-pbc-inverse-image-exact], and it is applied termwise by [def-weil-pbc-derived-inverse-image]. Thus $e^{-1}K^\\bullet$ vanishes below $a$. Exactness gives $e^{-1}\\ker(d^n)=\\ker(e^{-1}d^n)$, so the termwise formula for canonical truncation in [def-sbc-standard-tstructure-derived-category] identifies $e^{-1}\\tau_{\\le n}K^\\bullet$ with $\\tau_{\\le n}(e^{-1}K^\\bullet)$, including their inclusions into $e^{-1}K^\\bullet$. Apply part 5 of [thm-sp-truncation-e2] to this complex and $v=h_*$, with the Grothendieck, left exactness and derived-functor identifications of [def-sp-etale-dictionary]. Its canonical map $c_n$ is exactly the third claimed map under that identification, hence is invertible. This application needs only bounded below abelian sheaves, not a separate torsion-preservation assertion.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-exact",
+    "def-weil-pbc-derived-inverse-image",
+    "def-sbc-standard-tstructure-derived-category",
+    "thm-sp-truncation-e2",
+    "def-sp-etale-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-bounded-below-truncation-criterion.md",
+    "place": "## Proof; spectral-sequence and pullback argument (made explicit)"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-hypercohomology-filtrations"
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-pbc-hypercohomology-filtrations",
+  "thm-sp-truncation-e2",
+  "def-sp-etale-dictionary",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "def-weil-pbc-derived-inverse-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-bounded-below-truncation-criterion.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "truncLE.*rightDerived|rightDerived.*truncLE|homologyMap.*trunc",
+   "results": "Hits: Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/Embedding/TruncGEHomology.lean, Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean, Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean, Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean, Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean, Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: ingredients only, not derived truncation comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of right derived functor in degree n is unchanged by truncating a bounded below complex above n",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a left exact functor on abelian categories, degree n cohomology of its bounded below right derived functor depends only on the canonical truncation at n",
+   "results": "Hits: CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, DerivedCategory.instIsHomologicalHomologyFunctor, CategoryTheory.Functor.mapDerivedCategoryFactors, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-14",
+   "verdict": "no match: ingredients only, not derived truncation comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctor\", \"trunc\"",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match: ingredients only, not derived truncation comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "isGE|IsGE|trunc|homology",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match: ingredients only, not derived truncation comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right derived functor is left t-exact and the map from the upper truncation of a complex induces an isomorphism on cohomology in all degrees below the cutoff",
+   "results": "Hits: DerivedCategory.exists_iso_Q_obj_of_isGE, CochainComplex.quasiIso_πTruncGE_iff, CochainComplex.instQuasiIsoIntπTruncGEOfIsGE, CochainComplex.instQuasiIsoIntιTruncLEOfIsLE, CochainComplex.quasiIso_ιTruncLE_iff, DerivedCategory.exists_iso_Q_obj_of_isLE, CochainComplex.quasiIso_truncGEMap_iff, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-14",
+   "verdict": "no match: ingredients only, not derived truncation comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorPlus\"",
+   "results": "Hits: CategoryTheory.Functor.rightDerivedFunctorPlus, CategoryTheory.Functor.instCommShiftPlusRightDerivedFunctorPlusInt, CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnithQuasiIso, CategoryTheory.NatTrans.instCommShiftPlusRightDerivedFunctorPlusInt, CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnitQuasiIso, CategoryTheory.NatTrans.rightDerivedFunctorPlus, CategoryTheory.Functor.rightDerivedFunctorPlusUnith, CategoryTheory.NatTrans.rightDerivedFunctorPlus_id",
+   "date": "2026-10-14",
+   "verdict": "no match: ingredients only, not derived truncation comparison"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +164,54 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-rem-rest"
+ "unit": "sk-rem-rest",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "sbc-lem-bounded-below-truncation-criterion",
+  "worker": "stage1",
+  "summary": "Bound the previously free morphisms by an explicit cartesian square; expand both analogous clauses. Reuse the existing truncation spectral sequence theorem, whose part 5 gives the canonical isomorphism, and exact inverse-image lemmas. No new nodes. Mathlib searches found only ingredients.",
+  "blueprint": "The single blueprint proof paragraph: spectral-sequence diagonal support is step 1, the canonical truncation map is step 2, and pullback and h are steps 3 and 4.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-hypercohomology-filtrations",
+    "why": "Its three spectral sequences supply the blueprint route and exact diagonal ranges; this unit has no replacement construction."
+   },
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "General truncation spectral-sequence theorem, especially canonical c_n isomorphism, used as a tool on the two direct images."
+   },
+   {
+    "node": "def-sp-etale-dictionary",
+    "why": "Identifies Grothendieck sheaf categories and left exact direct images with the abstract spectral-sequence inputs."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Exactness of both inverse images, needed for cohomology and truncation compatibility."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "Natural cohomology comparison for an exact functor proves the pulled-back map."
+   },
+   {
+    "node": "def-weil-pbc-derived-inverse-image",
+    "why": "Termwise definition of derived inverse image is needed for the second direct-image complex."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-hypercohomology-filtrations",
+  "thm-sp-truncation-e2",
+  "def-sp-etale-dictionary",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "def-weil-pbc-derived-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-7813eb7c2",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-7813eb7c2 (reviewer sub-agent of L); spot-checked: Read the full item, report, all cited statements and source places. All four steps prove the canonical maps with valid hypotheses; coefficient categories and square domains agree with source context. Checked edge cases, DAG generalizations, and absence of cycles. No new nodes or repairs; accepted all six declared tool uses. Detailed checks written to review.md."
+ }
 }
