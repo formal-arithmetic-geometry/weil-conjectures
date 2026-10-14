@@ -1,93 +1,98 @@
 ## What changed
 
-Checked upstream review #1428 against the current module, compatibility module,
-DAG records, and all three callers. The duplicate declaration has already been
-removed upstream: the sole implementation is
-`AlgebraicGeometry.Scheme.GaloisCover.equivariantModulePresheaf_isSheaf` in this
-module; `TorsorEquivariantPresheafSheaf` only publicly imports it. The callers in
-`TorsorAssociatedModuleFull`, `TorsorSectionEvaluationBijective`, and
-`TorsorInvariantSections` already use the retained declaration.
+Checked the assigned module and upstream duplicate repair #1428. The baseline
+already contains exactly one implementation of
+`AlgebraicGeometry.Scheme.GaloisCover.equivariantModulePresheaf_isSheaf`.
+`TorsorEquivariantPresheafSheaf` is a compatibility import with no declarations.
+The three callers (`TorsorAssociatedModuleFull`,
+`TorsorSectionEvaluationBijective`, `TorsorInvariantSections`) already use the
+retained theorem. No further duplicate removal or caller adaptation is needed.
 
-Removed the unnecessary file-wide
-`set_option backward.isDefEq.respectTransparency false` from the retained module.
-The complete canonical proof compiles under the default transparency setting.
-No declaration, signature, visibility, definition, or import changes. The proof
-route and DAG remain unchanged. This is cleanup and verification of the retained
-implementation in the duplicate repair, not a new consolidation.
+Simplified the naturality proof of the comparison natural isomorphism from a
+three-line tactic block to `fun {_ _} _ ↦ rfl`. This is a proof-only edit. All
+existing signatures, visibility, definitions and imports are unchanged. Corrected
+the stale module comment: the companion module publicly imports this theorem. Both
+node records already describe the continuous-function/subfunctor proof, so no
+DAG update is needed. No modules other than the assigned module are delivered.
 
 ## Proved and sorry left
 
-The retained declaration
-`AlgebraicGeometry.Scheme.GaloisCover.equivariantModulePresheaf_isSheaf` remains
-proved. Original holes: zero. Holes closed: zero. Holes added: zero. Holes left:
-none. Split-off statements: none. The three private proof helpers also remain
-complete. The module compiles without warnings under the default transparency
-setting (2.9 seconds). Required dry-run compilation and axiom probe are run by
-`deliver3.py --no-push`.
+The baseline contains zero sorries. Holes closed: zero. Holes added: zero.
+Sorries left: none. Split-off statements: none.
+`AlgebraicGeometry.Scheme.GaloisCover.equivariantModulePresheaf_isSheaf` and all
+three private theorem helpers remain proved. The proof uses the existing
+continuous-function sheaf, local equivariance via separatedness, and reflection
+of the sheaf condition through the module forgetful functor. The discrete
+coefficient topology identifies locally constant functions with continuous maps.
+This is verification and proof cleanup of an already completed repair, not a
+new proof or decomposition. Single-file compilation and the required dry-run
+axiom probe validate the retained proof.
 
 ## No longer needed
 
-No imports, nodes, or modules are newly pruned. The removed duplicate
-`equivariantModulePresheaf_restrictScalars_isSheaf` and its copy-pasted proof are
-already absent in the baseline. The compatibility import path remains available.
-The nondefault transparency option is no longer needed by the retained proof.
+None newly pruned: no imports, DAG nodes or modules were removed. The duplicate
+`equivariantModulePresheaf_restrictScalars_isSheaf` and its copied implementation
+are already absent from the baseline. The sole public import supplies the
+statement's definitions and is necessary.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The repair list is stale relative to the sources: the duplicate consolidation is
-already present, as documented in
-`coord/changes/equivariantModulePresheafSheaf-duplicate.md`. This delivery does not
-claim to remove that duplicate again or to close a sorry. The earlier sandbox
-had no source difference and therefore could not pass preflight. The present
-source change removes an unnecessary elaborator option and validates the sole
-retained proof under the standard setting; no replacement or additional theorem
-is introduced. Both node records already point to the same retained declaration
-and correctly record the continuous-function/subfunctor proof. No DAG edits are
-necessary.
+The dispatcher brief says this module still contains sorry, but the entire
+assigned source has none and compiles cleanly. The repair list still names the
+upstream duplicate complaint, although the consolidation and subsequent
+transparency cleanup have already landed. The existing change records document
+both repairs. This delivery does not claim their progress again.
 
-Change record: `coord/changes/torsor-equivariant-sheaf-transparency.md`.
+Read both node records, `dag/units/sk-thm-p1.json`, the compatibility module,
+all callers, Mathlib `Subfunctor.isSheaf_iff`, and the source construction
+`Scheme.Etale.continuousMapSheaf`. The proof matches the three recorded steps
+and does not bypass a realized unit statement or step. No arbitrary witness
+is chosen from an unproved existence theorem. The proof has no nonemptiness,
+primality or finite-generation assumption: empty objects, zero modules, the
+trivial group and ell = 0 remain covered.
 
-The following is preserved from the earlier sandbox reader's report, not a new
-second reading of this edit. Its observation about an unchanged delivery describes
-the earlier attempt. The dispatcher must obtain a fresh second reading before
-pushing; this worker only runs the dry run.
+Short-route searches actually run through msearch: LeanFinder for equivalence
+of locally constant functions and continuous maps into a discrete space;
+Loogle for `LocallyConstant, ContinuousMap`; grep for
+`equivariantModulePresheaf_isSheaf|Subfunctor.isSheaf_iff`. They confirm the
+existing route. The condensed continuous-map comparison would require a new
+import and offers no useful simplification here. No new node is introduced.
 
-## Earlier second reading (a previous round; superseded)
-
-1. Compared the entire delivered module and node against their repository versions.
-   All existing signatures, definitions, visibility and imports are identical.
-   The sole initial difference was an inserted docstring sentence splitting
-   “before sheafification”; removed it. No statement change or change record needed.
-2. Read each helper and the final proof. `restriction_action` follows from the
-   pullback projections. `functionPresheaf_isSheaf` uses continuous base change
-   and the existing continuous-function sheaf. In `equivarianceSubfunctor_isSheaf`,
-   the two continuous maps are equal locally by equivariance and commutation with
-   restriction; separatedness gives global equality. The final natural isomorphism
-   uses the discrete topology to identify locally constant and continuous functions,
-   with pointwise inverse and naturality, then reflects the sheaf condition through
-   the module forgetful functor. Restriction of scalars leaves the underlying sets
-   and maps unchanged. No arbitrary witness is selected from an unproved existence
-   statement. The module compiles cleanly through lcompile.py; no forbidden
-   declarations or sorry occur. The scratch axiom check is recorded below.
-3. No new statements or split-off holes exist. The discrete-topology argument
-   covers zero modules, trivial groups and empty objects without a nonemptiness
-   assumption; no special coefficient characteristic is used (ell = 0 is allowed).
-4. Checked the existing continuousMapSheaf construction in
-   `WeilConjectures/Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean`: this proof
-   already takes the short route through that construction and Subfunctor.isSheaf_iff.
-   No proof-only public import exists. Checked dag/units/sk-thm-p1.json realized:
-   this auxiliary node is not a unit statement or step, and its unchanged proof
-   does not bypass any realized node. No old proof dependency is removed.
-5. The node's three proof steps and proof_deps match the continuous-function sheaf,
-   local equivariance and natural-isomorphism/forgetful-functor argument. The node
-   is unchanged, including proof_origin; no new nodes require searches or metadata.
 
 ## Second reading by A3
 
-1. Compared the delivered module with the repository version. The only source difference is removal of the file-wide `backward.isDefEq.respectTransparency` option; all declarations, signatures, definitions, visibility, and imports are byte-for-byte unchanged. The change is documented in `coord/changes/torsor-equivariant-sheaf-transparency.md`.
-2. Compiled the module with `lcompile.py`; it succeeds under default transparency with no warnings. Searched for forbidden declarations and `sorry`; none occur. The theorem proof uses the continuous-function sheaf, the equivariance subfunctor sheaf criterion, and the module forgetful functor with no arbitrary witness or hollow definition. An axiom probe is included in `scratchpad/AxiomCheck.lean` and reports only permitted axioms.
-3. The retained theorem statement is unchanged and has no split-off statements. Its edge cases (zero coefficient module, trivial group, and empty objects) are covered by the general sheaf and separatedness arguments; no extra hypotheses were introduced.
-4. The proof follows the retained unit route through continuous functions, local equivariance, and the natural isomorphism to the module presheaf. No shorter unused imported route was found, and no prior proof dependency is removable. The compatibility module remains a public import only.
-5. The DAG node already records the retained declaration and matching proof dependencies and is unchanged. No new nodes or statement changes are present.
+1. Compared the entire delivered module with the repository using diff. PASS:
+   every existing declaration signature, visibility, definition and import is
+   byte-for-byte unchanged. The only differences are the naturality proof term
+   and the accurate compatibility-module comment. No change record is required.
+2. Compiled the delivered file with lcompile.py (3.0 seconds, no warnings).
+   PASS: no sorry, axiom, unsafe, opaque, implemented_by or extern occurs.
+   Compiled a scratch copy with #print axioms for restriction_action,
+   functionPresheaf_isSheaf, equivarianceSubfunctor_isSheaf and
+   AlgebraicGeometry.Scheme.GaloisCover.equivariantModulePresheaf_isSheaf:
+   each uses only propext, Classical.choice and Quot.sound, with no sorryAx.
+   functionPresheaf and equivarianceSubfunctor are explicit constructions;
+   no arbitrary object is selected from an unproved existence statement.
+3. PASS: no new statement or split-off hole exists. Checked the discrete
+   topology comparison and the local-equivariance argument; they cover empty
+   schemes, the zero representation, the trivial group and ell = 0 without
+   extra hypotheses. Searched with msearch grep for isSheaf_of_isSheaf_comp,
+   locallyConstantIsoContinuousMap and isSheaf_iff, and inspected the upstream
+   continuousMapSheaf and Mathlib Subfunctor.isSheaf_iff. No missed exact
+   equivariant-sheaf theorem or useful shorter route was found.
+4. PASS: the proof starts with the existing continuous-function sheaf, proves
+   equivariance local by separatedness, then compares underlying presheaves
+   and reflects the sheaf condition. The sole public import is necessary for
+   the theorem's signature. No proof dependency or import was removed, so
+   No longer needed is complete. Read sk-thm-p1.json: its realized unit
+   statement and steps are preserved; this below-unit proof bypasses none.
+5. PASS: read both lem-weil-pbc-torsor-equivariant-module-is-sheaf and
+   lem-weil-pbc-torsor-equivariant-presheaf-sheaf node records. Their lean
+   signatures match the public theorem, and proof, proof_deps and proof_origin
+   describe the continuous-function/subfunctor/reflection proof actually used.
+   The naturality simplification changes none of these dependencies.
 
-Changed in this second reading: removed the unnecessary transparency option, recorded by the change record above, and verified the unchanged proof and DAG against the repository.
+Second-reading repair: corrected the report's private-theorem helper count
+from four to three and explicitly recorded the module-comment change.
+No Lean proof repair was necessary. Holes closed: zero; holes added: zero;
+no decomposition or new proof progress is claimed.

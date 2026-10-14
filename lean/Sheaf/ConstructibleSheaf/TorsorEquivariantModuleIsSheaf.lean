@@ -11,7 +11,7 @@ public import Sheaf.ConstructibleSheaf.TorsorAssociatedModule
 # Equivariant locally constant sections are a sheaf
 
 The restricted-scalars theorem below is the single retained implementation;
-callers import this module directly, and the retired companion has no imports.
+the companion compatibility module only imports this declaration.
 
 Source: Stacks Project, Tags 04TR, 04TS and 0DV5 (3).
 (blueprint: lem-weil-pbc-torsor-equivariant-presheaf-sheaf)
@@ -135,9 +135,7 @@ theorem Scheme.GaloisCover.equivariantModulePresheaf_isSheaf
           let t₀ : C(c.sectionSpace W.unop, N.V) := t.val
           ⟨⟨t₀, (IsLocallyConstant.iff_continuous _).2 t₀.continuous⟩, t.property⟩
         left_inv := fun _ ↦ Subtype.ext rfl
-        right_inv := fun _ ↦ Subtype.ext rfl }) (by
-      intro W W' f
-      rfl)
+        right_inv := fun _ ↦ Subtype.ext rfl }) (fun {_ _} _ ↦ rfl)
   let : HasLimitsOfSize.{u, u + 1}
       (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) :=
     ModuleCat.hasLimitsOfSize.{u, u + 1, u + 1, u + 1}
