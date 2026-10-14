@@ -5,10 +5,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.RelativeMVMaps
 public import Sheaf.AlgebraicGeometry.MayerVietorisImageChainData
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisUnderivedOpenCounitSquare
-import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
-import Sheaf.AlgebraicGeometry.RingedSpaceDirectImageKInjectiveAcyclic
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.AlgebraicGeometry.RelativeMVDirectImageRowsCore
+import Sheaf.AlgebraicGeometry.RelativeMVDirectImageRowsMates
 
 /-! # Resolved relative rows before the overlap mate -/
 
@@ -29,10 +27,10 @@ restriction Mayer--Vietoris rows, use sectionwise gluing and injective
 flasqueness for short exactness, and take the homotopy pullback of the two
 strict row maps. The global mate follows from the composite adjunction counit;
 the middle mate follows by biproduct extensionality applied to the two open
-components. The overlap equation is recorded before the final target-vertex
-cancellation; `relativeMV_direct_image_rows_overlap_mate` performs that
-cancellation. Empty and repeated opens reduce to the zero and split
-restriction rows, respectively. -/
+components. The three normalized mate equations are then converted to the
+displayed equations by the inverse and cancellation laws for the adjunction
+equivalence. Empty and repeated opens reduce to the zero and split restriction
+rows, respectively. -/
 theorem relativeMV_direct_image_rows_preoverlap
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -66,6 +64,16 @@ theorem relativeMV_direct_image_rows_preoverlap
       (adj.homEquiv _ _).symm (DerivedCategory.Q.map m.τ₂ ≫ η.app P'.X₂) ≫ e₂'.hom =
         e₂.hom ≫ biprod.map (b U).hom (b V).hom ∧
       (adj.homEquiv _ _).symm (DerivedCategory.Q.map m.τ₃ ≫ η.app P'.X₃) =
-        e₃.hom ≫ (b (U ⊓ V)).hom ≫ e₃'.inv := by sorry
+        e₃.hom ≫ (b (U ⊓ V)).hom ≫ e₃'.inv := by
+  classical
+  dsimp only
+  obtain ⟨P, P', m, e₁, e₂, e₃, e₁', e₂', e₃', hα, hβ, hγ, hdata⟩ :=
+    relativeMV_direct_image_rows_core f f' g g' hpull K K' φ U V hcover
+  have hP := hdata.1
+  have hP' := hdata.2
+  have hm := relativeMV_direct_image_rows_mates f f' g g' hpull K K' φ U V
+    P P' m e₁ e₂ e₃ e₁' e₂' e₃' hα hβ hγ
+  rcases hm with ⟨h₁, h₂, h₃⟩
+  exact ⟨P, P', m, e₁, e₂, e₃, e₁', e₂', e₃', hP, hP', h₁, h₂, h₃⟩
 
 end AlgebraicGeometry
