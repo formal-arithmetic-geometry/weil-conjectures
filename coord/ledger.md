@@ -14319,3 +14319,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:39 L: merged deliver/W2/Sheaf.Algebra.Homology.KInjectiveProducts (stage 3; reviewer PASS; first push; landing 20261014T023941-L-17432 (proof); batch 20261014T023929; modules 1; new nodes 0)
 - 02:39 L: merged deliver/W2/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T023941-L-17540 (proof); batch 20261014T023929; modules 1; new nodes 0)
 - 02:39 L: merged deliver/W2/Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling (stage 3; reviewer PASS; first push; landing 20261014T023942-L-17757 (proof); batch 20261014T023929; modules 1; new nodes 0)
+- 02:39 L: merged deliver/X3/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (stage 3; reviewer PASS; first push; landing 20261014T023942-L-17884 (proof); batch 20261014T023929; modules 1; new nodes 0)

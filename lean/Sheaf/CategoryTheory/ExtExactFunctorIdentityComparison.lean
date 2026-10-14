@@ -63,20 +63,14 @@ theorem exactFunctorIdentityComparison
       (Ext.mk₀ (e.hom.app X)).comp x (zero_add n) := by
   let := HasDerivedCategory.standard C
   let Q := DerivedCategory.Q (C := C)
-  let ε := Functor.mapHomologicalComplexIdIso C (ComplexShape.up ℤ)
-  let η := NatIso.mapHomologicalComplex e (ComplexShape.up ℤ)
+  let ε := NatIso.mapHomologicalComplex e (ComplexShape.up ℤ) ≪≫
+    Functor.mapHomologicalComplexIdIso C (ComplexShape.up ℤ)
   have : NatTrans.CommShift ε.hom ℤ := by
     constructor
     intro m
     ext K i
     simp [ε, Functor.commShiftIso_id_hom_app]
-  have : NatTrans.CommShift η.hom ℤ := by
-    constructor
-    intro m
-    ext K i
-    dsimp [η]
-    erw [Category.id_comp, Category.comp_id]
-  let δ := Functor.isoWhiskerRight (η ≪≫ ε) Q ≪≫ Q.leftUnitor ≪≫ Q.rightUnitor.symm
+  let δ := Functor.isoWhiskerRight ε Q ≪≫ Q.leftUnitor ≪≫ Q.rightUnitor.symm
   have : NatTrans.CommShift Q.rightUnitor.inv ℤ :=
     NatTrans.CommShift.of_iso_inv Q.rightUnitor ℤ
   have : NatTrans.CommShift δ.hom ℤ := by dsimp [δ]; infer_instance
@@ -84,7 +78,7 @@ theorem exactFunctorIdentityComparison
     (ComplexShape.up ℤ)).equiv_smallShiftedHomMap Q Q
       ((F.mapCochainComplexSingleFunctor 0).app X)
       ((F.mapCochainComplexSingleFunctor 0).app Y) (𝟭 _) δ x
-  have hx (Z : C) :
+  have hc (Z : C) :
       Q.map ((F.mapCochainComplexSingleFunctor 0).app Z).inv ≫
         δ.hom.app ((CochainComplex.singleFunctor C 0).obj Z) =
       (DerivedCategory.singleFunctor C 0).map (e.hom.app Z) := by
@@ -94,27 +88,28 @@ theorem exactFunctorIdentityComparison
     congr 1
     ext i
     dsimp [Functor.mapCochainComplexSingleFunctor,
-      HomologicalComplex.singleMapHomologicalComplex, η, ε,
-      NatIso.mapHomologicalComplex, Functor.mapHomologicalComplexIdIso,
-      CochainComplex.singleFunctor, CochainComplex.singleFunctors, HomologicalComplex.single]
+      HomologicalComplex.singleMapHomologicalComplex, ε,
+      Functor.mapHomologicalComplexIdIso, CochainComplex.singleFunctor,
+      CochainComplex.singleFunctors, HomologicalComplex.single]
     by_cases hi : i = 0
     · subst i; simp
-    · have hz := HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0 (F.obj Z) i hi
+    · have hz := HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0
+        (F.obj Z) i hi
       exact hz.eq_of_src _ _
-  have hy (Z : C) :
-      δ.inv.app ((CochainComplex.singleFunctor C 0).obj Z) ≫
-        Q.map ((F.mapCochainComplexSingleFunctor 0).app Z).hom ≫
-          (DerivedCategory.singleFunctor C 0).map (e.hom.app Z) = 𝟙 _ := by
-    rw [← hx Z]
-    dsimp only [Iso.app_hom, Iso.app_inv]
-    rw [← Q.map_comp_assoc, Iso.hom_inv_id_app]
-    erw [Q.map_id, Category.id_comp, Iso.inv_hom_id_app]
+  have hd (Z : C) :
+      (δ.inv.app ((CochainComplex.singleFunctor C 0).obj Z) ≫
+        Q.map ((F.mapCochainComplexSingleFunctor 0).app Z).hom) ≫
+        (DerivedCategory.singleFunctor C 0).map (e.hom.app Z) = 𝟙 _ := by
+    rw [← hc]
+    simp only [Category.assoc, ← Q.map_comp_assoc]
+    simp
   apply Ext.ext
-  simp only [Ext.comp_hom, Ext.mk₀_hom, ShiftedHom.comp_mk₀, ShiftedHom.mk₀_comp]
+  simp only [Ext.comp_hom, Ext.mk₀_hom]
   change (x.mapExactFunctor F).hom = _ at h
   rw [h]
-  simp only [ShiftedHom.comp_mk₀, ShiftedHom.mk₀_comp, ShiftedHom.id_map,
-    Category.assoc, ← Functor.map_comp, hy, hx]
+  simp only [ShiftedHom.comp_mk₀, ShiftedHom.mk₀_comp, ShiftedHom.id_map]
+  rw [hc]
+  simp only [Category.assoc, ← Functor.map_comp, hd]
   change _ ≫ x.hom ≫ (shiftFunctor _ _).map (𝟙 _) = _
   simp
 
