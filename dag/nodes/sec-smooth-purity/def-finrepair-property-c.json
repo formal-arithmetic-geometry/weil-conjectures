@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-finrepair-property-c",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Constructibility under direct image",
@@ -21,9 +21,52 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible|Constructible",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean. Directory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-14",
+   "verdict": "No match: only Chevalley statements for constructible subsets occur in AlgebraicGeometry/Morphisms/FinitePresentation.lean; read lines 117-124."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of schemes preserves constructible etale sheaves under all higher direct images",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable: LeanSearch returned Internal Server Error."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme morphism f, every higher direct image of every constructible sheaf of finite coefficient modules is constructible",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, PrimeSpectrum.isConstructible_comap_image, Topology.IsConstructible.image_of_isOpenEmbedding, CompHausLike.LocallyConstantModule.functor, Topology.IsConstructible.image_of_isClosedEmbedding, PrimeSpectrum.isConstructible_range_comap",
+   "date": "2026-10-14",
+   "verdict": "No match: the hits concern Chevalley images/preimages of constructible subsets and condensed locally constant modules, not constructibility of higher direct images of etale module sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\"",
+   "results": "12 hits: Topology.IsConstructible, Topology.IsLocallyConstructible, Topology.IsConstructible.univ, Topology.IsLocallyConstructible.univ, Topology.IsConstructible.empty, Topology.IsLocallyConstructible.empty, Topology.IsConstructible.isLocallyConstructible, IsRetrocompact.isConstructible",
+   "date": "2026-10-14",
+   "verdict": "No match: Topology.IsConstructible and IsLocallyConstructible describe subsets of topological spaces, not the predicate on scheme morphisms defined here."
+  },
+  {
+   "tool": "grep",
+   "query": "(constructible|Constructible).*(Sheaf|sheaf)|(Sheaf|sheaf).*(constructible|Constructible)|higher.*direct.*image",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "No match: no source hits for constructible sheaves or higher direct images."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Define the property of a functor on sheaves that its right derived functors preserve finite locally constant stratified sheaves in every nonnegative degree",
+   "results": "8 hits: CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp, CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp, CategoryTheory.instIsConstantObjSheafSheafCompose, Condensed.lanSheafProfinite, LightProfinite.hasSheafify, CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts_of_projective",
+   "date": "2026-10-14",
+   "verdict": "No match: coherent-topology sheaf composition and condensed locally constant constructions do not define preservation of constructible etale sheaves by higher direct images."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -47,5 +90,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-finrepair-property-c",
+  "worker": "stage1",
+  "summary": "Checked the definition verbatim against its master blueprint source and read all four statement dependencies. Each notion is already supplied by those definitions, including the module-sheaf version of derived direct image. This is a predicate definition, not an assertion that it holds or a uniform-vanishing theorem, so no proof steps or new nodes are required. Searched the whole imported blueprint, project Lean and Mathlib; found no exact duplicate or attachment.",
+  "blueprint": "Entire defining paragraph and final sentence of def-finrepair-property-c.md (order 1592). There is no proof in this definition; the four statement dependencies realize its ingredients.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NM-102c80aa3",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-102c80aa3 (reviewer sub-agent of L); spot-checked: Read the full item, report, four dependency statements and cited source passages, and unit/chapter route. The definition matches master order 1592, preserves finite étale coefficients and all quantifiers, and adds no uniform vanishing claim. Checked identity, empty-scheme and zero-coefficient cases and existing duplicate candidates. No new nodes, proof gaps, repairs or tool_uses. Concrete checks recorded in review.md."
+ }
 }
