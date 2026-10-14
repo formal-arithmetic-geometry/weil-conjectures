@@ -14696,3 +14696,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:38 L: merged deliver/U2/Sheaf.AlgebraicGeometry.AffineModelStageHomEquationOfCoherentObjects (stage 3; reviewer PASS; after a return; landing 20261014T063823-L-2815810 (interface); batch 20261014T063810; modules 1; new nodes 0; change records: coord/changes/affineModelStageHomEquation-import-pruning.md)
 
 - 15:00 L: batch 20261014T063810 dependency take-out
+- 07:08 L: returned deliver/B2/Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization (reviewer RETURN: (reviewer X-7c2e9, head 7c2e9037b) A3 / mechanical (d): Aux deletes an existing public declaration while treated as an u)
