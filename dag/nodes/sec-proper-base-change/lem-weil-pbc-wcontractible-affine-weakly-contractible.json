@@ -30,9 +30,75 @@
   "def-weil-pbc-faithfully-flat-ring-map",
   "def-weil-pbc-ind-etale-algebra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\varphi:F\\to G$ be an epimorphism of sheaves of sets and $s\\in G(T)$. The epimorphism/local-surjectivity equivalence gives a covering $\\{f_i:T_i\\to T\\}_{i\\in I}$ in $X_{\\mathrm{proet}}$ and sections $t_i\\in F(T_i)$ with $\\varphi(t_i)=s|_{T_i}$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WN, lemma-mono-epi-sheaves; Tag 00WM, definition-sheaves-injective-surjective"
+   }
+  },
+  {
+   "text": "The underlying family is a pro-etale covering of the affine scheme $T$. Apply the covering-section lemma using exactly the ring splitting hypothesis of the item. It gives $\\sigma:T\\to C=\\coprod_iT_i$ with $p\\circ\\sigma=\\mathrm{id}_T$, where $p|_{T_i}=f_i$. This is an assertion about schemes; no change from the small site to a big site is needed.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-wcontractible-cover-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098F, lemma-w-contractible-proetale-cover, forward proof"
+   }
+  },
+  {
+   "text": "The coprojections have disjoint clopen images covering $C$. Their inverse images $U_i=\\sigma^{-1}(T_i)$ are disjoint clopen opens covering $T$, and $\\sigma|_{U_i}$ factors through $T_i$, with composite to $T$ the inclusion $U_i\\hookrightarrow T$. Quasi-compactness of $\\operatorname{Spec}A$ gives finitely many of the $U_i$ covering $T$; disjointness forces all the remaining $U_i$ to be empty. An open immersion is flat because its maps on local rings are isomorphisms, and its diagonal is an isomorphism, hence flat; thus each $U_i\\to T$ is weakly etale. Composition stability makes $U_i\\to X$ an object of the small site, within the original size bound. These finitely many opens form a pro-etale covering: for any affine test open $V\\subset T$, take affine neighborhoods in the intersections $V\\cap U_i$ and then a finite subcover of $V$. Thus their images have union exactly $V$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "def-weil-weakly-etale-morphism",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "def-weil-pbc-proetale-site",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098F, lemma-w-contractible-proetale-cover, inverse images of the coproduct components; Tag 098H, lemma-w-contractible-is-weakly-contractible, proof (3) implies (2), applied to the small site"
+   }
+  },
+  {
+   "text": "Restrict $t_i$ along $\\sigma|_{U_i}:U_i\\to T_i$, obtaining $u_i\\in F(U_i)$. Naturality gives $\\varphi(u_i)=s|_{U_i}$ since $f_i\\circ\\sigma|_{U_i}$ is the inclusion. The empty scheme is a site object with an empty covering, so both sheaves have exactly one section there. Hence the $u_i$ agree on every pairwise intersection, which is empty for distinct indices. The sheaf axiom glues them to $u\\in F(T)$; the restrictions of $\\varphi(u)$ and $s$ agree on the covering, so sheaf uniqueness gives $\\varphi(u)=s$. The same argument applies to an empty covering when $A$ is the zero ring.",
+   "uses": [
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098H, lemma-w-contractible-is-weakly-contractible, proof (3) implies (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-wcontractible-cover-section",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "def-weil-weakly-etale-morphism",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 098F and 098H; sites.tex Tags 00WM and 00WN. Explicit small-site adaptation and finite clopen refinement argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -86,7 +152,7 @@
  ],
  "mathlib_match": null,
  "chapter": "sec-proper-base-change",
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
   "by": "worker",
@@ -96,5 +162,20 @@
  "merged_into": null,
  "lean_audit": {
   "state": "none"
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-wcontractible-affine-weakly-contractible",
+  "worker": "stage1",
+  "summary": "Retain one geometric covering-section intermediate (098F), use the existing Mathlib epimorphism/local-surjectivity leaf, and prove the finite clopen refinement and sheaf gluing explicitly on the full small site. Removed the redundant refinement node. Item statement unchanged.",
+  "blueprint": "The four steps realize the ring-to-full-site evaluation input from 098H, subordinate to the blueprint ancestor thm-weil-pbc-qbar along the ancestry recorded in blueprint.from. The ancestor paragraph does not itself discuss hypercovers; no chapter or unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-2edcf55e5",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-2edcf55e5 (reviewer sub-agent of L); spot-checked: Read the item, sole new node, cited statements and source passages in full. The 098F/098H small-site argument and edge cases check out. Repaired missing LeanSearch attempt (service unavailable) and incomplete new-node metadata; corrected JSON and review.md written. No statements weakened or delivery cycles introduced; unrelated inherited cycles documented.; 1 file(s) fixed by the reviewer"
  }
 }
