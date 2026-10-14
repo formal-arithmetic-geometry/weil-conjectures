@@ -40,13 +40,12 @@ with `j^* ⊣ Rj_*`, have left adjoints identified by the Verdier exchange `𝔻
 and `δ_M` up to isomorphisms, are invertible at the same objects. A cone argument replaces
 `j_! j^* K` by `K`.
 
-## TODO
+## Proper push-forward
 
-The proper push-forward statement remains conditional. The mate `Rf_* 𝔻_X M ⟶ 𝔻_Y Rf_* M` of the
-Verdier exchange is the canonical comparison map. Showing that it is invertible amounts to
-showing that the exchange `derivedHomRightDerivedLowerShriekIso` is self-dual with respect to
-the self-adjunctions of `𝔻_X` and `𝔻_Y`, a coherence between the projection formula and the
-braiding that is not available.
+The conditional push-forward statement below, through the mate of the Verdier exchange, is
+superseded by the unconditional one in
+`WeilConjectures.SixFunctors.Etale.Derived.DoubleDualProper`, which uses the canonical
+comparison `Rf_* 𝔻_X M ⟶ 𝔻_Y Rf_* M` instead.
 -/
 
 @[expose] public section
