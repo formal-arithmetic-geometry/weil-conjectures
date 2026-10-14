@@ -1,0 +1,100 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+
+module
+
+public import Mathlib.CategoryTheory.Sites.Sheaf
+public import WeilConjectures.AlgebraicGeometry.EtaleFieldGsets
+public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
+import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
+import WeilConjectures.CategoryTheory.DiscreteContinuousRepCommGrp
+import Mathlib.CategoryTheory.Adjunction.Limits
+
+/-!
+# Transport of abelian group objects across a set-valued sheaf equivalence
+
+Source: Stacks Project, Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point.
+(blueprint: lem-exc-abelian-sheaves-gmodules-transport)
+-/
+
+@[expose] public section
+
+universe u v
+
+open CategoryTheory Opposite
+
+namespace AlgebraicGeometry.Scheme
+
+/-- Source: Stacks Project, Tag 04JQ, proof of
+`lemma-equivalence-abelian-sheaves-point` (and Tags 03QT, 03QW).
+(blueprint: lem-exc-abelian-sheaves-gmodules-transport).
+
+Proof: Identify abelian-group-valued sheaves with internal integer modules in
+set-valued sheaves: forgetting the operations preserves and reflects the sheaf
+condition, and products are computed on sections. Identify discrete continuous
+integer representations with internal integer modules in discrete continuous
+G-sets: equivariance of addition, negation and integer multiplication is precisely
+linearity of the action; continuity of the discrete action is precisely openness
+of all stabilizers. Apply equivalence_induces_internalModules to Eset and compose
+with these two identifications. Its equality of underlying functors gives beta.
+On morphisms the identifications send operation-preserving set maps to additive
+maps, which are automatically integer-linear, and the inverse does the reverse.
+The quasi-inverse obtained from Eset.inverse transports the operations back;
+the unit and counit preserve all the operations by their naturality. Thus these
+are inverse equivalences, with an equivariant comparison beta on underlying sets.
+No geometric point or stalk comparison is used here.
+The zero group and trivial action are allowed. -/
+theorem abelianSheaves_transport
+    {C : Type (u + 1)} [Category.{u} C]
+    (J : GrothendieckTopology C)
+    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] :
+    let D := Rep.DiscreteContinuousRep.{0, u, max (u + 1) v} ℤ G
+    let U : D ⥤ Rep.{max (u + 1) v} ℤ G := ObjectProperty.ι _
+    let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type (max (u + 1) v)) (G := G))
+      ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type (max (u + 1) v)) (G := G))
+    ∀ (Eset : Sheaf J (Type (max (u + 1) v)) ≌
+        DiscreteContAction (Type (max (u + 1) v)) G),
+    ∃ (E : Sheaf J AddCommGrpCat.{max (u + 1) v} ≌ D),
+      Nonempty
+        (E.functor ⋙ U ⋙ Rep.RepToAction ℤ G ⋙
+            (CategoryTheory.forget (ModuleCat.{max (u + 1) v} ℤ)).mapAction G ≅
+          sheafCompose J (CategoryTheory.forget AddCommGrpCat.{max (u + 1) v}) ⋙
+            Eset.functor ⋙ V) := by
+  classical
+  dsimp only
+  intro Eset
+  let : Limits.HasFiniteProducts
+      (DiscreteContAction (Type (max (u + 1) v)) G) :=
+    ⟨fun _ ↦ Adjunction.hasLimitsOfShape_of_equivalence Eset.inverse⟩
+  let : CartesianMonoidalCategory
+      (DiscreteContAction (Type (max (u + 1) v)) G) :=
+    CartesianMonoidalCategory.ofHasFiniteProducts
+  let : BraidedCategory (DiscreteContAction (Type (max (u + 1) v)) G) :=
+    BraidedCategory.ofCartesianMonoidalCategory
+  let : Eset.functor.Braided := Functor.Braided.ofChosenFiniteProducts _
+  let : Eset.inverse.Braided := Functor.Braided.ofChosenFiniteProducts _
+  obtain ⟨F, H, hF, _, hFH, hHF, _, _⟩ :=
+    sheavesAlgebraicStructuresAbelian.{u + 1, u, v} J
+  let A := CategoryTheory.Equivalence.mk F H (eqToIso hFH).symm (eqToIso hHF)
+  obtain ⟨B, ⟨hB⟩⟩ := Rep.discreteContinuousRep_commGrp G
+  let E := (A.trans Eset.mapCommGrp).trans B
+  refine ⟨E, ⟨?_⟩⟩
+  let W := (ObjectProperty.ι
+    (fun X : Rep.{max (u + 1) v} ℤ G ↦ ∀ x : X.V, IsOpen {g : G | X.ρ g x = x})) ⋙
+    Rep.RepToAction ℤ G ⋙
+    (CategoryTheory.forget (ModuleCat.{max (u + 1) v} ℤ)).mapAction G
+  let V := ObjectProperty.ι
+    (ContAction.IsDiscrete (V := Type (max (u + 1) v)) (G := G)) ⋙
+    ObjectProperty.ι (Action.IsContinuous (V := Type (max (u + 1) v)) (G := G))
+  change (F ⋙ Eset.functor.mapCommGrp ⋙ B.functor) ⋙ W ≅ _
+  calc
+    (F ⋙ Eset.functor.mapCommGrp ⋙ B.functor) ⋙ W ≅
+        (F ⋙ Eset.functor.mapCommGrp) ⋙ (CommGrp.forget _ ⋙ V) :=
+      Functor.isoWhiskerLeft (F ⋙ Eset.functor.mapCommGrp) hB
+    _ ≅ (F ⋙ CommGrp.forget _) ⋙ Eset.functor ⋙ V := Iso.refl _
+    _ ≅ _ := Functor.isoWhiskerRight (eqToIso hF) (Eset.functor ⋙ V)
+
+end AlgebraicGeometry.Scheme
