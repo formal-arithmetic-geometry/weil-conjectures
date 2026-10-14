@@ -24,15 +24,15 @@ Y' --g---> Y
 
 recorded as `sq : IsPullback g' f' f g`, and a compactification `c : X ⟶[i] Z ⟶[p] Y` of `f`.
 This file constructs, on the bounded constructible derived categories `Dᵇc(-)⟦Λ⟧` of module
-objects over `Λ_X = p_X^* Λ`, the compact-support base-change morphism
+objects over `Λ_X = p_X^* Λ`, the compact-support base-change morphism into the base-changed
+compactification `c.baseChange sq` of `f'`
 
-`Ex_!^c : Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c'}` (in diagrammatic `⋙`-order)
+`Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.baseChange sq}` (in diagrammatic `⋙`-order)
 
-where `c' = c.baseChange sq` is the base-changed compactification of `f'` and
-`Rf_!^c := i_! ⋙ Rp_*` is the lower shriek attached to `c`
+where `Rf_!^c := i_! ⋙ Rp_*` is the lower shriek attached to `c`
 (`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactification`, of
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`), exactly as
-the étale `Etale.lowerShriekBaseChange`. It is assembled from two exchange morphisms:
+the étale `Etale.lowerShriekBaseChange`. It is the pasting of two exchange morphisms:
 
 - the *direct-image exchange* `Ex_* : Rp_* ⋙ Lg^* ⟶ Lḡ^* ⋙ Rp'_*` for the proper square of the
   base-changed compactification, which is the base-change morphism
@@ -41,13 +41,21 @@ the étale `Etale.lowerShriekBaseChange`. It is assembled from two exchange morp
   compactification. Its canonical mate goes in the direction `Lg'^* ⋙ i'_! ⟶ i_! ⋙ Lḡ^*`
   (`ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekBaseChange`), base
   change for extension by zero asserts that it is an isomorphism (currently `sorry`), and the
-  construction of `Ex_!^c` uses its inverse.
+  pasting uses its inverse.
 
-The independence of `Ex_!^c` from the chosen compactification is *not* treated here; all
-statements are relative to an explicit compactification `c`. All schemes are separated and of
-finite type over a field `k` of characteristic `p > 0` with `p ≠ ℓ`, and all morphisms are over
-`Spec k`; the compactification `Z` of `f` and `Z ×_Y Y'` are then so as well
-(`WeilConjectures.Compactification.Over`).
+For another compactification `c'` of `f'`, the pasting followed by an identification
+`Rf'_!^{c.baseChange sq} ≅ Rf'_!^{c'}` is a base-change morphism
+`Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c'}`. For the coefficient rings `E̲` and `ℚ̲̄_ℓ`, the
+identification is given by the independence of the lower shriek from the compactification
+(`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso`, currently
+`sorry`), and the resulting base-change morphisms, for arbitrary and for the chosen
+compactifications, are constructed together with the base change theorem
+(`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationBaseChange`,
+`ProEtale.CondensedRing.isIso_boundedConstructibleLowerShriekBaseChange`).
+
+All schemes are separated and of finite type over a field `k` of characteristic `p > 0` with
+`p ≠ ℓ`, and all morphisms are over `Spec k`; the compactification `Z` of `f` and `Z ×_Y Y'`
+are then so as well (`WeilConjectures.Compactification.Over`).
 
 ## Main definitions
 
@@ -58,20 +66,15 @@ finite type over a field `k` of characteristic `p > 0` with `p ≠ ℓ`, and all
   base change for extension by zero, for a cartesian square;
   `ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekBaseChangeIso` is the
   inverse isomorphism `j_! ⋙ Lg^* ≅ Lg'^* ⋙ j'_!`.
-- `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange`: the compact-support
-  base-change morphism `Ex_!^c`.
-- `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChangeCompactificationIso`: for a
-  cartesian square whose two vertical maps are the same `f`, the identification
-  `Rf_!^{c.baseChange sq} ≅ Rf_!^c` of the lower shrieks attached to the base-changed and the
-  original compactification.
-- `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChangeSelf`: for such a square, the
-  compact-support base-change morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf_!^c` with the same
-  compactification `c` on both sides.
+- `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationBaseChangePasting`:
+  the pasting `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.baseChange sq}`.
+- `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationBaseChangeOfIso`:
+  the pasting followed by a given identification `Rf'_!^{c.baseChange sq} ≅ Rf'_!^{c'}`.
 
 ## Sorried input
 
-- `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChangeCompactificationIso`: an
-  instance of the independence of the lower shriek from the compactification.
+- `ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange`: base
+  change for extension by zero.
 
 -/
 
@@ -223,19 +226,17 @@ variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} [f.IsOver (Spec (.of k))]
   [g.IsOver (Spec (.of k))] [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
 
-/-- The *compact-support base-change morphism* `Ex_!^c : Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c'}` on
-bounded constructible complexes, for a cartesian square `sq` and a compactification
-`c : X ⟶[i] Z ⟶[p] Y` of `f`, where `c' = c.baseChange sq`: with `Rf_!^c = i_! ⋙ Rp_*`, it is
-the pasting of the direct-image exchange `boundedConstructibleBaseChange` of the proper square
-of the base-changed compactification with the inverse of the extension-by-zero exchange of its
-open-immersion square,
+/-- The compact-support base-change morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.baseChange sq}`
+on bounded constructible complexes, for a cartesian square `sq` and a compactification
+`c : X ⟶[i] Z ⟶[p] Y` of `f`, *into the base-changed compactification* of `f'`: with
+`Rf_!^c = i_! ⋙ Rp_*`, it is the pasting of the direct-image exchange
+`boundedConstructibleBaseChange` of the proper square of the base-changed compactification with
+the inverse of the extension-by-zero exchange of its open-immersion square,
 
-`i_! ⋙ Rp_* ⋙ Lg^* ⟶ i_! ⋙ Lḡ^* ⋙ Rp'_* ⟶ Lg'^* ⋙ i'_! ⋙ Rp'_*`.
-
-The base change theorem for the lower shriek asserts that this morphism is an isomorphism. -/
+`i_! ⋙ Rp_* ⋙ Lg^* ⟶ i_! ⋙ Lḡ^* ⋙ Rp'_* ⟶ Lg'^* ⋙ i'_! ⋙ Rp'_*`. -/
 @[no_expose]
-noncomputable def boundedConstructibleLowerShriekBaseChange (c : Compactification f)
-    (sq : IsPullback g' f' f g) :
+noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
+    (c : Compactification f) (sq : IsPullback g' f' f g) :
     boundedConstructibleLowerShriekOfCompactification Λ ℓ k c ⋙
       boundedConstructibleUpperStar Λ ℓ k g ⟶
       boundedConstructibleUpperStar Λ ℓ k g' ⋙
@@ -250,9 +251,9 @@ noncomputable def boundedConstructibleLowerShriekBaseChange (c : Compactificatio
       (boundedConstructibleLowerStar Λ ℓ k (c.baseChange sq).g) ≫
     (Functor.associator _ _ _).hom
 
-lemma boundedConstructibleLowerShriekBaseChange_eq (c : Compactification f)
-    (sq : IsPullback g' f' f g) :
-    boundedConstructibleLowerShriekBaseChange Λ ℓ k c sq =
+lemma boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq
+    (c : Compactification f) (sq : IsPullback g' f' f g) :
+    boundedConstructibleLowerShriekOfCompactificationBaseChangePasting Λ ℓ k c sq =
       (Functor.associator _ _ _).hom ≫
         Functor.whiskerLeft (boundedConstructibleOpenImmersionLowerShriek Λ ℓ k c.i)
           (boundedConstructibleBaseChange Λ ℓ k (c.baseChange_isPullback_g sq).toCommSq) ≫
@@ -261,67 +262,25 @@ lemma boundedConstructibleLowerShriekBaseChange_eq (c : Compactification f)
           (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso Λ ℓ k
             (c.baseChange_isPullback_i sq)).hom
           (boundedConstructibleLowerStar Λ ℓ k (c.baseChange sq).g) ≫
-        (Functor.associator _ _ _).hom :=
-  by rw [boundedConstructibleLowerShriekBaseChange]
+        (Functor.associator _ _ _).hom := by
+  rw [boundedConstructibleLowerShriekOfCompactificationBaseChangePasting]
+
+/-- The compact-support base-change morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c'}` on bounded
+constructible complexes, for a cartesian square `sq`, compactifications `c` of `f` and `c'` of
+`f'`, and an identification `e : Rf'_!^{c.baseChange sq} ≅ Rf'_!^{c'}` of the lower shrieks of
+`f'` attached to the base-changed compactification and to `c'`: the pasting
+`boundedConstructibleLowerShriekOfCompactificationBaseChangePasting` followed by `e`. -/
+noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChangeOfIso
+    (c : Compactification f) (c' : Compactification f') (sq : IsPullback g' f' f g)
+    (e : boundedConstructibleLowerShriekOfCompactification Λ ℓ k (c.baseChange sq) ≅
+      boundedConstructibleLowerShriekOfCompactification Λ ℓ k c') :
+    boundedConstructibleLowerShriekOfCompactification Λ ℓ k c ⋙
+      boundedConstructibleUpperStar Λ ℓ k g ⟶
+      boundedConstructibleUpperStar Λ ℓ k g' ⋙
+        boundedConstructibleLowerShriekOfCompactification Λ ℓ k c' :=
+  boundedConstructibleLowerShriekOfCompactificationBaseChangePasting Λ ℓ k c sq ≫
+    Functor.whiskerLeft _ e.hom
 
 end LowerShriek
-
-/-! ### The base-changed compactification of a square with the same vertical maps -/
-
-section CompactificationIso
-
-variable {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
-  [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
-  [IsSeparated (X ↘ Spec (.of k))]
-  [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
-  [IsSeparated (Y ↘ Spec (.of k))]
-  {f : X ⟶ Y} {g : Y ⟶ Y} {g' : X ⟶ X} [f.IsOver (Spec (.of k))]
-  [g.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
-
-/-- For a cartesian square `sq : IsPullback g' f f g` whose two vertical maps are the same
-morphism `f`, and a compactification `c` of `f`, the identification
-`Rf_!^{c'} ≅ Rf_!^c` on bounded constructible complexes of the lower shriek attached to the
-base-changed compactification `c' = c.baseChange sq` with the one attached to `c`. It is the
-input that turns the compact-support base-change isomorphism
-`Rf_!^c ⋙ Lg^* ≅ Lg'^* ⋙ Rf_!^{c'}` into a commutation isomorphism of `Rf_!^c` with `Lg^*` and
-`Lg'^*`, as needed for the Frobenius square of `f` (`g`, `g'` the Frobenius automorphisms).
-
-Both sides are lower shrieks of `f` for two compactifications, so this is an instance of the
-independence of the lower shriek from the compactification, which is not formalized; the
-isomorphism is currently `sorry`. -/
-@[no_expose]
-noncomputable def boundedConstructibleLowerShriekBaseChangeCompactificationIso
-    (c : Compactification f) (sq : IsPullback g' f f g) :
-    boundedConstructibleLowerShriekOfCompactification Λ ℓ k (c.baseChange sq) ≅
-      boundedConstructibleLowerShriekOfCompactification Λ ℓ k c :=
-  sorry
-
-/-- The *compact-support base-change morphism* `Ex_!^c : Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf_!^c` on
-bounded constructible complexes for a cartesian square `sq : IsPullback g' f f g` whose two
-vertical maps are the same morphism `f`, and a compactification `c` of `f`, with the lower shriek
-attached to `c` on both sides: the compact-support base-change morphism
-`boundedConstructibleLowerShriekBaseChange` into `Rf_!^{c.baseChange sq}`, followed by the
-identification `boundedConstructibleLowerShriekBaseChangeCompactificationIso` of the
-base-changed compactification with `c`. -/
-@[no_expose]
-noncomputable def boundedConstructibleLowerShriekBaseChangeSelf (c : Compactification f)
-    (sq : IsPullback g' f f g) :
-    boundedConstructibleLowerShriekOfCompactification Λ ℓ k c ⋙
-        boundedConstructibleUpperStar Λ ℓ k g ⟶
-      boundedConstructibleUpperStar Λ ℓ k g' ⋙
-        boundedConstructibleLowerShriekOfCompactification Λ ℓ k c :=
-  boundedConstructibleLowerShriekBaseChange Λ ℓ k c sq ≫
-    Functor.whiskerLeft _
-      (boundedConstructibleLowerShriekBaseChangeCompactificationIso Λ ℓ k c sq).hom
-
-lemma boundedConstructibleLowerShriekBaseChangeSelf_eq (c : Compactification f)
-    (sq : IsPullback g' f f g) :
-    boundedConstructibleLowerShriekBaseChangeSelf Λ ℓ k c sq =
-      boundedConstructibleLowerShriekBaseChange Λ ℓ k c sq ≫
-        Functor.whiskerLeft _
-          (boundedConstructibleLowerShriekBaseChangeCompactificationIso Λ ℓ k c sq).hom := by
-  rw [boundedConstructibleLowerShriekBaseChangeSelf]
-
-end CompactificationIso
 
 end AlgebraicGeometry.ProEtale.CondensedRing
