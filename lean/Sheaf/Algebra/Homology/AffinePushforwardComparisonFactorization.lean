@@ -16,6 +16,12 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 noncomputable section
 namespace AlgebraicGeometry
+private lemma cancelComparison {D : Type*} [Category D]
+    {X Y Z W V U : D} (s : X ≅ Y) (b : Y ⟶ Z) (c : Z ⟶ W)
+    (d : W ⟶ V) (e : V ⟶ U) :
+    s.inv ≫ (s.hom ≫ b ≫ c) ≫ d ≫ e = b ≫ c ≫ d ≫ e := by
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules (moduleRings Y.toRingedSpace))]
 
@@ -62,6 +68,40 @@ theorem affinePushforwardComparison_factorization
             (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit.app
             ((HomotopyCategory.quotient _ (.up ℤ)).obj
               (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj C))) := by
-  sorry
+  let F := ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B
+  let G := affinePushforwardTilde A ⋙ RingedSpace.moduleDirectImage
+    (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom
+  let : (affinePushforwardTilde B).Additive :=
+    instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : (affinePushforwardTilde B).PreservesHomology := tilde_preservesHomology B
+  let : PreservesFiniteLimits (affinePushforwardTilde B) :=
+    Functor.preservesFiniteLimits_of_preservesHomology _
+  let : PreservesFiniteColimits (affinePushforwardTilde B) :=
+    Functor.preservesFiniteColimits_of_preservesHomology _
+  let : F.PreservesHomology := inferInstance
+  let : (affinePushforwardTilde A ⋙
+      Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom φ))).PreservesZeroMorphisms :=
+    ⟨fun X Y => by
+      rw [Functor.comp_map, (affinePushforwardTilde A).map_zero]
+      exact (Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom φ))).map_zero _ _⟩
+  let σ' : F ≅ G := σ
+  let a := (σ'.hom.mapHomologicalComplex (.up ℤ)).app C
+  have hn := (DerivedCategory.homologyFunctorFactors
+    (SheafOfModules (moduleRings (Spec (.of B)).toRingedSpace)) i).inv.naturality a
+  dsimp only [Functor.comp_map] at hn
+  dsimp only [affinePushforwardCohomologyMapOfComparison]
+  erw [← reassoc_of% hn]
+  have hh := ShortComplex.homologyMap_mapNatTrans (C.sc i) σ'.hom
+  change (HomologicalComplex.homologyFunctor
+      (SheafOfModules (moduleRings (Spec (.of B)).toRingedSpace)) (.up ℤ) i).map a =
+    ((C.sc i).mapHomologyIso F).hom ≫ σ'.hom.app (C.homology i) ≫
+      ((C.sc i).mapHomologyIso G).inv at hh
+  dsimp only [F, G, σ'] at hh
+  erw [hh]
+  exact cancelComparison
+    ((C.sc i).mapHomologyIso (ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B))
+    (σ.hom.app (C.homology i))
+    ((C.sc i).mapHomologyIso (affinePushforwardTilde A ⋙ RingedSpace.moduleDirectImage
+      (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom)).inv _ _
 
 end AlgebraicGeometry

@@ -14717,3 +14717,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:45 L: batch 20261014T074215 dependency take-out
 - 07:46 L: returned deliver/S3/Sheaf.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization (reviewer RETURN: (reviewer X-2eba2, head 2eba27b80) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Si)
 - 07:46 L: merged deliver/U3/Sheaf.AlgebraicGeometry.HorizontalTransferInverseFormula (stage 3; reviewer PASS; first push; landing 20261014T074649-L-3571178 (proof); batch 20261014T074647; modules 1; new nodes 0)
+- 07:46 L: merged deliver/V4/Sheaf.Algebra.Homology.AffinePushforwardComparisonFactorization (stage 3; reviewer PASS; first push; landing 20261014T074649-L-3571331 (proof); batch 20261014T074647; modules 1; new nodes 0)
