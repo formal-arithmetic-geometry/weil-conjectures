@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-dimension-finite-type",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finiteness of the dimension of a finite type scheme",
@@ -12,29 +12,100 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-dimension-finite-type.md",
   "place": "node lem-kun-dimension-finite-type, order 1676"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-kun-dimension"
+ ],
  "proof": [
   {
-   "text": "Every point $x\\in X$ lies in an affine open chart, so\n$\\mathcal O_{X,x}$ is a Noetherian local ring and has finite\ndimension by Krull's principal ideal theorem, while $\\kappa(x)$ is a\nfinitely generated field extension of $K$ and has finite\ntranscendence degree; by [lem-kun-dimension-formula] therefore\n$\\kundim_xX<\\infty$ for every $x\\in X$ (and $X=\\emptyset$ is\ntrivial). The Krull dimension of $X$ is the supremum of the numbers\n$\\kundim_xX$, $x\\in X$: for an irreducible scheme every nonempty\nopen subset has the dimension of the scheme, so a generic point of an\nirreducible component realizes the dimension of that component. A\nscheme of finite type over a field is Noetherian, so $X$ has finitely\nmany irreducible components, and the supremum is a maximum of finitely\nmany finite numbers by [def-kun-dimension].",
+   "text": "For every point x∈X, the local-dimension node gives finiteness of dim O_{X,x}, and the residue-field node gives finiteness of trdeg_K κ(x). Applying the unit-mandated dimension formula [lem-kun-dimension-formula] yields kundim_x X < ∞. If X is empty, the conclusion is immediate.",
    "uses": [
-    "lem-kun-dimension-formula",
+    "lem-kun-finite-type-local-dimension",
+    "lem-kun-finite-type-residue-trdeg",
+    "lem-kun-dimension-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-dimension-finite-type.md",
+    "place": "Proof, first paragraph; dimension-at-a-point argument via lem-kun-dimension-formula"
+   }
+  },
+  {
+   "text": "By the definition of kundim as the supremum of lengths of strict chains, the global dimension is the supremum of the finite dimensions at points (for each irreducible component, a generic point realizes its component dimension; every chain is contained in a component).",
+   "uses": [
     "def-kun-dimension"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-dimension-finite-type.md",
+    "place": "Proof, second paragraph; supremum over point dimensions"
+   }
+  },
+  {
+   "text": "The structure morphism X→Spec K is of finite type. Since K is Noetherian, [lem-weil-pbc-finite-type-over-noetherian] makes X Noetherian, and [lem-sc-noetherian-finite-irreducible-components] gives finitely many irreducible components.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-noetherian-finite-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma 01T6; Properties Definition 01OV; Topology Lemma 0052"
+   }
+  },
+  {
+   "text": "The supremum in Step 2 is therefore a maximum of finitely many finite component dimensions, hence finite; this is the finite-component maximum argument and also covers the empty scheme.",
+   "uses": [
+    "def-kun-dimension",
+    "lem-sc-noetherian-finite-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-dimension-finite-type.md",
+    "place": "Proof, final finite-maximum sentence"
+   }
   }
  ],
  "proof_deps": [
+  "def-kun-dimension",
   "lem-kun-dimension-formula",
-  "def-kun-dimension"
+  "lem-kun-finite-type-local-dimension",
+  "lem-kun-finite-type-residue-trdeg",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-weil-pbc-finite-type-over-noetherian"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-dimension-finite-type.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a quasi-compact scheme locally of finite type over a field has finite topological Krull dimension",
+   "results": "No exact target declaration; general Noetherian and compactness declarations returned",
+   "date": "2026-10-15",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDim_ne_top_of_compactSpace, exists_topologicalKrullDim_le",
+   "results": "0 hits; unknown identifier topologicalKrullDim_ne_top_of_compactSpace",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim_ne_top_of_compactSpace|exists_topologicalKrullDim_le in Mathlib/AlgebraicGeometry/Morphisms",
+   "results": "0 hits in Mathlib; declarations occur only in project extension WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+   "date": "2026-10-15",
+   "verdict": "no Mathlib match; project theorem considered separately"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -57,5 +128,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "lem-kun-dimension-finite-type",
+  "worker": "stage1",
+  "summary": "Repaired the split to follow the unit-mandated lem-kun-dimension-formula route. The residue-field and local-dimension facts are now substantive unsplit statement nodes, since affine-chart, quotient, localization, and Noetherian-stalk arguments are required; Mathlib searches found only general algebra lemmas. The item proof explicitly applies the dimension formula, then the finite-component maximum argument.",
+  "blueprint": "Steps realize the blueprint proof: pointwise finiteness via lem-kun-dimension-formula, supremum over point/component dimensions, Noetherian finite components, and finite maximum.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-dimension-formula",
+    "why": "The unit explicitly mandates this dimension-at-a-point formula as the route to pointwise finiteness."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Finite-type-over-Noetherian theorem supplies Noetherianity; this unit has no replacement."
+   },
+   {
+    "node": "lem-sc-noetherian-finite-irreducible-components",
+    "why": "Noetherian topology theorem supplies finitely many irreducible components; this unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-dimension-formula",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-noetherian-finite-irreducible-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-52312e5a5",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-52312e5a5 (reviewer sub-agent of L); spot-checked: Corrected local-dimension source from Stacks Tag 00P0 to the exact arbitrary-prime statement Tag 00P1, and added required created.by/date metadata to both new nodes. Mathematical statements, routes, searches, edge cases, and duplicate checks pass.; 2 file(s) fixed by the reviewer"
+ }
 }
