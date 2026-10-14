@@ -3,55 +3,208 @@
  "blueprint": {
   "is": "lem-fin-finite-type-pushforward-embedding",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite-pushforward embeddings over a field",
- "statement": "Let $X$ be of finite type\nover a field, and let $F$ be a\nconstructible\nsheaf of $\\mathbf Z/N$-modules. There are finitely many finite maps\n$h_i:Y_i\\to X$, finite groups $M_i$ killed by $N$, and an\ninjective map\n\n$$\nF\\longrightarrow\\bigoplus_i(h_i)_*\\underline M_i .\n$$\n\nDirect images have the meaning of [def-weil-pbc-direct-image].",
+ "statement": "Let $X$ be a scheme of finite type over a field [def-weil-pbc-scheme-conventions], and let $F$ be a constructible sheaf of $\\mathbf Z/N$-modules on the small etale site of $X$ [def-weil-pbc-etale-constructible-sheaf], with the finite coefficient ring $\\mathbf Z/N$ as in that definition. There are finitely many finite maps $h_i:Y_i\\to X$, finite abelian groups $M_i$ killed by $N$, and an injective map of $\\mathbf Z/N$-module sheaves\n$$F\\longrightarrow\\bigoplus_i(h_i)_*\\underline M_i.$$\nHere $\\underline M_i$ is the constant sheaf [def-weil-pbc-constant-sheaf] with its $\\mathbf Z/N$-module structure, and direct images have the meaning of [def-weil-pbc-direct-image].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-type-pushforward-embedding.md",
   "place": "node lem-fin-finite-type-pushforward-embedding, order 1607"
  },
  "stmt_deps": [
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-direct-image"
  ],
  "proof": [
   {
-   "text": "Fix $x\\in X$. The restriction of $F$ to\n$\\operatorname{Spec}\\kappa(x)$ is finite locally constant, by\n[def-weil-pbc-constructible-complexes].\nOne member of a trivializing etale cover gives a finite separable\nextension $K/\\kappa(x)$ on which it becomes constant, say $M$.\nLet $Z=\\overline{\\{x\\}}_{\\mathrm{red}}$, and normalize $Z$ in $K$.\nThis gives $h:Y\\to Z\\to X$, finite by\n[lem-fin-normalization-extension-finite]. Its source is normal\nintegral and Noetherian, with generic inclusion $e:\\operatorname{Spec}K\\to Y$.\nWrite $a=he$. The adjunction of\n[def-weil-pbc-inverse-image], [def-weil-pbc-direct-image] gives\n\n$$\nF\\longrightarrow a_*a^*F\n\\simeq h_*e_*\\underline M\n\\simeq h_*\\underline M ,\n$$\n\nwhere the last isomorphism is\n[lem-fin-normal-generic-constant].\nAt a geometric point above $x$, compose this map with evaluation\nat the chosen generic geometric point of $Y$.\nThe composite is the identity of $F_{\\bar x}=M$, by the\nunit–counit identity. Hence the displayed map is injective at\n$\\bar x$. It is a map of $\\mathbf Z/N$-modules throughout.",
+   "text": "Put $\\Lambda=\\mathbf Z/N$. The field spectrum is locally Noetherian (a field has only the ideals $0$ and $1$). Since $X$ is locally of finite type over it, [pqf-lem-locnoeth-lft] makes $X$ locally Noetherian. Finite type includes quasi-compactness [def-weil-pbc-scheme-conventions], so $X$ is Noetherian, meaning locally Noetherian and quasi-compact. By [lem-weil-pbc-locally-noetherian-quasi-separated], $X$ is also quasi-separated. No separatedness of $X$ is assumed.",
    "uses": [
-    "def-weil-pbc-constructible-complexes",
-    "lem-fin-normalization-extension-finite",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-direct-image",
-    "lem-fin-normal-generic-constant"
+    "pqf-lem-locnoeth-lft",
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; Properties Tag 01OY, lemma-locally-Noetherian-quasi-separated"
+   }
   },
   {
-   "text": "Perform this construction for every $x$.\nThe finite-selection lemma\n[lem-weil-pbc-constructible-noetherian-finite-selection]\nchooses finitely many of these maps whose direct sum is injective\non every stalk, and therefore injective as a sheaf map.\nNo normalization in an infinite extension, approximation, or\nhigher-direct-image finiteness is used.",
+   "text": "Fix $x\\in X$, and write $b:\\operatorname{Spec}\\kappa(x)\\to X$. By [prop-constructible-pullback], $b^{-1}F$ is constructible. Apply [lem-weil-pbc-constructible-field-finite-separable-constant] with $k=\\kappa(x)$ and the finite ring $\\Lambda$. It gives a finite separable extension $K/\\kappa(x)$, a finite $\\Lambda$-module $M$, and a module-sheaf isomorphism $\\theta:a^{-1}F\\xrightarrow{\\sim}\\underline M_K$, where $a:\\operatorname{Spec}K\\to X$ is the composite through $b$. The underlying additive group of $M$ is finite abelian and $NM=0$, since $N\\cdot1=0$ in $\\Lambda$.",
    "uses": [
+    "prop-constructible-pullback",
+    "lem-weil-pbc-constructible-field-finite-separable-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095G, lemma-pullback-constructible; Tag 09Z6, lemma-constructible-maps-into-constant, proof first construction and part (3)"
+   }
+  },
+  {
+   "text": "Let $Z$ be the reduced induced closed subscheme on $\\overline{\\{x\\}}$, supplied by [lem-weil-pbc-reduced-induced-closed-subscheme]. Its underlying space is irreducible: two opens meeting that closure both contain its generic point $x$. Thus reducedness makes $Z$ integral [def-pc-integral-scheme]. Choose a finite affine cover $\\operatorname{Spec}R_j$ of $X$ with each $R_j$ a finitely generated algebra over the base field, as in [def-weil-pbc-scheme-conventions]. Its intersections with $Z$ are $\\operatorname{Spec}(R_j/I_j)$, a finite cover by finite-type field algebras, so $Z$ is of finite type over that field. The generic point of $Z$ is $x$, and its residue field is $\\kappa(x)$: on an affine containing $x$, the closure has prime ideal $\\mathfrak p_x$, and the generic local ring of $R/\\mathfrak p_x$ is $\\operatorname{Frac}(R/\\mathfrak p_x)=\\kappa(x)$. Thus $K$ is a finite extension of the function field of $Z$, as required by the normalization-finiteness theorem. Use [lem-weil-pbc-normalization-in-residue-field-extension] for $X,x,K$: take its stated normalization of $Z$ in $K$. It gives a normal integral $Y$ and generic inclusion $e:\\operatorname{Spec}K\\to Y$, with function field $K$ and $a=he$. The morphism $Y\\to Z$ is finite by [lem-fin-normalization-extension-finite]. On an affine $\\operatorname{Spec}R\\subseteq X$, its inverse image is the spectrum of an algebra finite as an $R/I$-module, where $R/I$ is the ring of $Z$ there. The same generators generate it as an $R$-module; hence $h:Y\\to X$ is finite by [def-weil-finite-integral-morphism]. Over the chosen finite affine cover $\\operatorname{Spec}R_j$, these finite algebras are generated as field algebras by the generators of $R_j$ and their finite module generators. Their spectra form a finite affine cover of $Y$, hence $Y$ is quasi-compact and locally of finite type over the field. Thus $Y$ is of finite type over the field and locally Noetherian by [pqf-lem-locnoeth-lft]; in particular it is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-normalization-in-residue-field-extension",
+    "lem-fin-normalization-extension-finite",
+    "def-weil-finite-integral-morphism",
+    "pqf-lem-locnoeth-lft",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z6, lemma-constructible-maps-into-constant, normalization construction and Nagata footnote; Morphisms Tags 035H, 035I, 035L and 01T6"
+   }
+  },
+  {
+   "text": "The natural map $u:\\underline M_Y\\to e_*\\underline M_K$ is an isomorphism by [lem-fin-normal-generic-constant], applied to this normal integral Noetherian $Y$. It is $\\Lambda$-linear: naturality with respect to multiplication by each scalar on $M$ says exactly that $u$ commutes with that scalar, and its inverse does too. Identify $e^{-1}h^{-1}F$ with $a^{-1}F$ by [lem-weil-pbc-inverse-image-composition-module-linear]. Under the module adjunction [lem-weil-pbc-inverse-image-module-adjunction], $\\theta$ has an adjoint $\\beta:h^{-1}F\\to e_*\\underline M_K$. Put $\\alpha=u^{-1}\\beta:h^{-1}F\\to\\underline M_Y$, and take its adjoint $\\phi_x:F\\to h_*\\underline M_Y$. These are all maps of $\\Lambda$-module sheaves.",
+   "uses": [
+    "lem-fin-normal-generic-constant",
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "lem-weil-pbc-inverse-image-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z6, lemma-constructible-maps-into-constant, the two adjunctions; Tag 09Z5, lemma-push-constant-sheaf-from-open; Modules on Sites Tags 03D3 and 03D8"
+   }
+  },
+  {
+   "text": "The pullback $e^{-1}\\alpha$ is an isomorphism. To see the precise map, let $v:e^{-1}\\underline M_Y\\xrightarrow{\\sim}\\underline M_K$ be the canonical constant-pullback isomorphism [lemma-constructible-pullback-constant]. The natural map $u$ in step 4 is adjoint to $v$, so $\\varepsilon_{e,\\underline M_K}\\,e^{-1}u=v$. The defining adjunction equation for $\\beta$ says $\\varepsilon_{e,\\underline M_K}\\,e^{-1}\\beta=\\theta$. Since $\\beta=u\\alpha$, these identities give $v\\,e^{-1}\\alpha=\\theta$. Both $v$ and $\\theta$ are isomorphisms, hence so is $e^{-1}\\alpha$. These equations are the unit-counit identities for [def-weil-pbc-inverse-image], in the module adjunction of [lem-weil-pbc-inverse-image-module-adjunction].",
+   "uses": [
+    "lemma-constructible-pullback-constant",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-inverse-image-module-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z6, lemma-constructible-maps-into-constant, the commutative stalk diagram; Tag 09Z5, natural constant-unit map"
+   }
+  },
+  {
+   "text": "Let $\\bar x:\\operatorname{Spec}\\Omega\\to X$ be any geometric point with image $x$. Embed $K$ into $\\Omega$ over $\\kappa(x)$: choose finitely many algebraic generators of $K$, and extend the embedding successively by choosing a root in the algebraically closed field $\\Omega$ of each generator's minimal polynomial. This gives $\\bar y:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}K\\xrightarrow{e}Y$ with $h\\bar y=\\bar x$. The stalk identification [lem-weil-pbc-inverse-image-stalk-germ] for $e$ and the isomorphism $e^{-1}\\alpha$ of step 5 imply that $\\alpha_{\\bar y}$ is an isomorphism. Write $r:(h_*\\underline M_Y)_{\\bar x}\\to(\\underline M_Y)_{\\bar y}$ for the germ restriction of [lem-weil-pbc-finite-stalk-formula-restriction]. Since $\\phi_x=h_*\\alpha\\,\\eta_{h,F}$, its composition with $r$ is $\\alpha_{\\bar y}$ after the canonical identification $F_{\\bar x}\\cong(h^{-1}F)_{\\bar y}$. Indeed a representative section $s\\in F(U)$ goes by the unit to its pullback on $U\\times_XY$, then by $\\alpha$ to its image there, and $r$ takes its germ at $(\\bar u,\\bar y)$; the unit-germ identity in [lem-weil-pbc-inverse-image-stalk-germ] identifies the first germ with $s_{\\bar x}$. Therefore $r(\\phi_x)_{\\bar x}$ is an isomorphism, and $(\\phi_x)_{\\bar x}$ is injective.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-finite-stalk-formula-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z6, lemma-constructible-maps-into-constant, geometric-point lift and commutative diagram; Tags 03Q1 and 03QP, stalk identifications"
+   }
+  },
+  {
+   "text": "Choose this construction for each point $x$ of $X$. At every geometric point over $x$, the associated $\\phi_x$ is injective by step 6. Forgetting the module actions, $F$ is a constructible abelian sheaf: its finite locally constant module restrictions remain finite locally constant abelian restrictions [def-weil-pbc-etale-constructible-sheaf]. Apply [lem-weil-pbc-constructible-noetherian-finite-selection] to the family of these maps on the Noetherian scheme $X$. It gives finitely many of them with a monomorphism $F\\to\\bigoplus_i(h_i)_*\\underline M_i$. The finite-sum map is still $\\Lambda$-linear because every component is linear. It is injective as a module-sheaf map: cancellation against it follows from cancellation on the underlying abelian-sheaf maps, whose equality is equality of the module-sheaf maps. Each $h_i$ is finite by step 3, and each $M_i$ is finite abelian and killed by $N$ by step 2. If $X$ is empty or $F=0$, the empty finite family gives the map to the zero sheaf, which is a monomorphism.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
     "lem-weil-pbc-constructible-noetherian-finite-selection"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-constructible-noetherian-finite-selection.md",
+    "place": "Statement and Proof; finite-selection paragraph of the item, corresponding to Stacks Tag 09Z6"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-constructible-complexes",
+  "pqf-lem-locnoeth-lft",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-constructible-field-finite-separable-constant",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
   "lem-fin-normalization-extension-finite",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-direct-image",
+  "def-weil-finite-integral-morphism",
   "lem-fin-normal-generic-constant",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-inverse-image-module-adjunction",
+  "lemma-constructible-pullback-constant",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-finite-stalk-formula-restriction",
+  "def-weil-pbc-etale-constructible-sheaf",
   "lem-weil-pbc-constructible-noetherian-finite-selection"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-type-pushforward-embedding.md",
-  "place": "## Proof"
+  "place": "Proof, both paragraphs, checked against Stacks 09Z6; finite-type Nagata specialization without approximation"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A constructible etale sheaf of finite modules on a scheme of finite type over a field embeds into a finite direct sum of finite pushforwards of finite constant sheaves",
+   "results": "Hits: SheafOfModules.IsFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.isFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFinitePresentation, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.localGeneratorsDataOfIsFiniteType",
+   "date": "2026-10-14",
+   "verdict": "no match: none states this finite-pushforward embedding; locally Noetherian auxiliary hits are covered by existing DAG leaves"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|finite.*pushforward|mono.*lowerStar",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: none states this finite-pushforward embedding; locally Noetherian auxiliary hits are covered by existing DAG leaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible etale sheaves embed into finite pushforwards of constant finite sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite locally constant sheaf on a variety injects into a finite sum of direct images of constant torsion groups under finite morphisms",
+   "results": "Hits: CompHausLike.LocallyConstantModule.functor, CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf, LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, CompHausLike.LocallyConstantModule.functor_obj_val, LightCondMod.LocallyConstant.instFaithfulSheafLightProfiniteCoherentTopologyTypeConstantSheaf, CondensedMod.LocallyConstant.instFaithfulSheafCompHausCoherentTopologyTypeConstantSheaf, Condensed.finFree, CompHausLike.LocallyConstant.functor",
+   "date": "2026-10-14",
+   "verdict": "no match: none states this finite-pushforward embedding; locally Noetherian auxiliary hits are covered by existing DAG leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Mono",
+   "results": "Hits: CategoryTheory.Sheaf.Hom.mono_of_presheaf_mono, CategoryTheory.presheaf_mono_of_mono, CategoryTheory.Sheaf.Hom.mono_iff_presheaf_mono, CategoryTheory.instMonoFunctorOppositeHomFullSubcategoryIsSheafOfHasWeakSheafifyOfSheaf, CategoryTheory.instMonoSheafTypeImageι, CategoryTheory.Sheaf.mono_of_isLocallyInjective, CategoryTheory.Sheaf.mono_of_injective, SheafOfModules.Submodule.instMonoι",
+   "date": "2026-10-14",
+   "verdict": "no match: none states this finite-pushforward embedding; locally Noetherian auxiliary hits are covered by existing DAG leaves"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiSeparatedSpace|isNoetherian|IsNoetherian.*iff|compactSpace",
+   "results": "Hits: 24, 32, 35, 38, 59",
+   "date": "2026-10-14",
+   "verdict": "no match: none states this finite-pushforward embedding; locally Noetherian auxiliary hits are covered by existing DAG leaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally Noetherian quasi compact schemes are Noetherian and quasi separated",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally noetherian scheme is quasi separated and if its underlying space is compact then it is a noetherian scheme",
+   "results": "Hits: AlgebraicGeometry.isNoetherian_iff, AlgebraicGeometry.IsNoetherian.toCompactSpace, AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.noetherianSpace_of_isAffine, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace, AlgebraicGeometry.IsNoetherian.noetherianSpace",
+   "date": "2026-10-14",
+   "verdict": "no match: none states this finite-pushforward embedding; locally Noetherian auxiliary hits are covered by existing DAG leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsLocallyNoetherian",
+   "results": "Hits: AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.instIsLocallyNoetherianToScheme, AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.isLocallyNoetherian_Spec, AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace",
+   "date": "2026-10-14",
+   "verdict": "no match: none states this finite-pushforward embedding; locally Noetherian auxiliary hits are covered by existing DAG leaves"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -82,5 +235,64 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-fin-finite-type-pushforward-embedding",
+  "worker": "stage1",
+  "summary": "Checked Stacks 09Z6 and its finite-type Nagata specialization. Expanded the field trivialization, normal normalization, module adjunctions, unit-compatible stalk argument, and finite selection using existing nodes only. Clarified finite coefficients and abelian module values in the statement. No new nodes or attachment.",
+  "blueprint": "First proof paragraph: steps 1-3 establish field trivialization and finite normal normalization, steps 4-5 construct the adjoint and its generic isomorphism, step 6 proves stalk injectivity. Second proof paragraph: step 7 applies finite selection.",
+  "tool_uses": [
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Generic geometric or sheaf tool used in the imported field-trivialization/normalization/adjunction/stalk route; this unit has no node providing this precise auxiliary statement."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-field-finite-separable-constant",
+    "why": "Generic geometric or sheaf tool used in the imported field-trivialization/normalization/adjunction/stalk route; this unit has no node providing this precise auxiliary statement."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic geometric or sheaf tool used in the imported field-trivialization/normalization/adjunction/stalk route; this unit has no node providing this precise auxiliary statement."
+   },
+   {
+    "node": "lem-weil-pbc-normalization-in-residue-field-extension",
+    "why": "Generic geometric or sheaf tool used in the imported field-trivialization/normalization/adjunction/stalk route; this unit has no node providing this precise auxiliary statement."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Generic geometric or sheaf tool used in the imported field-trivialization/normalization/adjunction/stalk route; this unit has no node providing this precise auxiliary statement."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-module-adjunction",
+    "why": "Generic geometric or sheaf tool used in the imported field-trivialization/normalization/adjunction/stalk route; this unit has no node providing this precise auxiliary statement."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic geometric or sheaf tool used in the imported field-trivialization/normalization/adjunction/stalk route; this unit has no node providing this precise auxiliary statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-stalk-formula-restriction",
+    "why": "Generic geometric or sheaf tool used in the imported field-trivialization/normalization/adjunction/stalk route; this unit has no node providing this precise auxiliary statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-constructible-pullback",
+  "lem-weil-pbc-constructible-field-finite-separable-constant",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-inverse-image-module-adjunction",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-finite-stalk-formula-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-86cd694a0",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-86cd694a0 (reviewer sub-agent of L); spot-checked: Read the complete item, all cited statements, sources, report, and unit/chapter route. All seven steps are justified; normalization finiteness, module-linear adjunctions, stalk compatibility, finite selection, and edge cases check out. No new nodes or repairs. Accepted eight generic tool uses; no target-category comparison inferred. Full review written to review.md."
+ }
 }
