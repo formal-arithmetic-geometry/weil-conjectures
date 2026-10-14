@@ -17,7 +17,7 @@ Source: Stacks Project, derived.tex, Tag 015F; Mathlib Ext.Map.
 
 @[expose] public section
 
-universe w
+universe w w' w''
 
 open CategoryTheory CategoryTheory.Limits
 
@@ -42,6 +42,7 @@ private lemma singleComparison_hom {A B : Type*} [Category A] [Category B] [Abel
   erw [Category.id_comp]
   rfl
 /-- Exact functors respect composition after transport by a natural isomorphism.
+The Ext universes of the three categories may be chosen independently.
 The comparison is established on localized single complexes and then shifted.
 Source: Stacks Project, derived.tex, Tag 015F (lemma-right-derived-exact-functor:
 every complex computes an exact functor), and Mathlib Ext.Map's definition through
@@ -59,7 +60,7 @@ single complexes and the shift isomorphisms cancel on both sides, giving the equ
 theorem mapExactFunctor_comp_mk₀_eq
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
-    [HasExt.{w} C] [HasExt.{w} D] [HasExt.{w} E]
+    [HasExt.{w} C] [HasExt.{w'} D] [HasExt.{w''} E]
     (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
     [F.Additive] [G.Additive] [H.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]

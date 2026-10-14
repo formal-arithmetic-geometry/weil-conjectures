@@ -37,7 +37,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 015F and Definition Tag 06XQ; F1 Lean proof using the existing derived natural-isomorphism and composition comparisons, their localization factorization equations and shifted naturality."
+  "place": "Tag 015F and Definition Tag 06XQ; F1 Lean proof using the existing derived natural-isomorphism and composition comparisons, their localization factorization equations and shifted naturality. R2 checks the same proof for independent source, intermediate and target Ext universes."
  },
  "mathlib_searches": [
   {
@@ -108,11 +108,11 @@
   "module": "Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison",
   "file": "lean/Sheaf/CategoryTheory/ExtExactFunctorCompositionComparison.lean",
   "declaration": "CategoryTheory.Abelian.Ext.mapExactFunctor_comp_mk₀_eq",
-  "statement": "theorem mapExactFunctor_comp_mk₀_eq\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    [Abelian C] [Abelian D] [Abelian E]\n    [HasExt.{w} C] [HasExt.{w} D] [HasExt.{w} E]\n    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)\n    [F.Additive] [G.Additive] [H.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    [PreservesFiniteLimits H] [PreservesFiniteColimits H]\n    (e : H ≅ F ⋙ G) {X Y : C} {n : ℕ} (x : Ext.{w} X Y n) :\n    (x.mapExactFunctor H).comp (Ext.mk₀ (e.hom.app Y)) (add_zero n) =\n      (Ext.mk₀ (e.hom.app X)).comp\n        ((x.mapExactFunctor F).mapExactFunctor G) (zero_add n)",
+  "statement": "theorem mapExactFunctor_comp_mk₀_eq\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    [Abelian C] [Abelian D] [Abelian E]\n    [HasExt.{w} C] [HasExt.{w'} D] [HasExt.{w''} E]\n    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)\n    [F.Additive] [G.Additive] [H.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    [PreservesFiniteLimits H] [PreservesFiniteColimits H]\n    (e : H ≅ F ⋙ G) {X Y : C} {n : ℕ} (x : Ext.{w} X Y n) :\n    (x.mapExactFunctor H).comp (Ext.mk₀ (e.hom.app Y)) (add_zero n) =\n      (Ext.mk₀ (e.hom.app X)).comp\n        ((x.mapExactFunctor F).mapExactFunctor G) (zero_add n)",
   "branch": "sheaf-dag",
-  "by": "K1",
-  "date": "2026-10-12",
-  "note": "P4 upstream review repair: canonical name mapExactFunctor_comp_mk₀_eq; no EnoughInjectives hypothesis. The cited upstream declaration is absent from this checkout, so the general proof is retained in the held module."
+  "by": "R2",
+  "date": "2026-10-14",
+  "note": "Canonical composition lemma generalized to independent Ext universes w, w-prime, w-double-prime. No EnoughInjectives hypothesis or duplicate alias."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -127,13 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "P2",
+  "reviewer": "X-73726",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261014T050530-L-1686598",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [],
-  "sorry_after": []
+  "landing": "20261014T054053-L-2107695",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the generalized Lean signature and proof with the node, declared change record, and packet baseline hashes; compilation and axiom checks passed."
  }
 }
