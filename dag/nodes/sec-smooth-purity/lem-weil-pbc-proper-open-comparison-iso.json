@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-proper-open-comparison-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Proper pushforward of extension by zero",
@@ -12,49 +12,183 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-comparison-iso.md",
   "place": "node lem-weil-pbc-proper-open-comparison-iso, order 1482"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-proper-open-comparison"
+ ],
  "proof": [
   {
-   "text": "On the open $j_2(X)$, the section described in\n[lem-weil-pbc-proper-open-section] exhibits $X$ as an open and\nclosed subscheme of the relevant inverse image, and the comparison\nisomorphism $\\theta_{u,K}$ of\n[lem-weil-pbc-proper-open-identification] is built from the\nidentity of $K$ on that component; hence $\\alpha_{u,K}$ of\n[def-weil-pbc-proper-open-comparison], being the adjoint of\n$\\theta_{u,K}^{-1}$, restricts to the identity of $K$. In\nparticular this holds at every geometric point of that open, including\npoints over generic points.",
+   "text": "Fix a datum of [def-weil-pbc-proper-open-comparison]: schemes $u:T_1\\to T_2$ proper, open immersions $j_i:X\\hookrightarrow T_i$ with $uj_1=j_2$, a finite commutative ring $\\Lambda$, and $K\\in D^+(X_{\\Et},\\Lambda)$. Put $M=Ru_*j_{1!}K$. By [lem-weil-pbc-proper-open-section], the section $s:X\\to V=T_1\\times_{T_2}X$ has clopen image and $ps=\\mathrm{id}_X$. By [lem-weil-pbc-proper-open-identification], the specified composite $\\theta:j_2^{-1}M\\xrightarrow{\\sim}K$ is an isomorphism. The definition specifies $\\alpha=\\varepsilon_M\\circ j_{2!}(\\theta^{-1})$. On sheaves, the counit is induced by the identity on every etale object factoring through $X$, by [lem-weil-pbc-extension-by-zero-adjunction]; restriction therefore identifies $j_2^{-1}\\varepsilon_M$ with the identity on $j_2^{-1}M$. Likewise $j_2^{-1}j_{2!}K$ identifies with $K$: on an etale object over $X$, the extension-by-zero presheaf of [def-weil-pbc-extension-by-zero] is exactly the original sheaf. Every etale object and every member of a covering over an object factoring through $X$ also factors through $X$. On this restricted site the presheaf is already a sheaf, so its sheafification and the sheafified counit retain those identities. These identities hold termwise and descend with the adjunction as specified in the comparison definition. Consequently $j_2^{-1}\\alpha$ is $\\theta^{-1}$ under this identification, and is an isomorphism. It is not necessary to call this map an identity without specifying the theta identification.",
    "uses": [
+    "def-weil-pbc-proper-open-comparison",
     "lem-weil-pbc-proper-open-section",
     "lem-weil-pbc-proper-open-identification",
-    "def-weil-pbc-proper-open-comparison"
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "def-weil-pbc-extension-by-zero"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-comparison-iso.md",
+    "place": "Proof, paragraphs 1–3; expanded with Stacks Tags 03S4, 03S5, 0F70, 0DDF and derived cohomology"
+   }
   },
   {
-   "text": "Let $\\bar z:\\operatorname{Spec}\\Omega\\to T_2$ instead lie outside\n$j_2(X)$, and write $i:T_{1,\\bar z}\\to T_1$ for the geometric\nfibre. The fibre has empty intersection with $j_1(X)$, since\n$u j_1=j_2$. Extension by zero in\n[def-weil-pbc-extension-by-zero] therefore gives\n$i^{-1}j_{1!}K=0$, degree by degree. The geometric-fibre formula\n[cor-weil-pbc-geometric-fiber-finite] gives\n\n$$\n(Ru_*j_{1!}K)_{\\bar z}\n\\simeq R\\Gamma(T_{1,\\bar z},i^{-1}j_{1!}K)=0.\n$$",
+   "text": "Let $\\bar z:P=\\operatorname{Spec}\\Omega\\to T_2$ have image outside $j_2(X)$ and put $F=T_1\\times_{T_2}P$, $i:F\\to T_1$ and $a:F\\to P$. The pullback $X\\times_{T_1}F$ is empty: any point of it would map under $uj_1=j_2$ both into $j_2(X)$ and to the image of $\\bar z$, a contradiction. Thus the square with right open immersion $j_1$, bottom map $i$, and left open immersion $\\varnothing\\hookrightarrow F$ is an open-immersion square of [def-cbc-open-immersion-square]. Applying [cor-cbc-derived-extension-zero-base-change] gives $i^{-1}j_{1!}K\\simeq(\\varnothing\\hookrightarrow F)_!(K|_{\\varnothing})=0$. Indeed the only sheaf of modules on the empty scheme's small etale site is zero (the empty covering forces its sections on the empty object to be zero), hence every complex there is zero; alternatively the extension-by-zero presheaf of [def-weil-pbc-extension-by-zero] is zero on every nonempty etale object, and is zero also on the empty object. This proves vanishing of the actual module complex on the fibre, without assuming a stalk formula is part of the definition.",
    "uses": [
-    "def-weil-pbc-extension-by-zero",
-    "cor-weil-pbc-geometric-fiber-finite"
+    "def-weil-pbc-proper-open-comparison",
+    "def-cbc-open-immersion-square",
+    "cor-cbc-derived-extension-zero-base-change",
+    "def-weil-pbc-extension-by-zero"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-comparison-iso.md",
+    "place": "Proof, paragraphs 1–3; expanded with Stacks Tags 03S4, 03S5, 0F70, 0DDF and derived cohomology"
+   }
   },
   {
-   "text": "The source $j_{2!}K$ also has zero stalk there. Thus the map is a\nquasi-isomorphism on every geometric stalk.\n[lemma-weil-pbc-geometric-stalk-conservative], applied to the\ncohomology sheaves of its cone, proves the assertion.",
+   "text": "The proper map $u$, finite ring $\\Lambda$, and bounded-below object $j_{1!}K$ satisfy [cor-weil-pbc-geometric-fiber-finite]. Bounded-below extension by zero is part of the comparison datum, and [lem-weil-pbc-extension-by-zero-exact] also gives its termwise exact realization. The first, derived formula of the corollary gives $\\bar z^{-1}M\\simeq Ra_*i^{-1}j_{1!}K=0$ by step 2; an additive derived direct-image functor carries the zero complex to zero. On the source, [lem-weil-pbc-extension-by-zero-stalks], clause 2, says that every term of $j_{2!}K$ has zero stalk at $\\bar z$. Hence its termwise stalk complex is zero. These assertions include an empty fibre and make no finiteness or constructibility assumption on the individual sheaves of $K$.",
    "uses": [
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "cor-weil-pbc-geometric-fiber-finite",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-extension-by-zero-stalks"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-comparison-iso.md",
+    "place": "Proof, paragraphs 1–3; expanded with Stacks Tags 03S4, 03S5, 0F70, 0DDF and derived cohomology"
+   }
+  },
+  {
+   "text": "For every integer $q$, stalks commute with cohomology: the underlying abelian stalk functor is exact by [prop-weil-pbc-geometric-stalks-exact], and [lem-weil-pbc-exact-functor-bounded-below] supplies $H^q(FN)\\simeq F H^q(N)$ for any exact functor $F$. The inverse image of module sheaves is exact and agrees with underlying abelian inverse image by [prop-weil-pbc-inverse-image-modules-exact]. At $\\bar z:P\\to T_2$, [lem-weil-pbc-geometric-point-pullback-stalk] identifies the underlying stalk with $\\Gamma(P,\\bar z^{-1}(-))$ and makes $\\Gamma(P,-)$ exact, also for modules. Thus step 3 implies that both $\\mathcal H^q(j_{2!}K)_{\\bar z}$ and $\\mathcal H^q(M)_{\\bar z}$ vanish off $j_2(X)$. For a point in $j_2(X)$, restriction identifies pointed etale neighbourhoods inside that open with neighbourhoods in $X$ (intersect any neighbourhood with the open); therefore its stalk is the stalk of the restricted sheaf. Exactness of restriction and step 1 make the stalk of $\\mathcal H^q(\\alpha)$ an isomorphism there. Off the open it is the unique map $0\\to0$, also an isomorphism.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-geometric-point-pullback-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-comparison-iso.md",
+    "place": "Proof, paragraphs 1–3; expanded with Stacks Tags 03S4, 03S5, 0F70, 0DDF and derived cohomology"
+   }
+  },
+  {
+   "text": "Apply [lemma-weil-pbc-geometric-stalk-conservative] to the underlying abelian sheaf morphism of $\\mathcal H^q(\\alpha)$ for each $q$, using step 4. Each is an isomorphism of abelian sheaves, hence of $\\Lambda$-module sheaves: if a linear map $h$ has inverse $v$ on abelian sheaves, then $h(v(\\lambda y))=\\lambda y=h(\\lambda v(y))$, so injectivity gives $v(\\lambda y)=\\lambda v(y)$ on every object. Finally apply [lem-weil-pbc-derived-plus-iso-on-cohomology] with the abelian category $\\Mod(T_{2,\\Et},\\Lambda)$, not the pro-etale category and not merely abelian coefficients. Every cohomology map of $\\alpha$ is invertible, so the specified $\\alpha_{u,K}$ is an isomorphism in $D^+(T_{2,\\Et},\\Lambda)$.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-comparison-iso.md",
+    "place": "Proof, paragraphs 1–3; expanded with Stacks Tags 03S4, 03S5, 0F70, 0DDF and derived cohomology"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-proper-open-comparison",
   "lem-weil-pbc-proper-open-section",
   "lem-weil-pbc-proper-open-identification",
-  "def-weil-pbc-proper-open-comparison",
+  "lem-weil-pbc-extension-by-zero-adjunction",
   "def-weil-pbc-extension-by-zero",
+  "def-cbc-open-immersion-square",
+  "cor-cbc-derived-extension-zero-base-change",
   "cor-weil-pbc-geometric-fiber-finite",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-comparison-iso.md",
-  "place": "## Proof"
+  "place": "Proof paragraphs 1–3, expanded using Stacks etale-cohomology.tex Tags 03S4, 03S5, 0F70, 0DDF and existing derived-category lemmas"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lowerShriek|extensionByZero|properOpenComparison",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: hits are general category theory, Zariski modules, condensed sheaves or site geometry, not the specified etale proper/open derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper pushforward extension by zero fixing an open subscheme etale derived category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.IsIso",
+   "results": "CategoryTheory.Functor.isIso_ranAdjunction_homEquiv_iff; CategoryTheory.Functor.isIso_lanAdjunction_homEquiv_symm_iff",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: hits are general category theory, Zariski modules, condensed sheaves or site geometry, not the specified etale proper/open derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper morphism fixing an open subscheme has derived pushforward of extension by zero canonically isomorphic to extension by zero",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom; SheafOfModules.pushforwardNatIso_hom; SheafOfModules.pushforwardNatIso; AlgebraicGeometry.Scheme.Modules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: hits are general category theory, Zariski modules, condensed sheaves or site geometry, not the specified etale proper/open derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*proper|proper.*etale|extension.by.zero",
+   "results": "Mathlib/NumberTheory/MulChar/Basic.lean; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: hits are general category theory, Zariski modules, condensed sheaves or site geometry, not the specified etale proper/open derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology proper map extension by zero on a common open the canonical adjunction comparison is an isomorphism",
+   "results": "CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction; LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor; AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction; CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor; CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous; LightCondensed.isoLocallyConstantOfIsColimit; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; Condensed.isoLocallyConstantOfIsColimit",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: generic cohomology criterion only; reused the existing Mathlib leaf lem-weil-pbc-derived-plus-iso-on-cohomology"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*homology|isIso.*[Hh]omology|homology.*[Cc]onservative",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean; Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean; Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: generic cohomology criterion only; reused the existing Mathlib leaf lem-weil-pbc-derived-plus-iso-on-cohomology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived category cohomology functors jointly reflect isomorphisms of morphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor, IsIso",
+   "results": "loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: generic cohomology criterion only; reused the existing Mathlib leaf lem-weil-pbc-derived-plus-iso-on-cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism in the derived category of any abelian category is an isomorphism if all its cohomology maps are isomorphisms",
+   "results": "DerivedCategory.isIso_Q_map_iff_quasiIso; DerivedCategory.instIsIsoMapCochainComplexIntQ; HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso; DerivedCategory.isIso_Qh_map_iff; CochainComplex.quasiIsoAt₀_iff; HomotopyCategory.mem_quasiIso_iff; CochainComplex.cm5b.instQuasiIsoIntP; CochainComplex.isKInjective_iff_of_iso",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: generic cohomology criterion only; reused the existing Mathlib leaf lem-weil-pbc-derived-plus-iso-on-cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.isIso_iff",
+   "results": "DerivedCategory.isIso_iff",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: generic cohomology criterion only; reused the existing Mathlib leaf lem-weil-pbc-derived-plus-iso-on-cohomology"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -81,5 +215,49 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proper-open-comparison-iso",
+  "worker": "stage1",
+  "summary": "Kept the specified comparison and all hypotheses. Added its missing statement dependency. Expanded restriction of the adjoint, empty-open base change on the fibre, proper-base-change vanishing, exact cohomology stalks and module-linear conservativity. Reused existing nodes only; no attachment and no new nodes.",
+  "blueprint": "Paragraph 1 is step 1; paragraph 2 is steps 2–3; paragraph 3 is steps 4–5. All six original imported dependencies remain cited, with their missing properties supplied by existing statement nodes.",
+  "tool_uses": [
+   {
+    "node": "cor-cbc-derived-extension-zero-base-change",
+    "why": "Base change of extension by zero for the empty open in the geometric fibre; generic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "cor-weil-pbc-geometric-fiber-finite",
+    "why": "The blueprint explicitly uses the finite-coefficient proper geometric-fibre formula; no node of this unit supplies it."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact module pullback and compatibility with abelian inverse image; generic coefficient tool needed to read cohomology stalks."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Exact abelian stalks; generic tool for cohomology stalks."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Exact global sections over a geometric point and their identification with stalks; generic tool for the fibre formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-cbc-derived-extension-zero-base-change",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-geometric-point-pullback-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-f95b4c6fb",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-f95b4c6fb (reviewer sub-agent of L); spot-checked: Read the complete item, report, all sixteen cited statements, and cited source passages. All five steps preserve the specified comparison and ordinary étale D+ coefficients; proper-base-change hypotheses hold. Edge cases, duplicate/generalization candidates, and dependency paths checked; no repairs needed. Accepted tool uses and detailed findings are recorded in review.md."
+ }
 }
