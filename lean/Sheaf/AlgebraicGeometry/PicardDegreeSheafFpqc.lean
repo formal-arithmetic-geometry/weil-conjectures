@@ -8,6 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.Picard.Degree
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+import WeilConjectures.AlgebraicGeometry.DensePoints
+import WeilConjectures.AlgebraicGeometry.Descent
+import WeilConjectures.AlgebraicGeometry.Picard.Defs
+import WeilConjectures.AlgebraicGeometry.Picard.RationalPoint
 
 /-! # Fpqc descent for degree parts of the Picard functor
 
