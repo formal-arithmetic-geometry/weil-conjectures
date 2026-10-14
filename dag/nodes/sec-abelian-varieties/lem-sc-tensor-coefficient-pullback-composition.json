@@ -1,0 +1,118 @@
+{
+ "id": "lem-sc-tensor-coefficient-pullback-composition",
+ "kind": "statement",
+ "title": "Ordinary pullback composition of tensor coefficient comparisons",
+ "statement": "For schemes [def-pc-scheme], fixed tensor coefficient identifications [def-sc-tensor-coefficient-comparison], and morphisms q:A→X, q1:B→X, q2:C→X, a:B→A, b:C→B, aprime:C→A with a≫q=q1, b≫q1=q2, aprime≫q=q2 and b≫a=aprime, every X-module L satisfies pullback(b)(d1.hom)≫d2.hom = pullbackComp(b,a).hom at tensorPullback(q)(L), followed by equality transport along b≫a=aprime and d3.hom. This is an equality of ordinary module morphisms, with no derived category or flatness assumption.",
+ "source": {
+  "document": "Stacks Project, Cohomology and Sheaves",
+  "place": "Tags 0D5S and 0096; step 2 of lem-sc-tensor-single-pullback-composition"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-tensor-coefficient-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Identify each coefficient comparison as the mixed leftAdjointCompIso using the fixed tensor adjunction for q and the ordinary pullback adjunction for a. The conjugate of the inverse leftAdjointUniq is identity, so the five-line mate calculation identifies the two transformations. Identify ordinary pullbackComp as leftAdjointCompIso by its Mathlib conjugateEquiv_pullbackComp_inv formula and injectivity of conjugateEquiv.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Substitute aprime=b≫a. Apply Mathlib Adjunction.leftAdjointCompIso_assoc (the coherent-right-isomorphism form of the declaration attached to lem-sc-left-adjoint-composition-iso-associativity) to tensor adjunctions along q,q1,q2 and ordinary adjunctions along a,b,b≫a. Its right-adjoint coherence hypothesis is proved by substituting q1 and q2, evaluating at each module and open, and simplifying pushforward composition and equality transports. Evaluate the resulting equality at L and rewrite the mixed comparisons and ordinary pullbackComp.",
+   "uses": [
+    "lem-sc-left-adjoint-composition-iso-associativity",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-left-adjoint-composition-iso-associativity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Cohomology and Sheaves; Mathlib.CategoryTheory.Adjunction.CompositionIso",
+  "place": "Tags 0096 and 0D5S; Adjunction.leftAdjointCompIso_assoc, lines 170-181; conjugateEquiv_pullbackComp_inv in Mathlib.AlgebraicGeometry.Modules.Sheaf, lines 265-269"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Search returned 12 adjunction uniqueness ingredients: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-14",
+   "verdict": "Ingredients only; no exact derived square or coefficient triangle theorem or previously named coefficient data construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition coherence of pullback functors in a commuting diagram of two squares",
+   "results": "Search returned 8 ingredients; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp_hom_app_fst_app, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp_hom_app_snd_app, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.w_app_assoc, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.Hom.w_assoc, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.comp_fst_app, CategoryTheory.Limits.CategoricalPullback.Hom.w_assoc, CategoryTheory.Over.pullbackComp",
+   "date": "2026-10-14",
+   "verdict": "No exact match; ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp.*assoc|pushforwardComp.*assoc|canonicalSinglePullback.*composition",
+   "results": "Search returned 4 ingredients; Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-14",
+   "verdict": "No exact match; ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary pullback coefficient comparisons compose under adjunction uniqueness",
+   "results": "Service unavailable: Internal Server Error. No result or match is claimed; Loogle/LeanFinder and source grep searches are recorded above.",
+   "date": "2026-10-14",
+   "verdict": "Unavailable; no match claimed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TensorSinglePullbackComposition",
+  "date": "2026-10-14",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-tensor-single-pullback-composition",
+   "place": "proof step 2"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorCoefficientPullbackComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorCoefficientPullbackComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorCoefficientPullback_composition",
+  "statement": "theorem tensorCoefficientPullback_composition\n    {A B C X : Scheme.{v}} (q : A ⟶ X) (q1 : B ⟶ X) (q2 : C ⟶ X)\n    (a : B ⟶ A) (b : C ⟶ B) (a' : C ⟶ A)\n    (h1 : a ≫ q = q1) (h2 : b ≫ q1 = q2) (h3 : a' ≫ q = q2)\n    (hab : b ≫ a = a') (L : X.Modules) :\n    (pullback b).map (tensorCoefficientComparison q q1 a h1 L).hom ≫\n      (tensorCoefficientComparison q1 q2 b h2 L).hom =\n    (pullbackComp b a ≪≫ eqToIso (congrArg (fun r ↦ pullback r) hab)).hom.app\n      ((tensorPullback q).obj L) ≫ (tensorCoefficientComparison q q2 a' h3 L).hom",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-586ef",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261014T033106-L-603824",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-586ef",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261014T033106-L-603824",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered proofs match the unchanged signatures and DAG statements; both modules and direct importer PicardCoefficientTransposePasting compile warning-free; all eleven axiom probes use only permitted axioms."
+ }
+}

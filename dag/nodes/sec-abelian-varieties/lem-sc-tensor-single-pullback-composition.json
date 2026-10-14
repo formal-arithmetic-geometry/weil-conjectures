@@ -8,7 +8,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Cohomology",
-  "place": "Tag 0D5S"
+  "place": "Tag 0D5S; naturality and canonicalSinglePullbackComposition followed by the ordinary coefficient composition identity"
  },
  "mathlib_searches": [
   {
@@ -61,15 +61,12 @@
  "statement": "For schemes [def-pc-scheme] with module sheaves [def-weil-sheaf-of-modules-category] and shared derived categories [def-pc-derived-category], let $q:A\\to X$, $q_1:B\\to X$, $q_2:C\\to X$, $a:B\\to A$, $b:C\\to B$, $a\\prime:C\\to A$ satisfy $aq=q_1$, $bq_1=q_2$, $a\\prime q=q_2$ and $ba=a\\prime$. Fix an $\\mathcal O_X$-module $L$, and put $M=q^\\otimes L$, $N=q_1^\\otimes L$. For a triangle $rq=q_1$, let $d_r:r^*M\\cong q_1^\\otimes L$ be the inverse unique left-adjoint comparison from tensor to ordinary pullback followed by the inverse conjugate of pushforward composition and transport along the triangle [lem-pc-module-pullback-adjunction]. Define $e_a=s_a(M)\\gg d_a[0]$, $e_b=s_b(N)\\gg d_b[0]$ and $e_{a\\prime}=s_{a\\prime}(M)\\gg d_{a\\prime}[0]$, where $s$ is the canonical single-module derived-pullback comparison [lem-pc-canonical-single-pullback-comparison]. With $K=M[0]$ and the selected comparison $c$ [lem-pc-ringed-spaces-derived-pullback-composition], composition in Lean order obeys $Lb^*(e_a)\\gg e_b=c(b,a)_K\\gg\\mathrm{transport}_{ba=a\\prime}\\gg e_{a\\prime}$. No flatness or invertibility of $s$ is assumed. Each d is the fixed identification [def-sc-tensor-coefficient-comparison], whose construction is the displayed conjugate and left-adjoint uniqueness formula.",
  "proof": [
   {
-   "text": "Evaluate canonicalSinglePullbackComposition at b,a,M. Naturality of the canonical single-pullback map moves d1[0] through the comparison for b. Transport the composite comparison along b followed by a equals aprime. It remains to prove that ordinary pullback composition followed by d3 equals pullback of d1 followed by d2.",
+   "text": "Prove naturality of canonicalSinglePullbackMap by naturality of the selected derived counit, the single-complex comparison, and the unique tensor-to-ordinary adjunction comparison. Name the single and homotopy functors explicitly, change the equations to those named maps, and combine the three equalities by category-only reassociation. Substitute aprime=b≫a. Move d1 through the b single comparison and apply tensorCoefficientPullback_composition. Map its ordinary equality by the single functor, then combine it with canonicalSinglePullbackComposition using the category-only pasting calculation. No geometric construction is unfolded in that pasting calculation.",
    "uses": [
-    "lem-pc-canonical-single-pullback-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Transpose the remaining underived identity with the composed ordinary pullback adjunctions and the chosen tensor adjunctions. The leftAdjointUniq counit equations identify their mates with identities. The definitions of the three coefficient isomorphisms as conjugates reduce the equation to associativity of pushforward composition, with transport along h1,h2,h3 and hab. The transports agree by proof irrelevance. Injectivity of the conjugate equivalence gives the underived identity. Map by the single functor and substitute into the preceding derived composition equality.",
-   "uses": [
+    "lem-pc-canonical-single-pullback-composition",
+    "lem-sc-tensor-coefficient-pullback-composition",
+    "lem-pc-canonical-single-pullback-comparison",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
     "lem-pc-module-pullback-adjunction"
    ],
    "elementary": false
@@ -77,6 +74,9 @@
  ],
  "proof_deps": [
   "lem-pc-canonical-single-pullback-composition",
+  "lem-sc-tensor-coefficient-pullback-composition",
+  "lem-pc-canonical-single-pullback-comparison",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
   "lem-pc-module-pullback-adjunction"
  ],
  "lean": {
@@ -113,11 +113,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-46027",
-  "group": "A4",
+  "reviewer": "X-586ef",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261014T013032-L-3411915",
+  "landing": "20261014T033106-L-603824",
   "kind": "interface",
-  "note": "independent Codex review: Delivery matches its DAG statements and compiles; forced adaptation is necessary and minimal, direct importers pass, and axioms/sorry usage conform."
+  "note": "independent Codex review: Delivered proofs match the unchanged signatures and DAG statements; both modules and direct importer PicardCoefficientTransposePasting compile warning-free; all eleven axiom probes use only permitted axioms."
  }
 }
