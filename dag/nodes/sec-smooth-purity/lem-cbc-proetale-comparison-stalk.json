@@ -24,9 +24,128 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C=A^{\\mathrm{sh}}_{T,\\bar t}$ and $S=\\operatorname{Spec}C=T_{(\\bar t)}$ with structural map $p:S\\to T$. The local-structure lemma gives a local-ring structure on $C$ for which $C$ is strictly henselian. Apply the pointed-map lemma with this structure: it gives $\\psi:C\\twoheadrightarrow K\\subset\\Omega$ with kernel the maximal ideal and with the specified neighbourhood projection equations. The composite $C\\to K\\hookrightarrow\\Omega$ defines $\\bar s:\\operatorname{Spec}\\Omega\\to S$. Its image is the closed point because the kernel is the maximal ideal. The projection equations and the definition of the structural map give $p\\bar s=\\bar t$. Thus the strictly henselian sections lemma can be applied at $\\bar s$, rather than at an arbitrary point of $S$.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map",
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-weil-pbc-strict-henselization-pointed-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GP and 04GW, labels lemma-strict-henselization and lemma-strict-henselization-different; Etale Cohomology Tag 04HX, lemma-describe-etale-local-ring"
+   }
+  },
+  {
+   "text": "By the classical pro-etale stalk lemma, $S\\to T$ is an object of the pro-etale site and the germ map $(\\nu_T^*H)(S)\\to(\\nu_T^*H)_{\\bar t}$ is a canonical isomorphism, natural in the sheaf $H$. Use its inverse to start the desired comparison. This is an evaluation formula on the strict localization; it does not assert that etale neighbourhoods are cofinal among weakly etale neighbourhoods.",
+   "uses": [
+    "lem-cbc-proetale-classical-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0993, label lemma-classical-point"
+   }
+  },
+  {
+   "text": "Apply the sections formula to the object $p:S\\to T$. It identifies $(\\nu_T^*H)(S)$ with $\\Gamma(S_{\\mathrm{et}},p_{\\mathrm{et}}^{-1}H)$, naturally in $H$. Since Step 2 places $p$ in the pro-etale site, the weakly etale hypothesis of that formula is satisfied. The identification is with the ordinary inverse image of sheaves of sets, with no tensor product or change of coefficient ring.",
+   "uses": [
+    "lem-cbc-comparison-pullback-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0GLZ, label lemma-describe-pullback-from-etale"
+   }
+  },
+  {
+   "text": "Apply the sets version of the strictly henselian sections lemma with its ambient scheme and open subscheme both equal to $S$. Step 1 gives precisely its hypotheses: a strictly henselian local coordinate ring and a geometric point at the closed point. Its germ map identifies $\\Gamma(S_{\\mathrm{et}},p_{\\mathrm{et}}^{-1}H)$ with $(p_{\\mathrm{et}}^{-1}H)_{\\bar s}$. Apply the etale inverse-image stalk-germ lemma to $p$ and $\\bar s$; since $p\\bar s=\\bar t$, this last stalk is bijective to $H_{\\bar t}$. Composing these bijections with Steps 2 and 3 defines $c_H:(\\nu_T^*H)_{\\bar t}\\xrightarrow{\\sim}H_{\\bar t}$.",
+   "uses": [
+    "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QO, label lemma-vanishing-etale-cohomology-strictly-henselian; Tag 03Q1, label lemma-stalk-pullback (3)"
+   }
+  },
+  {
+   "text": "The evaluations and germ maps in the first three arrows of this composite commute with a sheaf morphism $a:H\\to H'$ (evaluation and germ are componentwise, and the sections formula is natural). For the last arrow, apply the characterization in the stalk-germ lemma to a pulled-back section $s\\in H(U)$: either composite with $a$ sends its germ to the germ of $a_U(s)$. Naturality of the inverse-image unit is the clause (0) of the composition-units lemma. These pulled-back germs exhaust the source stalk: an element maps under the bijection of Step 4 to a germ represented by a section of H on a pointed etale neighbourhood; the pulled-back germ of that section has the same image, so injectivity makes it the original element. The two composites are therefore equal on every element. This uses the bijection and its formula on unit germs, not a uniqueness assertion for a different codomain. This proves $c_{H'}(\\nu_T^*a)_{\\bar t}=a_{\\bar t}c_H$. All choices in Step 1 give the same $\\bar s$: its composites with every limit projection are the specified lifts, so the inverse-limit universal property determines it. Hence the isomorphism is canonical, not dependent on a chosen local-ring structure or presentation.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1, label lemma-stalk-pullback (3), with its germ characterization; Tag 0GLZ, naturality of the displayed sections formula"
+   }
+  },
+  {
+   "text": "Write $P(H)=(\\nu_T^*H)_{\\bar t}$ and $Q(H)=H_{\\bar t}$ for the two functors on etale sheaves of sets. $P$ preserves finite products: comparison inverse image preserves finite limits by the geometric-morphism definition, and the classical stalk identification makes the second functor evaluation at $S$, which preserves sectionwise products and the terminal sheaf. The etale stalk finite-limits lemma gives the same assertion for $Q$. Under these product identifications, naturality from Step 5 with the two projections gives $c_{H\\times H}(x,y)=(c_H(x),c_H(y))$; on the terminal sheaf the component is the unique map. An abelian sheaf is an abelian group object, so naturality with $+:H\\times H\\to H$, $0:*\\to H$, and negation gives $c_H(x+y)=c_H(x)+c_H(y)$, $c_H(0)=0$, and $c_H(-x)=-c_H(x)$. The inverse bijection is additive as well. On abelian sheaves this is the asserted abelian stalk isomorphism: the two pointed-neighbourhood colimits are filtered, and forgetting abelian groups preserves filtered colimits. Thus their underlying sets are exactly the stalks used in Steps 2--5. The identification of abelian comparison inverse image with the set inverse image equipped with its group operations is clause (3) of [def-weil-pbc-sites-and-cohomology], so the abelian functor here is the one in the statement.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-cbc-proetale-classical-stalk",
+    "lem-weil-pbc-sets-etale-stalk-finite-limits",
+    "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "lem-weil-pbc-abelian-groups-forget-filtered-colimits",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "def-weil-proetale-geometric-stalk",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Tag 00YR, label section-sheaves-algebraic-structures; Etale Cohomology Tag 03PT, lemma-stalk-exact; Pro-etale Cohomology Tag 0993"
+   }
+  },
+  {
+   "text": "For a sheaf of left $\\Lambda$-modules, the inverse image in the statement applies the set functor to each scalar endomorphism $\\lambda_r:H\\to H$ separately. Step 5 applied to $\\lambda_r$ therefore gives $c_H(rx)=r c_H(x)$ for every $r\\in\\Lambda$; Step 6 supplies additivity. The filtered-module-colimit elementwise lemma identifies these stalk structures with module colimits: every element has a section representative, equality holds after a common refinement, and the operations are $[x]+[y]=[x|_W+y|_W]$, $r[x]=[rx]$ on a common pointed refinement $W$. These formulas are well defined because restrictions are linear, and have the module-colimit universal property since a compatible family of linear maps preserves the displayed operations. Consequently the comparison and its inverse are $\\Lambda$-linear. This argument uses only a fixed ring and each individual scalar operation, so neither commutativity nor finiteness of $\\Lambda$ is needed.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-proetale-geometric-stalk",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Tag 00YR, label section-sheaves-algebraic-structures; Algebra Tags 00D6 and 00D7, labels lemma-directed-colimit and lemma-zero-directed-limit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-strict-henselization-pointed-map",
+  "lem-cbc-proetale-classical-stalk",
+  "lem-cbc-comparison-pullback-sections",
+  "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-sets-etale-stalk-finite-limits",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "lem-weil-pbc-abelian-groups-forget-filtered-colimits",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 0993 and 0GLZ; combine with Etale Cohomology Tags 03QO and 03Q1 and the algebraic-structure construction of Sites Tag 00YR"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -97,10 +216,73 @@
    "results": "12 hits: AlgebraicGeometry.Scheme.ProEt, AlgebraicGeometry.Scheme.proetalePrecoverage, AlgebraicGeometry.Scheme.proetaleTopology, AlgebraicGeometry.Scheme.instCategoryProEt, AlgebraicGeometry.Scheme.instHasIsosProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderCompositionProetalePrecoverage, AlgebraicGeometry.Scheme.instSubcanonicalProetaleTopology",
    "date": "2026-10-14",
    "verdict": "no match: independently read hits; site constructions, structure-sheaf evaluation, morphisms between points on one fixed site, or unrelated module cokernels do not assert this pro-etale formula"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(pullback|sections)|comparison.*(sections|stalk)|describePullback",
+   "results": "0 hit(s): ",
+   "date": "2026-10-14",
+   "verdict": "no match: read the hits; scheme structural stalks, ordinary topological stalks, same-site point morphisms, sheaf equivalences, and structure-sheaf modules do not state the comparison sections formula or identify the two geometric fiber functors"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEt.*stalk|stalk.*ProEt",
+   "results": "0 hit(s): ",
+   "date": "2026-10-14",
+   "verdict": "no match: read the hits; scheme structural stalks, ordinary topological stalks, same-site point morphisms, sheaf equivalences, and structure-sheaf modules do not state the comparison sections formula or identify the two geometric fiber functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProEt\", \"stalk\"",
+   "results": "0 hit(s): ",
+   "date": "2026-10-14",
+   "verdict": "no match: read the hits; scheme structural stalks, ordinary topological stalks, same-site point morphisms, sheaf equivalences, and structure-sheaf modules do not state the comparison sections formula or identify the two geometric fiber functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric stalks of the pullback along the comparison from the proetale site to the etale site are naturally the etale stalks",
+   "results": "8 hit(s): TopCat.Presheaf.stalkPullbackIso, TopCat.Presheaf.stalkPullbackInv, TopCat.Presheaf.stalkPullbackHom, AlgebraicGeometry.LocallyRingedSpace.toStalk_stalkMap_toΓSpec, AlgebraicGeometry.LocallyRingedSpace.stalkMap_germ_apply, TopCat.Presheaf.germToPullbackStalk, AlgebraicGeometry.Scheme.stalkMap_germ_apply, AlgebraicGeometry.Scheme.Etale.forget",
+   "date": "2026-10-14",
+   "verdict": "no match: read the hits; scheme structural stalks, ordinary topological stalks, same-site point morphisms, sheaf equivalences, and structure-sheaf modules do not state the comparison sections formula or identify the two geometric fiber functors"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkPullbackIso",
+   "results": "1 hit(s): Mathlib/Topology/Sheaves/Stalks.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: read the hits; scheme structural stalks, ordinary topological stalks, same-site point morphisms, sheaf equivalences, and structure-sheaf modules do not state the comparison sections formula or identify the two geometric fiber functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proetale comparison inverse image geometric stalk is etale stalk",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\", \"comp\"",
+   "results": "12 hit(s): CategoryTheory.GrothendieckTopology.Point.shrinkYonedaCompPresheafFiberIso, CategoryTheory.GrothendieckTopology.Point.sheafToPresheafCompPresheafFiberIso, CategoryTheory.GrothendieckTopology.Point.sheafFiberCompIso, CategoryTheory.GrothendieckTopology.Point.presheafFiberCompIso, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_presheafFiberCompIso_hom_app, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_presheafFiberCompIso_hom_app_assoc, CategoryTheory.GrothendieckTopology.Point.shrinkYonedaCompPresheafFiberIso_inv_app_toPresheafFiber, CategoryTheory.GrothendieckTopology.Point.sheafFiberCompIso_hom_app",
+   "date": "2026-10-14",
+   "verdict": "no match: read the hits; scheme structural stalks, ordinary topological stalks, same-site point morphisms, sheaf equivalences, and structure-sheaf modules do not state the comparison sections formula or identify the two geometric fiber functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProEt\"",
+   "results": "12 hit(s): AlgebraicGeometry.Scheme.ProEt, AlgebraicGeometry.Scheme.proetalePrecoverage, AlgebraicGeometry.Scheme.proetaleTopology, AlgebraicGeometry.Scheme.instCategoryProEt, AlgebraicGeometry.Scheme.instHasIsosProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderCompositionProetalePrecoverage, AlgebraicGeometry.Scheme.instSubcanonicalProetaleTopology",
+   "date": "2026-10-14",
+   "verdict": "no match: read the hits; scheme structural stalks, ordinary topological stalks, same-site point morphisms, sheaf equivalences, and structure-sheaf modules do not state the comparison sections formula or identify the two geometric fiber functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of the fiber functor at a geometric point with the inverse image from etale sheaves to proetale sheaves equals the original fiber functor",
+   "results": "8 hit(s): CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber_comp, CategoryTheory.GrothendieckTopology.Point.Hom.presheafFiber_comp, CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber_comp_assoc, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w_apply, CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber, CategoryTheory.GrothendieckTopology.Point.Hom.presheafFiber_comp_assoc, CategoryTheory.GrothendieckTopology.Point.presheafToSheafCompSheafFiber",
+   "date": "2026-10-14",
+   "verdict": "no match: read the hits; scheme structural stalks, ordinary topological stalks, same-site point morphisms, sheaf equivalences, and structure-sheaf modules do not state the comparison sections formula or identify the two geometric fiber functors"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-proetale-stalk-conservative",
   "by": "worker",
@@ -116,5 +298,59 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-cbc-proetale-comparison-stalk",
+  "worker": "stage1",
+  "summary": "Kept the statement, replaced the unsupported etale-cofinality route by strict-local evaluation, the general comparison sections formula, strictly henselian sections and etale stalk pullback. Checked closed-point and coefficient hypotheses and wrote naturality, additivity and scalar compatibility explicitly. One new statement-only node, no Mathlib leaves.",
+  "blueprint": "Realizes ancestor lem-cbc-proetale-stalk-conservative Proof Step 3, the geometric stalk identification, using the corrected evaluation route already indicated by this item; does not change the unit or chapter.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-local-structure",
+    "why": "Generic tool for the strict-localization calculation; the comparison unit has no node giving this local and strictly henselian structure on the chosen colimit."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-pointed-map",
+    "why": "Generic tool for the strict-localization calculation; the comparison unit has no node giving this closed-point geometric lift with the projection equations."
+   },
+   {
+    "node": "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+    "why": "Generic tool for the strict-localization calculation; the comparison unit has no node giving this sets sections-to-closed-stalk bijection."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "why": "Generic tool for the strict-localization calculation; the comparison unit has no node giving this sets inverse-image stalk bijection with germ characterization."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "why": "Generic tool for the strict-localization calculation; the comparison unit has no node giving this sets inverse-image construction and naturality of units."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "why": "Generic tool for the strict-localization calculation; the comparison unit has no node giving this description of an abelian sheaf as a group object and sectionwise products."
+   },
+   {
+    "node": "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "why": "Generic tool for the strict-localization calculation; the comparison unit has no node giving this common-refinement property of etale stalk representatives."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-strict-henselization-pointed-map",
+  "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-19b88fd63",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-19b88fd63 (reviewer sub-agent of L); spot-checked: Read both nodes, all seven steps, cited statements and source passages, unit/chapter route, and exact archived target declarations. The stalk comparison is sound for sets, abelian groups and arbitrary fixed-ring modules; it does not establish condensed-coefficient base change. Corrected the new node’s missing created.by/date in fixes. Full checks, duplicate searches, edge cases and inherited dependency cycles are documented in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
