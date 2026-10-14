@@ -76,12 +76,14 @@ abbrev tensorClosed (R : Sheaf J CommRingCat.{u}) :
   let := monoidalCategory R
   let := symmetricCategory R
   refine ⟨⟨?_⟩, ⟨monoidalClosed⟩, tensorHomEquiv, ?_⟩
-  · exact
+  · -- MonoidalFree supplies additivity of both tensor functors from the adjunction.
+    exact
       { whiskerLeft_zero := fun {X Y Z} ↦ (tensorLeft X).map_zero Y Z
         zero_whiskerRight := fun {X Y Z} ↦ (tensorRight X).map_zero Y Z
         whiskerLeft_add := fun {X Y Z} f g ↦ (tensorLeft X).map_add (f := f) (g := g)
         add_whiskerRight := fun {X Y Z} f g ↦ (tensorRight X).map_add (f := f) (g := g) }
   · intro F F' G G' H H' f g h t
+    -- Naturality in the two tensor factors precedes naturality in the target.
     rw [tensorHom_def, Category.assoc]
     calc
       tensorHomEquiv F' G' H' (f ▷ G' ≫ F ◁ g ≫ t ≫ h) =
