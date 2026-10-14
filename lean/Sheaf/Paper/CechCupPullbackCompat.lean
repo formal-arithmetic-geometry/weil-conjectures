@@ -13,7 +13,6 @@ public import Sheaf.AlgebraicGeometry.EtaleTensorSections
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import Sheaf.Paper.CechRefinementComparisonSquare
 import Sheaf.Paper.CechCupResolutionRepresentatives
-import Sheaf.Paper.ModuleCupCoefficientResolutionMaps
 
 /-! # Cech cup products and pullback
 
@@ -221,47 +220,6 @@ private def cup_cycle {X : Scheme.{v}} {ι : Type v} (U : ι → X.Opens)
   rw [(ComplexShape.up ℕ).next_eq' (show p + q + 1 = p + q + 1 from rfl)]
   exact hz
 
-private theorem cupResolutionClass_surjective {X : Scheme.{v}} {F : X.Modules}
-    (D : CupAcyclicResolution F) (n : ℕ) : Function.Surjective (D.class n) := by
-  let : EnoughInjectives X.Modules :=
-    (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
-  let := RingedSpace.globalSectionsFunctor_additive X.toRingedSpace
-  let T := (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
-    (ComplexShape.up ℕ)
-  have : IsIso (HomologicalComplex.homologyMap (T.map D.comparison) n) := D.computes n
-  exact ((ModuleCat.epi_iff_surjective
-    (D.I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) n).inv).mp
-      inferInstance).comp
-    (((ModuleCat.epi_iff_surjective
-      (HomologicalComplex.homologyMap (T.map D.comparison) n)).mp inferInstance).comp
-        (cycle_class_surjective (T.obj D.K) n))
-
-private theorem cupPair_exists_cycle {X : Scheme.{v}} {F G : X.Modules}
-    (D : CupResolutionPairing F G) (p q : ℕ)
-    (a : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
-      (ComplexShape.up ℕ)).obj D.left.K).sc p).moduleCatLeftHomologyData.K)
-    (b : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
-      (ComplexShape.up ℕ)).obj D.right.K).sc q).moduleCatLeftHomologyData.K) :
-    ∃ c : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
-      (ComplexShape.up ℕ)).obj D.target.K).sc (p + q)).moduleCatLeftHomologyData.K,
-      c.val = D.pair p q ⊤ a.val b.val := by
-  have ha := a.property
-  have hb := b.property
-  change (D.left.K.d p ((ComplexShape.up ℕ).next p)).val.app (op ⊤) a.val = 0 at ha
-  change (D.right.K.d q ((ComplexShape.up ℕ).next q)).val.app (op ⊤) b.val = 0 at hb
-  rw [ComplexShape.next_eq' (ComplexShape.up ℕ) (by simp :
-    (ComplexShape.up ℕ).Rel p (p + 1))] at ha
-  rw [ComplexShape.next_eq' (ComplexShape.up ℕ) (by simp :
-    (ComplexShape.up ℕ).Rel q (q + 1))] at hb
-  refine ⟨⟨D.pair p q ⊤ a.val b.val, ?_⟩, rfl⟩
-  change (D.target.K.d (p + q) ((ComplexShape.up ℕ).next (p + q))).val.app (op ⊤)
-    (D.pair p q ⊤ a.val b.val) = 0
-  rw [ComplexShape.next_eq' (ComplexShape.up ℕ) (by simp :
-    (ComplexShape.up ℕ).Rel (p + q) (p + q + 1))]
-  rw [D.leibniz, ha, hb]
-  simp
-
-
 /-- Refinement pullback and the signed Cech cup product commute with the canonical
 Cech-to-module-cohomology comparisons. If these comparisons are isomorphisms, the
 products identify through them. Coefficient and pullback naturality are stated below.
@@ -378,24 +336,7 @@ theorem moduleCup_coefficient_naturality (X : Scheme.{v})
         (@id (F ⊗ G ⟶ F₁ ⊗ G₁) (φ ⊗ₘ ψ)) (cup a b) =
       cup₁ ((RingedSpace.moduleCohomology X.toRingedSpace p).map φ a)
         ((RingedSpace.moduleCohomology X.toRingedSpace q).map ψ b) := by
-  obtain ⟨D, E, l, r, t, hl, hr, ht, hpair⟩ :=
-    moduleCup_coefficient_resolution_maps X F G F₁ G₁ φ ψ
-  intro x y
-  obtain ⟨a, rfl⟩ := cupResolutionClass_surjective D.left p x
-  obtain ⟨b, rfl⟩ := cupResolutionClass_surjective D.right q y
-  obtain ⟨c, hcval⟩ := cupPair_exists_cycle D p q a b
-  let T := (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
-    (ComplexShape.up ℕ)
-  let a' := map_cycle (T.map l) p a
-  let b' := map_cycle (T.map r) q b
-  let c' := map_cycle (T.map t) (p + q) c
-  have ha' : a'.val = (l.f p).val.app (op ⊤) a.val := map_cycle_val _ _ _
-  have hb' : b'.val = (r.f q).val.app (op ⊤) b.val := map_cycle_val _ _ _
-  have hc' : c'.val = (t.f (p + q)).val.app (op ⊤) c.val := map_cycle_val _ _ _
-  rw [hc D a b c hcval, ← hl p a a' ha', ← hr q b b' hb',
-    ← ht (p + q) c c' hc']
-  apply (hc₁ E a' b' c' ?_).symm
-  rw [hc', hcval, hpair, ha', hb']
+  sorry
 
 /-- Pullback carries the sheaf cup product to the product of pulled-back classes,
 using the canonical tensor-pullback comparison on the coefficient sheaves.
