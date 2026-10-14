@@ -15,7 +15,7 @@
  },
  "kind": "statement",
  "title": "Perfect local lifting of a lisse residue reduction",
- "statement": "Let $X$ be a Noetherian scheme (locally Noetherian and quasi-compact) [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme, def-pc-scheme]. Let $(A,I)$ be an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], and assume $A\\xrightarrow{\\sim}\\varprojlim_{n\\geq1}A/I^n$. Use sheaves of modules [def-weil-sheaf-of-modules-category] and inverse limits of sheaves [def-pur-sheaf-inverse-limit]. Put $B_X=\\varprojlim_{n\\geq1}(A/I^n)_X$ on the small pro-etale site [def-weil-pbc-proetale-site]. Let $M\\in D(\\operatorname{Mod}(B_X))$ [def-weil-abstract-derived-category] be derived $I$-complete [def-weil-pbc-intrinsic-completion]. Suppose $M_1=M\\otimes^L_{B_X}(A/I)_X$ [def-weil-derived-tensor] is etale locally on the small etale site [def-weil-pbc-etale-site] isomorphic to the constant complex of a perfect $A/I$-complex: there is an etale covering on each member of which $M_1$ is isomorphic, after pullback to the pro-etale site, to a bounded complex of constant sheaves of finite projective $A/I$-modules [def-weil-pbc-projective-module]. Then there is a pro-etale covering $\\{U_j\\to X\\}$ and perfect $A$-complexes $P_j$ [def-pc-perfect-ring-complex], meaning bounded complexes of finite projective $A$-modules, with $M|_{U_j}\\simeq B_X|_{U_j}\\otimes_A^L P_j$. Here tensor with $A$ means tensor with its constant sheaf [def-weil-pbc-constant-sheaf], and restriction is to the corresponding localized site. No stratification or compatible etale witnesses are asserted in this conclusion.",
+ "statement": "Let $X$ be a Noetherian scheme (locally Noetherian and quasi-compact) [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme, def-pc-scheme]. Let $(A,I)$ be an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], and assume $A\\xrightarrow{\\sim}\\varprojlim_{n\\geq1}A/I^n$. Use sheaves of modules [def-weil-sheaf-of-modules-category] and inverse limits of sheaves [def-pur-sheaf-inverse-limit]. Put $B_X=\\varprojlim_{n\\geq1}(A/I^n)_X$ on the small pro-etale site [def-weil-pbc-proetale-site]. Let $M\\in D(\\operatorname{Mod}(B_X))$ [def-weil-abstract-derived-category] be derived $I$-complete [def-weil-pbc-intrinsic-completion]. Suppose $M_1=M\\otimes^L_{B_X}(A/I)_X$ [lem-pur-derived-change-of-rings] is etale locally on the small etale site [def-weil-pbc-etale-site] isomorphic to the constant complex of a perfect $A/I$-complex: there is an etale covering on each member of which $M_1$ is isomorphic, after pullback to the pro-etale site, to a bounded complex of constant sheaves of finite projective $A/I$-modules [def-weil-pbc-projective-module]. Then there is a pro-etale covering $\\{U_j\\to X\\}$ and perfect $A$-complexes $P_j$ [def-pc-perfect-ring-complex], meaning bounded complexes of finite projective $A$-modules, with $M|_{U_j}\\simeq B_X|_{U_j}\\otimes_A^L P_j$. Here tensor with $A$ means tensor with its constant sheaf [def-weil-pbc-constant-sheaf], and restriction is to the corresponding localized site. No stratification or compatible etale witnesses are asserted in this conclusion.",
  "source": {
   "document": "literature/stacks-project/proetale.tex",
   "place": "Tag 09C6, lemma-connected-adic-lisse, applied on connected open components of a Noetherian scheme; coefficient change by lem-weil-pbc-constant-completion-equivalence. Also literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf, Lemma 6.6.8 and Proposition 6.6.11, local lifting ingredient."
@@ -28,17 +28,148 @@
   "def-weil-pbc-proetale-site",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-intrinsic-completion",
-  "def-weil-derived-tensor",
   "def-pc-perfect-ring-complex",
   "def-weil-pbc-constant-sheaf",
   "def-weil-sheaf-of-modules-category",
   "def-pur-sheaf-inverse-limit",
   "def-weil-pbc-etale-site",
-  "def-weil-pbc-projective-module"
+  "def-weil-pbc-projective-module",
+  "lem-pur-derived-change-of-rings"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work locally on a member of the given etale residue-trivializing cover, then on each connected clopen component of a Noetherian affine open neighborhood. Etale maps are locally of finite presentation, hence locally of finite type; the locally-Noetherian finite-type lemma makes their sources locally Noetherian. Such neighborhoods cover: a Noetherian affine has finitely many irreducible components (otherwise recursively split a closed counterexample, contradicting the descending chain condition); grouping these finitely many components by chains of nonempty intersections gives its finitely many clopen connected components. Discard empty members. On this neighborhood choose one bounded finite-projective residue model $F$ with terms in $[a,b]$. Use the localization lemma as a canonical equivalence of sites after choosing small skeleta, rather than a literal isomorphism of those skeleta. Compute restriction on the equivalent concrete localized site. Slice restriction preserves kernels and products by the section formula $F|_U(V\\to U)=F(V)$. It preserves epimorphisms because any section over $V$ lifts on a covering of $V$, and that same covering, with its structural maps to $U$, is a covering in the slice. Thus restriction is exact; it also preserves constant sheaves and their inverse limits. By exact countable products and the Roos triangle it commutes with the derived limits of strict towers. It therefore preserves the quotient-completion unit in the constant-completion equivalence. Hence the restricted $M$ remains complete and is the derived limit of its quotient tower. Use the coefficient datum's normalization maps and cocycles throughout; no independently chosen transitions are substituted.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-countable-products-core",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-adic-coefficient-datum",
+    "pqf-lem-locnoeth-lft",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C6, connected-local reduction; Tag 099M; explicit slice and component arguments"
+   }
+  },
+  {
+   "text": "Write $N=\\operatorname{Res}_{\\underline A}M$. The constant-completion equivalence identifies $N\\otimes_A^L A/I^n$ with $M_n$, compatibly with transitions. Prove by induction that every $M_n$ is supported in $[a,b]$ and has pro-etale locally constant finite cohomology. The base is the given perfect constant model $F$ for $M_1$. Put $J_n=I^n/I^{n+1}$, a finite $A/I$-module because it is a subset of the finite ring $A/I^{n+1}$. Tensor the exact constant sequence $0\\to J_n\\to A/I^{n+1}\\to A/I^n\\to0$ with $N$ to get a triangle whose outer terms are $M_1\\otimes^L_{A/I}\\underline{J_n}$ and $M_n$. Exactness of this constant sequence follows by taking the exact finite etale constant sequence and applying the exact comparison inverse image. The first term is the constant bounded complex $F\\otimes_{A/I}J_n$, so has finite cohomology and no terms outside $[a,b]$. Derived associativity here is the balancing map $(p\\otimes c)\\otimes j\\mapsto p\\otimes cj$ on K-flat resolutions; the same computation identifies the kernel term. Tensoring a K-flat representative preserves the quasi-isomorphism from the cone of the first coefficient map to the last coefficient object, and commutes with cones, giving precisely this triangle. Regard all three terms as complexes of $A/I^{n+1}$-module sheaves, with the outer terms acted on through their quotient rings. Their finite locally constant underlying module sheaves remain finite locally constant over $A/I^{n+1}$. This finite ring is Noetherian, so the cited Serre theorem applies over that common ring. The long exact cohomology sequence then gives the induction step, including the same bounds $[a,b]$. This proves the finite-level properties rather than adding them as hypotheses; no boundedness of $N$ is assumed.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-constructible-constant-exact",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-locally-constant-derived-serre",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094I, ideal-power filtration proof, strengthened here using the given perfect residue model"
+   }
+  },
+  {
+   "text": "The preceding locally constant finite sheaves are intrinsically constructible using the one-stratum partition of the nonempty connected neighborhood $Y$: take $N=1$, $Y_1=Y$ with its given scheme structure, and $i_1=\\operatorname{id}_Y$. The whole space is locally closed and constructible (it is the intersection of itself as an open and a closed subset; its constructible expression uses the retrocompact opens $Y$ and $\\varnothing$). For $\\Lambda=A/I^n$, the canonical identification $i_1^{-1}\\Lambda_Y=\\Lambda_Y$ is the identity, so the module inverse image $i_1^*$ is the identity on coefficient actions and sheaves. The local finite-module models from step 2 give locally constant restrictions and finite module stalks, since a stalk of such a model is that finite module. Thus every clause of the current global finite-partition definition is satisfied, without replacing it by the affine-local Stacks convention. Finite-ring constructible derived origin therefore supplies bounded etale complexes $L_n$ and isomorphisms $\\alpha_n:\\nu^*L_n\\simeq M_n$. The residue model is already etale, so bounded-below full faithfulness identifies $L_1$ with its given constant perfect model. Pullback commutes with derived tensor. Thus $L_{n+1}\\otimes^L_{A/I^{n+1}}A/I^n$ pulls back to $M_n$. This source is bounded: exactness of $\\nu^*$ identifies its cohomology with that of $M_n$, and the sheaf unit in finite-level comparison reflects zero cohomology sheaves. Write $\\rho_n:M_{n+1}\\otimes^L_{A/I^{n+1}}A/I^n\\simeq M_n$ for the datum's normalization. Full faithfulness now uniquely lifts $\\alpha_n^{-1}\\rho_n(\\alpha_{n+1}\\otimes^L A/I^n)$ to an isomorphism $\\beta_n$ from that source to $L_n$. Its inverse also lifts, and faithfulness proves the quotient cocycles. Finally apply nilpotent-reduction lissity on the etale site with $B=A/I^n$, $J=I/I^n$, and $K=L_n$. Its bounded-above hypothesis holds by the established bound. Its first reduction is $L_1$ by these normalization maps (the identical reflection argument applies for reduction to level 1). Hence all cohomology sheaves of $L_n$ are finite locally constant on the etale site.",
+   "uses": [
+    "def-weil-proetale-constructible-sheaf",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "thm-weil-pbc-site-comparison",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-nilpotent-reduction-lissity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C6, passage to etale $L_n$; Tag 094I; explicit reflection and full-faithfulness construction"
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar x$ of the nonempty connected neighborhood and set $E_n=(L_n)_{\\bar x}$, taking the exact stalk functor termwise on complexes. Apply that same functor to every $\\beta_n$ to get algebraic normalization isomorphisms $E_{n+1}\\otimes^L_{A/I^{n+1}}A/I^n\\simeq E_n$. Stalks commute with tensor and preserve its associativity and coefficient maps: for derived tensor use the ringed-topos derived tensor pullback theorem for the point morphism. Its K-flat pullback computation and exactness of stalks identify this derived pullback with the termwise stalk. Put $t_n:E_{n+1}\\to E_n$ equal to the scalar-extension unit $E_{n+1}\\to\\operatorname{Res}(E_{n+1}\\otimes^L_{A/I^{n+1}}A/I^n)$ followed by the restriction of the stalk of $\\beta_n$. This is a map in $D(A/I^{n+1})$ whose adjoint reduction map is exactly that stalk normalization isomorphism. The unit is represented on a K-flat resolution by $p\\mapsto p\\otimes1$, so the iterated units and balancing maps reproduce the quotient cocycles already proved in step 3. Thus these specified $t_n$, not arbitrary maps between local models, give the algebraic tower required by the reconstruction lemma; restrict them further to $D(A)$ when forming its derived limit. Each $E_n$ is bounded with finite cohomology, and has a bounded finite-module representative: take the stalk of any constant finite-module local model supplied by finite-ring local constancy. The connected clause of finite-ring derived local constancy says $L_n$ is etale locally the constant complex $E_n$, and $E_1$ is perfect by the chosen residue model and the constant-sheaf stalk identity. Apply the algebraic perfect inverse-limit reconstruction lemma to this tower. It gives a perfect $P\\in D(A)$ and compatible isomorphisms $P\\otimes_A^L A/I^n\\simeq E_n$; choose a bounded finite-projective representative for $P$.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "lem-weil-pbc-finite-ring-derived-local-constancy",
+    "lem-weil-pbc-rlim-perfect-complete",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C6, algebraic models and transition maps; Tag 09AW"
+   }
+  },
+  {
+   "text": "For each $n$, finite-ring derived local constancy identifies the sheaf of isomorphisms $\\operatorname{Isom}(\\underline{E_n},L_n)$ as finite locally constant. Its stalks are nonempty because the chosen neighborhood $Y$ is connected and $L_n$ is locally the constant stalk model $E_n$. Supply the algebraic normalization maps of step 4 and etale normalization maps of step 3, with their cocycles, to compatible finite derived trivialization. It gives one pro-etale covering and compatible isomorphisms $\\underline{E_n}|_U\\simeq\\nu^*L_n|_U$. Compose with $\\alpha_n$ and the reductions of $P$ to identify $\\underline{P\\otimes_A^L A/I^n}|_U\\simeq M_n|_U$, compatibly for all $n$. The nonempty finite isomorphism sheaves, not an unproved simultaneous choice of independent trivializations, are the input to this step.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-derived-local-constancy",
+    "lem-weil-pbc-compatible-finite-derived-trivializations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C6, final compatible-isomorphism argument; Tag 09BV, finite-isomorphism-sheaf adaptation"
+   }
+  },
+  {
+   "text": "It remains to identify the derived limit of the left tower, including after restriction to $U$. For each finite-projective term $P^q$, choose an idempotent $e$ on $A^r$ with image $P^q$. Its finite reductions are the images of the same idempotent modulo $I^n$. Their constant sheaves have sectionwise surjective transition maps by constant-module section properties. For any sectionwise surjective tower, $1-s$ on the product is sectionwise surjective: given $(y_n)$ choose $x_1$ and recursively lift $x_n-y_n$ to $x_{n+1}$. Its kernel is the ordinary inverse limit. The latter for the summand in question is $e B_U^r=B_U\\otimes_A P^q$, since finite sums and idempotents commute with inverse limits. The Roos triangle and exact countable products therefore identify $R\\lim_n\\underline{P\\otimes_A A/I^n}|_U$ with the bounded complex $B_U\\otimes_A P$. Flatness of $B_U$ over constant $A$ identifies this with $B_U\\otimes_A^L P$. On the right, slice restriction preserves products and is exact as in step 1; applying it to the quotient-completion Roos triangle gives $R\\lim_n M_n|_U\\simeq M|_U$. A compatible isomorphism of towers induces an isomorphism of their products commuting with $1-s$, and hence an isomorphism of the fibers (complete the square to a morphism of distinguished triangles; its cohomology sequence shows the fiber map is an isomorphism). Applying this to step 5 proves the claimed local realization. Assemble the covers of the connected affine neighborhoods. For $X$ empty use the empty covering.",
+   "uses": [
+    "lem-weil-pbc-constant-module-section-properties",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-countable-products-core",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "def-weil-triangulated-category",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C6, displayed completed realization and final limit; Tag 099M; explicit summand and Roos computation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-triangulated-category",
+  "lem-constructible-constant-exact",
+  "lem-pc-kflat-resolution",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-derived-countable-products-core",
+  "lem-weil-pbc-compatible-finite-derived-trivializations",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-finite-ring-derived-local-constancy",
+  "lem-weil-pbc-locally-constant-derived-serre",
+  "lem-weil-pbc-nilpotent-reduction-lissity",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-rlim-perfect-complete",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "pqf-lem-locnoeth-lft",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6 and 099M, with explicit ideal-filtration, etale-origin, stalk-tower, and finite-summand arguments; Bhatt–Scholze Lemma 6.6.8"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -112,7 +243,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-integral-stratified-perfect-characterization",
   "by": "worker",
@@ -128,5 +259,59 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-residue-lisse-perfect-lift",
+  "worker": "stage1",
+  "summary": "Repaired E1 by retaining the original scope and deriving bounded finite-level lissity using the perfect residue model and the ideal filtration. Supplied etale origins, normalized etale maps and a fixed-stalk algebraic tower, checked all hypotheses of 09AW and compatible trivialization, and computed the final completed realization and slice limit. Repaired child definition dependencies and ancestry. Landing-return repair: revalidated all current cited statements, expanded the one-stratum constructibility argument with the identity coefficient identification, and used the skeletal localization equivalence; refreshed both changed citation quotations.",
+  "blueprint": "Integral-lattice sentence of thm-weil-pbc-finite-extension; local perfect-lifting ingredient of integral-stratified-perfect-characterization.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site used for the local lifting construction; no statement of this unit replaces this general input."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic Long exact cohomology sequence of a distinguished triangle in the derived category used for the local lifting construction; no statement of this unit replaces this general input."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Generic Geometric stalks of a constant etale sheaf used for the local lifting construction; no statement of this unit replaces this general input."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic Countable products of pro-etale modules are exact used for the local lifting construction; no statement of this unit replaces this general input."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic The small pro-etale site of a weakly etale X-scheme is the localization of X_proet used for the local lifting construction; no statement of this unit replaces this general input."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic Finite type over a locally Noetherian base used for the local lifting construction; no statement of this unit replaces this general input."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic Exactness of geometric stalks used for the local lifting construction; no statement of this unit replaces this general input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "pqf-lem-locnoeth-lft",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-1f2259402",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-1f2259402 (reviewer sub-agent of L); spot-checked: Read the item, new node, cited statements and sources in full. Six proof steps and the arbitrary-ring reconstruction statement check out against Stacks 09C6/09AW; coefficient categories remain distinct. Repaired missing creation/audit metadata in the new node. Detailed checks and accepted tool uses are in review.md; corrected JSON is under fixes/dag/nodes/.; 1 file(s) fixed by the reviewer"
  }
 }
