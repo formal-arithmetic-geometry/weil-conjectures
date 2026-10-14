@@ -128,6 +128,7 @@ theorem termwise_product_isKInjective_and_isLimit
     let P := HomologicalComplex.coneOfHasLimitEval (Discrete.functor I)
     IsKInjective P.pt ∧ Nonempty (IsLimit (DerivedCategory.Q.mapCone P)) := by
   classical
+  -- Only products of this evaluated family are assumed; no global product instance is needed.
   let P := HomologicalComplex.coneOfHasLimitEval (Discrete.functor I)
   let q := HomotopyCategory.quotient C (.up ℤ)
   let hP := HomologicalComplex.isLimitConeOfHasLimitEval (Discrete.functor I)

@@ -1,111 +1,79 @@
 ## What changed
 
-Proved `CochainComplex.termwise_product_isKInjective_and_isLimit` in
-`Sheaf.Algebra.Homology.KInjectiveProducts`, with its signature unchanged.
-Added the proof-only import `Mathlib.Algebra.Homology.DerivedCategory.KInjective`.
-Two fully proved private helpers assemble degreewise homotopies and transfer a
-product through an essentially surjective functor with the required Hom bijections.
-All original public imports remain, preserving the existing reexports for
-importers. `Sheaf.CategoryTheory.KInjectiveBridge` supplies the public
-K-injectivity convention used in the signature. The added derived-category
-Hom comparison import is proof-only; no interface or definition changed.
-Updated the existing node's proof, proof_deps, and proof_origin to match the Lean.
-
-The source was read at the official Stacks Tag 0BK6 page because the local
-literature file is absent. The proof follows its three conclusions, replacing the
-Hom-complex calculation by componentwise homotopies. Mathlib's Hom comparison is
-used directly. The source library's HomotopyCategory/Products.lean was read for
-its homotopy assembly argument but not imported: its lemmas require global
-HasLimitsOfShape, stronger than the degreewise family limits assumed here.
-LeanFinder, Loogle, and grep searches ran through msearch.py; no exact product
-closure theorem was found. The compiled proof uses only Mathlib results and
-fully proved local helpers, without new statement modules.
+Retain the complete proof of
+CochainComplex.termwise_product_isKInjective_and_isLimit and its two private construction
+helpers in Sheaf.Algebra.Homology.KInjectiveProducts. Add only a proof comment explaining
+that the assumptions concern this evaluated family, not global products. All declarations,
+signatures, definitions, visibility, imports and proof terms match the current repository.
+The second reader reverted the first worker's unnecessary public import change. There is
+no interface change, change record, adaptation or new node in the final delivery.
 
 ## Proved and sorry left
 
-Closed the sole original hole:
-`CochainComplex.termwise_product_isKInjective_and_isLimit`
-(node `lem-pc-ringed-space-product-kinjective`). No sorry remains in the item;
-no new holes were added. Both private helpers are complete proofs.
-The full module compiles locally without warnings. The signature still allows
-arbitrary index and localization universes, and assumes only this family's
-products degreewise. Empty families are covered by the same limit extensionality
-and lifting arguments; no inhabited-index or boundedness assumption is used.
+CochainComplex.termwise_product_isKInjective_and_isLimit, node
+lem-pc-ringed-space-product-kinjective, was already proved in the starting checkout.
+CochainComplex.productHomotopy and CochainComplex.mapProduct were already complete as well.
+Holes closed: none. Holes added: none. Sorries left: none. This is investigation and
+annotation of the listed upstream-duplicate repair, not new proof progress or decomposition.
+Local compilation and scratch-copy #print axioms for all three declarations show only
+propext, Classical.choice and Quot.sound.
 
 ## No longer needed
 
-Pruned proof dependency `lem-pc-abelian-groups-exact-products`
-(Mathlib's `instAB4StarAddCommGrpCat`, module `Mathlib.Algebra.Category.Grp.AB`):
-componentwise null-homotopies avoid Hom-complex cohomology and exactness of Ab
-products entirely. No existing import was removed. The bridge public import is retained to
-preserve existing reexports for its importers, even though the proof needs
-none of the bridge's resolution-choice constructions.
-The source module
-`WeilConjectures.Algebra.Homology.HomotopyCategory.Products` and its derived
-product-existence machinery are not needed or imported. No other planned node
-was bypassed. This node appears in none of its unit's realized statement/steps,
-and the supporting product argument and the K-injective Hom comparison remain.
+None relative to the current repository: no import, module or proof-dependency node is
+pruned. The old report described removal of Sheaf.CategoryTheory.KInjectiveBridge, but that
+removal already landed before this review. The final imports expose HomologicalComplexLimits,
+DerivedCategory.Basic and HomotopyCategory.KInjective for the statements and definitions;
+DerivedCategory.KInjective is a plain import used only for the Hom comparison proof.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-No incorrect statement was found. The old plan's use of exactness of abelian-group
-products is unnecessary in the null-homotopy convention already used in Lean.
-The second reading corrected the declaration docstring to describe the
-componentwise homotopy variant implemented by the proof and updated node.
-The source product helper cannot be applied directly under the current weaker
-family-specific limit hypotheses; the degreewise construction here needs exactly
-the stated hypotheses. All data choices in the proof come from proved fullness,
-essential surjectivity, bijections, or actual limits, not unproved existence.
+The dispatcher says the item contains sorry, but the current checkout has a complete proof.
+coord/repairs.txt lists upstream duplicate review #1428. Its proposed replacement APIs
+CochainComplex.isKInjective_of_isLimitFan and DerivedCategory.isLimitFanMkQObjOfIsKInjective
+are absent from the available project and Mathlib source. The asserted upstream
+Algebra/Homology/DerivedCategory/Products.lean does not exist in this checkout.
 
+The available HomotopyCategory.isLimitFanQuotient requires global
+HasLimitsOfShape (Discrete T) C, whereas this theorem assumes only limits of this family's
+terms in every degree. DerivedCategory.hasLimitsOfShape_discrete additionally assumes
+K-injective resolutions and proves product existence rather than this cone's universal
+property. Neither may replace the assigned theorem without adding hypotheses. The proof
+retained here follows the existing node's route and preserves the chosen projections.
+The requested grep, loogle and leanfinder searches found no replacement with this interface.
+
+The first worker's report and change record had a stale baseline: the repository now already
+uses public HomotopyCategory.KInjective and plain DerivedCategory.KInjective, and its node
+records reviewed_proof by J4. Therefore the claimed bridge pruning is not this delivery's
+progress, and making DerivedCategory.KInjective public would incorrectly expose a proof-only
+import. The second reader corrected both issues.
 
 ## Second reading by N2
 
-1. **Statements and definitions: PASS.** Compared the sole delivered Lean module
-   with the repository using `diff` and checked the existing theorem signature
-   byte for byte through `:= by`. All universes, hypotheses, the chosen termwise
-   cone, K-injectivity conclusion, and exact derived projection cone are unchanged.
-   There are no other pre-existing declarations or definition changes and no
-   change records are needed. All original public imports are retained and the sole added import is
-   proof-only, so the visible interface is preserved.
-2. **Proof and axioms: PASS.** Compiled the delivered module with `lcompile.py`
-   without errors or warnings. A scratch copy with `#print axioms` for
-   `CochainComplex.productHomotopy`, `CochainComplex.mapProduct`, and
-   `CochainComplex.termwise_product_isKInjective_and_isLimit` reports only
-   `propext`, `Classical.choice`, and `Quot.sound` for each. No `sorry`, forbidden
-   declaration, or hollow definition occurs. All chosen data comes from proved
-   limits, fullness, essential surjectivity, or proved Hom bijections.
-3. **Split-off statements and edge cases: PASS.** No statements are split off,
-   no public theorem is added, and no new holes are introduced. The two private
-   definitions are explicit constructions, fully checked by Lean. Read their
-   arguments: projection extensionality proves both homotopy equations, while
-   `mapProduct` uses Hom surjectivity to lift cones and Hom injectivity for
-   uniqueness. Empty families yield the terminal zero complex and a terminal
-   derived object; singleton families recover the factor; neither argument needs
-   an inhabited index type or uniform boundedness. Additional searches used
-   Loogle (`"IsLimit", "EssSurj"`), LeanFinder (null homotopies into products),
-   and `rg` on the library and Mathlib; no applicable shorter replacement was
-   found. The upstream product helpers require all products of this shape,
-   whereas this statement assumes only limits for this specific evaluated family.
-4. **Route and pruning: PASS after repair.** Read the Mathlib Hom comparison,
-   upstream `HomotopyCategory/Products.lean`, and the official source at
-   https://stacks.math.columbia.edu/tag/0BK6. The direct homotopy route proves
-   both conclusions of that lemma under its degreewise assumptions. The old
-   proof dependency on exact products of abelian groups is the only omitted
-   planned node and is listed above. Checked a direct Mathlib replacement for the bridge import; it compiles,
-   but removes public reexports used by existing importers, so retained the
-   original signature-level bridge import. The extra Hom comparison import
-   is correctly proof-only. The unit
-   `sk-thm-picard-duality` has empty realized statement and step lists, so no
-   realized unit node is bypassed and its route is unchanged.
-5. **DAG agreement: PASS.** The delivered node changes only its owned `proof`,
-   `proof_deps`, and `proof_origin` fields. Its dependency list equals the union
-   of the steps' `uses`, including the Mathlib K-injective Hom comparison node.
-   The statement and Lean record are unchanged; the proof describes precisely
-   the homotopy assembly, quotient-cone limit, and essentially-surjective
-   transport performed in Lean. No new nodes are required for the private
-   fully constructed implementation data.
+1. Compared the delivered module with the current repository using diff. Verdict: every
+   existing signature and definition is byte-for-byte unchanged; only a proof comment is
+   added. No target, public interface, other module or statement changes.
+2. Read both helpers and the theorem. productHomotopy assembles components using the
+   evaluated limits; mapProduct transfers lifts via actual bijections and an object
+   preimage determined up to isomorphism by essential surjectivity. No arbitrary witness
+   from an unproved existence theorem is chosen. Local compilation and #print axioms for
+   every declaration pass with exactly the three permitted axioms. There is no sorry,
+   axiom, unsafe, opaque, implemented_by or extern declaration.
+3. No split-off statements or new nodes exist. Verdict: no new holes or disguised
+   restatement. Checked empty-index and singleton cases: hom_ext and the lifting
+   constructions impose no inhabited-index assumption; singleton reduces to a product
+   isomorphic to the factor. No exactness of products is assumed or needed.
+4. Checked shorter routes against available Mathlib and upstream declarations and repeated
+   the three search modes. The candidate replacements either do not exist or require
+   stronger assumptions. Verdict: retain this proof. Imports are correctly public for
+   interfaces and private to the module for the derived Hom comparison. No old proof_deps
+   becomes unused. The unit sk-thm-picard-duality and its realized fields are untouched;
+   this supporting lemma does not bypass any realized step.
+5. Read lem-pc-ringed-space-product-kinjective and its proof dependencies. Its three steps
+   match the homotopy product construction, right-orthogonality argument and Qh Hom
+   comparison with final cone transport. Verdict: proof, proof_deps and proof_origin remain
+   accurate; no node edit is required for a proof comment.
 
-Second-reading changes: corrected the stale theorem proof docstring. The
-working proof and original public imports were retained. The dry run rejected
-removing a public import without a change record; that tentative removal was
-reverted to preserve the visible interface. Net holes closed: 1; holes added: 0.
+Changed in this second reading: restored the current repository's imports, removed the stale
+change record, and corrected the report to claim no new proof or pruning progress. Retained
+what was right: all statements, definitions, proofs and the explanatory proof comment.
