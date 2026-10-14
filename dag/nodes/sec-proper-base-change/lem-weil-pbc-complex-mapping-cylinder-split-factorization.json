@@ -29,81 +29,36 @@
  ],
  "proof": [
   {
-   "text": "*The complex $\\tilde L^\\bullet$.* For every $n$ let $\\tilde L^n=L^n\\oplus K^n\\oplus K^{n+1}$, the direct sum of three objects in the additive category $\\mathcal A$ [def-weil-additive-category] (iterate the binary direct sum), with injections $i_1,i_2,i_3$ and projections $p_1,p_2,p_3$ satisfying $p_ai_b=\\delta_{ab}\\mathrm{id}$ and $i_1p_1+i_2p_2+i_3p_3=\\mathrm{id}$. A morphism $X\\oplus Y\\oplus Z\\to X'\\oplus Y'\\oplus Z'$ is the same as its $3\\times3$ matrix of components $p'_a\\,u\\,i_b$, and composition is matrix multiplication, by bilinearity of composition [def-weil-preadditive-category] and $\\sum_b i_bp_b=\\mathrm{id}$. Define $d^n_{\\tilde L}:\\tilde L^n\\to\\tilde L^{n+1}=L^{n+1}\\oplus K^{n+1}\\oplus K^{n+2}$ by the matrix $\\begin{pmatrix}d_L^n&0&0\\\\0&d_K^n&\\mathrm{id}_{K^{n+1}}\\\\0&0&-d_K^{n+1}\\end{pmatrix}$, i.e. on components $(l,k,k^+)\\mapsto(d_Ll,\\ d_Kk+k^+,\\ -d_Kk^+)$ (this is $L^\\bullet\\oplus C(1_{K^\\bullet})$ in Stacks' words; components are written as tuples only as shorthand for the matrices).",
-   "uses": [
-    "def-weil-additive-category",
-    "def-weil-preadditive-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, proof of Lemma 013N (lemma-make-injective), lines 2649-2711 (definition of $\\tilde L^n$ and $d_{\\tilde L}$)"
-   }
+   "text": "Construct Q = CochainComplex.mappingCone (id K) and T = L ⊞ Q using Mathlib. mappingCone supplies the complex and the proof that its differential squares to zero; after braiding its two summands, Q^n is K^n ⊞ K^(n+1), with the matrix of the original construction.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "*$d_{\\tilde L}^{n+1}d_{\\tilde L}^n=0$.* The product of the matrices is $\\begin{pmatrix}d_L^{n+1}d_L^n&0&0\\\\0&d_K^{n+1}d_K^n&d_K^{n+1}\\cdot\\mathrm{id}-\\mathrm{id}\\cdot d_K^{n+1}\\\\0&0&d_K^{n+2}d_K^{n+1}\\end{pmatrix}=0$, since $d_L^2=0$, $d_K^2=0$, and the $(2,3)$ entry is $d_K^{n+1}-d_K^{n+1}=0$. So $\\tilde L^\\bullet$ is a cochain complex.",
-   "uses": [
-    "def-weil-additive-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, proof of Lemma 013N (lemma-make-injective), lines 2649-2711 (the differential; the check is omitted in the source)"
-   }
+   "text": "Set i = biprod.lift α (mappingCone.inr (id K)), p = biprod.fst, and s = biprod.inl. The biproduct identities give i ≫ p = α and s ≫ p = id.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "*The morphisms $\\tilde\\alpha,\\pi,s$ and clause (0), $\\pi s=\\mathrm{id}$.* Define $\\tilde\\alpha^n=\\begin{pmatrix}\\alpha^n\\\\\\mathrm{id}_{K^n}\\\\0\\end{pmatrix}:K^n\\to\\tilde L^n$, $\\pi^n=(\\mathrm{id}_{L^n}\\ 0\\ 0):\\tilde L^n\\to L^n$, $s^n=\\begin{pmatrix}\\mathrm{id}_{L^n}\\\\0\\\\0\\end{pmatrix}:L^n\\to\\tilde L^n$. They commute with the differentials: $d_{\\tilde L}^n\\tilde\\alpha^n=\\begin{pmatrix}d_L^n\\alpha^n\\\\d_K^n\\\\0\\end{pmatrix}=\\begin{pmatrix}\\alpha^{n+1}d_K^n\\\\d_K^n\\\\0\\end{pmatrix}=\\tilde\\alpha^{n+1}d_K^n$ because $\\alpha$ is a morphism of complexes; $\\pi^{n+1}d_{\\tilde L}^n=(d_L^n\\ 0\\ 0)=d_L^n\\pi^n$; $d_{\\tilde L}^ns^n=\\begin{pmatrix}d_L^n\\\\0\\\\0\\end{pmatrix}=s^{n+1}d_L^n$. Finally $\\pi^n\\tilde\\alpha^n=\\alpha^n$ (clause (0)) and $\\pi^ns^n=\\mathrm{id}_{L^n}$, so $\\pi\\circ s=\\mathrm{id}_{L^\\bullet}$ (first half of clause (2)).",
-   "uses": [
-    "def-weil-additive-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, proof of Lemma 013N (lemma-make-injective), lines 2649-2711 (definitions of $\\tilde\\alpha$, $\\pi$, $s$; the source calls the checks clear)"
-   }
+   "text": "Use mappingCone.liftHomotopy with mappingCone.snd and zero to contract Q. Compose this homotopy with the second projection and inclusion of T, add the reflexive homotopy on p ≫ s, and use biprod.total. Its symmetry gives p ≫ s homotopic to id T.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "*Clause (1): $\\tilde\\alpha$ is a termwise split injection.* Put $M^n=L^n\\oplus K^{n+1}$, so $K^n\\oplus M^n=K^n\\oplus L^n\\oplus K^{n+1}$. Let $\\varphi^n:K^n\\oplus L^n\\oplus K^{n+1}\\to\\tilde L^n=L^n\\oplus K^n\\oplus K^{n+1}$ be $(k,l,k^+)\\mapsto(\\alpha^nk+l,\\ k,\\ k^+)$, i.e. the matrix $\\begin{pmatrix}\\alpha^n&\\mathrm{id}_{L^n}&0\\\\\\mathrm{id}_{K^n}&0&0\\\\0&0&\\mathrm{id}\\end{pmatrix}$, and $\\psi^n:\\tilde L^n\\to K^n\\oplus L^n\\oplus K^{n+1}$ be $(l,k,k^+)\\mapsto(k,\\ l-\\alpha^nk,\\ k^+)$, i.e. $\\begin{pmatrix}0&\\mathrm{id}_{K^n}&0\\\\\\mathrm{id}_{L^n}&-\\alpha^n&0\\\\0&0&\\mathrm{id}\\end{pmatrix}$. Multiplying the matrices, $\\varphi^n\\psi^n=\\mathrm{id}$ (first row $(\\mathrm{id},\\ \\alpha^n-\\alpha^n,\\ 0)$) and $\\psi^n\\varphi^n=\\mathrm{id}$ (second row $(\\alpha^n-\\alpha^n,\\ \\mathrm{id},\\ 0)$), so $\\varphi^n$ is an isomorphism; and $\\varphi^n$ composed with the inclusion of the summand $K^n$ is the first column $\\begin{pmatrix}\\alpha^n\\\\\\mathrm{id}\\\\0\\end{pmatrix}=\\tilde\\alpha^n$. Hence under $\\tilde L^n\\cong K^n\\oplus M^n$ the map $\\tilde\\alpha^n$ is the inclusion of $K^n$, which is clause (1) as the statement defines it. (The source says only that $\\tilde\\alpha$ is clearly a split injection; its left inverse is $p_2$, and $\\varphi^n$ makes the summand explicit.)",
-   "uses": [
-    "def-weil-additive-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, proof of Lemma 013N (lemma-make-injective), lines 2649-2711 ($\\tilde\\alpha$ 'clearly a split injection'), with Definition 014G (definition-termwise-split-map, line 2580)"
-   }
+   "text": "Use eval.mapBiprod, homotopyCofiber.XIsoBiprod and biprod.braiding to identify T^n with L^n ⊞ (K^n ⊞ K^(n+1)); the inclusion i^n becomes (α^n,id,0). The explicit isomorphism (l,k,d) ↦ (k,l−α^n k,d), with inverse (k,l,d) ↦ (α^n k+l,k,d), carries it to the first inclusion. Verify the inverse equations by biproduct extensionality and bilinearity.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "*Clause (2): $s\\pi$ is homotopic to $\\mathrm{id}_{\\tilde L^\\bullet}$.* Let $h^n:\\tilde L^n=L^n\\oplus K^n\\oplus K^{n+1}\\to\\tilde L^{n-1}=L^{n-1}\\oplus K^{n-1}\\oplus K^n$ map the summand $K^n$ of $\\tilde L^n$ by the identity to the summand $K^n$ of $\\tilde L^{n-1}$: $h^n=\\begin{pmatrix}0&0&0\\\\0&0&0\\\\0&\\mathrm{id}_{K^n}&0\\end{pmatrix}$, i.e. $(l,k,k^+)\\mapsto(0,0,k)$. Then $d_{\\tilde L}^{n-1}h^n=\\begin{pmatrix}d_L^{n-1}&0&0\\\\0&d_K^{n-1}&\\mathrm{id}_{K^n}\\\\0&0&-d_K^n\\end{pmatrix}h^n=\\begin{pmatrix}0&0&0\\\\0&\\mathrm{id}_{K^n}&0\\\\0&-d_K^n&0\\end{pmatrix}$ and $h^{n+1}d_{\\tilde L}^n=\\begin{pmatrix}0&0&0\\\\0&0&0\\\\0&\\mathrm{id}_{K^{n+1}}&0\\end{pmatrix}\\begin{pmatrix}d_L^n&0&0\\\\0&d_K^n&\\mathrm{id}\\\\0&0&-d_K^{n+1}\\end{pmatrix}=\\begin{pmatrix}0&0&0\\\\0&0&0\\\\0&d_K^n&\\mathrm{id}_{K^{n+1}}\\end{pmatrix}$. Their sum is $\\begin{pmatrix}0&0&0\\\\0&\\mathrm{id}&0\\\\0&0&\\mathrm{id}\\end{pmatrix}=\\mathrm{id}_{\\tilde L^n}-s^n\\pi^n$, since $s^n\\pi^n=\\begin{pmatrix}\\mathrm{id}_{L^n}&0&0\\\\0&0&0\\\\0&0&0\\end{pmatrix}$. So $\\mathrm{id}^n-(s\\pi)^n=d_{\\tilde L}^{n-1}h^n+h^{n+1}d_{\\tilde L}^n$ for all $n$: $\\mathrm{id}_{\\tilde L^\\bullet}$ and $s\\circ\\pi$ are homotopic in the sense of the statement (second half of clause (2)).",
-   "uses": [
-    "def-weil-additive-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, proof of Lemma 013N (lines 2697-2711) and Remark 013O (remark-compute-modules, line 2714)"
-   }
-  },
-  {
-   "text": "*Boundedness.* A direct sum of zero objects is zero: if $X=Y=Z=0$ then $\\mathrm{id}_{X\\oplus Y\\oplus Z}=\\sum_b i_bp_b$ factors each term through $0$, so it is the zero morphism and $X\\oplus Y\\oplus Z$ is a zero object [def-weil-additive-category]. If $K^n=L^n=0$ for $n<n_0$, then for $n<n_0-1$ all of $L^n,K^n,K^{n+1}$ vanish ($n+1<n_0$), so $\\tilde L^n=0$. If $K^n=L^n=0$ for $n>n_1$, then for $n>n_1$ also $n+1>n_1$, so $\\tilde L^n=0$. Both together give both. Hence $\\tilde L^\\bullet$ is bounded below, above, or bounded when $K^\\bullet$ and $L^\\bullet$ are.",
-   "uses": [
-    "def-weil-additive-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, Lemma 013N, 'Moreover' clause (lines 2645-2647); the source gives no argument"
-   }
+   "text": "For n < n₀−1, both n and n+1 are < n₀; for n₁ < n, both n and n+1 are > n₁. Apply biprod_isZero_iff twice to the objectwise isomorphism to prove both bounds for the same T.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "def-weil-additive-category",
-  "def-weil-preadditive-category"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Derived Categories, Lemma 013N (lemma-make-injective, line 2623), proof lines 2649-2711, Remark 013O (remark-compute-modules, line 2714), Definition 014G (definition-termwise-split-map, line 2580)"
+  "place": "Lemma 013N and Remark 013O; implemented by the identity mapping cone from Mathlib.Algebra.Homology.HomotopyCategory.MappingCone, followed by the same explicit termwise shear isomorphism."
  },
  "mathlib_searches": [
   {
@@ -228,5 +183,15 @@
   "group": "J1",
   "result": "pass",
   "note": "additive A = Preadditive+HasFiniteBiproducts (recorded dep); K L CochainComplex C Z, alpha : K ⟶ L; ∃ T i p s; (0) i≫p=α; (1) ∀n ∃M e : T.X n ≅ K.X n ⊞ M, i.f n ≫ e.hom = biprod.inl (true summand, not IsSplitMono); (2) s≫p=𝟙, Nonempty Homotopy (p≫s) (𝟙 T); bounds n<n₀-1 / n>n₁ on the same T; #check ok, no Mathlib exact match (cylinder is of one complex, CM5b abelian)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261014T044553-L-1451189",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

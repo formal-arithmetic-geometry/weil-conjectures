@@ -14533,3 +14533,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:44 L: batch 20261014T043529 dependency take-out
 - 04:45 L: merged deliver/XRb0cc22400e136910/Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf (stage 3; reviewer PASS; first push; landing 20261014T044553-L-1450952 (interface); batch 20261014T044551; modules 3; new nodes 0; change records: coord/changes/retire-equivariant-sheaf-compatibility.md)
 - 04:45 L: merged deliver/A3/Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker (stage 3; reviewer PASS; first push; landing 20261014T044553-L-1451055 (interface); batch 20261014T044551; modules 2; new nodes 0; change records: coord/changes/retire-pic-proper-ntorsion-coker-duplicate.md)
+- 04:45 L: merged deliver/C2/Sheaf.Algebra.Homology.MappingCylinderSplitFactorization (stage 3; reviewer PASS; first push; landing 20261014T044553-L-1451189 (proof); batch 20261014T044551; modules 1; new nodes 0)
