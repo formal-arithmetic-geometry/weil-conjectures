@@ -25,6 +25,7 @@ import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
 import Sheaf.AlgebraicGeometry.LocalizedStrictPerfectResidueHomology
 import Sheaf.AlgebraicGeometry.RelativeMVMaps
 import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # A strictly perfect affine model computes residue cycle homology
 

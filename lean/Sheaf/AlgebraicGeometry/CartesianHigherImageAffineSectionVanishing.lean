@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.CartesianHigherImageTransitions
 import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
+import Sheaf.AlgebraicGeometry.DerivedEtaleCohomologyLimit
 
 /-! # Eventual vanishing of affine relative higher-image sections
 
