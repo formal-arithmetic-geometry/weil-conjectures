@@ -33,9 +33,147 @@
   "def-weil-pbc-site-cech-complex",
   "def-sp-double-complex-total"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use additive section complexes throughout. Evaluation $P\\mapsto P(U)$ in modules is left exact: kernels are sectionwise, and evaluation preserves finite products because their sectionwise product is again a sheaf. Since $u$ preserves the final object, $\\Gamma_{\\mathcal C}(f_*P)=\\Gamma_{\\mathcal D}(P)$. Continuity, in the covering-family sense of the site definition, makes $u\\mathcal U$ a covering; preservation of fibre products identifies its tuple intersections with $u(U_{\\mathbf i})$. For a tuple $\\mathbf j$ and each omitted coordinate $k$, the two maps from $V_{\\mathbf j}$ to $u(U_{r(\\mathbf j\\widehat k)})$ obtained by first taking $a_{\\mathbf j}$ or first omitting coordinate $k$ agree: both have projections $a_{j_l}\\mathrm{pr}_l$ for $l\\ne k$. Naturality of $h$ and of restriction therefore gives $d_C\\gamma=\\gamma d_C$ term by term, with the same signs $(-1)^k$, including repeated indices of $r$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01FD, label lemma-functoriality-cech; general ringed-site tuple calculation"
+   }
+  },
+  {
+   "text": "Choose nonnegative injective resolutions $\\varepsilon_M:M\\to I^\\bullet$ and $\\varepsilon_N:N\\to J^\\bullet$. Put $P^\\bullet=f_*J^\\bullet$. By the complex injective-resolution monomorphism lemma, applied with lower bound $0$, choose a termwise monic quasi-isomorphism $\\lambda:P^\\bullet\\to Q^\\bullet$, with $Q$ nonnegative and termwise injective. Apply the strict lifting lemma to the termwise monic quasi-isomorphism $M[0]\\to I^\\bullet$ and the map $M[0]\\xrightarrow{h}f_*N[0]\\xrightarrow{f_*\\varepsilon_N}P^\\bullet\\xrightarrow{\\lambda}Q^\\bullet$. It gives $b:I^\\bullet\\to Q^\\bullet$ with $b\\varepsilon_M=\\lambda f_*\\varepsilon_N h$ as maps of complexes. Neither $P$ nor $f_*N$ is asserted to be injective.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-complex-injective-resolution-mono",
+    "lem-weil-pbc-lift-along-injective-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K, label lemma-injective-resolutions-exist (3), and 013P, label lemma-morphisms-lift (2); cohomology.tex 01FB, label remark-explain-arrow"
+   }
+  },
+  {
+   "text": "Write $A=\\operatorname{Tot}\\check C(\\mathcal V,J)$, $B=\\operatorname{Tot}\\check C(\\mathcal U,I)$, $B'=\\operatorname{Tot}\\check C(\\mathcal U,Q)$ and $B''=\\operatorname{Tot}\\check C(\\mathcal U,P)$. Each augmented Cech row for an injective term of $I,Q,J$ is a resolution of its global sections: positive Cech cohomology vanishes by the general ringed-site injective-module lemma, and degree zero is the sheaf equalizer. For $P^n$, its row is the row of $J^n$ on $u\\mathcal U$ by step 1, hence is also such a resolution. Apply the first-quadrant augmentation lemma, exchanging the two indices, to obtain quasi-isomorphisms $\\alpha_I,\\alpha_Q,\\alpha_J,\\alpha_P$ from the respective global section complexes. With the exchanged indices the canonical sign isomorphism has component $(-1)^{t n}$ on Cech degree $t$ and resolution degree $n$: it intertwines the exchanged total differential and $d_C+(-1)^t d_I$, and is identity on the augmentation axis $t=0$. Thus these are exactly the alphas prescribed in the statement, not unspecified edge isomorphisms. The common universe permits the general ringed-site lemma's coefficient and index convention (enlarge all small data together); the sheafification hypotheses there hold for the usual site sheafification.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-sc-first-quadrant-column-augmentation",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03FC, label lemma-injective-module-trivial-cech; 03AX, label lemma-cech-cohomology; homology.tex Tag 0133, label lemma-double-complex-gives-resolution"
+   }
+  },
+  {
+   "text": "Every $P^n=f_*J^n$ is acyclic for $\\Gamma_{\\mathcal C}$ by the direct-image injective evaluation lemma at $1_{\\mathcal C}$. Every $Q^n$ is acyclic for this functor by injective derived-functor vanishing. Apply Leray acyclicity for quasi-isomorphisms to $\\lambda:P\\to Q$, with bound $0$, to get a quasi-isomorphism $\\ell=\\Gamma_{\\mathcal C}(\\lambda):\\Gamma_{\\mathcal D}(J)\\to\\Gamma_{\\mathcal C}(Q)$. All its hypotheses hold: the source module category is abelian with enough injectives, evaluation is additive and left exact by step 1, both complexes are nonnegative, and both have acyclic terms. Consequently the canonical map specified in the item is $h_H=H^q(\\ell)^{-1}H^q(\\Gamma_{\\mathcal C}(b))$.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-direct-image-injective-evaluation-acyclic",
+    "lem-weil-pbc-derived-functor-injective-vanishing",
+    "lem-weil-pbc-leray-acyclicity-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 072Z, label lemma-direct-image-injective-sheaf; 0731, label lemma-limp-acyclic (1); 08J6, label remark-before-Leray; derived.tex 015E, label lemma-leray-acyclicity"
+   }
+  },
+  {
+   "text": "Coefficient maps $b$ and $\\lambda$ give total maps $L:B\\to B'$ and $S:B''\\to B'$. For each bidegree define $T:B''\\to A$ by $T(x)_{\\mathbf j}=J^n(a_{\\mathbf j})(x_{r(\\mathbf j)})$. The omitted-coordinate identities of step 1 show commutation with $d_C$; naturality of $d_J$ shows commutation with $d_I$. Since $T$ preserves Cech degree, it also commutes with $(-1)^t d_I$, and therefore totalizes. Define $\\delta:\\check C(\\mathcal U,M)\\to B''$ using $M\\xrightarrow{h}f_*N\\xrightarrow{f_*\\varepsilon_N}P^0$ into resolution degree zero. It is a chain map because that augmentation is killed by $d_P^0$. Coefficient functoriality and the strict lift identity of step 2 give the pentagon $L\\beta_M=S\\delta$. In coordinates, the other upper identity is $T\\delta=\\beta_N\\gamma$: both send $s_{r(\\mathbf j)}$ to $\\varepsilon_N\\bigl(N(a_{\\mathbf j})h(s_{r(\\mathbf j)})\\bigr)$.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01FD, label lemma-functoriality-cech; general ringed-site tuple calculation"
+   }
+  },
+  {
+   "text": "The lower squares satisfy $L\\alpha_I=\\alpha_Q\\Gamma(b)$ and $S\\alpha_P=\\alpha_Q\\ell$ since coefficient maps commute with restriction. The right square is $T\\alpha_P=\\alpha_J$, after identifying the two global section complexes of $P$ and $J$: its component at $j$ restricts a global $J^n$ section first to $u(U_{r(j)})$, then to $V_j$, which is exactly restriction to $V_j$. On cohomology put $a_I=H^q(\\alpha_I)$, and similarly $a_Q,a_P,a_J$. These are invertible by step 3, and $\\ell_q=H^q(\\ell)$ is invertible by step 4; therefore $S_q=a_Q\\ell_q a_P^{-1}$ is invertible, even though no termwise acyclicity of a pulled-back coefficient sheaf was assumed. Using the four displayed squares and the pentagon, cancellation gives\n$$\\ell_q^{-1}H^q(\\Gamma(b))a_I^{-1}H^q(\\beta_M)=a_P^{-1}S_q^{-1}L_qH^q(\\beta_M)=a_P^{-1}H^q(\\delta)=a_J^{-1}T_qH^q(\\delta)=a_J^{-1}H^q(\\beta_N)H^q(\\gamma).$$\nThis is the required equality with both edges equal to the displayed inverse-alpha followed by beta.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01FD, label lemma-functoriality-cech; general ringed-site tuple calculation"
+   }
+  },
+  {
+   "text": "For two nonnegative injective resolutions of a coefficient sheaf, apply the strict lifting lemma to their augmentations to get comparisons in both directions over the identity. The uniqueness-up-to-homotopy lemma applied to the coefficient augmentation shows that the composites are homotopic to the identities, so the comparisons are homotopy equivalences. A coefficient chain homotopy $k$ induces the total Cech homotopy with component $(-1)^t\\check C^t(k)$: its horizontal cross terms cancel and its vertical terms give $\\check C^t(dk+kd)$. The alphas commute with these comparisons, and the betas commute because the comparisons are strict over the coefficient. Their induced homology diagrams prove independence of $a^{-1}H^q(\\beta)$ under the canonical global-section identifications. This applies without acyclicity of the coefficient sheaf.",
+   "uses": [
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "def-weil-pbc-site-cech-complex",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013P, label lemma-morphisms-lift; 013S, label lemma-morphisms-equal-up-to-homotopy; sites-cohomology.tex 03AX, omitted functoriality verification"
+   }
+  },
+  {
+   "text": "For a second replacement $\\lambda':P\\to Q'$, lift $\\lambda'$ strictly along the termwise monic quasi-isomorphism $\\lambda$ to $c:Q\\to Q'$. Then $c\\lambda=\\lambda'$; uniqueness up to homotopy applied to $M[0]\\to I$ gives $cb\\simeq b'$. On global cohomology, $H(\\Gamma c)\\ell_q=\\ell'_q$, and both $\\ell_q,\\ell'_q$ are invertible by step 4; cancellation shows that the roof defining $h_H$ is unchanged. For another resolution $J'$ of $N$, take a comparison $v:J\\to J'$ strict over $N$ from step 7 and put $P'=f_*J'$. Its direct image $w=f_*v:P\\to P'$ is a homotopy equivalence: applying the additive direct image to the inverse and the two chain homotopies preserves their equations. Choose $\\lambda':P'\\to Q'$ and $b':I\\to Q'$ as in step 2. Lift $\\lambda'w$ along $\\lambda$ to $c:Q\\to Q'$ with $c\\lambda=\\lambda'w$. Since $v\\varepsilon_N=\\varepsilon_{N'}$, the maps $cb$ and $b'$ agree after $\\varepsilon_M$, hence are homotopic by the uniqueness lemma. Write $g=H^q(\\Gamma_{\\mathcal D}v)$. The equality $c\\lambda=\\lambda'w$ gives $H^q(\\Gamma c)\\ell_q=\\ell'_q g$. Consequently $g\\ell_q^{-1}H^q(\\Gamma b)=(\\ell'_q)^{-1}H^q(\\Gamma c)H^q(\\Gamma b)=(\\ell'_q)^{-1}H^q(\\Gamma b')$, the desired canonical target identification. For another source resolution $I'$ choose $z:I\\to I'$ strict over $M$, and let $b':I'\\to Q$ be its lift. The maps $b'z$ and $b$ agree after $\\varepsilon_M$, so are homotopic. Writing $k=H^q(\\Gamma z)$, which is the canonical source identification by step 7, gives $\\ell_q^{-1}H^q(\\Gamma b')k=\\ell_q^{-1}H^q(\\Gamma b)$. These equations establish independence of every resolution choice.",
+   "uses": [
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013P, label lemma-morphisms-lift; 013S, label lemma-morphisms-equal-up-to-homotopy; cohomology.tex 01FB, label remark-explain-arrow"
+   }
+  },
+  {
+   "text": "For integer coefficients a sheaf of modules is exactly an abelian sheaf: multiplication by an integer is repeated addition, so the two section complexes agree. Let $\\bar h:f^{-1}M\\to N$ be adjoint to $h$. The abelian site-pullback exactness lemma gives a resolution $f^{-1}M\\to f^{-1}I$. Lift $\\bar h$ followed by $\\varepsilon_N$ along this termwise monic quasi-isomorphism to $v:f^{-1}I\\to J$. Its adjoint $b_0:I\\to f_*J=P$ is a cochain map strictly extending $h$. Taking $b=\\lambda b_0$ in step 4 cancels $\\ell_q$, so $h_H=H^q(\\Gamma b_0)$. The degreewise adjunction says $\\Gamma b_0$ is the inverse-image unit on sections followed by $\\Gamma v$. For comparison with pullback followed by $H(\\bar h)$, choose an injective resolution $E$ of $f^{-1}M$, lift $f^{-1}I\\to E$ over its augmentation and $E\\to J$ over $\\bar h$. Their composite and $v$ agree up to homotopy by the uniqueness lemma applied to $f^{-1}M[0]\\to f^{-1}I$. Thus their section cohomology maps agree. This is the asserted inverse-image cohomology pullback followed by the adjoint coefficient map.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "lem-weil-pbc-site-pullback-abelian-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01FB, label remark-explain-arrow; sites-cohomology.tex 08J6, label remark-before-Leray; derived.tex 013P and 013S"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-site-cech-complex",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+  "lem-sc-first-quadrant-column-augmentation",
+  "def-sp-double-complex-total",
+  "lem-weil-pbc-ringed-site-direct-image-injective-evaluation-acyclic",
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "lem-weil-pbc-leray-acyclicity-quasi-iso",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-weil-pbc-site-pullback-abelian-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01FD, augmented pentagon and lower squares, generalized from ringed spaces to sites using sites-cohomology.tex 03FC and 08J6; omitted resolution independence expanded explicitly"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,10 +209,45 @@
    "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical Cech cohomology edge maps for modules on sites commute with refinement and site morphisms",
+   "results": "{\"t\": \"2026-10-14T11:51:00Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical Cech cohomology edge maps for modules on sites commute with refinement and site morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"CategoryTheory.Meq.condition\", \"CategoryTheory.PresheafOfGroups.OneCocycle.ev_trans\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation\", \"CategoryTheory.PresheafOfGroups.OneCochain.ev_precomp\"], \"digest\": \"2c43681bb2f596ac\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Refining a pulled back covering commutes with the Cech edge map to sheaf cohomology",
+   "results": "{\"t\": \"2026-10-14T11:51:41Z\", \"tool\": \"leanfinder\", \"query\": \"Refining a pulled back covering commutes with the Cech edge map to sheaf cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Meq.pullback_refine\", \"CategoryTheory.Meq.pullback_apply\", \"CategoryTheory.GrothendieckTopology.diagramPullback_app\", \"CategoryTheory.GrothendieckTopology.diagramPullback\", \"CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toPullbackObj\", \"CategoryTheory.Meq.pullback\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.glue\"], \"digest\": \"8a2dea30618c04f2\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"cohomology\"",
+   "results": "{\"t\": \"2026-10-14T11:50:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cech\\\", \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(refinement|edge|comparison)|(refinement|edge|comparison).*cech",
+   "results": "{\"t\": \"2026-10-14T11:50:59Z\", \"tool\": \"grep\", \"query\": \"cech.*(refinement|edge|comparison)|(refinement|edge|comparison).*cech\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech comparison natural under morphisms of ringed sites and refinements",
+   "results": "{\"t\": \"2026-10-14T11:50:59Z\", \"tool\": \"leansearch\", \"query\": \"Cech comparison natural under morphisms of ringed sites and refinements\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-qcoherent-cohomology-comparison-pullback",
   "by": "worker",
@@ -90,5 +263,49 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ringed-site-cech-refinement-square",
+  "worker": "stage1",
+  "summary": "Kept the full ringed-site statement. Expanded the 01FD diagram into tuple identities, strict resolution lift, all four invertible alpha maps, direct-image acyclic replacement, augmented pentagon, cancellation, explicit total homotopy and independence of choices, and the abelian inverse-image identification. Reused generic DAG lemmas and created only the narrower direct-image injective object-evaluation acyclicity input. No scheme-only Cech refinement lemma used.",
+  "blueprint": "Classical torsion constructibility input: 0GKW final sentence invokes 0GKV for prime constant coefficients. Expanded by 0GKV case (b): f_* O_X = O_S and R^1 f_* O_X is finite locally free. Etale form: compatibility of 03P2 comparison with restriction between etale base objects and with scalar multiplication. The naturality comparison is checked after refining the pulled-back affine open cover.; steps 1-6 supply the naturality comparison after cover refinement, steps 7-9 supply canonical normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complex-injective-resolution-mono",
+    "why": "Generic homological algebra or ringed-site injective Cech vanishing used as a tool in the 01FD augmented-diagram proof; the proper-base-change unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+    "why": "Generic homological algebra or ringed-site injective Cech vanishing used as a tool in the 01FD augmented-diagram proof; the proper-base-change unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-sc-first-quadrant-column-augmentation",
+    "why": "Generic homological algebra or ringed-site injective Cech vanishing used as a tool in the 01FD augmented-diagram proof; the proper-base-change unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "Generic homological algebra or ringed-site injective Cech vanishing used as a tool in the 01FD augmented-diagram proof; the proper-base-change unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Generic exactness of abelian site inverse image needed only to identify the integer-coefficient roof with the pullback recipe; no node of the proper-base-change unit states this general-site fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+  "lem-sc-first-quadrant-column-augmentation",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-weil-pbc-site-pullback-abelian-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-77ac55c1c",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-77ac55c1c (reviewer sub-agent of L); spot-checked: Read all nine steps, the new node, cited statements and source locations. Verified lifting hypotheses, total signs, roof cancellation, resolution independence and abelian pullback identification; checked edge cases, duplicates, route and archived target signatures. No mathematical faults found. Full findings and an inspection write-boundary mistake are recorded in review.md."
  }
 }
