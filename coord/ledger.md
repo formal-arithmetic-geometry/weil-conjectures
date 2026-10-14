@@ -14715,3 +14715,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:42 L: merged deliver/U3/Sheaf.AlgebraicGeometry.SingleComplexOpenUnionCompatibleChainData (stage 3; reviewer PASS; first push; landing 20261014T074217-L-3520746 (proof); batch 20261014T074215; modules 1; new nodes 0)
 
 - 15:45 L: batch 20261014T074215 dependency take-out
+- 07:46 L: returned deliver/S3/Sheaf.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization (reviewer RETURN: (reviewer X-2eba2, head 2eba27b80) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Si)
