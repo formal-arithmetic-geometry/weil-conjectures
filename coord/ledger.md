@@ -14119,7 +14119,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:08 L: merged deliver/J3/Sheaf.AlgebraicGeometry.DerivedPullbackKFlatCounitShiftAdjustment (stage 3; reviewer PASS; first push; landing 20261014T010844-L-3164476 (interface); batch 20261014T010832; modules 3; new nodes 2)
 - 01:08 L: merged deliver/J3/Sheaf.AlgebraicGeometry.Morphisms.DvrGaloisComponentsRootCotangent (stage 3; reviewer PASS; first push; landing 20261014T010845-L-3164649 (interface); batch 20261014T010832; modules 4; new nodes 3)
 - 01:08 L: merged deliver/K3/Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationDvrComparison (stage 3; reviewer PASS; first push; landing 20261014T010845-L-3164798 (interface); batch 20261014T010832; modules 3; new nodes 2)
-- 01:08 L: merged deliver/K3/Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionUniqueAux (stage 3; reviewer PASS; first push; landing 20261014T010846-L-3165008 (proof); batch 20261014T010832; modules 1; new nodes 0)
 - 01:08 L: merged deliver/K4/Sheaf.AlgebraicGeometry.PicardModuleCechExternalPairing (stage 3; reviewer PASS; after a return; landing 20261014T010846-L-3165165 (interface); batch 20261014T010832; modules 2; new nodes 2; change records: coord/changes/picard-module-cech-external-pairing-restore.md)
 - 01:08 L: merged deliver/M2/Sheaf.AlgebraicGeometry.HigherDirectImageRawTransitionToHomCore (stage 3; reviewer PASS; after a return; landing 20261014T010846-L-3165316 (interface); batch 20261014T010832; modules 3; new nodes 2; change records: coord/changes/M2-higher-image-raw-transition-proof-controls.md)
 - 01:08 L: merged deliver/N1/Sheaf.AlgebraicGeometry.PicardResidueHomologySourceResidueComparison (stage 3; reviewer PASS; first push; landing 20261014T010847-L-3165468 (interface); batch 20261014T010832; modules 3; new nodes 2)
@@ -14150,3 +14149,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:10 L: returned deliver/H3/Sheaf.CategoryTheory.DerivedModuleRankOneNonzeroMap (reviewer RETURN: (reviewer X-27d14, head 27d14d53d) C6: Break the dependency cycle. In dag/nodes/sec-smooth-purity/new-stage3-derived-mod)
 - 01:12 L: returned deliver/S3/Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap (reviewer RETURN: (reviewer X-63956, head 6395617a5) A9 (brief point 5): replace `public import Mathlib.CategoryTheory.Adjunction.Mates` w)
 - 01:14 L: returned deliver/T4/Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations (reviewer RETURN: (reviewer X-efb69, head efb69a130) A (mechanical finding d): In coord/changes/fieldLinearComparisonProofScopeT4.md, unde)
+
+- 09:16 L: batch 20261014T010832 dependency take-out
