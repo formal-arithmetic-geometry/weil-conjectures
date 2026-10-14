@@ -6,11 +6,91 @@
   "by": "worker",
   "date": "2026-10-13"
  },
- "status": "unsplit",
+ "status": "split",
  "mathlib_match": null,
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a K-flat representative B of L and a K-injective representative I of M using [lem-pc-kflat-resolution, prop-pur-kinjective-resolutions-exist]; let A represent K. The degree-n currying map sends a family f of maps A^p to Hom(B^q,I^{p+q+n}) to the family (a tensor b maps to f^p(a)^q) on the summands A^p tensor B^q of the direct-sum total tensor. This is invertible by the sheaf tensor universal property, because Hom out of a direct sum is a product. In [def-pur-hom-complex, def-pc-tensor-complex-sheaves], expanding the differential gives on both sides d_I f(a,b) - (-1)^n f(d_A a,b) - (-1)^{n+p} f(a,d_B b) for a of degree p, so this is a chain isomorphism natural in A,B,I. By [lem-pur-hom-kflat-into-kinjective], Hom(B,I) is K-injective: hence, by [def-pur-derived-internal-hom], the left complex computes H(K,H(L,M)), and the right computes H(K tensor-derived L,M): tensoring with B preserves quasi-isomorphisms, since the cone of a quasi-isomorphism is acyclic and its tensor with B is acyclic by [def-pc-kflat-complex]. Independence and descent of the chain isomorphism follow from [lem-pur-rhom-well-defined].",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pur-hom-kflat-into-kinjective",
+    "lem-pur-rhom-well-defined",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-hom",
+    "def-pur-derived-internal-hom",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (lemma-internal-hom), derived tensor–Hom adjunction"
+   }
+  },
+  {
+   "text": "Let A represent L and let I be the K-injective representative of M. Over an object V mapping to U, the degree-n sections of Hom(A,I)|_U are the families of maps A^p|_V to I^{p+n}|_V, which are precisely the sections of Hom(A|_U,I|_U); the differential d_I f - (-1)^n f d_A is identical on these sections [def-pur-hom-complex]. This gives the chain identification without any topological-space hypothesis. By [lem-pur-kinjective-restrict-localized], I|_U is K-injective, so both complexes compute the required derived Hom [def-pur-derived-internal-hom]. For a successive restriction along V to U, both comparisons are the identity on the same families over each object mapping to V; their composite equals direct restriction. The identifications commute with pre- and postcomposition, proving naturality.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-pur-kinjective-restrict-localized",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JB (lemma-restriction-RHom-to-U)"
+   }
+  },
+  {
+   "text": "For the first variable, fix a K-injective I representing M. A triangle represented by the cone of A to B is sent by Hom(-,I) to the reversed cone triangle: the graded splitting C(A to B)=B direct-sum A[1] induces Hom(C,I)=Hom(B,I) direct-sum Hom(A[1],I), and substitution in d(f)=d_I f-(-1)^degree(f) f d_C gives the off-diagonal map by precomposition with A to B, with the contravariant cone sign [def-pur-hom-complex]. Explicitly, put X=Hom(B,I), Y=Hom(A,I), and h=f*:X to Y. A degree-n element (x,y) of Hom(C(f),I) has differential (d_X x, d_Y y+(-1)^(n+1)h(x)). The map (x,y) to ((-1)^(n-1)y,x) identifies this with C(h)[-1], whose differential on (u,x) is (-d_Y u-h(x),d_X x). Thus rotating its cone triangle gives the required reversed distinguished triangle. For the second variable, choose K-injective representatives J and I of the first two objects using [prop-pur-kinjective-resolutions-exist]. By [lem-weil-pbc-kinjective-hom-derived], their derived morphism is represented by a chain map g:J to I, unique up to homotopy. Its cone triangle is isomorphic to the given distinguished triangle: both complete the same first morphism, so TR3 of [def-weil-triangulated-category] gives a triangle map with identity first two components, and [lem-sf-triangle-morphism-iso] makes its third component an isomorphism (the derived triangulated structure is supplied by [def-weil-abstract-derived-category, lem-pur-homotopy-category-triangulated]). Use the cone C of g; C is K-injective, since the ordinary complex of global module maps from any acyclic E into C is the cone of the corresponding map for J and I: its degree-n cycles are chain maps E to C[n], and boundaries are null-homotopies. K-injectivity of J and I makes both ordinary Hom complexes acyclic (apply the defining null-homotopy condition also to every shift of E); the cone is acyclic by its split degreewise exact sequence. Hence every chain map E to C is null-homotopic [def-pur-kinjective-complex]. Now Hom(A,C) has the graded splitting Hom(A,I) direct-sum Hom(A,J[1]), and the same differential formula gives the cone of Hom(A,J) to Hom(A,I), using the covariant shift identification: a degree-n pair (x,y) has differential (d x+Hom(A,g)y,-d y), exactly the cone differential. Only finite biproducts and termwise split sequences are used, so exactness of infinite products or of arbitrary Hom sequences is unnecessary. These cone triangles descend through localization by [lem-pur-homotopy-category-triangulated]; [def-pur-derived-internal-hom, lem-pur-rhom-well-defined] permit the representatives just chosen. The precise natural shift identifications are H(P[m],Q)=H(P,Q)[-m] and H(P,Q[n])=H(P,Q)[n], supplied by [lem-pur-derived-internal-hom-shift-left, lem-pur-derived-internal-hom-shift-right], with the signs of the Hom differential. Thus both variables preserve distinguished triangles with the stipulated variance and shifts.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined",
+    "lem-pur-homotopy-category-triangulated",
+    "lem-pur-derived-internal-hom-shift-left",
+    "lem-pur-derived-internal-hom-shift-right",
+    "def-pur-kinjective-complex",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC (lemma-RHom-triangulated)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-rhom-well-defined",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-pur-derived-internal-hom",
+  "def-pc-kflat-complex",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-homotopy-category-triangulated",
+  "lem-pur-derived-internal-hom-shift-left",
+  "lem-pur-derived-internal-hom-shift-right",
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9, 08JB, 08JC"
+ },
  "id": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
  "blueprint": {
   "is": null,
@@ -36,8 +116,7 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-derived-internal-hom",
   "def-pc-tensor-complex-sheaves",
-  "def-pc-kflat-complex",
-  "lem-pc-kflat-resolution"
+  "def-pc-kflat-complex"
  ],
  "mathlib_searches": [
   {
@@ -82,5 +161,47 @@
    "date": "2026-10-14",
    "verdict": "no match: Light/Monoidal.lean lines 43-65 gives underived condensed module structures; the other returned closed structures are also underived and give no slice or derived triangle statement."
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "worker": "stage1",
+  "summary": "Repaired returned landing on the current DAG: retained the existing-node split, restored maintainer-owned creation metadata, removed the unused statement dependency on resolution existence, normalized inherited TeX escapes, and expanded both cone differential calculations and the K-injective cone argument. Re-read all cited statements; none changed against the shared DAG mirror. Second reading: supplied the missing K-injective Hom-localization citation and the cone-triangle comparison; made derived-Hom and K-flat representative justifications explicit.",
+  "blueprint": [
+   "tensor adjunction and internal-Hom restriction in the final Stacks comparison",
+   "exactness and shift compatibility of internal Hom in the final Stacks comparison"
+  ],
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "General ringed-site complex infrastructure used in the Stacks 08J9/08JB proof; no proper-base-change-unit statement supplies this resolution fact."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "General ringed-site complex infrastructure used in the Stacks 08J9/08JB proof; no proper-base-change-unit statement supplies this resolution fact."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "General ringed-site complex infrastructure used in the Stacks 08J9/08JB proof; no proper-base-change-unit statement supplies this resolution fact."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "General ringed-site complex infrastructure used in the Stacks 08J9/08JB proof; no proper-base-change-unit statement supplies this resolution fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-rhom-well-defined",
+  "lem-pur-kinjective-restrict-localized"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-000a9defc",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-000a9defc (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, and Stacks sources. Verified tensor–Hom currying, coherent slice restriction, signed cone calculations, K-injective representatives, route, and edge cases. No new nodes, duplicates, cycles, or mathematical gaps found. Accepted the four declared generic tool uses. Condensed target comparisons remain separate obligations. Detailed checks are in review.md."
+ }
 }
