@@ -6,8 +6,6 @@ Authors: SHEAF group J4
 module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartSectionModules
-import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartCompletedLocalizationsAlpha
-import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartCompletedLocalizationsD
 
 /-!
 # Completed localization and affine pullback section identifications
@@ -25,6 +23,7 @@ namespace AlgebraicGeometry.Scheme.CompletionGluingData
 /-- Completed pullback sections identify scalar extension with localized completed sections.
 Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1).
 (blueprint: lem-sbc-punctured-completion-chart-completed-localizations)
+(blueprint: lem-sbc-punctured-completion-chart-completed-localizations-d)
 
 Proof: use the actual modules completedSectionModule s and chartSectionModule
 (q followed by U's inclusion) f_i. The affine open V_i maps to the affine D(f_i)
@@ -84,8 +83,6 @@ theorem exists_chart_completed_localizations
             (homOfLE (le_top :
               (pullback.fst q (completionSpecMap A ∣_ U)) ⁻¹ᵁ
                 ((q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)) ≤ ⊤)).op).hom z * d i m) := by
-  obtain ⟨alpha, ha⟩ := exists_chart_completed_localizations_alpha D t f hf hV
-  obtain ⟨d, hp, hc, hs⟩ := exists_chart_completed_localizations_d D t f hf hV alpha
-  exact ⟨alpha, d, ha, hp, hc, hs⟩
+  sorry
 
 end AlgebraicGeometry.Scheme.CompletionGluingData
