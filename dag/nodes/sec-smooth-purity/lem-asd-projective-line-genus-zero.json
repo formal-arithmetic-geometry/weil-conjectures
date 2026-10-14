@@ -23,9 +23,92 @@
   "def-sc-curves",
   "def-sc-genus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct the two charts of the base-change model explicitly. In the degree-zero localization of $\\mathbf Z[x_0,x_1]$ at $x_0$, a homogeneous degree-zero fraction $F/x_0^m$, with $F=\\sum_{j=0}^m a_jx_0^{m-j}x_1^j$, maps to $\\sum_{j=0}^m a_jt^j$, where $t=x_1/x_0$. Its inverse sends $t^j$ to $x_1^j/x_0^j$; multiplying numerator and denominator by $x_0$ leaves the image unchanged, and monomial independence proves injectivity. Thus this ring is $\\mathbf Z[t]$. On the other chart $F/x_1^m$, with $F=\\sum_{j=0}^m b_jx_1^{m-j}x_0^j$, maps to $\\sum_{j=0}^m b_js^j$, with inverse $s^j\\mapsto x_0^j/x_1^j$, so its ring is $\\mathbf Z[s]$. The basic opens cover by [def-nagata-affine-proj] since $x_0,x_1$ generate the irrelevant ideal. Base change to $k$ using [lem-weil-pbc-fibre-product-affine-spectra] gives $k\\otimes_{\\mathbf Z}\\mathbf Z[t]\\cong k[t]$ (send $a\\otimes t^j$ to $at^j$, with inverse $\\sum a_jt^j\\mapsto\\sum a_j\\otimes t^j$), and $k\\otimes_{\\mathbf Z}\\mathbf Z[s]\\cong k[s]$ by $a\\otimes s^j\\mapsto as^j$ with inverse $\\sum a_js^j\\mapsto\\sum a_j\\otimes s^j$. The preimages of the two basic opens cover the fibre product, since each point projects into one of them. In the first chart the overlap inverts $t=x_1/x_0$, and in the second it inverts $s=x_0/x_1$, so its rings are identified by $s=t^{-1}$. This is exactly the gluing presentation of the polynomial Proj and standard cover of [def-sc-p1-standard], so the chart identifications glue, with identical transition $s=t^{-1}$, to an isomorphism over $k$ with that model.",
+   "uses": [
+    "def-nagata-affine-proj",
+    "def-nagata-projective-space-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sc-p1-standard"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2P, lemma-projective-space-smooth: supply its omitted chart argument"
+   }
+  },
+  {
+   "text": "Each of these two charts is $\\mathbf A^1_k$, so [sbc-lem-affine-space-smooth] gives smoothness of relative dimension one on both. The affine-local description in [def-sbc-smooth-morphisms] checks smoothness on these covering charts; the relative fibre dimension condition is local at each point and equals one on its chart. Thus $P\\to\\operatorname{Spec}k$ is smooth of relative dimension one.",
+   "uses": [
+    "def-sc-p1-standard",
+    "sbc-lem-affine-space-smooth",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2P, lemma-projective-space-smooth: chartwise smoothness"
+   }
+  },
+  {
+   "text": "The polynomial rings $k[t]$ and $k[s]$ are domains: the product of two nonzero polynomials has nonzero leading coefficient. In each spectrum the prime $(0)$ has closure $V(0)$ equal to the whole spectrum; hence every two nonempty opens meet, and each chart is irreducible, in particular connected. The intersection is nonempty, for evaluation $t\\mapsto1$ defines a point of $\\operatorname{Spec}k[t,t^{-1}]$. If $P$ were the union of disjoint nonempty open-and-closed pieces, each connected chart would lie entirely in one piece, and their common point would force both charts into the same piece, a contradiction. Thus $P$ is nonempty and connected. Apply [lem-sbc-smooth-fixed-dimension-over-field] with $n=1$ and step 2 to obtain $\\dim P=1$.",
+   "uses": [
+    "def-sc-p1-standard",
+    "lem-sbc-smooth-fixed-dimension-over-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2P, lemma-projective-space-smooth: connectedness and dimension"
+   }
+  },
+  {
+   "text": "Apply [lemma-nagata-projective-space-base-change-proper] to the finite homogeneous-coordinate set $\\{0,1\\}$ and base $\\operatorname{Spec}k$: $P\\to\\operatorname{Spec}k$ is proper. Properness includes separatedness and finite type by [def-weil-proper-morphism]. With smoothness from step 2 and nonempty connected dimension one from step 3, these are all clauses in the connected-curve convention of [def-sc-curves].",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "def-sc-curves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Projective-line properness and the curve convention"
+   }
+  },
+  {
+   "text": "Under the explicit standard-chart identification of step 1, use [lem-sc-p1-monomial](ii) with $d=0\\geq-1$ to obtain $H^1(P,\\mathcal O(0))=0$. The gluing rule of [def-sc-p1-standard] for $d=0$ is $g_0=g_1$; sending $g_i$ to $1$ identifies $\\mathcal O(0)$ with $\\mathcal O_P$, with equal maps on the overlap. Thus $H^1(P,\\mathcal O_P)=0$. The genus definition [def-sc-genus], applicable by step 4 and algebraic closedness of $k$, now gives $g(P)=\\dim_k0=0$.",
+   "uses": [
+    "lem-sc-p1-monomial",
+    "def-sc-p1-standard",
+    "def-sc-genus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6U, proposition-projective-line, omitted implication (1) to (2),(7); explicit computation from the existing monomial lemma"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-affine-proj",
+  "def-nagata-projective-space-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sc-p1-standard",
+  "sbc-lem-affine-space-smooth",
+  "def-sbc-smooth-morphisms",
+  "lem-sbc-smooth-fixed-dimension-over-field",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-weil-proper-morphism",
+  "def-sc-curves",
+  "lem-sc-p1-monomial",
+  "def-sc-genus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2P omitted proof supplied by charts; curves.tex Tag 0C6U omitted forward implication supplied by lem-sc-p1-monomial(ii), d=0"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -96,15 +179,101 @@
    "results": "AlgebraicGeometry.Proj; Algebra.FormallySmooth.iff_subsingleton_and_projective; Algebra.formallySmooth_iff; AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty; AlgebraicGeometry.Proj.instIsSeparated; AlgebraicGeometry.AffineSpace.not_isIntegralHom; AlgebraicGeometry.AffineSpace.instIsAffine; AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
    "date": "2026-10-14",
    "verdict": "no match: read signatures concern Proj, affine space, cotangent differentials or etale loci, not this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projective line over an algebraically closed field is a smooth proper connected curve of genus zero",
+   "results": "WeierstrassCurve.Projective; WeierstrassCurve.Projective.NonsingularLift; WeierstrassCurve.Projective.PointClass; WeierstrassCurve.toProjective; WeierstrassCurve.Affine; WeierstrassCurve.Projective.Point; WeierstrassCurve.Affine.CoordinateRing.instSubsingleton; WeierstrassCurve.Projective.toAffine",
+   "date": "2026-10-14",
+   "verdict": "no match: returned signatures do not state the smooth proper connected genus-zero projective-line assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "ProjectiveLine, IsCurve, SmoothOfRelativeDimension, ConnectedSpace",
+   "results": "loogle: unknown identifier 'ProjectiveLine'",
+   "date": "2026-10-14",
+   "verdict": "no match: returned signatures do not state the smooth proper connected genus-zero projective-line assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectiveLine.*(smooth|connected|genus)|isCurve_projectiveLine",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: returned signatures do not state the smooth proper connected genus-zero projective-line assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "H1 structure sheaf projective line vanishes genus zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing first coherent cohomology of O on projective space over a field smooth connected dimension one",
+   "results": "Algebra.FormallySmooth.iff_subsingleton_and_projective; Algebra.formallySmooth_iff; Rep.isZero_Tor_succ_of_projective; Algebra.IsStandardSmooth.subsingleton_h1Cotangent; Algebra.FormallySmooth.subsingleton_h1Cotangent; isZero_groupCohomology_succ_of_subsingleton; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_zero; Algebra.FormallyEtale.subsingleton_h1Cotangent",
+   "date": "2026-10-14",
+   "verdict": "no match: returned signatures do not state the smooth proper connected genus-zero projective-line assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Proj.*(smooth|genus)|[Hh]1.*[Pp]rojective",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: returned signatures do not state the smooth proper connected genus-zero projective-line assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-asd-ordinary-finite-p1-adjunction",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-asd-projective-line-genus-zero",
+  "worker": "stage1",
+  "summary": "Proved geometry directly from the two polynomial affine charts, properness from the existing projective-space theorem, and genus zero by specializing the existing monomial computation to twist zero. No new nodes and no statement change. Explicitly identified the base-change and polynomial-Proj models.",
+  "blueprint": "thm-asd-smooth-tensor proof second paragraph: geometric-fibre genus-zero input for the projective-line adjunction via lem-asd-ordinary-finite-p1-adjunction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic geometric or coherent-cohomology tool for the projective-line fibre calculation; the compact-support base-change unit gives no replacement for this input."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic geometric or coherent-cohomology tool for the projective-line fibre calculation; the compact-support base-change unit gives no replacement for this input."
+   },
+   {
+    "node": "lem-sbc-smooth-fixed-dimension-over-field",
+    "why": "Generic geometric or coherent-cohomology tool for the projective-line fibre calculation; the compact-support base-change unit gives no replacement for this input."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic geometric or coherent-cohomology tool for the projective-line fibre calculation; the compact-support base-change unit gives no replacement for this input."
+   },
+   {
+    "node": "lem-sc-p1-monomial",
+    "why": "Generic geometric or coherent-cohomology tool for the projective-line fibre calculation; the compact-support base-change unit gives no replacement for this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "sbc-lem-affine-space-smooth",
+  "lem-sbc-smooth-fixed-dimension-over-field",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-sc-p1-monomial"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-d8f6836c6",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-d8f6836c6 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements and sources, and checked all five proof steps, edge cases, duplicates, cycles and coefficient distinctions. Mathematics accepted. Corrected A3: the genus-zero lemma falsely realized the compact-support base-change unit; fixes/dag/units/sk-prop-sf-cbc.json clears that binding. Accepted four generic tool uses. Details in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
