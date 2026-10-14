@@ -66,11 +66,8 @@ theorem stalk_normalization_depth_two_section_flat_core
     -- Its stalk map is local, so its flatness is faithful flatness.
     have hg : (g.stalkMap w).hom.FaithfullyFlat := by
       algebraize [(g.stalkMap w).hom]
-      have : Module.Flat _ _ := Flat.stalkMap g w
-      have : IsLocalHom (algebraMap (E.presheaf.stalk (g w))
-          ((Limits.pullback p t).presheaf.stalk w)) :=
-        inferInstanceAs (IsLocalHom (g.stalkMap w).hom)
-      exact Module.FaithfullyFlat.of_flat_of_isLocalHom
+      exact @Module.FaithfullyFlat.of_flat_of_isLocalHom _ _ _ _ _ _ _
+        (Flat.stalkMap g w) (g.toLRSHom.prop w)
     have hp : (p.stalkMap (g w)).hom.Flat := by
       algebraize [(p.stalkMap (g w)).hom, (g.stalkMap w).hom,
         (g.stalkMap w).hom.comp (p.stalkMap (g w)).hom]
