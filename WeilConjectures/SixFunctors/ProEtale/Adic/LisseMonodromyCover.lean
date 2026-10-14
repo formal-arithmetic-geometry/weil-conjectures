@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.UniversalCover
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy
+public import WeilConjectures.SixFunctors.ProEtale.Adic.DenseOpenUnit
 public import WeilConjectures.WeilSheaf.StalkConstantSheaf
 
 /-!
@@ -174,19 +175,6 @@ lemma globalSectionsToUpperStar_app_comp_resOver_app {S T Z : Scheme.{u}} {s : S
 end Transport
 
 section Constancy
-
-/-- A natural transformation of additive functors whose components at the summands of a finite
-biproduct are isomorphisms has an isomorphism as component at the biproduct. -/
-lemma _root_.CategoryTheory.NatTrans.isIso_app_biproduct {C D : Type*} [Category* C] [Category* D]
-    [Preadditive C] [Preadditive D] {F G : C ⥤ D} [F.Additive] [G.Additive] (α : F ⟶ G)
-    {J : Type} [Finite J] (f : J → C) [HasBiproduct f] (hα : ∀ j, IsIso (α.app (f j))) :
-    IsIso (α.app (⨁ f)) := by
-  have := Fintype.ofFinite J
-  refine ⟨∑ j, G.map (biproduct.π f j) ≫ inv (α.app (f j)) ≫ F.map (biproduct.ι f j), ?_, ?_⟩
-  · simp only [Preadditive.comp_sum, ← α.naturality_assoc, IsIso.hom_inv_id_assoc,
-      ← F.map_comp, ← F.map_sum, biproduct.total, F.map_id]
-  · simp only [Preadditive.sum_comp, Category.assoc, α.naturality, IsIso.inv_hom_id_assoc,
-      ← G.map_comp, ← G.map_sum, biproduct.total, G.map_id]
 
 variable {l : ℕ} [Fact l.Prime] {K : Type u} [Field K]
 
