@@ -10,24 +10,28 @@
  },
  "proof": [
   {
-   "text": "For a family X_i form K, the coproduct of X_i[0] in D(A), and P=H^0(K). Applying H^0 to the injections gives the cofan X_i -> P. For each injective I, the degree-zero complex I[0] is K-injective, and exactness of Hom(-,I) identifies Hom_D(K,I[0]) with Hom_A(P,I). The derived coproduct property identifies this with product_i Hom_A(X_i,I), naturally in I.",
-   "uses": [],
+   "text": "For the family X_j, form K=∐_j X_j[0] in the derived category and P=H⁰(K). Define injections X_j -> P by the inverse single-object homology isomorphism followed by H⁰ of the derived injection. The injective homology comparison, its compatibility with composition, and the derived coproduct universal property prove bijectivity of Hom_A(P,I) -> product_j Hom_A(X_j,I) for injective I.",
+   "uses": [
+    "new-stage3-derived-homology-injective-bijective"
+   ],
    "elementary": false
   },
   {
-   "text": "For Y use an injective copresentation 0 -> Y -> I^0 -> I^1. The comparison Hom_A(P,-) -> product_i Hom_A(X_i,-) is natural and both sides are left exact. Its bijectivity on I^0 and I^1 implies bijectivity on their kernels, hence on Y. This is the coproduct universal property; the empty case gives a zero object.",
+   "text": "For arbitrary Y, embed it into Injective.under Y. Extend the family of maps X_j -> Y to a unique map a:P -> Injective.under Y. Postcompose with the cokernel and its monomorphism into an injective. Bijectivity on this second injective proves the composite is zero. Cancel the monomorphism, and use Abelian.monoLift to factor a through Y. Cancel the first monomorphism to verify the coprojection equations and uniqueness. Package these maps as a colimiting cofan and transport to the original discrete diagram.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "new-stage3-derived-homology-injective-bijective"
+ ],
  "proof_origin": {
   "by": "worker",
-  "group": "Q2",
+  "group": "N1",
   "date": "2026-10-14",
   "document": "dag/nodes/sec-smooth-purity/new-stage3-gabriel-popescu-large-hom-right-adjoint.json",
   "place": "Original proof step 1: agent-written derived-to-abelian coproduct transfer, extending Stacks Project Tag 0F5S",
-  "note": "Second reading replaced the equivalence-only restatement with this separate argument component."
+  "note": "Second reading: real coproduct construction and injective-copresentation descent in Lean; only the general injective homology comparison remains open."
  },
  "mathlib_searches": [
   {
@@ -104,9 +108,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261014T001730-L-2553779",
+  "landing": "20261014T004109-L-2836650",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

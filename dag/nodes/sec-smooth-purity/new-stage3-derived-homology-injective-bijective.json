@@ -1,0 +1,109 @@
+{
+ "id": "new-stage3-derived-homology-injective-bijective",
+ "kind": "statement",
+ "title": "Zeroth cohomology computes maps to an injective single object",
+ "statement": "Let A be an abelian category with a chosen derived category whose Hom types are in universe w. For every K in D(A) and injective I in A, the map on morphisms induced by H⁰, from Hom_D(A)(K,I[0]) to Hom_A(H⁰(K),H⁰(I[0])), is bijective. No Grothendieck or coproduct hypothesis is required.",
+ "stmt_deps": [],
+ "source": {
+  "document": "dag/nodes/sec-smooth-purity/new-stage3-derived-large-coproducts-transfer.json",
+  "place": "Proof step 1: comparison Hom_D(K,I[0]) with Hom_A(H⁰(K),I) for injective I"
+ },
+ "proof": [
+  {
+   "text": "Represent K by a complex C. The bounded-below injective complex I[0] is K-injective, so derived maps to it are chain maps modulo homotopy. A chain map is a map C⁰ -> I vanishing on boundaries. For a map H⁰(C) -> I, injectivity extends it from cycles modulo boundaries to C⁰ modulo boundaries; this gives a chain map inducing the prescribed map on H⁰. If the induced map on H⁰ is zero, the component C⁰ -> I factors through C⁰/Z⁰(C), the image of C⁰ -> C¹. Extend this map from the image to C¹ by injectivity to obtain a null homotopy. Transport through the canonical localization and single-object homology isomorphisms. This proves bijectivity of the stated, specific homology map.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "N1",
+  "date": "2026-10-14",
+  "document": "dag/nodes/sec-smooth-purity/new-stage3-derived-large-coproducts-transfer.json",
+  "place": "Proof step 1: comparison Hom_D(K,I[0]) with Hom_A(H⁰(K),I) for injective I",
+  "note": "Second reader: isolated the injective comparison only; the coproduct construction and injective-copresentation descent are proved in the original module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Hom from arbitrary derived object to injective degree zero equals Hom from zeroth cohomology",
+   "date": "2026-10-14",
+   "results": "CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom; CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk; CategoryTheory.InjectiveResolution.extMk; CategoryTheory.InjectiveResolution.extEquivCohomologyClass; CategoryTheory.InjectiveResolution.extMk_hom; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk; CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass",
+   "digest": "03bf779f875b5dd4",
+   "verdict": "No complete match. The Ext-resolution results assume the source is a single object; toHom_bijective compares homotopy classes with Hom-complex cohomology, not H⁰ of the source with the injective target."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective, Function.Bijective",
+   "date": "2026-10-14",
+   "results": "No hits",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "No complete match. The Ext-resolution results assume the source is a single object; toHom_bijective compares homotopy classes with Hom-complex cohomology, not H⁰ of the source with the injective target."
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*bijective|bijective.*homology",
+   "date": "2026-10-14",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean",
+   "digest": "ba3e9cf9c52a6f5e",
+   "verdict": "No complete match. The Ext-resolution results assume the source is a single object; toHom_bijective compares homotopy classes with Hom-complex cohomology, not H⁰ of the source with the injective target."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from a derived complex to an injective concentrated in degree zero are computed by zeroth cohomology",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedLargeCoproductsTransfer",
+  "date": "2026-10-14",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-stage3-derived-large-coproducts-transfer",
+   "place": "Proof step 1: comparison Hom_D(K,I[0]) with Hom_A(H⁰(K),I) for injective I",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedHomologyInjective",
+  "file": "lean/Sheaf/CategoryTheory/DerivedHomologyInjective.lean",
+  "declaration": "CategoryTheory.derived_homology_injective_bijective",
+  "statement": "theorem derived_homology_injective_bijective\n    {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{w} A]\n    (K : DerivedCategory A) (I : A) [Injective I] :\n    Function.Bijective\n      ((DerivedCategory.homologyFunctor A 0).map :\n        (K ⟶ (DerivedCategory.singleFunctor A 0).obj I) →\n        ((DerivedCategory.homologyFunctor A 0).obj K ⟶\n          (DerivedCategory.homologyFunctor A 0).obj\n            ((DerivedCategory.singleFunctor A 0).obj I)))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261014T004109-L-2836650",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261014T004109-L-2836650",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
