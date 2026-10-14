@@ -14908,3 +14908,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:24 L: returned deliver/H3/Sheaf.AlgebraicGeometry.PicardExternalCechCupLeibniz (reviewer RETURN: (reviewer X-95f9f, head 95f9fd0fe) 5 (forced adaptation): PicardExternalCechCupLeibniz was adapted unnecessarily. In lea)
 - 17:30 L: returned deliver/N3/Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionsFactorization (reviewer RETURN: (reviewer X-fbb2b, head fbb2b73d5) H10: `ModuleCohomologyExtSectionsComponentFormula.lean` does not compile cleanly with)
 - 17:30 L: merged deliver/Q3/WeilConjectures.ConstructibleSheaf.FinitePushforward (stage 3; reviewer PASS; first push; landing 20261014T173045-L-2910045 (interface); batch 20261014T173043; modules 3; new nodes 2)
+- 17:35 L: returned deliver/Z2/Sheaf.AlgebraicGeometry.MeromorphicModule (reviewer RETURN: (reviewer X-578d8, head 578d8eb16) F (report; coord/brief-stage3.md §4): In coord/reports/Z2/Sheaf.AlgebraicGeometry.Mer)
