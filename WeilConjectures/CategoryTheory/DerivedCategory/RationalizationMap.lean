@@ -23,6 +23,11 @@ An `R`-linear triangulated functor `F : C ⥤ D` induces a functor
 fully faithful when `F` is (`CategoryTheory.Rationalization.full_map`,
 `CategoryTheory.Rationalization.faithful_map`): on `Hom` groups it is the localization at `M`
 of the bijection induced by `F`.
+
+More generally, a triangulated functor `F : C ⥤ D` which is linear along a ring morphism
+`ψ : R ⟶ R'` carrying `M` into `M'` induces a triangulated functor
+`CategoryTheory.Rationalization.mapOfRingHom ψ hM F hF : Rationalization M C ⥤ Rationalization M' D`
+(`CategoryTheory.Rationalization.isTriangulated_mapOfRingHom`).
 -/
 
 @[expose] public section
@@ -205,5 +210,59 @@ instance faithful_map : (map M F).Faithful := by
   have : eA.hom ≫ φ₁ ≫ eB.inv = eA.hom ≫ φ₂ ≫ eB.inv :=
     (mapHom_bijective F _ _).1 (by simp [mapHom, h])
   simpa using this
+
+
+section RingHom
+
+variable {R R' : Type*} [CommRing R] [CommRing R'] (ψ : R →+* R') {M : Submonoid R}
+  {M' : Submonoid R'} (hM : M ≤ M'.comap ψ)
+  {C : Type*} [Category C] [Preadditive C] [Linear R C] [HasZeroObject C]
+  [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [∀ n : ℤ, (shiftFunctor C n).Linear R]
+  [Pretriangulated C] [IsTriangulated C]
+  {D : Type*} [Category D] [Preadditive D] [Linear R' D] [HasZeroObject D]
+  [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor D n).Additive] [∀ n : ℤ, (shiftFunctor D n).Linear R']
+  [Pretriangulated D] [IsTriangulated D]
+  (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]
+  (hF : ∀ (r : R) {X Y : C} (f : X ⟶ Y), F.map (r • f) = ψ r • F.map f)
+
+omit [∀ n : ℤ, (shiftFunctor C n).Linear R] [IsTriangulated C]
+  [∀ n : ℤ, (shiftFunctor D n).Linear R'] [IsTriangulated D] in
+include hM hF in
+/-- A triangulated functor which is linear along a ring morphism `ψ : R ⟶ R'` carrying `M` into
+`M'` preserves the morphisms with torsion mapping cone. -/
+lemma W_map_of_ringHom {X Y : C} {s : X ⟶ Y} (hs : W M C s) : W M' D (F.map s) := by
+  obtain ⟨Z, g, h, hT, m, hm, hZ⟩ := hs
+  exact ObjectProperty.trW.mk _ (F.map_distinguished _ hT)
+    ⟨ψ m, hM hm, by
+      change ψ m • 𝟙 (F.obj Z) = 0
+      rw [← F.map_id, ← hF, hZ, F.map_zero]⟩
+
+/-- The functor `Rationalization M C ⥤ Rationalization M' D` induced by a triangulated functor
+which is linear along a ring morphism `ψ : R ⟶ R'` carrying `M` into `M'`. -/
+noncomputable def mapOfRingHom : Rationalization M C ⥤ Rationalization M' D :=
+  Localization.lift (F ⋙ Q M' D)
+    (fun _ _ _ hs ↦ Localization.inverts (Q M' D) (W M' D) _ (W_map_of_ringHom ψ hM F hF hs))
+    (Q M C)
+
+noncomputable instance : Localization.Lifting (Q M C) (W M C) (F ⋙ Q M' D)
+    (mapOfRingHom ψ hM F hF) :=
+  ⟨Localization.fac _ _ _⟩
+
+noncomputable instance : (mapOfRingHom ψ hM F hF).CommShift ℤ :=
+  Functor.commShiftOfLocalization (Q M C) (W M C) ℤ (F ⋙ Q M' D) (mapOfRingHom ψ hM F hF)
+
+/-- The functor induced on rationalizations by a triangulated functor linear along a ring
+morphism is triangulated: a distinguished triangle of the rationalization is isomorphic to the
+image of a distinguished triangle of `C`. -/
+instance isTriangulated_mapOfRingHom : (mapOfRingHom ψ hM F hF).IsTriangulated := by
+  have := Localization.essSurj_mapArrow (Q M C) (W M C)
+  refine ⟨fun T hT ↦ ?_⟩
+  obtain ⟨T₀, e, hT₀⟩ := (Functor.distTriang_iff (Q M C) T).1 hT
+  let G := mapOfRingHom ψ hM F hF
+  exact Pretriangulated.isomorphic_distinguished _ ((F ⋙ Q M' D).map_distinguished _ hT₀) _
+    (G.mapTriangle.mapIso e ≪≫ (Functor.mapTriangleCompIso (Q M C) G).symm.app T₀ ≪≫
+      (Functor.mapTriangleIso (Localization.Lifting.iso (Q M C) (W M C) (F ⋙ Q M' D) G)).app T₀)
+
+end RingHom
 
 end CategoryTheory.Rationalization

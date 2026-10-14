@@ -39,8 +39,10 @@ a zero object. The cancellation `P (α ≫ f) → P f → P α` it uses is
 
 For an arbitrary `f` the indexing comma category at `W` is the disjoint union, over the
 lifts `α` of `W` through `f`, of categories with terminal object: the inclusion of the
-discrete category of lifts is final. The presheaf-level left Kan extension is then
-pointwise the direct sum `⨁_α F(α)`, hence left exact when direct sums in `A` are exact
+discrete category of lifts is final
+(`SmallSite.exists_final_discrete_costructuredArrow_overMap`). The presheaf-level left Kan
+extension is then pointwise the direct sum `⨁_α F(α)`, hence left exact when direct sums in
+`A` are exact
 (`SmallSite.preservesFiniteLimits_op_lan_overMap_of_isGrothendieckAbelian`). This is the
 left exactness of extension by zero along an étale morphism.
 
@@ -266,6 +268,22 @@ private lemma final_discreteFunctor (h : P f) : (discreteFunctor (W := W) h).Fin
 end LiftIndex
 
 end LiftIndex
+
+section Final
+
+variable {P : MorphismProperty Scheme.{u}} {V U : Scheme.{u}}
+  [P.IsMultiplicative] [P.HasOfPostcompProperty P] {f : V ⟶ U}
+
+/-- The comma category indexing the pointwise left Kan extension along the opposite of the
+localization functor of `h : P f` at `W` receives a final functor from a discrete category,
+namely the lifts of `W` through `f`, whose comma objects have invertible structure maps. -/
+theorem exists_final_discrete_costructuredArrow_overMap (h : P f) (W : P.Over ⊤ U) :
+    ∃ (ι : Type u) (s : Discrete ι ⥤ CostructuredArrow (MorphismProperty.Over.map ⊤ h).op (op W)),
+      s.Final ∧ ∀ i, IsIso (s.obj i).hom :=
+  ⟨_, LiftIndex.discreteFunctor h, LiftIndex.final_discreteFunctor h, fun i ↦
+    inferInstanceAs (IsIso (i.as.isoComp h).hom.op)⟩
+
+end Final
 
 section OverMap
 

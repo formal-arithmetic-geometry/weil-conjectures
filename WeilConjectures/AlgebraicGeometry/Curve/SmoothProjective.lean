@@ -111,7 +111,9 @@ a field `k` is projective over `k` if its structure morphism is projective.
 class IsProjective (f : X ⟶ S) : Prop extends IsHProjective f, QuasiCompact f
 
 /-- **H-projective morphisms are proper**, being the composite of a closed immersion and the
-proper structure morphism of a projective space. -/
+proper structure morphism of a projective space.
+
+(blueprint: `lem-pc-projective-proper`) -/
 instance (priority := 100) IsHProjective.isProper (f : X ⟶ S) [IsHProjective f] :
     IsProper f := by
   obtain ⟨n, _, i, _, rfl⟩ := IsHProjective.exists_isClosedImmersion (f := f)
