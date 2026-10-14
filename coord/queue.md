@@ -44,9 +44,9 @@
 | `Sheaf.Algebra.Homology.AffineStalkBaseSecondLocalizationComparison` | 33 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeDerivedTensorMate` | 33 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BoundedFlatModelNormalization` | 35 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.FlatTelescopeNormalizationMorphisms` | 35 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CompactFlatGeneratorTowerResolution` | 36 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CompactFlatTelescopeBarEnlargement` | 36 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FlatTelescopeConeNormalizationDescent` | 36 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FlatTelescopeSumComparisonIsIso` | 37 | 1 | proof |
 | `Sheaf.CategoryTheory.Abelian.DerivedBottomCycleTransport` | 37 | 1 | proof |
 | `Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization` | 41 | 1 | proof |
