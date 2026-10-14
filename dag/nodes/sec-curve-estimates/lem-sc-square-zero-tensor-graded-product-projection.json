@@ -1,145 +1,142 @@
 {
-  "id": "lem-sc-square-zero-tensor-graded-product-projection",
-  "kind": "statement",
-  "title": "Homogeneous product projection in the graded tensor algebra",
-  "statement": "Let j:Z→X be a closed immersion, L invertible, J=j.ker with J²=0 [def-pc-scheme, def-weil-closed-immersion, def-sc-invertible-module, def-sbc-closed-immersion-ideal-sheaf, def-sbc-ideal-sheaf-powers]. Fix n≥0, a TensorGradedPresentation T [lem-sc-square-zero-tensor-graded-presentation], and canonical comparison data D=(a_r,k_r) [lem-sc-square-zero-ideal-tensor-unit]. Put N=(j^*L)^n, and for y:O_Z→N^(r+1) put c(y)=T.c_(n(r+1))((y;a_r^(-1))(1)), using the pushforward identification of sections [def-pc-module-pullback, lem-pc-module-pullback-adjunction]. For e≥0, f:O_Z→N and x:O_Z→N^(e+1), projection to degree n(e+2) of c(f^⊗1)c(x) is (((λ_(O_Z))^(-1);f⊗x);a_(e+1)^(-1))(1). This is an equality of quotient sections, with no cohomology boundary or action assertion.",
-  "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 09MS, coherent-equation-ses and the direct-sum exact sequence following it; Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, the quotient action in the first paragraph of its proof."
-  },
-  "stmt_deps": [
-    "def-pc-module-pullback",
-    "def-pc-quasi-coherent-sheaf",
-    "def-pc-scheme",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "def-sbc-ideal-sheaf-powers",
-    "def-sc-invertible-module",
-    "def-sc-module-cohomology-boundary",
-    "def-sc-ringed-space-module-cohomology",
-    "def-sp-injective-resolutions",
-    "def-weil-abstract-derived-category",
-    "def-weil-closed-immersion",
-    "def-weil-pbc-comm-algebra-sheaf",
-    "def-weil-pbc-ringed-space-algebra-module",
-    "lem-pc-module-pullback-adjunction",
-    "lem-sc-module-section-boundary-exact",
-    "lem-sc-square-zero-ideal-tensor-unit",
-    "lem-sc-square-zero-tensor-graded-presentation",
-    "pqf-def-cohomology"
-  ],
-  "proof": [
-    {
-      "text": "Locally lift the two quotient sections through the degreewise units. By b_quotient their homogeneous inclusions are images of the homogeneous lifts. Apply the algebra map p to b_multiply and use c_projection to extract degree n+n(e+1)=n(e+2). The monoidal pullback and tensor-power comparisons identify the coefficient with the displayed tensor-product section, including the degree-one right unitor in tensorPowSection f 1. Different lifts differ by kernel sections and do not change the quotient product. Glue by sheaf separation. The same diagonal projection works for n=0.",
-      "uses": [
-        "lem-sc-square-zero-tensor-graded-presentation",
-        "lem-sc-square-zero-ideal-tensor-unit",
-        "lem-weil-pbc-closed-immersion-unit-quotient"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-sc-square-zero-ideal-tensor-unit",
-    "lem-sc-square-zero-tensor-graded-presentation",
-    "lem-weil-pbc-closed-immersion-unit-quotient"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 09MS, coherent-equation-ses and the direct-sum exact sequence following it; Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, the quotient action in the first paragraph of its proof."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Direct sum of tensor powers of an invertible sheaf and homogeneous quotient actions",
-      "results": "Service returned Internal Server Error.",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Projection of a product of homogeneous quotient sections in a graded algebra sheaf equals the tensor product section",
-      "results": "Eight hits on Proj homogeneous localization and graded ring tensor products; no graded module-sheaf realization or coefficient cohomology action comparison.",
-      "date": "2026-10-14",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "grep",
-      "query": "boundary.*naturality|graded.*algebra|Cofan.mk",
-      "results": "Mathlib supplies graded tensor algebras and generic coproduct machinery but no line-bundle graded algebra sheaf or its coefficient cohomology comparisons. Whole blueprint searches for graded square zero and quotient action returned no duplicate.",
-      "date": "2026-10-14",
-      "verdict": "no exact match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryGradedRealization",
-    "date": "2026-10-14",
-    "group": "N4"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-pic-proper-ntorsion",
-      "place": "Tag 09MS graded direct-sum sequence: projection of the product of two homogeneous sections",
-      "via": [
-        "lem-sc-square-zero-tensor-boundary-graded-realization",
-        "lem-sc-square-zero-tensor-boundary-product",
-        "lem-sc-square-zero-tensor-boundary-leibniz",
-        "lem-sc-square-zero-tensor-power-boundary",
-        "lem-sc-square-zero-section-power-obstruction-core",
-        "lem-sc-square-zero-section-power-obstruction",
-        "lem-sc-square-zero-section-power-lift",
-        "lem-sc-square-zero-section-power-locus",
-        "lem-sc-ample-square-zero-thickening",
-        "lem-sc-ample-on-reduction-noetherian",
-        "lem-sc-dim-one-ample-invertible",
-        "lem-sc-dim-one-quasi-projective",
-        "lem-sc-proper-dim-one-projective"
-      ]
-    },
-    "same_as": []
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none"
-    },
-    "slopmaster2": {
-      "state": "none"
-    }
-  },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-thm-curveestimate",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.SquareZeroTensorGradedProductProjection",
-    "file": "lean/Sheaf/AlgebraicGeometry/SquareZeroTensorGradedProductProjection.lean",
-    "declaration": "AlgebraicGeometry.Scheme.Modules.tensorGradedSection_product",
-    "statement": "theorem tensorGradedSection_product {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥) (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n) (hD : canonicalTensorBoundaryComparisons j L hI n = D) (e : ℕ) (f : 𝟙_ Z.Modules ⟶ ((tensorPullback j).obj L).tensorPow n) (x : 𝟙_ Z.Modules ⟶ (((tensorPullback j).obj L).tensorPow n).tensorPow (e + 1)) : Hom.app (T.q (n * ((e + 1) + 1))) ⊤ (tensorGradedSection T D 0 (tensorPowSection f 1) * tensorGradedSection T D e x) = ((((λ_ (𝟙_ Z.Modules)).inv ≫ (f ⊗ₘ x)) ≫ (D.a (e + 1)).inv).app ⊤ (1 : Γ(Z, ⊤)))",
-    "branch": "sheaf-dag",
-    "by": "N4",
-    "date": "2026-10-14"
-  },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "X-381d3",
-    "group": "N4",
-    "result": "pass",
-    "landing": "20261014T004110-L-2836995",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "X-381d3",
-    "group": "N4",
-    "result": "pass",
-    "landing": "20261014T004110-L-2836995",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered files and DAG nodes match the stated theorem interfaces; all five modules and the direct importer compile successfully."
+ "id": "lem-sc-square-zero-tensor-graded-product-projection",
+ "kind": "statement",
+ "title": "Homogeneous product projection in the graded tensor algebra",
+ "statement": "Let j:Z→X be a closed immersion, L invertible, J=j.ker with J²=0 [def-pc-scheme, def-weil-closed-immersion, def-sc-invertible-module, def-sbc-closed-immersion-ideal-sheaf, def-sbc-ideal-sheaf-powers]. Fix n≥0, a TensorGradedPresentation T [lem-sc-square-zero-tensor-graded-presentation], and canonical comparison data D=(a_r,k_r) [lem-sc-square-zero-ideal-tensor-unit]. Put N=(j^*L)^n, and for y:O_Z→N^(r+1) put c(y)=T.c_(n(r+1))((y;a_r^(-1))(1)), using the pushforward identification of sections [def-pc-module-pullback, lem-pc-module-pullback-adjunction]. For e≥0, f:O_Z→N and x:O_Z→N^(e+1), projection to degree n(e+2) of c(f^⊗1)c(x) is (((λ_(O_Z))^(-1);f⊗x);a_(e+1)^(-1))(1). This is an equality of quotient sections, with no cohomology boundary or action assertion.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, coherent-equation-ses and the direct-sum exact sequence following it; Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, the quotient action in the first paragraph of its proof."
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-pc-quasi-coherent-sheaf",
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-invertible-module",
+  "def-sc-module-cohomology-boundary",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-weil-pbc-ringed-space-algebra-module",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-module-section-boundary-exact",
+  "lem-sc-square-zero-ideal-tensor-unit",
+  "lem-sc-square-zero-tensor-graded-presentation",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Apply tensorGradedSection_projection_of_raw, then prove its raw hypothesis by tensorGradedSection_product_raw.",
+   "uses": [
+    "lem-sc-square-zero-tensor-graded-product-projection-projection",
+    "lem-sc-square-zero-tensor-graded-product-projection-raw"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-sc-square-zero-tensor-graded-product-projection-projection",
+  "lem-sc-square-zero-tensor-graded-product-projection-raw"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, coherent-equation-ses and the direct-sum exact sequence following it; Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, the quotient action in the first paragraph of its proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Direct sum of tensor powers of an invertible sheaf and homogeneous quotient actions",
+   "results": "Service returned Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection of a product of homogeneous quotient sections in a graded algebra sheaf equals the tensor product section",
+   "results": "Eight hits on Proj homogeneous localization and graded ring tensor products; no graded module-sheaf realization or coefficient cohomology action comparison.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundary.*naturality|graded.*algebra|Cofan.mk",
+   "results": "Mathlib supplies graded tensor algebras and generic coproduct machinery but no line-bundle graded algebra sheaf or its coefficient cohomology comparisons. Whole blueprint searches for graded square zero and quotient action returned no duplicate.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryGradedRealization",
+  "date": "2026-10-14",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS graded direct-sum sequence: projection of the product of two homogeneous sections",
+   "via": [
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SquareZeroTensorGradedProductProjection",
+  "file": "lean/Sheaf/AlgebraicGeometry/SquareZeroTensorGradedProductProjection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorGradedSection_product",
+  "statement": "theorem tensorGradedSection_product {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥) (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n) (hD : canonicalTensorBoundaryComparisons j L hI n = D) (e : ℕ) (f : 𝟙_ Z.Modules ⟶ ((tensorPullback j).obj L).tensorPow n) (x : 𝟙_ Z.Modules ⟶ (((tensorPullback j).obj L).tensorPow n).tensorPow (e + 1)) : Hom.app (T.q (n * ((e + 1) + 1))) ⊤ (tensorGradedSection T D 0 (tensorPowSection f 1) * tensorGradedSection T D e x) = ((((λ_ (𝟙_ Z.Modules)).inv ≫ (f ⊗ₘ x)) ≫ (D.a (e + 1)).inv).app ⊤ (1 : Γ(Z, ⊤)))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-381d3",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T004110-L-2836995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T033114-L-606920",
+  "kind": "interface"
+ }
 }
