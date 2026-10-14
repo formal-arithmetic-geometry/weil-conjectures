@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-0f0g",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Projection formula for proper morphisms",
@@ -18,46 +18,182 @@
  ],
  "proof": [
   {
-   "text": "Write $\\Lambda=\\kunZn$. Both sides of\n[def-kun-projection-formula-map] are triangulated functors of\n$K\\in D(Y_{\\Et},\\Lambda)$\n([lem-kun-derived-tensor-triangulated]). For $K=\\Lambda$ in degree zero the map\nis the identity constraint, hence an isomorphism, and the same holds\nfor every bounded complex of free $\\Lambda$-module sheaves, both\nsides being compatible with finite direct sums and shifts. A\nbounded-above $K$ may be replaced by a bounded-above complex of flat\nsheaves ([lem-kun-bounded-flat-replacement]) and written as the\nfiltered colimit of its stupid truncations\n([def-kun-truncations]), which is a homotopy colimit\n([lem-kun-complex-colimit-hocolim]); the left hand side commutes\nwith homotopy colimits\n([lem-kun-derived-tensor-direct-sums]), and the right hand side\ndoes too, because $f$ proper of finite type over a field has\n$\\kuncd(f)<\\infty$ by [lem-kun-0f10](1) and therefore $Rf_*$\npreserves direct sums by [lem-kun-0f11] ([def-kun-cd] for\nthe dimension predicate). An arbitrary $K$ is the homotopy colimit\nof its truncations $\\tau_{[-N,N]}K$\n([lem-kun-hocolim-truncations]), which are bounded, and the same\ntwo commutation statements reduce to the bounded-above case. Hence\n$\\mathrm{PF}_f(E,K)$ is an isomorphism in general; the identifications\nused are those of [def-weil-pbc-direct-image] and\n[def-weil-pbc-inverse-image].",
+   "text": "For a geometric point $g:s=\\operatorname{Spec}\\Omega\\to Y$, form $X_s=X\\times_Ys$ with projections $f_s$ and $g'$. Properness is stable under base change, so $X_s$ is proper over the algebraically closed field $\\Omega$, hence separated and of finite type over $\\Omega$; Finite type over the affine point gives quasi-compactness. Its diagonal is a closed immersion, whose inverse image of an affine open is a closed affine subscheme and is quasi-compact; thus it is quasi-separated. Clause (2) of [lem-kun-0f10] therefore gives $\\operatorname{cd}(X_s)<\\infty$. Here finiteness is used only on the geometric fiber, not asserted for an arbitrary base $Y$.",
    "uses": [
-    "def-kun-projection-formula-map",
-    "lem-kun-derived-tensor-triangulated",
-    "lem-kun-bounded-flat-replacement",
-    "def-kun-truncations",
-    "lem-kun-complex-colimit-hocolim",
-    "lem-kun-derived-tensor-direct-sums",
-    "lem-kun-0f10",
-    "lem-kun-0f11",
-    "def-kun-cd",
-    "lem-kun-hocolim-truncations",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-inverse-image"
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-pbc-scheme-conventions",
+    "lem-kun-0f10"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n, proof"
+   }
+  },
+  {
+   "text": "Put $E_s=g'^{-1}E$ and $M=K_{\\bar y}$. By [lem-kun-stalk-as-pullback], $g^{-1}K$ is the stalk complex $M$. Over the algebraically closed field $\\Omega$ the Galois group is trivial, so [lem-exc-abelian-sheaves-gmodules] identifies abelian sheaves on $s$ with abelian groups. This identification carries a $\\Lambda$-action to its endomorphisms on the group, with the same ring identities, and conversely carries these endomorphisms back by full faithfulness. It thus identifies $\\Lambda$-module sheaves with $\\Lambda$-modules. This additive equivalence preserves kernels and cokernels, hence is exact; applying it termwise preserves and reflects quasi-isomorphisms, so it induces the same identification on unbounded derived categories. Consequently $f_s^{-1}g^{-1}K$ is the constant complex $\\underline M$.",
+   "uses": [
+    "lem-kun-stalk-as-pullback",
+    "lem-exc-abelian-sheaves-gmodules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-proper-base-change-torsion-ring] to $E$ and to $E\\otimes^L_\\Lambda f^{-1}K$. These are arbitrary unbounded $\\Lambda$-complexes, as allowed by that lemma. Its two exchange maps are isomorphisms. Monoidality [lem-kun-inverse-image-monoidal] identifies the pulled-back tensor product with $E_s\\otimes^L_\\Lambda f_s^{-1}g^{-1}K$. The commuting square of [lem-kun-proj-formula-natural] then identifies $g^{-1}\\mathrm{PF}_f(E,K)$, through these isomorphisms, with $\\mathrm{PF}_{f_s}(E_s,M)$. This is the canonical map, not merely an abstract isomorphism of its source and target.",
+   "uses": [
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-kun-inverse-image-monoidal",
+    "lem-kun-proj-formula-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n, proof"
+   }
+  },
+  {
+   "text": "Since $X_s$ is qcqs of finite cohomological dimension by Step 1 and $\\Lambda$ is a torsion ring, [lem-kun-0f12] applied to $E_s$ and $M\\in D(\\Lambda)$ makes the canonical map $R\\Gamma(X_s,E_s)\\otimes^L_\\Lambda M\\to R\\Gamma(X_s,E_s\\otimes^L_\\Lambda\\underline M)$ an isomorphism. Under Step 2 this is exactly the fiber projection map, by its adjoint definition [def-kun-projection-formula-map]. Step 3 therefore shows that the original map is an isomorphism at every geometric stalk.",
+   "uses": [
+    "lem-kun-0f12",
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n, proof"
+   }
+  },
+  {
+   "text": "For every integer $i$, exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact] identifies the stalk of $\\mathcal H^i(\\mathrm{PF}_f)$ with the cohomology in degree $i$ of the stalk map, hence with an isomorphism by Step 4. Forgetting the $\\Lambda$-action does not change kernels or cokernels. Sheaf stalk conservativity [lemma-weil-pbc-geometric-stalk-conservative] makes every $\\mathcal H^i(\\mathrm{PF}_f)$ an isomorphism. Its cone is therefore acyclic, which is precisely invertibility in the derived category. This argument does not require a bound on either complex.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n, proof"
+   }
   }
  ],
  "proof_deps": [
-  "def-kun-projection-formula-map",
-  "lem-kun-derived-tensor-triangulated",
-  "lem-kun-bounded-flat-replacement",
-  "def-kun-truncations",
-  "lem-kun-complex-colimit-hocolim",
-  "lem-kun-derived-tensor-direct-sums",
+  "lem-weil-pbc-proper-base-change",
+  "def-weil-pbc-scheme-conventions",
   "lem-kun-0f10",
-  "lem-kun-0f11",
-  "def-kun-cd",
-  "lem-kun-hocolim-truncations",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-inverse-image"
+  "lem-kun-stalk-as-pullback",
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-kun-inverse-image-monoidal",
+  "lem-kun-proj-formula-natural",
+  "lem-kun-0f12",
+  "def-kun-projection-formula-map",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f0g.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n, proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived projection formula for a proper morphism of schemes with torsion coefficients on the small etale site, for unbounded complexes",
+   "results": "8 hits: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero', CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero', AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; read returned signatures; no etale derived projection formula or proper base change theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\"",
+   "results": "12 hits: Lean.AuxParentProjectionInfo, Lean.ProjectionFunctionInfo, Lean.instInhabitedAuxParentProjectionInfo, Lean.instInhabitedProjectionFunctionInfo, Lean.instReprAuxParentProjectionInfo, Lean.instReprProjectionFunctionInfo, Lean.projectionFnInfoExt, Lean.AuxParentProjectionInfo.fromClass; read returned signatures; no etale derived projection formula or proper base change theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula",
+   "results": "0 hits: ; read returned signatures; no etale derived projection formula or proper base change theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward of etale sheaves satisfies the unbounded derived tensor projection formula over a torsion ring",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper scheme morphism, arbitrary base change commutes with unbounded derived pushforward of sheaves of modules over any torsion commutative ring",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardNatTrans_comp, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardComp_inv_app_val_app; read returned signatures; no etale derived projection formula or proper base change theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"IsIso\"",
+   "results": "6 hits: CategoryTheory.TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact, CategoryTheory.TwoSquare.instIsIsoFunctorRanBaseChangeOfGuitartExact, CategoryTheory.TwoSquare.isIso_lanBaseChange_app, CategoryTheory.TwoSquare.isIso_ranBaseChange_app, CategoryTheory.TwoSquare.isIso_lanBaseChange_app_iff, CategoryTheory.TwoSquare.isIso_ranBaseChange_app_iff; read returned signatures; no etale derived projection formula or proper base change theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*base.?change|base.?change.*proper",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/OpenImmersion.lean, Mathlib/AlgebraicGeometry/OpenImmersion.lean, Mathlib/AlgebraicGeometry/LimitsOver.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/Small.lean; read returned signatures; no etale derived projection formula or proper base change theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exchange map g inverse image R f pushforward to R f prime pushforward g prime inverse image is an isomorphism for proper f and torsion ring module sheaves",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardCongr_symm, SheafOfModules.pushforwardNatIso_inv, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; read returned signatures; no etale derived projection formula or proper base change theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded proper base change for small etale sheaves of modules over a torsion commutative ring",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*formula|pull.*constant",
+   "results": "1 hits: Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ColimCoyoneda.lean; read returned signatures; no etale derived projection formula or proper base change theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChangeMap|properBaseChange|proper_base_change",
+   "results": "0 hits: ; second reader read returned signatures; no proper etale derived base-change result.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images on the etale site of a proper scheme commute with inverse image for complexes of modules killed by an integer",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardComp_inv_app_val_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardNatIso, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom; second reader read returned signatures; no proper etale derived base-change result.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"derived\"",
+   "results": "0 hits: ; second reader read returned signatures; no proper etale derived base-change result.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -94,5 +230,44 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-0f0g",
+  "worker": "stage1",
+  "summary": "Replaced the invalid global free-sheaf generation argument by the geometric-fiber proof of Stacks 0F0G. Reused constant-complex formula and finite-type dimension bound only on fibers. Exposed the missing general torsion-ring unbounded proper base-change input, also a sorry declaration in slopmaster2. Statement unchanged.",
+  "blueprint": "Realizes the projection-formula conclusion; repairs node-level Proof: Lambda=Z/n and finite-type-over-a-field assumptions were unjustified globally. Unit statement/route unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic geometric or stalk tool used on the geometric fiber; this unit has no replacement statement."
+   },
+   {
+    "node": "lem-exc-abelian-sheaves-gmodules",
+    "why": "Generic geometric or stalk tool used on the geometric fiber; this unit has no replacement statement."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic geometric or stalk tool used on the geometric fiber; this unit has no replacement statement."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic geometric or stalk tool used on the geometric fiber; this unit has no replacement statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-base-change",
+  "lem-exc-abelian-sheaves-gmodules",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-3f99504d4",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-3f99504d4 (reviewer sub-agent of L); spot-checked: Reviewed the full item, new node, cited DAG statements, unit/chapter route, Stacks Tags 0F0G/0F0C/04JQ, and the exact master declaration. The projection-formula statement and all hypotheses match the blueprint. The unbounded torsion-ring base-change theorem is correctly exposed as a separate unsplit dependency matching the master exchange morphism and coefficient category; it is not treated as proved. Checks covered every step, edge cases, citations, searches, reuse, and absence of target weakening. Review written to review.md."
+ }
 }
