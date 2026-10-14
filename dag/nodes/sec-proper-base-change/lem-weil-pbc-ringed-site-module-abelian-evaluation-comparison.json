@@ -23,7 +23,7 @@
  },
  "kind": "statement",
  "title": "Module and abelian cohomology over an object of a ringed site agree",
- "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology], $\\mathcal O$ a sheaf of rings on $\\mathcal C$, and $M$ a sheaf of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category]. Write $M_{ab}$ for the underlying abelian sheaf. Work in a common universe containing the objects, arrows, ring and module values, and covering index sets, and assume the module category has enough injectives [def-sp-injective-resolutions]. For every object $U$ of $\\mathcal C$ and every integer $q\\geq0$, there is a canonical additive isomorphism $$R^q\\Gamma_{\\mathrm{Mod}}(U,-)(M)\\cong H^q(U,M_{ab}),$$ where $\\Gamma_{\\mathrm{Mod}}(U,-):\\operatorname{Mod}(\\mathcal O)\\to\\operatorname{Ab}$ sends $P$ to $P(U)$, its right derived functors are computed by injective module resolutions, and $H^q(U,-)$ is the right derived functor of evaluation in abelian sheaves as in [def-weil-pbc-sites-and-cohomology]. These isomorphisms are natural in $M$ and are the identity of $M(U)$ in degree zero. No flatness of $\\mathcal O$ over the constant integer sheaf and no injectivity of $M_{ab}$ is assumed.",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology], $\\mathcal O$ a sheaf of rings on $\\mathcal C$, and $M$ a sheaf of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category]. Write $M_{ab}$ for the underlying abelian sheaf. Work in a common universe containing the objects, arrows, ring and module values, and covering index sets, and assume the module category has enough injectives [def-sp-enough-injectives]. For every object $U$ of $\\mathcal C$ and every integer $q\\geq0$, there is a canonical additive isomorphism $$R^q\\Gamma_{\\mathrm{Mod}}(U,-)(M)\\cong H^q(U,M_{ab}),$$ where $\\Gamma_{\\mathrm{Mod}}(U,-):\\operatorname{Mod}(\\mathcal O)\\to\\operatorname{Ab}$ sends $P$ to $P(U)$, its right derived functors are computed by injective module resolutions, and $H^q(U,-)$ is the right derived functor of evaluation in abelian sheaves as in [def-weil-pbc-sites-and-cohomology]. These isomorphisms are natural in $M$ and are the identity of $M(U)$ in degree zero. No flatness of $\\mathcal O$ over the constant integer sheaf and no injectivity of $M_{ab}$ is assumed.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 03FD, label lemma-cohomology-modules-abelian-agree, second displayed equality (cohomology over any object)"
@@ -31,11 +31,92 @@
  "stmt_deps": [
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-sheaf-of-modules-category",
-  "def-sp-injective-resolutions"
+  "def-sp-injective-resolutions",
+  "def-sp-enough-injectives"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an object $U$. Write $E(P)=P(U)$ for module evaluation and $T^q(P)=H^q(U,P_{ab})$. Evaluation $E$ is additive and left exact: addition of morphisms is sectionwise and module kernels are sectionwise by [def-weil-sheaf-of-modules-category]. The module category is abelian and has enough injectives by the hypotheses. Thus [lem-weil-pbc-right-derived-universal-delta-functor] gives a universal $\\delta$-functor $D^q=R^qE$, with $D^0=E$ canonically. Abelian presheaves on this site have sheafification, the left adjoint supplied by [lem-weil-pbc-sheafification-exact]. Therefore clause (1) of [lem-weil-pbc-module-sheaves-colimits-forgetful] applies and says that forgetting the module structure is exact, preserving kernels and cokernels. Forgetting is additive because addition of module morphisms and of their underlying abelian morphisms is sectionwise. Apply the same right-derived theorem to abelian evaluation, whose source has enough injectives by that definition. Precompose its $\\delta$-functor with forgetting: every short exact module sequence and every morphism of such sequences is sent to an abelian one, so its long exact sequence and the naturality of its connecting maps give a $\\delta$-functor $T$ on module sheaves. In degree zero $T^0(P)=P_{ab}(U)=P(U)=E(P)$, including on morphisms.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "lem-weil-pbc-sheafification-exact",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD, label lemma-cohomology-modules-abelian-agree, proof; exact forgetting is sites-modules.tex Tag 03DA, label lemma-abelian"
+   }
+  },
+  {
+   "text": "Let $I$ be an injective module sheaf and let $\\mathcal U=\\{U_t\\to V\\}_{t\\in T}$ be any covering. By [lem-weil-pbc-ringed-site-injective-module-injective-presheaf], its underlying module presheaf is injective. For $p>0$, put $q=p-1$ in [lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift]. Every degree-$p$ cocycle in the alternating restriction complex is then the differential of a degree-$(p-1)$ cochain. This is exactly the complex for $I_{ab}$ in [def-weil-pbc-site-cech-complex], since forgetting leaves sections, restrictions and addition unchanged. Consequently $\\ker d^p=\\operatorname{im}d^{p-1}$ and $\\check H^p(\\mathcal U,I_{ab})=0$. All iterated fibre products exist by the covering base-change axiom. The common universe in the statement contains hom-sets, coefficients and covering indices, as required by the cocycle-lifting node; no scalar-extension exactness or flatness is used.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
+    "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FC, label lemma-injective-module-trivial-cech, proof; used in Tag 03FD final substantive paragraph"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-cech-vanishing-criterion] to the abelian sheaf $I_{ab}$, with $\\mathcal B=\\operatorname{Ob}(\\mathcal C)$ and $\\mathrm{Cov}$ the set of all coverings. Its condition (1) holds because every object and each iterated covering fibre product is in $\\mathcal B$. Its condition (2) holds because every covering refines itself. Its condition (3) is step 2. Thus $H^q(V,I_{ab})=0$ for every object $V$ and every $q>0$, in particular $T^q(I)=0$. No finite-cover, basis or final-object assumption has been imposed.",
+   "uses": [
+    "lem-weil-pbc-site-cech-vanishing-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD, label lemma-cohomology-modules-abelian-agree, proof"
+   }
+  },
+  {
+   "text": "For every module sheaf $P$, enough injectives provides a monomorphism $P\\hookrightarrow I$ with $I$ injective, as specified by [def-sp-enough-injectives]. For each $q>0$, step 3 makes the target of $T^q(P)\\to T^q(I)$ zero, so this map is zero. The $\\delta$-functor $T$ of step 1 is therefore effaceable in every positive degree. By [lem-weil-pbc-effaceable-delta-functor-universal], it is universal.",
+   "uses": [
+    "def-sp-enough-injectives",
+    "lem-weil-pbc-effaceable-delta-functor-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD, label lemma-cohomology-modules-abelian-agree, proof"
+   }
+  },
+  {
+   "text": "Both $D$ and $T$ are universal, and their degree-zero identifications with $E$ give the identity $E\\to E$. The definition of universality in [def-weil-pbc-delta-functor] supplies unique morphisms $a:D\\to T$ and $b:T\\to D$ extending that identity. The composites $ba$ and $ab$ are morphisms of $\\delta$-functors equal to the identity in degree zero; uniqueness for $D$ and $T$ makes them the identity in every degree. Hence $a_P^q:R^qE(P)\\xrightarrow{\\sim}H^q(U,P_{ab})$ is an additive isomorphism, natural in $P$, normalized to the identity on $P(U)$ for $q=0$. Uniqueness makes it canonical. Since $U$ was arbitrary this proves the statement; nowhere was $I_{ab}$ required to be injective.",
+   "uses": [
+    "def-weil-pbc-delta-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD, label lemma-cohomology-modules-abelian-agree, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-enough-injectives",
+  "def-weil-pbc-delta-functor",
+  "def-weil-pbc-site-cech-complex",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-effaceable-delta-functor-universal",
+  "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-site-cech-vanishing-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD, label lemma-cohomology-modules-abelian-agree, objectwise part of proof, with 03FC and 03F9"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -99,10 +180,52 @@
    "results": "{\"t\": \"2026-10-14T12:28:42Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.toSheaf, \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-14",
    "verdict": "no match: abelian Ext definitions and ordinary module forgetful functors do not state this derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(toSheaf|forgetToSheaf).*(rightDerived|cohomology)|(rightDerived|cohomology).*(toSheaf|forgetToSheaf)",
+   "results": "{\"t\": \"2026-10-14T12:43:43Z\", \"tool\": \"grep\", \"query\": \"(toSheaf|forgetToSheaf).*(rightDerived|cohomology)|(rightDerived|cohomology).*(toSheaf|forgetToSheaf)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: returned abelian Ext/cohomology definitions, injective-complex results and module-category abelianness do not give the module-to-abelian derived evaluation comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology over an object of a ringed site agrees for module sheaves and underlying abelian sheaves",
+   "results": "{\"t\": \"2026-10-14T12:43:43Z\", \"tool\": \"leansearch\", \"query\": \"Cohomology over an object of a ringed site agrees for module sheaves and underlying abelian sheaves\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.toSheaf, \"rightDerived\"",
+   "results": "{\"t\": \"2026-10-14T12:43:44Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.toSheaf, \\\"rightDerived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: returned abelian Ext/cohomology definitions, injective-complex results and module-category abelianness do not give the module-to-abelian derived evaluation comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective module sheaf is acyclic for abelian sheaf evaluation even if the ring sheaf is not flat over integers",
+   "results": "{\"t\": \"2026-10-14T12:43:44Z\", \"tool\": \"leanfinder\", \"query\": \"An injective module sheaf is acyclic for abelian sheaf evaluation even if the ring sheaf is not flat over integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instInjectiveXIntI\", \"CochainComplex.isKInjective_of_injective\", \"CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex\", \"CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CochainComplex.cm5b.I_X\", \"SheafOfModules.instAbelian\", \"CochainComplex.IsKInjective\"], \"digest\": \"29bb2aa460bcbc60\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: returned abelian Ext/cohomology definitions, injective-complex results and module-category abelianness do not give the module-to-abelian derived evaluation comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right derived functor of sections of a sheaf of modules on a ringed site equals cohomology of its underlying abelian sheaf",
+   "results": "{\"t\": \"2026-10-14T12:43:44Z\", \"tool\": \"leanfinder\", \"query\": \"The right derived functor of sections of a sheaf of modules on a ringed site equals cohomology of its underlying abelian sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Sheaf.H\", \"SheafOfModules.instAbelian\", \"PresheafOfModules.sheafification\", \"CategoryTheory.sheafIsAbelian\", \"CategoryTheory.HasGlobalSectionsFunctor\", \"CategoryTheory.Sheaf.instAddCommGroupH\"], \"digest\": \"72909f4015c70cb6\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: returned abelian Ext/cohomology definitions, injective-complex results and module-category abelianness do not give the module-to-abelian derived evaluation comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful functor from sheaves of modules to sheaves of abelian groups induces an isomorphism on all derived functors of evaluation at an object",
+   "results": "{\"t\": \"2026-10-14T12:51:13Z\", \"tool\": \"leanfinder\", \"query\": \"The forgetful functor from sheaves of modules to sheaves of abelian groups induces an isomorphism on all derived functors of evaluation at an object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsIsoFunctorToRightDerivedZero\", \"CategoryTheory.instIsIsoFunctorFromLeftDerivedZero\", \"CategoryTheory.instIsIsoAppToRightDerivedZero\", \"SheafOfModules.toSheafCompSheafToPresheafIso\", \"CategoryTheory.instIsIsoAppFromLeftDerivedZero\", \"PresheafOfModules.sheafificationCompForgetCompToPresheaf\", \"CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective\", \"PresheafOfModules.instReflectsIsomorphismsSheafOfModulesFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf\"], \"digest\": \"1ef273b240a3d775\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: derived-zero isomorphisms cover degree zero only; toSheafCompSheafToPresheafIso (Sheaf.lean:124) identifies ordinary forgetful functors, not higher derived evaluation"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-ringed-site-direct-image-injective-evaluation-acyclic",
   "by": "worker",
@@ -118,5 +241,34 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "worker": "stage1",
+  "summary": "Retained the arbitrary small ringed-site statement. Followed Stacks 03FD: exact forgetting, Cech acyclicity of injective module sheaves via presheaf injectivity and cocycle lifting, the general-site Cech vanishing criterion, effaceability, and explicit inverse comparisons from universality. Reused existing nodes throughout; no new nodes and no attachment.",
+  "blueprint": "Realizes the classical torsion constructibility input in the first paragraph of thm-weil-pbc-direct-image-finiteness-proper: the objectwise module/abelian cohomology dictionary needed by the 0GKV/03P2 structure-sheaf comparison along the recorded ancestor chain. No unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
+    "why": "General ringed-site Cech tool in the proof of Stacks 03FD; the proper-base-change unit does not supply a more general site-level substitute."
+   },
+   {
+    "node": "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift",
+    "why": "General ringed-site Cech tool in the proof of Stacks 03FD; the proper-base-change unit does not supply a more general site-level substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
+  "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-36b71cf62",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-36b71cf62 (reviewer sub-agent of L); spot-checked: Read the item, report, cited statements, Stacks sources, unit/chapter route, and exact master target interfaces. Repaired one C1/C4 citation gap in step 1 by citing the existing exact-forgetting theorem. Corrected whole-node JSON is under fixes/dag/nodes/; concrete checks are in review.md. Statements and targets remain unchanged; no new nodes, cycles, or major mathematical gaps found.; 1 file(s) fixed by the reviewer"
  }
 }
