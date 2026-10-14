@@ -1,0 +1,153 @@
+{
+ "id": "lem-sc-boundary-pullback-tensor-braiding",
+ "kind": "statement",
+ "title": "Symmetry of the fixed boundary tensor pullback comparison",
+ "statement": "Let $j:Z\\to X$ be any morphism of schemes, $P=\\mathrm{tensorPullback}(j)$, and $A,B$ arbitrary $\\mathcal O_X$-modules. Write $\\delta_{A,B}:P(A\\otimes B)\\simeq PA\\otimes PB$ for boundaryPullbackTensorIso, obtained by transporting the fixed Mathlib pullback tensorator through boundaryPullbackComparison [lem-sc-square-zero-ideal-tensor-unit]. Then $P(\\beta_{A,B})\\gg\\delta_{B,A}=\\delta_{A,B}\\gg\\beta_{PA,PB}$, where $\\beta$ is the sheaf tensor symmetry [lem-weil-pbc-module-tensor-symmetric-monoidal] and $\\gg$ denotes composition in application order. No invertibility, immersion or square-zero assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 09MS, coherent-equation-ses; canonical tensor comparisons from modules.tex, Tag 01CD (lemma-tensor-product-pullback), and Tag 01CA (section-tensor-product); read via the Stacks tag pages."
+ },
+ "stmt_deps": [
+  "lem-sc-square-zero-ideal-tensor-unit",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "For Mathlib pullback apply the injective pullback-pushforward adjunction hom equivalence to the symmetry square. Maps out of a sheaf tensor are determined by their values on tensor sections over all opens, by the sheafification adjunction and the presheaf tensor universal property.",
+   "uses": [
+    "lem-sc-square-zero-ideal-tensor-unit",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Move the pullback of braiding across the adjunction unit by naturality. The braiding interchanges s and t, and the proved pullback cotensorator normalization sends the unit of their tensor to the tensor of their two units. Thus both adjoint maps send s tensor t to pullback(t) tensor pullback(s). The tensor universal property proves the square for Mathlib pullback.",
+   "uses": [
+    "lem-sc-pullback-tensor-unit-section",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand boundaryPullbackTensorIso. Naturality of boundaryPullbackComparison moves P of the original braiding to Mathlib pullback of it. Apply the square just proved, then naturality of braiding on the inverse component comparisons. This gives the displayed square.",
+   "uses": [
+    "lem-sc-square-zero-ideal-tensor-unit",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-square-zero-ideal-tensor-unit",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal",
+  "lem-sc-pullback-tensor-unit-section"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "A4 formal expansion of the canonical comparisons in Tags 01CA, 01CD and 09MS; proof written from the existing recursive definitions and the cited section formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical pullback tensor comparison on sheaves of modules respects braiding",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical pullback tensor comparison respects braiding symmetry of sheaves of modules",
+   "date": "2026-10-14",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackIso, SheafOfModules.pullback_assoc",
+   "verdict": "No exact sheaf comparison statement; use the existing general API in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxBraided.braided",
+   "date": "2026-10-14",
+   "results": "1 hits: CategoryTheory.Functor.LaxBraided.braided",
+   "verdict": "No exact sheaf comparison statement; use the existing general API in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*braid|braid.*pullback",
+   "date": "2026-10-14",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Over.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Over.lean, Mathlib/CategoryTheory/Extensive.lean, Mathlib/CategoryTheory/Extensive.lean",
+   "verdict": "No exact sheaf comparison statement; use the existing general API in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BoundaryCoefficientTensorProduct",
+  "date": "2026-10-14",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS, coherent-equation-ses: coefficient identification for multiplication in the graded ideal sequence; steps 2 and 3 of lem-sc-boundary-coefficient-tensor-product.",
+   "via": [
+    "lem-sc-boundary-coefficient-tensor-product",
+    "lem-sc-tensor-boundary-kernel-map-local-multiplication",
+    "lem-sc-tensor-graded-action-kernel-second",
+    "lem-sc-square-zero-tensor-graded-action-projection-second",
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BoundaryPullbackTensorBraiding",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundaryPullbackTensorBraiding.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.boundaryPullbackTensorIso_braiding",
+  "statement": "theorem boundaryPullbackTensorIso_braiding {X Z : Scheme.{u}} (j : Z ⟶ X)\n    (A B : X.Modules) :\n    (tensorPullback j).map (β_ A B).hom ≫ (boundaryPullbackTensorIso j B A).hom =\n      (boundaryPullbackTensorIso j A B).hom ≫\n        (β_ ((tensorPullback j).obj A) ((tensorPullback j).obj B)).hom",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-14"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T050215-L-1646225",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T050215-L-1646225",
+  "kind": "interface"
+ }
+}

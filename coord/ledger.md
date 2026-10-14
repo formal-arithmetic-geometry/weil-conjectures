@@ -14569,3 +14569,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:01 L: returned deliver/E4/Sheaf.AlgebraicGeometry.TensorIdealSectionCoefficientComparison (reviewer RETURN: (reviewer X-6fb01, head 6fb016425) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Te)
 - 05:01 L: returned deliver/P1/Sheaf.RingTheory.IdealKernelElementDescent (reviewer RETURN: (reviewer X-6b9b3, head 6b9b3412e) B2/forced adaptation: `Sheaf.RingTheory.FiniteIdealKernelDescent` directly imports th)
 - 05:02 L: merged deliver/A2/Sheaf.AlgebraicGeometry.FlatTelescopeStageMapRefinement (stage 3; reviewer PASS; first push; landing 20261014T050215-L-1646070 (interface); batch 20261014T050213; modules 2; new nodes 1)
+- 05:02 L: merged deliver/A4/Sheaf.AlgebraicGeometry.BoundaryCoefficientTensorProduct (stage 3; reviewer PASS; first push; landing 20261014T050215-L-1646225 (interface); batch 20261014T050213; modules 4; new nodes 3)
