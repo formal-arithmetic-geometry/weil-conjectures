@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-hocolim-truncations",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Recovery from bounded-above truncations",
@@ -13,32 +13,109 @@
   "place": "node lem-kun-hocolim-truncations, order 1720"
  },
  "stmt_deps": [
-  "def-kun-truncations"
+  "def-kun-truncations",
+  "def-weil-pbc-derived-categories"
  ],
  "proof": [
   {
-   "text": "By [lem-kun-complex-colimit-hocolim] the homotopy colimit is\ncomputed by the termwise colimit of the complexes\n$\\tau_{\\le N}E$, and cohomology commutes with termwise filtered\ncolimits of complexes. For each fixed $q$ one has\n$\\mathcal H^q(\\tau_{\\le N}E)=\\mathcal H^q(E)$ for all $N\\ge q$ by\n[def-kun-truncations], so\n$\\mathcal H^q(\\operatorname{hocolim}_N\\tau_{\\le N}E) =\\varinjlim_N\\mathcal H^q(\\tau_{\\le N}E)=\\mathcal H^q(E)$. As this\nholds for every $q$, the canonical morphism is a quasi-isomorphism,\nhence an isomorphism of the derived category by\n[def-weil-pbc-derived-categories].",
+   "text": "Choose a cochain complex $C^\\bullet$ of $\\Lambda_T$-module sheaves representing $E$, using [def-weil-pbc-derived-categories]. Realize the good truncations of [def-kun-truncations] by the subcomplexes $C_N=\\tau_{\\le N}C$: $C_N^i=C^i$ for $i<N$, $C_N^N=\\ker(d^N)$, and $C_N^i=0$ for $i>N$. This is the standard truncation subcomplex in [def-sbc-standard-tstructure-derived-category], shifted from degree zero to degree $N$. Its differential into degree $N$ is $d^{N-1}$ with codomain restricted to $\\ker(d^N)$, since $d^Nd^{N-1}=0$. The inclusions $C_N\\to C_{N+1}\\to C$ define the truncation sequence and its compatible cocone to $C$. We index it by $N\\in\\mathbf N$, which is sufficient for $N\\to+\\infty$.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
+    "def-kun-truncations",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations, canonical truncation of cochain complexes"
+   }
+  },
+  {
+   "text": "For every integer $i$, choose $M\\in\\mathbf N$ with $M>i+1$. In degrees $i$ and $i+1$, all $C_N$ for $N\\ge M$ equal $C$, the transition maps are identities and the differential is $d^i$. The cocone $C_N^i\\to C^i$ is colimiting: a compatible family of maps $C_N^i\\to F$ is uniquely determined by its map $C_M^i=C^i\\to F$, because for $N<M$ compatibility forces the composite $C_N^i\\to C_M^i\\to F$, and for $N\\ge M$ forces the same map. Thus the induced map $\\varinjlim_N C_N^i\\to C^i$ is an isomorphism. Write $j_N^i:C_N^i\\to L^i$ for the structure maps into the degreewise colimit and $a^i:L^i\\to C^i$ for the resulting isomorphism. The colimit differential $\\delta^i$ is determined by $\\delta^i j_N^i=j_N^{i+1}d_{C_N}^i$. Since each inclusion $b_N:C_N\\to C$ is a chain map, $(a^{i+1}\\delta^i)j_N^i=b_N^{i+1}d_{C_N}^i=d^ib_N^i=(d^ia^i)j_N^i$. Uniqueness in the colimit universal property gives $a^{i+1}\\delta^i=d^ia^i$. Thus the degreewise isomorphisms $a^i$ form an isomorphism of complexes $\\varinjlim_N C_N^\\bullet\\xrightarrow{\\sim}C^\\bullet$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-hocolim-truncations.md",
+    "place": "Proof, termwise colimit of the truncations; explicit eventually constant calculation"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-complex-colimit-hocolim] to this sequence of complexes of etale module sheaves: its canonical morphism $\\operatorname{hocolim}_N C_N\\to\\varinjlim_N C_N$ is a quasi-isomorphism. Compose it with the complex isomorphism to $C$ constructed in step 2. This composite is the canonical morphism in the statement: the map to the termwise colimit followed by its cocone map to $C$ is induced by the inclusions $C_N\\to C$. In the localization at quasi-isomorphisms of [def-weil-pbc-derived-categories], the first map is invertible and the second already is invertible. Their composite is therefore an isomorphism to $E$.",
    "uses": [
     "lem-kun-complex-colimit-hocolim",
-    "def-kun-truncations",
     "def-weil-pbc-derived-categories"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0949, lemma-colim-hocolim; canonical colimit cocone"
+   }
   }
  ],
  "proof_deps": [
-  "lem-kun-complex-colimit-hocolim",
+  "def-weil-pbc-derived-categories",
   "def-kun-truncations",
-  "def-weil-pbc-derived-categories"
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-kun-complex-colimit-hocolim"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-hocolim-truncations.md",
-  "place": "## Proof"
+  "place": "Proof, made explicit by the termwise stabilization calculation (Stacks 0118 and 0949)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hocolim|homotopyColimit|colimit.*trunc|trunc.*colimit",
+   "results": "2 hits: Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean, Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state recovery from a truncation tower"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex is the homotopy colimit of its bounded above truncations",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, truncLE, IsIso",
+   "results": "0 hits: ; loogle: unknown identifier 'truncLE'",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state recovery from a truncation tower"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy colimit of the canonical bounded above truncations of an unbounded complex is isomorphic to that complex",
+   "results": "8 hits: HomologicalComplex.truncGE'.XIsoOpcycles, HomologicalComplex.truncGEXIso, HomologicalComplex.truncGE'XIsoOpcycles, HomologicalComplex.instQuasiIsoAtπTruncGEF, HomologicalComplex.instIsIsoιTruncLEOfIsStrictlySupported, HomologicalComplex.quasiIsoAt_πTruncGE, HomologicalComplex.truncGE'.XIso, HomologicalComplex.truncGEXIsoOpcycles",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state recovery from a truncation tower"
+  },
+  {
+   "tool": "grep",
+   "query": "telescope|homotopy.colimit|homotopy_colimit",
+   "results": "25 hits: Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/Summable.lean, Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/Summable.lean, Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/Summable.lean, Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/Summable.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean, Mathlib/Topology/Algebra/InfiniteSum/Order.lean, Mathlib/Geometry/Manifold/Notation.lean, Mathlib/Tactic/Algebraize.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state recovery from a truncation tower"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sequential homotopy colimits recover objects from their standard t structure truncation tower",
+   "results": "8 hits: ComplexShape.Embedding.πTruncGENatTrans, ComplexShape.Embedding.πTruncGENatTrans_app, ComplexShape.Embedding.ιTruncLENatTrans, ComplexShape.Embedding.ιTruncLENatTrans_app, CochainComplex.g_shortComplexTruncLEX₃ToTruncGE, SSet.Truncated.HomotopyCategory.descOfTruncation_comp, HomologicalComplex.shortComplexTruncLEX₃ToTruncGE, HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state recovery from a truncation tower"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"truncLE\"",
+   "results": "12 hits: ComplexShape.Embedding.IsTruncLE, ComplexShape.Embedding.IsTruncLE.toIsRelIff, ComplexShape.Embedding.instIsTruncGEOpOfIsTruncLE, ComplexShape.Embedding.instIsTruncLEOpOfIsTruncGE, ComplexShape.instIsTruncLENatIntEmbeddingDownNat, ComplexShape.instIsTruncLENatIntEmbeddingUpIntLE, ComplexShape.instIsTruncLEEmbeddingDown'Add, ComplexShape.Embedding.IsTruncLE.mem_prev",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state recovery from a truncation tower"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -62,5 +139,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-hocolim-truncations",
+  "worker": "stage1",
+  "summary": "No closed project declaration or exact Mathlib match found. Split into a good-truncation representative, its explicitly computed termwise colimit, and the existing hocolim comparison. Removed the uncited assertion that cohomology commutes with filtered colimits; no new node is necessary. Statement unchanged; derived-category definition added to statement dependencies.",
+  "blueprint": "The sole Proof paragraph: step 1 realizes the truncations, step 2 computes their termwise colimit directly (stronger than the displayed cohomology calculation), step 3 applies the same hocolim comparison and derived localization."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-bd929fb9e",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-bd929fb9e (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source locations. Verified all three steps, canonical telescope comparison, coefficient category, truncation boundary and unbounded edge cases. No new nodes, missing citations, cycles or repairs. Detailed checks are in review.md."
+ }
 }
