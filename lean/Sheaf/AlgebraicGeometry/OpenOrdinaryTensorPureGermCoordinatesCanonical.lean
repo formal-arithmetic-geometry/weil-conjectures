@@ -3,6 +3,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
+import Sheaf.AlgebraicGeometry.OpenPinnedTensorRestrictionStalkUnit
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import all Sheaf.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
 
@@ -23,6 +24,62 @@ open scoped TensorProduct ChangeOfRings
 namespace AlgebraicGeometry
 open SingleComplexBaseChange
 open TopologicalSpace Opposite
+
+private theorem tensor_unit_stalk {X Y : Scheme.{u}} (k : X ⟶ Y) (x : X)
+    (M : Y.Modules) (m : M.presheaf.stalk (k x)) :
+    (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso k x)).inv.app M
+        ((1 : X.presheaf.stalk x) ⊗ₜ[Y.presheaf.stalk (k x), (k.stalkMap x).hom] m) =
+      (((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} (k x)).map
+        (Scheme.Modules.Hom.mapPresheaf
+          ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction k)).unit.app M))) ≫
+        ((Scheme.Modules.tensorPullback k).obj M).presheaf.stalkPushforward
+          AddCommGrpCat.{u} k.base x) m := by
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
+  obtain ⟨W, hx, s, rfl⟩ := M.presheaf.exists_germ_eq m
+  have he := Classical.choose_spec (Scheme.Modules.exists_tensorPullback_stalk_iso k x)
+    M W hx s
+  have hi := congrArg (fun t ↦
+    (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso k x)).inv.app M t) he
+  have hunit :
+      (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso k x)).inv.app M
+          ((1 : X.presheaf.stalk x) ⊗ₜ[_, (k.stalkMap x).hom]
+            (M.presheaf.germ W (k x) hx s)) =
+        ((Scheme.Modules.tensorPullback k).obj M).presheaf.germ (k ⁻¹ᵁ W) x hx
+          ((Classical.choose
+            (Scheme.Modules.exists_tensorPullbackAdjunction k)).unit.app M |>.app W s) := by
+    simp only [← ModuleCat.comp_apply, Iso.hom_inv_id_app, ModuleCat.id_apply] at hi
+    exact hi.symm
+  rw [hunit]
+  change _ = ((Scheme.Modules.tensorPullback k).obj M).presheaf.stalkPushforward
+    AddCommGrpCat.{u} k.base x
+      (((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} (k x)).map
+        (Scheme.Modules.Hom.mapPresheaf
+          ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction k)).unit.app M)))
+        (M.presheaf.germ W (k x) hx s))
+  have hm := TopCat.Presheaf.stalkFunctor_map_germ_apply W (k x) hx
+    (Scheme.Modules.Hom.mapPresheaf
+      ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction k)).unit.app M)) s
+  have hp := TopCat.Presheaf.stalkPushforward_germ_apply AddCommGrpCat.{u} k.base
+    ((Scheme.Modules.tensorPullback k).obj M).presheaf W x hx
+    (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction k)).unit.app M).app W s)
+  exact hp.symm.trans (congrArg
+    (((Scheme.Modules.tensorPullback k).obj M).presheaf.stalkPushforward
+      AddCommGrpCat.{u} k.base x) hm.symm)
+
+private theorem tensor_unit_stalk_cast {X Y : Scheme.{u}} (k : X ⟶ Y) (x : X)
+    (M : Y.Modules) (a : Y.presheaf.stalk (k x) →+* X.presheaf.stalk x)
+    (ha : a = (k.stalkMap x).hom) (m : M.presheaf.stalk (k x)) :
+    (eqToHom (congrArg (fun b ↦ (ModuleCat.extendScalars b).obj
+        ((RingedSpace.moduleStalkFunctor Y.toRingedSpace (k x)).obj M)) ha) ≫
+      (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso k x)).inv.app M)
+        ((1 : X.presheaf.stalk x) ⊗ₜ[Y.presheaf.stalk (k x), a] m) =
+      (((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} (k x)).map
+        (Scheme.Modules.Hom.mapPresheaf
+          ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction k)).unit.app M))) ≫
+        ((Scheme.Modules.tensorPullback k).obj M).presheaf.stalkPushforward
+          AddCommGrpCat.{u} k.base x) m := by
+  subst a
+  simpa using tensor_unit_stalk k x M m
 
 private theorem open_coordinate_smul (X : Scheme.{u}) (U : X.Opens) (x : U.toScheme)
     (M : X.Modules) (r : U.toScheme.presheaf.stalk x)
@@ -48,6 +105,8 @@ private theorem open_coordinate_smul (X : Scheme.{u}) (U : X.Opens) (x : U.toSch
   rw [he]
   rfl
 
+set_option maxHeartbeats 1000000 in
+-- Stalk scalar transport elaborates two specified tensor-stalk components.
 /-- The unit-scalar section-germ generator equation for the pinned comparison.
 
 Expand the tensor-stalk and pinned restriction maps on a section germ. Their
@@ -115,7 +174,33 @@ theorem openOrdinaryTensor_pure_germ_coordinates_canonical
               γ.hom.app ((Scheme.Modules.tensorPullback g').obj (P.X n)))
                 ((1 : C₀) ⊗ₜ[A₀,(algebraMap (A₀ ⊗[R₀] B₀) C₀).comp
                   (algebraMap A₀ (A₀ ⊗[R₀] B₀))] q) := by
-  sorry
+  intro Q₀ R₀ A₀ B₀ C₀ R₁ A₁ B₁ C₁ K₀ K T₀ T F₀ F L₀ γ Lᵢ Fᵢ γᵢ hx n q
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
+  let := leftAlgebra (f ∣_ V) j z
+  let := rightAlgebra (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z
+  let := (tensorMap (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z).toAlgebra
+  let := leftAlgebra f g' z.val
+  let := rightAlgebra f f' g g' sq z.val
+  let := (tensorMap f f' g g' sq z.val).toAlgebra
+  simp only [map_one]
+  erw [Classical.choose_spec (exists_tensorStalkIso f f' g g' sq z.val P) n,
+    Classical.choose_spec
+      (exists_tensorStalkIso (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q₀) n]
+  change (eqToHom _ ≫
+      (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso g' z.val)).inv.app
+        (P.X n)) _ =
+    (γ.hom.app ((Scheme.Modules.tensorPullback g').obj (P.X n)))
+      ((L₀.map ((openPinnedTensorRestrictionIso g'
+        (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj).inv.app (P.X n)))
+        ((eqToHom _ ≫
+          (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso j z)).inv.app
+            (Q₀.X n)) _))
+  rw [tensor_unit_stalk_cast, tensor_unit_stalk_cast]
+  · exact ConcreteCategory.congr_hom
+      (openPinnedTensorRestriction_stalk_unit g' (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj (P.X n) z) q
+  · exact (Classical.choose_spec
+      (exists_tensorMap (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z)).1
+  · exact (Classical.choose_spec (exists_tensorMap f f' g g' sq z.val)).1
 
 
 set_option maxHeartbeats 1000000 in

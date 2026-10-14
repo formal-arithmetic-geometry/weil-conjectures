@@ -13,25 +13,41 @@
  },
  "proof": [
   {
-   "text": "Expand tensorStalkIso and openPinnedTensorRestrictionIso on the unit-scalar section-germ generators; the pinned units and restrictStalkNatIso germ formula identify both sides. The linear extension step then supplies arbitrary coefficients and stalk elements.",
+   "text": "For any scheme morphism, the specified pullback-stalk germ formula gives that the inverse stalk isomorphism sends 1 tensor m to the stalk map of the adjunction unit followed by stalkPushforward. Prove this on a section-germ representative of m and cancel the stalk isomorphism. This is the proved private tensor_unit_stalk helper.",
    "uses": [
-    "def-pc-single-complex-base-change-stalk-condition",
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the specified degreewise components of tensorStalkIso. The restriction equation for tensorMap identifies the scalar map with the actual morphism stalk map. Equality induction transports the preceding unit formula across eqToHom; this is tensor_unit_stalk_cast.",
+   "uses": [
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize the unit compatibility theorem to k=g prime, U=f inverse V, U prime=f prime inverse V prime, M=P.X n and z. Evaluate its additive-map equality at q. Rewrite both inverse pullback-stalk unit tensors using the two proved helpers, obtaining exactly the canonical equation. map_one handles the canonical output ring equivalence at 1.",
+   "uses": [
+    "lem-pc-open-pinned-tensor-restriction-stalk-unit",
     "def-pc-open-pinned-single-tensor-restriction-iso"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-module-stalk-pullback",
   "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-open-pinned-tensor-restriction-stalk-unit",
   "def-pc-open-pinned-single-tensor-restriction-iso"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "S1",
+  "group": "G1",
   "date": "2026-10-14",
   "document": "Stacks Project",
-  "place": "Tags 0098 and 0096",
-  "note": "Canonical generator calculation split from arbitrary ring-equivalence coordinate theorem."
+  "place": "Tags 0096 and 0098",
+  "note": "Lean reduction: discharge tensor-stalk germ normalization and scalar-map transport; isolate only the open-square adjunction-unit identity."
  },
  "mathlib_searches": [
   {
@@ -101,13 +117,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-0589f",
-  "group": "S1",
+  "reviewer": "COMPILER",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261013T231543-L-1820183",
+  "landing": "20261014T001718-L-2549443",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files match the recorded nodes and statements; both modules and the direct importer compile successfully."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

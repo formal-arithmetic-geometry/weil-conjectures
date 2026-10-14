@@ -1,0 +1,119 @@
+{
+ "id": "lem-pc-open-pinned-tensor-restriction-stalk-unit",
+ "kind": "statement",
+ "title": "Pinned tensor restriction preserves the pullback unit on stalks",
+ "statement": "Let $k:X'\\to X$ be a morphism of schemes, let $U\\subseteq X$ and $U'\\subseteq X'$ be open subschemes with inclusions $i$ and $i'$, and let $j:U'\\to U$ satisfy $j;i=i';k$. Let $M$ be an $\\mathcal O_X$-module and $z\\in U'$. Put $N=M|_U$. For a scheme morphism $a:Y\\to Z$, a point $y\\in Y$ and an $\\mathcal O_Z$-module $F$, write $\\eta_{a,y,F}:F_{a(y)}\\to(a^*F)_y$ for the additive stalk map of the pinned tensor-pullback adjunction unit [lem-pc-module-pullback-adjunction], followed by the canonical pushforward-stalk map. All module stalks use [def-pc-module-stalk-functor]. Let $\\gamma_i:N_{j(z)}\\to M_{i(j(z))}$ and $\\gamma_o:((k^*M)|_{U'})_z\\to(k^*M)_{i'(z)}$ be the canonical open-stalk comparisons, including the slice-site restriction equivalence. Let $t:M_{i(j(z))}\\to M_{k(i'(z))}$ be stalk transport along the point equality induced by $j;i=i';k$. Let $\\beta:(k^*M)|_{U'}\\xrightarrow{\\sim}j^*(M|_U)$ be the pinned restriction comparison [def-pc-open-pinned-single-tensor-restriction-iso], whose composition factors are [def-pc-tensor-pullback-composition-iso]. Then the following two additive maps from $N_{j(z)}$ to $(k^*M)_{i'(z)}$ agree: $\\gamma_i;t;\\eta_{k,i'(z),M}=\\eta_{j,z,N};(\\beta^{-1})_z;\\gamma_o$.",
+ "stmt_deps": [
+  "def-pc-open-pinned-single-tensor-restriction-iso",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-tensor-pullback-composition-iso",
+  "def-pc-module-stalk-functor"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0096 (lemma-adjoint-pullback-pushforward-modules) and 0098 (lemma-stalk-pullback-modules); Mathlib/CategoryTheory/Adjunction/Mates.lean unit_conjugateEquiv_symm, Mathlib/CategoryTheory/Adjunction/Unique.lean unit_leftAdjointUniq_hom_app; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean germ_restrictStalkNatIso_hom_app."
+ },
+ "proof": [
+  {
+   "text": "Expand the inverse pinned restriction into its four factors. The two open comparison factors identify adjunction units by Adjunction.unit_leftAdjointUniq_hom_app; the two composition factors identify composite units by unit_conjugateEquiv_symm. Naturality moves the input open comparison through the unit for j, and the composition identities cancel using the commuting square hj. Thus the inverse pinned comparison preserves the restricted adjunction unit.",
+   "uses": [
+    "def-pc-open-pinned-single-tensor-restriction-iso",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-tensor-pullback-composition-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply additive stalk maps to this unit equality. On a section germ the stalk map of a unit followed by stalkPushforward is the germ of the pulled-back section, by stalkFunctor_map_germ and stalkPushforward_germ. The hom formulas for restrictStalkNatIso identify the open factors with the ambient germs; stalkCongr accounts for the equality of input points induced by hj. Every stalk element is a section germ, so stalk_hom_ext gives the displayed equality of maps.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-open-pinned-single-tensor-restriction-iso",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-tensor-pullback-composition-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "G1",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 0096 and 0098",
+  "note": "Extract the unit-compatibility part of the canonical generator calculation, independently of tensor coordinates, complexes and cartesian base-change squares."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The pinned pullback adjunction unit commutes with restriction to open subschemes and the canonical same-germ stalk comparison",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unit_conjugateEquiv_symm\"",
+   "date": "2026-10-14",
+   "results": "1 hits: CategoryTheory.unit_conjugateEquiv_symm",
+   "verdict": "General unit and germ identities only; no pinned open-square stalk identity."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_leftAdjointUniq|germ_restrictStalkNatIso|stalkPushforward",
+   "date": "2026-10-14",
+   "results": "21 hits: Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "verdict": "General unit and germ identities only; no pinned open-square stalk identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenOrdinaryTensorPureGermCoordinatesCanonical",
+  "date": "2026-10-14",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Open-locality of the single-complex stalk comparison: compatibility of the pinned open tensor comparison with adjunction unit section germs.",
+   "via": [
+    "lem-pc-open-ordinary-tensor-pure-germ-coordinates-canonical"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenPinnedTensorRestrictionStalkUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenPinnedTensorRestrictionStalkUnit.lean",
+  "declaration": "AlgebraicGeometry.openPinnedTensorRestriction_stalk_unit",
+  "statement": "theorem openPinnedTensorRestriction_stalk_unit\n    {X X' : Scheme.{u}} (k : X' ⟶ X)\n    (U : X.Opens) (U' : X'.Opens) (j : U'.toScheme ⟶ U.toScheme)\n    (hj : j ≫ U.ι = U'.ι ≫ k) (M : X.Modules) (z : U'.toScheme) :\n    let N := (schemeOpenRestriction X U).obj M\n    let L₀ := RingedSpace.moduleStalkFunctor U'.toScheme.toRingedSpace z\n    let F₀ := forget₂ (ModuleCat.{u} (U'.toScheme.presheaf.stalk z)) AddCommGrpCat.{u}\n    let Lᵢ := RingedSpace.moduleStalkFunctor U.toScheme.toRingedSpace (j z)\n    let Fᵢ := forget₂ (ModuleCat.{u} (U.toScheme.presheaf.stalk (j z))) AddCommGrpCat.{u}\n    let γ := Functor.isoWhiskerRight (Scheme.Modules.overFunctorEquiv U') (L₀ ⋙ F₀) ≪≫\n      Scheme.Modules.restrictStalkNatIso U'.ι z\n    let γᵢ := Functor.isoWhiskerRight (Scheme.Modules.overFunctorEquiv U) (Lᵢ ⋙ Fᵢ) ≪≫\n      Scheme.Modules.restrictStalkNatIso U.ι (j z)\n    let hx := congrArg (fun t : U'.toScheme ⟶ X ↦ t z) hj\n    γᵢ.hom.app M ≫ (M.presheaf.stalkCongr (.of_eq hx)).hom ≫\n        (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} (k z.val)).map\n          (Scheme.Modules.Hom.mapPresheaf\n          ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction k)).unit.app M)) ≫\n        ((Scheme.Modules.tensorPullback k).obj M).presheaf.stalkPushforward\n          AddCommGrpCat.{u} k.base z.val =\n      (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} (j z)).map\n          (Scheme.Modules.Hom.mapPresheaf\n          ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction j)).unit.app N)) ≫\n        ((Scheme.Modules.tensorPullback j).obj N).presheaf.stalkPushforward\n          AddCommGrpCat.{u} j.base z ≫\n        F₀.map (L₀.map ((openPinnedTensorRestrictionIso k U U' j hj).inv.app M)) ≫\n        γ.hom.app ((Scheme.Modules.tensorPullback k).obj M)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261014T001718-L-2549443",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261014T001718-L-2549443",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
