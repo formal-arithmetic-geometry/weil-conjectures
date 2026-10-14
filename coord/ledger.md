@@ -14099,3 +14099,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:08 L: merged deliver/B4/Sheaf.AlgebraicGeometry.Morphisms.CartierGenericStalkGaloisModel (stage 3; reviewer PASS; first push; landing 20261014T010835-L-3160906 (interface); batch 20261014T010832; modules 2; new nodes 1)
 - 01:08 L: merged deliver/C2/Sheaf.AlgebraicGeometry.MayerVietorisImageLocalizationCompatibility (stage 3; reviewer PASS; first push; landing 20261014T010836-L-3161104 (interface); batch 20261014T010832; modules 4; new nodes 3)
 - 01:08 L: merged deliver/C3/Sheaf.AlgebraicGeometry.PerfectDescendMorphisms (stage 3; reviewer PASS; first push; landing 20261014T010836-L-3161255 (proof); batch 20261014T010832; modules 1; new nodes 0)
+- 01:08 L: merged deliver/C4/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (stage 3; reviewer PASS; first push; landing 20261014T010837-L-3161472 (proof); batch 20261014T010832; modules 1; new nodes 0)
