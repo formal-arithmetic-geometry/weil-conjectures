@@ -13985,3 +13985,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:17 L: merged deliver/H4/Sheaf.RingTheory.ZariskisMainAway (stage 3; reviewer PASS; first push; landing 20261014T001721-L-2550525 (proof); batch 20261014T001711; modules 1; new nodes 0)
 - 00:17 L: merged deliver/J2/Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal (stage 3; reviewer PASS; first push; landing 20261014T001721-L-2550631 (proof); batch 20261014T001711; modules 1; new nodes 0)
 - 00:17 L: merged deliver/J2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (stage 3; reviewer PASS; first push; landing 20261014T001722-L-2550745 (proof); batch 20261014T001711; modules 1; new nodes 0)
+- 00:17 L: merged deliver/J2/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore (stage 3; reviewer PASS; first push; landing 20261014T001722-L-2550893 (proof); batch 20261014T001711; modules 1; new nodes 0)

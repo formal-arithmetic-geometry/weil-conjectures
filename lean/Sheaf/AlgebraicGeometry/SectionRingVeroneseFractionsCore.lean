@@ -51,6 +51,7 @@ of the descended map. Surjectivity follows from the surjectivity of the numerato
 map. On a fraction generator the quotient lift evaluates to the numerator map;
 its summand formula and the tensor-power cancellation identity give exactly `ξ/s^n`.
 The construction and proof also apply when `d=0`, `n=0`, or `s` is zero or nilpotent.
+The quotient-lift computation is retained explicitly below.
 -/
 theorem sectionRing_veronese_fraction_core
     (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]
