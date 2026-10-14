@@ -17,13 +17,20 @@
  ],
  "proof": [
   {
-   "text": "The full restriction-square calculation after fixing the transition is left as the named intermediate hole; the outer theorem performs only substitution.",
+   "text": "Write the conjugated transition as alpha_a.hom followed by alpha_b.inv using modulesPseudofunctor_toDescentData_obj_hom. Apply overlap_single_chart_restriction separately to charts a and b. The relation z followed by nu equals the overlap structure map follows from hza, hnua and pullback.lift_fst.",
    "uses": [
     "lem-pc-overlap-single-chart-restriction",
+    "def-pc-overlap-pair-canonical-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved private conjugate_square cancels the source restriction comparison and target composition comparison, then rewrites the two single-chart equations. Functoriality identifies the pullback of the conjugated transition. The private direct_restriction_eq identifies the restriction formulas by canceling the reflexive congruence factor. The local proved pair_square_native converts the native equation to the pair square: expand overlapPairBaseChangeSquare, replace pseudofunctor maps by module pullback maps using the definitional modules_map_eq, rewrite modulesPseudofunctor_toDescentData_obj_hom, and reassociate. Instantiate this elementary calculation at the iterated cover and substitute the supplied base-change equality. No bridge statement or new hole is used.",
+   "uses": [
     "def-pc-overlap-pair-canonical-comparisons",
     "def-pc-local-overlap-transitions"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -34,7 +41,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01ZR",
-  "place": "Tag 01ZR (2), first proof; Q2 explicit single-chart naturality and canonical inverse-image composition associativity, 2026-10-14"
+  "place": "Tag 01ZR (2), first proof; M2 single-chart compatibility, categorical cancellation and elementary local transition conversion, repair 2026-10-14"
  },
  "mathlib_searches": [
   {
@@ -98,7 +105,7 @@
   "module": "Sheaf.AlgebraicGeometry.OverlapConjugateRestriction",
   "file": "lean/Sheaf/AlgebraicGeometry/OverlapConjugateRestriction.lean",
   "declaration": "AlgebraicGeometry.overlap_conjugate_restriction_explicit",
-  "statement": "theorem overlap_conjugate_restriction_explicit {X Y Z H : Scheme.{u}} (U : X.OpenCover.{u})\n    (q : Y ⟶ X) (p : Z ⟶ Y) (t : Z ⟶ X) (h : p ≫ q = t)\n    (N : (d : U.I₀) → (U.X d).Modules) (M : Z.Modules)\n    (e : ∀ d, (Scheme.Modules.pullback (U.pullbackHom t d)).obj (N d) ≅\n      (Scheme.Modules.pullback ((U.pullback₁ t).f d)).obj M)\n    (a b : U.I₀) (ν : H ⟶ Z)\n    (ha : H ⟶ (U.pullback₁ t).X a) (hb : H ⟶ (U.pullback₁ t).X b)\n    (hνa : ha ≫ (U.pullback₁ t).f a = ν) (hνb : hb ≫ (U.pullback₁ t).f b = ν)\n    (z : pullback (((U.pullback₁ q).pullback₁ p).f a)\n      (((U.pullback₁ q).pullback₁ p).f b) ⟶ H)\n    (hza : z ≫ ha = pullback.fst _ _ ≫ overlapIteratedChartHom U q p t h a)\n    (hzb : z ≫ hb = pullback.snd _ _ ≫ overlapIteratedChartHom U q p t h b)\n    (S T : H.Modules)\n    (τa : S ≅ (Scheme.Modules.pullback ha).obj\n      ((Scheme.Modules.pullback (U.pullbackHom t a)).obj (N a)))\n    (τb : T ≅ (Scheme.Modules.pullback hb).obj\n      ((Scheme.Modules.pullback (U.pullbackHom t b)).obj (N b))) (θ : S ⟶ T) :\n    let ξa := overlapDirectRestrictionIso U q p t h N a b a ha z\n      (pullback.fst _ _) hza S τa\n    let ξb := overlapDirectRestrictionIso U q p t h N a b b hb z\n      (pullback.snd _ _) hzb T τb\n    let W := (U.pullback₁ q).pullback₁ p\n    let D := (modulesPseudofunctor.toDescentData W.f).obj M\n    let ε := overlapIteratedComparison U q p t h N M e\n    let V : Y.OpenCover.{u} := U.pullback₁ q\n    let A := fun d ↦ (Scheme.Modules.pullback (U.pullbackHom q d)).obj (N d)\n    ∀ (φ : (Scheme.Modules.pullback (pullback.fst (V.f a) (V.f b))).obj (A a) ⟶\n        (Scheme.Modules.pullback (pullback.snd (V.f a) (V.f b))).obj (A b)),\n      modulesPseudofunctor.overlapPairBaseChangeHom (V.f a) (V.f b) p\n        (V.pullbackHom p a) (V.pullbackHom p b) (W.f a) (W.f b)\n        (V.pullbackHom_map p a) (V.pullbackHom_map p b) (A a) (A b) φ =\n        ξa.inv ≫ (Scheme.Modules.pullback z).map θ ≫ ξb.hom →\n      overlapPairSquare V A p D ε a b φ",
+  "statement": "theorem overlap_conjugate_restriction_explicit {X Y Z H : Scheme.{u}} (U : X.OpenCover.{u})\n    (q : Y ⟶ X) (p : Z ⟶ Y) (t : Z ⟶ X) (h : p ≫ q = t)\n    (N : (d : U.I₀) → (U.X d).Modules) (M : Z.Modules)\n    (e : ∀ d, (Scheme.Modules.pullback (U.pullbackHom t d)).obj (N d) ≅\n      (Scheme.Modules.pullback ((U.pullback₁ t).f d)).obj M)\n    (a b : U.I₀) (ν : H ⟶ Z)\n    (ha : H ⟶ (U.pullback₁ t).X a) (hb : H ⟶ (U.pullback₁ t).X b)\n    (hνa : ha ≫ (U.pullback₁ t).f a = ν) (hνb : hb ≫ (U.pullback₁ t).f b = ν)\n    (z : pullback (((U.pullback₁ q).pullback₁ p).f a)\n      (((U.pullback₁ q).pullback₁ p).f b) ⟶ H)\n    (hza : z ≫ ha = pullback.fst _ _ ≫ overlapIteratedChartHom U q p t h a)\n    (hzb : z ≫ hb = pullback.snd _ _ ≫ overlapIteratedChartHom U q p t h b)\n    (S T : H.Modules)\n    (τa : S ≅ (Scheme.Modules.pullback ha).obj\n      ((Scheme.Modules.pullback (U.pullbackHom t a)).obj (N a)))\n    (τb : T ≅ (Scheme.Modules.pullback hb).obj\n      ((Scheme.Modules.pullback (U.pullbackHom t b)).obj (N b))) (θ : S ⟶ T)\n    (hθ : θ = overlapConjugatedTransition U t N M e a b ν ha hb hνa hνb S T τa τb) :\n    let ξa := overlapDirectRestrictionIso U q p t h N a b a ha z\n      (pullback.fst _ _) hza S τa\n    let ξb := overlapDirectRestrictionIso U q p t h N a b b hb z\n      (pullback.snd _ _) hzb T τb\n    let W := (U.pullback₁ q).pullback₁ p\n    let D := (modulesPseudofunctor.toDescentData W.f).obj M\n    let ε := overlapIteratedComparison U q p t h N M e\n    let V : Y.OpenCover.{u} := U.pullback₁ q\n    let A := fun d ↦ (Scheme.Modules.pullback (U.pullbackHom q d)).obj (N d)\n    ∀ (φ : (Scheme.Modules.pullback (pullback.fst (V.f a) (V.f b))).obj (A a) ⟶\n        (Scheme.Modules.pullback (pullback.snd (V.f a) (V.f b))).obj (A b)),\n      modulesPseudofunctor.overlapPairBaseChangeHom (V.f a) (V.f b) p\n        (V.pullbackHom p a) (V.pullbackHom p b) (W.f a) (W.f b)\n        (V.pullbackHom_map p a) (V.pullbackHom_map p b) (A a) (A b) φ =\n        ξa.inv ≫ (Scheme.Modules.pullback z).map θ ≫ ξb.hom →\n      overlapPairSquare V A p D ε a b φ",
   "branch": "sheaf-dag",
   "by": "Q2",
   "date": "2026-10-14",
@@ -125,11 +132,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-6f92d",
-  "group": "Q2",
+  "reviewer": "X-53dfc",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261014T052131-L-1876990",
+  "landing": "20261014T090920-L-366460",
   "kind": "interface",
-  "note": "independent Codex review: Delivered modules compile cleanly; target signature, nodes, report, imports, and documented sorry declarations match the packet."
+  "note": "independent Codex review: Matched delivered signatures, definitions and proof with the node records and documented hθ repair; module and all three direct importers compile cleanly; all 17 declarations use only permitted axioms."
  }
 }
