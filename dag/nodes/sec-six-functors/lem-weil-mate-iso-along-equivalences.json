@@ -4,24 +4,83 @@
   "is": null,
   "from": {
    "node": "def-weil-global-geometric-frobenius",
-   "place": "its statement (a notion the statement uses)",
+   "place": "statement: the first isomorphism in each of the ordinary and compactly supported Frobenius cohomology composites; its exchange-map invertibility is proved in lem-weil-frobenius-cohomology-transport-iso",
    "via": [
     "lem-weil-frobenius-cohomology-transport-iso"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The mate of an isomorphism along equivalences is an isomorphism",
- "statement": "Let $\\mathcal C,\\mathcal D,\\mathcal C',\\mathcal D'$ be categories, let\n$L\\dashv R$ be an adjunction with $L:\\mathcal C\\to\\mathcal D$, $R:\\mathcal D\\to\\mathcal C$\n(unit $\\eta$, counit $\\varepsilon$), let $L'\\dashv R'$ be an adjunction with\n$L':\\mathcal C'\\to\\mathcal D'$, $R':\\mathcal D'\\to\\mathcal C'$ (unit $\\eta'$, counit\n$\\varepsilon'$), let $G:\\mathcal C\\to\\mathcal C'$ and $G':\\mathcal D\\to\\mathcal D'$ be\nfunctors, and let $\\theta:L'G\\xrightarrow{\\sim}G'L$ be a natural isomorphism. Let\n\n$$\n \\alpha:GR\\xrightarrow{\\ \\eta'GR\\ }R'L'GR\\xrightarrow{\\ R'\\theta R\\ }R'G'LR\n \\xrightarrow{\\ R'G'\\varepsilon\\ }R'G'\n$$\n\nbe the mate of $\\theta$. If $G$ is an equivalence of categories (fully faithful and\nessentially surjective) and $G'$ is fully faithful, then $\\alpha$ is a natural\nisomorphism.\n\n(Proof to be written: for $c\\in\\mathcal C$, $d\\in\\mathcal D$ the composite bijection\n$\\operatorname{Hom}(Gc,GRd)\\cong\\operatorname{Hom}(c,Rd)\\cong\\operatorname{Hom}(Lc,d)\n\\cong\\operatorname{Hom}(G'Lc,G'd)\\cong\\operatorname{Hom}(L'Gc,G'd)\\cong\n\\operatorname{Hom}(Gc,R'G'd)$, built from full faithfulness of $G$ and $G'$, the two\nadjunctions and $\\theta_c$, is $\\varphi\\mapsto\\alpha_d\\circ\\varphi$, by naturality of\n$\\theta$ and $\\eta'$; since every object of $\\mathcal C'$ is isomorphic to some $Gc$,\nYoneda gives that $\\alpha_d$ is an isomorphism.)",
+ "statement": "Let $\\mathcal C,\\mathcal D,\\mathcal C',\\mathcal D'$ be categories, let\n$L\\dashv R$ be an adjunction with $L:\\mathcal C\\to\\mathcal D$, $R:\\mathcal D\\to\\mathcal C$\n(unit $\\eta$, counit $\\varepsilon$), let $L'\\dashv R'$ be an adjunction with\n$L':\\mathcal C'\\to\\mathcal D'$, $R':\\mathcal D'\\to\\mathcal C'$ (unit $\\eta'$, counit\n$\\varepsilon'$), let $G:\\mathcal C\\to\\mathcal C'$ and $G':\\mathcal D\\to\\mathcal D'$ be\nfunctors, and let $\\theta:L'G\\xrightarrow{\\sim}G'L$ be a natural isomorphism. Let\n\n$$\n \\alpha:GR\\xrightarrow{\\ \\eta'GR\\ }R'L'GR\\xrightarrow{\\ R'\\theta R\\ }R'G'LR\n \\xrightarrow{\\ R'G'\\varepsilon\\ }R'G'\n$$\n\nbe the mate of $\\theta$. If $G$ is an equivalence of categories (fully faithful and\nessentially surjective) and $G'$ is fully faithful, then $\\alpha$ is a natural\nisomorphism.",
  "source": {
   "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
   "place": "no statement in the document: the abstract fact behind 'agit par transport de structure' of Deligne, La conjecture de Weil II, (1.1.7) p. 151 and (1.1.14) p. 153, as used for the exchange maps of the Frobenius square in lem-weil-frobenius-cohomology-transport-iso; written by an agent (standard reference on mates, Kelly-Street, Review of the elements of 2-categories, LNM 420, section 2.2, is not in literature/)"
  },
  "stmt_deps": [],
- "proof": [],
+ "proof": [
+  {
+   "text": "Fix $d\\in\\mathcal D$. For $c\\in\\mathcal C$, full faithfulness means that $G$ and $G'$ induce bijections on the relevant Hom sets. The adjunctions, by definition, give bijections $\\operatorname{Hom}(c,Rd)\\cong\\operatorname{Hom}(Lc,d)$ and $\\operatorname{Hom}(L'Gc,G'd)\\cong\\operatorname{Hom}(Gc,R'G'd)$. Precomposition with the invertible arrow $\\theta_c$ is a bijection from $\\operatorname{Hom}(G'Lc,G'd)$ to $\\operatorname{Hom}(L'Gc,G'd)$, with inverse precomposition with $\\theta_c^{-1}$. Thus their composite $B_{c,d}:\\operatorname{Hom}(Gc,GRd)\\to\\operatorname{Hom}(Gc,R'G'd)$ is bijective. No assertion about preservation of isomorphisms by mates is used here.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "Agent proof of the abstract mate lemma; context: Deligne, Weil II (1.1.7), p. 151, and (1.1.14), p. 153 (these passages motivate transport but do not state this abstract lemma). Step 1"
+   }
+  },
+  {
+   "text": "For $\\varphi:Gc\\to GRd$, let $t:c\\to Rd$ be its unique preimage under $G$, so $\\varphi=G(t)$. Write the adjunction bijections explicitly: the transpose of $t$ is $\\varepsilon_d\\circ L(t)$, and the transpose of $h:L'Gc\\to G'd$ is $R'(h)\\circ\\eta'_{Gc}$. Consequently $B_{c,d}(G(t))=R'(G'(\\varepsilon_d)\\circ G'L(t)\\circ\\theta_c)\\circ\\eta'_{Gc}$. These formulas are part of the unit-counit description of the given adjunctions (their inverse formulas are $h\\mapsto R(h)\\circ\\eta_c$ and $u\\mapsto\\varepsilon'_{G'd}\\circ L'(u)$, respectively).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "Agent proof of the abstract mate lemma; context: Deligne, Weil II (1.1.7), p. 151, and (1.1.14), p. 153 (these passages motivate transport but do not state this abstract lemma). Step 2"
+   }
+  },
+  {
+   "text": "Naturality of $\\theta$ at $t$ gives $G'L(t)\\circ\\theta_c=\\theta_{Rd}\\circ L'G(t)$; naturality of $\\eta'$ at $G(t)$ gives $R'L'G(t)\\circ\\eta'_{Gc}=\\eta'_{GRd}\\circ G(t)$. Substitute these two equalities into Step 2 and use functoriality and associativity. The result is $B_{c,d}(\\varphi)=R'G'(\\varepsilon_d)\\circ R'(\\theta_{Rd})\\circ\\eta'_{GRd}\\circ\\varphi=\\alpha_d\\circ\\varphi$. Therefore postcomposition with $\\alpha_d$ is bijective on morphisms whose source is $Gc$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "Agent proof of the abstract mate lemma; context: Deligne, Weil II (1.1.7), p. 151, and (1.1.14), p. 153 (these passages motivate transport but do not state this abstract lemma). Step 3"
+   }
+  },
+  {
+   "text": "For any $x\\in\\mathcal C'$, essential surjectivity supplies $c\\in\\mathcal C$ and an isomorphism $u:Gc\\xrightarrow{\\sim}x$. Precomposition with $u$ is a bijection $\\operatorname{Hom}(x,z)\\to\\operatorname{Hom}(Gc,z)$ for either $z=GRd$ or $z=R'G'd$, with inverse precomposition with $u^{-1}$. Associativity gives $(\\alpha_d\\circ f)\\circ u=\\alpha_d\\circ(f\\circ u)$. Hence postcomposition with $\\alpha_d$ is bijective on $\\operatorname{Hom}(x,GRd)\\to\\operatorname{Hom}(x,R'G'd)$ for every $x$. This is just composition of the three bijections, not an invocation of Yoneda.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "Agent proof of the abstract mate lemma; context: Deligne, Weil II (1.1.7), p. 151, and (1.1.14), p. 153 (these passages motivate transport but do not state this abstract lemma). Step 4"
+   }
+  },
+  {
+   "text": "Set $a=GRd$, $b=R'G'd$. Surjectivity in Step 4 at $x=b$ gives $\\beta_d:b\\to a$ with $\\alpha_d\\circ\\beta_d=\\operatorname{id}_b$. At $x=a$, the two maps $\\beta_d\\circ\\alpha_d$ and $\\operatorname{id}_a$ have the same image under postcomposition with $\\alpha_d$, since $\\alpha_d\\circ\\beta_d\\circ\\alpha_d=\\alpha_d$. Injectivity in Step 4 gives $\\beta_d\\circ\\alpha_d=\\operatorname{id}_a$. Thus every component $\\alpha_d$ is invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "Agent proof of the abstract mate lemma; context: Deligne, Weil II (1.1.7), p. 151, and (1.1.14), p. 153 (these passages motivate transport but do not state this abstract lemma). Step 5"
+   }
+  },
+  {
+   "text": "For $f:d\\to e$, counit naturality gives $f\\circ\\varepsilon_d=\\varepsilon_e\\circ LR(f)$, naturality of $\\theta$ gives $G'LR(f)\\circ\\theta_{Rd}=\\theta_{Re}\\circ L'GR(f)$, and unit naturality gives $R'L'GR(f)\\circ\\eta'_{GRd}=\\eta'_{GRe}\\circ GR(f)$. Applying $R'G'$ to the first equality and $R'$ to the second, functoriality and associativity give the explicit calculation $$R'G'(f)\\circ\\alpha_d=R'(G'(f\\circ\\varepsilon_d)\\circ\\theta_{Rd})\\circ\\eta'_{GRd}=R'(G'(\\varepsilon_e)\\circ G'LR(f)\\circ\\theta_{Rd})\\circ\\eta'_{GRd}=R'(G'(\\varepsilon_e)\\circ\\theta_{Re})\\circ R'L'GR(f)\\circ\\eta'_{GRd}=\\alpha_e\\circ GR(f).$$ Thus the displayed mate is natural. Compose this equation on the left with $\\beta_e$ and on the right with $\\beta_d$; the two inverse equations of Step 5 give $\\beta_e\\circ R'G'(f)=GR(f)\\circ\\beta_d$. Therefore the component inverses form a natural inverse, proving that $\\alpha$ is a natural isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "Agent proof of the abstract mate lemma; context: Deligne, Weil II (1.1.7), p. 151, and (1.1.14), p. 153 (these passages motivate transport but do not state this abstract lemma). Step 6"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Agent proof of the abstract mate lemma; context: Deligne, Weil II (1.1.7), p. 151, and (1.1.14), p. 153 (these passages motivate transport but do not state this abstract lemma)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -36,10 +95,52 @@
    "results": "GuitartExact/Basic.lean:295 instance guitartExact_of_isEquivalence_of_isIso [L.IsEquivalence] [R.IsEquivalence] [IsIso w.natTrans] : GuitartExact w (a 2-square with invertible 2-cell and equivalence horizontal functors is Guitart exact); nothing on the mate under adjunctions",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right mate of a natural isomorphism is invertible if the source vertical functor is an equivalence and the target vertical functor is fully faithful",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_symm_apply; CategoryTheory.mateEquiv_apply; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.mateEquiv_counit; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.Bicategory.toNatTrans_mateEquiv; CategoryTheory.iterated_mateEquiv_conjugateEquiv",
+   "date": "2026-10-14",
+   "verdict": "no match: mates correspondence does not assert invertibility under these hypotheses; conjugation treats identity side functors and iterated mates require extra side adjoints"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-14",
+   "verdict": "no match: mates correspondence does not assert invertibility under these hypotheses; conjugation treats identity side functors and iterated mates require extra side adjoints"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*mate|mate.*[Ii]so",
+   "results": "none; read Mathlib/CategoryTheory/Adjunction/Mates.lean:84-117,123-126 and the conjugate/iterated-mate declarations; no invertibility result under just the hypotheses of the item",
+   "date": "2026-10-14",
+   "verdict": "no match: mates correspondence does not assert invertibility under these hypotheses; conjugation treats identity side functors and iterated mates require extra side adjoints"
+  },
+  {
+   "tool": "leansearch",
+   "query": "mate of an isomorphism along an equivalence and a fully faithful functor is an isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible natural transformation between composites of left adjoints induces an invertible right mate when one horizontal functor is an equivalence and the other is fully faithful",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_apply; CategoryTheory.mateEquiv_symm_apply; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.Bicategory.toNatTrans_mateEquiv; CategoryTheory.Bicategory.mateEquiv_apply; CategoryTheory.Bicategory.mateEquiv",
+   "date": "2026-10-14",
+   "verdict": "no match: mates correspondence does not assert invertibility under these hypotheses; conjugation treats identity side functors and iterated mates require extra side adjoints"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|conjugateEquiv_iso",
+   "results": "53; 84; 123; 124; 128; read Mathlib/CategoryTheory/Adjunction/Mates.lean:84-117,123-126 and the conjugate/iterated-mate declarations; no invertibility result under just the hypotheses of the item",
+   "date": "2026-10-14",
+   "verdict": "no match: mates correspondence does not assert invertibility under these hypotheses; conjugation treats identity side functors and iterated mates require extra side adjoints"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +160,21 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-rf-shriek-preservation"
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-mate-iso-along-equivalences",
+  "worker": "stage1",
+  "summary": "Expanded the original Hom-bijection sketch into six explicit elementary steps. Identified the composite with postcomposition by the specified mate using two naturality equations; extended through essential surjectivity, constructed a two-sided inverse and proved naturality of that inverse. No new nodes and no extra adjoint assumption on G′. Removed the proof sketch from the statement without changing its mathematical assertion. Searches found no exact attachment or Mathlib leaf. Second reading expands mate naturality into the three component identities and their composite calculation.",
+  "blueprint": "Realizes the exchange-map invertibility needed by the first arrows of the two Frobenius cohomology composites in def-weil-global-geometric-frobenius, through lem-weil-frobenius-cohomology-transport-iso; the abstract auxiliary item does not replace any step of its unit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-25d3babf2",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-25d3babf2 (reviewer sub-agent of L); spot-checked: Read the complete item, reports, route and cited Deligne passages. All six steps correctly prove invertibility of the specified mate; 103 finite-chain cases also passed. No duplicates, missing non-elementary citations or extra hypotheses found. Exact archived target declarations checked without identifying distinct coefficient categories. Full findings in review.md; no repairs or tool_uses."
+ }
 }
