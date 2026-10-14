@@ -14923,3 +14923,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:31 L: merged deliver/K4/WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula (stage 3; reviewer PASS; first push; landing 20261014T183101-L-3874269 (proof); batch 20261014T183059; modules 1; new nodes 0)
 - 18:35 L: returned deliver/K3/Sheaf.AlgebraicGeometry.BaseChangeTargetTransitionHigherImage (reviewer RETURN: (reviewer X-7031c, head 7031cac7f) F (report accuracy; stage-3 review points 5 and 7): In coord/reports/K3/Sheaf.Algebra)
 - 18:48 L: merged deliver/E1/Sheaf.AlgebraicGeometry.CartesianHigherImageGermVanishing (stage 3; reviewer PASS; first push; landing 20261014T184835-L-93480 (interface); batch 20261014T184832; modules 2; new nodes 2)
+- 18:48 L: merged deliver/F4/Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup (stage 3; reviewer PASS; after a return; landing 20261014T184836-L-93856 (proof); batch 20261014T184832; modules 1; new nodes 0)

@@ -33,7 +33,7 @@ private theorem moduleCup_congr {R : Type w} [CommRing R]
     {M N L : ModuleCat.{w} R} (cup : M →ₗ[R] N →ₗ[R] L)
     {x x' : M} {y y' : N} (hx : x = x') (hy : y = y') :
     cup x y = cup x' y' := by
-  rw [hx, hy]
+  simp [hx, hy]
 
 /-- Canonical comparison of the external Cech cup on open covers.
 The cover equalities are essential: without them IsModuleCechComparison does not
