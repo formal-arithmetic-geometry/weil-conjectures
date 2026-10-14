@@ -25,7 +25,7 @@ theorem projective_resolution_ext_degree
   · rintro ⟨P, hP⟩
     apply HasProjectiveDimensionLT.mk
     intro i hi Y a
-    obtain ⟨f, hf, rfl⟩ := P.extMk_surjective a (i + 1) rfl
+    obtain ⟨f, _, rfl⟩ := P.extMk_surjective a (i + 1) rfl
     have hfzero : f = 0 := (hP i (by omega)).eq_of_src _ _
     simpa only [hfzero] using P.extMk_zero (i + 1) rfl
   · intro h
