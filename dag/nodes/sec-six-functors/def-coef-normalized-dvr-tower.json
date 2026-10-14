@@ -3,25 +3,102 @@
  "blueprint": {
   "is": "def-coef-normalized-dvr-tower",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "A normalized DVR tower",
- "statement": "A normalized DVR tower on $X$ consists of complexes\n$M_n\\in D(X_{\\mathrm{proet}},A_n)$, represented in the derived\ntower category of [def-weil-pbc-derived-inverse-limit], with\ncoherent transition maps whose adjoints\n\n$$\nM_m\\otimes^L_{A_m}A_n\\longrightarrow M_n\\qquad(m\\geq n)\n$$\n\nare isomorphisms and satisfy the quotient cocycle. Restriction of\nscalars uses [def-weil-completed-integral-coefficients].\nNo common stratification or integral local model is part of this\ndefinition. Such finiteness assertions must be proved separately.",
+ "statement": "Use the global finite-field coefficient datum of [def-weil-completed-integral-coefficients], with residue characteristic $p$: fix a prime $\\ell\\neq p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and a scheme $X$. For $n\\geq1$ write $A_n=\\mathcal O_E/\\varpi_E^n$, $B_n=(A_n)_X$ for the constant sheaf of rings on $X_{\\mathrm{proet}}$, and $R=\\widehat{\\mathcal O}_{E,X}=\\varprojlim_n B_n$. For $m\\geq n\\geq1$ let $q_{m,n}:B_m\\to B_n$ be induced by the quotient homomorphism and let $\\pi_n:R\\to B_n$ be the limit projection, so $q_{m,n}\\pi_m=\\pi_n$.\n\nWrite $D(X_{\\mathrm{proet}},A_n)=D(\\operatorname{Mod}(B_n))$ and $D(X_{\\mathrm{proet}},\\mathcal O_E)=D(\\operatorname{Mod}(R))$, with derived categories as in [def-weil-abstract-derived-category]. Let $\\operatorname{Res}_{m,n}$ and $\\operatorname{Res}_n$ be restriction of scalars along $q_{m,n}$ and $\\pi_n$ [def-pc-sheaf-restrict-scalars], applied termwise to complexes; restriction leaves the underlying abelian sheaf unchanged, so it preserves kernels and cokernels and induces derived functors by [lem-sf-exact-functor-derived-triangulated]. Let $L_{m,n}=-\\otimes^L_{B_m}B_n$ be derived change of rings [lem-pur-derived-change-of-rings]. The ordinary tensor-restriction adjunction sends a module map $f:N\\to\\operatorname{Res}_{m,n}P$ to $x\\otimes b\\mapsto b f(x)$, with inverse $g\\mapsto(x\\mapsto g(x\\otimes1))$; balancing makes these inverse maps and they commute with restrictions. The notation 'adjoint' below uses $L_{m,n}\\dashv\\operatorname{Res}_{m,n}$, obtained from the usual tensor-restriction adjunction by [lem-pc-pre-derived-adjoint-functors-general]; restriction is exact and derived change of rings is everywhere defined.\n\nA normalized DVR tower consists of objects $M_n\\in D(X_{\\mathrm{proet}},A_n)$ and transition morphisms\n$$\\tau_{m,n}:M_m\\longrightarrow\\operatorname{Res}_{m,n}M_n\\qquad(m\\geq n\\geq1),$$\nrepresented coherently in the derived tower category of [def-weil-pbc-derived-inverse-limit]: part of the datum is an object $\\mathcal M_\\bullet\\in D(\\operatorname{Tow}_R(X))$, with $\\operatorname{Tow}_R(X)=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\operatorname{Mod}(R))$ as defined for an arbitrary sheaf of rings in [def-weil-pbc-adic-coefficient-datum], together with identifications $\\operatorname{ev}_n\\mathcal M_\\bullet\\cong\\operatorname{Res}_nM_n$ under which its evaluated transition morphisms are $\\operatorname{Res}_m(\\tau_{m,n})$, using $\\operatorname{Res}_m\\operatorname{Res}_{m,n}=\\operatorname{Res}_n$. Require $\\tau_{n,n}=1$ and\n$$\\tau_{r,n}=\\operatorname{Res}_{r,m}(\\tau_{m,n})\\circ\\tau_{r,m}\\qquad(r\\geq m\\geq n),$$\nunder the canonical identification of successive restrictions with restriction along the composite quotient map. For every $m\\geq n$ the adjoint comparison\n$$\\alpha_{m,n}:M_m\\otimes^L_{B_m}B_n\\longrightarrow M_n$$\nis required to be an isomorphism. The displayed identity and unit condition specify the quotient cocycle for the transitions (equivalently for their adjoints under the canonical iterated change-of-rings identifications). The tensor product is over the finite-level sheaf $B_m$, not over $R$.\n\nNo boundedness, constructibility, common stratification, or integral local model is part of this definition. Such finiteness and effectivity assertions must be proved separately.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/def-coef-normalized-dvr-tower.md",
   "place": "node def-coef-normalized-dvr-tower, order 2131"
  },
  "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-pre-derived-adjoint-functors-general",
   "def-weil-pbc-derived-inverse-limit",
-  "def-weil-completed-integral-coefficients"
+  "def-weil-pbc-adic-coefficient-datum"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized adic systems in the derived category of sheaves with compatible derived reductions modulo powers of an ideal",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NormalizedTower\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not define derived pro-etale coefficient towers with finite-level normalization and coherent tower representation"
+  },
+  {
+   "tool": "grep",
+   "query": "NormalizedTower|normalized.*tower|adic.*system",
+   "results": "4 hits: Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/Topology/Algebra/Nonarchimedean/AdicTopology.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not define derived pro-etale coefficient towers with finite-level normalization and coherent tower representation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized inverse tower of complexes of sheaves on the pro etale site with coefficients O_E modulo uniformizer powers whose derived change of coefficients transition maps are isomorphisms",
+   "results": "8 hits: BDeRhamPlus, BDeRham, Algebra.FormallyEtale.comp, StandardEtalePair.instFormallyEtaleRing, localCohomology.diagram, Algebra.FormallyEtale.of_restrictScalars, localCohomology, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not define derived pro-etale coefficient towers with finite-level normalization and coherent tower representation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived category sheaf complexes compatible reductions modulo powers of a discrete valuation ideal tower",
+   "results": "8 hits: localCohomology, localCohomology.ofSelfLERadical, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, BDeRhamPlus, BDeRham, localCohomology.diagram, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, localCohomology.isoSelfLERadical",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not define derived pro-etale coefficient towers with finite-level normalization and coherent tower representation"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor (ULift ℕ) (CategoryTheory.Functor _ _), IsIso",
+   "results": "0 hits: ; loogle: Application type mismatch: The argument\n  ULift.{?u.4, 0} ℕ\nhas type\n  Type (max ?u.1 ?u.2)\nbut is expected to have type\n  Type ?u.2 → Type ?u.1\nin the application\n  Functor (ULift.{?u.4, 0} ℕ)",
+   "date": "2026-10-14",
+   "verdict": "invalid query: Loogle reported a type mismatch; retried with a name-pattern query"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*base.change|IsDerivedBaseChange|quotientPowSuccFactor",
+   "results": "0 hits: ; Mathlib subdirectory AlgebraicGeometry",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not define derived pro-etale coefficient towers with finite-level normalization and coherent tower representation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adic\"",
+   "results": "12 hits: Lean.Parser.Tactic.contradiction, Decidable.byContradiction, Classical.byContradiction, Std.Iter.Step.toMonadic, Std.Rxi.Iterator.Monadic.step, Std.Rxc.Iterator.Monadic.step, Std.Rxo.Iterator.Monadic.step, Std.Rxi.Iterator.Monadic.isPlausibleOutput_next",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not define derived pro-etale coefficient towers with finite-level normalization and coherent tower representation"
+  },
+  {
+   "tool": "grep",
+   "query": "adicSystem|adic.*complex|normaliz.*inverse|IsNormalized",
+   "results": "15 hits: Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean, Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/RingTheory/Perfectoid/BDeRham.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern local cohomology, ordinary adic completion, condensed category instances, or unrelated normalization; none defines normalized derived coefficient towers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse system of unbounded derived sheaf modules over quotient rings, with derived scalar extension along each quotient identifying its levels",
+   "results": "8 hits: localCohomology.diagram, localCohomology, localCohomology.ofDiagram, localCohomology.ofSelfLERadical, Hausdorffification, localCohomology.ringModIdeals, LightCondensed.instIsGrothendieckAbelianLightCondMod, AdicCompletion",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern local cohomology, ordinary adic completion, condensed category instances, or unrelated normalization; none defines normalized derived coefficient towers"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -43,5 +120,20 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-coef-normalized-dvr-tower",
+  "worker": "stage1",
+  "summary": "Definition split using eight existing nodes and no new nodes. Expanded the implicit finite coefficients, completed coefficient sheaf, derived tower witness, transition scalar maps, adjunction and quotient cocycle without adding finiteness. Neither the small-etale NormalizedTower nor the pro-etale IsNormalizedTower over discrete constant integral coefficients is an exact attachment. Mathlib searches return no match; LeanSearch unavailable.",
+  "blueprint": "Entire definition at order 2131: first paragraph (finite-level complexes with a derived tower representation), displayed adjoint comparisons, quotient cocycle and restriction of scalars, and final paragraph excluding finiteness assumptions."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-36de1cf3d",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-36de1cf3d (reviewer sub-agent of L); spot-checked: Read the full definition, all eight dependency statements, cited sources, report, and unit/chapter route. Verified finite-level tensor adjunctions, quotient cocycle, completed-coefficient tower witness, small cases, and exact master coefficient categories/base-change morphisms. No repairs or new nodes needed. review.md records the checks and inherited DAG cycles outside this delivery."
+ }
 }
