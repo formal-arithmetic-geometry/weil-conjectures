@@ -4,10 +4,10 @@
   "is": null,
   "from": {
    "node": "def-weil-derived-direct-image",
-   "place": "its statement (a notion the statement uses)",
+   "place": "The tower maps are induced by $A_{E,n+1}\\twoheadrightarrow A_{E,n}$ (coefficient restriction for finite-level direct images).",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Derived pro-etale direct image commutes with restriction of scalars",
@@ -24,11 +24,82 @@
  },
  "stmt_deps": [
   "def-weil-pbc-proetale-site",
-  "def-weil-pbc-proetale-operations"
+  "def-weil-pbc-proetale-operations",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-kinjective-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $c_W:(\\operatorname{Sh}(W_{\\mathrm{proet}}),B_W)\\to(\\operatorname{Sh}(W_{\\mathrm{proet}}),A_W)$ for the identity morphism of the underlying topos with structural map $\\varphi_W$. Its module direct image is $c_{W,*}=\\operatorname{Res}_{\\varphi,W}$: the underlying abelian sheaf and every restriction map are unchanged and $a$ acts as $\\varphi_W(a)$. Kernels are unchanged sectionwise; the sectionwise cokernel and its sheafification are also unchanged as abelian sheaves, with the induced restricted action. Thus restriction of scalars preserves kernels and cokernels and is exact and additive. Apply the exact-functor factorization theorem to obtain its termwise triangulated functor on the unbounded derived categories. The exact-functor derived theorem identifies this functor canonically with $Rc_{W,*}$, and its comparison on every complex is the usual resolution map after restriction of scalars.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, label lemma-right-derived-exact-functor; restriction on module sheaves as in sites-modules.tex, Tag 03DA"
+   }
+  },
+  {
+   "text": "Use the small sites and universes fixed in [def-weil-pbc-proetale-site]. Let $f_A:(X_{\\mathrm{proet}},A_X)\\to(Y_{\\mathrm{proet}},A_Y)$ and $f_B:(X_{\\mathrm{proet}},B_X)\\to(Y_{\\mathrm{proet}},B_Y)$ be the ringed-topos morphisms of the pro-etale operations. Use the canonical structure maps $c^f_A$ and $c^f_B$ defined by constant sections in [def-weil-proetale-inverse-image]. They are isomorphisms by [prop-weil-pbc-proetale-constant-ring-map], applied separately to the finite discrete rings $A$ and $B$, so they give the identified coefficient pullbacks required by [def-weil-pbc-proetale-operations]. The structural maps of $f_Ac_X$ and $c_Yf_B$ agree: both send a constant section $a$ from $A$ to the constant section $\\varphi(a)$ of $B_X$, and the universal property of the constant-sheaf sheafification makes equality on these constant-presheaf maps equality of sheaf maps. The underlying topos map is $f$ in both cases. Denote their common ringed-topos morphism by $h$. On a test object $V\\to Y$, both $h_*M=f_{A,*}\\operatorname{Res}_{\\varphi,X}M$ and $\\operatorname{Res}_{\\varphi,Y}f_{B,*}M$ have sections $M(X\\times_Y V)$, the same restriction maps, and the same $A_Y$-action. Hence this identification is natural in module sheaves and complexes.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-proetale-operations",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-proetale-inverse-image",
+    "prop-weil-pbc-proetale-constant-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-derived-direct-image.md",
+    "place": "The tower maps are induced by $A_{E,n+1}\\twoheadrightarrow A_{E,n}$; elementary coefficient square underlying Tag 0D6E; canonical structure maps: proetale.tex Tag 09A5, label section-morphism, and blueprint prop-weil-pbc-proetale-constant-ring-map, order 1235. After this identification the coefficient square is elementary."
+   }
+  },
+  {
+   "text": "Apply the unbounded ringed-topos composition theorem to $(c_X,f_A)$ and to $(f_B,c_Y)$. The sites are small in the chosen universe by step 2, the rings are commutative sheaves, and all four arrows are morphisms of ringed topoi by their structural maps. It gives natural isomorphisms $\\kappa_{f_A,c_X}:Rh_*\\xrightarrow{\\sim}Rf_{A,*}Rc_{X,*}$ and $\\kappa_{c_Y,f_B}:Rh_*\\xrightarrow{\\sim}Rc_{Y,*}Rf_{B,*}$. Replace $Rc_{X,*},Rc_{Y,*}$ by the termwise restriction functors using step 1. Define the required transformation as $\\kappa_{c_Y,f_B}\\circ\\kappa_{f_A,c_X}^{-1}$. Its endpoints are exactly $Rf_*^A\\operatorname{Res}_{\\varphi,X}$ and $\\operatorname{Res}_{\\varphi,Y}Rf_*^B$. Being a composite of natural isomorphisms it is a natural isomorphism. No flatness of $B$ over $A$, boundedness, or finiteness property of $f$ is used.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, label lemma-derived-pushforward-composition"
+   }
+  },
+  {
+   "text": "Check the normalization. Let $J$ be the given K-injective $B_X$-complex and $j:\\operatorname{Res}_{\\varphi,X}J\\to I$ the given K-injective $A_X$-resolution. The composition theorem on $(c_X,f_A)$ states that $f_{A,*}j:h_*J=f_{A,*}\\operatorname{Res}_{\\varphi,X}J\\to f_{A,*}I$ is a quasi-isomorphism representing $\\kappa_{f_A,c_X}$ at $QJ$. For the other factorization choose a K-injective $B_Y$-resolution $q:f_{B,*}J\\to L$, which exists on the small ringed site. Its normalized comparison is $c_{Y,*}q:\\operatorname{Res}_{\\varphi,Y}f_{B,*}J\\to\\operatorname{Res}_{\\varphi,Y}L$. Since $c_{Y,*}$ is exact, the exact-functor derived theorem identifies this map with the canonical identification of $Rc_{Y,*}(Qf_{B,*}J)$ with $Q\\operatorname{Res}_{\\varphi,Y}f_{B,*}J$; under that identification its class is the identity. Therefore the composite from step 3 is precisely the inverse of the class of $f_{A,*}j$ stated in the item. The composition theorem explicitly makes its resolution identifications and comparisons natural in the derived argument, so this formula is independent of the resolutions and natural for all derived morphisms, not just chain maps between selected representatives.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, label lemma-derived-pushforward-composition, K-injective normalization; Tag 0D6J, label lemma-modules-abelian-unbounded, analogous resolution formula; derived.tex Tag 015F"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-inverse-image",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, label lemma-derived-pushforward-composition, applied to the two coefficient factorizations; exact restriction by derived.tex Tag 015F"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -43,10 +114,52 @@
    "results": "`Functor.totalRightDerived` (CategoryTheory/Functor/Derived/RightDerived.lean:196, needs `HasRightDerivedFunctor`), `Functor.rightDerivedFunctorPlus` (DerivedCategory/RightDerivedFunctorPlus.lean, bounded below, enough injectives); no composition/change-of-rings comparison for direct images of sheaves",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|rightDerived|totalRightDerived",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: underived constructions or generic derived transformations do not give the unbounded coefficient direct-image comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived pushforward of sheaves of modules commutes with restriction of scalars along a ring homomorphism",
+   "results": "SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforward_obj_val, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforward_map_val, SheafOfModules.pushforwardNatIso_inv",
+   "date": "2026-10-14",
+   "verdict": "no match: underived constructions or generic derived transformations do not give the unbounded coefficient direct-image comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "SheafOfModules.restrictScalars, SheafOfModules.instAdditiveRestrictScalars, SheafOfModules.restrictScalars_obj_val, SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-14",
+   "verdict": "no match: underived constructions or generic derived transformations do not give the unbounded coefficient direct-image comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of unbounded right derived direct image functors on ringed topoi and exact restriction of scalars",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition theorem for total right derived functors on unbounded derived categories of ringed sites",
+   "results": "CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.Functor.rightDerivedNatTrans_comp, CategoryTheory.NatTrans.leftDerived_comp, CategoryTheory.Functor.rightDerived_fac_assoc, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc, CategoryTheory.NatTrans.leftDerived_comp_assoc, CategoryTheory.Functor.leftDerivedNatTrans_comp",
+   "date": "2026-10-14",
+   "verdict": "no match: underived constructions or generic derived transformations do not give the unbounded coefficient direct-image comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "composition|compIso|comp.*[Ii]so",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: underived constructions or generic derived transformations do not give the unbounded coefficient direct-image comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +179,49 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "worker": "stage1",
+  "summary": "Proved exact restriction and compared two ringed-topos factorizations using existing Tag 0D6E, including its normalized K-injective comparison. Reused all required generic nodes, created no nodes, and retained the mathematical statement. No bounded-below or injective-preservation assumption introduced.",
+  "blueprint": "Realizes the coefficient-transition sentence of def-weil-derived-direct-image, order 1468, in clause (ii) of sk-def-sf-operations; no unit route departure.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Termwise triangulated descent of any exact functor; the unit defines operations but does not establish this generic localization fact."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "An exact functor has total derived functor computed by every complex, including its canonical comparison; needed to identify identity-topos coefficient pushforwards."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Unbounded composition for arbitrary ringed topoi including the K-injective normalization; the unit does not provide a replacement for this generic theorem."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "K-injective resolutions on a small ringed site, applied to the intermediate B_Y-complex in the normalization."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Canonical constant-ring pullback isomorphisms for finite rings supply the identified coefficient data of the operations definition; this is a coefficient tool, not a replacement unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-b3843febc",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-b3843febc (reviewer sub-agent of L); spot-checked: Read the complete mathematics and cited sources. Repaired one step-2 citation gap by citing existing canonical constant-ring structure-map and isomorphism nodes; statement unchanged. Verified unbounded composition, nonflat coefficients, comparison direction and inverse resolution formula. review.md records all checks, accepted tool_uses, and a pre-existing dependency cycle outside this delivery.; 1 file(s) fixed by the reviewer"
+ }
 }
