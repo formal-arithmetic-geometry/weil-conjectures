@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **849**, closure **29**, holes in definitions **6**, definitions with undetermined data **2** (closure **0**).
+Holes now: library **847**, closure **27**, holes in definitions **5**, definitions with undetermined data **2** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -13,7 +13,6 @@ Definitions with holes (def/instance/structure field):
 - `WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie::AlgebraicGeometry.GeneralLinearGroup.toMatrixLieHom` (def, line 110)
 - `WeilConjectures.RingTheory.ProEtale.ClosedLift::Algebra.ClosedLift.isFiltered_index` (instance, line 142)
 - `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar::AlgebraicGeometry.Etale.isIso_derivedOpenImmersionLowerShriekToLowerStar` (instance, line 89)
-- `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek::AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek` (instance, line 179)
 
 Definitions with undetermined data (class-1 exceptions in `coord/hollow-definitions.md`):
 
@@ -22,24 +21,24 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 626 | 19 |
-| WeilConjectures | 223 | 10 |
+| Sheaf | 627 | 20 |
+| WeilConjectures | 220 | 7 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2169 | 93 | 2076 | 4 | 1 |
-| 660345513 (Application of proof-dependency imports) | library | 2111 | 91 | 2020 | 4 | 1 |
-| 660345513 (Application of proof-dependency imports) | closure | 1976 | 19 | 1957 | 3 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 2172 | 94 | 2078 | 4 | 1 |
+| 660345513 (Application of proof-dependency imports) | library | 2114 | 92 | 2022 | 4 | 1 |
+| 660345513 (Application of proof-dependency imports) | closure | 1978 | 20 | 1958 | 3 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3348 |
-| decomposed | 47 |
+| proved | 3349 |
+| decomposed | 48 |
 | moved | 3883 |
 | pruned | 118 |
-| other | 457 |
+| other | 458 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
 
@@ -59,7 +58,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | D3 | 96 | 101 | 66 | 35 | 47/96 (49.0%) |
 | D4 | 50 | 45 | 41 | 4 | 25/50 (50.0%) |
 | E1 | 142 | 157 | 102 | 55 | 78/142 (54.9%) |
-| E2 | 105 | 104 | 81 | 23 | 56/105 (53.3%) |
+| E2 | 106 | 104 | 81 | 23 | 56/106 (52.8%) |
 | E3 | 104 | 99 | 85 | 14 | 56/104 (53.8%) |
 | E4 | 37 | 37 | 26 | 11 | 19/37 (51.4%) |
 | F1 | 134 | 135 | 103 | 32 | 69/134 (51.5%) |
@@ -106,10 +105,10 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | S2 | 121 | 125 | 98 | 27 | 63/121 (52.1%) |
 | S3 | 102 | 97 | 63 | 34 | 48/102 (47.1%) |
 | S4 | 43 | 41 | 32 | 9 | 22/43 (51.2%) |
-| T1 | 107 | 107 | 80 | 27 | 55/107 (51.4%) |
+| T1 | 108 | 108 | 80 | 28 | 55/108 (50.9%) |
 | T2 | 131 | 153 | 97 | 56 | 64/131 (48.9%) |
 | T3 | 98 | 93 | 75 | 18 | 52/98 (53.1%) |
-| T4 | 63 | 55 | 37 | 18 | 24/63 (38.1%) |
+| T4 | 64 | 57 | 38 | 19 | 24/64 (37.5%) |
 | U1 | 125 | 126 | 92 | 34 | 62/125 (49.6%) |
 | U2 | 135 | 129 | 92 | 37 | 63/135 (46.7%) |
 | U3 | 95 | 97 | 69 | 28 | 49/95 (51.6%) |
@@ -148,19 +147,19 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | Sheaf.CategoryTheory.SiteSystemStrictificationData | 7 | 1 | M4 |
 | Sheaf.AlgebraicGeometry.BaseChangeClosedCoefficientRange | 8 | 1 | X2 |
 | Sheaf.AlgebraicGeometry.BaseChangeOpenInjectiveCoefficientZero | 8 | 1 | S1 |
-| WeilConjectures.AlgebraicGeometry.Picard.Jacobian | 8 | 2 | T4 |
+| Sheaf.AlgebraicGeometry.PicardDegreeSheafFpqc | 9 | 1 | M3 |
 | Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality | 10 | 1 | N1 |
 | Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula | 20 | 1 | W4 |
-| WeilConjectures.SixFunctors.Etale.Derived.UpperShriek | 20 | 1 | T1 |
 | WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula | 22 | 3 | Q1 |
 | Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionsFactorization | 23 | 1 | N3 |
 | Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation | 24 | 1 | G4 |
 | Sheaf.Paper.ModuleCupEqualDerivedMapsClass | 27 | 1 | E2 |
 | Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex | 28 | 1 | H4 |
 | Sheaf.AlgebraicGeometry.RelativeMVDirectImageRows | 29 | 1 | W3 |
-| Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate | 30 | 1 | XR32ae8835ad92617e |
+| Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate | 30 | 1 | N4 |
 | Sheaf.AlgebraicGeometry.ScalarCupModuleCupCompatibility | 30 | 1 | B2 |
 | Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealization | 33 | 1 | B2 |
+| Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchange | 34 | 1 | G4 |
 
 Modules pruned since the imports baseline:
 
@@ -474,7 +473,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.RingTheory.DVRValuationRingCharacterization`
 - `Sheaf.RingTheory.DirectedUnionSubringsFlatModule`
 - `Sheaf.RingTheory.Etale.QuasiFiniteAtPrime`
-- `Sheaf.RingTheory.EtaleColimitNormalLocalDomain`
 - `Sheaf.RingTheory.EtaleFiniteFactorDecomposition`
 - `Sheaf.RingTheory.EtaleRetractionFiniteTypeSplitting`
 - `Sheaf.RingTheory.ExistsNegativeValuationOfTensorSurjective`
