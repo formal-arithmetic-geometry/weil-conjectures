@@ -16,6 +16,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 The unsigned tensor bicomplex and its maps are compatibility abbreviations for
 Mathlib `Functor.mapBifunctorHomologicalComplex` and `Functor.uncurry.obj`.
 The names remain available to downstream modules; no separate construction is used.
+In particular, `tensorBicomplexMap` is the map supplied by the uncurried
+bifunctor, so its chain-map identities are inherited from Mathlib.
 
 Source: Stacks Project, Algebra, Tag 00M3, functoriality paragraph.
 (blueprint: def-weil-pbc-tensor-bicomplex)
