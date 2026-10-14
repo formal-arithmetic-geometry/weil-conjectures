@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Sheaf.CategoryTheory.KInjectiveBridge
+public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-!
