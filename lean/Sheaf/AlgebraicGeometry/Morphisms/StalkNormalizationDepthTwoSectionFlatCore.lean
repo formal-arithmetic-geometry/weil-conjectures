@@ -39,7 +39,7 @@ theorem stalk_normalization_depth_two_section_flat_core
     (p : E ⟶ L) [IsFinite p] (t : T ⟶ L)
     [Flat t] [Flat (pullback.snd p t)] (x : L) (b : T) (hb : t b = x) :
     ∃ W : L.Opens, x ∈ W ∧ Flat (p ∣_ W) := by
-  -- The generalized flat-test formulation repairs the earlier false depth-two statement.
+  -- Point lifting follows from hb; no rational-section hypothesis is needed for descent.
   -- The argument proceeds by stalkwise faithful-flat descent.
   classical
   let F : Set L := {y | ∀ z, p z = y → (p.stalkMap z).hom.Flat}
