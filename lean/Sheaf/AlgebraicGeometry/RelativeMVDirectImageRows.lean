@@ -5,10 +5,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.RelativeMVMaps
 public import Sheaf.AlgebraicGeometry.MayerVietorisImageChainData
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisUnderivedOpenCounitSquare
-import Sheaf.AlgebraicGeometry.RingedSpaceDirectImageKInjectiveAcyclic
+import Sheaf.AlgebraicGeometry.RelativeMVDirectImageRowsPreoverlap
+import Sheaf.AlgebraicGeometry.RelativeMVDirectImageRowsOverlapMate
 
 /-! # Resolved relative short exact rows before tensor pullback -/
 
@@ -108,6 +106,18 @@ theorem relativeMV_direct_image_rows
       (adj.homEquiv _ _).symm (DerivedCategory.Q.map m.τ₂ ≫ η.app P'.X₂) ≫ e₂'.hom =
         e₂.hom ≫ biprod.map (b U).hom (b V).hom ∧
       (adj.homEquiv _ _).symm (DerivedCategory.Q.map m.τ₃ ≫ η.app P'.X₃) ≫ e₃'.hom =
-        e₃.hom ≫ (b (U ⊓ V)).hom := by sorry
+        e₃.hom ≫ (b (U ⊓ V)).hom := by
+  classical
+  dsimp only
+  have hrows := relativeMV_direct_image_rows_preoverlap f f' g g' hpull K K' φ U V hcover
+  rcases hrows with ⟨P, P', m, e₁, e₂, e₃, e₁', e₂', e₃', hdata⟩
+  have hP := hdata.1
+  have hP' := hdata.2.1
+  have h₁ := hdata.2.2.1
+  have h₂ := hdata.2.2.2.1
+  have h₃ := hdata.2.2.2.2
+  refine ⟨P, P', m, e₁, e₂, e₃, e₁', e₂', e₃', hP, hP', h₁, h₂, ?_⟩
+  exact relativeMV_direct_image_rows_overlap_mate f f' g g' hpull K K' φ U V
+    P P' m e₃ e₃' h₃
 
 end AlgebraicGeometry

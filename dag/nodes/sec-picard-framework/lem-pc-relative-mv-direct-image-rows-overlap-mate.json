@@ -1,0 +1,108 @@
+{
+ "id": "lem-pc-relative-mv-direct-image-rows-overlap-mate",
+ "kind": "statement",
+ "title": "Cancellation of the overlap mate",
+ "statement": "A strict subclaim of lem-pc-relative-mv-direct-image-rows: from the pre-cancellation overlap mate equation, postcompose with the target vertex comparison and cancel its inverse to obtain the displayed overlap identity.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-relative-mv-maps",
+  "def-pc-mayer-vietoris-image-chain-data"
+ ],
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08BV, 08HZ, 08FE and 08HY; resolved relative rows before the cone passage."
+ },
+ "proof": [
+  {
+   "text": "Postcompose the supplied pre-cancellation overlap mate equation with the target vertex isomorphism and simplify by associativity and the inverse-hom identity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Mathlib categorical identities",
+  "place": "Cancellation by congrArg, Category.assoc, Iso.inv_hom_id and Category.comp_id."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "resolved relative Mayer Vietoris row mate cancellation",
+   "results": "No exact theorem found; the split uses the stated relative-row construction.",
+   "date": "2026-10-15",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "DerivedCategory Q map adjunction homEquiv naturality inverse isomorphism",
+   "results": "Generic adjunction naturality and isomorphism cancellation lemmas found.",
+   "date": "2026-10-15",
+   "verdict": "supporting generic lemmas identified"
+  },
+  {
+   "tool": "loogle",
+   "query": "Iso.inv_hom_id Category.assoc congrArg",
+   "results": "Generic categorical cancellation lemmas found.",
+   "date": "2026-10-15",
+   "verdict": "supporting generic lemmas identified"
+  },
+  {
+   "tool": "grep",
+   "query": "Iso.inv_hom_id Category.assoc congrArg",
+   "results": "No matching Mathlib source hit.",
+   "date": "2026-10-15",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeMVDirectImageRows",
+  "date": "2026-10-14",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-relative-mv-direct-image-rows",
+   "place": "Resolved relative short exact row comparison, before the cone-to-quotient passage",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeMVDirectImageRowsOverlapMate",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeMVDirectImageRowsOverlapMate.lean",
+  "declaration": "AlgebraicGeometry.relativeMV_direct_image_rows_overlap_mate",
+  "statement": "theorem relativeMV_direct_image_rows_overlap_mate\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (hpull : IsPullback g' f' f g)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    (U V : X.Opens)\n    (P : ShortComplex (CochainComplex\n        (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ))\n    (P' : ShortComplex (CochainComplex\n        (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) ℤ))\n    (m : P ⟶ P'.map\n      ((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).mapHomologicalComplex (.up ℤ)))\n    (e₃ : (derivedPullback g).obj (DerivedCategory.Q.obj P.X₃) ≅\n      (relativeMVLocalArrow f f' g g' hpull K K' φ (U ⊓ V)).left)\n    (e₃' : DerivedCategory.Q.obj P'.X₃ ≅\n      (relativeMVLocalArrow f f' g g' hpull K K' φ (U ⊓ V)).right)\n    (h₃ : ((relativeMVAdj g).homEquiv _ _).symm (DerivedCategory.Q.map m.τ₃ ≫\n      (schemeMVDirectImageLocalization g).app P'.X₃) =\n        e₃.hom ≫ (relativeMVLocalArrow f f' g g' hpull K K' φ (U ⊓ V)).hom ≫ e₃'.inv) :\n    ((relativeMVAdj g).homEquiv _ _).symm\n      (DerivedCategory.Q.map m.τ₃ ≫ (schemeMVDirectImageLocalization g).app P'.X₃) ≫\n        e₃'.hom = e₃.hom ≫\n          (relativeMVLocalArrow f f' g g' hpull K K' φ (U ⊓ V)).hom",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261014T171840-L-2711156",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261014T171840-L-2711156",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

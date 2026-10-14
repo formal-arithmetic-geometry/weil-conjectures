@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-relative-mv-direct-image-rows-preoverlap",
+ "kind": "statement",
+ "title": "The resolved relative rows and mate data before cancellation",
+ "statement": "A strict subclaim of lem-pc-relative-mv-direct-image-rows: construct the two resolved short exact rows, six vertex isomorphisms, the global and middle mate identities, and the overlap mate before postcomposition by the target vertex isomorphism.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-relative-mv-maps",
+  "def-pc-mayer-vietoris-image-chain-data"
+ ],
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08BV, 08HZ, 08FE and 08HY; resolved relative rows before the cone passage."
+ },
+ "proof": [
+  {
+   "text": "Resolve the coefficient complexes by injective-term K-injectives, form the restriction rows, and strictify the finite comparison diagram. Mate the global and open components, and record the overlap mate before cancellation with the target vertex comparison.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-kinjective-mayer-vietoris-presentation",
+    "def-pc-mayer-vietoris-image-chain-data",
+    "lem-pc-ringed-space-direct-image-kinjective-acyclic",
+    "lem-pc-mayer-vietoris-underived-open-counit-square",
+    "def-pc-relative-mv-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-kinjective-mayer-vietoris-presentation",
+  "def-pc-mayer-vietoris-image-chain-data",
+  "lem-pc-ringed-space-direct-image-kinjective-acyclic",
+  "lem-pc-mayer-vietoris-underived-open-counit-square",
+  "def-pc-relative-mv-maps"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08BV, 08HZ, 08FE and 08HY; decomposition of the rows construction into strict-row and overlap-mate subclaims."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "resolved relative Mayer Vietoris row mate cancellation",
+   "results": "No exact theorem found; the split uses the stated relative-row construction.",
+   "date": "2026-10-15",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "DerivedCategory Q map adjunction homEquiv naturality inverse isomorphism",
+   "results": "Generic adjunction naturality and isomorphism cancellation lemmas found.",
+   "date": "2026-10-15",
+   "verdict": "supporting generic lemmas identified"
+  },
+  {
+   "tool": "loogle",
+   "query": "Iso.inv_hom_id Category.assoc congrArg",
+   "results": "Generic categorical cancellation lemmas found.",
+   "date": "2026-10-15",
+   "verdict": "supporting generic lemmas identified"
+  },
+  {
+   "tool": "grep",
+   "query": "Iso.inv_hom_id Category.assoc congrArg",
+   "results": "No matching Mathlib source hit.",
+   "date": "2026-10-15",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeMVDirectImageRows",
+  "date": "2026-10-14",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-relative-mv-direct-image-rows",
+   "place": "Resolved relative short exact row comparison, before the cone-to-quotient passage",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeMVDirectImageRowsPreoverlap",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeMVDirectImageRowsPreoverlap.lean",
+  "declaration": "AlgebraicGeometry.relativeMV_direct_image_rows_preoverlap",
+  "statement": "theorem relativeMV_direct_image_rows_preoverlap\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (hpull : IsPullback g' f' f g)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    (U V : X.Opens) (hcover : U ⊔ V = ⊤) :\n    let G := RingedSpace.moduleDirectImage g.toLRSHom.toShHom\n    let F := G.mapHomologicalComplex (.up ℤ)\n    let η := schemeMVDirectImageLocalization g\n    let adj := relativeMVAdj g\n    let a := relativeMVGlobalArrow f f' g g' hpull K K' φ\n    let b := relativeMVLocalArrow f f' g g' hpull K K' φ\n    ∃ (P : ShortComplex (CochainComplex\n        (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ))\n      (P' : ShortComplex (CochainComplex\n        (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) ℤ))\n      (m : P ⟶ P'.map F)\n      (e₁ : (derivedPullback g).obj (DerivedCategory.Q.obj P.X₁) ≅ a.left)\n      (e₂ : (derivedPullback g).obj (DerivedCategory.Q.obj P.X₂) ≅\n        (b U).left ⊞ (b V).left)\n      (e₃ : (derivedPullback g).obj (DerivedCategory.Q.obj P.X₃) ≅ (b (U ⊓ V)).left)\n      (e₁' : DerivedCategory.Q.obj P'.X₁ ≅ a.right)\n      (e₂' : DerivedCategory.Q.obj P'.X₂ ≅ (b U).right ⊞ (b V).right)\n      (e₃' : DerivedCategory.Q.obj P'.X₃ ≅ (b (U ⊓ V)).right),\n      P.ShortExact ∧ P'.ShortExact ∧\n      (adj.homEquiv _ _).symm (DerivedCategory.Q.map m.τ₁ ≫ η.app P'.X₁) ≫ e₁'.hom =\n        e₁.hom ≫ a.hom ∧\n      (adj.homEquiv _ _).symm (DerivedCategory.Q.map m.τ₂ ≫ η.app P'.X₂) ≫ e₂'.hom =\n        e₂.hom ≫ biprod.map (b U).hom (b V).hom ∧\n      (adj.homEquiv _ _).symm (DerivedCategory.Q.map m.τ₃ ≫ η.app P'.X₃) =\n        e₃.hom ≫ (b (U ⊓ V)).hom ≫ e₃'.inv",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261014T171840-L-2711156",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261014T171840-L-2711156",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
