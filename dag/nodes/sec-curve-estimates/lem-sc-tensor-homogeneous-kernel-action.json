@@ -19,42 +19,38 @@
  ],
  "proof": [
   {
-   "text": "For a closed immersion j:Z→X, the unit on L^a is a sheaf epimorphism by lem-weil-pbc-closed-immersion-unit-quotient. Locally lift s(1), including its restrictions, to x in L^a. The equation b_quotient identifies c_a(s(1)) with p(b_a(x)). Precompose the proposed action equality with boundaryIdealKernelIso in degree d. Its defining inclusion equation identifies a section y of J tensor L^d with its image in L^d.",
+   "text": "Apply closedImmersion_unit_epi to L^a and transport its adjunction to the canonical one by unit_leftAdjointUniq_hom_app. Mathlib isLocallySurjective_iff_epi gives local lifts of s(1) on a covering of each open. The b_quotient equation and naturality of c identify p(b_a(x)) with the restriction of the one global quotient coefficient.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-unit-quotient",
-    "lem-sc-square-zero-tensor-graded-presentation",
-    "lem-sc-square-zero-ideal-tensor-unit"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Evaluate hglobal and then hlocal at that lift and the image of y under the degree-d kernel injection. Apply k_inclusion and b_multiply. Commutativity and tensor symmetry rewrite the product as y multiplied on its right by x. Naturality of the pullback tensor comparison and the adjunction unit identifies this with the explicit tensorIdealSectionMultiply: insert s using the right unitor, apply the inverse pullback tensorator, associate J tensor L^d tensor L^a, multiply tensor powers, and transport d+a to t.",
-   "uses": [
-    "lem-sc-square-zero-tensor-graded-presentation",
+    "lem-weil-pbc-closed-immersion-unit-epi",
     "lem-pc-module-pullback-adjunction",
-    "lem-sc-square-zero-ideal-tensor-unit"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The unit on J tensor L^t is invertible by square-zero annihilation. Use its inverse and boundaryIdealKernelIso in degree t to obtain tensorHomogeneousKernelMap. Cancel the monic i and the source kernel isomorphism. Changing the local lift adds an element in ker p, whose product with the ideal element is zero by squareZero. Sheaf separation glues the equality. No restriction law for arbitrary quotient sections is needed: hglobal already supplies the restrictions of the one global quotient section used here. Unit degrees use the same unitors.",
-   "uses": [
-    "lem-sc-square-zero-ideal-tensor-unit",
     "lem-sc-square-zero-tensor-graded-presentation"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Use k_inclusion at the source, hglobal, and hlocal to compute the included action as b_a(x) times b_d(inclusion y). Commute the factors in B and apply b_multiply in degrees d and a. The local ideal-tensor formula computes the inclusion of tensorHomogeneousKernelMap(y) as the tensorPowAddIso product of inclusion y with x. Apply k_inclusion at the target and eliminate the degree transport h by equality induction; the two included sections agree. Cancel the monic i, provided by T.shortExact.",
+   "uses": [
+    "lem-sc-square-zero-tensor-graded-presentation",
+    "lem-sc-tensor-ideal-section-local-multiplication"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use naturality of both global module maps to identify their restrictions with the local calculation. Apply TopCat.Sheaf.eq_of_locally_eq on the local lifting cover to obtain equality on every open, then module-map extensionality. No global lift or arbitrary quotient-section restriction law is required. The same proof handles zero degrees and empty opens.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-module-pullback-adjunction",
-  "lem-sc-square-zero-ideal-tensor-unit",
   "lem-sc-square-zero-tensor-graded-presentation",
-  "lem-weil-pbc-closed-immersion-unit-quotient"
+  "lem-sc-tensor-ideal-section-local-multiplication",
+  "lem-weil-pbc-closed-immersion-unit-epi"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 09MS, coherent-equation-ses and the graded direct sum, multiplication on its ideal; Tag 0B8S (cohomology.tex), first proof paragraph, quotient action. This is the local homogeneous multiplication part of lem-sc-tensor-coefficient-action-on-summand. The explicit categorical calculation spells out the original parent node's local proof."
+  "place": "Tag 09MS, coherent-equation-ses and the graded direct sum, multiplication on its ideal; Tag 0B8S (cohomology.tex), first proof paragraph, quotient action. This is the local homogeneous multiplication part of lem-sc-tensor-coefficient-action-on-summand. Lean proof uses local unit lifts, the proved local ideal-tensor formula, graded multiplication, monic cancellation and sheaf separation."
  },
  "mathlib_searches": [
   {
@@ -179,9 +175,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261014T034910-L-814814",
+  "landing": "20261014T041917-L-1153797",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,168 @@
+{
+ "id": "lem-sc-tensor-ideal-section-local-multiplication",
+ "kind": "statement",
+ "title": "Local section formula for the raw homogeneous ideal-tensor kernel map",
+ "statement": "Let $j:Z\\to X$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], $J=\\ker j$ [def-sbc-closed-immersion-ideal-sheaf] with $J^2=0$ [def-sbc-ideal-sheaf-powers], and $L$ invertible [def-sc-invertible-module]. Use the canonical tensor-pullback adjunction [lem-pc-module-pullback-adjunction], its unit $\\eta$, and the canonical ideal-kernel and pullback-tensor comparisons [lem-sc-square-zero-ideal-tensor-unit]. For $a,d,t\\in\\mathbb N$, $h:d+a=t$, and $s:\\mathcal O_Z\\to j^*(L^a)$, let $m$ be the composite inverse right unitor, $j^*(J\\otimes L^d)\\otimes s$, inverse pullback tensor comparison, and pullback of the associator followed by $J\\otimes\\operatorname{tensorPowAddIso}_{d,a}^{-1}$ and degree transport $h$. Let $v:K_d\\to K_t$ be the composite inverse ideal-kernel comparison, $\\eta_{J\\otimes L^d}$, $j_*m$, inverse $\\eta_{J\\otimes L^t}$, and target ideal-kernel comparison, where $K_r=\\ker\\eta_{L^r}$. For every open $U\\subset X$, local section $x\\in\\Gamma(U,L^a)$ with $\\eta(x)=s(1)|_U$, and $y\\in\\Gamma(U,K_d)$, the inclusion of $v(y)$ equals the degree-transported section $\\operatorname{tensorPowAddIso}_{d,a}^{-1}(\\operatorname{incl}(y)\\otimes x)$. There is no graded algebra presentation or quotient action in this assertion.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, coherent-equation-ses and the identification of the ideal tensor as an O_Z-module; Tag 08KS (modules.tex), lemma-i-star-equivalence. Read https://stacks.math.columbia.edu/tag/09MS and https://stacks.math.columbia.edu/tag/08KS; the literature checkout is absent on this machine."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-invertible-module",
+  "lem-sc-square-zero-ideal-tensor-unit",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "By lem-sc-pullback-tensor-unit-section the ordinary pullback cotensorator takes the adjunction-unit image of a section tensor to the tensor of the two unit images. Transport this formula along boundaryPullbackComparison, using the unit_leftAdjointUniq_hom_app identity. Expanding boundaryPullbackTensorIso and canceling the comparison isomorphisms proves the same formula for the tensor-formula pullback.",
+   "uses": [
+    "lem-sc-pullback-tensor-unit-section",
+    "lem-pc-module-pullback-adjunction",
+    "lem-sc-square-zero-ideal-tensor-unit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport y to z in J tensor L^d through the inverse ideal-kernel comparison. Its defining inclusion equation identifies the included y with ideal multiplication q_d(z). Naturality of s and hx identify s applied to 1 over j inverse U with the unit image of x. Expand the explicit map: the inverse right unitor inserts 1, tensoring by s inserts this unit image, and the inverse tensor comparison changes the section tensor to the unit image of z tensor x.",
+   "uses": [
+    "lem-sc-square-zero-ideal-tensor-unit",
+    "lem-pc-module-pullback-adjunction",
+    "lem-sc-pullback-tensor-unit-section"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let f be the associator followed by multiplication of degrees d and a and transport along h. Unit naturality changes the pulled-back f applied to the preceding unit image to the unit on J tensor L^t applied to f(z tensor x). Square-zero ideal annihilation makes that unit invertible, so its displayed inverse cancels. The target comparison inclusion equation gives q_t(f(z tensor x)).",
+   "uses": [
+    "lem-sc-square-zero-ideal-tensor-unit",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Whisker exchange, left-unitor naturality, associator naturality and leftUnitor_tensor_hom show f followed by q_t equals q_d whiskered by L^a followed by tensorPowAddIso inverse and the degree transport. Evaluate on z tensor x and use whiskerRight_app_tmulSection and the source inclusion equation. This is the claimed equality, with arbitrary degrees including zero and on arbitrary opens including the empty open.",
+   "uses": [
+    "lem-sc-square-zero-ideal-tensor-unit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-pullback-tensor-unit-section",
+  "lem-sc-square-zero-ideal-tensor-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, coherent-equation-ses and the identification of the ideal tensor as an O_Z-module; Tag 08KS (modules.tex), lemma-i-star-equivalence. Read https://stacks.math.columbia.edu/tag/09MS and https://stacks.math.columbia.edu/tag/08KS; the literature checkout is absent on this machine."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.eq_of_locally_eq",
+   "date": "2026-10-14",
+   "results": "TopCat.Sheaf.eq_of_locally_eq; local-to-global equality tool, not a tensor transport identity.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*section.*pullback|pullback.*tmul|unit.*tmul",
+   "date": "2026-10-14",
+   "results": "25 hits, including presheaf tensor-unit formulas; no exact sheaf kernel formula. Repository rg found the proved Sheaf.AlgebraicGeometry.PullbackTensorUnitSection formula, used as a dependency; TensorBoundaryKernelMapLocalMultiplication is restricted to special block degrees and a different coefficient map.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit of sheaf module pullback sends a tensor product of sections to the tensor of their images under the pullback tensor comparison",
+   "date": "2026-10-14",
+   "results": "SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; no formula for the specific boundaryPullbackTensorIso and kernel transport.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adjunction unit for pullback of modules respects tensor products of local sections",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TensorHomogeneousKernelAction",
+  "date": "2026-10-14",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS, coherent-equation-ses: the identification of the ideal coefficient on Z; explicit local tensor multiplication part of lem-sc-tensor-homogeneous-kernel-action, proof step 2.",
+   "via": [
+    "lem-sc-tensor-homogeneous-kernel-action",
+    "lem-sc-tensor-coefficient-action-on-summand",
+    "lem-sc-square-zero-tensor-graded-coefficient-sheaf-action",
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorIdealSectionLocalMultiplication",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorIdealSectionLocalMultiplication.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorIdealSection_local_multiplication",
+  "statement": "theorem tensorIdealSection_local_multiplication {X Z : Scheme.{u}} (j : Z ⟶ X)\n    [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)\n    (a d t : ℕ) (h : d + a = t)\n    (s : 𝟙_ Z.Modules ⟶ (tensorPullback j).obj (L.tensorPow a))\n    (U : X.Opens) (x : Γ(L.tensorPow a, U))\n    (hx : (tensorGradedUnit j (L.tensorPow a)).app U x =\n      ((pushforward j).obj ((tensorPullback j).obj (L.tensorPow a))).val.map\n        (homOfLE le_top).op (s.app ⊤ (1 : Γ(Z, ⊤))))\n    (y : Γ(kernel (tensorGradedUnit j (L.tensorPow d)), U)) :\n  let m : (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow d) ⟶\n      (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow t) :=\n    (ρ_ _).inv ≫ ((tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow d)) ◁ s ≫\n      (boundaryPullbackTensorIso j (j.ker.toModules ⊗ L.tensorPow d)\n        (L.tensorPow a)).inv ≫\n      (tensorPullback j).map ((α_ _ _ _).hom ≫\n        j.ker.toModules ◁ (L.tensorPowAddIso d a).inv ≫\n        j.ker.toModules ◁ eqToHom (congrArg L.tensorPow h))\n  let _inst := square_zero_ideal_tensor_unit_isIso j L hI t\n  let v : kernel (tensorGradedUnit j (L.tensorPow d)) ⟶\n      kernel (tensorGradedUnit j (L.tensorPow t)) :=\n    (boundaryIdealKernelIso j (L.tensorPow d)).inv ≫\n    (Classical.choose (exists_tensorPullbackAdjunction j)).unit.app\n      (j.ker.toModules ⊗ L.tensorPow d) ≫\n    (pushforward j).map m ≫\n    inv ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app\n      (j.ker.toModules ⊗ L.tensorPow t)) ≫\n    (boundaryIdealKernelIso j (L.tensorPow t)).hom\n  (kernel.ι (tensorGradedUnit j (L.tensorPow t))).app U (v.app U y) =\n    (eqToHom (congrArg L.tensorPow h)).app U\n      ((L.tensorPowAddIso d a).inv.app U\n        (tmulSection ((kernel.ι (tensorGradedUnit j (L.tensorPow d))).app U y) x))",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261014T041917-L-1153797",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261014T041917-L-1153797",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
