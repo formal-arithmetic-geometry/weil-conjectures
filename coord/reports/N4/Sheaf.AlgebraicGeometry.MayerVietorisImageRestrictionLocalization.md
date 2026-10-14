@@ -1,0 +1,26 @@
+## What changed
+Proved `AlgebraicGeometry.schemeMV_image_restriction_localization` with its existing signature unchanged. The proof transports the explicit restriction chain to the homotopy quotient, applies `schemeMVOpenRestriction_unit_normalization`, cancels the exact X-restriction factors, and uses naturality of the derived restriction comparison. Added the proved intermediate theorem `AlgebraicGeometry.schemeMV_restriction_chain_quotient_transport` in a sibling module. Its import in the item is proof-only. No definition or existing statement changed.
+
+## Proved and sorry left
+Closed the one original hole: `AlgebraicGeometry.schemeMV_image_restriction_localization` (node `lem-pc-mayer-vietoris-image-restriction-localization`).
+Also proved the draft's split-off hole: `AlgebraicGeometry.schemeMV_restriction_chain_quotient_transport` (node `lem-pc-mayer-vietoris-restriction-chain-quotient-transport`).
+Added holes: none. Sorry left in delivered modules: none. This closes one original hole with no new holes; it is not a decomposition into open statements. Upstream dependencies are assessed separately by the axiom checks and global ledger.
+
+## No longer needed
+No import or node from the original item's proof dependencies is removed. Its original dependency modules remain reachable and used, directly or through the transport helper. Removed the draft helper's proof-only import of `Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenRestrictionNormalization`: transport does not use normalization. That module stays imported by the item and is not pruned from the target closure. No modules pruned.
+
+## Where the brief, the DAG or earlier work was wrong
+The original DAG already described quotient transport, but did not name a separate intermediate theorem for it. The first draft left that intermediate theorem open and incorrectly recorded normalization as its proof dependency. The second reading proved it from the existing constructions and Mathlib's `Functor.mapDerivedCategoryFactorsh_hom_app`, so normalization is used only by the final theorem. The first draft's new node had an incomplete Lean signature and no searches; these are repaired.
+
+## New nodes
+`lem-pc-mayer-vietoris-restriction-chain-quotient-transport` states the quotient transport identity for the explicit four-map complex restriction chain. It is proved, strictly intermediate, and does not mention the derived restriction comparison's normalization. Source: Stacks Tags 08FE and 079V, implemented using the existing constructions and Mathlib exact-functor comparison. Loogle, Lean Finder, and source searches found the generic factorization ingredients but no existing scheme-specific transport theorem; LeanSearch returned Internal Server Error, recorded as unavailable. Its complete Lean signature, statement dependencies, proof steps, and search results are recorded. No change records are needed.
+
+## Second reading by N4
+1. Compared every existing sandbox module with the repository version. The two dependency copies were identical and were removed from the delivery set. The item's original signature is byte-for-byte unchanged; only its proof and a plain proof import changed. No existing definitions, hypotheses, conclusions, or visibility changed. Verdict: pass.
+2. Read both delivered modules in full and compiled them in import order with lcompile.py. There are no sorry terms or forbidden constructs, and no hollow definitions or existence-witness choices. Scratch #print axioms checks for both theorems show exactly propext, Classical.choice and Quot.sound, with no sorryAx. The delivery tool also runs its probe. Verdict: pass.
+3. The draft's new hole is a proper transport identity: it uses the explicit chain, exact-restriction comparisons, and direct-image units; it does not assert the target's normalization identity. Read the constructions, searched Mathlib and both library roots, and proved the hole. Empty/full opens, identity morphisms, and the zero complex require no special hypotheses: the argument uses functorial identities and quotient comparisons on every complex. Verdict: pass; no split-off holes remain.
+4. Kept the existing homotopy normalization route, used Mathlib's exact-factor comparison for transport, and removed the helper's unused normalization import. The unit `sk-thm-picard-semicon` has empty realized bindings; no unit or chapter route is changed or bypassed. All original proof dependencies remain used. Verdict: pass.
+5. Updated the original node's proof, proof_deps and proof_origin to describe the actual reduction. Repaired the new node's full signature, self-contained statement, defining dependencies, proof steps, search records and audit fields. Both nodes retain the item's chapter and unit. Verdict: pass.
+Validation: both modules compiled locally in import order; both printed axiom sets contain only propext, Classical.choice and Quot.sound. The transport theorem uses a documented local heartbeat budget for the derived/sheaf-category conversions and remains within the 60-second single-file limit.
+
+Changes by the second reader: proved the transport hole; removed unused simp arguments and the helper's unused import; removed unchanged dependency copies; repaired DAG metadata and this report.

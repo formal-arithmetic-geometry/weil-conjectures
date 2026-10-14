@@ -1,0 +1,164 @@
+{
+ "id": "lem-pc-mayer-vietoris-restriction-chain-quotient-transport",
+ "kind": "statement",
+ "title": "Quotient transport for the restriction localization chain",
+ "statement": "For schemes X and Y, a morphism h : X → Y, an open W of Y, and every cochain complex I of modules on X (with the derived-category universe assumptions below), the explicit restriction/localization chain [def-pc-mayer-vietoris-restriction-localization-chain] equals the homotopy restriction chain transported by the canonical quotient comparisons. The units are those of [def-pc-mayer-vietoris-image-chain-data], and the restriction comparison is [def-pc-derived-mayer-vietoris-open-counit-model]. Exact statement:\ntheorem schemeMV_restriction_chain_quotient_transport\n    (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ T : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    [∀ T : Y.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :\n    let F := RingedSpace.moduleDirectImage h.toLRSHom.toShHom\n    let G := RingedSpace.moduleDirectImage (h ∣_ W).toLRSHom.toShHom\n    let LX := schemeOpenRestriction X (h ⁻¹ᵁ W)\n    let LY := schemeOpenRestriction Y W\n    let K := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj I\n    schemeMVRestrictionLocalizationChain X Y h W I =\n      LY.mapDerivedCategory.map\n        ((DerivedCategory.quotientCompQhIso _).inv.app\n            ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj I) ≫\n          DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (ComplexShape.up ℤ)).inv.app I)) ≫\n      (LY.mapDerivedCategoryFactorsh.hom.app\n          ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≫\n        DerivedCategory.Qh.map ((schemeMVHomotopyOpenRestriction h W).hom.app K) ≫\n        G.rightDerivedFunctorUnit.app ((LX.mapHomotopyCategory (ComplexShape.up ℤ)).obj K)) ≫\n      G.rightDerivedFunctor.map (LX.mapDerivedCategoryFactorsh.inv.app K) ≫\n      G.rightDerivedFunctor.map\n        (LX.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).hom.app I))",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08FE and 079V"
+ },
+ "stmt_deps": [
+  "def-pc-mayer-vietoris-restriction-localization-chain",
+  "def-pc-mayer-vietoris-image-chain-data",
+  "def-pc-derived-mayer-vietoris-open-counit-model",
+  "def-pc-derived-mayer-vietoris-canonical-data"
+ ],
+ "proof": [
+  {
+   "text": "Expand the four-map chain and complex direct-image localization unit using [def-pc-mayer-vietoris-restriction-localization-chain] and [def-pc-mayer-vietoris-image-chain-data].",
+   "uses": [
+    "def-pc-mayer-vietoris-restriction-localization-chain",
+    "def-pc-mayer-vietoris-image-chain-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Mathlib Functor.mapDerivedCategoryFactorsh_hom_app for both exact restrictions. On quotient objects the quotient comparison components and mapHomotopyCategoryFactors are identities. Functors preserve identities; cancel the X-restriction hom factor to identify its inverse factors.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Expand [def-pc-derived-mayer-vietoris-open-counit-model]. Its homotopy restriction comparison is the quotient of the termwise complex restriction map; the composition identity factor disappears by map_id. The two remaining chains agree definitionally.",
+   "uses": [
+    "def-pc-derived-mayer-vietoris-open-counit-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-mayer-vietoris-restriction-localization-chain",
+  "def-pc-mayer-vietoris-image-chain-data",
+  "def-pc-derived-mayer-vietoris-open-counit-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "N4",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08FE and 079V"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactorsh.*app|quotientCompQhIso.*naturality",
+   "results": [
+    "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/Basic.lean"
+   ],
+   "date": "2026-10-14",
+   "verdict": "Generic quotient/exact-functor ingredients found and used; no existing scheme restriction chain transport theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryFactorsh\"",
+   "results": [
+    "CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+    "CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh",
+    "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app"
+   ],
+   "date": "2026-10-14",
+   "verdict": "Generic quotient/exact-functor ingredients found and used; no existing scheme restriction chain transport theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functor comparison on complexes equals comparison on the homotopy quotient; transport the derived unit through quotient functor",
+   "results": [
+    "CategoryTheory.Functor.instLiftingHomotopyCategoryHomologicalComplexUpToQuasiIsoQhQuasiIsoCompMapHomotopyCategoryMapHomologicalComplexUpToQuasiIso",
+    "CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory",
+    "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh",
+    "CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+    "CategoryTheory.Functor.mapDerivedCategoryFactors",
+    "DerivedCategory.quotientCompQhIso",
+    "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors",
+    "CategoryTheory.NatTrans.leftDerivedToHomotopyCategory"
+   ],
+   "date": "2026-10-14",
+   "verdict": "Generic quotient/exact-functor ingredients found and used; no existing scheme restriction chain transport theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of exact derived functor comparison with homotopy quotient on complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable; other services and source searches used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MayerVietorisImageRestrictionLocalization",
+  "date": "2026-10-14",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "complex quotient transport in the open-restriction/direct-image unit comparison",
+   "via": [
+    "lem-pc-mayer-vietoris-image-restriction-localization",
+    "lem-pc-mayer-vietoris-image-localization-compatibility",
+    "lem-pc-mayer-vietoris-image-resolution-comparison-intersection",
+    "lem-pc-mayer-vietoris-image-resolution-comparison",
+    "lem-pc-derived-mayer-vietoris-direct-image-boundary"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MayerVietorisRestrictionChainQuotientTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/MayerVietorisRestrictionChainQuotientTransport.lean",
+  "declaration": "AlgebraicGeometry.schemeMV_restriction_chain_quotient_transport",
+  "statement": "theorem schemeMV_restriction_chain_quotient_transport\n    (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ T : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    [∀ T : Y.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :\n    let F := RingedSpace.moduleDirectImage h.toLRSHom.toShHom\n    let G := RingedSpace.moduleDirectImage (h ∣_ W).toLRSHom.toShHom\n    let LX := schemeOpenRestriction X (h ⁻¹ᵁ W)\n    let LY := schemeOpenRestriction Y W\n    let K := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj I\n    schemeMVRestrictionLocalizationChain X Y h W I =\n      LY.mapDerivedCategory.map\n        ((DerivedCategory.quotientCompQhIso _).inv.app\n            ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj I) ≫\n          DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (ComplexShape.up ℤ)).inv.app I)) ≫\n      (LY.mapDerivedCategoryFactorsh.hom.app\n          ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≫\n        DerivedCategory.Qh.map ((schemeMVHomotopyOpenRestriction h W).hom.app K) ≫\n        G.rightDerivedFunctorUnit.app ((LX.mapHomotopyCategory (ComplexShape.up ℤ)).obj K)) ≫\n      G.rightDerivedFunctor.map (LX.mapDerivedCategoryFactorsh.inv.app K) ≫\n      G.rightDerivedFunctor.map\n        (LX.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).hom.app I))",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-14"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T020516-L-3813165",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261014T020516-L-3813165",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

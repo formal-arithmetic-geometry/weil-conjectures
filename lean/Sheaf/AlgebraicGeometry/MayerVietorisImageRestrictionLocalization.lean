@@ -6,6 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.MayerVietorisRestrictionLocalizationChain
 import Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenRestrictionNormalization
+import Sheaf.AlgebraicGeometry.MayerVietorisRestrictionChainQuotientTransport
 
 /-! # Complex localization of the open restriction square
 
@@ -55,6 +56,23 @@ theorem schemeMV_image_restriction_localization
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
     (schemeMVRestrictionLocalizationChain X Y h W I) ≫
       (schemeMVOpenRestrictionComparison h W).inv.app (DerivedCategory.Q.obj I) =
-    (schemeMVDerivedRestriction Y W).map ((schemeMVDirectImageLocalization h).app I) := by sorry
+    (schemeMVDerivedRestriction Y W).map ((schemeMVDirectImageLocalization h).app I) := by
+  let F := RingedSpace.moduleDirectImage h.toLRSHom.toShHom
+  let G := RingedSpace.moduleDirectImage (h ∣_ W).toLRSHom.toShHom
+  let LX := schemeOpenRestriction X (h ⁻¹ᵁ W)
+  let LY := schemeOpenRestriction Y W
+  let K := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj I
+  have hn := schemeMVOpenRestriction_unit_normalization X Y h W K
+  rw [schemeMV_restriction_chain_quotient_transport]
+  rw [← hn]
+  simp only [Category.assoc, ← Functor.map_comp_assoc]
+  simp only [K, Iso.hom_inv_id_app_assoc]
+  have ha := (schemeMVOpenRestrictionComparison h W).hom.naturality
+    ((DerivedCategory.quotientCompQhIso _).hom.app I)
+  dsimp only [Functor.comp_map] at ha
+  rw [← reassoc_of% ha]
+  simp only [Iso.hom_inv_id_app]
+  simp [schemeMVDirectImageLocalization, Functor.map_comp, Category.assoc]
+
 
 end AlgebraicGeometry
