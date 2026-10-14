@@ -14719,3 +14719,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:46 L: merged deliver/U3/Sheaf.AlgebraicGeometry.HorizontalTransferInverseFormula (stage 3; reviewer PASS; first push; landing 20261014T074649-L-3571178 (proof); batch 20261014T074647; modules 1; new nodes 0)
 - 07:46 L: merged deliver/V4/Sheaf.Algebra.Homology.AffinePushforwardComparisonFactorization (stage 3; reviewer PASS; first push; landing 20261014T074649-L-3571331 (proof); batch 20261014T074647; modules 1; new nodes 0)
 - 07:46 L: merged deliver/V4/Sheaf.AlgebraicGeometry.FlatTelescopeArrowBarData (stage 3; reviewer PASS; first push; landing 20261014T074650-L-3571495 (interface); batch 20261014T074647; modules 2; new nodes 1)
+- 07:49 L: returned deliver/G3/Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup (reviewer RETURN: (reviewer X-c05cd, head c05cdabda) H2 (review point 6): In dag/nodes/sec-abelian-varieties/lem-sc-picard-scalar-cech-ext)
