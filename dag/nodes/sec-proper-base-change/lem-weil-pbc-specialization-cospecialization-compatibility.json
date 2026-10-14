@@ -47,9 +47,108 @@
   "lem-weil-pbc-geometric-point-pullback-stalk",
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $K=G[0]$, $K'=p^{-1}K$ and $A=(Rf_*K)_{\\bar s}$. Form the canonical map $a:A\\to R\\Gamma(X',K')$: first apply the representative-neighbourhood restriction $r$ to the complex $Rf_*K$, then the derived exchange for $S'\\to S$, and finally Leray. Exactness of strict-local global sections makes the termwise $r$ a derived map. The germ-restriction isomorphism and the strict-local global-homology comparison show that $a$ induces isomorphisms in all degrees. This is precisely the canonical strict-henselization identification used in the source. In what follows we use the map $a$ itself, so no replacement of $Rf_*K$ by $Rf'_*K'$ as a sheaf on $S'$ is asserted.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-restriction",
+    "lem-weil-pbc-strict-local-germ-restriction-iso",
+    "lem-weil-pbc-strict-local-base-change-global-homology",
+    "def-weil-pbc-derived-exchange",
+    "lem-weil-pbc-cohomology-pullback-derived-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJV, lemma-specialization-cospecialization, proof; K=G[0]"
+   }
+  },
+  {
+   "text": "Let $g:S'\\to S$ and $M=g^{-1}Rf_*K$. Under $r$, the map $sp$ is restriction from $\\Gamma(S',M)$ to the geometric point $\\bar t$; the corresponding restriction to the canonical lift of $\\bar s$ is the original germ at $\\bar s$. Indeed, in each degree represent a germ by $(V,\\bar v,\\sigma)$. The limit leg $S'\\to V$ used in $r$ sends $\\bar t$ to the pointed lift defining $sp$, and sends the closed geometric point to $\\bar v$. Both descriptions therefore send the germ to the same restriction of $\\sigma$. The colimit defining the stalk gives equality of these maps of complexes. Global sections at the geometric points identify these restrictions with the stated derived stalk maps.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-strict-henselization-restriction",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-geometric-point-pullback-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJV, lemma-specialization-cospecialization, proof; K=G[0]"
+   }
+  },
+  {
+   "text": "For $v=i,h$ write $v^*$ for pullback on derived global sections. Then $\\rho_{\\bar s}=i^*a$ and $\\rho_{\\bar t}sp=h^*a$. To check the canonical arrows, write $z:\\operatorname{Spec}\\Omega_u\\to S'$ for the corresponding geometric point and $f_u:X_u\\to\\operatorname{Spec}\\Omega_u$. Horizontal coherence says that the outer exchange is $\\Ex_z\\circ z^{-1}\\Ex_g$. Restriction of sections to $z$ is natural in the complex on $S'$, hence it commutes with $\\Ex_g$. Step 2 identifies restriction before $\\Ex_g$ with $sp$ for $u=\\bar t$ and with the identity germ for $u=\\bar s$. It remains to identify restriction followed by $\\Ex_z$ with $v^*$ after Leray. Choose a bounded below K-injective representative $I$ of $K$, a K-injective resolution $j:p^{-1}I\\to J$, and a K-injective resolution $k:v^{-1}J\\to L$. The termwise exchange theorem represents $\\Ex_g$ by $f'_*(j)\\Ex^0_{g,I}$ and $\\Ex_z$ by $f_{u,*}(k)\\Ex^0_{z,J}$. The underived global-germ/exchange identity for $f'$ and $z$ identifies the composite from $\\Gamma(X',J)$, through the germ of $f'_*J$ and $\\Ex^0_{z,J}$, with restriction $\\Gamma(X',J)\\to\\Gamma(X_u,v^{-1}J)$. Postcompose both sides with $\\Gamma(X_u,k)$. By the derived-unit description the resulting map $\\Gamma(X',J)\\to\\Gamma(X_u,L)$ represents $v^*$. These equalities hold for complexes before localization. The termwise comparison theorem and the uniqueness of comparison homotopy classes into K-injectives identify these representatives with the specified derived arrows. Thus both equations hold in $D^+(\\operatorname{Ab})$, rather than merely on cohomology groups.",
+   "uses": [
+    "lemma-weil-pbc-derived-exchange-coherence",
+    "def-weil-pbc-underived-exchange",
+    "lem-weil-pbc-underived-global-germ-exchange",
+    "lem-weil-pbc-derived-exchange-termwise",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-cohomology-pullback-derived-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJV, lemma-specialization-cospecialization, proof; K=G[0]"
+   }
+  },
+  {
+   "text": "Set $B=Rh_*h^{-1}K'$ and let $\\lambda:R\\Gamma(X',B)\\xrightarrow{\\sim}R\\Gamma(X_{\\bar t},h^{-1}K')$ be Leray. The derived-unit formula gives $h^*=\\lambda\\circ R\\Gamma(X',\\beta)$. Local acyclicity gives the isomorphism $\\delta=i^{-1}\\beta:i^{-1}K'\\xrightarrow{\\sim}i^{-1}B$. Its hypotheses are exactly the original local acyclicity of $f$ relative to $G$ and the two chosen geometric points; neither properness nor torsion is used.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "lem-weil-pbc-local-acyclicity-closed-fibre-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJV, lemma-specialization-cospecialization, proof; K=G[0]"
+   }
+  },
+  {
+   "text": "Naturality of pullback along $i$ for the derived arrow $\\beta:K'\\to B$ gives $i_B^*\\circ R\\Gamma(X',\\beta)=R\\Gamma(X_{\\bar s},\\delta)\\circ i_{K'}^*$. Explicitly, the unit of $i^{-1}\\dashv Ri_*$ satisfies $Ri_*i^{-1}\\beta\\circ\\eta^D_{i,K'}=\\eta^D_{i,B}\\circ\\beta$. Apply $R\\Gamma(X',-)$ and then the natural Leray identification. By the derived-unit formula the two resulting composites are exactly the two sides of the displayed equality. This is unit naturality followed by functoriality, so it applies to $B$ even though $B$ need not be a sheaf in degree zero.",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-cohomology-pullback-derived-unit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJV, lemma-specialization-cospecialization, proof; K=G[0]"
+   }
+  },
+  {
+   "text": "Using the definition of $cosp$ and steps 3--5, calculate in $D^+(\\operatorname{Ab})$:\n$$\\begin{aligned}\ncosp\\,\\rho_{\\bar t}\\,sp\n&=R\\Gamma(X_{\\bar s},\\delta^{-1})\\,i_B^*\\,\\lambda^{-1}\\,h^*\\,a\\\\\n&=R\\Gamma(X_{\\bar s},\\delta^{-1})\\,i_B^*\\,R\\Gamma(X',\\beta)\\,a\\\\\n&=R\\Gamma(X_{\\bar s},\\delta^{-1})\\,R\\Gamma(X_{\\bar s},\\delta)\\,i_{K'}^*\\,a\\\\\n&=i_{K'}^*a=\\rho_{\\bar s}.\n\\end{aligned}$$\nThe cancellation uses only functoriality and $\\delta^{-1}\\delta=\\mathrm{id}$. No cancellation of $a$, $sp$, either fibre map, or $i_B^*$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJV, lemma-specialization-cospecialization, proof; K=G[0]"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-restriction",
+  "lem-weil-pbc-strict-local-germ-restriction-iso",
+  "lem-weil-pbc-strict-local-base-change-global-homology",
+  "def-weil-pbc-derived-exchange",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lemma-weil-pbc-derived-exchange-coherence",
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-underived-global-germ-exchange",
+  "lem-weil-pbc-derived-exchange-termwise",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-local-acyclicity-closed-fibre-unit",
+  "prop-weil-pbc-derived-inverse-image-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJV, lemma-specialization-cospecialization, proof; K=G[0]"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -99,15 +198,103 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cospecialization|specialization.*cohomology",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Specialization and cospecialization compatibility in derived etale cohomology",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally acyclic scheme morphism specialization of derived direct image stalks followed by fibre comparison and cospecialization equals the special fibre comparison",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap, AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap, TopCat.Presheaf.stalkSpecializes_stalkPushforward, AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap_apply, AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap_assoc, AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap_apply, AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap_assoc, TopCat.Presheaf.stalkSpecializes_stalkFunctor_map",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cospecialization\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of restriction of etale cohomology to geometric fibres with specialization and the inverse of the local acyclicity adjunction unit",
+   "results": "8 hits: CategoryTheory.Sheaf.ΓRes_naturality, CategoryTheory.Sheaf.ΓRes_map, CategoryTheory.Sheaf.ΓRes_map_assoc, AlgebraicGeometry.Scheme.Hom.naturality_assoc, AlgebraicGeometry.Scheme.Hom.naturality, AlgebraicGeometry.Scheme.Γevaluation_naturality, AlgebraicGeometry.Scheme.Hom.map_appLE, AlgebraicGeometry.Scheme.Hom.appLE_map",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proper-locally-acyclic-specialization",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-specialization-cospecialization-compatibility",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0GJV for abelian G in degree zero; retained the statement and expanded the germ restriction, exchange, derived-unit naturality and inverse-unit cancellation using existing DAG nodes. No new nodes or attachments.",
+  "blueprint": "Proof, first paragraph: \"the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$\". Constructibility clause, via the existing 0GL0 -> 0GKW -> 0GKV case (a) -> 0GKD branch; 0GKD invokes 0GJQ, 0GJR and 0GJW. Input 0GJV (lemma-specialization-cospecialization).",
+  "requested_generic_tools": [
+   {
+    "node": "lem-weil-pbc-strict-local-germ-restriction-iso",
+    "why": "Generic strict-local comparison or derived exchange/adjunction comparison used to identify the canonical arrows in Tag 0GJV; no local-acyclicity conclusion or proper-base-change route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-strict-local-base-change-global-homology",
+    "why": "Generic strict-local comparison or derived exchange/adjunction comparison used to identify the canonical arrows in Tag 0GJV; no local-acyclicity conclusion or proper-base-change route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "why": "Generic strict-local comparison or derived exchange/adjunction comparison used to identify the canonical arrows in Tag 0GJV; no local-acyclicity conclusion or proper-base-change route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Generic strict-local comparison or derived exchange/adjunction comparison used to identify the canonical arrows in Tag 0GJV; no local-acyclicity conclusion or proper-base-change route is replaced."
+   },
+   {
+    "node": "lemma-weil-pbc-derived-exchange-coherence",
+    "why": "Generic strict-local comparison or derived exchange/adjunction comparison used to identify the canonical arrows in Tag 0GJV; no local-acyclicity conclusion or proper-base-change route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-underived-global-germ-exchange",
+    "why": "Generic strict-local comparison or derived exchange/adjunction comparison used to identify the canonical arrows in Tag 0GJV; no local-acyclicity conclusion or proper-base-change route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-derived-exchange-termwise",
+    "why": "Generic strict-local comparison or derived exchange/adjunction comparison used to identify the canonical arrows in Tag 0GJV; no local-acyclicity conclusion or proper-base-change route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic strict-local comparison or derived exchange/adjunction comparison used to identify the canonical arrows in Tag 0GJV; no local-acyclicity conclusion or proper-base-change route is replaced."
+   },
+   {
+    "node": "prop-weil-pbc-derived-inverse-image-adjunction",
+    "why": "Generic strict-local comparison or derived exchange/adjunction comparison used to identify the canonical arrows in Tag 0GJV; no local-acyclicity conclusion or proper-base-change route is replaced."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-e82278771",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-e82278771 (reviewer sub-agent of L); spot-checked: Mathematics, hypotheses, canonical base-change morphisms, coefficient category, source route, edge cases, and all six proof steps check against Stacks Tags 0GJV/0GJU and cited DAG statements. Repair required: created.item incorrectly names lem-weil-pbc-proper-locally-acyclic-specialization; corrected full DAG JSON is in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-specialization-cospecialization-compatibility.json.; 1 file(s) fixed by the reviewer"
+ }
 }
