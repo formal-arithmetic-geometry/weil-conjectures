@@ -42,13 +42,10 @@ theorem Scheme.Hom.pic_proper_ntorsion_coker
   let φ : C.Pic →* Multiplicative (ZMod n) :=
     (Int.castAddHom (ZMod n)).toMultiplicative.comp
       ((MonoidHom.fst (Multiplicative ℤ) P0).comp e.toMonoidHom)
-  have hφ : Function.Surjective φ := by
-    intro a
-    obtain ⟨z, hz⟩ := ZMod.intCast_surjective (Multiplicative.toAdd a)
-    refine ⟨e.symm (Multiplicative.ofAdd z, 1), ?_⟩
-    change Multiplicative.ofAdd (((e (e.symm (Multiplicative.ofAdd z, 1))).1.toAdd : ℤ) :
-      ZMod n) = a
-    simpa using congrArg Multiplicative.ofAdd hz
+  have hφ : Function.Surjective φ :=
+    (Multiplicative.ofAdd.surjective.comp
+      (ZMod.intCast_surjective.comp Multiplicative.toAdd.surjective)).comp
+      (Prod.fst_surjective.comp e.surjective)
   have hker : (powMonoidHom n : C.Pic →* C.Pic).range = φ.ker := by
     ext L
     constructor
