@@ -12,7 +12,32 @@
  ],
  "proof": [
   {
-   "text": "naturality of the derived counits.",
+   "text": "Use the full faithful whiskering by the homotopy quotient to precompose the given universal counits. Change localization and target functors by the explicit quotient isomorphisms. The helper kan_precomp_full proves the precomposed universal property by lifting transformations through the full faithful functor; kan_change_iso transports terminal objects along the right-extension equivalences. Reuse kan_precomp_full from RawTransportIso via proof-only import all.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pc-derived-extension-ring-equiv-raw-transport-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The additive equivalences eR and eB is an equivalence, both on complexes and on derived categories (Localization.isEquivalence). Descend q using the full faithful Localization whiskering functor to show E is also an equivalence. Precompose the source universal counit through restriction and postcompose the target counit with E; kan_postcomp_equivalence proves preservation of the terminal right extension. Reuse derived_equivalence and kan_postcomp_equivalence from RawTransportIso via proof-only import all.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-module-base-change",
+    "lem-pc-derived-extension-ring-equiv-raw-transport-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary comparison is the composite of the supplied t with q inverse, associating the functors. Apply Functor.rightKanExtensionUniqueOfIso to these universal extensions, and whisker with DerivedCategory.Q and the explicit equivalence/localization comparison isomorphisms.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate liftOfIsRightKanExtension_fac_app at K. Precompose with the inverse source comparison and postcompose with q.hom. The mapHomotopyCategoryFactors components are identities; functoriality, associativity and cancellation of inverse isomorphisms give the displayed original counit equation for the constructed comparison.",
    "uses": [
     "def-weil-abstract-derived-category",
     "def-weil-module-base-change"
@@ -22,14 +47,15 @@
  ],
  "proof_deps": [
   "def-weil-abstract-derived-category",
-  "def-weil-module-base-change"
+  "def-weil-module-base-change",
+  "lem-pc-derived-extension-ring-equiv-raw-transport-iso"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "P1",
+  "group": "Y2",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/06Y6",
-  "place": "Lemma 15.61.1"
+  "place": "Generic additive-functor transport; reuse three existing private helpers through import all and construct the normalized comparison by right Kan extension uniqueness."
  },
  "mathlib_searches": [
   {
@@ -76,12 +102,12 @@
   "module": "Sheaf.Algebra.Homology.DerivedExtensionRingEquivRawCounitEquation",
   "file": "lean/Sheaf/Algebra/Homology/DerivedExtensionRingEquivRawCounitEquation.lean",
   "declaration": "ModuleCat.raw_transport_counit_equation",
-  "statement": "theorem raw_transport_counit_equation {R₀ B₀ R B : Type u} [CommRing R₀] [CommRing B₀] [CommRing R] [CommRing B] [Algebra R₀ B₀] [Algebra R B] [HasDerivedCategory.{w} (ModuleCat.{u} R₀)] [HasDerivedCategory.{w} (ModuleCat.{u} B₀)] [HasDerivedCategory.{w'} (ModuleCat.{u} R)] [HasDerivedCategory.{w'} (ModuleCat.{u} B)] (L₀ : DerivedCategory (ModuleCat.{u} R₀) ⥤ DerivedCategory (ModuleCat.{u} B₀)) (L : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B)) (ε₀ : DerivedCategory.Qh ⋙ L₀ ⟶ (extendScalars (algebraMap R₀ B₀)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) (ε : DerivedCategory.Qh ⋙ L ⟶ (extendScalars (algebraMap R B)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) (h₀ : L₀.IsLeftDerivedFunctor ε₀ (HomotopyCategory.quasiIso _ (.up ℤ))) (h : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ))) (eR : R₀ ≃+* R) (eB : B₀ ≃+* B) (hRB : eB.toRingHom.comp (algebraMap R₀ B₀) = (algebraMap R B).comp eR.toRingHom) : ∀ (E : DerivedCategory (ModuleCat.{u} B) ⥤ DerivedCategory (ModuleCat.{u} B₀)) (q : (HomotopyCategory.quotient (ModuleCat.{u} B) (.up ℤ) ⋙ DerivedCategory.Qh) ⋙ E ≅ (restrictScalars.{u} eB.toRingHom).mapHomologicalComplex (.up ℤ) ⋙ (HomotopyCategory.quotient (ModuleCat.{u} B₀) (.up ℤ) ⋙ DerivedCategory.Qh)) (t : (restrictScalars.{u} eR.toRingHom).mapHomologicalComplex (.up ℤ) ⋙ (extendScalars (algebraMap R₀ B₀)).mapHomologicalComplex (.up ℤ) ≅ (extendScalars (algebraMap R B)).mapHomologicalComplex (.up ℤ) ⋙ (restrictScalars.{u} eB.toRingHom).mapHomologicalComplex (.up ℤ)) (a : (restrictScalars.{u} eR.toRingHom).mapHomologicalComplex (.up ℤ) ⋙ HomotopyCategory.quotient (ModuleCat.{u} R₀) (.up ℤ) ⋙ DerivedCategory.Qh ⋙ L₀ ≅ HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ) ⋙ DerivedCategory.Qh ⋙ L ⋙ E), ∀ K : CochainComplex (ModuleCat.{u} R) ℤ, a.hom.app K ≫ E.map (ε.app ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).obj K)) ≫ q.hom.app (((extendScalars (algebraMap R B)).mapHomologicalComplex (.up ℤ)).obj K) = ε₀.app ((HomotopyCategory.quotient (ModuleCat.{u} R₀) (.up ℤ)).obj (((restrictScalars.{u} eR.toRingHom).mapHomologicalComplex (.up ℤ)).obj K)) ≫ ((HomotopyCategory.quotient (ModuleCat.{u} B₀) (.up ℤ) ⋙ DerivedCategory.Qh).map (t.hom.app K))",
+  "statement": "theorem raw_transport_counit_equation\n    {C₀ D₀ C D : Type u}\n    [Category.{v} C₀] [Category.{v} D₀] [Category.{v} C] [Category.{v} D]\n    [Abelian C₀] [Abelian D₀] [Abelian C] [Abelian D]\n    [HasDerivedCategory.{w} C₀] [HasDerivedCategory.{w} D₀]\n    [HasDerivedCategory.{w'} C] [HasDerivedCategory.{w'} D]\n    (F₀ : C₀ ⥤ D₀) (F : C ⥤ D) [F₀.Additive] [F.Additive]\n    (L₀ : DerivedCategory C₀ ⥤ DerivedCategory D₀)\n    (L : DerivedCategory C ⥤ DerivedCategory D)\n    (ε₀ : DerivedCategory.Qh ⋙ L₀ ⟶\n      F₀.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    (ε : DerivedCategory.Qh ⋙ L ⟶\n      F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    (h₀ : L₀.IsLeftDerivedFunctor ε₀ (HomotopyCategory.quasiIso _ (.up ℤ)))\n    (h : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ)))\n    (eR : C ≌ C₀) (eB : D ≌ D₀) [eR.functor.Additive] [eB.functor.Additive] :\n    ∀ (E : DerivedCategory D ⥤ DerivedCategory D₀)\n      (q : (HomotopyCategory.quotient D (.up ℤ) ⋙ DerivedCategory.Qh) ⋙ E ≅\n        eB.functor.mapHomologicalComplex (.up ℤ) ⋙\n          (HomotopyCategory.quotient D₀ (.up ℤ) ⋙ DerivedCategory.Qh))\n      (t : eR.functor.mapHomologicalComplex (.up ℤ) ⋙\n        F₀.mapHomologicalComplex (.up ℤ) ≅\n        F.mapHomologicalComplex (.up ℤ) ⋙\n          eB.functor.mapHomologicalComplex (.up ℤ)),\n      ∃ a : eR.functor.mapHomologicalComplex (.up ℤ) ⋙\n        HomotopyCategory.quotient C₀ (.up ℤ) ⋙ DerivedCategory.Qh ⋙ L₀ ≅\n        HomotopyCategory.quotient C (.up ℤ) ⋙ DerivedCategory.Qh ⋙ L ⋙ E,\n        ∀ K : CochainComplex C ℤ,\n          a.hom.app K ≫ E.map (ε.app\n            ((HomotopyCategory.quotient C (.up ℤ)).obj K)) ≫\n            q.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) =\n          ε₀.app ((HomotopyCategory.quotient C₀ (.up ℤ)).obj\n            ((eR.functor.mapHomologicalComplex (.up ℤ)).obj K)) ≫\n            ((HomotopyCategory.quotient D₀ (.up ℤ) ⋙ DerivedCategory.Qh).map\n              (t.hom.app K))",
   "branch": "sheaf-dag",
-  "by": "P1",
+  "by": "Y2",
   "date": "2026-10-14"
  },
- "statement": "theorem raw_transport_counit_equation {R₀ B₀ R B : Type u} [CommRing R₀] [CommRing B₀] [CommRing R] [CommRing B] [Algebra R₀ B₀] [Algebra R B] [HasDerivedCategory.{w} (ModuleCat.{u} R₀)] [HasDerivedCategory.{w} (ModuleCat.{u} B₀)] [HasDerivedCategory.{w'} (ModuleCat.{u} R)] [HasDerivedCategory.{w'} (ModuleCat.{u} B)] (L₀ : DerivedCategory (ModuleCat.{u} R₀) ⥤ DerivedCategory (ModuleCat.{u} B₀)) (L : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B)) (ε₀ : DerivedCategory.Qh ⋙ L₀ ⟶ (extendScalars (algebraMap R₀ B₀)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) (ε : DerivedCategory.Qh ⋙ L ⟶ (extendScalars (algebraMap R B)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) (h₀ : L₀.IsLeftDerivedFunctor ε₀ (HomotopyCategory.quasiIso _ (.up ℤ))) (h : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ))) (eR : R₀ ≃+* R) (eB : B₀ ≃+* B) (hRB : eB.toRingHom.comp (algebraMap R₀ B₀) = (algebraMap R B).comp eR.toRingHom) : ∀ (E : DerivedCategory (ModuleCat.{u} B) ⥤ DerivedCategory (ModuleCat.{u} B₀)) (q : (HomotopyCategory.quotient (ModuleCat.{u} B) (.up ℤ) ⋙ DerivedCategory.Qh) ⋙ E ≅ (restrictScalars.{u} eB.toRingHom).mapHomologicalComplex (.up ℤ) ⋙ (HomotopyCategory.quotient (ModuleCat.{u} B₀) (.up ℤ) ⋙ DerivedCategory.Qh)) (t : (restrictScalars.{u} eR.toRingHom).mapHomologicalComplex (.up ℤ) ⋙ (extendScalars (algebraMap R₀ B₀)).mapHomologicalComplex (.up ℤ) ≅ (extendScalars (algebraMap R B)).mapHomologicalComplex (.up ℤ) ⋙ (restrictScalars.{u} eB.toRingHom).mapHomologicalComplex (.up ℤ)) (a : (restrictScalars.{u} eR.toRingHom).mapHomologicalComplex (.up ℤ) ⋙ HomotopyCategory.quotient (ModuleCat.{u} R₀) (.up ℤ) ⋙ DerivedCategory.Qh ⋙ L₀ ≅ HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ) ⋙ DerivedCategory.Qh ⋙ L ⋙ E), ∀ K : CochainComplex (ModuleCat.{u} R) ℤ, a.hom.app K ≫ E.map (ε.app ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).obj K)) ≫ q.hom.app (((extendScalars (algebraMap R B)).mapHomologicalComplex (.up ℤ)).obj K) = ε₀.app ((HomotopyCategory.quotient (ModuleCat.{u} R₀) (.up ℤ)).obj (((restrictScalars.{u} eR.toRingHom).mapHomologicalComplex (.up ℤ)).obj K)) ≫ ((HomotopyCategory.quotient (ModuleCat.{u} B₀) (.up ℤ) ⋙ DerivedCategory.Qh).map (t.hom.app K))",
+ "statement": "theorem raw_transport_counit_equation\n    {C₀ D₀ C D : Type u}\n    [Category.{v} C₀] [Category.{v} D₀] [Category.{v} C] [Category.{v} D]\n    [Abelian C₀] [Abelian D₀] [Abelian C] [Abelian D]\n    [HasDerivedCategory.{w} C₀] [HasDerivedCategory.{w} D₀]\n    [HasDerivedCategory.{w'} C] [HasDerivedCategory.{w'} D]\n    (F₀ : C₀ ⥤ D₀) (F : C ⥤ D) [F₀.Additive] [F.Additive]\n    (L₀ : DerivedCategory C₀ ⥤ DerivedCategory D₀)\n    (L : DerivedCategory C ⥤ DerivedCategory D)\n    (ε₀ : DerivedCategory.Qh ⋙ L₀ ⟶\n      F₀.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    (ε : DerivedCategory.Qh ⋙ L ⟶\n      F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    (h₀ : L₀.IsLeftDerivedFunctor ε₀ (HomotopyCategory.quasiIso _ (.up ℤ)))\n    (h : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ)))\n    (eR : C ≌ C₀) (eB : D ≌ D₀) [eR.functor.Additive] [eB.functor.Additive] :\n    ∀ (E : DerivedCategory D ⥤ DerivedCategory D₀)\n      (q : (HomotopyCategory.quotient D (.up ℤ) ⋙ DerivedCategory.Qh) ⋙ E ≅\n        eB.functor.mapHomologicalComplex (.up ℤ) ⋙\n          (HomotopyCategory.quotient D₀ (.up ℤ) ⋙ DerivedCategory.Qh))\n      (t : eR.functor.mapHomologicalComplex (.up ℤ) ⋙\n        F₀.mapHomologicalComplex (.up ℤ) ≅\n        F.mapHomologicalComplex (.up ℤ) ⋙\n          eB.functor.mapHomologicalComplex (.up ℤ)),\n      ∃ a : eR.functor.mapHomologicalComplex (.up ℤ) ⋙\n        HomotopyCategory.quotient C₀ (.up ℤ) ⋙ DerivedCategory.Qh ⋙ L₀ ≅\n        HomotopyCategory.quotient C (.up ℤ) ⋙ DerivedCategory.Qh ⋙ L ⋙ E,\n        ∀ K : CochainComplex C ℤ,\n          a.hom.app K ≫ E.map (ε.app\n            ((HomotopyCategory.quotient C (.up ℤ)).obj K)) ≫\n            q.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) =\n          ε₀.app ((HomotopyCategory.quotient C₀ (.up ℤ)).obj\n            ((eR.functor.mapHomologicalComplex (.up ℤ)).obj K)) ≫\n            ((HomotopyCategory.quotient D₀ (.up ℤ) ⋙ DerivedCategory.Qh).map\n              (t.hom.app K))",
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -95,17 +121,42 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-27630",
-  "group": "B4",
+  "reviewer": "X-8056f",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261014T013033-L-3412250",
-  "kind": "proof",
-  "note": "independent Codex review: Delivered module/report match the packet and base public theorem; clean compilation; dispute counterexample and second reading present",
-  "sorry_before": [
-   "ModuleCat.raw_transport_counit_equation"
+  "landing": "20261014T033117-L-608409",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matches the corrected node and change record; caller signature preserved, forced adaptation verified, both modules and direct importers compile cleanly, and axiom probes show only permitted axioms."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "Y2 stage 2",
+  "old_statement": "theorem raw_transport_counit_equation {R₀ B₀ R B : Type u} [CommRing R₀] [CommRing B₀] [CommRing R] [CommRing B] [Algebra R₀ B₀] [Algebra R B] [HasDerivedCategory.{w} (ModuleCat.{u} R₀)] [HasDerivedCategory.{w} (ModuleCat.{u} B₀)] [HasDerivedCategory.{w'} (ModuleCat.{u} R)] [HasDerivedCategory.{w'} (ModuleCat.{u} B)] (L₀ : DerivedCategory (ModuleCat.{u} R₀) ⥤ DerivedCategory (ModuleCat.{u} B₀)) (L : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B)) (ε₀ : DerivedCategory.Qh ⋙ L₀ ⟶ (extendScalars (algebraMap R₀ B₀)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) (ε : DerivedCategory.Qh ⋙ L ⟶ (extendScalars (algebraMap R B)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) (h₀ : L₀.IsLeftDerivedFunctor ε₀ (HomotopyCategory.quasiIso _ (.up ℤ))) (h : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ))) (eR : R₀ ≃+* R) (eB : B₀ ≃+* B) (hRB : eB.toRingHom.comp (algebraMap R₀ B₀) = (algebraMap R B).comp eR.toRingHom) : ∀ (E : DerivedCategory (ModuleCat.{u} B) ⥤ DerivedCategory (ModuleCat.{u} B₀)) (q : (HomotopyCategory.quotient (ModuleCat.{u} B) (.up ℤ) ⋙ DerivedCategory.Qh) ⋙ E ≅ (restrictScalars.{u} eB.toRingHom).mapHomologicalComplex (.up ℤ) ⋙ (HomotopyCategory.quotient (ModuleCat.{u} B₀) (.up ℤ) ⋙ DerivedCategory.Qh)) (t : (restrictScalars.{u} eR.toRingHom).mapHomologicalComplex (.up ℤ) ⋙ (extendScalars (algebraMap R₀ B₀)).mapHomologicalComplex (.up ℤ) ≅ (extendScalars (algebraMap R B)).mapHomologicalComplex (.up ℤ) ⋙ (restrictScalars.{u} eB.toRingHom).mapHomologicalComplex (.up ℤ)) (a : (restrictScalars.{u} eR.toRingHom).mapHomologicalComplex (.up ℤ) ⋙ HomotopyCategory.quotient (ModuleCat.{u} R₀) (.up ℤ) ⋙ DerivedCategory.Qh ⋙ L₀ ≅ HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ) ⋙ DerivedCategory.Qh ⋙ L ⋙ E), ∀ K : CochainComplex (ModuleCat.{u} R) ℤ, a.hom.app K ≫ E.map (ε.app ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).obj K)) ≫ q.hom.app (((extendScalars (algebraMap R B)).mapHomologicalComplex (.up ℤ)).obj K) = ε₀.app ((HomotopyCategory.quotient (ModuleCat.{u} R₀) (.up ℤ)).obj (((restrictScalars.{u} eR.toRingHom).mapHomologicalComplex (.up ℤ)).obj K)) ≫ ((HomotopyCategory.quotient (ModuleCat.{u} B₀) (.up ℤ) ⋙ DerivedCategory.Qh).map (t.hom.app K))",
+  "what": "Correct the false arbitrary-isomorphism equation to existence of a normalized comparison, and generalize in place to additive functors between abelian categories and additive equivalences. This genuinely extends the ring-specific existing raw_compatibility statement. Reuse the three existing private universal-property helpers with import all instead of proving them again. The caller keeps its exact signature and specializes the generic theorem.",
+  "source": {
+   "document": "https://stacks.math.columbia.edu/tag/06Y6",
+   "place": "Lemma 15.61.1, derived counit transport"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-derived-extension-ring-equiv-raw-compatibility",
+    "holds": false,
+    "note": "Its statement is preserved, but its former proof chose an arbitrary isomorphism and invoked the false universal equation. That proof fails to typecheck against the corrected interface and is adapted in this delivery."
+   }
   ],
-  "sorry_after": [
-   "ModuleCat.raw_transport_counit_equation"
+  "old_proof": [
+   {
+    "text": "naturality of the derived counits.",
+    "uses": [
+     "def-weil-abstract-derived-category",
+     "def-weil-module-base-change"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-abstract-derived-category",
+   "def-weil-module-base-change"
   ]
  }
 }
