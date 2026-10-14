@@ -224,7 +224,8 @@ def run_probe(mods: list[str]) -> dict[str, dict]:
     d = CLONE / ".sandbox"
     d.mkdir(exist_ok=True)
     f = d / "BatchProbe.lean"
-    f.write_text("".join(f"import {m}\n" for m in mods) + BATCH_PROBE % ",\n    ".join("`" + m for m in mods))
+    # 2026-10-14: the probe imports Lean.Elab.Command itself (a batch of withdrawn, emptied modules imports nothing)
+    f.write_text("import Lean.Elab.Command\n" + "".join(f"import {m}\n" for m in mods) + BATCH_PROBE % ",\n    ".join("`" + m for m in mods))
     r = run(["nice", "-n", "19", "timeout", "600", "lake", "env", "lean", str(f)], cwd=CLONE,
             env=dict(os.environ, LEAN_NUM_THREADS=THREADS))
     out = r.stdout + r.stderr
@@ -266,7 +267,7 @@ def batch_checks(included: list[dict], log: str) -> list[dict]:
         res[m] = run_probe([m])[m]      # one module of the set stopped the common run: each of the others alone
     for m in todo:
         r, (rec, path) = res[m], mods[m]
-        if not r["ran"] and "environment already contains" in r["out"]:
+        if not r["ran"] and ("environment already contains" in r["out"] or re.search(r"BatchProbe\.lean:\d+:\d+: error: unknown (namespace|identifier|constant)", r["out"])):
             # 2026-10-14 (launcher): the probe file is outside the module system, so its plain imports load private
             # declarations too and collide where the module system does not; the global build compiled the module, and
             # deliver3 probed each delivered file at delivery. 82 of 101 take-outs that day were this, not the delivery.
