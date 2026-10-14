@@ -23,9 +23,118 @@
   "def-weil-pbc-torsion-etale-sheaf",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a geometric point $\\bar y:P=\\operatorname{Spec}\\Omega\\to Y$, with $\\Omega$ algebraically closed and underlying point $y$, and put $T=X\\times_Y P$ with projections $a:T\\to P$ and $i:T\\to X$. By proper base change of morphisms, $a$ is proper, hence of finite type by the definition of properness. Apply the fibre-dimension base-change lemma to $f$ and $\\bar y$: for every $t\\in T$, with image $x\\in X_y$, $\\dim_t T=\\dim_x X_y$. The supremum-of-local-dimensions formula gives $\\dim_t T\\leq\\dim X_y\\leq d$, and then $\\dim T\\leq d$. This includes empty fibres, whose dimension is bottom. Thus $T$ is a finite-type $\\Omega$-scheme of dimension at most $d$; no finiteness or Noetherian assumption on $Y$ has been used.",
+   "uses": [
+    "def-weil-geometric-point",
+    "def-pc-scheme-fibre",
+    "lem-pc-proper-base-change",
+    "def-weil-proper-morphism",
+    "lem-sc-fibre-dimension-after-base-change",
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W4 (lemma-base-change-proper) and 02FY (lemma-dimension-fibre-after-base-change), part (1); Topology Tag 0B7I (lemma-dimension-supremum-local-dimensions)"
+   }
+  },
+  {
+   "text": "Let $G=i^{-1}F$. At a geometric point $\\bar t$ of $T$, the inverse-image stalk isomorphism identifies $G_{\\bar t}$ with $F_{i\\bar t}$. The latter is a torsion group by the torsion-sheaf characterization applied to $F$. Applying the converse characterization to $G$ proves that $G$ is a torsion abelian sheaf. This only requires elementwise torsion in each stalk, not one integer annihilating the whole sheaf.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-torsion-sheaf-characterizations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1 (lemma-stalk-pullback), part (3), and Section 0DDB (torsion-sheaves), stalk characterization"
+   }
+  },
+  {
+   "text": "We first dispose of $T=\\varnothing$. Every object of its small etale site is empty. The empty family of etale morphisms to an empty object is jointly surjective, hence is a covering by the definition of the small etale site. The abelian sheaf equalizer axiom therefore makes its section group zero (both products indexed by an empty set are the zero abelian group). For an injective resolution of $G$ the complex of global sections is consequently termwise zero, so $H^q(T,G)=0$ for every $q$.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095U (lemma-cohomological-dimension-proper), geometric-fibre reduction; empty-case expansion using the sheaf axiom"
+   }
+  },
+  {
+   "text": "For $T$ nonempty, put $e=\\dim T$. Since $0\\leq e\\leq d$, $e$ is a finite nonnegative integer. Every irreducible polynomial over the algebraically closed field $\\Omega$ has a root, hence is linear. Thus every element of a finite field extension of $\\Omega$ has linear minimal polynomial and belongs to $\\Omega$; in particular $\\Omega$ has no nontrivial finite separable extension and is separably closed. Therefore the separably-closed-point vanishing lemma and the definition of torsion cohomological dimension give $\\operatorname{cd}_{\\rm tor}(\\Omega)\\leq0$. Apply the finite-type torsion cohomological dimension theorem with field $\\Omega$, dimension exactly $e$, and $c=0$. It gives $\\operatorname{cd}_{\\rm tor}(T)\\leq2e$. Unpacking the same definition for the torsion sheaf $G$ yields $H^q(T,G)=0$ whenever $q>2e$. In particular it vanishes for $q>2d$, because $2e\\leq2d$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-kun-03qu-sep-closed",
+    "def-kun-separably-closed",
+    "def-sc-etale-torsion-cd",
+    "thm-sc-finite-type-torsion-cd"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-finite-type-torsion-cd.md",
+    "place": "Statement and proof; use c=0, with lem-kun-03qu-sep-closed.md; supplies the fibre vanishing required by Stacks 095U"
+   }
+  },
+  {
+   "text": "Apply bounded-below proper base change to the cartesian square with bottom map $\\bar y$ and to $F[0]$. This complex has torsion cohomology and gives an isomorphism $\\bar y^{-1}Rf_*F\\cong Ra_*G$. Here inverse image is exact, so its degree-$q$ cohomology is $\\bar y^{-1}R^qf_*F$. The global-sections functor $\\Gamma(P,-)$ is exact and $\\Gamma(P,\\bar y^{-1}R^qf_*F)\\cong(R^qf_*F)_{\\bar y}$ by the geometric-point pullback lemma. To compute the other side, take a bounded-below injective resolution $G\\to J^\\bullet$. The definition of derived direct image represents $Ra_*G$ by $a_*J^\\bullet$. Exactness of $\\Gamma(P,-)$ lets it commute with cohomology (kernels and cokernels); the direct-image formula gives $\\Gamma(P,a_*J^\\bullet)=\\Gamma(T,J^\\bullet)$ term by term. By the definition of etale cohomology its degree-$q$ cohomology is $H^q(T,G)$. We have therefore derived $(R^qf_*F)_{\\bar y}\\cong H^q(T,G)$, which is zero for $q>2d$ by steps 3 and 4.",
+   "uses": [
+    "thm-weil-pbc-bounded-below",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDF (lemma-proper-base-change-stalk), part (1), expanded from bounded-below proper base change and exact sections over a geometric point"
+   }
+  },
+  {
+   "text": "Fix $q>2d$. Step 5 applies to every geometric point of $Y$, and makes every stalk of $R^qf_*F$ the zero group. For the unique map $R^qf_*F\\to0$ each geometric stalk map is thus an isomorphism. Geometric-stalk conservativity makes the sheaf map an isomorphism, proving $R^qf_*F=0$. When $Y$ is empty this same criterion is vacuous and still applies. The argument nowhere requires $Y$ quasi-compact, $F$ constructible, or any torsion order invertible.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03PU (theorem-exactness-stalks) and 095U (lemma-cohomological-dimension-proper), stalkwise conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-geometric-point",
+  "def-pc-scheme-fibre",
+  "lem-pc-proper-base-change",
+  "def-weil-proper-morphism",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-algebraic-closure",
+  "lem-kun-03qu-sep-closed",
+  "def-kun-separably-closed",
+  "def-sc-etale-torsion-cd",
+  "thm-sc-finite-type-torsion-cd",
+  "thm-weil-pbc-bounded-below",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "def-weil-pbc-direct-image",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095U (lemma-cohomological-dimension-proper), stalk reduction via 0DDF; replaces the dimension induction with the existing finite-type torsion cohomological dimension theorem, whose blueprint proof is agent-written."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -89,10 +198,66 @@
    "results": "; 8 hits; DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.isGE_iff, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.isLE_iff, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective",
    "date": "2026-10-14",
    "verdict": "no match: derived t-structure and Tor vanishing are not proper etale direct-image bounds; grep finds relative-dimension-zero characterizations of etale maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of torsion etale sheaves under proper morphisms vanish above twice the fibre dimension",
+   "results": "; 8 hits: Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+   "date": "2026-10-14",
+   "verdict": "no match: none states a proper morphism torsion etale higher-direct-image dimension bound; derived t-structures, cotangent modules, affine-limit sections and spectral-object indexing are different statements"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|cohomologicalDimension|torsion.*vanish",
+   "results": "; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: none states a proper morphism torsion etale higher-direct-image dimension bound; derived t-structures, cotangent modules, affine-limit sections and spectral-object indexing are different statements"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper morphism etale higher direct image torsion cohomological dimension bound",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology over algebraically closed fields vanishes above twice the Krull dimension for torsion abelian sheaves",
+   "results": "; 8 hits: Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.formallyEtale_iff, Algebra.etaleLocus_eq_compl_support, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Extension.cotangentComplex_injective_iff, Algebra.Extension.subsingleton_h1Cotangent, Algebra.FormallySmooth.iff_subsingleton_and_projective",
+   "date": "2026-10-14",
+   "verdict": "no match: none states a proper morphism torsion etale higher-direct-image dimension bound; derived t-structures, cotangent modules, affine-limit sections and spectral-object indexing are different statements"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomological\"",
+   "results": "; 12 hits: CategoryTheory.Abelian.SpectralObject.coreE₂CohomologicalNat, CategoryTheory.Abelian.SpectralObject.coreE₂CohomologicalNat_i₁, CategoryTheory.Abelian.SpectralObject.coreE₂CohomologicalNat_deg, CategoryTheory.Abelian.SpectralObject.coreE₂CohomologicalNat_i₂, CategoryTheory.Abelian.SpectralObject.instHasSpectralSequenceEIntProdNatCoreE₂CohomologicalNat, CategoryTheory.Abelian.SpectralObject.coreE₂CohomologicalFin, CategoryTheory.Abelian.SpectralObject.coreE₂CohomologicalNat_i₀, CategoryTheory.Abelian.SpectralObject.coreE₂CohomologicalNat_i₃",
+   "date": "2026-10-14",
+   "verdict": "no match: none states a proper morphism torsion etale higher-direct-image dimension bound; derived t-structures, cotangent modules, affine-limit sections and spectral-object indexing are different statements"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*(isZero|eq_zero)|IsProper.*cohomology",
+   "results": "{\"t\": \"2026-10-14T08:00:05Z\", \"tool\": \"grep\", \"query\": \"rightDerived.*(isZero|eq_zero)|IsProper.*cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: generic derived t-structure cohomology vanishing does not supply the geometric bound for proper torsion etale direct images; grep and Loogle have no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functors of pushforward along proper scheme maps vanish in degrees above twice the relative Krull dimension for torsion sheaves",
+   "results": "{\"t\": \"2026-10-14T08:00:05Z\", \"tool\": \"leanfinder\", \"query\": \"Right derived functors of pushforward along proper scheme maps vanish in degrees above twice the relative Krull dimension for torsion sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\"], \"digest\": \"0ebeb54cf0be78a2\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: generic derived t-structure cohomology vanishing does not supply the geometric bound for proper torsion etale direct images; grep and Loogle have no hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"etale\", \"cohomology\"",
+   "results": "{\"t\": \"2026-10-14T08:00:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"etale\\\", \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: generic derived t-structure cohomology vanishing does not supply the geometric bound for proper torsion etale direct images; grep and Loogle have no hits"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-kun-0f0c",
   "by": "worker",
@@ -108,5 +273,79 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-proper-torsion-cd-bound",
+  "worker": "stage1",
+  "summary": "Split into geometric-fibre geometry, preservation of torsion, empty-fibre vanishing, finite-type cohomological bound, an explicit proper-base-change stalk computation, and stalk conservativity. Reused existing nodes throughout; no new nodes. Kept the statement and its statement dependencies unchanged. Expanded the stalk computation instead of introducing a duplicate elementary corollary; distinguished arbitrary torsion sheaves from finite coefficient sheaves.",
+  "blueprint": "Realizes the finite cohomological dimension input in lem-kun-0f0c, proof, sentence claiming proper direct images have finite cohomological dimension. The parent already corrects its inapplicable finite-type-over-a-field assumption by the uniform fibre bound of Stacks 095U.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic tool: Proper and smooth morphisms are stable under base change. Its statement supplies the specific fibre, torsion, cohomology or stalk fact used in the proof; the Kunneth unit has no replacement for this fact."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Generic tool: Fibre dimensions are preserved by base change. Its statement supplies the specific fibre, torsion, cohomology or stalk fact used in the proof; the Kunneth unit has no replacement for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "why": "Generic tool: The dimension of a space is the supremum of its local dimensions. Its statement supplies the specific fibre, torsion, cohomology or stalk fact used in the proof; the Kunneth unit has no replacement for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic tool: Stalk of an inverse image, compatible with germs of pulled-back sections. Its statement supplies the specific fibre, torsion, cohomology or stalk fact used in the proof; the Kunneth unit has no replacement for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-torsion-sheaf-characterizations",
+    "why": "Generic tool: Characterizations of torsion abelian sheaves on the etale site. Its statement supplies the specific fibre, torsion, cohomology or stalk fact used in the proof; the Kunneth unit has no replacement for this fact."
+   },
+   {
+    "node": "lem-kun-03qu-sep-closed",
+    "why": "Generic tool: Vanishing on a separably closed point. Its statement supplies the specific fibre, torsion, cohomology or stalk fact used in the proof; the Kunneth unit has no replacement for this fact."
+   },
+   {
+    "node": "thm-sc-finite-type-torsion-cd",
+    "why": "Generic tool: Torsion cohomological dimension of a finite-type scheme. Its statement supplies the specific fibre, torsion, cohomology or stalk fact used in the proof; the Kunneth unit has no replacement for this fact."
+   },
+   {
+    "node": "thm-weil-pbc-bounded-below",
+    "why": "Generic tool: Bounded-below derived proper base change. Its statement supplies the specific fibre, torsion, cohomology or stalk fact used in the proof; the Kunneth unit has no replacement for this fact."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Generic tool: Exactness of inverse image. Its statement supplies the specific fibre, torsion, cohomology or stalk fact used in the proof; the Kunneth unit has no replacement for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Generic tool: Inverse image to a geometric point is the stalk. Its statement supplies the specific fibre, torsion, cohomology or stalk fact used in the proof; the Kunneth unit has no replacement for this fact."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic tool: Conservativity of geometric stalks. Its statement supplies the specific fibre, torsion, cohomology or stalk fact used in the proof; the Kunneth unit has no replacement for this fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "lem-kun-03qu-sep-closed",
+  "thm-sc-finite-type-torsion-cd",
+  "thm-weil-pbc-bounded-below",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-5dc6ae2df",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-5dc6ae2df (reviewer sub-agent of L); spot-checked: Read the item, all six steps, every cited statement, sources, and unit/chapter route in full. Stacks 095U and 0DDF support the arbitrary-torsion bound and stalk computation. Checked hypotheses, empty fibres, characteristic-p torsion, strict degree bound, duplicates, and absence of a cycle through this item. Accepted all eleven declared tool uses. No coefficient comparison or target weakening assumed. Findings written to review.md; no repairs needed."
  }
 }
