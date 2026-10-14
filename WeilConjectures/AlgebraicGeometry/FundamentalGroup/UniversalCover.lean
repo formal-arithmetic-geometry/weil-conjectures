@@ -98,7 +98,8 @@ structure UniversalCovers where
     map f y ≫ (transport (pullbackPathIso f τ)).hom = (transport τ).hom ≫ map f z
   /-- Every point of `Ỹ_y ×_Y Ỹ_y` lies on the graph `x ↦ (x, g x)` of the transport along some
   loop `g ∈ π₁(Y, y) = Aut F_y`. -/
-  exists_graph (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (p : (pullback (proj y) (proj y) : Scheme.{u})) :
+  exists_graph (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
+    (p : (pullback (proj y) (proj y) : Scheme.{u})) :
     ∃ (g : Aut (fiber y)) (x : cover y),
       (pullback.lift (f := proj y) (g := proj y) (𝟙 _) (transport g).hom
         (by rw [Category.id_comp, transport_proj])).base x = p
