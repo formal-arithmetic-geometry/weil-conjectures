@@ -19,7 +19,8 @@ the category of schemes (EGA IV 8.2.3, Stacks Project Tag 01YX): it is the relat
 We construct the quasi-coherent algebra as a filtered colimit of presheaves of rings on the small
 affine Zariski site of `S`: the colimit of coequifibered (quasi-coherent) algebras is again
 coequifibered (`CategoryTheory.NatTrans.coequifibered_comp_colimitι`, since pushouts commute
-with colimits). Its relative spectrum (`AlgebraicGeometry.Scheme.AffineZariskiSite.relativeGluingData`)
+with colimits). Its relative spectrum
+(`AlgebraicGeometry.Scheme.AffineZariskiSite.relativeGluingData`)
 carries a cone over `D`, and this cone is a limit cone since it is so over the affine opens of
 `S` (`AlgebraicGeometry.isLimitOfIsLimitOpensCone'`), where it is `Spec` of a colimit of rings.
 
@@ -131,7 +132,8 @@ lemma coequifibered_sectionsι [∀ i, IsAffineHom (p i)] (i : I) :
     Scheme.preimage_basicOpen _ _
   change @IsLocalization.Away Γ(D.obj i, p i ⁻¹ᵁ U.toOpens) _ ((p i).app U.toOpens r)
     Γ(D.obj i, p i ⁻¹ᵁ (U.basicOpen r).toOpens) _
-    ((D.obj i).presheaf.map (homOfLE ((p i).preimage_mono (toOpens_mono (U.basicOpen_le r)))).op).hom.toAlgebra
+    ((D.obj i).presheaf.map
+      (homOfLE ((p i).preimage_mono (toOpens_mono (U.basicOpen_le r)))).op).hom.toAlgebra
   rw! (castMode := .all) [e]
   exact hU.isLocalization_basicOpen _
 
@@ -287,7 +289,8 @@ noncomputable abbrev ringDiagram : I ⥤ CommRingCat.{u}ᵒᵖ :=
 
 /-- `colim Γ(Dᵢ, pᵢ⁻¹ U)` as a cocone over the rings `Γ(Dᵢ, pᵢ⁻¹ U)` for `i` over `i₀`. -/
 noncomputable def ringCocone (i₁ : I) : Cocone (Over.forget i₁ ⋙ ringDiagram D p hp U).leftOp :=
-  (((CategoryTheory.evaluation _ _).obj (Opposite.op U)).mapCocone (colimit.cocone (diagram D p hp))).whisker
+  (((CategoryTheory.evaluation _ _).obj (Opposite.op U)).mapCocone
+    (colimit.cocone (diagram D p hp))).whisker
     (Over.forget i₁).op
 
 omit [∀ i, IsAffineHom (p i)] in
@@ -317,7 +320,8 @@ lemma opensIso_hom_chart (i₁ : I) (j : Over i₁) :
 
 /-- The restricted diagram of stages over `U` is the diagram `Spec Γ(Dⱼ, pⱼ⁻¹ U)`. -/
 noncomputable def opensDiagramIso (i₁ : I) :
-    opensDiagram D i₁ (p i₁ ⁻¹ᵁ U.toOpens) ≅ (Over.forget i₁ ⋙ ringDiagram D p hp U) ⋙ Scheme.Spec :=
+    opensDiagram D i₁ (p i₁ ⁻¹ᵁ U.toOpens) ≅
+      (Over.forget i₁ ⋙ ringDiagram D p hp U) ⋙ Scheme.Spec :=
   NatIso.ofComponents (opensIso D p hp U i₁) fun {j j'} k ↦ by
     rw [← cancel_mono (chart D p j'.left U), Category.assoc, opensIso_hom_chart,
       opensDiagram_map_ι]
